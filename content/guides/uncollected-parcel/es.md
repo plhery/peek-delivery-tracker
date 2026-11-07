@@ -4,7 +4,7 @@ description: Paquete no recogido en Correos, InPost, GLS o un Amazon Locker: cu�
 slug: paquete-no-recogido
 picture: Un locker de paquetes con una puerta abierta y Pip esperando dentro, y un calendario con los dos últimos días rodeados.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Un paquete que nadie recoge en una oficina, una tienda o un locker vuelve al remitente cuando se acaba el plazo. Correos lo guarda 15 días en la oficina; en un locker sueles tener 5 días o menos (3 en un Amazon Locker). La fecha que manda es la de tu aviso, SMS o email. Después, la tienda o la plataforma decide si te devuelve el dinero o te lo vuelve a enviar.
@@ -25,6 +25,7 @@ Vuelve al remitente, normalmente con el mismo transportista, no a tu casa.
 - **[Correos](carrier:correos-spain)** lo dice así en su aviso de llegada: «Finalizado este plazo, el envío se devolverá al remitente». En el seguimiento lo verás como `Finalizado plazo retirada`.
 - **[GLS](carrier:gls-es)**: si también falla el segundo intento de entrega (cuando el servicio lo incluye), el paquete se queda en la agencia y vuelve al remitente 7 días naturales después del primer intento.
 - **InPost**, que es como se llama ahora [Mondial Relay](carrier:mondial-relay) en España (mondialrelay.es lleva a inpost.es), devuelve el paquete al remitente cuando se acaba el plazo en el Locker o el Punto Pack, sea una tienda online, un vendedor o un particular.
+- **[CTT Express](carrier:ctt-express)** retira el paquete del Punto Collectt o de la taquilla Locky cuando se acaba el plazo, y lo gestiona «según las condiciones del envío». Su ayuda no dice si vuelve siempre al remitente.
 - **[Amazon](carrier:amazon-logistics)**: un paquete que no recoges de un Amazon Locker en 3 días vuelve a Amazon (qué pasa con tu dinero, más abajo).
 
 Cuando el paquete ya va de vuelta, [paquete devuelto al remitente](guide:returned-to-sender) explica el viaje y qué pedirle a la tienda.
@@ -38,9 +39,10 @@ Los lockers dan poco tiempo; las oficinas, mucho más.
 | Correos | Oficina: 15 días tras un intento fallido, desde el día siguiente al SMS | Citypaq: 5 días naturales |
 | InPost | Punto Pack: 5 días naturales en envíos nacionales | Locker: 5 días naturales en envíos nacionales |
 | GLS | Agencia: vuelve 7 días naturales después del primer intento | – |
+| CTT Express | Punto Collectt: 10 días | Locky: 5 días |
 | Amazon | – | Amazon Locker: 3 días |
 
-En el aviso en papel, Correos indica el tiempo de permanencia según el producto, así que manda lo que ponga ahí. Si pediste la entrega en una oficina, Correos te manda recordatorios cuando quedan 10 y 5 días.
+En el aviso en papel, Correos indica el tiempo de permanencia según el producto, así que manda lo que ponga ahí. Si pediste la entrega en una oficina, Correos te manda recordatorios cuando quedan 10 y 5 días. CTT Express también te manda recordatorios por email o SMS desde que el paquete está disponible, y para recogerlo te basta el PIN que te llega por la misma vía.
 
 Los 5 días naturales de InPost son para envíos nacionales: si el paquete viene de otro país, guíate por la fecha de tu aviso.
 
@@ -52,21 +54,23 @@ Los días naturales cuentan fines de semana y festivos; los laborables dejan fue
 
 ## ¿Por qué me toca ir a recogerlo?
 
-Casi siempre porque la entrega no salió bien: no había nadie en casa y el repartidor dejó un aviso. Correos te manda entonces un SMS con la oficina donde puedes recogerlo, y el envío no está allí hasta el día siguiente. Otras veces fuiste tú, o la tienda, quien eligió un punto de recogida o un locker al hacer el pedido.
+Casi siempre porque la entrega no salió bien: no había nadie en casa y el repartidor dejó un aviso. Correos te manda entonces un SMS con la oficina donde puedes recogerlo, y el envío no está allí hasta el día siguiente. Con GLS, los envíos EconomyParcel tienen un solo intento de entrega: si falla, el paquete pasa al Parcel Shop más cercano. Otras veces fuiste tú, o la tienda, quien eligió un punto de recogida o un locker al hacer el pedido.
 
-El seguimiento dirá entonces algo como `A disposición del destinatario` en Correos o `Depositado en Parcel Shop` en GLS, y [estados de un envío](guide:tracking-statuses) explica cada uno. El aviso, el DNI que tienes que llevar y cómo autorizar a otra persona están en [intento de entrega ausente](guide:missed-delivery). Si hay algo que pagar, [aduanas](guide:customs) explica quién lo pide y por qué.
+El seguimiento dirá entonces algo como `A disposición del destinatario` en Correos, `Depositado en Parcel Shop` en GLS o `Disponible en Punto Collectt Express` en CTT Express, y [estados de un envío](guide:tracking-statuses) explica cada uno. El aviso, el DNI que tienes que llevar y cómo autorizar a otra persona están en [intento de entrega ausente](guide:missed-delivery). Si hay algo que pagar, [aduanas](guide:customs) explica quién lo pide y por qué.
 
 [Peek](/) puede mandarte una notificación cuando el seguimiento diga que el paquete está listo para recoger. Eso sí, no puede ampliar el plazo: eso solo lo pueden hacer el transportista o la tienda.
 
 ## No puedo recoger el paquete a tiempo: ¿qué hago?
 
-Conseguir más días es raro. Ni Correos ni InPost ni GLS explican en su ayuda cómo ampliar el plazo de un paquete que ya te está esperando. Lo que existe se decide antes: el remitente con contrato puede pedir a Correos hasta 30 días en oficina, y Correos Modify te deja cambiar el destino cuando te avisa de que tu envío está listo para entregarse.
+Conseguir más días es raro. Ni Correos ni InPost ni GLS ni CTT Express explican en su ayuda cómo ampliar el plazo de un paquete que ya te está esperando. Lo que existe se decide antes: el remitente con contrato puede pedir a Correos hasta 30 días en oficina, y Correos Modify te deja cambiar el destino cuando te avisa de que tu envío está listo para entregarse.
+
+GLS te deja elegir un Parcel Shop en su web: introduces el número de seguimiento y el código postal, y pulsas «Recoger en GLS Point». Para cambiar la dirección de un paquete que ya está en camino, la tienda tiene que autorizarlo. CTT Express cambia gratis la entrega a un Punto Collectt si el paquete es de un solo bulto, pesa 20 kg como mucho, sus medidas suman menos de 160 cm, ningún lado pasa de 60 cm y no lleva servicios adicionales, como el pago contra reembolso. Y si tu envío a un Punto Collectt sufre una incidencia, te deja escoger otro punto desde el email que te manda.
 
 Si no vas a llegar a tiempo:
 
 :::steps
 - Busca el último día | Está en el aviso, el SMS o el email.
-- Cambia la entrega a tiempo | Con Correos Modify, cuando te avisan de la entrega, puedes pedir otra dirección de tu provincia, una oficina o un Citypaq.
+- Cambia la entrega a tiempo | Con Correos Modify, cuando te avisan de la entrega, puedes pedir otra dirección de tu provincia, una oficina o un Citypaq; GLS y CTT Express te dejan pasarla a uno de sus puntos.
 - Manda a otra persona | En un locker, pásale tu código; en una oficina o un Punto Pack, tu autorización y su DNI.
 - Habla con la tienda | Antes del plazo si ya no lo quieres; después si se te ha pasado.
 :::
@@ -113,8 +117,11 @@ El seguimiento suele dar el paquete por entregado en cuanto está en el locker. 
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5 días naturales en Locker y Punto Pack, devolución al remitente, autorización, PIN
 - [InPost España: Sobre nosotros](https://www.inpost.es/quienes-somos) – 2021: «Adquisición de Mondial Relay. Nuevo nombre, misma misión.»
 - [InPost España: mondialrelay.es](https://www.mondialrelay.es/) – mondialrelay.es lleva ahora a inpost.es
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – 7 días naturales tras el primer intento, «Depositado en Parcel Shop»
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – 7 días naturales tras el primer intento, «Depositado en Parcel Shop», EconomyParcel con un solo intento y Parcel Shop más cercano, «Recoger en GLS Point», cambio de dirección autorizado por la tienda
+- [CTT Express: Recoge y devuelve tus paquetes en nuestros puntos](https://www.cttexpress.com/red-collectt-express/envio-y-recogida) – 10 días en Punto Collectt, 5 en Locky, recordatorios por email o SMS, retirado y gestionado según las condiciones del envío, PIN
+- [CTT Express: Preguntas frecuentes sobre Puntos Collectt Express](https://www.cttexpress.com/preguntas-frecuentes/puntos-collectt-express) – otro punto tras una incidencia, cambio gratuito a un Punto Collectt, 20 kg, 160 cm, 60 cm, un bulto, sin servicios adicionales como contrarreembolso o retorno
 - [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – A disposición del destinatario, Finalizado plazo retirada
+- [Universal Parcel Scraper: estados de CTT Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/ctt-express/statuses.json) – Disponible en Punto Collectt Express
 - [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – código único por email al llegar el paquete, 3 días, vuelta a Amazon (artículo de 2017)
 - [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – problema con un pedido: atención al cliente, reemplazo o reembolso
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después el reembolso de Amazon

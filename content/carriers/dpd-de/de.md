@@ -139,7 +139,7 @@ Im [Paketshop Finder](https://www.dpd.com/de/de/pickup-paketshops/paketshop-find
 - [DPD: Wunsch-Nachbar nicht da](https://www.dpd.com/de/de/faq/was-passiert-wenn-mein-wunsch-nachbar-nicht-da-ist/) – Paketshop
 - [DPD: Abstellbedingungen](https://www.dpd.com/wp-content/uploads/sites/59/2026/09/20260923_Abstellbedingungen_DE_final.pdf) – Foto, Risiko
 - [DPD: Zweiter Zustellversuch](https://www.dpd.com/de/de/faq/das-paket-konnte-nicht-zugestellt-werden-gibt-es-einen-zweiten-zustellversuch/) – Versuche
-- [DPD: Zeit zum Abholen](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 und 3 Tage
+- [DPD: Paket abholen](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – 7 und 3 Tage
 - [DPD: Ohne Paketinfokarte abholen](https://www.dpd.com/de/de/faq/kann-ich-mein-paket-ohne-paketinfokarte-abholen/) – Ausweis
 - [DPD: Wie funktioniert die Retoure?](https://www.dpd.com/de/de/faq/wie-funktioniert-die-retoure/) – Retourenschein, kostenlos
 - [DPD: Parcel return](https://www.dpd.com/de/en/support/recipients/parcel-return/) – Abgabe, mobiler Schein

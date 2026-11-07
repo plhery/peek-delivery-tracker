@@ -47,7 +47,7 @@ On the carrier's own site or app, or with the QR code on the card. Most redelive
 - **Evri:** after a missed attempt, divert it in the app or online to a ParcelShop, locker, neighbour or safe place.
 - **DPD UK:** the driver can't come back the same day. Change the date, or choose a safe place, a neighbour or a Pickup shop.
 - **Canada Post:** after `Delivery Attempt Made`, it normally tries again the next business day.
-- **Australia Post:** no redelivery. Collect it, send someone, or pay $7.20 to move it to another Post Office.
+- **Australia Post:** no redelivery. Collect it, send someone, or pay $7.55 to move it to another Post Office.
 
 Want it sent somewhere else next time? See [changing a delivery address or day](guide:change-delivery-address).
 
@@ -137,7 +137,7 @@ Complain to the carrier first and keep its reference. For an online order, tell 
 - [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – next attempt
 - [Canada Post: Can I refuse a delivery?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/can-i-refuse-delivery-of-a-parcel.page) – 15 calendar days
 - [Ombudsman at Canada Post: File an appeal](https://www.canadapost-postescanada.ca/ombudsman/) – closed service ticket
-- [Australia Post: Missed deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – collection, ID, $7.20
+- [Australia Post: Missed deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – collection, ID, $7.55
 - [Australia Post: Parcel at Post Office](https://auspost.com.au/help/collection-delivery/parcel-at-post-office) – no redelivery, cards phased out, attempt photo, delivery issue form
 - [Commonwealth Ombudsman: Postal complaints](https://www.ombudsman.gov.au/complaints/postal-industry-complaints) – 12 months
 - [Citizens Advice: Lost or delayed post](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, Royal Mail escalation, other companies

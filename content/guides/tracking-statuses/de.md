@@ -35,7 +35,7 @@ Dieselben Schritte, andere Worte:
 | Unterwegs | `Die Sendung ist in der Region des Empfängers angekommen …` | `Sendung in Verteilung` | `Sendung wurde sortiert und weitergeleitet` |
 | In Zustellung | `Die Sendung wurde in das Zustellfahrzeug geladen.` | `Sendung in Zustellung` | `Verlad in Zustellfahrzeug` |
 | Abholbereit | `Die Sendung wird zur Abholung in die Filiale … gebracht.` | `Sendung abholbereit` | `Ankunft an der Abhol-/Zustellstelle` |
-| Zugestellt | `Die Sendung wurde erfolgreich zugestellt.` | `Sendung zugestellt` | `Zugestellt durch` |
+| Zugestellt | `Die Sendung wurde erfolgreich zugestellt.` | `Sendung wurde zugestellt` | `Zugestellt durch` |
 
 Bei [Hermes](carrier:hermes-de) heißen die Schritte `Die Sendung wurde angekündigt`, `Die Sendung wurde von Hermes übernommen`, `Die Sendung wurde im Hermes Logistikzentrum sortiert`, `Die Sendung ist in der Zielregion angekommen` und `Die Sendung befindet sich in der Zustellung`.
 
@@ -104,7 +104,7 @@ Ob der Code auf der Karte auch als Sendungsnummer taugt, steht unter [Sendungsnu
 
 ## „Zur Abholung bereit“: Wo liegt mein Paket?
 
-In einer Filiale, einem Paketshop, einer Packstation oder, in Österreich, einer Poststation, [bis die Frist aus der Tabelle oben abläuft](guide:uncollected-parcel). Bei der Österreichischen Post heißt das `Sendung abholbereit`: In der Post-Geschäftsstelle holst du es zu den Öffnungszeiten ab, aus der Poststation jederzeit mit dem Benachrichtigungscode. Bei `Sendung in Post Empfangsbox eingelangt` kannst du es aus der Post Empfangsbox nehmen. Die Schweizerische Post zeigt mit `Ankunft an der Abhol-/Zustellstelle`, ab wann das Paket in der Filiale bereitliegt. Bei UPS lautet der Scan `Delivered to UPS Access Point™`.
+In einer Filiale, einem Paketshop, einer Packstation oder, in Österreich, einer Poststation, [bis die Frist aus der Tabelle oben abläuft](guide:uncollected-parcel). Bei der Österreichischen Post heißt das `Sendung abholbereit`: In der Post-Geschäftsstelle holst du es zu den Öffnungszeiten ab, aus der Poststation jederzeit mit dem Benachrichtigungscode. Bei `Sendung in Postempfangsbox abholbereit` kannst du es aus der Post Empfangsbox nehmen. Die Schweizerische Post zeigt mit `Ankunft an der Abhol-/Zustellstelle`, ab wann das Paket in der Filiale bereitliegt. Bei UPS lautet der Scan `Delivered to UPS Access Point™`.
 
 Schau in die Sendungsverfolgung, bevor du losgehst. Bei DHL kann das Paket in Ausnahmefällen woanders landen als auf der Karte vermerkt. Der tatsächliche Ort steht in der Sendungsverfolgung. Stimmen beide überein, warst du vielleicht zu früh dran: Prüf die Uhrzeit auf der Karte. In der Schweiz lässt du dir das Paket mit einem Login bei „Meine Sendungen“ auch nochmals zustellen: kostenlos zum Deponieren oder an den Nachbarn, CHF 3.30 auf die Etage, CHF 7.00 am Samstag. Weiterleiten kostet CHF 8.00 von Montag bis Freitag.
 
@@ -115,7 +115,7 @@ Nicht immer. Es heißt, der Zusteller hat es als übergeben oder abgelegt gescan
 - **An jemand anderen.** Bei DHL steht im Feld „Empfänger“, wer angenommen hat: Original-Empfänger, Familienangehörige, Mitarbeiter, Nachbar, sonstige Person oder Briefkasten. Den Namen zeigt dir die Sendungsverfolgung, wenn du die Detailangaben öffnest und deine Postleitzahl eingibst. Kennst du den Nachbarn nicht, warte zwei Tage, ob er sich meldet, dann wende dich an den DHL-Kundenservice.
 - **An einem Ablageort.** Ein DHL-Ablageort muss auf deinem Grundstück liegen, wettergeschützt, für Dritte nicht einsehbar und für den Zusteller frei zugänglich sein. Bei UPS kann die Sendungsverfolgung zeigen, wo das Paket abgestellt wurde (etwa `Left at: Front Door`). Bei der Schweizerischen Post heißt `Zugestellt im Ablagefach/Briefkasten`, dass das Paket im Ablagefach (Milchkasten) liegt.
 
-`Zugestellt am Schalter` meldet die Schweizerische Post, wenn du das Paket in einer Filiale oder PickPost-Stelle bekommen hast. Bei der Österreichischen Post steht `Sendung zugestellt` auch auf Rücksendungen: Dann hat der Absender sein Paket zurück. Und bei [Planzer](carrier:planzer) und [Quickpac](carrier:quickpac) heißt das englische `Shipped` zugestellt, nicht verschickt. Nichts da? Schau im vollständigen Verlauf nach einem Namen oder Ort, dann lies [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
+`Zugestellt am Schalter` meldet die Schweizerische Post, wenn du das Paket in einer Filiale oder PickPost-Stelle bekommen hast. Bei der Österreichischen Post steht `Sendung wurde zugestellt` auch auf Rücksendungen: Dann hat der Absender sein Paket zurück. Und bei [Planzer](carrier:planzer) und [Quickpac](carrier:quickpac) heißt das englische `Shipped` zugestellt, nicht verschickt. Nichts da? Schau im vollständigen Verlauf nach einem Namen oder Ort, dann lies [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 ## „Ausnahme“ oder „Verzögerung“: Ist mein Paket verloren?
 
@@ -146,7 +146,7 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [DPD: Was bedeutet der Status „Das Paket ist unterwegs“?](https://www.dpd.com/de/de/faq/was-heisst-das-paket-ist-unterwegs/) – erster Transport zum Depot
 - [DPD: Wie lange dauert der Versand in Deutschland?](https://www.dpd.com/de/de/faq/wie-lange-dauert-der-versand-in-deutschland/) – 1 bis 2 Werktage, Predict
 - [DPD: Was passiert, wenn ich für eine Zustellung nicht zu Hause bin?](https://www.dpd.com/de/de/faq/was-passiert-wenn-ich-fuer-eine-zustellung-nicht-zu-hause-bin/) – Paketinfokarte, umleiten
-- [DPD: Wie lange habe ich Zeit, mein Paket im Paketshop abzuholen?](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 und 3 Kalendertage
+- [DPD: Paket abholen](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – 7 und 3 Kalendertage
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Status, Abholfrist, Poststation, Empfangsbox, Rücksendung
 - [Schweizerische Post: Ereignisse „Sendungen verfolgen“](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Status, Zoll, Fehlleitung, Rücksendegründe
 - [Schweizerische Post: Statustexte der Sendungsverfolgung](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – Verlad in Zustellfahrzeug
@@ -155,4 +155,5 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage bei vollständigen Angaben
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – UPS-Scans, die Peek liest: Etikett erstellt, Access Point, „Left at“, „Exception“
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – FedEx-Scans, die Peek liest: Sendungsdaten an FedEx übermittelt
+- [Universal Parcel Scraper: Österreichische Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/austrian-post) – Scans der Post, die Peek liest: Sendung wurde zugestellt, Sendung in Postempfangsbox abholbereit
 :::

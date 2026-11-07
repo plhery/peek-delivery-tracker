@@ -68,7 +68,7 @@ Otherwise, work through these before the last day:
 - Tell the shop | Before the deadline if you no longer want it, after it if you missed it.
 :::
 
-USPS asks you to allow 2 days when you rebook with the paper notice, so book early. Australia Post can move a missed parcel to another Post Office for $7.20, using a form. For an [Amazon](carrier:amazon-logistics) Locker, forward the delivery confirmation email to whoever is collecting.
+USPS asks you to allow 2 days when you rebook with the paper notice, so book early. Australia Post can move a missed parcel to another Post Office for $7.55, using a form. For an [Amazon](carrier:amazon-logistics) Locker, forward the delivery confirmation email to whoever is collecting.
 
 With only 2 or 3 days at many lockers, a notice you see late can cost you the parcel. [Peek](/) can send a notification when the tracking says a parcel is waiting for pickup, but only the carrier or the shop can move the deadline.
 
@@ -109,7 +109,7 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 - [InPost UK: Collect in 3 days](https://inpost.co.uk/blog/collect-in-3-days) – no extension, retailer decides
 - [Canada Post: Can I refuse delivery of a parcel?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/can-i-refuse-delivery-of-a-parcel.page) – 15 calendar days, sender pays the return
 - [Canada Post: Where to get your delivery](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/where-to-get-your-delivery.page) – location can't be changed
-- [Australia Post: Missed parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – 2 and 10 business days, $7.20 transfer
+- [Australia Post: Missed parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – 2 and 10 business days, $7.55 transfer
 - [Australia Post: Parcel Lockers](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers) – locker, then Post Office
 - [About Amazon: How to use Amazon Locker](https://www.aboutamazon.com/news/operations/how-to-use-amazon-locker) – US: three calendar days, automatic return and refund, forwarding the delivery confirmation email
 - [About Amazon UK: How to use Amazon Locker](https://www.aboutamazon.co.uk/news/operations/how-to-use-amazon-locker) – UK: three calendar days, automatic return and refund, forwarding the email

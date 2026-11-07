@@ -4,7 +4,7 @@ description: Paket nicht abgeholt? Wie lange es in Filiale, Paketshop oder Packs
 slug: paket-nicht-abgeholt
 picture: Eine Packstation mit einer offenen Tür, in deren Fach Pip wartet, und ein Kalender mit den letzten zwei Tagen eingekreist.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Holt niemand ein Paket aus der Filiale, dem Paketshop oder der Packstation ab, geht es nach Ablauf der Abholfrist an den Absender zurück. Bei DHL und Hermes in Deutschland sind das meist 7 Werktage, bei der Österreichischen Post läuft die Frist bis zum dritten Montag nach der Benachrichtigung, bei der Schweizerischen Post in der Regel 7 Tage, die du kostenlos verlängern kannst. Es zählt das Datum auf deiner Benachrichtigung, in der SMS oder E-Mail. Ist es vorbei, frag den Shop, ob er dir das Geld erstattet oder das Paket noch einmal schickt.
@@ -24,7 +24,7 @@ Es geht zurück an den Absender, nicht noch einmal zu dir.
 
 - **[DHL](carrier:dhl)** schickt das Paket nach den 7 Werktagen an den Absender zurück. In der Sendungsverfolgung steht dann `Die Sendung wurde nicht abgeholt und wird zurückgesandt.`
 - **[Hermes](carrier:hermes-de)** schickt ein nicht abgeholtes Paket aus dem PaketShop ebenfalls an den Absender zurück.
-- **[Österreichische Post](carrier:austrian-post)**: Ist ein zurückgeschicktes Paket beim Absender angekommen, zeigt die Sendungsverfolgung `Sendung zugestellt`. Gemeint ist dann die Zustellung an den Versender, nicht an dich.
+- **[Österreichische Post](carrier:austrian-post)**: Ist ein zurückgeschicktes Paket beim Absender angekommen, zeigt die Sendungsverfolgung `Sendung wurde zugestellt`. Gemeint ist dann die Zustellung an den Versender, nicht an dich.
 - **[Amazon](carrier:amazon-logistics)** schickt ein Paket, das du nicht rechtzeitig aus einem Amazon Locker holst, automatisch zurück und erstattet dir den Betrag (mehr dazu unten).
 
 Ob du die Ware doch noch bekommst, klärst du mit dem Shop, nicht mit dem Paketdienst. Ist das Paket schon unterwegs zurück, erklärt [Paket zurück an Absender](guide:returned-to-sender) den Rückweg und was du den Shop fragen solltest.
@@ -35,7 +35,7 @@ Meist rund eine Woche, an manchen Automaten nur 3 Tage. Die Abholfristen der gro
 
 | Land | Filiale nach verpasster Zustellung | Paketshop | Packstation oder Automat |
 | --- | --- | --- | --- |
-| Deutschland | DHL Postfiliale: 7 Werktage (Montag bis Samstag, ohne Feiertage) | DHL Paketshop: 7 Werktage; Hermes PaketShop: 7 Werktage; DPD Paketshop: 7 Tage; GLS Paketshop nach verpasster Zustellung: mindestens 7 Werktage | DHL Packstation: 7 Kalendertage, 9 nach einer verpassten Zustellung; DPD Paketstation: 3 Tage; Amazon Locker: 3 Kalendertage |
+| Deutschland | DHL Postfiliale: 7 Werktage (Montag bis Samstag, ohne Feiertage) | DHL Paketshop: 7 Werktage; Hermes PaketShop: 7 Werktage; DPD Paketshop: 7 Tage; GLS Paketshop nach verpasster Zustellung: mindestens 7 Werktage | DHL Packstation: 7 Kalendertage, 9 nach einer verpassten Zustellung; Hermes Packstation: 7 Werktage; DPD Paketstation: 3 Tage; Amazon Locker: 3 Kalendertage |
 | Österreich | Post: ab dem Folgetag bis zum dritten darauffolgenden Montag (5 Werktage, wenn der Versandhändler das so festlegt); GLS-Depot: 4 Arbeitstage | – | – |
 | Schweiz | Post: in der Regel 7 Tage, 15 bei Sendungen aus dem Ausland, verlängerbar | – | My Post 24: 10 Tage |
 
@@ -45,6 +45,8 @@ Manche Paketdienste widersprechen sich selbst. [DPD](carrier:dpd-de) spricht auf
 
 Bei der [Schweizerischen Post](carrier:swiss-post) gilt für den My Post 24-Automaten eine eigene Frist: Den Abholcode bekommst du per SMS, abholen kannst du innerhalb von 10 Tagen.
 
+Liegt deine Sendung bei der Österreichischen Post in einer Poststation, holst du sie jederzeit bis zum Ende der Lagerfrist ab, die auf der Benachrichtigung steht. Dafür brauchst du den Benachrichtigungscode. Steht die Poststation in einer Postfiliale, bekommst du die Sendung auch am Schalter, mit Lichtbildausweis und Sendungsnummer.
+
 ### Warum dein Datum anders sein kann
 
 Der Absender kann die Frist mitbestimmen. In Österreich dürfen Versandhändler eine kürzere Lagerfrist von 5 Werktagen festlegen.
@@ -53,9 +55,9 @@ Kalendertage zählen Wochenenden und Feiertage mit, Werktage nicht. Bei DHL ist 
 
 ## Warum liegt mein Paket in der Filiale?
 
-Meist, weil die Zustellung nicht geklappt hat. Bei DHL heißt das: Der Zusteller hat dich nicht angetroffen, und kein Familienangehöriger oder Nachbar konnte das Paket annehmen. Dann bringt er es in eine nahe Postfiliale, einen DHL Paketshop oder eine Packstation. In Österreich liegt danach eine Benachrichtigung im Briefkasten. Manchmal hast du die Packstation oder den Paketshop aber auch selbst beim Bestellen gewählt.
+Meist, weil die Zustellung nicht geklappt hat. Bei DHL heißt das: Der Zusteller hat dich nicht angetroffen, und kein Familienangehöriger oder Nachbar konnte das Paket annehmen. Dann bringt er es in eine nahe Postfiliale, einen DHL Paketshop oder eine Packstation. In Österreich liegt danach eine Benachrichtigung im Briefkasten. DPD bringt ein Paket in den Paketshop, wenn du nicht da warst und kein Abstell-Okay gegeben hast, wenn es direkt an den Shop adressiert ist oder wenn du einen Wunsch-Paketshop hinterlegt hast. In der Regel ist es der nächstgelegene, ausnahmsweise ein anderer, etwa wenn der nächste keinen Platz mehr hat. Manchmal hast du die Packstation oder den Paketshop aber auch selbst beim Bestellen gewählt.
 
-In der Sendungsverfolgung steht dann zum Beispiel `Die Sendung wird zur Abholung in die Filiale … gebracht.` (DHL) oder `Sendung abholbereit` (Österreichische Post). Was die einzelnen Status bedeuten, erklärt [Sendungsstatus verstehen](guide:tracking-statuses). Was auf der Benachrichtigungskarte steht und welchen Ausweis du brauchst, erklärt [Paket verpasst](guide:missed-delivery). Und wenn noch Zollgebühren offen sind, lies [Paket beim Zoll](guide:customs).
+In der Sendungsverfolgung steht dann zum Beispiel `Die Sendung wird zur Abholung in die Filiale … gebracht.` (DHL) oder `Sendung abholbereit` (Österreichische Post). Was die einzelnen Status bedeuten, erklärt [Sendungsstatus verstehen](guide:tracking-statuses). Die Benachrichtigungskarte brauchst du nicht immer: Im DPD Paketshop reicht dein amtlicher Lichtbildausweis, und auch bei der Österreichischen Post holst du eine Sendung ohne gelben Zettel ab, wenn du einen gültigen mitbringst. Ab wann das geht, zeigt dein Post Account unter „Meine Sendungen“. Was auf der Karte steht und welchen Ausweis du brauchst, erklärt [Paket verpasst](guide:missed-delivery). Und wenn noch Zollgebühren offen sind, lies [Paket beim Zoll](guide:customs).
 
 ## Abholfrist verlängern: Geht das?
 
@@ -68,7 +70,7 @@ Schaffst du es anderswo nicht rechtzeitig, bleiben dir diese Wege:
 :::steps
 - Letzten Tag finden | Er steht auf der Karte, dem gelben Zettel, der Abholungseinladung, in der SMS oder E-Mail.
 - Zweite Zustellung buchen | DHL bietet sie für ausgewählte Sendungen einmal an, bis 2 Tage vor Fristende. In der Schweiz geht es mit einem Login bei „Meine Sendungen“.
-- Jemanden schicken | Bei DHL mit deiner unterschriebenen Vollmacht, der Karte und dem eigenen Ausweis; in der Schweiz reicht die Abholungseinladung, nur für Signature-Pakete braucht es zusätzlich eine Vollmacht.
+- Jemanden schicken | Bei DHL mit deiner unterschriebenen Vollmacht, der Karte und dem eigenen Ausweis; im DPD Paketshop mit Vollmacht und eigenem Ausweis, an der DPD Paketstation mit dem Abholcode; in Österreich mit dem gelben Zettel; in der Schweiz reicht die Abholungseinladung, nur für Signature-Pakete braucht es zusätzlich eine Vollmacht.
 - Den Shop fragen | Vor Fristende, wenn du das Paket nicht mehr willst; danach, wenn du die Frist verpasst hast.
 :::
 
@@ -100,7 +102,7 @@ Nein. DHL erinnert dich an der Packstation 48 Stunden nach der Ankunft und noch 
 
 ### Kann jemand anderes mein Paket abholen?
 
-Ja. Bei DHL braucht die Person deine unterschriebene Vollmacht, die Benachrichtigungskarte und ihren eigenen amtlichen Lichtbildausweis. Bei Sendungen mit Identitäts- oder Altersprüfung geht das nicht. In der Schweiz genügt für normale Pakete die Abholungseinladung. Mehr in [Paket verpasst](guide:missed-delivery).
+Ja. Bei DHL braucht die Person deine unterschriebene Vollmacht, die Benachrichtigungskarte und ihren eigenen amtlichen Lichtbildausweis. Bei Sendungen mit Identitäts- oder Altersprüfung geht das nicht. Im DPD Paketshop genügen deine unterschriebene Vollmacht und ihr eigener Ausweis, an der DPD Paketstation der Abholcode oder QR-Code aus der Benachrichtigungs-E-Mail. Bei der Österreichischen Post braucht sie die Benachrichtigung, den gelben Zettel. In der Schweiz genügt für normale Pakete die Abholungseinladung. Mehr in [Paket verpasst](guide:missed-delivery).
 
 ### Paket nicht abgeholt: Wer zahlt die Rücksendekosten?
 
@@ -117,10 +119,11 @@ Ein Paket in der Packstation oder im Paketshop kann für den Paketdienst schon a
 :::sources
 - [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – 7 Werktage ab dem Werktag nach dem Zustellversuch, Statustexte, Vollmacht, Ausweis
 - [DHL: Packstation, Sendungen empfangen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 und 9 Kalendertage, Erinnerungen, keine Verlängerung, zweite Zustellung
-- [Hermes: Aufbewahrung im PaketShop](https://www.myhermes.de/service/fragen/empfangen/aufbewahrung-im-paketshop.html) – 7 Werktage ab Einlieferung, keine Verlängerung, zurück an den Absender
-- [DPD: Wie lange habe ich Zeit, mein Paket im Paketshop abzuholen?](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 Tage im Paketshop, 3 an der Paketstation, Beispiel Montag bis Montag
+- [Hermes: Aufbewahrung im PaketShop](https://www.myhermes.de/service/fragen/empfangen/aufbewahrung-im-paketshop.html) – 7 Werktage im PaketShop und an der Packstation ab Einlieferung, keine Verlängerung, zurück an den Absender
+- [DPD: Paket abholen](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – 7 Tage im Paketshop, 3 an der Paketstation, Beispiel Montag bis Montag, Ausweis statt Paketinfokarte, Vollmacht, Abholcode oder QR-Code, Gründe für den Paketshop, anderer Paketshop ohne freie Kapazität
 - [GLS: AGB für Geschäftskunden, Stand Januar 2025 (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – nach verpasster Zustellung mindestens 7 Werktage im PaketShop, Depot oder in der ParcelStation, nicht Abgeholtes zurück an den Absender
-- [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – bis zum dritten Montag, 5 Werktage bei Versandhändlern, Sendung abholbereit, Sendung zugestellt bei Rücksendungen
+- [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – bis zum dritten Montag, 5 Werktage bei Versandhändlern, Sendung abholbereit, Sendung zugestellt bei Rücksendungen, Poststation mit Benachrichtigungscode, Abholung ohne gelben Zettel mit Lichtbildausweis, Ersatzempfänger mit Benachrichtigung
+- [Universal Parcel Scraper: Status der Österreichischen Post](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/austrian-post/statuses.json) – Sendung wurde zugestellt
 - [GLS Österreich: Pakete empfangen](https://gls-group.com/AT/de/faq/pakete-empfangen/) – 4 Arbeitstage im Depot
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – 7 und 15 Tage, Verlängerung kostenlos und ohne Konto, Einmal-Vollmacht, Preise für zweite Zustellung und Weiterleitung
 - [Schweizerische Post: Vollmachten bei der Post](https://www.post.ch/de/empfangen/vollmachten-bei-der-post) – Abholung mit der Abholungseinladung, Vollmacht für Signature-Pakete

@@ -122,7 +122,7 @@ Un retour est un colis comme un autre, avec son propre numéro : [suivi de retou
 
 Oui, avec le numéro de suivi du transporteur, comme n'importe quel colis. Colle-le dans [Peek](/) : une fois le colis dans la consigne, Peek affiche l'étape « Prêt à être retiré ».
 
-Quand le transporteur nomme le point de retrait, la fiche du colis l'affiche sous « Point de retrait », avec Itinéraire, Voir sur la carte et Copier l'adresse, puis « Retiré chez » une fois le colis récupéré. La plupart des transporteurs ne nomment le point que pendant que le colis y attend.
+Quand le transporteur nomme le point de retrait, la fiche du colis l'affiche sous « Point de retrait », avec Itinéraire, Voir sur la carte et Copier l’adresse, puis « Retiré chez » une fois le colis récupéré. La plupart des transporteurs ne nomment le point que pendant que le colis y attend.
 
 Les notifications te préviennent quand un colis est prêt à être retiré. Il existe aussi un e-mail facultatif, désactivé tant que tu ne l'actives pas : un quand un colis est prêt à être retiré, un quand il est livré.
 

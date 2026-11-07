@@ -91,7 +91,7 @@ Das Paket fährt meist dieselbe Strecke zurück, und die Sendungsverfolgung läu
 - shop | Absender | „Zugestellt“ heißt hier: beim Absender.
 :::
 
-Achte auf den letzten Scan: Bei der Österreichischen Post heißt `Sendung zugestellt` auf einer Rücksendung, dass der Absender sein Paket zurückhat. Und nach `Rücksendung mit Vorverfügung` zeigt die Schweizerische Post keine weiteren Scans mehr. Bleibt der Verlauf stehen, frag den Shop, ob die Rücksendung eine neue Sendungsnummer hat, oder lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+Achte auf den letzten Scan: Bei der Österreichischen Post heißt `Sendung wurde zugestellt` auf einer Rücksendung, dass der Absender sein Paket zurückhat. Und nach `Rücksendung mit Vorverfügung` zeigt die Schweizerische Post keine weiteren Scans mehr. Bleibt der Verlauf stehen, frag den Shop, ob die Rücksendung eine neue Sendungsnummer hat, oder lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
 [Peek](/) meldet dir Rücksendungen schon mit der Einstellung „Wichtige Schritte“, so merkst du, wenn ein Paket kehrtmacht. Aufhalten kann Peek es nicht.
 

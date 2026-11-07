@@ -18,6 +18,7 @@ Os formatos que o Peek conhece (dígitos inventados):
 | --- | --- |
 | `BR0000000000000` | SPX Express: `BR`, 12 dígitos e um dígito final. |
 | `BR000000000000X` | SPX Express: `BR`, 12 dígitos e uma letra final. |
+| `BR000000000000XSPXLM00000000` | SPX Express: um desses códigos seguido de `SPXLM` e 8 dígitos, como na etiqueta de um marketplace. |
 | `EA000000005BR` | Duas letras, nove dígitos e `BR`: um código dos Correios, não da SPX. |
 
 O "ID do pedido" não é código de rastreio, mas a Shopee pode pedi-lo no Atendimento ao Cliente.

@@ -44,7 +44,7 @@ Eine Liste seiner Status veröffentlicht Lingdong nicht. Seine Zeilen schreibt e
 
 `货物电子信息已经收到` ist kein Scan deines Pakets. Lingdongs Tracking-System schreibt diese Zeile selbst für einen Auftrag, der noch keinen Scan hat, und datiert sie auf den Zeitpunkt, an dem der Auftrag angelegt wurde.
 
-Keine der Lingdong-Zeilen, die Peek kennt, meldet eine Zustellung: Lingdongs letzte eigene Zeile ist die Übergabe nach der Verzollung. In Italien kann Lingdongs Tracking-Seite danach noch die ersten Scans der Poste Italiane zeigen: `First parcel scan along Poste Italiane’s logistic network` und `In transit along Poste Italiane’s logistic network`. Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
+Keine von Lingdongs eigenen Zeilen meldet eine Zustellung: Lingdongs letzte eigene Zeile ist die Übergabe nach der Verzollung. In Italien kann Lingdongs Tracking-Seite danach noch die Scans der Poste Italiane zeigen: `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` und `In transito, la spedizione è in transito`, bis zu `In consegna` („In Zustellung“) und `Consegnata, la spedizione è stata consegnata` („Zugestellt“). Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
 
 ## Wer Lingdong-Pakete in Deutschland, Österreich und der Schweiz zustellt
 
@@ -62,7 +62,7 @@ Mehr dazu in [Paket beim Zoll](guide:customs).
 
 ## Lingdong-Paket kommt nicht an oder Tracking hängt
 
-**Hängt bei `Shipment departed from facility`.** Das Paket hat Lingdongs Lager in Shenzhen verlassen. Danach können Zeilen zum Flug und zum Zoll kommen, aber keine Lingdong-Zeile, die Peek kennt, meldet die Zustellung. Lingdongs Verlauf kann also stillstehen, während das Paket weiterreist. Frag den Shop, welcher Paketdienst es in deinem Land zustellt und unter welcher Nummer: Dessen Sendungsverfolgung zeigt den Rest. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
+**Hängt bei `Shipment departed from facility`.** Das Paket hat Lingdongs Lager in Shenzhen verlassen. Danach können Zeilen zum Flug und zum Zoll kommen, aber keine von Lingdongs eigenen Zeilen meldet die Zustellung. Lingdongs Verlauf kann also stillstehen, während das Paket weiterreist. Frag den Shop, welcher Paketdienst es in deinem Land zustellt und unter welcher Nummer: Dessen Sendungsverfolgung zeigt den Rest. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
 **Hängt nach der Übergabe.** Mit `货物已交服务商【The shipment has been transferred to the logistics partner.】` endet Lingdongs Teil. Vier Tage nach der neuesten Zeile markiert Peek das Paket mit „Seit vier Tagen keine Aktualisierung“, auch wenn der Zusteller es längst weiterbringt. Zeigt Lingdongs Tracking-Seite bei deinem Paket eine 渠道转单号 (Transfernummer des Versandkanals), ist das die Nummer des Zustellers: Füg sie in Peek als eigenes Paket hinzu. Wenn nicht, frag den Shop danach.
 
@@ -94,7 +94,7 @@ Ist eine Zeile auf einen späteren Zeitpunkt datiert als Peeks Abfrage, zeigt Pe
 
 Nennt Lingdongs Datensatz keinen Zusteller, an den Peek das Paket übergeben kann, endet der Verlauf in Peek dort, wo Lingdongs endet. Als Zusteller mit Namen erkennt Peek in diesem Datensatz nur die [Schweizerische Post](carrier:swiss-post): wenn er sie als Linie nennt, eine ihrer Nummern enthält und kein Zielland außerhalb der Schweiz und Liechtensteins angibt. Dann zeigt Peek „Zustellung durch“ mit ihrem Namen und ihrer Nummer. Solange Peek das Paket bei der Post nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei Swiss Post angekündigt, noch nicht eingetroffen“. Sobald sie einen Scan zeigt, der mindestens so neu ist wie Lingdongs neuester, verfolgt Peek das Paket bei ihr weiter und behält Lingdongs Scans. Ob Lingdong Pakete in die Schweiz so verschickt, sagt Lingdong nicht. Gibt dir der Shop die Nummer des Zustellers in deinem Land, füg sie als eigenes Paket hinzu.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket „In Zustellung“ ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Lingdong oder die Schweizerische Post selbst antwortet; über Tracking-Dienste alle 15 Minuten); zu diesem Status führt keine der bekannten Lingdong-Zeilen. Kommt zwei Tage lang kein neuer Scan (solange das Paket „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Von den bekannten Lingdong-Zeilen meldet „Wichtige Schritte“ nur `货物在清关【Customs clearance in progress】`, alle anderen bekommst du nur mit „Jeden Scan“. Lingdong oder den Shop kann Peek nicht für dich kontaktieren.
+Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket „In Zustellung“ ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Lingdong oder die Schweizerische Post selbst antwortet; über Tracking-Dienste alle 15 Minuten); zu diesem Status führt von den Zeilen auf Lingdongs Tracking-Seite nur `In consegna` der Poste Italiane. Kommt zwei Tage lang kein neuer Scan (solange das Paket „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Von Lingdongs eigenen Zeilen meldet „Wichtige Schritte“ nur `货物在清关【Customs clearance in progress】`, alle anderen bekommst du nur mit „Jeden Scan“; in Italien melden „Wichtige Schritte“ und „Nur die Zustellung“ auch `In consegna` und `Consegnata, la spedizione è stata consegnata` der Poste Italiane. Lingdong oder den Shop kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur Lingdong Sendungsverfolgung
 
@@ -104,7 +104,7 @@ Ein Spediteur aus Shenzhen, der Pakete von Onlinehändlern in China ins Ausland 
 
 ### Warum hängt meine Lingdong-Sendung bei „Shipment departed from facility“?
 
-Die Zeile heißt, dass das Paket Lingdongs Lager in Shenzhen verlassen hat, und Lingdongs Verlauf kann dort stehen bleiben, während das Paket weiterreist. Danach können Zeilen zum Flug und zum Zoll kommen, aber keine Lingdong-Zeile, die Peek kennt, meldet die Zustellung: Die übernimmt in deinem Land ein anderes Unternehmen. Frag den Shop, welches es ist und unter welcher Nummer du das Paket dort verfolgst.
+Die Zeile heißt, dass das Paket Lingdongs Lager in Shenzhen verlassen hat, und Lingdongs Verlauf kann dort stehen bleiben, während das Paket weiterreist. Danach können Zeilen zum Flug und zum Zoll kommen, aber keine von Lingdongs eigenen Zeilen meldet die Zustellung: Die übernimmt in deinem Land ein anderes Unternehmen. Frag den Shop, welches es ist und unter welcher Nummer du das Paket dort verfolgst.
 
 ### Wie lange braucht ein Lingdong-Paket aus China?
 

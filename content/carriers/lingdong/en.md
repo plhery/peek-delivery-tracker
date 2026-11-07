@@ -1,6 +1,6 @@
 ---
 title: Lingdong International tracking: SZLD numbers and statuses
-description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking stops before the delivery.
+description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking often stops before the delivery.
 slug: lingdong-tracking
 published: 2026-10-21
 updated: 2026-11-06
@@ -46,7 +46,7 @@ The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes i
 
 In Peek, the Chinese line shows as "Label created", `Shipment arrived at facility` as "Received by carrier", `货物在清关【Customs clearance in progress】` as "At customs", and every other line in the table as "In transit".
 
-None of the Lingdong lines Peek knows is a delivery line: the last of Lingdong's own is the hand-over after customs clearance in the destination country. In Italy its tracker can then pass on Poste Italiane's first scans, `First parcel scan along Poste Italiane’s logistic network` and `In transit along Poste Italiane’s logistic network`. Another company delivers the parcel there, and its tracking has the rest.
+None of Lingdong's own lines is a delivery line: the last is the hand-over after customs clearance in the destination country. In Italy its tracker can then pass on Poste Italiane's scans, `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` and `In transito, la spedizione è in transito`, up to `In consegna` ("Out for delivery") and `Consegnata, la spedizione è stata consegnata` ("Delivered"). Another company delivers the parcel there, and its tracking has the rest.
 
 ## Who delivers Lingdong parcels
 
@@ -58,7 +58,7 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 
 ## Lingdong parcel not arriving or tracking stuck
 
-**Stuck on `Shipment departed from facility`.** That's the parcel leaving Lingdong's warehouse in Shenzhen. Flight and customs lines can follow, but none of the lines Peek knows is a delivery line, so Lingdong's history can stay still while the parcel moves on. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck on `Shipment departed from facility`.** That's the parcel leaving Lingdong's warehouse in Shenzhen. Flight and customs lines can follow, but none of Lingdong's own lines is a delivery line, so Lingdong's history can stay still while the parcel moves on. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Stuck after the hand-over.** `货物已交服务商【The shipment has been transferred to the logistics partner.】` ends Lingdong's part. Four days after the newest line, Peek flags the parcel "No tracking update for four days", even if the delivering company is moving it. If Lingdong's tracker shows a 渠道转单号 (channel transfer number) for your parcel, that's the delivering company's number: add it to Peek as a parcel of its own. If not, ask the seller for it.
 
@@ -86,7 +86,7 @@ Peek reads Lingdong's own tracker and shows the status, each scan with its place
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. The only such carrier Peek recognises in it is [Swiss Post](carrier:swiss-post), when the record names Swiss Post as its line, holds a Swiss Post number and gives no destination outside Switzerland and Liechtenstein: the parcel then shows "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek follows it there once Swiss Post has a scan at least as recent as Lingdong's newest, keeping Lingdong's scans. Lingdong doesn't say it ships with Swiss Post. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel shows "Out for delivery", while Lingdong's or Swiss Post's own tracker answers (through tracking services, every 15 minutes): no Lingdong line Peek knows gives that status, but Swiss Post's scans can after a hand-over. After 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel shows "Out for delivery", while Lingdong's or Swiss Post's own tracker answers (through tracking services, every 15 minutes): of the lines in Lingdong's tracker, only Poste Italiane's `In consegna` gives that status, and Swiss Post's scans can after a hand-over. After 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
 
 ## Questions about Lingdong tracking
 
@@ -96,7 +96,7 @@ It is Shenzhen Lingdong International Freight Forwarding Co., Ltd. (深圳市领
 
 ### Why is my Lingdong tracking stuck on "Shipment departed from facility"?
 
-That scan marks the parcel leaving Lingdong's warehouse in Shenzhen, and Lingdong's history can stay on it while the parcel travels on. Flight and customs lines can follow, but none of the Lingdong lines Peek knows is a delivery line: another company delivers the parcel in your country. Ask the seller which company it is and for your tracking number with it.
+That scan marks the parcel leaving Lingdong's warehouse in Shenzhen, and Lingdong's history can stay on it while the parcel travels on. Flight and customs lines can follow, but none of Lingdong's own lines is a delivery line: another company delivers the parcel in your country. Ask the seller which company it is and for your tracking number with it.
 
 ### How long does Lingdong take to deliver?
 

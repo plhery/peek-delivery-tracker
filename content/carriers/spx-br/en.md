@@ -18,6 +18,7 @@ These are the shapes Peek knows (digits invented):
 | --- | --- |
 | `BR0000000000000` | SPX Express: `BR`, 12 digits and a final digit. |
 | `BR000000000000X` | SPX Express: `BR`, 12 digits and a final letter. |
+| `BR000000000000XSPXLM00000000` | SPX Express: such a number followed by `SPXLM` and 8 digits, as on a marketplace label. |
 | `EA000000005BR` | Two letters, nine digits and `BR`: a [Correios](carrier:correios-br) code, not SPX's. |
 
 The order ID ("ID do pedido") is not a tracking number, but Shopee may ask for it when you contact its Customer Service.

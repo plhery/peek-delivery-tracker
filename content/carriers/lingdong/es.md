@@ -44,7 +44,7 @@ Lingdong no publica la lista de sus estados. Sus pasos van en inglés, o en chin
 
 `货物电子信息已经收到`, el único paso solo en chino, no es un escaneo del paquete: el sistema de seguimiento de Lingdong lo escribe por su cuenta en un pedido que aún no tiene escaneos, con la fecha en que se creó el pedido.
 
-Ninguno de los pasos de Lingdong que Peek conoce es de reparto o de entrega: el último de los suyos es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. En Italia, la web de seguimiento de Lingdong puede mostrar después los primeros escaneos de Poste Italiane: `First parcel scan along Poste Italiane’s logistic network` y `In transit along Poste Italiane’s logistic network`. La entrega en España la hace otra empresa, y el resto está en su seguimiento.
+Ninguno de los pasos propios de Lingdong es de reparto o de entrega: el último es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. En Italia, la web de seguimiento de Lingdong puede mostrar después los escaneos de Poste Italiane: `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` y `In transito, la spedizione è in transito`, hasta `In consegna` («En reparto») y `Consegnata, la spedizione è stata consegnata` («Entregado»). La entrega en España la hace otra empresa, y el resto está en su seguimiento.
 
 ## Quién reparte los paquetes de Lingdong en España
 
@@ -58,7 +58,7 @@ Lingdong no publica plazos de entrega ni reglas sobre intentos de entrega, aviso
 
 ## Paquete de Lingdong que no llega o seguimiento parado
 
-**Parado en `Shipment departed from facility`.** Es la salida del almacén de Lingdong en Shenzhen. Después pueden llegar los pasos del vuelo y de la aduana, pero ninguno de los que Peek conoce es de reparto, así que el historial de Lingdong puede quedarse quieto mientras el paquete sigue su camino. Pregunta a la tienda qué empresa lo entrega en España y con qué número de seguimiento. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
+**Parado en `Shipment departed from facility`.** Es la salida del almacén de Lingdong en Shenzhen. Después pueden llegar los pasos del vuelo y de la aduana, pero ninguno de los propios de Lingdong es de reparto, así que el historial de Lingdong puede quedarse quieto mientras el paquete sigue su camino. Pregunta a la tienda qué empresa lo entrega en España y con qué número de seguimiento. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
 **Esperando un vuelo.** El paso del vuelo reservado da su fecha. Si pasan unos días sin un paso de despegue, pregunta a la tienda.
 
@@ -90,7 +90,7 @@ Peek lee la web de seguimiento de Lingdong y muestra el estado, cada paso con su
 
 A menos que los datos de Lingdong nombren una empresa de reparto a la que Peek pueda pasar el paquete, el historial del paquete en Peek termina donde termina el de Lingdong. Si la tienda te da el número de seguimiento de la empresa que lo entrega en España, añádelo como un paquete aparte.
 
-Peek consulta cada 10 minutos, y cada hora cuando Lingdong deja de dar noticias: tras 12 horas sin un paso nuevo si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», o tras dos días en «En tránsito» o «En aduanas». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Los pasos de Lingdong que conoce son «Etiqueta creada», «Admitido por el transportista» o «En tránsito», y solo «Cada escaneo» te avisa de ellos; la excepción es `货物在清关【Customs clearance in progress】`, en «En aduanas», del que también te avisa «Pasos importantes». Peek no puede contactar con Lingdong ni con la tienda por ti.
+Peek consulta cada 10 minutos, cada 2 minutos cuando el paquete está «En reparto» (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Lingdong), y cada hora cuando Lingdong deja de dar noticias: tras 12 horas sin un paso nuevo si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», o tras dos días en «En tránsito» o «En aduanas». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Los pasos propios de Lingdong son «Etiqueta creada», «Admitido por el transportista» o «En tránsito», y solo «Cada escaneo» te avisa de ellos; la excepción es `货物在清关【Customs clearance in progress】`, en «En aduanas», del que también te avisa «Pasos importantes». En Italia, de `In consegna` («En reparto») y `Consegnata, la spedizione è stata consegnata` («Entregado»), de Poste Italiane, te avisan además «Pasos importantes» y «Solo la entrega». Peek no puede contactar con Lingdong ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Lingdong
 
@@ -100,7 +100,7 @@ Es 深圳市领东国际货运代理有限公司 (Shenzhen Lingdong Internationa
 
 ### ¿Por qué el seguimiento de Lingdong se queda en «Shipment departed from facility»?
 
-Ese paso es la salida del almacén de Lingdong en Shenzhen. Después pueden aparecer los pasos del vuelo y de la aduana del país de destino, pero ninguno de los que Peek conoce es de reparto: la entrega en España la hace otra empresa. Pregúntale a la tienda qué empresa es y cuál es tu número de seguimiento con ella: ahí verás el resto.
+Ese paso es la salida del almacén de Lingdong en Shenzhen. Después pueden aparecer los pasos del vuelo y de la aduana del país de destino, pero ninguno de los propios de Lingdong es de reparto: la entrega en España la hace otra empresa. Pregúntale a la tienda qué empresa es y cuál es tu número de seguimiento con ella: ahí verás el resto.
 
 ### ¿Cuánto tarda un paquete de Lingdong en llegar a España?
 

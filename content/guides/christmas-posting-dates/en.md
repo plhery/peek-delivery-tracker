@@ -131,7 +131,7 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 - Still stuck after Christmas? | See [why tracking stops updating](guide:tracking-not-updating).
 :::
 
-Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery only": it checks up to every 2 minutes once the parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers), though it can't make it arrive sooner. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (GLS in most countries and Royal Mail hourly, Poste Italiane and PostNL every 30 minutes).
+Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery only": it checks up to every 2 minutes once the parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers), though it can't make it arrive sooner. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail and for Morning Global; every 30 minutes for Poste Italiane and PostNL).
 
 :::sources
 - [Royal Mail: Royal Mail announces last recommended posting dates for Christmas](https://www.internationaldistributionservices.com/en/press-centre/press-releases/royal-mail/royal-mail-announces-last-recommended-posting-dates-for-christmas/) – 2026 dates, two dates for 1st Class, 27 October 2026

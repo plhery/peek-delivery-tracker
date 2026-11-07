@@ -125,7 +125,7 @@ Souvent, en dernier recours :
 
 ### Peek peut-il retrouver mon colis ?
 
-Non. [Peek](/), comme tout [suivi de colis universel](guide:universal-tracker), ne montre que ce que le transporteur publie, et ne peut ni le contacter ni réclamer à ta place. En revanche, il vérifie le suivi jusqu'à toutes les 2 minutes le jour de la livraison (une fois le colis remis au livreur, dès 6 h, heure locale, et tant que c'est le suivi du transporteur qui répond) et peut t'envoyer une notification : tu peux ainsi aller voir à ta porte juste après le scan « livré ». Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (GLS dans la plupart des pays et Royal Mail toutes les heures, Poste Italiane et PostNL toutes les 30 minutes).
+Non. [Peek](/), comme tout [suivi de colis universel](guide:universal-tracker), ne montre que ce que le transporteur publie, et ne peut ni le contacter ni réclamer à ta place. En revanche, il vérifie le suivi jusqu'à toutes les 2 minutes le jour de la livraison (une fois le colis remis au livreur, dès 6 h, heure locale, et tant que c'est le suivi du transporteur qui répond) et peut t'envoyer une notification : tu peux ainsi aller voir à ta porte juste après le scan « livré ». Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail et pour Morning Global ; toutes les 30 minutes pour Poste Italiane et PostNL).
 
 ### Faut-il porter plainte pour un colis volé ?
 

@@ -131,7 +131,7 @@ Für Weihnachtsgeschenke heißt das: früh bestellen. Mehr dazu unter [Weihnacht
 
 Meist nicht: In der Regel zahlst du Steuer und Zoll schon an der Kasse. Was trotzdem dazukommen kann:
 
-- **Deutschland und Österreich:** Seit 1. Juli 2026 kostet jede Warenart in Online-Bestellungen bis 150 € pauschal 3 € Zoll, auch wenn der Shop die Einfuhrumsatzsteuer schon kassiert hat (IOSS). Seit 1. November 2026 kommen laut EU-Kommission 2 € Bearbeitungsgebühr pro Warenart dazu, bei jedem Warenwert. Ist an der Kasse nicht alles bezahlt, holt sich der Paketdienst den Rest bei der Zustellung, plus eigene Gebühr: 7,50 € bei der Deutschen Post, ab 6 € bei der Österreichischen Post.
+- **Deutschland und Österreich:** Seit 1. Juli 2026 kostet jede Warenart in Online-Bestellungen bis 150 € pauschal 3 € Zoll, auch wenn der Shop die Einfuhrumsatzsteuer schon kassiert hat (IOSS). Seit 1. November 2026 kommen laut EU-Kommission 2 € Bearbeitungsgebühr pro Warenart dazu, bei jedem Warenwert; in Deutschland zahlst du sie laut DHL nicht bei der Zustellung, sondern meist schon beim Kauf. Ist an der Kasse sonst nicht alles bezahlt, holt sich der Paketdienst den Rest bei der Zustellung, plus eigene Gebühr: 7,50 € bei der Deutschen Post, ab 6 € bei der Österreichischen Post.
 - **Schweiz:** Die EU-Regeln gelten nicht. Große Versandhändler und Plattformen rechnen die Schweizer MWST selbst ab. Bei anderen Shops erhebt das BAZG Abgaben bis CHF 5.– nicht, sonst verlangt die Post für die Verzollung CHF 16.– plus 3 % des Warenwerts, dazu MWST und Zoll.
 
 Was du genau zahlst, wo du zahlst und woran du eine Fake-Zollnachricht erkennst, steht unter [Paket beim Zoll](guide:customs).
@@ -183,7 +183,7 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [Österreichische Post: Kooperation mit Temu für die Zustellung](https://news.post.at/presse/de/post/id/1947158/TEMU%20UND%20%C3%96STERREICHISCHE%20POST%3A%20KOOPERATION%20F%C3%9CR%20NACHHALTIGE%20UND%20QUALIT%C3%84TSVOLLE%20ZUSTELLUNG) – Post als Dienstleisterin für Temu in Österreich, November 2023
 - [DHL: Bedeutung des Sendungsstatus](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Weitertransport zu DHL
 - [DHL: Sendungsstatus international](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zollabfertigung, einige Werktage
-- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € je Warenart, meist schon im Shop
+- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € je Warenart, meist schon im Shop; 2 € Bearbeitungsgebühr nicht bei der Zustellung bezahlt
 - [DHL: Fragen zu Kosten](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – postalische Verzollung, 7,50 € Auslagepauschale, IOSS
 - [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – 3 € pro Warenkategorie
 - [EU-Kommission: Buying goods online coming from a non-EU country](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – Waren schon in der EU: keine Zollformalitäten, MwSt. im Preis

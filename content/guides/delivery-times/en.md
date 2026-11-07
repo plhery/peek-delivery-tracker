@@ -18,7 +18,7 @@ Parcels get delivered any time from early morning to late evening, and almost no
 | [Amazon](carrier:amazon-logistics) (UK, Ireland) | UK Same-Day orders by 7 p.m. or 10 p.m. | Ireland: yes | Ireland: "seven days a week" |
 | [Royal Mail](carrier:royal-mail) (UK) | Usually by 4.30 p.m.; a parcel due at a specific time may come later | Yes, as normal | In some areas |
 | [Evri](carrier:evri) (UK) | 8 a.m. to 8 p.m. | Yes, as normal | Uncommon |
-| Yodel, now [InPost](carrier:inpost) (UK) | 7 a.m. to 9 p.m. | 7 a.m. to 9 p.m. in mainland UK | Busy periods only |
+| Yodel, now [InPost](carrier:inpost) (UK) | 7 a.m. to 9 p.m. | 7 a.m. to 9 p.m. | Busy periods only |
 | [DPD](carrier:dpd-uk) (UK) | None published; a one-hour window on the day | An upgrade offered in Predict | An upgrade offered in Predict |
 | [Canada Post](carrier:canada-post) | Homes 9 a.m. to as late as 8 p.m.; businesses 9 a.m. to 5 p.m. | Select areas of Toronto, Ottawa and Montreal | The same select areas |
 | [Purolator](carrier:purolator) (Canada) | "End of day" means 9 p.m. on guaranteed services | Saturday Service, a sender option | No Sunday service listed |
@@ -89,7 +89,7 @@ USPS asks you to wait one full postal business day after `Out for Delivery` befo
 
 A card saying the driver came while you were out? See [missed delivery](guide:missed-delivery). No new scan for days? See [why tracking stops updating](guide:tracking-not-updating).
 
-Peek checks every 2 minutes once a parcel is out for delivery with the carriers it reads directly (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you on delivery day only, so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (GLS in most countries and Royal Mail hourly, Poste Italiane and PostNL every 30 minutes).
+Peek checks up to every 2 minutes once a parcel is out for delivery with the carriers it reads directly (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you on delivery day only, so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail and for Morning Global; every 30 minutes for Poste Italiane and PostNL). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Do parcels get delivered on bank holidays?
 
@@ -135,7 +135,7 @@ One catch: a locker you can open at any hour is only filled on delivery days, so
 - [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – rescheduled next business day
 - [Canada Post: Item hasn't arrived](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) – 5 business days, investigation
 - [Purolator: Service guide](https://web.purolator.com/app/guides/pdf/Purolator_Service_Guide_English.pdf) – end of day 9 p.m., Saturday
-- [Australia Post: AusPost app](https://auspost.com.au/about-us/about-our-site/australia-post-app) – 2-hour window
+- [Australia Post: AusPost app](https://auspost.com.au/personal/receiving/australia-post-app) – 2-hour window
 - [Australia Post: Public holiday services](https://auspost.com.au/about-us/corporate-information/public-holiday-services) – holidays, Saturday Express Post
 - [Australia Post: Parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries) – 24/7 Parcel Lockers
 - [DHL: What does my shipment status mean?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – unfinished rounds, no direct contact with drivers

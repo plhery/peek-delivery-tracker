@@ -116,7 +116,7 @@ Den letzten Termin verpasst? Ein schnellerer Dienst schließt oft später, etwa 
 - Nach Weihnachten immer noch nichts? | Lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 :::
 
-Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell die Mitteilungen auf „Nur die Zustellung“: Sobald das Paket in Zustellung ist, prüft Peek bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange der Paketdienst selbst antwortet). Schneller ankommen lässt es das Paket allerdings nicht. Über Tracking-Dienste wie 17TRACK prüft Peek alle 15 Minuten, und einige Paketdienste setzen einen längeren Abstand (GLS in den meisten Ländern und Royal Mail stündlich, Poste Italiane und PostNL alle 30 Minuten).
+Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell die Mitteilungen auf „Nur die Zustellung“: Sobald das Paket in Zustellung ist, prüft Peek bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange der Paketdienst selbst antwortet). Schneller ankommen lässt es das Paket allerdings nicht. Über Tracking-Dienste wie 17TRACK prüft Peek alle 15 Minuten, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail und Morning Global; alle 30 Minuten Poste Italiane und PostNL).
 
 :::sources
 - [GLS: Versandfristen Weihnachten 2026](https://newsroom.de.gls-group.com/news/versandfristen-weihnachten-2026/s/4f03daaf-07d4-47bb-9cc0-a36d97901bdb) – Termine 2026, 12 Uhr, Verzögerungen, Spitzenmengen

@@ -4,7 +4,7 @@ description: Descobre que transportadora tem a tua encomenda pelo número de seg
 slug: como-saber-qual-e-a-transportadora
 picture: Três etiquetas de seguimento divididas em partes coloridas, uma lupa sobre o código de país CH e o Pip, curioso.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 As letras e o comprimento de um número de seguimento dizem muitas vezes que transportadora tem a tua encomenda. `1Z` seguido de 16 letras e algarismos é UPS, e 13 caracteres como `RR000000005CH` (duas letras, nove algarismos, duas letras) costumam ser de um operador postal, com o país que emitiu o número nas duas últimas letras: `PT` é Portugal. Os números só com algarismos são o caso difícil: 10, 12 ou 14 algarismos podem ser de várias transportadoras, e aí quem decide é o e-mail de envio, ou um serviço de seguimento que as experimente uma a uma.
@@ -24,6 +24,8 @@ Quatro passos, por esta ordem:
 :::
 
 Se não te apetecer fazer de detetive, cola o número, uma ligação da transportadora ou o e-mail de envio inteiro no [Peek](/): ele encontra o número e deteta a transportadora entre mais de 3500. Os outros serviços que juntam várias transportadoras estão em [como seguir todas as encomendas num só lugar](guide:universal-tracker).
+
+Quando a forma do número serve a mais do que uma transportadora, o verificador acima responde «Pode ser» e mostra as candidatas. No Peek, mal colas o número, ou sais do campo depois de o escreveres, a linha da transportadora mostra «A verificar serviços de seguimento…» enquanto o Peek pergunta às mais prováveis, até cinco de cada vez. Só conta a resposta sobre uma encomenda recente, porque as transportadoras voltam a usar números antigos. Se só uma conhecer o número, aparece o nome dela e «tem esta encomenda». Se forem várias, aparece, por exemplo, «3 transportadoras conhecem este número» e «escolhe a tua»: escolhe a que a mensagem de envio indica. Se nenhuma o conhecer ainda, lês «ainda não encontrada · o Peek continua a verificar».
 
 ## Como é o número de seguimento de cada transportadora
 
@@ -168,4 +170,5 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – o seguimento da Yanwen, sem número de exemplo
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – o código de envio
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 algarismos
+- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – como o Peek confirma a transportadora de um número ambíguo: até cinco de cada vez, só encomendas recentes, escolha tua quando várias o conhecem
 :::

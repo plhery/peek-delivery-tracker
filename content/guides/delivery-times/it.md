@@ -4,7 +4,7 @@ description: Fino a che ora consegnano Poste Italiane, BRT, GLS e Amazon, se il 
 slug: a-che-ora-consegna-il-corriere
 picture: Un orologio che segna le otto di sera sotto una falce di luna, un calendario con i fine settimana evidenziati, un furgone a fari accesi e Pip che guarda da una finestra.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Con la consegna in giornata Amazon porta i pacchi fino alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-90 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
@@ -24,6 +24,20 @@ Due cose che la tabella non dice:
 
 - **Amazon** arriva fino alle 22:00 con la consegna in giornata, che c'è in oltre 30 città italiane: nell'area di Milano, per esempio, per alcuni dei prodotti più richiesti ordini entro le 17:00 e ricevi il pacco la sera stessa. Per i clienti Prime è gratuita sopra i 29 euro, per gli altri costa 8,99 euro.
 - **Poste Italiane** fa due tentativi di consegna per ogni pacco, ma non dice a che ora. Se ti serve un orario preciso, devono averlo scelto il negozio o chi ti spedisce il pacco, con le opzioni di Poste Delivery Business Express.
+
+## Quanto ci mette un pacco ad arrivare?
+
+Dipende dal corriere e dal servizio che ha scelto il mittente. Questi sono i tempi che i corrieri pubblicano per le spedizioni in Italia:
+
+| Corriere e servizio | Tempi che pubblica |
+| --- | --- |
+| Poste Delivery Express | 1-4 giorni lavorativi, sabato e festivi esclusi |
+| Poste Delivery Standard | 5 giorni lavorativi nel 90% dei casi, sabato e festivi esclusi |
+| Poste Delivery Business Express | Indicativamente 1-2 giorni lavorativi dopo il ritiro, nella maggior parte delle località |
+| BRT | Generalmente 24/48 ore; all'estero, su gomma, 48/72 ore nella maggior parte dei Paesi europei |
+| GLS (National Express) | Indicativamente 24 ore nella penisola e 48 ore in Sicilia, Calabria e Sardegna; il 99% delle spedizioni arriva in 4 giorni lavorativi |
+
+I tempi partono da quando il corriere ritira o accetta il pacco, non da quando ordini. Con Poste Delivery Standard, per un pacco accettato dopo l'orario limite indicato in ufficio postale i tempi decorrono dal giorno lavorativo successivo. Sui siti di BRT e GLS puoi calcolare i tempi per la tua località inserendo il CAP.
 
 ## I corrieri consegnano anche il sabato e la domenica?
 
@@ -84,7 +98,7 @@ Per Poste Delivery Standard, Poste Italiane prevede la consegna in 5 giorni lavo
 
 Hai trovato un avviso perché non eri in casa? Leggi [mancata consegna pacco](guide:missed-delivery). Nessuna nuova scansione da giorni? Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (GLS nella maggior parte dei Paesi e Royal Mail ogni ora, Poste Italiane e PostNL ogni 30 minuti).
+Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane e PostNL). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
 
 ## Il corriere consegna nei giorni festivi?
 
@@ -109,12 +123,15 @@ Attenzione: un locker che apri a ogni ora viene riempito solo nei giorni in cui 
 - [About Amazon Italia: Nuove soluzioni per consegne più veloci in Italia](https://www.aboutamazon.it/notizie/logistica/amazon-introduce-nuove-soluzioni-per-consegne-piu-veloci-e-piu-sostenibili-in-italia) – area di Milano, ordini fino alle 17:00 e consegna la sera stessa, consegna in giornata in oltre 30 città
 - [About Amazon Italia: Nuovo record di velocità nelle consegne Prime nel 2025](https://www.aboutamazon.it/notizie/company-news/amazon-nuovo-record-velocita-consegne-prime-2025-italia-230-milioni-prodotti) – consegna in giornata gratuita per i clienti Prime sopra i 29 euro, 8,99 euro per gli altri
 - [Poste Italiane: Poste Delivery Express](https://www.poste.it/pacchi/poste-delivery-express) – 1-4 giorni lavorativi, sabato e festivi esclusi, due tentativi
-- [Poste Italiane: Poste Delivery Standard](https://www.poste.it/pacchi/poste-delivery-standard) – 5 giorni lavorativi nel 90% dei casi, due tentativi
-- [Poste Italiane: Poste Delivery Business Express](https://business.poste.it/professionisti-imprese/prodotti/poste-delivery-business-express.html) – consegna di sabato e di sera (18:30-21:00), appuntamento, finestra di due ore, ritiro il sabato
-- [BRT: FAQ](https://www.brt.it/it/faq) – BRTcode, data e fascia oraria, BRT-fermopoint
-- [BRT: Ricevere](https://www.brt.it/it/ricevere/) – oltre 12.400 BRT-fermopoint, orari estesi nel fine settimana
+- [Poste Italiane: Poste Delivery Standard](https://www.poste.it/pacchi/poste-delivery-standard) – 5 giorni lavorativi nel 90% dei casi, due tentativi, oltre l'orario limite dal giorno lavorativo successivo
+- [Poste Italiane: Poste Delivery Business Express](https://business.poste.it/professionisti-imprese/prodotti/poste-delivery-business-express.html) – consegna di sabato e di sera (18:30-21:00), appuntamento, finestra di due ore, ritiro il sabato, indicativamente 1-2 giorni lavorativi dopo il ritiro
+- [BRT: FAQ](https://www.brt.it/it/servizio-clienti/faq/) – BRTcode, data e fascia oraria, BRT-fermopoint
+- [BRT: Quali sono i vostri tempi di consegna?](https://www.brt.it/it/faq/quali-sono-i-vostri-tempi-di-consegna/) – in Italia generalmente 24/48 ore, calcolo per CAP
+- [BRT: Privati](https://www.brt.it/it/privati/) – oltre 12.400 BRT-fermopoint, orari estesi nel fine settimana
 - [BRT: Condizioni generali di contratto](https://vas.brt.it/vas/info/it/CONDIZIONI%20GENERALI%20CONTRATTO%20TARIFFARIO.pdf) – tempi sospesi sabato, domenica, festivi e ferie
 - [GLS Italy: La consegna e le possibili opzioni](https://gls-group.com/IT/it/spedire-ricevere/opzioni-consegna/) – Express12Service, SaturdayExpressService, FlexDeliveryService, orari delle sedi
+- [GLS Italy: Carta dei servizi postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – National Express in 24 ore nella penisola e 48 ore in Sicilia, Calabria e Sardegna, 99% in 4 giorni lavorativi
+- [GLS Italy: Tempi di consegna](https://gls-group.com/IT/it/spedire-ricevere/info-utili-spedire/destinazioni-tempi/) – tempi indicativi per località o CAP
 - [La Posta: Invio singolo](https://www.post.ch/it/ricezione/gestire-un-invio/invio-singolo) – sabato CHF 3.80, recapito mattutino e serale, prezzi prima del primo tentativo
 - [La Posta: Invito di ritiro](https://www.post.ch/fr/reception/invitation-a-retirer) – réexpédition gratis solo mentre il pacco è in viaggio, CHF 8.00 dal lunedì al venerdì e CHF 15.00 il sabato o al mattino dopo l'avviso, secondo recapito sabato CHF 7.00
 - [La Posta: Gestione permanente](https://www.post.ch/it/ricezione/gestire-un-invio/gestione-permanente) – sabato per tutti i pacchi, CHF 20.00 e 40.00

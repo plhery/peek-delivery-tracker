@@ -4,7 +4,7 @@ description: Jak śledzić paczkę z Chin: czemu numer się zmienia, kto doręcz
 slug: sledzenie-paczki-z-chin
 picture: Samolot leci przerywanym łukiem nad kulą ziemską, od czerwonej pinezki do zielonej, oznaczającej dom, a Pip podróżuje między dwiema furgonetkami.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 Paczka z AliExpress, Temu albo Shein przechodzi z rąk do rąk: chińska firma logistyczna wysyła ją samolotem, celnicy ją sprawdzają, a w Polsce doręcza ją [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) albo inny przewoźnik, często pod nowym numerem. Każda z tych firm skanuje tylko swój odcinek. Licz się więc z tym, że pierwszy skan pojawi się nawet po 11 dniach, w czasie lotu śledzenie zamilknie, a po statusie „arrived at destination country” paczka jeszcze trochę poczeka. Śledź najpierw numer ze sklepu, a potem numer polskiego przewoźnika. Przy najtańszej wysyłce śledzenie może się urwać na dobre właśnie przy tym przekazaniu. Paczka z magazynu w UE omija lot z Chin i odprawę celną.
@@ -80,6 +80,7 @@ Poza Cainiao zobaczysz [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Su
 | dwie litery, dziewięć cyfr, `YP` | Yanwen (`YP` to nie kod kraju) |
 | `BYS` i 9 cyfr | Yanwen |
 | `SY` i 11 cyfr | Sunyou |
+| `SF` i 13 cyfr | SF Express |
 | `3A5V` i 9 cyfr | CNE |
 
 Wklej do [Peeka](/) którykolwiek numer, chiński albo polski, a Peek znajdzie przewoźnika spośród ponad 3500. Więcej o numerach przesyłek: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
@@ -122,7 +123,7 @@ Od 1 lipca 2026 r. często tak, nawet przy tanich zamówieniach. Za paczkę do 1
 - **Cło:** 3 euro za każdy rodzaj produktu, także przy VAT zapłaconym w kasie. Jeśli sklep nie wliczył go w cenę, Poczta Polska pobierze je przy odbiorze.
 - **Opłatę Poczty Polskiej:** 20,00 zł za zgłoszenie celne, gdy paczkę zgłasza Poczta, nawet przy VAT w cenie.
 
-Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość paczki. Sklep albo przewoźnik może ją przerzucić na Ciebie. Szczegóły, także o fałszywych SMS-ach z żądaniem dopłaty, znajdziesz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
+Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, liczony tak jak przy cle, ale bez względu na wartość paczki. Należy się od tego, kto zgłasza towar do odprawy, w chwili przyjęcia zgłoszenia celnego. Sklep albo przewoźnik może ją przerzucić na Ciebie. Szczegóły, także o fałszywych SMS-ach z żądaniem dopłaty, znajdziesz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Paczka z Chin nie dotarła: kiedy żądać zwrotu pieniędzy?
 
@@ -167,7 +168,7 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [Rada Państwa ChRL: dni wolne w 2026 r.](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – chiński Nowy Rok w lutym, Święto Narodowe 1–7 października
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – chiński Nowy Rok między 21 stycznia a 20 lutego
 - [UPU: standard S10](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – jeden numer na przesyłkę
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, brzmienie statusów
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów (także `SF` i 13 cyfr), brzmienie statusów
 - [Shein Polska: Czy oferujecie Przyspieszone Przesyłki?](https://pl.shein.com/faq/detail?id=41177) – InPost Paczkomat 24/7
 - [Poczta Polska: Dalsza współpraca logistyczna Poczty Polskiej z platformą Temu](https://media.poczta-polska.pl/releases/dalsza-wspolpraca-logistyczna-poczty-polskiej-z-platforma-temu-poczta-polska-rozwija-obsluge-przesylek-e-commerce) – szybsze dostawy w całej Polsce (czerwiec 2025 r.)
 - [Poczta Polska: Zmiany w opłatach dla przesyłek spoza Unii Europejskiej od 1 lipca 2026 r.](https://www.poczta-polska.pl/news/zmiany-w-oplatach-dla-przesylek-spoza-unii-europejskiej-od-1-lipca-2026-r/) – 3 euro za rodzaj produktu, pobranie przy doręczeniu
@@ -175,7 +176,7 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [Poczta Polska: Cennik opłat dodatkowych](https://www.poczta-polska.pl/wp-content/uploads/2025/04/cennik-oplat-dodatkowych.pdf) – od 1 lipca 2026 r.: 20,00 zł za zgłoszenie celne
 - [Komisja Europejska: Buying goods online coming from a non-EU country](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – towar już w UE: bez formalności celnych, VAT w cenie
 - [Komisja Europejska: Pytania i odpowiedzi dotyczące cła w wysokości 3 EUR](https://ec.europa.eu/commission/presscorner/detail/pl/qanda_26_1492) – 3 euro za pozycję, towar odprawiony w jednym kraju bez dodatkowych kontroli w innych
-- [Komisja Europejska: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro także przy IOSS
+- [Komisja Europejska: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro także przy IOSS; 2 euro za pozycję liczoną jak przy cle, należne od zgłaszającego w chwili przyjęcia zgłoszenia
 - [Komisja Europejska: Reforma celna UE wyznacza nową erę dla organów celnych w Europie](https://ec.europa.eu/commission/presscorner/detail/pl/ip_26_1904) – opłata manipulacyjna od listopada 2026 r.
 - [Komisja Europejska: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 euro od 1 listopada 2026 r.
 - [Rada UE: Rozporządzenie delegowane Komisji C(2026) 6694](https://data.consilium.europa.eu/doc/document/ST-13480-2026-INIT/pl/pdf) – 2 euro za pozycję, także powyżej 150 euro

@@ -113,7 +113,7 @@ Para Correos, el Black Friday es «el pistoletazo de salida de la temporada más
 - ¿Sigue parado después de Navidad? | Mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 :::
 
-¿Esperas un regalo? Pega su número en [Peek](/) y elige las notificaciones «Solo la entrega»: lo consulta hasta una vez cada 2 minutos cuando sale a reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa), aunque no puede hacer que llegue antes. A través de servicios de seguimiento como 17TRACK lo consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (GLS en la mayoría de los países y Royal Mail cada hora, Poste Italiane y PostNL cada 30 minutos).
+¿Esperas un regalo? Pega su número en [Peek](/) y elige las notificaciones «Solo la entrega»: lo consulta hasta una vez cada 2 minutos cuando sale a reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa), aunque no puede hacer que llegue antes. A través de servicios de seguimiento como 17TRACK lo consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail y Morning Global; cada 30 minutos, Poste Italiane y PostNL).
 
 :::sources
 - [GLS: Navidad 2025, plazos de entrega](https://gls-group.com/ES/es/navidad-plazos-de-entrega/) – fechas de 2025, festivos, pedidos, Etiqueta creada

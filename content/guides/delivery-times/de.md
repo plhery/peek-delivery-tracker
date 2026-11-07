@@ -4,7 +4,7 @@ description: Bis wie spät DHL, Hermes, DPD und die Post in Österreich und der 
 slug: wann-liefert-dhl-uhrzeit-paketzustellung
 picture: Eine Uhr, die acht Uhr abends zeigt, unter einer Mondsichel, ein Kalender mit markierten Wochenenden, ein Lieferwagen mit eingeschalteten Scheinwerfern und Pip, der aus dem Fenster schaut.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzeit verspricht dir fast kein Paketdienst. Hermes stellt von 8 bis 20 Uhr zu. DHL, die Österreichische Post und die Schweizerische Post nennen für normale Pakete gar keine Uhrzeit. Samstag ist in Deutschland ein normaler Zustelltag. Die Schweizerische Post und GLS Österreich stellen montags bis freitags zu, die Post in der Schweiz samstags nur gegen Aufpreis.
@@ -24,6 +24,22 @@ Zwei Dinge zeigt die Tabelle nicht:
 
 - **DHL** nennt keine Zustellzeiten. Die Uhrzeiten, die man online findet, stammen von Blogs, nicht von DHL. Zum Status `Die Sendung wurde in das Zustellfahrzeug geladen.` schreibt DHL nur: „In der Regel wird Ihr Paket noch am gleichen Tag zugestellt.“ Auch der angekündigte Zustelltag ist eine Prognose, die Wetter, Staus oder Probleme bei der Sortierung durcheinanderbringen können.
 - **Amazon** liefert in über 70 deutschen Städten auch am selben Tag. In Berlin und München kannst du bestimmte Produkte sogar bis zum Nachmittag bestellen und bekommst sie noch am selben Abend.
+
+## Wie lange ist ein Paket unterwegs?
+
+Das hängt vom Paketdienst und vom Versandprodukt ab, das der Absender gewählt hat. Diese Laufzeiten nennen die Paketdienste selbst für Sendungen im Inland:
+
+| Paketdienst | Laufzeit laut Paketdienst |
+| --- | --- |
+| DHL Paket und Päckchen (DE) | In der Regel 1 bis 2 Werktage |
+| Deutsche Post, Warensendung | Regellaufzeit 4 Werktage |
+| Hermes (DE) | „wenige Tage“ |
+| DPD CLASSIC (DE) | 1 bis 2 Tage, innerhalb Europas 1 bis 4 Tage |
+| Österreichische Post | Über 97 Prozent der Inlandspakete innerhalb von 2 Werktagen; Post Express am nächsten Werktag bis 13 Uhr |
+| GLS (AT) | In der Regel binnen 24 Stunden |
+| Schweizerische Post | PostPac Priority in der Regel am nächsten Werktag, PostPac Economy innerhalb von 2 Werktagen |
+
+Gezählt wird ab der Einlieferung beim Paketdienst, nicht ab deiner Bestellung. Für den Universaldienst setzt das Postgesetz eine Untergrenze: Im Jahresdurchschnitt müssen mindestens 95 Prozent der inländischen Pakete am dritten Werktag nach der Einlieferung zugestellt sein und 99 Prozent am vierten (§ 18 PostG). Hermes unternimmt im Inland grundsätzlich drei Zustellversuche an aufeinanderfolgenden Werktagen.
 
 ## Liefert DHL am Samstag und am Sonntag?
 
@@ -87,7 +103,7 @@ DHL stellt innerhalb Deutschlands in der Regel 1 bis 2 Werktage nach dem Versand
 
 Lag eine Benachrichtigung im Briefkasten, weil du nicht da warst? Dann hilft [Paket verpasst: Was tun?](guide:missed-delivery). Kommt tagelang kein neuer Scan, lies [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-Peek fragt bei Paketdiensten, die es direkt abruft, alle 2 Minuten nach, sobald ein Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet), und schickt dir mit der Einstellung „Nur die Zustellung“ eine Mitteilung, wenn es in Zustellung geht und wenn es ankommt. So musst du nicht ständig neu laden. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (GLS in den meisten Ländern und Royal Mail stündlich, Poste Italiane und PostNL alle 30 Minuten).
+Peek fragt bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten nach, sobald ein Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet), und schickt dir mit der Einstellung „Nur die Zustellung“ eine Mitteilung, wenn es in Zustellung geht und wenn es ankommt. So musst du nicht ständig neu laden. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail und Morning Global; alle 30 Minuten Poste Italiane und PostNL). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt.
 
 ## Liefern Paketdienste an Feiertagen?
 
@@ -111,18 +127,22 @@ Ein Haken bleibt: Eine Station, die du jederzeit öffnen kannst, wird nur an Zus
 - [DHL: Live-Tracking](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/live-tracking.html) – 90 Minuten, 15 Minuten vorher, nicht für jedes Paket
 - [DHL: Packstation](https://www.dhl.de/de/privatkunden/pakete-empfangen/an-einem-abholort-empfangen/packstation.html) – über 19.000 Stationen, 24/7
 - [Postgesetz: § 19 Zustellfrequenz](https://www.gesetze-im-internet.de/postg_2024/__19.html) – Zustellung werktäglich
-- [Hermes: Laufzeiten und Zustellung](https://www.myhermes.de/service/fragen/empfangen/laufzeiten-zustellung.html) – Montag bis Samstag, 8 bis 20 Uhr
+- [Postgesetz: § 18 Laufzeitvorgaben](https://www.gesetze-im-internet.de/postg_2024/__18.html) – Pakete im Inland: 95 Prozent am dritten, 99 Prozent am vierten Werktag nach der Einlieferung
+- [Deutsche Post: Warensendung](https://www.deutschepost.de/de/w/warensendung.html) – Regellaufzeit 4 Werktage, DHL Päckchen in der Regel 1 bis 2 Werktage
+- [Hermes: Laufzeiten und Zustellung](https://www.myhermes.de/service/fragen/empfangen/laufzeiten-zustellung.html) – Montag bis Samstag, 8 bis 20 Uhr, wenige Tage im Inland, drei Zustellversuche
 - [Hermes: Voraussichtliche Zustellung](https://www.myhermes.de/service/fragen/empfangen/voraussichtliche-zustellung.html) – Zeitfenster am Vortag, unverbindlich
 - [Hermes Newsroom: Sendungsverfolgung und mehr](https://newsroom.hermesworld.com/themen-digitalisierung-hermes-sendungsverfolgung-und-mehr-wie-empfaengerinnen-von-mehr-transparenz-und-flexibilitaet-profitieren-34419/) – höchstens 2 Stunden für über 90 Prozent, 30 Minuten, Stopps ab einer Stunde vorher
 - [DPD: Empfangen](https://www.dpd.com/de/de/empfangen/) – Zeitfenster von 2 Stunden, 30 Minuten
+- [DPD: Paketversand](https://www.dpd.com/de/de/versenden/paketversand/) – DPD CLASSIC in 1 bis 2 Tagen in Deutschland, 1 bis 4 Tagen in Europa
 - [DPD: Feiertage](https://www.dpd.com/de/de/support/versandbestimmungen/feiertage/) – bundesweite und regionale Feiertage
 - [About Amazon Deutschland: Amazon Prime 2025, Rekord bei Liefergeschwindigkeit](https://www.aboutamazon.de/amazon-prime-liefergeschwindigkeit-2025-rekord) – Same-Day in über 70 Städten, in Berlin und München bis zum Nachmittag bestellt, am selben Abend geliefert
-- [Österreichische Post: FAQ](https://www.post.at/p/c/faq-privat) – nach Tagen, nicht nach Uhrzeiten, Position in der Tour, Post Express am Samstag, Poststation rund um die Uhr
+- [Österreichische Post: FAQ](https://www.post.at/p/c/faq-privat) – nach Tagen, nicht nach Uhrzeiten, Position in der Tour, Post Express am Samstag, Poststation rund um die Uhr, Pakete in 2 Werktagen (über 97 Prozent), Post Express am nächsten Werktag bis 13 Uhr
 - [RTR: Wie oft muss die Post Briefe und Pakete zustellen?](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/empfangsbeschwerden/empfang-postendungen.de.html) – Zustellpflicht an Werktagen außer Samstag
 - [ORF Salzburg: Post mit neuer Paketzustellung an Sonntagen](https://salzburg.orf.at/stories/3358040/) – Sonntag in Wien, Linz, Graz und Salzburg für Geschäftskunden, sonst Montag bis Samstag
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – in Zustellung, in Verteilung, Hotline
-- [GLS Österreich: Pakete empfangen](https://gls-group.com/AT/de/faq/pakete-empfangen/) – Montag bis Freitag, Geschäftszeiten, Uhrzeit nicht bestimmbar
-- [Schweizerische Post: PostPac Priority](https://www.post.ch/de/pakete-versenden/pakete-schweiz/postpac-priority) – Montag bis Freitag, Samstagzustellung CHF 3.80, keine Pakete sonntags und an Feiertagen
+- [GLS Österreich: Pakete empfangen](https://gls-group.com/AT/de/faq/pakete-empfangen/) – Montag bis Freitag, Geschäftszeiten, Uhrzeit nicht bestimmbar, in der Regel binnen 24 Stunden
+- [Schweizerische Post: PostPac Priority](https://www.post.ch/de/pakete-versenden/pakete-schweiz/postpac-priority) – nächster Werktag, Montag bis Freitag, Samstagzustellung CHF 3.80, keine Pakete sonntags und an Feiertagen
+- [Schweizerische Post: PostPac Economy](https://www.post.ch/de/pakete-versenden/pakete-schweiz/postpac-economy) – innerhalb von 2 Werktagen
 - [Schweizerische Post: Einmalig steuern](https://www.post.ch/de/empfangen/sendung-steuern/einmalig-steuern) – Samstag, Früh- und Abendzustellung, Preise, Umleiten, Mitternacht
 - [Schweizerische Post: Invitation à retirer (FR)](https://www.post.ch/fr/reception/invitation-a-retirer) – Umleiten nach Benachrichtigung CHF 8.00, Samstag oder früh CHF 15.00
 - [Schweizerische Post: Dauerhaft steuern](https://www.post.ch/de/empfangen/sendung-steuern/dauerhaft-steuern) – Samstag CHF 20.– und CHF 40.–

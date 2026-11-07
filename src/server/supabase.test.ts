@@ -522,6 +522,21 @@ describe('one-off parcels and their links', () => {
     expect(request.mock.calls[3]).toEqual(['/rest/v1/parcel_link_alerts?id=eq.alert-1', { method: 'DELETE', prefer: 'return=minimal' }]);
   });
 
+  it('reads the numbers of the alerts\' parcels only for the links that hide them', async () => {
+    const client = service();
+    const parcel = { tracking_number: 'TESTPARCEL983456', carrier_data: { delivery_tracking_number: 'TESTPOST987654321' } };
+    const request = vi.spyOn(client, 'request').mockResolvedValue([
+      { id: 'k7Qm2xHd9RtW', package: parcel }, { id: 'm8Rn3yJe4SuX', package: null },
+    ]);
+    await expect(client.numberHidingParcels(['k7Qm2xHd9RtW', 'm8Rn3yJe4SuX', 'k7Qm2xHd9RtW']))
+      .resolves.toEqual(new Map([['k7Qm2xHd9RtW', parcel]]));
+    const [path] = request.mock.calls[0]!;
+    expect(path).toMatch(/^\/rest\/v1\/parcel_links\?/);
+    expect(Object.fromEntries(params(path))).toEqual({
+      id: 'in.(k7Qm2xHd9RtW,m8Rn3yJe4SuX)', show_number: 'is.false', select: 'id,package:packages(tracking_number,carrier_data)',
+    });
+  });
+
   it('shares an account\'s parcel under its own token, and reads another account\'s as missing', async () => {
     const user = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const stored = { id: 'k7Qm2xHd9RtW', show_number: true, gift: false, created_at: '2026-10-02T08:00:00+00:00' };

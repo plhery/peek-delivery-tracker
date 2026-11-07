@@ -328,6 +328,78 @@ describe('what a link shows', () => {
     });
   });
 
+  describe('the parcel\'s numbers in the carrier\'s words', () => {
+    // Synthetic numbers: the parcel is filed under its own, its delivery partner's is stored, and the
+    // partner's label number and an aggregator's are only written in the scans.
+    const own = 'TESTSFC0193847562';
+    const partner = 'TESTPOST987654321';
+    const label = 'TESTWAY24680135';
+    const relayed = 'TESTAGG11223344';
+    const handover = `Last mile courier=>Example Post. Tracking No.: ${partner} Tracking website: https://post.example/track?no=${partner}`;
+    const scan = (id: string, description: string, location: string | null, occurred_at: string, stage = 'in_transit') => ({
+      id, package_id: 'parcel', stage, description, location, occurred_at, provider_event_id: `sfc:${id}`, point: null,
+    });
+    const answer = (link: Record<string, unknown>, stage = 'in_transit') => publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, ...link },
+      package: {
+        id: 'parcel', tracking_number: own, carrier: 'sfc', sync_status: 'ok', created_at: '2026-10-02T08:00:00Z',
+        current_stage: stage, last_status_text: handover,
+        carrier_data: { delivery_tracking_number: partner, pickup_point: `Example Locker\nfor ${own.toLowerCase()}`, sender_name: 'Example Shop' },
+        planned_events: [{ description: `Delivery by Example Post, ${partner.slice(0, 8)}-${partner.slice(8)}`, stage: 'out_for_delivery',
+          location: null, occurred_at: '2026-10-05T08:00:00Z' }],
+        tracking_events: [
+          scan('label', `Waybill generated for ${label}`, null, '2026-10-02T08:00:00Z', 'accepted'),
+          // The parcel's own number with spaces and dashes, and the label's in small letters.
+          scan('hub', `Parcel TEST SFC 0193-847562 left the hub, label ${label.toLowerCase()}`, `Hub ${own}`, '2026-10-02T09:00:00Z'),
+          scan('relay', `Handed over, see https://agg.example/en#nums=${relayed}&lang=en`, 'Exampletown', '2026-10-02T10:00:00Z'),
+          scan('handover', handover, 'Exampletown', '2026-10-02T11:00:00Z'),
+        ],
+      },
+    }, alerts);
+    const numbers = [own, partner, label, relayed];
+    const told = (shown: unknown) => JSON.stringify(shown).toUpperCase().replace(/[\s-]|\\N/g, '');
+
+    it('masks every number of the parcel for a viewer who is not shown the number, in every field and address', () => {
+      const shown = answer({ owner: false });
+      for (const number of numbers) expect(told(shown)).not.toContain(number);
+      const { package: parcel } = shown;
+      // Each reads as the page writes the parcel's masked number.
+      const masked = 'Last mile courier=>Example Post. Tracking No.: ••• 4321 Tracking website: https://post.example/track?no=••• 4321';
+      expect(parcel.number_hint).toEqual({ head: '', tail: '7562' });
+      expect(parcel.last_status_text).toBe(masked);
+      expect(parcel.tracking_events.map(({ description, location }) => [description, location])).toEqual([
+        ['Waybill generated for ••• 135', null],
+        ['Parcel ••• 7562 left the hub, label ••• 135', 'Hub ••• 7562'],
+        ['Handed over, see https://agg.example/en#nums=••• 344&lang=en', 'Exampletown'],
+        [masked, 'Exampletown'],
+      ]);
+      expect(parcel.planned_events?.[0]?.description).toBe('Delivery by Example Post, ••• 4321');
+      expect(parcel.carrier_data).toMatchObject({ pickup_point: 'Example Locker\nfor ••• 7562', sender_name: 'Example Shop' });
+    });
+
+    it('masks them for a gift\'s viewer too, whatever the link shows, and leaves them to the owner and to whoever is shown the number', () => {
+      for (const number of numbers) expect(told(answer({ owner: false, gift: true, show_number: true }))).not.toContain(number);
+      for (const link of [{ owner: true }, { owner: false, show_number: true }, { owner: false, gift: true, show_number: true }]) {
+        const shown = answer(link, 'delivered');
+        for (const number of numbers) expect(JSON.stringify(shown)).toContain(number);
+        expect(shown.package.last_status_text).toBe(handover);
+        expect(shown.package.tracking_events.at(-1)?.description).toBe(handover);
+      }
+    });
+
+    it('leaves alone a stored number too short or without a digit, and a label\'s word without a digit', () => {
+      const words = 'Box 12345 collected at gate ABCDEFGH; Tracking No.: pending; see https://agg.example/?ref=example-shop';
+      const { package: parcel } = publicParcelResponse({
+        link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null },
+        package: { id: 'parcel', tracking_number: 'T12', carrier: 'unknown', sync_status: 'ok', created_at: '2026-10-02T08:00:00Z',
+          last_status_text: words, carrier_data: { delivery_tracking_number: '12345', routing: { confirmed_number: 'ABCDEFGH' } },
+          tracking_events: [scan('scan', words, 'Gate 12345', '2026-10-02T09:00:00Z')] },
+      }, alerts);
+      expect(parcel.last_status_text).toBe(words);
+      expect(parcel.tracking_events[0]).toMatchObject({ description: words, location: 'Gate 12345' });
+    });
+  });
+
   it('drops a stored value of the wrong type instead of publishing it', () => {
     const { carrier_data: shown } = publicParcelResponse({
       link: { id: 'k7Qm2xHd9RtW', owner: true, created_at: '2026-10-02T08:00:00Z' },

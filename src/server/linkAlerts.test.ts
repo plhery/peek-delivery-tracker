@@ -49,6 +49,7 @@ let send: MockInstance<WebPushNotificationService['send']>;
 let handled: MockInstance<SupabaseServiceClient['recordParcelLinkAlertDeliveries']>;
 let removed: MockInstance<SupabaseServiceClient['deleteParcelLinkAlert']>;
 let failures: MockInstance<SupabaseServiceClient['setParcelLinkAlertFailures']>;
+let hiding: MockInstance<SupabaseServiceClient['numberHidingParcels']>;
 const pending = (rows: JsonObject[]) => vi.spyOn(client, 'listPendingParcelLinkAlerts').mockResolvedValue(rows);
 const apnsKey = () => generateKeyPairSync('ec', { namedCurve: 'prime256v1' }).privateKey.export({ type: 'pkcs8', format: 'pem' }).toString();
 const refused = (statusCode: number) => Object.assign(new Error('Received unexpected response code'), { statusCode });
@@ -61,6 +62,7 @@ beforeEach(() => {
   handled = vi.spyOn(client, 'recordParcelLinkAlertDeliveries').mockResolvedValue();
   removed = vi.spyOn(client, 'deleteParcelLinkAlert').mockResolvedValue();
   failures = vi.spyOn(client, 'setParcelLinkAlertFailures').mockResolvedValue();
+  hiding = vi.spyOn(client, 'numberHidingParcels').mockResolvedValue(new Map());
   vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map());
   vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map());
   vi.spyOn(client, 'handoffScans').mockResolvedValue([]);
@@ -342,6 +344,37 @@ describe('what an alert says', () => {
     // The title has just said that it is on its way.
     expect(alerts.payload(row({ gift: true, stage: 'in_transit' })).body).toBe('One step closer');
     expect(alerts.payload(row({ gift: true, stage: 'delivered', package_stage: 'delivered' })).body).toBe('Delivered at 14:30\nExample Town');
+  });
+
+  it('masks the parcel\'s numbers in the scan\'s place for a link that hides its number, as its page does', async () => {
+    // Synthetic numbers: the parcel's own, and its delivery partner's, written with a dash.
+    const parcel = { tracking_number: 'TESTSFC0123456789', carrier_data: { delivery_tracking_number: 'TESTPOST987654321' } };
+    hiding.mockResolvedValue(new Map([[linkId, parcel]]));
+    pending([row({ location: 'Locker TESTPOST-987654321, by TESTSFC0123456789' })]);
+    await alerts.dispatch();
+    expect(hiding).toHaveBeenCalledExactlyOnceWith([linkId]);
+    const [told, payload] = send.mock.calls[0]!;
+    expect(payload?.body).toBe('One step closer\nLocker ••• 4321, by ••• 6789');
+    expect(JSON.stringify([told, payload])).not.toMatch(/TESTPOST|TESTSFC/);
+
+    // A link that shows its number is not among the parcels the lookup finds, and its place is told as written.
+    hiding.mockResolvedValue(new Map());
+    pending([row({ location: 'Locker TESTPOST987654321' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[1]![1]?.body).toBe('One step closer\nLocker TESTPOST987654321');
+
+    // Nor is the owner's own alert asked about.
+    hiding.mockClear();
+    pending([row({ owner: true, location: 'Locker TESTPOST987654321' })]);
+    await alerts.dispatch();
+    expect(hiding).not.toHaveBeenCalled();
+    expect(send.mock.calls[2]![1]?.body).toBe('One step closer\nLocker TESTPOST987654321');
+
+    // When the numbers cannot be read, a viewer is told no place.
+    hiding.mockRejectedValue(new Error('down'));
+    pending([row({ location: 'Locker TESTPOST987654321' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[3]![1]?.body).toBe('One step closer');
   });
 
   it('tells the owner of a gift lookup like the owner of any parcel', () => {

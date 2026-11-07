@@ -17,6 +17,7 @@ import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
+import { numberMask, parcelNumbers } from './hiddenNumbers';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
@@ -977,6 +978,8 @@ const FINISHED_STAGES = new Set(['delivered', 'returned']);
  *   still announced to the people it was shared with, not to its owner.
  * - A gift on its way is announced as one: without the place of a scan, and
  *   without the scans its page leaves out.
+ * - A link that hides its number masks the parcel's numbers in the scan's
+ *   place, as its page does (`viewerScan`).
  * - An alert on a browser or phone the parcel's owner gets account
  *   notifications on is passed over, so nobody is told twice.
  * - An alert ends with the journey, when the push service says its
@@ -1015,6 +1018,8 @@ export class ParcelLinkAlertService {
     const summary = emptySummary();
     let failed = 0;
     const times = await parcelTimes(client, grouped.values(), this.now());
+    const viewers = [...grouped.values()].filter((events) => events[0]!.owner !== true).map((events) => stringField(events[0]!, 'link_id'));
+    const hiding = viewers.length ? await orNone(() => client.numberHidingParcels(viewers), null) : new Map<string, JsonObject>();
     for (const [alertId, events] of grouped) {
       signal?.throwIfAborted();
       const newest = announcedScan(events.filter((event) => this.announces(event)), times);
@@ -1042,9 +1047,10 @@ export class ParcelLinkAlertService {
         continue;
       }
       summary.attempted += 1;
+      const told = this.viewerScan(newest, hiding);
       try {
-        if (transport !== 'web') await app!.send(this.appDevice(newest), this.appPayload(newest), `link-${stringField(newest, 'link_id')}`);
-        else await this.web!.send(newest, this.payload(newest));
+        if (transport !== 'web') await app!.send(this.appDevice(told), this.appPayload(told), `link-${stringField(told, 'link_id')}`);
+        else await this.web!.send(told, this.payload(told));
       } catch (error) {
         signal?.throwIfAborted();
         const status = typeof error === 'object' && error !== null && 'statusCode' in error ? Number(error.statusCode) : 0;
@@ -1076,6 +1082,17 @@ export class ParcelLinkAlertService {
     const stages: readonly string[] = Object.hasOwn(ALERT_PRESET_STAGES, preset)
       ? ALERT_PRESET_STAGES[preset as ApiParcelAlertPreset] : [];
     return stages.includes(stage) && !(this.wrappedGift(row) && stage === 'registered');
+  }
+
+  /**
+   * The scan as the alert may tell it: for a viewer of a link that hides its number, its place with the parcel's
+   * numbers masked (`numberMask`), or without its place when they could not be read.
+   */
+  viewerScan(row: JsonObject, hiding: ReadonlyMap<string, JsonObject> | null): JsonObject {
+    if (row.owner === true || typeof row.location !== 'string') return row;
+    if (hiding === null) return { ...row, location: null };
+    const parcel = hiding.get(stringField(row, 'link_id'));
+    return parcel ? { ...row, location: numberMask(parcelNumbers(parcel), [row.location])(row.location) } : row;
   }
 
   /** A gift that has not arrived, for everyone but the lookup's owner. */

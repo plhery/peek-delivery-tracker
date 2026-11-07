@@ -126,9 +126,13 @@ Key server modules:
     forget the parcel, and may keep it after signing in.
   - Anyone else with the link is a viewer: the number is masked to its last characters, and
     the answer is built from an allow-list. The name, postcode, private tracking link, routing state,
-    recipient's name and internal ids never leave the server, for either role. A viewer's
-    carrier link opens the carrier's page for typing a number in (the catalog's
-    `trackingSearchUrl`), or is left out when the carrier has none.
+    recipient's name and internal ids never leave the server, for either role. A viewer who
+    isn't shown the number reads the parcel's numbers masked the same way in the carrier's
+    words too, spaced, dashed or inside a web address: its own, the others its carrier data
+    keeps, and those the words name after "tracking no", "waybill" or "AWB" or as a web
+    address's parameter (`hiddenNumbers.ts`). A number needs six characters and a digit to
+    count. A viewer's carrier link opens the carrier's page for typing a number in (the
+    catalog's `trackingSearchUrl`), or is left out when the carrier has none.
   - A parcel with no new scan for four days links the help page of the carrier that has it,
     else of the one it is filed under (the catalog's `helpUrl`; no link when neither has
     one), and says so when that carrier's tracking leaves out the destination country
@@ -186,9 +190,11 @@ Key server modules:
     endpoint must belong to a known push service and the key be a valid one, as for an
     account. Endpoints and keys are service-role only and are never returned or logged. A
     link takes ten alerts from viewers. Notifications carry no name and no number, and a
-    gift's no place. An alert ends with the journey, when the push service says the
-    subscription is gone, or after three failed sends in a row; a failed send is not
-    repeated, so an endpoint anyone can add costs a bounded number of requests.
+    gift's no place. A link that hides its number masks the parcel's numbers in the place,
+    and leaves the place out when they can't be read. An alert ends with the journey, when
+    the push service says the subscription is gone, or after three failed sends in a row; a
+    failed send is not repeated, so an endpoint anyone can add costs a bounded number of
+    requests.
     The browser is asked for the permission, and subscribes, only on "Turn on". It reuses
     the subscription an account or another parcel already made, so turning one alert off
     leaves the subscription in place. The calendar file is made in the browser.

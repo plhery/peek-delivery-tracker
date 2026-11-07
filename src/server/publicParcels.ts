@@ -8,7 +8,6 @@ import type {
   ApiLikelyCarrier,
   ApiParcelAlerts,
   ApiParcelLink,
-  ApiParcelNumberHint,
   ApiPlannedTrackingEvent,
   ApiPublicPackage,
   ApiPublicParcelResponse,
@@ -21,11 +20,14 @@ import { appleAppIds } from './appleAppLinks';
 import { appFollowsLinks } from './appStoreRelease';
 import { emailConfigured } from './email/config';
 import { withEventPlaces } from './eventPlaces';
+import { numberHint, numberMask, parcelNumbers } from './hiddenNumbers';
 import { type AllowanceHolder, captureOverallAllowance, logOperationalEvent } from './observability';
 import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
 import type { PublicAllowance, StoredParcelLink, SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
+
+export { numberHint } from './hiddenNumbers';
 
 /**
  * One parcel through a link: what the link's caller may see, a gift's viewer
@@ -204,16 +206,6 @@ export function secondsUntilUtcMidnight(now: Date): number {
   return Math.max(1, Math.ceil((midnight - now.getTime()) / 1_000));
 }
 
-/**
- * The end of a masked number: its last quarter, four characters at most. The
- * start stays hidden: `head` is empty, and stays in the answer for the
- * clients that read it.
- */
-export function numberHint(trackingNumber: string): ApiParcelNumberHint {
-  const tail = Math.min(4, Math.floor(trackingNumber.length / 4));
-  return { head: '', tail: trackingNumber.slice(trackingNumber.length - tail) };
-}
-
 const text = (value: unknown): value is string => typeof value === 'string' && value !== '';
 const flag = (value: unknown): value is boolean => typeof value === 'boolean';
 const amount = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0;
@@ -287,14 +279,19 @@ function shownLikelyCarrier(routing: unknown): ApiLikelyCarrier | undefined {
     ? { carrier: likely.carrier as ApiCarrierId, since: likely.since } : undefined;
 }
 
-function publicCarrierData(value: unknown, numberShown: boolean, wrapped: boolean): ApiPublicPackage['carrier_data'] {
+/** The carrier details written in words, which can name a number. */
+const WORDED_CARRIER_DATA = ['sender_name', 'pickup_point', 'dimensions_text'];
+
+function publicCarrierData(
+  value: unknown, numberShown: boolean, wrapped: boolean, told: (text: string) => string,
+): ApiPublicPackage['carrier_data'] {
   // A member of the import charges a later scraper release adds stays on the server too.
   const stored: Record<string, unknown> = isRecord(value)
     ? { ...value, import_charges: shownImportCharges(value.import_charges), likely_carrier: shownLikelyCarrier(value.routing) } : {};
   const shown = numberShown ? { ...SHOWN_CARRIER_DATA, ...SHOWN_WITH_NUMBER } : SHOWN_CARRIER_DATA;
   return Object.fromEntries(Object.entries(shown)
     .filter(([key, valid]) => valid(stored[key]) && (!wrapped || SHOWN_IN_GIFT.has(key)))
-    .map(([key]) => [key, stored[key]]));
+    .map(([key]) => [key, WORDED_CARRIER_DATA.includes(key) ? told(String(stored[key])) : stored[key]]));
 }
 
 function eventTime(event: ApiTrackingEventRow): number {
@@ -422,6 +419,10 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * point, no carrier status line, a masked number whatever the link shows
  * otherwise, and the journey of giftEvents. Delivered, it is a link like any
  * other. Its owner always sees everything.
+ *
+ * Whoever is not shown the number does not read it in the carrier's words
+ * either, nor another number of the parcel: the scans, planned steps, status
+ * line and worded carrier details mask them (`numberMask`).
  */
 export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelAlerts): ApiPublicParcelResponse {
   const { link } = found;
@@ -431,25 +432,33 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
   const wrapped = isWrappedGift(found);
   const numberShown = owner || (link.show_number === true && !wrapped);
   const trackingNumber = String(row.tracking_number ?? '');
-  const events = (Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : []).map((event): ApiTrackingEventRow => ({
+  const storedEvents = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [];
+  const storedPlanned = Array.isArray(row.planned_events) ? row.planned_events.filter(isRecord) : [];
+  const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
+  // The numbers as stored: a placeholder number's parcel is served without its carrier data, not without its steps.
+  const told = numberShown ? (value: string) => value : numberMask(parcelNumbers(found.package), [
+    row.last_status_text, ...WORDED_CARRIER_DATA.map((key) => carrierData[key]),
+    ...[...storedEvents, ...storedPlanned].flatMap((step) => [step.description, step.location]),
+  ]);
+  const toldText = (value: unknown): string | null => typeof value === 'string' ? told(value) : null;
+  const events = storedEvents.map((event): ApiTrackingEventRow => ({
     id: String(event.id),
     package_id: String(event.package_id),
     stage: event.stage as ApiTrackingEventRow['stage'],
-    description: String(event.description ?? ''),
-    location: optionalText(event.location),
+    description: told(String(event.description ?? '')),
+    location: toldText(event.location),
     occurred_at: String(event.occurred_at),
     place: (isRecord(event.place) ? event.place : null) as ApiTrackingEventRow['place'],
     ...(typeof event.relay_of === 'string' ? { relay_of: event.relay_of } : {}),
     ...(typeof event.recipient_action === 'string' ? { recipient_action: event.recipient_action as ApiTrackingEventRow['recipient_action'] } : {}),
     ...(tieOrder(event.tie_order) >= 0 ? { tie_order: tieOrder(event.tie_order) } : {}),
   }));
-  const planned: ApiPlannedTrackingEvent[] = (Array.isArray(row.planned_events) ? row.planned_events.filter(isRecord) : []).map((step) => ({
-    description: String(step.description ?? ''), stage: String(step.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],
-    location: typeof step.location === 'string' ? step.location : null, occurred_at: String(step.occurred_at ?? ''),
+  const planned: ApiPlannedTrackingEvent[] = storedPlanned.map((step) => ({
+    description: told(String(step.description ?? '')), stage: String(step.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],
+    location: toldText(step.location), occurred_at: String(step.occurred_at ?? ''),
     ...(typeof step.day === 'string' ? { day: step.day } : {}),
     place: (isRecord(step.place) ? step.place : null) as ApiPlannedTrackingEvent['place'],
   }));
-  const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)
     ? carrierData.destination_country.toUpperCase() : null;
   const shownLink: ApiParcelLink = {
@@ -486,14 +495,14 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       created_at: later(row.created_at, link.created_at),
       expected_delivery: optionalText(row.expected_delivery),
       // The carrier's status line can name the place the newest scan was made.
-      last_status_text: wrapped ? null : optionalText(row.last_status_text),
+      last_status_text: wrapped ? null : toldText(row.last_status_text),
       last_synced_at: optionalText(row.last_synced_at),
       sync_status: String(row.sync_status) as ApiSyncStatus,
       sync_error: typeof row.sync_error === 'string' && SYNC_ERROR_CODE.test(row.sync_error) ? row.sync_error : null,
       // A stored link is always a private credential (Planzer, Dachser, a Freightways sender's account), and a postcode is the recipient's.
       tracking_url: null,
       dpd_postcode: null,
-      carrier_data: publicCarrierData(carrierData, numberShown, wrapped),
+      carrier_data: publicCarrierData(carrierData, numberShown, wrapped, told),
       archived_at: null,
       notifications_muted: false,
       tracking_events: wrapped ? giftEvents(events, destination) : events,

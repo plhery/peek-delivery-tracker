@@ -2287,6 +2287,21 @@ export class SupabaseServiceClient extends SupabaseClient {
     return rows(await this.request(`/rest/v1/pending_parcel_link_alerts?${params}`));
   }
 
+  /**
+   * The parcels of these links that hide the number from their viewers, by link: each with its number and its carrier
+   * data, where the numbers its alerts must not tell are (hiddenNumbers.ts). A link that shows its number is left out.
+   */
+  async numberHidingParcels(linkIds: string[]): Promise<Map<string, JsonObject>> {
+    const ids = [...new Set(linkIds)];
+    const pages = Array.from({ length: Math.ceil(ids.length / 100) }, (_, page) => ids.slice(page * 100, page * 100 + 100));
+    const found = await Promise.all(pages.map(async (page) => rows(await this.request(`/rest/v1/parcel_links?${query([
+      ['id', `in.(${page.join(',')})`],
+      ['show_number', 'is.false'],
+      ['select', 'id,package:packages(tracking_number,carrier_data)'],
+    ])}`))));
+    return new Map(found.flat().flatMap((row) => typeof row.id === 'string' && isRecord(row.package) ? [[row.id, row.package]] : []));
+  }
+
   async recordParcelLinkAlertDeliveries(alertId: string, eventIds: string[]): Promise<void> {
     if (eventIds.length === 0) return;
     await this.request(`/rest/v1/parcel_link_alert_deliveries?${query({ on_conflict: 'alert_id,event_id' })}`, {

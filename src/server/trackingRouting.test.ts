@@ -12,6 +12,7 @@ import { BudgetExceededError, ChallengeError, IndeterminateError, InputRequiredE
 import * as scraper from 'universal-parcel-scraper';
 import { recognitionAskedCarriers } from '../lib/carriers';
 import { healthStepRecorder, observeTrackingHealth, type HealthSample } from './trackingHealth';
+import { RoyalBrowserPaused } from './royalBrowserAdmission';
 
 // Keep the published plan configurable without changing the scraper's other exports.
 vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
@@ -166,6 +167,18 @@ describe('persistent tracking routing', () => {
     expect(universal).not.toHaveBeenCalled();
     expect(result.sourceCarrierId).toBe('royal-mail');
     expect(result.result.routing).toMatchObject({ configured_carrier: 'royal-mail', confirmed_carrier: 'royal-mail' });
+  });
+  it('keeps providers available without a carrier failure when the Royal browser was paused before contact', async () => {
+    fixedPlan('ParcelsApp');
+    const { router, direct, universal } = setup();
+    direct.mockRejectedValue(new RoyalBrowserPaused());
+    const result = await router.fetch(parcel({ carrier: 'unknown', carrier_data: { routing: state({
+      confirmed_carrier: 'royal-mail', confirmed_number: 'TEST1234',
+    }) } }), false);
+    expect(direct).toHaveBeenCalledExactlyOnceWith(expect.any(Object), 'royal-mail');
+    expect(universal).toHaveBeenCalledOnce();
+    expect(result.result.tracking_provider).toBe('ParcelsApp');
+    expect((result.result.routing as JsonObject).failures).toEqual({});
   });
   it('falls back to provider history when Royal Mail browser tracking fails', async () => {
     const { router, direct, universal } = setup();

@@ -332,6 +332,7 @@ export class SupabaseClient {
       body?: unknown;
       prefer?: string;
       timeoutMs?: number;
+      signal?: AbortSignal;
     } = {},
   ): Promise<T | null> {
     const method = options.method ?? 'GET';
@@ -356,7 +357,9 @@ export class SupabaseClient {
         body,
         cache: 'no-store',
         redirect: 'error',
-        signal: AbortSignal.timeout(options.timeoutMs ?? this.timeoutMs),
+        signal: options.signal
+          ? AbortSignal.any([options.signal, AbortSignal.timeout(options.timeoutMs ?? this.timeoutMs)])
+          : AbortSignal.timeout(options.timeoutMs ?? this.timeoutMs),
       });
       text = await response.text();
     } catch (error) {
@@ -1572,6 +1575,15 @@ export class SupabaseServiceClient extends SupabaseClient {
       method: 'POST', timeoutMs: 3_000,
       body: { p_attempt_id: attemptId, p_package_id: packageId, p_samples: samples },
     }));
+  }
+
+  async trackingProviderIncidentOpen(provider: string, options: { signal?: AbortSignal; timeoutMs?: number } = {}): Promise<boolean> {
+    const params = query({ select: 'active', kind: 'eq.provider', subject: `eq.${provider}`, limit: '1' });
+    const answer = await this.request(`/rest/v1/tracking_health_incidents?${params}`, { timeoutMs: 1_000, ...options });
+    if (!Array.isArray(answer) || answer.length > 1 || (answer.length && typeof answer[0]?.active !== 'boolean')) {
+      throw new TypeError('Unreadable tracking provider incident state');
+    }
+    return answer[0]?.active === true;
   }
 
   /** The thin answer the parcel's latest scheduled refresh under `carrier` kept in its health sample (trackingAudit.ts), if any. */

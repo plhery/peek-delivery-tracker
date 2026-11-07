@@ -2,7 +2,9 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import type { BrowserRecognition, TrackingContext } from 'universal-parcel-scraper/node';
 
 const lookup = vi.hoisted(() => vi.fn());
+const incident = vi.hoisted(() => vi.fn());
 vi.mock('./adapterRegistry', () => ({ createAdapterRegistry: () => ({ for: () => ({ recognizeWithBrowser: lookup }) }) }));
+vi.mock('./runtime', () => ({ serviceClient: () => ({ trackingProviderIncidentOpen: incident }) }));
 let browser: typeof import('./browserRecognition');
 const known = (): BrowserRecognition => ({ known: true, lastActivityAt: new Date().toISOString(),
   result: { status: 'in_transit', events: [{ time: new Date().toISOString(), description: 'Sorted' }] } });
@@ -10,9 +12,39 @@ beforeEach(async () => {
   vi.resetModules();
   Reflect.deleteProperty(globalThis, Symbol.for('peek.browserRecognition'));
   lookup.mockReset().mockResolvedValue(known());
+  incident.mockReset().mockResolvedValue(false);
   browser = await import('./browserRecognition');
 });
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
+
+it.each(['royal-mail', 'parcelforce'])('opens no %s recognition browser while the Royal incident is active, and preserves cached history', async carrier => {
+  incident.mockResolvedValue(true);
+  await expect(browser.recognizeBrowser(carrier, 'SYNTHETIC0001')).rejects.toThrow('reserved');
+  expect(lookup).not.toHaveBeenCalled();
+  incident.mockResolvedValue(false);
+  const answer = await browser.recognizeBrowser(carrier, 'SYNTHETIC0001');
+  incident.mockResolvedValue(true);
+  await expect(browser.recognizeBrowser(carrier, 'SYNTHETIC0001')).resolves.toEqual(answer);
+  expect(browser.takeBrowserHistory(carrier, 'SYNTHETIC0001')).toEqual(answer.result);
+  expect(lookup).toHaveBeenCalledOnce();
+});
+
+it('still shares a Royal browser when concurrent incident reads finish together', async () => {
+  const replies = await Promise.all([browser.recognizeBrowser('royal-mail', 'SYNTHETIC0001'),
+    browser.recognizeBrowser('royal-mail', 'SYNTHETIC0001')]);
+  expect(replies[0]).toEqual(replies[1]);
+  expect(lookup).toHaveBeenCalledOnce();
+});
+
+it('does not open a browser after the incident read used the remaining recognition budget', async () => {
+  vi.useFakeTimers();
+  incident.mockImplementation(() => new Promise(resolve => setTimeout(() => resolve(false), 10)));
+  const result = browser.recognizeBrowser('royal-mail', 'SYNTHETIC0001', { budgetMs: 5 });
+  const assertion = expect(result).rejects.toThrow('budget exceeded');
+  await vi.advanceTimersByTimeAsync(10);
+  await assertion;
+  expect(lookup).not.toHaveBeenCalled();
+});
 
 it('shares duplicate work and consumes fresh history only once', async () => {
   const [left, right] = await Promise.all([browser.recognizeBrowser('fedex', '000000000001'), browser.recognizeBrowser('fedex', '000000000001')]);

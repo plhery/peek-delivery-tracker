@@ -45,6 +45,7 @@ import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { NOOP_RECORDER } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
+import { RoyalBrowserPaused, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { unseenFor } from './unseenLookup';
 import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, SchemaError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
@@ -64,10 +65,24 @@ describe('dedicated carrier dispatch', () => {
     const adapter = new CarrierTrackingAdapter(universal as unknown as UniversalTracker);
     const track = vi.spyOn(adapter.registry.for('royal-mail')!, 'track').mockResolvedValue({ status: 'in_transit' });
 
-    await expect(adapter.fetch('royal-mail', 'SG999999999GB', null)).resolves.toMatchObject({ status: 'in_transit' });
+    await expect(withRoyalBrowserAdmission('royal-mail', { trackingProviderIncidentOpen: vi.fn() },
+      () => adapter.fetch('royal-mail', 'SG999999999GB', null))).resolves.toMatchObject({ status: 'in_transit' });
     expect(track).toHaveBeenCalledExactlyOnceWith({ number: 'SG999999999GB', trackingUrl: null, postcode: null });
     expect(universal.fetch).not.toHaveBeenCalled();
     expect(adapter.registry.has('royal-mail')).toBe(true);
+  });
+
+  it.each(['royal-mail', 'parcelforce'])('opens no %s tracking browser for another filed carrier during the Royal incident', async carrier => {
+    const adapter = new CarrierTrackingAdapter();
+    const track = vi.spyOn(adapter.registry.for(carrier)!, 'track').mockResolvedValue({ status: 'in_transit' });
+    const client = { trackingProviderIncidentOpen: vi.fn().mockResolvedValue(true) };
+    await expect(withRoyalBrowserAdmission('swiss-post', client,
+      () => adapter.fetch(carrier, 'SYNTHETIC0001', null))).rejects.toBeInstanceOf(RoyalBrowserPaused);
+    expect(track).not.toHaveBeenCalled();
+    client.trackingProviderIncidentOpen.mockResolvedValue(false);
+    await expect(withRoyalBrowserAdmission('swiss-post', client,
+      () => adapter.fetch(carrier, 'SYNTHETIC0001', null))).resolves.toMatchObject({ status: 'in_transit' });
+    expect(track).toHaveBeenCalledOnce();
   });
 
   it.each(['la-poste', 'chronopost', 'gls-fr', 'colis-prive', 'geodis', 'dpd-fr', 'mondial-relay', 'relais-colis', 'swiss-post-cargo', 'gls-ch', 'colisweb', 'c-chez-vous', 'heppner', 'ciblex', 'paack', 'india-post'])('dispatches %s through the public registry', async carrier => {
@@ -1190,6 +1205,7 @@ function fakeClient(packages: JsonObject[] = []) {
     startSyncAttempt: vi.fn().mockResolvedValue(undefined),
     completeSyncAttempt: vi.fn().mockResolvedValue(true),
     recordTrackingHealth: vi.fn().mockResolvedValue([]),
+    trackingProviderIncidentOpen: vi.fn().mockResolvedValue(false),
     ackTrackingHealth: vi.fn().mockResolvedValue(undefined),
     previousThinAnswer: vi.fn().mockResolvedValue(null),
     recordTrackingStatusObservations: vi.fn().mockResolvedValue(undefined),
@@ -1209,6 +1225,43 @@ function fakeClient(packages: JsonObject[] = []) {
 }
 
 describe('TrackingSyncService', () => {
+  it.each([false, true])('keeps a non-Royal origin eligible while its new or saved Royal delivery leg is paused: %s', async saved => {
+    const number = 'RR123456785DE';
+    const client = fakeClient();
+    client.trackingProviderIncidentOpen.mockResolvedValue(true);
+    const origin: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:00:00Z',
+      delivery_carrier: 'royal-mail', delivery_tracking_number: 'RR123456785GB',
+      events: [{ time: '2026-09-10T11:00:00Z', description: 'In transit', stage: 'in_transit' }] };
+    const adapter = { fetch: vi.fn().mockResolvedValue(origin) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await expect(service.syncPackage({ id: 'paused-delivery', carrier: 'dhl', tracking_number: number, current_stage: 'in_transit',
+      carrier_data: saved ? { original_carrier: 'dhl', original_tracking_number: number,
+        active_tracking_carrier: 'royal-mail', active_tracking_number: 'RR123456785GB' } : {},
+    })).resolves.toMatchObject({ updated: 1, errors: 0 });
+    expect(adapter.fetch.mock.calls.map(call => call[0])).toEqual(['dhl']);
+    expect(client.trackingProviderIncidentOpen).toHaveBeenCalled();
+    expect(client.updatePackage.mock.calls.at(-1)?.[1]).toMatchObject({ sync_status: 'ok', current_stage: 'in_transit' });
+  });
+
+  it('uses the actual filed carrier when routing rewrites a candidate to Royal Mail, and still serves provider history', async () => {
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    client.trackingProviderIncidentOpen.mockResolvedValue(true);
+    const adapter = new CarrierTrackingAdapter();
+    const track = vi.spyOn(adapter.registry.for('royal-mail')!, 'track');
+    vi.spyOn(adapter, 'fetchUniversal').mockResolvedValue({ status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:00:00Z',
+      events: [{ time: '2026-09-10T11:00:00Z', description: 'In transit', stage: 'in_transit' }] });
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await expect(service.syncPackage({ id: 'paused-candidate', carrier: 'unknown', tracking_number: 'RR123456785GB', current_stage: 'in_transit',
+      carrier_data: { routing: { version: 1, configured_carrier: 'unknown', confirmed_carrier: 'royal-mail',
+        confirmed_number: 'RR123456785GB', failures: {}, probe_cursor: 0, discovery_cursor: 0 } },
+    })).resolves.toMatchObject({ updated: 1, errors: 0 });
+    expect(track).not.toHaveBeenCalled();
+    expect(adapter.fetchUniversal).toHaveBeenCalled();
+    expect(client.updatePackage.mock.calls.at(-1)?.[1]).toMatchObject({ sync_status: 'ok', carrier_data: { routing: { failures: {} } } });
+  });
+
   it('gives an account parcel its owner’s postcode once a check finds it with a carrier that shows more with one', async () => {
     const parcel = { id: 'given', user_id: 'owner', carrier: 'dpd', tracking_number: '06080000000001', current_stage: 'in_transit',
       dpd_postcode: null, archived_at: null, carrier_data: {}, tracking_generation: 'generation' };

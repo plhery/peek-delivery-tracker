@@ -2,6 +2,7 @@ import 'server-only';
 
 import type { BrowserRecognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry } from './adapterRegistry';
+import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
 
 export const BROWSER_RECOGNITION_BUDGET_MS = 20_000;
 export const MAX_BROWSER_RECOGNITIONS = 2;
@@ -28,6 +29,7 @@ function remember(key: string, answer?: BrowserRecognition) {
 /** Shared by preflight and sync; identical requests share work until their last caller cancels. */
 export async function recognizeBrowser(carrier: string, number: string, context: TrackingContext = {}, previousError?: unknown): Promise<BrowserRecognition> {
   context.signal?.throwIfAborted();
+  const deadline = performance.now() + Math.min(context.budgetMs ?? BROWSER_RECOGNITION_BUDGET_MS, BROWSER_RECOGNITION_BUDGET_MS);
   const key = `${carrier}:${number}`;
   const cached = cache.get(key);
   if (cached && Date.now() - cached.at < (cached.answer ? TTL_MS : FAILURE_TTL_MS)) {
@@ -35,6 +37,12 @@ export async function recognizeBrowser(carrier: string, number: string, context:
     return structuredClone(cached.answer);
   }
   let job = pending.get(key);
+  if (!job && usesRoyalBrowser(carrier)) {
+    await requireRoyalBrowser(carrier, 'recognition', context);
+    if (performance.now() >= deadline) throw new Error('Browser recognition budget exceeded');
+    // Another caller may have started the shared job while incident state was being read.
+    job = pending.get(key);
+  }
   if (!job) {
     if (pending.size >= MAX_BROWSER_RECOGNITIONS) throw new Error('Browser recognition is busy');
     const controller = new AbortController();
@@ -69,7 +77,7 @@ export async function recognizeBrowser(carrier: string, number: string, context:
     const abort = () => finish(undefined, context.signal?.reason ?? new Error('Browser recognition cancelled'));
     context.signal?.addEventListener('abort', abort, { once: true });
     const timer = setTimeout(() => finish(undefined, new Error('Browser recognition budget exceeded')),
-      Math.max(1, Math.min(context.budgetMs ?? BROWSER_RECOGNITION_BUDGET_MS, BROWSER_RECOGNITION_BUDGET_MS)));
+      Math.max(1, deadline - performance.now()));
     active.promise.then((answer) => finish(answer), (error: unknown) => finish(undefined, error));
     if (context.signal?.aborted) abort();
   });

@@ -199,6 +199,22 @@ describe('one-off parcels and their links', () => {
     expect(params(path).get('order')).toBe('last_synced_at.asc.nullsfirst,created_at.asc');
   });
 
+  it('reads provider incident state separately from refresh incidents and rejects unreadable state', async () => {
+    const client = service();
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ active: true }]).mockResolvedValueOnce([{ active: false }])
+      .mockResolvedValueOnce([]).mockResolvedValueOnce(null).mockResolvedValueOnce([{ active: 'false' }]);
+    const signal = new AbortController().signal;
+    await expect(client.trackingProviderIncidentOpen('royal-mail', { signal, timeoutMs: 10 })).resolves.toBe(true);
+    const [path, options] = request.mock.calls[0];
+    expect(path).toMatch(/^\/rest\/v1\/tracking_health_incidents\?/);
+    expect(Object.fromEntries(params(path))).toEqual({ select: 'active', kind: 'eq.provider', subject: 'eq.royal-mail', limit: '1' });
+    expect(options).toEqual({ signal, timeoutMs: 10 });
+    await expect(client.trackingProviderIncidentOpen('royal-mail')).resolves.toBe(false);
+    await expect(client.trackingProviderIncidentOpen('royal-mail')).resolves.toBe(false);
+    await expect(client.trackingProviderIncidentOpen('royal-mail')).rejects.toThrow('Unreadable');
+    await expect(client.trackingProviderIncidentOpen('royal-mail')).rejects.toThrow('Unreadable');
+  });
+
   it("reads the thin answer of a parcel's latest scheduled refresh under its carrier", async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ details: { category: 'repeated_answer', thin_answer: 'a1' } }]);

@@ -8,6 +8,13 @@ The **carrier** (what the user sees) and the **source** (who answered) are separ
 FedEx parcel can be served by the FedEx adapter or, as a fallback, by a universal
 provider.
 
+While Royal Mail's provider incident is active, its browser serves only parcels filed
+under Royal Mail. Browser recognition and other parcels' candidate, handoff and
+follow-up checks pause, including Parcelforce's shared Royal Mail browser. Cached
+history and universal providers remain available. This admission pause records no
+carrier failure and ends when the provider incident closes. If incident state cannot
+be read, optional sessions stay paused; filed Royal Mail checks can still run.
+
 ## Add preflight
 
 Both detection endpoints ask the shape-matching carriers first. If none confirms the

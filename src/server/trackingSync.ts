@@ -27,6 +27,7 @@ import { normalizedLookupCountry } from './lookupCountry';
 import { preflightInputNeeded, takePreflightHistory } from './trackingPreflight';
 import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
+import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { hostStepRecorder } from './stepRecorder';
 import { recordStatusMapping } from './metrics';
 import {
@@ -688,6 +689,7 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
   ): Promise<CarrierResult> {
     const prefetched = !trackingUrl && !dpdPostcode ? takeBrowserHistory(carrierId, trackingNumber) : undefined;
     if (prefetched) return dateLocalClocks(carrierId, normalizeCarrierResult(prefetched));
+    if (usesRoyalBrowser(carrierId)) await requireRoyalBrowser(carrierId, 'tracking');
     return trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language), {
       registry: this.registry, universal: this.universal, recorder: this.recorder,
     });
@@ -1780,7 +1782,8 @@ export class TrackingSyncService {
     // The carrier the check filed the parcel under, when it changed it.
     const filed: { carrier?: string } = {};
     try {
-      const outcome = await untilShutdown(this.check(parcel, context, audit, now, lookups, filed), context.signal);
+      const outcome = await untilShutdown(withRoyalBrowserAdmission(String(parcel.carrier ?? ''), this.client,
+        () => this.check(parcel, context, audit, now, lookups, filed), context.signal), context.signal);
       // A number that reads as mistyped is counted for review, never suggested, and apart when
       // its first check found scans all the same.
       if (firstAnswer && outcome !== 'superseded') {
@@ -2782,11 +2785,13 @@ export class TrackingSyncService {
     const activeCarrier = typeof metadata.active_tracking_carrier === 'string' ? metadata.active_tracking_carrier
       : legacySwissReady ? 'swiss-post' : '';
     const activeNumber = typeof metadata.active_tracking_number === 'string' ? metadata.active_tracking_number : trackingNumber;
-    if ((metadata.original_carrier || legacySwissReady) && hasDirectHandoffAdapter(activeCarrier, activeNumber)) {
+    if ((metadata.original_carrier || legacySwissReady) && hasDirectHandoffAdapter(activeCarrier, activeNumber)
+      && await royalBrowserAllowed(activeCarrier)) {
       // The earlier carrier still publishes late scans: ask it too, as at the handoff, for a while.
       // One with no adapter of its own has none to ask.
       const followUp = metadata.original_carrier === carrierId && carrierId !== activeCarrier && directCarrier(carrierId)
-        && metadata.original_tracking_number === trackingNumber && asksEarlierCarrier(metadata, this.now());
+        && metadata.original_tracking_number === trackingNumber && asksEarlierCarrier(metadata, this.now())
+        && await royalBrowserAllowed(carrierId);
       const [result, earlier] = await Promise.all([
         this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata),
         followUp ? this.fetchCarrier(checks, carrierId, trackingNumber,
@@ -2829,7 +2834,8 @@ export class TrackingSyncService {
       }
       let fallbackError: string | null = null;
       // The country the parcel was looked up from proposes a postal item's destination post only when nothing names one.
-      const candidate = savedPartner ?? deliveryHandoff(carrierId, trackingNumber, origin, lookupCountry);
+      const proposed = savedPartner ?? deliveryHandoff(carrierId, trackingNumber, origin, lookupCountry);
+      const candidate = proposed && await royalBrowserAllowed(proposed.carrier) ? proposed : null;
       const previousProbe = candidate ? previousDeliveryProbe(parcel, candidate.carrier, candidate.number) : null;
       const originUpdate = typeof origin.last_update === 'string' ? origin.last_update : previousProbe?.origin_update ?? null;
       const sinceProbe = previousProbe ? this.now().getTime() - Date.parse(previousProbe.at) : Number.NaN;

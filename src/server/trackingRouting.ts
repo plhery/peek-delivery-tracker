@@ -30,6 +30,7 @@ import manifest from '../../package.json';
 import { getRecognitionPriorities } from './recognitionRanking';
 import { guessedCarrier, likelyCarrier } from './likelyCarrier';
 import { confirmationLookup } from './trackingHealth';
+import { RoyalBrowserPaused } from './royalBrowserAdmission';
 
 const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
@@ -1198,6 +1199,8 @@ export class TrackingRouter {
         return value;
       } catch (error) {
         signal?.throwIfAborted();
+        // Admission paused this optional browser before any carrier contact: providers remain available.
+        if (error instanceof RoyalBrowserPaused) return null;
         // Our own pacing refused the lookup before any request (Poste Italiane's searches an hour, a
         // DHL Express key's turn): no failure and no contact. The parcel's own carrier defers the
         // check to when its next search frees up, with no provider asked meanwhile; a candidate

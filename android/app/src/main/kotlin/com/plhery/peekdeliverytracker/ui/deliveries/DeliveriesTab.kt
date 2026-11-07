@@ -91,6 +91,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.WindowKey
 import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
+import com.plhery.peekdeliverytracker.ui.escapeBeforeKeyboard
 import com.plhery.peekdeliverytracker.ui.settings.AccountSheetHost
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
@@ -169,7 +170,8 @@ fun DeliveriesTab(
     val hinge = LocalWindowHinge.current
     val windowArrangement = LocalWindowArrangement.current
 
-    BoxWithConstraints(modifier.fillMaxSize()) {
+    // Esc closes the search while its field types, before an on-screen keyboard shown with a hardware one takes it.
+    BoxWithConstraints(modifier.fillMaxSize().escapeBeforeKeyboard { state.key(it, scope, reduceMotion, refreshable = false) }) {
         val regularWidth = maxWidth >= REGULAR_WIDTH
         val regularHeight = maxHeight >= REGULAR_HEIGHT
         // A foldable in book posture shows the two halves side by side, whatever its width.

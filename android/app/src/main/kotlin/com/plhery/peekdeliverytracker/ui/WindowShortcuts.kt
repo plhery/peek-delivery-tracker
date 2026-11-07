@@ -8,6 +8,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.onInterceptKeyBeforeSoftKeyboard
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 
@@ -119,4 +121,15 @@ fun WindowShortcutsEffect(keys: () -> List<WindowKey>) {
         shortcuts.add(source)
         onDispose { shortcuts.remove(source) }
     }
+}
+
+/**
+ * Escape from a hardware keyboard, answered by [handle] before an on-screen keyboard shown with it hears it: Android 12's
+ * Gboard takes the key to hide itself, and the window's own answer, an unhandled-key listener, never hears it. Applied
+ * to what holds the text fields, it reaches them only while one of them has the focus; [handle] answers as the window
+ * would, true where it used the key.
+ */
+internal fun Modifier.escapeBeforeKeyboard(handle: (KeyEvent) -> Boolean): Modifier = onInterceptKeyBeforeSoftKeyboard { event ->
+    val key = event.nativeKeyEvent
+    key.keyCode == KeyEvent.KEYCODE_ESCAPE && key.hasNoModifiers() && handle(key)
 }

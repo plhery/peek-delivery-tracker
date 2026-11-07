@@ -158,6 +158,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CarrierTruck
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.experimentalSurface
+import com.plhery.peekdeliverytracker.ui.escapeBeforeKeyboard
 import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
@@ -449,7 +450,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     }
     // Escape closes Add, or the picker or the scanner over it (their Cancel, `.cancellationAction`), which then leaves
     // Add up.
-    AddEscape(enabled = !saving) {
+    val escape = rememberAddEscape(enabled = !saving) {
         when {
             form.showingScanner -> form.showingScanner = false
             form.showingPicker -> form.showingPicker = false
@@ -488,6 +489,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     Column(
         modifier
             .fillMaxSize()
+            .escapeBeforeKeyboard(escape)
             .background(colors.sheet)
             .then(if (cover) Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)) else Modifier)
             .onSizeChanged { viewHeight = it.height },
@@ -1684,21 +1686,31 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
     }
 }
 
-/** Escape, from a hardware keyboard, while [enabled]: what nothing in the window used. */
+/**
+ * Escape, from a hardware keyboard, while [enabled]: what nothing in the window used. Returns the same answer for Add's
+ * fields to give before an on-screen keyboard takes the key ([escapeBeforeKeyboard]).
+ */
 @Composable
-private fun AddEscape(enabled: Boolean, close: () -> Unit) {
+private fun rememberAddEscape(enabled: Boolean, close: () -> Unit): (KeyEvent) -> Boolean {
     val act by rememberUpdatedState(close)
     val on by rememberUpdatedState(enabled)
+    val answer = remember {
+        { event: KeyEvent ->
+            if (on && event.keyCode == KeyEvent.KEYCODE_ESCAPE && event.hasNoModifiers()) {
+                if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) act()
+                true
+            } else {
+                false
+            }
+        }
+    }
     val view = LocalView.current
     DisposableEffect(view) {
-        val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event ->
-            if (!on || event.keyCode != KeyEvent.KEYCODE_ESCAPE || !event.hasNoModifiers()) return@OnUnhandledKeyEventListenerCompat false
-            if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) act()
-            true
-        }
+        val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event -> answer(event) }
         ViewCompat.addOnUnhandledKeyEventListener(view, listener)
         onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
     }
+    return answer
 }
 
 /**

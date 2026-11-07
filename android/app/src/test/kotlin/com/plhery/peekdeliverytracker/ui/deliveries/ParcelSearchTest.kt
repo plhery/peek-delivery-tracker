@@ -481,6 +481,38 @@ class ParcelSearchTest {
     }
 
     /**
+     * Esc while a field types, with an on-screen keyboard shown beside the hardware one: Android 12's keyboard takes
+     * the key to hide itself and hands it on to nothing, so the search and Add answer it before the keyboard hears it.
+     */
+    @Test
+    fun escapeReachesTheSearchAndAddBeforeAnOnScreenKeyboard() {
+        show()
+        press(KeyEvent.KEYCODE_F, ctrl)
+        assertTrue(focused(SEARCH_FIELD))
+        assertTrue(escapeBeforeTheKeyboard())
+        assertFalse(exists(SEARCH_ROW))
+
+        press(KeyEvent.KEYCODE_N, ctrl)
+        assertTrue(exists(ADD_PARCEL))
+        assertTrue(escapeBeforeTheKeyboard())
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertFalse(exists(ADD_PARCEL))
+    }
+
+    /** Esc pressed and let go as the window offers it before the keyboard (`dispatchKeyEventPreIme`): whether the press was taken. */
+    private fun escapeBeforeTheKeyboard(): Boolean {
+        var taken = false
+        compose.runOnUiThread {
+            val root = view.rootView
+            taken = root.dispatchKeyEventPreIme(KeyEvent(0, 0, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ESCAPE, 0))
+            root.dispatchKeyEventPreIme(KeyEvent(0, 0, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ESCAPE, 0))
+        }
+        compose.waitForIdle()
+        return taken
+    }
+
+    /**
      * ⌘F with the list scrolled past its top: the iPhone's scroll view brings the field it focuses into view, so the
      * list goes back to its top, where the search shows with the cursor in it.
      */

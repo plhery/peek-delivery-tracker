@@ -67,9 +67,11 @@ Strona wyników ma też okno „Proof of Delivery Images”, które otwiera się
 
 **Od kilku dni bez zmian.** Gdy paczkę ma już przewoźnik w Polsce, sprawdź jego śledzenie numerem z „Last Mile Tracking”. Więcej w poradniku [status przesyłki się nie zmienia](guide:tracking-not-updating).
 
-**Doręczona, a jej nie ma.** Doręczał lokalny przewoźnik, więc zacznij od niego, potem napisz do sklepu. Zobacz [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+**Utknęła w urzędzie celnym.** Na linii Yanwen do UE wszystkie podatki i opłaty według karty produktu ponosi nadawca, czyli sprzedawca. Od 1 lipca 2026 r. przy takich zakupach do 150 euro pobiera się 3 euro cła za każdy rodzaj produktu, a od 1 listopada 2026 r. UE dolicza opłatę manipulacyjną 2 euro za rodzaj produktu, bez względu na wartość. Karty Yanwen nie mówią, kto płaci te 2 euro. Jeśli ktoś żąda od Ciebie zapłaty, sprawdź to w sklepie i przeczytaj poradnik [paczka zatrzymana przez urząd celny](guide:customs).
 
-**Zgubiona, uszkodzona albo zwrócona.** Yanwen nie publikuje dla odbiorców ani procedury reklamacji, ani terminów, ani odszkodowań. Jego strony są dla sprzedawców, a umowę z Yanwen ma sklep lub platforma, więc to od nich żądaj zwrotu pieniędzy albo nowej paczki. `Exception` i `Returned` to kategorie Yanwen dla takich przypadków.
+**Doręczona, a jej nie ma.** Doręczał lokalny przewoźnik, więc zacznij od niego, potem napisz do sklepu. Jeśli strona przewoźnika pokazuje paczkę jako doręczoną, Yanwen pomaga sklepowi jej szukać, ale nie wypłaca odszkodowania. Zobacz [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+
+**Zgubiona, uszkodzona albo zwrócona.** Yanwen nie publikuje dla odbiorców ani procedury reklamacji, ani terminów, ani odszkodowań. Jego strony są dla sprzedawców, a umowę z Yanwen ma sklep lub platforma, więc to od nich żądaj zwrotu pieniędzy albo nowej paczki. Zgłoś się do nich szybko: sklep może zlecić poszukiwanie od 10 dni po nadaniu, a po 60 dniach już nie. Jeśli paczki nie da się doręczyć w kraju docelowym, a sklep nie poprosi o ponowne doręczenie, domyślnie zostaje zniszczona. `Exception` i `Returned` to kategorie Yanwen dla takich przypadków.
 
 **Starsze paczki.** Po roku przesyłka znika z samodzielnego śledzenia; według komunikatu Yanwen konsultant na infolinii nadal może ją sprawdzić.
 
@@ -116,6 +118,9 @@ Yanwen nie publikuje czasów doręczenia dla odbiorców, więc kieruj się termi
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress i eBay od 2015
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – infolinia, e-mail
 - [Yanwen: 联系我们 (kontakt, po chińsku)](https://www.yw56.com.cn/webfile/联系我们/) – godziny infolinii
+- [Yanwen: 燕文TemuY2欧盟快线 (karta linii do UE, po chińsku)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – podatki i opłaty po stronie nadawcy, poszukiwanie od 10 do 60 dni, doręczona według przewoźnika: pomoc bez odszkodowania, zniszczenie bez ponownego doręczenia
+- [Komisja Europejska: EU Customs Reform (po angielsku)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 euro cła za rodzaj produktu do 150 euro od 1 lipca 2026 r., opłata manipulacyjna 2 euro od 1 listopada 2026 r.
+- [Komisja Europejska: Customs Guidance on EUR 3 customs duty (PDF, po angielsku)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 euro za rodzaj produktu, tak jak cło 3 euro, bez względu na wartość
 - [Yanwen: 关于官方快件查询入口及服务的通告 (oficjalne kanały śledzenia)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numerów, limit jednego roku, sprawdzanie przez infolinię, czat, portal, WeChat
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DPD Polska i J&T Express Australia w historiach Yanwen
 :::

@@ -3,7 +3,7 @@ title: iMile Sendungsverfolgung: Nummer, Status, Zustellung
 description: iMile Sendungsverfolgung in Deutschland, Österreich und der Schweiz: wie die Nummer aussieht, was die Status heißen, wer zustellt und wie du iMile erreichst.
 slug: imile-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-11-05
+updated: 2026-11-06
 ---
 
 iMile ist ein Zustelldienst für den Onlinehandel, 2017 in Dubai gegründet. Er bringt Pakete über Grenzen, auch aus China, und hat Gesellschaften in Deutschland (Düsseldorf) und Österreich (Wien). Verfolge die Nummer auf iMiles [Tracking-Seite](https://www.imile.com/en/track) oder oben im Feld. Die Nummer bekommst du vom Shop, in den Versanddaten deiner Bestellung.
@@ -74,7 +74,7 @@ Weitere Gründe, die der Fahrer eintragen kann, neben `User not at home`: `wrong
 
 **Seit Tagen nichts Neues.** Pakete aus China sind zwischen Flug, Zoll und erstem Zentrum oft länger still. Mehr dazu in [Pakete aus China](guide:tracking-from-china) und [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Zoll und Gebühren.** Auf Online-Bestellungen von außerhalb der EU, etwa aus China, erhebt die EU seit 1. November 2026 eine Bearbeitungsgebühr von 2 € pro Ware, bei jedem Warenwert; in der Schweiz nicht. Ob Steuer, Zoll und Gebühr schon im Preis waren, weiß der Shop; wie iMile offene Beträge einzieht, veröffentlicht iMile nicht. Was du wann zahlst, steht im [Zoll-Ratgeber](guide:customs).
+**Zoll und Gebühren.** Auf Online-Bestellungen von außerhalb der EU, etwa aus China, fallen seit 1. Juli 2026 bis 150 € Warenwert 3 € Zoll pro Ware an, und seit 1. November 2026 erhebt die EU außerdem eine Bearbeitungsgebühr von 2 € pro Ware, bei jedem Warenwert. In der Schweiz gilt beides nicht. Ob Steuer, Zoll und Gebühr schon im Preis waren, weiß der Shop; wie iMile offene Beträge einzieht, veröffentlicht iMile nicht. Was du wann zahlst, steht im [Zoll-Ratgeber](guide:customs).
 
 **Zugestellt, aber nicht da.** Schau dir das Foto im Zustellnachweis auf iMiles Seite an, frag Nachbarn, dann schreib iMile und dem Shop. Mehr in [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -145,7 +145,7 @@ iMile ist ein echter Zustelldienst, 2017 in Dubai gegründet, mit eigener Tracki
 - [RTR: Probleme mit Postsendungen](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/faq/probleme_mit_postsendungen.de.html) – Nachforschung nur durch den Absender, Vollmacht, keine Antwort auf einzelne Beschwerden
 - [RTR: Voraussetzungen für ein Schlichtungsverfahren](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/schlichtungsstelle/PKS_Schlichtung.de.html) – Schlichtung zu einer Sendung nur durch den Versender, Formular für Empfangsbeschwerden
 - [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – Antrag auch durch Empfänger, Sonderbedingungen bei E-Commerce-Sendungen, Verbraucherservice Post
-- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € Bearbeitungsgebühr ab 1. November 2026
+- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll pro Ware bis 150 € ab 1. Juli 2026, 2 € Bearbeitungsgebühr ab 1. November 2026
 - [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Position bei Online-Bestellungen, bei jedem Warenwert
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernformen, Status, was Peek zeigt
 :::

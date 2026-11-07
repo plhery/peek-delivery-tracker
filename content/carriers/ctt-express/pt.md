@@ -3,7 +3,7 @@ title: CTT Express (Expresso) rastreio: estados e contactos
 description: Rastreio CTT Express em Portugal: o número de 22 ou 25 algarismos, os estados em espanhol explicados, pontos Collectt, entregas falhadas e contactos.
 slug: ctt-expresso-rastreio
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 A CTT Express é a empresa de encomendas expresso do grupo CTT em Espanha (a antiga Tourline Express) e entrega em Espanha e em Portugal. Em Portugal, o site da CTT Express manda seguir a encomenda no «Seguir objeto» do [ctt.pt](https://appserver2.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx); o seguimento próprio, só em espanhol, está no [localizador do cttexpress.com](https://www.cttexpress.com/localizador-de-envios/). Também podes colar o número na caixa acima. O número aparece no SMS ou no email de confirmação do envio.
@@ -35,6 +35,7 @@ O seguimento da CTT Express está só em espanhol: não tem versão portuguesa n
 | `En tránsito internacional. Pendiente de recepción en CTT Express` | Vem do estrangeiro; a CTT Express ainda não a recebeu. |
 | `En reparto` ou `Entrega hoy` | Atribuída a uma rota e saiu para entrega. |
 | `Incidencia en el reparto` ou `Reparto fallido` | Algo impediu a entrega; o motivo aparece por baixo. |
+| `Recogerán en Delegación` | Numa encomenda que os CTT entregam em Portugal, a entrega falhou e a encomenda fica à espera de que a vás levantar. O seguimento dos CTT mostra a tentativa falhada no mesmo momento e, mais tarde, que a encomenda está pronta para levantar. |
 | `Almacenado temporalmente` | Guardada no armazém depois de uma entrega falhada, até nova volta ou devolução. |
 | `Nuevo reparto` | Saiu outra vez para uma nova tentativa. |
 | `Disponible en Punto Collectt Express` | Pronta para levantar num ponto Collectt; o PIN chega por email e SMS. |
@@ -89,7 +90,7 @@ Como os sites da CTT Express e dos CTT os listavam a 11 de outubro de 2026:
 
 Cola um número das duas primeiras formas acima e o [Peek](/) reconhece logo a CTT Express, incluindo a forma de 25 algarismos de um número `00001000`. Para 22 algarismos a começar por `00001000`, o Peek consulta a TIPSA, a Austrian Post e a CTT Express; se só uma conhecer o número, diz que tem a encomenda, senão escolhes com «Alterar». Uma ligação da página de seguimento da CTT Express também serve.
 
-O Peek consulta o seguimento da CTT Express em espanhol, não o Seguir objeto dos CTT, a cada 10 minutos, e a cada 2 minutos quando a encomenda sai para entrega: só nesse dia, a partir das 6h, hora local, e enquanto responder o próprio seguimento da CTT Express (através de serviços de seguimento, a cada 15 minutos). Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Mostra o estado, o histórico (sem locais), o dia de entrega previsto (exceto num ponto Collectt, com uma incidência, retida por falta de documentação ou em devolução), o peso, a hora de entrega e, quando outro correio lhe passou a encomenda, o número internacional.
+O Peek consulta o seguimento da CTT Express em espanhol, não o Seguir objeto dos CTT, a cada 10 minutos, e a cada 2 minutos quando a encomenda sai para entrega: só nesse dia, a partir das 6h, hora local, e enquanto responder o próprio seguimento da CTT Express (através de serviços de seguimento, a cada 15 minutos). Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Mostra o estado, o histórico (sem locais), o dia de entrega previsto (exceto num ponto Collectt, com uma incidência, retida por falta de documentação ou em devolução), o peso, a hora de entrega e, quando outro correio lhe passou a encomenda, o número internacional. Quando esse número é um código dos CTT terminado em `PT`, são os CTT que entregam a encomenda em Portugal: o cartão diz «Entrega: CTT Portugal» e mostra o código («Anunciada a CTT Portugal, ainda não recebida» enquanto os CTT a tiverem registada sem nenhuma leitura sua). Assim que o seguimento dos CTT mostrar uma leitura pelo menos tão recente como a última da CTT Express, o Peek passa a seguir a encomenda nos CTT e guarda o histórico da CTT Express. Os textos ficam em espanhol, como `En reparto`. Num ponto Collectt mostra `Disponible en Punto Collectt Express`, mas sem o nome nem a morada do ponto. A partir de `En devolución`, a encomenda aparece como problema. O Peek segue os envios com vários volumes através de serviços de seguimento universais.
 
 ## Perguntas sobre o rastreio CTT Expresso
 
@@ -135,5 +136,5 @@ São do mesmo grupo, mas não são iguais. A CTT Express é a filial espanhola d
 - [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artigo de 27 de outubro de 2026, 900 110 898
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulário de contacto
 - [CTT Express: Qué es Phishing](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – SMS e emails falsos
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, `Recogerán en Delegación`, passagem para os CTT nos códigos `PT`
 :::

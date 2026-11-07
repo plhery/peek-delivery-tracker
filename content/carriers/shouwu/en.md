@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-11-04
+updated: 2026-11-06
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -59,6 +59,17 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Abnormal delivery` | The round didn't deliver. The courier's reason follows as a scan of its own in angle brackets, such as `<Incorrect address.>`. | "Delivery attempted" |
 | `Delivered by post man`, `This parcel has been delivered` | The local post or courier has delivered it. | "Delivered", once Shouwu's status says `Delivered` |
 
+When iMile delivers in Italy, Shouwu's history relays iMile's lines, with the centre in 【】 brackets (yours may name another centre than Milan center or ROM 10):
+
+| Shouwu says | What it means for you | Peek shows |
+| --- | --- | --- |
+| `【Milan center】Received.` | iMile's centre has received the parcel. | "In transit" |
+| `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Sent on to iMile's delivery station, then arrived there. | "In transit" |
+| `【ROM 10】Shipment out for delivery.` | iMile's delivery round. | "Out for delivery" |
+| `<User not at home>`, `【ROM 10】 Back To DS.` | The driver didn't find you, and the parcel is back at the delivery station. | "Delivery attempted" |
+| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | After two failed rounds, the station sends it back to iMile's centre. | "In transit" |
+| `【Milan Transit Center】Order Closed.` | iMile closes the delivery order without delivering; ask the seller. | "Needs attention" |
+
 **Lines in Chinese.** Some parcels also get lines Shouwu writes in Chinese, which Peek shows as written. `货物电子信息已经收到` (the goods' electronic data received) comes with the order data: "Label created". Then, all "In transit": `申报过港中` after a batch's code (the batch is declared for the road to Hong Kong), `已到港，安排航班中` (at the port of departure, waiting for a flight), `预计23号的航班` (the flight booked, here for the 23rd; with `二程` in front, for the second leg), `航班已飞` and `二程航班已飞` (the flight, or the second leg's, has left) and `已落地` (landed). `已落地，清关提货中` (landed, being cleared and collected from the airline) is "At customs"; `清关完成` (cleared) and `已交仓扫描` (scanned in at the delivering courier's depot) are "In transit" again.
 
 **Times out by hours.** Shouwu's system records every scan's local time as if it were Beijing time, scans abroad too, and its tracker shows that in your time zone. So a scan in the UK or the US shows hours early, and the flight looks hours shorter. Go by the order of the rows. Peek works out each scan's clock from its place, or from the leg the parcel was on, and shows them in your device's time zone.
@@ -69,7 +80,7 @@ Shouwu says it works directly with USPS, Royal Mail, La Poste, DHL, DPD and Herm
 
 - **United Kingdom.** The UK lines cover the whole of the UK. Their last-mile couriers are Royal Mail, Yodel and Evri (spelt ERVI there); the line for goods with batteries goes mainly by Royal Mail.
 - **United States.** The US lines cover the whole country, delivered mainly by USPS.
-- **European Union.** Shouwu also has lines to Germany, delivered mainly by [DHL](carrier:dhl), [Hermes](carrier:hermes-de) or [DPD](carrier:dpd-de) depending on the line, France (mainly [Colissimo](carrier:la-poste)), the Netherlands (mainly DHL), Sweden (mainly [Early Bird](carrier:early-bird)) and Italy (UniUni and [Poste Italiane](carrier:poste-italiane)). Here too the seller may pass on the courier's number.
+- **European Union.** Shouwu also has lines to Germany, delivered mainly by [DHL](carrier:dhl), [Hermes](carrier:hermes-de) or [DPD](carrier:dpd-de) depending on the line, France (mainly [Colissimo](carrier:la-poste)), the Netherlands (mainly DHL), Sweden (mainly [Early Bird](carrier:early-bird)) and Italy (an economy line, 10 to 12 working days, delivered by UniUni and [Poste Italiane](carrier:poste-italiane); in histories Peek has read, [iMile](carrier:imile) delivers there too, with the lines above). Here too the seller may pass on the courier's number.
 - **Ireland, Canada and Australia.** Shouwu lists no line for them and names no courier. Ask the seller who delivers.
 
 Shouwu's tracker gives no courier's name or number, beyond what a scan's wording may say.
@@ -102,7 +113,7 @@ For your order, ask the seller: it booked the parcel with Shouwu and makes the c
 
 Peek takes the parcel's stage from Shouwu's status, as in the tables above, and shows the destination country and each scan with its place, which Shouwu's page leaves out. A place holding a digit, such as a postcode, is dropped. Shouwu gives no delivery estimate, so Peek shows no expected delivery date.
 
-With no courier named, Peek shows no "Delivery with" line and doesn't hand the parcel over to the courier. If you have the courier's number, add it to Peek as a parcel of its own.
+With no courier named, Peek shows no "Delivery with" line and doesn't hand the parcel over to the courier, even when the history relays iMile's lines. If you have the courier's number, add it to Peek as a parcel of its own.
 
 Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Shouwu's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact Shouwu or the seller for you.
 
@@ -144,8 +155,8 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 法国标快 (France standard express)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=20) – mainly Colissimo, 4 to 7 working days
 - [Shouwu International: 荷兰标快 (Netherlands standard express)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=28) – mainly DHL, 4 to 8 working days
 - [Shouwu International: 瑞典经济 (Sweden economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=29) – mainly EarlyBird, 4 to 8 working days
-- [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, 10 to 12 working days
+- [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, choice of number, 10 to 12 working days
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages, clocks, places, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages, iMile's lines relayed in Italy, clocks, places, what Peek shows
 :::

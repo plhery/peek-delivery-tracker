@@ -67,9 +67,11 @@ Die Ergebnisseite hat außerdem ein Fenster „Proof of Delivery Images“, das 
 
 **Seit Tagen keine Bewegung.** Hat der Paketdienst vor Ort das Paket, schau mit der „Last Mile Tracking“-Nummer in seine eigene Sendungsverfolgung. Mehr dazu unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Zugestellt, aber nicht da.** Zugestellt hat der Paketdienst vor Ort, also fang dort an, dann frag den Shop. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Hängt beim Zoll.** Auf Yanwens Linie für die EU trägt laut Produktblatt der Absender, also der Händler, alle Steuern und Abgaben. Seit 1. Juli 2026 fallen auf solche Online-Bestellungen bis 150 € Warenwert 3 € Zoll pro Ware an, und seit 1. November 2026 erhebt die EU außerdem eine Bearbeitungsgebühr von 2 € pro Ware, bei jedem Warenwert. Wer diese 2 € zahlt, sagen Yanwens Produktblätter nicht. In der Schweiz gilt beides nicht. Verlangt jemand Geld von dir, frag zuerst beim Shop nach und lies den [Zoll-Ratgeber](guide:customs).
 
-**Verloren, beschädigt oder zurück.** Yanwen veröffentlicht für Empfänger weder ein Reklamationsverfahren noch Fristen oder Entschädigungen. Seine Seiten richten sich an Händler, und den Vertrag mit Yanwen hat der Shop oder Marktplatz: Dort fragst du nach Erstattung oder Ersatz. `Exception` und `Returned` sind Yanwens Kategorien für solche Fälle.
+**Zugestellt, aber nicht da.** Zugestellt hat der Paketdienst vor Ort, also fang dort an, dann frag den Shop. Zeigt die Seite des Paketdiensts das Paket als zugestellt, hilft Yanwen dem Shop bei der Suche, entschädigt aber nicht. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
+
+**Verloren, beschädigt oder zurück.** Yanwen veröffentlicht für Empfänger weder ein Reklamationsverfahren noch Fristen oder Entschädigungen. Seine Seiten richten sich an Händler, und den Vertrag mit Yanwen hat der Shop oder Marktplatz: Dort fragst du nach Erstattung oder Ersatz. Sag dort schnell Bescheid: Der Shop kann ab 10 Tagen nach dem Versand eine Nachforschung beantragen, nach 60 Tagen keine mehr. Lässt sich ein Paket im Zielland nicht zustellen und beantragt der Shop keine neue Zustellung, wird es standardmäßig vernichtet. `Exception` und `Returned` sind Yanwens Kategorien für solche Fälle.
 
 **Ältere Sendungen.** Nach einem Jahr fallen Sendungen aus der Selbstabfrage; laut Yanwens Mitteilung kann sie ein Mitarbeiter an der Hotline weiterhin nachschlagen.
 
@@ -116,6 +118,9 @@ Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwen
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – Unternehmensgeschichte
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – Hotline, E-Mail
 - [Yanwen: 联系我们 (Kontakt)](https://www.yw56.com.cn/webfile/联系我们/) – Servicezeiten, Produktlinien über DHL und Colissimo
+- [Yanwen: 燕文TemuY2欧盟快线 (Produktblatt der EU-Linie, Chinesisch)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – Steuern und Abgaben beim Absender, Nachforschung ab 10 und bis 60 Tage, zugestellt laut Paketdienst: Hilfe bei der Suche ohne Entschädigung, Vernichtung ohne neue Zustellung
+- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll pro Ware bis 150 € ab 1. Juli 2026, 2 € Bearbeitungsgebühr ab 1. November 2026
+- [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Position bei Online-Bestellungen, bei jedem Warenwert
 - [Yanwen: 关于官方快件查询入口及服务的通告 (offizielle Tracking-Wege)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 Nummern, Ein-Jahres-Grenze, Abfrage per Telefon, Chat, Portal, WeChat
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, Scans von J&T Express Australia nach der Übergabe
 :::

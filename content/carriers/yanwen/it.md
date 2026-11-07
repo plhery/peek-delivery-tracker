@@ -67,9 +67,11 @@ La pagina dei risultati ha anche una finestra «Proof of Delivery Images», che 
 
 **Fermo per giorni.** Una volta passato al corriere locale, conta il suo tracking: guarda il numero «Last Mile Tracking». Perché il tracking si blocca, e quando preoccuparsi, lo spiega [perché il tracking non si aggiorna](guide:tracking-not-updating). Per i pacchi dalla Cina in generale, dogana compresa, c'è [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-**Consegnato ma non c'è.** La consegna l'ha fatta il corriere locale, quindi parti da lui e poi dal negozio. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+**Fermo in dogana.** Sulla linea di Yanwen per l'UE, secondo la sua scheda, tutte le imposte e i dazi sono a carico del mittente, cioè del venditore. Dal 1° luglio 2026 questi acquisti online pagano 3 € di dazio per voce fino a 150 €, e dal 1° novembre 2026 l'UE aggiunge una tassa di gestione di 2 € per voce, a qualunque valore. Le schede di Yanwen non dicono chi paga i 2 €. In Svizzera non valgono né l'uno né l'altra. Se ti chiedono di pagare, verifica con il negozio e leggi la [guida alla dogana](guide:customs).
 
-**Perso, danneggiato o tornato indietro.** Yanwen non pubblica per chi riceve né una procedura di reclamo né scadenze né rimborsi. I suoi siti sono per i venditori, e il contratto con Yanwen ce l'ha il negozio o il marketplace: chiedi a loro un rimborso o un nuovo invio. `Exception` e `Returned` sono le categorie di Yanwen per questi casi.
+**Consegnato ma non c'è.** La consegna l'ha fatta il corriere locale, quindi parti da lui e poi dal negozio. Se il sito del corriere dà il pacco per consegnato, Yanwen aiuta il negozio a cercarlo, ma non lo risarcisce. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+
+**Perso, danneggiato o tornato indietro.** Yanwen non pubblica per chi riceve né una procedura di reclamo né scadenze né rimborsi. I suoi siti sono per i venditori, e il contratto con Yanwen ce l'ha il negozio o il marketplace: chiedi a loro un rimborso o un nuovo invio. Avvisali presto: il negozio può aprire una ricerca da 10 giorni dopo la spedizione, non più dopo 60. Se il pacco non si riesce a consegnare nel Paese di destinazione e il negozio non chiede una nuova consegna, di norma viene distrutto. `Exception` e `Returned` sono le categorie di Yanwen per questi casi.
 
 **Spedizioni vecchie.** Dopo un anno le spedizioni escono dalla ricerca in autonomia; secondo un avviso di Yanwen, al telefono un operatore può ancora cercarle.
 
@@ -120,6 +122,9 @@ Yanwen non pubblica tempi di consegna per chi riceve: vale la stima che il negoz
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress ed eBay
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – telefono, e-mail
 - [Yanwen: 联系我们 (contatti)](https://www.yw56.com.cn/webfile/联系我们/) – orari del telefono
+- [Yanwen: 燕文TemuY2欧盟快线 (scheda della linea UE, in cinese)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – imposte e dazi a carico del mittente, ricerca da 10 a 60 giorni, consegnato per il corriere: aiuto senza risarcimento, distruzione senza nuova consegna
+- [Commissione europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € per voce fino a 150 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
+- [Commissione europea: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € per voce come i 3 €, a qualunque valore
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canali ufficiali di tracciamento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numeri, limite di un anno, ricerca al telefono, chat, portale, WeChat
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, scansioni di J&T Express Australia dopo il passaggio
 :::

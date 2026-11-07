@@ -68,7 +68,7 @@ Otros motivos que puede anotar el repartidor, además de `User not at home`: `wr
 
 **Parado varios días.** Los paquetes que vienen de China suelen quedarse sin novedades entre el vuelo, la aduana y el primer centro en España. Lo explicamos en [paquetes desde China](guide:tracking-from-china) y en [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
-**Aduana y cargos.** Desde el 1 de noviembre de 2026, en las compras en línea enviadas desde fuera de la UE, como desde China, la UE cobra una tasa de tramitación de 2 € por tipo de producto, sea cual sea el valor, que la aduana recauda junto con el arancel (3 € por tipo de producto en compras de hasta 150 €). iMile no explica cómo se pagan el arancel, el IVA y la tasa en sus paquetes: si ya iban incluidos en el precio, lo sabe la tienda. Qué se paga y cuándo, en la [guía de aduanas](guide:customs).
+**Aduana y cargos.** Desde el 1 de noviembre de 2026, en las compras en línea enviadas desde fuera de la UE, como desde China, la UE cobra una tasa de tramitación de 2 € por tipo de producto, sea cual sea el valor, además del arancel (3 € por tipo de producto en compras de hasta 150 €). iMile no explica cómo se pagan el arancel, el IVA y la tasa en sus paquetes: si ya iban incluidos en el precio, lo sabe la tienda. Qué se paga y cuándo, en la [guía de aduanas](guide:customs).
 
 **El enlace de seguimiento no funciona.** Según sus preguntas frecuentes, recarga la página o ábrela en otro navegador, borra las cookies y, si sigue igual, escribe a atención al cliente con el número de pedido para que te manden un enlace nuevo.
 

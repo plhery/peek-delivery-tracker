@@ -74,7 +74,7 @@ Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong a
 
 **Fermo da giorni.** I pacchi dalla Cina restano spesso senza novità tra il volo, la dogana e il primo centro in Italia. Lo spieghiamo in [pacchi dalla Cina](guide:tracking-from-china) e in [tracking che non si aggiorna](guide:tracking-not-updating).
 
-**Dogana e oneri.** Sugli acquisti online spediti da fuori UE, come dalla Cina, dal 1° novembre 2026 l'UE applica anche la tassa di gestione di 2 € per voce, a qualunque valore, che la dogana riscuote insieme al dazio (3 € per voce fino a 150 €). iMile non dice come si pagano dazio, IVA e tassa sui suoi pacchi: se erano già compresi nel prezzo, lo sa il negozio. Cosa si paga e quando, nella [guida alla dogana](guide:customs).
+**Dogana e oneri.** Sugli acquisti online spediti da fuori UE, come dalla Cina, dal 1° novembre 2026 l'UE applica la tassa di gestione di 2 € per voce, a qualunque valore, oltre al dazio (3 € per voce fino a 150 €). iMile non dice come si pagano dazio, IVA e tassa sui suoi pacchi: se erano già compresi nel prezzo, lo sa il negozio. Cosa si paga e quando, nella [guida alla dogana](guide:customs).
 
 **Consegnato ma non ce l'hai.** Guarda la prova di consegna sulla pagina di iMile, controlla cassetta, portineria e vicini, poi scrivi a iMile e al negozio. Altri consigli in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 

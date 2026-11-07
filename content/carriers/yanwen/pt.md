@@ -67,9 +67,11 @@ A página de resultados tem ainda uma janela «Proof of Delivery Images», que p
 
 **Parada há dias.** Quando já está com a transportadora local, vê o seguimento dela com o número do «Last Mile Tracking». Mais em [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
-**Dada como entregue e não a tens.** Quem fez a entrega foi a transportadora local, por isso começa por ela e depois fala com a loja. Vê [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
+**Retida na alfândega.** Na linha da Yanwen para a UE, segundo a ficha do produto, todos os impostos e taxas ficam a cargo do remetente, ou seja, do vendedor. Desde 1 de julho de 2026, estas compras pagam 3 € de direitos por tipo de produto até 150 €, e desde 1 de novembro de 2026 a UE junta uma taxa de tratamento de 2 € por tipo de produto, seja qual for o valor. As fichas da Yanwen não dizem quem paga esses 2 €. Se te pedirem para pagar, confirma com a loja e lê [encomenda retida na alfândega](guide:customs).
 
-**Perdida, danificada ou devolvida.** A Yanwen não publica processo de reclamação, prazo nem indemnização para quem recebe. Os sites dela são para vendedores, e é a loja ou o marketplace que tem o contrato com a Yanwen: pede-lhe o reembolso ou um novo envio. `Exception` e `Returned` são as categorias da Yanwen para estes casos.
+**Dada como entregue e não a tens.** Quem fez a entrega foi a transportadora local, por isso começa por ela e depois fala com a loja. Se o site da transportadora a der como entregue, a Yanwen ajuda a loja a procurá-la, mas não a indemniza. Vê [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
+
+**Perdida, danificada ou devolvida.** A Yanwen não publica processo de reclamação, prazo nem indemnização para quem recebe. Os sites dela são para vendedores, e é a loja ou o marketplace que tem o contrato com a Yanwen: pede-lhe o reembolso ou um novo envio. Avisa-a depressa: a loja pode pedir uma pesquisa a partir de 10 dias depois do envio, e nenhuma passados 60. Se a encomenda não puder ser entregue no destino e a loja não pedir nova entrega, é destruída por defeito. `Exception` e `Returned` são as categorias da Yanwen para estes casos.
 
 **Encomendas mais antigas.** As guias deixam de aparecer na pesquisa por conta própria ao fim de um ano; segundo um aviso da Yanwen, uma pessoa da linha de apoio ainda as consegue procurar.
 
@@ -116,6 +118,9 @@ Não: a Yanwen não publica telefone, e-mail nem morada em Portugal. Fala com a 
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress e eBay, 214 países
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – linha de apoio, e-mail
 - [Yanwen: 联系我们 (contactos)](https://www.yw56.com.cn/webfile/联系我们/) – horário da linha de apoio, linhas de produtos (ilhas de Espanha e Portugal, Colissimo, DHL)
+- [Yanwen: 燕文TemuY2欧盟快线 (ficha da linha para a UE, em chinês)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – impostos e taxas a cargo do remetente, pesquisa dos 10 aos 60 dias, entregue segundo a transportadora: ajuda sem indemnização, destruição sem nova entrega
+- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € de direitos por tipo de produto até 150 € desde 1 de julho de 2026, taxa de 2 € desde 1 de novembro de 2026
+- [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa de 2 € por artigo, como os 3 €, seja qual for o valor
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canais oficiais de seguimento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 números, limite de um ano, pesquisa por telefone, chat, portal, WeChat
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, leituras da J&T Express Australia depois da entrega em lotes
 :::

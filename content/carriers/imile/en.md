@@ -3,7 +3,7 @@ title: iMile tracking: numbers, statuses and who delivers
 description: Track an iMile parcel: what iMile numbers look like, what its English scans mean, who delivers in your country and how to reach iMile when it stalls.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 iMile is an e-commerce delivery company founded in Dubai in 2017. It carries parcels across borders, including from China, clears customs and delivers the last mile with its own couriers in some countries. Track the number on iMile's own page, [imile.com/track](https://www.imile.com/en/track), or in the box above. The number comes from the shop, in your order's shipping details.
@@ -74,6 +74,8 @@ iMile's tracking page has a proof-of-delivery view that asks you to confirm you'
 
 **Stuck for days.** Parcels from China often go quiet between the flight, customs and the first centre in your country. More in [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
 
+**Customs and charges.** In Ireland, as across the EU, an online order sent from outside the EU, such as from China, pays €3 customs duty per kind of product when it's worth €150 or less (since 1 July 2026) and, since 1 November 2026, a €2 EU handling fee per kind of product whatever its value. iMile doesn't say how duty, VAT and the fee are paid on its parcels: the shop knows whether they were in the price. What you pay and when: [customs and import fees](guide:customs).
+
 **The tracking link doesn't work.** iMile's FAQ says to refresh the page or open it in another browser, clear cookies, and then contact customer support with your order number for a fresh link.
 
 **Delivered but not there.** Look for the proof-of-delivery photo on iMile's page, check around the door and with neighbours, then contact iMile and the shop. See [delivered but not received](guide:delivered-not-received).
@@ -128,5 +130,7 @@ Yes. iMile is a delivery company founded in Dubai in 2017, with its own tracking
 - [iMile: Legal Notice (United Kingdom)](https://www.imile.com/GB-en/LegalNotice) – iMile Logistics Co., Ltd., registered address only
 - [iMile: Customer Support](https://www.imile.com/en/CustomerService/CustomerSupport) – contact form and its fields
 - [iMile: iMile Chat](https://help.imile.com/) – virtual assistant and its languages
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 EU handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3, whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, status wordings, what Peek shows
 :::

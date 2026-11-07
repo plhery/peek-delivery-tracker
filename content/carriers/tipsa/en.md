@@ -3,10 +3,10 @@ title: TIPSA tracking: numbers, statuses and missed deliveries
 description: Track a TIPSA parcel in Spain or Portugal: the 22-digit number, what TIPSA's Spanish statuses mean, missed deliveries, agencies and how to reach TIPSA.
 slug: tipsa-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
-TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, often in the shipping email or SMS.
+TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, often in the shipping email or SMS. If you don't have it, ask the shop or the TIPSA agency that delivers in your area; find it by postcode in TIPSA's [agency finder](https://www.tip-sa.com/es/agencias-de-transporte). You also arrange delivery with that agency after an `Ausente`, or a collection if you'd rather pick the parcel up yourself; if it's lost or arrives damaged, tell the shop.
 
 ## TIPSA tracking number: what it looks like
 
@@ -24,7 +24,7 @@ TIPSA's locator asks for the 22-digit shipment number and marks the destination 
 | `012345 012345 1234567890` | The same number with spaces. Peek reads it; TIPSA's locator field holds only 22 characters, so type it there without spaces. |
 | `1234567890` | The 10-digit waybill alone. TIPSA's locator doesn't take it. |
 
-Shops can have TIPSA send emails and SMS when the parcel sets off, when it reaches the agency, after an incident and after delivery, and their tracking links lead to TIPSA's shipment page. TIPSA's FAQ says that if you have no number, you should ask the sender or the agency that delivers. More places to look are in [how to find your tracking number](guide:find-tracking-number).
+Shops can have TIPSA send emails and SMS when the parcel sets off, when it reaches the agency, after an incident and after delivery, and their tracking links lead to TIPSA's shipment page. Without the number, TIPSA's locator also searches by the shipment's reference, but then asks for an identifier (agency plus client) that you'd have to get from the sender. More places to look are in [how to find your tracking number](guide:find-tracking-number).
 
 Twenty-two digits also fit Austrian Post, [USPS](carrier:usps) and Estafeta. A number whose two agency codes both start with `00` has the shape of a [CTT Express](carrier:ctt-express) number, another Spanish carrier, so check which carrier the shop's email names. People often search for "TIPSA 10 digits": only the full 22-digit form works, so find it in the email or ask the sender.
 
@@ -43,6 +43,7 @@ TIPSA's shipment page is in Spanish only, even when you open the locator from th
 | `REPARTO` | Out for delivery. |
 | `Ausente` | The courier couldn't deliver because nobody could be reached. |
 | `Faltan Datos / Datos incorrectos` | Address details are missing or wrong. Noted on the delivery round, before another attempt. |
+| `Cerrado` | The courier found the address closed. Noted on the delivery round, after `REPARTO`. |
 | `Solicitada en otra dirección` | Delivery was asked for at another address, and the parcel is rerouted. |
 | `DISPONIBLE` or `Pendiente de recoger en Tipsa` | After a missed delivery, it's held at the agency for you. |
 | `Devolver a Origen` | Going back to the sender. |
@@ -60,7 +61,7 @@ TIPSA delivers through its own network across mainland Spain and Portugal, the B
 
 **Pickup points and lockers.** TIPSA shares a network of Pickup points with [SEUR](carrier:seur), in shops and in lockers open 24/7. Most points open at least six days a week, and you have 7 days to collect the parcel. Delivery to a point is an option the shop offers. Find one with TIPSA's [Pickup point finder](https://aplicaciones.tip-sa.com/puntospickup/).
 
-Some shops also book Saturday delivery or a pre-alert, an SMS and email telling you the day the parcel reaches its destination.
+Some shops also book Saturday delivery or a pre-alert, an SMS and email telling you the day the parcel reaches its destination. With the Premium service you can also pick a delivery time slot, give or take an hour; TIPSA doesn't say where you pick it, so ask the destination agency.
 
 ## TIPSA parcel late, lost or returned
 
@@ -108,7 +109,7 @@ No: TIPSA's locator asks for the 22-digit number. The 10 digits are the waybill 
 Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 7 days. You get one only if the shop offers delivery to a point.
 
 :::sources
-- [TIPSA: Delivery locator](https://www.tip-sa.com/en/delivery-locator) – 22-digit number, form
+- [TIPSA: Delivery locator](https://www.tip-sa.com/en/delivery-locator) – 22-digit number, form, search by reference with an identifier (agency + client)
 - [TIPSA: Frequently Asked Questions](https://www.tip-sa.com/en/recursos/faqs) – missing number, 15-day hold, ID, address change, lost or damaged, phones, email
 - [TIPSA: Contact](https://www.tip-sa.com/en/contact) – phones, form reasons
 - [TIPSA: Collection points](https://www.tip-sa.com/en/services/collection-points) – Pickup network
@@ -119,12 +120,12 @@ Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 
 - [TIPSA: Preguntas frecuentes](https://www.tip-sa.com/es/recursos/faqs) – coverage, 900 number
 - [TIPSA: Empresa de transporte urgente](https://www.tip-sa.com/es/tipsa) – Geopost, 330 agencies, hubs, lockers
 - [TIPSA: Página inicial (Portugal)](https://www.tip-sa.com/pt) – more than 300 agencies
-- [TIPSA: FAQs eTIPSA](https://www.tip-sa.com/es/faqs-etipsa) – two attempts, 24 and 48 hours, Saturday, shop notifications
+- [TIPSA: FAQs eTIPSA](https://www.tip-sa.com/es/faqs-etipsa) – two attempts, 24 and 48 hours, time slot with eTIPSA Premium, Saturday, shop notifications
 - [TIPSA: 360º eCommerce](https://www.tip-sa.com/es/envios-de-paquetes/360o-ecommerce) – three attempts with Premium
 - [TIPSA: Recogida en puntos de recogida](https://www.tip-sa.com/es/envios-de-paquetes/puntos-de-recogidas) – shared with SEUR, 7 days, opening days
 - [TIPSA: Agencias de transporte](https://www.tip-sa.com/es/agencias-de-transporte) – agency finder
 - [TIPSA: Puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/) – pickup point finder
 - [TIPSA: Aviso legal](https://www.tip-sa.com/es/aviso-legal) – company name
 - [TIPSA: Contacto (Portugal)](https://www.tip-sa.com/pt/contacto) – same numbers for Portugal
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, `Cerrado`
 :::

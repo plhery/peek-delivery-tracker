@@ -3,7 +3,7 @@ title: CTT Express tracking: statuses in English and contact
 description: Track a CTT Express parcel in Spain or Portugal: the 22-digit number, its Spanish statuses in plain English, Collectt points, missed deliveries and who to call.
 slug: ctt-express-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 CTT Express is the Spanish parcel company of Portugal's CTT group, formerly Tourline Express, delivering across Spain and Portugal. Type your number into the [localizador](https://www.cttexpress.com/localizador-de-envios/) on cttexpress.com, or paste it in the box above. The number comes from the sender, usually the shop, and CTT Express sends it to you by SMS or email. CTT Express isn't CTT, Portugal's post: a code with letters ending in `PT` is a [CTT](carrier:ctt) number.
@@ -35,6 +35,7 @@ There is no English tracking. The English switch on cttexpress.com shows the Spa
 | `En tránsito internacional. Pendiente de recepción en CTT Express` | Coming from abroad; CTT Express doesn't have it yet. |
 | `En reparto` or `Entrega hoy` | Assigned to a route and out for delivery today. |
 | `Incidencia en el reparto` or `Reparto fallido` | Something stopped the delivery; the reason appears below it. |
+| `Recogerán en Delegación` | "They'll collect it at the office": on a parcel CTT delivers in Portugal, the delivery failed and the parcel waits for you to collect it. CTT's own tracking shows the failed attempt at the same moment, and later that the parcel is ready to collect. |
 | `Almacenado temporalmente` | "Stored temporarily": back at the depot after a failed attempt, until a new round or a return. |
 | `Nuevo reparto` | "New delivery": out again for another attempt. |
 | `Disponible en Punto Collectt Express` | Ready to pick up at a Collectt point; your PIN comes by email and SMS. |
@@ -46,7 +47,7 @@ There is no English tracking. The English switch on cttexpress.com shows the Spa
 
 Under an incident, the reason tells you what happened, such as `No pudimos contactar contigo` ("we couldn't reach you") or `Dirección incorrecta` ("wrong address"). CTT Express's FAQ warns that an "absent recipient" incident can appear even if you were home, when the driver couldn't reach your door.
 
-**Orders from abroad:** CTT Express says a parcel bought abroad also needs time to be accepted in the origin country and to travel to Spain or Portugal, so `En tránsito` can last a while. For shops sending from outside the EU, CTT Express also clears customs and delivers through its own network. If customs holds a parcel, the tracking may show it or you may get a notification, and taxes or duties may be due before it moves on: see [parcels held at customs](guide:customs).
+**Orders from abroad:** CTT Express says a parcel bought abroad also needs time to be accepted in the origin country and to travel to Spain or Portugal, so `En tránsito` can last a while. For shops sending from outside the EU, such as from China, CTT Express also offers customs clearance, which it says takes 12 hours on average, and then delivers through its own network in 24 or 48 hours. If customs holds a parcel, the tracking may show it or you may get a notification, and taxes or duties may be due before it moves on. Since 1 July 2026, such orders worth €150 or less pay €3 customs duty per kind of product, and since 1 November 2026 all of them also pay a €2 EU handling fee per kind of product, whatever their value. Who collects them and when: [parcels held at customs](guide:customs).
 
 ## CTT Express delivery hours, Collectt points and missed deliveries
 
@@ -83,7 +84,7 @@ As CTT Express's and CTT's sites listed them on 11 October 2026 (none in English
 
 Paste a number in the first two shapes above and [Peek](/) names CTT Express at once, the 25-digit form of a `00001000` number included. For 22 digits starting `00001000`, Peek asks TIPSA, Austrian Post and CTT Express; if it can't settle on one, pick with "Change". A link from CTT Express's tracking page works too. On its own, a code ending in `PT` goes to CTT.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day CTT Express scans the parcel out for delivery, while CTT Express's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history (without places, as CTT Express gives none), the expected delivery day while the parcel is moving, the weight, the delivery time and, when another post handed the parcel over, its international number.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day CTT Express scans the parcel out for delivery, while CTT Express's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history (without places, as CTT Express gives none), the expected delivery day while the parcel is moving, the weight, the delivery time and, when another post handed the parcel over, its international number. When that number is a CTT code ending in `PT`, CTT delivers the parcel in Portugal: the card says "Delivery with CTT Portugal" and shows the code ("Announced to CTT Portugal, not received yet" while CTT lists the parcel without a scan of its own). Once CTT's tracker shows a scan at least as recent as CTT Express's newest, Peek follows the parcel there and keeps CTT Express's history. Scan texts stay in CTT Express's Spanish, such as `En reparto`. At a Collectt point Peek shows `Disponible en Punto Collectt Express` but not the point's name or address. Multi-parcel shipments are tracked through universal tracking services.
 
 ## Questions about CTT Express tracking
 
@@ -121,8 +122,10 @@ No. CTT Express's tracker has one box, for the tracking number, and its contact 
 - [CTT Express: Preguntas frecuentes Puntos Collectt Express](https://www.cttexpress.com/preguntas-frecuentes/puntos-collectt-express) – PIN, free switch to a point
 - [CTT Express: Qué significa "aceptado por la última milla"](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – status meanings
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – transit from abroad
-- [CTT Express: Servicio de importación de paquetería para empresas](https://www.cttexpress.com/servicios/importacion/) – imports from outside the EU, customs clearance
+- [CTT Express: Servicio de importación de paquetería para empresas](https://www.cttexpress.com/servicios/importacion/) – imports from outside the EU, customs clearance in 12 hours on average, delivery in 24 or 48 hours
 - [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – customs holds, notifications, taxes and duties, 900 110 898
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 EU handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3, whatever the value
 - [CTT Express: Cómo contactar con CTT Express](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – phones, hours, email, 807 warning
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – contact form, which asks for the tracking number
 - [CTT Express: Qué es Phishing](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – fake SMS and emails
@@ -135,5 +138,5 @@ No. CTT Express's tracker has one box, for the tracking number, and its contact 
 - [CTT: Condições gerais de transporte de Encomendas Expresso](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – claim deadlines
 - [CTT: Linhas de Apoio](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/linhas-de-apoio) – phone, hours
 - [CTT: Alertas de Phishing](https://www.ctt.pt/transversais/alertas-de-phishing) – fake CTT Expresso SMS
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows, `Recogerán en Delegación`, hand-over to CTT on `PT` codes
 :::

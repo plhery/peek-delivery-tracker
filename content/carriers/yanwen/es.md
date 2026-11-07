@@ -63,9 +63,11 @@ La página de resultados tiene también una ventana «Proof of Delivery Images»
 
 **Parado varios días.** Si ya lo tiene el transportista local, mira su propio seguimiento con el número «Last Mile Tracking». Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
-**Entregado pero no lo tienes.** La entrega la hizo el transportista local, así que empieza por él y después la tienda. Mira [paquete entregado pero no recibido](guide:delivered-not-received).
+**Retenido en aduana.** En la línea de Yanwen para la UE, según su ficha, todos los impuestos y tasas corren a cargo del remitente, es decir, del vendedor. Desde el 1 de julio de 2026, estas compras pagan un arancel de 3 € por tipo de producto si valen hasta 150 €, y desde el 1 de noviembre de 2026 la UE suma una tasa de tramitación de 2 € por tipo de producto, sea cual sea su valor. Las fichas de Yanwen no dicen quién paga esos 2 €. Si te piden pagar algo, compruébalo con la tienda y mira [paquete retenido en aduanas](guide:customs).
 
-**Perdido, dañado o devuelto.** Yanwen no publica para destinatarios ningún proceso de reclamación, plazo ni indemnización. Sus webs son para vendedores, y el contrato con Yanwen lo tiene la tienda o el marketplace: pídele a ella el reembolso o un nuevo envío. `Exception` y `Returned` son las categorías de Yanwen para estos casos.
+**Entregado pero no lo tienes.** La entrega la hizo el transportista local, así que empieza por él y después la tienda. Si la web del transportista lo da por entregado, Yanwen ayuda a la tienda a buscarlo, pero no la indemniza. Mira [paquete entregado pero no recibido](guide:delivered-not-received).
+
+**Perdido, dañado o devuelto.** Yanwen no publica para destinatarios ningún proceso de reclamación, plazo ni indemnización. Sus webs son para vendedores, y el contrato con Yanwen lo tiene la tienda o el marketplace: pídele a ella el reembolso o un nuevo envío. Avísala pronto: puede pedir una búsqueda a partir de los 10 días del envío, y ninguna pasados 60. Si el paquete no se puede entregar en destino y la tienda no pide una nueva entrega, por defecto se destruye. `Exception` y `Returned` son las categorías de Yanwen para estos casos.
 
 **Envíos antiguos.** Pasado un año, los envíos desaparecen del seguimiento por tu cuenta; según un aviso de Yanwen, una persona de su línea de atención aún puede buscarlos.
 
@@ -112,6 +114,9 @@ Yanwen no publica horarios de reparto, porque en España no reparte ella: lo hac
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress y eBay
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – teléfono, correo
 - [Yanwen: 联系我们 (contacto)](https://www.yw56.com.cn/webfile/联系我们/) – horario del teléfono, línea a las islas de España y Portugal
+- [Yanwen: 燕文TemuY2欧盟快线 (ficha de la línea para la UE, en chino)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – impuestos y tasas a cargo del remitente, búsqueda de los 10 a los 60 días, entregado según el transportista: ayuda sin indemnización, destrucción sin nueva entrega
+- [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € por tipo de producto hasta 150 € desde el 1 de julio de 2026, tasa de tramitación de 2 € desde el 1 de noviembre de 2026
+- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por tipo de producto, como los 3 €, sea cual sea el valor
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canales oficiales de seguimiento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 números, límite de un año, búsqueda por teléfono, chat, portal, WeChat
 - [YanwenExpress: página principal](https://www.yanwenexpress.com/) – reparto de última milla en Estados Unidos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, escaneos de J&T Express Australia tras la entrega por lotes

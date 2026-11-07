@@ -3,10 +3,10 @@ title: TIPSA rastreio: número, estados, agências e contactos
 description: Rastreio TIPSA em Portugal: o número de 22 algarismos, os estados em espanhol explicados, entregas falhadas, levantamento na agência e contactos.
 slug: tipsa-rastreio
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
-A TIPSA (Transporte Integral de Paquetería) é uma transportadora espanhola de encomendas urgentes, da rede Geopost, com agências em Espanha, Portugal e Andorra. Para seguir a encomenda, escreve o número de 22 algarismos no [localizador de envios](https://www.tip-sa.com/pt/localizador-envios) do site português da TIPSA ou cola-o na caixa acima. Quem te dá o número é o remetente, normalmente a loja onde compraste.
+A TIPSA (Transporte Integral de Paquetería) é uma transportadora espanhola de encomendas urgentes, da rede Geopost, com agências em Espanha, Portugal e Andorra. Para seguir a encomenda, escreve o número de 22 algarismos no [localizador de envios](https://www.tip-sa.com/pt/localizador-envios) do site português da TIPSA ou cola-o na caixa acima. Quem te dá o número é o remetente, normalmente a loja onde compraste. Se não o tens, pede-o à loja ou à delegação da TIPSA que entrega na tua zona, que encontras escrevendo a tua morada no [localizador de agências](https://www.tip-sa.com/pt/agencias-de-transporte). É também com essa delegação que combinas a entrega se o seguimento disser `Ausente`, ou o levantamento se preferires ir lá buscá-la; se a encomenda se perder ou chegar danificada, avisa a loja.
 
 ## Número de rastreio TIPSA: 22 algarismos
 
@@ -24,7 +24,7 @@ O localizador pede o «número de envio composto por 22 dígitos». O número ju
 | `010000 010000 0000000000` | O mesmo número com espaços. O Peek lê-o assim; no localizador da TIPSA, cujo campo só leva 22 carateres, escreve-o sem espaços. |
 | `0000000000` | Só o albarán, com 10 algarismos. O localizador pede os 22. |
 
-Não tens número? A FAQ da TIPSA manda pedi-lo ao remetente ou à delegação que faz a entrega, que encontras escrevendo a tua morada no [localizador de agências](https://www.tip-sa.com/pt/agencias-de-transporte). Também podes ligar para a TIPSA ou escrever para info@tip-sa.com. Mais sítios onde procurar em [onde encontrar o número de seguimento](guide:find-tracking-number).
+Sem número, também podes ligar para a TIPSA ou escrever para info@tip-sa.com. O localizador de envios pesquisa ainda pela «Referência» do envio, mas pede então um «Identificador» (agência + cliente), que terias de pedir ao remetente. Mais sítios onde procurar em [onde encontrar o número de seguimento](guide:find-tracking-number).
 
 Os 22 algarismos também têm a forma dos números da Austrian Post, da USPS e da Estafeta, e um número em que os dois códigos de agência começam por `00` tem a forma de um número da [CTT Express](carrier:ctt-express), outra transportadora espanhola. Confirma no email da loja qual é a transportadora.
 
@@ -43,18 +43,19 @@ O Peek lê o seguimento da TIPSA em espanhol e mostra os estados tal como a TIPS
 | `REPARTO` | Saiu para entrega. |
 | `Ausente` | O estafeta não te encontrou e não conseguiu entregar. |
 | `Faltan Datos / Datos incorrectos` | Faltam dados na morada ou estão errados. Fica anotado na volta de entrega, antes de nova tentativa. |
+| `Cerrado` | Quando foram entregá-la, encontraram a morada fechada. Fica anotado na volta de entrega, depois de `REPARTO`. |
 | `Solicitada en otra dirección` | Foi pedida a entrega noutra morada e a encomenda é reencaminhada. |
 | `DISPONIBLE` ou `Pendiente de recoger en Tipsa` | Depois de uma entrega falhada, ficou guardada na agência à tua espera. |
 | `Devolver a Origen` | Vai voltar ao remetente. |
 | `ENTREGADO` | Entregue. |
 
-As 13 plataformas de intercâmbio da TIPSA ficam todas em Espanha, por isso o histórico de uma encomenda para Portugal pode mostrar nomes de cidades espanholas. Depois de um `Ausente` ou de `Faltan Datos / Datos incorrectos`, fala com a agência indicada em `LECTURA EN AGENCIA DESTINO`.
+As 13 plataformas de intercâmbio da TIPSA ficam todas em Espanha, por isso o histórico de uma encomenda para Portugal pode mostrar nomes de cidades espanholas. Depois de um `Ausente`, de um `Cerrado` ou de `Faltan Datos / Datos incorrectos`, fala com a agência indicada em `LECTURA EN AGENCIA DESTINO`.
 
 ## Entrega TIPSA em Portugal: agência, pontos e entrega falhada
 
 A TIPSA diz ter estrutura própria de distribuição em toda a Península Ibérica, Portugal incluído. As suas [agências em Portugal](https://www.tip-sa.com/pt/agencias-de-transporte/portugal) vão do Porto, Braga e Vila Real a Coimbra, Viseu, Leiria, Lisboa (Prior Velho), Setúbal, Évora e Faro.
 
-**Entrega falhada.** As páginas portuguesas da TIPSA não dizem quantas tentativas faz em Portugal. Depois de um `Ausente`, a encomenda pode ficar na agência, com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`; para a ires buscar ou saberes o que vem a seguir, fala com a delegação que faz a entrega. Vê também [entrega falhada](guide:missed-delivery).
+**Entrega falhada.** As páginas portuguesas da TIPSA não dizem quantas tentativas faz em Portugal; a página espanhola 360º eCommerce diz que a tarifa paga pela loja inclui duas, ou três com o serviço Premium para lojas online. Depois de um `Ausente`, a encomenda pode ficar na agência, com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`; para a ires buscar ou saberes o que vem a seguir, fala com a delegação que faz a entrega. Vê também [entrega falhada](guide:missed-delivery).
 
 **Levantar na delegação.** Se não fores estar em casa no dia previsto ou preferires ir buscá-la, a FAQ da TIPSA diz que a encomenda fica 15 dias na delegação mais próxima do teu código postal, a contar da saída do envio e não da chegada; depois, volta ao remetente. Leva o teu documento de identificação ou o passaporte; quem for por ti leva uma fotocópia do teu. Com o serviço RECOLHA NA AGÊNCIA, a loja manda a encomenda diretamente para uma delegação, onde a levanta quem ela autorizar.
 
@@ -66,7 +67,7 @@ A TIPSA diz ter estrutura própria de distribuição em toda a Península Ibéri
 
 ## Avisos da TIPSA e mensagens falsas
 
-Se a loja contratar o PRÉ-ALERTA, a TIPSA avisa-te por SMS ou email do dia em que a encomenda chega ao destino e de como vai ser a entrega.
+Se a loja contratar o PRÉ-ALERTA, a TIPSA avisa-te por SMS ou email do dia em que a encomenda chega ao destino e de como vai ser a entrega. Com o serviço Premium, podes ainda escolher a faixa horária da entrega, com uma hora de margem; a TIPSA não explica onde se escolhe, por isso pergunta à delegação que faz a entrega.
 
 > A TIPSA não publica avisos sobre SMS ou emails falsos. Os únicos pagamentos que descreve para quem recebe são o CONTRA REEMBOLSO e os PORTES A PAGAR, cobrados no destino, contra a entrega. Uma mensagem «da TIPSA» que te manda pagar portes ou uma nova entrega através de uma ligação não corresponde a nada disto: não pagues e procura o número no localizador do tip-sa.com. Mais em [SMS falsos de entregas](guide:delivery-scam-texts).
 
@@ -134,7 +135,7 @@ Não. O localizador da TIPSA pede o número de 22 algarismos, e os 10 do fim sã
 Diz que sim, com pontos e cacifos, mas não diz onde ficam nem quanto tempo lá espera a encomenda. Na delegação mais próxima do teu código postal, a encomenda fica 15 dias a contar da saída do envio.
 
 :::sources
-- [TIPSA: Rastrear o meu envio](https://www.tip-sa.com/pt/localizador-envios) – 22 algarismos, campo de 22 carateres
+- [TIPSA: Rastrear o meu envio](https://www.tip-sa.com/pt/localizador-envios) – 22 algarismos, campo de 22 carateres, pesquisa pela referência com identificador (agência + cliente)
 - [TIPSA: Perguntas Frequentes](https://www.tip-sa.com/pt/recursos/faqs) – número em falta, 15 dias, documentos, morada, perda, telefones, DPDgroup
 - [TIPSA: Contacto](https://www.tip-sa.com/pt/contacto) – telefones, formulário
 - [TIPSA: Página inicial](https://www.tip-sa.com/pt) – mais de 300 agências
@@ -142,6 +143,8 @@ Diz que sim, com pontos e cacifos, mas não diz onde ficam nem quanto tempo lá 
 - [TIPSA: Portugal](https://www.tip-sa.com/pt/servicos/portugal) – prazos e serviços em Portugal
 - [TIPSA: Pontos de recolhas](https://www.tip-sa.com/pt/servicos/pontos-recolhas) – rede de pontos em Espanha
 - [TIPSA: Pré-alerta](https://www.tip-sa.com/pt/servicos/pre-alerta) – aviso por SMS e email
+- [TIPSA: FAQs eTIPSA (em espanhol)](https://www.tip-sa.com/es/faqs-etipsa) – faixa horária com o eTIPSA Premium
+- [TIPSA: 360º eCommerce (em espanhol)](https://www.tip-sa.com/es/envios-de-paquetes/360o-ecommerce) – duas tentativas, três com o Premium
 - [TIPSA: Contra reembolso](https://www.tip-sa.com/pt/servicos/reembolso) – até 1000 euros por envio
 - [TIPSA: Portes a pagar](https://www.tip-sa.com/pt/servicos/portes-pagar) – transporte cobrado no destino
 - [TIPSA: Recolha na agência](https://www.tip-sa.com/pt/servicos/recolha-na-agencia) – envio para uma delegação
@@ -157,5 +160,5 @@ Diz que sim, com pontos e cacifos, mas não diz onde ficam nem quanto tempo lá 
 - [Portal das Finanças: Mercadorias eCommerce – Alterações para 1 de julho de 2026](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição, IVA
 - [Comissão Europeia: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de 2 € desde novembro
 - [Comissão Europeia: Guidance on the EUR 3 customs duty and the Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa de 2 € por adição, como os 3 €, a qualquer valor
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, estado `Cerrado`
 :::

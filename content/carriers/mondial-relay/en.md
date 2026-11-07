@@ -71,7 +71,7 @@ As listed on 10 October 2026.
 
 ## Tracking a Mondial Relay parcel with Peek
 
-[Peek](/) recognises the 26-digit barcode at once. With 8, 10, 12 or 14 digits it may not name Mondial Relay on its own, since other carriers share those lengths and Mondial Relay can't be asked whether it knows a number: press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr, .be, .nl or .com (links from its Spanish and Portuguese sites aren't read).
+[Peek](/) recognises the 26-digit barcode at once. With 8, 10, 12 or 14 digits it may not name Mondial Relay on its own: other carriers share those lengths, and Peek asks Mondial Relay whether it knows a number only for InPost Spain's `FV` numbers (FV and 8 digits). If no carrier or tracking service knows an 8-digit number, Peek offers Mondial Relay itself, with a field for the delivery postcode, when you're in France, Belgium, Luxembourg, Spain, Portugal or the Netherlands. Otherwise press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr, .be, .nl or .com (links from its Spanish and Portuguese sites aren't read).
 
 An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, but a Portuguese one needs all seven digits (1234-567, hyphen optional). A wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 
@@ -127,5 +127,5 @@ Yes: Mondial Relay SASU is a French company based in Villeneuve-d'Ascq. Fake mes
 - [InPost: Contacto](https://www.inpost.es/contacta-con-nosotros) – Spanish line, 5 days
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – Portuguese line, 5 days
 - [InPost: Como recolher](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – 5 or 8 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, 14-digit numbers, labels and stages
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, 14-digit numbers, labels and stages, Mondial Relay asked only about `FV` numbers
 :::

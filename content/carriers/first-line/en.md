@@ -3,7 +3,7 @@ title: FIRST LINE tracking: 1ST numbers, statuses and delivery
 description: Track a FIRST LINE (壹号专线) parcel from China: what a 1ST number looks like, what each status means, who delivers it in the US and who to ask when it stalls.
 slug: first-line-tracking
 published: 2026-10-21
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours in the tracking box on firstline56.com's home page, which opens FIRST LINE's 追踪单号 (track a number) page, or in the box above. The shop gives the number with your order's shipping details.
@@ -43,7 +43,7 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Customs broker picked it up` | The customs broker collected it after the release, to pass it on for delivery. It is no longer held at customs. |
 | `The package has been transferred to the service provider` | Handed over to the delivering company, after the broker. |
 
-In the US, the delivering company's scans follow in its own words, up to delivery: USPS's or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. FIRST LINE's tracker never names the company, so that wording is the clue.
+In the US, the delivering company's scans follow in its own words, up to delivery: USPS's, [GOFO](carrier:gofo)'s or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. GOFO's delivery round reads `Out for Delivery`, which Peek shows as "Out for delivery". FIRST LINE's tracker never names the company, so that wording is the clue.
 
 Each time is the local clock of the place that scanned the parcel, Shenzhen's or Hong Kong's and then the US one's, without a time zone, so a US scan can show an earlier hour than the last one in China. A number the tracker doesn't know gets `未找到此单号信息` ("no information found for this number").
 
@@ -82,7 +82,7 @@ These channels serve the sellers, FIRST LINE's customers; it publishes no help f
 
 [Peek](/) names FIRST LINE at once for a 1ST number with 11 digits, in capitals or not, with or without spaces. Peek reads no FIRST LINE links, so paste the number itself.
 
-Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan: while that scan is the newest, Peek shows that day's window when the scan gives one; a scan with only a latest time adds no estimate, since "Out for delivery" already means today. It doesn't switch to USPS or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
+Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS, GOFO or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan: while that scan is the newest, Peek shows that day's window when the scan gives one; a scan with only a latest time adds no estimate, since "Out for delivery" already means today. It doesn't switch to USPS, GOFO or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
 
 Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (when that day's window is given, from half an hour before it opens), while FIRST LINE's own tracker answers; through tracking services, every 15 minutes. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact FIRST LINE or the seller for you.
 
@@ -94,7 +94,7 @@ It is a waybill number of the 1ST group's forwarders, FIRST LINE among them: 1ST
 
 ### Who delivers FIRST LINE parcels in the US?
 
-A US carrier does: FIRST LINE's pages name USPS, DHL eCommerce and FedEx, and the histories seen were delivered by USPS or UniUni. FIRST LINE's tracker relays their scans without naming them.
+A US carrier does: FIRST LINE's pages name USPS, DHL eCommerce and FedEx, and the histories seen were delivered by USPS, GOFO or UniUni. FIRST LINE's tracker relays their scans without naming them.
 
 ### Why can't FIRST LINE's tracker find my 1ST number?
 

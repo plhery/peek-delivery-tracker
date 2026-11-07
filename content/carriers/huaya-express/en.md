@@ -3,7 +3,7 @@ title: Huaya Express tracking: HYYT numbers and where they stop
 description: Huaya Express (华亚运通) ships online orders from Guangzhou. How to read an HYYT…GZ number and its English scans, and who to ask after the hand-over.
 slug: huaya-express-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 Huaya Express (华亚运通) is the brand on the logo of 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), a forwarder in Guangzhou, China, that carries parcels abroad for online shops. A Huaya waybill opens with HYYT and closes with GZ. Put it in the box above, or follow the 物流跟踪 (logistics tracking) link in the top menu of hyytgz.com to Huaya's own tracker. Huaya's history ends when it hands the parcel to a carrier in your country, or just after, and it never says which carrier that is, except on a line through DHL in Germany: there it copies DHL's scans too.
@@ -39,7 +39,7 @@ Huaya's tracker has a Chinese and an English version. The scan lines Peek knows 
 | `Package in transit to destination country` | Travelling to your country. |
 | `Package arrived at destination country` | It has reached your country. |
 | `Customs import clearance completed, awaiting pickup by local carrier` | Your country's customs have let it through; the local carrier still has to collect it. |
-| `It has been handed over to the service provider.` | The local carrier has collected it. Huaya names neither that carrier nor its number, and the lines Peek knows after this one are a US carrier's scans: `Arrived at Origin Hub`, at its first hub, by Chicago's O'Hare airport, then `Departed Origin Hub`, `Arrived at Destination Hub` (its hub nearest you), `Departed Destination Hub` and `Arrived At Warehouse`, its warehouse before the delivery round. |
+| `It has been handed over to the service provider.` | The local carrier has collected it. Huaya names neither that carrier nor its number, and the lines Peek knows after this one are a US carrier's scans: `Arrived at Origin Hub`, at its first hub, by Chicago's O'Hare airport, then `Departed Origin Hub`, `Arrived at Destination Hub` (its hub nearest you), `Departed Destination Hub`, `Arrived At Warehouse`, its warehouse before the delivery round, and `Out for Delivery`, the round itself ("Out for delivery" in Peek). |
 
 Huaya's times come without a time zone: they're Beijing time, except on the DHL scans it copies and the US carrier's scans at a US town, which keep the time of the place where the parcel was scanned. If the tracker has nothing for a number, its 参考号 (reference) column repeats the number and the rest of the row stays blank.
 

@@ -120,7 +120,7 @@ Spesso sì, come ultima strada:
 
 ### Peek può trovare il mio pacco?
 
-No. [Peek](/) mostra solo quello che pubblica il corriere e non può contattarlo né fare reclamo per te. Però, quando il pacco è in consegna, lo ricontrolla fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking del corriere stesso) e può mandarti una notifica: così arrivi alla porta poco dopo la scansione «consegnato». Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane e PostNL). Cosa non può vedere nessun tracker lo spiega [la guida al tracking universale](guide:universal-tracker).
+No. [Peek](/) mostra solo quello che pubblica il corriere e non può contattarlo né fare reclamo per te. Però, quando il pacco è in consegna, lo ricontrolla fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking del corriere stesso) e può mandarti una notifica: così arrivi alla porta poco dopo la scansione «consegnato». Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL e USPS; ogni 10 minuti GOFO). Cosa non può vedere nessun tracker lo spiega [la guida al tracking universale](guide:universal-tracker).
 
 ### Pacco rubato: serve la denuncia?
 

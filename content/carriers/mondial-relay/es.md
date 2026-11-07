@@ -79,7 +79,7 @@ Datos consultados el 10 de octubre de 2026:
 
 ## Seguir un paquete de Mondial Relay con Peek
 
-[Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10, 12 o 14 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y no puede preguntar a Mondial Relay si conoce un número: pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr, .be, .nl o .com. Los enlaces de mondialrelay.es o inpost.es no se leen.
+[Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10, 12 o 14 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y solo pregunta a Mondial Relay si conoce un número cuando es un número FV de InPost España (FV y 8 cifras). Si ninguna empresa ni servicio de seguimiento conoce un número de 8 cifras, el propio Peek te propone Mondial Relay, con un campo para el código postal de entrega, si estás en España, Portugal, Francia, Bélgica, Luxemburgo o los Países Bajos. Si no, pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr, .be, .nl o .com. Los enlaces de mondialrelay.es o inpost.es no se leen.
 
 Un número de 8 cifras pide además el «Código postal de entrega»: escribe el número solo y luego el código postal en su campo (el de un enlace no se usa). Admite códigos de cualquier país, pero solo se han probado los franceses y los portugueses, y uno portugués necesita sus siete cifras (1234-567, con o sin guion). Uno equivocado hace que el paquete no aparezca. Se envía a Mondial Relay y, si hace falta, a servicios de seguimiento. Con un número de 8 cifras de InPost España, Peek propone Mondial Relay, no InPost, y lo busca en Mondial Relay, no en inpost.es: no se ha comprobado que así encuentre esos envíos, así que síguelos también en inpost.es. Los números FV (FV y 8 cifras) sí los lee en inpost.es, con sus textos en español: pégalo tal cual y verás «Mondial Relay tiene este paquete.»; si inpost.es pide el código postal, Peek no puede leerlo.
 
@@ -114,5 +114,5 @@ Es el 900 900 137 de InPost, de lunes a viernes de 8:30 a 20:00 y los sábados d
 - [Mondial Relay Belgique: Suivre l'acheminement](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – numéro d'expédition de 8 cifras
 - [Mondial Relay Belgique: Mentions légales](https://www.mondialrelay.be/fr-be/mentions-legales/) – Mondial Relay S.A.S.U., RCS Lille Métropole, sede en Villeneuve-d'Ascq
 - [Mondial Relay Belgique: Qui sommes-nous](https://www.mondialrelay.be/fr-be/qui-sommes-nous/) – Points Relais, Lockers, domicilio
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek, estados, código de barras de 26 cifras y números de 14
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek, estados, código de barras de 26 cifras y números de 14, a Mondial Relay solo se le pregunta por los números FV
 :::

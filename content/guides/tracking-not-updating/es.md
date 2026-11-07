@@ -101,7 +101,7 @@ Una plataforma puede devolverte el dinero, pero solo dentro de su plazo:
 
 | Plataforma | Puedes reclamar | Hasta |
 | --- | --- | --- |
-| Vinted | Etiqueta generada en Vinted: tras esperar hasta 25 días laborables desde `Enviado`. Envío personalizado: a los 21 días laborables, cuando el pedido se marca como `Entregado` | 2 días naturales después del aviso de Vinted o de que el pedido se marque como entregado; 14 días si el vendedor es Pro |
+| Vinted | Etiqueta generada en Vinted: tras esperar hasta 25 días laborables desde `Enviado` | 2 días naturales después del aviso de Vinted o de que el pedido se marque como entregado; 14 días si el vendedor es Pro |
 | AliExpress | Por lo general, desde el día 11 después de que el vendedor lo envíe. Si el seguimiento se mueve con normalidad, solo cuando acabe el plazo de entrega | 15 días después de que acabe el plazo de entrega o de que confirmes la recepción |
 
 En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores externos: si tienes problemas con el plazo de entrega y no consigues resolverlos con el vendedor, puedes reclamar directamente a Amazon.
@@ -145,9 +145,9 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – mal tiempo, atascos, accidentes, antes de Navidad
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reembolso de Amazon si no se resuelve con el vendedor
-- [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 7, 25, 21 y 2 días
+- [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 7 días laborables, 25 con etiqueta generada en Vinted
 - [Vinted: Términos y condiciones de Vinted Pro](https://www.vinted.es/pro-terms-and-conditions) – 14 días naturales con vendedores Pro, «Tengo un problema», después se completa solo
-- [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – 48 horas
+- [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – 48 horas, «Tengo un problema» en 2 días desde que el pedido se marca como entregado
 - [Vinted: La información de seguimiento no se actualiza](https://www.vinted.es/help/1368) – días laborables sin festivos
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – 2 días naturales tras el aviso
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=es) – día 11 y 15 días

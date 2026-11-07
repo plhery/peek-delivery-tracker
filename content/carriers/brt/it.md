@@ -3,7 +3,7 @@ title: BRT tracking: dov'è il pacco e cosa fare se non arriva
 description: Tracking BRT: dove trovi il BRTcode, cosa vogliono dire gli stati, giacenza, BRT-fermopoint e locker, numero verde e cosa fare se il pacco non arriva.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-11-05
+updated: 2026-11-07
 ---
 
 BRT è un corriere espresso italiano del gruppo Geopost, come DPD. Per seguire il pacco apri il link nell'SMS o nell'e-mail di BRT, cerca il numero in «Dov'è la mia spedizione?» su [brt.it](https://www.brt.it/it/) oppure incollalo nel box qui sopra. Il numero, il BRTcode, te lo comunica BRT quando prende in carico la spedizione, se il mittente le ha dato il tuo cellulare o la tua e-mail.
@@ -97,6 +97,8 @@ Il numero di Bologna (051) sui documenti BRT è la sede operativa, non il serviz
 
 Se usi Peek in italiano, chiede a BRT la versione italiana e ti mostra le sue diciture, ma per una consegna (`CONSEGNATA` o `RITIRATA AL BRT-fermopoint`) scrive solo «Consegnata». Se trova una dicitura italiana che non conosce, come quelle dei locker, richiede tutto in inglese; se usi Peek in un'altra lingua, le diciture sono sempre quelle inglesi. Con queste, per le tre di consegna (`DELIVERED`, `COLLECTED AT BRT-fermopoint` e `COLLECTED AT BRT LOCKER`) Peek scrive solo «Delivered», tradotto nella lingua in cui lo usi («Consegnato» in italiano). Mostra anche il luogo di ogni scansione su una mappa e il peso, e può mandarti notifiche quando lo stato cambia. Lascia fuori mittente, destinatario, riferimento del mittente, numero di colli e volume; non mostra i dati del punto di ritiro. BRT non dà un giorno di consegna previsto: per un numero di 14 cifre Peek può mostrare la previsione del tracking di DPD, che riconosce anche i numeri BRT, o quella di Chronopost se il pacco è arrivato in Italia con Chronopost. La previsione scompare quando il giorno previsto è passato, o prima se BRT consegna il pacco o lo rimanda al mittente, lo lascia in un punto di ritiro, tenta invano la consegna o segnala un problema. BRT dà a ogni scansione data e ora senza fuso orario: Peek le legge sull'ora italiana, o sull'ora locale di un deposito all'estero, e mostra la cronologia di BRT nel suo ordine.
 
+Peek controlla il pacco ogni 10 minuti, ogni 2 quando è in consegna (ogni 5 se deve aprire il tracking di DPD in un browser). I controlli più fitti valgono solo il giorno in cui il pacco va in consegna, dalle 6.00 ora locale (se la previsione di DPD o di Chronopost indica una fascia oraria, da mezz'ora prima che inizi), e finché risponde il tracking di BRT o di DPD; quando rispondono i servizi di tracciamento, ogni 15 minuti. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora.
+
 ## Domande sul tracking BRT
 
 ### BRT consegna anche il sabato?
@@ -140,5 +142,6 @@ Chiedi prima a vicini e familiari, poi al negozio di controllare la lettera di v
 - [BRT: Condizioni generali e particolari](https://www.brt.it/wp-content/uploads/sites/275/2026/01/CONDIZIONI-GENERALI-CONTRATTO-TARIFFARIO_IT_CON-LOGO_REV-31.pdf) – giorni convenuti, contrassegno, weekend
 - [BRT: Alert Phishing, SMS ed e-mail](https://www.brt.it/it/news/2026/04/16/alert-phishing-sms-email/) – messaggi falsi
 - [DPD: Home](https://www.dpd.com/en/) – BRT e DPD in Geopost
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, fasce orarie di DPD e di Chronopost
+- [Peek: Routing (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – ogni quanto controlla Peek: 10 minuti, 2 o 5 in consegna, da mezz'ora prima della fascia oraria, 15 con i servizi di tracciamento, una volta all'ora se non ci sono novità
 :::

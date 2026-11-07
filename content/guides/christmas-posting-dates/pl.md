@@ -91,7 +91,7 @@ Dni wolne InPostu, DHL eCommerce i ORLEN Paczki sprawdzisz na ich stronach.
 - Paczka stoi po świętach? | Przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 :::
 
-Czekasz na prezent? Wklej jego numer do [Peeka](/) i ustaw powiadomienia na „Tylko doręczenie”: gdy paczka wyjedzie do doręczenia, Peek sprawdza ją nawet co 2 minuty (tego dnia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika), ale nie sprawi, że dotrze szybciej. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane i PostNL).
+Czekasz na prezent? Wklej jego numer do [Peeka](/) i ustaw powiadomienia na „Tylko doręczenie”: gdy paczka wyjedzie do doręczenia, Peek sprawdza ją nawet co 2 minuty (tego dnia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika), ale nie sprawi, że dotrze szybciej. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane, PostNL i USPS; co 10 minut GOFO).
 
 :::sources
 - [Poczta Polska: Uwaga, ważne terminy! Sprawdź, kiedy wysłać prezenty, by dotarły pod choinkę](https://www.poczta-polska.pl/news/uwaga-wazne-terminy-sprawdz-kiedy-wyslac-prezenty-by-dotarly-pod-choinke/) – terminy z 2025 r.: 21 i 22 grudnia

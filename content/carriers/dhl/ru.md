@@ -41,7 +41,7 @@ DHL Paket — посылочная служба DHL Group в Германии, �
 | `The shipment could not be delivered` | Вручить посылку не удалось. | «Попытка вручения» |
 | `There will be a 2nd delivery attempt.` | Обычно это значит, что первая попытка вручения не удалась. Следующая — не раньше следующего рабочего дня. | «Попытка вручения» |
 | `The shipment is ready for collection` | Посылка ждёт вас в отделении, Paketshop или Packstation. | «Готова к выдаче» |
-| `The shipment is returning to sender` | Посылка едет обратно к отправителю, но ещё не вернулась. | «Требует внимания» |
+| `The shipment is returning to sender` | Посылка едет обратно к отправителю, но ещё не вернулась. | «Возвращена отправителю» |
 
 В немецкой версии dhl.de и в Peek на немецком языке те же отметки написаны по-немецки, например `Die Sendung wurde in das Zustellfahrzeug geladen.` (погружена в машину курьера), `Die Sendung liegt zur Abholung bereit.` (готова к выдаче) и `Die Sendung wurde erfolgreich zugestellt.` (доставлена).
 

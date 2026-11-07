@@ -92,7 +92,7 @@ Chaque silence a sa raison :
 - **Aucun scan au bout de 5 jours ouvrés.** Le vendeur n'a peut-être pas envoyé le colis. Sauf confirmation d'envoi ou prolongation acceptée, Vinted annule la commande et te rembourse.
 - **Bloqué en route.** Si le colis est en retard, Vinted te prévient et affiche une nouvelle date dans la commande. Si le suivi semble bloqué, sur Vinted comme chez le transporteur, Vinted demande d'attendre 25 jours ouvrés à partir du jour où la commande a été indiquée comme expédiée.
 - **Retiré, mais pas « livré ».** Le suivi ne se met pas toujours à jour tout de suite : sélectionne « Suivre le colis », puis « Bien reçu ».
-- **Envoi hors Vinted.** Un colis envoyé sans le bordereau de Vinted n'est pas suivi sur Vinted : le vendeur doit te donner le numéro.
+- **Envoi hors Vinted.** Un colis envoyé sans le bordereau de Vinted n'est pas suivi sur Vinted : le suivi n'existe que pour les articles achetés avec le bouton « Acheter » et envoyés selon les instructions de l'app. Pour de l'aide, va sur la page d'accueil du Centre d'aide et sélectionne ta commande.
 
 Plus d'explications dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
@@ -139,7 +139,7 @@ Oui : copie le numéro depuis « Suivre le colis » et colle-le dans [Peek](/). 
 - [Vinted : Envoyer un article](https://www.vinted.fr/help/482) – 5 jours ouvrés, rien ne change après la vente
 - [Vinted : Délais de livraison](https://www.vinted.fr/help/101) – 2 à 5 jours ouvrés, vérification jusqu'à 10, prolongation de 3 ou 5 jours
 - [Vinted : Tu ne peux pas envoyer le colis à temps ?](https://www.vinted.fr/help/740) – annulée le jour ouvré suivant, confirmation d'envoi
-- [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – Suivre le colis, 48 h, Bien reçu, 25 jours ouvrés
+- [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – Suivre le colis, 48 h, Bien reçu, 25 jours ouvrés, suivi seulement avec le bouton « Acheter » et les instructions de l'app, Centre d'aide
 - [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/657) – nouveau délai, 25 jours ouvrés
 - [Vinted : Récupérer un colis](https://www.vinted.fr/help/1601) – code de retrait, durée de stockage, remboursement, 2 jours
 - [Vinted : Le colis a été retourné à l'expéditeur·trice](https://www.vinted.fr/help/728) – remboursement après retour

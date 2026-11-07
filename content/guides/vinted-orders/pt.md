@@ -11,7 +11,7 @@ Na Vinted, é quem compra que escolhe a transportadora e paga a etiqueta; quem v
 
 ## Como funcionam os envios na Vinted?
 
-Cada pedido feito com o botão «Comprar agora» e envio integrado traz uma etiqueta que a Vinted gera para a transportadora escolhida por quem compra. Quem vende encontra-a na conversa e no e-mail, com as instruções: se a etiqueta é digital ou para imprimir, e onde entregar a encomenda. A Vinted avisa que essa etiqueta «deve ser utilizada»: com outra etiqueta ou a opção de envio errada, o pedido é cancelado automaticamente. Depois da venda, a transportadora, o tipo de etiqueta, a morada e o tamanho da encomenda já não mudam. A única forma é cancelar o pedido e repeti-lo.
+Cada pedido feito com o botão «Comprar» e envio integrado traz uma etiqueta que a Vinted gera para a transportadora escolhida por quem compra. Quem vende encontra-a na conversa e no e-mail, com as instruções: se a etiqueta é digital ou para imprimir, e onde entregar a encomenda. A Vinted avisa que essa etiqueta «deve ser utilizada»: com outra etiqueta ou a opção de envio errada, o pedido é cancelado automaticamente. Depois da venda, a transportadora, o tipo de etiqueta, a morada e o tamanho da encomenda já não mudam. A única forma é cancelar o pedido e repeti-lo.
 
 :::journey
 - shop | Quem compra | Paga, escolhe a transportadora e a morada ou um ponto de recolha
@@ -91,7 +91,7 @@ Cada silêncio tem a sua razão:
 - **Nenhuma leitura ao fim de 5 dias úteis.** Quem vende pode não ter enviado. Se não confirmou o envio nem aceitaste prolongar o prazo, a Vinted cancela o pedido e reembolsa-te.
 - **Parada pelo caminho.** Se a encomenda se atrasar, a Vinted avisa-te e dá-te uma nova data de entrega, que aparece no pedido. Se parecer bloqueada na Vinted e no site da transportadora, a Vinted pede que esperes 25 dias úteis desde que o pedido foi marcado como enviado.
 - **Levantada, mas sem `Entregue`.** O sistema da Vinted nem sempre atualiza logo: pressiona «Acompanhar encomenda» e depois «Marcar como recebido».
-- **Envio personalizado.** Uma encomenda enviada sem a etiqueta da Vinted não se acompanha na Vinted. Quem vende deve mandar-te o número por mensagem.
+- **Envio personalizado.** É uma opção antiga, que já não está disponível para novos anúncios. Uma encomenda enviada sem a etiqueta da Vinted não se acompanha na Vinted: só há acompanhamento para artigos comprados com o botão «Comprar» e enviados segundo as instruções da app. Para pedires ajuda, vai à página inicial do Centro de Ajuda e seleciona o teu pedido.
 
 Mais sobre estes silêncios: [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
@@ -139,7 +139,8 @@ Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Um núme
 - [Vinted: Enviar um artigo](https://www.vinted.pt/help/482) – etiqueta na conversa e no e-mail, nada muda depois da venda
 - [Vinted: Tempo de entrega](https://www.vinted.pt/help/101) – 2 a 5 dias úteis, verificação até 10, prolongamento de 3 ou 5 dias
 - [Vinted: Não consigo enviar o artigo a tempo](https://www.vinted.pt/help/740) – cancelado no dia útil seguinte, «Já enviei o pedido»
-- [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – 48 horas, Marcar como recebido, Centro de Ajuda, envio personalizado
+- [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – 48 horas, Marcar como recebido, Centro de Ajuda, botão «Comprar» e instruções da app
+- [Vinted: Envio personalizado na Vinted](https://www.vinted.pt/help/443) – opção antiga, já não disponível para novos anúncios
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/657) – nova data de entrega, 25 dias úteis
 - [Vinted: Levantar uma encomenda](https://www.vinted.pt/help/1601) – código de levantamento, prazos, reembolso, 2 dias
 - [Vinted: Recolher o teu pedido](https://www.vinted.pt/help/738) – 2 dias consecutivos, sem código, outro ponto, cacifo vazio

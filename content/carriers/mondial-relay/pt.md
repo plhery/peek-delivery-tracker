@@ -77,7 +77,7 @@ Tal como os sites os indicavam a 10 de outubro de 2026:
 
 ## Seguir encomenda Mondial Relay com o Peek
 
-O [Peek](/) reconhece logo o código de barras de 26 algarismos, mesmo com espaços. Com 8, 10, 12 ou 14 algarismos, pode não dizer sozinho que é da Mondial Relay: outras transportadoras usam esses comprimentos, e o Peek não consegue perguntar à Mondial Relay se conhece um número. Carrega então em «Alterar» e escolhe Mondial Relay, ou cola uma ligação de seguimento do mondialrelay.fr, .be, .nl ou .com; as dos sites .es e .pt não são lidas.
+O [Peek](/) reconhece logo o código de barras de 26 algarismos, mesmo com espaços. Com 8, 10, 12 ou 14 algarismos, pode não dizer sozinho que é da Mondial Relay: outras transportadoras usam esses comprimentos, e o Peek só pergunta à Mondial Relay se conhece um número quando é um número FV da InPost Espanha (FV e 8 algarismos). Se nenhuma transportadora nem serviço de seguimento conhecer um número de 8 algarismos, o próprio Peek sugere a Mondial Relay, com um campo para o código postal de entrega, se estiveres em Portugal, Espanha, França, Bélgica, Luxemburgo ou nos Países Baixos. Caso contrário, carrega em «Alterar» e escolhe Mondial Relay, ou cola uma ligação de seguimento do mondialrelay.fr, .be, .nl ou .com; as dos sites .es e .pt não são lidas.
 
 Um número de 8 algarismos pede também o «Código postal de entrega»: escreve só o número e depois o código postal no campo próprio. Só foram testados códigos postais franceses e portugueses, e um português tem de levar os sete algarismos (1234-567, com ou sem hífen). Um código errado faz a encomenda parecer não encontrada. O código vai para a Mondial Relay e, quando é preciso, para serviços de seguimento. Um número de 8 algarismos da InPost em Portugal aparece com a Mondial Relay como hipótese, nunca com a InPost, e não está confirmado que o seguimento da Mondial Relay o encontre: nesse caso, segue-o no inpost.pt.
 
@@ -114,5 +114,5 @@ Em Portugal, pelo formulário da InPost na página Fala connosco; danos visívei
 - [Mondial Relay Belgique: Nous contacter](https://www.mondialrelay.be/fr-be/nous-contacter/) – telefone, preço de uma chamada local, horários
 - [Mondial Relay Belgique: Retard](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – customerservice@mondialrelay.be
 - [Mondial Relay Belgique: Mentions légales](https://www.mondialrelay.be/fr-be/mentions-legales/) – Mondial Relay S.A.S.U., RCS Lille Métropole, sede em Villeneuve-d'Ascq
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, números de 14 algarismos, estados e etapas
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, números de 14 algarismos, estados e etapas, a Mondial Relay só é consultada sobre os números FV
 :::

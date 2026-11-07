@@ -91,7 +91,7 @@ Ogni silenzio ha il suo motivo:
 - **Nessuna scansione dopo 5 giorni lavorativi.** Forse chi vende non ha spedito. Senza conferma di invio o proroga accettata, Vinted annulla l'ordine e ti rimborsa.
 - **Fermo per strada.** La maggior parte dei pacchi arriva in 5 giorni lavorativi (7 dall'estero). Se il pacco è in ritardo, Vinted ti avvisa e indica una nuova data nella conversazione. Se il tracciamento sembra bloccato, su Vinted e sul sito del corriere, Vinted chiede di attendere fino a 25 giorni lavorativi da quando l'ordine è segnato come «spedito».
 - **Ritirato, ma non «Consegnato».** Il sistema non si aggiorna sempre subito: premi «Traccia il pacco», poi «Segna come ricevuto».
-- **Spedizione personalizzata.** Il tracciamento su Vinted vale solo per gli acquisti con «Acquista» spediti seguendo le istruzioni dell'app. Altrimenti chiedi il codice a chi vende.
+- **Spedizione personalizzata.** È una vecchia opzione, non più disponibile per i nuovi annunci. Il tracciamento su Vinted vale solo per gli acquisti con «Acquista subito» spediti seguendo le istruzioni dell'app; per assistenza, vai alla home del Centro assistenza e seleziona l'ordine.
 
 Più dettagli in [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
@@ -137,7 +137,8 @@ Sì: copia il codice da «Traccia il pacco» e incollalo in [Peek](/). Un codice
 - [Vinted: Tempi di consegna](https://www.vinted.it/help/101) – 2-5 giorni lavorativi, verifica fino a 10, proroga di 3 o 5 giorni
 - [Vinted: Non riesco a spedire l'articolo in tempo](https://www.vinted.it/help/740) – «Estendi il termine della spedizione», «Confermo di aver inviato l'ordine», annullamento
 - [Vinted: Etichetta di spedizione non ricevuta o non funzionante](https://www.vinted.it/help/154) – altro punto di consegna, indirizzo o Paese diverso, annullare
-- [Vinted: Tracciare un pacco](https://www.vinted.it/help/100) – «Traccia il pacco», 48 ore, 25 giorni lavorativi, «Segna come ricevuto», solo con «Acquista»
+- [Vinted: Tracciare un pacco](https://www.vinted.it/help/100) – «Traccia il pacco», 48 ore, 25 giorni lavorativi, «Segna come ricevuto», tracciamento solo con «Acquista subito» e le istruzioni dell'app, Centro assistenza
+- [Vinted: Spedizione personalizzata su Vinted](https://www.vinted.it/help/443) – vecchia opzione, non più disponibile per i nuovi annunci
 - [Vinted: Il pacco non è arrivato (per chi vende)](https://www.vinted.it/help/657) – 5 o 7 giorni lavorativi, 25 giorni lavorativi
 - [Vinted: Ritirare un pacco](https://www.vinted.it/help/1601) – «Consegnato», 2 giorni, reso e rimborso
 - [Vinted: Come ritirare un ordine](https://www.vinted.it/help/738) – 2 giorni di calendario, codice di ritiro, altro punto, locker vuoto

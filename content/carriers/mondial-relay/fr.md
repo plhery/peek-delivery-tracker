@@ -75,7 +75,7 @@ Relevé le 10 octobre 2026 :
 
 ## Suivre un colis Mondial Relay avec Peek
 
-[Peek](/) reconnaît tout de suite le code-barres de 26 chiffres, même tapé avec des espaces. Avec 8, 10, 12 ou 14 chiffres, il peut ne pas nommer Mondial Relay de lui-même : d'autres transporteurs utilisent ces longueurs, et Peek ne peut pas demander à Mondial Relay s'il connaît un numéro. Appuie alors sur « Changer » et choisis Mondial Relay, ou colle un lien de suivi de mondialrelay.fr, .be, .nl ou .com (ceux de ses sites espagnol et portugais ne sont pas lus).
+[Peek](/) reconnaît tout de suite le code-barres de 26 chiffres, même tapé avec des espaces. Avec 8, 10, 12 ou 14 chiffres, il peut ne pas nommer Mondial Relay de lui-même : d'autres transporteurs utilisent ces longueurs, et Peek ne demande à Mondial Relay s'il connaît un numéro que pour les numéros `FV` d'InPost Espagne (FV et 8 chiffres). Si aucun transporteur ni service de suivi ne connaît un numéro à 8 chiffres, Peek te propose lui-même Mondial Relay, avec un champ pour le code postal de livraison, quand tu es en France, en Belgique, au Luxembourg, en Espagne, au Portugal ou aux Pays-Bas. Sinon, appuie sur « Changer » et choisis Mondial Relay, ou colle un lien de suivi de mondialrelay.fr, .be, .nl ou .com (ceux de ses sites espagnol et portugais ne sont pas lus).
 
 Un numéro à 8 chiffres demande aussi le « Code postal de livraison » : tape le numéro seul, puis le code postal dans son champ. Seuls des codes postaux français et portugais ont été testés, et un code portugais doit avoir ses sept chiffres (1234-567, avec ou sans tiret). Avec un mauvais code, le colis reste introuvable. Il est envoyé à Mondial Relay et, si besoin, à des services de suivi.
 
@@ -132,5 +132,5 @@ Non, mais il n'est pas surtaxé : en Belgique, le +32 2 340 06 10 coûte le prix
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – frais additionnels, signalement au 33700
 - [InPost : Quiénes somos](https://www.inpost.es/quienes-somos) – reprise en Espagne
 - [InPost : Quem somos](https://www.inpost.pt/quem-somos) – reprise au Portugal
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit, numéros à 14 chiffres, libellés et étapes
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit, numéros à 14 chiffres, libellés et étapes, Mondial Relay interrogé seulement sur les numéros `FV`
 :::

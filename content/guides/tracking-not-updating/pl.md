@@ -96,7 +96,7 @@ Platforma może oddać Ci pieniądze, ale tylko w swoim terminie:
 | Platforma | Od kiedy | Do kiedy |
 | --- | --- | --- |
 | Allegro (Allegro Ochrona Kupujących) | Problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal Dyskusja): najwcześniej godzinę po opłaceniu zamówienia, sprzedający ma 24 godziny na odpowiedź na Twoją pierwszą wiadomość (bez sobót, niedziel i dni wolnych od pracy). Przy opóźnieniu albo zagubieniu paczki ma 7 dni na rozwiązanie zgłoszenia. Jeśli po tym czasie Allegro nie widzi, że problem rozwiązano, zapyta Cię o to, a gdy odpowiesz, że nadal występuje, zaproponuje Ci wniosek w ramach Allegro Ochrony Kupujących | Wniosek o rekompensatę najpóźniej 730 dni od zakupu. Rekompensata do 20 000 zł |
-| Vinted | Etykieta wygenerowana na Vinted: po 25 dniach roboczych od chwili, gdy zamówienie oznaczono jako wysłane. Wysyłka indywidualna: po 21 dniach roboczych zamówienie zostaje oznaczone jako doręczone | 2 dni od powiadomienia od Vinted albo od zmiany statusu na „Doręczono” |
+| Vinted | Etykieta wygenerowana na Vinted: po 25 dniach roboczych od chwili, gdy zamówienie oznaczono jako wysłane | 2 dni od powiadomienia od Vinted albo od zmiany statusu na „Doręczono” |
 
 Na Amazonie każdy produkt, także od niezależnego sprzedawcy, jest objęty Gwarancją od A do Z. Jeśli masz problem z terminową dostawą, Amazon obiecuje zwrot pieniędzy albo wymianę produktu. Gdy sprzedaje ktoś inny niż Amazon, najpierw spróbuj rozwiązać problem bezpośrednio ze sprzedawcą.
 
@@ -112,7 +112,7 @@ W kraju to długo. DPD doręcza standardowo następnego dnia roboczego, a dla pr
 
 ### Czy da się przyspieszyć aktualizację statusu?
 
-Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie lub w przeglądarce: przy każdym skanie, tylko przy ważnych krokach albo tylko w dniu dostawy. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane i PostNL).
+Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie lub w przeglądarce: przy każdym skanie, tylko przy ważnych krokach albo tylko w dniu dostawy. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane, PostNL i USPS; co 10 minut GOFO).
 
 ### Numer przesyłki nie działa
 
@@ -136,7 +136,7 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [Zalando: Gdzie jest moja paczka?](https://www.zalando.pl/faq/where-is-my-parcel.html) – link do śledzenia działa po odbiorze paczki przez przewoźnika
 - [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, terminowa dostawa, zwrot pieniędzy albo wymiana
 - [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw rozmowa ze sprzedawcą, potem zwrot pieniędzy od Amazon
-- [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/658) – 5 i 7 dni roboczych, 25 i 21 dni roboczych, 2 dni
+- [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/658) – 5 i 7 dni roboczych, 25 dni roboczych przy zintegrowanej wysyłce
 - [Vinted: Status przesyłki nie jest aktualizowany](https://www.vinted.pl/help/1368) – status inny niż u przewoźnika, dni robocze bez weekendów i świąt
 - [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – 48 godzin, „Mam problem” w ciągu dwóch dni
 - [Vinted: Polityka Zwrotów](https://www.vinted.pl/help/465) – 2 dni kalendarzowe od powiadomienia

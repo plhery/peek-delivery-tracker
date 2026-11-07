@@ -95,7 +95,7 @@ Une plateforme peut te rembourser, mais seulement dans les délais qu'elle fixe 
 | Plateforme | Tu peux agir | Jusqu'à |
 | --- | --- | --- |
 | eBay (garantie client eBay) | Dès que la date de livraison estimée est passée | 30 jours calendaires après cette date |
-| Vinted | Envoi intégré (bordereau Vinted) : 25 jours ouvrés après le passage en « expédiée ». Envoi personnalisé : au bout de 21 jours ouvrés, la commande est indiquée comme livrée | 2 jours après l'avis de Vinted ou le passage en livrée |
+| Vinted | Envoi intégré (bordereau Vinted) : 25 jours ouvrés après le passage en « expédiée » | 2 jours après l'avis de Vinted ou le passage en livrée |
 
 Sur Amazon, la garantie A à Z couvre les articles vendus et expédiés par un vendeur tiers : si la livraison pose problème et que tu n'arrives pas à le régler directement avec le vendeur, tu peux demander un remboursement à Amazon.
 
@@ -137,9 +137,9 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [DHL : What does my international shipment status mean? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – dédouanement en plusieurs jours ouvrables
 - [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeurs tiers, remboursement par Amazon si le problème de livraison n'est pas réglé avec le vendeur
 - [eBay.fr : Règlement de la Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours calendaires
-- [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 5, 7, 21 et 25 jours ouvrés, 2 jours
+- [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 5, 7 et 25 jours ouvrés, envoi intégré
 - [Vinted : Termes et conditions de Vinted Pro](https://www.vinted.fr/pro-terms-and-conditions) – 14 jours calendaires avec un vendeur Pro, puis finalisation automatique
-- [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – 48 heures avant l'affichage du suivi, jours ouvrés hors week-ends et jours fériés
+- [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – 48 heures avant l'affichage du suivi, jours ouvrés hors week-ends et jours fériés, « J'ai un problème » dans les 2 jours après le passage en livrée
 - [Vinted : Politique de remboursement de Vinted](https://www.vinted.fr/help/465) – 2 jours calendaires après l'avis de Vinted
 - [Zalando : Où se trouve mon colis ?](https://www.zalando.fr/faq/where-is-my-parcel.html) – lien de suivi inactif avant la prise en charge
 - [AliExpress : How to open dispute? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 jours

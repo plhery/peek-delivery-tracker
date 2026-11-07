@@ -94,7 +94,7 @@ Cada silencio tiene su motivo:
 - **Ningún escaneo en 5 días laborables.** Puede que el vendedor no lo haya enviado. Salvo que confirme el envío o aceptes una ampliación, Vinted cancela el pedido y te reembolsa.
 - **Parado por el camino.** Si se retrasa, Vinted te avisa y pone la nueva fecha en tu pedido. Si el seguimiento está bloqueado en Vinted y en la web de la empresa, espera hasta 25 días laborables desde que el pedido se marcó como enviado.
 - **Recogido, pero sin `Entregado`.** Vinted no siempre se actualiza al momento: pulsa «Rastrear paquete» y luego «Marcar como recibido».
-- **Envío personalizado.** Un paquete enviado sin la etiqueta de Vinted no se puede rastrear en Vinted: el vendedor debe darte el número.
+- **Envío personalizado.** Es una opción antigua que ya no está disponible para los anuncios nuevos. Un paquete enviado sin la etiqueta de Vinted no se puede rastrear en Vinted: el seguimiento solo existe para los artículos comprados con el botón «Comprar ahora» y enviados siguiendo las instrucciones de la app. Para pedir ayuda, ve a la página de inicio del centro de asistencia y selecciona tu pedido.
 
 Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
@@ -143,7 +143,8 @@ Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Un núm
 - [Vinted: ¿Cuánto tarda el envío?](https://www.vinted.es/help/101) – 2 a 5 días, verificación, ampliación
 - [Vinted: No puedo enviar el artículo a tiempo](https://www.vinted.es/help/740) – cancelación, ampliación, confirmación de envío
 - [Vinted: La etiqueta de envío no se ha recibido o no funciona](https://www.vinted.es/help/154) – otro punto, nuevo pedido, otra dirección o país
-- [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – botones, 48 horas, envío personalizado
+- [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – botones, 48 horas, seguimiento solo con «Comprar ahora» y las instrucciones de la app, centro de asistencia
+- [Vinted: Envío personalizado en Vinted](https://www.vinted.es/help/443) – opción antigua, ya no disponible para los anuncios nuevos
 - [Vinted: El paquete no llega](https://www.vinted.es/help/657) – aviso de retraso, 25 días laborables
 - [Vinted: Recoger un paquete](https://www.vinted.es/help/1601) – código de recogida, plazos, reembolso
 - [Vinted: Cómo recoger un pedido](https://www.vinted.es/help/738) – 2 días naturales, sin código, taquilla vacía

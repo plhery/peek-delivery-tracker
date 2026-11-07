@@ -102,7 +102,7 @@ Una piattaforma può rimborsarti, ma solo entro i suoi termini:
 | Piattaforma | Da quando | Fino a quando |
 | --- | --- | --- |
 | eBay (Garanzia cliente eBay) | Passata la data di consegna prevista | 30 giorni di calendario dopo quella data |
-| Vinted | Etichetta generata su Vinted: quando Vinted ti avvisa che il pacco sembra smarrito, o passati 25 giorni lavorativi da quando l'ordine è segnato come `spedito`, con *Ho un problema*. Spedizione personalizzata: dopo 21 giorni lavorativi da `spedito`, quando l'ordine viene segnato come `consegnato` | 2 giorni di calendario dall'avviso di Vinted o da quando l'ordine risulta consegnato, 14 con un Seller Pro |
+| Vinted | Etichetta generata su Vinted: quando Vinted ti avvisa che il pacco sembra smarrito, o passati 25 giorni lavorativi da quando l'ordine è segnato come `spedito`, con *Ho un problema* | 2 giorni di calendario dall'avviso di Vinted o da quando l'ordine risulta consegnato, 14 con un Seller Pro |
 
 Su Amazon, se un prodotto venduto e spedito da un partner di vendita arriva in ritardo e non riesci a risolvere il problema direttamente con lui, puoi chiedere il rimborso ad Amazon con la Garanzia dalla A alla Z.
 
@@ -142,10 +142,10 @@ Il pacco forse non è ancora stato scansionato, il codice può essere di un altr
 - [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – maltempo, traffico, incidenti, prima di Natale
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prodotti dei partner di vendita, rimborso da Amazon se il problema di consegna non si risolve con il venditore
 - [eBay.it: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 giorni
-- [Vinted: Il pacco non è arrivato](https://www.vinted.it/help/658) – 5 e 7 giorni, 25 e 21 giorni lavorativi, 2 giorni
+- [Vinted: Il pacco non è arrivato](https://www.vinted.it/help/658) – 5 e 7 giorni, 25 giorni lavorativi con spedizione integrata
 - [Vinted: Termini e condizioni di Vinted Pro](https://www.vinted.it/pro-terms-and-conditions) – 14 giorni per gli ordini dai Seller Pro, poi conclusione automatica
 - [Vinted: Politica di rimborso](https://www.vinted.it/help/465) – 2 giorni di calendario dall'avviso di Vinted
-- [Vinted: Tracciare un pacco](https://www.vinted.it/help/100) – 48 ore
+- [Vinted: Tracciare un pacco](https://www.vinted.it/help/100) – 48 ore, «Ho un problema» entro 2 giorni da quando l'ordine risulta consegnato
 - [Zalando.it: Dov'è il mio pacco?](https://www.zalando.it/faq/where-is-my-parcel.html) – link di tracking attivo quando il corriere ha il pacco
 - [Vinted: Le informazioni sul tracciamento non si aggiornano](https://www.vinted.it/help/1368) – 25 giorni lavorativi esclusi fine settimana e giorni festivi
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 giorni

@@ -99,7 +99,7 @@ A marketplace can refund you, but only inside its window:
 | Platform | You can act | Until |
 | --- | --- | --- |
 | eBay | Once the estimated delivery date has passed | 30 calendar days after it |
-| Vinted | Vinted label: after up to 25 business days from `shipped`. Your own label: at 21 business days the order is marked delivered | 2 days after Vinted's notice or the delivered mark |
+| Vinted | Vinted label: after up to 25 business days from `shipped` | 2 days after Vinted's notice or the delivered mark |
 
 On Amazon, the A-to-z Guarantee covers on-time delivery of items sold and shipped by a third-party seller. If you can't sort it out with the seller (on Amazon.co.uk, if it hasn't answered within 48 hours), you claim a refund from Amazon directly. For any other late Amazon order, Customer Service can help you track it and resolve the delay.
 
@@ -147,8 +147,8 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [About Amazon: How to contact Amazon customer service](https://www.aboutamazon.com/news/company-news/contact-amazon-customer-service) – late deliveries
 - [eBay: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 days
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 days
-- [Vinted: Tracking a parcel](https://www.vinted.co.uk/help/100-tracking-a-parcel) – 48 hours
-- [Vinted: Parcel didn't arrive](https://www.vinted.co.uk/help/658-package-didn-t-arrive) – 25, 21 and 2 days
+- [Vinted: Tracking a parcel](https://www.vinted.co.uk/help/100-tracking-a-parcel) – 48 hours, "I have an issue" within 2 days of the delivered mark
+- [Vinted: Parcel didn't arrive](https://www.vinted.co.uk/help/658-package-didn-t-arrive) – 25 business days with a Vinted label
 - [Vinted: Pro Terms and Conditions](https://www.vinted.co.uk/pro-terms-and-conditions) – 14 calendar days for Pro sellers, "I have an issue", then completed automatically
 - [Vinted: Refund Policy](https://www.vinted.co.uk/help/465-the-vinted-refund-policy) – 2 days after Vinted's notice
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 days

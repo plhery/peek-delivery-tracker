@@ -97,7 +97,7 @@ Ein Marktplatz kann dir das Geld zurückgeben, aber nur innerhalb seiner Frist:
 | Plattform | Ab wann | Bis wann |
 | --- | --- | --- |
 | eBay (eBay-Käuferschutz) | Sobald das Ca.-Lieferdatum verstrichen ist | 30 Kalendertage danach |
-| Vinted | Mit Vinted-Versandschein: nach 25 Werktagen ab „verschickt“. Individueller Versand: Nach 21 Werktagen wird die Bestellung als „geliefert“ markiert | 2 Tage nach dem Hinweis von Vinted oder der Markierung als „geliefert“ |
+| Vinted | Mit Vinted-Versandschein: nach 25 Werktagen ab „verschickt“ | 2 Tage nach dem Hinweis von Vinted oder der Markierung als „geliefert“ |
 
 Bei Amazon deckt die A-bis-z-Garantie die rechtzeitige Lieferung von Artikeln ab, die externe Verkäufer auf dem Marketplace anbieten und versenden. Kannst du das Problem nicht direkt mit dem Verkäufer lösen, beantragst du die Erstattung bei Amazon.
 
@@ -136,9 +136,9 @@ Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 
 - [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – A-bis-z-Garantie: rechtzeitige Lieferung bei externen Verkäufern, Erstattung
 - [About Amazon: A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst mit dem Verkaufspartner klären, dann an Amazon wenden
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – Ca.-Lieferdatum, 30 Kalendertage
-- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – bis zu 48 Stunden
+- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – bis zu 48 Stunden, „Ich habe ein Problem“ innerhalb von 2 Tagen nach „geliefert“
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link erst aktiv, wenn das Paket beim Zusteller ist
-- [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – 5 und 7 Werktage, 25 und 21 Werktage, 2 Tage
+- [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – 5 und 7 Werktage, 25 Werktage mit Vinted-Versandschein
 - [Vinted: Allgemeine Geschäftsbedingungen für Vinted Pro](https://www.vinted.de/pro-terms-and-conditions) – 14 Kalendertage bei Pro-Verkäufern, automatischer Abschluss
 - [Vinted: Die Infos zur Sendungsverfolgung werden nicht aktualisiert](https://www.vinted.de/help/1368) – Werktage ohne Wochenenden und Feiertage
 - [Vinted: Rückerstattungsrichtlinien](https://www.vinted.de/help/465) – 2 Kalendertage nach dem Hinweis von Vinted

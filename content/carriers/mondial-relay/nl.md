@@ -97,7 +97,7 @@ Gecontroleerd op de Nederlandstalige pagina's van Mondial Relay op 25 oktober 20
 
 ## Uw Mondial Relay-pakket volgen met Peek
 
-[Peek](/) herkent de barcode van 26 cijfers meteen. Een nummer van 8, 10, 12 of 14 cijfers past ook bij andere vervoerders, en Peek kan Mondial Relay niet vragen of het een nummer kent. Plak het toch: Peek volgt meer dan 3.500 vervoerders. Noemt Peek Mondial Relay niet zelf, kies het dan met ‘Change’. Trackinglinks van mondialrelay.nl, mondialrelay.be, mondialrelay.fr en mondialrelay.com leest Peek ook.
+[Peek](/) herkent de barcode van 26 cijfers meteen. Een nummer van 8, 10, 12 of 14 cijfers past ook bij andere vervoerders, en alleen bij de FV-nummers van InPost Spanje (FV en 8 cijfers) vraagt Peek Mondial Relay of het een nummer kent. Plak het toch: Peek volgt meer dan 3.500 vervoerders. Noemt Peek Mondial Relay niet zelf, kies het dan met ‘Change’. Trackinglinks van mondialrelay.nl, mondialrelay.be, mondialrelay.fr en mondialrelay.com leest Peek ook.
 
 Voor een nummer van 8 cijfers vraagt Peek ook de ‘Delivery postcode’, de postcode van het afleveradres. Kent niemand het nummer, dan stelt Peek vanuit Nederland of België zelf Mondial Relay voor (‘Mondial Relay may have this parcel. Add the delivery postcode to track it.’). Voor 10, 12 of 14 cijfers en voor de barcode is geen postcode nodig.
 
@@ -156,5 +156,5 @@ Ja, het is een echt bedrijf: MONDIAL RELAY S.A.S.U., met hoofdkantoor in Villene
 - [Douane: Extra kosten bij online bestellingen](https://www.douane.nl/onderwerpen/online-shoppen-en-pakketpost/shoppen-bij-een-buitenlandse-webwinkel/extra-kosten-bij-bestellen/) – € 3, € 2, btw
 - [Douane: Waar is mijn pakket?](https://www.douane.nl/onderwerpen/online-shoppen-en-pakketpost/waar-is-mijn-pakket/) – vervoerder
 - [FOD Financiën: Waar blijft uw pakje?](https://fin.belgium.be/nl/particulieren/internationaal/online-aankopen-buitenland/problemen-pakje/waar-blijft-uw-pakje) – koerierdienst
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek leest, nummers van 14 cijfers, statussen en fasen
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek leest, nummers van 14 cijfers, statussen en fasen, Mondial Relay alleen gevraagd naar FV-nummers
 :::

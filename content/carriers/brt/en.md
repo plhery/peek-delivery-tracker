@@ -3,7 +3,7 @@ title: BRT tracking: numbers, statuses and missed deliveries
 description: Track a BRT parcel in or from Italy: where to find the BRTcode or shipment number, what BRT's English statuses mean, missed deliveries, lockers and contacts.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-10-26
+updated: 2026-11-07
 ---
 
 BRT is an Italian express courier, part of the Geopost group like DPD. Track a parcel with the link in BRT's SMS or email, with "Where is my shipment?" on [brt.it](https://www.brt.it/en/) or by pasting the number in the box above. BRT sends that number, the BRTcode, when it takes charge of the parcel, if the sender gave it your contact details.
@@ -92,6 +92,8 @@ The Bologna number on BRT's documents is its office, not customer service.
 
 Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". With Peek set to Italian, you see BRT's Italian wordings instead, and "Consegnata" for a delivery; a parcel with a scan Peek knows only in English, such as a locker's, stays in English. It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no pickup-point details. BRT gives no expected day, but for a 14-digit number Peek can show the delivery estimate from DPD's tracking, which also reads BRT's numbers, or from Chronopost's if Chronopost brought the parcel to Italy. The estimate disappears once its day has passed, or sooner if BRT delivers or returns the parcel, leaves it at a pickup point, makes a failed delivery attempt or reports a problem. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
 
+Peek checks every 10 minutes, and every 2 minutes on the day the parcel goes out for delivery, from 6 a.m. local time or, when DPD's or Chronopost's estimate gives a time window, from half an hour before it opens, while BRT's or DPD's own tracker answers (every 5 minutes when DPD's tracking needs a browser); through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+
 ## Questions about BRT tracking
 
 ### Where is my BRT shipment?
@@ -128,5 +130,6 @@ BRT's [fermopoint finder](https://www.mybrt.it/it/mybrt/parcel-shops/search) lis
 - [BRT: Condizioni generali](https://www.brt.it/wp-content/uploads/sites/275/2026/01/CONDIZIONI-GENERALI-CONTRATTO-TARIFFARIO_IT_CON-LOGO_REV-31.pdf) – agreed hold days
 - [BRT: Alert phishing](https://www.brt.it/en/news/2026/04/16/alert-phishing-sms-email/) – fake messages
 - [DPD: Home](https://www.dpd.com/en/) – Geopost's brands
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, DPD's and Chronopost's time windows
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – how often Peek checks: every 10 minutes, every 2 or 5 out for delivery, half an hour before a time window, every 15 through tracking services, hourly when nothing moves
 :::

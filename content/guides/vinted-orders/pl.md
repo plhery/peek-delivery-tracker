@@ -97,7 +97,7 @@ Każda cisza ma swój powód:
 - **Brak skanu po 5 dniach roboczych.** Sprzedający mógł nie wysłać paczki. Jeśli nie potwierdził wysłania, a termin nie został przedłużony, Vinted anuluje zamówienie i zwraca Ci pieniądze.
 - **Paczka utknęła w drodze.** Gdy paczka się spóźnia, Vinted daje Ci znać i podaje nowy termin w oknie rozmowy. Jeśli status stoi i na Vinted, i u przewoźnika, odczekaj do 25 dni roboczych od oznaczenia zamówienia jako wysłanego.
 - **Odebrana, ale bez „Doręczono”.** System Vinted nie zawsze aktualizuje się od razu: naciśnij „Śledź przesyłkę”, a potem „Oznacz jako odebraną”.
-- **Wysyłka indywidualna.** Paczki bez etykiety Vinted nie śledzi się na Vinted: numer poda Ci sprzedający. Jeśli status stoi, po 21 dniach roboczych od wysłania Vinted oznacza ją jako doręczoną, a Ty masz 2 dni na zgłoszenie problemu.
+- **Wysyłka indywidualna.** To dawna opcja, niedostępna już w nowych ogłoszeniach. Paczki bez etykiety Vinted nie śledzi się na Vinted: śledzenie działa tylko dla przedmiotów kupionych przyciskiem „Kup teraz” i wysłanych zgodnie z instrukcjami w aplikacji. Jeśli potrzebujesz pomocy, wejdź na stronę główną Centrum Pomocy i wybierz swoje zamówienie.
 
 Więcej o przerwach w śledzeniu: [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
@@ -156,8 +156,9 @@ Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpozn
 - [Vinted: Czas dostawy](https://www.vinted.pl/help/101) – 2 do 5 i 4 do 7 dni roboczych, weryfikacja do 10, przedłużenie o 3 lub 5 dni
 - [Vinted: Nie mogę wysłać przedmiotu na czas](https://www.vinted.pl/help/740) – anulowanie, potwierdzenie wysłania, przedłużenie
 - [Vinted: Nie udało się pobrać etykiety wysyłkowej albo etykieta nie działa](https://www.vinted.pl/help/154) – inny punkt, nowy zakup, inny adres na etykiecie
-- [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – śledzenie w rozmowie, 48 godzin, 25 dni, „Oznacz jako odebraną”, wysyłka indywidualna
-- [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/657) – nowy przewidywany termin, 25 i 21 dni roboczych
+- [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – śledzenie w rozmowie, 48 godzin, 25 dni, „Oznacz jako odebraną”, śledzenie tylko z „Kup teraz” i według instrukcji w aplikacji, Centrum Pomocy
+- [Vinted: Wysyłka indywidualna na Vinted](https://www.vinted.pl/help/443) – dawna opcja, niedostępna w nowych ogłoszeniach
+- [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/657) – nowy przewidywany termin, 25 dni roboczych
 - [Vinted: Odbiór paczki](https://www.vinted.pl/help/1601) – kod odbioru, czas przechowywania, zwrot pieniędzy, 2 dni na potwierdzenie
 - [Vinted: Odbiór zamówienia](https://www.vinted.pl/help/738) – 2 dni kalendarzowe, brak kodu, inny punkt, pusta skrytka
 - [Vinted: Paczka wróciła do nadawcy](https://www.vinted.pl/help/728) – „Wszystko OK” przekazuje płatność sprzedającemu

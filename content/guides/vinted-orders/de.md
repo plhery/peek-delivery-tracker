@@ -90,7 +90,7 @@ Jede Funkstille hat ihren Grund:
 - **Nach 5 Werktagen kein Scan.** Vielleicht hat der Verkäufer nicht verschickt. Ohne Versandbestätigung oder Verlängerung storniert Vinted die Bestellung und erstattet dir das Geld.
 - **Hängt unterwegs fest.** Ist die Sendung verspätet, informiert dich Vinted und zeigt im Chat ein neues Lieferdatum. Ändert sich der Status weder auf Vinted noch beim Versanddienst, bittet Vinted, 25 Werktage ab dem Tag zu warten, an dem die Bestellung als „verschickt“ markiert wurde.
 - **Abgeholt, aber nicht „geliefert“.** Das System aktualisiert nicht immer sofort: Tippe auf „Sendung verfolgen“ und dann auf „Als erhalten markieren“.
-- **Individueller Versand.** Ein Paket ohne Vinted-Versandschein lässt sich auf Vinted nicht verfolgen. Der Verkäufer sollte dir die Sendungsnummer schicken.
+- **Individueller Versand.** Diese frühere Option gibt es für neue Angebote nicht mehr. Ein Paket ohne Vinted-Versandschein lässt sich auf Vinted nicht verfolgen: Eine Sendungsverfolgung gibt es nur für Artikel, die über den „Kaufen“-Button gekauft und nach den Anweisungen in der App verschickt wurden. Hilfe bekommst du, wenn du auf der Startseite des Hilfe-Centers die Bestellung auswählst.
 
 Mehr dazu unter [warum die Sendungsverfolgung stockt](guide:tracking-not-updating).
 
@@ -136,7 +136,8 @@ Ja: Kopiere die Nummer unter „Sendung verfolgen“ und füge sie in [Peek](/) 
 - [Vinted: So funktioniert die Lieferung](https://www.vinted.de/help/444) – Käufer wählt, 5 Werktage, 48 Stunden
 - [Vinted: Lieferzeit](https://www.vinted.de/help/101) – 2 bis 5 Werktage, Verifizierung bis 10, Verlängerung um 3 oder 5
 - [Vinted: Ich kann den Artikel nicht rechtzeitig abschicken](https://www.vinted.de/help/740) – Stornierung am nächsten Werktag, Versandbestätigung
-- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, 48 Stunden, Als erhalten markieren, 25 Werktage
+- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, 48 Stunden, Als erhalten markieren, 25 Werktage, Sendungsverfolgung nur mit „Kaufen“-Button und nach den Anweisungen in der App, Hilfe-Center
+- [Vinted: Individueller Versand auf Vinted](https://www.vinted.de/help/443) – frühere Option, für neue Angebote nicht mehr verfügbar
 - [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/657) – neues Lieferdatum, 25 Werktage, Entschädigung
 - [Vinted: Eine Sendung abholen](https://www.vinted.de/help/1601) – Abholcode, Lagerzeiten, Rückerstattung, 2 Tage
 - [Vinted: Die Sendung wurde zum Absender zurückgeschickt](https://www.vinted.de/help/728) – Rückerstattung nach Rücksendung

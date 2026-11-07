@@ -4449,7 +4449,9 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingSearchUrl": "https://trace.epost.go.kr/xtts/tt/epost/ems/ems_eng.jsp",
     "aliases": [
-      "South Korea Post"
+      "South Korea Post",
+      "ePOST (인터넷우체국)",
+      "ePOST (인터넷우체국)(Domestic)"
     ]
   },
   "thailand-post": {
@@ -18349,7 +18351,8 @@ export const CARRIER_CAPABILITIES = {
       "Shopee Express Brasil",
       "Shopee Xpress Brasil",
       "Shopee Express Brazil",
-      "SPX Brasil"
+      "SPX Brasil",
+      "SPX Express (BR)"
     ],
     "countries": [
       "BR"
@@ -20470,7 +20473,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Shopee Express Malaysia",
       "Shopee Xpress Malaysia",
-      "SPX Malaysia"
+      "SPX Malaysia",
+      "SPX Express (MY)"
     ],
     "countries": [
       "MY"
@@ -21541,7 +21545,8 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [
       {
         "domains": [
-          "ameex.ma"
+          "ameex.ma",
+          "ameex.com"
         ],
         "path": "^/(?:en|fr|ar)/(?:tracking|suivi-colis)/([^/?#]+)/?$"
       }

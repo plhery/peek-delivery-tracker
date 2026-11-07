@@ -4448,7 +4448,9 @@
       ],
       "trackingSearchUrl": "https://trace.epost.go.kr/xtts/tt/epost/ems/ems_eng.jsp",
       "aliases": [
-        "South Korea Post"
+        "South Korea Post",
+        "ePOST (인터넷우체국)",
+        "ePOST (인터넷우체국)(Domestic)"
       ]
     },
     "thailand-post": {
@@ -18348,7 +18350,8 @@
         "Shopee Express Brasil",
         "Shopee Xpress Brasil",
         "Shopee Express Brazil",
-        "SPX Brasil"
+        "SPX Brasil",
+        "SPX Express (BR)"
       ],
       "countries": [
         "BR"
@@ -20469,7 +20472,8 @@
       "aliases": [
         "Shopee Express Malaysia",
         "Shopee Xpress Malaysia",
-        "SPX Malaysia"
+        "SPX Malaysia",
+        "SPX Express (MY)"
       ],
       "countries": [
         "MY"
@@ -21540,7 +21544,8 @@
       "linkRules": [
         {
           "domains": [
-            "ameex.ma"
+            "ameex.ma",
+            "ameex.com"
           ],
           "path": "^/(?:en|fr|ar)/(?:tracking|suivi-colis)/([^/?#]+)/?$"
         }

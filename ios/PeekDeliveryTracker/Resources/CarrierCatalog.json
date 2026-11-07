@@ -2696,7 +2696,10 @@
         "PT"
       ],
       "trackingSearchUrl": "https://s.correosexpress.com/",
-      "helpUrl": "https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente"
+      "helpUrl": "https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente",
+      "aliases": [
+        "Chronoexprés"
+      ]
     },
     "seur": {
       "displayName": "SEUR",
@@ -2894,7 +2897,8 @@
       ],
       "trackingSearchUrl": "https://shipping-tracking.production.cloud2.cttexpress.com/",
       "aliases": [
-        "CTT Express Tracking"
+        "CTT Express Tracking",
+        "Tourline Express"
       ],
       "helpUrl": "https://www.cttexpress.com/envios/incidencias"
     },
@@ -12091,7 +12095,8 @@
     "hunter-express": {
       "displayName": "Hunter Express",
       "aliases": [
-        "Hunter Express Australia"
+        "Hunter Express Australia",
+        "E-Go"
       ],
       "countries": [
         "AU"
@@ -23093,7 +23098,9 @@
       "displayName": "Packlink",
       "aliases": [
         "Packlink PRO",
-        "Packlink Shipping"
+        "Packlink Shipping",
+        "Keavo",
+        "Keavo Express"
       ],
       "countries": [
         "ES",
@@ -25430,7 +25437,8 @@
         "BNI",
         "BNICA",
         "Brunswick News",
-        "Brunswick News Inc."
+        "Brunswick News Inc.",
+        "Bonshaw Logistics"
       ],
       "countries": [
         "CA"
@@ -32400,7 +32408,10 @@
     "fedex-international-connect": {
       "displayName": "FedEx International Connect",
       "aliases": [
-        "FedEx International Connect (FIC)"
+        "FedEx International Connect (FIC)",
+        "P2P Mailing",
+        "P2P TrakPak",
+        "TrakPak"
       ],
       "countries": [
         "GB"
@@ -49755,6 +49766,48 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.suhusupplychain.com/"
+    },
+    "allied-express": {
+      "displayName": "Allied Express",
+      "aliases": [
+        "Allied Express Transport",
+        "Allied Express Transport Pty Ltd",
+        "Allied Overnight Express"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#e7333e",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.alliedexpress.com.au/"
+    },
+    "skynet-my": {
+      "displayName": "SkyNet Malaysia",
+      "aliases": [
+        "SkyNet MY",
+        "Skynet (MY)",
+        "Skynet Worldwide (M) Sdn. Bhd."
+      ],
+      "countries": [
+        "MY"
+      ],
+      "color": "#ec1c24",
+      "selectable": true,
+      "timezone": "Asia/Kuala_Lumpur",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.skynet.com.my/track"
     }
   }
 }

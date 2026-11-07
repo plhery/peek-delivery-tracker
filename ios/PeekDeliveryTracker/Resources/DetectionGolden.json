@@ -24621,6 +24621,43 @@
     ]
   },
   {
+    "input": "201029271122",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "sf-express",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "gls-at",
+      "gls-pl",
+      "j-and-t-cargo",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sagawa",
+      "sending"
+    ],
+    "preferred": [
+      "sf-express"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "japan-post",
+      "j-and-t-cargo"
+    ]
+  },
+  {
     "input": "2010505799436494",
     "carrier": "unknown",
     "confidence": "low",
@@ -24833,6 +24870,35 @@
     ]
   },
   {
+    "input": "201613685744",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "j-and-t-cargo",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "japan-post",
+      "j-and-t-cargo",
+      "brt",
+      "colis-prive",
+      "j-and-t"
+    ]
+  },
+  {
     "input": "201655817345",
     "carrier": "unknown",
     "confidence": "low",
@@ -24856,6 +24922,36 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "201660090015",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "j-and-t-cargo",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "dhl",
+      "japan-post",
+      "j-and-t-cargo",
+      "brt",
+      "colis-prive"
     ]
   },
   {

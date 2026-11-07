@@ -2697,7 +2697,10 @@ export const CARRIER_CAPABILITIES = {
       "PT"
     ],
     "trackingSearchUrl": "https://s.correosexpress.com/",
-    "helpUrl": "https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente"
+    "helpUrl": "https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente",
+    "aliases": [
+      "Chronoexprés"
+    ]
   },
   "seur": {
     "displayName": "SEUR",
@@ -2895,7 +2898,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingSearchUrl": "https://shipping-tracking.production.cloud2.cttexpress.com/",
     "aliases": [
-      "CTT Express Tracking"
+      "CTT Express Tracking",
+      "Tourline Express"
     ],
     "helpUrl": "https://www.cttexpress.com/envios/incidencias"
   },
@@ -12092,7 +12096,8 @@ export const CARRIER_CAPABILITIES = {
   "hunter-express": {
     "displayName": "Hunter Express",
     "aliases": [
-      "Hunter Express Australia"
+      "Hunter Express Australia",
+      "E-Go"
     ],
     "countries": [
       "AU"
@@ -23094,7 +23099,9 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Packlink",
     "aliases": [
       "Packlink PRO",
-      "Packlink Shipping"
+      "Packlink Shipping",
+      "Keavo",
+      "Keavo Express"
     ],
     "countries": [
       "ES",
@@ -25431,7 +25438,8 @@ export const CARRIER_CAPABILITIES = {
       "BNI",
       "BNICA",
       "Brunswick News",
-      "Brunswick News Inc."
+      "Brunswick News Inc.",
+      "Bonshaw Logistics"
     ],
     "countries": [
       "CA"
@@ -32401,7 +32409,10 @@ export const CARRIER_CAPABILITIES = {
   "fedex-international-connect": {
     "displayName": "FedEx International Connect",
     "aliases": [
-      "FedEx International Connect (FIC)"
+      "FedEx International Connect (FIC)",
+      "P2P Mailing",
+      "P2P TrakPak",
+      "TrakPak"
     ],
     "countries": [
       "GB"
@@ -49756,6 +49767,48 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.suhusupplychain.com/"
+  },
+  "allied-express": {
+    "displayName": "Allied Express",
+    "aliases": [
+      "Allied Express Transport",
+      "Allied Express Transport Pty Ltd",
+      "Allied Overnight Express"
+    ],
+    "countries": [
+      "AU"
+    ],
+    "color": "#e7333e",
+    "selectable": true,
+    "timezone": "Australia/Sydney",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.alliedexpress.com.au/"
+  },
+  "skynet-my": {
+    "displayName": "SkyNet Malaysia",
+    "aliases": [
+      "SkyNet MY",
+      "Skynet (MY)",
+      "Skynet Worldwide (M) Sdn. Bhd."
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#ec1c24",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.skynet.com.my/track"
   }
 } as const;
 
@@ -51184,7 +51237,9 @@ export const CARRIER_IDS = [
   "yuexi-logistics",
   "dongdu",
   "zecheng",
-  "suhu"
+  "suhu",
+  "allied-express",
+  "skynet-my"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

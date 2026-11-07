@@ -22,6 +22,7 @@ import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
 import { lateScans, relayRepeats } from './relayCopies';
 import { repeatedScans } from './scanRepeats';
+import { stageNotices } from './stageNotices';
 import { messagesFor } from './requestLocale';
 import type { SupabaseServiceClient } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
@@ -691,8 +692,8 @@ export function compareNotificationEvents(left: JsonObject, right: JsonObject): 
 
 /**
  * What a batch of new scans is measured against, by parcel: its newest stored
- * scan, when it joined its account, the scans whose news it already had
- * (`knownScans`), and whether it is archived.
+ * scan (`newestNews`), when it joined its account, the scans whose news it
+ * already had (`scanNews`), and whether it is archived.
  */
 interface ParcelTimes {
   latest: ReadonlyMap<string, string>;
@@ -708,18 +709,28 @@ async function orNone<T>(load: () => Promise<T>, none: T): Promise<T> {
 
 const batchParcels = (batches: readonly JsonObject[][]) => batches.map((events) => stringField(events[0]!, 'package_id')).filter(Boolean);
 
-const NO_SCANS: Awaited<ReturnType<SupabaseServiceClient['recentScans']>> = new Map();
+type RecentScans = Awaited<ReturnType<SupabaseServiceClient['recentScans']>>;
+const NO_SCANS: RecentScans = new Map();
+
+/** The parcels' notices in the stage of their scan before them (stageNotices.ts). */
+function noticesIn(recent: RecentScans): Set<string> {
+  return new Set([...recent.values()].flatMap((scans) => [...stageNotices(scans.map((scan) => ({
+    id: scan.id, source: scan.source, stage: scan.stage, stageSource: scan.stageSource ?? null, at: Date.parse(scan.occurredAt),
+  }))).keys()]));
+}
 
 /**
  * The scans of the batches whose news their parcel already had: a handed-over
  * parcel's relay repeats and late scans (relayCopies.ts) and the universal
- * copies its timeline leaves out (providerCopies.ts), and a carrier's repeats
- * of a scan it had sent (scanRepeats.ts). Copies are looked for only in
+ * copies its timeline leaves out (providerCopies.ts), a carrier's repeats
+ * of a scan it had sent (scanRepeats.ts) and its notices in the stage of the
+ * scan before them (stageNotices.ts). Copies are looked for only in
  * parcels with a confirmed carrier whose batch holds a universal row. A
  * generated track's moves are no news either (generatedTrack.ts): they are
- * looked for in parcels whose batch holds a scan in transit.
+ * looked for in parcels whose batch holds a scan in transit. With the
+ * parcels' recent scans and their notices.
  */
-async function knownScans(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<Set<string>> {
+async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObject[][]) {
   const eventIds = batches.flat().map((event) => stringField(event, 'event_id')).filter(Boolean);
   const moving = new Set(batchParcels(batches.filter((events) => events.some((event) => stringField(event, 'stage') === 'in_transit'))));
   const [handoffs, copied, recent] = await Promise.all([
@@ -727,23 +738,46 @@ async function knownScans(client: SupabaseServiceClient, batches: readonly JsonO
     orNone(() => client.providerCopyScans(eventIds), []),
     batches.length ? orNone(() => client.recentScans(batchParcels(batches)), NO_SCANS) : NO_SCANS,
   ]);
-  return new Set([...handoffs.flatMap((row) => [...relayRepeats(row), ...lateScans(row)]),
+  const notices = noticesIn(recent);
+  const known = new Set([...handoffs.flatMap((row) => [...relayRepeats(row), ...lateScans(row)]),
     ...copied.flatMap((row) => [...providerCopies(row)]),
+    ...notices,
     ...[...recent].flatMap(([packageId, scans]) => [
       ...moving.has(packageId) ? generatedScans(scans).map((scan) => scan.id) : [],
       ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })))])]);
+  return { known, recent, notices };
 }
 
-async function parcelTimes(client: SupabaseServiceClient, batches: Iterable<JsonObject[]>): Promise<ParcelTimes> {
+async function knownScans(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<Set<string>> {
+  return (await scanNews(client, batches)).known;
+}
+
+/**
+ * Each parcel's newest scan, a notice in the stage of the scan before it aside: the scan's news is
+ * not older than the notice. Read from the parcel's recent scans when it has such a notice, as
+ * `latestScanTimes` reads the stored ones otherwise.
+ */
+function newestNews(latest: ReadonlyMap<string, string>, recent: RecentScans, notices: ReadonlySet<string>, now: number): Map<string, string> {
+  const newest = new Map(latest);
+  for (const [packageId, scans] of recent) {
+    if (!scans.some((scan) => notices.has(scan.id))) continue;
+    const news = scans.filter((scan) => scan.stage !== 'pending' && scan.source !== 'app' && !notices.has(scan.id)
+      && Date.parse(scan.occurredAt) <= now).sort((a, b) => Date.parse(b.occurredAt) - Date.parse(a.occurredAt))[0];
+    if (news) newest.set(packageId, news.occurredAt);
+  }
+  return newest;
+}
+
+async function parcelTimes(client: SupabaseServiceClient, batches: Iterable<JsonObject[]>, now: number): Promise<ParcelTimes> {
   const all = [...batches];
   const ids = batchParcels(all);
-  const [latest, joined, known, archived] = await Promise.all([
+  const [latest, joined, { known, recent, notices }, archived] = await Promise.all([
     orNone(() => client.latestScanTimes(ids), new Map<string, string>()),
     orNone(() => client.packageJoinTimes(ids), new Map<string, string>()),
-    knownScans(client, all),
+    scanNews(client, all),
     orNone(() => client.archivedPackageIds(ids), new Set<string>()),
   ]);
-  return { latest, joined, known, archived };
+  return { latest: newestNews(latest, recent, notices, now), joined, known, archived };
 }
 
 /**
@@ -821,7 +855,7 @@ export class WebPushNotificationService {
       grouped.set(key, [...(grouped.get(key) ?? []), row]);
     }
     const summary = emptySummary();
-    const times = await parcelTimes(this.client, grouped.values());
+    const times = await parcelTimes(this.client, grouped.values(), this.now());
     for (const events of grouped.values()) {
       signal?.throwIfAborted();
       const newest = announcedScan(events, times);
@@ -980,7 +1014,7 @@ export class ParcelLinkAlertService {
     }
     const summary = emptySummary();
     let failed = 0;
-    const times = await parcelTimes(client, grouped.values());
+    const times = await parcelTimes(client, grouped.values(), this.now());
     for (const [alertId, events] of grouped) {
       signal?.throwIfAborted();
       const newest = announcedScan(events.filter((event) => this.announces(event)), times);
@@ -1226,7 +1260,7 @@ abstract class AppPushNotificationService {
       grouped.set(key, [...(grouped.get(key) ?? []), row]);
     }
     const summary = emptySummary();
-    const times = await parcelTimes(this.client, grouped.values());
+    const times = await parcelTimes(this.client, grouped.values(), this.now() * 1_000);
     for (const events of grouped.values()) {
       signal?.throwIfAborted();
       const newest = announcedScan(events, times);

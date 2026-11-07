@@ -8,6 +8,7 @@ import { clockDay, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, relayCopies } from './relayCopies';
 import { repeatLeads } from './scanRepeats';
+import { noticeScan, stageNotices } from './stageNotices';
 import { servedPlannedSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
@@ -15,10 +16,11 @@ import { isRecord, type JsonObject } from './types';
 let reported = false;
 
 /**
- * The stored point only feeds the place, and the source and provider only tell
- * Peek's own rows, relay copies and provider copies apart: the API returns none
- * of them. A row of a relay pair names the other row instead (`relayLeads`), and
- * a carrier's repeat of a scan the newest of its run (scanRepeats.ts). A
+ * The stored point only feeds the place, and the source, provider and stage source only tell
+ * Peek's own rows, relay copies, provider copies and notices apart: the API returns none
+ * of them. A row of a relay pair names the other row instead (`relayLeads`),
+ * a carrier's repeat of a scan the newest of its run (scanRepeats.ts), and a
+ * carrier's notice in the stage of its scan before it that scan (stageNotices.ts). A
  * scan dated by its day alone names that day. A scan or stage change its source
  * gave no words for is served without Peek's stand-in, so the apps name its
  * stage. A scan in which the carrier asks
@@ -31,6 +33,7 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
   delete rest.point;
   delete rest.provider_event_id;
   delete rest.universal_provider;
+  delete rest.stage_source;
   delete rest.recipient_action;
   if (tieOrder(rest.tie_order) < 0) delete rest.tie_order;
   return action ? { ...rest, recipient_action: action } : rest;
@@ -172,6 +175,7 @@ export function withoutEventSources(row: JsonObject): JsonObject {
       const rest = dated(event);
       delete rest.provider_event_id;
       delete rest.universal_provider;
+      delete rest.stage_source;
       return rest;
     }),
   };
@@ -200,6 +204,15 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>):
   return new Map([...relays].map(([copy, scan]): [string, string] => (
     (placed(byId.get(copy)!) && !placed(byId.get(scan)!)) || copyTellsProblem(byId.get(copy)!, byId.get(scan)!)
       ? [scan, copy] : [copy, scan])));
+}
+
+/**
+ * Each notice in the stage of its scan before it, with the row it is shown under (stageNotices.ts): that scan, or the
+ * row the scan itself is shown under as a carrier's repeat. Rows of a relay pair (`apart`) are neither.
+ */
+function noticeLeads(events: readonly JsonObject[], apart: ReadonlySet<string>, repeats: ReadonlyMap<string, string>): Map<string, string> {
+  const notices = stageNotices(events.filter((event) => !apart.has(String(event.id))).map(noticeScan));
+  return new Map([...notices].map(([notice, scan]) => [notice, repeats.get(scan) ?? scan]));
 }
 
 /**
@@ -232,8 +245,9 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * served, so improving the gazetteer improves every parcel, old ones
  * included. A universal provider's copy of a confirmed carrier's scan is left
  * out (providerCopies.ts), so is Peek's own opening row once carrier scans
- * reach back to it (see `timeline`), and a row of a relay pair or a carrier's repeat of a scan names the row it
- * is shown under (`relay_of`, see `relayLeads`, relayCopies.ts and scanRepeats.ts). A carrier's scan that names no place the
+ * reach back to it (see `timeline`), and a row of a relay pair, a carrier's repeat of a scan or its notice in the stage
+ * of the scan before it names the row it is shown under (`relay_of`, see `relayLeads`, relayCopies.ts, scanRepeats.ts and
+ * stageNotices.ts). A carrier's scan that names no place the
  * gazetteer finds, such as an office, takes the place of a left-out copy of it (`placeLenders`). A placeholder
  * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`). The steps its carrier
  * listed before they happen and that are still ahead are served apart from the scans, each with its place
@@ -272,8 +286,10 @@ function placedEvents(row: JsonObject): JsonObject {
   if (!Array.isArray(row.tracking_events) || !row.tracking_events.length) return row;
   const events = shownEvents(stored);
   const relays = relayLeads(events, relayCopies({ ...row, tracking_events: events }));
-  const repeats = repeatLeads(events, new Set([...relays.keys(), ...relays.values()]));
-  const shown = (event: JsonObject) => served(event, relays.get(String(event.id)) ?? repeats.get(String(event.id)));
+  const apart = new Set([...relays.keys(), ...relays.values()]);
+  const repeats = repeatLeads(events, apart);
+  const notices = noticeLeads(events, apart, repeats);
+  const shown = (event: JsonObject) => served(event, relays.get(String(event.id)) ?? notices.get(String(event.id)) ?? repeats.get(String(event.id)));
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   try {
     const ordered = [...events].sort((a, b) => String(a.occurred_at).localeCompare(String(b.occurred_at))

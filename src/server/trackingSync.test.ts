@@ -207,20 +207,19 @@ describe('tracking event normalization', () => {
     ]);
   });
 
-  it('reads a notice that keeps the stage of the scan before it as that stage, unless that steps back', () => {
+  it('reads a notice that keeps the stage of the scan before it as that stage, but after a delivery or a return', () => {
     // Synthetic notices a carrier marks as keeping the stage of the scan before it (`stage_source` `none`).
     const notice = (stage: string) => ({ time: '2026-09-10T15:08:00Z', description: 'Fixture notice 8', stage, stage_source: 'none' });
     const stages = (...events: JsonObject[]) => buildEvents({ id: 'package-1', carrier: 'dpd' }, { status: 'unknown', events })
       .map((row) => [row.description, row.stage, (row.raw_data as JsonObject).stage_source]);
-    // After a label, an acceptance, in transit or at customs, it keeps the stage it was left in.
-    for (const stage of ['registered', 'accepted', 'in_transit', 'customs']) {
+    // It keeps the stage it was left in: the apps show it under the scan and no alert announces it (stageNotices.ts).
+    for (const stage of ['registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery', 'ready_for_pickup', 'failed_attempt', 'exception']) {
       expect(stages(notice(stage), { time: '2026-09-10T08:00:00Z', description: 'Fixture scan', stage })).toEqual([
         ['Fixture notice 8', stage, 'none'], ['Fixture scan', stage, 'carrier_map'],
       ]);
     }
-    // After the round, a delivery, a pickup point, a missed attempt, a return or a problem it is pending: the
-    // scan it follows stays the newest in that stage, so its wording and time stand for the stage, not the notice's.
-    for (const stage of ['out_for_delivery', 'delivered', 'ready_for_pickup', 'failed_attempt', 'returned', 'exception']) {
+    // After a delivery or a return it is pending: a notice after the parcel arrived is no second delivery.
+    for (const stage of ['delivered', 'returned']) {
       expect(stages(notice(stage), { time: '2026-09-10T14:59:00Z', description: 'Fixture scan', stage })).toEqual([
         ['Fixture notice 8', 'pending', 'none'], ['Fixture scan', stage, 'carrier_map'],
       ]);

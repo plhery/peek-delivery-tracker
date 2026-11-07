@@ -410,7 +410,9 @@ and nothing typed is sent.
   delivery, a delivery, a pickup point, a missed attempt, a return or a problem). It is then
   stored as `pending`: it stays in the timeline as the carrier's news, but the parcel's stage,
   the apps' headline, alerts and the delivery email go by the newest scan in a stage, which a
-  pending scan never makes look out of date. A scan
+  pending scan never makes look out of date. A notice in that scan's stage keeps it, but after a
+  delivery or a return: it is served under the scan (`relay_of`), so the headline stays on the
+  scan, and it announces nothing (`src/server/stageNotices.ts`). A scan
   the carrier dated by its day alone, or on a wall clock in no zone, is served with that
   `day`: the apps list it under that day without a time, and the delivery email names that day. `src/server/eventPlaces.ts` applies this to every parcel and link the API serves; the
   account export keeps every stored row. Scans of one instant read by delivery progress

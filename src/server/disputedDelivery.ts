@@ -64,7 +64,9 @@ function ownStages(events: readonly JsonObject[], times: readonly number[]): (st
  * before it (out for delivery, a delivery, a pickup point, a missed attempt, a return or a
  * problem). It is then pending: it stays in the timeline as the carrier's news but moves the
  * parcel neither back nor on (a carrier's notice after the delivery), and its wording never
- * stands for the stage it followed. A scan left pending is in no stage.
+ * stands for the stage it followed. A scan left pending is in no stage. A notice its carrier
+ * left in the stage of that scan keeps it, but after a delivery or a return: the apps show it
+ * under the scan and no alert announces it (stageNotices.ts).
  */
 export function scanStages(events: readonly JsonObject[], instants: readonly (string | null)[]): string[] {
   const times = events.map((_, index) => Date.parse(instants[index] ?? ''));
@@ -77,13 +79,15 @@ export function scanStages(events: readonly JsonObject[], instants: readonly (st
     if (!Number.isFinite(at)) return kept;
     let newest = Number.NEGATIVE_INFINITY;
     let past = false;
+    let same = false;
     for (const [other, otherStage] of read.entries()) {
       const time = times[other];
       if (otherStage === null || otherStage === 'pending' || !Number.isFinite(time) || time > at || time < newest) continue;
       past = (time === newest && past) || PAST_TRANSIT.has(otherStage);
+      same = (time === newest && same) || otherStage === kept;
       newest = time;
     }
-    return past ? 'pending' : kept;
+    return past && !(same && !FINAL_STAGES.has(kept)) ? 'pending' : kept;
   });
 }
 

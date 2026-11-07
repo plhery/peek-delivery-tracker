@@ -2,6 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import * as observability from './observability';
 import * as places from 'universal-parcel-scraper/places';
 vi.mock('universal-parcel-scraper/places', { spy: true });
+import { currentEvent } from '../lib/stages';
+import type { Stage, TrackingEvent } from '../types';
 import { withEventPlaces, withoutEventSources } from './eventPlaces';
 
 it('keeps addition-only query context out of client package data', () => {
@@ -276,6 +278,41 @@ describe('withEventPlaces', () => {
       ['first', 'last'], ['again', 'last'], ['last', undefined], ['later', undefined],
       ['elsewhere', undefined], ['held', undefined], ['copy', undefined], ['back', undefined],
     ]);
+  });
+
+  it('serves a carrier\'s notice in the stage of its scan before it under that scan, so the headline stays on the scan', () => {
+    // Synthetic DPD Poland rows: a notice its adapter left in the stage of the scan before it (`stage_source` `none`).
+    const scan = (id: string, stage: string, occurredAt: string, stageSource: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, null, occurredAt), stage, description: `Fixture ${id}`, provider_event_id: `dpd-pl:${id}`, stage_source: stageSource, ...extra,
+    });
+    const row = {
+      id: 'parcel', carrier: 'dpd-pl', tracking_events: [
+        scan('collected', 'accepted', '2026-11-06T22:59:50Z', 'carrier_map'),
+        scan('notice', 'accepted', '2026-11-07T00:15:17Z', 'none'),
+        // A scan no rule reads is in transit in `none` too: news that the parcel moves, a row of its own.
+        scan('depot', 'in_transit', '2026-11-07T05:20:32Z', 'carrier_map'),
+        scan('unread', 'in_transit', '2026-11-07T06:00:00Z', 'none'),
+        scan('point', 'ready_for_pickup', '2026-11-07T09:15:46Z', 'carrier_map'),
+        // A mail notice and a text message of one instant both go under the scan.
+        scan('mail', 'ready_for_pickup', '2026-11-07T09:19:41Z', 'none'),
+        scan('text', 'ready_for_pickup', '2026-11-07T09:19:41Z', 'none'),
+        // A provider's row is no notice of the carrier's scan, nor a stage of its own the carrier gave.
+        scan('provider', 'ready_for_pickup', '2026-11-07T09:30:00Z', 'none', { provider_event_id: 'unknown:provider', universal_provider: '17TRACK' }),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([
+      ['collected', undefined], ['notice', 'collected'], ['depot', undefined], ['unread', undefined],
+      ['point', undefined], ['mail', 'point'], ['text', 'point'], ['provider', undefined],
+    ]);
+    expect(served.some((event) => 'stage_source' in event)).toBe(false);
+    // The apps' headline: the pickup point's scan, not the notices after it.
+    const parcelEvents: TrackingEvent[] = served.filter((event) => event.id !== 'provider').map((event) => ({
+      id: String(event.id), parcelId: 'parcel', stage: event.stage as Stage, description: String(event.description),
+      occurredAt: String(event.occurred_at), ...(typeof event.relay_of === 'string' ? { relayOf: event.relay_of } : {}),
+    }));
+    expect(currentEvent(parcelEvents)?.id).toBe('point');
+    expect((withoutEventSources(row).tracking_events as Record<string, unknown>[]).some((event) => 'stage_source' in event)).toBe(false);
   });
 
   it('leaves out a provider\'s copy of a confirmed carrier\'s scan, and pairs relay copies without it', () => {

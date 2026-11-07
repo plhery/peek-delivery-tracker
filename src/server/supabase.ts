@@ -40,7 +40,7 @@ const PACKAGE_COLUMNS = [
  * provider_event_id tells Peek's own rows from the carrier's: the response
  * carries neither. The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
-const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order)`;
+const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source)`;
 const ACTIVE_PACKAGE_SELECT = 'id,user_id,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
 /**
  * Where the sync loaders put each stored event's identity, instant, stage and
@@ -219,7 +219,7 @@ export interface DeliveryEmailClaim {
 export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
-export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string };
+export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string; stageSource?: string };
 
 /** A connected assistant or personal token of an account, as its owner sees it in Settings. */
 export interface AssistantGrant {
@@ -766,22 +766,23 @@ export class SupabaseClient {
   }
 
   /**
-   * Each package's newest scans, enough to tell a generated track by (`generatedScans`) and a carrier's
-   * repeats of a scan (`repeatedScans`).
+   * Each package's newest scans, enough to tell a generated track by (`generatedScans`), a carrier's
+   * repeats of a scan (`repeatedScans`) and its notices in the stage of the scan before them (`stageNotices`).
    */
   async recentScans(packageIds: string[]): Promise<Map<string, RecentScan[]>> {
     const recent = new Map<string, RecentScan[]>();
     await Promise.all([...new Set(packageIds)].map(async (packageId) => {
       const events = rows(await this.request(`/rest/v1/tracking_events?${query([
         ['package_id', `eq.${packageId}`],
-        ['select', 'id,stage,location,occurred_at,description,provider_event_id,universal_provider:raw_data->>universal_provider'],
+        ['select', 'id,stage,location,occurred_at,description,provider_event_id,universal_provider:raw_data->>universal_provider,stage_source:raw_data->>stage_source'],
         ['order', 'occurred_at.desc'],
         ['limit', '60'],
       ])}`));
-      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, description, provider_event_id, universal_provider }) =>
+      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, description, provider_event_id, universal_provider, stage_source }) =>
         typeof id === 'string' && typeof occurred_at === 'string' ? [{
           id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}),
           description: typeof description === 'string' ? description.trim() : '', source: scanSource(provider_event_id, universal_provider),
+          ...(typeof stage_source === 'string' ? { stageSource: stage_source } : {}),
         }] : []));
     }));
     return recent;

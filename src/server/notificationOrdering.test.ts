@@ -395,6 +395,52 @@ it.each(['web', 'native'] as const)('records an earlier carrier\'s scan told aft
   expect(await dispatched('late')).toEqual(['late']);
 });
 
+it.each(['web', 'native'] as const)('records a carrier\'s notice in the stage of its scan before it as handled, and announces that scan, for %s', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const clock = clocks('2026-11-05T14:05:00Z');
+  const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+  const service = channel === 'web' ? new WebPushNotificationService(client, '', '', '', clock.web) : apns;
+  const send = vi.spyOn(service, 'send').mockResolvedValue();
+  const ack = channel === 'web' ? vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue() : vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+  const pending = channel === 'web' ? vi.spyOn(client, 'listPendingPushNotifications') : vi.spyOn(client, 'listPendingNativePushNotifications');
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  // DPD Poland's parcel reached a pickup point, and the carrier mailed the recipient hours later.
+  const scans = [
+    { id: 'point', stage: 'ready_for_pickup', occurredAt: '2026-11-05T09:00:00Z', created: '2026-11-05T12:40:00Z', stageSource: 'carrier_map' },
+    { id: 'mail', stage: 'ready_for_pickup', occurredAt: '2026-11-05T12:30:00Z', created: '2026-11-05T12:40:00Z', stageSource: 'none' },
+    { id: 'collected', stage: 'delivered', occurredAt: '2026-11-05T14:00:00Z', created: '2026-11-05T14:02:00Z', stageSource: 'carrier_map' },
+  ] as const;
+  let stored: readonly string[] = [];
+  const kept = () => scans.filter((scan) => stored.includes(scan.id)).reverse();
+  const recent = vi.mocked(client.recentScans).mockImplementation(async () => new Map([['pkg', kept().map(({ id, stage, occurredAt, stageSource }) => ({
+    id, stage, occurredAt, stageSource, description: '', source: 'dpd-pl',
+  }))]]));
+  vi.spyOn(client, 'latestScanTimes').mockImplementation(async () => new Map([['pkg', kept()[0]!.occurredAt]]));
+  const dispatched = async (...ids: string[]) => {
+    stored = [...new Set([...stored, ...ids])];
+    pending.mockResolvedValueOnce(ids.map((id) => {
+      const { stage, occurredAt, created } = scans.find((scan) => scan.id === id)!;
+      return { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_id: id, stage, occurred_at: occurredAt, event_created_at: created };
+    }));
+    send.mockClear(); ack.mockClear();
+    await service.dispatch();
+    expect(ack).toHaveBeenCalledExactlyOnceWith(channel === 'web' ? 'sub' : 'device', ids);
+    return send.mock.calls.map(([event]) => event.event_id);
+  };
+  // One check brings both: the pickup point is announced, though the notice after it is the parcel's newest scan.
+  expect(await dispatched('point', 'mail')).toEqual(['point']);
+  // A later check brings the notice: no news.
+  stored = ['point'];
+  expect(await dispatched('mail')).toEqual([]);
+  // The delivery after it is news as ever, and a failed lookup announces as before.
+  expect(await dispatched('collected')).toEqual(['collected']);
+  stored = ['point'];
+  recent.mockRejectedValueOnce(new Error('down'));
+  expect(await dispatched('mail')).toEqual(['mail']);
+});
+
 it.each(['web', 'native'] as const)('counts each batch by what became of it, for %s notifications', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
   const clock = clocks('2026-10-08T12:00:30Z');

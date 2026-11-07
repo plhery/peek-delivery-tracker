@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 6 November 2026
+Effective: 8 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -128,8 +128,13 @@ such as ParcelsApp, Ship24, 17TRACK and the Universal Postal Union. The
 carriers and services it can ask are listed in the open-source
 [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper).
 A postcode or private link you supply goes to the carrier it is for; ParcelsApp
-and 17TRACK also receive the postcode, and 17TRACK the parcel's carrier. Dachser's link shows more than the journey: the
-service discards its sender, recipient, address, contact and document fields.
+and 17TRACK also receive the postcode, and 17TRACK the parcel's carrier. In an
+account, when a check finds that an open parcel saved without a postcode is with
+a carrier that shows more with one, such as DPD, the service gives it, once, the
+latest postcode you gave another parcel, preferring one for the same carrier.
+It then goes where a postcode you typed would, and you can change or clear it
+on the parcel. Dachser's link shows more than the journey: the service discards
+its sender, recipient, address, contact and document fields.
 
 Browser push services receive encrypted Web Push messages; Apple processes the
 iPhone app's notification and Live Activity payloads through APNs, and Google
@@ -223,10 +228,10 @@ simulators, emulators, and unconfigured self-hosted deployments do not collect.
 
 You can follow a parcel without signing in. The service then stores its
 tracking number, the carrier, a postcode or tracking link if the carrier needs
-one, the tracking history, and a link to the parcel. No account, email address
-or name is stored. A name you give the parcel stays in your browser or in the
+one, the tracking history, and a link to the parcel. No account or email
+address is stored. A name you give the parcel stays in your browser or in the
 iPhone or Android app, and in the part of a link after `#`, which is not sent
-to the service.
+to the service, unless you share the parcel as a gift, as described below.
 
 Your device keeps a key that shows it made the lookup; the service stores only
 a hash of that key. Anyone who has the link can see the parcel's status and
@@ -265,7 +270,8 @@ number as described above and under "Retention and control".
 
 You can share a parcel through its link, with or without an account. Anyone
 who has the link sees the parcel's status and history. They never see a pickup
-code, a postcode, the recipient's name or the name you gave the parcel, and
+code, a postcode or the recipient's name. They see the name you gave the parcel
+only if you choose to show it, and
 the tracking number stays masked unless you choose to show it. An app that
 previews the link, a chat app for instance, gets the parcel's status, carrier
 and estimate, never the number, a name or a place.
@@ -279,11 +285,12 @@ You can stop sharing at any time. The link then only says that the parcel is
 not shared anymore. A stopped link from an account is deleted 30 days later;
 deleting the parcel or the account deletes its links at once.
 
-The name of a parcel, a gift note and who a gift is from are never sent to the
-service. They travel in the part of the link after `#` and stay in the
-browsers of the people who have the link. The browser you share from remembers
-what you chose to send along, until the parcel is forgotten on that device. A
-gift's page shows its recipient none of it before the parcel is delivered.
+A name you choose to show travels in the part of the link after `#`, which is
+not sent to the service. A gift's link carries nothing there: the name you
+show, a note and who the gift is from go to the service, which keeps them with
+the link and shows them to its viewers only once the parcel is delivered. They
+are deleted with the link. The browser or app you share from remembers what you
+chose to send along, until the parcel is forgotten on that device.
 
 Anyone who has a link can turn on notifications for that one parcel, without an
 account, in their browser or in the iPhone or Android app. The service then

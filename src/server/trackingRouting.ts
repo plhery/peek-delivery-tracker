@@ -880,11 +880,14 @@ export class TrackingRouter {
       }
       // It refuses the postcode stored for it: it asks for it again, finds it invalid, or finds no parcel
       // with it while the parcel is moving (PostNL's domestic tracker answers a wrong postcode as an unknown
-      // barcode). The owner is told, as DPD's own flag tells them.
-      if (!universalSource && provider === declared && postcode
-        && activeRequirements(provider, number).some(({ field }) => field === 'postcode')
+      // barcode). A carrier that finds the parcel by its number alone and only shows more with the postcode
+      // (DPD) has lost the number, not refused the postcode. The owner is told, as DPD's own flag tells them.
+      const postcodeAsked = !universalSource && provider === declared && postcode
+        ? activeRequirements(provider, number).filter(({ field }) => field === 'postcode') : [];
+      if (postcodeAsked.length > 0
         && (kind === 'input_required' || kind === 'invalid_input'
-          || ((kind === 'not_found' || kind === 'no_history') && !['pending', 'registered'].includes(String(parcel.current_stage ?? 'pending'))))) {
+          || ((kind === 'not_found' || kind === 'no_history') && !postcodeAsked.some((rule) => 'showsMore' in rule && rule.showsMore === true)
+            && !['pending', 'registered'].includes(String(parcel.current_stage ?? 'pending'))))) {
         state.postcode_refused = { carrier: provider };
       }
       // Called before another provider is attempted, including recovered failures.

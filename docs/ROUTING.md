@@ -335,7 +335,7 @@ and providers scan parcels across every time zone.
 | Followed without an account, no link opened for an hour and no alert on | every 3 h; opening a link queues a check at once |
 | Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h |
 | Without an account, filed under no carrier or one with no adapter of its own, newest scan over 14 days old, no link opened for an hour and no alert on | daily; opening a link queues a check at once |
-| Another carrier holds it and waits for the delivery postcode (`routing.input_needed`); or its own carrier waits for it or refuses the one stored (`routing.postcode_refused`), and nothing has answered for the parcel for a day | daily; adding or changing the postcode checks it at once |
+| A carrier waits for the delivery postcode (`routing.input_needed`): one that knows the number, whether the parcel is filed under it yet or not, or its own; or its own refuses the one stored (`routing.postcode_refused`); and nothing has answered for the parcel for a day since it was added | daily; adding or changing the postcode checks it at once |
 | Number no carrier or provider has seen (no carrier identified, no history, no input asked) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below). An account's parcel whose number points to a carrier (`routing.likely_carrier`, Carrier recognition, below): hourly, as a parcel waiting for its carrier's first scan, for 30 days after it was added |
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
 | Delivered on a provider's word alone, which the parcel's carrier did not show (below) | daily around the clock for 3 days |
@@ -567,14 +567,16 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   the parcel behind an input it lists as optional (DHL's postcode, when several shipments
   share a twelve-digit number, and GLS Austria's); a lookup that fails on the way leaves the request.
   The owner adding the postcode files the parcel under that carrier. Until then the providers
-  serve the parcel and are asked daily. The parcel's own carrier asks the same way when
+  serve the parcel at its usual pace. The parcel's own carrier asks the same way when
   its adapter needs a postcode it lists for the number and the parcel has none (PostNL's for a
-  3S barcode sent within the Netherlands): the providers keep serving the parcel at its usual
-  pace, a check the carrier answers drops the request, and with no source serving the parcel
-  the sync error asks instead and the parcel is checked daily once nothing has answered for a day.
-  A postcode stored for it that it refuses, asking for it again or
+  3S barcode sent within the Netherlands): the providers keep serving the parcel, a check the
+  carrier answers drops the request, and with no source serving the parcel the sync error asks
+  instead. Either way the parcel is checked daily once nothing has answered for it for a day.
+  A postcode stored for it that it refuses, asking for it again or finding it invalid, or
   finding no parcel with it while the parcel is past its label, is flagged to the owner as DPD's
-  own refusal is, until the carrier answers or the owner changes the postcode (`routing.postcode_refused`). A lookup without an account shows the request
+  own refusal is, until the carrier answers or the owner changes the postcode (`routing.postcode_refused`).
+  A carrier that finds the parcel by its number alone and only shows more with the postcode
+  (DPD) finding no parcel has lost the number, which is no refusal. A lookup without an account shows the request
   to whoever holds the link's owner key, and to no viewer
   ([`postcode/route.ts`](../app/api/public/parcels/[linkId]/postcode/route.ts)). The server
   asks that carrier's own tracking with the postcode, and its country when the owner names

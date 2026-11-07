@@ -3225,7 +3225,7 @@ describe('TrackingSyncService', () => {
     expect(isOpenedParcelSyncDue(lookup('quiet', { last_synced_at: '2026-09-09T10:00:15Z' }), new Date('2026-09-09T12:00:00Z'))).toBe(true);
   });
 
-  it('asks the providers daily while a carrier holding the parcel waits for its postcode', async () => {
+  it('asks the providers daily while a carrier waits for the parcel\'s postcode and nothing answers', async () => {
     const waiting = { carrier: 'dhl', field: 'dpdPostcode' };
     const owned = (id: string, extra: JsonObject = {}, needed: JsonObject | null = waiting): JsonObject => ({ id, user_id: 'user-1',
       one_off: false, carrier: 'unknown', current_stage: 'in_transit', tracking_number: ON_THE_HOUR, created_at: '2026-09-05T10:00:00Z',
@@ -3242,18 +3242,26 @@ describe('TrackingSyncService', () => {
       await service.sync();
       return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
     };
-    // Checked three hours ago: a parcel still moving would be due, but this one waits for a day, overnight too.
-    await expect(check('2026-09-09T12:00:00Z', [owned('moving', {}, null)])).resolves.toEqual(['moving']);
-    await expect(check('2026-09-09T12:00:00Z', [owned('waiting')])).resolves.toEqual([]);
-    await expect(check('2026-09-09T12:00:00Z', [owned('waiting', { last_synced_at: '2026-09-08T12:00:15Z' })])).resolves.toEqual(['waiting']);
-    await expect(check('2026-09-09T23:00:00Z', [owned('waiting', { last_synced_at: '2026-09-08T23:00:15Z' })])).resolves.toEqual(['waiting']);
-    // Filed under that carrier, or asked for a link the parcel does not ask the owner for, it keeps its cadence.
-    await expect(check('2026-09-09T12:00:00Z', [owned('filed', { carrier: 'dhl' })])).resolves.toEqual(['filed']);
-    // Unless nothing has answered for the parcel for a day, as when its carrier refuses the postcode stored.
-    // Adding or changing the postcode clears the parcel's last check, so the next run checks it.
     const routed = (parcel: JsonObject, routing: JsonObject): JsonObject => ({ ...parcel,
       carrier_data: { routing: { ...(parcel.carrier_data as { routing: JsonObject }).routing, ...routing } } });
     const unanswered = { last_success_at: '2026-09-08T11:00:00Z' };
+    // Checked three hours ago, a parcel still moving is due. So is one a provider answered for within the
+    // day while DHL, which knows the number, waits for the postcode: filed under DHL yet or not, a
+    // provider may track it without one.
+    await expect(check('2026-09-09T12:00:00Z', [owned('moving', {}, null)])).resolves.toEqual(['moving']);
+    await expect(check('2026-09-09T12:00:00Z', [owned('waiting')])).resolves.toEqual(['waiting']);
+    await expect(check('2026-09-09T12:00:00Z', [owned('filed', { carrier: 'dhl' })])).resolves.toEqual(['filed']);
+    // Once nothing has answered for a day, it waits for a day between checks, overnight too.
+    const quiet = routed(owned('waiting'), unanswered);
+    await expect(check('2026-09-09T12:00:00Z', [quiet])).resolves.toEqual([]);
+    await expect(check('2026-09-09T12:00:00Z', [{ ...quiet, last_synced_at: '2026-09-08T12:00:15Z' }])).resolves.toEqual(['waiting']);
+    await expect(check('2026-09-09T23:00:00Z', [{ ...quiet, last_synced_at: '2026-09-08T23:00:15Z' }])).resolves.toEqual(['waiting']);
+    // A parcel added within the day keeps its cadence though nothing has answered yet.
+    const added = routed(owned('added', { created_at: '2026-09-09T08:00:00Z', sync_status: 'error' }), { last_success_at: null });
+    await expect(check('2026-09-09T12:00:00Z', [added])).resolves.toEqual(['added']);
+    await expect(check('2026-09-10T12:00:00Z', [{ ...added, last_synced_at: '2026-09-10T09:00:15Z' }])).resolves.toEqual([]);
+    // So it goes for the parcel's own carrier waiting for the postcode, or refusing the one stored.
+    // Adding or changing the postcode clears the parcel's last check, so the next run checks it.
     await expect(check('2026-09-09T12:00:00Z', [routed(owned('alone', { carrier: 'dhl' }), unanswered)])).resolves.toEqual([]);
     await expect(check('2026-09-09T12:00:00Z', [routed(owned('given', { carrier: 'dhl', dpd_postcode: '8001' }), unanswered)]))
       .resolves.toEqual(['given']);
@@ -3267,7 +3275,7 @@ describe('TrackingSyncService', () => {
       .resolves.toEqual(['refused']);
     await expect(check('2026-09-09T12:00:00Z', [owned('link', {}, { carrier: 'dhl', field: 'trackingUrl' })])).resolves.toEqual(['link']);
     // A lookup without an account waits the same; opening its link checks it at that cadence.
-    const lookup = { ...owned('lookup'), user_id: null, one_off: true };
+    const lookup = { ...routed(owned('lookup'), unanswered), user_id: null, one_off: true };
     expect(isOpenedParcelSyncDue(lookup, new Date('2026-09-09T12:00:00Z'))).toBe(false);
     expect(isOpenedParcelSyncDue({ ...lookup, last_synced_at: '2026-09-08T12:00:15Z' }, new Date('2026-09-09T12:00:00Z'))).toBe(true);
   });

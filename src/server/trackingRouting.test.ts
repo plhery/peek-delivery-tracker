@@ -1449,6 +1449,19 @@ describe('persistent tracking routing', () => {
         else expect(routing).not.toHaveProperty('postcode_refused');
       }
     });
+    it('does not read DPD losing a moving parcel\'s number as a refusal of the postcode stored for it', async () => {
+      // DPD finds a parcel by its number alone; the postcode only shows more of it.
+      const moving = parcel({ carrier: 'dpd', tracking_number: '06080000000001', dpd_postcode: '8000', current_stage: 'in_transit' });
+      for (const error of [new NotFoundError('DPD'), new NoHistoryError('DPD')]) {
+        const lost = setup();
+        lost.direct.mockRejectedValue(error);
+        expect((await lost.router.fetch(moving, false)).result.routing).not.toHaveProperty('postcode_refused');
+      }
+      // A postcode it finds invalid is refused all the same.
+      const invalid = setup();
+      invalid.direct.mockRejectedValue(new InvalidInputError('DPD', 'DPD postcode must be 3 to 12 letters and digits with a digit'));
+      expect((await invalid.router.fetch(moving, false)).result.routing).toMatchObject({ postcode_refused: { carrier: 'dpd' } });
+    });
     it('suggests a carrier that cannot be asked about the number without the postcode', async () => {
       // An 8-digit shipment fits Mondial Relay, which needs the recipient's postcode for it, so
       // recognition cannot ask it; a parcel looked up from France is offered it.

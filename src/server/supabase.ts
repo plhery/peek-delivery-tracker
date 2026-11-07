@@ -1863,7 +1863,8 @@ export class SupabaseServiceClient extends SupabaseClient {
     }
 
     const params = query({
-      select: 'id,user_id,package_id,kind,state,priority,requested_at',
+      // The reason too: a reader's check takes over one a link queued (below).
+      select: 'id,user_id,package_id,kind,state,priority,requested_at,reason',
       dedupe_key: `eq.${dedupeKey}`,
       limit: '1',
     });

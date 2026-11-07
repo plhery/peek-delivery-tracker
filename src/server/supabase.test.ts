@@ -347,19 +347,40 @@ describe('one-off parcels and their links', () => {
 
   it('gives a queued check to the reader who asks for it, unless they only opened its link', async () => {
     const client = service();
-    const release = { id: 'job', state: 'queued', priority: -30, reason: 'release' };
-    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([]).mockResolvedValueOnce([release]).mockResolvedValueOnce([release]);
+    // The queued job in the way: the insert finds its key taken, a read answers with the columns
+    // its select names alone, as the database does, and an update guarded by its state applies.
+    const table = (job: Record<string, unknown>) => async (path: string, options: { method?: string; body?: unknown } = {}) => {
+      if (options.method === 'POST') return [];
+      const filters = params(path);
+      if (options.method === 'PATCH') {
+        return filters.get('state') === `eq.${String(job.state)}` ? [{ ...job, ...options.body as object }] : [];
+      }
+      const columns = filters.get('select')!.split(',');
+      return [Object.fromEntries(columns.filter((column) => Object.hasOwn(job, column)).map((column) => [column, job[column]]))];
+    };
+    const release = { id: 'job', package_id: 'package-1', kind: 'package', state: 'queued', priority: -30, reason: 'release' };
+    const request = vi.spyOn(client, 'request').mockImplementation(table(release));
     await client.enqueueSyncJob({ packageId: 'package-1', reason: 'opened' });
     // A link opened moves a release's re-check up and leaves it the release's.
     expect(request.mock.calls[2][1]).toMatchObject({ method: 'PATCH', body: { priority: -20 } });
     expect(request.mock.calls[2][1]!.body).not.toHaveProperty('reason');
     const opened = { ...release, priority: -20, reason: 'opened' };
-    request.mockReset().mockResolvedValueOnce([]).mockResolvedValueOnce([opened]).mockResolvedValueOnce([opened]);
-    await client.enqueueSyncJob({ packageId: 'package-1', reason: 'added' });
-    // Adding the parcel takes over the check its link queued, at the same priority.
-    expect(request.mock.calls[2][1]).toMatchObject({ method: 'PATCH', body: { priority: -20, reason: 'added' } });
-    request.mockReset().mockResolvedValueOnce([]).mockResolvedValueOnce([opened]);
+    for (const reason of ['added', 'changed', 'refresh'] as const) {
+      request.mockReset().mockImplementation(table(opened));
+      // Filing a postcode, adding or claiming the parcel takes over the check its link queued, at
+      // the same priority, guarded by the job's state, so its check is not dropped as the link's.
+      await expect(client.enqueueSyncJob({ packageId: 'package-1', reason })).resolves
+        .toEqual({ row: { ...opened, reason }, queued: false });
+      const [path, options] = request.mock.calls[2]!;
+      expect(Object.fromEntries(params(path))).toEqual({ id: 'eq.job', state: 'eq.queued' });
+      expect(options).toMatchObject({ method: 'PATCH', body: { priority: -20, reason } });
+    }
+    request.mockReset().mockImplementation(table(opened));
     await client.enqueueSyncJob({ packageId: 'package-1', reason: 'opened' });
+    expect(request).toHaveBeenCalledTimes(2);
+    // A job a worker took meanwhile keeps its reason: the update finds no queued job.
+    request.mockReset().mockImplementation(table({ ...opened, state: 'running' }));
+    await client.enqueueSyncJob({ packageId: 'package-1', reason: 'changed' });
     expect(request).toHaveBeenCalledTimes(2);
   });
 

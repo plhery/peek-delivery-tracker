@@ -49813,6 +49813,91 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.skynet.com.my/track"
+    },
+    "hub-delivery": {
+      "displayName": "HUB Delivery",
+      "aliases": [
+        "HUB Delivery Incorporated",
+        "Hub Delivery, Inc.",
+        "HUB Delivery Services",
+        "HUB Delivery Incorporarted"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#000000",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.hubdelivery.com/HubDelivery/PackageTracking.html?search={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.hubdelivery.com",
+            "hubdelivery.com"
+          ],
+          "pathPattern": "^/HubDelivery/PackageTracking\\.html$",
+          "params": [
+            "search"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.hubdelivery.com/HubDelivery/PackageTracking.html"
+    },
+    "kuqi": {
+      "displayName": "Kuqi Supply Chain",
+      "aliases": [
+        "SZKUQI",
+        "Kuqi",
+        "库奇"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#01696c",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://618881.ollogistic.com/tracking?code={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "618881.ollogistic.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "code"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://618881.ollogistic.com/tracking"
+    },
+    "national-delivery-systems": {
+      "displayName": "National Delivery Systems",
+      "aliases": [
+        "National Delivery Systems, Inc."
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#2f4a9c",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ndsweb.tmwcloud.com/trace/external.msw"
     }
   }
 }

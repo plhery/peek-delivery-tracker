@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 /// A parcel followed on this iPhone without an account: the link the service made for it, the
 /// key that owns the link, and what this device knows about the parcel. A parcel followed
@@ -194,29 +195,57 @@ struct DeviceParcelClient: Sendable {
 protocol DeviceParcelStorage {
     func load() -> (parcels: [DeviceParcel], keys: [String: String])
     func save(_ parcels: [DeviceParcel], keys: [String: String])
+    /// The links of this iPhone's own forgotten here before the service could be told, with their keys.
+    func loadForgetting() -> [String: String]
+    func saveForgetting(_ links: [String: String])
+}
+
+extension DeviceParcelStorage {
+    func loadForgetting() -> [String: String] { [:] }
+    func saveForgetting(_ links: [String: String]) {}
 }
 
 struct DeviceParcelFiles: DeviceParcelStorage {
+    private static let log = Logger(subsystem: "com.plhery.PeekDeliveryTracker", category: "DeviceParcels")
     private let keychain = KeychainStore(service: "com.plhery.PeekDeliveryTracker.deviceParcels")
+    private let forgettingKeychain = KeychainStore(service: "com.plhery.PeekDeliveryTracker.deviceParcels.forgetting")
 
     func load() -> (parcels: [DeviceParcel], keys: [String: String]) {
         let keys: [String: String] = keychain.load() ?? [:]
         return Self.opened((try? Self.fileURL()).flatMap { try? Data(contentsOf: $0) }, keys: keys)
     }
 
-    /// The parcels on file, with their keys. A file this build can't read keeps every key, so
-    /// the service can be asked to forget their links.
+    /// The parcels on file, with their keys. The file only shows what was last known: a row this
+    /// build can't read is left out, and its key stays, for the parcel to be read again with it.
     static func opened(_ file: Data?, keys: [String: String]) -> (parcels: [DeviceParcel], keys: [String: String]) {
         guard let file else { return ([], [:]) }
-        guard let parcels = try? JSONDecoder.deliveryTracker.decode([DeviceParcel].self, from: file) else { return ([], keys) }
-        return matched(parcels, keys: keys)
+        return matched(rows(file), keys: keys)
     }
 
-    /// A parcel of this iPhone's own without its key cannot be read or forgotten, and a key without
-    /// its parcel opens nothing. A parcel followed through someone else's link needs no key.
+    /// The parcels a file holds, row by row: one this build can't read, written by another build,
+    /// leaves the others in place. A file that isn't a list holds none.
+    static func rows(_ file: Data) -> [DeviceParcel] {
+        guard let rows = try? JSONDecoder.deliveryTracker.decode([Row].self, from: file) else {
+            log.error("The device's parcels file could not be read")
+            return []
+        }
+        let parcels = rows.compactMap(\.parcel)
+        if parcels.count < rows.count { log.error("Left out \(rows.count - parcels.count) of the device's parcels that could not be read") }
+        return parcels
+    }
+
+    private struct Row: Decodable {
+        let parcel: DeviceParcel?
+        init(from decoder: any Decoder) throws { parcel = try? DeviceParcel(from: decoder) }
+    }
+
+    /// A parcel of this iPhone's own without its key cannot be read or forgotten. A key without its
+    /// parcel is the parcel's to read again. A parcel followed through someone else's link needs no
+    /// key, and a key beside it opens nothing.
     static func matched(_ parcels: [DeviceParcel], keys: [String: String]) -> (parcels: [DeviceParcel], keys: [String: String]) {
         let kept = parcels.filter { $0.isViewer || keys[$0.linkID] != nil }
-        return (kept, keys.filter { key, _ in kept.contains { $0.linkID == key && !$0.isViewer } })
+        let viewers = Set(kept.filter(\.isViewer).map(\.linkID))
+        return (kept, keys.filter { !viewers.contains($0.key) })
     }
 
     func save(_ parcels: [DeviceParcel], keys: [String: String]) {
@@ -228,9 +257,14 @@ struct DeviceParcelFiles: DeviceParcelStorage {
         }
         // The keys go first: a parcel on file always has its key.
         if keys.isEmpty { keychain.delete() } else if (try? keychain.save(keys)) == nil { return }
-        // Keys alone are those of a file that couldn't be read, which stays until their links are forgotten.
-        guard !parcels.isEmpty, let data = try? JSONEncoder.deliveryTracker.encode(parcels) else { return }
+        guard let data = try? JSONEncoder.deliveryTracker.encode(parcels) else { return }
         try? data.write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    func loadForgetting() -> [String: String] { forgettingKeychain.load() ?? [:] }
+
+    func saveForgetting(_ links: [String: String]) {
+        if links.isEmpty { forgettingKeychain.delete() } else { try? forgettingKeychain.save(links) }
     }
 
     private static func fileURL() throws -> URL {
@@ -261,9 +295,14 @@ final class DeviceParcels {
     let postcodes: PostcodeMemory
     private let now: () -> Date
     private var entries: [DeviceParcel]
+    /// The owner keys of this iPhone's own parcels. One without its entry is a parcel whose last answer
+    /// was lost or couldn't be read: it is read again with its key, never forgotten for it.
     private var keys: [String: String]
     /// Parcels forgotten here whose notifications are still to be turned off, on file beside the others.
     private var forgotten: [DeviceParcel]
+    /// Links of this iPhone's own forgotten here that the service is still to forget, with their keys.
+    private var forgetting: [String: String]
+    private var savedForgetting: [String: String]
     /// The tokens and languages rounds of notification requests are under way for.
     private var alertRounds: Set<String> = []
     /// The token and language each parcel's notifications were asked for since launch. Each
@@ -277,10 +316,14 @@ final class DeviceParcels {
         self.storage = storage
         self.postcodes = postcodes
         self.now = now
+        let forgetting = storage.loadForgetting()
         let (parcels, keys) = storage.load()
-        entries = parcels.filter { $0.forgotten != true }
+        // A link being forgotten stays forgotten, even where the list was saved before it was.
+        entries = parcels.filter { $0.forgotten != true && forgetting[$0.linkID] == nil }
         forgotten = parcels.filter { $0.forgotten == true }
-        self.keys = keys
+        self.keys = keys.filter { forgetting[$0.key] == nil }
+        self.forgetting = forgetting
+        savedForgetting = forgetting
     }
 
     var isEmpty: Bool { entries.isEmpty }
@@ -325,10 +368,11 @@ final class DeviceParcels {
         if let twin = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
             let old = entries.remove(at: twin)
             let key = keys.removeValue(forKey: old.linkID)
+            if let key { forgetting[old.linkID] = key }
             if key != nil || old.alertToken != nil {
                 Task {
                     if let token = old.alertToken { try? await client.removeAlert(old.linkID, DeleteParcelAppAlertRequest(token: token)) }
-                    if let key { try? await client.forget(old.linkID, key) }
+                    if let key { await self.tellForgotten(old.linkID, key: key, client) }
                 }
             }
             // The parcel being replaced came back unchanged: only its link is new.
@@ -345,17 +389,13 @@ final class DeviceParcels {
         return Self.shown(entry)
     }
 
-    /// Reads every parcel whose answer has gone stale, or every one when `all`. A parcel the
-    /// service no longer has leaves the list. The first trouble ends the round and is thrown;
-    /// the list keeps what the device has.
+    /// Reads every parcel whose answer has gone stale, or every one when `all`, and brings back
+    /// the ones whose last answer was lost. A parcel the service no longer has leaves the list.
+    /// The first trouble ends the round and is thrown; the list keeps what the device has.
     func refresh(all: Bool = false, only id: UUID? = nil) async throws {
         guard let client else { return }
         await stopForgottenAlerts(client)
-        // Keys without their parcel, left by a file that couldn't be read: the service forgets those links too.
-        for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
-            guard (try? await client.forget(linkID, key)) != nil, !entries.contains(where: { $0.linkID == linkID }) else { continue }
-            keys[linkID] = nil
-        }
+        await tellForgotten(client)
         var trouble: Error?
         for entry in entries where id == nil || entry.parcel.id == id {
             let key = keys[entry.linkID]
@@ -380,8 +420,49 @@ final class DeviceParcels {
                 break
             }
         }
+        if id == nil, let error = await recover(client) { trouble = trouble ?? error }
         save()
         if let trouble { throw trouble }
+    }
+
+    /// Reads again, with its key, each parcel of this iPhone's own whose entry was lost or couldn't
+    /// be read, and puts it back on the list, without the name it had here. Only a link the service
+    /// no longer has, or no longer owns with the key, lets its key go: losing the list never forgets
+    /// anything on the service. The first trouble ends the round and is returned; the rest wait.
+    private func recover(_ client: DeviceParcelClient) async -> Error? {
+        for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
+            let response: PublicParcelResponse?
+            do { response = try await client.read(linkID, key) } catch { return error }
+            // Forgotten, followed or let go meanwhile.
+            guard keys[linkID] == key, !entries.contains(where: { $0.linkID == linkID }) else { continue }
+            // A parcel already here through another link stays as it is.
+            guard let response, response.link.id == linkID, response.link.role == .owner,
+                  !entries.contains(where: { $0.parcel.id == response.package.id }) else {
+                keys[linkID] = nil
+                continue
+            }
+            entries.append(DeviceParcel(linkID: linkID, label: "", archivedAt: nil, parcel: Parcel(shared: response.package), checkedAt: now()))
+        }
+        return nil
+    }
+
+    /// Tells the service to forget the links forgotten here before it could be. The first trouble
+    /// ends the round; the rest wait for the next.
+    private func tellForgotten(_ client: DeviceParcelClient) async {
+        for (linkID, key) in forgetting {
+            guard await tellForgotten(linkID, key: key, client) else { return }
+        }
+    }
+
+    /// Whether the service forgot the link, or had already. Until it has, its key stays aside.
+    @discardableResult
+    private func tellForgotten(_ linkID: String, key: String, _ client: DeviceParcelClient) async -> Bool {
+        guard (try? await client.forget(linkID, key)) != nil else { return false }
+        if forgetting[linkID] == key {
+            forgetting[linkID] = nil
+            save()
+        }
+        return true
     }
 
     func rename(id: UUID, label: String) throws -> Parcel {
@@ -392,25 +473,29 @@ final class DeviceParcels {
         try update(id) { $0.archivedAt = archived ? DateParser.isoString(self.now()) : nil }
     }
 
-    /// The service forgets the parcel, then the device does. Someone else's parcel is forgotten
-    /// here alone: its notifications on this iPhone stop, and its link goes on working for others.
-    /// When the service can't be told yet, it leaves the list and each refresh tells it again.
-    func forget(id: UUID) async throws {
+    /// The device forgets the parcel at once, and the service forgets the link of this iPhone's own
+    /// behind it: when it can't be told yet, the key stays aside and each refresh tells it again.
+    /// Someone else's parcel is forgotten here alone: its notifications on this iPhone stop, and its
+    /// link goes on working for others.
+    func forget(id: UUID) async {
         guard let index = entries.firstIndex(where: { $0.parcel.id == id }) else { return }
-        var entry = entries[index]
-        var alerting = false
-        if let client, let token = entry.alertToken {
-            alerting = (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) == nil
-        }
-        if let client, let key = keys[entry.linkID] { try await client.forget(entry.linkID, key) }
-        entries.removeAll { $0.linkID == entry.linkID }
-        keys[entry.linkID] = nil
-        // A forgotten link of this iPhone's own takes its notifications with it; someone else's goes on.
-        if alerting, entry.isViewer {
+        var entry = entries.remove(at: index)
+        let key = keys.removeValue(forKey: entry.linkID)
+        if let key { forgetting[entry.linkID] = key }
+        // A forgotten link of this iPhone's own takes its notifications with it; someone else's goes
+        // on, and stays on file until its notifications here are turned off.
+        let token = client == nil ? nil : entry.alertToken
+        if token != nil, entry.isViewer {
             entry.forgotten = true
             forgotten.append(entry)
         }
         save()
+        guard let client else { return }
+        if let token, (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil, entry.isViewer {
+            forgotten.removeAll { $0.linkID == entry.linkID && $0.alertToken == token }
+            save()
+        }
+        if let key { await tellForgotten(entry.linkID, key: key, client) }
     }
 
     /// Turns off the notifications of parcels forgotten while the service couldn't be told. The
@@ -425,13 +510,16 @@ final class DeviceParcels {
         }
     }
 
-    /// Forgets every parcel. The ones the service could not be told about stay, and the trouble is thrown.
-    func forgetAll() async throws {
-        var trouble: Error?
-        for entry in entries {
-            do { try await forget(id: entry.parcel.id) } catch { trouble = error }
-        }
-        if let trouble { throw trouble }
+    /// Forgets every parcel, with those still to be read again. The links the service could not be
+    /// told about yet are forgotten on a later refresh.
+    func forgetAll() async {
+        for entry in entries { await forget(id: entry.parcel.id) }
+        let unread = keys.filter { linkID, _ in !entries.contains { $0.linkID == linkID } }
+        guard !unread.isEmpty else { return }
+        forgetting.merge(unread) { _, key in key }
+        for linkID in unread.keys { keys[linkID] = nil }
+        save()
+        if let client { await tellForgotten(client) }
     }
 
     /// Follows the same number with another carrier, link or postcode: a new lookup, which takes the old one's place and name.
@@ -445,7 +533,7 @@ final class DeviceParcels {
             lookupCountryHint: ParcelLookupCountry.hint()
         ), replacing: id)
         if added.id != id {
-            try? await forget(id: id)
+            await forget(id: id)
             if let index = entries.firstIndex(where: { $0.parcel.id == added.id }) {
                 entries[index].replaced = entry.replaced ?? id
                 save()
@@ -533,6 +621,8 @@ final class DeviceParcels {
         let linkID = response.link.id
         guard ParcelLinkRoute.validID(linkID) else { throw DeliveryAPIError.invalidResponse }
         let key = key.flatMap { response.link.role == .owner && ParcelLinkRoute.validKey($0) ? $0 : nil }
+        // Followed again before the service was told to forget it: the link stays.
+        if forgetting.removeValue(forKey: linkID) != nil { save() }
         if let index = entries.firstIndex(where: { $0.linkID == linkID || $0.parcel.id == response.package.id }) {
             guard let key, entries[index].isViewer else { return (entries[index].parcel.id, false) }
             let old = entries[index]
@@ -622,7 +712,14 @@ final class DeviceParcels {
         return Self.shown(entries[index])
     }
 
-    private func save() { storage.save(entries + forgotten, keys: keys) }
+    private func save() {
+        // The links being forgotten go first: their keys are never read again as parcels to bring back.
+        if forgetting != savedForgetting {
+            storage.saveForgetting(forgetting)
+            savedForgetting = forgetting
+        }
+        storage.save(entries + forgotten, keys: keys)
+    }
 
     private static func waiting(_ parcel: Parcel) -> Bool { parcel.syncStatus == .pending || parcel.syncStatus == .syncing }
 

@@ -399,7 +399,7 @@ struct AccountView: View {
         .alert(forgetQuestion, isPresented: $confirmingForget) {
             Button(localizer.text("common.cancel"), role: .cancel) {}
             Button(localizer.text("door.recents.forget.yes"), role: .destructive) {
-                run { try await store.forgetDeviceParcels() }
+                run { await store.forgetDeviceParcels() }
             }
         }
         .alert(localizer.text("native.resetDemoQuestion"), isPresented: $confirmingDemoReset) {

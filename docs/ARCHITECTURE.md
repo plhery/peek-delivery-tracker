@@ -148,6 +148,12 @@ Key server modules:
     public routes; it becomes the parcel's label only when the parcel is kept in an account.
     "Forget it now" deletes the link on the server and the device's copy; keeping a parcel
     in an account drops the device's copy too.
+  - The iPhone and Android apps keep the owner keys apart from the last answers, which only
+    show what was last known. An answer the app can't read, such as one another version
+    wrote, is read again with its key, without the name given on the device; a key goes only
+    once the service no longer has its link. Only forgetting a parcel, or a new lookup
+    taking its place, deletes its link, and the app asks again on each refresh until the
+    service has answered.
   - Beside each link the browser notes what its sharer sends along (whether the name
     travels, a gift's note and who it is from, whether viewers read the whole number) and
     the alert it turned on. The notes go when the device forgets the parcel.

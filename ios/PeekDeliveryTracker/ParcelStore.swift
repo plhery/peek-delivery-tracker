@@ -667,7 +667,7 @@ final class ParcelStore: ObservableObject {
             try demo.permanentlyDelete(id: parcel.id)
             demoShares.stop(parcel.id)
         } else if isGuest {
-            try await device.forget(id: parcel.id)
+            await device.forget(id: parcel.id)
         } else {
             try await api.permanentlyDelete(id: parcel.id)
         }
@@ -790,11 +790,11 @@ final class ParcelStore: ObservableObject {
     }
 
     /// Forgets every parcel followed on this iPhone without an account, here and on the service.
-    func forgetDeviceParcels() async throws {
+    func forgetDeviceParcels() async {
         guard isGuest else { return }
         let generation = session.generation
         defer { if generation == session.generation, isGuest { mutationRevision += 1; parcels = device.list() } }
-        try await device.forgetAll()
+        await device.forgetAll()
         undoParcel = nil
     }
 

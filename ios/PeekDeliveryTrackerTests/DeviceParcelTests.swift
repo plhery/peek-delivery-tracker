@@ -8,8 +8,11 @@ final class DeviceParcelTests: XCTestCase {
     private final class Memory: DeviceParcelStorage {
         var parcels: [DeviceParcel] = []
         var keys: [String: String] = [:]
+        var forgetting: [String: String] = [:]
         func load() -> (parcels: [DeviceParcel], keys: [String: String]) { (parcels, keys) }
         func save(_ parcels: [DeviceParcel], keys: [String: String]) { self.parcels = parcels; self.keys = keys }
+        func loadForgetting() -> [String: String] { forgetting }
+        func saveForgetting(_ links: [String: String]) { forgetting = links }
     }
 
     /// What the service was asked, in order.
@@ -393,7 +396,7 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(try device.setArchived(id: id, false).archivedAt)
         XCTAssertEqual(calls.all, [], "Neither a name nor the archive is the service's to know")
 
-        try await device.forget(id: id)
+        await device.forget(id: id)
         XCTAssertEqual(calls.all, ["forget 22222222222A"])
         XCTAssertTrue(device.isEmpty)
         XCTAssertTrue(storage.parcels.isEmpty)
@@ -477,9 +480,9 @@ final class DeviceParcelTests: XCTestCase {
         ]
         let device = DeviceParcels(client: client(Calls()), storage: storage, postcodes: memory)
 
-        try await device.forget(id: first)
+        await device.forget(id: first)
         XCTAssertEqual(memory.entries, [given(.dpd, "75001"), given(.glsCh, "8000")])
-        try await device.forgetAll()
+        await device.forgetAll()
         XCTAssertTrue(storage.parcels.isEmpty)
         XCTAssertEqual(memory.entries, [given(.dpd, "75001"), given(.glsCh, "8000")])
     }
@@ -632,7 +635,7 @@ final class DeviceParcelTests: XCTestCase {
         await XCTAssertThrowsErrorAsync(try await again.changeCarrier(id: id, carrier: .ups, trackingURL: nil, dpdPostcode: nil))
 
         // Forgotten here alone: the link is not this iPhone's to forget.
-        try await again.forget(id: id)
+        await again.forget(id: id)
         XCTAssertEqual(calls.all, ["read 33333333333A -"])
         XCTAssertTrue(again.isEmpty)
         XCTAssertTrue(storage.parcels.isEmpty)
@@ -645,7 +648,8 @@ final class DeviceParcelTests: XCTestCase {
         followed.viewer = true
         let loaded = DeviceParcelFiles.matched([own, lost, followed], keys: ["22222222222A": key, "33333333333A": key, "22222222222C": key])
         XCTAssertEqual(loaded.parcels.map(\.linkID), ["22222222222A", "33333333333A"])
-        XCTAssertEqual(loaded.keys, ["22222222222A": key], "A key beside someone else's parcel, or beside none, opens nothing")
+        XCTAssertEqual(loaded.keys, ["22222222222A": key, "22222222222C": key],
+                       "A key beside someone else's parcel opens nothing; one beside none is its parcel's to read again")
         XCTAssertEqual(DeviceParcelFiles.matched([followed], keys: [:]).parcels, [followed])
 
         // A file written before parcels could be followed this way still opens, every parcel its own.
@@ -656,24 +660,195 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(saved, [followed])
     }
 
-    func testAFileThatCannotBeReadKeepsItsKeysUntilTheirLinksAreForgotten() async throws {
-        let unreadable = DeviceParcelFiles.opened(Data(#"[{"linkID":42}]"#.utf8), keys: ["22222222222C": key])
-        XCTAssertTrue(unreadable.parcels.isEmpty)
-        XCTAssertEqual(unreadable.keys, ["22222222222C": key])
-        XCTAssertEqual(DeviceParcelFiles.opened(nil, keys: ["22222222222C": key]).keys, [:], "No file, no parcels to forget")
+    // MARK: - A list this build can't read
 
-        // Offline, the key stays for the next try.
+    /// The parcel behind a link of this iPhone's own, as the service answers it with the key.
+    private func answer(_ linkID: String, _ id: UUID, number: String = "TESTPARCEL123789") -> PublicParcelResponse {
+        PublicParcelResponse(link: link(linkID), package: package(id, number: number))
+    }
+
+    /// The list on file as JSON rows, changed as another build might have written it.
+    private func file(_ parcels: [DeviceParcel], _ change: (inout [[String: Any]]) -> Void = { _ in }) throws -> Data {
+        var rows = try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder.deliveryTracker.encode(parcels)) as? [[String: Any]])
+        change(&rows)
+        return try JSONSerialization.data(withJSONObject: rows)
+    }
+
+    func testARowThisBuildCannotReadLeavesTheOthersAndForgetsNothing() async throws {
+        let first = UUID(), second = UUID(), third = UUID()
+        let parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "Lamp", archivedAt: nil, parcel: Parcel(shared: package(first)), checkedAt: Date()),
+            DeviceParcel(linkID: "22222222222B", label: "Books", archivedAt: nil, parcel: Parcel(shared: package(second, number: "TESTPARCEL456")), checkedAt: Date()),
+            DeviceParcel(linkID: "22222222222C", label: "Shoes", archivedAt: nil, parcel: Parcel(shared: package(third, number: "TESTPARCEL999")), checkedAt: Date()),
+        ]
+        let keys = ["22222222222A": key, "22222222222B": key, "22222222222C": key]
+
+        let opened = DeviceParcelFiles.opened(try file(parcels) { $0[1]["linkID"] = 42 }, keys: keys)
+
+        XCTAssertEqual(opened.parcels, [parcels[0], parcels[2]])
+        XCTAssertEqual(opened.keys, keys, "The unread row's key stays")
         let storage = Memory()
-        storage.keys = unreadable.keys
+        storage.parcels = opened.parcels
+        storage.keys = opened.keys
         let calls = Calls()
-        var offline = client(calls)
-        offline.forget = { linkID, _ in calls.add("forget \(linkID)"); throw URLError(.notConnectedToInternet) }
-        try await DeviceParcels(client: offline, storage: storage).refresh()
-        XCTAssertEqual(storage.keys, ["22222222222C": key])
+        let shown = answer("22222222222B", second, number: "TESTPARCEL456")
+        let device = DeviceParcels(client: client(calls, read: { $0 == "22222222222B" ? shown : nil }), storage: storage)
+        XCTAssertEqual(device.list().map(\.label), ["Lamp", "Shoes"])
 
-        try await DeviceParcels(client: client(calls), storage: storage).refresh()
-        XCTAssertEqual(calls.all, ["forget 22222222222C", "forget 22222222222C"])
-        XCTAssertTrue(storage.keys.isEmpty)
+        try await device.refresh()
+
+        XCTAssertEqual(calls.all, ["read 22222222222B k"], "Read again with its key, and nothing forgotten")
+        XCTAssertEqual(device.list().map(\.id), [first, third, second])
+        XCTAssertEqual(storage.keys, keys)
+    }
+
+    func testAFileThatCannotBeReadAtAllIsReadAgainWithItsKeys() async throws {
+        let first = UUID(), second = UUID()
+        let keys = ["22222222222A": key, "22222222222B": key]
+        let opened = DeviceParcelFiles.opened(Data("not a list".utf8), keys: keys)
+        XCTAssertTrue(opened.parcels.isEmpty)
+        XCTAssertEqual(opened.keys, keys)
+        XCTAssertEqual(DeviceParcelFiles.opened(Data("{}".utf8), keys: keys).keys, keys)
+        XCTAssertEqual(DeviceParcelFiles.opened(nil, keys: keys).keys, [:], "No file, no parcels to read again")
+
+        let storage = Memory()
+        storage.keys = opened.keys
+        let calls = Calls()
+        let answers = ["22222222222A": answer("22222222222A", first), "22222222222B": answer("22222222222B", second, number: "TESTPARCEL999")]
+        let device = DeviceParcels(client: client(calls, read: { answers[$0] }), storage: storage)
+        XCTAssertTrue(device.isEmpty)
+
+        try await device.refresh()
+
+        XCTAssertEqual(Set(calls.all), ["read 22222222222A k", "read 22222222222B k"])
+        XCTAssertEqual(Set(device.list().map(\.id)), [first, second])
+        XCTAssertEqual(device.list().map(\.label), ["", ""], "The names lived only in the list")
+        XCTAssertEqual(Set(device.claims), [ClaimParcelLink(id: "22222222222A", key: key), ClaimParcelLink(id: "22222222222B", key: key)])
+        XCTAssertEqual(Set(storage.parcels.map(\.linkID)), ["22222222222A", "22222222222B"])
+        XCTAssertEqual(storage.keys, keys)
+        try await device.refresh()
+        XCTAssertEqual(calls.all.count, 2, "Back on the list, they are fresh")
+    }
+
+    func testAnEntryWrittenBeforeAFieldWasRequiredIsReadAgainWithItsKey() async throws {
+        let kept = UUID(), upgraded = UUID()
+        let parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "Lamp", archivedAt: nil, parcel: Parcel(shared: package(kept)), checkedAt: Date()),
+            DeviceParcel(linkID: "22222222222B", label: "Books", archivedAt: nil, parcel: Parcel(shared: package(upgraded, number: "TESTPARCEL999")), checkedAt: Date()),
+        ]
+        let keys = ["22222222222A": key, "22222222222B": key]
+        // An older build wrote no `notificationsMuted`, which this one requires.
+        let older = try file(parcels) { rows in
+            var parcel = rows[1]["parcel"] as? [String: Any]
+            parcel?.removeValue(forKey: "notificationsMuted")
+            rows[1]["parcel"] = parcel
+        }
+
+        let opened = DeviceParcelFiles.opened(older, keys: keys)
+
+        XCTAssertEqual(opened.parcels.map(\.linkID), ["22222222222A"])
+        let storage = Memory()
+        storage.parcels = opened.parcels
+        storage.keys = opened.keys
+        let calls = Calls()
+        let shown = answer("22222222222B", upgraded, number: "TESTPARCEL999")
+        let device = DeviceParcels(client: client(calls, read: { $0 == "22222222222B" ? shown : nil }), storage: storage)
+        try await device.refresh()
+        XCTAssertEqual(calls.all, ["read 22222222222B k"])
+        XCTAssertEqual(device.list().map(\.id), [kept, upgraded])
+        XCTAssertEqual(device.list().map(\.label), ["Lamp", ""])
+        XCTAssertEqual(storage.keys, keys)
+    }
+
+    func testAKeyWhoseLinkIsGoneLetsGoWithoutForgettingAnything() async throws {
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        let calls = Calls()
+        // Out of reach, the keys wait for the next refresh.
+        let offline = DeviceParcels(client: client(calls, read: { _ in throw URLError(.notConnectedToInternet) }), storage: storage)
+        await XCTAssertThrowsErrorAsync(try await offline.refresh())
+        XCTAssertEqual(storage.keys.count, 2)
+
+        // Gone, or no longer the key's to own: the key lets go, and the link is left as it is.
+        let notOwned = PublicParcelResponse(link: reader("22222222222B"), package: package(UUID()))
+        let device = DeviceParcels(client: client(calls, read: { $0 == "22222222222B" ? notOwned : nil }), storage: storage)
+        try await device.refresh()
+        XCTAssertTrue(device.isEmpty)
+        XCTAssertEqual(storage.keys, [:])
+        XCTAssertEqual(calls.all.filter { $0.hasPrefix("forget") }, [])
+        XCTAssertEqual(calls.all.count, 3)
+    }
+
+    func testAParcelForgottenOfflineIsForgottenOnTheServiceLaterAndDoesNotComeBack() async throws {
+        let id = UUID()
+        let saved = DeviceParcel(linkID: "22222222222A", label: "Lamp", archivedAt: nil, parcel: Parcel(shared: package(id)), checkedAt: .distantPast)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [saved]
+        let calls = Calls()
+        let shown = answer("22222222222A", id)
+        var offline = client(calls, read: { _ in shown })
+        offline.forget = { linkID, _ in calls.add("forget \(linkID)"); throw URLError(.notConnectedToInternet) }
+        let device = DeviceParcels(client: offline, storage: storage)
+
+        await device.forget(id: id)
+
+        XCTAssertTrue(device.isEmpty, "It leaves the list at once")
+        XCTAssertEqual(storage.keys, [:])
+        XCTAssertEqual(storage.forgetting, ["22222222222A": key])
+        try await device.refresh(all: true)
+        XCTAssertEqual(calls.all, ["forget 22222222222A", "forget 22222222222A"], "Told again, never read back")
+        XCTAssertTrue(device.isEmpty)
+
+        // After a restart, with the service in reach, it is forgotten for good.
+        let relaunched = DeviceParcels(client: client(calls, read: { _ in shown }), storage: storage)
+        XCTAssertTrue(relaunched.isEmpty)
+        try await relaunched.refresh(all: true)
+        try await relaunched.refresh(all: true)
+        XCTAssertEqual(Array(calls.all.dropFirst(2)), ["forget 22222222222A"])
+        XCTAssertTrue(relaunched.isEmpty)
+        XCTAssertEqual(storage.forgetting, [:])
+        XCTAssertTrue(storage.parcels.isEmpty)
+
+        // A list saved before the forget was leaves the parcel out all the same.
+        let early = Memory()
+        early.parcels = [saved]
+        early.keys = ["22222222222A": key]
+        early.forgetting = ["22222222222A": key]
+        let earlyCalls = Calls()
+        let reopened = DeviceParcels(client: client(earlyCalls, read: { _ in shown }), storage: early)
+        XCTAssertTrue(reopened.isEmpty)
+        try await reopened.refresh(all: true)
+        XCTAssertEqual(earlyCalls.all, ["forget 22222222222A"])
+        XCTAssertEqual(early.keys, [:])
+    }
+
+    func testALinkFollowedAgainBeforeTheServiceForgotItStays() async throws {
+        let id = UUID()
+        let storage = Memory()
+        storage.forgetting = ["22222222222A": key]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: storage)
+
+        _ = try device.follow(answer("22222222222A", id), key: key, label: "Lamp")
+        try await device.refresh()
+
+        XCTAssertEqual(storage.forgetting, [:])
+        XCTAssertEqual(calls.all, [])
+        XCTAssertEqual(device.list().map(\.id), [id])
+    }
+
+    func testForgettingEveryParcelForgetsTheOnesStillToBeReadAgain() async {
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: storage)
+
+        await device.forgetAll()
+
+        XCTAssertEqual(calls.all, ["forget 22222222222A"])
+        XCTAssertEqual(storage.keys, [:])
+        XCTAssertEqual(storage.forgetting, [:])
     }
 
     func testARoundEndingLeavesAnotherUnderWayMarked() async throws {
@@ -725,7 +900,7 @@ final class DeviceParcelTests: XCTestCase {
         let other = UUID()
         XCTAssertTrue(try device.follow(PublicParcelResponse(link: link("22222222222B"), package: package(other, number: "TESTPARCEL999")), key: key, label: "Lamp").added)
         XCTAssertEqual(storage.keys["22222222222B"], key)
-        try await device.forget(id: other)
+        await device.forget(id: other)
         XCTAssertEqual(calls.all, ["forget 22222222222B"])
     }
 
@@ -772,7 +947,7 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertFalse(calls.all.contains("unalert 22222222222A token2"))
 
         // Forgetting a parcel, or letting an account take it over, stops its notifications here.
-        try await relaunched.forget(id: theirs)
+        await relaunched.forget(id: theirs)
         XCTAssertEqual(calls.all.last, "unalert 33333333333B token2")
         relaunched.release(["22222222222A"])
         for _ in 0..<50 where calls.all.last != "unalert 22222222222A token2" { await Task.yield() }
@@ -790,7 +965,7 @@ final class DeviceParcelTests: XCTestCase {
 
         // The service can't turn its notifications off yet: the parcel leaves the list all the same,
         // an account can't take it over, and each refresh asks again.
-        try await offline.forget(id: id)
+        await offline.forget(id: id)
         XCTAssertTrue(offline.list().isEmpty)
         XCTAssertEqual(offline.claims, [])
         XCTAssertNil(offline.parcelID(linkID: "33333333333B"))
@@ -798,7 +973,7 @@ final class DeviceParcelTests: XCTestCase {
         try await offline.refresh(all: true)
         // Followed again meanwhile, it keeps the notifications it still has, and forgetting it asks again.
         XCTAssertTrue(try offline.follow(shown, key: nil, label: "Books for Ana").added)
-        try await offline.forget(id: id)
+        await offline.forget(id: id)
         XCTAssertEqual(calls.all, ["alert 33333333333B - important token1 fr development",
                                    "unalert 33333333333B token1", "unalert 33333333333B token1", "unalert 33333333333B token1"])
 

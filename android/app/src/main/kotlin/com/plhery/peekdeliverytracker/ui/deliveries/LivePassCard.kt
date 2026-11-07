@@ -557,6 +557,7 @@ internal fun carrierPrompt(
     val shape = parcel.nonTrackingShape ?: return null
     val text = when (shape) {
         is NonTrackingShape.Order -> localizer.text("link.notTracking.order", mapOf("shop" to (NonTrackingShape.shopNames[shape.shop] ?: shape.shop)))
+        NonTrackingShape.Container -> localizer.text("link.notTracking.container")
         NonTrackingShape.Short -> localizer.text("link.notTracking.short")
     }
     return CarrierPromptCopy(text, localizer.text("link.chooseCarrier"))

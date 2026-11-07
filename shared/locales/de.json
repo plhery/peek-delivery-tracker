@@ -405,6 +405,7 @@
   "link.likely.week": "{{carrier}} kennt die Nummer auch nach einer Woche nicht. Kläre sie mit dem Absender ab oder wähl einen anderen Paketdienst.",
   "link.likely.weekNoChoice": "{{carrier}} kennt die Nummer auch nach einer Woche nicht. Kläre sie mit dem Absender ab.",
   "link.likely.choose": "Anderen Paketdienst wählen",
+  "link.notTracking.container": "Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.",
   "link.notTracking.order": "Das sieht nach einer Bestellnummer von {{shop}} aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.",
   "link.notTracking.short": "Kürzer als die meisten Sendungsnummern. Ist es eine Bestellnummer, sieh in der Versandmail oder bei der Bestellung nach.",
   "link.chooseCarrier": "Paketdienst wählen",

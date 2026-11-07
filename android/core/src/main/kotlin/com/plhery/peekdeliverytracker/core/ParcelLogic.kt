@@ -202,8 +202,8 @@ fun Parcel.likelyCarrierPrompt(now: Instant = AppClock.now()): LikelyCarrierProm
 
 /**
  * Nobody has answered for the number, its format points to no carrier of its own, and it looks like a shop's order
- * number or is shorter than tracking numbers are: its owner is told where the tracking number is, and may choose the
- * carrier.
+ * number or a shipping container's, or is shorter than tracking numbers are: its owner is told where the tracking
+ * number is, and may choose the carrier.
  */
 val Parcel.nonTrackingShape: NonTrackingShape?
     get() {

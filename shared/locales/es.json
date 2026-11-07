@@ -405,6 +405,7 @@
   "link.likely.week": "{{carrier}} sigue sin tenerlo después de una semana. Comprueba el número con el remitente o elige otro transportista.",
   "link.likely.weekNoChoice": "{{carrier}} sigue sin tenerlo después de una semana. Comprueba el número con el remitente.",
   "link.likely.choose": "Elegir otro transportista",
+  "link.notTracking.container": "Parece el número de un contenedor marítimo. El número de seguimiento está en el correo de envío o en la página del pedido.",
   "link.notTracking.order": "Parece un número de pedido de {{shop}}. El número de seguimiento está en el correo de envío o en la página del pedido.",
   "link.notTracking.short": "Es más corto que la mayoría de los números de seguimiento. Si es un número de pedido, mira el correo de envío o la página del pedido.",
   "link.chooseCarrier": "Elegir transportista",

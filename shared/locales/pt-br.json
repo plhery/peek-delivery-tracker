@@ -405,6 +405,7 @@
   "link.likely.week": "Depois de uma semana, {{carrier}} ainda não reconhece o código. Confira com o remetente ou escolha outra transportadora.",
   "link.likely.weekNoChoice": "Depois de uma semana, {{carrier}} ainda não reconhece o código. Confira com o remetente.",
   "link.likely.choose": "Escolher outra transportadora",
+  "link.notTracking.container": "Isto parece o número de um contêiner marítimo. O código de rastreamento está no e-mail de envio ou na página do pedido.",
   "link.notTracking.order": "Isto parece um número de pedido de {{shop}}. O código de rastreamento está no e-mail de envio ou na página do pedido.",
   "link.notTracking.short": "É mais curto que a maioria dos códigos de rastreamento. Se for um número de pedido, veja o e-mail de envio ou a página do pedido.",
   "link.chooseCarrier": "Escolher a transportadora",

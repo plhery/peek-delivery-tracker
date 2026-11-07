@@ -405,6 +405,7 @@
   "link.likely.week": "{{carrier}} still doesn’t list it after a week. Check the number with the sender, or choose another carrier.",
   "link.likely.weekNoChoice": "{{carrier}} still doesn’t list it after a week. Check the number with the sender.",
   "link.likely.choose": "Choose another carrier",
+  "link.notTracking.container": "This looks like a shipping container number. The tracking number is in the shipping email or on the order page.",
   "link.notTracking.order": "This looks like an order number from {{shop}}. The tracking number is in the shipping email or on the order page.",
   "link.notTracking.short": "This is shorter than most tracking numbers. If it’s an order number, check the shipping email or the order page.",
   "link.chooseCarrier": "Choose the carrier",

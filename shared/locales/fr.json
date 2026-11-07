@@ -405,6 +405,7 @@
   "link.likely.week": "{{carrier}} ne connaît toujours pas ce numéro après une semaine. Vérifie-le auprès de l’expéditeur, ou choisis un autre transporteur.",
   "link.likely.weekNoChoice": "{{carrier}} ne connaît toujours pas ce numéro après une semaine. Vérifie-le auprès de l’expéditeur.",
   "link.likely.choose": "Choisir un autre transporteur",
+  "link.notTracking.container": "On dirait un numéro de conteneur maritime. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande.",
   "link.notTracking.order": "On dirait un numéro de commande {{shop}}. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande.",
   "link.notTracking.short": "Plus court que la plupart des numéros de suivi. Si c’est un numéro de commande, regarde l’e-mail d’expédition ou la page de la commande.",
   "link.chooseCarrier": "Choisir le transporteur",

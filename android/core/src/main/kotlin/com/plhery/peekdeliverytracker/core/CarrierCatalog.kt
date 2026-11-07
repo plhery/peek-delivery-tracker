@@ -1139,13 +1139,29 @@ class CarrierCatalog private constructor(
         fun orderShop(text: String): OrderShop? =
             orderNumbers.firstOrNull { matches(text, it.pattern, caseInsensitive = true) }?.shop
 
-        /** Whether a normalized number no carrier answered for looks like a shop's order number, or is shorter than
-         * tracking numbers are: the parcel says so instead of waiting for a carrier. */
+        /** Whether a normalized number no carrier answered for looks like a shop's order number or a shipping
+         * container's, or is shorter than tracking numbers are: the parcel says so instead of waiting for a carrier. */
         fun nonTrackingShape(normalized: String): NonTrackingShape? {
             val shop = orderShop(normalized)?.rawValue
                 ?: storedOrderNumbers.firstOrNull { matches(normalized, it.pattern) }?.shop
             if (shop != null) return NonTrackingShape.Order(shop)
+            if (isContainerNumber(normalized)) return NonTrackingShape.Container
             return if (normalized.characterCount < 8) NonTrackingShape.Short else null
+        }
+
+        /** ISO 6346's letter values: 10 for A and up from there, leaving out 11, 22 and 33. */
+        private val containerLetterValues = (10..38).filter { it % 11 != 0 }
+
+        /** Whether a normalized number is a shipping container's (ISO 6346): its owner's three letters, U for a
+         * freight container, six digits and a check digit that adds up. No carrier issues one for a parcel. */
+        fun isContainerNumber(normalized: String): Boolean {
+            if (!matches(normalized, "^[A-Z]{3}U[0-9]{7}$")) return false
+            var sum = 0
+            for (index in 0 until 10) {
+                val character = normalized[index]
+                sum += (if (index < 4) containerLetterValues[character - 'A'] else character - '0') shl index
+            }
+            return sum % 11 % 10 == normalized[10] - '0'
         }
 
         /** The text without its order numbers, so that no part of one is read as a tracking number. */

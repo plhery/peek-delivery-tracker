@@ -405,6 +405,7 @@
   "link.likely.week": "Dopo una settimana {{carrier}} non riconosce ancora il numero. Verificalo con il mittente o scegli un altro corriere.",
   "link.likely.weekNoChoice": "Dopo una settimana {{carrier}} non riconosce ancora il numero. Verificalo con il mittente.",
   "link.likely.choose": "Scegli un altro corriere",
+  "link.notTracking.container": "Sembra il numero di un container marittimo. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.",
   "link.notTracking.order": "Sembra un numero d’ordine {{shop}}. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.",
   "link.notTracking.short": "È più corto della maggior parte dei numeri di tracciamento. Se è un numero d’ordine, guarda l’e-mail di spedizione o la pagina dell’ordine.",
   "link.chooseCarrier": "Scegli il corriere",

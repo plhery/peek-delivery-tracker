@@ -405,6 +405,7 @@
   "link.likely.week": "一周过去了，{{carrier}} 仍然没有收录它。请向寄件人核对单号，或选择其他快递公司。",
   "link.likely.weekNoChoice": "一周过去了，{{carrier}} 仍然没有收录它。请向寄件人核对单号。",
   "link.likely.choose": "选择其他快递公司",
+  "link.notTracking.container": "这看起来是海运集装箱号。运单号在发货邮件或订单页面上。",
   "link.notTracking.order": "这看起来是 {{shop}} 的订单号。运单号在发货邮件或订单页面上。",
   "link.notTracking.short": "这比大多数运单号都短。如果是订单号，请查看发货邮件或订单页面。",
   "link.chooseCarrier": "选择快递公司",

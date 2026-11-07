@@ -216,10 +216,12 @@ enum OrderShop: String, Decodable, Sendable {
 }
 
 /// What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's
-/// order number, or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
+/// order number, a shipping container's, or one shorter than tracking numbers are (`nonTrackingShape` in
+/// src/peek/lookup/reading.ts).
 enum NonTrackingShape: Equatable, Sendable {
     /// The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu.
     case order(shop: String)
+    case container
     case short
 
     /// The shop by the name the app writes.
@@ -1435,14 +1437,30 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         orderNumbers.first { matches(text, pattern: $0.pattern, caseInsensitive: true) }?.shop
     }
 
-    /// Whether a normalized number no carrier answered for looks like a shop's order number, or is shorter than
-    /// tracking numbers are: the parcel says so instead of waiting for a carrier.
+    /// Whether a normalized number no carrier answered for looks like a shop's order number or a shipping
+    /// container's, or is shorter than tracking numbers are: the parcel says so instead of waiting for a carrier.
     static func nonTrackingShape(_ normalized: String) -> NonTrackingShape? {
         if let shop = orderShop(in: normalized)?.rawValue
             ?? storedOrderNumbers.first(where: { matches(normalized, pattern: $0.pattern) })?.shop {
             return .order(shop: shop)
         }
+        if isContainerNumber(normalized) { return .container }
         return normalized.count < 8 ? .short : nil
+    }
+
+    /// ISO 6346's letter values: 10 for A and up from there, leaving out 11, 22 and 33.
+    private static let containerLetterValues = (10...38).filter { $0 % 11 != 0 }
+
+    /// Whether a normalized number is a shipping container's (ISO 6346): its owner's three letters, U for a freight
+    /// container, six digits and a check digit that adds up. No carrier issues one for a parcel.
+    static func isContainerNumber(_ normalized: String) -> Bool {
+        guard matches(normalized, pattern: "^[A-Z]{3}U[0-9]{7}$") else { return false }
+        let values = normalized.unicodeScalars.map { Int($0.value) }
+        var sum = 0
+        for index in 0..<10 {
+            sum += (index < 4 ? containerLetterValues[values[index] - 65] : values[index] - 48) << index
+        }
+        return sum % 11 % 10 == values[10] - 48
     }
 
     /// The text without its order numbers, so that no part of one is read as a tracking number.

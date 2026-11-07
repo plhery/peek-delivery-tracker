@@ -624,13 +624,15 @@ struct ParcelDetailView: View {
         .accessibilityElement(children: .contain)
     }
 
-    /// A number that looks like a shop's order number, or is shorter than tracking numbers are: where the
-    /// tracking number is, and the way to choose the carrier.
+    /// A number that looks like a shop's order number or a shipping container's, or is shorter than tracking
+    /// numbers are: where the tracking number is, and the way to choose the carrier.
     private func nonTrackingPrompt(_ shape: NonTrackingShape, tint: Color) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             switch shape {
             case .order(let shop):
                 Text(localizer.text("link.notTracking.order", ["shop": NonTrackingShape.shopNames[shop] ?? shop]))
+            case .container:
+                Text(localizer.text("link.notTracking.container"))
             case .short:
                 Text(localizer.text("link.notTracking.short"))
             }

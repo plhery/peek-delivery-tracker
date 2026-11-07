@@ -6,6 +6,7 @@ import {
   parseTrackingInput,
   type TrackingInputMatch,
 } from '../../lib/carriers';
+import type { Translate } from '../../lib/messages';
 import rules from '../../../shared/reading.json';
 
 /** One tracking number a text names, with what its shape says about the carrier. */
@@ -48,19 +49,43 @@ export type StoredOrderShop = OrderShop | 'aliexpress';
 export const SHOP_NAMES: Record<StoredOrderShop, string> = { amazon: 'Amazon', aliexpress: 'AliExpress', shein: 'Shein', shopee: 'Shopee', temu: 'Temu' };
 
 /** What a looked-up number no carrier answered for looks like instead of a tracking number. */
-export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'short' };
+export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'container' } | { kind: 'short' };
 
 /** Tracking numbers have 8 characters or more, but for a few carriers' own. */
 const SHORTEST_TRACKING_NUMBER = 8;
 
+/** ISO 6346's letter values: 10 for A and up from there, leaving out 11, 22 and 33. */
+const CONTAINER_LETTER_VALUES = Array.from({ length: 29 }, (_, index) => 10 + index).filter((value) => value % 11 !== 0);
+
 /**
- * Whether a normalized number no carrier answered for looks like a shop's order number, or is shorter than tracking
- * numbers are: the parcel page says so instead of waiting for a carrier.
+ * Whether a normalized number is a shipping container's (ISO 6346): its owner's three letters, U for a freight
+ * container, six digits and a check digit that adds up. No carrier issues one for a parcel.
+ */
+export function isContainerNumber(normalized: string): boolean {
+  if (!/^[A-Z]{3}U[0-9]{7}$/.test(normalized)) return false;
+  let sum = 0;
+  for (let index = 0; index < 10; index += 1) {
+    const value = index < 4 ? CONTAINER_LETTER_VALUES[normalized.charCodeAt(index) - 65] : Number(normalized[index]);
+    sum += value * 2 ** index;
+  }
+  return sum % 11 % 10 === Number(normalized[10]);
+}
+
+/**
+ * Whether a normalized number no carrier answered for looks like a shop's order number or a shipping container's, or
+ * is shorter than tracking numbers are: the parcel page says so instead of waiting for a carrier.
  */
 export function nonTrackingShape(normalized: string): NonTrackingShape | null {
   const shop = orderShop(normalized) ?? STORED_ORDER_NUMBERS.find(({ pattern }) => pattern.test(normalized))?.shop;
   if (shop) return { kind: 'order', shop };
+  if (isContainerNumber(normalized)) return { kind: 'container' };
   return normalized.length < SHORTEST_TRACKING_NUMBER ? { kind: 'short' } : null;
+}
+
+/** What a parcel says about its number's shape, where it would say that no carrier knows the number yet. */
+export function nonTrackingNote(shape: NonTrackingShape, t: Translate): string {
+  if (shape.kind === 'order') return t('link.notTracking.order', { shop: SHOP_NAMES[shape.shop] });
+  return t(shape.kind === 'container' ? 'link.notTracking.container' : 'link.notTracking.short');
 }
 
 const EVERY_ORDER_NUMBER = ORDER_NUMBERS.map(({ pattern }) => new RegExp(pattern.source, 'gi'));

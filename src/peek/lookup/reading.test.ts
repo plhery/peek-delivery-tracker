@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { checkDigitTrouble, looksLikeNumber, nonTrackingShape, readText } from './reading';
+import { checkDigitTrouble, isContainerNumber, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText } from './reading';
+import type { Translate } from '../../lib/messages';
 import { isPickupCode, normalizeTrackingNumber } from '../../lib/carriers';
 import rules from '../../../shared/reading.json';
 
@@ -66,12 +67,34 @@ describe('a looked-up number no carrier answered for', () => {
     ['261025ABCD1234', { kind: 'order', shop: 'shopee' }],
     ['10293', { kind: 'short' }],
     ['AB12C3', { kind: 'short' }],
+    // Synthetic shipping container numbers whose ISO 6346 check digit adds up, one through its remainder of 10.
+    ['TEMU1234565', { kind: 'container' }],
+    ['ZZZU0000005', { kind: 'container' }],
+    ['TEMU0000080', { kind: 'container' }],
     // 17 or 16 digits Amazon's or AliExpress's don't start with, and the shapes of carriers' numbers.
     ['99945719832294617', null],
     ['1234567890123456', null],
     ['12345678', null],
     ['EOB10293847561029384', null],
+    // A container's shape whose check digit doesn't add up, and four letters and seven digits that aren't a freight
+    // container's although their check digit does.
+    ['TEMU1234567', null],
+    ['ZZZJ0000008', null],
+    ['ABCD1234560', null],
   ])('%s', (number, shape) => {
     expect(nonTrackingShape(number)).toEqual(shape);
+  });
+
+  it('says where the tracking number is for each shape', () => {
+    const t = ((key: string, values?: Record<string, string>) => `${key}${values?.shop ? `:${values.shop}` : ''}`) as Translate;
+    expect(nonTrackingNote({ kind: 'order', shop: 'aliexpress' }, t)).toBe('link.notTracking.order:AliExpress');
+    expect(nonTrackingNote({ kind: 'container' }, t)).toBe('link.notTracking.container');
+    expect(nonTrackingNote({ kind: 'short' }, t)).toBe('link.notTracking.short');
+  });
+
+  it('reads a container number only as normalized', () => {
+    expect(isContainerNumber('TEMU1234565')).toBe(true);
+    expect(isContainerNumber('temu1234565')).toBe(false);
+    expect(nonTrackingShape(normalizeTrackingNumber('temu 123456-5'))).toEqual({ kind: 'container' });
   });
 });

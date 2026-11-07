@@ -695,6 +695,12 @@ class ParcelLogicTests {
         assertEquals(NonTrackingShape.Short, CarrierCatalog.nonTrackingShape("10293"))
         assertNull(CarrierCatalog.nonTrackingShape("99945719832294617"))
         assertNull(CarrierCatalog.nonTrackingShape("12345678"))
+        // Synthetic shipping container numbers whose ISO 6346 check digit adds up, one through its remainder of 10;
+        // one whose check digit doesn't, and four letters and seven digits that aren't a freight container's.
+        assertEquals(NonTrackingShape.Container, CarrierCatalog.nonTrackingShape("TEMU1234565"))
+        assertEquals(NonTrackingShape.Container, CarrierCatalog.nonTrackingShape("TEMU0000080"))
+        assertNull(CarrierCatalog.nonTrackingShape("TEMU1234567"))
+        assertNull(CarrierCatalog.nonTrackingShape("ZZZJ0000008"))
 
         val packageId = UUID.randomUUID()
         val json = """

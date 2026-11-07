@@ -680,6 +680,12 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("10293"), .short)
         XCTAssertNil(CarrierCatalog.nonTrackingShape("99945719832294617"))
         XCTAssertNil(CarrierCatalog.nonTrackingShape("12345678"))
+        // Synthetic shipping container numbers whose ISO 6346 check digit adds up, one through its remainder of 10;
+        // one whose check digit doesn't, and four letters and seven digits that aren't a freight container's.
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("TEMU1234565"), .container)
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("TEMU0000080"), .container)
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("TEMU1234567"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("ZZZJ0000008"))
 
         let packageID = UUID()
         let json = """

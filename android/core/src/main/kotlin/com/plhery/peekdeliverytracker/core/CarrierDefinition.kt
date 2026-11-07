@@ -244,11 +244,13 @@ enum class OrderShop(val rawValue: String) {
 
 /**
  * What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's order number,
- * or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
+ * a shipping container's, or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
  */
 sealed interface NonTrackingShape {
     /** The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu. */
     data class Order(val shop: String) : NonTrackingShape
+
+    data object Container : NonTrackingShape
 
     data object Short : NonTrackingShape
 

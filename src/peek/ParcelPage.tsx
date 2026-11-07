@@ -64,7 +64,7 @@ import {
 import { announceNotice, Toast } from './parcel/Toast';
 import { announceKeepOutcome, onKeepOutcome, usePendingKeep, type KeepOutcome } from './pending';
 import { recentFor, renameParcel } from './recents';
-import { nonTrackingShape, SHOP_NAMES } from './lookup/reading';
+import { nonTrackingNote, nonTrackingShape } from './lookup/reading';
 import { closeParcelLink, forgetParcelLinkOpener, leaveParcelLink, openLanding, parcelLinkOpener, parcelLinkURL, PIP_TRANSITION_NAME } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 import { usePeekSession } from './session';
@@ -269,13 +269,13 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // who reads the number, may choose another carrier at the front door.
   const likely = !carrierKnown && !placeholder && !present ? likelyCarrier(parcel, now) : null;
   const likelyName = likely ? carrierInfo(likely.carrier, locale) : null;
-  // Or a number that looks like a shop's order number, or is shorter than tracking numbers are: its owner, who looked it
-  // up, is told where the tracking number is, and may choose the carrier.
+  // Or a number that looks like a shop's order number or a shipping container's, or is shorter than tracking numbers
+  // are: its owner, who looked it up, is told where the tracking number is, and may choose the carrier.
   const shape = !carrierKnown && !placeholder && !present && !likely && parcel.trackingNumber
     ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
   const choosing = (!!likely?.waited || !!shape) && owner && !sample && !!parcel.trackingNumber;
   const unknownNote = likelyName ? t(!likely?.waited ? 'link.likely.body' : choosing ? 'link.likely.week' : 'link.likely.weekNoChoice', { carrier: likelyName.name })
-    : shape ? (shape.kind === 'order' ? t('link.notTracking.order', { shop: SHOP_NAMES[shape.shop] }) : t('link.notTracking.short'))
+    : shape ? nonTrackingNote(shape, t)
       : number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber');
   const notes = present ? (deliveryNote ? [deliveryNote] : []) : placeholder ? [trackingFailureMessage(parcel.syncError, t)] : !carrierKnown ? [unknownNote] : [
     previousEstimateLine(previousEstimate, parcel, wording),

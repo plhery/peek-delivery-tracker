@@ -405,6 +405,7 @@
   "link.likely.week": "Po tygodniu {{carrier}} nadal nie zna tego numeru. Sprawdź go u nadawcy albo wybierz innego przewoźnika.",
   "link.likely.weekNoChoice": "Po tygodniu {{carrier}} nadal nie zna tego numeru. Sprawdź go u nadawcy.",
   "link.likely.choose": "Wybierz innego przewoźnika",
+  "link.notTracking.container": "To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.",
   "link.notTracking.order": "To wygląda na numer zamówienia {{shop}}. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.",
   "link.notTracking.short": "Krótszy niż większość numerów śledzenia. Jeśli to numer zamówienia, sprawdź e-mail o wysyłce albo stronę zamówienia.",
   "link.chooseCarrier": "Wybierz przewoźnika",

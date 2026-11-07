@@ -100,8 +100,9 @@ const MOVING_STAGES: ReadonlySet<Stage> = new Set<Stage>(['in_transit', 'customs
  * merely because it has a newer timestamp. An announcement or acceptance after
  * the parcel has moved on is a notice or a reworded scan, not a step back: the
  * scan before it still says where the parcel is. After a problem, a return or
- * a delivery, a new label starts over. A scan the journal shows as a line under
- * another (`relayOf`) is part of that scan's step, whichever is newer.
+ * a delivery, a new label starts over. A return holds while the scans after it
+ * only carry the parcel back (`returnUnderWay`). A scan the journal shows as a
+ * line under another (`relayOf`) is part of that scan's step, whichever is newer.
  */
 export function currentEvent(events: TrackingEvent[]): TrackingEvent | null {
   const byId = new Map(events.map((event) => [event.id, event]));
@@ -109,16 +110,40 @@ export function currentEvent(events: TrackingEvent[]): TrackingEvent | null {
     const scan = event.relayOf ? byId.get(event.relayOf) : undefined;
     return scan !== undefined && scan !== event && !scan.relayOf;
   };
-  const carrier = sortEventsDesc(events.filter((event) => event.stage !== 'pending' && !underAnother(event)));
-  let current = carrier[0];
-  if (!current) return latestEvent(events);
-  for (const event of carrier.slice(1)) {
-    if (!EARLY_STAGES.includes(current.stage)) break;
-    if (MOVING_STAGES.has(event.stage)) return event;
-    if (!EARLY_STAGES.includes(event.stage)) break;
-    if (EARLY_STAGES.indexOf(event.stage) > EARLY_STAGES.indexOf(current.stage)) current = event;
+  return currentScan(sortEventsDesc(events.filter((event) => event.stage !== 'pending' && !underAnother(event))))
+    ?? latestEvent(events);
+}
+
+/** `currentEvent` of a parcel's carrier scans, newest first: the server reads its rows by it too. */
+export function currentScan<T extends { stage?: unknown }>(newestFirst: readonly T[]): T | undefined {
+  const early = (scan: T) => EARLY_STAGES.indexOf(scan.stage as Stage);
+  let current = newestFirst[0];
+  if (!current) return undefined;
+  for (const event of newestFirst.slice(1)) {
+    if (early(current) < 0) break;
+    if (MOVING_STAGES.has(event.stage as Stage)) {
+      current = event;
+      break;
+    }
+    if (early(event) < 0) break;
+    if (early(event) > early(current)) current = event;
   }
-  return current;
+  return returnUnderWay(newestFirst.slice(newestFirst.indexOf(current))) ?? current;
+}
+
+/** Stages of the scans that carry a parcel back to its sender once its return started. */
+const RETURN_TRIP: ReadonlySet<unknown> = new Set<Stage>(['in_transit', 'customs']);
+
+/**
+ * The scan that returned the parcel to its sender, while the scans after it only carry the parcel
+ * back (in transit, through customs): the carrier keeps scanning it on the way, and none of those
+ * scans brings a delivery. A delivery round, a problem or a new label after the return ends it.
+ * Undefined when the newest scan, newest first, is no such movement after a return.
+ */
+export function returnUnderWay<T extends { stage?: unknown }>(newestFirst: readonly T[]): T | undefined {
+  if (!RETURN_TRIP.has(newestFirst[0]?.stage)) return undefined;
+  const before = newestFirst.find((scan) => !RETURN_TRIP.has(scan.stage));
+  return before?.stage === 'returned' ? before : undefined;
 }
 
 /** How long a label may wait before the page explains that the sender still has the parcel. */

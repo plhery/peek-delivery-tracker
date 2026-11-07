@@ -120,6 +120,14 @@ describe('useful delivery estimates', () => {
     saved.expectedDelivery = '2026-09-07';
     expect(parcelDeliveryEstimate(saved, now)).toBeNull();
   });
+  it('hides the estimate while a returned parcel is carried back', () => {
+    const saved = parcel('ok', 'in_transit');
+    saved.events[0].stage = 'returned';
+    saved.events.push({ id: 'event-2', parcelId: 'package-1', stage: 'in_transit', description: 'Processed', occurredAt: '2026-07-17T10:00:00Z' });
+    saved.expectedDelivery = '2026-09-08';
+    expect(parcelDeliveryEstimate(saved, now)).toBeNull();
+    expect(parcelDisplayStatus(saved).label).toBe(en['stage.returned']);
+  });
   it('keeps only today\'s hours while out for delivery, and hides stale estimates', () => {
     const saved = parcel('ok');
     saved.events[0].stage = 'out_for_delivery';

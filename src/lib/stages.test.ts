@@ -179,6 +179,30 @@ describe('currentStage / progressIndex', () => {
     expect(currentEvent([label, problem])).toBe(problem);
   });
 
+  it('keeps a return while the scans after it only carry the parcel back', () => {
+    const at = (day: number) => `2026-06-${String(day).padStart(2, '0')}T08:00:00.000Z`;
+    const failed = makeEvent({ id: 'failed', stage: 'failed_attempt', occurredAt: at(4) });
+    const returned = makeEvent({ id: 'returned', stage: 'returned', occurredAt: at(5) });
+    const hub = makeEvent({ id: 'hub', stage: 'in_transit', occurredAt: at(6) });
+    const border = makeEvent({ id: 'border', stage: 'customs', occurredAt: at(7) });
+    expect(currentEvent([failed, returned, hub])).toBe(returned);
+    expect(currentEvent([failed, returned, hub, border])).toBe(returned);
+    // A notice after the trip back reads as the trip's scan, which is still the return.
+    const notice = makeEvent({ id: 'notice', stage: 'accepted', occurredAt: at(8) });
+    expect(currentEvent([failed, returned, hub, notice])).toBe(returned);
+    // A delivery round or a problem after the return is news of its own, and so is the trip after it.
+    for (const stage of ['out_for_delivery', 'failed_attempt', 'ready_for_pickup', 'delivered', 'exception'] as const) {
+      const round = makeEvent({ id: 'round', stage, occurredAt: at(8) });
+      expect(currentEvent([failed, returned, hub, round])).toBe(round);
+      const after = makeEvent({ id: 'after', stage: 'in_transit', occurredAt: at(9) });
+      expect(currentEvent([failed, returned, hub, round, after])).toBe(after);
+    }
+    // A new label after the return starts over, and its parcel moves on its own.
+    const label = makeEvent({ id: 'label', stage: 'registered', occurredAt: at(8) });
+    const moved = makeEvent({ id: 'moved', stage: 'in_transit', occurredAt: at(9) });
+    expect(currentEvent([returned, hub, label, moved])).toBe(moved);
+  });
+
   it('keeps progress at in-transit level while at customs', () => {
     const events = [
       makeEvent({ id: 'a', stage: 'customs', occurredAt: '2026-06-03T08:00:00.000Z' }),

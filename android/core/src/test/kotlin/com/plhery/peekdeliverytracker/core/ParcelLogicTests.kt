@@ -1071,6 +1071,28 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun returnHoldsWhileTheLaterScansCarryTheParcelBack() {
+        val id = UUID.randomUUID()
+        val failed = event(id, TrackingStage.FailedAttempt, "2026-08-04T10:00:00Z")
+        val returned = event(id, TrackingStage.Returned, "2026-08-05T10:00:00Z")
+        val hub = event(id, TrackingStage.InTransit, "2026-08-06T10:00:00Z")
+        val border = event(id, TrackingStage.Customs, "2026-08-07T10:00:00Z")
+        assertEquals(returned.id, makeParcel(id, events = listOf(failed, returned, hub)).currentEvent?.id)
+        assertEquals(returned.id, makeParcel(id, events = listOf(failed, returned, hub, border)).currentEvent?.id)
+        val notice = event(id, TrackingStage.Accepted, "2026-08-08T10:00:00Z")
+        assertEquals(returned.id, makeParcel(id, events = listOf(failed, returned, hub, notice)).currentEvent?.id)
+        for (stage in listOf(TrackingStage.OutForDelivery, TrackingStage.FailedAttempt, TrackingStage.Exception)) {
+            val round = event(id, stage, "2026-08-08T10:00:00Z")
+            assertEquals(round.id, makeParcel(id, events = listOf(failed, returned, hub, round)).currentEvent?.id)
+            val after = event(id, TrackingStage.InTransit, "2026-08-09T10:00:00Z")
+            assertEquals(after.id, makeParcel(id, events = listOf(failed, returned, hub, round, after)).currentEvent?.id)
+        }
+        val label = event(id, TrackingStage.Registered, "2026-08-08T10:00:00Z")
+        val moved = event(id, TrackingStage.InTransit, "2026-08-09T10:00:00Z")
+        assertEquals(moved.id, makeParcel(id, events = listOf(returned, hub, label, moved)).currentEvent?.id)
+    }
+
+    @Test
     fun eventOrderingUsesInstantsAndStableTieBreakers() {
         val id = UUID.randomUUID()
         val accepted = event(id, TrackingStage.Accepted, "2026-08-08T10:00:00Z")

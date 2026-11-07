@@ -545,12 +545,28 @@ private object LatestEventCache {
         for (event in newestFirst.drop(1)) {
             val rank = early.indexOf(current.stage)
             if (rank < 0) break
-            if (event.stage in moving) return event
+            if (event.stage in moving) {
+                current = event
+                break
+            }
             val earlier = early.indexOf(event.stage)
             if (earlier < 0) break
             if (earlier > rank) current = event
         }
-        return current
+        return returnUnderWay(newestFirst.subList(newestFirst.indexOf(current), newestFirst.size)) ?: current
+    }
+
+    /** Stages of the scans that carry a parcel back to its sender once its return started. */
+    private val returnTrip = setOf(TrackingStage.InTransit, TrackingStage.Customs)
+
+    /**
+     * The scan that returned the parcel to its sender, while the scans after it only carry the parcel back (in transit,
+     * through customs): none of them brings a delivery. A delivery round, a problem or a new label after the return
+     * ends it (`src/lib/stages.ts`).
+     */
+    private fun returnUnderWay(newestFirst: List<TrackingEvent>): TrackingEvent? {
+        if (newestFirst.firstOrNull()?.stage !in returnTrip) return null
+        return newestFirst.firstOrNull { it.stage !in returnTrip }?.takeIf { it.stage == TrackingStage.Returned }
     }
 }
 

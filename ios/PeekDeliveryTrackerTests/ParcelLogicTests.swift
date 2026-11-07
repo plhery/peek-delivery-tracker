@@ -1160,6 +1160,27 @@ final class ParcelLogicTests: XCTestCase {
         }
     }
 
+    func testReturnHoldsWhileTheLaterScansCarryTheParcelBack() {
+        let id = UUID()
+        let failed = event(id, .failedAttempt, "2026-08-04T10:00:00Z")
+        let returned = event(id, .returned, "2026-08-05T10:00:00Z")
+        let hub = event(id, .inTransit, "2026-08-06T10:00:00Z")
+        let border = event(id, .customs, "2026-08-07T10:00:00Z")
+        XCTAssertEqual(makeParcel(id: id, events: [failed, returned, hub]).currentEvent?.id, returned.id)
+        XCTAssertEqual(makeParcel(id: id, events: [failed, returned, hub, border]).currentEvent?.id, returned.id)
+        let notice = event(id, .accepted, "2026-08-08T10:00:00Z")
+        XCTAssertEqual(makeParcel(id: id, events: [failed, returned, hub, notice]).currentEvent?.id, returned.id)
+        for stage in [TrackingStage.outForDelivery, .failedAttempt, .exception] {
+            let round = event(id, stage, "2026-08-08T10:00:00Z")
+            XCTAssertEqual(makeParcel(id: id, events: [failed, returned, hub, round]).currentEvent?.id, round.id)
+            let after = event(id, .inTransit, "2026-08-09T10:00:00Z")
+            XCTAssertEqual(makeParcel(id: id, events: [failed, returned, hub, round, after]).currentEvent?.id, after.id)
+        }
+        let label = event(id, .registered, "2026-08-08T10:00:00Z")
+        let moved = event(id, .inTransit, "2026-08-09T10:00:00Z")
+        XCTAssertEqual(makeParcel(id: id, events: [returned, hub, label, moved]).currentEvent?.id, moved.id)
+    }
+
     func testEventOrderingUsesInstantsAndStableTieBreakers() {
         let id = UUID()
         let accepted = event(id, .accepted, "2026-08-08T10:00:00Z")

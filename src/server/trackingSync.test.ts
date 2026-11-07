@@ -1756,6 +1756,45 @@ describe('TrackingSyncService', () => {
       expect(same).toMatchObject({ current_stage: 'delivered', last_status_text: 'Consegnata al punto di ritiro' });
       expect(same.anomalies).toContain('terminal_stage_regression');
     });
+
+  describe('a return on its way back', () => {
+    // A parcel the carrier could not deliver and sent back; the number, wording and clocks are invented.
+    const trip = [
+      { time: '2026-11-05T12:00:00+01:00', description: 'In restituzione al mittente', stage: 'returned' },
+      { time: '2026-11-04T15:00:00+01:00', description: 'Destinatario assente', stage: 'failed_attempt' },
+      { time: '2026-11-04T08:00:00+01:00', description: 'In consegna', stage: 'out_for_delivery' },
+      { time: '2026-11-03T20:00:00+01:00', description: 'In transito', stage: 'in_transit' }];
+    const answer = (stage: string, ...newer: Array<{ time: string; description: string; stage: string }>): CarrierResult => {
+      const events = [...newer, ...trip];
+      return { status: 'in_transit', current_stage: stage, last_status_text: events[0]!.description, last_update: events[0]!.time,
+        expected_delivery: '2026-11-09', events };
+    };
+    const check = async (carrier: CarrierResult) => {
+      const store = eventStore();
+      const client = Object.assign(store.client, {
+        acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+        finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
+      const adapter = { fetch: vi.fn().mockResolvedValue(carrier), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+      await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-07T18:00:00Z'))
+        .syncPackage({ id: 'going-back', carrier: 'poste-italiane', tracking_number: `RA${s10('31415926')}IT`,
+          current_stage: 'pending', created_at: '2026-11-03T09:00:00Z', [STORED_EVENT_IDENTITIES]: store.identities() });
+      return client.applyTrackingSync.mock.calls.at(-1)![1] as JsonObject;
+    };
+
+    it('stays returned, with no delivery date, while the later scans carry it back', async () => {
+      for (const stage of ['in_transit', 'customs']) {
+        expect(await check(answer(stage, { time: '2026-11-07T15:30:00+01:00', description: 'Centro di origine', stage }))).toMatchObject({
+          current_stage: 'returned', last_status_text: 'In restituzione al mittente', expected_delivery: null });
+      }
+    });
+
+    it('follows a delivery round after the return, and the trip after it', async () => {
+      const round = { time: '2026-11-06T09:00:00+01:00', description: 'In consegna', stage: 'out_for_delivery' };
+      expect(await check(answer('out_for_delivery', round))).toMatchObject({ current_stage: 'out_for_delivery', expected_delivery: '2026-11-09' });
+      expect(await check(answer('in_transit', { time: '2026-11-07T15:30:00+01:00', description: 'Centro di origine', stage: 'in_transit' },
+        round))).toMatchObject({ current_stage: 'in_transit', expected_delivery: '2026-11-09' });
+    });
+  });
   });
 
   describe('a delivery read again in another stage', () => {

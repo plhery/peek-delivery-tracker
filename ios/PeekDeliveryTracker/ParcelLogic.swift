@@ -448,6 +448,9 @@ private final class LatestEventCache: @unchecked Sendable {
     /// Stages of a parcel on its way, short of a final one.
     private static let moving: Set<TrackingStage> = [.inTransit, .customs, .outForDelivery, .failedAttempt, .readyForPickup]
 
+    /// Stages of the scans that carry a parcel back to its sender once its return started.
+    private static let returnTrip: Set<TrackingStage> = [.inTransit, .customs]
+
     /// An announcement or acceptance after the parcel has moved on is a notice
     /// or a reworded scan, not a step back: the scan before it still says where
     /// the parcel is. After a problem, a return or a delivery, a new label starts over.
@@ -455,11 +458,23 @@ private final class LatestEventCache: @unchecked Sendable {
         guard var current = carrier.first else { return nil }
         for event in carrier.dropFirst() {
             guard let rank = early.firstIndex(of: current.stage) else { break }
-            if moving.contains(event.stage) { return event }
+            if moving.contains(event.stage) {
+                current = event
+                break
+            }
             guard let earlier = early.firstIndex(of: event.stage) else { break }
             if earlier > rank { current = event }
         }
-        return current
+        return returnUnderWay(carrier.drop(while: { $0.id != current.id })) ?? current
+    }
+
+    /// The scan that returned the parcel to its sender, while the scans after it only carry the
+    /// parcel back (in transit, through customs): none of them brings a delivery. A delivery round,
+    /// a problem or a new label after the return ends it (`src/lib/stages.ts`).
+    private static func returnUnderWay(_ newestFirst: ArraySlice<TrackingEvent>) -> TrackingEvent? {
+        guard let newest = newestFirst.first, returnTrip.contains(newest.stage) else { return nil }
+        let before = newestFirst.first { !returnTrip.contains($0.stage) }
+        return before?.stage == .returned ? before : nil
     }
 }
 

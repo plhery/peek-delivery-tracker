@@ -6,7 +6,7 @@ export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } 
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
 import { isLocale } from '../lib/locale';
-import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
+import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 
 import { createHash } from 'node:crypto';
 import { DateTime } from 'luxon';
@@ -2113,12 +2113,18 @@ export class TrackingSyncService {
           eventTimestamp(result!.last_update, resultTimezone(sourceCarrierId!, result!))]
           .map((time) => Date.parse(String(time ?? ''))).filter(Number.isFinite));
         const lead = fetched.earlierFollowUp ? earlierLead(earlierEvents, partnerAt, normalizedSelectedStage, now, storedAhead) : null;
+        // A return holds while the scans after it only carry the parcel back, as the apps read it
+        // (`currentScan`): a summary in transit or at customs then brings no delivery.
+        const back = ['in_transit', 'customs'].includes(String(normalizedSelectedStage))
+          ? currentScan(newestEvents.filter((event) => event.stage !== 'pending')) : undefined;
+        const returned = back?.stage === 'returned' ? back : undefined;
+        const selected = lead ?? returned;
         return {
           events: [...earlierEvents, ...normalizedEvents],
           relays: relayedScans(earlierEvents, normalizedEvents),
           reportedStage: normalizedReportedStage,
-          selectedStage: lead ? String(lead.stage) : normalizedSelectedStage,
-          scanText: lead ? String(lead.description ?? '').trim() || null : scanText,
+          selectedStage: selected ? String(selected.stage) : normalizedSelectedStage,
+          scanText: selected ? String(selected.description ?? '').trim() || null : scanText,
           leadAt: lead ? Date.parse(String(lead.occurred_at)) : Number.NaN,
         };
       }, (value) => ({
@@ -2471,7 +2477,8 @@ export class TrackingSyncService {
       };
       if (!preserveSummary) {
         values.last_status_text = stageText || result.last_status_text || null;
-        values.expected_delivery = result.expected_delivery ? String(result.expected_delivery) : null;
+        // A parcel on its way back to the sender has no delivery to expect.
+        values.expected_delivery = result.expected_delivery && selectedStage !== 'returned' ? String(result.expected_delivery) : null;
         values.carrier_data = carrierData;
         if (selectedStage && (hasUpdate || !swissPostReady)) {
           const rows = rowsOnceSaved();

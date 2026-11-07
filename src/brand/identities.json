@@ -166,6 +166,9 @@
   "alliance-air-freight": {
     "decal": "alliance-air-freight"
   },
+  "allied-express": {
+    "decal": "allied-express"
+  },
   "alljoy": {
     "decal": "alljoy"
   },
@@ -3465,6 +3468,9 @@
   },
   "skyking": {
     "decal": "skyking"
+  },
+  "skynet-my": {
+    "decal": "skynet-my"
   },
   "skynet-sa": {
     "decal": "skynet-worldwide"

@@ -646,6 +646,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "alil-post": "alil-post",
   "allegro-one": "allegro-one",
   "alliance-air-freight": "alliance-air-freight",
+  "allied-express": "allied-express",
   "alljoy": "alljoy",
   "am-home-delivery": "am-home-delivery",
   "amalgamated-distribution": "amalgamated-distribution",
@@ -1664,6 +1665,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "skybox": "skybox",
   "skyex-ae": "skyex-ae",
   "skyking": "skyking",
+  "skynet-my": "skynet-my",
   "skynet-sa": "skynet-worldwide",
   "skynet-worldwide": "skynet-worldwide",
   "skypostal": "skypostal",
@@ -33427,6 +33429,80 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M16.54 11.22L16.59 11.22L17 11.16L17.41 11.01L17.79 10.76L18.1 10.44L18.33 10.06L18.46 9.67L19.1 6.47L18.69 6.38L18.26 6.38L17.65 9.45L17.56 9.7L17.43 9.92L17.25 10.11L17.03 10.26L16.79 10.35L16.57 10.37L16.37 10.35L16.21 10.28L16.1 10.17L16.02 10.03L15.98 9.85L15.99 9.61L16.62 6.47L16.21 6.38L15.78 6.38L15.16 9.5L15.13 9.91L15.22 10.33L15.43 10.7L15.75 10.99L16.14 11.16Z",
+        "fill": "accent"
+      }
+    ],
+    "allied-express": [
+      {
+        "type": "polygon",
+        "d": "M7.65 6.83L6.31 10.65L8.32 10.65L8.32 9.88L7.39 9.88L8.37 7.08Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.9 10.65L10.91 10.65L10.91 9.88L9.98 9.88L10.96 7.08L10.24 6.83Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.51 7.08L12.79 6.83L11.49 10.52L12.21 10.77Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.2 9.18L15.3 9.18L15.3 8.42L14.47 8.42L14.71 7.72L16.05 7.72L16.05 6.95L14.17 6.95L12.88 10.65L15.03 10.65L15.03 9.88L13.95 9.88Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.46 9.79L18.78 9.38L19 8.93L19.1 8.45L19.07 7.98L18.89 7.55L18.57 7.22L18.15 7.01L17.71 6.95L16.94 6.95L15.65 10.65L16.68 10.65L17.14 10.59L17.62 10.41L18.07 10.14Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.32 8.16L18.33 8.39L18.27 8.67L18.12 8.98L17.9 9.27L17.61 9.53L17.29 9.72L16.96 9.84L16.73 9.87L17.48 7.72L17.65 7.72L17.93 7.75L18.12 7.84L18.24 7.98Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M3.57 10.76L4.14 9.71L5.1 9.71L4.97 10.52L5.72 10.64L6.31 6.95L4.76 6.95L2.9 10.39Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M5.22 8.95L4.55 8.95L5.21 7.72L5.42 7.72Z",
+        "fill": "truck"
+      }
+    ],
+    "skynet-my": [
+      {
+        "type": "polygon",
+        "d": "M13.18 9.78L13.11 9.78L13.64 7.14L12.23 7.14L11.26 10.36L11.92 10.56L12.74 7.82L12.8 7.82L12.28 10.46L13.69 10.46L14.65 7.24L14 7.04Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M4.35 9.23L4.4 9.34L4.28 9.57L3.93 9.78L3.6 9.78L3.36 9.56L2.9 10.07L3.33 10.46L4.12 10.46L4.8 10.06L5.15 9.38L4.87 8.69L3.95 8.37L3.91 8.26L4.03 8.03L4.36 7.82L4.67 7.82L4.89 8.03L5.36 7.54L4.94 7.14L4.17 7.14L3.51 7.54L3.16 8.22L3.42 8.91Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.4 7.04L5.41 10.36L6.06 10.56L6.45 9.27L6.75 9.04L7.14 10.38L7.8 10.19L7.33 8.59L8.55 7.65L8.13 7.11L6.79 8.14L7.06 7.24Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.35 9.14L16.33 9.14L16.33 8.46L15.55 8.46L15.74 7.82L16.94 7.82L16.94 7.14L15.23 7.14L14.24 10.46L16.15 10.46L16.15 9.78L15.16 9.78Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.72 10.56L10.19 8.98L11.55 7.57L11.05 7.09L10.02 8.16L9.68 7.21L9.04 7.44L9.53 8.81L9.06 10.36Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.54 7.82L19.1 7.82L19.1 7.14L17.47 7.14L17.47 7.82L17.82 7.82L17.06 10.36L17.72 10.56Z",
         "fill": "accent"
       }
     ]

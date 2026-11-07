@@ -806,6 +806,8 @@ describe('carrier brand', () => {
       'dongdu',
       'zecheng',
       'suhu',
+      'allied-express',
+      'skynet-my',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

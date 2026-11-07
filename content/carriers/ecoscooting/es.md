@@ -3,7 +3,7 @@ title: Ecoscooting seguimiento: estados, entregas y teléfono
 description: Sigue tu paquete de Ecoscooting en España: qué número usar, qué significa cada estado, qué pasa si falla la entrega, puntos de recogida y teléfonos.
 slug: ecoscooting-seguimiento
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Ecoscooting es una empresa de reparto de compras online de plataformas extranjeras en España y Portugal, del grupo Cainiao, la logística de Alibaba. Solo hace el último tramo: lleva el paquete a tu casa o a un punto de recogida. Para seguirlo, escribe en ecoscooting.com el número que aparece en sus correos, o pégalo en la casilla de arriba.
@@ -41,7 +41,7 @@ ecoscooting.com sale en español, inglés o portugués según tu navegador, y ti
 | `Su envío será devuelto al lugar de origen` | Empieza la devolución al remitente. |
 | `Su envío tiene una incidencia en la estación de última milla [Paquete perdido]` | Se ha perdido en la base local. Mira más abajo qué hacer. |
 
-El que más confunde es el paso al punto de recogida. Su título en negrita es `Entregado por el repartidor`, y en inglés `Delivered to PUDO` (PUDO es el punto de recogida y entrega), y suena a que ya te lo han entregado. No es así: espera el mensaje del punto antes de ir.
+El que más confunde es el paso al punto de recogida. Su título en negrita es `Entregado por el repartidor`, y en inglés `Delivered to PUDO` (PUDO es el punto de recogida y entrega), y suena a que ya te lo han entregado. No es así: espera el mensaje del punto antes de ir. En Peek, que consulta el seguimiento en inglés, puede salir también `Service point closed`: tras los intentos fallidos en tu domicilio, el repartidor tampoco pudo dejar el paquete en el punto de recogida, así que no te está esperando allí.
 
 Encima del historial, ecoscooting.com pone un titular. Dice `En tránsito` incluso después de la entrega, así que fíjate en la última línea. `Fallo en la entrega` aparece cuando el seguimiento marca un error, como un paquete robado. `Tiempo de recogida excedido` sale cuando el paquete se quedó demasiado tiempo en un punto, y `Sin trayectoria` significa que todavía no hay escaneos.
 

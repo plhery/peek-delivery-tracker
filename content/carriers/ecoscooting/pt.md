@@ -3,7 +3,7 @@ title: Ecoscooting rastreio: estados, pontos de recolha e contacto
 description: Rastreio Ecoscooting em Portugal: que número usar, o que querem dizer os estados, entregas falhadas, pontos de recolha e como contactar a Ecoscooting.
 slug: ecoscooting-rastreio
 published: 2026-10-12
-updated: 2026-11-05
+updated: 2026-11-07
 ---
 
 A Ecoscooting é uma empresa de entregas em Portugal e Espanha para compras feitas em plataformas internacionais, e pertence à Cainiao, a empresa de logística do grupo Alibaba. Faz só a última parte do caminho: a entrega em casa ou num ponto de recolha. Segue a encomenda no ecoscooting.com com o número que vem nos e-mails da Ecoscooting, ou cola-o na caixa no topo desta página.
@@ -42,7 +42,7 @@ O ecoscooting.com mostra o seguimento em português, espanhol ou inglês, confor
 | `Sua encomenda expirou no ponto de retirada e será devolvida ao remetente` | Ninguém a levantou a tempo. Vai voltar ao remetente. |
 | `Sua remessa será devolvida ao remetente original` | Está a voltar ao remetente. |
 
-O estado que mais confunde é a passagem para o ponto de recolha. O título a negrito é `Entregue ao PUDO` (PUDO quer dizer ponto de recolha e entrega), o que parece uma entrega a ti. Não é: espera pelo e-mail ou SMS com o PIN antes de lá ires. O passo seguinte tem um título que fica em inglês, `PUDO Inbound Success`, e esse sim quer dizer que já a podes levantar.
+O estado que mais confunde é a passagem para o ponto de recolha. O título a negrito é `Entregue ao PUDO` (PUDO quer dizer ponto de recolha e entrega), o que parece uma entrega a ti. Não é: espera pelo e-mail ou SMS com o PIN antes de lá ires. O passo seguinte tem um título que fica em inglês, `PUDO Inbound Success`, e esse sim quer dizer que já a podes levantar. No Peek, que consulta o seguimento em inglês, pode aparecer também `Service point closed`: depois das tentativas falhadas em tua casa, o estafeta também não conseguiu deixar a encomenda no ponto de recolha, por isso ela não está lá à tua espera.
 
 Por cima do histórico, o ecoscooting.com mostra um título geral. Diz `Em trânsito` mesmo depois da entrega, por isso lê antes a última linha. `Falha na entrega` aparece quando a Ecoscooting assinala um problema numa leitura, `Tempo de recolha excedido` quando a encomenda ficou tempo demais num ponto de recolha, e `Sem trajetória` quer dizer que ainda não há leituras.
 

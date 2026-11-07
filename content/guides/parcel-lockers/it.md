@@ -20,7 +20,7 @@ Al pagamento scegli un locker al posto dell'indirizzo di casa. Il negozio affida
 - home | Tu | Apri con il codice o con l'app e lo porti via
 :::
 
-Puoi passare al locker anche a ordine fatto. InPost ti fa spostare in un locker una consegna a domicilio dal link nella sua e-mail. Poste Italiane lo permette con Scegli Tu, dal link nell'avviso, se chi spedisce ha attivato il servizio. BRT ti fa scegliere un punto di ritiro dal tracciamento su MyBRT.
+Puoi passare al locker anche a ordine fatto. InPost spiega che una consegna a domicilio si può spostare in un locker o in un InPost Point dal link nelle sue e-mail (dall'app non ancora), ma nelle domande sulla consegna a casa scrive che per ora non si può; in ogni caso, dopo due tentativi di consegna falliti il corriere porta il pacco al locker o all'InPost Point più vicino, se il venditore lo consente. Poste Italiane lo permette con Scegli Tu, dal link nell'avviso, se chi spedisce ha attivato il servizio. BRT ti fa scegliere un punto di ritiro dal tracciamento su MyBRT.
 
 Al locker non c'è nessuno che controlla: lo sportello si apre a chi ha il codice. È comodo, ma vuol dire che il codice va trattato come una chiave.
 
@@ -135,9 +135,9 @@ Il codice di tracciamento InPost ha 24 cifre; le altre forme sono in [riconoscer
 
 :::sources
 - [InPost: Come ritirare un pacco dal Locker o presso un InPost Point](https://inpost.it/come-ritirare-un-pacco-dal-locker-o-presso-un-inpost-point) – notifica con PIN e QR, «Ritira il pacco», numero di telefono e codice
-- [InPost: Contatti e assistenza](https://inpost.it/contatti-e-assistenza) – PIN da InPost, recapiti dati al negozio, tempi decisi dal negozio, delega con e-mail o SMS, locker guasto, numero gratuito 02 38582894 dal lunedì al sabato dalle 8 alle 20, 24 cifre
+- [InPost: Contatti e assistenza](https://inpost.it/contatti-e-assistenza) – PIN da InPost, recapiti dati al negozio, tempi decisi dal negozio, delega con e-mail o SMS, locker guasto, numero gratuito 02 38582894 dal lunedì al sabato dalle 8 alle 20, 24 cifre, consegna a domicilio non dirottabile «per ora», due tentativi e poi il locker o l'InPost Point più vicino se il venditore lo consente
 - [InPost: Giacenza, come funziona con InPost](https://inpost.it/news-giacenza-come-funziona-con-inpost) – circa 3 giorni, nessuna proroga, promemoria, ritorno senza costi
-- [InPost: App InPost](https://inpost.it/app-inpost) – codice e QR nell'app, apertura a distanza entro circa 70 metri, consegna spostata nel locker
+- [InPost: App InPost](https://inpost.it/app-inpost) – codice e QR nell'app, apertura a distanza entro circa 70 metri, consegna a domicilio spostata nel locker dal link nell'e-mail, non dall'app
 - [Poste Italiane: Rete Punto Poste](https://www.poste.it/punto-poste/rete-punto-poste) – PIN o QR per SMS o e-mail, delega solo con PIN, spedire dal Locker, oltre 18.000 punti di ritiro e Locker, tipi di negozio, Locker anche in alcuni uffici postali, assistenza 803 160 e +39 06 4526 3160
 - [Poste Italiane: Poste Delivery Business, scheda prodotto](https://business.poste.it/business/files/1476520760931/poste-delivery-business-express-standard-scheda-prodotto.pdf) – 3 giorni lavorativi nel Locker e 7 al Punto Poste, punto alternativo entro 700 metri o 4 km, resi con QR, massimo 36 x 37 x 56 cm e 15 kg, niente multicollo, ritorno al mittente dei pacchi troppo grandi o pesanti
 - [Poste Italiane: FAQ Scegli Tu](https://www.poste.it/assistenza/faq-scegli-tu) – consegna spostata in un Locker dal link nell'avviso, servizio clienti 803 160 e 06 4526 3160, orari

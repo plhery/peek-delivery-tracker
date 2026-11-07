@@ -30,9 +30,9 @@ Dieselben Schritte, andere Worte:
 
 | Schritt | DHL (Deutschland) | Österreichische Post | Schweizerische Post |
 | --- | --- | --- | --- |
-| Angekündigt | `Die Sendung wurde elektronisch angekündigt.` | `Elektronische Auftragsdaten wurden vom Versender übermittelt` | `Anmeldung der Sendung durch Versender (Dateneinlieferung)` |
-| Übernommen | `Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport …` | `Zum Transport erhalten` | `Zeitpunkt der Aufgabe Ihrer Sendung` |
-| Unterwegs | `Die Sendung ist in der Region des Empfängers angekommen …` | `Sendung in Verteilung` | `Sendung wurde sortiert und weitergeleitet` |
+| Angekündigt | `Die Sendung wurde elektronisch angekündigt.` | `Versender*in bereitet die Sendung für den Versand vor` | `Anmeldung der Sendung durch Versender (Dateneinlieferung)` |
+| Übernommen | `Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport …` | `Sendungsannahme durchgeführt` | `Zeitpunkt der Aufgabe Ihrer Sendung` |
+| Unterwegs | `Die Sendung ist in der Region des Empfängers angekommen …` | `Sendung im Logistikzentrum in Bearbeitung` | `Sendung wurde sortiert und weitergeleitet` |
 | In Zustellung | `Die Sendung wurde in das Zustellfahrzeug geladen.` | `Sendung in Zustellung` | `Verlad in Zustellfahrzeug` |
 | Abholbereit | `Die Sendung wird zur Abholung in die Filiale … gebracht.` | `Sendung abholbereit` | `Ankunft an der Abhol-/Zustellstelle` |
 | Zugestellt | `Die Sendung wurde erfolgreich zugestellt.` | `Sendung wurde zugestellt` | `Zugestellt durch` |
@@ -155,5 +155,5 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage bei vollständigen Angaben
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – UPS-Scans, die Peek liest: Etikett erstellt, Access Point, „Left at“, „Exception“
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – FedEx-Scans, die Peek liest: Sendungsdaten an FedEx übermittelt
-- [Universal Parcel Scraper: Österreichische Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/austrian-post) – Scans der Post, die Peek liest: Sendung wurde zugestellt, Sendung in Postempfangsbox abholbereit
+- [Universal Parcel Scraper: Österreichische Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/austrian-post) – Scans der Post, die Peek liest: Versender\*in bereitet die Sendung für den Versand vor, Sendungsannahme durchgeführt, Sendung im Logistikzentrum in Bearbeitung, Sendung wurde zugestellt, Sendung in Postempfangsbox abholbereit
 :::

@@ -3,7 +3,7 @@ title: DHL Paket tracking: numbers, statuses and pickup help
 description: Track a DHL Paket parcel in Germany: the tracking number shapes, what DHL's statuses mean, missed deliveries, Packstation pickup, claims and contacts.
 slug: dhl-paket-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 DHL Paket is the German parcel service of DHL Group, sold under the Deutsche Post and DHL brands. Track a parcel with its tracking number on dhl.de (in English or German), in the Post & DHL app or by pasting it in the box above. The number comes from the sender: shops usually put it in the shipping confirmation.
@@ -78,7 +78,7 @@ DHL warns about fake SMS with shortened links or odd country codes, and fake car
 
 [Peek](/) names DHL at once from a `JJD` label number with 18 digits, a valid `0034043…` barcode number or a valid `C…DE` / `L…DE` number. A 12-digit Identcode fits several carriers: Peek asks a few of them whether they know it, DHL among them. A 10-digit number fits several too: paste it all the same, as Peek follows more than 3,500 carriers. If the parcel isn't filed under DHL, pick "DHL" with "Change", which also fixes a parcel filed under the wrong DHL network. Links from dhl.de, deutschepost.de and nolp.dhl.de work too.
 
-Peek reads dhl.de's tracking in English (in German if your Peek is set to German), falling back to a browser on its server when DHL refuses. When several shipments share a 12-digit number, DHL asks for the delivery postcode: the parcel then asks you for it with "Add postcode", and tracking services fill in until you add it. They also fill in when DHL says the number belongs to another DHL service. Peek checks every 10 minutes, or every 2 minutes once out for delivery (every 5 when it has to open dhl.de in a browser), and can notify you at every scan, at important steps or on delivery day only. The faster checks run on the day DHL scans the parcel out for delivery, from 6 a.m. local time (when DHL gives a time window, from half an hour before it opens), and only while DHL's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek reads dhl.de's tracking in English (in German if your Peek is set to German), falling back to a browser on its server when DHL refuses. When several shipments share a 12-digit number, DHL asks for the delivery postcode: the parcel then asks you for it with "Add postcode", and tracking services fill in until you add it. While DHL waits for the postcode, or turns down the one you gave, and nothing has answered for a day, Peek checks once a day; adding or changing the postcode checks the parcel at once. Tracking services also fill in when DHL says the number belongs to another DHL service. Peek checks every 10 minutes, or every 2 minutes once out for delivery (every 5 when it has to open dhl.de in a browser), and can notify you at every scan, at important steps or on delivery day only. The faster checks run on the day DHL scans the parcel out for delivery, from 6 a.m. local time (when DHL gives a time window, from half an hour before it opens), and only while DHL's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 It shows the status, each scan with its place at DHL's exact time, the route through those places on a map, the expected delivery day (with DHL's time window when it gives one) and the destination country, with DHL's wordings as written. It drops your name, address and signature; a branch or Packstation that DHL names in a scan stays as DHL writes it. When a scan abroad links a local post's tracking (Swiss Post, for example), Peek can follow the parcel there. It can't redirect a parcel or book a Liefertag.
 
@@ -125,4 +125,5 @@ No. DHL Päckchen and DHL Päckchen International have no tracking; only parcels
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – never asks for personal data or payment by SMS
 - [Deutsche Post/DHL: Leistungen und Preise](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – free tracking, Post & DHL app, hotline hours
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from DHL Paket, in English or German, and DHL's status wordings
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – daily checks while DHL waits for the postcode or refuses it, an added or changed postcode checked at once
 :::

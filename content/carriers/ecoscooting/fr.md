@@ -3,7 +3,7 @@ title: Ecoscooting suivi colis : statuts, point relais et contact
 description: Suivre un colis Ecoscooting en Espagne ou au Portugal : quel numéro utiliser, ce que veulent dire les statuts, les points relais et comment joindre Ecoscooting.
 slug: ecoscooting-suivi
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-07
 ---
 
 Ecoscooting livre en Espagne et au Portugal les commandes passées sur des plateformes de vente en ligne transfrontalières. Il ne fait que la dernière étape : la livraison locale, à ta porte ou dans un point de retrait. Avant lui, le suivi montre les étapes de [Cainiao](carrier:cainiao), qui achemine le colis jusqu'en Espagne ou au Portugal. Suis ton colis sur ecoscooting.com avec le numéro des e-mails d'Ecoscooting, ou colle-le dans le champ ci-dessus.
@@ -38,6 +38,7 @@ ecoscooting.com affiche son suivi en espagnol, en portugais ou en anglais selon 
 | `Your shipment has arrived at sorting center` | Il est dans un centre de tri. |
 | `Your shipment is out for delivery` | Il est avec le livreur aujourd'hui. |
 | `Your shipment delivery attempt failed [Recipient not at home]` | Le livreur est passé et personne n'a répondu. Regarde tes e-mails pour la suite. |
+| `Service point closed` | Après des tentatives manquées chez toi, le livreur n'a pas pu le déposer non plus au point de retrait. Il ne t'y attend pas. |
 | `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | Remis à un point de retrait. Pas encore prêt, et pas encore entre tes mains. |
 | `Your shipment has arrived at parcelshop and you‘ll receive pickup instructions shortly` | Il t'attend au point de retrait. Le code PIN arrive par e-mail ou SMS. |
 | `Your shipment has been collected by consignee at the parcelshop` | Retiré au point de retrait. |

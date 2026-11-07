@@ -3,7 +3,7 @@ title: Ecoscooting tracking: statuses, pickup points and contact
 description: Track an Ecoscooting parcel in Spain or Portugal: which number to use, what its statuses mean, missed deliveries, parcelshops and how to reach Ecoscooting.
 slug: ecoscooting-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Ecoscooting is a delivery company for online orders from cross-border platforms in Spain and Portugal. It only does the last leg: the local delivery to your door or to a pickup point. Track the parcel on ecoscooting.com with the number from Ecoscooting's emails, or paste it in the box above.
@@ -36,6 +36,7 @@ ecoscooting.com shows its tracking in English, Spanish or Portuguese, following 
 | `Your shipment has arrived at sorting center` | It's at a sorting centre. |
 | `Your shipment is out for delivery` | It's with the courier today. |
 | `Your shipment delivery attempt failed [Recipient not at home]` | The courier came and nobody answered. Check your email for what happens next. |
+| `Service point closed` | After failed attempts at your door, the courier couldn't leave it at the pickup point either. It isn't waiting there. |
 | `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | Handed to a pickup point. Not yet ready, and not with you. |
 | `Your shipment has arrived at parcelshop and you‘ll receive pickup instructions shortly` | Ready to pick up. The PIN comes by email or SMS. |
 | `Your shipment has been collected by consignee at the parcelshop` | Picked up at the parcelshop. |

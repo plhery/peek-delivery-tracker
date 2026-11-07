@@ -100,6 +100,7 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.toSize
@@ -142,8 +143,9 @@ import kotlinx.coroutines.launch
  * and its picture, which the menu lifts over the dimmed screen in the card's own shape
  * (`.contentShape(.contextMenuPreview, shape)`), on `fill` where the card has no ground of its own (a row of the
  * archive's surface), as iOS lifts a preview on a platter. [modifier] goes on the outside of the card; while its menu
- * is open the card is drawn only there, lifted, as iOS hides the card it lifts. [target] goes on what TalkBack reads
- * as the card, where TalkBack comes back as the menu closes.
+ * is open the card is drawn only there, lifted, as iOS hides the card it lifts. A secondary click on it opens the
+ * menu at the pointer instead, the card left where it is ([CardMenuRequest.pointer]). [target] goes on what TalkBack
+ * reads as the card, where TalkBack comes back as the menu closes.
  */
 @Stable
 internal class CardMenuSource(
@@ -164,17 +166,18 @@ internal class CardMenuSource(
 
     val modifier: Modifier = Modifier
         .onGloballyPositioned { bounds = Rect(it.positionInWindow(), it.size.toSize()) }
+        .secondaryClick { open(pointer = bounds.topLeft + it) }
         .drawWithContent {
             picture.record { this@drawWithContent.drawContent() }
-            if (state.menu?.source !== this@CardMenuSource) drawLayer(picture)
+            if (state.menu?.lifts(this@CardMenuSource) != true) drawLayer(picture)
         }
 
     val target: Modifier = Modifier.accessibilityFocus(focus)
 
-    /** The long press: the menu opens over the screen. */
-    fun open() {
+    /** The long press: the menu opens over the screen; a secondary click's, at its `pointer` in the window. */
+    fun open(pointer: Offset? = null) {
         if (state.menu != null) return
-        state.menu = CardMenuRequest(this)
+        state.menu = CardMenuRequest(this, pointer)
         state.returnFocus = focus
     }
 }
@@ -199,10 +202,17 @@ internal fun rememberCardMenu(state: DeliveriesState, parcel: Parcel, cornerRadi
     return source
 }
 
-/** The menu open over the list: the card it came from, and its parcel's items. */
+/**
+ * The menu open over the list: the card it came from, and its parcel's items. A secondary click's opens at its
+ * [pointer] in the window, as `.contextMenu` opens a compact menu under a pointer on the iPad, with no preview and
+ * nothing dimmed; a long press's lifts the card over the dimmed screen.
+ */
 @Stable
-internal class CardMenuRequest(val source: CardMenuSource) {
+internal class CardMenuRequest(val source: CardMenuSource, val pointer: Offset? = null) {
     val parcel: Parcel get() = source.parcel
+
+    /** Whether it lifts `card`, which is then drawn only lifted. */
+    fun lifts(card: CardMenuSource): Boolean = source === card && pointer == null
 }
 
 /** The menu's side of the lifted card, where it grows from. */
@@ -274,6 +284,40 @@ internal fun cardMenuPlacement(
     return CardMenuPlacement(
         Rect(cardLeft, top, cardLeft + width, top + height), besideScale, Rect(menuLeft, menuTop, menuLeft + menuWidth, menuTop + shown),
         if (right) MenuSide.Right else MenuSide.Left,
+    )
+}
+
+/**
+ * Where a menu opened at a pointer stands, as a compact context menu does: from the pointer `at` toward the trailing
+ * side and down, turned to the leading side or up where only that side has room for it, and kept within the window's
+ * safe area `safe`, `margin` from its top and bottom and `side` from its sides. The menu is [menu] tall at most, and
+ * scrolls past that; it grows from its corner at the pointer (`origin`). All in pixels in the window.
+ */
+internal data class PointerMenuPlacement(val menu: Rect, val origin: TransformOrigin)
+
+internal fun pointerMenuPlacement(
+    at: Offset,
+    menuWidth: Float,
+    menuHeight: Float,
+    safe: Rect,
+    margin: Float,
+    side: Float,
+    rtl: Boolean = false,
+): PointerMenuPlacement {
+    val highest = safe.top + margin
+    val lowest = max(highest, safe.bottom - margin)
+    val leftmost = safe.left + side
+    val rightmost = max(leftmost, safe.right - side)
+    val shown = min(menuHeight, lowest - highest)
+    val roomRight = at.x + menuWidth <= rightmost
+    val roomLeft = at.x - menuWidth >= leftmost
+    val leftward = if (rtl) roomLeft || !roomRight else roomLeft && !roomRight
+    val upward = at.y + shown > lowest && at.y - shown >= highest
+    val left = (if (leftward) at.x - menuWidth else at.x).coerceIn(leftmost, max(leftmost, rightmost - menuWidth))
+    val top = (if (upward) at.y - shown else at.y).coerceIn(highest, max(highest, lowest - shown))
+    return PointerMenuPlacement(
+        Rect(left, top, left + menuWidth, top + shown),
+        TransformOrigin(if (leftward) 1f else 0f, if (upward) 1f else 0f),
     )
 }
 
@@ -371,8 +415,10 @@ private val LocalLayerPass = staticCompositionLocalOf<LayerPass?> { null }
 /**
  * The card's menu (A-S41, A-G04): the screen dims, the card lifts in its shape, and the parcel's items stand beside it on
  * glass in their groups, the dimmed screen showing through it, each with its symbol, and the keys that press them on
- * the parcel the keyboard acts on, while the keyboard reaches the deliveries. A tap outside, the back gesture or a
- * choice closes it; a choice acts once it has closed. TalkBack reaches only the menu, from its first item.
+ * the parcel the keyboard acts on, while the keyboard reaches the deliveries. Opened by a secondary click, the items
+ * stand at the pointer instead, with nothing dimmed and the card left in its place, as the iPad's compact menu
+ * ([pointerMenuPlacement]). A tap outside, the back gesture or a choice closes it; a choice acts once it has closed.
+ * TalkBack reaches only the menu, from its first item.
  */
 @Composable
 private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
@@ -403,24 +449,34 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
         // The menu's whole height, as tall as its items; it shows as much as the placement leaves room for.
         var menuHeight by remember(request) { mutableIntStateOf(0) }
         val card = request.source.bounds.translate(-origin)
-        val placement = with(density) {
-            val safe = Rect(
+        val pointer = request.pointer?.minus(origin)
+        val safe = with(density) {
+            Rect(
                 insets.getLeft(this, direction).toFloat(), insets.getTop(this).toFloat(),
                 windowWidth - insets.getRight(this, direction), windowHeight - insets.getBottom(this),
             )
-            cardMenuPlacement(card, menuWidth, menuHeight.toFloat(), safe, margin = MENU_MARGIN.toPx(), gap = MENU_GAP.toPx(), side = PREVIEW_SIDE.toPx())
         }
-        // The dim, over everything but the card and its menu.
+        val margin = with(density) { MENU_MARGIN.toPx() }
+        val side = with(density) { PREVIEW_SIDE.toPx() }
+        val placement = if (pointer == null) {
+            cardMenuPlacement(card, menuWidth, menuHeight.toFloat(), safe, margin = margin, gap = with(density) { MENU_GAP.toPx() }, side = side)
+        } else {
+            null
+        }
+        val atPointer = pointer?.let {
+            pointerMenuPlacement(it, menuWidth, menuHeight.toFloat(), safe, margin = margin, side = side, rtl = direction == LayoutDirection.Rtl)
+        }
+        val menuBounds = placement?.menu ?: atPointer?.menu ?: Rect.Zero
+        // The dim, over everything but the card and its menu; none under a pointer's menu.
         Box(
             Modifier
                 .fillMaxSize()
                 .onGloballyPositioned { origin = it.positionInWindow() }
-                .graphicsLayer { alpha = shown.value }
-                .background(DIM),
+                .then(if (placement != null) Modifier.graphicsLayer { alpha = shown.value }.background(DIM) else Modifier),
         )
         // The card, lifted from its place to the menu's side.
         val radius = request.source.cornerRadius
-        Box(
+        if (placement != null) Box(
             Modifier
                 .layout { measurable, _ ->
                     val placeable = measurable.measure(Constraints.fixed(card.width.toInt(), card.height.toInt()))
@@ -448,14 +504,15 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
             Modifier
                 .layout { measurable, _ ->
                     val width = menuWidth.roundToInt()
-                    val placeable = measurable.measure(Constraints(width, width, 0, placement.menu.height.roundToInt()))
+                    val placeable = measurable.measure(Constraints(width, width, 0, menuBounds.height.roundToInt()))
                     layout(placeable.width, placeable.height) {
-                        placeable.place(placement.menu.left.roundToInt(), placement.menu.top.roundToInt())
+                        placeable.place(menuBounds.left.roundToInt(), menuBounds.top.roundToInt())
                     }
                 }
                 .growingMenu(
                     menu,
-                    when (placement.side) {
+                    when (placement?.side) {
+                        null -> atPointer?.origin ?: TransformOrigin(0f, 0f)
                         MenuSide.Below -> TransformOrigin(0.5f, 0f)
                         MenuSide.Above -> TransformOrigin(0.5f, 1f)
                         MenuSide.Right -> TransformOrigin(0f, 0f)
@@ -465,7 +522,7 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = parcel.label.ifEmpty { localizer.text("common.parcel") } }
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
-            dim = DIM.alpha,
+            dim = if (placement != null) DIM.alpha else 0f,
         ) {
             Column(
                 Modifier

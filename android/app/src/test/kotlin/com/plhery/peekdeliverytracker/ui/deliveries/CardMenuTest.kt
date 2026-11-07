@@ -7,6 +7,7 @@ import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -47,6 +48,7 @@ import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -143,6 +145,55 @@ class CardMenuTest {
         assertTrue(ParcelMenuItem.Restore in shownItems())
         back()
         compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
+    }
+
+    /**
+     * Opened by a secondary click, the menu stands at the pointer, as `.contextMenu` opens the iPad's compact menu: its
+     * glass from the point clicked, no card lifted over a dimmed screen; a long press on the same card still lifts it.
+     */
+    @Test
+    fun aSecondaryClickOpensTheMenuAtThePointerWithoutLiftingTheCard() {
+        show()
+        val card = drawn(compose.card("Birthday gift"))
+        compose.card("Birthday gift").performMouseInput { rightClick(Offset(40.dp.toPx(), 20.dp.toPx())) }
+        compose.waitForIdle()
+        compose.onNodeWithTag(CARD_MENU_PREVIEW).assertDoesNotExist()
+        val glass = drawn(compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.PaneTitle) and hasAnyAncestor(hasTestTag(CARD_MENU))))
+        val pointer = Offset(card.left + 40, card.top + 20)
+        assertEquals("From the pointer: $glass, $pointer", pointer.x, glass.left, 0.5f)
+        assertTrue("From the pointer: $glass, $pointer", abs(glass.top - pointer.y) < 0.5f || abs(glass.bottom - pointer.y) < 0.5f)
+        assertTrue(ParcelMenuItem.Archive in shownItems())
+        back()
+
+        longPress("Birthday gift", scroll = false)
+        compose.onNodeWithTag(CARD_MENU_PREVIEW).assertExists()
+    }
+
+    /**
+     * A pointer's menu goes right and down from the pointer, left or up where only that side has room, and stays inside
+     * the safe area, scrolling where it is taller than the room; right to left, it goes left first.
+     */
+    @Test
+    fun aPointersMenuStandsFromThePointerAndInsideTheWindow() {
+        val safe = Rect(0f, 40f, 400f, 800f)
+        fun at(x: Float, y: Float, height: Float = 300f, rtl: Boolean = false) =
+            pointerMenuPlacement(Offset(x, y), menuWidth = 250f, menuHeight = height, safe = safe, margin = 20f, side = 20f, rtl = rtl)
+
+        assertEquals(Rect(50f, 100f, 300f, 400f), at(50f, 100f).menu)
+        assertEquals(TransformOrigin(0f, 0f), at(50f, 100f).origin)
+        // No room to the right: to the left of the pointer; none below: above it.
+        assertEquals(Rect(50f, 100f, 300f, 400f), at(300f, 100f).menu)
+        assertEquals(TransformOrigin(1f, 0f), at(300f, 100f).origin)
+        assertEquals(Rect(50f, 400f, 300f, 700f), at(50f, 700f).menu)
+        assertEquals(TransformOrigin(0f, 1f), at(50f, 700f).origin)
+        // Room on neither side: as far right as the window lets it go, and as low as it lets it.
+        assertEquals(Rect(130f, 60f, 380f, 360f), at(200f, 60f).menu)
+        assertEquals(Rect(50f, 180f, 300f, 780f), at(50f, 500f, height = 600f).menu)
+        // Taller than the room: the whole room, scrolling.
+        assertEquals(Rect(50f, 60f, 300f, 780f), at(50f, 500f, height = 2000f).menu)
+        // Right to left: left of the pointer where it can be.
+        assertEquals(Rect(50f, 100f, 300f, 400f), at(300f, 100f, rtl = true).menu)
+        assertEquals(Rect(50f, 100f, 300f, 400f), at(50f, 100f, rtl = true).menu)
     }
 
     /**

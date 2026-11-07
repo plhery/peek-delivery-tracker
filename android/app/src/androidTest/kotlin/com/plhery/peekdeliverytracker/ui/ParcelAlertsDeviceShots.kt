@@ -60,7 +60,7 @@ import org.junit.runner.RunWith
  * its alert over the sheet; the bell without the email, muting the parcel and saying so to TalkBack, as it still does
  * once the page is opened again from the list's card; and on a delivered parcel of an account that never chose, the
  * email's offer: Turn on saving then accepted, and Settings' delivery email on after it with the offer gone for good;
- * Not now; a failure offline; the envelope left out at the largest text. Each moment saved as
+ * Not now; a failure offline; the envelope left out at the largest text; and the alerts of a phone without pushes. Each moment saved as
  * stateswalk/<row>-<moment>.png, with -dark, and -largest at the largest text, in the test package's external files,
  * which adb pulls. Signed in on fake deliveries ([FakeDeliveries], [ParcelWalk]) whose stores answer every read in
  * memory: nothing goes to the network. Each test keeps Zurich's time and the captures' moment as the JVM's do, under
@@ -336,5 +336,28 @@ class ParcelAlertsDeviceShots {
         assertTrue(walk.shows(PARCEL_ALERTS_NOTIFICATIONS, "Delivery only, as in Settings"))
         assertTrue(walk.shows(PARCEL_ALERTS_EMAIL, "To reader@example.com"))
         walk.shot("B-S66-alerts")
+    }
+
+    /**
+     * B-D37, Android's own: on a phone without pushes (no Google Play services) the bell opens alerts that keep the
+     * email's switch alone, which saves as on any phone.
+     */
+    @Test
+    fun withoutPushTheAlertsKeepTheEmailsSwitchAlone() {
+        show {
+            signedInWithEmail(true)
+            pushAvailable = false
+        }
+        openAlerts()
+        assertFalse(walk.exists(PARCEL_ALERTS_NOTIFICATIONS))
+        assertTrue(walk.shows(PARCEL_ALERTS_EMAIL, "To reader@example.com"))
+        assertEquals(ToggleableState.On, walk.toggle(PARCEL_ALERTS_EMAIL))
+        walk.shot("B-D37-email-alone")
+
+        walk.flip(PARCEL_ALERTS_EMAIL)
+        compose.waitUntil(LONG_MILLIS) { emailMutes() == listOf(gift.id to true) }
+        walk.settle()
+        assertEquals(ToggleableState.Off, walk.toggle(PARCEL_ALERTS_EMAIL))
+        assertTrue(mutes().isEmpty())
     }
 }

@@ -1880,6 +1880,9 @@
   "huaya-express": {
     "decal": "huaya-express"
   },
+  "hub-delivery": {
+    "decal": "hub-delivery"
+  },
   "hub-group-final-mile": {
     "decal": "hub-group-final-mile"
   },
@@ -2223,6 +2226,9 @@
   },
   "kunyoung": {
     "decal": "kunyoung"
+  },
+  "kuqi": {
+    "decal": "kuqi"
   },
   "kwick-box": {
     "decal": "kwick-box"
@@ -2585,6 +2591,9 @@
   },
   "nas-express": {
     "decal": "nas-express"
+  },
+  "national-delivery-systems": {
+    "decal": "national-delivery-systems"
   },
   "nationex": {
     "decal": "nationex"

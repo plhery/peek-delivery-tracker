@@ -808,6 +808,9 @@ describe('carrier brand', () => {
       'suhu',
       'allied-express',
       'skynet-my',
+      'hub-delivery',
+      'national-delivery-systems',
+      'kuqi',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -442,7 +442,8 @@ class NotificationsTest {
 
     /**
      * An account turns them on with Firebase's token, sent as an FCM one with the test notification; a token Firebase
-     * makes later (PeekMessagingService's `onNewToken`) reaches the stores through the application and is sent in turn.
+     * makes later (PeekMessagingService's `onNewToken`) reaches the stores through the application and is sent in turn,
+     * and again in the app's language once it changes.
      */
     @Test
     fun anAccountTurnsThemOnWithFirebasesTokenAndANewOneFollows() {
@@ -468,6 +469,11 @@ class NotificationsTest {
         assertEquals("synthetic-token-2", stores.notifications.currentDeviceToken)
         val renewed = devices.last { "synthetic-token-2" in it }
         assertTrue(renewed, "\"sendTest\":false" in renewed && "\"transport\":\"fcm\"" in renewed)
+
+        // The app's language changed: the token kept goes again in it, as RootView forwards it on the language's change.
+        val before = devices.size
+        stores.localizer.language = AppLanguage.De
+        idleUntil("the token sent in German") { devices.drop(before).any { "synthetic-token-2" in it && "\"locale\":\"de\"" in it } }
     }
 
     /** A push's data, as Firebase hands it to PeekMessagingService, is posted as the app's notification. */

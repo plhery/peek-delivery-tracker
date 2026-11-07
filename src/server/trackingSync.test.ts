@@ -8369,6 +8369,36 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(offsets().map((line) => (line as JsonObject).scan_id)).toEqual([copyId]);
   });
 
+  it('sets aside a provider\'s copies of the carrier\'s scans hours off, and shows the offset once', async () => {
+    vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const store = eventStore();
+    const client = { ...store.client,
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-01-05T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = {
+      fetch: vi.fn().mockResolvedValueOnce(result([hub, label])).mockRejectedValue(new Error('GOFO tracking endpoint is unavailable')),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...result([hub, label].map(copied)), tracking_provider: 'Ship24' }),
+    };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, now);
+    let shown: unknown;
+    const sync = async () => {
+      await service.syncPackage({ ...parcel, current_stage: 'in_transit', carrier_data: { clock_offsets: shown },
+        [STORED_EVENT_IDENTITIES]: store.identities() });
+      shown = ((client.updatePackage.mock.calls.at(-1)![1] as JsonObject).carrier_data as JsonObject | undefined)?.clock_offsets ?? shown;
+      return { batch: ids(store.batch()), anomalies: (client.completeSyncAttempt.mock.calls.at(-1)![1] as JsonObject).anomaly_codes };
+    };
+
+    await sync();
+    const rows = structuredClone([...store.rows.values()]);
+    // GOFO is down: the copies repeat its rows three hours late and store nothing. Peek cannot tell the provider's
+    // misreading from a zone the scraper chose for either side, so the offset shows.
+    expect(await sync()).toEqual({ batch: [], anomalies: ['provider_clock_offset'] });
+    // The next check repeats the copies: nothing new is stored or shown.
+    expect(await sync()).toEqual({ batch: [], anomalies: [] });
+    expect([...store.rows.values()]).toEqual(rows);
+  });
+
   it('does not take the carrier reply after a fallback for older history', async () => {
     vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
     const store = eventStore();

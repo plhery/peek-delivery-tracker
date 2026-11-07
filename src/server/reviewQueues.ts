@@ -8,7 +8,7 @@ import type { SupabaseServiceClient } from './supabase';
 import { trackingSupportContext } from './trackingSupport';
 import { isRecord, type JsonObject } from './types';
 import { routingState } from './trackingRouting';
-import { leftScheduleUnseen } from './unseenLookup';
+import { leftScheduleUnseen, linkAlertOn } from './unseenLookup';
 
 /** Long enough for one replay; a server that dies holding it is relieved after this. */
 const REPLAY_LEASE_SECONDS = 600;
@@ -99,7 +99,7 @@ export function unseenLookupNote(
     return 'No parcel with the number is saved any more, and its last check got no answer for it: '
       + 'no check is left to update the case.';
   }
-  if (!parcels.every((parcel) => leftScheduleUnseen(parcel, now))) return null;
+  if (!parcels.every((parcel) => leftScheduleUnseen(parcel, now, linkAlertOn(parcel)))) return null;
   return 'Every parcel with the number is a one-off lookup that left the schedule before any carrier or provider '
     + 'answered for it: no check is left to update the case.';
 }

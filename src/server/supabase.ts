@@ -41,7 +41,11 @@ const PACKAGE_COLUMNS = [
  * carries neither. The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
 const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source)`;
-const ACTIVE_PACKAGE_SELECT = 'id,user_id,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
+/**
+ * The columns the schedule reads, `one_off` among them: a lookup without an account leaves the
+ * schedule once nobody has answered for its number (unseenLookup.ts).
+ */
+const ACTIVE_PACKAGE_SELECT = 'id,user_id,one_off,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
 /**
  * Where the sync loaders put each stored event's identity, instant, stage and
  * wording, so a reworded scan can update its row in place and another source's

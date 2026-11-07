@@ -18,12 +18,13 @@ describe('guarded tracking writes', () => {
     expect(decodeURIComponent(request.mock.calls[1][0])).toContain('carrier_data->>original_package_id=eq.origin');
   });
 
-  it('loads every column the schedule reads: sync status, timestamps, expired histories and delivery windows', async () => {
+  it('loads every column the schedule reads: sync status, timestamps, expired histories, delivery windows and lookups without an account', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue([]);
     await client.listActivePackages();
     const selected = new URL(`https://database.example${request.mock.calls[0][0]}`).searchParams.get('select')!.split(',');
-    expect(selected).toEqual(expect.arrayContaining(['sync_status', 'sync_error', 'last_synced_at', 'expected_delivery', 'carrier', 'created_at', 'carrier_data']));
+    expect(selected).toEqual(expect.arrayContaining(['sync_status', 'sync_error', 'last_synced_at', 'expected_delivery', 'carrier', 'created_at',
+      'carrier_data', 'one_off']));
   });
 
   it('dates a parcel\'s news by its newest scan in a stage, before any scan in none', async () => {

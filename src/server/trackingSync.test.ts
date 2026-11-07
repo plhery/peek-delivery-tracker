@@ -6,7 +6,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { idlePollDelay, secondsUntilNextSync, syncWindowStart, workerPollDelay } from './background';
 import { deployedVersion } from './reviewQueues';
 import { normalizeCarrierResult, type CarrierResult } from 'universal-parcel-scraper';
-import { STORED_EVENT_IDENTITIES, type SupabaseServiceClient } from './supabase';
+import { STORED_EVENT_IDENTITIES, SupabaseServiceClient } from './supabase';
+import { postgrestTables } from '../test/postgrest';
 import { AdapterRegistry, type AdapterEnvironment } from 'universal-parcel-scraper/node';
 import type { StepRecorder } from 'universal-parcel-scraper/node';
 import type { UniversalTracker } from 'universal-parcel-scraper/node';
@@ -9102,5 +9103,80 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     await expect(asked((service) => service.syncPackage(lookup, { trigger: 'refresh' }), [])).resolves.toEqual(every);
     // Five hours after it was added, the lookup is still on its hourly schedule.
     await expect(asked(release({ ...lookup, last_synced_at: null }), [], '2026-09-01T14:00:00Z')).resolves.toEqual(every);
+  });
+});
+
+describe('lookups as the scheduled run reads them', () => {
+  afterEach(() => vi.unstubAllEnvs());
+  /**
+   * The parcels a scheduled run checks of these database rows, read through the client's own
+   * queries: each list answers with the columns it selects alone. Every lookup is unwatched but
+   * the `watched` ones (an alert on, or a link opened in the last hour).
+   */
+  const run = async (at: string, tables: { followed?: JsonObject[]; unfiled?: JsonObject[] }, watched: string[] = [],
+    adapter: ConstructorParameters<typeof TrackingSyncService>[1] = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }) => {
+    const { followed = [], unfiled = [] } = tables;
+    const database = new SupabaseServiceClient('https://database.example', 'service-key');
+    vi.spyOn(database, 'request').mockImplementation(postgrestTables({
+      packages: [...followed, ...unfiled], 'rpc/followed_one_off_packages': followed, 'rpc/unfiled_one_off_packages': unfiled,
+    }));
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+      listActivePackages: () => database.listActivePackages(),
+      listFollowedOneOffPackages: (since: Date) => database.listFollowedOneOffPackages(since),
+      listUnfiledOneOffPackages: (since: Date, carriers: readonly string[]) => database.listUnfiledOneOffPackages(since, carriers),
+    };
+    client.listUnwatchedPackageIds.mockResolvedValue([...followed, ...unfiled].map((row) => String(row.id)).filter((id) => !watched.includes(id)));
+    await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at)).sync();
+    return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
+  };
+  // Added at 07:30 in Zurich and checked at 12:00, its link opened that morning; its carrier has not found the number.
+  const lookup = (id: string, extra: JsonObject = {}): JsonObject => ({ id, user_id: null, one_off: true, carrier: 'chronodiali',
+    current_stage: 'pending', tracking_number: 'TEST1234', created_at: '2026-09-09T05:30:00Z', last_synced_at: '2026-09-09T10:00:15Z',
+    sync_status: 'waiting', sync_error: null, archived_at: null, owner_locale: null, tracking_events: [],
+    parcel_links: [{ shared: false, last_opened_at: '2026-09-09T06:00:00Z', parcel_link_alerts: [] }],
+    carrier_data: { routing: { version: 1, configured_carrier: 'chronodiali',
+      failures: { chronodiali: { count: 3, kind: 'not_found', retry_at: '2026-09-09T10:30:00Z' } } } }, ...extra });
+  const alerted = { parcel_links: [{ shared: false, last_opened_at: '2026-09-09T06:00:00Z', parcel_link_alerts: [{ owner: true }] }] };
+  const unknown = { carrier: 'unknown', carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {} } } };
+
+  it('takes a lookup off the schedule six hours after it was added while its carrier has not found the number, unless an alert keeps it daily for 30 days', async () => {
+    await expect(run('2026-09-09T14:30:00Z', { followed: [lookup('quiet')] })).resolves.toEqual([]);
+    await expect(run('2026-09-10T12:00:00Z', { followed: [lookup('quiet')] })).resolves.toEqual([]);
+    // A number a provider answered for keeps the schedule, every 3 hours while nobody reads it.
+    const seen = lookup('seen', { ...unknown, current_stage: 'in_transit', sync_status: 'ok', carrier_data: { routing: {
+      version: 1, configured_carrier: 'unknown', failures: {}, last_success_at: '2026-09-09T10:00:15Z', last_event_at: '2026-09-09T09:00:00Z' } } });
+    await expect(run('2026-09-09T14:30:00Z', { followed: [lookup('quiet'), seen] })).resolves.toEqual(['seen']);
+    // With an alert on, daily, until 30 days after it was added.
+    await expect(run('2026-09-09T16:00:00Z', { followed: [lookup('alerted', alerted)] }, ['alerted'])).resolves.toEqual([]);
+    await expect(run('2026-09-10T12:00:00Z', { followed: [lookup('alerted', alerted)] }, ['alerted'])).resolves.toEqual(['alerted']);
+    const month = lookup('alerted', { ...alerted, created_at: '2026-08-10T05:30:00Z', last_synced_at: '2026-09-07T10:00:15Z' });
+    await expect(run('2026-09-08T12:00:00Z', { followed: [month] }, ['alerted'])).resolves.toEqual(['alerted']);
+    await expect(run('2026-09-10T12:00:00Z', { followed: [{ ...month, last_synced_at: '2026-09-08T12:00:15Z' }] }, ['alerted']))
+      .resolves.toEqual([]);
+  });
+
+  it('takes a lookup whose number points to a carrier off the schedule as any other unseen one, followed or not', async () => {
+    const likely = { ...unknown, carrier_data: { routing: { ...unknown.carrier_data.routing,
+      likely_carrier: { carrier: 'dpd', since: '2026-09-09T05:30:00Z' } } } };
+    await expect(run('2026-09-09T14:30:00Z', { followed: [lookup('followed', likely)] })).resolves.toEqual([]);
+    await expect(run('2026-09-09T16:30:00Z', { unfiled: [lookup('unfiled', { ...likely, parcel_links: [] })] })).resolves.toEqual([]);
+    // Still young, it is checked hourly.
+    await expect(run('2026-09-09T09:00:00Z', { followed: [lookup('followed', { ...likely, last_synced_at: '2026-09-09T07:00:15Z' })] }, ['followed']))
+      .resolves.toEqual(['followed']);
+  });
+
+  it('asks one universal provider at the daily check an alert keeps, with its flag, as at a release\'s re-check', async () => {
+    const asked = async () => {
+      const adapter = { fetch: vi.fn().mockRejectedValue(new NotFoundError('Carrier')),
+        fetchUniversal: vi.fn().mockRejectedValue(new NotFoundError('Provider')) };
+      await expect(run('2026-09-10T12:00:00Z', { followed: [lookup('alerted', { ...alerted, ...unknown })] }, ['alerted'], adapter))
+        .resolves.toEqual(['alerted']);
+      return adapter.fetchUniversal.mock.calls.map(([source]) => source);
+    };
+    await expect(asked()).resolves.toEqual(['ParcelsApp', 'Ship24', '17TRACK']);
+    vi.stubEnv('TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS', 'true');
+    await expect(asked()).resolves.toEqual(['ParcelsApp']);
   });
 });

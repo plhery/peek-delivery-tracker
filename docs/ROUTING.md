@@ -433,8 +433,8 @@ followed or not, unless it has an alert on:
 then it is checked daily until 30 days after it was added. Opening a link still queues a
 check at its cadence, daily rather than weekly after 7 days, since someone is looking. With
 `TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS=true` (off by default), a release's re-check of one
-that left the schedule unseen, or the daily check of one with an alert on, contacts one
-universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
+past its hourly checks unseen, alert on or not, or the daily check of one with an alert on,
+contacts one universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
 on is checked every 3 hours: nobody reads it, and a number no carrier is known for asks every
 provider in turn. A scheduled run checks at most twenty of them, after every account's share: the
 ones with an alert on or a link read in the last hour first, each the least recently checked first,

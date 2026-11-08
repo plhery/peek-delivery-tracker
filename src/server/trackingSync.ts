@@ -31,13 +31,12 @@ import { providerRefusals } from './providerRefusals';
 import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
 import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
-import { hostStepRecorder } from './stepRecorder';
+import { hostStepRecorder, withHeldLookups } from './stepRecorder';
 import { recordStatusMapping } from './metrics';
 import {
   captureOperationalError,
   errorType,
   logOperationalEvent,
-  reportEmptyLookup,
   reportRoutingEvent,
   shouldReportRepeatedFailure,
 } from './observability';
@@ -706,13 +705,10 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
     const prefetched = !trackingUrl && !dpdPostcode && !phoneDigits ? takeBrowserHistory(carrierId, trackingNumber) : undefined;
     if (prefetched) return dateLocalClocks(carrierId, normalizeCarrierResult(prefetched));
     if (usesRoyalBrowser(carrierId)) await requireRoyalBrowser(carrierId, 'tracking');
-    const result = await trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language, phoneDigits), {
+    // A lookup that answered with an empty result is recorded as one without history (withHeldLookups).
+    return withHeldLookups(carrierId, () => trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language, phoneDigits), {
       registry: this.registry, universal: this.universal, recorder: this.recorder,
-    });
-    // An adapter answers a number it does not know with an empty result, such as FedEx's "could not locate the
-    // shipment", which the scraper counts a success: the check's audit records it as an answer without history.
-    if (!usable(result)) reportEmptyLookup(carrierId);
-    return result;
+    }), (result) => !usable(result));
   }
 }
 

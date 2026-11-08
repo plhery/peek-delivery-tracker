@@ -11,7 +11,7 @@ const observability = {
 vi.mock('@sentry/node', () => ({ metrics }));
 vi.mock('./observability', () => observability);
 
-const { sentryStepRecorder, addStepRecorder, hostStepRecorder } = await import('./stepRecorder');
+const { sentryStepRecorder, addStepRecorder, hostStepRecorder, withHeldLookups } = await import('./stepRecorder');
 
 describe('sentryStepRecorder', () => {
   beforeEach(() => {
@@ -168,5 +168,34 @@ describe('sentryStepRecorder', () => {
     addStepRecorder(extra);
     hostStepRecorder().lookup({ carrier: 'x', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
     expect(extra.lookup).toHaveBeenCalledTimes(1);
+  });
+
+  it('records a lookup that answered with an empty result as one without history, everywhere', async () => {
+    const extra = { step: vi.fn(), lookup: vi.fn() };
+    addStepRecorder(extra);
+    const recorder = hostStepRecorder();
+    const ok = { finalStep: 'trawl', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 } as const;
+    const empty = (value: { events: unknown[] }) => value.events.length === 0;
+    // FedEx's "could not locate the shipment": held until the result, then an answer without history.
+    const notLocated = { status: 'unknown', events: [] };
+    await expect(withHeldLookups('fedex', async () => {
+      recorder.lookup({ ...ok, carrier: 'fedex' });
+      // Another carrier's lookup during the call goes out at once.
+      recorder.lookup({ ...ok, carrier: 'ups' });
+      expect(extra.lookup.mock.calls.map(([record]) => record.carrier)).toEqual(['ups']);
+      return notLocated;
+    }, empty)).resolves.toBe(notLocated);
+    expect(extra.lookup.mock.lastCall![0]).toMatchObject({ carrier: 'fedex', outcome: 'indeterminate', errorType: 'NoHistoryError' });
+    expect(observability.logOperationalEvent).toHaveBeenLastCalledWith('tracking_scrape',
+      expect.objectContaining({ carrier: 'fedex', phase: 'total', outcome: 'no_history' }));
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('fedex', 'no_history', expect.any(String));
+    // A result with history, and a call that failed, leave the lookup as it was.
+    await withHeldLookups('fedex', async () => { recorder.lookup({ ...ok, carrier: 'fedex' }); return { events: [{}] }; }, empty);
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('fedex', 'success', undefined);
+    await expect(withHeldLookups('usps', async () => {
+      recorder.lookup({ ...ok, carrier: 'usps' });
+      throw new Error('synthetic failure after the lookup');
+    }, empty)).rejects.toThrow('synthetic failure');
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('usps', 'success', undefined);
   });
 });

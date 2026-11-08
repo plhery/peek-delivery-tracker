@@ -1,8 +1,10 @@
 import 'server-only';
 
+import { AsyncLocalStorage } from 'node:async_hooks';
 import * as Sentry from '@sentry/node';
+import { NoHistoryError } from 'universal-parcel-scraper';
 import type { LookupRecord, StepRecord, StepRecorder } from 'universal-parcel-scraper/node';
-import { combineRecorders } from 'universal-parcel-scraper/node';
+import { combineRecorders, errorTypeOf, outcomeOf } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
 import { prometheusStepRecorder, stepOutcome } from './metrics';
 import {
@@ -130,6 +132,9 @@ export function addStepRecorder(recorder: StepRecorder): void {
   extraRecorders.push(recorder);
 }
 
+/** The successful lookups of the carrier a tracking call asks, held back until its result is known. */
+const heldLookups = new AsyncLocalStorage<{ carrier: string; records: { record: LookupRecord; sinks: StepRecorder }[] }>();
+
 /**
  * The recorder handed to every adapter: health, Sentry, Prometheus and the running
  * check plus any registered sinks, each failure-isolated. Prometheus is wired here rather than
@@ -137,5 +142,40 @@ export function addStepRecorder(recorder: StepRecorder): void {
  * lookup evaluates its own copy of this module and must reach the sink.
  */
 export function hostStepRecorder(): StepRecorder {
-  return combineRecorders(healthStepRecorder, sentryStepRecorder, prometheusStepRecorder, attemptStepRecorder, ...extraRecorders);
+  const sinks = combineRecorders(healthStepRecorder, sentryStepRecorder, prometheusStepRecorder, attemptStepRecorder, ...extraRecorders);
+  return {
+    step: (record) => sinks.step(record),
+    lookup: (record) => {
+      const held = heldLookups.getStore();
+      if (held && record.outcome === 'ok' && record.carrier === held.carrier) held.records.push({ record, sinks });
+      else sinks.lookup(record);
+    },
+  };
+}
+
+/** A successful lookup whose result held nothing, as every sink records an adapter's NoHistoryError. */
+function withoutHistory(record: LookupRecord): LookupRecord {
+  const error = new NoHistoryError(record.carrier, 'The carrier answered with an empty result', { reason: 'empty_answer' });
+  return { ...record, outcome: outcomeOf(error), errorType: errorTypeOf(error), error };
+}
+
+/**
+ * Runs a carrier's tracking call with its successful lookups held back from every sink until the result is known.
+ * An adapter answers a number it does not know with an empty result, such as FedEx's "could not locate the
+ * shipment", which the scraper counts a success: when `empty` says the result holds nothing, the lookup that gave
+ * it is recorded as an answer without history (`no_history` in the check's lookups and `tracking_scrape`, health's
+ * `not_found`), as an adapter's NoHistoryError is. Its steps stay as they ran: the transport answered.
+ */
+export async function withHeldLookups<T>(carrier: string, operation: () => Promise<T>, empty: (value: T) => boolean): Promise<T> {
+  const held = { carrier, records: [] as { record: LookupRecord; sinks: StepRecorder }[] };
+  let answer: { value: T } | undefined;
+  try {
+    answer = { value: await heldLookups.run(held, operation) };
+    return answer.value;
+  } finally {
+    let emptied = false;
+    try { emptied = answer !== undefined && empty(answer.value); } catch { /* Telemetry must never change a tracking result. */ }
+    const last = held.records.length - 1;
+    held.records.forEach(({ record, sinks }, index) => sinks.lookup(emptied && index === last ? withoutHistory(record) : record));
+  }
 }

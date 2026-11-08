@@ -236,18 +236,9 @@ export class TrackingSyncAudit {
   readonly #lookups = new Map<string, string>();
   /** Why each failed lookup failed, without numbers: a reason code or the error's wording. */
   readonly #lookupReasons = new Map<string, string>();
-  /** The carriers whose success in `#lookups` their latest lookup wrote, which that lookup's empty answer takes back. */
-  readonly #freshSuccesses = new Set<string>();
-  readonly #lookup = (carrier: string, outcome: string, reason?: string, emptyAnswer = false): void => {
+  readonly #lookup = (carrier: string, outcome: string, reason?: string): void => {
     const key = carrier.slice(0, 100);
-    if (emptyAnswer) {
-      // The success the latest lookup wrote was an empty "not found" result: an answer without history. An
-      // earlier lookup's success stays.
-      if (!this.#freshSuccesses.delete(key)) return;
-    } else if ((!this.#lookups.has(key) && this.#lookups.size >= 32) || this.#lookups.get(key) === 'success') {
-      this.#freshSuccesses.delete(key);
-      return;
-    } else if (outcome === 'success') this.#freshSuccesses.add(key);
+    if ((!this.#lookups.has(key) && this.#lookups.size >= 32) || this.#lookups.get(key) === 'success') return;
     this.#lookups.set(key, outcome.slice(0, 40));
     if (reason && outcome !== 'success') this.#lookupReasons.set(key, reason.slice(0, 100));
     else this.#lookupReasons.delete(key);

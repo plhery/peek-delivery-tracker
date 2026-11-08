@@ -665,6 +665,10 @@ Key JSON events:
   inconclusive answer with a reason in `UNKNOWN_ITEM_REASONS`, `src/server/trackingFailure.ts`),
   `input_required`, `invalid_input` or `handed_off` (the carrier places the parcel with its
   group's unit in another country, which the next step asks: a reason in `HANDED_OFF_REASONS`).
+  A carrier's empty result, as FedEx's "could not locate the shipment", which the scraper counts a
+  success, is recorded as an answer without history, reason `empty_answer`, wherever its lookup is:
+  `no_history` on the `total` line, in `carrier_lookup_total` and in the check's `lookups`, and
+  `not_found` in health and so in `direct_outcome`. The step that fetched it stays `success`.
   An `error` line says why: the carrier's `error_reason` when it gave one, `error_message`,
   and `error_cause`, the wording of up to three causes. Its wording has no number to mask,
   so addresses lose their query and number-like path segments, and every word of six

@@ -41,11 +41,12 @@ import type { JsonObject } from './types';
 import * as observability from './observability';
 import * as metrics from './metrics';
 import { catalogRules, recognizers, routingFailure, routingState, RoutingDeferred, TrackingRouter, type RoutedResult } from './trackingRouting';
-import { WorkerShutdown } from './trackingAudit';
+import { TrackingSyncAudit, WorkerShutdown } from './trackingAudit';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { NOOP_RECORDER } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
+import { hostStepRecorder } from './stepRecorder';
 import { RoyalBrowserPaused, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { unseenFor } from './unseenLookup';
 import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, SchemaError } from 'universal-parcel-scraper';
@@ -115,16 +116,28 @@ describe('dedicated carrier dispatch', () => {
     ]);
   });
 
-  it('tells the check when a carrier answers a number it does not know with an empty result', async () => {
+  it('records a carrier that answers a number it does not know with an empty result as answering without history', async () => {
     const adapter = new CarrierTrackingAdapter();
+    // FedEx runs its own steps and reports its lookup to the host's recorder, then returns its result.
+    const answer = (result: CarrierResult) => async () => {
+      hostStepRecorder().lookup({ carrier: 'fedex', finalStep: 'trawl', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
+      return result;
+    };
     vi.spyOn(adapter.registry.for('fedex')!, 'track')
-      .mockResolvedValueOnce({ status: 'unknown', last_status_text: 'FedEx could not locate the shipment', last_update: null, events: [] })
-      .mockResolvedValueOnce({ status: 'in_transit' });
-    const lookup = vi.fn();
-    for (const number of ['SYNTHETIC0001', 'SYNTHETIC0002']) {
-      await observability.withTrackingAttempt('synthetic-attempt', () => adapter.fetch('fedex', number, null), undefined, undefined, lookup);
-    }
-    expect(lookup.mock.calls.filter(([, , , empty]) => empty === true)).toEqual([['fedex', 'no_history', undefined, true]]);
+      .mockImplementationOnce(answer({ status: 'unknown', last_status_text: 'FedEx could not locate the shipment', last_update: null, events: [] }))
+      .mockImplementationOnce(answer({ status: 'in_transit' }));
+    const check = async (number: string) => {
+      const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
+        recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };
+      const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient, 'synthetic-package', number, 'fedex', 'pending', { trigger: 'added' });
+      await audit.observeFetch(() => adapter.fetch('fedex', number, null));
+      const direct = { outcome: audit.lookupOutcome('fedex'), reason: audit.lookupReason('fedex') };
+      await audit.finish({ outcome: 'waiting', sourceCarrier: 'fedex', evaluateHealth: false });
+      return { lookups: (client.completeSyncAttempt.mock.lastCall![1] as JsonObject).lookups, ...direct };
+    };
+    // The check's lookups and its direct outcome, as for an adapter that throws NoHistoryError; health files it not_found.
+    expect(await check('SYNTHETIC0001')).toEqual({ lookups: { fedex: 'no_history' }, outcome: 'not_found', reason: 'empty_answer' });
+    expect(await check('SYNTHETIC0002')).toEqual({ lookups: { fedex: 'success' }, outcome: 'ok', reason: null });
   });
 });
 

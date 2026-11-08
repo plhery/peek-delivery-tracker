@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -68,6 +67,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -171,7 +171,7 @@ internal fun SettingsRow(
                 if (' ' !in value) {
                     BasicText(
                         value, style = style, maxLines = 1,
-                        autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * 0.5f, maxFontSize = style.fontSize),
+                        autoSize = MinimumScale(style.fontSize, 0.5f),
                     )
                 } else {
                     Text(value, style = style)

@@ -389,21 +389,22 @@ internal fun GlassOverlayLayer(host: TabOverlay, key: Any, content: (@Composable
 
 /**
  * Draws `content` over the window as the shell's layer `key` ([LocalTabOverlay]) while it isn't null, taking the latest
- * `content` each time it is drawn. Each composition here draws the whole layer again: `content` is the same lambda
- * with new captures, which Compose remembers as one, and Compose drops that lambda's own redraw when this composes in
- * the frame the layer was put in (a popover made again with the window, its source laid out that frame), so the layer
- * would keep what it first drew.
+ * `content` each time it is drawn; gone after another owner took the key, it leaves that one's. Each composition here
+ * draws the whole layer again: `content` is the same lambda with new captures, which Compose remembers as one, and
+ * Compose drops that lambda's own redraw when this composes in the frame the layer was put in (a popover made again
+ * with the window, its source laid out that frame), so the layer would keep what it first drew.
  */
 @Composable
 internal fun OverlayLayer(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) {
     val latest = remember { mutableStateOf<LayerPass?>(null) }
     latest.value = content?.let(::LayerPass)
     DisposableEffect(host, key, content != null) {
+        if (content == null) return@DisposableEffect onDispose {}
         val layer: @Composable () -> Unit = {
             latest.value?.let { pass -> CompositionLocalProvider(LocalLayerPass provides pass) { pass.content() } }
         }
-        host.show(key, if (content != null) layer else null)
-        onDispose { host.show(key, null) }
+        host.show(key, layer)
+        onDispose { host.hide(key, layer) }
     }
 }
 

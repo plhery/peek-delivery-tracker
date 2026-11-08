@@ -172,6 +172,14 @@ class TabOverlay(val backdrop: MaterialBackdrop? = null, private val window: Win
         window?.show(this, key, content)
     }
 
+    /**
+     * Takes the layer `key` away while it still draws `content`: an owner made again elsewhere in the window (the list
+     * laid out anew as the window turns) takes the key first, and the old one, gone after it, leaves the new one's layer.
+     */
+    fun hide(key: Any, content: @Composable () -> Unit) {
+        if (layers.any { it.first == key && it.second === content }) show(key, null)
+    }
+
     /** Whether a layer shows. */
     val covered: Boolean get() = layers.isNotEmpty()
 

@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui
 import android.accessibilityservice.AccessibilityService
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.graphics.Rect
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.DisposableEffect
@@ -22,6 +23,8 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -64,7 +67,11 @@ import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
 import java.util.UUID
+import kotlin.math.abs
+import kotlin.math.min
+import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -77,10 +84,11 @@ import org.junit.runner.RunWith
  * The friends tab (A-S20, C-S19 to C-S31) on this device's own window, its bars and density the device's, on fake
  * deliveries and made-up friends, which reach no server: the demo's circle; signed out; a friend's card opening their
  * page and the system's back closing it, and the page's ‹; a stamp's popover; manage friendship and the removal; the
- * accepted notice opening the friend, and its ✕ tapped through the screen dismissing it (A-S04, A-G18); the profile's
- * panel; the demo's invitation; an account's invitation with its link copied and its manage links open; the account
- * button opening Settings. Each saved as friends/<test>.png in the test package's external files, which adb pulls.
- * Under Reduce Motion, as the other device tests are; each test puts back the appearance it found, and the copy the
+ * accepted notice opening the friend, its ✕ tapped through the screen dismissing it, its place under the status bar,
+ * and its coming and going at once with animations on (A-S04, A-G18); the profile's panel; the demo's invitation; an
+ * account's invitation with its link copied and its manage links open; the account button opening Settings. Each saved
+ * as friends/<test>.png in the test package's external files, which adb pulls. Under Reduce Motion, as the other device
+ * tests are, but for the notice's coming and going; each test puts back the appearance it found, and the copy the
  * clipboard held.
  */
 @RunWith(AndroidJUnit4::class)
@@ -117,9 +125,14 @@ class FriendsDeviceTest {
 
     /**
      * The friends tab of [session], its friends as [friends] sets them, edge to edge as the app's window; the deliveries
-     * unless [choose].
+     * unless [choose]. Under Reduce Motion unless [reduceMotion] is false.
      */
-    private fun show(session: AuthenticationState = AuthenticationState.Demo, choose: Boolean = true, friends: FakeFriendsClient.() -> Unit = {}) {
+    private fun show(
+        session: AuthenticationState = AuthenticationState.Demo,
+        choose: Boolean = true,
+        reduceMotion: Boolean = true,
+        friends: FakeFriendsClient.() -> Unit = {},
+    ) {
         store.set(AppAppearance.Light)
         source = FakeDeliveries(DemoCards.parcels(), session)
         source.friendsClient.friends()
@@ -130,7 +143,7 @@ class FriendsDeviceTest {
                 compose.activity.edgeToEdge(dark)
                 onDispose {}
             }
-            RootHost(state = session, dark = dark, reduceMotion = true, source = source)
+            RootHost(state = session, dark = dark, reduceMotion = reduceMotion, source = source)
         }
         compose.waitForIdle()
         if (!choose) return
@@ -286,6 +299,106 @@ class FriendsDeviceTest {
         shots.take("A-G18-notice-dismissed")
     }
 
+    /**
+     * A-S04: the accepted notice stands 16 in from the window's sides, inside its bars and cutout, and 6 under the status
+     * bar, as RootView's overlay pads it; where the window has room, it is 520 wide at most, in the middle.
+     */
+    @Test
+    fun theAcceptedNoticeStandsUnderTheStatusBarSixteenInFromTheSides() {
+        show(reader, choose = false) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        compose.waitUntil(5_000) { exists(FRIENDS_NOTICE) }
+        compose.waitForIdle()
+        assertNoticeRests()
+        shots.take("A-S04-notice-place")
+    }
+
+    /**
+     * A-S04: with animations on, the notice comes and goes at once, as the iPhone's does: RootView's overlay declares a
+     * move from the top with a fade, but the store changes its notices outside any animation, so SwiftUI never plays
+     * it. On a clock the test moves a frame at a time, the notice stands where it rests, drawn in full, on the first
+     * frame it shows, as it does a second later; and once its ✕ has taken it off the store, it has gone within two frames.
+     */
+    @Test
+    fun theAcceptedNoticeComesAndGoesAtOnceWithAnimationsOn() {
+        show(reader, choose = false, reduceMotion = false)
+        assertFalse(exists(FRIENDS_NOTICE))
+        compose.mainClock.autoAdvance = false
+        source.friendsClient.activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo")))
+        runBlocking { source.friendsActivity.refresh() }
+        var frames = 0
+        while (!exists(FRIENDS_NOTICE)) {
+            assertTrue("No notice after $frames frames", ++frames <= NOTICE_FRAMES)
+            nextFrame()
+        }
+        assertNoticeRests()
+        val area = noticeMiddle()
+        val first = pixels(area)
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertNoticeRests()
+        val later = pixels(area)
+        val changed = first.indices.count { apart(first[it], later[it]) > PIXEL_APART }
+        assertTrue("$changed of ${first.size} pixels changed after its first frame", changed <= first.size / 500)
+        shots.take("A-S04-notice-at-once")
+
+        compose.onNodeWithTag(FRIENDS_NOTICE_DISMISS).performClick()
+        var lingering = 0
+        frames = 0
+        while (exists(FRIENDS_NOTICE)) {
+            assertTrue("The notice still there after $frames frames", ++frames <= NOTICE_FRAMES)
+            if (source.friendsActivity.updates.isEmpty()) lingering++
+            nextFrame()
+        }
+        assertTrue("Off the store", source.friendsActivity.updates.isEmpty())
+        assertTrue("Drawn $lingering frames after it left the store", lingering <= 2)
+        compose.mainClock.autoAdvance = true
+    }
+
+    /** The notice where RootView's overlay rests it, in this window: 16 in from the safe area, 6 under it, 520 at most. */
+    private fun assertNoticeRests() {
+        val (left, top, right) = compose.runOnUiThread {
+            val view = compose.activity.window.decorView
+            val scale = compose.activity.resources.displayMetrics.density
+            val sides = WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            val safe = ViewCompat.getRootWindowInsets(view)?.getInsets(sides)
+            val start = (safe?.left ?: 0) / scale + NOTICE_SIDE
+            val end = (view.width - (safe?.right ?: 0)) / scale - NOTICE_SIDE
+            val width = min(NOTICE_WIDTH, end - start)
+            val leading = start + (end - start - width) / 2
+            Triple(leading, (safe?.top ?: 0) / scale + NOTICE_TOP, leading + width)
+        }
+        val notice = compose.onNodeWithTag(FRIENDS_NOTICE, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        assertEquals("Its leading edge: $notice", left, notice.left.value, 1f)
+        assertEquals("Its top: $notice", top, notice.top.value, 1f)
+        assertEquals("Its trailing edge: $notice", right, notice.right.value, 1f)
+    }
+
+    /** The notice's middle, in the window's pixels: clear of its rounded ends and its line, its words, → and ✕. */
+    private fun noticeMiddle(): Rect {
+        val notice = compose.onNodeWithTag(FRIENDS_NOTICE, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val scale = compose.density.density
+        return Rect(
+            ((notice.left + NOTICE_ENDS).value * scale).toInt(), ((notice.top + 2.dp).value * scale).toInt(),
+            ((notice.right - NOTICE_ENDS).value * scale).toInt(), ((notice.bottom - 2.dp).value * scale).toInt(),
+        )
+    }
+
+    /** The window's pixels in [area], row by row. */
+    private fun pixels(area: Rect): IntArray {
+        val window = compose.onRoot().captureToImage().asAndroidBitmap()
+        return IntArray(area.width() * area.height()).also { window.getPixels(it, 0, area.width(), area.left, area.top, area.width(), area.height()) }
+    }
+
+    /** How far apart two pixels are, in the channel they differ most in, out of 255. */
+    private fun apart(one: Int, other: Int): Int =
+        listOf(24, 16, 8, 0).maxOf { shift -> abs((one shr shift and 0xFF) - (other shr shift and 0xFF)) }
+
+    /** One frame of the test's clock, and the UI idle. */
+    private fun nextFrame() {
+        compose.mainClock.advanceTimeByFrame()
+        compose.waitForIdle()
+    }
+
     @Test
     fun theProfilesPanel() {
         show()
@@ -329,5 +442,21 @@ class FriendsDeviceTest {
         compose.waitUntil(5_000) { exists(SETTINGS_SHEET) }
         compose.waitForIdle()
         shot()
+    }
+
+    private companion object {
+        /** The notice's room from the safe area's sides and top, and its widest, in dp (RootView, FriendAcceptedNotice). */
+        const val NOTICE_SIDE = 16f
+        const val NOTICE_TOP = 6f
+        const val NOTICE_WIDTH = 520f
+
+        /** How far in from the notice's ends its middle starts, past its continuous corners. */
+        val NOTICE_ENDS = 36.dp
+
+        /** The most frames the notice takes to come or go, a second's worth, before the test gives up on it. */
+        const val NOTICE_FRAMES = 60
+
+        /** How far apart, out of 255, two pixels of the notice may be before they count as changed. */
+        const val PIXEL_APART = 64
     }
 }

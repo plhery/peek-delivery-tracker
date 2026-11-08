@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,12 +20,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -57,6 +58,7 @@ import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -223,6 +225,7 @@ private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: j
     CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {
         val type = PeekTheme.type
         val style = type.tracking(type.caption2, 1.2f).sfLines().copy(color = ink.copy(alpha = ink.alpha * 0.75f))
+        val probe = LocalNextUpWords.current
         BasicText(
             text.uppercase(locale),
             // CoreText tracks after each letter, Android half before it: the words end where the iPhone's end.
@@ -230,7 +233,11 @@ private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: j
             style = style,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
-            autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * 0.7f, maxFontSize = style.fontSize, stepSize = 0.1.sp),
+            autoSize = MinimumScale(style.fontSize, 0.7f, 0.1.sp),
+            onTextLayout = { probe?.invoke(it) },
         )
     }
 }
+
+/** Told how "Next up" is laid out: the tests check it keeps to one line, whole, as TalkBack doesn't read it. */
+internal val LocalNextUpWords = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }

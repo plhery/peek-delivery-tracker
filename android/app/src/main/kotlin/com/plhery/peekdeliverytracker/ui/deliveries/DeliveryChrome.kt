@@ -21,7 +21,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
@@ -1114,7 +1113,7 @@ private fun QuietButton(title: String, symbol: String, wraps: Boolean, tag: Stri
         } else {
             Text(
                 title, Modifier.weight(1f, fill = false), color = colors.ink, style = style, maxLines = 1,
-                autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * QUIET_MINIMUM_SCALE, maxFontSize = style.fontSize),
+                autoSize = MinimumScale(style.fontSize, QUIET_MINIMUM_SCALE),
             )
         }
     }

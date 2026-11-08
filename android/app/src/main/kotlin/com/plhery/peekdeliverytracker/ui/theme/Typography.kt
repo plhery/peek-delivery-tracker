@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.isUnspecified
+import androidx.compose.ui.unit.sp
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -203,12 +204,12 @@ fun TextStyle.italic(): TextStyle = copy(fontStyle = FontStyle.Italic)
 
 /**
  * `.minimumScaleFactor(scale)` of a text of `fontSize`: at its size where it fits whole, else at the largest size down
- * to `scale` of it, in quarter points, that does. Compose's step-based size alone counts its steps up from the smallest
- * size, so a text that fits would stand a little smaller than its size.
+ * to `scale` of it, in steps of `step` (a quarter point unless said), that does. Compose's step-based size alone counts
+ * its steps up from the smallest size, so a text that fits would stand a little smaller than its size.
  */
 @Immutable
-internal class MinimumScale(private val fontSize: TextUnit, private val scale: Float) : TextAutoSize {
-    private val steps = TextAutoSize.StepBased(minFontSize = fontSize * scale, maxFontSize = fontSize)
+internal class MinimumScale(private val fontSize: TextUnit, private val scale: Float, private val step: TextUnit = 0.25.sp) : TextAutoSize {
+    private val steps = TextAutoSize.StepBased(minFontSize = fontSize * scale, maxFontSize = fontSize, stepSize = step)
 
     override fun TextAutoSizeLayoutScope.getFontSize(constraints: Constraints, text: AnnotatedString): TextUnit {
         val scope = this
@@ -217,9 +218,10 @@ internal class MinimumScale(private val fontSize: TextUnit, private val scale: F
         return if (cut) with(steps) { scope.getFontSize(constraints, text) } else fontSize
     }
 
-    override fun equals(other: Any?): Boolean = other is MinimumScale && other.fontSize == fontSize && other.scale == scale
+    override fun equals(other: Any?): Boolean =
+        other is MinimumScale && other.fontSize == fontSize && other.scale == scale && other.step == step
 
-    override fun hashCode(): Int = 31 * fontSize.hashCode() + scale.hashCode()
+    override fun hashCode(): Int = 31 * (31 * fontSize.hashCode() + scale.hashCode()) + step.hashCode()
 }
 
 /**

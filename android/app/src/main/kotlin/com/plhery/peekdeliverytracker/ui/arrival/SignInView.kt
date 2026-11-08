@@ -35,7 +35,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -126,6 +125,7 @@ import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -530,7 +530,7 @@ private fun Methods(
                 val style = type.fixed(18f, FontWeight.Medium).sfLines()
                 Text(
                     localized(if (active) "auth.googleOpening" else "auth.google"), color = colors.ink, style = style, maxLines = 1, softWrap = false,
-                    autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * 0.7f, maxFontSize = style.fontSize),
+                    autoSize = MinimumScale(style.fontSize, 0.7f),
                 )
                 if (active) ActivityIndicator(Modifier.clearAndSetSemantics {}, size = SMALL_SPINNER)
             }
@@ -748,7 +748,7 @@ private fun SignInTextField(
                     val probe = LocalSignInPlaceholder.current
                     Text(
                         placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = style, maxLines = 1, softWrap = false,
-                        autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * PLACEHOLDER_SHRINK, maxFontSize = style.fontSize),
+                        autoSize = MinimumScale(style.fontSize, PLACEHOLDER_SHRINK),
                         onTextLayout = { probe?.invoke(it) },
                     )
                 }

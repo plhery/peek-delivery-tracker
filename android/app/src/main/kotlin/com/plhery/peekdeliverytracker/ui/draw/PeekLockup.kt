@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker.ui.draw
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +16,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 
 /**
@@ -54,7 +54,7 @@ fun PeekLockup(modifier: Modifier = Modifier) {
 private fun LockupLine(text: String, style: TextStyle) {
     Text(
         text, style = style, maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis,
-        autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * LOCKUP_MINIMUM_SCALE, maxFontSize = style.fontSize),
+        autoSize = MinimumScale(style.fontSize, LOCKUP_MINIMUM_SCALE),
     )
 }
 

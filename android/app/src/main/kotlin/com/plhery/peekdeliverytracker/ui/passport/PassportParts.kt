@@ -44,7 +44,6 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -66,6 +65,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.PopoverSize
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
@@ -447,7 +447,7 @@ private fun TimeCard(state: PassportState, id: String, tag: String, title: Strin
                 Text(
                     passportDuration(duration, localizer), color = colors.ink, style = style, maxLines = 1, softWrap = false,
                     overflow = TextOverflow.Ellipsis,
-                    autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * MINIMUM_SCALE, maxFontSize = style.fontSize),
+                    autoSize = MinimumScale(style.fontSize, MINIMUM_SCALE),
                 )
             }
             Text(title, color = colors.ink.copy(alpha = SECONDARY), style = type.caption.sfLines())

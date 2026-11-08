@@ -38,7 +38,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -85,6 +84,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -126,6 +126,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLevelHinge
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -649,12 +650,16 @@ private fun FirstOpenPing(detail: String, identity: CarrierVisualIdentity, modif
     ) {
         PeekSymbol("bell.fill", font = type.fixed(9f), tint = ink)
         val style = type.style(IosTextStyle.Caption, FontWeight.Medium)
+        val probe = LocalFirstOpenPing.current
         Text(
             detail, Modifier.weight(1f, fill = false), color = ink, style = style, maxLines = 1, softWrap = false,
-            autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * PING_MINIMUM_SCALE, maxFontSize = style.fontSize),
+            autoSize = MinimumScale(style.fontSize, PING_MINIMUM_SCALE), onTextLayout = { probe?.invoke(it) },
         )
     }
 }
+
+/** Told how the ping's words are laid out: the tests check they keep to one line, whole, as TalkBack doesn't read them. */
+internal val LocalFirstOpenPing = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }
 
 /**
  * `masthead`: the lockup (`PeekLockup`), and at the other end Sign in in subheadline medium in the ink, at least 44
@@ -712,7 +717,7 @@ private fun FirstOpenAsk(
             // At the accessibility sizes the question takes the lines it needs, and the screen scrolls.
             color = colors.ink, style = title, textAlign = TextAlign.Center,
             maxLines = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) Int.MAX_VALUE else 2,
-            autoSize = TextAutoSize.StepBased(minFontSize = title.fontSize * ASK_TITLE_MINIMUM_SCALE, maxFontSize = title.fontSize),
+            autoSize = MinimumScale(title.fontSize, ASK_TITLE_MINIMUM_SCALE),
         )
         Text(
             localized(if (scene.tracks) "native.pasteLead" else "arrival.welcomeSubtitle"), Modifier.padding(top = 8.dp),
@@ -946,7 +951,7 @@ private fun PosterForeground(
             Text(
                 localized("peek.title"), Modifier.takesTaps().semantics { heading() },
                 color = colors.ink, style = title, textAlign = TextAlign.Center, maxLines = 2,
-                autoSize = TextAutoSize.StepBased(minFontSize = title.fontSize * POSTER_TITLE_MINIMUM_SCALE, maxFontSize = title.fontSize),
+                autoSize = MinimumScale(title.fontSize, POSTER_TITLE_MINIMUM_SCALE),
             )
             Text(
                 localized(if (scene.tracks) "native.pasteLead" else "arrival.welcomeSubtitle"), Modifier.padding(top = 10.dp).takesTaps(),

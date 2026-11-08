@@ -171,6 +171,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -1643,7 +1644,7 @@ private fun ShrinkingText(text: String, style: TextStyle, color: Color, twoLines
         text,
         style = style.copy(color = color, textAlign = androidx.compose.ui.text.style.TextAlign.Center),
         maxLines = 2,
-        autoSize = androidx.compose.foundation.text.TextAutoSize.StepBased(minFontSize = style.fontSize * MINIMUM_SCALE, maxFontSize = style.fontSize),
+        autoSize = MinimumScale(style.fontSize, MINIMUM_SCALE),
     )
 }
 

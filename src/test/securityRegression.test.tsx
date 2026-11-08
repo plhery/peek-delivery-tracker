@@ -13,6 +13,10 @@ vi.spyOn(console, 'log').mockImplementation(() => {});
 
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 
+// A token with the shape Auth issues, for the account `sub`; the server refuses any other without asking Auth.
+const accessToken = (sub: string) => [{ alg: 'HS256', typ: 'JWT' }, { sub, exp: Math.floor(Date.now() / 1000) + 3600 }]
+  .map((part) => Buffer.from(JSON.stringify(part)).toString('base64url')).concat('fixture-signature').join('.');
+
 const parcel: ParcelWithEvents = { id: 'parcel-1', trackingNumber: '123456', label: 'Old name', carrier: 'ups', createdAt: '2026-09-08T00:00:00Z', syncStatus: 'ok', events: [] };
 
 it('keeps a completed rename when an earlier poll returns', async () => {
@@ -43,7 +47,7 @@ it.each([429, 500, 502, 503, 504])('preserves authentication during Auth HTTP %s
   vi.stubEnv('SUPABASE_PUBLISHABLE_KEY', 'public-fixture');
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('Service unavailable', { status })));
   const route = apiRoute(() => json({ ok: true }), { loadService: false });
-  const response = await route(new NextRequest('https://audit.example.test/api/packages', { headers: { authorization: 'Bearer fixture-current-session' } }), { params: Promise.resolve({}) });
+  const response = await route(new NextRequest('https://audit.example.test/api/packages', { headers: { authorization: `Bearer ${accessToken('00000000-0000-4000-8000-000000000006')}` } }), { params: Promise.resolve({}) });
   expect(response.status).toBe(503);
 });
 
@@ -80,7 +84,7 @@ it('isolates untrusted anonymous traffic from valid credentials', async () => {
   }
   const upstream = vi.fn().mockResolvedValue(Response.json({ id: '00000000-0000-4000-8000-000000000007' }));
   vi.stubGlobal('fetch', upstream);
-  const victim = await route(new NextRequest('https://audit.example.test/api/packages', { headers: { authorization: 'Bearer valid-other-user', 'x-real-ip': '203.0.113.55' } }), { params: Promise.resolve({}) });
+  const victim = await route(new NextRequest('https://audit.example.test/api/packages', { headers: { authorization: `Bearer ${accessToken('00000000-0000-4000-8000-000000000007')}`, 'x-real-ip': '203.0.113.55' } }), { params: Promise.resolve({}) });
   expect(victim.status).toBe(200);
   expect(upstream).toHaveBeenCalledOnce();
 });

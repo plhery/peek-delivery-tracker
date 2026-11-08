@@ -312,8 +312,9 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
           ? createHash('sha256').update(token).digest('hex').slice(0, 24)
           : null;
         const ip = clientIp(request);
-        // Unknown callers must not share an admission bucket with every signed-in user.
-        let retryAfter = isIP(ip) ? limiters.address.retryAfter(ip, {
+        // Unknown callers must not share an admission bucket with every signed-in user. An IPv6
+        // client is its /64, so rotating the address inside it does not open another bucket.
+        let retryAfter = isIP(ip) ? limiters.address.retryAfter(clientNetwork(ip), {
           limit: PREAUTH_REQUEST_LIMIT * 3,
           window: PREAUTH_REQUEST_WINDOW_SECONDS,
         }) : 0;

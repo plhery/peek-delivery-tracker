@@ -14,6 +14,7 @@ const INTERACTIVE_AUTH_METHODS = new Set([
   'totp',
 ]);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const JWT_SEGMENT = /^[A-Za-z0-9_-]+={0,2}$/;
 
 export interface SupabaseUser {
   id: string;
@@ -59,6 +60,7 @@ export class SupabaseAuthenticator {
     if (!token || token.length > 16_384) {
       throw new SupabaseAuthError('Supabase access token is missing or invalid');
     }
+    if (!mayBeAccessToken(token)) throw new SupabaseAuthError('Supabase access token is malformed');
     const fingerprint = createHash('sha256').update(token).digest('hex');
     const now = (this.options.clock ?? Date.now)();
     if (useCache) {
@@ -129,6 +131,30 @@ export class SupabaseAuthenticator {
   }
 }
 
+/** A segment of a JWT as the JSON object it holds, or null. */
+function jwtObject(segment: string): Record<string, unknown> | null {
+  try {
+    const value: unknown = JSON.parse(Buffer.from(segment, 'base64url').toString('utf8'));
+    return isRecord(value) ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Whether the token has the shape of one Auth issues: a JWT whose header names its
+ * algorithm and whose claims name the account by its UUID, as every Supabase access token
+ * does. Anything else, such as a personal token sent to the wrong address, Auth would
+ * refuse, so it is refused here without asking.
+ */
+function mayBeAccessToken(token: string): boolean {
+  const parts = token.split('.');
+  if (parts.length !== 3 || !parts.every((part) => JWT_SEGMENT.test(part))) return false;
+  const header = jwtObject(parts[0]!);
+  const claims = jwtObject(parts[1]!);
+  return typeof header?.alg === 'string' && typeof claims?.sub === 'string' && UUID.test(claims.sub);
+}
+
 /**
  * What the token says of its session, once Auth has accepted it for `userId`: when its
  * holder last signed in, the session, and when the token expires (milliseconds).
@@ -139,14 +165,8 @@ function tokenClaims(
 ): { authenticatedAt: Date | null; sessionId: string | null; expiresAt: number | null } {
   const none = { authenticatedAt: null, sessionId: null, expiresAt: null };
   const parts = token.split('.');
-  if (parts.length !== 3) return none;
-  let claims: unknown;
-  try {
-    claims = JSON.parse(Buffer.from(parts[1]!, 'base64url').toString('utf8'));
-  } catch {
-    return none;
-  }
-  if (!isRecord(claims) || claims.sub !== userId) return none;
+  const claims = parts.length === 3 ? jwtObject(parts[1]!) : null;
+  if (!claims || claims.sub !== userId) return none;
   const expiresAt = typeof claims.exp === 'number' && Number.isFinite(claims.exp) ? claims.exp * 1_000 : null;
   const sessionId = typeof claims.session_id === 'string' && UUID.test(claims.session_id)
     ? claims.session_id.toLowerCase()

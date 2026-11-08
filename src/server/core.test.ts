@@ -66,6 +66,7 @@ const originalEnvironment = {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
   for (const [key, value] of Object.entries(originalEnvironment)) {
     if (value === undefined) delete process.env[key];
     else process.env[key] = value;
@@ -251,6 +252,31 @@ describe('API request boundaries', () => {
     expect(response.status).toBe(200);
   });
 
+  it('admits signed-in requests by network: the addresses of an IPv6 /64 share one allowance', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
+    process.env.SUPABASE_URL = 'https://database.example';
+    process.env.SUPABASE_PUBLISHABLE_KEY = 'public-key';
+    const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => Response.json({ msg: 'invalid JWT' }, { status: 401 }));
+    const route = apiRoute(async () => json({ ok: true }), { loadService: false });
+    // Each request presents a token of its own, so only the address allowance can fill.
+    let sent = 0;
+    const send = (address: string) => route(new NextRequest('https://delivery.example/core-test/admission', {
+      headers: { authorization: `Bearer core-test-${sent += 1}`, 'cf-connecting-ip': address },
+    }), { params: Promise.resolve({}) });
+    const statuses = new Set<number>();
+    for (let host = 0; host < 900; host += 1) statuses.add((await send(`2001:db8:6:6:${host.toString(16)}::1`)).status);
+    expect([...statuses]).toEqual([401]);
+    const refused = await send('2001:db8:6:6:ffff:ffff:ffff:ffff');
+    expect(refused.status).toBe(429);
+    expect(refused.headers.get('retry-after')).toBeTruthy();
+    // Another /64, and an IPv4 address, keep their own.
+    expect((await send('2001:db8:6:7::1')).status).toBe(401);
+    expect((await send('198.51.100.66')).status).toBe(401);
+    // None of those tokens could be one Auth issues: Auth was never asked.
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
   it('shares a named allowance across a route\'s addresses and reports refusals', async () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const onLimited = vi.fn();
@@ -423,7 +449,7 @@ describe('authentication validation', () => {
 
   function token(payload: Record<string, unknown>): string {
     return [
-      Buffer.from('{}').toString('base64url'),
+      Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url'),
       Buffer.from(JSON.stringify(payload)).toString('base64url'),
       'signature',
     ].join('.');
@@ -520,8 +546,39 @@ describe('authentication validation', () => {
       is_anonymous: true,
     }), { status: 200 }));
     const auth = new SupabaseAuthenticator('https://supabase.example', 'public-key');
+    await expect(auth.validate(token({ sub: userId }))).rejects.toBeInstanceOf(SupabaseAuthError);
     await expect(auth.validate('token')).rejects.toBeInstanceOf(SupabaseAuthError);
     await expect(auth.validate('x'.repeat(16_385))).rejects.toBeInstanceOf(SupabaseAuthError);
+  });
+
+  it('refuses a token Auth could not have issued without asking Auth', async () => {
+    const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => Response.json({ id: userId }));
+    const auth = new SupabaseAuthenticator('https://supabase.example', 'public-key');
+    const segment = (value: unknown) => Buffer.from(JSON.stringify(value)).toString('base64url');
+    const header = segment({ alg: 'ES256', kid: 'synthetic', typ: 'JWT' });
+    const claims = segment({ sub: userId, exp: 2_000_000_000 });
+    for (const malformed of [
+      'token',
+      // A personal token and an assistant's access token, sent to a route that takes a sign-in.
+      `peek_pat_${'A'.repeat(43)}`,
+      `peek_at_${'A'.repeat(43)}`,
+      `${header}.${claims}`,
+      `${header}.${claims}.signature.extra`,
+      `${header}.${claims}.`,
+      `${header}.${claims}.sig nature`,
+      `${header}.${claims}.sig+nature/`,
+      `${segment({ typ: 'JWT' })}.${claims}.signature`,
+      `${segment(['ES256'])}.${claims}.signature`,
+      `not-json.${claims}.signature`,
+      `${header}.${segment({ exp: 2_000_000_000 })}.signature`,
+      `${header}.${segment({ sub: 'someone', exp: 2_000_000_000 })}.signature`,
+      `${header}.${segment([userId])}.signature`,
+    ]) await expect(auth.validate(malformed), malformed).rejects.toBeInstanceOf(SupabaseAuthError);
+    expect(fetcher).not.toHaveBeenCalled();
+    // Padded segments are still a token Auth may have issued, and so is one in upper case.
+    await auth.validate(`${header}==.${segment({ sub: userId.toUpperCase() })}.signature`);
+    await auth.validate(`${header}.${claims}.signature`);
+    expect(fetcher).toHaveBeenCalledTimes(2);
   });
 });
 

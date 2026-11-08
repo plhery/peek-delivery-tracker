@@ -428,8 +428,11 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
   on `sync_claim_failed` once it repeats for two minutes (its `failing_for_ms`). They
   contain tracking numbers, so restrict access.
 - **API limits** per account: 12 sync requests per 5 min, 240 reads per minute, 60 other
-  writes per minute. Sign-in codes go straight to Auth, and the gateway in front of it
-  limits them per client network ([AUTHENTICATION.md](AUTHENTICATION.md)).
+  writes per minute. Before a token is checked, a client network (an IPv4 address or an
+  IPv6 /64) may send 900 requests a minute and each token 300; a token that is not a JWT
+  naming an account is refused without asking Auth. Sign-in codes go straight to Auth, and
+  the gateway in front of it limits them per client network
+  ([AUTHENTICATION.md](AUTHENTICATION.md)).
 - **Limits without an account**, per client address: 6 lookups and 20 carrier detections
   per minute, 120 link reads per minute, and the daily allowances above. The limits per
   minute are kept in memory and start again with each deploy; the daily ones are in the

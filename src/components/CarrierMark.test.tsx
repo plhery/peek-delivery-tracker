@@ -732,6 +732,16 @@ describe('carrier mark', () => {
     'shopini-world',
     'international-bridge',
     'wpx',
+    'teleport',
+    'lexship',
+    'tci-freight',
+    'vichare',
+    'navata',
+    'makesend',
+    'f2-logistics',
+    'dago-express',
+    'jlog',
+    'time-matters',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

@@ -720,7 +720,17 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'qwqer'
   | 'shopini-world'
   | 'international-bridge'
-  | 'wpx';
+  | 'wpx'
+  | 'teleport'
+  | 'lexship'
+  | 'tci-freight'
+  | 'vichare'
+  | 'navata'
+  | 'makesend'
+  | 'f2-logistics'
+  | 'dago-express'
+  | 'jlog'
+  | 'time-matters';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

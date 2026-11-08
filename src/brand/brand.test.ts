@@ -837,6 +837,16 @@ describe('carrier brand', () => {
       'shopini-world',
       'international-bridge',
       'wpx',
+      'teleport',
+      'lexship',
+      'tci-freight',
+      'vichare',
+      'navata',
+      'makesend',
+      'f2-logistics',
+      'dago-express',
+      'jlog',
+      'time-matters',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

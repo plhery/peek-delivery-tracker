@@ -18955,7 +18955,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "zheldor"
     },
     "trackingUrlTemplate": "https://i.jde.ru/track/?ttn={trackingNumber}",
     "linkRules": [
@@ -36653,7 +36653,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kuala_Lumpur",
     "tracking": {
       "mode": "automatic",
-      "adapter": "lex-my"
+      "adapter": "lex-my",
+      "recognitionRank": 11
     },
     "trackingUrlTemplate": "https://lex.com.my/tracking?references={trackingNumber}",
     "linkRules": [
@@ -42833,7 +42834,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "跨源速递",
       "深圳市跨源速递供应链有限公司",
-      "KuaYuan Express"
+      "KuaYuan Express",
+      "KUAYUAN SUPPLY CHAIN"
     ],
     "countries": [
       "CN"
@@ -42843,10 +42845,16 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "kuayuan-express",
+      "recognitionRank": 714
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^3[A-Z]{3}\\d(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{5}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.kuayuanexpress.com.cn/"
   },
   "2ebox": {

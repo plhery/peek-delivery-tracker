@@ -102,7 +102,9 @@ Key server modules:
 - `email/` tells an account by email that a parcel was delivered or is ready for pickup,
   when the account asked for it. The database hands each parcel out once per stage (`claim_delivery_emails`),
   `deliveryEmails.ts` writes the email and sends it through any SMTP service, and
-  `unsubscribe.ts` signs the link that switches it off.
+  `unsubscribe.ts` signs the link that switches it off. A run claims one email at a time,
+  up to 20, so a server killed mid-run leaves only the email it was sending claimed, and
+  that one is not sent again.
 - `assistants/` is the OAuth server and the MCP endpoint that connect assistants to an
   account (see Trust boundaries).
 - `observability.ts` and `trackingAudit.ts` link Sentry and logs to the private audit

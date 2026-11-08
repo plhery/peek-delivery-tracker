@@ -13,8 +13,8 @@ import { EmailSendError, openTransport, type EmailTransport, type OutgoingEmail 
 import { DELIVERY_CARD_CID, type DeliveryEmailContent } from './types';
 import { unsubscribeUrls } from './unsubscribe';
 
-/** Scans one run claims. The rest wait for the next run, which follows every sync job. */
-const CLAIMS_PER_RUN = 20;
+/** Emails one run claims, one at a time. The rest wait for the next run, which follows every sync job. */
+export const CLAIMS_PER_RUN = 20;
 
 export interface DeliveryEmailSummary {
   sent: number;
@@ -47,46 +47,66 @@ export class DeliveryEmailService {
     readonly now: () => Date = () => new Date(),
   ) {}
 
+  /**
+   * Claims and sends one email at a time, up to `CLAIMS_PER_RUN`, until a claim comes back
+   * empty: a server killed mid-run leaves at most the email it was sending claimed, and that
+   * one is never sent again, since it may have gone out.
+   */
   async dispatch(signal?: AbortSignal): Promise<DeliveryEmailSummary> {
     signal?.throwIfAborted();
     const summary: DeliveryEmailSummary = { sent: 0, failed: 0, skipped: 0 };
-    const claimed = await this.client.claimDeliveryEmails(
-      CLAIMS_PER_RUN, this.settings.perAccountPerDay, this.settings.perDay,
-    );
-    // Beyond an allowance, an email is recorded as skipped by the claim itself.
-    for (const [reason, total] of [['account_cap', claimed.accountCap], ['service_cap', claimed.serviceCap]] as const) {
-      if (total <= 0) continue;
-      summary.skipped += total;
-      recordDeliveryEmail('skipped', reason, total);
-      logOperationalEvent('delivery_emails_capped', { reason, emails: total }, 'warning');
-    }
-    if (claimed.send.length === 0) return summary;
-
+    const capped = { account_cap: 0, service_cap: 0 };
     const reported = new Set<string>();
-    const transport = this.open(this.settings);
+    let transport: EmailTransport | null = null;
     try {
-      for (const claim of claimed.send) {
-        // A run that is stopped hands back what it has not sent, to be claimed again.
-        const ending: Ending = signal?.aborted
-          ? { outcome: 'failed', reason: 'interrupted' }
-          : await this.deliver(claim, transport);
-        summary[ending.outcome] += 1;
-        this.record(claim, ending, reported);
-        try {
-          await this.client.finishDeliveryEmail(claim.id, ending.outcome, ending.outcome === 'sent' ? null : ending.reason);
-        } catch (error) {
-          // The claim stays open and is never handed out again: no email goes out twice.
-          logOperationalEvent('delivery_email_finish_failed', {
-            package_id: claim.packageId, outcome: ending.outcome, error_type: errorType(error),
-          }, 'error');
-          if (!signal?.aborted) captureOperationalError(error, { component: 'delivery-email', operation: 'finish' });
+      for (let claims = 0; claims < CLAIMS_PER_RUN && !signal?.aborted; claims += 1) {
+        const claimed = await this.client.claimDeliveryEmails(1, this.settings.perAccountPerDay, this.settings.perDay);
+        // Beyond an allowance, an email is recorded as skipped by the claim itself.
+        capped.account_cap += claimed.accountCap;
+        capped.service_cap += claimed.serviceCap;
+        if (claimed.send.length === 0) {
+          if (claimed.accountCap + claimed.serviceCap > 0) continue;
+          break;
         }
+        transport ??= this.open(this.settings);
+        for (const claim of claimed.send) await this.handle(claim, transport, summary, reported, signal);
       }
     } finally {
-      transport.close();
+      transport?.close();
+      for (const [reason, total] of Object.entries(capped) as [keyof typeof capped, number][]) {
+        if (total <= 0) continue;
+        summary.skipped += total;
+        recordDeliveryEmail('skipped', reason, total);
+        logOperationalEvent('delivery_emails_capped', { reason, emails: total }, 'warning');
+      }
     }
     signal?.throwIfAborted();
     return summary;
+  }
+
+  /** Sends one claimed email and records how it ended. */
+  private async handle(
+    claim: DeliveryEmailClaim,
+    transport: EmailTransport,
+    summary: DeliveryEmailSummary,
+    reported: Set<string>,
+    signal?: AbortSignal,
+  ): Promise<void> {
+    // A run stopped since the claim hands the email back, to be claimed again.
+    const ending: Ending = signal?.aborted
+      ? { outcome: 'failed', reason: 'interrupted' }
+      : await this.deliver(claim, transport);
+    summary[ending.outcome] += 1;
+    this.record(claim, ending, reported);
+    try {
+      await this.client.finishDeliveryEmail(claim.id, ending.outcome, ending.outcome === 'sent' ? null : ending.reason);
+    } catch (error) {
+      // The claim stays open and is never handed out again: no email goes out twice.
+      logOperationalEvent('delivery_email_finish_failed', {
+        package_id: claim.packageId, outcome: ending.outcome, error_type: errorType(error),
+      }, 'error');
+      if (!signal?.aborted) captureOperationalError(error, { component: 'delivery-email', operation: 'finish' });
+    }
   }
 
   private async deliver(claim: DeliveryEmailClaim, transport: EmailTransport): Promise<Ending> {

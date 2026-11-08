@@ -4,7 +4,7 @@ import * as observability from '../observability';
 import { SupabaseError, SupabaseServiceClient, type AuthAccount, type DeliveryEmailClaim } from '../supabase';
 import type { JsonObject } from '../types';
 import type { EmailSettings } from './config';
-import { deliveryEmail, DeliveryEmailService, deliveryEmailService } from './deliveryEmails';
+import { CLAIMS_PER_RUN, deliveryEmail, DeliveryEmailService, deliveryEmailService } from './deliveryEmails';
 import { EmailSendError, type EmailTransport, type OutgoingEmail } from './transport';
 import { DELIVERY_CARD_CID, type DeliveryEmailContent, type DeliveryEmailInput } from './types';
 import { unsubscribeAccount, unsubscribeToken } from './unsubscribe';
@@ -65,8 +65,23 @@ let counted: MockInstance<typeof metrics.recordDeliveryEmail>;
 let reported: MockInstance<typeof observability.captureOperationalError>;
 let logs: MockInstance[];
 
-const claims = (send: DeliveryEmailClaim[], caps: { accountCap?: number; serviceCap?: number } = {}) => claimed
-  .mockResolvedValue({ send, accountCap: caps.accountCap ?? 0, serviceCap: caps.serviceCap ?? 0 });
+/**
+ * What the database has waiting, handed out in order as it is claimed: the emails to send, then
+ * those an allowance holds back, which the claim records as skipped itself.
+ */
+const claims = (send: DeliveryEmailClaim[], caps: { accountCap?: number; serviceCap?: number } = {}) => {
+  const waiting: (DeliveryEmailClaim | 'accountCap' | 'serviceCap')[] = [
+    ...send, ...Array<'accountCap'>(caps.accountCap ?? 0).fill('accountCap'), ...Array<'serviceCap'>(caps.serviceCap ?? 0).fill('serviceCap'),
+  ];
+  return claimed.mockImplementation(async (limit) => {
+    const taken = waiting.splice(0, limit);
+    return {
+      send: taken.filter((entry): entry is DeliveryEmailClaim => typeof entry !== 'string'),
+      accountCap: taken.filter((entry) => entry === 'accountCap').length,
+      serviceCap: taken.filter((entry) => entry === 'serviceCap').length,
+    };
+  });
+};
 /** Everything written to the logs or reported as an error, as one text. */
 const everythingRecorded = () => JSON.stringify([
   ...logs.flatMap((log) => log.mock.calls),
@@ -104,7 +119,8 @@ afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); written.content.mock
 describe('telling an account that its parcel was delivered', () => {
   it('claims, writes, sends and records one email', async () => {
     expect(await service.dispatch()).toEqual({ sent: 1, failed: 0, skipped: 0 });
-    expect(claimed).toHaveBeenCalledExactlyOnceWith(20, 20, 80);
+    // One email at a time, until a claim comes back empty.
+    expect(claimed.mock.calls).toEqual([[1, 20, 80], [1, 20, 80]]);
     expect(accounts).toHaveBeenCalledExactlyOnceWith(alex);
     expect(parcels).toHaveBeenCalledExactlyOnceWith(claim(1).packageId, alex);
 
@@ -180,6 +196,27 @@ describe('telling an account that its parcel was delivered', () => {
     expect(counted).not.toHaveBeenCalled();
   });
 
+  it('claims one email at a time, at most CLAIMS_PER_RUN a run, and leaves the rest for the next run', async () => {
+    const waiting = Array.from({ length: CLAIMS_PER_RUN + 5 }, (_, index) => claim(index + 1, { id: `email-${index + 1}` }));
+    claims(waiting);
+    expect(await service.dispatch()).toEqual({ sent: CLAIMS_PER_RUN, failed: 0, skipped: 0 });
+    expect(claimed).toHaveBeenCalledTimes(CLAIMS_PER_RUN);
+    expect(claimed.mock.calls.every(([limit]) => limit === 1)).toBe(true);
+    // Each email is sent before the next one is claimed: a kill leaves at most one claimed.
+    for (let index = 0; index < CLAIMS_PER_RUN - 1; index += 1) {
+      expect(claimed.mock.invocationCallOrder[index + 1]).toBeGreaterThan(finished.mock.invocationCallOrder[index]!);
+    }
+    expect(await service.dispatch()).toEqual({ sent: 5, failed: 0, skipped: 0 });
+    expect(finished.mock.calls.map(([id]) => id)).toEqual(waiting.map(({ id }) => id));
+  });
+
+  it('counts an email an allowance held back towards the run\'s claims, and goes on after it', async () => {
+    claims([claim(1)], { serviceCap: CLAIMS_PER_RUN + 2 });
+    expect(await service.dispatch()).toEqual({ sent: 1, failed: 0, skipped: CLAIMS_PER_RUN - 1 });
+    expect(claimed).toHaveBeenCalledTimes(CLAIMS_PER_RUN);
+    expect(logged('delivery_emails_capped')).toEqual([expect.objectContaining({ reason: 'service_cap', emails: CLAIMS_PER_RUN - 1 })]);
+  });
+
   it('sends several emails over one transport, and closes it once', async () => {
     claims([claim(1), claim(2), claim(3)]);
     expect(await service.dispatch()).toEqual({ sent: 3, failed: 0, skipped: 0 });
@@ -214,6 +251,7 @@ describe('an email that is not sent', () => {
     expect(transport.send).not.toHaveBeenCalled();
 
     const registered = new DeliveryEmailService(client, { ...settings, appleRelay: true }, open as never, () => now);
+    claims([claim(1)]);
     expect(await registered.dispatch()).toEqual({ sent: 1, failed: 0, skipped: 0 });
     expect(transport.send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ to: 'synthetic1234@privaterelay.appleid.com' }));
   });
@@ -229,7 +267,8 @@ describe('an email that is not sent', () => {
   it('counts what the claim itself skipped for an allowance', async () => {
     claims([claim(1)], { accountCap: 2, serviceCap: 1 });
     expect(await service.dispatch()).toEqual({ sent: 1, failed: 0, skipped: 3 });
-    expect(counted.mock.calls).toEqual([['skipped', 'account_cap', 2], ['skipped', 'service_cap', 1], ['sent', 'none']]);
+    // Counted and logged once for the run, however many claims they took.
+    expect(counted.mock.calls).toEqual([['sent', 'none'], ['skipped', 'account_cap', 2], ['skipped', 'service_cap', 1]]);
     expect(logged('delivery_emails_capped')).toEqual([
       expect.objectContaining({ level: 'warning', reason: 'account_cap', emails: 2 }),
       expect.objectContaining({ level: 'warning', reason: 'service_cap', emails: 1 }),
@@ -305,6 +344,14 @@ describe('an email that fails', () => {
     await expect(service.dispatch()).rejects.toThrow('Supabase POST request failed (404)');
     expect(open).not.toHaveBeenCalled();
   });
+
+  it('fails the run when a later claim fails, with what it sent recorded and the connection closed', async () => {
+    const outage = new SupabaseError('The delivery database is unreachable');
+    claimed.mockResolvedValueOnce({ send: [claim(1)], accountCap: 0, serviceCap: 0 }).mockRejectedValueOnce(outage);
+    await expect(service.dispatch()).rejects.toBe(outage);
+    expect(finished).toHaveBeenCalledExactlyOnceWith(claim(1).id, 'sent', null);
+    expect(transport.close).toHaveBeenCalledOnce();
+  });
 });
 
 describe('a run that is stopped', () => {
@@ -315,18 +362,30 @@ describe('a run that is stopped', () => {
     expect(claimed).not.toHaveBeenCalled();
   });
 
-  it('hands back what it has not sent, and closes the connection', async () => {
+  it('records the email it was sending, claims no other, and closes the connection', async () => {
     claims([claim(1), claim(2), claim(3)]);
     const controller = new AbortController();
     transport.send.mockImplementationOnce(async () => { controller.abort(); });
     await expect(service.dispatch(controller.signal)).rejects.toThrow();
     expect(transport.send).toHaveBeenCalledOnce();
-    expect(finished.mock.calls).toEqual([
-      [claim(1).id, 'sent', null], [claim(2).id, 'failed', 'interrupted'], [claim(3).id, 'failed', 'interrupted'],
-    ]);
-    expect(counted.mock.calls).toEqual([['sent', 'none'], ['failed', 'interrupted'], ['failed', 'interrupted']]);
+    // The others were never claimed: the next server sends them.
+    expect(claimed).toHaveBeenCalledOnce();
+    expect(finished.mock.calls).toEqual([[claim(1).id, 'sent', null]]);
+    expect(counted.mock.calls).toEqual([['sent', 'none']]);
     expect(transport.close).toHaveBeenCalledOnce();
     // Stopping is not a fault to report.
+    expect(reported).not.toHaveBeenCalled();
+  });
+
+  it('hands back an email claimed as it stopped, unsent, to be claimed again', async () => {
+    const controller = new AbortController();
+    claimed.mockImplementation(async () => {
+      controller.abort();
+      return { send: [claim(1)], accountCap: 0, serviceCap: 0 };
+    });
+    await expect(service.dispatch(controller.signal)).rejects.toThrow();
+    expect(transport.send).not.toHaveBeenCalled();
+    expect(finished).toHaveBeenCalledExactlyOnceWith(claim(1).id, 'failed', 'interrupted');
     expect(reported).not.toHaveBeenCalled();
   });
 });

@@ -1449,6 +1449,17 @@ value class CarrierId(val rawValue: String) {
         val KyrgyzExpressPost = CarrierId("kyrgyz-express-post")
         val WmgGroup = CarrierId("wmg-group")
         val YtoPh = CarrierId("yto-ph")
+        val Aeronet = CarrierId("aeronet")
+        val ArcoSpedizioni = CarrierId("arco-spedizioni")
+        val Boxc = CarrierId("boxc")
+        val BraunsExpress = CarrierId("brauns-express")
+        val Crossflight = CarrierId("crossflight")
+        val DooraLogistics = CarrierId("doora-logistics")
+        val FastshipTh = CarrierId("fastship-th")
+        val MeitetsuUnyu = CarrierId("meitetsu-unyu")
+        val Runforint = CarrierId("runforint")
+        val TheDeliveryGroup = CarrierId("the-delivery-group")
+        val Trumpcard = CarrierId("trumpcard")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2839,6 +2850,17 @@ value class CarrierId(val rawValue: String) {
             KyrgyzExpressPost,
             WmgGroup,
             YtoPh,
+            Aeronet,
+            ArcoSpedizioni,
+            Boxc,
+            BraunsExpress,
+            Crossflight,
+            DooraLogistics,
+            FastshipTh,
+            MeitetsuUnyu,
+            Runforint,
+            TheDeliveryGroup,
+            Trumpcard,
         )
     }
 }

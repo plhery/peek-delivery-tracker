@@ -1705,7 +1705,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingUrlTemplate": "https://www.heppner-group.com/destinataire-suivez-votre-marchandise/",
     "aliases": [
-      "Heppner Group"
+      "Heppner Group",
+      "Heppner Internationale Spedition GmbH & Co."
     ],
     "countries": [
       "FR",
@@ -2514,7 +2515,10 @@ export const CARRIER_CAPABILITIES = {
       "AT"
     ],
     "trackingSearchUrl": "https://www.post.at/en/s/track-and-trace-search",
-    "helpUrl": "https://www.post.at/k/c/kontakt"
+    "helpUrl": "https://www.post.at/k/c/kontakt",
+    "aliases": [
+      "Österreichische Post"
+    ]
   },
   "postnord": {
     "displayName": "PostNord",
@@ -5086,7 +5090,11 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingUrlTemplate": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&cons={trackingNumber}",
     "trackingSearchUrl": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html",
-    "helpUrl": "https://www.tnt.com/express/en_gb/site/support.html"
+    "helpUrl": "https://www.tnt.com/express/en_gb/site/support.html",
+    "aliases": [
+      "TNT Netherlands",
+      "TNT NL"
+    ]
   },
   "correos-spain": {
     "displayName": "Correos",
@@ -14059,7 +14067,8 @@ export const CARRIER_CAPABILITIES = {
       "Send From China",
       "SFC Express",
       "三态速递",
-      "深圳三态现代物流有限公司"
+      "深圳三态现代物流有限公司",
+      "SFC Fulfillment"
     ],
     "countries": [
       "CN"
@@ -14226,7 +14235,9 @@ export const CARRIER_CAPABILITIES = {
       "SkyNet WWE",
       "Skynet Express",
       "Deltec International Courier",
-      "Deltec Courier"
+      "Deltec Courier",
+      "SkyNet UAE",
+      "SkyNet Worldwide Express UAE"
     ],
     "countries": [
       "GB"
@@ -14506,7 +14517,9 @@ export const CARRIER_CAPABILITIES = {
       "MyTeamGE",
       "Toll Global Express",
       "Toll IPEC",
-      "Toll Priority"
+      "Toll Priority",
+      "Toll New Zealand",
+      "Toll NZ"
     ],
     "countries": [
       "AU",
@@ -20707,7 +20720,9 @@ export const CARRIER_CAPABILITIES = {
   "tnt-it": {
     "displayName": "TNT Italy",
     "aliases": [
-      "TNT Italia"
+      "TNT Italia",
+      "TNT-Click Italy",
+      "TNT-Click"
     ],
     "countries": [
       "IT"
@@ -22364,7 +22379,9 @@ export const CARRIER_CAPABILITIES = {
       "GoGoXpress",
       "GGX",
       "QuadX",
-      "QuadX Inc."
+      "QuadX Inc.",
+      "XPost",
+      "Xpost.ph"
     ],
     "countries": [
       "PH"
@@ -31591,7 +31608,9 @@ export const CARRIER_CAPABILITIES = {
       "一代国际集团",
       "深圳市一代国际物流（集团）有限公司",
       "壹号专线",
-      "深圳市壹号专线供应链有限公司"
+      "深圳市壹号专线供应链有限公司",
+      "Shenzhen 1st International Logistics",
+      "Shenzhen 1st International Logistics (Group) Co."
     ],
     "countries": [
       "CN"
@@ -38364,7 +38383,8 @@ export const CARRIER_CAPABILITIES = {
       "セイノースーパーエクスプレス株式会社",
       "Seino Super Express Co., Ltd.",
       "西武運輸",
-      "Seibu Unyu"
+      "Seibu Unyu",
+      "西濃スーパーエキスプレス"
     ],
     "countries": [
       "JP"
@@ -40797,7 +40817,9 @@ export const CARRIER_CAPABILITIES = {
       "北俄国际",
       "北俄物流",
       "北俄供应链",
-      "北俄供应链（深圳）有限公司"
+      "北俄供应链（深圳）有限公司",
+      "BEL North Russia",
+      "North Russia Supply Chain (Shenzhen) Co."
     ],
     "countries": [
       "CN",
@@ -50169,6 +50191,321 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.yto.com.ph/trackTrace"
+  },
+  "aeronet": {
+    "displayName": "Aeronet Worldwide",
+    "aliases": [
+      "Aeronet",
+      "Aeronet Worldwide, Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#00529b",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.aeronet.com/tracking/"
+  },
+  "arco-spedizioni": {
+    "displayName": "Arco Spedizioni",
+    "aliases": [
+      "Arco Spedizioni S.p.A.",
+      "Arco Spedizioni SpA"
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#151c42",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.arcospedizioni.it/"
+  },
+  "boxc": {
+    "displayName": "BoxC",
+    "aliases": [
+      "BoxC Logistics",
+      "BoxC Logistics, Inc."
+    ],
+    "countries": [
+      "US",
+      "CN"
+    ],
+    "color": "#2e8049",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://boxc.com/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "boxc.com",
+          "www.boxc.com"
+        ],
+        "path": "^/track/([^/?#]+)/?$",
+        "ownNumbersOnly": true
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://boxc.com/track"
+  },
+  "brauns-express": {
+    "displayName": "Braun's Express",
+    "aliases": [
+      "Braun's Express, Inc.",
+      "Brauns Express"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#155196",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.braunsexpress.com/tracking/?tracking_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.braunsexpress.com",
+          "braunsexpress.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "tracking_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.braunsexpress.com/tracking/"
+  },
+  "crossflight": {
+    "displayName": "Crossflight",
+    "aliases": [
+      "Crossflight Limited"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#18355d",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://my.crossflight.com/shipping/tracking/tracking.jsp?shipmentNumbers={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "my.crossflight.com"
+        ],
+        "pathPattern": "^/shipping/tracking/tracking\\.jsp$",
+        "params": [
+          "shipmentNumbers"
+        ]
+      },
+      {
+        "domains": [
+          "my.crossflight.com"
+        ],
+        "pathPattern": "^/tracking/tracking\\.action$",
+        "params": [
+          "shipmentNumbers"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://my.crossflight.com/shipping/tracking/tracking.jsp"
+  },
+  "doora-logistics": {
+    "displayName": "Doora Logistics",
+    "aliases": [
+      "DOORA LOGISTICS CO., LTD.",
+      "Doora",
+      "두라로지스틱스",
+      "(주)두라로지스틱스"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#e27c34",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.doora.co.kr/?p=43bf98f0-5801-4251-89ff-f22199d58dff&bl={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.doora.co.kr",
+          "doora.co.kr"
+        ],
+        "pathPattern": "^/?$",
+        "query": "^(?=(?:.*&)?p=43bf98f0-5801-4251-89ff-f22199d58dff(?:&|$))(?:.*&)?bl=([^&]+)(?=&|$)"
+      },
+      {
+        "domains": [
+          "lms.doora.co.kr"
+        ],
+        "pathPattern": "^/script/users/tracking\\.php$",
+        "query": "^(?=(?:.*&)?mode=search(?:&|$))(?:.*&)?search_no=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.doora.co.kr/?p=43bf98f0-5801-4251-89ff-f22199d58dff"
+  },
+  "fastship-th": {
+    "displayName": "FastShip",
+    "aliases": [
+      "FastShip Co., Ltd.",
+      "บริษัท ฟาสต์ชิป จำกัด"
+    ],
+    "countries": [
+      "TH"
+    ],
+    "color": "#ff5e1f",
+    "selectable": true,
+    "timezone": "Asia/Bangkok",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.fastship.co/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.fastship.co"
+        ],
+        "path": "^/([A-Za-z0-9]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.fastship.co/"
+  },
+  "meitetsu-unyu": {
+    "displayName": "Meitetsu NX Unyu",
+    "aliases": [
+      "名鉄運輸",
+      "名鉄NX運輸",
+      "Meitetsu Unyu",
+      "Meitetsu Transportation"
+    ],
+    "countries": [
+      "JP"
+    ],
+    "color": "#004da0",
+    "selectable": true,
+    "timezone": "Asia/Tokyo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ap.meitetsuunyu.co.jp/webtrace/webtsuiseki/webtsuiseki.aspx"
+  },
+  "runforint": {
+    "displayName": "Runforint Logistics",
+    "aliases": [
+      "Runforint",
+      "RFL",
+      "润峯物流",
+      "润峯",
+      "江苏润峯国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#c51e32",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.runforint.com/index.php?m=home&c=Lists&a=index&tid=137&key={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.runforint.com"
+        ],
+        "pathPattern": "^/index\\.php$",
+        "query": "^(?=(?:.*&)?tid=137(?:&|$))(?:.*&)?key=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.runforint.com/index.php?m=home&c=Lists&a=index&tid=137"
+  },
+  "the-delivery-group": {
+    "displayName": "The Delivery Group",
+    "aliases": [
+      "TDG",
+      "The Delivery Group Limited"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#87b04a",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.dockethub.com/shipment/{trackingNumber}?style=TDG",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.dockethub.com/shipment/?style=TDG"
+  },
+  "trumpcard": {
+    "displayName": "TrumpCard",
+    "aliases": [
+      "TrumpCard Inc.",
+      "TCard"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#a90000",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ace2.trumpcardinc.com/searchairbill?SearchByAirbill={trackingNumber}&SearchByRefPO=",
+    "linkRules": [
+      {
+        "domains": [
+          "ace2.trumpcardinc.com"
+        ],
+        "pathPattern": "^/searchairbill/?$",
+        "params": [
+          "SearchByAirbill"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ace2.trumpcardinc.com/searchairbill"
   }
 } as const;
 
@@ -51610,7 +51947,18 @@ export const CARRIER_IDS = [
   "j-and-t-co",
   "kyrgyz-express-post",
   "wmg-group",
-  "yto-ph"
+  "yto-ph",
+  "aeronet",
+  "arco-spedizioni",
+  "boxc",
+  "brauns-express",
+  "crossflight",
+  "doora-logistics",
+  "fastship-th",
+  "meitetsu-unyu",
+  "runforint",
+  "the-delivery-group",
+  "trumpcard"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

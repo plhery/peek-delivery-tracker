@@ -235,6 +235,18 @@ class ParcelStore(
     /** How a background check of every parcel ended. */
     data class RefreshOutcome(val result: RefreshResult, val id: UUID = UUID.randomUUID())
 
+    /**
+     * How a read of the account's list ended. `Skipped`: nothing was read or the answer was set aside, because a change
+     * was made meanwhile, a newer read began or the account changed.
+     */
+    private sealed class LoadOutcome {
+        data object Loaded : LoadOutcome()
+
+        data class Failed(val message: String) : LoadOutcome()
+
+        data object Skipped : LoadOutcome()
+    }
+
     private val parcelsState = MutableStateFlow<List<Parcel>>(emptyList())
     private val loadingState = MutableStateFlow(false)
     private val refreshingState = MutableStateFlow(false)
@@ -623,7 +635,12 @@ class ParcelStore(
             loadDeviceParcels()
             return
         }
-        if (!session.isAuthenticated) return
+        loadAccountParcels(showSpinner)
+    }
+
+    /** Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read. */
+    private suspend fun loadAccountParcels(showSpinner: Boolean): LoadOutcome {
+        if (!session.isAuthenticated) return LoadOutcome.Skipped
         val generation = session.generation
         val revision = mutationRevision
         val ownerId = session.user?.id
@@ -633,7 +650,7 @@ class ParcelStore(
         try {
             val next = list()
             session.checkGeneration(generation)
-            if (revision != mutationRevision || sequence != loadSequence || pendingMutations.isNotEmpty()) return
+            if (revision != mutationRevision || sequence != loadSequence || pendingMutations.isNotEmpty()) return LoadOutcome.Skipped
             holdingDeliverySurfaces = false
             showingSavedParcels = false
             val changed = next != parcels
@@ -651,11 +668,12 @@ class ParcelStore(
             if (errorMessage != null) errorMessage = null
             if (authenticationRequired) authenticationRequired = false
             if (usingCachedData) usingCachedData = false
+            return LoadOutcome.Loaded
         } catch (error: Exception) {
             if (!stillCurrent(generation) || revision != mutationRevision || sequence != loadSequence ||
                 error is CancellationException
             ) {
-                return
+                return LoadOutcome.Skipped
             }
             val message = localizer.errorMessage(error)
             if (errorMessage != message) errorMessage = message
@@ -668,6 +686,7 @@ class ParcelStore(
             } else if (showingSavedParcels && !usingCachedData) {
                 usingCachedData = true
             }
+            return LoadOutcome.Failed(message)
         } finally {
             if (generation == session.generation && sequence == loadSequence && loading) loading = false
         }
@@ -1043,8 +1062,13 @@ class ParcelStore(
         val result: RefreshResult = try {
             api.waitForJobs(jobIds)
             session.checkGeneration(generation)
-            load(showSpinner = false)
-            if (Parcel.trackingChanged(before, parcels)) RefreshResult.Updated else RefreshResult.Unchanged
+            when (val read = loadAccountParcels(showSpinner = false)) {
+                LoadOutcome.Loaded -> if (Parcel.trackingChanged(before, parcels)) RefreshResult.Updated else RefreshResult.Unchanged
+                // The checks are done but the list could not be read: they are not "no new updates".
+                is LoadOutcome.Failed -> RefreshResult.Failed(read.message)
+                // A newer read, or the next one after a change made meanwhile, shows what the checks found.
+                LoadOutcome.Skipped -> RefreshResult.StillChecking
+            }
         } catch (_: DeliveryApiError.RefreshTimeout) {
             // The checks keep running; their results arrive with a later load.
             RefreshResult.StillChecking

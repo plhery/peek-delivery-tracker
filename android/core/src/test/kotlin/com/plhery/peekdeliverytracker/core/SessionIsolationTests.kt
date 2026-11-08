@@ -712,6 +712,99 @@ class SessionIsolationTests {
         assertEquals(listOf(parcel.id), store.parcels.map { it.id })
     }
 
+    /** Starts a check of every parcel and waits for the outcome the store reports once it is done. */
+    private suspend fun refreshOutcome(store: ParcelStore): ParcelStore.RefreshResult? {
+        val previous = store.refreshOutcome?.id
+        assertEquals(ParcelStore.RefreshStart.Queued, store.refreshAll())
+        return store.refreshOutcomeFlow.first { it != null && it.id != previous }?.result
+    }
+
+    /**
+     * The checks can succeed just as the connection drops: the list read after them failing is a failed refresh, not
+     * "No new updates" beside the warning.
+     */
+    @Test
+    fun refreshSaysUnchangedOnlyAfterReadingTheListAndFailsWhenTheReadFails() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        authorize(session, transport)
+        val store = store(session, transport)
+        val job = UUID.randomUUID()
+        val list = packageList(parcel())
+        transport.respond(list)
+        store.load()
+        val queued = json(QueueResponse.serializer(), QueueResponse(queued = true, pending = 1, jobIds = listOf(job)))
+        val jobs = json(
+            SyncJobListResponse.serializer(),
+            SyncJobListResponse(listOf(SyncJobResponse(id = job, status = SyncJobStatus.Succeeded, requestedAt = "2026-09-25T10:00:00Z"))),
+        )
+        var listOnline = true
+        transport.handler = { request ->
+            when (request.method to request.path) {
+                "POST" to "/api/sync" -> jsonResponse(202, queued)
+                "GET" to "/api/sync/jobs" -> jsonResponse(200, jobs)
+                else -> if (listOnline) jsonResponse(200, list) else throw IOException("The Internet connection appears to be offline.")
+            }
+        }
+        // The same list, read again, has nothing new.
+        assertEquals(ParcelStore.RefreshResult.Unchanged, refreshOutcome(store))
+        assertNull(store.errorMessage)
+
+        listOnline = false
+        val failed = refreshOutcome(store)
+        val message = store.errorMessage ?: return@runTest fail("Expected the warning")
+        assertEquals(ParcelStore.RefreshResult.Failed(message), failed)
+        assertFalse(store.refreshing)
+    }
+
+    /**
+     * A read that lands while the refresh's own is on its way has the list, so the refresh's answer is set aside: it was
+     * not compared, so it is not "No new updates".
+     */
+    @Test
+    fun refreshWhoseReadIsSetAsideIsStillChecking() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        authorize(session, transport)
+        val store = store(session, transport)
+        val job = UUID.randomUUID()
+        val list = packageList(parcel())
+        transport.respond(list)
+        store.load()
+        val queued = json(QueueResponse.serializer(), QueueResponse(queued = true, pending = 1, jobIds = listOf(job)))
+        val jobs = json(
+            SyncJobListResponse.serializer(),
+            SyncJobListResponse(listOf(SyncJobResponse(id = job, status = SyncJobStatus.Succeeded, requestedAt = "2026-09-25T10:00:00Z"))),
+        )
+        val refreshRead = CompletableDeferred<Unit>()
+        val refreshAnswer = CompletableDeferred<HttpResponse>()
+        var reads = 0
+        transport.handler = { request ->
+            when (request.method to request.path) {
+                "POST" to "/api/sync" -> jsonResponse(202, queued)
+                "GET" to "/api/sync/jobs" -> jsonResponse(200, jobs)
+                else -> {
+                    reads += 1
+                    if (reads == 1) {
+                        refreshRead.complete(Unit)
+                        refreshAnswer.await()
+                    } else {
+                        jsonResponse(200, list)
+                    }
+                }
+            }
+        }
+        assertEquals(ParcelStore.RefreshStart.Queued, store.refreshAll())
+        refreshRead.await()
+        // A poll reads the list meanwhile and lands first.
+        store.load()
+        refreshAnswer.complete(jsonResponse(200, list))
+        val outcome = store.refreshOutcomeFlow.first { it != null }
+        assertEquals(ParcelStore.RefreshResult.StillChecking, outcome?.result)
+        assertFalse(store.refreshing)
+        assertNull(store.errorMessage)
+    }
+
     @Test
     fun emailSwitchSendsTheSavedPreferencesAndShowsTheServersAnswer() = runTest {
         val transport = RecordingTransport()

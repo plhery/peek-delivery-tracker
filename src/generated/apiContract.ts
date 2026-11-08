@@ -26108,13 +26108,13 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://paxel.co/id/track-shipments?awb_req={trackingNumber}",
+    "trackingUrlTemplate": "https://paxel.co/id/lacak-pengiriman?awb_req={trackingNumber}",
     "linkRules": [
       {
         "domains": [
           "paxel.co"
         ],
-        "pathPattern": "^/(?:id|en)/track-shipments/?$",
+        "pathPattern": "^/(?:id/lacak-pengiriman|(?:id|en)/track-shipments)/?$",
         "params": [
           "awb_req"
         ]
@@ -26126,7 +26126,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://paxel.co/en/track-shipments"
+    "trackingSearchUrl": "https://paxel.co/id/lacak-pengiriman"
   },
   "pickupp": {
     "displayName": "Pickupp",

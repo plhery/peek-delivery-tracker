@@ -4393,7 +4393,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Tokyo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "yamato"
+      "adapter": "yamato",
+      "recognitionRank": 14,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {

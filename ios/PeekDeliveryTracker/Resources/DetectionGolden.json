@@ -63929,6 +63929,18 @@
     ]
   },
   {
+    "input": "888002423592016",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "brt",
+      "yunda"
+    ],
+    "asked": [
+      "brt"
+    ]
+  },
+  {
     "input": "888002555905321",
     "carrier": "unknown",
     "confidence": "low",

@@ -21160,7 +21160,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "j-and-t-br"
     },
     "trackingUrlTemplate": "https://www.jtexpress.com.br/trajectoryQuery?waybillNo={trackingNumber}&type=0",
     "linkRules": [

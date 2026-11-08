@@ -136,6 +136,21 @@ describe('tracking support context', () => {
     expect(trackingSupportGap('ZZTEST1234', 'unknown', null)).toEqual({});
   });
 
+  it('leaves the gap undecided when a carrier that could settle it failed its lookup in the check', () => {
+    const failed = (down: string[]) => (carrier: string) => down.includes(carrier);
+    // A shape GOFO and AliExpress both issue, filed under GOFO, which was rate limited.
+    expect(trackingSupportGap('GFUS01234567890123', 'gofo', null, failed(['gofo'])))
+      .toEqual({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });
+    // Filed under no carrier, any carrier of the shape could have settled it.
+    expect(trackingSupportGap('GFUS01234567890123', 'unknown', null, failed(['gofo'])))
+      .toEqual({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });
+    // The filed carrier answered and did not confirm it: another carrier's outage changes nothing.
+    expect(trackingSupportGap('GFUS01234567890123', 'gofo', null, failed(['aliexpress']))).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    // A carrier the shape does not fit settles nothing.
+    expect(trackingSupportGap('GFUS01234567890123', 'unknown', null, failed(['usps']))).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    expect(trackingSupportGap('GFUS01234567890123', 'gofo', 'gofo', failed(['gofo']))).toEqual({});
+  });
+
   it('keeps a generic postal match unresolved without assigning its issuer to a carrier', () => {
     expect(trackingSupportContext('RR123456785FI', 'intl-post')).toMatchObject({
       detection_carrier: 'intl-post', detection_confidence: 'high', reasons: ['generic_postal'],

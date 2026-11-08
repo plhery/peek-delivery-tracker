@@ -158,6 +158,30 @@ begin
 end;
 $$;
 
+-- A shape gap a carrier's outage left undecided opens no case on its own; an open case keeps it.
+do $$
+declare
+  case_id uuid;
+begin
+  assert public.record_tracking_support_observation('UNDECIDED1234', '{"configured_carrier":"synthetic-carrier", "reasons":[]}',
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"ambiguous_shape", "support_gap_undecided":true}',
+    '2026-10-04T10:00:00Z', 'attempt:a7100000-0000-4000-8000-000000000020') is null, 'An outage must not open a shape case';
+  case_id := public.record_tracking_support_observation('UNDECIDED1234', '{"configured_carrier":"synthetic-carrier", "reasons":[]}',
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"ambiguous_shape"}',
+    '2026-10-04T11:00:00Z', 'attempt:a7100000-0000-4000-8000-000000000021');
+  assert case_id is not null;
+  perform public.record_tracking_support_observation('UNDECIDED1234', '{"configured_carrier":"synthetic-carrier", "reasons":[]}',
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"ambiguous_shape", "support_gap_undecided":true}',
+    '2026-10-04T12:00:00Z', 'attempt:a7100000-0000-4000-8000-000000000022');
+  assert (select reasons = array['ambiguous_shape'] and seen_count = 2 from public.tracking_support_cases where id = case_id),
+    'An open case keeps the reason an outage left undecided';
+  -- With another reason of its own, the check opens its case as before.
+  assert public.record_tracking_support_observation('UNDECIDED5678', '{"configured_carrier":"synthetic-carrier", "reasons":["no_direct_adapter"]}',
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"ambiguous_shape", "support_gap_undecided":true}',
+    '2026-10-04T10:00:00Z', 'attempt:a7100000-0000-4000-8000-000000000023') is not null;
+end;
+$$;
+
 insert into public.sync_jobs(id, user_id, package_id, kind, state, locked_by, lease_until)
 values('a7100000-0000-4000-8000-000000000006', 'a7100000-0000-4000-8000-000000000001',
   'a7100000-0000-4000-8000-000000000002', 'package', 'running', 'support-worker', now() + interval '1 minute');

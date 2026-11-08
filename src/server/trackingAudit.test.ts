@@ -95,6 +95,21 @@ describe('tracking support audit persistence', () => {
     expect([step.step, (step.details as JsonObject).support_gap_reason]).toEqual(['complete', ...gap.length ? gap : [undefined]]);
   });
 
+  it('leaves the gap of a shape several carriers issue undecided while the filed carrier\'s lookup failed', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue(true);
+    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'GFUS01234567890123', 'gofo', 'pending', { trigger: 'added' });
+    await audit.start();
+    await audit.observeFetch(async () => {
+      reportTrackingLookup('gofo', 'error', 'rate_limited');
+      reportTrackingLookup('ParcelsApp', 'success');
+    });
+    audit.filed('gofo', null);
+    await audit.finish({ outcome: 'updated', sourceCarrier: 'unknown', evaluateHealth: false });
+    const [step] = (request.mock.calls[1][1] as { body: { p_steps: JsonObject[] } }).body.p_steps;
+    expect(step.details).toMatchObject({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });
+  });
+
   it('records a fallback success without losing the unresolved detection context', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue(true);

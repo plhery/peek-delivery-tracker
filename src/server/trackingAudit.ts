@@ -441,7 +441,7 @@ export class TrackingSyncAudit {
         outcome,
         ...completion.supportEvidence,
         ...trackingSupportGap(this.trackingNumber, this.#filed?.carrier ?? this.configuredCarrier,
-          this.#filed ? this.#filed.answeredBy : this.answeredBy),
+          this.#filed ? this.#filed.answeredBy : this.answeredBy, (carrier) => this.#lookups.get(carrier) === 'error'),
       });
     }
     const completedAt = new Date();

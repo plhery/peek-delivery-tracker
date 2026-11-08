@@ -204,7 +204,10 @@ carrier, or the carrier it handed the parcel to, tracked that number directly. N
 shape several carriers issue ambiguous once the parcel's carrier, one of them, confirmed
 the number directly. A check settles that at its end, from the carrier it filed the parcel
 under and the one that confirmed the number, so a first check that its carrier answers
-opens no case.
+opens no case. When the lookup of a carrier that could have settled it failed, rate limited
+or down (the filed carrier if the shape fits it, else any carrier the shape fits), the gap
+is undecided (`support_gap_undecided`): the check opens no case for it, and a case already
+open keeps it.
 
 Each check computes the shape and carrier reasons afresh and replaces them on its case.
 Recognition reasons from the Add sheet, gap evidence, and sightings older than the case's

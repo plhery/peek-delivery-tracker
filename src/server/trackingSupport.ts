@@ -65,10 +65,20 @@ export function trackingSupportStart(trackingNumber: string, configuredCarrier: 
   return context;
 }
 
-/** The ambiguous shape a check leaves, from the carrier it filed the parcel under and the one that confirmed the number. */
-export function trackingSupportGap(trackingNumber: string, filedCarrier: string, answeredBy: string | null): JsonObject {
-  return (trackingSupportContext(trackingNumber, filedCarrier, answeredBy).reasons as string[]).includes('ambiguous_shape')
-    ? { support_gap_reason: 'ambiguous_shape' } : {};
+/**
+ * The ambiguous shape a check leaves, from the carrier it filed the parcel under and the one that confirmed the number.
+ * When a carrier that could have settled it failed its lookup in the check (`failed`: rate limited or down), the
+ * filed one if the shape fits it, or else any the shape fits, the gap is undecided: such a check opens no case for
+ * it, the outage being health monitoring's, and a case already open keeps it.
+ */
+export function trackingSupportGap(
+  trackingNumber: string, filedCarrier: string, answeredBy: string | null, failed: (carrier: string) => boolean = () => false,
+): JsonObject {
+  const context = trackingSupportContext(trackingNumber, filedCarrier, answeredBy);
+  if (!(context.reasons as string[]).includes('ambiguous_shape')) return {};
+  const candidates = context.detection_candidates as string[];
+  const settling = candidates.includes(DETECTED_AS[filedCarrier] ?? filedCarrier) ? [filedCarrier] : candidates;
+  return { support_gap_reason: 'ambiguous_shape', ...(settling.some(failed) ? { support_gap_undecided: true } : {}) };
 }
 
 /** Whether the Add sheet's recognition asks the carrier over plain HTTP; any other it asks through a browser, if at all. */

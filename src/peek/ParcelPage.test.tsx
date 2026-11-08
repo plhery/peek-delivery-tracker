@@ -154,7 +154,7 @@ describe('ParcelPage', () => {
     expect(document.title).toMatch(/^For Mum · In transit/);
     // A name is the device's own: a viewer can give one too.
     expect(screen.getByRole('button', { name: 'Edit parcel name' })).toBeVisible();
-    expect(mocks.read).toHaveBeenCalledWith(LINK_ID, expect.objectContaining({ key: undefined }));
+    expect(mocks.read).toHaveBeenCalledWith(LINK_ID, expect.objectContaining({ key: null }));
   });
 
   it('shows a viewer no carrier link when the carrier has no page to type the number in', async () => {

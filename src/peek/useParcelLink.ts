@@ -4,7 +4,7 @@ import { parcelHasCarrierUpdate } from '../lib/parcelStatus';
 import { currentEvent, currentStage } from '../lib/stages';
 import type { TrackingEvent } from '../types';
 import { isWrappedGift, ParcelLinkError, readParcelLink, type ParcelLinkView } from './links';
-import { forgetRecent, recentFor, rememberParcel, useRecents } from './recents';
+import { forgetRecent, ownerKeyFor, recentFor, rememberParcel, useRecents } from './recents';
 import { hashWithoutOwnerKey, linkWordsFromHash, type LinkWords } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 
@@ -159,7 +159,7 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
       controller?.abort();
       const current = controller = new AbortController();
       try {
-        const result = await readParcelLink(linkId, { key: recentFor(linkId)?.key, signal: current.signal, advance, tellStopped: true, locale: language.current });
+        const result = await readParcelLink(linkId, { key: ownerKeyFor(linkId), signal: current.signal, advance, tellStopped: true, locale: language.current });
         if (disposed || current.signal.aborted) return false;
         if (result === 'unavailable') {
           // Nothing is left to follow, on the server or here.

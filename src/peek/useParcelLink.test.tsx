@@ -53,7 +53,7 @@ describe('useParcelLink', () => {
     expect(hook.result.current).toMatchObject({ status: 'ready', view: testView(), trouble: null, checking: false });
     expect(mocks.read).toHaveBeenCalledTimes(1);
     // The page asks to be told when a link's sharing was stopped.
-    expect(mocks.read).toHaveBeenLastCalledWith(LINK_ID, expect.objectContaining({ key: undefined, advance: false, tellStopped: true }));
+    expect(mocks.read).toHaveBeenLastCalledWith(LINK_ID, expect.objectContaining({ key: null, advance: false, tellStopped: true }));
     expect(recentFor(LINK_ID)).toMatchObject({ key: null, stage: 'in_transit' });
     const waits = [30_000, 60_000, 120_000, 240_000, 480_000, 600_000, 600_000];
     for (const [index, wait] of waits.entries()) {

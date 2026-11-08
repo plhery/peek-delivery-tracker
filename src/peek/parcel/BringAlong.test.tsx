@@ -181,6 +181,16 @@ describe('the device’s parcels to bring along', () => {
     expect(recentFor(OTHER_LINK_ID)).not.toBeNull();
   });
 
+  it('keep more than twenty parcels twenty to a request', async () => {
+    const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const ids = Array.from({ length: 25 }, (_, index) => `r7Qm2xHd9R${ALPHABET[Math.floor(index / 32)]}${ALPHABET[index % 32]}`);
+    for (const [index, id] of ids.entries()) rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: 10 + index });
+    mocks.claim.mockImplementation(async (links: { id: string }[]) => links.map(({ id }) => ({ id, outcome: 'kept', packageId: 'p1' })));
+    expect(await bringAlong(ids.map((id) => recentFor(id)!), auth)).toBe(25);
+    expect(mocks.claim.mock.calls.map(([links]) => links.length)).toEqual([20, 5]);
+    expect(ids.every((id) => recentFor(id) === null)).toBe(true);
+  });
+
   it('in the demo, skip a link that is gone, count a parcel the demo already has, and fall back to the device’s last answer', async () => {
     const repo = createDemoRepo(window.localStorage);
     renameParcel(LINK_ID, null);

@@ -152,6 +152,11 @@ Key server modules:
     public routes; it becomes the parcel's label only when the parcel is kept in an account.
     "Forget it now" deletes the link on the server and the device's copy; keeping a parcel
     in an account drops the device's copy too.
+  - The list holds twenty links, and up to sixty of the browser's own lookups: links opened
+    from someone else make way first. A saved parcel the browser can't read, such as one
+    another version wrote, stays with its id and owner key: it isn't listed, its link gets
+    the key back when it is read again, and forgetting all the device's parcels forgets it on
+    the server too. Bringing parcels into an account sends twenty to a request.
   - The iPhone and Android apps keep the owner keys apart from the last answers, which only
     show what was last known. An answer the app can't read, such as one another version
     wrote, is read again with its key, without the name given on the device; a key goes only

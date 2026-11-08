@@ -2,7 +2,7 @@ import { isActiveParcel, nextPriorityParcel } from '../../lib/parcelPriority';
 import { isFinal } from '../../lib/stages';
 import { forgetParcelLink, ParcelLinkError, readParcelLink } from '../links';
 import { journeyEndedBefore } from '../parcel/summary';
-import { forgetRecent, rememberParcel, type RecentParcel } from '../recents';
+import { forgetRecent, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
 
 /** How long an answer is fresh enough for the list: a parcel on its way moves, one that arrived rests. */
 const FRESH_MS = 5 * 60_000;
@@ -116,12 +116,15 @@ export function watchDeviceParcels(parcels: () => readonly RecentParcel[]): () =
 
 /**
  * Forgets the device's parcels: on the server where this device made the
- * lookup and holds its key, then on the device. Returns how many could not be
- * forgotten; those stay listed.
+ * lookup and holds its key, then on the device. The parcels the device holds
+ * the key of but cannot list go too. Returns how many could not be forgotten;
+ * those stay.
  */
 export async function forgetDeviceParcels(recents: readonly RecentParcel[]): Promise<number> {
   let kept = 0;
-  for (const recent of recents) {
+  const listed = new Set(recents.map((recent) => recent.id));
+  const parcels = [...recents, ...strandedParcels().filter((stranded) => !listed.has(stranded.id))];
+  for (const recent of parcels) {
     try {
       if (recent.key) await forgetParcelLink(recent.id, recent.key);
       forgetRecent(recent.id);

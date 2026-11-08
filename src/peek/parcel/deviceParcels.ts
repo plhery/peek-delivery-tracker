@@ -39,18 +39,24 @@ export function bringable(recents: readonly RecentParcel[], pendingId: string | 
   return recents.filter((recent) => !!recent.key && recent.id !== pendingId && !offered.has(recent.id));
 }
 
+/** How many parcels one request keeps at most. */
+const CLAIM_BATCH = 20;
+
 /**
- * Keeps several of the device's parcels in the account with one request. A
- * parcel the account now has leaves the device; the count is how many joined
- * or were there already.
+ * Keeps several of the device's parcels in the account, twenty to a request. A
+ * parcel the account now has leaves the device as soon as its request answers;
+ * the count is how many joined or were there already.
  */
 export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth): Promise<number> {
-  const results = await claimParcelLinks(parcels.map(({ id, key, name }) => ({ id, key, label: name })), auth, auth.signal);
   let brought = 0;
-  for (const result of results) {
-    if (result.outcome !== 'kept' && result.outcome !== 'already') continue;
-    forgetRecent(result.id);
-    brought += 1;
+  for (let start = 0; start < parcels.length; start += CLAIM_BATCH) {
+    const batch = parcels.slice(start, start + CLAIM_BATCH);
+    const results = await claimParcelLinks(batch.map(({ id, key, name }) => ({ id, key, label: name })), auth, auth.signal);
+    for (const result of results) {
+      if (result.outcome !== 'kept' && result.outcome !== 'already') continue;
+      forgetRecent(result.id);
+      brought += 1;
+    }
   }
   return brought;
 }

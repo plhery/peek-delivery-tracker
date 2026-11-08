@@ -1,12 +1,13 @@
+import { renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../../test/parcelLinks';
 import type { EventPlace, ParcelWithEvents, Stage } from '../../types';
 import { ParcelLinkError } from '../links';
-import { forgetAllRecents, recentFor, rememberParcel, type RecentParcel } from '../recents';
-import { forgetDeviceChecks, leadParcel, watchDeviceParcels } from './deviceList';
+import { forgetAllRecents, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
+import { forgetDeviceChecks, forgetDeviceParcels, leadParcel, watchDeviceParcels } from './deviceList';
 
-const mocks = vi.hoisted(() => ({ read: vi.fn() }));
-vi.mock('../links', async (original) => ({ ...await original<typeof import('../links')>(), readParcelLink: mocks.read }));
+const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn() }));
+vi.mock('../links', async (original) => ({ ...await original<typeof import('../links')>(), readParcelLink: mocks.read, forgetParcelLink: mocks.forget }));
 
 const THIRD_LINK_ID = 'p5Rt9wJq2LbX';
 const zurich: EventPlace = { latitude: 47.38, longitude: 8.54, precision: 'city', country: 'CH', name: 'Zürich' };
@@ -155,5 +156,40 @@ describe('watchDeviceParcels', () => {
     window.dispatchEvent(new Event('online'));
     await pass(60 * MINUTE);
     expect(mocks.read).toHaveBeenCalledOnce();
+  });
+});
+
+describe('forgetDeviceParcels', () => {
+  const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+  const shared = (index: number) => `q7Qm2xHd9R${ALPHABET[Math.floor(index / 32)]}${ALPHABET[index % 32]}`;
+  beforeEach(() => { mocks.forget.mockReset(); mocks.forget.mockResolvedValue(undefined); });
+  afterEach(() => { forgetAllRecents(); forgetDeviceChecks(); });
+
+  it('forgets on the server a lookup that twenty newer links did not push out, and one saved in a way it cannot read', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now });
+    for (let index = 0; index < MAX_RECENTS + 3; index += 1) {
+      rememberParcel({ id: shared(index), view: testView({ id: shared(index), owner: false }), now: now + 1 + index });
+    }
+    // A parcel another version saved: its answer cannot be read here, its link and key can.
+    const saved = JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!) as object[];
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([...saved, { id: THIRD_LINK_ID, key: OWNER_KEY, snapshot: null }]));
+    const { result } = renderHook(() => useRecents());
+    expect(result.current).toHaveLength(MAX_RECENTS);
+    expect(strandedParcels()).toEqual([{ id: THIRD_LINK_ID, key: OWNER_KEY }]);
+
+    await expect(forgetDeviceParcels(result.current)).resolves.toBe(0);
+    expect(mocks.forget.mock.calls).toEqual([[LINK_ID, OWNER_KEY], [THIRD_LINK_ID, OWNER_KEY]]);
+    expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
+  });
+
+  it('keeps what the server could not forget', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now });
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([
+      ...JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!) as object[], { id: THIRD_LINK_ID, key: OWNER_KEY },
+    ]));
+    mocks.forget.mockImplementation(async (id: string) => { if (id === THIRD_LINK_ID) throw new ParcelLinkError('offline'); });
+    await expect(forgetDeviceParcels([recentFor(LINK_ID)!])).resolves.toBe(1);
+    expect(recentFor(LINK_ID)).toBeNull();
+    expect(strandedParcels()).toEqual([{ id: THIRD_LINK_ID, key: OWNER_KEY }]);
   });
 });

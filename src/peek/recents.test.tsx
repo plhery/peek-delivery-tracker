@@ -4,11 +4,14 @@ import {
   cleanParcelName,
   forgetAllRecents,
   forgetRecent,
+  MAX_OWNED,
   MAX_RECENTS,
+  ownerKeyFor,
   recentFor,
   RECENTS_STORAGE_KEY,
   rememberParcel,
   renameParcel,
+  strandedParcels,
   useRecents,
 } from './recents';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
@@ -68,6 +71,63 @@ describe('the parcels of this device', () => {
     act(() => forgetAllRecents());
     expect(result.current).toEqual([]);
     expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
+  });
+
+  it('keeps its own lookups when newer links push the list past twenty: links opened from someone else make way', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), name: 'Coffee beans', now: NOW });
+    for (let index = 0; index < MAX_RECENTS + 5; index += 1) {
+      rememberParcel({ id: id(index), view: testView({ id: id(index), owner: false }), now: NOW + 1 + index });
+    }
+    const { result } = renderHook(() => useRecents());
+    expect(result.current).toHaveLength(MAX_RECENTS);
+    expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, name: 'Coffee beans' });
+    expect(result.current.at(-1)!.id).toBe(LINK_ID);
+    // The oldest links opened from someone else went: nineteen of them stay beside the lookup.
+    expect(result.current.filter((recent) => !recent.key).map((recent) => recent.id)).toEqual(
+      Array.from({ length: MAX_RECENTS - 1 }, (_, index) => id(MAX_RECENTS + 4 - index)),
+    );
+  });
+
+  it('keeps up to sixty lookups of its own, and no link opened from someone else once they fill twenty', () => {
+    rememberParcel({ id: OTHER_LINK_ID, view: testView({ id: OTHER_LINK_ID, owner: false }), now: NOW + 1_000 });
+    for (let index = 0; index < MAX_OWNED + 2; index += 1) {
+      rememberParcel({ id: id(index), key: OWNER_KEY, view: testView({ id: id(index) }), now: NOW + index });
+    }
+    const { result } = renderHook(() => useRecents());
+    expect(result.current).toHaveLength(MAX_OWNED);
+    expect(result.current.every((recent) => recent.key === OWNER_KEY)).toBe(true);
+    expect(result.current.at(-1)!.id).toBe(id(2));
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
+  });
+
+  it('keeps the owner key of a parcel saved in a way it cannot read, and gives it back when the link answers again', () => {
+    const unreadable = { ...validRecent(), id: LINK_ID, key: OWNER_KEY, name: 'Coffee beans', snapshot: { version: 2 } };
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([unreadable, validRecent()]));
+    const { result } = renderHook(() => useRecents());
+    expect(result.current.map((recent) => recent.id)).toEqual([OTHER_LINK_ID]);
+    expect(strandedParcels()).toEqual([{ id: LINK_ID, key: OWNER_KEY }]);
+    expect(ownerKeyFor(LINK_ID)).toBe(OWNER_KEY);
+    // Another parcel's answer is saved: the unreadable one stays as it was.
+    act(() => renameParcel(OTHER_LINK_ID, 'Shoes'));
+    expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)).toContainEqual(unreadable);
+    // Its link answers: the parcel is listed again, with its key.
+    act(() => rememberParcel({ id: LINK_ID, view: testView(), now: NOW }));
+    expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY });
+    expect(strandedParcels()).toEqual([]);
+    expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)).toHaveLength(2);
+  });
+
+  it('keeps the owner keys a list that is no longer JSON still shows, until the parcel is forgotten', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: NOW });
+    rememberParcel({ id: OTHER_LINK_ID, view: testView({ id: OTHER_LINK_ID, owner: false }), now: NOW + 1 });
+    localStorage.setItem(RECENTS_STORAGE_KEY, localStorage.getItem(RECENTS_STORAGE_KEY)!.slice(0, -40));
+    expect(recentFor(LINK_ID)).toBeNull();
+    expect(strandedParcels()).toEqual([{ id: LINK_ID, key: OWNER_KEY }]);
+    rememberParcel({ id: id(1), view: testView({ id: id(1), owner: false }), now: NOW + 2 });
+    expect(ownerKeyFor(LINK_ID)).toBe(OWNER_KEY);
+    forgetRecent(LINK_ID);
+    expect(ownerKeyFor(LINK_ID)).toBeNull();
+    expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!).map((recent: { id: string }) => recent.id)).toEqual([id(1)]);
   });
 
   it('returns the same list while nothing changes, and follows another tab', () => {

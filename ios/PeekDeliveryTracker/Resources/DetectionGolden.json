@@ -88609,6 +88609,17 @@
     ]
   },
   {
+    "input": "MGP9999999999980",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gofo"
+    ],
+    "asked": [
+      "gofo"
+    ]
+  },
+  {
     "input": "MGT00125027683",
     "carrier": "unknown",
     "confidence": "none",

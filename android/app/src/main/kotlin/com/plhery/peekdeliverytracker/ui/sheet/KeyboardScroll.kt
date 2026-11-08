@@ -25,7 +25,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -88,7 +87,7 @@ internal fun KeyboardScrollColumn(
     Column(
         modifier
             .onGloballyPositioned { keyboard.place(it) }
-            .then(if (drag != null) Modifier.nestedScroll(drag) else Modifier)
+            .then(if (drag != null) Modifier.keyboardDrag(drag) else Modifier)
             .verticalScroll(scroll)
             .onFocusedBoundsChanged { keyboard.focused = it }
             .then(KeyboardRoom(keyboard, ime, bottom))

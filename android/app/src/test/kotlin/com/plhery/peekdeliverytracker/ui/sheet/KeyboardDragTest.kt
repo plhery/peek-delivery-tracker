@@ -24,7 +24,9 @@ import org.junit.runner.RunWith
  * A drag of what scrolls takes the keyboard with the finger (`.scrollDismissesKeyboard(.interactively)`), through the
  * window's control of its insets: it follows the finger down and back up, and let go ends shown or hidden. Once what
  * scrolls has left, as a sheet closing under the finger does, the window's answers that come after are let go without
- * throwing, and a controller handed then is finished at once where the keyboard stands, not left half way.
+ * throwing, and a controller handed then is finished at once where the keyboard stands, not left half way. A scroll
+ * with no finger on what scrolls (a field brought into view) leaves the keyboard alone, and a controller that comes
+ * once the finger has lifted is given back at once: the keyboard is never left in the app's hands.
  */
 @RunWith(AndroidJUnit4::class)
 class KeyboardDragTest {
@@ -107,6 +109,7 @@ class KeyboardDragTest {
     @Test
     fun theKeyboardFollowsTheFingerDownAndBackUpAndLetGoEndsShown() = runTest(Frames()) {
         shown = true
+        drag.pressed = true
         // Down 30: taken while the controller comes.
         assertEquals(Offset(0f, 30f), drag.onPreScroll(Offset(0f, 30f), NestedScrollSource.UserInput))
         val controller = Controller(bottom = 600)
@@ -119,10 +122,38 @@ class KeyboardDragTest {
         assertEquals(Offset(0f, -10f), drag.onPostScroll(Offset.Zero, Offset(0f, -10f), NestedScrollSource.UserInput))
         assertEquals(570, controller.currentInsets.bottom)
         // Let go nearer shown: it springs up and is finished shown.
+        drag.pressed = false
         assertEquals(Velocity.Zero, drag.onPreFling(Velocity.Zero))
         drag.onPostFling(Velocity.Zero, Velocity.Zero)
         assertEquals(600, controller.currentInsets.bottom)
         assertEquals(listOf(true), controller.finished)
         assertEquals(1, asked.size)
+    }
+
+    @Test
+    fun aScrollWithNoFingerOnWhatScrollsLeavesTheKeyboardAlone() = runTest {
+        shown = true
+        // A field brought into view above the keyboard, which Compose hands on as a drag: what scrolls takes it all.
+        assertEquals(Offset.Zero, drag.onPreScroll(Offset(0f, 30f), NestedScrollSource.UserInput))
+        assertEquals(Offset.Zero, drag.onPostScroll(Offset.Zero, Offset(0f, -30f), NestedScrollSource.UserInput))
+        assertTrue(asked.isEmpty())
+    }
+
+    @Test
+    fun aControllerThatComesOnceTheFingerHasLiftedIsGivenBackAtOnce() = runTest {
+        shown = true
+        drag.pressed = true
+        assertEquals(Offset(0f, 30f), drag.onPreScroll(Offset(0f, 30f), NestedScrollSource.UserInput))
+        // Let go still before the window answers: nothing waits for the keyboard.
+        drag.pressed = false
+        assertEquals(Velocity.Zero, drag.onPreFling(Velocity.Zero))
+        assertEquals(Velocity.Zero, drag.onPostFling(Velocity.Zero, Velocity.Zero))
+        val late = Controller(bottom = 600)
+        asked.single().onReady(late, WindowInsets.Type.ime())
+        assertEquals(listOf(true), late.finished)
+        // The next drag asks again: nothing was kept.
+        drag.pressed = true
+        assertEquals(Offset(0f, 30f), drag.onPreScroll(Offset(0f, 30f), NestedScrollSource.UserInput))
+        assertEquals(2, asked.size)
     }
 }

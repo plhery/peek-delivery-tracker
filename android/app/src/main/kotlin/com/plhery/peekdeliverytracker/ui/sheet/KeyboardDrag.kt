@@ -18,7 +18,10 @@
  * the fling's spline is Compose Animation's `SplineBasedFloatDecayAnimationSpec` rather than a copy of it; and once
  * disposed it hands what waits for a controller back once and forgets it, ignores the system's callbacks after it, and
  * finishes at once a controller that comes then. Compose's resumed the wait without forgetting it, so a controller
- * that came after its modifier had left (a sheet dragged as it closed) resumed it again and threw.
+ * that came after its modifier had left (a sheet dragged as it closed) resumed it again and threw. Only a finger on
+ * what scrolls moves the keyboard ([keyboardDrag]): Compose hands a field brought into view on as a drag too, which
+ * took control of the keyboard, slid it part way down and kept it there. A controller that comes once the finger has
+ * lifted with nothing waiting for it is finished at once, never kept.
  */
 package com.plhery.peekdeliverytracker.ui.sheet
 
@@ -29,6 +32,8 @@ import android.view.WindowInsetsAnimationController
 import androidx.compose.animation.SplineBasedFloatDecayAnimationSpec
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateDecay
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.isImeVisible
@@ -37,9 +42,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
@@ -58,7 +67,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun rememberKeyboardDrag(): NestedScrollConnection {
+internal fun rememberKeyboardDrag(): KeyboardDrag {
     val view = LocalView.current
     val density = LocalDensity.current
     val shown by rememberUpdatedState(WindowInsets.isImeVisible)
@@ -70,6 +79,26 @@ internal fun rememberKeyboardDrag(): NestedScrollConnection {
     DisposableEffect(drag) { onDispose(drag::dispose) }
     return drag
 }
+
+/**
+ * What scrolls, [drag] on its nested scroll, and the fingers on it watched for it ([KeyboardDrag.pressed]) without
+ * taking them: a scroll with no finger on it, a field brought into view, leaves the keyboard alone.
+ */
+internal fun Modifier.keyboardDrag(drag: KeyboardDrag): Modifier = this
+    .pointerInput(drag) {
+        awaitEachGesture {
+            awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+            drag.pressed = true
+            try {
+                do {
+                    val event = awaitPointerEvent(PointerEventPass.Initial)
+                } while (event.changes.any { it.pressed })
+            } finally {
+                drag.pressed = false
+            }
+        }
+    }
+    .nestedScroll(drag)
 
 /**
  * The keyboard moved by the scroll it is handed: a drag down moves it down before what scrolls takes the drag, a drag
@@ -103,6 +132,12 @@ internal class KeyboardDrag(
     /** What scrolls has left: nothing is asked, moved or waited for after. */
     private var disposed = false
 
+    /**
+     * Whether a finger is on what scrolls ([keyboardDrag]): only its drag moves the keyboard, not a scroll what scrolls
+     * makes itself, which Compose hands on as a drag too (a field brought into view).
+     */
+    var pressed = false
+
     private fun request() {
         if (requested || disposed) return
         requested = true
@@ -128,6 +163,7 @@ internal class KeyboardDrag(
 
     /** Moves the keyboard by `amount`, up where positive, and returns what it took of `available`. */
     private fun scroll(available: Offset, amount: Float): Offset {
+        if (!pressed) return Offset.Zero
         animation?.cancel()
         animation = null
         val controller = controller
@@ -222,7 +258,9 @@ internal class KeyboardDrag(
 
     override fun onReady(controller: WindowInsetsAnimationController, types: Int) {
         requested = false
-        if (disposed) {
+        // Once what scrolls has left, or once the finger has lifted with no fling waiting for it: nothing would finish
+        // it, and the keyboard would stay in the app's hands.
+        if (disposed || (!pressed && waiting == null)) {
             leave(controller)
             return
         }

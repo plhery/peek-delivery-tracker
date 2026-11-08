@@ -49899,6 +49899,221 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://ndsweb.tmwcloud.com/trace/external.msw"
+  },
+  "best-express-kh": {
+    "displayName": "BEST Express Cambodia",
+    "aliases": [
+      "BEST Express KH",
+      "BEST Inc (KH)",
+      "BEST Express (Cambodia)"
+    ],
+    "countries": [
+      "KH"
+    ],
+    "color": "#d80c18",
+    "selectable": true,
+    "timezone": "Asia/Phnom_Penh",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://kh.best-inc.com/track?bills={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "kh.best-inc.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "bills",
+          "waybill"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://kh.best-inc.com/track"
+  },
+  "best-express-sg": {
+    "displayName": "BEST Express Singapore",
+    "aliases": [
+      "BEST Express SG",
+      "BEST Inc (SG)",
+      "BEST Logistics Technology (Singapore)"
+    ],
+    "countries": [
+      "SG"
+    ],
+    "color": "#d80c18",
+    "selectable": true,
+    "timezone": "Asia/Singapore",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.best-inc.sg/track?bills={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "best-inc.sg",
+          "www.best-inc.sg"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "bills",
+          "waybill"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.best-inc.sg/track"
+  },
+  "first-logistics": {
+    "displayName": "First Logistics",
+    "aliases": [
+      "PT. Synergy First Logistics",
+      "PT Synergy First Logistics"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#ff6600",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.firstlogistics.co.id/trace/"
+  },
+  "flash-express-la": {
+    "displayName": "Flash Express Laos",
+    "aliases": [
+      "Flash Express (LA)",
+      "Flash Express LA",
+      "Flash Express Lao Sole Co., Ltd.",
+      "Flash Express (Laos) Company Limited",
+      "ແຟັຣດ ເອັກເພສ໌"
+    ],
+    "countries": [
+      "LA"
+    ],
+    "color": "#ffea33",
+    "selectable": true,
+    "timezone": "Asia/Vientiane",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.flashexpress.la/fle/tracking?se={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "flashexpress.la",
+          "www.flashexpress.la"
+        ],
+        "pathPattern": "^/(?:(?:en|la|zh|th|ms)/)?(?:fle/)?tracking/?$",
+        "params": [
+          "se"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.flashexpress.la/fle/tracking"
+  },
+  "j-and-t-co": {
+    "displayName": "J&T Express Colombia",
+    "aliases": [
+      "J&T Express (CO)",
+      "J&T Express CO",
+      "J&T Colombia"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#e60000",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.jtexpress.co",
+          "jtexpress.co"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "q"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jtexpress.co/tracking"
+  },
+  "kyrgyz-express-post": {
+    "displayName": "Kyrgyz Express Post",
+    "aliases": [
+      "Kyrgyz Express Post LLC",
+      "Кыргыз Express Post"
+    ],
+    "countries": [
+      "KG"
+    ],
+    "color": "#1680bd",
+    "selectable": true,
+    "timezone": "Asia/Bishkek",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://kep.kg/en/Tracking"
+  },
+  "wmg-group": {
+    "displayName": "WMG",
+    "aliases": [
+      "WMG Group",
+      "WMG Pte Ltd"
+    ],
+    "countries": [
+      "SG"
+    ],
+    "color": "#123053",
+    "selectable": true,
+    "timezone": "Asia/Singapore",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.wmg-group.com/"
+  },
+  "yto-ph": {
+    "displayName": "YTO Express Philippines",
+    "aliases": [
+      "YTO Express (PH)",
+      "YTO Express PH",
+      "YTO Express (Philippines) Technology Group Corporation"
+    ],
+    "countries": [
+      "PH"
+    ],
+    "color": "#47086c",
+    "selectable": true,
+    "timezone": "Asia/Manila",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.yto.com.ph/trackTrace"
   }
 } as const;
 
@@ -51332,7 +51547,15 @@ export const CARRIER_IDS = [
   "skynet-my",
   "hub-delivery",
   "kuqi",
-  "national-delivery-systems"
+  "national-delivery-systems",
+  "best-express-kh",
+  "best-express-sg",
+  "first-logistics",
+  "flash-express-la",
+  "j-and-t-co",
+  "kyrgyz-express-post",
+  "wmg-group",
+  "yto-ph"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

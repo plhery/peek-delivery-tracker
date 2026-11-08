@@ -2792,6 +2792,103 @@ extension SessionIsolationTests {
         XCTAssertEqual(store.parcels.map(\.id), [parcel.id])
     }
 
+    /// Starts a check of every parcel and waits for the outcome the store reports once it is done.
+    @MainActor private func refreshOutcome(_ store: ParcelStore) async throws -> ParcelStore.RefreshResult? {
+        let previous = store.refreshOutcome?.id
+        let finished = expectation(description: "Refresh finished")
+        finished.assertForOverFulfill = false
+        let observation = store.$refreshOutcome.sink { if let outcome = $0, outcome.id != previous { finished.fulfill() } }
+        defer { observation.cancel() }
+        let start = try await store.refreshAll()
+        XCTAssertEqual(start, .queued)
+        await fulfillment(of: [finished], timeout: 2)
+        return store.refreshOutcome?.result
+    }
+
+    /// The checks can succeed just as the connection drops: the list read after them failing is a failed refresh,
+    /// not "No new updates" beside the warning.
+    @MainActor func testRefreshSaysUnchangedOnlyAfterReadingTheListAndFailsWhenTheReadFails() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let job = UUID()
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [parcel()]))
+        respond(list)
+        await store.load()
+        let queued = try JSONEncoder.deliveryTracker.encode(QueueResponse(queued: true, pending: 1, jobIDs: [job]))
+        let jobs = try JSONEncoder.deliveryTracker.encode(SyncJobListResponse(jobs: [
+            SyncJobResponse(id: job, status: .succeeded, requestedAt: "2026-09-25T10:00:00Z"),
+        ]))
+        nonisolated(unsafe) var listAnswer: Result<(Int, Data), Error> = .success((200, list))
+        SessionTestURLProtocol.handler = { request, callback in
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/api/sync"): callback(.success((202, queued)))
+            case ("GET", "/api/sync/jobs"): callback(.success((200, jobs)))
+            default: callback(listAnswer)
+            }
+        }
+        // The same list, read again, has nothing new.
+        let unchanged = try await refreshOutcome(store)
+        XCTAssertEqual(unchanged, .unchanged)
+        XCTAssertNil(store.errorMessage)
+
+        listAnswer = .failure(URLError(.notConnectedToInternet))
+        let failed = try await refreshOutcome(store)
+        let message = try XCTUnwrap(store.errorMessage)
+        XCTAssertEqual(failed, .failed(message))
+        XCTAssertFalse(store.refreshing)
+    }
+
+    /// A read that lands while the refresh's own is on its way has the list, so the refresh's answer is set aside:
+    /// it was not compared, so it is not "No new updates".
+    @MainActor func testRefreshWhoseReadIsSetAsideIsStillChecking() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let job = UUID()
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [parcel()]))
+        respond(list)
+        await store.load()
+        let queued = try JSONEncoder.deliveryTracker.encode(QueueResponse(queued: true, pending: 1, jobIDs: [job]))
+        let jobs = try JSONEncoder.deliveryTracker.encode(SyncJobListResponse(jobs: [
+            SyncJobResponse(id: job, status: .succeeded, requestedAt: "2026-09-25T10:00:00Z"),
+        ]))
+        let refreshRead = expectation(description: "The refresh read the list")
+        nonisolated(unsafe) var completeRefreshRead: ((Result<(Int, Data), Error>) -> Void)?
+        nonisolated(unsafe) var reads = 0
+        SessionTestURLProtocol.handler = { request, callback in
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/api/sync"): callback(.success((202, queued)))
+            case ("GET", "/api/sync/jobs"): callback(.success((200, jobs)))
+            default:
+                reads += 1
+                if reads == 1 {
+                    completeRefreshRead = callback
+                    refreshRead.fulfill()
+                } else { callback(.success((200, list))) }
+            }
+        }
+        let finished = expectation(description: "Refresh finished")
+        let observation = store.$refreshOutcome.dropFirst().sink { if $0 != nil { finished.fulfill() } }
+        defer { observation.cancel() }
+        let start = try await store.refreshAll()
+        XCTAssertEqual(start, .queued)
+        await fulfillment(of: [refreshRead], timeout: 2)
+        // A poll reads the list meanwhile and lands first.
+        await store.load()
+        completeRefreshRead?(.success((200, list)))
+        await fulfillment(of: [finished], timeout: 2)
+        XCTAssertEqual(store.refreshOutcome?.result, .stillChecking)
+        XCTAssertFalse(store.refreshing)
+        XCTAssertNil(store.errorMessage)
+    }
+
     func testRefreshReportsNewTrackingOnlyWhenTheTimelineStatusOrDeliveryDateChanged() {
         let checked = parcel()
         var rechecked = checked

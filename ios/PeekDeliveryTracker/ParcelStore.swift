@@ -34,6 +34,10 @@ final class ParcelStore: ObservableObject {
         let result: RefreshResult
     }
 
+    /// How a read of the account's list ended. `skipped`: nothing was read or the answer was set aside,
+    /// because a change was made meanwhile, a newer read began or the account changed.
+    private enum LoadOutcome { case loaded, failed(String), skipped }
+
     /// Live Activities are switched off: the store ends any still showing and withdraws this
     /// iPhone's registration, so the server starts no more. `NSSupportsLiveActivities` in
     /// Info.plist is off with it, so iOS shows no switch for them either: turn both on together.
@@ -319,7 +323,13 @@ final class ParcelStore: ObservableObject {
 
     func load(showSpinner: Bool = false) async {
         if isGuest { await loadDeviceParcels(); return }
-        guard session.isAuthenticated else { return }
+        await loadAccountParcels(showSpinner: showSpinner)
+    }
+
+    /// Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read.
+    @discardableResult
+    private func loadAccountParcels(showSpinner: Bool) async -> LoadOutcome {
+        guard session.isAuthenticated else { return .skipped }
         let generation = session.generation
         let revision = mutationRevision
         let ownerID = session.user?.id
@@ -330,7 +340,7 @@ final class ParcelStore: ObservableObject {
         do {
             let next = try await list()
             try session.checkGeneration(generation)
-            guard revision == mutationRevision, sequence == loadSequence, pendingMutations.isEmpty else { return }
+            guard revision == mutationRevision, sequence == loadSequence, pendingMutations.isEmpty else { return .skipped }
             holdingDeliverySurfaces = false
             showingSavedParcels = false
             let changed = next != parcels
@@ -348,10 +358,11 @@ final class ParcelStore: ObservableObject {
             if errorMessage != nil { errorMessage = nil }
             if authenticationRequired { authenticationRequired = false }
             if usingCachedData { usingCachedData = false }
+            return .loaded
         } catch {
             guard (try? session.checkGeneration(generation)) != nil,
                   revision == mutationRevision, sequence == loadSequence,
-                  !(error is CancellationError) else { return }
+                  !(error is CancellationError) else { return .skipped }
             let message = localizer.errorMessage(error)
             if errorMessage != message { errorMessage = message }
             var expired = false
@@ -363,6 +374,7 @@ final class ParcelStore: ObservableObject {
             } else if showingSavedParcels, !usingCachedData {
                 usingCachedData = true
             }
+            return .failed(message)
         }
     }
 
@@ -723,8 +735,13 @@ final class ParcelStore: ObservableObject {
         do {
             try await api.waitForJobs(jobIDs)
             try session.checkGeneration(generation)
-            await load(showSpinner: false)
-            result = Parcel.trackingChanged(from: before, to: parcels) ? .updated : .unchanged
+            switch await loadAccountParcels(showSpinner: false) {
+            case .loaded: result = Parcel.trackingChanged(from: before, to: parcels) ? .updated : .unchanged
+            // The checks are done but the list could not be read: they are not "no new updates".
+            case .failed(let message): result = .failed(message)
+            // A newer read, or the next one after a change made meanwhile, shows what the checks found.
+            case .skipped: result = .stillChecking
+            }
         } catch DeliveryAPIError.refreshTimeout {
             // The checks keep running; their results arrive with a later load.
             result = .stillChecking

@@ -152,9 +152,10 @@ class OkHttpTransportTest {
 
     @Test
     fun theTimeoutIsForEachWaitNotTheWholeAnswer() {
-        // Ten bytes, one every 100 ms: a second in all, three times the timeout, never a wait as long as it.
-        server.enqueue(MockResponse.Builder().body("0123456789").throttleBody(1, 100, TimeUnit.MILLISECONDS).build())
-        assertEquals("0123456789", send(HttpRequest(url(), timeout = 0.35)).body.decodeToString())
+        // Ten bytes, one every 200 ms: two seconds in all, twice the timeout, while each wait keeps a fifth of it, so a
+        // busy test machine's pause between two reads can't use it up.
+        server.enqueue(MockResponse.Builder().body("0123456789").throttleBody(1, 200, TimeUnit.MILLISECONDS).build())
+        assertEquals("0123456789", send(HttpRequest(url(), timeout = 1.0)).body.decodeToString())
     }
 
     @Test

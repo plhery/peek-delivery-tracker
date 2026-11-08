@@ -90,8 +90,9 @@ describe('what a place shows', () => {
     expect(shows({ ...installed, thanksClosed: true })).toBeNull();
     // Snoozed or not, the invitation is over.
     expect(shows({ ...installed, thanked: PAGE_START - 1, hiddenUntil: 0 })).toBeNull();
-    // The first two steps alone keep it coming.
+    // The first two steps alone keep it coming, and so does an install without the group, which could not work.
     expect(shows({ steps: { group: true, optIn: true } })).toBe('invite');
+    expect(shows({ steps: { optIn: true, install: true } })).toBe('invite');
   });
 });
 

@@ -95,8 +95,9 @@ export interface AndroidTestNote {
 export type AndroidTestShows = 'invite' | 'thanks' | null;
 
 /**
- * What a place shows: the invitation; once the install link was followed, the thanks, for the rest of the page load
- * it first shows on and until it is closed (only where `thanks` is drawn); or nothing.
+ * What a place shows: the invitation; once the install link was followed after the group's, the thanks, for the
+ * rest of the page load it first shows on and until it is closed (only where `thanks` is drawn); or nothing. An
+ * install without the group could not have worked, so it is invited again.
  */
 export function androidTestShows(note: AndroidTestNote, { open, device, now, pageStart, thanks }: {
   open: boolean;
@@ -107,7 +108,7 @@ export function androidTestShows(note: AndroidTestNote, { open, device, now, pag
   thanks: boolean;
 }): AndroidTestShows {
   if (!open || !device || note.never || note.app) return null;
-  if (note.steps?.install) {
+  if (note.steps?.group && note.steps.install) {
     return thanks && !note.thanksClosed && (note.thanked === undefined || note.thanked >= pageStart) ? 'thanks' : null;
   }
   return (note.hiddenUntil ?? 0) > now ? null : 'invite';

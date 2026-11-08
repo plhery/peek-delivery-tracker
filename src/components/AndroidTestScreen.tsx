@@ -26,8 +26,9 @@ const nothing = () => null;
 
 /**
  * Peek for Android's three steps, at `/android`: join the testers' group, become a tester on Google Play, install.
- * Each opens Google's page in a new tab, so Back returns here, where the next step then leads. Anyone who reaches
- * the page sees it, on any device: a computer can join and opt in for the phone's Google account too.
+ * Each opens Google's page in a new tab, so Back returns here, where the next step then leads. Google Play lets in
+ * only the group's members, so the last two steps stay locked until the group's link was followed. Anyone who
+ * reaches the page sees it, on any device: a computer can join and opt in for the phone's Google account too.
  */
 export function AndroidTestScreen({ initialLocale, initialMessages }: { initialLocale?: Locale; initialMessages?: Messages }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
@@ -48,8 +49,10 @@ function AndroidTest() {
   // The button goes as it is pressed: the focus moves to what it did.
   useEffect(() => { if (declined) said.current?.focus(); }, [declined]);
 
+  // Google Play turns away anyone outside the group: until its link was followed, it leads and the others wait.
+  const joined = !!note?.steps?.group;
   // The first step not taken yet leads; once all are, none does.
-  const next = note ? STEPS.find(({ step }) => !note.steps?.[step])?.step : 'group';
+  const next = joined ? STEPS.find(({ step }) => !note?.steps?.[step])?.step : 'group';
   function back(event: MouseEvent<HTMLAnchorElement>) {
     // Back where the visitor came from on this site, as it was left; anyone else goes to the home page.
     if (history.length > 1 && document.referrer.startsWith(`${location.origin}/`)) {
@@ -73,18 +76,21 @@ function AndroidTest() {
       </div>
       <ol className="android-steps__list">
         {STEPS.map(({ step, event, title, body, action }, index) => {
-          const done = !!note?.steps?.[step];
-          return <li key={step} data-next={next === step || undefined} data-done={done || undefined}>
+          const locked = step !== 'group' && !joined;
+          const done = !locked && !!note?.steps?.[step];
+          return <li key={step} data-next={next === step || undefined} data-done={done || undefined} data-locked={locked || undefined}>
             <span className="android-steps__number">
               {done ? <><Icon name="check" /><span className="sr-only">{t('androidTest.step.done')}</span></> : index + 1}
             </span>
             <div>
               <strong>{t(title)}</strong>
               <p>{t(body)}</p>
-              <a className={`button ${next === step ? 'button--primary' : 'button--secondary'}`} href={ANDROID_TEST_LINKS[step]}
-                target="_blank" rel="noopener noreferrer" onClick={() => { trackAction(event); noteAndroidTestStep(step); }}>
-                {t(action)}<Icon name="arrow" />
-              </a>
+              {locked
+                ? <button type="button" className="button button--secondary" disabled><Icon name="lock" />{t('androidTest.step.locked')}</button>
+                : <a className={`button ${next === step ? 'button--primary' : 'button--secondary'}`} href={ANDROID_TEST_LINKS[step]}
+                  target="_blank" rel="noopener noreferrer" onClick={() => { trackAction(event); noteAndroidTestStep(step); }}>
+                  {t(action)}<Icon name="arrow" />
+                </a>}
             </div>
           </li>;
         })}

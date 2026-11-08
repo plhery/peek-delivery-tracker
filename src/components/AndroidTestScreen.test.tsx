@@ -21,29 +21,45 @@ beforeEach(() => {
 });
 
 describe('the steps page', () => {
-  it('walks through the three steps, each in a new tab, the next one leading', async () => {
+  it('walks through the three steps, each in a new tab, the next one leading, the last two locked until the group', async () => {
     const user = userEvent.setup();
     render(<AndroidTestScreen />);
     expect(screen.getByRole('heading', { level: 1, name: 'Try Peek for Android' })).toBeVisible();
     expect(mocks.screen).toHaveBeenCalledExactlyOnceWith('android-test', 'anonymous');
     expect(mocks.start).toHaveBeenCalledExactlyOnceWith({ open: false });
 
+    const group = within(steps()[0]).getByRole('link');
+    expect([group.textContent, group.getAttribute('href'), group.getAttribute('target'), group.className])
+      .toEqual(['Join the group', 'https://groups.google.com/g/peek-android-testers', '_blank', 'button button--primary']);
+    for (const step of steps().slice(1)) {
+      expect(within(step).queryByRole('link')).not.toBeInTheDocument();
+      expect(within(step).getByRole('button', { name: 'Join the group first' })).toBeDisabled();
+    }
+    group.addEventListener('click', (event) => event.preventDefault());
+
+    await user.click(group);
+    expect(within(steps()[0]).getByText('Done')).toHaveClass('sr-only');
     const links = steps().map((step) => within(step).getByRole('link'));
-    expect(links.map((link) => [link.textContent, link.getAttribute('href'), link.getAttribute('target'), link.className])).toEqual([
-      ['Join the group', 'https://groups.google.com/g/peek-android-testers', '_blank', 'button button--primary'],
-      ['Open Google Play', 'https://play.google.com/apps/testing/com.plhery.peekdeliverytracker', '_blank', 'button button--secondary'],
+    expect(links.slice(1).map((link) => [link.textContent, link.getAttribute('href'), link.getAttribute('target'), link.className])).toEqual([
+      ['Open Google Play', 'https://play.google.com/apps/testing/com.plhery.peekdeliverytracker', '_blank', 'button button--primary'],
       ['Install Peek', 'https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker', '_blank', 'button button--secondary'],
     ]);
     for (const link of links) link.addEventListener('click', (event) => event.preventDefault());
-
-    await user.click(links[0]);
-    expect(within(steps()[0]).getByText('Done')).toHaveClass('sr-only');
-    expect(within(steps()[1]).getByRole('link')).toHaveClass('button--primary');
     await user.click(links[1]);
     await user.click(links[2]);
     expect(steps().map((step) => within(step).getByRole('link').className)).toEqual(Array(3).fill('button button--secondary'));
     expect(stored().steps).toEqual({ group: true, optIn: true, install: true });
     expect(mocks.track.mock.calls).toEqual([['android-test-group'], ['android-test-opt-in'], ['android-test-install']]);
+  });
+
+  it('locks the last two steps again for a browser that took them without the group', () => {
+    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { optIn: true, install: true } }));
+    render(<AndroidTestScreen />);
+    expect(within(steps()[0]).getByRole('link')).toHaveClass('button--primary');
+    for (const step of steps().slice(1)) {
+      expect(within(step).queryByText('Done')).not.toBeInTheDocument();
+      expect(within(step).getByRole('button', { name: 'Join the group first' })).toBeDisabled();
+    }
   });
 
   it('asks no more on “Don’t ask me again”, and says so where the button was', async () => {
@@ -64,6 +80,6 @@ describe('the steps page', () => {
   it('speaks the visitor’s language', () => {
     render(<AndroidTestScreen initialLocale="fr" initialMessages={fr} />);
     expect(screen.getByRole('heading', { level: 1, name: fr['androidTest.page.title'] })).toBeVisible();
-    expect(within(steps()[1]).getByRole('link')).toHaveTextContent(fr['androidTest.step.optIn.action']);
+    expect(within(steps()[1]).getByRole('button')).toHaveTextContent(fr['androidTest.step.locked']);
   });
 });

@@ -18,6 +18,7 @@
 .android-steps__number { display: grid; place-items: center; width: 26px; height: 26px; flex: 0 0 26px; border-radius: 50%; background: var(--control); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .android-steps__list > li[data-next] .android-steps__number { color: var(--on-yellow); background: var(--yellow); }
 .android-steps__list > li[data-done] .android-steps__number { color: var(--green); background: var(--green-soft); }
+.android-steps__list > li[data-locked] .button { cursor: not-allowed; }
 .android-steps__number svg { width: 15px; height: 15px; stroke-width: 2.6; }
 .android-steps__note { margin: 0 6px; color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
 .android-steps__never { justify-self: center; min-height: 44px; padding: 8px; background: none; color: var(--ink-soft); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }

@@ -119,7 +119,7 @@ describe('the parcel page’s row', () => {
     next.unmount();
 
     // Closed on the page it shows on.
-    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { install: true } }));
+    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, install: true } }));
     ({ AndroidTestRow } = await load());
     render(<AndroidTestRow />);
     await user.click(await screen.findByRole('button', { name: 'Close' }));
@@ -154,7 +154,7 @@ describe('the “Notify me” row', () => {
   });
 
   it('goes with the rest once the install link was followed', async () => {
-    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { install: true } }));
+    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, install: true } }));
     const { AndroidTestOffer } = await load();
     const { container } = render(<AndroidTestOffer />);
     await act(async () => { await Promise.resolve(); });
@@ -174,7 +174,7 @@ describe('the home page’s banner', () => {
     expect(events()).toEqual([['android-test-view', 'home'], ['android-test-dismiss', 'home']]);
     view.unmount();
 
-    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { install: true } }));
+    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, install: true } }));
     ({ AndroidTestBanner } = await load());
     render(<AndroidTestBanner />);
     expect(await screen.findByText('Thanks for testing Peek for Android')).toBeVisible();

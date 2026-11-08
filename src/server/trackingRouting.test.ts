@@ -3446,10 +3446,10 @@ describe('universal preflight and recipient input', () => {
   });
   it('files an unknown parcel under the journey owner a provider names among several carriers', async () => {
     const value = setup();
-    value.universal.mockResolvedValue({ ...history(), discovered_carrier: 'j-and-t-mx',
-      reported_carriers: ['Estafeta', 'J&T Express Mexico', 'DHL Express'] });
-    const result = await value.router.fetch(parcel({ tracking_number: 'JMX000000000001' }), false);
-    expect(result.correction).toEqual({ carrier: 'j-and-t-mx', trackingUrl: null, postcode: null });
+    value.universal.mockResolvedValue({ ...history(), discovered_carrier: 'buffalo-ex',
+      reported_carriers: ['Estafeta', 'Buffalo', 'DHL Express'] });
+    const result = await value.router.fetch(parcel({ tracking_number: 'BUFZA0000000001YQ' }), false);
+    expect(result.correction).toEqual({ carrier: 'buffalo-ex', trackingUrl: null, postcode: null });
     expect(result.result.tracking_provider).toBeDefined();
   });
   it.each(['unknown', 'la-poste'])('keeps provider history and changes only an unknown carrier: %s', async (carrier) => {

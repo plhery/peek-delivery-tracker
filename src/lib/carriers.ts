@@ -117,9 +117,13 @@ const OPTIONAL_POSTCODE_HELP: Readonly<Partial<Record<string, MessageKey>>> = {
   canpar: 'add.requirement.canparPostcodeOptionalHelp',
 };
 
-/** The line under a carrier's input. An optional postcode says what it gives (`OPTIONAL_POSTCODE_HELP`). */
+/**
+ * The line under a carrier's input. An optional postcode says what it gives (`OPTIONAL_POSTCODE_HELP`); phone digits
+ * say why they are asked and where they go.
+ */
 export function requirementHelpKey(carrierId: CarrierId, requirement: Pick<CarrierInputRequirement, 'field' | 'optional'>): MessageKey {
   if (requirement.field === 'trackingUrl') return 'add.requirement.trackingUrlHelp';
+  if (requirement.field === 'phoneDigits') return 'add.requirement.phoneDigitsHelp';
   if (!requirement.optional) return 'add.requirement.dpdPostcodeHelp';
   const adapter = carrierInfo(carrierId).capabilities.tracking.adapter;
   return (adapter ? OPTIONAL_POSTCODE_HELP[adapter] : undefined) ?? 'add.requirement.dpdPostcodeOptionalHelp';

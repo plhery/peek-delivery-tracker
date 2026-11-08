@@ -166,6 +166,11 @@ export function ParcelDetail({
   const postcodeShowsMore = !postcodePrompt && !parcel.dpdPostcode && !parcel.archivedAt && Boolean(parcel.lastSyncedAt)
     && !['delivered', 'returned'].includes(current?.stage ?? '')
     && carrierRequirements(parcel.carrier, parcel.trackingNumber).some(({ field, showsMore }) => field === 'dpdPostcode' && showsMore);
+  // Or its carrier shows its own scans only with the phone digits it was saved without (J&T Express Mexico and China),
+  // unless the sync error already asks for them.
+  const phoneDigitsShowsMore = !postcodePrompt && !postcodeShowsMore && !parcel.phoneDigits && !parcel.archivedAt
+    && Boolean(parcel.lastSyncedAt) && parcel.syncError !== 'carrier:input_required' && !['delivered', 'returned'].includes(current?.stage ?? '')
+    && carrierRequirements(parcel.carrier, parcel.trackingNumber).some(({ field }) => field === 'phoneDigits');
   // Or the number has one carrier's own format, and that carrier does not list it yet: after a week, its owner is asked
   // to choose another.
   const likely = !postcodePrompt && !parcel.archivedAt ? likelyCarrier(parcel) : null;
@@ -649,11 +654,11 @@ export function ParcelDetail({
             )}
           </p>
         )}
-        {postcodeShowsMore && (
+        {(postcodeShowsMore || phoneDigitsShowsMore) && (
           <p className="detail__postcode-note">
-            {t('detail.postcodeShowsMore', { carrier: carrierInfo(parcel.carrier, locale).name })}{' '}
+            {t(postcodeShowsMore ? 'detail.postcodeShowsMore' : 'detail.phoneDigitsShowsMore', { carrier: carrierInfo(parcel.carrier, locale).name })}{' '}
             <button type="button" className="detail__postcode-edit" onClick={() => setEditingCarrier(true)}>
-              {t('detail.inputNeededAction')}
+              {t(postcodeShowsMore ? 'detail.inputNeededAction' : 'detail.phoneDigitsAction')}
             </button>
           </p>
         )}

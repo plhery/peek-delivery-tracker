@@ -38,6 +38,7 @@ describe('SharedLookups', () => {
     const own = (parcel: JsonObject) => new SharedLookups([parcel, base]).for(parcel).parcel;
     for (const other of [
       copy('postcode', { dpd_postcode: '0000' }),
+      copy('digits', { phone_digits: '0000' }),
       copy('link', { tracking_url: 'https://carrier.invalid/t' }),
       copy('carrier', { carrier: 'ups' }),
       copy('country', {}, { lookup_country_hint: 'CH' }),

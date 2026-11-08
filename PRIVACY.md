@@ -20,8 +20,8 @@ analytics.
   locker that performed the scan — plus sender or business names, pickup-point
   details, parcel weight and dimensions where the carrier provides them.
 - What some carriers need besides the number, when you supply it: a delivery
-  postcode, a private tracking link, or a reference that itself contains the
-  postcode.
+  postcode, a private tracking link, a reference that itself contains the
+  postcode, or the last four digits of the recipient's or sender's phone.
 - Web Push subscription endpoints, encryption keys, browser user agent, native
   iPhone APNs device token or Android Firebase Cloud Messaging registration
   token, optional device name (on Android, the phone's model) and locale, a
@@ -91,7 +91,7 @@ Cloudflare Email Routing receives the emails you forward to your Peek address
 and passes them to the service. An assistant you connect, such as Claude or
 ChatGPT, receives what you allowed it: your parcels' names, senders, carriers,
 tracking numbers, statuses, expected days, pickup points and scans, never the
-recipient's name or postcode. Its provider's own privacy terms then apply to what it receives.
+recipient's name, postcode or phone digits. Its provider's own privacy terms then apply to what it receives.
 A tool you give a personal token, such as Home Assistant, receives the same.
 
 Cloudflare Turnstile checks the browser or an in-app verification sheet when you start a new parcel lookup to
@@ -135,6 +135,14 @@ latest postcode you gave another parcel, preferring one for the same carrier.
 It then goes where a postcode you typed would, and you can change or clear it
 on the parcel. Dachser's link shows more than the journey: the service discards
 its sender, recipient, address, contact and document fields.
+
+J&T Express Mexico and J&T Express China show a parcel only with the last four
+digits of the recipient's or sender's phone, so their parcels have an optional
+field for them. If you fill it in, the service keeps those four digits with the
+parcel and sends them to that carrier with each check, and to no other carrier
+or tracking service. They never go into a link, a notification, logs, error
+reports or analytics. They are deleted when you clear the field, choose another
+carrier for the parcel, delete or forget the parcel, or delete your account.
 
 Browser push services receive encrypted Web Push messages; Apple processes the
 iPhone app's notification and Live Activity payloads through APNs, and Google
@@ -212,7 +220,7 @@ the part of its address after a question mark or `#`, and the source, medium
 and campaign the link you followed was tagged with, if any. Umami processes IP
 address and user agent to derive approximate location and rotating
 visitor/session identifiers. We do not send account IDs, email addresses,
-parcel labels, tracking numbers, delivery postcodes, invitation codes, search
+parcel labels, tracking numbers, delivery postcodes, phone digits, invitation codes, search
 text, any other part of an address, or error messages. No analytics cookies or
 persistent analytics device identifiers are created. Events are not linked to
 your Peek account.
@@ -227,8 +235,8 @@ simulators, emulators, and unconfigured self-hosted deployments do not collect.
 ## Following a parcel without an account
 
 You can follow a parcel without signing in. The service then stores its
-tracking number, the carrier, a postcode or tracking link if the carrier needs
-one, the tracking history, and a link to the parcel. No account or email
+tracking number, the carrier, a postcode, tracking link or phone digits if the
+carrier needs them, the tracking history, and a link to the parcel. No account or email
 address is stored. A name you give the parcel stays in your browser or in the
 iPhone or Android app, and in the part of a link after `#`, which is not sent
 to the service, unless you share the parcel as a gift, as described below.
@@ -237,8 +245,8 @@ Your device keeps a key that shows it made the lookup; the service stores only
 a hash of that key. Anyone who has the link can see the parcel's status and
 history, with the tracking number masked to its last characters.
 Only the device holding the key sees the full number, can forget the parcel,
-and can keep it after signing in. The postcode or tracking link you entered is
-never shown through a link.
+and can keep it after signing in. The postcode, tracking link or phone digits
+you entered are never shown through a link.
 
 Your browser, or the iPhone or Android app, keeps a list of the parcels you
 followed or opened this way: each link, its key if this device made the
@@ -270,7 +278,7 @@ number as described above and under "Retention and control".
 
 You can share a parcel through its link, with or without an account. Anyone
 who has the link sees the parcel's status and history. They never see a pickup
-code, a postcode or the recipient's name. They see the name you gave the parcel
+code, a postcode, phone digits or the recipient's name. They see the name you gave the parcel
 only if you choose to show it, and
 the tracking number stays masked unless you choose to show it. An app that
 previews the link, a chat app for instance, gets the parcel's status, carrier
@@ -406,8 +414,8 @@ in Keychain and a protected account-scoped parcel snapshot; it requests a
 current APNs token from Apple instead of persisting that token locally. It
 stores a random installation identifier and the independent Home Screen widget
 and Live Activity preferences on the device. Either snapshot can include
-tracking history, a private tracking link, a supplied delivery postcode, and a
-reference that contains the delivery postcode. The Android app keeps its
+tracking history, a private tracking link, a supplied delivery postcode, a
+reference that contains the delivery postcode, and phone digits you gave. The Android app keeps its
 session in the app's private storage; its home-screen widget and its place in
 Android's share menu read only what is already on the phone. Signing out clears
 account-scoped local state and ends Live Activities. Browser or

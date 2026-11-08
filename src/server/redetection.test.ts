@@ -42,18 +42,18 @@ it('points a delivered parcel filed under no carrier to the carrier a provider n
     .toBeNull();
   // Nothing else is asked about it: its detected carrier, a carrier without an adapter, or one filed under a carrier.
   expect(rerouteCarrier(parcel({ current_stage: 'delivered' }))).toBeNull();
-  expect(rerouteCarrier(finished('delivered', { reported_carriers: ['J&T Express Mexico'] }, { tracking_number: 'JMX000000000001' })))
+  expect(rerouteCarrier(finished('delivered', { reported_carriers: ['Buffalo'] }, { tracking_number: 'BUFZA0000000001YQ' })))
     .toBeNull();
   expect(rerouteCarrier(finished('delivered', {}, { carrier: 'dhl' }))).toBeNull();
 });
 
 it('points a parcel filed under no carrier to a carrier without an adapter of its own', () => {
-  expect(rerouteCarrier(parcel({ tracking_number: 'JMX000000000001' }, { reported_carriers: ['J&T Express Mexico', 'Estafeta'] })))
-    .toBe('j-and-t-mx');
+  expect(rerouteCarrier(parcel({ tracking_number: 'BUFZA0000000001YQ' }, { reported_carriers: ['Buffalo', 'Estafeta'] })))
+    .toBe('buffalo-ex');
   // No provider has answered for it yet: its check asks them about that carrier.
-  expect(rerouteCarrier(parcel({ tracking_number: 'JMX000000000001' }, { tracking_provider: undefined }))).toBe('j-and-t-mx');
+  expect(rerouteCarrier(parcel({ tracking_number: 'BUFZA0000000001YQ' }, { tracking_provider: undefined }))).toBe('buffalo-ex');
   // A parcel filed under a carrier keeps it.
-  expect(rerouteCarrier(parcel({ carrier: 'dhl', tracking_number: 'JMX000000000001' }, { routing: { failures: { dhl: { kind: 'not_found' } } } })))
+  expect(rerouteCarrier(parcel({ carrier: 'dhl', tracking_number: 'BUFZA0000000001YQ' }, { routing: { failures: { dhl: { kind: 'not_found' } } } })))
     .toBeNull();
 });
 

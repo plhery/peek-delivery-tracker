@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
 import { carrierResult } from '../test/carrierResults';
-import { CarrierError, ChallengeError } from 'universal-parcel-scraper';
+import { CARRIER_DEFINITIONS, CarrierError, ChallengeError } from 'universal-parcel-scraper';
 import { REGISTRY } from 'universal-parcel-scraper/node';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { idlePollDelay, secondsUntilNextSync, syncWindowStart, workerPollDelay } from './background';
 import { deployedVersion } from './reviewQueues';
 import { normalizeCarrierResult, type CarrierResult } from 'universal-parcel-scraper';
@@ -932,6 +932,17 @@ describe('status observation collection', () => {
     await service.syncPackage({ id: 'changed', carrier: 'spring-gds', tracking_number: 'TEST1234', dpd_postcode: '1012 AB', carrier_data: abroad });
     const asked = adapter.fetch.mock.calls.filter(([carrier]) => carrier === 'spring-gds');
     expect(asked.map((call) => [call[3], call[5]])).toEqual([['1000', 'BE'], ['1012 AB', undefined]]);
+  });
+
+  it('sends the phone digits stored with the parcel to its own carrier only', async () => {
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) };
+    const service = new TrackingSyncService(fakeClient() as unknown as SupabaseServiceClient, adapter, null);
+    await service.syncPackage({ id: 'digits', carrier: 'j-and-t-mx', tracking_number: 'TEST1234', phone_digits: '0472' });
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('j-and-t-mx', 'TEST1234', null, null, null, null, '0472');
+    adapter.fetch.mockClear();
+    // Digits left with a carrier that doesn't read them are never sent.
+    await service.syncPackage({ id: 'other', carrier: 'dpd', tracking_number: 'TEST1234', phone_digits: '0472' });
+    expect(adapter.fetch.mock.calls.flat()).not.toContain('0472');
   });
 
   it('sends the keys of mapped wording with the server version', async () => {
@@ -4891,12 +4902,21 @@ describe('TrackingSyncService', () => {
     expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', 'LX123456785CH', null, null, null);
   });
 
+  // These follow Swiss Post's probe gaps alone: AliExpress's own pace (its catalog's refresh) is left out.
+  const withoutAliExpressPace = () => {
+    const aliexpress = CARRIER_DEFINITIONS.aliexpress.tracking as { refresh?: unknown };
+    const pace = aliexpress.refresh;
+    delete aliexpress.refresh;
+    onTestFinished(() => { aliexpress.refresh = pace; });
+  };
+
   it('keeps Cainiao and respects the probe cooldown when Swiss Post does not know the historical postal number', async () => {
     const client = fakeClient();
     const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
       if (carrier === 'swiss-post') throw Object.assign(new Error('Shipment not found'), { status: 404 });
       return { status: 'in_transit', last_update: '2026-03-04T10:00:00Z' };
     }) };
+    withoutAliExpressPace();
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
       () => new Date('2026-03-04T12:00:00Z'));
     const parcel = { id: 'legacy-unannounced', carrier: 'aliexpress', tracking_number: 'LX123456785CH' };
@@ -4910,6 +4930,7 @@ describe('TrackingSyncService', () => {
   });
 
   it('asks Swiss Post less often about a Swiss postal number it keeps missing, and at once on Cainiao news', async () => {
+    withoutAliExpressPace();
     const client = fakeClient();
     let now = new Date('2026-09-10T10:00:00Z');
     let cainiaoUpdate = '2026-09-09T10:00:00+08:00';
@@ -5578,6 +5599,15 @@ describe('TrackingSyncService', () => {
       expect(isTrackingSyncDue({ ...parcel, last_synced_at: 'invalid' }, new Date())).toBe(true);
     },
   );
+
+  it('paces a Swiss postal number Cainiao still tracks as AliExpress: half-hourly, hourly after a failure', () => {
+    const parcel = { carrier: 'swiss-post', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok',
+      carrier_data: { active_tracking_carrier: 'aliexpress' } };
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:29:59Z'))).toBe(false);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:30:00Z'))).toBe(true);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T10:59:59Z'))).toBe(false);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:00:00Z'))).toBe(true);
+  });
 
   it('checks Morning Global hourly, out for delivery too, and waits two hours after a failure', () => {
     const parcel = { carrier: 'morning-global', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok' };

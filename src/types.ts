@@ -63,6 +63,8 @@ export interface Parcel {
   dpdPostcode?: string;
   /** The country of `dpdPostcode`, when the owner named one other than the carrier's home country. */
   dpdPostcodeCountry?: string;
+  /** The last 4 digits of a phone the owner gave J&T Express Mexico or China. */
+  phoneDigits?: string;
   /** False when DPD rejected the stored postcode and tracked without it. */
   dpdPostcodeVerified?: boolean;
   /** The parcel's own carrier refused the stored postcode on its last answer (PostNL finding no parcel with it). */
@@ -140,6 +142,7 @@ export interface NewParcelInput {
   dpdPostcode?: string;
   /** The postcode's country, sent only when it is not the carrier's home country. */
   dpdPostcodeCountry?: string;
+  phoneDigits?: string;
 }
 
 export interface ParcelCarrierInput {
@@ -148,6 +151,7 @@ export interface ParcelCarrierInput {
   trackingUrl?: string;
   dpdPostcode?: string;
   dpdPostcodeCountry?: string;
+  phoneDigits?: string;
 }
 
 export class ParcelAlreadyExistsError extends Error {

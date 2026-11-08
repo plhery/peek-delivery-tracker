@@ -1082,6 +1082,8 @@ export class TrackingRouter {
         const lookupParcel = candidate ? { ...parcel, carrier,
           tracking_url: ownInputs ? state.confirmed_tracking_url : null,
           dpd_postcode: ownInputs ? state.confirmed_postcode : null,
+          // Phone digits are given for the parcel's own carrier, never to another.
+          phone_digits: null,
           // The country of the owner's postcode goes with it.
           carrier_data: ownInputs && isRecord(parcel.carrier_data) && parcel.carrier_data.postcode_country
             ? { postcode_country: parcel.carrier_data.postcode_country } : {} } : parcel;
@@ -1429,10 +1431,11 @@ export class TrackingRouter {
       // A carrier that knows the number but needs the user's input (GLS's
       // postcode) is offered to the user instead, as is one whose lookup found
       // the parcel behind an input it lists as optional (DHL's postcode, when
-      // several shipments share the number, and GLS Austria's).
+      // several shipments share the number, and GLS Austria's). Not one that wants phone digits (J&T Express
+      // Mexico's and China's): the apps read a postcode or a link here, and its owner gives them with that carrier.
       const asking = outcomes.map((outcome) => ({ ...outcome, needsInput: outcome.needsInput
         ?? (heldDirect.has(outcome.carrier) ? activeRequirements(outcome.carrier, number)[0]?.field ?? null : null) }))
-        .filter((outcome) => outcome.needsInput);
+        .filter((outcome) => outcome.needsInput && outcome.needsInput !== 'phoneDigits');
       const needing = settleRecognition(asking, now()).carrier;
       const field = asking.find((outcome) => outcome.carrier === needing)?.needsInput;
       if (needing && field) {

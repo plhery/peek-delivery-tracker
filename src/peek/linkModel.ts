@@ -72,6 +72,8 @@ export interface ParcelLookupInput {
   dpdPostcode?: string;
   /** The postcode's country, only when it is not the carrier's home country. */
   dpdPostcodeCountry?: string;
+  /** The last 4 digits of a phone, for a carrier that shows a parcel only with them. */
+  phoneDigits?: string;
 }
 
 /** A lookup's answer: the new link, its owner key (given once) and the parcel as the owner sees it. */

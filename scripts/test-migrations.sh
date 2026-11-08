@@ -373,6 +373,9 @@ if [[ "$dropped" != "5|2|1|1|0|1" ]]; then
   exit 1
 fi
 
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/j_and_t_phone_digits.sql"
+
 # Closing a reader's answer marks it reviewed once.
 feedback_id=$(psql "$database_url" -X -Atq -v ON_ERROR_STOP=1 -c "
   insert into public.parcel_feedback (id, tracking_number, carrier, answer, reasons, asked, via, app, locale, shown)

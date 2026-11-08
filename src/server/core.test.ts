@@ -673,11 +673,12 @@ describe('input validation', () => {
       trackingUrl: null,
       dpdPostcode: '59650',
       dpdPostcodeCountry: null,
+      phoneDigits: null,
     });
     expect(() => packageCarrierValues({ carrier: 'mondial-relay' }, '76434219'))
       .toThrow('requires the delivery postcode');
     expect(packageCarrierValues({ carrier: 'dpd' }, '06080000000001'))
-      .toEqual({ carrier: 'dpd', trackingUrl: null, dpdPostcode: null, dpdPostcodeCountry: null });
+      .toEqual({ carrier: 'dpd', trackingUrl: null, dpdPostcode: null, dpdPostcodeCountry: null, phoneDigits: null });
     expect(packageCarrierValues({ carrier: 'dpd', dpdPostcode: '8000' }, '06080000000001'))
       .toMatchObject({ dpdPostcode: '8000' });
     expect(packageCarrierValues({ carrier: 'dpd', dpdPostcode: '75001' }, '06080000000001'))
@@ -690,6 +691,20 @@ describe('input validation', () => {
       .toThrow('Carrier must be text');
     expect(packageCarrierValues({ carrier: 'ups' }, '449999999999999980'))
       .toMatchObject({ carrier: 'quickpac' });
+  });
+
+  it('takes the last four phone digits only for a carrier that reads them', () => {
+    for (const carrier of ['j-and-t-mx', 'j-and-t-cn']) {
+      expect(packageCarrierValues({ carrier, phoneDigits: ' 0123 ' }, 'JMX000000000001')).toMatchObject({ carrier, phoneDigits: '0123' });
+      expect(packageCarrierValues({ carrier }, 'JMX000000000001')).toMatchObject({ carrier, phoneDigits: null });
+      for (const phoneDigits of ['123', '12345', '12a4']) {
+        expect(() => packageCarrierValues({ carrier, phoneDigits }, 'JMX000000000001'), phoneDigits).toThrow('last four digits');
+      }
+    }
+    expect(newPackageValues({ trackingNumber: 'JMX000000000001', label: '', carrier: 'j-and-t-mx', phoneDigits: '4321' }))
+      .toMatchObject({ carrier: 'j-and-t-mx', phoneDigits: '4321' });
+    expect(() => packageCarrierValues({ carrier: 'dpd', phoneDigits: '1234' }, '06080000000001')).toThrow('not used');
+    expect(() => packageCarrierValues({ carrier: 'j-and-t-mx', phoneDigits: 1234 }, 'JMX000000000001')).toThrow('must be text');
   });
 
   it('takes the country of a postcode from abroad, and keeps it only when it is not the carrier’s home and its lookup reads it', () => {

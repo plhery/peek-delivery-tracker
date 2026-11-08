@@ -2959,6 +2959,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var syncError: String? = nil
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
+    var phoneDigits: String? = nil
     var carrierData: CarrierData? = nil
     var archivedAt: String? = nil
     var notificationsMuted: Bool
@@ -2980,6 +2981,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case syncError
         case trackingURL = "trackingUrl"
         case dpdPostcode
+        case phoneDigits
         case carrierData
         case archivedAt
         case notificationsMuted
@@ -3011,6 +3013,7 @@ struct CreatePackageRequest: Codable, Equatable, Hashable, Sendable {
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
     var dpdPostcodeCountry: String? = nil
+    var phoneDigits: String? = nil
     var lookupCountryHint: String? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -3020,6 +3023,7 @@ struct CreatePackageRequest: Codable, Equatable, Hashable, Sendable {
         case trackingURL = "trackingUrl"
         case dpdPostcode
         case dpdPostcodeCountry
+        case phoneDigits
         case lookupCountryHint
     }
 }
@@ -3033,6 +3037,7 @@ struct ChangePackageCarrierRequest: Codable, Equatable, Hashable, Sendable {
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
     var dpdPostcodeCountry: String? = nil
+    var phoneDigits: String? = nil
     var providerPostcode: String? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -3040,6 +3045,7 @@ struct ChangePackageCarrierRequest: Codable, Equatable, Hashable, Sendable {
         case trackingURL = "trackingUrl"
         case dpdPostcode
         case dpdPostcodeCountry
+        case phoneDigits
         case providerPostcode
     }
 }
@@ -3546,6 +3552,7 @@ struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
     var dpdPostcodeCountry: String? = nil
+    var phoneDigits: String? = nil
     var lookupCountryHint: String? = nil
     var language: String? = nil
 
@@ -3555,6 +3562,7 @@ struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {
         case trackingURL = "trackingUrl"
         case dpdPostcode
         case dpdPostcodeCountry
+        case phoneDigits
         case lookupCountryHint
         case language
     }
@@ -4092,6 +4100,7 @@ extension Parcel {
         syncError = try values.decodeIfPresent(String.self, forKey: .syncError)
         trackingURL = try values.decodeIfPresent(String.self, forKey: .trackingURL)
         dpdPostcode = try values.decodeIfPresent(String.self, forKey: .dpdPostcode)
+        phoneDigits = try values.decodeIfPresent(String.self, forKey: .phoneDigits)
         carrierData = try values.decodeIfPresent(CarrierData.self, forKey: .carrierData)
         archivedAt = try values.decodeIfPresent(String.self, forKey: .archivedAt)
         notificationsMuted = try values.decode(Bool.self, forKey: .notificationsMuted)

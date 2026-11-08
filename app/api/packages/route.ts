@@ -68,6 +68,8 @@ export const POST = apiRoute(async (context) => {
     }
     throw error;
   }
+  // Kept beside the parcel rather than in create_account_package, which every carrier list redefines.
+  if (values.phoneDigits) await service.updatePackage(packageId, { phone_digits: values.phoneDigits });
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 

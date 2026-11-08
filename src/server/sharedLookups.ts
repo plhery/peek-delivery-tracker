@@ -31,10 +31,11 @@ function lookupIdentity(parcel: JsonObject): string | null {
   const routing = isRecord(data.routing) ? data.routing : {};
   const url = text(parcel.tracking_url);
   const postcode = text(parcel.dpd_postcode);
+  const digits = text(parcel.phone_digits);
   if (![null, url].includes(text(routing.confirmed_tracking_url))
     || ![null, postcode].includes(text(routing.confirmed_postcode))) return null;
   const input = isRecord(data.universal_input) ? [text(data.universal_input.number), text(data.universal_input.postcode)] : null;
-  return JSON.stringify([String(parcel.carrier ?? ''), number(parcel.tracking_number), url, postcode, input,
+  return JSON.stringify([String(parcel.carrier ?? ''), number(parcel.tracking_number), url, postcode, digits, input,
     text(data.original_carrier), text(data.active_tracking_carrier), text(data.active_tracking_number),
     data.swiss_post_ready === true, normalizedLookupCountry(data.lookup_country_hint), storedPostcodeCountry(data, postcode) ?? null]);
 }
@@ -139,8 +140,8 @@ export class ParcelLookups {
  * language, so copies whose owners read different languages never take each other's wording.
  */
 export function carrierLookupKey(carrier: string, trackingNumber: string, trackingUrl: string | null, postcode?: string | null,
-  language?: string | null, postcodeCountry?: string | null): unknown[] {
-  return ['carrier', carrier, number(trackingNumber), text(trackingUrl), text(postcode), text(language), text(postcodeCountry)];
+  language?: string | null, postcodeCountry?: string | null, phoneDigits?: string | null): unknown[] {
+  return ['carrier', carrier, number(trackingNumber), text(trackingUrl), text(postcode), text(language), text(postcodeCountry), text(phoneDigits)];
 }
 
 /** What a universal provider lookup sends, the carrier it may ask about included. */

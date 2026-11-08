@@ -42,11 +42,13 @@ export interface NewPackageValues {
   dpdPostcode: string | null;
   /** The postcode's country, when it is not the carrier's home country. */
   dpdPostcodeCountry: string | null;
+  /** The last four digits of a phone, for a carrier that shows a parcel only with them (J&T Express Mexico and China). */
+  phoneDigits: string | null;
 }
 
 export type PackageCarrierValues = Pick<
   NewPackageValues,
-  'carrier' | 'trackingUrl' | 'dpdPostcode' | 'dpdPostcodeCountry'
+  'carrier' | 'trackingUrl' | 'dpdPostcode' | 'dpdPostcodeCountry' | 'phoneDigits'
 >;
 
 /**
@@ -72,6 +74,7 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
   const rawTrackingUrl = payload.trackingUrl ?? '';
   const rawDpdPostcode = payload.dpdPostcode ?? '';
   const rawPostcodeCountry = payload.dpdPostcodeCountry ?? '';
+  const rawPhoneDigits = payload.phoneDigits ?? '';
   if (
     typeof rawTracking !== 'string'
     || typeof rawLabel !== 'string'
@@ -79,10 +82,11 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
     || typeof rawTrackingUrl !== 'string'
     || typeof rawDpdPostcode !== 'string'
     || typeof rawPostcodeCountry !== 'string'
+    || typeof rawPhoneDigits !== 'string'
   ) {
     throw new HttpError(
       400,
-      'Tracking number, label, carrier, tracking URL, postcode and its country must be text',
+      'Tracking number, label, carrier, tracking URL, postcode, its country and phone digits must be text',
     );
   }
   const trackingNumber = rawTracking.replace(/[\s.-]/g, '').toUpperCase();
@@ -111,6 +115,7 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
       trackingNumber,
       rawTrackingUrl,
       rawDpdPostcode,
+      rawPhoneDigits,
     );
   } catch (error) {
     throw new HttpError(400, error instanceof Error ? error.message : 'Invalid carrier details', undefined, {
@@ -140,12 +145,14 @@ export function packageCarrierValues(
     trackingUrl: payload.trackingUrl ?? '',
     dpdPostcode: payload.dpdPostcode ?? '',
     dpdPostcodeCountry: payload.dpdPostcodeCountry ?? '',
+    phoneDigits: payload.phoneDigits ?? '',
   });
   return {
     carrier: values.carrier,
     trackingUrl: values.trackingUrl,
     dpdPostcode: values.dpdPostcode,
     dpdPostcodeCountry: values.dpdPostcodeCountry,
+    phoneDigits: values.phoneDigits,
   };
 }
 

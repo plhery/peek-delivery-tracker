@@ -283,12 +283,14 @@ function lookupInput(found: Survey): ParcelLookupInput {
   const trackingUrl = wanted('trackingUrl') ? found.input('trackingUrl').trim() : found.match!.carrier === carrier ? found.match!.trackingUrl : undefined;
   const dpdPostcode = wanted('dpdPostcode') ? found.input('dpdPostcode').trim() : undefined;
   const dpdPostcodeCountry = dpdPostcode ? sentPostcodeCountry(carrier, found.postcodeCountry) : undefined;
+  const phoneDigits = wanted('phoneDigits') ? found.input('phoneDigits').trim() : undefined;
   return {
     trackingNumber: found.normalized,
     ...(carrier !== 'unknown' ? { carrier } : {}),
     ...(trackingUrl ? { trackingUrl } : {}),
     ...(dpdPostcode ? { dpdPostcode } : {}),
     ...(dpdPostcodeCountry ? { dpdPostcodeCountry } : {}),
+    ...(phoneDigits ? { phoneDigits } : {}),
   };
 }
 

@@ -91,6 +91,7 @@ export function AddParcelSheet({
   const [carrierInputs, setCarrierInputs] = useState<Record<CarrierInputField, string>>({
     trackingUrl: '',
     dpdPostcode: '',
+    phoneDigits: '',
   });
   // Each carrier's postcode is kept apart: one typed for a carrier never goes to another.
   const [carrierPostcodes, setCarrierPostcodes] = useState<Partial<Record<CarrierId, string>>>({});
@@ -355,6 +356,9 @@ export function AddParcelSheet({
           : undefined,
         dpdPostcodeCountry: requirements.some(({ field }) => field === 'dpdPostcode') && carrierInputValue('dpdPostcode').trim()
           ? sentPostcodeCountry(resolvedCarrier, postcodeCountry)
+          : undefined,
+        phoneDigits: requirements.some(({ field }) => field === 'phoneDigits')
+          ? carrierInputValue('phoneDigits').trim() || undefined
           : undefined,
       });
       if (!mounted.current) return;

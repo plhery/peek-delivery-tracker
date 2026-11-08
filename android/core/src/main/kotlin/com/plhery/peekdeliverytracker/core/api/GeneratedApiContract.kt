@@ -2962,6 +2962,7 @@ data class Parcel(
     @SerialName("sync_error") val syncError: String? = null,
     @SerialName("tracking_url") val trackingUrl: String? = null,
     @SerialName("dpd_postcode") val dpdPostcode: String? = null,
+    @SerialName("phone_digits") val phoneDigits: String? = null,
     @SerialName("carrier_data") val carrierData: CarrierData? = null,
     @SerialName("archived_at") val archivedAt: String? = null,
     @SerialName("notifications_muted") val notificationsMuted: Boolean,
@@ -2990,6 +2991,7 @@ data class CreatePackageRequest(
     val trackingUrl: String? = null,
     val dpdPostcode: String? = null,
     val dpdPostcodeCountry: String? = null,
+    val phoneDigits: String? = null,
     val lookupCountryHint: String? = null,
 )
 
@@ -3004,6 +3006,7 @@ data class ChangePackageCarrierRequest(
     val trackingUrl: String? = null,
     val dpdPostcode: String? = null,
     val dpdPostcodeCountry: String? = null,
+    val phoneDigits: String? = null,
     val providerPostcode: String? = null,
 )
 
@@ -3459,6 +3462,7 @@ data class PublicLookupRequest(
     val trackingUrl: String? = null,
     val dpdPostcode: String? = null,
     val dpdPostcodeCountry: String? = null,
+    val phoneDigits: String? = null,
     val lookupCountryHint: String? = null,
     val language: String? = null,
 )

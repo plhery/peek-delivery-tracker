@@ -169,6 +169,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
         ...(input.trackingUrl?.trim() ? { trackingUrl: input.trackingUrl.trim() } : {}),
         ...(input.dpdPostcode?.trim() ? { dpdPostcode: input.dpdPostcode.trim() } : {}),
         ...(input.dpdPostcode?.trim() && input.dpdPostcodeCountry ? { dpdPostcodeCountry: input.dpdPostcodeCountry } : {}),
+        ...(input.phoneDigits?.trim() ? { phoneDigits: input.phoneDigits.trim() } : {}),
         // A carrier that words its scans in several languages answers the parcel in the page's.
         ...(language ? { language } : {}),
       };

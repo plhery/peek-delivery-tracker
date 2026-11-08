@@ -198,7 +198,7 @@ describe('looking up a parcel without an account', () => {
     // The database gets the key's hash, never the key, and never the name.
     const hash = createHash('sha256').update(answer.key).digest('hex');
     expect(create).toHaveBeenCalledExactlyOnceWith(
-      { trackingNumber, label: '', carrier: 'dpd', trackingUrl: null, dpdPostcode: postcode, dpdPostcodeCountry: null }, hash,
+      { trackingNumber, label: '', carrier: 'dpd', trackingUrl: null, dpdPostcode: postcode, dpdPostcodeCountry: null, phoneDigits: null }, hash,
     );
     expect(text).not.toContain(hash);
     expect(text).not.toContain('Surprise');
@@ -248,6 +248,24 @@ describe('looking up a parcel without an account', () => {
     }
     expect((await lookup({ trackingNumber, language: 'pl' }, nextIp())).status).toBe(201);
     expect(update).toHaveBeenLastCalledWith(packageId, { carrier_data: expect.objectContaining({ lookup_language: 'pl' }) });
+  });
+
+  it('stores the phone digits a lookup gives its carrier, and never answers or logs them', async () => {
+    allow();
+    const create = vi.spyOn(SupabaseServiceClient.prototype, 'createOneOffParcel').mockResolvedValue({
+      link: storedLink({ owner: true }), created: true,
+      package: storedPackage({ carrier: 'j-and-t-mx', phone_digits: '0472', last_synced_at: null, sync_status: 'pending' }),
+    });
+    const response = await lookup({ trackingNumber: 'JMX000000000001', carrier: 'j-and-t-mx', phoneDigits: '0472' });
+    expect(response.status).toBe(201);
+    expect(create).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'j-and-t-mx', phoneDigits: '0472' }), expect.any(String));
+    expect(await response.text()).not.toContain('0472');
+    const lines = [...vi.mocked(console.log).mock.calls, ...vi.mocked(console.error).mock.calls].map(([line]) => String(line));
+    for (const line of lines) expect(line).not.toContain('0472');
+    // A carrier that reads no phone digits is given none.
+    create.mockClear();
+    expect((await lookup({ trackingNumber: 'JMX000000000001', carrier: 'dhl', phoneDigits: '0472' }, nextIp())).status).toBe(400);
+    expect(create).not.toHaveBeenCalled();
   });
 
   it('keeps the country of a postcode from abroad with the postcode of a new lookup', async () => {

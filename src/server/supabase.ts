@@ -27,6 +27,7 @@ const PACKAGE_COLUMNS = [
   'sync_error',
   'tracking_url',
   'dpd_postcode',
+  'phone_digits',
   'carrier_data',
   'archived_at',
   'notifications_muted',
@@ -43,7 +44,7 @@ const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,d
  * The columns the schedule reads, `one_off` among them: a lookup without an account leaves the
  * schedule once nobody has answered for its number (unseenLookup.ts).
  */
-const ACTIVE_PACKAGE_SELECT = 'id,user_id,one_off,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
+const ACTIVE_PACKAGE_SELECT = 'id,user_id,one_off,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,phone_digits,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
 /**
  * Where the sync loaders put each stored event's identity, instant, stage and
  * wording, so a reworded scan can update its row in place and another source's
@@ -2127,7 +2128,7 @@ export class SupabaseServiceClient extends SupabaseClient {
    * Answers like publicParcel, plus whether the parcel is new.
    */
   async createOneOffParcel(
-    values: { trackingNumber: string; carrier: string; trackingUrl: string | null; dpdPostcode: string | null },
+    values: { trackingNumber: string; carrier: string; trackingUrl: string | null; dpdPostcode: string | null; phoneDigits?: string | null },
     ownerKeyHash: string,
   ): Promise<{ link: JsonObject; package: JsonObject; created: boolean }> {
     const result = await this.request('/rest/v1/rpc/create_one_off_parcel', {
@@ -2138,6 +2139,7 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_tracking_url: values.trackingUrl,
         p_dpd_postcode: values.dpdPostcode,
         p_owner_key_hash: ownerKeyHash,
+        ...(values.phoneDigits ? { p_phone_digits: values.phoneDigits } : {}),
       },
     });
     if (!isRecord(result) || !isRecord(result.link) || !isRecord(result.package)) {

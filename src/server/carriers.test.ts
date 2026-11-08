@@ -5,7 +5,7 @@ describe('Mondial Relay label barcode inputs', () => {
   const barcode = '12123999999999999999999987'; // Official specification example.
 
   it('accepts a verified barcode without a postcode and preserves optional legacy postcodes', () => {
-    expect(normalizeCarrierInputs('mondial-relay', barcode, '', '')).toEqual({ trackingUrl: null, dpdPostcode: null });
+    expect(normalizeCarrierInputs('mondial-relay', barcode, '', '')).toEqual({ trackingUrl: null, dpdPostcode: null, phoneDigits: null });
     expect(normalizeCarrierInputs('mondial-relay', barcode, '', '75001').dpdPostcode).toBe('75001');
   });
 
@@ -21,7 +21,7 @@ describe('optional carrier inputs', () => {
   const dpdNumber = '06080000000001';
 
   it('lets DPD track without a postcode and still checks one that is supplied', () => {
-    expect(normalizeCarrierInputs('dpd', dpdNumber, '', '')).toEqual({ trackingUrl: null, dpdPostcode: null });
+    expect(normalizeCarrierInputs('dpd', dpdNumber, '', '')).toEqual({ trackingUrl: null, dpdPostcode: null, phoneDigits: null });
     expect(normalizeCarrierInputs('dpd', dpdNumber, '', ' 8000 ').dpdPostcode).toBe('8000');
     expect(normalizeCarrierInputs('dpd', dpdNumber, '', '1012 ab').dpdPostcode).toBe('1012 AB');
     expect(() => normalizeCarrierInputs('dpd', dpdNumber, '', '80')).toThrow('postcode');

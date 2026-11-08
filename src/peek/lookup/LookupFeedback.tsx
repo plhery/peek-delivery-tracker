@@ -190,7 +190,8 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
         <p id={`${id}-help`} className="door-aside">
           {t(found.suggested ? 'detail.inputSuggested' : requirementHelpKey(fieldCarrier.id, requirement), { carrier: fieldCarrier.name })}
         </p>
-        <p className="door-private"><Icon name="lock" />{t('door.postcode.private', { carrier: fieldCarrier.name })}</p>
+        {/* Phone digits go to their carrier alone, as their help line says. */}
+        <p className="door-private"><Icon name="lock" />{t(requirement.field === 'phoneDigits' ? 'door.phoneDigits.private' : 'door.postcode.private', { carrier: fieldCarrier.name })}</p>
       </div>;
     })}
 

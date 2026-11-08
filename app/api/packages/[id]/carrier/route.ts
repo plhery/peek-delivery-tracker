@@ -49,6 +49,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
   const unchanged = original.carrier === values.carrier
     && nullableText(original.tracking_url) === values.trackingUrl
     && nullableText(original.dpd_postcode) === values.dpdPostcode
+    && nullableText(original.phone_digits) === values.phoneDigits
     && holdsPostcodeCountry(original, values.dpdPostcodeCountry);
   if (body.providerPostcode !== undefined && !unchanged) throw new HttpError(400, 'Save the carrier change before updating provider input');
   let providerPostcode: string | undefined;
@@ -71,6 +72,10 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     const changed = await client.getPackage(packageId);
     const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
     if (write) await service.updatePackage(packageId, write);
+  }
+  // A new carrier or number forgets the digits (packages_forget_phone_digits); the ones sent are written after it.
+  if (!providerPostcode && (values.phoneDigits || original.phone_digits)) {
+    await service.updatePackage(packageId, { phone_digits: values.phoneDigits });
   }
 
   if (providerPostcode) {

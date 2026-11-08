@@ -63,7 +63,9 @@ such as `MY + 10 digits + US`), its `package_id` or its check's `attempt_id`, an
 else the line would repeat the number, such as in a carrier's error, it reads as that
 shape. Sentry reports keep the errors and details, name a parcel the same way, shorten
 addresses and leave out the failing request's body, query and client address (see "What
-Sentry reports keep" below). Both survive parcel deletion until retention expires. Restrict access and retention, and sanitize anything
+Sentry reports keep" below). Neither holds the phone digits a parcel keeps for J&T: the apps send
+them in request bodies, the carrier's address loses its query, and the scraper leaves them out
+of its errors and diagnostics. Both survive parcel deletion until retention expires. Restrict access and retention, and sanitize anything
 you share publicly.
 
 Parcel link ids and owner keys are the exception, because holding one is enough to read

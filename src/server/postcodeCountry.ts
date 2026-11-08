@@ -18,8 +18,10 @@ export function carrierLookupInput(
   postcode: string | null,
   postcodeCountry?: string | null,
   language?: string | null,
+  phoneDigits?: string | null,
 ): TrackingInput & { postcodeCountry?: string } {
-  return { number, trackingUrl, postcode, ...(postcode && postcodeCountry ? { postcodeCountry } : {}), ...(language ? { language } : {}) };
+  return { number, trackingUrl, postcode, ...(postcode && postcodeCountry ? { postcodeCountry } : {}), ...(language ? { language } : {}),
+    ...(phoneDigits ? { phoneDigits } : {}) };
 }
 
 /** carrier_data with the parcel's postcode bound to its country, or without a country. */

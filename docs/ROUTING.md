@@ -609,6 +609,15 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   It is given once (`account_postcode`), so a postcode the owner clears or changes stays as they
   left it, and the next check asks the carrier with it as with one the owner typed. With none to
   give, the parcel page says the carrier shows more with the postcode and offers to add it.
+  J&T Express Mexico and China show their scans only with the last four digits of the
+  recipient's or sender's phone (`phone_digits`, the catalog's optional `phoneDigits`). The
+  owner gives them on Add, on a carrier change or from the parcel page, which offers them once
+  a check has run without them. They go to that carrier's own lookup alone: never to a
+  candidate, another leg's carrier or a universal provider, and never in `routing.input_needed`,
+  where the apps read a postcode or link. A new carrier or number forgets them
+  (`packages_forget_phone_digits`). A lookup without an account shares its one-off parcel only
+  with lookups that gave the same digits, and only the key holder keeps them when the parcel
+  goes to an account.
   When the number points to one carrier, `routing.likely_carrier` names it once that carrier
   was asked without saying it knows the number (recognition's answer, or a not-found or
   no-history answer to the check), with `since` from the first such check. A number points to

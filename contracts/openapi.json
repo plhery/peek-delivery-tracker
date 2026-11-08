@@ -762,7 +762,9 @@
       "aliases": [
         "DHL eCommerce Solutions",
         "DHL Global Mail",
-        "DHL eCommerce Global Mail"
+        "DHL eCommerce Global Mail",
+        "DHL eCommerce Asia",
+        "DHL eCommerce US"
       ],
       "countries": [
         "DE",
@@ -17131,7 +17133,22 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "j-and-t-cn",
+        "requirements": [
+          {
+            "field": "phoneDigits",
+            "validator": "phoneLastFour",
+            "optional": true,
+            "showsMore": true,
+            "label": "Last 4 digits of the phone number",
+            "type": "text",
+            "help": "J&T Express China shows a parcel only with the last four digits of the recipient's or sender's phone. Without them, other sources are asked.",
+            "pattern": "^[0-9]{4}$",
+            "maxLength": 4,
+            "inputMode": "numeric",
+            "autoComplete": "off"
+          }
+        ]
       },
       "trackingUrlTemplate": "https://www.jtexpress.com.cn/service.html?indexIpt={trackingNumber}",
       "linkRules": [
@@ -21150,7 +21167,22 @@
       "timezone": "America/Mexico_City",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "j-and-t-mx",
+        "requirements": [
+          {
+            "field": "phoneDigits",
+            "validator": "phoneLastFour",
+            "optional": true,
+            "showsMore": true,
+            "label": "Last 4 digits of the phone number",
+            "type": "text",
+            "help": "J&T Express Mexico shows a parcel only with the last four digits of the recipient's or sender's phone. Without them, other sources are asked.",
+            "pattern": "^[0-9]{4}$",
+            "maxLength": 4,
+            "inputMode": "numeric",
+            "autoComplete": "off"
+          }
+        ]
       },
       "trackingUrlTemplate": "https://www.jtexpress.mx/trajectoryQuery?waybillNo={trackingNumber}&flag=1",
       "linkRules": [
@@ -55027,6 +55059,14 @@
             "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Z0-9]+(?:[ -][A-Z0-9]+)*$",
             "description": "Canonical recipient postcode used by DPD and GLS Switzerland, Mondial Relay, Heppner or Paack. DPD postcodes are stored uppercase with single spaces, Paack postcodes uppercase without spaces; the database field keeps its historical name for API compatibility."
           },
+          "phone_digits": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9]{4}$",
+            "description": "The last four digits of the recipient’s or sender’s phone that the owner gave J&T Express Mexico or J&T Express China. Shown to the owner only."
+          },
           "carrier_data": {
             "type": "object",
             "additionalProperties": true,
@@ -55429,6 +55469,11 @@
             "pattern": "^[A-Z]{2}$",
             "description": "ISO country code of dpdPostcode when it is from another country than the carrier's home, such as a Belgian postcode for a parcel PostNL delivers in Belgium. Sent to the carrier with the postcode. A carrier that checks its own countries' postcode shapes takes only those countries; the home country, or no postcode, keeps none."
           },
+          "phoneDigits": {
+            "type": "string",
+            "pattern": "^[0-9]{4}$",
+            "description": "The last four digits of the recipient’s or sender’s phone, optional for J&T Express Mexico and J&T Express China, which show a parcel only with them. A credential: sent only to that carrier, never shown on shared links."
+          },
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
@@ -55473,6 +55518,11 @@
             "type": "string",
             "pattern": "^[A-Z]{2}$",
             "description": "ISO country code of dpdPostcode when it is from another country than the carrier's home, such as a Belgian postcode for a parcel PostNL delivers in Belgium. Sent to the carrier with the postcode. A carrier that checks its own countries' postcode shapes takes only those countries; the home country, or no postcode, keeps none."
+          },
+          "phoneDigits": {
+            "type": "string",
+            "pattern": "^[0-9]{4}$",
+            "description": "The last four digits of the recipient’s or sender’s phone, for J&T Express Mexico and J&T Express China; see CreatePackageRequest. Left out, the parcel keeps none."
           },
           "providerPostcode": {
             "type": "string",
@@ -56935,6 +56985,11 @@
             "type": "string",
             "pattern": "^[A-Z]{2}$",
             "description": "ISO country code of dpdPostcode; see CreatePackageRequest."
+          },
+          "phoneDigits": {
+            "type": "string",
+            "pattern": "^[0-9]{4}$",
+            "description": "The last four digits of the recipient’s or sender’s phone, for the carriers that take them; see CreatePackageRequest."
           },
           "lookupCountryHint": {
             "type": "string",

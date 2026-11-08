@@ -27,7 +27,7 @@ begin
       'public.claim_public_lookup(text,integer,integer,text,text,integer)',
       'public.public_lookup_usage_summary()',
       'public.public_parcel(text,text,boolean)',
-      'public.create_one_off_parcel(text,text,text,text,text)',
+      'public.create_one_off_parcel(text,text,text,text,text,text)',
       'public.forget_parcel_link(text,text)',
       'public.forget_expired_parcel_links()',
       'public.followed_one_off_packages(timestamptz)',

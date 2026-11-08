@@ -30,7 +30,7 @@ describe('public carrier catalog route', () => {
     expect(body['x-carriers'].unknown).toBeDefined();
     // Clients fill a carrier's inputs by these names, which are the app's and not the scraper's.
     const fields = Object.values(body['x-carriers']).flatMap((carrier) => (carrier.tracking.requirements ?? []).map((requirement) => requirement.field));
-    expect([...new Set(fields)].sort()).toEqual(['dpdPostcode', 'trackingUrl']);
+    expect([...new Set(fields)].sort()).toEqual(['dpdPostcode', 'phoneDigits', 'trackingUrl']);
     expect(body['x-carriers'].dpd?.tracking.requirements?.map((requirement) => requirement.field)).toEqual(['dpdPostcode']);
 
     const cached = await GET(

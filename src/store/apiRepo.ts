@@ -150,6 +150,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     trackingUrl: row.tracking_url ?? undefined,
     dpdPostcode: row.dpd_postcode ?? undefined,
     dpdPostcodeCountry: storedPostcodeCountry(row.carrier_data, row.dpd_postcode),
+    phoneDigits: row.phone_digits ?? undefined,
     dpdPostcodeVerified: row.carrier_data?.dpd_postcode_verified ?? undefined,
     postcodeRefused: row.carrier_data?.routing?.postcode_refused?.carrier === row.carrier || undefined,
     trackingProvider: row.carrier_data?.tracking_provider ?? undefined,
@@ -392,6 +393,7 @@ export function createApiRepo(
         trackingUrl: input.trackingUrl?.trim() || undefined,
         dpdPostcode: input.dpdPostcode?.trim() || undefined,
         dpdPostcodeCountry: input.dpdPostcode?.trim() ? input.dpdPostcodeCountry : undefined,
+        phoneDigits: input.phoneDigits?.trim() || undefined,
       };
       const payload = await request<ApiCreatePackageResponse>('/api/packages', auth, {
         method: 'POST',
@@ -422,6 +424,7 @@ export function createApiRepo(
         trackingUrl: input.trackingUrl?.trim() || undefined,
         dpdPostcode: input.dpdPostcode?.trim() || undefined,
         dpdPostcodeCountry: input.dpdPostcode?.trim() ? input.dpdPostcodeCountry : undefined,
+        phoneDigits: input.phoneDigits?.trim() || undefined,
       };
       const payload = await request<ApiChangePackageCarrierResponse>(
         `/api/packages/${encodeURIComponent(id)}/carrier`,

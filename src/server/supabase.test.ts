@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { STORED_EVENT_IDENTITIES, SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
 import { postgrestTables } from '../test/postgrest';
+import type { JsonObject } from './types';
 
 describe('guarded tracking writes', () => {
   it('requests account-scoped automatic linking', async () => {
@@ -25,7 +26,7 @@ describe('guarded tracking writes', () => {
     await client.listActivePackages();
     const selected = new URL(`https://database.example${request.mock.calls[0][0]}`).searchParams.get('select')!.split(',');
     expect(selected).toEqual(expect.arrayContaining(['sync_status', 'sync_error', 'last_synced_at', 'expected_delivery', 'carrier', 'created_at',
-      'carrier_data', 'one_off']));
+      'carrier_data', 'one_off', 'tracking_generation', 'sync_revision']));
   });
 
   it('dates a parcel\'s news by its newest scan in a stage, before any scan in none', async () => {
@@ -46,10 +47,10 @@ describe('guarded tracking writes', () => {
     } });
   });
 
-  it('atomically submits events, cleanup and status with the configuration generation', async () => {
+  it('atomically submits events, cleanup and status with the configuration generation and the revision it read', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue(true);
-    const parcel = { id: 'package-1', tracking_generation: 'generation-1' };
+    const parcel = { id: 'package-1', tracking_generation: 'generation-1', sync_revision: 4 };
     const events = [{ stage: 'in_transit' }];
     await expect(client.applyTrackingSync(parcel, { sync_status: 'ok' }, events, ['REPORTED'], ['unknown:copy']))
       .resolves.toBe(true);
@@ -58,7 +59,7 @@ describe('guarded tracking writes', () => {
       body: {
         p_package_id: 'package-1', p_tracking_generation: 'generation-1',
         p_values: { sync_status: 'ok' }, p_events: events, p_delete_descriptions: ['REPORTED'],
-        p_delete_event_ids: ['unknown:copy'],
+        p_delete_event_ids: ['unknown:copy'], p_sync_revision: 4, p_new_event_ids: [],
       },
     });
     request.mockResolvedValue(false);
@@ -66,7 +67,55 @@ describe('guarded tracking writes', () => {
     await expect(client.applyTrackingSync({ id: 'package-1' }, {})).rejects.toThrow('generation');
   });
 
-  it('loads generation and current stage for workers but not public package responses', async () => {
+  it('follows its own writes, and answers null when another check wrote the parcel since it was read', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    let stored = 7;
+    // The database's fence: a write from the revision it holds applies and adds one.
+    const request = vi.spyOn(client, 'request').mockImplementation(async (_path, init) => {
+      const body = init?.body as { p_sync_revision: number };
+      if (body.p_sync_revision !== stored) return null;
+      stored += 1;
+      return true;
+    });
+    const lease = { jobId: 'job-1', workerId: 'worker-1' };
+    const parcel: JsonObject = { id: 'package-1', tracking_generation: 'generation-1', sync_revision: 7 };
+    await expect(client.applyTrackingSync(parcel, { sync_status: 'syncing' }, [], [], [], lease)).resolves.toBe(true);
+    await expect(client.applyTrackingSync(parcel, { sync_status: 'ok' }, [], [], [], lease)).resolves.toBe(true);
+    expect(request.mock.calls.map(([path, init]) => [path, (init?.body as JsonObject).p_sync_revision]))
+      .toEqual([['/rest/v1/rpc/apply_leased_tracking_sync', 7], ['/rest/v1/rpc/apply_leased_tracking_sync', 8]]);
+    expect(parcel.sync_revision).toBe(9);
+
+    // Another check of the parcel wrote it: this one's next write keeps only its new scans.
+    stored += 1;
+    await expect(client.applyTrackingSync(parcel, { sync_status: 'ok' })).resolves.toBeNull();
+    expect(parcel.sync_revision).toBe(9);
+    request.mockResolvedValue(false);
+    await expect(client.applyTrackingSync(parcel, { sync_status: 'ok' })).resolves.toBe(false);
+    expect(parcel.sync_revision).toBe(9);
+  });
+
+  it('names the scans new to the parcel it read, and none when it did not read the stored ones', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue(true);
+    const events = [{ provider_event_id: 'ups:stored', stage: 'in_transit' }, { provider_event_id: 'ups:new', stage: 'delivered' },
+      { stage: 'in_transit' }];
+    await client.applyTrackingSync({ id: 'package-1', tracking_generation: 'generation-1', sync_revision: 0,
+      [STORED_EVENT_IDENTITIES]: [{ provider_event_id: 'ups:stored', occurred_at: '2026-11-01T10:00:00Z' }] }, {}, events);
+    await client.applyTrackingSync({ id: 'package-1', tracking_generation: 'generation-1', sync_revision: 1 }, {}, events);
+    expect(request.mock.calls.map(([, init]) => (init?.body as JsonObject).p_new_event_ids)).toEqual([['ups:new'], []]);
+  });
+
+  it('refuses to write without the revision the parcel was read at', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue(true);
+    for (const revision of [undefined, null, '3', 1.5]) {
+      await expect(client.applyTrackingSync({ id: 'package-1', tracking_generation: 'generation-1', sync_revision: revision }, {}))
+        .rejects.toThrow('sync revision');
+    }
+    expect(request).not.toHaveBeenCalled();
+  });
+
+  it('loads generation, sync revision and current stage for workers but not public package responses', async () => {
     const service = new SupabaseServiceClient('https://database.example', 'service-key');
     const user = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const serviceRequest = vi.spyOn(service, 'request').mockResolvedValue([]);
@@ -77,6 +126,8 @@ describe('guarded tracking writes', () => {
     expect(userRequest.mock.calls[0][0]).not.toContain('tracking_generation');
     expect(decodeURIComponent(serviceRequest.mock.calls[0][0])).toContain('tracking_generation,user_id');
     expect(userRequest.mock.calls[0][0]).not.toContain('user_id');
+    expect(decodeURIComponent(serviceRequest.mock.calls[0][0])).toContain(',sync_revision,');
+    expect(userRequest.mock.calls[0][0]).not.toContain('sync_revision');
   });
 
   it('gives only the sync loaders the stored event identities, under their own alias', async () => {

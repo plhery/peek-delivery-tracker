@@ -16,7 +16,7 @@ declare
   old_deadline timestamptz;
 begin
   if has_function_privilege('authenticated', 'public.renew_sync_job_lease(uuid,text,integer)', 'execute')
-    or has_function_privilege('anon', 'public.apply_leased_tracking_sync(uuid,text,uuid,uuid,jsonb,jsonb,text[],text[])', 'execute')
+    or has_function_privilege('anon', 'public.apply_leased_tracking_sync(uuid,text,uuid,uuid,jsonb,jsonb,text[],text[],bigint,text[])', 'execute')
     or has_function_privilege('authenticated', 'public.finish_sync_job(uuid,text,jsonb,text)', 'execute') then
     raise exception 'lease functions are exposed to users';
   end if;
@@ -75,7 +75,7 @@ declare
   deleted_id constant uuid := '97000000-0000-0000-0000-000000000005';
   changed_id constant uuid := '97000000-0000-0000-0000-000000000006';
   owner_key constant text := repeat('c', 64);
-  leased_write constant regprocedure := 'public.apply_leased_tracking_sync(uuid,text,uuid,uuid,jsonb,jsonb,text[],text[])';
+  leased_write constant regprocedure := 'public.apply_leased_tracking_sync(uuid,text,uuid,uuid,jsonb,jsonb,text[],text[],bigint,text[])';
   job_id uuid;
   generation uuid;
   lookup jsonb;

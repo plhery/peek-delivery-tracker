@@ -1362,6 +1362,8 @@ function untilShutdown<T>(work: Promise<T>, signal?: AbortSignal): Promise<T> {
 }
 
 class SupersededTrackingSync extends Error {}
+/** Another check wrote the parcel after this one read it: only the scans new to the parcel were stored. */
+class OvertakenTrackingSync extends SupersededTrackingSync {}
 
 export class TrackingSyncService {
   #tail: Promise<void> = Promise.resolve();
@@ -1894,6 +1896,7 @@ export class TrackingSyncService {
       const applied = context.lease
         ? await this.client.applyTrackingSync(parcel, values, newEvents, deleteDescriptions, deleteEventIds, context.lease)
         : await this.client.applyTrackingSync(parcel, values, newEvents, deleteDescriptions, deleteEventIds);
+      if (applied === null) throw new OvertakenTrackingSync('Another check wrote the parcel during the check');
       if (!applied) {
         throw new SupersededTrackingSync('Tracking configuration changed during the check');
       }
@@ -1907,8 +1910,8 @@ export class TrackingSyncService {
         consumeAddition = false;
       }
     };
-    const superseded = async (): Promise<SyncOutcome> => {
-      await audit.finish({ outcome: 'superseded' });
+    const superseded = async (error: SupersededTrackingSync): Promise<SyncOutcome> => {
+      await audit.finish({ outcome: 'superseded', ...(error instanceof OvertakenTrackingSync ? { errorType: 'NewerParcelWrite' } : {}) });
       return 'superseded';
     };
 
@@ -1929,7 +1932,7 @@ export class TrackingSyncService {
         return 'unsupported';
       } catch (error) {
         context.signal?.throwIfAborted();
-        if (error instanceof SupersededTrackingSync) return superseded();
+        if (error instanceof SupersededTrackingSync) return superseded(error);
         audit.reportError(error, 'persist_package');
         await audit.finish({ outcome: 'error', error });
         throw error;
@@ -2694,7 +2697,7 @@ export class TrackingSyncService {
       return outcome === 'error' ? 'errors' : outcome;
     } catch (error) {
       context.signal?.throwIfAborted();
-      if (error instanceof SupersededTrackingSync) return superseded();
+      if (error instanceof SupersededTrackingSync) return superseded(error);
       if (error instanceof RoutingDeferred) {
         // A parcel with no scans whose own carrier refuses the number, such as one chosen by hand
         // that issues no number of its shape, shows why at the first check: only its details can change that.
@@ -2713,7 +2716,7 @@ export class TrackingSyncService {
             carrier_data: { ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}), routing: error.routing },
           });
         } catch (persistenceError) {
-          if (persistenceError instanceof SupersededTrackingSync) return superseded();
+          if (persistenceError instanceof SupersededTrackingSync) return superseded(persistenceError);
           audit.reportError(persistenceError, 'persist_routing_state');
           throw persistenceError;
         }
@@ -2738,7 +2741,7 @@ export class TrackingSyncService {
           });
         }, () => ({ purpose: 'record_error' }));
       } catch (persistenceError) {
-        if (persistenceError instanceof SupersededTrackingSync) return superseded();
+        if (persistenceError instanceof SupersededTrackingSync) return superseded(persistenceError);
         audit.reportError(error, operation);
         audit.reportError(persistenceError, 'persist_error_state');
         await audit.finish({

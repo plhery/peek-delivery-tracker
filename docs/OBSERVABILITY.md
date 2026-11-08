@@ -157,7 +157,10 @@ A check whose parcel is deleted or whose carrier changes while it runs ends as
 `superseded`: nothing is saved and no error is reported, whether its next write or the
 worker's lease renewal notices first. A deleted parcel takes the check's job and audit rows
 with it, and a carrier change ends the job, so the worker drops the job instead of
-finishing it.
+finishing it. A check that another check of the parcel overtook, by claiming or writing it
+after this one read it, also ends `superseded`, with `error_type` `NewerParcelWrite`: only
+the scans new to the parcel are stored, and the next dispatch announces them
+([ARCHITECTURE.md](ARCHITECTURE.md)).
 
 `delivery_emails` records what was emailed: one row per parcel and stage claimed for a
 delivery email, with the account, the scan it told and its `stage` (`delivered`,

@@ -350,7 +350,10 @@ overall, inside the platform's 30 s grace period.
 If a process is killed or the host dies, its job's **90 s lease** (renewed every 15 s)
 expires and another worker picks it up. A job gets three crash attempts; orderly deploys
 don't count. A job's writes are fenced by its lease and the database clock, so
-overlapping containers never run the same job twice.
+overlapping containers never run the same job twice. Two jobs can still check one parcel
+at once, such as the old container's scheduled run and the new one's check of the parcel:
+the parcel's sync revision fences those, and the check that read the parcel last writes it
+([ARCHITECTURE.md](ARCHITECTURE.md)).
 
 Push notifications go out from one container at a time. A dispatch holds a **60 s lease**
 (renewed every 15 s, and stopped after 30 s without a confirmed renewal); a container

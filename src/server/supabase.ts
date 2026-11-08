@@ -44,7 +44,7 @@ const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,d
  * The columns the schedule reads, `one_off` among them: a lookup without an account leaves the
  * schedule once nobody has answered for its number (unseenLookup.ts).
  */
-const ACTIVE_PACKAGE_SELECT = 'id,user_id,one_off,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,phone_digits,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
+const ACTIVE_PACKAGE_SELECT = 'id,user_id,one_off,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,phone_digits,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,sync_revision,archived_at';
 /**
  * Where the sync loaders put each stored event's identity, instant, stage and
  * wording, so a reworded scan can update its row in place and another source's
@@ -1153,7 +1153,7 @@ export class SupabaseServiceClient extends SupabaseClient {
    * identities instead of the public event list, which the worker never reads.
    */
   override async getPackage(packageId: string): Promise<JsonObject | null> {
-    const select = `${PACKAGE_COLUMNS},current_stage,tracking_generation,user_id,one_off,${SYNC_EXTRAS}`;
+    const select = `${PACKAGE_COLUMNS},current_stage,tracking_generation,user_id,one_off,sync_revision,${SYNC_EXTRAS}`;
     const params = query({
       select,
       id: `eq.${packageId}`,
@@ -1560,6 +1560,13 @@ export class SupabaseServiceClient extends SupabaseClient {
     }));
   }
 
+  /**
+   * Writes a check's result over the parcel it read. True when it applied: the parcel's
+   * `sync_revision` then follows the write, so the check's own writes never fence its next one.
+   * False when the parcel was deleted or its carrier, number or inputs changed. Null when another
+   * check wrote the parcel since this one read it: only the scans new to the parcel it read were
+   * stored, and the newer write keeps the rest (migration 20261108140000).
+   */
   async applyTrackingSync(
     parcel: JsonObject,
     values: JsonObject,
@@ -1567,12 +1574,22 @@ export class SupabaseServiceClient extends SupabaseClient {
     deleteDescriptions: string[] = [],
     deleteEventIds: string[] = [],
     lease?: { jobId: string; workerId: string },
-  ): Promise<boolean> {
+  ): Promise<boolean | null> {
     if (typeof parcel.tracking_generation !== 'string') {
       // Fail closed if a caller did not load the configuration snapshot.
       throw new TypeError('A tracking generation is required for synchronization');
     }
-    return await this.request(`/rest/v1/rpc/${lease ? 'apply_leased_tracking_sync' : 'apply_tracking_sync'}`, {
+    const revision = parcel.sync_revision;
+    if (typeof revision !== 'number' || !Number.isSafeInteger(revision)) {
+      throw new TypeError('A sync revision is required for synchronization');
+    }
+    // A loader without the stored identities knows of no scan as new: an overtaken write keeps none.
+    const stored = Array.isArray(parcel[STORED_EVENT_IDENTITIES])
+      ? new Set(parcel[STORED_EVENT_IDENTITIES].flatMap((row) => isRecord(row) && typeof row.provider_event_id === 'string' ? [row.provider_event_id] : []))
+      : null;
+    const newEventIds = stored ? events.flatMap((event) => typeof event.provider_event_id === 'string'
+      && !stored.has(event.provider_event_id) ? [event.provider_event_id] : []) : [];
+    const applied = await this.request(`/rest/v1/rpc/${lease ? 'apply_leased_tracking_sync' : 'apply_tracking_sync'}`, {
       method: 'POST',
       body: {
         ...(lease ? { p_job_id: lease.jobId, p_worker_id: lease.workerId } : {}),
@@ -1582,8 +1599,15 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_events: events,
         p_delete_descriptions: deleteDescriptions,
         p_delete_event_ids: deleteEventIds,
+        p_sync_revision: revision,
+        p_new_event_ids: newEventIds,
       },
-    }) === true;
+    });
+    if (applied === true) {
+      parcel.sync_revision = revision + 1;
+      return true;
+    }
+    return applied === null ? null : false;
   }
 
   async startSyncAttempt(attemptId: string, values: JsonObject, lease?: { jobId: string; workerId: string }): Promise<void> {

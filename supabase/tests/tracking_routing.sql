@@ -116,7 +116,7 @@ begin
   perform public.change_owned_package_carrier(parcel_id, 'dhl');
   if exists (select 1 from public.packages where id = parcel_id and carrier_data ?| array['auto_changed_from','auto_changed_to','auto_changed_at']) then raise exception 'Manual edit retained notice'; end if;
   if not exists (select 1 from public.tracking_events where package_id = parcel_id and provider_event_id = 'correction:1') then raise exception 'Manual edit lost history'; end if;
-  if has_function_privilege('authenticated','public.apply_tracking_sync(uuid,uuid,jsonb,jsonb,text[],text[])','execute') then raise exception 'Correction callable by client'; end if;
+  if has_function_privilege('authenticated','public.apply_tracking_sync(uuid,uuid,jsonb,jsonb,text[],text[],bigint,text[])','execute') then raise exception 'Correction callable by client'; end if;
 end;
 $$;
 -- Public specification barcode: both creation and a carrier edit may omit the postcode.

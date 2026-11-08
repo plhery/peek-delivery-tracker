@@ -12,8 +12,8 @@ declare
   new_generation uuid;
   stale_events jsonb := '[{"provider_event_id":"old:delivered","stage":"delivered","description":"Old carrier result","occurred_at":"2026-09-06T12:00:00Z"}]';
 begin
-  if has_function_privilege('authenticated', 'public.apply_tracking_sync(uuid,uuid,jsonb,jsonb,text[],text[])', 'execute')
-      or has_function_privilege('anon', 'public.apply_tracking_sync(uuid,uuid,jsonb,jsonb,text[],text[])', 'execute') then
+  if has_function_privilege('authenticated', 'public.apply_tracking_sync(uuid,uuid,jsonb,jsonb,text[],text[],bigint,text[])', 'execute')
+      or has_function_privilege('anon', 'public.apply_tracking_sync(uuid,uuid,jsonb,jsonb,text[],text[],bigint,text[])', 'execute') then
     raise exception 'users can call service-only tracking persistence';
   end if;
   select tracking_generation into original_generation from public.packages where id = parcel_id;

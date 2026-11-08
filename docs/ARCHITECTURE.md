@@ -56,6 +56,14 @@ Key server modules:
 - `trackingSync.ts` runs one refresh through the adapter registry;
   `trackingRouting.ts` decides which source to ask ([ROUTING.md](ROUTING.md)), and
   `sharedLookups.ts` lets the copies of a number in one scheduled run share their lookups.
+  A check claims the parcel, asks, then writes what it found, each in one call
+  (`apply_tracking_sync`) against the parcel it read: its tracking generation, which a
+  change of carrier, number or inputs renews, and its sync revision, which each applied
+  write moves on, the check's own too. Two jobs' leases let two checks of a parcel overlap,
+  as two servers' do during a deploy. Of two that read one revision, the second to claim
+  stops before asking anyone; one whose result another check's write overtook stores only
+  the scans new to the parcel it read, in no minute the parcel already holds, and leaves
+  the rest, its deletions included, to the newer write.
 - `eventPlaces.ts` serves a parcel's timeline (see [Data lifecycle](#data-lifecycle))
   and uses the scraper's place resolver to put each scan on the map,
   when the API returns a parcel, telling it the parcel's destination and carriers ([README](https://github.com/plhery/universal-parcel-scraper/blob/main/places/README.md)).

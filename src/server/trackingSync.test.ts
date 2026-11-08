@@ -1232,7 +1232,7 @@ function fakeClient(packages: JsonObject[] = []) {
     ...client,
     applyTrackingSync: vi.fn(async (
       parcel: JsonObject, values: JsonObject, events: JsonObject[] = [], descriptions: string[] = [],
-    ) => {
+    ): Promise<boolean | null> => {
       if (events.length) await client.insertEvents(events);
       if (descriptions.length) await client.deleteEventsByDescriptions(parcel.id, new Set(descriptions));
       await client.updatePackage(parcel.id, values);
@@ -6117,7 +6117,56 @@ describe('TrackingSyncService', () => {
       .resolves.toMatchObject({ superseded: 1 });
     expect(adapter.fetch).not.toHaveBeenCalled();
     expect(client.updatePackage).not.toHaveBeenCalled();
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(
+      expect.any(String), expect.objectContaining({ outcome: 'superseded', error_type: null }), expect.any(Array),
+    );
   });
+
+  it('turns a check away before it asks the carrier when another check wrote the parcel since it was read', async () => {
+    const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
+    const client = fakeClient();
+    client.applyTrackingSync.mockResolvedValue(null);
+    const adapter = { fetch: vi.fn() };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter);
+    await expect(service.syncPackage({ id: 'overtaken', carrier: 'ups', tracking_number: '1Z999AA10123456784' }))
+      .resolves.toMatchObject({ superseded: 1, errors: 0 });
+    expect(adapter.fetch).not.toHaveBeenCalled();
+    expect(client.applyTrackingSync).toHaveBeenCalledOnce();
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(
+      expect.any(String), expect.objectContaining({ outcome: 'superseded', error_type: 'NewerParcelWrite' }), expect.any(Array),
+    );
+    expect(report).not.toHaveBeenCalled();
+  });
+
+  it.each(['result', 'error'] as const)(
+    'ends a late %s that another check overtook as superseded, its new scans offered, nothing reported', async (outcome) => {
+      const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
+      const client = fakeClient();
+      // The check's claim applies; another check writes the parcel while the carrier answers.
+      client.applyTrackingSync.mockResolvedValueOnce(true).mockResolvedValue(null);
+      const adapter = { fetch: vi.fn(async (): Promise<CarrierResult> => {
+        if (outcome === 'error') throw new Error('Carrier unavailable');
+        return { status: 'in_transit', events: [{ time: '2026-09-06T12:00:00Z', description: 'In transit' }] };
+      }) };
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter);
+      const parcel = { id: 'overtaken', carrier: 'ups', tracking_number: '1Z999AA10123456784', current_stage: 'pending',
+        tracking_generation: 'generation', sync_revision: 3 };
+
+      await expect(service.syncPackage(parcel)).resolves.toMatchObject({ superseded: 1, updated: 0, errors: 0 });
+      expect(adapter.fetch).toHaveBeenCalled();
+      const [[claim], [late, values, events]] = client.applyTrackingSync.mock.calls;
+      // Both writes go from the parcel the check read, whose revision the client moves past the check's own writes.
+      expect(late).toBe(claim);
+      expect(values).toMatchObject({ sync_status: outcome === 'error' ? 'error' : 'ok' });
+      // The database keeps the ones new to that parcel.
+      if (outcome === 'result') expect(events).toEqual([expect.objectContaining({ description: 'In transit' })]);
+      expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(
+        expect.any(String), expect.objectContaining({ outcome: 'superseded', error_type: 'NewerParcelWrite' }), expect.any(Array),
+      );
+      expect(client.reopenScanAnnouncements).not.toHaveBeenCalled();
+      expect(report).not.toHaveBeenCalled();
+    },
+  );
 
   it('tells support the carrier that confirmed the number directly', async () => {
     const parcel = { id: 'package-1', user_id: 'user-1', carrier: 'dhl', tracking_number: 'HL123456789RV', current_stage: 'pending',

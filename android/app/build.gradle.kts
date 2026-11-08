@@ -96,7 +96,7 @@ android {
         targetSdk = 37
         versionCode = 4
         // The iPhone's MARKETING_VERSION (ios/PeekDeliveryTracker.xcodeproj).
-        versionName = "1.1.9"
+        versionName = "1.1.8"
         // What only a device can show (src/androidTest): the WebView's own engine behind the browser check.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from), and Firebase's.

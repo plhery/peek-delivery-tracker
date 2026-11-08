@@ -482,7 +482,8 @@ export const CARRIER_CAPABILITIES = {
       "Mailing Technology",
       "PostNL - Netherlands Post",
       "Spring Global Mail",
-      "PostNL International Mail"
+      "PostNL International Mail",
+      "NL Post"
     ],
     "countries": [
       "NL"

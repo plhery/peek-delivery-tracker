@@ -39,9 +39,10 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 
 /**
- * DesignSystem.swift's `InlineToast` (A-S68), with one button or none: `symbol` in `tint`, the text on up to two lines
- * in subheadline medium, and `button` in subheadline bold and the tint at its end, on glass cut to 16 with a shadow.
- * At the accessibility sizes the button goes under the text. The asking form, with answers, is the next one.
+ * DesignSystem.swift's `InlineToast` (A-S68), with one button or none: `symbol` in `tint`, the text on up to [maxLines]
+ * lines (two unless told) in subheadline medium, and `button` in subheadline bold and the tint at its end, on glass cut
+ * to 16 with a shadow. At the accessibility sizes the button goes under the text. The asking form, with answers, is the
+ * next one.
  *
  * It is read as one, its button the toast's own action. The list tells TalkBack its news as it appears
  * ([DeliveriesState.announce]), as the iPhone list posts it.
@@ -55,6 +56,7 @@ internal fun InlineToast(
     action: (() -> Unit)?,
     backdrop: MaterialBackdrop?,
     modifier: Modifier = Modifier,
+    maxLines: Int = 2,
 ) {
     val type = PeekTheme.type
     val colors = PeekTheme.colors
@@ -104,7 +106,7 @@ internal fun InlineToast(
         } else {
             Row(padding, horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
                 lead(Modifier)
-                Text(text, Modifier.weight(1f), color = colors.label, style = textStyle, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(text, Modifier.weight(1f), color = colors.label, style = textStyle, maxLines = maxLines, overflow = TextOverflow.Ellipsis)
                 // `Spacer(minLength: 4)`, with the row's spacing on both its sides.
                 if (button != null) Spacer(Modifier.width(4.dp))
                 press()

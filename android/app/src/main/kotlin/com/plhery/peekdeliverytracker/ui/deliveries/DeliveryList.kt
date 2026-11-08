@@ -264,7 +264,8 @@ internal fun DeliveryList(state: DeliveriesState) {
 /**
  * `bottomControls`: the toast of the parcel archived last, whose Undo brings it back, or else the latest message, for
  * four seconds from when it came, which the tab counts ([DeliveriesTab]), or else the invitation to turn notifications
- * on ([invitation]), at most 380 wide in the middle and 8 over the bar rather than the toasts' 5.
+ * on ([invitation]), at most 380 wide in the middle and 8 over the bar rather than the toasts' 5. The parcels a full
+ * account left on this phone show under the archive's box, on every line their words need.
  */
 @Composable
 private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, invitation: Boolean, modifier: Modifier) {
@@ -280,9 +281,17 @@ private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, i
         )
         toast != null -> InlineToast(
             text = toast.text, button = null,
-            symbol = if (toast.warning) "exclamationmark.triangle.fill" else "checkmark.circle.fill",
-            tint = if (toast.warning) colors.warning else colors.resolve(ExperimentalPalette.delivered),
-            action = null, backdrop = backdrop, modifier = modifier,
+            symbol = when {
+                toast.leftOnDevice -> "archivebox.fill"
+                toast.warning -> "exclamationmark.triangle.fill"
+                else -> "checkmark.circle.fill"
+            },
+            tint = when {
+                toast.leftOnDevice -> colors.resolve(ExperimentalPalette.ochre)
+                toast.warning -> colors.warning
+                else -> colors.resolve(ExperimentalPalette.delivered)
+            },
+            action = null, backdrop = backdrop, modifier = modifier, maxLines = if (toast.leftOnDevice) Int.MAX_VALUE else 2,
         )
         invitation -> Box(modifier.padding(bottom = INVITATION_BOTTOM - CONTROLS_BOTTOM), contentAlignment = Alignment.Center) {
             val user by state.source.session.collectAsState()

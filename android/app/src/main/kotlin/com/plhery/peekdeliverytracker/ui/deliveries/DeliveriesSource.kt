@@ -113,6 +113,12 @@ interface DeliveriesSource {
      */
     fun forgetUndo(parcel: Parcel)
 
+    /** How many of this phone's parcels a full account left here, for the list to say once (`store.leftOnDevice`). */
+    val leftOnDevice: StateFlow<ParcelStore.LeftOnDevice?>
+
+    /** `store.leftOnDevice = nil` as the list says it: only this very news, not newer news that came meanwhile. */
+    fun forgetLeftOnDevice(news: ParcelStore.LeftOnDevice)
+
     /** What counts the Undo's seven seconds, for every window this process makes ([UndoClock]). */
     val undoClock: UndoClock
 
@@ -412,6 +418,12 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun forgetUndo(parcel: Parcel) {
         if (container.parcels.undoParcel === parcel) container.parcels.undoParcel = null
+    }
+
+    override val leftOnDevice get() = container.parcels.leftOnDeviceFlow
+
+    override fun forgetLeftOnDevice(news: ParcelStore.LeftOnDevice) {
+        if (container.parcels.leftOnDevice == news) container.parcels.leftOnDevice = null
     }
 
     override val undoClock: UndoClock get() = UNDO_CLOCK

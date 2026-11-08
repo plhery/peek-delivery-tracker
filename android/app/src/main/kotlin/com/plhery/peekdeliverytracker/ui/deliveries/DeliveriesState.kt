@@ -309,12 +309,13 @@ internal fun rememberPromptStates(launch: UUID, adding: MutableState<String?>): 
 )
 
 /**
- * A message under the list (`ListToast`): what a check of the parcels found, or, up to Android 12L, that a number was
- * copied ([Device.confirmsCopies]). Each one shown is another ([id]), even with the same words, and has its own four
- * seconds.
+ * A message under the list (`ListToast`): what a check of the parcels found, how many of this phone's parcels a full
+ * account left here ([leftOnDevice]), or, up to Android 12L, that a number was copied ([Device.confirmsCopies]). Each
+ * one shown is another ([id]), even with the same words, and has its own four seconds; the parcels left here, under the
+ * archive's box, have eight, the time it takes to read what to do about them.
  */
 @Immutable
-internal data class ListToast(val id: Int, val text: String, val warning: Boolean = false)
+internal data class ListToast(val id: Int, val text: String, val warning: Boolean = false, val leftOnDevice: Boolean = false)
 
 /** News TalkBack is told that nothing on screen says (`AccessibilityNotification.Announcement`), each one once. */
 @Immutable
@@ -1137,10 +1138,19 @@ internal class DeliveriesState(
      * pull's message, whose result TalkBack has already heard. An Undo held for TalkBack or Switch Access gives way to
      * it (`onChange(of: toast)`, [UndoClock.held]).
      */
-    fun show(text: String, warning: Boolean = false, announce: Boolean = true) {
-        toast = ListToast(++toasts, text, warning)
+    fun show(text: String, warning: Boolean = false, announce: Boolean = true, leftOnDevice: Boolean = false) {
+        toast = ListToast(++toasts, text, warning, leftOnDevice)
         if (source.undoClock.held.value) source.undoParcel.value?.let(source::forgetUndo)
         if (announce) announce(text)
+    }
+
+    /**
+     * The account had no room for some of the parcels this phone followed before signing in: the list says how many
+     * stayed here, once, as the web's deliveries do after bringing parcels along, and lets the news go.
+     */
+    fun tellLeftOnDevice(news: ParcelStore.LeftOnDevice) {
+        source.forgetLeftOnDevice(news)
+        show(text("link.bring.full.many", mapOf("count" to news.count)), leftOnDevice = true)
     }
 
     /** The message `id` has had its four seconds, unless a newer one took its place. */

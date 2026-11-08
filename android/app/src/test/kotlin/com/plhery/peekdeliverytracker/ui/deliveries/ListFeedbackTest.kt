@@ -48,8 +48,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The list's feedback on a phone: the pull to refresh (A-G06) with its thresholds, the check it starts, and how it
- * ends, the list back at its top however it is thrown into it; the message under the list and its four seconds; the
- * Undo of an archive and its seven, or for as long as TalkBack or Switch Access is on; and what TalkBack is told of each.
+ * ends, the list back at its top however it is thrown into it; the message under the list and its four seconds, or eight
+ * for the parcels a full account left on the phone; the Undo of an archive and its seven, or for as long as TalkBack or
+ * Switch Access is on; and what TalkBack is told of each.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -228,6 +229,30 @@ class ListFeedbackTest {
         assertEquals("Still checking. Updates will appear here.", announced())
         advance(5000)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+    }
+
+    @Test
+    fun theParcelsAFullAccountLeftOnThePhoneAreSaidOnceForEightSeconds() {
+        show()
+        compose.mainClock.autoAdvance = false
+        val words = "Your deliveries are full, so 2 parcels stayed on this device. Archive or delete a few, and Peek will offer them again."
+        compose.runOnUiThread { source.leftOnDevice.value = ParcelStore.LeftOnDevice(2) }
+        advance(100)
+        toast(words).assertExists()
+        assertEquals(words, announced())
+        // Said, the news is let go: nothing brings it back.
+        assertEquals(null, source.leftOnDevice.value)
+        advance(7800)
+        toast(words).assertExists()
+        advance(200)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+        advance(8000)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+
+        // One parcel, in the singular.
+        compose.runOnUiThread { source.leftOnDevice.value = ParcelStore.LeftOnDevice(1) }
+        advance(100)
+        toast("Your deliveries are full, so 1 parcel stayed on this device. Archive or delete a few, and Peek will offer it again.").assertExists()
     }
 
     @Test

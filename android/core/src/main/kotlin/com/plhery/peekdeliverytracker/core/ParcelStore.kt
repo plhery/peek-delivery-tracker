@@ -235,6 +235,9 @@ class ParcelStore(
     /** How a background check of every parcel ended. */
     data class RefreshOutcome(val result: RefreshResult, val id: UUID = UUID.randomUUID())
 
+    /** How many of the parcels followed on this phone before signing in stayed here, because the account was full. */
+    data class LeftOnDevice(val count: Int, val id: UUID = UUID.randomUUID())
+
     /**
      * How a read of the account's list ended. `Skipped`: nothing was read or the answer was set aside, because a change
      * was made meanwhile, a newer read began or the account changed.
@@ -265,6 +268,7 @@ class ParcelStore(
     private val deliveryLiveActivitiesEnabledState = MutableStateFlow(offersLiveActivities && deliveryWidgetStore.liveActivitiesEnabled)
     private val deliveryLiveActivityErrorState = MutableStateFlow<String?>(null)
     private val undoParcelState = MutableStateFlow<Parcel?>(null)
+    private val leftOnDeviceState = MutableStateFlow<LeftOnDevice?>(null)
 
     val parcelsFlow: StateFlow<List<Parcel>> = parcelsState.asStateFlow()
     val loadingFlow: StateFlow<Boolean> = loadingState.asStateFlow()
@@ -284,6 +288,7 @@ class ParcelStore(
     val deliveryLiveActivitiesEnabledFlow: StateFlow<Boolean> = deliveryLiveActivitiesEnabledState.asStateFlow()
     val deliveryLiveActivityErrorFlow: StateFlow<String?> = deliveryLiveActivityErrorState.asStateFlow()
     val undoParcelFlow: StateFlow<Parcel?> = undoParcelState.asStateFlow()
+    val leftOnDeviceFlow: StateFlow<LeftOnDevice?> = leftOnDeviceState.asStateFlow()
 
     /** `objectWillChange`, for what no flow publishes: the postcodes this phone suggests. */
     val objectWillChange = PassthroughSignal()
@@ -393,6 +398,13 @@ class ParcelStore(
             undoParcelState.value = value
         }
 
+    /** News for the list to say once, and then set back to null: the account had no room for some of this phone's parcels. */
+    var leftOnDevice: LeftOnDevice?
+        get() = leftOnDeviceState.value
+        set(value) {
+            leftOnDeviceState.value = value
+        }
+
     private val demo = DemoRepository(defaults, { localizer.language }, now, importCharges)
     private val demoShares = DemoParcelShares(defaults)
     private val shareNotes = ParcelShareNotes(defaults)
@@ -469,6 +481,8 @@ class ParcelStore(
             shareNotes.forgetAll()
             // So does what it answered about its parcels.
             ParcelFeedbackMemory(defaults, now).forgetAll()
+            // The next sign-in hears again about the parcels its account had no room for.
+            LeftOnDeviceMemory.forget(owner, defaults)
             releaseDeviceNotifications(from = owner)
         }
         cacheOwnerId = session.user?.id
@@ -482,6 +496,7 @@ class ParcelStore(
         // Open on content: the saved list, or the demo box, instead of an empty frame.
         parcels = saved ?: if (session.isDemo) demo.list() else if (session.isGuest) device.list() else emptyList()
         undoParcel = null
+        leftOnDevice = null
         loading = session.isAuthenticated && parcels.isEmpty()
         refreshing = false
         errorMessage = null
@@ -1569,13 +1584,16 @@ class ParcelStore(
     }
 
     /**
-     * The parcels followed on this phone before signing in join the account, under the names they had here. The
-     * device lets go of each one the account now has.
+     * The parcels followed on this phone before signing in join the account, under the names they had here, each time
+     * the account's list starts: at sign-in, at each launch and as an invitation comes or goes. The device lets go of
+     * each one the account now has. One the account has no room for stays here, and the list says how many stayed once
+     * a sign-in, and again only when that number changes; a claim cut short says nothing.
      */
     private suspend fun claimDeviceParcels() {
+        val user = session.user ?: return
         val claims = device.claims
-        if (session.user == null || claims.isEmpty()) return
         val generation = session.generation
+        var full = 0
         for (start in claims.indices step 20) {
             val batch = claims.subList(start, minOf(start + 20, claims.size)).toList()
             val response = try {
@@ -1601,7 +1619,9 @@ class ParcelStore(
                     }
                 }.map { it.id }.toSet(),
             )
+            full += response.results.count { it.outcome == ClaimParcelResultOutcome.Quota }
         }
+        if (LeftOnDeviceMemory.isNews(full, user.id, defaults)) leftOnDevice = LeftOnDevice(full)
     }
 
     private fun monitorJobs(jobIds: List<UUID>) {
@@ -1695,6 +1715,34 @@ class ParcelStore(
             defaults.set(value.uuidString, forKey = installationIdKey)
             return value
         }
+    }
+}
+
+/**
+ * How many of this phone's parcels an account was last told had stayed here for want of room, so that bringing them
+ * along again at a launch, or as an invitation comes or goes, says nothing new. Signing out forgets it.
+ */
+object LeftOnDeviceMemory {
+    private fun key(userId: UUID): String = "sdt.leftOnDevice.v1.${userId.uuidString}"
+
+    /**
+     * Whether `count` parcels staying here is news to the account: some stay, and not as many as it was last told.
+     * Remembers the count as told; none staying forgets it.
+     */
+    fun isNews(count: Int, userId: UUID, defaults: UserDefaults): Boolean {
+        val key = key(userId)
+        val told = defaults.string(forKey = key)?.toIntOrNull() ?: 0
+        if (count <= 0) {
+            if (told != 0) defaults.removeObject(forKey = key)
+            return false
+        }
+        if (count == told) return false
+        defaults.set(count.toString(), forKey = key)
+        return true
+    }
+
+    fun forget(userId: UUID, defaults: UserDefaults) {
+        defaults.removeObject(forKey = key(userId))
     }
 }
 

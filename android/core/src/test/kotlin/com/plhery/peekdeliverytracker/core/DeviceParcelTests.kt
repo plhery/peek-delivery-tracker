@@ -1,11 +1,17 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
+import com.plhery.peekdeliverytracker.core.api.ClaimParcelResult
+import com.plhery.peekdeliverytracker.core.api.ClaimParcelResultOutcome
+import com.plhery.peekdeliverytracker.core.api.ClaimParcelsRequest
+import com.plhery.peekdeliverytracker.core.api.ClaimParcelsResponse
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
+import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
@@ -805,6 +811,153 @@ class DeviceParcelTests {
 
         assertEquals(listOf("22222222222B"), device.claims.map { it.id })
         assertEquals(listOf("22222222222B"), storage.keys.keys.sorted())
+    }
+
+    /**
+     * An account with room for `room` more parcels. Each claim is answered for the links it sends, in their order: kept
+     * while there is room, `quota` once there is none.
+     */
+    private class AccountRoom(room: Int) {
+        private var left = room
+        private val sent = mutableListOf<List<String>>()
+
+        var room: Int
+            get() = synchronized(this) { left }
+            set(value) = synchronized(this) { left = value }
+        val claims: List<List<String>> get() = synchronized(this) { sent.toList() }
+
+        fun answer(request: ClaimParcelsRequest): ClaimParcelsResponse = synchronized(this) {
+            sent += request.links.map { it.id }
+            ClaimParcelsResponse(
+                request.links.map { link ->
+                    if (left > 0) {
+                        left -= 1
+                        ClaimParcelResult(id = link.id, outcome = ClaimParcelResultOutcome.Kept, packageId = UUID.randomUUID())
+                    } else {
+                        ClaimParcelResult(id = link.id, outcome = ClaimParcelResultOutcome.Quota)
+                    }
+                },
+            )
+        }
+    }
+
+    /** This phone following `links` as its own, and a sign-in into `account`, whose list is empty. */
+    private class SigningIn(val transport: RecordingTransport, val device: DeviceParcels, val defaults: MemoryDefaults, val persistence: MemorySessionPersistence)
+
+    private fun signingIn(links: List<String>, account: AccountRoom, scope: CoroutineScope): SigningIn {
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        val signedIn = JsonEncoder.deliveryTracker.encode(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "access", tokenType = "bearer", expiresIn = 3600, expiresAt = Instant.now().epochSecond + 3600,
+                refreshToken = "refresh", user = user,
+            ),
+        ).decodeToString()
+        val list = JsonEncoder.deliveryTracker.encode(PackageListResponse.serializer(), PackageListResponse(emptyList())).decodeToString()
+        val transport = RecordingTransport { request ->
+            when (request.method to request.path) {
+                "POST" to "/auth/v1/verify" -> jsonResponse(200, signedIn)
+                "POST" to "/api/packages/claim" -> {
+                    val claim = ApiJson.decodeFromString(ClaimParcelsRequest.serializer(), request.body!!.decodeToString())
+                    jsonResponse(200, ApiJson.encodeToString(ClaimParcelsResponse.serializer(), account.answer(claim)))
+                }
+                "GET" to "/api/packages" -> jsonResponse(200, list)
+                else -> jsonResponse(404)
+            }
+        }
+        val storage = Memory()
+        storage.keys = links.associateWith { key }
+        storage.parcels = links.mapIndexed { index, link ->
+            UUID.randomUUID().let { parcel(link, "", it, pkg = pkg(it, number = "TESTPARCEL12300$index")) }
+        }
+        return SigningIn(transport, device(client(Calls()), storage, scope), MemoryDefaults(), MemorySessionPersistence())
+    }
+
+    private fun SigningIn.session(scope: CoroutineScope) =
+        testSessionStore(postcodeConfiguration, scope, persistence = persistence, transport = transport, defaults = defaults)
+
+    private fun SigningIn.store(session: SessionStore, scope: CoroutineScope) = testParcelStore(
+        postcodeConfiguration, session, transport, scope, defaults, device = device, deviceNotifications = quietNotifications(),
+    ).apply {
+        setDeliveryWidgetEnabled(false)
+        setDeliveryLiveActivitiesEnabled(false)
+    }
+
+    @Test
+    fun aParcelAFullAccountRefusesStaysHereAndTheListIsToldOnceASignIn() = runTest {
+        val account = AccountRoom(1)
+        val phone = signingIn(listOf("22222222222A", "22222222222B", "22222222222C"), account, backgroundScope)
+        val session = phone.session(backgroundScope)
+        session.showWelcome()
+        val store = phone.store(session, backgroundScope)
+
+        // Signing in brings this phone's parcels along: the account takes one, and the two it has no room for stay.
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.start()
+        assertEquals(listOf(listOf("22222222222A", "22222222222B", "22222222222C")), account.claims)
+        assertEquals(listOf("22222222222B", "22222222222C"), phone.device.claims.map { it.id })
+        assertEquals("Nothing of this phone's shows among the account's parcels", emptyList<Parcel>(), store.parcels)
+        assertEquals(2, store.leftOnDevice?.count)
+        // The list says it, and lets the news go.
+        store.leftOnDevice = null
+
+        // Room for one more: the next start brings it, and the one that stays is news.
+        account.room = 1
+        store.start()
+        assertEquals(listOf("22222222222B", "22222222222C"), account.claims.last())
+        assertEquals(listOf("22222222222C"), phone.device.claims.map { it.id })
+        assertEquals(1, store.leftOnDevice?.count)
+        store.leftOnDevice = null
+
+        // The next sign-in is told again.
+        session.forceSignOut()
+        assertNull(store.leftOnDevice)
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.start()
+        assertEquals(listOf("22222222222C"), phone.device.claims.map { it.id })
+        assertEquals(1, store.leftOnDevice?.count)
+        store.leftOnDevice = null
+
+        // Once the account takes the last, nothing stays and nothing is said.
+        account.room = 1
+        store.start()
+        assertEquals(emptyList<ClaimParcelLink>(), phone.device.claims)
+        assertNull(store.leftOnDevice)
+        session.forceSignOut()
+    }
+
+    @Test
+    fun aRefreshOrARelaunchWhileTheAccountIsStillFullSaysNothingAgain() = runTest {
+        val account = AccountRoom(0)
+        val phone = signingIn(listOf("22222222222A"), account, backgroundScope)
+        val session = phone.session(backgroundScope)
+        session.showWelcome()
+        val store = phone.store(session, backgroundScope)
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.start()
+        assertEquals(1, store.leftOnDevice?.count)
+        store.leftOnDevice = null
+
+        // A refresh reads the account's list and brings nothing along.
+        store.load(showSpinner = false)
+        assertEquals(1, account.claims.size)
+        assertNull(store.leftOnDevice)
+        // The list starting again, as an invitation comes or goes, asks again and hears the same.
+        store.start()
+        assertEquals(2, account.claims.size)
+        assertEquals(listOf("22222222222A"), phone.device.claims.map { it.id })
+        assertNull(store.leftOnDevice)
+
+        // A relaunch reopens the account and asks again: still nothing new.
+        val reopened = phone.session(backgroundScope)
+        val relaunched = phone.store(reopened, backgroundScope)
+        reopened.bootstrap()
+        assertEquals(session.user?.id, reopened.user?.id)
+        relaunched.start()
+        assertEquals(3, account.claims.size)
+        assertEquals(listOf("22222222222A"), phone.device.claims.map { it.id })
+        assertNull(relaunched.leftOnDevice)
+        reopened.forceSignOut()
     }
 
     @Test

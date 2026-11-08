@@ -103,6 +103,7 @@ class FakeDeliveries(
     override var storeScreenshots = false
     override var launchPreviews = LaunchPreviews()
     override val undoParcel = MutableStateFlow<Parcel?>(null)
+    override val leftOnDevice = MutableStateFlow<ParcelStore.LeftOnDevice?>(null)
     override val deliveryEmail = MutableStateFlow<DeliveryEmail?>(null)
     override val notificationPreferences = MutableStateFlow<NotificationPreferences?>(null)
     override val homePageUrl = "https://example.com/"
@@ -244,6 +245,10 @@ class FakeDeliveries(
 
     override fun forgetUndo(parcel: Parcel) {
         if (undoParcel.value === parcel) undoParcel.value = null
+    }
+
+    override fun forgetLeftOnDevice(news: ParcelStore.LeftOnDevice) {
+        if (leftOnDevice.value == news) leftOnDevice.value = null
     }
 
     override val undoClock = UndoClock()

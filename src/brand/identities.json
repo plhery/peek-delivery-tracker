@@ -424,6 +424,9 @@
       "accent": "#5c5147"
     }
   },
+  "blitznow": {
+    "decal": "blitznow"
+  },
   "blue-dart": {
     "decal": "blue-dart"
   },
@@ -456,6 +459,9 @@
   },
   "border-express": {
     "decal": "border-express"
+  },
+  "borzo": {
+    "decal": "borzo"
   },
   "bosta": {
     "decal": "bosta"
@@ -1471,6 +1477,9 @@
   "fg-delivery": {
     "decal": "fg-delivery"
   },
+  "fillo": {
+    "decal": "fillo"
+  },
   "fimile": {
     "decal": "fimile"
   },
@@ -1850,6 +1859,9 @@
   "hkd-express": {
     "decal": "hkd-express"
   },
+  "hlog-transportes": {
+    "decal": "hlog-transportes"
+  },
   "holisol": {
     "decal": "holisol"
   },
@@ -2006,6 +2018,9 @@
   },
   "interlogistica": {
     "decal": "interlogistica"
+  },
+  "international-bridge": {
+    "decal": "international-bridge"
   },
   "internet-express": {
     "decal": "internet-express",
@@ -2262,6 +2277,9 @@
   },
   "kunyoung": {
     "decal": "kunyoung"
+  },
+  "kunzendorf": {
+    "decal": "kunzendorf"
   },
   "kuqi": {
     "decal": "kuqi"
@@ -2624,6 +2642,9 @@
   },
   "mylerz": {
     "decal": "mylerz"
+  },
+  "mzz-briefdienst": {
+    "decal": "mzz-briefdienst"
   },
   "nacex": {
     "decal": "nacex"
@@ -3034,6 +3055,9 @@
   "post-luxembourg": {
     "decal": "post-luxembourg"
   },
+  "post-modern": {
+    "decal": "post-modern"
+  },
   "post-one": {
     "decal": "post-one",
     "palette": {
@@ -3203,6 +3227,9 @@
   },
   "qwintry": {
     "decal": "qwintry"
+  },
+  "qwqer": {
+    "decal": "qwqer"
   },
   "raben": {
     "decal": "raben"
@@ -3474,6 +3501,9 @@
   },
   "shipx-asia": {
     "decal": "shipx-asia"
+  },
+  "shopini-world": {
+    "decal": "shopini-world"
   },
   "shouwu": {
     "decal": "shouwu"
@@ -4271,6 +4301,9 @@
   "wp-ground": {
     "decal": "wp-ground"
   },
+  "wpx": {
+    "decal": "wpx"
+  },
   "x-express-ba": {
     "decal": "x-express-ba"
   },
@@ -4428,6 +4461,9 @@
   },
   "zippd": {
     "decal": "zippd"
+  },
+  "zippee": {
+    "decal": "zippee"
   },
   "znlogic": {
     "decal": "znlogic"

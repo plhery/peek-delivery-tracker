@@ -720,6 +720,18 @@ describe('carrier mark', () => {
     'aeronet',
     'brauns-express',
     'meitetsu-unyu',
+    'hlog-transportes',
+    'blitznow',
+    'borzo',
+    'zippee',
+    'fillo',
+    'kunzendorf',
+    'mzz-briefdienst',
+    'post-modern',
+    'qwqer',
+    'shopini-world',
+    'international-bridge',
+    'wpx',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

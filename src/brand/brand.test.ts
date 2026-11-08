@@ -825,6 +825,18 @@ describe('carrier brand', () => {
       'aeronet',
       'brauns-express',
       'meitetsu-unyu',
+      'hlog-transportes',
+      'blitznow',
+      'borzo',
+      'zippee',
+      'fillo',
+      'kunzendorf',
+      'mzz-briefdienst',
+      'post-modern',
+      'qwqer',
+      'shopini-world',
+      'international-bridge',
+      'wpx',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

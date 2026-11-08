@@ -708,7 +708,19 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'doora-logistics'
   | 'aeronet'
   | 'brauns-express'
-  | 'meitetsu-unyu';
+  | 'meitetsu-unyu'
+  | 'hlog-transportes'
+  | 'blitznow'
+  | 'borzo'
+  | 'zippee'
+  | 'fillo'
+  | 'kunzendorf'
+  | 'mzz-briefdienst'
+  | 'post-modern'
+  | 'qwqer'
+  | 'shopini-world'
+  | 'international-bridge'
+  | 'wpx';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

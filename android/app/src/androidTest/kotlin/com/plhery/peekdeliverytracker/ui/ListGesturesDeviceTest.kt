@@ -6,9 +6,11 @@ import android.view.InputDevice
 import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.ScrollAxisRange
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -32,6 +34,10 @@ import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.ArchiveSwipeState
+import com.plhery.peekdeliverytracker.core.GlobeCamera
+import com.plhery.peekdeliverytracker.core.GlobeProjection
+import com.plhery.peekdeliverytracker.core.PipPlacement
+import com.plhery.peekdeliverytracker.core.Point
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.LONG_MILLIS
 import com.plhery.peekdeliverytracker.ui.deliveries.ARCHIVE_ACTION
@@ -42,7 +48,10 @@ import com.plhery.peekdeliverytracker.ui.deliveries.FILTERS_DONE
 import com.plhery.peekdeliverytracker.ui.deliveries.FILTERS_POPOVER
 import com.plhery.peekdeliverytracker.ui.deliveries.FILTERS_SHEET
 import com.plhery.peekdeliverytracker.ui.deliveries.INLINE_TOAST
+import com.plhery.peekdeliverytracker.ui.deliveries.MAP_COVER
+import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_CONTENT
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_NAME
+import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_ROUTE
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_BURST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
@@ -51,6 +60,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_CLEAR
 import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_FIELD
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.cardId
+import com.plhery.peekdeliverytracker.ui.map.LocalMapCameraWatch
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -63,15 +73,17 @@ import java.util.UUID
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.max
+import kotlin.math.min
 
 /**
- * The deliveries' list under a finger (A-G01, A-G03, A-G07, A-G09, A-G17), its touches sent through the system's input
- * into this device's window as the screen's are ([ScreenTouches], and a swipe's a frame apart): a card tapped opens its
- * parcel, over the list or beside it; an open card tapped beside its Archive closes; the Archive under it takes a tap
- * once 8 points of it show and archives once the card has left; a drag of the list ends a card's arrival; the search's
- * field, the filters' sheet or popover, the Undo under the list and a message with no action. Signed in as the
- * synthetic reader@example.com on fake deliveries ([ParcelWalk]), the demo's parcels or synthetic lamps, which reach
- * no server; each test keeps Zurich's time and the captures' moment.
+ * The deliveries' list under a finger (A-G01, A-G03, A-G07, A-G09, A-G13, A-G17), its touches sent through the system's
+ * input into this device's window as the screen's are ([ScreenTouches], and a swipe's or a pinch's a frame apart): a
+ * card tapped opens its parcel, over the list or beside it; an open card tapped beside its Archive closes; the Archive
+ * under it takes a tap once 8 points of it show and archives once the card has left; a drag of the list ends a card's
+ * arrival; the search's field, the filters' sheet or popover, the Undo under the list and a message with no action; and
+ * the map on the pass of the parcel a card opens, which two fingers zoom until they lift and one leaves to the page.
+ * Signed in as the synthetic reader@example.com on fake deliveries ([ParcelWalk]), the demo's parcels or synthetic
+ * lamps, which reach no server; each test keeps Zurich's time and the captures' moment.
  */
 @RunWith(AndroidJUnit4::class)
 class ListGesturesDeviceTest {
@@ -85,6 +97,12 @@ class ListGesturesDeviceTest {
     private val touches = ScreenTouches(compose)
     private val demo: List<Parcel> = DemoCards.parcels()
     private val density: Float get() = compose.density.density
+
+    /** Each camera the map on the open parcel's pass was composed with (`peek`, not the opened map's), on the UI thread. */
+    private val peeked = mutableListOf<GlobeCamera>()
+    private val watch: (Boolean, Boolean, GlobeCamera, PipPlacement?) -> Unit = { interactive, peek, camera, _ ->
+        if (peek && !interactive) peeked += camera
+    }
 
     // A-G01: a card's tap.
 
@@ -335,6 +353,100 @@ class ListGesturesDeviceTest {
         assertFalse(walk.onUi { walk.deliveries.showingFilters })
     }
 
+    // A-G13: two fingers on the map of a parcel's pass. A card in the list draws its map for its look alone and takes no
+    // touch there (`peek: false`), as the iPhone's: the pass's is the map a pinch zooms.
+
+    /**
+     * A-G13: two fingers drawn apart on the map of a parcel's pass zoom it as far as they part, about the point between
+     * them as they landed, the place there staying under them (`MagnifyGesture` alone, nothing turned); the page stays
+     * where it was and the map shut. With one finger lifted it stays where they put it; once both have, it flies back to
+     * its own camera over its flight's time (A-AN46), never closer on the way. A tap on it then opens the map.
+     */
+    @Test
+    fun twoFingersOnAPassMapZoomItAboutThemAndItFliesBackOnceTheyLift() {
+        walk.reduceMotion = false
+        showWatched()
+        val gift = DemoCards.parcel("Birthday gift")
+        walk.open(gift)
+        awaitPass()
+        val start = passCamera()
+        val scroll = pageScroll().value()
+        val bounds = touches.node(hasTestTag(PAGE_ROUTE)).boundsInWindow
+        // Where the fingers' middle stands on the map, in its points, as the map reads where they stand.
+        val anchor = Point((bounds.width / 2 / density).toDouble(), (bounds.height * PINCH_HEIGHT / density).toDouble())
+        // Framed closer than the whole globe, which a pinch draws to the middle of the map rather than about the fingers.
+        assertTrue("Framed close: $start on ${bounds.size}", start.scale >= 1.25 * min(bounds.width, bounds.height) / density)
+
+        val fingers = TwoFingers(touches.point(PAGE_ROUTE, y = PINCH_HEIGHT), PINCH_DIRECTION, PINCH_FROM * density)
+        fingers.put()
+        fingers.spreadTo(PINCH_TO * density)
+        fingers.hold()
+        val zoomed = passCamera()
+        val parted = (PINCH_TO / PINCH_FROM).toDouble()
+        assertEquals("Zoomed as far as the fingers parted: $zoomed from $start", parted, zoomed.scale / start.scale, parted * 0.01)
+        assertEquals("Nothing turned", start.center, zoomed.center)
+        val under = checkNotNull(GlobeProjection(start).invert(anchor)) { "No globe under the fingers at $anchor: $start" }
+        val there = GlobeProjection(zoomed).project(under)
+        val kept = abs(there.x - anchor.x) <= 0.5 && abs(there.y - anchor.y) <= 0.5
+        assertTrue("The place between the fingers stays under them: $there, not $anchor", kept)
+        assertEquals("The page stays", scroll, pageScroll().value(), 0.5f)
+        assertFalse("The map stays shut", walk.exists(MAP_COVER))
+        walk.shot("A-G13-pass-pinch", alsoDark = false)
+
+        fingers.liftSecond()
+        assertEquals("One finger still down: where the fingers put it", zoomed, passCamera())
+        compose.mainClock.autoAdvance = false
+        val flying = walk.onUi { peeked.size }
+        fingers.liftFirst()
+        val lifted = walk.now()
+        frame()
+        val leaving = passCamera()
+        assertTrue("Flying back, not there at once: $leaving", leaving != start && leaving.scale > start.scale * 2)
+        val duration = GlobeCamera.flightDuration(zoomed, start)
+        framesUntil(duration + 0.5) { passCamera() == start }
+        val took = walk.now() - lifted
+        assertTrue("Back over the flight's $duration s, not sooner: $took ms", took >= duration * 1_000 - 2 * ScreenTouches.FRAME_MILLIS)
+        val scales = walk.onUi { peeked.drop(flying) }.map { it.scale }
+        assertTrue("Never closer on the way: $scales", scales.zipWithNext().all { (was, next) -> next <= was * (1 + 1e-9) })
+        compose.mainClock.autoAdvance = true
+        walk.settle()
+        assertEquals(start, passCamera())
+        assertEquals("The page stays", scroll, pageScroll().value(), 0.5f)
+        assertFalse(walk.exists(MAP_COVER))
+        assertEquals("Nothing else opened", gift.id, walk.shown())
+
+        touches.tap(touches.point(PAGE_ROUTE, y = PINCH_HEIGHT))
+        compose.waitUntil(LONG_MILLIS) { walk.exists(MAP_COVER) }
+    }
+
+    /**
+     * A-G13: one finger drawn up across the map of a parcel's pass scrolls the page and turns nothing: the map takes
+     * only two fingers, and stays shut.
+     */
+    @Test
+    fun oneFingerOnAPassMapScrollsThePageAndLeavesTheMapAsItWas() {
+        showWatched()
+        val trainers = DemoCards.parcel("New trainers")
+        walk.open(trainers)
+        awaitPass()
+        val start = passCamera()
+        val from = walk.onUi { peeked.size }
+        val scroll = pageScroll().value()
+        val drag = PASS_DRAG * density
+        val room = pageScroll().maxValue() - scroll
+        assertTrue("Room to scroll the page $PASS_DRAG dp: $room px", room >= drag)
+
+        touches.drag(touches.point(PAGE_ROUTE, y = PINCH_HEIGHT), Offset(0f, -drag))
+        walk.settle()
+        val scrolled = pageScroll().value() - scroll
+        assertTrue("The page followed the finger: $scrolled px of $drag", scrolled > drag / 2)
+        val seen = walk.onUi { peeked.drop(from) }
+        assertTrue("The map stayed as it was: $seen, from $start", seen.all { it == start })
+        assertFalse("The map stayed shut", walk.exists(MAP_COVER))
+        assertEquals(trainers.id, walk.shown())
+        walk.shot("A-G13-pass-one-finger", alsoDark = false)
+    }
+
     // A-G17: a message under the list.
 
     /**
@@ -406,6 +518,27 @@ class ListGesturesDeviceTest {
 
     private fun restored(): List<UUID> = walk.onUi { walk.source.restored.toList() }
 
+    /** The demo's parcels shown, each camera of a pass's map heard ([peeked]). */
+    private fun showWatched() = walk.show(
+        demo,
+        around = { content -> CompositionLocalProvider(LocalMapCameraWatch provides watch, content = content) },
+    )
+
+    /** The map on the open parcel's pass drawn, its camera heard, and still. */
+    private fun awaitPass() {
+        compose.waitUntil(LONG_MILLIS) { walk.exists(PAGE_ROUTE) && walk.onUi { peeked.isNotEmpty() } }
+        walk.settle()
+    }
+
+    /** The camera the map on the open parcel's pass was last drawn from. */
+    private fun passCamera(): GlobeCamera = walk.onUi { peeked.last() }
+
+    /** The page's scroll: how far down it stands and how far it goes, in pixels. */
+    private fun pageScroll(): ScrollAxisRange =
+        checkNotNull(touches.node(hasTestTag(PAGE_CONTENT)).config.getOrNull(SemanticsProperties.VerticalScrollAxisRange)) {
+            "The page has no scroll"
+        }
+
     /**
      * The point on the screen [UNDO_INSET] in from the trailing edge of the message under the list, at its middle: on
      * the Undo where it has one, which TalkBack reaches only through the message's own action.
@@ -440,6 +573,106 @@ class ListGesturesDeviceTest {
             frame()
         }
         assertTrue("Not done in $seconds s", done())
+    }
+
+    /** A frame of real time and of the test's clock, as [ScreenTouches] moves a finger on in. */
+    private fun touchFrame() {
+        SystemClock.sleep(ScreenTouches.FRAME_MILLIS)
+        compose.mainClock.advanceTimeBy(ScreenTouches.FRAME_MILLIS)
+    }
+
+    /**
+     * Two fingers on the screen, their touches sent as the screen's are through UiAutomation, as [ScreenTouches] sends a
+     * finger's, each a frame after the one before ([touchFrame]): the first `apart` pixels back from `middle` along
+     * `direction`, the second as far on from it a frame later; then drawn apart or together about that middle, held
+     * still, and lifted, the second first.
+     */
+    private inner class TwoFingers(private val middle: Offset, private val direction: Offset, private var apart: Float) {
+        private var down = 0L
+        private val pointers = Array(2) { pointer ->
+            MotionEvent.PointerProperties().apply {
+                id = pointer
+                toolType = MotionEvent.TOOL_TYPE_FINGER
+            }
+        }
+
+        fun put() {
+            down = SystemClock.uptimeMillis()
+            send(MotionEvent.ACTION_DOWN, 1)
+            touchFrame()
+            send(MotionEvent.ACTION_POINTER_DOWN or SECOND_POINTER, 2)
+            compose.waitForIdle()
+        }
+
+        /** Each drawn to `to` pixels from the middle in [ScreenTouches.DRAG_STEPS] frames. */
+        fun spreadTo(to: Float) {
+            val from = apart
+            val steps = ScreenTouches.DRAG_STEPS
+            for (step in 1..steps) {
+                touchFrame()
+                apart = from + (to - from) * step / steps
+                send(MotionEvent.ACTION_MOVE, 2)
+            }
+        }
+
+        /** Held still for [ScreenTouches.HOLD_FRAMES] frames, and the window idle after. */
+        fun hold() {
+            repeat(ScreenTouches.HOLD_FRAMES) {
+                touchFrame()
+                send(MotionEvent.ACTION_MOVE, 2)
+            }
+            compose.waitForIdle()
+        }
+
+        fun liftSecond() {
+            touchFrame()
+            send(MotionEvent.ACTION_POINTER_UP or SECOND_POINTER, 2)
+            compose.waitForIdle()
+        }
+
+        fun liftFirst() {
+            touchFrame()
+            send(MotionEvent.ACTION_UP, 1)
+            compose.waitForIdle()
+        }
+
+        /**
+         * The touch for `action` with the first `count` fingers, sent; the first put down again a little later while the
+         * screen refuses it, as [ScreenTouches] puts its finger down again while the test's own activity stands over the
+         * app's.
+         */
+        private fun send(action: Int, count: Int) {
+            val until = SystemClock.uptimeMillis() + ScreenTouches.DOWN_AGAIN_MILLIS
+            while (!inject(action, count)) {
+                check(action == MotionEvent.ACTION_DOWN && SystemClock.uptimeMillis() < until) {
+                    "The screen refused the touch ${MotionEvent.actionToString(action)} about $middle"
+                }
+                SystemClock.sleep(ScreenTouches.FRAME_MILLIS * 6)
+                down = SystemClock.uptimeMillis()
+            }
+        }
+
+        private fun inject(action: Int, count: Int): Boolean {
+            val coords = Array(count) { pointer ->
+                val at = if (pointer == 0) middle - direction * apart else middle + direction * apart
+                MotionEvent.PointerCoords().apply {
+                    x = at.x
+                    y = at.y
+                    pressure = 1f
+                    size = 1f
+                }
+            }
+            val time = if (action == MotionEvent.ACTION_DOWN) down else SystemClock.uptimeMillis()
+            val event = MotionEvent.obtain(
+                down, time, action, count, Array(count) { pointers[it] }, coords, 0, 0, 1f, 1f, 0, 0,
+                InputDevice.SOURCE_TOUCHSCREEN, 0,
+            )
+            try {
+                return instrumentation.uiAutomation.injectInputEvent(event, true)
+            } finally {
+                event.recycle()
+            }
+        }
     }
 
     /**
@@ -547,6 +780,25 @@ class ListGesturesDeviceTest {
 
         /** How far in from the message's trailing edge its Undo is tapped, in dp: within the word, past its padding. */
         const val UNDO_INSET = 34f
+
+        /**
+         * Where on a pass's map two fingers land, across its middle and a little below half its height: on the room the
+         * card leaves the route, under the marks and the buttons and above the name.
+         */
+        const val PINCH_HEIGHT = 0.55f
+
+        /** How far each finger stands from their middle as they land, then drawn apart, in dp: two and a half times as far. */
+        const val PINCH_FROM = 25f
+        const val PINCH_TO = 62.5f
+
+        /** The line the two fingers lie on, up and back to down and on: across the page's scroll and along it. */
+        val PINCH_DIRECTION = Offset(0.8f, 0.6f)
+
+        /** The second finger's index in its touches' action. */
+        const val SECOND_POINTER = 1 shl MotionEvent.ACTION_POINTER_INDEX_SHIFT
+
+        /** How far one finger draws the page up across a pass's map, in dp. */
+        const val PASS_DRAG = 100f
 
         const val CAPITALS = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS or InputType.TYPE_TEXT_FLAG_CAP_WORDS or
             InputType.TYPE_TEXT_FLAG_CAP_SENTENCES

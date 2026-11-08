@@ -66,6 +66,31 @@ describe('providerCopies', () => {
     expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c1'])]]));
   });
 
+  it('leaves out a provider\'s copy of a USPS departure up to a day before it, as USPS re-dates one that far', () => {
+    const departed = { description: 'Departed USPS Facility', location: 'EXAMPLE CITY DISTRIBUTION CENTER' };
+    const arrived = { description: 'Arrived at USPS Facility', location: departed.location };
+    const row = {
+      carrier_data: { routing: { confirmed_carrier: 'usps' } },
+      tracking_events: [
+        scan('c1', 'usps', '2026-11-04T09:08:00Z', departed),
+        scan('c2', 'usps', '2026-11-04T09:30:00Z', arrived),
+        // The time USPS first gave the departure, ten and a half hours earlier, and a day earlier.
+        scan('u1', 'unknown', '2026-11-03T22:34:00Z', { ...named, ...departed }),
+        scan('u2', 'unknown', '2026-11-03T09:08:00Z', { ...named, ...departed }),
+        // Over a day before it, or another USPS scan over three hours before it.
+        scan('u3', 'unknown', '2026-11-03T09:07:00Z', { ...named, ...departed }),
+        scan('u4', 'unknown', '2026-11-03T22:37:00Z', { ...named, ...arrived }),
+      ],
+    };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c1'])]]));
+    // Another carrier's departure keeps the three hours.
+    const other = {
+      carrier_data: confirmed,
+      tracking_events: [scan('c1', 'posti', '2026-11-04T09:08:00Z', departed), scan('u1', 'unknown', '2026-11-03T22:34:00Z', { ...named, ...departed })],
+    };
+    expect(providerCopyScans(other)).toEqual(new Map());
+  });
+
   it('leaves out a provider\'s announcement within an hour of the carrier\'s, in any words, and no other step in other words', () => {
     const row = {
       carrier_data: confirmed,

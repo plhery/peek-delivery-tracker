@@ -870,13 +870,13 @@ const RETIMED_WITHIN_MS = 3 * HOUR_MS;
 /** How much earlier a carrier's answer may move a scan: USPS moved a facility arrival a minute earlier. */
 const RETIMED_EARLIER_WITHIN_MS = HOUR_MS;
 /** How much later USPS may re-date a departure: it moved one ten and a half hours on, past when Peek stored it. */
-const REDATED_DEPARTURE_WITHIN_MS = 24 * HOUR_MS;
+export const REDATED_DEPARTURE_WITHIN_MS = 24 * HOUR_MS;
 
 /**
  * A USPS departure ("Departed USPS Facility"), which USPS re-dates hours on, after Peek stored it,
  * and then lists only at its new time. USPS's scraper adapter gives these scans no code of their own.
  */
-function redatedDeparture(source: string, scan: JsonObject): boolean {
+export function redatedDeparture(source: string, scan: JsonObject): boolean {
   return source === 'usps' && /^departed\b/.test(wordingOf(scan));
 }
 

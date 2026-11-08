@@ -10,7 +10,8 @@
  * within 15 minutes or a whole number of hours up to 14 h away, within an hour
  * in the scan's words, alone or followed by the copy's place, or so worded up
  * to three hours before it at its place (ParcelsApp dates a USPS departure at
- * the time USPS first gave it, before USPS moved the departure on), or in any stage
+ * the time USPS first gave it, before USPS moved the departure on), up to a
+ * day before a USPS departure, which USPS re-dates that far, or in any stage
  * and words whole hours away to the second when that second is not a minute's
  * first (ParcelsApp reads ECMS's Japanese scans an hour off). A copy only
  * whole hours from the carrier's scans shows the provider read them a zone
@@ -43,7 +44,7 @@
  * that time that no answer held counts as the provider's.
  */
 import { DateTime } from 'luxon';
-import { clockDay } from './eventIdentity';
+import { clockDay, REDATED_DEPARTURE_WITHIN_MS, redatedDeparture } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
 /** The `carrier_data` key of the universal rows carrier answers held and the time those answers covered. */
@@ -163,10 +164,14 @@ function atScanPlace(copy: JsonObject, scan: JsonObject): boolean {
   return named !== '' && (own === named || own.startsWith(`${named} `));
 }
 
-/** Whether `copy` tells `scan` in its words at its place, up to three hours before it: the carrier moved the scan on. */
+/**
+ * Whether `copy` tells `scan` in its words at its place, up to three hours before it, or a day before a USPS
+ * departure (`redatedDeparture`): the carrier moved the scan on.
+ */
 function movedOn(copy: JsonObject, scan: JsonObject): boolean {
   const ahead = instant(scan) - instant(copy);
-  return ahead > 0 && ahead <= MOVED_ON_MS && scanWords(copy, scan) && atScanPlace(copy, scan);
+  const within = redatedDeparture(source(scan), scan) ? REDATED_DEPARTURE_WITHIN_MS : MOVED_ON_MS;
+  return ahead > 0 && ahead <= within && scanWords(copy, scan) && atScanPlace(copy, scan);
 }
 
 /**

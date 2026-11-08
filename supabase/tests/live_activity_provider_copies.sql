@@ -359,5 +359,31 @@ do $$ begin
     raise exception 'A provider row over three hours before the scan, after it, at another place or with none was hidden';
   end if;
 end; $$;
+-- A provider's row in a USPS departure's words at its place up to a day before it is a copy (USPS re-dates a
+-- departure that far); one over a day before it, or another USPS scan's copy over three hours before it, stays.
+insert into public.packages(id, user_id, tracking_number, label, carrier, current_stage, carrier_data)
+values ('97000000-0000-0000-0000-000000000091', '97000000-0000-0000-0000-000000000001', 'COPYTEST9', 'Re-dated',
+  'usps', 'in_transit', '{"routing": {"confirmed_carrier": "usps"}}');
+insert into public.tracking_events(id, package_id, stage, description, location, provider_event_id, occurred_at, created_at, raw_data)
+values
+ ('97000000-0000-0000-0000-000000000092', '97000000-0000-0000-0000-000000000091', 'in_transit', 'Departed USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'usps:departed', '2026-11-04T09:08:00Z', '2026-11-04T09:20:00Z', '{}'),
+ ('97000000-0000-0000-0000-000000000093', '97000000-0000-0000-0000-000000000091', 'in_transit', 'Arrived at USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'usps:arrived', '2026-11-04T09:30:00Z', '2026-11-04T09:40:00Z', '{}'),
+ ('97000000-0000-0000-0000-000000000094', '97000000-0000-0000-0000-000000000091', 'in_transit', 'Departed USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'unknown:first-time', '2026-11-03T22:34:00Z', '2026-11-04T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000095', '97000000-0000-0000-0000-000000000091', 'in_transit', 'Departed USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'unknown:too-early', '2026-11-03T09:07:00Z', '2026-11-04T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000096', '97000000-0000-0000-0000-000000000091', 'in_transit', 'Arrived at USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'unknown:arrival', '2026-11-03T22:37:00Z', '2026-11-04T07:00:00Z', '{"universal_provider": "ParcelsApp"}');
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000094') then
+    raise exception 'A copy of a USPS departure ten and a half hours before it was not hidden';
+  end if;
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000095')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000096') then
+    raise exception 'A copy over a day before a USPS departure, or of another USPS scan over three hours before it, was hidden';
+  end if;
+end; $$;
 reset role;
 rollback;

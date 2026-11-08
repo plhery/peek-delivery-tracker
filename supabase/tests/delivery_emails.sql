@@ -1040,6 +1040,29 @@ begin
     raise exception 'A collected parcel whose pickup email failed was not told its delivery: % %', claim, ledger;
   end if;
 
+  -- A pickup scan restaged in place into the delivery was told by its pickup
+  -- email: it is not emailed again and, claimed one at a time, holds back no
+  -- other parcel's email.
+  perform pg_temp.fresh();
+  parcel := pg_temp.parcel(alex, 'EMAILPICKUP08', '2 days', 'ready_for_pickup');
+  waiting := pg_temp.scan(parcel, 'ready_for_pickup', '2 hours', '1 hour 50 minutes');
+  perform public.finish_delivery_email((public.claim_delivery_emails(1, 20, 80, both_stages)#>>'{send,0,id}')::uuid, 'sent');
+  update public.tracking_events set stage = 'delivered' where id = waiting;
+  update public.packages set current_stage = 'delivered' where id = parcel;
+  original := pg_temp.parcel(alex, 'EMAILPICKUP09', '2 days');
+  delivered := pg_temp.scan(original, 'delivered', '1 hour', '1 hour');
+  claim := public.claim_delivery_emails(1, 20, 80, both_stages);
+  if pg_temp.sends(claim) <> array[original] or claim#>>'{send,0,event_id}' <> delivered::text
+      or exists (select 1 from public.delivery_emails where package_id = parcel and stage = 'delivered') then
+    raise exception 'A scan restaged after its email held back the next one: %', claim;
+  end if;
+  -- A failed email is still tried again with the scan it names.
+  perform public.finish_delivery_email((claim#>>'{send,0,id}')::uuid, 'failed', 'smtp');
+  update public.delivery_emails set claimed_at = now() - interval '15 minutes' where package_id = original;
+  if pg_temp.sends(public.claim_delivery_emails(1, 20, 80, both_stages)) <> array[original] then
+    raise exception 'A failed email was not tried again with its own scan';
+  end if;
+
   -- Merged legs: a pickup told from one leg holds back no delivery of the
   -- parcel that stays, whether its row moved with the scan or not.
   perform pg_temp.fresh();

@@ -11,6 +11,7 @@ import { translateMessage, type Messages, type Translate } from '../lib/messages
 import { CarrierIndex } from './CarrierIndex';
 import { CarrierPage } from './CarrierPage';
 import { CarrierTracker } from './CarrierTracker';
+import { pickCandidate, pressEnter } from '../test/inputMethod';
 
 const t = (locale: Locale, messages: Messages): Translate => (key, variables) => translateMessage(locale, key, variables, messages);
 const [carrier, neighbour] = CARRIER_LINKS.en;
@@ -123,6 +124,17 @@ describe('the tracker on a carrier’s page', () => {
     // The landing's own address: at `/`, someone signed in sees their deliveries.
     expect(assign).toHaveBeenCalledExactlyOnceWith('/home');
     expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!).text).toBe('Your parcel\n0123456789012');
+  });
+
+  it('leaves the Enter that picks an input method’s candidate to the input method', async () => {
+    const user = userEvent.setup();
+    tracker();
+    const field = screen.getByRole('textbox');
+    await user.type(field, '0123456789012');
+    pickCandidate(field);
+    expect(assign).not.toHaveBeenCalled();
+    pressEnter(field);
+    expect(assign).toHaveBeenCalledExactlyOnceWith('/home');
   });
 
   it('goes nowhere with an empty field, and puts the cursor in it', async () => {

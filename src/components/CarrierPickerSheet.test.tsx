@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { SELECTABLE_CARRIERS } from '../lib/carriers';
 import { everyCarrierListed } from '../test/carrierPicker';
+import { pickCandidate, pressEnter } from '../test/inputMethod';
 import { CarrierPickerSheet, type CarrierPickerSection } from './CarrierPickerSheet';
 
 const sections: CarrierPickerSection[] = [
@@ -49,6 +50,21 @@ describe('carrier picker', () => {
     expect(search).toHaveAttribute('aria-activedescendant', expect.stringMatching(/-fits-dpd$/));
     await user.keyboard('{Enter}');
     expect(onSelect).toHaveBeenCalledWith('dpd');
+  });
+
+  it('leaves the keys that work an input method’s candidates to the input method', () => {
+    const { search, onSelect } = renderPicker();
+    fireEvent.keyDown(search, { key: 'ArrowDown', keyCode: 40 });
+    const active = search.getAttribute('aria-activedescendant')!;
+    expect(active).toMatch(/-fits-dpd$/);
+    fireEvent.compositionStart(search);
+    fireEvent.keyDown(search, { key: 'ArrowDown', keyCode: 229, isComposing: true });
+    fireEvent.compositionEnd(search);
+    expect(search).toHaveAttribute('aria-activedescendant', active);
+    pickCandidate(search);
+    expect(onSelect).not.toHaveBeenCalled();
+    pressEnter(search);
+    expect(onSelect).toHaveBeenCalledExactlyOnceWith('dpd');
   });
 
   it('searches names, other names and countries, and says when nothing matches', async () => {

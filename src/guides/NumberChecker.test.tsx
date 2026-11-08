@@ -10,6 +10,7 @@ import type { GuideLanguage, Locale } from '../lib/locale';
 import { translateMessage, type Messages, type Translate } from '../lib/messages';
 import { GuidePage } from './GuidePage';
 import { parseGuide } from './markdown';
+import { pickCandidate, pressEnter } from '../test/inputMethod';
 
 const analytics = vi.hoisted(() => ({ trackScreen: vi.fn(), startAnalytics: vi.fn(async () => undefined) }));
 vi.mock('../lib/analytics', () => analytics);
@@ -145,6 +146,17 @@ describe('the number checker in a guide', () => {
     // Without a script, the form opens the landing alone: the field has no name to send.
     expect(field.closest('form')).toHaveAttribute('action', '/de');
     expect(field).not.toHaveAttribute('name');
+  });
+
+  it('leaves the Enter that picks an input method’s candidate to the input method', async () => {
+    const user = userEvent.setup();
+    page('en', en);
+    const field = screen.getByRole('textbox', { name: 'Which carrier is this number?' });
+    await user.type(field, 'RR123456785CH');
+    pickCandidate(field);
+    expect(assign).not.toHaveBeenCalled();
+    pressEnter(field);
+    expect(assign).toHaveBeenCalledExactlyOnceWith('/home');
   });
 
   it('opens the landing at its own address from an English guide', async () => {

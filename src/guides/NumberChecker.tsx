@@ -69,8 +69,9 @@ export function NumberChecker({ locale, words }: { locale: Locale; words: Checke
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-    // Enter tracks, as on the landing; a new line in a pasted message takes Shift.
-    if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing) return;
+    // Enter tracks, as on the landing; a new line in a pasted message takes Shift. The Enter that picks an
+    // input method's candidate is not one: Safari sends it after the composition ended, with key code 229.
+    if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing || event.keyCode === 229) return;
     event.preventDefault();
     event.currentTarget.form?.requestSubmit();
   }

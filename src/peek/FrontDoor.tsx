@@ -221,8 +221,9 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-    // Enter tracks; a new line in a message takes Shift.
-    if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing) return;
+    // Enter tracks; a new line in a message takes Shift. The Enter that picks an input method's candidate
+    // is not one: Safari sends it after the composition ended, with key code 229.
+    if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing || event.keyCode === 229) return;
     event.preventDefault();
     form.current?.requestSubmit();
   }

@@ -220,6 +220,9 @@ export function CarrierPickerSheet({
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    // Keys that work an input method's candidates are its own: Safari sends the Enter that picks one after the
+    // composition ended, with key code 229.
+    if (event.nativeEvent.isComposing || event.keyCode === 229) return;
     if (event.key === 'ArrowDown') { event.preventDefault(); move(1); }
     else if (event.key === 'ArrowUp') { event.preventDefault(); move(-1); }
     else if (event.key === 'Enter' && activeOption) { event.preventDefault(); onSelect(activeOption.carrier?.id ?? 'auto'); }

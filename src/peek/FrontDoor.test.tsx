@@ -15,6 +15,7 @@ import { forgetDeviceChecks } from './lookup/deviceList';
 import { forgetAllRecents, recentFor, rememberParcel, renameParcel } from './recents';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
+import { pickCandidate, pressEnter } from '../test/inputMethod';
 
 const mocks = vi.hoisted(() => ({ lookup: vi.fn(), detect: vi.fn(), read: vi.fn(), forget: vi.fn(), sample: vi.fn() }));
 vi.mock('./links', async (original) => ({
@@ -119,6 +120,15 @@ describe('FrontDoor', () => {
     await user.type(field, '{Enter}');
     await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
     expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: UPS, carrier: 'ups' }, expect.any(AbortSignal));
+  });
+
+  it('leaves the Enter that picks an input method’s candidate to the input method', async () => {
+    const { field } = door();
+    type(field, UPS);
+    pickCandidate(field);
+    expect(mocks.lookup).not.toHaveBeenCalled();
+    pressEnter(field);
+    await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
   });
 
   it('goes straight on after a paste when the carrier is certain, with the label printed on Pip', async () => {

@@ -709,6 +709,17 @@ describe('carrier mark', () => {
     'first-logistics',
     'wmg-group',
     'kyrgyz-express-post',
+    'fastship-th',
+    'boxc',
+    'the-delivery-group',
+    'trumpcard',
+    'crossflight',
+    'runforint',
+    'arco-spedizioni',
+    'doora-logistics',
+    'aeronet',
+    'brauns-express',
+    'meitetsu-unyu',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

@@ -83,6 +83,9 @@
   "acs-courier": {
     "decal": "acs-courier"
   },
+  "aeronet": {
+    "decal": "aeronet"
+  },
   "aeropost": {
     "decal": "aeropost"
   },
@@ -282,6 +285,9 @@
   "aras-kargo": {
     "decal": "aras-kargo"
   },
+  "arco-spedizioni": {
+    "decal": "arco-spedizioni"
+  },
   "ark-express": {
     "decal": "ark-express"
   },
@@ -460,6 +466,9 @@
   "box-now": {
     "decal": "box-now"
   },
+  "boxc": {
+    "decal": "boxc"
+  },
   "boxtal": {
     "decal": "boxtal"
   },
@@ -477,6 +486,9 @@
   },
   "braspress": {
     "decal": "braspress"
+  },
+  "brauns-express": {
+    "decal": "brauns-express"
   },
   "bridge-intl": {
     "decal": "bridge-intl"
@@ -844,6 +856,9 @@
   "credifin": {
     "decal": "credifin"
   },
+  "crossflight": {
+    "decal": "crossflight"
+  },
   "cruz-del-sur": {
     "decal": "cruz-del-sur"
   },
@@ -1078,6 +1093,9 @@
   },
   "dongdu": {
     "decal": "dongdu"
+  },
+  "doora-logistics": {
+    "decal": "doora-logistics"
   },
   "dpd": {
     "decal": "dpd"
@@ -1419,6 +1437,9 @@
   },
   "fastgo": {
     "decal": "fastgo"
+  },
+  "fastship-th": {
+    "decal": "fastship-th"
   },
   "fasttrack-ar": {
     "decal": "fasttrack-ar"
@@ -2501,6 +2522,9 @@
   "megacity-courier": {
     "decal": "megacity-courier"
   },
+  "meitetsu-unyu": {
+    "decal": "meitetsu-unyu"
+  },
   "mensajeros-urbanos": {
     "decal": "mensajeros-urbanos"
   },
@@ -3282,6 +3306,9 @@
   "rtt": {
     "decal": "rtt"
   },
+  "runforint": {
+    "decal": "runforint"
+  },
   "runner-express": {
     "decal": "runner-express"
   },
@@ -3804,6 +3831,9 @@
   "the-courier-guy": {
     "decal": "the-courier-guy"
   },
+  "the-delivery-group": {
+    "decal": "the-delivery-group"
+  },
   "the-human-express": {
     "decal": "the-human-express"
   },
@@ -3941,6 +3971,9 @@
   },
   "trexity": {
     "decal": "trexity"
+  },
+  "trumpcard": {
+    "decal": "trumpcard"
   },
   "tsb-es": {
     "decal": "tsb-es"

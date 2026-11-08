@@ -697,7 +697,18 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'kuqi'
   | 'first-logistics'
   | 'wmg-group'
-  | 'kyrgyz-express-post';
+  | 'kyrgyz-express-post'
+  | 'fastship-th'
+  | 'boxc'
+  | 'the-delivery-group'
+  | 'trumpcard'
+  | 'crossflight'
+  | 'runforint'
+  | 'arco-spedizioni'
+  | 'doora-logistics'
+  | 'aeronet'
+  | 'brauns-express'
+  | 'meitetsu-unyu';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -814,6 +814,17 @@ describe('carrier brand', () => {
       'first-logistics',
       'wmg-group',
       'kyrgyz-express-post',
+      'fastship-th',
+      'boxc',
+      'the-delivery-group',
+      'trumpcard',
+      'crossflight',
+      'runforint',
+      'arco-spedizioni',
+      'doora-logistics',
+      'aeronet',
+      'brauns-express',
+      'meitetsu-unyu',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

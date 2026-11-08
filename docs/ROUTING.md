@@ -295,7 +295,8 @@ providers follow the legs before. Only a provider's progress replaces that answe
 has any, the providers are asked again 6 h after a round in which the carrier or a provider
 added a scan, 12 h after a round that added none and a day after a second such round
 (`routing.label_rounds`), each within its own backoff (a day for a number it does not know).
-The carrier is still asked on every check. A younger label stands alone, and progress the
+A round the provider serving the parcel sat out, in a cooldown or failing on the way, is not
+counted: the providers are asked again once it is free. The carrier is still asked on every check. A younger label stands alone, and progress the
 parcel has shown stays (Older or regressing result, under Scenarios).
 
 When detection also lists Cainiao for the number (GoFo's `GFUS` numbers), Cainiao is asked

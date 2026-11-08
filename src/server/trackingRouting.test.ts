@@ -2177,6 +2177,29 @@ describe('persistent tracking routing', () => {
       expect(routing).toMatchObject({ partial_checked_at: '2026-09-13T06:00:00.000Z', label_rounds: { empty: 1 } });
     });
 
+    it('leaves a round the serving provider sat out in its cooldown uncounted, and asks again once it is free', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, direct, universal, health } = setup();
+      direct.mockResolvedValue(label());
+      // ParcelsApp served the legs before the carrier's; it is in a cooldown, and Ship24 holds the label alone.
+      health.acquireTrackingProvider.mockImplementation(async (source: string) => source === 'ParcelsApp'
+        ? { token: null, retry_at: '2026-09-10T12:30:00Z' } : { token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+      universal.mockResolvedValue(label().result);
+      const result = await router.fetch(ups({ carrier_data: { routing: state({ configured_carrier: 'ups', preferred_provider: 'ParcelsApp' }) } }), false);
+      expect(result).toMatchObject({ sourceCarrierId: 'ups', result: { current_stage: 'registered' } });
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
+      const routing = routingOf(result);
+      expect(routing).toMatchObject({ partial_checked_at: '2026-09-10T06:30:00.000Z', failures: { ParcelsApp: { kind: 'rate_limited' } } });
+      expect(routing.label_rounds).toBeUndefined();
+      for (const [at, asked] of [['2026-09-10T12:29:00Z', []], ['2026-09-10T12:30:00Z', ['ParcelsApp', 'Ship24']]] as const) {
+        const later = setup(new Date(at));
+        later.direct.mockResolvedValue(label());
+        later.universal.mockResolvedValue(label().result);
+        await later.router.fetch(ups({ carrier_data: { routing } }), false);
+        expect(later.universal.mock.calls.map(([source]) => source)).toEqual(asked);
+      }
+    });
+
     it.each([
       ['is behind the label', { ...journey(), events: [{ time: '2026-09-05T09:00:00Z', description: 'Departed facility', stage: 'in_transit' },
         { time: '2026-09-04T09:00:00Z', description: 'Picked up', stage: 'accepted' }] }],

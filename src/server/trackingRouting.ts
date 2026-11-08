@@ -1838,8 +1838,16 @@ export class TrackingRouter {
       return persistResult(value, chosen, withoutProgress);
     }
     if (partialDirect) {
-      state.partial_checked_at = now().toISOString();
-      if (partialDirect.label) state.label_rounds = labelRound(state.label_rounds, scanCount(partialDirect.value.result), fullest);
+      // A round beside the label that the provider serving the parcel sat out (its cooldown, a failure on the way) says
+      // nothing of its progress: it is not counted, and the providers are asked again once that provider is free.
+      const missed = preferred && partialDirect.label && ['rate_limited', 'transport', 'verification', 'schema'].includes(String(state.failures[preferred]?.kind))
+        ? millis(state.failures[preferred]?.retry_at) : 0;
+      if (missed > now().getTime()) {
+        state.partial_checked_at = iso(Math.min(now().getTime(), missed - labelSpacing(state.label_rounds, scanCount(partialDirect.value.result))));
+      } else {
+        state.partial_checked_at = now().toISOString();
+        if (partialDirect.label) state.label_rounds = labelRound(state.label_rounds, scanCount(partialDirect.value.result), fullest);
+      }
       return persistResult(partialDirect.value, partialDirect.carrier);
     }
     if (localDirectFallback) return keepLocal(localDirectFallback);

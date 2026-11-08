@@ -257,13 +257,15 @@ data class CarrierChange(
 
     /**
      * After automatic detection, the parcel's own carrier unless it is filed automatically or among the carriers its
-     * number fits, which come next, then the ones used before (of [parcels]). So the carrier it has is in view without
-     * scrolling, and one no longer offered is there at all.
+     * number fits, which come next (those of [country], the reader's, first), then the ones used before (of
+     * [parcels]). So the carrier it has is in view without scrolling, and one no longer offered is there at all.
      */
-    fun pickerSections(parcels: List<Parcel>): List<PickerSection> {
+    fun pickerSections(parcels: List<Parcel>, country: String? = null): List<PickerSection> {
         val match = catalog.detect(parcel.trackingNumber)
         val high = match.confidence == CarrierMatch.Confidence.High
-        val fitting = (if (high) listOf(match.carrier) else match.candidates).filter { catalog.info(it).selectable }
+        val fitting = CarrierPickerSearch.inReaderCountryFirst(
+            (if (high) listOf(match.carrier) else match.candidates).filter { catalog.info(it).selectable }, country, catalog,
+        )
         val own = if ((automaticCarrier != null && unfiled) || parcel.carrier in fitting) emptyList() else listOf(parcel.carrier)
         return listOf(
             PickerSection("current", "picker.section.current", own),

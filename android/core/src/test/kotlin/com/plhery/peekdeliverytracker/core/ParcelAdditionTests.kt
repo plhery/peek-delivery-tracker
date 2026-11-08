@@ -57,6 +57,18 @@ class ParcelAdditionTests {
     }
 
     @Test
+    fun theCarriersANumberFitsListTheReadersCountrysFirst() {
+        val form = addition("76434219")
+        val heppner = CarrierId("heppner")
+        val colisweb = CarrierId("colisweb")
+        assertEquals(listOf(colisweb, heppner, CarrierId.MondialRelay), form.pickerSections(emptyList()).first { it.id == "fits" }.carriers)
+        assertEquals(
+            listOf(heppner, CarrierId.MondialRelay, colisweb),
+            form.pickerSections(emptyList(), country = "BE").first { it.id == "fits" }.carriers,
+        )
+    }
+
+    @Test
     fun anEmptyOrUnreadableFieldAddsNothing() {
         val empty = addition("")
         assertFalse(empty.notFound)

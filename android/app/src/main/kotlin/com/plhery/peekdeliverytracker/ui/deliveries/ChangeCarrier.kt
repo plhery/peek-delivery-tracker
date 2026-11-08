@@ -55,10 +55,12 @@ import com.plhery.peekdeliverytracker.core.CarrierChange
 import com.plhery.peekdeliverytracker.core.CarrierRequirement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.NumberRefusals
+import com.plhery.peekdeliverytracker.core.ParcelLookupCountry
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -624,7 +626,9 @@ private fun PushedPicker(state: DeliveriesState, change: CarrierChange, onChoose
     val localizer = LocalLocalizer.current
     val parcels = state.parcels
     val sections = remember(change.parcel, change.catalog, parcels, localizer) {
-        change.pickerSections(parcels).map { CarrierPickerSection(it.id, localizer.text(it.titleKey), it.carriers) }
+        change.pickerSections(parcels, ParcelLookupCountry.hint(Device.region())).map {
+            CarrierPickerSection(it.id, localizer.text(it.titleKey), it.carriers)
+        }
     }
     val automatic = if (change.automaticCarrier == null) null else {
         CarrierPickerAutomatic(change.automaticDescription(localizer), recommended = false, busy = false)

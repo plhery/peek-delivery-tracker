@@ -260,4 +260,16 @@ class CarrierChangeTests {
         // A number of several shapes lists the carriers it fits.
         assertEquals("picker.section.fits", start(parcel(CarrierId.Unknown, number = "76434219")).pickerSections(emptyList())[1].titleKey)
     }
+
+    @Test
+    fun theCarriersANumberFitsListTheReadersCountrysFirst() {
+        val change = start(parcel(CarrierId.Unknown, number = "76434219"))
+        val heppner = CarrierId("heppner")
+        val colisweb = CarrierId("colisweb")
+        // Detection's order, which stands in France, where all three are based.
+        assertEquals(listOf(colisweb, heppner, CarrierId.MondialRelay), change.pickerSections(emptyList())[1].carriers)
+        assertEquals(listOf(colisweb, heppner, CarrierId.MondialRelay), change.pickerSections(emptyList(), country = "FR")[1].carriers)
+        // In Belgium, those that also deliver there come first.
+        assertEquals(listOf(heppner, CarrierId.MondialRelay, colisweb), change.pickerSections(emptyList(), country = "BE")[1].carriers)
+    }
 }

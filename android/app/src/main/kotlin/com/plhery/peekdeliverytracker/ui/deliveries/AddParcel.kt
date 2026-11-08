@@ -143,6 +143,7 @@ import com.plhery.peekdeliverytracker.core.NumberInText
 import com.plhery.peekdeliverytracker.core.NumberRefusals
 import com.plhery.peekdeliverytracker.core.OrderShop
 import com.plhery.peekdeliverytracker.core.ParcelAddition
+import com.plhery.peekdeliverytracker.core.ParcelLookupCountry
 import com.plhery.peekdeliverytracker.core.PostcodeFill
 import com.plhery.peekdeliverytracker.core.TrackingInputMatch
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
@@ -151,6 +152,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
@@ -1733,7 +1735,9 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
         // The sections it opened with stay as they were (CarrierPicker keeps them); the tags and the automatic row
         // follow the check.
         val sections = remember(addition.normalizedNumber, addition.recognitionStatus, parcels, localizer) {
-            addition.pickerSections(parcels).map { CarrierPickerSection(it.id, localizer.text(it.titleKey), it.carriers) }
+            addition.pickerSections(parcels, ParcelLookupCountry.hint(Device.region())).map {
+                CarrierPickerSection(it.id, localizer.text(it.titleKey), it.carriers)
+            }
         }
         val tags = addition.pickerTags.mapValues { (_, key) -> CarrierPickerTag(localizer.text(key), found = true) }
         val automatic = CarrierPickerAutomatic(addition.automaticDescription(localizer), recommended = !addition.choosingCarrier, busy = addition.checking)

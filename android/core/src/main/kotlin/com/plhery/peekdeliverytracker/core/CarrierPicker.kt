@@ -269,6 +269,23 @@ object CarrierPickerSearch {
     fun accessibilityValue(subtitle: String, tag: String?): String =
         listOf(subtitle, tag.orEmpty()).filter { it.isNotEmpty() }.joinToString(", ")
 
+    /**
+     * The carriers a number fits, the reader's country's first: those based there, then those that also serve it, as
+     * recognition ranks a country hint (`countryMatch`). Otherwise detection's order stands.
+     */
+    fun inReaderCountryFirst(carriers: List<CarrierId>, country: String?, catalog: CarrierCatalog): List<CarrierId> {
+        if (country == null) return carriers
+        // `sortedBy` is stable: detection's order stands within a rank.
+        return carriers.sortedBy { carrier ->
+            val countries = catalog.info(carrier).countries.orEmpty()
+            when {
+                countries.firstOrNull() == country -> 0
+                country in countries -> 1
+                else -> 2
+            }
+        }
+    }
+
     /** The carriers of someone's latest parcels, newest first, each once. */
     fun usedCarriers(parcels: List<Parcel>, catalog: CarrierCatalog, limit: Int = 3): List<CarrierId> {
         val used = mutableListOf<CarrierId>()

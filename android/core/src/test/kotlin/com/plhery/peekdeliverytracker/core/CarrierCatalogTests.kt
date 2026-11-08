@@ -726,6 +726,25 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun fittingCarriersOfTheReadersCountryComeFirst() {
+        val fits = listOf(
+            CarrierId.Fedex, CarrierId.DpdFr, CarrierId.JapanPost, CarrierId.Dhl, CarrierId.Yamato, CarrierId.Sto, CarrierId.Sagawa,
+        )
+        assertEquals(
+            listOf(CarrierId.JapanPost, CarrierId.Yamato, CarrierId.Sagawa, CarrierId.Fedex, CarrierId.DpdFr, CarrierId.Dhl, CarrierId.Sto),
+            CarrierPickerSearch.inReaderCountryFirst(fits, country = "JP", catalog = catalog),
+        )
+        assertEquals(fits, CarrierPickerSearch.inReaderCountryFirst(fits, country = null, catalog = catalog))
+        // Carriers based in the country, then those that also serve it.
+        assertEquals(
+            listOf(CarrierId.Bpost, CarrierId.MondialRelay, CarrierId.DpdFr),
+            CarrierPickerSearch.inReaderCountryFirst(
+                listOf(CarrierId.DpdFr, CarrierId.MondialRelay, CarrierId.Bpost), country = "BE", catalog = catalog,
+            ),
+        )
+    }
+
+    @Test
     fun carrierPickerSectionsAndLines() {
         val sections = CarrierPickerSearch.letterSections(catalog = catalog, language = AppLanguage.En)
         assertEquals(catalog.selectableCarriers.size, sections.flatMap { it.carriers }.size)

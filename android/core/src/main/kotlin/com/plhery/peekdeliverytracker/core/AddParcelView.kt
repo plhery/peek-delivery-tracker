@@ -250,10 +250,15 @@ data class ParcelAddition(
         }
     }
 
-    /** The picker leads with the carriers that know the number, then those that fit it, then the ones used before. */
-    fun pickerSections(parcels: List<Parcel>): List<CarrierChange.PickerSection> {
+    /**
+     * The picker leads with the carriers that know the number, then those that fit it (those of [country], the
+     * reader's, first), then the ones used before.
+     */
+    fun pickerSections(parcels: List<Parcel>, country: String? = null): List<CarrierChange.PickerSection> {
         val knowing = (recognitionStatus as? CarrierRecognition.Status.Several)?.carriers ?: emptyList()
-        val fitting = (numberCarrier?.let { listOf(it) } ?: parsed.candidates).filter { catalog.info(it).selectable }
+        val fitting = CarrierPickerSearch.inReaderCountryFirst(
+            (numberCarrier?.let { listOf(it) } ?: parsed.candidates).filter { catalog.info(it).selectable }, country, catalog,
+        )
         return listOf(
             CarrierChange.PickerSection("known", "picker.section.known", knowing),
             CarrierChange.PickerSection(

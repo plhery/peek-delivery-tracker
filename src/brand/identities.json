@@ -370,7 +370,13 @@
   "belpost": {
     "decal": "belpost"
   },
+  "best-express-kh": {
+    "decal": "best-express-my"
+  },
   "best-express-my": {
+    "decal": "best-express-my"
+  },
+  "best-express-sg": {
     "decal": "best-express-my"
   },
   "best-express-th": {
@@ -1459,7 +1465,13 @@
   "first-line": {
     "decal": "first-line"
   },
+  "first-logistics": {
+    "decal": "first-logistics"
+  },
   "flash-express": {
+    "decal": "flash-express"
+  },
+  "flash-express-la": {
     "decal": "flash-express"
   },
   "flash-express-ph": {
@@ -2014,6 +2026,9 @@
   "j-and-t-br": {
     "decal": "j-and-t-cn"
   },
+  "j-and-t-co": {
+    "decal": "j-and-t-cn"
+  },
   "j-and-t-de": {
     "family": "j-and-t-cn"
   },
@@ -2235,6 +2250,9 @@
   },
   "kyoungdong": {
     "decal": "kyoungdong"
+  },
+  "kyrgyz-express-post": {
+    "decal": "kyrgyz-express-post"
   },
   "kyrgyz-post": {
     "decal": "kyrgyz-post"
@@ -4208,6 +4226,9 @@
   "wld-express": {
     "decal": "wld-express"
   },
+  "wmg-group": {
+    "decal": "wmg-group"
+  },
   "wooliiporter": {
     "decal": "wooliiporter"
   },
@@ -4321,6 +4342,9 @@
     "decal": "youbang-express"
   },
   "yto": {
+    "decal": "yto"
+  },
+  "yto-ph": {
     "decal": "yto"
   },
   "yuema-express": {

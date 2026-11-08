@@ -811,6 +811,9 @@ describe('carrier brand', () => {
       'hub-delivery',
       'national-delivery-systems',
       'kuqi',
+      'first-logistics',
+      'wmg-group',
+      'kyrgyz-express-post',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

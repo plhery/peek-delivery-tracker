@@ -128,7 +128,9 @@ and [`truck.json`](truck.json).
 | `beexprss` | [beexprss.com](https://beexprss.com/img/bee_logo.png) — logo PNG amber, median #fdb51b of 168,030 pixels, for xprss and the right faces of the bee's body; the wings are sky blue #40c5f3, the head, the stripes and bee near-black (#252026 in the mark, #231f20 in the lettering), and the body's left faces yellow #ffde00 |
 | `bel` | [8256ru.com](https://www.8256ru.com/Skin/8256/images/logo.png) — logo PNG navy #293e86 with near shades for the eagle, its most used colour; the crescent behind the eagle is a light-blue gradient from about #315fae at the top to #c8d3e5 at the bottom (median #90a6cf), and 北俄国际 beneath is dark grey #343434 |
 | `belpost` | [belpost.by](https://belpost.by/manifest.json) — manifest and meta theme_color #005aa8 |
+| `best-express-kh` | [kh.best-inc.com](https://kh.best-inc.com/track) — page theme colour #d80c18, as for best-express-my; the favicon is the BEST emblem in navy #022345 and red #d70c19 |
 | `best-express-my` | [best-inc.my](https://www.best-inc.my/favicon.ico) — red of the BEST emblem favicon #d70c19 (approximate), same as the site's chat theme colour #d80c18 and best-express-vn |
+| `best-express-sg` | [best-inc.sg](https://www.best-inc.sg/track) — page theme colour #d80c18, on the same build as kh.best-inc.com and as for best-express-my |
 | `best-express-th` | [best-inc.co.th](https://www.best-inc.co.th/favicon.ico) — favicon ICO of the BEST emblem in two flat colours, navy #022345 (192 pixels) and red #d70c19 (168); the catalog colour is that red, #d80c18 as for best-express-my and best-express-vn |
 | `best-express-vn` | [best-inc.vn](https://www.best-inc.vn/bundles/6b8a4b9ede52ad2fb33fd81ac1b5e24c.png) — logo PNG red #d80c18 (approximate); the site header, buttons and bands are red |
 | `best-overnite-express` | [bestovernite.com](https://www.bestovernite.com/wp-content/uploads/2022/06/logo.png) — logo PNG navy #1e3b91 and red #ea1c28 (approximate); the site's navy is #1b3999 |
@@ -426,7 +428,9 @@ and [`truck.json`](truck.json).
 | `first-flight-me` | [firstflightme.com](https://firstflightme.com/assets/user-logo-Dj-SKSC_.png) — logo PNG flat orange #ee6818, the sun disc behind the ff monogram and the line under the wordmark, with navy #293a85 for the ff, the plane, the clouds and the lettering |
 | `first-fly-express` | [firstflyexpress.com](https://firstflyexpress.com/images/ffelogo.png) — logo PNG red #ed3237 (approximate) |
 | `first-line` | [firstline56.com](http://www.firstline56.com/uploadfiles/20221019-165927.png) — header logo PNG purple #55207a, the O and the Chinese name, with an orange #f0832e NE, each about half the pixels |
+| `first-logistics` | [firstlogistics.co.id](https://www.firstlogistics.co.id/img/logo/logonew.png) — logo PNG orange #ff6600 for FIRST, the F square and the bar beneath; LOGISTICS and the L square are grey |
 | `flash-express` | [flashexpress.co.th](https://www.flashexpress.co.th/) — site CSS #FFEA33 (132 uses); logo bolt #fcee20 |
+| `flash-express-la` | [flashexpress.la](https://www.flashexpress.la/) — header colour #ffea33, the site CSS's most used, as for flash-express and flash-express-ph |
 | `flash-express-ph` | [flashexpress.ph](https://www.flashexpress.ph/) — header background CSS rgb(255, 234, 51) #ffea33 |
 | `flashbird-ca` | [flashbird.ca](https://flashbird.ca/assets/img/logo.png) — logo PNG blue #0e6ba8 (8,941 pixels, with #1670ab on 3,608 more), its most used blue, for the bird and Bird; Flash is navy #0f2b45; the [favicon](https://flashbird.ca/assets/img/favicon.png) field is #2b769a |
 | `flecha-amarilla` | [paqueteria-flechaamarilla.com.mx](https://dy0k519lz9qje.cloudfront.net/imagenes/Paqueteria-DEV/af814e20-5c53-11eb-b1a8-45d9b7f51d9c.webp) — logo WebP: yellow, median #fcca30 over 4,778 pixels of a PNG conversion, for an arrow sweeping under a box and for Flecha Amarilla in heavy italics shadowed in black #110100; the box of four parcels is light brown #d3a67a on top and #ac753f at the sides, beside PAQUETERIA Y MENSAJERIA in grey #a5a7ab |
@@ -576,6 +580,7 @@ and [`truck.json`](truck.json).
 | `j-and-t` | [jtexpress.ph](https://www.jtexpress.ph/) |
 | `j-and-t-au` | [jtexpress.au](https://www.jtexpress.au/favicon.svg) — favicon fill #e60000 |
 | `j-and-t-br` | [jtexpress.com.br](https://www.jtexpress.com.br/css/app.13c40106.css) — site CSS #e60000 |
+| `j-and-t-co` | [jtexpress.co](https://www.jtexpress.co/) — favicon SVG fill #e60000, as for j-and-t-uk |
 | `j-and-t-de` | [jtexpress.de](https://www.jtexpress.de/) — tab logo SVG fill #e60000 |
 | `j-and-t-cargo` | [jtcargo.id](https://www.jtcargo.id/) |
 | `j-and-t-cn` | [jtexpress.com.cn](https://www.jtexpress.com.cn/css/base.css) — site CSS --swiper-theme-color #e62019; logo PNG #e50113 |
@@ -648,6 +653,7 @@ and [`truck.json`](truck.json).
 | `kuqi` | [kuqi56.com](http://www.kuqi56.com/advance/pics/20260803/1785757237331164_s.png) — logo PNG teal #01696c for the globe with a ship and KUQI on a banner; KUQI SUPPLY CHAIN beside it is black |
 | `kwick-box` | [kwick-box.com](https://www.kwick-box.com/) — the site's theme-main-blue rgb(37, 75, 102) behind the home page hero, matching the KwickBox app icon's dark blue; the logo's BOX is #246081 |
 | `kyoungdong` | [kdexp.com](https://www.kdexp.com/common/img/logo_kd.png) — flat navy #2f308d of the logo tiles (approximate, from the PNG); the site CSS --sub-color is #141991 |
+| `kyrgyz-express-post` | [kep.kg](https://kep.kg/skins/kep/images/logo.png) — logo PNG blue #1680bd for the slanted KEP wordmark and its speed lines; the site CSS primary is #0180bb |
 | `kyrgyz-post` | [post.kg](https://post.kg/language/ru/main/) — site button CSS `background-color: #184CEC`; favicon fill #164dee |
 | `l-post` | [l-post.ru](https://l-post.ru/) — header logo SVG letter fill #5B2599 (favicon.svg ground #5b2599); crescent from the logo's portal fill #65D0DD |
 | `la-poste-burkina-faso` | [laposte.bf](https://laposte.bf/) — site CSS #155bab (its most used brand blue); logo blue sampled #175fa6 (approximate) |
@@ -1235,6 +1241,7 @@ and [`truck.json`](truck.json).
 | `wise-express` | [shwise.cn](https://www.shwise.cn/home/img/logo.png) — logo PNG flat blue #0662a0 (1,687 of 1,776 opaque pixels) for the square mark and 万色速递, with orange #ef9917 (75) for Wise Express beneath |
 | `wizmo` | [shipwizmo.com](https://shipwizmo.com/apple-touch-icon.png) — app icon PNG flat blue #34a5d5, its most used colour (the fist and the box it holds), inside a white sticker outline with white speed lines; the header wordmark, an inline SVG, is light cyan #40fcf5, too pale under a white decal |
 | `wld-express` | [wld-express.com](https://wld-express.com/images/logo.png) — site blue #3b43c9, its only accent colour; the logo PNG is white, for the dark header |
+| `wmg-group` | [wmg-group.com](https://www.wmg-group.com/wmg-logo.png) — logo PNG navy #123053 of the shield behind WMG in white, edged in gold; the site palette adds gold #c9973a and blue #1b6fbe |
 | `wooliiporter` | [woolii.com](https://woolii.com/brand/icon-512.png) — app icon PNG flat navy #2c3053, its most used colour, the rounded square behind a white W, with teal #85c3bb for the forked line and dot beneath the W; the site's CSS sets the same navy as its primary colour, and the header draws its mark, a bird's head in a shield, and WooliiPorter in the site's ink #0a2540 |
 | `world-package` | [worldpackage.co.uk](https://www.worldpackage.co.uk/wp-content/themes/worldpackage/images/world-package-logo.svg) — logo SVG fills #120748 (the diamond and World Package) and #dd0035 (the chevron and ECOMMERCE DELIVERED); the navy covers more of the logo, and the [site icon](https://www.worldpackage.co.uk/wp-content/uploads/2020/09/cropped-world-package-favicon-192x192.png) draws the diamond and chevron alone in the same fills |
 | `wp-ground` | [wpglogis.com](https://www.wpglogis.com/static/upload/image/20260402/1775119847674915.png) — logo PNG flat yellow #f7c24e (315,412 pixels) for the G, a rounded bowl open at the upper left whose inner stroke ends in an arrow pointing right, and for three speed lines under the P; W and P are black #000000 (458,311 pixels), its most used colour |
@@ -1268,6 +1275,7 @@ and [`truck.json`](truck.json).
 | `yoseus` | [yoseus.com](https://www.yoseus.com/ylc/css/header.css) — header CSS `.head_tt{color:#00af8c}`, the colour of 美国优胜速递, which the header sets as text, and of its links; the site has no logo image |
 | `youbang-express` | [youbangexpress.com](http://www.youbangexpress.com/assets/img/logo.png) — logo PNG orange #fb5008 of the globe, its most used colour (about half of its coloured pixels, the rest shades of it); the globe's lines and the outline of the 佑邦物流 lettering are black, the lettering white |
 | `yto` | [yto.net.cn](https://www.yto.net.cn/) (sampled from the footer logo) |
+| `yto-ph` | [yto.com.ph](https://www.yto.com.ph/) — logo PNG purple #47086c for YTO EXPRESS beside an orange #ff7500 emblem; the site CSS uses #47086c |
 | `yuema-express` | [yue777.com](https://www.yue777.com/images/logo.gif) — logo GIF red #a81d30, with close shades such as #aa1d30, for the eagle's stripes and the 玥玛速运 wordmark, its most used colour, and navy #132f57 for the eagle's head and YUEMA EXPRESS |
 | `yuexi-logistics` | [yxlg.com](https://www.yxlg.com/images/logo.png) — logo PNG: YXL, 悦希国际 and spaced LOGISTICS in flat orange #ff6400 (58,066 of 58,786 opaque pixels), with a small dark grey #3d3a39 fold at the Y's upper left |
 | `yunda` | [yundaex.com](https://www.yundaex.com/) |
@@ -1335,7 +1343,7 @@ and [`truck.json`](truck.json).
 | `j-and-t` | White slanted J&T on red, the J on its foot | [jtexpress.ph](https://www.jtexpress.ph/) |
 | `aliexpress` | White shopping bag with its smile on red | [aliexpress.com](https://www.aliexpress.com/) |
 | `zto` | White slanted letters on blue | [zto.com](https://www.zto.com/) |
-| `yto` | White letters on purple, the T in pink; the pink is an approximation | [yto.net.cn](https://www.yto.net.cn/) |
+| `yto` (`yto`, `yto-ph`) | White letters on purple, the T in pink; the pink is an approximation | [yto.net.cn](https://www.yto.net.cn/) |
 | `sto` | White letters in a rounded frame on orange | [sto.cn](https://www.sto.cn/) |
 | `yunda` | Dark smiling face under a star on yellow | [yundaex.com](https://www.yundaex.com/) |
 | `jd-logistics` | White letters JDL on red | [jingdonglogistics.com](https://www.jingdonglogistics.com/) |
@@ -1506,7 +1514,7 @@ and [`truck.json`](truck.json).
 | `direct-freight-express` | White DF over an orange band on navy | [directfreight.com.au](https://www.directfreight.com.au/images/favicon.ico) — favicon DF with navy and orange bands |
 | `egypt-post` | White spiral crescent with a notched bird head on green | [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:EGYPT_POST.svg) — logo SVG |
 | `emirates-post` | White falcon in flight on blue | [emiratespost.ae](https://web.archive.org/web/20240405123148im_/https://stapps.blob.core.windows.net/cn-cms/assets/Logo_419d6a1056.svg) — site logo (Wayback copy) |
-| `flash-express` | Yellow lightning bolt in a black disc on yellow | [flashexpress.co.th](https://www.flashexpress.co.th/favicon.ico) — favicon |
+| `flash-express` (`flash-express`, `flash-express-la`) | Yellow lightning bolt in a black disc on yellow | [flashexpress.co.th](https://www.flashexpress.co.th/favicon.ico) — favicon |
 | `forward-air` | White sun over horizon stripes on red | [forwardair.com](https://www.forwardair.com/apple-touch-icon.png) — red sun arc over black stripes |
 | `fukuyama` | White ring over left-pointing arrow on red | [fukutsu.co.jp](https://corp.fukutsu.co.jp/corp/assets/img/common/header/logo_fukuyama.png) — red ring and arrow mark |
 | `gati` | White italic GATI on teal blue | [allcargologistics.com](https://www.allcargologistics.com/assets/images/Gati-logo.webp) — AllcargoGATI logo, white GATI on a blue panel |
@@ -1657,7 +1665,7 @@ and [`truck.json`](truck.json).
 | `tracx-logis` | White X of two back-to-back arcs on blue | [tracxlogis.com](https://www.tracxlogis.com/image/home/logo_tracxlogis.svg) — the X of TRACX LOGIS, two opposed arcs; also the site icon |
 | `quantium-solutions` | Lime corner arrow with a starburst on dark teal | [quantiumsolutions.com](https://www.quantiumsolutions.com/homesource/Quantium_Solutions_Logo.png) — logo symbol: lime cut square pointing up-right with an eight-point burst |
 | `janio` | White disc with a triangle cut out on navy | [janio.asia](https://www.janio.asia/brand/janio-icon.png) — brand icon: the o of janio, a disc split by a triangular cut |
-| `j-and-t-cn` (`j-and-t-cn`, `j-and-t-au`, `j-and-t-br`, `j-and-t-de`, `j-and-t-middle-east`, `j-and-t-mx`, `j-and-t-uk`) | White slanted J&T on red, the J on its foot | [jtexpress.com.cn](https://www.jtexpress.com.cn/images/v3/index/logo_red@2x.png) — J&T wordmark, drawn as the fleet's j-and-t truck |
+| `j-and-t-cn` (`j-and-t-cn`, `j-and-t-au`, `j-and-t-br`, `j-and-t-co`, `j-and-t-de`, `j-and-t-middle-east`, `j-and-t-mx`, `j-and-t-uk`) | White slanted J&T on red, the J on its foot | [jtexpress.com.cn](https://www.jtexpress.com.cn/images/v3/index/logo_red@2x.png) — J&T wordmark, drawn as the fleet's j-and-t truck |
 | `equick` | White E with a double chevron on dark red | [equick.cn](http://www.equick.cn/favicon.ico) — favicon: white Equick wordmark with a double chevron on dark red; the E is the logo's large rounded capital |
 | `pfc-express` | White crown over PFC on blue | [pfctrack.com](https://www.pfctrack.com/images/logo.png) — logo: white crown above bold PFC on blue |
 | `ecms-express` | White italic ECMS on green | [ecmsglobal.com](https://www.ecmsglobal.com/static/img/logo.638720d1.png) — green ECMS wordmark beside a navy runner carrying a red parcel |
@@ -1948,7 +1956,7 @@ and [`truck.json`](truck.json).
 | `united-worldwide-couriers` | White globe and dove on blue | [unitedcouriers.biz](https://www.unitedcouriers.biz/img/LOGO.jpg) — header logo, a wire globe with a dove flying from it |
 | `dnx-cargo` | White italic DNX between red bars on navy | [dnxindia.com](https://dnxindia.com/wp-content/uploads/2023/11/DNX-Logo-Color-1.webp) — header logo, navy italic DNX with a red bar above and below |
 | `daily-xpress` | White D crossed by a swoosh on purple | [dailyxpress.in](https://www.dailyxpress.in/assets/img/logo/loder.png) — favicon emblem, a red D cut by a purple swoosh |
-| `best-express-my` | White BEST emblem (hexagonal ribbon ring) on red | [best-inc.my](https://www.best-inc.my/) — the Malaysian site and parcel boxes show the BEST emblem, white on red, beside BEST EXPRESS |
+| `best-express-my` (`best-express-my`, `best-express-kh`, `best-express-sg`) | White BEST emblem (hexagonal ribbon ring) on red | [best-inc.my](https://www.best-inc.my/) — the Malaysian site and parcel boxes show the BEST emblem, white on red, beside BEST EXPRESS |
 | `royal-express-mm` | Yellow disc with a red R on red | [royalx.net](https://royalx.net/assets/images/icons/favicon.png) — site icon: red R over an open box on a yellow disc; the wordmark is red italic ROYAL Express |
 | `airpak-express` | White script A on red | [airpak-express.com](https://airpak-express.com/apps/airpak/img/logo.png) — red script "Airpak" signature over black Airpak Express |
 | `makati-express` | Yellow sun and a white swoosh on red | [makati-express.com](https://makati-express.com/wp-content/uploads/2019/06/logo1.png) — yellow Philippine sun beside red MAKATI under a purple and red swoosh |
@@ -2569,3 +2577,6 @@ and [`truck.json`](truck.json).
 | `hub-delivery` | HUB in white single-stroke capitals on black | [hubdelivery.com](https://www.hubdelivery.com/) — the logo: HUB in white slab-serif capitals over DELIVERY INCORPORATED and the tagline Quality Service You Can Rely On; HUB is set in the app's capitals, without serifs; the lines beneath are left out |
 | `national-delivery-systems` | Italic NATIONAL in yellow single-stroke capitals on blue | [national-delivery.com](https://national-delivery.com/) — the logo: a blue and yellow checkered flag beside NATIONAL in heavy italic blue capitals outlined in yellow, over DELIVERY SYSTEMS; NATIONAL is set in the app's capitals at a slant of 0.25 in the outline's yellow #ffce29, 5.8:1 on the truck; the flag and DELIVERY SYSTEMS are left out |
 | `kuqi` | KUQI in white single-stroke capitals on teal | [kuqi56.com](http://www.kuqi56.com/) — the logo: a teal globe with a cargo ship and KUQI on a banner, beside KUQI SUPPLY CHAIN in black serif capitals; KUQI is set in the app's capitals in white, 6.5:1 on the truck; the globe, the ship and SUPPLY CHAIN are left out |
+| `first-logistics` | Slanted FL in white single-stroke capitals on orange | [firstlogistics.co.id](https://www.firstlogistics.co.id/) — the logo: F and L in white on an orange and a grey square, beside FIRST in orange italic capitals and LOGISTICS in grey; FL is set in the app's capitals at a slant of 0.2, 2.9:1 on the truck; FIRST LOGISTICS is left out |
+| `wmg-group` | WMG in white single-stroke capitals on navy | [wmg-group.com](https://www.wmg-group.com/) — the logo: WMG in white on a navy shield with a globe, edged in gold; WMG is set in the app's capitals, 13.4:1 on the truck; the shield and the globe are left out |
+| `kyrgyz-express-post` | Slanted KEP in white single-stroke capitals on blue | [kep.kg](https://kep.kg/) — the logo: KEP in slanted blue capitals, the E drawn as speed lines; KEP is set in the app's capitals in white at a slant of 0.25, 4.3:1 on the truck; the speed lines are left out |

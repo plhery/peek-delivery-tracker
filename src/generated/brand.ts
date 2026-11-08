@@ -711,7 +711,9 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "beexprss": "beexprss",
   "bel": "bel",
   "belpost": "belpost",
+  "best-express-kh": "best-express-my",
   "best-express-my": "best-express-my",
+  "best-express-sg": "best-express-my",
   "best-express-th": "best-express-th",
   "best-express-vn": "best-express-vn",
   "best-overnite-express": "best-overnite-express",
@@ -1042,7 +1044,9 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "first-flight-me": "first-flight-me",
   "first-fly-express": "first-fly-express",
   "first-line": "first-line",
+  "first-logistics": "first-logistics",
   "flash-express": "flash-express",
+  "flash-express-la": "flash-express",
   "flash-express-ph": "flash-express-ph",
   "flashbird-ca": "flashbird-ca",
   "flecha-amarilla": "flecha-amarilla",
@@ -1212,6 +1216,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "j-and-t-br": "j-and-t-cn",
   "j-and-t-cargo": "j-and-t-cargo",
   "j-and-t-cn": "j-and-t-cn",
+  "j-and-t-co": "j-and-t-cn",
   "j-and-t-de": "j-and-t-cn",
   "j-and-t-eg": "j-and-t-eg",
   "j-and-t-middle-east": "j-and-t-cn",
@@ -1282,6 +1287,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "kuqi": "kuqi",
   "kwick-box": "kwick-box",
   "kyoungdong": "kyoungdong",
+  "kyrgyz-express-post": "kyrgyz-express-post",
   "kyrgyz-post": "kyrgyz-post",
   "l-post": "l-post",
   "la-poste": "la-poste",
@@ -1890,6 +1896,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "wise-express": "wise-express",
   "wizmo": "wizmo",
   "wld-express": "wld-express",
+  "wmg-group": "wmg-group",
   "wooliiporter": "wooliiporter",
   "world-package": "world-package",
   "wp-ground": "wp-ground",
@@ -1925,6 +1932,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "yoseus": "yoseus",
   "youbang-express": "youbang-express",
   "yto": "yto",
+  "yto-ph": "yto",
   "yuema-express": "yuema-express",
   "yuexi-logistics": "yuexi-logistics",
   "yunda": "yunda",
@@ -33617,6 +33625,57 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M15.62 9.3L14.82 9.9L15.23 10.44L14.86 10.52L14.37 10.42L13.95 10.14L13.67 9.72L13.56 9.18L13.56 8.14L13.67 7.59L13.95 7.17L14.37 6.89L14.86 6.79L15.36 6.89L15.77 7.17L16.05 7.59L16.16 8.14L16.16 9.18L16.05 9.72L16 9.81Z",
+        "fill": "truck"
+      }
+    ],
+    "first-logistics": [
+      {
+        "type": "polygon",
+        "d": "M15.13 11.01L13.05 11.01L14.14 5.53L12.99 5.3L11.61 12.18L15.13 12.18Z",
+        "fill": "#ffffff"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.17 6.59L11.59 6.59L11.59 5.42L8.2 5.42L6.87 12.07L8.02 12.3L8.61 9.39L10.6 9.39L10.6 8.21L8.84 8.21Z",
+        "fill": "#ffffff"
+      }
+    ],
+    "wmg-group": [
+      {
+        "type": "polygon",
+        "d": "M5.48 11.08L5.48 11.56L7.48 11.56L8.05 6.14L7.1 6.04L6.62 10.6L6.43 10.6L6.41 7.77L4.54 7.77L4.52 10.6L4.33 10.6L3.85 6.04L2.9 6.14L3.47 11.56L5.47 11.56Z",
+        "fill": "#ffffff"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.77 7L13.07 7L13.07 11.56L14.03 11.56L14.03 6.04L11.78 6.04L11.91 9.32L11.09 9.32L11.22 6.04L8.97 6.04L8.97 11.56L9.92 11.56L9.92 7L10.22 7L10.09 10.28L12.91 10.28Z",
+        "fill": "#ffffff"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.02 10.59L16.6 10.51L16.24 10.27L16 9.91L15.9 9.44L15.9 8.15L15.97 7.77L16.13 7.46L16.37 7.21L16.69 7.05L17.03 7L17.38 7.06L17.69 7.22L17.99 7.53L18.68 6.86L18.27 6.45L17.69 6.14L17.05 6.03L16.4 6.13L15.81 6.42L15.34 6.88L15.04 7.47L14.95 8.08L14.95 9.53L15.1 10.28L15.55 10.96L16.22 11.41L17.02 11.57L17.82 11.41L18.5 10.96L18.95 10.28L19.1 9.53L19.1 8.55L17.02 8.55L17.02 9.51L18.13 9.51L18.05 9.91L17.81 10.27L17.45 10.51Z",
+        "fill": "#ffffff"
+      }
+    ],
+    "kyrgyz-express-post": [
+      {
+        "type": "polygon",
+        "d": "M5.14 7.83L5.7 5.6L4.57 5.31L2.9 12L4.03 12.29L4.68 9.68L5.45 9.06L6.47 12.04L7.57 11.66L6.42 8.29L8.88 6.32L8.16 5.41Z",
+        "fill": "#ffffff"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.48 9.38L12.61 9.38L12.61 8.22L10.77 8.22L11.17 6.62L13.76 6.62L13.76 5.46L10.26 5.46L8.59 12.14L12.37 12.14L12.37 10.98L10.08 10.98Z",
+        "fill": "#ffffff"
+      },
+      {
+        "type": "polygon",
+        "d": "M19.06 7.61L19.1 6.82L18.8 6.1L18.19 5.61L17.47 5.46L15.19 5.46L13.55 12L14.67 12.29L15.37 9.49L16.74 9.49L17.47 9.35L18.18 8.95L18.73 8.35Z",
+        "fill": "#ffffff"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.93 7.03L17.91 7.33L17.75 7.7L17.44 8.03L17.06 8.25L16.63 8.33L15.66 8.33L16.09 6.62L17.35 6.62L17.68 6.69L17.84 6.82Z",
         "fill": "truck"
       }
     ]

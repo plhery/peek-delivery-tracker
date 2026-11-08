@@ -694,7 +694,10 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'skynet-my'
   | 'hub-delivery'
   | 'national-delivery-systems'
-  | 'kuqi';
+  | 'kuqi'
+  | 'first-logistics'
+  | 'wmg-group'
+  | 'kyrgyz-express-post';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

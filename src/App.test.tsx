@@ -492,6 +492,9 @@ describe('App', () => {
     expect(screen.queryByText('New trainers 👟')).not.toBeInTheDocument();
     expect(screen.getByText('1 shown')).toBeInTheDocument();
 
+    // Safari sends the Escape that cancels an input method's candidate after the composition, with key code 229 alone.
+    fireEvent.keyDown(screen.getByRole('searchbox', { name: 'Search parcels' }), { key: 'Escape', keyCode: 229 });
+    expect(screen.getByRole('searchbox', { name: 'Search parcels' })).toBeInTheDocument();
     await user.keyboard('{Escape}');
     expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
     expect(viewToggle).toHaveFocus();

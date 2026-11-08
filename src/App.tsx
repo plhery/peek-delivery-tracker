@@ -594,7 +594,7 @@ export default function App({
         {/* As on the iPhone, what narrows the list stays in sight as chips once its controls are closed. */}
         {!loading && parcels.length > 0 && (viewControlsOpen || advancedFiltersOpen || hasCustomView) && (
           <div ref={searchShell} className="parcel-view-shell" onKeyDown={(event) => {
-            if (event.key !== 'Escape' || event.nativeEvent.isComposing || !(viewControlsOpen || advancedFiltersOpen)) return;
+            if (event.key !== 'Escape' || event.nativeEvent.isComposing || event.keyCode === 229 || !(viewControlsOpen || advancedFiltersOpen)) return;
             event.preventDefault();
             closeViewControls();
             (viewControlsOpen ? searchToggle : filtersToggle).current?.focus({ preventScroll: true });

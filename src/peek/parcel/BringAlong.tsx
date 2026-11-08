@@ -12,7 +12,7 @@ import { useParcels } from '../../store/ParcelsContext';
 import type { ParcelRepo } from '../../types';
 import { usePendingKeep } from '../pending';
 import { useRecents, type RecentParcel } from '../recents';
-import { bringable, bringAlong, bringAlongInDemo, markOffered } from './deviceParcels';
+import { bringable, bringAlong, bringAlongInDemo, markOffered, type BroughtAlong } from './deviceParcels';
 import { parcelDetail, parcelHeadline } from './summary';
 import './BringAlong.css';
 
@@ -90,18 +90,24 @@ function Sheet({ parcels, onBring, onClose }: {
 /** After a parcel was kept on its own, the list says so first; the question comes when that has been seen. */
 const ASK_AFTER_KEEPING_MS = 1_600;
 
+/** How long the word after bringing parcels along stays: longer when it says what to do about a full account. */
+const SAID_MS = 4_000;
+const FULL_SAID_MS = 8_000;
+
 /**
  * Stands beside the deliveries of someone who just signed in, and asks once
  * about the other parcels this device looked up. It waits for a parcel that
- * is being kept on its own, so that one is not asked about twice.
+ * is being kept on its own, so that one is not asked about twice. A parcel the
+ * account had no room for is asked about again another time.
  */
-function BringAlong({ bring }: { bring: (parcels: RecentParcel[]) => Promise<number> }) {
+function BringAlong({ bring }: { bring: (parcels: RecentParcel[]) => Promise<BroughtAlong> }) {
   const { t } = useI18n();
   const { retryLoad } = useParcels();
   const recents = useRecents();
   const pendingId = usePendingKeep();
   const [asked, setAsked] = useState<RecentParcel[] | null>(null);
-  const [brought, setBrought] = useState(0);
+  // What the account took, and how many parcels it had no room for.
+  const [said, setSaid] = useState<{ brought: number; full: number } | null>(null);
   // Whether a parcel was being kept when the deliveries opened, and whether its word has had its moment.
   const [keeping] = useState(pendingId !== null);
   const [settled, setSettled] = useState(!keeping);
@@ -115,27 +121,32 @@ function BringAlong({ bring }: { bring: (parcels: RecentParcel[]) => Promise<num
   const parcels = asked ?? (pendingId || !settled || !candidates.length ? null : candidates);
 
   useEffect(() => {
-    if (!brought) return;
-    const timer = setTimeout(() => setBrought(0), 4_000);
+    if (!said) return;
+    const timer = setTimeout(() => setSaid(null), said.full ? FULL_SAID_MS : SAID_MS);
     return () => clearTimeout(timer);
-  }, [brought]);
+  }, [said]);
 
-  function close(shown: RecentParcel[]) {
-    markOffered(shown.map((recent) => recent.id));
+  function close(shown: RecentParcel[], again: ReadonlySet<string> = new Set()) {
+    markOffered(shown.map((recent) => recent.id).filter((id) => !again.has(id)));
     setAsked([]);
   }
 
   return <>
     {parcels && parcels.length > 0 && <Sheet parcels={parcels} onClose={() => close(parcels)} onBring={async (chosen) => {
       setAsked(parcels);
-      const count = await bring(chosen);
-      close(parcels);
-      if (count) {
-        setBrought(count);
-        void retryLoad();
-      }
+      const { brought, refused } = await bring(chosen);
+      const full = new Set(refused.filter(({ reason }) => reason === 'quota').map(({ id }) => id));
+      close(parcels, full);
+      if (brought || full.size) setSaid({ brought, full: full.size });
+      if (brought) void retryLoad();
     }} />}
-    {brought > 0 && <div className="action-toast" role="status"><ToastMark kind="success" /><span>{t('link.bring.done.many', { count: brought })}</span></div>}
+    {said && <div className="action-toast" role="status">
+      <ToastMark kind={said.brought ? 'success' : 'archive'} />
+      <span className="undo-toast__message">
+        {said.brought > 0 && <span>{t('link.bring.done.many', { count: said.brought })}</span>}
+        {said.full > 0 && <small role="alert">{t('link.bring.full.many', { count: said.full })}</small>}
+      </span>
+    </div>}
   </>;
 }
 

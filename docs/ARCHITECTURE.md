@@ -156,7 +156,9 @@ Key server modules:
     from someone else make way first. A saved parcel the browser can't read, such as one
     another version wrote, stays with its id and owner key: it isn't listed, its link gets
     the key back when it is read again, and forgetting all the device's parcels forgets it on
-    the server too. Bringing parcels into an account sends twenty to a request.
+    the server too. Bringing parcels into an account sends twenty to a request. A parcel
+    a full account refuses stays on the device, the toast says so, and it is offered again
+    the next time the deliveries open.
   - The iPhone and Android apps keep the owner keys apart from the last answers, which only
     show what was last known. An answer the app can't read, such as one another version
     wrote, is read again with its key, without the name given on the device; a key goes only

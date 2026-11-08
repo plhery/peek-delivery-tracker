@@ -101,12 +101,33 @@ describe('BringAlong', () => {
     await user.click(within(sheet()).getByRole('button', { name: 'Add 2 parcels' }));
     expect(await within(sheet()).findByRole('alert')).toHaveTextContent('Couldn’t add these parcels. Try again.');
     expect(recentFor(LINK_ID)).not.toBeNull();
-    // A full account or a link that is gone brings nothing, and says nothing was added.
+    // A full account or a link that is gone brings nothing: the full account says so.
     await user.click(within(sheet()).getByRole('button', { name: 'Add 2 parcels' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
-    expect(screen.queryByRole('status')).toBeNull();
+    expect(screen.getByRole('status')).toHaveTextContent('Your deliveries are full, so 1 parcel stayed on this device. Archive or delete a few, and Peek will offer it again.');
+    expect(screen.getByRole('status')).not.toHaveTextContent('added');
     expect(recentFor(LINK_ID)).not.toBeNull();
     expect(mocks.retryLoad).not.toHaveBeenCalled();
+    // The parcel the account had no room for is offered again; the gone link is not.
+    expect(offeredParcels().has(LINK_ID)).toBe(false);
+    expect(offeredParcels().has(OTHER_LINK_ID)).toBe(true);
+  });
+
+  it('says what was added and what stayed when the account fills up halfway, and offers the rest again', async () => {
+    mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'quota' }]);
+    const user = userEvent.setup();
+    const { unmount } = render(<BringAlongParcels auth={auth} />);
+    await user.click(within(sheet()).getByRole('button', { name: 'Add 2 parcels' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    expect(screen.getByRole('status')).toHaveTextContent('1 parcel added to your deliveries');
+    expect(screen.getByRole('alert')).toHaveTextContent('Your deliveries are full, so 1 parcel stayed on this device.');
+    expect(recentFor(LINK_ID)).toBeNull();
+    expect(recentFor(OTHER_LINK_ID)).not.toBeNull();
+    expect(mocks.retryLoad).toHaveBeenCalledOnce();
+    unmount();
+    render(<BringAlongParcels auth={auth} />);
+    expect(within(sheet()).getAllByRole('checkbox')).toHaveLength(1);
+    expect(sheet()).toHaveTextContent('1ZDEMO2…0009');
   });
 
   it('waits for the parcel that is being kept on its own, lets the deliveries say so first, and leaves it out', async () => {
@@ -174,9 +195,9 @@ describe('the device’s parcels to bring along', () => {
     expect(JSON.parse(window.localStorage.getItem(BRING_ALONG_STORAGE_KEY)!)).toEqual([LINK_ID, OTHER_LINK_ID]);
   });
 
-  it('count what the account took, and leave the rest on the device', async () => {
+  it('count what the account took, name what it refused and why, and leave the rest on the device', async () => {
     mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'quota' }]);
-    expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toBe(1);
+    expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 1, refused: [{ id: OTHER_LINK_ID, reason: 'quota' }] });
     expect(recentFor(LINK_ID)).toBeNull();
     expect(recentFor(OTHER_LINK_ID)).not.toBeNull();
   });
@@ -186,7 +207,7 @@ describe('the device’s parcels to bring along', () => {
     const ids = Array.from({ length: 25 }, (_, index) => `r7Qm2xHd9R${ALPHABET[Math.floor(index / 32)]}${ALPHABET[index % 32]}`);
     for (const [index, id] of ids.entries()) rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: 10 + index });
     mocks.claim.mockImplementation(async (links: { id: string }[]) => links.map(({ id }) => ({ id, outcome: 'kept', packageId: 'p1' })));
-    expect(await bringAlong(ids.map((id) => recentFor(id)!), auth)).toBe(25);
+    expect(await bringAlong(ids.map((id) => recentFor(id)!), auth)).toEqual({ brought: 25, refused: [] });
     expect(mocks.claim.mock.calls.map(([links]) => links.length)).toEqual([20, 5]);
     expect(ids.every((id) => recentFor(id) === null)).toBe(true);
   });
@@ -195,13 +216,13 @@ describe('the device’s parcels to bring along', () => {
     const repo = createDemoRepo(window.localStorage);
     renameParcel(LINK_ID, null);
     mocks.read.mockResolvedValueOnce('unavailable').mockRejectedValueOnce(new Error('unreadable'));
-    expect(await bringAlongInDemo([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], repo)).toBe(1);
+    expect(await bringAlongInDemo([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], repo)).toEqual({ brought: 1, refused: [{ id: LINK_ID, reason: 'unavailable' }] });
     expect(recentFor(LINK_ID)).not.toBeNull();
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
     // The same number again: the demo has it, and the device copy goes all the same.
     rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: ups(OTHER_LINK_ID) });
     mocks.read.mockResolvedValue(ups(OTHER_LINK_ID));
-    expect(await bringAlongInDemo([recentFor(OTHER_LINK_ID)!], repo)).toBe(1);
+    expect(await bringAlongInDemo([recentFor(OTHER_LINK_ID)!], repo)).toEqual({ brought: 1, refused: [] });
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
     // A repository without `adopt` adds the number, and a failure other than a duplicate is the caller's.
     rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });

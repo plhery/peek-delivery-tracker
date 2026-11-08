@@ -43,30 +43,45 @@ export function bringable(recents: readonly RecentParcel[], pendingId: string | 
 const CLAIM_BATCH = 20;
 
 /**
- * Keeps several of the device's parcels in the account, twenty to a request. A
- * parcel the account now has leaves the device as soon as its request answers;
- * the count is how many joined or were there already.
+ * How bringing parcels along ended: how many joined the account or were there
+ * already, and the ones it refused. `quota`: the account is full; such a parcel
+ * stays on the device, to be offered again. `unavailable`: its link is gone.
  */
-export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth): Promise<number> {
-  let brought = 0;
+export interface BroughtAlong {
+  brought: number;
+  refused: { id: string; reason: 'quota' | 'unavailable' }[];
+}
+
+/**
+ * Keeps several of the device's parcels in the account, twenty to a request. A
+ * parcel the account now has leaves the device as soon as its request answers.
+ */
+export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth): Promise<BroughtAlong> {
+  const outcome: BroughtAlong = { brought: 0, refused: [] };
   for (let start = 0; start < parcels.length; start += CLAIM_BATCH) {
     const batch = parcels.slice(start, start + CLAIM_BATCH);
     const results = await claimParcelLinks(batch.map(({ id, key, name }) => ({ id, key, label: name })), auth, auth.signal);
     for (const result of results) {
-      if (result.outcome !== 'kept' && result.outcome !== 'already') continue;
+      if (result.outcome === 'quota' || result.outcome === 'unavailable') {
+        outcome.refused.push({ id: result.id, reason: result.outcome });
+        continue;
+      }
       forgetRecent(result.id);
-      brought += 1;
+      outcome.brought += 1;
     }
   }
-  return brought;
+  return outcome;
 }
 
 /** The demo's counterpart: each parcel moves into the demo deliveries with its history, and its link is forgotten. */
-export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: ParcelRepo): Promise<number> {
-  let brought = 0;
+export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: ParcelRepo): Promise<BroughtAlong> {
+  const outcome: BroughtAlong = { brought: 0, refused: [] };
   for (const recent of parcels) {
     const read = await readParcelLink(recent.id, { key: recent.key }).catch(() => recent.snapshot);
-    if (read === 'unavailable' || !read.parcel.trackingNumber) continue;
+    if (read === 'unavailable' || !read.parcel.trackingNumber) {
+      outcome.refused.push({ id: recent.id, reason: 'unavailable' });
+      continue;
+    }
     try {
       if (repo.adopt) await repo.adopt(read.parcel, recent.name ?? '');
       else await repo.add({ trackingNumber: read.parcel.trackingNumber, label: recent.name ?? '', carrier: read.parcel.carrier });
@@ -75,7 +90,7 @@ export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: P
     }
     if (recent.key) await forgetParcelLink(recent.id, recent.key).catch(() => undefined);
     forgetRecent(recent.id);
-    brought += 1;
+    outcome.brought += 1;
   }
-  return brought;
+  return outcome;
 }

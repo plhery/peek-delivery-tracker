@@ -1346,10 +1346,13 @@ export class TrackingRouter {
       if (value) return persistResult(value, candidate);
     }
     // Beside the filed carrier's partial answer or label alone, Cainiao, an aggregator, is asked for
-    // the rest before the universals when detection lists it for the number (GoFo's GFUS numbers).
-    // Its movement, not a label of its own, serves the check: the leg before the filed carrier when it
-    // names that carrier as its delivery partner (GoFo), which stays filed, else filed under Cainiao.
-    if (partialDirect && primary !== 'aliexpress' && detected.candidates.includes('aliexpress')) {
+    // the rest before the universals when detection lists it for the number, or names it as an origin
+    // that follows the number beside the carrier it names (GoFo's GFUS numbers). Its movement, not a
+    // label of its own, serves the check: the leg before the filed carrier when it names that carrier
+    // as its delivery partner (GoFo), which stays filed, else filed under Cainiao.
+    // `origins` is read loosely until Peek adopts a scraper release that declares it.
+    const origins = (detected as { origins?: readonly string[] }).origins ?? [];
+    if (partialDirect && primary !== 'aliexpress' && (detected.candidates.includes('aliexpress') || origins.includes('aliexpress'))) {
       const value = await tryDirect('aliexpress', true, undefined, true);
       if (value) return persistResult(value, 'aliexpress');
     }

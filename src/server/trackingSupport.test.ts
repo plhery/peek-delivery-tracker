@@ -138,17 +138,17 @@ describe('tracking support context', () => {
 
   it('leaves the gap undecided when a carrier that could settle it failed its lookup in the check', () => {
     const failed = (down: string[]) => (carrier: string) => down.includes(carrier);
-    // A shape GOFO and AliExpress both issue, filed under GOFO, which was rate limited.
-    expect(trackingSupportGap('GFUS01234567890123', 'gofo', null, failed(['gofo'])))
+    // A shape Janio and AliExpress both issue, filed under Janio, which was rate limited.
+    expect(trackingSupportGap('JNCN000000000001', 'janio', null, failed(['janio'])))
       .toEqual({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });
     // Filed under no carrier, any carrier of the shape could have settled it.
-    expect(trackingSupportGap('GFUS01234567890123', 'unknown', null, failed(['gofo'])))
+    expect(trackingSupportGap('JNCN000000000001', 'unknown', null, failed(['janio'])))
       .toEqual({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });
     // The filed carrier answered and did not confirm it: another carrier's outage changes nothing.
-    expect(trackingSupportGap('GFUS01234567890123', 'gofo', null, failed(['aliexpress']))).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    expect(trackingSupportGap('JNCN000000000001', 'janio', null, failed(['aliexpress']))).toEqual({ support_gap_reason: 'ambiguous_shape' });
     // A carrier the shape does not fit settles nothing.
-    expect(trackingSupportGap('GFUS01234567890123', 'unknown', null, failed(['usps']))).toEqual({ support_gap_reason: 'ambiguous_shape' });
-    expect(trackingSupportGap('GFUS01234567890123', 'gofo', 'gofo', failed(['gofo']))).toEqual({});
+    expect(trackingSupportGap('JNCN000000000001', 'unknown', null, failed(['usps']))).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    expect(trackingSupportGap('JNCN000000000001', 'janio', 'janio', failed(['janio']))).toEqual({});
   });
 
   it('keeps a generic postal match unresolved without assigning its issuer to a carrier', () => {

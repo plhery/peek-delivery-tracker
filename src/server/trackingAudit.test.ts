@@ -77,17 +77,17 @@ describe('tracking support audit persistence', () => {
   });
 
   it.each([
-    ['opens no case once the carrier the check filed the parcel under confirmed the number', 'gofo', 'gofo', []],
-    ['still opens one while no carrier confirmed it', 'gofo', null, ['ambiguous_shape']],
-    ['still opens one while the parcel stays under no carrier', 'unknown', 'gofo', ['ambiguous_shape']],
+    ['opens no case once the carrier the check filed the parcel under confirmed the number', 'janio', 'janio', []],
+    ['still opens one while no carrier confirmed it', 'janio', null, ['ambiguous_shape']],
+    ['still opens one while the parcel stays under no carrier', 'unknown', 'janio', ['ambiguous_shape']],
   ])('for a shape several carriers issue, %s', async (_case, carrier, answeredBy, gap) => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue(true);
-    // A parcel saved under no carrier, its number a shape GOFO and AliExpress both issue.
-    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'GFUS01234567890123', 'unknown', 'pending', { trigger: 'added' });
+    // A parcel saved under no carrier, its number a shape Janio and AliExpress both issue.
+    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'JNCN000000000001', 'unknown', 'pending', { trigger: 'added' });
     await audit.start();
     audit.filed(carrier, answeredBy);
-    await audit.finish({ outcome: 'updated', sourceCarrier: 'gofo', evaluateHealth: false });
+    await audit.finish({ outcome: 'updated', sourceCarrier: 'janio', evaluateHealth: false });
     expect(request).toHaveBeenNthCalledWith(1, '/rest/v1/tracking_sync_attempts', expect.objectContaining({
       body: expect.objectContaining({ support_context: expect.objectContaining({ configured_carrier: 'unknown', reasons: [] }) }),
     }));
@@ -98,13 +98,13 @@ describe('tracking support audit persistence', () => {
   it('leaves the gap of a shape several carriers issue undecided while the filed carrier\'s lookup failed', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue(true);
-    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'GFUS01234567890123', 'gofo', 'pending', { trigger: 'added' });
+    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'JNCN000000000001', 'janio', 'pending', { trigger: 'added' });
     await audit.start();
     await audit.observeFetch(async () => {
-      reportTrackingLookup('gofo', 'error', 'rate_limited');
+      reportTrackingLookup('janio', 'error', 'rate_limited');
       reportTrackingLookup('ParcelsApp', 'success');
     });
-    audit.filed('gofo', null);
+    audit.filed('janio', null);
     await audit.finish({ outcome: 'updated', sourceCarrier: 'unknown', evaluateHealth: false });
     const [step] = (request.mock.calls[1][1] as { body: { p_steps: JsonObject[] } }).body.p_steps;
     expect(step.details).toMatchObject({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });

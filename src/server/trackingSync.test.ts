@@ -6186,15 +6186,15 @@ describe('TrackingSyncService', () => {
     }, undefined],
     ['opens one when the check ends without its confirmation', new Error('Synthetic outage'), 'ambiguous_shape'],
   ])('for a number of a shape several carriers issue, %s', async (_case, answer, gap) => {
-    // A shape GOFO and AliExpress both issue, filed under GOFO before GOFO answered for it.
-    const parcel = { id: 'package-gofo', carrier: 'gofo', tracking_number: 'GFUS01234567890123', current_stage: 'pending' };
+    // A shape Janio and AliExpress both issue, filed under Janio before Janio answered for it.
+    const parcel = { id: 'package-janio', carrier: 'janio', tracking_number: 'JNCN000000000001', current_stage: 'pending' };
     const client = fakeClient([parcel]);
     const adapter = { fetch: answer instanceof Error ? vi.fn().mockRejectedValue(answer) : vi.fn().mockResolvedValue(answer),
       fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
       () => new Date('2026-11-06T12:00:00Z')).syncPackage(parcel, { trigger: 'added' });
     expect(client.startSyncAttempt).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
-      support_context: expect.objectContaining({ detection_candidates: ['aliexpress', 'gofo'], reasons: [] }),
+      support_context: expect.objectContaining({ detection_candidates: ['aliexpress', 'janio'], reasons: [] }),
     }), undefined);
     const steps = client.completeSyncAttempt.mock.calls.at(-1)![2] as JsonObject[];
     expect((steps.find((step) => step.step === 'complete')!.details as JsonObject).support_gap_reason).toBe(gap);

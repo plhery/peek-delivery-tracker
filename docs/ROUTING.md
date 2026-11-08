@@ -299,8 +299,9 @@ A round the provider serving the parcel sat out, in a cooldown or failing on the
 counted: the providers are asked again once it is free. The carrier is still asked on every check. A younger label stands alone, and progress the
 parcel has shown stays (Older or regressing result, under Scenarios).
 
-When detection also lists Cainiao for the number (GoFo's `GFUS` numbers), Cainiao is asked
-before the providers for either answer. Its own movement, not behind the parcel's, serves the
+When detection lists Cainiao for the number, or names it as an origin that follows the number
+beside the carrier it names (GoFo's `GFUS` numbers), Cainiao is asked before the providers for
+either answer. Its own movement, not behind the parcel's, serves the
 check. When Cainiao names the filed carrier as its delivery partner, as for GoFo, its answer is
 the leg before that carrier, which stays filed and asked first; otherwise the parcel is filed
 under Cainiao. Its label alone or a miss leaves the rest to the providers.

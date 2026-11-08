@@ -3749,7 +3749,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^GFUS\\d{14}$",
-        "confidence": "low"
+        "confidence": "high"
       },
       {
         "pattern": "^GF\\d{13}$",

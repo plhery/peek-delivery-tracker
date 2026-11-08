@@ -255,6 +255,44 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('serves a relay row in the words of the row it goes under, spelt otherwise, in that row\'s spelling', () => {
+    const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const row = {
+      id: 'parcel', carrier: 'four-px', carrier_data: { original_carrier: 'four-px', active_tracking_carrier: 'speedx' },
+      tracking_events: [
+        // 4PX tells SpeedX's scan at its second, with the ZIP code: no more of the place, so SpeedX's row stays on top.
+        scan('facility', 'speedx', '2026-11-07T20:01:49+00:00', 'Carteret, NJ', 'Processing at Designated Facility'),
+        scan('facility-copy', 'four-px', '2026-11-07T20:01:49+00:00', 'Carteret,NJ, 7008', 'Processing at designated facility'),
+        // A copy that names more of the place, in the same stage and words, goes on top.
+        scan('hub', 'speedx', '2026-11-08T08:33:44+00:00', 'Newark', 'In transit to destination facility'),
+        scan('hub-copy', 'four-px', '2026-11-08T08:33:44+00:00', 'Newark Airport', 'In transit to destination facility.'),
+        // In another stage it does not.
+        scan('out', 'speedx', '2026-11-09T07:10:05+00:00', 'Newark', 'Out for delivery', 'out_for_delivery'),
+        scan('out-copy', 'four-px', '2026-11-09T07:10:05+00:00', 'Newark Airport', 'Out for delivery', 'in_transit'),
+        // Other words keep their own.
+        scan('sorted', 'speedx', '2026-11-09T09:00:12+00:00', 'Newark', 'Sorted'),
+        scan('sorted-copy', 'four-px', '2026-11-09T09:00:12+00:00', 'Newark', 'Parcel sorted at hub'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of, description, location }) => [id, relay_of, description, location])).toEqual([
+      ['facility', undefined, 'Processing at Designated Facility', 'Carteret, NJ'],
+      ['facility-copy', 'facility', 'Processing at Designated Facility', 'Carteret,NJ, 7008'],
+      ['hub', 'hub-copy', 'In transit to destination facility.', 'Newark'],
+      ['hub-copy', undefined, 'In transit to destination facility.', 'Newark Airport'],
+      ['out', undefined, 'Out for delivery', 'Newark'],
+      ['out-copy', 'out', 'Out for delivery', 'Newark Airport'],
+      ['sorted', undefined, 'Sorted', 'Newark'],
+      ['sorted-copy', 'sorted', 'Parcel sorted at hub', 'Newark'],
+    ]);
+    // The rows stay as stored, in the account's export too.
+    expect(row.tracking_events[1].description).toBe('Processing at designated facility');
+    expect((withoutEventSources(row) as { tracking_events: Record<string, unknown>[] }).tracking_events[1].description)
+      .toBe('Processing at designated facility');
+  });
+
   it('serves a carrier\'s repeats of one scan under the newest of them', () => {
     const scan = (id: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), stage: 'failed_attempt', description: 'Address details incorrect',

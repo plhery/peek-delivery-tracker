@@ -780,7 +780,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   when the places' names, codes left out, do not conflict. That pairing comes after the
   others, so two steps of one minute that both carriers tell pair stage by stage. When only
   the earlier carrier's row says where the scan was, or only it tells a problem beside the other's
-  routine step (Chronopost's parcel held as damaged beside DPD's "on its way"), the other row is
+  routine step (Chronopost's parcel held as damaged beside DPD's "on its way"), or, in the other's
+  stage and words, names more of the place (a postcode or number aside), the other row is
   served with `relay_of` instead. The new carrier may also tell
   the steps the earlier one sent it over the posts' data exchange, placed only in the earlier carrier's
   country and stamped when the message arrived (Slovenská pošta tells Poczta Polska's posting
@@ -793,7 +794,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   with milliseconds), one to three whole hours to the second from a row of the new carrier, in
   any stage, is that row on another clock (CTT Express tells CTT's scans an hour early), and is
   served with `relay_of` its id after every other pairing. The apps show the words of the row with
-  `relay_of` as a line under the other row instead of a step of its own, and a parcel's card
+  `relay_of` as a line under the other row instead of a step of its own, unless they are the other
+  row's words: a row in those words spelt otherwise, case, spacing and punctuation aside (4PX's
+  "designated facility" for SpeedX's "Designated Facility"), is served in the other row's spelling.
+  A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless
   the copy alone tells a problem: then the other row is the one left out. The delivered email quotes the row

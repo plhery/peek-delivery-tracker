@@ -4,7 +4,7 @@ import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
-import { clockDay, scanDay, UNWORDED_STEP } from './eventIdentity';
+import { clockDay, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, relayCopies } from './relayCopies';
 import { repeatLeads } from './scanRepeats';
@@ -197,17 +197,45 @@ function placed(event: JsonObject): boolean {
 }
 
 /**
+ * A scan's words as a reader tells them apart: case, spacing and punctuation left out. Empty for a scan its source
+ * gave no words for.
+ */
+function wordsRead(event: JsonObject): string {
+  if (event.description === UNWORDED_STEP) return '';
+  return String(event.description ?? '').normalize('NFC').toLocaleLowerCase('en-US').replace(/[^\p{L}\p{N}]+/gu, '');
+}
+
+/** Whether two rows of a relay pair tell the scan in the same words, spelt alike or not ("Designated Facility"). */
+function sameWords(event: JsonObject, other: JsonObject): boolean {
+  const words = wordsRead(event);
+  return words !== '' && words === wordsRead(other);
+}
+
+/**
+ * Whether a row names more of the place than another, every word of the other's included. A postcode or a number is
+ * no more of the place for a reader: 4PX adds the ZIP code, its leading zero dropped, to SpeedX's town and state.
+ */
+function namesMoreOfThePlace(event: JsonObject, other: JsonObject): boolean {
+  const words = (row: JsonObject) => placeWords(row).filter((word) => !/^\d+$/.test(word));
+  const own = words(event);
+  const others = words(other);
+  return others.every((word) => own.includes(word)) && own.some((word) => !others.includes(word));
+}
+
+/**
  * Each relay pair as it is served: the row the apps show under the other, and that row's id
  * (`relay_of`). The earlier carrier's copy goes under the scan it repeats, unless the copy alone
  * says where it was: YunExpress and Yanwen tell Ecoscooting's scans with the town Ecoscooting's
  * own leave out, Chronopost tells DPD's with the depot. Nor does a copy that alone tells a problem
- * beside the scan's routine step (relayCopies.ts). The apps show the lower row's words, not its place.
+ * beside the scan's routine step (relayCopies.ts), nor one in the scan's stage and words that names
+ * more of the place. The apps show the lower row's words, not its place.
  */
 function relayLeads(events: readonly JsonObject[], relays: Map<string, string>): Map<string, string> {
   const byId = new Map(events.map((event) => [String(event.id), event]));
+  const leads = (copy: JsonObject, scan: JsonObject) => (placed(copy) && !placed(scan)) || copyTellsProblem(copy, scan)
+    || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan));
   return new Map([...relays].map(([copy, scan]): [string, string] => (
-    (placed(byId.get(copy)!) && !placed(byId.get(scan)!)) || copyTellsProblem(byId.get(copy)!, byId.get(scan)!)
-      ? [scan, copy] : [copy, scan])));
+    leads(byId.get(copy)!, byId.get(scan)!) ? [scan, copy] : [copy, scan])));
 }
 
 /**
@@ -297,7 +325,16 @@ function placedEvents(row: JsonObject): JsonObject {
   const apart = new Set([...relays.keys(), ...relays.values()]);
   const repeats = repeatLeads(events, apart);
   const notices = noticeLeads(events, apart, repeats);
-  const shown = (event: JsonObject) => served(event, relays.get(String(event.id)) ?? notices.get(String(event.id)) ?? repeats.get(String(event.id)));
+  const byId = new Map(events.map((event) => [String(event.id), event]));
+  // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
+  // otherwise, it is served in the other row's spelling, so they are shown once.
+  const spelt = (event: JsonObject, under: JsonObject | undefined) =>
+    under && sameWords(event, under) && event.description !== under.description ? { ...event, description: under.description } : event;
+  const shown = (event: JsonObject) => {
+    const relayOf = relays.get(String(event.id));
+    return served(spelt(event, relayOf ? byId.get(relayOf) : undefined),
+      relayOf ?? notices.get(String(event.id)) ?? repeats.get(String(event.id)));
+  };
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   try {
     const ordered = [...events].sort((a, b) => String(a.occurred_at).localeCompare(String(b.occurred_at))

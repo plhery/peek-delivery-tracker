@@ -941,6 +941,28 @@ class DecodingError : SerializationException("The data couldn’t be read becaus
 internal fun <T> decodeSwiftKeys(deserializer: DeserializationStrategy<T>, data: ByteArray): T =
     decoding(deserializer, data, ::convertFromSnakeCase)
 
+/**
+ * A JSON list read as `decodeSwiftKeys` reads it, each element on its own: nil for an element it cannot read, so one
+ * that a model since changed (a field it now needs, a value it does not know) loses itself alone. Nil when the data is
+ * no JSON list at all.
+ */
+internal fun <T : Any> decodeSwiftKeysEach(deserializer: DeserializationStrategy<T>, data: ByteArray): List<T?>? {
+    val text = jsonText(data) ?: return null
+    val document = try {
+        ApiJson.parseToJsonElement(text)
+    } catch (_: Exception) {
+        return null
+    }
+    if (document !is JsonArray || !document.isJson) return null
+    return document.map { element ->
+        try {
+            ApiJson.decodeFromJsonElement(deserializer, element.withSerialNames(deserializer.descriptor, ::convertFromSnakeCase))
+        } catch (_: Exception) {
+            null
+        }
+    }
+}
+
 /** `JSONDecoder()`: as `decodeSwiftKeys`, but each key must be the property's own serial name. */
 internal fun <T> decodeJson(deserializer: DeserializationStrategy<T>, data: ByteArray): T = decoding(deserializer, data) { it }
 

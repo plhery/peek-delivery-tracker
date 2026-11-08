@@ -902,7 +902,7 @@ class ParcelFeedbackTests {
         val storage = object : DeviceParcelStorage {
             override fun load() = DeviceParcelStorage.Contents(parcels, keys)
 
-            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {}
+            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String>) {}
         }
         val verification = NativeVerification(
             NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),

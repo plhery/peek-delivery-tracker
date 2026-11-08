@@ -124,10 +124,10 @@ class DeviceParcelsFile(file: File) : DeviceParcelFile {
 
 /**
  * DeviceParcels' storage with each save handed to one thread of its own, in the order they come, so that a follow
- * never seals its keys and syncs the file on the main thread. Each save is the whole list with its keys, so the last
- * one made is the one kept, and the keys still go before the file within it; nobody waits for one, as
- * DeviceParcelFiles drops a failure the way the iPhone's `try?` does. `load` reads at once: DeviceParcels reads once,
- * as it is made, off the main thread.
+ * never seals its keys and syncs the file on the main thread. Each save is the whole list with its keys and the links
+ * still to be forgotten, so the last one made is the one kept, and the secrets still go before the file within it;
+ * nobody waits for one, as DeviceParcelFiles drops a failure the way the iPhone's `try?` does. `load` reads at once:
+ * DeviceParcels reads once, as it is made, off the main thread.
  */
 class QueuedDeviceParcelStorage(
     private val storage: DeviceParcelStorage,
@@ -135,8 +135,8 @@ class QueuedDeviceParcelStorage(
 ) : DeviceParcelStorage {
     override fun load(): DeviceParcelStorage.Contents = storage.load()
 
-    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
-        queue.execute { storage.save(parcels, keys) }
+    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String>) {
+        queue.execute { storage.save(parcels, keys, pendingForgets) }
     }
 }
 

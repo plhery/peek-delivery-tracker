@@ -208,7 +208,7 @@ class PersistenceTest {
         val storage = object : DeviceParcelStorage {
             override fun load() = DeviceParcelStorage.Contents(emptyList(), mapOf("link" to "key"))
 
-            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
+            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String>) {
                 saves += keys["link"] to Thread.currentThread()
             }
         }

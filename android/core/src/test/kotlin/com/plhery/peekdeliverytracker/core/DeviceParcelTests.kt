@@ -39,6 +39,7 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonArray
@@ -61,12 +62,14 @@ class DeviceParcelTests {
     private class Memory : DeviceParcelStorage {
         var parcels: List<DeviceParcel> = emptyList()
         var keys: Map<String, String> = emptyMap()
+        var pendingForgets: Map<String, String> = emptyMap()
 
-        override fun load(): DeviceParcelStorage.Contents = DeviceParcelStorage.Contents(parcels, keys)
+        override fun load(): DeviceParcelStorage.Contents = DeviceParcelStorage.Contents(parcels, keys, pendingForgets)
 
-        override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
+        override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String>) {
             this.parcels = parcels
             this.keys = keys
+            this.pendingForgets = pendingForgets
         }
     }
 
@@ -873,7 +876,8 @@ class DeviceParcelTests {
         val followed = parcel("33333333333A", "", UUID.randomUUID()).copy(viewer = true)
         val loaded = DeviceParcelFiles.matched(listOf(own, lost, followed), mapOf("22222222222A" to key, "33333333333A" to key, "22222222222C" to key))
         assertEquals(listOf("22222222222A", "33333333333A"), loaded.parcels.map { it.linkId })
-        assertEquals("A key beside someone else's parcel, or beside none, opens nothing", mapOf("22222222222A" to key), loaded.keys)
+        // A key beside someone else's parcel opens nothing; one beside none reads its parcel again.
+        assertEquals(mapOf("22222222222A" to key, "22222222222C" to key), loaded.keys)
         assertEquals(listOf(followed), DeviceParcelFiles.matched(listOf(followed), emptyMap()).parcels)
 
         // A file written before parcels could be followed this way still opens, every parcel its own.
@@ -884,27 +888,274 @@ class DeviceParcelTests {
         assertEquals(listOf(followed), saved)
     }
 
-    @Test
-    fun aFileThatCannotBeReadKeepsItsKeysUntilTheirLinksAreForgotten() = runTest {
-        val unreadable = DeviceParcelFiles.opened("""[{"linkID":42}]""".toByteArray(), keys = mapOf("22222222222C" to key))
-        assertTrue(unreadable.parcels.isEmpty())
-        assertEquals(mapOf("22222222222C" to key), unreadable.keys)
-        assertEquals("No file, no parcels to forget", emptyMap<String, String>(), DeviceParcelFiles.opened(null, keys = mapOf("22222222222C" to key)).keys)
+    /** The keychain item holding `keys`, as DeviceParcelFiles writes it. */
+    private fun savedKeys(keys: Map<String, String>) = MemorySessionPersistence().apply {
+        save(JsonEncoder.deliveryTracker.encode(MapSerializer(String.serializer(), String.serializer()), keys))
+    }
 
-        // Offline, the key stays for the next try.
+    /** The rows of `saved` as the file holds them, for a test to spoil. */
+    private fun rows(saved: List<DeviceParcel>): List<JsonObject> =
+        Json.parseToJsonElement(DeviceParcelFiles.encoder.encode(parcels, saved).decodeToString()).jsonArray.map { it.jsonObject }
+
+    /** The row with its parcel changed by `change`. */
+    private fun JsonObject.withParcel(change: (JsonObject) -> Map<String, JsonElement>): JsonObject =
+        JsonObject(this + ("parcel" to JsonObject(change(getValue("parcel").jsonObject))))
+
+    @Test
+    fun theSavedListIsReadRowByRowAndARowLeftOutIsReadAgainThroughItsKey() = runTest {
+        val lamp = UUID.randomUUID()
+        val books = UUID.randomUUID()
+        val shoes = UUID.randomUUID()
+        val saved = rows(listOf(parcel("22222222222A", "Lamp", lamp), parcel("22222222222B", "Books", books), parcel("22222222222C", "Shoes", shoes)))
+        // The middle row is one this build can't read: its date is text.
+        val file = JsonArray(listOf(saved[0], JsonObject(saved[1] + ("checkedAt" to JsonPrimitive("yesterday"))), saved[2]))
+        val keys = mapOf("22222222222A" to key, "22222222222B" to key, "22222222222C" to key)
+        val logged = mutableListOf<String>()
+        val storage = DeviceParcelFiles(savedKeys(keys), MemoryFile(file.toString().toByteArray()), MemorySessionPersistence(), log = { logged += it })
+
+        val loaded = storage.load()
+        assertEquals(listOf("22222222222A", "22222222222C"), loaded.parcels.map { it.linkId })
+        assertEquals(keys, loaded.keys)
+        assertEquals(1, logged.size)
+        assertFalse("The log names no link", logged.single().contains("22222222222"))
+
+        val calls = Calls()
+        val device = device(client(calls, read = { linkId -> PublicParcelResponse(link = link(linkId), parcel = pkg(books)) }), storage, this)
+        assertEquals(listOf("Lamp", "Shoes"), device.list().map { it.label })
+        // Its key goes to an account like the others, before it is read again.
+        assertEquals(listOf("22222222222A", "22222222222C", "22222222222B"), device.claims.map { it.id })
+        device.refresh()
+        // Read again as the lookup it was, without the name it had here. The service is asked to forget nothing.
+        assertEquals(listOf("read 22222222222B k"), calls.all)
+        assertEquals(listOf("Lamp", "Shoes", ""), device.list().map { it.label })
+        assertEquals(books, device.parcelId(linkId = "22222222222B"))
+        assertFalse(device.isViewer(linkId = "22222222222B"))
+        assertEquals(keys, storage.load().keys)
+        assertEquals(listOf(lamp, shoes, books), storage.load().parcels.map { it.parcel.id })
+    }
+
+    @Test
+    fun aFileThatIsNoListKeepsItsKeysAndTheirParcelsAreReadAgain() = runTest {
+        val keys = mapOf("22222222222C" to key, "22222222222D" to key)
+        val unreadable = DeviceParcelFiles.opened("""{"linkID":""".toByteArray(), keys = keys)
+        assertTrue(unreadable.parcels.isEmpty())
+        assertEquals(keys, unreadable.keys)
+        assertEquals("No file, no parcels to read again", emptyMap<String, String>(), DeviceParcelFiles.opened(null, keys = keys).keys)
+
         val storage = Memory()
         storage.keys = unreadable.keys
+        val ids = mapOf("22222222222C" to UUID.randomUUID(), "22222222222D" to UUID.randomUUID())
         val calls = Calls()
-        val offline = client(calls).replacing(forget = { linkId, _ ->
+        val read = { linkId: String -> PublicParcelResponse(link = link(linkId), parcel = pkg(ids.getValue(linkId), number = "TESTPARCEL$linkId")) }
+        val device = device(client(calls, read = read), storage, this)
+        assertTrue(device.isEmpty)
+        // A parcel's own page reads that parcel alone.
+        device.refresh(only = UUID.randomUUID())
+        assertEquals(emptyList<String>(), calls.all)
+        device.refresh()
+
+        assertEquals(listOf("read 22222222222C k", "read 22222222222D k"), calls.all)
+        assertEquals(listOf(ids["22222222222C"], ids["22222222222D"]), device.list().map { it.id })
+        assertEquals(listOf(ClaimParcelLink(id = "22222222222C", key = key), ClaimParcelLink(id = "22222222222D", key = key)), device.claims)
+        assertEquals(keys, storage.keys)
+        assertEquals(listOf(false, false), storage.parcels.map { it.isViewer })
+    }
+
+    @Test
+    fun aKeyWhoseLinkLeadsNowhereIsLetGoAndOneTheServiceCouldNotAnswerForStays() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222C" to key, "22222222222D" to key, "22222222222E" to key)
+        val calls = Calls()
+        var offline = true
+        val device = device(
+            client(calls, read = { linkId ->
+                when (linkId) {
+                    // The service no longer has it (404), or it is no longer shared (410).
+                    "22222222222C" -> null
+                    // The service no longer takes the key as the owner's.
+                    "22222222222E" -> PublicParcelResponse(link = reader(linkId), parcel = pkg(UUID.randomUUID()))
+                    else -> if (offline) throw IOException("The Internet connection appears to be offline.") else PublicParcelResponse(link = link(linkId), parcel = pkg(id))
+                }
+            }),
+            storage, this,
+        )
+
+        device.refresh()
+        assertEquals(listOf("read 22222222222C k", "read 22222222222D k", "read 22222222222E k"), calls.all)
+        assertEquals(mapOf("22222222222D" to key), storage.keys)
+        assertTrue(device.isEmpty)
+
+        offline = false
+        device.refresh()
+        assertEquals("read 22222222222D k", calls.all.last())
+        assertEquals(listOf(id), device.list().map { it.id })
+        assertEquals(mapOf("22222222222D" to key), storage.keys)
+        assertFalse("Only an explicit forget asks the service to forget", calls.all.any { it.startsWith("forget") })
+    }
+
+    @Test
+    fun aParcelForgottenOfflineLeavesAtOnceAndTheServiceIsToldOnALaterRefresh() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Lamp", id))
+        val calls = Calls()
+        var offline = true
+        val flaky = client(calls, read = { linkId -> PublicParcelResponse(link = link(linkId), parcel = pkg(id)) }).replacing(forget = { linkId, _ ->
             calls.add("forget $linkId")
-            throw IOException("The Internet connection appears to be offline.")
+            if (offline) throw IOException("The Internet connection appears to be offline.")
         })
-        device(offline, storage, this).refresh()
-        assertEquals(mapOf("22222222222C" to key), storage.keys)
+        val device = device(flaky, storage, this)
+
+        device.forget(id = id)
+        assertTrue(device.isEmpty)
+        assertEquals(emptyList<ClaimParcelLink>(), device.claims)
+        assertTrue(storage.parcels.isEmpty())
+        assertTrue(storage.keys.isEmpty())
+        assertEquals(mapOf("22222222222A" to key), storage.pendingForgets)
+
+        // Still offline: the service is asked again, and the parcel is not read back.
+        device.refresh(all = true)
+        assertEquals(listOf("forget 22222222222A", "forget 22222222222A"), calls.all)
+        assertTrue(device.isEmpty)
+
+        // Stopped while it was being forgotten, its entry and key still saved beside it: forgetting wins.
+        storage.parcels = listOf(parcel("22222222222A", "Lamp", id))
+        storage.keys = mapOf("22222222222A" to key)
+        offline = false
+        val relaunched = device(flaky, storage, this)
+        assertTrue(relaunched.isEmpty)
+        relaunched.refresh(all = true)
+        relaunched.refresh(all = true)
+        assertEquals(listOf("forget 22222222222A", "forget 22222222222A", "forget 22222222222A"), calls.all)
+        assertTrue(relaunched.isEmpty)
+        assertTrue(storage.pendingForgets.isEmpty())
+        assertTrue(storage.keys.isEmpty())
+    }
+
+    @Test
+    fun aForgetCutShortIsStillToldOnALaterRefresh() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Lamp", id))
+        val calls = Calls()
+        val leaving = client(calls).replacing(forget = { linkId, _ ->
+            calls.add("forget $linkId")
+            throw CancellationException("Left")
+        })
+        try {
+            device(leaving, storage, this).forget(id = id)
+            fail("The forget went on as though nothing happened")
+        } catch (_: CancellationException) {
+        }
+        // On file as still to be forgotten before the service was asked.
+        assertTrue(storage.parcels.isEmpty())
+        assertTrue(storage.keys.isEmpty())
+        assertEquals(mapOf("22222222222A" to key), storage.pendingForgets)
 
         device(client(calls), storage, this).refresh()
-        assertEquals(listOf("forget 22222222222C", "forget 22222222222C"), calls.all)
+        assertEquals(listOf("forget 22222222222A", "forget 22222222222A"), calls.all)
+        assertTrue(storage.pendingForgets.isEmpty())
+    }
+
+    @Test
+    fun theLinkASecondLookupReplacesIsForgottenThroughTheSameQueue() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Lamp", id, pkg = pkg(id, carrier = CarrierId.Dpd)))
+        val calls = Calls()
+        var offline = true
+        val device = device(
+            client(calls, lookup = PublicLookupResponse(link = link("22222222222B"), key = key, parcel = pkg(id, carrier = CarrierId.Dpd)))
+                .replacing(forget = { linkId, _ ->
+                    calls.add("forget $linkId")
+                    if (offline) throw IOException("The Internet connection appears to be offline.")
+                }),
+            storage, this,
+        )
+
+        device.changeCarrier(id = id, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = "75001")
+        assertEquals(mapOf("22222222222A" to key), storage.pendingForgets)
+        advanceUntilIdle()
+        assertEquals(listOf("lookup TESTPARCEL123789 dpd", "forget 22222222222A"), calls.all)
+        assertEquals(mapOf("22222222222A" to key), storage.pendingForgets)
+        assertEquals(mapOf("22222222222B" to key), storage.keys)
+
+        offline = false
+        device.refresh()
+        assertEquals("forget 22222222222A", calls.all.last())
+        assertTrue(storage.pendingForgets.isEmpty())
+        assertEquals(listOf("22222222222B"), storage.parcels.map { it.linkId })
+    }
+
+    @Test
+    fun forgettingEveryParcelForgetsTheKeysStillToBeReadAgain() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222C" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Lamp", id))
+        val calls = Calls()
+        val device = device(client(calls), storage, this)
+
+        device.forgetAll()
+        assertEquals(listOf("forget 22222222222A", "forget 22222222222C"), calls.all)
+        assertTrue(device.isEmpty)
+        assertEquals(emptyList<ClaimParcelLink>(), device.claims)
         assertTrue(storage.keys.isEmpty())
+        assertTrue(storage.pendingForgets.isEmpty())
+    }
+
+    @Test
+    fun aLinkFollowedAgainBeforeTheServiceWasToldToForgetItStays() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.pendingForgets = mapOf("22222222222A" to key)
+        val calls = Calls()
+        val device = device(client(calls, read = { linkId -> PublicParcelResponse(link = link(linkId), parcel = pkg(id)) }), storage, this)
+
+        assertTrue(device.follow(PublicParcelResponse(link = link("22222222222A"), parcel = pkg(id)), key = key, label = "Lamp").added)
+        assertTrue(storage.pendingForgets.isEmpty())
+        device.refresh(all = true)
+        assertEquals(listOf("read 22222222222A k"), calls.all)
+        assertEquals(listOf("Lamp"), device.list().map { it.label })
+    }
+
+    @Test
+    fun aParcelSavedBeforeAnUpdateChangedItsModelIsReadAgainThroughItsKey() = runTest {
+        val older = UUID.randomUUID()
+        val newer = UUID.randomUUID()
+        val current = UUID.randomUUID()
+        val saved = rows(
+            listOf(
+                parcel("22222222222A", "Lamp", older), parcel("22222222222B", "Books", newer), parcel("22222222222C", "Shoes", current),
+                parcel("33333333333A", "Ana's", UUID.randomUUID()).copy(viewer = true),
+            ),
+        )
+        // Written before the model needed `notificationsMuted`, or with a stage this build does not know.
+        val withoutField = saved[0].withParcel { it - "notificationsMuted" }
+        val withUnknownStage = saved[1].withParcel { parcel ->
+            val event = parcel.getValue("trackingEvents").jsonArray.single().jsonObject
+            parcel + ("trackingEvents" to JsonArray(listOf(JsonObject(event + ("stage" to JsonPrimitive("teleported"))))))
+        }
+        // Someone else's parcel no key reads: left out on this phone alone.
+        val theirs = saved[3].withParcel { it - "notificationsMuted" }
+        val file = JsonArray(listOf(withoutField, withUnknownStage, saved[2], theirs)).toString().toByteArray()
+        val keys = mapOf("22222222222A" to key, "22222222222B" to key, "22222222222C" to key)
+        val storage = DeviceParcelFiles(savedKeys(keys), MemoryFile(file), MemorySessionPersistence())
+        val calls = Calls()
+        val device = device(
+            client(calls, read = { linkId -> PublicParcelResponse(link = link(linkId), parcel = pkg(if (linkId == "22222222222A") older else newer)) }),
+            storage, this,
+        )
+        assertEquals(listOf("Shoes"), device.list().map { it.label })
+
+        device.refresh()
+        assertEquals(listOf("read 22222222222A k", "read 22222222222B k"), calls.all)
+        assertEquals(listOf(current, older, newer), device.list().map { it.id })
+        assertEquals(keys, storage.load().keys)
     }
 
     @Test
@@ -1217,7 +1468,7 @@ class DeviceParcelTests {
             override fun write(data: ByteArray) = throw IOException("Unwritable")
             override fun delete() = throw IOException("Undeletable")
         }
-        val storage = DeviceParcelFiles(lostKeystore, brokenFile)
+        val storage = DeviceParcelFiles(lostKeystore, brokenFile, lostKeystore)
         assertEquals(DeviceParcelStorage.Contents(emptyList(), emptyMap()), storage.load())
         storage.save(emptyList(), emptyMap())
         storage.save(listOf(parcel("22222222222A", "", UUID.randomUUID())), mapOf("22222222222A" to key))
@@ -1269,26 +1520,33 @@ class DeviceParcelTests {
         val keys = mapOf("22222222222C" to key)
         val keychain = MemorySessionPersistence()
         keychain.save(JsonEncoder.deliveryTracker.encode(MapSerializer(String.serializer(), String.serializer()), keys))
-        assertEquals("No file, no parcels to forget", DeviceParcelStorage.Contents(emptyList(), emptyMap()), DeviceParcelFiles(keychain, MemoryFile(null)).load())
+        assertEquals("No file, no parcels to read again", DeviceParcelStorage.Contents(emptyList(), emptyMap()), DeviceParcelFiles(keychain, MemoryFile(null), MemorySessionPersistence()).load())
 
-        val unreadable = """[{"linkID":42}]""".toByteArray()
+        val unreadable = "not JSON".toByteArray()
         val file = MemoryFile(unreadable)
-        val storage = DeviceParcelFiles(keychain, file)
+        val forgets = MemorySessionPersistence()
+        val storage = DeviceParcelFiles(keychain, file, forgets)
         assertEquals(DeviceParcelStorage.Contents(emptyList(), keys), storage.load())
         storage.save(emptyList(), keys)
         assertEquals(unreadable.toList(), file.data?.toList())
         assertEquals(keys, storage.load().keys)
 
-        // Once their links are forgotten, neither is left.
+        // The links still to be forgotten are kept in a store of their own, whatever becomes of the file.
+        storage.save(emptyList(), keys, pendingForgets = mapOf("22222222222D" to key))
+        assertNotNull(forgets.data)
+        assertEquals(mapOf("22222222222D" to key), DeviceParcelFiles(keychain, MemoryFile(null), forgets).load().pendingForgets)
+
+        // Once their parcels are read again or gone, and the service told, nothing is left.
         storage.save(emptyList(), emptyMap())
         assertNull(file.data)
         assertNull(keychain.data)
+        assertNull(forgets.data)
     }
 
     @Test
     fun aCancelledRefreshEndsInItsCancellationAndLeavesWhatItHadToTell() = runTest {
         val storage = Memory()
-        storage.keys = mapOf("22222222222C" to key)
+        storage.pendingForgets = mapOf("22222222222C" to key)
         storage.parcels = listOf(parcel("33333333333B", "", UUID.randomUUID()).copy(viewer = true, alertToken = "token1", forgotten = true))
         val calls = Calls()
         var unalertLeaves = true
@@ -1312,17 +1570,17 @@ class DeviceParcelTests {
         cancelledRefresh()
         assertEquals(listOf("unalert 33333333333B token1 fcm", "unalert 33333333333B token1 fcm", "forget 22222222222C"), calls.all)
         assertTrue(storage.parcels.isEmpty())
-        assertEquals(mapOf("22222222222C" to key), storage.keys)
+        assertEquals(mapOf("22222222222C" to key), storage.pendingForgets)
         forgetLeaves = false
         device.refresh()
         assertEquals("forget 22222222222C", calls.all.last())
-        assertTrue(storage.keys.isEmpty())
+        assertTrue(storage.pendingForgets.isEmpty())
     }
 
     @Test
-    fun aRefreshCancelledAmongKeysKeepsTheLinksItForgotForgotten() = runTest {
+    fun aRefreshCancelledAmongPendingForgetsKeepsTheLinksItForgotForgotten() = runTest {
         val storage = Memory()
-        storage.keys = mapOf("22222222222C" to key, "22222222222D" to key)
+        storage.pendingForgets = mapOf("22222222222C" to key, "22222222222D" to key)
         val calls = Calls()
         val leaving = client(calls).replacing(forget = { linkId, _ ->
             calls.add("forget $linkId")
@@ -1334,7 +1592,7 @@ class DeviceParcelTests {
         } catch (_: CancellationException) {
         }
         assertEquals(listOf("forget 22222222222C", "forget 22222222222D"), calls.all)
-        assertEquals(mapOf("22222222222D" to key), storage.keys)
+        assertEquals(mapOf("22222222222D" to key), storage.pendingForgets)
     }
 
     @Test

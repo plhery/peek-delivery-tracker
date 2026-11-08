@@ -263,7 +263,11 @@ class AppContainer(
                 null
             },
             storage = QueuedDeviceParcelStorage(
-                DeviceParcelFiles(KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.deviceParcels"), DeviceParcelsFile.of(context)),
+                DeviceParcelFiles(
+                    KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.deviceParcels"), DeviceParcelsFile.of(context),
+                    forgets = KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.deviceParcelForgets"),
+                    log = { line -> Log.w("PeekDeviceParcels", line) },
+                ),
             ),
             postcodes = PostcodeMemory(defaults),
             scope = scope,

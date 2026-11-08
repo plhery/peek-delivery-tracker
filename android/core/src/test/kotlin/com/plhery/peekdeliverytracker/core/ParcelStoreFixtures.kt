@@ -31,12 +31,14 @@ internal class MemoryParcelCacheFiles : ParcelCacheFiles {
 internal class MemoryDeviceParcelStorage : DeviceParcelStorage {
     var parcels: List<DeviceParcel> = emptyList()
     var keys: Map<String, String> = emptyMap()
+    var pendingForgets: Map<String, String> = emptyMap()
 
-    override fun load(): DeviceParcelStorage.Contents = DeviceParcelStorage.Contents(parcels, keys)
+    override fun load(): DeviceParcelStorage.Contents = DeviceParcelStorage.Contents(parcels, keys, pendingForgets)
 
-    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
+    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String>) {
         this.parcels = parcels
         this.keys = keys
+        this.pendingForgets = pendingForgets
     }
 }
 

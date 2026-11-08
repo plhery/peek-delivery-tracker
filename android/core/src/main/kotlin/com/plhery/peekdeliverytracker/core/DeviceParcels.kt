@@ -289,12 +289,15 @@ class DeviceParcelClient(
 interface DeviceParcelStorage {
     fun load(): Contents
 
-    fun save(parcels: List<DeviceParcel>, keys: Map<String, String>)
+    fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String> = emptyMap())
 
-    /** The parcels, and the owner keys by link id. */
-    data class Contents(val parcels: List<DeviceParcel>, val keys: Map<String, String>) {
-        /** Leaves out the keys, which are credentials. */
-        override fun toString(): String = "Contents(parcels=$parcels, keys=${keys.size})"
+    /**
+     * The parcels, the owner keys by link id, and the links forgotten here that the service is still to be told about,
+     * with their keys.
+     */
+    data class Contents(val parcels: List<DeviceParcel>, val keys: Map<String, String>, val pendingForgets: Map<String, String> = emptyMap()) {
+        /** Leaves out the keys, which are credentials, and the links. */
+        override fun toString(): String = "Contents(parcels=$parcels, keys=${keys.size}, pendingForgets=${pendingForgets.size})"
     }
 }
 
@@ -326,25 +329,46 @@ interface DeviceParcelFile {
 /**
  * The device's parcels as the iPhone app keeps them: the owner keys in `keychain`, a secret store of their own
  * (KeychainStore on the iPhone, service "com.plhery.PeekDeliveryTracker.deviceParcels", kept on this device alone and
- * readable after the first unlock), as the JSON object JsonEncoder.deliveryTracker writes; and the parcels in `file`,
- * as the iPhone's JSONEncoder.deliveryTracker writes its models (`JsonEncoder` with `swiftKeys`). A backup that brings
- * the file back without the keys brings back someone else's parcels alone (`matched`).
+ * readable after the first unlock), as the JSON object JsonEncoder.deliveryTracker writes; the links forgotten here
+ * that the service is still to be told about, with their keys, the same way in `forgets` (service
+ * "com.plhery.PeekDeliveryTracker.deviceParcelForgets"); and the parcels in `file`, as the iPhone's
+ * JSONEncoder.deliveryTracker writes its models (`JsonEncoder` with `swiftKeys`). A backup that brings the file back
+ * without the keys brings back someone else's parcels alone (`matched`). `log` hears how many saved parcels this build
+ * could not read, never which.
  */
-class DeviceParcelFiles(private val keychain: SessionPersistence, private val file: DeviceParcelFile) : DeviceParcelStorage {
+class DeviceParcelFiles(
+    private val keychain: SessionPersistence,
+    private val file: DeviceParcelFile,
+    private val forgets: SessionPersistence,
+    private val log: (String) -> Unit = {},
+) : DeviceParcelStorage {
+    /** What `forgets` holds as far as this store knows, so that a save leaves it alone when it is the same; nil, unknown. */
+    @Volatile private var forgetsOnFile: Map<String, String>? = null
+
     override fun load(): DeviceParcelStorage.Contents {
         // As KeychainStore's and Data(contentsOf:)'s `try?`: a store or file the system fails to read reads as missing,
         // so a lost Keystore key or a broken disk never stops the app from opening.
-        val keys = quietly { keychain.load() }?.let { data ->
-            try {
-                decodeJson(keysSerializer, data)
-            } catch (_: Exception) {
-                null
-            }
-        } ?: emptyMap()
-        return opened(quietly { file.read() }, keys)
+        val keys = secrets(keychain) ?: emptyMap()
+        val pendingForgets = secrets(forgets)
+        forgetsOnFile = pendingForgets
+        return opened(quietly { file.read() }, keys, log).copy(pendingForgets = pendingForgets ?: emptyMap())
     }
 
-    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
+    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>, pendingForgets: Map<String, String>) {
+        // The links still to be forgotten go first: one left among the keys too is still to be forgotten.
+        if (pendingForgets != forgetsOnFile) {
+            if (pendingForgets.isEmpty()) {
+                quietly { forgets.delete() }
+            } else {
+                try {
+                    forgets.save(JsonEncoder.deliveryTracker.encode(keysSerializer, pendingForgets))
+                } catch (_: Exception) {
+                    forgetsOnFile = null
+                    return
+                }
+            }
+            forgetsOnFile = pendingForgets
+        }
         if (parcels.isEmpty() && keys.isEmpty()) {
             quietly { keychain.delete() }
             quietly { file.delete() }
@@ -360,7 +384,7 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
                 return
             }
         }
-        // Keys alone are those of a file that couldn't be read, which stays until their links are forgotten.
+        // Keys alone are those of a file that couldn't be read, which stays until their parcels are read again.
         if (parcels.isEmpty()) return
         quietly { file.write(encoder.encode(parcelsSerializer, parcels)) }
     }
@@ -371,6 +395,15 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
         null
     }
 
+    /** Keys by link id in `store`, or nil when there are none or they can't be read. */
+    private fun secrets(store: SessionPersistence): Map<String, String>? = quietly { store.load() }?.let { data ->
+        try {
+            decodeJson(keysSerializer, data)
+        } catch (_: Exception) {
+            null
+        }
+    }
+
     companion object {
         private val keysSerializer = MapSerializer(String.serializer(), String.serializer())
         private val parcelsSerializer = ListSerializer(DeviceParcel.serializer())
@@ -379,26 +412,35 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
         internal val encoder = JsonEncoder(sortedKeys = true, swiftKeys = true)
 
         /**
-         * The parcels on file, with their keys. A file this build can't decode keeps every key, so the service can be
-         * asked to forget their links.
+         * The parcels on file, with their keys. Each parcel is read on its own: one this build can't read (an update
+         * gave the model a field it lacks, say) is left out alone, and a file that is no list at all leaves them all
+         * out. Their keys stay, and read their parcels again from the service (`DeviceParcels.refresh`): what was
+         * saved here is a copy, and losing it changes nothing there.
          */
-        fun opened(file: ByteArray?, keys: Map<String, String>): DeviceParcelStorage.Contents {
+        fun opened(file: ByteArray?, keys: Map<String, String>, log: (String) -> Unit = {}): DeviceParcelStorage.Contents {
             if (file == null) return DeviceParcelStorage.Contents(emptyList(), emptyMap())
-            val parcels = try {
-                decodeSwiftKeys(parcelsSerializer, file)
-            } catch (_: Exception) {
+            val rows = decodeSwiftKeysEach(DeviceParcel.serializer(), file)
+            if (rows == null) {
+                log("The saved parcels could not be read; their keys read them again.")
                 return DeviceParcelStorage.Contents(emptyList(), keys)
             }
+            val parcels = rows.filterNotNull()
+            if (parcels.size < rows.size) log("${rows.size - parcels.size} of ${rows.size} saved parcels could not be read; their keys read them again.")
             return matched(parcels, keys)
         }
 
         /**
-         * A parcel of this phone's own without its key cannot be read or forgotten, and a key without its parcel opens
-         * nothing. A parcel followed through someone else's link needs no key.
+         * A parcel of this phone's own without its key cannot be read or forgotten, and a key beside someone else's
+         * parcel opens nothing. A key without its parcel stays: its parcel is read again with it. A parcel followed
+         * through someone else's link needs no key.
          */
         fun matched(parcels: List<DeviceParcel>, keys: Map<String, String>): DeviceParcelStorage.Contents {
             val kept = parcels.filter { it.isViewer || keys.keyOf(it.linkId) != null }
-            return DeviceParcelStorage.Contents(kept, keys.filterKeys { key -> kept.any { it.linkId.equalsCanonically(key) && !it.isViewer } })
+            fun theirs(linkId: String): Boolean {
+                val beside = kept.filter { it.linkId.equalsCanonically(linkId) }
+                return beside.isNotEmpty() && beside.all { it.isViewer }
+            }
+            return DeviceParcelStorage.Contents(kept, keys.filterKeys { !theirs(it) })
         }
     }
 }
@@ -439,6 +481,13 @@ class DeviceParcels(
     private var forgotten: List<DeviceParcel>
 
     /**
+     * This phone's own links forgotten here, or replaced by a new lookup, that the service has not forgotten yet, with
+     * their keys: out of the list, and asked about again on each refresh until it answers. The only links this phone
+     * asks the service to forget.
+     */
+    private var pendingForgets: Map<String, String>
+
+    /**
      * The tokens and languages rounds of notification requests are under way for, kept in NFC so that canonically
      * equivalent spellings are one round, as Swift's `Set<String>` compares them.
      */
@@ -452,9 +501,12 @@ class DeviceParcels(
 
     init {
         val loaded = storage.load()
-        entries = loaded.parcels.filter { it.forgotten != true }
+        pendingForgets = loaded.pendingForgets
+        // A link both kept and still to be forgotten was being forgotten when the app last stopped: forgetting wins.
+        fun pending(linkId: String) = pendingForgets.keyOf(linkId) != null
+        entries = loaded.parcels.filter { it.forgotten != true && !pending(it.linkId) }
         forgotten = loaded.parcels.filter { it.forgotten == true }
-        keys = loaded.keys
+        keys = loaded.keys.filterKeys { !pending(it) }
     }
 
     val isEmpty: Boolean get() = entries.isEmpty()
@@ -505,10 +557,15 @@ class DeviceParcels(
             entries = entries.filterIndexed { index, _ -> index != twin }
             val key = keys.keyOf(old.linkId)
             keys = keys.setting(old.linkId, null)
+            // Its link is forgotten as one forgotten here would be: on file until the service has been told.
+            if (key != null) pendingForgets = pendingForgets.setting(old.linkId, key)
             if (key != null || old.alertToken != null) {
                 scope.launch {
                     old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, removal(token)) } }
-                    if (key != null) attempt { client.forget(old.linkId, key) }
+                    if (key != null && succeeds { client.forget(old.linkId, key) }) {
+                        pendingForgets = pendingForgets.setting(old.linkId, null)
+                        save()
+                    }
                 }
             }
             // The parcel being replaced came back unchanged: only its link is new.
@@ -516,6 +573,7 @@ class DeviceParcels(
         }
         entries = entries + entry
         keys = keys.setting(entry.linkId, response.key)
+        pendingForgets = pendingForgets.setting(entry.linkId, null)
         save()
         request.dpdPostcode?.let { postcodes.remember(it, request.carrier ?: response.parcel.carrier) }
         return shown(entry)
@@ -524,25 +582,26 @@ class DeviceParcels(
     /**
      * Reads every parcel whose answer has gone stale, or every one when `all`. A parcel the service no longer has leaves
      * the list. The first trouble ends the round and is thrown; the list keeps what the device has.
+     *
+     * First the service is told again of the links forgotten here that it could not be told about, and, unless `only`
+     * one parcel is read, the keys whose parcels were lost on this phone (a file this build could not read, say) read
+     * their parcels again.
      */
     suspend fun refresh(all: Boolean = false, only: UUID? = null) {
         val client = client ?: return
         stopForgottenAlerts(client)
-        // Keys without their parcel, left by a file that couldn't be decoded: the service forgets those links too.
-        try {
-            for ((linkId, key) in keys) {
-                if (entries.any { it.linkId.equalsCanonically(linkId) }) continue
-                if (!succeeds { client.forget(linkId, key) } || entries.any { it.linkId.equalsCanonically(linkId) }) continue
-                keys = keys.setting(linkId, null)
-            }
+        val recovered = try {
+            tellPendingForgets(client)
+            if (only == null) recoverParcels(client) else emptySet()
         } catch (cancellation: CancellationException) {
-            // The links already forgotten stay so on file, as the parcels' round keeps what it read.
+            // What was already told or read stays so on file, as the parcels' round keeps what it read.
             save()
             throw cancellation
         }
         var trouble: Exception? = null
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
+            if (recovered.any { it.equalsCanonically(entry.linkId) }) continue
             val key = keys.keyOf(entry.linkId)
             if (key == null && !entry.isViewer) continue
             val age = now().timeIntervalSinceReferenceDate - entry.checkedAt
@@ -579,7 +638,8 @@ class DeviceParcels(
     /**
      * The service forgets the parcel, then the device does. Someone else's parcel is forgotten here alone: its
      * notifications on this phone stop, and its link goes on working for others. When the service can't be told yet,
-     * it leaves the list and each refresh tells it again.
+     * the parcel leaves the list all the same and each refresh tells the service again: this phone's own link is kept
+     * with its key until the service has forgotten it, someone else's until its notifications are off.
      */
     suspend fun forget(id: UUID) {
         val entry = entries.firstOrNull { it.parcel.id == id } ?: return
@@ -589,12 +649,17 @@ class DeviceParcels(
             alerting = !succeeds { client.removeAlert(entry.linkId, removal(entry.alertToken)) }
         }
         val key = keys.keyOf(entry.linkId)
-        if (client != null && key != null) client.forget(entry.linkId, key)
         entries = entries.filter { !it.linkId.equalsCanonically(entry.linkId) }
         keys = keys.setting(entry.linkId, null)
+        // On file as still to be forgotten before the service is asked, so that nothing stopping the app loses it.
+        if (client != null && key != null) pendingForgets = pendingForgets.setting(entry.linkId, key)
         // A forgotten link of this phone's own takes its notifications with it; someone else's goes on.
         if (alerting && entry.isViewer) forgotten = forgotten + entry.copy(forgotten = true)
         save()
+        if (client != null && key != null && succeeds { client.forget(entry.linkId, key) }) {
+            pendingForgets = pendingForgets.setting(entry.linkId, null)
+            save()
+        }
     }
 
     /**
@@ -610,19 +675,69 @@ class DeviceParcels(
         }
     }
 
-    /** Forgets every parcel. The ones the service could not be told about stay, and the trouble is thrown. */
-    suspend fun forgetAll() {
-        var trouble: Exception? = null
-        for (entry in entries) {
-            try {
-                forget(entry.parcel.id)
+    /**
+     * Tells the service of the links forgotten here while it couldn't be told. One it has forgotten, or no longer has,
+     * is done with; the others wait for the next refresh.
+     */
+    private suspend fun tellPendingForgets(client: DeviceParcelClient) {
+        for ((linkId, key) in pendingForgets) {
+            if (!succeeds { client.forget(linkId, key) }) continue
+            pendingForgets = pendingForgets.setting(linkId, null)
+        }
+    }
+
+    /**
+     * Reads again, with its key, each parcel of this phone's own whose saved copy was lost (a file this build could not
+     * read, or a key saved without its file), and keeps it as a lookup made here, without the name it was given. A key
+     * whose link leads nowhere, or that the service no longer takes as the owner's, goes; one the service could not
+     * answer for stays for the next refresh. Never a key still to be forgotten: those are not among the keys. Returns
+     * the links it read.
+     */
+    private suspend fun recoverParcels(client: DeviceParcelClient): Set<String> {
+        val recovered = mutableSetOf<String>()
+        for ((linkId, key) in keys) {
+            if (entries.any { it.linkId.equalsCanonically(linkId) }) continue
+            val response = try {
+                client.read(linkId, key)
             } catch (cancellation: CancellationException) {
                 throw cancellation
-            } catch (error: Exception) {
-                trouble = error
+            } catch (_: Exception) {
+                continue
             }
+            // Followed or forgotten meanwhile.
+            if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) == null) continue
+            if (response == null || response.link.role != ParcelLinkRole.Owner || entries.any { it.parcel.id == response.parcel.id }) {
+                // Only this phone's copy goes: the link stays as it is on the service.
+                keys = keys.setting(linkId, null)
+                continue
+            }
+            entries = entries + DeviceParcel(
+                linkId = linkId, label = "", archivedAt = null, parcel = Parcel(shared = response.parcel),
+                checkedAt = now().timeIntervalSinceReferenceDate,
+            )
+            recovered += linkId
         }
-        trouble?.let { throw it }
+        return recovered
+    }
+
+    /**
+     * Forgets every parcel, those whose saved copy was lost and is still to be read again included. The ones the
+     * service could not be told about leave the list too, and each refresh tells it again.
+     */
+    suspend fun forgetAll() {
+        for (entry in entries) forget(entry.parcel.id)
+        val unread = keys.filterKeys { linkId -> entries.none { it.linkId.equalsCanonically(linkId) } }
+        if (unread.isEmpty()) return
+        val client = client
+        for ((linkId, key) in unread) {
+            keys = keys.setting(linkId, null)
+            if (client != null) pendingForgets = pendingForgets.setting(linkId, key)
+        }
+        save()
+        if (client != null) {
+            tellPendingForgets(client)
+            save()
+        }
     }
 
     /** Follows the same number with another carrier, link or postcode: a new lookup, which takes the old one's place and name. */
@@ -688,8 +803,8 @@ class DeviceParcels(
     fun isArchived(linkId: String): Boolean = entries.firstOrNull { it.linkId.equalsCanonically(linkId) }?.archivedAt != null
 
     /**
-     * What an account needs to take the device's parcels over: its own with their keys, and someone else's that the
-     * link lets an account keep.
+     * What an account needs to take the device's parcels over: its own with their keys, those whose saved copy was lost
+     * included, and someone else's that the link lets an account keep. Never a link still to be forgotten.
      */
     val claims: List<ClaimParcelLink>
         get() = entries.mapNotNull { entry ->
@@ -698,6 +813,8 @@ class DeviceParcels(
             } else {
                 keys.keyOf(entry.linkId)?.let { ClaimParcelLink(id = entry.linkId, key = it, label = entry.label.nonEmpty) }
             }
+        } + keys.mapNotNull { (linkId, key) ->
+            if (entries.any { it.linkId.equalsCanonically(linkId) }) null else ClaimParcelLink(id = linkId, key = key)
         }
 
     /** Whether the parcel behind this link is someone else's, followed here as its reader. */
@@ -773,6 +890,8 @@ class DeviceParcels(
             entry = entry.copy(alertToken = left.alertToken, alertPreset = left.alertPreset)
             forgotten = forgotten.filter { !it.linkId.equalsCanonically(linkId) }
         }
+        // Followed again before the service could be told to forget it: it no longer is.
+        pendingForgets = pendingForgets.setting(linkId, null)
         if (key != null) {
             keys = keys.setting(linkId, key)
         } else {
@@ -851,7 +970,7 @@ class DeviceParcels(
         entries = entries.toMutableList().also { it[index] = change(it[index]) }
     }
 
-    private fun save() = storage.save(entries + forgotten, keys)
+    private fun save() = storage.save(entries + forgotten, keys, pendingForgets)
 
     companion object {
         /**

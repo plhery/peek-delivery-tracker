@@ -757,6 +757,9 @@ Key JSON events:
   `native` or `live_activity`) and, for `native`, its `transport` (`apns` or `fcm`), with its
   HTTP `status`, the `reason` APNs or FCM gave (FCM's error code, or Google's OAuth error when
   the service account was refused) and the `error_type`; never the endpoint or token. The scan stays pending and the next dispatch sends it again.
+- `push_dispatch_skipped` (`reason`: `lease_held`): another server, or a dispatch still
+  running here, holds the push dispatch lease ([DEPLOYMENT.md](DEPLOYMENT.md)); the scans
+  wait for the next dispatch. Expected while a deploy's two containers overlap.
 - `parcel_feedback`: an answer about a parcel, with the `answer`, its `reasons`, the
   `carrier`, where it was `asked` (`page` or `back`, on the way back from the carrier's
   site), `via` an `account` or a `link`, the `app` and the `outcome` as
@@ -831,7 +834,8 @@ provider failure in an `AggregateError` so every cause is visible.
 - **Push deliveries**: a send the push service refuses, other than for a subscription that is
   gone, is retried by the next dispatch, so a dispatch with failed deliveries is only logged.
   While every dispatch keeps failing some, it is reported 1, 2, 3, 4, 8, 16… dispatches after
-  the first. A channel that cannot dispatch at all is reported at once.
+  the first. A channel that cannot dispatch at all is reported at once, and so is a dispatch
+  that could not take or keep its lease (`WorkerLeaseLost`).
 - **Input requirements**: requests for a postcode or other tracking input stay in logs
   and breadcrumbs without opening Sentry issues. Each lookup made with a postcode the
   owner supplied for a provider logs `provider_input_lookup` with its result.

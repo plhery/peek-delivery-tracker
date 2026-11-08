@@ -520,12 +520,13 @@ describe('when an alert ends', () => {
     expect(removed).toHaveBeenCalledOnce();
   });
 
-  it('stops at once when the server is shutting down', async () => {
-    pending([row()]);
+  it('records the alert it sent when the server starts shutting down, and sends no other', async () => {
+    pending([row(), row({ alert_id: 'alert-2', endpoint: `${endpoint}-2` })]);
     const controller = new AbortController();
     send.mockImplementation(async () => { controller.abort(new Error('draining')); });
     await expect(alerts.dispatch(controller.signal)).rejects.toThrow('draining');
-    expect(handled).not.toHaveBeenCalled();
+    expect(send).toHaveBeenCalledOnce();
+    expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['event-1']);
   });
 });
 

@@ -33,9 +33,11 @@ const MAX_WORKER_BACKOFF_MS = 60_000;
 const MAX_IDLE_POLL_INTERVALS = 10;
 // The platform stops the old container 30 s after SIGTERM (docs/DEPLOYMENT.md). A check
 // in progress gets 10 s to end on its own: nearly all take less. Then it is aborted, and
-// the handoff waits at most 4 s for it to stop before returning its job to the queue.
+// the handoff waits at most 4 s for it to stop before returning its job to the queue,
+// and 3 s more for the push dispatch lease to be given up.
 export const CHECK_FINISH_MS = 10_000;
 const ABORT_SETTLE_MS = 4_000;
+const LEASE_RELEASE_MS = 3_000;
 // Any run in the next 2 hours can still close a lost run's check-in.
 const LOST_RUN_WINDOW_MS = 2 * 60 * 60_000;
 
@@ -164,7 +166,8 @@ export class SyncJobWorker {
   /**
    * Stops taking jobs and lets the check in progress end, for `finishMs` at most; a
    * scheduled run stops before its next check. What is still running is then aborted,
-   * and only our own unfinished job goes back to the queue.
+   * and only our own unfinished job goes back to the queue. The push dispatch lease is
+   * given up with it, once the send in progress is recorded, so the next server dispatches at once.
    */
   drain(finishMs = CHECK_FINISH_MS): Promise<void> {
     this.#draining ??= (async () => {
@@ -175,7 +178,10 @@ export class SyncJobWorker {
       await settleWithin(this.#processing, finishMs);
       this.stop();
       await settleWithin(this.#processing, ABORT_SETTLE_MS);
-      await this.releaseOwnedJob();
+      await Promise.all([
+        this.releaseOwnedJob(),
+        settleWithin(this.service.notifier?.releaseLease() ?? null, LEASE_RELEASE_MS),
+      ]);
     })();
     return this.#draining;
   }

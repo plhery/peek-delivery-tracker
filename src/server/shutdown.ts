@@ -4,7 +4,8 @@ import { captureOperationalError, flushObservability, logOperationalEvent } from
 
 // The platform stops the container 30 s after the signal (docs/DEPLOYMENT.md). The sync
 // worker's handoff takes 17 s at most: 10 s for a check to end, 4 s for an aborted one
-// to stop, 3 s to return its job. HTTP requests then drain until the 25 s watchdog.
+// to stop, 3 s to return its job and the push dispatch lease. HTTP requests then drain
+// until the 25 s watchdog.
 const BACKGROUND_DRAIN_MS = 18_000;
 const SHUTDOWN_DEADLINE_MS = 25_000;
 

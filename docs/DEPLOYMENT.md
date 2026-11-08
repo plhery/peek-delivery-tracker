@@ -349,8 +349,14 @@ overall, inside the platform's 30 s grace period.
 
 If a process is killed or the host dies, its job's **90 s lease** (renewed every 15 s)
 expires and another worker picks it up. A job gets three crash attempts; orderly deploys
-don't count. All writes are fenced by lease ownership and the database clock, so
-overlapping containers can safely share the queue.
+don't count. A job's writes are fenced by its lease and the database clock, so
+overlapping containers never run the same job twice.
+
+Push notifications go out from one container at a time. A dispatch holds a **60 s lease**
+(renewed every 15 s, and stopped after 30 s without a confirmed renewal); a container
+that cannot take it skips that dispatch, and the scans wait for its next one. At shutdown
+a send in progress is recorded before the dispatch stops, then the lease is given up; a
+crashed holder's runs out.
 
 Open browsers keep their build. Assets are content-hashed and precached. The app switches
 to a new build by itself, in the background or after a few idle seconds, and never while

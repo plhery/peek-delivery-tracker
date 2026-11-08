@@ -125,6 +125,9 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/sync_job_leases.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/worker_leases.sql"
+
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/live_activity_revocation.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \

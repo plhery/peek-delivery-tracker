@@ -1967,6 +1967,27 @@ export class SupabaseServiceClient extends SupabaseClient {
     }) === true;
   }
 
+  /** Takes a lease on work one server does at a time, or extends it for its owner: false while another owner holds it. */
+  async claimWorkerLease(name: string, owner: string, seconds: number): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/claim_worker_lease', {
+      method: 'POST', timeoutMs: 3_000, body: { p_name: name, p_owner: owner, p_seconds: seconds },
+    }) === true;
+  }
+
+  /** Extends a lease its owner still holds: false once it ran out or another owner took it. */
+  async renewWorkerLease(name: string, owner: string, seconds: number): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/renew_worker_lease', {
+      method: 'POST', timeoutMs: 3_000, body: { p_name: name, p_owner: owner, p_seconds: seconds },
+    }) === true;
+  }
+
+  /** Gives a lease up, when this owner holds it. */
+  async releaseWorkerLease(name: string, owner: string): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/release_worker_lease', {
+      method: 'POST', timeoutMs: 3_000, body: { p_name: name, p_owner: owner },
+    }) === true;
+  }
+
   async setSyncJobCheckIn(jobId: string, workerId: string, checkIn: { checkInId: string; monitorSlug: string; startedAt: number }): Promise<void> {
     const saved = await this.request('/rest/v1/rpc/set_sync_job_check_in', {
       method: 'POST', body: { p_job_id: jobId, p_worker_id: workerId, p_check_in: checkIn },

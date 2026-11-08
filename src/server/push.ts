@@ -27,6 +27,7 @@ import { stageNotices } from './stageNotices';
 import { messagesFor } from './requestLocale';
 import type { SupabaseServiceClient } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
+import { WorkerLease } from './workerLease';
 
 /**
  * What a notification says beyond the app's own words for a parcel's stages.
@@ -878,7 +879,7 @@ export class WebPushNotificationService {
       summary.attempted += 1;
       try {
         await this.send(newest);
-        signal?.throwIfAborted();
+        // Sent is recorded, even while the server stops: the scan must not go out twice.
         await this.client.recordPushDeliveries(
           subscriptionId,
           events.map((event) => stringField(event, 'event_id')).filter(Boolean),
@@ -1085,7 +1086,7 @@ export class ParcelLinkAlertService {
         }
         continue;
       }
-      signal?.throwIfAborted();
+      // Sent is recorded, even while the server stops: the alert must not go out twice.
       await settle(0);
       recordParcelAlertSent('sent', channel);
       summary.sent += 1;
@@ -1314,7 +1315,7 @@ abstract class AppPushNotificationService {
       summary.attempted += 1;
       try {
         await this.send(newest);
-        signal?.throwIfAborted();
+        // Sent is recorded, even while the server stops: the scan must not go out twice.
         await this.client.recordNativePushDeliveries(
           deviceId,
           events.map((event) => stringField(event, 'event_id')).filter(Boolean),
@@ -1545,7 +1546,7 @@ export class DeliveryLiveActivityNotificationService {
       summary.attempted += 1;
       try {
         await this.send(newest, kind);
-        signal?.throwIfAborted();
+        // Sent is recorded, even while the server stops: the scan must not go out twice.
         await record(events, kind);
         if (kind === 'end' && updateTokenId) {
           await this.client.deleteLiveActivityTokenById(updateTokenId);
@@ -1712,10 +1713,29 @@ export class CompositePushNotificationService {
     readonly liveActivities: DeliveryLiveActivityNotificationService | null,
     readonly linkAlerts: ParcelLinkAlertService | null = null,
     readonly fcm: FcmPushNotificationService | null = null,
+    /** Taken for each dispatch, so that two servers never send the same scans. */
+    readonly lease: WorkerLease | null = null,
   ) {}
 
+  /**
+   * Sends what every channel has waiting. While another server dispatches, as the old one of a
+   * deploy may, this one sends nothing and the scans wait for its next dispatch.
+   */
   async dispatch(signal?: AbortSignal): Promise<PushSummary> {
     signal?.throwIfAborted();
+    if (!this.lease) return await this.dispatchChannels(signal);
+    const summary = await this.lease.run((held) => this.dispatchChannels(held), signal);
+    if (summary) return summary;
+    logOperationalEvent('push_dispatch_skipped', { reason: 'lease_held' });
+    return { ...emptySummary(), sentByChannel: {} };
+  }
+
+  /** Gives the dispatch lease up once the dispatch in progress, if any, has ended. */
+  async releaseLease(): Promise<void> {
+    await this.lease?.stop();
+  }
+
+  private async dispatchChannels(signal?: AbortSignal): Promise<PushSummary> {
     const combined: PushSummary & { sentByChannel: Partial<Record<PushChannel, number>> } = { ...emptySummary(), sentByChannel: {} };
     const errors: unknown[] = [];
     // Accounts first: a parcel link's alerts come on top of its owner's notifications. The iPhone's
@@ -1831,6 +1851,7 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
         native ? new DeliveryLiveActivityNotificationService(client, native) : null,
         web || native || fcm ? new ParcelLinkAlertService(web, native, fcm) : null,
         fcm,
+        new WorkerLease(client, 'push_dispatch'),
       ),
     };
   }

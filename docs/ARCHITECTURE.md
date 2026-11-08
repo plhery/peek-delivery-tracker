@@ -96,6 +96,7 @@ Key server modules:
   provider's row, its rows are read once to find them (`src/server/providerCopies.ts`). None of
   these moves a Live Activity either. A scheduled run sends a
   parcel's notifications right after its check, without waiting for the parcels after it.
+  One server dispatches at a time, under a lease ([DEPLOYMENT.md](DEPLOYMENT.md)).
   A check that stores news first merges the parcel with another leg of its shipment in
   the same account ([ROUTING.md](ROUTING.md)), so the merged parcel announces a scan once.
 - `email/` tells an account by email that a parcel was delivered or is ready for pickup,

@@ -34,7 +34,8 @@ export const CARRIER_CAPABILITIES = {
       "Die Post",
       "La Poste Suisse",
       "La Posta Svizzera",
-      "Swiss Post Ltd"
+      "Swiss Post Ltd",
+      "Die Schweizerische Post"
     ],
     "countries": [
       "CH",
@@ -994,7 +995,10 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.fedex.com/en-ch/tracking.html",
-    "helpUrl": "https://www.fedex.com/customer-support/en-ch"
+    "helpUrl": "https://www.fedex.com/customer-support/en-ch",
+    "aliases": [
+      "FedEx SmartPost"
+    ]
   },
   "gls-ch": {
     "displayName": "GLS Switzerland",
@@ -1373,7 +1377,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "aliases": [
-      "Colissimo"
+      "Colissimo",
+      "Coliposte"
     ],
     "countries": [
       "FR"
@@ -3301,7 +3306,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingUrlTemplate": "https://tools.usps.com/tracking/{trackingNumber}",
     "aliases": [
-      "United States Postal Service"
+      "United States Postal Service",
+      "U.S. Postal Service"
     ],
     "countries": [
       "US"
@@ -3441,7 +3447,10 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CA"
     ],
-    "trackingSearchUrl": "https://www.canpar.com/en/tracking/track.htm"
+    "trackingSearchUrl": "https://www.canpar.com/en/tracking/track.htm",
+    "aliases": [
+      "Canpar Express"
+    ]
   },
   "ontrac": {
     "displayName": "OnTrac",
@@ -3715,7 +3724,10 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "US"
     ],
-    "trackingSearchUrl": "https://www.speedeedelivery.com/track/"
+    "trackingSearchUrl": "https://www.speedeedelivery.com/track/",
+    "aliases": [
+      "Spee-Dee Delivery Service"
+    ]
   },
   "gofo": {
     "displayName": "GOFO Express",
@@ -13215,7 +13227,8 @@ export const CARRIER_CAPABILITIES = {
       "Pilot - A Maersk Company",
       "Maersk Ground Freight",
       "Pilot Delivers",
-      "Pilot Freight Services (Maersk)"
+      "Pilot Freight Services (Maersk)",
+      "Manna Freight Systems"
     ],
     "countries": [
       "US"
@@ -32412,7 +32425,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Maersk Logistics And Services USA Inc",
       "Maersk Parcel",
-      "B2C Europe"
+      "B2C Europe",
+      "InterPost"
     ],
     "countries": [
       "US"
@@ -44449,7 +44463,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Ryder Last Mile",
     "aliases": [
       "Ryder",
-      "Ryder System, Inc."
+      "Ryder System, Inc.",
+      "MXD Group"
     ],
     "countries": [
       "US"
@@ -50506,6 +50521,310 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://ace2.trumpcardinc.com/searchairbill"
+  },
+  "blitznow": {
+    "displayName": "Blitz",
+    "aliases": [
+      "GrowSimplee",
+      "BigShort Tails Private Limited"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#231f20",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.blitznow.in/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.blitznow.in"
+        ],
+        "path": "^/track/([A-Za-z0-9-]+)/?$"
+      },
+      {
+        "domains": [
+          "track.blitznow.in"
+        ],
+        "path": "^/((?=[A-Za-z]*\\d)[A-Za-z0-9]{6,40})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.blitznow.in/"
+  },
+  "borzo": {
+    "displayName": "Borzo",
+    "aliases": [
+      "WeFast",
+      "WEFAST India Pvt Ltd"
+    ],
+    "countries": [
+      "IN",
+      "ID"
+    ],
+    "color": "#0048ff",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://borzodelivery.com/in/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "borzodelivery.com",
+          "www.borzodelivery.com"
+        ],
+        "path": "^/(?:in|id)/track/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://borzodelivery.com/in/track"
+  },
+  "fillo": {
+    "displayName": "Fillo",
+    "aliases": [
+      "Fillo Kargo",
+      "Fillo Lojistik",
+      "Fillo Lojistik A.Ş.",
+      "Fillo Logistics"
+    ],
+    "countries": [
+      "TR"
+    ],
+    "color": "#5d2784",
+    "selectable": true,
+    "timezone": "Europe/Istanbul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://takip.fillo.com.tr/"
+  },
+  "hlog-transportes": {
+    "displayName": "HLOG",
+    "aliases": [
+      "HLOG Transportes e Logística",
+      "HLOG Transportes"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#ff8000",
+    "selectable": true,
+    "timezone": "America/Bahia",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^HL\\d{10}BR$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://hlogtransportes.com.br/buscar"
+  },
+  "international-bridge": {
+    "displayName": "International Bridge",
+    "aliases": [
+      "International Bridge, Inc.",
+      "ParcelPool"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#002e5d",
+    "selectable": true,
+    "timezone": "America/Denver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.myib.com/?trackingnumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.myib.com"
+        ],
+        "pathPattern": "^/$",
+        "params": [
+          "trackingnumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.myib.com/"
+  },
+  "kunzendorf": {
+    "displayName": "Kunzendorf Spedition",
+    "aliases": [
+      "Kunzendorf",
+      "Kunzendorf Spedition GmbH",
+      "Die fixen Kunzendorfer"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#f36a10",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.diefixenkunzendorfer.de/tracking"
+  },
+  "mzz-briefdienst": {
+    "displayName": "MZZ-Briefdienst",
+    "aliases": [
+      "MZZ Briefdienst",
+      "MZZ Briefdienst GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#003562",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.sent24.de/index.php/tracking/search"
+  },
+  "post-modern": {
+    "displayName": "PostModern",
+    "aliases": [
+      "MEDIA Logistik GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#ec254a",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.post-modern.de/tracking/"
+  },
+  "qwqer": {
+    "displayName": "QWQER",
+    "aliases": [
+      "QWQER EU SIA"
+    ],
+    "countries": [
+      "LV",
+      "LT",
+      "PL"
+    ],
+    "color": "#261865",
+    "selectable": true,
+    "timezone": "Europe/Riga",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://qwqer.eu/lv/en/sutijumu-izsekosana"
+  },
+  "shopini-world": {
+    "displayName": "ShopiniWorld",
+    "aliases": [
+      "Shopini World",
+      "Shopini Logistics",
+      "Shopini Logistics INC.",
+      "Shopini Logistics LLC"
+    ],
+    "countries": [
+      "AE"
+    ],
+    "color": "#00eb8c",
+    "selectable": true,
+    "timezone": "Asia/Dubai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.shopiniworld.com/track-shipments"
+  },
+  "wpx": {
+    "displayName": "WPX Delivery Solutions",
+    "aliases": [
+      "WPX"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#1b1b69",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://01000.cxtsoftware.net/rapidship/#/track-order;trackingId={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "01000.cxtsoftware.net"
+        ],
+        "pathPattern": "^/rapidship/?$",
+        "fragment": "^/track-order;(?:[^;]*;)*trackingId=([^;/?&]+)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://01000.cxtsoftware.net/rapidship/#/track-order"
+  },
+  "zippee": {
+    "displayName": "Zippee",
+    "aliases": [
+      "ZFW Hospitality Private Limited"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#9f3da8",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.zippee.delivery/track-order?awb={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.zippee.delivery",
+          "zippee.delivery"
+        ],
+        "pathPattern": "^/track-order/?$",
+        "params": [
+          "awb"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.zippee.delivery/track-order"
   }
 } as const;
 
@@ -51958,7 +52277,19 @@ export const CARRIER_IDS = [
   "meitetsu-unyu",
   "runforint",
   "the-delivery-group",
-  "trumpcard"
+  "trumpcard",
+  "blitznow",
+  "borzo",
+  "fillo",
+  "hlog-transportes",
+  "international-bridge",
+  "kunzendorf",
+  "mzz-briefdienst",
+  "post-modern",
+  "qwqer",
+  "shopini-world",
+  "wpx",
+  "zippee"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

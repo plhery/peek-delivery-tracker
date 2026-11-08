@@ -487,7 +487,9 @@ stored-scan replay, is kept in `private.hand_stage_changes` with the name a scri
 `set local peek.hand_fix = '<name>'`; and whether the parcel's own carrier answered the check that stepped back after a
 universal provider answered the one before it, as the carrier may read the provider's scans in an earlier stage),
 expected days dropped in the window from parcels still on their way (by the day the dropping check's
-`previous_expected_delivery` held: passed, still ahead on every clock, or passed on some clocks only),
+`previous_expected_delivery` held, on the parcel's clock as the server reads it, the offset its newest scan states or
+else the zone its answer declares: passed or still ahead; without either, passed or ahead on every clock, or passed on
+some clocks only),
 parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), a universal provider's delivered rows stored in the window that a
 wording rule read, on parcels not delivered (a misread keeps no wording, so the replay cannot re-read it: the row is removed by hand once

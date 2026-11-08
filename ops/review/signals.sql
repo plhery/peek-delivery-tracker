@@ -167,16 +167,29 @@ order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'
-\echo '   held or waiting to be collected, or its carrier changes. By the day the check that dropped it found: passed'
-\echo '   on every clock, early (still ahead on every clock: the ones to read), edge (passed on some clocks only), and'
-\echo '   unknown (none recorded, as before checks kept it); latest lists the early ones first'
+\echo '   held or waiting to be collected, or its carrier changes. By the day the check that dropped it found, read on'
+\echo '   the parcel''s clock as the server reads it (the offset its newest scan states, else the zone its answer'
+\echo '   declares): passed, or early (still ahead: the ones to read). Without either, the server reads the carrier''s'
+\echo '   catalog zone, which the database lacks: passed or early on every clock, or edge (passed on some clocks only).'
+\echo '   unknown: no day recorded, as before checks kept it; latest lists the early ones first'
 with dropped as (
   select p.id, p.carrier, p.current_stage, p.expected_delivery_changed_at,
          case when a.previous_expected_delivery ~ '^\d{4}-\d{2}-\d{2}' then left(a.previous_expected_delivery, 10) end as day,
-         -- The drop's date on the clocks furthest behind and ahead of UTC.
+         -- The drop's date on the parcel's clock, as trackingSync.ts's carrierClock reads it: the offset of the newest
+         -- scan when it states one ("Z" and "-00:00" do not), else the zone the answer declares.
+         to_char(case
+           when c.stated is not null then p.expected_delivery_changed_at at time zone c.stated::interval
+           when z.name is not null then p.expected_delivery_changed_at at time zone z.name
+         end, 'YYYY-MM-DD') as local,
+         -- Else its date on the clocks furthest behind and ahead of UTC.
          to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT+12', 'YYYY-MM-DD') as west,
          to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT-14', 'YYYY-MM-DD') as east
   from public.packages as p
+  cross join lateral (
+    select regexp_replace(substring(p.carrier_data->>'last_update' from 'T[0-9:.]+((?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2}))$'),
+      '^([+-]\d{2}):?(\d{2})$', '\1:\2') as stated
+  ) as c
+  left join pg_timezone_names as z on z.name = p.carrier_data->>'timezone'
   -- The check that dropped it: the parcel's last one begun by then.
   left join lateral (
     select a.previous_expected_delivery from public.tracking_sync_attempts as a
@@ -187,10 +200,10 @@ with dropped as (
     and p.current_stage in ('pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery')
 )
 select carrier, current_stage as stage, 'delivery-tracker' as lane, count(*) as parcels,
-       count(*) filter (where day < west) as passed, count(*) filter (where day >= east) as early,
-       count(*) filter (where day >= west and day < east) as edge, count(*) filter (where day is null) as unknown,
+       count(*) filter (where day < coalesce(local, west)) as passed, count(*) filter (where day >= coalesce(local, east)) as early,
+       count(*) filter (where local is null and day >= west and day < east) as edge, count(*) filter (where day is null) as unknown,
        array_to_string((array_agg(left(id::text, 8)
-         order by day >= east desc nulls last, expected_delivery_changed_at desc))[1:5], ' ') as latest
+         order by day >= coalesce(local, east) desc nulls last, expected_delivery_changed_at desc))[1:5], ' ') as latest
 from dropped
 group by 1, 2
 order by early desc, parcels desc, carrier, stage;

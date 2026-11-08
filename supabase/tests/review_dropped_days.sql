@@ -19,10 +19,21 @@ values
    '2026-01-01T06:00:00Z', '{"last_update": "2025-12-31T17:00:00Z", "timezone": "Europe/Paris"}'),
   -- No clock of its own: passed on some clocks only.
   ('19000000-0000-0000-0000-000000000104', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0104', 'la-poste', 'in_transit',
-   '2026-01-01T06:00:00Z', '{}');
+   '2026-01-01T06:00:00Z', '{}'),
+  -- Still ahead on Los Angeles's clock, but the check stored a failed attempt: held.
+  ('19000000-0000-0000-0000-000000000105', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0105', 'la-poste', 'in_transit',
+   '2026-01-01T06:00:00Z', '{"timezone": "America/Los_Angeles"}');
 
 insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_expected_delivery)
 select id, 'scheduled', 'la-poste', expected_delivery_changed_at - interval '1 minute', '2025-12-31'
 from public.packages where user_id = '19000000-0000-0000-0000-000000000001';
+
+-- The failed attempt the last parcel's dropping check stored, and an older one stored before that check.
+insert into public.tracking_events (package_id, provider_event_id, stage, description, occurred_at, created_at)
+values
+  ('19000000-0000-0000-0000-000000000105', 'la-poste:missed', 'failed_attempt', 'Synthetic missed delivery',
+   '2025-12-31T20:00:00Z', '2026-01-01T05:59:30Z'),
+  ('19000000-0000-0000-0000-000000000102', 'la-poste:earlier-miss', 'failed_attempt', 'Synthetic missed delivery',
+   '2025-12-30T20:00:00Z', '2025-12-30T21:00:00Z');
 
 commit;

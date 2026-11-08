@@ -361,14 +361,15 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
 psql "$database_url" -X -v hours=24 -f "$repo_root/ops/review/signals.sql" > /dev/null
 psql "$database_url" -X -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" > /dev/null
 
-# It reads a dropped expected day on the parcel's own clock: passed, early, edge, unknown.
+# It reads a dropped expected day on the parcel's own clock (passed, early, edge, unknown), unless the check that
+# dropped it stored a failed attempt or hold (held).
 psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_dropped_days.sql"
 dropped=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \
   | awk '/^== Expected days dropped/ { section = 1; next } /^== / { section = 0 } section && /^la-poste\|in_transit\|/' \
-  | cut -d '|' -f 4-8)
+  | cut -d '|' -f 4-9)
 psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000001'"
-if [[ "$dropped" != "4|2|1|1|0" ]]; then
-  echo "dropped expected days read on the wrong clock: parcels|passed|early|edge|unknown = '$dropped'" >&2
+if [[ "$dropped" != "5|2|1|1|0|1" ]]; then
+  echo "dropped expected days read on the wrong clock: parcels|passed|early|edge|unknown|held = '$dropped'" >&2
   exit 1
 fi
 

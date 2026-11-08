@@ -489,7 +489,8 @@ universal provider answered the one before it, as the carrier may read the provi
 expected days dropped in the window from parcels still on their way (by the day the dropping check's
 `previous_expected_delivery` held, on the parcel's clock as the server reads it, the offset its newest scan states or
 else the zone its answer declares: passed or still ahead; without either, passed or ahead on every clock, or passed on
-some clocks only),
+some clocks only; held when the dropping check stored a new failed-attempt or exception scan, which drops the day
+whenever it falls),
 parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), a universal provider's delivered rows stored in the window that a
 wording rule read, on parcels not delivered (a misread keeps no wording, so the replay cannot re-read it: the row is removed by hand once

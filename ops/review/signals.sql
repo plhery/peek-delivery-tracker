@@ -171,6 +171,7 @@ order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 \echo '   the parcel''s clock as the server reads it (the offset its newest scan states, else the zone its answer'
 \echo '   declares): passed, or early (still ahead: the ones to read). Without either, the server reads the carrier''s'
 \echo '   catalog zone, which the database lacks: passed or early on every clock, or edge (passed on some clocks only).'
+\echo '   held: the dropping check stored a new failed-attempt or exception scan, which drops the day whenever it falls.'
 \echo '   unknown: no day recorded, as before checks kept it; latest lists the early ones first'
 with dropped as (
   select p.id, p.carrier, p.current_stage, p.expected_delivery_changed_at,
@@ -183,7 +184,13 @@ with dropped as (
          end, 'YYYY-MM-DD') as local,
          -- Else its date on the clocks furthest behind and ahead of UTC.
          to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT+12', 'YYYY-MM-DD') as west,
-         to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT-14', 'YYYY-MM-DD') as east
+         to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT-14', 'YYYY-MM-DD') as east,
+         -- A failed attempt or hold the dropping check stored drops the day, as trackingSync.ts does.
+         exists (
+           select from public.tracking_events as e
+           where e.package_id = p.id and e.stage in ('failed_attempt', 'exception')
+             and e.created_at >= a.started_at and e.created_at <= p.expected_delivery_changed_at
+         ) as held
   from public.packages as p
   cross join lateral (
     select regexp_replace(substring(p.carrier_data->>'last_update' from 'T[0-9:.]+((?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2}))$'),
@@ -192,7 +199,7 @@ with dropped as (
   left join pg_timezone_names as z on z.name = p.carrier_data->>'timezone'
   -- The check that dropped it: the parcel's last one begun by then.
   left join lateral (
-    select a.previous_expected_delivery from public.tracking_sync_attempts as a
+    select a.started_at, a.previous_expected_delivery from public.tracking_sync_attempts as a
     where a.package_id = p.id and a.started_at <= p.expected_delivery_changed_at
     order by a.started_at desc limit 1
   ) as a on true
@@ -200,10 +207,12 @@ with dropped as (
     and p.current_stage in ('pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery')
 )
 select carrier, current_stage as stage, 'delivery-tracker' as lane, count(*) as parcels,
-       count(*) filter (where day < coalesce(local, west)) as passed, count(*) filter (where day >= coalesce(local, east)) as early,
-       count(*) filter (where local is null and day >= west and day < east) as edge, count(*) filter (where day is null) as unknown,
+       count(*) filter (where not held and day < coalesce(local, west)) as passed,
+       count(*) filter (where not held and day >= coalesce(local, east)) as early,
+       count(*) filter (where not held and local is null and day >= west and day < east) as edge,
+       count(*) filter (where not held and day is null) as unknown, count(*) filter (where held) as held,
        array_to_string((array_agg(left(id::text, 8)
-         order by day >= coalesce(local, east) desc nulls last, expected_delivery_changed_at desc))[1:5], ' ') as latest
+         order by not held and day >= coalesce(local, east) desc nulls last, expected_delivery_changed_at desc))[1:5], ' ') as latest
 from dropped
 group by 1, 2
 order by early desc, parcels desc, carrier, stage;

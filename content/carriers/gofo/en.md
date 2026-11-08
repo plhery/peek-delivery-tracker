@@ -18,7 +18,7 @@ GOFO's US numbers come in three shapes. The ones Peek links to GOFO, with invent
 | `GF1234567890123` | GF followed by 13 digits: an older series GOFO still tracks |
 | `CR123456789012` | CR followed by 12 digits: another older series |
 
-Some parcels carry both a GFUS waybill number and a CR tracking number, and either one finds the same parcel. On DHgate parcels that GOFO delivers for [DHLink](carrier:dhlink), the tracking number is DHLink's own, `FC` and 13 digits, and GOFO's tracker finds the parcel by it too.
+Some parcels carry both a GFUS waybill number and a CR tracking number, or an MGP tracking number (MGP and 13 digits), and either one finds the same parcel. On DHgate parcels that GOFO delivers for [DHLink](carrier:dhlink), the tracking number is DHLink's own, `FC` and 13 digits, and GOFO's tracker finds the parcel by it too.
 
 **Numbers that look alike.** GOFO runs networks in other countries, each with its own numbers: a `GFCA` number with 14 digits belongs to [GOFO Canada](carrier:gofo-ca), `GFFR` and `CIFR` numbers to [GOFO France](carrier:gofo-fr), `GFIT` and `CIIT` numbers to [GOFO Italy](carrier:gofo-it), `GFES` and `CIES` numbers to GOFO Spain, `GFNL` and `CINL` numbers to GOFO Netherlands. Peek recognises them at once and tracks them with that country's network. A `YT` number is [YunExpress](carrier:yunexpress)'s, even when GOFO does the final delivery: GOFO's US tracker takes the same number, and YunExpress's tracking shows GOFO's scans too.
 
@@ -94,7 +94,7 @@ The sender has made the shipping label, and GOFO doesn't have the parcel yet. Th
 
 ### Why is my GOFO tracking number not working?
 
-Check that it's a US GOFO number: GFUS, GF or CR. `GFCA`, `GFFR`, `GFIT`, `GFES` and `GFNL` numbers belong to GOFO's networks in other countries, and `YT` numbers to YunExpress. A DHgate parcel that GOFO delivers can also be looked up on GOFO's tracker by DHLink's `FC` number. If the shop has only just given you the number, GOFO may not know it yet: Peek keeps checking. If it shows `Label Cancelled`, nothing is coming under that number, so ask the shop for the right one.
+Check that it's a US GOFO number: GFUS, GF, CR or MGP. `GFCA`, `GFFR`, `GFIT`, `GFES` and `GFNL` numbers belong to GOFO's networks in other countries, and `YT` numbers to YunExpress. A DHgate parcel that GOFO delivers can also be looked up on GOFO's tracker by DHLink's `FC` number. If the shop has only just given you the number, GOFO may not know it yet: Peek keeps checking. If it shows `Label Cancelled`, nothing is coming under that number, so ask the shop for the right one.
 
 ### Why does my AliExpress order have a GOFO number?
 
@@ -104,5 +104,5 @@ Cainiao, which tracks AliExpress orders, follows some of them under GOFO's GFUS 
 - [GOFO: Customer Service](https://www.gofo.com/us/customer-service) – phone, WhatsApp, email and hours, form and chat, no self-pickup; FAQ: proof of delivery, redelivery, address problems, 1–2 days from the station, the sender's inquiry, returns
 - [GOFO: Home](https://www.gofo.com/us/) – more than 12,000 ZIP codes, 75% of the population
 - [FTC: What To Do if You're Billed for Things You Never Got, or You Get Unordered Products](https://consumer.ftc.gov/articles/what-do-if-youre-billed-things-you-never-got-or-you-get-unordered-products) – shipping deadlines, delays and refunds, card disputes, unordered merchandise
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GOFO's number shapes and its networks in other countries, GFUS and CR numbers, DHLink's FC numbers, YunExpress numbers, GOFO's tracker and help page, scan wordings, their meanings and what Peek shows for each, what GOFO's page shows and what Peek reads, Cainiao
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GOFO's number shapes and its networks in other countries, GFUS, CR and MGP numbers, DHLink's FC numbers, YunExpress numbers, GOFO's tracker and help page, scan wordings, their meanings and what Peek shows for each, what GOFO's page shows and what Peek reads, Cainiao
 :::

@@ -3,7 +3,7 @@ title: UPS tracking: numero, stati del pacco e consegna
 description: Tracking UPS: com'è fatto il numero 1Z, cosa vogliono dire Exception e le altre scansioni, UPS Access Point, dazi e i tuoi diritti se il pacco si perde.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-08
 ---
 
 I numeri di tracking UPS (United Parcel Service) di solito iniziano con `1Z`. Per seguire il pacco incolla il numero, o un link di tracciamento UPS, nel box qui sopra; il tracking di UPS vero e proprio è su ups.com.
@@ -23,9 +23,11 @@ La pagina di tracking di UPS in inglese mostra una barra di avanzamento (`Label 
 | UPS scrive | Peek mostra | Cosa vuol dire per te |
 | --- | --- | --- |
 | `Shipper created a label, UPS has not received the package yet.` | Etichetta creata | Il mittente ha creato l'etichetta. UPS non ha ancora il pacco. |
-| `Drop-Off`, `Pickup Scan` | Preso in carico | UPS ha il pacco: il mittente l'ha lasciato in un UPS Access Point, oppure UPS è passato a ritirarlo. Conta qui anche il primo `Arrived at Facility`. |
+| `Drop-Off`, `Pickup Scan` | Preso in carico | UPS ha il pacco: il mittente l'ha lasciato in un UPS Access Point, oppure UPS è passato a ritirarlo. Conta qui anche la scansione d'origine di UPS, che riporta anch'essa `Arrived at Facility`. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | In transito | Viaggia nella rete di UPS. `Export Scan` e `Import Scan` segnano il passaggio di una frontiera. |
 | `Your package is prepared for clearance.` | In dogana | È in sdoganamento. |
+| `Your package is pending release from a Government Agency. We'll notify the receiver or sender if information is needed.` | In dogana | Un ente pubblico lo trattiene, tra la scansione di esportazione e quella di importazione. Se servono informazioni, UPS avvisa te o il mittente. |
+| `Your package has been released by a government agency.` | In transito | L'ente lo ha sbloccato. |
 | `Duties or taxes are due on this package.` | In dogana | Devi pagare dazi o tasse prima che UPS consegni (vedi sotto). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | In consegna | Ce l'ha un autista. |
 | `The receiver was not available at the time of the final delivery attempt.` | Tentativo di consegna | Anche l'ultimo tentativo è andato a vuoto. |
@@ -92,5 +94,5 @@ Può esserlo. La Polizia Postale ha segnalato una campagna di smishing contro ch
 - [AGCOM: Delibera n. 572/18/CONS](https://www.agcom.it/sites/default/files/migration/delibera/Delibera%20572-18-CONS.pdf) – il corriere espresso è un servizio postale, UPS citato tra gli operatori postali
 - [UDSC: Spese di imposizione e tracciabilità dei colli](https://www.bazg.admin.ch/it/costi-imposizione-e-tracciamento-pacchi) – imposizione fatta dal trasportatore (DHL, UPS, La Posta), ricerca dell'invio, spese di imposizione (Svizzera)
 - [Polizia Postale: Nuova campagna di smishing «Il tuo pacco è stato consegnato al centro di spedizione»](https://www.commissariatodips.it/notizie/articolo/nuova-campagna-di-smishing-il-tuo-pacco-e-stato-consegnato-al-centro-di-spedizione/index.html) – SMS falso nella stessa chat del corriere, telefonata con spoofing, verificare con la società di spedizione
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – forme del numero, cifra di controllo, scansioni di UPS, cosa legge Peek da UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – forme del numero, cifra di controllo, scansioni di UPS (fermo e sblocco da parte di un ente pubblico), cosa legge Peek da UPS
 :::

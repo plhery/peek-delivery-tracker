@@ -3,10 +3,10 @@ title: Speedaf Express tracking: numbers, statuses and contacts
 description: Track a Speedaf Express parcel from China to Nigeria, Kenya, Ghana, Pakistan or the UAE: number shapes, what each status means, delivery attempts and contacts.
 slug: speedaf-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-08
 ---
 
-Speedaf Express (速达非) is a courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel) or in the box above. The number is in the shop's shipping details.
+Speedaf Express (速达非) is a courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in Speedaf's customer app or in the box above. The number is in the shop's shipping details.
 
 ## Speedaf tracking number: what it looks like
 
@@ -83,7 +83,7 @@ Speedaf's tracking page names who signed for the parcel: check it first. More in
 
 ## Speedaf contact number and customer service
 
-As read on 28 October 2026, each Speedaf country site lists its own contacts at the foot of the page (Ireland's and Zambia's open from the country chooser: pick the country, then English):
+As read on 28 October 2026 (Egypt, Morocco and China on 8 November 2026), each Speedaf country site lists its own contacts at the foot of the page (Ireland's and Zambia's open from the country chooser: pick the country, then English):
 
 | Country | Phone | Email | Hours |
 | --- | --- | --- | --- |
@@ -97,12 +97,15 @@ As read on 28 October 2026, each Speedaf country site lists its own contacts at 
 | UAE | +971 800 178 | ae.info@speedaf.com | Mon-Sat 9:00am-6:00pm |
 | Saudi Arabia | none listed | sa.info@speedaf.com | not given |
 | Ireland | +35312633068; WhatsApp +353 834281088 | info_customerserviceie@speedaf.com | Mon-Fri 8:30am-5:30pm |
+| Egypt | +20 15818, +20 1050383370 | eg.info@speedaf.com | Sat-Thu 9:00am-6:00pm |
+| Morocco | +212 522 100 888 | ma.info@speedaf.com | Mon-Fri 9:00am-6:00pm |
+| China | +86 400 888 0975 | info@speedaf.com | Mon-Fri 9:30am-6:30pm |
 
-Each site also has a "Customer Support" form.
+Speedaf's Help Center adds a hotline for the other countries on its list: Kazakhstan +7 778 371 9358, Mauritius 4687316, the Maldives +960 7678788, Switzerland and Serbia +41 798559737, Montenegro +382 60021040, Albania +355 45620111. Each site also has a "Customer Support" form.
 
 ## Track a Speedaf parcel with Peek
 
-[Peek](/) recognises a Speedaf number by its shape when it starts with NG, GH, KE, UG, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU or MV, then 9 digits and R or E. With 12 digits instead, after one of those codes or IE, the shape isn't enough on its own: Peek asks Speedaf, and you'll see "Checking tracking services…", then "Speedaf has this parcel." if Speedaf knows the number. Peek knows no number shape for Switzerland, Albania, Montenegro or Serbia: for those, and any number that fits neither shape, pick "Speedaf" with "Change". A speedaf.com tracking link with `tradeNo=` is read as Speedaf whatever number it holds. Peek sends the number in capitals, so lower case is fine.
+[Peek](/) recognises a Speedaf number by its shape when it starts with NG, GH, KE, UG, RW, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU, RE, MV or TR, then 9 digits and R or E. With 12 digits instead, after one of those codes or IE, the shape isn't enough on its own: Peek asks Speedaf, and you'll see "Checking tracking services…", then "Speedaf has this parcel." if Speedaf knows the number. Peek knows no number shape for Switzerland, Albania, Montenegro or Serbia: for those, and any number that fits neither shape, pick "Speedaf" with "Change". A speedaf.com tracking link with `tradeNo=` is read as Speedaf whatever number it holds. Peek sends the number in capitals, so lower case is fine.
 
 Peek reads Speedaf's own tracking: the status, the history, the destination country and the delivery time. Each scan carries its site's clock, China's in the warehouses, then your country's, and Peek shows it in your device's time zone. Speedaf names its sites only inside the lines, so there's no map, and it gives no expected delivery date. If Speedaf knows the number but shows no scans, as with some older parcels, Peek shows "Waiting for the carrier", or "Waiting for Speedaf’s first scan" for a 12-digit number that isn't filed under Speedaf, and keeps checking.
 
@@ -118,7 +121,7 @@ Yes. Speedaf is a logistics company founded in 2019, with ZTO among its original
 
 ### Which countries does Speedaf deliver to?
 
-Speedaf's country list names Egypt, South Africa, Morocco, the UAE, Ghana, Nigeria, Kenya, Uganda, Saudi Arabia, Pakistan, Kazakhstan, Mauritius, the Maldives, Switzerland, Montenegro, Albania, Ireland, Serbia and Zambia, besides China.
+Speedaf's country list names Egypt, South Africa, Morocco, the UAE, Ghana, Nigeria, Kenya, Uganda, Saudi Arabia, Pakistan, Kazakhstan, Mauritius, the Maldives, Switzerland, Montenegro, Albania, Ireland, Serbia and Zambia, besides China. Peek also recognises numbers starting RE (Réunion), RW (Rwanda) and TR (Turkey), countries the list doesn't name.
 
 ### How long does Speedaf take to deliver?
 
@@ -130,11 +133,11 @@ Duty or tax is due before customs in your country releases the parcel. Once it's
 
 :::sources
 - [Speedaf: Enterprise Introduction](https://www.speedaf.com/ng-en/business/about-us) – founded 2019, ZTO
-- [Speedaf: Select your location and language](https://www.speedaf.com/cn-en/user-opt/locale-select) – countries; Ireland's and Zambia's contacts (pick the country, then English)
+- [Speedaf: Select your location and language](https://www.speedaf.com/cn-en/user-opt/locale-select) – countries; Ireland's and Zambia's contacts (pick the country, then English); China's contacts (read 8 November 2026)
 - [Speedaf: Speedaf eParcel](https://www.speedaf.com/ke-en/product/intl-straight-small) – parcels from China for online sellers, 5-10 working days
 - [Speedaf: Warehouse & Fulfillment](https://www.speedaf.com/ke-en/product/warehouse-promise) – own last-mile couriers, COD
 - [Speedaf: Last-mile delivery](https://www.speedaf.com/ke-en/product/warehouse-delivery) – COD, door-to-door
-- [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – transit time
+- [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – transit time; tracking on the website or the customer app, hotlines by country (read 8 November 2026)
 - [Speedaf: Track](https://www.speedaf.com/ng-en/send-parcel) – up to 20 numbers; duty link for South Africa
 - [Speedaf: Look for Service Site](https://www.speedaf.com/ke-en/location-map) – map of sites
 - [Speedaf: Customer Support](https://www.speedaf.com/ng-en/service/support) – contact form
@@ -146,11 +149,13 @@ Duty or tax is due before customs in your country releases the parcel. Once it's
 - [Speedaf Pakistan: Home](https://www.speedaf.com/pk-en) – phone, email, hours, WhatsApp
 - [Speedaf UAE: Home](https://www.speedaf.com/ae-en) – phone, email, hours
 - [Speedaf Saudi Arabia: Home](https://www.speedaf.com/sa-en) – email
+- [Speedaf Egypt: Home](https://www.speedaf.com/eg-en) – phones, email, hours (read 8 November 2026)
+- [Speedaf Morocco: Home](https://www.speedaf.com/ma-en) – phone, email, hours (read 8 November 2026)
 - [Speedaf Kenya: Terms and Conditions](https://www.speedaf.com/ke-en/service-rule) – attempts, refusal, receiver, claims, delivery times
 - [Speedaf Uganda: Terms and Conditions](https://www.speedaf.com/ug-en/service-rule) – the same for Uganda
 - [Speedaf Pakistan: Terms and Conditions](https://www.speedaf.com/pk-en/service-rule) – attempts, receiver, claims, disputed delivery
 - [Speedaf UAE: Terms & Conditions](https://www.speedaf.com/ae-en/service-rule) – domestic delivery: attempts, undeliverable parcels, claim windows, claims with the shipper
 - [Speedaf Nigeria: Service Agreement](https://www.speedaf.com/ng-en/service-rule) – domestic delivery: undeliverable parcels, claim windows, claims with the shipper
 - [Speedaf Saudi Arabia: Express Shipping Terms](https://www.speedaf.com/sa-en/service-rule) – damage within 48 hours
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – network, number shapes, scan wordings and meanings, what Speedaf's page and Peek show
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – network, number shapes (RE, RW and TR checked 8 November 2026), scan wordings and meanings, what Speedaf's page and Peek show
 :::

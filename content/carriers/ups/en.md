@@ -3,7 +3,7 @@ title: UPS tracking: numbers, statuses and missed deliveries
 description: Track a UPS parcel: what the 1Z tracking number looks like, what Exception and other UPS scans mean, Access Points, customs charges and your rights if it's lost.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-08
 ---
 
 UPS (United Parcel Service) tracking numbers usually start with `1Z`. Paste the number, or a UPS tracking link, in the box above to follow the parcel; UPS's own tracking page is on ups.com.
@@ -23,9 +23,11 @@ UPS's tracking page has a progress bar (`Label Created`, `We Have Your Package`,
 | UPS's scan | Peek shows | What it means |
 | --- | --- | --- |
 | `Shipper created a label, UPS has not received the package yet.` | Label created | The sender has made a label. UPS doesn't have the parcel yet. |
-| `Drop-Off`, `Pickup Scan` | Received by carrier | UPS has it: the sender handed it in at an access point, or UPS collected it. The first `Arrived at Facility` counts here too. |
+| `Drop-Off`, `Pickup Scan` | Received by carrier | UPS has it: the sender handed it in at an access point, or UPS collected it. UPS's origin scan, also worded `Arrived at Facility`, counts here too. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | In transit | It's moving through UPS's network. `Export Scan` and `Import Scan` mark a border. |
 | `Your package is prepared for clearance.` | At customs | It's going through customs. |
+| `Your package is pending release from a Government Agency. We'll notify the receiver or sender if information is needed.` | At customs | A government agency is holding it, between the export and import scans. UPS contacts you or the sender if information is needed. |
+| `Your package has been released by a government agency.` | In transit | The agency has let it go. |
 | `Duties or taxes are due on this package.` | At customs | You have to pay import charges before UPS delivers it (see below). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Out for delivery | A driver has it. |
 | `The receiver was not available at the time of the final delivery attempt.` | Delivery attempted | The last try failed. |
@@ -95,5 +97,5 @@ It can be. Citizens Advice says a message asking you to pay to get a parcel or t
 - [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
 - [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings, what Peek reads from UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings (a government agency's hold and release), what Peek reads from UPS
 :::

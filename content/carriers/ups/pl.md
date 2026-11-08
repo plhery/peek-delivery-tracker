@@ -3,7 +3,7 @@ title: UPS tracking: śledzenie paczki w Polsce, statusy, reklamacje
 description: Śledzenie paczki UPS: jak wygląda numer 1Z, co znaczą Exception i inne skany, punkty Access Point, cło od paczek spoza UE i reklamacja w UPS Polska.
 slug: ups-tracking-sledzenie-paczki
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-08
 ---
 
 Numery przesyłek UPS (United Parcel Service) zwykle zaczynają się od `1Z`. Wklej numer albo link do śledzenia UPS w pole powyżej, żeby śledzić paczkę; własne śledzenie UPS znajdziesz na ups.com.
@@ -23,9 +23,11 @@ Angielska strona śledzenia UPS ma pasek postępu (`Label Created`, `We Have You
 | UPS pisze | Peek pokazuje | Co to znaczy dla Ciebie |
 | --- | --- | --- |
 | `Shipper created a label, UPS has not received the package yet.` | Zarejestrowana | Nadawca utworzył etykietę. UPS nie ma jeszcze paczki. |
-| `Drop-Off`, `Pickup Scan` | Przyjęta przez przewoźnika | UPS ma paczkę: nadawca nadał ją w punkcie Access Point albo UPS ją od niego odebrał. Pierwszy skan `Arrived at Facility` też się tu liczy. |
+| `Drop-Off`, `Pickup Scan` | Przyjęta przez przewoźnika | UPS ma paczkę: nadawca nadał ją w punkcie Access Point albo UPS ją od niego odebrał. Tu liczy się też skan początkowy UPS, który również brzmi `Arrived at Facility`. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | W transporcie | Paczka jedzie przez sieć UPS. `Export Scan` i `Import Scan` oznaczają przekroczenie granicy. |
 | `Your package is prepared for clearance.` | W urzędzie celnym | Trwa odprawa celna. |
+| `Your package is pending release from a Government Agency. We'll notify the receiver or sender if information is needed.` | W urzędzie celnym | Paczkę wstrzymał urząd państwowy, między skanem eksportowym a importowym. Jeśli potrzebne będą informacje, UPS powiadomi ciebie albo nadawcę. |
+| `Your package has been released by a government agency.` | W transporcie | Urząd zwolnił paczkę. |
 | `Duties or taxes are due on this package.` | W urzędzie celnym | Musisz zapłacić należności przywozowe, zanim UPS doręczy paczkę (więcej niżej). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | W doręczeniu | Paczkę wiezie kurier. |
 | `The receiver was not available at the time of the final delivery attempt.` | Próba doręczenia | Ostatnia próba doręczenia też się nie udała. |
@@ -92,5 +94,5 @@ Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzegał przed SMS-ami, w kt�
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy, 30 dni, odwołanie, interwencja Prezesa UKE, ADR
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje i odszkodowania](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół szkody, 7 dni na ukryte uszkodzenia
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS, co Peek odczytuje z UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS (wstrzymanie i zwolnienie przez urząd państwowy), co Peek odczytuje z UPS
 :::

@@ -19,12 +19,12 @@ La raison est en général dans le dernier scan du suivi, et elle est notée sur
 | --- | --- |
 | Adresse fausse ou incomplète | [La Poste](carrier:la-poste) : adresse incorrecte ; [bpost](carrier:bpost) : l'expéditeur s'est trompé d'adresse |
 | Nom absent de la boîte aux lettres | [La Poste suisse](carrier:swiss-post) : `Renvoi`, par exemple pour une boîte aux lettres sans nom |
-| Destinataire inconnu ou déménagé | La Poste suisse : `Destinataire introuvable à l'adresse indiquée`, `Destinataire a déménagé, délai de réexpédition expiré` |
+| Destinataire inconnu ou déménagé | La Poste suisse : `Destinataire introuvable à l’adresse indiquée`, `Destinataire a déménagé, délai de réexpédition expiré` |
 | Pas retiré à temps | La Poste : délai de retrait dépassé ; La Poste suisse : `Envoi non retiré` ; bpost : 14 jours en Point d'enlèvement, 5 en distributeur de colis |
 | Refusé à la porte | La Poste suisse : `Refusé` ; bpost : refusé à la porte, par exemple parce qu'il est abîmé ; [Mondial Relay](carrier:mondial-relay) : `Colis refusé` |
 | Douane : frais impayés, documents non conformes | La Poste : documents d'import non conformes ; La Poste suisse : envoi de l'étranger refusé faute de paiement |
-| Colis abîmé en route | La Poste suisse : `Envoi en retour en raison d'un dommage` |
-| L'expéditeur l'a demandé | La Poste suisse : `Retour direct selon instruction de l'expéditeur` |
+| Colis abîmé en route | La Poste suisse : `Envoi en retour en raison d’un dommage` |
+| L'expéditeur l'a demandé | La Poste suisse : `Retour direct selon instruction de l’expéditeur` |
 
 Entre deux pays, le motif est souvent noté en français, quelle que soit la langue du pays, comme le prévoient les règles de l'Union postale universelle : « Inconnu », « Refusé », « Non réclamé », « Déménagé ».
 
@@ -38,7 +38,7 @@ Les rares services pour arrêter ou rappeler un colis sont réservés à l'expé
 
 | Transporteur | Service | Qui peut s'en servir | Conditions |
 | --- | --- | --- | --- |
-| La Poste suisse | `Retour direct selon instruction de l'expéditeur` | L'expéditeur, à l'avance | Le colis repart dès la première tentative de livraison ratée |
+| La Poste suisse | `Retour direct selon instruction de l’expéditeur` | L'expéditeur, à l'avance | Le colis repart dès la première tentative de livraison ratée |
 | bpost | Aucun service de rappel trouvé sur ses pages d'aide | – | Contacte l'expéditeur |
 
 Tant que le colis vient encore vers toi, demande au vendeur. Pour le faire livrer ailleurs, lis [comment changer l'adresse de livraison](guide:change-delivery-address).
@@ -61,7 +61,7 @@ En général oui, une fois qu'il est rentré chez le vendeur. Les plateformes on
 
 - **Amazon** : pour un article vendu et expédié par un vendeur Marketplace, contacte d'abord le vendeur. Si tu n'arrives pas à régler le problème de livraison avec lui, la Garantie A à Z te permet de demander un remboursement à Amazon.
 - **eBay** rembourse, frais de livraison compris, un objet qui n'est pas arrivé, avec sa Garantie client eBay. Elle ne couvre pas une adresse incorrecte donnée à l'achat, une livraison refusée (sauf si le vendeur avait mal affranchi le colis), des frais d'importation impayés ou un objet pas retiré à temps au point de retrait.
-- **Vinted** annule la commande quand le colis repart et te rembourse « intégralement (c'est-à-dire le prix de l'article, les frais de port et les frais Vinted inclus) ». Si le vendeur ne l'a pas reçu ou pas signalé comme reçu dans les 14 jours ouvrés, le remboursement part tout seul ; toujours rien après 25 jours ouvrés, contacte Vinted.
+- **Vinted** annule la commande quand le colis repart et procède au « remboursement intégral (y compris le prix de l'article, les frais d'envoi et les frais Vinted) ». Si le vendeur ne l'a pas reçu ou pas signalé comme reçu dans les 14 jours ouvrés, le remboursement part tout seul ; toujours rien après 25 jours ouvrés, contacte Vinted.
 
 Dans une boutique en ligne ordinaire, c'est la loi de ton pays qui décide :
 

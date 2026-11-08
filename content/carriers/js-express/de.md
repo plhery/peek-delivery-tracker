@@ -3,10 +3,10 @@ title: JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller
 description: JS-Express-Paket (急速国际) aus China verfolgen: wie die JSE…YQ-Nummer aussieht, was die Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: js-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-08
 ---
 
-JS Express (急速国际, auch JS EXP) ist ein chinesisches Logistikunternehmen für grenzüberschreitende Onlineshops, betrieben von 急创速供应链管理（苏州）有限公司 in Suzhou. Hat ein Shop deine Bestellung mit JS Express verschickt, beginnt die Sendungsnummer mit JSE und endet auf YQ: Füg sie oben ins Feld ein. JS Express bringt das Paket aus China in dein Land, die Zustellung übernimmt dann ein Paketdienst vor Ort. In Deutschland tauchen im Verlauf von JS Express die Scans von DHL auf.
+JS Express (急速国际, auch JS EXP) ist ein chinesisches Logistikunternehmen für grenzüberschreitende Onlineshops, betrieben von 急创速供应链管理（苏州）有限公司 in Suzhou. Hat ein Shop deine Bestellung mit JS Express verschickt, beginnt die Sendungsnummer mit JSE und endet auf YQ: Füg sie oben ins Feld ein. JS Express bringt das Paket aus China in dein Land, die Zustellung übernimmt dann ein Paketdienst vor Ort. In Deutschland tauchen im Verlauf von JS Express die Scans von DHL oder iMile auf.
 
 ## JS Express Sendungsnummer: so sieht sie aus
 
@@ -60,6 +60,11 @@ Dieselbe Meldung kann auch auf Chinesisch kommen, ebenfalls mit der Telefonnumme
 | `The shipment is in transit to DHL.` | Das Paket ist auf dem Weg zu DHL. Die Zeile kommt, während JS Express es in China noch sortiert. | „Unterwegs“ |
 | `The shipment has been processed in the parcel center of origin` | Der erste Scan von DHL in Deutschland, nach der Übergabe an DHL. | „Unterwegs“ |
 | `The shipment arrived in the region of recipient and will be transported to the delivery base in the next step.` | Das Paket ist in deiner Region und kommt als Nächstes zur Zustellbasis. | „Unterwegs“ |
+| `Die Sendung wurde im Briefzentrum bearbeitet.` | Ein Briefzentrum von DHL hat ein kleines Paket bearbeitet. Diese Zeile kommt auf Deutsch. | „Unterwegs“ |
+
+Die ersten beiden Zeilen gibt es auch ohne Schlusspunkt am Ende; Peek zeigt sie genauso an.
+
+**Die Scans von iMile.** Stellt [iMile](carrier:imile) zu, kann sein Fahrer eine Tour mit `Route not completed` beenden: Das Paket wurde nicht zugestellt, Peek zeigt „Zustellversuch“.
 
 **Zeilen, die keine Scans sind.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, `Your package is being prepared by the sender and will be handed over to us soon` und, an einem Umschlagplatz in Europa, `Shipment Data Uploaded` mit `Processed` gleich danach sind Einträge eines Partners mit den Daten des Pakets, oft bevor er das Paket überhaupt hat.
 
@@ -67,7 +72,7 @@ Dieselbe Meldung kann auch auf Chinesisch kommen, ebenfalls mit der Telefonnumme
 
 ## Wer JS-Express-Pakete in Deutschland, Österreich und der Schweiz zustellt
 
-**Deutschland.** Im Verlauf von JS Express ist [DHL Paket](carrier:dhl) der Paketdienst vor Ort, mit DHLs Scans bis in deine Region (siehe oben). Dass DHL jedes JS-Express-Paket in Deutschland bringt, sagt JS Express aber nicht.
+**Deutschland.** Im Verlauf von JS Express ist [DHL Paket](carrier:dhl) der Paketdienst vor Ort, mit DHLs Scans bis in deine Region (siehe oben). Dass DHL jedes JS-Express-Paket in Deutschland bringt, sagt JS Express aber nicht: Manche Pakete stellt [iMile](carrier:imile) aus einem deutschen Zentrum zu.
 
 **Österreich und Schweiz.** Hier zeigt der Verlauf von JS Express, soweit Peek ihn kennt, keinen Zusteller. Der Datensatz von JS Express kann die Nummer des Paketdiensts vor Ort enthalten, aber nicht seinen Namen, und die Tracking-Seite von JS Express zeigt beides nicht. Peek nennt den Zusteller, wenn die Form dieser Nummer eindeutig zu einem Paketdienst in deinem Land passt. Ist es eine gültige [internationale Postnummer](guide:tracking-number-formats) (zwei Buchstaben, neun Ziffern, zwei Buchstaben), fragt Peek die Post deines Landes, also die [Österreichische Post](carrier:austrian-post) oder die [Schweizerische Post](carrier:swiss-post); mehr dazu unten. Nennt Peek keinen Zusteller, frag den Shop, wer zustellt.
 
@@ -108,7 +113,7 @@ Die Scans in China liest Peek in Pekinger Zeit, bei den anderen leitet es die Ze
 
 Passt die Form der Zustellernummer eindeutig zu einem einzigen Paketdienst, der in deinem Land arbeitet, zeigt Peek „Zustellung durch“ mit dem Namen dieses Paketdiensts und seiner Nummer und fragt auch dort nach. Solange Peek das Paket bei diesem Paketdienst nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei … angekündigt, noch nicht eingetroffen“. DHL-Nummern aus zwölf Ziffern oder aus JJD und 16 Ziffern nutzen auch andere Paketdienste: In Deutschland zählen sie nur, wenn der Verlauf von JS Express eine der Zeilen von DHL aus der Tabelle oben enthält. Eine internationale Postnummer geht an die Post deines Landes: DHL in Deutschland, die Österreichische Post in Österreich, die Schweizerische Post in der Schweiz. Sobald dieser Paketdienst einen Scan zeigt, der mindestens so neu ist wie der neueste von JS Express, verfolgt Peek das Paket dort weiter, zeigt beide Nummern und behält die Scans von JS Express im Verlauf. Bis dahin bleibt Peek bei JS Express, dessen Verlauf oft auch die Scans des Zustellers enthält.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket „In Zustellung“ ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange JS Express selbst antwortet; über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail, alle 30 Minuten bei Poste Italiane, PostNL und USPS, auch wenn das Paket in Zustellung ist. Nach zwei Tagen ohne neuen Scan (12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Als Mitteilung wählst du „Jeden Scan“, „Wichtige Schritte“ (Zoll, Probleme, Zustellversuche, „Abholbereit“, „In Zustellung“, die Zustellung und eine Rücksendung) oder „Nur die Zustellung“. JS Express oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut alle 10 Minuten nach, alle 2 Minuten (alle 5, wenn Peek die Seite von JS Express im Browser öffnen muss), sobald das Paket „In Zustellung“ ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange JS Express selbst antwortet; über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail, alle 30 Minuten bei Poste Italiane, PostNL und USPS, auch wenn das Paket in Zustellung ist. Nach zwei Tagen ohne neuen Scan (12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Als Mitteilung wählst du „Jeden Scan“, „Wichtige Schritte“ (Zoll, Probleme, Zustellversuche, „Abholbereit“, „In Zustellung“, die Zustellung und eine Rücksendung) oder „Nur die Zustellung“. JS Express oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur JS Express Sendungsverfolgung
 
@@ -126,7 +131,7 @@ Keine Daten gefunden: Die Tracking-Seite kennt die Nummer nicht, wegen eines Tip
 
 ### Wer stellt JS-Express-Pakete in Deutschland zu?
 
-Ein Paketdienst vor Ort: In Deutschland stehen im Verlauf von JS Express die Scans von DHL. Für Österreich und die Schweiz kennt Peek aus dem Verlauf keinen Zusteller, dort fragst du den Shop. Steht im Datensatz eine internationale Postnummer, fragt Peek selbst bei der Post deines Landes nach.
+Ein Paketdienst vor Ort: In Deutschland stehen im Verlauf von JS Express die Scans von DHL oder iMile. Für Österreich und die Schweiz kennt Peek aus dem Verlauf keinen Zusteller, dort fragst du den Shop. Steht im Datensatz eine internationale Postnummer, fragt Peek selbst bei der Post deines Landes nach.
 
 ### Wen frage ich, wenn mein JS-Express-Paket nicht ankommt?
 
@@ -141,5 +146,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei JS Express gebucht und 
 - [JS Express: Complaint](https://www.js-exp.com/EN/index.php?page=32) – Formular, Hotline
 - [JS Express: Contact Us](https://www.js-exp.com/EN/index.php?page=35) – ältere Nummern und Adressen
 - [JS Express: 联系我们 (Kontakt)](https://www.js-exp.com/index.php?page=35) – Hotline auch für internationale Anfragen, QQ, WeChat, Standorte
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Wortlaute und ihre Stufen, DHL-Scans in Deutschland, Uhrzeiten, Nummer des Zustellers und welche Formen Peek einem Paketdienst zuordnet, was Peek zeigt und wie es übergibt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Wortlaute und ihre Stufen, DHL- und iMile-Scans in Deutschland, Uhrzeiten, Browser-Abfrage, Nummer des Zustellers und welche Formen Peek einem Paketdienst zuordnet, was Peek zeigt und wie es übergibt
 :::

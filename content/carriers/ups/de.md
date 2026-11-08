@@ -3,7 +3,7 @@ title: UPS Sendungsverfolgung: Nummer, Status und Zustellung
 description: UPS-Paket verfolgen: wie die 1Z-Trackingnummer aussieht, was Scans wie „Exception“ bedeuten, Access Point, Zollgebühren und deine Rechte bei Verlust.
 slug: ups-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-11-04
+updated: 2026-11-08
 ---
 
 Um ein UPS-Paket zu verfolgen, füg die Sendungsnummer oder einen UPS-Tracking-Link oben ins Feld ein. Die Nummer beginnt meist mit `1Z` und hat 18 Zeichen, etwa `1Z1234567812345674`; du findest sie in der Versandbestätigung des Shops. UPS' eigene Sendungsverfolgung (UPS steht für United Parcel Service) findest du auf ups.com.
@@ -23,9 +23,11 @@ UPS' englische Tracking-Seite zeigt einen Fortschrittsbalken (`Label Created`, `
 | UPS schreibt | Peek zeigt | Was es für dich heißt |
 | --- | --- | --- |
 | `Shipper created a label, UPS has not received the package yet.` | Etikett erstellt | Der Versender hat ein Etikett erstellt. UPS hat das Paket noch nicht. |
-| `Drop-Off`, `Pickup Scan` | Beim Paketdienst eingegangen | UPS hat das Paket: Der Versender hat es in einem Access Point abgegeben, oder UPS hat es abgeholt. Das erste `Arrived at Facility` zählt auch dazu. |
+| `Drop-Off`, `Pickup Scan` | Beim Paketdienst eingegangen | UPS hat das Paket: Der Versender hat es in einem Access Point abgegeben, oder UPS hat es abgeholt. UPS' Ursprungsscan, der ebenfalls `Arrived at Facility` lautet, zählt auch dazu. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | Unterwegs | Es ist in UPS' Netz unterwegs. `Export Scan` und `Import Scan` markieren eine Grenze. |
 | `Your package is prepared for clearance.` | Beim Zoll | Es wird verzollt. |
+| `Your package is pending release from a Government Agency. We'll notify the receiver or sender if information is needed.` | Beim Zoll | Eine Behörde hält es fest, zwischen Export- und Import-Scan. Braucht sie Angaben, meldet sich UPS bei dir oder beim Versender. |
+| `Your package has been released by a government agency.` | Unterwegs | Die Behörde hat es freigegeben. |
 | `The package is at the clearing agency awaiting final release.` | Beim Zoll | Es liegt beim Zollagenten von UPS und wartet auf die Freigabe. |
 | `Duties or taxes are due on this package.` | Beim Zoll | Du musst Einfuhrabgaben zahlen, bevor UPS zustellt (siehe unten). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | In Zustellung | Ein Fahrer hat es dabei. |
@@ -90,5 +92,5 @@ Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienst
 - [Verbraucherzentrale: Paketdienst-SMS: Vorsicht, Abzocke!](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-SMS, Zollgebühren bei Zustellung, Nummer selbst eingeben
 - [Bundesnetzagentur: Schlichtungsstelle Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/start.html) – gebührenfrei, Voraussetzungen, 10 bis 2.500 €, Teilnahmepflicht
 - [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – UPS (UPS Management LLC, Neuss) als Postdienstleister eingetragen
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Nummernformen, Prüfziffer, UPS' Scans, was Peek bei UPS liest
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Nummernformen, Prüfziffer, UPS' Scans (Halt und Freigabe durch eine Behörde), was Peek bei UPS liest
 :::

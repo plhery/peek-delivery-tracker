@@ -3,7 +3,7 @@ title: FIRST LINE tracking: 1ST numbers, statuses and delivery
 description: Track a FIRST LINE (壹号专线) parcel from China: what a 1ST number looks like, what each status means, who delivers it in the US and who to ask when it stalls.
 slug: first-line-tracking
 published: 2026-10-21
-updated: 2026-11-07
+updated: 2026-11-08
 ---
 
 FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours in the tracking box on firstline56.com's home page, which opens FIRST LINE's 追踪单号 (track a number) page, or in the box above. The shop gives the number with your order's shipping details.
@@ -43,7 +43,7 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Customs broker picked it up` | The customs broker collected it after the release, to pass it on for delivery. It is no longer held at customs. |
 | `The package has been transferred to the service provider` | Handed over to the delivering company, after the broker. |
 
-In the US, the delivering company's scans follow in its own words, up to delivery: USPS's, [GOFO](carrier:gofo)'s or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. GOFO's delivery round reads `Out for Delivery`, which Peek shows as "Out for delivery". FIRST LINE's tracker never names the company, so that wording is the clue.
+In the US, the delivering company's scans follow in its own words, up to delivery: USPS's, [GOFO](carrier:gofo)'s or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. GOFO's delivery round reads `Out for Delivery`, which Peek shows as "Out for delivery"; its delivery reads `Delivered,` then where the parcel was left (such as `Door/Yard`), then `For delivery issues & tracking support, contact GOFO at` and a contact; Peek shows it as "Delivered". FIRST LINE's tracker never says which company delivers, so the wording is the clue.
 
 Each time is the local clock of the place that scanned the parcel, Shenzhen's or Hong Kong's and then the US one's, without a time zone, so a US scan can show an earlier hour than the last one in China. A number the tracker doesn't know gets `未找到此单号信息` ("no information found for this number").
 

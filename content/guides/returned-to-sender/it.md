@@ -18,9 +18,9 @@ Il motivo di solito è nell'ultima scansione ed è scritto anche sul pacco, cos�
 | Motivo | Cosa scrive il corriere |
 | --- | --- |
 | Indirizzo sbagliato o incompleto | [Poste](carrier:poste-italiane) sulla busta: «indirizzo inesatto», «indirizzo incompleto», «indirizzo inesistente»; [BRT](carrier:brt) mette il pacco in giacenza per «indirizzo di consegna errato o incompleto» |
-| Destinatario sconosciuto o trasferito | Poste: «destinatario sconosciuto», «destinatario trasferito», «destinatario irreperibile»; [la Posta](carrier:swiss-post) `Traslocato, termine di rispedizione scaduto`, `Il destinatario è irreperibile all'indirizzo indicato` |
+| Destinatario sconosciuto o trasferito | Poste: «destinatario sconosciuto», «destinatario trasferito», «destinatario irreperibile»; [la Posta](carrier:swiss-post) `Traslocato, termine di rispedizione scaduto`, `Il destinatario è irreperibile all’indirizzo indicato` |
 | Non ritirato in tempo | La Posta `Non ritirato`; Poste: la raccomandata torna «per compiuta giacenza»; [InPost](carrier:inpost): dopo circa 3 giorni nel locker il pacco riparte da solo |
-| Rifiutato alla consegna | La Posta `Il destinatario ha rifiutato l'invio`, oppure `Respinto`; BRT: «il destinatario ha rifiutato la merce» |
+| Rifiutato alla consegna | La Posta `Il destinatario ha rifiutato l’invio`, oppure `Respinto`; BRT: «il destinatario ha rifiutato la merce» |
 | Dazio e IVA non pagati | La Posta: se il destinatario non paga i costi di sdoganamento, l'invio torna al mittente, a spese del mittente |
 | Danneggiato in viaggio | La Posta `Invio di ritorno al mittente per danneggiamento` |
 | L'ha chiesto il mittente | La Posta `Rinvio diretto su istruzione del mittente` e `Rinvio con disposizione preliminare` |
@@ -58,7 +58,7 @@ Di solito arriva quando il pacco è di nuovo dal venditore. I marketplace hanno 
 
 - **Amazon.it**: se vende e spedisce un partner di vendita del Marketplace, scrivi prima a lui. Se non riuscite a risolvere il problema di consegna, con la Garanzia dalla A alla Z puoi chiedere il rimborso direttamente ad Amazon.
 - **eBay**, con la Garanzia cliente eBay, ti rimborsa tutto, spedizione compresa, se l'oggetto non arriva all'indirizzo che hai dato al pagamento. Non vale se hai dato un indirizzo sbagliato, se hai rifiutato la consegna (salvo che il venditore avesse messo un'affrancatura insufficiente), se non eri a casa al momento della consegna, se non l'hai ritirato in tempo al punto di ritiro o se non hai pagato le spese di importazione.
-- **Vinted** annulla l'ordine quando ha la conferma che il pacco sta tornando a chi vende (lo stato diventa «Rispedito al mittente») e ti rimborsa «l'importo totale dell'acquisto», cioè articolo, spedizione e commissioni Vinted. Se chi vende non segna il pacco come ricevuto entro 14 giorni lavorativi, il rimborso parte da solo; se dopo 25 giorni lavorativi non hai ancora niente, contatta Vinted.
+- **Vinted** annulla l'ordine quando ha la conferma che il pacco sta tornando a chi vende (lo stato diventa «Rispedito al mittente») e ti dà un «rimborso completo (compreso il prezzo dell’articolo, le spese di spedizione e le commissioni di Vinted)». Se chi vende non segna il pacco come ricevuto entro 14 giorni lavorativi, il rimborso parte da solo; se dopo 25 giorni lavorativi non hai ancora niente, contatta Vinted.
 
 Con un normale negozio online decide la legge del posto in cui vivi:
 
@@ -131,7 +131,7 @@ La Posta può aprire il pacco per risalire al mittente; se non ci riesce, ne dis
 - [Unione postale universale: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – ritorno immediato dei rifiutati, giacenza, via meno prioritaria
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prodotti dei partner di vendita, rimborso da Amazon se il problema di consegna non si risolve con il venditore
 - [eBay: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/garanzia-cliente-ebay?id=4210) – cosa è coperto e cosa no (rifiuto, assenza, mancato ritiro, spese di importazione)
-- [Vinted: Il pacco è stato rispedito al mittente](https://www.vinted.it/help/730) – rimborso totale
+- [Vinted: Il pacco è stato rispedito al mittente](https://www.vinted.it/help/730) – rimborso completo
 - [Vinted: Il mio pacco sta per essere restituito al mittente](https://www.vinted.it/help/1447) – 14 e 25 giorni lavorativi
 - [Vinted: Il mio pacco è stato inviato all'indirizzo sbagliato](https://www.vinted.it/help/1450) – fino a 25 giorni lavorativi per tornare
 - [MIMIT: Diritto di recesso, domande frequenti](https://www.mimit.gov.it/it/assistenza/domande-frequenti/diritto-di-recesso-domande-frequenti-faq) – dichiarazione esplicita, rimborso in 14 giorni, consegna standard, costo diretto della restituzione

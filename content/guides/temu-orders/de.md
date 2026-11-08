@@ -4,14 +4,14 @@ description: Warum du mit der Temu-Bestellnummer kein Paket verfolgst, wie du de
 slug: temu-sendungsverfolgung
 picture: Ein Stapel kleiner Pakete, der aus dem Frachtraum eines Flugzeugs kommt, ein Lieferwagen und Pip, der sie zählt.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-08
 ---
 
 Mit der Temu-Bestellnummer verfolgst du kein Paket: Dafür brauchst du die Sendungsnummer des Paketdienstes. Füg sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 3.500 Paketdiensten und folgt dem Partner vor Ort, wenn der erste Paketdienst einen nennt. Fügst du stattdessen die Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
 
 ## Ist meine Temu-Bestellnummer eine Sendungsnummer?
 
-Nein. Die Temu-Bestellnummer ist Temus eigene Referenz und keine Sendungsnummer: Kein Paketdienst findet dein Paket damit. Peek erkennt sie an ihrer Form, PO und 20 Ziffern (`PO-000-00000000000000000`), und hält sie zurück, mit dem Hinweis, dass sie nach einer Temu-Bestellnummer aussieht. Nicht sicher, was du da hast? Tipp es hier ein:
+Nein. Die Temu-Bestellnummer ist Temus eigene Referenz und keine Sendungsnummer: Kein Paketdienst findet dein Paket damit. Peek erkennt sie an ihrer Form, PO und 20 Ziffern (`PO-000-00000000000000000`), und hält sie zurück, mit dem Hinweis, dass sie nach einer Temu-Bestellnummer aussieht, und wo du stattdessen nachsehen kannst: Tippe in Temu unter „Deine Bestellungen“ neben der Bestellung auf „Verfolgen“, dort zeigt Temu für jedes Paket eine Sendungsnummer. Nicht sicher, was du da hast? Tipp es hier ein:
 
 :::checker
 :::
@@ -25,6 +25,8 @@ Auch eine Nummer aus drei Buchstaben, einem `U` und sieben Ziffern, etwa `TEMU12
 Meist verrät es die Sendungsnummer: Das Feld oben nennt den Paketdienst, auf den ihre Form zeigt, oder die wenigen, zu denen sie passen kann. Wen du auf dem letzten Stück wahrscheinlich siehst, von DHL über die Österreichische Post bis zur Schweizerischen Post, steht in der Ländertabelle unter [Paket aus China verfolgen](guide:tracking-from-china). Ob an der Grenze noch etwas fällig wird, hängt von deinem Land ab: [Zoll](guide:customs).
 
 In Deutschland und Österreich sind Online-Bestellungen von außerhalb der EU bis 150 € seit 1. Juli 2026 nicht mehr zollfrei: Jede Ware kostet 3 € Zoll, wobei „Ware“ eine Warenart meint, nicht ein Stück. Seit 1. November 2026 erhebt die EU laut EU-Kommission außerdem eine Bearbeitungsgebühr von 2 € pro Ware. Für die Schweiz gilt beides nicht.
+
+Eine Postsendung von China Post (zwei Buchstaben, neun Ziffern, `CN`) verzollt in Deutschland die Deutsche Post und stellt sie zu. Die Bearbeitungsgebühr von 2 € pro Ware zahlst du dabei laut Deutscher Post nicht bei der Zustellung, den Zoll von 3 € pro Ware in der Regel auch nicht: Meist zahlst du schon beim Kauf im Shop, und wie, entscheidet der Shop. Fehlen der Sendung wichtige Angaben zur Ware oder zur Zollanmeldung, kann die Deutsche Post sie nicht für die Einfuhr bearbeiten, und für diese Angaben ist die Absenderseite verantwortlich. Hängt ein solches Paket beim Zoll, frag also zuerst bei Temu nach.
 
 ## Temu-Paket hängt fest, kommt zu spät oder gar nicht?
 
@@ -45,6 +47,7 @@ Peek zeigt, was der Paketdienst veröffentlicht. Eine Reklamation oder eine Erst
 :::sources
 - [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € pro Ware bis 150 € seit 1. Juli 2026, 2 € pro Ware, pro Position der Zollanmeldung
+- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – Deutsche Post verzollt Postsendungen; 3 € je Warenart in der Regel und 2 € nie bei der Zustellung, meist beim Kauf; fehlende Angaben (gelesen am 8. November 2026)
 - [Universal Parcel Scraper: Carrier-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – was Peek prüft
 - [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – Eigentümercode, U für Frachtcontainer, sechsstellige Seriennummer und Prüfziffer
 - [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management

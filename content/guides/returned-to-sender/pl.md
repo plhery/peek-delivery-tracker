@@ -59,7 +59,7 @@ Zwykle tak, gdy paczka wróci do sprzedawcy. Platformy mają własne zasady:
 
 - **Amazon.pl** obejmuje Gwarancją od A do Z każdy produkt, także od niezależnego sprzedawcy, i przy problemie z terminową dostawą obiecuje zwrot pieniędzy albo wymianę. Przy sprzedawcy z Marketplace najpierw piszesz do niego; jeśli nie uda się rozwiązać problemu, o zwrot pieniędzy prosisz bezpośrednio Amazon.
 - **Allegro** pozwala ubiegać się o rekompensatę z Allegro Ochrony Kupujących, gdy zwróciłeś towar albo anulowałeś transakcję, a pieniędzy nie dostałeś. Przy zwrocie towaru najpierw zgłaszasz sprzedającemu problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal zakładasz Dyskusję) albo składasz reklamację. Jeśli anulowałeś transakcję, a pieniądze nie wróciły w ciągu 2 dni, zgłoszenie o rekompensatę powstaje automatycznie, bez tego kroku.
-- **Vinted** anuluje zamówienie, gdy potwierdzi, że paczka jest w drodze powrotnej, i oddaje „pełną kwotę (tj. cenę przedmiotu, w tym koszt wysyłki i opłaty Vinted)”. Jeśli sprzedający nie dostanie paczki albo nie oznaczy jej w ciągu 14 dni roboczych, zwrot rusza sam. Gdy po 25 dniach roboczych nadal nic nie masz, napisz do Vinted.
+- **Vinted** anuluje zamówienie, gdy potwierdzi, że paczka jest w drodze powrotnej, i oddaje „pełną kwotę (w tym cenę przedmiotu, koszt wysyłki oraz opłaty Vinted)”. Jeśli sprzedający nie dostanie paczki albo nie oznaczy jej w ciągu 14 dni roboczych, zwrot rusza sam. Gdy po 25 dniach roboczych nadal nic nie masz, napisz do Vinted.
 
 Przy zwykłym sklepie internetowym decyduje prawo:
 

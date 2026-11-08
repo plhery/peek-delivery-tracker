@@ -3,7 +3,7 @@ title: FIRST LINE seguimiento: números 1ST, estados y entrega
 description: Sigue tu paquete de FIRST LINE (壹号专线) desde China: cómo es un número 1ST, qué significa cada estado, quién lo entrega y a quién preguntar si se para.
 slug: first-line-seguimiento
 published: 2026-11-02
-updated: 2026-11-07
+updated: 2026-11-08
 ---
 
 FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) es una empresa de logística de Shenzhen, fundada en 2018, que envía paquetes de tiendas online desde China, sobre todo a Estados Unidos, y en destino se los da a un transportista local. Forma parte del grupo 1ST (一代国际集团). Para seguir tu paquete, pega el número en la casilla de arriba o búscalo en la web de seguimiento de firstline56.com, que admite hasta 5 números a la vez.
@@ -44,7 +44,7 @@ La web de seguimiento está en chino, pero los escaneos salen en inglés. Las l�
 | `Customs broker picked it up` | El agente de aduanas lo ha recogido tras el despacho para pasarlo al reparto; ya no está retenido en la aduana. |
 | `The package has been transferred to the service provider` | Entregado a la empresa que lo reparte, después del agente de aduanas. |
 
-Después siguen los escaneos de la empresa que reparte, como USPS, GOFO o UniUni en Estados Unidos, con sus palabras; la web no la nombra, pero su redacción da la pista. El reparto de GOFO aparece como `Out for Delivery`, y Peek lo muestra como «En reparto».
+Después siguen los escaneos de la empresa que reparte, como USPS, GOFO o UniUni en Estados Unidos, con sus palabras; la web no dice cuál es, pero su redacción da la pista. El reparto de GOFO aparece como `Out for Delivery`, y Peek lo muestra como «En reparto». Su entrega empieza por `Delivered,`, sigue con el sitio donde se dejó el paquete (por ejemplo, `Door/Yard`) y termina con `For delivery issues & tracking support, contact GOFO at` y el contacto de atención al cliente de GOFO: Peek la muestra como «Entregado».
 
 **Horas.** Cada escaneo lleva la hora local del lugar, sin zona horaria: la de Shenzhen o Hong Kong y luego la del destino, así que un escaneo en Estados Unidos puede mostrar una hora anterior a la del último en China.
 

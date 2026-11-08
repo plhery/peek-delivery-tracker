@@ -3,7 +3,7 @@ title: DHLink tracking: numbers, statuses and who delivers
 description: Track a DHLink parcel from a DHgate order: which numbers DHLink's tracker takes, what its English scans mean, who delivers in your country and who to ask.
 slug: dhlink-tracking
 published: 2026-10-22
-updated: 2026-11-04
+updated: 2026-11-08
 ---
 
 DHLink (驼飞侠) is the cross-border logistics platform of DHgate (敦煌网). Founded in 2014, it ships orders for DHgate sellers and other customers, from China or from its warehouses abroad, and hands them to a carrier in your country for the last leg. Track the number on DHLink's [tracking page](https://www.dhlink.com/trackQuery?lang=en) or in the box above. Take the number from your DHgate order, or ask the seller for it.
@@ -32,6 +32,7 @@ A result shows the status (`In transit`, `Delivered`), the origin and destinatio
 
 | DHLink says | What it means for you |
 | --- | --- |
+| `Data Received; Data transferred and received by carrier` | On a line to south-eastern Europe: Pactic, the platform in Hungary that line goes through, has the parcel's data. Before DHLink's warehouse scan, Peek shows "Label created"; when the row comes again after the flight, the parcel stays "In transit". |
 | `Arrive at the collection warehouse` | DHLink's collection warehouse in China has the parcel. |
 | `The collection warehouse has completed sorting` | Sorted there. |
 | `Package received & scanned at warehouse` | Booked in at DHLink's warehouse. |
@@ -53,7 +54,7 @@ US lines add hub scans such as `Arrived at Origin Hub` and `Departed Destination
 
 ## Who delivers DHLink parcels
 
-DHLink's site is written for sellers and names no last-mile partner by country. Its tracker shows who delivers. On US lines, one scan says the parcel went to "UPS/USPS/Fedex" without saying which; the rows that follow are that carrier's, such as [USPS](carrier:usps)'s. Some US lines end with [GOFO Express](carrier:gofo) or SwiftX, whose number shows as the "Last Leg No."; in Switzerland, that number can be [DPD Switzerland](carrier:dpd-ch)'s. Parcels carried by China Post keep their CN number to the end: see [China Post](carrier:china-post) for who delivers them in your country.
+DHLink's site is written for sellers and names no last-mile partner by country. Its tracker shows who delivers. On US lines, one scan says the parcel went to "UPS/USPS/Fedex" without saying which; the rows that follow are that carrier's, such as [USPS](carrier:usps)'s. Some US lines end with [GOFO Express](carrier:gofo) or SwiftX, whose number shows as the "Last Leg No." (GOFO's own tracker also finds the DHgate parcels it delivers by their DHLink number, FC and 13 digits); in Switzerland, that number can be [DPD Switzerland](carrier:dpd-ch)'s. Parcels carried by China Post keep their CN number to the end: see [China Post](carrier:china-post) for who delivers them in your country.
 
 Once you know the carrier and its number, its own tracking has the local detail, and its rules apply to delivery attempts, notice cards and pickup: see [missed a delivery](guide:missed-delivery). Since 1 November 2026, the EU charges a €2 handling fee per item on online orders from outside it; the seller or the delivering carrier pays it and may pass it on to you, at checkout or before delivery. For duties and other fees on goods from China, see [parcels held at customs](guide:customs).
 
@@ -99,5 +100,5 @@ DHLink has handed the parcel to the US carrier. It isn't delivered to you yet: t
 - [DHLink: Service agreement (服务协议)](https://www.dhlink.com/agreementPage/service) – operator 驼飞侠科技（北京）有限公司
 - [DHgate Seller Help: DHLink物流异常件赔付规则 (DHLink compensation rules)](https://seller.dhgate.com/help/c7502/516002.html) – compensation for sellers, logistics types, exclusions for buyer-caused late delivery and failed clearance, claims within 90 days of the logistics order
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, for goods bought outside the EU, paid by the seller or the delivery company, which may pass it on at checkout or before delivery
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes (CYS on a UniUni US line; JXCYI/JXCZO shared with Juxi Express, DHLink asked first), scan wordings, last-leg partners, what Peek reads and shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes (CYS on a UniUni US line; JXCYI/JXCZO shared with Juxi Express, DHLink asked first), scan wordings (Pactic's data row), last-leg partners, GOFO's tracker taking DHLink's FC numbers, what Peek reads and shows
 :::

@@ -3,7 +3,7 @@ title: Yanwen suivi : numéros, statuts et qui contacter
 description: Suivre un colis Yanwen venu de Chine : à quoi ressemble le numéro, ce que veut dire chaque statut, qui le livre chez toi et qui contacter s'il bloque.
 slug: yanwen-suivi
 published: 2026-10-11
-updated: 2026-11-06
+updated: 2026-11-08
 ---
 
 Yanwen est une société de logistique chinoise, fondée à Pékin en 1998, qui expédie à l'étranger les colis de vendeurs en ligne puis les confie à un transporteur local pour le dernier kilomètre. Pour suivre ton colis, saisis son numéro sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index), le site de suivi de Yanwen, ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique ou de la plateforme où tu as commandé, dans les détails d'expédition de ta commande.
@@ -43,7 +43,7 @@ Le site de suivi de Yanwen n'existe qu'en anglais et en chinois, et les lignes d
 | `Batch delivery to carrier` | Remis au transporteur local. Ses scans suivent. |
 | `Delivered` | Le colis est livré ; Yanwen ajoute le nombre de jours de trajet. |
 
-`Order Submited.`, `Waybill Generated` et `Shipping Order Created.` veulent dire la même chose que la première ligne : seule l'étiquette existe, et le colis n'a peut-être pas quitté le vendeur. `Pick up by local carrier at destination port` équivaut à `Batch delivery to carrier`. Ensuite, les lignes sont celles du transporteur local, parfois précédées d'un code pays ou du nom d'un dépôt entre crochets.
+`Order Submited.`, `Waybill Generated` et `Shipping Order Created.` veulent dire la même chose que la première ligne : seule l'étiquette existe, et le colis n'a peut-être pas quitté le vendeur. `Pick up by local carrier at destination port` équivaut à `Batch delivery to carrier`. Ensuite, les lignes sont celles du transporteur local, parfois précédées d'un code pays ou du nom d'un dépôt entre crochets. La ligne de DHL `The recipient has selected a Packstation as the new delivery address.` peut arriver alors que le colis est encore en Chine : elle note seulement que tu as choisi une Packstation DHL comme nouvelle adresse de livraison. Peek garde donc l'étape où en était le colis et n'y associe aucun lieu.
 
 Certains colis passent à China Post après `Yanwen facility - Outbound`. Yanwen affiche alors les lignes de China Post en chinois, expliquées sur la page [China Post](carrier:china-post) ; `中国邮政已收取邮件` est cette remise. `【…】退回，备注:安检退回` veut dire que le contrôle de sécurité d'un centre de tri a refusé le colis, et que le centre règle le problème avant de le réexpédier : il ne repart pas chez le vendeur. Peek l'affiche comme « Problème signalé ».
 
@@ -122,5 +122,5 @@ Yanwen ne livre pas lui-même chez toi : c'est le transporteur local qui fixe se
 - [Yanwen : 燕文TemuY2欧盟快线 (fiche de la ligne UE, en chinois)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – droits et taxes à la charge de l'expéditeur
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droits de 3 € depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
 - [Yanwen : 关于官方快件查询入口及服务的通告 (canaux de suivi officiels)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numéros, limite d'un an, recherche par téléphone, chat, portail, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek affiche, phrases de La Poste reprises par Yanwen et heure de ses scans traduits, scans de J&T Express Australia après la remise par lots
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek affiche, phrases de La Poste reprises par Yanwen et heure de ses scans traduits, scans de J&T Express Australia après la remise par lots, avis de DHL sur la Packstation
 :::

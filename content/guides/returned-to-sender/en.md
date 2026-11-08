@@ -58,7 +58,7 @@ Usually, once it's back with the seller. Marketplaces have their own rules:
 
 - **Amazon** orders can't be cancelled once shipped, but you can refuse the delivery, says Amazon UK; Amazon Australia gives a refund or replacement for a refused parcel it fulfilled. For a third-party seller, contact the seller first: on Amazon UK, if you want a refund and it hasn't answered within 48 hours, most orders are covered by the A-to-z Guarantee, and you claim from Amazon directly.
 - **eBay**'s Money Back Guarantee refunds an item that never reached your checkout address, postage included, but not if you gave a wrong address, refused it (unless the postage was underpaid) or didn't pay import charges.
-- **Vinted** cancels the order once the parcel is on its way back and refunds "the item's price, including shipping and Vinted fees". If the seller doesn't mark it received within 14 business days, the refund starts on its own; still nothing after 25 business days, contact Vinted.
+- **Vinted** cancels the order once the parcel is on its way back and issues "a full refund (including the item’s price, shipping cost and Vinted fees)". If the seller doesn't mark it received within 14 business days, the refund starts on its own; still nothing after 25 business days, contact Vinted.
 
 From an ordinary online shop, the law where you live decides:
 

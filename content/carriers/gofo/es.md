@@ -3,7 +3,7 @@ title: GOFO Express rastreo: número GFUS, estados y qué hacer
 description: Rastrea tu paquete de GOFO Express en Estados Unidos: cómo es el número de rastreo, qué significa cada estado en inglés y qué hacer si tu paquete no avanza.
 slug: gofo-express-rastreo
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-08
 ---
 
 GOFO Express es una empresa de paquetería que reparte en Estados Unidos: recoge los paquetes en el almacén del remitente y los lleva de centro en centro hasta la estación desde la que se reparten. Para rastrear tu paquete, pega el número de rastreo en la casilla de arriba; GOFO tiene además su propio rastreador, en gofo.com/us/track. El número te lo da la tienda que te envió el pedido. Si no lo encuentras, mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
@@ -19,7 +19,7 @@ GOFO usa tres formas de número en Estados Unidos. Aquí van, con cifras inventa
 | `CR123456789012` | CR y 12 cifras: otra serie antigua de GOFO. |
 | `YT1234567890123456` | YT y 16 cifras: es de [YunExpress](carrier:yunexpress), aunque GOFO haga la entrega. |
 
-**Dos números para un mismo paquete.** Algunos paquetes llevan a la vez un número GFUS, la guía, y un número CR, el de rastreo. Con cualquiera de los dos se encuentra el mismo paquete, en Peek y en el rastreador de GOFO.
+**Dos números para un mismo paquete.** Algunos paquetes llevan a la vez un número GFUS, la guía, y un número CR, el de rastreo. Con cualquiera de los dos se encuentra el mismo paquete, en Peek y en el rastreador de GOFO. En los paquetes de DHgate que GOFO entrega por cuenta de DHLink, el número de rastreo es el propio de DHLink, `FC` y 13 cifras, y el rastreador de GOFO también encuentra el paquete con él.
 
 **Números YT.** Cuando GOFO entrega en Estados Unidos un paquete de YunExpress, el rastreo de YunExpress muestra también los escaneos de GOFO, y el rastreador de GOFO acepta el mismo número YT.
 
@@ -87,7 +87,7 @@ Es una empresa de paquetería que reparte en Estados Unidos. GOFO tiene también
 
 ### ¿Por qué no funciona mi número de rastreo de GOFO?
 
-Comprueba que sea un número de GOFO para Estados Unidos: GFUS, GF o CR. Los que empiezan por GFCA, GFFR, GFIT, GFES o GFNL son de las redes de otros países, y los YT, de YunExpress. Si la tienda acaba de darte el número, puede que GOFO aún no lo conozca: Peek seguirá comprobando. Si dice `Label Cancelled`, con ese número no llegará nada: pídele a la tienda el número correcto.
+Comprueba que sea un número de GOFO para Estados Unidos: GFUS, GF o CR. Los que empiezan por GFCA, GFFR, GFIT, GFES o GFNL son de las redes de otros países, y los YT, de YunExpress. Un paquete de DHgate que entrega GOFO también se puede buscar en el rastreador de GOFO con el número FC de DHLink. Si la tienda acaba de darte el número, puede que GOFO aún no lo conozca: Peek seguirá comprobando. Si dice `Label Cancelled`, con ese número no llegará nada: pídele a la tienda el número correcto.
 
 ### ¿Qué significa Shipping Label Created en GOFO?
 
@@ -98,5 +98,5 @@ Que el remitente creó la etiqueta de envío y GOFO todavía no tiene el paquete
 Porque Cainiao, la logística de AliExpress, sigue algunos pedidos con el número GFUS de GOFO, que hace la entrega en Estados Unidos. Con un número GFUS, Peek pregunta a GOFO y a Cainiao.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek: números de GOFO y de sus redes en otros países, GFUS y CR del mismo paquete, números YT, rastreador y página de ayuda de GOFO, escaneos y etapas, zonas horarias, lo que Peek deja fuera, Cainiao
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek: números de GOFO y de sus redes en otros países, GFUS y CR del mismo paquete, números FC de DHLink, números YT, rastreador y página de ayuda de GOFO, escaneos y etapas, zonas horarias, lo que Peek deja fuera, Cainiao
 :::

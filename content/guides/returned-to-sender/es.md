@@ -60,7 +60,7 @@ Normalmente sí, cuando el paquete llega al vendedor. Las plataformas tienen sus
 
 - **Amazon.es**: si lo vendió un vendedor externo, habla primero con él. Si no consigues resolver el problema de entrega, la Garantía de la A a la Z te permite reclamar directamente a Amazon.
 - **eBay**, con su Garantía al cliente, te devuelve el importe, con el envío original, si el artículo no llega a la dirección que diste al pagar. No cubre una dirección incorrecta, una entrega que rehusaste (salvo que el vendedor pagara de menos el envío), que no estuvieras en casa ni unas tasas de importación sin pagar.
-- **Vinted** cancela el pedido en cuanto confirma que el paquete va de vuelta y te hace un reembolso completo: «el precio del artículo, incluidos los gastos de envío y las comisiones de Vinted». Si el vendedor no lo recibe o no lo marca en 14 días laborables, el reembolso empieza solo; si a los 25 días laborables sigues sin nada, escríbeles.
+- **Vinted** cancela el pedido en cuanto confirma que el paquete va de vuelta y te hace un «reembolso completo (incluido el precio del artículo, los gastos de envío y las comisiones de Vinted)». Si el vendedor no lo recibe o no lo marca en 14 días laborables, el reembolso empieza solo; si a los 25 días laborables sigues sin nada, escríbeles.
 - **Wallapop** te reembolsa el importe si no es posible entregar el paquete y vuelve al vendedor.
 
 En Temu, Shein o AliExpress, empieza por la ayuda de la plataforma, desde el propio pedido.

@@ -3,7 +3,7 @@ title: Yanwen tracking: numero, stati e chi consegna in Italia
 description: Tracking Yanwen per i pacchi dalla Cina: com'è fatto il numero, cosa vogliono dire gli stati in inglese, chi consegna in Italia e a chi scrivere.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-11-06
+updated: 2026-11-08
 ---
 
 Yanwen è un'azienda di logistica cinese, nata a Pechino nel 1998, che spedisce all'estero i pacchi dei venditori online e poi li passa a un corriere locale per l'ultimo tratto. Per il tracking inserisci il numero sul sito di Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), oppure incollalo nel box qui sopra. Il numero te lo dà il negozio o il marketplace dove hai comprato, nei dettagli di spedizione dell'ordine.
@@ -45,7 +45,7 @@ Il sito di tracciamento di Yanwen esiste solo in inglese e in cinese, e le righe
 | `<User not at home>` | Un tentativo di consegna non è riuscito: non eri in casa. |
 | `Delivered.` | Consegnato, nelle parole del corriere italiano. |
 
-`Order Submited.` (scritto così, con l'errore), `Waybill Generated` e `Shipping Order Created.` valgono come la prima riga: esiste solo l'etichetta, e il pacco può essere ancora dal venditore. `Pick up by local carrier at destination port` vuol dire lo stesso di `Batch delivery to carrier`.
+`Order Submited.` (scritto così, con l'errore), `Waybill Generated` e `Shipping Order Created.` valgono come la prima riga: esiste solo l'etichetta, e il pacco può essere ancora dal venditore. `Pick up by local carrier at destination port` vuol dire lo stesso di `Batch delivery to carrier`. La riga di DHL `The recipient has selected a Packstation as the new delivery address.` può comparire quando il pacco è ancora in Cina: registra solo che hai scelto una Packstation DHL come nuovo indirizzo di consegna, quindi Peek lascia lo stato che il pacco aveva già e non le associa nessun luogo.
 
 Dopo il passaggio, le righe sono quelle del corriere locale. Nei pacchi arrivati in Italia erano in inglese, con davanti il deposito tra parentesi quadre larghe, per esempio «【Milan center】Received.» o «【dalla sede operativa di TORINO (TO)】Delivered.». Oltre a quelle della tabella si vedono `Arrived.`, `Shipment dispatched.`, `<wrong address>` (l'indirizzo non va bene) e `Back To DS.`, cioè il pacco è tornato al deposito di consegna dopo un tentativo fallito.
 
@@ -126,5 +126,5 @@ Yanwen non pubblica tempi di consegna per chi riceve: vale la stima che il negoz
 - [Commissione europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € per voce fino a 150 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
 - [Commissione europea: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € per voce come i 3 €, a qualunque valore
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canali ufficiali di tracciamento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numeri, limite di un anno, ricerca al telefono, chat, portale, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, scansioni di J&T Express Australia dopo il passaggio
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, scansioni di J&T Express Australia dopo il passaggio, avviso di DHL sulla Packstation
 :::

@@ -3,7 +3,7 @@ title: UPS tracking: número 1Z, estados e entregas em Portugal
 description: UPS tracking em Portugal: como é o número 1Z, o que querem dizer Exception e as outras leituras, os Access Point, a alfândega e os teus direitos.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-08
 ---
 
 Os números de seguimento da UPS (United Parcel Service) começam normalmente por `1Z`. Cola o número, ou um link de seguimento da UPS, na caixa acima para seguires a encomenda; a página de seguimento da própria UPS está no ups.com.
@@ -23,9 +23,11 @@ A página de seguimento da UPS em inglês tem uma barra de progresso (`Label Cre
 | A UPS escreve | O Peek mostra | O que quer dizer para ti |
 | --- | --- | --- |
 | `Shipper created a label, UPS has not received the package yet.` | Etiqueta criada | O remetente criou a etiqueta. A UPS ainda não tem a encomenda. |
-| `Drop-Off`, `Pickup Scan` | Aceite pela transportadora | A UPS já a tem: o remetente deixou-a num Access Point ou a UPS foi buscá-la. O primeiro `Arrived at Facility` também conta aqui. |
+| `Drop-Off`, `Pickup Scan` | Aceite pela transportadora | A UPS já a tem: o remetente deixou-a num Access Point ou a UPS foi buscá-la. A leitura de origem da UPS, também com o texto `Arrived at Facility`, conta aqui. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | Em trânsito | Circula na rede da UPS. `Export Scan` e `Import Scan` marcam a passagem de uma fronteira. |
 | `Your package is prepared for clearance.` | Na alfândega | Está a ser desalfandegada. |
+| `Your package is pending release from a Government Agency. We'll notify the receiver or sender if information is needed.` | Na alfândega | Uma entidade pública retém-na, entre a leitura de exportação e a de importação. Se for precisa alguma informação, a UPS avisa-te a ti ou ao remetente. |
+| `Your package has been released by a government agency.` | Em trânsito | A entidade libertou-a. |
 | `Duties or taxes are due on this package.` | Na alfândega | Tens de pagar encargos de importação antes de a UPS a entregar (ver abaixo). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Em distribuição | Vai com um estafeta. |
 | `The receiver was not available at the time of the final delivery attempt.` | Tentativa de entrega | Também a última tentativa de entrega falhou. |
@@ -89,5 +91,5 @@ Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em
 - [Your Europe: Resolução extrajudicial de litígios](https://europa.eu/youreurope/citizens/consumers/consumers-dispute-resolution/informal-alternative-dispute-resolution/index_pt.htm) – resolver primeiro com a empresa, com documentos; depois resolução alternativa de litígios
 - [CNIACC: Rede de arbitragem de consumo](https://www.cniacc.pt/pt/rede-de-arbitragem-de-consumo) – os centros de arbitragem de conflitos de consumo
 - [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, taxa de 2 ou 3 euros, o que fazer
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS, o que o Peek lê da UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS (retenção e libertação por uma entidade pública), o que o Peek lê da UPS
 :::

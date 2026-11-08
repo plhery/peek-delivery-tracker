@@ -60,7 +60,7 @@ Normalmente, sim, quando ela chega à loja. As plataformas têm regras próprias
 
 - **Amazon.es**: se a compraste a um vendedor externo e não conseguiste resolver o problema da entrega com ele, a Garantia de A a Z permite-te pedir o reembolso diretamente à Amazon.
 - **eBay**: a Money Back Guarantee do eBay devolve o preço e os portes de um artigo que não chegou à morada indicada na compra, mas não se deste uma morada errada, se o recusaste (a não ser por portes mal pagos pelo vendedor) ou se não pagaste os encargos de importação.
-- **Vinted**: quando o pedido passa a «A devolver ao remetente» e a Vinted confirma que a encomenda está a voltar, cancela a compra e dá-te um reembolso total, «o preço do artigo, incluindo as taxas de envio e as taxas da Vinted». Se quem vendeu não a receber, ou não a marcar como recebida, em 14 dias úteis, o reembolso começa sozinho. Sem dinheiro ao fim de 25 dias úteis, contacta a Vinted.
+- **Vinted**: quando o pedido passa a «A devolver ao remetente» e a Vinted confirma que a encomenda está a voltar, cancela a compra e reembolsa-te «a totalidade do montante (incluindo o preço do artigo, o custo de envio e as taxas Vinted)». Se quem vendeu não a receber, ou não a marcar como recebida, em 14 dias úteis, o reembolso começa sozinho. Sem dinheiro ao fim de 25 dias úteis, contacta a Vinted.
 
 Numa loja online, conta a lei. Em Portugal, é o Decreto-Lei n.º 24/2014:
 

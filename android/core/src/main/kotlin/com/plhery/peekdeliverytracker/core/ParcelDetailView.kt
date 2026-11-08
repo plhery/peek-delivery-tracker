@@ -194,6 +194,8 @@ data class CarrierChange(
     val trackingUrl: String,
     val deliveryPostcode: String,
     val chosenPostcodeCountry: String? = null,
+    /** The parcel's own digits while its carrier stays; none for another. Cleared, none are sent, which removes them. */
+    val phoneDigits: String = "",
     val providerPostcode: String = "",
     val catalog: CarrierCatalog = CarrierCatalog.shared,
     val region: String? = CarrierCatalog.deviceCountry(),
@@ -304,6 +306,21 @@ data class CarrierChange(
     val postcodeRequirement: CarrierRequirement?
         get() = requirements.firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
 
+    val phoneDigitsRequirement: CarrierRequirement?
+        get() = requirements.firstOrNull { it.field == CarrierRequirement.Field.PhoneDigits }
+
+    /**
+     * Under the fields (`requirementsHelp`): what an optional postcode gives, and why phone digits are asked and where
+     * they go, one under the other; none without either.
+     */
+    fun requirementsHelp(localizer: Localizer): String? {
+        val carrier = mapOf("carrier" to catalog.info(selectedCarrier, localizer.language).displayName)
+        return listOfNotNull(
+            if (postcodeRequirement?.isOptional == true) localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier) else null,
+            if (phoneDigitsRequirement != null) localizer.text("add.requirement.phoneDigitsHelp", carrier) else null,
+        ).joinToString("\n").nonEmpty
+    }
+
     /** The keyboard a postcode field opens with (`keyboardType`). */
     enum class PostcodeKeys { NumberPad, NumbersAndPunctuation, AsciiCapable }
 
@@ -336,11 +353,15 @@ data class CarrierChange(
 
     val normalizedPostcode: String get() = postcodeRequirement?.normalizedValue(deliveryPostcode) ?: ""
 
+    /** The digits sent: only while the carrier asks for them. */
+    val normalizedPhoneDigits: String get() = phoneDigitsRequirement?.normalizedValue(phoneDigits) ?: ""
+
     /** Something differs from the parcel: its carrier, a field, the postcode's country, or a provider's postcode given. */
     val changed: Boolean
         get() = normalizedProviderPostcode != null || selectedCarrier != parcel.carrier ||
             normalizedTrackingUrl != (parcel.trackingUrl ?: "") ||
             normalizedPostcode != (parcel.dpdPostcode ?: "") ||
+            normalizedPhoneDigits != (parcel.phoneDigits ?: "") ||
             (normalizedPostcode.isNotEmpty() && postcodeCountry != initialPostcodeCountry)
 
     /** A change with every field it needs, the tracking link a secure web address. */
@@ -356,14 +377,16 @@ data class CarrierChange(
                         if (!requirement.accepts(value) || url == null || url.scheme != "https" || url.host == null) return false
                     }
                     CarrierRequirement.Field.DpdPostcode -> if (!requirement.isSatisfied(deliveryPostcode)) return false
+                    CarrierRequirement.Field.PhoneDigits -> if (!requirement.isSatisfied(phoneDigits)) return false
                 }
             }
             return true
         }
 
-    /** The link and the postcode as `save()` sends them: none when empty. */
+    /** The link, the postcode and the phone digits as `save()` sends them: none when empty. */
     val sentTrackingUrl: String? get() = normalizedTrackingUrl.nonEmpty
     val sentPostcode: String? get() = normalizedPostcode.nonEmpty
+    val sentPhoneDigits: String? get() = normalizedPhoneDigits.nonEmpty
 
     /** The country sent with the postcode: none without one, nor for the carrier's home country. */
     val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, normalizedPostcode, selectedCarrier)
@@ -380,6 +403,7 @@ data class CarrierChange(
         return next.copy(
             trackingUrl = if (own) parcel.trackingUrl ?: "" else "",
             deliveryPostcode = if (own) parcel.dpdPostcode ?: "" else "",
+            phoneDigits = if (own) parcel.phoneDigits ?: "" else "",
             chosenPostcodeCountry = null,
         )
     }
@@ -387,8 +411,9 @@ data class CarrierChange(
     companion object {
         /**
          * The sheet as it opens on [parcel] (`init(parcel:initialCarrier:)`), on [initialCarrier] where a prompt names
-         * one: an unfiled parcel on its own carrier starts on automatic detection, but for an Amazon number; the link
-         * and the postcode start from the parcel's on its own carrier.
+         * one: an unfiled parcel on its own carrier starts on automatic detection, but for an Amazon number; the link,
+         * the postcode and the phone digits start from the parcel's on its own carrier. A parcel followed without an
+         * account has no digits: its link never shows them, so its field starts empty.
          */
         fun start(
             parcel: Parcel,
@@ -404,6 +429,7 @@ data class CarrierChange(
                 chosenCarrier = if (unfiled && own && !catalog.isAmazonTrackingNumber(parcel.trackingNumber)) null else carrier,
                 trackingUrl = if (own) parcel.trackingUrl ?: "" else "",
                 deliveryPostcode = if (own) parcel.dpdPostcode ?: "" else "",
+                phoneDigits = if (own) parcel.phoneDigits ?: "" else "",
                 catalog = catalog,
                 region = region,
             )

@@ -231,8 +231,9 @@ internal fun AddParcelHost(state: DeliveriesState) {
 
 /**
  * What Add holds (`AddParcelView`'s `@State`): the name and the text typed, the number chosen among several, the
- * carrier chosen, the number to add as typed, recognition and the answers of the checks, the link and the postcode
- * typed, the postcode's country chosen and the postcode filled in from those given before, Amazon's check asked again,
+ * carrier chosen, the number to add as typed, recognition and the answers of the checks, the link, the postcode and
+ * the phone digits typed, the postcode's country chosen and the postcode filled in from those given before, Amazon's
+ * check asked again,
  * the picker or the scanner open, the keyboard or the scanner opened once, and a paste that found nothing. All of it
  * stays through a window made again, as the iPhone's `@State` does, so no check is asked again for what it answered.
  */
@@ -257,6 +258,7 @@ internal class AddForm(
     pasteFailed: Boolean,
     preparedFor: CarrierId?,
     showingScanner: Boolean,
+    phoneDigits: String,
 ) {
     var label by mutableStateOf(label)
     var trackingInput by mutableStateOf(trackingInput)
@@ -273,6 +275,9 @@ internal class AddForm(
     var deliveryPostcode by mutableStateOf(deliveryPostcode)
     var chosenPostcodeCountry by mutableStateOf(chosenPostcodeCountry)
     var postcodeFill by mutableStateOf(postcodeFill)
+
+    /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
+    var phoneDigits by mutableStateOf(phoneDigits)
     var lookupAttempt by mutableIntStateOf(lookupAttempt)
     var showingPicker by mutableStateOf(showingPicker)
     var showingScanner by mutableStateOf(showingScanner)
@@ -284,7 +289,7 @@ internal class AddForm(
 
     fun addition(demo: Boolean, catalog: CarrierCatalog, region: String?) = ParcelAddition(
         trackingInput, pick, carrierOverride, asTyped, recognition, refusedQuestion, verifiedCarrier, trackingUrl,
-        deliveryPostcode, chosenPostcodeCountry, demo, catalog, region,
+        deliveryPostcode, chosenPostcodeCountry, phoneDigits, demo, catalog, region,
     )
 
     /** Takes the text, the number chosen, the carrier chosen and recognition from `addition`. */
@@ -302,7 +307,7 @@ internal class AddForm(
             recognition = CarrierRecognition(draft?.let { ParcelAddition.trackingNumber(it, catalog) }), refusedQuestion = null,
             verifiedCarrier = null, lookedUp = null, trackingUrl = "", deliveryPostcode = "",
             chosenPostcodeCountry = null, postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
-            didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false,
+            didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false, phoneDigits = "",
         )
 
         val Saver = listSaver<AddForm, Any>(
@@ -315,6 +320,7 @@ internal class AddForm(
                     it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
                     it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
+                    it.phoneDigits,
                 )
             },
             restore = {
@@ -326,6 +332,7 @@ internal class AddForm(
                     kept(19)?.let(ParcelAddition::question), kept(18)?.let(ParcelAddition::answer), kept(20),
                     it[6] as String, it[7] as String, text(8), PostcodeFill(kept(9), it[10] as Boolean), it[11] as Int,
                     it[12] as Boolean, it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId), it[21] as Boolean,
+                    it[22] as String,
                 )
             },
         )
@@ -674,7 +681,10 @@ private class AddActions(
         form.take(current().settling(suggestion))
     }
 
-    /** `submitTracking()`: Next goes to the link, then the postcode, while either still wants something, else the name. */
+    /**
+     * `submitTracking()`: Next goes to the link, then the postcode, then the phone digits, while any still wants
+     * something, else the name.
+     */
     fun submitTracking() {
         focus.request(current().nextField)
     }
@@ -1242,7 +1252,8 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
 /**
  * `requiredDetails`: the complete link where the carrier needs one and the text had none, and the delivery postcode
  * with its country beside it where it reads several; an optional postcode offered from those given before, and, for a
- * guest, the one filled in to forget.
+ * guest, the one filled in to forget; the last 4 digits of a phone where the carrier shows the parcel with them, and,
+ * for a guest, that its link never shows them.
  */
 @Composable
 private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions) {
@@ -1351,6 +1362,59 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                 }
             }
         }
+        val digits = addition.phoneDigitsRequirement
+        if (digits != null) {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                RequirementField(
+                    localized("add.requirement.phoneDigits"),
+                    localizer.text(
+                        "add.requirement.phoneDigitsHelp",
+                        mapOf("carrier" to catalog.info(addition.resolvedCarrier, language).displayName),
+                    ),
+                    optional = digits.isOptional,
+                ) {
+                    // Number keys, and no autofill hint: nothing on the phone fills in these digits.
+                    AddTextField(
+                        value = form.phoneDigits,
+                        onValueChange = { form.phoneDigits = digits.normalizedValue(it) },
+                        placeholder = digits.placeholder.orEmpty(),
+                        label = localized("add.requirement.phoneDigits"),
+                        tag = ADD_PHONE_DIGITS,
+                        field = ParcelAddition.Field.PhoneDigits,
+                        focus = focus,
+                        actions = actions,
+                        keyboard = KeyboardOptions(
+                            KeyboardCapitalization.None, autoCorrectEnabled = false,
+                            keyboardType = if (digits.inputMode == "numeric") KeyboardType.Number else KeyboardType.Ascii,
+                            imeAction = ImeAction.Done,
+                        ),
+                        framed = false,
+                        suggestions = false,
+                        monospacedDigits = true,
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+                // Without an account the parcel has a link, which never shows the digits.
+                if (state.source.isGuest) PhoneDigitsPrivate()
+            }
+        }
+    }
+}
+
+/** The lock and `door.phoneDigits.private` in caption, in the secondary grey, read as one line. */
+@Composable
+private fun PhoneDigitsPrivate() {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Row(
+        Modifier
+            .testTag(ADD_PHONE_DIGITS_PRIVATE)
+            .semantics(mergeDescendants = true) {},
+        horizontalArrangement = Arrangement.spacedBy(7.dp),
+        verticalAlignment = Alignment.Top,
+    ) {
+        PeekSymbol("lock", Modifier.padding(top = 2.dp), font = type.caption2, tint = colors.secondaryLabel)
+        Text(localized("door.phoneDigits.private"), color = colors.secondaryLabel, style = type.caption.sfLines())
     }
 }
 
@@ -1792,6 +1856,8 @@ internal const val ADD_COUNTRY = "addParcel.country"
 internal const val ADD_COUNTRY_DIVIDER = "addParcel.country.divider"
 internal const val ADD_USE_POSTCODE = "addParcel.usePostcode"
 internal const val ADD_FORGET_POSTCODE = "addParcel.forgetPostcode"
+internal const val ADD_PHONE_DIGITS = "addParcel.phoneDigits"
+internal const val ADD_PHONE_DIGITS_PRIVATE = "addParcel.phoneDigitsPrivate"
 internal const val ADD_ERROR = "addParcel.error"
 internal const val ADD_OPEN_EXISTING = "addParcel.openExisting"
 internal const val ADD_PICKER = "addParcel.picker"

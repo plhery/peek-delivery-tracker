@@ -345,16 +345,20 @@ class FakeDeliveries(
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         providerPostcode: String?,
+        phoneDigits: String?,
     ) {
         changing?.await()
         failure?.let { throw it }
         carrierChanges += parcel.id to carrier
-        carrierRequests += CarrierChangeRequest(parcel.id, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode)
+        carrierRequests += CarrierChangeRequest(parcel.id, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode, phoneDigits)
         parcels.value = parcels.value.map {
             if (it.id != parcel.id) {
                 it
             } else {
-                it.copy(id = changedId ?: it.id, carrier = carrier, syncError = null, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode)
+                it.copy(
+                    id = changedId ?: it.id, carrier = carrier, syncError = null, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode,
+                    phoneDigits = phoneDigits,
+                )
             }
         }
     }
@@ -394,15 +398,16 @@ class FakeDeliveries(
         trackingUrl: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
+        phoneDigits: String?,
     ): Parcel {
         adding?.await()
         verification?.token(VERIFICATION_PAGE)
         failure?.let { throw it }
-        additions += AdditionRequest(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry)
+        additions += AdditionRequest(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, phoneDigits)
         val parcel = Parcel(
             id = addedId ?: UUID.randomUUID(), trackingNumber = CarrierCatalog.normalize(trackingNumber), label = label.trim(),
             carrier = carrier, createdAt = DateParser.isoString(now), syncStatus = SyncStatus.Pending, notificationsMuted = false,
-            trackingUrl = trackingUrl, dpdPostcode = dpdPostcode,
+            trackingUrl = trackingUrl, dpdPostcode = dpdPostcode, phoneDigits = phoneDigits,
         )
         parcels.value = parcels.value + parcel
         return parcel
@@ -677,7 +682,10 @@ class FakeDeliveries(
             onTheWayDefaults = onTheWayDefaults,
         )
 
-    /** What a carrier change sent: the parcel's id, the carrier, the link, the postcode and its country, and a provider's postcode. */
+    /**
+     * What a carrier change sent: the parcel's id, the carrier, the link, the postcode and its country, a provider's
+     * postcode and the phone digits.
+     */
     data class CarrierChangeRequest(
         val parcelId: UUID,
         val carrier: CarrierId,
@@ -685,9 +693,10 @@ class FakeDeliveries(
         val dpdPostcode: String?,
         val dpdPostcodeCountry: String?,
         val providerPostcode: String?,
+        val phoneDigits: String? = null,
     )
 
-    /** What an addition sent: the number, the name, the carrier, the link, the postcode and its country. */
+    /** What an addition sent: the number, the name, the carrier, the link, the postcode, its country and the phone digits. */
     data class AdditionRequest(
         val trackingNumber: String,
         val label: String,
@@ -695,6 +704,7 @@ class FakeDeliveries(
         val trackingUrl: String?,
         val dpdPostcode: String?,
         val dpdPostcodeCountry: String?,
+        val phoneDigits: String? = null,
     )
 
     private companion object {

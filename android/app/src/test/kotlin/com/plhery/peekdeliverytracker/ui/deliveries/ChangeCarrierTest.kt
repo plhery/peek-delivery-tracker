@@ -596,6 +596,31 @@ class ChangeCarrierTest {
         assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(chair.id, CarrierId.MondialRelay, null, "8001", "CH", null)), source.carrierRequests)
     }
 
+    /** J&T Express Mexico's digits start from the parcel's, stay through the window made again and are sent. */
+    @Test
+    fun thePhoneDigitsStartFromTheParcelsAndAreSentWithIt() {
+        val parcel = parcel(5, "Moon lamp", CarrierId.JAndTMx, "JMX000000000001").copy(phoneDigits = "0472")
+        val recreation = Recreation(compose)
+        show(list = parcels + parcel, recreation = recreation)
+        fromCard(parcel)
+        assertEquals("J&T Express Mexico", carrierRowValue())
+        assertEquals("0472", fieldText(CHANGE_CARRIER_PHONE_DIGITS))
+        node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
+        // Digits only, four at most.
+        node(CHANGE_CARRIER_PHONE_DIGITS).performTextReplacement("04 739")
+        compose.waitForIdle()
+        assertEquals("0473", fieldText(CHANGE_CARRIER_PHONE_DIGITS))
+        recreation.recreate()
+        settle()
+        assertEquals("0473", fieldText(CHANGE_CARRIER_PHONE_DIGITS))
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.CarrierChangeRequest(parcel.id, CarrierId.JAndTMx, null, null, null, null, phoneDigits = "0473")),
+            source.carrierRequests,
+        )
+    }
+
     @Test
     fun anotherCarrierAndItsFieldsStayThroughTheWindowMadeAgain() {
         val recreation = Recreation(compose)

@@ -308,13 +308,14 @@ class DeliveryApiClient(
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         providerPostcode: String? = null,
+        phoneDigits: String? = null,
     ): ChangePackageCarrierResponse = request(
         "/api/packages/${id.uuidString}/carrier", ChangePackageCarrierResponse.serializer(), "PATCH",
         encode(
             ChangePackageCarrierRequest.serializer(),
             ChangePackageCarrierRequest(
                 carrier = carrier, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode,
-                dpdPostcodeCountry = dpdPostcodeCountry, providerPostcode = providerPostcode,
+                dpdPostcodeCountry = dpdPostcodeCountry, phoneDigits = phoneDigits, providerPostcode = providerPostcode,
             ),
         ),
     )

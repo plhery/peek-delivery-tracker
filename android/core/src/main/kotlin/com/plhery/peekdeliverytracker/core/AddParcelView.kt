@@ -91,7 +91,7 @@ data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = f
 /**
  * What the Add sheet (`AddParcelView`) holds and works out from it: the field's text, the number chosen among several,
  * the carrier picked by hand, the number added as typed despite its check digit, the carrier check's answers, the
- * Amazon number's verification, the link and the postcode typed and the postcode's country chosen. The view's own
+ * Amazon number's verification, the link, the postcode and the phone digits typed, and the postcode's country chosen. The view's own
  * state (focus, saving, the error) is the app's; this is its arithmetic, with [region] the phone's country
  * (`CarrierCatalog.deviceCountry()`).
  */
@@ -110,12 +110,14 @@ data class ParcelAddition(
     val deliveryPostcode: String = "",
     /** The delivery country chosen beside the postcode, kept for each carrier whose field takes it. */
     val chosenPostcodeCountry: String? = null,
+    /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
+    val phoneDigits: String = "",
     val demo: Boolean = false,
     val catalog: CarrierCatalog = CarrierCatalog.shared,
     val region: String? = CarrierCatalog.deviceCountry(),
 ) {
     /** The fields `submitTracking()` moves the focus between (`Field`). */
-    enum class Field { Label, Tracking, TrackingUrl, DeliveryPostcode }
+    enum class Field { Label, Tracking, TrackingUrl, DeliveryPostcode, PhoneDigits }
 
     val cleanedInput: String get() = trackingInput.trimmingWhitespacesAndNewlines()
 
@@ -359,10 +361,14 @@ data class ParcelAddition(
     val postcodeRequirement: CarrierRequirement?
         get() = requirements.firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
 
+    /** The phone digits' field: the carrier shows the parcel's scans only with the last 4 digits of a phone. */
+    val phoneDigitsRequirement: CarrierRequirement?
+        get() = requirements.firstOrNull { it.field == CarrierRequirement.Field.PhoneDigits }
+
     /** The link's field shows: the carrier needs one, and the text had none. */
     val asksTrackingUrl: Boolean get() = trackingUrlRequirement != null && parsed.trackingUrl == null
 
-    val needsRequiredDetails: Boolean get() = asksTrackingUrl || postcodeRequirement != null
+    val needsRequiredDetails: Boolean get() = asksTrackingUrl || postcodeRequirement != null || phoneDigitsRequirement != null
 
     /** The postcode field's example: the country's beside it where the field names one, else the reader's. */
     fun postcodeExample(requirement: CarrierRequirement): String? =
@@ -391,19 +397,25 @@ data class ParcelAddition(
                         if (!requirement.accepts(value) || url == null || url.scheme != "https" || url.host == null) return false
                     }
                     CarrierRequirement.Field.DpdPostcode -> if (!requirement.isSatisfied(deliveryPostcode)) return false
+                    CarrierRequirement.Field.PhoneDigits -> if (!requirement.isSatisfied(phoneDigits)) return false
                 }
             }
             return true
         }
 
-    /** Where Next in the tracking field goes: the link, then the postcode, while either still wants something, else the name. */
+    /**
+     * Where Next in the tracking field goes: the link, then the postcode, then the phone digits, while any still wants
+     * something, else the name.
+     */
     val nextField: Field
         get() {
             val urlRequirement = trackingUrlRequirement
             val postcode = postcodeRequirement
+            val digits = phoneDigitsRequirement
             return when {
                 urlRequirement != null && parsed.trackingUrl == null && !urlRequirement.accepts(trackingUrl) -> Field.TrackingUrl
                 postcode != null && !postcode.accepts(deliveryPostcode) -> Field.DeliveryPostcode
+                digits != null && !digits.accepts(phoneDigits) -> Field.PhoneDigits
                 else -> Field.Label
             }
         }
@@ -416,6 +428,9 @@ data class ParcelAddition(
 
     /** The country sent with the postcode: none without one, nor for the carrier's home country. */
     val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, sentPostcode, resolvedCarrier)
+
+    /** The phone digits `save()` sends: only while the carrier asks for them, and none when empty. */
+    val sentPhoneDigits: String? get() = phoneDigitsRequirement?.normalizedValue(phoneDigits)?.nonEmpty
 
     /** The last postcode given that fits the field, this carrier's first (`previousPostcode(for:requirement:)`). */
     fun previousPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): String? =

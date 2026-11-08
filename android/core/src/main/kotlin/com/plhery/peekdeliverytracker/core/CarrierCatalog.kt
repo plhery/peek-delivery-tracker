@@ -935,7 +935,7 @@ class CarrierCatalog private constructor(
          * decoded classes, so a file written by a build that did not know a catalog field has lost it. Bump
          * the name when one is added. */
         fun cacheFile(cachesDirectory: File): File =
-            File(File(cachesDirectory, "delivery-tracker"), "carrier-catalog-v6.json")
+            File(File(cachesDirectory, "delivery-tracker"), "carrier-catalog-v7.json")
 
         /** Carriers the detect route asks at once. */
         const val maximumRecognitions = 5

@@ -966,14 +966,17 @@ internal class DeliveriesState(
     }
 
     /**
-     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier, the link and the postcode it needs
-     * and the postcode's country, goes to the store, in the app's scope while Add waits, which a window made again still
+     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier, the link and the postcode it needs,
+     * the postcode's country and the phone digits its carrier asks for, goes to the store, in the app's scope while Add waits, which a window made again still
      * hears of ([PageWork.add], by the request's id).
      */
     fun saveAddition(request: AddRequest, form: ParcelAddition, label: String) {
         if (!form.canSave || addition?.id != request.id) return
         source.pageWork.add(request.id, source.scope, source::errorMessage) {
-            source.add(form.parsed.trackingNumber, label, form.resolvedCarrier, form.sentTrackingUrl, form.sentPostcode, form.sentPostcodeCountry).id
+            source.add(
+                form.parsed.trackingNumber, label, form.resolvedCarrier, form.sentTrackingUrl, form.sentPostcode, form.sentPostcodeCountry,
+                form.sentPhoneDigits,
+            ).id
         }
     }
 
@@ -1597,8 +1600,8 @@ internal class DeliveriesState(
     }
 
     /**
-     * The editor's Save (`save()`), for `change`: the carrier, the link and the postcode it needs, the postcode's
-     * country and a provider's postcode go to the store, in the app's scope while the editor waits, which a window made
+     * The editor's Save (`save()`), for `change`: the carrier, the link, the postcode and the phone digits it needs, the
+     * postcode's country and a provider's postcode go to the store, in the app's scope while the editor waits, which a window made
      * again still hears of ([PageWork], by the request's id). Saved, the editor closes ([leavePage]); failed, it says
      * why in its own words, as `localizer.errorMessage(error)` does, for another try.
      */
@@ -1608,7 +1611,7 @@ internal class DeliveriesState(
         source.pageWork.run(request.id, source.scope, source::errorMessage, cards = emptyList()) {
             source.changeCarrier(
                 parcel, change.selectedCarrier, change.sentTrackingUrl, change.sentPostcode, change.sentPostcodeCountry,
-                change.normalizedProviderPostcode,
+                change.normalizedProviderPostcode, change.sentPhoneDigits,
             )
         }
     }

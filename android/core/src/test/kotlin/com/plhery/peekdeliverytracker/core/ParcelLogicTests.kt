@@ -594,6 +594,70 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun asksForThePhoneDigitsACheckedParcelsCarrierShowsItsScansWith() {
+        val catalog = CarrierCatalog(CarrierCatalogTestFixtures.phoneDigitsCatalogData)
+        val json = """
+            {
+              "packages": [{
+                "id": "${UUID.randomUUID().uuidString}",
+                "tracking_number": "JMX000000000001",
+                "label": "Test parcel",
+                "carrier": "j-and-t-mx",
+                "created_at": "2026-11-01T10:00:00Z",
+                "last_synced_at": "2026-11-02T10:00:00Z",
+                "sync_status": "ok",
+                "phone_digits": null,
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcel = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages.first()
+        assertNull(parcel.phoneDigits)
+        assertTrue(parcel.showsMoreWithPhoneDigits(catalog))
+        assertFalse(parcel.showsMoreWithPostcode(catalog))
+
+        // Not with the digits, nor before its first check, once archived, delivered or returned, nor while the sync
+        // error asks for them already.
+        val given = ApiJson.decodeFromString(
+            PackageListResponse.serializer(), json.replace("\"phone_digits\": null", "\"phone_digits\": \"0472\""),
+        ).packages.first()
+        assertEquals("0472", given.phoneDigits)
+        assertFalse(given.showsMoreWithPhoneDigits(catalog))
+        assertFalse(parcel.copy(lastSyncedAt = null).showsMoreWithPhoneDigits(catalog))
+        assertFalse(parcel.copy(archivedAt = "2026-11-03T10:00:00Z").showsMoreWithPhoneDigits(catalog))
+        for (stage in listOf(TrackingStage.Delivered, TrackingStage.Returned)) {
+            val finished = parcel.copy(trackingEvents = listOf(event(parcel.id, stage, "2026-11-03T10:00:00Z")))
+            assertFalse(stage.rawValue, finished.showsMoreWithPhoneDigits(catalog))
+        }
+        val moving = parcel.copy(trackingEvents = listOf(event(parcel.id, TrackingStage.InTransit, "2026-11-03T10:00:00Z")))
+        assertTrue(moving.showsMoreWithPhoneDigits(catalog))
+        assertFalse(parcel.copy(syncError = "carrier:input_required").showsMoreWithPhoneDigits(catalog))
+        // A postcode asked for comes first.
+        val postcode = parcel.copy(
+            carrierData = CarrierData(routing = CarrierDataRouting(inputNeeded = CarrierInputNeeded(CarrierId.Dpd, CarrierInputNeededField.DpdPostcode))),
+        )
+        assertNotNull(postcode.inputNeededPrompt)
+        assertFalse(postcode.showsMoreWithPhoneDigits(catalog))
+        // A carrier that never reads them, and a parcel followed without an account, whose link never says if it has them.
+        assertFalse(parcel.copy(carrier = CarrierId.Dpd, trackingNumber = "06080000000002").showsMoreWithPhoneDigits(catalog))
+        assertFalse(parcel.showsMoreWithPhoneDigits(catalog, knowsInputs = false))
+    }
+
+    @Test
+    fun theDemoKeepsTheDigitsWithItsCarrierAndForgetsThemWithout() {
+        val repo = DemoRepository(MemoryDefaults(), language = { AppLanguage.En })
+        val added = repo.add(CreatePackageRequest(trackingNumber = "JMX000000000001", label = "", carrier = CarrierId.JAndTMx, phoneDigits = "0472"))
+        assertEquals("0472", added.phoneDigits)
+        val kept = repo.changeCarrier(
+            added.id, CarrierId.JAndTMx, trackingUrl = null, dpdPostcode = null, dpdPostcodeCountry = null, phoneDigits = "0473",
+        )
+        assertEquals("0473", kept.phoneDigits)
+        val cleared = repo.changeCarrier(added.id, CarrierId.JAndTCn, trackingUrl = null, dpdPostcode = null, dpdPostcodeCountry = null)
+        assertNull(cleared.phoneDigits)
+    }
+
+    @Test
     fun namesTheLikelyCarrierWhileNobodyAnsweredAndAsksToChooseAfterAWeek() {
         val packageId = UUID.randomUUID()
         val json = """

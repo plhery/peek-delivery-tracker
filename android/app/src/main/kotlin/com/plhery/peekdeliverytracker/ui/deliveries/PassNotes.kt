@@ -409,6 +409,7 @@ private const val COPIED_DURATION = 2_000L
 /** The test tags of the page's notes, its pickup card and its buttons. */
 const val PAGE_POSTCODE = "parcelPage.postcode"
 const val PAGE_POSTCODE_MORE = "parcelPage.postcodeMore"
+const val PAGE_PHONE_DIGITS_MORE = "parcelPage.phoneDigitsMore"
 const val PAGE_PICKUP = "parcelPage.pickup"
 const val PAGE_PICKUP_POINT = "parcelPage.pickupPoint"
 const val PAGE_PICKUP_DIRECTIONS = "parcelPage.pickupDirections"

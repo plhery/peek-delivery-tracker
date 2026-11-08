@@ -541,6 +541,53 @@ class AddParcelTest {
         assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", carrier, null, "1010", null)), source.additions)
     }
 
+    /** J&T Express Mexico shows its scans with the last 4 digits of a phone: an optional field, sent with the parcel. */
+    @Test
+    fun jAndTsNumberTakesTheLastFourDigitsOfAPhoneAndSendsThem() {
+        val number = "JMX000000000001"
+        show()
+        open()
+        type(number)
+        leave()
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        // An account keeps them with the parcel: no lock line.
+        assertFalse(exists(ADD_PHONE_DIGITS_PRIVATE))
+        val name = CarrierCatalog.shared.info(CarrierId.JAndTMx, AppLanguage.En).displayName
+        compose.onNode(hasText(text("add.requirement.phoneDigitsHelp", mapOf("carrier" to name)))).assertExists()
+        // Optional: Add saves without them, but not with three digits.
+        node(ADD_SAVE).assertIsEnabled()
+        node(ADD_PHONE_DIGITS).performTextInput("047")
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsNotEnabled()
+        // Digits only, four at most.
+        node(ADD_PHONE_DIGITS).performTextReplacement("04-729")
+        compose.waitForIdle()
+        assertEquals("0472", fieldText(ADD_PHONE_DIGITS))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.AdditionRequest(number, "", CarrierId.JAndTMx, null, null, null, phoneDigits = "0472")),
+            source.additions,
+        )
+    }
+
+    /** A parcel followed without an account: the digits go with its lookup alone, which the lock line says. */
+    @Test
+    fun aGuestIsToldTheDigitsStayPrivate() {
+        show { isGuest = true }
+        open()
+        type("JMX000000000001")
+        leave()
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        assertTrue(exists(ADD_PHONE_DIGITS_PRIVATE))
+        node(ADD_PHONE_DIGITS_PRIVATE).assert(hasText(text("door.phoneDigits.private")))
+        // Another carrier's number has no field.
+        type("1Z999AA10123456784")
+        leave()
+        assertFalse(exists(ADD_PHONE_DIGITS))
+        assertFalse(exists(ADD_PHONE_DIGITS_PRIVATE))
+    }
+
     @Test
     fun aCheckWithoutAnAnswerSaysItFailedAndIsNotAskedAgainForTheSameNumber() {
         val number = "12345478901"

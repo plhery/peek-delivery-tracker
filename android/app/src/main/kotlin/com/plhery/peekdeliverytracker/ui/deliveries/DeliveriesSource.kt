@@ -147,9 +147,10 @@ interface DeliveriesSource {
     suspend fun setEmailMuted(parcel: Parcel, muted: Boolean)
 
     /**
-     * `store.changeCarrier(_:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:providerPostcode:)`: moves the parcel to
-     * `carrier`, with the link and the postcode it needs, the postcode's country where it isn't the carrier's home, and
-     * the postcode a provider asked for. The page's switch to the carrier its number names sends none of them.
+     * `store.changeCarrier(_:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:phoneDigits:providerPostcode:)`: moves the
+     * parcel to `carrier`, with the link and the postcode it needs, the postcode's country where it isn't the carrier's
+     * home, the phone digits it shows the parcel with (none removes them), and the postcode a provider asked for. The
+     * page's switch to the carrier its number names sends none of them.
      */
     suspend fun changeCarrier(
         parcel: Parcel,
@@ -158,6 +159,7 @@ interface DeliveriesSource {
         dpdPostcode: String? = null,
         dpdPostcodeCountry: String? = null,
         providerPostcode: String? = null,
+        phoneDigits: String? = null,
     )
 
     /** `store.isDemo`: the demo's parcels, which no server is asked about. */
@@ -173,8 +175,8 @@ interface DeliveriesSource {
     val tracksWithoutAccount: Boolean
 
     /**
-     * `store.add(trackingNumber:label:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:)`: the parcel added, once
-     * [parcels] holds it.
+     * `store.add(trackingNumber:label:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:phoneDigits:)`: the parcel
+     * added, once [parcels] holds it.
      */
     suspend fun add(
         trackingNumber: String,
@@ -183,6 +185,7 @@ interface DeliveriesSource {
         trackingUrl: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
+        phoneDigits: String? = null,
     ): Parcel
 
     /**
@@ -470,7 +473,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         providerPostcode: String?,
-    ) = container.parcels.changeCarrier(parcel, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode)
+        phoneDigits: String?,
+    ) = container.parcels.changeCarrier(parcel, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode, phoneDigits)
 
     override val isDemo: Boolean get() = container.parcels.isDemo
 
@@ -485,7 +489,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         trackingUrl: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
-    ): Parcel = container.parcels.add(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry)
+        phoneDigits: String?,
+    ): Parcel = container.parcels.add(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, phoneDigits)
 
     override suspend fun detectCarrier(trackingNumber: String, typed: String?): CarrierDetectionResponse =
         container.parcels.detectCarrier(trackingNumber, typed)

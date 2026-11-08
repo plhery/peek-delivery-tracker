@@ -40,6 +40,23 @@ class ParcelAdditionTests {
     }
 
     @Test
+    fun jAndTsNumberShowsAnOptionalPhoneDigitsFieldSentOnlyWhenFilled() {
+        val form = addition("JMX000000000001", region = "MX")
+        assertEquals(CarrierId.JAndTMx, form.resolvedCarrier)
+        assertNotNull(form.phoneDigitsRequirement)
+        // Optional: the parcel is added without them.
+        assertTrue(form.canSave)
+        assertNull(form.sentPhoneDigits)
+        assertEquals("0472", form.copy(phoneDigits = " 04 72").sentPhoneDigits)
+        assertFalse(form.copy(phoneDigits = "47").canSave)
+        assertEquals(ParcelAddition.Field.PhoneDigits, form.copy(phoneDigits = "47").nextField)
+        // Another carrier's number has no such field, and nothing typed earlier is sent with it.
+        val ups = addition("1Z999AA10123456784").copy(phoneDigits = "0472")
+        assertNull(ups.phoneDigitsRequirement)
+        assertNull(ups.sentPhoneDigits)
+    }
+
+    @Test
     fun anEmptyOrUnreadableFieldAddsNothing() {
         val empty = addition("")
         assertFalse(empty.notFound)

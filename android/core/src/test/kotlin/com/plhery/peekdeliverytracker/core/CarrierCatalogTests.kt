@@ -15,6 +15,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingProviderCheckOutcome
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.bundledCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.futureCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.linkRulesCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.phoneDigitsCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.recognitionPatternCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.unknownChecksumCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.unreadableCarrierCatalogData
@@ -1901,6 +1902,69 @@ class CarrierCatalogTests {
         assertEquals("Future Express", catalog.info(CarrierId("future-express")).displayName)
         // DPD now asks for an input this build does not know.
         assertEquals(bundledName, catalog.info(CarrierId.Dpd).displayName)
+    }
+
+    @Test
+    fun jAndTAsksForTheLastFourDigitsOfAPhoneAsAnOptionalField() {
+        val catalog = CarrierCatalog(phoneDigitsCatalogData)
+        val requirements = catalog.requirements(CarrierId.JAndTMx, trackingNumber = "JMX000000000001")
+        assertEquals(listOf(CarrierRequirement.Field.PhoneDigits), requirements.map { it.field })
+        val digits = requirements.first()
+        assertTrue(digits.isOptional)
+        assertEquals(true, digits.showsMore)
+        assertEquals("numeric", digits.inputMode)
+        // Typed on the number keys and kept to four digits.
+        assertEquals("0472", digits.normalizedValue(" 04 72 9"))
+        assertTrue(digits.accepts("0472"))
+        assertFalse(digits.accepts("472"))
+        assertFalse(digits.accepts("04729"))
+        assertTrue("The parcel is saved without them", digits.isSatisfied(" "))
+        assertFalse(digits.isSatisfied("47"))
+        // No other carrier asks for them.
+        assertEquals(listOf(CarrierRequirement.Field.DpdPostcode), catalog.requirements(CarrierId.Dpd, trackingNumber = "06080000000002").map { it.field })
+    }
+
+    /** The catalog the app ships: J&T Express Mexico and China read, each with the digits as an optional field. */
+    @Test
+    fun theBundledCatalogReadsJAndTsPhoneDigits() {
+        for ((carrier, number) in listOf(CarrierId.JAndTMx to "JMX000000000001", CarrierId.JAndTCn to "JT0000000000001")) {
+            val requirement = catalog.requirements(carrier, trackingNumber = number).single()
+            assertEquals(CarrierRequirement.Field.PhoneDigits, requirement.field)
+            assertTrue(requirement.isOptional)
+            assertEquals(true, requirement.showsMore)
+        }
+    }
+
+    /**
+     * A build before the field could not read J&T's definition, so it kept its old one beside the new ETag: the cache's
+     * name changed with the field, and a cache this build writes keeps it.
+     */
+    @Test
+    fun aCatalogWithThePhoneDigitsRefreshesAndIsCachedWithThem() = runTest {
+        val folder = File(System.getProperty("java.io.tmpdir"), "carrier-catalog-${UUID.randomUUID()}")
+        val cacheFile = CarrierCatalog.cacheFile(folder)
+        try {
+            assertEquals("carrier-catalog-v7.json", cacheFile.name)
+            val catalog = CarrierCatalog(
+                bundledCatalogData,
+                cacheFile = cacheFile,
+                loader = { CarrierCatalog.Response(200, headers = mapOf("ETag" to "\"digits-v1\""), body = phoneDigitsCatalogData) },
+            )
+
+            assertEquals(CarrierCatalogRefreshResult.Updated, catalog.refresh("https://delivery.example", force = true))
+            assertEquals(
+                listOf(CarrierRequirement.Field.PhoneDigits),
+                catalog.requirements(CarrierId.JAndTMx, trackingNumber = "JMX000000000001").map { it.field },
+            )
+
+            val cached = CarrierCatalog(cacheFile = cacheFile)
+            val requirement = cached.requirements(CarrierId.JAndTMx, trackingNumber = "JMX000000000001").single()
+            assertEquals(CarrierRequirement.Field.PhoneDigits, requirement.field)
+            assertTrue(requirement.isOptional)
+            assertEquals(true, requirement.showsMore)
+        } finally {
+            folder.deleteRecursively()
+        }
     }
 
     /**

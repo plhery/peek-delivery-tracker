@@ -541,8 +541,8 @@ class DeviceParcels(
             PublicLookupRequest(
                 trackingNumber = request.trackingNumber, carrier = request.carrier,
                 trackingUrl = request.trackingUrl, dpdPostcode = request.dpdPostcode,
-                dpdPostcodeCountry = request.dpdPostcodeCountry, lookupCountryHint = request.lookupCountryHint,
-                language = language().rawValue,
+                dpdPostcodeCountry = request.dpdPostcodeCountry, phoneDigits = request.phoneDigits,
+                lookupCountryHint = request.lookupCountryHint, language = language().rawValue,
             ),
         )
         if (!ParcelLinkRoute.validId(response.link.id)) throw DeliveryApiError.InvalidResponse()
@@ -576,6 +576,7 @@ class DeviceParcels(
         pendingForgets = pendingForgets.setting(entry.linkId, null)
         save()
         request.dpdPostcode?.let { postcodes.remember(it, request.carrier ?: response.parcel.carrier) }
+        // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return shown(entry)
     }
 
@@ -740,8 +741,18 @@ class DeviceParcels(
         }
     }
 
-    /** Follows the same number with another carrier, link or postcode: a new lookup, which takes the old one's place and name. */
-    suspend fun changeCarrier(id: UUID, carrier: CarrierId, trackingUrl: String?, dpdPostcode: String?, dpdPostcodeCountry: String? = null): Parcel {
+    /**
+     * Follows the same number with another carrier, link, postcode or phone digits: a new lookup, which takes the old
+     * one's place and name.
+     */
+    suspend fun changeCarrier(
+        id: UUID,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String? = null,
+        phoneDigits: String? = null,
+    ): Parcel {
         // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change.
         val entry = entries.firstOrNull { it.parcel.id == id }
         if (entry == null || entry.isViewer) throw DeliveryApiError.ParcelMissing()
@@ -749,7 +760,7 @@ class DeviceParcels(
             CreatePackageRequest(
                 trackingNumber = entry.parcel.trackingNumber, label = entry.label, carrier = carrier,
                 trackingUrl = trackingUrl, dpdPostcode = dpdPostcode, dpdPostcodeCountry = dpdPostcodeCountry,
-                lookupCountryHint = ParcelLookupCountry.hint(region()),
+                phoneDigits = phoneDigits, lookupCountryHint = ParcelLookupCountry.hint(region()),
             ),
             replacing = id,
         )

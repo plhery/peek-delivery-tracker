@@ -88,6 +88,7 @@ class DemoRepository(
             syncError = null,
             trackingUrl = request.trackingUrl,
             dpdPostcode = request.dpdPostcode,
+            phoneDigits = request.phoneDigits,
             carrierData = startingCarrierData(request.trackingNumber, postcode = request.dpdPostcode, country = request.dpdPostcodeCountry),
             archivedAt = null,
             notificationsMuted = false,
@@ -104,12 +105,20 @@ class DemoRepository(
     }
 
     /** The history stays, as the service keeps it and the sheet says, while the new carrier is checked. */
-    fun changeCarrier(id: UUID, carrier: CarrierId, trackingUrl: String?, dpdPostcode: String?, dpdPostcodeCountry: String?): Parcel =
+    fun changeCarrier(
+        id: UUID,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
+        phoneDigits: String? = null,
+    ): Parcel =
         update(id) { parcel ->
             parcel.copy(
                 carrier = carrier,
                 trackingUrl = trackingUrl,
                 dpdPostcode = dpdPostcode,
+                phoneDigits = phoneDigits,
                 expectedDelivery = null,
                 lastStatusText = null,
                 lastSyncedAt = null,

@@ -36,6 +36,43 @@ class CarrierChangeTests {
         CarrierChange.start(parcel, initial, catalog, region)
 
     @Test
+    fun phoneDigitsStartFromTheParcelOnItsOwnCarrierAndClearForAnother() {
+        val saved = parcel(CarrierId.JAndTMx, number = "JMX000000000001").copy(phoneDigits = "0472")
+        val own = start(saved)
+        assertEquals(CarrierId.JAndTMx, own.chosenCarrier)
+        assertEquals("0472", own.phoneDigits)
+        assertFalse(own.changed)
+        assertEquals("0472", own.sentPhoneDigits)
+        // New digits change the parcel; emptying the field sends none, which clears them.
+        val typed = own.copy(phoneDigits = " 04 73")
+        assertTrue(typed.changed)
+        assertTrue(typed.canSave)
+        assertEquals("0473", typed.sentPhoneDigits)
+        val emptied = own.copy(phoneDigits = "")
+        assertTrue(emptied.changed)
+        assertTrue(emptied.canSave)
+        assertNull(emptied.sentPhoneDigits)
+        // Three digits can't be the last four.
+        assertFalse(own.copy(phoneDigits = "047").canSave)
+
+        val other = own.choosing(CarrierId.JAndTCn)
+        assertEquals("", other.phoneDigits)
+        assertNull(other.sentPhoneDigits)
+        assertEquals("0472", other.choosing(CarrierId.JAndTMx).phoneDigits)
+        // A carrier without the field sends none, whatever was typed.
+        assertNull(start(saved, CarrierId.Dhl).copy(phoneDigits = "0472").sentPhoneDigits)
+        // A parcel followed without an account has no digits on the phone: its field starts empty.
+        assertEquals("", start(saved.copy(phoneDigits = null)).phoneDigits)
+    }
+
+    @Test
+    fun theFooterExplainsThePhoneDigitsForTheCarrierThatAsks() {
+        val change = start(parcel(CarrierId.JAndTMx, number = "JMX000000000001"))
+        assertEquals(localizer.text("add.requirement.phoneDigitsHelp", mapOf("carrier" to "J&T Express Mexico")), change.requirementsHelp(localizer))
+        assertNull(start(parcel(CarrierId.Ups, number = "1Z999AA10123456784")).requirementsHelp(localizer))
+    }
+
+    @Test
     fun anUnfiledParcelOnItsOwnCarrierStartsOnAutomaticDetectionButForAnAmazonNumber() {
         for (carrier in listOf(CarrierId.Unknown, CarrierId.InternationalPost)) {
             val change = start(parcel(carrier))

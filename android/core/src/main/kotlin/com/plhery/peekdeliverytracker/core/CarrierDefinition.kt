@@ -27,7 +27,10 @@ data class CarrierRequirement(
     @Serializable
     enum class Field(val rawValue: String) {
         @SerialName("trackingUrl") TrackingUrl("trackingUrl"),
-        @SerialName("dpdPostcode") DpdPostcode("dpdPostcode");
+        @SerialName("dpdPostcode") DpdPostcode("dpdPostcode"),
+
+        /** The last 4 digits of the recipient's or sender's phone, which J&T Express Mexico and China show a parcel with. */
+        @SerialName("phoneDigits") PhoneDigits("phoneDigits");
 
         companion object {
             fun fromRawValue(rawValue: String): Field? = entries.firstOrNull { it.rawValue == rawValue }

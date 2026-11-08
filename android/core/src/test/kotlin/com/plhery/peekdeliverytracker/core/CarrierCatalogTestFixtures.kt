@@ -208,4 +208,42 @@ internal object CarrierCatalogTestFixtures {
       }
     }
     """.trimIndent().toByteArray()
+
+    /**
+     * A catalog in which J&T Express Mexico asks for the last 4 digits of a phone as the scraper's catalog does, beside
+     * DPD's optional postcode (`PhoneDigitsCatalog`).
+     */
+    val phoneDigitsCatalogData: ByteArray = """
+    {
+      "x-carriers": {
+        "j-and-t-mx": {
+          "displayName": "J&T Express Mexico", "color": "#d6001c", "selectable": true, "timezone": "America/Mexico_City",
+          "countries": ["MX"],
+          "tracking": { "mode": "automatic", "adapter": "universal", "requirements": [{
+            "field": "phoneDigits", "validator": "phoneLastFour", "optional": true, "showsMore": true,
+            "label": "Last 4 digits of the phone number", "type": "text", "pattern": "^[0-9]{4}$", "maxLength": 4,
+            "inputMode": "numeric", "autoComplete": "off"
+          }] },
+          "linkRules": [],
+          "detectionRules": [{ "pattern": "^JMX\\d{12}$", "confidence": "high" }]
+        },
+        "dpd": {
+          "displayName": "DPD", "color": "#dc0032", "selectable": true, "timezone": "Europe/Zurich",
+          "countries": ["CH"],
+          "tracking": { "mode": "automatic", "adapter": "dpd", "requirements": [{
+            "field": "dpdPostcode", "validator": "internationalPostcode", "optional": true, "showsMore": true,
+            "label": "Delivery postcode", "type": "text", "maxLength": 12, "inputMode": "text"
+          }] },
+          "linkRules": [],
+          "detectionRules": [{ "pattern": "^0608\\d{10}$", "confidence": "high" }]
+        },
+        "unknown": {
+          "displayName": "Carrier", "color": "#8e8e93", "selectable": false, "timezone": "UTC",
+          "tracking": { "mode": "link-only", "adapter": null },
+          "linkRules": [],
+          "detectionRules": []
+        }
+      }
+    }
+    """.trimIndent().toByteArray()
 }

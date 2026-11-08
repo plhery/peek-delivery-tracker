@@ -82,6 +82,7 @@ import com.plhery.peekdeliverytracker.core.likelyCarrierPrompt
 import com.plhery.peekdeliverytracker.core.nonTrackingShape
 import com.plhery.peekdeliverytracker.core.refusedPostcode
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
+import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
@@ -136,11 +137,13 @@ internal class PassBell(
  *   TalkBack's way in.
  * - The carrier the app swapped from, and what the parcel's carrier needs (B-S73, B-S74) where it is the reader's to
  *   change. The name, which a tap renames (B-G01), beside the stamp; the sender and who delivers; the postcode the
- *   carrier refused or couldn't check (B-ST09), and that the carrier shows more with one; the status and its date;
+ *   carrier refused or couldn't check (B-ST09), and that the carrier shows more with one, or else with the last 4
+ *   digits of a phone; the status and its date;
  *   that the sender still has it; what the carrier waits on; that the scans are made up (B-ST11); the journey's steps.
  *
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
- * someone else's parcel followed through its link, and `working` a change being saved, which the bell waits for.
+ * someone else's parcel followed through its link, `guest` a parcel followed without an account, whose link never says
+ * whether its lookup had phone digits, and `working` a change being saved, which the bell waits for.
  * `onMap` opens the map, TalkBack going back to the given element once it closes, `onEditCarrier` the carrier
  * editor, on the carrier a prompt names, TalkBack going back to the mark or the button that opened it, `onRename`
  * the rename alert, TalkBack going back to the name, and `onShare` the share sheet, or the reader link's own share,
@@ -154,6 +157,7 @@ internal fun LivePassCard(
     readerLink: Boolean,
     bell: PassBell?,
     working: Boolean,
+    guest: Boolean = false,
     onMap: (AccessibilityFocus?) -> Unit,
     onEditCarrier: (initialCarrier: CarrierId?, focus: AccessibilityFocus?) -> Unit,
     onRename: (AccessibilityFocus?) -> Unit,
@@ -371,6 +375,12 @@ internal fun LivePassCard(
                     localizer.text("detail.postcodeShowsMore", mapOf("carrier" to identities.displayName(parcel.carrier, language))),
                     localizer.text("detail.inputNeededAction"),
                     Modifier.testTag(PAGE_POSTCODE_MORE),
+                ) { onEditCarrier(null, it) }
+            } else if (editable && parcel.showsMoreWithPhoneDigits(identities.catalog, knowsInputs = !guest)) {
+                PostcodeNote(
+                    localizer.text("detail.phoneDigitsShowsMore", mapOf("carrier" to identities.displayName(parcel.carrier, language))),
+                    localizer.text("detail.phoneDigitsAction"),
+                    Modifier.testTag(PAGE_PHONE_DIGITS_MORE),
                 ) { onEditCarrier(null, it) }
             }
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {

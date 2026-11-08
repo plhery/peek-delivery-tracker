@@ -714,6 +714,7 @@ class ParcelStore(
         trackingUrl: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String? = null,
+        phoneDigits: String? = null,
     ): Parcel {
         val generation = session.generation
         val request = CreatePackageRequest(
@@ -723,6 +724,7 @@ class ParcelStore(
             trackingUrl = trackingUrl?.trimmingWhitespacesAndNewlines()?.nonEmpty,
             dpdPostcode = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty,
             dpdPostcodeCountry = dpdPostcodeCountry,
+            phoneDigits = phoneDigits?.trimmingWhitespacesAndNewlines()?.nonEmpty,
             lookupCountryHint = ParcelLookupCountry.hint(region()),
         )
         val parcel: Parcel
@@ -931,23 +933,26 @@ class ParcelStore(
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         providerPostcode: String? = null,
+        phoneDigits: String? = null,
     ) {
         val generation = session.generation
         val cleanedUrl = trackingUrl?.trimmingWhitespacesAndNewlines()?.nonEmpty
         val cleanedPostcode = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty
+        // None sent removes the ones the parcel had.
+        val cleanedDigits = phoneDigits?.trimmingWhitespacesAndNewlines()?.nonEmpty
         val updated: Parcel
         if (isDemo) {
-            updated = demo.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry)
+            updated = demo.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, cleanedDigits)
         } else if (isGuest) {
             // A new lookup takes the old one's place, under a new id.
-            device.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry)
+            device.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, cleanedDigits)
             session.checkGeneration(generation)
             mutationRevision += 1
             parcels = device.list()
             beginDevicePolling()
             return
         } else {
-            val response = api.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, providerPostcode)
+            val response = api.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, providerPostcode, cleanedDigits)
             updated = response.parcel
             session.checkGeneration(generation)
             monitorJobs(response.jobIds)

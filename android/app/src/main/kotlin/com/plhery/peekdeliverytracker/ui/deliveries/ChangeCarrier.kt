@@ -153,7 +153,7 @@ internal fun CarrierEditorHost(state: DeliveriesState) {
 
 /**
  * What the carrier editor holds (`ChangeCarrierView`'s `@State`): the carrier chosen, null for automatic detection, the
- * link and the postcodes typed, the postcode's country chosen, whether the picker is pushed, the detent asked for, and
+ * link, the postcodes and the phone digits typed, the postcode's country chosen, whether the picker is pushed, the detent asked for, and
  * whether the carrier asked for something when last seen ([roomy]), which took the sheet to the large detent.
  */
 @Stable
@@ -166,18 +166,20 @@ internal class CarrierEditorForm(
     pushed: Boolean,
     large: Boolean,
     roomy: Boolean = large,
+    phoneDigits: String = "",
 ) {
     var chosenCarrier by mutableStateOf(chosenCarrier)
     var trackingUrl by mutableStateOf(trackingUrl)
     var deliveryPostcode by mutableStateOf(deliveryPostcode)
     var chosenPostcodeCountry by mutableStateOf(chosenPostcodeCountry)
     var providerPostcode by mutableStateOf(providerPostcode)
+    var phoneDigits by mutableStateOf(phoneDigits)
     var pushed by mutableStateOf(pushed)
     var large by mutableStateOf(large)
     var roomy = roomy
 
     fun change(parcel: Parcel, catalog: CarrierCatalog, region: String?) = CarrierChange(
-        parcel, chosenCarrier, trackingUrl, deliveryPostcode, chosenPostcodeCountry, providerPostcode, catalog, region,
+        parcel, chosenCarrier, trackingUrl, deliveryPostcode, chosenPostcodeCountry, phoneDigits, providerPostcode, catalog, region,
     )
 
     /** Takes what `change` holds, as another carrier chosen leaves it ([CarrierChange.choosing]). */
@@ -187,6 +189,7 @@ internal class CarrierEditorForm(
         deliveryPostcode = change.deliveryPostcode
         chosenPostcodeCountry = change.chosenPostcodeCountry
         providerPostcode = change.providerPostcode
+        phoneDigits = change.phoneDigits
     }
 
     companion object {
@@ -196,7 +199,7 @@ internal class CarrierEditorForm(
             val change = CarrierChange.start(parcel, request.initialCarrier, catalog, region)
             return CarrierEditorForm(
                 change.chosenCarrier, change.trackingUrl, change.deliveryPostcode, null, "",
-                pushed = false, large = change.requirements.isNotEmpty(),
+                pushed = false, large = change.requirements.isNotEmpty(), phoneDigits = change.phoneDigits,
             )
         }
 
@@ -204,14 +207,14 @@ internal class CarrierEditorForm(
             save = {
                 listOf(
                     it.chosenCarrier?.rawValue.orEmpty(), it.trackingUrl, it.deliveryPostcode, it.chosenPostcodeCountry.orEmpty(),
-                    it.providerPostcode, it.pushed, it.large, it.roomy,
+                    it.providerPostcode, it.pushed, it.large, it.roomy, it.phoneDigits,
                 )
             },
             restore = {
                 CarrierEditorForm(
                     (it[0] as String).ifEmpty { null }?.let(::CarrierId), it[1] as String, it[2] as String,
                     (it[3] as String).ifEmpty { null }, it[4] as String, it[5] as Boolean, it[6] as Boolean,
-                    it[7] as Boolean,
+                    it[7] as Boolean, it[8] as String,
                 )
             },
         )
@@ -304,7 +307,6 @@ private fun ChangeCarrierForm(
     onPush: () -> Unit,
 ) {
     val localizer = LocalLocalizer.current
-    val language = LocalLanguage.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val parcel = change.parcel
@@ -320,7 +322,6 @@ private fun ChangeCarrierForm(
         refusedQuestion = if (NumberRefusals.refuses(asked) { state.source.numberRefusal(it) }) asked else null
     }
     val refused = question != null && refusedQuestion == question
-    val carrierName = catalog.info(change.selectedCarrier, language).displayName
     SheetPage(
         title = localized("detail.changeCarrier"),
         confirmation = localized(if (saving) "detail.changingCarrier" else "detail.saveCarrier"),
@@ -356,11 +357,7 @@ private fun ChangeCarrierForm(
         }
         val requirements = change.requirements
         if (requirements.isNotEmpty()) {
-            val optional = change.postcodeRequirement?.isOptional == true
-            FormSection(
-                null,
-                footer = if (optional) localizer.text(catalog.optionalPostcodeHelpKey(change.selectedCarrier), mapOf("carrier" to carrierName)) else null,
-            ) {
+            FormSection(null, footer = change.requirementsHelp(localizer)) {
                 for (requirement in requirements) {
                     when (requirement.field) {
                         CarrierRequirement.Field.TrackingUrl -> FormRowFrame(Modifier) {
@@ -385,6 +382,24 @@ private fun ChangeCarrierForm(
                                     keyboardType = postcodeKeyboard(change.postcodeKeys(requirement)),
                                 ),
                                 postalCode = true,
+                            )
+                            if (requirement.isOptional) {
+                                Text(
+                                    localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryLabel,
+                                    style = type.caption.sfLines(),
+                                )
+                            }
+                        }
+                        // Number keys, and no autofill hint: nothing on the phone fills in these digits.
+                        CarrierRequirement.Field.PhoneDigits -> FormRowFrame(Modifier) {
+                            CarrierField(
+                                form.phoneDigits, { form.phoneDigits = requirement.normalizedValue(it) },
+                                localized("add.requirement.phoneDigits"), CHANGE_CARRIER_PHONE_DIGITS,
+                                KeyboardOptions(
+                                    KeyboardCapitalization.None, autoCorrectEnabled = false,
+                                    keyboardType = if (requirement.inputMode == "numeric") KeyboardType.Number else KeyboardType.Ascii,
+                                ),
+                                monospacedDigits = true,
                             )
                             if (requirement.isOptional) {
                                 Text(
@@ -485,9 +500,11 @@ private fun androidx.compose.foundation.layout.RowScope.CarrierField(
     keyboard: KeyboardOptions,
     singleLine: Boolean = true,
     postalCode: Boolean = false,
+    monospacedDigits: Boolean = false,
 ) {
     val colors = PeekTheme.colors
-    val font = PeekTheme.type.body.sfLines()
+    val base = PeekTheme.type.body.sfLines()
+    val font = if (monospacedDigits) base.copy(fontFeatureSettings = "tnum") else base
     NoSuggestions {
         BasicTextField(
             value,
@@ -664,6 +681,7 @@ internal const val CHANGE_CARRIER_REFUSED = "changeCarrier.refused"
 internal const val CHANGE_CARRIER_HINT = "changeCarrier.hint"
 internal const val CHANGE_CARRIER_URL = "changeCarrier.trackingUrl"
 internal const val CHANGE_CARRIER_POSTCODE = "changeCarrier.postcode"
+internal const val CHANGE_CARRIER_PHONE_DIGITS = "changeCarrier.phoneDigits"
 internal const val CHANGE_CARRIER_COUNTRY = "changeCarrier.country"
 internal const val CHANGE_CARRIER_PROVIDER_POSTCODE = "changeCarrier.providerPostcode"
 internal const val CHANGE_CARRIER_ERROR = "changeCarrier.error"

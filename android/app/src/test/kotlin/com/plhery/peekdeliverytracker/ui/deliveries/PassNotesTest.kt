@@ -59,6 +59,7 @@ import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.attention
+import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -180,6 +181,7 @@ class PassNotesTest {
     private var passParcel by mutableStateOf<Parcel?>(null)
     private var sample by mutableStateOf(false)
     private var readerLink by mutableStateOf(false)
+    private var guest by mutableStateOf(false)
 
     /** The carrier editor's requests the pass made, each with the carrier it starts on. */
     private val edits = mutableListOf<CarrierId?>()
@@ -192,7 +194,7 @@ class PassNotesTest {
             CardHost(reduceMotion = false) {
                 LivePassCard(
                     passParcel!!, WorldAtlases.loadedOrNull(), sample = sample, readerLink = readerLink, bell = null,
-                    working = false, onMap = {}, onEditCarrier = { carrier, _ -> edits += carrier }, onRename = {}, onShare = {},
+                    working = false, guest = guest, onMap = {}, onEditCarrier = { carrier, _ -> edits += carrier }, onRename = {}, onShare = {},
                 )
             }
         }
@@ -284,6 +286,39 @@ class PassNotesTest {
         passParcel = kit.copy(dpdPostcode = "0000")
         compose.waitForIdle()
         assertFalse(exists(PAGE_POSTCODE_MORE))
+    }
+
+    @Test
+    fun theReaderIsToldTheCarrierShowsItsScansWithThePhoneDigitsAndAskedForThem() {
+        val kit = DemoCards.parcel("Trail weekend kit").copy(
+            carrier = CarrierId.JAndTMx, trackingNumber = "JMX000000000001", dpdPostcode = null, phoneDigits = null,
+        )
+        assertTrue(kit.showsMoreWithPhoneDigits(CarrierCatalog.shared))
+        pass(kit)
+        val name = identities.displayName(CarrierId.JAndTMx, AppLanguage.En)
+        assertTrue(textExists(localizer.text("detail.phoneDigitsShowsMore", mapOf("carrier" to name))))
+        val action = localizer.text("detail.phoneDigitsAction")
+        compose.onNode(hasText(action) and hasClickAction() and hasAnyAncestor(hasTestTag(PAGE_PHONE_DIGITS_MORE))).performClick()
+        compose.waitForIdle()
+        assertEquals(listOf<CarrierId?>(null), edits)
+        assertFalse(exists(PAGE_POSTCODE_MORE))
+
+        // Not on a parcel followed without an account, whose link never says if it has them.
+        guest = true
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_PHONE_DIGITS_MORE))
+        guest = false
+        readerLink = true
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_PHONE_DIGITS_MORE))
+        readerLink = false
+        passParcel = kit.copy(archivedAt = archivedTime)
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_PHONE_DIGITS_MORE))
+        // Nor once given.
+        passParcel = kit.copy(phoneDigits = "0472")
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_PHONE_DIGITS_MORE))
     }
 
     /** Moon lamp, its scans made up: each a day and 11 s after the last, each in a new place. */

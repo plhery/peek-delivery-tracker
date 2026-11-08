@@ -171,6 +171,20 @@ fun Parcel.showsMoreWithPostcode(catalog: CarrierCatalog): Boolean {
         .any { it.field == CarrierRequirement.Field.DpdPostcode && it.showsMore == true }
 }
 
+/**
+ * Whether the parcel's carrier shows its own scans only with the last 4 digits of a phone it was saved without (J&T
+ * Express Mexico and China), once the parcel has been checked, unless the sync error already asks for them or the
+ * postcode is asked for instead. As the web's `phoneDigitsShowsMore`. `knowsInputs` is false for a parcel followed
+ * without an account: the service shows no lookup's digits through its link, so whether they were given is unknown
+ * there.
+ */
+fun Parcel.showsMoreWithPhoneDigits(catalog: CarrierCatalog, knowsInputs: Boolean = true): Boolean {
+    if (!knowsInputs || inputNeededPrompt != null || inputSuggestedPrompt != null || showsMoreWithPostcode(catalog) ||
+        phoneDigits?.nonEmpty != null || !isActive || lastSyncedAt == null || syncError == "carrier:input_required"
+    ) return false
+    return catalog.requirements(carrier, trackingNumber).any { it.field == CarrierRequirement.Field.PhoneDigits }
+}
+
 /** How long a carrier may go without listing a number of its own format before the reader is asked to check it, in seconds. */
 val Parcel.Companion.likelyCarrierWait: Double get() = 7 * 24 * 60 * 60.0
 

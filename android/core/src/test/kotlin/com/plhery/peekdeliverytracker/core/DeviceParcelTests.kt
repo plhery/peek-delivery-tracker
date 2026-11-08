@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.ChangePackageCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelResult
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelResultOutcome
@@ -85,15 +86,18 @@ class DeviceParcelTests {
         private val countryHints = mutableListOf<String?>()
         private val postcodes = mutableListOf<String?>()
         private val languages = mutableListOf<String?>()
+        private val digits = mutableListOf<String?>()
 
         fun add(call: String) = synchronized(this) { log += call }
         fun lookupCountry(hint: String?) = synchronized(this) { countryHints += hint }
         fun lookupPostcode(postcode: String?) = synchronized(this) { postcodes += postcode }
         fun lookupLanguage(language: String?) = synchronized(this) { languages += language }
+        fun lookupPhoneDigits(phoneDigits: String?) = synchronized(this) { digits += phoneDigits }
         val all: List<String> get() = synchronized(this) { log.toList() }
         val lookupCountries: List<String?> get() = synchronized(this) { countryHints.toList() }
         val lookupPostcodes: List<String?> get() = synchronized(this) { postcodes.toList() }
         val lookupLanguages: List<String?> get() = synchronized(this) { languages.toList() }
+        val lookupPhoneDigits: List<String?> get() = synchronized(this) { digits.toList() }
     }
 
     private val key = "k".repeat(43)
@@ -139,6 +143,7 @@ class DeviceParcelTests {
             calls.lookupCountry(request.lookupCountryHint)
             calls.lookupPostcode(request.dpdPostcode)
             calls.lookupLanguage(request.language)
+            calls.lookupPhoneDigits(request.phoneDigits)
             lookup ?: throw DeviceLookupsSpent()
         },
         read = { linkId, key ->
@@ -373,6 +378,76 @@ class DeviceParcelTests {
         }
         assertEquals(emptyList<String>(), calls.all)
         assertEquals(listOf(changing, other), device.list().map { it.id })
+    }
+
+    @Test
+    fun phoneDigitsGoInARequestOnlyWhenGiven() {
+        fun <T> body(serializer: SerializationStrategy<T>, request: T): JsonObject =
+            Json.parseToJsonElement(JsonEncoder.deliveryTracker.encode(serializer, request).decodeToString()).jsonObject
+        fun JsonObject.digits() = this["phoneDigits"]?.jsonPrimitive?.content
+        val number = "JMX000000000001"
+        val mx = CarrierId.JAndTMx
+        assertNull(body(CreatePackageRequest.serializer(), CreatePackageRequest(trackingNumber = number, carrier = mx)).digits())
+        assertEquals(
+            "0472",
+            body(CreatePackageRequest.serializer(), CreatePackageRequest(trackingNumber = number, carrier = mx, phoneDigits = "0472")).digits(),
+        )
+        assertNull(body(ChangePackageCarrierRequest.serializer(), ChangePackageCarrierRequest(carrier = mx)).digits())
+        assertEquals(
+            "0472",
+            body(ChangePackageCarrierRequest.serializer(), ChangePackageCarrierRequest(carrier = mx, phoneDigits = "0472")).digits(),
+        )
+        assertNull(body(PublicLookupRequest.serializer(), PublicLookupRequest(trackingNumber = number, carrier = mx)).digits())
+        assertEquals(
+            "0472",
+            body(PublicLookupRequest.serializer(), PublicLookupRequest(trackingNumber = number, carrier = mx, phoneDigits = "0472")).digits(),
+        )
+    }
+
+    @Test
+    fun aLookupGivesItsCarrierThePhoneDigitsAndThePhoneKeepsNone() = runTest {
+        val memory = PostcodeMemory(MemoryDefaults())
+        val storage = Memory()
+        val calls = Calls()
+        val found = PublicLookupResponse(
+            link = link("22222222222A"), key = key, parcel = pkg(UUID.randomUUID(), number = "JMX000000000001", carrier = CarrierId.JAndTMx),
+        )
+        val device = device(client(calls, lookup = found), storage, this, postcodes = memory)
+
+        val parcel = device.add(CreatePackageRequest(trackingNumber = "JMX000000000001", carrier = CarrierId.JAndTMx, phoneDigits = "0472"))
+
+        assertEquals(listOf<String?>("0472"), calls.lookupPhoneDigits)
+        // The link never shows them, and the phone keeps none: not with the parcel, nor for the next one's field.
+        assertNull(parcel.phoneDigits)
+        val stored = JsonEncoder.deliveryTracker.encode(ListSerializer(DeviceParcel.serializer()), storage.parcels).decodeToString()
+        assertFalse(stored.contains("0472"))
+        assertEquals(emptyList<GivenPostcode>(), memory.entries)
+    }
+
+    @Test
+    fun changingTheCarrierOfAParcelFollowedHereSendsTheDigitsGivenForIt() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Moon lamp", previousId, pkg = pkg(previousId, number = "JMX000000000001")))
+        val calls = Calls()
+        val device = device(
+            client(
+                calls,
+                lookup = PublicLookupResponse(
+                    link = link("22222222222B"), key = key, parcel = pkg(nextId, number = "JMX000000000001", carrier = CarrierId.JAndTMx),
+                ),
+            ),
+            storage, this,
+        )
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.JAndTMx, trackingUrl = null, dpdPostcode = null, phoneDigits = "0472")
+
+        assertEquals(nextId, parcel.id)
+        assertEquals("Moon lamp", parcel.label)
+        assertEquals(listOf<String?>("0472"), calls.lookupPhoneDigits)
+        assertEquals(listOf("lookup JMX000000000001 j-and-t-mx", "forget 22222222222A"), calls.all)
     }
 
     @Test

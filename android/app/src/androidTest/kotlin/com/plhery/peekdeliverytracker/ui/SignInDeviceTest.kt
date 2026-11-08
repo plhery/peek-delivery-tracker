@@ -454,9 +454,14 @@ class SignInDeviceTest {
         assertTypingIn(EMAIL_FIELD)
         assumeTrue("A keyboard on the screen", keyboardShown())
         val keyboard = windowKeyboard()
+        // The window makes room for the keyboard, as the app's does (adjustResize), and doesn't pan its views up.
+        assertEquals(0, onUi { IntArray(2).also { compose.activity.window.decorView.getLocationInWindow(it) }[1] })
         val from = touches.point(EMAIL_FIELD, y = 0f) - Offset(0f, 8 * compose.density.density)
+        mark("drag from $from")
         touches.drag(from, Offset(0f, keyboard * 0.8f), steps = 30)
-        compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() }
+        mark("lifted")
+        runCatching { compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() } }
+            .onFailure { fail("The keyboard still up: ${layoutNow()}. Events: ${events.joinToString()}") }
         awaitStill()
         assertTrue(exists(EMAIL_FIELD))
         shots.take("C-G06-sign-in-keyboard-down")

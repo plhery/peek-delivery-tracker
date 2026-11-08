@@ -21,10 +21,15 @@ import androidx.test.platform.app.InstrumentationRegistry
 internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
 
-    /** Where the window's top-left corner stands on the screen. */
+    /**
+     * Where the window's top-left corner stands on the screen, as Compose's own window position: a window the keyboard
+     * pans moves its views up in it, which their bounds in the window already count.
+     */
     fun origin(): Offset = compose.runOnUiThread {
-        val at = IntArray(2).also { compose.activity.window.decorView.getLocationOnScreen(it) }
-        Offset(at[0].toFloat(), at[1].toFloat())
+        val decor = compose.activity.window.decorView
+        val screen = IntArray(2).also { decor.getLocationOnScreen(it) }
+        val window = IntArray(2).also { decor.getLocationInWindow(it) }
+        Offset((screen[0] - window[0]).toFloat(), (screen[1] - window[1]).toFloat())
     }
 
     /** The first node `matcher` finds, unmerged. */

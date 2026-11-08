@@ -956,6 +956,11 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   it blocks. That second answer counts as a rate limit, not as the parcel's lack of history:
   the provider rests 30 minutes, and one such answer within 30 minutes of the pause ending
   rests it again.
+- a budget of answers without history for a provider that refuses an address after too many
+  of them ([providerMisses.ts](../src/server/providerMisses.ts)): ParcelsApp, 30 in 30
+  minutes, counted across syncs and Add lookups. Once spent, checks nobody asked for stop
+  asking it about numbers it has not tracked and go on to the next provider, with no failure
+  for the parcel to wait out; numbers it tracked, Add and checks someone asked for still ask it.
 
 If coordination fails, universal calls fail closed. A failed completion write never throws
 away data already retrieved.
@@ -964,8 +969,8 @@ away data already retrieved.
 
 Each routing decision is a `tracking_routing` log line with its `decision`, `carrier`,
 `provider`, `category` and the check's `attempt_id`, and a breadcrumb on any later Sentry
-report. Only `health_store_unavailable` and `provider_blocked` open a Sentry issue
-(`component:tracking-routing`, grouped by decision, provider and category). The four signals
+report. Only `health_store_unavailable`, `provider_blocked` and `provider_budget_spent` open a
+Sentry issue (`component:tracking-routing`, grouped by decision, provider and category). The four signals
 are what the catalog, detection or the adapters could act on: each check saves them for the
 hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 
@@ -974,6 +979,8 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded; not after a step that answered |
 | `provider_failed` | A provider failed for a parcel: `category` `rate_limited` needs less traffic, `schema` parser work, `invalid_input` a number the source refuses |
 | `provider_blocked` | A provider refuses this server whatever it is asked, and rests 30 minutes (Shared provider protection). A Sentry event for each pause |
+| `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection). A Sentry event at most once in 30 minutes |
+| `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |

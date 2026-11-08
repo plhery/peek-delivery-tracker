@@ -17,6 +17,7 @@ import { errorType, reportRoutingEvent } from './observability';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { BLOCK_PAUSE_MS, type ProviderRefusals } from './providerRefusals';
+import type { ProviderMisses } from './providerMisses';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
@@ -718,6 +719,8 @@ export class TrackingRouter {
     hourlyUntil?: number;
     /** Universal providers' "no history" answers for numbers they tracked, across checks; without it, no block is found. */
     refusals?: ProviderRefusals;
+    /** Universal providers' answers without history, across checks; without it, no provider's budget is spent. */
+    misses?: ProviderMisses;
     now?: () => Date;
     /** Waits out a provider's spacing; tests replace the timer. */
     wait?: (ms: number, signal?: AbortSignal) => Promise<unknown>;
@@ -1551,6 +1554,12 @@ export class TrackingRouter {
         }
       }
       const reused = this.options.reusedUniversal?.(source, universalNumber, providerPostcode, zone, askedCarrier);
+      const tracked = state.preferred_provider === source && state.preferred_number === universalNumber;
+      // A check nobody asked for leaves a provider that spent its budget of answers without history
+      // (providerMisses.ts) to the numbers it tracked: it asks the next provider, as after a cooldown.
+      if (!reused && scheduled && !tracked && this.options.misses?.spent(source, now().getTime())) {
+        report('provider_budget_held', source); return null;
+      }
       const acquire = async () => {
         try { return await this.options.health.acquireTrackingProvider(source); }
         catch {
@@ -1607,7 +1616,7 @@ export class TrackingRouter {
         // The provider this number was tracked through finds no history for it. With another number
         // it tracked soon after, it refuses this server whatever it is asked (providerRefusals.ts):
         // it rests as on a rate limit, and the answer is no lack of history for this parcel.
-        const blocked = token !== null && !answered && state.preferred_provider === source && state.preferred_number === universalNumber
+        const blocked = token !== null && !answered && tracked
           && (caught instanceof NoHistoryError || carrierErrorKind(caught) === 'not_found')
           && this.options.refusals?.refused(source, universalNumber, now().getTime()) === true;
         if (blocked) report('provider_blocked', source, 'rate_limited', caught);
@@ -1618,6 +1627,10 @@ export class TrackingRouter {
         const failure = fail(source, error, true);
         kind = failure.kind;
         if (kind === 'not_found' || kind === 'no_history') answeredEmpty.push(source);
+        // The provider's own answer without history counts against its budget; a reused one counted for the check that asked.
+        if (token && !answered && (kind === 'not_found' || kind === 'no_history') && this.options.misses?.missed(source, now().getTime())) {
+          report('provider_budget_spent', source, kind);
+        }
         retryAfterMs = millis(failure.retry_at) - now().getTime();
         if (kind === 'rate_limited' && recent() && !localDirectFallback && !partialDirect) {
           state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS));

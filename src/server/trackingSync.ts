@@ -26,6 +26,7 @@ import type { StepRecorder } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry, hostAdapterEnvironment } from './adapterRegistry';
 import { normalizedLookupCountry } from './lookupCountry';
 import { preflightInputNeeded, takePreflightHistory } from './trackingPreflight';
+import { providerMisses } from './providerMisses';
 import { providerRefusals } from './providerRefusals';
 import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
@@ -1988,7 +1989,7 @@ export class TrackingSyncService {
               () => this.adapter.fetchUniversal!(source, number, timeout, postcode, timezone, carrier)),
             ...(checks ? { reusedUniversal: (source: UniversalSource, number: string, postcode: string | null, timezone: string | null, carrier: string | null) =>
               checks.reuse<CarrierResult>(universalLookupKey(source, number, postcode, timezone, carrier)) } : {}),
-            health: this.client, now: this.now, refusals: providerRefusals,
+            health: this.client, now: this.now, refusals: providerRefusals, misses: providerMisses,
             ...(unseen !== null ? { hourlyUntil: now.getTime() - unseen + UNSEEN_HOURLY_MS } : {}),
             takePrefetchedUniversal: takePreflightHistory, preflightInputNeeded, refuses: refusesNumber,
             ...(this.adapter.plannedScans ? { plannedScans: (carrier: string) => this.adapter.plannedScans!(carrier) } : {}),

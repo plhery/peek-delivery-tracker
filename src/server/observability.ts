@@ -580,7 +580,7 @@ function applyUpstreamHttpContext(scope: Sentry.Scope, metadata: OperationalErro
  * that it has no history for the number yet is an answer about the parcel.
  */
 function warnsOf(code: string, category: string | undefined): boolean {
-  return code === 'transport_fallback' || code === 'provider_blocked' || (code === 'provider_failed' && category !== 'no_history');
+  return code === 'transport_fallback' || code === 'provider_blocked' || code === 'provider_budget_spent' || (code === 'provider_failed' && category !== 'no_history');
 }
 
 /**
@@ -593,7 +593,7 @@ function routingSignal(code: string, category: string | undefined): code is Rout
 
 /**
  * Every routing decision is a log line and a breadcrumb. A routing signal also goes
- * to the check that reported it; only a failed coordination store or a blocked provider opens an issue.
+ * to the check that reported it; only a failed coordination store, or a provider blocked or near it, opens an issue.
  */
 export function reportRoutingEvent(code: string, context: {
   carrier: string; provider: string; category?: string; trackingNumber?: string; errorClass?: string; error?: unknown;
@@ -633,8 +633,9 @@ export function reportRoutingEvent(code: string, context: {
       scope.setLevel('warning');
       // Failures for one parcel, recoveries and routing signals stay in logs and
       // breadcrumbs; signals also go to the review queues. A provider refusing every
-      // number is no one parcel's failure: each pause it starts is an event.
-      if (code === 'provider_blocked') Sentry.captureMessage(`Tracking routing: ${code}`);
+      // number, or near refusing, is no one parcel's failure: each pause it starts, and
+      // each budget it spends, is an event.
+      if (code === 'provider_blocked' || code === 'provider_budget_spent') Sentry.captureMessage(`Tracking routing: ${code}`);
       else if (code === 'health_store_unavailable') {
         const message = `Tracking routing: ${code}`;
         if (context.error !== undefined) {

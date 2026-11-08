@@ -8,6 +8,8 @@ import { foreignHistory, plausibleInputRequest, type ProviderHealth } from './tr
 import type { ApiCarrierId } from '../generated/apiContract';
 import { providerCarrier } from './providerCarrier';
 import { refusesNumber } from './numberRefusal';
+import { reportRoutingEvent } from './observability';
+import { providerMisses } from './providerMisses';
 
 export type PreflightOutcome = { provider: UniversalSource; outcome: 'history' | 'no_history' | 'input_required' | 'unavailable' | 'deferred' };
 const BUDGET_MS = 8_000;
@@ -85,6 +87,10 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
     catch { return settled.signal.aborted ? null : { provider, outcome: 'unavailable' }; }
     if (!lease.token) return { provider, outcome: 'deferred' };
     const started = performance.now();
+    // An answer without history counts against the provider's budget, as on a sync (providerMisses.ts), which an Add never waits for.
+    const missed = () => {
+      if (providerMisses.missed(provider, Date.now())) reportRoutingEvent('provider_budget_spent', { carrier: 'unknown', provider, category: 'no_history' });
+    };
     let retryAfterMs = 0;
     let kind: Parameters<ProviderHealth['finishTrackingProvider']>[2] = null;
     try {
@@ -97,7 +103,7 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
       const result = normalizeCarrierResult(await withinSignal(fetching, bounded));
       bounded.throwIfAborted();
       if (!result.events?.length && (!result.status || ['unknown', 'pending'].includes(result.status))) {
-        kind = 'not_found'; return { provider, outcome: 'no_history' };
+        kind = 'not_found'; missed(); return { provider, outcome: 'no_history' };
       }
       // A reused number's earlier parcel is no history for the one being added, as on a sync.
       if (foreignHistory(result, 'unknown', new Date().toISOString(), number)) { kind = 'not_found'; return { provider, outcome: 'no_history' }; }
@@ -117,7 +123,7 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
       // A refused number is an answer about this number too: it has no history there, asking again cannot change
       // that, and it keeps the provider's circuit closed.
       if (failure === 'not_found' || failure === 'indeterminate' || failure === 'invalid_input') {
-        kind = 'not_found'; return { provider, outcome: 'no_history' };
+        kind = 'not_found'; missed(); return { provider, outcome: 'no_history' };
       }
       kind = failure === 'rate_limited' ? 'rate_limited'
         : failure === 'challenge' ? 'verification' : failure === 'schema' ? 'schema' : 'transport';

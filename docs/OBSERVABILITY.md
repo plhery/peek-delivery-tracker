@@ -669,8 +669,8 @@ Key JSON events:
   so addresses lose their query and number-like path segments, and every word of six
   letters and digits or more with a digit reads as its shape (`[LX + 9 digits + PL]`),
   except a universal provider's name (`17TRACK`, `Ship24`), which stays to search by.
-  A `tracking_routing` line is a warning for `transport_fallback`, `provider_blocked` and
-  `provider_failed`, except a provider's `no_history` answer, which is info. One with an error has its
+  A `tracking_routing` line is a warning for `transport_fallback`, `provider_blocked`,
+  `provider_budget_spent` and `provider_failed`, except a provider's `no_history` answer, which is info. One with an error has its
   `error_type` and, when the carrier gave one, its `error_reason` (such as `parcel_found`
   or `postcode_mismatch`), read through the error's causes and kept only when it reads as
   a code;

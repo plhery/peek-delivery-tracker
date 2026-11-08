@@ -14,6 +14,7 @@ import { recognitionAskedCarriers } from '../lib/carriers';
 import { healthStepRecorder, observeTrackingHealth, type HealthSample } from './trackingHealth';
 import { RoyalBrowserPaused } from './royalBrowserAdmission';
 import { ProviderRefusals } from './providerRefusals';
+import { ProviderMisses } from './providerMisses';
 
 // Keep the published plan configurable without changing the scraper's other exports.
 vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
@@ -3737,5 +3738,41 @@ describe('a provider refusing numbers it tracked', () => {
     for (const number of ['TEST1234', 'TEST5678', 'TEST9012']) await router.fetch(parcel({ id: number, tracking_number: number }), false);
     expect(parcelsApp(health).map(([kind]) => kind)).toEqual(['not_found', 'not_found', 'not_found']);
     expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_blocked', expect.anything());
+  });
+});
+
+describe('a provider’s budget of answers without history', () => {
+  const missing = () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const value = setup(time, { misses: new ProviderMisses({ ParcelsApp: 2 }) });
+    value.universal.mockImplementation(async (source: string) => {
+      if (source === 'ParcelsApp') throw new NoHistoryError(source, 'ParcelsApp has no usable shipment history');
+      return { ...history(), tracking_provider: source };
+    });
+    return value;
+  };
+  const asked = (universal: ReturnType<typeof setup>['universal']) => universal.mock.calls.map(([source]) => source);
+
+  it('leaves the provider to the numbers it tracked on checks nobody asked for once spent', async () => {
+    const { router, universal, health } = missing();
+    for (const number of ['TEST1234', 'TEST5678']) await router.fetch(parcel({ id: number, tracking_number: number }), true);
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_budget_spent', expect.objectContaining({ provider: 'ParcelsApp', category: 'no_history' }));
+    universal.mockClear(); health.acquireTrackingProvider.mockClear();
+    const held = await router.fetch(parcel({ id: 'held', tracking_number: 'TEST9012' }), true);
+    expect(asked(universal)).toEqual(['Ship24']);
+    expect(health.acquireTrackingProvider).not.toHaveBeenCalledWith('ParcelsApp');
+    // Held back, the provider has no failure for the parcel to wait out.
+    expect(held.result).toMatchObject({ tracking_provider: 'Ship24' });
+    expect((held.result.routing as JsonObject).failures).not.toHaveProperty('ParcelsApp');
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_budget_held', expect.objectContaining({ provider: 'ParcelsApp' }));
+  });
+  it('still asks the provider for a number it tracked, and on a check someone asked for', async () => {
+    const { router, universal } = missing();
+    for (const number of ['TEST1234', 'TEST5678']) await router.fetch(parcel({ id: number, tracking_number: number }), true);
+    universal.mockClear();
+    await router.fetch(parcel({ id: 'TEST9012', tracking_number: 'TEST9012', carrier_data: { routing: state({
+      preferred_provider: 'ParcelsApp', preferred_number: 'TEST9012', last_success_at: '2026-09-10T09:00:00Z' }) } }), true);
+    await router.fetch(parcel({ id: 'TEST3456', tracking_number: 'TEST3456' }), false);
+    expect(asked(universal)).toEqual(['ParcelsApp', 'Ship24', 'ParcelsApp', 'Ship24']);
   });
 });

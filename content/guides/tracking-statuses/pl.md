@@ -74,7 +74,7 @@ Zwykle tak, ale przewoźnicy ujmują to różnie:
 
 Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
 
-[Peek](/) sprawdza paczkę nawet co 2 minuty w dniu doręczenia (gdy jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane, PostNL i USPS; co 10 minut GOFO). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+[Peek](/) sprawdza paczkę nawet co 2 minuty w dniu doręczenia (gdy jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane, PostNL, USPS i GOFO). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 ## Awizo i nieudana próba doręczenia: co teraz?
 

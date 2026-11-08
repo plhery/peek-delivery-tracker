@@ -4,7 +4,7 @@ description: «In attesa di sdoganamento» o fermo da settimane? Cosa vuol dire,
 slug: pacco-fermo-in-dogana
 picture: Una cabina della dogana con la sbarra a strisce, un documento timbrato con una spunta e Pip che aspetta paziente davanti alla sbarra.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-11-04
 ---
 
 «Fermo in dogana» di solito vuol dire che il tuo pacco sta passando il controllo di routine previsto per la merce che arriva da fuori UE (in Ticino, da qualsiasi Paese estero), non che è stato sequestrato. Se resta fermo a lungo, forse il corriere aspetta che tu paghi dazio e IVA o che gli mandi una fattura. Per saperlo apri tu il sito o l'app del corriere, mai il link di un SMS.

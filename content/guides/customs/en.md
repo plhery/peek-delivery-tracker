@@ -4,7 +4,7 @@ description: What "held at customs" means, how long it can last, what you pay in
 slug: parcel-held-at-customs
 picture: A customs booth with a striped barrier, a stamped document with a tick, and Pip waiting patiently before the barrier.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-06
 ---
 
 "Held at customs" usually means your parcel (or package) is in the routine import check for goods from abroad, not that it was seized. If it stays held, the carrier may be waiting for you to pay a charge or send an invoice. Check the carrier's own website or app, never a link in a text.

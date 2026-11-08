@@ -47,6 +47,7 @@ Die Seite von JS Express listet jeden Scan mit Datum und Uhrzeit, einem Ort in �
 | `collection by overseas warehouse` | Das Lager von JS Express in deinem Land hat das Paket nach dem Zoll übernommen. | „Unterwegs“ |
 | `Load cargo overseas`, `Vehicles depart from` | Dieses Lager verlädt das Paket für den Zusteller, dann fährt der Lkw ab; der Ort steht beim Scan. | „Unterwegs“ |
 | `Delivery to local courier`, `Last Mile Delivery` | Übergabe an den Paketdienst, der in deinem Land zustellt, noch vor dessen erstem Scan. Bei dir ist das Paket noch nicht. | „Unterwegs“ |
+| `Delivery in progress` | Auf manchen Strecken: Der Paketdienst in deinem Land hat das Paket, nachdem es in seiner Station angekommen ist, und noch vor jeder Zustellrunde. Trotz des Wortlauts ist es noch nicht in Zustellung. | „Unterwegs“ |
 | `到达待取` | Ein eigener Status von JS Express auf Chinesisch: angekommen, wartet auf Abholung. Als Ort steht nur das Land da. | „Abholbereit“ |
 | `The delivery address is incorrect. Please ask the recipient to contact their local area?` | Eine eigene Meldung von JS Express nach einem gescheiterten Zustellversuch: Die Adresse ist unklar oder falsch. Du sollst dich bei der Stelle vor Ort melden, deren Telefonnummer auf der Seite von JS Express steht; Peek lässt Telefonnummern weg. | „Zustellversuch“ |
 

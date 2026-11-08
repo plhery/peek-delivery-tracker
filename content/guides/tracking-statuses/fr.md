@@ -4,7 +4,7 @@ description: Ce que veut dire chaque étape du suivi d'un colis, de « pris en c
 slug: etapes-suivi-colis-signification
 picture: Une route sinueuse aux étapes cochées (étiquette, dépôt, avion), une camionnette à l'étape en cours, une maison plus loin et Pip qui file.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-08
 ---
 
 Un statut de suivi résume en quelques mots le dernier scan du transporteur, et la plupart ne te demandent rien. « En préparation chez l'expéditeur » veut dire que le transporteur n'a pas encore ton colis, « en cours d'acheminement » qu'il est quelque part entre deux scans, et « en cours de livraison » qu'il est dans la camionnette du jour. Seuls quelques-uns demandent une action de ta part : un avis de passage, un colis en instance, des frais de douane, ou un « livré » alors que rien n'est arrivé.
@@ -36,6 +36,28 @@ Mêmes étapes, autres mots. Pour [Mondial Relay](carrier:mondial-relay), ce son
 | En cours de livraison | `Colis en route vers le point de livraison` (vers le Point Relais, pas chez toi) | `L'envoi a été trié en vue de sa Distribution` (encore au centre de tri) |
 | En instance | `Disponible dans votre Point Relais` | `Arrivée à l'office de retrait / à l'office de distribution` |
 | Livré | `Remis au destinataire` | `Distribué par` |
+
+## Que veulent dire les statuts de Colissimo, Chronopost, DPD, Colis Privé et Mondial Relay ?
+
+Voici des libellés de chacun et l'étape qu'affiche Peek (chez Colis Privé, des bouts de phrase).
+
+| Peek affiche | Ce que tu lis |
+| --- | --- |
+| Étiquette créée | Chronopost : `Colis en cours de préparation chez l'expéditeur`. Colis Privé : `information transmise par l'expéditeur` |
+| Pris en charge | Chronopost : `Colis déposé par l'expéditeur`. Mondial Relay : `Colis pris en charge en Locker` |
+| En transit | Chronopost : `Colis en cours d'acheminement`. Colis Privé : `pris en charge` |
+| En livraison | Chronopost : `Colis en cours de livraison par le livreur`. Colis Privé : `en cours de distribution par le livreur` |
+| Tentative de livraison | Colissimo : `nous n'avons pu vous remettre votre colis` (la phrase nomme ensuite le point de retrait). Chronopost : `Colis non livré : client absent`. Colis Privé : `nous avons tenté de livrer`. Mondial Relay : `Échec de livraison` |
+| Prêt à être retiré | Chronopost : `Colis mis à disposition au point de retrait`. Colis Privé : `vous attend au relais`. Mondial Relay : `Disponible dans votre locker` |
+| Livré | Chronopost : `Colis remis au destinataire au point de retrait`. Colis Privé : `a été livré`. Mondial Relay : `Retiré par le destinataire` |
+| Problème signalé | Chronopost : `Colis en attente d'informations complémentaires de votre part` (à toi d'agir), `Remise du colis annulée par l'expéditeur`. Colis Privé : `adresse incorrecte`. Mondial Relay : `Colis refusé` |
+| Retourné à l’expéditeur | Colis Privé : `retourné à l'expéditeur`. Mondial Relay : `Retour en cours` |
+
+Chez Chronopost, `Colis retardé durant l'acheminement` et `Livraison reportée` restent « En transit » : le colis repart seul. `Destinataire informé par SMS ou mail` et `Instruction de livraison reçue` (ta consigne) ne sont pas des scans : Peek garde l'étape d'avant.
+
+Chez Mondial Relay, `Sollicitation Client pour replace colis` : le Point Relais n'a pas pu prendre le colis, il faut en choisir un autre. `Colis en route vers le point de livraison` reste « En transit » vers un Point Relais, mais devient « En livraison » à domicile.
+
+Chez DPD France, l'avis du jour par SMS et e-mail (… `de la livraison de son colis ce jour`) donne « En livraison » ; l'avis de prise en charge (… `de la prise en charge de son colis`) ne change pas l'étape.
 
 ## « En préparation chez l'expéditeur » ou « étiquette créée » : le colis est-il parti ?
 
@@ -111,7 +133,7 @@ Sur le suivi en anglais de [Planzer](carrier:planzer), qui sert aussi aux colis 
 
 Non. Chez UPS, `Exception` est le statut générique, et il peut ne signaler qu'un simple retard : lis le scan en dessous.
 
-Chez La Poste, Peek affiche « Problème signalé » quand le scan parle d'incident, d'anomalie, d'avarie, de colis endommagé ou refusé, ou d'adresse incorrecte. Et `Erreur d'acheminement` (La Poste suisse) signale un envoi parti au mauvais endroit, par exemple à cause d'un NPA (code postal) erroné : il est réacheminé, avec un retard possible.
+Chez La Poste, Peek affiche « Problème signalé » quand le scan parle d'incident, d'anomalie, d'avarie, de colis endommagé ou refusé, ou d'adresse incorrecte ou incomplète. Et `Erreur d'acheminement` (La Poste suisse) signale un envoi parti au mauvais endroit, par exemple à cause d'un NPA (code postal) erroné : il est réacheminé, avec un retard possible.
 
 Regarde de plus près quand le problème touche l'adresse, comme `Tentative de distribution, adresse incorrecte` à La Poste suisse : chez La Poste aussi, le suivi cite l'adresse incorrecte parmi les raisons d'un retour.
 
@@ -120,21 +142,23 @@ Regarde de plus près quand le problème touche l'adresse, comme `Tentative de d
 Les raisons que donnent les transporteurs : colis non retiré à temps, adresse incorrecte, destinataire introuvable ou déménagé, refus, documents d'importation non conformes. Certains retours ne se reconnaissent pas au premier coup d'œil :
 
 - **Mondial Relay :** en Belgique, un colis non retiré dans le délai repart automatiquement vers l'expéditeur.
-- **Chronopost :** `Colis en retour expéditeur` ouvre le retour ; si le suivi affiche ensuite `Livraison effectuée`, c'est l'expéditeur qui a reçu le colis.
+- **Chronopost :** `Colis en retour expéditeur` ouvre le retour ; si le suivi affiche ensuite `Livraison effectuée`, c'est l'expéditeur qui a reçu le colis. Dans Peek : « Problème signalé », puis « Retourné à l’expéditeur ».
 - **La Poste suisse :** `Renvoi`, avec le motif : `Envoi non retiré`, `Refusé`, `Destinataire introuvable à l'adresse indiquée` ou `Destinataire a déménagé, délai de réexpédition expiré`.
 
 Et ensuite ? Contacte l'expéditeur (le site marchand) pour [un nouvel envoi ou un remboursement](guide:returned-to-sender).
 
 :::sources
-- [Universal Parcel Scraper : La Poste / Colissimo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – tri pour la tournée, formalités d'import/export, partenaire à l'étranger, point de retrait, motifs de retour, ce que Peek signale
-- [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Livraison reportée de 24h », retour à l'expéditeur
+- [Universal Parcel Scraper : La Poste / Colissimo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – tri pour la tournée, formalités d'import/export, partenaire à l'étranger, point de retrait, motifs de retour, ce que Peek signale, échec de remise (lus le 8 novembre 2026)
+- [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Livraison reportée de 24h », retour à l'expéditeur, autres libellés, étape affichée (lus le 8 novembre 2026)
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – transporteurs imités, vrai suivi, 33700, abuse@chronopost.fr
 - [Colis Privé : suivre mon colis](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – colis attendu
 - [Colis Privé : avis de passage](https://colisprive.fr/aide/jai-eu-un-avis-de-passage/) – relais, seconde présentation
 - [Mondial Relay Belgique : délai moyen de livraison](https://www.mondialrelay.be/fr-be/faq/envoyer-un-colis/quel-est-le-delai-moyen-de-livraison/) – 3 jours ouvrés en Belgique, 3 à 6 à l'international
 - [Mondial Relay Belgique : délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, sans prolongation, retour à l'expéditeur
 - [Mondial Relay Belgique : retard de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – contact après le délai moyen
-- [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – libellés relevés dans des suivis
+- [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – libellés relevés dans des suivis, étape affichée (lus le 8 novembre 2026)
+- [Universal Parcel Scraper : Colis Privé](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/colis-prive/statuses.json) – libellés, étape affichée (lus le 8 novembre 2026)
+- [Universal Parcel Scraper : DPD France](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/dpd-fr/statuses.json) – avis du jour et de prise en charge (lus le 8 novembre 2026)
 - [bpost : colis « en préparation »](https://www.bpost.be/fr/faq/mon-colis-reste-en-preparation-quest-ce-que-cela-signifie-et-que-puis-je-faire) – deux sens, 5 jours
 - [bpost : Point d'enlèvement](https://www.bpost.be/fr/faq/combien-de-temps-mon-colis-reste-t-il-disponible-au-point-denlevement) – 14 et 5 jours
 - [bpost : pas d'avis de passage](https://www.bpost.be/fr/faq/je-nai-pas-recu-davis-de-passage-ou-et-comment-puis-je-recuperer-mon-colis) – avis papier, statut

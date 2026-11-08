@@ -145,7 +145,7 @@ In Österreich gibt dir MediaMarkt ebenfalls 30 Tage, neben dem gesetzlichen Rü
 
 Ja, mit der Sendungsnummer des Paketdienstes. Kopiere sie aus der Sendungsverfolgung und füge sie in [Peek](/) ein. Hermes-Nummern aus `H` und 16 bis 19 Ziffern erkennt Peek allein an der Form, ebenso die meisten DHL-Nummern aus `JJD` und 18 Ziffern, Nummern der Österreichischen Post aus zwei Buchstaben, 9 Ziffern und `AT` und Nummern der Schweizerischen Post aus 18 Ziffern ab `98` oder `99`. Bei einer Form, die sich mehrere Dienste teilen, etwa 14 Ziffern bei Hermes und DPD, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, lässt Peek dich wählen; zeigt es den falschen, tippst du auf „Ändern“ und wählst den Paketdienst aus der Versandbestätigung.
 
-Nummern von GLS Austria und dem Hermes Einrichtungs-Service erkennt Peek nie allein: Wähl den Dienst mit „Ändern“. Nikos, ZAC, Power Service und die Fahrer von Uber und Wolt kennt Peek nicht, für sie bleibt der Link aus der E-Mail oder SMS.
+Nummern von GLS Austria und dem Hermes Einrichtungs-Service haben Formen, die auch andere Dienste nutzen: Passt eine Nummer dazu, fragt Peek auch bei ihnen nach (GLS Austria nur aus Österreich). Zeigt Peek einen anderen Dienst oder keinen, wähl den richtigen mit „Ändern“. Nikos, ZAC, Power Service und die Fahrer von Uber und Wolt kennt Peek nicht, für sie bleibt der Link aus der E-Mail oder SMS.
 
 Peek zeigt, was der Paketdienst veröffentlicht. Erstattungen, Retouren und Abholtermine bleiben in deinem MediaMarkt-Konto.
 

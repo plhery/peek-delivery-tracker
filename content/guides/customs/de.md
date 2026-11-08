@@ -4,7 +4,7 @@ description: Dein Paket hängt im Zoll? Was der Status bedeutet, wie lange die A
 slug: paket-beim-zoll-dauer-kosten
 picture: Ein Zollhäuschen mit gestreifter Schranke, ein abgestempeltes Dokument mit Häkchen und Pip, der geduldig vor der Schranke wartet.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-11-04
 ---
 
 „Paket beim Zoll“ heißt meistens: Dein Paket steckt in der ganz normalen Einfuhrkontrolle für Waren aus dem Ausland. Beschlagnahmt ist es deshalb nicht. Bleibt es dort hängen, wartet der Paketdienst oft darauf, dass du Einfuhrabgaben zahlst oder eine Rechnung nachreichst. Schau auf der Website oder in der App des Paketdienstes nach, nie über einen Link aus einer SMS.

@@ -4,7 +4,7 @@ description: Colis retenu en douane : ce que ça veut dire, combien de temps ça
 slug: colis-bloque-en-douane
 picture: Un poste de douane avec une barrière rayée, un document tamponné et coché, et Pip qui attend sagement devant la barrière.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-04
 ---
 
 « Bloqué en douane » veut le plus souvent dire que ton colis passe les formalités habituelles d'importation, pas qu'il a été saisi. S'il reste bloqué, le transporteur attend peut-être que tu paies des frais ou que tu envoies une facture. Vérifie sur son site ou son app, en tapant toi-même l'adresse, jamais en suivant un lien reçu par SMS.

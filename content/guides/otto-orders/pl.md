@@ -146,7 +146,7 @@ Zwrot zgłaszasz w „Mein Konto” i dostajesz etykietę jako kod QR albo PDF. 
 
 Tak, numerem przesyłki przewoźnika. Skopiuj go z „Sendungsverfolgung” w „Mein Konto” i wklej do [Peek](/). Numery Hermesa z `H` i 16–19 cyframi Peek rozpoznaje po samym kształcie, podobnie jak większość numerów DHL z `JJD` i 18 cyframi oraz numery UPS z `1Z` i 16 znakami. Gdy kilka firm ma numery tego samego kształtu, jak 14 cyfr u Hermesa i DPD albo 12 cyfr u DHL i GLS, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, prosi cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz przewoźnika, którego podaje OTTO.
 
-Jeśli Hermes przywozi ci towar gabarytowy w dwie osoby, wybierz przez „Zmień” Hermes Einrichtungs-Service: jego numerów Peek nigdy nie rozpozna sam. Każda paczka ma własny numer, więc dodaj każdą. Własne numery OTTO, jak numer klienta, nie są numerami przesyłki i Peek ich nie śledzi.
+Jeśli Hermes przywozi ci towar gabarytowy w dwie osoby, numer należy do Hermes Einrichtungs-Service. Inni przewoźnicy używają takich samych formatów numerów, więc w zależności od numeru Peek pyta o niego Hermes Einrichtungs-Service i innych przewoźników; jeśli Peek pokaże innego przewoźnika albo żadnego, wybierz przez „Zmień” Hermes Einrichtungs-Service. Każda paczka ma własny numer, więc dodaj każdą. Własne numery OTTO, jak numer klienta, nie są numerami przesyłki i Peek ich nie śledzi.
 
 Peek pokazuje to, co publikuje przewoźnik. Zwroty pieniędzy, OTTO Versprechen i zwroty towaru zostają w twoim koncie OTTO.
 

@@ -4,7 +4,7 @@ description: O que significa uma encomenda retida na alfândega, quanto tempo de
 slug: encomenda-retida-na-alfandega
 picture: Uma cabine de alfândega com uma cancela às riscas, um documento carimbado com um visto e o Pip à espera, paciente, diante da cancela.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-11-04
 ---
 
 «Retida na alfândega» quer quase sempre dizer que a tua encomenda está no controlo normal das mercadorias que chegam de fora da União Europeia, e não que foi apreendida. Se continuar retida, a transportadora pode estar à espera de que pagues os encargos ou envies uma fatura: nos [CTT](carrier:ctt), isso trata-se no Portal de Desalfandegamento. Confirma sempre no site ou na app da transportadora, nunca num link recebido por SMS.

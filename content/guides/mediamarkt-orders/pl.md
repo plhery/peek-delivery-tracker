@@ -131,7 +131,7 @@ Gdzie jest numer zwrotu i kiedy wrócą pieniądze: [śledzenie zwrotów](guide:
 
 Tak, numerem przesyłki. Skopiuj go z maila i wklej do [Peek](/). Peek sam rozpoznaje po kształcie numery DPD Polska z 13 cyframi i literą, a także link śledzenia z inpost.pl z numerem w adresie. Gdy kilka firm ma numery tego samego kształtu, jak 24 cyfry InPostu, bpost i Austrian Post albo 14 cyfr DPD, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz przewoźnika z maila MediaMarkt.
 
-Numerów Rabena Peek nie rozpoznaje po kształcie. Wklej cały link śledzenia z myraben.com albo naciśnij „Zmień” i wybierz Raben. Produkt od sprzedawcy Marketplace jedzie z kurierem, którego wybrał sprzedawca: Peek rozpozna przewoźnika spośród ponad 3500.
+Numer Rabena (15 cyfr zaczynających się od 27) może też należeć do BRT albo Yundy, więc Peek pyta prawdopodobnych przewoźników. Możesz też wkleić cały link śledzenia z myraben.com albo nacisnąć „Zmień” i wybrać Raben. Produkt od sprzedawcy Marketplace jedzie z kurierem, którego wybrał sprzedawca: Peek rozpozna przewoźnika spośród ponad 3500.
 
 - **Kilka paczek, kilka numerów.** Dodaj każdy: Peek śledzi każdą paczkę osobno.
 - **Numer zamówienia nie wystarczy.** Numer zamówienia MediaMarkt, zaczynający się od 2, nie jest numerem przesyłki.

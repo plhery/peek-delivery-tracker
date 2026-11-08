@@ -155,7 +155,7 @@ Yes, with the carrier's tracking number. Copy it from the tracking page and past
 
 When several carriers share a shape, such as 14 digits for Hermes, DPD and SEUR, Peek asks the likely carriers and shows the one that knows the number. If more than one does, Peek lets you choose. If it shows the wrong one, tap "Change" and pick the carrier from your shipping email.
 
-Peek never recognises GLS Austria or Hermes Einrichtungs-Service numbers on its own: pick the carrier with "Change". For Nikos, ZAC, Power Service, Uber, Wolt and Glovo, which Peek doesn't cover, use the link from the email or text.
+GLS Austria and Hermes Einrichtungs-Service numbers share their shapes with other carriers: when a number fits, Peek asks them too (GLS Austria only from Austria). If it shows another carrier or none, pick the right one with "Change". For Nikos, ZAC, Power Service, Uber, Wolt and Glovo, which Peek doesn't cover, use the link from the email or text.
 
 Peek shows what the carrier publishes. Refunds, returns and appointments stay in your MediaMarkt account.
 

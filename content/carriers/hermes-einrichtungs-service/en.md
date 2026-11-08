@@ -81,7 +81,7 @@ Hermes Germany sends no SMS, but HES does, so a text from HES can be genuine.
 
 ## Tracking Hermes Einrichtungs-Service with Peek
 
-[Peek](/) never picks HES from the number alone and can't ask HES whether it knows one. It may suggest another carrier (DHL eCommerce, Colis Privé, Poczta Polska, [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps)…): tap "Change" and choose Hermes Einrichtungs-Service, and the number is looked up on myhes.de, with no postcode needed. Paste the number, not a myhes.de link.
+HES's delivery-note numbers have lengths other carriers use too, so [Peek](/) asks HES, among others, whether it knows one, and follows the parcel on HES when it does; it doesn't ask HES about a piece number. If Peek shows another carrier (DHL eCommerce, Colis Privé, Poczta Polska, [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps)…) or none, tap "Change" and choose Hermes Einrichtungs-Service, and the number is looked up on myhes.de, with no postcode needed. Paste the number, not a myhes.de link.
 
 Peek shows the status and history in HES's German wording, the planned delivery day with its time window when myhes.de gives one, the shop or dealer that sold the goods and the time of delivery. HES gives no places, so nothing appears on the map, and the van's live tracking isn't shown. A cancelled or returned order shows as a problem. Your name, address and delivery instructions are left out, and times are read as German time.
 

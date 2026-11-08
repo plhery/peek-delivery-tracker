@@ -47,6 +47,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `collection by overseas warehouse` | JS Express's warehouse in your country has taken the parcel, after customs. | "In transit" |
 | `Load cargo overseas`, `Vehicles depart from` | That warehouse loads the parcel for the courier, then the truck leaves from the place shown with the scan. | "In transit" |
 | `Delivery to local courier`, `Last Mile Delivery` | Handed to the courier that delivers in your country, before its first scan. Not delivered to you yet. | "In transit" |
+| `Delivery in progress` | On some routes: the carrier in your country has the parcel, after it reached that carrier's station and before any delivery round. Despite the words, not out for delivery yet. | "In transit" |
 | `到达待取` | JS Express's own status, in Chinese: arrived, awaiting collection. Its place is only the country. | "Ready for pickup" |
 | `The delivery address is incorrect. Please ask the recipient to contact their local area?` | JS Express's own notice after the courier failed to deliver: the address is unclear or wrong. It asks you to contact the local office, whose phone number JS Express's page gives; Peek leaves phone numbers out. | "Delivery attempted" |
 

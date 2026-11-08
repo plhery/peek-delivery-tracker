@@ -146,7 +146,7 @@ Registri il reso in «Mein Konto» e ricevi l'etichetta come codice QR o PDF. È
 
 Sì, con il codice del corriere. Copialo dalla «Sendungsverfolgung» in «Mein Konto» e incollalo in [Peek](/). Peek riconosce dalla sola forma i codici Hermes con `H` e da 16 a 19 cifre, come anche la maggior parte dei codici DHL con `JJD` e 18 cifre e quelli UPS con `1Z` e 16 caratteri. Per una forma che hanno più corrieri, come le 14 cifre di Hermes e DPD o le 12 cifre di DHL e GLS, Peek chiede ai corrieri probabili e mostra quello che conosce il codice. Se lo conoscono in più di uno, ti chiede di scegliere; se mostra quello sbagliato, tocca «Cambia» e scegli il corriere indicato da OTTO.
 
-Se Hermes ti porta un articolo ingombrante in due, scegli Hermes Einrichtungs-Service con «Cambia»: Peek non riconosce mai da solo i suoi codici. Ogni pacco ha il suo codice, quindi aggiungili tutti. I numeri di OTTO, come il numero cliente, non sono codici di tracciamento, e Peek non può seguirli.
+Se Hermes ti porta un articolo ingombrante in due, il codice è di Hermes Einrichtungs-Service. Altri corrieri usano gli stessi formati di codice, quindi, a seconda del codice, Peek lo interroga insieme ad altri; se Peek mostra un altro corriere o nessuno, scegli Hermes Einrichtungs-Service con «Cambia». Ogni pacco ha il suo codice, quindi aggiungili tutti. I numeri di OTTO, come il numero cliente, non sono codici di tracciamento, e Peek non può seguirli.
 
 Peek mostra quello che pubblica il corriere. Rimborsi, OTTO Versprechen e resi restano nel tuo account OTTO.
 

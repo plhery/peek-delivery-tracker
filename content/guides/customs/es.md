@@ -4,7 +4,7 @@ description: Qué significa que un paquete esté retenido en aduanas, cuánto pu
 slug: paquete-retenido-en-aduanas
 picture: Una caseta de aduanas con una barrera a rayas, un documento con un sello redondo y una marca de verificación, y Pip esperando con paciencia ante la barrera.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-06
 ---
 
 «Retenido en aduanas» casi siempre significa que tu paquete está en el trámite normal que pasa todo lo que llega de fuera de la UE, no que te lo hayan incautado. Si no avanza, puede que el transportista esté esperando a que pagues el IVA y el arancel o a que le mandes la factura. Compruébalo en su web o en su app, nunca en un enlace que te llegue por SMS.

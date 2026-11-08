@@ -71,15 +71,15 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Accanto alla ricerca, nella sezione «In arrivo», ora c’è il pulsante «Ordina e filtra»: metti i tuoi pacchi in un altro ordine o filtrali per stato o corriere.
-• Siri e Comandi Rapidi, su iPhone, iPad e Mac: «Prossima consegna» ti dice quando arriva il tuo prossimo pacco e «Aggiungi un pacco» apre Peek con il numero di tracciamento già inserito, senza aggiungere nulla finché non confermi.
-• La cronologia di un pacco ora mostra i passaggi previsti dal suo corriere, in grigio sotto «Previsto dal corriere», separati dalle scansioni avvenute davvero.
-• Una volta iniziata una finestra di consegna di più giorni, schede e widget ora indicano «entro» il suo ultimo giorno, e una fascia oraria nello stesso giorno riporta quel giorno una sola volta.
-• Una notifica di consegna ora indica l’ora secondo l’orologio del tuo dispositivo: alcune mostravano un’ora sbagliata.
-• Uscire dall’account non disattiva più definitivamente le notifiche: rientra con lo stesso account e tornano da sole, mentre con un altro account Peek chiede prima. Se un’uscita precedente le aveva disattivate, tornano con questo aggiornamento, oppure Peek te lo chiede di nuovo.
-• Un pacco consegnato mentre non eri nell’elenco ora ha il suo momento «Consegnato» quando ci torni.
-• La modalità scura è più calda: marroni da carta kraft, bordi illuminati sui furgoni scuri, un francobollo color crema e una mappa dai toni caldi.
-• Accessibilità: più schermate si ingrandiscono fino alle dimensioni del testo più grandi, VoiceOver annuncia cosa cambia sullo schermo e permette di spostarsi tra le intestazioni, la funzione Controllo vocale risponde alle parole mostrate da ogni comando e i testi secondari hanno più contrasto.
+• Un pacco in consegna arriva oggi, quindi la sua scheda, il widget e l’Attività Live non indicano più un giorno: restano solo gli orari che il corriere dà per oggi.
+• Quando il corriere che consegnerà un pacco ne è stato avvisato ma non l’ha ancora scansionato, la scheda ora dice, per esempio, «Annunciato a DHL, non ancora ricevuto» invece di «Consegna con DHL».
+• Un pacco restituito al mittente ora rimane tale mentre il corriere lo scansiona durante il ritorno, invece di tornare «In transito».
+• Un luogo scritto in un altro alfabeto, per esempio in cinese, giapponese o coreano, ora mostra la sua città e il suo paese, come «Shenzhen, Cina», sia nelle scansioni sia nei passaggi previsti; e un luogo come «SCARBOROUGH - ON - CANADA» ora mostra il Canada e la sua bandiera.
+• Quando un corriere pubblica il tracciamento in anticipo, la pagina del pacco ora dice che Peek mostra le scansioni reali man mano che arrivano, e un passaggio previsto sparisce appena il suo orario è passato.
+• 72 corrieri in più ora hanno un furgone tutto loro, nei loro colori, e quando scegli un corriere, quelli del tuo paese vengono prima tra quelli compatibili con il numero.
+• Un numero di container marittimo ora viene riconosciuto: la pagina del pacco lo dice, indica dove trovare il numero di tracciamento e propone di scegliere il corriere.
 • In Messico e in Cina, J&T Express mostra le scansioni di un pacco con le ultime 4 cifre del telefono del destinatario o del mittente: ora puoi aggiungerle insieme al pacco o più tardi dalla sua pagina.
-• Nelle Impostazioni ora c’è la voce «Valuta Peek», se vuoi lasciare una recensione.
+• Quando accedi, se il tuo account non ha spazio per tutti i pacchi di questo dispositivo, Peek ora ti dice quanti ne sono rimasti sul dispositivo.
+• Senza account, un pacco cercato con un codice postale non lo richiede più, un pacco la cui copia salvata non è leggibile torna nell’elenco e dimenticare un pacco funziona subito, anche offline.
+• Aggiornando i pacchi non compare più «Nessun nuovo aggiornamento» accanto a un errore di connessione e alcuni passaggi di C Chez Vous ora appaiono nella tua lingua invece che in francese.
 ```

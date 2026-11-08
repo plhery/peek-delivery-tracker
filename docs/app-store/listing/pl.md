@@ -71,15 +71,15 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Obok wyszukiwania w sekcji „W drodze” jest teraz przycisk „Sortuj i filtruj”: ułóż przesyłki w innej kolejności albo pokaż tylko te o danym statusie lub od danego przewoźnika.
-• Siri i Skróty na iPhonie, iPadzie i Macu: „Najbliższa dostawa” mówi, kiedy dotrze Twoja najbliższa przesyłka, a „Dodaj przesyłkę” otwiera aplikację Peek z wpisanym już numerem śledzenia i niczego nie dodaje, dopóki nie potwierdzisz.
-• Historia śledzenia przesyłki pokazuje teraz kroki zaplanowane przez przewoźnika, wyszarzone pod nagłówkiem „Zaplanowane przez przewoźnika”, oddzielnie od faktycznych skanów.
-• Gdy zacznie się kilkudniowe okno dostawy, karty i widżety podają teraz „do” i jego ostatni dzień, a przedział godzin w obrębie jednego dnia wymienia ten dzień tylko raz.
-• Powiadomienie o doręczeniu podaje teraz godzinę według zegara Twojego urządzenia; niektóre pokazywały błędną godzinę.
-• Wylogowanie nie wyłącza już powiadomień na stałe: zaloguj się ponownie na to samo konto, a wrócą same; przy innym koncie Peek najpierw zapyta. Jeśli wcześniejsze wylogowanie je wyłączyło, wrócą z tą aktualizacją albo Peek zapyta Cię ponownie.
-• Przesyłka doręczona, gdy nie było Cię na liście, dostaje teraz swoją chwilę „Dostarczona”, kiedy wrócisz do listy.
-• Tryb ciemny jest cieplejszy: brązy papieru pakowego, podświetlone krawędzie ciemnych furgonetek, kremowy znaczek i mapa w ciepłych barwach.
-• Dostępność: więcej ekranów powiększa się aż do największych rozmiarów tekstu, VoiceOver odczytuje zmiany na ekranie i pozwala przechodzić między nagłówkami, funkcja Sterowanie głosowe reaguje na słowa widoczne na przyciskach, a tekst pomocniczy ma lepszy kontrast.
+• Przesyłka w doręczeniu dotrze dziś, więc jej karta, widżet i aktywność na żywo nie podają już dnia: zostają tylko godziny wskazane przez przewoźnika na dziś.
+• Gdy przewoźnik, który ma doręczyć przesyłkę, wie już o niej, ale jeszcze jej nie zeskanował, karta pokazuje teraz na przykład „Zgłoszona przewoźnikowi DHL, jeszcze nieprzyjęta” zamiast „Doręcza: DHL”.
+• Przesyłka zwrócona nadawcy zachowuje teraz status zwrotu, gdy przewoźnik skanuje ją w drodze powrotnej, i nie wraca już do statusu „W transporcie”.
+• Miejsce zapisane innym pismem, takim jak chińskie, japońskie czy koreańskie, pokazuje teraz miasto i kraj, np. „Shenzhen, Chiny”, zarówno w skanach, jak i w zaplanowanych krokach, a miejsce w rodzaju „SCARBOROUGH - ON - CANADA” pokazuje Kanadę i jej flagę.
+• Gdy przewoźnik publikuje historię przesyłki z wyprzedzeniem, strona przesyłki informuje teraz, że Peek pokazuje prawdziwe skany, gdy tylko się pojawią, a zaplanowany krok znika zaraz po tym, jak minie jego czas.
+• Kolejnych 72 przewoźników ma teraz własną furgonetkę w swoich barwach, a przy wyborze przewoźnika ci z Twojego kraju są na początku listy pasujących do numeru.
+• Numer kontenera morskiego jest teraz rozpoznawany: strona przesyłki wyjaśnia, co to jest i gdzie znaleźć numer śledzenia, oraz proponuje wybór przewoźnika.
 • W Meksyku i Chinach J&T Express pokazuje skany przesyłki z ostatnimi 4 cyframi telefonu odbiorcy lub nadawcy: możesz je teraz podać przy dodawaniu przesyłki albo później na jej stronie.
-• W Ustawieniach jest teraz wiersz „Oceń Peek”, jeśli chcesz zostawić recenzję.
+• Jeśli po zalogowaniu na koncie zabraknie miejsca na wszystkie przesyłki z tego urządzenia, Peek poda teraz, ile z nich zostało na urządzeniu.
+• Bez konta przesyłka wyszukana z kodem pocztowym nie prosi już ponownie o ten kod, przesyłka, której zapisanej kopii nie da się odczytać, wraca na listę, a zapomnienie przesyłki działa od razu, nawet offline.
+• Odświeżanie przesyłek nie pokazuje już „Brak nowych aktualizacji” obok błędu połączenia, a niektóre kroki C Chez Vous są teraz w Twoim języku zamiast po francusku.
 ```

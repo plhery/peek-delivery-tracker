@@ -71,15 +71,15 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Neben der Suche unter „Unterwegs“ gibt es jetzt die Taste „Sortieren & filtern“: Bring deine Pakete in eine andere Reihenfolge oder filtere sie nach Status oder Paketdienst.
-• Siri und Kurzbefehle auf iPhone, iPad und Mac: „Nächste Lieferung“ sagt dir, wann dein nächstes Paket kommt, und „Paket hinzufügen“ öffnet Peek mit bereits eingetragener Sendungsnummer – hinzugefügt wird erst, wenn du bestätigst.
-• Der Sendungsverlauf eines Pakets zeigt jetzt die Schritte, die sein Paketdienst geplant hat, ausgegraut unter „Vom Paketdienst geplant“ und getrennt von den Scans, die wirklich stattgefunden haben.
-• Hat ein Lieferzeitraum über mehrere Tage begonnen, zeigen Karten und Widgets jetzt „bis“ und seinen letzten Tag, und ein Zeitfenster innerhalb eines Tages nennt diesen Tag nur noch einmal.
-• Eine Zustellmitteilung zeigt die Uhrzeit jetzt nach der Uhr deines Geräts; manche nannten bisher die falsche Stunde.
-• Abmelden schaltet die Mitteilungen nicht mehr dauerhaft aus: Meldest du dich mit demselben Konto wieder an, sind sie von selbst wieder da; bei einem anderen Konto fragt Peek zuerst. Hat eine frühere Abmeldung sie ausgeschaltet, kommen sie mit diesem Update zurück, oder Peek fragt dich noch einmal.
-• Wird ein Paket zugestellt, während du nicht in der Liste bist, bekommt es seinen „Zugestellt“-Moment jetzt, sobald du zurückkommst.
-• Der Dunkelmodus ist wärmer: Brauntöne wie Kraftpapier, aufgehellte Kanten an dunklen Lieferwagen, eine cremefarbene Briefmarke und eine warme Karte.
-• Bedienungshilfen: Mehr Bildschirme wachsen mit den größten Textgrößen mit, VoiceOver sagt an, was sich auf dem Bildschirm ändert, und lässt dich von Überschrift zu Überschrift springen, die Sprachsteuerung reagiert auf die Wörter, die auf einer Taste stehen, und Nebentexte haben mehr Kontrast.
+• Ein Paket in Zustellung kommt heute, deshalb nennen seine Karte, das Widget und die Live-Aktivität keinen Tag mehr, nur noch die Uhrzeiten, die der Paketdienst für heute angibt.
+• Ist ein Paket beim zustellenden Paketdienst angekündigt, aber noch nicht gescannt, steht auf der Karte jetzt zum Beispiel „Bei DHL angekündigt, noch nicht eingetroffen“ statt „Zustellung durch DHL“.
+• Ein an den Absender zurückgeschicktes Paket wird jetzt weiter als zurückgesendet angezeigt, während der Paketdienst es auf dem Rückweg scannt, statt wieder als unterwegs zu erscheinen.
+• Orte in einer anderen Schrift, etwa in chinesischen, japanischen oder koreanischen Zeichen, erscheinen jetzt als Stadt und Land, zum Beispiel „Shenzhen, China“, bei Scans wie bei geplanten Schritten, und ein Ort wie „SCARBOROUGH - ON - CANADA“ wird jetzt mit Kanada und seiner Flagge angezeigt.
+• Veröffentlicht ein Paketdienst seinen Sendungsverlauf im Voraus, steht auf der Seite des Pakets jetzt, dass Peek die echten Scans zeigt, wenn sie eintreffen, und ein geplanter Schritt verschwindet, sobald seine Zeit vorbei ist.
+• 72 weitere Paketdienste haben jetzt einen eigenen Lieferwagen in ihren Farben, und bei der Wahl des Paketdienstes stehen die aus deinem Land zuerst unter denen, die zur Nummer passen.
+• Eine Containernummer wird jetzt erkannt: Die Seite des Pakets sagt das, nennt, wo die Sendungsnummer steht, und bietet an, den Paketdienst auszuwählen.
 • J&T Express in Mexiko und China zeigt die Scans eines Pakets mit den letzten 4 Ziffern der Telefonnummer von Empfänger oder Absender an: Du kannst sie jetzt beim Hinzufügen des Pakets eintragen oder später auf seiner Seite.
-• In den Einstellungen gibt es jetzt die Zeile „Peek bewerten“, falls du eine Bewertung schreiben möchtest.
+• Hat dein Konto nach der Anmeldung keinen Platz für alle Pakete auf diesem Gerät, sagt Peek jetzt, wie viele dort geblieben sind.
+• Ohne Konto fragt ein mit Postleitzahl gesuchtes Paket nicht noch einmal danach, ein Paket, dessen gespeicherte Kopie nicht lesbar ist, kommt in die Liste zurück, und ein Paket zu vergessen klappt sofort, auch offline.
+• Beim Aktualisieren der Sendungen steht nicht mehr „Keine neuen Aktualisierungen“ neben einem Verbindungsfehler, und einige Schritte von C Chez Vous erscheinen jetzt in deiner Sprache statt auf Französisch.
 ```

@@ -71,15 +71,15 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Ao lado da pesquisa, em «A caminho», há agora um botão «Ordenar e filtrar»: põe as tuas encomendas noutra ordem ou filtra-as por estado ou transportadora.
-• Siri e Atalhos, no iPhone, iPad e Mac: «Próxima entrega» diz-te quando chega a tua próxima encomenda, e «Adicionar uma encomenda» abre o Peek com o número de seguimento já preenchido, sem adicionar nada até confirmares.
-• O histórico de uma encomenda mostra agora os passos previstos pela transportadora, a cinzento sob «Previsto pela transportadora», separados dos registos que aconteceram de facto.
-• Quando um intervalo de entrega de vários dias já começou, os cartões e os widgets indicam agora «até» ao último dia, e um intervalo dentro do mesmo dia só indica esse dia uma vez.
-• Uma notificação de entrega mostra agora a hora pelo relógio do teu dispositivo; algumas mostravam a hora errada.
-• Terminar sessão já não desliga as notificações de vez: volta a iniciar sessão com a mesma conta e elas regressam sozinhas; com outra conta, o Peek pergunta primeiro. Se já as tinhas perdido ao terminar sessão, voltam com esta atualização, ou o Peek pergunta-te outra vez.
-• Uma encomenda entregue enquanto não estavas na lista tem agora o seu momento «Entregue» quando voltas a ela.
-• O Modo escuro está mais quente: castanhos de papel kraft, contornos iluminados nas carrinhas escuras, um selo cor de creme e um mapa em tons quentes.
-• Acessibilidade: mais ecrãs crescem até aos maiores tamanhos de texto, o VoiceOver anuncia o que muda no ecrã e permite navegar pelos títulos, o controlo por voz responde às palavras que cada controlo mostra e os textos secundários têm mais contraste.
+• Uma encomenda em distribuição chega hoje, por isso o cartão, o widget e a atividade em direto já não indicam um dia: ficam só as horas que a transportadora dá para hoje.
+• Quando a transportadora que vai entregar uma encomenda já foi avisada, mas ainda não fez nenhum registo, o cartão diz agora, por exemplo, «Anunciada a DHL, ainda não recebida» em vez de «Entrega: DHL».
+• Uma encomenda devolvida ao remetente fica agora como devolvida enquanto a transportadora a regista no caminho de volta, em vez de voltar a «Em trânsito».
+• Um local escrito noutro alfabeto, como o chinês, o japonês ou o coreano, mostra agora a sua cidade e o seu país, por exemplo «Shenzhen, China», tanto nos registos como nos passos previstos; e um local como «SCARBOROUGH - ON - CANADA» mostra agora o Canadá e a sua bandeira.
+• Quando uma transportadora publica o percurso com antecedência, a página da encomenda diz agora que o Peek mostra os registos reais à medida que chegam, e um passo previsto desaparece assim que a sua hora passa.
+• Mais 72 transportadoras têm agora a sua própria carrinha, com as suas cores, e, ao escolheres uma transportadora, as do teu país aparecem primeiro entre as que correspondem ao número.
+• Um número de contentor marítimo é agora reconhecido: a página da encomenda explica o que é e onde encontrar o número de seguimento, e propõe escolher a transportadora.
 • No México e na China, a J&T Express mostra os registos de uma encomenda com os últimos 4 dígitos do telefone do destinatário ou do remetente: agora podes adicioná-los com a encomenda ou mais tarde, na página dela.
-• As Definições têm agora a linha «Avaliar o Peek», se quiseres deixar uma avaliação.
+• Ao iniciares sessão, se a tua conta não tiver espaço para todas as encomendas deste dispositivo, o Peek diz-te agora quantas ficaram nele.
+• Sem conta, uma encomenda procurada com um código postal já não o volta a pedir, uma encomenda cuja cópia guardada não se consegue ler volta à lista e esquecer uma encomenda funciona logo, mesmo sem ligação.
+• Ao atualizar as encomendas, já não aparece «Sem novas atualizações» ao lado de um erro de ligação, e alguns passos da C Chez Vous aparecem agora no teu idioma em vez de em francês.
 ```

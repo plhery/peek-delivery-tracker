@@ -73,15 +73,15 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Un bouton « Trier et filtrer » se trouve désormais à côté de la recherche, dans « En route » : range tes colis dans un autre ordre, ou n’affiche qu’un statut ou qu’un transporteur.
-• Avec Siri et Raccourcis, sur iPhone, iPad et Mac, « Prochaine livraison » te dit quand arrive ton prochain colis, et « Ajouter un colis » ouvre Peek avec le numéro de suivi déjà saisi : rien n’est ajouté avant que tu confirmes.
-• L’historique d’un colis affiche désormais les étapes prévues par son transporteur, en grisé sous « Prévu par le transporteur », séparées des scans qui ont vraiment eu lieu.
-• Une fois commencée, une fenêtre de livraison de plusieurs jours s’affiche désormais « d’ici » son dernier jour sur les cartes et les widgets, et un créneau sur une seule journée ne nomme ce jour qu’une fois.
-• Une notification de livraison donne désormais l’heure selon l’horloge de ton appareil ; certaines affichaient une mauvaise heure.
-• Se déconnecter ne coupe plus les notifications pour de bon : reconnecte-toi avec le même compte et elles reviennent toutes seules ; avec un autre compte, Peek demande d’abord. Si une déconnexion précédente les avait coupées, elles reviennent avec cette mise à jour, ou Peek te pose de nouveau la question.
-• Un colis livré pendant que tu n’étais pas sur la liste a désormais droit à son moment « Livré » quand tu y reviens.
-• Le Mode sombre est plus chaleureux : des bruns de papier kraft, des contours éclairés sur les camions sombres, un timbre crème et une carte aux tons chauds.
-• Accessibilité : davantage d’écrans s’agrandissent avec les plus grandes tailles de texte, VoiceOver annonce ce qui change à l’écran et permet de passer d’un titre à l’autre, le contrôle vocal répond aux mots affichés sur chaque commande, et les textes secondaires sont plus contrastés.
-• Au Mexique et en Chine, J&T Express affiche les scans d’un colis avec les 4 derniers chiffres du téléphone du destinataire ou de l’expéditeur : tu peux désormais les ajouter avec le colis, ou plus tard depuis sa page.
-• Les Réglages ont maintenant une ligne « Noter Peek », si tu veux laisser un avis.
+• Un colis en livraison arrive aujourd’hui, donc sa carte, le widget et l’activité en direct ne nomment plus de jour : seules restent les heures que le transporteur donne pour aujourd’hui.
+• Quand le transporteur qui doit livrer un colis en a été informé sans l’avoir encore scanné, la carte affiche désormais, par exemple, « Annoncé à DHL, pas encore reçu » au lieu de « Livraison par DHL ».
+• Un colis retourné à l’expéditeur reste désormais indiqué comme retourné pendant que le transporteur le scanne sur le chemin du retour, au lieu de repasser « En transit ».
+• Un lieu écrit dans un autre alphabet, en chinois, en japonais ou en coréen par exemple, affiche désormais sa ville et son pays, comme « Shenzhen, Chine », dans les scans comme dans les étapes prévues ; et un lieu comme « SCARBOROUGH - ON - CANADA » affiche maintenant le Canada et son drapeau.
+• Quand un transporteur publie son suivi à l’avance, la page du colis indique désormais que Peek affiche les vrais scans dès qu’ils arrivent, et une étape prévue disparaît sitôt son heure passée.
+• 72 transporteurs de plus ont maintenant leur propre camion, à leurs couleurs, et quand tu choisis un transporteur, ceux de ton pays passent en tête parmi ceux qui correspondent au numéro.
+• Un numéro de conteneur maritime est désormais reconnu : la page du colis le dit, t’indique où trouver le numéro de suivi et te propose de choisir le transporteur.
+• Au Mexique et en Chine, J&T Express affiche les scans d’un colis avec les 4 derniers chiffres du téléphone du destinataire ou de l’expéditeur : tu peux désormais les ajouter avec le colis, ou plus tard depuis sa page.
+• Quand tu te connectes, si ton compte n’a pas de place pour tous les colis de cet appareil, Peek te dit désormais combien y sont restés.
+• Sans compte, un colis recherché avec un code postal ne te le redemande plus, un colis dont la copie enregistrée est illisible revient dans la liste, et oublier un colis fonctionne tout de suite, même hors connexion.
+• Actualiser tes colis n’affiche plus « Aucune nouvelle mise à jour » à côté d’une erreur de connexion, et certaines étapes de C Chez Vous sont désormais traduites quand l’app est dans une autre langue.
 ```

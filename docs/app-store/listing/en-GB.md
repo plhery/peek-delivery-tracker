@@ -73,15 +73,15 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• A “Sort & filter” button now sits beside the search in “On the way”: put your parcels in another order, or show only one status or carrier.
-• Siri and Shortcuts, on iPhone, iPad and Mac: “Next delivery” tells you when your next parcel comes, and “Add a parcel” opens Peek with the tracking number filled in, ready for you to confirm.
-• A parcel’s tracking history now shows the steps its carrier has planned, greyed under “Planned by the carrier” and kept apart from the scans that actually happened.
-• Once a delivery window of several days has begun, cards and widgets now say “by” its last day, and a window within one day names that day only once.
-• A delivery notification now gives the time on your device’s own clock; some used to show the wrong hour.
-• Signing out no longer turns notifications off for good: sign back in with the same account and they come back on their own, while another account is asked first. If an earlier sign-out turned them off, they come back with this update, or Peek asks you again.
-• A parcel delivered while you were away from the list now gets its “Delivered” moment when you come back to it.
-• Dark Mode is warmer: kraft-paper browns, lit edges on dark trucks, a cream stamp and a warm map.
-• Accessibility: more screens grow with the largest text sizes, VoiceOver announces what changes on screen and can jump between headings, Voice Control answers to the words each control shows, and secondary text has stronger contrast.
+• A parcel out for delivery is coming today, so its card, widget and Live Activity no longer show a day, only the hours the carrier gives for today.
+• When the carrier that will deliver a parcel has been told about it but hasn’t scanned it yet, the card now says, for example, “Announced to DHL, not received yet” instead of “Delivery with DHL”.
+• A parcel returned to its sender now stays returned while the carrier scans it on its way back, instead of showing as in transit again.
+• A place written in another script, such as Chinese, Japanese or Korean, now shows its town and country, like “Shenzhen, China”, in scans and planned steps alike; and one like “SCARBOROUGH - ON - CANADA” now shows Canada and its flag.
+• When a carrier publishes its timeline in advance, the parcel’s page now says that Peek shows the real scans as they arrive, and a planned step goes away as soon as its time has passed.
+• 72 more carriers now have a truck of their own, in their colours, and when you choose a carrier, those from your country come first among the ones that fit the number.
+• A shipping container number is now recognised: the parcel’s page says so, tells you where to find the tracking number and offers to choose the carrier.
 • J&T Express Mexico and China show a parcel’s scans with the last 4 digits of the recipient’s or sender’s phone: you can now add them with the parcel, or later from its page.
-• Settings now has a “Rate Peek” row, if you’d like to leave a review.
+• After you sign in, if your account has no room for all the parcels on this device, Peek now says how many stayed on it.
+• Without an account, a parcel looked up with a postcode no longer asks for it again, a parcel whose saved copy can’t be read comes back to the list, and forgetting a parcel works at once, even offline.
+• Refreshing your parcels no longer says “No new updates” beside a connection error, and some C Chez Vous steps now appear in your language instead of French.
 ```

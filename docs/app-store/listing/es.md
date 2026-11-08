@@ -71,15 +71,15 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Junto a la búsqueda, en «En camino», ahora hay un botón «Ordenar y filtrar»: ordena tus paquetes de otra forma o fíltralos por estado o transportista.
-• Siri y Atajos, en iPhone, iPad y Mac: «Próxima entrega» te dice cuándo llega tu próximo paquete y «Añadir un paquete» abre Peek con el número de seguimiento ya escrito, sin añadir nada hasta que lo confirmes.
-• El historial de un paquete ahora muestra los pasos que ha previsto su transportista, en gris bajo «Previsto por el transportista», separados de los escaneos que sí han ocurrido.
-• Cuando ya ha empezado un plazo de entrega de varios días, las tarjetas y los widgets ahora indican «para el» último día, y una franja dentro de un mismo día menciona ese día una sola vez.
-• Una notificación de entrega ahora da la hora según el reloj de tu dispositivo; algunas mostraban una hora equivocada.
-• Cerrar sesión ya no desactiva las notificaciones para siempre: vuelve a iniciar sesión con la misma cuenta y se reactivan solas; con otra cuenta, Peek pregunta antes. Si un cierre de sesión anterior las desactivó, vuelven con esta actualización, o Peek te lo vuelve a preguntar.
-• Un paquete entregado mientras no estabas en la lista ahora tiene su momento «Entregado» cuando vuelves a ella.
-• El modo oscuro es más cálido: marrones de papel kraft, bordes iluminados en las furgonetas oscuras, un sello color crema y un mapa de tonos cálidos.
-• Accesibilidad: más pantallas crecen hasta los tamaños de texto más grandes, VoiceOver anuncia lo que cambia en pantalla y permite moverse por encabezados, el control por voz responde a las palabras que muestra cada control y los textos secundarios tienen más contraste.
+• Un paquete en reparto llega hoy, así que su tarjeta, el widget y la actividad en directo ya no mencionan un día: solo quedan las horas que da el transportista para hoy.
+• Cuando el transportista que entregará un paquete ya está avisado pero aún no lo ha escaneado, la tarjeta ahora dice, por ejemplo, «Anunciado a DHL, aún no recibido» en lugar de «Entrega con DHL».
+• Un paquete devuelto al remitente ahora sigue como devuelto mientras el transportista lo escanea en el camino de vuelta, en lugar de volver a aparecer como «En tránsito».
+• Un lugar escrito en otro alfabeto, como el chino, el japonés o el coreano, ahora muestra su ciudad y su país, por ejemplo «Shenzhen, China», tanto en los escaneos como en los pasos previstos; y un lugar como «SCARBOROUGH - ON - CANADA» ahora muestra Canadá y su bandera.
+• Cuando un transportista publica su seguimiento por adelantado, la página del paquete ahora indica que Peek muestra los escaneos reales a medida que llegan, y un paso previsto desaparece en cuanto pasa su hora.
+• 72 transportistas más tienen ahora su propia furgoneta, con sus colores, y, al elegir un transportista, los de tu país salen primero entre los que encajan con el número.
+• Ahora se reconoce un número de contenedor marítimo: la página del paquete lo indica, te dice dónde encontrar el número de seguimiento y te ofrece elegir el transportista.
 • En México y China, J&T Express muestra los escaneos de un paquete con los últimos 4 dígitos del teléfono del destinatario o del remitente: ahora puedes añadirlos con el paquete o más tarde desde su página.
-• En Ajustes ahora hay una fila «Valorar Peek», por si quieres dejar una reseña.
+• Al iniciar sesión, si tu cuenta no tiene sitio para todos los paquetes de este dispositivo, Peek ahora te dice cuántos se han quedado en él.
+• Sin cuenta, un paquete buscado con código postal ya no lo vuelve a pedir, un paquete cuya copia guardada no se puede leer vuelve a la lista y olvidar un paquete funciona al instante, incluso sin conexión.
+• Al actualizar tus paquetes ya no aparece «No hay novedades» junto a un error de conexión, y algunos pasos de C Chez Vous ahora aparecen en tu idioma en lugar de en francés.
 ```

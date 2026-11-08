@@ -33,7 +33,8 @@
  *   hours later, or up to an hour earlier, takes over the row of the old time
  *   that the answer no longer lists (`retimedScans`). The row keeps that old
  *   time as the one it was first stored with (`RETIMED_FROM`). A scan later
- *   than the row was first stored is the next scan, and gets a row of its own.
+ *   than the row was first stored is the next scan, and gets a row of its own,
+ *   except a USPS departure, which USPS re-dates up to a day on.
  * - A row taken over keeps its old identity while its strings follow the
  *   scan. When a later check meets the scan again, a policy that matched the
  *   old strings (AliExpress's town in brackets) no longer matches, so a scan
@@ -868,6 +869,16 @@ function copies(scan: JsonObject, row: JsonObject): boolean {
 const RETIMED_WITHIN_MS = 3 * HOUR_MS;
 /** How much earlier a carrier's answer may move a scan: USPS moved a facility arrival a minute earlier. */
 const RETIMED_EARLIER_WITHIN_MS = HOUR_MS;
+/** How much later USPS may re-date a departure: it moved one ten and a half hours on, past when Peek stored it. */
+const REDATED_DEPARTURE_WITHIN_MS = 24 * HOUR_MS;
+
+/**
+ * A USPS departure ("Departed USPS Facility"), which USPS re-dates hours on, after Peek stored it,
+ * and then lists only at its new time. USPS's scraper adapter gives these scans no code of their own.
+ */
+function redatedDeparture(source: string, scan: JsonObject): boolean {
+  return source === 'usps' && /^departed\b/.test(wordingOf(scan));
+}
 
 /**
  * Maps the computed identity of each new scan of `source`, the carrier that answered, to the
@@ -881,7 +892,9 @@ const RETIMED_EARLIER_WITHIN_MS = HOUR_MS;
  * latest of a run of the same scan (TNT's daily scan of a parcel held at its depot) moves it to
  * the next day: those are scans of their own, and stay. So is a scan later than the row was first
  * stored (`pastFirstStored`): DHL Express lists only a facility's latest "Processed at", and
- * replaced one Peek stored at 21:02 by one at 21:19.
+ * replaced one Peek stored at 21:02 by one at 21:19. A USPS departure is the exception
+ * (`redatedDeparture`): USPS re-dates one up to a day on, after Peek stored it, and withdraws the
+ * old time, so it takes over the row up to 24 hours later, whenever the row was stored.
  */
 export function retimedScans(
   events: readonly JsonObject[],
@@ -902,11 +915,13 @@ export function retimedScans(
   const earliest = Math.min(...answer.map(instantOf));
   const alike = (scan: JsonObject, row: JsonObject) => {
     const [from, to] = [instantOf(row), instantOf(scan)];
-    return to !== from && to - from <= RETIMED_WITHIN_MS && from - to <= RETIMED_EARLIER_WITHIN_MS
+    const departure = redatedDeparture(source, scan);
+    return to !== from && to - from <= (departure ? REDATED_DEPARTURE_WITHIN_MS : RETIMED_WITHIN_MS)
+      && from - to <= RETIMED_EARLIER_WITHIN_MS
       && earliest < Math.min(from, to)
       && wordingOf(scan) !== '' && wordingOf(scan) === wordingOf(row) && placeOf(scan) === placeOf(row)
       && stageOf(scan) !== '' && stageOf(scan) === stageOf(row) && codesAgree(scan, row)
-      && !pastFirstStored(scan, row);
+      && (departure || !pastFirstStored(scan, row));
   };
   for (const scan of scans) {
     const matching = rows.filter((row) => alike(scan, row));

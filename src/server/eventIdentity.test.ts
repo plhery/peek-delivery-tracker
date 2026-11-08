@@ -760,6 +760,9 @@ describe('a scan its carrier moves a little', () => {
   const departed = at('2026-10-23T01:55:00-07:00', 'usps:departed');
   const later = at('2026-10-23T03:00:00-07:00', 'usps:departed-later');
   const stored = [label, arrived, departed];
+  // The same scans from another carrier, which re-dates none of them past three hours or past their storing.
+  const of = (source: string, ...rows: JsonObject[]) =>
+    rows.map((row) => ({ ...row, provider_event_id: String(row.provider_event_id).replace(/^usps:/, `${source}:`) }));
 
   it('takes over the row the answer no longer lists, up to three hours later', () => {
     expect(pairs(retimedScans([label, arrived, later], stored, 'usps'))).toEqual([['usps:departed-later', 'usps:departed']]);
@@ -776,8 +779,11 @@ describe('a scan its carrier moves a little', () => {
 
   it('keeps a row the next round of the same scan replaces: a carrier listing only the latest of a run shows another scan', () => {
     // TNT scans a parcel held at its depot each working day and lists only the latest scan.
-    expect(retimedScans([label, arrived, at('2026-10-23T04:56:00-07:00', 'usps:over-three-hours')], stored, 'usps').size).toBe(0);
-    expect(retimedScans([label, arrived, at('2026-10-24T00:21:00-07:00', 'usps:next-day')], stored, 'usps').size).toBe(0);
+    expect(retimedScans(of('tnt', label, arrived, at('2026-10-23T04:56:00-07:00', 'usps:over-three-hours')), of('tnt', ...stored), 'tnt').size).toBe(0);
+    expect(retimedScans(of('tnt', label, arrived, at('2026-10-24T00:21:00-07:00', 'usps:next-day')), of('tnt', ...stored), 'tnt').size).toBe(0);
+    // A USPS scan other than a departure, over three hours on, is the next one too.
+    const sorted = at('2026-10-23T01:55:00-07:00', 'usps:sorted', 'Processed through Facility');
+    expect(retimedScans([label, arrived, at('2026-10-23T04:56:00-07:00', 'usps:sorted-later', 'Processed through Facility')], [label, arrived, sorted], 'usps').size).toBe(0);
   });
 
   it('takes over the row the answer no longer lists, up to an hour earlier', () => {
@@ -816,15 +822,34 @@ describe('a scan its carrier moves a little', () => {
 
   it('leaves a later scan past when the row was first stored a scan of its own', () => {
     // DHL Express lists only a facility's latest "Processed at": the later one is the next scan, not the first moved.
-    const storedAt = (createdAt: string | undefined) => [label, arrived, { ...departed, created_at: createdAt }];
-    expect(retimedScans([label, arrived, later], storedAt('2026-10-23T09:10:00+00:00'), 'usps').size).toBe(0);
+    const storedAt = (createdAt: string | undefined) => of('dhl-express', label, arrived, { ...departed, created_at: createdAt });
+    const answer = of('dhl-express', label, arrived, later);
+    expect(retimedScans(answer, storedAt('2026-10-23T09:10:00+00:00'), 'dhl-express').size).toBe(0);
     // Within five minutes of the storing, stored after the later time, or when the storing is unknown, it moves.
     for (const createdAt of ['2026-10-23T09:56:00+00:00', '2026-10-23T10:30:00Z', undefined, 'never']) {
-      expect(pairs(retimedScans([label, arrived, later], storedAt(createdAt), 'usps'))).toEqual([['usps:departed-later', 'usps:departed']]);
+      expect(pairs(retimedScans(answer, storedAt(createdAt), 'dhl-express'))).toEqual([['dhl-express:departed-later', 'dhl-express:departed']]);
     }
     // Earlier, it moves whenever the row was stored.
-    const hour = at('2026-10-23T00:55:00-07:00', 'usps:hour-earlier');
-    expect(pairs(retimedScans([label, arrived, hour], storedAt('2026-10-23T09:00:00Z'), 'usps'))).toEqual([['usps:hour-earlier', 'usps:departed']]);
+    const hour = of('dhl-express', label, arrived, at('2026-10-23T00:55:00-07:00', 'usps:hour-earlier'));
+    expect(pairs(retimedScans(hour, storedAt('2026-10-23T09:00:00Z'), 'dhl-express'))).toEqual([['dhl-express:hour-earlier', 'dhl-express:departed']]);
+  });
+
+  it('takes a USPS departure re-dated up to a day on over its row, past when the row was first stored', () => {
+    // USPS withdrew a "Departed USPS Facility" and listed it again ten and a half hours on.
+    const storedRow = { ...departed, description: 'Departed USPS Facility', created_at: '2026-10-23T09:10:00Z' };
+    const rows = [label, arrived, storedRow];
+    const redated = (time: string, id: string) => at(time, id, 'Departed USPS Facility');
+    expect(pairs(retimedScans([label, arrived, redated('2026-10-23T12:25:00-07:00', 'usps:redated')], rows, 'usps')))
+      .toEqual([['usps:redated', 'usps:departed']]);
+    expect(pairs(retimedScans([label, arrived, redated('2026-10-24T01:55:00-07:00', 'usps:day-on')], rows, 'usps')))
+      .toEqual([['usps:day-on', 'usps:departed']]);
+    // Not over a day on, nor past a scan of USPS between the two, nor while the answer still lists the row.
+    expect(retimedScans([label, arrived, redated('2026-10-24T01:56:00-07:00', 'usps:over-a-day')], rows, 'usps').size).toBe(0);
+    const between = at('2026-10-23T08:00:00-07:00', 'usps:between', 'Arrived at USPS Facility');
+    expect(retimedScans([label, arrived, between, redated('2026-10-23T12:25:00-07:00', 'usps:redated')], [...rows, between], 'usps').size).toBe(0);
+    expect(retimedScans([label, arrived, storedRow, redated('2026-10-23T12:25:00-07:00', 'usps:redated')], rows, 'usps').size).toBe(0);
+    // Another carrier's departure keeps the three hours and the first storing.
+    expect(retimedScans(of('dhl-express', label, arrived, redated('2026-10-23T12:25:00-07:00', 'usps:redated')), of('dhl-express', ...rows), 'dhl-express').size).toBe(0);
   });
 
   it('keeps the time the row was first stored with while the row shows another', () => {

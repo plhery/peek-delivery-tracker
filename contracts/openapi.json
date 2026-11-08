@@ -1383,7 +1383,8 @@
       ],
       "aliases": [
         "Colissimo",
-        "Coliposte"
+        "Coliposte",
+        "Lettre Suivie"
       ],
       "countries": [
         "FR"
@@ -6893,7 +6894,8 @@
         "DB Schenker",
         "Schenker",
         "DSV Road",
-        "DSV Schenker"
+        "DSV Schenker",
+        "DB Schenker Logistics"
       ],
       "countries": [
         "DK",
@@ -14160,7 +14162,8 @@
         "Shree Maruti Courier Services",
         "Shree Maruti Courier Services Private Limited",
         "Shree Maruti Courier Service",
-        "Innofulfill"
+        "Innofulfill",
+        "Maruti Courier"
       ],
       "countries": [
         "IN"
@@ -15943,7 +15946,8 @@
         "TCIEXPRESS",
         "TCI Express Limited",
         "Transport Corporation of India Express",
-        "TCI"
+        "TCI",
+        "TCI XPS"
       ],
       "countries": [
         "IN"
@@ -27091,7 +27095,9 @@
       "aliases": [
         "RIVIGO",
         "Rivigo by Mahindra Logistics",
-        "Rivigo Services"
+        "Rivigo Services",
+        "MLL Express Services",
+        "MLL Express"
       ],
       "countries": [
         "IN"
@@ -50830,6 +50836,259 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.zippee.delivery/track-order"
+    },
+    "dago-express": {
+      "displayName": "DAGO Express",
+      "aliases": [
+        "DAGO Express GmbH"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#ed1c24",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://app.dagoexpress.com/find-order"
+    },
+    "f2-logistics": {
+      "displayName": "F2 Logistics",
+      "aliases": [
+        "F2 Logistics Philippines",
+        "F2 Logistics Philippines, Inc."
+      ],
+      "countries": [
+        "PH"
+      ],
+      "color": "#ec1c24",
+      "selectable": true,
+      "timezone": "Asia/Manila",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.f2logistics.com/tnt/"
+    },
+    "jlog": {
+      "displayName": "JLog",
+      "aliases": [
+        "JetLog",
+        "JetLog (Pty) Ltd"
+      ],
+      "countries": [
+        "ZA"
+      ],
+      "color": "#1a2e26",
+      "selectable": true,
+      "timezone": "Africa/Johannesburg",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://jlog.co.za/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "jlog.co.za",
+            "www.jlog.co.za"
+          ],
+          "path": "^/tracking/([^/?#]+)/?$",
+          "ownNumbersOnly": true
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://jlog.co.za/tracking/"
+    },
+    "lexship": {
+      "displayName": "LEXSHIP",
+      "aliases": [
+        "LogiLink India Pvt Ltd"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#0097d6",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.lexship.biz/?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.lexship.biz"
+          ],
+          "pathPattern": "^/$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.lexship.biz/"
+    },
+    "makesend": {
+      "displayName": "MAKESEND",
+      "aliases": [
+        "Makesend",
+        "Makesend Express",
+        "Makesend Express Co., Ltd.",
+        "บริษัท เมคเซนด์ เอ็กซ์เพรส จำกัด"
+      ],
+      "countries": [
+        "TH"
+      ],
+      "color": "#f5782a",
+      "selectable": true,
+      "timezone": "Asia/Bangkok",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://app.makesend.asia/tracking?t={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "app.makesend.asia"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "t"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://app.makesend.asia/tracking"
+    },
+    "navata": {
+      "displayName": "Navata Road Transport",
+      "aliases": [
+        "Navata"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#e72a05",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://navata.com/track-consignment"
+    },
+    "tci-freight": {
+      "displayName": "TCI Freight",
+      "aliases": [
+        "TCI Freight Division"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#674023",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tcifreight.in/tracking-consignment/"
+    },
+    "teleport": {
+      "displayName": "Teleport",
+      "aliases": [
+        "Teleport Next Day",
+        "Teleport Platforms",
+        "Teleport Platforms Sdn Bhd",
+        "Teleport Commerce"
+      ],
+      "countries": [
+        "MY"
+      ],
+      "color": "#152cff",
+      "selectable": true,
+      "timezone": "Asia/Kuala_Lumpur",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.teleport.asia/track?tracking_number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.teleport.asia",
+            "teleport.asia"
+          ],
+          "pathPattern": "^/track(?:/|/index\\.html)?$",
+          "params": [
+            "tracking_number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.teleport.asia/track"
+    },
+    "time-matters": {
+      "displayName": "time:matters",
+      "aliases": [
+        "time matters",
+        "time:matters GmbH"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#ffad00",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://booking.time-matters.com/en-US/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "booking.time-matters.com"
+          ],
+          "path": "^/[a-z]{2}-[A-Z]{2}/tracking/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://booking.time-matters.com/en-US/tracking"
+    },
+    "vichare": {
+      "displayName": "Vichare Loginext",
+      "aliases": [
+        "Vichare",
+        "Vichare Courier",
+        "Vichare Loginext Pvt. Ltd."
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#f48120",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.vichareloginext.com/track-shipment"
     }
   },
   "servers": [
@@ -55388,7 +55647,17 @@
           "qwqer",
           "shopini-world",
           "wpx",
-          "zippee"
+          "zippee",
+          "dago-express",
+          "f2-logistics",
+          "jlog",
+          "lexship",
+          "makesend",
+          "navata",
+          "tci-freight",
+          "teleport",
+          "time-matters",
+          "vichare"
         ]
       },
       "Stage": {

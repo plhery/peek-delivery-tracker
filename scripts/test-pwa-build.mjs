@@ -72,6 +72,8 @@ assert.match(pushWorker, /addEventListener\(['"]notificationclick['"]/, 'notific
 assert.match(workerSource, /method: 'POST'/, 'private POST share targets must use the worker router');
 assert.match(workerSource, /formData\(\)/, 'shared content must be read from a POST body');
 assert.match(workerSource, /X-SDT-Created-At/, 'abandoned private share drafts must expire');
+assert.match(workerSource, /crypto\.randomUUID\(\)/, 'each share must keep its own one-use draft, named by a random id alone');
+assert.match(workerSource, /cache\.keys\(\)/, 'expired share drafts must be swept when a new share arrives');
 assert.doesNotMatch(workerSource, /new Response\(['"`]/, 'a failed share must reach the app, which says why in the reader’s language');
 assert.doesNotMatch(
   pushWorker,

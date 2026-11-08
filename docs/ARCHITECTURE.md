@@ -519,11 +519,14 @@ and nothing typed is sent.
 - **Deleting an account** removes the Auth user. Foreign-key cascades remove parcels,
   jobs, events, push registrations, Live Activity tokens, delivery email rows, the
   forwarding address, connected assistants and audit rows. Other audit rows expire after 90 days.
-- **Share target**: the PWA receives shared text via `POST`. The service worker keeps it
-  in a one-time cache entry, so tracking text never appears in a URL or HTTP log. It then
-  opens the app's add sheet, with the text or with why none came (too long, empty,
-  unreadable): the worker cannot know the reader's language, so it names the reason in
-  the address and the app says it.
+- **Share target**: the PWA receives shared text via `POST`. The service worker keeps each
+  share in a cache entry of its own, under a random id that is read once and expires after
+  ten minutes, so tracking text never appears in a URL or HTTP log and a second share
+  leaves the first alone; expired entries go when the next share arrives. It then opens
+  the app at `/` with that id, or with why no text came (too long, empty, unreadable): the
+  worker cannot know the reader's language, so it names the reason in the address and the
+  app says it. Signed in, the add sheet takes the text; a visitor's front door looks it up
+  as if pasted, and says why none came where a failed paste does.
 
 ## Notifications and Live Activities
 

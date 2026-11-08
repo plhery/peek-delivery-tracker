@@ -294,16 +294,35 @@ test('the service worker answers a language address from the server, never from 
   expect(await response!.text()).toContain('<html lang="de"');
   await expect(page.getByRole('heading', { level: 1, name: 'Wo ist mein Paket?' })).toBeVisible();
 
-  // The share target is still the worker's own: it keeps the shared text and sends the app to `/` to read it.
+  // The share target is still the worker's own: it keeps each share's text under an id of its own and sends the
+  // app to `/` with that id alone, so a second share before the app read the first takes nothing from it.
   const shared = await page.evaluate(async () => {
-    const form = new FormData();
-    form.set('title', 'Order');
-    form.set('text', 'Tracking 1ZDEMO202600000001');
-    const answer = await fetch('/share-target', { method: 'POST', body: form, redirect: 'manual' });
-    const draft = await (await fetch('/share-target/draft', { cache: 'no-store' })).json() as { label: string; trackingInput: string };
-    return { type: answer.type, draft };
+    const share = async (title: string, text: string) => {
+      const form = new FormData();
+      form.set('title', title);
+      form.set('text', text);
+      return new URL((await fetch('/share-target', { method: 'POST', body: form })).url).search;
+    };
+    const read = async (search: string) => {
+      const answer = await fetch(`/share-target/draft/${new URLSearchParams(search).get('share-target')}`, { cache: 'no-store' });
+      return answer.ok ? await answer.json() as { label: string; trackingInput: string } : answer.status;
+    };
+    const first = await share('Order', 'Tracking 1ZDEMO202600000001');
+    const second = await share('Gift', 'Tracking 1ZDEMO202600000002');
+    return { first, second, drafts: [await read(first), await read(second), await read(first)] };
   });
-  expect(shared).toEqual({ type: 'opaqueredirect', draft: { label: 'Order', trackingInput: 'Tracking 1ZDEMO202600000001' } });
+  // The browser reports the third read's 404 as an error of the page; it is the answer this test asks for.
+  errors.set(page, errors.get(page)!.filter((error) => !error.includes('status of 404')));
+  for (const search of [shared.first, shared.second]) {
+    expect(search).toMatch(/^\?share-target=[0-9a-f-]{36}$/);
+  }
+  expect(shared.first).not.toBe(shared.second);
+  expect(shared.drafts).toEqual([
+    { label: 'Order', trackingInput: 'Tracking 1ZDEMO202600000001' },
+    { label: 'Gift', trackingInput: 'Tracking 1ZDEMO202600000002' },
+    // A draft is handed out once.
+    404,
+  ]);
 });
 
 test('`/favicon.ico` answers with an icon', async ({ request }) => {

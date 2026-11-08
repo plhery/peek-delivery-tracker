@@ -325,7 +325,7 @@ describe('App', () => {
   });
 
   it('opens a prefilled add sheet for content shared to the installed PWA', async () => {
-    window.history.replaceState({}, '', '/?share-target=1');
+    window.history.replaceState({}, '', '/?share-target=00000000-0000-4000-8000-000000000001');
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({
       label: 'Coffee delivery',
       trackingInput: 'Track 993412345699999980',
@@ -370,7 +370,7 @@ describe('App', () => {
   it('says that nothing came through when a share left no draft to read', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 404 })));
     onTestFinished(() => { vi.unstubAllGlobals(); });
-    window.history.replaceState({}, '', '/?share-target=1');
+    window.history.replaceState({}, '', '/?share-target=00000000-0000-4000-8000-000000000002');
     renderApp();
 
     const sheet = await screen.findByRole('dialog', { name: 'Add a parcel' });

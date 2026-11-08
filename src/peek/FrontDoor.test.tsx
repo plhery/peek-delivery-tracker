@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor, within } from '@testing-librar
 import userEvent from '@testing-library/user-event';
 import { hydrateRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { scroll, stubIntersections } from '../test/intersections';
 import '../test/parcelCode';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
@@ -748,6 +748,70 @@ describe('FrontDoor', () => {
     expect(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)).toBeNull();
     await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
     view.unmount();
+  });
+
+  describe('a share to the installed app', () => {
+    const shareAt = (marker: string) => {
+      window.history.replaceState({}, '', `/?share-target=${marker}`);
+      onTestFinished(() => window.history.replaceState({}, '', '/'));
+    };
+    /** The worker's drafts: the lookup's own requests go elsewhere. */
+    const draft = (trackingInput: string | null) => {
+      const fetch = vi.fn(async (address: string) => !address.startsWith('/share-target/') ? Response.json({})
+        : trackingInput === null ? new Response(null, { status: 404 }) : Response.json({ label: 'Order', trackingInput }));
+      vi.stubGlobal('fetch', fetch);
+      return () => fetch.mock.calls.filter(([address]) => address.startsWith('/share-target/')).map(([address]) => address);
+    };
+
+    it('looks up what was shared as if it were pasted, and takes the share out of the address', async () => {
+      const id = '00000000-0000-4000-8000-0000000000d1';
+      shareAt(id);
+      const drafts = draft(`Your order has shipped: ${UPS}`);
+      const counted = vi.spyOn(await import('../lib/analytics'), 'trackAction');
+      const { field } = door();
+      await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: UPS, carrier: 'ups' }, expect.any(AbortSignal)));
+      expect(field).toHaveValue(`Your order has shipped: ${UPS}`);
+      expect(drafts()).toEqual([`/share-target/draft/${id}`]);
+      expect(counted).toHaveBeenCalledWith('parcel-share-received');
+      expect(window.location.search).toBe('');
+      counted.mockRestore();
+    });
+
+    it('says where a failed paste does that a share brought too much, or nothing', async () => {
+      shareAt('too-large');
+      const drafts = draft(null);
+      const first = door();
+      expect(await screen.findByRole('alert')).toHaveTextContent('Couldn’t pasteThe shared text is too long. Paste only the number or a tracking link here.');
+      expect(first.field).toHaveFocus();
+      expect(drafts()).toEqual([]);
+      expect(window.location.search).toBe('');
+      first.view.unmount();
+
+      shareAt('00000000-0000-4000-8000-0000000000d2');
+      const { field, user } = door();
+      expect(await screen.findByRole('alert')).toHaveTextContent('Couldn’t pasteNothing came through from that share. Paste the number or a tracking link.');
+      expect(window.location.search).toBe('');
+      // The note goes once the field has something.
+      await user.type(field, '1');
+      expect(screen.queryByText('Couldn’t paste')).not.toBeInTheDocument();
+      expect(mocks.lookup).not.toHaveBeenCalled();
+    });
+
+    it('leaves the share for the account’s deliveries while it makes sure whose the landing is', async () => {
+      const { PeekSessionProvider } = await import('./session');
+      const id = '00000000-0000-4000-8000-0000000000d3';
+      shareAt(id);
+      const drafts = draft(UPS);
+      const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+      await act(async () => { await Promise.resolve(); });
+      expect(drafts()).toEqual([]);
+      expect(window.location.search).toBe(`?share-target=${id}`);
+      // Nobody is signed in after all: this landing takes it.
+      view.rerender(<PeekSessionProvider value={{ account: 'visitor', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+      await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: UPS, carrier: 'ups' }, expect.any(AbortSignal)));
+      expect(window.location.search).toBe('');
+      view.unmount();
+    });
   });
 });
 

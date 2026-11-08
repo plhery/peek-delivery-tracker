@@ -108,7 +108,7 @@ describe('legacyHostRedirect', () => {
     '/sw.js', '/push-sw.js', '/manifest.webmanifest', '/de/manifest.webmanifest',
     '/.well-known/apple-app-site-association', '/.well-known/assetlinks.json',
     '/auth-emails/magic-link.html', '/og.png', '/og.png?v=73229339', '/og.svg',
-    '/share-target', '/share-target/draft',
+    '/share-target', '/share-target/draft/00000000-0000-4000-8000-000000000001',
   ])('leaves %s on the host it was asked from', (path) => {
     expect(redirect(path)).toBeNull();
     expect(redirect(path, { headers: { 'sec-fetch-mode': 'navigate' } })).toBeNull();

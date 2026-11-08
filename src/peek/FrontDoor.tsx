@@ -6,6 +6,7 @@ import { PeekLockup } from '../components/PeekMark';
 import { useI18n } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
 import { takeCarrierHandoff } from '../lib/carrierHandoff';
+import { clearSharedParcelInput, readSharedParcel } from '../lib/shareTarget';
 import { carrierBrand } from '../lib/carrierBrand';
 import { carrierChoiceSections, carrierChoiceTags, shapeCarrier, usedCarrierIds } from '../lib/carrierPicker';
 import { carrierInfo, formatTrackingNumber } from '../lib/carriers';
@@ -149,6 +150,26 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
     send({ type: 'pause', text: handed.text });
     send({ type: 'blur' });
     setPicking(true);
+  }, [account, covered, put, send, touch]);
+
+  // Something shared to the installed app opens it here for a visitor: what came is put in the field as if pasted,
+  // and a share that brought nothing says so where a failed paste does. Not while a saved sign-in is still being
+  // restored: the account's deliveries, which take the share in their add sheet, may be the ones to open.
+  useEffect(() => {
+    if (account === 'checking' || covered) return;
+    let active = true;
+    void readSharedParcel().then((received) => {
+      if (!active || !received) return;
+      touch();
+      if ('input' in received) {
+        trackAction('parcel-share-received');
+        put(received.input.trackingInput);
+      } else {
+        send({ type: 'pasteFailed', reason: received.failure === 'too-large' ? 'share-too-large' : 'share-failed' });
+        field.current?.focus();
+      }
+    }).finally(() => { if (active) clearSharedParcelInput(); });
+    return () => { active = false; };
   }, [account, covered, put, send, touch]);
 
   // Where going on stopped is where the visitor continues: the choice to make or the input to give.

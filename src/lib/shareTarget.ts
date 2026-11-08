@@ -14,22 +14,38 @@ export type ShareFailure = 'too-large' | 'failed';
 export type SharedParcel = { input: SharedParcelInput } | { failure: ShareFailure };
 
 const SHARE_MARKER = 'share-target';
-/** The marker of a share whose draft is waiting for the app. */
-const SHARE_RECEIVED = '1';
+/** Where the service worker keeps each share's draft, under the draft's own one-use id. */
+export const SHARE_DRAFTS = '/share-target/draft/';
+const DRAFT_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const FAILURES: readonly string[] = ['too-large', 'failed'] satisfies ShareFailure[];
 
-function shareMarker(location: Location): typeof SHARE_RECEIVED | ShareFailure | null {
+/** Whether a text is a draft's id as the service worker makes one: random, and never the shared content. */
+export function isShareDraftId(value: string): boolean {
+  return DRAFT_ID.test(value);
+}
+
+/** The draft's address in the service worker, which hands it out once. */
+export function shareDraftAddress(id: string): string {
+  return `${SHARE_DRAFTS}${id}`;
+}
+
+type ShareMarker = { draft: string } | { failure: ShareFailure };
+
+function shareMarker(location: Location): ShareMarker | null {
   const marker = new URLSearchParams(location.search).get(SHARE_MARKER);
-  return marker === SHARE_RECEIVED || marker === 'too-large' || marker === 'failed' ? marker : null;
+  if (marker === null) return null;
+  if (FAILURES.includes(marker)) return { failure: marker as ShareFailure };
+  return isShareDraftId(marker) ? { draft: marker } : null;
 }
 
 /** Where the service worker sends the app after a share: to read its draft, or to say why there is none. */
-export function shareTargetAddress(failure?: ShareFailure): string {
-  return `/?${SHARE_MARKER}=${failure ?? SHARE_RECEIVED}`;
+export function shareTargetAddress(marker: ShareMarker): string {
+  return `/?${SHARE_MARKER}=${'draft' in marker ? marker.draft : marker.failure}`;
 }
 
-async function readDraft(): Promise<SharedParcelInput | null> {
+async function readDraft(id: string): Promise<SharedParcelInput | null> {
   try {
-    const response = await fetch('/share-target/draft', {
+    const response = await fetch(shareDraftAddress(id), {
       cache: 'no-store',
       credentials: 'same-origin',
     });
@@ -45,19 +61,26 @@ async function readDraft(): Promise<SharedParcelInput | null> {
   }
 }
 
+/** The answer for each draft asked for: it is handed out once, so a screen drawn again reads the same answer. */
+const answers = new Map<string, Promise<SharedParcel>>();
+
 /**
  * What a share brought, when the address says the app was opened by one. A
- * draft that is gone or empty is a share that failed: the person shared
- * something and must hear that nothing came through.
+ * draft that is gone, expired or empty is a share that failed: the person
+ * shared something and must hear that nothing came through.
  */
 export async function readSharedParcel(
   location: Location = window.location,
 ): Promise<SharedParcel | null> {
   const marker = shareMarker(location);
   if (!marker) return null;
-  if (marker !== SHARE_RECEIVED) return { failure: marker };
-  const input = await readDraft();
-  return input ? { input } : { failure: 'failed' };
+  if ('failure' in marker) return marker;
+  let answer = answers.get(marker.draft);
+  if (!answer) {
+    answer = readDraft(marker.draft).then((input): SharedParcel => input ? { input } : { failure: 'failed' });
+    answers.set(marker.draft, answer);
+  }
+  return answer;
 }
 
 export function clearSharedParcelInput(location: Location = window.location): void {

@@ -88,8 +88,8 @@ export interface LookupState {
   offered: string | null;
   job: LookupJob | null;
   trouble: LookupTrouble | null;
-  /** Why the Paste button could not paste. */
-  paste: 'blocked' | 'empty' | null;
+  /** Why the Paste button could not paste, or why nothing came of a share to the installed app. */
+  paste: PasteFailure | null;
   /** Counts the times going on stopped at something the visitor has to settle, so the screen can lead them to it. */
   halted: number;
 }
@@ -110,7 +110,14 @@ export type LookupEvent =
   | { type: 'done' }
   | { type: 'cooled' }
   | { type: 'online' }
-  | { type: 'pasteFailed'; reason: 'blocked' | 'empty' };
+  | { type: 'pasteFailed'; reason: PasteFailure };
+
+/**
+ * Why nothing was pasted: the browser kept the clipboard (`blocked`), the
+ * clipboard was empty, or a share to the installed app brought too much
+ * (`share-too-large`) or nothing (`share-failed`).
+ */
+export type PasteFailure = 'blocked' | 'empty' | 'share-too-large' | 'share-failed';
 
 export function initialLookup(text = '', region: string | null = null, dialling = region): LookupState {
   return {

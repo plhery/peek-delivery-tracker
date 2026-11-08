@@ -1,7 +1,7 @@
 import { defaultCache } from '@serwist/next/worker';
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist';
 import { ExpirationPlugin, NetworkFirst, NetworkOnly, Serwist } from 'serwist';
-import { shareTargetAddress, type ShareFailure } from '../src/lib/shareTarget';
+import { isShareDraftId, SHARE_DRAFTS, shareDraftAddress, shareTargetAddress, type ShareFailure } from '../src/lib/shareTarget';
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -14,7 +14,6 @@ declare const self: ServiceWorkerGlobalScope;
 importScripts('/push-sw.js');
 
 const SHARE_TARGET_CACHE = 'sdt-private-share-target-v1';
-const SHARE_TARGET_DRAFT = '/share-target/draft';
 const SHARE_TARGET_MAX_AGE_MS = 10 * 60 * 1_000;
 let shareTargetTail: Promise<void> = Promise.resolve();
 
@@ -39,26 +38,34 @@ function missingShareTarget(): Response {
 }
 
 /**
- * Opens the app after a share: to read the draft, or to say why there is none.
+ * Opens the app after a share: to read its draft, or to say why there is none.
  * The worker cannot know the reader's language, so the app says it.
  */
-function openApp(failure?: ShareFailure): Response {
-  return Response.redirect(new URL(shareTargetAddress(failure), self.location.origin), 303);
+function openApp(marker: { draft: string } | { failure: ShareFailure }): Response {
+  return Response.redirect(new URL(shareTargetAddress(marker), self.location.origin), 303);
+}
+
+/** A draft the app may still read: one written in the last ten minutes, by a clock that has not gone back. */
+function fresh(draft: Response): boolean {
+  const createdAtHeader = draft.headers.get('X-SDT-Created-At');
+  const createdAt = Number(createdAtHeader);
+  const age = Date.now() - createdAt;
+  return createdAtHeader !== null && Number.isFinite(createdAt) && age >= -60_000 && age <= SHARE_TARGET_MAX_AGE_MS;
 }
 
 async function captureShareTarget(request: Request): Promise<Response> {
   const declaredHeader = request.headers.get('content-length');
   if (declaredHeader !== null) {
     const declaredLength = Number(declaredHeader);
-    if (!Number.isInteger(declaredLength) || declaredLength < 0) return openApp('failed');
-    if (declaredLength > 65_536) return openApp('too-large');
+    if (!Number.isInteger(declaredLength) || declaredLength < 0) return openApp({ failure: 'failed' });
+    if (declaredLength > 65_536) return openApp({ failure: 'too-large' });
   }
 
   let form: FormData;
   try {
     form = await request.formData();
   } catch {
-    return openApp('failed');
+    return openApp({ failure: 'failed' });
   }
   const asText = (value: FormDataEntryValue | null) => (
     typeof value === 'string' ? value.trim() : ''
@@ -68,41 +75,41 @@ async function captureShareTarget(request: Request): Promise<Response> {
     .map(asText)
     .filter((value, index, values) => value && values.indexOf(value) === index);
   const trackingInput = parts.join('\n').slice(0, 10_000);
+  if (!trackingInput) return openApp({ failure: 'failed' });
+  // Each share has its own draft, so a second share before the app read the first takes nothing from it.
+  // Only the random id is in the app's address, never what was shared.
+  const draft = crypto.randomUUID();
   await serializeShareTarget(async () => {
     const cache = await caches.open(SHARE_TARGET_CACHE);
-    await cache.delete(SHARE_TARGET_DRAFT);
-    if (trackingInput) {
-      await cache.put(SHARE_TARGET_DRAFT, new Response(
-        JSON.stringify({ label: title, trackingInput }),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Cache-Control': 'no-store',
-            'X-SDT-Created-At': String(Date.now()),
-          },
-        },
-      ));
+    // Drafts the app never came back for go as a new one arrives.
+    for (const key of await cache.keys()) {
+      const kept = await cache.match(key);
+      if (!kept || !fresh(kept)) await cache.delete(key);
     }
+    await cache.put(shareDraftAddress(draft), new Response(
+      JSON.stringify({ label: title, trackingInput }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          'X-SDT-Created-At': String(Date.now()),
+        },
+      },
+    ));
   });
-  return openApp(trackingInput ? undefined : 'failed');
+  return openApp({ draft });
 }
 
-async function consumeShareTarget(): Promise<Response> {
+/** Hands a draft to the app once, if it is still fresh. */
+async function consumeShareTarget(url: URL): Promise<Response> {
+  const id = url.pathname.slice(SHARE_DRAFTS.length);
+  if (!isShareDraftId(id)) return missingShareTarget();
   return await serializeShareTarget(async () => {
     const cache = await caches.open(SHARE_TARGET_CACHE);
-    const draft = await cache.match(SHARE_TARGET_DRAFT);
-    await cache.delete(SHARE_TARGET_DRAFT);
-    if (!draft) return missingShareTarget();
-    const createdAtHeader = draft.headers.get('X-SDT-Created-At');
-    const createdAt = Number(createdAtHeader);
-    const age = Date.now() - createdAt;
-    if (
-      createdAtHeader === null
-      || !Number.isFinite(createdAt)
-      || age < -60_000
-      || age > SHARE_TARGET_MAX_AGE_MS
-    ) return missingShareTarget();
-    return draft;
+    const address = shareDraftAddress(id);
+    const draft = await cache.match(address);
+    await cache.delete(address);
+    return draft && fresh(draft) ? draft : missingShareTarget();
   });
 }
 
@@ -137,8 +144,8 @@ const serwist: Serwist = new Serwist({
       handler: async ({ request }) => captureShareTarget(request),
     },
     {
-      matcher: ({ sameOrigin, url }) => sameOrigin && url.pathname === SHARE_TARGET_DRAFT,
-      handler: async () => consumeShareTarget(),
+      matcher: ({ sameOrigin, url }) => sameOrigin && url.pathname.startsWith(SHARE_DRAFTS),
+      handler: async ({ url }) => consumeShareTarget(url),
     },
     {
       // Account data and authentication traffic must never enter CacheStorage,

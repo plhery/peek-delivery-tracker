@@ -83,6 +83,16 @@ describe('shipment details', () => {
       .querySelector('.detail__tracking-label')!.textContent).toBe('Tracking number');
   });
 
+  it('says once that the carrier writes its timeline ahead, as the other notes look', () => {
+    const view = show({ carrier: 'gzyl', writtenAheadBy: 'gzyl' });
+    expect(screen.getByText(`${carrierInfo('gzyl', 'en').name} publishes its timeline in advance. Peek shows the real scans as they arrive.`))
+      .toHaveClass('detail__handover');
+    view.unmount();
+
+    show({ carrier: 'gzyl' });
+    expect(screen.queryByText(/publishes its timeline in advance/)).not.toBeInTheDocument();
+  });
+
   it('says the sender still has the parcel once its only scan, the label, is a day old', () => {
     const label = (hoursAgo: number) => [{ id: 'label', parcelId: 'parcel', stage: 'registered' as const, description: 'Label created', occurredAt: new Date(Date.now() - hoursAgo * 3_600_000).toISOString() }];
     const note = 'The sender hasn’t handed it to Chronopost yet. Tracking starts when they do.';

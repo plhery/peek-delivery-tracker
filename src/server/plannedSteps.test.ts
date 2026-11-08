@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NoHistoryError } from 'universal-parcel-scraper';
-import { plannedSteps, plannedStepsOf, PLANNED_STEPS_KEPT, servedPlannedSteps } from './plannedSteps';
+import { plannedSteps, plannedStepsOf, PLANNED_STEPS_KEPT, servedPlannedSteps, servedWrittenAhead } from './plannedSteps';
 import type { JsonObject } from './types';
 
 vi.mock('server-only', () => ({}));
@@ -97,6 +97,31 @@ describe('servedPlannedSteps', () => {
   });
 });
 
+// The answers held back rows their carrier wrote ahead of their own clocks.
+const ahead = (carriers: JsonObject, number = 'TEST1234'): JsonObject => ({ written_ahead: { number, carriers } });
+
+describe('servedWrittenAhead', () => {
+  it('names the carrier whose answers held rows back as written ahead', () => {
+    expect(servedWrittenAhead(row({ carrier_data: { routing: ahead({ gzyl: ['2026-11-03T08:00:00+08:00'] }) } }))).toBe('gzyl');
+  });
+
+  it('names the carrier tracking the parcel first, when several did', () => {
+    const both = ahead({ gzyl: ['2026-11-03T08:00:00+08:00'], mtscn: ['2026-11-04T15:00:00+08:00'] });
+    expect(servedWrittenAhead(row({ carrier_data: { routing: both } }))).toBe('mtscn');
+    expect(servedWrittenAhead(row({ carrier_data: { active_tracking_carrier: 'gzyl', routing: both } }))).toBe('gzyl');
+  });
+
+  it('names none for another number, an empty list, an unknown carrier, or once the parcel is delivered or returned', () => {
+    const one = { carrier_data: { routing: ahead({ gzyl: ['2026-11-03T08:00:00+08:00'] }) } };
+    expect(servedWrittenAhead(row({ carrier_data: { routing: ahead({ gzyl: ['2026-11-03T08:00:00+08:00'] }, 'OTHER1') } }))).toBeNull();
+    expect(servedWrittenAhead(row({ carrier_data: { routing: ahead({ gzyl: [] }) } }))).toBeNull();
+    expect(servedWrittenAhead(row({ carrier_data: { routing: ahead({ 'not-a-carrier': ['2026-11-03T08:00:00+08:00'] }) } }))).toBeNull();
+    expect(servedWrittenAhead(row({ ...one, current_stage: 'delivered' }))).toBeNull();
+    expect(servedWrittenAhead(row({ ...one, current_stage: 'returned' }))).toBeNull();
+    expect(servedWrittenAhead(row())).toBeNull();
+  });
+});
+
 describe('withEventPlaces', () => {
   it('serves the plan beside the scans, and keeps the stored plan out of the carrier data', () => {
     const served = withEventPlaces(row());
@@ -110,6 +135,15 @@ describe('withEventPlaces', () => {
     const served = withEventPlaces(row({}, steps)).planned_events as JsonObject[];
     expect(served[0]!.place).toMatchObject({ precision: 'city', country: 'CN', name: 'Shenzhen' });
     expect(served[1]!.place).toBeNull();
+  });
+
+  it('serves the carrier writing the timeline ahead, and keeps the stored clocks out of the carrier data', () => {
+    const served = withEventPlaces(row({ carrier_data: { routing: { version: 1, ...ahead({ gzyl: ['2026-11-03T08:00:00+08:00'] }) } } }));
+    expect(served.written_ahead_by).toBe('gzyl');
+    expect((served.carrier_data as JsonObject).routing).toEqual({ version: 1 });
+    expect(withEventPlaces(row())).not.toHaveProperty('written_ahead_by');
+    expect(withEventPlaces(row({ tracking_number: '123456789', carrier_data: { routing: { version: 1,
+      ...ahead({ gzyl: ['2026-11-03T08:00:00+08:00'] }, '123456789') } } }))).not.toHaveProperty('written_ahead_by');
   });
 
   it('serves no plan for a delivered parcel, nor for a placeholder number', () => {

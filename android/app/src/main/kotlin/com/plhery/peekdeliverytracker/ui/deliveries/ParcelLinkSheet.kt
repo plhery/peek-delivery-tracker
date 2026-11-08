@@ -1047,6 +1047,14 @@ private fun SharedParcelCard(
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
                     }
+                    // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
+                    val ahead = parcel.writtenAheadBy
+                    if (!gift && ahead != null) {
+                        Text(
+                            localizer.text("parcel.writtenAhead", mapOf("carrier" to identities.displayName(ahead, language))),
+                            color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
+                        )
+                    }
                 }
                 // Without a route to draw, the kraft parcel keeps the card company, its carrier's label on its side.
                 if (!placed && !arrived && !large) SmallPip(Modifier.size(width = 84.dp, height = Dp.Unspecified).testTag(LINK_PIP), label = label)

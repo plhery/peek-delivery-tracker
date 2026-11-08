@@ -395,6 +395,14 @@ internal fun LivePassCard(
                     style = type.caption.sfLines(),
                 )
             }
+            // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
+            parcel.writtenAheadBy?.let { ahead ->
+                Text(
+                    localizer.text("parcel.writtenAhead", mapOf("carrier" to identities.displayName(ahead, language))),
+                    color = secondary,
+                    style = type.caption.sfLines(),
+                )
+            }
             carrierWaits(parcel)?.let { waits ->
                 val key = waits.recipientAction?.let { ParcelAttention(it).localizationKey }
                     ?: if (waits.stage == TrackingStage.FailedAttempt) "attention.failed_attempt" else "attention.exception"

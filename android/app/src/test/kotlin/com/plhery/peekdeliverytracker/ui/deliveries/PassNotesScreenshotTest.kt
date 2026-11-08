@@ -219,6 +219,13 @@ class PassNotesScreenshotTest {
         )
     }
 
+    // A carrier that writes the whole timeline in advance.
+
+    @Test
+    fun aTimelineWrittenAhead() = pass("pass_written_ahead_light") {
+        DemoCards.parcel("Moon lamp").copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl)
+    }
+
     // The facts.
 
     @Test

@@ -547,6 +547,12 @@ private struct SharedParcelCard: View {
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(.secondary)
                     }
+                    // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
+                    if !gift, let ahead = parcel.writtenAheadBy {
+                        Text(localizer.text("parcel.writtenAhead",
+                                            ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
                 }
                 .multilineTextAlignment(arrived ? .center : .leading)
                 .fixedSize(horizontal: false, vertical: true)

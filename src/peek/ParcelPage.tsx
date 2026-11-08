@@ -285,6 +285,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     checking ? null : awaitingHandover(parcel.events, now) ? t('parcel.awaitingHandover', { carrier: displayed.name })
       : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name })
         : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name }) : null,
+    // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
+    !checking && parcel.writtenAheadBy ? t('parcel.writtenAhead', { carrier: carrierInfo(parcel.writtenAheadBy, locale).name }) : null,
   ].filter((note): note is string => !!note);
 
   // The reveal's last beat: the parcel's own link, offered once the card has settled.

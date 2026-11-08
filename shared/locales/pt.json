@@ -580,6 +580,7 @@
   "parcel.deliveryAnnounced": "Anunciada a {{carrier}}, ainda não recebida",
   "parcel.awaitingHandover": "O remetente ainda não a entregou a {{carrier}}. O seguimento começa quando a entregar.",
   "parcel.scheduledDelivery": "As atualizações de {{carrier}} seguem um horário fixo, sem assinatura. Se nada chegou, contacta o vendedor.",
+  "parcel.writtenAhead": "{{carrier}} publica o percurso da encomenda com antecedência. O Peek mostra os registos reais à medida que chegam.",
   "parcel.updated": "Atualizada: {{date}}",
   "peek.dailyLimit": "Já não há pesquisas por hoje. Inicia sessão para continuar.",
   "peek.onThisDevice": "Neste dispositivo",

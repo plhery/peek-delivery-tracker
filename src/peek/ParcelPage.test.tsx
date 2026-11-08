@@ -283,6 +283,11 @@ describe('ParcelPage stages and troubles', () => {
     expect(within(card()).queryByText(/hasn’t scanned the parcel yet/)).toBeNull();
   });
 
+  it('says the carrier writes its timeline ahead', async () => {
+    await shown(view([scan('in_transit', 30)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
+    expect(within(card()).getByText(/^.+ publishes its timeline in advance\. Peek shows the real scans as they arrive\.$/)).toBeVisible();
+  });
+
   it('keeps a number no carrier knows on a neutral card, and says to keep the page', async () => {
     await shown(view([scan('pending', 60, 'Tracking added; the carrier has not announced it yet')], { carrier: 'unknown', syncStatus: 'waiting' }));
     expect(screen.getByRole('heading', { level: 1, name: 'No tracking history yet' })).toBeVisible();

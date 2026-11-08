@@ -580,6 +580,7 @@
   "parcel.deliveryAnnounced": "{{carrier}} 已收到预报，尚未收到包裹",
   "parcel.awaitingHandover": "寄件人还没有把包裹交给 {{carrier}}，交寄后就会开始跟踪。",
   "parcel.scheduledDelivery": "{{carrier}} 按固定时间表更新，不显示签收人。如果没有收到，请联系卖家。",
+  "parcel.writtenAhead": "{{carrier}} 会提前发布物流轨迹。Peek 会在真实扫描出现时再显示。",
   "parcel.updated": "更新时间：{{date}}",
   "peek.dailyLimit": "今天的查询次数已用完。登录即可继续。",
   "peek.onThisDevice": "在这台设备上",

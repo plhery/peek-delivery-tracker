@@ -580,6 +580,7 @@
   "parcel.deliveryAnnounced": "Zgłoszona przewoźnikowi {{carrier}}, jeszcze nieprzyjęta",
   "parcel.awaitingHandover": "Nadawca nie przekazał jej jeszcze przewoźnikowi {{carrier}}. Śledzenie zacznie się po przekazaniu.",
   "parcel.scheduledDelivery": "Statusy przewoźnika {{carrier}} pojawiają się według stałego harmonogramu, bez podpisu. Jeśli nic nie dotarło, zapytaj sprzedawcę.",
+  "parcel.writtenAhead": "Przewoźnik {{carrier}} publikuje historię przesyłki z wyprzedzeniem. Peek pokazuje prawdziwe skany, gdy tylko się pojawią.",
   "parcel.updated": "Aktualizacja: {{date}}",
   "peek.dailyLimit": "Na dziś nie ma już wyszukiwań. Zaloguj się, aby kontynuować.",
   "peek.onThisDevice": "Na tym urządzeniu",

@@ -580,6 +580,7 @@
   "parcel.deliveryAnnounced": "Annoncé à {{carrier}}, pas encore reçu",
   "parcel.awaitingHandover": "L’expéditeur ne l’a pas encore remis à {{carrier}}. Le suivi commencera à la remise.",
   "parcel.scheduledDelivery": "{{carrier}} met à jour selon un calendrier fixe, sans signature. Si rien n’est arrivé, contacte le vendeur.",
+  "parcel.writtenAhead": "{{carrier}} publie son suivi à l’avance. Peek affiche les vrais scans dès qu’ils arrivent.",
   "parcel.updated": "Actualisé : {{date}}",
   "peek.dailyLimit": "Plus de recherches pour aujourd’hui. Connecte-toi pour continuer.",
   "peek.onThisDevice": "Sur cet appareil",

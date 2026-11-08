@@ -2948,6 +2948,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var notificationsMuted: Bool
     var trackingEvents: [TrackingEvent] = []
     var plannedEvents: [PlannedTrackingEvent]? = nil
+    var writtenAheadBy: CarrierID? = nil
     var emailMuted: Bool? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -2968,6 +2969,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case notificationsMuted
         case trackingEvents
         case plannedEvents
+        case writtenAheadBy
         case emailMuted
     }
 }
@@ -3492,6 +3494,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var notificationsMuted: Bool
     var trackingEvents: [TrackingEvent]
     var plannedEvents: [PlannedTrackingEvent]? = nil
+    var writtenAheadBy: CarrierID? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -3512,6 +3515,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case notificationsMuted
         case trackingEvents
         case plannedEvents
+        case writtenAheadBy
     }
 }
 
@@ -4077,6 +4081,7 @@ extension Parcel {
         notificationsMuted = try values.decode(Bool.self, forKey: .notificationsMuted)
         trackingEvents = try values.decodeIfPresent([TrackingEvent].self, forKey: .trackingEvents) ?? []
         plannedEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .plannedEvents)
+        writtenAheadBy = try values.decodeIfPresent(CarrierID.self, forKey: .writtenAheadBy)
         emailMuted = try values.decodeIfPresent(Bool.self, forKey: .emailMuted)
     }
 }

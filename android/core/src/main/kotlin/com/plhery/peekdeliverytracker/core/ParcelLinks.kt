@@ -77,6 +77,7 @@ fun Parcel(shared: PublicPackage): Parcel {
         notificationsMuted = shared.notificationsMuted,
         trackingEvents = shared.trackingEvents,
         plannedEvents = shared.plannedEvents,
+        writtenAheadBy = shared.writtenAheadBy,
     )
 }
 

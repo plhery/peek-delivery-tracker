@@ -131,6 +131,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     inputNeeded: row.carrier_data?.routing?.input_needed ?? undefined,
     inputSuggested: row.carrier_data?.routing?.input_suggested ?? undefined,
     likelyCarrier: row.carrier_data?.routing?.likely_carrier ?? undefined,
+    writtenAheadBy: row.written_ahead_by ?? undefined,
     senderName: row.carrier_data?.sender_name?.trim() || undefined,
     expectedDeliveryFrom: row.carrier_data?.expected_delivery_from ?? undefined,
     pickupPoint: row.carrier_data?.pickup_point?.trim() || undefined,

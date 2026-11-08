@@ -432,6 +432,12 @@ and nothing typed is sent.
   once the parcel is delivered or returned. The apps list them greyed above the scans, under
   "Planned by the carrier", and hide one whose time passes while it is shown. They are never scans: they set no stage, status,
   estimate, alert, email, count, map or drawing, and a wrapped gift's link shows none.
+- **A timeline written ahead**: when a carrier's answers for the number held rows back as
+  written ahead of their own clocks (the scraper's `written_ahead`, kept in
+  `routing.written_ahead`), the row names that carrier as `written_ahead_by`, the carrier
+  tracking the parcel first, until the parcel is delivered or returned. The apps say in one
+  line under the status that the carrier publishes its timeline in advance and that Peek
+  shows the real scans as they arrive; a wrapped gift's link does not.
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

@@ -466,6 +466,13 @@ struct ParcelDetailView: View {
                         .font(.caption).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
+                if let ahead = parcel.writtenAheadBy {
+                    Text(localizer.text("parcel.writtenAhead",
+                                        ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
+                        .font(.caption).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 if let waits = carrierWaits(parcel) {
                     ParcelFlag(text: localizer.text(waits.recipientAction.map { ParcelAttention($0).localizationKey }
                                                     ?? (waits.stage == .failedAttempt ? "attention.failed_attempt" : "attention.exception")),

@@ -499,6 +499,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       tracking_events: wrapped ? giftEvents(events, destination) : events,
       // A wrapped gift tells nothing of where its parcel is going before it gets there.
       ...(!wrapped && planned.length ? { planned_events: planned } : {}),
+      ...(!wrapped && typeof row.written_ahead_by === 'string' ? { written_ahead_by: row.written_ahead_by as ApiCarrierId } : {}),
     },
   };
 }

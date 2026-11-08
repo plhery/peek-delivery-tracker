@@ -9,7 +9,7 @@ import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCop
 import { copyTellsProblem, relayCopies } from './relayCopies';
 import { repeatLeads } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
-import { servedPlannedSteps } from './plannedSteps';
+import { servedPlannedSteps, servedWrittenAhead } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
 
@@ -90,20 +90,24 @@ function deliveryAnnounced(data: JsonObject): boolean {
 /** The carrier data only the service reads, the delivering carrier's last check with its number (`delivery_probe`) among them. */
 const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe'];
 
+/** The routing state served on its own: planned steps (`planned_events`) and the rows written ahead (`written_ahead_by`). */
+const SERVED_APART = ['planned', 'written_ahead'];
+
 /**
  * A package row without the carrier data that only the service reads (`SERVICE_DATA`), and with what the card says of
- * the delivering carrier's check (`delivery_announced`). Planned steps are served on their own (`planned_events`).
+ * the delivering carrier's check (`delivery_announced`). Planned steps and the rows written ahead are served on their
+ * own (`SERVED_APART`).
  */
 function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
-  const planned = stored && isRecord(stored.routing) && 'planned' in stored.routing;
+  const apart = stored && isRecord(stored.routing) && SERVED_APART.some((key) => key in (stored.routing as JsonObject));
   const announced = stored !== null && deliveryAnnounced(stored);
-  if (!stored || !(SERVICE_DATA.some((key) => key in stored) || planned)) return row;
+  if (!stored || !(SERVICE_DATA.some((key) => key in stored) || apart)) return row;
   const data: JsonObject = { ...stored, ...announced ? { delivery_announced: true } : {} };
   for (const key of SERVICE_DATA) delete data[key];
-  if (planned) {
+  if (apart) {
     const routing = { ...stored.routing as JsonObject };
-    delete routing.planned;
+    for (const key of SERVED_APART) delete routing[key];
     data.routing = routing;
   }
   return { ...row, carrier_data: data };
@@ -251,12 +255,16 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * gazetteer finds, such as an office, takes the place of a left-out copy of it (`placeLenders`). A placeholder
  * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`). The steps its carrier
  * listed before they happen and that are still ahead are served apart from the scans, each with its place
- * (`planned_events`, plannedSteps.ts and `placedSteps`).
+ * (`planned_events`, plannedSteps.ts and `placedSteps`), and so is the carrier that writes the timeline in advance
+ * (`written_ahead_by`, `servedWrittenAhead`).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const served = placedEvents(row);
-  const planned = placedSteps(row, servedPlannedSteps(withoutPlaceholderAnswers(row), shownEvents(row)));
-  return planned.length ? { ...served, planned_events: planned } : served;
+  const answered = withoutPlaceholderAnswers(row);
+  const planned = placedSteps(row, servedPlannedSteps(answered, shownEvents(row)));
+  const ahead = servedWrittenAhead(answered);
+  if (!planned.length && !ahead) return served;
+  return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {} };
 }
 
 /**

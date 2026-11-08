@@ -51479,6 +51479,7 @@ export interface ApiPackageRow {
   "notifications_muted": boolean;
   "tracking_events": Array<ApiTrackingEventRow> | null;
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
+  "written_ahead_by"?: ApiCarrierId;
   "email_muted"?: boolean;
 }
 
@@ -51835,6 +51836,7 @@ export interface ApiPublicPackage {
   "notifications_muted": boolean;
   "tracking_events": Array<ApiTrackingEventRow>;
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
+  "written_ahead_by"?: ApiCarrierId;
 }
 
 export interface ApiPublicParcelResponse {

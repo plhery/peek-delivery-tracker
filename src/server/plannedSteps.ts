@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { carrierTimezone } from 'universal-parcel-scraper';
+import { CARRIER_DEFINITIONS, carrierTimezone, type CarrierId } from 'universal-parcel-scraper';
 import { eventTimestamp } from 'universal-parcel-scraper/app';
 import { EVENT_STAGE_ORDER } from '../lib/stages';
 import { clockDay, scanDay } from './eventIdentity';
@@ -65,6 +65,24 @@ const FINAL_STAGES = new Set(['delivered', 'returned']);
 const PROGRESS = ['registered', 'accepted', 'in_transit', 'out_for_delivery', 'delivered'];
 
 const words = (value: unknown) => String(value ?? '').replace(/\s+/g, ' ').trim().toLocaleLowerCase('en-US');
+
+/**
+ * The carrier whose tracker writes the parcel's timeline in advance, as the API serves it (`written_ahead_by`): one whose
+ * answers for the number held rows back as written ahead of their own clocks (the adapter's `written_ahead`, kept in
+ * `routing.written_ahead`), the carrier tracking the parcel first. The apps say so in one line. None once the parcel is
+ * delivered or returned.
+ */
+export function servedWrittenAhead(row: JsonObject): CarrierId | null {
+  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
+  const routing = isRecord(data.routing) ? data.routing : {};
+  const kept = isRecord(routing.written_ahead) ? routing.written_ahead : null;
+  const listed = kept && kept.number === row.tracking_number && isRecord(kept.carriers) ? kept.carriers : null;
+  if (!listed || FINAL_STAGES.has(String(row.current_stage ?? ''))) return null;
+  const named = Object.entries(listed).filter(([carrier, clocks]) => Array.isArray(clocks) && clocks.length > 0 && carrier in CARRIER_DEFINITIONS)
+    .map(([carrier]) => carrier);
+  const tracking = [data.active_tracking_carrier, row.carrier].find((carrier): carrier is string => typeof carrier === 'string' && named.includes(carrier));
+  return (tracking ?? named[0] ?? null) as CarrierId | null;
+}
 
 /**
  * The planned steps a parcel's timeline shows, greyed under "Planned by the carrier", as the API serves them

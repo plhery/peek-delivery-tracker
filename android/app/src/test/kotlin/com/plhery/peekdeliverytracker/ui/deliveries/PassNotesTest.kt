@@ -300,6 +300,19 @@ class PassNotesTest {
     }
 
     @Test
+    fun aCarrierWritingItsTimelineAheadIsSaidOnce() {
+        val lamp = DemoCards.parcel("Moon lamp")
+        val gzyl = identities.displayName(CarrierId.Gzyl, AppLanguage.En)
+        val line = "$gzyl publishes its timeline in advance. Peek shows the real scans as they arrive."
+        pass(lamp.copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl))
+        assertTrue(textExists(line))
+
+        passParcel = lamp.copy(carrier = CarrierId.Gzyl)
+        compose.waitForIdle()
+        assertFalse(textExists(line))
+    }
+
+    @Test
     fun madeUpScansAreFlaggedAndSaidToSayNothingOfWhereTheParcelIs() {
         val parcel = generated()
         assertEquals(ParcelAttention.Generated, parcel.attention(CAPTURED))

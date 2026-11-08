@@ -55113,6 +55113,10 @@
             },
             "description": "The steps the carrier planned that are still ahead of the scans and of now, oldest first; absent when none. Never scans: see PlannedTrackingEvent."
           },
+          "written_ahead_by": {
+            "description": "The carrier whose tracker writes the parcel's timeline in advance: its answers for this number held rows back as written ahead of their own dates. The apps say so in one line. Absent when none, once the parcel is delivered or returned, and on a wrapped gift.",
+            "$ref": "#/components/schemas/CarrierId"
+          },
           "email_muted": {
             "type": "boolean",
             "description": "The account's delivery email is off for this parcel."
@@ -56642,6 +56646,10 @@
               "$ref": "#/components/schemas/PlannedTrackingEvent"
             },
             "description": "The steps the carrier planned that are still ahead of the scans and of now, oldest first; absent when none. Never scans: see PlannedTrackingEvent."
+          },
+          "written_ahead_by": {
+            "description": "The carrier whose tracker writes the parcel's timeline in advance: its answers for this number held rows back as written ahead of their own dates. The apps say so in one line. Absent when none, once the parcel is delivered or returned, and on a wrapped gift.",
+            "$ref": "#/components/schemas/CarrierId"
           }
         }
       },

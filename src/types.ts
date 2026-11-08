@@ -49,6 +49,8 @@ export interface Parcel {
   inputSuggested?: { carrier: CarrierId; field: 'dpdPostcode' };
   /** For a parcel filed under no carrier, the only carrier whose own format its number has, asked and not listing it since `since`. */
   likelyCarrier?: { carrier: CarrierId; since: string };
+  /** The carrier whose tracker writes the parcel's timeline in advance: Peek shows its real scans as they arrive. */
+  writtenAheadBy?: CarrierId;
   originalParcelId?: string;
   originalCarrier?: CarrierId;
   originalTrackingNumber?: string;

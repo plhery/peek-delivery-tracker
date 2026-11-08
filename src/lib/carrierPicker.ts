@@ -7,6 +7,7 @@ import type { ApiCarrierDetectionResponse } from '../generated/apiContract';
 import type { Translate } from '../i18n';
 import type { CarrierId } from '../types';
 import { carrierInfo, notTrackingNumber, recognitionAskedCarriers, type CarrierDetection, type CarrierInfo } from './carriers';
+import { deviceRegion } from './postcodeExample';
 
 const LETTER_OR_DIGIT = /[\p{L}\p{N}]/u;
 
@@ -232,6 +233,19 @@ export function canAskCarrier(
     || (detection.carrier === 'intl-post' && recognitionAskedCarriers(number).length > 0);
 }
 
+/**
+ * The carriers a number fits, the reader's country's first: those based there, then those that also serve it, as
+ * recognition ranks a country hint (`countryMatch`). Otherwise detection's order stands.
+ */
+export function inReaderCountryFirst(carriers: readonly CarrierId[], country: string | null): CarrierId[] {
+  if (!country) return [...carriers];
+  const rank = (id: CarrierId) => {
+    const { countries } = carrierInfo(id);
+    return countries[0] === country ? 0 : countries.includes(country) ? 1 : 2;
+  };
+  return [...carriers].sort((a, b) => rank(a) - rank(b));
+}
+
 export interface CarrierChoiceSection {
   key: string;
   title: string;
@@ -240,17 +254,19 @@ export interface CarrierChoiceSection {
 
 /**
  * What a picker opened beside a tracking number leads with: the carriers that
- * know the number, the ones its shape fits, then the ones used before, each
- * carrier once.
+ * know the number, the ones its shape fits (the reader's country's first), then
+ * the ones used before, each carrier once.
  */
-export function carrierChoiceSections({ detection, check, used = [], t }: {
+export function carrierChoiceSections({ detection, check, used = [], country = deviceRegion(), t }: {
   detection: Pick<CarrierDetection, 'carrier' | 'confidence' | 'candidates'>;
   check: CarrierCheck;
   used?: readonly CarrierId[];
+  /** The reader's country, whose carriers lead the ones the number fits. */
+  country?: string | null;
   t: Translate;
 }): CarrierChoiceSection[] {
   const named = shapeCarrier(detection);
-  const fitting = (named ? [named] : detection.candidates).filter((id) => carrierInfo(id).capabilities.selectable);
+  const fitting = inReaderCountryFirst((named ? [named] : detection.candidates).filter((id) => carrierInfo(id).capabilities.selectable), country);
   const knowing = check.status === 'several' ? check.carriers : [];
   return [
     { key: 'known', title: t('picker.section.known'), carriers: knowing },

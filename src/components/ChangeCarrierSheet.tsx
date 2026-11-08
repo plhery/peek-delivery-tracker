@@ -14,7 +14,8 @@ import {
   requirementSatisfied,
   typedRequirementValue,
 } from '../lib/carriers';
-import { deviceCountry, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
+import { inReaderCountryFirst } from '../lib/carrierPicker';
+import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
 import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../lib/postcodeCountry';
 import { useI18n } from '../i18n';
 import { useSheetDialog } from '../lib/modal';
@@ -83,10 +84,10 @@ export function ChangeCarrierSheet({
   // A carrier that issues no number of this shape is pointed out before the change is saved.
   const refused = useNumberRefusal(automatic ? null : chosenCarrier, parcel.trackingNumber);
   // The picker leads with automatic detection, then the parcel's own carrier unless it is filed automatically or
-  // among the carriers its number fits, which come next, then the ones used before. So the carrier it has is in view
+  // among the carriers its number fits, which come next (the reader's country's first), then the ones used before. So the carrier it has is in view
   // without scrolling, and one no longer offered is there at all.
-  const fitting = (detected.confidence === 'high' ? [detected.carrier] : detected.candidates)
-    .filter((id) => carrierInfo(id).capabilities.selectable);
+  const fitting = inReaderCountryFirst((detected.confidence === 'high' ? [detected.carrier] : detected.candidates)
+    .filter((id) => carrierInfo(id).capabilities.selectable), deviceRegion());
   const own: CarrierId[] = (automaticCarrier && unfiled) || fitting.includes(parcel.carrier) ? [] : [parcel.carrier];
   const pickerSections: CarrierPickerSection[] = [
     { key: 'current', title: t('picker.section.current'), carriers: own },

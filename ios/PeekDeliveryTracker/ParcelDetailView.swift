@@ -1418,12 +1418,13 @@ struct ChangeCarrierView: View {
     }
 
     /// After automatic detection, the parcel's own carrier unless it is filed automatically or
-    /// among the carriers its number fits, which come next, then the ones used before. So the
-    /// carrier it has is in view without scrolling, and one no longer offered is there at all.
+    /// among the carriers its number fits, which come next (the reader's country's first), then the ones used before.
+    /// So the carrier it has is in view without scrolling, and one no longer offered is there at all.
     private var pickerSections: [CarrierPickerView.PickerSection] {
         let match = catalog.detect(parcel.trackingNumber)
-        let fitting = (match.confidence == .high ? [match.carrier] : match.candidates)
-            .filter { catalog.info(for: $0).selectable }
+        let fitting = CarrierPickerSearch.inReaderCountryFirst(
+            (match.confidence == .high ? [match.carrier] : match.candidates).filter { catalog.info(for: $0).selectable },
+            country: ParcelLookupCountry.hint(), catalog: catalog)
         let own = (automaticCarrier != nil && unfiled) || fitting.contains(parcel.carrier) ? [] : [parcel.carrier]
         return [
             .init(id: "current", title: localizer.text("picker.section.current"), carriers: own),

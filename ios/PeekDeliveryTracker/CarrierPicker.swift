@@ -149,6 +149,20 @@ enum CarrierPickerSearch {
     }
 
     /// The carriers of someone's latest parcels, newest first, each once.
+    /// The carriers a number fits, the reader's country's first: those based there, then those that also serve it, as
+    /// recognition ranks a country hint (`countryMatch`). Otherwise detection's order stands.
+    static func inReaderCountryFirst(_ carriers: [CarrierID], country: String?, catalog: CarrierCatalog) -> [CarrierID] {
+        guard let country else { return carriers }
+        func rank(_ carrier: CarrierID) -> Int {
+            let countries = catalog.info(for: carrier).countries ?? []
+            return countries.first == country ? 0 : countries.contains(country) ? 1 : 2
+        }
+        // Swift's sort is not stable: the index keeps detection's order within a rank.
+        return carriers.enumerated()
+            .sorted { (rank($0.element), $0.offset) < (rank($1.element), $1.offset) }
+            .map(\.element)
+    }
+
     static func usedCarriers(_ parcels: [Parcel], catalog: CarrierCatalog, limit: Int = 3) -> [CarrierID] {
         var used: [CarrierID] = []
         for parcel in parcels.sorted(by: { $0.createdAt > $1.createdAt }) where used.count < limit {

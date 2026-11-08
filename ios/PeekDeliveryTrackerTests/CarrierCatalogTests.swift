@@ -579,6 +579,16 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(search("zzqx"), [])
     }
 
+    func testFittingCarriersOfTheReadersCountryComeFirst() {
+        let fits: [CarrierID] = [.fedex, .dpdFr, .japanPost, .dhl, .yamato, .sto, .sagawa]
+        XCTAssertEqual(CarrierPickerSearch.inReaderCountryFirst(fits, country: "JP", catalog: catalog),
+                       [.japanPost, .yamato, .sagawa, .fedex, .dpdFr, .dhl, .sto])
+        XCTAssertEqual(CarrierPickerSearch.inReaderCountryFirst(fits, country: nil, catalog: catalog), fits)
+        // Carriers based in the country, then those that also serve it.
+        XCTAssertEqual(CarrierPickerSearch.inReaderCountryFirst([.dpdFr, .mondialRelay, .bpost], country: "BE", catalog: catalog),
+                       [.bpost, .mondialRelay, .dpdFr])
+    }
+
     func testCarrierPickerSectionsAndLines() {
         let sections = CarrierPickerSearch.letterSections(catalog: catalog, language: .en)
         XCTAssertEqual(sections.flatMap(\.carriers).count, catalog.selectableCarriers.count)

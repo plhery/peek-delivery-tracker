@@ -1010,10 +1010,12 @@ struct AddParcelView: View {
         }
     }
 
-    /// The picker leads with the carriers that fit the number, then the ones used before.
+    /// The picker leads with the carriers that fit the number (the reader's country's first), then the ones used before.
     private var pickerSections: [CarrierPickerView.PickerSection] {
         let knowing: [CarrierID] = if case .several(let carriers) = recognitionStatus { carriers } else { [] }
-        let fitting = (numberCarrier.map { [$0] } ?? parsed.candidates).filter { catalog.info(for: $0).selectable }
+        let fitting = CarrierPickerSearch.inReaderCountryFirst(
+            (numberCarrier.map { [$0] } ?? parsed.candidates).filter { catalog.info(for: $0).selectable },
+            country: ParcelLookupCountry.hint(), catalog: catalog)
         return [
             .init(id: "known", title: localizer.text("picker.section.known"), carriers: knowing),
             .init(id: "fits", title: localizer.text(numberCarrier == nil ? "picker.section.fits" : "picker.section.detected"),

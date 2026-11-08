@@ -6,6 +6,7 @@ import {
   canAskCarrier,
   carrierCheck,
   carrierChoiceSections,
+  inReaderCountryFirst,
   carrierChoiceTags,
   carrierNameList,
   countryLine,
@@ -191,6 +192,18 @@ describe('what a picker beside a number leads with', () => {
     expect(carrierChoiceSections({ detection: shape('ups', 'high', ['ups']), check: { status: 'idle' }, t }))
       .toEqual([{ key: 'fits', title: 'Detected', carriers: ['ups'] }]);
     expect(carrierChoiceSections({ detection: shape('unknown', 'none'), check: { status: 'idle' }, t })).toEqual([]);
+  });
+
+  it('puts the carriers of the reader\'s country first among those a number fits, keeping detection\'s order otherwise', () => {
+    const fits: CarrierId[] = ['fedex', 'dpd-fr', 'japan-post', 'dhl', 'yamato', 'sto', 'sagawa'];
+    expect(inReaderCountryFirst(fits, 'JP')).toEqual(['japan-post', 'yamato', 'sagawa', 'fedex', 'dpd-fr', 'dhl', 'sto']);
+    expect(inReaderCountryFirst(fits, null)).toEqual(fits);
+    // Carriers based in the country, then those that also serve it.
+    expect(inReaderCountryFirst(['dpd-fr', 'mondial-relay', 'bpost'], 'BE')).toEqual(['bpost', 'mondial-relay', 'dpd-fr']);
+    expect(carrierChoiceSections({ detection: shape('unknown', 'low', fits), check: { status: 'idle' }, country: 'JP', t }))
+      .toEqual([{ key: 'fits', title: 'Fits this number', carriers: ['japan-post', 'yamato', 'sagawa', 'fedex', 'dpd-fr', 'dhl', 'sto'] }]);
+    expect(carrierChoiceSections({ detection: shape('unknown', 'low', fits), check: { status: 'idle' }, country: null, t }))
+      .toEqual([{ key: 'fits', title: 'Fits this number', carriers: fits }]);
   });
 
   it('tags the carriers the check has asked or heard from', () => {

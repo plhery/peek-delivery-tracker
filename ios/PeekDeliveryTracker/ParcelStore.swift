@@ -34,6 +34,12 @@ final class ParcelStore: ObservableObject {
         let result: RefreshResult
     }
 
+    /// How many of the parcels followed on this iPhone before signing in stayed here, because the account was full.
+    struct LeftOnDevice: Equatable {
+        let id = UUID()
+        let count: Int
+    }
+
     /// How a read of the account's list ended. `skipped`: nothing was read or the answer was set aside,
     /// because a change was made meanwhile, a newer read began or the account changed.
     private enum LoadOutcome { case loaded, failed(String), skipped }
@@ -63,6 +69,8 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var deliveryLiveActivitiesEnabled = true
     @Published private(set) var deliveryLiveActivityError: String?
     @Published var undoParcel: Parcel?
+    /// News for the list to say once, and then set back to nil: the account had no room for some of this iPhone's parcels.
+    @Published var leftOnDevice: LeftOnDevice?
 
     let configuration: AppConfiguration
     // Background delivery cleanup can outlive the screen that supplied the session.
@@ -163,6 +171,8 @@ final class ParcelStore: ObservableObject {
             shareNotes.forgetAll()
             // So does what it answered about its parcels.
             ParcelFeedbackMemory().forgetAll()
+            // The next sign-in hears again about the parcels its account had no room for.
+            LeftOnDeviceMemory.forget(cacheOwnerID)
             releaseDeviceNotifications(from: cacheOwnerID)
         }
         cacheOwnerID = session.user?.id
@@ -176,6 +186,7 @@ final class ParcelStore: ObservableObject {
         // Open on content: the saved list, or the demo box, instead of an empty frame.
         parcels = saved ?? (session.isDemo ? demo.list() : session.isGuest ? device.list() : [])
         undoParcel = nil
+        leftOnDevice = nil
         loading = session.isAuthenticated && parcels.isEmpty
         refreshing = false
         errorMessage = nil
@@ -1662,11 +1673,15 @@ final class ParcelStore: ObservableObject {
     }
 
     /// The parcels followed on this iPhone before signing in join the account, under the names
-    /// they had here. The device lets go of each one the account now has.
+    /// they had here, each time the account's list starts: at sign-in, at each launch and as an
+    /// invitation comes or goes. The device lets go of each one the account now has. One the account
+    /// has no room for stays here, and the list says how many stayed once a sign-in, and again only
+    /// when that number changes; a claim cut short says nothing.
     private func claimDeviceParcels() async {
+        guard let user = session.user else { return }
         let claims = device.claims
-        guard session.user != nil, !claims.isEmpty else { return }
         let generation = session.generation
+        var full = 0
         for start in stride(from: 0, to: claims.count, by: 20) {
             let batch = Array(claims[start..<min(start + 20, claims.count)])
             guard let response = try? await api.claimParcels(ClaimParcelsRequest(links: batch)),
@@ -1683,7 +1698,9 @@ final class ParcelStore: ObservableObject {
                 case .unavailable: !device.isViewer(linkID: result.id)
                 }
             }.map(\.id)))
+            full += response.results.count { $0.outcome == .quota }
         }
+        if LeftOnDeviceMemory.isNews(full, for: user.id) { leftOnDevice = LeftOnDevice(count: full) }
     }
 
     private func monitorJobs(_ jobIDs: [UUID]) {
@@ -1721,6 +1738,30 @@ final class ParcelStore: ObservableObject {
             if AppDelegate.deviceTokenFailures != failures { return nil }
         }
         return nil
+    }
+}
+
+/// How many of this iPhone's parcels an account was last told had stayed here for want of room, so that bringing them
+/// along again at a launch, or as an invitation comes or goes, says nothing new. Signing out forgets it.
+enum LeftOnDeviceMemory {
+    private static func key(for userID: UUID) -> String { "sdt.leftOnDevice.v1.\(userID.uuidString)" }
+
+    /// Whether `count` parcels staying here is news to the account: some stay, and not as many as it was last told.
+    /// Remembers the count as told; none staying forgets it.
+    static func isNews(_ count: Int, for userID: UUID, defaults: UserDefaults = .standard) -> Bool {
+        let key = key(for: userID)
+        let told = defaults.integer(forKey: key)
+        guard count > 0 else {
+            if told != 0 { defaults.removeObject(forKey: key) }
+            return false
+        }
+        guard count != told else { return false }
+        defaults.set(count, forKey: key)
+        return true
+    }
+
+    static func forget(_ userID: UUID, defaults: UserDefaults = .standard) {
+        defaults.removeObject(forKey: key(for: userID))
     }
 }
 

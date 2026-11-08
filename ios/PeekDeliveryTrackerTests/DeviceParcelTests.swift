@@ -636,6 +636,143 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.keys.keys.sorted(), ["22222222222B"])
     }
 
+    /// An account with room for `room` more parcels. Each claim is answered for the links it sends, in their order:
+    /// kept while there is room, `quota` once there is none.
+    private final class AccountRoom: @unchecked Sendable {
+        private let lock = NSLock()
+        private var left: Int
+        private var sent: [[String]] = []
+        init(_ room: Int) { left = room }
+        var room: Int {
+            get { lock.withLock { left } }
+            set { lock.withLock { left = newValue } }
+        }
+        var claims: [[String]] { lock.withLock { sent } }
+        func answer(_ request: ClaimParcelsRequest) -> ClaimParcelsResponse {
+            lock.withLock {
+                sent.append(request.links.map(\.id))
+                return ClaimParcelsResponse(results: request.links.map { link in
+                    guard left > 0 else { return ClaimParcelResult(id: link.id, outcome: .quota) }
+                    left -= 1
+                    return ClaimParcelResult(id: link.id, outcome: .kept, packageID: UUID())
+                })
+            }
+        }
+    }
+
+    /// This iPhone following `links` as its own, a store on it and a session that signs into `account`, whose list is
+    /// empty. The session's saved sign-in is `persistence`'s, for a relaunch to reopen.
+    private func signingIn(_ links: [String], into account: AccountRoom)
+        throws -> (store: ParcelStore, session: SessionStore, device: DeviceParcels, persistence: PostcodeTestSessionPersistence) {
+        let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
+        let signedIn = try JSONEncoder.deliveryTracker.encode(AuthSession(
+            accessToken: "access", tokenType: "bearer", expiresIn: 3600,
+            expiresAt: Int(Date().timeIntervalSince1970) + 3600, refreshToken: "refresh", user: user
+        ))
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: []))
+        PostcodeTestURLProtocol.handler = { request in
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/auth/v1/verify"): return (200, signedIn)
+            case ("POST", "/api/packages/claim"):
+                guard let claim = try? JSONDecoder.deliveryTracker.decode(ClaimParcelsRequest.self, from: PostcodeTestURLProtocol.body(of: request)),
+                      let answer = try? JSONEncoder.deliveryTracker.encode(account.answer(claim)) else { return (400, Data()) }
+                return (200, answer)
+            case ("GET", "/api/packages"): return (200, list)
+            default: return (404, Data())
+            }
+        }
+        let storage = Memory()
+        storage.keys = Dictionary(uniqueKeysWithValues: links.map { ($0, key) })
+        storage.parcels = links.enumerated().map { index, link in
+            DeviceParcel(linkID: link, label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL12300\(index)")),
+                         checkedAt: Date())
+        }
+        let device = DeviceParcels(client: client(Calls()), storage: storage)
+        let persistence = PostcodeTestSessionPersistence()
+        let session = SessionStore(configuration: PostcodeTestURLProtocol.configuration, persistence: persistence,
+                                   transport: PostcodeTestURLProtocol.shared)
+        session.showWelcome()
+        let store = ParcelStore(configuration: PostcodeTestURLProtocol.configuration, session: session, localizer: Localizer(),
+                                transport: PostcodeTestURLProtocol.shared, device: device, deviceNotifications: quietNotifications())
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        return (store, session, device, persistence)
+    }
+
+    func testAParcelAFullAccountRefusesStaysHereAndTheListIsToldOnceASignIn() async throws {
+        let account = AccountRoom(1)
+        let (store, session, device, _) = try signingIn(["22222222222A", "22222222222B", "22222222222C"], into: account)
+        defer { session.forceSignOut() }
+
+        // Signing in brings this iPhone's parcels along: the account takes one, and the two it has no room for stay.
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.start()
+        XCTAssertEqual(account.claims, [["22222222222A", "22222222222B", "22222222222C"]])
+        XCTAssertEqual(device.claims.map(\.id), ["22222222222B", "22222222222C"])
+        XCTAssertEqual(store.parcels, [], "Nothing of this iPhone's shows among the account's parcels")
+        XCTAssertEqual(store.leftOnDevice?.count, 2)
+        // The list says it, and lets the news go.
+        store.leftOnDevice = nil
+
+        // Room for one more: the next start brings it, and the one that stays is news.
+        account.room = 1
+        await store.start()
+        XCTAssertEqual(account.claims.last, ["22222222222B", "22222222222C"])
+        XCTAssertEqual(device.claims.map(\.id), ["22222222222C"])
+        XCTAssertEqual(store.leftOnDevice?.count, 1)
+        store.leftOnDevice = nil
+
+        // The next sign-in is told again.
+        session.forceSignOut()
+        XCTAssertNil(store.leftOnDevice)
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.start()
+        XCTAssertEqual(device.claims.map(\.id), ["22222222222C"])
+        XCTAssertEqual(store.leftOnDevice?.count, 1)
+        store.leftOnDevice = nil
+
+        // Once the account takes the last, nothing stays and nothing is said.
+        account.room = 1
+        await store.start()
+        XCTAssertEqual(device.claims, [])
+        XCTAssertNil(store.leftOnDevice)
+    }
+
+    func testARefreshOrARelaunchWhileTheAccountIsStillFullSaysNothingAgain() async throws {
+        let account = AccountRoom(0)
+        let (store, session, device, persistence) = try signingIn(["22222222222A"], into: account)
+        defer { session.forceSignOut() }
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.start()
+        XCTAssertEqual(store.leftOnDevice?.count, 1)
+        store.leftOnDevice = nil
+
+        // A refresh reads the account's list and brings nothing along.
+        await store.load(showSpinner: false)
+        XCTAssertEqual(account.claims.count, 1)
+        XCTAssertNil(store.leftOnDevice)
+        // The list starting again, as an invitation comes or goes, asks again and hears the same.
+        await store.start()
+        XCTAssertEqual(account.claims.count, 2)
+        XCTAssertEqual(device.claims.map(\.id), ["22222222222A"])
+        XCTAssertNil(store.leftOnDevice)
+
+        // A relaunch reopens the account and asks again: still nothing new.
+        let reopened = SessionStore(configuration: PostcodeTestURLProtocol.configuration, persistence: persistence,
+                                    transport: PostcodeTestURLProtocol.shared)
+        let relaunched = ParcelStore(configuration: PostcodeTestURLProtocol.configuration, session: reopened, localizer: Localizer(),
+                                     transport: PostcodeTestURLProtocol.shared, device: device, deviceNotifications: quietNotifications())
+        relaunched.setDeliveryWidgetEnabled(false)
+        relaunched.setDeliveryLiveActivitiesEnabled(false)
+        await reopened.bootstrap()
+        XCTAssertEqual(reopened.user?.id, session.user?.id)
+        await relaunched.start()
+        XCTAssertEqual(account.claims.count, 3)
+        XCTAssertEqual(device.claims.map(\.id), ["22222222222A"])
+        XCTAssertNil(relaunched.leftOnDevice)
+        reopened.forceSignOut()
+    }
+
     func testALinkIsSharedUntilItsSharingIsStopped() async throws {
         let id = UUID()
         let storage = Memory()
@@ -1169,6 +1306,24 @@ private final class PostcodeTestURLProtocol: URLProtocol {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [PostcodeTestURLProtocol.self]
         return URLSession(configuration: configuration)
+    }
+
+    /// One transport for tests that build several stores on it, as a relaunch does.
+    static let shared = transport()
+
+    /// A request's body reaches a URL protocol as a stream.
+    static func body(of request: URLRequest) -> Data {
+        var data = request.httpBody ?? Data()
+        guard let stream = request.httpBodyStream else { return data }
+        stream.open()
+        defer { stream.close() }
+        var bytes = [UInt8](repeating: 0, count: 1024)
+        while stream.hasBytesAvailable {
+            let count = stream.read(&bytes, maxLength: bytes.count)
+            if count <= 0 { break }
+            data.append(contentsOf: bytes.prefix(count))
+        }
+        return data
     }
 
     override class func canInit(with request: URLRequest) -> Bool { request.url?.host == "postcodes.test" }

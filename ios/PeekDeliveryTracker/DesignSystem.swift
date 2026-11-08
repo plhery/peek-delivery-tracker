@@ -685,6 +685,8 @@ struct InlineToast: View {
     let symbol: String
     let tint: Color
     let action: (() -> Void)?
+    /// How many lines the words take at most beside the symbol; nil, as many as they need.
+    let lines: Int?
     /// A question's answers, side by side where the one button stands.
     let answers: [Answer]
     /// Who asks the question, where the symbol stands.
@@ -697,12 +699,14 @@ struct InlineToast: View {
         button: String?,
         symbol: String = "checkmark.circle.fill",
         tint: Color = .green,
+        lines: Int? = 2,
         action: (() -> Void)?
     ) {
         self.text = text
         self.button = button
         self.symbol = symbol
         self.tint = tint
+        self.lines = lines
         self.action = action
         answers = []
         asker = nil
@@ -715,6 +719,7 @@ struct InlineToast: View {
         symbol = ""
         tint = .primary
         action = nil
+        lines = 3
         self.answers = answers
         self.asker = AnyView(asker())
     }
@@ -750,7 +755,7 @@ struct InlineToast: View {
         } else {
             HStack(spacing: asker == nil ? 14 : 10) {
                 lead
-                Text(text).font(.subheadline.weight(.medium)).lineLimit(answers.isEmpty ? 2 : 3)
+                Text(text).font(.subheadline.weight(.medium)).lineLimit(lines)
                 Spacer(minLength: 4)
                 actionButton
                 if !answers.isEmpty {

@@ -298,6 +298,9 @@ private struct DeliveryListView: View {
     private struct ListToast: Equatable {
         let text: String
         var warning = false
+        /// The parcels a full account left on this iPhone: under the archive's box, for the time it takes to read
+        /// what to do about them.
+        var leftOnDevice = false
     }
 
     /// What a card's menu asked for that waits on the person: a new name, a sheet, or a yes before a delete.
@@ -319,7 +322,19 @@ private struct DeliveryListView: View {
         let layout = arrangement(of: delivered.arranged(store.parcels))
         // The cards that are others once the held parcels are let go: those leave without a trace, and are flown.
         let leaving = delivered.isEmpty ? [] : Set(layout.changing(into: arrangement(of: store.parcels)).keys)
-        return reviewing(holdingDelivered(prompting(screen(layout, leaving: leaving))))
+        return reviewing(holdingDelivered(prompting(tellingLeftOnDevice(screen(layout, leaving: leaving)))))
+    }
+
+    /// The account had no room for some of the parcels this iPhone followed before signing in: the list says how many
+    /// stayed here, once, as the web's deliveries do after bringing parcels along.
+    private func tellingLeftOnDevice(_ screen: some View) -> some View {
+        screen.onChange(of: store.leftOnDevice, initial: true) { _, news in
+            guard let news else { return }
+            store.leftOnDevice = nil
+            let text = localizer.text("link.bring.full.many", ["count": news.count])
+            toast = ListToast(text: text, leftOnDevice: true)
+            AccessibilityNotification.Announcement(text).post()
+        }
     }
 
     /// What a card's menu opens over the list, kept apart from the screen's own modifiers as `holdingDelivered` is.
@@ -1177,16 +1192,17 @@ private struct DeliveryListView: View {
             InlineToast(
                 text: toast.text,
                 button: nil,
-                symbol: toast.warning ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",
-                tint: toast.warning ? Brand.warning : ExperimentalPalette.delivered,
+                symbol: toast.leftOnDevice ? "archivebox.fill" : toast.warning ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",
+                tint: toast.leftOnDevice ? ExperimentalPalette.ochre : toast.warning ? Brand.warning : ExperimentalPalette.delivered,
+                lines: toast.leftOnDevice ? nil : 2,
                 action: nil
             )
             .padding(.horizontal, 16)
             .padding(.bottom, 5)
             .transition(.move(edge: .bottom).combined(with: .opacity))
             .task(id: toast) {
-                // A newer message gets its own four seconds.
-                try? await Task.sleep(for: .seconds(4))
+                // A newer message gets its own four seconds; the parcels left on this iPhone, eight.
+                try? await Task.sleep(for: .seconds(toast.leftOnDevice ? 8 : 4))
                 if self.toast == toast { self.toast = nil }
             }
         } else if shouldShowNotificationInvitation, !largeText {

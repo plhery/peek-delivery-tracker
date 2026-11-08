@@ -13,6 +13,7 @@ import * as scraper from 'universal-parcel-scraper';
 import { recognitionAskedCarriers } from '../lib/carriers';
 import { healthStepRecorder, observeTrackingHealth, type HealthSample } from './trackingHealth';
 import { RoyalBrowserPaused } from './royalBrowserAdmission';
+import { ProviderRefusals } from './providerRefusals';
 
 // Keep the published plan configurable without changing the scraper's other exports.
 vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
@@ -3701,5 +3702,40 @@ describe('a reused number\'s earlier parcel an older release stored', () => {
       'reported_carriers_seen', 'confirmed_carrier', 'confirmed_number']) expect(kept).not.toHaveProperty(key);
     // So a parcel looked up from France is offered Mondial Relay's postcode, as one that never showed the label is.
     expect(suggestedInput(forgotten, routingState(forgotten))).toEqual({ carrier: 'mondial-relay', field: 'dpdPostcode' });
+  });
+});
+
+describe('a provider refusing numbers it tracked', () => {
+  // A parcel tracked through ParcelsApp, its last answer more than an hour old.
+  const tracked = (number: string) => parcel({ id: `parcel-${number}`, tracking_number: number, carrier_data: { routing: state({
+    preferred_provider: 'ParcelsApp', preferred_number: number, last_success_at: '2026-09-10T09:00:00Z' }) } });
+  const refusing = () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const value = setup(time, { refusals: new ProviderRefusals() });
+    value.universal.mockImplementation(async (source: string) => {
+      if (source === 'ParcelsApp') throw new NoHistoryError(source, 'ParcelsApp has no usable shipment history');
+      return { ...history(), tracking_provider: source };
+    });
+    return value;
+  };
+  const parcelsApp = (health: ReturnType<typeof setup>['health']) => health.finishTrackingProvider.mock.calls
+    .filter(([source]) => source === 'ParcelsApp').map(([, , kind, retryAfterMs]) => [kind, retryAfterMs]);
+
+  it('rests the provider as on a rate limit once a second number it tracked comes back without history', async () => {
+    const { router, health } = refusing();
+    const first = await router.fetch(tracked('TEST1234'), false);
+    expect(first.result).toMatchObject({ tracking_provider: 'Ship24', routing: { failures: { ParcelsApp: { kind: 'no_history' } } } });
+    expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_blocked', expect.anything());
+    const second = await router.fetch(tracked('TEST5678'), false);
+    expect(second.result).toMatchObject({ tracking_provider: 'Ship24',
+      routing: { failures: { ParcelsApp: { kind: 'rate_limited', retry_at: '2026-09-10T12:30:00.000Z' } } } });
+    expect(parcelsApp(health)).toEqual([['not_found', expect.any(Number)], ['rate_limited', 1_800_000]]);
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_blocked', expect.objectContaining({ provider: 'ParcelsApp', category: 'rate_limited' }));
+  });
+  it('counts no answer about a number the provider never tracked', async () => {
+    const { router, health } = refusing();
+    for (const number of ['TEST1234', 'TEST5678', 'TEST9012']) await router.fetch(parcel({ id: number, tracking_number: number }), false);
+    expect(parcelsApp(health).map(([kind]) => kind)).toEqual(['not_found', 'not_found', 'not_found']);
+    expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_blocked', expect.anything());
   });
 });

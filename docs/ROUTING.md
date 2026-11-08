@@ -944,7 +944,13 @@ which parcel the carrier answered for. A link shows it only where it shows the p
 - cooldowns: 429 → at least 15 min, verification → 1 h, other failures → 1 min to 1 h
   (exponential);
 - not-found, `no_history` and a refused number (`invalid_input`) are per-parcel and never
-  open a global cooldown.
+  open a global cooldown, except from a provider refusing this server
+  ([providerRefusals.ts](../src/server/providerRefusals.ts)). When the provider a number was
+  last answered by finds no history for it, and for another number it answered within
+  30 minutes, it is refusing whatever it is asked, as ParcelsApp does for hours to an address
+  it blocks. That second answer counts as a rate limit, not as the parcel's lack of history:
+  the provider rests 30 minutes, and one such answer within 30 minutes of the pause ending
+  rests it again.
 
 If coordination fails, universal calls fail closed. A failed completion write never throws
 away data already retrieved.
@@ -953,15 +959,16 @@ away data already retrieved.
 
 Each routing decision is a `tracking_routing` log line with its `decision`, `carrier`,
 `provider`, `category` and the check's `attempt_id`, and a breadcrumb on any later Sentry
-report. Only `health_store_unavailable` opens a Sentry issue (`component:tracking-routing`,
-grouped by decision, provider and category). The four signals are what the catalog,
-detection or the adapters could act on: each check saves them for the hourly review in
-[OBSERVABILITY.md](OBSERVABILITY.md).
+report. Only `health_store_unavailable` and `provider_blocked` open a Sentry issue
+(`component:tracking-routing`, grouped by decision, provider and category). The four signals
+are what the catalog, detection or the adapters could act on: each check saves them for the
+hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 
 | `decision` | Meaning |
 | --- | --- |
 | `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded; not after a step that answered |
 | `provider_failed` | A provider failed for a parcel: `category` `rate_limited` needs less traffic, `schema` parser work, `invalid_input` a number the source refuses |
+| `provider_blocked` | A provider refuses this server whatever it is asked, and rests 30 minutes (Shared provider protection). A Sentry event for each pause |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |

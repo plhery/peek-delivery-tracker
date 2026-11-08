@@ -185,6 +185,12 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
     expect.objectContaining({ category: 'tracking-routing', message: 'carrier_coverage_discovered', data: { provider: 'Example Parcel Co' } }),
   ]));
 
+  // So does a provider refusing this server whatever it is asked: an event for each pause.
+  reportRoutingEvent('provider_blocked', { carrier: 'unknown', provider: 'ParcelsApp', category: 'rate_limited', trackingNumber: 'TEST-first' });
+  await flushObservability();
+  const blocked = captured.events.find((event) => event.message === 'Tracking routing: provider_blocked')!;
+  expect(blocked.level).toBe('warning');
+  expect(blocked.tags).toMatchObject({ provider: 'ParcelsApp', failure_category: 'rate_limited' });
   const refusedBody = '<h1>Access Denied</h1><p>Reference #18.test.123; parcel 8U00000000000</p>';
   const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(refusedBody, {
     status: 403, headers: { 'content-type': 'text/html', 'x-request-id': 'example-request-id',

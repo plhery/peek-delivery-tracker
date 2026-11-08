@@ -15,7 +15,8 @@ import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universa
 import { brandCarrierIds, carrierBrand, carrierIdFromName } from 'universal-parcel-scraper/app';
 import { errorType, reportRoutingEvent } from './observability';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
-import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
+import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
+import { BLOCK_PAUSE_MS, type ProviderRefusals } from './providerRefusals';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
@@ -715,6 +716,8 @@ export class TrackingRouter {
      * milliseconds: the waits it asks again after end by the last of those checks.
      */
     hourlyUntil?: number;
+    /** Universal providers' "no history" answers for numbers they tracked, across checks; without it, no block is found. */
+    refusals?: ProviderRefusals;
     now?: () => Date;
     /** Waits out a provider's spacing; tests replace the timer. */
     wait?: (ms: number, signal?: AbortSignal) => Promise<unknown>;
@@ -1577,9 +1580,12 @@ export class TrackingRouter {
       const before = performance.now();
       let kind: RoutingFailureKind | null = null;
       let retryAfterMs = 0;
+      let answered = false;
       try {
-        const result = dueOnly(normalizeCarrierResult(await (reused ?? this.options.universal(source, universalNumber,
-          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))), source);
+        const answer = await (reused ?? this.options.universal(source, universalNumber,
+          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier));
+        answered = true;
+        const result = dueOnly(normalizeCarrierResult(answer), source);
         if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier holds back or not due yet`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
         if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
@@ -1595,8 +1601,17 @@ export class TrackingRouter {
         delete state.failures[source];
         return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
       } catch (caught) {
-        const error = !inputPlausible && carrierErrorKind(caught) === 'input_required'
-          ? new NoHistoryError(source, `${source} asked for a postcode for a number that no carrier issues`, { cause: caught }) : caught;
+        // The provider this number was tracked through finds no history for it. With another number
+        // it tracked soon after, it refuses this server whatever it is asked (providerRefusals.ts):
+        // it rests as on a rate limit, and the answer is no lack of history for this parcel.
+        const blocked = token !== null && !answered && state.preferred_provider === source && state.preferred_number === universalNumber
+          && (caught instanceof NoHistoryError || carrierErrorKind(caught) === 'not_found')
+          && this.options.refusals?.refused(source, universalNumber, now().getTime()) === true;
+        if (blocked) report('provider_blocked', source, 'rate_limited', caught);
+        const error = blocked
+          ? new RateLimitedError(source, BLOCK_PAUSE_MS, `${source} finds no history for numbers it tracked`, { reason: 'refuses_tracked_numbers', cause: caught })
+          : !inputPlausible && carrierErrorKind(caught) === 'input_required'
+            ? new NoHistoryError(source, `${source} asked for a postcode for a number that no carrier issues`, { cause: caught }) : caught;
         const failure = fail(source, error, true);
         kind = failure.kind;
         if (kind === 'not_found' || kind === 'no_history') answeredEmpty.push(source);

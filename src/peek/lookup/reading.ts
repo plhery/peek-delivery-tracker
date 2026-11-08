@@ -1,5 +1,6 @@
 import { keywordNumberInText, recognizedNumberInText, TRACKING_CANDIDATE_PATTERNS, validTrackingNumber } from 'universal-parcel-scraper';
 import {
+  type CarrierDetection,
   detectCarrierMatch,
   isValidS10TrackingNumber,
   normalizeTrackingNumber,
@@ -93,10 +94,21 @@ const EVERY_ORDER_NUMBER = ORDER_NUMBERS.map(({ pattern }) => new RegExp(pattern
 const withoutOrders = (line: string) => EVERY_ORDER_NUMBER.reduce((rest, order) => rest.replace(order, ' '), line);
 
 /**
+ * The most distinct links and candidates one text is read for, the first ones in the order written. An email names a
+ * few dozen links, and 16 KB of dense prose about seven hundred words; a paste of thousands would hold the server's
+ * thread for seconds.
+ */
+export const MOST_LINKS_READ = 100;
+export const MOST_CANDIDATES_READ = 1_000;
+/** The candidate shapes, copied once: reading a text through them leaves each copy as it was. */
+const CANDIDATE_PATTERNS = TRACKING_CANDIDATE_PATTERNS.map((pattern) => new RegExp(pattern.source, pattern.flags));
+
+/**
  * Every tracking number in a text that one carrier claims with certainty,
  * the rule the parser itself applies to prose. Links count through their own
  * number; each line is read on its own, so numbers on neighbouring lines
- * never run together.
+ * never run together. A link or a candidate met again reads as it did the
+ * first time, so each is read once: detection reads a candidate in capitals.
  */
 export function numbersInText(text: string): NumberInText[] {
   const found = new Map<string, NumberInText>();
@@ -104,24 +116,38 @@ export function numbersInText(text: string): NumberInText[] {
     const normalized = normalizeTrackingNumber(match.trackingNumber);
     if (normalized && !found.has(normalized)) found.set(normalized, { normalized, match });
   };
+  const links = new Set<string>();
+  const detections = new Map<string, CarrierDetection>();
+  const detection = (candidate: string) => {
+    const key = candidate.toUpperCase();
+    let known = detections.get(key);
+    if (!known && detections.size < MOST_CANDIDATES_READ) {
+      known = detectCarrierMatch(candidate);
+      detections.set(key, known);
+    }
+    return known;
+  };
   for (const line of text.split(/\r?\n/)) {
     for (const link of line.match(LINK) ?? []) {
+      if (links.has(link) || links.size >= MOST_LINKS_READ) continue;
+      links.add(link);
       const match = parseTrackingInput(link);
       if (match.trackingNumber) keep(match);
     }
     const prose = line.replace(LINK, ' ');
-    const candidates: { index: number; end: number; text: string }[] = [];
-    for (const pattern of TRACKING_CANDIDATE_PATTERNS) {
-      for (const hit of prose.matchAll(new RegExp(pattern.source, pattern.flags))) {
+    const candidates: { index: number; end: number; text: string; detection: CarrierDetection }[] = [];
+    for (const pattern of CANDIDATE_PATTERNS) {
+      for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();
-        if (detectCarrierMatch(candidate).confidence !== 'high') continue;
+        const detected = detection(candidate);
+        if (detected?.confidence !== 'high') continue;
         const index = hit.index, end = index + hit[0].length;
         // A shape inside another certain one is the same number read twice.
-        if (!candidates.some((other) => index < other.end && end > other.index)) candidates.push({ index, end, text: candidate });
+        if (!candidates.some((other) => index < other.end && end > other.index)) candidates.push({ index, end, text: candidate, detection: detected });
       }
     }
     for (const candidate of candidates.sort((left, right) => left.index - right.index)) {
-      keep({ trackingNumber: candidate.text, source: 'text', ...detectCarrierMatch(candidate.text) });
+      keep({ trackingNumber: candidate.text, source: 'text', ...candidate.detection });
     }
   }
   return [...found.values()];

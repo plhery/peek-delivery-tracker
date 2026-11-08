@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "Collegamento…",
   "assistants.consent.switch": "Usa un altro account",
   "assistants.consent.signIn": "Accedi per collegare {{name}}",
+  "assistants.consent.signInAgain": "Accedi di nuovo per collegare {{name}}",
   "assistants.consent.signInBody": "{{name}} chiede di usare il tuo account Peek.",
   "assistants.consent.allowedTitle": "{{name}} è collegato",
   "assistants.consent.deniedTitle": "{{name}} non è collegato",

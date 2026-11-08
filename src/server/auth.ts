@@ -97,7 +97,7 @@ export class SupabaseAuthenticator {
       throw new SupabaseAuthError('Anonymous Supabase users are not accepted');
     }
 
-    const claims = sessionClaims(token, payload.id);
+    const claims = tokenClaims(token, payload.id);
     const user: SupabaseUser = {
       id: payload.id.toLowerCase(),
       email: typeof payload.email === 'string' ? payload.email : null,
@@ -106,6 +106,12 @@ export class SupabaseAuthenticator {
       sessionId: claims.sessionId,
     };
 
+    // The answer holds until the token expires, and a minute at most: a token without a
+    // usable expiry is asked about every time.
+    const expiresAt = claims.expiresAt === null
+      ? now
+      : Math.min(now + Math.max(0, this.options.cacheMs ?? 60_000), claims.expiresAt);
+    if (expiresAt <= now) return user;
     if (this.#cache.size >= 256) {
       for (const [key, value] of this.#cache) {
         if (value.expiresAt <= now) this.#cache.delete(key);
@@ -114,10 +120,7 @@ export class SupabaseAuthenticator {
         this.#cache.delete(this.#cache.keys().next().value as string);
       }
     }
-    this.#cache.set(fingerprint, {
-      expiresAt: now + Math.max(0, this.options.cacheMs ?? 60_000),
-      user,
-    });
+    this.#cache.set(fingerprint, { expiresAt, user });
     return user;
   }
 
@@ -126,21 +129,25 @@ export class SupabaseAuthenticator {
   }
 }
 
-function sessionClaims(
+/**
+ * What the token says of its session, once Auth has accepted it for `userId`: when its
+ * holder last signed in, the session, and when the token expires (milliseconds).
+ */
+function tokenClaims(
   token: string,
   userId: string,
-): { authenticatedAt: Date | null; sessionId: string | null } {
+): { authenticatedAt: Date | null; sessionId: string | null; expiresAt: number | null } {
+  const none = { authenticatedAt: null, sessionId: null, expiresAt: null };
   const parts = token.split('.');
-  if (parts.length !== 3) return { authenticatedAt: null, sessionId: null };
+  if (parts.length !== 3) return none;
   let claims: unknown;
   try {
     claims = JSON.parse(Buffer.from(parts[1]!, 'base64url').toString('utf8'));
   } catch {
-    return { authenticatedAt: null, sessionId: null };
+    return none;
   }
-  if (!isRecord(claims) || claims.sub !== userId) {
-    return { authenticatedAt: null, sessionId: null };
-  }
+  if (!isRecord(claims) || claims.sub !== userId) return none;
+  const expiresAt = typeof claims.exp === 'number' && Number.isFinite(claims.exp) ? claims.exp * 1_000 : null;
   const sessionId = typeof claims.session_id === 'string' && UUID.test(claims.session_id)
     ? claims.session_id.toLowerCase()
     : null;
@@ -161,7 +168,7 @@ function sessionClaims(
       ) authenticatedAt = candidate;
     }
   }
-  return { authenticatedAt, sessionId };
+  return { authenticatedAt, sessionId, expiresAt };
 }
 
 interface AuthRuntime {

@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "Connecting…",
   "assistants.consent.switch": "Use another account",
   "assistants.consent.signIn": "Sign in to connect {{name}}",
+  "assistants.consent.signInAgain": "Sign in again to connect {{name}}",
   "assistants.consent.signInBody": "{{name}} asks to use your Peek account.",
   "assistants.consent.allowedTitle": "{{name}} is connected",
   "assistants.consent.deniedTitle": "{{name}} isn’t connected",

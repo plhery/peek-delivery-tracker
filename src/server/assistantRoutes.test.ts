@@ -65,7 +65,9 @@ beforeEach(() => {
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
   vi.spyOn(console, 'warn').mockImplementation(() => undefined);
   vi.spyOn(console, 'error').mockImplementation(() => undefined);
-  vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({ id: userId, email: 'alex@example.com', authenticatedAt: null, sessionId: null });
+  vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({
+    id: userId, email: 'alex@example.com', authenticatedAt: new Date(), sessionId: '7d000000-0000-4000-a000-000000000001',
+  });
   vi.spyOn(service, 'assistantToken').mockImplementation(async (digest) => owners.get(digest) ?? null);
   vi.mocked(addParcelsFromText).mockReset();
   forgetAssistantEmails();
@@ -535,5 +537,123 @@ describe('the account\'s assistants', () => {
     vi.stubEnv('ASSISTANT_ACCOUNTS', '');
     expect((await consent(signedIn('POST', path, { query, approve: true }), none)).status).toBe(404);
     expect(open).toHaveBeenCalledTimes(1);
+  });
+
+  describe('with Auth asked about each token', () => {
+    const START = Date.parse('2026-11-08T10:00:00Z');
+    let issued = 0;
+
+    /** An access token as Auth issues them, unsigned: the fake Auth below answers for it. Each one is new, so no answer is cached. */
+    function accessToken(signedInAt: number, expiresAt: number): string {
+      issued += 1;
+      const part = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
+      return [part({ alg: 'HS256', typ: 'JWT' }), part({
+        sub: userId, exp: Math.floor(expiresAt / 1_000), jti: `synthetic-${issued}`,
+        session_id: '7d000000-0000-4000-a000-000000000001', amr: [{ method: 'otp', timestamp: Math.floor(signedInAt / 1_000) }],
+      }), 'signature'].join('.');
+    }
+
+    /** Auth, accepting the tokens of sessions still open. */
+    function authServer(open: Set<string>) {
+      return vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
+        expect(String(input)).toBe('https://database.example/auth/v1/user');
+        const bearer = new Headers(init?.headers).get('authorization')?.replace(/^Bearer /, '') ?? '';
+        return open.has(bearer)
+          ? Response.json({ id: userId, email: 'alex@example.com', email_confirmed_at: '2026-11-01T00:00:00Z' })
+          : Response.json({ msg: 'invalid JWT' }, { status: 401 });
+      });
+    }
+
+    function withToken(token: string, method: string, path = '/api/account/assistants', body?: unknown) {
+      return new NextRequest(`https://peek.example${path}`, {
+        method,
+        headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'content-type': 'application/json' }) },
+        ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+      });
+    }
+
+    beforeEach(() => {
+      vi.mocked(SupabaseAuthenticator.prototype.validate).mockRestore();
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(START);
+    });
+    afterEach(() => { vi.useRealTimers(); });
+
+    it('serve a read from a checked token only until the token expires', async () => {
+      vi.spyOn(service, 'assistantGrants').mockResolvedValue([connection]);
+      const token = accessToken(START - 3_600_000, START + 30_000);
+      const open = new Set([token]);
+      const auth = authServer(open);
+      expect((await readAssistants(withToken(token, 'GET'), none)).status).toBe(200);
+      // Signed out elsewhere: the answer Auth gave holds while the token lasts…
+      open.delete(token);
+      vi.setSystemTime(START + 29_000);
+      expect((await readAssistants(withToken(token, 'GET'), none)).status).toBe(200);
+      expect(auth).toHaveBeenCalledOnce();
+      // …and not past its expiry, inside the minute or not.
+      vi.setSystemTime(START + 31_000);
+      expect((await readAssistants(withToken(token, 'GET'), none)).status).toBe(401);
+      expect(auth).toHaveBeenCalledTimes(2);
+    });
+
+    it('make a personal token only for a session Auth confirms now, signed in within ten minutes', async () => {
+      const create = vi.spyOn(service, 'createPersonalToken').mockResolvedValue(connection);
+      const make = (token: string) => createToken(withToken(token, 'POST', undefined, { name: 'Home script', scopes: ['parcels:read'] }), none);
+      const recent = accessToken(START - 60_000, START + 3_600_000);
+      const old = accessToken(START - 11 * 60_000, START + 3_600_000);
+      const brief = accessToken(START - 60_000, START + 30_000);
+      const open = new Set([recent, old, brief]);
+      const auth = authServer(open);
+
+      expect((await make(recent)).status).toBe(201);
+      // Once for the request, from then on from what Auth said, and once afresh for the token.
+      expect(auth).toHaveBeenCalledTimes(2);
+      open.delete(recent);
+      vi.setSystemTime(START + 5_000);
+      const signedOut = await make(recent);
+      expect(signedOut.status).toBe(401);
+      expect(await signedOut.json()).toEqual({ error: 'Sign in again before making a personal token' });
+      expect((await make(old)).status).toBe(401);
+
+      expect((await make(brief)).status).toBe(201);
+      open.delete(brief);
+      vi.setSystemTime(START + 31_000);
+      expect((await make(brief)).status).toBe(401);
+      expect(create).toHaveBeenCalledTimes(2);
+    });
+
+    it('grant an assistant only for a session Auth confirms now, signed in within ten minutes to allow', async () => {
+      const client = { id: newClientId(), name: 'Example Assistant', uri: null, redirectUris: ['https://assistant.example.com/callback'] };
+      vi.spyOn(service, 'assistantClient').mockResolvedValue(client);
+      const grant = vi.spyOn(service, 'openAssistantCode').mockResolvedValue(undefined);
+      const query = new URLSearchParams({
+        response_type: 'code', client_id: client.id, code_challenge: pkceChallenge('v'.repeat(64)), code_challenge_method: 'S256', state: 'state-123',
+      }).toString();
+      const answer = (token: string, approve: boolean) => consent(withToken(token, 'POST', '/api/account/assistants/consent', { query, approve, scopes: ['parcels:read'] }), none);
+      const recent = accessToken(START - 60_000, START + 3_600_000);
+      const old = accessToken(START - 11 * 60_000, START + 3_600_000);
+      const brief = accessToken(START - 60_000, START + 30_000);
+      const open = new Set([recent, old, brief]);
+      authServer(open);
+
+      expect((await answer(recent, true)).status).toBe(200);
+      open.delete(recent);
+      vi.setSystemTime(START + 5_000);
+      const signedOut = await answer(recent, true);
+      expect(signedOut.status).toBe(401);
+      expect(await signedOut.json()).toEqual({ error: 'Sign in again before connecting an assistant' });
+      // Refusing grants nothing: it needs a session Auth confirms, however old its sign-in.
+      expect((await answer(recent, false)).status).toBe(401);
+      const refused = await answer(old, false);
+      expect(refused.status).toBe(200);
+      expect(new URL((await refused.json()).redirect).searchParams.get('error')).toBe('access_denied');
+      expect((await answer(old, true)).status).toBe(401);
+
+      expect((await answer(brief, true)).status).toBe(200);
+      open.delete(brief);
+      vi.setSystemTime(START + 31_000);
+      expect((await answer(brief, true)).status).toBe(401);
+      expect(grant).toHaveBeenCalledTimes(2);
+    });
   });
 });

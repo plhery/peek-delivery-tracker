@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "正在连接…",
   "assistants.consent.switch": "使用其他账号",
   "assistants.consent.signIn": "登录以连接 {{name}}",
+  "assistants.consent.signInAgain": "重新登录以连接 {{name}}",
   "assistants.consent.signInBody": "{{name}} 请求使用你的 Peek 账号。",
   "assistants.consent.allowedTitle": "{{name}} 已连接",
   "assistants.consent.deniedTitle": "{{name}} 未连接",

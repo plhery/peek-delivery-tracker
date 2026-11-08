@@ -1,4 +1,4 @@
-import { apiRoute, HttpError, json, readJsonObject, requireService, requireUser, type ApiContext } from '../../../../src/server/api';
+import { apiRoute, HttpError, json, readJsonObject, requireRecentSignIn, requireService, requireUser, type ApiContext } from '../../../../src/server/api';
 import { clientName } from '../../../../src/server/assistants/clients';
 import { assistantsOpenToAccount } from '../../../../src/server/assistants/access';
 import {
@@ -30,7 +30,10 @@ export const GET = apiRoute(async (context) => {
   return json({ connections, mcpUrl: settings.resource });
 }, { serviceRequired: true });
 
-/** Makes a personal token for a script, `{"name": "…", "scopes": ["parcels:read"]}`. The token is shown this once. */
+/**
+ * Makes a personal token for a script, `{"name": "…", "scopes": ["parcels:read"]}`. The token is shown this once. It
+ * lasts until deleted, so it needs a sign-in from the last ten minutes.
+ */
 export const POST = apiRoute(async (context) => {
   await openSettings(context);
   const payload = await readJsonObject(context.request);
@@ -40,9 +43,10 @@ export const POST = apiRoute(async (context) => {
   if (!scopes.length || (payload.scopes as unknown[]).length !== scopes.length) {
     throw new HttpError(400, `scopes must list ${SCOPES.join(' or ')}`);
   }
+  const owner = await requireRecentSignIn(context, 'Sign in again before making a personal token');
   const token = newSecret('personal');
   try {
-    const connection = await requireService(context).createPersonalToken(requireUser(context).id, name, scopes as Scope[], secretDigest(token));
+    const connection = await requireService(context).createPersonalToken(owner.id, name, scopes as Scope[], secretDigest(token));
     return json({ connection, token }, 201);
   } catch (error) {
     if (error instanceof SupabaseError && error.code === 'P0001') {

@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "Wird verbunden…",
   "assistants.consent.switch": "Anderes Konto verwenden",
   "assistants.consent.signIn": "Melde dich an, um {{name}} zu verbinden",
+  "assistants.consent.signInAgain": "Melde dich erneut an, um {{name}} zu verbinden",
   "assistants.consent.signInBody": "{{name}} möchte dein Peek-Konto verwenden.",
   "assistants.consent.allowedTitle": "{{name}} ist verbunden",
   "assistants.consent.deniedTitle": "{{name}} ist nicht verbunden",

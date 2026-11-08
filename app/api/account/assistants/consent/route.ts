@@ -1,4 +1,4 @@
-import { apiRoute, HttpError, json, readJsonObject, requireService, requireUser } from '../../../../../src/server/api';
+import { apiRoute, HttpError, json, readJsonObject, requireRecentSignIn, requireService, requireUser, validateAfresh } from '../../../../../src/server/api';
 import { answerConsent } from '../../../../../src/server/assistants/consent';
 import { assistantsOpenToAccount } from '../../../../../src/server/assistants/access';
 import { assistantsConfigured, SCOPES, type Scope } from '../../../../../src/server/assistants/settings';
@@ -8,7 +8,9 @@ export const runtime = 'nodejs';
 
 /**
  * The owner's answer on the consent page: `{"query": "<the authorization request>", "approve": true, "scopes": […]}`.
- * Answers where the browser goes next, the assistant's redirect address with a code or an error.
+ * Answers where the browser goes next, the assistant's redirect address with a code or an error. The token is checked
+ * with Auth afresh, and allowing needs a sign-in from the last ten minutes: the grant outlasts the session. The page
+ * answers that 401 by asking to sign in again, then shows the same request.
  */
 export const POST = apiRoute(async (context) => {
   const settings = assistantsConfigured();
@@ -23,6 +25,9 @@ export const POST = apiRoute(async (context) => {
     if (!Array.isArray(payload.scopes)) throw new HttpError(400, 'scopes must be a list');
     kept = SCOPES.filter((scope) => (payload.scopes as unknown[]).includes(scope));
   }
-  const redirect = await answerConsent(settings, requireService(context), user.id, payload.query, payload.approve, kept);
+  const owner = payload.approve
+    ? await requireRecentSignIn(context, 'Sign in again before connecting an assistant')
+    : await validateAfresh(context, 'Authentication is required');
+  const redirect = await answerConsent(settings, requireService(context), owner.id, payload.query, payload.approve, kept);
   return json({ redirect });
 }, { serviceRequired: true });

@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "A ligar…",
   "assistants.consent.switch": "Usar outra conta",
   "assistants.consent.signIn": "Inicia sessão para ligar {{name}}",
+  "assistants.consent.signInAgain": "Inicia sessão novamente para ligar {{name}}",
   "assistants.consent.signInBody": "{{name}} pede para usar a tua conta do Peek.",
   "assistants.consent.allowedTitle": "{{name}} está ligado",
   "assistants.consent.deniedTitle": "{{name}} não está ligado",

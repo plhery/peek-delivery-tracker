@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiAuthenticationError } from '../lib/apiClient';
 import { AssistantRequestError, answerAssistantConsent } from '../lib/assistants';
 import { PENDING_CONSENT_STORAGE_KEY } from '../lib/pendingConsent';
 import { AssistantConsentScreen, type ConsentRequest } from './AssistantConsentScreen';
@@ -91,6 +92,25 @@ describe('the page where an assistant asks to connect', () => {
     await user.click(screen.getByRole('button', { name: 'Don’t allow' }));
     expect(answerAssistantConsent).toHaveBeenCalledWith(expect.anything(), { query: QUERY, approve: false, scopes: [] });
     expect(await screen.findByRole('heading', { name: 'Claude isn’t connected' })).toBeInTheDocument();
+  });
+
+  it('asks to sign in again when the server wants a newer sign-in, keeping the request', async () => {
+    signedIn();
+    const signedInAuth = mocks.auth;
+    const visitor = {
+      status: 'anonymous', user: null, googleEnabled: true, appleEnabled: false, emailOtpEnabled: true, oidcName: null,
+      signInWithGoogle, signInWithApple: vi.fn(), signInWithOidc: vi.fn(), sendCode: vi.fn(), verifyCode: vi.fn(),
+    };
+    vi.mocked(signedInAuth.signOut as () => Promise<void>).mockImplementation(async () => { mocks.auth = visitor; });
+    vi.mocked(answerAssistantConsent).mockRejectedValueOnce(new ApiAuthenticationError());
+    const user = userEvent.setup();
+    render(<AssistantConsentScreen request={request} query={QUERY} />);
+    await user.click(screen.getByRole('button', { name: 'Allow' }));
+    expect(signedInAuth.signOut).toHaveBeenCalledOnce();
+    expect(await screen.findByRole('heading', { name: 'Sign in again to connect Claude' })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Continue with Google' }));
+    expect(JSON.parse(window.sessionStorage.getItem(PENDING_CONSENT_STORAGE_KEY)!)).toMatchObject({ query: `?${QUERY}` });
+    expect(assign).not.toHaveBeenCalled();
   });
 
   it('warns when the answer goes to an app on this device, and says why the server refused', async () => {

@@ -17,6 +17,7 @@ import { errorMessage, isRecord, type JsonObject } from './types';
 const MAX_JSON_BODY = 16_384;
 const PREAUTH_REQUEST_LIMIT = 300;
 const PREAUTH_REQUEST_WINDOW_SECONDS = 60;
+const RECENT_SIGN_IN_MS = 10 * 60 * 1_000;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 // One limiter per kind of key: a flood of made-up tokens or addresses fills
 // its own limiter and leaves the other counts alone.
@@ -515,6 +516,42 @@ export function requireUserClient(context: ApiContext): SupabaseUserClient {
 export function requireService(context: ApiContext): SupabaseServiceClient {
   if (!context.service) throw new HttpError(503, 'The delivery database is not configured');
   return context.service;
+}
+
+/**
+ * The caller as Auth sees them now, asked afresh rather than from the cache: a session
+ * ended since the token's last check is refused. `refusal` is the 401's message.
+ */
+export async function validateAfresh(context: ApiContext, refusal: string): Promise<SupabaseUser> {
+  const user = requireUser(context);
+  const auth = context.token ? authenticator() : null;
+  if (!auth || !context.token) throw new HttpError(401, refusal);
+  let fresh: SupabaseUser;
+  try {
+    fresh = await auth.validate(context.token, false);
+  } catch (error) {
+    if (error instanceof SupabaseAuthError) throw new HttpError(401, refusal, undefined, { cause: error });
+    if (error instanceof SupabaseAuthUnavailableError) {
+      throw new HttpError(503, error.message, { 'Retry-After': '5' }, { cause: error });
+    }
+    throw error;
+  }
+  if (fresh.id !== user.id) throw new HttpError(401, refusal);
+  return fresh;
+}
+
+/**
+ * The caller, asked afresh, when they signed in within the last ten minutes: what deleting
+ * the account, a personal token and an assistant's grant need, since each outlasts the
+ * session. A copied access token alone can't make them. The clients answer the 401 as any
+ * other, by asking to sign in again.
+ */
+export async function requireRecentSignIn(context: ApiContext, refusal: string): Promise<SupabaseUser> {
+  const fresh = await validateAfresh(context, refusal);
+  if (!fresh.sessionId || !fresh.authenticatedAt) throw new HttpError(401, refusal);
+  const age = Date.now() - fresh.authenticatedAt.getTime();
+  if (age < -60_000 || age > RECENT_SIGN_IN_MS) throw new HttpError(401, refusal);
+  return fresh;
 }
 
 export function parseUuid(value: string, label: string): string {

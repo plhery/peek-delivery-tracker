@@ -41,9 +41,10 @@ Next.js route handlers --- user token ---> PostgREST + Postgres RLS
 
 Key server modules:
 
-- `auth.ts` validates the bearer token and builds a PostgREST client carrying the
-  user's JWT. `api.ts` adds logging, per-account rate limits and the checks on requests
-  without sign-in.
+- `auth.ts` validates the bearer token with Auth and builds a PostgREST client carrying
+  the user's JWT. It keeps Auth's answer until the token expires, a minute at most.
+  `api.ts` adds logging, per-account rate limits and the checks on requests without
+  sign-in.
 - `publicParcels.ts` decides what a parcel link shows, to a gift's viewer too, hashes owner
   keys and keys the daily lookup counters. The routes under `/api/public` are the only ones
   without sign-in that write.
@@ -280,8 +281,11 @@ Key server modules:
     once for ten minutes; one used twice ends its grant.
   - Access tokens last an hour. A refresh token lasts 60 days and is replaced at each use;
     a replaced one used again after two minutes ends the grant. Google's assistants keep
-    theirs, as they require. A personal token lasts until it is deleted. The database keeps
-    tokens and codes as their SHA-256, and only the service role reaches those tables.
+    theirs, as they require. A personal token lasts until it is deleted. Making one, or
+    allowing an assistant, needs a sign-in from the last ten minutes, which the server
+    checks with Auth afresh; the consent page then asks to sign in again and shows the
+    same request. The database keeps tokens and codes as their SHA-256, and only the
+    service role reaches those tables.
   - A grant makes at most 120 requests a minute. A network may present 600 unknown tokens
     a minute, open the consent page 30 times a minute and register 20 clients an hour. An
     account has at most 50 grants and 10 personal tokens; Settings lists them and ends any.

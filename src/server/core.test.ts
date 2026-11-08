@@ -438,6 +438,7 @@ describe('authentication validation', () => {
     const auth = new SupabaseAuthenticator('https://supabase.example', 'public-key');
     const accessToken = token({
       sub: userId,
+      exp: Math.floor(Date.now() / 1_000) + 3_600,
       session_id: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
       amr: [{ method: 'otp', timestamp: 1_787_000_000 }],
     });
@@ -451,6 +452,52 @@ describe('authentication validation', () => {
     expect(user.authenticatedAt?.toISOString()).toBe('2026-08-17T20:53:20.000Z');
     await expect(auth.validate(accessToken)).resolves.toEqual(user);
     expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps an accepted token\'s answer until the token expires, a minute at most', async () => {
+    let now = Date.parse('2026-11-08T10:00:00Z');
+    const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => Response.json({ id: userId, email: 'owner@example.com' }));
+    const auth = new SupabaseAuthenticator('https://supabase.example', 'public-key', { clock: () => now });
+
+    const brief = token({ sub: userId, exp: now / 1_000 + 30 });
+    await auth.validate(brief);
+    now += 29_000;
+    await auth.validate(brief);
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    // Past its expiry the token is Auth's to judge again, inside the minute or not.
+    now += 2_000;
+    fetcher.mockResolvedValueOnce(Response.json({ msg: 'token is expired' }, { status: 401 }));
+    await expect(auth.validate(brief)).rejects.toBeInstanceOf(SupabaseAuthError);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+
+    const lasting = token({ sub: userId, exp: now / 1_000 + 3_600 });
+    await auth.validate(lasting);
+    now += 59_000;
+    await auth.validate(lasting);
+    expect(fetcher).toHaveBeenCalledTimes(3);
+    now += 2_000;
+    await auth.validate(lasting);
+    expect(fetcher).toHaveBeenCalledTimes(4);
+  });
+
+  it('asks Auth every time about a token without a usable expiry', async () => {
+    const now = Date.parse('2026-11-08T10:00:00Z');
+    const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => Response.json({ id: userId, email: 'owner@example.com' }));
+    const auth = new SupabaseAuthenticator('https://supabase.example', 'public-key', { clock: () => now });
+    const tokens = [
+      token({ sub: userId }),
+      token({ sub: userId, exp: String(now / 1_000 + 3_600) }),
+      token({ sub: userId, exp: null }),
+      // Accepted by Auth, yet past by this server's clock.
+      token({ sub: userId, exp: now / 1_000 - 5 }),
+      // Its claims name another account than the one Auth answered for.
+      token({ sub: 'cccccccc-cccc-4ccc-8ccc-cccccccccccc', exp: now / 1_000 + 3_600 }),
+    ];
+    for (const accessToken of tokens) {
+      await auth.validate(accessToken);
+      await auth.validate(accessToken);
+    }
+    expect(fetcher).toHaveBeenCalledTimes(tokens.length * 2);
   });
 
   it('says whether the Auth server has confirmed the account\'s address', async () => {

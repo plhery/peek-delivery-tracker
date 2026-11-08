@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from '../auth/AuthContext';
 import { siteAuthConfig } from '../auth/siteAuth';
 import type { ApiAssistantScope } from '../generated/apiContract';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
+import { ApiAuthenticationError } from '../lib/apiClient';
 import { AppearanceProvider } from '../lib/appearance';
 import { answerAssistantConsent, AssistantRequestError } from '../lib/assistants';
 import { rememberPendingConsent } from '../lib/pendingConsent';
@@ -72,6 +73,8 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
   const [working, setWorking] = useState<Outcome | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [problem, setProblem] = useState<'invalid' | 'closed' | 'full' | 'failed' | null>(null);
+  // Allowing needs a recent sign-in: the server refused an older one, and the person signs in again here.
+  const [again, setAgain] = useState(false);
   const userId = auth.user?.id;
   const apiAuth = useMemo(() => userId ? { userId, getAccessToken: auth.getAccessToken, signal: auth.signal } : undefined,
     [userId, auth.getAccessToken, auth.signal]);
@@ -105,7 +108,7 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
     const noted = (signIn: () => Promise<void>) => () => { rememberPendingConsent(); return signIn(); };
     return <main className="auth-screen assistant-consent">
       <div className="feedback-language"><LanguageControl /></div>
-      <SignInScreen card configured={auth.status !== 'unconfigured'} title={t('assistants.consent.signIn', { name })}
+      <SignInScreen card configured={auth.status !== 'unconfigured'} title={t(again ? 'assistants.consent.signInAgain' : 'assistants.consent.signIn', { name })}
         subtitle={t('assistants.consent.signInBody', { name })}
         googleEnabled={auth.googleEnabled} appleEnabled={auth.appleEnabled} emailOtpEnabled={auth.emailOtpEnabled} oidcName={auth.oidcName}
         signInWithGoogle={noted(auth.signInWithGoogle)} signInWithApple={noted(auth.signInWithApple)} signInWithOidc={noted(auth.signInWithOidc)}
@@ -133,6 +136,13 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
       setOutcome(next);
       window.location.assign(redirect);
     } catch (reason) {
+      if (reason instanceof ApiAuthenticationError) {
+        // The same request shows again once signed in, here or after a provider's round trip.
+        setAgain(true);
+        setWorking(null);
+        void auth.signOut();
+        return;
+      }
       const status = reason instanceof AssistantRequestError ? reason.status : 0;
       setProblem(status === 400 ? 'invalid' : status === 403 ? 'closed' : status === 409 ? 'full' : 'failed');
       setWorking(null);
@@ -169,6 +179,6 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
         onClick={() => void answer(true)}>{t(working === 'allowed' ? 'assistants.consent.working' : 'assistants.consent.allow')}</button>
     </div>
     <button type="button" className="auth-flow__text-button assistant-consent__switch" disabled={Boolean(working)}
-      onClick={() => void auth.signOut()}>{t('assistants.consent.switch')}</button>
+      onClick={() => { setAgain(false); void auth.signOut(); }}>{t('assistants.consent.switch')}</button>
   </Card>;
 }

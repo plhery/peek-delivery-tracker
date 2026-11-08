@@ -229,6 +229,11 @@ don't expire by default, so users stay signed in until they sign out or delete t
 account. Keep the access-token lifetime short (about an hour); refresh tokens carry the
 long session. If you enable time-box or inactivity limits, use at least 30 days.
 
+What outlasts the session needs a sign-in from the last ten minutes: deleting the account,
+making a personal token and allowing an assistant. The server asks Auth about the token
+afresh, not from its cache, and reads when the session signed in from the token. An older
+sign-in gets `401`, which the clients answer by asking to sign in again.
+
 The browser saves the session under `sb-<first label of the Supabase host>-auth-token`, or under
 the key a saved sign-in already uses. So Supabase can move to another host without signing
 anyone out:

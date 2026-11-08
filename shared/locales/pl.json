@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "Łączenie…",
   "assistants.consent.switch": "Użyj innego konta",
   "assistants.consent.signIn": "Zaloguj się, aby połączyć {{name}}",
+  "assistants.consent.signInAgain": "Zaloguj się ponownie, aby połączyć {{name}}",
   "assistants.consent.signInBody": "{{name}} prosi o dostęp do Twojego konta Peek.",
   "assistants.consent.allowedTitle": "Połączono: {{name}}",
   "assistants.consent.deniedTitle": "Nie połączono: {{name}}",

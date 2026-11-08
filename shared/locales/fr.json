@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "Connexion…",
   "assistants.consent.switch": "Utiliser un autre compte",
   "assistants.consent.signIn": "Connecte-toi pour autoriser {{name}}",
+  "assistants.consent.signInAgain": "Reconnecte-toi pour autoriser {{name}}",
   "assistants.consent.signInBody": "{{name}} demande à utiliser ton compte Peek.",
   "assistants.consent.allowedTitle": "{{name}} est connecté",
   "assistants.consent.deniedTitle": "{{name}} n’est pas connecté",

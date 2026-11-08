@@ -1271,6 +1271,7 @@
   "assistants.consent.working": "Подключаем…",
   "assistants.consent.switch": "Использовать другой аккаунт",
   "assistants.consent.signIn": "Войдите, чтобы подключить {{name}}",
+  "assistants.consent.signInAgain": "Войдите снова, чтобы подключить {{name}}",
   "assistants.consent.signInBody": "{{name}} просит доступ к вашему аккаунту Peek.",
   "assistants.consent.allowedTitle": "{{name}} подключён",
   "assistants.consent.deniedTitle": "{{name}} не подключён",

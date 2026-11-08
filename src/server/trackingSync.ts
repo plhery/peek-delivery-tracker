@@ -40,7 +40,7 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { REDETECTION_PAGE, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
-import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
@@ -2182,7 +2182,8 @@ export class TrackingSyncService {
       // A scan meets the row an earlier take-over left under an old identity before any policy,
       // then the row whose template placeholder an adapter left unfilled, the row whose place it
       // names with a part more or less, and the row of its words with an adapter's HTML left in,
-      // whatever the carrier.
+      // whatever the carrier, then a universal provider's row to the minute of a scan it now gives
+      // to the second.
       const stored = storedEventIdentities(parcel);
       const reworded = restatedIdentities(events, stored);
       const adopt = (matches: ReadonlyMap<string, string>) => {
@@ -2192,6 +2193,7 @@ export class TrackingSyncService {
       adopt(filledPlaceholders(events, stored));
       adopt(requalifiedPlaces(events, stored));
       adopt(strippedMarkup(events, stored));
+      adopt(restatedMinutes(events, stored));
       const policyCarriers = fetched.earlierResult && fetched.earlierCarrierId && fetched.earlierCarrierId !== sourceCarrierId
         ? [sourceCarrierId, fetched.earlierCarrierId] : [sourceCarrierId];
       const held = new Map<string, string>();

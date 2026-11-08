@@ -7580,6 +7580,25 @@ it('rewrites in place a scan whose place gains a qualifier and one stored with a
     ]);
 });
 
+it('moves a universal provider\'s row to the minute to the second its provider now gives the scan', async () => {
+  const store = eventStore();
+  // An answer listed one scan twice in a minute and its minute's copy was stored; a release keeps the second's (synthetic).
+  const departed = { time: '2026-10-28T09:14:37Z', stage: 'in_transit', description: 'Departed from sorting center', location: 'Example Town' };
+  const adapter = { fetch: vi.fn().mockResolvedValue({ tracking_provider: 'ParcelsApp', status: 'in_transit', current_stage: 'in_transit',
+    last_update: departed.time, last_status_text: departed.description, events: [departed] }) };
+  const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+    () => new Date('2026-10-28T12:00:00Z'));
+  store.rows.set('unknown:minute', { id: 'row-0', package_id: 'minute-parcel', provider_event_id: 'unknown:minute',
+    occurred_at: '2026-10-28T09:14:00Z', stage: 'in_transit', description: departed.description, location: '',
+    raw_data: { time: '2026-10-28T09:14:00Z', universal_provider: 'ParcelsApp' } });
+  const load = () => ({ id: 'minute-parcel', user_id: 'owner', carrier: 'unknown', tracking_number: 'TEST1234',
+    current_stage: 'in_transit', [STORED_EVENT_IDENTITIES]: store.identities() });
+  await service.syncPackage(load());
+  await service.syncPackage(load());
+  expect([...store.rows.values()].map(({ id, provider_event_id, occurred_at, location }) => ({ id, provider_event_id, occurred_at, location })))
+    .toEqual([{ id: 'row-0', provider_event_id: 'unknown:minute', occurred_at: expect.stringMatching(/^2026-10-28T09:14:37/), location: 'Example Town' }]);
+});
+
 it('rewrites in place a scan its carrier rewords once the old words leave its answer', async () => {
   const store = eventStore();
   // A carrier rewords a failed attempt when it delivers the parcel (synthetic wording and times).

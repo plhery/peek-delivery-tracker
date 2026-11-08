@@ -552,6 +552,28 @@ export function strippedMarkup(
   });
 }
 
+/**
+ * Maps the computed identity of each new scan to the stored row its universal provider gave to the whole minute: a
+ * provider's answer listing one scan twice in a minute once kept the copy to the minute, and a release now keeps the
+ * one to the second (`withoutMinuteCopies`), which would otherwise be stored beside the row. The same universal
+ * provider, a row at the scan's minute, neither dated by its day alone, the same wording and stage, the same place or
+ * one the scan adds, codes that agree when both carry one, never an observation, a scan whose own identity is not
+ * stored and a row no event of the batch carries, matched one to one.
+ */
+export function restatedMinutes(
+  events: readonly JsonObject[],
+  stored: readonly JsonObject[],
+): Map<string, string> {
+  return restatedRows(events, stored, (scan, row) => {
+    const [at, minute] = [instantOf(scan), instantOf(row)];
+    return sourceOf(identity(scan)) === UNIVERSAL && providerOf(scan) !== '' && sameSource(scan, row)
+      && Number.isFinite(at) && Number.isFinite(minute) && minute % MINUTE_MS === 0 && at % MINUTE_MS !== 0
+      && at - (at % MINUTE_MS) === minute && !dayAlone(scan) && !dayAlone(row)
+      && stageOf(row) === stageOf(scan) && wordingOf(row) !== '' && wordingOf(row) === wordingOf(scan)
+      && codesAgree(scan, row) && (placeOf(row) === '' || placeOf(row) === placeOf(scan));
+  });
+}
+
 const UNIVERSAL = 'unknown';
 const MINUTE_MS = 60 * 1_000;
 const QUARTER_HOUR_MS = 15 * MINUTE_MS;

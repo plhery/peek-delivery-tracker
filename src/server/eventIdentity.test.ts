@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { JsonObject } from './types';
-import { datedObservations, filledPlaceholders, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { datedObservations, filledPlaceholders, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 
 // New events carry the sync's ISO spelling; stored rows come back from
 // PostgREST with an explicit +00:00 offset. Both name the same instant.
@@ -642,6 +642,47 @@ describe('rows stored with the HTML an adapter left in their words', () => {
     expect(strippedMarkup([scan], [saved, { ...scan }]).size).toBe(0);
     expect(strippedMarkup([scan, { ...saved }], [saved]).size).toBe(0);
     expect(strippedMarkup([scan], [saved, { ...saved, provider_event_id: 'yunexpress:copy', description: `<i>${scan.description}</i>` }]).size).toBe(0);
+  });
+});
+
+describe('a universal provider row to the minute of a scan its provider now gives to the second', () => {
+  // An answer listed one scan twice in a minute and the minute's copy was kept; a release keeps the second's now.
+  const saved = { provider_event_id: 'unknown:minute', occurred_at: '2026-10-28T09:14:00+00:00', stage: 'in_transit',
+    description: 'Departed from sorting center', location: '', universal_provider: 'ParcelsApp' };
+  const scan = { provider_event_id: 'unknown:second', occurred_at: '2026-10-28T09:14:37.000Z', stage: 'in_transit',
+    description: 'Departed from sorting center', location: 'Example Town', raw_data: { universal_provider: 'ParcelsApp' } };
+
+  it('lets the scan to the second take the row over, its place the same or added', () => {
+    expect(pairs(restatedMinutes([scan], [saved]))).toEqual([['unknown:second', 'unknown:minute']]);
+    expect(pairs(restatedMinutes([{ ...scan, description: ' departed  from Sorting Center ' }], [{ ...saved, location: 'example town' }])))
+      .toEqual([['unknown:second', 'unknown:minute']]);
+    expect(pairs(restatedMinutes([{ ...scan, location: '' }], [saved]))).toEqual([['unknown:second', 'unknown:minute']]);
+  });
+
+  it('needs the same provider, the row at the scan minute to the second, the same wording and stage, and codes that agree', () => {
+    for (const row of [
+      { ...saved, universal_provider: '17TRACK' },
+      { ...saved, provider_event_id: 'dhl:minute', universal_provider: undefined },
+      { ...saved, occurred_at: '2026-10-28T09:13:00+00:00' },
+      { ...saved, occurred_at: '2026-10-28T09:14:12+00:00' },
+      { ...saved, location: 'Other Town' },
+      { ...saved, stage: 'customs' },
+      { ...saved, description: 'Arrived at sorting center' },
+      { ...saved, provider_code: 'DP' },
+      { ...saved, observed_without_provider_timestamp: true },
+    ]) expect(restatedMinutes([{ ...scan, provider_code: 'AR' }], [row]).size, JSON.stringify(row)).toBe(0);
+    // A scan to the whole minute restates no row, and an unnamed scan none of a provider's.
+    expect(restatedMinutes([{ ...scan, occurred_at: '2026-10-28T09:14:00.000Z' }], [{ ...saved, occurred_at: '2026-10-28T09:14:00+00:00' }]).size).toBe(0);
+    expect(restatedMinutes([{ ...scan, raw_data: {} }], [{ ...saved, universal_provider: undefined }]).size).toBe(0);
+    // A scan dated by its day alone has no minute to restate.
+    expect(restatedMinutes([scan], [{ ...saved, time: '2026-10-28' }]).size).toBe(0);
+  });
+
+  it('leaves a scan stored under its own identity, a row the batch carries, and two alike rows or scans alone', () => {
+    expect(restatedMinutes([scan], [saved, { ...scan, universal_provider: 'ParcelsApp' }]).size).toBe(0);
+    expect(restatedMinutes([scan, { ...saved, raw_data: { universal_provider: 'ParcelsApp' } }], [saved]).size).toBe(0);
+    expect(restatedMinutes([scan], [saved, { ...saved, provider_event_id: 'unknown:minute-again' }]).size).toBe(0);
+    expect(restatedMinutes([scan, { ...scan, provider_event_id: 'unknown:second-again', occurred_at: '2026-10-28T09:14:52.000Z' }], [saved]).size).toBe(0);
   });
 });
 

@@ -23,8 +23,9 @@ locations, emails, photos, active shipments or ids.
   invitation, so treat it as a credential. It grants only the friendship, never account
   or parcel access.
 - Links are single-use and expire after seven days. Creating a new link keeps older ones
-  valid. **Cancel invitation links** (in your own Friends card) revokes all outstanding
-  links without touching existing friends.
+  valid, up to 20 live links an account: past that, the oldest stops working. **Cancel
+  invitation links** (in your own Friends card) revokes all outstanding links without
+  touching existing friends.
 - Public previews (including social-card GETs and rate-limited POSTs) reveal only the
   sender's nickname and never consume the link. Pages send `Referrer-Policy: no-referrer`,
   clients strip the key from the address bar before sign-in, and analytics never records

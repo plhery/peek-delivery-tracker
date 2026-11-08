@@ -98,7 +98,7 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
 
     /** A finger on the screen at [at], its touches sent as the screen's are. */
     private inner class Finger(var at: Offset) {
-        private val down = SystemClock.uptimeMillis()
+        private var down = SystemClock.uptimeMillis()
 
         /**
          * The time a drag's touches carry, a frame after the one before, rather than when they are sent: a device can
@@ -115,7 +115,24 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
             toolType = MotionEvent.TOOL_TYPE_FINGER
         }
 
+        /**
+         * The touch for [action], sent. Android 12 drops a touch through another app's window, even one that takes
+         * no touches, and the test's own empty activity can stand over the app's for a moment as it finishes: the
+         * finger put down never reaches the app then, so it is put down again a little later, until that window has
+         * gone.
+         */
         fun send(action: Int) {
+            val until = SystemClock.uptimeMillis() + DOWN_AGAIN_MILLIS
+            while (!inject(action)) {
+                check(action == MotionEvent.ACTION_DOWN && SystemClock.uptimeMillis() < until) {
+                    "The screen refused the touch ${MotionEvent.actionToString(action)} at $at"
+                }
+                SystemClock.sleep(FRAME_MILLIS * 6)
+                down = SystemClock.uptimeMillis()
+            }
+        }
+
+        private fun inject(action: Int): Boolean {
             val where = MotionEvent.PointerCoords().apply {
                 x = at.x
                 y = at.y
@@ -127,7 +144,7 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
                 down, time, action, 1, arrayOf(properties), arrayOf(where), 0, 0, 1f, 1f, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0,
             )
             try {
-                check(instrumentation.uiAutomation.injectInputEvent(event, true)) { "The screen refused the touch $event" }
+                return instrumentation.uiAutomation.injectInputEvent(event, true)
             } finally {
                 event.recycle()
             }
@@ -136,6 +153,7 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
 
     companion object {
         const val FRAME_MILLIS = 16L
+        const val DOWN_AGAIN_MILLIS = 5_000L
         const val TAP_MILLIS = 50L
 
         /** Twice the system's long press, on both clocks. */

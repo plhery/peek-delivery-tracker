@@ -340,9 +340,10 @@ class InvitationDeviceTest {
     }
 
     /**
-     * C-H02, C-H01: signed in, the parcel tapped asks for its soft impact at 0.65 and no light one, the acceptance not
-     * being the sign-in; accepted, the receipt's stamp lands with a soft impact at 0.45, and the friends come after it
-     * with nothing more.
+     * C-H02, C-H03, C-H01: signed in, the parcel tapped asks for its soft impact at 0.65, then the light one at 0.35 as
+     * the acceptance takes the welcome's place: once opened the screen is the sign-in's, whoever reads it, as on the
+     * iPhone. Accepted, the receipt's stamp lands with a soft impact at 0.45, and the friends come after it with nothing
+     * more.
      */
     @Test
     fun signedInTheParcelAsksForASoftImpactAndTheReceiptsStampAnother() {
@@ -351,7 +352,7 @@ class InvitationDeviceTest {
         follow()
         vibrations.mark()
         press(WELCOME_OPEN_PARCEL, until = INVITATION_ACCEPT)
-        vibrations.assertOne("C-H02-open-signed-in", vibrations.soft(0.65f))
+        vibrations.assertInOrder("C-H02-C-H03-open-signed-in", vibrations.soft(0.65f), vibrations.light(0.35f))
         compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
         compose.waitUntil(5_000) { !source.invitation.isPresenting && exists(PeekTab.Friends.screen) }
         compose.waitForIdle()

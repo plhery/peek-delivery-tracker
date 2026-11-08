@@ -4,6 +4,7 @@ import android.app.Instrumentation
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.isSpecified
 import androidx.core.content.IntentCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -377,9 +379,12 @@ class FriendsStatesDeviceShots {
         assertEquals(link, laid.layoutInput.text.text)
         walk.shot("C-ST17-long-link")
         assertEquals("The link on one line", 1, laid.lineCount)
+        // Before API 35 Compose cuts text with letter spacing (the SF widths) in its middle itself: it lays it out again
+        // as its head, "…" and its tail, a line with no ellipsis of its own and fewer characters than the link.
+        val spaced = laid.layoutInput.style.letterSpacing.let { it.isSpecified && it.value != 0f }
         assertTrue(
             "The link cut: ${laid.getLineEnd(0)} of ${link.length} characters on its line, ${laid.size} in ${laid.layoutInput.constraints}",
-            laid.isLineEllipsized(0),
+            laid.isLineEllipsized(0) || Build.VERSION.SDK_INT < 35 && spaced && laid.getLineEnd(0) < link.length,
         )
         closePanel()
 

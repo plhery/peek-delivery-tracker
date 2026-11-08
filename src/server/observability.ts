@@ -135,6 +135,8 @@ export interface OperationalErrorMetadata {
   providerFailureReason?: string;
   providerCode?: number;
   upstreamHttp?: UpstreamHttpDiagnostics;
+  /** The request the refusal in `upstreamHttp` answered. */
+  upstreamRequest?: UpstreamHttpError['request'];
   retryAfterMs?: number;
 }
 
@@ -204,7 +206,10 @@ export function operationalErrorMetadata(error: unknown): OperationalErrorMetada
     if (seen.has(current)) break;
     seen.add(current);
     if (current instanceof UpstreamHttpError) {
-      metadata.upstreamHttp ??= current.diagnostics;
+      if (!metadata.upstreamHttp && current.diagnostics) {
+        metadata.upstreamHttp = current.diagnostics;
+        metadata.upstreamRequest = current.request;
+      }
       metadata.retryAfterMs ??= current.retryAfterMs;
     }
     const details = current as Error & { status?: unknown; code?: unknown; reason?: unknown; providerCode?: unknown };
@@ -266,8 +271,29 @@ function scrubValue<T>(value: T, scrub: (text: string) => string, ancestors = ne
 }
 
 /**
+ * Error fields that can hold a request's or a reply's headers, cookies, body or keys, such as the
+ * scraper's `request` and `diagnostics`. Sentry copies an error's fields, and its causes' and
+ * nested errors', into the event's contexts.
+ */
+const CREDENTIAL_FIELD = /^(?:request|diagnostics|headers|body|body_excerpt|response_body|cookies?|set-cookie|(?:proxy-)?authorization|password|secret|(?:access_|refresh_|guest_)?token|api_?key|session(?:_?id)?)$/i;
+
+/** A copy where each credential field reads `[Filtered]`, at any depth. */
+function withoutCredentialFields<T>(value: T, ancestors = new Set<object>()): T {
+  if (!value || typeof value !== 'object') return value;
+  if (ancestors.has(value) || ancestors.size > 20) return '[Truncated]' as T;
+  ancestors.add(value);
+  const copy = Array.isArray(value)
+    ? value.map((item: unknown) => withoutCredentialFields(item, ancestors))
+    : Object.fromEntries(Object.entries(value).map(([key, item]) =>
+      [key, CREDENTIAL_FIELD.test(key) ? '[Filtered]' : withoutCredentialFields(item, ancestors)]));
+  ancestors.delete(value);
+  return copy as T;
+}
+
+/**
  * The last step before an event leaves: addresses are cut down wherever they appear,
- * and the incoming request keeps neither its body nor its query.
+ * the incoming request keeps neither its body nor its query, and error fields keep no
+ * upstream request or reply details (`upstream_http` holds what is safe of them).
  */
 export function scrubSentryEvent(event: ErrorEvent): ErrorEvent {
   const { sdkProcessingMetadata, ...rest } = event;
@@ -275,6 +301,11 @@ export function scrubSentryEvent(event: ErrorEvent): ErrorEvent {
   const number = typeof sdkProcessingMetadata?.trackingNumber === 'string' ? sdkProcessingMetadata.trackingNumber : '';
   const scrubbed = scrubValue(rest, number.length >= 4 ? (text) => withoutNumber(scrubText(text), number) : scrubText);
   if (scrubbed.request) scrubbed.request = { ...scrubbed.request, data: undefined, query_string: undefined };
+  if (scrubbed.contexts) {
+    const { upstream_http: upstreamHttp, ...contexts } = scrubbed.contexts;
+    scrubbed.contexts = { ...withoutCredentialFields(contexts), ...(upstreamHttp ? { upstream_http: upstreamHttp } : {}) };
+  }
+  if (scrubbed.extra) scrubbed.extra = withoutCredentialFields(scrubbed.extra);
   if (scrubbed.transaction) {
     scrubbed.transaction = scrubbed.transaction.replace(/(^|\s)(\/\S*)/g, (_, space: string, path: string) => space + scrubPath(path));
   }
@@ -503,13 +534,42 @@ export function captureOperationalError(
   return eventId;
 }
 
+/** Reply headers a report keeps: they name the protection that answered and hold no access value. */
+const UPSTREAM_HEADERS = ['content-type', 'retry-after', 'cf-mitigated', 'x-amzn-waf-action', 'x-datadome', 'x-cache', 'via'];
+
+/**
+ * What a report keeps of an upstream refusal: its classification, the headers that name a
+ * protection, the excerpt the logs keep, and the request's method, address and timeout. No
+ * other header, cookie or body of either side.
+ */
+function upstreamHttpContext(
+  reply: UpstreamHttpDiagnostics,
+  request: OperationalErrorMetadata['upstreamRequest'],
+  retryAfterMs: number | undefined,
+): Record<string, unknown> {
+  const headers = Object.fromEntries(UPSTREAM_HEADERS.flatMap((name) => {
+    const value: unknown = reply.headers?.[name];
+    return typeof value === 'string' ? [[name, value.slice(0, 200)]] : [];
+  }));
+  return {
+    content_type: reply.content_type, status_text: boundedText(reply.status_text), server: boundedText(reply.server),
+    response_url: reply.response_url ? scrubAddress(reply.response_url) : undefined, request_ids: reply.request_ids,
+    body_read: reply.body_read, bytes_inspected: safeNumber(reply.bytes_inspected), body_signals: reply.body_signals,
+    error_code: reply.error_code, headers,
+    ...(reply.body_excerpt ? { body_excerpt: refusalExcerpt(reply.body_excerpt) } : {}),
+    ...(request ? { request: { method: boundedText(request.method, 10),
+      url: typeof request.url === 'string' ? scrubAddress(request.url) : undefined, timeout_ms: safeNumber(request.timeout_ms) } } : {}),
+    retry_after_ms: retryAfterMs,
+  };
+}
+
 function applyUpstreamHttpContext(scope: Sentry.Scope, metadata: OperationalErrorMetadata): void {
   scope.setContext('upstream_http', null);
   scope.setTag('upstream_content_type', undefined);
   scope.setTag('upstream_body_read', undefined);
   scope.setTag('upstream_error_code', undefined);
   if (!metadata.upstreamHttp) return;
-  scope.setContext('upstream_http', { ...metadata.upstreamHttp, retry_after_ms: metadata.retryAfterMs });
+  scope.setContext('upstream_http', upstreamHttpContext(metadata.upstreamHttp, metadata.upstreamRequest, metadata.retryAfterMs));
   scope.setTag('upstream_content_type', metadata.upstreamHttp.content_type);
   scope.setTag('upstream_body_read', metadata.upstreamHttp.body_read);
   if (metadata.upstreamHttp.error_code) scope.setTag('upstream_error_code', metadata.upstreamHttp.error_code);

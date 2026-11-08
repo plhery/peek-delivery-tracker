@@ -210,7 +210,10 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(retries).toHaveLength(0);
   expect(captured.events.some(event => event.message === 'Tracking routing: provider_failed')).toBe(false);
   const wrapped = captured.events.find(event => event.event_id === wrappedId)!;
-  expect(wrapped.contexts?.upstream_http).toMatchObject({ body_excerpt: refusedBody, body_read: 'complete' });
+  // The report keeps the excerpt the logs keep, and none of the reply's cookies or credentials.
+  expect(wrapped.contexts?.upstream_http).toMatchObject({ body_read: 'complete', headers: { 'content-type': 'text/html' },
+    body_excerpt: expect.stringContaining('Access Denied Reference') });
+  expect(withoutSource(wrapped)).not.toContain('DO_NOT_CAPTURE');
   const incidentId = captureTrackingHealth({ id: 'test-incident', kind: 'direct', subject: 'la-poste', state: 'open',
     attempts: 12, failures: 8, window_hours: 24, evidence: { http_status: 403, category: 'challenge' } });
   await flushObservability();
@@ -317,7 +320,8 @@ it('names a parcel by the shape of its number and cuts addresses down in reports
   expect(report.exception?.values?.map((value) => value.value)).toContain('Lookup of 4 letters + 4 digits failed');
   // Addresses lose their query and number-like path segments; other text loses the number, in any case.
   expect(report.contexts?.upstream_http).toMatchObject({ response_url: 'https://carrier.example/v1/track',
-    body_excerpt: '<p>No parcel 4 letters + 4 digits</p>', headers: { location: 'https://carrier.example/v1/parcels/:id' } });
+    body_excerpt: 'No parcel [4 letters + 4 digits]', headers: {},
+    request: { method: 'POST', url: 'https://carrier.example/v1/track', timeout_ms: 10_000 } });
 
   // A log line, which holds no number, keeps its text without the console's copy of it.
   const logLine = report.breadcrumbs?.find((crumb) => crumb.category === 'console' && crumb.message?.includes('tracking_sync_started'));
@@ -370,4 +374,51 @@ it('sends carriers no trace headers', async () => {
   expect(received).toHaveLength(1);
   expect(received[0]).not.toHaveProperty('baggage');
   expect(received[0]).not.toHaveProperty('sentry-trace');
+});
+
+it('sends none of a refusal\'s access values, whichever error carries it', async () => {
+  vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
+  expect(initObservability()).toBe(true);
+  // Letters only: a word with a digit would be masked as a possible number and prove nothing.
+  const secrets = ['QUERYSENTINEL', 'FRAGMENTSENTINEL', 'REQUESTBODYSENTINEL', 'AUTHORIZATIONSENTINEL', 'COOKIESENTINEL',
+    'SETCOOKIESENTINEL', 'LOCATIONSENTINEL', 'REPLYCSRFSENTINEL', 'REPLYSESSIONSENTINEL'];
+  const url = 'https://carrier.example/v1/track?accessKey=QUERYSENTINEL#FRAGMENTSENTINEL';
+  // Raw details, as an error from any source may hold them. Sentry captures an error once, so each report has its own.
+  const refusal = () => Object.assign(new UpstreamHttpError('Example Carrier', 403), {
+    request: { url, method: 'POST', timeout_ms: 10_000, body: '{"answer":"REQUESTBODYSENTINEL"}',
+      headers: { authorization: 'Bearer AUTHORIZATIONSENTINEL', cookie: 'session=COOKIESENTINEL', accept: 'text/html' } },
+    diagnostics: {
+      content_type: 'text/html', response_url: url, status_text: 'Forbidden', request_ids: { 'cf-ray': 'example-ray' },
+      headers: { 'content-type': 'text/html', 'cf-mitigated': 'challenge', 'set-cookie': 'session=SETCOOKIESENTINEL',
+        location: 'https://carrier.example/challenge?state=LOCATIONSENTINEL' },
+      body_read: 'complete' as const, bytes_inspected: 120, body_signals: ['access_denied'],
+      body_excerpt: '<p>Access denied</p><input type="hidden" name="csrf" value="REPLYCSRFSENTINEL">'
+        + '<script>var config = {"session":"REPLYSESSIONSENTINEL"}</script>',
+    },
+  });
+  const ids = [
+    captureOperationalError(refusal(), { component: 'tracking-sync', operation: 'fetch', carrier: 'example' }),
+    captureOperationalError(new Error('Recovery failed', { cause: refusal() }), { component: 'tracking-sync', operation: 'fetch', carrier: 'example' }),
+    captureOperationalError(new UniversalTrackingError([{ source: '17TRACK', reason: 'refused', error: refusal() }]),
+      { component: 'tracking-sync', operation: 'fetch', carrier: 'unknown' }),
+    captureOperationalError(new AggregateError([refusal()], 'Every step failed'), { component: 'tracking-sync', operation: 'fetch', carrier: 'example' }),
+  ];
+  reportRoutingEvent('health_store_unavailable', { carrier: 'example', provider: 'tracking-health', error: refusal() });
+  await flushObservability();
+  const reports = [...ids.map((id) => captured.events.find((event) => event.event_id === id)!),
+    captured.events.filter((event) => event.message === 'Tracking routing: health_store_unavailable').at(-1)!];
+  for (const report of reports) {
+    for (const secret of secrets) expect(withoutSource(report)).not.toContain(secret);
+  }
+  // A refusal reached through causes keeps what is safe of it; an aggregate's failures give no context.
+  for (const report of [reports[0], reports[1], reports[4]]) {
+    expect(report.contexts?.upstream_http).toMatchObject({ content_type: 'text/html', body_read: 'complete',
+      response_url: 'https://carrier.example/v1/track', headers: { 'content-type': 'text/html', 'cf-mitigated': 'challenge' },
+      body_excerpt: expect.stringContaining('Access denied'),
+      request: { method: 'POST', url: 'https://carrier.example/v1/track', timeout_ms: 10_000 } });
+  }
+  // The error's own fields stay, without the request and reply.
+  expect(reports[0].contexts?.UpstreamHttpError).toMatchObject({ provider: 'Example Carrier', status: 403,
+    request: '[Filtered]', diagnostics: '[Filtered]' });
+  expect(reports[1].contexts?.Error).toMatchObject({ cause: { UpstreamHttpError: { request: '[Filtered]', diagnostics: '[Filtered]' } } });
 });

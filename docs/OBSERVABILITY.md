@@ -787,7 +787,7 @@ status text, URL, token, cookie and secret data.
 The SDK is enabled only when `SENTRY_DSN` is set. Default integrations are on and tracing is
 off by default. Outgoing requests carry no `sentry-trace` or `baggage` header
 (`tracePropagationTargets: []`): carriers' bot protection refuses a request with `baggage`. Reports keep original errors, their causes and custom fields; `beforeSend`
-and `beforeBreadcrumb` only shorten addresses and take tracking numbers out (below).
+and `beforeBreadcrumb` shorten addresses, take tracking numbers out and filter upstream request and reply details (below).
 Sentry's own limits and project-side scrubbing still apply. Automatic lookups wrap each
 provider failure in an `AggregateError` so every cause is visible.
 
@@ -854,14 +854,16 @@ provider failure in an `AggregateError` so every cause is visible.
 
 ### Upstream HTTP diagnostics
 
-Rejected responses from `fetchBounded` carry `UpstreamHttpError.diagnostics`, attached to
-Sentry's `upstream_http` context before fallback. It contains:
+Rejected responses from `fetchBounded` carry `UpstreamHttpError.diagnostics`. Sentry's
+`upstream_http` context keeps part of it, before fallback:
 
-- content type, server header, request/correlation IDs and `Retry-After`;
-- recognized body signatures and error codes, plus a text excerpt of the body;
-- all response headers, and the request URL, method, headers, body and timeout.
+- content type, status text, server header, request/correlation IDs and `Retry-After`;
+- recognized body signatures and error codes, plus the body-text excerpt the logs keep;
+- the reply headers that name a protection (`cf-mitigated`, `x-amzn-waf-action`, `x-datadome`,
+  `x-cache`, `via`), and the request's method, address and timeout.
 
-Like the rest of a report, their addresses are shortened as described below.
+Other headers, cookies and the request body are left out. Like the rest of a report, its
+addresses are shortened as described below.
 
 Body inspection stops after 8 KiB or 200 ms. `body_read` says whether the body was
 complete, empty, truncated, timed out, unreadable or skipped as binary. `body_signals` are
@@ -879,6 +881,9 @@ reports through its `attempt_id` or `job_id`.
   included, lose their query and fragment, which can hold keys. A path segment of six
   characters or more with a digit, other than a uuid, reads `:id`, so a transaction is
   named after its route.
+- **Error fields** that hold an upstream request or reply, such as `request`, `diagnostics`,
+  `headers`, `body` or `response_body`, or a cookie, token, key or password, read `[Filtered]`
+  in every context but `upstream_http`, through causes and nested errors too.
 - **Breadcrumbs** drop the console's copy of a log line's arguments; the line itself stays.
 - **Incoming requests** keep their headers, less those Sentry filters, but no body, query
   or client address (`dataCollection.userInfo` is off).

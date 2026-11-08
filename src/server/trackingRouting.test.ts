@@ -1292,6 +1292,66 @@ describe('persistent tracking routing', () => {
       expect(result.result.tracking_provider).toBe('ParcelsApp');
       expect(result.result.routing).toMatchObject({ candidate_probes: { dpd: { count: 1 } }, failures: {} });
     });
+    describe('a label the only answer for a number nobody else tracks', () => {
+      const preAdvice = (carrier: string): RoutedResult => ({ ...directValue(carrier), result: { status: 'pending', current_stage: 'registered',
+        last_update: '2026-09-10T11:00:00Z', events: [{ time: '2026-09-10T11:00:00Z', description: 'Order created', stage: 'registered' }] } });
+      const labelled = (...carriers: string[]) => {
+        const run = setup();
+        run.recognize.mockImplementation(knows(...carriers));
+        run.direct.mockImplementation(async (_parcel, carrier) => preAdvice(carrier));
+        run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+        return run;
+      };
+      const routingOf = (outcome: unknown) => (outcome instanceof RoutingDeferred ? outcome.routing
+        : (outcome as RoutedResult).result.routing) as JsonObject;
+
+      it('files the parcel under the one carrier that knows the number, confirmed', async () => {
+        const { router, universal } = labelled('dpd');
+        const result = await router.fetch(parcel({ tracking_number: swissDpd }), false);
+        expect(universal).toHaveBeenCalled();
+        expect(result).toMatchObject({ sourceCarrierId: 'dpd', correction: { carrier: 'dpd' } });
+        expect(result.result).toMatchObject({ current_stage: 'registered' });
+        expect(routingOf(result)).toMatchObject({ configured_carrier: 'dpd', confirmed_carrier: 'dpd', confirmed_number: swissDpd });
+        expect(routingOf(result)).not.toHaveProperty('set_aside');
+        expect(routingOf(result)).not.toHaveProperty('likely_carrier');
+        expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('candidate_probe_confirmed', expect.objectContaining({ provider: 'dpd' }));
+      });
+
+      it('files it so beside a provider\'s label that names no carrier', async () => {
+        const { router, universal } = labelled('dpd');
+        universal.mockResolvedValue({ ...preAdvice('dpd').result, discovered_carrier: undefined });
+        const result = await router.fetch(parcel({ tracking_number: swissDpd }), false);
+        expect(result).toMatchObject({ sourceCarrierId: 'dpd', correction: { carrier: 'dpd' } });
+      });
+
+      it.each([
+        ['several carriers know it with a label each', ['dpd', 'dpd-nl'], {}, 'dpd-nl'],
+        ['another carrier\'s label was set aside before', ['dpd'],
+          { set_aside: { seur: { reason: 'no_movement', checked_at: '2026-09-10T09:00:00Z', count: 1 } } }, 'seur'],
+      ] as const)('files it under none when %s', async (_case, known, routing, other) => {
+        const { router } = labelled(...known);
+        const outcome = await router.fetch(parcel({ tracking_number: swissDpd, carrier_data: { routing: state(routing) } }), false)
+          .catch((deferred: unknown) => deferred);
+        expect(outcome).toBeInstanceOf(RoutingDeferred);
+        expect(routingOf(outcome)).toMatchObject({ set_aside: { dpd: { reason: 'no_movement' }, [other]: { reason: 'no_movement' } } });
+        expect(routingOf(outcome)).not.toHaveProperty('confirmed_carrier');
+      });
+
+      it('files it under none when a provider\'s label names another carrier', async () => {
+        const { router, direct, universal } = labelled('dpd');
+        // The carrier it names does not know the number.
+        direct.mockImplementation(async (_parcel, carrier) => {
+          if (carrier === 'seur') throw new NotFoundError('seur');
+          return preAdvice(carrier);
+        });
+        universal.mockResolvedValue({ ...preAdvice('dpd').result, discovered_carrier: 'seur' });
+        const result = await router.fetch(parcel({ tracking_number: swissDpd }), false);
+        expect(result.correction).toBeUndefined();
+        expect(result.result.tracking_provider).toBe('ParcelsApp');
+        expect(routingOf(result)).toMatchObject({ set_aside: { dpd: { reason: 'no_movement' } } });
+        expect(routingOf(result)).not.toHaveProperty('confirmed_carrier');
+      });
+    });
     it('offers a carrier that needs the user\'s postcode instead of looking it up', async () => {
       const { router, direct, recognize } = setup();
       // Both GLS networks answer from the same overview: the more common one is offered.
@@ -2270,6 +2330,35 @@ describe('persistent tracking routing', () => {
         expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true });
         expect(routingOf(result)).toMatchObject({ configured_carrier: 'gofo', confirmed_carrier: 'gofo' });
         expect(universal).toHaveBeenCalledOnce();
+      });
+
+      describe('filed under no carrier', () => {
+        const unfiled = (overrides: JsonObject = {}) => parcel({ tracking_number: 'GFUS01000000000001', ...overrides });
+
+        it('files it under GoFo on GoFo\'s label alone while nothing else answers', async () => {
+          fixedPlan('ParcelsApp');
+          const { router, direct, universal } = setup();
+          direct.mockResolvedValue(label(undefined, 'gofo'));
+          universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+          const result = await router.fetch(unfiled(), false);
+          expect(result).toMatchObject({ sourceCarrierId: 'gofo', correction: { carrier: 'gofo' } });
+          expect(routingOf(result)).toMatchObject({ configured_carrier: 'gofo', confirmed_carrier: 'gofo' });
+        });
+
+        it('files it under GoFo, its label set aside, once a provider\'s journey names GoFo among other legs', async () => {
+          fixedPlan('ParcelsApp');
+          const { router, direct, universal } = setup();
+          direct.mockImplementation(async (_parcel, carrier) => {
+            if (carrier === 'gofo') return label(undefined, 'gofo');
+            throw new NotFoundError(carrier);
+          });
+          universal.mockResolvedValue({ ...journey(), discovered_carrier: 'gofo', reported_carriers: ['GoFo Express', 'YunExpress'] });
+          const result = await router.fetch(unfiled({ current_stage: 'in_transit',
+            carrier_data: { routing: state({ last_event_at: '2026-09-09T09:00:00Z' }) } }), false);
+          expect(result.result.tracking_provider).toBe('ParcelsApp');
+          expect(result.correction).toMatchObject({ carrier: 'gofo' });
+          expect(routingOf(result)).toMatchObject({ configured_carrier: 'gofo', set_aside: { gofo: { reason: 'no_movement' } } });
+        });
       });
     });
   });

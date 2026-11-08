@@ -103,7 +103,8 @@ function unanswered(parcel: JsonObject, state: RoutingState): boolean {
  * The carrier a parcel filed under none probably travels with: the one its number points to (guessedCarrier), once
  * asked, by recognition or directly, without saying it knows the number, which it may not list until the sender hands
  * the parcel over. A carrier that failed to answer recognition counts as asked; one that said it knows the number,
- * even with no more than a pre-advice, is more than likely, and is not named. `since` is when a check first found it so.
+ * even with no more than a pre-advice, is more than likely, and is not named: its label alone files the parcel under it
+ * when nothing else answers (trackingRouting.ts). `since` is when a check first found it so.
  */
 export function likelyCarrier(parcel: JsonObject, state: RoutingState, now: Date): RoutingState['likely_carrier'] {
   const carrier = guessedCarrier(String(parcel.tracking_number ?? ''));

@@ -774,6 +774,9 @@ export class TrackingRouter {
     // Carriers asked in this check whose own answer for the number moved but had only
     // local clocks: the answer, the local history it brought, and how to confirm the carrier.
     const localAnswers = new Map<string, { value: RoutedResult; history: JsonObject | undefined; confirm: () => void }>();
+    // Carriers asked in this check whose own answer for the number was its label alone, set aside
+    // as no movement: whether on local clocks, the local history it brought, and how to confirm it.
+    const labelAnswers = new Map<string, { value: RoutedResult; history: JsonObject | undefined; confirm: () => void; local: boolean }>();
     // The carrier this check's recognition settled on alone.
     let recognized: string | undefined;
     // That carrier when the parcel's country settled it among a brand's networks and its lookup
@@ -909,6 +912,9 @@ export class TrackingRouter {
       const partner = deliveryHandoff(carrier, number, value.result);
       return value.sourceCarrierId === declared || (partner?.carrier === declared && partner.number === number);
     };
+    // The carrier's own label for this very number, nothing past it, handed to no one.
+    const ownLabel = (carrier: string, value: RoutedResult) => value.sourceCarrierId === carrier && !value.earlierResult
+      && resultStage(value.result) === 'registered' && !earlierLeg(carrier, value);
     const persistResult = (value: RoutedResult, provider: string, withoutProgress = false): RoutedResult => {
       if (state.failures[provider]) report('provider_recovered', provider);
       delete state.failures[provider];
@@ -1173,10 +1179,12 @@ export class TrackingRouter {
           }
           // Set aside unless the check takes it in the end.
           if (candidate) setAsideAs(moved ? 'local_clock' : 'no_movement', value);
+          if (candidate && !moved && ownLabel(carrier, value)) labelAnswers.set(carrier, { value, history: capturedHistory, confirm, local: true });
           return null;
         }
         if (candidate && !moved) {
           setAsideAs('no_movement', value);
+          if (ownLabel(carrier, value)) labelAnswers.set(carrier, { value, history: capturedHistory, confirm, local: false });
           return null;
         }
         // An answer without a date is neither older nor newer than the parcel's dated progress,
@@ -1301,6 +1309,26 @@ export class TrackingRouter {
       state.direct_retry_at = undefined;
       return keepLocal({ value: answer.value, carrier });
     };
+    // A parcel filed under no carrier that nothing showed moving, in this check or before: the
+    // one carrier that answered for the number with its own label alone, as recognition finds a
+    // carrier the sender has just booked with, files it, confirmed, as the label of the carrier
+    // detection names would. Labels of several carriers (SEUR's of a DPD number another DPD network
+    // lists too), any other answer set aside, or a provider's answer naming another carrier file it
+    // under none. A label beside any movement stays set aside (tryDirect).
+    const labelAnswer = (provider?: CarrierResult): RoutedResult | undefined => {
+      if (declared !== 'unknown' || state.confirmed_carrier || metadata.original_carrier || universalNumber !== number
+        || PROGRESS_STAGES.has(rereadStage(parcel)) || labelAnswers.size !== 1) return undefined;
+      const [[carrier, answer]] = [...labelAnswers];
+      const asides = Object.keys(state.set_aside ?? {});
+      if (asides.length !== 1 || asides[0] !== carrier) return undefined;
+      if (provider && typeof provider.discovered_carrier === 'string' && provider.discovered_carrier !== carrier) return undefined;
+      if (!confirmedBefore(carrier)) report('candidate_probe_confirmed', carrier);
+      answer.confirm();
+      clearSetAside(carrier);
+      state.direct_retry_at = undefined;
+      if (answer.history) localHistory = answer.history;
+      return answer.local ? keepLocal({ value: answer.value, carrier }) : persistResult(answer.value, carrier);
+    };
     // A freshly checked preview can keep the already saved fuller history for an hour.
     // Compare the whole answer: a new scan can replace one in a fixed-size window without
     // changing its count or stage. A manual refresh still asks for the rest immediately.
@@ -1417,7 +1445,8 @@ export class TrackingRouter {
       homeNetwork = recognized && !requiredRequirements(recognized, number).length
         && outcomes.some((outcome) => outcome.carrier === recognized && outcome.countryMatch === 'home') ? recognized : undefined;
       // A carrier that knows the number and needs no input gets a full
-      // lookup, adopted only on real progress (a pre-advice is not enough).
+      // lookup, adopted only on real progress (a pre-advice is not enough), or on its label
+      // alone at the end of a check nothing else answered with more (labelAnswer).
       for (const outcome of outcomes) {
         if (outcome.needsInput || settleRecognition([outcome], now()).carrier !== outcome.carrier) continue;
         const failure = state.failures[outcome.carrier];
@@ -1779,7 +1808,7 @@ export class TrackingRouter {
         }
         state.reported_carriers_seen = [...new Set([...seen, ...value.result.reported_carriers])].slice(-20);
       }
-      const own = hasRoutingProgress(value.result) ? undefined : ownLocalAnswer();
+      const own = hasRoutingProgress(value.result) ? undefined : ownLocalAnswer() ?? labelAnswer(value.result);
       if (own) return own;
       // A provider holding just the carrier's scans, which only guesses the clock of those the
       // carrier dates by their day alone, adds nothing: a midnight it gives one can even put it
@@ -1881,7 +1910,7 @@ export class TrackingRouter {
       return persistResult(partialDirect.value, partialDirect.carrier);
     }
     if (localDirectFallback) return keepLocal(localDirectFallback);
-    const own = ownLocalAnswer();
+    const own = ownLocalAnswer() ?? labelAnswer();
     if (own) return own;
     // The carrier confirmed for an unknown parcel's number answered not found or without history,
     // and no other source answered: the confirmation goes, as when the sync leaves the parcel

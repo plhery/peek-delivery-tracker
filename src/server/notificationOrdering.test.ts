@@ -210,11 +210,43 @@ it.each(['web', 'native'] as const)('records the scans of an archived parcel as 
   expect(archived).toHaveBeenCalledWith(['pkg']);
   expect(send).not.toHaveBeenCalled();
   expect(ack).toHaveBeenCalledExactlyOnceWith(channel === 'web' ? 'sub' : 'device', ['collected']);
-  // On the list it is news, and so it is when the lookup fails.
-  archived.mockResolvedValueOnce(new Set()).mockRejectedValueOnce(new Error('down'));
+  // Off the list it is news.
+  archived.mockResolvedValueOnce(new Set());
   await service.dispatch();
-  await service.dispatch();
-  expect(send).toHaveBeenCalledTimes(2);
+  expect(send).toHaveBeenCalledOnce();
+});
+
+it.each(['web', 'native'] as const)('sends nothing and leaves the scans pending while the archive cannot be read, for %s', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const clock = clocks('2026-10-08T07:10:00Z');
+  const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+  const service = channel === 'web' ? new WebPushNotificationService(client, '', '', '', clock.web) : apns;
+  const send = vi.spyOn(service, 'send').mockResolvedValue();
+  const ack = channel === 'web' ? vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue() : vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+  const pending = channel === 'web' ? vi.spyOn(client, 'listPendingPushNotifications') : vi.spyOn(client, 'listPendingNativePushNotifications');
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-09-01T08:00:00Z']]));
+  vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map([['pkg', '2026-10-08T07:00:00Z']]));
+  const archived = vi.mocked(client.archivedPackageIds);
+  // Until a dispatch records them, the queue keeps listing the scans.
+  pending.mockResolvedValue([
+    { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_id: 'collected', stage: 'delivered',
+      occurred_at: '2026-10-08T07:00:00Z', event_created_at: '2026-10-08T07:10:00Z', event_has_time: true },
+    { subscription_id: 'sub', device_id: 'device', package_id: 'other', event_id: 'moving', stage: 'in_transit',
+      occurred_at: '2026-10-08T07:05:00Z', event_created_at: '2026-10-08T07:10:00Z', event_has_time: true },
+  ]);
+  const outage = new Error('The delivery database is unreachable');
+  archived.mockRejectedValueOnce(outage);
+  await expect(service.dispatch()).rejects.toBe(outage);
+  expect(send).not.toHaveBeenCalled();
+  expect(ack).not.toHaveBeenCalled();
+
+  // The next dispatch reads it: the parcel put away is handled silently, the other one is told.
+  archived.mockResolvedValueOnce(new Set(['pkg']));
+  expect(await service.dispatch()).toMatchObject({ attempted: 1, sent: 1 });
+  expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ event_id: 'moving' }));
+  expect(ack.mock.calls).toEqual([[channel === 'web' ? 'sub' : 'device', ['collected']], [channel === 'web' ? 'sub' : 'device', ['moving']]]);
 });
 
 it.each(['web', 'native'] as const)('records the row of a relay pair that reached the parcel second as handled without announcing it, for %s', async (channel) => {

@@ -541,7 +541,8 @@ and nothing typed is sent.
   handled without a browser or phone notification, or an alert the owner turned on for a
   lookup, so bringing it back does not announce them either. No Live Activity starts for
   it, and the delivery email leaves it out. Someone it was shared with still gets their
-  link's alerts.
+  link's alerts. While the server cannot read which parcels are archived, the owner's
+  notifications and alerts wait for the next dispatch.
 - A Live Activity starts only at `out_for_delivery`, once until a scan in another stage,
   not counting a provider copy the timeline leaves out or a scan in no stage (`pending`).
   It ends on delivery, failed attempt, problem, pickup, return, archive, sign-out or

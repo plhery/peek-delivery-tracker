@@ -769,14 +769,23 @@ function newestNews(latest: ReadonlyMap<string, string>, recent: RecentScans, no
   return newest;
 }
 
-async function parcelTimes(client: SupabaseServiceClient, batches: Iterable<JsonObject[]>, now: number): Promise<ParcelTimes> {
+/**
+ * What the batches are measured against. Whether a parcel is archived is read for the batches
+ * `archivedAmong` names, all of them unless told: unlike the other lookups, that one must answer,
+ * since an owner is never told about a parcel they put away (`putAway`). When it fails, so does
+ * this, and the dispatch leaves its scans pending for the next one.
+ */
+async function parcelTimes(
+  client: SupabaseServiceClient, batches: Iterable<JsonObject[]>, now: number, archivedAmong?: readonly JsonObject[][],
+): Promise<ParcelTimes> {
   const all = [...batches];
   const ids = batchParcels(all);
+  const archivable = archivedAmong ? batchParcels(archivedAmong) : ids;
   const [latest, joined, { known, recent, notices }, archived] = await Promise.all([
     orNone(() => client.latestScanTimes(ids), new Map<string, string>()),
     orNone(() => client.packageJoinTimes(ids), new Map<string, string>()),
     scanNews(client, all),
-    orNone(() => client.archivedPackageIds(ids), new Set<string>()),
+    archivable.length ? client.archivedPackageIds(archivable) : new Set<string>(),
   ]);
   return { latest: newestNews(latest, recent, notices, now), joined, known, archived };
 }
@@ -835,7 +844,7 @@ export function isOldNews(newest: JsonObject, { latest, joined }: ParcelTimes, n
  * back does not announce what was recorded meanwhile. Someone it was shared
  * with still gets their link's alerts.
  */
-function putAway(newest: JsonObject, { archived }: ParcelTimes): boolean {
+function putAway(newest: JsonObject, { archived }: Pick<ParcelTimes, 'archived'>): boolean {
   return archived.has(stringField(newest, 'package_id'));
 }
 
@@ -1017,11 +1026,21 @@ export class ParcelLinkAlertService {
     }
     const summary = emptySummary();
     let failed = 0;
-    const times = await parcelTimes(client, grouped.values(), this.now());
+    // Only an owner's own alerts are held back by the archive (`putAway`). When it cannot be read, theirs wait for
+    // the next dispatch, which fails with the lookup, and the people the parcel was shared with are still told.
+    const owned = batchParcels([...grouped.values()].filter((events) => events[0]!.owner === true));
+    const [times, archive] = await Promise.all([
+      parcelTimes(client, grouped.values(), this.now(), []),
+      owned.length
+        ? client.archivedPackageIds(owned).then((ids) => ({ ids }), (error: unknown) => ({ ids: null, error }))
+        : { ids: new Set<string>() },
+    ]);
     const viewers = [...grouped.values()].filter((events) => events[0]!.owner !== true).map((events) => stringField(events[0]!, 'link_id'));
     const hiding = viewers.length ? await orNone(() => client.numberHidingParcels(viewers), null) : new Map<string, JsonObject>();
     for (const [alertId, events] of grouped) {
       signal?.throwIfAborted();
+      const owner = events[0]!.owner === true;
+      if (owner && !archive.ids) continue;
       const newest = announcedScan(events.filter((event) => this.announces(event)), times);
       const transport = linkAlertTransport(events[0]!);
       const app = transport === 'apns' ? this.native : transport === 'fcm' ? this.fcm : null;
@@ -1040,7 +1059,7 @@ export class ParcelLinkAlertService {
         if (failuresNow !== failures) await client.setParcelLinkAlertFailures(alertId, failuresNow);
       };
 
-      if (!newest || newest.account_endpoint === true || (newest.owner === true && putAway(newest, times))
+      if (!newest || newest.account_endpoint === true || (owner && putAway(newest, { archived: archive.ids! }))
         || isOldNews(newest, times, this.now())) {
         await settle(failures);
         recordParcelAlertSent('skipped', channel);
@@ -1072,6 +1091,7 @@ export class ParcelLinkAlertService {
       summary.sent += 1;
     }
     if (failed > 0) logOperationalEvent('parcel_link_alerts_failed', { failed }, 'error');
+    if ('error' in archive) throw new PushDispatchError([archive.error], summary);
     return summary;
   }
 
@@ -1677,7 +1697,7 @@ function logDeliveryFailure(channel: 'web' | 'native' | 'live_activity', error: 
   }, 'warning');
 }
 
-/** Carries what the healthy channels delivered when another channel failed. */
+/** Carries what was delivered when a channel, or a part of one, failed. */
 export class PushDispatchError extends AggregateError {
   constructor(errors: unknown[], readonly summary: PushSummary) {
     super(errors, `${errors.length} push channel(s) failed`);
@@ -1704,18 +1724,22 @@ export class CompositePushNotificationService {
       ['live_activity', this.liveActivities], ['web', this.web], ['native', this.native], ['native', this.fcm],
       ['link_alert', this.linkAlerts],
     ] as const;
+    const add = (channel: PushChannel, summary: PushSummary) => {
+      combined.attempted += summary.attempted;
+      combined.sent += summary.sent;
+      combined.failed += summary.failed;
+      combined.expired += summary.expired;
+      combined.sentByChannel[channel] = (combined.sentByChannel[channel] ?? 0) + summary.sent;
+    };
     for (const [channel, service] of channels) {
       if (!service) continue;
       try {
-        const summary = await service.dispatch(signal);
-        combined.attempted += summary.attempted;
-        combined.sent += summary.sent;
-        combined.failed += summary.failed;
-        combined.expired += summary.expired;
-        combined.sentByChannel[channel] = (combined.sentByChannel[channel] ?? 0) + summary.sent;
+        add(channel, await service.dispatch(signal));
       } catch (error) {
         signal?.throwIfAborted();
-        // One channel's outage or schema drift must not hold back the others.
+        // One channel's outage or schema drift must not hold back the others. What a channel sent before it
+        // failed still counts.
+        if (error instanceof PushDispatchError) add(channel, error.summary);
         errors.push(error);
       }
     }

@@ -1208,6 +1208,7 @@ describe('native notification boundaries', () => {
     const suppressedClient = {
       listPendingNativePushNotifications: vi.fn().mockResolvedValue([liveRow]),
       recordNativePushDeliveries: vi.fn().mockResolvedValue(undefined),
+      archivedPackageIds: vi.fn().mockResolvedValue(new Set()),
     };
     const suppressed = new NativePushNotificationService(
       suppressedClient as never,
@@ -1235,6 +1236,7 @@ describe('native notification boundaries', () => {
       }]),
       recordNativePushDeliveries: vi.fn().mockResolvedValue(undefined),
       updateNativePushDevice: vi.fn().mockResolvedValue(undefined),
+      archivedPackageIds: vi.fn().mockResolvedValue(new Set()),
     };
     const fallback = new NativePushNotificationService(
       fallbackClient as never,
@@ -1263,6 +1265,7 @@ describe('native notification boundaries', () => {
       listPendingNativePushNotifications: vi.fn().mockResolvedValue([row]),
       recordNativePushDeliveries: vi.fn().mockResolvedValue(undefined),
       updateNativePushDevice: vi.fn().mockResolvedValue(undefined),
+      archivedPackageIds: vi.fn().mockResolvedValue(new Set()),
     };
     const native = new NativePushNotificationService(
       devices as never,
@@ -1284,6 +1287,7 @@ describe('native notification boundaries', () => {
       listPendingPushNotifications: vi.fn().mockResolvedValue([row]),
       recordPushDeliveries: vi.fn().mockResolvedValue(undefined),
       updatePushSubscription: vi.fn().mockResolvedValue(undefined),
+      archivedPackageIds: vi.fn().mockResolvedValue(new Set()),
     };
     const web = new WebPushNotificationService(subscriptions as never, 'public', 'private', 'mailto:test@example.com');
     vi.spyOn(web, 'send').mockRejectedValue(Object.assign(new Error('Received unexpected response code'), {

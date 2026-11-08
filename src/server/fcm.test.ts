@@ -205,6 +205,8 @@ describe('an Android phone\'s notifications', () => {
     listPendingNativePushNotifications: vi.fn().mockResolvedValue(rows),
     recordNativePushDeliveries: vi.fn().mockResolvedValue(undefined),
     updateNativePushDevice: vi.fn().mockResolvedValue(undefined),
+    // An owner is never told about a parcel they put away, so the archive must answer.
+    archivedPackageIds: vi.fn().mockResolvedValue(new Set()),
   });
   const android = (client: ReturnType<typeof devices>, fetcher: typeof fetch) =>
     new FcmPushNotificationService(client as never, projectId, clientEmail, privateKey, () => nowSeconds, fetcher);

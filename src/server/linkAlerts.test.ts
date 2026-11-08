@@ -19,6 +19,7 @@ import {
   FcmPushNotificationService,
   NativePushNotificationService,
   ParcelLinkAlertService,
+  PushDispatchError,
   pushServices,
   WebPushNotificationService,
 } from './push';
@@ -233,6 +234,31 @@ describe('what an alert announces', () => {
     expect(send).not.toHaveBeenCalled();
     expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['event-1']);
     expect(counted).toHaveBeenCalledExactlyOnceWith('skipped', 'web');
+  });
+
+  it('keeps the owner\'s own alert waiting while the archive cannot be read, and still tells the others', async () => {
+    pending([
+      row({ alert_id: 'owner-alert', owner: true }),
+      row({ alert_id: 'viewer-alert', endpoint: `${endpoint}-2` }),
+    ]);
+    const outage = new Error('The delivery database is unreachable');
+    const archived = vi.mocked(client.archivedPackageIds).mockRejectedValueOnce(outage);
+    const error = await alerts.dispatch().catch((reason: unknown) => reason);
+    expect(error).toBeInstanceOf(PushDispatchError);
+    expect(error).toMatchObject({ errors: [outage], summary: { attempted: 1, sent: 1 } });
+    // The lookup asks only about the owner's parcels: the people it was shared with are told whatever it says.
+    expect(archived).toHaveBeenCalledExactlyOnceWith(['package-1']);
+    expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ alert_id: 'viewer-alert' }), expect.anything());
+    expect(handled).toHaveBeenCalledExactlyOnceWith('viewer-alert', ['event-1']);
+
+    // Once it answers, the owner's alert goes out, or is handled silently for a parcel put away.
+    pending([row({ alert_id: 'owner-alert', owner: true })]);
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 1, sent: 1 });
+    expect(send).toHaveBeenLastCalledWith(expect.objectContaining({ alert_id: 'owner-alert' }), expect.anything());
+    expect(handled).toHaveBeenLastCalledWith('owner-alert', ['event-1']);
+    archived.mockResolvedValueOnce(new Set(['package-1']));
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(send).toHaveBeenCalledTimes(2);
   });
 
   it('tells each alert of a link apart, in its own language and with its own preset', async () => {
@@ -520,6 +546,16 @@ describe('alerts beside the account notifications', () => {
       { dispatch: async () => summary(2) } as never, null, null, { dispatch: async () => { throw outage; } } as never,
     );
     await expect(composite.dispatch()).rejects.toMatchObject({ errors: [outage], summary: { ...summary(2), sentByChannel: { web: 2 } } });
+  });
+
+  it('counts the alerts a dispatch sent before part of it failed', async () => {
+    const partial = new PushDispatchError([new Error('The delivery database is unreachable')], summary(1));
+    const composite = new CompositePushNotificationService(
+      { dispatch: async () => summary(2) } as never, null, null, { dispatch: async () => { throw partial; } } as never,
+    );
+    await expect(composite.dispatch()).rejects.toMatchObject({
+      errors: [partial], summary: { ...summary(3), sentByChannel: { web: 2, link_alert: 1 } },
+    });
   });
 
   it('exists exactly when this server sends Web Push or APNs', async () => {

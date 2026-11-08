@@ -33,13 +33,14 @@ function nullableText(value: unknown): string | null {
 
 export const PATCH = apiRoute<PackageParameters>(async (context) => {
   const { id } = await context.route.params;
-  const packageId = parseUuid(id, 'package id');
   const client = requireUserClient(context);
   const service = requireService(context);
-  const original = await client.getPackage(packageId);
+  const original = await client.getPackage(parseUuid(id, 'package id'));
   if (!original || typeof original.tracking_number !== 'string') {
     throw new HttpError(404, 'Package not found');
   }
+  // A parcel merged into another still answers to its old id: change the one found.
+  const packageId = String(original.id);
 
   const body = await readJsonObject(context.request);
   const values = packageCarrierValues(

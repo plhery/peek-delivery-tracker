@@ -26,6 +26,7 @@ beforeEach(() => {
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
   vi.spyOn(console, 'error').mockImplementation(() => undefined);
   vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({ id: userId, email: null, authenticatedAt: null, sessionId: null });
+  vi.spyOn(SupabaseUserClient.prototype, 'getPackage').mockResolvedValue({ id: packageId });
 });
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
@@ -73,11 +74,24 @@ it('stops sharing, and answers the same when the parcel was not shared', async (
 });
 
 it('answers another account\'s parcel like one that does not exist', async () => {
+  const counted = vi.spyOn(metrics, 'recordParcelShare');
+  // The account cannot read it, so the sharing functions are never asked.
+  vi.mocked(SupabaseUserClient.prototype.getPackage).mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
+  const asked = [
+    vi.spyOn(SupabaseUserClient.prototype, 'packageShare'),
+    vi.spyOn(SupabaseUserClient.prototype, 'sharePackage'),
+    vi.spyOn(SupabaseUserClient.prototype, 'stopPackageShare'),
+  ];
+  for (const response of [await request(GET, 'GET'), await request(PUT, 'PUT', { gift: true }), await request(DELETE, 'DELETE')]) {
+    expect(response.status).toBe(404);
+    expect(await response.json()).toEqual({ error: 'Package not found' });
+  }
+  for (const spy of asked) expect(spy).not.toHaveBeenCalled();
+  // The database still refuses it when it went between the lookup and the request.
   const missing = new SupabaseError('Package not found', 404, 'P0002');
   vi.spyOn(SupabaseUserClient.prototype, 'packageShare').mockRejectedValue(missing);
   vi.spyOn(SupabaseUserClient.prototype, 'sharePackage').mockRejectedValue(missing);
   vi.spyOn(SupabaseUserClient.prototype, 'stopPackageShare').mockRejectedValue(missing);
-  const counted = vi.spyOn(metrics, 'recordParcelShare');
   for (const response of [await request(GET, 'GET'), await request(PUT, 'PUT', { gift: true }), await request(DELETE, 'DELETE')]) {
     expect(response.status).toBe(404);
     expect(await response.json()).toEqual({ error: 'Package not found' });
@@ -102,6 +116,7 @@ it('rejects a malformed parcel id or switch, and a caller who is not signed in, 
   expect(read).not.toHaveBeenCalled();
   expect(store).not.toHaveBeenCalled();
   expect(stop).not.toHaveBeenCalled();
+  expect(SupabaseUserClient.prototype.getPackage).not.toHaveBeenCalled();
 });
 
 it('passes a database failure on as one', async () => {

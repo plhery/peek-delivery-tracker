@@ -50536,6 +50536,9 @@
           "400": {
             "$ref": "#/components/responses/ApiError"
           },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
           "502": {
             "$ref": "#/components/responses/ApiError"
           }

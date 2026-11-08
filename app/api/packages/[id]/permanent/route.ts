@@ -16,9 +16,10 @@ export const runtime = 'nodejs';
 
 export const DELETE = apiRoute<PackageParameters>(async (context) => {
   const { id } = await context.route.params;
-  const packageId = parseUuid(id, 'package id');
   const client = requireUserClient(context);
-  if (!await client.getPackage(packageId) || !await client.deletePackage(packageId)) {
+  const found = await client.getPackage(parseUuid(id, 'package id'));
+  // A parcel merged into another still answers to its old id: delete the one found.
+  if (!found || !await client.deletePackage(String(found.id))) {
     throw new HttpError(404, 'Package not found');
   }
   return json({ ok: true });

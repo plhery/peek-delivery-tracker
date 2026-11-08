@@ -2568,7 +2568,7 @@ export class SupabaseUserClient extends SupabaseClient {
     } else {
       throw new TypeError('User-scoped package updates must use an approved mutation');
     }
-    if (changed !== true) throw new SupabaseError('Package not found', 404);
+    if (changed !== true) throw new SupabaseError('Package not found', 404, 'P0002');
   }
 
   async setProviderPostcode(packageId: string, postcode: string): Promise<boolean> {

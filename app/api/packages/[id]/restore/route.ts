@@ -18,10 +18,11 @@ export const runtime = 'nodejs';
 
 export const POST = apiRoute<PackageParameters>(async (context) => {
   const { id } = await context.route.params;
-  const packageId = parseUuid(id, 'package id');
   const client = requireUserClient(context);
-  const original = await client.getPackage(packageId);
+  const original = await client.getPackage(parseUuid(id, 'package id'));
   if (!original) throw new HttpError(404, 'Package not found');
+  // A parcel merged into another still answers to its old id: restore the one found.
+  const packageId = String(original.id);
   try {
     await client.restorePackage(packageId);
   } catch (error) {

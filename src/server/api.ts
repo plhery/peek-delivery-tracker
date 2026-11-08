@@ -235,6 +235,11 @@ function failure(error: unknown): Response {
     if (error.status === 401 || error.status === 403) {
       return apiResponse(401, { error: 'Authentication is required' });
     }
+    // The database found no such row, or none of the caller's. A 404 without that code is
+    // a missing function or route, which is an outage rather than an answer.
+    if (error.status === 404 && error.code === 'P0002') {
+      return apiResponse(404, { error: 'Not found' });
+    }
     return apiResponse(502, { error: 'The delivery database is temporarily unavailable' });
   }
   return apiResponse(500, { error: 'The request could not be completed' });

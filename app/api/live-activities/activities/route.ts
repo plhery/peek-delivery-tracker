@@ -22,9 +22,8 @@ export const POST = apiRoute(async (context) => {
     throw new HttpError(503, 'Live Activity push notifications are not configured');
   }
   const values = liveActivityUpdateToken(await readJsonObject(context.request));
-  if (!await requireUserClient(context).getPackage(values.parcelId)) {
-    throw new HttpError(404, 'Package not found');
-  }
+  const parcel = await requireUserClient(context).getPackage(values.parcelId);
+  if (!parcel) throw new HttpError(404, 'Package not found');
   const device = await service.getLiveActivityDevice(
     requireUser(context).id,
     values.installationId,
@@ -37,7 +36,8 @@ export const POST = apiRoute(async (context) => {
   }
   await service.upsertLiveActivityUpdateToken({
     deviceId: device.id,
-    packageId: values.parcelId,
+    // A parcel merged into another still answers to its old id: the pushes follow the one found.
+    packageId: String(parcel.id),
     activityId: values.activityId,
     token: values.token,
     environment: values.environment,

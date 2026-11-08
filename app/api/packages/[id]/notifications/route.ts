@@ -20,9 +20,13 @@ export const runtime = 'nodejs';
 
 export const PATCH = apiRoute<PackageParameters>(async (context) => {
   const { id } = await context.route.params;
-  const packageId = parseUuid(id, 'package id');
+  const requestedId = parseUuid(id, 'package id');
   const { muted, emailMuted } = packageNotificationValues(await readJsonObject(context.request));
   const client = requireUserClient(context);
+  const found = await client.getPackage(requestedId);
+  if (!found) throw new HttpError(404, 'Package not found');
+  // A parcel merged into another still answers to its old id: change the one found.
+  const packageId = String(found.id);
   try {
     if (muted !== undefined) await client.updatePackage(packageId, { notifications_muted: muted });
     if (emailMuted !== undefined) await client.updatePackage(packageId, { email_muted: emailMuted });

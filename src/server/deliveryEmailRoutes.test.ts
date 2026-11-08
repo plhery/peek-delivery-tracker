@@ -193,12 +193,18 @@ describe('one parcel\'s notifications and delivery email', () => {
 
   it('answers another account\'s parcel like one that does not exist', async () => {
     signedIn();
-    vi.spyOn(SupabaseUserClient.prototype, 'updatePackage').mockRejectedValue(new SupabaseError('Package not found', 404));
-    const read = vi.spyOn(SupabaseUserClient.prototype, 'getPackage');
+    const update = vi.spyOn(SupabaseUserClient.prototype, 'updatePackage');
+    const read = vi.spyOn(SupabaseUserClient.prototype, 'getPackage').mockResolvedValue(null);
     const response = await change({ emailMuted: true });
     expect(response.status).toBe(404);
     expect(await response.json()).toEqual({ error: 'Package not found' });
-    expect(read).not.toHaveBeenCalled();
+    expect(update).not.toHaveBeenCalled();
+    // Gone between the lookup and the change.
+    read.mockResolvedValue(parcel);
+    update.mockRejectedValue(new SupabaseError('Package not found', 404, 'P0002'));
+    const gone = await change({ emailMuted: true });
+    expect(gone.status).toBe(404);
+    expect(await gone.json()).toEqual({ error: 'Package not found' });
     expect((await change({ emailMuted: true }, 'not-a-uuid')).status).toBe(400);
   });
 });

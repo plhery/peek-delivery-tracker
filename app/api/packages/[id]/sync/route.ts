@@ -20,13 +20,14 @@ export const runtime = 'nodejs';
 
 export const POST = apiRoute<PackageParameters>(async (context) => {
   const { id } = await context.route.params;
-  const packageId = parseUuid(id, 'package id');
+  const requestedId = parseUuid(id, 'package id');
   // The route takes no body, so a signed request signs none.
   await checkAccountRequest(context.request, requireService(context), new Uint8Array(), 'account_refresh');
-  const parcel = await requireUserClient(context).getPackage(packageId);
+  const parcel = await requireUserClient(context).getPackage(requestedId);
   if (!parcel) throw new HttpError(404, 'Package not found');
   const service = requireService(context);
-  const job = await service.enqueueSyncJob({ userId: requireUser(context).id, packageId, reason: 'refresh' });
+  // A parcel merged into another still answers to its old id: check the one found.
+  const job = await service.enqueueSyncJob({ userId: requireUser(context).id, packageId: String(parcel.id), reason: 'refresh' });
   wakeSyncWorker();
   return json({
     queued: job.queued,

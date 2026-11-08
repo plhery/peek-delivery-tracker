@@ -817,7 +817,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   under one of its numbers. A parcel matching more than one other, or two naming each
   other, stay apart (`is_later_leg`). The merge follows the check that stores the news,
   before that news goes out, and a scan both parcels held keeps the receipts of either
-  copy, so it is announced once. The merged parcel keeps both names and histories.
+  copy, so it is announced once. The merged parcel keeps both names and histories, and
+  the earlier parcel's id still finds it: a change sent under that id applies to the
+  merged parcel.
 
 ## UPU history
 

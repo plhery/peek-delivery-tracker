@@ -23,15 +23,17 @@ export const runtime = 'nodejs';
 
 /**
  * Runs a sharing request under the caller's own token: the database checks
- * that the parcel is theirs. Someone else's parcel answers like none.
+ * that the parcel is theirs. Someone else's parcel answers like none, and a
+ * parcel merged into another is shared as the one it was merged into.
  */
 async function ownParcel<Answer>(
   context: ApiContext<PackageParameters>,
   request: (packageId: string) => Promise<Answer>,
 ): Promise<Answer> {
-  const packageId = parseUuid((await context.route.params).id, 'package id');
+  const found = await requireUserClient(context).getPackage(parseUuid((await context.route.params).id, 'package id'));
+  if (!found) throw new HttpError(404, 'Package not found');
   try {
-    return await request(packageId);
+    return await request(String(found.id));
   } catch (error) {
     if (error instanceof SupabaseError && error.status === 404) {
       throw new HttpError(404, 'Package not found', undefined, { cause: error });

@@ -581,6 +581,80 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(dhl.showsMoreWithPostcode(catalog))
     }
 
+    func testAsksForThePhoneDigitsACheckedParcelsCarrierShowsItsScansWith() throws {
+        let catalog = try PhoneDigitsCatalog.make()
+        let json = """
+        {
+          "packages": [{
+            "id": "\(UUID().uuidString)",
+            "tracking_number": "JMX000000000001",
+            "label": "Test parcel",
+            "carrier": "j-and-t-mx",
+            "created_at": "2026-11-01T10:00:00Z",
+            "last_synced_at": "2026-11-02T10:00:00Z",
+            "sync_status": "ok",
+            "phone_digits": null,
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        XCTAssertNil(parcel.phoneDigits)
+        XCTAssertTrue(parcel.showsMoreWithPhoneDigits(catalog))
+        XCTAssertFalse(parcel.showsMoreWithPostcode(catalog))
+
+        // Not with the digits, nor before its first check, once archived, delivered or returned, nor while the sync
+        // error asks for them already.
+        let given = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(
+            json.replacingOccurrences(of: "\"phone_digits\": null", with: "\"phone_digits\": \"0472\"").utf8
+        )).packages.first)
+        XCTAssertEqual(given.phoneDigits, "0472")
+        XCTAssertFalse(given.showsMoreWithPhoneDigits(catalog))
+        var unchecked = parcel
+        unchecked.lastSyncedAt = nil
+        XCTAssertFalse(unchecked.showsMoreWithPhoneDigits(catalog))
+        var archived = parcel
+        archived.archivedAt = "2026-11-03T10:00:00Z"
+        XCTAssertFalse(archived.showsMoreWithPhoneDigits(catalog))
+        for stage in [TrackingStage.delivered, .returned] {
+            var finished = parcel
+            finished.trackingEvents = [event(parcel.id, stage, "2026-11-03T10:00:00Z")]
+            XCTAssertFalse(finished.showsMoreWithPhoneDigits(catalog), stage.rawValue)
+        }
+        var moving = parcel
+        moving.trackingEvents = [event(parcel.id, .inTransit, "2026-11-03T10:00:00Z")]
+        XCTAssertTrue(moving.showsMoreWithPhoneDigits(catalog))
+        var asked = parcel
+        asked.syncError = "carrier:input_required"
+        XCTAssertFalse(asked.showsMoreWithPhoneDigits(catalog))
+        // A postcode asked for comes first.
+        var postcode = parcel
+        postcode.carrierData = CarrierData(routing: CarrierDataRouting(inputNeeded: CarrierInputNeeded(carrier: .dpd, field: .dpdPostcode)))
+        XCTAssertNotNil(postcode.inputNeededPrompt)
+        XCTAssertFalse(postcode.showsMoreWithPhoneDigits(catalog))
+        // A carrier that never reads them, and a parcel followed without an account, whose link never says if it has them.
+        var dpd = parcel
+        dpd.carrier = .dpd
+        dpd.trackingNumber = "06080000000002"
+        XCTAssertFalse(dpd.showsMoreWithPhoneDigits(catalog))
+        XCTAssertFalse(parcel.showsMoreWithPhoneDigits(catalog, knowsInputs: false))
+    }
+
+    func testTheDemoKeepsTheDigitsWithItsCarrierAndForgetsThemWithout() throws {
+        let suite = "demo-digits-tests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let repo = DemoRepository(defaults: defaults, language: { .en })
+        let added = try repo.add(CreatePackageRequest(trackingNumber: "JMX000000000001", label: "", carrier: .jAndTMx, phoneDigits: "0472"))
+        XCTAssertEqual(added.phoneDigits, "0472")
+        let kept = try repo.changeCarrier(id: added.id, carrier: .jAndTMx, trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil,
+                                          phoneDigits: "0473")
+        XCTAssertEqual(kept.phoneDigits, "0473")
+        let cleared = try repo.changeCarrier(id: added.id, carrier: .jAndTCn, trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil)
+        XCTAssertNil(cleared.phoneDigits)
+    }
+
     func testNamesTheLikelyCarrierWhileNobodyAnsweredAndAsksToChooseAfterAWeek() throws {
         let packageID = UUID()
         let json = """

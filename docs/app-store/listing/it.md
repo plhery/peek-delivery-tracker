@@ -80,5 +80,6 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 • Un pacco consegnato mentre non eri nell’elenco ora ha il suo momento «Consegnato» quando ci torni.
 • La modalità scura è più calda: marroni da carta kraft, bordi illuminati sui furgoni scuri, un francobollo color crema e una mappa dai toni caldi.
 • Accessibilità: più schermate si ingrandiscono fino alle dimensioni del testo più grandi, VoiceOver annuncia cosa cambia sullo schermo e permette di spostarsi tra le intestazioni, la funzione Controllo vocale risponde alle parole mostrate da ogni comando e i testi secondari hanno più contrasto.
+• In Messico e in Cina, J&T Express mostra le scansioni di un pacco con le ultime 4 cifre del telefono del destinatario o del mittente: ora puoi aggiungerle insieme al pacco o più tardi dalla sua pagina.
 • Nelle Impostazioni ora c’è la voce «Valuta Peek», se vuoi lasciare una recensione.
 ```

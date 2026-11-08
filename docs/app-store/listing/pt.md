@@ -80,5 +80,6 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 • Uma encomenda entregue enquanto não estavas na lista tem agora o seu momento «Entregue» quando voltas a ela.
 • O Modo escuro está mais quente: castanhos de papel kraft, contornos iluminados nas carrinhas escuras, um selo cor de creme e um mapa em tons quentes.
 • Acessibilidade: mais ecrãs crescem até aos maiores tamanhos de texto, o VoiceOver anuncia o que muda no ecrã e permite navegar pelos títulos, o controlo por voz responde às palavras que cada controlo mostra e os textos secundários têm mais contraste.
+• No México e na China, a J&T Express mostra os registos de uma encomenda com os últimos 4 dígitos do telefone do destinatário ou do remetente: agora podes adicioná-los com a encomenda ou mais tarde, na página dela.
 • As Definições têm agora a linha «Avaliar o Peek», se quiseres deixar uma avaliação.
 ```

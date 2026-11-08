@@ -80,5 +80,6 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 • Un paquete entregado mientras no estabas en la lista ahora tiene su momento «Entregado» cuando vuelves a ella.
 • El modo oscuro es más cálido: marrones de papel kraft, bordes iluminados en las furgonetas oscuras, un sello color crema y un mapa de tonos cálidos.
 • Accesibilidad: más pantallas crecen hasta los tamaños de texto más grandes, VoiceOver anuncia lo que cambia en pantalla y permite moverse por encabezados, el control por voz responde a las palabras que muestra cada control y los textos secundarios tienen más contraste.
+• En México y China, J&T Express muestra los escaneos de un paquete con los últimos 4 dígitos del teléfono del destinatario o del remitente: ahora puedes añadirlos con el paquete o más tarde desde su página.
 • En Ajustes ahora hay una fila «Valorar Peek», por si quieres dejar una reseña.
 ```

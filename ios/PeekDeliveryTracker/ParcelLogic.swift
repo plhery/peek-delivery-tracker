@@ -147,6 +147,17 @@ extension Parcel {
             .contains { $0.field == .dpdPostcode && $0.showsMore == true }
     }
 
+    /// Whether the parcel's carrier shows its own scans only with the last 4 digits of a phone it was saved without
+    /// (J&T Express Mexico and China), once the parcel has been checked, unless the sync error already asks for them or
+    /// the postcode is asked for instead. As the web's `phoneDigitsShowsMore`. `knowsInputs` is false for a parcel
+    /// followed without an account: the service shows no lookup's digits through its link, so whether they were given
+    /// is unknown there.
+    func showsMoreWithPhoneDigits(_ catalog: CarrierCatalog, knowsInputs: Bool = true) -> Bool {
+        guard knowsInputs, inputNeededPrompt == nil, inputSuggestedPrompt == nil, !showsMoreWithPostcode(catalog),
+              phoneDigits?.nonEmpty == nil, isActive, lastSyncedAt != nil, syncError != "carrier:input_required" else { return false }
+        return catalog.requirements(for: carrier, trackingNumber: trackingNumber).contains { $0.field == .phoneDigits }
+    }
+
     /// How long a carrier may go without listing a number of its own format before the reader is asked to check it.
     static let likelyCarrierWait: TimeInterval = 7 * 24 * 60 * 60
 

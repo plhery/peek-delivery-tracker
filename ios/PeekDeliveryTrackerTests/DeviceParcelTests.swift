@@ -22,14 +22,17 @@ final class DeviceParcelTests: XCTestCase {
         private var countryHints: [String?] = []
         private var postcodes: [String?] = []
         private var languages: [String?] = []
+        private var digits: [String?] = []
         func add(_ call: String) { lock.withLock { log.append(call) } }
         func lookupCountry(_ hint: String?) { lock.withLock { countryHints.append(hint) } }
         func lookupPostcode(_ postcode: String?) { lock.withLock { postcodes.append(postcode) } }
         func lookupLanguage(_ language: String?) { lock.withLock { languages.append(language) } }
+        func lookupPhoneDigits(_ phoneDigits: String?) { lock.withLock { digits.append(phoneDigits) } }
         var all: [String] { lock.withLock { log } }
         var lookupCountries: [String?] { lock.withLock { countryHints } }
         var lookupPostcodes: [String?] { lock.withLock { postcodes } }
         var lookupLanguages: [String?] { lock.withLock { languages } }
+        var lookupPhoneDigits: [String?] { lock.withLock { digits } }
     }
 
     private let key = String(repeating: "k", count: 43)
@@ -65,6 +68,7 @@ final class DeviceParcelTests: XCTestCase {
                 calls.lookupCountry(request.lookupCountryHint)
                 calls.lookupPostcode(request.dpdPostcode)
                 calls.lookupLanguage(request.language)
+                calls.lookupPhoneDigits(request.phoneDigits)
                 guard let lookup else { throw DeviceLookupsSpent() }
                 return lookup
             },
@@ -256,6 +260,57 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(try body(CarrierDetectionRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "CH"))["lookupCountryHint"], "CH")
         XCTAssertEqual(try body(CreatePackageRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "US"))["lookupCountryHint"], "US")
         XCTAssertEqual(try body(PublicLookupRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "GB"))["lookupCountryHint"], "GB")
+    }
+
+    func testPhoneDigitsGoInARequestOnlyWhenGiven() throws {
+        func body<T: Encodable>(_ request: T) throws -> [String: Any] {
+            try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder.deliveryTracker.encode(request)) as? [String: Any])
+        }
+        XCTAssertNil(try body(CreatePackageRequest(trackingNumber: "JMX000000000001", carrier: .jAndTMx))["phoneDigits"])
+        XCTAssertEqual(try body(CreatePackageRequest(trackingNumber: "JMX000000000001", carrier: .jAndTMx, phoneDigits: "0472"))["phoneDigits"] as? String, "0472")
+        XCTAssertNil(try body(ChangePackageCarrierRequest(carrier: .jAndTMx))["phoneDigits"])
+        XCTAssertEqual(try body(ChangePackageCarrierRequest(carrier: .jAndTMx, phoneDigits: "0472"))["phoneDigits"] as? String, "0472")
+        XCTAssertNil(try body(PublicLookupRequest(trackingNumber: "JMX000000000001", carrier: .jAndTMx))["phoneDigits"])
+        XCTAssertEqual(try body(PublicLookupRequest(trackingNumber: "JMX000000000001", carrier: .jAndTMx, phoneDigits: "0472"))["phoneDigits"] as? String, "0472")
+    }
+
+    func testALookupGivesItsCarrierThePhoneDigitsAndTheIPhoneKeepsNone() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let memory = PostcodeMemory(defaults: defaults)
+        let storage = Memory()
+        let calls = Calls()
+        let found = PublicLookupResponse(link: link("22222222222A"), key: key, package: package(UUID(), number: "JMX000000000001", carrier: .jAndTMx))
+        let device = DeviceParcels(client: client(calls, lookup: found), storage: storage, postcodes: memory)
+
+        let parcel = try await device.add(CreatePackageRequest(trackingNumber: "JMX000000000001", carrier: .jAndTMx, phoneDigits: "0472"))
+
+        XCTAssertEqual(calls.lookupPhoneDigits, ["0472"])
+        // The link never shows them, and the iPhone keeps none: not with the parcel, nor for the next one's field.
+        XCTAssertNil(parcel.phoneDigits)
+        XCTAssertFalse(String(decoding: try JSONEncoder.deliveryTracker.encode(storage.parcels), as: UTF8.self).contains("0472"))
+        XCTAssertEqual(memory.entries, [])
+    }
+
+    func testChangingTheCarrierOfAParcelFollowedHereSendsTheDigitsGivenForIt() async throws {
+        let previousID = UUID(), nextID = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [DeviceParcel(
+            linkID: "22222222222A", label: "Moon lamp", archivedAt: nil,
+            parcel: Parcel(shared: package(previousID, number: "JMX000000000001")), checkedAt: Date()
+        )]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(
+            link: link("22222222222B"), key: key, package: package(nextID, number: "JMX000000000001", carrier: .jAndTMx)
+        )), storage: storage)
+
+        let parcel = try await device.changeCarrier(id: previousID, carrier: .jAndTMx, trackingURL: nil, dpdPostcode: nil, phoneDigits: "0472")
+
+        XCTAssertEqual(parcel.id, nextID)
+        XCTAssertEqual(parcel.label, "Moon lamp")
+        XCTAssertEqual(calls.lookupPhoneDigits, ["0472"])
+        XCTAssertEqual(calls.all, ["lookup JMX000000000001 j-and-t-mx", "forget 22222222222A"])
     }
 
     func testDetectionSendsTheNumberAsTypedWhenItSpellsTheNumberDifferently() async throws {

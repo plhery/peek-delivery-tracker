@@ -358,7 +358,8 @@ final class DeviceParcels {
         let response = try await client.lookup(PublicLookupRequest(
             trackingNumber: request.trackingNumber, carrier: request.carrier,
             trackingURL: request.trackingURL, dpdPostcode: request.dpdPostcode,
-            dpdPostcodeCountry: request.dpdPostcodeCountry, lookupCountryHint: request.lookupCountryHint,
+            dpdPostcodeCountry: request.dpdPostcodeCountry, phoneDigits: request.phoneDigits,
+            lookupCountryHint: request.lookupCountryHint,
             language: AppLanguage.current.rawValue
         ))
         guard ParcelLinkRoute.validID(response.link.id) else { throw DeliveryAPIError.invalidResponse }
@@ -386,6 +387,7 @@ final class DeviceParcels {
         keys[entry.linkID] = response.key
         save()
         if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier) }
+        // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return Self.shown(entry)
     }
 
@@ -522,15 +524,16 @@ final class DeviceParcels {
         if let client { await tellForgotten(client) }
     }
 
-    /// Follows the same number with another carrier, link or postcode: a new lookup, which takes the old one's place and name.
+    /// Follows the same number with another carrier, link, postcode or phone digits: a new lookup, which takes the old
+    /// one's place and name.
     func changeCarrier(id: UUID, carrier: CarrierID, trackingURL: String?, dpdPostcode: String?,
-                       dpdPostcodeCountry: String? = nil) async throws -> Parcel {
+                       dpdPostcodeCountry: String? = nil, phoneDigits: String? = nil) async throws -> Parcel {
         // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change.
         guard let entry = entries.first(where: { $0.parcel.id == id }), !entry.isViewer else { throw DeliveryAPIError.parcelMissing }
         let added = try await lookUp(CreatePackageRequest(
             trackingNumber: entry.parcel.trackingNumber, label: entry.label, carrier: carrier,
             trackingURL: trackingURL, dpdPostcode: dpdPostcode, dpdPostcodeCountry: dpdPostcodeCountry,
-            lookupCountryHint: ParcelLookupCountry.hint()
+            phoneDigits: phoneDigits, lookupCountryHint: ParcelLookupCountry.hint()
         ), replacing: id)
         if added.id != id {
             await forget(id: id)

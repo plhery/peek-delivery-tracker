@@ -82,5 +82,6 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 • Un colis livré pendant que tu n’étais pas sur la liste a désormais droit à son moment « Livré » quand tu y reviens.
 • Le Mode sombre est plus chaleureux : des bruns de papier kraft, des contours éclairés sur les camions sombres, un timbre crème et une carte aux tons chauds.
 • Accessibilité : davantage d’écrans s’agrandissent avec les plus grandes tailles de texte, VoiceOver annonce ce qui change à l’écran et permet de passer d’un titre à l’autre, le contrôle vocal répond aux mots affichés sur chaque commande, et les textes secondaires sont plus contrastés.
+• Au Mexique et en Chine, J&T Express affiche les scans d’un colis avec les 4 derniers chiffres du téléphone du destinataire ou de l’expéditeur : tu peux désormais les ajouter avec le colis, ou plus tard depuis sa page.
 • Les Réglages ont maintenant une ligne « Noter Peek », si tu veux laisser un avis.
 ```

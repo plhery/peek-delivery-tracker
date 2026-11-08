@@ -80,5 +80,6 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 • Przesyłka doręczona, gdy nie było Cię na liście, dostaje teraz swoją chwilę „Dostarczona”, kiedy wrócisz do listy.
 • Tryb ciemny jest cieplejszy: brązy papieru pakowego, podświetlone krawędzie ciemnych furgonetek, kremowy znaczek i mapa w ciepłych barwach.
 • Dostępność: więcej ekranów powiększa się aż do największych rozmiarów tekstu, VoiceOver odczytuje zmiany na ekranie i pozwala przechodzić między nagłówkami, funkcja Sterowanie głosowe reaguje na słowa widoczne na przyciskach, a tekst pomocniczy ma lepszy kontrast.
+• W Meksyku i Chinach J&T Express pokazuje skany przesyłki z ostatnimi 4 cyframi telefonu odbiorcy lub nadawcy: możesz je teraz podać przy dodawaniu przesyłki albo później na jej stronie.
 • W Ustawieniach jest teraz wiersz „Oceń Peek”, jeśli chcesz zostawić recenzję.
 ```

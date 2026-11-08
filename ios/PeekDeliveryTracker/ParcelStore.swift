@@ -385,7 +385,8 @@ final class ParcelStore: ObservableObject {
         carrier: CarrierID,
         trackingURL: String?,
         dpdPostcode: String?,
-        dpdPostcodeCountry: String? = nil
+        dpdPostcodeCountry: String? = nil,
+        phoneDigits: String? = nil
     ) async throws -> Parcel {
         let generation = session.generation
         let request = CreatePackageRequest(
@@ -395,6 +396,7 @@ final class ParcelStore: ObservableObject {
             trackingURL: trackingURL?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
             dpdPostcode: dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
             dpdPostcodeCountry: dpdPostcodeCountry,
+            phoneDigits: phoneDigits?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
             lookupCountryHint: ParcelLookupCountry.hint()
         )
         let parcel: Parcel
@@ -576,12 +578,16 @@ final class ParcelStore: ObservableObject {
         trackingURL: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
+        phoneDigits: String? = nil,
         providerPostcode: String? = nil
     ) async throws {
         let generation = session.generation
         let cleanedURL = trackingURL?
             .trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
         let cleanedPostcode = dpdPostcode?
+            .trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
+        // None sent removes the ones the parcel had.
+        let cleanedDigits = phoneDigits?
             .trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
         let updated: Parcel
         if isDemo {
@@ -590,12 +596,14 @@ final class ParcelStore: ObservableObject {
                 carrier: carrier,
                 trackingURL: cleanedURL,
                 dpdPostcode: cleanedPostcode,
-                dpdPostcodeCountry: dpdPostcodeCountry
+                dpdPostcodeCountry: dpdPostcodeCountry,
+                phoneDigits: cleanedDigits
             )
         } else if isGuest {
             // A new lookup takes the old one's place, under a new id.
             _ = try await device.changeCarrier(id: parcel.id, carrier: carrier, trackingURL: cleanedURL,
-                                               dpdPostcode: cleanedPostcode, dpdPostcodeCountry: dpdPostcodeCountry)
+                                               dpdPostcode: cleanedPostcode, dpdPostcodeCountry: dpdPostcodeCountry,
+                                               phoneDigits: cleanedDigits)
             try session.checkGeneration(generation)
             mutationRevision += 1
             parcels = device.list()
@@ -608,6 +616,7 @@ final class ParcelStore: ObservableObject {
                 trackingURL: cleanedURL,
                 dpdPostcode: cleanedPostcode,
                 dpdPostcodeCountry: dpdPostcodeCountry,
+                phoneDigits: cleanedDigits,
                 providerPostcode: providerPostcode
             )
             updated = response.package
@@ -1861,6 +1870,7 @@ final class DemoRepository {
             syncError: nil,
             trackingURL: request.trackingURL,
             dpdPostcode: request.dpdPostcode,
+            phoneDigits: request.phoneDigits,
             carrierData: Self.startingCarrierData(request.trackingNumber, postcode: request.dpdPostcode, country: request.dpdPostcodeCountry),
             archivedAt: nil,
             notificationsMuted: false,
@@ -1881,13 +1891,15 @@ final class DemoRepository {
         carrier: CarrierID,
         trackingURL: String?,
         dpdPostcode: String?,
-        dpdPostcodeCountry: String?
+        dpdPostcodeCountry: String?,
+        phoneDigits: String? = nil
     ) throws -> Parcel {
         // The history stays, as the service keeps it and the sheet says, while the new carrier is checked.
         try update(id: id) { parcel in
             parcel.carrier = carrier
             parcel.trackingURL = trackingURL
             parcel.dpdPostcode = dpdPostcode
+            parcel.phoneDigits = phoneDigits
             parcel.expectedDelivery = nil
             parcel.lastStatusText = nil
             parcel.lastSyncedAt = nil

@@ -185,6 +185,7 @@ final class DeliveryAPIClient {
         trackingURL: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
+        phoneDigits: String? = nil,
         providerPostcode: String? = nil
     ) async throws -> ChangePackageCarrierResponse {
         try await request(
@@ -195,6 +196,7 @@ final class DeliveryAPIClient {
                 trackingURL: trackingURL,
                 dpdPostcode: dpdPostcode,
                 dpdPostcodeCountry: dpdPostcodeCountry,
+                phoneDigits: phoneDigits,
                 providerPostcode: providerPostcode
             )
         )

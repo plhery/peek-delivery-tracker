@@ -442,6 +442,15 @@ struct ParcelDetailView: View {
                         Button(localizer.text("detail.inputNeededAction")) { carrierEditor = CarrierEditorRequest() }
                             .font(.caption.weight(.semibold))
                     }
+                } else if editable, parcel.showsMoreWithPhoneDigits(catalog, knowsInputs: !store.isGuest) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(localizer.text("detail.phoneDigitsShowsMore",
+                                            ["carrier": catalog.info(for: parcel.carrier, language: localizer.language).displayName]))
+                            .font(.caption).foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Button(localizer.text("detail.phoneDigitsAction")) { carrierEditor = CarrierEditorRequest() }
+                            .font(.caption.weight(.semibold))
+                    }
                 }
                 VStack(alignment: .leading, spacing: 6) {
                     Text(localizer.parcelStatus(parcel))
@@ -1213,6 +1222,8 @@ struct ChangeCarrierView: View {
     @State private var chosenCarrier: CarrierID?
     @State private var trackingURL: String
     @State private var deliveryPostcode: String
+    /// The parcel's own digits while its carrier stays; none for another. Cleared, none are sent, which removes them.
+    @State private var phoneDigits: String
     /// The delivery country chosen beside the postcode, until another carrier is chosen.
     @State private var chosenPostcodeCountry: String?
     @State private var providerPostcode = ""
@@ -1232,6 +1243,7 @@ struct ChangeCarrierView: View {
             && !CarrierCatalog.shared.isAmazonTrackingNumber(parcel.trackingNumber) ? nil : carrier)
         _trackingURL = State(initialValue: carrier == parcel.carrier ? parcel.trackingURL ?? "" : "")
         _deliveryPostcode = State(initialValue: carrier == parcel.carrier ? parcel.dpdPostcode ?? "" : "")
+        _phoneDigits = State(initialValue: carrier == parcel.carrier ? parcel.phoneDigits ?? "" : "")
     }
 
     var body: some View {
@@ -1285,6 +1297,7 @@ struct ChangeCarrierView: View {
                     .onChange(of: selectedCarrier) { _, carrier in
                         trackingURL = carrier == parcel.carrier ? parcel.trackingURL ?? "" : ""
                         deliveryPostcode = carrier == parcel.carrier ? parcel.dpdPostcode ?? "" : ""
+                        phoneDigits = carrier == parcel.carrier ? parcel.phoneDigits ?? "" : ""
                         chosenPostcodeCountry = nil
                         errorMessage = nil
                     }
@@ -1301,10 +1314,8 @@ struct ChangeCarrierView: View {
                             requirementField(requirement)
                         }
                     } footer: {
-                        if postcodeRequirement?.isOptional == true {
-                            Text(localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), [
-                                "carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName,
-                            ]))
+                        if let help = requirementsHelp {
+                            Text(help)
                         }
                     }
                 }
@@ -1458,6 +1469,19 @@ struct ChangeCarrierView: View {
         requirements.first(where: { $0.field == .dpdPostcode })
     }
 
+    private var phoneDigitsRequirement: CarrierRequirement? {
+        requirements.first(where: { $0.field == .phoneDigits })
+    }
+
+    /// Under the fields: what an optional postcode gives, and why phone digits are asked and where they go.
+    private var requirementsHelp: String? {
+        let carrier = ["carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName]
+        return [
+            postcodeRequirement?.isOptional == true ? localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier) : nil,
+            phoneDigitsRequirement != nil ? localizer.text("add.requirement.phoneDigitsHelp", carrier) : nil,
+        ].compactMap { $0 }.joined(separator: "\n").nonEmpty
+    }
+
     private var needsProviderPostcode: Bool { selectedCarrier == parcel.carrier && parcel.carrierData?.routing?.providerInputNeeded != nil }
     private var normalizedProviderPostcode: String? {
         guard needsProviderPostcode else { return nil }
@@ -1477,6 +1501,8 @@ struct ChangeCarrierView: View {
                       url.host != nil else { return false }
             case .dpdPostcode:
                 guard requirement.isSatisfied(by: deliveryPostcode) else { return false }
+            case .phoneDigits:
+                guard requirement.isSatisfied(by: phoneDigits) else { return false }
             }
         }
         return true
@@ -1486,6 +1512,7 @@ struct ChangeCarrierView: View {
         normalizedProviderPostcode != nil || selectedCarrier != parcel.carrier
             || normalizedTrackingURL != (parcel.trackingURL ?? "")
             || normalizedPostcode != (parcel.dpdPostcode ?? "")
+            || normalizedPhoneDigits != (parcel.phoneDigits ?? "")
             || (!normalizedPostcode.isEmpty && postcodeCountry != initialPostcodeCountry)
     }
 
@@ -1497,6 +1524,12 @@ struct ChangeCarrierView: View {
     private var normalizedPostcode: String {
         guard let postcodeRequirement else { return "" }
         return postcodeRequirement.normalizedValue(deliveryPostcode)
+    }
+
+    /// The digits sent: only while the carrier asks for them.
+    private var normalizedPhoneDigits: String {
+        guard let phoneDigitsRequirement else { return "" }
+        return phoneDigitsRequirement.normalizedValue(phoneDigits)
     }
 
     @ViewBuilder
@@ -1541,6 +1574,23 @@ struct ChangeCarrierView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+        case .phoneDigits:
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                // Number keys, and no content type: nothing on the iPhone fills in these digits.
+                TextField(localizer.text("add.requirement.phoneDigits"), text: $phoneDigits)
+                    .drawnField()
+                    .font(.body.monospacedDigit())
+                    .keyboardType(requirement.inputMode == "numeric" ? .numberPad : .asciiCapable)
+                    .autocorrectionDisabled()
+                    .onChange(of: phoneDigits) { _, value in
+                        phoneDigits = requirement.normalizedValue(value)
+                    }
+                if requirement.isOptional {
+                    Text(localizer.text("add.optional"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
     }
 
@@ -1556,6 +1606,7 @@ struct ChangeCarrierView: View {
                     trackingURL: normalizedTrackingURL.nonEmpty,
                     dpdPostcode: normalizedPostcode.nonEmpty,
                     dpdPostcodeCountry: catalog.sentPostcodeCountry(postcodeCountry, postcode: normalizedPostcode, for: selectedCarrier),
+                    phoneDigits: normalizedPhoneDigits.nonEmpty,
                     providerPostcode: normalizedProviderPostcode
                 )
                 dismiss()

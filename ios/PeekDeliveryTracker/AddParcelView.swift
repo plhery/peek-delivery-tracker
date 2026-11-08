@@ -23,6 +23,8 @@ struct AddParcelView: View {
     @State private var trackingInput: String
     @State private var trackingURL = ""
     @State private var deliveryPostcode = ""
+    /// The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows.
+    @State private var phoneDigits = ""
     @State private var postcodeFill = PostcodeFill()
     /// The delivery country chosen beside the postcode, kept, as the postcode is, for each carrier whose field takes it.
     @State private var chosenPostcodeCountry: String?
@@ -50,6 +52,7 @@ struct AddParcelView: View {
         case tracking
         case trackingURL
         case deliveryPostcode
+        case phoneDigits
     }
 
     init(draft: SharedParcelDraft?, scanning: Bool = false, onOpenParcel: @escaping (UUID) -> Void = { _ in }, onAdded: @escaping (UUID) -> Void = { _ in }) {
@@ -725,6 +728,42 @@ struct AddParcelView: View {
                     }
                 }
             }
+
+            if let requirement = phoneDigitsRequirement {
+                VStack(alignment: .leading, spacing: 10) {
+                    requirementField(
+                        title: localizer.text("add.requirement.phoneDigits"),
+                        help: localizer.text("add.requirement.phoneDigitsHelp", [
+                            "carrier": catalog.info(for: resolvedCarrier, language: localizer.language).displayName,
+                        ]),
+                        optional: requirement.isOptional
+                    ) {
+                        // Number keys, and no content type: nothing on the iPhone fills in these digits.
+                        TextField(requirement.placeholder ?? "", text: $phoneDigits)
+                            .drawnField()
+                            .font(.body.monospacedDigit())
+                            .keyboardType(requirement.inputMode == "numeric" ? .numberPad : .asciiCapable)
+                            .autocorrectionDisabled()
+                            .focused($focusedField, equals: .phoneDigits)
+                            .accessibilityLabel(localizer.text("add.requirement.phoneDigits"))
+                            .onChange(of: phoneDigits) { _, value in
+                                phoneDigits = requirement.normalizedValue(value)
+                            }
+                            .padding(14)
+                    }
+                    // Without an account the parcel has a link, which never shows the digits.
+                    if store.isGuest {
+                        HStack(alignment: .top, spacing: 7) {
+                            Image(systemName: "lock").font(.caption2).padding(.top, 2)
+                            Text(localizer.text("door.phoneDigits.private"))
+                                .font(.caption)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .foregroundStyle(.secondary)
+                        .accessibilityElement(children: .combine)
+                    }
+                }
+            }
         }
     }
 
@@ -1070,9 +1109,14 @@ struct AddParcelView: View {
         requirements.first(where: { $0.field == .dpdPostcode })
     }
 
+    private var phoneDigitsRequirement: CarrierRequirement? {
+        requirements.first(where: { $0.field == .phoneDigits })
+    }
+
     private var needsRequiredDetails: Bool {
         (trackingURLRequirement != nil && parsed.trackingURL == nil)
             || postcodeRequirement != nil
+            || phoneDigitsRequirement != nil
     }
 
     private var canSave: Bool {
@@ -1088,6 +1132,8 @@ struct AddParcelView: View {
                       url.host != nil else { return false }
             case .dpdPostcode:
                 guard requirement.isSatisfied(by: deliveryPostcode) else { return false }
+            case .phoneDigits:
+                guard requirement.isSatisfied(by: phoneDigits) else { return false }
             }
         }
         return true
@@ -1169,6 +1215,9 @@ struct AddParcelView: View {
         } else if let requirement = postcodeRequirement,
                   !requirement.accepts(deliveryPostcode) {
             focusedField = .deliveryPostcode
+        } else if let requirement = phoneDigitsRequirement,
+                  !requirement.accepts(phoneDigits) {
+            focusedField = .phoneDigits
         } else {
             focusedField = .label
         }
@@ -1191,7 +1240,9 @@ struct AddParcelView: View {
                     trackingURL: trackingURLRequirement != nil
                         ? (parsed.trackingURL ?? trackingURL) : nil,
                     dpdPostcode: postcode,
-                    dpdPostcodeCountry: catalog.sentPostcodeCountry(postcodeCountry, postcode: postcode, for: resolvedCarrier)
+                    dpdPostcodeCountry: catalog.sentPostcodeCountry(postcodeCountry, postcode: postcode, for: resolvedCarrier),
+                    // Only while the carrier asks for them.
+                    phoneDigits: phoneDigitsRequirement.flatMap { $0.normalizedValue(phoneDigits).nonEmpty }
                 )
                 onAdded(parcel.id)
                 dismiss()

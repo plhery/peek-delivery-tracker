@@ -82,5 +82,6 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 • A package delivered while you were away from the list now gets its “Delivered” moment when you come back to it.
 • Dark Mode is warmer: kraft-paper browns, lit edges on dark trucks, a cream stamp, and a warm map.
 • Accessibility: more screens grow with the largest text sizes, VoiceOver announces what changes on screen and can jump between headings, Voice Control answers to the words each control shows, and secondary text has stronger contrast.
+• J&T Express Mexico and China show a package’s scans with the last 4 digits of the recipient’s or sender’s phone: you can now add them with the package, or later from its page.
 • Settings now has a “Rate Peek” row, if you’d like to leave a review.
 ```

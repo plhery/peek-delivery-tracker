@@ -1751,6 +1751,51 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.info(for: .dpd).displayName, bundledName)
     }
 
+    func testJAndTAsksForTheLastFourDigitsOfAPhoneAsAnOptionalField() throws {
+        let catalog = try PhoneDigitsCatalog.make()
+        let requirements = catalog.requirements(for: .jAndTMx, trackingNumber: "JMX000000000001")
+        XCTAssertEqual(requirements.map(\.field), [.phoneDigits])
+        let digits = try XCTUnwrap(requirements.first)
+        XCTAssertTrue(digits.isOptional)
+        XCTAssertEqual(digits.showsMore, true)
+        XCTAssertEqual(digits.inputMode, "numeric")
+        // Typed on the number keys and kept to four digits.
+        XCTAssertEqual(digits.normalizedValue(" 04 72 9"), "0472")
+        XCTAssertTrue(digits.accepts("0472"))
+        XCTAssertFalse(digits.accepts("472"))
+        XCTAssertFalse(digits.accepts("04729"))
+        XCTAssertTrue(digits.isSatisfied(by: " "), "The parcel is saved without them")
+        XCTAssertFalse(digits.isSatisfied(by: "47"))
+        // No other carrier asks for them.
+        XCTAssertEqual(catalog.requirements(for: .dpd, trackingNumber: "06080000000002").map(\.field), [.dpdPostcode])
+    }
+
+    /// A build before the field could not read J&T's definition, so it kept its old one beside the new ETag: the
+    /// cache's name changed with the field, and a cache this build writes keeps it.
+    @MainActor
+    func testACatalogWithThePhoneDigitsRefreshesAndIsCachedWithThem() async throws {
+        let cacheURL = FileManager.default.temporaryDirectory
+            .appending(path: "carrier-catalog-\(UUID().uuidString).json")
+        defer { try? FileManager.default.removeItem(at: cacheURL) }
+        let catalog = try CarrierCatalog(
+            data: Self.bundledCatalogData,
+            cacheURL: cacheURL,
+            loader: { request in
+                (PhoneDigitsCatalog.data, Self.response(for: request, status: 200, headers: ["ETag": "\"digits-v1\""]))
+            }
+        )
+
+        let result = await catalog.refresh(from: URL(string: "https://delivery.example")!, force: true)
+        XCTAssertEqual(result, .updated)
+        XCTAssertEqual(catalog.requirements(for: .jAndTMx, trackingNumber: "JMX000000000001").map(\.field), [.phoneDigits])
+
+        let cached = CarrierCatalog(bundle: .main, cacheURL: cacheURL)
+        let requirement = try XCTUnwrap(cached.requirements(for: .jAndTMx, trackingNumber: "JMX000000000001").first)
+        XCTAssertEqual(requirement.field, .phoneDigits)
+        XCTAssertTrue(requirement.isOptional)
+        XCTAssertEqual(requirement.showsMore, true)
+    }
+
     /// The server sends the bundled catalog without indentation. It must stay far below the
     /// limit, or every refresh fails and the app keeps the catalog it has.
     func testTheCatalogStaysFarBelowTheRefreshLimit() throws {
@@ -2280,4 +2325,44 @@ extension CarrierCatalogTests {
             XCTAssertEqual(catalog.detect(raw).confidence, .none, raw)
         }
     }
+}
+
+/// A catalog in which J&T Express Mexico asks for the last 4 digits of a phone as the scraper's catalog does, beside
+/// DPD's optional postcode. The bundled catalog gets the field with the scraper release that carries it.
+enum PhoneDigitsCatalog {
+    static let data = Data(#"""
+    {
+      "x-carriers": {
+        "j-and-t-mx": {
+          "displayName": "J&T Express Mexico", "color": "#d6001c", "selectable": true, "timezone": "America/Mexico_City",
+          "countries": ["MX"],
+          "tracking": { "mode": "automatic", "adapter": "universal", "requirements": [{
+            "field": "phoneDigits", "validator": "phoneLastFour", "optional": true, "showsMore": true,
+            "label": "Last 4 digits of the phone number", "type": "text", "pattern": "^[0-9]{4}$", "maxLength": 4,
+            "inputMode": "numeric", "autoComplete": "off"
+          }] },
+          "linkRules": [],
+          "detectionRules": [{ "pattern": "^JMX\\d{12}$", "confidence": "high" }]
+        },
+        "dpd": {
+          "displayName": "DPD", "color": "#dc0032", "selectable": true, "timezone": "Europe/Zurich",
+          "countries": ["CH"],
+          "tracking": { "mode": "automatic", "adapter": "dpd", "requirements": [{
+            "field": "dpdPostcode", "validator": "internationalPostcode", "optional": true, "showsMore": true,
+            "label": "Delivery postcode", "type": "text", "maxLength": 12, "inputMode": "text"
+          }] },
+          "linkRules": [],
+          "detectionRules": [{ "pattern": "^0608\\d{10}$", "confidence": "high" }]
+        },
+        "unknown": {
+          "displayName": "Carrier", "color": "#8e8e93", "selectable": false, "timezone": "UTC",
+          "tracking": { "mode": "link-only", "adapter": null },
+          "linkRules": [],
+          "detectionRules": []
+        }
+      }
+    }
+    """#.utf8)
+
+    static func make() throws -> CarrierCatalog { try CarrierCatalog(data: data) }
 }

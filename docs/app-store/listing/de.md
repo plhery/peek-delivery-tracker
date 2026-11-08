@@ -80,5 +80,6 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 • Wird ein Paket zugestellt, während du nicht in der Liste bist, bekommt es seinen „Zugestellt“-Moment jetzt, sobald du zurückkommst.
 • Der Dunkelmodus ist wärmer: Brauntöne wie Kraftpapier, aufgehellte Kanten an dunklen Lieferwagen, eine cremefarbene Briefmarke und eine warme Karte.
 • Bedienungshilfen: Mehr Bildschirme wachsen mit den größten Textgrößen mit, VoiceOver sagt an, was sich auf dem Bildschirm ändert, und lässt dich von Überschrift zu Überschrift springen, die Sprachsteuerung reagiert auf die Wörter, die auf einer Taste stehen, und Nebentexte haben mehr Kontrast.
+• J&T Express in Mexiko und China zeigt die Scans eines Pakets mit den letzten 4 Ziffern der Telefonnummer von Empfänger oder Absender an: Du kannst sie jetzt beim Hinzufügen des Pakets eintragen oder später auf seiner Seite.
 • In den Einstellungen gibt es jetzt die Zeile „Peek bewerten“, falls du eine Bewertung schreiben möchtest.
 ```

@@ -5,6 +5,8 @@ struct CarrierRequirement: Codable, Hashable, Sendable {
     enum Field: String, Codable, Sendable {
         case trackingURL = "trackingUrl"
         case dpdPostcode
+        /// The last 4 digits of the recipient's or sender's phone, which J&T Express Mexico and China show a parcel with.
+        case phoneDigits
     }
 
     let field: Field
@@ -2085,7 +2087,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     private static func defaultCacheURL() -> URL? {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?
             .appending(path: "delivery-tracker", directoryHint: .isDirectory)
-            .appending(path: "carrier-catalog-v5.json")
+            .appending(path: "carrier-catalog-v6.json")
     }
 
     static let emptyMatch = TrackingInputMatch(

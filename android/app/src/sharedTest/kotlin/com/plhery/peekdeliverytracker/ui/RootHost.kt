@@ -31,19 +31,21 @@ import kotlinx.coroutines.CoroutineScope
  * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]) unless [now]
  * says otherwise, the deliveries showing [source]'s parcels (the demo's unless a test gives its own), under Reduce
  * Motion unless asked otherwise. The session is told to the deliveries too, and their screens counted to [onView] with
- * the tabs'; their app's scope runs on the test's clock. The carriers are the bundled catalog's unless [identities] pins others. Transparency is full
- * unless [reduceTransparency]. The tabs show [browserCheck]'s sheet, where a test gives one, and scan labels with
- * [scanner] (none unless a test gives one). A parcel's link opens over it from [links], where a test gives them. The
- * first open stands over the tabs for a guest with nothing followed, unless a test draws its own [deliveries]. The
- * arrival signs in with [session], whose state then is the root's in place of [state], its runs going on in [work]
- * where a test gives a scope that outlives the window, as the app's does, else in the host's; without one it has the
- * debug build's, where sign-in is unavailable, which never changes the state.
+ * the tabs'; their app's scope runs on the test's clock. The carriers are the bundled catalog's unless [identities]
+ * pins others. Transparency is full unless [reduceTransparency], the contrast standard unless [highContrast]. The tabs
+ * show [browserCheck]'s sheet, where a test gives one, and scan labels with [scanner] (none unless a test gives one). A
+ * parcel's link opens over it from [links], where a test gives them. The first open stands over the tabs for a guest
+ * with nothing followed, unless a test draws its own [deliveries]. The arrival signs in with [session], whose state
+ * then is the root's in place of [state], its runs going on in [work] where a test gives a scope that outlives the
+ * window, as the app's does, else in the host's; without one it has the debug build's, where sign-in is unavailable,
+ * which never changes the state.
  */
 @Composable
 fun RootHost(
     state: AuthenticationState = AuthenticationState.Welcome,
     language: AppLanguage = AppLanguage.En,
     dark: Boolean = false,
+    highContrast: Boolean = false,
     reduceMotion: Boolean = true,
     onView: (String) -> Unit = {},
     source: FakeDeliveries? = null,
@@ -71,7 +73,7 @@ fun RootHost(
     SideEffect { shown.session.value = shownState }
     CompositionLocalProvider(LocalNow provides now) {
         PeekTheme(
-            dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = reduceTransparency,
+            dark = dark, highContrast = highContrast, reduceMotion = reduceMotion, reduceTransparency = reduceTransparency,
             carrierIdentities = identities,
         ) {
             // The first open over the tabs is the deliveries' own: none over a page a test draws in their place.

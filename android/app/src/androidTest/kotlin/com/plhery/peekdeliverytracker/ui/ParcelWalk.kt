@@ -73,6 +73,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.cardId
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
+import com.plhery.peekdeliverytracker.ui.theme.increasedContrastSetting
 import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.Job
@@ -89,11 +90,12 @@ import org.junit.rules.ExternalResource
  * dark. The app's clock is [clock] (the captures' [CAPTURED] unless a test moves it on), its words English as the app's
  * Android copy has them unless a test picks another [language], under Reduce Motion unless a test turns [reduceMotion]
  * off. The root shows [session], which a test may change as the session's store would, in the walk's own appearance
- * unless it [followsAppearance]. [fontScale] is the composition's own Density, not the phone's setting: 2, Android's
- * largest step, which the app reads as iOS's accessibility2 (DynamicTypeSize), a shot at it named
- * <row>-<moment>-largest. What TalkBack would hear is read from the deliveries' announcements ([heard]). The views the
- * app asks the system for (a carrier's page in the browser) are kept here and not started, so nothing leaves the
- * device; the catalog a test installs is put back after it, with the monitor that keeps them.
+ * unless it [followsAppearance], at the standard contrast unless it [followsContrast]. [fontScale] is the composition's
+ * own Density, not the phone's setting: 2, Android's largest step, which the app reads as iOS's accessibility2
+ * (DynamicTypeSize), a shot at it named <row>-<moment>-largest. What TalkBack would hear is read from the deliveries'
+ * announcements ([heard]). The views the app asks the system for (a carrier's page in the browser) are kept here and
+ * not started, so nothing leaves the device; the catalog a test installs is put back after it, with the monitor that
+ * keeps them.
  */
 internal class ParcelWalk(
     private val compose: AndroidComposeTestRule<ActivityScenarioRule<ComponentActivity>, ComponentActivity>,
@@ -140,6 +142,12 @@ internal class ParcelWalk(
 
     /** Whether the window's appearance is the one picked in Settings, as MainActivity's, rather than [dark]. */
     var followsAppearance = false
+
+    /**
+     * Whether the root takes the phone's contrast as MainActivity's theme does ([increasedContrastSetting]) rather than
+     * the standard one, set before [show].
+     */
+    var followsContrast = false
 
     private val asked = mutableListOf<Intent>()
 
@@ -223,6 +231,7 @@ internal class ParcelWalk(
         compose.setContent {
             val night = isSystemInDarkTheme()
             val inDark = if (followsAppearance) appearanceSetting().isDark(night) else dark
+            val highContrast = if (followsContrast) increasedContrastSetting() else false
             // Set again on a change of the night too: the platform then lays the window theme's icons over the bars,
             // the light ones of this activity's theme (MainActivity's theme has a dark and a light of its own).
             DisposableEffect(inDark, night) {
@@ -233,8 +242,8 @@ internal class ParcelWalk(
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides ::hear) {
                 around {
                     RootHost(
-                        state = this@ParcelWalk.session, language = language, dark = inDark, reduceMotion = reduceMotion, source = shown,
-                        inbox = inbox, identities = identities, now = { clock },
+                        state = this@ParcelWalk.session, language = language, dark = inDark, highContrast = highContrast,
+                        reduceMotion = reduceMotion, source = shown, inbox = inbox, identities = identities, now = { clock },
                     )
                 }
             }

@@ -435,9 +435,9 @@ private fun HoldingDelivered(state: DeliveriesState, resumed: Boolean, looking: 
  * first ask; a failure shown on it keeps any ask away for the day. Play's prompt is shown over the window's activity.
  * A card's open menu stands over the list too, as the questions it asks do on the iPhone.
  *
- * Out of the iPhone's: the Add and account sheets, a page of the site and what a card's menu asks, which don't stand
- * over the list on Android yet, nor anything over the parcel beside it. The notifications' invitation keeps it away
- * while it shows.
+ * What stands over the list is the iPhone's (`listCovered`, `pageCovered`): Add, the account, the filters, a page of the
+ * site, what a card's menu asks, an alert, and anything over the parcel beside it. The notifications' invitation keeps
+ * it away while it shows.
  */
 @Composable
 private fun Reviewing(state: DeliveriesState, resumed: Boolean, looking: Boolean, now: () -> Instant) {

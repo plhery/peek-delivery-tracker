@@ -78,7 +78,7 @@ Normalmente, sí:
 
 Ojo con dos estados que despistan. En una entrega a domicilio, `Alta en la unidad de reparto` significa que el paquete ha llegado a la unidad de Correos que lo entregará «en cuanto sea posible», no que ya vaya en la furgoneta. Y en CTT Express, `Aceptado por la última milla` quiere decir que ya lo tiene la delegación que lo entregará, aunque quizá aún sin ruta asignada.
 
-[Peek](/) consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (y hasta una vez cada 10 minutos el resto del tiempo), y puedes dejar sus notificaciones en «Solo la entrega». Lo de cada 2 minutos vale solo el día del reparto, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa; a través de servicios de seguimiento como 17TRACK, es cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail y Morning Global; cada 30 minutos, Poste Italiane, PostNL y USPS; cada 10 minutos, GOFO). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete.
+[Peek](/) consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (y hasta una vez cada 10 minutos el resto del tiempo), y puedes dejar sus notificaciones en «Solo la entrega». Lo de cada 2 minutos vale solo el día del reparto, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa; a través de servicios de seguimiento como 17TRACK, es cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail y Morning Global; cada 30 minutos, Poste Italiane, PostNL y USPS; cada 10 minutos, GOFO). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete.
 
 ## «Intento de entrega» o «ausente»: ¿y ahora qué?
 
@@ -119,7 +119,7 @@ No siempre. Significa que el repartidor lo ha escaneado como entregado:
 
 No. Correos llama «envío estacionado» al que tiene una incidencia que impide entregarlo: un paquete roto o dañado, datos del destinatario insuficientes, una dirección incorrecta o desconocida, que nadie se haga cargo o que falte el prerregistro. Lo guarda 5 días naturales a la espera de que se corrijan los datos, y puedes corregirlos tú en «Gestión de estacionados» con el [número de envío](guide:find-tracking-number) y el PIN que te manda por SMS o email. Si no tienes PIN, habla con la empresa que te lo envía: ella se encarga del trámite.
 
-En SEUR, el estado que empieza por `EL ENVÍO ESTÁ PENDIENTE DE LLEGAR A DESTINO.` avisa de una demora, no de una pérdida: el paquete aún no ha llegado a la instalación de destino, por ejemplo por un retraso en el transporte o por un alto volumen de paquetes.
+En SEUR, el estado que empieza por `EL ENVÍO ESTÁ PENDIENTE DE LLEGAR A DESTINO.` avisa de una demora, no de una pérdida: el paquete aún no ha llegado a la instalación de destino.
 
 Eso sí, fíjate bien si el motivo es la dirección o un pago. En Correos, corrige un estacionado dentro de esos 5 días naturales; si te lo envía un particular, es él quien tiene que llamar a Atención al Cliente antes de que pasen.
 
@@ -143,7 +143,7 @@ Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: pídele que
 - [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de 2 €
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – nunca pide datos ni pagos por SMS o email
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – estados, plazos, horario, intentos, 7 días, Parcel Shop
-- [Ship24: Seguimiento SEUR](https://www.ship24.com/es/transportistas/seur-seguimiento) – estados de SEUR: registrado, en tránsito, en demora, en reparto, entregado
+- [Universal Parcel Scraper: SEUR](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/seur) – estados de SEUR que lee Peek: registrado, en tránsito, pendiente de llegar a destino, en reparto, entregado
 - [MRW: Conoce el estado de tu envío](https://blog.mrw.es/conoce-el-estado-de-tu-envio/) – estados, aduana, ausente, Franquicia destino
 - [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – ausencia, nuevo intento
 - [CTT Express: Estados de envío](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – pendiente de recepción, última milla

@@ -30,12 +30,12 @@ As mesmas etapas, com outras palavras:
 
 | Etapa | CTT | InPost | UPS |
 | --- | --- | --- | --- |
-| Etiqueta criada | `Aguarda entrada nos CTT` | `Preparado pelo remetente` | `Shipper created a label, UPS has not received the package yet` |
+| Etiqueta criada | `Aguarda entrada nos CTT` | `Preparado pelo remetente` | `Shipper created a label, UPS has not received the package yet.` |
 | Aceite | `Aceite` | `Recolhido pela InPost` | – |
 | Em trânsito | `Em trânsito` | `Em trânsito` | `Arrived at Facility`, `Departed from Facility` |
 | Perto do destino | `Em trânsito` (repete-se) | `Chegada ao centro local de distribuição` | – |
 | Em entrega | `Em entrega` | Não vem na lista da [InPost](carrier:inpost) | `Out For Delivery` |
-| Para levantar | `No ponto de entrega` (o aviso diz onde e até quando) | `Colocada no Locker ou Ponto Pack` | `Delivered to a UPS Access Point` |
+| Para levantar | `No ponto de entrega` (o aviso diz onde e até quando) | `Colocada no Locker ou Ponto Pack` | `Delivered to UPS Access Point™` |
 | Entregue | `Entregue` | `Entregue` | `DELIVERED` |
 
 As leituras da UPS estão em inglês, tal como o Peek as lê. Os estados em espanhol da [Correos Express](carrier:correos-express) e da [NACEX](carrier:nacex) estão traduzidos nas páginas delas. Os da [Cainiao](carrier:cainiao) e da [YunExpress](carrier:yunexpress), em inglês, também.
@@ -72,7 +72,7 @@ Normalmente, sim:
 
 Um estado que engana: na InPost, `Chegada ao centro local de distribuição` quer dizer que a encomenda está no centro mais próximo do destino, prestes a sair para distribuição ou a ser colocada num ponto InPost. Ainda não vai na carrinha.
 
-No [Peek](/), esta etapa chama-se «Em distribuição»: no dia da entrega, o seguimento é verificado até de 2 em 2 minutos (a partir das 6h00, hora local, e enquanto for o próprio seguimento da transportadora a responder), e as notificações podem ficar só para o dia da entrega. Através de serviços de seguimento como o 17TRACK, é verificado de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França e na Polónia, a DHL eCommerce na Polónia, a Royal Mail e a Morning Global; de 30 em 30 minutos a Poste Italiane, a PostNL e a USPS; de 10 em 10 minutos a GOFO). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
+No [Peek](/), esta etapa chama-se «Em distribuição»: no dia da entrega, o seguimento é verificado até de 2 em 2 minutos (a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e as notificações podem ficar só para o dia da entrega. Através de serviços de seguimento como o 17TRACK, é verificado de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França e na Polónia, a DHL eCommerce na Polónia, a Royal Mail e a Morning Global; de 30 em 30 minutos a Poste Italiane, a PostNL e a USPS; de 10 em 10 minutos a GOFO). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
 
 ## «Entrega não conseguida»: e agora?
 
@@ -98,7 +98,7 @@ Este já te pede alguma coisa: [não estava ninguém para receber a encomenda](g
 
 ## Encomenda para levantar: onde está e quando posso ir?
 
-Está numa Loja CTT, num Ponto CTT, num Agente Payshop, num cacifo ou no ponto de recolha de outra transportadora, [até ao fim do prazo](guide:uncollected-parcel) da tabela acima. Nos CTT, o seguimento mostra `No ponto de entrega`; a InPost escreve `Colocada no Locker ou Ponto Pack` e, perto do fim, `Último aviso: falta pouco para a recolha`. Na UPS, `Delivered to a UPS Access Point` quer dizer que está pronta para a levantares lá.
+Está numa Loja CTT, num Ponto CTT, num Agente Payshop, num cacifo ou no ponto de recolha de outra transportadora, [até ao fim do prazo](guide:uncollected-parcel) da tabela acima. Nos CTT, o seguimento mostra `No ponto de entrega`; a InPost escreve `Colocada no Locker ou Ponto Pack` e, perto do fim, `Último aviso: falta pouco para a recolha`. Na UPS, `Delivered to UPS Access Point™` quer dizer que está pronta para a levantares lá.
 
 Espera pelo aviso antes de ir: os CTT pedem-te que confirmes primeiro que o envio já está disponível. O SMS ou e-mail dos CTT só chega quando o envio já está à tua espera, e diz o local e a data-limite; um aviso em papel indica a partir de que dia e hora podes levantar. A InPost avisa por e-mail ou SMS quando a encomenda chega ao ponto, e a DPD manda um SMS quando chega ao ponto Pickup e outro 2 dias antes de o prazo acabar.
 
@@ -108,7 +108,7 @@ Nem sempre. Quer dizer que o estafeta a registou como entregue ou deixada:
 
 - **Com alguém na morada.** Nos CTT, uma Encomenda Postal com Entrega ao Domicílio ou uma Encomenda Expresso é entregue em mão a quem estiver na morada, desde que não seja menor.
 - **Com um vizinho.** Se não estiveres em casa, a GLS tenta primeiro um vizinho, que assina por ti.
-- **Num sítio seguro.** Na UPS, os detalhes do seguimento podem mostrar onde a encomenda ficou, por exemplo junto à porta da frente ou na garagem.
+- **Num sítio seguro.** Na UPS, os detalhes do seguimento podem mostrar onde a encomenda ficou, por exemplo junto à porta da frente (`Left at: Front Door`).
 - **No ponto de recolha.** Na InPost, `Entregue` quer dizer que a encomenda foi entregue ou levantada.
 
 Nada à porta? Procura no seguimento completo um nome, uma fotografia ou um local. A DPD pede-te que uses o formulário de contacto dela. Depois, lê [encomenda entregue mas não recebida](guide:delivered-not-received).
@@ -147,7 +147,6 @@ Não contes travá-la a meio. Os CTT mandam-te falar com o remetente para ver se
 - [DPD Portugal: Receber encomendas](https://www.dpd.com/pt/pt/receber-encomenda/) – Predict, Live-Tracking, alterar data ou local
 - [DPD Portugal: Perguntas frequentes, receber encomendas](https://www.dpd.com/pt/pt/ajuda/faq/receber-encomendas/) – aviso de passagem, redirecionar, entregue mas não recebida
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – leituras da FedEx que o Peek lê, em inglês: informação do envio enviada à FedEx
-- [Ship24: UPS tracking](https://www.ship24.com/couriers/ups-tracking) – leituras da UPS em inglês: etiqueta criada, chegada e saída das instalações, Out For Delivery, Access Point, DELIVERED, Exception
-- [Ship24: rastreamento UPS](https://www.ship24.com/pt/correios/ups-tracking) – etiqueta criada sem a encomenda, motivos de uma «Exceção», local onde a encomenda entregue ficou
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – leituras da UPS que o Peek lê, em inglês: etiqueta criada, chegada e saída das instalações, Out For Delivery, Access Point, «Left at», DELIVERED, Exception
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – seguimento da transportadora de destino
 :::

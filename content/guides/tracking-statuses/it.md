@@ -4,7 +4,7 @@ description: Cosa vuol dire ogni stato del tracking, da «etichetta creata» a �
 slug: stati-spedizione-cosa-significano
 picture: Un percorso tortuoso con tappe spuntate (etichetta, deposito, aereo), un furgone alla tappa attuale, una casa ancora davanti e Pip che corre.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-08
 ---
 
 Uno stato della spedizione è l'ultima scansione del corriere riassunta in poche parole, e quasi sempre non ti chiede niente. «Etichetta creata» vuol dire che il corriere il pacco non ce l'ha ancora, «in transito» che è da qualche parte tra due scansioni, «in consegna» che è sul furgone di oggi. Solo pochi stati ti chiedono di fare qualcosa: una mancata consegna, un pacco in giacenza da ritirare, qualcosa da pagare in dogana e un «consegnato» quando alla porta non c'è niente.
@@ -39,6 +39,22 @@ Stesse tappe, parole diverse:
 
 Le scansioni di UPS sono in inglese, così come le legge Peek. In Svizzera, nel tracking inglese di [Planzer](carrier:planzer) e [Quickpac](carrier:quickpac), `Shipped` vuol dire già consegnato, non spedito.
 
+[BRT](carrier:brt) scrive in maiuscolo e per abbreviazioni, [GLS](carrier:gls-it) con frasi intere. Ecco le loro diciture italiane e la fase che mostra Peek:
+
+| Fase in Peek | BRT | GLS |
+| --- | --- | --- |
+| Etichetta creata | `DATI SPEDIZ. TRASMESSI A BRT` | `La spedizione e' stata creata dal mittente, attendiamo che ci venga affidata per l'invio a destinazione.` |
+| Preso in carico | `RITIRATA` (dal mittente) | – |
+| In transito | `PARTITA`, `ARRIVATA IN FILIALE` | `Partita dalla sede mittente. In transito.`, `In transito.`, `Arrivata nella Sede GLS locale.` |
+| In consegna | `IN CONSEGNA` | `Consegna prevista nel corso della giornata odierna.` |
+| Tentativo di consegna | `Destin.Assente:LASCIATO AVVISO`, `DESTINATAR.SCONOSC./INCOMPLETO` | `Destinatario assente al primo passaggio. Prego prenotare la consegna entro 3 giorni lavorativi, seguendo le istruzioni ricevute via mail o sms.` |
+| Pronto per il ritiro | `ARRIVATA AL BRT-fermopoint` | – |
+| Consegnato | `CONSEGNATA`, `RITIRATA AL BRT-fermopoint` (l'hai ritirato tu) | `Consegnata.` |
+| Problema segnalato | `MANIFESTAZIONE PUBBLICA`: una manifestazione blocca il pacco, che poi riparte | `Spedizione non in consegna. Il destinatario puo' prenotare la riconsegna tramite link presente in email / sms ricevuto` |
+| Restituito al mittente | `RESO MITTENTE` | – |
+
+Con GLS, dopo una mancata consegna e la tua prenotazione compare una riga che comincia con `Consegna prenotata il`, seguita dalla data che hai scelto: il pacco aspetta in sede fino a quel giorno, e Peek lo mostra «In transito».
+
 ## «Etichetta creata»: il corriere ha già il pacco?
 
 No: il venditore ha stampato un'etichetta e mandato i dati al corriere, niente di più. Con [FedEx](carrier:fedex) questa fase, in inglese, si chiama `Shipment information sent to FedEx`. La prima scansione di [UPS](carrier:ups) dice che il mittente ha creato l'etichetta e che UPS non ha ancora il pacco. Per la [Posta svizzera](carrier:swiss-post), con `Notifica dell'invio da parte dello speditore (inoltro dei dati)` il mittente ha generato il numero d'invio, ma di norma il pacco non è ancora alla Posta. Diciture come «spedizione generata, in attesa di ritiro» vogliono dire la stessa cosa.
@@ -67,7 +83,7 @@ Di solito sì. Su Poste, `In consegna` vuol dire che il pacco è stato affidato 
 
 Due diciture ingannano. Su Poste, `In consegna` può restare anche dopo che il pacco è stato consegnato, o quando ti aspetta già in un ufficio postale o in un Punto Poste; se la consegna non riesce, torna `In transito`. E `L'invio è stato spartito per il recapito` della Posta vuol dire che un centro l'ha smistato verso la tua località: non è detto che sia già sul furgone. Quanto a «fuori per la consegna», che si legge su alcuni tracking tradotti dall'inglese, è semplicemente «in consegna».
 
-[Peek](/) ricontrolla un pacco in consegna fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking del corriere stesso), e il resto del percorso fino a ogni 10 minuti. Quando rispondono servizi di tracciamento come 17TRACK, controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL e USPS; ogni 10 minuti GOFO). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Puoi impostare le notifiche su «Solo la consegna».
+[Peek](/) ricontrolla un pacco in consegna fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e il resto del percorso fino a ogni 10 minuti. Quando rispondono servizi di tracciamento come 17TRACK, controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL e USPS; ogni 10 minuti GOFO). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Puoi impostare le notifiche su «Solo la consegna».
 
 ## Tentativo di consegna fallito o pacco in giacenza: cosa fare?
 
@@ -141,6 +157,8 @@ A quel punto decide il venditore: chiedigli di [rispedirtelo o di rimborsarti](g
 - [GLS: La consegna e le possibili opzioni](https://gls-group.com/IT/it/spedire-ricevere/opzioni-consegna/) – avviso di passaggio, due tentativi, giacenza in sede
 - [GLS Italia: Carta dei Servizi Postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – 10 giorni lavorativi di giacenza, 8 per i pacchi dall'estero
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – scansioni UPS che legge Peek: etichetta, presa in carico, transito, consegna, mancata consegna, Access Point, «Left at», «Exception»
+- [Universal Parcel Scraper: BRT](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/brt) – diciture italiane di BRT che legge Peek e la loro fase, manifestazione pubblica (lette l'8 novembre 2026)
+- [Universal Parcel Scraper: GLS Italia](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-it) – diciture italiane di GLS che legge Peek e la loro fase, consegna prenotata (lette l'8 novembre 2026)
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – scansioni FedEx che legge Peek: dati della spedizione inviati a FedEx
 - [La Posta: Eventi «Monitorare gli invii»](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – stati, dogana, recapito, errore di avviamento, rinvio
 - [La Posta: FAQ su importazione, dogana e IVA](https://www.post.ch/it/soluzioni-commerciali/esportazione-importazione-e-sdoganamento/importazione/faq-su-importazione-dogana-e-iva) – sdoganamento in tre o quattro giorni lavorativi

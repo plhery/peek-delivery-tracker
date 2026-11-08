@@ -3,7 +3,7 @@ title: JRT Sendungsverfolgung: JRT…MM-Nummer, Flüge und DHL
 description: JRT-Paket (今日通) aus Xiamen verfolgen: wie die JRT…MM-Nummer aussieht, was die chinesischen und englischen Schritte heißen und wer zustellt.
 slug: jrt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-08
 ---
 
 JRT (今日通, Jinritong) ist 厦门今日通商贸有限公司, ein Spediteur aus Xiamen in China. Hat ein Shop in China deine Bestellung mit JRT verschickt, bekommst du eine Nummer, die mit JRT beginnt und auf MM endet: Füg sie oben ins Feld ein. JRTs Tracking-Seite zeigt den Weg des Pakets von China über den Flug und den Zoll bis zur Firma, die zustellt, und übernimmt deren Scans: bei Sendungen nach Europa die von DHL, bei Sendungen in die USA die von UPS. Auf JRTs FedEx-Linie nach Irland übernimmt FedEx die letzte Strecke, auf seiner Linie nach Spanien CTT Express und auf der nach Polen InPost.
@@ -16,6 +16,7 @@ Die Frachtbriefnummern von JRT bestehen aus JRT, zehn Ziffern und MM, zusammen 1
 | --- | --- |
 | `JRT0000000000MM` | JRT, zehn Ziffern und MM: eine Frachtbriefnummer von JRT. |
 | `JRT000000000MM` | Nur neun Ziffern: So sehen die Nummern von JRT nicht aus. Prüf, ob eine Ziffer fehlt. |
+| `JRTO0000000000MM` | Ein Buchstabe O nach JRT: Peek liest die Nummer als `JRT0000000000MM`, denn nur so kennt sie JRTs Tracking-Seite. |
 | `UP0000000000000000` | UP und sechzehn Ziffern: eine Referenz des Versenders, unter der JRT eine Bestellung finden kann. Dass nur Versender von JRT diese Form nutzen, ist nicht belegt. |
 | `RR000000005CN` | Zwei Buchstaben, neun Ziffern und CN: eine Nummer der [China Post](carrier:china-post), nicht von JRT. |
 
@@ -149,5 +150,5 @@ JRTs Linie nach Europa endet bei DHL in Deutschland, und JRTs Tracking-Seite üb
 Den Shop, bei dem du bestellt hast: Er hat den Versand bei JRT gebucht. Eine Website oder Kontaktdaten von JRT außer der Tracking-Seite kennt Peek nicht.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname und Initialen, Hualei-Plattform, Tracking-Seite unter einer IP-Adresse über unverschlüsseltes HTTP, ihre Links und kein veröffentlichter Link, JRT…MM- und UP-Form, Suche nach Nummer oder Referenz mit Bindestrichen, Wortlaute der Zeilen und ihre Phasen, das Englisch für chinesische Zeilen, die chinesischen Zeilen nach Europa von der Landung bis zur Übergabe in Deutschland, von DHL übernommene Zeilen und die Filiale der Deutschen Post, die Linie in die USA und die übernommenen UPS-Zeilen, FedEx-Linie und ihre Scans, die Nummer der zustellenden Firma im Datensatz nach der Übergabe, Übergabe an DHL, FedEx, die Schweizerische Post und die Post des Ziellands, Pekinger Zeit und DHLs Ortszeit für seine Zeilen, Partner von DHL im Zielland, Antwort bei unbekannter Nummer, was Peek zeigt, zurückhält und weglässt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname und Initialen, Hualei-Plattform, Tracking-Seite unter einer IP-Adresse über unverschlüsseltes HTTP, ihre Links und kein veröffentlichter Link, JRT…MM- und UP-Form, ein O nach JRT als JRT gelesen, Suche nach Nummer oder Referenz mit Bindestrichen, Wortlaute der Zeilen und ihre Phasen, das Englisch für chinesische Zeilen, die chinesischen Zeilen nach Europa von der Landung bis zur Übergabe in Deutschland, von DHL übernommene Zeilen und die Filiale der Deutschen Post, die Linie in die USA und die übernommenen UPS-Zeilen, FedEx-Linie und ihre Scans, die Nummer der zustellenden Firma im Datensatz nach der Übergabe, Übergabe an DHL, FedEx, die Schweizerische Post und die Post des Ziellands, Pekinger Zeit und DHLs Ortszeit für seine Zeilen, Partner von DHL im Zielland, Antwort bei unbekannter Nummer, was Peek zeigt, zurückhält und weglässt
 :::

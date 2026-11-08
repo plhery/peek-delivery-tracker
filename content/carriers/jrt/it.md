@@ -3,7 +3,7 @@ title: JRT tracking: numero JRT…MM, stati, dogana e DHL
 description: Tracking JRT (今日通) per i pacchi da Xiamen: com'è fatto il numero JRT…MM, cosa vogliono dire le righe in cinese e in inglese e chi consegna in Italia.
 slug: jrt-tracking
 published: 2026-10-31
-updated: 2026-11-06
+updated: 2026-11-08
 ---
 
 JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna: verso l'Europa la cronologia finisce con DHL, di cui copia le scansioni, tranne sulla linea di JRT per l'Irlanda con FedEx nel nome del prodotto, dove il pacco passa a FedEx, e su quelle per la Spagna e la Polonia, dove passa a CTT Express e a InPost.
@@ -16,6 +16,7 @@ Le lettere di vettura di JRT sono JRT, dieci cifre e MM: 15 caratteri in tutto (
 | --- | --- |
 | `JRT0000000000MM` | JRT, dieci cifre e MM: una lettera di vettura JRT. |
 | `JRT000000000MM` | Solo nove cifre: non è un numero JRT. Controlla che non ne manchi una. |
+| `JRTO0000000000MM` | Una lettera O dopo JRT: Peek lo legge come `JRT0000000000MM`, l'unica forma che il tracking di JRT riconosce. |
 | `UP0000000000000000` | UP e sedici cifre: un riferimento del mittente con cui si può trovare un ordine JRT, ma non è detto che lo usino solo i clienti di JRT. |
 | `RR000000005CN` | Due lettere, nove cifre e CN: un numero di [China Post](carrier:china-post), non di JRT. |
 
@@ -148,7 +149,7 @@ Verso l'Europa la cronologia di JRT finisce con DHL, di cui JRT copia le scansio
 Al venditore da cui hai comprato: è lui che ha prenotato la spedizione con JRT. Oltre al tracking, Peek non conosce siti né contatti di JRT.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, le righe solo in cinese verso l'Europa dall'atterraggio al passaggio in Germania, righe copiate da DHL (tentativo, ritiro, consegna, reso) e filiale Deutsche Post, riga di FedEx e sue scansioni copiate, il numero DHL o FedEx nei dati dopo la consegna, il passaggio a DHL e, sulla linea per l'Irlanda, a FedEx, passaggio alla Posta Svizzera, ora di Pechino e ora locale di DHL per le sue righe copiate, secondo la città indicata, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori; righe DHL con indirizzo non trovato, linea stradale dallo Xinjiang al Kazakistan, volo in ritardo
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, una O dopo JRT letta come JRT, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, le righe solo in cinese verso l'Europa dall'atterraggio al passaggio in Germania, righe copiate da DHL (tentativo, ritiro, consegna, reso) e filiale Deutsche Post, riga di FedEx e sue scansioni copiate, il numero DHL o FedEx nei dati dopo la consegna, il passaggio a DHL e, sulla linea per l'Irlanda, a FedEx, passaggio alla Posta Svizzera, ora di Pechino e ora locale di DHL per le sue righe copiate, secondo la città indicata, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori; righe DHL con indirizzo non trovato, linea stradale dallo Xinjiang al Kazakistan, volo in ritardo
 - [DHL: Paket nach Italien versenden (in tedesco)](https://www.dhl.de/de/privatkunden/pakete-versenden/weltweit-versenden/land/italien.html) – consegna di SDA, un tentativo, ritiro in filiale, giacenza di 15 giorni lavorativi, dal lunedì al venerdì e in alcune zone il sabato, 2-4 giorni lavorativi
 - [DHL: DHL Paket International – Informationen zu Destinationen & Zielgebieten (in tedesco)](https://www.dhl.de/dam/jcr:75e9d96c-e4f1-4282-9b80-a4ee7f334fcf/dhl-paket-international-infoblatt-destinationen-de-092026.pdf) – partner di consegna in Italia: SDA (Poste Italiane) o DHL Express
 - [SDA: Home](https://www.sda.it/wps/portal/sdait.home/) – servizi di corriere espresso ex SDA passati a Poste Italiane

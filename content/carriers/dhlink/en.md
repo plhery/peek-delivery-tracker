@@ -38,11 +38,15 @@ A result shows the status (`In transit`, `Delivered`), the origin and destinatio
 | `Package received & scanned at warehouse` | Booked in at DHLink's warehouse. |
 | `Parcel handed over to carrier,waiting for transportation` | The collection point has it and it waits for transport. |
 | `Package departed from the warehouse`, `The package has sent from the warehouse` | It has left the warehouse. |
+| `Warehouse scanning bagging`, `Master airway bill number received`, `Leave the warehouse` | On some lines: the line's warehouse in China has bagged the parcel for the flight, the flight's master air waybill has come in, and the parcel has left the warehouse. Peek shows "In transit". |
 | `Customs export clearance completed`, `Package handed over to airline` | Chinese export customs has released it, then an airline took it. |
 | `Flight departure`, `The flight has taken off` | Flown out of China. |
 | `Shipment Departed From Original Country at …` | Same: it has left China. |
+| `Departed from airport of origin` | The flight has left China ("In transit" in Peek). |
 | `The flight has arrived and the board is being dismantled` | Landed; the pallets are being broken down. |
+| `Dismantling the board` | Same: the pallet is being broken down at the airport of arrival ("In transit" in Peek). |
 | `Shipment has arriveved at destination Country at …` | In your country. The spelling is DHLink's. |
+| `Arrived to … hub`, `Linehaul transit; Parcel has entered the linehaul network.` | After the flight, a partner's hub in Europe, named by a code where the dots are, then its line haul onward. On the line to south-eastern Europe these are Pactic's rows, from its hub in Hungary (code HU). Peek shows "In transit". |
 | `Customs clearance completed`, `Customs import clearance completed, awaiting pickup by local carrier` | Import customs has released it; the carrier in your country collects it next. |
 | `UPS/USPS/Fedex` | A handover to the US carrier is coming. |
 | `货物已交UPS/USPS/Fedex,The goods have been delivered to UPS/USPS/Fedex` | Handed to the US carrier. Not delivered to you yet. |
@@ -50,7 +54,7 @@ A result shows the status (`In transit`, `Delivered`), the origin and destinatio
 | `Scheduled for Delivery` | Out for delivery. |
 | `Shipment has delivered at …` | Delivered. |
 
-US lines add hub scans such as `Arrived at Origin Hub` and `Departed Destination Hub`. After the handover come the delivering carrier's rows, such as GOFO's `Arrived at GOFO Delivery Station` or USPS's `No Access to Delivery Location` (a failed attempt). On China Post lines, China Post's rows appear too, some only in Chinese: `中国邮政 已收取邮件` (China Post took the item), `送交出口海关` (presented to export customs), `已妥投` after a country code (delivered). For a number it doesn't know, the page says `There is no track for this waybill number`.
+US lines add hub scans such as `Arrived at Origin Hub` and `Departed Destination Hub`. After the handover come the delivering carrier's rows, such as GOFO's `Arrived at GOFO Delivery Station` or USPS's `No Access to Delivery Location` (a failed attempt). UniUni's are `Parcel received at UniUni sorting hub.`, `Parcel processed.` (at that hub, minutes before the delivery round) and `Parcel scanned and in transit.`, sometimes after the hub's town and state, all "In transit" in Peek. On China Post lines, China Post's rows appear too, some only in Chinese: `中国邮政 已收取邮件` (China Post took the item), `送交出口海关` (presented to export customs), `已妥投` after a country code (delivered). For a number it doesn't know, the page says `There is no track for this waybill number`.
 
 ## Who delivers DHLink parcels
 
@@ -100,5 +104,5 @@ DHLink has handed the parcel to the US carrier. It isn't delivered to you yet: t
 - [DHLink: Service agreement (服务协议)](https://www.dhlink.com/agreementPage/service) – operator 驼飞侠科技（北京）有限公司
 - [DHgate Seller Help: DHLink物流异常件赔付规则 (DHLink compensation rules)](https://seller.dhgate.com/help/c7502/516002.html) – compensation for sellers, logistics types, exclusions for buyer-caused late delivery and failed clearance, claims within 90 days of the logistics order
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, for goods bought outside the EU, paid by the seller or the delivery company, which may pass it on at checkout or before delivery
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes (CYS on a UniUni US line; JXCYI/JXCZO shared with Juxi Express, DHLink asked first), scan wordings (Pactic's data row), last-leg partners, GOFO's tracker taking DHLink's FC numbers, what Peek reads and shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes (CYS on a UniUni US line; JXCYI/JXCZO shared with Juxi Express, DHLink asked first), scan wordings (Pactic's data, hub and line-haul rows; a line's bagging, air waybill and flight rows; UniUni's hub and transit scans), last-leg partners, GOFO's tracker taking DHLink's FC numbers, what Peek reads and shows
 :::

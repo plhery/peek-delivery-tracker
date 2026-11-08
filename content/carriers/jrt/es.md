@@ -3,7 +3,7 @@ title: JRT seguimiento: número JRT…MM, vuelos, DHL y UPS
 description: Sigue tu paquete de JRT (今日通) desde Xiamen: cómo es un número JRT…MM, qué significan sus pasos en chino y en inglés y quién lo entrega en Europa y en EE. UU.
 slug: jrt-seguimiento
 published: 2026-11-03
-updated: 2026-11-06
+updated: 2026-11-08
 ---
 
 JRT (今日通, Jinritong) es 厦门今日通商贸有限公司, una empresa de logística de Xiamen, en China. Si una tienda china te ha enviado el pedido con JRT, te habrá dado un número de seguimiento que empieza por JRT y acaba en MM: pégalo en la casilla de arriba para rastrear el paquete. La web de seguimiento de JRT lo sigue desde China: el vuelo, la aduana y el paso a DHL, en los envíos a Europa, o a UPS, en los envíos a Estados Unidos. JRT copia en su web los escaneos de DHL y de UPS. En su línea a Irlanda con FedEx en el nombre del producto, el paquete pasa en cambio a FedEx; en su línea a España, a CTT Express, y en la de Polonia, a InPost.
@@ -16,6 +16,7 @@ Los números de envío de JRT llevan JRT, diez cifras y MM: 15 caracteres en tot
 | --- | --- |
 | `JRT0000000000MM` | JRT, diez cifras y MM: un número de envío de JRT. |
 | `JRT000000000MM` | Solo nueve cifras: no es el formato de JRT. Mira si falta una cifra. |
+| `JRTO0000000000MM` | Una letra O detrás de JRT: Peek lo lee como `JRT0000000000MM`, la única forma que conoce la web de seguimiento de JRT. |
 | `UP0000000000000000` | UP y dieciséis cifras: una referencia del remitente con la que se puede encontrar un pedido de JRT. Nada indica que ese formato solo lo usen los clientes de JRT. |
 | `RR000000005CN` | Dos letras, nueve cifras y CN: un número de [China Post](carrier:china-post), no de JRT. |
 
@@ -179,7 +180,7 @@ En los envíos a Europa, el historial de JRT acaba con DHL, y en los envíos a E
 A la tienda donde compraste: fue ella quien contrató el envío con JRT. Aparte de su web de seguimiento, Peek no conoce ninguna web ni datos de contacto de JRT.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y sus iniciales, plataforma Hualei, la web de seguimiento en una dirección numérica por HTTP sin cifrar, sus enlaces y ningún enlace publicado, formatos JRT…MM y UP, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, el inglés de los pasos solo en chino, los pasos solo en chino del final del trayecto a Europa, fechas mes.día, pasos copiados de DHL y la oficina de Deutsche Post, la ruta a Estados Unidos y los pasos copiados de UPS en hora local, el paso de FedEx y sus escaneos copiados, el número de DHL o de FedEx en los datos tras la entrega, el traspaso a DHL y, en la línea a Irlanda, a FedEx, traspaso a Swiss Post, hora de Pekín y hora local de DHL en sus pasos copiados, según la ciudad que nombran, la respuesta a un número desconocido, lo que Peek muestra, aparta y deja fuera, los pasos de DHL con dirección no encontrada, la línea por carretera de Xinjiang a Kazajistán, el vuelo retrasado, los pasos en español de la línea a México, el aviso de CTT Express
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y sus iniciales, plataforma Hualei, la web de seguimiento en una dirección numérica por HTTP sin cifrar, sus enlaces y ningún enlace publicado, formatos JRT…MM y UP, una O detrás de JRT leída como JRT, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, el inglés de los pasos solo en chino, los pasos solo en chino del final del trayecto a Europa, fechas mes.día, pasos copiados de DHL y la oficina de Deutsche Post, la ruta a Estados Unidos y los pasos copiados de UPS en hora local, el paso de FedEx y sus escaneos copiados, el número de DHL o de FedEx en los datos tras la entrega, el traspaso a DHL y, en la línea a Irlanda, a FedEx, traspaso a Swiss Post, hora de Pekín y hora local de DHL en sus pasos copiados, según la ciudad que nombran, la respuesta a un número desconocido, lo que Peek muestra, aparta y deja fuera, los pasos de DHL con dirección no encontrada, la línea por carretera de Xinjiang a Kazajistán, el vuelo retrasado, los pasos en español de la línea a México, el aviso de CTT Express
 - [BOE: Orden PCM/186/2022, calendario de la hora de verano de 2022 a 2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2022-4026) – fin del horario de verano el 25 de octubre de 2026; en Canarias, una hora menos
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € desde el 1 de julio de 2026 en envíos de hasta 150 €, tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Guidance on the 3 EUR customs duty and Union handling fee (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – tasa fija de 2 € por tipo de producto en ventas a distancia, también por encima de 150 €; qué es un tipo de producto

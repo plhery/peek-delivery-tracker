@@ -3,7 +3,7 @@ title: JRT tracking: JRT…MM numbers, flight scans and DHL
 description: Track a JRT (今日通, Jinritong) parcel from Xiamen, China: what a JRT…MM number looks like, what its Chinese and English scans mean and who delivers it.
 slug: jrt-tracking
 published: 2026-10-30
-updated: 2026-11-06
+updated: 2026-11-08
 ---
 
 JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, and into the United States, UPS, whose scans it copies. JRT's FedEx line to Ireland ends with FedEx instead, its line into Spain with CTT Express and its line into Poland with InPost.
@@ -16,6 +16,7 @@ JRT's own waybills are JRT, ten digits and MM, 15 characters in all; JRT is 今�
 | --- | --- |
 | `JRT0000000000MM` | JRT, ten digits and MM: a JRT waybill. |
 | `JRT000000000MM` | Only nine digits: not JRT's layout. Check for a missing digit. |
+| `JRTO0000000000MM` | A letter O after JRT: Peek reads it as `JRT0000000000MM`, the only form JRT's tracker knows. |
 | `UP0000000000000000` | UP and sixteen digits: a shipper's reference that can find a JRT order. Nothing shows that only JRT's shippers use it. |
 | `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not JRT's. |
 
@@ -131,6 +132,6 @@ Into Europe, DHL, and into the United States, UPS: JRT's tracker copies their sc
 The seller you ordered from: it booked the parcel with JRT. Peek knows no website or contact details for JRT besides its tracker.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and initials, Hualei platform, the tracker on a bare address over plain HTTP, its links and no link published, JRT…MM and UP number shapes, search by number or reference with its dashes, line wordings and their stages, the English for Chinese-only lines, the Chinese-only lines into Europe from the landing to the hand-over in Germany, DHL's copied lines and the Deutsche Post outlet, the US line and UPS's copied lines on their local clock, FedEx's line and its copied scans, DHL's or FedEx's number in the record after the hand-over, the hand-over to DHL and, on the FedEx line to Ireland, to FedEx, Swiss Post hand-over, Beijing clock and DHL's local clock for its copied lines, by the town they name, the answer for an unknown number, what Peek shows, holds back and leaves out, DHL's bad-address lines, the road line through Xinjiang and Kazakhstan, the delayed flight, CTT Express's notice
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and initials, Hualei platform, the tracker on a bare address over plain HTTP, its links and no link published, JRT…MM and UP number shapes, a letter O after JRT read as JRT, search by number or reference with its dashes, line wordings and their stages, the English for Chinese-only lines, the Chinese-only lines into Europe from the landing to the hand-over in Germany, DHL's copied lines and the Deutsche Post outlet, the US line and UPS's copied lines on their local clock, FedEx's line and its copied scans, DHL's or FedEx's number in the record after the hand-over, the hand-over to DHL and, on the FedEx line to Ireland, to FedEx, Swiss Post hand-over, Beijing clock and DHL's local clock for its copied lines, by the town they name, the answer for an unknown number, what Peek shows, holds back and leaves out, DHL's bad-address lines, the road line through Xinjiang and Kazakhstan, the delayed flight, CTT Express's notice
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – the €2 Union handling fee from 1 November 2026
 :::

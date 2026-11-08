@@ -3,7 +3,7 @@ title: JRT śledzenie przesyłki: numer JRT…MM, statusy i DHL
 description: Paczka JRT (今日通) z Xiamen w Chinach: jak wygląda numer JRT…MM, co znaczą chińskie i angielskie statusy lotu i odprawy celnej oraz kto ją doręcza.
 slug: jrt-sledzenie
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-08
 ---
 
 JRT (今日通, Jinritong) to 厦门今日通商贸有限公司, firma spedycyjna z Xiamen w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez JRT, dostajesz numer, który zaczyna się od JRT i kończy na MM: wklej go w pole powyżej. Śledzenie JRT pokazuje drogę paczki z Chin: lot, odprawę celną i przekazanie firmie, która ją doręcza. Przy wysyłkach do Europy w historii JRT pojawia się dalej DHL: JRT przepisuje jego skany. Wyjątki to linia JRT do Irlandii z FedEx w nazwie produktu, na której ostatni odcinek ma FedEx, linia do Polski, na której ma go InPost, i linia do Hiszpanii, na której ma go CTT Express.
@@ -16,6 +16,7 @@ Numery listów przewozowych JRT to litery JRT, dziesięć cyfr i MM, razem 15 zn
 | --- | --- |
 | `JRT0000000000MM` | JRT, dziesięć cyfr i MM: list przewozowy JRT. |
 | `JRT000000000MM` | Tylko dziewięć cyfr: tak numer JRT nie wygląda. Sprawdź, czy nie brakuje cyfry. |
+| `JRTO0000000000MM` | Litera O po JRT: Peek odczyta taki numer jako `JRT0000000000MM`, bo tylko w tej postaci zna go strona śledzenia JRT. |
 | `UP0000000000000000` | UP i szesnaście cyfr: numer referencyjny nadawcy, pod którym JRT może znaleźć zamówienie. Nic nie wskazuje, że takich numerów używają tylko klienci JRT. |
 | `RR000000005CN` | Dwie litery, dziewięć cyfr i CN: numer [China Post](carrier:china-post), nie JRT. |
 
@@ -124,5 +125,5 @@ Przy wysyłkach do Europy historia JRT pokazuje DHL, którego skany przepisuje �
 Do sprzedawcy, u którego kupowałeś: to on zamówił przesyłkę u JRT. Peek nie zna żadnej strony ani danych kontaktowych JRT poza stroną śledzenia.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inicjały, platforma Hualei, strona śledzenia pod adresem IP po zwykłym HTTP, jej linki i brak opublikowanego linku, kształty numerów JRT…MM i UP, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie linii i ich etapy, angielskie wersje linii chińskich, chińskie linie przy przesyłkach do Europy od lądowania do przekazania w Niemczech, przepisane linie DHL (także doręczenie, próba doręczenia, odbiór i zwrot) i placówka Deutsche Post, linia FedEx i przepisane skany FedEx, numer DHL albo FedEx w rekordzie po przekazaniu paczki, przekazanie DHL i, na linii do Irlandii, FedEx, przekazanie Poczcie Szwajcarskiej, zegar pekiński i czas lokalny DHL w przepisanych liniach DHL, według miasta, które podają, odpowiedź na nieznany numer, co Peek pokazuje, pomija i czego nie odczytuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inicjały, platforma Hualei, strona śledzenia pod adresem IP po zwykłym HTTP, jej linki i brak opublikowanego linku, kształty numerów JRT…MM i UP, litera O po JRT odczytywana jako JRT, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie linii i ich etapy, angielskie wersje linii chińskich, chińskie linie przy przesyłkach do Europy od lądowania do przekazania w Niemczech, przepisane linie DHL (także doręczenie, próba doręczenia, odbiór i zwrot) i placówka Deutsche Post, linia FedEx i przepisane skany FedEx, numer DHL albo FedEx w rekordzie po przekazaniu paczki, przekazanie DHL i, na linii do Irlandii, FedEx, przekazanie Poczcie Szwajcarskiej, zegar pekiński i czas lokalny DHL w przepisanych liniach DHL, według miasta, które podają, odpowiedź na nieznany numer, co Peek pokazuje, pomija i czego nie odczytuje
 :::

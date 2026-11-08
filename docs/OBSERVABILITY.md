@@ -107,7 +107,8 @@ All tables and views here are service-role only.
   fills in, is not new. It is null for checks recorded before the column existed.
   `lookups` names each carrier or provider the check's lookups asked, with how the lookup
   ended (`success`, `not_found`, `error` and the like, a success kept over a later failure),
-  so a `refused` or `waiting` check still shows whom it asked. A lookup another copy of the
+  so a `refused` or `waiting` check still shows whom it asked. A carrier that answers with an
+  empty result, as FedEx's "could not locate the shipment", is `no_history`, not `success`. A lookup another copy of the
   number ran in the same run is not this check's. It is `{}` when the check asked nobody,
   and null for checks recorded before the column existed.
 - `tracking_sync_steps`: `selected`, `fetch`, `normalize`, `persist_events`,

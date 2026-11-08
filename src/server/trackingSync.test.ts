@@ -114,6 +114,18 @@ describe('dedicated carrier dispatch', () => {
       { number: 'SYNTHETIC0001', trackingUrl: null, postcode: null },
     ]);
   });
+
+  it('tells the check when a carrier answers a number it does not know with an empty result', async () => {
+    const adapter = new CarrierTrackingAdapter();
+    vi.spyOn(adapter.registry.for('fedex')!, 'track')
+      .mockResolvedValueOnce({ status: 'unknown', last_status_text: 'FedEx could not locate the shipment', last_update: null, events: [] })
+      .mockResolvedValueOnce({ status: 'in_transit' });
+    const lookup = vi.fn();
+    for (const number of ['SYNTHETIC0001', 'SYNTHETIC0002']) {
+      await observability.withTrackingAttempt('synthetic-attempt', () => adapter.fetch('fedex', number, null), undefined, undefined, lookup);
+    }
+    expect(lookup.mock.calls.filter(([, , , empty]) => empty === true)).toEqual([['fedex', 'no_history', undefined, true]]);
+  });
 });
 
 describe('tracking event normalization', () => {

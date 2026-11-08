@@ -71,9 +71,9 @@ Para cualquier problema con tu pedido, habla primero con la tienda que te lo ven
 
 ## Rastrear un paquete de GOFO Express con Peek
 
-Con un número `GFUS`, `GF` o `CR`, con o sin espacios, [Peek](/) le pregunta a GOFO si tiene el paquete («Comprobando servicios de seguimiento…»). Si lo tiene, verás «GOFO Express tiene este paquete.» y Peek lo rastrea con GOFO. Un número `GFUS` se lo pregunta también a [Cainiao](carrier:cainiao), que sigue algunos pedidos de AliExpress con el número de GOFO: si Cainiao tiene el paquete, Peek lo sigue primero con Cainiao y, cuando el destino es Estados Unidos, pasa a GOFO en cuanto GOFO muestra escaneos nuevos. Si GOFO solo tiene la etiqueta, Peek consulta también a Cainiao por el tramo anterior. Más en [pedidos de AliExpress](guide:aliexpress-orders).
+Con un número `GFUS`, `GF` o `CR`, con o sin espacios, [Peek](/) le pregunta a GOFO si tiene el paquete («Comprobando servicios de seguimiento…»). Si lo tiene, verás «GOFO Express tiene este paquete.» y Peek lo rastrea con GOFO. [Cainiao](carrier:cainiao) sigue algunos pedidos de AliExpress con el número `GFUS` de GOFO: si GOFO solo muestra la etiqueta desde hace dos días, Peek consulta también a Cainiao por el tramo anterior. Más en [pedidos de AliExpress](guide:aliexpress-orders).
 
-Mientras GOFO no conozca el número, Peek sigue comprobando. Con un número `GF` o `CR` verás «Esperando el primer escaneo de GOFO Express»; con un `GFUS`, que también puede ser de Cainiao, «Todavía no hay historial de seguimiento». Si sabes que es de GOFO, elígelo con «Cambiar»: hasta el primer escaneo verás «Esperando al transportista». También puedes pegar un enlace de rastreo de GOFO para Estados Unidos (de gofo.com/us o gofoexpress.com) que lleve `searchID=` y el número.
+Mientras GOFO no conozca el número, Peek sigue comprobando y verás «Esperando el primer escaneo de GOFO Express». Si sabes que es de GOFO, elígelo con «Cambiar»: hasta el primer escaneo verás «Esperando al transportista». También puedes pegar un enlace de rastreo de GOFO para Estados Unidos (de gofo.com/us o gofoexpress.com) que lleve `searchID=` y el número.
 
 Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, que Peek muestra hasta que el paquete se entrega, se devuelve o llega a un punto de recogida; Peek deja fuera las fotos de entrega, las coordenadas y el peso.
 
@@ -95,7 +95,7 @@ Que el remitente creó la etiqueta de envío y GOFO todavía no tiene el paquete
 
 ### ¿Por qué mi pedido de AliExpress tiene un número de GOFO?
 
-Porque Cainiao, la logística de AliExpress, sigue algunos pedidos con el número GFUS de GOFO, que hace la entrega en Estados Unidos. Con un número GFUS, Peek pregunta a GOFO y a Cainiao.
+Porque Cainiao, la logística de AliExpress, sigue algunos pedidos con el número GFUS de GOFO, que hace la entrega en Estados Unidos. Con un número GFUS, Peek pregunta a GOFO, y también a Cainiao mientras GOFO solo muestra la etiqueta.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek: números de GOFO y de sus redes en otros países, GFUS, CR y MGP del mismo paquete, números FC de DHLink, números YT, rastreador y página de ayuda de GOFO, escaneos y etapas, zonas horarias, lo que Peek deja fuera, Cainiao

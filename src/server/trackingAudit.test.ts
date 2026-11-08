@@ -7,7 +7,8 @@ import { SupabaseServiceClient } from './supabase';
 import { trackingSupportEvidence } from './trackingSupport';
 import type { JsonObject } from './types';
 import {
-  captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep,
+  captureOperationalError, captureTrackingHealth, logOperationalEvent, reportEmptyLookup, reportRoutingEvent, reportTrackingLookup,
+  reportTrackingStep,
 } from './observability';
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 
@@ -302,6 +303,30 @@ describe('the lookups of a check', () => {
     await interrupted.interrupt();
     expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(interrupted.attemptId,
       expect.objectContaining({ outcome: 'interrupted', lookups: { nacex: 'transport' } }), expect.any(Array), { timeoutMs: 3_000 });
+  });
+
+  it('record a lookup that answered with an empty "not found" result as one without history', async () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
+      recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };
+    const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'fedex', 'registered', { trigger: 'added' });
+    await audit.observeFetch(async () => {
+      // FedEx's "could not locate the shipment" is a result, which the scraper counts a success.
+      reportTrackingLookup('fedex', 'success');
+      reportEmptyLookup('fedex');
+      // An earlier lookup's success stays when a later one of the check answers nothing.
+      reportTrackingLookup('ups', 'success');
+      reportTrackingLookup('ups', 'success');
+      reportEmptyLookup('ups');
+      // An empty answer takes back only a success: a carrier that was not asked stays out.
+      reportEmptyLookup('usps');
+      reportTrackingLookup('dhl', 'not_found');
+      reportEmptyLookup('dhl');
+    });
+    expect(audit.answeredWithoutHistory('fedex')).toBe(true);
+    await audit.finish({ outcome: 'waiting', sourceCarrier: 'fedex' });
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(audit.attemptId,
+      expect.objectContaining({ lookups: { fedex: 'no_history', ups: 'success', dhl: 'not_found' } }), expect.any(Array));
   });
 
   it('say on the fetch step which path they took, step by step', async () => {

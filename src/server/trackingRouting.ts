@@ -397,7 +397,8 @@ function unreadEstimates(result: CarrierResult): string[] {
     : [];
 }
 
-function usable(value: CarrierResult): boolean {
+/** Whether an answer holds anything: a scan, or a status or stage past unknown or pending. */
+export function usable(value: CarrierResult): boolean {
   return Boolean(value.events?.length || value.status && !['unknown', 'pending'].includes(value.status)
     || value.current_stage && value.current_stage !== 'pending');
 }
@@ -1353,9 +1354,7 @@ export class TrackingRouter {
     // that follows the number beside the carrier it names (GoFo's GFUS numbers). Its movement, not a
     // label of its own, serves the check: the leg before the filed carrier when it names that carrier
     // as its delivery partner (GoFo), which stays filed, else filed under Cainiao.
-    // `origins` is read loosely until Peek adopts a scraper release that declares it.
-    const origins = (detected as { origins?: readonly string[] }).origins ?? [];
-    if (partialDirect && primary !== 'aliexpress' && (detected.candidates.includes('aliexpress') || origins.includes('aliexpress'))) {
+    if (partialDirect && primary !== 'aliexpress' && (detected.candidates.includes('aliexpress') || detected.origins?.includes('aliexpress'))) {
       const value = await tryDirect('aliexpress', true, undefined, true);
       if (value) return persistResult(value, 'aliexpress');
     }

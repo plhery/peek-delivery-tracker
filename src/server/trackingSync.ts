@@ -37,6 +37,7 @@ import {
   captureOperationalError,
   errorType,
   logOperationalEvent,
+  reportEmptyLookup,
   reportRoutingEvent,
   shouldReportRepeatedFailure,
 } from './observability';
@@ -56,7 +57,7 @@ import {
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import { UNIVERSAL_SOURCES, type UniversalSource } from 'universal-parcel-scraper';
-import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
@@ -705,9 +706,13 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
     const prefetched = !trackingUrl && !dpdPostcode && !phoneDigits ? takeBrowserHistory(carrierId, trackingNumber) : undefined;
     if (prefetched) return dateLocalClocks(carrierId, normalizeCarrierResult(prefetched));
     if (usesRoyalBrowser(carrierId)) await requireRoyalBrowser(carrierId, 'tracking');
-    return trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language, phoneDigits), {
+    const result = await trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language, phoneDigits), {
       registry: this.registry, universal: this.universal, recorder: this.recorder,
     });
+    // An adapter answers a number it does not know with an empty result, such as FedEx's "could not locate the
+    // shipment", which the scraper counts a success: the check's audit records it as an answer without history.
+    if (!usable(result)) reportEmptyLookup(carrierId);
+    return result;
   }
 }
 

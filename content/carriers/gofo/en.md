@@ -78,7 +78,7 @@ For anything about the order itself, start with the shop that shipped it. For th
 
 ## Tracking GOFO Express parcels with Peek
 
-For a `GFUS`, `GF` or `CR` number, typed with or without spaces, [Peek](/) asks GOFO whether it has the parcel and names GOFO Express when it does. `GFUS` numbers also go to AliExpress / Cainiao, which tracks some AliExpress parcels under GOFO's number: if Cainiao has the parcel, Peek follows it with Cainiao first and, when Cainiao gives the US as its destination, moves to GOFO once GOFO scans it. Until GOFO knows the number, Peek keeps checking. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link with `searchID=` and the number in it.
+For a `GFUS`, `GF` or `CR` number, typed with or without spaces, [Peek](/) asks GOFO whether it has the parcel and names GOFO Express when it does. Until GOFO knows the number, Peek keeps checking. AliExpress / Cainiao tracks some AliExpress parcels under GOFO's `GFUS` number: when GOFO has shown only the label for two days, Peek also asks Cainiao for the journey before GOFO. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link with `searchID=` and the number in it.
 
 Peek reads GOFO's US tracking every 30 minutes, out for delivery too, and waits an hour after a failed check (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with the town and state GOFO gives for it, those places on a map, the exact time of each scan, the delivery time and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows GOFO's expected delivery day until the parcel is delivered or returned, and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
 
@@ -98,7 +98,7 @@ Check that it's a US GOFO number: GFUS, GF, CR or MGP. `GFCA`, `GFFR`, `GFIT`, `
 
 ### Why does my AliExpress order have a GOFO number?
 
-Cainiao, which tracks AliExpress orders, follows some of them under GOFO's GFUS number when GOFO delivers them in the US. For a GFUS number, Peek asks both GOFO and Cainiao. More in [AliExpress orders](guide:aliexpress-orders).
+Cainiao, which tracks AliExpress orders, follows some of them under GOFO's GFUS number when GOFO delivers them in the US. For a GFUS number, Peek asks GOFO, and Cainiao too while GOFO shows only the label. More in [AliExpress orders](guide:aliexpress-orders).
 
 :::sources
 - [GOFO: Customer Service](https://www.gofo.com/us/customer-service) – phone, WhatsApp, email and hours, form and chat, no self-pickup; FAQ: proof of delivery, redelivery, address problems, 1–2 days from the station, the sender's inquiry, returns

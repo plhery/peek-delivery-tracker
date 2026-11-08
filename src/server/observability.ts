@@ -34,7 +34,7 @@ interface TrackingAttempt {
   id: string;
   signal?: (signal: RoutingSignal) => void;
   step?: (step: string, carrier?: string, outcome?: string) => void;
-  lookup?: (carrier: string, outcome: string, reason?: string) => void;
+  lookup?: (carrier: string, outcome: string, reason?: string, emptyAnswer?: boolean) => void;
   browser?: () => void;
 }
 
@@ -50,7 +50,7 @@ const trackingAttempts = new AsyncLocalStorage<TrackingAttempt>();
 export function withTrackingAttempt<T>(
   attemptId: string, operation: () => T, signal?: (signal: RoutingSignal) => void,
   step?: (step: string, carrier?: string, outcome?: string) => void,
-  lookup?: (carrier: string, outcome: string, reason?: string) => void, browser?: () => void,
+  lookup?: (carrier: string, outcome: string, reason?: string, emptyAnswer?: boolean) => void, browser?: () => void,
 ): T {
   return trackingAttempts.run({ id: attemptId, signal, step, lookup, browser }, operation);
 }
@@ -75,6 +75,15 @@ export function reportTrackingBrowser(): void {
  */
 export function reportTrackingLookup(carrier: string, outcome: string, reason?: string): void {
   trackingAttempts.getStore()?.lookup?.(carrier, outcome, reason);
+}
+
+/**
+ * Tells the running check that the carrier's lookup it just counted a success answered nothing: a result without
+ * scans or status, such as FedEx's "could not locate the shipment", which the adapter returns rather than throws.
+ * The check records it as `no_history`.
+ */
+export function reportEmptyLookup(carrier: string): void {
+  trackingAttempts.getStore()?.lookup?.(carrier, 'no_history', undefined, true);
 }
 
 /**

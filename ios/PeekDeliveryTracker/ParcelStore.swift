@@ -478,6 +478,12 @@ final class ParcelStore: ObservableObject {
         session.showWelcome()
     }
 
+    /// Whether a postcode went with the lookup behind a parcel followed without an account, which its link never shows.
+    /// An account's parcel holds its own postcode instead.
+    func postcodeGiven(for parcel: Parcel) -> Bool {
+        isGuest && device.postcodeGiven(id: parcel.id) == true
+    }
+
     /// The link of a parcel followed here through someone else's link: all this iPhone may share
     /// of it, and the sign that its carrier and details are not this iPhone's to change.
     func viewerLink(for parcel: Parcel) -> String? {

@@ -24,6 +24,9 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// Someone else's parcel forgotten here before its notifications could be turned off: out of
     /// the list, and kept only until they are.
     var forgotten: Bool? = nil
+    /// Whether a postcode went with the lookup that made the parcel, which its link never shows: yes or no only,
+    /// never the postcode. Nil where this iPhone doesn't know, such as a parcel it kept before it noted this.
+    var postcodeGiven: Bool? = nil
 
     var isViewer: Bool { viewer == true }
 }
@@ -364,7 +367,8 @@ final class DeviceParcels {
         ))
         guard ParcelLinkRoute.validID(response.link.id) else { throw DeliveryAPIError.invalidResponse }
         var entry = DeviceParcel(linkID: response.link.id, label: request.label ?? "", archivedAt: nil,
-                                 parcel: Parcel(shared: response.package), checkedAt: now())
+                                 parcel: Parcel(shared: response.package), checkedAt: now(),
+                                 postcodeGiven: request.dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil)
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         if let twin = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
             let old = entries.remove(at: twin)
@@ -594,6 +598,9 @@ final class DeviceParcels {
 
     /// The link of a parcel followed here through someone else's link, which is all this iPhone may share of it.
     func viewerLink(id: UUID) -> String? { entries.first { $0.parcel.id == id && $0.isViewer }?.linkID }
+
+    /// Whether a postcode went with the lookup that made the parcel; nil when this iPhone doesn't know.
+    func postcodeGiven(id: UUID) -> Bool? { entries.first { $0.parcel.id == id }?.postcodeGiven }
 
     /// The parcel this iPhone follows through a link, as the list shows it.
     func parcelID(linkID: String) -> UUID? { entries.first { $0.linkID == linkID }?.parcel.id }

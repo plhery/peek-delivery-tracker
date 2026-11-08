@@ -270,6 +270,8 @@ struct ParcelDetailView: View {
         // Someone else's parcel, followed through its link: the link is shared as it is, and the carrier is theirs to change.
         let readerLink = store.viewerLink(for: parcel)
         let editable = sample == nil && readerLink == nil
+        // A lookup without an account keeps its postcode off the parcel: the iPhone notes only whether it had one.
+        let postcodeGiven = store.postcodeGiven(for: parcel)
 
         return VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 16) {
@@ -433,7 +435,7 @@ struct ParcelDetailView: View {
                         }
                     }
                 }
-                if editable, parcel.showsMoreWithPostcode(catalog) {
+                if editable, parcel.showsMoreWithPostcode(catalog, postcodeGiven: postcodeGiven) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(localizer.text("detail.postcodeShowsMore",
                                             ["carrier": catalog.info(for: parcel.carrier, language: localizer.language).displayName]))
@@ -442,7 +444,7 @@ struct ParcelDetailView: View {
                         Button(localizer.text("detail.inputNeededAction")) { carrierEditor = CarrierEditorRequest() }
                             .font(.caption.weight(.semibold))
                     }
-                } else if editable, parcel.showsMoreWithPhoneDigits(catalog, knowsInputs: !store.isGuest) {
+                } else if editable, parcel.showsMoreWithPhoneDigits(catalog, knowsInputs: !store.isGuest, postcodeGiven: postcodeGiven) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(localizer.text("detail.phoneDigitsShowsMore",
                                             ["carrier": catalog.info(for: parcel.carrier, language: localizer.language).displayName]))

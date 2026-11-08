@@ -140,8 +140,10 @@ extension Parcel {
 
     /// Whether the parcel's carrier shows more with the delivery postcode it was saved without. An account's own
     /// postcode is given at the next check, so this asks those who gave none, once the parcel has been checked.
-    func showsMoreWithPostcode(_ catalog: CarrierCatalog) -> Bool {
-        guard inputNeededPrompt == nil, inputSuggestedPrompt == nil, dpdPostcode?.nonEmpty == nil, isActive,
+    /// `postcodeGiven` is true for a parcel followed without an account whose lookup had a postcode: the service
+    /// never shows it through the link, so the parcel itself has none.
+    func showsMoreWithPostcode(_ catalog: CarrierCatalog, postcodeGiven: Bool = false) -> Bool {
+        guard !postcodeGiven, inputNeededPrompt == nil, inputSuggestedPrompt == nil, dpdPostcode?.nonEmpty == nil, isActive,
               lastSyncedAt != nil else { return false }
         return catalog.requirements(for: carrier, trackingNumber: trackingNumber)
             .contains { $0.field == .dpdPostcode && $0.showsMore == true }
@@ -151,9 +153,10 @@ extension Parcel {
     /// (J&T Express Mexico and China), once the parcel has been checked, unless the sync error already asks for them or
     /// the postcode is asked for instead. As the web's `phoneDigitsShowsMore`. `knowsInputs` is false for a parcel
     /// followed without an account: the service shows no lookup's digits through its link, so whether they were given
-    /// is unknown there.
-    func showsMoreWithPhoneDigits(_ catalog: CarrierCatalog, knowsInputs: Bool = true) -> Bool {
-        guard knowsInputs, inputNeededPrompt == nil, inputSuggestedPrompt == nil, !showsMoreWithPostcode(catalog),
+    /// is unknown there. `postcodeGiven` is as for `showsMoreWithPostcode`.
+    func showsMoreWithPhoneDigits(_ catalog: CarrierCatalog, knowsInputs: Bool = true, postcodeGiven: Bool = false) -> Bool {
+        guard knowsInputs, inputNeededPrompt == nil, inputSuggestedPrompt == nil,
+              !showsMoreWithPostcode(catalog, postcodeGiven: postcodeGiven),
               phoneDigits?.nonEmpty == nil, isActive, lastSyncedAt != nil, syncError != "carrier:input_required" else { return false }
         return catalog.requirements(for: carrier, trackingNumber: trackingNumber).contains { $0.field == .phoneDigits }
     }

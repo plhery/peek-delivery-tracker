@@ -579,12 +579,14 @@ final class DeviceParcelTests: XCTestCase {
         try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dpd, trackingURL: nil, dpdPostcode: " 75001 ")
         XCTAssertEqual(memory.entries, [given(.dpd, "75001")])
         XCTAssertEqual(store.givenPostcodes, [given(.dpd, "75001")])
+        XCTAssertTrue(store.postcodeGiven(for: try XCTUnwrap(store.parcels.first { $0.id == id })))
 
         // An account's postcode stays on its parcel, and the account's parcels come first.
         try await session.verifyCode(email: "test@example.com", code: "123456")
         try await store.add(trackingNumber: "TESTPARCEL999", label: "", carrier: .glsCh, trackingURL: nil, dpdPostcode: "3000")
         XCTAssertEqual(memory.entries, [given(.dpd, "75001")])
         XCTAssertEqual(store.givenPostcodes, [given(.glsCh, "3000"), given(.dpd, "75001")])
+        XCTAssertFalse(store.postcodeGiven(for: accountParcel), "An account's parcel holds its own postcode")
 
         session.forceSignOut()
         XCTAssertEqual(memory.entries, [given(.dpd, "75001")])
@@ -618,6 +620,99 @@ final class DeviceParcelTests: XCTestCase {
         let parcels = try JSONDecoder.deliveryTracker.decode([DeviceParcel].self, from: JSONSerialization.data(withJSONObject: file))
 
         XCTAssertEqual(parcels, [saved])
+    }
+
+    // MARK: - Whether a lookup had a postcode
+
+    /// A DPD parcel its carrier has answered for: DPD shows more with the delivery postcode.
+    private func checkedDPD(_ id: UUID) -> PublicPackage {
+        var checked = package(id, number: "06080000000002", carrier: .dpd)
+        checked.lastSyncedAt = "2026-10-02T08:00:00Z"
+        return checked
+    }
+
+    func testALookupWithAPostcodeNotesOnlyThatItHadOneAndAsksForNone() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let catalog = CarrierCatalog(cacheURL: nil)
+        let id = UUID()
+        let storage = Memory()
+        let found = PublicLookupResponse(link: link("22222222222A"), key: key, package: checkedDPD(id))
+        let device = DeviceParcels(client: client(Calls(), lookup: found), storage: storage, postcodes: PostcodeMemory(defaults: defaults))
+
+        let parcel = try await device.add(CreatePackageRequest(trackingNumber: "06080000000002", carrier: .dpd, dpdPostcode: " QX7 7QX "))
+
+        XCTAssertEqual(storage.parcels.map(\.postcodeGiven), [true])
+        XCTAssertEqual(device.postcodeGiven(id: id), true)
+        // Yes or no only: the postcode stays off the parcel and its row.
+        XCTAssertNil(parcel.dpdPostcode)
+        XCTAssertFalse(String(decoding: try JSONEncoder.deliveryTracker.encode(storage.parcels), as: UTF8.self).contains("QX7"))
+        XCTAssertTrue(parcel.showsMoreWithPostcode(catalog), "The parcel alone can't tell")
+        XCTAssertFalse(parcel.showsMoreWithPostcode(catalog, postcodeGiven: true))
+    }
+
+    func testALookupWithoutAPostcodeStillAsksForOneItsCarrierShowsMoreWith() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let catalog = CarrierCatalog(cacheURL: nil)
+        for postcode in [nil, " "] as [String?] {
+            let id = UUID()
+            let storage = Memory()
+            let found = PublicLookupResponse(link: link("22222222222A"), key: key, package: checkedDPD(id))
+            let device = DeviceParcels(client: client(Calls(), lookup: found), storage: storage, postcodes: PostcodeMemory(defaults: defaults))
+
+            let parcel = try await device.add(CreatePackageRequest(trackingNumber: "06080000000002", carrier: .dpd, dpdPostcode: postcode))
+
+            XCTAssertEqual(storage.parcels.map(\.postcodeGiven), [false], String(describing: postcode))
+            XCTAssertTrue(parcel.showsMoreWithPostcode(catalog, postcodeGiven: device.postcodeGiven(id: id) == true), String(describing: postcode))
+        }
+    }
+
+    func testChangingTheCarrierWithoutAPostcodeNotesThatTheNewLookupHadNone() async throws {
+        let catalog = CarrierCatalog(cacheURL: nil)
+        let previousID = UUID(), nextID = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [DeviceParcel(
+            linkID: "22222222222A", label: "Moon lamp", archivedAt: nil,
+            parcel: Parcel(shared: package(previousID, number: "06080000000002", carrier: .glsCh)), checkedAt: Date(), postcodeGiven: true
+        )]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(link: link("22222222222B"), key: key, package: checkedDPD(nextID))),
+                                   storage: storage)
+
+        let parcel = try await device.changeCarrier(id: previousID, carrier: .dpd, trackingURL: nil, dpdPostcode: nil)
+
+        XCTAssertEqual(parcel.id, nextID)
+        XCTAssertEqual(calls.lookupPostcodes, [nil])
+        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222B"])
+        XCTAssertEqual(storage.parcels.map(\.postcodeGiven), [false])
+        XCTAssertEqual(device.postcodeGiven(id: nextID), false)
+        XCTAssertTrue(parcel.showsMoreWithPostcode(catalog, postcodeGiven: device.postcodeGiven(id: nextID) == true))
+    }
+
+    func testAnEntryKeptBeforeLookupsNotedTheirPostcodeStillAsksForOne() throws {
+        let catalog = CarrierCatalog(cacheURL: nil)
+        let id = UUID()
+        let noted = DeviceParcel(linkID: "22222222222A", label: "Moon lamp", archivedAt: nil, parcel: Parcel(shared: checkedDPD(id)),
+                                 checkedAt: Date(timeIntervalSince1970: 1_800_000_000), postcodeGiven: true)
+        let older = try file([noted]) { rows in
+            XCTAssertEqual(rows[0]["postcodeGiven"] as? Bool, true)
+            rows[0].removeValue(forKey: "postcodeGiven")
+        }
+
+        let opened = DeviceParcelFiles.opened(older, keys: ["22222222222A": key])
+
+        XCTAssertEqual(opened.parcels.map(\.linkID), ["22222222222A"])
+        XCTAssertEqual(opened.parcels.map(\.postcodeGiven), [nil])
+        let storage = Memory()
+        storage.parcels = opened.parcels
+        storage.keys = opened.keys
+        let device = DeviceParcels(client: client(Calls()), storage: storage)
+        XCTAssertNil(device.postcodeGiven(id: id))
+        // Unknown, as before: the note still shows.
+        let parcel = try XCTUnwrap(device.list().first)
+        XCTAssertTrue(parcel.showsMoreWithPostcode(catalog, postcodeGiven: device.postcodeGiven(id: id) == true))
     }
 
     func testAnAccountTakesTheParcelsOverAndTheDeviceLetsGo() {

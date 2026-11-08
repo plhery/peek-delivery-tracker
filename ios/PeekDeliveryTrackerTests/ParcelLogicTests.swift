@@ -571,6 +571,8 @@ final class ParcelLogicTests: XCTestCase {
         var given = parcel
         given.dpdPostcode = "8000"
         XCTAssertFalse(given.showsMoreWithPostcode(catalog))
+        // Nor for a parcel followed without an account whose lookup had one, which its link never shows.
+        XCTAssertFalse(parcel.showsMoreWithPostcode(catalog, postcodeGiven: true))
         var archived = parcel
         archived.archivedAt = "2026-08-10T10:00:00Z"
         XCTAssertFalse(archived.showsMoreWithPostcode(catalog))

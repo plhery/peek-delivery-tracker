@@ -78412,20 +78412,54 @@
   {
     "input": "EEUS026904543AE0",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "asendia"
+    ],
+    "asked": [
+      "asendia",
+      "dhl-ecommerce"
+    ]
   },
   {
     "input": "EEUS027373790JP0",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "asendia"
+    ],
+    "asked": [
+      "asendia",
+      "dhl-ecommerce"
+    ]
   },
   {
     "input": "EEUS027988469JP0",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "asendia"
+    ],
+    "asked": [
+      "asendia",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "EEUS999999990GB9",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "asendia"
+    ],
+    "asked": [
+      "asendia",
+      "dhl-ecommerce"
+    ]
   },
   {
     "input": "EF00001257029",

@@ -745,6 +745,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^EEUS\\d{9}[A-Z]{2}\\d$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^UU\\d{9}DE$",
         "confidence": "low",
         "checksum": "s10"
@@ -1879,6 +1883,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^ESUS\\d{9}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^EEUS\\d{9}[A-Z]{2}\\d$",
         "confidence": "low"
       }
     ],

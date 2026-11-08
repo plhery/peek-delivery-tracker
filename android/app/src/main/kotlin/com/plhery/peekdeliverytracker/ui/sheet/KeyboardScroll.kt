@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -37,8 +38,10 @@ import androidx.compose.ui.node.LayoutModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.offset
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlin.math.abs
 import kotlin.math.min
@@ -113,13 +116,66 @@ internal suspend fun reachTheFocusedField(offset: () -> Float, scrollBy: suspend
 
 /**
  * The navigation bar's height where the sheet reaches the window's bottom ([SheetInsets.reachesBottom]), which what it
- * holds ends clear of; none on a regular window's form or page sheet, or a popover.
+ * holds ends clear of; none on a regular window's form or page sheet, or a popover. What asks for it keeps clear of the
+ * bar itself, its ground and what scrolls going on under it, so the sheet leaves it be ([SheetFoot]).
  */
 @Composable
 internal fun sheetBottomInset(): Dp {
     if (!LocalSheetInsets.current.reachesBottom) return 0.dp
+    SheetGoesUnderTheBar()
     val density = LocalDensity.current
     return with(density) { WindowInsets.navigationBars.getBottom(this).toDp() }
+}
+
+/**
+ * Tells the sheet from the window's bottom that holds this that what it holds goes on under the navigation bar as it
+ * is, as a web page does: the sheet leaves its foot be ([SheetFoot]).
+ */
+@Composable
+internal fun SheetGoesUnderTheBar() {
+    LocalSheetFoot.current?.let { if (!it.clearsTheBar) it.clearsTheBar = true }
+}
+
+/**
+ * What a sheet from the window's bottom knows of what it holds at its foot: whether it keeps clear of the navigation bar
+ * itself ([sheetBottomInset]). If it doesn't, the sheet holds it above the bar ([sheetFootRoom]), so that nothing it
+ * holds, a button at its foot above all, stands in the bar: with three buttons the bar is 48 tall.
+ */
+@Stable
+internal class SheetFoot {
+    var clearsTheBar by mutableStateOf(false)
+}
+
+/** The foot of the sheet from the window's bottom that holds this; none outside one, or in a regular window's form. */
+internal val LocalSheetFoot = staticCompositionLocalOf<SheetFoot?> { null }
+
+/**
+ * What a sheet from the window's bottom holds, above the navigation bar [bar] unless it keeps clear of the bar itself
+ * ([SheetFoot.clearsTheBar]); the room under it counts in what a fitted sheet measures it for.
+ */
+internal fun Modifier.sheetFootRoom(foot: SheetFoot, bar: WindowInsets): Modifier = this.then(SheetFootRoom(foot, bar))
+
+private data class SheetFootRoom(val foot: SheetFoot, val bar: WindowInsets) : ModifierNodeElement<SheetFootRoomNode>() {
+    override fun create() = SheetFootRoomNode(foot, bar)
+
+    override fun update(node: SheetFootRoomNode) {
+        node.foot = foot
+        node.bar = bar
+    }
+}
+
+private class SheetFootRoomNode(var foot: SheetFoot, var bar: WindowInsets) : Modifier.Node(), LayoutModifierNode {
+    private fun Density.room(): Int = if (foot.clearsTheBar) 0 else bar.getBottom(this)
+
+    override fun MeasureScope.measure(measurable: Measurable, constraints: Constraints): MeasureResult {
+        val room = room()
+        val placeable = measurable.measure(constraints.offset(vertical = -room))
+        return layout(placeable.width, (placeable.height + room).coerceAtMost(constraints.maxHeight)) { placeable.place(0, 0) }
+    }
+
+    override fun IntrinsicMeasureScope.minIntrinsicHeight(measurable: IntrinsicMeasurable, width: Int) = measurable.minIntrinsicHeight(width) + room()
+
+    override fun IntrinsicMeasureScope.maxIntrinsicHeight(measurable: IntrinsicMeasurable, width: Int) = measurable.maxIntrinsicHeight(width) + room()
 }
 
 /**

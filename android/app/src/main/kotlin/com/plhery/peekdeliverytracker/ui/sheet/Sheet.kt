@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
@@ -622,7 +623,7 @@ private fun SheetLayer(
                     CompositionLocalProvider(
                         LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
                         LocalSheetInsets provides SheetInsets.sheet(if (page) with(density) { formWidth.toDp() } else FORM_WIDTH, reachesBottom = false),
-                        LocalSheetGround provides ground, LocalInSheet provides lit,
+                        LocalSheetGround provides ground, LocalInSheet provides lit, LocalSheetFoot provides null,
                     ) {
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
                         // Over what it holds, whose ground would hide them.
@@ -666,18 +667,22 @@ private fun SheetLayer(
                             .clip(shape)
                             .drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) },
                     )
+                    val foot = remember { SheetFoot() }
+                    val bar = WindowInsets.navigationBars
                     Box(Modifier.matchParentSize().clip(shape)) {
                         CompositionLocalProvider(
                             LocalSheetAttachment provides attachment, LocalSheetMenus provides menus, LocalSheetInsets provides insets,
-                            LocalSheetGround provides ground, LocalInSheet provides lit,
+                            LocalSheetGround provides ground, LocalInSheet provides lit, LocalSheetFoot provides foot,
                         ) {
                             // Floating, the sheet is its attached self made smaller to its width, as UIKit draws it: laid
-                            // out across the whole window, and scaled into the inset panel.
+                            // out across the whole window, and scaled into the inset panel. What it holds stands above
+                            // the navigation bar, unless it keeps clear of it itself.
                             Box(
                                 Modifier
                                     .fillMaxSize()
                                     .scaledFrom(scale)
-                                    .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier),
+                                    .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier)
+                                    .sheetFootRoom(foot, bar),
                             ) { content() }
                             if (standsUp) LitEdge(shape, Modifier.matchParentSize())
                             if (grabber) Grabber(Modifier.align(Alignment.TopCenter))

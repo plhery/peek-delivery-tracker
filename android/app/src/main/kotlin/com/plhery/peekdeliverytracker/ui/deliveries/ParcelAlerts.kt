@@ -57,6 +57,7 @@ import com.plhery.peekdeliverytracker.ui.draw.Toggle
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetMenus
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
+import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -170,8 +171,8 @@ internal fun ParcelAlertsHost(state: DeliveriesState) {
 }
 
 /**
- * `ParcelAlertSwitches` on Brand's background, 22 in from the sides, 26 under the top and 18 over the foot, 560 wide
- * at most and 14 between its parts: the parcel's name as the heading, "this parcel" where it has none, with the close
+ * `ParcelAlertSwitches` on Brand's background, 22 in from the sides, 26 under the top and 18 over the foot and the
+ * navigation bar under a sheet from the window's bottom, 560 wide at most and 14 between its parts: the parcel's name as the heading, "this parcel" where it has none, with the close
  * button; the two switches 7 apart, each for this parcel only (`flip`), the notifications with the account's preset
  * and the email with its address; the note saying where the defaults are, in caption secondary; and Done. A switch
  * shows the position it was flipped to while it saves (`saving`), and all are disabled meanwhile, one save at a time.
@@ -193,6 +194,7 @@ internal fun ParcelAlertSwitches(
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
+    val bottom = sheetBottomInset()
     Box(Modifier.fillMaxSize().background(colors.sheet).verticalScroll(rememberScrollState())) {
         Column(
             Modifier
@@ -201,7 +203,7 @@ internal fun ParcelAlertSwitches(
                 .wrapContentWidth()
                 .widthIn(max = ALERTS_WIDTH)
                 .fillMaxWidth()
-                .padding(start = ALERTS_SIDE, top = ALERTS_TOP, end = ALERTS_SIDE, bottom = ALERTS_BOTTOM),
+                .padding(start = ALERTS_SIDE, top = ALERTS_TOP, end = ALERTS_SIDE, bottom = ALERTS_BOTTOM + bottom),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             AlertsHeader(parcel, close)

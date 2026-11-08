@@ -166,6 +166,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
+import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -1543,7 +1544,7 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
 /**
  * `primaryAction`: Add across the foot, above the keyboard (`safeAreaInset(edge: .bottom)`), on the app's background: on
  * a cover above the keyboard and the navigation bar, in the form sheet above the part of the keyboard over its foot,
- * as the sheet stays where it is. "Add parcel", or "Track this one" among several, in headline on the accent, 50 tall
+ * as the sheet stays where it is, and above the navigation bar where the sheet reaches the window's bottom. "Add parcel", or "Track this one" among several, in headline on the accent, 50 tall
  * at least with 14-point corners, at 45 % while it can't add (easing out over 0.2 s); while it saves, a spinner 10
  * before "Adding…". The words swap at once on the tap, as `saving = true` rides no animation (`.animation` is on
  * `canSave` alone); they cross over the form's snappy 0.3 s only where [error] appears or clears in the same update (a
@@ -1584,7 +1585,7 @@ private fun AddButton(
                 val root = foot.findRootCoordinates()
                 below = (root.size.height - root.localPositionOf(foot, Offset(0f, foot.size.height.toFloat())).y).roundToInt().coerceAtLeast(0)
             }
-            .padding(bottom = lift)
+            .padding(bottom = maxOf(lift, sheetBottomInset()))
     }
     Box(
         modifier

@@ -201,6 +201,7 @@ private fun PopoverLayer(
             val ground: @Composable (Modifier) -> Unit = { if (paper != null) Box(it.background(paper)) else SheetGlass(RectangleShape, backdrop, it) }
             CompositionLocalProvider(
                 LocalSheetAttachment provides { 0f }, LocalSheetMenus provides menus, LocalSheetInsets provides insets, LocalSheetGround provides ground,
+                LocalSheetFoot provides null,
             ) {
                 Box(Modifier.padding(top = if (frame.below) ARROW_HEIGHT else 0.dp, bottom = if (frame.below) 0.dp else ARROW_HEIGHT)) {
                     content()

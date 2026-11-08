@@ -124,7 +124,7 @@ private fun CoverLayer(
                 .then(if (leaving) Untouchable else Modifier)
                 .then(hidden),
         ) {
-            CompositionLocalProvider(LocalSheetMenus provides menus, LocalSheetInsets provides insets) { content() }
+            CompositionLocalProvider(LocalSheetMenus provides menus, LocalSheetInsets provides insets, LocalSheetFoot provides null) { content() }
         }
         menus.content?.invoke()
     }

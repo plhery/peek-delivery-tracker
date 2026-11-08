@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.foundation.layout.padding
@@ -132,6 +131,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.SECTION_RADIUS
 import com.plhery.peekdeliverytracker.ui.sheet.SEPARATOR
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormRows
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormSeparator
+import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
@@ -249,7 +249,7 @@ internal fun CarrierPicker(
     val keyboard by remember(ime, density) {
         derivedStateOf { with(density) { ((ime.exclude(consumed).getBottom(density) - below).coerceAtLeast(0f) / scale).toDp() } }
     }
-    val navigation = if (!insets.reachesBottom) 0.dp else with(density) { WindowInsets.navigationBars.getBottom(this).toDp() }
+    val navigation = sheetBottomInset()
     val bottom = maxOf(navigation, keyboard)
     var barHeight by remember { mutableStateOf(insets.barTop + BAR_ROW + SEARCH_TOP + SEARCH_HEIGHT + SEARCH_BOTTOM) }
     // `.contentMargins(.trailing, ...)`: the rows keep clear of the rail's touch strip.

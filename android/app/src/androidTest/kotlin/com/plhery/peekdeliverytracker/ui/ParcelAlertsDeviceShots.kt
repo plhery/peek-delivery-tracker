@@ -1,11 +1,13 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
@@ -15,6 +17,8 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.Dp
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -131,6 +135,16 @@ class ParcelAlertsDeviceShots {
         assertEquals(ToggleableState.On, walk.toggle(PARCEL_ALERTS_NOTIFICATIONS))
         assertEquals(ToggleableState.On, walk.toggle(PARCEL_ALERTS_EMAIL))
         assertTrue(mutes().isEmpty() && emailMutes().isEmpty())
+        // Done stands above the navigation bar (three buttons, 48 tall, on Android 12's phone), the sheet's ground going
+        // on under it.
+        val (window, bar) = walk.onUi {
+            val view = compose.activity.findViewById<View>(android.R.id.content)
+            val density = compose.activity.resources.displayMetrics.density
+            val insets = ViewCompat.getRootWindowInsets(view)?.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.height / density to (insets?.bottom ?: 0) / density
+        }
+        val done = walk.node(PARCEL_ALERTS_DONE).getBoundsInRoot().bottom.value
+        assertTrue("Done's foot at $done, the bar's top at ${window - bar}", done <= window - bar + 0.5f)
         walk.shot("B-S66-alerts")
 
         walk.flip(PARCEL_ALERTS_NOTIFICATIONS)

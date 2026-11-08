@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -16,6 +17,7 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasProgressBarRangeInfo
@@ -30,6 +32,9 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
 import androidx.compose.ui.unit.width
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import android.view.accessibility.AccessibilityManager
 import androidx.compose.ui.platform.ViewRootForTest
@@ -444,6 +449,27 @@ class ParcelAlertsTest {
         assertEquals(content.bottom.value, panel.bottom.value, 1f)
         assertEquals(content.top.value, panel.top.value, 1f)
         assertTrue("${panel.bottom - panel.top}", panel.bottom - panel.top < 660.dp)
+    }
+
+    @Test
+    fun overANavigationBarOfThreeButtonsDoneStandsAboveIt() {
+        show()
+        compose.runOnUiThread {
+            val content = compose.activity.findViewById<ViewGroup>(android.R.id.content)
+            val bar = (48 * content.resources.displayMetrics.density).toInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, bar))
+                .setVisible(WindowInsetsCompat.Type.navigationBars(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(content, insets)
+        }
+        openAlerts()
+        val window = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
+        // Where they are drawn, the floating sheet drawing what it holds smaller.
+        val done = node(PARCEL_ALERTS_DONE).getBoundsInRoot().bottom.value
+        assertTrue("Done's foot at $done, the bar's top at ${window - 48}", done <= window - 48 + 0.5f)
+        // The sheet's ground goes on under the bar.
+        assertEquals(node(SHEET_PANEL).getBoundsInRoot().bottom.value, node(PARCEL_ALERTS).getBoundsInRoot().bottom.value, 1f)
     }
 
     @Test

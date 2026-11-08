@@ -44,6 +44,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.InlineBar
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetInsets
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
+import com.plhery.peekdeliverytracker.ui.sheet.SheetGoesUnderTheBar
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
@@ -230,6 +231,9 @@ private fun TurnstileSheetPage(check: TurnstileCheck, up: Boolean, title: String
     // The app's appearance, which the iPhone's window takes and its web view follows.
     val dark = PeekTheme.colors.dark
     val ground = pageGround(dark)
+    // The page goes on under the navigation bar, as the iPhone's web view goes to the sheet's foot under the home
+    // indicator, its page centred in the whole of it.
+    SheetGoesUnderTheBar()
     Column(Modifier.fillMaxSize().semantics { isTraversalGroup = true }) {
         // First for TalkBack, as on the iPhone; a drag there moves the sheet, as on the iPhone's bar.
         InlineBar(

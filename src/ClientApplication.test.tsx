@@ -176,6 +176,8 @@ describe('DemoApplication', () => {
     expect(screen.queryByRole('heading', { name: 'Deliveries' })).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Peek' }));
     expect(location.pathname).toBe('/');
-    expect(await screen.findByRole('heading', { name: 'Deliveries' })).toBeVisible();
+    // The deliveries open, with the device's parcel offered over them.
+    expect(await screen.findByRole('dialog', { name: 'Bring these parcels too?' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Deliveries', hidden: true })).toBeVisible();
   });
 });

@@ -8,6 +8,7 @@ import { announceKeepOutcome } from './peek/pending';
 import { createDemoRepo } from './store/demoRepo';
 import { ParcelsProvider } from './store/ParcelsContext';
 import { carrierPicker, everyCarrierListed, pickCarrier } from './test/carrierPicker';
+import { shutOff } from './test/modalBackground';
 import { RefreshTimeoutError, type ParcelRepo, type ParcelWithEvents } from './types';
 
 function renderApp(repo: ParcelRepo = createDemoRepo(window.localStorage)) {
@@ -261,7 +262,7 @@ describe('App', () => {
     expect(document.body.style.overflow).toBe('hidden');
     await user.keyboard('{Escape}');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    expect(document.querySelector('.app')).not.toHaveAttribute('inert');
+    expect(shutOff(document.querySelector('.app'))).toBe(false);
     expect(document.body.style.overflow).not.toBe('hidden');
   });
 
@@ -1274,13 +1275,13 @@ describe('App', () => {
     const dialog = screen.getByRole('dialog', { name: /add a parcel/i });
     expect(dialog).toHaveAttribute('aria-modal', 'true');
     expect(within(dialog).getByLabelText('Tracking number or link')).toHaveFocus();
-    expect(document.querySelector('.app')).toHaveAttribute('inert');
+    expect(shutOff(document.querySelector('.app'))).toBe(true);
     expect(document.body.style.overflow).toBe('hidden');
 
     await user.keyboard('{Escape}');
 
     expect(screen.queryByRole('dialog', { name: /add a parcel/i })).not.toBeInTheDocument();
-    expect(document.querySelector('.app')).not.toHaveAttribute('inert');
+    expect(shutOff(document.querySelector('.app'))).toBe(false);
     expect(document.body.style.overflow).toBe('');
     expect(trigger).toHaveFocus();
   });

@@ -2,9 +2,10 @@ import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import '../test/parcelCode';
+import { shutOff } from '../test/modalBackground';
 import { LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
 import { PeekRoot } from './PeekRoot';
-import { forgetAllRecents, recentFor, RECENTS_STORAGE_KEY } from './recents';
+import { forgetAllRecents, recentFor, rememberParcel, RECENTS_STORAGE_KEY } from './recents';
 import { usePeekSession, type PeekSession } from './session';
 
 const mocks = vi.hoisted(() => ({ lookup: vi.fn(), read: vi.fn() }));
@@ -58,7 +59,7 @@ describe('PeekRoot', () => {
     expect(mocks.read).not.toHaveBeenCalled();
     // The door waits under the page, started over: its field is empty again, and it lists the parcel.
     const door = document.querySelector<HTMLElement>('.door')!;
-    expect(door).toHaveAttribute('inert');
+    expect(shutOff(door)).toBe(true);
     expect(within(door).getByLabelText('Tracking number or link')).toHaveValue('');
     expect(door.querySelector(`[data-parcel-link="${LINK_ID}"]`)).toHaveAttribute('href', `/p/${LINK_ID}`);
     expect(screen.getByRole('dialog', { name: 'Parcel details' })).toContainElement(document.querySelector('.peekp-main'));
@@ -78,7 +79,7 @@ describe('PeekRoot', () => {
     expect(location.pathname).toBe(`/p/${LINK_ID}`);
     expect(history.state).toEqual({ peekDoorSteps: 1 });
     const page = screen.getByRole('dialog', { name: 'Parcel details' });
-    expect(document.querySelector('.door')).toHaveAttribute('inert');
+    expect(shutOff(document.querySelector('.door'))).toBe(true);
     expect(document.title).not.toBe(title);
     // Its name leads home: the page closes, and Back from the door does not come back to it.
     waiting = moved();
@@ -87,7 +88,7 @@ describe('PeekRoot', () => {
     expect(location.pathname).toBe('/');
     expect(history.length).toBe(entries);
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    expect(document.querySelector('.door')).not.toHaveAttribute('inert');
+    expect(shutOff(document.querySelector('.door'))).toBe(false);
     expect(screen.getByRole('link', { name: /DHL/ })).toHaveFocus();
     await waitFor(() => expect(document.title).toBe(title));
     // Escape closes it too.
@@ -183,6 +184,39 @@ describe('PeekRoot', () => {
     render(<PeekRoot session={visitor} serverLinkId="unavailable" />);
     expect(await screen.findByRole('heading', { level: 1, name: 'This parcel has been forgotten' })).toBeVisible();
     expect(mocks.read).toHaveBeenLastCalledWith('not-a-link', expect.anything());
+  });
+
+  it('shuts the page off behind a sheet opened on a parcel’s own address, and gives it back when the sheet closes', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+    history.replaceState(null, '', `/p/${LINK_ID}`);
+    const user = userEvent.setup();
+    const signInWith = {
+      configured: true, googleEnabled: true, appleEnabled: false, emailOtpEnabled: false,
+      signInWithGoogle: vi.fn(async () => undefined), signInWithApple: vi.fn(async () => undefined),
+      sendCode: vi.fn(async () => undefined), verifyCode: vi.fn(async () => undefined),
+    };
+    render(<PeekRoot session={{ ...visitor, signInWith }} serverLinkId={LINK_ID} />);
+    await screen.findByRole('heading', { level: 1, name: 'In transit' });
+    // No door opened under it: the page is the whole screen.
+    expect(document.querySelector('.door')).toBeNull();
+    const page = document.querySelector<HTMLElement>('.peekp')!;
+    const keep = within(page).getByRole('button', { name: /Create an account/ });
+    await user.click(keep);
+    const sheet = screen.getByRole('dialog', { name: 'Sign in to keep it' });
+    expect(shutOff(page)).toBe(true);
+    expect(shutOff(sheet)).toBe(false);
+    // The keyboard goes round the sheet and never back onto the page.
+    for (let step = 0; step < 4; step++) {
+      await user.tab();
+      expect(sheet).toContainElement(document.activeElement as HTMLElement);
+    }
+    keep.focus();
+    expect(sheet).toContainElement(document.activeElement as HTMLElement);
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(shutOff(page)).toBe(false);
+    expect(page.closest('[aria-hidden]')).toBeNull();
+    expect(keep).toHaveFocus();
   });
 
   it('gives the screens the session, signed in or not', () => {

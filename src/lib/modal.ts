@@ -39,6 +39,26 @@ function updateModalStack() {
   }
 }
 
+/** Elements that hold nothing anyone reads or reaches. */
+const UNSEEN = new Set(['SCRIPT', 'STYLE', 'LINK', 'META', 'TEMPLATE', 'NOSCRIPT']);
+/** A region that announces changes, such as a toast, goes on announcing them while a modal is open. */
+const LIVE = '[aria-live], [role="alert"], [role="status"], [role="log"]';
+
+/**
+ * What lies behind `modal`: at each level up to the body, the elements beside it and beside what holds it. It is found
+ * from the modal, never by a screen's name, so that whatever screen is open behind it is shut off.
+ */
+function backgroundOf(modal: HTMLElement): HTMLElement[] {
+  const found: HTMLElement[] = [];
+  for (let node: HTMLElement = modal; node !== document.body && node.parentElement; node = node.parentElement) {
+    for (const sibling of node.parentElement.children) {
+      if (sibling === node || !(sibling instanceof HTMLElement) || UNSEEN.has(sibling.tagName) || sibling.matches(LIVE)) continue;
+      found.push(sibling);
+    }
+  }
+  return found;
+}
+
 function focusableElements(modal: HTMLElement): HTMLElement[] {
   return Array.from(modal.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((element) => {
     if (element.tabIndex < 0 || element.matches(':disabled')) return false;
@@ -74,8 +94,6 @@ export function useModalDialog<T extends HTMLElement>(
     if (!open || !dialog.current) return;
 
     const modal = dialog.current;
-    const background = document.querySelector<HTMLElement>('.app, .door')
-      ?? document.getElementById('root');
     const returnFocus = document.activeElement instanceof HTMLElement
       ? document.activeElement
       : null;
@@ -85,13 +103,15 @@ export function useModalDialog<T extends HTMLElement>(
     (initialFocus?.current ?? modal).focus({ preventScroll: true });
     if (modals.length === 1) {
       const previousOverflow = document.body.style.overflow;
-      const original = background ? hiddenState(background) : null;
-      background?.setAttribute('inert', '');
-      background?.setAttribute('aria-hidden', 'true');
+      const background = backgroundOf(modal).map((element) => ({ element, original: hiddenState(element) }));
+      for (const { element } of background) {
+        element.setAttribute('inert', '');
+        element.setAttribute('aria-hidden', 'true');
+      }
       document.body.style.overflow = 'hidden';
       unlockBackground = () => {
         document.body.style.overflow = previousOverflow;
-        if (background && original) restore(background, original);
+        for (const { element, original } of background) restore(element, original);
       };
     }
     updateModalStack();

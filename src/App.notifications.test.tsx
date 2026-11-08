@@ -5,6 +5,7 @@ import App from './App';
 import { createDemoRepo } from './store/demoRepo';
 import { ParcelsProvider } from './store/ParcelsContext';
 import { inspectPushState } from './lib/pushNotifications';
+import { shutOff } from './test/modalBackground';
 import type { ParcelRepo, ParcelWithEvents } from './types';
 
 vi.mock('./lib/pushNotifications', async importOriginal => ({
@@ -74,7 +75,7 @@ describe('web notification invitation placement', () => {
     await screen.findByRole('region', { name: 'Get delivery updates' });
     await user.click(screen.getByRole('button', { name: 'Account' }));
     await screen.findByRole('dialog', { name: 'Settings' });
-    await waitFor(() => expect(document.querySelector('.app')).toHaveAttribute('inert'));
+    await waitFor(() => expect(shutOff(document.querySelector('.app'))).toBe(true));
     expect(invitation()).not.toBeInTheDocument();
   });
 });

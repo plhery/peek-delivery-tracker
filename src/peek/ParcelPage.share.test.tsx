@@ -152,9 +152,10 @@ describe('the parcel page of a link’s owner', () => {
     const sheet = screen.getByRole('dialog', { name: 'Share this parcel' });
     await user.click(within(sheet).getByRole('switch', { name: 'Wrap as a gift' }));
     expect(mocks.update).toHaveBeenCalledExactlyOnceWith(LINK_ID, OWNER_KEY, { gift: true });
-    // The owner keeps the usual page, marked as a gift, and the device keeps the answer.
+    // The owner keeps the usual page, marked as a gift, and the device keeps the answer. The page lies under the sheet,
+    // shut off until it closes.
     expect(await screen.findByText('Gift')).toBeVisible();
-    expect(screen.getByRole('heading', { level: 1, name: 'In transit' })).toBeVisible();
+    expect(screen.getByRole('heading', { level: 1, name: 'In transit', hidden: true })).toBeVisible();
     await waitFor(() => expect(recentFor(LINK_ID)!.snapshot.link.gift).toBe(true));
     expect(within(sheet).getByRole('textbox', { name: 'From' })).toBeVisible();
 

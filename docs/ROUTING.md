@@ -405,7 +405,8 @@ else in the carrier's catalog zone. A catalog zone of UTC stands for none (USPS 
 several): the slot is then read on the offset the newest scan states, the delivering office's.
 A window given as two timestamps with their offsets (Royal Mail's and Parcelforce's, from
 `expected_delivery_from` to `expected_delivery`) opens at the first. A single time, or a slot
-with no known clock, is not waited for.
+with no known clock, is not waited for. FedEx gives windows only through its Track API, which
+FedEx never approved for Peek's production, so Peek's FedEx parcels have none.
 
 **Archived parcels** stay on the schedule until they have gone 30 days without a new
 carrier event, so one put away while it waits at a pickup point still shows its collection.

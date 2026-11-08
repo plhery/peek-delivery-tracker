@@ -13,10 +13,11 @@ import androidx.test.platform.app.InstrumentationRegistry
 
 /**
  * A finger on the screen, its touches sent as the screen's are through UiAutomation, as DropDeviceTest's: taps, long
- * presses, drags and throws on what the window shows. A drag moves a frame at a time, real time and the test's clock
- * both moved on with each move, so what follows a drag through the composition's coroutines (a sheet, a scroll, the
- * keyboard following the finger) and what waits on its clock (a long press) see the finger as a person's would. A tap
- * leaves the test's clock where it stands, so a test that holds it sees the frames after it one by one.
+ * presses, drags and throws on what the window shows, and a mouse's right click. A drag moves a frame at a time, real
+ * time and the test's clock both moved on with each move, so what follows a drag through the composition's coroutines
+ * (a sheet, a scroll, the keyboard following the finger) and what waits on its clock (a long press) see the finger as a
+ * person's would. A tap leaves the test's clock where it stands, so a test that holds it sees the frames after it one
+ * by one.
  */
 internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
@@ -54,6 +55,18 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
     }
 
     fun tap(tag: String) = tap(point(tag))
+
+    /**
+     * A mouse's right button pressed at `at` and let go 50 ms later, sent as a mouse's are (its source, its pointer and
+     * the button held while it is down), and the window idle after.
+     */
+    fun rightClick(at: Offset) {
+        val mouse = Finger(at, mouse = true)
+        mouse.send(MotionEvent.ACTION_DOWN, MotionEvent.BUTTON_SECONDARY)
+        SystemClock.sleep(TAP_MILLIS)
+        mouse.send(MotionEvent.ACTION_UP)
+        compose.waitForIdle()
+    }
 
     /** A finger held still at `at` for [LONG_PRESS_MILLIS], the test's clock moved on as much, then lifted. */
     fun longPress(at: Offset) {
@@ -101,8 +114,8 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
         compose.mainClock.advanceTimeBy(FRAME_MILLIS)
     }
 
-    /** A finger on the screen at [at], its touches sent as the screen's are. */
-    private inner class Finger(var at: Offset) {
+    /** A finger on the screen at [at], its touches sent as the screen's are; or a [mouse]'s pointer, as a mouse's. */
+    private inner class Finger(var at: Offset, private val mouse: Boolean = false) {
         private var down = SystemClock.uptimeMillis()
 
         /**
@@ -117,18 +130,18 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
         }
         private val properties = MotionEvent.PointerProperties().apply {
             id = 0
-            toolType = MotionEvent.TOOL_TYPE_FINGER
+            toolType = if (mouse) MotionEvent.TOOL_TYPE_MOUSE else MotionEvent.TOOL_TYPE_FINGER
         }
 
         /**
          * The touch for [action], sent. Android 12 drops a touch through another app's window, even one that takes
          * no touches, and the test's own empty activity can stand over the app's for a moment as it finishes: the
          * finger put down never reaches the app then, so it is put down again a little later, until that window has
-         * gone.
+         * gone. `buttons` are a mouse's held.
          */
-        fun send(action: Int) {
+        fun send(action: Int, buttons: Int = 0) {
             val until = SystemClock.uptimeMillis() + DOWN_AGAIN_MILLIS
-            while (!inject(action)) {
+            while (!inject(action, buttons)) {
                 check(action == MotionEvent.ACTION_DOWN && SystemClock.uptimeMillis() < until) {
                     "The screen refused the touch ${MotionEvent.actionToString(action)} at $at"
                 }
@@ -137,7 +150,7 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
             }
         }
 
-        private fun inject(action: Int): Boolean {
+        private fun inject(action: Int, buttons: Int): Boolean {
             val where = MotionEvent.PointerCoords().apply {
                 x = at.x
                 y = at.y
@@ -146,7 +159,8 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
             }
             val time = if (action == MotionEvent.ACTION_DOWN) down else paced ?: SystemClock.uptimeMillis()
             val event = MotionEvent.obtain(
-                down, time, action, 1, arrayOf(properties), arrayOf(where), 0, 0, 1f, 1f, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0,
+                down, time, action, 1, arrayOf(properties), arrayOf(where), 0, buttons, 1f, 1f, 0, 0,
+                if (mouse) InputDevice.SOURCE_MOUSE else InputDevice.SOURCE_TOUCHSCREEN, 0,
             )
             try {
                 return instrumentation.uiAutomation.injectInputEvent(event, true)

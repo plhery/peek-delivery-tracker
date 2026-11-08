@@ -210,8 +210,10 @@ is undecided (`support_gap_undecided`): the check opens no case for it, and a ca
 open keeps it.
 
 Each check computes the shape and carrier reasons afresh and replaces them on its case.
-Recognition reasons from the Add sheet, gap evidence, and sightings older than the case's
-latest still add to them, so a reason that no longer applies leaves with the next check.
+The ambiguous shape is replaced only at the check's end, so a check cut short (superseded,
+abandoned, interrupted) leaves it on the case. Recognition reasons from the Add sheet, gap
+evidence, and sightings older than the case's latest still add to them, so a reason that no
+longer applies leaves with the next check.
 
 Cases and their bounded `tracking_support_observations` are service-role only. They
 survive parcel deletion and audit pruning. A case goes 10 days after no parcel, an

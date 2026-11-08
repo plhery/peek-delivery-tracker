@@ -57,7 +57,7 @@ export function trackingSupportContext(trackingNumber: string, configuredCarrier
 /**
  * The context a check records when it begins. Whether a shape several carriers issue leaves a gap
  * depends on the check's answer, so that reason waits for its end (`trackingSupportGap`): a check whose
- * carrier confirms the number opens no case.
+ * carrier confirms the number opens no case. An open case keeps the reason until a check ends: one cut short never does.
  */
 export function trackingSupportStart(trackingNumber: string, configuredCarrier: string, answeredBy: string | null = null): JsonObject {
   const context = trackingSupportContext(trackingNumber, configuredCarrier, answeredBy);

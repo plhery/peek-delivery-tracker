@@ -182,6 +182,44 @@ begin
 end;
 $$;
 
+-- A check's start leaves an open case its shape reason, which only the check's end replaces: a check cut short never
+-- ends, and a case left without reasons is one the replay marks fixed.
+insert into public.packages(id, user_id, tracking_number, carrier) values
+  ('a7100000-0000-4000-8000-000000000030', 'a7100000-0000-4000-8000-000000000001', 'CUTSHORT1234', 'unknown');
+do $$
+declare
+  start jsonb := '{"tracking_number":"CUTSHORT1234", "reasons":[]}';
+  outcomes text[] := array['superseded', 'abandoned', 'interrupted'];
+  attempt_id uuid;
+begin
+  insert into public.tracking_sync_attempts(id, package_id, trigger, configured_carrier, started_at, support_context)
+  values('a7100000-0000-4000-8000-000000000031', 'a7100000-0000-4000-8000-000000000030', 'scheduled', 'unknown',
+    '2026-10-04T10:00:00Z', start);
+  assert public.complete_tracking_sync_attempt('a7100000-0000-4000-8000-000000000031',
+    '{"outcome":"updated", "source_carrier":"unknown", "completed_at":"2026-10-04T10:01:00Z"}',
+    '[{"sequence":1,"step":"complete","status":"succeeded","details":{"support_gap_reason":"ambiguous_shape","support_provider":"test-provider"}}]');
+  assert (select reasons = array['ambiguous_shape'] from public.tracking_support_cases where tracking_number = 'CUTSHORT1234');
+  for i in 1..cardinality(outcomes) loop
+    attempt_id := format('a7100000-0000-4000-8000-00000000003%s', i + 1)::uuid;
+    insert into public.tracking_sync_attempts(id, package_id, trigger, configured_carrier, started_at, support_context)
+    values(attempt_id, 'a7100000-0000-4000-8000-000000000030', 'scheduled', 'unknown', clock_timestamp(), start);
+    assert (select reasons = array['ambiguous_shape'] from public.tracking_support_cases where tracking_number = 'CUTSHORT1234'),
+      'A check''s start must leave the shape reason to its end';
+    update public.tracking_sync_attempts set outcome = outcomes[i], completed_at = clock_timestamp() where id = attempt_id;
+    assert (select reasons = array['ambiguous_shape'] and fix_status = 'open' from public.tracking_support_cases
+      where tracking_number = 'CUTSHORT1234'), 'A check cut short must leave the shape reason: ' || outcomes[i];
+  end loop;
+  insert into public.tracking_sync_attempts(id, package_id, trigger, configured_carrier, started_at, support_context)
+  values('a7100000-0000-4000-8000-000000000035', 'a7100000-0000-4000-8000-000000000030', 'scheduled', 'unknown',
+    clock_timestamp(), start);
+  assert public.complete_tracking_sync_attempt('a7100000-0000-4000-8000-000000000035',
+    jsonb_build_object('outcome', 'updated', 'source_carrier', 'unknown', 'completed_at', clock_timestamp()),
+    '[{"sequence":1,"step":"complete","status":"succeeded","details":{"support_provider":"test-provider"}}]');
+  assert (select reasons = '{}'::text[] from public.tracking_support_cases where tracking_number = 'CUTSHORT1234'),
+    'A check that ends without the gap must take the shape reason off';
+end;
+$$;
+
 insert into public.sync_jobs(id, user_id, package_id, kind, state, locked_by, lease_until)
 values('a7100000-0000-4000-8000-000000000006', 'a7100000-0000-4000-8000-000000000001',
   'a7100000-0000-4000-8000-000000000002', 'package', 'running', 'support-worker', now() + interval '1 minute');

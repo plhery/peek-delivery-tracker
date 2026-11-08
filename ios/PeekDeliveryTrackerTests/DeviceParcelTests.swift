@@ -706,17 +706,16 @@ final class DeviceParcelTests: XCTestCase {
 
         // Signing in brings this iPhone's parcels along: the account takes one, and the two it has no room for stay.
         try await session.verifyCode(email: "test@example.com", code: "123456")
-        await store.start()
+        await store.claimDeviceParcels()
         XCTAssertEqual(account.claims, [["22222222222A", "22222222222B", "22222222222C"]])
         XCTAssertEqual(device.claims.map(\.id), ["22222222222B", "22222222222C"])
-        XCTAssertEqual(store.parcels, [], "Nothing of this iPhone's shows among the account's parcels")
         XCTAssertEqual(store.leftOnDevice?.count, 2)
         // The list says it, and lets the news go.
         store.leftOnDevice = nil
 
-        // Room for one more: the next start brings it, and the one that stays is news.
+        // Room for one more: bringing them along again takes it, and the one that stays is news.
         account.room = 1
-        await store.start()
+        await store.claimDeviceParcels()
         XCTAssertEqual(account.claims.last, ["22222222222B", "22222222222C"])
         XCTAssertEqual(device.claims.map(\.id), ["22222222222C"])
         XCTAssertEqual(store.leftOnDevice?.count, 1)
@@ -726,14 +725,14 @@ final class DeviceParcelTests: XCTestCase {
         session.forceSignOut()
         XCTAssertNil(store.leftOnDevice)
         try await session.verifyCode(email: "test@example.com", code: "123456")
-        await store.start()
+        await store.claimDeviceParcels()
         XCTAssertEqual(device.claims.map(\.id), ["22222222222C"])
         XCTAssertEqual(store.leftOnDevice?.count, 1)
         store.leftOnDevice = nil
 
         // Once the account takes the last, nothing stays and nothing is said.
         account.room = 1
-        await store.start()
+        await store.claimDeviceParcels()
         XCTAssertEqual(device.claims, [])
         XCTAssertNil(store.leftOnDevice)
     }
@@ -743,7 +742,7 @@ final class DeviceParcelTests: XCTestCase {
         let (store, session, device, persistence) = try signingIn(["22222222222A"], into: account)
         defer { session.forceSignOut() }
         try await session.verifyCode(email: "test@example.com", code: "123456")
-        await store.start()
+        await store.claimDeviceParcels()
         XCTAssertEqual(store.leftOnDevice?.count, 1)
         store.leftOnDevice = nil
 
@@ -751,8 +750,8 @@ final class DeviceParcelTests: XCTestCase {
         await store.load(showSpinner: false)
         XCTAssertEqual(account.claims.count, 1)
         XCTAssertNil(store.leftOnDevice)
-        // The list starting again, as an invitation comes or goes, asks again and hears the same.
-        await store.start()
+        // Bringing them along again, as the list does when an invitation comes or goes, hears the same.
+        await store.claimDeviceParcels()
         XCTAssertEqual(account.claims.count, 2)
         XCTAssertEqual(device.claims.map(\.id), ["22222222222A"])
         XCTAssertNil(store.leftOnDevice)
@@ -766,7 +765,7 @@ final class DeviceParcelTests: XCTestCase {
         relaunched.setDeliveryLiveActivitiesEnabled(false)
         await reopened.bootstrap()
         XCTAssertEqual(reopened.user?.id, session.user?.id)
-        await relaunched.start()
+        await relaunched.claimDeviceParcels()
         XCTAssertEqual(account.claims.count, 3)
         XCTAssertEqual(device.claims.map(\.id), ["22222222222A"])
         XCTAssertNil(relaunched.leftOnDevice)

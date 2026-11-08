@@ -1676,8 +1676,9 @@ final class ParcelStore: ObservableObject {
     /// they had here, each time the account's list starts: at sign-in, at each launch and as an
     /// invitation comes or goes. The device lets go of each one the account now has. One the account
     /// has no room for stays here, and the list says how many stayed once a sign-in, and again only
-    /// when that number changes; a claim cut short says nothing.
-    private func claimDeviceParcels() async {
+    /// when that number changes; a claim cut short says nothing. Tests call it directly: the rest of
+    /// a signed-in start asks the system for the notification settings, which a fresh simulator can hold for minutes.
+    func claimDeviceParcels() async {
         guard let user = session.user else { return }
         let claims = device.claims
         let generation = session.generation

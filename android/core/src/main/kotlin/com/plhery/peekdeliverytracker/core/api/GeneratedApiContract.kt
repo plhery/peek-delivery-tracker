@@ -3039,6 +3039,7 @@ data class ErrorResponse(
     val error: String,
     val packageId: UUID? = null,
     val scope: ErrorResponseScope? = null,
+    val code: ErrorResponseCode? = null,
 )
 
 @Serializable
@@ -3866,6 +3867,16 @@ enum class ErrorResponseScope(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): ErrorResponseScope? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class ErrorResponseCode(val rawValue: String) {
+    @SerialName("recent_sign_in") RecentSignIn("recent_sign_in"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): ErrorResponseCode? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

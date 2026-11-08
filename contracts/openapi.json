@@ -50301,6 +50301,7 @@
     "/api/account": {
       "delete": {
         "operationId": "deleteAccount",
+        "description": "Deletes the account and all it keeps. It needs a sign-in from the last ten minutes, checked with Auth afresh: a 401 with code recent_sign_in otherwise.",
         "requestBody": {
           "required": true,
           "content": {
@@ -50323,6 +50324,9 @@
             }
           },
           "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
             "$ref": "#/components/responses/ApiError"
           },
           "502": {
@@ -52900,7 +52904,7 @@
       },
       "post": {
         "operationId": "createPersonalToken",
-        "description": "Makes a personal token for a script, at most ten an account. It needs a sign-in from the last ten minutes, checked with Auth afresh: 401 otherwise.",
+        "description": "Makes a personal token for a script, at most ten an account. It needs a sign-in from the last ten minutes, checked with Auth afresh: a 401 with code recent_sign_in otherwise.",
         "requestBody": {
           "required": true,
           "content": {
@@ -52943,7 +52947,7 @@
     "/api/account/assistants/consent": {
       "post": {
         "operationId": "answerAssistantConsent",
-        "description": "The owner's answer to an assistant asking to connect, from the consent page at /oauth/authorize. The token is checked with Auth afresh, and allowing needs a sign-in from the last ten minutes: 401 otherwise.",
+        "description": "The owner's answer to an assistant asking to connect, from the consent page at /oauth/authorize. The token is checked with Auth afresh, and allowing needs a sign-in from the last ten minutes: a 401 with code recent_sign_in otherwise.",
         "requestBody": {
           "required": true,
           "content": {
@@ -55628,6 +55632,13 @@
               "daily"
             ],
             "description": "Present on a 429 when the day's lookups without an account are used up; signing in lifts the limit."
+          },
+          "code": {
+            "type": "string",
+            "enum": [
+              "recent_sign_in"
+            ],
+            "description": "Present on a 401 when the action needs a sign-in from the last ten minutes. The session still stands: signing in again lets the action through."
           }
         }
       },

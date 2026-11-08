@@ -232,7 +232,15 @@ long session. If you enable time-box or inactivity limits, use at least 30 days.
 What outlasts the session needs a sign-in from the last ten minutes: deleting the account,
 making a personal token and allowing an assistant. The server asks Auth about the token
 afresh, not from its cache, and reads when the session signed in from the token. An older
-sign-in gets `401`, which the clients answer by asking to sign in again.
+sign-in gets `401` with `code: recent_sign_in`; a session Auth refuses gets a plain `401`.
+
+The web keeps the session for `recent_sign_in` and doesn't refresh it, since a refreshed
+token keeps its sign-in time. It asks for a sign-in in place, with the site's ways to sign
+in, then makes the token or allows the assistant; a deletion shows its confirmation again.
+Before a provider takes the page away, the tab's session storage notes the action and what
+was typed, and the page opens there again on the way back. When another account signs in
+instead, nothing is done for it: Settings say so, and the consent page shows the request to
+that account. The iPhone and Android apps answer any `401` alike: one refresh, then sign-out.
 
 The browser saves the session under `sb-<first label of the Supabase host>-auth-token`, or under
 the key a saved sign-in already uses. So Supabase can move to another host without signing
@@ -255,8 +263,8 @@ anyone out:
 3. A second account can't see, refresh, archive, export or get notifications for the first
    account's parcels.
 4. After sign-out, private API calls return `401`.
-5. Export data, then delete a disposable account. Deletion needs a sign-in from the last
-   ten minutes.
+5. Export data, then delete a disposable account. With a sign-in older than ten minutes,
+   Settings ask to sign in again in place, then for the confirmation once more.
 6. For Apple: first and repeat sign-in, Hide My Email, cancel, sign-out, and returning to a
    pending invitation, on both platforms.
 

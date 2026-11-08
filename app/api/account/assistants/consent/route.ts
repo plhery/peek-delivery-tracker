@@ -10,7 +10,7 @@ export const runtime = 'nodejs';
  * The owner's answer on the consent page: `{"query": "<the authorization request>", "approve": true, "scopes": […]}`.
  * Answers where the browser goes next, the assistant's redirect address with a code or an error. The token is checked
  * with Auth afresh, and allowing needs a sign-in from the last ten minutes: the grant outlasts the session. The page
- * answers that 401 by asking to sign in again, then shows the same request.
+ * answers that 401 by asking for a sign-in in place, then allows again.
  */
 export const POST = apiRoute(async (context) => {
   const settings = assistantsConfigured();

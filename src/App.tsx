@@ -30,6 +30,7 @@ import {
   useI18n,
 } from './i18n';
 import type { ApiAuth } from './lib/apiClient';
+import type { SignInMethods } from './peek/session';
 import { carrierInfo } from './lib/carriers';
 import { usePostcodeMemory } from './lib/postcodeMemory';
 import { usedCarrierIds } from './lib/carrierPicker';
@@ -103,6 +104,7 @@ export default function App({
   onExportAccount,
   onDeleteAccount,
   apiAuth,
+  signIn,
   onExitDemo,
   onOpenLanding,
 }: {
@@ -111,6 +113,8 @@ export default function App({
   onExportAccount?: () => Promise<void>;
   onDeleteAccount?: (confirmation: string) => Promise<void>;
   apiAuth?: ApiAuth;
+  /** The ways to sign in again, for what in Settings needs a recent sign-in. */
+  signIn?: SignInMethods;
   onExitDemo?: () => void;
   /** Shows the landing: at its own address for an account, at `/` for the demo of a visitor. */
   onOpenLanding?: () => void;
@@ -518,7 +522,7 @@ export default function App({
           <h1 className="app__title">{t(tab === 'deliveries' ? 'native.deliveries' : tab === 'passport' ? 'passport.title' : 'friends.title')}</h1>
           <div className="app__actions">
             <button type="button" className="app__add-button" aria-label={t('app.addParcelAria')} onClick={() => setAdding(true)}><Icon name="plus" /><span>{t('app.addParcel')}</span></button>
-            <AccountMenu email={accountEmail} onExport={onExportAccount} onDelete={onDeleteAccount} onSignOut={onSignOut} onExitDemo={onExitDemo} onResetDemo={mode === 'demo' ? resetDemo : undefined} onOpenLanding={openLanding} apiAuth={apiAuth} />
+            <AccountMenu email={accountEmail} onExport={onExportAccount} onDelete={onDeleteAccount} onSignOut={onSignOut} onExitDemo={onExitDemo} onResetDemo={mode === 'demo' ? resetDemo : undefined} onOpenLanding={openLanding} apiAuth={apiAuth} signIn={signIn} />
           </div>
           <AppNavigation selected={tab} onSelect={switchTab} />
         </div>

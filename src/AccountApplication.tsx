@@ -27,7 +27,7 @@ import { BringAlongInDemo, BringAlongParcels } from './peek/parcel/BringAlong';
 import { PeekRoot } from './peek/PeekRoot';
 import { keepParcelLink } from './peek/pending';
 import { leaveParcelLink, openLanding } from './peek/route';
-import type { PeekSession } from './peek/session';
+import type { PeekSession, SignInMethods } from './peek/session';
 import type { ParcelRepo } from './types';
 
 /**
@@ -125,10 +125,13 @@ export function ApiAccount({ auth, experience, invitation, demoAddress, linkId, 
     }
     restoreRequestedParcel();
   }, [userId]);
-  const invitationProps: ComponentProps<typeof FriendInvitation> = {
-    invitation, onDismiss: () => { invitation.clear(); if (!auth.user) experience.navigate('welcome'); },
-    configured: auth.status !== 'unconfigured', googleEnabled: auth.googleEnabled, appleEnabled: auth.appleEnabled, emailOtpEnabled: auth.emailOtpEnabled, oidcName: auth.oidcName,
+  const configured = auth.status !== 'unconfigured';
+  const signInWith = useMemo<SignInMethods>(() => ({
+    configured, googleEnabled: auth.googleEnabled, appleEnabled: auth.appleEnabled, emailOtpEnabled: auth.emailOtpEnabled, oidcName: auth.oidcName,
     signInWithGoogle: auth.signInWithGoogle, signInWithApple: auth.signInWithApple, signInWithOidc: auth.signInWithOidc, sendCode: auth.sendCode, verifyCode: auth.verifyCode,
+  }), [configured, auth.googleEnabled, auth.appleEnabled, auth.emailOtpEnabled, auth.oidcName, auth.signInWithGoogle, auth.signInWithApple, auth.signInWithOidc, auth.sendCode, auth.verifyCode]);
+  const invitationProps: ComponentProps<typeof FriendInvitation> = {
+    invitation, onDismiss: () => { invitation.clear(); if (!auth.user) experience.navigate('welcome'); }, ...signInWith,
   };
   // Someone signed in has the landing at its own address; a visitor's is `/`, where leaving the demo leads.
   const demo = <ParcelsProvider key="demo" repo={demoRepo}>
@@ -169,6 +172,7 @@ export function ApiAccount({ auth, experience, invitation, demoAddress, linkId, 
         onDeleteAccount={handleDelete}
         onOpenLanding={openLanding}
         apiAuth={apiAuth}
+        signIn={signInWith}
       /><BringAlongParcels auth={apiAuth!} /></>}
     </ParcelsProvider>
     </FriendsActivityProvider>

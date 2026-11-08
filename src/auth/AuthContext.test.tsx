@@ -278,3 +278,37 @@ it('treats a local logout tombstone as authoritative over late token storage wri
   expect(secondTab.getItem(key)).not.toBeNull();
   secondTab.removeItem(key);
 });
+
+it('keeps the account\'s requests going when it signs in again with a code, on the new session', async () => {
+  const { client, auth } = authClient(SESSION);
+  const { result } = renderHook(() => useAuth(), {
+    wrapper: ({ children }) => <AuthProvider config={null} client={client}>{children}</AuthProvider>,
+  });
+  await waitFor(() => expect(result.current.user?.id).toBe('user-1'));
+  const before = result.current;
+  const fresh = { ...SESSION, access_token: 'fresh-access-token', refresh_token: 'fresh-refresh-token' } as Session;
+  auth.verifyOtp.mockResolvedValueOnce({ data: { session: fresh }, error: null });
+  auth.getSession.mockResolvedValue({ data: { session: fresh }, error: null });
+  await act(() => before.verifyCode('owner@example.test', '123456'));
+  // What asked for the sign-in goes on: the same account, its requests not ended, the new session's token.
+  expect(before.signal.aborted).toBe(false);
+  expect(result.current.signal).toBe(before.signal);
+  expect(result.current.getAccessToken).toBe(before.getAccessToken);
+  expect(result.current.accessToken).toBe('fresh-access-token');
+  await expect(before.getAccessToken()).resolves.toBe('fresh-access-token');
+});
+
+it('ends the first account\'s requests when another signs in with a code over it', async () => {
+  const { client, auth } = authClient(SESSION);
+  const { result } = renderHook(() => useAuth(), {
+    wrapper: ({ children }) => <AuthProvider config={null} client={client}>{children}</AuthProvider>,
+  });
+  await waitFor(() => expect(result.current.user?.id).toBe('user-1'));
+  const before = result.current;
+  const other = { ...SESSION, access_token: 'other-access-token', user: { ...SESSION.user, id: 'user-2', email: 'other@example.test' } } as Session;
+  auth.verifyOtp.mockResolvedValueOnce({ data: { session: other }, error: null });
+  await act(() => before.verifyCode('other@example.test', '123456'));
+  expect(before.signal.aborted).toBe(true);
+  expect(result.current.user?.id).toBe('user-2');
+  await expect(before.getAccessToken()).rejects.toMatchObject({ name: 'AbortError' });
+});

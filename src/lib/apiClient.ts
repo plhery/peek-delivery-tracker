@@ -1,9 +1,34 @@
+import type { ApiErrorResponse } from '../generated/apiContract';
 import { apiAnalyticsEvent, trackAction } from './analytics';
 
 export class ApiAuthenticationError extends Error {
   constructor() {
     super('Your sign-in expired. Please sign in again.');
     this.name = 'ApiAuthenticationError';
+  }
+}
+
+/**
+ * The action needs a sign-in from the last few minutes, and the session is older: it still stands, and signing in
+ * again here lets the action through.
+ */
+export class ApiRecentSignInError extends Error {
+  constructor() {
+    super('Sign in again to continue.');
+    this.name = 'ApiRecentSignInError';
+  }
+}
+
+const RECENT_SIGN_IN: NonNullable<ApiErrorResponse['code']> = 'recent_sign_in';
+
+/** The server's 401 for an action that needs a recent sign-in, which keeps the session. The body stays to be read. */
+async function asksForRecentSignIn(response: Response): Promise<boolean> {
+  if (response.status !== 401) return false;
+  try {
+    const body = await response.clone().json() as Partial<ApiErrorResponse> | null;
+    return body?.code === RECENT_SIGN_IN;
+  } catch {
+    return false;
   }
 }
 
@@ -56,12 +81,19 @@ async function performAuthenticatedFetch(
   }
 
   let response = await perform(await token());
-  if (auth && (response.status === 401 || response.status === 403)) {
+  // A refreshed token keeps its session's sign-in time, so it can't pass where a recent sign-in is needed.
+  let recentSignIn = await abortable(asksForRecentSignIn(response), signal);
+  if (auth && !recentSignIn && (response.status === 401 || response.status === 403)) {
     // A transient refresh failure must not discard a recoverable session.
     const accessToken = await token(true);
-    if (accessToken) response = await perform(accessToken);
+    if (accessToken) {
+      response = await perform(accessToken);
+      recentSignIn = await abortable(asksForRecentSignIn(response), signal);
+    }
   }
   signal.throwIfAborted();
+  // Not a lost session: the caller asks for a sign-in in place.
+  if (recentSignIn) throw new ApiRecentSignInError();
   if (response.type === 'opaqueredirect' || response.redirected
     || response.status === 401 || response.status === 403) {
     // Local sign-out starts synchronously; notification cleanup cannot hold up this request.

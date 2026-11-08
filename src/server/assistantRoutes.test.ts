@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GET as authorizationServer } from '../../app/.well-known/oauth-authorization-server/route';
 import { GET as mcpResource } from '../../app/.well-known/oauth-protected-resource/mcp/route';
 import { GET as protectedResource } from '../../app/.well-known/oauth-protected-resource/route';
+import { DELETE as deleteAccount } from '../../app/api/account/route';
 import { DELETE as disconnect } from '../../app/api/account/assistants/[id]/route';
 import { POST as consent } from '../../app/api/account/assistants/consent/route';
 import { GET as readAssistants, POST as createToken } from '../../app/api/account/assistants/route';
@@ -543,15 +544,22 @@ describe('the account\'s assistants', () => {
     const START = Date.parse('2026-11-08T10:00:00Z');
     let issued = 0;
 
-    /** An access token as Auth issues them, unsigned: the fake Auth below answers for it. Each one is new, so no answer is cached. */
-    function accessToken(signedInAt: number, expiresAt: number): string {
+    /**
+     * An access token as Auth issues them, unsigned: the fake Auth below answers for it. Each one is new, so no answer
+     * is cached. Without a sign-in time its `amr` names none.
+     */
+    function accessToken(signedInAt: number | null, expiresAt: number): string {
       issued += 1;
       const part = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
       return [part({ alg: 'HS256', typ: 'JWT' }), part({
         sub: userId, exp: Math.floor(expiresAt / 1_000), jti: `synthetic-${issued}`,
-        session_id: '7d000000-0000-4000-a000-000000000001', amr: [{ method: 'otp', timestamp: Math.floor(signedInAt / 1_000) }],
+        session_id: '7d000000-0000-4000-a000-000000000001',
+        amr: signedInAt === null ? ['otp'] : [{ method: 'otp', timestamp: Math.floor(signedInAt / 1_000) }],
       }), 'signature'].join('.');
     }
+
+    /** A refusal that asks for a sign-in now, which keeps the session, rather than one that ends it. */
+    const signInAgain = (error: string) => ({ error, code: 'recent_sign_in' });
 
     /** Auth, accepting the tokens of sessions still open. */
     function authServer(open: Set<string>) {
@@ -613,7 +621,13 @@ describe('the account\'s assistants', () => {
       const signedOut = await make(recent);
       expect(signedOut.status).toBe(401);
       expect(await signedOut.json()).toEqual({ error: 'Sign in again before making a personal token' });
-      expect((await make(old)).status).toBe(401);
+      const stale = await make(old);
+      expect(stale.status).toBe(401);
+      expect(await stale.json()).toEqual(signInAgain('Sign in again before making a personal token'));
+      // A token that says no sign-in time can't show a recent one either.
+      const undated = accessToken(null, START + 3_600_000);
+      open.add(undated);
+      expect(await (await make(undated)).json()).toEqual(signInAgain('Sign in again before making a personal token'));
 
       expect((await make(brief)).status).toBe(201);
       open.delete(brief);
@@ -643,17 +657,53 @@ describe('the account\'s assistants', () => {
       expect(signedOut.status).toBe(401);
       expect(await signedOut.json()).toEqual({ error: 'Sign in again before connecting an assistant' });
       // Refusing grants nothing: it needs a session Auth confirms, however old its sign-in.
-      expect((await answer(recent, false)).status).toBe(401);
+      const ended = await answer(recent, false);
+      expect(ended.status).toBe(401);
+      expect(await ended.json()).toEqual({ error: 'Authentication is required' });
       const refused = await answer(old, false);
       expect(refused.status).toBe(200);
       expect(new URL((await refused.json()).redirect).searchParams.get('error')).toBe('access_denied');
-      expect((await answer(old, true)).status).toBe(401);
+      const stale = await answer(old, true);
+      expect(stale.status).toBe(401);
+      expect(await stale.json()).toEqual(signInAgain('Sign in again before connecting an assistant'));
 
       expect((await answer(brief, true)).status).toBe(200);
       open.delete(brief);
       vi.setSystemTime(START + 31_000);
       expect((await answer(brief, true)).status).toBe(401);
       expect(grant).toHaveBeenCalledTimes(2);
+    });
+
+    it('delete the account only for a session Auth confirms now, signed in within ten minutes', async () => {
+      const deleted = vi.spyOn(service, 'deleteAuthUser').mockResolvedValue(undefined);
+      vi.spyOn(service, 'appleSubjects').mockResolvedValue([]);
+      const remove = (token: string) => deleteAccount(withToken(token, 'DELETE', '/api/account', { confirmation: 'Alex@Example.com' }), none);
+      const recent = accessToken(START - 60_000, START + 3_600_000);
+      const old = accessToken(START - 11 * 60_000, START + 3_600_000);
+      const ahead = accessToken(START + 2 * 60_000, START + 3_600_000);
+      const ending = accessToken(START - 60_000, START + 3_600_000);
+      const open = new Set([recent, old, ahead, ending]);
+      authServer(open);
+
+      // An older sign-in, or one ahead of this server's clock, keeps its session and is asked for a new one; the
+      // iPhone and Android apps read any 401 alike.
+      for (const token of [old, ahead]) {
+        const stale = await remove(token);
+        expect(stale.status).toBe(401);
+        expect(await stale.json()).toEqual(signInAgain('Sign in again before permanently deleting your account'));
+      }
+      // A session ended since its token was checked is refused plainly, which signs out.
+      const mistyped = withToken(ending, 'DELETE', '/api/account', { confirmation: 'someone@else.example' });
+      expect((await deleteAccount(mistyped, none)).status).toBe(400);
+      open.delete(ending);
+      vi.setSystemTime(START + 5_000);
+      const signedOut = await remove(ending);
+      expect(signedOut.status).toBe(401);
+      expect(await signedOut.json()).toEqual({ error: 'Sign in again before permanently deleting your account' });
+      expect(deleted).not.toHaveBeenCalled();
+
+      expect((await remove(recent)).status).toBe(200);
+      expect(deleted).toHaveBeenCalledExactlyOnceWith(userId);
     });
   });
 });

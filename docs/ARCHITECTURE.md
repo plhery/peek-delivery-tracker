@@ -305,9 +305,9 @@ Key server modules:
     a replaced one used again after two minutes ends the grant. Google's assistants keep
     theirs, as they require. A personal token lasts until it is deleted. Making one, or
     allowing an assistant, needs a sign-in from the last ten minutes, which the server
-    checks with Auth afresh; the consent page then asks to sign in again and shows the
-    same request. The database keeps tokens and codes as their SHA-256, and only the
-    service role reaches those tables.
+    checks with Auth afresh; the consent page then asks to sign in again in place and
+    allows the same request ([AUTHENTICATION.md](AUTHENTICATION.md)). The database keeps
+    tokens and codes as their SHA-256, and only the service role reaches those tables.
   - A grant makes at most 120 requests a minute. A network may present 600 unknown tokens
     a minute, open the consent page 30 times a minute and register 20 clients an hour. An
     account has at most 50 grants and 10 personal tokens; Settings lists them and ends any.

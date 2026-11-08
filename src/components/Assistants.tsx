@@ -1,11 +1,21 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import type { ApiAssistantConnection, ApiAssistantScope, ApiAssistantsResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
-import type { ApiAuth } from '../lib/apiClient';
+import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
 import { createPersonalToken, readAssistants, revokeAssistant } from '../lib/assistants';
 import { localizedRelativeTime, type Translate } from '../lib/messages';
+import { dropSignInAgain, noteSignInAgain } from '../lib/signInAgain';
 import { userErrorMessage } from '../lib/userMessages';
+import type { SignInMethods } from '../peek/session';
 import { Icon } from './Icon';
+import { SignInAgain } from './SignInAgain';
+
+/** A token typed before a sign-in asked for again, and whether to make it now: the same account signed in again. */
+export interface TokenDraft {
+  name: string;
+  writes: boolean;
+  make: boolean;
+}
 
 const MOST_NAME_LENGTH = 100;
 
@@ -51,20 +61,28 @@ function Connection({ connection, working, onRevoke }: {
 
 /**
  * The assistants' page in Settings: the address to give an assistant, the ones connected, and personal tokens for
- * scripts and tools that can't sign in.
+ * scripts and tools that can't sign in. A token needs a recent sign-in: the page asks for one in place, with `signIn`,
+ * and makes the token once signed in again.
  */
-export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
+export function AssistantsPage({ apiAuth, offer, onChange, onBusy, signIn, email, draft }: {
   apiAuth: ApiAuth;
   offer: ApiAssistantsResponse;
   onChange: (next: ApiAssistantsResponse) => void;
   onBusy?: (busy: boolean) => void;
+  signIn?: SignInMethods;
+  /** The account's address, which the sign-in asked for again starts with. */
+  email?: string;
+  /** What was typed before a sign-in that left the page or changed the account. */
+  draft?: TokenDraft;
 }) {
   const { t } = useI18n();
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<'address' | 'token' | null>(null);
-  const [name, setName] = useState('');
-  const [writes, setWrites] = useState(false);
+  const [name, setName] = useState(draft?.name ?? '');
+  const [writes, setWrites] = useState(draft?.writes ?? false);
+  const [signingInAgain, setSigningInAgain] = useState(false);
+  const resumed = useRef(false);
   // A new token, shown until the page closes: the server keeps only its digest.
   const [token, setToken] = useState<string | null>(null);
   const assistants = offer.connections.filter((connection) => connection.kind === 'oauth');
@@ -88,16 +106,49 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
     onChange({ ...offer, connections: offer.connections.filter((connection) => connection.id !== id) });
   });
 
-  function create(event: FormEvent) {
-    event.preventDefault();
-    const named = name.trim();
-    if (!named) return;
-    const scopes: ApiAssistantScope[] = writes ? ['parcels:read', 'parcels:write'] : ['parcels:read'];
+  function make(named: string, withWrites: boolean) {
+    const scopes: ApiAssistantScope[] = withWrites ? ['parcels:read', 'parcels:write'] : ['parcels:read'];
     void run(async () => {
-      const created = await createPersonalToken(apiAuth, named, scopes);
+      let created;
+      try {
+        created = await createPersonalToken(apiAuth, named, scopes);
+      } catch (reason) {
+        if (!(reason instanceof ApiRecentSignInError && signIn)) throw reason;
+        setSigningInAgain(true);
+        return;
+      }
       onChange({ ...offer, connections: [created.connection, ...offer.connections] });
       setToken(created.token); setCopied(null); setName(''); setWrites(false);
     });
+  }
+
+  function create(event: FormEvent) {
+    event.preventDefault();
+    const named = name.trim();
+    if (named) make(named, writes);
+  }
+
+  // Back from a provider, signed in again: the token is made as it was typed, once.
+  useEffect(() => {
+    if (resumed.current || !draft?.make || !draft.name.trim()) return;
+    resumed.current = true;
+    make(draft.name.trim(), draft.writes);
+  });
+
+  if (signingInAgain && signIn) {
+    // Noted before a sign-in leaves the page or brings another account, whose Settings then say what happened.
+    const note = () => noteSignInAgain({ action: 'personal-token', userId: apiAuth.userId, name, writes });
+    return <SignInAgain methods={signIn} email={email} title={t('assistants.signInAgain')} subtitle={t('assistants.signInAgainBody')}
+      onLeave={note} onVerify={note} onFailed={() => dropSignInAgain(['personal-token'])}
+      onSignedIn={() => {
+        // Another account signed in: its own Settings open, and this one is gone.
+        if (apiAuth.signal?.aborted) return;
+        dropSignInAgain(['personal-token']);
+        setSigningInAgain(false);
+        const named = name.trim();
+        if (named) make(named, writes);
+      }}
+      onCancel={() => setSigningInAgain(false)} />;
   }
 
   return <>

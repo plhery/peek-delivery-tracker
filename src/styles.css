@@ -514,6 +514,9 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .auth-flow__form--code input { text-align: center; font: 500 24px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 10px; }
 .auth-flow__intro { font-size: 13px; color: var(--ink-soft); margin-bottom: 2px; }
 .auth-flow__text-button { background: transparent; text-decoration: underline; text-underline-offset: 3px; font-size: 12px; min-height: 44px; }
+/* A sign-in asked for again in place, while the account stays signed in, with the way back beneath it. */
+.sign-in-again { display: grid; gap: 6px; }
+.sign-in-again__cancel { justify-self: center; color: var(--ink-soft); }
 .auth-flow__divider { display: flex; align-items: center; gap: 14px; font-size: 11px; color: var(--ink-soft); margin: 6px 0; }
 .auth-flow__divider::before, .auth-flow__divider::after { content: ''; height: 1px; flex: 1; background: var(--line); }
 .auth-flow__privacy { display: flex; align-items: flex-start; gap: 8px; color: var(--ink-soft); margin: 22px 4px 0; }

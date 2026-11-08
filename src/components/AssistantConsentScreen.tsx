@@ -1,16 +1,19 @@
 'use client';
 
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { AuthProvider, useAuth } from '../auth/AuthContext';
 import { siteAuthConfig } from '../auth/siteAuth';
 import type { ApiAssistantScope } from '../generated/apiContract';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
-import { ApiAuthenticationError } from '../lib/apiClient';
+import { ApiAuthenticationError, ApiRecentSignInError } from '../lib/apiClient';
 import { AppearanceProvider } from '../lib/appearance';
 import { answerAssistantConsent, AssistantRequestError } from '../lib/assistants';
 import { rememberPendingConsent } from '../lib/pendingConsent';
+import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
 import { useTabTitle } from '../lib/tabTitle';
+import type { SignInMethods } from '../peek/session';
 import { PeekLockup } from './PeekMark';
+import { SignInAgain } from './SignInAgain';
 import { SignInScreen } from './SignInScreen';
 import './EmailOff.css';
 import './AssistantConsent.css';
@@ -73,12 +76,57 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
   const [working, setWorking] = useState<Outcome | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [problem, setProblem] = useState<'invalid' | 'closed' | 'full' | 'failed' | null>(null);
-  // Allowing needs a recent sign-in: the server refused an older one, and the person signs in again here.
+  // A session Auth no longer confirms is signed out, and the person signs in again here.
   const [again, setAgain] = useState(false);
+  // Allowing needs a recent sign-in: the account that signed in earlier signs in again in place, then allows.
+  const [signingInAgain, setSigningInAgain] = useState<string | null>(null);
+  const resumed = useRef(false);
   const userId = auth.user?.id;
   const apiAuth = useMemo(() => userId ? { userId, getAccessToken: auth.getAccessToken, signal: auth.signal } : undefined,
     [userId, auth.getAccessToken, auth.signal]);
   useTabTitle(`${t('app.title')} — ${t('assistants.consent.tab')}`);
+
+  async function answer(approve: boolean, scopes = kept) {
+    if (working || !apiAuth || (approve && !scopes.length)) return;
+    const next: Outcome = approve ? 'allowed' : 'denied';
+    setWorking(next);
+    setProblem(null);
+    try {
+      const redirect = await answerAssistantConsent(apiAuth, { query, approve, scopes });
+      // An app's own address may open it without leaving the page, which then says to go back to it.
+      setOutcome(next);
+      window.location.assign(redirect);
+    } catch (reason) {
+      setWorking(null);
+      if (reason instanceof ApiRecentSignInError) {
+        setSigningInAgain(apiAuth.userId);
+        return;
+      }
+      if (reason instanceof ApiAuthenticationError) {
+        // The same request shows again once signed in, here or after a provider's round trip.
+        setAgain(true);
+        void auth.signOut();
+        return;
+      }
+      const status = reason instanceof AssistantRequestError ? reason.status : 0;
+      setProblem(status === 400 ? 'invalid' : status === 403 ? 'closed' : status === 409 ? 'full' : 'failed');
+    }
+  }
+
+  function resume(scopes: ApiAssistantScope[], allow: boolean) {
+    setKept(scopes);
+    if (allow) void answer(true, scopes);
+  }
+
+  // Back from a provider after signing in again: the request shows with the access kept, and the same account allows
+  // it at once. Another account sees the request for itself, and answers it or not. Once, with the first account.
+  useEffect(() => {
+    if (resumed.current || !apiAuth || !request) return;
+    resumed.current = true;
+    const note = takeSignInAgain(['assistant-consent']);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- session storage, which only the live page can read
+    if (note?.query === query) resume(request.scopes.filter((scope) => note.scopes.includes(scope)), note.userId === apiAuth.userId);
+  });
 
   if (busy) {
     return <Card>
@@ -116,6 +164,29 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
     </main>;
   }
 
+  if (signingInAgain === apiAuth.userId) {
+    const signInWith: SignInMethods = {
+      configured: true, googleEnabled: auth.googleEnabled, appleEnabled: auth.appleEnabled, emailOtpEnabled: auth.emailOtpEnabled, oidcName: auth.oidcName,
+      signInWithGoogle: auth.signInWithGoogle, signInWithApple: auth.signInWithApple, signInWithOidc: auth.signInWithOidc, sendCode: auth.sendCode, verifyCode: auth.verifyCode,
+    };
+    // A provider returns to `/` alone: the request is noted so that the deliveries come back here, and allow it then.
+    const noted = () => {
+      rememberPendingConsent();
+      noteSignInAgain({ action: 'assistant-consent', userId: apiAuth.userId, query, scopes: kept });
+    };
+    return <main className="auth-screen assistant-consent">
+      <div className="feedback-language"><LanguageControl /></div>
+      <SignInAgain methods={signInWith} email={auth.user?.email} title={t('assistants.consent.signInAgain', { name })}
+        subtitle={t('assistants.consent.signInBody', { name })} onLeave={noted} onFailed={() => dropSignInAgain(['assistant-consent'])}
+        onSignedIn={() => {
+          setSigningInAgain(null);
+          // Another account signed in: the request shows for it, and waits for its answer.
+          if (!apiAuth.signal?.aborted) void answer(true);
+        }}
+        onCancel={() => setSigningInAgain(null)} />
+    </main>;
+  }
+
   if (outcome) {
     return <Card>
       <div aria-live="polite">
@@ -123,30 +194,6 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
         <p className="auth-card__intro">{t('assistants.consent.back', { name })}</p>
       </div>
     </Card>;
-  }
-
-  async function answer(approve: boolean) {
-    if (working || !apiAuth || (approve && !kept.length)) return;
-    const next: Outcome = approve ? 'allowed' : 'denied';
-    setWorking(next);
-    setProblem(null);
-    try {
-      const redirect = await answerAssistantConsent(apiAuth, { query, approve, scopes: kept });
-      // An app's own address may open it without leaving the page, which then says to go back to it.
-      setOutcome(next);
-      window.location.assign(redirect);
-    } catch (reason) {
-      if (reason instanceof ApiAuthenticationError) {
-        // The same request shows again once signed in, here or after a provider's round trip.
-        setAgain(true);
-        setWorking(null);
-        void auth.signOut();
-        return;
-      }
-      const status = reason instanceof AssistantRequestError ? reason.status : 0;
-      setProblem(status === 400 ? 'invalid' : status === 403 ? 'closed' : status === 409 ? 'full' : 'failed');
-      setWorking(null);
-    }
   }
 
   const toggle = (scope: ApiAssistantScope, on: boolean) => setKept((current) =>

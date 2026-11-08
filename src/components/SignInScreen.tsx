@@ -18,11 +18,17 @@ export function SignInScreen({
   title,
   subtitle,
   showConfigurationHelp = true,
+  initialEmail = '',
+  codeAction,
 }: {
   card?: boolean;
   showConfigurationHelp?: boolean;
   title?: ReactNode;
   subtitle?: string;
+  /** The address the email field starts with, as when the account signed in asks for a sign-in again. */
+  initialEmail?: string;
+  /** What the button that sends the code says, where it leads elsewhere than to the parcels. */
+  codeAction?: string;
   configured: boolean;
   googleEnabled?: boolean;
   appleEnabled?: boolean;
@@ -35,7 +41,7 @@ export function SignInScreen({
   verifyCode: (email: string, code: string) => Promise<void>;
 }) {
   const { t } = useI18n();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [code, setCode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
   const socialEnabled = !!((googleEnabled && signInWithGoogle) || (appleEnabled && signInWithApple) || (oidcName && signInWithOidc));
@@ -120,7 +126,7 @@ export function SignInScreen({
             />
             {error && <p className="auth-flow__error" role="alert">{error}</p>}
             <button className="button button--primary" type="submit" disabled={Boolean(working)}>
-              {working === 'code' ? t('auth.signingIn') : t('auth.openBox')}
+              {working === 'code' ? t('auth.signingIn') : codeAction ?? t('auth.openBox')}
             </button>
             <button
               className="auth-flow__text-button"

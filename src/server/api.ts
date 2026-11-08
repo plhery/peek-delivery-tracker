@@ -13,6 +13,7 @@ import {
   type SupabaseUserClient,
 } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
+import type { ApiErrorResponse } from '../generated/apiContract';
 
 const MAX_JSON_BODY = 16_384;
 const PREAUTH_REQUEST_LIMIT = 300;
@@ -47,14 +48,18 @@ export interface ApiContext<Parameters extends RouteParameters = RouteParameters
 }
 
 export class HttpError extends Error {
+  /** Said in the answer beside the message, for a client to tell this refusal from others of its status. */
+  readonly code?: ApiErrorResponse['code'];
+
   constructor(
     readonly status: number,
     message: string,
     readonly headers?: HeadersInit,
-    options?: ErrorOptions,
+    options?: ErrorOptions & { code?: ApiErrorResponse['code'] },
   ) {
     super(message, options);
     this.name = 'HttpError';
+    if (options?.code) this.code = options.code;
   }
 }
 
@@ -229,7 +234,7 @@ export function expectedFailure(response: Response): Response {
 
 function failure(error: unknown): Response {
   if (error instanceof HttpError) {
-    return apiResponse(error.status, { error: error.message }, error.headers);
+    return apiResponse(error.status, { error: error.message, ...(error.code ? { code: error.code } : {}) }, error.headers);
   }
   if (error instanceof SupabaseError) {
     if (error.status === 401 || error.status === 403) {
@@ -549,14 +554,17 @@ export async function validateAfresh(context: ApiContext, refusal: string): Prom
 /**
  * The caller, asked afresh, when they signed in within the last ten minutes: what deleting
  * the account, a personal token and an assistant's grant need, since each outlasts the
- * session. A copied access token alone can't make them. The clients answer the 401 as any
- * other, by asking to sign in again.
+ * session. A copied access token alone can't make them. A session Auth still confirms but
+ * signed in earlier gets a 401 with `code: recent_sign_in`: the web keeps it and asks for a
+ * sign-in in place, and the apps answer it as any other 401. A session Auth refuses gets a
+ * plain 401, which signs out.
  */
 export async function requireRecentSignIn(context: ApiContext, refusal: string): Promise<SupabaseUser> {
   const fresh = await validateAfresh(context, refusal);
-  if (!fresh.sessionId || !fresh.authenticatedAt) throw new HttpError(401, refusal);
-  const age = Date.now() - fresh.authenticatedAt.getTime();
-  if (age < -60_000 || age > RECENT_SIGN_IN_MS) throw new HttpError(401, refusal);
+  const age = fresh.sessionId && fresh.authenticatedAt ? Date.now() - fresh.authenticatedAt.getTime() : null;
+  if (age === null || age < -60_000 || age > RECENT_SIGN_IN_MS) {
+    throw new HttpError(401, refusal, undefined, { code: 'recent_sign_in' });
+  }
   return fresh;
 }
 

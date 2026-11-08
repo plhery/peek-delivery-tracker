@@ -51811,6 +51811,7 @@ export interface ApiErrorResponse {
   "error": string;
   "packageId"?: string;
   "scope"?: "daily";
+  "code"?: "recent_sign_in";
 }
 
 export interface ApiPushConfigResponse {

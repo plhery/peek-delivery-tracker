@@ -3085,11 +3085,13 @@ struct ErrorResponse: Codable, Equatable, Hashable, Sendable {
     var error: String
     var packageID: UUID? = nil
     var scope: ErrorResponseScope? = nil
+    var code: ErrorResponseCode? = nil
 
     private enum CodingKeys: String, CodingKey {
         case error
         case packageID = "packageId"
         case scope
+        case code
     }
 }
 
@@ -3933,6 +3935,12 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
 
 enum ErrorResponseScope: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case daily
+
+    var id: String { rawValue }
+}
+
+enum ErrorResponseCode: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case recentSignIn = "recent_sign_in"
 
     var id: String { rawValue }
 }

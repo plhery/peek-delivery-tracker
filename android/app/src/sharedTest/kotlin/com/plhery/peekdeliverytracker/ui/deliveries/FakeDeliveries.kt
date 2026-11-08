@@ -438,6 +438,11 @@ class FakeDeliveries(
 
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]
 
+    /** The parcels followed without an account whose lookup had a postcode. */
+    var postcodesGiven: Set<UUID> = emptySet()
+
+    override fun postcodeGiven(parcel: Parcel): Boolean = isGuest && parcel.id in postcodesGiven
+
     /** Holds each reading of a link, each change and each stop until the test lets it go. */
     var shareLoading: CompletableDeferred<Unit>? = null
     var shareSaving: CompletableDeferred<Unit>? = null

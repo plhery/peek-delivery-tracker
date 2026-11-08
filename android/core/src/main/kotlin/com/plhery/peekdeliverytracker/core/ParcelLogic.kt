@@ -161,11 +161,13 @@ val Parcel.inputSuggestedPrompt: CarrierInputSuggested?
 
 /**
  * Whether the parcel's carrier shows more with the delivery postcode it was saved without. An account's own postcode
- * is given at the next check, so this asks those who gave none, once the parcel has been checked.
+ * is given at the next check, so this asks those who gave none, once the parcel has been checked. `postcodeGiven` is
+ * true for a parcel followed without an account whose lookup had a postcode: the service never shows it through the
+ * link, so the parcel itself has none.
  */
-fun Parcel.showsMoreWithPostcode(catalog: CarrierCatalog): Boolean {
-    if (inputNeededPrompt != null || inputSuggestedPrompt != null || dpdPostcode?.nonEmpty != null || !isActive ||
-        lastSyncedAt == null
+fun Parcel.showsMoreWithPostcode(catalog: CarrierCatalog, postcodeGiven: Boolean = false): Boolean {
+    if (postcodeGiven || inputNeededPrompt != null || inputSuggestedPrompt != null || dpdPostcode?.nonEmpty != null ||
+        !isActive || lastSyncedAt == null
     ) return false
     return catalog.requirements(carrier, trackingNumber)
         .any { it.field == CarrierRequirement.Field.DpdPostcode && it.showsMore == true }
@@ -176,11 +178,12 @@ fun Parcel.showsMoreWithPostcode(catalog: CarrierCatalog): Boolean {
  * Express Mexico and China), once the parcel has been checked, unless the sync error already asks for them or the
  * postcode is asked for instead. As the web's `phoneDigitsShowsMore`. `knowsInputs` is false for a parcel followed
  * without an account: the service shows no lookup's digits through its link, so whether they were given is unknown
- * there.
+ * there. `postcodeGiven` is as for `showsMoreWithPostcode`.
  */
-fun Parcel.showsMoreWithPhoneDigits(catalog: CarrierCatalog, knowsInputs: Boolean = true): Boolean {
-    if (!knowsInputs || inputNeededPrompt != null || inputSuggestedPrompt != null || showsMoreWithPostcode(catalog) ||
-        phoneDigits?.nonEmpty != null || !isActive || lastSyncedAt == null || syncError == "carrier:input_required"
+fun Parcel.showsMoreWithPhoneDigits(catalog: CarrierCatalog, knowsInputs: Boolean = true, postcodeGiven: Boolean = false): Boolean {
+    if (!knowsInputs || inputNeededPrompt != null || inputSuggestedPrompt != null ||
+        showsMoreWithPostcode(catalog, postcodeGiven) || phoneDigits?.nonEmpty != null || !isActive || lastSyncedAt == null ||
+        syncError == "carrier:input_required"
     ) return false
     return catalog.requirements(carrier, trackingNumber).any { it.field == CarrierRequirement.Field.PhoneDigits }
 }

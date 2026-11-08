@@ -588,6 +588,8 @@ class ParcelLogicTests {
         // Not before its first check, which gives it the account's own postcode, nor with one, nor once archived.
         assertFalse(parcel.copy(lastSyncedAt = null).showsMoreWithPostcode(catalog))
         assertFalse(parcel.copy(dpdPostcode = "8000").showsMoreWithPostcode(catalog))
+        // Nor for a parcel followed without an account whose lookup had one, which its link never shows.
+        assertFalse(parcel.showsMoreWithPostcode(catalog, postcodeGiven = true))
         assertFalse(parcel.copy(archivedAt = "2026-08-10T10:00:00Z").showsMoreWithPostcode(catalog))
         // DHL needs it for some twelve-digit numbers only, and asks for those.
         assertFalse(parcel.copy(carrier = CarrierId.Dhl, trackingNumber = "000000000012").showsMoreWithPostcode(catalog))

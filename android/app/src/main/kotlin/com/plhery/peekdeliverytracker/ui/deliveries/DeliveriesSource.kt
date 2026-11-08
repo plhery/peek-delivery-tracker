@@ -231,6 +231,12 @@ interface DeliveriesSource {
     fun viewerLink(parcel: Parcel): String?
 
     /**
+     * `store.postcodeGiven(for:)`: whether the lookup behind a parcel followed without an account had a postcode, which
+     * its link never shows, so its page asks for none.
+     */
+    fun postcodeGiven(parcel: Parcel): Boolean
+
+    /**
      * `store.shareClient(for:)`: how the share sheet reaches the parcel's link (reads it, makes it, changes what it
      * shows, stops it), through the account, the device's own parcels or the demo's made-up links.
      */
@@ -514,6 +520,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override fun setDeliveryWidgetEnabled(enabled: Boolean) = container.parcels.setDeliveryWidgetEnabled(enabled)
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
+
+    override fun postcodeGiven(parcel: Parcel): Boolean = container.parcels.postcodeGiven(parcel)
 
     override fun shareClient(parcel: Parcel): ParcelShareModel.Client = container.parcels.shareClient(parcel)
 

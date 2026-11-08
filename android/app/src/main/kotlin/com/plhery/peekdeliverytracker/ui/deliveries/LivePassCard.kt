@@ -143,7 +143,8 @@ internal class PassBell(
  *
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
  * someone else's parcel followed through its link, `guest` a parcel followed without an account, whose link never says
- * whether its lookup had phone digits, and `working` a change being saved, which the bell waits for.
+ * whether its lookup had phone digits, `postcodeGiven` such a parcel whose lookup had a postcode, which its link never
+ * shows, and `working` a change being saved, which the bell waits for.
  * `onMap` opens the map, TalkBack going back to the given element once it closes, `onEditCarrier` the carrier
  * editor, on the carrier a prompt names, TalkBack going back to the mark or the button that opened it, `onRename`
  * the rename alert, TalkBack going back to the name, and `onShare` the share sheet, or the reader link's own share,
@@ -158,6 +159,7 @@ internal fun LivePassCard(
     bell: PassBell?,
     working: Boolean,
     guest: Boolean = false,
+    postcodeGiven: Boolean = false,
     onMap: (AccessibilityFocus?) -> Unit,
     onEditCarrier: (initialCarrier: CarrierId?, focus: AccessibilityFocus?) -> Unit,
     onRename: (AccessibilityFocus?) -> Unit,
@@ -370,13 +372,13 @@ internal fun LivePassCard(
                     Modifier.testTag(PAGE_POSTCODE),
                 ) { onEditCarrier(null, it) }
             }
-            if (editable && parcel.showsMoreWithPostcode(identities.catalog)) {
+            if (editable && parcel.showsMoreWithPostcode(identities.catalog, postcodeGiven)) {
                 PostcodeNote(
                     localizer.text("detail.postcodeShowsMore", mapOf("carrier" to identities.displayName(parcel.carrier, language))),
                     localizer.text("detail.inputNeededAction"),
                     Modifier.testTag(PAGE_POSTCODE_MORE),
                 ) { onEditCarrier(null, it) }
-            } else if (editable && parcel.showsMoreWithPhoneDigits(identities.catalog, knowsInputs = !guest)) {
+            } else if (editable && parcel.showsMoreWithPhoneDigits(identities.catalog, knowsInputs = !guest, postcodeGiven)) {
                 PostcodeNote(
                     localizer.text("detail.phoneDigitsShowsMore", mapOf("carrier" to identities.displayName(parcel.carrier, language))),
                     localizer.text("detail.phoneDigitsAction"),

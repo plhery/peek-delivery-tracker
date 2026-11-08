@@ -182,6 +182,7 @@ class PassNotesTest {
     private var sample by mutableStateOf(false)
     private var readerLink by mutableStateOf(false)
     private var guest by mutableStateOf(false)
+    private var postcodeGiven by mutableStateOf(false)
 
     /** The carrier editor's requests the pass made, each with the carrier it starts on. */
     private val edits = mutableListOf<CarrierId?>()
@@ -194,7 +195,7 @@ class PassNotesTest {
             CardHost(reduceMotion = false) {
                 LivePassCard(
                     passParcel!!, WorldAtlases.loadedOrNull(), sample = sample, readerLink = readerLink, bell = null,
-                    working = false, guest = guest, onMap = {}, onEditCarrier = { carrier, _ -> edits += carrier }, onRename = {}, onShare = {},
+                    working = false, guest = guest, postcodeGiven = postcodeGiven, onMap = {}, onEditCarrier = { carrier, _ -> edits += carrier }, onRename = {}, onShare = {},
                 )
             }
         }
@@ -286,6 +287,33 @@ class PassNotesTest {
         passParcel = kit.copy(dpdPostcode = "0000")
         compose.waitForIdle()
         assertFalse(exists(PAGE_POSTCODE_MORE))
+        // Nor for a parcel followed without an account whose lookup had one, which its link never shows.
+        passParcel = kit
+        postcodeGiven = true
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_POSTCODE_MORE))
+    }
+
+    /** The page asks a parcel followed without an account for no postcode its lookup had. */
+    @Test
+    fun aPageAsksForNoPostcodeTheLookupWithoutAnAccountHad() {
+        val kit = id("Trail weekend kit")
+        show(demo("Trail weekend kit") { it.copy(dpdPostcode = null) }) {
+            isGuest = true
+            postcodesGiven = setOf(kit)
+        }
+        open(kit)
+        assertTrue(textExists(dpd))
+        assertFalse(exists(PAGE_POSTCODE_MORE))
+    }
+
+    /** One whose lookup had none is asked for it, as before. */
+    @Test
+    fun aPageAsksForThePostcodeALookupWithoutAnAccountHadNot() {
+        val kit = id("Trail weekend kit")
+        show(demo("Trail weekend kit") { it.copy(dpdPostcode = null) }) { isGuest = true }
+        open(kit)
+        assertTrue(exists(PAGE_POSTCODE_MORE))
     }
 
     @Test

@@ -805,6 +805,12 @@ class ParcelStore(
      */
     fun viewerLink(parcel: Parcel): String? = if (isGuest) device.viewerLink(parcel.id) else null
 
+    /**
+     * Whether a postcode went with the lookup behind a parcel followed without an account, which its link never shows.
+     * An account's parcel holds its own postcode instead.
+     */
+    fun postcodeGiven(parcel: Parcel): Boolean = isGuest && device.postcodeGiven(parcel.id) == true
+
     // Notifications without an account
 
     /**

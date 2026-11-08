@@ -71,6 +71,11 @@ data class DeviceParcel(
      * until they are.
      */
     val forgotten: Boolean? = null,
+    /**
+     * Whether a postcode went with the lookup that made the parcel, which its link never shows: yes or no only, never
+     * the postcode. Null where this phone doesn't know, such as a parcel it kept before it noted this.
+     */
+    val postcodeGiven: Boolean? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
 
@@ -549,6 +554,7 @@ class DeviceParcels(
         var entry = DeviceParcel(
             linkId = response.link.id, label = request.label ?: "", archivedAt = null,
             parcel = Parcel(shared = response.parcel), checkedAt = now().timeIntervalSinceReferenceDate,
+            postcodeGiven = request.dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
         )
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         val twin = entries.indexOfFirst { it.parcel.id == response.parcel.id }
@@ -833,6 +839,9 @@ class DeviceParcels(
 
     /** The link of a parcel followed here through someone else's link, which is all this phone may share of it. */
     fun viewerLink(id: UUID): String? = entries.firstOrNull { it.parcel.id == id && it.isViewer }?.linkId
+
+    /** Whether a postcode went with the lookup that made the parcel; null when this phone doesn't know. */
+    fun postcodeGiven(id: UUID): Boolean? = entries.firstOrNull { it.parcel.id == id }?.postcodeGiven
 
     /** The parcel this phone follows through a link, as the list shows it. */
     fun parcelId(linkId: String): UUID? = entries.firstOrNull { it.linkId.equalsCanonically(linkId) }?.parcel?.id

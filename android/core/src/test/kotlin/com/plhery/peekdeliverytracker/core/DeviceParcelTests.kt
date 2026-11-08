@@ -710,6 +710,98 @@ class DeviceParcelTests {
         assertEquals("Only a lookup that went through is remembered", 2, memory.entries.size)
     }
 
+    // Whether a lookup had a postcode
+
+    /** A DPD parcel its carrier has answered for: DPD shows more with the delivery postcode. */
+    private fun checkedDpd(id: UUID): PublicPackage =
+        pkg(id, number = "06080000000002", carrier = CarrierId.Dpd).copy(lastSyncedAt = "2026-10-02T08:00:00Z")
+
+    @Test
+    fun aLookupWithAPostcodeNotesOnlyThatItHadOneAndAsksForNone() = runTest {
+        val catalog = CarrierCatalog(cacheFile = null)
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        val found = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = checkedDpd(id))
+        val device = device(client(Calls(), lookup = found), storage, this, postcodes = PostcodeMemory(MemoryDefaults()))
+
+        val parcel = device.add(CreatePackageRequest(trackingNumber = "06080000000002", carrier = CarrierId.Dpd, dpdPostcode = " QX7 7QX "))
+
+        assertEquals(listOf<Boolean?>(true), storage.parcels.map { it.postcodeGiven })
+        assertEquals(true, device.postcodeGiven(id))
+        // Yes or no only: the postcode stays off the parcel and its row.
+        assertNull(parcel.dpdPostcode)
+        assertFalse(DeviceParcelFiles.encoder.encode(parcels, storage.parcels).decodeToString().contains("QX7"))
+        assertTrue("The parcel alone can't tell", parcel.showsMoreWithPostcode(catalog))
+        assertFalse(parcel.showsMoreWithPostcode(catalog, postcodeGiven = true))
+    }
+
+    @Test
+    fun aLookupWithoutAPostcodeStillAsksForOneItsCarrierShowsMoreWith() = runTest {
+        val catalog = CarrierCatalog(cacheFile = null)
+        for (postcode in listOf(null, " ")) {
+            val id = UUID.randomUUID()
+            val storage = Memory()
+            val found = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = checkedDpd(id))
+            val device = device(client(Calls(), lookup = found), storage, this, postcodes = PostcodeMemory(MemoryDefaults()))
+
+            val parcel = device.add(
+                CreatePackageRequest(trackingNumber = "06080000000002", carrier = CarrierId.Dpd, dpdPostcode = postcode),
+            )
+
+            assertEquals(postcode.toString(), listOf<Boolean?>(false), storage.parcels.map { it.postcodeGiven })
+            assertTrue(postcode.toString(), parcel.showsMoreWithPostcode(catalog, postcodeGiven = device.postcodeGiven(id) == true))
+        }
+    }
+
+    @Test
+    fun changingTheCarrierWithoutAPostcodeNotesThatTheNewLookupHadNone() = runTest {
+        val catalog = CarrierCatalog(cacheFile = null)
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "Moon lamp", previousId, pkg = pkg(previousId, number = "06080000000002", carrier = CarrierId.GlsCh))
+                .copy(postcodeGiven = true),
+        )
+        val calls = Calls()
+        val found = PublicLookupResponse(link = link("22222222222B"), key = key, parcel = checkedDpd(nextId))
+        val device = device(client(calls, lookup = found), storage, this)
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null)
+
+        assertEquals(nextId, parcel.id)
+        assertEquals(listOf<String?>(null), calls.lookupPostcodes)
+        assertEquals(listOf("22222222222B"), storage.parcels.map { it.linkId })
+        assertEquals(listOf<Boolean?>(false), storage.parcels.map { it.postcodeGiven })
+        assertEquals(false, device.postcodeGiven(nextId))
+        assertTrue(parcel.showsMoreWithPostcode(catalog, postcodeGiven = device.postcodeGiven(nextId) == true))
+    }
+
+    @Test
+    fun anEntryKeptBeforeLookupsNotedTheirPostcodeStillAsksForOne() = runTest {
+        val catalog = CarrierCatalog(cacheFile = null)
+        val id = UUID.randomUUID()
+        val noted = parcel("22222222222A", "Moon lamp", id, date(Instant.ofEpochSecond(1_800_000_000)), pkg = checkedDpd(id))
+            .copy(postcodeGiven = true)
+        val row = rows(listOf(noted)).single()
+        assertEquals(JsonPrimitive(true), row["postcodeGiven"])
+        val older = JsonArray(listOf(JsonObject(row - "postcodeGiven"))).toString().toByteArray()
+
+        val opened = DeviceParcelFiles.opened(older, keys = mapOf("22222222222A" to key))
+
+        assertEquals(listOf("22222222222A"), opened.parcels.map { it.linkId })
+        assertEquals(listOf<Boolean?>(null), opened.parcels.map { it.postcodeGiven })
+        val storage = Memory()
+        storage.parcels = opened.parcels
+        storage.keys = opened.keys
+        val device = device(client(Calls()), storage, this)
+        assertNull(device.postcodeGiven(id))
+        // Unknown, as before: the note still shows.
+        val parcel = device.list().first()
+        assertTrue(parcel.showsMoreWithPostcode(catalog, postcodeGiven = device.postcodeGiven(id) == true))
+    }
+
     @Test
     fun forgettingParcelsKeepsTheirPostcodes() = runTest {
         val memory = PostcodeMemory(MemoryDefaults())
@@ -771,12 +863,14 @@ class DeviceParcelTests {
         store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = " 75001 ")
         assertEquals(listOf(given(CarrierId.Dpd, "75001")), memory.entries)
         assertEquals(listOf(given(CarrierId.Dpd, "75001")), store.givenPostcodes)
+        assertTrue(store.postcodeGiven(store.parcels.first { it.id == id }))
 
         // An account's postcode stays on its parcel, and the account's parcels come first.
         session.verifyCode(email = "test@example.com", code = "123456")
         store.add(trackingNumber = "TESTPARCEL999", label = "", carrier = CarrierId.GlsCh, trackingUrl = null, dpdPostcode = "3000")
         assertEquals(listOf(given(CarrierId.Dpd, "75001")), memory.entries)
         assertEquals(listOf(given(CarrierId.GlsCh, "3000"), given(CarrierId.Dpd, "75001")), store.givenPostcodes)
+        assertFalse("An account's parcel holds its own postcode", store.postcodeGiven(accountParcel))
 
         session.forceSignOut()
         assertEquals(listOf(given(CarrierId.Dpd, "75001")), memory.entries)

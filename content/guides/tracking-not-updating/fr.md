@@ -111,7 +111,7 @@ Dans un même pays, c'est long : en Belgique, Mondial Relay compte en moyenne 3 
 
 ### Peut-on accélérer la mise à jour du suivi ?
 
-Non. Un [site de suivi universel](guide:universal-tracker) non plus : il ne montre que ce que le transporteur publie. [Peek](/) vérifie le suivi jusqu'à toutes les 10 minutes et peut t'envoyer une notification à chaque nouveau scan, pour que tu n'aies plus à actualiser la page.
+Non. Un [site de suivi universel](guide:universal-tracker) non plus : il ne montre que ce que le transporteur publie. [Peek](/) vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond), et peut t'envoyer une notification à chaque nouveau scan, pour que tu n'aies plus à actualiser la page.
 
 ### Mon numéro de suivi ne fonctionne pas
 

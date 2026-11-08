@@ -103,7 +103,7 @@ Each quiet spell has its own reason:
 - **No scan after 5 business days.** The seller may not have sent it. Unless they confirmed sending or you agreed to an extension, Vinted cancels the order and refunds you.
 - **Stuck on the way.** If the parcel is late, Vinted tells you and shows a new delivery date in the conversation. If tracking is stuck both on Vinted and on the carrier's site, Vinted asks you to wait up to 25 business days from when the order was marked as shipped.
 - **Collected, but not `Delivered`.** Vinted's system doesn't always update at once: press **Track parcel**, then **Mark as received**.
-- **Not bought with Buy now.** Vinted only tracks items bought with **Buy now** and sent as the app instructs. For anything else, ask the seller for the carrier's tracking number.
+- **Not bought with Buy now.** Custom shipping is a legacy option, no longer available for new listings. Vinted only tracks items bought with **Buy now** and sent as the app instructs. For help with tracking, go to the Help Centre homepage and select your order.
 
 More on gaps: [why tracking stops updating](guide:tracking-not-updating).
 
@@ -149,7 +149,8 @@ Yes: copy the number from **Track parcel** and paste it into [Peek](/). A Vinted
 - [Vinted UK: Delivery time](https://www.vinted.co.uk/help/101) – 2 to 5 business days, verification up to 10, extension of 3 or 5 days
 - [Vinted UK: I can't send the item on time](https://www.vinted.co.uk/help/740) – cancelled the next business day, "I confirm I've sent the order"
 - [Vinted UK: Shipping label not received or not working](https://www.vinted.co.uk/help/154) – another drop-off point, cancel and order again, forwarding addresses
-- [Vinted UK: Tracking a parcel](https://www.vinted.co.uk/help/100) – Track parcel, 48 hours, Mark as received, tracking only for Buy now orders
+- [Vinted UK: Tracking a parcel](https://www.vinted.co.uk/help/100) – Track parcel, 48 hours, Mark as received, tracking only for Buy now orders sent as the app instructs, Help Centre homepage
+- [Vinted UK: Custom shipping on Vinted](https://www.vinted.co.uk/help/443) – legacy option, no longer available for new listings
 - [Vinted UK: Parcel didn't arrive](https://www.vinted.co.uk/help/657) – delay notice, 25 business days, compensation
 - [Vinted UK: Collecting a parcel](https://www.vinted.co.uk/help/1601) – pick-up code, deadlines per carrier, refund, 2-day confirmation
 - [Vinted UK: Collecting your order](https://www.vinted.co.uk/help/738) – 2 calendar days, no code, other pick-up point, empty locker

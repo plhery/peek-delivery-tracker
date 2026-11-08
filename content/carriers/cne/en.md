@@ -105,7 +105,7 @@ Peek reads CNE's own tracking: the status, each line with its place, the destina
 
 When CNE names the delivering carrier and gives its number, Peek asks that carrier too: one of the three above, your country's post for a postal number (two letters, nine digits, two letters), or the one carrier that number's shape points to. Once that carrier shows a scan at least as recent as CNE's newest, Peek follows the parcel there and keeps CNE's history.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day CNE scans the parcel out for delivery, while CNE's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day CNE scans the parcel out for delivery, while CNE's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail, every 30 minutes for Poste Italiane, PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
 
 ## Questions about CNE Express tracking
 

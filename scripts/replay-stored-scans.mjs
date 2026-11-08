@@ -2,8 +2,10 @@
 // (docs/SCRAPER.md). `--query` prints the read-only export to run on the database; its output, one
 // parcel a line, goes to stdin. `--from <version>` replays the rows with that earlier release too
 // and keeps the rows it reads as they are stored or otherwise than this one: the ones this release
-// changes. It takes 0.621.0-main.2946 or later, the first release to export `carrierHomeZone`,
-// which the replay imports; an older one fails on that import. The report names rows by their ids'
+// changes, except the copies to the minute it deletes: once a release leaves those out, no check
+// stores them, so a copy the earlier release leaves out too still goes. It takes 0.621.0-main.2946
+// or later, the first release to export `carrierHomeZone`, which the replay imports; an older one
+// fails on that import. The report names rows by their ids'
 // first eight characters and shows no number, place or wording. `--sql <file>` writes the guarded
 // transaction that would apply the changes and step back the open parcels no row then shows past
 // the label and the delivered ones still checked that no row then shows delivered, and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
@@ -63,7 +65,7 @@ const parcels = lines.map((line) => JSON.parse(line)).map((parcel) => ({ ...parc
 const key = (change) => `${change.kind} ${change.row} ${change.to}`;
 const earlier = from ? new Set(parcels.flatMap((await earlierRelease(from)).replayParcel).map(key)) : new Set();
 const replayed = parcels.flatMap(replayParcel).filter((change) => !sources || sources.includes(change.source));
-const changes = replayed.filter((change) => !earlier.has(key(change)));
+const changes = replayed.filter((change) => change.kind === 'copy' || !earlier.has(key(change)));
 const stepBacks = steppedBack(parcels, changes);
 const { version } = JSON.parse(readFileSync(resolve(root, 'node_modules/universal-parcel-scraper/package.json'), 'utf8'));
 const short = (id) => id.slice(0, 8);
@@ -71,14 +73,16 @@ const minute = (iso) => iso.slice(0, 16).replace('T', ' ') + 'Z';
 
 console.log(`Replayed ${parcels.reduce((sum, parcel) => sum + parcel.events.length, 0)} stored rows of ${parcels.length} parcels with universal-parcel-scraper ${version}.`);
 if (from) console.log(`Left out ${replayed.length - changes.length} rows ${from} already reads as this release does, otherwise than they are stored.`);
-for (const kind of ['clock', 'stage']) {
+const titles = { clock: 'Clocks', stage: 'Stages', copy: 'Copies to the minute' };
+for (const kind of ['clock', 'stage', 'copy']) {
   const found = changes.filter((change) => change.kind === kind);
-  console.log(`\n${kind === 'clock' ? 'Clocks' : 'Stages'}: ${found.length} rows on ${new Set(found.map((change) => change.parcel)).size} parcels, ${found.filter((change) => change.open).length} of them on open parcels.`);
+  console.log(`\n${titles[kind]}: ${found.length} rows on ${new Set(found.map((change) => change.parcel)).size} parcels, ${found.filter((change) => change.open).length} of them on open parcels.`);
   const groups = new Map();
   for (const change of found) {
     const key = kind === 'clock'
       ? `${change.source} ${change.basis ?? '?'} ${Math.round((Date.parse(change.to) - Date.parse(change.from)) / 60_000)} min`
-      : `${change.source} ${change.code ?? '-'} ${change.from} -> ${change.to} (${change.reason})`;
+      : kind === 'stage' ? `${change.source} ${change.code ?? '-'} ${change.from} -> ${change.to} (${change.reason})`
+        : `${change.provider ?? 'unnamed provider'}`;
     groups.set(key, [...groups.get(key) ?? [], change]);
   }
   for (const [key, group] of [...groups].sort((a, b) => b[1].length - a[1].length)) {
@@ -86,7 +90,8 @@ for (const kind of ['clock', 'stage']) {
     for (const change of group.slice(0, args.includes('--all') ? group.length : 5)) {
       console.log(`        ${short(change.parcel)} ${short(change.row)} ${change.open ? 'open  ' : 'closed'} ${kind === 'clock'
         ? `${minute(change.from)} -> ${minute(change.to)} ${change.timeZone ?? ''}${change.clash ? ' CLASH' : ''}`
-        : `${change.from} -> ${change.to}`}`);
+        : kind === 'stage' ? `${change.from} -> ${change.to}`
+          : `deleted, kept ${short(change.to)}${change.location !== null ? ' (takes its place)' : ''}${change.clash ? ' CLASH' : ''}`}`);
     }
     if (group.length > 5 && !args.includes('--all')) console.log(`        … ${group.length - 5} more (--all)`);
   }

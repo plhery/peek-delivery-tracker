@@ -220,7 +220,10 @@ adapter can state itself, and a scan's stage is read again from its source's sta
 wording rules, a notice stored as the sync stores it. A wording Postal Ninja relays for the carrier it
 names (`reporting_carrier`) is read with that carrier's map first, when the map reads relayed wordings
 whole (PostNL's), as the adapter reads it. A scan its adapter gave the stage of the scan
-before it, with no source of its own (Chronopost's RB), keeps it.
+before it, with no source of its own (Chronopost's RB), keeps it. A universal provider's row to the
+minute that the release leaves out as a copy of its row to the second (`withoutMinuteCopies`: an
+answer that listed one scan twice in a minute) is deleted, and the row to the second takes its
+place when it has none, with the identity the sync gives it with that place.
 
 ```bash
 node scripts/replay-stored-scans.mjs --query > export.sql   # run read-only on the database, one parcel a line
@@ -228,7 +231,9 @@ node scripts/replay-stored-scans.mjs --from <previous version> --sql replay.sql 
 ```
 
 `--from` replays the rows with the release the app had before too and keeps the rows it reads as
-they are stored or otherwise than this release: the ones this release changes. `--sql` needs it:
+they are stored or otherwise than this release: the ones this release changes. Copies to the
+minute go whatever the earlier release reads: once a release leaves them out, no check stores them.
+`--sql` needs it:
 the replay reads each row alone, so a row a check wrote from the parcel's other rows, such as a
 USPS return leg, reads otherwise than stored with every release, and only `--from` leaves it out.
 The report names

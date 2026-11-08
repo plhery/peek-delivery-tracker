@@ -15,7 +15,9 @@
  * source of its own, keeps it whatever the map says of its code. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. A wording Postal Ninja relays for a carrier whose map reads it
- * whole is read with that map first (`relayedAnswer`), as its adapter reads it. Peek's own rows and the stage changes it saw without
+ * whole is read with that map first (`relayedAnswer`), as its adapter reads it. A universal provider's copy of a scan to
+ * the minute, stored beside its copy to the second when its answer listed the scan twice, goes where the release leaves
+ * it out (`withoutMinuteCopies`), and the copy to the second takes its place. Peek's own rows and the stage changes it saw without
  * a scan time are left out. It is a dry run: it lists the rows that would change, the parcels
  * that would step back with them, and the SQL that would change both, guarded on their stored
  * values; applying it is the operator's
@@ -75,7 +77,23 @@ export interface StageChange extends Change {
   declared: string | null;
   stageSource: string;
 }
-export type ReplayedChange = ClockChange | StageChange;
+/**
+ * A universal provider's row to the minute the release leaves out as a copy of its row to the second (`row`, at the
+ * time `from`, is deleted; `to` is the row that stays).
+ */
+export interface CopyChange extends Change {
+  kind: 'copy';
+  provider: string | null;
+  previousProviderEventId: string;
+  /** The deleted row's place, which the row that stays takes when it has none; null when it keeps its own. */
+  location: string | null;
+  /** The identity of the row that stays, and the one it takes with the place when its identity hashed its strings. */
+  keptProviderEventId: string;
+  providerEventId: string;
+  /** Another stored row already holds that identity: the row that stays keeps its place and identity. */
+  clash: boolean;
+}
+export type ReplayedChange = ClockChange | StageChange | CopyChange;
 /** A parcel whose saved stage no row shows once the changes apply, and the stage they leave it. */
 export interface StepBack { parcel: string; from: string; to: string }
 
@@ -106,6 +124,11 @@ const RELAYING_PROVIDERS = new Set(['Postal Ninja']);
  * the module still loads with it.
  */
 const relayedWordingStage = (scraperApp as Partial<typeof scraperApp>).relayedWordingStage;
+/** A release before 0.1022.0 keeps a provider's copies to the minute: looked up the same way. */
+const withoutMinuteCopies = (scraperApp as Partial<typeof scraperApp>).withoutMinuteCopies;
+const UNIVERSAL = 'unknown';
+const MINUTE_MS = 60_000;
+const words = (value: string) => value.trim().replace(/\s+/g, ' ').toLowerCase();
 const text = (value: unknown) => typeof value === 'string' ? value : null;
 const deduced = (scan: StoredScan, source: string) => text(scan.raw.local_time) !== null && DEDUCED.has(String(scan.raw.time_zone_basis))
   && !(scan.raw.time_zone_basis === 'carrier' && scan.raw.time_zone === carrierHomeZone(source));
@@ -159,7 +182,62 @@ export function replayParcel(parcel: StoredParcel): ReplayedChange[] {
     const ordered = [...scans].sort((a, b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt) || a.id.localeCompare(b.id));
     changes.push(...replayedClocks(parcel, source, ordered), ...replayedStages(parcel, source, ordered));
   }
-  return changes;
+  // A row the release leaves out as a copy goes; nothing else is written to it.
+  const copies = replayedCopies(parcel);
+  const gone = new Set(copies.map((copy) => copy.row));
+  return [...changes.filter((change) => !gone.has(change.row)), ...copies];
+}
+
+/**
+ * The rows of each universal provider, read as one answer by `withoutMinuteCopies`: a row it leaves out is a copy to
+ * the minute of the one row to the second in that minute with the same wording and stage, and goes; that row takes the
+ * copy's place when it has none, and the identity the sync gives it with the place when its own hashed its strings.
+ * Rows that name no provider are read together.
+ */
+function replayedCopies(parcel: StoredParcel): CopyChange[] {
+  if (!withoutMinuteCopies) return [];
+  const groups = new Map<string | null, StoredScan[]>();
+  for (const scan of parcel.events) {
+    if (sourceOf(scan) !== UNIVERSAL || scan.raw.observed_without_provider_timestamp === true) continue;
+    const provider = text(scan.raw[UNIVERSAL_PROVIDER]);
+    groups.set(provider, [...groups.get(provider) ?? [], scan]);
+  }
+  return [...groups].flatMap(([provider, scans]): CopyChange[] => {
+    if (scans.length < 2) return [];
+    // Newest first, as providers list them; each event names its row.
+    const listed = [...scans].sort((a, b) => Date.parse(b.occurredAt) - Date.parse(a.occurredAt) || a.id.localeCompare(b.id));
+    const result = withoutMinuteCopies({
+      events: listed.map((scan) => ({
+        ...(text(scan.raw.time) ? { time: scan.raw.time } : {}),
+        ...(text(scan.raw.local_time) ? { local_time: scan.raw.local_time } : {}),
+        description: scan.description, location: scan.location ?? '', stage: scan.stage,
+        ...(text(scan.raw.provider_code) ? { provider_code: scan.raw.provider_code } : {}),
+        row: scan.id,
+      })),
+    } as unknown as CarrierResult);
+    const kept = new Map(((result.events ?? []) as unknown as JsonObject[]).map((event) => [String(event.row), event]));
+    if (kept.size === listed.length) return [];
+    return listed.flatMap((copy): CopyChange[] => {
+      if (kept.has(copy.id)) return [];
+      // The row it copies: the one kept in its minute, to the second, with its wording and stage.
+      const at = Date.parse(copy.occurredAt);
+      const [stays, ...others] = listed.filter((scan) => kept.has(scan.id) && Date.parse(scan.occurredAt) % MINUTE_MS !== 0
+        && Date.parse(scan.occurredAt) - (Date.parse(scan.occurredAt) % MINUTE_MS) === at
+        && words(scan.description) === words(copy.description) && scan.stage === copy.stage);
+      if (!stays || others.length) return [];
+      const place = stays.location ? null : text(kept.get(stays.id)?.location) || null;
+      const hashed = providerEventId(UNIVERSAL, stays.raw.time, stays.location ?? '', stays.description) === stays.providerEventId;
+      const identity = place && hashed ? providerEventId(UNIVERSAL, stays.raw.time, place, stays.description) : stays.providerEventId;
+      const clash = identity !== stays.providerEventId
+        && parcel.events.some((other) => other.id !== stays.id && other.id !== copy.id && other.providerEventId === identity);
+      return [{
+        kind: 'copy', parcel: parcel.id, row: copy.id, source: UNIVERSAL, open: parcel.open,
+        from: new Date(at).toISOString(), to: stays.id, provider, previousProviderEventId: copy.providerEventId,
+        location: clash ? null : place, keptProviderEventId: stays.providerEventId,
+        providerEventId: clash ? stays.providerEventId : identity, clash,
+      }];
+    });
+  });
 }
 
 function replayedClocks(parcel: StoredParcel, source: string, ordered: StoredScan[]): ClockChange[] {
@@ -270,10 +348,13 @@ const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 /**
  * One transaction that writes the changes as the release would, each guarded on the row's stored
  * values, and steps the parcels back, each guarded on its saved stage, failing unless every one
- * applies. It ends open: the operator rolls it back for a dry run or commits it.
+ * applies. A copy is deleted after the other changes, and the row that stays then takes its place.
+ * It ends open: the operator rolls it back for a dry run or commits it.
  */
 export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): string {
-  const statements = changes.map((change) => change.kind === 'clock'
+  const copies = changes.filter((change): change is CopyChange => change.kind === 'copy');
+  const placed = copies.filter((copy) => copy.location !== null);
+  const statements = changes.filter((change) => change.kind !== 'copy').map((change) => change.kind === 'clock'
     ? `  update public.tracking_events set occurred_at = ${literal(change.to)}, provider_event_id = ${literal(change.providerEventId)},
     raw_data = raw_data || ${literal(JSON.stringify({ time: change.time, time_zone: change.timeZone, time_zone_basis: change.basis }))}::jsonb
    where id = ${literal(change.row)} and occurred_at = ${literal(change.from)} and provider_event_id = ${literal(change.previousProviderEventId)};
@@ -283,6 +364,14 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
       ? { stage: change.declared, stage_source: change.stageSource } : { stage_source: change.stageSource }))}::jsonb
    where id = ${literal(change.row)} and stage = ${literal(change.from)};
   get diagnostics n = row_count; total := total + n;`);
+  const deletions = copies.map((copy) => `  delete from public.tracking_events
+   where id = ${literal(copy.row)} and package_id = ${literal(copy.parcel)} and occurred_at = ${literal(copy.from)}
+     and provider_event_id = ${literal(copy.previousProviderEventId)};
+  get diagnostics n = row_count; total := total + n;`);
+  const places = placed.map((copy) => `  update public.tracking_events set location = ${literal(copy.location!)},
+    provider_event_id = ${literal(copy.providerEventId)}, raw_data = raw_data || ${literal(JSON.stringify({ location: copy.location }))}::jsonb
+   where id = ${literal(copy.to)} and coalesce(location, '') = '' and provider_event_id = ${literal(copy.keptProviderEventId)};
+  get diagnostics n = row_count; filled := filled + n;`);
   const parcels = stepBacks.map((step) => `  update public.packages set current_stage = ${literal(step.to)}
    where id = ${literal(step.parcel)} and current_stage = ${literal(step.from)};
   get diagnostics n = row_count; stepped := stepped + n;`);
@@ -290,10 +379,11 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
 begin;
 set local peek.hand_fix = 'stored-scan replay';
 do $$
-declare n int; total int := 0; stepped int := 0;
+declare n int; total int := 0; filled int := 0; stepped int := 0;
 begin
-${[...statements, ...parcels].join('\n')}
+${[...statements, ...deletions, ...places, ...parcels].join('\n')}
   if total <> ${changes.length} then raise exception 'replay: % of ${changes.length} rows changed', total; end if;
+  if filled <> ${placed.length} then raise exception 'replay: % of ${placed.length} rows given a copy''s place', filled; end if;
   if stepped <> ${stepBacks.length} then raise exception 'replay: % of ${stepBacks.length} parcels stepped back', stepped; end if;
 end $$;
 `;

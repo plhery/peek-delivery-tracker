@@ -140,6 +140,55 @@ describe('stored scan replay', () => {
     expect(replayParcel({ ...parcel({ ...copy, providerEventId: providerEventId('unknown', time, '', copy.description) }), carriers: ['gofo'] })).toEqual([]);
   });
 
+  it("deletes a universal provider's copy to the minute of its row to the second, which takes the copy's place", () => {
+    // An answer listed one scan twice in a minute, and both copies were stored (synthetic wording and places).
+    const copy = (id: string, time: string, location: string | null, raw: JsonObject = {}): StoredScan => ({
+      ...scan(id, 'unknown', time, 'in_transit', 'Departed from sorting center', { time, universal_provider: 'ParcelsApp', stage: 'in_transit', ...raw }),
+      providerEventId: providerEventId('unknown', time, location ?? '', 'Departed from sorting center'), location,
+    });
+    const minute = copy('minute', '2026-10-28T09:14:00Z', 'Example Town');
+    const second = copy('second', '2026-10-28T09:14:37Z', null);
+    const changes = replayParcel(parcel(second, minute));
+
+    expect(changes).toEqual([expect.objectContaining({
+      kind: 'copy', row: 'minute', from: '2026-10-28T09:14:00.000Z', to: 'second', provider: 'ParcelsApp', location: 'Example Town',
+      previousProviderEventId: minute.providerEventId, keptProviderEventId: second.providerEventId,
+      providerEventId: providerEventId('unknown', '2026-10-28T09:14:37Z', 'Example Town', 'Departed from sorting center'), clash: false,
+    })]);
+    const sql = replaySql(changes);
+    expect(sql).toContain(`delete from public.tracking_events
+   where id = 'minute' and package_id = 'parcel-1' and occurred_at = '2026-10-28T09:14:00.000Z'
+     and provider_event_id = '${minute.providerEventId}';`);
+    expect(sql).toContain(`where id = 'second' and coalesce(location, '') = '' and provider_event_id = '${second.providerEventId}';`);
+    expect(sql).toContain('if total <> 1 then raise exception');
+    expect(sql).toContain('if filled <> 1 then raise exception');
+
+    // A row to the second with its own place keeps it, and a row whose identity does not hash its strings keeps that.
+    expect(replayParcel(parcel({ ...second, location: 'Example Town' }, minute)))
+      .toEqual([expect.objectContaining({ kind: 'copy', row: 'minute', location: null, providerEventId: second.providerEventId })]);
+    expect(replayParcel(parcel({ ...second, providerEventId: 'unknown:kept' }, minute)))
+      .toEqual([expect.objectContaining({ kind: 'copy', location: 'Example Town', providerEventId: 'unknown:kept' })]);
+    // Rows that name no provider are read together, as one answer.
+    expect(replayParcel(parcel(copy('second', '2026-10-28T09:14:37Z', null, { universal_provider: undefined }),
+      copy('minute', '2026-10-28T09:14:00Z', null, { universal_provider: undefined })))).toEqual([expect.objectContaining({ kind: 'copy', row: 'minute' })]);
+  });
+
+  it("leaves rows to the minute another provider, another minute, wording or stage, or two rows to the second share", () => {
+    const at = (id: string, time: string, raw: JsonObject = {}, description = 'Departed from sorting center', stage = 'in_transit') =>
+      scan(id, 'unknown', time, stage, description, { time, universal_provider: 'ParcelsApp', stage, ...raw });
+    const minute = at('minute', '2026-10-28T09:14:00Z');
+    const copies = (...scans: StoredScan[]) => replayParcel(parcel(...scans)).filter((change) => change.kind === 'copy');
+    for (const second of [
+      at('second', '2026-10-28T09:14:37Z', { universal_provider: '17TRACK' }),
+      at('second', '2026-10-28T09:15:37Z'),
+      at('second', '2026-10-28T09:14:37Z', {}, 'Arrived at sorting center'),
+      at('second', '2026-10-28T09:14:37Z', {}, 'Departed from sorting center', 'out_for_delivery'),
+    ]) expect(copies(second, minute), JSON.stringify(second)).toEqual([]);
+    expect(copies(at('second', '2026-10-28T09:14:37Z'), at('again', '2026-10-28T09:14:52Z'), minute)).toEqual([]);
+    // A carrier's scan stored under a copy's identity is the carrier's, not a provider's answer.
+    expect(copies(at('second', '2026-10-28T09:14:37Z'), { ...minute, providerEventId: 'dhl:minute' })).toEqual([]);
+  });
+
   it('writes one transaction, left open, that fails unless every guarded row changes', () => {
     const changes = replayParcel(parcel(
       scan('origin', 'gofo', '2026-10-19T10:00:00Z', 'in_transit', 'Arrived at GOFO Regional Origin Hub', { provider_code: '202', stage: 'in_transit' }),

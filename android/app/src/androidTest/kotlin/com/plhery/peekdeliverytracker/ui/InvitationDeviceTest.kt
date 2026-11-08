@@ -634,7 +634,8 @@ class InvitationDeviceTest {
 
     /**
      * C-G07: the profile's sheet shows its grabber and a throw down on it closes the sheet. C-G06: a finger dragging the
-     * sheet down takes the nickname's keyboard down with it, the sheet staying, where the device shows a keyboard.
+     * sheet down takes the nickname's keyboard down with it, and its focus, the sheet staying, where the device shows a
+     * keyboard.
      * C-G11: the nickname asks for Done and sentence capitals, and Done lets the field go. C-G07: while it joins, the
      * sheet stays against a throw and the system's back; joined, it closes.
      */
@@ -669,6 +670,7 @@ class InvitationDeviceTest {
             compose.waitUntil(KEYBOARD_MILLIS) { keyboardHeight() == 0 }
             awaitKeyboardStill()
             assertTrue(exists(INVITATION_SHEET))
+            compose.onNodeWithTag(FRIENDS_NICKNAME).assertIsNotFocused()
             shots.take("C-G06-sheet-keyboard-down")
         }
         if (!compose.onAllNodes(hasTestTag(FRIENDS_NICKNAME) and isFocused()).fetchSemanticsNodes().any()) {

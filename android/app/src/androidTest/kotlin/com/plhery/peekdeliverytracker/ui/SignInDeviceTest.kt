@@ -24,6 +24,7 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -444,8 +445,9 @@ class SignInDeviceTest {
 
     /**
      * C-G06: with the keyboard up on the address, a finger just above its field dragged down 0.8 of the keyboard's
-     * height takes the keyboard down with it, and it goes on down once the finger lifts. Skipped where the device shows
-     * no keyboard on the screen.
+     * height takes the keyboard down with it, and it goes on down once the finger lifts; the address gives up the
+     * focus with it, no caret left, as the field dismissed interactively resigns its first responder. Skipped where the
+     * device shows no keyboard on the screen.
      */
     @Test
     fun aDragDownTakesTheKeyboardDown() {
@@ -464,6 +466,7 @@ class SignInDeviceTest {
             .onFailure { fail("The keyboard still up: ${layoutNow()}. Events: ${events.joinToString()}") }
         awaitStill()
         assertTrue(exists(EMAIL_FIELD))
+        compose.onNodeWithTag(EMAIL_FIELD).assertIsNotFocused()
         shots.take("C-G06-sign-in-keyboard-down")
     }
 

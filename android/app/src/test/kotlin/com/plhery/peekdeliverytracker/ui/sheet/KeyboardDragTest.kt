@@ -10,9 +10,11 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Velocity
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlin.coroutines.coroutineContext
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -26,14 +28,21 @@ import org.junit.runner.RunWith
  * scrolls has left, as a sheet closing under the finger does, the window's answers that come after are let go without
  * throwing, and a controller handed then is finished at once where the keyboard stands, not left half way. A scroll
  * with no finger on what scrolls (a field brought into view) leaves the keyboard alone, and a controller that comes
- * once the finger has lifted is given back at once: the keyboard is never left in the app's hands.
+ * once the finger has lifted is given back at once: the keyboard is never left in the app's hands. A drag that ends
+ * with the keyboard hidden, held down or thrown, ends the editing, as the field dismissed interactively resigns its
+ * first responder; one that ends with it shown, or a sheet that leaves, keeps it.
  */
 @RunWith(AndroidJUnit4::class)
 class KeyboardDragTest {
     /** What asked the window for control of the keyboard, in order. */
     private val asked = mutableListOf<WindowInsetsAnimationControlListener>()
     private var shown = false
-    private val drag = KeyboardDrag(Density(2f), shown = { shown }) { listener, _ -> asked += listener }
+
+    /** How many times the editing was ended. */
+    private var endedEditing = 0
+    private val drag = KeyboardDrag(Density(2f), shown = { shown }, endEditing = { endedEditing++ }) { listener, _ ->
+        asked += listener
+    }
 
     /** The window's control of a keyboard [height] pixels tall, its top [bottom] pixels above the window's foot. */
     private class Controller(bottom: Int, private val height: Int = 600) : WindowInsetsAnimationController {
@@ -67,11 +76,12 @@ class KeyboardDragTest {
         override fun isCancelled(): Boolean = false
     }
 
-    /** A frame every 16 ms, each at once. */
+    /** A frame every 16 ms, each at once; an animation cancelled waits for none, as with a screen's frames. */
     private class Frames : MonotonicFrameClock {
         private var now = 0L
 
         override suspend fun <R> withFrameNanos(onFrame: (frameTimeNanos: Long) -> R): R {
+            coroutineContext.ensureActive()
             now += 16_000_000L
             return onFrame(now)
         }
@@ -96,6 +106,8 @@ class KeyboardDragTest {
         assertEquals(listOf(false), late.finished)
         asked.single().onFinished(late)
         assertEquals(listOf(false), late.finished)
+        // The sheet has left: the field it had goes with it, nothing to end.
+        assertEquals(0, endedEditing)
     }
 
     @Test
@@ -128,6 +140,40 @@ class KeyboardDragTest {
         assertEquals(600, controller.currentInsets.bottom)
         assertEquals(listOf(true), controller.finished)
         assertEquals(1, asked.size)
+        assertEquals(0, endedEditing)
+    }
+
+    @Test
+    fun aDragThatHoldsTheKeyboardAllTheWayDownEndsTheEditing() = runTest(Frames()) {
+        shown = true
+        drag.pressed = true
+        assertEquals(Offset(0f, 30f), drag.onPreScroll(Offset(0f, 30f), NestedScrollSource.UserInput))
+        val controller = Controller(bottom = 600)
+        asked.single().onReady(controller, WindowInsets.Type.ime())
+        // Down the keyboard's height and more: it stops at the window's foot.
+        drag.onPreScroll(Offset(0f, 700f), NestedScrollSource.UserInput)
+        assertEquals(0, controller.currentInsets.bottom)
+        drag.pressed = false
+        assertEquals(Velocity.Zero, drag.onPreFling(Velocity.Zero))
+        drag.onPostFling(Velocity.Zero, Velocity.Zero)
+        assertEquals(listOf(false), controller.finished)
+        assertEquals(1, endedEditing)
+    }
+
+    @Test
+    fun aThrowDownThatSendsTheKeyboardOnDownEndsTheEditing() = runTest(Frames()) {
+        shown = true
+        drag.pressed = true
+        drag.onPreScroll(Offset(0f, 30f), NestedScrollSource.UserInput)
+        val controller = Controller(bottom = 600)
+        asked.single().onReady(controller, WindowInsets.Type.ime())
+        drag.onPreScroll(Offset(0f, 100f), NestedScrollSource.UserInput)
+        assertEquals(500, controller.currentInsets.bottom)
+        // Let go fast down: the keyboard goes on to the window's foot.
+        drag.pressed = false
+        drag.onPreFling(Velocity(0f, 8_000f))
+        assertEquals(listOf(false), controller.finished)
+        assertEquals(1, endedEditing)
     }
 
     @Test

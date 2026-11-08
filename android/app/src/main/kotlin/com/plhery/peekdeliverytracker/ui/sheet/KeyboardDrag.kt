@@ -21,7 +21,8 @@
  * that came after its modifier had left (a sheet dragged as it closed) resumed it again and threw. Only a finger on
  * what scrolls moves the keyboard ([keyboardDrag]): Compose hands a field brought into view on as a drag too, which
  * took control of the keyboard, slid it part way down and kept it there. A controller that comes once the finger has
- * lifted with nothing waiting for it is finished at once, never kept.
+ * lifted with nothing waiting for it is finished at once, never kept. A drag that ends with the keyboard hidden ends
+ * the editing too: the field gives up the focus, and with it the caret.
  */
 package com.plhery.peekdeliverytracker.ui.sheet
 
@@ -50,6 +51,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Velocity
@@ -63,7 +65,8 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 /**
  * A drag of what scrolls taking the keyboard down with the finger and back up, on to shown or hidden as the finger
  * lets go (`.scrollDismissesKeyboard(.interactively)`): the connection for its nested scroll, through the window's
- * control of the keyboard's insets, given back as it leaves.
+ * control of the keyboard's insets, given back as it leaves. Taken all the way down, the keyboard takes the focus with
+ * it, as the field dismissed interactively resigns its first responder: no caret is left in a field with no keyboard.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -71,8 +74,9 @@ internal fun rememberKeyboardDrag(): KeyboardDrag {
     val view = LocalView.current
     val density = LocalDensity.current
     val shown by rememberUpdatedState(WindowInsets.isImeVisible)
+    val focus by rememberUpdatedState(LocalFocusManager.current)
     val drag = remember(view, density) {
-        KeyboardDrag(density, shown = { shown }) { listener, signal ->
+        KeyboardDrag(density, shown = { shown }, endEditing = { focus.clearFocus() }) { listener, signal ->
             view.windowInsetsController?.controlWindowInsetsAnimation(android.view.WindowInsets.Type.ime(), -1, null, signal, listener)
         }
     }
@@ -102,13 +106,15 @@ internal fun Modifier.keyboardDrag(drag: KeyboardDrag): Modifier = this
 
 /**
  * The keyboard moved by the scroll it is handed: a drag down moves it down before what scrolls takes the drag, a drag
- * up what is left of it once that has scrolled to its top; a fling ends it shown or hidden. [shown] is whether the
- * keyboard is up, as the window's insets tell; [control] asks the window for control of the keyboard's insets, answered
- * through this listener. Once [dispose]d, nothing waits on it and what the window answers after is let go.
+ * up what is left of it once that has scrolled to its top; a fling ends it shown or hidden, and [endEditing] once it
+ * ends hidden. [shown] is whether the keyboard is up, as the window's insets tell; [control] asks the window for
+ * control of the keyboard's insets, answered through this listener. Once [dispose]d, nothing waits on it and what the
+ * window answers after is let go.
  */
 internal class KeyboardDrag(
     private val density: Density,
     private val shown: () -> Boolean,
+    private val endEditing: () -> Unit,
     private val control: (WindowInsetsAnimationControlListener, CancellationSignal) -> Unit,
 ) : NestedScrollConnection, WindowInsetsAnimationControlListener {
     /** The window's controller of the keyboard's insets, once it has handed one. */
@@ -210,8 +216,7 @@ internal class KeyboardDrag(
         val up = controller.shownStateInsets.bottom
         val current = controller.currentInsets.bottom
         if ((amount <= 0f && current == hidden) || (amount >= 0f && current == up)) {
-            controller.finish(current == up)
-            this.controller = null
+            finish(controller, current == up)
             return Velocity.Zero
         }
         val spec = SplineBasedFloatDecayAnimationSpec(density)
@@ -227,8 +232,7 @@ internal class KeyboardDrag(
                             move(value)
                         } else {
                             left = velocity
-                            controller.finish(endsShown)
-                            this@KeyboardDrag.controller = null
+                            finish(controller, endsShown)
                             animation?.cancel()
                         }
                     }
@@ -242,11 +246,17 @@ internal class KeyboardDrag(
         coroutineScope {
             animation = launch {
                 Animatable(current.toFloat()).animateTo((if (endsShown) up else hidden).toFloat(), initialVelocity = amount) { move(value) }
-                controller.finish(endsShown)
-                this@KeyboardDrag.controller = null
+                finish(controller, endsShown)
             }
         }
         return Velocity(0f, available.y)
+    }
+
+    /** Gives [controller] back, the keyboard [endsShown] or hidden as the drag ends: hidden, the editing ends with it. */
+    private fun finish(controller: WindowInsetsAnimationController, endsShown: Boolean) {
+        controller.finish(endsShown)
+        this.controller = null
+        if (!endsShown && !disposed) endEditing()
     }
 
     /** The keyboard's top `bottom` pixels above the window's foot. */

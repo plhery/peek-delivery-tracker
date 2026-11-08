@@ -1215,13 +1215,13 @@ and `GRAFANA_METRICS_UID`.
    audit row and, for an outage, its `tracking_health_incident` recovery line.
 
 FedEx network retries are measured by `fedex_network_attempt_total`: selected route,
-observed connection family, outcome and whether dated history was returned. Compare
-`attempt="retry"` recovery rates for `route="default"`, `route="datacenter"` and
-`route="residential"` over the same window, together with counts and
-`fedex_network_attempt_duration_seconds`. The proxied routes' family stays unknown; on the
-default route, unknown means no connection was observed. A proxied retry whose worker
+observed connection family, outcome and whether dated history was returned. With
+`FEDEX_DATACENTER_TRAWL_URL` set every `attempt="retry"` is `route="datacenter"`, without it
+`route="default"`; read recovery rates with their counts and
+`fedex_network_attempt_duration_seconds`. The datacenter route's family stays unknown; on the
+default route, unknown means no connection was observed. A datacenter retry whose worker
 cannot prove that both the page and FedEx's API went through its route fails as
-`datacenter_unverified` or `residential_unverified`. Proxied retries that end in
+`datacenter_unverified`. Datacenter retries that end in
 `outcome="transport"` usually mean the proxy's exit is down rather than FedEx refusing it.
 First browser attempts, including those after optional API credentials fail, remain
 `attempt="initial"`.
@@ -1232,27 +1232,3 @@ running lookup's lease and refuses every other one (`fedex_retry_proxy_unleased_
 so nothing is carried between lookups and the series adds up to the worker's own
 `fedex_retry_proxy_bytes_total` except for replies lost in transport. These counters are
 usage estimates to reconcile with the proxy provider's statistics, not invoices.
-
-While `FEDEX_RETRY_TRIAL` names a trial, the `fedex_retry_trial_*` gauges show it from the
-attempts kept in `retry_route_trial_attempts` and its start and end in `retry_route_trials`,
-so they carry on across deploys: `fedex_retry_trial_attempts{period="trial"}` by route and
-outcome (`running` until an attempt settles, `byte_allowance` for a failed attempt the worker
-cut at its allowance, `not_started` for a reservation answered too late to use),
-`fedex_retry_trial_histories`, `fedex_retry_trial_bytes` proven per route, `charged` against
-the residential cap and, of that, `reserved` by residential attempts still running,
-`fedex_retry_trial_state` with its phase and end reason (`samples`, `bytes` or `deadline`),
-`fedex_retry_trial_time_seconds` and `fedex_retry_trial_limit` (attempts, residential bytes,
-and each residential attempt's worker `allowance_bytes` and `margin_bytes`).
-`period="after"` counts the datacenter retries since the process started once the trial
-ended. The comparison is dated-history recovery out of all attempts of a route.
-
-A residential attempt starts only once `reserve_retry_route_trial_attempt` has saved it
-under the trial's row lock, charged its allowance plus the margin; one runs at a time, and
-an attempt waits at most 3 seconds (or a quarter of the lookup's remaining time) for the
-answer before it takes the datacenter route. The worker cuts the attempt at its allowance.
-A verified proof replaces the charge with its bytes plus the margin; a cut, lost or unproven
-attempt keeps the whole reservation. The trial ends, for good, in the database: on its
-bytes once the next reservation would pass the cap, on its samples, or at its deadline.
-`phase="unavailable"` means a store call failed (`retry_trial_store_failed` in the logs):
-retries take the datacenter route, and the residential one waits a minute before asking
-again.

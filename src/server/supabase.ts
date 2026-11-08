@@ -1,8 +1,6 @@
 import 'server-only';
 
-import type {
-  DpdSession, RetryRouteAttempt, RetryRouteReservation, RetryRouteReservationRequest, RetryRouteTrialState, TrialEnd,
-} from 'universal-parcel-scraper/node';
+import type { DpdSession } from 'universal-parcel-scraper/node';
 import type { ApiGiftWords } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
@@ -115,10 +113,6 @@ function query(
     ).toString();
   }
   return new URLSearchParams(entries as Record<string, string>).toString();
-}
-
-function isTrialEnd(value: unknown): value is TrialEnd {
-  return value === 'samples' || value === 'bytes' || value === 'deadline';
 }
 
 function rows(value: unknown): JsonObject[] {
@@ -2444,110 +2438,6 @@ export class SupabaseServiceClient extends SupabaseClient {
       body: [{ token: session.token, opened_at: time(session.openedAt), checked_at: time(session.checkedAt), refused_at: time(session.refusedAt) }],
       prefer: 'resolution=merge-duplicates,return=minimal',
     });
-  }
-
-  /** A retry route trial's attempts, start and end, dropping malformed rows. */
-  async retryRouteTrialState(trial: string): Promise<RetryRouteTrialState> {
-    const time = (value: unknown) => typeof value === 'string' ? Date.parse(value) : Number.NaN;
-    const count = (value: unknown) => {
-      const number = typeof value === 'number' ? value : typeof value === 'string' ? Number(value) : Number.NaN;
-      return Number.isSafeInteger(number) && number >= 0 ? number : undefined;
-    };
-    const [attempts, trials] = await Promise.all([
-      this.request(`/rest/v1/retry_route_trial_attempts?${query([
-        ['select', 'id,trial,route,assigned_at,settled_at,outcome,history,bytes,reserved_bytes,charged_bytes'],
-        ['trial', `eq.${trial}`],
-        ['order', 'assigned_at.asc'],
-        ['limit', '5000'],
-      ])}`),
-      this.request(`/rest/v1/retry_route_trials?${query([
-        ['select', 'trial,started_at,ended_at,end_reason'],
-        ['trial', `eq.${trial}`],
-      ])}`),
-    ]);
-    const state: RetryRouteTrialState = { attempts: rows(attempts).flatMap((row): RetryRouteAttempt[] => {
-      const assignedAt = time(row.assigned_at), settledAt = time(row.settled_at);
-      if (typeof row.id !== 'string' || row.trial !== trial || (row.route !== 'datacenter' && row.route !== 'residential')
-        || !Number.isFinite(assignedAt)) return [];
-      const bytes = count(row.bytes), reservedBytes = count(row.reserved_bytes), chargedBytes = count(row.charged_bytes);
-      // A residential attempt without its reservation would hide its bytes from the cap.
-      if (row.route === 'residential' && (reservedBytes === undefined || chargedBytes === undefined)) {
-        throw new TypeError('Invalid retry route trial attempt');
-      }
-      return [{
-        id: row.id, trial, route: row.route, assignedAt,
-        ...(Number.isFinite(settledAt) ? { settledAt } : {}),
-        ...(typeof row.outcome === 'string' ? { outcome: row.outcome } : {}),
-        ...(typeof row.history === 'boolean' ? { history: row.history } : {}),
-        ...(bytes === undefined ? {} : { bytes }),
-        ...(row.route === 'residential' ? { reservedBytes, chargedBytes } : {}),
-      }];
-    }) };
-    const row = rows(trials).find((candidate) => candidate.trial === trial);
-    if (row) {
-      const startedAt = time(row.started_at), endedAt = time(row.ended_at);
-      if (!Number.isFinite(startedAt)) throw new TypeError('Invalid retry route trial');
-      state.startedAt = startedAt;
-      if (row.end_reason !== null && row.end_reason !== undefined) {
-        if (!isTrialEnd(row.end_reason) || !Number.isFinite(endedAt)) throw new TypeError('Invalid retry route trial');
-        state.end = { reason: row.end_reason, at: endedAt };
-      }
-    }
-    return state;
-  }
-
-  /**
-   * Saves a datacenter attempt under its id, or a residential attempt's settlement:
-   * a residential attempt is created only by its reservation, and keeps it.
-   */
-  async saveRetryRouteTrialAttempt(attempt: RetryRouteAttempt): Promise<void> {
-    const time = (ms: number | undefined) => ms === undefined ? null : new Date(ms).toISOString();
-    const settlement = { settled_at: time(attempt.settledAt), outcome: attempt.outcome ?? null, history: attempt.history ?? null, bytes: attempt.bytes ?? null };
-    if (attempt.route === 'residential') {
-      await this.request(`/rest/v1/retry_route_trial_attempts?${query([
-        ['id', `eq.${attempt.id}`], ['trial', `eq.${attempt.trial}`], ['route', 'eq.residential'],
-      ])}`, {
-        method: 'PATCH',
-        body: { ...settlement, ...(attempt.chargedBytes === undefined ? {} : { charged_bytes: attempt.chargedBytes }) },
-        prefer: 'return=minimal',
-      });
-      return;
-    }
-    await this.request(`/rest/v1/retry_route_trial_attempts?${query({ on_conflict: 'id' })}`, {
-      method: 'POST',
-      body: [{ id: attempt.id, trial: attempt.trial, route: attempt.route, assigned_at: time(attempt.assignedAt), ...settlement }],
-      prefer: 'resolution=merge-duplicates,return=minimal',
-    });
-  }
-
-  /** Reserves a residential retry attempt's bytes under the trial's lock, or says why not. */
-  async reserveRetryRouteTrialAttempt(request: RetryRouteReservationRequest): Promise<RetryRouteReservation> {
-    const { attempt } = request;
-    if (attempt.route !== 'residential' || attempt.reservedBytes === undefined) throw new TypeError('A reservation is for a residential attempt');
-    const result = await this.request('/rest/v1/rpc/reserve_retry_route_trial_attempt', { method: 'POST', body: {
-      p_id: attempt.id, p_trial: attempt.trial, p_assigned_at: new Date(attempt.assignedAt).toISOString(),
-      p_reserved_bytes: attempt.reservedBytes, p_target_attempts: request.targetAttempts,
-      p_max_residential_bytes: request.maxResidentialBytes, p_duration_ms: Math.round(request.durationMs),
-      p_lease_ms: Math.round(request.leaseMs),
-    } });
-    if (isRecord(result)) {
-      if (result.granted === true && typeof result.started_at === 'string' && Number.isFinite(Date.parse(result.started_at))) {
-        return { granted: true, startedAt: Date.parse(result.started_at) };
-      }
-      if (result.granted === false && result.busy === true) return { granted: false, busy: true };
-      if (result.granted === false && isTrialEnd(result.end_reason) && typeof result.ended_at === 'string'
-        && Number.isFinite(Date.parse(result.ended_at))) {
-        return { granted: false, end: { reason: result.end_reason, at: Date.parse(result.ended_at) } };
-      }
-    }
-    throw new TypeError('Invalid retry route reservation response');
-  }
-
-  /** Records a retry route trial's end, unless it already has one. */
-  async endRetryRouteTrial(trial: string, end: { reason: TrialEnd; at: number }): Promise<void> {
-    await this.request('/rest/v1/rpc/end_retry_route_trial', { method: 'POST', body: {
-      p_trial: trial, p_reason: end.reason, p_at: new Date(end.at).toISOString(),
-    } });
   }
 
   /**

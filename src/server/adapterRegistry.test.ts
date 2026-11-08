@@ -41,21 +41,12 @@ it('gives every environment of the process one fetcher per proxy setting, so loo
   expect(() => hostAdapterEnvironment({ TRACKING_PROXY_ROUTES: '[]' })).toThrow(TypeError);
 });
 
-it('constructs an independent host-owned residential route', () => {
-  const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test:8192' });
-  expect(env.trawlRoutes?.['fedex-residential']).toBeInstanceOf(HostTrawlClient);
-  expect(env.trawlRoutes?.['fedex-residential']?.scrapeUrl().hostname).toBe('residential.test');
-  expect(env.trawlRoutes?.['fedex-residential']).not.toBe(env.trawl);
-});
-
-it('adds the datacenter route beside the residential one, and keeps a trial only with both routes and a name', () => {
-  const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test', FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test:8192' });
+it('constructs an independent host-owned datacenter route for FedEx\'s retry, and no other', () => {
+  const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test', FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test:8192',
+    FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test:8192' });
+  expect(env.trawlRoutes?.['fedex-datacenter']).toBeInstanceOf(HostTrawlClient);
   expect(env.trawlRoutes?.['fedex-datacenter']?.scrapeUrl().hostname).toBe('datacenter.test');
-  expect(env.trawlRoutes?.['fedex-residential']).toBeUndefined();
-  expect(env.retryTrialStores).toBeUndefined();
-  const both = hostAdapterEnvironment({ FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test:8192', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test:8192' });
-  expect(Object.keys(both.trawlRoutes ?? {}).sort()).toEqual(['fedex-datacenter', 'fedex-residential']);
-  // Without a database the trial has nowhere to keep its limits, so the scraper sends every retry to the datacenter route.
-  expect(hostAdapterEnvironment({ FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test',
-    FEDEX_RETRY_TRIAL: 'example' }).retryTrialStores).toBeUndefined();
+  expect(env.trawlRoutes?.['fedex-datacenter']).not.toBe(env.trawl);
+  expect(Object.keys(env.trawlRoutes ?? {})).toEqual(['fedex-datacenter']);
+  expect(hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test' }).trawlRoutes).toBeUndefined();
 });

@@ -3,7 +3,7 @@ import 'server-only';
 import * as Sentry from '@sentry/node';
 import { Counter, Gauge, Histogram, Registry, collectDefaultMetrics, type LabelValues } from '@prometheus-io/client';
 import { CarrierError, NoHistoryError } from 'universal-parcel-scraper';
-import { METRICS, type LookupRecord, type RetryRouteTrialSnapshot, type StepOutcome, type StepRecord, type StepRecorder } from 'universal-parcel-scraper/node';
+import { METRICS, type LookupRecord, type StepOutcome, type StepRecord, type StepRecorder } from 'universal-parcel-scraper/node';
 import { initObservability } from './observability';
 import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './trackingFailure';
 
@@ -50,12 +50,6 @@ interface PrometheusRuntime {
   browserNetworkDuration: Histogram<'carrier' | 'attempt' | 'route' | 'outcome'>;
   fedexNetworkTotal: Counter<'attempt' | 'route' | 'family' | 'outcome' | 'history'>;
   fedexNetworkDuration: Histogram<'attempt' | 'route' | 'outcome'>;
-  retryTrialAttempts: Gauge<'period' | 'route' | 'outcome'>;
-  retryTrialHistories: Gauge<'period' | 'route'>;
-  retryTrialBytes: Gauge<'period' | 'route' | 'measure'>;
-  retryTrialState: Gauge<'trial' | 'phase' | 'end_reason'>;
-  retryTrialTime: Gauge<'event'>;
-  retryTrialLimit: Gauge<'limit'>;
   statusMappingTotal: Counter<'carrier' | 'stage_source'>;
   detectionTotal: Counter<'result'>;
   refreshTotal: Counter<'carrier' | 'served_by' | 'outcome'>;
@@ -161,36 +155,6 @@ function createRuntime(): PrometheusRuntime {
       help: 'FedEx browser attempt time by selected network route.',
       labelNames: ['attempt', 'route', 'outcome'] as const,
       buckets: [1, 3, 5, 10, 20, 30, 45, 60], registers: [registry],
-    }),
-    retryTrialAttempts: new Gauge({
-      name: 'fedex_retry_trial_attempts',
-      help: 'FedEx retry trial attempts by period (trial, after), route and step outcome; running while unsettled. Kept across deploys during the trial.',
-      labelNames: ['period', 'route', 'outcome'] as const, registers: [registry],
-    }),
-    retryTrialHistories: new Gauge({
-      name: 'fedex_retry_trial_histories',
-      help: 'FedEx retry trial attempts that returned dated history, by period and route.',
-      labelNames: ['period', 'route'] as const, registers: [registry],
-    }),
-    retryTrialBytes: new Gauge({
-      name: 'fedex_retry_trial_bytes',
-      help: 'FedEx retry trial tunnel bytes by period and route: proven by the workers, charged against the residential cap (a verified proof plus the margin, the whole reservation otherwise), or reserved by residential attempts still running. Not the provider bill.',
-      labelNames: ['period', 'route', 'measure'] as const, registers: [registry],
-    }),
-    retryTrialState: new Gauge({
-      name: 'fedex_retry_trial_state',
-      help: 'The FedEx retry trial by name, phase (loading, unavailable, active, complete) and why it ended; 1 for the current one.',
-      labelNames: ['trial', 'phase', 'end_reason'] as const, registers: [registry],
-    }),
-    retryTrialTime: new Gauge({
-      name: 'fedex_retry_trial_time_seconds',
-      help: 'When the FedEx retry trial started, reaches its deadline and ended, in Unix seconds.',
-      labelNames: ['event'] as const, registers: [registry],
-    }),
-    retryTrialLimit: new Gauge({
-      name: 'fedex_retry_trial_limit',
-      help: 'The FedEx retry trial limits: attempts per route, residential bytes, and each residential attempt\'s worker allowance and charged margin.',
-      labelNames: ['limit'] as const, registers: [registry],
     }),
     statusMappingTotal: new Counter({
       name: METRICS.statusMappingTotal,
@@ -412,40 +376,6 @@ export function stepOutcome(outcome: StepOutcome, error: unknown): string {
 /** The selected route, never relabelled: an unknown value is counted as `other`, not as another route. */
 function networkRoute(route: StepRecord['networkRoute'] | string): 'default' | 'datacenter' | 'residential' | 'other' {
   return route === 'default' || route === 'datacenter' || route === 'residential' ? route : 'other';
-}
-
-// On globalThis: the route that runs the trial and the metrics route are separate bundles,
-// each with its own copy of this module.
-const globalTrialSource = globalThis as typeof globalThis & { __deliveryRetryTrialSource?: (() => RetryRouteTrialSnapshot) | null };
-
-/** Gives the metrics the running FedEx retry trial, read at each scrape. */
-export function setRetryTrialSource(source: (() => RetryRouteTrialSnapshot) | null): void { globalTrialSource.__deliveryRetryTrialSource = source; }
-
-function refreshRetryTrial(): void {
-  const gauges = [runtime.retryTrialAttempts, runtime.retryTrialHistories, runtime.retryTrialBytes,
-    runtime.retryTrialState, runtime.retryTrialTime, runtime.retryTrialLimit];
-  for (const gauge of gauges) gauge.reset();
-  let snapshot: RetryRouteTrialSnapshot | null = null;
-  try { snapshot = globalTrialSource.__deliveryRetryTrialSource?.() ?? null; } catch { snapshot = null; }
-  if (!snapshot) return;
-  const periods = [['trial', 'datacenter', snapshot.routes.datacenter], ['trial', 'residential', snapshot.routes.residential],
-    ['after', 'datacenter', snapshot.after]] as const;
-  for (const [period, route, tally] of periods) {
-    for (const [outcome, count] of Object.entries(tally.outcomes)) runtime.retryTrialAttempts.set({ period, route, outcome }, count);
-    runtime.retryTrialAttempts.set({ period, route, outcome: 'running' }, tally.attempts - tally.settled);
-    runtime.retryTrialHistories.set({ period, route }, tally.history);
-    runtime.retryTrialBytes.set({ period, route, measure: 'proven' }, tally.bytes);
-  }
-  runtime.retryTrialBytes.set({ period: 'trial', route: 'residential', measure: 'charged' }, snapshot.chargedResidentialBytes);
-  runtime.retryTrialBytes.set({ period: 'trial', route: 'residential', measure: 'reserved' }, snapshot.reservedResidentialBytes);
-  runtime.retryTrialState.set({ trial: snapshot.trial, phase: snapshot.phase, end_reason: snapshot.endReason ?? 'none' }, 1);
-  for (const [event, at] of [['started', snapshot.startedAt], ['deadline', snapshot.deadlineAt], ['ended', snapshot.endedAt]] as const) {
-    if (at !== null) runtime.retryTrialTime.set({ event }, at / 1000);
-  }
-  runtime.retryTrialLimit.set({ limit: 'attempts' }, snapshot.targetAttempts);
-  runtime.retryTrialLimit.set({ limit: 'residential_bytes' }, snapshot.maxResidentialBytes);
-  runtime.retryTrialLimit.set({ limit: 'allowance_bytes' }, snapshot.allowanceBytes);
-  runtime.retryTrialLimit.set({ limit: 'margin_bytes' }, snapshot.marginBytes);
 }
 
 export const prometheusStepRecorder: StepRecorder = {
@@ -735,7 +665,6 @@ export function recordPublicLookupUsage(summary: UsageStats & { detection: Usage
 export async function metricsText(): Promise<string> {
   // A series created while this reply renders may be missing from it: it waits for the next.
   const shown = [...runtime.held.keys()];
-  refreshRetryTrial();
   const text = await registry.metrics();
   for (const key of shown) {
     for (const update of runtime.held.get(key) ?? []) update();

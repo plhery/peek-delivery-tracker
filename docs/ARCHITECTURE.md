@@ -214,7 +214,11 @@ Key server modules:
     requests.
     The browser is asked for the permission, and subscribes, only on "Turn on". It reuses
     the subscription an account or another parcel already made, so turning one alert off
-    leaves the subscription in place. The calendar file is made in the browser.
+    leaves the subscription in place. Turning the account's alerts off, signing out or
+    deleting the account keeps it too while link alerts use it, once the server has dropped
+    the account's row. When the server can't be told, or the account replaces a subscription
+    the push service dropped, the browser takes a new subscription and moves its link alerts
+    there. The calendar file is made in the browser.
   - The iPhone app follows a link without an account and holds its alert with its APNs
     device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`).
     Browsers and iPhones share the same ten, and an iPhone the parcel's account already

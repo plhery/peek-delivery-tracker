@@ -8,7 +8,7 @@ import { deleteAccount, downloadAccountExport, exportAccount } from './lib/accou
 import {
   disablePushNotifications,
   followPushNotificationLocale,
-  unsubscribePushNotificationsLocally,
+  releasePushSubscription,
 } from './lib/pushNotifications';
 import { useFollowLanguage } from './lib/followLanguage';
 import { browserStorage, clearApiCache, createApiRepo } from './store/apiRepo';
@@ -97,7 +97,8 @@ export function ApiAccount({ auth, experience, invitation, demoAddress, linkId, 
     if (!apiAuth) return;
     await deleteAccount(apiAuth, confirmation);
     apiAuth.signal?.throwIfAborted();
-    void unsubscribePushNotificationsLocally().catch(() => undefined);
+    // The account's push rows went with it; alerts on parcel links keep the browser's subscription.
+    void releasePushSubscription().catch(() => undefined);
     clearApiCache(storage, apiAuth.userId);
     await signOut();
     navigate('welcome');

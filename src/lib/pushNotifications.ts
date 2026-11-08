@@ -1,5 +1,7 @@
 import { authenticatedFetch, type ApiAuth } from './apiClient';
 import type { Locale } from '../i18n';
+import { linkAlertsUse, moveLinkAlerts } from '../peek/alerts';
+import { decodePublicKey } from './pushKey';
 import type {
   ApiOkResponse,
   ApiNotificationPreferences,
@@ -158,13 +160,17 @@ export async function enablePushNotifications(
   if (!existing) return register(await subscribe(), true);
   if (await register(existing, false)) return true;
   // A kept subscription can be one the push service already dropped. Replace it
-  // once rather than registering an endpoint that cannot receive alerts.
+  // once rather than registering an endpoint that cannot receive alerts. The
+  // alerts this browser turned on for parcel links move to the new one, which
+  // then stays for them even if the account's request fails.
   await request<ApiOkResponse>('/api/push/subscriptions', auth, {
     method: 'DELETE',
     body: JSON.stringify({ endpoint: existing.endpoint }),
   }).catch(() => undefined);
   await existing.unsubscribe().catch(() => false);
-  return register(await subscribe(), true);
+  const replacement = await subscribe();
+  await moveLinkAlerts(existing.endpoint, replacement);
+  return register(replacement, !linkAlertsUse(replacement.endpoint));
 }
 
 /**
@@ -185,36 +191,55 @@ export async function followPushNotificationLocale(locale: Locale, auth: ApiAuth
   noteSent(auth.userId, { endpoint: subscription.endpoint, locale });
 }
 
+/**
+ * Swaps this browser's push subscription for a new one when the server may
+ * still send the account's alerts to it. Those stop: the push service refuses
+ * the old one, and the server's next send to it drops the account's row. The
+ * alerts this browser turned on for parcel links move to the new subscription;
+ * without any, the browser keeps none.
+ */
+async function replaceSubscription(registration: ServiceWorkerRegistration, old: PushSubscription): Promise<void> {
+  const key = old.options?.applicationServerKey;
+  await old.unsubscribe();
+  if (!key || !linkAlertsUse(old.endpoint)) return;
+  const replacement = await registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });
+  await moveLinkAlerts(old.endpoint, replacement);
+  if (!linkAlertsUse(replacement.endpoint)) await replacement.unsubscribe();
+}
+
+/**
+ * Stops the account's alerts on this browser: the toggle in its settings, and
+ * signing out. The browser's push subscription also carries the alerts it
+ * turned on for parcel links, so once the server says it dropped the account's
+ * row, the subscription stays while they use it. When the server can't be
+ * told, the subscription is replaced instead, and the error is the caller's.
+ */
 export async function disablePushNotifications(auth?: ApiAuth): Promise<void> {
   if (auth) noteSent(auth.userId, null);
   if (!('serviceWorker' in navigator)) return;
   const registration = await navigator.serviceWorker.getRegistration();
-  if (!registration) return;
-  const subscription = await registration.pushManager.getSubscription();
-  if (!subscription) return;
+  const subscription = await registration?.pushManager.getSubscription();
+  if (!registration || !subscription) return;
   try {
     await request<ApiOkResponse>('/api/push/subscriptions', auth, {
       method: 'DELETE',
       body: JSON.stringify({ endpoint: subscription.endpoint }),
     });
-  } finally {
-    // Stop local delivery even if the server is temporarily unreachable. Its
-    // next send will receive an expired-endpoint response and disable the row.
-    await subscription.unsubscribe();
+  } catch (error) {
+    await replaceSubscription(registration, subscription).catch(() => undefined);
+    throw error;
   }
+  if (!linkAlertsUse(subscription.endpoint)) await subscription.unsubscribe();
 }
 
-export async function unsubscribePushNotificationsLocally(): Promise<void> {
+/**
+ * Lets go of this browser's push subscription once the server holds no row of
+ * the account's for it, as after the account was deleted. It stays while
+ * alerts this browser turned on for parcel links use it.
+ */
+export async function releasePushSubscription(): Promise<void> {
   if (!('serviceWorker' in navigator)) return;
   const registration = await navigator.serviceWorker.getRegistration();
-  if (!registration) return;
-  const subscription = await registration.pushManager.getSubscription();
-  await subscription?.unsubscribe();
-}
-
-export function decodePublicKey(value: string): ArrayBuffer {
-  const padding = '='.repeat((4 - (value.length % 4)) % 4);
-  const raw = window.atob((value + padding).replace(/-/g, '+').replace(/_/g, '/'));
-  const bytes = Uint8Array.from(raw, (character) => character.charCodeAt(0));
-  return bytes.buffer;
+  const subscription = await registration?.pushManager.getSubscription();
+  if (subscription && !linkAlertsUse(subscription.endpoint)) await subscription.unsubscribe();
 }

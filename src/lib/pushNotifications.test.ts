@@ -1,15 +1,24 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { forgetAllLinkNotes, linkNote, noteLink } from '../peek/deviceNotes';
+import { forgetAllRecents, rememberParcel } from '../peek/recents';
+import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
+import { decodePublicKey } from './pushKey';
 import {
-  decodePublicKey,
   disablePushNotifications,
   enableAppBadgeClearing,
   enablePushNotifications,
   followPushNotificationLocale,
   getNotificationPreferences,
   inspectPushState,
+  releasePushSubscription,
   saveNotificationPreferences,
-  unsubscribePushNotificationsLocally,
 } from './pushNotifications';
+
+const links = vi.hoisted(() => ({ setParcelAlert: vi.fn() }));
+vi.mock('../peek/links', async (original) => ({
+  ...await original<typeof import('../peek/links')>(),
+  setParcelAlert: links.setParcelAlert,
+}));
 
 const getSubscription = vi.fn();
 const subscribe = vi.fn();
@@ -35,11 +44,14 @@ beforeEach(() => {
   getSubscription.mockReset().mockResolvedValue(null);
   subscribe.mockReset();
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response({ available: true, publicKey: 'AQID' })));
+  links.setParcelAlert.mockReset().mockResolvedValue(undefined);
 });
 
 afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
+  forgetAllLinkNotes();
+  forgetAllRecents();
 });
 
 describe('inspectPushState', () => {
@@ -279,10 +291,10 @@ describe('push subscription lifecycle', () => {
   });
 
   it('can remove only the local subscription after account deletion', async () => {
-    const subscription = { unsubscribe: vi.fn().mockResolvedValue(true) };
+    const subscription = { endpoint: 'https://push.example/token', unsubscribe: vi.fn().mockResolvedValue(true) };
     getSubscription.mockResolvedValue(subscription);
 
-    await unsubscribePushNotificationsLocally();
+    await releasePushSubscription();
 
     expect(subscription.unsubscribe).toHaveBeenCalledOnce();
     expect(fetch).not.toHaveBeenCalled();
@@ -293,8 +305,115 @@ describe('push subscription lifecycle', () => {
     await expect(disablePushNotifications()).resolves.toBeUndefined();
 
     getRegistration.mockResolvedValueOnce(undefined);
-    await expect(unsubscribePushNotificationsLocally()).resolves.toBeUndefined();
+    await expect(releasePushSubscription()).resolves.toBeUndefined();
     expect(getSubscription).not.toHaveBeenCalled();
+  });
+});
+
+describe('the browser subscription that parcel links’ alerts share with the account', () => {
+  const auth = { userId: 'user-1', getAccessToken: vi.fn().mockResolvedValue('token') };
+  const KEY = new Uint8Array([1, 2, 3]).buffer;
+  const pushSubscription = (endpoint: string) => ({
+    endpoint,
+    options: { applicationServerKey: KEY, userVisibleOnly: true },
+    toJSON: () => ({ endpoint, keys: { p256dh: `${endpoint}#p256dh`, auth: `${endpoint}#auth` } }),
+    unsubscribe: vi.fn().mockResolvedValue(true),
+  });
+  const SHARED = 'https://push.example/shared';
+  const FRESH = 'https://push.example/fresh';
+  const alertOn = (endpoint: string, linkId = LINK_ID) => noteLink(linkId, { alert: { preset: 'important', endpoint, locale: 'de' } });
+
+  it('stays for the parcels’ alerts once the server dropped the account’s, and goes with the last of them', async () => {
+    const shared = pushSubscription(SHARED);
+    getSubscription.mockResolvedValue(shared);
+    alertOn(SHARED);
+    vi.mocked(fetch).mockResolvedValue(response({ ok: true }));
+
+    await disablePushNotifications(auth);
+    expect(fetch).toHaveBeenCalledWith('/api/push/subscriptions', expect.objectContaining({
+      method: 'DELETE', body: JSON.stringify({ endpoint: SHARED }),
+    }));
+    expect(shared.unsubscribe).not.toHaveBeenCalled();
+    expect(subscribe).not.toHaveBeenCalled();
+    expect(linkNote(LINK_ID).alert?.endpoint).toBe(SHARED);
+
+    // An alert on a subscription this browser no longer has keeps nothing.
+    noteLink(LINK_ID, { alert: null });
+    alertOn('https://push.example/older', OTHER_LINK_ID);
+    await disablePushNotifications(auth);
+    expect(shared.unsubscribe).toHaveBeenCalledOnce();
+  });
+
+  it('is replaced when the server can’t be told, so the account’s alerts stop and the parcels’ move to the new one', async () => {
+    const shared = pushSubscription(SHARED);
+    const fresh = pushSubscription(FRESH);
+    getSubscription.mockResolvedValue(shared);
+    subscribe.mockResolvedValue(fresh);
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+    alertOn(SHARED);
+    alertOn(SHARED, OTHER_LINK_ID);
+    // The server takes one alert and refuses the other.
+    links.setParcelAlert.mockImplementation(async (id: string) => { if (id === OTHER_LINK_ID) throw new Error('full'); });
+    vi.mocked(fetch).mockRejectedValueOnce(new Error('offline'));
+
+    await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
+    expect(shared.unsubscribe).toHaveBeenCalledOnce();
+    expect(subscribe).toHaveBeenCalledExactlyOnceWith({ userVisibleOnly: true, applicationServerKey: KEY });
+    expect(links.setParcelAlert).toHaveBeenCalledWith(LINK_ID, {
+      subscription: { endpoint: FRESH, keys: { p256dh: `${FRESH}#p256dh`, auth: `${FRESH}#auth` } }, preset: 'important', locale: 'de',
+    }, OWNER_KEY);
+    expect(links.setParcelAlert).toHaveBeenCalledWith(OTHER_LINK_ID, expect.anything(), null);
+    expect(linkNote(LINK_ID).alert).toEqual({ preset: 'important', endpoint: FRESH, locale: 'de' });
+    expect(linkNote(OTHER_LINK_ID).alert).toBeUndefined();
+    expect(fresh.unsubscribe).not.toHaveBeenCalled();
+  });
+
+  it('is not replaced for parcels’ alerts the server takes none of, nor without any', async () => {
+    const shared = pushSubscription(SHARED);
+    const fresh = pushSubscription(FRESH);
+    getSubscription.mockResolvedValue(shared);
+    subscribe.mockResolvedValue(fresh);
+    alertOn(SHARED);
+    links.setParcelAlert.mockRejectedValue(new Error('offline'));
+    vi.mocked(fetch).mockRejectedValue(new Error('offline'));
+
+    await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
+    expect(shared.unsubscribe).toHaveBeenCalledOnce();
+    expect(fresh.unsubscribe).toHaveBeenCalledOnce();
+    expect(linkNote(LINK_ID).alert).toBeUndefined();
+
+    subscribe.mockClear();
+    await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
+    expect(subscribe).not.toHaveBeenCalled();
+  });
+
+  it('stays after the account is deleted while the parcels’ alerts use it', async () => {
+    const shared = pushSubscription(SHARED);
+    getSubscription.mockResolvedValue(shared);
+    alertOn(SHARED);
+    await releasePushSubscription();
+    expect(shared.unsubscribe).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('takes the parcels’ alerts along when the account replaces a subscription the push service dropped, and keeps the new one for them', async () => {
+    vi.stubGlobal('Notification', { permission: 'granted', requestPermission: vi.fn() });
+    const stale = pushSubscription(SHARED);
+    const fresh = pushSubscription(FRESH);
+    getSubscription.mockResolvedValue(stale);
+    subscribe.mockResolvedValue(fresh);
+    alertOn(SHARED);
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(response({ ok: true, testSent: false }))
+      .mockResolvedValueOnce(response({ ok: true }))
+      .mockResolvedValueOnce(response({ error: 'database offline' }, false));
+
+    await expect(enablePushNotifications('AQID', auth)).rejects.toThrow('database offline');
+    expect(stale.unsubscribe).toHaveBeenCalledOnce();
+    expect(links.setParcelAlert).toHaveBeenCalledWith(LINK_ID, expect.objectContaining({ subscription: expect.objectContaining({ endpoint: FRESH }) }), null);
+    expect(linkNote(LINK_ID).alert?.endpoint).toBe(FRESH);
+    // The account's request failed, but the parcels' alerts now use the new subscription.
+    expect(fresh.unsubscribe).not.toHaveBeenCalled();
   });
 });
 

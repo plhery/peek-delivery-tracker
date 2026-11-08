@@ -18,7 +18,7 @@ const mocks = vi.hoisted(() => ({
   clearApiCache: vi.fn(),
   disablePushNotifications: vi.fn(),
   followPushNotificationLocale: vi.fn(),
-  unsubscribePushNotificationsLocally: vi.fn(),
+  releasePushSubscription: vi.fn(),
   exportAccount: vi.fn(),
   downloadAccountExport: vi.fn(),
   deleteAccount: vi.fn(),
@@ -57,7 +57,7 @@ vi.mock('./peek/ParcelPage', async () => {
 vi.mock('./lib/pushNotifications', () => ({
   disablePushNotifications: mocks.disablePushNotifications,
   followPushNotificationLocale: mocks.followPushNotificationLocale,
-  unsubscribePushNotificationsLocally: mocks.unsubscribePushNotificationsLocally,
+  releasePushSubscription: mocks.releasePushSubscription,
 }));
 vi.mock('./lib/account', () => ({
   exportAccount: mocks.exportAccount,
@@ -122,7 +122,7 @@ beforeEach(() => {
   mocks.createApiRepo.mockReturnValue({ mode: 'api' });
   mocks.disablePushNotifications.mockResolvedValue(undefined);
   mocks.followPushNotificationLocale.mockResolvedValue(undefined);
-  mocks.unsubscribePushNotificationsLocally.mockResolvedValue(undefined);
+  mocks.releasePushSubscription.mockResolvedValue(undefined);
   mocks.exportAccount.mockResolvedValue({ exportedAt: '2026-08-05T12:00:00Z' });
   mocks.deleteAccount.mockResolvedValue(undefined);
 });
@@ -564,7 +564,7 @@ describe('ApiApplication', () => {
       expect.objectContaining({ userId: USER.id }),
       USER.email,
     ));
-    expect(mocks.unsubscribePushNotificationsLocally).toHaveBeenCalled();
+    expect(mocks.releasePushSubscription).toHaveBeenCalled();
 
     await user.click(screen.getByRole('button', { name: 'Sign out' }));
     await waitFor(() => expect(mocks.disablePushNotifications).toHaveBeenCalled());

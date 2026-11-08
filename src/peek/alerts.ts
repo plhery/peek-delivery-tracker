@@ -1,9 +1,10 @@
 import type { Locale } from '../i18n';
-import { decodePublicKey } from '../lib/pushNotifications';
+import { pageLocale } from '../lib/locale';
+import { decodePublicKey } from '../lib/pushKey';
 import { uid } from '../lib/uid';
 import { linkNote, notedAlerts, noteLink, type DeviceAlert } from './deviceNotes';
 import { ParcelLinkError, removeParcelAlert, setParcelAlert, type ParcelAlertPreset, type ParcelAlerts } from './links';
-import { recentFor } from './recents';
+import { ownerKeyFor, recentFor } from './recents';
 
 /**
  * "Notify me" without an account: this browser's notifications for one parcel
@@ -181,3 +182,35 @@ export async function turnOffAlert(linkId: string): Promise<void> {
   await removeParcelAlert(linkId, noted.endpoint);
   noteLink(linkId, { alert: null });
 }
+
+/**
+ * Whether alerts this browser turned on for parcel links use a push
+ * subscription. They share it with a signed-in account's.
+ */
+export function linkAlertsUse(endpoint: string): boolean {
+  return notedAlerts().some(([, alert]) => alert.endpoint === endpoint);
+}
+
+/**
+ * Moves this browser's alerts on parcel links from the push subscription it
+ * gave up to its new one, each as it was set. An alert the server does not
+ * take on the new one is forgotten here: the old subscription no longer
+ * reaches this browser, and the server drops it at its next send.
+ */
+export async function moveLinkAlerts(from: string, to: PushSubscription): Promise<void> {
+  const moving = notedAlerts().filter(([, alert]) => alert.endpoint === from);
+  if (moving.length === 0) return;
+  // A subscription without keys can carry no alert.
+  const address = (() => { try { return pushKeys(to); } catch { return null; } })();
+  for (const [linkId, alert] of moving) {
+    const locale = alert.locale ?? pageLocale() ?? 'en';
+    const moved = address
+      ? await setParcelAlert(linkId, { subscription: address, preset: alert.preset, locale }, ownerKeyFor(linkId)).then(() => address, () => null)
+      : null;
+    // Read as it is now: the reader may have changed the alert or turned it off meanwhile.
+    const current = linkNote(linkId).alert;
+    if (current?.endpoint !== from) continue;
+    noteLink(linkId, { alert: moved ? { ...current, endpoint: moved.endpoint, locale } : null });
+  }
+}
+

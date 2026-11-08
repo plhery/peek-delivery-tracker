@@ -99,7 +99,7 @@ describe('the parcel page’s row', () => {
     expect(mocks.track).not.toHaveBeenCalled();
   });
 
-  it('thanks once after the install link, for the rest of that page load', async () => {
+  it('thanks after the install link, on every page load until it is closed', async () => {
     const user = userEvent.setup();
     localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, optIn: true, install: true } }));
     let { AndroidTestRow } = await load();
@@ -107,25 +107,29 @@ describe('the parcel page’s row', () => {
     expect(await screen.findByText('Thanks for testing Peek for Android')).toBeVisible();
     expect(screen.getByText('Keep it two weeks: that opens it to everyone.')).toBeVisible();
     expect(stored().thanked).toEqual(expect.any(Number));
-    view.rerender(<><AndroidTestRow /></>);
-    expect(screen.getByText('Thanks for testing Peek for Android')).toBeVisible();
     view.unmount();
 
-    // The next page load: gone.
-    ({ AndroidTestRow } = await load());
-    const next = render(<AndroidTestRow />);
-    await act(async () => { await Promise.resolve(); });
-    expect(next.container).toBeEmptyDOMElement();
-    next.unmount();
-
-    // Closed on the page it shows on.
-    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, install: true } }));
+    // The next page load: still there, until closed.
     ({ AndroidTestRow } = await load());
     render(<AndroidTestRow />);
     await user.click(await screen.findByRole('button', { name: 'Close' }));
     expect(screen.queryByText('Thanks for testing Peek for Android')).not.toBeInTheDocument();
     expect(stored().thanksClosed).toBe(true);
     expect(mocks.track).not.toHaveBeenCalled();
+  });
+
+  it('leads from the thanks back to the steps, which start over', async () => {
+    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({
+      steps: { group: true, optIn: true, install: true }, thanked: Date.now() - 60_000, hiddenUntil: 5,
+    }));
+    const { AndroidTestRow } = await load();
+    render(<AndroidTestRow />);
+    const link = await screen.findByRole('link', { name: 'Didn’t work? See the steps' });
+    expect(link).toHaveAttribute('href', '/android');
+    link.addEventListener('click', (event) => event.preventDefault());
+    await userEvent.click(link);
+    expect(stored()).toEqual({ hiddenUntil: 5 });
+    expect(events()).toEqual([['android-test-open', 'parcel']]);
   });
 
   it('never shows in a browser the app itself opened a page in', async () => {
@@ -179,5 +183,6 @@ describe('the home page’s banner', () => {
     render(<AndroidTestBanner />);
     expect(await screen.findByText('Thanks for testing Peek for Android')).toBeVisible();
     expect(screen.queryByText('Keep it two weeks: that opens it to everyone.')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Didn’t work? See the steps' })).toHaveAttribute('href', '/android');
   });
 });

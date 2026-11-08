@@ -78,7 +78,7 @@ are virtual names, never real URLs.
   card opened, remove, disable.
 - **Passport** (web): a stamp opened for its explanation.
 - **Android test** (web): the invitation to test the Android app shown (once per page load
-  and place), opened, hidden for a week with ×, or never again; on its steps page
+  and place), opened (also from the thanks' "Didn't work?"), hidden for a week with ×, or never again; on its steps page
   (`android-test`), each step's link followed: the testers' group, Google Play's opt-in and the
   install. The parcel page holds it twice, so its events say where: `spot` is `parcel` for the
   page's row, `alerts` for "Notify me" and `home` for the home page's banner. Google Play

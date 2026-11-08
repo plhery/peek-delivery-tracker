@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  ANDROID_TEST_LINKS, ANDROID_TEST_SNOOZE_MS, ANDROID_TEST_STORAGE_KEY, androidTestShows, canInstallAndroidApp, closeAndroidTestThanks,
-  neverAndroidTest, noteAndroidAppReferrer, noteAndroidTestStep, noteAndroidTestThanked, readAndroidDevice, readAndroidTestNote,
-  snoozeAndroidTest, subscribeAndroidTest, type AndroidTestNote,
+  ANDROID_TEST_LINKS, ANDROID_TEST_SNOOZE_MS, ANDROID_TEST_STORAGE_KEY, ANDROID_TEST_THANKS_MS, androidTestShows, canInstallAndroidApp,
+  closeAndroidTestThanks, neverAndroidTest, noteAndroidAppReferrer, noteAndroidTestStep, noteAndroidTestThanked, readAndroidDevice,
+  readAndroidTestNote, restartAndroidTest, snoozeAndroidTest, subscribeAndroidTest, type AndroidTestNote,
 } from './androidTest';
 
 /** Chrome's reduced user agent: every Android phone says Android 10. */
@@ -64,9 +64,8 @@ describe('who is invited', () => {
 
 describe('what a place shows', () => {
   const NOW = Date.UTC(2026, 10, 3, 12);
-  const PAGE_START = NOW - 60_000;
   const shows = (note: AndroidTestNote, { open = true, device = true, thanks = true } = {}) =>
-    androidTestShows(note, { open, device, now: NOW, pageStart: PAGE_START, thanks });
+    androidTestShows(note, { open, device, now: NOW, thanks });
 
   it('invites on every visit until × or never, and only while switched on, on a device that can install', () => {
     expect(shows({})).toBe('invite');
@@ -81,15 +80,16 @@ describe('what a place shows', () => {
     expect(shows({ hiddenUntil: NOW })).toBe('invite');
   });
 
-  it('thanks once the install link was followed, for that page load only, where the place draws a thanks', () => {
+  it('thanks once the install link was followed, until closed and for two weeks at most, where the place draws a thanks', () => {
     const installed = { steps: { group: true, optIn: true, install: true } } satisfies AndroidTestNote;
     expect(shows(installed)).toBe('thanks');
     expect(shows(installed, { thanks: false })).toBeNull();
-    expect(shows({ ...installed, thanked: PAGE_START })).toBe('thanks');
-    expect(shows({ ...installed, thanked: PAGE_START - 1 })).toBeNull();
+    expect(ANDROID_TEST_THANKS_MS).toBe(14 * 24 * 60 * 60 * 1000);
+    expect(shows({ ...installed, thanked: NOW - ANDROID_TEST_THANKS_MS + 1 })).toBe('thanks');
+    expect(shows({ ...installed, thanked: NOW - ANDROID_TEST_THANKS_MS })).toBeNull();
     expect(shows({ ...installed, thanksClosed: true })).toBeNull();
     // Snoozed or not, the invitation is over.
-    expect(shows({ ...installed, thanked: PAGE_START - 1, hiddenUntil: 0 })).toBeNull();
+    expect(shows({ ...installed, thanksClosed: true, hiddenUntil: 0 })).toBeNull();
     // The first two steps alone keep it coming, and so does an install without the group, which could not work.
     expect(shows({ steps: { group: true, optIn: true } })).toBe('invite');
     expect(shows({ steps: { optIn: true, install: true } })).toBe('invite');
@@ -119,6 +119,14 @@ describe('the note this browser keeps', () => {
     stop();
     neverAndroidTest();
     expect(listener).toHaveBeenCalledTimes(7);
+  });
+
+  it('starts the steps over on “Didn’t work?”, keeping × and never', () => {
+    localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({
+      hiddenUntil: 7, steps: { group: true, optIn: true, install: true }, thanked: 5, thanksClosed: true,
+    }));
+    restartAndroidTest();
+    expect(stored()).toEqual({ hiddenUntil: 7 });
   });
 
   it('keeps the same note until it changes, and hears another tab', () => {

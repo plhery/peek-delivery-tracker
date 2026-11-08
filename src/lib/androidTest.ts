@@ -34,6 +34,8 @@ const REDUCED_ANDROID = 10;
 const APP_REFERRER = 'android-app://com.plhery.peekdeliverytracker';
 /** How long × hides the invitation. */
 export const ANDROID_TEST_SNOOZE_MS = 7 * 24 * 60 * 60 * 1000;
+/** How long the thanks stays at most: the two weeks a tester keeps the app. */
+export const ANDROID_TEST_THANKS_MS = 14 * 24 * 60 * 60 * 1000;
 
 /** What the browser says about the device, as User-Agent Client Hints give it where the browser has them. */
 export interface AndroidDevice {
@@ -95,21 +97,20 @@ export interface AndroidTestNote {
 export type AndroidTestShows = 'invite' | 'thanks' | null;
 
 /**
- * What a place shows: the invitation; once the install link was followed after the group's, the thanks, for the
- * rest of the page load it first shows on and until it is closed (only where `thanks` is drawn); or nothing. An
- * install without the group could not have worked, so it is invited again.
+ * What a place shows: the invitation; once the install link was followed after the group's, the thanks, until it is
+ * closed and for two weeks at most (only where `thanks` is drawn); or nothing. An install without the group could
+ * not have worked, so it is invited again. The thanks leads back to the steps, for a join or an opt-in that didn't
+ * go through, which the site can't see.
  */
-export function androidTestShows(note: AndroidTestNote, { open, device, now, pageStart, thanks }: {
+export function androidTestShows(note: AndroidTestNote, { open, device, now, thanks }: {
   open: boolean;
   device: boolean;
   now: number;
-  /** When this page load began: a thanks first shown since then stays for the rest of it. */
-  pageStart: number;
   thanks: boolean;
 }): AndroidTestShows {
   if (!open || !device || note.never || note.app) return null;
   if (note.steps?.group && note.steps.install) {
-    return thanks && !note.thanksClosed && (note.thanked === undefined || note.thanked >= pageStart) ? 'thanks' : null;
+    return thanks && !note.thanksClosed && (note.thanked === undefined || now - note.thanked < ANDROID_TEST_THANKS_MS) ? 'thanks' : null;
   }
   return (note.hiddenUntil ?? 0) > now ? null : 'invite';
 }
@@ -188,6 +189,17 @@ export function noteAndroidTestThanked(now = Date.now()): void {
 
 export function closeAndroidTestThanks(): void {
   write((note) => ({ ...note, thanksClosed: true }));
+}
+
+/** "Didn't work?": the steps start over, and the invitation comes back until they are taken again. */
+export function restartAndroidTest(): void {
+  write((note) => {
+    const restarted = { ...note };
+    delete restarted.steps;
+    delete restarted.thanked;
+    delete restarted.thanksClosed;
+    return restarted;
+  });
 }
 
 /** A page opened from the app itself: this browser's owner has the app. */

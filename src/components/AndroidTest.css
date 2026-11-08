@@ -7,6 +7,7 @@
 .android-test__close svg { width: 16px; height: 16px; stroke-width: 2.2; }
 .android-test__done { display: grid; place-items: center; width: 46px; height: 46px; flex: 0 0 46px; border-radius: 12px; color: var(--green); background: var(--green-soft); }
 .android-test__done svg { width: 22px; height: 22px; stroke-width: 2.6; }
+.android-test__retry { justify-self: start; display: inline-flex; align-items: center; min-height: 24px; color: var(--green); font-size: 12.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
 /* In "Notify me", below what the sheet asks first. */
 .android-test-offer { margin-top: 14px; }
@@ -36,3 +37,4 @@
 .android-test-banner--thanks .android-test__done svg { width: 18px; height: 18px; }
 .android-test-banner--thanks .android-test__words strong { font-size: 13.5px; }
 .android-test-banner--thanks .android-test__close { color: var(--green); }
+.android-test-banner--thanks .android-test__words { padding-block: 6px; gap: 0; }

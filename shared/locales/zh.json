@@ -741,6 +741,7 @@
   "androidTest.never": "不再显示",
   "androidTest.thanks.title": "感谢你测试 Peek Android 版",
   "androidTest.thanks.body": "请保留两周：这样它就能向所有人开放。",
+  "androidTest.thanks.retry": "没成功？查看步骤",
   "androidTest.page.title": "试用 Peek Android 版",
   "androidTest.page.lead": "抢先体验。免费，大约一分钟，用你的 Google 账号即可。",
   "androidTest.page.back": "返回",

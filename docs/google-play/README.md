@@ -59,5 +59,7 @@ a banner on the home page, and leads to the steps at `/android`, which are not f
 switch is off. Play lets in only the group's members, so the steps page keeps its last two steps
 locked until the group's link was followed. × hides it for a week and offers "Never show"; the
 steps page has "Don't ask me again". Once the install link was followed after the group's, the
-parcel page or the home page thanks the visitor on that page load, and nothing shows after. A browser that opened a page from the app is not invited.
+parcel page and the home page thank the visitor until the thanks is closed, for two weeks at most.
+The site can't see whether the join or the opt-in went through, so the thanks has a "Didn't work?"
+link back to the steps, which start over. A browser that opened a page from the app is not invited.
 What the browser did stays in its storage; the events are in [ANALYTICS.md](../ANALYTICS.md).

@@ -3,7 +3,8 @@ import { useI18n } from '../i18n';
 import { trackAction, type AnalyticsSpot } from '../lib/analytics';
 import {
   ANDROID_TEST_OPEN, ANDROID_TEST_PATH, androidTestShows, closeAndroidTestThanks, neverAndroidTest, noteAndroidAppReferrer,
-  noteAndroidTestThanked, readAndroidDevice, readAndroidTestNote, snoozeAndroidTest, subscribeAndroidTest, type AndroidTestShows,
+  noteAndroidTestThanked, readAndroidDevice, readAndroidTestNote, restartAndroidTest, snoozeAndroidTest, subscribeAndroidTest,
+  type AndroidTestShows,
 } from '../lib/androidTest';
 import { Toast } from '../peek/parcel/Toast';
 import { AppOffer } from './AppOffer';
@@ -11,8 +12,6 @@ import { Icon } from './Icon';
 import { PeekMark } from './PeekMark';
 import './AndroidTest.css';
 
-/** When this page load began: a thanks first shown since then stays until the page goes. */
-const PAGE_START = Date.now();
 /** How long the toast after × stays. */
 const HIDDEN_TOAST_MS = 6_000;
 
@@ -45,7 +44,7 @@ function useAndroidTest(spot: AnalyticsSpot, { thanks }: { thanks: boolean }) {
   const [now] = useState(() => Date.now());
   const [hidden, setHidden] = useState(false);
   const shows: AndroidTestShows = note && known !== null
-    ? androidTestShows(note, { open: ANDROID_TEST_OPEN, device: known, now, pageStart: PAGE_START, thanks })
+    ? androidTestShows(note, { open: ANDROID_TEST_OPEN, device: known, now, thanks })
     : null;
 
   useEffect(() => { if (ANDROID_TEST_OPEN) noteAndroidAppReferrer(document.referrer); }, []);
@@ -66,6 +65,8 @@ function useAndroidTest(spot: AnalyticsSpot, { thanks }: { thanks: boolean }) {
     open: () => trackAction('android-test-open', undefined, spot),
     snooze: () => { trackAction('android-test-dismiss', undefined, spot); snoozeAndroidTest(); setHidden(true); },
     closeThanks: closeAndroidTestThanks,
+    // The page goes to the steps: the invitation the restart brings back isn't counted as shown on its way out.
+    retry: () => { counted.add(spot); trackAction('android-test-open', undefined, spot); restartAndroidTest(); },
     toast: hidden && <HiddenToast spot={spot} onDone={() => setHidden(false)} />,
   };
 }
@@ -88,14 +89,15 @@ function CloseButton({ label, onClick }: { label: string; onClick: () => void })
   return <button type="button" className="android-test__close" aria-label={label} onClick={onClick}><Icon name="close" /></button>;
 }
 
-/** The thanks, once, after the install link was followed. */
-function Thanks({ banner, onClose }: { banner?: boolean; onClose: () => void }) {
+/** The thanks, after the install link was followed, with the way back to the steps for when it didn't work. */
+function Thanks({ banner, onClose, onRetry }: { banner?: boolean; onClose: () => void; onRetry: () => void }) {
   const { t } = useI18n();
   return <div className={banner ? 'android-test-banner android-test-banner--thanks' : 'android-test-row android-test-row--thanks'}>
     <span className="android-test__done" aria-hidden="true"><Icon name="check" /></span>
     <span className="android-test__words">
       <strong>{t('androidTest.thanks.title')}</strong>
       {!banner && <small>{t('androidTest.thanks.body')}</small>}
+      <a className="android-test__retry" href={ANDROID_TEST_PATH} onClick={onRetry}>{t('androidTest.thanks.retry')}</a>
     </span>
     <CloseButton label={t('common.close')} onClick={onClose} />
   </div>;
@@ -104,7 +106,7 @@ function Thanks({ banner, onClose }: { banner?: boolean; onClose: () => void }) 
 /** P1: a row on the parcel page, under its actions. */
 export function AndroidTestRow() {
   const { t } = useI18n();
-  const { shows, open, snooze, closeThanks, toast } = useAndroidTest('parcel', { thanks: true });
+  const { shows, open, snooze, closeThanks, retry, toast } = useAndroidTest('parcel', { thanks: true });
   return <>
     {shows === 'invite' && <div className="android-test-row">
       <a className="android-test-row__link" href={ANDROID_TEST_PATH} onClick={open}>
@@ -117,7 +119,7 @@ export function AndroidTestRow() {
       </a>
       <CloseButton label={t('androidTest.invite.later')} onClick={snooze} />
     </div>}
-    {shows === 'thanks' && <Thanks onClose={closeThanks} />}
+    {shows === 'thanks' && <Thanks onClose={closeThanks} onRetry={retry} />}
     {toast}
   </>;
 }
@@ -135,7 +137,7 @@ export function AndroidTestOffer() {
 /** P3: a slim banner at the top of the home page. */
 export function AndroidTestBanner() {
   const { t } = useI18n();
-  const { shows, open, snooze, closeThanks, toast } = useAndroidTest('home', { thanks: true });
+  const { shows, open, snooze, closeThanks, retry, toast } = useAndroidTest('home', { thanks: true });
   return <>
     {shows === 'invite' && <div className="android-test-banner">
       <span className="android-test-banner__glyph" aria-hidden="true"><PhoneGlyph /></span>
@@ -145,7 +147,7 @@ export function AndroidTestBanner() {
       </a>
       <CloseButton label={t('androidTest.invite.later')} onClick={snooze} />
     </div>}
-    {shows === 'thanks' && <Thanks banner onClose={closeThanks} />}
+    {shows === 'thanks' && <Thanks banner onClose={closeThanks} onRetry={retry} />}
     {toast}
   </>;
 }

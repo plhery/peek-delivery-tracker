@@ -741,6 +741,7 @@
   "androidTest.never": "Never show",
   "androidTest.thanks.title": "Thanks for testing Peek for Android",
   "androidTest.thanks.body": "Keep it two weeks: that opens it to everyone.",
+  "androidTest.thanks.retry": "Didn’t work? See the steps",
   "androidTest.page.title": "Try Peek for Android",
   "androidTest.page.lead": "Before anyone else. Free, about a minute, with your Google account.",
   "androidTest.page.back": "Back",

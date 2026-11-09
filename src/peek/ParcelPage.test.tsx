@@ -285,7 +285,7 @@ describe('ParcelPage stages and troubles', () => {
 
   it('says the carrier writes its timeline ahead', async () => {
     await shown(view([scan('in_transit', 30)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
-    expect(within(card()).getByText(/^.+ publishes its timeline in advance\. Peek shows the real scans as they arrive\.$/)).toBeVisible();
+    expect(within(card()).getByText(/^.+’s site shows steps written in advance, even a delivery\. Peek can’t confirm them, so it leaves them out\. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller\.$/)).toBeVisible();
   });
 
   it('keeps a number no carrier knows on a neutral card, and says to keep the page', async () => {

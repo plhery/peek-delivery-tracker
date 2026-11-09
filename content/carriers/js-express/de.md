@@ -18,7 +18,7 @@ Die Frachtbriefnummern von JS Express bestehen aus JSE, zwei Buchstaben, zehn Zi
 | `JSEAA000000000YQ` | Nur neun Ziffern: So sehen die Nummern von JS Express nicht aus. Prüf, ob eine Ziffer fehlt. |
 | `JXCAA0000000000YQ` | Endet auch auf YQ, beginnt aber mit JXC: eine Nummer von Juxi Express. |
 
-Andere chinesische Spediteure nutzen dieselbe Form mit eigenen Buchstaben vorne: FEI bei 17FEIA, WNB bei WanbExpress, SFC bei SFC, CJP bei CJ Packet. JSE steht für JS Express. Leerzeichen und Kleinbuchstaben stören Peek nicht, aber Peek braucht die ganze Nummer.
+Andere chinesische Spediteure nutzen dieselbe Form mit eigenen Buchstaben vorne: FEI bei 17FEIA, WNB bei WanbExpress, SFC bei SFC, CJP bei CJ Packet. JSE steht für JS Express. Leerzeichen und Kleinbuchstaben stören Peek nicht. Eine Null an der Stelle des zweiten Buchstabens liest Peek als O, ein O unter den zehn Ziffern als Null. Peek braucht aber die ganze Nummer.
 
 **Wo du sie findest.** Der Shop schickt dir die Nummer mit der Versandbestätigung oder zeigt sie bei deiner Bestellung. Laut JS Express arbeitet das Unternehmen eng mit Amazon, Walmart, Shopify, eBay, AliExpress, Wish und Shopee zusammen. Findest du die Nummer nicht: [So findest du deine Sendungsnummer](guide:find-tracking-number).
 

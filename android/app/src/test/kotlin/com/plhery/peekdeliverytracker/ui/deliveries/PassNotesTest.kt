@@ -366,7 +366,7 @@ class PassNotesTest {
     fun aCarrierWritingItsTimelineAheadIsSaidOnce() {
         val lamp = DemoCards.parcel("Moon lamp")
         val gzyl = identities.displayName(CarrierId.Gzyl, AppLanguage.En)
-        val line = "$gzyl publishes its timeline in advance. Peek shows the real scans as they arrive."
+        val line = "$gzyl’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller."
         pass(lamp.copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl))
         assertTrue(textExists(line))
 

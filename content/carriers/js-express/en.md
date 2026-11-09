@@ -18,7 +18,7 @@ JS Express's waybills are JSE, two letters, ten digits and YQ, 17 characters in 
 | `JSEAA000000000YQ` | Only nine digits: not JS Express's layout. Check for a missing digit. |
 | `JXCAA0000000000YQ` | Also ends in YQ, but opens with JXC: a [Juxi Express](carrier:juxi-express) number. |
 
-Other Chinese forwarders use the same layout with their own letters in front: FEI for 17FEIA, WNB for WanbExpress, SFC for SFC, CJP for CJ Packet. JSE marks JS Express. Spaces and lower case don't matter in Peek. JS Express's tracker needs the whole number: part of one finds nothing.
+Other Chinese forwarders use the same layout with their own letters in front: FEI for 17FEIA, WNB for WanbExpress, SFC for SFC, CJP for CJ Packet. JSE marks JS Express. Spaces and lower case don't matter in Peek. It reads a zero typed for the second of the two letters as an O, and an O among the ten digits as a zero. JS Express's tracker needs the whole number: part of one finds nothing.
 
 **Where to find it.** The shop passes the number on in its shipping email or on your order page. JS Express says it works closely with Amazon, Walmart, Shopify, eBay, AliExpress, Wish and Shopee. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 

@@ -85,12 +85,12 @@ describe('shipment details', () => {
 
   it('says once that the carrier writes its timeline ahead, as the other notes look', () => {
     const view = show({ carrier: 'gzyl', writtenAheadBy: 'gzyl' });
-    expect(screen.getByText(`${carrierInfo('gzyl', 'en').name} publishes its timeline in advance. Peek shows the real scans as they arrive.`))
+    expect(screen.getByText(`${carrierInfo('gzyl', 'en').name}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.`))
       .toHaveClass('detail__handover');
     view.unmount();
 
     show({ carrier: 'gzyl' });
-    expect(screen.queryByText(/publishes its timeline in advance/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/site shows steps written in advance/)).not.toBeInTheDocument();
   });
 
   it('says the sender still has the parcel once its only scan, the label, is a day old', () => {

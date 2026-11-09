@@ -291,6 +291,22 @@
     "Delivery instructions required": {
       "key": "event.carrier.instructions",
       "variables": {}
+    },
+    "Last-mile delivery forecast": {
+      "key": "event.carrier.lastMileAnnounced",
+      "variables": {}
+    },
+    "Last-mile delivery forecast.": {
+      "key": "event.carrier.lastMileAnnounced",
+      "variables": {}
+    },
+    "Forecast of last-mile delivery by carrier": {
+      "key": "event.carrier.lastMileAnnounced",
+      "variables": {}
+    },
+    "Forecast of last-mile delivery by carrier.": {
+      "key": "event.carrier.lastMileAnnounced",
+      "variables": {}
     }
   },
   "failures": {

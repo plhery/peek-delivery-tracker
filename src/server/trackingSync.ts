@@ -375,6 +375,12 @@ function refreshLimit(parcel: JsonObject): { minMinutes: number; afterFailureMin
   return CARRIER_DEFINITIONS[String(active ?? parcel.carrier) as CarrierId]?.tracking.refresh;
 }
 
+/** The carrier a handoff moved the parcel to, when it is not the one the parcel is filed under. */
+function handedTo(parcel: JsonObject): string | null {
+  const active = isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined;
+  return typeof active === 'string' && active && active !== parcel.carrier ? active : null;
+}
+
 /**
  * When the persisted cooldown lets the parcel be checked again, as epoch
  * milliseconds: a routing deferral or the carrier's refresh interval. Zero when
@@ -1858,6 +1864,7 @@ export class TrackingSyncService {
       now,
       routing.confirmed_number === parcel.tracking_number ? routing.confirmed_carrier ?? null : null,
       typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery : null,
+      handedTo(parcel),
     );
     await audit.start();
     // A parcel just added, or looked up, with no progress saved yet: its first answer.

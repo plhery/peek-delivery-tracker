@@ -4580,10 +4580,10 @@ describe('TrackingSyncService', () => {
       let now = new Date('2026-01-12T10:30:00Z');
       const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
       let parcel: JsonObject = { id: 'partner-down', carrier: 'la-poste', tracking_number: 'CW123456785FR' };
-      const sync = async (at: string) => {
+      const sync = async (at: string, trigger?: 'scheduled') => {
         now = new Date(at);
         adapter.fetch.mockClear();
-        await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() });
+        await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() }, trigger ? { trigger } : undefined);
         parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
         return adapter.fetch.mock.calls.map((call) => call[0]);
       };
@@ -4636,6 +4636,15 @@ describe('TrackingSyncService', () => {
       expect(descriptions()).toEqual(expect.arrayContaining([late.description, 'Departed the hub']));
       expect(parcel()).toMatchObject({ carrier_data: { earlier_checked_at: '2026-01-13T12:00:00.000Z' } });
       expect(await sync('2026-01-13T12:30:00Z')).not.toContain('la-poste');
+    });
+
+    it('counts the failed refresh against the delivery carrier, not the one the parcel is filed under', async () => {
+      const { answers, client, sync } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      expect(await sync('2026-01-13T12:00:00Z', 'scheduled')).toEqual(['posti', 'la-poste']);
+      const samples = client.recordTrackingHealth.mock.lastCall![2] as JsonObject[];
+      expect(samples.filter((sample) => sample.kind === 'refresh')).toEqual([expect.objectContaining({ subject: 'posti', healthy: false })]);
     });
 
     it('asks the earlier carrier no more once the stored rows show the delivery carrier holding the parcel', async () => {

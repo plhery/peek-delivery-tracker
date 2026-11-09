@@ -266,6 +266,8 @@ export class TrackingSyncAudit {
     readonly answeredBy: string | null = null,
     /** The day the parcel was expected when the check began, so the review tells a day that passed from one dropped. */
     readonly previousExpectedDelivery: string | null = null,
+    /** The carrier a handoff moved the parcel to, whose answers its refreshes wait for: their health sample names it. */
+    readonly trackedBy: string | null = null,
   ) {
     this.#startedAtIso = now.toISOString();
   }
@@ -516,7 +518,7 @@ export class TrackingSyncAudit {
         && [...this.#healthSamples.values()].every((sample) => sample === ownAnswer || sample.healthy || sample.recovered);
       const thin = completion.thinAnswer === undefined ? {} : { thin_answer: completion.thinAnswer };
       const samples: JsonObject[] = [...this.#healthSamples.values(), ...(abstained ? [] : [{
-        kind: 'refresh', subject: this.configuredCarrier, healthy,
+        kind: 'refresh', subject: this.trackedBy ?? this.configuredCarrier, healthy,
         // The failing tier's own error class is better evidence than the attempt's summary, unless
         // its lookup recovered from it.
         details: refused ? { category: 'input_required', ...refreshEvidence(completion) }

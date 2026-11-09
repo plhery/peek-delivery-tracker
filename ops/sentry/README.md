@@ -33,6 +33,8 @@ or closes.
 ## Counting rules
 
 - One sample per provider per scheduled refresh, so retries don't inflate the rate.
+- A parcel handed over to a delivery carrier counts its refreshes under that carrier: its
+  outage is not the earlier carrier's, whose own lookups record their samples as usual.
 - A direct failure rescued by the browser counts as a failed *direct* sample and a
   successful *provider* sample. A carrier with only a direct step records the provider
   sample alone, so one outage opens one incident.

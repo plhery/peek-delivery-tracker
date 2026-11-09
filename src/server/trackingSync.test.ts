@@ -4557,6 +4557,97 @@ describe('TrackingSyncService', () => {
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
   });
 
+  describe('while the delivery carrier’s lookup fails', () => {
+    const origin0: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti',
+      last_update: '2026-01-11T10:00:00Z', events: [{ time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] };
+    const announced = [{ time: '2026-01-12T10:00:00Z', description: 'Shipment on its way to the carrier', stage: 'in_transit' },
+      { time: '2026-01-12T09:00:00Z', description: 'Shipment information received', stage: 'registered' }];
+    const late = { time: '2026-01-13T11:00:00Z', description: 'Handed over to the airline', stage: 'in_transit' };
+    const handedOver = (universal?: () => Promise<CarrierResult>) => {
+      const store = eventStore();
+      const client = { ...store.client, acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: null }),
+        finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+      const answers: { origin: CarrierResult; delivery: CarrierResult | Error } = { origin: origin0,
+        delivery: { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:00:00Z', events: announced } };
+      const adapter = {
+        fetch: vi.fn(async (carrier: string) => {
+          const answer = carrier === 'posti' ? answers.delivery : answers.origin;
+          if (answer instanceof Error) throw answer;
+          return answer;
+        }),
+        ...(universal ? { fetchUniversal: vi.fn(universal) } : {}),
+      };
+      let now = new Date('2026-01-12T10:30:00Z');
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+      let parcel: JsonObject = { id: 'partner-down', carrier: 'la-poste', tracking_number: 'CW123456785FR' };
+      const sync = async (at: string) => {
+        now = new Date(at);
+        adapter.fetch.mockClear();
+        await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() });
+        parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+        return adapter.fetch.mock.calls.map((call) => call[0]);
+      };
+      const descriptions = () => [...store.rows.values()].map((row) => row.description);
+      return { answers, client, sync, descriptions, parcel: () => parcel };
+    };
+
+    it('stores the earlier carrier’s late scans beside the failure and keeps its follow-up every 3 h', async () => {
+      const { answers, client, sync, descriptions, parcel } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      expect(parcel().carrier_data).toMatchObject({ active_tracking_carrier: 'posti', handed_over_at: '2026-01-12T10:30:00.000Z' });
+      // A day on, the delivery carrier is down when the origin's late scan comes.
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      answers.origin = { ...origin0, last_update: late.time, events: [...origin0.events!, late] };
+      expect(await sync('2026-01-13T12:00:00Z')).toEqual(['posti', 'la-poste']);
+      expect(descriptions()).toContain(late.description);
+      // The failure stands: the stage and watermark stay, and the check counts as unanswered.
+      expect(parcel()).toMatchObject({ current_stage: 'in_transit', carrier_data: { earlier_checked_at: '2026-01-13T12:00:00.000Z',
+        routing: { last_event_at: '2026-01-12T10:00:00.000Z', consecutive_failures: 1, failures: { 'la-poste': { kind: 'transport' } } } } });
+      expect(client.completeSyncAttempt.mock.calls.at(-1)![1]).toMatchObject({ outcome: 'waiting', events_new: 1 });
+      // The follow-up keeps its pace through the outage, and after it no scan is stored twice.
+      expect(await sync('2026-01-13T12:30:00Z')).toEqual(['posti']);
+      answers.delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:00:00Z', events: announced };
+      expect(await sync('2026-01-13T15:00:00Z')).toEqual(['posti', 'la-poste']);
+      expect(descriptions().filter((description) => description === late.description)).toHaveLength(1);
+      expect(parcel()).toMatchObject({ sync_status: 'ok', carrier_data: { earlier_checked_at: '2026-01-13T15:00:00.000Z' } });
+    });
+
+    it('stores the scans the earlier carrier gave alongside within the day, with no provider to fall back on', async () => {
+      const { answers, sync, descriptions, parcel } = handedOver();
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      const alongside = { ...late, time: '2026-01-12T11:00:00Z' };
+      answers.origin = { ...origin0, last_update: alongside.time, events: [...origin0.events!, alongside] };
+      expect(await sync('2026-01-12T11:30:00Z')).toEqual(['posti', 'la-poste']);
+      expect(descriptions()).toContain(late.description);
+      expect(parcel()).toMatchObject({ sync_status: 'error', current_stage: 'in_transit',
+        carrier_data: { earlier_checked_at: '2026-01-12T11:30:00.000Z' } });
+      expect(await sync('2026-01-12T12:00:00Z')).toEqual(['posti']);
+    });
+
+    it('adds the earlier carrier’s late scans to a provider’s answer', async () => {
+      const provider: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', tracking_provider: '17TRACK',
+        last_update: '2026-01-13T09:00:00Z', events: [{ time: '2026-01-13T09:00:00Z', description: 'Departed the hub', stage: 'in_transit' }] };
+      const { answers, sync, descriptions, parcel } = handedOver(async () => provider);
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      answers.origin = { ...origin0, last_update: late.time, events: [...origin0.events!, late] };
+      expect(await sync('2026-01-13T12:00:00Z')).toEqual(['posti', 'la-poste']);
+      expect(descriptions()).toEqual(expect.arrayContaining([late.description, 'Departed the hub']));
+      expect(parcel()).toMatchObject({ carrier_data: { earlier_checked_at: '2026-01-13T12:00:00.000Z' } });
+      expect(await sync('2026-01-13T12:30:00Z')).not.toContain('la-poste');
+    });
+
+    it('asks the earlier carrier no more once the stored rows show the delivery carrier holding the parcel', async () => {
+      const { answers, sync } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));
+      answers.delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:40:00Z',
+        events: [{ time: '2026-01-12T10:40:00Z', description: 'Arrived at the sorting centre', stage: 'in_transit' }, ...announced] };
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      expect(await sync('2026-01-13T12:00:00Z')).toEqual(['posti']);
+    });
+  });
+
   it('takes the summary from the earlier carrier asked again when it has followed the parcel days past the partner', async () => {
     const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
     let now = new Date('2026-01-12T10:30:00Z');

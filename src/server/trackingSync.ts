@@ -240,10 +240,27 @@ const HELD_BY_PARTNER = new Set(['out_for_delivery', 'failed_attempt', 'ready_fo
  * handoff, and nothing it reports only once it holds the parcel, such as a delivery round.
  */
 function announcedOnly(answer: CarrierResult, metadata: JsonObject): boolean {
+  return announcedScans(resultStage(answer), (answer.events ?? []).filter(isRecord), metadata);
+}
+
+/** `announcedOnly` read from the parcel's stage and its stored rows of the delivery carrier, which did not answer. */
+function storedAnnouncedOnly(parcel: JsonObject, activeCarrier: string, metadata: JsonObject): boolean {
+  return announcedScans(String(parcel.current_stage ?? 'pending'), storedEventIdentities(parcel)
+    .filter((row) => String(row.provider_event_id).startsWith(`${activeCarrier}:`))
+    .map((row) => ({ stage: row.stage, description: row.description, time: row.occurred_at })), metadata);
+}
+
+function announcedScans(stage: string | null | undefined, events: readonly JsonObject[], metadata: JsonObject): boolean {
   const handedOver = Date.parse(String(metadata.handed_over_at ?? ''));
-  const events = (answer.events ?? []).filter(isRecord);
-  return !HELD_BY_PARTNER.has(resultStage(answer) ?? '') && !events.some((event) => HELD_BY_PARTNER.has(eventStage(event))
+  return !HELD_BY_PARTNER.has(stage ?? '') && !events.some((event) => HELD_BY_PARTNER.has(eventStage(event))
     || (!['pending', 'registered'].includes(eventStage(event)) && Date.parse(String(event.time ?? '')) >= handedOver));
+}
+
+/** The earlier carrier's follow-up, made while the delivery carrier's lookup failed. */
+interface EarlierInOutage {
+  answer: CarrierResult | null;
+  carrier: string;
+  at: string;
 }
 
 /** Further than any clock read a zone away (UTC−12 to UTC+14) can put one scan from another. */
@@ -1915,6 +1932,9 @@ export class TrackingSyncService {
     // The delivery probe the check's lookups last made or kept: whatever the check saves carries it, though the
     // origin failed or routing set its answer aside, so its gap counts it.
     let lookupProbe: JsonObject | null = null;
+    // The earlier carrier's follow-up the check made while the delivery carrier failed: its new scans, and when it
+    // was asked, are saved whether the check fails or another source answers.
+    const outage: { earlier?: EarlierInOutage } = {};
 
     const persist = async (
       values: JsonObject,
@@ -1952,6 +1972,15 @@ export class TrackingSyncService {
     const superseded = async (error: SupersededTrackingSync): Promise<SyncOutcome> => {
       await audit.finish({ outcome: 'superseded', ...(error instanceof OvertakenTrackingSync ? { errorType: 'NewerParcelWrite' } : {}) });
       return 'superseded';
+    };
+    // A check whose sources all failed saves the earlier carrier's follow-up (`outage`) with its own values: the
+    // scans new to the parcel, the copies they absorb, and when that carrier was asked. Stage and summary stay.
+    const besideFailure = (values: JsonObject): { values: JsonObject; added: JsonObject[]; absorbed: string[] } => {
+      const earlier = outage.earlier;
+      if (!earlier) return { values, added: [], absorbed: [] };
+      const { events: added, absorbed } = earlierScansInOutage(parcel, earlier);
+      const data = isRecord(values.carrier_data) ? values.carrier_data : isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+      return { values: { ...values, carrier_data: { ...data, earlier_checked_at: earlier.at } }, added, absorbed };
     };
 
     if (unsupported) {
@@ -2010,7 +2039,8 @@ export class TrackingSyncService {
       const withSavedProbe = (candidate: JsonObject) => isRecord(savedProbe) && isRecord(candidate.carrier_data)
         && candidate.carrier_data.delivery_probe === undefined
         ? { ...candidate, carrier_data: { ...candidate.carrier_data, delivery_probe: savedProbe } } : candidate;
-      const keepProbe = (probe: JsonObject) => { lookupProbe = probe; };
+      const keep = { probe: (probe: JsonObject) => { lookupProbe = probe; },
+        earlier: (earlier: EarlierInOutage) => { outage.earlier = earlier; } };
       // A check nobody asked for of a number nobody has answered, an account's for a day or a lookup's
       // that left the schedule, contacts one provider at most.
       const sparse = !askedForCheck(context.trigger)
@@ -2020,9 +2050,9 @@ export class TrackingSyncService {
       try {
         fetched = await audit.observeFetch(async () => this.adapter.fetchUniversal && carrierId !== 'amazon-shipping'
           ? await new TrackingRouter({
-            direct: (candidate, carrier) => this.fetchResult(withSavedProbe(candidate), carrier, checks, askedForCheck(context.trigger), lookupCountry, keepProbe),
+            direct: (candidate, carrier) => this.fetchResult(withSavedProbe(candidate), carrier, checks, askedForCheck(context.trigger), lookupCountry, keep),
             handoff: (candidate, carrier, origin) => this.fetchResult(withSavedProbe(candidate), carrier, checks, askedForCheck(context.trigger),
-              lookupCountry, keepProbe, origin),
+              lookupCountry, keep, origin),
             universal: (source, number, timeout, postcode, timezone, carrier) => once(universalLookupKey(source, number, postcode, timezone, carrier),
               () => this.adapter.fetchUniversal!(source, number, timeout, postcode, timezone, carrier)),
             ...(checks ? { reusedUniversal: (source: UniversalSource, number: string, postcode: string | null, timezone: string | null, carrier: string | null) =>
@@ -2040,7 +2070,7 @@ export class TrackingSyncService {
             enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true',
             enableTrack123: true,
           }).fetch(subject, !askedForCheck(context.trigger), context.signal, addition, sparse)
-          : await this.fetchResult(subject, carrierId, checks, askedForCheck(context.trigger), lookupCountry, keepProbe));
+          : await this.fetchResult(subject, carrierId, checks, askedForCheck(context.trigger), lookupCountry, keep));
       } catch (error) {
         if (carrierId === 'amazon-shipping' && error instanceof CarrierError && error.reason === 'history_expired') {
           audit.skip('normalize', 'history_expired');
@@ -2085,23 +2115,25 @@ export class TrackingSyncService {
           audit.skip('normalize', 'unannounced');
           audit.skip('persist_events', 'unannounced');
           operation = 'persist_package';
+          const waiting = besideFailure({
+            last_synced_at: this.now().toISOString(),
+            sync_status: 'waiting',
+            sync_error: null,
+            ...(error instanceof RoutingDeferred || withdrawn ? { carrier_data: {
+              ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
+              ...(error instanceof RoutingDeferred ? { routing: error.routing } : {}),
+              ...(withdrawn ? { scans_withdrawn: { ...withdrawals(parcel), [carrierId]: now.toISOString() } } : {}),
+            } } : {}),
+          });
           await audit.step('persist_package', async () => {
-            await persist({
-              last_synced_at: this.now().toISOString(),
-              sync_status: 'waiting',
-              sync_error: null,
-              ...(error instanceof RoutingDeferred || withdrawn ? { carrier_data: {
-                ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
-                ...(error instanceof RoutingDeferred ? { routing: error.routing } : {}),
-                ...(withdrawn ? { scans_withdrawn: { ...withdrawals(parcel), [carrierId]: now.toISOString() } } : {}),
-              } } : {}),
-            });
+            await persist(waiting.values, waiting.added, [], waiting.absorbed);
           });
           const completion = {
             outcome: 'waiting',
             sourceCarrier: carrierId,
             eventsReceived: 0,
             eventsNormalized: 0,
+            ...(waiting.added.length ? { eventsNew: waiting.added.length } : {}),
             ...(withdrawn ? { anomalyCodes: ['scans_withdrawn' as const] } : {}),
           } as const;
           await audit.finish(completion);
@@ -2116,6 +2148,16 @@ export class TrackingSyncService {
         throw error;
       }
 
+      // Another source answered after the delivery carrier failed: the earlier carrier's follow-up joins its answer as
+      // it joins the delivery carrier's, unless the check filed the parcel elsewhere or answered with that carrier itself.
+      // The answer then holds it, and a check that fails after this saves none of it (`besideFailure`).
+      const earlierInOutage = outage.earlier;
+      delete outage.earlier;
+      if (earlierInOutage && !fetched.earlierResult && !fetched.correction) {
+        fetched = { ...fetched, result: { ...fetched.result, earlier_checked_at: earlierInOutage.at },
+          ...(earlierInOutage.answer && fetched.sourceCarrierId !== earlierInOutage.carrier
+            ? { earlierResult: earlierInOutage.answer, earlierCarrierId: earlierInOutage.carrier, earlierFollowUp: true } : {}) };
+      }
       ({ result, sourceCarrierId } = fetched);
       // A scan dated hours after the check is stored and flagged, but sets neither status line nor stage.
       result = withoutFutureSummary(result!, sourceCarrierId!, now, storedEventIdentities(parcel));
@@ -2239,39 +2281,14 @@ export class TrackingSyncService {
       );
       const handoff = supportsSwissPostHandoff(String(parcel.tracking_number ?? ''));
       const knownUpdate = hasUpdate || Boolean(handoff && swissPostReady);
-      // A reworded scan (DPD with and without the postcode) updates its stored row in place,
-      // and a scan both a carrier and a universal provider reported is stored once.
-      // A handoff's batch also carries the earlier carrier's scans, under that carrier's policy.
-      // A scan meets the row an earlier take-over left under an old identity before any policy,
-      // then the row whose template placeholder an adapter left unfilled, the row whose place it
-      // names with a part more or less, and the row of its words with an adapter's HTML left in,
-      // whatever the carrier, then a universal provider's row to the minute of a scan it now gives
-      // to the second.
+      // A scan meets the stored rows as `storedRowMatches` says; a provider's answer moves no carrier's row later.
       const stored = storedEventIdentities(parcel);
-      const reworded = restatedIdentities(events, stored);
-      const adopt = (matches: ReadonlyMap<string, string>) => {
-        const taken = new Set(reworded.values());
-        for (const [id, saved] of matches) if (!reworded.has(id) && !taken.has(saved)) reworded.set(id, saved);
-      };
-      adopt(filledPlaceholders(events, stored));
-      adopt(requalifiedPlaces(events, stored));
-      adopt(strippedMarkup(events, stored));
-      adopt(restatedMinutes(events, stored));
       const policyCarriers = fetched.earlierResult && fetched.earlierCarrierId && fetched.earlierCarrierId !== sourceCarrierId
         ? [sourceCarrierId, fetched.earlierCarrierId] : [sourceCarrierId];
-      const held = new Map<string, string>();
-      for (const policyCarrier of policyCarriers) adopt(sameInstantIdentities(events, stored, policyCarrier, held));
-      // Whatever the policy, a carrier's scan a release reads on another clock takes over the row of its old offset.
-      for (const policyCarrier of policyCarriers) adopt(rezonedScans(events, stored, policyCarrier, reworded, held));
-      // Last, a scan its source reworded takes over the row of its old words once the source no longer lists them.
-      adopt(rewordedScans(events, stored, reworded));
       // The earlier carrier's relay of a delivery scan stays its own row, at the same second or to the minute.
       const relaying = fetched.earlierCarrierId ?? earlierCarrier(parcel);
-      const shared = sharedScans(events.filter((event) => !normalized.relays.has(String(event.provider_event_id))), stored, reworded, relaying);
-      // A scan the carrier's own answer moved a little later takes over the row it no longer lists.
-      const retimed = typeof result.tracking_provider === 'string' ? new Map<string, string>()
-        : retimedScans(events, stored, sourceCarrierId, new Map([...reworded, ...shared.reused, ...shared.skipped]));
-      const matches = { reused: new Map([...reworded, ...shared.reused, ...retimed]), skipped: shared.skipped };
+      const { reworded, held, shared, retimed, matches } = storedRowMatches(events, stored, policyCarriers, relaying,
+        normalized.relays, typeof result.tracking_provider === 'string' ? null : sourceCarrierId);
       // A scan that takes a row over keeps the row's time when its own is past when the row was
       // first stored, unless the carrier re-dated it (`retimed`).
       events = withHeldClocks(events, stored, matches.reused, heldPastFirstStored(events, stored, new Map([...reworded, ...shared.reused]), held));
@@ -2754,12 +2771,13 @@ export class TrackingSyncService {
         const failing = error.stale || refused;
         const syncError = failing ? await failureCopy(code, carrierId, parcel,
           error.routing.failures[carrierId]?.wrong_number === true) ?? error.message : null;
+        const deferred = besideFailure({ last_synced_at: this.now().toISOString(),
+          sync_status: failing ? 'error' : previousStage === 'pending' ? 'waiting' : 'ok',
+          sync_error: syncError,
+          carrier_data: { ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}), routing: error.routing },
+        });
         try {
-          await persist({ last_synced_at: this.now().toISOString(),
-            sync_status: failing ? 'error' : previousStage === 'pending' ? 'waiting' : 'ok',
-            sync_error: syncError,
-            carrier_data: { ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}), routing: error.routing },
-          });
+          await persist(deferred.values, deferred.added, [], deferred.absorbed);
         } catch (persistenceError) {
           if (persistenceError instanceof SupersededTrackingSync) return superseded(persistenceError);
           audit.reportError(persistenceError, 'persist_routing_state');
@@ -2769,21 +2787,24 @@ export class TrackingSyncService {
         // skipped, which neither health samples nor failure counts read, whatever the parcel shows.
         // Keep the failure evidence even while the parcel's error chip is suppressed.
         await audit.finish({ outcome: error.attempted > 0 ? failing ? 'error' : 'waiting' : 'skipped', sourceCarrier: carrierId,
-          error, providerFailures: error.routing.failures });
+          error, providerFailures: error.routing.failures, ...(deferred.added.length ? { eventsNew: deferred.added.length } : {}) });
         return failing ? 'errors' : 'waiting';
       }
       let message = error instanceof Error ? error.message.trim() || error.name : String(error);
       if (error instanceof SyntaxError) {
         message = 'The carrier returned a maintenance page instead of tracking data.';
       }
+      let failedNew = 0;
       try {
         await audit.step('persist_package', async () => {
-          await persist({
+          const failed = besideFailure({
             last_synced_at: this.now().toISOString(),
             sync_status: 'error',
             sync_error: await failureCopy(trackingFailureCode(error), carrierId, parcel,
               carrierErrorReason(error) === 'wrong_number') ?? message.slice(0, 500),
           });
+          await persist(failed.values, failed.added, [], failed.absorbed);
+          failedNew = failed.added.length;
         }, () => ({ purpose: 'record_error' }));
       } catch (persistenceError) {
         if (persistenceError instanceof SupersededTrackingSync) return superseded(persistenceError);
@@ -2813,6 +2834,7 @@ export class TrackingSyncService {
         statusText: result?.last_status_text,
         eventsReceived: result?.events?.length ?? 0,
         eventsNormalized: events.length,
+        ...(failedNew ? { eventsNew: failedNew } : {}),
         anomalyCodes: anomalies,
         error,
       });
@@ -2850,7 +2872,9 @@ export class TrackingSyncService {
     checks?: ParcelLookups,
     byHand = false,
     lookupCountry: string | null = null,
-    onProbe?: (probe: JsonObject) => void,
+    // What the lookup hands the check beside its answer: the delivery probe it made, and the earlier
+    // carrier's follow-up made while the delivery carrier failed.
+    keep: { probe?: (probe: JsonObject) => void; earlier?: (earlier: EarlierInOutage) => void } = {},
     // A provider's answer for a parcel filed under a carrier with no adapter of its own, which
     // stands in for the origin's: only the delivery carrier it names is asked.
     providerOrigin?: CarrierResult,
@@ -2889,14 +2913,27 @@ export class TrackingSyncService {
         return null;
       });
       const alongside = followUp === 'alongside' && await royalBrowserAllowed(carrierId, 'handoff');
-      const [answer, alongsideAnswer] = await Promise.all([
-        this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata),
-        alongside ? askEarlier() : null,
-      ]);
+      const delivery = this.fetchCarrier(checks, activeCarrier, activeNumber, null,
+        handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata);
+      const alongsideAnswer = alongside ? askEarlier() : null;
+      let answer: CarrierResult;
+      try {
+        answer = await delivery;
+      } catch (error) {
+        // The delivery carrier failing stops no follow-up: the earlier carrier is asked as it would have been, its
+        // stored scans judging whether the delivery carrier still only announces the parcel, and the check saves
+        // that carrier's new scans beside the failure.
+        const announced = followUp === 'announced' && storedAnnouncedOnly(parcel, activeCarrier, metadata)
+          && await royalBrowserAllowed(carrierId, 'handoff');
+        if (alongsideAnswer || announced) {
+          keep.earlier?.({ answer: await (alongsideAnswer ?? askEarlier()), carrier: carrierId, at: this.now().toISOString() });
+        }
+        throw error;
+      }
       const result = normalizeCarrierResult(answer);
       const afterAnnouncement = followUp === 'announced' && announcedOnly(result, metadata)
         && await royalBrowserAllowed(carrierId, 'handoff');
-      const earlier = afterAnnouncement ? await askEarlier() : alongsideAnswer;
+      const earlier = afterAnnouncement ? await askEarlier() : await alongsideAnswer;
       return {
         result: { ...result, ...(alongside || afterAnnouncement ? { earlier_checked_at: this.now().toISOString() } : {}) },
         sourceCarrierId: activeCarrier, swissPostReady: activeCarrier === 'swiss-post' ? true : null, handoffFallbackErrorType: null,
@@ -3000,7 +3037,7 @@ export class TrackingSyncService {
         }
       }
       // The check saves the probe's marker although the origin's error carries no result, or routing sets the result aside.
-      if (isRecord(origin.delivery_probe)) onProbe?.(origin.delivery_probe);
+      if (isRecord(origin.delivery_probe)) keep.probe?.(origin.delivery_probe);
       if (originError) throw originError;
       return {
         result: origin, sourceCarrierId: carrierId,
@@ -3058,7 +3095,7 @@ export class TrackingSyncService {
     }
     // Swiss Post was asked: Cainiao failing saves that ask, without a miss while Cainiao cannot say whether it moved.
     cainiao ??= await fetchCainiao().catch((error: unknown) => {
-      onProbe?.({ at: askedAt, origin_update: previousProbe?.origin_update ?? null, carrier: 'swiss-post', number: trackingNumber, misses });
+      keep.probe?.({ at: askedAt, origin_update: previousProbe?.origin_update ?? null, carrier: 'swiss-post', number: trackingNumber, misses });
       throw error;
     });
     const originUpdate = typeof cainiao.last_update === 'string' ? cainiao.last_update : previousProbe?.origin_update ?? null;
@@ -3128,6 +3165,59 @@ function providerIdentification(
 function storedEventIdentities(parcel: JsonObject): JsonObject[] {
   const stored = parcel[STORED_EVENT_IDENTITIES];
   return Array.isArray(stored) ? stored.filter(isRecord) : [];
+}
+
+/**
+ * How a check's scans meet the parcel's stored rows: the rows they take over (`matches.reused`), the rows they repeat
+ * (`matches.skipped`) and the copies they absorb (`shared.absorbed`). A reworded scan (DPD with and without the
+ * postcode) updates its stored row in place, and a scan both a carrier and a universal provider reported is stored
+ * once. A handoff's batch also carries the earlier carrier's scans, under that carrier's policy. A scan meets the row
+ * an earlier take-over left under an old identity before any policy, then the row whose template placeholder an
+ * adapter left unfilled, the row whose place it names with a part more or less, and the row of its words with an
+ * adapter's HTML left in, whatever the carrier, then a universal provider's row to the minute of a scan it now gives
+ * to the second. `relays` are the earlier carrier's relays of a delivery scan, which stay its own rows; `retimeFor`
+ * is the carrier whose own answer this is, whose scans moved a little later take over the rows it no longer lists.
+ */
+function storedRowMatches(events: readonly JsonObject[], stored: readonly JsonObject[], policyCarriers: readonly string[],
+  relaying: string | null, relays: ReadonlySet<string>, retimeFor: string | null) {
+  const reworded = restatedIdentities(events, stored);
+  const adopt = (matches: ReadonlyMap<string, string>) => {
+    const taken = new Set(reworded.values());
+    for (const [id, saved] of matches) if (!reworded.has(id) && !taken.has(saved)) reworded.set(id, saved);
+  };
+  adopt(filledPlaceholders(events, stored));
+  adopt(requalifiedPlaces(events, stored));
+  adopt(strippedMarkup(events, stored));
+  adopt(restatedMinutes(events, stored));
+  const held = new Map<string, string>();
+  for (const policyCarrier of policyCarriers) adopt(sameInstantIdentities(events, stored, policyCarrier, held));
+  // Whatever the policy, a carrier's scan a release reads on another clock takes over the row of its old offset.
+  for (const policyCarrier of policyCarriers) adopt(rezonedScans(events, stored, policyCarrier, reworded, held));
+  // Last, a scan its source reworded takes over the row of its old words once the source no longer lists them.
+  adopt(rewordedScans(events, stored, reworded));
+  const shared = sharedScans(events.filter((event) => !relays.has(String(event.provider_event_id))), stored, reworded, relaying);
+  const retimed = retimeFor === null ? new Map<string, string>()
+    : retimedScans(events, stored, retimeFor, new Map([...reworded, ...shared.reused, ...shared.skipped]));
+  return { reworded, held, shared, retimed, matches: { reused: new Map([...reworded, ...shared.reused, ...retimed]), skipped: shared.skipped } };
+}
+
+/**
+ * The scans of the earlier carrier's follow-up, made while the delivery carrier's lookup failed, that the failed
+ * check stores: those new to the parcel, which no stored row holds, repeats or gives its row to, and the copies they
+ * absorb. A scan that takes a row over waits for an answered check. Nothing for a parcel loaded without its rows.
+ */
+function earlierScansInOutage(parcel: JsonObject, earlier: EarlierInOutage): { events: JsonObject[]; absorbed: string[] } {
+  if (!earlier.answer || !Array.isArray(parcel[STORED_EVENT_IDENTITIES])) return { events: [], absorbed: [] };
+  const events = buildEvents(parcel, earlier.answer, earlier.carrier);
+  const stored = storedEventIdentities(parcel);
+  const known = new Set(stored.map((row) => String(row.provider_event_id)));
+  const { shared, matches } = storedRowMatches(events, stored, [earlier.carrier], earlier.carrier, new Set(), earlier.carrier);
+  const dated = datedObservations(events, stored, { ...matches, absorbed: shared.absorbed });
+  const added = events.filter((event) => {
+    const id = String(event.provider_event_id);
+    return !known.has(id) && !matches.reused.has(id) && !matches.skipped.has(id) && !dated.reused.has(id) && !dated.skipped.has(id);
+  });
+  return { events: added, absorbed: added.length ? [...new Set([...shared.absorbed, ...dated.absorbed])] : [] };
 }
 
 /**

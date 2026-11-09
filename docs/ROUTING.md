@@ -781,7 +781,12 @@ A parcel often changes carrier at the border. The origin history is always kept.
   (`earlier_checked_at`). After that day, while the partner has scanned nothing past the label
   since the handoff and shows no delivery round, problem, delivery or return (JRT hands a parcel
   to DHL at the shipper's pre-advice and flies it days later), the origin is asked after the
-  partner's answer every 3 h, for up to 14 days after the handoff. Its scans join the history; its failures and its clock do not touch
+  partner's answer every 3 h, for up to 14 days after the handoff. A partner whose lookup fails
+  stops none of this: the origin is asked as it would have been, the partner's stored rows and
+  the parcel's stage judging whether the partner still only announces the parcel. Its scans new
+  to the parcel are stored with the failure, which changes nothing else (the stage, summary and
+  watermark stay), and a scan that would take a stored row over waits for an answered check. A
+  provider answering in the partner's place takes the origin's scans as the partner would. Its scans join the history; its failures and its clock do not touch
   the parcel's summary or freshness watermark, and a stage it reports without a time adds no
   row stamped at observation time. One exception: when its newest dated scan in a stage is more
   than 26 h newer than everything the partner's answer shows, further than any zone can put it,

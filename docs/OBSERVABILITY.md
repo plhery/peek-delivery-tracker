@@ -210,7 +210,9 @@ monitoring. A number is not marked as pointing elsewhere when detection offers i
 carrier under another id (Amazon Shipping as Amazon Logistics), or when the parcel's
 carrier, or the carrier it handed the parcel to, tracked that number directly. Nor is a
 shape several carriers issue ambiguous once the parcel's carrier, one of them, confirmed
-the number directly. A check settles that at its end, from the carrier it filed the parcel
+the number directly, or said it holds the parcel and shows it only with an input the parcel
+lacks or not with the postcode it has (`parcel_found`, `postcode_mismatch`): the owner's
+input is wrong, not the shape. A check settles that at its end, from the carrier it filed the parcel
 under and the one that confirmed the number, so a first check that its carrier answers
 opens no case. When the lookup of a carrier that could have settled it failed, rate limited
 or down (the filed carrier if the shape fits it, else any carrier the shape fits), the gap

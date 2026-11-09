@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ChallengeError, IndeterminateError, InvalidInputError, NotFoundError, TransportError } from 'universal-parcel-scraper';
+import { ChallengeError, IndeterminateError, InputRequiredError, InvalidInputError, NotFoundError, TransportError } from 'universal-parcel-scraper';
 import type { StepOutcome } from 'universal-parcel-scraper/node';
 import { TrackingSyncAudit } from './trackingAudit';
 import { healthStepRecorder } from './trackingHealth';
@@ -93,6 +93,31 @@ describe('tracking support audit persistence', () => {
     }));
     const [step] = (request.mock.calls[1][1] as { body: { p_steps: JsonObject[] } }).body.p_steps;
     expect([step.step, (step.details as JsonObject).support_gap_reason]).toEqual(['complete', ...gap.length ? gap : [undefined]]);
+  });
+
+  it('opens no case for a shape several carriers issue once the filed carrier says it holds the parcel', async () => {
+    const gap = async (error?: Error) => {
+      const client = new SupabaseServiceClient('https://database.example', 'service-key');
+      const request = vi.spyOn(client, 'request').mockResolvedValue(true);
+      // A synthetic 11-digit number, a shape several GLS countries issue, filed under GLS Germany.
+      const audit = new TrackingSyncAudit(client, 'synthetic-package', '12345678901', 'gls-de', 'pending', { trigger: 'scheduled' });
+      await audit.start();
+      await audit.observeFetch(async () => {
+        if (error) healthStepRecorder.lookup({ carrier: 'gls-de', finalStep: 'direct', outcome: 'input_required',
+          errorType: error.name, durationMs: 1, attempts: 1, error });
+        reportTrackingLookup('Ship24', 'success');
+      });
+      audit.filed('gls-de', null);
+      await audit.finish({ outcome: 'unchanged', sourceCarrier: 'unknown', evaluateHealth: false });
+      const [step] = (request.mock.calls[1][1] as { body: { p_steps: JsonObject[] } }).body.p_steps;
+      return (step.details as JsonObject).support_gap_reason;
+    };
+    // GLS holds it for another postcode, or shows it only with one: the postcode is the owner's to correct.
+    expect(await gap(new InputRequiredError('GLS', 'postcode', 'Synthetic', { reason: 'postcode_mismatch' }))).toBeUndefined();
+    expect(await gap(new InputRequiredError('GLS', 'postcode', 'Synthetic', { reason: 'parcel_found' }))).toBeUndefined();
+    // A postcode asked for without saying it holds the parcel confirms nothing, nor does no answer.
+    expect(await gap(new InputRequiredError('GLS', 'postcode', 'Synthetic'))).toBe('ambiguous_shape');
+    expect(await gap()).toBe('ambiguous_shape');
   });
 
   it('leaves the gap of a shape several carriers issue undecided while the filed carrier\'s lookup failed', async () => {

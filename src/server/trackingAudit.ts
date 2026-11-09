@@ -144,6 +144,8 @@ export function providerFailureSummary(failures: unknown): string | null {
 const OWNER_TO_CORRECT: ReadonlySet<string> = new Set([
   'carrier:input_required', 'carrier:invalid_input', 'carrier:several_parcels', PLACEHOLDER_NUMBER,
 ]);
+/** Reasons of a missing input with which the carrier says it holds the parcel: it shows it only with that input. */
+const PARCEL_HELD_REASONS: ReadonlySet<string> = new Set(['parcel_found', 'postcode_mismatch']);
 
 /**
  * Whether the check failed on the carrier's answer for the owner to act on, through routing or not,
@@ -449,11 +451,16 @@ export class TrackingSyncAudit {
     // Such a check failed for its parcel, not for its carrier: error rates leave it out.
     const outcome: RecordedOutcome = refused && completion.outcome === 'error' ? 'refused' : completion.outcome;
     if (!this.#steps.some((step) => step.step === 'complete')) {
+      const filedCarrier = this.#filed?.carrier ?? this.configuredCarrier;
+      // A carrier that holds the parcel and shows it only with an input the parcel lacks, or not with the
+      // postcode it has (GLS), knows the number: what is left is the owner's input, not the number's shape.
+      const held = this.#healthSamples.get(`provider:${filedCarrier}`)?.details;
+      const holds = held?.category === 'input_required' && PARCEL_HELD_REASONS.has(String(held.reason));
       this.record('complete', 'succeeded', elapsedMilliseconds(this.#startedAt), {
         outcome,
         ...completion.supportEvidence,
-        ...trackingSupportGap(this.trackingNumber, this.#filed?.carrier ?? this.configuredCarrier,
-          this.#filed ? this.#filed.answeredBy : this.answeredBy, (carrier) => this.#lookups.get(carrier) === 'error'),
+        ...trackingSupportGap(this.trackingNumber, filedCarrier,
+          holds ? filedCarrier : this.#filed ? this.#filed.answeredBy : this.answeredBy, (carrier) => this.#lookups.get(carrier) === 'error'),
       });
     }
     const completedAt = new Date();

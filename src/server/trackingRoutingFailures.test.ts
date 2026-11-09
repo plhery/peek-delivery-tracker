@@ -1,7 +1,7 @@
-import { afterEach, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { RateLimitedError } from 'universal-parcel-scraper';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { RoutingDeferred, routingState, TrackingRouter } from './trackingRouting';
+import { catalogRules, quietUntil, RoutingDeferred, routingState, TrackingRouter } from './trackingRouting';
 import type { JsonObject } from './types';
 import * as monitoring from './observability';
 
@@ -24,8 +24,8 @@ function setup(time = '2026-09-10T11:00:00.000Z') {
   const router = () => new TrackingRouter({ direct, universal, health, now: () => now });
   return { direct, universal, health, router, advance: (ms: number) => { now = new Date(now.getTime() + ms); } };
 }
-async function missed(router: TrackingRouter, snapshot: JsonObject): Promise<RoutingDeferred> {
-  try { await router.fetch(snapshot, false); }
+async function missed(router: TrackingRouter, snapshot: JsonObject, scheduled = false): Promise<RoutingDeferred> {
+  try { await router.fetch(snapshot, scheduled); }
   catch (error) { if (error instanceof RoutingDeferred) return error; throw error; }
   throw new Error('Expected every source to fail');
 }
@@ -117,4 +117,57 @@ it('defers a check our own pacing refused to when the next search frees up, aski
   const limited = await missed(run.router(), parcel({ consecutive_failures: 1 }));
   expect(limited).toMatchObject({ attempted: 4, routing: { consecutive_failures: 2, failures: { 'la-poste': { kind: 'rate_limited' } } } });
   expect(run.universal).toHaveBeenCalled();
+});
+
+describe('a check every source sits out', () => {
+  const waiting = (turns: Record<string, string>, kind = 'no_history') => Object.fromEntries(Object.entries(turns)
+    .map(([source, retry]) => [source, { count: 3, kind, retry_at: retry }]));
+  const turns = { 'la-poste': '2026-09-10T15:00:00Z', ParcelsApp: '2026-09-10T17:00:00Z', Ship24: '2026-09-11T11:00:00Z', '17TRACK': '2026-09-10T14:30:00Z' };
+
+  it('holds the scheduled checks until the earliest turn, a day at most', async () => {
+    const run = setup();
+    const held = await missed(run.router(), parcel({ failures: waiting(turns) }), true);
+    expect(held).toMatchObject({ attempted: 0, routing: { next_check_at: '2026-09-10T12:00:00.000Z', quiet_until: '2026-09-10T14:30:00.000Z' } });
+    expect(quietUntil(parcel(held.routing))).toBe(Date.parse('2026-09-10T14:30:00Z'));
+    const later = Object.fromEntries(Object.keys(turns).map((source) => [source, '2026-09-13T00:00:00Z']));
+    expect((await missed(run.router(), parcel({ failures: waiting(later) }), true)).routing.quiet_until).toBe('2026-09-11T11:00:00.000Z');
+  });
+
+  it.each([
+    ['whose turn comes by the next check', { '17TRACK': '2026-09-10T11:40:00Z' }],
+    ['the check asks', {}],
+  ])('leaves the hourly check, and drops an earlier hold, beside a source %s', async (_, own) => {
+    const run = setup();
+    const others = Object.fromEntries(Object.entries(turns).filter(([source]) => source !== '17TRACK'));
+    const free = await missed(run.router(), parcel({ rules: catalogRules(), quiet_until: '2026-09-10T14:30:00.000Z',
+      failures: waiting({ ...others, ...own }) }), true);
+    expect(free.routing.quiet_until).toBeUndefined();
+    expect(quietUntil(parcel(free.routing))).toBe(0);
+  });
+
+  it.each([
+    ['its failure', { failures: { 'la-poste': { count: 1, kind: 'transport', retry_at: '2026-09-10T13:00:00Z' } } }],
+    ['its own wait while a provider serves the parcel', { preferred_provider: 'Ship24', preferred_number: 'TEST1234', direct_retry_at: '2026-09-10T13:00:00Z' }],
+  ])('counts the filed carrier\'s turn after %s, and no provider waiting for a postcode the parcel lacks', async (_, carrier: JsonObject) => {
+    const run = setup();
+    const failures = { ...waiting({ Ship24: '2026-09-10T16:00:00Z', '17TRACK': '2026-09-10T16:00:00Z' }),
+      ...waiting({ ParcelsApp: '2026-09-10T10:00:00Z' }, 'input_required'), ...carrier.failures as JsonObject };
+    const held = await missed(run.router(), parcel({ rules: catalogRules(), ...carrier, failures }), true);
+    expect(held).toMatchObject({ attempted: 0, routing: { quiet_until: '2026-09-10T13:00:00.000Z' } });
+    expect(run.direct).not.toHaveBeenCalled();
+    expect(run.universal).not.toHaveBeenCalled();
+  });
+
+  it('ends when the owner\'s input or a new carrier drops the next check, or a release ends a carrier\'s wait', () => {
+    const held = { rules: catalogRules(), next_check_at: '2026-09-10T12:00:00.000Z', quiet_until: '2026-09-10T14:30:00.000Z',
+      failures: waiting(turns) };
+    const until = Date.parse('2026-09-10T14:30:00Z');
+    expect(quietUntil(parcel(held))).toBe(until);
+    expect(quietUntil(parcel({ ...held, next_check_at: undefined }))).toBe(0);
+    expect(quietUntil({ ...parcel(held), carrier: 'dhl' })).toBe(0);
+    // A release keeps it, unless it ends a carrier's wait.
+    expect(quietUntil(parcel({ ...held, rules: 'older' }))).toBe(until);
+    expect(quietUntil(parcel({ ...held, rules: 'older', failures: { ...held.failures, ...waiting({ 'la-poste': '2026-09-10T15:00:00Z' }, 'schema') } }))).toBe(0);
+    expect(quietUntil(parcel({ ...held, rules: 'older', direct_retry_at: '2026-09-10T15:00:00Z' }))).toBe(0);
+  });
 });

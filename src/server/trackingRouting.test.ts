@@ -1216,6 +1216,28 @@ describe('persistent tracking routing', () => {
       expect(shared.asked.length).toBeGreaterThan(1);
       expect(shared.routing).not.toHaveProperty('likely_carrier');
     });
+    it('holds the scheduled checks while every carrier it may ask and every provider wait their turn', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const failures = Object.fromEntries(['ParcelsApp', 'Ship24'].map((source) => [source, { count: 3, kind: 'no_history', retry_at: '2026-09-10T18:00:00.000Z' }]));
+      const check = async (candidate_probes: JsonObject) => {
+        const run = setup();
+        const routing = state({ consecutive_failures: 0, failures, candidate_probes });
+        const deferred = await run.router.fetch(parcel({ tracking_number: swissDpd, carrier_data: { routing } }), true)
+          .catch((error: RoutingDeferred) => error);
+        expect(deferred).toBeInstanceOf(RoutingDeferred);
+        return { asked: asked(run.recognize), routing: (deferred as RoutingDeferred).routing as JsonObject };
+      };
+      // Every carrier recognition may ask, beyond the first round's.
+      const every = [...new Set([...scraper.recognitionCandidates(swissDpd),
+        ...scraper.recognitionCandidates(swissDpd, { phase: 'browser' })].map(({ carrier }) => carrier))];
+      const held = await check(probes(2, '2026-09-10T16:00:00.000Z', every));
+      expect(held.asked).toEqual([]);
+      expect(held.routing).toMatchObject({ next_check_at: '2026-09-10T13:00:00.000Z', quiet_until: '2026-09-10T16:00:00.000Z' });
+      // A carrier it has not asked yet is asked: no hold.
+      const fresh = await check(probes(2, '2026-09-10T16:00:00.000Z', every.slice(1)));
+      expect(fresh.asked).toEqual([every[0]]);
+      expect(fresh.routing).not.toHaveProperty('quiet_until');
+    });
     it('asks the carrier a number points to every 6 hours after six misses, the others daily', async () => {
       const run = setup();
       run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));

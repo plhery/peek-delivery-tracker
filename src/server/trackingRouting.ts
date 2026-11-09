@@ -87,6 +87,11 @@ export interface RoutingState extends JsonObject {
   consecutive_failures: number;
   last_event_at?: string;
   next_check_at?: string;
+  /**
+   * A check nobody answered found every source a scheduled check may ask waiting its turn past
+   * `next_check_at`: the earliest turn. Scheduled checks wait for it (quietUntil).
+   */
+  quiet_until?: string;
   direct_retry_at?: string;
   last_probe_at?: string;
   /**
@@ -202,6 +207,20 @@ export function recognizers(number: string): string[] {
  */
 export function releaseLapses(carrier: string, failure: { kind?: unknown } | undefined): boolean {
   return directCarrier(carrier) && !opensBrowser(carrier) && (failure?.kind === 'invalid_input' || failure?.kind === 'schema');
+}
+
+/**
+ * Until when scheduled checks leave the parcel, as epoch milliseconds, zero when they don't: its
+ * last check found every source they may ask waiting its turn (`quiet_until`). Whatever ends a
+ * wait sooner ends it too: the owner's input and a new carrier drop `next_check_at`, and a scraper
+ * release ends a carrier's wait (releaseLapses, `direct_retry_at`).
+ */
+export function quietUntil(parcel: JsonObject): number {
+  const state = routingState(parcel);
+  if (state.next_check_at === undefined) return 0;
+  if (state.rules !== catalogRules() && (state.direct_retry_at !== undefined
+    || Object.entries(state.failures).some(([carrier, failure]) => releaseLapses(carrier, failure)))) return 0;
+  return millis(state.quiet_until);
 }
 
 export function routingState(parcel: JsonObject): RoutingState {
@@ -745,6 +764,7 @@ export class TrackingRouter {
       }
     }
     delete state.carrier_named_at;
+    delete state.quiet_until;
     const previousFailures = state.consecutive_failures;
     const declared = String(parcel.carrier);
     const number = String(parcel.tracking_number ?? '');
@@ -1402,20 +1422,28 @@ export class TrackingRouter {
     // carrier already confirmed. Before the universals, ask the carriers the number could
     // belong to whether they know it, never another network of the filed
     // carrier's own brand, for open parcels in their first month.
-    const confirmed = state.confirmed_carrier === primary && state.confirmed_number === number;
-    const differentShape = detected.confidence === 'low' && !detected.candidates.includes(primary as never);
-    const filedCannotTrack = !confirmed && (!directCarrier(primary)
-      || state.failures[primary]?.kind === 'not_found' || differentShape);
     const open = !['delivered', 'returned'].includes(String(parcel.current_stage));
     const young = typeof parcel.created_at !== 'string' || now().getTime() - millis(parcel.created_at) < CANDIDATE_PROBE_WINDOW;
     const recognize = this.options.recognize;
-    if (!prefetchedUniversal.size && (recognize || this.options.recognizeBrowser) && filedCannotTrack && open && young && universalNumber === number && !metadata.original_carrier) {
-      const brand = carrierBrand(primary) ?? carrierBrand(declared);
-      const skip = (candidate: string) => candidate === primary || candidate === declared
-          || Boolean(brand && carrierBrand(candidate) === brand) || attemptedDirect.has(candidate)
+    // Whether recognition asks for a parcel whose carrier first asked is `filed`.
+    const recognizes = (filed: string) => Boolean(recognize || this.options.recognizeBrowser) && open && young
+      && universalNumber === number && !metadata.original_carrier
+      && !(state.confirmed_carrier === filed && state.confirmed_number === number) && (!directCarrier(filed)
+        || state.failures[filed]?.kind === 'not_found'
+        || (detected.confidence === 'low' && !detected.candidates.includes(filed as never)));
+    // The carriers it never asks: that carrier, the parcel's own, and the other networks of their brand.
+    const ownBrand = (filed: string) => {
+      const brand = carrierBrand(filed) ?? carrierBrand(declared);
+      return (candidate: string) => candidate === filed || candidate === declared || Boolean(brand && carrierBrand(candidate) === brand);
+    };
+    const recognitionOrder = (skip: (candidate: string) => boolean) => ({ hint: state.discovered_carrier, countryHint,
+      priorities: getRecognitionPriorities(number), skip });
+    if (!prefetchedUniversal.size && recognizes(primary)) {
+      const excluded = ownBrand(primary);
+      const skip = (candidate: string) => excluded(candidate) || attemptedDirect.has(candidate)
           || millis(state.candidate_probes?.[candidate]?.retry_at) > now().getTime()
           || millis(state.failures[candidate]?.retry_at) > now().getTime();
-      const ordering = { hint: state.discovered_carrier, countryHint, priorities: getRecognitionPriorities(number), skip };
+      const ordering = recognitionOrder(skip);
       const eligible = recognize ? recognitionCandidates(number, ordering) : [];
       const due = eligible.slice(0, MAX_RECOGNITIONS);
       const next = addition ? eligible.slice(MAX_RECOGNITIONS, 2 * MAX_RECOGNITIONS) : [];
@@ -1520,6 +1548,32 @@ export class TrackingRouter {
     const everyProvider = [...new Set<UniversalSource>([...(sources.includes('Track123') ? ['Track123' as const] : []), ...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...rotation.slice(offset), ...rotation.slice(0, offset),
       ...sources])];
     const ordered = sparse ? recheckSources(universalNumber, everyProvider, this.options.enablePostalNinja) : everyProvider;
+    // When a scheduled check starting from the state this check leaves could first ask anyone, as
+    // epoch milliseconds: the carrier asked first, and those detection and discovery point to,
+    // once their failure's wait is over (the one asked first, while a provider serves the parcel,
+    // once its own wait is too); each carrier recognition may ask once its probe's wait and its
+    // failure's are; each provider but one waiting for a postcode the parcel lacks once its
+    // failure's wait is. Zero when nothing is listed.
+    const nextTurn = (): number => {
+      const filed = state.confirmed_number === number && state.confirmed_carrier ? state.confirmed_carrier : declared;
+      // As tryDirect: a carrier with an adapter, given the input it needs.
+      const asks = (carrier: string) => (directCarrier(carrier) || (handedOver && carrier === declared))
+        && (carrier === declared || (state.confirmed_carrier === carrier && state.confirmed_number === number)
+          || !requiredRequirements(carrier, number).length);
+      const turns = everyProvider.filter((source) => !awaitsInput(source)).map((source) => millis(state.failures[source]?.retry_at));
+      if (asks(filed)) turns.push(Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider ? millis(state.direct_retry_at) : 0));
+      for (const carrier of [detected.confidence === 'high' ? detected.carrier : undefined, state.discovered_carrier]) {
+        if (carrier && carrier !== filed && asks(carrier)) turns.push(millis(state.failures[carrier]?.retry_at));
+      }
+      if (recognizes(filed)) {
+        const ordering = recognitionOrder(ownBrand(filed));
+        for (const { carrier } of [...(recognize ? recognitionCandidates(number, ordering) : []),
+          ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...ordering, phase: 'browser' }) : [])]) {
+          turns.push(Math.max(millis(state.candidate_probes?.[carrier]?.retry_at), millis(state.failures[carrier]?.retry_at)));
+        }
+      }
+      return turns.length ? Math.min(...turns) : 0;
+    };
     // Reserve each source’s lookup budget plus transport allowance (UPU needs only 8s).
     // Start after direct attempts so a slow carrier cannot starve discovery.
     const universalDeadline = performance.now() + sources.reduce((sum, source) => sum + universalSourceBudget(source) + 5_000, 0);
@@ -1924,6 +1978,10 @@ export class TrackingRouter {
     const deadlines = Object.entries(state.failures).filter(([provider]) => !awaitsInput(provider))
       .map(([, failure]) => millis(failure.retry_at)).filter((time) => time > now().getTime());
     state.next_check_at = iso(Math.max(now().getTime() + 15 * 60_000, Math.min(...deadlines, now().getTime() + HOUR)));
+    // Each source a scheduled check may ask still waits its turn at the next check: scheduled
+    // checks wait for the earliest, a day at most, rather than ask nobody hourly until then.
+    const turn = nextTurn();
+    if (turn > millis(state.next_check_at)) state.quiet_until = iso(Math.min(turn, now().getTime() + DAY));
     report('all_providers_unavailable', preferred ?? 'none');
     return defer();
   }

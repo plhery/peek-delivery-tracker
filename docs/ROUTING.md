@@ -359,6 +359,15 @@ as the database's API ends each answer at its row limit, and takes the least rec
 first. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
 read: the run reads those of the ones it takes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
 
+A check that nothing answered stores its next check time within the hour. When every source a
+scheduled check may ask is still waiting its turn past that time (the carrier asked first, the
+carriers its number's shape, a provider or recognition point to, and every provider but one
+waiting for a postcode the parcel lacks), scheduled checks wait for the earliest turn, a day at
+most (`quiet_until` in its routing), rather than ask nobody until then. Opening one of the
+parcel's links and a refresh by hand check it as before. Whatever ends a wait sooner ends this
+one too: the owner's postcode, link or phone digits, a postcode given to a provider, a new
+carrier, and a scraper release that ends a carrier's wait.
+
 **Someone is waiting** for a parcel while a notification can reach them: its account has
 browser or phone notifications or the delivery email on and the parcel is not muted for
 them, the account has a Live Activity device, or one of the parcel's links has an alert on.

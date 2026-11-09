@@ -3621,6 +3621,22 @@ describe('TrackingSyncService', () => {
     expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'tracking', operation: 'list_unwatched_packages' });
   });
 
+  it('leaves a parcel whose every source waits its turn until then, but not a link opened or a refresh by hand', async () => {
+    const routing = { version: 1, configured_carrier: 'swiss-post', rules: catalogRules(), failures: {}, probe_cursor: 0, discovery_cursor: 0,
+      consecutive_failures: 1, next_check_at: '2026-09-09T11:00:00.000Z', quiet_until: '2026-09-09T14:30:00.000Z' };
+    const parcel = { id: 'a1', user_id: 'a', carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
+      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok', archived_at: null, carrier_data: { routing } };
+    const run = (time: string, values: JsonObject = parcel) => new TrackingSyncService(fakeClient([values]) as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(time)).sync();
+    await expect(run('2026-09-09T12:10:00Z')).resolves.toMatchObject({ checked: 0 });
+    await expect(run('2026-09-09T14:30:00Z')).resolves.toMatchObject({ checked: 1 });
+    // The owner's input drops the next check, and the hold with it.
+    await expect(run('2026-09-09T12:10:00Z', { ...parcel, carrier_data: { routing: { ...routing, next_check_at: undefined } } }))
+      .resolves.toMatchObject({ checked: 1 });
+    expect(isOpenedParcelSyncDue(parcel, new Date('2026-09-09T12:10:00Z'))).toBe(true);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T12:10:00Z'))).toBe(true);
+  });
+
   it('queues a check when a link is opened only if the schedule would check the parcel now', () => {
     const parcel = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok', archived_at: null };

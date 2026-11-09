@@ -366,7 +366,8 @@ order by parcels desc, could_take, provider;
 
 \echo '== Followed parcels not checked for 24 h: a scheduler fault, none expected (new: added in the window)'
 \echo '   an account''s parcel with a scan, or a lookup with an alert or a link opened in 24 h; never-checked Amazon parcels'
-\echo '   and routing deferrals left out. Lookups nobody follows leave the schedule (the dormant lane above).'
+\echo '   and routing deferrals left out, a hold until every source''s turn (quiet_until) to the parcel''s next hour after it.'
+\echo '   Lookups nobody follows leave the schedule (the dormant lane above).'
 select case when package.user_id is not null then 'account' else 'lookup' end as kind, package.carrier,
        package.carrier_data->>'tracking_provider' as provider, package.sync_status,
        count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
@@ -376,6 +377,8 @@ where package.archived_at is null and package.current_stage not in ('pending', '
   and package.last_synced_at < now() - interval '24 hours' and package.sync_status is distinct from 'unsupported'
   and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'next_check_at', 'timestamptz')
     then (package.carrier_data->'routing'->>'next_check_at')::timestamptz > now() end, false)
+  and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'quiet_until', 'timestamptz')
+    then (package.carrier_data->'routing'->>'quiet_until')::timestamptz > now() - interval '1 hour' end, false)
   and (package.user_id is not null or (package.one_off and exists (
     select 1 from public.parcel_links as link
     where link.package_id = package.id and (link.last_opened_at > now() - interval '24 hours' or exists (
@@ -395,6 +398,8 @@ where package.one_off and package.archived_at is null and package.current_stage 
   and package.sync_status is distinct from 'unsupported'
   and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'next_check_at', 'timestamptz')
     then (package.carrier_data->'routing'->>'next_check_at')::timestamptz > now() end, false)
+  and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'quiet_until', 'timestamptz')
+    then (package.carrier_data->'routing'->>'quiet_until')::timestamptz > now() - interval '1 hour' end, false)
   and package.carrier_data->'routing'->'input_needed'->>'field' is distinct from 'dpdPostcode'
   and coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'last_event_at', 'timestamptz')
     then (package.carrier_data->'routing'->>'last_event_at')::timestamptz > now() - interval '14 days' end, true)

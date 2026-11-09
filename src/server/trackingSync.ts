@@ -56,7 +56,7 @@ import {
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import { UNIVERSAL_SOURCES, type UniversalSource } from 'universal-parcel-scraper';
-import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
@@ -512,6 +512,9 @@ function isScheduledTrackingSyncDue(
   { unwatched = false, oneOff = false, unfollowed = false, sharedAlerts = false, opened = false }: ScheduleContext = {},
 ): boolean {
   if (!isTrackingSyncDue(parcel, now)) return false;
+  // Every source a scheduled check may ask still waits its turn: it would ask nobody. Opening one of
+  // the parcel's links still checks it as before.
+  if (!opened && quietUntil(parcel) > now.getTime()) return false;
   const unseen = unseenFor(parcel, now);
   if (oneOff && unseen !== null && (unfollowed || unseen >= UNSEEN_HOURLY_MS)) {
     // Past its hourly checks, a lookup someone keeps an alert on, which is what watches a lookup

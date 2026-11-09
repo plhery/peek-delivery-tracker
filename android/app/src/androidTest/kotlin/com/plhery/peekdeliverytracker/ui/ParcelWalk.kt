@@ -65,7 +65,9 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
+import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_NAME
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
@@ -148,6 +150,9 @@ internal class ParcelWalk(
      * the standard one, set before [show].
      */
     var followsContrast = false
+
+    /** How the root scans labels: none unless a test gives a scanner before [show]. */
+    var scanner: LabelScanner = NoLabelScanner
 
     private val asked = mutableListOf<Intent>()
 
@@ -243,7 +248,8 @@ internal class ParcelWalk(
                 around {
                     RootHost(
                         state = this@ParcelWalk.session, language = language, dark = inDark, highContrast = highContrast,
-                        reduceMotion = reduceMotion, source = shown, inbox = inbox, identities = identities, now = { clock },
+                        reduceMotion = reduceMotion, source = shown, inbox = inbox, identities = identities, scanner = scanner,
+                        now = { clock },
                     )
                 }
             }

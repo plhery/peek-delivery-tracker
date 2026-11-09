@@ -43,7 +43,9 @@ Text.
 ## What the text can hold
 
 - `## ` and `### ` headings, paragraphs, `- ` and `1. ` lists, a `> ` note, and tables
-  with a `| --- |` line under their heading.
+  with a `| --- |` line under their heading. Each list item starts a line of its own: a
+  marker in the middle of a line, as when an edit loses the break between two items, stops
+  the build.
 - `**bold**`, `*italics*`, `` `code` `` for tracking numbers and a carrier's exact words.
 - Links to an `https://` page (in `:::sources`, `http://` too, for a site that only answers
   over plain http), to the tracker as `[Peek](/)`, which leads to the landing in

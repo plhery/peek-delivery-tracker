@@ -19,8 +19,33 @@ const LIMITS = { title: 60, description: [110, 165], words: 600, translated: [.6
 /** Chinese characters are about twice as wide as Latin letters: a search result shows about half as many. */
 const CHINESE_DESCRIPTION = [60, 85];
 
+const INLINE_TYPES = new Set(['text', 'strong', 'em', 'code', 'link', 'guide', 'carrier']);
+/** Every run of inline text in a page's blocks: paragraphs, list items, table cells, notes, steps and sources. */
+function inlineRuns(value, runs = []) {
+  if (Array.isArray(value) && value.length && value.every((node) => INLINE_TYPES.has(node?.type))) runs.push(value);
+  else if (Array.isArray(value)) for (const item of value) inlineRuns(item, runs);
+  else if (value && typeof value === 'object') for (const item of Object.values(value)) inlineRuns(item, runs);
+  return runs;
+}
+/** A run as its Markdown reads, bold kept and code left out, to see a list marker in it. */
+const markdownOf = (nodes) => nodes.map((node) => node.type === 'text' ? node.text : node.type === 'code' ? '``' :
+  node.type === 'strong' ? `**${markdownOf(node.children)}**` : node.type === 'em' ? `_${markdownOf(node.children)}_` :
+    markdownOf(node.children)).join('');
+/**
+ * A list item glued to the end of the line before it, as when an edit loses the line break between two bullets
+ * ("…mais IVA.- **CTT, Encomenda Expresso:** …"): the page would show the marker and the item inside the previous one.
+ */
+const GLUED_ITEM = /[.!?:;)»”"\]]-[ \t]+\S|\S[ \t]+[-*+][ \t]+\*\*[^*]+\*\*|[.!?:;)»”"]\d{1,2}\.[ \t]+\*\*/;
+
 /** What a guide and a carrier's page share: a title and a description a search result shows whole, and its sources last. */
 function searchable(text, where, kind, language) {
+  for (const run of inlineRuns(text.blocks)) {
+    const markdown = markdownOf(run), glued = GLUED_ITEM.exec(markdown);
+    if (glued) {
+      const around = markdown.slice(Math.max(0, glued.index - 30), glued.index + glued[0].length + 30);
+      throw new Error(`${where}: a list item starts in the middle of a line ("…${around}…"): put it on a line of its own`);
+    }
+  }
   for (const field of ['title', 'description']) {
     if (/^(["']).*\1$/s.test(text[field])) throw new Error(`${where}: the ${field} is wrapped in quotes, which the page would show; write it bare`);
   }

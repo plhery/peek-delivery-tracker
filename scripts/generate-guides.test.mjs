@@ -192,6 +192,15 @@ test('a page with a long title, a short description, or its sources anywhere but
   refusesCarriers(({ first: carrier, file }) => writeFileSync(file(carrier.id, 'en'), `${readFileSync(file(carrier.id, 'en'), 'utf8').trimEnd()}\n\nA last word.\n`), /a carrier page ends with its ":::sources"/);
 });
 
+test('a list item glued to the end of the line before it is refused, in a guide and in a carrier\'s page', () => {
+  // An edit that lost the line break between two bullets.
+  refuses(({ edit }) => edit('pt', /\n:::sources\n/, '\n- Primeiro ponto, mais IVA.- **CTT, Encomenda Expresso:** segundo ponto.\n\n:::sources\n'),
+    /pt\.md: a list item starts in the middle of a line \("….*IVA\.- \*\*CTT.*…"\): put it on a line of its own/);
+  refuses(({ edit }) => edit('de', /\n:::sources\n/, '\n- Erster Punkt im Lager. - **DPD:** zweiter Punkt.\n\n:::sources\n'), /de\.md: a list item starts in the middle of a line/);
+  refusesCarriers(({ first: carrier, edit }) => edit(carrier.id, 'en', /\n:::sources\n/, '\n1. First step, then wait.2. **Second step:** collect it.\n\n:::sources\n'),
+    /en\.md: a list item starts in the middle of a line/);
+});
+
 test('a page asks 3 to 5 questions in its last section, each ending with "?" and answered below it', () => {
   const ask = (...questions) => ({ first: carrier, file }) => writeFileSync(file(carrier.id, 'en'), asking(readFileSync(file(carrier.id, 'en'), 'utf8'), ...questions));
   const question = (number) => `### Question ${number}?\n\nAnswer ${number}.`;

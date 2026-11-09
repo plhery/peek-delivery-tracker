@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   localizedCalendarDate,
   localizedCalendarDateTime,
@@ -7,6 +7,7 @@ import {
   formatExpectedDelivery,
   relativeTime,
   scanDate,
+  timeZoneName,
 } from './format';
 
 const NOW = new Date('2026-07-01T12:00:00.000Z').getTime();
@@ -109,5 +110,34 @@ describe('scanDate', () => {
     expect(scanDate({ occurredAt: new Date(2026, 9, 2, 9, 12).toISOString() })).toEqual({ date: new Date(2026, 9, 2, 9, 12), timed: true });
     expect(scanDate({ occurredAt: new Date(2026, 9, 2, 9, 12).toISOString(), day: '2026-02-30' })).toEqual({ date: new Date(2026, 9, 2, 9, 12), timed: true });
     expect(scanDate({ occurredAt: 'not a date' })).toBeNull();
+  });
+});
+
+describe('timeZoneName', () => {
+  afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
+
+  it('names a zone in the reader’s language by its name for the whole year, in summer as in winter', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-07-15T12:00:00Z'));
+    expect(timeZoneName('en-GB', 'Europe/Paris')).toBe('Central European Time');
+    expect(timeZoneName('de', 'Europe/Berlin')).toBe('Mitteleuropäische Zeit');
+    expect(timeZoneName('en-US', 'America/New_York')).toBe('Eastern Time');
+    vi.setSystemTime(new Date('2026-01-15T12:00:00Z'));
+    expect(timeZoneName('fr', 'Europe/Paris')).toBe('heure d’Europe centrale');
+    expect(timeZoneName('zh-CN', 'Europe/Helsinki')).toBe('东欧时间');
+  });
+
+  it('names the reader’s own zone when given none', () => {
+    const own = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+    expect(timeZoneName('it', undefined)).toBe(timeZoneName('it', own));
+  });
+
+  it('gives the zone’s id where the engine names no zone for the whole year', () => {
+    const Native = Intl.DateTimeFormat;
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(((locales?: string | string[], options?: Intl.DateTimeFormatOptions) => {
+      if (options?.timeZoneName === 'longGeneric') throw new RangeError('timeZoneName');
+      return new Native(locales, options);
+    }) as unknown as typeof Intl.DateTimeFormat);
+    expect(timeZoneName('es', 'America/Argentina/Buenos_Aires')).toBe('America/Argentina/Buenos Aires');
   });
 });

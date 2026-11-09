@@ -341,6 +341,37 @@ final class LocalizationTests: XCTestCase {
         }
     }
 
+    func testTheHistoryNamesTheZoneItsTimesAreInByItsNameForTheWholeYear() throws {
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        let paris = try XCTUnwrap(TimeZone(identifier: "Europe/Paris"))
+        localizer.language = .en
+        XCTAssertEqual(localizer.timeZoneName(paris), "Central European Time")
+        XCTAssertEqual(localizer.text("timeline.timeZone", ["zone": localizer.timeZoneName(paris)]),
+                       "Times are in your time zone: Central European Time.")
+        localizer.language = .de
+        XCTAssertEqual(localizer.timeZoneName(paris), "Mitteleuropäische Zeit")
+        for language in AppLanguage.allCases {
+            localizer.language = language
+            let zone = localizer.timeZoneName(paris)
+            let line = localizer.text("timeline.timeZone", ["zone": zone])
+            XCTAssertFalse(zone.isEmpty, "\(language)")
+            XCTAssertTrue(line.contains(zone), "\(language)")
+            XCTAssertFalse(line.contains("{{"), "\(language)")
+        }
+        // A scan the carrier dated by its day alone shows no time to name a zone for.
+        let timed = TrackingEvent(id: UUID(), packageID: UUID(), stage: .inTransit, description: "Update", location: nil,
+                                  occurredAt: "2026-09-12T08:42:00Z")
+        XCTAssertTrue(timed.showsTime)
+        var dayAlone = timed
+        dayAlone.day = "2026-09-12"
+        XCTAssertFalse(dayAlone.showsTime)
+        XCTAssertTrue(PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-09-12T15:00:00Z").showsTime)
+        XCTAssertFalse(PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-09-11T22:00:00Z",
+                                            day: "2026-09-12").showsTime)
+    }
+
     func testSingularCountsInEveryLanguage() {
         let localizer = Localizer()
         let cases: [(AppLanguage, String, String, String)] = [

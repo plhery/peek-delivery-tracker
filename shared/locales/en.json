@@ -806,6 +806,7 @@
   "timeline.planned.step": "Planned, not confirmed: {{step}}",
   "timeline.planned.title": "Planned by the carrier",
   "timeline.syncing": "Checking for updates…",
+  "timeline.timeZone": "Times are in your time zone: {{zone}}.",
   "view.allCarriers": "All carriers",
   "view.carrier": "Carrier",
   "view.clear": "Clear filters",

@@ -806,6 +806,7 @@
   "timeline.planned.step": "Previsto, sin confirmar: {{step}}",
   "timeline.planned.title": "Previsto por el transportista",
   "timeline.syncing": "Buscando novedades…",
+  "timeline.timeZone": "Horas en tu zona horaria: {{zone}}.",
   "view.allCarriers": "Todos los transportistas",
   "view.carrier": "Transportista",
   "view.clear": "Borrar filtros",

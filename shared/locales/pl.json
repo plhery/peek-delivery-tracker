@@ -806,6 +806,7 @@
   "timeline.planned.step": "Zaplanowany, niepotwierdzony: {{step}}",
   "timeline.planned.title": "Zaplanowane przez przewoźnika",
   "timeline.syncing": "Sprawdzanie aktualizacji…",
+  "timeline.timeZone": "Godziny w Twojej strefie czasowej: {{zone}}.",
   "view.allCarriers": "Wszyscy przewoźnicy",
   "view.carrier": "Przewoźnik",
   "view.clear": "Wyczyść filtry",

@@ -806,6 +806,7 @@
   "timeline.planned.step": "Запланировано, не подтверждено: {{step}}",
   "timeline.planned.title": "Запланировано службой доставки",
   "timeline.syncing": "Проверяем обновления…",
+  "timeline.timeZone": "Время указано в вашем часовом поясе: {{zone}}.",
   "view.allCarriers": "Все службы доставки",
   "view.carrier": "Служба доставки",
   "view.clear": "Сбросить фильтры",

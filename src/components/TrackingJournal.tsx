@@ -1,5 +1,5 @@
-import { useId, useState } from 'react';
-import { dayAndTime, localizedCalendarDate, scanDate } from '../lib/format';
+import { useId, useState, useSyncExternalStore } from 'react';
+import { dayAndTime, localizedCalendarDate, scanDate, timeZoneName } from '../lib/format';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
@@ -58,6 +58,9 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
     : sameDay(date, now) ? t('time.today') : sameDay(date, yesterday) ? t('time.yesterday')
       : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
   const updates = (count: number) => t(count === 1 ? 'detail.updateCount.one' : 'detail.updateCount.many', { count });
+  const zone = useReaderTimeZone(languageTag);
+  // The times are the reader's, wherever the carrier scanned: one quiet line says so under the history.
+  const timed = events.some((event) => scanDate(event)?.timed) || ahead.some((step) => scanDate(step)?.timed);
 
   // A scan dated by its day alone can sort among the day before's scans, west of the carrier's zone.
   const days = [...groups].sort(([, a], [, b]) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0));
@@ -101,10 +104,21 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
     {oldest > 0 && <button type="button" className="tracking-journal__oldest" onClick={() => setOldestShown(true)}>
       <svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg>{t('link.showOldest.many', { count: oldest })}
     </button>}
+    {timed && zone && <p className="tracking-journal__zone">{t('timeline.timeZone', { zone })}</p>}
   </details>;
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+
+const never = () => () => undefined;
+
+/**
+ * The zone the reader's browser shows times in, named in the reader's language; null on the server and while the page
+ * comes alive, which only know the server's zone: a page drawn there names none rather than a wrong one.
+ */
+function useReaderTimeZone(languageTag: string): string | null {
+  return useSyncExternalStore(never, () => timeZoneName(languageTag), () => null);
+}
 
 /**
  * Whether a planned step's time is still ahead, as the server serves it (plannedSteps.ts): a step dated by its day

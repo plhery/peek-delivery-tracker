@@ -1,6 +1,10 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react';
+import { hydrateRoot } from 'react-dom/client';
+import { renderToString } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { timeZoneName } from '../lib/format';
 import { TrackingJournal } from './TrackingJournal';
 import type { TrackingEvent } from '../types';
 
@@ -71,6 +75,35 @@ describe('TrackingJournal', () => {
     rerender(<TrackingJournal events={picked} planned={plan} />);
     expect(screen.queryByRole('region', { name: 'Planned by the carrier' })).not.toBeInTheDocument();
     expect(container.querySelector('.tracking-journal__planned-mark')).toBeNull();
+  });
+
+  it('says under the history that its times are the reader’s, and names the reader’s zone', () => {
+    const { container } = render(<TrackingJournal events={[event('scan', '2024-09-09T08:42:00', 'With courier', 'Helsinki, FI')]} />);
+    const line = container.querySelector('.tracking-journal__zone');
+    expect(line).toHaveTextContent(`Times are in your time zone: ${timeZoneName('en-CH')}.`);
+    expect(container.querySelector('details')!.lastElementChild).toBe(line);
+  });
+
+  it('names no zone where no time of day is shown', () => {
+    const { container, rerender } = render(<TrackingJournal events={[{ ...event('day', '2024-09-08T22:00:00Z', 'Delivered'), day: '2024-09-09' }]} />);
+    expect(container.querySelector('.tracking-journal__zone')).toBeNull();
+    rerender(<TrackingJournal events={[]} />);
+    expect(container.querySelector('.tracking-journal__zone')).toBeNull();
+  });
+
+  it('names no zone on the server, which knows only its own, and the reader’s once the page comes alive', async () => {
+    const journal = <TrackingJournal events={[event('scan', '2024-09-09T08:42:00', 'With courier')]} />;
+    const html = renderToString(journal);
+    expect(html).toContain('With courier');
+    expect(html).not.toContain('tracking-journal__zone');
+    const host = document.createElement('div');
+    host.innerHTML = html;
+    document.body.append(host);
+    const recovered = vi.fn();
+    await act(async () => { hydrateRoot(host, journal, { onRecoverableError: recovered }); });
+    expect(host.querySelector('.tracking-journal__zone')).toHaveTextContent(timeZoneName('en-CH'));
+    expect(recovered).not.toHaveBeenCalled();
+    host.remove();
   });
 
   it('leads each place with its flag and closes it with the country’s name', () => {

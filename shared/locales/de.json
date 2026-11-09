@@ -806,6 +806,7 @@
   "timeline.planned.step": "Geplant, nicht bestätigt: {{step}}",
   "timeline.planned.title": "Vom Paketdienst geplant",
   "timeline.syncing": "Aktualisierungen werden geprüft…",
+  "timeline.timeZone": "Uhrzeiten in deiner Zeitzone: {{zone}}.",
   "view.allCarriers": "Alle Paketdienste",
   "view.carrier": "Paketdienst",
   "view.clear": "Filter löschen",

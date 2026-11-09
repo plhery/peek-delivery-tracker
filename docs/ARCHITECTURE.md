@@ -460,7 +460,9 @@ and nothing typed is sent.
   Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of
   the scan dated before it (`keptNotices`). A scan
   the carrier dated by its day alone, or on a wall clock in no zone, is served with that
-  `day`: the apps list it under that day without a time, and the delivery email names that day. `src/server/eventPlaces.ts` applies this to every parcel and link the API serves; the
+  `day`: the apps list it under that day without a time, and the delivery email names that day. The apps show
+  every other scan's time on the reader's clock, and a line under the history names that zone as the language names it
+  all year (`timeline.timeZone`); a page the server draws leaves the line out until the browser knows the zone. `src/server/eventPlaces.ts` applies this to every parcel and link the API serves; the
   account export keeps every stored row. Scans of one instant read by delivery progress
   (`EVENT_STAGE_ORDER` in `src/lib/stages.ts`) in the timeline, the map, the stage a check
   picks, the status line it saves and the scan an alert announces, even where the carrier's

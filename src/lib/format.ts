@@ -38,6 +38,30 @@ export function scanDate(event: Pick<TrackingEvent, 'occurredAt' | 'day'>): { da
   return Number.isNaN(date.getTime()) ? null : { date, timed: true };
 }
 
+const zoneNames = new Map<string, string>();
+
+/**
+ * The zone scan times are shown in, the reader's own unless `timeZone` names another, as the language names it all
+ * year round: "Central European Time", not its summer or winter name nor an offset that changes between them. An
+ * engine without such names gives the zone's id ("America/New York").
+ */
+export function timeZoneName(languageTag: string, timeZone?: string): string {
+  const zone = timeZone ?? new Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const key = `${languageTag}|${zone}`;
+  let name = zoneNames.get(key);
+  if (name === undefined) {
+    try {
+      name = new Intl.DateTimeFormat(languageTag, { timeZone: zone, timeZoneName: 'longGeneric' })
+        .formatToParts(new Date()).find((part) => part.type === 'timeZoneName')?.value;
+    } catch {
+      // An engine without generic zone names refuses the option.
+    }
+    name ||= zone.replaceAll('_', ' ');
+    zoneNames.set(key, name);
+  }
+  return name;
+}
+
 function isSameCalendarDay(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() &&
     a.getMonth() === b.getMonth() &&

@@ -469,6 +469,12 @@ final class Localizer: ObservableObject {
         formatter("HH:mm").string(from: date)
     }
 
+    /// The zone times are shown in, the device's unless `zone` names another, as the app language names it all year
+    /// round ("Central European Time"), not by its summer or winter name; the zone's id where the language has none.
+    func timeZoneName(_ zone: TimeZone = .current) -> String {
+        zone.localizedName(for: .generic, locale: language.locale) ?? zone.identifier.replacingOccurrences(of: "_", with: " ")
+    }
+
     func expectedDelivery(_ value: String, now: Date = Date()) -> String {
         let range = NSRange(value.startIndex..., in: value)
         if let match = Self.deliveryWindowPattern?.firstMatch(in: value, range: range),
@@ -658,6 +664,9 @@ extension TrackingEvent {
 
     /// The date to show for the scan: its day when it has no clock time, else its moment.
     var displayDate: Date? { calendarDay ?? DateParser.date(occurredAt) }
+
+    /// Whether the scan shows a time of day, which is the device's.
+    var showsTime: Bool { calendarDay == nil && DateParser.date(occurredAt) != nil }
 }
 
 extension PlannedTrackingEvent {
@@ -666,6 +675,9 @@ extension PlannedTrackingEvent {
 
     /// The date to show for the step: its day when it has no clock time, else its moment.
     var displayDate: Date? { calendarDay ?? DateParser.date(occurredAt) }
+
+    /// Whether the step shows a time of day, which is the device's.
+    var showsTime: Bool { calendarDay == nil && DateParser.date(occurredAt) != nil }
 
     /// Whether the step's time is still ahead, as the server serves it: a step dated by its day alone stands through
     /// that day, which starts at `occurredAt` in the carrier's zone. So a carrier's pre-written "Delivered" never shows

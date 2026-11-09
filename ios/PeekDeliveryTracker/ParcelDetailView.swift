@@ -1643,6 +1643,9 @@ struct ParcelJournal: View {
             entries.first { $0.id == current.id || $0.relays.contains(current) }?.id
         }
         let syncing = parcel.displayStatus.syncing
+        let planned = parcel.plannedEvents?.filter { $0.isAhead(of: Date()) } ?? []
+        // The times are the device's, wherever the carrier scanned: one quiet line under the history says so.
+        let timed = entries.contains { $0.event.showsTime } || planned.contains { $0.showsTime }
         return VStack(alignment: .leading, spacing: 0) {
             Button {
                 withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.2)) { showingFullJourney.toggle() }
@@ -1661,7 +1664,7 @@ struct ParcelJournal: View {
             .buttonStyle(.plain)
             .accessibilityValue(localizer.text(showingFullJourney ? "design.lessJourney" : "design.fullJourney"))
             if showingFullJourney {
-                if let planned = parcel.plannedEvents?.filter({ $0.isAhead(of: Date()) }), !planned.isEmpty {
+                if !planned.isEmpty {
                     PlannedSteps(steps: planned)
                 }
                 if groups.isEmpty {
@@ -1680,6 +1683,12 @@ struct ParcelJournal: View {
                                 syncing: syncing)
                         }
                     }
+                }
+                if timed {
+                    Text(localizer.text("timeline.timeZone", ["zone": localizer.timeZoneName()]))
+                        .font(.caption2).foregroundStyle(Brand.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 22)
                 }
             }
         }

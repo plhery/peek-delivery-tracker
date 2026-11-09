@@ -806,6 +806,7 @@
   "timeline.planned.step": "Prevista, não confirmada: {{step}}",
   "timeline.planned.title": "Previsto pela transportadora",
   "timeline.syncing": "Buscando atualizações…",
+  "timeline.timeZone": "Horários no seu fuso horário: {{zone}}.",
   "view.allCarriers": "Todas as transportadoras",
   "view.carrier": "Transportadora",
   "view.clear": "Limpar filtros",

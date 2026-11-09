@@ -806,6 +806,7 @@
   "timeline.planned.step": "Previsto, non confermato: {{step}}",
   "timeline.planned.title": "Previsto dal corriere",
   "timeline.syncing": "Ricerca degli aggiornamenti…",
+  "timeline.timeZone": "Orari nel tuo fuso orario: {{zone}}.",
   "view.allCarriers": "Tutti i corrieri",
   "view.carrier": "Corriere",
   "view.clear": "Cancella filtri",

@@ -806,6 +806,7 @@
   "timeline.planned.step": "计划中，未确认：{{step}}",
   "timeline.planned.title": "快递公司计划的步骤",
   "timeline.syncing": "正在查询新动态…",
+  "timeline.timeZone": "时间按你所在的时区显示：{{zone}}。",
   "view.allCarriers": "所有快递公司",
   "view.carrier": "快递公司",
   "view.clear": "清除筛选",

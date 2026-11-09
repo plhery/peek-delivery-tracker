@@ -310,6 +310,31 @@ describe('tracking event normalization', () => {
     ]);
   });
 
+  it('gives a notice its adapter leaves in no stage the stage of the scan before it when its map says it keeps it', () => {
+    // Royal Mail's retention, which its map leaves without a stage as it keeps the stage of the scan before it.
+    const retention = (time: string) => ({ time, description: 'Item Retention', provider_code: 'EVNRT' });
+    const scan = (time: string, stage: string) => ({ time, description: `Fixture ${stage} scan`, stage, stage_source: 'carrier_map' });
+    const stages = (carrier: string, ...events: JsonObject[]) => buildEvents({ id: 'package-1', carrier: 'usps' }, { status: 'unknown', events }, carrier)
+      .map((row) => [row.description, row.stage, (row.raw_data as JsonObject).stage_source]);
+    expect(stages('royal-mail', retention('2026-09-10T06:12:40Z'), scan('2026-09-10T06:12:00Z', 'customs'))).toEqual([
+      ['Item Retention', 'customs', 'none'], ['Fixture customs scan', 'customs', 'carrier_map'],
+    ]);
+    // Dated before it in whatever order the answer lists them, through another notice; first, it is registered.
+    expect(stages('royal-mail', scan('2026-09-10T05:00:00Z', 'accepted'), retention('2026-09-10T07:00:00Z'),
+      retention('2026-09-10T06:00:00Z'), scan('2026-09-10T08:00:00Z', 'in_transit')).map((row) => row[1])).toEqual([
+      'accepted', 'accepted', 'accepted', 'in_transit',
+    ]);
+    expect(stages('royal-mail', retention('2026-09-10T06:00:00Z'), scan('2026-09-10T08:00:00Z', 'accepted')).map((row) => row[1]))
+      .toEqual(['registered', 'accepted']);
+    // After a delivery it is pending, as any notice.
+    expect(stages('royal-mail', retention('2026-09-10T06:12:40Z'), scan('2026-09-10T06:12:00Z', 'delivered')).map((row) => row[1]))
+      .toEqual(['pending', 'delivered']);
+    // Another carrier's map says nothing of it: news that the parcel moves.
+    expect(stages('dpd', retention('2026-09-10T06:12:40Z'), scan('2026-09-10T06:12:00Z', 'customs'))).toEqual([
+      ['Item Retention', 'in_transit', 'none'], ['Fixture customs scan', 'customs', 'carrier_map'],
+    ]);
+  });
+
   it('dates scans a carrier gives by their day alone at that day, in its order, with no observed row', () => {
     // NACEX heads its history with calendar days and gives no clock (synthetic scans).
     const rows = buildEvents({ id: 'package-1', carrier: 'nacex', current_stage: 'in_transit' }, {

@@ -1,5 +1,5 @@
 import { classifyStage, inferStage, resultStage, type CarrierResult } from 'universal-parcel-scraper';
-import { eventTimestamp, resultTimezone } from 'universal-parcel-scraper/app';
+import { eventTimestamp, resultTimezone, statusMapAnswer } from 'universal-parcel-scraper/app';
 import { STAGES } from '../generated/apiContract';
 import { isRecord, type JsonObject } from './types';
 
@@ -89,6 +89,39 @@ export function scanStages(events: readonly JsonObject[], instants: readonly (st
     }
     return past && !(same && !FINAL_STAGES.has(kept)) ? 'pending' : kept;
   });
+}
+
+/** A gap note of a carrier's status map that says its scan keeps the stage of the scan before it: a notice. */
+export const KEEPS_STAGE = /keeps? the stage/;
+
+/**
+ * The scans of one carrier's answer, a notice its adapter gave no stage of its own given the stage of the scan
+ * dated before it, with no source of its own, as an adapter that keeps it gives it (DPD France's acceptance
+ * notice): the carrier's map leaves its code or wording without a stage, noting that it keeps the stage of the scan
+ * before it (Royal Mail's retention seconds after a customs hold). `scanStages` then reads it as a notice, not as
+ * news that the parcel moves. A notice dated first takes registered. Oldest first; of two scans at one instant, the
+ * one listed after is older, as carriers list theirs newest first. The stored replay restages stored rows alike.
+ */
+export function keptNotices(carrier: string, scans: readonly JsonObject[], instants: readonly (string | null)[]): JsonObject[] {
+  const notices = scans.map((scan) => {
+    if (VALID_STAGES.has(String(scan.stage ?? '')) && scan.stage_source === 'none') return false;
+    const answer = statusMapAnswer({ carrier, providerCode: typeof scan.provider_code === 'string' ? scan.provider_code : null,
+      description: String(scan.description ?? '') });
+    return answer.kind === 'intentional_gap' && KEEPS_STAGE.test(answer.note);
+  });
+  if (!notices.includes(true)) return [...scans];
+  const read = scanStages(scans, instants);
+  const times = instants.map((instant) => Date.parse(instant ?? ''));
+  const order = scans.map((_, index) => index).filter((index) => Number.isFinite(times[index]))
+    .sort((a, b) => times[a] - times[b] || b - a);
+  const kept = [...scans];
+  let previous: string | null = null;
+  for (const index of order) {
+    const declared = String(scans[index].stage ?? '');
+    if (notices[index]) kept[index] = { ...scans[index], stage: previous ?? 'registered', stage_source: 'none' };
+    previous = notices[index] ? String(kept[index].stage) : VALID_STAGES.has(declared) ? declared : read[index];
+  }
+  return kept;
 }
 
 function scanTime(event: JsonObject, zone: string): number {

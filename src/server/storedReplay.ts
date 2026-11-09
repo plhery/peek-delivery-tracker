@@ -31,7 +31,7 @@ import * as scraperApp from 'universal-parcel-scraper/app';
 import { carrierIdFromName, statusMapAnswer, type StatusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
 import { STAGES } from '../generated/apiContract';
-import { scanStages } from './disputedDelivery';
+import { KEEPS_STAGE, scanStages } from './disputedDelivery';
 import { providerEventId, scanDay, UNIVERSAL_PROVIDER, unnamedRowCarrier } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
@@ -123,7 +123,6 @@ from packages p where exists (select 1 from tracking_events e where e.package_id
 
 /** The bases `dateLocalClocks` gives a zone it deduced; a stated offset has none of them. */
 const DEDUCED = new Set(['place', 'neighbour', 'destination', 'carrier']);
-const KEEPS_STAGE = /keeps? the stage/;
 const VALID_STAGES = new Set<string>(STAGES);
 /** Stages past the label, as the sync's `rereadStage` counts progress. */
 const PROGRESS_STAGES = new Set<string>(STAGES.filter((stage) => stage !== 'pending' && stage !== 'registered'));

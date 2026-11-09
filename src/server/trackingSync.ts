@@ -64,7 +64,7 @@ import { collectedPickupPoint } from './collectedPickupPoint';
 import { afterSameDayScans } from './dayScans';
 import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
-import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
+import { carrierMovedAt, eventStage, keptNotices, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
 import { earlierCarrier } from './relayCopies';
 import { carrierBrand, eventTimestamp, latestResultTime, resultTimezone, statusMapAnswer, SWISS_POST_GLOBAL_STATUSES } from 'universal-parcel-scraper/app';
@@ -845,11 +845,13 @@ export function buildEvents(
     instants[index] = start ? at.toUTC().toISO({ suppressMilliseconds: true }) : timed;
     older = at;
   }
-  const stages = scanStages(scans, instants);
+  // A notice its carrier's map says keeps the stage of the scan before it takes that stage (keptNotices).
+  const read = keptNotices(carrierId, scans, instants);
+  const stages = scanStages(read, instants);
   // Such a scan also follows the scans of its day before it from any source; the stages stay as read.
-  const ordered = afterSameDayScans(scans, days, dayZone, instants, stages, storedEventIdentities(parcel), observedAt);
-  const dated = scanStages(scans, ordered).every((stage, index) => stage === stages[index]) ? ordered : instants;
-  for (const [index, raw] of scans.entries()) {
+  const ordered = afterSameDayScans(read, days, dayZone, instants, stages, storedEventIdentities(parcel), observedAt);
+  const dated = scanStages(read, ordered).every((stage, index) => stage === stages[index]) ? ordered : instants;
+  for (const [index, raw] of read.entries()) {
     const description = String(raw.description ?? UNWORDED_STEP).trim();
     const location = String(raw.location ?? '').trim();
     const occurredAt = dated[index];

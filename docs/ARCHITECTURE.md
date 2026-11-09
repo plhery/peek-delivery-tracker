@@ -455,7 +455,10 @@ and nothing typed is sent.
   the apps' headline, alerts and the delivery email go by the newest scan in a stage, which a
   pending scan never makes look out of date. A notice in that scan's stage keeps it, but after a
   delivery or a return: it is served under the scan (`relay_of`), so the headline stays on the
-  scan, and it announces nothing (`src/server/stageNotices.ts`). A scan
+  scan, and it announces nothing (`src/server/stageNotices.ts`). A scan its adapter leaves in no
+  stage whose code or wording the carrier's map notes keeps the stage of the scan before it (Royal
+  Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of
+  the scan dated before it (`keptNotices`). A scan
   the carrier dated by its day alone, or on a wall clock in no zone, is served with that
   `day`: the apps list it under that day without a time, and the delivery email names that day. `src/server/eventPlaces.ts` applies this to every parcel and link the API serves; the
   account export keeps every stored row. Scans of one instant read by delivery progress

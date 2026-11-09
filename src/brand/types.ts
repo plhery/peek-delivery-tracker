@@ -731,7 +731,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'dago-express'
   | 'jlog'
   | 'time-matters'
-  | 'alphastline';
+  | 'alphastline'
+  | 'dpdex';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

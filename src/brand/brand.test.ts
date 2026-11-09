@@ -848,6 +848,7 @@ describe('carrier brand', () => {
       'jlog',
       'time-matters',
       'alphastline',
+      'dpdex',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

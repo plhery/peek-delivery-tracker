@@ -1151,6 +1151,9 @@
   "dpd-za": {
     "family": "dpd"
   },
+  "dpdex": {
+    "decal": "dpdex"
+  },
   "dpe-express": {
     "decal": "dpe-express"
   },

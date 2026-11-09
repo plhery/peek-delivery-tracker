@@ -168,7 +168,7 @@ data class CarrierDefinition(
         val recognitionRank: Int? = null,
         /** The numbers that recognition can answer; the carrier's rules only suggest it for others. */
         val recognitionPattern: String? = null,
-        /** Recognition asks the carrier only for a country hint among its countries. */
+        /** Recognition asks the carrier about a bare run of digits only for a country hint among its countries. */
         val recognitionServedCountriesOnly: Boolean? = null,
         val browserRecognitionRank: Int? = null,
     )

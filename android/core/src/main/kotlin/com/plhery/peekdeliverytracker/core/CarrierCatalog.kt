@@ -172,8 +172,9 @@ class CarrierCatalog private constructor(
     /**
      * The carriers the detect route asks about an ambiguous number, best first: number evidence, then a
      * passing check digit, then the catalog's recognition rank. A carrier whose recognition names the numbers
-     * it answers is asked only about those, and one asked only for its own countries is not asked: this build
-     * gives no country hint. Mirrors `recognitionAskedCarriers`; the detection golden file keeps them in step.
+     * it answers is asked only about those, and one asked only for its own countries is not asked about a bare
+     * run of digits: this build gives no country hint. Mirrors `recognitionAskedCarriers`; the detection golden
+     * file keeps them in step.
      */
     fun recognitionCandidates(raw: String, browser: Boolean = false): List<CarrierId> {
         val match = detect(raw)
@@ -204,6 +205,8 @@ class CarrierCatalog private constructor(
         // A preferred carrier that cannot be asked (DPD France) keeps its brand's other networks out: DPD's
         // guest API also answers for DPD France parcels.
         val shadowed = preferred.filter { rank(it) == null }.mapNotNull { networkBrand(it) }.toSet()
+        // Coordinadora's eleven digits are GLS's abroad; Paquetexpress's guías, letters and digits, are its own.
+        val bareRun = number.isNotEmpty() && number.all { it in '0'..'9' }
         val eligible = candidates.filter { carrier ->
             val definition = definitions[carrier] ?: return@filter false
             if (rank(carrier) == null || definition.tracking.mode != "automatic" || definition.tracking.adapter == "universal") {
@@ -211,7 +214,7 @@ class CarrierCatalog private constructor(
             }
             val pattern = definition.tracking.recognitionPattern
             if (!browser && pattern != null && !matches(number, pattern)) return@filter false
-            if (!browser && definition.tracking.recognitionServedCountriesOnly == true) return@filter false
+            if (!browser && bareRun && definition.tracking.recognitionServedCountriesOnly == true) return@filter false
             if (browser && requirements(carrier, raw).any { it.optional != true }) return@filter false
             networkBrand(carrier)?.let { it !in shadowed } ?: true
         }

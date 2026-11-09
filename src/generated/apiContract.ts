@@ -5881,7 +5881,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^E[ES][A-Z0-9]{26}$",
+        "pattern": "^E[ESX][A-Z0-9]{26}$",
         "confidence": "high"
       }
     ],

@@ -46,8 +46,8 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Carrier received the shipment` | Shouwu writes it two hours after the order data, days before the first warehouse scan: no one has the parcel yet. | "Label created" |
 | `Arrival processing center` | Shouwu's warehouse in China has taken the parcel in. | "Received by carrier" |
 | `Package processing completed` | The warehouse is done with it, before the flight. | "Received by carrier" |
-| `Shipment started the customs clearance process at origin` | Export clearance in China, not your country's customs. | "At customs" |
-| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Sent from the transfer warehouse to the airport, where China's export clearance is under way: not your country's customs. | "At customs" |
+| `Shipment started the customs clearance process at origin` | Export clearance in China has started, a routine step before the flight. Customs aren't holding the parcel. | "In transit" |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Sent from the transfer warehouse to the airport, where China's export clearance is under way: not your country's customs. | "In transit" |
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | China has cleared it for export; nothing is held. | "In transit" |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | At the departure airport after export clearance, being loaded onto a flight. | "In transit" |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |

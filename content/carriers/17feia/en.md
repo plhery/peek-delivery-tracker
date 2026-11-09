@@ -35,7 +35,7 @@ In Peek, small letters, spaces and dashes don't matter.
 | `The order has information pending customer confirmation.` (`订单待客户确认`) | The warehouse waits for 17FEIA's customer, who booked the shipment, to confirm the order. | "Received by carrier" |
 | `Order Confirmed.` (`订单已确认`) | The order is confirmed. | "Received by carrier" |
 | `Order dispatched from warehouse.` (`订单已出库`) | The parcel left the warehouse. | "In transit" |
-| `Export declaration in progress.` (`出口报关中`) | Export customs in China, not your country's. | "At customs" |
+| `Export declaration in progress.` (`出口报关中`) | The parcel is being declared for export in China, a routine step before the flight. Customs aren't holding it, and it isn't your country's customs. | "In transit" |
 | `Flight has departed.` (`航班已起飞`) | The flight has left China. | "In transit" |
 | `Flight Arrived at Transit Hub.`, `Flight Departed from Transit Hub.` | A stop on the way, then the next flight. | "In transit" |
 | `Flight Arrived at Clearance Port.` (`航班抵达清关港`) | Landed where the parcel clears import customs. | "In transit" |
@@ -91,7 +91,7 @@ Peek shows the status, each line in 17FEIA's English with its place where it giv
 
 When 17FEIA names DPD Germany, DHL or FedEx with a number of that carrier's shape, the parcel card says so ("Delivery with DPD Germany", for example) and lists that number after 17FEIA's. While that carrier has only the announcement of the parcel, with no scan of its own, the card says "Announced to …, not received yet" instead. Once that carrier shows a scan at least as recent as 17FEIA's newest, Peek follows the parcel there and keeps 17FEIA's history. When 17FEIA's tracker can't be reached, Peek asks tracking services instead and shows their history, in their words.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 17FEIA's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only"; "Important steps" includes customs, so the export declaration in China counts. Peek can't contact 17FEIA, the seller or your forwarder for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 17FEIA's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only"; "Important steps" includes customs at the clearance port, not the export declaration in China. Peek can't contact 17FEIA, the seller or your forwarder for you.
 
 ## Questions about 17FEIA tracking
 

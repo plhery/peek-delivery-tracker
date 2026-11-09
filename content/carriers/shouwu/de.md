@@ -66,8 +66,8 @@ Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 | --- | --- | --- |
 | `Shipment arrived at facility` | Der erste Scan beim Spediteur, der das Paket zum Flug bringt. | „Beim Paketdienst eingegangen“ |
 | `Shipment arrived at a carrier facility` | Beim Transporteur angekommen, der den Flug übernimmt. | „Unterwegs“ |
-| `Shipment started the customs clearance process at origin` | Die Ausfuhrabfertigung in China, nicht der Zoll bei dir. | „Beim Zoll“ |
-| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Vom Umschlaglager zum Flughafen geschickt, wo die Ausfuhrabfertigung in China läuft: nicht der Zoll bei dir. | „Beim Zoll“ |
+| `Shipment started the customs clearance process at origin` | Die Ausfuhrabfertigung in China hat begonnen, ein Routineschritt vor dem Flug. Der Zoll hält das Paket nicht fest. | „Unterwegs“ |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Vom Umschlaglager zum Flughafen geschickt, wo die Ausfuhrabfertigung in China läuft: nicht der Zoll bei dir. | „Unterwegs“ |
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | Die Ausfuhranmeldung in China ist erledigt, die Ware freigegeben. Das Paket hängt nicht beim Zoll. | „Unterwegs“ |
 | `Flight departure`, `Flight arrival` | Abflug und Landung. | „Unterwegs“ |
 | `Shipment arrived in the destination country` | Im Zielland angekommen. | „Unterwegs“ |

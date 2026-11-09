@@ -54,7 +54,7 @@ On the 17FEIA line, TSJY then copies 17FEIA's lines, in English:
 | `The package is on the way to the facility.`, `Warehouse receipt.` | On its way to 17FEIA's warehouse in China, then received there. | "In transit" |
 | `The order has information pending customer confirmation.`, `Order Confirmed.` | 17FEIA's warehouse holds the parcel until the order is confirmed. | "In transit" |
 | `Order dispatched from warehouse.` | It left 17FEIA's warehouse. | "In transit" |
-| `Export declaration in progress.` | China's export customs, not your country's. | "At customs" |
+| `Export declaration in progress.` | The parcel is being declared for export from China, a routine step before the flight. Customs aren't holding it, and it isn't your country's customs. | "In transit" |
 | `Flight has departed.` | Flown out. | "In transit" |
 | `Flight delayed.` | The flight is late. The parcel hasn't moved. | the status of the line before |
 | `Flight Arrived at Transit Hub.`, `Flight Departed from Transit Hub.` | A stop on the way. | "In transit" |

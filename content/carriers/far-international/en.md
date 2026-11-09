@@ -34,7 +34,7 @@ FAR's warehouse and flight lines come in Chinese followed by English, such as `ä
 | `Await Release from Sender` | The warehouse holds the parcel until the seller confirms it. | "Received by carrier" |
 | `Departed Warehouse`, `Pickup Scan` | Out of FAR's warehouse, then collected by the carrier for the next leg. | "In transit" |
 | `In Transit to Export Port` | On its way to the airport or port in China. | "In transit" |
-| `Export Custom Clearance Processing and Flight Booking` | China's export customs, and a flight being booked. Not your country's customs. | "At customs" |
+| `Export Custom Clearance Processing and Flight Booking` | China's export clearance is under way, a routine step before the flight, and a flight is being booked. Customs aren't holding the parcel, and it isn't your country's customs. | "In transit" |
 | `Scheduled to Take off`, `Export Scan` | Waiting for the flight, then scanned for export. | "In transit" |
 | `Arrived at departure transport hub`, `Leaving from departure country`, `Flight has departed` | At the departure hub, then flown out. | "In transit" |
 | `Arrived at Facility`, `Departed from Facility` | At a transfer centre on the way, then leaving it. | "In transit" |

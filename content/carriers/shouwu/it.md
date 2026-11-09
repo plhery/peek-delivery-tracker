@@ -46,7 +46,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Carrier received the shipment` | Shouwu la scrive due ore dopo i dati dell'ordine, giorni prima della prima scansione in magazzino: nessuno ha ancora il pacco. | «Etichetta creata» |
 | `Arrival processing center` | Il magazzino di Shouwu in Cina ha preso in carico il pacco. | «Preso in carico» |
 | `Package processing completed` | Il magazzino ha finito di lavorarlo, prima del volo. | «Preso in carico» |
-| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Partito dal magazzino di transito verso l'aeroporto, dove è in corso lo sdoganamento in uscita dalla Cina: non è la dogana del tuo Paese. | «In dogana» |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Partito dal magazzino di transito verso l'aeroporto, dove è in corso lo sdoganamento in uscita dalla Cina, un passaggio di routine prima del volo: non è la dogana del tuo Paese. | «In transito» |
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | La Cina l'ha sdoganato in uscita: non è fermo in dogana. | «In transito» |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | Arrivato all'aeroporto di partenza dopo lo sdoganamento in uscita, viene caricato su un volo. | «In transito» |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | All'aeroporto di Shanghai, poi decollato dalla Cina. | «In transito» |

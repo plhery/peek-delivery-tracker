@@ -4,6 +4,7 @@ import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { shownEvents, withoutPlaceholderAnswers } from './eventPlaces';
 import { recordParcelFeedback } from './metrics';
 import { logOperationalEvent } from './observability';
+import { servedWrittenAhead } from './plannedSteps';
 import { deployedVersion } from './reviewQueues';
 import type { SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
@@ -26,7 +27,8 @@ function cut(value: unknown, limit: number): string | null {
  * What the service holds about a parcel when an answer arrives: its status,
  * its last check and its newest scans, as its timeline shows them: without
  * a provider's copies of its carrier's scans, or Peek's own "Tracking added"
- * once carrier scans reach back to it. A placeholder number's parcel is held as
+ * once carrier scans reach back to it, and the carrier the page says writes the
+ * timeline in advance (`written_ahead_by`). A placeholder number's parcel is held as
  * it is shown, without what was stored from it (`withoutPlaceholderAnswers`). A private
  * tracking link, a postcode and a name the reader gave the parcel are left out.
  */
@@ -38,6 +40,7 @@ export function shownParcel(row: JsonObject): JsonObject {
       || String(b.id).localeCompare(String(a.id)));
   row = withoutPlaceholderAnswers(row);
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
+  const writtenAheadBy = servedWrittenAhead(row);
   return {
     status: cut(row.last_status_text, 300),
     sync_status: cut(row.sync_status, 40),
@@ -54,6 +57,7 @@ export function shownParcel(row: JsonObject): JsonObject {
       location: cut(event.location, 100),
       occurred_at: cut(event.occurred_at, 40),
     })),
+    ...writtenAheadBy ? { written_ahead_by: writtenAheadBy } : {},
   };
 }
 

@@ -313,7 +313,7 @@ was found for. `parcel_feedback` keeps one row per answer, service-role only: th
 tracking number, the carrier, the answer (`right`, `wrong` with its reasons and note, or
 `found_elsewhere` with a carrier name or tracking page), where it was asked, and `shown`,
 what the service held about the parcel at that moment (status, last check, newest scans
-as its timeline shows them).
+as its timeline shows them, and the carrier the page says writes the timeline in advance).
 A row names no account, link or device. A note may follow its reason within the hour and
 replaces the row; a tracking number takes twenty answers a day. Rows are deleted 90 days
 after they were given, by the scheduled sync's maintenance pass.

@@ -117,6 +117,18 @@ describe('what the service held when an answer arrived', () => {
     expect(JSON.stringify(shown)).not.toMatch(/In transit|Sorted|Zürich|ParcelsApp/);
   });
 
+  it('names the carrier the page said writes the timeline in advance, without the rows it held back', () => {
+    const routing = { written_ahead: { number: trackingNumber, carriers: { gzyl: ['2026-10-14T15:35:20+08:00'] } } };
+    const scripted = (overrides: JsonObject = {}) => storedPackage({
+      carrier: 'gzyl', carrier_data: { active_tracking_carrier: 'gzyl', routing }, ...overrides,
+    });
+    const shown = shownParcel(scripted());
+    expect(shown.written_ahead_by).toBe('gzyl');
+    expect(JSON.stringify(shown)).not.toContain('2026-10-14');
+    expect(shownParcel(scripted({ current_stage: 'delivered' }))).not.toHaveProperty('written_ahead_by');
+    expect(shownParcel(storedPackage())).not.toHaveProperty('written_ahead_by');
+  });
+
   it('orders scans of one instant and stage as the timeline does, by their source\'s order and then by id', () => {
     const at = '2026-10-01T10:00:00+00:00';
     const scan = (id: string, tieOrder?: number) => ({

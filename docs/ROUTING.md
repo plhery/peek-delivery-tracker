@@ -355,7 +355,9 @@ fails that way in a run, the run's other checks take the same failure without as
 Cooldowns use the persisted `last_synced_at` and `sync_status`, so restarts and repeated
 Refresh taps don't bypass them. New or reconfigured parcels are checked at once. So, at the
 next run, is a parcel a provider just filed under a carrier with an adapter of its own that
-the check did not ask (an Add preflight's history skips confirming it): that carrier is asked
+the check did not ask (an Add preflight's history skips confirming it), or one filed under no
+carrier whose provider relays only a label naming such a carrier, when that carrier needs no
+input the parcel lacks: that carrier is asked
 without waiting the provider's 15 minutes, archived or delivered too (`carrier_named_at` in its
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
 per account, round-robin, every 2 minutes. It lists every open parcel and lookup in pages by id,

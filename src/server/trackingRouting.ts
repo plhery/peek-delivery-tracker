@@ -163,7 +163,8 @@ export interface RoutingState extends JsonObject {
   browser_check?: true;
   /**
    * When a provider filed the parcel under a carrier with an adapter of its own that the
-   * check did not ask: the next run asks it (see the schedule). The next check clears it.
+   * check did not ask, or named one for a parcel filed under none: the next run asks it
+   * (see the schedule). The next check clears it.
    */
   carrier_named_at?: string;
   /** The carrier without an adapter of its own last reported as a candidate for one: a number counts once. */
@@ -1020,7 +1021,13 @@ export class TrackingRouter {
       }
       // A carrier with an adapter of its own that this check did not ask (an Add preflight's
       // history skips confirming it) is asked at the next run, not after the provider's spacing.
-      if (named && directCarrier(named) && !attemptedDirect.has(named) && millis(state.failures[named]?.retry_at) <= now().getTime()) {
+      // So is the one a provider names for a parcel filed under none when its answer files nothing
+      // yet (a label it relays), if that carrier needs no input the parcel lacks.
+      const relayedName = !named && declared === 'unknown' && !state.confirmed_carrier && !metadata.original_carrier
+        && universalNumber === number && sources.includes(provider as UniversalSource) && state.discovered_carrier
+        && !requiredRequirements(state.discovered_carrier, number).length ? state.discovered_carrier : undefined;
+      const unasked = named ?? relayedName;
+      if (unasked && directCarrier(unasked) && !attemptedDirect.has(unasked) && millis(state.failures[unasked]?.retry_at) <= now().getTime()) {
         delete state.next_check_at;
         state.carrier_named_at = now().toISOString();
       }

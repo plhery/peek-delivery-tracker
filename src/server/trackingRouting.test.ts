@@ -3567,6 +3567,37 @@ describe('universal preflight and recipient input', () => {
     expect(next.sourceCarrierId).toBe('dhl-express');
     expect(next.result.routing).not.toHaveProperty('carrier_named_at');
   });
+  it('asks at the next run the carrier a prefetched label names, though the label files nothing', async () => {
+    const value = setup();
+    value.universal.mockRejectedValue(new RateLimitedError('ParcelsApp', 30 * 60_000));
+    value.router.options.takePrefetchedUniversal = vi.fn((source) => source === 'Ship24' ? { ...thinHistory(),
+      discovered_carrier: 'dhl-express', reported_carriers: ['DHL Express'] } : undefined);
+    const result = await value.router.fetch(parcel({ tracking_number: '1234567891' }), false);
+    expect(result.correction).toBeUndefined();
+    expect(result.result.tracking_provider).toBe('Ship24');
+    expect(value.direct).not.toHaveBeenCalled();
+    expect(result.result.routing).toMatchObject({ discovered_carrier: 'dhl-express', carrier_named_at: expect.any(String) });
+    expect(result.result.routing).not.toHaveProperty('next_check_at');
+    // Only the Add check has a preflight.
+    value.router.options.takePrefetchedUniversal = undefined;
+    // The carrier's scan after the label the provider relayed.
+    value.direct.mockImplementation(async (_parcel, carrier) => ({ ...directValue(carrier), result: history('2026-09-10T11:45:00Z') }));
+    const next = await value.router.fetch(parcel({ tracking_number: '1234567891',
+      carrier_data: { routing: result.result.routing as JsonObject } }), true);
+    expect(value.direct).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'dhl-express' }), 'dhl-express');
+    expect(next.sourceCarrierId).toBe('dhl-express');
+    expect(next.result.routing).not.toHaveProperty('carrier_named_at');
+  });
+  it('leaves to the provider spacing a carrier a prefetched label names that needs an input the parcel lacks', async () => {
+    const value = setup();
+    value.universal.mockRejectedValue(new RateLimitedError('ParcelsApp', 30 * 60_000));
+    value.router.options.takePrefetchedUniversal = vi.fn((source) => source === 'Ship24' ? { ...thinHistory(),
+      discovered_carrier: 'heppner', reported_carriers: ['Heppner'] } : undefined);
+    const result = await value.router.fetch(parcel({ tracking_number: '1234567891' }), false);
+    expect(result.result.tracking_provider).toBe('Ship24');
+    expect(result.result.routing).not.toHaveProperty('carrier_named_at');
+    expect(result.result.routing).toMatchObject({ next_check_at: expect.any(String) });
+  });
   it('keeps the provider spacing when the check asked the carrier the provider named', async () => {
     const value = setup();
     value.direct.mockRejectedValue(new Error('carrier blocked'));

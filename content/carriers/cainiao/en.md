@@ -3,7 +3,7 @@ title: Cainiao tracking: numbers, statuses and who to contact
 description: Track a Cainiao parcel from AliExpress: which numbers are Cainiao's, what each status means, where a missed parcel waits and who to ask when it stalls.
 slug: cainiao-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Cainiao is Alibaba's logistics group: it ships parcels abroad for sellers on platforms such as AliExpress, and its tracking site, [global.cainiao.com](https://global.cainiao.com/), follows Cainiao and AliExpress parcels only. Type the number there or in the box above. On AliExpress, the number is under My Orders: find the order and click Tracking.
@@ -39,7 +39,7 @@ The main lines, in the order a parcel meets them:
 | `Arrived at pick-up point. Package available for collection.` | Waiting for you at a pickup point. |
 | `Package delivered` | Delivered to you, or picked up by you. |
 
-`Carrier update` is a Cainiao notice: the parcel is in transit. `Accepted for transportation by postal service` is a postal partner taking over after the hand-off, not a first scan; `Delivery Carrier Accepted` means the local carrier has it. The pickup-point line is signed for by the pickup point, not by you; `Package delivered` follows when you pick it up. `Processing delay at sorting center` is a hold-up, not a fault. `Delivery failed` closes the delivery after its attempts. For the local carrier's own statuses, see [what tracking statuses mean](guide:tracking-statuses).
+`Carrier update` is a Cainiao notice: the parcel is in transit. `Accepted for transportation by postal service` is a postal partner taking over after the hand-off, not a first scan; `Delivery Carrier Accepted` means the local carrier has it. The pickup-point line is signed for by the pickup point, not by you; `Package delivered` follows when you pick it up. `Processing delay at sorting center` is a hold-up, not a fault. `Delivery failed` closes the delivery after its attempts. `Shipment cancelled` means the seller's pickup order closed before any pickup: the shipment is cancelled and won't be delivered, and Peek shows "Needs attention". For the local carrier's own statuses, see [what tracking statuses mean](guide:tracking-statuses).
 
 ## Cainiao delivery attempt unsuccessful, pickup points and lockers
 
@@ -114,5 +114,5 @@ Cainiao gives no number of days and advises picking the parcel up at once. In Sp
 - [Cainiao España: Sobre Cainiao](https://es.cainiao.com/about-us.html) – own network in Spain, contact
 - [Ecoscooting: Delivery](https://ecoscooting.com/) – Spanish and Portuguese lines, 3 days, 14 days
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=en) – My Orders, Online Service
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, `Shipment cancelled` for a closed pickup order
 :::

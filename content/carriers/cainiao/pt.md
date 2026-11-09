@@ -3,7 +3,7 @@ title: Cainiao em Portugal: rastreio, estados e contactos
 description: A Cainiao é o grupo de logística da Alibaba. Vê os seus números e estados, como saber quem entrega em Portugal e os contactos da Cainiao e da Ecoscooting.
 slug: cainiao-rastreio
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 A Cainiao é o grupo de logística da Alibaba: envia para o estrangeiro as encomendas de vendedores de plataformas como o AliExpress, e o seu site de seguimento, [global.cainiao.com](https://global.cainiao.com/), só segue encomendas Cainiao e AliExpress. Escreve o número no site da Cainiao ou cola-o na caixa no topo desta página. No AliExpress, o número está na encomenda: a ajuda do AliExpress manda abrir «My Orders», encontrar a encomenda e carregar em «Tracking».
@@ -41,7 +41,7 @@ O site muda de idioma no botão do canto superior direito, mas o português fica
 | `Arrived at pick-up point. Package available for collection.` | À tua espera num ponto de levantamento. |
 | `Package delivered` | Entregue, ou levantada por ti. |
 
-No site em português, `No tracking updates yet` aparece como `Sem atualização de rastreamento`, e a Cainiao pede que esperes pelo envio ou perguntes ao vendedor. `Carrier update` é um aviso da Cainiao: vai a caminho. `Accepted for transportation by postal service` é um parceiro postal que a recebe de outra empresa, não a primeira leitura; `Delivery Carrier Accepted` quer dizer que a transportadora local já a tem. `Processing delay at sorting center` é um atraso, não um erro. A linha do ponto de levantamento quer dizer que foi o ponto que assinou, não tu; quando a levantas, vem `Package delivered`. `Delivery failed` fecha a entrega como falhada depois das tentativas. Quando a encomenda passa para uma transportadora portuguesa, vê [o que quer dizer cada etapa do seguimento](guide:tracking-statuses).
+No site em português, `No tracking updates yet` aparece como `Sem atualização de rastreamento`, e a Cainiao pede que esperes pelo envio ou perguntes ao vendedor. `Carrier update` é um aviso da Cainiao: vai a caminho. `Accepted for transportation by postal service` é um parceiro postal que a recebe de outra empresa, não a primeira leitura; `Delivery Carrier Accepted` quer dizer que a transportadora local já a tem. `Processing delay at sorting center` é um atraso, não um erro. A linha do ponto de levantamento quer dizer que foi o ponto que assinou, não tu; quando a levantas, vem `Package delivered`. `Delivery failed` fecha a entrega como falhada depois das tentativas. `Shipment cancelled` quer dizer que a ordem de recolha do vendedor foi fechada antes de qualquer recolha: o envio foi cancelado e não vai ser entregue, e o Peek mostra «Problema reportado». Quando a encomenda passa para uma transportadora portuguesa, vê [o que quer dizer cada etapa do seguimento](guide:tracking-statuses).
 
 ## Cainiao transportadora em Portugal: entregas e levantamento
 
@@ -124,5 +124,5 @@ A Cainiao não publica horários de entrega para Portugal, e a Ecoscooting diz q
 - [Ecoscooting: Delivery](https://ecoscooting.com/) – linha portuguesa, prazos, pontos de recolha
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=en) – My Orders, Online Service
 - [AliExpress: When will the seller send out the order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063471&language=en) – reembolso
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek mostra
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek mostra, `Shipment cancelled` depois de uma ordem de recolha fechada
 :::

@@ -3,7 +3,7 @@ title: SEUR seguimiento: número, estados y puntos Pickup
 description: Pega tu número de SEUR y mira dónde está tu paquete: cómo es el número, qué significa cada estado, qué pasa si no estás en casa y los puntos Pickup.
 slug: seur-seguimiento
 published: 2026-10-11
-updated: 2026-11-04
+updated: 2026-11-09
 ---
 
 Pega tu número de SEUR en la casilla de arriba para ver dónde está tu paquete, o escríbelo en Mis envíos de miSEUR, en seur.com, sin crear una cuenta. Suele tener 14 o 21 cifras y está en el correo de envío de la tienda o en la página de tu pedido. SEUR es una empresa española de paquetería urgente que forma parte del grupo Geopost, el mismo de DPD.
@@ -45,6 +45,7 @@ SEUR escribe sus estados en mayúsculas y en español. Esta tabla los ordena seg
 | `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` | No había nadie o estaba cerrado. Puedes pedir otra entrega. |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE LA DIRECCIÓN DE ENTREGA ESTÁ INCOMPLETA O ERRÓNEA.` | A la dirección le falta algún dato o tiene un error. Habla con el remitente o con SEUR. |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE NO ES LA DIRECCIÓN ACTUAL DEL DESTINATARIO.` | La dirección es incorrecta o antigua. Habla con el remitente o con SEUR. |
+| `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO` | El punto Pickup que se pidió no ha podido recibir el paquete. |
 | `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` | Listo para recoger en un punto Pickup. |
 | `EL ENVÍO ESTÁ ENTREGADO.` | Entregado. |
 
@@ -56,7 +57,7 @@ La entrega también puede terminar con `EL DESTINATARIO HA RETIRADO EL ENVÍO DE
 
 **Si no estás en casa.** El seguimiento pone `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`, y puedes pedir otra entrega. Si la entrega pasa a un punto SEUR Pickup, verás `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.`
 
-**Puntos SEUR Pickup y lockers.** SEUR tiene miles de tiendas Pickup y lockers; encuentra el tuyo en seur.com. Cuando el paquete llega, el seguimiento pone `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` Si un locker no ha podido recibirlo, verás `EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.`, y te toca elegir otro punto.
+**Puntos SEUR Pickup y lockers.** SEUR tiene miles de tiendas Pickup y lockers; encuentra el tuyo en seur.com. Cuando el paquete llega, el seguimiento pone `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` Si el punto Pickup que se pidió no ha podido recibir el paquete, pone `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO`. Si un locker no ha podido recibirlo, verás `EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.`, y te toca elegir otro punto.
 
 ## Paquete SEUR en demora, perdido o entregado sin recibirlo
 
@@ -76,7 +77,7 @@ Para contactar con la atención al cliente de SEUR, entra en el área de soporte
 
 [Peek](/) pregunta directamente a SEUR por los números de 21 cifras y por las referencias REC. Con 14 cifras pregunta a la vez a los transportistas más probables, SEUR el primero para España. Verás «Comprobando servicios de seguimiento…» y luego «SEUR tiene este paquete.» si solo SEUR lo conoce; si no, pulsa «Cambiar» y elige SEUR. Haz lo mismo con un número de 7 cifras: SEUR los reutiliza, así que Peek no le pregunta por uno por su cuenta. También sirve un enlace de miSEUR o de seguimiento en directo con `tracking=`, y no hace falta código postal. Un número de 21 cifras con `000` en las cifras 13 a 15 se toma por uno de Australia Post: elige SEUR con «Cambiar».
 
-Peek muestra el estado, el historial y el peso. SEUR no da el lugar de sus escaneos, así que no aparecen en el mapa. Los estados se quedan en el español de SEUR, salvo los de entrega, que salen como «Entregado». Arriba, Peek resume el paso con sus palabras: «Intento de entrega» por ausencia o por una dirección incompleta o errónea, «Incidencia» si no es la dirección actual, si falla el locker o si falta la factura, y «En aduanas» mientras la aduana lo tramita; los avisos de retraso no cambian ese estado. Peek no guarda el número de bultos, el remitente, el destinatario ni el PIN y el código QR de entrega. Las horas de SEUR no traen una zona horaria fiable, así que Peek las lee en hora de Madrid y muestra el historial propio de SEUR. Los envíos de varios bultos se siguen solo con otros servicios de seguimiento. Puedes recibir notificaciones cuando cambie el estado.
+Peek muestra el estado, el historial y el peso. SEUR no da el lugar de sus escaneos, así que no aparecen en el mapa. Los estados se quedan en el español de SEUR, salvo los de entrega, que salen como «Entregado». Arriba, Peek resume el paso con sus palabras: «Intento de entrega» por ausencia, por una dirección incompleta o errónea o si el punto Pickup no ha podido recibirlo, «Incidencia» si no es la dirección actual, si falla el locker o si falta la factura, y «En aduanas» mientras la aduana lo tramita; los avisos de retraso no cambian ese estado. Peek no guarda el número de bultos, el remitente, el destinatario ni el PIN y el código QR de entrega. Las horas de SEUR no traen una zona horaria fiable, así que Peek las lee en hora de Madrid y muestra el historial propio de SEUR. Los envíos de varios bultos se siguen solo con otros servicios de seguimiento. Puedes recibir notificaciones cuando cambie el estado.
 
 ## Preguntas sobre el seguimiento de SEUR
 

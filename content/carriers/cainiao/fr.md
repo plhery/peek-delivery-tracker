@@ -3,7 +3,7 @@ title: Cainiao suivi : numéros, statuts et qui contacter
 description: Suivre un colis Cainiao venu d'AliExpress : à quoi ressemble le numéro, ce que veut dire chaque statut, où il t'attend en France et qui contacter s'il bloque.
 slug: cainiao-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Cainiao est le groupe logistique d'Alibaba : il achemine à l'étranger les colis de vendeurs de plateformes comme AliExpress et, en France, il a aussi son propre réseau de livraison. Pour suivre ton colis, saisis son numéro sur [global.cainiao.com](https://global.cainiao.com/), le site de suivi de Cainiao, qui ne suit que les colis Cainiao et AliExpress, ou colle-le dans le champ ci-dessus. Sur AliExpress, le numéro se trouve dans le suivi de ta commande : l'aide d'AliExpress indique « My Orders », puis la commande, puis « Tracking ».
@@ -40,7 +40,7 @@ Le site de Cainiao s'ouvre en anglais tant que tu n'as pas choisi une autre lang
 | `Package delivered` | Livré, ou retiré par toi au point de retrait. |
 | `Delivery failed` | Après les tentatives, la livraison est classée en échec. |
 
-`Carrier update` est un avis de Cainiao : le colis est en route. `Accepted for transportation by postal service` veut dire qu'un partenaire postal le prend en charge après la remise, pas qu'il s'agit du premier scan du colis ; `Delivery Carrier Accepted`, que le transporteur local l'a. La ligne du point de retrait est signée par le point, pas par toi. Et `Processing delay at sorting center` est un retard, pas une anomalie.
+`Carrier update` est un avis de Cainiao : le colis est en route. `Accepted for transportation by postal service` veut dire qu'un partenaire postal le prend en charge après la remise, pas qu'il s'agit du premier scan du colis ; `Delivery Carrier Accepted`, que le transporteur local l'a. La ligne du point de retrait est signée par le point, pas par toi. Et `Processing delay at sorting center` est un retard, pas une anomalie. `Shipment cancelled`, en revanche, veut dire que l'ordre d'enlèvement du vendeur a été clos avant tout enlèvement : l'envoi est annulé et ne sera pas livré, et Peek affiche « Problème signalé ».
 
 Le centre d'aide de Cainiao explique en français ses grands statuts, avec deux faux amis. `En attente de prise en charge par le transporteur` : le transporteur a reçu le message et ira chercher le colis plus tard. Mais `Ramassage` et `En attente de ramassage` parlent de toi : le premier veut dire que le colis est en cours de livraison ou à l'agence locale et que tu peux planifier la livraison ou le retrait, le second qu'il attend au bureau de poste que tu viennes le chercher, ou qu'il est en route vers ce bureau. `Arrivée à destination` : il est dans ton pays mais doit encore être dédouané. `Non trouvé` : numéro incorrect, invalide ou expiré, ou colis pas encore accepté par le transporteur. Après la remise, les statuts de ta poste ou du transporteur local sont expliqués dans [les étapes du suivi d'un colis](guide:tracking-statuses).
 
@@ -115,5 +115,5 @@ Parfois : Cainiao France propose des « options de retrait » en plus de la livr
 - [Cainiao España : Entrega exprés local](https://es.cainiao.com/local-express.html) – week-end en Espagne
 - [AliExpress : How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=en) – My Orders, Online Service
 - [AliExpress : I haven't received my parcel but it shows "Delivered".](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – livré mais non reçu
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek affiche
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek affiche, `Shipment cancelled` après un ordre d'enlèvement clos
 :::

@@ -3,7 +3,7 @@ title: Cainiao seguimiento en España: estados, entregas y teléfono
 description: Sigue tu paquete de Cainiao o AliExpress en España: cómo es el número, qué significa cada estado, qué pasa si falla la entrega y a quién llamar.
 slug: cainiao-seguimiento
 published: 2026-10-11
-updated: 2026-11-05
+updated: 2026-11-09
 ---
 
 Cainiao es el grupo logístico de Alibaba: lleva al extranjero los paquetes de vendedores de plataformas como AliExpress y en España dice tener su propia red de reparto. Para seguir tu paquete, escribe el número en [global.cainiao.com](https://global.cainiao.com/), su web de seguimiento, que solo sigue paquetes de Cainiao y AliExpress, o pégalo en la casilla de arriba. En AliExpress, el número está en tu pedido: entra en «My Orders», busca el pedido y pulsa «Tracking».
@@ -41,7 +41,7 @@ La web de Cainiao sale en español si lo eliges con el botón de idioma, arriba 
 | `Arrived at pick-up point. Package available for collection.` | Te espera en un punto de recogida. |
 | `Package delivered` | Entregado a ti, o recogido por ti en el punto. |
 
-`Carrier update` es un aviso de Cainiao: el paquete [sigue en tránsito](guide:tracking-statuses). `Accepted for transportation by postal service` es un socio postal que se hace cargo tras un traspaso, no el primer escaneo, y `Delivery Carrier Accepted` significa que ya lo tiene la empresa local. La línea del punto de recogida la firma el punto, no tú: `Package delivered` llega cuando lo recoges. `Processing delay at sorting center` es un retraso, no un fallo. `Delivery failed` cierra la entrega como fallida después de los intentos.
+`Carrier update` es un aviso de Cainiao: el paquete [sigue en tránsito](guide:tracking-statuses). `Accepted for transportation by postal service` es un socio postal que se hace cargo tras un traspaso, no el primer escaneo, y `Delivery Carrier Accepted` significa que ya lo tiene la empresa local. La línea del punto de recogida la firma el punto, no tú: `Package delivered` llega cuando lo recoges. `Processing delay at sorting center` es un retraso, no un fallo. `Delivery failed` cierra la entrega como fallida después de los intentos. `Shipment cancelled` quiere decir que la orden de recogida del vendedor se cerró antes de que se recogiera el paquete: el envío está cancelado y no se entregará, y Peek muestra «Incidencia».
 
 ## Entrega fallida de Cainiao, puntos de recogida y taquillas en España
 
@@ -126,5 +126,5 @@ Las fuentes de esta página no lo miden: ninguna da cifras de puntualidad ni de 
 - [AliExpress: When will the seller send out the order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063471&language=en) – pedido no enviado
 - [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por artículo, es decir, por mercancías con la misma clasificación arancelaria
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek, `Shipment cancelled` tras una orden de recogida cerrada
 :::

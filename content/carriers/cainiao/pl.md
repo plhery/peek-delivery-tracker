@@ -3,7 +3,7 @@ title: Cainiao śledzenie przesyłki: numery, statusy i kontakt
 description: Paczka z AliExpress wysłana przez Cainiao: jakie numery są Cainiao, co znaczą angielskie statusy, co z doręczeniem w Polsce i gdzie pytać, gdy utknie.
 slug: cainiao-sledzenie
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Cainiao to grupa logistyczna Alibaby: wysyła za granicę paczki sprzedawców z platform takich jak AliExpress, a jej strona śledzenia, [global.cainiao.com](https://global.cainiao.com/), pokazuje tylko przesyłki Cainiao i AliExpress. Wpisz numer na global.cainiao.com albo wklej go w pole na samej górze tej strony. Na AliExpress numer jest przy zamówieniu: pomoc AliExpress, także w wersji polskiej, opisuje to po angielsku jako „My Orders”, potem zamówienie i „Tracking”.
@@ -42,7 +42,7 @@ Stronę global.cainiao.com przełączysz na polski przyciskiem języka w prawym 
 
 `Carrier update` to komunikat Cainiao: paczka jest w drodze. `Accepted for transportation by postal service` znaczy, że po przekazaniu przejął ją partner pocztowy, a nie że to pierwszy skan; `Delivery Carrier Accepted`, że ma ją przewoźnik na miejscu. Linie w rodzaju `Arrived in transit country/region` mówią, że paczka jedzie przez kraj trzeci. Już przy statusie `Leaving Origin` (paczka opuściła kraj nadania) pomoc Cainiao pisze, żeby się nie martwić, jeśli nie jedzie prosto do kraju docelowego. `Processing delay at sorting center` to opóźnienie, nie błąd.
 
-Linia o punkcie odbioru znaczy, że paczkę pokwitował punkt, nie Ty: `Package delivered` pojawia się dopiero, gdy ją odbierzesz. `Delivery failed` zamyka doręczenie jako nieudane po wszystkich próbach. Etapy, przez które przechodzi każda paczka, opisuje poradnik [statusy przesyłek krok po kroku](guide:tracking-statuses).
+Linia o punkcie odbioru znaczy, że paczkę pokwitował punkt, nie Ty: `Package delivered` pojawia się dopiero, gdy ją odbierzesz. `Delivery failed` zamyka doręczenie jako nieudane po wszystkich próbach. `Shipment cancelled` znaczy, że zlecenie odbioru paczki u sprzedawcy zamknięto, zanim ktokolwiek ją odebrał: przesyłka jest anulowana i nie zostanie doręczona, a Peek pokazuje „Zgłoszono problem”. Etapy, przez które przechodzi każda paczka, opisuje poradnik [statusy przesyłek krok po kroku](guide:tracking-statuses).
 
 ## Paczka Cainiao w Polsce: doręczenie, punkty i automaty
 
@@ -122,5 +122,5 @@ Przy zamówieniu z AliExpress zwrot załatwiasz w sporze na AliExpress i odsyła
 - [AliExpress: I haven't received my parcel but it shows Delivered](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – poczta lub przewoźnik w kraju docelowym, jego strona przez Cainiao
 - [AliExpress: When will the seller send out the order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063471&language=en) – zwrot pieniędzy, gdy zamówienie nie wyjdzie na czas
 - [AliExpress: How do I return goods?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060582431&language=en) – 10 dni, 30 dni, 3–20 dni roboczych
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, `Shipment cancelled` po zamkniętym zleceniu odbioru
 :::

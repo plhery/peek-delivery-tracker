@@ -3,7 +3,7 @@ title: Cainiao tracking: numero, stati e pacco che non arriva
 description: Tracking Cainiao per i pacchi AliExpress: quale numero usare, cosa vogliono dire gli stati in inglese e a chi scrivere se il pacco non arriva in Italia.
 slug: cainiao-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Cainiao è il gruppo logistico di Alibaba: spedisce all'estero i pacchi dei venditori di piattaforme come AliExpress. Il suo sito di tracciamento, [global.cainiao.com](https://global.cainiao.com/), segue solo i pacchi Cainiao e AliExpress: inserisci lì il numero, oppure incollalo nel box qui sopra. Su AliExpress parti da «My Orders»: trova l'ordine e clicca «Tracking».
@@ -42,7 +42,7 @@ Il sito di Cainiao si apre in inglese, a meno che tu non scelga un'altra lingua 
 | `Arrived at pick-up point. Package available for collection.` | Ti aspetta in un punto di ritiro. |
 | `Package delivered` | Consegnato a te, o ritirato da te. |
 
-`Carrier update` è un avviso di Cainiao: il pacco è in viaggio. `Accepted for transportation by postal service` è un partner postale che prende il pacco dopo il passaggio di consegne, non la prima scansione; `Delivery Carrier Accepted` vuol dire che ce l'ha il corriere locale. La riga del punto di ritiro la firma il punto di ritiro, non tu: `Package delivered` arriva quando lo ritiri. `Processing delay at sorting center` è un ritardo nello smistamento, non un'anomalia. `Delivery failed`, invece, chiude la consegna come fallita dopo i tentativi. Le fasi comuni a tutti i corrieri, con le diciture italiane di Poste, UPS e la Posta, sono in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses).
+`Carrier update` è un avviso di Cainiao: il pacco è in viaggio. `Accepted for transportation by postal service` è un partner postale che prende il pacco dopo il passaggio di consegne, non la prima scansione; `Delivery Carrier Accepted` vuol dire che ce l'ha il corriere locale. La riga del punto di ritiro la firma il punto di ritiro, non tu: `Package delivered` arriva quando lo ritiri. `Processing delay at sorting center` è un ritardo nello smistamento, non un'anomalia. `Delivery failed`, invece, chiude la consegna come fallita dopo i tentativi. `Shipment cancelled` vuol dire che l'ordine di ritiro del venditore è stato chiuso prima di qualsiasi ritiro: la spedizione è annullata e non verrà consegnata, e Peek mostra «Problema segnalato». Le fasi comuni a tutti i corrieri, con le diciture italiane di Poste, UPS e la Posta, sono in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses).
 
 ## Consegna Cainiao in Italia: mancata consegna e punti di ritiro
 
@@ -120,5 +120,5 @@ Non ne indica: nessuna pagina di Cainiao riporta un ufficio o un contatto in Ita
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=it) – My Orders, Tracking, Online Service
 - [AliExpress: I haven't received my parcel but it shows "Delivered"](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – aspettare, ufficio postale o corriere, contatti dal sito di Cainiao
 - [AliExpress: When will the seller send out the order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063471&language=en) – ordine chiuso e rimborsato
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, `Shipment cancelled` dopo un ordine di ritiro chiuso
 :::

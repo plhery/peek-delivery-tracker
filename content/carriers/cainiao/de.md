@@ -3,7 +3,7 @@ title: Cainiao Sendungsverfolgung: Nummern, Status und Kontakt
 description: AliExpress-Paket mit Cainiao verfolgen: welche Nummern dazugehören, was die englischen Status bedeuten und wen du in Deutschland, Österreich und der Schweiz fragst.
 slug: cainiao-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Cainiao ist die Logistiksparte der Alibaba-Gruppe und verschickt Pakete über Grenzen hinweg, für Händler auf Plattformen wie AliExpress. Seine Tracking-Seite [global.cainiao.com](https://global.cainiao.com/) verfolgt nur Cainiao- und AliExpress-Pakete: Gib die Nummer dort ein oder füg sie oben ins Feld ein. Bei AliExpress steht sie in der Bestellung, laut AliExpress-Hilfe unter „My Orders“ und dann „Tracking“.
@@ -42,7 +42,7 @@ Die Tracking-Seite lässt sich über den Sprachknopf oben rechts auf Deutsch ums
 
 Vor dem ersten Scan zeigt die deutsche Seite den Hinweis `Kein Tracking-Update` und bittet, auf den Versand zu warten oder den Verkäufer zu fragen. `Carrier update` ist ein Hinweis von Cainiao: Das Paket ist unterwegs. Mit `Accepted for transportation by postal service` übernimmt ein Postpartner nach der Übergabe, das ist kein erster Scan; `Delivery Carrier Accepted` heißt, der Paketdienst vor Ort hat es. Zeilen wie `Arrived in transit country/region` bedeuten, dass das Paket über ein Drittland reist. Geht es nach dem Verlassen des Absenderlands nicht direkt ins Zielland, ist das laut Cainiaos Hilfe zu `Leaving Origin` kein Grund zur Sorge. `Processing delay at sorting center` ist eine Verzögerung, kein Fehler.
 
-Die Abholstellen-Zeile heißt, dass die Abholstelle das Paket quittiert hat, nicht du; `Package delivered` folgt erst, wenn du es abholst. `Delivery failed` schließt die Zustellung nach den Versuchen als gescheitert ab. Was die Status des Paketdiensts vor Ort in seiner eigenen Sendungsverfolgung bedeuten, steht unter [Sendungsstatus erklärt](guide:tracking-statuses).
+Die Abholstellen-Zeile heißt, dass die Abholstelle das Paket quittiert hat, nicht du; `Package delivered` folgt erst, wenn du es abholst. `Delivery failed` schließt die Zustellung nach den Versuchen als gescheitert ab. `Shipment cancelled` heißt, dass der Abholauftrag des Verkäufers geschlossen wurde, bevor das Paket abgeholt war: Die Sendung ist storniert und wird nicht zugestellt, und Peek zeigt „Problem gemeldet“. Was die Status des Paketdiensts vor Ort in seiner eigenen Sendungsverfolgung bedeuten, steht unter [Sendungsstatus erklärt](guide:tracking-statuses).
 
 ## Cainiao in Deutschland, Österreich und der Schweiz: Zustellung und Abholung
 
@@ -117,5 +117,5 @@ Keine, die Cainiao veröffentlicht: Stand 9. Oktober 2026 nennt keine Cainiao-Se
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=en) – My Orders, Tracking, global.cainiao.com, Online Service 24/7
 - [AliExpress: I haven't received my parcel but it shows Delivered](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – Paketdienst vor Ort über Cainiaos Seite finden
 - [AliExpress: When will the seller send out the order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063471&language=en) – Erstattung, wenn nicht rechtzeitig verschickt
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, `Shipment cancelled` bei geschlossenem Abholauftrag
 :::

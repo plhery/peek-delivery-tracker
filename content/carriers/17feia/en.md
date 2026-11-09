@@ -3,7 +3,7 @@ title: 17FEIA tracking: FEI…YQ numbers, statuses and delivery
 description: Track a 17FEIA (一起飞) parcel from China: what a FEI…YQ number looks like, what each line on its tracker means, who delivers it and what Peek shows.
 slug: 17feia-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-09
 ---
 
 17FEIA (一起飞, also Shanghai Hongshan International Logistics, 上海宏杉国际物流) is a Chinese logistics company. It takes parcels in at its warehouse in Shenzhen or Shanghai, flies them out of China and, after import customs, hands them to a carrier for delivery. Its numbers start with FEI and end with YQ. Paste yours in the box above, or use 17FEIA's own tracker on www.17feia.com. The number comes from whoever shipped your order: the seller, or the forwarder that sent your goods on from China.
@@ -41,6 +41,7 @@ In Peek, small letters, spaces and dashes don't matter.
 | `Flight Arrived at Clearance Port.` (`航班抵达清关港`) | Landed where the parcel clears import customs. | "In transit" |
 | `Broker picked up Shipment and delivered to warehouse.` (`清关行提货到仓`) | A customs broker took the shipment to its warehouse for clearance. Not a delivery to you. | "At customs" |
 | `Customs Clearance is in progress.` (`清关中`) | Import customs are checking it. | "At customs" |
+| `Customs inspection in Progress, Release Pending.` (`海关查验，暂未放行`) | After the flight landed at the clearance port, import customs are inspecting the shipment and haven't released it yet. | "At customs" |
 | `Customs Clearance Completed.` (`清关完成`) | Import customs let it through. | "In transit" |
 | `Arrived at delivery hub，Awaiting carrie scan.` (`已交仓，等待上网`) | Handed in at the delivering carrier's depot. That carrier's first scan comes next. ("carrie" is the tracker's spelling.) | "In transit" |
 
@@ -60,7 +61,7 @@ After import customs, 17FEIA hands the parcel to a carrier that takes it on to y
 
 **Missed delivery.** Attempts and pickup follow the delivering carrier's rules: ask it, with its own number. See [missed delivery](guide:missed-delivery).
 
-**Customs in the EU.** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. Peek couldn't check how these are charged on a 17FEIA parcel: ask the seller or your forwarder whether your price included them. Elsewhere, what you owe depends on your country. See [parcels held at customs](guide:customs), and before paying after a text or email, [delivery scam texts](guide:delivery-scam-texts).
+**Customs in the EU.** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. Peek couldn't check how these are charged on a 17FEIA parcel: ask the seller or your forwarder whether your price included them. Elsewhere, what you owe depends on your country. While import customs inspect the shipment and haven't released it, 17FEIA's record reads `Customs inspection in Progress, Release Pending.` See [parcels held at customs](guide:customs), and before paying after a text or email, [delivery scam texts](guide:delivery-scam-texts).
 
 ## 17FEIA parcel not updating, lost or returned
 
@@ -113,5 +114,5 @@ The carrier 17FEIA hands it to after import customs. 17FEIA's record can name it
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number shape and branches, tracker and link, labels, lines and stages, progress bar, warehouses, clocks, partners, destinations, what Peek reads, the hand-over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number shape and branches, tracker and link, labels, lines and stages (including the customs inspection), progress bar, warehouses, clocks, partners, destinations, what Peek reads, the hand-over
 :::

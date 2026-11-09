@@ -3,7 +3,7 @@ title: DHL eCommerce Poland śledzenie przesyłki: statusy i punkty
 description: Śledzenie przesyłki DHL po 11-cyfrowym numerze listu przewozowego: co znaczą statusy, punkty DHL POP i automaty DHL BOX, zmiana doręczenia i reklamacje.
 slug: dhl-ecommerce-poland-sledzenie-przesylki
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 DHL eCommerce Polska (dawniej DHL Parcel Polska) to krajowa sieć paczkowa DHL w Polsce, która doręcza paczki ze sklepów internetowych. Przesyłkę śledzisz na stronie Mój DHL albo w aplikacji Mój DHL po 11-cyfrowym numerze listu przewozowego, możesz też wkleić numer w pole powyżej. Gdy paczka zostanie nadana, DHL wysyła e-mail lub SMS z datą, miejscem i przewidywanymi godzinami doręczenia.
@@ -25,7 +25,7 @@ Tyle samo cyfr mają numery GLS we Francji, Niemczech i Szwajcarii oraz paczek P
 
 ## Statusy DHL eCommerce: co oznaczają
 
-Peek odczytuje bieżący status paczki z Mój DHL po angielsku. Oto zdania, które dostaje, mniej więcej w kolejności, w jakiej pojawiają się przy paczce:
+Gdy korzystasz z Peek po polsku, Peek pyta Mój DHL o bieżący status paczki po polsku: widzisz wtedy te same statusy w polskim brzmieniu DHL. W innych językach pyta po angielsku; oto angielskie zdania, które w tym przypadku dostaje, mniej więcej w kolejności, w jakiej pojawiają się przy paczce:
 
 | DHL pisze | Co to znaczy dla Ciebie |
 | --- | --- |
@@ -71,7 +71,7 @@ Przy paczce wycofanej, zutylizowanej albo zaginionej nie ma już na co czekać: 
 
 Przy 11 cyfrach [Peek](/) pyta przewoźników, do których numer może należeć: GLS France, GLS Germany, GLS Switzerland, PostLogistics Poczty Szwajcarskiej i DHL eCommerce Poland, a w Polsce najpierw DHL eCommerce Poland, potem GLS Poland zamiast PostLogistics. Gdy numer zna tylko DHL, zobaczysz „DHL eCommerce Poland ma tę przesyłkę.”. Jeśli zna go też któraś sieć GLS albo PostLogistics, wybierz DHL eCommerce Poland przyciskiem „Zmień”; po takim wyborze zadziałają też inne numery z 11 do 34 liter i cyfr. Numery Allegro Delivery z `AD` są odrzucane, bo śledzi je Allegro, a numery `JJD` trafiają do DHL z Niemiec, chyba że wybierzesz DHL eCommerce Poland. Działają linki z mojdhl.pl (`paczki=`) i sprawdz.dhl.com.pl (`sn=`); link z dhl.com z `tracking-id=` zostanie odczytany jako DHL z Niemiec, więc wtedy wpisz sam numer.
 
-Peek odczytuje bieżący status z Mój DHL, a historię skanów ze strony sprawdz.dhl.com.pl, w obu przypadkach po angielsku. Każdy skan ma zdanie DHL (np. `The shipment is in transit to the delivery depot.`), miejsce podane przez DHL i tamtejszą godzinę. Gdy historii nie uda się odczytać, zobaczysz tylko bieżący status, np. `Parcel has been delivered` albo `The parcel has returned to Sender`, z datą z chwili, gdy został odczytany; tylko doręczenie i zwrot mają wtedy godzinę od DHL. W obu przypadkach Peek pokazuje też przewidywany dzień dostawy (z przedziałem godzin, jeśli DHL go podaje), nadawcę (zwykle sklep) i godzinę doręczenia. Numeru obejmującego kilka paczek nie da się tak śledzić. Peek sprawdza DHL najwyżej raz na godzinę, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu czeka 2 godziny; ręczne odświeżenie czeka tyle samo. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
+Peek odczytuje bieżący status z Mój DHL po polsku albo po angielsku, jak opisano wyżej, a historię skanów ze strony sprawdz.dhl.com.pl po angielsku, niezależnie od tego, w jakim języku korzystasz z Peek. Każdy skan ma angielskie zdanie DHL (np. `The shipment is in transit to the delivery depot.`), miejsce podane przez DHL i tamtejszą godzinę. Gdy historii nie uda się odczytać, zobaczysz tylko bieżący status (np. po angielsku `Parcel has been delivered` albo `The parcel has returned to Sender`) z datą z chwili, gdy został odczytany; tylko doręczenie i zwrot mają wtedy godzinę od DHL. W obu przypadkach Peek pokazuje też przewidywany dzień dostawy (z przedziałem godzin, jeśli DHL go podaje), nadawcę (zwykle sklep) i godzinę doręczenia. Numeru obejmującego kilka paczek nie da się tak śledzić. Peek sprawdza DHL najwyżej raz na godzinę, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu czeka 2 godziny; ręczne odświeżenie czeka tyle samo. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
 
 ## Pytania o śledzenie przesyłki DHL
 
@@ -98,5 +98,5 @@ Paczki Allegro Delivery śledzi samo Allegro, więc Peek nie przyjmuje ich numer
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – punkty DHL POP w Żabce, ABC i Lewiatanie, DHL BOX 24/7
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – odpowiedzialność sprzedawcy za uszkodzenia, 30 dni, dodatkowy termin, rozwiązanie umowy
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, formularz płatności, numer 8080, bank
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje: 11 cyfr i cyfra kontrolna, statusy i opisy skanów, Allegro Delivery
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje: 11 cyfr i cyfra kontrolna, statusy i opisy skanów oraz język, w którym Peek pyta, Allegro Delivery
 :::

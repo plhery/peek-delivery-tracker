@@ -3,7 +3,7 @@ title: DHL eCommerce Poland tracking: statuses, pickup and help
 description: Track a DHL parcel in Poland: the 11-digit waybill number, what DHL eCommerce's statuses mean, DHL POP points and lockers, redirects and complaints.
 slug: dhl-ecommerce-poland-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 DHL eCommerce Poland (formerly DHL Parcel Polska) is DHL's domestic parcel network in Poland, which delivers online shops' parcels. Track a parcel on the Mój DHL website or in the Mój DHL app with its 11-digit waybill number, or paste it in the box above. DHL emails or texts you once the parcel is posted, with the delivery day, the place and the expected delivery hours.
@@ -25,7 +25,7 @@ Eleven digits also fit [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-d
 
 ## What DHL eCommerce Poland's tracking statuses mean
 
-Peek reads the parcel's current status from Mój DHL in English. The wordings it gets, roughly in the order a parcel meets them:
+Peek asks Mój DHL for the parcel's current status in Polish if you use Peek in Polish, and in English otherwise. In Polish you see DHL's own Polish wording of the same statuses. The English wordings Peek gets, roughly in the order a parcel meets them:
 
 | DHL says | What it means for you |
 | --- | --- |
@@ -71,7 +71,7 @@ A withdrawn, disposed of or lost parcel leaves nothing to wait for: Peek flags i
 
 For 11 digits, [Peek](/) asks the likely carriers at once (GLS France, GLS Germany, GLS Switzerland, Swiss Post's PostLogistics and DHL eCommerce Poland; for readers in Poland, DHL first, then GLS Poland in place of PostLogistics) and shows "DHL eCommerce Poland has this parcel." when only DHL knows the number. If a GLS network knows it too, pick DHL eCommerce Poland with "Change"; picked this way, other numbers of 11 to 34 letters and digits work too. Allegro Delivery `AD` numbers are refused, as Allegro tracks them, and `JJD` plates go to DHL Germany unless you pick DHL eCommerce Poland. Links from mojdhl.pl (`paczki=`) and sprawdz.dhl.com.pl (`sn=`) work; a dhl.com link with `tracking-id=` is read as DHL Germany, so type the number instead.
 
-Peek reads the current status from Mój DHL and the scan history from sprawdz.dhl.com.pl, both in English. Each scan comes with DHL's wording (`The shipment is in transit to the delivery depot.`, for example), the place DHL gives and the local time there. When the history can't be read, Peek shows only the current status (`Parcel has been delivered`, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. Either way it adds the expected delivery day (with DHL's planned hours when it gives them), the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks at most once an hour, out for delivery too, and waits 2 hours after a failed check; a manual refresh waits the same. It can notify you of every scan, important steps or delivery day only.
+Peek reads the current status from Mój DHL in Polish or English, as above, and the scan history from sprawdz.dhl.com.pl in English, whatever language you use Peek in. Each scan comes with DHL's English wording (`The shipment is in transit to the delivery depot.`, for example), the place DHL gives and the local time there. When the history can't be read, Peek shows only the current status (`Parcel has been delivered` in English, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. Either way it adds the expected delivery day (with DHL's planned hours when it gives them), the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks at most once an hour, out for delivery too, and waits 2 hours after a failed check; a manual refresh waits the same. It can notify you of every scan, important steps or delivery day only.
 
 ## Questions about DHL parcel tracking in Poland
 
@@ -98,5 +98,5 @@ Not here. Allegro tracks Allegro Delivery parcels itself, so Peek doesn't take t
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – DHL POP points in Żabka, ABC and Lewiatan, DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – trader responsible for damage until delivery, 30 days, extra deadline, refund
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fake courier texts, payment form, 8080, bank
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads: 11 digits and the check digit, status and scan wordings, Allegro Delivery
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads: 11 digits and the check digit, status and scan wordings and the language Peek asks in, Allegro Delivery
 :::

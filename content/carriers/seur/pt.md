@@ -3,7 +3,7 @@ title: SEUR encomenda: rastreio, estados e contactos em Portugal
 description: Seguir uma encomenda SEUR em Portugal: o número, os estados em espanhol explicados, pontos Pickup, entregas falhadas, reclamações e contactos.
 slug: seur-encomenda
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-09
 ---
 
 A SEUR é uma transportadora espanhola de encomendas e envios urgentes, do grupo Geopost, o mesmo da DPD. Para seguir a tua, abre a página de seguimento miSEUR, em seur.com, sem conta, ou cola o número na caixa acima.
@@ -39,6 +39,7 @@ Os estados aparecem em espanhol e em maiúsculas, tal como a SEUR os escreve. Pe
 | `EL ENVÍO ESTÁ EN REPARTO.` | Em distribuição, deve chegar hoje. |
 | `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` | Entrega falhada: não estava ninguém ou o local estava fechado. Podes marcar nova entrega. |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE NO ES LA DIRECCIÓN ACTUAL DEL DESTINATARIO.` | Não entregue: a morada está errada ou desatualizada. |
+| `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO` | Não entregue: o ponto SEUR Pickup pedido não pôde receber a encomenda. |
 | `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.` | A entrega passou para um ponto SEUR Pickup. |
 | `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` | Pronta a levantar no ponto SEUR Pickup. |
 | `EL ENVÍO ESTÁ ENTREGADO.` | Entregue. |
@@ -48,7 +49,7 @@ O aviso de atraso não diz o motivo nem quanto tempo.
 
 ## Levantar encomenda SEUR: pontos Pickup e entregas falhadas
 
-**Entrega falhada.** O seguimento mostra `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` e podes marcar nova entrega. Se a entrega passar para um ponto SEUR Pickup, aparece `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.` e, quando a encomenda lá chegar, `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.`
+**Entrega falhada.** O seguimento mostra `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` e podes marcar nova entrega. Se a entrega passar para um ponto SEUR Pickup, aparece `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.` e, quando a encomenda lá chegar, `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` Quando o ponto Pickup pedido não consegue receber a encomenda, o seguimento mostra `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO`.
 
 **Em Portugal**, a SEUR juntou-se à Chronopost em 2019 para formar a DPD Portugal. A DPD Portugal diz que, se não estiveres em casa, recebes um aviso de passagem com o número da encomenda. Nenhuma página oficial que consultámos confirma se é a DPD Portugal quem faz a última etapa da tua encomenda.
 

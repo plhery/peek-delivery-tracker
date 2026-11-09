@@ -3,7 +3,7 @@ title: SEUR tracking: numbers, statuses and pickup points
 description: Track a SEUR parcel in Spain: what the number looks like, what SEUR's Spanish statuses mean, Pickup points, missed deliveries and how to reach SEUR.
 slug: seur-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-09
 ---
 
 SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's miSEUR tracking page on seur.com, with a SEUR tracking link or by pasting the number in the box above.
@@ -36,6 +36,7 @@ SEUR's tracking site is in Spanish and English. The statuses below are the Spani
 | `EL ENVÍO ESTÁ EN REPARTO.` | Out for delivery today. |
 | `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` | Missed: nobody was in or the place was closed. You can rebook. |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE NO ES LA DIRECCIÓN ACTUAL DEL DESTINATARIO.` | Not delivered: the address is wrong or out of date. |
+| `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO` | Not delivered: the SEUR Pickup point asked for couldn't take it. |
 | `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` | Ready for pickup at a SEUR Pickup point. |
 | `EL ENVÍO ESTÁ ENTREGADO.` | Delivered. |
 | `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.` | Delivered to a neighbour. |
@@ -46,7 +47,7 @@ The delay message gives no reason or length. Parcels that go through customs als
 
 **Missed delivery.** The tracking shows `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`, and you can rebook. If the delivery is moved to a SEUR Pickup point, you see `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.`
 
-**SEUR Pickup points and lockers.** SEUR has thousands of Pickup shops and lockers; find one on seur.com. Once your parcel is there, the tracking shows `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.`, and after you collect it from a shop, `EL DESTINATARIO HA RETIRADO EL ENVÍO DE LA TIENDA SEUR PICKUP SELECCIONADA.` If a locker couldn't take it, `EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.` means you have to choose another point.
+**SEUR Pickup points and lockers.** SEUR has thousands of Pickup shops and lockers; find one on seur.com. Once your parcel is there, the tracking shows `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.`, and after you collect it from a shop, `EL DESTINATARIO HA RETIRADO EL ENVÍO DE LA TIENDA SEUR PICKUP SELECCIONADA.` When the Pickup point asked for couldn't take the parcel, the tracking says `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO`. If a locker couldn't take it, `EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.` means you have to choose another point.
 
 ## SEUR parcel delayed, lost or damaged
 

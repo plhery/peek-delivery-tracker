@@ -38342,13 +38342,13 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://movin.portal.shipsy.io/p/track?searchBy=referenceNumber&refNum={trackingNumber}",
+    "trackingUrlTemplate": "https://movin.portal.shipsy.io/track/result?searchBy=referenceNumber&refNum={trackingNumber}",
     "linkRules": [
       {
         "domains": [
           "movin.portal.shipsy.io"
         ],
-        "pathPattern": "^/p/track/?$",
+        "pathPattern": "^/(?:p/track|track/result)/?$",
         "params": [
           "refNum"
         ]
@@ -46805,7 +46805,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "om-logistics"
     },
     "linkRules": [],
     "detectionRules": [],

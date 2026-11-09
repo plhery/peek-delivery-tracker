@@ -43,16 +43,20 @@ import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isHeading
+import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.percentOffset
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
@@ -1008,6 +1012,22 @@ class AddParcelTest {
         assertTrue(exists(ADD_FOUND))
         node(ADD_TRACKING).assertIsFocused()
         assertEquals(listOf("parcel-paste", "parcel-paste"), source.actions.filter { it == "parcel-paste" })
+    }
+
+    @Test
+    fun aLongPressSelectsTheFoundNumberWhichTalkBackStillReadsAsFound() {
+        show()
+        open()
+        type("Your parcel 1Z999AA10123456784 is on its way")
+        settle()
+        assertEquals(text("add.foundText", mapOf("number" to "1Z999AA10123456784")), description(ADD_FOUND))
+        val popups = compose.onAllNodes(isPopup()).fetchSemanticsNodes().size
+        // Over the number, right of its barcode.
+        node(ADD_FOUND).performTouchInput { longClick(percentOffset(0.75f, 0.5f)) }
+        compose.waitForIdle()
+        // The selection's two handles.
+        assertEquals(popups + 2, compose.onAllNodes(isPopup()).fetchSemanticsNodes().size)
+        assertEquals(text("add.foundText", mapOf("number" to "1Z999AA10123456784")), description(ADD_FOUND))
     }
 
     @Test

@@ -56,6 +56,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -1058,7 +1059,10 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     PeekSymbol("barcode", font = type.caption, tint = colors.ink)
-                    Text(number, color = colors.ink, style = type.style(IosTextStyle.Caption, design = FontDesign.Monospaced).sfLines())
+                    // `.textSelection(.enabled)`: a long press selects the number, to copy it.
+                    SelectionContainer {
+                        Text(number, color = colors.ink, style = type.style(IosTextStyle.Caption, design = FontDesign.Monospaced).sfLines())
+                    }
                 }
             }
         } else {

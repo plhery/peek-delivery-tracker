@@ -202,7 +202,8 @@ class AddFieldsDeviceTest {
 
     /**
      * B-S22: the tracking field draws "add.trackingPlaceholder" while empty, which goes once something is typed and
-     * comes back once it is emptied, under "add.tracking", which TalkBack reads it by; it asks the keyboard for Next,
+     * comes back once it is emptied, under "add.tracking", which TalkBack reads it by, the placeholder after it while it
+ * is empty as VoiceOver reads a field's placeholder; it asks the keyboard for Next,
      * no capitals, no autocorrection and no suggestions (AddParcelView's `trackingField`: `.textInputAutocapitalization
      * (.never)`, `.autocorrectionDisabled()`, `.submitLabel(.next)`).
      */
@@ -211,7 +212,8 @@ class AddFieldsDeviceTest {
         openAdd()
         val label = walk.text("add.tracking")
         assertTrue("The label over the field", walk.shows(ADD_PARCEL, label))
-        assertEquals(listOf(label), description(ADD_TRACKING))
+        val placeholder = walk.text("add.trackingPlaceholder")
+        assertEquals("Its name, then its placeholder while empty", listOf("$label, $placeholder"), description(ADD_TRACKING))
         val empty = inkWidth()
         assertTrue("The placeholder drawn across the empty field: $empty dp", empty >= PLACEHOLDER_INK)
 
@@ -226,8 +228,10 @@ class AddFieldsDeviceTest {
         type("1")
         val typed = inkWidth()
         assertTrue("The placeholder gone once a digit is typed: $typed dp", typed < TYPED_INK)
+        assertEquals("Its name alone once it has words", listOf(label), description(ADD_TRACKING))
         type("")
         assertTrue("The placeholder back once the field is emptied", inkWidth() >= PLACEHOLDER_INK)
+        assertEquals(listOf("$label, $placeholder"), description(ADD_TRACKING))
         walk.shot("B-S22-field", alsoDark = false)
     }
 
@@ -254,6 +258,22 @@ class AddFieldsDeviceTest {
         assertTrue("Empty, two lines tall: $empty px, lines of $line px", empty >= 2 * line - line / 4 && empty <= 2 * line + PX)
         assertEquals("The lines past four kept", SIX_LINES, walk.editable(ADD_TRACKING))
         walk.shot("B-S22-four-lines", alsoDark = false)
+    }
+
+    /**
+     * B-S22: at the accessibility sizes the empty field draws its placeholder on two lines at most, cut short, and so is
+     * as tall as with two lines typed (AddParcelView draws it in the field's place with `.lineLimit(2)`).
+     */
+    @Test
+    fun atTheLargestTextThePlaceholderKeepsToTheFieldsTwoLines() {
+        walk.fontScale = 2f
+        openAdd()
+        val two = fieldHeight("A\nB")
+        val three = fieldHeight("A\nB\nC")
+        val empty = fieldHeight("")
+        assertTrue("A third line makes it taller: $two px, then $three px", three > two)
+        assertEquals("Empty, as tall as with two lines", two.toFloat(), empty.toFloat(), PX)
+        walk.shot("B-S22-largest-placeholder", alsoDark = false)
     }
 
     /**

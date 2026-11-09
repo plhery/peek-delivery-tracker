@@ -1488,7 +1488,9 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
 /**
  * A field of Add as `drawnField()` draws one: its placeholder in the tertiary grey while it is empty, the cursor in the
  * accent, its text grey while off; [framed], 14 in, raised, with 14-point corners, outlined in ochre while it has
- * the focus. TalkBack reads [label] as its name. Its submit key acts ([onSubmit]), as a hardware Return does. It keeps
+ * the focus. TalkBack reads [label] as its name and, while it is empty, the placeholder after it, as VoiceOver reads a
+ * field's placeholder. The placeholder keeps to one line, cut short, as a field's own does; a field of more lines draws
+ * it on two at the accessibility sizes. Its submit key acts ([onSubmit]), as a hardware Return does. It keeps
  * the focus and the keyboard through a window made again. The keyboard offers no suggestions where the field is
  * `.autocorrectionDisabled()`.
  */
@@ -1522,6 +1524,7 @@ private fun AddTextField(
     val extra = if (maxLines == 1) FIELD_LEADING else 0.dp
     val leading = with(LocalDensity.current) { extra.roundToPx().let { (it / 2).toDp() to (it - it / 2).toDp() } }
     val submit by rememberUpdatedState(onSubmit)
+    val placeholderLines = if (maxLines > 1 && PeekTheme.dynamicTypeSize.isAccessibilitySize) 2 else 1
     // The cursor where the reader left it; at the end of what came otherwise (a paste, a suggestion, the window made again).
     var edited by remember { mutableStateOf(TextFieldValue(value, TextRange(value.length))) }
     val shown = if (edited.text == value) edited else TextFieldValue(value, TextRange(value.length))
@@ -1561,7 +1564,7 @@ private fun AddTextField(
                     true
                 }
                 .semantics {
-                    contentDescription = label
+                    contentDescription = if (value.isEmpty() && placeholder.isNotEmpty()) "$label, $placeholder" else label
                     if (postalCode) contentType = ContentType.PostalCode
                 },
             textStyle = font.copy(color = if (enabled) colors.label else colors.tertiaryLabel),
@@ -1575,7 +1578,7 @@ private fun AddTextField(
             decorationBox = { text ->
                 Box(Modifier.padding(top = leading.first, bottom = leading.second), contentAlignment = Alignment.TopStart) {
                     if (value.isEmpty()) {
-                        Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = maxLines, overflow = TextOverflow.Ellipsis)
+                        Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = placeholderLines, overflow = TextOverflow.Ellipsis)
                     }
                     text()
                 }

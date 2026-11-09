@@ -1215,6 +1215,42 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsEnabled()
     }
 
+    /**
+     * As VoiceOver reads a field's placeholder after its name: TalkBack reads the empty tracking and name fields by their
+     * names and placeholders, and by their names alone once they have words.
+     */
+    @Test
+    fun anEmptyFieldIsReadByItsNameThenItsPlaceholder() {
+        show()
+        open()
+        assertEquals("${text("add.tracking")}, ${text("add.trackingPlaceholder")}", description(ADD_TRACKING))
+        assertEquals("${text("design.parcelTitle")}, ${text("add.contentsPlaceholder")}", description(ADD_NAME))
+        type("1Z999AA10123456784")
+        assertEquals(text("add.tracking"), description(ADD_TRACKING))
+        node(ADD_NAME).performTextReplacement("Lamp")
+        compose.waitForIdle()
+        assertEquals(text("design.parcelTitle"), description(ADD_NAME))
+    }
+
+    /**
+     * At the accessibility sizes the empty tracking field draws its placeholder on two lines at most, cut short, as the
+     * iPhone draws it in the field's place: in a narrow window, where it would take four, the field stays as tall as
+     * with two lines typed.
+     */
+    @Test
+    @Config(qualifiers = "w240dp-h640dp-xhdpi")
+    fun atTheAccessibilitySizesThePlaceholderTakesTwoLinesAtMost() {
+        show(fontScale = 2f)
+        open()
+        val empty = node(ADD_TRACKING).getUnclippedBoundsInRoot().height
+        type("A\nB")
+        val two = node(ADD_TRACKING).getUnclippedBoundsInRoot().height
+        type("A\nB\nC")
+        val three = node(ADD_TRACKING).getUnclippedBoundsInRoot().height
+        assertTrue("A third line makes it taller: $two, then $three", three > two)
+        assertEquals(two.value, empty.value, 1f)
+    }
+
     @Test
     fun atTheAccessibilitySizesTheTitleScrollsWithTheForm() {
         show(fontScale = 2f)

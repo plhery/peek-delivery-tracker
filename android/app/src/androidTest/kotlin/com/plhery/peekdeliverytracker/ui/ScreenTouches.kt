@@ -81,9 +81,10 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
 
     /**
      * A finger down at `from` and moved by `by` in `steps` frames; where it `holds`, it rests ten frames before it
-     * lifts, so it lets go with no speed left, as a drag does, else it lifts on the move, as a throw does.
+     * lifts, so it lets go with no speed left, as a drag does, else it lifts on the move, as a throw does. `beforeLift`
+     * runs as it rests, before it lifts.
      */
-    fun drag(from: Offset, by: Offset, steps: Int = DRAG_STEPS, holds: Boolean = true) {
+    fun drag(from: Offset, by: Offset, steps: Int = DRAG_STEPS, holds: Boolean = true, beforeLift: () -> Unit = {}) {
         val finger = Finger(from)
         finger.send(MotionEvent.ACTION_DOWN)
         for (step in 1..steps) {
@@ -98,6 +99,7 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
                 finger.pace()
                 finger.send(MotionEvent.ACTION_MOVE)
             }
+            beforeLift()
         }
         frame()
         finger.pace()

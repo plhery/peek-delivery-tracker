@@ -77,6 +77,9 @@ class SheetDetentsDeviceTest {
     private val touches = ScreenTouches(compose)
     private val tree = AccessTree(compose)
 
+    /** Where the last drag on the indicator held the sheet before it lifted, for a sheet a drag left up. */
+    private var held = ""
+
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk)
 
@@ -228,6 +231,45 @@ class SheetDetentsDeviceTest {
         }
     }
 
+    /**
+     * B-G13: a finger's tap on Change carrier's drag indicator, off its pill, takes a sheet from the window's bottom to
+     * its next detent, as UIKit's grabber does: from medium to large, and from there back to medium. The indicator takes
+     * a finger and TalkBack's focus 72 × 20 round its 36 × 5 pill. A form in a regular window has no detent to go to:
+     * the tap leaves it where it stood.
+     */
+    @Test
+    fun aFingersTapOnTheDragIndicatorTakesTheSheetToItsNextDetent() {
+        walk.show(listOf(gift, lamp))
+        walk.open(lamp)
+        walk.tap(PAGE_MENU_BUTTON)
+        compose.waitUntil(LONG_MILLIS) { walk.exists(PAGE_MENU) }
+        walk.settle()
+        walk.tap(menuItemTag(ParcelMenuItem.ChangeCarrier))
+        compose.waitUntil(LONG_MILLIS) { walk.exists(CHANGE_CARRIER_SHEET) && walk.exists(SHEET_PANEL) }
+        walk.awaitStill()
+        walk.settle()
+        val grabber = tree.awaitId(SHEET_GRABBER)
+        grabber.assertTarget("The drag indicator's width", side = GRABBER_TARGET_WIDTH, along = false)
+        grabber.assertTarget("The drag indicator's height", side = GRABBER_TARGET_HEIGHT, across = false)
+        val room = room()
+        val opened = frame()
+        touches.tap(touches.point(SHEET_GRABBER, x = 0.15f, y = 0.8f))
+        walk.settle()
+        walk.awaitStill()
+        if (room.regular) {
+            assertFrame("The form where it stood", opened, frame())
+            assertTrue("Still up", walk.exists(CHANGE_CARRIER_SHEET))
+            return
+        }
+        val largeTop = max(room.top, LARGE_MIN_TOP)
+        assertFrame("Tapped to large", Frame(0f, largeTop, room.width, room.height), frame())
+        walk.shot("B-G13-grabber-tapped-large", alsoDark = false)
+        touches.tap(touches.point(SHEET_GRABBER, x = 0.85f, y = 0.8f))
+        walk.settle()
+        walk.awaitStill()
+        assertFrame("Tapped back to medium", opened, frame())
+    }
+
     /** Material's string `name`, looked up among the app's resources, where Material's are merged, in the app's words. */
     private fun material(name: String): String = walk.onUi {
         val app = compose.activity
@@ -253,7 +295,9 @@ class SheetDetentsDeviceTest {
         val holdsLarge: (() -> Boolean)? = large?.let { read -> { walk.onUi(read) } }
         holdsLarge?.let { assertFalse("$name opens below its large detent", it()) }
         if (room().regular) aForm(name, first, holdsLarge) else aBottomSheet(name, first, holdsLarge)
-        compose.waitUntil(LONG_MILLIS) { !walk.exists(sheet) && !walk.exists(SHEET_PANEL) }
+        val gone = runCatching { compose.waitUntil(LONG_MILLIS) { !walk.exists(sheet) && !walk.exists(SHEET_PANEL) } }.isSuccess
+        if (!gone) walk.shot("B-G13-$name-still-up", alsoDark = false)
+        assertTrue("$name sent away, not left at ${if (walk.exists(SHEET_PANEL)) frame() else "none"} in ${room()}; the last drag $held", gone)
         assertFalse("$name: no drag indicator left", walk.exists(SHEET_GRABBER))
     }
 
@@ -312,7 +356,8 @@ class SheetDetentsDeviceTest {
 
     /** A finger on the drag indicator moved `by` dp down (up where negative), held still before it lifts, and the sheet settled. */
     private fun dragTheIndicator(by: Float) {
-        touches.drag(touches.point(SHEET_GRABBER), Offset(0f, by * compose.density.density))
+        val from = touches.point(SHEET_GRABBER)
+        touches.drag(from, Offset(0f, by * compose.density.density)) { held = "from ${from.y / compose.density.density} dp by $by dp, held at ${frame()}" }
         walk.settle()
         walk.awaitStill()
     }
@@ -372,6 +417,10 @@ class SheetDetentsDeviceTest {
 
         /** How much further than the way between two detents a drag goes, in dp: it settles at the nearer, the far one. */
         const val PAST = 4f
+
+        /** What takes a finger and TalkBack's focus round the drag indicator, in dp. */
+        const val GRABBER_TARGET_WIDTH = 72f
+        const val GRABBER_TARGET_HEIGHT = 20f
 
         /** How far a form is pulled up, in dp. */
         const val FORM_PULL = 60f

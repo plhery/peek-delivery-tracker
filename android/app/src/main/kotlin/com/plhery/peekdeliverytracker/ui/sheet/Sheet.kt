@@ -88,6 +88,7 @@ import com.plhery.peekdeliverytracker.ui.draw.Lamplight
 import com.plhery.peekdeliverytracker.ui.draw.SHEET_EDGE_OPACITY
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.litEdgePath
+import com.plhery.peekdeliverytracker.ui.tabs.LocalLayersAbove
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.GlassFace
@@ -180,7 +181,9 @@ internal class SheetMenus {
  * ([FormMenuRow]). Once it has come up, [onShown] runs (`present(_:animated:completion:)`'s completion); once it has
  * gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window made again (a rotation) finds it
  * at the detent it had, without coming up again, and [onShown] runs again there. Without its [grabber] it shows none,
- * as UIKit's page sheet; in a compact window the page sheet is the sheet at its large detent.
+ * as UIKit's page sheet; in a compact window the page sheet is the sheet at its large detent. Nor does it in a window
+ * lower than 480, or under another sheet, as UIKit hides the grabber of a sheet in compact height and of one under
+ * another.
  *
  * A [lit] sheet, one of Peek's own on its sheet ground ([PeekColors.sheet]) rather than a system list, stands up in dark
  * as the web's do: a lamp catches its top edge, one dp of warm light that thins away round its corners, and it casts a
@@ -545,6 +548,11 @@ private fun SheetLayer(
             animateTo(motion.rest(requested), 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { arrive() }
         }
 
+        // The grabber, but in a window lower than 480, where the sheet stands at its large detent as iOS's does in
+        // compact height with none, and under another sheet, as UIKit hides the one under it.
+        val layersAbove = LocalLayersAbove.current
+        val stacked by remember(layersAbove) { derivedStateOf { layersAbove().any { it is SheetKey } } }
+        val showsGrabber = grabber && !compactHeight && !stacked
         // The detent a tap on the grabber goes to, as UIKit's grabber cycles them: the next larger, after the largest
         // the smallest. None while the sheet has one rest, a form or lifted to large.
         val toggle = if (rests.size < 2 || rests.size != detents.size) null else {
@@ -602,12 +610,20 @@ private fun SheetLayer(
         }
         // While a menu is open over it, TalkBack reaches only the menu.
         val hidden = if (menus.content != null) Modifier.clearAndSetSemantics {} else Modifier
+        val grabberTap by rememberUpdatedState(if (showsGrabber) toggle else null)
         val sheetModifier = Modifier
             .semantics { this.paneTitle = paneTitle }
             .onFocusChanged { focused = it.hasFocus }
             .nestedScroll(connection)
             .draggable(drag, Orientation.Vertical, onDragStopped = { settle(it) })
-            .pointerInput(Unit) { detectTapGestures { } }
+            .pointerInput(Unit) {
+                // A tap on the grabber's target, which the sheet hears so that a drag there is its own as anywhere
+                // else: a node of the grabber's, moving with the sheet under the finger, would lose some of the drag.
+                detectTapGestures { at ->
+                    val half = GRABBER_TARGET_WIDTH.toPx() / 2
+                    if (abs(at.x - size.width / 2f) <= half && at.y <= GRABBER_TARGET_HEIGHT.toPx()) grabberTap?.run()
+                }
+            }
             .then(hidden)
 
         // The dim and the sheet: a layer over the tab, which the glass of an alert over the sheet blurs with the tab.
@@ -653,7 +669,7 @@ private fun SheetLayer(
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
                         // Over what it holds, whose ground would hide them.
                         if (standsUp) LitEdge(shape, Modifier.matchParentSize())
-                        if (grabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
+                        if (showsGrabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
                     }
                 }
             } else {
@@ -710,7 +726,7 @@ private fun SheetLayer(
                                     .sheetFootRoom(foot, bar),
                             ) { content() }
                             if (standsUp) LitEdge(shape, Modifier.matchParentSize())
-                            if (grabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
+                            if (showsGrabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
                         }
                     }
                 }
@@ -819,14 +835,16 @@ private fun LitEdge(shape: Shape, modifier: Modifier) {
     )
 }
 
-/** A tap on the grabber, to TalkBack: to the next detent, a larger one where it [expands]. */
+/** A tap on the grabber, a finger's or TalkBack's: to the next detent, a larger one where it [expands]. */
 private class GrabberToggle(val expands: Boolean, val run: () -> Unit)
 
 /**
- * `.presentationDragIndicator(.visible)`: 36 × 5, 5 under the sheet's top. TalkBack reaches it first in the sheet, as
- * VoiceOver does the iPhone's ("Sheet grabber, button"), in the system's words for one (Material's "Drag handle"); where
- * the sheet has detents to go to, it is a button whose double tap takes the sheet to the next ([toggle]), heard as
- * expanding or collapsing it, as VoiceOver's hint says.
+ * `.presentationDragIndicator(.visible)`: 36 × 5, 5 under the sheet's top, in a target 72 × 20 from the sheet's top
+ * that takes a finger and TalkBack's focus, as UIKit's grabber takes more than its pill. Where the sheet has detents to
+ * go to, a tap there takes it to the next ([toggle]), as UIKit's grabber cycles them, the sheet hearing it; a drag there
+ * drags the sheet. TalkBack reaches it first in the sheet, as VoiceOver does the iPhone's ("Sheet grabber, button"), in
+ * the system's words for one (Material's "Drag handle"); with detents to go to, it is a button whose double tap does as
+ * a tap, heard as expanding or collapsing the sheet, as VoiceOver's hint says.
  */
 @Composable
 private fun Grabber(toggle: GrabberToggle?, modifier: Modifier) {
@@ -836,9 +854,7 @@ private fun Grabber(toggle: GrabberToggle?, modifier: Modifier) {
     }
     Box(
         modifier
-            .padding(top = GRABBER_TOP)
-            .size(GRABBER_WIDTH, GRABBER_HEIGHT)
-            .background(PeekTheme.colors.grabber, ContinuousRoundedShape(GRABBER_HEIGHT / 2))
+            .size(GRABBER_TARGET_WIDTH, GRABBER_TARGET_HEIGHT)
             .testTag(SHEET_GRABBER)
             .clearAndSetSemantics {
                 contentDescription = name
@@ -851,7 +867,15 @@ private fun Grabber(toggle: GrabberToggle?, modifier: Modifier) {
                     }
                 }
             },
-    )
+    ) {
+        Box(
+            Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = GRABBER_TOP)
+                .size(GRABBER_WIDTH, GRABBER_HEIGHT)
+                .background(PeekTheme.colors.grabber, ContinuousRoundedShape(GRABBER_HEIGHT / 2)),
+        )
+    }
 }
 
 /** The sheet's drag indicator ([Grabber]). */
@@ -881,6 +905,10 @@ private val PAGE_WIDE_DROP = 44.dp
 private val GRABBER_TOP = 5.dp
 private val GRABBER_WIDTH = 36.dp
 private val GRABBER_HEIGHT = 5.dp
+
+/** What takes a finger and TalkBack's focus round the grabber, from the sheet's top. */
+private val GRABBER_TARGET_WIDTH = 72.dp
+private val GRABBER_TARGET_HEIGHT = 20.dp
 private const val DIM_LIGHT = 0.2f
 private const val DIM_DARK = 0.62f
 

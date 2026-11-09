@@ -189,7 +189,12 @@ class TabOverlay(val backdrop: MaterialBackdrop? = null, private val window: Win
         if (window != null) {
             window.Place(this)
         } else {
-            for ((key, content) in layers) key(key) { content() }
+            for ((key, content) in layers) {
+                key(key) {
+                    val above = remember(this, key) { { layers.dropWhile { it.first != key }.drop(1).map { it.first } } }
+                    CompositionLocalProvider(LocalLayersAbove provides above) { content() }
+                }
+            }
         }
     }
 }
@@ -241,6 +246,12 @@ class WindowLayers private constructor(restored: List<String>) {
 
     private fun id(host: TabOverlay, key: Any) = "${host.name}/$key"
 
+    /** The keys of the layers over the layer `key` of `host`, read as they change. */
+    private fun layersAbove(host: TabOverlay, key: Any): () -> List<Any> = {
+        val at = layers.indexOfFirst { it.host === host && it.key == key }
+        if (at < 0) emptyList() else layers.subList(at + 1, layers.size).map { it.key }
+    }
+
     /** Where `host` draws its layers: what is provided there, which its layers are composed with. */
     @Composable
     internal fun Place(host: TabOverlay) {
@@ -266,8 +277,11 @@ class WindowLayers private constructor(restored: List<String>) {
                     composed += id
                     onDispose { composed -= id }
                 }
+                val above = remember(this, layer.host, layer.key) { layersAbove(layer.host, layer.key) }
                 CompositionLocalProvider(place) {
-                    Box(if (under) Modifier.clearAndSetSemantics {} else Modifier) { layer.content() }
+                    CompositionLocalProvider(LocalLayersAbove provides above) {
+                        Box(if (under) Modifier.clearAndSetSemantics {} else Modifier) { layer.content() }
+                    }
                 }
             }
         }
@@ -308,6 +322,12 @@ class WindowLayers private constructor(restored: List<String>) {
 val LocalWindowLayers = staticCompositionLocalOf<WindowLayers?> { null }
 
 val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
+
+/**
+ * The keys of the layers over the one composed here, in the order they came, read as they change, whichever overlay
+ * showed them: a sheet under another hides its grabber, as UIKit's does. None outside a layer.
+ */
+val LocalLayersAbove = staticCompositionLocalOf<() -> List<Any>> { { emptyList() } }
 
 /**
  * Whether the tab's window keys wait, read as a key comes: the first open stands over the tabs, or anything stands over

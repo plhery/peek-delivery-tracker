@@ -7,9 +7,11 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
@@ -21,6 +23,7 @@ import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
@@ -33,6 +36,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.WindowLayers
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -48,8 +54,9 @@ import org.robolectric.annotation.GraphicsMode
  * a window as low as a phone on its side; a drag that moves it without composing what it holds again; the field's
  * focus let go as it starts to go; the sheet opened again on its way out after the back gesture; the detent asked
  * for; nothing but its own content sending it away while it isn't dismissible; taps on the status bar, which leave it
- * up; and the page sheet in regular windows, the iPad's, an Android tablet's and an unfolded foldable's, beside the
- * form there.
+ * up; the page sheet in regular windows, the iPad's, an Android tablet's and an unfolded foldable's, beside the
+ * form there; and the grabber, whose target a tap takes the sheet to its next detent from, gone on a phone on its side
+ * and under another sheet.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -185,13 +192,80 @@ class SheetTest {
 
     @Test
     @Config(qualifiers = "w844dp-h390dp-land-xhdpi")
-    fun onAPhoneOnItsSideItStandsAtItsLargeHeightAttached() {
+    fun onAPhoneOnItsSideItStandsAtItsLargeHeightAttachedWithNoGrabber() {
         show()
         assertEquals(10f, top(), 1f)
         val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
         assertEquals(0f, panel.left.value, 0.5f)
         assertEquals(compose.onRoot().getUnclippedBoundsInRoot().right.value, panel.right.value, 0.5f)
+        assertEquals(emptyList<Float>(), grabbers())
     }
+
+    @Test
+    fun aTapOnTheGrabberOrBesideItsPillTakesItToTheNextDetentAndBack() {
+        show()
+        val medium = top()
+        val target = compose.onNodeWithTag(SHEET_GRABBER, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
+        // 72 × 20 from the sheet's top, in its middle: wider and taller than the 36 × 5 pill.
+        assertEquals(72f, (target.right - target.left).value, 0.5f)
+        assertEquals(20f, (target.bottom - target.top).value, 0.5f)
+        assertEquals(medium, target.top.value, 0.5f)
+        assertEquals(((panel.left + panel.right) / 2).value, ((target.left + target.right) / 2).value, 0.5f)
+        compose.onNodeWithTag(SHEET_GRABBER, useUnmergedTree = true).performTouchInput { click(center) }
+        compose.waitForIdle()
+        assertEquals(10f, top(), 1f)
+        assertEquals(listOf(SheetDetent.Large), rested)
+        // 30 beside the pill's middle and 15 under the sheet's top, off the pill: back to medium.
+        compose.onNodeWithTag(SHEET_GRABBER, useUnmergedTree = true).performTouchInput { click(Offset(centerX - 30.dp.toPx(), 15.dp.toPx())) }
+        compose.waitForIdle()
+        assertEquals(medium, top(), 2f)
+        assertEquals(listOf(SheetDetent.Large, SheetDetent.Medium), rested)
+    }
+
+    @Test
+    fun underAnotherSheetInAnOverlayItShowsNoGrabberUntilThatOneHasGone() = aSheetOverAnother(windowFront = false)
+
+    @Test
+    fun underAnotherSheetInTheWindowsFrontItShowsNoGrabberUntilThatOneHasGone() = aSheetOverAnother(windowFront = true)
+
+    /**
+     * A sheet at its medium detent, in an overlay drawing its layers itself or in the window's front ([windowFront]),
+     * with its grabber; another over it at large, whose grabber alone shows; that one gone, the first's again.
+     */
+    private fun aSheetOverAnother(windowFront: Boolean) {
+        var over by mutableStateOf(false)
+        compose.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
+                val front = remember { if (windowFront) WindowLayers() else null }
+                val overlay = remember { TabOverlay(window = front, name = "sheets") }
+                Box(Modifier.fillMaxSize()) {
+                    CompositionLocalProvider(LocalTabOverlay provides overlay) {
+                        Sheet(visible, onDismiss = { visible = false }, paneTitle = "Under") { Box(Modifier.fillMaxSize()) }
+                        Sheet(over, onDismiss = { over = false }, paneTitle = "Over", detent = SheetDetent.Large) { Box(Modifier.fillMaxSize()) }
+                    }
+                    overlay.Content()
+                    front?.Content()
+                }
+            }
+        }
+        compose.waitForIdle()
+        val medium = windowHeight() * 0.4714f
+        assertEquals(1, grabbers().size)
+        assertEquals(medium, grabbers().single(), 2f)
+        over = true
+        compose.waitForIdle()
+        assertEquals("The one over it, at large", listOf(10f), grabbers().map { Math.round(it).toFloat() })
+        over = false
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertEquals(1, grabbers().size)
+        assertEquals(medium, grabbers().single(), 2f)
+    }
+
+    /** The tops of the grabbers showing, in points from the window's. */
+    private fun grabbers(): List<Float> =
+        compose.onAllNodesWithTag(SHEET_GRABBER, useUnmergedTree = true).fetchSemanticsNodes().map { it.boundsInRoot.top / compose.density.density }
 
     @Test
     fun aDragMovesItWithoutComposingWhatItHoldsAgain() {

@@ -4,7 +4,7 @@ description: Chi consegna il tuo ordine eBay, come funzionano la Spedizione Inte
 slug: tracciare-ordine-ebay
 picture: Un pacco con un'etichetta a codice a barre, un percorso tratteggiato che passa per un aereo fino a un furgone, e Pip che aspetta lì accanto.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 Su eBay ogni venditore spedisce l'ordine da sé, quindi il corriere dipende dal venditore e dal servizio che ha scelto: Poste Italiane, BRT, InPost, oppure uno dei programmi di eBay come la Spedizione Internazionale eBay o SpeedPAK. Il codice della spedizione compare come link nella tua Cronologia acquisti appena il venditore lo carica, e alcune spedizioni economiche non ne hanno. Se l'oggetto non è arrivato entro la data di consegna prevista, hai 30 giorni per segnalarlo con la Garanzia cliente eBay.
@@ -36,12 +36,12 @@ Quando compri all'estero, l'inserzione dice se il venditore usa uno dei programm
 
 | Programma | Venditori in | Tracciamento | Dazi e tasse |
 | --- | --- | --- | --- |
-| Spedizione Internazionale eBay | Stati Uniti, Canada | Il venditore manda il pacco a un centro spedizioni nel suo Paese, poi il codice internazionale viene aggiunto in automatico | Al pagamento o all'arrivo, secondo l'opzione offerta |
+| Spedizione Internazionale eBay | Stati Uniti, Canada; Regno Unito, gradualmente | Il venditore manda il pacco a un centro spedizioni nel suo Paese, poi il codice internazionale viene aggiunto in automatico | Al pagamento o all'arrivo, secondo l'opzione offerta |
 | Programma di spedizione internazionale (GSP) | Regno Unito | Tramite un centro spedizioni, con tracciamento | Tutto al pagamento |
 | SpeedPAK | Cina, Giappone | Caricato in automatico e gestito con Orange Connex; consegna un corriere del tuo Paese | Vedi l'inserzione |
 | Altri servizi | Ovunque | Varia | A volte alla consegna |
 
-Nel Regno Unito eBay sta sostituendo il Programma di spedizione internazionale con la Spedizione Internazionale eBay per i venditori idonei. Il fornitore internazionale del GSP è Pitney Bowes.
+Nel Regno Unito eBay sta sostituendo il Programma di spedizione internazionale con la Spedizione Internazionale eBay: da agosto 2026 iscrive gradualmente i venditori idonei, e per chi è iscritto il GSP non è più disponibile. Il fornitore internazionale del GSP è Pitney Bowes.
 
 :::journey
 - shop | Venditore | Stampa un'etichetta e carica il codice
@@ -52,7 +52,7 @@ Nel Regno Unito eBay sta sostituendo il Programma di spedizione internazionale c
 - home | Tu | Un `Consegnato` in anticipo sposta la scadenza di eBay
 :::
 
-SpeedPAK non consegna da solo fino alla porta: nel suo storico compare il corriere che prende in carico il pacco, con il suo codice. Verso l'Italia SpeedPAK EU ha due versioni. Una è tracciata "End to end", l'altra solo "From pickup to destination country only", cioè fino all'arrivo nel Paese di destinazione. Con la seconda, il tracciamento può fermarsi dopo l'atterraggio. Più dettagli sul [tracciamento SpeedPAK](carrier:speedpak).
+SpeedPAK non consegna da solo fino alla porta: nel suo storico compare il corriere che prende in carico il pacco, con il suo codice. Verso l'Italia SpeedPAK EU ha due versioni. Una è tracciata "End to end", l'altra solo "From pickup to destination country only", cioè fino all'arrivo nel Paese di destinazione. Con la seconda, il tracciamento può fermarsi dopo l'atterraggio. eBay indica ai venditori 8-12 giorni di transito per la prima e 10-15 per la seconda. Più dettagli sul [tracciamento SpeedPAK](carrier:speedpak).
 
 ## Com'è fatto un codice di tracciamento eBay?
 
@@ -106,11 +106,11 @@ In quest'ordine:
 :::steps
 - Aspetta la data di consegna prevista | La trovi nella Cronologia acquisti. Conta la data più lontana dell'intervallo.
 - Controlla il tracking del corriere | Cerca un secondo codice o un corriere partner.
-- Avvisa il venditore | Da Il mio eBay, segnala l'oggetto non arrivato entro 30 giorni dalla data di consegna prevista.
+- Avvisa il venditore | Nella Cronologia acquisti, **Altre azioni** → **Non ho ricevuto l'oggetto**, entro 30 giorni dalla data di consegna prevista.
 - Chiedi a eBay di intervenire | Se il venditore non ha risolto dopo 3 giorni lavorativi, al massimo 21 giorni lavorativi dopo la segnalazione.
 :::
 
-Dopo la tua segnalazione, il venditore ha 3 giorni lavorativi per aggiornarti sulla consegna, offrirti un oggetto sostitutivo o rimborsarti. Se ti rimborsa, ha 2 giorni lavorativi per farlo, e i fondi sono di norma disponibili entro 3-5 giorni lavorativi. Non sei d'accordo con la decisione di eBay? Puoi fare appello entro 30 giorni di calendario. Vale la garanzia del sito eBay su cui hai completato il pagamento.
+Dopo la tua segnalazione, il venditore ha 3 giorni lavorativi per aggiornarti sulla consegna, offrirti un oggetto sostitutivo o rimborsarti. Se ti rimborsa, ha 2 giorni lavorativi per farlo, e i fondi sono di norma disponibili entro 3-5 giorni lavorativi; su una carta di credito, a seconda dell'ente emittente, possono servire fino a 30 giorni prima che il rimborso compaia nell'estratto conto. Se l'oggetto arriva dopo il rimborso, accordati con il venditore: glielo restituisci e tieni il rimborso, oppure lo tieni e gli restituisci i soldi. Non sei d'accordo con la decisione di eBay? Puoi fare appello con nuove informazioni entro 30 giorni di calendario dalla chiusura della controversia. Vale la garanzia del sito eBay su cui hai completato il pagamento.
 
 > Se il tracking mostra la consegna prima della data prevista, i tuoi 30 giorni partono da quel giorno.
 
@@ -118,7 +118,7 @@ La Garanzia cliente eBay non copre tutto. Restano fuori gli oggetti pagati in tu
 
 ## Risulta consegnato, ma non hai ricevuto niente?
 
-eBay consiglia prima di tutto di chiedere a un vicino di casa: forse ha accettato il pacco mentre non c'eri. Ancora niente? Avvisa il venditore come sopra, negli stessi 30 giorni.
+eBay consiglia prima di tutto di chiedere a un vicino di casa: forse ha accettato il pacco mentre non c'eri. Controlla anche l'indirizzo di spedizione nella Cronologia acquisti: se quello dato al pagamento era sbagliato e l'oggetto è già partito, il venditore non può più cambiarlo, e conviene provare a ritirare il pacco all'indirizzo originale. Ancora niente? Avvisa il venditore come sopra, negli stessi 30 giorni.
 
 Per eBay una consegna è provata con lo stato "consegnato" o "tentata consegna", la data e un indirizzo con almeno città o CAP. Per gli ordini da 550 EUR in su serve anche la firma alla consegna. Altro aiuto in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -128,7 +128,7 @@ Sì. Copia il codice dalla Cronologia acquisti e incollalo in [Peek](/), che ric
 
 :::sources
 - [eBay Italia: Controllare lo stato della spedizione dell'oggetto](https://www.ebay.it/help/buying/spedizione-consegna/tracciare-oggetto?id=4027) – Cronologia acquisti, acquisto senza registrazione, data di consegna prevista
-- [eBay Italia: Ottieni aiuto per un oggetto che non è arrivato](https://www.ebay.it/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 giorni, 3 e 2 giorni lavorativi, 3-5 giorni lavorativi, vicino di casa
+- [eBay Italia: Ottieni aiuto per un oggetto che non è arrivato](https://www.ebay.it/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 giorni, Altre azioni, Non ho ricevuto l'oggetto, 3 e 2 giorni lavorativi, 3-5 giorni lavorativi, carta di credito, oggetto arrivato dopo il rimborso, appello dopo la chiusura, vicino di casa, indirizzo sbagliato
 - [eBay Italia: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 21 giorni lavorativi, appello in 30 giorni, prova di consegna, firma da 550 EUR, esclusioni
 - [eBay Italia: Acquisti e spedizioni internazionali per gli acquirenti](https://www.ebay.it/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – Spedizione Internazionale eBay, Programma di spedizione internazionale, dazi
 - [eBay Italia: Stampare e annullare le etichette per la spedizione](https://www.ebay.it/help/selling/shipping-items/labels-packaging-tips/buying-printing-shipping-labels?id=4157) – Poste Italiane, BRT, InPost, Packlink, locker, 5 etichette con codici diversi
@@ -136,8 +136,9 @@ Sì. Copia il codice dalla Cronologia acquisti e incollalo in [Peek](/), che ric
 - [Packlink: Quanto costa una spedizione con eBay Spedizioni?](https://support-ebay.packlink.com/hc/it/articles/209156905) – BRT, DHL, Poste Italiane, UPS
 - [eBay US: eBay International Shipping program](https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348) – venditori negli Stati Uniti e in Canada, centro spedizioni
 - [eBay UK: Global Shipping Programme](https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options/global-shipping-programme?id=4646) – Pitney Bowes, sostituzione con la Spedizione Internazionale eBay
+- [eBay UK: eBay International Shipping (Seller Centre)](https://www.ebay.co.uk/sellercentre/postage/ebay-international-shipping) – venditori del Regno Unito iscritti gradualmente da agosto 2026, poi niente più GSP
 - [eBay US: International purchases and shipping for buyers](https://www.ebay.com/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – SpeedPAK da Cina e Giappone
-- [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Paesi, tracciamento completo o fino al Paese di destinazione
+- [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Paesi, tracciamento completo o fino al Paese di destinazione, giorni di transito
 - [Orange Connex: eBay SpeedPAK](https://globalshipping.orangeconnex.de/tracking) – cinque giorni senza movimenti
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici
 :::

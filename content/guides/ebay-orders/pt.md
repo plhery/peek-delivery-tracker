@@ -4,7 +4,7 @@ description: Não há eBay português: onde compras, quem entrega a tua encomend
 slug: seguir-encomenda-ebay
 picture: Uma encomenda com uma etiqueta de código de barras, um percurso pontilhado que passa por um avião até uma carrinha, e o Pip à espera ao lado.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 No eBay, cada vendedor envia a encomenda por conta própria, por isso a transportadora depende do vendedor e do serviço que escolheu: os correios do país dele, uma transportadora como a UPS, ou um dos programas do eBay, como o eBay International Shipping ou o SpeedPAK. Em Portugal, uma encomenda que vem pelo correio é entregue pelos CTT. O número de seguimento aparece no teu histórico de compras assim que o vendedor o carrega. Se o artigo não chegar até à data de entrega estimada, tens 30 dias para o comunicar.
@@ -44,12 +44,12 @@ Quando compras no estrangeiro, o anúncio diz se o vendedor usa um programa do e
 
 | Programa | Vendedores em | Seguimento | Taxas e impostos |
 | --- | --- | --- | --- |
-| eBay International Shipping | Estados Unidos, Canadá | O vendedor envia a encomenda para um centro no país dele; a partir daí, o seguimento é acrescentado sozinho até à tua porta | Na compra ou na entrega, conforme a opção oferecida |
+| eBay International Shipping | Estados Unidos, Canadá; Reino Unido, por fases | O vendedor envia a encomenda para um centro no país dele; a partir daí, o seguimento é acrescentado sozinho até à tua porta | Na compra ou na entrega, conforme a opção oferecida |
 | Global Shipping Program (GSP) | Reino Unido | Através de um centro de envios, com seguimento | Tudo na compra |
 | SpeedPAK | China, Japão | Carregado sozinho e gerido com a Orange Connex; entrega uma transportadora do teu país | Vê o anúncio |
 | Outros serviços | Qualquer país | Varia | Às vezes na entrega |
 
-No Reino Unido, o eBay está a substituir o Global Shipping Program pelo eBay International Shipping para os vendedores elegíveis. O parceiro internacional do GSP é a Pitney Bowes.
+No Reino Unido, o eBay está a substituir o Global Shipping Program pelo eBay International Shipping: desde agosto de 2026, inscreve por fases os vendedores elegíveis, e quem fica inscrito deixa de poder usar o GSP. O parceiro internacional do GSP é a Pitney Bowes.
 
 :::journey
 - shop | Vendedor | Imprime uma etiqueta e carrega o número
@@ -60,7 +60,7 @@ No Reino Unido, o eBay está a substituir o Global Shipping Program pelo eBay In
 - home | Tu | Um `Entregue` antecipado muda o prazo do eBay
 :::
 
-O SpeedPAK não entrega até à tua porta: o histórico dele indica a transportadora que fica com a encomenda, com o número dela. Para Portugal, o SpeedPAK EU tem duas versões. Uma tem seguimento "End to end"; a outra só "From pickup to destination country only", ou seja, até chegar ao país de destino. Com a segunda, o seguimento pode parar depois de aterrar.
+O SpeedPAK não entrega até à tua porta: o histórico dele indica a transportadora que fica com a encomenda, com o número dela. Para Portugal, o SpeedPAK EU tem duas versões. Uma tem seguimento "End to end"; a outra só "From pickup to destination country only", ou seja, até chegar ao país de destino. Com a segunda, o seguimento pode parar depois de aterrar. O eBay indica aos vendedores 8 a 12 dias de trânsito para a primeira e 10 a 15 para a segunda.
 
 ## Como é um número de seguimento do eBay?
 
@@ -98,7 +98,7 @@ Para a última etapa, segue o número mais recente. O primeiro costuma parar na 
 
 Cada silêncio tem a sua razão:
 
-- **Há número, mas nenhuma leitura.** A etiqueta existe, mas a transportadora ainda não tem a encomenda. Para o eBay, o seguimento só prova o envio com uma leitura de aceitação.
+- **Há número, mas nenhuma leitura.** A etiqueta existe, mas a transportadora ainda não tem a encomenda. Para o eBay, o seguimento só prova o envio com uma leitura de aceitação. No «Seguir objeto» dos CTT, `Aguarda entrada nos CTT` quer dizer que os CTT receberam a informação eletrónica do envio, mas a encomenda ainda não entrou na rede deles.
 - **A caminho do centro de envios.** Com o eBay International Shipping e o GSP, o seguimento internacional só aparece quando o centro tem a encomenda.
 - **No avião e na alfândega.** Poucas leituras até os CTT ou outra transportadora ficarem com ela. No «Seguir objeto», `Em importação` quer dizer que está em processo aduaneiro no país de destino. Quanto tempo pode demorar: [encomenda retida na alfândega](guide:customs).
 - **Seguimento parcial.** Alguns serviços param na fronteira, como a versão do SpeedPAK seguida só até ao país de destino. A Orange Connex aconselha os compradores do SpeedPAK a contactar o vendedor se não houver movimento há mais de cinco dias.
@@ -117,7 +117,7 @@ Por esta ordem:
 - Pede ajuda ao eBay | Se o vendedor não resolver em 3 dias úteis, até 21 dias úteis depois de o avisares.
 :::
 
-Depois do teu aviso, o vendedor tem 3 dias úteis para te dar novidades da entrega, um artigo de substituição ou o reembolso. Quando o eBay intervém, costuma responder em 48 horas, e podes recorrer da decisão em 30 dias. No ebay.es, os fundos de um reembolso costumam estar disponíveis em 3 a 5 dias úteis.
+Depois do teu aviso, o vendedor tem 3 dias úteis para te dar novidades da entrega, um artigo de substituição ou o reembolso. Quando o eBay intervém, costuma responder em 48 horas, e podes recorrer da decisão, com informação nova, nos 30 dias a seguir ao fecho do caso. No ebay.es, os fundos de um reembolso costumam estar disponíveis em 3 a 5 dias úteis; num cartão de crédito, o reembolso pode demorar até 30 dias a aparecer no extrato, conforme o emissor. Se o artigo chegar depois do reembolso, o ebay.es diz para combinares com o vendedor: devolves o artigo e ficas com o reembolso, ou ficas com o artigo e devolves-lhe o dinheiro.
 
 > Se o seguimento mostrar a entrega antes da data estimada, os teus 30 dias contam a partir desse dia.
 
@@ -125,7 +125,7 @@ A garantia não cobre tudo. Ficam de fora os artigos pagos em parte fora do eBay
 
 ## O seguimento diz entregue, mas não tens nada?
 
-O eBay aconselha a perguntar primeiro aos vizinhos: talvez alguém a tenha recebido quando não estavas. Continua a faltar? Avisa o vendedor como acima, nos mesmos 30 dias.
+O eBay aconselha a perguntar primeiro aos vizinhos: talvez alguém a tenha recebido quando não estavas. Vê também a morada de envio no histórico de compras: se a que deste ao pagar estava errada e o artigo já foi enviado, o vendedor já não a pode mudar, e o ebay.es aconselha a ir buscar a encomenda à morada original, se possível. Continua a faltar? Avisa o vendedor como acima, nos mesmos 30 dias.
 
 Para o eBay, uma entrega fica provada com o estado "entregue" ou "tentativa de entrega", a data e o teu código postal. Em encomendas de valor alto, também é preciso assinatura: a partir de 750 USD no ebay.com e de 550 EUR no ebay.es. No ebay.es, se o seguimento confirmar a entrega no teu código postal depois de abrires o pedido, o caso fecha-se sozinho em 24 horas, mas nesse tempo ainda podes pedir ajuda ao eBay. Mais ajuda em [encomenda entregue mas não recebida](guide:delivered-not-received).
 
@@ -142,10 +142,11 @@ Sim. Copia o número do teu histórico de compras e cola-o no [Peek](/), que rec
 - [eBay US: International purchases and shipping for buyers](https://www.ebay.com/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – programas por origem, seguimento, taxas de importação, SpeedPAK
 - [eBay US: eBay International Shipping program](https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348) – vendedores nos EUA e no Canadá, centro de envios
 - [eBay UK: Global Shipping Programme](https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options/global-shipping-programme?id=4646) – Pitney Bowes, substituição pelo eBay International Shipping
-- [eBay España: Conseguir ayuda con un artículo que no ha llegado](https://www.ebay.es/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – Garantía al cliente de eBay, 30 dias, 3 a 5 dias úteis, 24 horas
+- [eBay UK: eBay International Shipping (Seller Centre)](https://www.ebay.co.uk/sellercentre/postage/ebay-international-shipping) – vendedores do Reino Unido inscritos por fases desde agosto de 2026, sem GSP depois
+- [eBay España: Conseguir ayuda con un artículo que no ha llegado](https://www.ebay.es/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – Garantía al cliente de eBay, 30 dias, 3 a 5 dias úteis, cartão de crédito, artigo que chega depois do reembolso, recurso depois do fecho do caso, 24 horas, morada errada
 - [eBay España: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 21 dias úteis, 550 EUR
-- [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Portugal nas duas versões do SpeedPAK EU
+- [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Portugal nas duas versões do SpeedPAK EU, dias de trânsito
 - [Orange Connex: eBay SpeedPAK](https://globalshipping.orangeconnex.de/tracking) – cinco dias sem movimento
-- [CTT: Resultados que podem aparecer na pesquisa do «Seguir objeto»](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto) – Aceite, Em importação
+- [CTT: Resultados que podem aparecer na pesquisa do «Seguir objeto»](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto) – Aguarda entrada nos CTT, Aceite, Em importação
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números
 :::

@@ -4,7 +4,7 @@ description: Kto doręcza zamówienie z eBay, jak działają Wysyłka Międzynar
 slug: sledzenie-zamowienia-ebay
 picture: Paczka z etykietą z kodem kreskowym, przerywana trasa przez samolot do furgonetki, a obok czeka Pip.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 Na eBayu każdy sprzedawca wysyła zamówienie sam, więc przewoźnik zależy od sprzedawcy i od usługi, którą wybrał: poczty z jego kraju, kuriera albo jednego z programów eBay, takich jak Wysyłka Międzynarodowa eBay czy SpeedPAK. Numer przesyłki pojawia się jako łącze w Historii zakupów, gdy tylko sprzedawca go doda, a niektóre tanie wysyłki nie mają go wcale. Jeśli przedmiot nie dotarł do szacowanej daty dostawy, masz 30 dni, żeby to zgłosić w ramach Gwarancji zwrotu pieniędzy eBay.
@@ -35,12 +35,12 @@ Gdy kupujesz za granicą, oferta pokazuje, czy sprzedawca korzysta z programu eB
 
 | Program | Sprzedawcy z | Śledzenie | Cło i podatki |
 | --- | --- | --- | --- |
-| Wysyłka Międzynarodowa eBay | USA, Kanada | Sprzedawca wysyła paczkę do centrum wysyłkowego w swoim kraju, potem numer przesyłki jest dodawany automatycznie | Przy płatności albo przy dostawie, zależnie od dostępnej opcji |
+| Wysyłka Międzynarodowa eBay | USA, Kanada; Wielka Brytania, stopniowo | Sprzedawca wysyła paczkę do centrum wysyłkowego w swoim kraju, potem numer przesyłki jest dodawany automatycznie | Przy płatności albo przy dostawie, zależnie od dostępnej opcji |
 | Program wysyłki międzynarodowej (Global Shipping Program) | Wielka Brytania | Przez centrum wysyłkowe, ze śledzeniem | Wszystko przy płatności |
 | SpeedPAK | Chiny, Japonia | Dodawany automatycznie i obsługiwany z Orange Connex; doręcza przewoźnik z twojego kraju | Sprawdź w ofercie |
 | Inne usługi | Cały świat | Różnie | Czasem przy dostawie |
 
-W Wielkiej Brytanii eBay stopniowo zastępuje Global Shipping Program Wysyłką Międzynarodową eBay dla uprawnionych sprzedawców. Międzynarodowym partnerem GSP jest Pitney Bowes.
+W Wielkiej Brytanii eBay zastępuje Global Shipping Program Wysyłką Międzynarodową eBay: od sierpnia 2026 r. etapami przenosi do niej uprawnionych sprzedawców, a po przeniesieniu GSP nie jest już dla nich dostępny. Międzynarodowym partnerem GSP jest Pitney Bowes.
 
 :::journey
 - shop | Sprzedawca | Drukuje etykietę i dodaje numer
@@ -48,10 +48,10 @@ W Wielkiej Brytanii eBay stopniowo zastępuje Global Shipping Program Wysyłką 
 - plane | Lot | Niewiele skanów do lądowania
 - customs | Cło | Tu płacisz, jeśli nie zapłacono przy zakupie
 - handover | Przewoźnik w Polsce | Często z własnym numerem
-- home | Ty | `Dostarczono` może zamknąć prośbę w eBay
+- home | Ty | `Dostarczona` może zamknąć prośbę w eBay
 :::
 
-SpeedPAK nie doręcza sam pod drzwi: w jego historii widać przewoźnika, który przejmuje paczkę, razem z jego numerem. Do Polski SpeedPAK EU ma dwie wersje. Jedna jest śledzona „End to end”, druga tylko „From pickup to destination country only”, czyli do przyjazdu do kraju docelowego. Przy drugiej śledzenie może się urwać po wylądowaniu.
+SpeedPAK nie doręcza sam pod drzwi: w jego historii widać przewoźnika, który przejmuje paczkę, razem z jego numerem. Do Polski SpeedPAK EU ma dwie wersje. Jedna jest śledzona „End to end”, druga tylko „From pickup to destination country only”, czyli do przyjazdu do kraju docelowego. Przy drugiej śledzenie może się urwać po wylądowaniu. eBay podaje sprzedawcom czas tranzytu 8–12 dni dla pierwszej i 10–15 dni dla drugiej.
 
 ## Jak wygląda numer przesyłki z eBay?
 
@@ -109,11 +109,11 @@ W tej kolejności:
 - Poproś eBay o pomoc | Jeśli sprzedawca nie rozwiąże sprawy w 3 dni robocze, najpóźniej 30 dni po zgłoszeniu.
 :::
 
-Po twoim zgłoszeniu sprzedawca ma 3 dni robocze, żeby odpowiedzieć i zaproponować rozwiązanie. Jeśli zwraca pieniądze, ma na to 2 dni robocze, a środki są zwykle dostępne w ciągu 3–5 dni roboczych. Jeśli w ciągu 30 dni od zgłoszenia problemu sprzedawcy nie poprosisz eBay o pomoc, prośba zostanie automatycznie zamknięta. Od decyzji eBay możesz się odwołać w ciągu 30 dni, jeśli masz nowe dowody.
+Po twoim zgłoszeniu sprzedawca ma 3 dni robocze, żeby podać zaktualizowane informacje o dostawie, zaproponować inny egzemplarz tego samego przedmiotu albo zwrócić pieniądze. Nie każdy sprzedawca ma jednak przedmiot na wymianę. Jeśli zwraca pieniądze, ma na to 2 dni robocze, a środki są zwykle dostępne w ciągu 3–5 dni roboczych. Gdy przedmiot dotrze już po zwrocie pieniędzy, ustal ze sprzedawcą, co dalej: odeślij przedmiot i zachowaj zwrot albo zatrzymaj przedmiot i uzgodnij, jak oddać mu pieniądze. Jeśli w ciągu 30 dni od zgłoszenia problemu sprzedawcy nie poprosisz eBay o pomoc, prośba zostanie automatycznie zamknięta. Od decyzji eBay możesz się odwołać w ciągu 30 dni od zamknięcia sprawy, podając nowe informacje.
 
 ## Śledzenie mówi „dostarczono”, a paczki nie ma?
 
-eBay radzi najpierw zapytać sąsiada: może odebrał paczkę, gdy nie było cię w domu. Dalej nic? Zgłoś to sprzedawcy jak wyżej, w tych samych 30 dniach.
+eBay radzi najpierw zapytać sąsiada: może odebrał paczkę, gdy nie było cię w domu. Sprawdź też adres wysyłkowy w Historii zakupów: jeśli podany przy realizacji transakcji był błędny, a przedmiot został już wysłany, sprzedawca nie może zmienić adresu, więc w miarę możliwości spróbuj odebrać paczkę pod pierwotnym adresem. Dalej nic? Zgłoś to sprzedawcy jak wyżej, w tych samych 30 dniach.
 
 Jeśli po otwarciu prośby śledzenie pokaże doręczenie na twój kod pocztowy, prośba zostanie automatycznie zamknięta w ciągu 24 godzin. W tym czasie możesz jeszcze poprosić eBay o pomoc. Dla eBay dowodem dostawy jest status „Dostarczono” (albo podobny), data i adres z co najmniej twoim kodem pocztowym. Przy zamówieniach za co najmniej 550 EUR potrzebne jest też potwierdzenie odbioru podpisem. Więcej pomocy w poradniku [dostarczona, ale nie odebrana](guide:delivered-not-received).
 
@@ -123,15 +123,16 @@ Tak. Skopiuj numer z Historii zakupów i wklej go w [Peek](/), który rozpozna p
 
 :::sources
 - [eBay Polska: Śledzenie przedmiotu](https://www.ebay.pl/help/buying/shipping-delivery/ledzenie-przedmiotu?id=4027) – Historia zakupów, zakup bez konta, szacowana data dostawy, prośba do sprzedawcy
-- [eBay Polska: Uzyskanie pomocy w sprawie przedmiotu, który nie dotarł](https://www.ebay.pl/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 dni, Więcej działań, 3 i 2 dni robocze, 3–5 dni roboczych, 24 godziny, sąsiad
+- [eBay Polska: Uzyskanie pomocy w sprawie przedmiotu, który nie dotarł](https://www.ebay.pl/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 dni, Więcej działań, 3 i 2 dni robocze, inny egzemplarz przedmiotu, 3–5 dni roboczych, przedmiot po zwrocie pieniędzy, odwołanie po zamknięciu sprawy, 24 godziny, sąsiad, błędny adres
 - [eBay Polska: Gwarancja zwrotu pieniędzy eBay](https://www.ebay.pl/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – eBay GmbH, 30 dni na prośbę o pomoc, odwołanie, dowód dostawy, 550 EUR, serwis transakcji
 - [eBay Polska: Informacje dla kupujących o zagranicznych zakupach i wysyłce](https://www.ebay.pl/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – Wysyłka Międzynarodowa eBay, Program wysyłki międzynarodowej, cło
 - [eBay Polska: Śledzenie sprzedanych przedmiotów](https://www.ebay.pl/help/selling/shipping-items/tracking-items-youve-sold?id=4088) – numer i nazwa przewoźnika, e-mail do kupującego, zgodny numer, czas na wysłanie danych
 - [eBay US: Tracking items you've sold](https://www.ebay.com/help/selling/shipping-items/tracking-items-youve-sold?id=4088) – do 6 numerów, edycja
 - [eBay US: eBay International Shipping program](https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348) – sprzedawcy z USA i Kanady, centrum wysyłkowe
 - [eBay UK: Global Shipping Programme](https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options/global-shipping-programme?id=4646) – Pitney Bowes, zastąpienie przez eBay International Shipping
+- [eBay UK: eBay International Shipping (Seller Centre)](https://www.ebay.co.uk/sellercentre/postage/ebay-international-shipping) – sprzedawcy z Wielkiej Brytanii przenoszeni etapami od sierpnia 2026 r., potem bez GSP
 - [eBay US: International purchases and shipping for buyers](https://www.ebay.com/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – SpeedPAK z Chin i Japonii
-- [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Polska w obu wersjach SpeedPAK EU
+- [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Polska w obu wersjach SpeedPAK EU, czas tranzytu
 - [Orange Connex: eBay SpeedPAK](https://globalshipping.orangeconnex.de/tracking) – pięć dni bez ruchu
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formy numerów
 :::

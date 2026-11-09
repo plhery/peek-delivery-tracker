@@ -4,7 +4,7 @@ description: Wer deine eBay-Bestellung zustellt, wie eBay Internationaler Versan
 slug: ebay-sendungsverfolgung
 picture: Ein Paket mit Barcode-Etikett, eine gepunktete Route über ein Flugzeug zu einem Lieferwagen, und Pip wartet daneben.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 Bei eBay verschickt jeder Verkäufer selbst. Wer liefert, hängt also vom Verkäufer und vom gewählten Versandservice ab: DHL, Hermes, DPD, die Deutsche Post oder eines der eBay-Programme wie eBay Internationaler Versand oder SpeedPAK. Die Sendungsnummer steht als Link unter Mein eBay: Käufe, sobald der Verkäufer sie hochlädt, und manche günstigen Versandarten haben gar keine. Ist der Artikel nach dem angegebenen Lieferdatum nicht da, hast du 30 Tage, um ihn über den eBay-Käuferschutz als nicht erhalten zu melden.
@@ -36,12 +36,12 @@ Kaufst du im Ausland, steht im Angebot, ob der Verkäufer eines der eBay-Program
 
 | Programm | Verkäufer in | Sendungsverfolgung | Zoll und Steuern |
 | --- | --- | --- | --- |
-| eBay Internationaler Versand | USA, Kanada | Der Verkäufer schickt das Paket an ein Versandzentrum in seinem Land, danach kommt die Verfolgung automatisch bis zu deiner Haustür dazu | Bei der Kaufabwicklung oder bei Erhalt, je nach angebotener Option |
+| eBay Internationaler Versand | USA, Kanada; Vereinigtes Königreich, schrittweise | Der Verkäufer schickt das Paket an ein Versandzentrum in seinem Land, danach kommt die Verfolgung automatisch bis zu deiner Haustür dazu | Bei der Kaufabwicklung oder bei Erhalt, je nach angebotener Option |
 | Programm zum weltweiten Versand (GSP) | Vereinigtes Königreich | Über ein Versandzentrum, mit Sendungsverfolgung | Alles im Voraus bei der Kaufabwicklung |
 | SpeedPAK | China, Japan | Automatisch hochgeladen und mit Orange Connex abgewickelt; ein Zusteller in deinem Land liefert | Im Angebot nachsehen |
 | Andere Versandservices | Überall | Unterschiedlich | Eventuell bei der Lieferung |
 
-eBay ersetzt das Programm zum weltweiten Versand für berechtigte britische Verkäufer nach und nach durch eBay Internationaler Versand. Der internationale Partner des GSP ist Pitney Bowes.
+Seit August 2026 stellt eBay berechtigte britische Verkäufer nach und nach vom Programm zum weltweiten Versand auf eBay Internationaler Versand um; danach steht ihnen das GSP nicht mehr zur Verfügung. Der internationale Partner des GSP ist Pitney Bowes.
 
 :::journey
 - shop | Verkäufer | Druckt ein Etikett und lädt die Nummer hoch
@@ -111,11 +111,11 @@ Geh in dieser Reihenfolge vor:
 - eBay einschalten | Hat der Verkäufer nach 3 Werktagen nichts gelöst, bis spätestens 21 Werktage nach deiner Meldung.
 :::
 
-Nach deiner Meldung hat der Verkäufer 3 Werktage, um dir neue Lieferinfos zu geben oder das Geld zu erstatten. Bietet er eine Erstattung an, hat er dafür 2 Werktage, und das Geld ist normalerweise innerhalb von 3 bis 5 Werktagen verfügbar. Mit eBays Entscheidung nicht einverstanden? Du kannst innerhalb von 45 Kalendertagen Einspruch einlegen. Auf ebay.at und ebay.ch gilt dasselbe. Entscheidend ist der Schutz der eBay-Website, auf der du die Kaufabwicklung abgeschlossen hast.
+Nach deiner Meldung hat der Verkäufer 3 Werktage, um dir neue Lieferinfos zu geben oder das Geld zu erstatten. Bietet er eine Erstattung an, hat er dafür 2 Werktage, und das Geld ist normalerweise innerhalb von 3 bis 5 Werktagen verfügbar. Geht die Erstattung auf eine Kreditkarte, kann es je nach Kartenanbieter bis zu 30 Tage dauern, bis sie auf deinem Kontoauszug erscheint. Kommt der Artikel doch noch, schließ die Anfrage über **Weitere Aktionen** → **Einzelheiten zum Kauf** → **Anfrage schließen**; wieder öffnen lässt sie sich nicht. Mit eBays Entscheidung nicht einverstanden? Du kannst innerhalb von 45 Kalendertagen Einspruch einlegen. Auf ebay.at und ebay.ch gilt dasselbe. Entscheidend ist der Schutz der eBay-Website, auf der du die Kaufabwicklung abgeschlossen hast.
 
 > Zeigt die Sendungsverfolgung eine Zustellung vor dem Lieferdatum, laufen deine 30 Tage ab diesem Tag.
 
-Der Käuferschutz deckt nicht alles. Nicht geschützt sind Artikel, die du zum Teil außerhalb von eBay bezahlt hast, etwa per Überweisung oder bar, und Pakete, die vom Zoll nicht freigegeben wurden, weil du Zölle oder Gebühren nicht bezahlt hast. Hat der Verkäufer den Wert zu hoch oder einen falschen Artikelstandort angegeben, bist du trotzdem geschützt. Verweigerst du die Annahme, bist du es nicht.
+Der Käuferschutz deckt nicht alles. Nicht geschützt sind Artikel, die du zum Teil außerhalb von eBay bezahlt hast, etwa per Überweisung oder bar, und Pakete, die vom Zoll nicht freigegeben wurden, weil du Zölle oder Gebühren nicht bezahlt hast. Hat der Verkäufer den Wert zu hoch oder einen falschen Artikelstandort angegeben, bist du trotzdem geschützt. Verweigerst du die Annahme, bist du es nicht. Falsche Lieferadresse angegeben? Bitte den Verkäufer, den Kauf abzubrechen, solange er noch nicht verschickt hat. Danach kann er die Adresse nicht mehr ändern, und eBay rät, das Paket an der ursprünglichen Adresse abzuholen.
 
 ## Sendung zugestellt, aber nicht bei dir?
 
@@ -131,8 +131,8 @@ Ja. Kopiere die Nummer aus Mein eBay: Käufe und füge sie in [Peek](/) ein: Pee
 - [eBay: Sendung für Ihren Artikel nachverfolgen](https://www.ebay.de/help/buying/versand-lieferung/sendungsverfolgung?id=4027) – Mein eBay: Käufe, Gastkauf, nur Lieferdatum ohne Verfolgung, Verkäufer fragen
 - [eBay: Erhalten Sie Hilfe, wenn Ihr Artikel nicht geliefert wurde](https://www.ebay.de/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 Tage, Weitere Aktionen, 3 und 2 Werktage, 3 bis 5 Werktage, 24 Stunden, Nachbarn
 - [eBay: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 21 Werktage, Einspruch in 45 Tagen, Nachweis der Zustellung, Ausschlüsse, Website der Kaufabwicklung
-- [eBay Österreich: Erhalten Sie Hilfe, wenn Ihr Artikel nicht geliefert wurde](https://www.ebay.at/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 Tage, 3 und 21 Werktage, 24 Stunden in Österreich
-- [eBay Schweiz: Erhalten Sie Hilfe, wenn Ihr Artikel nicht geliefert wurde](https://www.ebay.ch/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – eBay-Käuferschutz, 30 Tage, 3 und 21 Werktage, 24 Stunden in der Schweiz
+- [eBay Österreich: Erhalten Sie Hilfe, wenn Ihr Artikel nicht geliefert wurde](https://www.ebay.at/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 Tage, 3, 2 und 21 Werktage, 24 Stunden, Kreditkarte bis zu 30 Tage, Anfrage schließen, falsche Lieferadresse, Nachbarn in Österreich
+- [eBay Schweiz: Erhalten Sie Hilfe, wenn Ihr Artikel nicht geliefert wurde](https://www.ebay.ch/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – eBay-Käuferschutz, 30 Tage, 3, 2 und 21 Werktage, 24 Stunden, Kreditkarte bis zu 30 Tage, Anfrage schließen, falsche Lieferadresse in der Schweiz
 - [eBay Österreich: Einspruch gegen eBay-Entscheidung bei Rückgabe oder fehlendem Artikel](https://www.ebay.at/help/returns-refunds/returning-item-purchased/cases-disputes?id=4039) – Einspruch innerhalb von 45 Tagen in Österreich
 - [eBay Schweiz: Einspruch gegen eBay-Entscheidung bei Rückgabe oder fehlendem Artikel](https://www.ebay.ch/help/returns-refunds/returning-item-purchased/cases-disputes?id=4039) – Einspruch innerhalb von 45 Tagen in der Schweiz
 - [eBay: Internationaler Kauf und Versand für Käufer](https://www.ebay.de/help/buying/versand-lieferung/internationale-kaeufe?id=4057) – eBay Internationaler Versand, Programm zum weltweiten Versand, Zoll
@@ -143,6 +143,7 @@ Ja. Kopiere die Nummer aus Mein eBay: Käufe und füge sie in [Peek](/) ein: Pee
 - [Packlink: Versandtarife für eBay-Versand by Packlink](https://support-ebay.packlink.com/hc/de/articles/209156905) – DPD und UPS
 - [eBay US: eBay International Shipping program](https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348) – Verkäufer in den USA und Kanada, Versandzentrum
 - [eBay UK: Global Shipping Programme](https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options/global-shipping-programme?id=4646) – Pitney Bowes, Ablösung durch eBay International Shipping
+- [eBay UK: eBay International Shipping (Seller Centre)](https://www.ebay.co.uk/sellercentre/postage/ebay-international-shipping) – britische Verkäufer seit August 2026 schrittweise umgestellt, danach kein GSP mehr
 - [eBay US: International purchases and shipping for buyers](https://www.ebay.com/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – SpeedPAK aus China und Japan
 - [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – Länder, End to end oder nur bis ins Zielland
 - [Orange Connex: eBay SpeedPAK](https://globalshipping.orangeconnex.de/tracking) – fünf Tage ohne Bewegung

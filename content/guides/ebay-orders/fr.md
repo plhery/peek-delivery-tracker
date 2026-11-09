@@ -4,7 +4,7 @@ description: Qui livre ta commande eBay, comment fonctionnent la Livraison inter
 slug: suivi-colis-ebay
 picture: Un colis avec une étiquette à code-barres, un trajet en pointillés qui passe par un avion jusqu'à une camionnette, et Pip qui attend à côté.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 Sur eBay, chaque vendeur envoie lui-même la commande : le transporteur dépend donc du vendeur et du service qu'il a choisi, comme La Poste, Colissimo, Mondial Relay, Chronopost, ou l'un des programmes d'eBay, comme la Livraison internationale eBay ou SpeedPAK. Le numéro de suivi apparaît en lien dans ton Historique des achats dès que le vendeur l'ajoute, et certains envois bon marché n'en ont pas. Si l'objet n'est pas arrivé à la date de livraison estimée, tu as 30 jours pour le signaler avec la Garantie client eBay.
@@ -36,12 +36,12 @@ Quand tu achètes à l'étranger, l'annonce indique si le vendeur passe par un p
 
 | Programme | Vendeurs | Suivi | Droits et taxes |
 | --- | --- | --- | --- |
-| Livraison internationale eBay | États-Unis, Canada | Le vendeur envoie le colis à un centre de livraison dans son pays, puis le suivi est ajouté automatiquement jusqu'à chez toi | Au paiement ou à la livraison, selon l'option proposée |
+| Livraison internationale eBay | États-Unis, Canada ; Royaume-Uni, progressivement | Le vendeur envoie le colis à un centre de livraison dans son pays, puis le suivi est ajouté automatiquement jusqu'à chez toi | Au paiement ou à la livraison, selon l'option proposée |
 | Service de livraison internationale (GSP) | Royaume-Uni | Par un centre de livraison, avec suivi | Tout au paiement |
 | SpeedPAK | Chine, Japon | Chargé automatiquement et géré avec Orange Connex ; un transporteur de ton pays livre | Voir l'annonce |
 | Autres services | Partout | Variable | Parfois à la livraison |
 
-Au Royaume-Uni, eBay remplace peu à peu le Service de livraison internationale par la Livraison internationale eBay pour les vendeurs éligibles. Son prestataire international est Pitney Bowes.
+Depuis août 2026, eBay fait passer peu à peu les vendeurs britanniques éligibles du Service de livraison internationale à la Livraison internationale eBay ; une fois un vendeur inscrit, le GSP n'est plus disponible sur ses annonces. Le prestataire international du GSP est Pitney Bowes.
 
 :::journey
 - shop | Vendeur | Imprime un bordereau et ajoute le numéro
@@ -111,17 +111,17 @@ Dans cet ordre :
 - Demander à eBay d'intervenir | Si le vendeur n'a rien réglé après 3 jours ouvrés, au plus tard 21 jours ouvrés après ton signalement.
 :::
 
-Une fois prévenu, le vendeur a 3 jours ouvrables pour te donner des nouvelles de la livraison, te proposer un objet de remplacement ou te rembourser. Un remboursement arrive en général en 3 à 5 jours ouvrés. Si tu n'es pas d'accord avec la décision d'eBay, tu peux la contester dans les 30 jours calendaires. C'est la garantie du site eBay où tu as finalisé l'achat qui s'applique. Sur befr.ebay.be, les délais sont les mêmes, sauf un : tu as 30 jours après ton signalement pour demander à eBay d'intervenir.
+Une fois prévenu, le vendeur a 3 jours ouvrables pour te donner des nouvelles de la livraison, te proposer un objet de remplacement ou te rembourser. S'il propose de te rembourser, il a 2 jours ouvrables pour le faire, et l'argent est en général disponible en 3 à 5 jours ouvrés ; sur une carte de crédit, cela peut prendre jusqu'à 30 jours selon l'émetteur. Si l'objet finit par arriver, clôture ta demande : **Autres actions** → **Afficher les détails de la demande** → **Clôturer votre demande**. Elle ne peut plus être rouverte ensuite. Déjà remboursé ? Mets-toi d'accord avec le vendeur : tu renvoies l'objet, ou tu le gardes et tu rembourses le vendeur. Si tu n'es pas d'accord avec la décision d'eBay, tu peux la contester dans les 30 jours calendaires. C'est la garantie du site eBay où tu as finalisé l'achat qui s'applique. Sur befr.ebay.be, les délais sont les mêmes, sauf un : tu as 30 jours après ton signalement pour demander à eBay d'intervenir.
 
 > Si le suivi montre une livraison avant la date estimée, tes 30 jours partent de ce jour-là.
 
-La Garantie client eBay ne couvre pas tout. Elle exclut un objet payé en partie en dehors d'eBay (virement, espèces, mandat), un service de réexpédition que tu as choisi toi-même, et un colis bloqué parce que les frais d'importation n'ont pas été payés. Ces frais restent couverts si le vendeur les avait annoncés prépayés. Tu n'es pas couvert non plus si tu n'as pas retiré l'objet au point de retrait dans le délai imparti : voir [colis non retiré](guide:uncollected-parcel). Les colis passés par la Livraison internationale eBay ou le Service de livraison internationale restent couverts.
+La Garantie client eBay ne couvre pas tout. Elle exclut un objet payé en partie en dehors d'eBay (virement, espèces, mandat), un service de réexpédition que tu as choisi toi-même, et un colis bloqué parce que les frais d'importation n'ont pas été payés. Ces frais restent couverts si le vendeur les avait annoncés prépayés. Tu n'es pas couvert non plus si tu n'as pas retiré l'objet au point de retrait dans le délai imparti : voir [colis non retiré](guide:uncollected-parcel). Les colis passés par la Livraison internationale eBay ou le Service de livraison internationale restent couverts. Tu t'es trompé d'adresse ? Demande au vendeur d'annuler la commande tant qu'il n'a pas envoyé l'objet. Ensuite, il ne peut plus changer l'adresse, et eBay conseille de récupérer le colis à l'adresse d'origine.
 
 ## Le suivi dit livré, mais tu n'as rien reçu ?
 
 eBay conseille d'abord de demander à un voisin : il a peut-être accepté le colis pendant ton absence. Toujours rien ? Préviens le vendeur comme plus haut, dans les mêmes 30 jours.
 
-Si le suivi montre ensuite une livraison à ton adresse, ta demande se ferme toute seule, mais tu peux encore demander à eBay d'intervenir si l'objet n'est pas là. Pour qu'eBay retienne une livraison, il lui faut le statut « Livré » ou « Tentative de livraison », la date, et ta ville ou ton code postal. Pour une commande de 550 EUR ou plus, il faut aussi un accusé de réception. Plus d'aide dans [colis livré mais pas reçu](guide:delivered-not-received).
+Si le suivi montre ensuite une livraison à ton adresse, ta demande se ferme toute seule sous 24 heures, mais pendant ce délai tu peux encore demander à eBay d'intervenir si l'objet n'est pas là. Pour qu'eBay retienne une livraison, il lui faut le statut « Livré » ou « Tentative de livraison », la date, et ta ville ou ton code postal. Sur befr.ebay.be, seul le statut « Livré » compte, avec ton code postal. Pour une commande de 550 EUR ou plus, il faut aussi un accusé de réception. Plus d'aide dans [colis livré mais pas reçu](guide:delivered-not-received).
 
 ## Est-ce que je peux suivre une commande eBay avec Peek ?
 
@@ -129,10 +129,10 @@ Oui. Copie le numéro depuis ton Historique des achats et colle-le dans [Peek](/
 
 :::sources
 - [eBay France : Suivre l'acheminement d'un objet](https://www.ebay.fr/help/buying/livraison/suivre-objet?id=4027) – Historique des achats, achat sans compte, service avec suivi, date estimée
-- [eBay France : Obtenir de l'aide pour un objet qui n'est pas arrivé](https://www.ebay.fr/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 jours, Autres actions, 3 jours ouvrables, 3 à 5 jours ouvrés, voisin
+- [eBay France : Obtenir de l'aide pour un objet qui n'est pas arrivé](https://www.ebay.fr/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 jours, Autres actions, 3 et 2 jours ouvrables, 3 à 5 jours ouvrés, carte de crédit jusqu'à 30 jours, 24 heures, clôturer la demande, objet arrivé après remboursement, adresse incorrecte, voisin
 - [eBay France : Règlement de la Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 21 jours ouvrés, contestation en 30 jours, preuve de livraison, 550 EUR, exclusions
 - [eBay Belgique : Obtenir de l'aide pour un objet qui n'est pas arrivé](https://www.befr.ebay.be/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – Garantie client eBay, 30 jours, 3 jours ouvrables en Belgique
-- [eBay Belgique : Garantie client eBay](https://www.befr.ebay.be/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours après le signalement pour demander à eBay d'intervenir, contestation en 30 jours
+- [eBay Belgique : Garantie client eBay](https://www.befr.ebay.be/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours après le signalement pour demander à eBay d'intervenir, contestation en 30 jours, preuve : « Livré » et code postal, 550 EUR
 - [eBay Suisse : Erhalten Sie Hilfe, wenn Ihr Artikel nicht geliefert wurde](https://www.ebay.ch/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – eBay-Käuferschutz, 30 jours en Suisse
 - [eBay France : Achats et livraison à l'international pour les acheteurs](https://www.ebay.fr/help/buying/livraison/achats-internationaux?id=4057) – Livraison internationale eBay, Service de livraison internationale, droits et taxes
 - [eBay France : Imprimer et annuler des bordereaux d'envoi](https://www.ebay.fr/help/selling/shipping-items/labels-packaging-tips/buying-printing-shipping-labels?id=4157) – La Poste, Colissimo, Mondial Relay, Packlink, un numéro par bordereau
@@ -141,6 +141,7 @@ Oui. Copie le numéro depuis ton Historique des achats et colle-le dans [Peek](/
 - [Packlink : Comment suivre mon envoi ?](https://support-ebay.packlink.com/hc/fr-fr/articles/209069765) – suivi jusqu'à 12 heures après l'enlèvement ou le dépôt
 - [eBay US : eBay International Shipping program](https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348) – vendeurs aux États-Unis et au Canada, centre de livraison
 - [eBay UK : Global Shipping Programme](https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options/global-shipping-programme?id=4646) – Pitney Bowes, remplacement par la Livraison internationale eBay
+- [eBay UK : eBay International Shipping (Seller Centre)](https://www.ebay.co.uk/sellercentre/postage/ebay-international-shipping) – vendeurs britanniques inscrits par étapes depuis août 2026, GSP indisponible ensuite
 - [eBay US : International purchases and shipping for buyers](https://www.ebay.com/help/buying/shipping-delivery/international-purchases-shipping?id=4057) – SpeedPAK depuis la Chine et le Japon
 - [eBay : SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – pays, suivi de bout en bout ou jusqu'au pays de destination
 - [Orange Connex : eBay SpeedPAK](https://globalshipping.orangeconnex.de/tracking) – cinq jours sans mouvement

@@ -125,7 +125,7 @@ As a consumer, you have at least 14 days from the day after delivery to tell the
 
 ## Can I track an Allegro parcel in Peek?
 
-Yes, with the tracking number. Copy it from My Parcels or the order in Purchase History and paste it into [Peek](/). Peek recognises Allegro One numbers and tracks them automatically, as well as an allegro.pl tracking link with the number in it, and shows Allegro's tracking wording in English unless you use Peek in Polish. It also knows DPD Poland and Pocztex numbers by their shape. For a shape several carriers share, such as InPost's 24 digits, press "Change" and pick the carrier the purchase details name.
+Yes, with the tracking number. Copy it from My Parcels or the order in Purchase History and paste it into [Peek](/). Peek recognises Allegro One numbers and tracks them automatically, as well as an allegro.pl tracking link with the number in it, and shows Allegro's tracking wording in English unless you use Peek in Polish. It also names DPD Poland (13 digits and a letter) and Pocztex (`PX` and 10 digits) at once by their shape. When several carriers share a number's shape, such as InPost's 24 digits, ORLEN Paczka's `210` and 10 digits, DPD's 14 digits starting `13` or DHL's 11 digits, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if Peek shows the wrong one, press "Change" and pick the carrier the purchase details name.
 
 - **Several parcels, several numbers.** Add each one: Peek tracks each parcel separately.
 - **An order or offer number isn't enough.** Peek needs the tracking number.

@@ -22,7 +22,7 @@ Sur Allegro, chaque vendeur choisit les modes de livraison qu'il propose, et tu 
 | ORLEN Paczka | `Allegro Automat ORLEN Paczka` | Consigne ou point |
 | Poczta Polska (Pocztex) | `Allegro Kurier Pocztex`, `Allegro Automat Pocztex`, `Allegro Odbiór w Punkcie Pocztex` | Domicile, consigne, point |
 
-Le vendeur propose les modes d'Allegro One, d'ORLEN Paczka, de DHL et de DPD soit par « Allegro Delivery », le programme de livraison d'Allegro, soit avec son propre contrat chez le transporteur. Avec Allegro Delivery, Allegro est responsable de toute la livraison et du service client. Les colis Allegro One Punkt peuvent être transportés par DPD, et les colis Allegro One Box aussi par DHL ou ORLEN Paczka ; les coursiers d'Allegro One livrent eux-mêmes dans certaines villes.
+Le vendeur propose les modes d'Allegro One, d'ORLEN Paczka, de DHL et de DPD soit par « Allegro Delivery », le programme de livraison d'Allegro, soit avec son propre contrat chez le transporteur. Avec Allegro Delivery, Allegro est responsable de toute la livraison et du service client. Les colis Allegro One Punkt peuvent être transportés par DPD, et les colis Allegro One Box par DPD, DHL ou ORLEN Paczka ; les coursiers d'Allegro One livrent eux-mêmes dans certaines villes.
 
 Avec Allegro Delivery, le colis t'attend 2 jours calendaires dans une One Box et 2 à 3 jours ouvrés dans les autres consignes et points. Tu reçois le code de retrait par e-mail, dans l'appli ou par SMS. Si tu ne le retires pas, il repart chez le vendeur. Plus de détails : [consignes à colis](guide:parcel-lockers).
 
@@ -123,7 +123,7 @@ Chez un vendeur professionnel, tu as au moins 14 jours à partir du lendemain de
 
 ## Peut-on suivre un colis Allegro dans Peek ?
 
-Oui, avec le numéro du transporteur. Copie-le depuis « Moje zakupy » et colle-le dans [Peek](/). Peek reconnaît et suit automatiquement les numéros Allegro One (`A0` ou `AD` et 8 caractères, `AD0` et 14), et reconnaît aussi DPD Pologne et Pocztex à leur forme. Pour une forme partagée par plusieurs transporteurs, comme les 24 chiffres d'InPost, appuie sur « Changer » et choisis celui indiqué dans les détails de l'achat.
+Oui, avec le numéro du transporteur. Copie-le depuis « Moje zakupy » et colle-le dans [Peek](/). Peek reconnaît et suit automatiquement les numéros Allegro One (`A0` ou `AD` et 8 caractères, `AD0` et 14), et reconnaît aussi d'emblée DPD Pologne (13 chiffres et une lettre) et Pocztex (`PX` et 10 chiffres) à leur forme. Pour une forme partagée par plusieurs transporteurs, comme les 24 chiffres d'InPost, `210` et 10 chiffres chez ORLEN Paczka, 14 chiffres commençant par `13` chez DPD ou 11 chiffres chez DHL, Peek interroge les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; si Peek affiche le mauvais, appuie sur « Changer » et choisis celui indiqué dans les détails de l'achat.
 
 Le numéro de commande Allegro n'est pas un numéro de suivi, et Peek ne peut pas le suivre. Peek affiche ce que publie le transporteur. Les signalements de problème, la protection des acheteurs et les remboursements restent dans ton compte Allegro.
 

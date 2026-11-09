@@ -129,7 +129,7 @@ Zara refunds you on the payment method you used. It processes a return within 72
 
 Yes, with the courier's tracking number. Zara doesn't name its delivery couriers in these countries, so paste the number into [Peek](/) all the same: Peek follows more than 3,500 carriers. When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right courier. Paste a return label's number the same way.
 
-If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the courier publishes. Reports, refunds and returns stay in your Zara account.
+If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the courier publishes. Reports, refunds and returns stay with Zara.
 
 :::sources
 - [Zara UK: Shipping methods, times and costs](https://www.zara.com/uk/en/help-center/DeliveryMethods) – options, times, prices, working days, store and drop point collection, absent at delivery, new date, large Zara Home items

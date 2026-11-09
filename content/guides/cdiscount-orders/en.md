@@ -175,7 +175,7 @@ If a seller's parcel changes carrier on the way and the first carrier names the 
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – shipping by seller or Cdiscount, Cdiscount stepping in, FEVAD mediator
 - [Cdiscount Marketplace: home page](https://marketplace.cdiscount.com/) – 10,000 sellers
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – selling abroad, marketplace countries, door delivery only, French-language site, times from outside Europe
-- [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – online orders: claim with the shop
+- [Relais Colis: Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – online orders: claim with the shop
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – at least 14 days
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – 30 days without a date, risk until you have the parcel
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, carriers Peek knows

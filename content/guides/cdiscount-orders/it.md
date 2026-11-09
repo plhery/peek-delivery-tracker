@@ -173,7 +173,7 @@ Se il pacco di un venditore cambia corriere durante il viaggio e il primo corrie
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – spedizione del venditore o di Cdiscount, intervento di Cdiscount, mediatore FEVAD
 - [Cdiscount Marketplace: home page](https://marketplace.cdiscount.com/) – 10.000 venditori
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – vendita fuori dalla Francia in cinque paesi, anche per gli articoli spediti da Cdiscount, solo a domicilio, da 2 a 7 giorni, assistenza in francese, tempi da fuori Europa
-- [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – ordini online: reclamo al negozio
+- [Relais Colis: Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – ordini online: reclamo al negozio
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, termine supplementare e annullamento, danni fino alla ricezione
 - [Your Europe: Restituzioni](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_it.htm) – 14 giorni dalla consegna
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – rischio finché non hai il pacco

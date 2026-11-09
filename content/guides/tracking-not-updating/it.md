@@ -118,7 +118,7 @@ Per un pacco spedito in Italia è tanto: Poste consegna il 90% dei Poste Deliver
 
 ### Posso far aggiornare il tracking prima?
 
-No, e non può farlo nemmeno un tracker: mostra solo quello che pubblica il corriere. [Peek](/) ricontrolla il corriere fino a ogni 10 minuti, e fino a ogni 2 quando il pacco è in consegna con un corriere che Peek legge direttamente (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e può mandarti una notifica quando arriva una nuova scansione, così non devi più ricaricare la pagina.
+No, e non può farlo nemmeno un tracker: mostra solo quello che pubblica il corriere. [Peek](/) ricontrolla il corriere fino a ogni 10 minuti, e fino a ogni 2 quando il pacco è in consegna con un corriere che Peek legge direttamente (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e può mandarti una notifica quando arriva una nuova scansione, così non devi più ricaricare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL, USPS, GOFO e Cainiao). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
 
 ### «Spedizione non trovata»: perché il codice non funziona?
 

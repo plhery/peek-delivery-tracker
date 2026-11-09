@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-Relais Colis is a French network delivering parcels to local shops that act as pickup points, now part of [GLS France](carrier:gls-fr). Track a parcel on [Relais Colis's tracking page](https://www.relaiscolis.com/colis/suivre) with its parcel number, or paste the number in the box above. The number comes from the shop that sent it, or from Relais Colis's confirmation email for a parcel sent between people.
+Relais Colis is a French network delivering parcels to local shops that act as pickup points, now part of [GLS France](carrier:gls-fr). Track a parcel on [Relais Colis's tracking page](https://relaiscolis.com/colis/suivre) with its parcel number, or paste the number in the box above. The number comes from the shop that sent it, or from Relais Colis's confirmation email for a parcel sent between people.
 
 ## Relais Colis tracking number (numéro de colis)
 
@@ -101,7 +101,7 @@ Yes: for parcels sent through relaiscolis.com, its terms say Relais Colis delive
 No. Relais Colis says it doesn't deliver to the French overseas territories or abroad for now.
 
 :::sources
-- [Relais Colis: Suivre mon colis](https://www.relaiscolis.com/colis/suivre) – number length, example, not-found message
+- [Relais Colis: Suivre mon colis](https://relaiscolis.com/colis/suivre) – number length, example, not-found message
 - [Relais Colis: Comment suivre mon colis ?](https://relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 to 16 characters, search without number
 - [Relais Colis: Prévenir le destinataire](https://relaiscolis.com/faq/question/pr%C3%A9venir%20arriv%C3%A9e%20destinataire) – email or SMS, holding time
 - [Relais Colis: Combien de jours mon colis est-il gardé ?](https://relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 7 working days

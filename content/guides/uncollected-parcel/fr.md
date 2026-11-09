@@ -4,7 +4,7 @@ description: Combien de jours ton colis reste en point relais, au bureau de post
 slug: colis-non-retire
 picture: Une consigne à colis avec une porte ouverte, Pip qui attend dans le casier, et un calendrier aux deux derniers jours entourés.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-09
 ---
 
 Un colis non retiré au bureau de poste, en point relais ou en consigne repart chez l'expéditeur une fois son dernier jour passé. Les bureaux de poste et les points de retrait le gardent le plus longtemps (14 jours calendaires dans un Point d'enlèvement bpost, par exemple), les consignes souvent 5 jours seulement, et c'est la date de ton avis de passage, de ton SMS ou de ton e-mail qui compte. Si tu l'as raté, demande à la boutique de te rembourser ou de te le renvoyer.
@@ -37,11 +37,11 @@ Les consignes te laissent peu de temps, les bureaux de poste bien plus.
 | --- | --- | --- | --- |
 | France | La Poste : délai parfois indiqué dans le suivi (voir sous le tableau) | Relais Colis : 9 jours calendaires ; Relais Pickup DPD : 9 jours calendaires | Amazon Locker : 3 jours calendaires |
 | Belgique | – | Point d'enlèvement bpost : 14 jours calendaires ; DPD Pickup : 5 jours calendaires ; Mondial Relay : 5 jours calendaires | Distributeur de colis bpost : 5 jours calendaires ; Locker Mondial Relay : 5 jours calendaires |
-| Suisse | La Poste suisse : 7 jours en général, 15 pour les colis venus de l'étranger, prolongeable | – | Automate My Post 24 : 10 jours |
+| Suisse | La Poste suisse : 7 jours en général, 15 pour les envois internationaux, prolongeable | – | Automate My Post 24 : 10 jours |
 
 Chez La Poste, le message du suivi peut donner le délai quand le colis arrive au point de retrait, par exemple « … pendant un délai de 15 jours calendaires » ou « Le délai de retrait est de 5 jours ».
 
-Chez [Relais Colis](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis), les 9 jours calendaires correspondent à 7 jours ouvrés. Chez DPD France, les 9 jours comptent dès le jour où le colis arrive au relais.
+Chez [Relais Colis](https://relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis), les 9 jours calendaires correspondent à 7 jours ouvrés. Chez DPD France, les 9 jours comptent dès le jour où le colis arrive au relais.
 
 Un même transporteur peut avoir plusieurs délais selon l'endroit : chez bpost, 14 jours au Point d'enlèvement, mais 5 au distributeur de colis.
 
@@ -70,15 +70,17 @@ Ailleurs, si tu ne peux pas y aller à temps :
 - Préviens la boutique | Avant le délai si tu n'en veux plus, après si tu l'as raté.
 :::
 
-La Poste suisse peut aussi faire suivre un envoi vers une autre filiale, ou vers un point PickPost ou un automate My Post 24 si tu es inscrit à ce service.
+La Poste suisse peut aussi faire suivre un envoi vers une autre filiale, ou vers un point PickPost ou un automate My Post 24 si tu es inscrit à ce service. Avec « Mes envois », réexpédier un colis coûte CHF 8.– en semaine.
 
-Avec 5 jours seulement en consigne, une notification lue trop tard peut suffire à te le faire rater. [Peek](/) peut t'envoyer une notification quand le suivi indique que ton colis attend d'être retiré, avec le réglage « Étapes importantes ». Il ne peut pas prolonger le délai : seuls le transporteur ou la boutique le peuvent.
+Pour un Amazon Locker, transfère l'e-mail de confirmation de livraison à la personne qui ira chercher le colis.
+
+Avec 5 jours seulement en consigne, une notification lue trop tard peut suffire à te le faire rater. Quand le suivi indique que ton colis attend d'être retiré, [Peek](/) affiche « Prêt à être retiré » et, si le transporteur le donne, le point de retrait. Il peut t'en prévenir avec le réglage « Étapes importantes » (pas avec « Livraison seulement »), et par e-mail avec « Un e-mail quand un colis arrive » si tu as un compte. Il ne peut pas prolonger le délai : seuls le transporteur ou la boutique le peuvent.
 
 ## Colis non retiré : suis-je remboursé ?
 
 Ça dépend de qui te l'a vendu. Si tu ne retires pas ton colis d'un Amazon Locker avant la date indiquée dans l'e-mail de confirmation de livraison, [Amazon](carrier:amazon-logistics) le renvoie automatiquement et te rembourse, sans que tu aies à le demander.
 
-Sur Vinted, un colis non récupéré repart chez le vendeur. Si le vendeur ne l'a pas reçu ou ne l'a pas signalé comme reçu dans les 14 jours ouvrés, Vinted lance le remboursement tout seul, sans rien à faire de ton côté. Toujours rien après 25 jours ouvrés : contacte Vinted.
+Sur Vinted, un colis non récupéré repart chez le vendeur. Si le vendeur ne l'a pas reçu ou ne l'a pas signalé comme reçu dans les 14 jours ouvrés, Vinted lance le remboursement tout seul, sans rien à faire de ton côté. Toujours rien après 25 jours ouvrés : contacte Vinted. Le remboursement se fait sur le moyen de paiement utilisé pour l'achat.
 
 Avec une autre boutique, ça dépend du pays.
 
@@ -114,17 +116,17 @@ Le suivi indique souvent « livré » dès que le colis est dans la consigne. Li
 - [Mondial Relay Belgique : Quel est le délai pour retirer mon colis en Locker ou en Point Relais ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, dimanches et jours fériés inclus, retour automatique, pas de prolongation
 - [Mondial Relay Belgique : Le destinataire n'est pas venu chercher son colis, que se passe-t-il ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – retour au Point Relais de dépôt, aux frais de Mondial Relay
 - [Mondial Relay Belgique : Pendant combien de temps mon colis sera gardé par le Point Relais® ou le Locker ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/pendant-combien-de-temps-mon-colis-sera-garde-par-le-point-relais/) – retour à l'expéditeur : Locker ou Point Relais d'origine aux frais de Mondial Relay pour un envoi de particulier, vendeur pour une enseigne, un site e-commerce ou une marketplace
-- [Relais Colis : Combien de jours mon colis est-il gardé en Relais Colis ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 jours calendaires, soit 7 jours ouvrés, retour au relais de dépôt
+- [Relais Colis : Combien de jours mon colis est-il gardé en Relais Colis ?](https://relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 jours calendaires, soit 7 jours ouvrés, retour au relais de dépôt (lu le 9 novembre 2026, la page a quitté www.relaiscolis.com pour relaiscolis.com)
 - [DPD France : Pendant combien de temps mon colis est-il gardé en relais Pickup ?](https://www.dpd.com/fr/fr/faq/pendant-combien-de-temps-mon-colis-est-il-garde-en-relais-pickup/) – 9 jours calendaires dès le dépôt au relais, puis retour
 - [bpost : Combien de temps mon colis reste-t-il disponible au Point d'enlèvement ?](https://www.bpost.be/fr/faq/combien-de-temps-mon-colis-reste-t-il-disponible-au-point-denlevement) – 14 jours calendrier, 5 en distributeur de colis, puis retour
 - [DPD Belgique : Combien de temps mon colis sera-t-il stocké dans le Pickup parcelshop ?](https://www.dpd.com/be/fr/faq/combien-de-temps-mon-colis-sera-t-il-stocke-dans-le-pickup-parcelshop/) – 5 jours calendaires, puis retour
-- [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – 7 jours en général, 15 pour les envois de l'étranger, prolongation gratuite et sans compte
+- [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – 7 jours en général, 15 pour les envois internationaux, prolongation gratuite et sans compte ; réexpédition d'un colis avec « Mes envois » : CHF 8.– en semaine (lu le 9 novembre 2026)
 - [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – libellé « Annoncé pour retrait (invitation à retirer un envoi) »
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « Disponible dans votre Point Relais »
 - [La Poste suisse : CG PickPost et My Post 24](https://www.post.ch/-/media/post/agb/agb-pickpost-mypost24.pdf?sc_lang=fr) – automate My Post 24, 10 jours
 - [La Poste suisse : CG « Mes envois »](https://www.post.ch/-/media/post/agb/agb-meine-sendungen.pdf?sc_lang=fr) – prolongation, pas pour les actes judiciaires ; réexpédition vers un autre point de retrait
-- [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – trois jours calendaires, renvoi automatique et remboursement
-- [Vinted : Que faire si ton colis est renvoyé à l'expéditeur ?](https://www.vinted.fr/help/1447) – colis non récupéré à temps, remboursement automatique après 14 jours ouvrés, 25 jours ouvrés
+- [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – trois jours calendaires, renvoi automatique et remboursement, transférer l'e-mail de confirmation de livraison (lu le 9 novembre 2026)
+- [Vinted : Que faire si ton colis est renvoyé à l'expéditeur ?](https://www.vinted.fr/help/1447) – colis non récupéré à temps, remboursement automatique après 14 jours ouvrés, 25 jours ouvrés, moyen de paiement de l'achat (lu le 9 novembre 2026)
 - [Service-public.gouv.fr : Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – 14 jours dès le lendemain de la réception, déclaration nécessaire, remboursement, coûts de renvoi, majorations
 - [SPF Economie : Le droit de rétractation dans les contrats à distance (PDF)](https://economie.fgov.be/sites/default/files/Files/Ventes/Information-droit-retractation-consommateur-vente-a-distance.pdf) – art. VI.47 et suivants : point de départ, formulaire ou déclaration dénuée d'ambiguïté, remboursement, coûts de renvoi
 - [SPF Economie : Un achat impulsif ? Vous pouvez changer d'avis](https://news.economie.fgov.be/270126-un-achat-impulsif-vous-pouvez-changer-d-avis/) – fonction de rétractation en ligne obligatoire depuis le 14 août 2026

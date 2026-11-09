@@ -115,6 +115,6 @@ Yes. Ciblex has an agency in Zaventem and depots in Belgium, including Schaerbee
 - [Ciblex: H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – before noon, signature
 - [Ciblex: Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – Saturday mornings
 - [Ciblex: Le groupe Walden a finalisé le rachat de Relais Colis](https://ciblex.eu/le-groupe-walden-a-finalise-le-rachat-de-relais-colis/) – link with Relais Colis
-- [Relais Colis: Accueil](https://www.relaiscolis.com/) – Relais Colis's own site
+- [Relais Colis: Accueil](https://relaiscolis.com/) – Relais Colis's own site
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
 :::

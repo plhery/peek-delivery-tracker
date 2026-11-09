@@ -4,7 +4,7 @@ description: Dove segui il tuo ordine Zara in Italia, cosa vuol dire ogni stato,
 slug: tracciamento-ordine-zara
 picture: Un sacchetto di carta con manici di corda accanto a un furgone delle consegne, e Pip che sbuca dal sacchetto.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-09
 ---
 
 Segui il tuo ordine Zara dal tuo account, nella sezione «Ordini», oppure, se hai comprato come ospite, dal link presente in tutte le e-mail sull'ordine. Le pagine di Zara non dicono quale corriere porta l'ordine: se qualcosa va storto, contatta Zara, che verifica il caso con l'impresa di trasporti. Hai 30 giorni dalla spedizione per fare il reso, gratis in negozio.
@@ -68,10 +68,10 @@ Quando non si muove niente, di solito è uno di questi casi:
 - **È ancora in magazzino.** Con `Ordine in corso` o `In preparazione` il pacco non è ancora partito.
 - **Un ordine diviso.** Se hai accettato più consegne, ognuna ha la sua data. Controlla nei dettagli dell'ordine.
 - **Un fine settimana o un festivo.** Zara consegna solo nei giorni lavorativi.
-- **Zara ha cambiato la data.** Se non riesce a consegnare il giorno stimato, ti manda un'e-mail e trovi la nuova data nei dettagli dell'ordine.
+- **Zara ha cambiato la data.** Se non riesce a consegnare il giorno stimato, ti manda un'e-mail e trovi la nuova data nei dettagli dell'ordine. Puoi scegliere tra la nuova data e l'annullamento dell'ordine, con il rimborso di tutto l'importo pagato.
 - **Sei su un'isola.** Per Sardegna, Sicilia e le altre isole i tempi possono essere più lunghi.
 
-La legge chiede di consegnare entro 30 giorni dalla conclusione del contratto, salvo accordi diversi. Se non arriva, puoi dare a Zara un termine supplementare; se non consegna neanche entro quello, puoi risolvere il contratto (Codice del consumo, art. 61). Quando è ancora normale aspettare: [il tracking non si aggiorna](guide:tracking-not-updating).
+La legge chiede di consegnare entro 30 giorni dalla conclusione del contratto, salvo accordi diversi. Nelle condizioni d'acquisto Zara si impegna a fare il possibile per consegnare entro la data indicata nella conferma di spedizione o, se manca, entro quella stimata quando scegli la spedizione, e comunque non oltre 30 giorni dalla conferma dell'ordine. Se non arriva, puoi dare a Zara un termine supplementare; se non consegna neanche entro quello, puoi risolvere il contratto (Codice del consumo, art. 61). Il termine supplementare non serve se Zara si è rifiutata espressamente di consegnare o se la data era essenziale, per esempio perché glielo avevi detto prima di comprare; quando risolvi il contratto, Zara deve restituirti senza indebito ritardo tutto quello che hai pagato. Quando è ancora normale aspettare: [il tracking non si aggiorna](guide:tracking-not-updating).
 
 **Modificare o annullare.** La modalità di spedizione non si cambia dopo l'acquisto. Se sei registrato e hai scelto la spedizione a domicilio, puoi cambiare l'indirizzo nei dettagli dell'ordine, purché lo stato lo consenta. Anche l'annullamento si fa lì, se lo stato lo consente; come ospite, dal link nell'e-mail di conferma. Gli articoli non si possono modificare: quando ricevi l'ordine, chiedi un cambio o un reso. Se non vuoi più riceverlo, contatta Zara. Di più: [cambiare l'indirizzo di consegna](guide:change-delivery-address).
 
@@ -86,7 +86,7 @@ La legge chiede di consegnare entro 30 giorni dalla conclusione del contratto, s
 
 A seconda dell'ora dell'ordine, alcune opzioni non compaiono. Se l'ordine contiene un articolo HOME voluminoso, paghi le spese di spedizione che gli corrispondono.
 
-**In negozio.** Hai 7 giorni per ritirare l'ordine. Mostra il tuo ZARA QR o il codice QR dello scontrino elettronico. Se va un'altra persona, deve portare anche il suo documento d'identità.
+**In negozio.** Hai 7 giorni per ritirare l'ordine. Mostra il tuo ZARA QR o il codice QR dello scontrino elettronico. Se va un'altra persona, deve portare anche il suo documento d'identità. Se il negozio offre la «consegna immediata», l'ordine può essere pronto prima della data indicata: Zara ti avvisa via e-mail quando puoi ritirarlo.
 
 **In un punto di consegna.** Zara ti avvisa quando l'ordine è disponibile nel punto scelto. Devi identificarti; se va un'altra persona al posto tuo, le servono un'autorizzazione scritta e una copia del tuo documento d'identità. Di più: [locker e punti di ritiro](guide:parcel-lockers) e [pacco non ritirato](guide:uncollected-parcel).
 
@@ -96,10 +96,10 @@ Prima guarda, poi segnala. Nell'ordine:
 
 :::steps
 - Controlla il tracking | Apri l'ordine in «Ordini» o dal link dell'e-mail. Guarda se è stato diviso in più consegne e se Zara ti ha mandato una nuova data per e-mail. Se hai il numero del corriere, controlla anche il suo tracking.
-- Cerca e chiedi | Guarda nella cassetta, chiedi al portiere, ai vicini o a chi vive con te. Se hai scelto un punto di consegna, cerca l'avviso che l'ordine è disponibile. Se manca un articolo, controlla che non arrivi con un'altra consegna.
+- Cerca e chiedi | Guarda nella cassetta, chiedi al portiere, ai vicini o a chi vive con te. Se hai scelto un punto di consegna, cerca l'avviso che l'ordine è disponibile. Se manca un articolo, controlla che non arrivi con un'altra consegna. Se a domicilio non è stato possibile consegnare e non c'era un posto sicuro dove lasciarlo, l'ordine va al deposito e trovi un avviso con il luogo e il modo per fissare una nuova consegna; se non lo ritiri entro 30 giorni da quando è disponibile, Zara lo considera abbandonato.
 - Contatta Zara | Scrivi in chat o su WhatsApp, dal lunedì al venerdì dalle 8:30 alle 20:00 e il sabato dalle 10:00 alle 16:00. La pagina dei contatti non indica un numero di telefono. Tieni a portata di mano il numero d'ordine.
 - Segnala il problema | Racconta cosa è successo. Se risulta consegnato ma non l'hai ricevuto, Zara verifica il caso con l'impresa di trasporti. Se non eri a casa, Zara controlla con il corriere. Se hai ricevuto un articolo diverso da quello acquistato, Zara verifica cos'è successo. Se è difettoso, contatta Zara o vai in un negozio Zara.
-- Rimborso o nuovo articolo | Zara esamina il tuo caso e ti aiuta a risolverlo. Il rischio passa a te solo quando tu, o una persona che hai indicato diversa dal corriere, entri in possesso dei beni (Codice del consumo, art. 63): un pacco perso prima è un problema di Zara.
+- Rimborso o nuovo articolo | Zara esamina il tuo caso e ti aiuta a risolverlo. Il rischio passa a te solo quando tu, o una persona che hai indicato diversa dal corriere, entri in possesso dei beni (Codice del consumo, art. 63): un pacco perso prima è un problema di Zara. Per un articolo difettoso o non conforme, Zara ti propone la sostituzione o il rimborso; il rimborso comprende le spese di spedizione e di reso e arriva entro 14 giorni da quando Zara te lo conferma.
 :::
 
 Di più: [consegna mancata](guide:missed-delivery), [pacco consegnato ma non ricevuto](guide:delivered-not-received), [pacco danneggiato](guide:damaged-parcel) e [pacco smarrito](guide:lost-parcel).
@@ -114,13 +114,15 @@ Hai 30 giorni dalla data di spedizione dell'ordine; nei dettagli dell'ordine tro
 
 Per un articolo HOME voluminoso, contatta Zara per il ritiro a domicilio. Se vuoi un'altra taglia o un altro colore, il cambio è gratis, in negozio o online, tranne per gli articoli HOME. Alcuni articoli hanno condizioni speciali: i costumi da bagno vogliono l'adesivo igienico, la biancheria intima da uomo non si restituisce, profumi e cosmetici tornano nella confezione sigillata.
 
-Zara gestisce il reso entro 72 ore dall'arrivo nelle sue strutture e ti manda un'e-mail di conferma. I soldi tornano sulla stessa modalità di pagamento entro 14 giorni al massimo, a seconda della banca. Se hai spedito più scatole, il rimborso può arrivare in momenti diversi. Dove trovare il numero di tracking del reso: [tracciamento dei resi](guide:returns-tracking).
+Zara gestisce il reso entro 72 ore dall'arrivo nelle sue strutture e ti manda un'e-mail di conferma. I soldi tornano sulla stessa modalità di pagamento entro 14 giorni al massimo, a seconda della banca. Se hai spedito più scatole, il rimborso può arrivare in momenti diversi. Le spese di spedizione tornano, fino al costo della spedizione standard più economica, se comunichi il recesso entro i 14 giorni dalla consegna previsti dalla legge e rendi tutti gli articoli della stessa consegna; se rendi più tardi, entro i 30 giorni concessi da Zara, ricevi solo il prezzo degli articoli. Puoi anche spedire il reso con un corriere scelto da te, insieme all'E-Ticket ricevuto con la conferma di spedizione, ma costi e rischi del trasporto sono a tuo carico. Dove trovare il numero di tracking del reso: [tracciamento dei resi](guide:returns-tracking).
 
 ## Posso tracciare un ordine Zara in Peek?
 
 Sì, se hai il numero del corriere: incollalo in [Peek](/). Zara non nomina i suoi corrieri, quindi incolla comunque il numero: Peek segue più di 3.500 corrieri. Se più corrieri usano la stessa forma di numero, Peek chiede a quelli probabili e mostra quello che lo conosce. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli quello giusto. Se ogni consegna ha il suo numero, aggiungili tutti. L'etichetta di reso ha il suo numero: incollalo allo stesso modo.
 
-Gli stati di Zara, da `Acquistato` a `Consegnato al cliente`, li vedi nel tuo account o dal link delle sue e-mail.
+Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere. Quando il corriere segnala che il pacco ti aspetta in un punto di consegna, Peek mostra la fase «Pronto per il ritiro». Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL, USPS, GOFO e Cainiao). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
+
+Peek mostra quello che pubblica il corriere. Gli stati di Zara, da `Acquistato` a `Consegnato al cliente`, li vedi nel tuo account o dal link delle sue e-mail; segnalazioni, rimborsi e resi passano da Zara.
 
 :::sources
 - [Zara Italia: Metodi di spedizione, tempistiche e costi](https://www.zara.com/it/it/help-center/DeliveryMethods) – negozio, domicilio, giorno successivo, punto di consegna, tempi, costi, isole, giorni lavorativi, stesso mercato, 7 giorni in negozio, autorizzazione scritta, articoli HOME voluminosi, gru, ritardi, assenza, consegnato ma non ricevuto
@@ -136,8 +138,8 @@ Gli stati di Zara, da `Acquistato` a `Consegnato al cliente`, li vedi nel tuo ac
 - [Zara Italia: Come effettuare un cambio](https://www.zara.com/it/it/help-center/HowToExchange) – cambio gratuito in negozio o online, niente cambi per gli articoli HOME
 - [Zara Italia: Condizioni speciali di restituzione](https://www.zara.com/it/it/help-center/ReturnSpecialConditions) – costumi da bagno, biancheria intima, profumi e cosmetici
 - [Zara Italia: Rimborso di una restituzione](https://www.zara.com/it/it/help-center/Refund) – 72 ore, 14 giorni, stessa modalità di pagamento, più scatole
-- [Zara Italia: Condizioni generali d'acquisto e d'uso (PDF)](https://static.zara.net/static//pdfs/IT/terms-and-conditions/terms-and-conditions-it_IT-20241002.pdf) – niente consegne a domicilio di sabato e di domenica
-- [Normattiva: Codice del consumo, art. 61](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art61) – consegna entro 30 giorni, termine supplementare, risoluzione
+- [Zara Italia: Condizioni generali d'acquisto e d'uso (PDF)](https://static.zara.net/static//pdfs/IT/terms-and-conditions/terms-and-conditions-it_IT-20241002.pdf) – niente consegne a domicilio di sabato e di domenica, data di consegna entro 30 giorni dalla conferma, nuova data o annullamento con rimborso, consegna immediata in negozio, deposito e avviso, ordine abbandonato dopo 30 giorni, recesso per legge e 30 giorni, spese di spedizione rimborsate, reso con un corriere scelto da te, prodotti difettosi
+- [Normattiva: Codice del consumo, art. 61](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art61) – consegna entro 30 giorni, termine supplementare, rifiuto o termine essenziale, risoluzione, rimborso delle somme versate
 - [Normattiva: Codice del consumo, art. 63](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art63) – passaggio del rischio
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – corrieri che Peek conosce
 :::

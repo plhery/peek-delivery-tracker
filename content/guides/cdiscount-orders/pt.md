@@ -174,7 +174,7 @@ Se a encomenda de um vendedor mudar de transportadora pelo caminho e a primeira 
 - [Cdiscount Marketplace: página inicial](https://marketplace.cdiscount.com/) – 10 000 vendedores
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – venda fora de França em cinco países, também para os artigos enviados pela Cdiscount, só ao domicílio, apoio em francês, prazos de fora da Europa
 - [Cdiscount Marketplace: Fulfillment Cdiscount](https://marketplace.cdiscount.com/service/octopia-fulfillment/) – artigos enviados pela Cdiscount: França, Espanha, Itália, Alemanha, Bélgica e Luxemburgo
-- [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – compras online: reclama-se à loja
+- [Relais Colis: Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – compras online: reclama-se à loja
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo adicional e cancelamento, danos até à receção
 - [Your Europe: Devoluções](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pt.htm) – 14 dias a contar da entrega
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – risco até teres a encomenda

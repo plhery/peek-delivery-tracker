@@ -4,7 +4,7 @@ description: Der Status hängt seit Tagen? Die häufigsten Gründe, wie lange Wa
 slug: sendungsverfolgung-aktualisiert-sich-nicht
 picture: Ein Kalender mit mehreren durchgestrichenen Tagen, eine Fortschrittslinie, die auf halbem Weg abbricht, und Pip wartet ein bisschen gelangweilt.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Wenn sich die Sendungsverfolgung nicht aktualisiert, hat meist nur niemand dein Paket gescannt. Stehen geblieben ist es deshalb nicht: Paketdienste scannen in Paketzentren und an Grenzen, nicht auf der Straße, und eine lange Fahrt, ein Flug, der Zoll oder ein Wochenende können Tage ohne neuen Eintrag bedeuten. Sorgen machen musst du dir erst, wenn die Frist des Paketdienstes abgelaufen ist (bei [DHL](carrier:dhl) mehr als 5 Werktage ohne neuen Status, bei der [Schweizerischen Post](carrier:swiss-post) im Inland mehr als zwei Tage über der erwarteten Laufzeit). Und auch dann fragst du zuerst den Händler: Er ist der Kunde des Paketdienstes.
@@ -99,11 +99,11 @@ Ein Marktplatz kann dir das Geld zurückgeben, aber nur innerhalb seiner Frist:
 | eBay (eBay-Käuferschutz) | Sobald das Ca.-Lieferdatum verstrichen ist | 30 Kalendertage danach |
 | Vinted | Mit Vinted-Versandschein: nach 25 Werktagen ab „verschickt“ | 2 Tage nach dem Hinweis von Vinted oder der Markierung als „geliefert“ |
 
-Bei Amazon deckt die A-bis-z-Garantie die rechtzeitige Lieferung von Artikeln ab, die externe Verkäufer auf dem Marketplace anbieten und versenden. Kannst du das Problem nicht direkt mit dem Verkäufer lösen, beantragst du die Erstattung bei Amazon.
+Bei Amazon deckt die A-bis-z-Garantie die rechtzeitige Lieferung von Artikeln ab, die externe Verkäufer auf dem Marketplace anbieten und versenden. Kannst du das Problem nicht direkt mit dem Verkäufer lösen, beantragst du die Erstattung bei Amazon. Bei jeder anderen Bestellung hilft der Amazon-Kundenservice, rund um die Uhr auf Amazon.de, in der Amazon App oder im Chat und täglich von 6 bis 24 Uhr am Telefon.
 
 Bei Etsy kannst du bis 30 Tage nach dem angesetzten Liefertermin einen Fall eröffnen, bei AliExpress einen Streitfall bis 15 Tage nach Ende der Lieferzeit.
 
-> Bei Vinted wird eine als „geliefert“ markierte Bestellung abgeschlossen und der Verkäufer bezahlt, wenn du nicht innerhalb von 2 Tagen auf „Ich habe ein Problem“ tippst (bei Pro-Verkäufern 14 Tage). Warte nicht darauf, dass die Sendungsverfolgung aufwacht.
+> Bei Vinted wird eine als „geliefert“ markierte Bestellung abgeschlossen und der Verkäufer bezahlt, wenn du nicht innerhalb von 2 Tagen auf „Ich habe ein Problem“ tippst (bei Pro-Verkäufern 14 Tage). Dieselbe Frist läuft, sobald Vinted im Chat „Die Sendung ist anscheinend verloren gegangen“ meldet. Warte nicht darauf, dass die Sendungsverfolgung aufwacht.
 
 ## Kurz beantwortet
 
@@ -113,14 +113,16 @@ Innerhalb Deutschlands ist das langsam: DHL stellt Pakete in der Regel 1 bis 2 W
 
 ### Wie oft wird die Sendungsverfolgung aktualisiert?
 
-So oft, wie jemand dein Paket scannt. Schneller geht es nicht: Auch der DHL-Kundenservice kann eine Sendung nicht beschleunigen, und ein [Paket-Tracker](guide:universal-tracker) zeigt nur, was der Paketdienst veröffentlicht. [Peek](/) fragt rund um die Uhr bis zu alle 10 Minuten beim Paketdienst nach und bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet), und kann sich melden, sobald ein neuer Scan da ist. Das ständige Neuladen kannst du dir also sparen.
+So oft, wie jemand dein Paket scannt. Schneller geht es nicht: Auch der DHL-Kundenservice kann eine Sendung nicht beschleunigen, und ein [Paket-Tracker](guide:universal-tracker) zeigt nur, was der Paketdienst veröffentlicht. [Peek](/) fragt rund um die Uhr bis zu alle 10 Minuten beim Paketdienst nach und bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten, sobald ein Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet), und kann sich melden, sobald ein neuer Scan da ist. Das ständige Neuladen kannst du dir also sparen. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail und Morning Global; alle 30 Minuten Poste Italiane, PostNL, USPS, GOFO und Cainiao). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Bei GLS fragt Peek auch dann nicht früher nach, wenn du von Hand aktualisierst.
+
+Antwortet der Paketdienst nicht, steht in Peek „Aktualisierung nicht verfügbar“, und Peek fragt von selbst wieder nach. Kommt unterwegs vier Tage lang kein neuer Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“, mit dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei DHL nach.“ (hier am Beispiel DHL) und, wenn es eine gibt, einem Link zur Hilfeseite des Paketdienstes.
 
 ### Meine Sendungsnummer funktioniert nicht
 
-Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 Stunden dauern, bis es erscheint), die Nummer gehört zu einem anderen Paketdienst, oder ein Zeichen stimmt nicht. [Prüf, zu welchem Paketdienst sie gehört](guide:tracking-number-formats) oder [finde die richtige Nummer](guide:find-tracking-number).
+Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 Stunden dauern, bis es erscheint), die Nummer gehört zu einem anderen Paketdienst, oder ein Zeichen stimmt nicht. Ein DHL Päckchen hat laut DHL gar keine Sendungsverfolgung. [Prüf, zu welchem Paketdienst sie gehört](guide:tracking-number-formats) oder [finde die richtige Nummer](guide:find-tracking-number). Kennt noch kein Paketdienst die Nummer, zeigt Peek „Paketdienst noch nicht gefunden“ und dazu: „Behalte diese Seite: Peek fragt die Paketdienste weiter, und dieser Link zeigt das Paket, sobald einer antwortet.“ Stattdessen zeigt Peek „Wahrscheinlich“ und den Namen eines Paketdienstes, wenn die Nummer nach ihm aussieht, oder einen Hinweis, wenn sie ungewöhnlich kurz ist, vertippt wirkt oder nach einer Bestell- oder Containernummer aussieht.
 
 :::sources
-- [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – 1 bis 2 Werktage, mehr als 5 Werktage, Nachforschung, erst den Absender fragen, Vorweihnachtszeit, Wetter und Stau, keine Beschleunigung, 24 Stunden
+- [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – 1 bis 2 Werktage, mehr als 5 Werktage, Nachforschung, erst den Absender fragen, Vorweihnachtszeit, Wetter und Stau, keine Beschleunigung, 24 Stunden, Päckchen ohne Sendungsverfolgung (gelesen am 9. November 2026)
 - [DHL: Bedeutung des Sendungsstatus](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – elektronisch angekündigt, Weitertransport, Zustellfahrzeug, manuelle Nachbearbeitung, Werktage
 - [DHL: Wie kommt es zu Verspätungen der Sendungen?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – 50.000 Sendungen pro Stunde, Adress- und Etikettfehler, mehrere Tage
 - [DHL: Probleme mit meinem internationalen Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – völlig normal, IPZ Frankfurt, Regellaufzeit, Abrisse, Sendungsverfolgung des Ziellands, bis zu 8 Wochen
@@ -133,15 +135,15 @@ Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 
 - [Schweizerische Post: Kontaktformular für Nachforschungen](https://customer-service.post.ch/public/e/l/nachforschung?lang=de&shortcut=national-enquiry-de) – Absender oder Empfänger
 - [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Nachrichten bei Anmeldung und Sortierung
 - [Schweizerische Post: Ereignisse der Sendungsverfolgung](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Dateneinlieferung
-- [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – A-bis-z-Garantie: rechtzeitige Lieferung bei externen Verkäufern, Erstattung
+- [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – A-bis-z-Garantie: rechtzeitige Lieferung bei externen Verkäufern, Erstattung; Kundenservice rund um die Uhr auf Amazon.de, in der App oder im Chat, am Telefon täglich von 6 bis 24 Uhr (gelesen am 9. November 2026)
 - [About Amazon: A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst mit dem Verkaufspartner klären, dann an Amazon wenden
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – Ca.-Lieferdatum, 30 Kalendertage
-- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – bis zu 48 Stunden, „Ich habe ein Problem“ innerhalb von 2 Tagen nach „geliefert“
+- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – bis zu 48 Stunden, „Ich habe ein Problem“ innerhalb von 2 Tagen nach „geliefert“, „Die Sendung ist anscheinend verloren gegangen“ im Chat (gelesen am 9. November 2026)
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link erst aktiv, wenn das Paket beim Zusteller ist
 - [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – 5 und 7 Werktage, 25 Werktage mit Vinted-Versandschein
-- [Vinted: Allgemeine Geschäftsbedingungen für Vinted Pro](https://www.vinted.de/pro-terms-and-conditions) – 14 Kalendertage bei Pro-Verkäufern, automatischer Abschluss
+- [Vinted: Allgemeine Geschäftsbedingungen für Vinted Pro](https://www.vinted.de/pro-terms-and-conditions) – 14 Kalendertage bei Pro-Verkäufern ab Lieferung oder Verlustmeldung, automatischer Abschluss (gelesen am 9. November 2026)
 - [Vinted: Die Infos zur Sendungsverfolgung werden nicht aktualisiert](https://www.vinted.de/help/1368) – Werktage ohne Wochenenden und Feiertage
-- [Vinted: Rückerstattungsrichtlinien](https://www.vinted.de/help/465) – 2 Kalendertage nach dem Hinweis von Vinted
+- [Vinted: Rückerstattungsrichtlinien](https://www.vinted.de/help/465) – 2 Kalendertage nach dem Hinweis von Vinted, auch wenn die Bestellung anscheinend verloren gegangen ist (gelesen am 9. November 2026)
 - [Etsy: Einen Fall eröffnen](https://help.etsy.com/hc/de/articles/5745586898199) – 30 Tage
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 Tage
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – Gefahrübergang beim Verbrauchsgüterkauf, 30 Tage

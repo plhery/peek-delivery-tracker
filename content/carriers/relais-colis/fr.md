@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-Relais Colis livre des colis dans des commerces de proximité qui servent de points relais, partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, saisis son numéro sur [la page « Suivre mon colis » de Relais Colis](https://www.relaiscolis.com/colis/suivre), ou colle-le dans le champ ci-dessus. Ce numéro vient de la boutique qui t'a envoyé le colis, ou de l'e-mail de confirmation de Relais Colis pour un colis envoyé entre particuliers.
+Relais Colis livre des colis dans des commerces de proximité qui servent de points relais, partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, saisis son numéro sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre), ou colle-le dans le champ ci-dessus. Ce numéro vient de la boutique qui t'a envoyé le colis, ou de l'e-mail de confirmation de Relais Colis pour un colis envoyé entre particuliers.
 
 ## Numéro de suivi Relais Colis : où le trouver
 
@@ -108,7 +108,7 @@ Un réseau français de près de 7 000 commerçants partenaires, selon GLS, qui 
 Non. Relais Colis dit ne pas livrer pour le moment dans les DOM-TOM ni à l'étranger.
 
 :::sources
-- [Relais Colis : Suivre mon colis](https://www.relaiscolis.com/colis/suivre) – longueur du numéro, exemple, message sans données
+- [Relais Colis : Suivre mon colis](https://relaiscolis.com/colis/suivre) – longueur du numéro, exemple, message sans données
 - [Relais Colis : Comment suivre mon colis ?](https://relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 à 16 caractères, recherche sans numéro
 - [Relais Colis : Recherche avancée](https://relaiscolis.com/colis/recherche-avancee) – e-mail ou téléphone, enseigne
 - [Relais Colis : Où retrouver le numéro de suivi ?](https://relaiscolis.com/faq/question/jai-envoye-un-colis-ou-puis-je-retrouver-le-numero-de-suivi-du-colis) – « Mes Commandes »

@@ -173,7 +173,7 @@ Wechselt das Paket eines Verkäufers unterwegs den Paketdienst und nennt der ers
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – Versand durch Verkäufer oder Cdiscount, Eingreifen von Cdiscount, Schlichtung der FEVAD
 - [Cdiscount Marketplace: Startseite](https://marketplace.cdiscount.com/) – 10.000 Verkäufer
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – Verkauf ins Ausland, Marktplatz-Länder, nur an die Haustür, Seite auf Französisch, Lieferzeiten von außerhalb Europas
-- [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – Online-Bestellungen: Reklamation beim Shop
+- [Relais Colis: Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – Online-Bestellungen: Reklamation beim Shop
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – mindestens 14 Tage
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – 30 Tage ohne Datum, Risiko bis zur Übergabe
 - [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Nummernformen, Paketdienste, die Peek kennt

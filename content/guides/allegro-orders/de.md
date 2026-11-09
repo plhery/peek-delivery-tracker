@@ -22,7 +22,7 @@ Auf Allegro verkaufen Händler. Jeder legt fest, welche Versandarten er anbietet
 | ORLEN Paczka | `Allegro Automat ORLEN Paczka` | Automat oder Punkt |
 | Poczta Polska (Pocztex) | `Allegro Kurier Pocztex`, `Allegro Automat Pocztex`, `Allegro Odbiór w Punkcie Pocztex` | Haustür, Automat, Punkt |
 
-Die Versandarten von Allegro One, ORLEN Paczka, DHL und DPD bietet der Händler über Allegros Lieferprogramm „Allegro Delivery“ an oder mit eigenem Vertrag beim Paketdienst. Bei Allegro Delivery ist Allegro für die ganze Lieferung und den Kundenservice verantwortlich. Pakete für Allegro One Punkt kann DPD bringen, Pakete für Allegro One Box auch DHL oder ORLEN Paczka; Allegro Ones eigene Kuriere fahren in ausgewählten Städten.
+Die Versandarten von Allegro One, ORLEN Paczka, DHL und DPD bietet der Händler über Allegros Lieferprogramm „Allegro Delivery“ an oder mit eigenem Vertrag beim Paketdienst. Bei Allegro Delivery ist Allegro für die ganze Lieferung und den Kundenservice verantwortlich. Pakete für Allegro One Punkt kann DPD bringen, Pakete für Allegro One Box DPD, DHL oder ORLEN Paczka; Allegro Ones eigene Kuriere fahren in ausgewählten Städten.
 
 Bei Allegro Delivery wartet ein Paket 2 Kalendertage in einer One Box und 2 bis 3 Werktage an anderen Automaten und Punkten. Den Abholcode bekommst du per Mail, in der App oder per SMS. Holst du es nicht ab, geht es zurück an den Händler. Mehr dazu: [Paketautomaten](guide:parcel-lockers).
 
@@ -124,7 +124,7 @@ Bei einem gewerblichen Händler hast du mindestens 14 Tage ab dem Tag nach dem E
 
 ## Kann ich ein Allegro-Paket in Peek verfolgen?
 
-Ja, mit der Nummer des Paketdienstes. Kopiere sie aus „Moje zakupy“ und füge sie in [Peek](/) ein. Nummern von Allegro One (`A0` oder `AD` und 8 Zeichen, `AD0` und 14) erkennt und verfolgt Peek automatisch, ebenso DPD Polen und Pocztex an ihrer Form. Teilen sich mehrere Dienste eine Form, etwa 24 Ziffern bei InPost, tippe auf „Ändern“ und wähle den Paketdienst aus deinen Kaufdetails.
+Ja, mit der Nummer des Paketdienstes. Kopiere sie aus „Moje zakupy“ und füge sie in [Peek](/) ein. Nummern von Allegro One (`A0` oder `AD` und 8 Zeichen, `AD0` und 14) erkennt und verfolgt Peek automatisch, ebenso sofort DPD Polen (13 Ziffern und ein Buchstabe) und Pocztex (`PX` und 10 Ziffern) an ihrer Form. Teilen sich mehrere Dienste eine Form, etwa 24 Ziffern bei InPost, `210` und 10 Ziffern bei ORLEN Paczka, 14 Ziffern ab `13` bei DPD oder 11 Ziffern bei DHL, fragt Peek die wahrscheinlichen Paketdienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippe auf „Wählen“; zeigt Peek den falschen, tippe auf „Ändern“ und wähle den Paketdienst aus deinen Kaufdetails.
 
 Die Bestellnummer von Allegro ist keine Sendungsnummer, Peek kann sie nicht verfolgen. Peek zeigt, was der Paketdienst veröffentlicht. Problemmeldungen, Käuferschutz und Erstattungen bleiben in deinem Allegro-Konto.
 

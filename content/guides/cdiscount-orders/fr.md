@@ -171,7 +171,7 @@ Si le colis d'un vendeur change de transporteur en route et que le premier nomme
 - [Cdiscount : Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – modes d'expédition, intervention de Cdiscount, médiateur FEVAD
 - [Cdiscount Marketplace : accueil](https://marketplace.cdiscount.com/) – 10 000 vendeurs
 - [Cdiscount Marketplace : FAQ](https://marketplace.cdiscount.com/faqs/) – vente à l'étranger, délais hors d'Europe
-- [Relais Colis : Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – commande en ligne : réclamation auprès de l'enseigne
+- [Relais Colis : Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – commande en ligne : réclamation auprès de l'enseigne
 - [Service Public : Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – au moins 14 jours
 - [Service Public : Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – 30 jours sans date, risque jusqu'à la prise en main
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes de numéros, transporteurs connus de Peek

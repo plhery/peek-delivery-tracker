@@ -114,6 +114,6 @@ Ce sont deux transporteurs, chacun avec son propre suivi. La page e-commerce de 
 - [Ciblex : H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – avant midi, signature
 - [Ciblex : Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – samedi matin
 - [Ciblex : Le groupe Walden a finalisé le rachat de Relais Colis](https://ciblex.eu/le-groupe-walden-a-finalise-le-rachat-de-relais-colis/) – lien avec Relais Colis
-- [Relais Colis : Accueil](https://www.relaiscolis.com/) – site de Relais Colis
+- [Relais Colis : Accueil](https://relaiscolis.com/) – site de Relais Colis
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit et affiche
 :::

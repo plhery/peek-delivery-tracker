@@ -173,7 +173,7 @@ Jeśli paczka sprzedawcy zmieni po drodze przewoźnika, a pierwszy przewoźnik w
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – wysyłka przez sprzedawcę albo Cdiscount, interwencja Cdiscount, mediator FEVAD
 - [Cdiscount Marketplace: strona główna](https://marketplace.cdiscount.com/) – 10 000 sprzedawców
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – sprzedaż za granicę do pięciu krajów, także artykuły wysyłane przez Cdiscount, tylko pod drzwi, obsługa po francusku, czasy dostawy w Europie i spoza Europy
-- [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – zamówienia online: reklamacja w sklepie
+- [Relais Colis: Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – zamówienia online: reklamacja w sklepie
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – 30 dni, dodatkowy termin i odstąpienie, szkody do chwili odbioru
 - [Your Europe: Zwrot towarów](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pl.htm) – 14 dni od dostawy
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – ryzyko do momentu odbioru

@@ -69,7 +69,7 @@ Os prazos que a InPost indica na sua página de contacto:
 
 Tal como os sites os indicavam a 10 de outubro de 2026:
 
-- **Portugal (InPost):** assistente virtual «Disponível 24/7», formulário na página [Fala connosco](https://www.inpost.pt/fala-connosco) e o 211 245 624, de segunda a sexta-feira das 8:30 às 20:00 e ao sábado das 9:00 às 13:00, mais um serviço em língua gestual. A página não mostra número internacional nem WhatsApp.
+- **Portugal (InPost):** assistente virtual «Disponível 24/7», formulário na página [Fala connosco](https://www.inpost.pt/fala-connosco) e o 211 245 624, de segunda a sexta-feira, das 9:00 às 18:00 (horário visto a 9 de novembro de 2026), mais um serviço em língua gestual. A página não mostra número internacional nem WhatsApp.
 - **França:** vê a página de contacto do site francês da Mondial Relay.
 - **Bélgica:** +32 2 340 06 10 (preço de uma chamada local), de segunda a sexta-feira das 8:00 às 19:00 e ao sábado das 8:00 às 18:00, ou customerservice@mondialrelay.be.
 

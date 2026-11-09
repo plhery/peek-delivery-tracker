@@ -79,7 +79,7 @@ GLS has no Swiss hotline of its own. Its contact page points to "the website of 
 
 GLS shows its scan history only with the delivery postcode, so the "Delivery postcode" field is required: four digits, like 8000. It goes to GLS and, when needed, to tracking services; a wrong one looks like an unknown number.
 
-You then see the status, each scan's town and country on a map, the expected delivery day, the weight and the delivery time, without your name, address, contact details or signature. Statuses keep GLS's English wording; the ParcelShop one shows as ready for pickup. GLS is checked about once an hour, delivery day included, and you can be notified of every scan, important steps or delivery day only.
+You then see the status, each scan's town and country on a map, the expected delivery day, the weight and the delivery time, without your name, address, contact details or signature. Statuses keep GLS's English wording; Peek shows the ParcelShop one as "Ready for pickup". GLS is checked about once an hour, delivery day included (4 hours after a failed check), and refreshing by hand doesn't make it check sooner. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. You can be notified of every scan, important steps or delivery day only.
 
 When GLS names Swiss Post as the deliverer, the parcel page says "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek can follow the parcel on Swiss Post's tracking with the same number once Swiss Post shows newer progress.
 

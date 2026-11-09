@@ -3,7 +3,7 @@ title: InPost śledzenie przesyłki: numer, statusy i Paczkomat
 description: Śledzenie paczki InPost w Polsce: jak wygląda numer, co znaczą kroki w śledzeniu, co zrobić przy pełnym Paczkomacie, jak złożyć reklamację i gdzie dzwonić.
 slug: inpost-sledzenie-przesylki
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 InPost to sieć automatów paczkowych Paczkomat, punktów odbioru i kurierów, która zaczynała w Polsce; polski operator to InPost sp. z o.o. z Krakowa. Paczkę śledzisz na inpost.pl albo w aplikacji InPost Mobile; numer z 24 cyfr możesz też wkleić w pole powyżej. Numer dostajesz od nadawcy, na przykład sklepu; nie myl go z kodem odbioru, którym otwierasz skrytkę w Paczkomacie.
@@ -30,13 +30,15 @@ Gdy korzystasz z Peek po polsku, statusy InPost są po polsku. Kroki, które mo�
 | Nadanie w Paczkomacie albo punkcie odbioru | Nadawca zostawił paczkę w Paczkomacie albo w punkcie odbioru. |
 | Odbiór przez kuriera | Kurier InPost zabrał paczkę od nadawcy albo z Paczkomatu, w którym ją nadano. Ty jej jeszcze nie masz. |
 | Wydanie do doręczenia | Kurier wiezie paczkę: pod Twoje drzwi albo do Paczkomatu. |
+| Paczka przekierowana | Paczka jedzie do innego punktu odbioru. Ten krok bywa widoczny nawet zaraz po utworzeniu etykiety, więc Peek zostawia paczce etap, który miała. |
+| Brak możliwości doręczenia | Kurier nie mógł doręczyć paczki; w Peek to „Próba doręczenia”. |
 | Odmowa przyjęcia | Odbiorca odmówił przyjęcia paczki. |
 
 ## Odbiór z Paczkomatu: kod, czas na odbiór i przedłużenie
 
 **Kod odbioru.** Nie masz kodu albo nie wiesz, jak otworzyć skrytkę? Sprawdź aplikację InPost Mobile albo polską stronę InPost.
 
-**Czas na odbiór i przedłużenie.** Ile paczka czeka w Paczkomacie albo punkcie odbioru i czy możesz ten czas wydłużyć, sprawdzisz w aplikacji InPost Mobile albo na polskiej stronie InPost.
+**Czas na odbiór i przedłużenie.** Ile paczka czeka w Paczkomacie albo punkcie odbioru i czy możesz ten czas wydłużyć, sprawdzisz w aplikacji InPost Mobile albo na polskiej stronie InPost. Regulamin Konta InPost wymienia wśród usług przedłużenie czasu odbioru z Paczkomatu, na warunkach regulaminu kurierskiego, a w Polsce także zmiany i przekierowania paczek w aplikacji.
 
 **Po terminie.** Gdy paczka wraca do nadawcy, śledzenie pokazuje zwrot; więcej w poradniku o [nieodebranej paczce](guide:uncollected-parcel).
 
@@ -71,7 +73,7 @@ Peek czyta śledzenie z serwisu InPost na inposteasy.com, tego samego dla Polski
 
 Statusy są takie, jak przysyła je serwis InPost: po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku; gdy krok nie ma tytułu, możesz zobaczyć surowy kod InPost. Nie każdy kod InPost ma w Peek swój etap, więc paczka czekająca w Paczkomacie nie zawsze dostaje etap „Do odbioru”. Skany bez strefy czasowej są pomijane, a Twoje imię, adres, telefon i podpis nie są odczytywane.
 
-Peek sprawdza śledzenie co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie InPost; przez serwisy śledzenia przesyłek co 15 minut), i może Cię powiadomić o wszystkich aktualizacjach, tylko o ważnych albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki dalej u innego przewoźnika, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
+Peek sprawdza śledzenie co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie InPost; przez serwisy śledzenia przesyłek co 15 minut), i może Cię powiadomić o wszystkich aktualizacjach, tylko o ważnych albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, na przykład gdy InPost doręcza część paczek z zagranicy, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki dalej, gdy InPost przekaże ją innemu przewoźnikowi, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
 
 ## Pytania o śledzenie przesyłek InPost
 
@@ -92,7 +94,7 @@ Kod nadania ma nadawca, nie odbiorca: regulamin Allegro Lokalnie opisuje go jako
 Według ogólnych zasad UKE dla operatorów pocztowych operator ma na odpowiedź 30 dni, a jeśli nie odpowie w terminie, reklamację uważa się za uznaną. Od odmowy odwołasz się w ciągu 14 dni od otrzymania odpowiedzi, a na odpowiedź na odwołanie operator ma 30 dni.
 
 :::sources
-- [InPost: Regulamin Konta InPost](https://terms.inpost-group.com/pl/regulamin) – Paczkomat, punkty odbioru, InPost Mobile, „Twoja paczka” po numerze telefonu, czat AI, formularz, infolinia, adres
+- [InPost: Regulamin Konta InPost](https://terms.inpost-group.com/pl/regulamin) – Paczkomat, punkty odbioru, InPost Mobile, przedłużenie czasu odbioru, zmiany i przekierowania, „Twoja paczka” po numerze telefonu, czat AI, formularz, infolinia, adres
 - [UKE: Rejestr operatorów pocztowych, InPost Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00562) – InPost w rejestrze operatorów pocztowych, siedziba w Krakowie
 - [UKE: Reklamacje usług pocztowych](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, forma, 12 miesięcy, 30 dni, uznanie bez odpowiedzi, odwołanie w 14 dni, Prezes UKE, ADR, sąd
 - [UKE: Reklamacje i odszkodowania](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół przy widocznym uszkodzeniu, 7 dni na ukryte
@@ -103,5 +105,5 @@ Według ogólnych zasad UKE dla operatorów pocztowych operator ma na odpowiedź
 - [InPost Portugal: Fala connosco](https://www.inpost.pt/fala-connosco) – bez numeru zapytaj nadawcę
 - [InPost UK: Yodel by InPost help](https://inpost.co.uk/yodel-help) – brytyjskie numery od JD, JJD albo 8
 - [InPost Easy: Parcel form](https://inposteasy.com/en) – serwis InPost, który czyta Peek
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rozpoznawanie numerów, linki z inpost.pl, zapisane statusy InPost i ich znaczenie, język statusów, Paczkomat tymczasowy, zwrot, to, co Peek pokazuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rozpoznawanie numerów, linki z inpost.pl, zapisane statusy InPost i ich znaczenie, paczka przekierowana, brak możliwości doręczenia, język statusów, Paczkomat tymczasowy, zwrot, przejęcie przez innego przewoźnika, to, co Peek pokazuje
 :::

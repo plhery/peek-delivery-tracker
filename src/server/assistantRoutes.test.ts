@@ -257,6 +257,17 @@ describe('the MCP endpoint', () => {
     }
   });
 
+  it('gives the newest scan as the status line, as the apps head the parcel, and the saved one for a parcel without scans', async () => {
+    // Handed over: the saved summary is the delivery carrier's, older than the earlier carrier's latest scan.
+    const handedOver = { ...stored(5, 'in_transit'), last_status_text: 'Announced to the delivery carrier' };
+    const unscanned = { ...stored(6, 'pending'), last_status_text: 'Label created', tracking_events: [] };
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([handedOver, unscanned]);
+    const answer = await call(connect(['parcels:read']), 'list_parcels', { status: 'all' });
+    const parcels = answer.result!.structuredContent!.parcels as Array<{ id: string }>;
+    expect(parcels.find((parcel) => parcel.id === handedOver.id)).toMatchObject({ statusText: 'Latest scan', lastUpdate: { description: 'Latest scan' } });
+    expect(parcels.find((parcel) => parcel.id === unscanned.id)).toMatchObject({ statusText: 'Label created', lastUpdate: null });
+  });
+
   it('adds parcels from a text for the caller\'s own account, with the write scope only', async () => {
     vi.mocked(addParcelsFromText).mockResolvedValue([
       { trackingNumber: UPS, carrier: 'ups', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000aa', jobId: null },

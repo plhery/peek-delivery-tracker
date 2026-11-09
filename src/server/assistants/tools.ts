@@ -36,7 +36,9 @@ function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParc
     carrier: carrierInfo(parcel.carrier).name,
     trackingNumber: parcel.trackingNumber,
     status: currentStage(parcel.events) ?? 'pending',
-    statusText: parcel.lastStatusText ?? latest?.description ?? null,
+    // The newest scan, as the apps head the parcel and as `status` and `lastUpdate` read it: the saved summary is the
+    // delivery carrier's after a handoff, while the earlier carrier may have scanned the parcel since.
+    statusText: latest?.description ?? parcel.lastStatusText ?? null,
     needsAttention: parcelAttention(parcel, now),
     expectedDelivery: parcel.expectedDelivery ?? null,
     lastUpdate: latest ? { time: latest.day ?? latest.occurredAt, description: latest.description, location: latest.location ?? null } : null,

@@ -2007,6 +2007,30 @@ describe('persistent tracking routing', () => {
     const result = await router.fetch(parcel({ carrier }), false);
     expect(result.result.routing).toMatchObject({ last_event_at: watermark });
   });
+  it('lets a turn that comes shortly before the filed carrier\'s wait for it, so that check asks the carrier too', async () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const turn = async (carrierRetry: string) => {
+      const { router, direct, universal } = setup();
+      const failures = {
+        ups: { count: 4, kind: 'verification', retry_at: carrierRetry },
+        ParcelsApp: { count: 5, kind: 'no_history', retry_at: '2026-09-10T14:00:00.000Z' },
+        Ship24: { count: 5, kind: 'no_history', retry_at: '2026-09-10T14:30:00.000Z' },
+      };
+      const routing = state({ configured_carrier: 'ups', consecutive_failures: 4, failures });
+      const deferred = await router.fetch(parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784', carrier_data: { routing } }), true)
+        .catch((error: RoutingDeferred) => error);
+      expect(deferred).toBeInstanceOf(RoutingDeferred);
+      expect(direct).not.toHaveBeenCalled();
+      expect(universal).not.toHaveBeenCalled();
+      return ((deferred as RoutingDeferred).routing as JsonObject).quiet_until;
+    };
+    // UPS's wait ends 51 s after ParcelsApp's: the scheduled checks wait for UPS, rather than ask ParcelsApp alone.
+    expect(await turn('2026-09-10T14:00:51.000Z')).toBe('2026-09-10T14:00:51.000Z');
+    // Further off, ParcelsApp's turn comes first, as before.
+    expect(await turn('2026-09-10T14:20:00.000Z')).toBe('2026-09-10T14:00:00.000Z');
+    // A carrier whose turn comes first sets it.
+    expect(await turn('2026-09-10T13:40:00.000Z')).toBe('2026-09-10T13:40:00.000Z');
+  });
   it('sends no postcode to universal providers when the parcel stores none', async () => {
     const { router, universal } = setup();
     await router.fetch(parcel(), false);

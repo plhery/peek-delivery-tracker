@@ -262,6 +262,11 @@ export function clearConfirmation(routing: JsonObject): void {
 export const FRESHNESS_WINDOW_MS = HOUR;
 /** How often a parcel asks the universal providers, around the clock. */
 const UNIVERSAL_SPACING_MS = 15 * 60_000;
+/**
+ * How long before the filed carrier's turn another source's turn waits for it, so the check that comes asks the
+ * carrier too: as long as the providers' own spacing.
+ */
+const OWN_TURN_GRACE_MS = UNIVERSAL_SPACING_MS;
 const millis = (value: unknown): number => typeof value === 'string' && Number.isFinite(Date.parse(value)) ? Date.parse(value) : 0;
 const iso = (value: number): string => new Date(value).toISOString();
 /**
@@ -1583,7 +1588,8 @@ export class TrackingRouter {
         && (carrier === declared || (state.confirmed_carrier === carrier && state.confirmed_number === number)
           || !requiredRequirements(carrier, number).length);
       const turns = everyProvider.filter((source) => !awaitsInput(source)).map((source) => millis(state.failures[source]?.retry_at));
-      if (asks(filed)) turns.push(Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider ? millis(state.direct_retry_at) : 0));
+      const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider ? millis(state.direct_retry_at) : 0) : null;
+      if (own !== null) turns.push(own);
       for (const carrier of [detected.confidence === 'high' ? detected.carrier : undefined, state.discovered_carrier]) {
         if (carrier && carrier !== filed && asks(carrier)) turns.push(millis(state.failures[carrier]?.retry_at));
       }
@@ -1594,7 +1600,10 @@ export class TrackingRouter {
           turns.push(Math.max(millis(state.candidate_probes?.[carrier]?.retry_at), millis(state.failures[carrier]?.retry_at)));
         }
       }
-      return turns.length ? Math.min(...turns) : 0;
+      const earliest = turns.length ? Math.min(...turns) : 0;
+      // A turn that comes shortly before the filed carrier's waits for it: the check it brings would ask another source
+      // alone, and the carrier only a turn later (Postal Ninja's wait ended 51 s before DHL's, after DHL's outage).
+      return own !== null && own > earliest && own - earliest <= OWN_TURN_GRACE_MS ? own : earliest;
     };
     // Reserve each source’s lookup budget plus transport allowance (UPU needs only 8s).
     // Start after direct attempts so a slow carrier cannot starve discovery.

@@ -369,7 +369,9 @@ A check that nothing answered stores its next check time within the hour. When e
 scheduled check may ask is still waiting its turn past that time (the carrier asked first, the
 carriers its number's shape, a provider or recognition point to, and every provider but one
 waiting for a postcode the parcel lacks), scheduled checks wait for the earliest turn, a day at
-most (`quiet_until` in its routing), rather than ask nobody until then. Opening one of the
+most (`quiet_until` in its routing), rather than ask nobody until then. A turn up to 15 minutes
+before the carrier asked first waits for that carrier, so the check asks it too rather than a
+provider alone and the carrier a turn later. Opening one of the
 parcel's links and a refresh by hand check it as before. Whatever ends a wait sooner ends this
 one too: the owner's postcode, link or phone digits, a postcode given to a provider, a new
 carrier, and a scraper release that ends a carrier's wait.

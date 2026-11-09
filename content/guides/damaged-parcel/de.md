@@ -4,7 +4,7 @@ description: Paket beschädigt angekommen? Welche Fotos du machst, wann du die A
 slug: paket-beschaedigt-was-tun
 picture: Ein eingedellter Karton mit eingerissener Ecke und sich lösendem Klebeband, ein Handy fotografiert ihn mit Blitz, und ein besorgter Pip mit einem aufgeklebten Pflaster.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-11-09
 ---
 
 Ist dein Paket beschädigt angekommen, fotografier es, bevor du weiter auspackst, heb Karton und Inhalt auf und sag dem Händler noch am selben Tag Bescheid. Hast du in Deutschland oder Österreich bei einem Shop gekauft, schuldet er dir einwandfreie Ware, und den Schaden beim Paketdienst zu reklamieren ist seine Aufgabe, nicht deine. In der Schweiz entscheiden die AGB des Shops, wer das Risiko trägt. Ist der Karton schon an der Tür eingedrückt, gerissen oder nass, kannst du die Annahme verweigern oder den Schaden beim Zusteller festhalten lassen.
@@ -54,7 +54,7 @@ Fast immer der Absender: Die meisten Paketdienste haben ihren Vertrag nur mit ih
 
 ### DHL-Paket beschädigt: Schadensanzeige, und wenn DHL nicht zahlt
 
-Du lädst die Schadensanzeige von [dhl.de](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) herunter und füllst sie aus. Dann buchst du über die Hotline 0228 4333112 eine kostenlose Abholung oder gibst das Paket mit dem Formular in einer Filiale ab, nicht im Paketshop und nicht an der Packstation. DHL will das ganze Paket mit allen Verpackungsteilen, eine Rechnung oder ein Lieferschein bleibt drin. Du musst unterschreiben, dass DHL es öffnen darf. Die Antwort geht an den Absender, nicht an dich.
+Du lädst die Schadensanzeige von [dhl.de](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) herunter und füllst sie aus. Dann buchst du über die Hotline 0228 4333112 eine kostenlose Abholung oder gibst das Paket mit dem Formular in einer Filiale ab, nicht im Paketshop und nicht an der Packstation. DHL will das ganze Paket mit allen Verpackungsteilen, eine Rechnung oder ein Lieferschein bleibt drin. Du musst unterschreiben, dass DHL es öffnen darf, und wählst, ob es nach der Begutachtung an den Absender zurückgeht, erneut an dich zugestellt oder vernichtet wird. Die Antwort geht an den Absender, nicht an dich.
 
 Zahlt DHL nicht, prüf die Verpackung: Für Schäden durch fehlende oder mangelhafte Verpackung haftet DHL laut AGB nicht.
 
@@ -94,7 +94,7 @@ Fotografier, bevor du etwas bewegst. GLS Österreich verlangt im Kern drei Dinge
 2. Den Paketaufkleber mit lesbarer Sendungsnummer.
 3. Die Außenverpackung mit dem Schaden.
 
-Vinted will zusätzlich Fotos der Verpackung von innen, außen und von allen Seiten. Hermes will die Verpackung außen und innen sehen und braucht einen Wertnachweis, beim Privatverkauf etwa einen Screenshot des Verkaufs mit Preis, Käufer, Verkäufer und Zahlung. Ohne Wertnachweis erstattet Hermes nur nach Gewicht. Leg also deine Rechnung dazu.
+Vinted will zusätzlich Fotos des Artikels in der Verpackung, der Innen- und der Außenverpackung mit etwaigen Spuren eines Öffnens oder erneuten Verschließens und des gut lesbaren Versandscheins. Hermes will die Verpackung außen und innen sehen und braucht einen Wertnachweis, beim Privatverkauf etwa einen Screenshot des Verkaufs mit Preis, Käufer, Verkäufer und Zahlung. Ohne Wertnachweis erstattet Hermes nur nach Gewicht. Leg also deine Rechnung dazu.
 
 Dann heb alles auf. DHL will das ganze Paket samt Verpackung sehen, die Schweizerische Post auch die Polsterung, und DPD Schweiz bittet, Verpackung und Inhalt bis zu drei Monate nach der Zustellung aufzubewahren.
 
@@ -110,7 +110,7 @@ Am besten am selben Tag. Gegenüber einem Shop in Deutschland oder Österreich h
 | Shop in Deutschland oder Österreich | Keine kurze Frist, Gewährleistung zwei Jahre |
 | Shop in der Schweiz | Sofort (Art. 201 OR), laut Konsumentenschutz innerhalb von höchstens acht Tagen |
 
-Bei Vinted tippst du im Chat auf „Ich habe ein Problem“ oder auf der Hilfeseite zu beschädigten Sendungen auf „Kontaktiere uns“ und dann auf „Problem zur Überprüfung senden“. Tippst du auf „Alles in Ordnung“ oder lässt die 2 Tage verstreichen, wird der Verkäufer bezahlt. Bestätigt Vinted den Transportschaden, bekommst du den vollen Betrag zurück, meist ohne den Artikel zurückzuschicken. Vinted rät: „Vermeide es, wenn möglich, eine sichtbar beschädigte Sendung anzunehmen.“
+Bei Vinted tippst du im Chat auf „Ich habe ein Problem“ oder auf der Hilfeseite zu beschädigten Sendungen auf „Kontaktiere uns“ und dann auf „Senden“. Tippst du auf „Alles in Ordnung“ oder lässt die 2 Tage verstreichen, wird der Verkäufer bezahlt. Bestätigt Vinted den Transportschaden, bekommst du den vollen Betrag zurück, meist ohne den Artikel zurückzuschicken. Vinted rät: „Wenn die Sendung sichtbar beschädigt ist, nimm sie nach Möglichkeit nicht an.“
 
 Bei Kleinanzeigen nennt der Käuferschutz von „Sicher bezahlen“ Transportschäden nicht als eigenen Fall. Er greift nicht mehr, wenn du den Erhalt bestätigt und das Geld freigegeben hast, und auch nicht, wenn du selbst mit dem Paketdienst einen Ablageort oder Nachbarn vereinbart hast. Prüf die Ware also, bevor du bestätigst. Bei Ricardo deckt der klassische Käuferschutz keinen Artikel, der nachweislich verschickt und beim Transport beschädigt wurde: Dann reklamiert der Verkäufer beim Paketdienst.
 
@@ -120,7 +120,7 @@ Hilft der Verkäufer nicht, bleibt der Weg über die Zahlung, etwa PayPal oder e
 
 :::sources
 - [DHL: Der Inhalt meiner Sendung ist beschädigt oder fehlt](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – Schadensanzeige, 7 Tage, Abholung, Filiale, ganze Verpackung
-- [DHL: Schadensanzeige (PDF)](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige-052025.pdf) – Textform, Öffnung, Rechnung im Paket, Antwort an den Absender
+- [DHL: Schadensanzeige (PDF)](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – Textform, Öffnung, Rechnung im Paket, Rücksendung, erneute Zustellung oder Vernichtung, Antwort an den Absender
 - [DHL: AGB Paket/Express National (englische Fassung)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – 500 €, mangelhafte Verpackung
 - [Hermes: Meine Sendung ist beschädigt](https://www.myhermes.de/service/fragen/schaden-und-verlust/schaden-melden.html) – Onlineshop, Schadenskarte, 7 Tage, Fotos, Wertnachweis
 - [Hermes: Haftungshöhe](https://www.myhermes.de/service/fragen/schaden-und-verlust/haftungshoehe.html) – 500 € und 50 €
@@ -148,7 +148,7 @@ Hilft der Verkäufer nicht, bleibt der Weg über die Zahlung, etwa PayPal oder e
 - [RIS: Konsumentenschutzgesetz § 7b](https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002462&Paragraf=7b) – Gefahrenübergang
 - [RIS: Verbrauchergewährleistungsgesetz](https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20011654) – §§ 10 bis 12
 - [Fedlex: Obligationenrecht](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de) – Art. 185, 201, 210
-- [Vinted: Die Sendung wurde während des Transports beschädigt](https://www.vinted.de/help/662) – 2 und 14 Tage, Fotos, Problem zur Überprüfung senden, Alles in Ordnung
+- [Vinted: Die Sendung wurde während des Transports beschädigt](https://www.vinted.de/help/662) – 2 und 14 Tage, Fotos, Senden, Alles in Ordnung, sichtbar beschädigte Sendung nicht annehmen
 - [Vinted: Rückerstattungsrichtlinie](https://www.vinted.de/help/465) – Ich habe ein Problem, Rückerstattung ohne Rücksendung, Verpackung behalten
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – annehmen und melden, 30 Kalendertage, eigene Versandmethode, Rücksendekosten beim Verkäufer, Teilerstattung oder Ersatz
 - [Kleinanzeigen: Was ist „Sicher bezahlen“?](https://hilfe.kleinanzeigen.de/hc/de/articles/17211553583388) – abgedeckte Fälle, Ablageort oder Nachbar

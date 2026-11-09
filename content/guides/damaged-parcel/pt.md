@@ -4,7 +4,7 @@ description: Encomenda danificada ou caixa amassada? As fotografias a tirar, qua
 slug: encomenda-danificada
 picture: Uma caixa amassada com um canto rasgado e a fita a descolar, um telemóvel a fotografá-la com flash e o Pip, preocupado, com um penso colado.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-11-09
 ---
 
 Se a encomenda chegou danificada, fotografa-a antes de continuares a desembalar, guarda a caixa e tudo o que vinha dentro e avisa a loja no próprio dia. Se compraste a uma empresa, a loja deve-te um artigo em bom estado e é ela que trata do assunto com a transportadora, não tu. Se a caixa já vem amassada, rasgada ou molhada à porta, podes recusá-la, ou aceitá-la e deixar os danos registados.
@@ -35,6 +35,9 @@ O que diz o Decreto-Lei n.º 84/2021 sobre um artigo que chega danificado:
 | Reparar ou substituir | Escolhes tu, salvo se a opção for impossível ou desproporcionada. É gratuito e não deve passar de 30 dias, salvo em casos complexos (arts. 15.º e 18.º) |
 | Garantia | A loja responde por defeitos que apareçam até 3 anos depois da entrega; nos 2 primeiros anos presume-se que o defeito já lá estava (arts. 12.º e 13.º) |
 | Marketplace | A plataforma onde compraste também pode responder perante ti, ao lado do vendedor, quando tem «influência predominante» no contrato, por exemplo se o pagamento é feito só pelos meios dela (art. 44.º) |
+| Reembolso | Se resolveres o contrato, devolves o artigo à custa da loja, e ela tem 14 dias, a contar de quando a informas, para te devolver tudo o que pagaste, incluindo os portes de entrega, pelo mesmo meio de pagamento. Pode reter o reembolso até receber o artigo ou a prova de que o enviaste (art. 20.º) |
+
+Comunica o defeito à loja por carta, por e-mail ou por outro meio que deixe prova (art. 12.º, n.º 5).
 
 O problema fica do teu lado, ou do lado da transportadora, em três casos:
 
@@ -56,7 +59,9 @@ A maior parte das transportadoras só trata com o remetente, por isso a tua recl
 
 ### Encomenda danificada nos CTT: o que fazer?
 
-Nos envios nacionais dos CTT, a ANACOM explica que só há indemnização por dano em envios registados ou com valor declarado. O direito é do remetente, mas passa para ti se ele to atribuir ou se, numa encomenda registada ou com valor declarado, assinares o recibo de receção e indicares que vem danificada. Por isso, ao assinar, escreve o dano no recibo. Correio não registado não dá direito a indemnização.
+Nos envios nacionais dos CTT, a ANACOM explica que só há indemnização por dano em envios registados ou com valor declarado. O direito é do remetente, mas passa para ti se ele to atribuir ou se, numa encomenda registada ou com valor declarado, assinares o recibo de receção e indicares que vem danificada. Por isso, ao assinar, escreve o dano no recibo. Correio não registado não dá direito a indemnização. Numa encomenda internacional registada, a indemnização vai até 40 DTS por encomenda, mais 4,50 DTS por quilo e o preço do envio, e a ANACOM aconselha quem a recebe com problemas a contactar o remetente ou o prestador postal. Reclamas aos CTT pelo formulário de contacto, pela linha de apoio ou numa Loja ou Ponto CTT.
+
+Se a encomenda chegou aberta ou violada, a ANACOM recomenda que, além de reclamares ao prestador, apresentes queixa à PSP ou à GNR. E lembra que os serviços de correio expresso, como a CTT Expresso, não fazem parte do serviço universal, por isso não seguem as mesmas regras.
 
 Na CTT Expresso, as condições gerais presumem que a mercadoria foi entregue em boas condições, salvo «reservas precisas, completas, datadas e assinadas» no terminal ou no documento de entrega. A reclamação é feita por escrito, em 8 dias, com a embalagem original ou fotografias dela e provas do dano no conteúdo.
 
@@ -66,9 +71,9 @@ A DPD também pede reservas «precisas, completas, datadas e assinadas» na folh
 
 ### Encomenda danificada na InPost ou na GLS
 
-Na InPost, se a embalagem está «danificada, rota ou amolgada» quando a vais levantar a um Ponto Pack, recusa-a e avisa a loja antes de dares o PIN, pedindo que volte ao remetente. Se só vês o dano em casa, a InPost pede-te que contactes a loja, ou a própria InPost, em 24 horas (dano visível) ou 7 dias seguidos (dano que só se vê ao abrir), com fotografias do produto e da embalagem, por dentro e por fora.
+Na InPost, se a embalagem está «danificada, rota ou amolgada» quando a vais levantar a um Ponto Pack, recusa-a e avisa a loja antes de dares o PIN, pedindo que volte ao remetente. Se só vês o dano em casa, a InPost pede-te que contactes a loja, ou a própria InPost, em 24 horas (dano visível) ou 7 dias seguidos (dano que só se vê ao abrir), com fotografias do produto e da embalagem, por dentro e por fora. Num Locker, depois de levantada, a encomenda já não pode ser devolvida, e só resta reclamar. Num envio internacional, a InPost trata o problema no país de destino.
 
-A GLS diz que podes recusar uma encomenda danificada por fora: volta ao armazém e a GLS avisa o expedidor. Se o dano está no conteúdo, contacta o expedidor.
+A GLS diz que podes recusar uma encomenda danificada por fora: volta ao armazém e a GLS avisa o expedidor. Se o dano está no conteúdo, contacta o expedidor: a GLS não verifica o conteúdo das encomendas.
 
 ## Caixa amassada: posso recusar a encomenda?
 
@@ -94,7 +99,7 @@ Tira-as antes de continuares a desembalar. Este conjunto serve para qualquer tra
 2. Um grande plano da etiqueta com o número de seguimento.
 3. O exterior da caixa, a mostrar o dano.
 
-A Vinted quer também a embalagem por dentro e por fora, de todos os lados, e a etiqueta com os nomes e as moradas de remetente e destinatário. A InPost pede, para um dano que só se vê ao abrir, uma descrição escrita do que vinha na encomenda. Junta a fatura: prova quanto valia o artigo.
+A Vinted quer também fotografias do artigo dentro da embalagem, da embalagem interior e da exterior, com qualquer sinal de abertura ou de fita colada de novo, e da etiqueta de envio bem legível, e que digas se viste danos na embalagem quando a recebeste. Se a caixa chegar visivelmente danificada, fotografa-a antes de a abrires. A InPost pede, para um dano que só se vê ao abrir, uma descrição escrita do que vinha na encomenda. Junta a fatura: prova quanto valia o artigo.
 
 Depois, guarda tudo. A CTT Expresso só aceita reclamações por danos com a embalagem original ou fotografias dela, e a Vinted recomenda guardar a embalagem até o pedido estar resolvido.
 
@@ -110,23 +115,23 @@ No próprio dia, se puderes. Perante uma loja, a lei dá-te tempo, mas a loja te
 
 > Na Vinted, carrega em «Tenho um problema», no ecrã da conversa. Se carregares em «Está tudo OK», ou deixares passar os 2 dias, o pagamento vai para quem vendeu.
 
-Na página de ajuda sobre encomendas danificadas, o caminho é outro: «Contacta-nos», no fim da página, e depois «Enviar o problema para revisão». Se o dano no transporte se confirmar, recebes o reembolso total sem teres de devolver o artigo, exceto se só parte de um conjunto de artigos veio danificada: aí, a Vinted pode pedir-te que devolvas o conjunto. Se foste tu a vender com a etiqueta pré-paga da Vinted, uma encomenda bem embalada pode ser indemnizada, se a transportadora confirmar o dano, até 10 € por kg com a DPD e a CTT Expresso, 25 € com a InPost e 500 € com a [Vinted Go](carrier:vinted-go).
+Na página de ajuda sobre encomendas danificadas, o caminho é outro: «Contacta-nos», no fim da página, e depois «Submeter», que suspende o pedido e guarda o teu dinheiro. A Vinted analisa o dano ou envia o caso à transportadora, o que pode demorar várias semanas. Se recusaste a entrega, junta o que tiveres: registos da transportadora, fotografias, atualizações do seguimento. Se o dano no transporte se confirmar, recebes o reembolso total sem teres de devolver o artigo, exceto se só parte de um conjunto de artigos veio danificada: aí, a Vinted pode pedir-te que devolvas o conjunto. Se foste tu a vender com a etiqueta pré-paga da Vinted, uma encomenda bem embalada pode ser indemnizada, se a transportadora confirmar o dano, até 10 € por kg com a DPD e a CTT Expresso, 15 € com a DHL Express, 25 € com a InPost e 500 € com a [Vinted Go](carrier:vinted-go). Sem a etiqueta da Vinted, pedes a indemnização diretamente à transportadora.
 
 No eBay, devolves o artigo com a etiqueta de devolução paga pelo vendedor e recebes o valor total, incluindo os portes de envio originais, ou combinas com ele um reembolso parcial ou um artigo de substituição.
 
 Se a loja não resolver, restam a disputa no PayPal, o estorno no banco e os centros de arbitragem de consumo, explicados em [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
 
 :::sources
-- [PGDL: Decreto-Lei n.º 84/2021, versão atualizada](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – arts. 11.º a 18.º e 44.º, risco, 30 dias, 3 anos, 2 anos, marketplace; preâmbulo, fim do prazo de denúncia
+- [PGDL: Decreto-Lei n.º 84/2021, versão atualizada](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – arts. 11.º a 18.º, 20.º e 44.º, risco, 30 dias, 3 anos, 2 anos, comunicação do defeito, reembolso em 14 dias, marketplace; preâmbulo, fim do prazo de denúncia
 - [Diário da República: Decreto-Lei n.º 84/2021](https://files.diariodarepublica.pt/1s/2021/10/20200/0000400029.pdf) – texto original publicado
-- [ANACOM: Serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – envios nacionais: indemnização por dano só em registados, direito do remetente que passa para o destinatário, limites
-- [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – 1 ano (nacionais) e 6 meses (internacionais) depois da aceitação
+- [ANACOM: Serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – envios nacionais: indemnização por dano só em registados, direito do remetente que passa para o destinatário, limites; internacionais: 40 DTS mais 4,50 DTS por quilo; encomenda violada, PSP ou GNR; correio expresso fora do serviço universal
+- [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – formulário, linha de apoio, Loja ou Ponto CTT; 1 ano (nacionais) e 6 meses (internacionais) depois da aceitação
 - [CTT Expresso: Condições gerais de transporte](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – reservas, 8 dias, embalagem ou fotografias, 10 € por kg, má embalagem
 - [DPD Portugal: Condições gerais de transporte](https://www.dpd.com/pt/pt/ajuda/condicoes-gerais-de-transporte/) – relação com o expedidor, reservas, responsabilidade só com reservas, 7 dias, 10 € por kg e 300 € (nacional), embalagem
-- [InPost: Contactos e apoio ao cliente](https://www.inpost.pt/fala-connosco) – recusar no Ponto Pack antes do PIN, 24 horas, 7 dias, fotografias, descrição, seguro de 25 €
-- [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – recusar, contactar o expedidor
-- [Vinted: A encomenda foi danificada em trânsito](https://www.vinted.pt/help/662) – 2 ou 14 dias, Está tudo OK, evitar aceitar, fotografias, Contacta-nos
+- [InPost: Contactos e apoio ao cliente](https://www.inpost.pt/fala-connosco) – recusar no Ponto Pack antes do PIN, 24 horas, 7 dias, fotografias, descrição, Locker, envios internacionais, seguro de 25 €
+- [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – recusar, contactar o expedidor, conteúdo não verificado
+- [Vinted: A encomenda foi danificada em trânsito](https://www.vinted.pt/help/662) – 2 ou 14 dias, Está tudo OK, evitar aceitar, fotografias, Contacta-nos, Submeter, transportadora, várias semanas, entrega recusada
 - [Vinted: Política de Reembolso](https://www.vinted.pt/help/465) – Tenho um problema, reembolso total sem devolver, guardar a embalagem
-- [Vinted: Indemnização de vendedores para envios com etiquetas integradas](https://www.vinted.pt/help/1018) – 10 € por kg, 25 €, 500 €
+- [Vinted: Indemnização de vendedores para envios com etiquetas integradas](https://www.vinted.pt/help/1018) – 10 € por kg, 15 €, 25 €, 500 €, sem etiqueta da Vinted
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias, artigo danificado, etiqueta de devolução do vendedor, reembolso parcial ou substituição, transitário ou reencaminhamento, aceitar uma encomenda danificada no transporte e comunicar que não corresponde ao anúncio
 :::

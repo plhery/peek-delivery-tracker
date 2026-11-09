@@ -12,7 +12,7 @@ import { STORED_EVENT_IDENTITIES } from './supabase';
 import { priorityUniversalSource, universalPlan, universalSourceBudget } from 'universal-parcel-scraper';
 import type { UniversalSource } from 'universal-parcel-scraper';
 import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universal-parcel-scraper/app';
-import { brandCarrierIds, carrierBrand, carrierIdFromName } from 'universal-parcel-scraper/app';
+import { brandCarrierIds, carrierBrand, carrierIdFromName, universalCarrierHints } from 'universal-parcel-scraper/app';
 import { errorType, reportRoutingEvent } from './observability';
 import { markLookup, unmarkLookups } from './stepRecorder';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
@@ -518,8 +518,13 @@ const SHIPPING_PLATFORMS: ReadonlySet<string> = new Set(['easyship', 'packlink',
 function isShippingPlatformName(name: string): boolean {
   return SHIPPING_PLATFORMS.has(name.toLowerCase().replace(/[^a-z0-9]/g, ''));
 }
-/** Whether a reported name can mean this carrier: its id, a brand network of it, or a name the catalog doesn't know. */
-function mayNameCarrier(name: string, carrier: string): boolean {
+/**
+ * Whether a reported name can mean this carrier: the carrier the name names read with the number, as the
+ * scraper reads a provider's name ("Jumppoint" names the network the number belongs to), its id, a brand
+ * network of it, or a name the catalog doesn't know.
+ */
+function mayNameCarrier(name: string, carrier: string, number: string): boolean {
+  if (universalCarrierHints([name], number).discovered_carrier === carrier) return true;
   const id = carrierIdFromName(name);
   if (id) return id === carrier;
   const networks = brandCarrierIds(name);
@@ -582,7 +587,7 @@ export function foreignHistory(result: CarrierResult, carrier: string, addedAt: 
   const names = Array.isArray(result.reported_carriers)
     ? result.reported_carriers.filter((name): name is string => typeof name === 'string') : [];
   if (!names.length) return deliveryBehindOwnScans(result, carrier, stored);
-  if (names.some((name) => mayNameCarrier(name, carrier))) return false;
+  if (names.some((name) => mayNameCarrier(name, carrier, number))) return false;
   const newest = newestScan([result]);
   return newest > 0 && newest < millis(addedAt) - OTHER_CARRIER_GAP;
 }
@@ -1620,7 +1625,7 @@ export class TrackingRouter {
       if (!named || named === universalCarrier || !filedIn.length || !finished(result) || !this.options.refuses) return false;
       const hinted = countryHint ? [...filedIn, countryHint] : filedIn;
       const names = Array.isArray(result.reported_carriers) ? result.reported_carriers : [];
-      if (names.some((name) => typeof name === 'string' && mayNameCarrier(name, universalCarrier))) return false;
+      if (names.some((name) => typeof name === 'string' && mayNameCarrier(name, universalCarrier, universalNumber))) return false;
       const travelsIn = [...countriesOf(named),
         ...(typeof result.destination_country === 'string' ? [result.destination_country.toUpperCase()] : [])];
       if (!travelsIn.length || travelsIn.some((country) => hinted.includes(country))) return false;

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { earlierParcelRows, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { earlierParcelRows, foreignHistory, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
 import type { JsonObject } from './types';
@@ -3776,6 +3776,20 @@ describe('universal preflight and recipient input', () => {
   });
 });
 
+describe('a universal history naming the filed carrier by a name of several networks', () => {
+  // Moving weeks before the parcel was added: another carrier's history would be a reused number's earlier parcel.
+  const old = (name: string): CarrierResult => ({ status: 'in_transit', current_stage: 'in_transit', reported_carriers: [name],
+    events: [{ time: '2026-07-20T10:00:00Z', description: 'Departed facility', stage: 'in_transit' }] });
+  const added = '2026-09-01T00:00:00Z';
+  it('reads the name with the number, as the scraper does', () => {
+    // "Jumppoint" names Jumppoint International for its JP, two letters and ten digits.
+    expect(foreignHistory(old('Jumppoint'), 'jumppoint-international', added, 'JPAB0123456789')).toBe(false);
+    expect(foreignHistory(old('Jumppoint'), 'jumppoint', added, 'JP012345678901')).toBe(false);
+    // Read with a number of the other network, or naming another carrier, it is still another carrier's.
+    expect(foreignHistory(old('Jumppoint'), 'jumppoint-international', added, 'JP012345678901')).toBe(true);
+    expect(foreignHistory(old('FedEx'), 'jumppoint-international', added, 'JPAB0123456789')).toBe(true);
+  });
+});
 describe('a reused number\'s earlier parcel an older release stored', () => {
   const added = '2026-10-20T09:00:00Z';
   const own = { provider_event_id: 'app:pending', occurred_at: added, stage: 'pending', description: 'Tracking added' };

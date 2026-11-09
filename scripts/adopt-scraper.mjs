@@ -142,7 +142,8 @@ export function releaseArtifact(version) {
 
 /** The Adopt job's steps that run the release: one failing is the release's fault, not the runner's. */
 export const RELEASE_STEPS = new Set(['Install the release', "Check the scraper's optional peers",
-  'Regenerate the contract and the iPhone resources', 'Write the adoption as a patch', 'Test the app with the release']);
+  'Regenerate the contract and the iPhone resources', 'Write the adoption as a patch', 'Test the app with the release',
+  'Test the Android core with the release']);
 
 /**
  * Since when a release that failed waits: the slot's start, or a slot's length ago in the night's longer slot. A CI run

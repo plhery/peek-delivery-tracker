@@ -3,7 +3,7 @@ title: Correios Brasil seguimiento: código, estados y aduanas
 description: Sigue un paquete de Correios de Brasil: cómo es el código BR, qué significan sus estados en portugués, la aduana en España y en Brasil, y quién lo entrega.
 slug: correios-brasil-seguimiento
 published: 2026-10-24
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) es el correo de Brasil; no lo confundas con Correos, el español. Si te mandan un paquete por correo desde Brasil, lleva un código de Correios acabado en `BR`, y en España lo reparte [Correos](carrier:correos-spain) con ese mismo código. Si eres tú quien envía a Brasil, Correios lo entrega allí con el código que le puso el correo de origen. Puedes seguirlo en el [rastreador de Correios](https://rastreamento.correios.com.br/app/index.php), en portugués (te pide copiar el texto de una imagen); en el localizador de Correos, cuando ya está en España, o en la casilla de arriba.
@@ -30,6 +30,7 @@ Correios escribe sus estados en portugués y añade la ciudad y el estado brasil
 | --- | --- |
 | `Etiqueta emitida` | Se ha creado la etiqueta. Correios aún no tiene el paquete. |
 | `Objeto postado` | Admitido: Correios ya lo tiene. |
+| `Objeto encaminhado para fiscalização aduaneira de exportação` | Un paquete que va al extranjero ha pasado a la inspección de la aduana de exportación brasileña, antes de salir de Brasil (más abajo). Mientras está allí, Correios no lo tiene en sus manos. |
 | `Objeto em transferência - por favor aguarde` | Va de una unidad de Correios a otra («en traslado, espera, por favor»). |
 | `Objeto recebido pelos Correios do Brasil` | Un paquete del extranjero ha llegado a Correios, en Brasil. |
 | `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes` | Sus datos han pasado a la aduana brasileña y a los organismos que controlan las importaciones. |
@@ -41,7 +42,7 @@ Correios escribe sus estados en portugués y añade la ciudad y el estado brasil
 | `Inconsistências no endereçamento do objeto` | Algo falla en la dirección. |
 | `Objeto entregue ao destinatário` | Entregado al destinatario. |
 
-Los de aduana e importación son de un paquete que entra en Brasil. Otros avisan de un problema: `Importação não autorizada` quiere decir que no se ha autorizado la importación; `Prazo de regularização encerrado`, que se acabó el plazo para regularizarla, y `Devolução determinada pela autoridade competente`, que las autoridades han ordenado devolverlo al remitente. `Objeto saiu para entrega ao remetente` es un reparto, pero hacia quien lo envió.
+Salvo el de exportación, los de aduana e importación son de un paquete que entra en Brasil. Otros avisan de un problema: `Importação não autorizada` quiere decir que no se ha autorizado la importación; `Prazo de regularização encerrado`, que se acabó el plazo para regularizarla, y `Devolução determinada pela autoridade competente`, que las autoridades han ordenado devolverlo al remitente. `Objeto saiu para entrega ao remetente` es un reparto, pero hacia quien lo envió.
 
 En sus páginas de importación, Correios cita también `Em fiscalização aduaneira` (en inspección aduanera). Mientras aparece, dice Correios, el paquete no está en sus manos.
 
@@ -158,5 +159,5 @@ Depende del servicio y del código postal (CEP), y el seguimiento de Correios mu
 - [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – Aduana, 3 €, 2 €
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – fechas de 3 € y 2 €
 - [Comisión Europea: Guidance on the €3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – ventas a distancia, 2 €
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados, lo que muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados (inspección de la aduana de exportación, 9 de noviembre de 2026), lo que muestra Peek
 :::

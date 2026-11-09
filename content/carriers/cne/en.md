@@ -3,7 +3,7 @@ title: CNE Express tracking: 3A5V numbers, statuses and contact
 description: Track a CNE Express (递一物流) parcel from China: what a 3A5V number looks like, what CNE's statuses mean, who delivers it near you and who to ask.
 slug: cne-express-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-09
 ---
 
 CNE Express (递一物流, CNE EXPRESS CO LTD) is a cross-border logistics company in Shanghai, China, founded in 2003. It ships parcels abroad for online sellers, including sellers on eBay, Walmart, TikTok, Temu and SHEIN, flies them out of China and hands them to a partner in your country for the last stretch. Track the number on [CNE's tracker](https://www.cne.com/en/track), in English, or paste it in the box above. The seller booked CNE and gives you the number with your order's shipping details.
@@ -53,8 +53,10 @@ CNE's tracker puts a status above each parcel's lines. In English, as CNE labels
 | `The shipment is picked up by customs broker` | A customs broker took it for import clearance. | "At customs" |
 | `Released From Import Customs`, `Pickup from airport` | Through import customs, then collected from the airport. | "In transit" |
 | `Handled by local carrier` | CNE handed it to the carrier that delivers in your country. That carrier's own acceptance comes next. | "In transit" |
-| `Arrived At The Delivery Company`, `Your shipment has arrived at sorting center`, `Parcel Unloaded From Container` | With the carrier that delivers it, or at a sorting centre before it. | "In transit" |
+| `Arrived At The Delivery Company`, `Your shipment has arrived at sorting center`, `Your shipment is in process at sorting center`, `Parcel Unloaded From Container` | With the carrier that delivers it, or at a sorting centre before it. | "In transit" |
+| `Your shipment has been processed at sorting center and ready for shipping`, `Your shipment has departed from the transit origin`, `Your shipment has arrived at the transit destination` | Sorted in your country and sent on to the delivering carrier's local station, where it arrives before the delivery round. This "transit" is that last leg, not a stop abroad. | "In transit" |
 | `On Board with Courier` | On the courier's van: out for delivery. | "Out for delivery" |
+| `Your shipment delivery attempt failed [Recipient not at home]` | The courier found nobody at home. The delivery is tried again. | "Delivery attempted", or "Needs attention" while CNE's status says `Exception` |
 | `Sorting failed []` | Sorting went wrong. The empty brackets are CNE's. | "Needs attention" |
 | `It was returned to customer's address by CNE` | CNE sent it back to the seller, its customer. | "Returned to sender" |
 
@@ -144,5 +146,5 @@ By its hotline, 400-021-5600, or its online consulting form, choosing `Complaint
 - [CNE: 关于欧盟国家2026年11月税改通知 (EU tax change notice)](https://www.cne.com/news/article/rDe4ANa6KYOW) – €2 collected from sellers in advance from 26 October, on top of the €3, per parcel and tariff code; customs cleared on the seller's declaration
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, wordings and codes, last-mile suppliers, clocks, hand-over, what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, wordings and codes (last-mile sorting, station and missed-delivery lines since 9 November 2026), last-mile suppliers, clocks, hand-over, what Peek reads
 :::

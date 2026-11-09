@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-11-06
+updated: 2026-11-09
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -47,13 +47,15 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Arrival processing center` | Shouwu's warehouse in China has taken the parcel in. | "Received by carrier" |
 | `Package processing completed` | The warehouse is done with it, before the flight. | "Received by carrier" |
 | `Shipment started the customs clearance process at origin` | Export clearance in China, not your country's customs. | "At customs" |
-| `Export customs declaration completed`, `Export Released` | China has cleared it for export; nothing is held. | "In transit" |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Sent from the transfer warehouse to the airport, where China's export clearance is under way: not your country's customs. | "At customs" |
+| `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | China has cleared it for export; nothing is held. | "In transit" |
+| `The parcel has arrived at the airport and is currently being loaded onto a flight` | At the departure airport after export clearance, being loaded onto a flight. | "In transit" |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |
 | `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Landed in your country. | "In transit" |
 | `NOA received` | The agent in your country has the airline's notice of arrival; customs comes next. | "In transit" |
-| `Shipment started the customs clearance process at destination`, `Customs clearance in progress` | Your country's customs are clearing it. | "At customs" |
-| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed` | Your country's customs have let it through. | "In transit" |
-| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider` | Handed to the courier that delivers in your country, not to you ("deliverey" is Shouwu's spelling). | "In transit" |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` | Your country's customs are clearing it. | "At customs" |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Your country's customs have let it through. | "In transit" |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Handed to the courier that delivers in your country, not delivered to you ("deliverey" is Shouwu's spelling). | "In transit" |
 | `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
 | `Abnormal delivery` | The round didn't deliver. The courier's reason follows as a scan of its own in angle brackets, such as `<Incorrect address.>`. | "Delivery attempted" |
@@ -93,7 +95,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 
-**Stuck at customs.** After `Shipment started the customs clearance process at destination`, `Customs clearance in progress` or `已落地，清关提货中`, it waits for your country's customs. On the EU lines, goods bought online from outside the EU now owe €3 duty per item in parcels worth up to €150 (since 1 July 2026) and the EU's €2 handling fee per item, at any value (since 1 November 2026); Shouwu's line pages don't say who pays them. If you're asked for import charges, see [parcels held at customs](guide:customs).
+**Stuck at customs.** After `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` or `已落地，清关提货中`, it waits for your country's customs. On the EU lines, goods bought online from outside the EU now owe €3 duty per item in parcels worth up to €150 (since 1 July 2026) and the EU's €2 handling fee per item, at any value (since 1 November 2026); Shouwu's line pages don't say who pays them. If you're asked for import charges, see [parcels held at customs](guide:customs).
 
 **Nothing after `Delivery to local courier`.** The courier has it, but Shouwu's tracker doesn't give the courier's number. Ask the seller for the courier's number and paste it into Peek. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
@@ -158,5 +160,5 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, choice of number, 10 to 12 working days
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages, iMile's lines relayed in Italy, clocks, places, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November), iMile's lines relayed in Italy, clocks, places, what Peek shows
 :::

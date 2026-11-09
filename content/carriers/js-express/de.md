@@ -73,7 +73,7 @@ Die ersten beiden Zeilen gibt es auch ohne Schlusspunkt am Ende; Peek zeigt sie 
 
 **Zeilen, die keine Scans sind.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, `Your package is being prepared by the sender and will be handed over to us soon` und, an einem Umschlagplatz in Europa, `Shipment Data Uploaded` mit `Processed` gleich danach sind Einträge eines Partners mit den Daten des Pakets, oft bevor er das Paket überhaupt hat.
 
-**Uhrzeiten durcheinander.** Die Zeiten stehen ohne Zeitzone da und folgen verschiedenen Uhren: Pekinger Zeit in China, an Flughäfen und bei den Zustellern meist die Ortszeit. Richte dich nach der Reihenfolge der Zeilen, nicht nach den Uhrzeiten.
+**Uhrzeiten durcheinander.** Die Zeiten stehen ohne Zeitzone da und folgen verschiedenen Uhren: Pekinger Zeit in China, an Flughäfen und bei den Zustellern meist die Ortszeit. Richte dich nach der Reihenfolge der Zeilen, nicht nach den Uhrzeiten. In Peek zeigen die deutschen Zeilen von J&T Express Germany dieselben Zeiten wie die Sendungsverfolgung von J&T Express Germany selbst.
 
 ## Wer JS-Express-Pakete in Deutschland, Österreich und der Schweiz zustellt
 
@@ -114,7 +114,7 @@ Ansprüche gegenüber JS Express stellt der Verkäufer, der das Paket gebucht ha
 
 Peek liest die englische Tracking-Seite von JS Express und zeigt den Verlauf, jeden Scan mit seinem Ort und dazu das Zielland, das diese Seite nicht anzeigt. `到达待取` steht bei Peek auf Englisch als `Arrived, awaiting collection`, und auch die chinesische Meldung zur Adresse zeigt Peek auf Englisch. Namen von Personen, die ein Paket angenommen haben, und Telefonnummern lässt Peek weg. Ebenso Zustellfotos und die Bestellnummer des Shops, die der Datensatz von JS Express enthalten kann. Als Liefertermin zeigt Peek den Tag aus der Prognose von JS Express; sobald das Paket in Zustellung ist, auch mit Straightships `Package will be delivered before 9:00pm`, zeigt Peek keinen Tag mehr, denn „In Zustellung“ heißt schon: heute. Zeilen, die keine Scans sind, ändern den Status nicht.
 
-Die Scans in China liest Peek in Pekinger Zeit, bei den anderen leitet es die Zeitzone aus dem Ort oder dem Zielland ab. Alle zeigt es in der Zeitzone deines Geräts, den neuesten zuerst.
+Die Scans in China liest Peek in Pekinger Zeit, die deutschen Zeilen von J&T Express Germany mit dem UTC-Versatz, den jede Zeile angibt; bei den anderen leitet es die Zeitzone aus dem Ort oder dem Zielland ab. Alle zeigt es in der Zeitzone deines Geräts, den neuesten zuerst.
 
 Passt die Form der Zustellernummer eindeutig zu einem einzigen Paketdienst, der in deinem Land arbeitet, zeigt Peek „Zustellung durch“ mit dem Namen dieses Paketdiensts und seiner Nummer und fragt auch dort nach. Solange Peek das Paket bei diesem Paketdienst nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei … angekündigt, noch nicht eingetroffen“. DHL-Nummern aus zwölf Ziffern oder aus JJD und 16 Ziffern nutzen auch andere Paketdienste: In Deutschland zählen sie nur, wenn der Verlauf von JS Express eine der Zeilen von DHL aus der Tabelle oben enthält. Eine internationale Postnummer geht an die Post deines Landes: DHL in Deutschland, die Österreichische Post in Österreich, die Schweizerische Post in der Schweiz. Sobald dieser Paketdienst einen Scan zeigt, der mindestens so neu ist wie der neueste von JS Express, verfolgt Peek das Paket dort weiter, zeigt beide Nummern und behält die Scans von JS Express im Verlauf. Bis dahin bleibt Peek bei JS Express, dessen Verlauf oft auch die Scans des Zustellers enthält.
 
@@ -151,5 +151,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei JS Express gebucht und 
 - [JS Express: Complaint](https://www.js-exp.com/EN/index.php?page=32) – Formular, Hotline
 - [JS Express: Contact Us](https://www.js-exp.com/EN/index.php?page=35) – ältere Nummern und Adressen
 - [JS Express: 联系我们 (Kontakt)](https://www.js-exp.com/index.php?page=35) – Hotline auch für internationale Anfragen, QQ, WeChat, Standorte
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Wortlaute und ihre Stufen, DHL-, iMile- und J&T-Express-Scans in Deutschland, Scans eines ungenannten Zustellers (Umschlagzentrum, Depot, Zustellversuche, Umleitung, Probleme), Uhrzeiten, Browser-Abfrage, Nummer des Zustellers und welche Formen Peek einem Paketdienst zuordnet, was Peek zeigt und wie es übergibt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Wortlaute und ihre Stufen, DHL-, iMile- und J&T-Express-Scans in Deutschland, Scans eines ungenannten Zustellers (Umschlagzentrum, Depot, Zustellversuche, Umleitung, Probleme), Uhrzeiten (seit 9. November die Zeilen von J&T Express Germany mit ihrem angegebenen UTC-Versatz), Browser-Abfrage, Nummer des Zustellers und welche Formen Peek einem Paketdienst zuordnet, was Peek zeigt und wie es übergibt
 :::

@@ -3,7 +3,7 @@ title: Correios Brazil tracking: codes, statuses and customs
 description: Track a Correios parcel to or from Brazil: what BR codes look like, what the Portuguese statuses mean, import taxes, Minhas Importações and contacts.
 slug: correios-brazil-tracking
 published: 2026-10-23
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) is Brazil's post. A parcel sent from Brazil keeps its Correios code all the way, and the post of the country it's going to delivers it. A parcel bought abroad keeps the sending post's code, and Correios delivers it in Brazil. Track it on [Correios' tracker](https://rastreamento.correios.com.br/app/index.php), which takes up to 20 codes or a CPF or CNPJ and asks you to type the text from an image, or paste the code in the box above.
@@ -31,6 +31,7 @@ Correios writes its statuses in Portuguese, with the town and state (UF) of each
 | --- | --- |
 | `Etiqueta emitida` | A label was issued. Correios doesn't have the parcel yet. |
 | `Objeto postado` | Posted: Correios has it. |
+| `Objeto encaminhado para fiscalização aduaneira de exportação` | A parcel posted for abroad has gone to Brazilian export customs for inspection, before it leaves Brazil (below). While it's there, Correios doesn't hold it. |
 | `Objeto em transferência - por favor aguarde` | Moving between Correios units ("in transfer, please wait"). |
 | `Objeto recebido pelos Correios do Brasil` | A parcel from abroad has reached Correios in Brazil. |
 | `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes` | Its details went to customs and the other agencies that check imports. |
@@ -141,5 +142,5 @@ Yes, with the same code: on Correios' tracker, then on your own post's tracker o
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – service letters, check digit
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty, €2 handling fee
 - [European Commission: Guidance on the €3 customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – item, distance sales
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings (export customs inspection, 9 November 2026), what Peek shows
 :::

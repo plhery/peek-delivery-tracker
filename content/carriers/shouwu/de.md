@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-06
+updated: 2026-11-09
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -46,12 +46,13 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Carrier received the shipment` | Diese Zeile schreibt Shouwu zwei Stunden nach den Bestelldaten, Tage vor dem ersten Lagerscan: Noch hat niemand das Paket. | „Etikett erstellt“ |
 | `Arrival processing center` | Shouwus Lager in China hat das Paket angenommen. | „Beim Paketdienst eingegangen“ |
 | `Package processing completed` | Das Lager ist damit fertig, der Flug steht noch aus. | „Beim Paketdienst eingegangen“ |
+| `The parcel has arrived at the airport and is currently being loaded onto a flight` | Nach der Ausfuhrabfertigung am Abflughafen angekommen; es wird gerade in ein Flugzeug verladen. | „Unterwegs“ |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | Am Flughafen Shanghai, dann aus China abgeflogen. | „Unterwegs“ |
 | `Arrived at airport of Destination` | In deinem Land gelandet. | „Unterwegs“ |
 | `NOA received` | Der Agent vor Ort hat die Ankunftsmeldung der Fluggesellschaft bekommen; danach kommt der Zoll. | „Unterwegs“ |
-| `Shipment started the customs clearance process at destination`, `Customs clearance in progress` | Der Zoll in deinem Land fertigt es ab. | „Beim Zoll“ |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` | Der Zoll in deinem Land fertigt es ab. | „Beim Zoll“ |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Der Zoll in deinem Land hat es freigegeben. | „Unterwegs“ |
-| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider` | An den Paketdienst übergeben, der bei dir zustellt, nicht an dich („deliverey“ schreibt Shouwu so). | „Unterwegs“ |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | An den Paketdienst übergeben, der bei dir zustellt: Zugestellt ist es damit noch nicht („deliverey“ schreibt Shouwu so). | „Unterwegs“ |
 | `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: keine Abholung beim Händler und keine durch dich. | „Unterwegs“ |
 | `The shipment has been processed in the parcel center of origin` | DHLs erster Scan in Deutschland, nach dem Zoll. | „Unterwegs“ |
 | `Germany, Die Sendung wurde im Briefzentrum bearbeitet.,运输途中` | Der Zusteller in Deutschland hat es in einem Briefzentrum bearbeitet; davor steht das Land, dahinter „unterwegs“ auf Chinesisch. | „Unterwegs“ |
@@ -66,10 +67,11 @@ Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 | `Shipment arrived at facility` | Der erste Scan beim Spediteur, der das Paket zum Flug bringt. | „Beim Paketdienst eingegangen“ |
 | `Shipment arrived at a carrier facility` | Beim Transporteur angekommen, der den Flug übernimmt. | „Unterwegs“ |
 | `Shipment started the customs clearance process at origin` | Die Ausfuhrabfertigung in China, nicht der Zoll bei dir. | „Beim Zoll“ |
-| `Export customs declaration completed`, `Export Released` | Die Ausfuhranmeldung in China ist erledigt, die Ware freigegeben. Das Paket hängt nicht beim Zoll. | „Unterwegs“ |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Vom Umschlaglager zum Flughafen geschickt, wo die Ausfuhrabfertigung in China läuft: nicht der Zoll bei dir. | „Beim Zoll“ |
+| `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | Die Ausfuhranmeldung in China ist erledigt, die Ware freigegeben. Das Paket hängt nicht beim Zoll. | „Unterwegs“ |
 | `Flight departure`, `Flight arrival` | Abflug und Landung. | „Unterwegs“ |
 | `Shipment arrived in the destination country` | Im Zielland angekommen. | „Unterwegs“ |
-| `Customs clearance has been completed` | Der Zoll im Zielland hat es freigegeben. | „Unterwegs“ |
+| `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Der Zoll im Zielland hat es freigegeben. | „Unterwegs“ |
 | `Abnormal delivery` | Die Zustelltour hat nicht geklappt. Den Grund nennt ein eigener Scan danach. | „Zustellversuch“ |
 | `<Incorrect address.>` | So nennt der Paketdienst vor Ort den Grund, in spitzen Klammern: Die Adresse stimmt nicht. | „Zustellversuch“ |
 
@@ -96,7 +98,7 @@ Shouwus Sendungsverfolgung nennt weder Namen noch Nummer des Paketdiensts, auße
 
 **Hängt bei `Preparing`, `Shipment information received` oder `Carrier received the shipment`.** Shouwu hat das Paket noch nicht oder hat es noch nicht aus seinem Lager losgeschickt. Frag den Shop, wann er es übergeben hat.
 
-**Hängt beim Zoll.** Nach `Shipment started the customs clearance process at destination`, `Customs clearance in progress` oder `已落地，清关提货中` wartet es auf den Zoll in deinem Land. Seit dem 1. November 2026 kommt bei Onlinebestellungen aus China in der EU, also auch in Deutschland und Österreich, zu den 3 € Zoll je Warenart (bis 150 €) eine Bearbeitungsgebühr der EU hinzu: 2 € je Warenart, egal wie viel die Ware wert ist. Wer sie zahlt, sagen Shouwus Linienseiten nicht. Sollst du Einfuhrabgaben zahlen, lies [Paket beim Zoll](guide:customs).
+**Hängt beim Zoll.** Nach `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` oder `已落地，清关提货中` wartet es auf den Zoll in deinem Land. Seit dem 1. November 2026 kommt bei Onlinebestellungen aus China in der EU, also auch in Deutschland und Österreich, zu den 3 € Zoll je Warenart (bis 150 €) eine Bearbeitungsgebühr der EU hinzu: 2 € je Warenart, egal wie viel die Ware wert ist. Wer sie zahlt, sagen Shouwus Linienseiten nicht. Sollst du Einfuhrabgaben zahlen, lies [Paket beim Zoll](guide:customs).
 
 **Nichts mehr nach `Delivery to local courier`.** Der Paketdienst hat das Paket, aber Shouwus Sendungsverfolgung nennt seine Nummer nicht. Frag den Shop nach der Nummer des Paketdiensts und füg sie in Peek ein. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
@@ -151,5 +153,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei Shouwu gebucht und kann
 - [Shouwu International: 德国经济 (Deutschland, Economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=22) – vor allem Hermes, 4 bis 7 Arbeitstage
 - [Shouwu International: 德国带电 (Deutschland, mit Batterien)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=25) – vor allem DPD, 4 bis 7 Arbeitstage
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll seit 1. Juli 2026, Bearbeitungsgebühr von 2 € seit 1. November 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen, Zeilen von DHL und des Zustellers in Deutschland, Uhrzeiten, Orte, was Peek zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst), Zeilen von DHL und des Zustellers in Deutschland, Uhrzeiten, Orte, was Peek zeigt
 :::

@@ -3,7 +3,7 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-11-06
+updated: 2026-11-09
 ---
 
 Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
@@ -46,13 +46,15 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Carrier received the shipment` | Shouwu la scrive due ore dopo i dati dell'ordine, giorni prima della prima scansione in magazzino: nessuno ha ancora il pacco. | «Etichetta creata» |
 | `Arrival processing center` | Il magazzino di Shouwu in Cina ha preso in carico il pacco. | «Preso in carico» |
 | `Package processing completed` | Il magazzino ha finito di lavorarlo, prima del volo. | «Preso in carico» |
-| `Export customs declaration completed`, `Export Released` | La Cina l'ha sdoganato in uscita: non è fermo in dogana. | «In transito» |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Partito dal magazzino di transito verso l'aeroporto, dove è in corso lo sdoganamento in uscita dalla Cina: non è la dogana del tuo Paese. | «In dogana» |
+| `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | La Cina l'ha sdoganato in uscita: non è fermo in dogana. | «In transito» |
+| `The parcel has arrived at the airport and is currently being loaded onto a flight` | Arrivato all'aeroporto di partenza dopo lo sdoganamento in uscita, viene caricato su un volo. | «In transito» |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | All'aeroporto di Shanghai, poi decollato dalla Cina. | «In transito» |
 | `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Atterrato nel Paese di arrivo. | «In transito» |
 | `NOA received` | L'agente sul posto ha ricevuto l'avviso di arrivo della compagnia aerea; poi viene la dogana. | «In transito» |
-| `Shipment started the customs clearance process at destination`, `Customs clearance in progress` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
-| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
-| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider` | Passato al corriere che consegna nel tuo Paese, non a te («deliverey» è scritto così da Shouwu). | «In transito» |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Passato al corriere che consegna nel tuo Paese: a te non è ancora stato consegnato («deliverey» è scritto così da Shouwu). | «In transito» |
 | `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è un ritiro dal venditore, né da parte tua. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
@@ -92,7 +94,7 @@ Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a
 
 **Fermo su `Preparing`, `Shipment information received` o `Carrier received the shipment`.** Shouwu non ha ancora il pacco, oppure non l'ha ancora fatto partire dal magazzino. Chiedi al venditore quando l'ha affidato a Shouwu.
 
-**Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination`, `Customs clearance in progress` o `已落地，清关提货中` il pacco aspetta la dogana di arrivo. Dal 1° novembre 2026, su un acquisto online dalla Cina l'UE applica, oltre al dazio di 3 € per voce (fino a 150 €), la tassa di gestione di 2 € per voce, a qualunque valore. Le pagine delle linee di Shouwu non dicono chi la paga. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
+**Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` o `已落地，清关提货中` il pacco aspetta la dogana di arrivo. Dal 1° novembre 2026, su un acquisto online dalla Cina l'UE applica, oltre al dazio di 3 € per voce (fino a 150 €), la tassa di gestione di 2 € per voce, a qualunque valore. Le pagine delle linee di Shouwu non dicono chi la paga. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
 
 **Niente dopo `Delivery to local courier`.** Il pacco ce l'ha il corriere, ma il tracking di Shouwu non dà il suo numero. Chiedi al venditore il numero del corriere e incollalo in Peek. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
@@ -149,5 +151,5 @@ Al venditore da cui hai comprato: ha prenotato lui la spedizione con Shouwu e pu
 - [Shouwu International: 美国标快 (Stati Uniti, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=1) – soprattutto USPS, da 6 a 8 giorni lavorativi, niente ritorno in Cina, reclami
 - [Shouwu International: 美国经济 (Stati Uniti, economica)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=21) – da 8 a 12 giorni lavorativi
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi, righe di Poste Italiane e di iMile, orari, luoghi, cosa mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere), righe di Poste Italiane e di iMile, orari, luoghi, cosa mostra Peek
 :::

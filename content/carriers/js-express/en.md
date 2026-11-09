@@ -57,7 +57,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 
 **Lines that aren't scans.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, USPS's `Shipping Label Created, USPS Awaiting Item`, `Package information is created in the system` and, at a European hub, `Shipment Data Uploaded` then `Processed` are a partner's record of the parcel's details, sometimes days before it has the parcel.
 
-**Times out of order.** The times carry no time zone and mix clocks: Beijing time in China, local time at airports and most couriers, and UTC for Straightship, hours ahead of Canada's clocks. Go by the order of the rows, not the times.
+**Times out of order.** The times carry no time zone and mix clocks: Beijing time in China, local time at airports and most couriers, and UTC for Straightship, hours ahead of Canada's clocks. Go by the order of the rows, not the times. In Peek, J&T Express Germany's German rows show the times J&T Express Germany's own tracker gives.
 
 ## Who delivers JS Express parcels
 
@@ -102,7 +102,7 @@ JS Express's claims go through the seller who booked the parcel. For your order,
 
 Peek shows the history of JS Express's English page, each scan with its place, and the destination country, which that page leaves out. `到达待取` shows as "Arrived, awaiting collection". Names of who took a delivery and phone numbers are dropped. Peek leaves out the delivery photos and the shop's order number that JS Express's record can hold. As the expected delivery, it shows the day of JS Express's estimate; once the parcel is out for delivery, Straightship's `Package will be delivered before 9:00pm` included, it shows no day, since "Out for delivery" already means today. Lines that aren't scans don't change the status.
 
-Peek reads rows in China on Beijing time and Straightship's on UTC, works out the others' clocks from their place or the destination, and shows them all in your device's time zone, newest first.
+Peek reads rows in China on Beijing time, Straightship's on UTC and J&T Express Germany's German rows at the offset each row states, works out the others' clocks from their place or the destination, and shows them all in your device's time zone, newest first.
 
 When the courier's number fits one carrier that works in your country, such as a USPS barcode in the US or a Straightship number in Canada, Peek shows "Delivery with" that carrier, with its number, and asks it too; an international postal number goes to your country's post. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. Once that carrier shows a scan at least as recent as JS Express's latest, Peek follows the parcel there, showing both numbers and keeping JS Express's scans. Until then it stays with JS Express, whose history often carries the courier's scans too.
 
@@ -147,5 +147,5 @@ The seller you ordered from: it booked the parcel with JS Express and makes the 
 - [Aramex Australia: About Aramex Australia](https://www.aramex.com.au/why-aramex/about-us/) – Fastway became Aramex Australia
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, paid by the seller or the delivering business, may be passed on
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings and stages, clocks, USPS, GOFO, SpeedX, Straightship, Yodel, DHL, iMile, J&T Express Germany, FedEx and Colissimo scans, an unnamed courier's hub, depot, missed-delivery, redirection and exception scans, an unnamed US partner's hub scans, iMile's German centres, the browser fallback, customs, refusals and returns, the courier's number, what Peek shows and how it hands a parcel over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings and stages, clocks (J&T Express Germany's rows at their stated offset since 9 November), USPS, GOFO, SpeedX, Straightship, Yodel, DHL, iMile, J&T Express Germany, FedEx and Colissimo scans, an unnamed courier's hub, depot, missed-delivery, redirection and exception scans, an unnamed US partner's hub scans, iMile's German centres, the browser fallback, customs, refusals and returns, the courier's number, what Peek shows and how it hands a parcel over
 :::

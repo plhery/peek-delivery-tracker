@@ -9578,7 +9578,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "paquetexpress",
-      "recognitionRank": 35
+      "recognitionRank": 35,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://www.paquetexpress.com.mx/rastreo/{trackingNumber}",
     "linkRules": [
@@ -9592,6 +9593,10 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^[A-Z]{3}\\d{2}[A-Z]{2}\\d{5,7}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^\\d{11,13}$",
         "confidence": "low"
       }
     ],
@@ -35223,7 +35228,7 @@ export const CARRIER_CAPABILITIES = {
           "www.ky-express.com",
           "ky-express.com"
         ],
-        "pathPattern": "^/88\\.html$",
+        "pathPattern": "^/(?:website/)?88\\.html$",
         "params": [
           "orders"
         ]
@@ -36497,7 +36502,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "zes-express",
+      "recognitionRank": 13
     },
     "linkRules": [],
     "detectionRules": [

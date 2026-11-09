@@ -3,7 +3,7 @@ title: GZYL tracking: YL…YQ numbers, scans and who to ask
 description: Track a GZYL (广州云链) parcel from Guangzhou: what a YL…YQ number looks like, what its scans mean and why its Delivered step can be written in advance.
 slug: gzyl-tracking
 published: 2026-10-30
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with GZYL, your number is YL, ten digits and YQ: paste it in the box above. GZYL's website, yunlianhouyun.com, is in Chinese, and its parcel search (小包查询) opens a tracker that runs on a bare server address. Read that tracker with care: GZYL writes much of a parcel's journey in advance, so a step there, even `Delivered`, isn't always a scan.
@@ -60,15 +60,15 @@ GZYL writes its own steps in English, typos included. In the order a parcel gets
 
 Peek doesn't know who delivers GZYL parcels in the US, the UK, Ireland, Canada or Australia: GZYL's steps in your country name no company. The only delivering company Peek can hand a GZYL parcel over to is [Swiss Post](carrier:swiss-post), in Switzerland and Liechtenstein.
 
-Peek found no delivery times from GZYL, and no rules for delivery attempts, pickup points or how long a parcel is held: those are the delivering company's. Ask the seller which company delivers your order and for its tracking number.
+Peek found no delivery times from GZYL, and no rules for delivery attempts, pickup points or how long a parcel is held: those are the delivering company's. On GZYL's tracking page, look at the 渠道转单号 (transfer number) column, and at 跟踪号码 (tracking number) when it holds something other than your YL…YQ number: either can be the delivering company's number, which you can add to Peek as a parcel of its own. If there's none, ask the seller which company delivers your order and for its tracking number.
 
 ## GZYL parcel not arriving or tracking stuck
 
 **Only `Order information received` or `货物电子信息已经收到`.** The seller has created the order, but GZYL hasn't scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**Stuck at customs.** If you're asked for import charges, see [parcels held at customs](guide:customs). In Ireland, since 1 November 2026, an EU handling fee of €2 per item comes on top of the duty; if the shop didn't charge both at checkout, the delivery company can ask you for them before it delivers. If the parcel stays there for days, tell the seller.
+**Stuck at customs.** If you're asked for import charges, see [parcels held at customs](guide:customs). In Ireland, since 1 November 2026, an EU handling fee of €2 per distinct item (two identical ones count as one), whatever the parcel's value, comes on top of the duty; if the shop didn't charge both at checkout, the delivery company can ask you for them before it delivers. If the parcel stays there for days, tell the seller.
 
-**GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show, the `Delivered` that ends GZYL's plan, and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show, the `Delivered` that ends GZYL's plan, and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. When it has held back steps GZYL wrote ahead, Peek says so under the parcel's status on peektracker.com: "GZYL’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
 
@@ -78,17 +78,17 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 ## GZYL contact number and customer service
 
-As read on 4 November 2026, the contact page (联系我们) of GZYL's website, in Chinese, lists a 24-hour hotline (全国24小时服务热线), a WeChat account and an after-sales QQ account (售后QQ), but nothing for recipients: these channels serve GZYL's customers, the sellers. The seller booked the parcel and is the one to ask about your order, and the marketplace if the seller doesn't answer.
+As read on 10 November 2026, the contact page (联系我们) of GZYL's website, in Chinese, lists a 24-hour hotline (全国24小时服务热线), a WeChat account and an after-sales QQ account (售后QQ), but nothing for recipients: these channels serve GZYL's customers, the sellers. The seller booked the parcel and is the one to ask about your order, and the marketplace if the seller doesn't answer.
 
 ## Track a GZYL parcel with Peek
 
 [Peek](/) names GZYL at once for a number that starts YL738, with seven more digits and YQ ("Detected carrier"). Other numbers of YL, ten digits and YQ are only a weak match. Paste yours all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks GZYL's tracker ("Checking tracking services…") and shows "GZYL has this parcel." when the tracker knows the number. Otherwise press "Change" and pick GZYL under "Fits this number" (typing 广州云链 finds it too), or use "Change carrier" on a parcel you've already added. A seller's reference works too, but only once you pick GZYL yourself: press "Change" (or "Change carrier") and search for GZYL. Peek then shows the order's own number, labelled "GZYL tracks this as". Peek drops dashes, though, so a reference with dashes isn't found: ask the seller for the YL…YQ number.
 
-Peek reads GZYL's own tracker and shows the status, each step with its place, and the destination country when GZYL's record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, fees, signature and proof of delivery GZYL's record can hold, and shows no expected delivery date: GZYL gives none.
+Peek reads GZYL's own tracker and shows the status, each step with its place, and the destination country when GZYL's record gives it. Times are read on Beijing time and shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Peek leaves out the names, address, postcodes, weight, fees, signature and proof of delivery GZYL's record can hold, and shows no expected delivery date: GZYL gives none.
 
 Peek holds back any step written more than twelve hours before the time it shows, and any step dated after the moment it checks, on Beijing time. On an order with steps written ahead, it holds back `Delivered` too, even one written on its own day. When the tracker's data interface has no steps for a number, Peek reads GZYL's tracking page instead; that page doesn't show when a step was written, so there Peek holds back every `Delivered`. It goes by the steps it keeps, not by the record's summary status. An order whose steps are all held back has no tracking history in Peek yet. Peek also sets aside tracking services' copies of the steps it holds back as GZYL's plan, `Delivered` included, even when it keeps other steps of the order. When GZYL's tracker can't be reached, though, Peek asks tracking services instead, and their copies can include steps GZYL wrote ahead.
 
-Apart from a hand-over to Swiss Post, Peek stays with GZYL: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day a parcel shows "Out for delivery", while GZYL's or Swiss Post's own tracker answers (through tracking services, every 15 minutes), though none of the GZYL steps Peek knows gives that status. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers GZYL's two customs steps and `Delivered`, not its flights or sorting. Peek can't contact GZYL or the seller for you.
+Apart from a hand-over to Swiss Post, Peek stays with GZYL: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes, and up to every 2 minutes on the day a parcel shows "Out for delivery" (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while GZYL's or Swiss Post's own tracker answers (through tracking services, every 15 minutes), though none of the GZYL steps Peek knows gives that status. Once Swiss Post has taken over, Peek follows its pace. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers GZYL's two customs steps and `Delivered`, not its flights or sorting. Peek can't contact GZYL or the seller for you.
 
 ## Questions about GZYL tracking
 
@@ -106,11 +106,11 @@ It may be part of GZYL's plan. GZYL writes much of a parcel's timeline ahead and
 
 ### Who delivers GZYL parcels in my country?
 
-Peek doesn't know: GZYL's steps in your country name no company. Ask the seller which company delivers your order and for its tracking number, and add that number to Peek as a separate parcel. Only in Switzerland and Liechtenstein can Peek hand a GZYL parcel over to Swiss Post itself.
+Peek doesn't know: GZYL's steps in your country name no company. GZYL's tracking page can show the delivering company's number under 渠道转单号 (transfer number); if it doesn't, ask the seller which company delivers your order and for its tracking number. Add that number to Peek as a separate parcel. Only in Switzerland and Liechtenstein can Peek hand a GZYL parcel over to Swiss Post itself.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): Home](http://yunlianhouyun.com/) – company name, Chinese site, parcel search (小包查询) on GZYL's tracker
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contact)](http://yunlianhouyun.com/contact.html) – hotline, WeChat and after-sales QQ
-- [Revenue: Union Handling Fee](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item in Ireland from 1 November 2026, at checkout or before delivery
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shapes, YL738 named at once and the others a weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out
+- [Revenue: Union Handling Fee](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per distinct item in Ireland from 1 November 2026, whatever the value, on top of the €3 duty, at checkout or before delivery
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shapes, YL738 named at once and the others a weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, the tracking page's transfer-number and tracking-number columns, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out
 :::

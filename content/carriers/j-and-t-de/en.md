@@ -3,7 +3,7 @@ title: J&T Express Germany tracking: JTDE numbers and statuses
 description: Track a J&T Express parcel in Germany: what a JTDE number looks like, what each tracking line means, and what to do when your parcel is late, lost or missing.
 slug: jt-express-germany-tracking
 published: 2026-10-21
-updated: 2026-11-05
+updated: 2026-11-10
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt am Main) is the German network of the J&T Express parcel group: it delivers parcels in Germany. If a shop sent your order with J&T, the tracking number starts with `JTDE`: paste it in the box above, or look it up on [J&T's own tracker at jtexpress.de](https://www.jtexpress.de/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -16,6 +16,8 @@ J&T's FAQ says its tracking numbers start with JTDE. Peek knows only one shape f
 | --- | --- |
 | `JTDE000000000000` | `JTDE` and 12 digits: a J&T Express Germany parcel. Peek names J&T Express Germany at once. |
 | `JTDE00000000000` | One digit short: not J&T Express Germany's shape, and Peek recognises no carrier. Check for a missing digit. |
+
+If a number has one digit too few or too many after `JTDE` and no carrier answers for it, the parcel's page on peektracker.com says so ("This starts like a J&T Express Germany tracking number but is one character short, so it may be mistyped." or "… but has one character too many, so it may be mistyped.") and asks you to compare it with your shipping message.
 
 **Where to find it.** J&T says the sender gives it to you, and that it's on the shop's order page, in the order confirmation email, in a shipping email or text message, in emails announcing or confirming the delivery, and on the parcel's label. If you can't find it, J&T sends you to the sender or the shopping platform's customer service. See also [how to find a tracking number](guide:find-tracking-number).
 
@@ -78,7 +80,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 **Delivered but not received.** Read the delivered line in Peek: if it names a place, such as `Mailbox` or `Garage`, look there; if it says `Left with neighbor`, ask your neighbours, or look the neighbour up on J&T's tracker (see above). J&T's FAQ also asks you to check whether family, a neighbour or building staff took the parcel in. Still missing? Report it to J&T's hotline, and ask the shop for a refund or a new parcel, with your tracking number. See also [delivered but not received](guide:delivered-not-received).
 
-**Lost, damaged or returned.** Ask the shop for a refund or replacement, with your tracking number. J&T's FAQ gives no claim form, deadline or compensation for recipients; German law sets the deadlines. Under § 438 of the Commercial Code (HGB), report visible damage on delivery at the latest (telling the driver is enough), and hidden damage within seven days of delivery, in text form, such as an email to J&T. If you can't agree with J&T over a lost or damaged parcel, you can take it to the Bundesnetzagentur's postal arbitration board (Schlichtungsstelle Post), which charges no fee and hears recipients as well as senders. Parcels from large online shops, though, usually travel under special terms that rule arbitration out; you can then still turn to the Bundesnetzagentur's consumer service for postal matters (Verbraucherservice Post). See [lost parcels](guide:lost-parcel), [damaged parcels](guide:damaged-parcel) and [returned to sender](guide:returned-to-sender).
+**Lost, damaged or returned.** Ask the shop for a refund or replacement, with your tracking number. J&T's FAQ gives no claim form, deadline or compensation for recipients; German law sets the deadlines. Under § 438 of the Commercial Code (HGB), report visible damage on delivery at the latest (telling the driver is enough), and hidden damage within seven days of delivery, in text form, such as an email to J&T; sending it in time is enough to meet the deadline. If you can't agree with J&T over a lost or damaged parcel, you can take it to the Bundesnetzagentur's postal arbitration board (Schlichtungsstelle Post), which charges no fee, hears recipients as well as senders and asks you to apply through its online form. Parcels from large online shops, though, usually travel under special terms that rule arbitration out; you can then still turn to the Bundesnetzagentur's consumer service for postal matters (Verbraucherservice Post). See [lost parcels](guide:lost-parcel), [damaged parcels](guide:damaged-parcel) and [returned to sender](guide:returned-to-sender).
 
 ## J&T Express Germany customer service and contact
 
@@ -96,7 +98,7 @@ For an online order, start with the shop all the same: it booked the delivery wi
 
 [Peek](/) names J&T Express Germany at once from a `JTDE` number ("Detected carrier"), typed with or without spaces, in capitals or not, and asks J&T's own tracker with the number alone: no postcode or account. A www.jtexpress.de/tracking link with `?q=` and the number works too; with another kind of number in it, Peek reads that number as if you had pasted it alone. If what you have isn't a `JTDE` number, paste it all the same: Peek follows more than 3,500 carriers. Picking J&T Express Germany with "Change" for another shape doesn't help: Peek says it "doesn’t issue numbers like this one".
 
-Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone. Scans come in J&T's English, even if you read them in German on jtexpress.de. J&T gives no place, expected delivery day or weight, so Peek shows no map. On a very long history it keeps the newest 100 scans. "Open the J&T Express Germany website", on the parcel's page, opens your number on J&T's tracker.
+Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone; on peektracker.com, the last line under the history names it ("Times are in your time zone: …"). Scans come in J&T's English, even if you read them in German on jtexpress.de. J&T gives no place, expected delivery day or weight, so Peek shows no map. On a very long history it keeps the newest 100 scans. "Open the J&T Express Germany website", on the parcel's page, opens your number on J&T's tracker.
 
 Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
@@ -137,7 +139,7 @@ Call +49 6931090650 (Monday to Friday, 8:00 to 20:00), use the live chat on jtex
 - [Universal Parcel Scraper: J&T's shared tracker lookup](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – English sentences, exact scan times, no place, expected day or weight, names and phone numbers left out, newest 100 scans
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – other J&T networks' shapes, no hand-over to another carrier, tracking services as a fallback
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – the seller's risk in transit
-- [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – damage reported on delivery, hidden damage within seven days, text form
+- [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – damage reported on delivery, hidden damage within seven days, text form, sending in time is enough
 - [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – register of postal providers: J&T Express Germany GmbH, listed on 1 September 2026
-- [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – recipients may apply, no fee, special terms for online shops' parcels, Verbraucherservice Post
+- [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – recipients may apply, online form, no fee, special terms for online shops' parcels, Verbraucherservice Post
 :::

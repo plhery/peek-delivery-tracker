@@ -3,7 +3,7 @@ title: Meiteshun tracking: AMTS numbers, scans and who to ask
 description: Track a Meiteshun Logistics (美特顺) parcel from Shenzhen: what an AMTS number looks like, what its steps mean and why its Delivered step can be written in advance.
 slug: meiteshun-tracking
 published: 2026-10-28
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) is a forwarder in Shenzhen, China. Its numbers start with AMTS and end with FS: if the shop that sent your order gave you one, paste it in the box above. Read Meiteshun's tracking with care: its system writes a parcel's whole journey, delivery included, when the order is created, so a "Delivered" there doesn't prove your parcel arrived.
@@ -45,15 +45,17 @@ Every Meiteshun order follows the same script, and most of its steps are written
 | `package is on the way` | The step before the delivery. It doesn't say the parcel is out for delivery. | "In transit" |
 | `Delivered` | The script's last step (below). | "Delivered", unless Peek holds the step back (below) |
 
+For an order with no steps yet, the platform writes `货物电子信息已经收到` by itself: "the goods' electronic information has been received". The seller has created the order, but nobody has scanned the parcel; Peek shows the line in Chinese, under "Label created".
+
 A step's place comes before a comma at its start, and steps in your country add your town or region and postcode after the wording. Every time is on Beijing's clock, even for steps in your country: a step at 21:00 on Meiteshun's tracker is the afternoon in London and the morning in New York.
 
 **Steps written in advance.** Meiteshun runs its tracking on its own tracker on Hualei (华磊), a forwarder platform that other Chinese forwarders such as [Pengyou](carrier:pengyou) use too. On Meiteshun's, all of an order's steps are written when the order is created, each with the time it is planned for, from the collection to `Delivered`. They're a forecast, not scans of your parcel: they say where the parcel was planned to be on a date. Tracking services that copy Meiteshun's record show the same steps.
 
 ## Who delivers Meiteshun parcels
 
-Meiteshun's steps in your country don't name the company that delivers there. The service name on its records is MTS全球小包, MTS global small parcel.
+Meiteshun's steps in your country don't name the company that delivers there. The service name on its records is MTS全球小包, MTS global small parcel. On Meiteshun's tracking page, a number under 渠道转单号 (transfer number), or under 跟踪号码 (tracking number) when it isn't your AMTS number, can be the delivering company's: add it to Peek as a parcel of its own.
 
-Peek found no delivery times from Meiteshun, and no rules for delivery attempts, pickup points or how long a parcel is held. Ask the seller which company delivers your order and for its number: that company's tracking and rules are the ones that count. If you're asked for import charges, which in the EU now include a €2 handling fee per item (due since 1 November 2026), see [parcels held at customs](guide:customs).
+Peek found no delivery times from Meiteshun, and no rules for delivery attempts, pickup points or how long a parcel is held. Ask the seller which company delivers your order and for its number: that company's tracking and rules are the ones that count. If you're asked for import charges, which in the EU now include a €2 handling fee per kind of product, whatever the parcel's value (due since 1 November 2026), see [parcels held at customs](guide:customs).
 
 ## Meiteshun parcel not arriving or tracking stuck
 
@@ -61,7 +63,7 @@ Peek found no delivery times from Meiteshun, and no rules for delivery attempts,
 
 **Every step on time, but no parcel.** The steps were written when the order was created, so they show the plan, not where the parcel is. Go by the delivery estimate the shop gave, and ask the seller once it passes.
 
-**Stuck in Shenzhen in Peek.** If Peek shows only the first steps in Shenzhen while a tracking link from the seller shows more, the steps Peek leaves out were written in advance or are dated after its check (below). More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck in Shenzhen in Peek.** If Peek shows only the first steps in Shenzhen while a tracking link from the seller shows more, the steps Peek leaves out were written in advance or are dated after its check (below). When it has held back steps written in advance, Peek says so under the parcel's status on peektracker.com: "Meiteshun Logistics’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing found.** For a number it doesn't know, Meiteshun's tracker shows the number as a reference with every other field empty. Check the number with the seller.
 
@@ -69,7 +71,7 @@ Peek found no delivery times from Meiteshun, and no rules for delivery attempts,
 
 ## Meiteshun contact number and customer service
 
-For anything about your order, ask the seller first: it booked the parcel with Meiteshun. If the seller doesn't answer, ask the marketplace. If neither helps, 17TRACK's page on Meiteshun lists an email address for it, szmeiteshun@163.com, and no phone number (as read on 4 November 2026): write with your AMTS number and the seller's name.
+For anything about your order, ask the seller first: it booked the parcel with Meiteshun. If the seller doesn't answer, ask the marketplace. If neither helps, 17TRACK's page on Meiteshun lists an email address for it, szmeiteshun@163.com, its website, mtswl.com.cn, and an office in Shenzhen's Longgang district, but no phone number (as read on 10 November 2026): write with your AMTS number and the seller's name.
 
 ## Track a Meiteshun parcel with Peek
 
@@ -81,7 +83,7 @@ Peek holds back a step written more than twelve hours before the time it carries
 
 Peek follows the parcel on Meiteshun's tracker. The one hand-over Peek can take from Meiteshun's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day a parcel goes out for delivery, while Meiteshun's own tracker answers (through tracking services, every 15 minutes), though no Meiteshun step Peek knows gives that status. After two days with nothing new (or 12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly, which an order whose whole script was written at its creation soon reaches. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
+Peek checks every 10 minutes, and up to every 2 minutes on the day a parcel goes out for delivery (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Meiteshun's or Swiss Post's own tracker answers (through tracking services, every 15 minutes), though no Meiteshun step Peek knows gives that status. Once Swiss Post has taken over, Peek follows its pace. After two days with nothing new (or 12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly, which an order whose whole script was written at its creation soon reaches. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
 
 ## Questions about Meiteshun tracking
 
@@ -99,15 +101,15 @@ Most likely because Meiteshun's system writes every step of an order, delivery i
 
 ### Who delivers Meiteshun parcels in my country?
 
-Meiteshun's steps don't say: none names a delivery company. Ask the seller which company delivers your order and for its tracking number.
+Meiteshun's steps don't say: none names a delivery company. Its tracking page can show the delivering company's number under 渠道转单号 (transfer number); if it doesn't, ask the seller which company delivers your order and for its tracking number.
 
 ### Who do I contact about a missing Meiteshun parcel?
 
 The seller you ordered from: it booked the parcel with Meiteshun. If neither the seller nor the marketplace helps, 17TRACK lists an email address for Meiteshun, szmeiteshun@163.com.
 
 :::sources
-- [17TRACK: MTSCN tracking](https://www.17track.net/en/carriers/mtscn) – email address listed for Meiteshun, no phone
+- [17TRACK: MTSCN tracking](https://www.17track.net/en/carriers/mtscn) – email address, website and Shenzhen office listed for Meiteshun, no phone
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee from 1 November 2026
-- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item sold at a distance, whatever its value
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, Hualei platform, AMTS number shape, the tracker and its links, search by reference, the script and its wordings, places and Beijing clock, steps written in advance, the answer for an unknown number, service name, no delivery company in the steps, the Swiss Post hand-over, what Peek shows, holds back and leaves out
+- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item sold at a distance, whatever its value, counted per declaration line (one per kind of product) like the €3 duty
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, Hualei platform, AMTS number shape, the tracker and its links, search by reference, the script and its wordings, places and Beijing clock, steps written in advance, the answer for an unknown number, the platform's Chinese line, service name, no delivery company in the steps, the tracking page's transfer-number and tracking-number columns, the Swiss Post hand-over, what Peek shows, holds back and leaves out
 :::

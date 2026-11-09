@@ -51,7 +51,7 @@ Pour savoir quand attendre encore : [le suivi ne se met pas à jour](guide:track
 - **Demande un nouveau délai par écrit.** Fixe au vendeur un délai supplémentaire raisonnable, par lettre recommandée avec demande d'avis de réception ou sur un autre support durable, comme un e-mail.
 - **Annule si rien n'arrive.** Annule la commande de la même manière, par lettre recommandée ou par écrit.
 - **Annule tout de suite** si le vendeur refuse de livrer, ou si la date était essentielle, par exemple parce que la commande était liée à un événement précis et que tu l'avais signalé à la commande.
-- **Fais-toi rembourser.** Après l'annulation, le vendeur doit te rembourser la totalité des sommes versées dans les 14 jours. S'il rembourse en retard, la somme est majorée de 10 % jusqu'à 30 jours après l'annulation, de 20 % jusqu'à 60 jours, puis de 50 %.
+- **Fais-toi rembourser.** Après l'annulation, le vendeur doit te rembourser la totalité des sommes versées dans les 14 jours. S'il rembourse en retard, la somme est majorée de 10, 20 ou 50 % selon le retard.
 
 Ces règles figurent aux articles L216-1 à L216-8 du Code de la consommation, et Service-Public.fr propose un modèle de lettre pour annuler une commande livrée en retard.
 

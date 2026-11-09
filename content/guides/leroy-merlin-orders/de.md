@@ -51,7 +51,7 @@ Wann Warten noch normal ist: [Sendungsverfolgung aktualisiert sich nicht](guide:
 - **Schriftlich eine neue Frist setzen.** Gib dem Verkäufer eine angemessene Nachfrist, per Einschreiben mit Rückschein oder auf einem anderen dauerhaften Datenträger, etwa per E-Mail.
 - **Zurücktreten, wenn die Ware immer noch nicht kommt.** Storniere die Bestellung auf dieselbe Weise, per Einschreiben oder schriftlich.
 - **Sofort zurücktreten**, wenn der Verkäufer die Lieferung verweigert oder wenn das Datum entscheidend war, zum Beispiel weil die Bestellung für einen bestimmten Anlass war und du das bei der Bestellung gesagt hast.
-- **Geld zurück.** Nach dem Rücktritt muss dir der Verkäufer alles, was du bezahlt hast, innerhalb von 14 Tagen erstatten. Zahlt er zu spät, erhöht sich der Betrag um 10 % bis 30 Tage nach dem Rücktritt, um 20 % bis 60 Tage und danach um 50 %.
+- **Geld zurück.** Nach dem Rücktritt muss dir der Verkäufer alles, was du bezahlt hast, innerhalb von 14 Tagen erstatten. Zahlt er zu spät, erhöht sich der Betrag je nach Verspätung um 10, 20 oder 50 %.
 
 Service-Public.fr, die Informationsseite der französischen Regierung, hat einen Musterbrief für den Rücktritt von einer verspäteten Bestellung.
 

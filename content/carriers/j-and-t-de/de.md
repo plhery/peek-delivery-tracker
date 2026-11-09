@@ -3,7 +3,7 @@ title: J&T Express Sendungsverfolgung: JTDE-Nummer und Status
 description: J&T-Paket in Deutschland verfolgen: wie eine JTDE-Nummer aussieht, was jede Zeile der Sendungsverfolgung heißt und was du tust, wenn das Paket fehlt.
 slug: jt-express-sendungsverfolgung
 published: 2026-10-21
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
 J&T Express Germany (J&T Express Germany GmbH aus Frankfurt am Main) ist das deutsche Netz der Paketgruppe J&T Express und stellt Pakete in Deutschland zu. Hat ein Shop deine Bestellung mit J&T verschickt, beginnt die Sendungsnummer mit `JTDE`: Füg sie oben ins Feld ein oder schau in der [Sendungsverfolgung auf jtexpress.de](https://www.jtexpress.de/tracking) nach. Der Shop, der deine Bestellung verschickt hat, kennt die Nummer: Sie steht in seiner Versand-E-Mail oder in deinen Bestelldetails.
@@ -16,6 +16,8 @@ Laut FAQ von J&T beginnt die Sendungsnummer mit JTDE. Peek kennt dafür nur eine
 | --- | --- |
 | `JTDE000000000000` | `JTDE` und 12 Ziffern: ein Paket von J&T Express Germany. Peek erkennt J&T Express Germany sofort. |
 | `JTDE00000000000` | Eine Ziffer zu wenig: keine Nummer von J&T Express Germany, und Peek erkennt keinen Paketdienst. Prüf, ob eine Ziffer fehlt. |
+
+Hat eine Nummer nach `JTDE` eine Ziffer zu wenig oder zu viel und antwortet kein Paketdienst, weist dich die Seite des Pakets auf peektracker.com darauf hin („Das beginnt wie eine Sendungsnummer von J&T Express Germany, aber ein Zeichen fehlt.“ bzw. „…, hat aber ein Zeichen zu viel.“) und rät dir, sie mit deiner Versandnachricht zu vergleichen.
 
 **Wo sie steht.** Laut J&T bekommst du sie vom Absender, und sie steht auf der Bestellseite des Online-Shops, in der Bestellbestätigung, in der Versandbenachrichtigung per E-Mail oder SMS, in E-Mails vor oder nach der Zustellung und auf dem Paketschein. Findest du sie nicht, schickt dich J&T zum Absender oder zum Kundenservice der Einkaufsplattform. Lies auch nach, [wie du die Sendungsnummer findest](guide:find-tracking-number).
 
@@ -78,11 +80,11 @@ Den Auftrag an J&T hat der Shop erteilt, bei einem Online-Kauf ist er also deine
 
 **Zugestellt, aber nicht da.** Lies den Zustellsatz in Peek: Nennt er einen Ort, etwa `Mailbox` oder `Garage`, schau dort nach. Steht dort `Left with neighbor`, frag deine Nachbarn oder lass dir in der Sendungsverfolgung von J&T zeigen, welcher es ist (siehe oben). Die FAQ von J&T rät außerdem nachzufragen, ob Familie, Nachbarn, die Hausverwaltung oder andere Berechtigte das Paket angenommen haben. Immer noch nichts? Melde es der Hotline von J&T und bitte den Shop mit deiner Sendungsnummer um Erstattung oder ein neues Paket. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Verloren, beschädigt oder zurück.** Bitte den Shop mit deiner Sendungsnummer um Erstattung oder Ersatz. Ein Schadensformular, Fristen oder eine Entschädigung für Empfänger nennt die FAQ von J&T nicht; die Fristen stehen im Gesetz. Einen sichtbaren Schaden zeigst du dem Paketdienst nach § 438 HGB spätestens bei der Ablieferung an (dann genügt es, ihn dem Zusteller zu nennen), einen verdeckten innerhalb von sieben Tagen danach in Textform, etwa per E-Mail an J&T. Einigst du dich mit J&T über Verlust oder Beschädigung nicht, kannst du auch als Empfänger die gebührenfreie Schlichtungsstelle Post der Bundesnetzagentur anrufen. Bei E-Commerce-Sendungen großer Onlinehändler gelten aber in der Regel Sonderbedingungen, die eine Schlichtung ausschließen; dann bleibt dir der Verbraucherservice Post der Bundesnetzagentur. Mehr in [Paket verloren](guide:lost-parcel), [Paket beschädigt](guide:damaged-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
+**Verloren, beschädigt oder zurück.** Bitte den Shop mit deiner Sendungsnummer um Erstattung oder Ersatz. Ein Schadensformular, Fristen oder eine Entschädigung für Empfänger nennt die FAQ von J&T nicht; die Fristen stehen im Gesetz. Einen sichtbaren Schaden zeigst du dem Paketdienst nach § 438 HGB spätestens bei der Ablieferung an (dann genügt es, ihn dem Zusteller zu nennen), einen verdeckten innerhalb von sieben Tagen danach in Textform, etwa per E-Mail an J&T; für die Frist zählt, dass du die Anzeige rechtzeitig abschickst. Einigst du dich mit J&T über Verlust oder Beschädigung nicht, kannst du auch als Empfänger die gebührenfreie Schlichtungsstelle Post der Bundesnetzagentur anrufen; den Antrag stellst du am besten über ihr Online-Formular. Bei E-Commerce-Sendungen großer Onlinehändler gelten aber in der Regel Sonderbedingungen, die eine Schlichtung ausschließen; dann bleibt dir der Verbraucherservice Post der Bundesnetzagentur. Mehr in [Paket verloren](guide:lost-parcel), [Paket beschädigt](guide:damaged-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
 
 ## J&T Kontakt und Kundenservice
 
-So stand es am 3. November 2026 auf der [Kontaktseite von J&T](https://www.jtexpress.de/contact):
+So stand es am 10. November 2026 auf der [Kontaktseite von J&T](https://www.jtexpress.de/contact):
 
 - **Hotline:** +49 6931090650, Mo. – Fr. 8:00 bis 20:00 Uhr, an Feiertagen geschlossen.
 - **Live-Chat:** „Chat starten“ auf der Kontakt- und der FAQ-Seite.
@@ -96,7 +98,7 @@ Bei einer Online-Bestellung ist trotzdem der Shop deine erste Adresse: Er hat di
 
 [Peek](/) erkennt eine `JTDE`-Nummer sofort als J&T Express Germany („Erkannter Paketdienst“), mit oder ohne Leerzeichen, groß oder klein geschrieben, und fragt die Sendungsverfolgung von J&T nur mit der Nummer ab: ohne Postleitzahl und ohne Konto. Einen Link von www.jtexpress.de/tracking mit `?q=` und der Nummer kannst du ebenfalls einfügen; steht darin eine Nummer anderer Form, liest Peek sie, als hättest du sie allein eingefügt. Hast du eine Nummer anderer Form, füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Wählst du für eine andere Nummer über „Ändern“ J&T Express Germany, hilft das nicht: Peek schreibt dann, J&T Express Germany „vergibt keine Nummern wie diese“.
 
-Peek zeigt den Status, jeden Scan mit genauer Uhrzeit und den Zeitpunkt der Zustellung. J&T gibt jeden Scan als genauen Zeitpunkt an, Peek zeigt ihn also in der Zeitzone deines Geräts. Die Scans zeigt Peek im englischen Wortlaut von J&T. Orte, einen erwarteten Zustelltag oder das Gewicht gibt J&T nicht heraus, Peek zeigt also keine Karte. Bei sehr langem Verlauf behält Peek die neuesten 100 Scans. „Website von J&T Express Germany öffnen“ auf der Seite des Pakets öffnet deine Nummer in der Sendungsverfolgung von J&T.
+Peek zeigt den Status, jeden Scan mit genauer Uhrzeit und den Zeitpunkt der Zustellung. J&T gibt jeden Scan als genauen Zeitpunkt an, Peek zeigt ihn also in der Zeitzone deines Geräts; auf peektracker.com steht sie in der letzten Zeile unter dem Verlauf („Uhrzeiten in deiner Zeitzone: …“). Die Scans zeigt Peek im englischen Wortlaut von J&T. Orte, einen erwarteten Zustelltag oder das Gewicht gibt J&T nicht heraus, Peek zeigt also keine Karte. Bei sehr langem Verlauf behält Peek die neuesten 100 Scans. „Website von J&T Express Germany öffnen“ auf der Seite des Pakets öffnet deine Nummer in der Sendungsverfolgung von J&T.
 
 Bis J&T das Paket scannt, zeigt Peek „Warten auf den Paketdienst“ und fragt weiter nach. Ist die Sendungsverfolgung von J&T nicht erreichbar oder kennt sie die Nummer nicht, fragt Peek bei Tracking-Diensten nach und zeigt deren Verlauf in deren Worten.
 
@@ -137,7 +139,7 @@ Ruf +49 6931090650 an (Mo. – Fr. 8:00 bis 20:00 Uhr), nutze den Live-Chat auf 
 - [Universal Parcel Scraper: gemeinsame Abfrage der J&T-Netze](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – englische Sätze, genaue Scanzeiten, kein Ort, kein Zustelltag, kein Gewicht, Namen und Telefonnummern weggelassen, neueste 100 Scans
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummern anderer J&T-Netze, keine Übergabe an einen anderen Paketdienst, Tracking-Dienste als Rückfall
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – Transportrisiko beim Verbrauchsgüterkauf
-- [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – Schadensanzeige bei der Ablieferung, verdeckte Schäden binnen sieben Tagen, Textform
+- [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – Schadensanzeige bei der Ablieferung, verdeckte Schäden binnen sieben Tagen, Textform, rechtzeitige Absendung genügt
 - [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – J&T Express Germany GmbH, eingetragen am 1. September 2026
-- [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – Antrag auch durch Empfänger, gebührenfrei, Sonderbedingungen bei E-Commerce-Sendungen, Verbraucherservice Post
+- [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – Antrag auch durch Empfänger, Online-Formular, gebührenfrei, Sonderbedingungen bei E-Commerce-Sendungen, Verbraucherservice Post
 :::

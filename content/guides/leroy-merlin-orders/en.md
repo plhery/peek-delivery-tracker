@@ -51,7 +51,7 @@ When waiting is still normal: [tracking not updating](guide:tracking-not-updatin
 - **Ask for a new deadline in writing.** Ask the seller to deliver within a reasonable extra period, by registered letter with acknowledgement of receipt or on another durable medium such as an email.
 - **Cancel if it still doesn't come.** Cancel the order the same way, by registered letter or in writing.
 - **Cancel at once** if the seller refuses to deliver, or if the date was essential, for example because the order was for a set event and you said so when ordering.
-- **Get your money back.** After a cancellation, the seller must refund everything you paid within 14 days. If it pays late, the amount goes up by 10% up to 30 days after the cancellation, 20% up to 60 days and 50% after that.
+- **Get your money back.** After a cancellation, the seller must refund everything you paid within 14 days. If it pays late, the amount goes up by 10%, 20% or 50%, depending on how late it is.
 
 Service-Public.fr, the French government's information site, has a template letter for cancelling a late order.
 

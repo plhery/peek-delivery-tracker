@@ -293,6 +293,47 @@ describe('withEventPlaces', () => {
       .toBe('Processing at designated facility');
   });
 
+  it('serves an earlier carrier\'s copy in words that read as a stage neither row is in, in the words of the scan it tells', () => {
+    const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const row = {
+      id: 'parcel', carrier: 'topyou', carrier_data: { original_carrier: 'topyou', active_tracking_carrier: 'gofo-it' },
+      tracking_events: [
+        // TopYou tells GOFO's transfer centre in a code it means as in transit, worded as out for delivery.
+        scan('transfer', 'gofo-it', '2026-10-29T10:30:17+00:00', 'Milano', 'Registrato presso il centro di trasferimento'),
+        scan('transfer-copy', 'topyou', '2026-10-29T10:30:17+00:00', null, 'Shipment is out for delivery'),
+        // On top, as it alone names the place, it is served in the carrier's words too.
+        scan('left', 'gofo-it', '2026-10-30T16:25:17+00:00', null, 'Il pacco ha lasciato il centro di smistamento'),
+        scan('left-copy', 'topyou', '2026-10-30T16:25:17+00:00', 'Milano', 'Shipment is out for delivery'),
+        // Words in the copy's stage, or in the scan's, keep their own.
+        scan('sorted', 'gofo-it', '2026-10-31T06:49:14+00:00', 'Milano', 'Registrato presso il centro di smistamento'),
+        scan('sorted-copy', 'topyou', '2026-10-31T06:49:14+00:00', null, 'In transit'),
+        scan('handed', 'gofo-it', '2026-11-01T08:00:12+00:00', 'Milano', 'Presa in carico', 'accepted'),
+        scan('handed-copy', 'topyou', '2026-11-01T08:00:12+00:00', null, 'Parcel handed to GOFO'),
+        scan('cleared', 'gofo-it', '2026-11-02T09:10:11+00:00', 'Milano', 'Arrivato al centro'),
+        scan('cleared-copy', 'topyou', '2026-11-02T09:10:11+00:00', null, 'Customs clearance', 'customs'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of, description }) => [id, relay_of, description])).toEqual([
+      ['transfer', undefined, 'Registrato presso il centro di trasferimento'],
+      ['transfer-copy', 'transfer', 'Registrato presso il centro di trasferimento'],
+      ['left', 'left-copy', 'Il pacco ha lasciato il centro di smistamento'],
+      ['left-copy', undefined, 'Il pacco ha lasciato il centro di smistamento'],
+      ['sorted', undefined, 'Registrato presso il centro di smistamento'],
+      ['sorted-copy', 'sorted', 'In transit'],
+      ['handed', undefined, 'Presa in carico'],
+      ['handed-copy', 'handed', 'Parcel handed to GOFO'],
+      ['cleared', undefined, 'Arrivato al centro'],
+      ['cleared-copy', 'cleared', 'Customs clearance'],
+    ]);
+    // The rows stay as stored, in the account's export too.
+    expect(row.tracking_events[1].description).toBe('Shipment is out for delivery');
+    expect((withoutEventSources(row) as { tracking_events: Record<string, unknown>[] }).tracking_events[1].description)
+      .toBe('Shipment is out for delivery');
+  });
+
   it('serves a carrier\'s repeats of one scan under the newest of them', () => {
     const scan = (id: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), stage: 'failed_attempt', description: 'Address details incorrect',

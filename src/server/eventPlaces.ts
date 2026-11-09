@@ -2,7 +2,7 @@ import 'server-only';
 
 import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { captureOperationalError } from './observability';
-import { CARRIER_DEFINITIONS, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
+import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
@@ -223,6 +223,15 @@ function namesMoreOfThePlace(event: JsonObject, other: JsonObject): boolean {
 }
 
 /**
+ * Whether the earlier carrier's copy tells its scan in words that read as a stage neither row is in: TopYou tells
+ * GOFO's arrival at a transfer centre as "Shipment is out for delivery", in a code it means as in transit.
+ */
+function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
+  const { stage, source } = classifyWording(typeof copy.description === 'string' ? copy.description : '');
+  return source !== 'none' && stage !== copy.stage && stage !== scan.stage;
+}
+
+/**
  * Each relay pair as it is served: the row the apps show under the other, and that row's id
  * (`relay_of`). The earlier carrier's copy goes under the scan it repeats, unless the copy alone
  * says where it was: YunExpress and Yanwen tell Ecoscooting's scans with the town Ecoscooting's
@@ -321,15 +330,20 @@ function placedEvents(row: JsonObject): JsonObject {
   row = withoutPlaceholderAnswers(withoutServiceData(row));
   if (!Array.isArray(row.tracking_events) || !row.tracking_events.length) return row;
   const events = shownEvents(stored);
-  const relays = relayLeads(events, relayCopies({ ...row, tracking_events: events }));
+  const pairs = relayCopies({ ...row, tracking_events: events });
+  const relays = relayLeads(events, pairs);
   const apart = new Set([...relays.keys(), ...relays.values()]);
   const repeats = repeatLeads(events, apart);
   const notices = noticeLeads(events, apart, repeats);
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
-  // otherwise, it is served in the other row's spelling, so they are shown once.
-  const spelt = (event: JsonObject, under: JsonObject | undefined) =>
-    under && sameWords(event, under) && event.description !== under.description ? { ...event, description: under.description } : event;
+  // otherwise, it is served in the other row's spelling, so they are shown once. So is a copy whose words read as
+  // a stage neither row is in, in the words of the carrier whose scan it tells, whichever row is on top.
+  const misled = new Map([...pairs].filter(([copy, scan]) => copyMisleads(byId.get(copy)!, byId.get(scan)!))
+    .map(([copy, scan]) => [copy, byId.get(scan)!.description]));
+  const spelt = (event: JsonObject, under: JsonObject | undefined) => misled.has(String(event.id))
+    ? { ...event, description: misled.get(String(event.id)) }
+    : under && sameWords(event, under) && event.description !== under.description ? { ...event, description: under.description } : event;
   const shown = (event: JsonObject) => {
     const relayOf = relays.get(String(event.id));
     return served(spelt(event, relayOf ? byId.get(relayOf) : undefined),

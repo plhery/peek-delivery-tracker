@@ -56,11 +56,15 @@
 
 .landing-more__actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .landing-more__actions .button svg { width: 19px; height: 19px; }
-/* The App Store's address as a code to scan, for a computer only: on a phone or a tablet the button is the way. */
-.landing-qr { display: none; }
+.landing-more__buttons { display: grid; gap: 10px; }
+/* What getting the Android app takes while it is a closed test, under its button. */
+.landing-more__android { margin: 2px 0 0; color: var(--ink-soft); font-size: 13px; line-height: 1.5; text-wrap: balance; }
+/* Each app's address as a code to scan, for a computer only: on a phone or a tablet the buttons are the way. */
+.landing-qrs { display: none; }
 @media (hover: hover) and (pointer: fine) and (min-width: 820px) {
-  .landing-qr { display: flex; align-items: center; gap: 14px; width: max-content; max-width: 100%; margin-top: 14px; padding: 12px 16px 12px 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+  .landing-qrs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 }
+.landing-qr { display: flex; align-items: center; gap: 14px; width: max-content; max-width: 100%; padding: 12px 16px 12px 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
 .landing-qr img { display: block; width: 92px; height: 92px; border-radius: 6px; }
 .landing-qr > span { display: grid; gap: 3px; font-size: 13px; line-height: 1.4; }
 .landing-qr strong { font-weight: 600; }
@@ -88,14 +92,15 @@
   .landing-phone__main { display: block; padding: 0; }
   .landing-more__rest { gap: 20px; margin-top: 24px; }
   .landing-benefits { gap: 16px; }
-  .landing-passport, .landing-more__actions { justify-content: center; }
+  .landing-passport, .landing-more__actions, .landing-qrs { justify-content: center; }
+  .landing-more__android { justify-self: center; text-align: center; }
   /* The cover and the stamps it holds stand on the middle: the place kept for the next stamp, 38 px and its gap, is matched on the other side. */
   .landing-passport { padding-inline-start: 46px; }
 }
 @media (max-width: 760px) {
   .landing-more { margin-top: 48px; }
   .landing-list { min-height: 474px; }
-  .landing-more__actions { display: grid; justify-content: normal; gap: 6px; }
+  .landing-more__buttons, .landing-more__actions { display: grid; justify-content: normal; gap: 6px; }
   .landing-more__actions a.button { min-height: 44px; padding: 10px 14px; border-radius: 14px; font-size: 13px; font-weight: 550; }
   .landing-more__actions a.button svg { width: 17px; height: 17px; }
 }

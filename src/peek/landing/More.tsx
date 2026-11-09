@@ -3,6 +3,8 @@ import { Icon, type IconName } from '../../components/Icon';
 import { Seal } from '../../components/Seal';
 import { PeekMark } from '../../components/PeekMark';
 import { useI18n, type MessageKey } from '../../i18n';
+import { trackAction } from '../../lib/analytics';
+import { ANDROID_APP_LINK, ANDROID_TEST_OPEN } from '../../lib/androidTest';
 import { appStoreLink } from '../../lib/appStore';
 import { DEMO_PATH } from '../../lib/experience';
 import { usePeekSession } from '../session';
@@ -87,22 +89,37 @@ export function More({ onSignIn, landed }: {
           <span className="landing-stamp landing-stamp--new tone-green" data-landed={landed || undefined}><Seal icon="houses" /></span>
         </div>
       </div>
-      <div className="landing-more__actions">
-        {/* The page has two ways to sign in; this one says what it is for. */}
-        {mine
-          // eslint-disable-next-line @next/next/no-html-link-for-pages -- followed in place: the app itself answers at `/`
-          ? <a className="button button--primary" href="/" onClick={(event) => followInPlace(event, () => mine())}>{t('landing.mine')}</a>
-          : <button type="button" className="button button--primary" onClick={onSignIn}>
-            <span>{t('arrival.signInTitle')}{' '}<span className="sr-only">{t('landing.more.signInFor')}</span></span>
-          </button>}
-        <a className="button button--secondary" href={DEMO_PATH} onClick={followDemoLink}>{t('landing.more.demo')}</a>
-        <a className="button button--secondary" href={appStoreLink('web-more')} target="_blank" rel="noopener noreferrer"><LandingIcon name="iphone" />{t('landing.more.app')}</a>
+      <div className="landing-more__buttons">
+        <div className="landing-more__actions">
+          {/* The page has two ways to sign in; this one says what it is for. */}
+          {mine
+            // eslint-disable-next-line @next/next/no-html-link-for-pages -- followed in place: the app itself answers at `/`
+            ? <a className="button button--primary" href="/" onClick={(event) => followInPlace(event, () => mine())}>{t('landing.mine')}</a>
+            : <button type="button" className="button button--primary" onClick={onSignIn}>
+              <span>{t('arrival.signInTitle')}{' '}<span className="sr-only">{t('landing.more.signInFor')}</span></span>
+            </button>}
+          <a className="button button--secondary" href={DEMO_PATH} onClick={followDemoLink}>{t('landing.more.demo')}</a>
+        </div>
+        {/* The two apps side by side, on a row of their own. */}
+        <div className="landing-more__actions">
+          <a className="button button--secondary" href={appStoreLink('web-more')} target="_blank" rel="noopener noreferrer"><LandingIcon name="iphone" />{t('landing.more.app')}</a>
+          {/* While the Android app is a closed test, the steps lead there: Google Play lets in only the testers' group. */}
+          <a className="button button--secondary" href={ANDROID_APP_LINK} onClick={() => trackAction('android-test-open', undefined, 'landing')}><LandingIcon name="android" />{t('landing.more.android')}</a>
+        </div>
+        {ANDROID_TEST_OPEN && <p className="landing-more__android">{t('landing.more.androidSteps')}</p>}
       </div>
-      {/* On a computer the app is a scan away. */}
-      <div className="landing-qr">
-        {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
-        <img src="/landing/app-store-qr.svg" alt="" width={92} height={92} loading="lazy" />
-        <span><strong>{t('landing.more.qr.title')}</strong><span>{t('landing.more.qr.body')}</span></span>
+      {/* On a computer each app is a scan away. */}
+      <div className="landing-qrs">
+        <div className="landing-qr">
+          {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
+          <img src="/landing/app-store-qr.svg" alt="" width={92} height={92} loading="lazy" />
+          <span><strong>{t('landing.more.qr.title')}</strong><span>{t('landing.more.qr.body')}</span></span>
+        </div>
+        {ANDROID_TEST_OPEN && <div className="landing-qr">
+          {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
+          <img src="/landing/android-qr.svg" alt="" width={92} height={92} loading="lazy" />
+          <span><strong>{t('landing.more.qr.androidTitle')}</strong><span>{t('landing.more.qr.androidBody')}</span></span>
+        </div>}
       </div>
     </div>
   </section>;

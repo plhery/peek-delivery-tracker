@@ -107,12 +107,23 @@ describe('Landing', () => {
     expect(screen.getByText('Scan with your iPhone').closest('.landing-qr')?.querySelector('img')).toHaveAttribute('src', '/landing/app-store-qr.svg');
   });
 
-  it('ends with the name, the privacy notice, the iPhone app, the code and the language', () => {
+  it('offers the Android app beside the iPhone app, through the closed test\'s steps, which it sums up', () => {
+    render(<Landing onSignIn={onSignIn} />);
+    const android = screen.getByRole('link', { name: 'Get the Android app' });
+    expect(android).toHaveAttribute('href', '/android');
+    expect(android.parentElement).toBe(screen.getByRole('link', { name: 'Get the iPhone app' }).parentElement);
+    expect(screen.getByText(/^The Android app is in early access: join the testers’ group, become a tester on Google Play, then install it\.$/)).toBeInTheDocument();
+    // A computer is shown the steps' address as a code to scan with the phone.
+    expect(screen.getByText('Scan with your Android phone').closest('.landing-qr')?.querySelector('img')).toHaveAttribute('src', '/landing/android-qr.svg');
+  });
+
+  it('ends with the name, the privacy notice, the iPhone and Android apps, the code and the language', () => {
     render(<LandingFooter />);
     const footer = screen.getByRole('contentinfo');
     expect(footer).toHaveTextContent('Peek · Universal Parcel Tracker');
     expect(within(footer).getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', '/privacy.html');
     expect(within(footer).getByRole('link', { name: 'iPhone app' })).toHaveAttribute('href', expect.stringContaining('&ct=web-footer&'));
+    expect(within(footer).getByRole('link', { name: 'Android app' })).toHaveAttribute('href', '/android');
     expect(within(footer).getByRole('link', { name: 'GitHub' })).toHaveAttribute('target', '_blank');
     expect(within(footer).getByRole('combobox', { name: 'Language' })).toHaveValue('en');
   });

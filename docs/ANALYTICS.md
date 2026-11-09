@@ -80,8 +80,9 @@ are virtual names, never real URLs.
 - **Android test** (web): the invitation to test the Android app shown (once per page load
   and place), opened (also from the thanks' "Didn't work?"), hidden for a week with ×, or never again; on its steps page
   (`android-test`), each step's link followed: the testers' group, Google Play's opt-in and the
-  install. The parcel page holds it twice, so its events say where: `spot` is `parcel` for the
-  page's row, `alerts` for "Notify me" and `home` for the home page's banner. Google Play
+  install. Its events say where they come from: `spot` is `parcel` for the parcel page's row,
+  `alerts` for its "Notify me", `home` for the home page's banner, and `landing` and `footer` for
+  the landing's "Get the Android app" button and footer link (opened only). Google Play
   counts the testers ([Google Play](google-play/README.md)).
 - **Settings**: language, appearance, notifications and the App Store link beside them,
   widgets, export, account deletion, app opens.

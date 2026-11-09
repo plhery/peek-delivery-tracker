@@ -4,7 +4,7 @@ description: Encomenda não entregue porque não estavas em casa? O que diz o av
 slug: encomenda-nao-entregue
 picture: Uma porta de casa com um aviso enfiado por baixo, uma carrinha já ao longe e o Pip a chegar ofegante, um instante tarde demais.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-11-09
 ---
 
 Se a encomenda não foi entregue porque não estavas em casa, o aviso em papel, o SMS ou o e-mail diz-te onde ela está agora e até quando espera por ti. Nos CTT, segue em geral para uma Loja CTT, um Ponto CTT, um Agente Payshop ou um cacifo Locky, e levantas com o aviso e um documento de identificação. Uma nova tentativa de entrega só acontece se o remetente a contratou; numa Encomenda Postal dos CTT, pedes tu e pagas.
@@ -25,8 +25,8 @@ O aviso de cada transportadora, e o que acontece a seguir:
 | [CTT](carrier:ctt), Encomenda Postal | Aviso de entrega em papel na caixa do correio | Fica numa Loja ou Ponto CTT; uma nova entrega só se a pedires |
 | CTT, Encomenda Expresso | SMS ou e-mail; em papel só sem telemóvel português nem e-mail válido | O que o remetente contratou: mais tentativas, um ponto CTT, a devolução ou a espera por instruções |
 | GLS | Aviso de Passagem | Primeiro tenta um vizinho; depois, o GLS Point mais próximo. Sem GLS Point perto, ou à cobrança, segunda tentativa no dia útil seguinte |
-| DPD | Aviso de passagem na caixa do correio, com o número da encomenda | Escolhes outro dia, outro local ou um ponto Pickup, no site da DPD |
-| [InPost](carrier:inpost) | Contacto da agência de distribuição | A agência liga-te para combinar uma nova data |
+| [DPD](carrier:dpd-pt) | Aviso de passagem na caixa do correio, com o número da encomenda | Escolhes outro dia, outro local ou um ponto Pickup, no site da DPD |
+| [InPost](carrier:inpost) | Contacto da agência de distribuição | A agência contacta-te para combinar uma nova data |
 
 ## «Entrega não conseguida»: quantas tentativas de entrega fazem os CTT?
 
@@ -43,7 +43,7 @@ A encomenda vai parar ao balcão quando ninguém a pode receber em mão ou quand
 No site, na app ou pelo telefone da própria transportadora, a partir do código do aviso.
 
 - **CTT, Encomenda Postal:** pede uma nova entrega, na mesma morada ou noutra, ou o levantamento noutra Loja CTT. Faz-se no site dos CTT, numa Loja ou Ponto CTT ou pela Linha de Apoio 21 047 16 16 (dias úteis, das 8h30 às 19h30), até 3 dias úteis depois da data do aviso. Custa 4,15 € (nova entrega) ou 3,40 € (outra loja), mais IVA.
-- **CTT, Encomenda Expresso (código começado por D):** no Seguir objeto ou na App CTT podes pedir uma nova tentativa na mesma morada, outra morada, uma Loja ou Ponto CTT, ou outra data (até 5 dias úteis além do prazo de entrega), e pagas o custo que aparece no fim. Os CTT analisam o pedido em 24 a 48 horas. Nos códigos DS e DT, pede-se pela Linha de Apoio; nos DD, DE, DF e DZ, só o remetente pode pedir. Se a encomenda já ficou à tua espera numa Loja ou Ponto CTT depois da entrega falhada, já não dá para alterar.
+- **CTT, Encomenda Expresso (código começado por D):** no Seguir objeto ou na App CTT podes pedir uma nova tentativa na mesma morada, outra morada, uma Loja ou Ponto CTT, ou outra data (até 5 dias úteis além do prazo de entrega), e pagas o custo que aparece no fim. Sem contrato do remetente com os CTT, uma nova tentativa custa 4,53 € (Para Amanhã) ou 4,52 € (Em Dois Dias) e outra data 5,01 €, mais IVA; com contrato, paga ele. Os CTT analisam o pedido em 24 a 48 horas. Nos códigos DS e DT, pede-se pela Linha de Apoio; nos DD, DE, DF e DZ, só o remetente pode pedir. Se a encomenda já ficou à tua espera numa Loja ou Ponto CTT depois da entrega falhada, já não dá para alterar.
 - **GLS:** sem GLS Point perto, ou numa encomenda à cobrança, a GLS volta no dia útil seguinte. Se a segunda tentativa também falhar, a encomenda volta ao expedidor depois de 10 dias úteis no armazém.
 - **DPD:** vai a dpd.pt, «Receber uma Encomenda», com o número do aviso de passagem, e escolhe outro dia, outro local ou um ponto Pickup.
 - **InPost:** numa entrega em casa, é a agência de distribuição da InPost que te contacta para combinar uma nova data.
@@ -80,7 +80,7 @@ A carta de condução só conta nos CTT se tiver o nome completo, a assinatura e
 Quase sempre dá, com a autorização do destinatário e a identificação de quem vai.
 
 - **CTT, aviso em papel:** quem vai assina o campo «Identificação do representante» e o destinatário o campo «Identificação do destinatário». Quem vai leva o aviso e os documentos originais dos dois, e as assinaturas têm de bater certo com os documentos.
-- **CTT, aviso por SMS ou e-mail:** reencaminha-o; quem vai mostra-o no telemóvel, com a própria identificação.
+- **CTT, aviso por SMS ou e-mail:** reencaminha-o; quem vai mostra-o no telemóvel, com a própria identificação. Sem o SMS ou o e-mail, precisa de uma procuração feita por advogado ou notário.
 - **CTT, de forma regular:** a Representação Postal autoriza uma ou duas pessoas durante um ano, renovável, numa Loja CTT específica; pede-se nessa loja e não serve para Encomendas Expresso.
 - **GLS:** uma autorização escrita informal com o teu nome e morada e os da pessoa que vai, ou o formulário do Aviso de Passagem, mais a identificação dela.
 - **DPD:** um formulário de autorização preenchido pelo destinatário e a identificação de quem vai.
@@ -100,13 +100,13 @@ Se o seguimento diz entregue e não tens nada, vê [encomenda dada como entregue
 
 ## Até quando fica a encomenda à tua espera?
 
-A data-limite está no aviso. Nos CTT, uma Encomenda Postal fica 10 dias úteis numa Loja ou Ponto CTT, a contar do dia útil seguinte ao aviso; num cacifo Locky ou num Locker da InPost, só 5 dias. Depois, volta para o remetente. Os prazos de cada transportadora, como prolongá-los e o reembolso estão em [quanto tempo tenho para levantar uma encomenda](guide:uncollected-parcel).
+A data-limite está no aviso. Nos CTT, uma Encomenda Postal fica 10 dias úteis numa Loja ou Ponto CTT (15 dias se vier do estrangeiro: os CTT ora dizem seguidos, ora úteis), a contar do dia útil seguinte ao aviso, e uma Encomenda Expresso nacional, 5 dias úteis; num cacifo Locky ou num Locker da InPost, só 5 dias. Num GLS Point são 10 dias úteis; num ponto Pickup da DPD, 7 ou 10 dias úteis, e num Locker da DPD, 72 horas. Depois, volta para o remetente. Os prazos de cada transportadora, como prolongá-los e o reembolso estão em [quanto tempo tenho para levantar uma encomenda](guide:uncollected-parcel).
 
 ## SMS de entrega falhada a pedir pagamento
 
 > Um SMS a dizer que a entrega falhou e que tens de reagendar, pagar uma pequena taxa ou corrigir a morada num link é a burla clássica. Os CTT alertam para SMS falsos sobre entregas não efetuadas que pedem reagendamento: o link não é dos CTT e serve para recolher dados pessoais. Não toques: escreve tu o número de seguimento no site ou na app da transportadora.
 
-Uma nova entrega dos CTT paga-se, sim, mas no site ou na App CTT, numa Loja ou Ponto CTT ou pela Linha de Apoio, nunca por um link num SMS. Mais em [como reconhecer uma burla CTT por SMS](guide:delivery-scam-texts). Para saberes das tentativas falhadas verdadeiras, o Peek manda-te uma notificação com a opção «Passos importantes», que inclui as tentativas falhadas; pedir a nova entrega continua a ser com a transportadora.
+Uma nova entrega dos CTT paga-se, sim, mas no site ou na App CTT, numa Loja ou Ponto CTT ou pela Linha de Apoio, nunca por um link num SMS. A 4 de novembro de 2026, os CTT alertaram ainda para um site falso de «alterar entrega», com um endereço parecido com o seu. Mais em [como reconhecer uma burla CTT por SMS](guide:delivery-scam-texts). Para saberes das tentativas falhadas verdadeiras, o Peek manda-te uma notificação com a opção «Passos importantes», que inclui as tentativas falhadas; pedir a nova entrega continua a ser com a transportadora.
 
 ## Como reclamar de uma encomenda não entregue?
 
@@ -116,21 +116,21 @@ Reclama primeiro à transportadora e guarda a referência. Numa compra online, f
 | --- | --- |
 | Livro de Reclamações | Em papel, em qualquer balcão de correios, incluindo os postos em papelarias ou Juntas de Freguesia; ou online, no site dos CTT ou no Portal do Consumidor da ANACOM |
 | ANACOM | Se o carteiro deixou aviso sem tocar, diz-te para reclamares à transportadora; não resolve o teu caso por ti |
-| Centros de Arbitragem de Conflitos de Consumo | Para serviços postais, seja qual for o valor, mas só depois de teres reclamado à empresa |
+| Centros de Arbitragem de Conflitos de Consumo | Para serviços postais, seja qual for o valor, mas só depois de teres reclamado à empresa. Podes reclamar online, quase sempre sem taxas, e o caso resolve-se em 90 dias |
 
 :::sources
-- [CTT: Entrega não conseguida](https://www.ctt.pt/ajuda/particulares/receber/problemas-na-entrega/entrega-nao-conseguida) – destino do envio, nova tentativa se contratada, Encomenda Postal, Encomenda Expresso, aviso em papel, SMS ou e-mail, devolução sem cancelamento
-- [CTT: Alterar entrega de Correio ou Encomenda Postal](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-de-correio) – nova entrega ou outra loja, 4,15 € e 3,40 € mais IVA, 3 dias úteis, Linha de Apoio, códigos C, G, L, O, R, U e V
-- [CTT: Tenho um código que começa por D](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/alterar/tenho-um-codigo-que-comeca-por-d-o-que-posso-fazer) – alterações à Encomenda Expresso, 24 a 48 horas, códigos DS e DT pela Linha de Apoio, códigos só do remetente
-- [CTT: Alterar entrega de encomenda Expresso](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-expresso) – alterações pagas, nada a alterar depois de avisada numa Loja ou Ponto CTT
-- [CTT: Prazo para levantar e onde se dirigir](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – prazos, dia útil seguinte ao aviso, disponível no próprio dia, notificação, cacifo Locky
-- [CTT: Como efetuar o levantamento num Ponto de Contacto CTT](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/o-que-precisa-de-levar-consigo) – confirmar antes de ir, documentos aceites, PIN do cacifo, sem aviso
-- [CTT: Autorizar outra pessoa a levantar](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/autorizar-outra-pessoa-a-levantar) – aviso assinado ou reencaminhado, Representação Postal, exceções
-- [CTT: Alertas de phishing](https://www.ctt.pt/transversais/alertas-de-phishing) – SMS falsos sobre entregas não efetuadas e reagendamento
-- [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – vizinho, Aviso de Passagem, GLS Point, segunda tentativa, 10 dias úteis, identificação, autorização
-- [DPD Portugal: Perguntas frequentes, receber encomendas](https://www.dpd.com/pt/pt/ajuda/faq/receber-encomendas/) – aviso de passagem, número da encomenda, redirecionar
-- [DPD Portugal: Perguntas frequentes sobre pontos Pickup](https://www.dpd.com/pt/pt/ajuda/faq/pickup/) – SMS à chegada ao ponto Pickup, autorização para levantar
-- [InPost: Fala connosco, perguntas frequentes](https://www.inpost.pt/fala-connosco) – ausência na entrega em casa, aviso por e-mail ou SMS, 5 dias seguidos, documentos, PIN do Locker, autorização a terceiros
-- [ANACOM: Perguntas frequentes sobre serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – aviso deixado sem tocar, entrega no domicílio, Livro de Reclamações
-- [gov.pt: Resolução de conflitos de consumo](https://www.gov.pt/guias/resolucao-de-conflitos-de-consumo) – centros de arbitragem, serviços postais seja qual for o valor, reclamar primeiro à empresa
+- [CTT: Entrega não conseguida](https://www.ctt.pt/ajuda/particulares/receber/problemas-na-entrega/entrega-nao-conseguida) – destino do envio, nova tentativa se contratada, Encomenda Postal, Encomenda Expresso, aviso em papel, SMS ou e-mail, devolução sem cancelamento (consultado a 9 de novembro de 2026)
+- [CTT: Alterar entrega de Correio ou Encomenda Postal](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-de-correio) – nova entrega ou outra loja, 4,15 € e 3,40 € mais IVA, 3 dias úteis, Linha de Apoio, códigos C, G, L, O, R, U e V, 15 dias seguidos para encomendas internacionais (consultado a 9 de novembro de 2026)
+- [CTT: Tenho um código que começa por D](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/alterar/tenho-um-codigo-que-comeca-por-d-o-que-posso-fazer) – alterações à Encomenda Expresso, 24 a 48 horas, códigos DS e DT pela Linha de Apoio, códigos só do remetente (consultado a 9 de novembro de 2026)
+- [CTT: Alterar entrega de encomenda Expresso](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-expresso) – alterações pagas, preços sem contrato, nada a alterar depois de avisada numa Loja ou Ponto CTT (consultado a 9 de novembro de 2026)
+- [CTT: Prazo para levantar e onde se dirigir](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – prazos por produto, dia útil seguinte ao aviso, disponível no próprio dia, notificação, cacifo Locky (consultado a 9 de novembro de 2026)
+- [CTT: Como efetuar o levantamento num Ponto de Contacto CTT](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/o-que-precisa-de-levar-consigo) – confirmar antes de ir, documentos aceites, PIN do cacifo, sem aviso (consultado a 9 de novembro de 2026)
+- [CTT: Autorizar outra pessoa a levantar](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/autorizar-outra-pessoa-a-levantar) – aviso assinado ou reencaminhado, procuração, Representação Postal, exceções (consultado a 9 de novembro de 2026)
+- [CTT: Alertas de phishing](https://www.ctt.pt/transversais/alertas-de-phishing) – SMS falsos sobre entregas não efetuadas e reagendamento, site falso de 4 de novembro (consultado a 9 de novembro de 2026)
+- [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – vizinho, Aviso de Passagem, GLS Point e prazo, segunda tentativa, 10 dias úteis, identificação, autorização (consultado a 9 de novembro de 2026)
+- [DPD Portugal: Perguntas frequentes, receber encomendas](https://www.dpd.com/pt/pt/ajuda/faq/receber-encomendas/) – aviso de passagem, número da encomenda, redirecionar (consultado a 9 de novembro de 2026)
+- [DPD Portugal: Perguntas frequentes sobre pontos Pickup](https://www.dpd.com/pt/pt/ajuda/faq/pickup/) – SMS à chegada ao ponto Pickup, prazos no Pickup e no Locker, autorização para levantar (consultado a 9 de novembro de 2026)
+- [InPost: Fala connosco, perguntas frequentes](https://www.inpost.pt/fala-connosco) – ausência na entrega em casa, aviso por e-mail ou SMS, 5 dias seguidos, documentos, PIN do Locker, autorização a terceiros (consultado a 9 de novembro de 2026)
+- [ANACOM: Perguntas frequentes sobre serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – aviso deixado sem tocar, entrega no domicílio, Livro de Reclamações (consultado a 9 de novembro de 2026)
+- [gov.pt: Resolução de conflitos de consumo](https://www.gov.pt/guias/resolucao-de-conflitos-de-consumo) – centros de arbitragem, serviços postais seja qual for o valor, reclamar primeiro à empresa, online, custos, 90 dias (consultado a 9 de novembro de 2026)
 :::

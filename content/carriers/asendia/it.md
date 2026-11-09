@@ -22,7 +22,7 @@ Asendia non pubblica formati né esempi. Queste sono le forme che Peek collega a
 | `ESUS000000000` | ESUS e 9 cifre: può essere Asendia, ma anche DHL eCommerce. |
 | `AS000000005CH` | Comincia allo stesso modo ma finisce con CH: è un numero della [Posta Svizzera](carrier:swiss-post). |
 | `LA000000005FR` | Numero postale internazionale francese: è di La Poste / Colissimo. |
-| `EEUS000000000US0` | Riferimento di eBay International Shipping: da solo non indica nessun corriere. |
+| `EEUS000000000US0` | Riferimento di eBay International Shipping: può essere Asendia, ma anche DHL eCommerce. |
 
 Un codice fatto di due lettere, nove cifre e due lettere è un numero postale internazionale: le ultime due lettere dicono quale posta l'ha emesso (`CH` Posta Svizzera, `FR` La Poste, `IT` [Poste Italiane](carrier:poste-italiane)). Attento quindi: `AS…US` è Asendia, `AS…CH` no. Se un numero non funziona, Asendia ti chiede di controllare di essere sul suo sito di tracciamento. Altre forme in [come capire il corriere dal numero](guide:tracking-number-formats).
 

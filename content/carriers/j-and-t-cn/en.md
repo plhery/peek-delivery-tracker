@@ -3,7 +3,7 @@ title: J&T Express China tracking: 极兔速递 numbers, statuses, contact
 description: Track a J&T Express China (极兔速递) parcel: what a JT number looks like, what 已签收 and J&T's other statuses mean, where parcels wait and how to reach J&T.
 slug: jt-express-china-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-09
 ---
 
 J&T Express China (极兔速递) is J&T Express's network in China, operating since March 2020. A J&T China number usually belongs to a parcel inside China, often an online order on its way to you, a friend or a forwarder's warehouse. Track it on [J&T's tracker](https://www.jtexpress.com.cn/service.html), which is in Chinese, or in the box above. J&T China's own international service flies only to seven countries in Southeast Asia. Elsewhere, such as in the US or the UK, a J&T China number may cover only the parcel's trip inside China, for example to a forwarder.
@@ -41,7 +41,7 @@ J&T's tracker page handles these statuses, roughly in this order:
 
 When something goes wrong, J&T's tracker can also show a logistics problem notice with J&T's explanation.
 
-These are J&T's own words: Peek shows what tracking services say instead (see below).
+These are J&T's own words. Peek shows them once you give it the last four phone digits; until then, it shows what tracking services say (see below).
 
 **Sent to a forwarder?** Then `已签收` means its warehouse signed for the parcel, and J&T's part is over. Follow the forwarder's own number from there.
 
@@ -60,7 +60,7 @@ China's Express Market Administration Measures, in force since 1 March 2024, add
 
 ## J&T parcel not updating, lost or returned
 
-**Nothing yet.** If J&T's tracker says it can't find the waybill (`抱歉！未查到此运单`), check the number with the seller. Meanwhile, Peek shows "No tracking history yet" for a parcel filed under no carrier, and "Waiting for the carrier" for one filed under J&T Express China.
+**Nothing yet.** If J&T's tracker says it can't find the waybill (`抱歉！未查到此运单`), check the number with the seller. Meanwhile, Peek shows "No tracking history yet" for a parcel filed under no carrier, and "Waiting for the carrier" for one filed under J&T Express China. Without the last four phone digits, if no tracking service has the parcel either, Peek shows "Update unavailable" from the second check on, with "Update tracking details" to add them.
 
 **No update.** When a parcel still on its way has had no new step for 4 days, Peek flags it: "No tracking update for four days". It notes that parcels often go quiet and keeps asking. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
@@ -89,7 +89,7 @@ Its shape alone doesn't tell Peek that a JT number is J&T China's rather than J&
 - **Picked by you.** Tap "Change" and pick J&T Express China under "Fits this number", or search for J&T or 极兔 under "All carriers". On a parcel you've already added, use "Change carrier". Do the same if Peek ever files a J&T China parcel under J&T Express.
 - **A link.** Paste a J&T China tracking link (jtexpress.com.cn with `indexIpt=` and the number), and Peek files the parcel under J&T Express China at once ("Detected carrier").
 
-**Where the steps come from.** Peek doesn't read J&T's tracker. It asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the status and history of the first one that has the parcel, in that service's words. They may not match J&T's Chinese statuses above, and they can be behind J&T's own tracker.
+**Where the steps come from.** J&T's tracker shows a parcel only with the last four digits of the recipient's or sender's phone. Once J&T Express China is the parcel's carrier, type them under "Last 4 digits of the phone number" when you add the parcel or change its carrier, or tap "Add the digits" on the parcel's page: Peek then reads J&T's tracker and shows the steps in J&T's Chinese words. Peek keeps the digits with the parcel and sends them only to J&T. Without them, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the status and history of the first one that has the parcel, in that service's words. They may not match J&T's Chinese statuses above, and they can be behind J&T's own tracker.
 
 **The link on the parcel's page.** Until a service has the parcel, "Open the J&T Express China website" opens the number on J&T's tracker. Once a service has it, the link opens that service instead, such as "Open the ParcelsApp website".
 
@@ -128,6 +128,6 @@ Not with its own international service: J&T China's International Standard Expre
 - [J&T Express China: 电子运单契约条款 (electronic waybill terms)](https://www.jtexpress.com.cn/electronicContract.html) – delivery, returns, tracking period, compensation, claims
 - [J&T Express China: J&T International Standard Express](https://www.jtexpress.com.cn/internationalv3.html) – the seven countries
 - [Ministry of Transport of China: 快递市场管理办法 (Express Market Administration Measures)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – consent for lockers and stations, checking on delivery, appeals
-- [Universal Parcel Scraper: J&T Express China](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-cn) – number shape, names, tracking link, tracking services, status meanings
+- [Universal Parcel Scraper: J&T Express China](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-cn) – number shape, names, tracking link, the last four phone digits, tracking services, status meanings
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – the shared JT shape, 13-digit carriers, order of tracking services, hand-overs
 :::

@@ -22,7 +22,7 @@ The shapes known as Asendia's, with invented digits:
 | `ESUS000000000` | ESUS and 9 digits: Asendia or [DHL eCommerce](carrier:dhl-ecommerce). |
 | `RR000000005CH` | An international postal number: the post that issued it, here [Swiss Post](carrier:swiss-post). |
 | `LA000000005FR` | The same for France: [La Poste / Colissimo](carrier:la-poste). |
-| `EEUS000000000US0` | An eBay International Shipping reference: no carrier from the number alone. |
+| `EEUS000000000US0` | An eBay International Shipping reference: Asendia or DHL eCommerce. |
 
 Many Asendia parcels travel under the delivering post's international number: two letters, nine digits and two letters, where the last two name the post (`CH` Swiss Post, `FR` La Poste, `GB` [Royal Mail](carrier:royal-mail)). Careful: `AS…US` is Asendia, but `AS…CH` is a Swiss Post number. If a number doesn't work, Asendia asks you to make sure you are on its own tracking site. More in [tracking number formats](guide:tracking-number-formats).
 

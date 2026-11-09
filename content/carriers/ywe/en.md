@@ -31,9 +31,9 @@ YWE's tracker lists each scan with its date and time, its offset from GMT, and t
 | YWE says | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Shipping Order Created.` | The sender has booked the delivery with YWE. YWE doesn't have the parcel yet. | "Label created" |
-| `Container picked up by YWE,LAX01 Awaiting Item.` | YWE has collected the container your parcel flew in. The parcel itself isn't scanned yet. | "Received by carrier" |
-| `Container received` | The hub has taken the container in. | "Received by carrier" |
-| `Parcel received by in LAX01.` | The parcel's own first scan at YWE's hub. | "Received by carrier" |
+| `Container picked up by YWE,LAX01 Awaiting Item.` | YWE has collected the container your parcel flew in. The parcel itself isn't scanned yet. | "In transit" |
+| `Container received` | The hub has taken the container in. | "In transit" |
+| `Parcel received by in LAX01.` | The parcel's own first scan at YWE's hub. | "In transit" |
 | `Parcel departed from Facility.` | It has left the hub. | "In transit" |
 | `Parcel received by transit facility.`, `In processing at transit facility.`, `In transit to next facility.` | At a hub on the way, before the station that delivers your area. | "In transit" |
 | `Parcel received by local  Facility.` | At the delivery station, the depot that delivers your area. | "In transit" |
@@ -117,7 +117,7 @@ In the box above, or on YWE's tracker at yanwenexpress.com, which takes up to 30
 
 ### What does "Container picked up by YWE" mean?
 
-YWE has picked up the container your parcel flew in. The code after the comma, such as LAX01, names the hub. Your parcel's own scan, `Parcel received by in LAX01.`, comes later. Peek shows "Received by carrier" for both.
+YWE has picked up the container your parcel flew in. The code after the comma, such as LAX01, names the hub. Your parcel's own scan, `Parcel received by in LAX01.`, comes later. Peek shows "In transit" for both.
 
 ### Who do I contact about a missing YWE parcel?
 

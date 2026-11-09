@@ -21,7 +21,7 @@ Diese Formen gelten als Asendias Nummern, hier mit erfundenen Ziffern:
 | `AHOY12345678` | AHOY und 8 Buchstaben und Ziffern: Asendia. |
 | `RR000000005CH` | Eine internationale Postnummer: Sie gehört der Post, die sie vergeben hat, hier der [Schweizerischen Post](carrier:swiss-post). |
 | `CX000000005DE` | Dasselbe für Deutschland: [DHL](carrier:dhl). |
-| `EEUS000000000US0` | Eine Referenz von eBay International Shipping: Aus der Nummer allein ergibt sich kein Paketdienst. |
+| `EEUS000000000US0` | Eine Referenz von eBay International Shipping: Asendia oder [DHL eCommerce](carrier:dhl-ecommerce). |
 
 Viele Asendia-Pakete reisen unter der internationalen Nummer der Post, die sie zustellt: zwei Buchstaben, neun Ziffern, zwei Buchstaben. Die letzten beiden nennen die Post (`CH` Schweizerische Post, `FR` La Poste, `DE` DHL). Achtung: `AS…US` ist Asendia, `AS…CH` dagegen eine Nummer der Schweizerischen Post. Funktioniert eine Nummer nicht, bittet Asendia dich zu prüfen, ob du auf seiner eigenen Tracking-Seite bist. Mehr zu Nummernformen: [Sendungsnummer: welcher Paketdienst steckt dahinter](guide:tracking-number-formats).
 

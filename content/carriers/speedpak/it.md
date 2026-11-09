@@ -3,14 +3,14 @@ title: SpeedPAK tracking: pacchi eBay, stati e chi consegna
 description: Tracking SpeedPAK per i pacchi eBay: com'è fatto il numero di 28 caratteri, cosa vogliono dire gli stati in inglese e a chi chiedere se il pacco si ferma.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
-SpeedPAK è il servizio di spedizione di eBay per gli ordini dall'estero, gestito con la società di logistica Orange Connex e pensato per i pacchi che partono dalla Cina. Il numero ha 28 caratteri e comincia con ES o EE: inseriscilo sulla pagina di tracciamento di Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), oppure incollalo nel box qui sopra. Su eBay lo trovi come link accanto all'oggetto, in «Cronologia acquisti».
+SpeedPAK è il servizio di spedizione di eBay per gli ordini dall'estero, gestito con la società di logistica Orange Connex e pensato per i pacchi che partono dalla Cina. Il numero ha 28 caratteri e comincia con ES, EE o EX: inseriscilo sulla pagina di tracciamento di Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), oppure incollalo nel box qui sopra. Su eBay lo trovi come link accanto all'oggetto, in «Cronologia acquisti».
 
 ## Numero di tracking SpeedPAK: com'è fatto
 
-Tutti i numeri SpeedPAK letti sul tracking di Orange Connex avevano 28 lettere e cifre e cominciavano con ES o EE. Ecco due esempi inventati e un numero che non è SpeedPAK:
+Tutti i numeri SpeedPAK letti sul tracking di Orange Connex avevano 28 lettere e cifre e cominciavano con ES, EE o EX. Ecco due esempi inventati e un numero che non è SpeedPAK:
 
 | Numero | Che cos'è |
 | --- | --- |
@@ -18,7 +18,7 @@ Tutti i numeri SpeedPAK letti sul tracking di Orange Connex avevano 28 lettere e
 | `EE1234567890123456789012345X` | EE e 26 lettere e cifre: anche questo è SpeedPAK. |
 | `EE123456789CN` | Due lettere, nove cifre, due lettere: un numero postale internazionale, non SpeedPAK. |
 
-Le pagine di eBay per i venditori parlano anche di numeri SpeedPAK che cominciano con EX o EM. Peek non li traccia come SpeedPAK.
+Le pagine di eBay per i venditori parlano anche di numeri SpeedPAK che cominciano con EX o EM. Peek traccia come SpeedPAK un numero EX di 28 caratteri: nei numeri letti finora, [DHL Express](carrier:dhl-express) ha portato il pacco per tutto il tragitto. I numeri EM non li traccia come SpeedPAK.
 
 **Dove trovarlo.** In «Cronologia acquisti» eBay mostra «il codice della spedizione dell'oggetto sotto forma di link accanto all'oggetto». Se hai comprato senza account, apri l'e-mail «Ordine confermato», poi «Vedi i dettagli dell'ordine» e «Mostra i dettagli della spedizione». Se il numero non c'è, eBay ti dice di contattare il venditore e chiedergli di caricarlo. Gli altri posti dove cercarlo sono in [dove si trova il codice tracking](guide:find-tracking-number).
 
@@ -83,7 +83,7 @@ eBay riporta la stessa e-mail con gli orari nel fuso della Cina, su una pagina p
 
 ## Tracciare un pacco SpeedPAK con Peek
 
-[Peek](/) riconosce subito un numero ES o EE di 28 caratteri, perché nessun altro corriere usa quella forma. Puoi incollare anche i link di orangeconnex.com o orangeconnex.cn con il numero dentro. Mostra lo stato, la cronologia con città e Paese di ogni scansione, il Paese di destinazione, l'ora della consegna e il corriere che consegna con il suo numero. SpeedPAK non dà una data di consegna prevista né un punto di ritiro, quindi Peek non può mostrarli.
+[Peek](/) riconosce subito un numero ES, EE o EX di 28 caratteri, perché nessun altro corriere usa quella forma. Puoi incollare anche i link di orangeconnex.com o orangeconnex.cn con il numero dentro. Mostra lo stato, la cronologia con città e Paese di ogni scansione, il Paese di destinazione, l'ora della consegna e il corriere che consegna con il suo numero. SpeedPAK non dà una data di consegna prevista né un punto di ritiro, quindi Peek non può mostrarli.
 
 Quando SpeedPAK nomina il corriere che consegna, Peek può chiedere anche a lui e passare alle sue scansioni appena mostra progressi più recenti. Il pacco resta sotto il numero che hai aggiunto, la sua pagina dice «Consegna con» e il nome del corriere, ed elenca il numero di quel corriere con un link al suo tracking. Finché Peek trova il pacco solo annunciato a quel corriere, senza una sua scansione, la pagina dice invece «Annunciato a …, non ancora ricevuto». Dipende da cosa pubblica SpeedPAK, quindi non succede per ogni pacco.
 
@@ -116,5 +116,5 @@ La pagina di Orange Connex esiste solo in inglese e in cinese, e si apre in cine
 - [Orange Connex: Claims](https://help.orangeconnex.com/helpCentre/claims.html) – i reclami sono per i venditori
 - [eBay: SpeedPAK shipping services](https://export.ebay.com/sea-en/speedpak/speedpak-shipping-services/) – servizio dalla Cina, tempi, elenchi dei Paesi, contatto come lo riporta eBay
 - [eBay: eBay SpeedPAK](https://export.ebay.com/en/ebay-speedpak/) – accordo con Orange Connex, numeri EX, EM ed EE, partenze via DHL e FedEx
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, numeri EX con DHL Express
 :::

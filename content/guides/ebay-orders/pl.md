@@ -66,7 +66,7 @@ To numer przewoźnika, więc działa też na jego stronie. Formy, które możesz
 | DHL (z Niemiec) | `JJD` + litery i cyfry albo 20 cyfr zaczynających się od `0034043` |
 | Royal Mail (z Wielkiej Brytanii) | 2 litery, 9 cyfr, `GB` |
 | USPS (z USA) | 22 cyfry zaczynające się od `91` do `95` albo 2 litery, 9 cyfr, `US` |
-| SpeedPAK | `ES` albo `EE` + 26 liter lub cyfr |
+| SpeedPAK | `ES`, `EE` albo `EX` + 26 liter lub cyfr |
 
 Nie wiesz, czyj to numer? Wpisz go tutaj:
 

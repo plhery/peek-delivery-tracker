@@ -68,7 +68,7 @@ C'est le numéro du transporteur, donc il marche aussi sur son site. Les formes 
 | [La Poste suisse](carrier:swiss-post) | `98` ou `99` + 16 chiffres, ou 2 lettres, 9 chiffres, `CH` |
 | Royal Mail (du Royaume-Uni) | 2 lettres, 9 chiffres, `GB` |
 | USPS (des États-Unis) | 22 chiffres commençant par `91` à `95`, ou 2 lettres, 9 chiffres, `US` |
-| SpeedPAK | `ES` ou `EE` + 26 lettres ou chiffres |
+| SpeedPAK | `ES`, `EE` ou `EX` + 26 lettres ou chiffres |
 
 Tu ne sais pas à qui appartient ton numéro ? Tape-le ici :
 

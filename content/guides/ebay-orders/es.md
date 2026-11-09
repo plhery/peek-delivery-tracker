@@ -63,7 +63,7 @@ Es el número del transportista, así que también funciona en su web. Las forma
 | UPS | `1Z` + 16 letras o dígitos |
 | Royal Mail (desde el Reino Unido) | 2 letras, 9 dígitos, `GB` |
 | [USPS](carrier:usps) (desde Estados Unidos) | 22 dígitos que empiezan por `91` a `95`, o 2 letras, 9 dígitos, `US` |
-| SpeedPAK | `ES` o `EE` + 26 letras o dígitos |
+| SpeedPAK | `ES`, `EE` o `EX` + 26 letras o dígitos |
 
 ¿No sabes de quién es tu número? Escríbelo aquí:
 

@@ -3,14 +3,14 @@ title: SpeedPAK tracking: eBay parcels, statuses and who to ask
 description: Track an eBay SpeedPAK parcel: what the 28-character number looks like, what each status means, who delivers it and who to ask when it stalls.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
-SpeedPAK is eBay's shipping service for cross-border orders, run with the logistics company Orange Connex and built for parcels leaving China. Its number has 28 characters and starts with ES or EE: type it on Orange Connex's tracking page, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), or in the box above. On eBay, the number shows as a link beside the item in your Purchase history.
+SpeedPAK is eBay's shipping service for cross-border orders, run with the logistics company Orange Connex and built for parcels leaving China. Its number has 28 characters and starts with ES, EE or EX: type it on Orange Connex's tracking page, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), or in the box above. On eBay, the number shows as a link beside the item in your Purchase history.
 
 ## SpeedPAK tracking number: what it looks like
 
-Every SpeedPAK number read on Orange Connex's tracking was 28 letters and digits long, starting with ES or EE. With invented characters:
+Every SpeedPAK number read on Orange Connex's tracking was 28 letters and digits long, starting with ES, EE or EX. With invented characters:
 
 | Number | What it is |
 | --- | --- |
@@ -18,7 +18,7 @@ Every SpeedPAK number read on Orange Connex's tracking was 28 letters and digits
 | `EE1234567890123456789012345X` | EE and 26 letters and digits: SpeedPAK too. |
 | `EE123456789CN` | Two letters, nine digits, two letters: an international postal number, not SpeedPAK. |
 
-eBay's pages for sellers also speak of SpeedPAK numbers starting with EX or EM. Peek doesn't track those as SpeedPAK.
+eBay's pages for sellers also speak of SpeedPAK numbers starting with EX or EM. Peek tracks an EX number of 28 characters as SpeedPAK: on those read so far, [DHL Express](carrier:dhl-express) carried the parcel all the way. EM numbers it doesn't track as SpeedPAK.
 
 **Where to find it.** In eBay's Purchase history, the number appears as a link beside the item. If you bought as a guest, open the email whose subject starts "Order Confirmed", then View order details and Show delivery details. If no number shows, eBay says to contact the seller and ask them to upload it. More in [how to find your tracking number](guide:find-tracking-number).
 
@@ -83,7 +83,7 @@ eBay prints the same email with the hours in China Standard Time, on a page for 
 
 ## Track a SpeedPAK parcel with Peek
 
-[Peek](/) recognises an ES or EE number of 28 characters straight away, as no other carrier uses that shape. Links from orangeconnex.com or orangeconnex.cn with the number inside can be pasted too. It shows the status, the history with the town and country of each scan, the destination country, the delivery time and the delivering carrier with its number. SpeedPAK gives no expected delivery date and no pickup point, so Peek can't show them.
+[Peek](/) recognises an ES, EE or EX number of 28 characters straight away, as no other carrier uses that shape. Links from orangeconnex.com or orangeconnex.cn with the number inside can be pasted too. It shows the status, the history with the town and country of each scan, the destination country, the delivery time and the delivering carrier with its number. SpeedPAK gives no expected delivery date and no pickup point, so Peek can't show them.
 
 When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. While that carrier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. This depends on what SpeedPAK publishes, so not every parcel gets it.
 
@@ -117,5 +117,5 @@ Orange Connex's page shows English or Chinese, and opens in Chinese unless you c
 - [eBay UK: International purchases and postage](https://www.ebay.co.uk/help/buying/postage-delivery/changing-delivery-address-method/international-purchases-postage-buy?id=4057) – SpeedPAK from Germany to the US, UK and Australia
 - [eBay UK: Tracking your item](https://www.ebay.co.uk/help/buying/postage-delivery/tracking-item?id=4027) – Purchase history, guest orders, missing number
 - [eBay UK: Get help with an item that hasn't arrived](https://www.ebay.co.uk/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 days, 3 and 21 business days, refunds, neighbour
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, EX numbers with DHL Express
 :::

@@ -67,7 +67,7 @@ SpeedPAK non consegna da solo fino alla porta: nel suo storico compare il corrie
 | [DHL Express](carrier:dhl-express) | 10 cifre, oppure `JD01` + 16 cifre |
 | Royal Mail (dal Regno Unito) | 2 lettere, 9 cifre, `GB` |
 | USPS (dagli Stati Uniti) | 22 cifre che iniziano da `91` a `95`, oppure 2 lettere, 9 cifre, `US` |
-| SpeedPAK | `ES` o `EE` + 26 lettere o cifre |
+| SpeedPAK | `ES`, `EE` o `EX` + 26 lettere o cifre |
 
 Non sai di chi è il tuo codice? Scrivilo qui:
 

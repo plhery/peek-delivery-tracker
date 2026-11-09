@@ -70,7 +70,7 @@ It's the carrier's own number, so it also works on the carrier's site. The shape
 | An Post | 2 letters, 9 digits, `IE` |
 | Canada Post | 16 digits, or 2 letters, 9 digits, `CA` |
 | Australia Post | 21 or 23 characters with `000` before the last 6 digits |
-| SpeedPAK | `ES` or `EE` + 26 letters or digits |
+| SpeedPAK | `ES`, `EE` or `EX` + 26 letters or digits |
 
 Not sure whose number you have? Type it here:
 

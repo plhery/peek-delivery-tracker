@@ -74,7 +74,7 @@ O SpeedPAK não entrega até à tua porta: o histórico dele indica a transporta
 | [SEUR](carrier:seur) | 14 ou 21 algarismos |
 | UPS | `1Z` + 16 letras ou algarismos |
 | USPS (dos Estados Unidos) | 22 algarismos a começar por `91` a `95` |
-| SpeedPAK | `ES` ou `EE` + 26 letras ou algarismos |
+| SpeedPAK | `ES`, `EE` ou `EX` + 26 letras ou algarismos |
 
 Não sabes de quem é o teu número? Escreve-o aqui:
 

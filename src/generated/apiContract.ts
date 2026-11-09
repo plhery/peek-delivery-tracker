@@ -667,6 +667,11 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^34043(?!400|447|464|489|525|533|537|542|571|579|580)(?:38[3-9]|39\\d|[45]\\d{2})\\d{10}$",
+        "confidence": "high",
+        "checksum": "gs1"
+      },
+      {
         "pattern": "^\\d{12}$",
         "confidence": "low",
         "checksum": "identcode"
@@ -24011,7 +24016,7 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "dpd-pt",
       "recognitionRank": 815
     },
-    "trackingUrlTemplate": "https://tracking.dpd.pt/?reference={trackingNumber}",
+    "trackingUrlTemplate": "https://tracking.dpd.pt/pt?reference={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -24057,7 +24062,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "dpd"
       }
     ],
-    "trackingSearchUrl": "https://tracking.dpd.pt/"
+    "trackingSearchUrl": "https://tracking.dpd.pt/pt"
   },
   "gls-pl": {
     "displayName": "GLS Poland",

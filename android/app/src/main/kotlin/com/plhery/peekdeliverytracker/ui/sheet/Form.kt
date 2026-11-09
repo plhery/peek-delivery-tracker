@@ -4,7 +4,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -92,6 +91,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.drawMarks
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
@@ -220,7 +220,7 @@ internal fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBac
             Modifier
                 .heightIn(min = BAR_ROW)
                 .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-                .clickable(interactionSource = null, indication = RowHighlight.Capsule, enabled = enabled, role = Role.Button, onClick = onClick)
+                .button(interactionSource = null, indication = RowHighlight.Capsule, enabled = enabled, role = Role.Button, onClick = onClick)
                 .padding(horizontal = CONFIRM_PADDING),
             contentAlignment = Alignment.Center,
         ) {
@@ -293,7 +293,7 @@ internal fun BarCancel(cancel: () -> Unit, tag: String, behind: Color = PeekThem
                 Modifier
                     .heightIn(min = BAR_ROW)
                     .testTag(tag)
-                    .clickable(interactionSource = null, indication = PressStyle.tactile(CANCEL_PRESSED), role = Role.Button, onClick = cancel)
+                    .button(interactionSource = null, indication = PressStyle.tactile(CANCEL_PRESSED), role = Role.Button, onClick = cancel)
                     .padding(horizontal = CONFIRM_PADDING),
                 contentAlignment = Alignment.Center,
             ) {
@@ -470,7 +470,7 @@ fun FormButtonRow(title: String, destructive: Boolean, onClick: () -> Unit, modi
     FormRowFrame(
         modifier
             .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onClick),
+            .button(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onClick),
     ) {
         Text(title, Modifier.weight(1f), color = if (destructive) colors.red else colors.ink, style = PeekTheme.type.body.sfLines())
     }
@@ -509,7 +509,7 @@ fun FormMenuRow(
             .then(if (tag != null) Modifier.testTag(tag) else Modifier)
             .onGloballyPositioned { row = it.boundsInWindow() }
             .accessibilityFocus(returnFocus)
-            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = open)
+            .button(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = open)
             .clearAndSetSemantics {
                 contentDescription = "$title, $current"
                 role = Role.Button

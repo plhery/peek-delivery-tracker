@@ -12,7 +12,6 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,6 +61,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.time.Instant
@@ -140,7 +140,7 @@ private fun ArchiveShelfHeader(title: String, count: Int, expanded: Boolean, lab
                     true
                 }
             }
-            .clickable(interactionSource = null, indication = PressStyle.ExperimentalLift, onClick = onToggle)
+            .button(interactionSource = null, indication = PressStyle.ExperimentalLift, onClick = onToggle)
             .fillMaxWidth()
             .heightIn(min = 44.dp)
             .padding(horizontal = 2.dp, vertical = 9.dp),

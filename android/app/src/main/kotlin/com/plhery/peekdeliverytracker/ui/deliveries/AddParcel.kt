@@ -24,7 +24,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.draganddrop.dragAndDropTarget
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -179,6 +178,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.roundToInt
@@ -691,6 +691,14 @@ private class AddActions(
         focus.request(current().nextField)
     }
 
+    /**
+     * Return in the delivery postcode or the phone's last digits, which ask for no label on the key (no
+     * `.submitLabel`): the field gives up the focus and the keyboard goes, as a SwiftUI field's return does.
+     */
+    fun endEditing() {
+        focusManager.clearFocus()
+    }
+
     /** The name's Done: Add, where it can, else back to the number. */
     fun submitName() {
         if (current().canSave) save() else focus.request(ParcelAddition.Field.Tracking)
@@ -806,7 +814,7 @@ private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = 
                 Modifier
                     .size(44.dp)
                     .testTag(ADD_CLOSE)
-                    .clickable(interactionSource = null, indication = PlainPress, enabled = !saving, role = Role.Button, onClick = close)
+                    .button(interactionSource = null, indication = PlainPress, enabled = !saving, role = Role.Button, onClick = close)
                     .semantics { contentDescription = closeLabel },
                 contentAlignment = Alignment.Center,
             ) {
@@ -905,7 +913,7 @@ private fun PasteButton(paste: () -> Unit) {
         Modifier
             .heightIn(min = 44.dp)
             .testTag(ADD_PASTE)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = paste)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = paste)
             .plainDisabled(enabled),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -927,7 +935,7 @@ private fun ScanButton(scan: () -> Unit) {
         Modifier
             .size(44.dp)
             .testTag(ADD_SCAN)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = scan)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = scan)
             .plainDisabled(enabled)
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,
@@ -1012,7 +1020,7 @@ private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String
         Modifier
             .heightIn(min = 22.dp)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
             .then(if (label != null) Modifier.semantics { contentDescription = label } else Modifier),
         color = if (enabled) colors.accent else colors.tertiaryLabel,
         style = PeekTheme.type.subheadline.sfLines(),
@@ -1112,7 +1120,7 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
             .fillMaxWidth()
             .heightIn(min = 44.dp)
             .testTag(ADD_CARRIER)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = open)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = open)
             .clearAndSetSemantics {
                 // The way to change it said once, as what a tap does (`accessibilityHint`).
                 contentDescription = description
@@ -1187,7 +1195,7 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
                         .heightIn(min = 44.dp)
                         .wrapContentHeight(Alignment.CenterVertically)
                         .testTag(ADD_SIGN_IN)
-                        .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) {
+                        .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) {
                             state.closeAdd()
                             state.source.showSignIn()
                         },
@@ -1220,7 +1228,7 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
             .fillMaxWidth()
             .heightIn(min = 56.dp)
             .testTag(numberRowTag(number.normalized))
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), enabled = enabled, role = Role.Button, onClick = choose)
+            .button(interactionSource = null, indication = PressStyle.tactile(0.98f), enabled = enabled, role = Role.Button, shape = shape, onClick = choose)
             .clearAndSetSemantics {
                 contentDescription = "$name, $printed"
                 if (chosen) selected = true
@@ -1325,8 +1333,9 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                         actions = actions,
                         keyboard = KeyboardOptions(
                             KeyboardCapitalization.Characters, autoCorrectEnabled = false,
-                            keyboardType = postcodeKeyboard(addition.postcodeKeys(requirement)), imeAction = ImeAction.Done,
+                            keyboardType = postcodeKeyboard(addition.postcodeKeys(requirement)), imeAction = ImeAction.None,
                         ),
+                        onSubmit = actions::endEditing,
                         framed = false,
                         suggestions = false,
                         postalCode = true,
@@ -1388,8 +1397,9 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                         keyboard = KeyboardOptions(
                             KeyboardCapitalization.None, autoCorrectEnabled = false,
                             keyboardType = if (digits.inputMode == "numeric") KeyboardType.Number else KeyboardType.Ascii,
-                            imeAction = ImeAction.Done,
+                            imeAction = ImeAction.None,
                         ),
+                        onSubmit = actions::endEditing,
                         framed = false,
                         suggestions = false,
                         monospacedDigits = true,
@@ -1600,7 +1610,7 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
                 localized("add.openExisting"),
                 Modifier
                     .testTag(ADD_OPEN_EXISTING)
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { open(existing) },
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button) { open(existing) },
                 color = colors.ink,
                 style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).copy(textDecoration = TextDecoration.Underline).sfLines(),
             )
@@ -1668,7 +1678,7 @@ private fun AddButton(
                 .padding(horizontal = 20.dp, vertical = 16.dp)
                 .testTag(ADD_SAVE)
                 .graphicsLayer { alpha = opacity }
-                .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = canSave && !saving, role = Role.Button, onClick = save)
+                .button(interactionSource = null, indication = PressStyle.Tactile, enabled = canSave && !saving, role = Role.Button, onClick = save)
                 .semantics { contentDescription = if (saving) adding else words }
                 .heightIn(min = 50.dp)
                 .background(colors.accent, ContinuousRoundedShape(14.dp))

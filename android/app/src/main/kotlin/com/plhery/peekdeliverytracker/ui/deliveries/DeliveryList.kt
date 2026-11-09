@@ -13,7 +13,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -110,6 +109,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -668,7 +668,7 @@ private fun DeviceAccountRow(onSignIn: () -> Unit) {
     val frame = Modifier
         .fillMaxWidth()
         .testTag(DEVICE_ACCOUNT_ROW)
-        .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = onSignIn)
+        .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = onSignIn)
         .heightIn(min = 66.dp)
         .background(colors.paper, shape)
         .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape)

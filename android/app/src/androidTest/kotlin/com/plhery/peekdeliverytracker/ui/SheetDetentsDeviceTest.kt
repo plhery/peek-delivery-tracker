@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
 import android.view.ViewConfiguration
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
@@ -39,6 +40,7 @@ import kotlin.math.max
 import kotlin.math.min
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -59,7 +61,10 @@ import org.junit.runner.RunWith
  * where it stood, and a drag down sends it away. Beside a parcel the filters are a popover off their button
  * (ParcelListView.swift:1018), with no indicator and no detents. Each drag is a real finger's ([ScreenTouches]) on the
  * indicator, held still before it lifts, so the sheet settles where the finger left it rather than where a throw would
- * carry it. No field takes the focus here: writing that opens a fitted sheet fully, and the keyboard, are
+ * carry it. TalkBack reaches the indicator, in Material's words for a drag handle, as VoiceOver reaches the iPhone's
+ * ("Sheet grabber"); where the sheet has detents to go to, it is a button whose double tap takes the sheet to the next,
+ * as UIKit's grabber cycles them, read from the tree an accessibility service is given ([AccessTree]). No field takes
+ * the focus here: writing that opens a fitted sheet fully, and the keyboard, are
  * [KeyboardDismissDeviceTest]'s; Change carrier opening fully at once where the carrier asks for more is
  * ChangeCarrierTest's. The demo's parcels on fake deliveries ([ParcelWalk]) whose stores answer every read in memory,
  * for the synthetic reader@example.com: nothing goes to the network. Each moment saved as
@@ -70,6 +75,7 @@ class SheetDetentsDeviceTest {
     private val compose = createAndroidComposeRule<ComponentActivity>()
     private val walk = ParcelWalk(compose, FOLDER)
     private val touches = ScreenTouches(compose)
+    private val tree = AccessTree(compose)
 
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk)
@@ -167,6 +173,68 @@ class SheetDetentsDeviceTest {
             walksTheDetents("filters", FILTERS_SHEET, Detent.Medium)
         }
         compose.waitUntil(LONG_MILLIS) { !walk.onUi { walk.deliveries.showingFilters } }
+    }
+
+    /**
+     * B-G13: TalkBack reaches Change carrier's drag indicator, which says it is a drag handle in Material's words. A
+     * sheet from the window's bottom makes it a button: at medium, a double tap expands the sheet to large ("Expand
+     * bottom sheet"), and there it collapses it back to medium ("Collapse bottom sheet"), as UIKit's grabber cycles its
+     * detents. A form in a regular window has no detent to go to: the indicator only says what it is.
+     */
+    @Test
+    fun talkBackReachesTheDragIndicatorWhoseDoubleTapExpandsAndCollapsesTheSheet() {
+        walk.show(listOf(gift, lamp))
+        walk.open(lamp)
+        walk.tap(PAGE_MENU_BUTTON)
+        compose.waitUntil(LONG_MILLIS) { walk.exists(PAGE_MENU) }
+        walk.settle()
+        walk.tap(menuItemTag(ParcelMenuItem.ChangeCarrier))
+        compose.waitUntil(LONG_MILLIS) { walk.exists(CHANGE_CARRIER_SHEET) && walk.exists(SHEET_PANEL) }
+        walk.awaitStill()
+        walk.settle()
+        val grabber = tree.awaitId(SHEET_GRABBER)
+        assertTrue("TalkBack stops on the indicator", grabber.isScreenReaderFocusable)
+        assertEquals(material("m3c_bottom_sheet_drag_handle_description"), grabber.spoken)
+        val room = room()
+        if (room.regular) {
+            assertNull("A form has no detent to go to", grabber.action(AccessibilityNodeInfo.ACTION_CLICK))
+            assertFalse(grabber.isButton)
+            walk.shot("B-G13-grabber-form", alsoDark = false)
+            return
+        }
+        assertTrue(grabber.isButton)
+        assertEquals(material("m3c_bottom_sheet_expand_description"), grabber.clickLabel)
+        val largeTop = max(room.top, LARGE_MIN_TOP)
+        val opened = frame()
+        assertFrame("Change carrier at its medium detent", floating(room, max(room.height * MEDIUM_TOP, largeTop)), opened)
+
+        assertTrue(grabber.click())
+        walk.settle()
+        walk.awaitStill()
+        assertFrame("Expanded to large", Frame(0f, largeTop, room.width, room.height), frame())
+        val collapse = material("m3c_bottom_sheet_collapse_description")
+        val atLarge = tree.await("The indicator collapsing the sheet") { nodes ->
+            nodes.firstOrNull { it.viewIdResourceName == SHEET_GRABBER && it.clickLabel == collapse }
+        }
+        walk.shot("B-G13-grabber-large", alsoDark = false)
+
+        assertTrue(atLarge.click())
+        walk.settle()
+        walk.awaitStill()
+        assertFrame("Collapsed back to medium", opened, frame())
+        val expand = material("m3c_bottom_sheet_expand_description")
+        tree.await("The indicator expanding the sheet again") { nodes ->
+            nodes.firstOrNull { it.viewIdResourceName == SHEET_GRABBER && it.clickLabel == expand }
+        }
+    }
+
+    /** Material's string `name`, looked up among the app's resources, where Material's are merged, in the app's words. */
+    private fun material(name: String): String = walk.onUi {
+        val app = compose.activity
+        @Suppress("DiscouragedApi")
+        val id = app.resources.getIdentifier(name, "string", app.packageName)
+        check(id != 0) { "The app has no string $name of Material's" }
+        app.getString(id)
     }
 
     /** The detent a sheet opens at on the iPhone. */

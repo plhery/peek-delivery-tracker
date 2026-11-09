@@ -12,4 +12,10 @@
         <ignore regexp="localeConfig" />
         <ignore regexp="enableOnBackInvokedCallback" />
     </issue>
+    <!-- A sheet's grabber says what it is and does in Material's words for a bottom sheet's drag handle (ui/sheet/Sheet.kt),
+         which come in the system's languages as UIKit's do; Material keeps them private, and a release that renamed
+         them would stop the build rather than the grabber. -->
+    <issue id="PrivateResource">
+        <ignore regexp="m3c_bottom_sheet_" />
+    </issue>
 </lint>

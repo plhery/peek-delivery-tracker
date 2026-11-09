@@ -39,7 +39,9 @@ import org.junit.runner.RunWith
  * Next (`.submitLabel(.next)`) and the name for Done (`.submitLabel(.done)`). Next on the number (`submitTracking`)
  * goes to the first detail the carrier still needs (its tracking link, the delivery postcode, the phone's last digits),
  * else to the name, and leaving the field settles the number; Done on the name (`onSubmit`) adds the parcel where it
- * can be added and closes Add, else goes back to the number. The action key is pressed as the keyboard presses it:
+ * can be added and closes Add, else goes back to the number. The delivery postcode and the phone's last digits ask for
+ * no action (no `.submitLabel`): their key is a plain return, which ends the editing, as a SwiftUI field's does. The
+ * action key is pressed as the keyboard presses it:
  * through the input connection the focused field gives the window, with the action its EditorInfo asks for
  * (`performEditorAction`), so it holds where the device shows no keyboard on the screen too (a hardware one open); a
  * hardware Return does the same. Signed in as the synthetic reader@example.com on fake deliveries whose stores answer
@@ -97,6 +99,24 @@ class AddReturnKeyDeviceTest {
         val connection = checkNotNull(walk.onUi { view.onCreateInputConnection(info) }) { "The focused field gives no input connection" }
         assertEquals("The action the field asks the keyboard for", expected, action(info))
         walk.onUi { connection.performEditorAction(expected) }
+        walk.settle()
+    }
+
+    /**
+     * The keyboard's return key on the focused field where it asks for no action, as a keyboard sends it: Return pressed
+     * and let go through the field's input connection opened from the window; a second of the app's time after.
+     */
+    private fun pressReturnKey() {
+        compose.waitForIdle()
+        val view = (compose.onNode(isFocused()).fetchSemanticsNode().root as ViewRootForTest).view
+        val info = EditorInfo()
+        val connection = checkNotNull(walk.onUi { view.onCreateInputConnection(info) }) { "The focused field gives no input connection" }
+        assertEquals("The field asks the keyboard for no action", EditorInfo.IME_ACTION_NONE, action(info))
+        val down = SystemClock.uptimeMillis()
+        walk.onUi {
+            connection.sendKeyEvent(KeyEvent(down, down, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER, 0))
+            connection.sendKeyEvent(KeyEvent(down, SystemClock.uptimeMillis(), KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER, 0))
+        }
         walk.settle()
     }
 
@@ -238,6 +258,50 @@ class AddReturnKeyDeviceTest {
         assertTrue(walk.exists(ADD_PARCEL))
         assertTrue(additions().isEmpty())
         walk.awaitKeyboard(required = false)
+        walk.shot(moment, alsoDark = false)
+    }
+
+    /**
+     * B-G07: the phone's last digits ask the keyboard for no action, its key a plain return: pressed, the field gives up
+     * the focus, as a SwiftUI field's return does, and types nothing; nothing is added and Add stays. A hardware Return
+     * does the same.
+     */
+    @Test
+    fun thePhonesDigitsReturnKeyEndsTheEditing() {
+        openAdd()
+        assertNextGoesFirstTo(PHONE, ADD_PHONE_DIGITS, "B-G07-next-phone")
+        assertReturnEndsTheEditing(ADD_PHONE_DIGITS, "B-G07-return-phone") { pressReturnKey() }
+        walk.tap(ADD_PHONE_DIGITS)
+        awaitFocus(ADD_PHONE_DIGITS)
+        assertReturnEndsTheEditing(ADD_PHONE_DIGITS, "B-G07-return-phone-hardware") { pressReturn() }
+    }
+
+    /**
+     * B-G07: the delivery postcode asks the keyboard for no action, its key a plain return: pressed, the field gives up
+     * the focus and types nothing; nothing is added and Add stays. A hardware Return does the same.
+     */
+    @Test
+    fun thePostcodesReturnKeyEndsTheEditing() {
+        openAdd { detections[ASKED] = CarrierDetectionResponse(ASKED, carrier = CarrierId.GlsCh) }
+        assertNextGoesFirstTo(ASKED, ADD_POSTCODE, "B-G07-next-postcode")
+        assertReturnEndsTheEditing(ADD_POSTCODE, "B-G07-return-postcode") { pressReturnKey() }
+        walk.tap(ADD_POSTCODE)
+        awaitFocus(ADD_POSTCODE)
+        assertReturnEndsTheEditing(ADD_POSTCODE, "B-G07-return-postcode-hardware") { pressReturn() }
+    }
+
+    /**
+     * `press` on the field tagged `tag`, focused and empty: no field has the focus after, the field still empty, nothing
+     * added, Add still up. Shot as `moment`.
+     */
+    private fun assertReturnEndsTheEditing(tag: String, moment: String, press: () -> Unit) {
+        assertTrue(focused(tag))
+        press()
+        compose.waitUntil(LONG_MILLIS) { !focused(tag) }
+        assertTrue("No field has the focus", compose.onAllNodes(isFocused()).fetchSemanticsNodes().isEmpty())
+        assertEquals("Nothing typed", "", walk.editable(tag))
+        assertTrue(walk.exists(ADD_PARCEL))
+        assertTrue(additions().isEmpty())
         walk.shot(moment, alsoDark = false)
     }
 

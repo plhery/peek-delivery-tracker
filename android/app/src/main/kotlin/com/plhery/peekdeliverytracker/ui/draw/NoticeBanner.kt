@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.draw
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +23,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.Radii
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
@@ -67,7 +67,7 @@ fun NoticeBanner(
                     actionTitle,
                     Modifier
                         .padding(top = 3.dp)
-                        .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action),
+                        .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action),
                     color = tint,
                     style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines(),
                 )

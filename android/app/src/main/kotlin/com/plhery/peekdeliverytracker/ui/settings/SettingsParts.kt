@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.ui.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -70,6 +69,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 // SettingsViews.swift's building blocks (C-S45): `SettingsGroup`, `SettingsRow`, `settingsDivider`, `settingsGreen`,
@@ -204,7 +204,7 @@ internal fun SettingsButtonRow(
         title,
         Modifier
             .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClick)
             .semantics(mergeDescendants = true) {},
         symbol = symbol, detail = detail, value = value, chevron = chevron,
     )
@@ -303,7 +303,7 @@ internal fun SettingsLanguageRow() {
         .testTag(SETTINGS_LANGUAGE)
         .onGloballyPositioned { row = it.boundsInWindow() }
         .accessibilityFocus(returnFocus)
-        .clickable(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
+        .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
         .clearAndSetSemantics {
             contentDescription = label
             stateDescription = language.nativeName
@@ -349,7 +349,7 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
                 Column(
                     tile
                         .testTag(appearanceTag(option))
-                        .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { onChoose(option) }
+                        .button(interactionSource = null, indication = PlainPress, role = Role.Button) { onChoose(option) }
                         .clearAndSetSemantics {
                             contentDescription = name
                             role = Role.Button

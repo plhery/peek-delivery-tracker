@@ -6,7 +6,6 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,6 +58,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.util.TimeZone
 import kotlin.coroutines.cancellation.CancellationException
@@ -144,7 +144,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                         Modifier
                             .heightIn(min = 44.dp)
                             .testTag(SETTINGS_OPEN_SETTINGS)
-                            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { openNotificationSettings(context) }
+                            .button(interactionSource = null, indication = PlainPress, role = Role.Button) { openNotificationSettings(context) }
                             .semantics(mergeDescendants = true) {},
                         horizontalArrangement = Arrangement.spacedBy(7.dp),
                         verticalAlignment = Alignment.CenterVertically,
@@ -256,7 +256,7 @@ private fun PresetRow(option: NotificationPreset, chosen: Boolean, onChoose: () 
         Modifier
             .fillMaxWidth()
             .testTag(presetTag(option))
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onChoose)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onChoose)
             .semantics(mergeDescendants = true) { selected = chosen }
             .padding(15.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -280,7 +280,7 @@ private fun SaveButton(saving: Boolean, onSave: () -> Unit) {
         Modifier
             .fillMaxWidth()
             .testTag(SETTINGS_SAVE)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onSave)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onSave)
             .background(colors.accent, ContinuousRoundedShape(14.dp))
             .padding(14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
@@ -372,7 +372,7 @@ private fun QuietLink(key: String, tag: String, onClick: () -> Unit) {
         Modifier
             .heightIn(min = 44.dp)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClick),
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClick),
         contentAlignment = Alignment.CenterStart,
     ) {
         Text(

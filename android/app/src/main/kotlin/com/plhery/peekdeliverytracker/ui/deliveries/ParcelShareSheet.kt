@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -105,6 +104,7 @@ import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.util.UUID
@@ -485,7 +485,7 @@ private fun ShareHeader(name: String?, working: Boolean, close: () -> Unit) {
             Modifier
                 .size(44.dp)
                 .testTag(PARCEL_SHARE_CLOSE)
-                .clickable(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, onClick = close)
+                .button(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, shape = CircleShape, onClick = close)
                 .plainDisabled(!working)
                 .semantics { contentDescription = closeLabel },
             contentAlignment = Alignment.Center,
@@ -738,7 +738,7 @@ private fun CopyButton(copied: Boolean, enabled: Boolean, copy: () -> Unit) {
     Row(
         Modifier
             .testTag(PARCEL_SHARE_COPY)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = copy)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, shape = ContinuousRoundedShape(14.dp), onClick = copy)
             .background(colors.sheetButton, ContinuousRoundedShape(14.dp))
             .heightIn(min = 44.dp)
             .padding(horizontal = 14.dp),
@@ -763,7 +763,7 @@ private fun PrimaryButton(title: String, symbol: String?, tag: String, enabled: 
         Modifier
             .fillMaxWidth()
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, shape = ContinuousRoundedShape(16.dp), onClick = action)
             .semantics { if (working) progressBarRangeInfo = ProgressBarRangeInfo.Indeterminate }
             .background(colors.accent, ContinuousRoundedShape(16.dp))
             .heightIn(min = 50.dp)
@@ -791,7 +791,7 @@ private fun StopButton(enabled: Boolean, stop: () -> Unit) {
         Box(
             Modifier
                 .testTag(PARCEL_SHARE_STOP)
-                .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = stop)
+                .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = stop)
                 .plainDisabled(enabled)
                 .heightIn(min = 44.dp),
             contentAlignment = Alignment.Center,

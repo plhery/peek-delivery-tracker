@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -91,6 +90,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.time.Instant
 import java.util.UUID
@@ -352,7 +352,7 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
                         .heightIn(min = 44.dp)
                         // A button to TalkBack: Compose has no link role but a link inside a text, which would take
                         // only its words and not the arrow and the row's height.
-                        .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                        .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
                             onHelp()
                             try {
                                 uriHandler.openUri(help.url)

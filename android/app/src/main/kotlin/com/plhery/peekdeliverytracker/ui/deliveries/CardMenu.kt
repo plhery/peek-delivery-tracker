@@ -632,6 +632,7 @@ private fun MenuItemRow(
             .fillMaxWidth()
             .heightIn(min = ROW_HEIGHT)
             .testTag(menuItemTag(item))
+            // Not `Modifier.button`'s held press: on the iPhone a finger slides from one item to the next.
             .clickable(interactionSource = null, indication = PlainPress, enabled = enabled) { choose(item) }
             .clearAndSetSemantics {
                 contentDescription = listOfNotNull(title, key).joinToString(", ")
@@ -1097,6 +1098,7 @@ internal fun AlertButton(
             .clip(CapsuleShape)
             .background(alertFill(colors.dark))
             .testTag(tag)
+            // Not `Modifier.button`'s held press: on the iPhone a finger slides from one action to the next.
             .clickable(interactionSource = null, indication = RowHighlight.Capsule, enabled = enabled, role = Role.Button, onClick = action)
             .padding(horizontal = ALERT_BUTTON_PADDING, vertical = ALERT_CAPSULE_PADDING),
         contentAlignment = Alignment.Center,

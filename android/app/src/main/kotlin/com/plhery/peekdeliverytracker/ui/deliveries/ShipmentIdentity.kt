@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +36,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
@@ -50,7 +50,7 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
  * (B-H03).
  *
  * Under each number its carrier's own pages, and after the numbers the pages that are none of theirs
- * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`.
+ * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`, `padded` on the page and not in a link's sheet.
  */
 @Composable
 internal fun ShipmentNumbers(
@@ -61,6 +61,7 @@ internal fun ShipmentNumbers(
     onCopy: (ParcelTrackingNumber) -> Unit,
     onLink: (ParcelTrackingLink) -> Unit,
     modifier: Modifier = Modifier,
+    padded: Boolean = true,
 ) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
@@ -119,10 +120,10 @@ internal fun ShipmentNumbers(
                         }
                     }
                 }
-                CarrierLinks(pages.own[index], own = true, tint, onLink)
+                CarrierLinks(pages.own[index], own = true, tint, onLink, padded)
             }
         }
-        CarrierLinks(pages.loose, own = false, tint, onLink)
+        CarrierLinks(pages.loose, own = false, tint, onLink, padded)
     }
 }
 
@@ -140,7 +141,7 @@ private fun CopyButton(label: String, action: () -> Unit, content: @Composable (
                     true
                 }
             }
-            .clickable(interactionSource = null, indication = PlainPress, onClick = action),
+            .button(interactionSource = null, indication = PlainPress, onClick = action),
     ) {
         content()
     }
@@ -148,13 +149,14 @@ private fun CopyButton(label: String, action: () -> Unit, content: @Composable (
 
 /**
  * `carrierLinks` (B-S07, B-G05, B-L05): the carriers' own pages, each "Open the {carrier} website" and a 10-point
- * arrow 6 after it, in caption in `tint`, 10 above and below and 44 tall at least. Under its own number a page needs
+ * arrow 6 after it, in caption in `tint`, 44 tall at least, and where `padded` (the page's, not a link sheet's) 10
+ * above and below, so that words on two lines make it taller. Under its own number a page needs
  * no more words; another, but the one the parcel is followed on, says at the line's end in caption2 secondary what
  * it is to the parcel: not ready yet, or an earlier journey. A tap calls `onLink`, then opens the page in the browser,
  * as the iPhone's opens Safari.
  */
 @Composable
-internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: Color, onLink: (ParcelTrackingLink) -> Unit) {
+internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: Color, onLink: (ParcelTrackingLink) -> Unit, padded: Boolean = true) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val uriHandler = LocalUriHandler.current
@@ -172,7 +174,7 @@ internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: C
                     .testTag(PAGE_CARRIER_LINK)
                     // A button to TalkBack, as the quiet note's help: Compose's link role is a text's, which would
                     // take only the words.
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
                         onLink(link)
                         try {
                             uriHandler.openUri(link.url)
@@ -180,7 +182,7 @@ internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: C
                             // Where no app opens web pages, as Compose's handler says: nothing, as with the iPhone's link.
                         }
                     }
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = if (padded) 10.dp else 0.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Row(

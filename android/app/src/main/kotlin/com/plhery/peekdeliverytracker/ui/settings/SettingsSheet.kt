@@ -8,7 +8,6 @@ import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -92,6 +91,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
@@ -513,7 +513,7 @@ private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: Scroll
                 Modifier
                     .heightIn(min = 44.dp)
                     .testTag(SETTINGS_DELETE)
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { ask(ALERT_DELETE) }
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button) { ask(ALERT_DELETE) }
                     .padding(vertical = 13.dp),
                 color = colors.warning, style = type.caption.sfLines(),
             )
@@ -594,7 +594,7 @@ private fun SettingsBack(enabled: Boolean, onBack: () -> Unit) {
                 .size(BAR_ROW)
                 .testTag(SETTINGS_BACK)
                 .accessibilityFocus(focus)
-                .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), enabled = enabled, onClick = onBack)
+                .button(interactionSource = null, indication = PressStyle.tactile(0.94f), enabled = enabled, onClick = onBack)
                 .semantics {
                     contentDescription = label
                     role = Role.Button

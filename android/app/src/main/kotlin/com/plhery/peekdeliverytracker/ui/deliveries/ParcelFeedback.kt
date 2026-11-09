@@ -18,7 +18,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -147,6 +146,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.delay
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
@@ -718,7 +718,7 @@ private fun AddNote(action: () -> Unit) {
         Modifier
             .overhang(vertical = 4.dp)
             .testTag(FEEDBACK_ADD_NOTE)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
             .padding(vertical = 4.dp)
             .heightIn(min = 36.dp)
             .padding(end = 6.dp),
@@ -756,7 +756,7 @@ private fun FeedbackPill(title: String, tag: String, modifier: Modifier = Modifi
         modifier
             .overhang(vertical = 4.dp)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.96f), role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PressStyle.tactile(0.96f), role = Role.Button, onClick = action)
             .padding(vertical = 4.dp)
             .heightIn(min = 36.dp)
             .background(if (onControl) (if (inSheet) colors.raised else colors.paper) else colors.ink.copy(alpha = colors.ink.alpha * 0.07f), shape)
@@ -1248,7 +1248,7 @@ private fun FeedbackSheet(title: String, tag: String, busy: Boolean, close: () -
                     Modifier
                         .size(44.dp)
                         .testTag(FEEDBACK_CLOSE)
-                        .clickable(interactionSource = null, indication = PlainPress, enabled = !busy, role = Role.Button, onClick = close)
+                        .button(interactionSource = null, indication = PlainPress, enabled = !busy, role = Role.Button, shape = CircleShape, onClick = close)
                         .plainDisabled(!busy)
                         .semantics { contentDescription = closeLabel },
                     contentAlignment = Alignment.Center,
@@ -1266,8 +1266,8 @@ private fun FeedbackSheet(title: String, tag: String, busy: Boolean, close: () -
 /**
  * `chip(_:)`: a reason in footnote medium, 14 and 10 in, 44 tall at least, with 14-point continuous corners: raised
  * with a hairline of the sheet's line at 60 %, or chosen on ochre's surface with a stroke of ochre 1.5 wide. It gives
- * under the finger at 0.97, and TalkBack hears it selected once chosen, and nothing of a choice otherwise
- * (`.accessibilityAddTraits(on ? .isSelected : [])`).
+ * under the finger at 0.97 and takes one only within its corners (`.contentShape`), and TalkBack hears it selected
+ * once chosen, and nothing of a choice otherwise (`.accessibilityAddTraits(on ? .isSelected : [])`).
  */
 @Composable
 private fun ReasonChip(title: String, tag: String, on: Boolean, enabled: Boolean, toggle: () -> Unit) {
@@ -1276,7 +1276,7 @@ private fun ReasonChip(title: String, tag: String, on: Boolean, enabled: Boolean
     Box(
         Modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.97f), enabled = enabled, role = Role.Button, onClick = toggle)
+            .button(interactionSource = null, indication = PressStyle.tactile(0.97f), enabled = enabled, role = Role.Button, shape = shape, onClick = toggle)
             .semantics { if (on) selected = true }
             .heightIn(min = 44.dp)
             .background(if (on) colors.resolve(ExperimentalPalette.ochreSurface) else colors.raised, shape)
@@ -1366,7 +1366,7 @@ private fun SendButton(busy: Boolean, disabled: Boolean, action: () -> Unit) {
             .fillMaxWidth()
             .testTag(FEEDBACK_SEND)
             .graphicsLayer { alpha = if (disabled && !busy) 0.45f else 1f }
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = !busy && !disabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = !busy && !disabled, role = Role.Button, shape = ContinuousRoundedShape(16.dp), onClick = action)
             .semantics { if (busy) progressBarRangeInfo = ProgressBarRangeInfo.Indeterminate }
             .background(colors.accent, ContinuousRoundedShape(16.dp))
             .heightIn(min = 50.dp)

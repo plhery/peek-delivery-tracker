@@ -68,6 +68,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.text.NumberFormat
@@ -295,7 +296,7 @@ internal fun PassportStamps(state: PassportState, stats: PassportStatistics, car
                 Modifier
                     .outset(8.dp)
                     .testTag(PASSPORT_SHOW_ALL)
-                    .clickable(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) {
+                    .button(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) {
                         state.showAllStamps = !state.showAllStamps
                     }
                     .heightIn(min = 44.dp)
@@ -479,7 +480,7 @@ internal fun PassportCountries(state: PassportState, stats: PassportStatistics) 
                 .popoverAnchor { anchor = it }
                 .outset(10.dp)
                 .testTag(PASSPORT_COUNTRIES)
-                .clickable(interactionSource = null, indication = PressStyle.Passport, onClick = toggle)
+                .button(interactionSource = null, indication = PressStyle.Passport, onClick = toggle)
                 .clearAndSetSemantics {
                     contentDescription = title
                     stateDescription = expansionState(expanded, localizer)

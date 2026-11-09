@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,6 +61,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.util.UUID
 
@@ -258,7 +258,7 @@ private fun AlertsHeader(parcel: Parcel, close: () -> Unit) {
             Modifier
                 .size(44.dp)
                 .testTag(PARCEL_ALERTS_CLOSE)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = close)
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, shape = CircleShape, onClick = close)
                 .semantics { contentDescription = closeLabel },
             contentAlignment = Alignment.Center,
         ) {
@@ -324,7 +324,7 @@ private fun DoneButton(closing: Boolean, close: () -> Unit) {
         Modifier
             .fillMaxWidth()
             .testTag(PARCEL_ALERTS_DONE)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = close)
+            .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, shape = ContinuousRoundedShape(16.dp), onClick = close)
             .background(colors.accent, ContinuousRoundedShape(16.dp))
             .heightIn(min = 50.dp)
             .padding(horizontal = 20.dp, vertical = 13.dp),

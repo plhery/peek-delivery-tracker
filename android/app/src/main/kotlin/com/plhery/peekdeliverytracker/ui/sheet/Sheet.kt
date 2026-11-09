@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
+import androidx.compose.material3.R as MaterialR
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
@@ -30,6 +31,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -65,9 +67,15 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.paneTitle
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -225,7 +233,10 @@ private data class SheetKey(val title: String)
  * What a sheet or a popover keeps with the window, so that the window made again finds it as it was: the detent it
  * rests at, of its sheet's, and whether it had come up. Forgotten once it has gone.
  */
-internal class SheetMemory(var detent: Int = 0, var up: Boolean = false) {
+internal class SheetMemory(detent: Int = 0, var up: Boolean = false) {
+    /** Read as the sheet is composed, so that its grabber says which way a tap on it goes. */
+    var detent by mutableIntStateOf(detent)
+
     fun forget() {
         detent = 0
         up = false
@@ -534,6 +545,20 @@ private fun SheetLayer(
             animateTo(motion.rest(requested), 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { arrive() }
         }
 
+        // The detent a tap on the grabber goes to, as UIKit's grabber cycles them: the next larger, after the largest
+        // the smallest. None while the sheet has one rest, a form or lifted to large.
+        val toggle = if (rests.size < 2 || rests.size != detents.size) null else {
+            val at = memory.detent.coerceIn(rests.indices)
+            val larger = rests.indices.filter { rests[it] < rests[at] - 0.5f }.maxByOrNull { rests[it] }
+            val next = larger ?: rests.indices.maxBy { rests[it] }
+            if (next == at) null else GrabberToggle(expands = larger != null) {
+                if (!visible || !motion.shown || motion.moved) return@GrabberToggle
+                memory.detent = next
+                onDetentChange(detents[next])
+                animateTo(motion.rest(next), 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { arrive() }
+            }
+        }
+
         // While it can't be sent away, the back goes nowhere, rather than to what is under it.
         BackHandler(enabled = visible && !dismissible) {}
         PredictiveBackHandler(enabled = visible && dismissible) { progress ->
@@ -628,7 +653,7 @@ private fun SheetLayer(
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
                         // Over what it holds, whose ground would hide them.
                         if (standsUp) LitEdge(shape, Modifier.matchParentSize())
-                        if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
+                        if (grabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
                     }
                 }
             } else {
@@ -685,7 +710,7 @@ private fun SheetLayer(
                                     .sheetFootRoom(foot, bar),
                             ) { content() }
                             if (standsUp) LitEdge(shape, Modifier.matchParentSize())
-                            if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
+                            if (grabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
                         }
                     }
                 }
@@ -794,20 +819,42 @@ private fun LitEdge(shape: Shape, modifier: Modifier) {
     )
 }
 
-/** `.presentationDragIndicator(.visible)`: 36 × 5, 5 under the sheet's top. */
+/** A tap on the grabber, to TalkBack: to the next detent, a larger one where it [expands]. */
+private class GrabberToggle(val expands: Boolean, val run: () -> Unit)
+
+/**
+ * `.presentationDragIndicator(.visible)`: 36 × 5, 5 under the sheet's top. TalkBack reaches it first in the sheet, as
+ * VoiceOver does the iPhone's ("Sheet grabber, button"), in the system's words for one (Material's "Drag handle"); where
+ * the sheet has detents to go to, it is a button whose double tap takes the sheet to the next ([toggle]), heard as
+ * expanding or collapsing it, as VoiceOver's hint says.
+ */
 @Composable
-private fun Grabber(modifier: Modifier) {
+private fun Grabber(toggle: GrabberToggle?, modifier: Modifier) {
+    val name = stringResource(MaterialR.string.m3c_bottom_sheet_drag_handle_description)
+    val action = toggle?.let {
+        stringResource(if (it.expands) MaterialR.string.m3c_bottom_sheet_expand_description else MaterialR.string.m3c_bottom_sheet_collapse_description)
+    }
     Box(
         modifier
             .padding(top = GRABBER_TOP)
             .size(GRABBER_WIDTH, GRABBER_HEIGHT)
             .background(PeekTheme.colors.grabber, ContinuousRoundedShape(GRABBER_HEIGHT / 2))
             .testTag(SHEET_GRABBER)
-            .clearAndSetSemantics {},
+            .clearAndSetSemantics {
+                contentDescription = name
+                traversalIndex = -1f
+                if (toggle != null) {
+                    role = Role.Button
+                    onClick(action) {
+                        toggle.run()
+                        true
+                    }
+                }
+            },
     )
 }
 
-/** The sheet's drag indicator ([Grabber]), which TalkBack doesn't reach. */
+/** The sheet's drag indicator ([Grabber]). */
 const val SHEET_GRABBER = "sheet.grabber"
 
 /** The window is regular this wide and this tall, as the iPhone's size classes would have it. */

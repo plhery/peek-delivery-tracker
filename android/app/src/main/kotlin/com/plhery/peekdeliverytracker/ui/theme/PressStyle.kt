@@ -34,9 +34,9 @@ import kotlin.math.roundToInt
  * back with `animation`. Under Reduce Motion it neither scales nor moves, and what remains changes at once.
  *
  * A style is Compose's `Indication`, so a button takes it in place of the ripple, which the iPhone has none of:
- * `Modifier.clickable(onClick = …, interactionSource = null, indication = PressStyle.Tactile)`, placed before what it
- * presses (`background`, `clip`), as `.buttonStyle` takes the whole label. A press told some other way (a card whose
- * gesture is its own) uses `Modifier.pressEffect(style, pressed)`.
+ * `Modifier.button(interactionSource = null, indication = PressStyle.Tactile, onClick = …)` ([button]), placed
+ * before what it presses (`background`, `clip`), as `.buttonStyle` takes the whole label. A press told some other way
+ * (a card whose gesture is its own) uses `Modifier.pressEffect(style, pressed)`.
  *
  * As an indication it also rings the button while the keyboard has the focus there, just outside `shape`, and, where
  * `hover`, lights it up under a pointer in `shape` ([ControlHighlight], which rounds the bounds where `shape` is null).

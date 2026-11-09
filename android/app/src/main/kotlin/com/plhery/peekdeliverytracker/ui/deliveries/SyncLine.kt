@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +26,7 @@ import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
@@ -83,7 +83,7 @@ private fun RefreshButton(tint: Color, working: Boolean, onRefresh: () -> Unit) 
         Modifier
             .size(REFRESH_SIDE)
             .testTag(PAGE_REFRESH)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, onClick = onRefresh)
+            .button(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, onClick = onRefresh)
             .plainDisabled(!working)
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,

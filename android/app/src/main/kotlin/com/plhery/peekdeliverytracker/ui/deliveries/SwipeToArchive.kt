@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.indication
@@ -86,6 +85,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -634,7 +634,7 @@ private fun ActionButton(swipe: ArchiveSwipe, title: String) {
                             onClick { swipe.trigger(provideFeedback = true); true }
                         }
                         // `.buttonStyle(.plain)`: it dims while pressed.
-                        .clickable(interactionSource = null, indication = PlainPress) {
+                        .button(interactionSource = null, indication = PlainPress) {
                             if (swipe.visible() >= 8) swipe.trigger(provideFeedback = true)
                         }
                 } else {

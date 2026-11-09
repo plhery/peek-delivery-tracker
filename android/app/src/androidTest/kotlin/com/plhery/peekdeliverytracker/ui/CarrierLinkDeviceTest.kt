@@ -3,6 +3,10 @@ package com.plhery.peekdeliverytracker.ui
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.MutableFloatState
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyDescendant
@@ -12,6 +16,9 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -36,6 +43,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.math.max
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -52,7 +60,8 @@ import org.junit.runner.RunWith
  * counted once, and the visit is told to the page's question (`feedback.visited(link.name)`), which asks on the way
  * back from the carrier's site. On the sample (`sample == nil` in ParcelDetailView) there is no link, so nothing is
  * opened, counted or asked. The same in a link's sheet, its number whole (the carrier's tracking page) or hidden (the
- * carrier's search page). The walk keeps the browser from opening ([ParcelWalk]'s monitor answers each view for the
+ * carrier's search page). The link is 44 tall at least, with 10 above and below its words on the page and none in the
+ * sheet (B-S07, B-S47). The walk keeps the browser from opening ([ParcelWalk]'s monitor answers each view for the
  * system): the window is never stopped and keeps the focus, so nothing is left over the next test's. Signed in as the
  * synthetic reader@example.com on fake deliveries and links whose stores answer every read in memory, the page beside
  * the list or over it as the window lays them out. Shots in carrierlink/<row>-<moment>.png.
@@ -237,15 +246,8 @@ class CarrierLinkDeviceTest {
      * shot as `moment`, then back two seconds later with the sheet's question asking, shot as `moment`-back.
      */
     private fun visitFromTheSheet(answer: PublicParcelResponse, link: ParcelTrackingLink, moment: String) {
-        val links = FakeParcelLinks(answer = answer, session = FakeParcelLinks.READER)
-        compose.waitsForMaps()
-        compose.runOnUiThread { compose.activity.edgeToEdge(dark = false) }
-        compose.setContent { RootHost(state = FakeParcelLinks.READER, identities = walk.identities, links = links) }
-        compose.waitForIdle()
-        compose.runOnUiThread { links.links.open(ParcelLinkRoute(id = answer.link.id)) }
+        val links = openSheet(answer, link)
         val sheet = button(link, LINK_SHEET)
-        compose.waitUntil(LONG_MILLIS) { compose.onAllNodes(sheet).fetchSemanticsNodes().isNotEmpty() }
-        walk.settle()
         val word = { walk.onUi { links.sheet.feedback(links).word } }
         val counted = { walk.onUi { links.actions.count { it == CARRIER_LINK_ACTION } } }
 
@@ -275,8 +277,92 @@ class CarrierLinkDeviceTest {
         compose.mainClock.autoAdvance = true
     }
 
+    /**
+     * B-S07: on a parcel's page, the carrier's link stands 10 above and below its words, 44 tall at least
+     * (ParcelDetailView's `carrierLinks`, `.padding(.vertical, 10).frame(minHeight: 44)`): at the largest text, as tall
+     * as its words and 20.
+     */
+    @Test
+    fun onThePageTheCarriersLinkHas10AboveAndBelowItsWords() {
+        walk.fontScale = LARGEST
+        walk.show(listOf(gift, lamp))
+        walk.open(gift)
+        val link = walk.identities.catalog.trackingLinks(gift, AppLanguage.En).single()
+        val page = button(link, PARCEL_PAGE)
+        reveal(page)
+        assertAroundItsWords(link, PARCEL_PAGE, 20.dp)
+        walk.shot("B-S07-link")
+    }
+
+    /**
+     * B-S47: in a link's sheet, the carrier's link is 44 tall at least with nothing above and below its words
+     * (ParcelLinkSheet's `carrierLinks`, `.frame(minHeight: 44)` alone): 44 at the standard text, as tall as its words at
+     * the largest, where the page's room would show.
+     */
+    @Test
+    fun inALinksSheetTheCarriersLinkIs44TallAtLeastWithNoRoomAboveAndBelow() {
+        val answer = LinkFixtures.keepable()
+        val link = walk.identities.catalog.trackingLinks(Parcel(shared = answer.parcel), AppLanguage.En).first()
+        val scale = mutableFloatStateOf(1f)
+        openSheet(answer, link, scale)
+        val sheet = button(link, LINK_SHEET)
+        reveal(sheet)
+        assertEquals("44 tall at the standard text", px(LINK_HEIGHT), compose.onAllNodes(sheet).onFirst().fetchSemanticsNode().size.height.toFloat(), PIXEL)
+        walk.shot("B-S47-link", alsoDark = false)
+
+        scale.floatValue = LARGEST
+        walk.settle()
+        reveal(sheet)
+        assertAroundItsWords(link, LINK_SHEET, 0.dp)
+        walk.shot("B-S47-link-largest", alsoDark = false)
+    }
+
+    private fun px(dp: Dp): Float = with(compose.density) { dp.toPx() }
+
+    /**
+     * That `link`'s button in what has the tag `place` is as tall as its words and `around`, 44 at least, where its
+     * words and 20 are taller than 44, so that the page's room and none tell apart.
+     */
+    private fun assertAroundItsWords(link: ParcelTrackingLink, place: String, around: Dp) {
+        val words = walk.text("detail.carrierWebsite", "carrier" to link.name)
+        val button = compose.onAllNodes(button(link, place)).onFirst().fetchSemanticsNode().size.height.toFloat()
+        val inside = hasText(words) and hasAnyAncestor(hasTestTag(PAGE_CARRIER_LINK) and hasAnyAncestor(hasTestTag(place)))
+        val drawn = compose.onAllNodes(inside, useUnmergedTree = true).onFirst().fetchSemanticsNode().size.height.toFloat()
+        assertTrue("The words ($drawn px) and 20 taller than 44", drawn + px(20.dp) > px(LINK_HEIGHT) + PIXEL)
+        assertEquals("The link as tall as its words ($drawn px) and $around", max(px(LINK_HEIGHT), drawn + px(around)), button, PIXEL)
+    }
+
+    /**
+     * `answer`'s sheet, opened over the deliveries at the text size `scale` holds, once `link`'s button shows. The
+     * sheet's links.
+     */
+    private fun openSheet(answer: PublicParcelResponse, link: ParcelTrackingLink, scale: MutableFloatState = mutableFloatStateOf(1f)): FakeParcelLinks {
+        val links = FakeParcelLinks(answer = answer, session = FakeParcelLinks.READER)
+        compose.waitsForMaps()
+        compose.runOnUiThread { compose.activity.edgeToEdge(dark = false) }
+        compose.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(LocalDensity.current.density, scale.floatValue)) {
+                RootHost(state = FakeParcelLinks.READER, identities = walk.identities, links = links)
+            }
+        }
+        compose.waitForIdle()
+        compose.runOnUiThread { links.links.open(ParcelLinkRoute(id = answer.link.id)) }
+        val sheet = button(link, LINK_SHEET)
+        compose.waitUntil(LONG_MILLIS) { compose.onAllNodes(sheet).fetchSemanticsNodes().isNotEmpty() }
+        walk.settle()
+        return links
+    }
+
     private companion object {
         const val FOLDER = "carrierlink"
         const val CARRIER_LINK_ACTION = "parcel-carrier-link"
+
+        /** The largest text, an accessibility size. */
+        const val LARGEST = 2f
+
+        /** How far a measured height may be off, in pixels. */
+        const val PIXEL = 2f
+
+        val LINK_HEIGHT = 44.dp
     }
 }

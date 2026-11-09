@@ -4,7 +4,6 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -136,6 +135,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -675,7 +675,7 @@ internal fun BorderedButton(title: String, tag: String, enabled: Boolean = true,
     Box(
         Modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled)
             .background(colors.ink.copy(alpha = 0.12f), CapsuleShape)
             .padding(horizontal = 14.dp, vertical = 7.dp),
@@ -704,7 +704,7 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
         Modifier
             .fillMaxWidth()
             .testTag(FRIENDS_SHARING)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { state.open(FriendsPanel.Profile, asForm) }
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button) { state.open(FriendsPanel.Profile, asForm) }
             .clearAndSetSemantics {
                 contentDescription = settings
                 role = Role.Button
@@ -754,7 +754,7 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
             modifier
                 .heightIn(min = 36.dp)
                 .testTag(FRIENDS_INVITE)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = invite)
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = invite)
                 .background(colors.accent, ContinuousRoundedShape(11.dp))
                 .padding(horizontal = 10.dp),
             contentAlignment = Alignment.Center,
@@ -809,7 +809,7 @@ private fun FriendButton(state: FriendsState, friend: FriendCard, landing: Boole
             )
             .testTag(friendCardTag(friend.id))
             .zoomSource(friend.id, state.zoom, CARD_RADIUS)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), role = Role.Button) { state.openFriend(friend.id) },
+            .button(interactionSource = null, indication = PressStyle.tactile(0.98f), role = Role.Button) { state.openFriend(friend.id) },
     ) {
         FriendCardView(friend)
     }
@@ -1125,7 +1125,7 @@ internal fun FriendAcceptedNotice(update: FriendUpdate, open: () -> Unit, dismis
                 .weight(1f)
                 .heightIn(min = 44.dp)
                 .testTag(FRIENDS_NOTICE_OPEN)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = open),
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = open),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -1144,7 +1144,7 @@ internal fun FriendAcceptedNotice(update: FriendUpdate, open: () -> Unit, dismis
             Modifier
                 .size(32.dp, 44.dp)
                 .testTag(FRIENDS_NOTICE_DISMISS)
-                .clickable(interactionSource = null, indication = PlainPress, onClick = dismiss)
+                .button(interactionSource = null, indication = PlainPress, onClick = dismiss)
                 .semantics {
                     contentDescription = dismissal
                     role = Role.Button

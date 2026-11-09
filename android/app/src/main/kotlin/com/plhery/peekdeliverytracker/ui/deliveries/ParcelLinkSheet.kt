@@ -7,7 +7,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -163,6 +162,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.delay
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
@@ -680,7 +680,7 @@ private fun Keeping(
                         .fillMaxWidth()
                         .heightIn(min = 44.dp)
                         .testTag(LINK_SIGN_IN)
-                        .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { state.signIn(source) }
+                        .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { state.signIn(source) }
                         .plainDisabled(enabled),
                     contentAlignment = Alignment.Center,
                 ) {
@@ -720,7 +720,7 @@ private fun LinkPrimaryButton(title: String, symbol: String?, tag: String, busy:
         Modifier
             .fillMaxWidth()
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = !busy, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = !busy, role = Role.Button, shape = ContinuousRoundedShape(16.dp), onClick = action)
             .semantics { if (busy) progressBarRangeInfo = ProgressBarRangeInfo.Indeterminate }
             .background(colors.accent, ContinuousRoundedShape(16.dp))
             .heightIn(min = 50.dp)
@@ -771,7 +771,7 @@ private fun AlreadyFollowed(source: ParcelLinkSource, parcelId: UUID?, here: Boo
                 Modifier
                     .fillMaxWidth()
                     .testTag(LINK_OPEN_EXISTING)
-                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) {
+                    .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, shape = ContinuousRoundedShape(12.dp)) {
                         source.action("parcel-link-open-existing")
                         if (here) source.showDeviceParcels()
                         source.links.openExisting(parcelId)
@@ -860,7 +860,7 @@ private fun ProminentButton(title: String, tag: String, enabled: Boolean, modifi
     Box(
         modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled)
             .background(colors.accent, CapsuleShape)
             .heightIn(min = 44.dp)
@@ -1163,7 +1163,7 @@ private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, 
         Modifier
             .heightIn(min = 44.dp)
             .testTag(LINK_REFRESH)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .clearAndSetSemantics {
                 contentDescription = if (shownAge != null) "$shownAge, $label" else label
                 stateDescription = if (shownAge != null) "" else updated ?: ""
@@ -1414,7 +1414,7 @@ private fun SharedImportCharges(charges: ImportChargesLine, asksForNumber: Boole
  * a long press selects, with its copy and its carriers' pages ([ShipmentNumbers]); a copy puts the number on the
  * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds and, before
  * Android 13, whose system shows no copy, to TalkBack ([announce], [Device.confirmsCopies]). A carrier's page opened is
- * counted and told ([onVisit]).
+ * counted and told ([onVisit]). Its carriers' pages are 44 tall, with none of the page's 10 above and below.
  */
 @Composable
 private fun SharedParcelNumber(
@@ -1441,7 +1441,7 @@ private fun SharedParcelNumber(
                 Text(localized("detail.trackingNumber"), color = colors.secondaryLabel, style = type.caption2.sfLines())
                 Text(hint.masked, color = colors.label, style = type.style(IosTextStyle.Caption, design = FontDesign.Monospaced).sfLines())
             }
-            CarrierLinks(listOfNotNull(identities.catalog.searchLink(parcel, language)), own = true, tint, onLink)
+            CarrierLinks(listOfNotNull(identities.catalog.searchLink(parcel, language)), own = true, tint, onLink, padded = false)
         }
         return
     }
@@ -1465,6 +1465,7 @@ private fun SharedParcelNumber(
             }
         },
         onLink = onLink,
+        padded = false,
     )
 }
 

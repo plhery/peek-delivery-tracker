@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -59,6 +58,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.pressEffect
 import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import com.plhery.peekdeliverytracker.ui.theme.TextLines
@@ -197,7 +197,7 @@ private fun ShareCardView(card: ShareCard, copy: ExtensionLocalizer, onSave: () 
                         copy.text(if (phase == SharePhase.Saved) "native.done" else "common.cancel"),
                         Modifier
                             .testTag(SHARE_CLOSE)
-                            .clickable(interactionSource = null, indication = SystemPress, role = Role.Button, onClick = onClose)
+                            .button(interactionSource = null, indication = SystemPress, role = Role.Button, onClick = onClose)
                             .padding(vertical = CLOSE_PADDING),
                         style = type.fixed(type.scaled(CLOSE_SIZE)).sfLines(), color = colors.resolve(SystemColors.blue),
                         textAlign = TextAlign.Center,
@@ -225,7 +225,7 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
         Modifier
             .fillMaxWidth()
             .testTag(SHARE_SAVE)
-            .clickable(interactionSource = presses, indication = ControlHighlight(shape), enabled = enabled, role = Role.Button, onClick = onClick),
+            .button(interactionSource = presses, indication = ControlHighlight(shape), enabled = enabled, role = Role.Button, onClick = onClick),
     ) {
         Box(Modifier.matchParentSize().pressEffect(PlainPress, pressed).background(if (enabled) YELLOW else DISABLED_FILL, shape))
         Row(

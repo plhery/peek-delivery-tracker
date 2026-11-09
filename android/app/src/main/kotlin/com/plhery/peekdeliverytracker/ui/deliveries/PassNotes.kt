@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,6 +54,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
@@ -129,7 +129,7 @@ internal fun PickupPointCard(
             Row(
                 Modifier
                     .testTag(PAGE_PICKUP_DIRECTIONS)
-                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) {
+                    .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, shape = ContinuousRoundedShape(BUTTON_RADIUS)) {
                         onDirections()
                         try {
                             uriHandler.openUri(point.directionsUrl)
@@ -170,7 +170,7 @@ internal fun PickupPointCard(
                                 true
                             }
                         }
-                        .clickable(interactionSource = null, indication = PressStyle.Tactile, onClick = copy)
+                        .button(interactionSource = null, indication = PressStyle.Tactile, shape = ContinuousRoundedShape(BUTTON_RADIUS), onClick = copy)
                         .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), ContinuousRoundedShape(BUTTON_RADIUS))
                         .heightIn(min = BUTTON_HEIGHT)
                         .padding(horizontal = 10.dp),
@@ -390,7 +390,7 @@ private fun NoteButton(
         text,
         Modifier
             .accessibilityFocus(focus)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { action(focus) },
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { action(focus) },
         color = tint,
         style = PeekTheme.type.style(IosTextStyle.Footnote, weight).sfLines(),
     )

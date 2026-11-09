@@ -12,7 +12,6 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,6 +58,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.util.UUID
@@ -294,7 +294,7 @@ private fun OfferButton(
     Box(
         Modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, shape = if (ground != null) shape else null, onClick = action)
             .semantics { if (saving) progressBarRangeInfo = ProgressBarRangeInfo.Indeterminate }
             .then(if (ground != null) Modifier.background(ground, shape) else Modifier)
             .heightIn(min = 44.dp)

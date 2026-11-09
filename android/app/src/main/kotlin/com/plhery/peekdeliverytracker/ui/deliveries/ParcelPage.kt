@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.view.KeyEvent
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -103,6 +102,7 @@ import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
@@ -605,7 +605,7 @@ internal fun PageBarButton(symbol: String, label: String, tag: String, modifier:
         modifier
             .size(BAR_BUTTON)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = action)
+            .button(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = action)
             .semantics {
                 contentDescription = label
                 role = Role.Button

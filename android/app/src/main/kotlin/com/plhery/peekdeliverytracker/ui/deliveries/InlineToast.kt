@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +34,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 
@@ -86,7 +86,7 @@ internal fun InlineToast(
             if (button != null && action != null) {
                 Text(
                     button,
-                    Modifier.clickable(interactionSource = null, indication = PlainPress, onClick = action),
+                    Modifier.button(interactionSource = null, indication = PlainPress, onClick = action),
                     color = tint,
                     style = type.style(IosTextStyle.Subheadline, FontWeight.Bold).sfLines(),
                 )
@@ -182,7 +182,7 @@ private fun ToastAnswerButton(answer: ToastAnswer) {
     Box(
         Modifier
             .then(if (answer.tag != null) Modifier.testTag(answer.tag) else Modifier)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.96f), role = Role.Button, onClick = answer.action)
+            .button(interactionSource = null, indication = PressStyle.tactile(0.96f), role = Role.Button, onClick = answer.action)
             .heightIn(min = 44.dp),
         contentAlignment = Alignment.Center,
     ) {

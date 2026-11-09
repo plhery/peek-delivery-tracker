@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -89,6 +88,7 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
@@ -456,7 +456,7 @@ private fun CarrierRow(change: CarrierChange, refused: Boolean, focus: Accessibi
         Modifier
             .testTag(CHANGE_CARRIER_ROW)
             .accessibilityFocus(focus)
-            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onPush)
+            .button(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onPush)
             .clearAndSetSemantics {
                 contentDescription = label
                 stateDescription = listOfNotNull(name, refusal.takeIf { refused }).joinToString(", ")
@@ -592,7 +592,7 @@ internal fun PostcodeCountryMenu(
             .testTag(tag)
             .onGloballyPositioned { bounds = it.boundsInWindow() }
             .accessibilityFocus(returnFocus)
-            .clickable(interactionSource = null, indication = ControlHighlight.Default, enabled = enabled, role = Role.DropdownList, onClick = open)
+            .button(interactionSource = null, indication = ControlHighlight.Default, enabled = enabled, role = Role.DropdownList, onClick = open)
             .clearAndSetSemantics {
                 contentDescription = label
                 stateDescription = name
@@ -662,7 +662,7 @@ private fun PickerBack(onBack: () -> Unit) {
                 .size(BACK_SIZE)
                 .testTag(CHANGE_CARRIER_BACK)
                 .accessibilityFocus(focus)
-                .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = onBack)
+                .button(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = onBack)
                 .semantics {
                     contentDescription = label
                     role = Role.Button

@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -82,6 +81,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.WindowLevelHinge
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
@@ -267,7 +267,7 @@ internal fun ParcelMapScreen(
                 Modifier
                     .matchParentSize()
                     .testTag(MAP_CLOSE)
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClose)
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button, shape = CapsuleShape, onClick = onClose)
                     .semantics { contentDescription = localizer.text("map.close") },
                 contentAlignment = Alignment.Center,
             ) {
@@ -419,7 +419,7 @@ private fun ViewButton(title: String, symbol: String, selected: Boolean, group: 
     val style = type.style(IosTextStyle.Caption, FontWeight.Medium)
     Row(
         Modifier
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, shape = CapsuleShape, onClick = action)
             .semantics {
                 this.selected = selected
                 // Compose gives TalkBack a description of a node with words of its own as a child before them.

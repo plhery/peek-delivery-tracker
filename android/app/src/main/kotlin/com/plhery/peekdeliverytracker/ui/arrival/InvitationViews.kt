@@ -5,7 +5,6 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -111,6 +110,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.animateKeptFloatAsState
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import java.util.UUID
@@ -166,7 +166,7 @@ internal fun InvitationWelcome(
                             Modifier
                                 .size(44.dp)
                                 .testTag(INVITATION_CLOSE)
-                                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onDismiss)
+                                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onDismiss)
                                 .semantics { contentDescription = close },
                             contentAlignment = Alignment.Center,
                         ) {
@@ -229,7 +229,7 @@ private fun OpenParcelButton(opening: Boolean, onOpen: () -> Unit, onPress: (Boo
         Modifier
             .padding(top = 12.dp)
             .testTag(WELCOME_OPEN_PARCEL)
-            .clickable(interaction, indication = ControlHighlight.Default, enabled = enabled, role = Role.Button, onClick = onOpen)
+            .button(interaction, indication = ControlHighlight.Default, enabled = enabled, role = Role.Button, onClick = onOpen)
             .clearAndSetSemantics {
                 contentDescription = title
                 role = Role.Button
@@ -582,7 +582,7 @@ internal fun FriendInvitationAcceptance(
                     Modifier
                         .size(44.dp)
                         .testTag(INVITATION_BACK)
-                        .clickable(interactionSource = null, indication = PlainPress, enabled = !joining, role = Role.Button, onClick = onBack)
+                        .button(interactionSource = null, indication = PlainPress, enabled = !joining, role = Role.Button, onClick = onBack)
                         .plainDisabled(!joining)
                         .semantics { contentDescription = back },
                     contentAlignment = Alignment.Center,

@@ -43,6 +43,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_ADD_NOTE
 import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_BUBBLE
 import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_CHIP
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_CLOSE
 import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_NOT_QUITE
 import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_REASON
 import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_WORDS_SHEET
@@ -74,8 +75,9 @@ import org.junit.runner.RunWith
  * is drawn 36 tall and takes a touch 4 above and below it (`.padding(.vertical, 4).contentShape(Rectangle())
  * .padding(.vertical, -4)`), a chip is 44 tall at least and a number row 56; a finger held on one gives it at 0.96, 0.97
  * and 0.98 (with the style's 0.94 opacity) and does nothing until it lifts, which acts once. A finger dragged off a chip
- * well past where either platform still holds the press does nothing; a long press acts once on lift, as a SwiftUI
- * Button's does. "feedback.addNote", a plain button, is 36 tall in a touch 44 tall. The touches measured are the
+ * keeps it pressed within 70 of it, as UIKit tracks one, lets go past that and presses it again on the way back, and a
+ * lift where it is pressed acts; past it, nothing. A chip and the words sheet's ✕ take no finger in their rounded
+ * corners (`.contentShape`). A long press acts once on lift, as a SwiftUI Button's does. "feedback.addNote", a plain button, is 36 tall in a touch 44 tall. The touches measured are the
  * screen's own, sent through UiAutomation ([ScreenTouches], and a finger held here while the screen is photographed);
  * what only leads to a moment is TalkBack's click. How much a held button gives is read from the screen: the scale
  * about the button's centre that best maps the photograph at rest onto the one held, the press's opacity fitted out as
@@ -414,18 +416,10 @@ class TouchTargetsDeviceTest {
         val shown = reasons()
         for (reason in shown) assertAtLeast("${reason.name}'s chip", onScreen(FEEDBACK_CHIP + reason.name), 44.dp)
 
-        val clear = clear()
-        val candidates = shown.filter { it != ParcelFeedbackReason.Steps }
-            .map { it to onScreen(FEEDBACK_CHIP + it.name) }
-            .filter { (_, box) -> within(box, clear) }
-        check(candidates.isNotEmpty()) { "No chip but the chosen one stands where a finger reaches it" }
-        val (reason, box) = candidates.maxBy { (_, place) -> max(place.left - clear.left, clear.right - place.right) }
+        val (reason, box, side) = roomyChip()
         val tag = FEEDBACK_CHIP + reason.name
-        val rightwards = clear.right - box.right >= box.left - clear.left
-        val room = (if (rightwards) clear.right - box.right else box.left - clear.left) - px(CLEAR_MARGIN)
-        val beyond = min(px(DRAG_BEYOND), room)
-        assertTrue("Room to drag ${STILL_HELD_ON_IOS} past the chip: ${beyond / compose.density.density} dp", beyond >= px(STILL_HELD_ON_IOS))
-        touches.drag(box.center, Offset((if (rightwards) 1f else -1f) * (box.width / 2 + beyond), 0f))
+        val beyond = beyond(box, side)
+        touches.drag(box.center, Offset(side * (box.width / 2 + beyond), 0f))
         walk.settle()
         assertNull("Dragged off, not chosen", selected(tag))
         assertEquals(setOf(ParcelFeedbackReason.Steps), chosen())
@@ -446,6 +440,120 @@ class TouchTargetsDeviceTest {
         assertNull("A long press takes it off once, as a tap does", selected(tag))
         assertEquals(setOf(ParcelFeedbackReason.Steps), chosen())
     }
+
+    /**
+     * B-G17: a finger put down on a chip and dragged off it sideways keeps it pressed (0.97) 40 past its edge, as UIKit
+     * keeps a press within about 70 points; dragged on to well past that, it lets go, the chip back at its size; brought
+     * back within 40, it presses the chip again. Nothing is chosen until the finger lifts there, which chooses the chip
+     * once.
+     */
+    @Test
+    fun aChipDraggedOffStaysPressedWithin70LetsGoPastItAndIsChosenOnALiftBackWithin() {
+        openWords(ParcelFeedbackReason.Steps)
+        val (reason, box, side) = roomyChip()
+        val tag = FEEDBACK_CHIP + reason.name
+        val beyond = beyond(box, side)
+        val rest = walk.shot("B-G17-chip-off", alsoDark = false)
+        val near = box.center + Offset(side * (box.width / 2 + px(WITHIN_REACH)), 0f)
+        val far = box.center + Offset(side * (box.width / 2 + beyond), 0f)
+        val finger = Finger(box.center)
+        finger.down()
+        try {
+            finger.rest()
+            finger.moveTo(near)
+            finger.rest()
+            assertScale(0.97f, rest, walk.shot("B-G17-chip-off-near", alsoDark = false), box)
+            assertNull("Not chosen while held off", selected(tag))
+            finger.moveTo(far)
+            finger.rest()
+            assertScale(1f, rest, walk.shot("B-G17-chip-off-far", alsoDark = false), box)
+            finger.moveTo(near)
+            finger.rest()
+            assertScale(0.97f, rest, walk.shot("B-G17-chip-off-back", alsoDark = false), box)
+            assertNull("Not chosen while held off", selected(tag))
+        } finally {
+            finger.up()
+            compose.waitForIdle()
+        }
+        walk.settle()
+        assertEquals("Chosen once lifted within reach", true, selected(tag))
+        assertEquals(setOf(ParcelFeedbackReason.Steps, reason), chosen())
+    }
+
+    /**
+     * B-G17: a tap in each rounded corner of a chip, where its 14-point continuous corners leave it out, chooses
+     * nothing (`.contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))`), and one in each corner of the
+     * words sheet's ✕, outside its circle 44 across (`.contentShape(Circle())`), closes nothing; a tap at the middle of
+     * the chip's leading edge, inside its shape, chooses it.
+     */
+    @Test
+    fun aChipAndTheCloseTakeNoFingerInTheirRoundedCorners() {
+        openWords(ParcelFeedbackReason.Steps)
+        val (reason, _, _) = roomyChip()
+        val tag = FEEDBACK_CHIP + reason.name
+        val chip = drawn(tag)
+        for (corner in corners(chip, px(CORNER_IN))) {
+            touches.tap(corner)
+            walk.settle()
+            assertNull("A tap at $corner, in a corner of the chip at $chip, chooses nothing", selected(tag))
+        }
+        assertEquals(setOf(ParcelFeedbackReason.Steps), chosen())
+
+        val close = drawn(FEEDBACK_CLOSE)
+        for (corner in corners(close, px(CORNER_IN))) {
+            touches.tap(corner)
+            walk.settle()
+            assertTrue("A tap at $corner, in a corner of the close at $close, closes nothing", walk.exists(FEEDBACK_WORDS_SHEET))
+        }
+        assertNotNull(walk.onUi { work().words })
+        walk.shot("B-G17-corners", alsoDark = false)
+
+        touches.tap(Offset(chip.left + px(CORNER_IN), chip.center.y))
+        walk.settle()
+        assertEquals("A tap at the middle of its leading edge chooses it", true, selected(tag))
+        assertEquals(setOf(ParcelFeedbackReason.Steps, reason), chosen())
+    }
+
+    /**
+     * The chip other than the chosen one with the most room beside it where a finger reaches it, its box on the screen,
+     * and the side with that room: 1 to the right, -1 to the left.
+     */
+    private fun roomyChip(): Triple<ParcelFeedbackReason, Rect, Float> {
+        val clear = clear()
+        val candidates = reasons().filter { it != ParcelFeedbackReason.Steps }
+            .map { it to onScreen(FEEDBACK_CHIP + it.name) }
+            .filter { (_, box) -> within(box, clear) }
+        check(candidates.isNotEmpty()) { "No chip but the chosen one stands where a finger reaches it" }
+        val (reason, box) = candidates.maxBy { (_, place) -> max(place.left - clear.left, clear.right - place.right) }
+        return Triple(reason, box, if (clear.right - box.right >= box.left - clear.left) 1f else -1f)
+    }
+
+    /** How far past `box` on `side` a finger is dragged off it: [DRAG_BEYOND] where there is room, past UIKit's reach. */
+    private fun beyond(box: Rect, side: Float): Float {
+        val clear = clear()
+        val room = (if (side > 0) clear.right - box.right else box.left - clear.left) - px(CLEAR_MARGIN)
+        val beyond = min(px(DRAG_BEYOND), room)
+        assertTrue("Room to drag ${STILL_HELD_ON_IOS} past the chip: ${beyond / compose.density.density} dp", beyond >= px(STILL_HELD_ON_IOS))
+        return beyond
+    }
+
+    /**
+     * Where what has `tag` is drawn on the screen, in pixels: the box of its modifiers from the tag in, padding and all,
+     * as the scales round it leave it (a floating sheet draws what it holds smaller than it lays it out), not as laid
+     * out.
+     */
+    private fun drawn(tag: String): Rect {
+        val node = touches.node(hasTestTag(tag))
+        return walk.onUi { node.boundsInWindow }.translate(touches.origin())
+    }
+
+    /** The four points `inset` in from each corner of `box`. */
+    private fun corners(box: Rect, inset: Float): List<Offset> = listOf(
+        Offset(box.left + inset, box.top + inset),
+        Offset(box.right - inset, box.top + inset),
+        Offset(box.left + inset, box.bottom - inset),
+        Offset(box.right - inset, box.bottom - inset),
+    )
 
     /**
      * B-G17: two numbers in Add's field are listed as rows 56 tall at least, the first chosen. Held on the second, it
@@ -492,8 +600,10 @@ class TouchTargetsDeviceTest {
         assertNull(selected(second))
     }
 
-    /** A finger on the screen at `at`, put down and lifted as the screen's own touches come, as [ScreenTouches]'s. */
-    private inner class Finger(private val at: Offset) {
+    /**
+     * A finger on the screen at `at`, put down, moved and lifted as the screen's own touches come, as [ScreenTouches]'s.
+     */
+    private inner class Finger(private var at: Offset) {
         private var down = SystemClock.uptimeMillis()
         private val properties = MotionEvent.PointerProperties().apply {
             id = 0
@@ -512,6 +622,24 @@ class TouchTargetsDeviceTest {
 
         fun up() {
             check(send(MotionEvent.ACTION_UP)) { "The screen refused the finger's lift at $at" }
+        }
+
+        /** Moved to `to` in [MOVE_STEPS] frames, real time and the test's clock both moved on with each. */
+        fun moveTo(to: Offset) {
+            val from = at
+            for (step in 1..MOVE_STEPS) {
+                SystemClock.sleep(ScreenTouches.FRAME_MILLIS)
+                compose.mainClock.advanceTimeBy(ScreenTouches.FRAME_MILLIS)
+                at = from + (to - from) * (step / MOVE_STEPS.toFloat())
+                check(send(MotionEvent.ACTION_MOVE)) { "The screen refused the finger's move to $at" }
+            }
+        }
+
+        /** Held still while its touches reach the window and a press comes or goes: as [held] waits, short of a long press. */
+        fun rest() {
+            SystemClock.sleep(FINGER_MILLIS)
+            compose.mainClock.advanceTimeBy(PRESS_MILLIS)
+            compose.waitForIdle()
         }
 
         private fun send(action: Int): Boolean {
@@ -608,5 +736,14 @@ class TouchTargetsDeviceTest {
 
         /** Past this, UIKit lets go of a press a finger dragged off (about 70 points around the control). */
         val STILL_HELD_ON_IOS = 72.dp
+
+        /** How far past a chip a finger dragged off it still holds it, well within UIKit's reach. */
+        val WITHIN_REACH = 40.dp
+
+        /** How far in from a corner of a box a tap in its corner lands, outside its rounding. */
+        val CORNER_IN = 1.5.dp
+
+        /** The frames a held finger takes to move. */
+        const val MOVE_STEPS = 12
     }
 }

@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.friends
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -78,6 +77,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.text.NumberFormat
@@ -236,7 +236,7 @@ private fun FriendDetail(friend: FriendCard, busy: Boolean, remove: () -> Unit) 
                 Box(
                     Modifier
                         .testTag(FRIENDS_SHOW_ALL)
-                        .clickable(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) { showAll = !showAll }
+                        .button(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) { showAll = !showAll }
                         .heightIn(min = 44.dp),
                     contentAlignment = Alignment.CenterStart,
                 ) {
@@ -297,7 +297,7 @@ private fun PlainButton(
     Box(
         modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled),
         contentAlignment = Alignment.Center,
     ) {
@@ -328,7 +328,7 @@ private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, o
             .heightIn(min = 96.dp)
             .popoverAnchor { anchor = it }
             .testTag(friendStampTag(value))
-            .clickable(interactionSource = null, indication = PressStyle.Passport, onClick = onOpen)
+            .button(interactionSource = null, indication = PressStyle.Passport, onClick = onOpen)
             .clearAndSetSemantics {
                 contentDescription = label
                 role = Role.Button

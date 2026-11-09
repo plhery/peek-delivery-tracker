@@ -11,7 +11,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -142,6 +141,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.floor
@@ -500,7 +500,7 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
                     Modifier
                         .size(SEARCH_HEIGHT)
                         .testTag(CARRIER_PICKER_CLEAR)
-                        .clickable(interactionSource = null, indication = PlainPress) { onQuery("") }
+                        .button(interactionSource = null, indication = PlainPress) { onQuery("") }
                         .semantics {
                             contentDescription = clear
                             role = Role.Button
@@ -536,7 +536,7 @@ private fun SearchClose(shown: Boolean, label: String, onClose: () -> Unit) {
                     Modifier
                         .size(CLOSE_SIZE)
                         .testTag(CARRIER_PICKER_CANCEL)
-                        .clickable(interactionSource = null, indication = PressStyle.tactile(CLOSE_PRESSED), onClick = onClose)
+                        .button(interactionSource = null, indication = PressStyle.tactile(CLOSE_PRESSED), onClick = onClose)
                         .semantics {
                             contentDescription = label
                             role = Role.Button
@@ -610,7 +610,7 @@ private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, s
         start, end, separatorStart = 0.dp,
         Modifier
             .testTag(CARRIER_PICKER_AUTOMATIC)
-            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
+            .button(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
             .semantics { if (selected) this.selected = true },
     ) {
         if (!stacked) {
@@ -678,7 +678,7 @@ private fun CarrierRow(
         start, end, separatorStart = MARK_WIDTH + ROW_SPACING,
         Modifier
             .testTag(carrierPickerRowTag(entry.carrier))
-            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
+            .button(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
             .clearAndSetSemantics {
                 contentDescription = listOf(definition.displayName, value).filter(String::isNotEmpty).joinToString(", ")
                 if (selected) this.selected = true

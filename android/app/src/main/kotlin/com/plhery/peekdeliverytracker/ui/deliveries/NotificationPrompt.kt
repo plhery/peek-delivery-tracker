@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +33,7 @@ import com.plhery.peekdeliverytracker.ui.draw.stroke
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import java.util.UUID
@@ -105,7 +105,7 @@ internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Mod
                 fill
                     .testTag(NOTIFICATIONS_PROMPT_ENABLE)
                     .plainDisabled(!enabling)
-                    .clickable(interactionSource = null, indication = PlainPress, enabled = !enabling, role = Role.Button) {
+                    .button(interactionSource = null, indication = PlainPress, enabled = !enabling, role = Role.Button) {
                         work.run(PROMPT_WORK, source.scope, { localizer.text("notifications.error.enable") }) { source.enableNotifications() }
                     }
                     .background(colors.accent, ContinuousRoundedShape(BUTTON_RADIUS))
@@ -128,7 +128,7 @@ internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Mod
                 Modifier
                     .testTag(NOTIFICATIONS_PROMPT_DISMISS)
                     .plainDisabled(!enabling)
-                    .clickable(interactionSource = null, indication = PlainPress, enabled = !enabling, role = Role.Button) {
+                    .button(interactionSource = null, indication = PlainPress, enabled = !enabling, role = Role.Button) {
                         source.action("notifications-defer")
                         source.dismissNotificationInvitation()
                     }

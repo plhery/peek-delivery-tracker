@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -104,6 +103,7 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
@@ -315,7 +315,7 @@ internal fun LivePassCard(
                         localizer.text("detail.inputNeededAction"),
                         Modifier
                             .accessibilityFocus(neededFocus)
-                            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null, neededFocus) },
+                            .button(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null, neededFocus) },
                         color = colors.accent,
                         style = type.footnote.sfLines(),
                     )
@@ -337,7 +337,7 @@ internal fun LivePassCard(
                                 if (sample) {
                                     Modifier
                                 } else {
-                                    Modifier.accessibilityFocus(nameFocus).clickable(
+                                    Modifier.accessibilityFocus(nameFocus).button(
                                         interactionSource = null, indication = PlainPress, role = Role.Button,
                                         onClickLabel = localizer.text("detail.editTitle"),
                                     ) { onRename(nameFocus) }
@@ -450,7 +450,7 @@ internal fun PassMarks(
     // The second mark hangs past the first's bounds, where the marks' taps don't reach, so it takes its own: one more
     // way to the same button, which TalkBack and the keyboard reach once.
     fun taps(focusable: Boolean): Modifier = if (change != null) {
-        Modifier.focusProperties { canFocus = focusable }.clickable(interactionSource = press, indication = null, onClick = change)
+        Modifier.focusProperties { canFocus = focusable }.button(interactionSource = press, indication = null, onClick = change)
     } else {
         Modifier.pointerInput(Unit) { detectTapGestures { } }
     }
@@ -502,7 +502,7 @@ internal fun HeaderButton(
         modifier
             .size(side)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled)
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,
@@ -598,7 +598,7 @@ private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color, action: (Acces
                 Modifier
                     .heightIn(min = HEADER_BUTTON)
                     .accessibilityFocus(focus)
-                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { action(focus) },
+                    .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { action(focus) },
                 contentAlignment = Alignment.CenterStart,
             ) {
                 Text(prompt.action, color = tint, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines())
@@ -624,7 +624,7 @@ private fun PostcodeNote(text: String, button: String?, modifier: Modifier, acti
                 button,
                 Modifier
                     .accessibilityFocus(focus)
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { action(focus) },
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button) { action(focus) },
                 color = colors.accent,
                 style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines(),
             )

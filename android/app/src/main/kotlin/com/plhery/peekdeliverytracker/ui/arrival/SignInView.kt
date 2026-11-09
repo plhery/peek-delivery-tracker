@@ -12,7 +12,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -130,6 +129,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.TextLines
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.widestLine
 import kotlin.coroutines.cancellation.CancellationException
@@ -432,7 +432,7 @@ private fun SignInBack(onBack: () -> Unit) {
             Modifier
                 .size(BACK_SIZE)
                 .testTag(WELCOME_BACK)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onBack)
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onBack)
                 .semantics { contentDescription = label },
             contentAlignment = Alignment.Center,
         ) {
@@ -480,7 +480,7 @@ internal fun LanguageMenu(menus: SheetMenus) {
             .onGloballyPositioned { bounds = it.boundsInWindow() }
             .testTag(LANGUAGE_MENU)
             .accessibilityFocus(returnFocus)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
+            .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
             .clearAndSetSemantics {
                 // Voice Access answers to the code it shows as well as to its name.
                 contentDescription = "${language.rawValue.uppercase()}, $label"
@@ -565,7 +565,7 @@ private fun Methods(
                     Modifier
                         .fillMaxWidth()
                         .testTag(EMAIL_OPTION)
-                        .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = !form.working && !form.emailExpanded, role = Role.Button) {
+                        .button(interactionSource = null, indication = PressStyle.Tactile, enabled = !form.working && !form.emailExpanded, role = Role.Button) {
                             form.errorMessage = null
                             form.emailExpanded = true
                         }
@@ -670,7 +670,7 @@ private fun CodeForm(form: SignInForm, invited: Boolean, focus: AccessibilityFoc
             Modifier
                 .fillMaxWidth()
                 .testTag(DIFFERENT_EMAIL)
-                .clickable(interactionSource = null, indication = PlainPress, enabled = !form.working, role = Role.Button) {
+                .button(interactionSource = null, indication = PlainPress, enabled = !form.working, role = Role.Button) {
                     form.step = SignInStep.Methods
                     form.code = ""
                     form.errorMessage = null
@@ -772,7 +772,7 @@ private fun SignInPrimaryButton(title: String, working: Boolean, enabled: Boolea
             .fillMaxWidth()
             .testTag(tag)
             .graphicsLayer { alpha = if (enabled || working) 1f else 0.5f }
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
             .heightIn(min = 52.dp)
             .background(colors.accent, ContinuousRoundedShape(16.dp)),
         horizontalArrangement = Arrangement.spacedBy(9.dp, Alignment.CenterHorizontally),
@@ -796,7 +796,7 @@ private fun MethodButton(tag: String, enabled: Boolean, onClick: () -> Unit, con
         Modifier
             .fillMaxWidth()
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
             .heightIn(min = 48.dp)
             .background(colors.paper, shape)
             .stroke(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.35f), shape)
@@ -881,7 +881,7 @@ private fun DemoLink(enabled: Boolean, modifier: Modifier, onClick: () -> Unit) 
     Row(
         modifier
             .testTag(AUTH_DEMO)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
             .clearAndSetSemantics {
                 contentDescription = title
                 role = Role.Button
@@ -951,7 +951,7 @@ private fun PrivacyNotice(privacyUrl: String, modifier: Modifier) {
                 Text(localized("auth.privacy"), color = colors.secondaryLabel, style = style.sfLines())
                 Text(
                     read,
-                    Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { uri.openUri(privacyUrl) },
+                    Modifier.button(interactionSource = null, indication = PlainPress, role = Role.Button) { uri.openUri(privacyUrl) },
                     color = colors.secondaryLabel,
                     style = style.sfLines().copy(textDecoration = TextDecoration.Underline),
                 )
@@ -968,7 +968,7 @@ internal fun PlainTextButton(title: String, tag: String, modifier: Modifier = Mo
         title,
         modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
             .plainDisabled(enabled),
         color = colors.accent,
         textAlign = TextAlign.Center,

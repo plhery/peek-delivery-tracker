@@ -10,7 +10,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -76,6 +75,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.time.Instant
@@ -289,7 +289,7 @@ private fun JournalHeader(count: Int, full: Boolean, reduceMotion: Boolean, onTo
             .fillMaxWidth()
             .heightIn(min = 36.dp)
             .testTag(JOURNAL_TOGGLE)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onToggle)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onToggle)
             .semantics { stateDescription = value },
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,

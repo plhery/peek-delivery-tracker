@@ -36,6 +36,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
+import com.plhery.peekdeliverytracker.ui.theme.button
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.withContext
@@ -57,7 +58,6 @@ import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -290,7 +290,7 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
             .testTag(ADD_BUTTON)
             .accessibilityFocus(focus)
             .parcelDrop(state)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f)) { state.add(focus) }
+            .button(interactionSource = null, indication = PressStyle.tactile(0.94f)) { state.add(focus) }
             .semantics {
                 contentDescription = label
                 role = Role.Button
@@ -423,7 +423,7 @@ private fun AccountButton(
         modifier
             .size(BUTTON_SIDE)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = onClick)
+            .button(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = onClick)
             .clearAndSetSemantics {
                 contentDescription = label
                 role = Role.Button
@@ -484,7 +484,7 @@ internal fun DemoModeBar(onExit: () -> Unit, modifier: Modifier = Modifier, side
             Box(
                 Modifier
                     .testTag(DEMO_EXIT)
-                    .clickable(interactionSource = null, indication = PressStyle.tactile(0.995f), onClick = onExit)
+                    .button(interactionSource = null, indication = PressStyle.tactile(0.995f), onClick = onExit)
                     .semantics(mergeDescendants = false) {
                         contentDescription = "$demo, $exit"
                         role = Role.Button
@@ -563,7 +563,7 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, change: ListChange
                 .size(BUTTON_SIDE)
                 .testTag(SEARCH_BUTTON)
                 .background(if (marked) colors.ink.copy(alpha = 0.06f) else Color.Transparent, CircleShape)
-                .clickable(interactionSource = null, indication = PlainPress) {
+                .button(interactionSource = null, indication = PlainPress) {
                     if (state.showingSearch) state.closeSearch() else state.openSearch()
                 }
                 .semantics {
@@ -603,7 +603,7 @@ private fun FiltersButton(state: DeliveriesState) {
             .testTag(FILTERS_BUTTON)
             .onGloballyPositioned { state.filtersAnchor = it.boundsInWindow() }
             .accessibilityFocus(state.filtersButton)
-            .clickable(interactionSource = null, indication = PlainPress, onClick = state::openFilters)
+            .button(interactionSource = null, indication = PlainPress, onClick = state::openFilters)
             .semantics {
                 contentDescription = label
                 role = Role.Button
@@ -643,7 +643,7 @@ private fun RefreshButton(state: DeliveriesState) {
         Modifier
             .size(BUTTON_SIDE)
             .testTag(REFRESH_BUTTON)
-            .clickable(interactionSource = null, indication = PlainPress) {
+            .button(interactionSource = null, indication = PlainPress) {
                 if (!refreshing) state.refreshFromButton()
             }
             .semantics {
@@ -780,7 +780,7 @@ internal fun SearchControls(state: DeliveriesState) {
                 Modifier
                     .size(30.dp, BUTTON_SIDE)
                     .testTag(SEARCH_CLEAR)
-                    .clickable(interactionSource = null, indication = PlainPress) { state.query = "" }
+                    .button(interactionSource = null, indication = PlainPress) { state.query = "" }
                     .semantics {
                         contentDescription = clear
                         role = Role.Button
@@ -823,7 +823,7 @@ internal fun FilterChips(state: DeliveriesState) {
             Modifier
                 .heightIn(min = CHIP_HEIGHT)
                 .testTag(CLEAR_ALL)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::clearFilters)
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::clearFilters)
                 .padding(horizontal = 5.dp),
             contentAlignment = Alignment.Center,
         ) {
@@ -841,7 +841,7 @@ private fun FilterChip(title: String, id: String, action: () -> Unit) {
     Row(
         Modifier
             .testTag("$FILTER_CHIPS.$id")
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
             .heightIn(min = CHIP_HEIGHT)
             .background(colors.ink.copy(alpha = 0.06f), CapsuleShape)
             .padding(horizontal = 11.dp, vertical = if (largeText) 6.dp else 0.dp),
@@ -903,7 +903,7 @@ internal fun NoResults(state: DeliveriesState) {
                 .padding(top = 18.dp)
                 .heightIn(min = BUTTON_SIDE)
                 .testTag(NO_RESULTS_CLEAR)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::clearFilters)
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::clearFilters)
                 .padding(horizontal = 12.dp),
             contentAlignment = Alignment.Center,
         ) {
@@ -959,7 +959,7 @@ private fun FootLink(title: String, id: String, open: () -> Unit) {
         Modifier
             .heightIn(min = BUTTON_SIDE)
             .testTag("$FOOT.$id")
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = open),
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = open),
         contentAlignment = Alignment.Center,
     ) {
         Text(
@@ -1028,7 +1028,7 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
                 .fillMaxWidth()
                 .testTag(EMPTY_PASTE)
                 .accessibilityFocus(pasteFocus)
-                .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { state.pasteFirst(pasteFocus) }
+                .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { state.pasteFirst(pasteFocus) }
                 .heightIn(min = 54.dp)
                 .background(colors.accent, ContinuousRoundedShape(16.dp)),
             horizontalArrangement = Arrangement.spacedBy(9.dp, Alignment.CenterHorizontally),
@@ -1099,7 +1099,7 @@ private fun QuietButton(title: String, symbol: String, wraps: Boolean, tag: Stri
             .fillMaxWidth()
             .testTag(tag)
             .accessibilityFocus(focus)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = open)
+            .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = open)
             .heightIn(min = 48.dp)
             .background(colors.paper, shape)
             .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape),
@@ -1176,7 +1176,7 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
             .size(PARCEL_WIDTH.dp, (PARCEL_WIDTH * 31f / 30f).dp)
             .then(modifier)
             .testTag(EMPTY_SAMPLE)
-            .clickable(interaction, indication = ControlHighlight.Default, role = Role.Button, onClick = onOpen)
+            .button(interaction, indication = ControlHighlight.Default, role = Role.Button, onClick = onOpen)
             .semantics { contentDescription = label },
     ) {
         // Pip's 300 × 310 frame, drawn at the parcel's width.
@@ -1226,7 +1226,7 @@ internal fun AllArrived(state: DeliveriesState) {
             Modifier
                 .padding(top = 6.dp)
                 .accessibilityFocus(focus)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { state.add(focus) }
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button) { state.add(focus) }
                 .background(colors.accent, CapsuleShape)
                 .padding(horizontal = 14.dp, vertical = 7.dp),
         ) {

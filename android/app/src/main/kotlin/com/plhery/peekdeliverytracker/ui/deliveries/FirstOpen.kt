@@ -16,7 +16,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -131,6 +130,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
+import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
@@ -555,7 +555,7 @@ private fun Modifier.samplePicture(
 ): Modifier = this
     .zoomSource(FirstOpenJourney.parcelId, scene.firstOpen.zoom, corners)
     .testTag(FIRST_OPEN_PICTURE)
-    .clickable(interactionSource = null, indication = PressStyle.FirstOpenHero, role = Role.Button, onClick = scene.state::openFirstSample)
+    .button(interactionSource = null, indication = PressStyle.FirstOpenHero, role = Role.Button, onClick = scene.state::openFirstSample)
     .semantics { contentDescription = label }
 
 /**
@@ -679,7 +679,7 @@ private fun FirstOpenMasthead(scene: FirstOpenScene, modifier: Modifier = Modifi
                 .heightIn(min = 44.dp)
                 .background(colors.paper.copy(alpha = colors.paper.alpha * 0.55f), ContinuousRoundedShape(Radii.mastheadButton))
                 .testTag(FIRST_OPEN_SIGN_IN)
-                .clickable(interactionSource = null, indication = SystemPress, role = Role.Button) { source.showSignIn() }
+                .button(interactionSource = null, indication = SystemPress, role = Role.Button) { source.showSignIn() }
                 .padding(horizontal = 14.dp),
             contentAlignment = Alignment.Center,
         ) {
@@ -769,7 +769,7 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
                 .heightIn(min = if (large) 64.dp else 58.dp)
                 .testTag(FIRST_OPEN_FIELD)
                 .accessibilityFocus(fieldFocus)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { scene.firstOpen.ask(FirstParcelRequest.Type, fieldFocus) }
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button) { scene.firstOpen.ask(FirstParcelRequest.Type, fieldFocus) }
                 .semantics { contentDescription = fieldLabel },
             contentAlignment = Alignment.CenterStart,
         ) {
@@ -788,7 +788,7 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
                     .size(side)
                     .testTag(FIRST_OPEN_SCAN)
                     .accessibilityFocus(scanFocus)
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { scene.firstOpen.ask(FirstParcelRequest.Scan, scanFocus) }
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button) { scene.firstOpen.ask(FirstParcelRequest.Scan, scanFocus) }
                     .semantics { contentDescription = scanLabel },
                 contentAlignment = Alignment.Center,
             ) {
@@ -841,7 +841,7 @@ internal fun FirstParcelPrimaryButton(
         modifier
             .testTag(tag)
             .accessibilityFocus(focus)
-            .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = onClick)
             .heightIn(min = if (large) 64.dp else 54.dp)
             .background(colors.accent, ContinuousRoundedShape(if (large) Radii.primaryButton else Radii.primaryButtonCompact))
             .padding(horizontal = if (large) 30.dp else 0.dp),

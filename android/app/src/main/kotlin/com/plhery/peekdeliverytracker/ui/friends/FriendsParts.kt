@@ -13,6 +13,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.button
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,7 +24,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -520,7 +520,7 @@ internal fun ProminentButton(
         modifier
             .then(if (wide) Modifier.fillMaxWidth() else Modifier)
             .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled)
             .background(fill, CapsuleShape)
             .padding(horizontal = 14.dp, vertical = 7.dp)
@@ -626,7 +626,7 @@ internal fun FriendsInvitationView(
                     .fillMaxWidth()
                     .heightIn(min = 36.dp)
                     .testTag(FRIENDS_COPY)
-                    .clickable(interactionSource = null, indication = PlainPress, enabled = !busy, role = Role.Button) {
+                    .button(interactionSource = null, indication = PlainPress, enabled = !busy, role = Role.Button) {
                         context.getSystemService(ClipboardManager::class.java)?.setPrimaryClip(ClipData.newPlainText(link, link))
                         invitation.copied = true
                         source.action("friend-invite-copy", DeliveryAnalytics.Outcome.Success)
@@ -730,7 +730,7 @@ private fun LinkAction(title: String, tag: String, enabled: Boolean, action: () 
         Modifier
             .heightIn(min = 30.dp)
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled),
         contentAlignment = Alignment.CenterStart,
     ) {
@@ -762,7 +762,7 @@ internal fun Disclosure(
                 .fillMaxWidth()
                 .heightIn(min = minHeight)
                 .testTag(tag)
-                .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { onExpand(!expanded) }
+                .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { onExpand(!expanded) }
                 // Its state in TalkBack's own words, as the system's disclosure says it.
                 .semantics {
                     if (!enabled) return@semantics
@@ -823,7 +823,7 @@ internal fun FriendsInvitationParcel(nickname: String) {
         Box(
             modifier
                 .testTag(FRIENDS_REPLAY)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { iteration++ }
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button) { iteration++ }
                 .clearAndSetSemantics {
                     contentDescription = replay
                     role = Role.Button

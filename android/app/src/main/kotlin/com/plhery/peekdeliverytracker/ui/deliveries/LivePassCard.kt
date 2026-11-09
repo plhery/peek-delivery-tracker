@@ -553,7 +553,7 @@ internal class CarrierPromptCopy(val text: String, val action: String?, val carr
  * The first of what the page asks of the parcel's carrier: the delivery postcode its carrier, or the one its number
  * points to, needs (`inputNeededPrompt`), or would like (`inputSuggestedPrompt`); then the carrier the number probably
  * travels with (B-S73), with a way to choose another once it has waited a week; then that the number looks like a
- * shop's order number or is too short (B-S74). Null when it asks nothing.
+ * shop's order number, may be mistyped or is too short (B-S74). Null when it asks nothing.
  */
 internal fun carrierPrompt(
     parcel: Parcel,
@@ -578,6 +578,8 @@ internal fun carrierPrompt(
     val text = when (shape) {
         is NonTrackingShape.Order -> localizer.text("link.notTracking.order", mapOf("shop" to (NonTrackingShape.shopNames[shape.shop] ?: shape.shop)))
         NonTrackingShape.Container -> localizer.text("link.notTracking.container")
+        is NonTrackingShape.Mistyped ->
+            named(if (shape.change == NonTrackingShape.Change.Missing) "link.notTracking.missing" else "link.notTracking.extra", shape.carrier)
         NonTrackingShape.Short -> localizer.text("link.notTracking.short")
     }
     return CarrierPromptCopy(text, localizer.text("link.chooseCarrier"))

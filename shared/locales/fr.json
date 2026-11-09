@@ -417,6 +417,8 @@
   "link.likely.weekNoChoice": "{{carrier}} ne connaît toujours pas ce numéro après une semaine. Vérifie-le auprès de l’expéditeur.",
   "link.likely.choose": "Choisir un autre transporteur",
   "link.notTracking.container": "On dirait un numéro de conteneur maritime. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande.",
+  "link.notTracking.extra": "Ça commence comme un numéro de suivi {{carrier}}, mais il y a un caractère en trop : il y a peut-être une faute de frappe. Compare-le avec ton message d’expédition.",
+  "link.notTracking.missing": "Ça commence comme un numéro de suivi {{carrier}}, mais il manque un caractère : il y a peut-être une faute de frappe. Compare-le avec ton message d’expédition.",
   "link.notTracking.order": "On dirait un numéro de commande {{shop}}. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande.",
   "link.notTracking.short": "Plus court que la plupart des numéros de suivi. Si c’est un numéro de commande, regarde l’e-mail d’expédition ou la page de la commande.",
   "link.chooseCarrier": "Choisir le transporteur",

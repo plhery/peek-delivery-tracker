@@ -381,6 +381,23 @@ class CarrierCatalog private constructor(
         return match.carrier
     }
 
+    /**
+     * A number that starts like one carrier's numbers but is one character short of their length or one over it: it
+     * may be mistyped. Only when no high-confidence rule takes the number as it is, and the rules it is one character
+     * off are one carrier's (`mistypedNumber` in src/peek/lookup/reading.ts).
+     */
+    fun mistypedNumber(normalized: String): NonTrackingShape.Mistyped? {
+        if (detect(normalized).confidence == CarrierMatch.Confidence.High) return null
+        val found = definitions.flatMap { (carrier, definition) ->
+            definition.detectionRules.filter { it.confidence == "high" && it.rawPattern == null }.mapNotNull { rule ->
+                val start = spelledStart(rule.pattern) ?: return@mapNotNull null
+                oneCharacterOff(normalized, start, rule.pattern)?.let { NonTrackingShape.Mistyped(carrier, it) }
+            }
+        }
+        val first = found.firstOrNull() ?: return null
+        return if (found.all { it.carrier == first.carrier }) first else null
+    }
+
     private class RuleMatch(val carrier: CarrierId, val confidence: CarrierMatch.Confidence, val preferred: Boolean)
 
     private fun detectNormalized(number: String, printed: String): CarrierMatch {
@@ -1140,13 +1157,44 @@ class CarrierCatalog private constructor(
             orderNumbers.firstOrNull { matches(text, it.pattern, caseInsensitive = true) }?.shop
 
         /** Whether a normalized number no carrier answered for looks like a shop's order number or a shipping
-         * container's, or is shorter than tracking numbers are: the parcel says so instead of waiting for a carrier. */
-        fun nonTrackingShape(normalized: String): NonTrackingShape? {
+         * container's, starts like one carrier's numbers with one character too few or too many, or is shorter than
+         * tracking numbers are: the parcel says so instead of waiting for a carrier. */
+        fun nonTrackingShape(normalized: String, catalog: CarrierCatalog = shared): NonTrackingShape? {
             val shop = orderShop(normalized)?.rawValue
                 ?: storedOrderNumbers.firstOrNull { matches(normalized, it.pattern) }?.shop
             if (shop != null) return NonTrackingShape.Order(shop)
             if (isContainerNumber(normalized)) return NonTrackingShape.Container
+            catalog.mistypedNumber(normalized)?.let { return it }
             return if (normalized.characterCount < 8) NonTrackingShape.Short else null
+        }
+
+        /** A high-confidence detection rule of one length, written as characters, digits and classes each taken
+         * once or a set number of times (`^1Z[A-Z0-9]{16}$`). A rule of several lengths, with a lookahead or with
+         * alternatives doesn't say how long its carrier's numbers are. */
+        private const val ONE_LENGTH_RULE = """^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$"""
+
+        /** The characters a rule of one length spells out at its start, at least two and one of them a letter, so
+         * that a number starting with them is most likely that carrier's; null for any other rule. */
+        private fun spelledStart(pattern: String): String? {
+            if (!matches(pattern, ONE_LENGTH_RULE)) return null
+            var start = pattern.drop(1).takeWhile { it in 'A'..'Z' || it in '0'..'9' }
+            // A character a count follows is not spelled once.
+            if (start.isNotEmpty() && pattern.getOrNull(start.length + 1) == '{') start = start.dropLast(1)
+            return if (start.length >= 2 && start.any { it in 'A'..'Z' }) start else null
+        }
+
+        private const val NUMBER_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        /** Whether leaving out one character after the rule's start, or adding one, makes the number fit the rule. */
+        private fun oneCharacterOff(number: String, start: String, pattern: String): NonTrackingShape.Change? {
+            if (!number.startsWith(start) || matches(number, pattern)) return null
+            for (index in start.length..number.length) {
+                val before = number.substring(0, index)
+                val after = number.substring(index)
+                if (after.isNotEmpty() && matches(before + after.substring(1), pattern)) return NonTrackingShape.Change.Extra
+                if (NUMBER_CHARACTERS.any { matches(before + it + after, pattern) }) return NonTrackingShape.Change.Missing
+            }
+            return null
         }
 
         /** ISO 6346's letter values: 10 for A and up from there, leaving out 11, 22 and 33. */

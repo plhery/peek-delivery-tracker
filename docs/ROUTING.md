@@ -656,7 +656,11 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   seven digits whose ISO 6346 check digit adds up) or has fewer than eight characters: the
   parcel page and the detail (web, iPhone and Android) say where the tracking number is,
   rather than that Peek keeps looking, and offer to choose the carrier. A likely carrier
-  comes first.
+  comes first. One that starts like one carrier's numbers and is one character short of
+  their length or one over it is said to be maybe mistyped, naming that carrier. That takes
+  a high-confidence rule of one length spelling out at least two characters at its start,
+  one a letter (`^1Z[A-Z0-9]{16}$`), and no high-confidence rule taking the number as it is
+  (`mistypedNumber` in `src/peek/lookup/reading.ts`).
   A transient failure of a matching carrier and failures of an already confirmed carrier
   do not trigger recognition.
 - **Retries.** Answers are kept in `routing.candidate_probes`, not with the carrier

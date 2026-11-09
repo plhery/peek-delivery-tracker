@@ -181,8 +181,9 @@ extension Parcel {
     }
 
     /// Nobody has answered for the number, its format points to no carrier of its own, and it looks
-    /// like a shop's order number or a shipping container's, or is shorter than tracking numbers are: its
-    /// owner is told where the tracking number is, and may choose the carrier.
+    /// like a shop's order number or a shipping container's, one carrier's with a character missing or one
+    /// too many, or is shorter than tracking numbers are: its owner is told where the tracking number is, or
+    /// that it may be mistyped, and may choose the carrier.
     var nonTrackingShape: NonTrackingShape? {
         guard inputNeededPrompt == nil, inputSuggestedPrompt == nil, carrierData?.routing?.likelyCarrier == nil,
               carrier == .unknown, !isArchived, !hasCarrierUpdate, syncError != "carrier:placeholder_number" else { return nil }

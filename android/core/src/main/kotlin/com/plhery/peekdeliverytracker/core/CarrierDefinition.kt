@@ -247,13 +247,20 @@ enum class OrderShop(val rawValue: String) {
 
 /**
  * What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's order number,
- * a shipping container's, or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
+ * a shipping container's, one carrier's with a character missing or one too many, or one shorter than tracking
+ * numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
  */
 sealed interface NonTrackingShape {
+    /** A character missing from a number, or one too many. */
+    enum class Change { Missing, Extra }
+
     /** The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu. */
     data class Order(val shop: String) : NonTrackingShape
 
     data object Container : NonTrackingShape
+
+    /** The number starts like the carrier's numbers and is one character short of their length, or one over it. */
+    data class Mistyped(val carrier: CarrierId, val change: Change) : NonTrackingShape
 
     data object Short : NonTrackingShape
 

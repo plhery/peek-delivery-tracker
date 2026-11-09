@@ -1,6 +1,9 @@
-import { keywordNumberInText, recognizedNumberInText, TRACKING_CANDIDATE_PATTERNS, validTrackingNumber } from 'universal-parcel-scraper';
+import {
+  CARRIER_DEFINITIONS, keywordNumberInText, recognizedNumberInText, TRACKING_CANDIDATE_PATTERNS, validTrackingNumber,
+} from 'universal-parcel-scraper';
 import {
   type CarrierDetection,
+  carrierInfo,
   detectCarrierMatch,
   isValidS10TrackingNumber,
   normalizeTrackingNumber,
@@ -8,6 +11,7 @@ import {
   type TrackingInputMatch,
 } from '../../lib/carriers';
 import type { Translate } from '../../lib/messages';
+import type { CarrierId } from '../../types';
 import rules from '../../../shared/reading.json';
 
 /** One tracking number a text names, with what its shape says about the carrier. */
@@ -50,7 +54,14 @@ export type StoredOrderShop = OrderShop | 'aliexpress';
 export const SHOP_NAMES: Record<StoredOrderShop, string> = { amazon: 'Amazon', aliexpress: 'AliExpress', shein: 'Shein', shopee: 'Shopee', temu: 'Temu' };
 
 /** What a looked-up number no carrier answered for looks like instead of a tracking number. */
-export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'container' } | { kind: 'short' };
+export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'container' } | MistypedNumber | { kind: 'short' };
+
+/** A number that starts like one carrier's numbers and is one character short of their length, or one over it. */
+export interface MistypedNumber {
+  kind: 'mistyped';
+  carrier: CarrierId;
+  change: 'missing' | 'extra';
+}
 
 /** Tracking numbers have 8 characters or more, but for a few carriers' own. */
 const SHORTEST_TRACKING_NUMBER = 8;
@@ -73,19 +84,85 @@ export function isContainerNumber(normalized: string): boolean {
 }
 
 /**
- * Whether a normalized number no carrier answered for looks like a shop's order number or a shipping container's, or
- * is shorter than tracking numbers are: the parcel page says so instead of waiting for a carrier.
+ * A high-confidence detection rule of one length, written as characters, digits and classes each taken once or a
+ * set number of times (`^1Z[A-Z0-9]{16}$`, `^JTAU\d{12}$`). A rule of several lengths, with a lookahead or with
+ * alternatives doesn't say how long its carrier's numbers are.
+ */
+const ONE_LENGTH_RULE = /^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$/;
+
+/** The characters a rule spells out at its start, not counting one a count follows. */
+function spelledStart(pattern: string): string {
+  const start = /^\^([A-Z0-9]*)/.exec(pattern)?.[1] ?? '';
+  return pattern[start.length + 1] === '{' ? start.slice(0, -1) : start;
+}
+
+interface LengthRule {
+  carrier: CarrierId;
+  start: string;
+  pattern: RegExp;
+}
+
+let lengthRules: readonly LengthRule[] | undefined;
+/**
+ * The rules a number can be one character off: of one length, spelling out at least two characters at their start,
+ * one of them a letter, so that a number starting with them is most likely that carrier's. A rule that also reads the
+ * number as typed is left out.
+ */
+function oneLengthRules(): readonly LengthRule[] {
+  lengthRules ??= Object.entries(CARRIER_DEFINITIONS).flatMap(([carrier, definition]) => definition.detectionRules.flatMap((rule) => {
+    const start = spelledStart(rule.pattern);
+    return rule.confidence === 'high' && !rule.rawPattern && ONE_LENGTH_RULE.test(rule.pattern) && start.length >= 2 && /[A-Z]/.test(start)
+      ? [{ carrier: carrier as CarrierId, start, pattern: new RegExp(rule.pattern) }] : [];
+  }));
+  return lengthRules;
+}
+
+const CHARACTERS = [...'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+
+/** Whether leaving out one character after the rule's start, or adding one, makes the number fit the rule. */
+function oneCharacterOff(number: string, rule: LengthRule): MistypedNumber['change'] | null {
+  if (!number.startsWith(rule.start) || rule.pattern.test(number)) return null;
+  for (let index = rule.start.length; index <= number.length; index += 1) {
+    const before = number.slice(0, index);
+    const after = number.slice(index);
+    if (after && rule.pattern.test(before + after.slice(1))) return 'extra';
+    if (CHARACTERS.some((character) => rule.pattern.test(before + character + after))) return 'missing';
+  }
+  return null;
+}
+
+/**
+ * A number that starts like one carrier's numbers but is one character short of their length or one over it: it
+ * may be mistyped. Only when no high-confidence rule takes the number as it is, and the rules it is one character
+ * off are one carrier's.
+ */
+export function mistypedNumber(normalized: string): MistypedNumber | null {
+  if (detectCarrierMatch(normalized).confidence === 'high') return null;
+  const found = oneLengthRules().flatMap((rule) => {
+    const change = oneCharacterOff(normalized, rule);
+    return change ? [{ kind: 'mistyped' as const, carrier: rule.carrier, change }] : [];
+  });
+  return found.length > 0 && found.every(({ carrier }) => carrier === found[0].carrier) ? found[0] : null;
+}
+
+/**
+ * Whether a normalized number no carrier answered for looks like a shop's order number or a shipping container's,
+ * starts like one carrier's numbers with one character too few or too many, or is shorter than tracking numbers
+ * are: the parcel page says so instead of waiting for a carrier.
  */
 export function nonTrackingShape(normalized: string): NonTrackingShape | null {
   const shop = orderShop(normalized) ?? STORED_ORDER_NUMBERS.find(({ pattern }) => pattern.test(normalized))?.shop;
   if (shop) return { kind: 'order', shop };
   if (isContainerNumber(normalized)) return { kind: 'container' };
-  return normalized.length < SHORTEST_TRACKING_NUMBER ? { kind: 'short' } : null;
+  return mistypedNumber(normalized) ?? (normalized.length < SHORTEST_TRACKING_NUMBER ? { kind: 'short' } : null);
 }
 
 /** What a parcel says about its number's shape, where it would say that no carrier knows the number yet. */
-export function nonTrackingNote(shape: NonTrackingShape, t: Translate): string {
+export function nonTrackingNote(shape: NonTrackingShape, t: Translate, locale?: string): string {
   if (shape.kind === 'order') return t('link.notTracking.order', { shop: SHOP_NAMES[shape.shop] });
+  if (shape.kind === 'mistyped') {
+    return t(shape.change === 'missing' ? 'link.notTracking.missing' : 'link.notTracking.extra', { carrier: carrierInfo(shape.carrier, locale).name });
+  }
   return t(shape.kind === 'container' ? 'link.notTracking.container' : 'link.notTracking.short');
 }
 

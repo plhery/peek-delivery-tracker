@@ -596,7 +596,7 @@ export function ParcelDetail({
         )}
         {shape && (
           <div className="detail__input-needed" role="status">
-            <p>{nonTrackingNote(shape, t)}</p>
+            <p>{nonTrackingNote(shape, t, locale)}</p>
             <button type="button" className="text-button" onClick={() => setEditingCarrier(true)}>{t('link.chooseCarrier')}</button>
           </div>
         )}

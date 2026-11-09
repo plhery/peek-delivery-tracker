@@ -218,12 +218,19 @@ enum OrderShop: String, Decodable, Sendable {
 }
 
 /// What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's
-/// order number, a shipping container's, or one shorter than tracking numbers are (`nonTrackingShape` in
-/// src/peek/lookup/reading.ts).
+/// order number, a shipping container's, one carrier's with a character missing or one too many, or one
+/// shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
 enum NonTrackingShape: Equatable, Sendable {
+    /// A character missing from a number, or one too many.
+    enum Change: String, Sendable {
+        case missing, extra
+    }
+
     /// The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu.
     case order(shop: String)
     case container
+    /// The number starts like the carrier's numbers and is one character short of their length, or one over it.
+    case mistyped(carrier: CarrierID, change: Change)
     case short
 
     /// The shop by the name the app writes.
@@ -1440,14 +1447,63 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }
 
     /// Whether a normalized number no carrier answered for looks like a shop's order number or a shipping
-    /// container's, or is shorter than tracking numbers are: the parcel says so instead of waiting for a carrier.
-    static func nonTrackingShape(_ normalized: String) -> NonTrackingShape? {
+    /// container's, starts like one carrier's numbers with one character too few or too many, or is shorter than
+    /// tracking numbers are: the parcel says so instead of waiting for a carrier.
+    static func nonTrackingShape(_ normalized: String, catalog: CarrierCatalog = .shared) -> NonTrackingShape? {
         if let shop = orderShop(in: normalized)?.rawValue
             ?? storedOrderNumbers.first(where: { matches(normalized, pattern: $0.pattern) })?.shop {
             return .order(shop: shop)
         }
         if isContainerNumber(normalized) { return .container }
+        if let mistyped = catalog.mistypedNumber(normalized) { return .mistyped(carrier: mistyped.carrier, change: mistyped.change) }
         return normalized.count < 8 ? .short : nil
+    }
+
+    /// A high-confidence detection rule of one length, written as characters, digits and classes each taken once
+    /// or a set number of times (`^1Z[A-Z0-9]{16}$`). A rule of several lengths, with a lookahead or with
+    /// alternatives doesn't say how long its carrier's numbers are.
+    private static let oneLengthRule = #"^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$"#
+
+    /// The characters a rule of one length spells out at its start, at least two and one of them a letter, so that
+    /// a number starting with them is most likely that carrier's; nil for any other rule.
+    private static func spelledStart(_ pattern: String) -> String? {
+        guard matches(pattern, pattern: oneLengthRule) else { return nil }
+        var start = String(pattern.dropFirst().prefix { $0.isASCII && ($0.isUppercase || $0.isNumber) })
+        // A character a count follows is not spelled once.
+        if !start.isEmpty, pattern.dropFirst(start.count + 1).first == "{" { start.removeLast() }
+        return start.count >= 2 && start.contains(where: \.isLetter) ? start : nil
+    }
+
+    private static let numberCharacters = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+    /// Whether leaving out one character after the rule's start, or adding one, makes the number fit the rule.
+    private static func oneCharacterOff(_ number: String, start: String, pattern: String) -> NonTrackingShape.Change? {
+        guard number.hasPrefix(start), !matches(number, pattern: pattern) else { return nil }
+        let characters = Array(number)
+        for index in start.count...characters.count {
+            let before = String(characters[..<index])
+            let after = String(characters[index...])
+            if !after.isEmpty, matches(before + after.dropFirst(), pattern: pattern) { return .extra }
+            if numberCharacters.contains(where: { matches(before + String($0) + after, pattern: pattern) }) { return .missing }
+        }
+        return nil
+    }
+
+    /// A number that starts like one carrier's numbers but is one character short of their length or one over it:
+    /// it may be mistyped. Only when no high-confidence rule takes the number as it is, and the rules it is one
+    /// character off are one carrier's (`mistypedNumber` in src/peek/lookup/reading.ts).
+    func mistypedNumber(_ normalized: String) -> (carrier: CarrierID, change: NonTrackingShape.Change)? {
+        guard detect(normalized).confidence != .high else { return nil }
+        var found: [(carrier: CarrierID, change: NonTrackingShape.Change)] = []
+        for (carrier, definition) in definitions {
+            for rule in definition.detectionRules where rule.confidence == "high" && rule.rawPattern == nil {
+                guard let start = Self.spelledStart(rule.pattern),
+                      let change = Self.oneCharacterOff(normalized, start: start, pattern: rule.pattern) else { continue }
+                found.append((carrier, change))
+            }
+        }
+        guard let first = found.first, found.allSatisfy({ $0.carrier == first.carrier }) else { return nil }
+        return first
     }
 
     /// ISO 6346's letter values: 10 for A and up from there, leaving out 11, 22 and 33.

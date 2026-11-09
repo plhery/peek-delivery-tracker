@@ -417,6 +417,8 @@
   "link.likely.weekNoChoice": "Po tygodniu {{carrier}} nadal nie zna tego numeru. Sprawdź go u nadawcy.",
   "link.likely.choose": "Wybierz innego przewoźnika",
   "link.notTracking.container": "To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.",
+  "link.notTracking.extra": "Zaczyna się jak numer śledzenia przewoźnika {{carrier}}, ale ma o jeden znak za dużo: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.",
+  "link.notTracking.missing": "Zaczyna się jak numer śledzenia przewoźnika {{carrier}}, ale brakuje jednego znaku: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.",
   "link.notTracking.order": "To wygląda na numer zamówienia {{shop}}. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.",
   "link.notTracking.short": "Krótszy niż większość numerów śledzenia. Jeśli to numer zamówienia, sprawdź e-mail o wysyłce albo stronę zamówienia.",
   "link.chooseCarrier": "Wybierz przewoźnika",

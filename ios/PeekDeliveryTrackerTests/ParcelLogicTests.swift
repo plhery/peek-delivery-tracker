@@ -762,6 +762,15 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("TEMU0000080"), .container)
         XCTAssertNil(CarrierCatalog.nonTrackingShape("TEMU1234567"))
         XCTAssertNil(CarrierCatalog.nonTrackingShape("ZZZJ0000008"))
+        // Synthetic numbers that start like UPS's or J&T Australia's with a character missing or one too many; UPS's
+        // own length, a DHL rule of several lengths, two characters short, and one character off two carriers' numbers.
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("1Z999AA1012345678"), .mistyped(carrier: .ups, change: .missing))
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("1Z999AA101234567840"), .mistyped(carrier: .ups, change: .extra))
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("JTAU12345678901"), .mistyped(carrier: .jAndTAu, change: .missing))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("1Z999AA10123456784"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("JJD0000000000000000"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("1Z999AA10123456"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("JTE12345678901"))
 
         let packageID = UUID()
         let json = """

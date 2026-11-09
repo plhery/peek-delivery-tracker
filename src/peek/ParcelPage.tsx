@@ -275,7 +275,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
   const choosing = (!!likely?.waited || !!shape) && owner && !sample && !!parcel.trackingNumber;
   const unknownNote = likelyName ? t(!likely?.waited ? 'link.likely.body' : choosing ? 'link.likely.week' : 'link.likely.weekNoChoice', { carrier: likelyName.name })
-    : shape ? nonTrackingNote(shape, t)
+    : shape ? nonTrackingNote(shape, t, locale)
       : number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber');
   const notes = present ? (deliveryNote ? [deliveryNote] : []) : placeholder ? [trackingFailureMessage(parcel.syncError, t)] : !carrierKnown ? [unknownNote] : [
     previousEstimateLine(previousEstimate, parcel, wording),

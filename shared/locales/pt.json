@@ -417,6 +417,8 @@
   "link.likely.weekNoChoice": "Ao fim de uma semana, {{carrier}} continua sem reconhecer o número. Confirma-o com o remetente.",
   "link.likely.choose": "Escolher outra transportadora",
   "link.notTracking.container": "Isto parece o número de um contentor marítimo. O número de seguimento está no e-mail de envio ou na página do pedido.",
+  "link.notTracking.extra": "Começa como um número de seguimento de {{carrier}}, mas tem um carácter a mais: pode estar mal escrito. Compara-o com a tua mensagem de envio.",
+  "link.notTracking.missing": "Começa como um número de seguimento de {{carrier}}, mas falta-lhe um carácter: pode estar mal escrito. Compara-o com a tua mensagem de envio.",
   "link.notTracking.order": "Isto parece um número de pedido de {{shop}}. O número de seguimento está no e-mail de envio ou na página do pedido.",
   "link.notTracking.short": "É mais curto do que a maioria dos números de seguimento. Se for um número de pedido, vê o e-mail de envio ou a página do pedido.",
   "link.chooseCarrier": "Escolher a transportadora",

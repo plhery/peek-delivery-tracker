@@ -81,6 +81,16 @@ describe('a looked-up number no carrier answered for', () => {
     ['TEMU1234567', null],
     ['ZZZJ0000008', null],
     ['ABCD1234560', null],
+    // Synthetic numbers that start like UPS's or J&T Australia's, with a character missing or one too many.
+    ['1Z999AA1012345678', { kind: 'mistyped', carrier: 'ups', change: 'missing' }],
+    ['1Z999AA101234567840', { kind: 'mistyped', carrier: 'ups', change: 'extra' }],
+    ['JTAU12345678901', { kind: 'mistyped', carrier: 'j-and-t-au', change: 'missing' }],
+    // UPS's own length, and a DHL rule that takes numbers of several lengths: neither says the number is mistyped.
+    ['1Z999AA10123456784', null],
+    ['JJD0000000000000000', null],
+    // Two characters short, and a character short of two carriers' numbers at once.
+    ['1Z999AA10123456', null],
+    ['JTE12345678901', null],
   ])('%s', (number, shape) => {
     expect(nonTrackingShape(number)).toEqual(shape);
   });
@@ -90,6 +100,12 @@ describe('a looked-up number no carrier answered for', () => {
     expect(nonTrackingNote({ kind: 'order', shop: 'aliexpress' }, t)).toBe('link.notTracking.order:AliExpress');
     expect(nonTrackingNote({ kind: 'container' }, t)).toBe('link.notTracking.container');
     expect(nonTrackingNote({ kind: 'short' }, t)).toBe('link.notTracking.short');
+  });
+
+  it('names the carrier a mistyped number starts like', () => {
+    const t = ((key: string, values?: Record<string, string>) => `${key}:${values?.carrier}`) as Translate;
+    expect(nonTrackingNote({ kind: 'mistyped', carrier: 'ups', change: 'missing' }, t, 'en')).toBe('link.notTracking.missing:UPS');
+    expect(nonTrackingNote({ kind: 'mistyped', carrier: 'ups', change: 'extra' }, t, 'en')).toBe('link.notTracking.extra:UPS');
   });
 
   it('reads a container number only as normalized', () => {

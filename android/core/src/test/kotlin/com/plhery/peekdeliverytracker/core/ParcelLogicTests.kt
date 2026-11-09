@@ -767,6 +767,16 @@ class ParcelLogicTests {
         assertEquals(NonTrackingShape.Container, CarrierCatalog.nonTrackingShape("TEMU0000080"))
         assertNull(CarrierCatalog.nonTrackingShape("TEMU1234567"))
         assertNull(CarrierCatalog.nonTrackingShape("ZZZJ0000008"))
+        // Synthetic numbers that start like UPS's or J&T Australia's with a character missing or one too many; UPS's
+        // own length, a DHL rule of several lengths, two characters short, and one character off two carriers' numbers.
+        val missing = NonTrackingShape.Change.Missing
+        assertEquals(NonTrackingShape.Mistyped(CarrierId.Ups, missing), CarrierCatalog.nonTrackingShape("1Z999AA1012345678"))
+        assertEquals(NonTrackingShape.Mistyped(CarrierId.Ups, NonTrackingShape.Change.Extra), CarrierCatalog.nonTrackingShape("1Z999AA101234567840"))
+        assertEquals(NonTrackingShape.Mistyped(CarrierId.JAndTAu, missing), CarrierCatalog.nonTrackingShape("JTAU12345678901"))
+        assertNull(CarrierCatalog.nonTrackingShape("1Z999AA10123456784"))
+        assertNull(CarrierCatalog.nonTrackingShape("JJD0000000000000000"))
+        assertNull(CarrierCatalog.nonTrackingShape("1Z999AA10123456"))
+        assertNull(CarrierCatalog.nonTrackingShape("JTE12345678901"))
 
         val packageId = UUID.randomUUID()
         val json = """

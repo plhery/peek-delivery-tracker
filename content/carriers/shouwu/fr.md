@@ -3,7 +3,7 @@ title: Suivi colis Shouwu : numéro SWECN…YQ, statuts et livraison
 description: Suivre un colis Shouwu International (守务国际) venu de Chine : à quoi ressemble le numéro SWECN…YQ, ce que veulent dire les statuts et qui livre en France.
 slug: shouwu-suivi
 published: 2026-11-02
-updated: 2026-11-09
+updated: 2026-11-10
 ---
 
 Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. En France, c'est surtout Colissimo, et Shouwu annonce 4 à 7 jours ouvrés. Le vendeur choisit le numéro qu'il te transmet : celui de Shouwu, qui commence par SWECN et finit par YQ, ou celui de Colissimo. Colle l'un ou l'autre dans le champ ci-dessus, ou le numéro Shouwu sur son site de suivi, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Pas de numéro ? Demande-le au vendeur : Shouwu n'a aucun contact pour les destinataires.
@@ -69,6 +69,18 @@ Pour certains colis, l'historique reprend aussi des lignes de Colis Privé, en a
 | `Your parcel arrived at the shipping partner. It will be sent to Colis Privé.` | Chez le partenaire qui l'amène en France. | « En transit » |
 | `Your package is in transit to Colis Privé` | En route vers Colis Privé, qui ne l'a pas encore. | « En transit » |
 | `Delivered to letterbox` | Colis Privé l'a déposé dans ta boîte aux lettres. | « Livré », une fois que le statut de Shouwu dit aussi `Delivered` |
+
+Quand iMile livre en Italie, l'historique de Shouwu reprend les lignes d'iMile, avec le centre entre crochets 【】 (ton historique peut nommer un autre centre que Milan center ou ROM 10) :
+
+| Ce qu'écrit Shouwu | Ce que ça veut dire pour toi | Peek affiche |
+| --- | --- | --- |
+| `【Milan center】Received.` | Le centre d'iMile a reçu le colis. | « En transit » |
+| `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Envoyé à l'agence de livraison d'iMile, puis arrivé là-bas. | « En transit » |
+| `【ROM 10】Shipment out for delivery.` | La tournée de livraison d'iMile. | « En livraison » |
+| `<User not at home>`, `【ROM 10】 Back To DS.` | Le livreur ne t'a pas trouvé, et le colis est revenu à l'agence de livraison. | « Tentative de livraison » |
+| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | Après deux tournées sans livraison, l'agence le renvoie au centre d'iMile. | « En transit » |
+| `Back to Sender for reason: wrong recipient address or address related problem` | Après ses tournées sans livraison, iMile renvoie le colis, ici à cause de l'adresse (une autre raison peut suivre les deux-points) : il est sur le chemin du retour, pas encore chez l'expéditeur. Contacte le vendeur. | « Problème signalé » |
+| `【Milan Transit Center】Order Closed.` | iMile clôt la livraison sans avoir livré ; contacte le vendeur. | « Problème signalé » |
 
 **Des lignes en chinois.** Certains colis ont aussi des lignes que Shouwu écrit en chinois, et Peek les affiche telles quelles. `货物电子信息已经收到` (les données électroniques des marchandises sont reçues) accompagne les données de commande : « Étiquette créée ». Viennent ensuite, toutes affichées « En transit » : `申报过港中` après le code d'un lot (le lot est déclaré pour la route vers Hong Kong), `已到港，安排航班中` (arrivé au point de départ, en attente d'un vol), `预计23号的航班` (le vol réservé, ici le 23 ; avec `二程` devant, pour le second tronçon), `航班已飞` (le vol est parti), `二程航班已飞` (le vol du second tronçon est parti) et `已落地` (atterri). Peek affiche `已落地，清关提货中` (atterri, en cours de dédouanement et de retrait auprès de la compagnie aérienne) comme « À la douane », puis `清关完成` (dédouané) et `已交仓扫描` (scanné à l'entrepôt du transporteur qui livre) de nouveau comme « En transit ».
 
@@ -141,5 +153,5 @@ Le vendeur chez qui tu as commandé : il a réservé l'envoi chez Shouwu et peut
 - [Shouwu International : 法国经济 (France, économique)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=23) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Shouwu International : 法国带电 (France, avec batteries)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=26) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droits de 3 € depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes (depuis le 9 novembre aussi le dédouanement à l'export et à l'arrivée, le chargement à l'aéroport et la remise au transporteur), lignes de Colis Privé et du transporteur français, heures, lieux, ce qu'affiche Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes (depuis le 9 novembre aussi le dédouanement à l'export et à l'arrivée, le chargement à l'aéroport et la remise au transporteur), lignes de Colis Privé et du transporteur français, lignes d'iMile en Italie (renvoi à l'expéditeur compris), heures, lieux, ce qu'affiche Peek
 :::

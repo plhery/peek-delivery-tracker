@@ -4,7 +4,7 @@ description: Dónde ver el estado de tu pedido de El Corte Inglés en «Mis comp
 slug: seguimiento-pedido-el-corte-ingles
 picture: Unos grandes almacenes con un toldo verde, una furgoneta de reparto en la puerta y Pip junto a una caja envuelta para regalo.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-10
 ---
 
 En España, El Corte Inglés (elcorteingles.es) te envía el pedido a casa con una agencia de transporte, te lo lleva en el día en 54 ciudades o te lo guarda para que lo recojas gratis en uno de sus centros comerciales, o por 3 € en Supercor, Correos o Celeritas. El estado del pedido está en tu cuenta, en «Mis compras», y en el enlace del correo de confirmación, y El Corte Inglés te avisa cuando está en camino o listo para recoger. Lo que vende un vendedor externo del Marketplace lo envía el propio vendedor, con sus plazos.
@@ -44,7 +44,7 @@ En estos sitios:
 
 El número de pedido de El Corte Inglés sirve para hablar con El Corte Inglés y para recoger en tienda, no para seguir el paquete en la web de un transportista. Para una recogida en un centro comercial o en Supercor, te basta ese número o el código QR: esperas el correo que dice que el pedido está listo. En otras tiendas: [encontrar el número de seguimiento](guide:find-tracking-number).
 
-Si el pedido va a una oficina de [Correos](carrier:correos-spain), los números de Correos tienen esta forma (las cifras son inventadas): `PR`, 15 cifras y `C`, como `PR123456789012345C`, o 2 letras, 9 cifras y `ES`, como `RR000000005ES`. Los envíos de Celeritas se siguen en celeritastransporte.com.
+Si el pedido va a una oficina de [Correos](carrier:correos-spain), los números de Correos tienen esta forma (las cifras son inventadas): `PR`, 15 cifras y `C`, como `PR123456789012345C`, o 2 letras, 9 cifras y `ES`, como `RR000000005ES`. Los envíos de Celeritas se siguen en celeritastransporte.com. Si el pedido va a un Punto Celeritas, Celeritas dice que te avisa por correo o SMS cuando llega y que te lo guarda 15 días; para retirarlo necesitas el PIN que llega al teléfono o al correo que diste al comprar, y si lo pierdes, en su página de contacto te generan otro con la referencia del pedido.
 
 ¿No sabes de quién es un número? Escríbelo aquí:
 
@@ -62,7 +62,7 @@ El plazo estimado de entrega aparece en el correo de confirmación, y los gastos
 - **Entrega en el día.** Llega el día y la hora que eliges, entre las 10:00 y las 22:00, de lunes a domingo. El Corte Inglés te informa del seguimiento por correo.
 - **Recogida en tienda o en un punto.** Espera el correo que dice que puedes ir a recogerlo.
 
-Si no acordaste una fecha, la ley de consumidores da a la tienda 30 días naturales como máximo desde el pedido para entregarlo. Cuándo esperar sigue siendo normal: [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
+Si no acordaste una fecha, la ley de consumidores da a la tienda 30 días naturales como máximo desde el pedido para entregarlo. Si antes de comprar acordasteis que la fecha de entrega era esencial, puedes resolver el contrato en cuanto no se cumpla, sin darle un plazo más. Cuándo esperar sigue siendo normal: [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 
 ## Opciones y gastos de envío de El Corte Inglés
 
@@ -94,7 +94,7 @@ En este orden:
 - Revisa el seguimiento | Abre el pedido en «Mis compras» o con el enlace del correo de confirmación, y mira los correos y SMS de la agencia de transporte, también en la carpeta de spam. Si pediste varios productos, revisa cada uno: pueden llegar por separado.
 - Busca y pregunta | Mira alrededor de la puerta y pregunta a quien estuviera en casa, a los vecinos y en la conserjería. En una recogida, comprueba en el correo en qué centro, tienda Supercor o punto te espera el pedido.
 - Contacta con El Corte Inglés | En el pedido, pulsa «¿Alguna duda con tu compra?» > «Habla con nosotros» para abrir el chat, de 7:00 a 23:00 todos los días, con la sesión iniciada. También puedes llamar gratis al 900 363 900 o escribir a clientes@elcorteingles.es con el número de pedido.
-- Reclamación | Si no se resuelve, reclama a El Corte Inglés por correo en clientes@elcorteingles.es o con una hoja de reclamaciones en uno de sus centros comerciales. Si no te convence la respuesta, El Corte Inglés está adherido a Confianza Online, donde reclamas gratis por una compra en línea de hace menos de un año, después de haber reclamado a la tienda.
+- Reclamación | Si no se resuelve, reclama a El Corte Inglés por correo en clientes@elcorteingles.es o con una hoja de reclamaciones en uno de sus centros comerciales. Si no te convence la respuesta, El Corte Inglés está adherido a Confianza Online, donde reclamas gratis por una compra en línea de hace menos de un año, después de haber reclamado a la tienda. Es una mediación, y te piden una prueba de esa primera reclamación, como los correos que cruzaste con la tienda.
 - Reembolso o artículo nuevo | La ley de consumidores dice que el riesgo de pérdida es de la tienda hasta que tú, u otra persona que indicaste y que no sea el transportista, tenéis el paquete. Si no llega a tiempo, puedes darle un plazo más; si tampoco entonces, cancela el pedido y pide el reembolso, o pide que te lo vuelvan a enviar.
 :::
 
@@ -102,17 +102,17 @@ Si al recibirlo ves el paquete dañado o manipulado a simple vista, El Corte Ing
 
 ## Devolver un pedido de El Corte Inglés
 
-El plazo cuenta desde que recibes el artículo y depende de lo que compras: 60 días naturales para moda, calzado y accesorios; 30 para muebles, menaje y textil del hogar; 15 para electrónica, electrodomésticos, perfumería, cosmética, juguetes y material deportivo; 14 para los productos del Marketplace.
+El plazo cuenta desde que recibes el artículo y depende de lo que compras: 60 días naturales para moda, calzado y accesorios; 30 para muebles, menaje y textil del hogar; 15 para electrónica, electrodomésticos, perfumería, cosmética, juguetes y material deportivo; 14 para los productos del Marketplace. La ley de consumidores da al menos 14 días naturales para desistir de una compra a distancia y, si el pedido llega en varios paquetes, los cuenta desde que recibes el último.
 
 Puedes devolverlo gratis en cualquier centro comercial, con el QR de la app o el tique; en Supercor, si lo recogiste allí; en Correos o Celeritas por 3 €, si pesa hasta 3 kg y estás en la Península o Baleares; o con una recogida a domicilio desde «Mis compras», por 7,90 € hasta 15 kg o 30 € si pesa más. Con El Corte Inglés Plus, las devoluciones son gratis. Los productos de más de 15 kg y los del Marketplace solo se devuelven a domicilio, y si recogiste el pedido en tienda, lo devuelves en tienda.
 
-Si lo devuelves en tienda, te devuelven el dinero en el momento; si lo recoge un transportista o lo llevas a Correos o Celeritas, en 14 días desde la recogida, con el mismo método de pago. Un artículo de la web de Portugal no se puede devolver en la Península. Dónde está el número de la devolución y cuándo llega el dinero: [seguimiento de devoluciones](guide:returns-tracking).
+Si lo devuelves en tienda, te devuelven el dinero en el momento; si lo recoge un transportista o lo llevas a Correos o Celeritas, en 14 días desde la recogida, con el mismo método de pago. La ley obliga a la tienda a devolver también los gastos de envío, hasta el precio de la entrega ordinaria más barata, y le deja esperar a recibir el artículo o una prueba de que lo has devuelto, salvo que se haya ofrecido a recogerlo ella. Un artículo de la web de Portugal no se puede devolver en la Península. Dónde está el número de la devolución y cuándo llega el dinero: [seguimiento de devoluciones](guide:returns-tracking).
 
 ## ¿Puedo seguir un paquete de El Corte Inglés en Peek?
 
-Sí, cuando tienes un número de transportista. Cópialo de los correos o SMS de la agencia de transporte, o de Correos, y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Correos de arriba. Si una forma la usan varios transportistas, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica el correo. Peek no reconoce por la forma los números de Celeritas: pulsa «Cambiar» y elige Celeritas.
+Sí, cuando tienes un número de transportista. Cópialo de los correos o SMS de la agencia de transporte, o de Correos, y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Correos de arriba. Si una forma la usan varios transportistas, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica el correo. Peek no reconoce por la forma los números de Celeritas: pulsa «Cambiar» y elige Celeritas, o pega el enlace de seguimiento de Celeritas entero, y Peek saca de él el número y el transportista.
 
-Un artículo de un vendedor externo llega con el transportista que él elija: si el envío tiene seguimiento, Peek lo detecta entre más de 3500. Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. El número de pedido de El Corte Inglés y el QR de una recogida no son números de seguimiento: Peek no puede seguirlos.
+Un artículo de un vendedor externo llega con el transportista que él elija: si el envío tiene seguimiento, Peek lo detecta entre más de 3500. Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo, al ritmo del que reparte el paquete. El número de pedido de El Corte Inglés y el QR de una recogida no son números de seguimiento: Peek no puede seguirlos.
 
 Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan en tu cuenta de El Corte Inglés.
 
@@ -136,10 +136,11 @@ Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos 
 - [El Corte Inglés: Información general de devolución](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/informacion-general-devolucion/) – formas de devolver, plazos, gastos, paquete dañado, Marketplace, Portugal
 - [El Corte Inglés: Cómo solicitar una devolución en Mi Cuenta](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/como-solicitar-una-devolucion-en-mi-cuenta/) – «Mis compras», etiqueta de devolución
 - [El Corte Inglés: Abono de una devolución](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/abono-de-una-devolucion/) – reembolso en tienda y en 14 días desde la recogida
-- [Celeritas: Inicio](https://celeritastransporte.com/) – casi 9000 puntos de recogida, seguimiento
+- [Celeritas: Inicio](https://celeritastransporte.com/) – casi 9000 puntos de recogida, seguimiento (leído el 10 de noviembre de 2026)
+- [Celeritas: Contacto](https://celeritastransporte.com/contacto/) – aviso por correo o SMS, 15 días en el Punto Celeritas, PIN, PIN perdido (leído el 10 de noviembre de 2026)
 - [El Corte Inglés: Términos legales](https://www.elcorteingles.es/ayuda/es/otros/terminos-legales/) – reclamación en clientes@elcorteingles.es, hojas de reclamaciones en los centros, Confianza Online después de reclamar a El Corte Inglés
 - [Confianza Online: El Corte Inglés](https://www.confianzaonline.es/empresas/elcorteingles.htm) – adhesión de El Corte Inglés
-- [Confianza Online: Cómo reclamar](https://www.confianzaonline.es/como-reclamar/) – gratis, compras en línea, un año, reclamar antes a la empresa
-- [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – art. 66 bis, plazo de entrega; art. 66 ter, transmisión del riesgo
-- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, transportistas que conoce Peek
+- [Confianza Online: Cómo reclamar](https://www.confianzaonline.es/como-reclamar/) – gratis, compras en línea, un año, reclamar antes a la empresa, mediación, prueba de la reclamación previa (leído el 10 de noviembre de 2026)
+- [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – art. 66 bis, plazo de entrega y fecha esencial; art. 66 ter, transmisión del riesgo; art. 104, 14 días desde el último paquete; art. 107, gastos de envío hasta la entrega ordinaria más barata, retención hasta recibir el artículo o la prueba de la devolución, salvo si la tienda se ofrece a recogerlo (leído el 10 de noviembre de 2026)
+- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, transportistas que conoce Peek, enlaces de seguimiento de Celeritas
 :::

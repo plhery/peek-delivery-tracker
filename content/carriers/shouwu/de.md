@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-09
+updated: 2026-11-10
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -76,6 +76,18 @@ Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 | `<Incorrect address.>` | So nennt der Paketdienst vor Ort den Grund, in spitzen Klammern: Die Adresse stimmt nicht. | „Zustellversuch“ |
 
 Zeilen wie `Shipment departed from facility`, `Depart from the sorting center` oder `Shipment arrived at an air hub` sind Zwischenstationen: Peek zeigt „Unterwegs“.
+
+Stellt in Italien iMile zu, übernimmt Shouwus Verlauf dessen Zeilen, mit dem Zentrum in 【】-Klammern (bei dir kann statt Milan center oder ROM 10 ein anderes stehen):
+
+| Shouwu schreibt | Was es für dich heißt | Peek zeigt |
+| --- | --- | --- |
+| `【Milan center】Received.` | iMiles Zentrum hat das Paket angenommen. | „Unterwegs“ |
+| `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | An iMiles Zustellbasis weitergeschickt, dann dort angekommen. | „Unterwegs“ |
+| `【ROM 10】Shipment out for delivery.` | iMiles Zustelltour. | „In Zustellung“ |
+| `<User not at home>`, `【ROM 10】 Back To DS.` | Der Fahrer hat dich nicht angetroffen, und das Paket ist zurück an der Zustellbasis. | „Zustellversuch“ |
+| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | Nach zwei erfolglosen Touren schickt die Basis es an iMiles Zentrum zurück. | „Unterwegs“ |
+| `Back to Sender for reason: wrong recipient address or address related problem` | Nach den erfolglosen Touren schickt iMile das Paket zurück, hier wegen der Adresse (nach dem Doppelpunkt kann auch ein anderer Grund stehen): Es ist auf dem Rückweg, noch nicht beim Absender. Frag den Shop. | „Problem gemeldet“ |
+| `【Milan Transit Center】Order Closed.` | iMile schließt den Zustellauftrag, ohne zugestellt zu haben; frag den Shop. | „Problem gemeldet“ |
 
 **Zeilen auf Chinesisch.** Manche Pakete bekommen auch Zeilen, die Shouwu auf Chinesisch schreibt; Peek zeigt sie so, wie sie dastehen. `货物电子信息已经收到` (die elektronischen Warendaten sind eingegangen) kommt mit den Bestelldaten: „Etikett erstellt“. Danach, alle „Unterwegs“: `申报过港中` nach dem Code einer Charge (die Charge ist für den Landweg nach Hongkong angemeldet), `已到港，安排航班中` (am Abflugort angekommen, wartet auf einen Flug), `预计23号的航班` (der gebuchte Flug, hier am 23.; mit `二程` davor für die zweite Etappe), `航班已飞` (der Flug ist gestartet), `二程航班已飞` (der Flug der zweiten Etappe ist gestartet) und `已落地` (gelandet). `已落地，清关提货中` (gelandet, wird verzollt und bei der Fluggesellschaft abgeholt) zeigt Peek als „Beim Zoll“, `清关完成` (verzollt) und `已交仓扫描` (im Lager des zustellenden Paketdiensts eingescannt) wieder als „Unterwegs“.
 
@@ -153,5 +165,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei Shouwu gebucht und kann
 - [Shouwu International: 德国经济 (Deutschland, Economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=22) – vor allem Hermes, 4 bis 7 Arbeitstage
 - [Shouwu International: 德国带电 (Deutschland, mit Batterien)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=25) – vor allem DPD, 4 bis 7 Arbeitstage
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll seit 1. Juli 2026, Bearbeitungsgebühr von 2 € seit 1. November 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst), Zeilen von DHL und des Zustellers in Deutschland, Uhrzeiten, Orte, was Peek zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst), Zeilen von DHL und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
 :::

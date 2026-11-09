@@ -3,7 +3,7 @@ title: USPS seguimiento: estados, reintento de entrega y envíos
 description: Sigue tu paquete de USPS: dónde está el número, qué significan sus estados en inglés, cómo pedir un reintento de entrega y qué pasa si el envío va a España.
 slug: usps-seguimiento
 published: 2026-10-22
-updated: 2026-11-07
+updated: 2026-11-09
 ---
 
 USPS, el U.S. Postal Service, es el correo de Estados Unidos: llega a todas las direcciones del país, y la mayoría de sus servicios de paquetes nacionales incluyen seguimiento gratis. Para seguir un paquete, escribe el número en USPS Tracking, en usps.com o en su versión en español, es.usps.com; también puedes mandarlo por SMS al 28777 o pegarlo en la casilla de arriba. El número te lo da quien envía, normalmente en el correo de envío de la tienda. Esta página te sirve si vives en Estados Unidos y también si estás en España esperando un paquete que viene de allí.
@@ -44,6 +44,7 @@ Aquí van los estados en inglés, tal como los escribe USPS en usps.com: primero
 | `Notice Left (No Secure Location Available)` | El cartero no vio un sitio seguro y se lo llevó a la oficina. Tampoco hay segundo intento automático. |
 | `Available for Pickup` | No se puede entregar: recógelo en tu oficina de correos desde el siguiente día hábil, con identificación con foto. Para este estado no se puede pedir un reintento. |
 | `Held at Delivery Depot/Delivery Office` | En un envío internacional: el correo del país de destino lo guarda en su oficina para que lo recojas. Aparece pocos minutos después de que llegue allí. |
+| `Payment of charges - Item being held, addressee being notified` | En un envío internacional: el correo del país de destino lo retiene hasta que pagues los cargos de importación, y te avisa. Peek muestra «En aduanas». |
 | `Insufficient Address` o `No Such Number` | A la dirección le falta algo o está mal: el paquete vuelve al remitente. |
 | `Alert` | Un retraso, por ejemplo por el tiempo u otro imprevisto. Mira los avisos de servicio de USPS. |
 
@@ -141,5 +142,5 @@ No exactamente. A veces da una franja prevista de 2 horas, sin garantía, y USPS
 - [Correos: IVA de importación en el comercio electrónico](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/iva-de-importacion-en-el-comercio-electronico) – IVA hasta 150 €, IOSS, cobro antes de la entrega
 - [Correos: Gestionar la entrega de un envío con Correos](https://www.correos.es/es/es/particulares/recibir) – aviso de llegada, SMS, 15 días, DNI, autorización
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – teléfonos y horario de Correos
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que Peek lee y muestra de USPS, el estado de recogida en un envío internacional
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que Peek lee y muestra de USPS, los estados de recogida y de pago de cargos de importación en un envío internacional
 :::

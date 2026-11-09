@@ -77,9 +77,9 @@ MaltaPost's customer service page, read on 13 October 2026, lists:
 
 ## Tracking MaltaPost items with Peek
 
-For a number ending `MT` with a valid check digit, [Peek](/) asks MaltaPost and [Chronopost](carrier:chronopost) at once and shows "MaltaPost has this parcel." when MaltaPost knows it, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit MaltaPost isn't asked: check the number, or pick the carrier with "Change". A maltapost.com tracking link with `barcode=` always names MaltaPost, whatever number it holds.
+For a number ending `MT` with a valid check digit, [Peek](/) asks MaltaPost and [Chronopost](carrier:chronopost) at once and shows "MaltaPost has this parcel." when MaltaPost knows it, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit MaltaPost isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A maltapost.com tracking link with `barcode=` always names MaltaPost, whatever number it holds.
 
-Peek leaves a number from abroad with its own post, but MaltaPost's lookup takes it, SendOn barcodes included: pick "MaltaPost" with "Change", or paste a maltapost.com link. It switches to MaltaPost by itself only when the carrier abroad names MaltaPost.
+Peek follows a number from abroad at its own post first. When that post says the item is going to Malta (or names no destination and you're in Malta), Peek also asks MaltaPost with the same number, and moves to it once it has a fresh scan; the earlier history stays. MaltaPost's lookup takes such numbers, SendOn barcodes included: to follow one at MaltaPost straight away, pick "MaltaPost" with "Change", or paste a maltapost.com link.
 
 MaltaPost's times carry no time zone: Peek reads them on the clock of the scan's place, Maltese time for scans in Malta, and lists MaltaPost's own history. Statuses keep MaltaPost's wording. Peek can show the post office where an item waits or was picked up, and can notify you when the status changes. There's no expected delivery day and no weight. An item MaltaPost withholds from tracking can't be followed.
 

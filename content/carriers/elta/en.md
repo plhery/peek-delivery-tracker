@@ -81,9 +81,9 @@ ELTA's channels, as elta.gr and elta-courier.gr listed them in October 2026:
 
 ## Tracking ELTA parcels with Peek
 
-For a number ending `GR` with a valid check digit, [Peek](/) asks ELTA (and [Chronopost](carrier:chronopost)) at once and shows "ELTA Hellenic Post has this parcel." when ELTA knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit ELTA isn't asked: check the number, or pick the carrier with "Change". A 12-digit code from Germany, typed, goes to other carriers, never ELTA: use "Change" or paste an ELTA link. Links from elta.gr's tracker and elta-courier.gr's search always name ELTA.
+For a number ending `GR` with a valid check digit, [Peek](/) asks ELTA (and [Chronopost](carrier:chronopost)) at once and shows "ELTA Hellenic Post has this parcel." when ELTA knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit ELTA isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A 12-digit code from Germany, typed, goes to other carriers, never ELTA: use "Change" or paste an ELTA link. Links from elta.gr's tracker and elta-courier.gr's search always name ELTA.
 
-An item from abroad stays with its foreign post, but ELTA's lookup takes it too: pick "ELTA Hellenic Post" with "Change". A parcel can also be followed into ELTA when the carrier abroad names it, though not every parcel is.
+An item from abroad is followed at its foreign post first. When that post says the item is going to Greece (or names no destination and you're in Greece), Peek also asks ELTA with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at ELTA straight away, pick "ELTA Hellenic Post" with "Change".
 
 ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of the scan's place, Greek time for scans in Greece, and lists ELTA's own history with ELTA's English wording. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
 

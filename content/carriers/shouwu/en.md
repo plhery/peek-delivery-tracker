@@ -70,6 +70,7 @@ When iMile delivers in Italy, Shouwu's history relays iMile's lines, with the ce
 | `【ROM 10】Shipment out for delivery.` | iMile's delivery round. | "Out for delivery" |
 | `<User not at home>`, `【ROM 10】 Back To DS.` | The driver didn't find you, and the parcel is back at the delivery station. | "Delivery attempted" |
 | `【ROM 10】Parcel shipped to【Milan Transit Center】.` | After two failed rounds, the station sends it back to iMile's centre. | "In transit" |
+| `Back to Sender for reason: wrong recipient address or address related problem` | After its failed rounds, iMile is sending the parcel back, here over the address (another reason can follow the colon): on its way back, not with the sender yet. Ask the seller. | "Needs attention" |
 | `【Milan Transit Center】Order Closed.` | iMile closes the delivery order without delivering; ask the seller. | "Needs attention" |
 
 **Lines in Chinese.** Some parcels also get lines Shouwu writes in Chinese, which Peek shows as written. `货物电子信息已经收到` (the goods' electronic data received) comes with the order data: "Label created". Then, all "In transit": `申报过港中` after a batch's code (the batch is declared for the road to Hong Kong), `已到港，安排航班中` (at the port of departure, waiting for a flight), `预计23号的航班` (the flight booked, here for the 23rd; with `二程` in front, for the second leg), `航班已飞` and `二程航班已飞` (the flight, or the second leg's, has left) and `已落地` (landed). `已落地，清关提货中` (landed, being cleared and collected from the airline) is "At customs"; `清关完成` (cleared) and `已交仓扫描` (scanned in at the delivering courier's depot) are "In transit" again.
@@ -160,5 +161,5 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, choice of number, 10 to 12 working days
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November), iMile's lines relayed in Italy, clocks, places, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November), iMile's lines relayed in Italy (its return to sender too), clocks, places, what Peek shows
 :::

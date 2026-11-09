@@ -3,7 +3,7 @@ title: Hrvatska pošta tracking: statuses, lockers and contacts
 description: Track a Hrvatska pošta (Croatian Post) parcel: the item number, what the English statuses mean, paketomat lockers, post office pickup, claims and contacts.
 slug: hrvatska-posta-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Hrvatska pošta (Croatian Post) is Croatia's national post, with its Paket24 parcel service. Track an item on its [English tracking page](https://posiljka.posta.hr/en/tracking) (the plain posiljka.posta.hr address opens in Croatian), or paste the number in the box above. The number comes from the sender: the shop's shipping email or order page, or Hrvatska pošta's own SMS and notices.
@@ -31,6 +31,9 @@ The tracker shows each step in Croatian, or in English with the EN switch, with 
 | `Item announced` | The sender has [entered the details](guide:tracking-statuses). Not handed over yet. |
 | `Item received` | Accepted at the post office the step names. |
 | `Item sent` | Dispatched. |
+| `Item sent to Customs` | Presented to customs: a step passed on from the post abroad. |
+| `Item returned from Customs` | Customs has released it and the post goes on with it. Not a return to the sender. |
+| `Item held at Post Office` | Passed on from the post abroad: the delivering office is holding the item before it goes out. Not a pickup notice. |
 | `Item is out for delivery` | With the postman: delivery to your address is under way. |
 | `Delivery attempt` | The postman tried, but nobody was available. |
 | `Delivery was redirected to the parcelstation` | Sent to a parcel locker instead of your address. |
@@ -50,29 +53,29 @@ Odd one: for a valid number with no data yet, the English page says `Invalid bar
 If you're out, or the item doesn't fit the letterbox, the postman leaves a notice saying where and until when you can pick it up. How long it waits depends on the service:
 
 - **Post office, in general:** 5 working days, says Hrvatska pošta's help page; then it goes back to the sender.
-- **A parcel from abroad** (universal service) and an ordinary Paket: 15 working days at the post office.
-- **Paket 24:** 5 working days at the post office.
+- **A parcel from abroad** (universal service) and an ordinary Paket: 15 working days at the post office. An ordinary Paket gets one delivery attempt before that.
+- **Paket 24:** 5 working days at the post office; Hrvatska pošta then contacts you or the sender about what to do with it.
 - **Parcel lockers (paketomati):** 3 days from the SMS or e-mail notice, with a reminder 12 hours before the deadline.
 
-The notice gives the exact deadline, counted from the day on it.
+The notice gives the exact deadline, counted from the day on it. Away for a while? A post office can hold your items for up to 30 days, for a fee. Items over 500 g that you don't collect within a day of the notice pay a storage fee; for an item called in for a customs inspection, it starts 10 days after the call.
 
-**Lockers.** About 300 lockers, according to the English site, open around the clock. You open the door with the PIN or barcode from the notice, and can pay any cash-on-delivery amount there by card. Once Hrvatska pošta has your parcel, it can send an SMS and e-mail with a link to redirect it to a locker you choose.
+**Lockers.** About 300 lockers, according to the English site, open around the clock. You open the door with the PIN or barcode from the notice, and can pay any cash-on-delivery amount there by card. Once Hrvatska pošta has your parcel, it can send an SMS and e-mail with a link to redirect it to a locker you choose, and a parcel the postman couldn't deliver can also go to a locker. No code? Check Viber's business inbox and your spam folder, or ask the Contact Centre to send it again, with the item number, your name and a contact number ready. If the door won't open, call 072 303 304.
 
 **Changing delivery.** Redelivery can be requested at a post office or on 072 303 304, for a fee.
 
-**Who can collect:** an item you sign for goes to the recipient, a legal representative or someone with a power of attorney; if that isn't possible, a household member over 15 or an employee at your home or workplace. ID is checked at the counter.
+**Who can collect:** an item you sign for goes to the recipient, a legal representative or someone with a power of attorney; if that isn't possible, a household member over 15 or an employee at your home or workplace. ID is checked at the counter. There, whoever brings the arrival notice can collect a parcel, a Paket 24 or a registered letter (except court and official letters), showing their own ID.
 
 ## Croatian Post parcel delayed, lost or damaged
 
 Hrvatska pošta aims to deliver 85% of domestic items in its fastest category the next working day; Paket 24 takes one to three working days (three for islands). If nothing moves for days, see [tracking that isn't updating](guide:tracking-not-updating).
 
-**Customs.** For goods from outside the EU, Hrvatska pošta acts as your customs representative and collects VAT (and duty where due) plus its fee on delivery: 2.46 € for items up to 150 € without an IOSS number, 4.91 € from 150 to 1,000 €. With an IOSS number the shop has charged the VAT already, so neither the VAT nor Hrvatska pošta's fee is charged again. Since 1 July 2026, though, each item in a parcel up to 150 € carries a flat customs duty of 3 €, IOSS or not. See [parcels held at customs](guide:customs).
+**Customs.** For goods from outside the EU, Hrvatska pošta acts as your customs representative and collects VAT (and duty where due) plus its fee on delivery: 2.46 € for items up to 150 € without an IOSS number, 4.91 € from 150 to 1,000 €. With an IOSS number the shop has charged the VAT already, so neither the VAT nor Hrvatska pošta's fee is charged again. Since 1 July 2026, though, each item in a parcel up to 150 € carries a flat customs duty of 3 €, IOSS or not, and since 1 November 2026 an EU handling fee of 2 € per item applies too, whatever the value. See [parcels held at customs](guide:customs). Charged VAT you had already paid the shop? Send a complaint and refund request at a post office or with the web form, with proof of payment, Hrvatska pošta's receipt and the order invoice; the Contact Centre answers within 15 days.
 
 **Complaints** (loss, delay, damage, missing contents): within 3 months of posting for domestic items, 6 months for international ones, at a post office or with the web form. Report damage when the item is handed over, so a report can be drawn up; for a locker parcel, within one hour of collection. Hrvatska pošta answers within 30 days (60 internationally); then the Consumer Complaints Committee and the regulator HAKOM. Compensation goes to the sender, so for an online order, the shop claims.
 
 ## Hrvatska pošta contact number and email
 
-Hrvatska pošta's channels, as posta.hr listed them in October 2026:
+Hrvatska pošta's channels, as posta.hr listed them on 9 November 2026:
 
 - **Contact Centre:** 072 303 304 from Croatia, Monday to Friday 7:00 to 19:00, Saturday 7:00 to 15:00, at your operator's fixed-network rate. Have the item number ready.
 - **From abroad:** +385 1 6626 870.
@@ -81,15 +84,17 @@ Hrvatska pošta's channels, as posta.hr listed them in October 2026:
 - **By post:** HP - Hrvatska pošta d.d., Poštanska ulica 9, 10410 Velika Gorica.
 - **In person:** any post office.
 
-> Hrvatska pošta never asks for extra payment by SMS, and never asks for your card number by SMS or Viber. Fake messages link outside posta.hr and ask you to "update" parcel details or pay customs. You only ever pay the postman, at a post office or at a parcel locker. Don't click.
+You can't call post offices or postmen directly.
+
+> Hrvatska pošta never asks for extra payment by SMS, and never asks for your card number by SMS or Viber. Fake messages link outside posta.hr, ask you to "update" parcel details or say a parcel can't be delivered, and then ask for your card number and CVC. Official messages carry the item number, which you can check on the tracker. You only ever pay the postman, at a post office or at a parcel locker. Don't click.
 
 ## Tracking Hrvatska pošta parcels with Peek
 
-[Peek](/) names a postal number starting C, E, L or R and ending `HR` as Hrvatska pošta's straight away when its check digit is valid. For other valid numbers ending `HR`, such as `UA…HR` or `VV…HR`, it asks Hrvatska pošta (and [Chronopost](carrier:chronopost)) at once and shows "Hrvatska pošta has this parcel." when it knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Hrvatska pošta isn't asked: check the number, or pick the carrier with "Change". A posiljka.posta.hr tracking link with the number in it always names Hrvatska pošta. Its other barcodes, typed, never do: use "Change".
+[Peek](/) names a postal number starting C, E, L or R and ending `HR` as Hrvatska pošta's straight away when its check digit is valid. For other valid numbers ending `HR`, such as `UA…HR` or `VV…HR`, it asks Hrvatska pošta (and [Chronopost](carrier:chronopost)) at once and shows "Hrvatska pošta has this parcel." when it knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Hrvatska pošta isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A posiljka.posta.hr tracking link with the number in it, or a posta.hr track-and-trace link, always names Hrvatska pošta. Its other barcodes, typed, never do: use "Change".
 
-An item from abroad stays with its foreign post in Peek, but Hrvatska pošta's lookup takes it: pick "Hrvatska pošta" with "Change".
+An item from abroad is followed at its foreign post first. When that post says the item is going to Croatia (or names no destination and you're in Croatia), Peek also asks Hrvatska pošta with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Hrvatska pošta straight away, pick "Hrvatska pošta" with "Change".
 
-Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks every 10 minutes (every 2 once out for delivery, every 5 when it has to open Hrvatska pošta's site in a browser) and can notify you when the status changes. The faster checks run on the day Hrvatska pošta scans the parcel out for delivery, from 6 a.m. Croatian time, and only while Hrvatska pošta's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks every 10 minutes (every 2 once out for delivery, every 5 when it has to open Hrvatska pošta's site in a browser) and can notify you when the status changes. The faster checks run on the day Hrvatska pošta scans the parcel out for delivery, from 6 a.m. Croatian time, and only while Hrvatska pošta's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Questions about Croatian Post tracking
 
@@ -99,7 +104,7 @@ Yes. posiljka.posta.hr opens in Croatian, but its EN switch, or the /en/tracking
 
 ### Can I track an international parcel to Croatia?
 
-Yes, with the postal number the sender gave you, which ends in the sending country's code. Hrvatska pošta's tracker accepts it, and so does Peek once you pick Hrvatska pošta.
+Yes, with the postal number the sender gave you, which ends in the sending country's code. Hrvatska pošta's tracker accepts it. Peek follows it at the post abroad and moves to Hrvatska pošta once Hrvatska pošta has a fresh scan, or straight away if you pick Hrvatska pošta with "Change".
 
 ### How long does Hrvatska pošta keep a parcel in a paketomat?
 
@@ -113,17 +118,19 @@ Yes, with the postal number the sender gave you, which ends in the sending count
 - [Croatian Post: About us](https://hrvatska.posta.hr/en/about-us) – national post, about 300 parcel lockers
 - [Croatian Post: Core business](https://hrvatska.posta.hr/en/our-business/core-business) – post offices, Paket24, lockers open 0–24
 - [Hrvatska pošta: Kontakt centar](https://www.posta.hr/kontakt-centar) – contact centre hours, call cost, item number
-- [Hrvatska pošta: Paketomati](https://www.posta.hr/paketomati-9743) – 3 days, reminder, PIN or barcode, redirect link, card payment
-- [Hrvatska pošta: Uvjeti korištenja Paketomata](https://www.posta.hr/UserDocsImages/Dokumenti_2024/Uvjeti%20kori%C5%A1tenja%20Paketomata%20-%201.1.2025%20.pdf) – missed deliveries to lockers, one-hour damage report
-- [Hrvatska pošta: Unutarnji promet](https://www.posta.hr/unutarnji-promet-2153?pojam=&page=1) – notice, 5 working days, delivery attempt, redelivery, holding, who may collect
-- [Hrvatska pošta: Međunarodni promet](https://www.posta.hr/medjunarodni-promet?pojam=&page=1) – customs fees, IOSS, VAT refund, items stuck abroad
+- [Hrvatska pošta: Paketomati](https://www.posta.hr/paketomati-9743) – 3 days, reminder, PIN or barcode, redirect link, card payment, a new code, Viber and spam folders, a door that won't open (pages 1 and 2)
+- [Hrvatska pošta: Uvjeti korištenja Paketomata](https://www.posta.hr/UserDocsImages/Dokumenti_2024/Uvjeti%20kori%C5%A1tenja%20Paketomata%20-%201.1.2025%20.pdf) – missed deliveries to lockers, one-hour damage report, card payment
+- [Hrvatska pošta: Unutarnji promet](https://www.posta.hr/unutarnji-promet-2153?pojam=&page=1) – notice, 5 working days, delivery attempt, redelivery, holding up to 30 days, storage fee, who may collect, the notice's bearer, no direct calls to offices (pages 1 to 3)
+- [Hrvatska pošta: Međunarodni promet](https://www.posta.hr/medjunarodni-promet?pojam=&page=1) – customs fees, IOSS, VAT refund request and documents, 15-day answer, items stuck abroad (pages 1 to 3)
 - [Croatian Customs Administration: Nova pravila za robu koja se nabavlja putem prodaje na daljinu – e-trgovina](https://carina.gov.hr/pristup-informacijama/propisi-i-sporazumi/carinsko-postupanje/nova-pravila-za-robu-koja-se-nabavlja-putem-prodaje-na-daljinu-e-trgovina/2718) – flat 3 € duty per item from 1 July 2026, whatever the VAT route
 - [Hrvatska pošta: Opći uvjeti za obavljanje univerzalne usluge](https://www.posta.hr/UserDocsImages/Dokumenti_2026/Op%C4%87i_uvjeti_za_obavljanje_univerzalne%20usluge_1.8.2026.pdf) – arrival notice, 5 and 15 working days, e-mail, compensation to the sender
-- [Hrvatska pošta: Opći uvjeti za obavljanje ostalih poštanskih usluga](https://www.posta.hr/UserDocsImages/Dokumenti_2026/Op%C4%87i_uvjeti_za_obavljanje_ostalih_po%C5%A1tanskih_usluga_1.8.2026.pdf) – Paket 15 working days, Paket 24 5 working days, lockers 3 days
+- [Hrvatska pošta: Opći uvjeti za obavljanje ostalih poštanskih usluga](https://www.posta.hr/UserDocsImages/Dokumenti_2026/Opci_uvjeti_za_obavljanje_ostalih_postanskih_usluga_1.11.2026.pdf) – edition of 1 November 2026: Paket 15 working days and one delivery attempt, Paket 24 5 working days and a follow-up contact, lockers 3 days
 - [Hrvatska pošta: Rokovi uručenja pošiljaka](https://www.posta.hr/UserDocsImages/Dokumenti_2025/Rokovi_urucenja_posiljaka_20251120.pdf) – delivery times, Paket 24
 - [Hrvatska pošta: Reklamacije / prigovor](https://www.posta.hr/reklamacije/275) – complaint deadlines, channels, answer times, committee, HAKOM
 - [Hrvatska pošta: Kontakt](https://obrasci.posta.hr/kontakt) – web form, VAT refund request
-- [Hrvatska pošta: Ne nasjedajte na prijevaru](https://hrvatska.posta.hr/hr/ne-nasjedajte-na-prijevaru-hrvatska-posta-sms-om-ne-trazi-novac) – no payment by SMS, official messages carry the item number
-- [Hrvatska pošta: Kako prepoznati pokušaje prijevare](https://hrvatska.posta.hr/hr/kako-prepoznati-pokusaje-prijevare-uime-hrvatske-poste) – signs of fake SMS, card number warning
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Hrvatska pošta: Ne nasjedajte na prijevaru](https://hrvatska.posta.hr/hr/ne-nasjedajte-na-prijevaru-hrvatska-posta-sms-om-ne-trazi-novac) – no payment by SMS, fake requests to update parcel details, official messages carry the item number
+- [Hrvatska pošta: Kako prepoznati pokušaje prijevare](https://hrvatska.posta.hr/hr/kako-prepoznati-pokusaje-prijevare-uime-hrvatske-poste) – signs of fake SMS, undeliverable-parcel lure, card number and CVC warning
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € Union handling fee per item from 1 November 2026
+- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, status wordings and what they mean, refused numbers, links, moving to Hrvatska pošta from the post abroad
 :::

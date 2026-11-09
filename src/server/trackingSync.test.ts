@@ -2579,6 +2579,33 @@ describe('TrackingSyncService', () => {
     await expect(saved()).resolves.toEqual(['out_for_delivery', 'Out for delivery']);
   });
 
+  it('reads a summary naming an unstaged scan by that scan\'s words', async () => {
+    // The adapter leaves its newest scan unstaged and falls back to the shipment's state for the
+    // summary, which names that scan (synthetic wording and times).
+    const missed = 'Incorrect address details: delivery not possible';
+    const answer = (summary: string, scanStage?: string) => ({ status: 'out_for_delivery', current_stage: 'out_for_delivery',
+      last_status_text: summary, last_update: '2026-11-09T08:23:00Z',
+      events: [
+        { time: '2026-11-09T08:23:00Z', description: missed, ...(scanStage ? { stage: scanStage } : {}) },
+        { time: '2026-11-09T06:46:00Z', description: 'Out for delivery', stage: 'out_for_delivery' },
+      ] });
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn().mockResolvedValue(answer(missed)) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-09T09:00:00Z'));
+    const parcel = { id: 'worded', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'out_for_delivery' };
+    const saved = async () => {
+      await service.syncPackage(parcel);
+      const values = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+      return [values.current_stage, values.last_status_text];
+    };
+    await expect(saved()).resolves.toEqual(['failed_attempt', missed]);
+    // A summary in words of its own may be newer than the scans, and stands; so does one naming a scan the adapter staged.
+    adapter.fetch.mockResolvedValue(answer('Your parcel is with the courier'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Your parcel is with the courier']);
+    adapter.fetch.mockResolvedValue(answer(missed, 'in_transit'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', missed]);
+  });
+
   it('follows the carrier once no scan the parcel keeps shows the stage it was held at', async () => {
     // A scraper fix re-reads the scan that moved the parcel as a booked
     // collection (synthetic wording and times): no scan is in transit any more.

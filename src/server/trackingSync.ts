@@ -2127,17 +2127,23 @@ export class TrackingSyncService {
         // progress, as the apps do.
         const summaryOfTie = progressEvent !== undefined && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at
           && event.stage === normalizedReportedStage);
+        const summaryText = String(result!.last_status_text ?? '').trim();
+        // A summary naming the newest scan, which the adapter left unstaged and Peek places by its words:
+        // the summary's stage is then the adapter's fallback, not that scan's (DHL eCommerce Spain's
+        // shipment state, still out for delivery beside a later scan saying delivery was not possible).
+        const summaryOfWordedScan = progressEvent !== undefined && summaryText !== ''
+          && String(progressEvent.description ?? '').trim() === summaryText && isRecord(progressEvent.raw_data)
+          && String(progressEvent.raw_data.stage_source ?? '').startsWith('wording');
         // A provider's explicit non-pending summary can be newer than its last
         // timestamped milestone. Timed progress remains authoritative only
         // while the provider's summary is still pending.
         const normalizedSelectedStage = normalizedReportedStage && result!.status !== 'pending'
-          ? summaryOfTie ? String(progressEvent.stage) : normalizedReportedStage
+          ? summaryOfTie || summaryOfWordedScan ? String(progressEvent.stage) : normalizedReportedStage
           : (progressEvent ? String(progressEvent.stage) : null) ?? normalizedReportedStage ?? latestEventStage;
         // The scan that sets the stage over a pending summary tells it too: Royal Mail's "Pending"
         // summary beside its customs scans would say otherwise.
         // So does it over a summary naming another scan of its instant in another stage, which the apps
         // list after it (GLS Spain's "At delivery agency" written beside its "Out for delivery" of that minute).
-        const summaryText = String(result!.last_status_text ?? '').trim();
         const tiedScanNamed = progressEvent !== undefined && summaryOfTie && normalizedSelectedStage === progressEvent.stage
           && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at && event.stage !== progressEvent.stage
             && String(event.description ?? '').trim() === summaryText);

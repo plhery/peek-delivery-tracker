@@ -51106,7 +51106,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "alphastline",
+      "recognitionRank": 716
     },
     "linkRules": [],
     "detectionRules": [
@@ -51114,7 +51115,8 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^AF\\d{21}$",
         "confidence": "low"
       }
-    ]
+    ],
+    "trackingSearchUrl": "https://www.alphastline.com/"
   }
 } as const;
 

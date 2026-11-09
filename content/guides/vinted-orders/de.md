@@ -4,14 +4,14 @@ description: Vinted-Sendung verfolgen, als Käufer oder Verkäufer: wer in Deuts
 slug: vinted-sendungsverfolgung
 picture: Zwei Handys, das einer Verkäuferin und das eines Käufers, dazwischen fährt ein Paket im Lieferwagen, und ein fröhlicher Pip.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-11-09
 ---
 
 Auf Vinted wählt der Käufer beim Bezahlen den Versanddienst und zahlt den Versandschein; der Verkäufer bekommt ihn als bezahlten Versandschein oder als Code und hat 5 Werktage, um das Paket abzugeben. Beide verfolgen die Sendung im Chat zur Bestellung unter „Sendung verfolgen“, wo du auch die Sendungsnummer des Versanddienstes kopieren kannst. Bis die Sendungsverfolgung nach der Abgabe erscheint, können bis zu 48 Stunden vergehen, und der Verkäufer bekommt sein Geld erst, wenn der Käufer bestätigt oder 2 Tage nach der Lieferung.
 
 ## Wie funktioniert der Versand auf Vinted?
 
-Zu jeder Bestellung über den „Kaufen“-Button mit integriertem Versand gehört ein Versandschein, den Vinted für den gewählten Versanddienst erstellt. Der Verkäufer findet ihn im Posteingang, mit einer Anleitung: ausdrucken oder einen Code an der Annahmestelle zeigen. Dieser Versandschein „muss“ verwendet werden, schreibt Vinted: Mit einem anderen Versandschein oder einer anderen Versandoption wird die Bestellung automatisch storniert. Nach dem Kauf lässt sich der Versanddienst nicht mehr ändern; dafür muss die Bestellung storniert und neu aufgegeben werden.
+Zu jeder Bestellung über den „Kaufen“-Button mit integriertem Versand gehört ein Versandschein, den Vinted für den gewählten Versanddienst erstellt. Der Verkäufer findet ihn im Chat mit dem Käufer und per E-Mail, mit einer Anleitung: ausdrucken oder einen Code an der Annahmestelle zeigen. Dieser Versandschein „muss“ verwendet werden, schreibt Vinted: Mit einem anderen Versandschein oder einer anderen Versandoption wird die Bestellung automatisch storniert. Nach dem Kauf lassen sich Versanddienst, Art des Versandscheins (zum Ausdrucken oder digital) und Versandadresse nicht mehr ändern; dafür muss die Bestellung storniert und neu aufgegeben werden.
 
 :::journey
 - shop | Käufer | Bezahlt, wählt Versanddienst und Haustür oder Abholstelle
@@ -34,14 +34,16 @@ Artikel mit Artikelverifizierung oder Elektronikverifizierung gehen zuerst ins P
 
 ## Welcher Versanddienst liefert Vinted-Pakete?
 
-Der, den der Käufer gewählt hat. Jedes Land hat seine eigene Liste, und Verkäufer können manche Versanddienste in den Einstellungen abschalten:
+Der, den der Käufer gewählt hat. Jedes Land hat seine eigene Liste, und Verkäufer können manche Versanddienste unter **Profil** → **Meine Einstellungen** → **Versand** abschalten:
 
 | Land | Versanddienste auf Vinted | Bestellungen auch mit |
 | --- | --- | --- |
 | Deutschland | [DPD](carrier:dpd-de), [GLS](carrier:gls-de), [DHL Paket / DHL Päckchen](carrier:dhl), [Hermes](carrier:hermes-de), [DHL Express](carrier:dhl-express) | Belgien, Frankreich, Italien, Niederlande, Österreich |
 | Österreich | GLS, Hermes Paket Österreich, DPD | Deutschland, Frankreich, Italien |
 
-Vinteds eigener Versanddienst Vinted Go mit Schließfächern und Paketshops ist in Frankreich, Belgien, den Niederlanden, Spanien, Portugal und Finnland unterwegs, nicht in Deutschland oder Österreich.
+In Deutschland bringen alle fünf das Paket nach Hause oder an eine Abholstelle, je nachdem, was der Käufer beim Bezahlen gewählt hat. Bestellungen aus Italien und den Niederlanden liefert DHL an die Adresse, die der Käufer angegeben hat.
+
+Vinteds eigener Versanddienst Vinted Go hat Schließfächer und Paketshops in Frankreich, Belgien, den Niederlanden, Spanien, Portugal und Finnland, nicht in Deutschland oder Österreich. Laut Vinted Frankreich verschickt Vinted Go aber auch Pakete zwischen Frankreich und Deutschland.
 
 **In der Schweiz gibt es kein Vinted.** Vinted hat keine Schweizer Seite, und die Schweiz steht weder bei Deutschland noch bei Österreich oder Frankreich in der Liste der verbundenen Länder. Ein Vinted-Paket kann also nicht in die Schweiz geliefert werden.
 
@@ -98,7 +100,7 @@ Mehr dazu unter [warum die Sendungsverfolgung stockt](guide:tracking-not-updatin
 
 Das hängt vom Versanddienst ab: Die Frist steht meist in seiner Nachricht mit dem Abholcode. Vinted warnt, dass „einige Versandanbieter Sendungen nur 2 Kalendertage lang aufbewahren“, bevor sie zurückgehen. Bei Hermes Paket Österreich hast du 5 Kalendertage.
 
-- **Kein Abholcode?** Schau in SMS und Spam und warte 24 Stunden. Am Schalter bekommst du das Paket manchmal auch mit Ausweis und Sendungsnummer.
+- **Kein Abholcode?** Schau in SMS, E-Mails und Spam. Kommt er nicht binnen 24 Stunden oder funktioniert er nicht, wende dich an den Kundenservice des Versanddienstes. Am Schalter bekommst du das Paket manchmal auch mit Ausweis und Sendungsnummer.
 - **Nicht rechtzeitig abgeholt?** Es geht zurück an den Verkäufer. Vinted storniert die Bestellung und erstattet dir das Geld, sobald die Rücksendung bestätigt ist.
 - **Verkäufer, holt auch Rücksendungen ab.** Bleibt ein zurückgeschicktes Paket über die Frist und jede Verlängerung hinaus liegen, geht es in das Eigentum von Vinted Go UAB über.
 
@@ -115,7 +117,7 @@ In dieser Reihenfolge:
 - Lass Vinted nachforschen | Vinted klärt es mit dem Versanddienst, das kann mehrere Wochen dauern.
 :::
 
-Solange die Bestellung unterbrochen ist, ist deine Zahlung sicher verwahrt; ist der Verlust bestätigt, bekommst du alles zurück, Versand und Vinted-Gebühr eingeschlossen. Eine Packstation, die ein leeres Fach öffnet, meldest du ebenfalls über die Bestellung. Verkäufer werden für ein verlorenes oder beschädigtes Paket entschädigt, wenn es mit dem Vinted-Versandschein ging und gut verpackt war. Die Grenze setzt der Versanddienst: in Deutschland bis zu 500 Euro mit GLS, DHL und Hermes (Hermes Päckchen 50 Euro), 520 Euro mit DPD, aber nur 15 Euro mit DHL Express; in Österreich bis zu 550 Euro mit GLS und Hermes. Siehe auch [Paket verloren](guide:lost-parcel) und [zugestellt, aber nicht erhalten](guide:delivered-not-received).
+Solange die Bestellung unterbrochen ist, ist deine Zahlung sicher verwahrt; ist der Verlust bestätigt, bekommst du alles zurück, Versand und Vinted-Gebühr eingeschlossen. Eine Packstation, die ein leeres Fach öffnet, meldest du ebenfalls über die Bestellung. Verkäufer werden für ein verlorenes oder beschädigtes Paket entschädigt, wenn es mit dem Vinted-Versandschein ging und gut verpackt war. Die Grenze setzt der Versanddienst: in Deutschland bis zu 500 Euro mit GLS (GLS Send@Letterbox 10 Euro), DHL und Hermes (Hermes Päckchen 50 Euro), 520 Euro mit DPD, aber nur 15 Euro mit DHL Express; in Österreich bis zu 550 Euro mit GLS und Hermes, 520 Euro mit DPD. Siehe auch [Paket verloren](guide:lost-parcel) und [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 ## Wann bekommt der Verkäufer auf Vinted sein Geld?
 
@@ -133,7 +135,9 @@ Ja: Kopiere die Nummer unter „Sendung verfolgen“ und füge sie in [Peek](/) 
 - [Vinted: Der Versand auf Vinted](https://www.vinted.de/help/234) – Versanddienste in Deutschland, verbundene Länder, Versandschein oder Code, Stornierung
 - [Vinted Österreich: Der Versand auf Vinted](https://www.vinted.at/help/234) – Versanddienste in Österreich, verbundene Länder
 - [Vinted Frankreich: Quels sont les différents modes d'envoi sur Vinted ?](https://www.vinted.fr/help/234) – mit Frankreich verbundene Länder
+- [Vinted Frankreich: Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – Vinted Go auch zwischen Frankreich und Deutschland
 - [Vinted: So funktioniert die Lieferung](https://www.vinted.de/help/444) – Käufer wählt, 5 Werktage, 48 Stunden
+- [Vinted: Einen Artikel verschicken](https://www.vinted.de/help/482) – Chat und E-Mail, Versanddienst, Art des Versandscheins und Adresse nach dem Verkauf fest
 - [Vinted: Lieferzeit](https://www.vinted.de/help/101) – 2 bis 5 Werktage, Verifizierung bis 10, Verlängerung um 3 oder 5
 - [Vinted: Ich kann den Artikel nicht rechtzeitig abschicken](https://www.vinted.de/help/740) – Stornierung am nächsten Werktag, Versandbestätigung
 - [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, 48 Stunden, Als erhalten markieren, 25 Werktage, Sendungsverfolgung nur mit „Kaufen“-Button und nach den Anweisungen in der App, Hilfe-Center
@@ -141,15 +145,15 @@ Ja: Kopiere die Nummer unter „Sendung verfolgen“ und füge sie in [Peek](/) 
 - [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/657) – neues Lieferdatum, 25 Werktage, Entschädigung
 - [Vinted: Eine Sendung abholen](https://www.vinted.de/help/1601) – Abholcode, Lagerzeiten, Rückerstattung, 2 Tage
 - [Vinted: Die Sendung wurde zum Absender zurückgeschickt](https://www.vinted.de/help/728) – Rückerstattung nach Rücksendung
-- [Vinted: Abholung deiner Bestellung](https://www.vinted.de/help/738) – 2 Kalendertage, kein Abholcode, andere Abholstelle, leeres Fach
-- [Vinted: Entschädigung für Verkäufer beim Versand mit integrierten Versandscheinen](https://www.vinted.de/help/1018) – Grenzen je Versanddienst, Vinted Go UAB
-- [Vinted Österreich: Entschädigung für Verkäufer beim Versand mit integrierten Versandscheinen](https://www.vinted.at/help/1018) – GLS und Hermes 550 Euro
+- [Vinted: Abholung deiner Bestellung](https://www.vinted.de/help/738) – 2 Kalendertage, kein Abholcode, Kundenservice nach 24 Stunden, andere Abholstelle, leeres Fach
+- [Vinted: Entschädigung für Verkäufer beim Versand mit integrierten Versandscheinen](https://www.vinted.de/help/1018) – Grenzen je Versanddienst, GLS Send@Letterbox, Vinted Go UAB
+- [Vinted Österreich: Entschädigung für Verkäufer beim Versand mit integrierten Versandscheinen](https://www.vinted.at/help/1018) – GLS und Hermes 550 Euro, DPD 520 Euro
 - [Vinted: Vinted-Gebühr](https://www.vinted.de/help/342) – Name der Gebühr
-- [Vinted: Versand mit DHL](https://www.vinted.de/help/1244) – QR-Code in Filiale, Paketshop oder Packstation
-- [Vinted: Versand mit DPD](https://www.vinted.de/help/1101) – QR-Code, Paketshop
-- [Vinted: Versand mit GLS](https://www.vinted.de/help/871) – QR-Code im Paketshop
-- [Vinted: Versand mit Hermes](https://www.vinted.de/help/567) – QR-Code im Paketshop
-- [Vinted: Versand mit DHL Express](https://www.vinted.de/help/1606) – zwei Zustellversuche, dann Abholstelle
+- [Vinted: Versand mit DHL](https://www.vinted.de/help/1244) – QR-Code in Filiale, Paketshop oder Packstation, Haustür oder Abholstelle, aus Italien und den Niederlanden an die Adresse
+- [Vinted: Versand mit DPD](https://www.vinted.de/help/1101) – QR-Code, Paketshop, Haustür oder Abholstelle
+- [Vinted: Versand mit GLS](https://www.vinted.de/help/871) – QR-Code im Paketshop, Haustür oder Abholstelle, Profil > Meine Einstellungen > Versand
+- [Vinted: Versand mit Hermes](https://www.vinted.de/help/567) – QR-Code im Paketshop, Haustür oder Abholstelle
+- [Vinted: Versand mit DHL Express](https://www.vinted.de/help/1606) – Haustür oder Abholstelle, zwei Zustellversuche, dann Abholstelle
 - [Vinted Österreich: Versand mit Hermes Paket Österreich](https://www.vinted.at/help/567) – 5 Kalendertage zum Abholen
 - [Vinted: Rückerstattungsrichtlinien von Vinted](https://www.vinted.de/help/465) – 2 Kalendertage, Verlust, volle Erstattung, keine Erstattung nach Freigabe
 - [Vinted: Ich erhalte den Versandschein nicht oder er funktioniert nicht](https://www.vinted.de/help/154) – andere Annahmestelle, andere Adresse oder anderes Land, stornieren

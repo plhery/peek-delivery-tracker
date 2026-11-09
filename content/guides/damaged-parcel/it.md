@@ -29,7 +29,7 @@ Se hai comprato da un negozio, paga il venditore. In Italia il pacco viaggia a r
 | Paese | I tuoi diritti verso il venditore |
 | --- | --- |
 | Italia | Il venditore risponde dei difetti presenti alla consegna che si manifestano entro due anni, e l'azione si prescrive in 26 mesi dalla consegna (Codice del consumo, art. 133). Un difetto che compare entro un anno si presume già presente alla consegna (art. 135). L'obbligo di denunciare il difetto entro due mesi non c'è più |
-| Svizzera (Ticino) | Nessuna regola apposita per i consumatori sul rischio del trasporto: salvo accordi diversi, passa a te con la conclusione del contratto (Codice delle obbligazioni, art. 185), quindi contano le condizioni del negozio. Devi esaminare la merce appena possibile e dare «subito» notizia dei difetti al venditore (art. 201). La garanzia si prescrive in due anni dalla consegna (art. 210) |
+| Svizzera (Ticino) | Nessuna regola apposita per i consumatori sul rischio del trasporto: salvo accordi diversi, passa a te al più tardi quando la merce viene consegnata al corriere (Codice delle obbligazioni, art. 185), quindi contano le condizioni del negozio. Devi esaminare la merce appena possibile e dare «subito» notizia dei difetti al venditore (art. 201). La garanzia si prescrive in due anni dalla consegna (art. 210) |
 
 Le cose cambiano in tre casi:
 

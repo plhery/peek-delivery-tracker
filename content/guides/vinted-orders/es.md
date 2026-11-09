@@ -4,7 +4,7 @@ description: Sigue un paquete de Vinted como comprador o vendedor: qué empresa 
 slug: seguimiento-envio-vinted
 picture: Dos móviles, el de una vendedora y el de un comprador, entre los que viaja un paquete en una furgoneta, y un Pip muy contento.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-11-09
 ---
 
 En Vinted, el comprador elige la empresa de paquetería y paga el envío al comprar; el vendedor recibe una etiqueta prepagada o un código, y tiene 5 días laborables para enviar el paquete. Los dos lo siguen en la conversación del pedido con «Rastrear paquete», donde también puedes copiar el número de seguimiento. El seguimiento puede tardar hasta 48 horas en aparecer, y el vendedor cobra cuando el comprador pulsa «Todo está bien» o 2 días después de la entrega.
@@ -100,9 +100,9 @@ Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updati
 
 ## ¿Cuánto tiempo guardan un paquete de Vinted en el punto de recogida?
 
-Depende de la empresa: la fecha límite suele venir en su mensaje con el código de recogida. Vinted avisa de que «algunos transportistas solo guardan los paquetes durante 2 días naturales» antes de devolverlos al vendedor. Ontime guarda 7 días en su centro el paquete que no pudo entregar.
+Depende de la empresa: la fecha límite suele venir en su mensaje con el código de recogida. Vinted avisa de que «algunos transportistas solo guardan los paquetes durante 2 días naturales» antes de devolverlos al vendedor. Ontime guarda 7 días en su centro el paquete que no pudo entregar; en un punto de Vinted Go tienes 7 días para recogerlo, sin prórroga.
 
-- **¿No te ha llegado el código?** Revisa el móvil, el e-mail y el spam, y espera 24 horas. Pregunta en el punto si te lo dan con tu documento de identidad y el número de seguimiento.
+- **¿No te ha llegado el código?** Revisa los SMS, el e-mail y el spam. Si a las 24 horas no ha llegado o no funciona, contacta con la atención al cliente de la empresa. Pregunta en el punto si te lo dan con tu documento de identidad y el número de seguimiento.
 - **Lleva el DNI.** Con InPost, SEUR y GLS, Vinted te pide llevarlo para acreditar tu identidad.
 - **¿No lo recogiste a tiempo?** Vuelve al vendedor. Vinted cancela el pedido y te reembolsa cuando se confirma la devolución.
 - **Vendedor, recoge también tus devoluciones.** Un paquete devuelto que nadie recoge, pasado el plazo y cualquier prórroga, pasa a ser de Vinted Go UAB.
@@ -147,7 +147,7 @@ Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Un núm
 - [Vinted: Envío personalizado en Vinted](https://www.vinted.es/help/443) – opción antigua, ya no disponible para los anuncios nuevos
 - [Vinted: El paquete no llega](https://www.vinted.es/help/657) – aviso de retraso, 25 días laborables
 - [Vinted: Recoger un paquete](https://www.vinted.es/help/1601) – código de recogida, plazos, reembolso
-- [Vinted: Cómo recoger un pedido](https://www.vinted.es/help/738) – 2 días naturales, sin código, taquilla vacía
+- [Vinted: Cómo recoger un pedido](https://www.vinted.es/help/738) – 2 días naturales, sin código, atención al cliente a las 24 horas, taquilla vacía
 - [Vinted: Se ha devuelto el paquete al remitente](https://www.vinted.es/help/728) – reembolso tras la devolución
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – 2 días, varias semanas, reembolso completo
 - [Vinted: Indemnización a vendedores en envíos con etiqueta integrada](https://www.vinted.es/help/1018) – límites, Vinted Go UAB
@@ -160,5 +160,6 @@ Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Un núm
 - [Vinted: Envíos con Vinted Go](https://www.vinted.es/help/1110) – zonas, código QR, taquilla cercana
 - [Vinted: Envío con DHL Express](https://www.vinted.es/help/1606) – zonas, etiqueta digital, dos intentos
 - [Vinted Go: inicio](https://vintedgo.com/es?country=es&region=europe) – países de Vinted Go
+- [Vinted Go: preguntas frecuentes](https://vintedgo.com/es/faq?country=es&region=europe) – 7 días para recoger un paquete, sin prórroga
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números
 :::

@@ -30,7 +30,7 @@ Si tu as acheté à un professionnel, c'est le vendeur. En France et en Belgique
 | --- | --- |
 | France | Le vendeur répond des défauts de conformité, y compris les défauts « résultant de l'emballage » (code de la consommation, art. L217-3). Tu choisis entre réparation et remplacement, gratuits et faits dans les 30 jours (art. L217-8 à L217-10). Service-Public.fr est clair : avec le transporteur choisi par le vendeur, « le vendeur est seul responsable » |
 | Belgique | Garantie légale de deux ans auprès du vendeur, et c'est à lui de prouver que le défaut n'existait pas à la livraison. Le SPF Economie dit de contacter le vendeur, pas le livreur : il remplace, répare ou rembourse, puis se retourne contre la société de livraison |
-| Suisse | Pas de règle propre aux consommateurs : les risques passent à l'acheteur dès la conclusion du contrat, sauf accord contraire (Code des obligations, art. 185). Les conditions de la boutique décident, lis-les. Et tu dois vérifier la marchandise dès que possible et signaler un défaut « sans délai » (art. 201) |
+| Suisse | Pas de règle propre aux consommateurs : les risques passent à l'acheteur au plus tard quand la marchandise est remise au transporteur, sauf accord contraire (Code des obligations, art. 185). Les conditions de la boutique décident, lis-les. Et tu dois vérifier la marchandise dès que possible et signaler un défaut « sans délai » (art. 201) |
 
 C'est à toi de t'en occuper, avec le transporteur ou la plateforme, dans trois cas :
 

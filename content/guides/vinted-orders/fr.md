@@ -4,14 +4,14 @@ description: Suivre un colis Vinted, acheteur ou vendeur : qui le livre en Franc
 slug: suivi-colis-vinted
 picture: Deux téléphones, celui d'une vendeuse et celui d'un acheteur, entre lesquels un colis voyage en camionnette, et un Pip tout joyeux.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-11-09
 ---
 
 Sur Vinted, c'est l'acheteur qui choisit le transporteur et paie le bordereau en commandant ; le vendeur le reçoit sous forme de bordereau prépayé ou de code, et a 5 jours ouvrés pour déposer le colis. Tous deux suivent le colis dans la conversation de la commande, avec « Suivre le colis », où l'on peut aussi copier le numéro du transporteur. Le suivi peut mettre jusqu'à 48 h à apparaître après le dépôt, et le vendeur n'est payé qu'une fois que l'acheteur a confirmé que tout est en ordre, ou 2 jours après la livraison.
 
 ## Comment marche l'envoi sur Vinted ?
 
-Toute commande passée avec le bouton « Acheter » et un mode d'envoi intégré comprend un bordereau que Vinted génère pour le transporteur choisi par l'acheteur. Le vendeur le trouve dans sa messagerie Vinted, avec les instructions : l'imprimer, ou présenter un code au point de dépôt. Ce bordereau « doit être utilisé », prévient Vinted : avec un autre bordereau ou un autre mode d'envoi, la commande est annulée automatiquement. Une fois l'article vendu, le transporteur et le type de bordereau ne changent plus ; la seule solution est d'annuler et de recommander.
+Toute commande passée avec le bouton « Acheter » et un mode d'envoi intégré comprend un bordereau que Vinted génère pour le transporteur choisi par l'acheteur. Le vendeur le trouve dans la conversation avec l'acheteur et par e-mail, avec les instructions : l'imprimer, ou présenter un code au point de dépôt. Ce bordereau « doit être utilisé », prévient Vinted : avec un autre bordereau ou un autre mode d'envoi, la commande est annulée automatiquement. Une fois l'article vendu, le transporteur, le type de bordereau (imprimable ou numérique), l'adresse de livraison et la taille du colis ne changent plus ; la seule solution est d'annuler et de recommander.
 
 :::journey
 - shop | Acheteur | Paie, choisit le transporteur, le domicile ou un point relais
@@ -34,14 +34,16 @@ Un article acheté avec la Vérification de l'article ou la Vérification du mat
 
 ## Quel transporteur livre les colis Vinted ?
 
-Celui que l'acheteur a choisi. Chaque pays a sa liste, et le vendeur peut désactiver certains transporteurs dans ses paramètres :
+Celui que l'acheteur a choisi. Chaque pays a sa liste, et le vendeur peut désactiver certains transporteurs dans **Profil** → **Paramètres** → **Envoi** :
 
 | Pays | Transporteurs sur Vinted | Commandes possibles avec |
 | --- | --- | --- |
 | France | [Mondial Relay](carrier:mondial-relay), [Colissimo](carrier:la-poste), [Chronopost](carrier:chronopost), [Vinted Go](carrier:vinted-go), [DHL Express](carrier:dhl-express) | Allemagne, Autriche, Belgique, Espagne, Irlande, Italie, Luxembourg, Pays-Bas, Portugal |
 | Belgique | Mondial Relay, Vinted Go, DHL ServicePoint ou à domicile, Shop2Shop by Chronopost, DPD, [bpost](carrier:bpost), DHL Express | Allemagne, Espagne, France, Irlande, Italie, Luxembourg, Pays-Bas, Portugal |
 
-Vinted Go est le transporteur de Vinted, avec ses consignes et points relais en France, en Belgique, aux Pays-Bas, en Espagne, au Portugal et en Finlande.
+En France, Mondial Relay livre en point relais ou en consigne, Colissimo à domicile, Chronopost et Vinted Go en point relais, en consigne ou à domicile, et DHL Express en point relais ou à domicile, selon le choix de l'acheteur.
+
+Vinted Go est le transporteur de Vinted, avec ses consignes et points relais en France, en Belgique, aux Pays-Bas, en Espagne, au Portugal et en Finlande. En France, il n'est proposé que si une consigne Vinted Go se trouve près de l'acheteur et du vendeur ; certains relais y proposent aussi la livraison à domicile, par un coursier Uber Direct, à l'heure convenue.
 
 **En Suisse, pas de Vinted.** Vinted n'a pas de site suisse, et la Suisse ne figure dans la liste des pays reliés ni pour la France, ni pour la Belgique, ni pour l'Allemagne. Un colis Vinted ne peut donc pas être livré en Suisse.
 
@@ -82,7 +84,7 @@ En général, parce qu'un code est devenu un bordereau, ou que le colis a pris u
 - **Une commande entre deux pays.** Vinted prévient qu'un bordereau peut afficher une autre adresse, voire un autre pays, pour des raisons d'expédition et de transfert.
 - **Un centre de vérification.** Avec un service de vérification, le colis passe par le centre de Vinted avant de repartir vers toi.
 - **Une nouvelle commande.** Si le bordereau ne marchait pas et que la commande a été annulée puis repassée, le nouveau bordereau a un nouveau numéro.
-- **Un autre point de retrait.** DHL Express tente deux livraisons à domicile, puis dépose le colis dans un point relais proche. Un colis peut aussi être redirigé vers un autre point voisin : vérifie le lien de suivi avant d'y aller.
+- **Un autre point de retrait.** DHL Express tente deux livraisons à domicile, puis dépose le colis dans un point relais proche ; en Belgique, DHL Home Delivery l'apporte au point de service le plus proche si tu es absent et n'as pas indiqué d'autre lieu de livraison. Un colis peut aussi être redirigé vers un autre point voisin : vérifie le lien de suivi avant d'y aller.
 
 ## Pourquoi mon suivi Vinted ne bouge plus ?
 
@@ -92,15 +94,15 @@ Chaque silence a sa raison :
 - **Aucun scan au bout de 5 jours ouvrés.** Le vendeur n'a peut-être pas envoyé le colis. Sauf confirmation d'envoi ou prolongation acceptée, Vinted annule la commande et te rembourse.
 - **Bloqué en route.** Si le colis est en retard, Vinted te prévient et affiche une nouvelle date dans la commande. Si le suivi semble bloqué, sur Vinted comme chez le transporteur, Vinted demande d'attendre 25 jours ouvrés à partir du jour où la commande a été indiquée comme expédiée.
 - **Retiré, mais pas « livré ».** Le suivi ne se met pas toujours à jour tout de suite : sélectionne « Suivre le colis », puis « Bien reçu ».
-- **Envoi hors Vinted.** Un colis envoyé sans le bordereau de Vinted n'est pas suivi sur Vinted : le suivi n'existe que pour les articles achetés avec le bouton « Acheter » et envoyés selon les instructions de l'app. Pour de l'aide, va sur la page d'accueil du Centre d'aide et sélectionne ta commande.
+- **Envoi hors Vinted.** L'envoi personnalisé est une ancienne option, qui n'est plus disponible pour les nouvelles annonces. Un colis envoyé sans le bordereau de Vinted n'est pas suivi sur Vinted : le suivi n'existe que pour les articles achetés avec le bouton « Acheter » et envoyés selon les instructions de l'app. Pour de l'aide, va sur la page d'accueil du Centre d'aide et sélectionne ta commande.
 
 Plus d'explications dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
 ## Combien de temps le point relais garde-t-il mon colis Vinted ?
 
-Ça dépend du transporteur : la date limite figure en général dans son message, avec ton code de retrait. Vinted prévient que « certains transporteurs ne stockent les colis que pendant 2 jours calendaires » avant de les renvoyer au vendeur.
+Ça dépend du transporteur : la date limite figure en général dans son message, avec ton code de retrait. Vinted prévient que « certains transporteurs ne stockent les colis que pendant 2 jours calendaires » avant de les renvoyer au vendeur. Vinted Go te laisse 7 jours, sans prolongation possible.
 
-- **Pas de code de retrait ?** Regarde tes SMS et tes spams, et patiente 24 h. Au comptoir, on peut parfois te remettre le colis avec ta pièce d'identité et le numéro de suivi.
+- **Pas de code de retrait ?** Regarde tes SMS, tes e-mails et tes spams. S'il n'arrive pas sous 24 h ou ne marche pas, contacte le service client du transporteur. Au comptoir, on peut parfois te remettre le colis avec ta pièce d'identité et le numéro de suivi.
 - **Pas retiré à temps ?** Il repart chez le vendeur. Vinted annule la commande et te rembourse une fois le retour confirmé.
 - **Vendeurs, retirez aussi vos retours.** Un colis retourné qui reste en point relais au-delà du délai et de toute prolongation devient la propriété de Vinted Go UAB.
 
@@ -117,7 +119,7 @@ Dans cet ordre :
 - Laisse Vinted enquêter | Il voit avec le transporteur, ce qui peut prendre plusieurs semaines.
 :::
 
-Pendant que la commande est suspendue, ton argent reste en sécurité ; si la perte est confirmée, tu es remboursé en entier, frais de port et frais Vinted compris. Une consigne qui s'ouvre sur un casier vide se signale aussi depuis la commande. Le vendeur, lui, est indemnisé pour un colis perdu ou abîmé envoyé avec le bordereau Vinted et bien emballé, dans la limite fixée par chaque transporteur : 25 € avec Mondial Relay, 18 € avec Colissimo, 15 € avec DHL Express, jusqu'à 500 € avec Vinted Go en France, et 520 € avec DPD en Belgique. Voir aussi [colis perdu](guide:lost-parcel) et [colis livré mais pas reçu](guide:delivered-not-received).
+Pendant que la commande est suspendue, ton argent reste en sécurité ; si la perte est confirmée, tu es remboursé en entier, frais de port et frais Vinted compris. Une consigne qui s'ouvre sur un casier vide se signale aussi depuis la commande. Le vendeur, lui, est indemnisé pour un colis perdu ou abîmé envoyé avec le bordereau Vinted et bien emballé, dans la limite fixée par chaque transporteur : 25 € avec Mondial Relay, 20 € avec Shop2Shop by Chronopost, 18 € avec Colissimo, 15 € avec DHL Express et jusqu'à 500 € avec Vinted Go en France ; en Belgique, 520 € avec DPD, 20 € avec DHL ServicePoint ou Home Delivery, 10 € par kilo (500 € au plus) avec bpost, et 23 € par kilo avec Vinted Go, sans dépasser la valeur de l'article ni 500 €. Voir aussi [colis perdu](guide:lost-parcel) et [colis livré mais pas reçu](guide:delivered-not-received).
 
 ## Quand le vendeur Vinted est-il payé ?
 
@@ -136,27 +138,29 @@ Oui : copie le numéro depuis « Suivre le colis » et colle-le dans [Peek](/). 
 - [Vinted Belgique : Quels sont les différents modes d'envoi sur Vinted ?](https://www.vinted.be/help/234) – transporteurs en Belgique, pays reliés
 - [Vinted Allemagne : Der Versand auf Vinted](https://www.vinted.de/help/234) – pays reliés à l'Allemagne
 - [Vinted : Comment fonctionne la livraison ?](https://www.vinted.fr/help/444) – l'acheteur choisit, 5 jours ouvrables
-- [Vinted : Envoyer un article](https://www.vinted.fr/help/482) – 5 jours ouvrés, rien ne change après la vente
+- [Vinted : Envoyer un article](https://www.vinted.fr/help/482) – conversation et e-mail, 5 jours ouvrés, rien ne change après la vente
 - [Vinted : Délais de livraison](https://www.vinted.fr/help/101) – 2 à 5 jours ouvrés, vérification jusqu'à 10, prolongation de 3 ou 5 jours
 - [Vinted : Tu ne peux pas envoyer le colis à temps ?](https://www.vinted.fr/help/740) – annulée le jour ouvré suivant, confirmation d'envoi
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – Suivre le colis, 48 h, Bien reçu, 25 jours ouvrés, suivi seulement avec le bouton « Acheter » et les instructions de l'app, Centre d'aide
+- [Vinted : Envoi personnalisé sur Vinted](https://www.vinted.fr/help/443) – ancienne option, plus disponible pour les nouvelles annonces
 - [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/657) – nouveau délai, 25 jours ouvrés
 - [Vinted : Récupérer un colis](https://www.vinted.fr/help/1601) – code de retrait, durée de stockage, remboursement, 2 jours
 - [Vinted : Le colis a été retourné à l'expéditeur·trice](https://www.vinted.fr/help/728) – remboursement après retour
-- [Vinted : Comment récupérer ta commande ?](https://www.vinted.fr/help/738) – 2 jours calendaires, pas de code, autre point relais, casier vide
+- [Vinted : Comment récupérer ta commande ?](https://www.vinted.fr/help/738) – 2 jours calendaires, pas de code, service client après 24 h, autre point relais, casier vide
 - [Vinted : Politique de remboursement de Vinted](https://www.vinted.fr/help/465) – 2 jours calendaires, perte, remboursement complet, plus de remboursement après finalisation
 - [Vinted : Je n’ai pas reçu le bordereau d’envoi ou il ne fonctionne pas](https://www.vinted.fr/help/154) – autre point relais, adresse ou pays différent, annuler et recommander
 - [Vinted : Principes de base pour les achats](https://www.vinted.fr/help/25) – « Tout est OK » transfère le paiement
 - [Vinted : Recevoir le paiement d'une vente finalisée](https://www.vinted.fr/help/235) – finalisation, 2 jours, vendeurs Pro
-- [Vinted : Quelle indemnisation pour le vendeur en cas d'envoi avec un bordereau d'envoi intégré ?](https://www.vinted.fr/help/1018) – plafonds par transporteur, Vinted Go UAB
-- [Vinted Belgique : Quelle indemnisation pour le vendeur en cas d'envoi avec un bordereau d'envoi intégré ?](https://www.vinted.be/help/1018) – DPD 520 €
+- [Vinted : Quelle indemnisation pour le vendeur en cas d'envoi avec un bordereau d'envoi intégré ?](https://www.vinted.fr/help/1018) – plafonds par transporteur, Shop2Shop by Chronopost 20 €, Vinted Go UAB
+- [Vinted Belgique : Quelle indemnisation pour le vendeur en cas d'envoi avec un bordereau d'envoi intégré ?](https://www.vinted.be/help/1018) – DPD 520 €, DHL 20 €, bpost 10 €/kg, Vinted Go 23 €/kg
 - [Vinted : Frais Vinted](https://www.vinted.fr/help/342) – nom des frais
-- [Vinted : Envoi avec Mondial Relay](https://www.vinted.fr/help/1061) – point relais ou consigne
+- [Vinted : Envoi avec Mondial Relay](https://www.vinted.fr/help/1061) – point relais ou consigne, Profil > Paramètres > Envoi
 - [Vinted : Envoi avec Colissimo](https://www.vinted.fr/help/763) – domicile, bureau de poste
-- [Vinted : Envoi avec Chronopost](https://www.vinted.fr/help/879) – QR code à la consigne ou au comptoir
-- [Vinted : Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – QR code, code de retrait
-- [Vinted : Envoi avec DHL Express](https://www.vinted.fr/help/1606) – deux tentatives, puis un point relais
-- [Vinted Belgique : Envoi avec DHL Home delivery](https://www.vinted.be/help/1022) – QR code imprimé au point relais
+- [Vinted : Envoi avec Chronopost](https://www.vinted.fr/help/879) – QR code à la consigne ou au comptoir, point relais, consigne ou domicile
+- [Vinted : Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – QR code, code de retrait, consigne, relais ou domicile avec Uber Direct, consigne proche de l'acheteur et du vendeur
+- [Vinted : Envoi avec DHL Express](https://www.vinted.fr/help/1606) – point relais ou domicile, deux tentatives, puis un point relais
+- [Vinted Belgique : Envoi avec DHL Home delivery](https://www.vinted.be/help/1022) – QR code imprimé au point relais, point de service le plus proche en cas d'absence
 - [Vinted Go : accueil](https://vintedgo.com/fr?country=fr&region=europe) – pays de Vinted Go
+- [Vinted Go : foire aux questions](https://vintedgo.com/fr/faq?country=fr&region=europe) – 7 jours pour retirer un colis, sans prolongation
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes de numéros
 :::

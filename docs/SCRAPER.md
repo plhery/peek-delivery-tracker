@@ -134,7 +134,8 @@ the app is fixed. When the release changed an answer on purpose, such as the car
 number is detected as, either make the app's tests accept both answers on `main` and start
 the adoption again, or adopt the release by hand: one commit with
 `npm install --save-exact universal-parcel-scraper@<version>`, `npm run contract:generate`,
-`npm run ios:resources` and the fixes.
+`npm run ios:resources` and the fixes, with Android's for a catalog field it does not read
+yet (`./gradlew :core:test` in `android/`).
 
 `playwright-core`, `sharp` and `onnxruntime-web` are the scraper's optional peers. npm does
 not check them here, so [a test](../src/server/scraperDependency.test.ts) does. When a

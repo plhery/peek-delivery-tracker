@@ -1987,6 +1987,22 @@ class CarrierCatalogTests {
     }
 
     /**
+     * The catalog the app ships with is the shared one (`npm run ios:resources`), and this build reads every carrier in
+     * it: one it cannot read, such as one asking for a requirement field it has no case for, would be left out of the
+     * app as a newer server catalog's is, and its numbers detected as another carrier's.
+     */
+    @Test
+    fun theBundledCatalogReadsEveryCarrier() {
+        val carriers = Json.parseToJsonElement(bundledCatalogData.decodeToString()).jsonObject.getValue("x-carriers").jsonObject
+        val unreadable = carriers.mapNotNull { (key, entry) ->
+            runCatching { ApiJson.decodeFromJsonElement(CarrierDefinition.serializer(), entry) }.exceptionOrNull()
+                ?.let { "$key: ${it.message?.lineSequence()?.firstOrNull()}" }
+        }
+        assertEquals(unreadable.joinToString("\n"), emptyList<String>(), unreadable)
+        assertEquals(carriers.keys, catalog.definitions.keys.map { it.rawValue }.toSet())
+    }
+
+    /**
      * The server sends the bundled catalog without indentation. It must stay far below the limit, or every refresh
      * fails and the app keeps the catalog it has.
      */

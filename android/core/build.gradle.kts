@@ -79,4 +79,6 @@ dependencies {
 tasks.test {
     // Dates are shown in the device's zone, as on the iPhone. CI runs in UTC; TEST_TIME_ZONE checks other zones.
     providers.environmentVariable("TEST_TIME_ZONE").orNull?.let { systemProperty("user.timezone", it) }
+    // A failed test's message shows in the build's log, CI's included, not only in its report.
+    testLogging.exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 }

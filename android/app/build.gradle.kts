@@ -172,6 +172,8 @@ android {
             // Every test runs in one JVM, and an iPad-sized screenshot compares images of 20 MB and more: Gradle's
             // default 512 MB runs out.
             it.maxHeapSize = "2g"
+            // A failed test's message shows in the build's log, CI's included, not only in its report.
+            it.testLogging.exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
     }
 }

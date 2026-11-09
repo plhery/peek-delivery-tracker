@@ -10,7 +10,7 @@ it('uses a single named carrier with dated movement', () => {
 });
 
 it.each<Partial<CarrierResult>>([
-  { reported_carriers: ['DHL'] },
+  { reported_carriers: ['Cirro'] },
   { reported_carriers: ['DHL Express', 'Swiss Post'] },
   { reported_carriers: ['Unknown Carrier'] },
   { discovered_carrier: 'dhl' },
@@ -22,6 +22,24 @@ it.each<Partial<CarrierResult>>([
   { events: [{ stage: 'delivered', time: '9999-09-10T11:00:00Z', description: 'Delivered' }] },
 ])('keeps ambiguous names and undated or registration-only answers unresolved: %j', (change) => {
   expect(providerCarrier({ ...history, ...change }, '1234567891')).toBeUndefined();
+});
+
+it('reads one named carrier with the number, as the library does', () => {
+  const named = (name: string, discovered: string, number: string) => providerCarrier({ ...history,
+    tracking_provider: '17TRACK', reported_carriers: [name], discovered_carrier: discovered }, number);
+  // A DPD France label (250 and twelve digits): the name alone names no DPD network.
+  expect(named('DPD (FR)', 'dpd-fr', '250012345678901')).toBe('dpd-fr');
+  // Jumppoint's two networks: JP, two letters and ten digits, or JP and twelve digits.
+  expect(named('Jumppoint', 'jumppoint-international', 'JPAB0123456789')).toBe('jumppoint-international');
+  expect(named('Jump Point', 'jumppoint', 'JP012345678901')).toBe('jumppoint');
+  // A bare brand the number settles: a DHL Express waybill.
+  expect(named('DHL', 'dhl-express', '1234567891')).toBe('dhl-express');
+  // Names that span several networks stay unmapped: a DPD depot number in "DPD (BE)" or
+  // "DPD (FR)", a DPD France label in "DPD (BE)", and Cirro.
+  expect(named('DPD (BE)', 'dpd-be', '05123456789012')).toBeUndefined();
+  expect(named('DPD (FR)', 'dpd-fr', '01234567890123')).toBeUndefined();
+  expect(named('DPD (BE)', 'dpd-fr', '250012345678901')).toBeUndefined();
+  expect(named('Cirro', 'gofo', 'GFUS01234567890123')).toBeUndefined();
 });
 
 it('uses the journey owner of several named carriers when the number points to it alone', () => {

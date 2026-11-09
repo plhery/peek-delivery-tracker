@@ -80,7 +80,7 @@ Nummern der Post sind die Ausnahme. Der Weltpostverein erlaubt nur eine S10-Numm
 
 ### YunExpress, Cainiao, 4PX: Wer steckt hinter meiner Nummer?
 
-Neben Cainiao begegnen dir YunExpress, [4PX](carrier:4px), [Sunyou](carrier:sunyou) und [Yanwen](carrier:yanwen) (Yanwen verkauft sogar Versandlinien, die nach Temu und AliExpress benannt sind):
+Neben Cainiao begegnen dir YunExpress, [4PX](carrier:4px), [Sunyou](carrier:sunyou) und [Yanwen](carrier:yanwen) (Yanwen verkauft sogar Versandlinien, die nach Temu benannt sind):
 
 | Die Nummer sieht so aus | Meist |
 | --- | --- |
@@ -174,7 +174,7 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [Shein Deutschland: Versandinformation](https://de.shein.com/Shipping-Info-a-280.html) – Lieferzeitraum, verschiedene Lager, 45 und 30 Tage
 - [Shein Österreich: Versandinformation](https://at.shein.com/Shipping-Info-a-280.html) – 6 bis 9 Werktage, 45 und 30 Tage
 - [Shein Schweiz: Versandinformation](https://ch.shein.com/Shipping-Info-a-280.html) – 6 bis 8 Werktage, Economy ohne Tracking, 45 und 30 Tage
-- [Yanwen: Startseite](https://www.yw56.com.cn/) – Deutschland-DHL-Linie, Linien für Temu und AliExpress
+- [Yanwen: Startseite](https://www.yw56.com.cn/) – Deutschland-DHL-Linie, Linien für Temu
 - [SF International: Hinweise](https://www.sf-international.com/cn/sc) – Feiertage 2026
 - [Staatsrat der Volksrepublik China: Feiertage 2026](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Neujahrsfest im Februar, Nationalfeiertag 1. bis 7. Oktober
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Neujahrsfest zwischen 21. Januar und 20. Februar

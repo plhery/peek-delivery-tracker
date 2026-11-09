@@ -73,7 +73,7 @@ Con i codici delle poste è diverso. L'Unione postale universale prevede un solo
 
 ### Di quale corriere è il mio codice?
 
-Oltre a Cainiao vedrai [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou), [Yanwen](carrier:yanwen) (che vende perfino linee con il nome di Temu e di AliExpress) e CNE, che tra i suoi clienti indica Temu:
+Oltre a Cainiao vedrai [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou), [Yanwen](carrier:yanwen) (che vende perfino linee con il nome di Temu) e CNE, che tra i suoi clienti indica Temu:
 
 | Il codice è fatto così | Di solito |
 | --- | --- |
@@ -165,7 +165,7 @@ Schermate, stati, crediti e reclami di ogni negozio: [tracciare un ordine AliExp
 - [AliExpress: Do I have to pay for customs and import taxes? (in inglese)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – magazzino nel tuo Paese, niente dazi né tasse in più
 - [Shein Italia: Informazioni sulla spedizione](https://it.shein.com/Shipping-Info-a-280.html) – I miei ordini, tempi, Magazzino UE, 45 e 30 giorni, 200 punti
 - [Shein Svizzera: Versandinformationen (in tedesco)](https://ch.shein.com/Shipping-Info-a-280.html) – Economy senza tracking, magazzini diversi, 6-8 giorni, 500 punti
-- [Yanwen: sito ufficiale (in cinese)](https://www.yw56.com.cn/) – linee Temu e AliExpress
+- [Yanwen: sito ufficiale (in cinese)](https://www.yw56.com.cn/) – linee Temu
 - [CNE: sito ufficiale (in cinese)](https://www.cne.com/) – Temu tra i clienti
 - [SF International: avvisi di servizio (in cinese)](https://www.sf-international.com/cn/sc) – festività 2026
 - [Consiglio di Stato cinese: festività 2026 (in cinese)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Capodanno cinese a febbraio, festa nazionale dal 1° al 7 ottobre

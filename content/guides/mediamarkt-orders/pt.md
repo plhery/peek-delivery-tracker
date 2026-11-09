@@ -4,7 +4,7 @@ description: Em Portugal, a MediaMarkt passou a chamar-se Darty. Onde vês o seg
 slug: seguimento-encomenda-mediamarkt-darty
 picture: Uma caixa plana de televisor e uma encomenda pequena ao lado de uma carrinha de entregas, o Pip contente e uma loja com uma placa de recolha.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 Em Portugal, a MediaMarkt passou a chamar-se Darty: o grupo Fnac Darty comprou a operação portuguesa e mudou a marca. O histórico das encomendas passou para o novo site, darty.pt, e o que compraste na MediaMarkt continua válido. Para seguir uma encomenda, usa o link do e-mail da transportadora ou abre «Minha conta» em darty.pt.
@@ -67,7 +67,7 @@ Se o prazo passar, a Darty diz que és informado da nova previsão; se a data da
 
 ## Opções e portes de envio da Darty
 
-Os portes são grátis em compras online acima de 49 €, exceto grandes eletrodomésticos e TVs com mais de 51". Quando pagas portes, somas um custo base de 2,70 € ao valor do 1.º, 2.º e 3.º artigo:
+Os portes são grátis em compras online acima de 49 €, exceto grandes eletrodomésticos e TVs com mais de 51"; na campanha de Black Friday, de 29 de outubro a 1 de dezembro de 2026, são grátis em tudo a partir de 49 €. Quando pagas portes, somas um custo base de 2,70 € ao valor do 1.º, 2.º e 3.º artigo:
 
 | Tipo de produto | 1.º artigo | 2.º artigo | 3.º artigo |
 | --- | --- | --- | --- |
@@ -90,7 +90,7 @@ Por esta ordem:
 :::steps
 - Vê o seguimento | Abre o link do e-mail da transportadora ou a encomenda em «Minha conta». Se encomendaste vários produtos, cada um pode chegar num dia diferente.
 - Procura e pergunta | Se não estavas, a transportadora tenta outra vez e avisa-te por SMS. Depois, a encomenda espera na franquia até 10 dias. Pergunta em casa e aos vizinhos.
-- Fala com a Darty | Usa o formulário de contacto ou liga para o 210 042 210, todos os dias das 10h às 20h. Indica o número da encomenda.
+- Fala com a Darty | Usa o formulário de contacto ou liga para o 210 042 210, todos os dias das 10h às 20h (das 10h às 21h de 21 de novembro a 23 de dezembro). Indica o número da encomenda.
 - Livro de Reclamações | Se o problema não se resolver, a Darty tem no fundo de cada página o link para o Livro de Reclamações eletrónico, onde podes registar uma reclamação.
 - Reembolso ou artigo novo | Segundo a lei, o risco de perda só passa para ti quando a encomenda chega às tuas mãos ou às de alguém que indicaste e que não seja a transportadora. Se não aparecer, pede o reembolso ou um novo envio.
 :::
@@ -121,7 +121,7 @@ O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e 
 - [Darty: Perguntas Frequentes](https://darty.pt/pages/faqs) – compras na MediaMarkt continuam válidas, reparações, cartões oferta, Cartão de Crédito MediaMarkt, nova password, conta com o mesmo e-mail
 - [Darty: Gerir as Minhas Encomendas](https://darty.pt/pages/minhas-encomendas) – e-mail da transportadora, link em tempo real, Minha conta, SMS, produto errado, até 10 dias úteis, nova previsão
 - [Darty: Enviar para uma morada ou recolher na loja](https://darty.pt/pages/enviar-morada-recolher-loja) – 24 horas a 5 dias úteis, 22h, vários produtos, 30 dias na loja, PIN, documentos, terceiros, 30 minutos antes, 48 horas, guia de entrega, 72 horas, serviços extra, horários, equipamento antigo
-- [Darty: Entrega numa Morada](https://darty.pt/pages/entrega-numa-morada) – 49 €, 1 a 3 dias úteis, Portugal continental, volumosos, portes por artigo, campanhas
+- [Darty: Entrega numa Morada](https://darty.pt/pages/entrega-numa-morada) – 49 €, 1 a 3 dias úteis, Portugal continental, volumosos, portes por artigo, campanhas, portes grátis em tudo até 1 de dezembro de 2026, horário de Natal do 210 042 210 (lida a 9 de novembro de 2026)
 - [Darty: Recolha em Loja](https://darty.pt/pages/recolha-em-loja) – e-mail, documento, grátis
 - [Darty: Condições gerais de utilização e venda](https://darty.pt/pages/termos-e-condicoes) – 2 a 5 dias úteis, 7 dias úteis na loja, segunda tentativa, SMS, franquia 10 dias, 30 dias para devolver
 - [Darty: Devoluções e Incidências de Produtos](https://darty.pt/pages/devolucoes-incidencias) – 30 dias, formulário ou telefone, loja, 24 horas, 30 kg, guia da transportadora, custo do transporte, transferência bancária, 7 e 14 dias

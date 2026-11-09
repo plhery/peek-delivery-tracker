@@ -4,7 +4,7 @@ description: Qué significan los estados de Cainiao, por qué se para el seguimi
 slug: seguimiento-paquete-de-china
 picture: Un avión traza un arco punteado sobre el globo, de un marcador rojo al marcador verde de casa, y Pip viaja entre dos furgonetas.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-09
 ---
 
 Un paquete de AliExpress, Temu o Shein cambia de manos por el camino: una empresa logística china lo saca del país, la Aduana lo revisa al llegar y [Correos](carrier:correos-spain) u otra empresa de reparto te lo entrega, a menudo con otro número. Cada una solo escanea su tramo, así que es normal pasar hasta 11 días sin un primer escaneo, no ver nada durante el vuelo y volver a esperar cuando ya ha llegado al país de destino. Sigue primero el número de la tienda y luego el de la empresa de reparto. Con el envío más barato, el seguimiento puede cortarse ahí para siempre. Lo que sale de un almacén en la UE se ahorra el vuelo desde China y el arancel.
@@ -70,7 +70,7 @@ Los números postales son la excepción. La Unión Postal Universal solo permite
 
 ### ¿De qué empresa es mi número?
 
-Además de Cainiao, verás [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou) y [Yanwen](carrier:yanwen) (que incluso vende líneas con el nombre de Temu y de AliExpress):
+Además de Cainiao, verás [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou) y [Yanwen](carrier:yanwen) (que incluso vende líneas con el nombre de Temu):
 
 | El número es así | Suele ser |
 | --- | --- |
@@ -97,6 +97,8 @@ Depende de la línea de envío:
 
 Si en el seguimiento aparece una empresa de reparto de aquí, como [Ecoscooting](carrier:ecoscooting) con un número `CNESP`, sigue el paquete en su web o en su app, con el número que te dé.
 
+[Peek](/) sigue ese relevo por ti. Con un número de Cainiao, consulta el seguimiento cada 30 minutos, también cuando el paquete sale a reparto (tras una consulta fallida, espera una hora), y una vez por hora tras dos días sin novedades. Si Cainiao publica el número de la empresa que lo reparte y ese número solo puede ser de una empresa (uno de Correos, uno de CTT Express o un `CNESP` de Ecoscooting, por ejemplo), Peek le pregunta por el paquete. Con un número postal, como los de China Post que acaban en `CN`, pregunta a Correos con ese mismo número si el paquete viene a España. En cuanto esa empresa da noticias del paquete, Peek lo sigue allí sin perder los escaneos de China, y verás, por ejemplo, «Entrega con Correos». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete (más en [plazos de entrega](guide:delivery-times)).
+
 ## Enviado desde un almacén en Europa: ¿qué cambia?
 
 No todo sale de China. Shein marca con «Almacén UE» los artículos que pueden salir de un almacén en Europa. Lo demás sale de fuera de Europa, y Shein avisa de que eso puede retrasar el pedido.
@@ -122,9 +124,10 @@ Depende del envío que hayas pagado. Cainiao cuenta días naturales; Shein, día
 Lo normal es que no: la tienda suele cobrar los impuestos al pagar el pedido. Pero en una compra de hasta 150 € que llega de fuera de la UE, Correos o la empresa de reparto puede pedirte antes de la entrega lo que la tienda no cobró:
 
 - **El arancel de 3 € por tipo de producto,** desde el 1 de julio de 2026. Correos puede cobrártelo aunque el IVA ya esté pagado por IOSS. En Ceuta y Melilla no se paga.
+- **La tasa de tramitación de 2 € por tipo de producto,** desde el 1 de noviembre de 2026, también con el IVA pagado por IOSS. Correos la llama «Tasa UE». Tampoco se paga en Ceuta y Melilla.
 - **El IVA, más la gestión del transportista,** si la compra no iba por IOSS. En Canarias no hay IGIC hasta 150 €, salvo excepciones.
 
-Desde el 1 de noviembre de 2026, la UE suma una tasa de tramitación de 2 € por tipo de producto. Lo que sale de un almacén de la UE no paga arancel. Cuánto se paga en cada caso, cómo pagar a Correos y cómo reconocer un SMS falso: [paquete retenido en aduanas](guide:customs).
+La tasa de tramitación se paga sea cual sea el valor del envío, también por encima de 150 €. La debe quien declara el envío en la aduana, en cuanto se admite la declaración de importación: normalmente la tienda o la empresa de transporte, que pueden cobrártela. Lo que sale de un almacén de la UE no paga arancel. Cuánto se paga en cada caso, cómo pagar a Correos y cómo reconocer un SMS falso: [paquete retenido en aduanas](guide:customs).
 
 ## ¿Cuándo pedir el reembolso?
 
@@ -165,15 +168,16 @@ Pantallas, estados, créditos y reclamaciones de cada tienda: [seguimiento de pe
 - [Shein España: Información de envío](https://es.shein.com/Shipping-Info-a-280.html) – preparación y plazos, Almacén UE, Mis Pedidos, 45 y 30 días
 - [Correos: Nota de prensa con AliExpress y Cainiao (2019)](https://www.correos.com/wp-content/uploads/2019/03/2019_03_19-NP-Correos-AliExpress-Cainiao.pdf) – principal operador logístico en España
 - [CTT: CTT são o parceiro de distribuição estratégico da Temu para a Península Ibérica (en portugués)](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-sao-o-parceiro-de-distribuicao-estrategico-da-temu-para-a-peninsula-iberica) – socio estratégico de Temu en España, noviembre de 2023
-- [Correos: Arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto, Canarias, Ceuta y Melilla, IOSS
+- [Correos: Arancel y tasas para envíos de importación a la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto, Canarias, Ceuta y Melilla, IOSS; Tasa UE de 2 € por tipo de producto, a cualquier valor y también con IOSS, no en Ceuta y Melilla (leído el 9 de noviembre de 2026)
 - [Correos: Información aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – pagar para recoger los paquetes pendientes de tramitación aduanera
 - [Correos: Tramitación aduanera en la importación](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion) – tarifa de gestión fuera de IOSS
-- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel, quién lo cobra, origen del envío, sin derechos de aduana desde la UE
+- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel, quién lo cobra, origen del envío, sin derechos de aduana desde la UE; tasa de tramitación de 2 € desde el 1 de noviembre de 2026 (leído el 9 de noviembre de 2026)
 - [European Commission: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de 2 € desde el 1 de noviembre de 2026
-- [European Commission: Customs Guidance on EUR 3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € se cuenta igual que el arancel de 3 €
+- [European Commission: Customs Guidance on EUR 3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € se cuenta igual que el arancel de 3 €, a cualquier valor; la debe el declarante, desde que se admite la declaración
+- [Yanwen: página de inicio (en chino)](https://www.yw56.com.cn/) – líneas TemuY2 para la UE (leído el 9 de noviembre de 2026)
 - [SF International: avisos de servicio (en chino)](https://www.sf-international.com/cn/sc) – festivos de 2026
 - [Consejo de Estado de China: festivos de 2026 (en chino)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Año Nuevo chino en febrero, Fiesta Nacional del 1 al 7 de octubre
 - [CSIRO: Happy Lunar New Year (en inglés)](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Año Nuevo chino entre el 21 de enero y el 20 de febrero
 - [UPU: S10 standard (en inglés)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – un número por envío
-- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, textos de Cainiao y de Correos
+- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, textos de Cainiao y de Correos, cada cuánto consulta Peek a Cainiao, relevo a la empresa de reparto
 :::

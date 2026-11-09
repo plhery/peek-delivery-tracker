@@ -71,7 +71,7 @@ Os números postais são a exceção. A União Postal Universal só permite um i
 
 ### De que empresa é o meu número?
 
-Além da Cainiao, é comum aparecerem a [YunExpress](carrier:yunexpress), a [4PX](carrier:4px), a [Sunyou](carrier:sunyou) e a [Yanwen](carrier:yanwen) (que até vende linhas com o nome da Temu e do AliExpress):
+Além da Cainiao, é comum aparecerem a [YunExpress](carrier:yunexpress), a [4PX](carrier:4px), a [Sunyou](carrier:sunyou) e a [Yanwen](carrier:yanwen) (que até vende linhas com o nome da Temu):
 
 | Formato do número | Normalmente é |
 | --- | --- |
@@ -176,7 +176,7 @@ Ecrãs, estados, créditos e reclamações de cada loja: [rastrear uma encomenda
 - [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento desde 1 de novembro de 2026
 - [Conselho da UE: Regulamento delegado C(2026) 6694](https://data.consilium.europa.eu/doc/document/ST-13480-2026-INIT/pt/pdf) – 2 € por artigo
 - [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, contado por linha da declaração, qualquer valor, devido por quem declara, quando a declaração é aceite
-- [Yanwen: página inicial (em chinês)](https://www.yw56.com.cn/) – linhas Temu e AliExpress
+- [Yanwen: página inicial (em chinês)](https://www.yw56.com.cn/) – linhas Temu
 - [SF International: avisos (em chinês)](https://www.sf-international.com/cn/sc) – feriados de 2026
 - [Conselho de Estado da China: feriados de 2026 (em chinês)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Ano Novo chinês em fevereiro, Dia Nacional de 1 a 7 de outubro
 - [CSIRO: Happy Lunar New Year (em inglês)](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Ano Novo chinês entre 21 de janeiro e 20 de fevereiro

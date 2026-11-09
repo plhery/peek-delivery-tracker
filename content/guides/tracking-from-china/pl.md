@@ -69,7 +69,7 @@ Wyjątkiem są numery pocztowe. Światowy Związek Pocztowy dopuszcza tylko jede
 
 ### Cainiao, YunExpress, 4PX: co to za firmy?
 
-Poza Cainiao zobaczysz [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou) i [Yanwen](carrier:yanwen) (Yanwen ma nawet linie z Temu i AliExpress w nazwie). To chińskie firmy logistyczne, które wiozą paczkę do Europy, a nie polscy kurierzy:
+Poza Cainiao zobaczysz [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou) i [Yanwen](carrier:yanwen) (Yanwen ma nawet linie z Temu w nazwie). To chińskie firmy logistyczne, które wiozą paczkę do Europy, a nie polscy kurierzy:
 
 | Numer wygląda tak | Zwykle |
 | --- | --- |
@@ -163,7 +163,7 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [AliExpress: Gwarancja AliExpress](https://pl.aliexpress.com/p/service-mindset/index.html) – etykieta „Szybka dostawa”, kupon, zwrot pieniędzy, 60–120 dni
 - [AliExpress: Do I have to pay for customs and import taxes?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – magazyn w Twoim kraju, bez dodatkowego cła i podatków
 - [Shein Polska: Informacje o wysyłce](https://pl.shein.com/Shipping-Info-a-280.html) – przygotowanie, przedział dat, Magazyn w UE, automat paczkowy lub punkt odbioru, 45 i 30 dni
-- [Yanwen: strona główna](https://www.yw56.com.cn/) – linie z Temu i AliExpress w nazwie
+- [Yanwen: strona główna](https://www.yw56.com.cn/) – linie z Temu w nazwie
 - [SF International: komunikaty](https://www.sf-international.com/cn/sc) – święta w Chinach w 2026 r.
 - [Rada Państwa ChRL: dni wolne w 2026 r.](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – chiński Nowy Rok w lutym, Święto Narodowe 1–7 października
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – chiński Nowy Rok między 21 stycznia a 20 lutego

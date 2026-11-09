@@ -4,7 +4,7 @@ description: Wie du den Bestellstatus unter „Meine Käufe“ oder als Gast pr�
 slug: mediamarkt-sendungsverfolgung
 picture: Ein flacher Fernseher-Karton und ein kleines Paket neben einem Lieferwagen, ein fröhlicher Pip und ein Markt mit Abholschild.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
 Den Stand deiner MediaMarkt-Bestellung siehst du in deinem Kundenkonto unter „Meine Käufe“, und mit der Versandbestätigung kommt per E-Mail ein Link zur Sendungsverfolgung. In Deutschland bringen DHL, Hermes oder DPD die Pakete, Großgeräte kommen per Spedition, in Österreich liefern die Post oder GLS, in der Schweiz die Post. Steht am Artikel „Verkauf und Versand durch …“, verschickt ihn ein Marketplace-Händler selbst.
@@ -137,7 +137,7 @@ Mehr dazu: [Zugestellt, aber nicht erhalten](guide:delivered-not-received), [Pak
 
 ## MediaMarkt-Bestellung zurücksenden
 
-In Deutschland hast du ab Erhalt 30 Tage, freiwillig zusätzlich zum gesetzlichen Widerrufsrecht von 14 Tagen. Das Retourenlabel holst du kostenlos in deinem Konto, als Gast mit Mailadresse und Bestellnummer, oder du gibst die Ware in jedem MediaMarkt oder Saturn in Deutschland ab. Speditionsware holt MediaMarkt ab, wenn du dich über das Kontaktformular meldest.
+In Deutschland hast du ab Erhalt 30 Tage, freiwillig zusätzlich zum gesetzlichen Widerrufsrecht von 14 Tagen. Was du zwischen dem 27. Oktober und dem 1. Dezember 2026 kaufst, kannst du bis einschließlich 31. Dezember 2026 zurückgeben, außer Marketplace-Artikeln. Das Retourenlabel holst du kostenlos in deinem Konto, als Gast mit Mailadresse und Bestellnummer, oder du gibst die Ware in jedem MediaMarkt oder Saturn in Deutschland ab. Speditionsware holt MediaMarkt ab, wenn du dich über das Kontaktformular meldest.
 
 In Österreich gibt dir MediaMarkt ebenfalls 30 Tage, neben dem gesetzlichen Rücktrittsrecht bei Online-Käufen: Das kostenlose Retourenlabel ist in der Versandbestätigung verlinkt, eine Abholung von Großgeräten kostet 59,40 €. In der Schweiz sind es auch 30 Tage, im Markt oder per Post mit dem Retourenformular, und per Post erstattet MediaMarkt nur, ohne Umtausch. Für Marketplace-Artikel gelten die Rückgabebedingungen des Händlers; in Österreich nimmt sie kein Markt zurück. Wo du die Nummer der Retoure findest: [Retoure verfolgen](guide:returns-tracking).
 
@@ -155,7 +155,7 @@ Peek zeigt, was der Paketdienst veröffentlicht. Erstattungen, Retouren und Abho
 - [Saturn: Lieferung](https://www.saturn.de/de/service/lieferung/standardlieferung) – dieselben Versandkosten und Versandpartner
 - [MediaMarkt: Click & Collect](https://www.mediamarkt.de/de/service/lieferung/abholung-markt) – 30 Minuten, „Bereit zur Marktabholung“, Ausweis, digitaler Abholschein, nicht für Drittanbieter
 - [MediaMarkt: Sofort-Lieferung](https://www.mediamarkt.de/de/service/lieferung/sofort-lieferung) – Uber, 90 Minuten, 23 kg, 10 km, Öffnungszeiten des Markts, PayPal oder Kreditkarte, Live-Link per SMS, PIN, ausgenommene Artikel, Storno
-- [MediaMarkt: Rücksendung & Rückgabe](https://www.mediamarkt.de/de/service/umtausch-rueckgabe) – 30 Tage, Retourenlabel im Konto, Rückgabe im Markt, Abholung von Speditionsware
+- [MediaMarkt: Rücksendung & Rückgabe](https://www.mediamarkt.de/de/service/umtausch-rueckgabe) – 30 Tage, Retourenlabel im Konto, Rückgabe im Markt, Abholung von Speditionsware, verlängertes Umtauschrecht bis 31.12.2026 (gelesen am 9. November 2026)
 - [MediaMarkt: Kundenservice](https://www.mediamarkt.de/de/service/kundenservice) – Bestellstatus, Gastbestellung, Marketplace-Händler kontaktieren
 - [MediaMarkt FAQ: Status meiner Bestellung](https://faq.mediamarkt.de/app/answers/detail/a_id/7365) – „Meine Käufe“, Marketplace, Chatbot, Speditionen, Warensendung nicht verfolgbar, neun Tage
 - [MediaMarkt FAQ: Wie lange dauert die Lieferung?](https://faq.mediamarkt.de/app/answers/detail/a_id/7368) – 1 bis 2 Werktage, längste Lieferzeit, getrennter Versand

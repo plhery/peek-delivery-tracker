@@ -1,13 +1,13 @@
 ---
 title: Pedido de MediaMarkt: seguimiento y transportistas
-description: Quién entrega tu pedido de MediaMarkt en España (Paack, SEUR, Correos o TIPSA), dónde ver el seguimiento y qué hacer si el paquete no llega.
+description: Quién entrega tu pedido de MediaMarkt en España (Paack, SEUR, Correos, TIPSA y otros), dónde ver el seguimiento y qué hacer si el paquete no llega.
 slug: seguimiento-pedido-mediamarkt
 picture: Una caja plana de televisor y un paquete pequeño junto a una furgoneta de reparto, Pip contento y una tienda con un cartel de recogida.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
-En España, MediaMarkt (mediamarkt.es) envía los paquetes con Paack, SEUR, Correos o TIPSA. Cuando el pedido sale del almacén, te llega un correo para seguir el envío en la web del transportista, y el estado del pedido también está en «Mi cuenta». Si lo recoges en tienda, no hay número de seguimiento: te avisan por correo o SMS cuando está listo. Lo que venden otros vendedores del marketplace lo envía el propio vendedor, con sus condiciones.
+En España, MediaMarkt (mediamarkt.es) envía los paquetes con Paack, SEUR, Correos, TIPSA, InPost, Method, Ader o Citylogin. Cuando el pedido sale del almacén, te llega un correo para seguir el envío en la web del transportista, y el estado del pedido también está en «Mi cuenta». Si lo recoges en tienda, no hay número de seguimiento: te avisan por correo o SMS cuando está listo. Lo que venden otros vendedores del marketplace lo envía el propio vendedor, con sus condiciones.
 
 ## ¿Qué transportista entrega mi pedido de MediaMarkt?
 
@@ -15,19 +15,19 @@ Depende de lo que pides y de cómo lo recibes. MediaMarkt solo entrega en la Pen
 
 | Qué pides | Quién lo entrega | Dónde |
 | --- | --- | --- |
-| Paquetería | Paack, SEUR, Correos o TIPSA | En la puerta de tu casa o en un punto de recogida |
+| Paquetería | Paack, SEUR, Correos, TIPSA o InPost, entre otros | En la puerta de tu casa o en un punto de recogida |
 | Voluminosos | Una empresa de transporte | En tu casa; con entrega agendada, desembalado |
 | Recogida en tienda | La propia tienda | En el mostrador, en un punto Stop&Go o en una taquilla Click&Go |
 | Envío con Glovo | Un repartidor de Glovo | En tu casa, en unos 30 minutos |
 | Artículo de otro vendedor | El transportista que elige el vendedor | Según el vendedor |
 
-Son los cuatro transportistas que MediaMarkt nombra en su web: «Envío seguro con Paack, Seur, Correos, Tipsa». No dice cuál lleva cada pedido. Si pides varios productos, MediaMarkt avisa de que pueden llegar «en varias expediciones con distintas empresas de transporte», cada una con su número.
+Son los ocho transportistas que MediaMarkt nombra en su web: «Envío seguro con Paack, Seur, Correos, Tipsa, inPost, Method, Ader, Citylogin». No dice cuál lleva cada pedido. En España, InPost es la antigua [Mondial Relay](carrier:mondial-relay). Si pides varios productos, MediaMarkt avisa de que pueden llegar «en varias expediciones con distintas empresas de transporte», cada una con su número.
 
 Los «envíos originados por terceros (marketplace)» son «productos vendidos y enviados por otros vendedores a través de nuestra web». Según MediaMarkt, sus gastos y condiciones dependen del vendedor, y no entran en la recogida en tienda, los puntos de recogida, Recibe HOY, Glovo ni la entrega agendada.
 
 :::journey
 - warehouse | Almacén de MediaMarkt | Te llega un correo cuando sale
-- truck | Paack, SEUR, Correos o TIPSA | Si no estás, un segundo intento
+- truck | Paack, SEUR, Correos, TIPSA u otro | Si no estás, un segundo intento
 - shop | Tienda MediaMarkt | Recogida gratis, en 30 minutos si hay stock
 - home | Tú | En la puerta de casa
 :::
@@ -125,7 +125,7 @@ Si el pedido llega en varias expediciones, añade cada número. Un artículo de 
 Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan en tu cuenta de MediaMarkt.
 
 :::sources
-- [MediaMarkt: Recogida y envíos de pedidos](https://www.mediamarkt.es/es/service/recogidas-y-env%C3%ADos) – Paack, SEUR, Correos y TIPSA; Península y Baleares; paquetería y voluminosos; tienda, Stop&Go, Click&Go; Recibe HOY; Glovo; precios; entrega agendada; puntos de recogida; días de más; marketplace
+- [MediaMarkt: Recogida y envíos de pedidos](https://www.mediamarkt.es/es/service/recogidas-y-env%C3%ADos) – Paack, SEUR, Correos, TIPSA, InPost, Method, Ader y Citylogin (leído el 9 de noviembre de 2026); Península y Baleares; paquetería y voluminosos; tienda, Stop&Go, Click&Go; Recibe HOY; Glovo; precios; entrega agendada; puntos de recogida; días de más; marketplace
 - [MediaMarkt: Condiciones de contratación](https://www.mediamarkt.es/es/legal/condiciones-contratacion) – 1 a 3 días laborables en general, segundo intento, franquicia 10 días, 20:30, 60 días, 14 días, gastos de devolución, reclamaciones en 10 días, Confianza Online
 - [MediaMarkt: ¿Dónde está mi pedido?](https://te-ayudamos.mediamarkt.es/app/answers/detail/a_id/17125) – correo al salir del almacén, web del transportista, 24 horas, fecha prevista, sábados y domingos, Mi cuenta, invitados
 - [MediaMarkt: Entrega de paquetería](https://te-ayudamos.mediamarkt.es/app/answers/detail/a_id/17140) – varias expediciones con distintas empresas, correo del transportista, segundo intento, en la puerta

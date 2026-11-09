@@ -69,7 +69,7 @@ Postal numbers are the exception. The Universal Postal Union allows "only one S1
 
 ### Which company does my number belong to?
 
-Besides Cainiao, you'll see [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou) and [Yanwen](carrier:yanwen) (which even sells lines named after Temu and AliExpress):
+Besides Cainiao, you'll see [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Sunyou](carrier:sunyou) and [Yanwen](carrier:yanwen) (which even sells lines named after Temu):
 
 | The number looks like | Usually |
 | --- | --- |

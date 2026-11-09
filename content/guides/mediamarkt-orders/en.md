@@ -4,10 +4,10 @@ description: Where MediaMarkt sells online, who delivers your order, where the t
 slug: mediamarkt-order-tracking
 picture: A flat TV box and a small parcel beside a delivery van, a cheerful Pip and a shop with a pickup sign.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-09
 ---
 
-MediaMarkt sells online only in Europe, through a separate shop for each country. Your account shows the order status. In Germany, Austria, Switzerland and Belgium the shipping email brings the tracking link, and in Spain it sends you to the carrier's website. Who delivers depends on the country and the item: in Germany DHL, Hermes or DPD bring parcels and freight companies bring large appliances on an agreed date, while in Spain it's Paack, SEUR, Correos or TIPSA.
+MediaMarkt sells online only in Europe, through a separate shop for each country. Your account shows the order status. In Germany, Austria, Switzerland and Belgium the shipping email brings the tracking link, and in Spain it sends you to the carrier's website. Who delivers depends on the country and the item: in Germany DHL, Hermes or DPD bring parcels and freight companies bring large appliances on an agreed date, while in Spain it's Paack, SEUR, Correos, TIPSA, InPost, Method, Ader or Citylogin.
 
 ## Where does MediaMarkt sell online?
 
@@ -24,7 +24,7 @@ It depends on the country, the size of the item and who sells it. What each shop
 | Country | Parcels | Large items | Fast option |
 | --- | --- | --- | --- |
 | Germany (mediamarkt.de, saturn.de) | [DHL](carrier:dhl), [Hermes](carrier:hermes-de) or [DPD](carrier:dpd-de) | Freight: Hermes, Nikos, ZAC or Power Service | "Sofort-Lieferung" (instant delivery) with Uber |
-| Spain (mediamarkt.es) | [Paack](carrier:paack), [SEUR](carrier:seur), [Correos](carrier:correos-spain) or [TIPSA](carrier:tipsa) | "Productos voluminosos" (bulky items) | Glovo, or same day in parts of Madrid |
+| Spain (mediamarkt.es) | [Paack](carrier:paack), [SEUR](carrier:seur), [Correos](carrier:correos-spain), [TIPSA](carrier:tipsa), [InPost](carrier:mondial-relay), Method, Ader or Citylogin | "Productos voluminosos" (bulky items) | Glovo, or same day in parts of Madrid |
 | Austria (mediamarkt.at) | [Austrian Post](carrier:austrian-post) or GLS Austria | MediaMarkt Powerservice | "Sofort-Lieferung" with Wolt |
 | Switzerland (mediamarkt.ch) | [Swiss Post](carrier:swiss-post) | A freight carrier over 30 kg | None named |
 | Belgium (mediamarkt.be) | [bpost](carrier:bpost) or PostNL | Delivered by appointment | Sunday delivery in six cities |
@@ -138,7 +138,7 @@ More help: [delivered but not received](guide:delivered-not-received), [lost par
 
 ## Returning a MediaMarkt order
 
-In Germany you have 30 days from receipt, a voluntary right on top of the 14-day legal one. Print a free return label from your account, or as a guest with your email and order number, or bring the item to any MediaMarkt or Saturn in Germany. For freight items, MediaMarkt arranges a pickup.
+In Germany you have 30 days from receipt, a voluntary right on top of the 14-day legal one. What you buy between 27 October and 1 December 2026 can go back until 31 December 2026, except marketplace items. Print a free return label from your account, or as a guest with your email and order number, or bring the item to any MediaMarkt or Saturn in Germany. For freight items, MediaMarkt arranges a pickup.
 
 In Spain you have up to 60 days, well beyond the 14 days EU law requires. Return it in any store with the invoice and your DNI or NIE, or request a pickup online, in which case the return cost comes off your refund. Marketplace items follow the seller's conditions, with 30 days in Spain. Where the return's tracking number is: [returns tracking](guide:returns-tracking).
 
@@ -169,7 +169,7 @@ Peek shows what the carrier publishes. Refunds, returns and appointments stay in
 - [Saturn: Delivery](https://www.saturn.de/de/service/lieferung/standardlieferung) – same costs and carriers
 - [MediaMarkt Germany: Click & Collect](https://www.mediamarkt.de/de/service/lieferung/abholung-markt) – 30 minutes, ID, pickup slip
 - [MediaMarkt Germany: Instant delivery](https://www.mediamarkt.de/de/service/lieferung/sofort-lieferung) – Uber, live link
-- [MediaMarkt Germany: Returns](https://www.mediamarkt.de/de/service/umtausch-rueckgabe) – 30 days, free label, stores, freight pickup
+- [MediaMarkt Germany: Returns](https://www.mediamarkt.de/de/service/umtausch-rueckgabe) – 30 days, free label, stores, freight pickup, purchases from 27 October to 1 December 2026 returnable until 31 December (read 9 November 2026)
 - [MediaMarkt Germany FAQ: Order status](https://faq.mediamarkt.de/app/answers/detail/a_id/7365) – "Meine Käufe", guests, chatbot, freight companies, "Warensendung"
 - [MediaMarkt Germany FAQ: Delivery time](https://faq.mediamarkt.de/app/answers/detail/a_id/7368) – 1 to 2 working days, separate parcels
 - [MediaMarkt Germany FAQ: Delivery in Germany](https://faq.mediamarkt.de/app/answers/detail/a_id/7367) – Monday to Friday, no delivery abroad
@@ -181,7 +181,7 @@ Peek shows what the carrier publishes. Refunds, returns and appointments stay in
 - [MediaMarkt Germany FAQ: Contact](https://faq.mediamarkt.de/app/answers/detail/a_id/16622) – contact form, email, chatbot
 - [MediaMarkt Germany FAQ: "Verkauf und Versand durch …"](https://faq.mediamarkt.de/app/answers/detail/a_id/17008) – marketplace sellers
 - [MediaMarkt Germany FAQ: Contact a marketplace seller](https://faq.mediamarkt.de/app/answers/detail/a_id/21400) – "Händler kontaktieren"
-- [MediaMarkt Spain: Recogida y envíos](https://www.mediamarkt.es/es/service/recogidas-y-env%C3%ADos) – carriers, costs, "+48h", pickup, bulky items, third parties, busy days
+- [MediaMarkt Spain: Recogida y envíos](https://www.mediamarkt.es/es/service/recogidas-y-env%C3%ADos) – carriers (eight named on 9 November 2026), costs, "+48h", pickup, bulky items, third parties, busy days
 - [MediaMarkt Spain: Condiciones de contratación](https://www.mediamarkt.es/es/legal/condiciones-contratacion) – usually 1 to 3 working days, 60 days to withdraw
 - [MediaMarkt Spain FAQ: ¿Dónde está mi pedido?](https://te-ayudamos.mediamarkt.es/app/answers/detail/a_id/17125) – email, carrier's website, 24 hours, account, contact form, WhatsApp, phone
 - [MediaMarkt Spain FAQ: Pedido dañado](https://te-ayudamos.mediamarkt.es/app/answers/detail/a_id/17137) – refuse, 48 hours, contact form, WhatsApp, phone

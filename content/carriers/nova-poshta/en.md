@@ -3,7 +3,7 @@ title: Nova Poshta tracking: numbers, statuses and branches
 description: Track a Nova Poshta (Nova Post) parcel in English: where to find the EW number, what each status means, branch and locker pickup, storage days and contacts.
 slug: nova-poshta-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-09
 ---
 
 Nova Poshta, "Nova Post" on its English site, is a Ukrainian express carrier delivering to branches, parcel lockers and doors across Ukraine, with branches in Poland and other European countries. Track a parcel with its express waybill number (EW) on [novaposhta.ua's tracking page](https://novaposhta.ua/en/tracking/), in its app or by pasting it in the box above. The number is at the top of the waybill, in the app and in the arrival notice.
@@ -84,9 +84,9 @@ As listed on Nova Poshta's and Nova Post Poland's sites on 22 October 2026:
 
 ## Tracking Nova Poshta parcels with Peek
 
-Other carriers share these shapes, so [Peek](/) never names Nova Poshta from the number alone. Instead it asks the carriers that use them, Nova Poshta among them: first if you search from Ukraine or the number starts with 595000, otherwise once the first carriers don't know it. If Nova Poshta knows it, Peek shows "Nova Poshta (Ukraine) has this parcel." If not, press "Change" and pick "Nova Poshta (Ukraine)". A tracking link from novaposhta.ua or novapost.com works too. It covers Ukrainian waybills, including those booked at Nova Post branches abroad, and Nova Post's international SH and TN numbers, not Nova Poshta Global references.
+Other carriers share the 14-digit shapes, and [Peek](/) never names Nova Poshta from the number alone. Instead it asks the carriers that use them, Nova Poshta among them: first if you search from Ukraine or the number starts with 595000, otherwise once the first carriers don't know it. For an SH or TN number, Nova Poshta is the only carrier it asks. If Nova Poshta knows it, Peek shows "Nova Poshta (Ukraine) has this parcel." If not, press "Change" and pick "Nova Poshta (Ukraine)". A tracking link from novaposhta.ua or novapost.com works too. It covers Ukrainian waybills, including those booked at Nova Post branches abroad, and Nova Post's international SH and TN numbers, not Nova Poshta Global references.
 
-It shows Nova Poshta's English wordings, each scan's town on a map, the expected arrival, weight, the branch or locker holding it and the delivery time, and drops names, addresses and payment. When an export names its partner abroad, [UPS](carrier:ups) or GoFo Express, Peek can follow the parcel there. It checks every 10 minutes, or every 2 from 6 a.m. local time on the day Nova Poshta scans the parcel out for delivery, while Nova Poshta's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+It shows Nova Poshta's English wordings, each scan's town on a map, the expected arrival, weight, the branch or locker holding it and the delivery time, and drops names, addresses and payment. When an export names its partner abroad, [UPS](carrier:ups) or [GOFO Express](carrier:gofo), Peek can follow the parcel there. It checks every 10 minutes, or every 2 from 6 a.m. local time on the day Nova Poshta scans the parcel out for delivery, while Nova Poshta's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: every 5 minutes rather than 2 on UPS's delivery day, as UPS's tracking opens in a browser, and every 30 minutes for GOFO Express, out for delivery too, or an hour after a failed check. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Nova Poshta tracking
 
@@ -126,5 +126,5 @@ In Ukraine, 5 days free from the day after arrival, then a daily fee; after 30 d
 - [Nova Post Poland: Odbiór w urządzeniach Paczkomat](https://novapost.com/pl-pl/receive/at-parcel-locker/) – 2 days, phone
 - [Nova Post Poland: Regulamin](https://novapost.com/pl-pl/more/offer/) – 2 days in a Paczkomat, claims, deadlines
 - [Nova Post Poland: O firmie](https://novapost.com/pl-pl/more/about) – founding, NOVA group, volumes
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads; UPS and GOFO Express as delivery partners and GOFO's 30-minute interval (read 9 November 2026)
 :::

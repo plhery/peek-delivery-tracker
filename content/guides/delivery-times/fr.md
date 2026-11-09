@@ -4,17 +4,19 @@ description: Jusqu'à quelle heure livrent Colissimo, Chronopost, Mondial Relay,
 slug: a-quelle-heure-livre-colissimo
 picture: Une horloge qui marque huit heures du soir sous un croissant de lune, un calendrier aux week-ends marqués, une camionnette phares allumés, et Pip qui regarde par la fenêtre.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-09
 ---
 
-Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo. Le samedi, Chronopost livre comme un jour normal ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
+Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo ; Colis Privé livre de 8 h à 19 h, et GLS du lundi au vendredi, de 8 h à 18 h. Le samedi, Chronopost livre aussi, par exemple avant 13 h avec Chrono 13 ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
 
 ## Jusqu'à quelle heure livre chaque transporteur ?
 
 | Transporteur | En semaine | Samedi | Dimanche |
 | --- | --- | --- | --- |
 | [Colissimo](carrier:la-poste) (France) | Aucun horaire publié ; un e-mail 24 h avant la livraison | – | – |
-| [Chronopost](carrier:chronopost) (France) | – | Oui | – |
+| [Chronopost](carrier:chronopost) (France) | – | Oui, par exemple avant 13 h avec Chrono 13 | – |
+| [Colis Privé](carrier:colis-prive) (France) | De 8 h à 19 h | – | – |
+| [GLS](carrier:gls-fr) (France) | Du lundi au vendredi, de 8 h à 18 h | Non | Non |
 | [bpost](carrier:bpost) (Belgique) | Une heure indicative, sans horaire général publié | En point d'enlèvement ou distributeur de colis, de 8 h à 17 h, si l'expéditeur a un accord avec bpost | À domicile, de 9 h à 19 h, même condition |
 | [Mondial Relay](carrier:mondial-relay) (Belgique) | Livraison en Point Relais du mardi au samedi | Oui, en Point Relais | Pas en Point Relais |
 | [La Poste suisse](carrier:swiss-post) | Du lundi au vendredi, sans horaire publié ; en option, le matin (7 h à 9 h) ou le soir (16 h 30 à 21 h) | En option, CHF 3.80 | Non pour le PostPac Priority |
@@ -23,7 +25,7 @@ Le tableau ne montre pas **Amazon**, qui livre aussi le soir même : dans plus d
 
 ## Livraison de colis le samedi et le dimanche
 
-**Le samedi** est un jour de livraison normal chez Chronopost, en France métropolitaine. En Belgique, les livreurs de Mondial Relay passent aussi dans les Points Relais du mardi au samedi, mais chez bpost et à La Poste suisse, le samedi est une option :
+**Le samedi**, Chronopost livre aussi en France métropolitaine, à une heure qui dépend de l'option choisie par l'expéditeur : par exemple avant 13 h avec Chrono 13, et même avant 10 h avec Chrono 10 selon le code postal. GLS France, elle, ne livre que du lundi au vendredi. En Belgique, les livreurs de Mondial Relay passent dans les Points Relais du mardi au samedi ; chez bpost et à La Poste suisse, le samedi est aussi une option :
 
 - **bpost :** lettres et recommandés ne sont livrés que du lundi au vendredi. Certaines boutiques en ligne ont un accord pour faire livrer leurs colis le samedi, en point d'enlèvement ou en distributeur de colis, entre 8 h et 17 h.
 - **La Poste suisse :** le PostPac Priority est distribué du lundi au vendredi. Le samedi coûte CHF 3.80 de supplément, payé par l'expéditeur, ou par toi depuis « Gérer ponctuellement ».
@@ -41,8 +43,10 @@ C'est la plage horaire où le transporteur pense passer chez toi, calculée d'ap
 
 | Transporteur | Créneau annoncé | Quand |
 | --- | --- | --- |
-| [DPD](carrier:dpd-fr) (France, Predict) | Un créneau, sans durée publiée | Le jour de la livraison, seulement si l'expéditeur a pris Predict |
-| La Poste suisse | De 40 à 90 minutes | Le jour même, dans de plus en plus de régions |
+| [DPD](carrier:dpd-fr) (France, Predict) | Un créneau, sans durée publiée | La date prévue par SMS et e-mail dès la prise en charge, puis le créneau le jour de la livraison, seulement si l'expéditeur a pris Predict |
+| GLS (France, FlexDeliveryService) | Aucun créneau publié | Un e-mail ou un SMS la veille, puis le jour même |
+| [Relais Colis](carrier:relais-colis) (à domicile) | Un rendez-vous | Relais Colis te contacte par e-mail ou par téléphone pour le fixer |
+| La Poste suisse | De 40 à 120 minutes, avec « Mes envois » | Le jour même, dans de plus en plus de régions |
 | bpost | Une date et une heure indicatives | Dans Track & Trace et l'app My bpost |
 
 Sans Predict, DPD France le dit sans détour : « aucun créneau horaire ne vous sera communiqué ». Avoir un créneau dépend donc aussi du service choisi par le vendeur.
@@ -51,9 +55,13 @@ Un créneau reste une estimation : bpost annonce que 95 % des colis arrivent dan
 
 Une heure précise, ça se paie. À La Poste suisse, la distribution matinale (du mardi au samedi, de 7 h à 9 h) coûte CHF 7.– et la distribution du soir (du lundi au vendredi, de 16 h 30 à 21 h) CHF 7.90. Sur [Peek](/), un créneau donné par le transporteur peut être ajouté à ton agenda.
 
+Pour les transporteurs français, Peek affiche ce que leur suivi annonce. Ceux de Colissimo, DPD France, GLS, Colis Privé et Mondial Relay lui donnent au mieux une date prévue, sans heure : même le créneau Predict de DPD France n'apparaît pas dans Peek. Chronopost peut donner un créneau de rendez-vous : le jour de la livraison, Peek commence alors ses vérifications rapprochées une demi-heure avant son début. Une fois le colis en livraison, Peek ne garde que des heures annoncées pour le jour même : une simple date disparaît, puisque le colis arrive aujourd'hui.
+
 ## Colis en cours de livraison : pourquoi toujours rien à 20 h ?
 
 Parce que ton adresse n'est pas le seul arrêt. « En cours de livraison » veut dire que le colis est dans la camionnette du jour, et c'est ta place dans la tournée, 15e ou 115e arrêt, qui décide de l'heure.
+
+Chez Colissimo, Peek passe le colis « En livraison » dès le scan `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.`, que La Poste range à l'étape « Colis en cours de livraison » : le colis est trié pour la tournée du jour, avant même le départ du facteur. Chez GLS, avec FlexDeliveryService, un e-mail ou un SMS te prévient au moment de la mise en livraison.
 
 :::journey
 - warehouse | Dépôt | Trié et chargé dans la camionnette.
@@ -81,6 +89,11 @@ Appeler le soir même ne sert pas à grand-chose : DHL, par exemple, indique qu'
 - Puis demande | Contacte le vendeur ou le transporteur une fois son délai passé.
 :::
 
+En France, un passage manqué laisse une trace :
+
+- **Colis Privé :** soit l'avis annonce un dépôt dans un relais proche, et un e-mail ou un SMS te donne la date de mise à disposition et l'adresse du relais, soit tu choisis la seconde présentation : chez toi, chez une tierce personne ou en relais.
+- **GLS :** le numéro de l'avis de passage te permet de changer la date de livraison sur uni-track.fr.
+
 La Poste suisse accepte une demande de recherche quand le délai habituel est dépassé de plus de deux jours. bpost répond au 02 278 51 27, du lundi au vendredi de 8 h à 12 h 30 et de 13 h à 18 h, et le samedi de 9 h à 13 h.
 
 Un avis de passage alors que tu attendais chez toi ? Lis [que faire après un avis de passage](guide:missed-delivery). Plus aucun scan depuis des jours ? Lis [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
@@ -97,6 +110,7 @@ Les fériés ne comptent pas non plus dans les délais : un délai donné en jou
 
 Oui, s'il va en consigne ou en point relais :
 
+- Le suivi GLS donne l'adresse et les horaires du Relais GLS où t'attend ton colis, que le relais garde 8 jours ouvrés.
 - En Belgique, les Lockers Mondial Relay fonctionnent « 24 heures sur 24 et 7 jours sur 7 ».
 - En Suisse, les automates My Post 24 reçoivent les colis de La Poste suisse 24 heures sur 24, mais pas ceux de DHL, DPD, FedEx ou UPS. Y faire réacheminer un colis encore en route vers chez toi est gratuit ; après un avis de passage, la réexpédition coûte CHF 8.–.
 - DPD Predict te laisse envoyer le colis vers un point relais Pickup au lieu de chez toi.
@@ -105,9 +119,14 @@ Un piège : une consigne ouverte jour et nuit n'est remplie que les jours de liv
 
 :::sources
 - [La Poste : Recevoir un Colissimo à domicile](https://www.laposte.fr/conseils-pratiques/recevoir-un-colissimo-a-domicile) – e-mail 24 h avant
-- [La Poste : Livraison le samedi](https://www.laposte.fr/professionnel/expedier/livraison-colis-samedi) – Chronopost le samedi, en métropole
+- [Universal Parcel Scraper : libellés La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – « Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison. », étape « Colis en cours de livraison »
+- [La Poste : Livraison le samedi](https://www.laposte.fr/professionnel/expedier/livraison-colis-samedi) – Chronopost le samedi, délais selon l'option : Chrono 13, Chrono 10 selon les codes postaux, en métropole (lu le 9 novembre 2026)
 - [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Livraison reportée de 24h »
-- [DPD France : Quand serai-je informé de mon créneau ?](https://www.dpd.com/fr/en/faq/quand-serai-je-informee-de-mon-creneau-horaire-de-livraison/) – créneau le jour même, aucun créneau sans Predict
+- [Colis Privé : Les horaires de livraison](https://colisprive.fr/aide/les-horaires-de-livraison/) – de 8 h à 19 h (lu le 9 novembre 2026)
+- [Colis Privé : J'ai eu un avis de passage](https://colisprive.fr/aide/jai-eu-un-avis-de-passage/) – relais proche, ou seconde présentation au choix (lu le 9 novembre 2026)
+- [GLS France : Aide à la réception](https://gls-group.com/FR/fr/recevoir-colis/aide/) – du lundi au vendredi de 8 h à 18 h, FlexDeliveryService, avis de passage et uni-track.fr, Relais GLS et ses horaires, 8 jours ouvrés (lu le 9 novembre 2026)
+- [Relais Colis : Date et heure de ma livraison à domicile](https://relaiscolis.com/faq/question/comment-connaitre-la-date-et-lheure-de-ma-livraison-a-domicile) – rendez-vous par e-mail ou par téléphone (lu le 9 novembre 2026)
+- [DPD France : Quand serai-je informé de mon créneau ?](https://www.dpd.com/fr/en/faq/quand-serai-je-informee-de-mon-creneau-horaire-de-livraison/) – date prévue dès la prise en charge, créneau le jour même, aucun créneau sans Predict
 - [DPD France : Livraison à domicile Predict](https://www.dpd.com/fr/fr/expedier-des-colis/domicile-predict/) – créneau, Pickup, voisin, autre date
 - [Mondial Relay Belgique : Jours de passage du livreur au Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quels-sont-les-jours-ou-le-livreur-passe-au-point-relais-pour-y-deposer-les-colis/) – du mardi au samedi, ni dimanche, ni lundi, ni jours fériés
 - [Mondial Relay Belgique : Lockers](https://www.mondialrelay.be/fr-be/consignes-lockers/) – 24 heures sur 24 et 7 jours sur 7
@@ -118,7 +137,7 @@ Un piège : une consigne ouverte jour et nuit n'est remplie que les jours de liv
 - [La Poste suisse : PostPac Priority](https://www.post.ch/fr/expedier-des-colis/colis-suisse/postpac-priority) – lundi au vendredi, samedi CHF 3.80, ni samedis, ni dimanches, ni fériés
 - [La Poste suisse : Gérer ponctuellement](https://www.post.ch/fr/reception/gerer-un-envoi/gerer-ponctuellement) – samedi CHF 3.80, matin CHF 7.–, soir CHF 7.90, réacheminement gratuit
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – réexpédition après un avis, CHF 8.–
-- [La Poste suisse : Suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois) – plage horaire de 40 à 90 minutes
+- [La Poste suisse : Suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois) – plage horaire de 40 à 120 minutes avec « Mes envois » (lu le 9 novembre 2026)
 - [La Poste suisse : Aide réception](https://www.post.ch/fr/aide-et-contact/reception) – notification la veille, jusqu'à minuit
 - [La Poste suisse : Recherche nationale](https://www.post.ch/fr/pages/formulaires-de-contact/recherche-nationale) – délai dépassé de plus de deux jours
 - [La Poste suisse : My Post 24, expédition et retrait à l'automate](https://www.post.ch/fr/reception/lieux-de-reception/pickpost-my-post-24/my-post-24) – 24 heures sur 24, pas de colis DHL, DPD, FedEx ou UPS

@@ -233,14 +233,16 @@ private fun FriendDetail(friend: FriendCard, busy: Boolean, remove: () -> Unit) 
                 }
             }
             if (unearned.size > 3) {
-                Box(
-                    Modifier
-                        .testTag(FRIENDS_SHOW_ALL)
-                        .button(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) { showAll = !showAll }
-                        .heightIn(min = 44.dp),
-                    contentAlignment = Alignment.CenterStart,
-                ) {
-                    Text(localized(if (showAll) "passport.showLess" else "passport.showAll"), color = colors.secondaryLabel, style = type.caption.sfLines())
+                // Its words alone take a finger, as the iPhone's with its `.frame(minHeight: 44)` outside the button.
+                Box(Modifier.heightIn(min = 44.dp), contentAlignment = Alignment.CenterStart) {
+                    Text(
+                        localized(if (showAll) "passport.showLess" else "passport.showAll"),
+                        Modifier
+                            .testTag(FRIENDS_SHOW_ALL)
+                            .button(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) { showAll = !showAll },
+                        color = colors.secondaryLabel,
+                        style = type.caption.sfLines(),
+                    )
                 }
             }
         } else {
@@ -283,7 +285,11 @@ private fun Metric(value: String, title: String, modifier: Modifier) {
     }
 }
 
-/** A plain button's words in [style] and [tint], greyed while off, which fade as they are pressed. */
+/**
+ * A plain button's words in [style] and [tint], greyed while off, which fade as they are pressed. The words alone take a
+ * finger, as a SwiftUI `Button` does with a frame outside it: [modifier] (Remove's `.frame(minHeight: 36)`) only places
+ * them.
+ */
 @Composable
 private fun PlainButton(
     title: String,
@@ -294,14 +300,16 @@ private fun PlainButton(
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    Box(
-        modifier
-            .testTag(tag)
-            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
-            .plainDisabled(enabled),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(title, color = tint, style = style.sfLines())
+    Box(modifier, contentAlignment = Alignment.Center) {
+        Text(
+            title,
+            Modifier
+                .testTag(tag)
+                .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+                .plainDisabled(enabled),
+            color = tint,
+            style = style.sfLines(),
+        )
     }
 }
 

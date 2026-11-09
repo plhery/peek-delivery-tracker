@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -73,8 +74,9 @@ internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: 
 /**
  * The sync line's refresh: an arrow in caption in `tint`, in 26 square, which TalkBack hears as "Check now". It waits
  * at half strength while `working`, its arrow turning a turn a second, or pulsing under Reduce Motion, as the list's
- * does ([refreshing]). Compose takes touches up to 48 square around so small a button, as Android asks, and leaves the
- * line as the iPhone lays it.
+ * does ([refreshing]). Within its square it takes a finger in its circle alone (`.contentShape(Circle())`): one in a
+ * corner of the square, outside the circle, starts nothing. Compose still takes touches outside the square up to 48
+ * square around so small a button, as Android asks, and leaves the line as the iPhone lays it.
  */
 @Composable
 private fun RefreshButton(tint: Color, working: Boolean, onRefresh: () -> Unit) {
@@ -83,7 +85,7 @@ private fun RefreshButton(tint: Color, working: Boolean, onRefresh: () -> Unit) 
         Modifier
             .size(REFRESH_SIDE)
             .testTag(PAGE_REFRESH)
-            .button(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, onClick = onRefresh)
+            .button(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, shape = CircleShape, onClick = onRefresh)
             .plainDisabled(!working)
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,

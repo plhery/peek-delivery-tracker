@@ -252,8 +252,11 @@ internal fun SettingsToggleRow(
 /**
  * `SettingsLanguageRow`: "language.label" in subheadline, and the app's language by its own name with the menu's
  * chevrons in the secondary grey, beside it, 54 tall at least and 15 in, or under it at the accessibility sizes. A tap
- * opens iOS's menu of the languages by their own names over the sheet ([SheetMenu]), the one in use checked; a choice
- * sets the app's language (`localizer.language`), which the app saves and passes on.
+ * on the language and its chevrons, the menu `Picker`'s button, opens iOS's menu of the languages by their own names
+ * over the sheet ([SheetMenu]), the one in use checked, and fades them alone while pressed; the rest of the row takes no
+ * finger. A choice sets the app's language (`localizer.language`), which the app saves and passes on. TalkBack still
+ * stops on the row as one, read as its label with the language as its state, and opens the menu from there: the row
+ * keeps the semantics, which clear the picker's own.
  */
 @Composable
 internal fun SettingsLanguageRow() {
@@ -288,7 +291,11 @@ internal fun SettingsLanguageRow() {
         // A menu Picker's button in a Form row: its up-down chevron at the subheadline size, semibold, 11 in from the
         // button's trailing end, which the menu lines up with.
         Row(
-            Modifier.onGloballyPositioned { value = it.boundsInWindow() }.padding(end = PICKER_TRAILING),
+            Modifier
+                .onGloballyPositioned { value = it.boundsInWindow() }
+                .testTag(SETTINGS_LANGUAGE_PICKER)
+                .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
+                .padding(end = PICKER_TRAILING),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(language.nativeName, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -303,7 +310,6 @@ internal fun SettingsLanguageRow() {
         .testTag(SETTINGS_LANGUAGE)
         .onGloballyPositioned { row = it.boundsInWindow() }
         .accessibilityFocus(returnFocus)
-        .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
         .clearAndSetSemantics {
             contentDescription = label
             stateDescription = language.nativeName
@@ -490,3 +496,4 @@ internal const val SETTINGS_ACCOUNT = "$SETTINGS_SHEET.account"
 internal const val SETTINGS_SIGN_IN = "$SETTINGS_SHEET.signIn"
 internal const val SETTINGS_APPEARANCE = "$SETTINGS_SHEET.appearance"
 internal const val SETTINGS_LANGUAGE = "$SETTINGS_SHEET.language"
+internal const val SETTINGS_LANGUAGE_PICKER = "$SETTINGS_LANGUAGE.picker"

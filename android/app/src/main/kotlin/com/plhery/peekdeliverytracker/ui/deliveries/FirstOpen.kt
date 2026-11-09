@@ -664,7 +664,9 @@ internal val LocalFirstOpenPing = staticCompositionLocalOf<((TextLayoutResult) -
 /**
  * `masthead`: the lockup (`PeekLockup`), and at the other end Sign in in subheadline medium in the ink, at least 44
  * tall, 14 in from its ends, on the paper at 55 % with corners of 12, fading under the finger as a system button's
- * title does. It opens the sign-in screen.
+ * title does. It opens the sign-in screen. Its words alone press it, as the iPhone's `Button` does with its padding,
+ * frame and paper laid outside it; a finger on the pill round them does nothing, the paper taking it as a view over
+ * the picture does ([takesTaps]).
  */
 @Composable
 private fun FirstOpenMasthead(scene: FirstOpenScene, modifier: Modifier = Modifier) {
@@ -678,12 +680,19 @@ private fun FirstOpenMasthead(scene: FirstOpenScene, modifier: Modifier = Modifi
             Modifier
                 .heightIn(min = 44.dp)
                 .background(colors.paper.copy(alpha = colors.paper.alpha * 0.55f), ContinuousRoundedShape(Radii.mastheadButton))
-                .testTag(FIRST_OPEN_SIGN_IN)
-                .button(interactionSource = null, indication = SystemPress, role = Role.Button) { source.showSignIn() }
+                .takesTaps()
+                .testTag(FIRST_OPEN_SIGN_IN_PILL)
                 .padding(horizontal = 14.dp),
             contentAlignment = Alignment.Center,
         ) {
-            Text(localized("arrival.signInTitle"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium))
+            Text(
+                localized("arrival.signInTitle"),
+                Modifier
+                    .testTag(FIRST_OPEN_SIGN_IN)
+                    .button(interactionSource = null, indication = SystemPress, role = Role.Button) { source.showSignIn() },
+                color = colors.ink,
+                style = type.style(IosTextStyle.Subheadline, FontWeight.Medium),
+            )
         }
     }
 }
@@ -1173,3 +1182,4 @@ const val FIRST_OPEN_SCAN = "firstOpen.scan"
 const val FIRST_OPEN_PASTE = "welcome.paste"
 const val FIRST_OPEN_DEMO = "welcome.demo"
 const val FIRST_OPEN_SIGN_IN = "welcome.signIn"
+const val FIRST_OPEN_SIGN_IN_PILL = "firstOpen.signInPill"

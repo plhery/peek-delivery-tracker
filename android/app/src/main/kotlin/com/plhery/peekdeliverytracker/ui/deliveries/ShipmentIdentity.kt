@@ -40,17 +40,20 @@ import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
- * `shipmentIdentity` (B-S06): the parcel's numbers, 2 in from the sides, each but an empty one (a number the link of
- * someone else's parcel hides). What a number is in caption2 in the opaque secondary grey (`trackingNumberLabel`), 4
- * above it in monospaced caption as its carrier writes it (`CarrierCatalog.format`), which a long press selects
- * (B-G04); at the line's end its copy, a 14-point copy symbol in the secondary grey in 44 square, a check while its row
- * says it copied the number (`copied`). At the accessibility sizes the number takes the line and its copy goes under
- * it, saying what it does in footnote, 44 tall. TalkBack hears the copy as "Copy tracking number" or "Copied", and
- * which number it copies where there are several. A copy calls `onCopy`, which puts the number on the clipboard
- * (B-H03).
+ * `shipmentIdentity` (B-S06): the parcel's numbers, each but an empty one (a number the link of someone else's parcel
+ * hides). What a number is in caption2 (`trackingNumberLabel`), 4 above it in monospaced caption as its carrier writes
+ * it (`CarrierCatalog.format`), which a long press selects (B-G04); at the line's end its copy, a 14-point copy symbol
+ * in the secondary grey in 44 square, a check while its row says it copied the number (`copied`). TalkBack hears the
+ * copy as "Copy tracking number" or "Copied", and which number it copies where there are several. A copy calls
+ * `onCopy`, which puts the number on the clipboard (B-H03).
  *
  * Under each number its carrier's own pages, and after the numbers the pages that are none of theirs
- * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`, `padded` on the page and not in a link's sheet.
+ * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`.
+ *
+ * `padded` is the page's look: 2 in from the sides, what a number is in the opaque secondary grey (`Brand.secondaryText`)
+ * and, at the accessibility sizes, the number taking the line with its copy under it, saying what it does in footnote,
+ * 44 tall. A link's sheet (`SharedParcelNumber`, not padded) has none of it: its numbers reach its sides, what a number
+ * is is in the translucent secondary grey (`.secondary`), and its copy stays at the line's end at every size.
  */
 @Composable
 internal fun ShipmentNumbers(
@@ -66,10 +69,11 @@ internal fun ShipmentNumbers(
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    // Only the page lays the copy under the number at the accessibility sizes (`AnyLayout`); a sheet's keeps its row.
+    val large = padded && PeekTheme.dynamicTypeSize.isAccessibilitySize
     val numbers = parcel.trackingNumbers.filter { it.number.isNotEmpty() }
     val pages = ParcelTrackingLink.byNumber(links, numbers)
-    Column(modifier.padding(horizontal = 2.dp)) {
+    Column(if (padded) modifier.padding(horizontal = 2.dp) else modifier) {
         numbers.forEachIndexed { index, entry ->
             key(entry.number) {
                 val label = parcel.trackingNumberLabel(entry, localizer)
@@ -78,7 +82,7 @@ internal fun ShipmentNumbers(
                 val copyLabel = localizer.text(if (says) "detail.copied" else "detail.copyTracking") + if (numbers.size > 1) " — $label" else ""
                 val number = @Composable { numberModifier: Modifier ->
                     Column(numberModifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(label, color = colors.secondaryText, style = type.caption2.sfLines())
+                        Text(label, color = if (padded) colors.secondaryText else colors.secondaryLabel, style = type.caption2.sfLines())
                         SelectionContainer {
                             Text(
                                 CarrierCatalog.format(entry.number, entry.carrier),
@@ -153,7 +157,8 @@ private fun CopyButton(label: String, action: () -> Unit, content: @Composable (
  * above and below, so that words on two lines make it taller. Under its own number a page needs
  * no more words; another, but the one the parcel is followed on, says at the line's end in caption2 secondary what
  * it is to the parcel: not ready yet, or an earlier journey. A tap calls `onLink`, then opens the page in the browser,
- * as the iPhone's opens Safari.
+ * as the iPhone's opens Safari. TalkBack hears the words alone: the arrow says nothing, as the sheet's
+ * `.accessibilityHidden(true)` arrow.
  */
 @Composable
 internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: Color, onLink: (ParcelTrackingLink) -> Unit, padded: Boolean = true) {
@@ -196,7 +201,7 @@ internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: C
                         color = tint,
                         style = type.caption.sfLines(),
                     )
-                    PeekSymbol("arrow.up.right", font = type.fixed(10f), tint = tint)
+                    PeekSymbol("arrow.up.right", Modifier.testTag(PAGE_CARRIER_ARROW), font = type.fixed(10f), tint = tint)
                 }
                 if (role != null) {
                     // 6 either side of the spacer, at least 4 long.
@@ -212,8 +217,9 @@ private val COPY_SIDE = 44.dp
 private val LINK_HEIGHT = 44.dp
 private val LABEL_SPACING = 6.dp
 
-/** The test tags of the page's numbers, their copies and the carriers' pages. */
+/** The test tags of the page's numbers, their copies and the carriers' pages, and of a page's arrow. */
 const val PAGE_IDENTITY = "parcelPage.identity"
 const val PAGE_NUMBER = "parcelPage.number"
 const val PAGE_COPY_NUMBER = "parcelPage.copyNumber"
 const val PAGE_CARRIER_LINK = "parcelPage.carrierLink"
+const val PAGE_CARRIER_ARROW = "parcelPage.carrierArrow"

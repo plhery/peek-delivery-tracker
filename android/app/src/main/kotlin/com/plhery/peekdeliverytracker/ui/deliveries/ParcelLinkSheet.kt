@@ -633,7 +633,9 @@ private fun LinkShared(
  * `keeping(_:keepable:followable:)` (B-S42, B-ST29): one tap to keep the parcel for someone signed in, or the answer
  * already given (already followed, no room). Anyone else follows it on this phone, or signs in to keep it, or sees it
  * is followed here already. Following needs a build with a server and the saved account reopened; signing in needs a
- * way to sign in.
+ * way to sign in. Under following, signing in is a plain button whose words alone take a finger, as SwiftUI's `Button`
+ * does with its `.frame(maxWidth: .infinity, minHeight: 44)` outside it: the row 44 tall across the sheet only places
+ * them.
  */
 @Composable
 private fun Keeping(
@@ -675,17 +677,13 @@ private fun Keeping(
             if (source.pushAvailable) LinkHint(localizer.text("native.follow.hint"))
             if (keepable && context.canSignIn) {
                 val enabled = !state.adding
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 44.dp)
-                        .testTag(LINK_SIGN_IN)
-                        .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { state.signIn(source) }
-                        .plainDisabled(enabled),
-                    contentAlignment = Alignment.Center,
-                ) {
+                Box(Modifier.fillMaxWidth().heightIn(min = 44.dp).testTag(LINK_SIGN_IN_ROW), contentAlignment = Alignment.Center) {
                     Text(
                         localizer.text("link.signInToAdd"),
+                        Modifier
+                            .testTag(LINK_SIGN_IN)
+                            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { state.signIn(source) }
+                            .plainDisabled(enabled),
                         color = PeekTheme.colors.ink,
                         style = PeekTheme.type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines(),
                         textAlign = TextAlign.Center,
@@ -1414,7 +1412,9 @@ private fun SharedImportCharges(charges: ImportChargesLine, asksForNumber: Boole
  * a long press selects, with its copy and its carriers' pages ([ShipmentNumbers]); a copy puts the number on the
  * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds and, before
  * Android 13, whose system shows no copy, to TalkBack ([announce], [Device.confirmsCopies]). A carrier's page opened is
- * counted and told ([onVisit]). Its carriers' pages are 44 tall, with none of the page's 10 above and below.
+ * counted and told ([onVisit]). Not padded as the page's: its numbers reach the sheet's sides, what a number is is in
+ * the translucent secondary grey (`.secondary`), a copy stays at its number's line's end at every size, and its
+ * carriers' pages are 44 tall, with none of the page's 10 above and below, their arrows silent to TalkBack.
  */
 @Composable
 private fun SharedParcelNumber(
@@ -1437,7 +1437,7 @@ private fun SharedParcelNumber(
     if (hint != null) {
         // A hidden number cannot be copied; the carrier's page takes one typed in.
         Column(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(horizontal = 2.dp).semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(Modifier.semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(localized("detail.trackingNumber"), color = colors.secondaryLabel, style = type.caption2.sfLines())
                 Text(hint.masked, color = colors.label, style = type.style(IosTextStyle.Caption, design = FontDesign.Monospaced).sfLines())
             }
@@ -1490,6 +1490,7 @@ const val LINK_NOTE = "parcelLink.note"
 const val LINK_ADD = "parcelLink.add"
 const val LINK_FOLLOW = "parcelLink.follow"
 const val LINK_SIGN_IN = "parcelLink.signIn"
+const val LINK_SIGN_IN_ROW = "parcelLink.signInRow"
 const val LINK_ALREADY = "parcelLink.already"
 const val LINK_OPEN_EXISTING = "parcelLink.openExisting"
 const val LINK_NOTHING = "parcelLink.nothing"

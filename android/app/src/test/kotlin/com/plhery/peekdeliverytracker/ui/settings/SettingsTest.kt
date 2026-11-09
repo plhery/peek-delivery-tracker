@@ -590,12 +590,20 @@ class SettingsTest {
         assertEquals(listOf("appearance-change"), source.actions.filter { it == "appearance-change" })
     }
 
+    /**
+     * The menu `Picker`'s button alone opens the menu, as on the iPhone: a tap on the row's label opens nothing, one on
+     * the language and its chevrons opens it, and a choice there changes the copy.
+     */
     @Test
     fun theLanguageMenuChangesTheCopy() {
         show()
         open()
         assertTrue(shows("Settings"))
-        tap(SETTINGS_LANGUAGE)
+        node(SETTINGS_LANGUAGE).performScrollTo().performTouchInput { click(Offset(20.dp.toPx(), height / 2f)) }
+        settle()
+        assertFalse("A tap on the label opens no menu", exists(settingsLanguageTag(AppLanguage.Fr)))
+        compose.onNodeWithTag(SETTINGS_LANGUAGE_PICKER, useUnmergedTree = true).performClick()
+        settle()
         tap(settingsLanguageTag(AppLanguage.Fr))
         assertTrue(shows(Localizer(AppLanguage.Fr, variant = "android").text("settings.title")))
         assertTrue(deliveries.showingAccount)

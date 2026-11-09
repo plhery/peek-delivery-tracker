@@ -723,18 +723,22 @@ internal class InvitationState(private val state: MutableState<InvitationValue>)
         }
 }
 
-/** A plain button in the disclosure: caption in the secondary grey, 30 tall at least, at the leading side. */
+/**
+ * A plain button in the disclosure: caption in the secondary grey, 30 tall at least, at the leading side. Its words
+ * alone take a finger, as the iPhone's with its `.frame(minHeight: 30)` outside the button.
+ */
 @Composable
 private fun LinkAction(title: String, tag: String, enabled: Boolean, action: () -> Unit) {
-    Box(
-        Modifier
-            .heightIn(min = 30.dp)
-            .testTag(tag)
-            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
-            .plainDisabled(enabled),
-        contentAlignment = Alignment.CenterStart,
-    ) {
-        Text(title, color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.caption.sfLines())
+    Box(Modifier.heightIn(min = 30.dp), contentAlignment = Alignment.CenterStart) {
+        Text(
+            title,
+            Modifier
+                .testTag(tag)
+                .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+                .plainDisabled(enabled),
+            color = PeekTheme.colors.secondaryLabel,
+            style = PeekTheme.type.caption.sfLines(),
+        )
     }
 }
 

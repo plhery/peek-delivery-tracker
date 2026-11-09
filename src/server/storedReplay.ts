@@ -12,7 +12,8 @@
  * adapter gave the source's scan before it and is stored as the sync stores it (`scanStages`:
  * pending after the delivery round), and, where the map knows neither, the wording rules for a
  * scan its adapter gave no stage. A scan its adapter gave the stage of the scan before it, with no
- * source of its own, keeps it whatever the map says of its code. A notice stored as one
+ * source of its own, keeps it whatever the map says of its code. A registration dated over a minute after the answer's
+ * first movement is in transit, as the scraper reads each answer (`resolveResult`). A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. A wording Postal Ninja relays for a carrier whose map reads it
  * whole is read with that map first (`relayedAnswer`), as its adapter reads it. A universal provider's copy of a scan to
@@ -23,7 +24,7 @@
  * values; applying it is the operator's
  * ([docs/SCRAPER.md](../../docs/SCRAPER.md)).
  */
-import { classifyStage, type CarrierResult } from 'universal-parcel-scraper';
+import { classifyStage, resolveResult, type CarrierResult } from 'universal-parcel-scraper';
 import * as scraperApp from 'universal-parcel-scraper/app';
 import { carrierIdFromName, statusMapAnswer, type StatusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
@@ -71,8 +72,11 @@ export interface ClockChange extends Change {
 export interface StageChange extends Change {
   kind: 'stage';
   code: string | null;
-  /** Where the new stage comes from: the map, a notice keeping the stage before it, or the wording. */
-  reason: 'mapped' | 'notice' | 'wording';
+  /**
+   * Where the new stage comes from: the map, a notice keeping the stage before it, the wording, or a registration
+   * dated after the answer's first movement, which the scraper reads in transit.
+   */
+  reason: 'mapped' | 'notice' | 'wording' | 'late';
   /** The stage its adapter would give the scan, which the sync keeps in the row's raw data; null for none. */
   declared: string | null;
   stageSource: string;
@@ -299,6 +303,10 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
     scans.push({ ...given, description: scan.description });
     reasons.push(reason);
   }
+  for (const index of lateRegistrations(scans, ordered)) {
+    scans[index] = { ...scans[index], stage: 'in_transit', stage_source: 'carrier_map' };
+    reasons[index] = 'late';
+  }
   const stages = scanStages(scans, ordered.map((scan) => scan.occurredAt));
   return ordered.flatMap((scan, index): StageChange[] => {
     const reason = reasons[index];
@@ -307,9 +315,22 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
     return [{
       kind: 'stage', parcel: parcel.id, row: scan.id, source, open: parcel.open, from: scan.stage, to,
       code: text(scan.raw.provider_code), reason, declared: text(scans[index].stage),
-      stageSource: reason === 'mapped' ? 'carrier_map' : reason === 'wording' ? classifyStage(scan.description).source : 'none',
+      stageSource: reason === 'mapped' || reason === 'late' ? 'carrier_map'
+        : reason === 'wording' ? classifyStage(scan.description).source : 'none',
     }];
   });
+}
+
+/**
+ * The scans of an answer the scraper reads as registrations written once the parcel moved (`resolveResult`, which
+ * every answer goes through): a label or order row dated over a minute after the answer's first movement is in
+ * transit, as a partner's label is.
+ */
+function lateRegistrations(scans: readonly JsonObject[], ordered: readonly StoredScan[]): number[] {
+  const events: JsonObject[] = scans.map((scan, index) => ({ ...scan, time: ordered[index].occurredAt }));
+  const read = (resolveResult({ status: 'unknown', events } as unknown as CarrierResult).events ?? []) as unknown as JsonObject[];
+  return events.flatMap((event, index) => (text(event.stage) ?? classifyStage(String(event.description)).stage) === 'registered'
+    && read[index]?.stage === 'in_transit' ? [index] : []);
 }
 
 /**

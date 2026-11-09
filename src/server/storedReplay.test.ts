@@ -44,6 +44,24 @@ describe('stored scan replay', () => {
     expect(changes).toEqual([expect.objectContaining({ row: 'read', from: 'in_transit', to: 'registered', reason: 'notice', stageSource: 'none' })]);
   });
 
+  it("reads a registration dated after the answer's first movement in transit, as the scraper reads each answer", () => {
+    const moved = scan('moved', 'jrt', '2026-10-18T10:00:00Z', 'in_transit', 'Departed from facility', { stage: 'in_transit' });
+    // A partner's label written once the parcel is on its way, stored as the sync stores it, and one stored before
+    // the scraper read it so; one within the minute of the movement is that movement's record and stays a label.
+    const changes = replayParcel(parcel(
+      moved,
+      scan('partner', 'jrt', '2026-10-19T10:00:00Z', 'in_transit', 'shipment information received', { stage: 'in_transit' }),
+      scan('stale', 'jrt', '2026-10-20T10:00:00Z', 'registered', 'Shipment information received', { stage: 'registered' }),
+      scan('record', 'jrt', '2026-10-18T10:00:30Z', 'registered', 'shipment information received.', { stage: 'registered' }),
+    ));
+    const first = replayParcel(parcel(
+      scan('label', 'jrt', '2026-10-17T10:00:00Z', 'registered', 'shipment information received', { stage: 'registered' }), moved,
+    ));
+
+    expect(changes).toEqual([expect.objectContaining({ row: 'stale', from: 'registered', to: 'in_transit', reason: 'late', stageSource: 'carrier_map' })]);
+    expect(first).toEqual([]);
+  });
+
   it('reads a wording Postal Ninja relays for PostNL with PostNL\'s map, as its adapter does', () => {
     const relayed = (id: string, stage: string, description: string, raw: JsonObject) => scan(id, 'unknown', `2026-11-0${id.length % 9}T10:00:00Z`,
       stage, description, { universal_provider: 'Postal Ninja', stage, ...raw });

@@ -221,7 +221,8 @@ adapter can state itself, and a scan's stage is read again from its source's sta
 wording rules, a notice stored as the sync stores it. A wording Postal Ninja relays for the carrier it
 names (`reporting_carrier`) is read with that carrier's map first, when the map reads relayed wordings
 whole (PostNL's), as the adapter reads it. A scan its adapter gave the stage of the scan
-before it, with no source of its own (Chronopost's RB), keeps it. A universal provider's row to the
+before it, with no source of its own (Chronopost's RB), keeps it. A registration dated over a minute after the
+answer's first movement (a partner's label) is in transit, as the scraper reads each answer. A universal provider's row to the
 minute that the release leaves out as a copy of its row to the second (`withoutMinuteCopies`: an
 answer that listed one scan twice in a minute) is deleted, and the row to the second takes its
 place when it has none, with the identity the sync gives it with that place.

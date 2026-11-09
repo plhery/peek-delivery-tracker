@@ -71325,6 +71325,17 @@
     "candidates": []
   },
   {
+    "input": "AUSAA1999999980YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
+    ]
+  },
+  {
     "input": "AV080071581BR",
     "carrier": "correios-br",
     "confidence": "high",

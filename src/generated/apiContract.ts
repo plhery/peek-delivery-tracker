@@ -15128,6 +15128,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^AUS[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^CYS\\d{11}$",
         "confidence": "low"
       },

@@ -46,7 +46,7 @@ import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { NOOP_RECORDER } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
-import { hostStepRecorder } from './stepRecorder';
+import { hostStepRecorder, markLookup, unmarkLookups } from './stepRecorder';
 import { RoyalBrowserPaused, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { unseenFor } from './unseenLookup';
 import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, SchemaError } from 'universal-parcel-scraper';
@@ -138,6 +138,35 @@ describe('dedicated carrier dispatch', () => {
     // The check's lookups and its direct outcome, as for an adapter that throws NoHistoryError; health files it not_found.
     expect(await check('SYNTHETIC0001')).toEqual({ lookups: { fedex: 'no_history' }, outcome: 'not_found', reason: 'empty_answer' });
     expect(await check('SYNTHETIC0002')).toEqual({ lookups: { fedex: 'success' }, outcome: 'ok', reason: null });
+  });
+
+  it('records an answer the router set aside as one without history, in the lookups and the trail', async () => {
+    const step = { finalStep: 'direct', step: 'direct', attempt: 1, outcome: 'ok', errorType: null, durationMs: 1, attempts: 1,
+      fallbackFrom: null, fallbackReason: null, fallbackErrorType: null } as const;
+    const check = async (verdict: (carrier: string) => void) => {
+      const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true), recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };
+      const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient, 'synthetic-package', 'SYNTHETIC0003', 'unknown', 'pending', { trigger: 'added' });
+      await audit.observeFetch(async () => {
+        for (const carrier of ['fan-courier', 'brt']) {
+          hostStepRecorder().step({ ...step, carrier });
+          hostStepRecorder().lookup({ ...step, carrier });
+          if (carrier === 'fan-courier') verdict(carrier);
+        }
+      });
+      const seen = { trail: audit.lookupTrail, outcome: audit.lookupOutcome('fan-courier'), withdrawn: audit.answeredWithoutHistory('fan-courier') };
+      await audit.finish({ outcome: 'waiting', sourceCarrier: 'unknown', evaluateHealth: false });
+      return { lookups: (client.completeSyncAttempt.mock.lastCall![1] as JsonObject).lookups, ...seen };
+    };
+    // A carrier answering with another parcel's history, or on a clock the parcel's scans can't be ordered against, did
+    // not answer for this parcel; health counts it answered all the same, and the label it may have shown is not withdrawn.
+    expect(await check((carrier) => markLookup(carrier, 'set_aside_local_clock'))).toEqual({
+      lookups: { 'fan-courier': 'no_history', brt: 'success' }, trail: 'fan-courier direct:no_history; brt direct:ok',
+      outcome: 'not_found', withdrawn: false,
+    });
+    // One the check took in the end answered.
+    expect(await check((carrier) => { markLookup(carrier, 'set_aside_local_clock'); unmarkLookups(carrier); })).toEqual({
+      lookups: { 'fan-courier': 'success', brt: 'success' }, trail: 'fan-courier direct:ok; brt direct:ok', outcome: 'ok', withdrawn: false,
+    });
   });
 });
 

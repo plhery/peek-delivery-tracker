@@ -108,7 +108,8 @@ All tables and views here are service-role only.
   `lookups` names each carrier or provider the check's lookups asked, with how the lookup
   ended (`success`, `not_found`, `error` and the like, a success kept over a later failure),
   so a `refused` or `waiting` check still shows whom it asked. A carrier that answers with an
-  empty result, as FedEx's "could not locate the shipment", is `no_history`, not `success`. A lookup another copy of the
+  empty result, as FedEx's "could not locate the shipment", is `no_history`, not `success`, and so is an
+  answer the check did not take (below). A lookup another copy of the
   number ran in the same run is not this check's. It is `{}` when the check asked nobody,
   and null for checks recorded before the column existed.
 - `tracking_sync_steps`: `selected`, `fetch`, `normalize`, `persist_events`,
@@ -146,7 +147,8 @@ All tables and views here are service-role only.
   does the failure of a carrier whose own browser already failed in the run. A `fetch` whose
   lookups ran a step has `lookup_trail`, the path they took: each carrier or provider asked, in
   order, with its steps and how each ended, such as `poste-italiane direct:challenge>browser:ok;
-  17track api:ok` for a challenged lookup the browser answered, at most 24 steps. It holds ids
+  17track api:ok` for a challenged lookup the browser answered, at most 24 steps. The step of an
+  answer recorded as one without history (below) ends `no_history`, not `ok`. It holds ids
   and outcome kinds, never a number.
 
 Completed rows are kept for 90 days. A check cut off at shutdown ends `interrupted`, with
@@ -669,6 +671,12 @@ Key JSON events:
   success, is recorded as an answer without history, reason `empty_answer`, wherever its lookup is:
   `no_history` on the `total` line, in `carrier_lookup_total` and in the check's `lookups`, and
   `not_found` in health and so in `direct_outcome`. The step that fetched it stays `success`.
+  An answer the router did not take is recorded the same way: one it set aside (`set_aside_` and the
+  router's reason, such as `set_aside_local_clock`), a reused number's earlier parcel (`older_parcel`), or a
+  recognition that knows the number only with no movement in 60 days (`older_answer`). A check holds its
+  successful lookups until it ends, or until the same carrier's next step or lookup, so an answer set aside and taken
+  in the end stays `success`. These three do not count as a source that showed the label answering without it
+  (`scans_withdrawn`).
   An `error` line says why: the carrier's `error_reason` when it gave one, `error_message`,
   and `error_cause`, the wording of up to three causes. Its wording has no number to mask,
   so addresses lose their query and number-like path segments, and every word of six

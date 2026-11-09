@@ -136,6 +136,29 @@ export function addStepRecorder(recorder: StepRecorder): void {
 const heldLookups = new AsyncLocalStorage<{ carrier: string; records: { record: LookupRecord; sinks: StepRecorder }[] }>();
 
 /**
+ * Why Peek recorded a successful lookup as one without history (`no_history`): the carrier's answer
+ * held nothing (`empty_answer`), was set aside (`set_aside_` and the router's reason, such as
+ * `set_aside_local_clock`), was an earlier parcel's under a reused number (`older_parcel`), or showed
+ * no movement within recognition's 60 days (`older_answer`).
+ */
+export type LookupVerdict = 'empty_answer' | `set_aside_${string}` | 'older_parcel' | 'older_answer';
+
+/** Whether a lookup's reason is one of Peek's verdicts on an answer, not the carrier's own. */
+export function lookupVerdict(reason: string | undefined): boolean {
+  return reason === 'empty_answer' || reason === 'older_parcel' || reason === 'older_answer' || Boolean(reason?.startsWith('set_aside_'));
+}
+
+const VERDICT_MESSAGES: Record<string, string> = {
+  empty_answer: 'The carrier answered with an empty result',
+  older_parcel: 'The carrier answered with an older parcel for this number',
+  older_answer: 'The carrier answered with no movement in recognition\'s 60 days',
+};
+
+/** A check's successful lookups, held back until it ends, with the verdict Peek gave each answer. */
+type CheckLookups = { records: { record: LookupRecord; sinks: StepRecorder; verdict?: LookupVerdict }[] };
+const checkLookups = new AsyncLocalStorage<CheckLookups>();
+
+/**
  * The recorder handed to every adapter: health, Sentry, Prometheus and the running
  * check plus any registered sinks, each failure-isolated. Prometheus is wired here rather than
  * registered from a side-effect import, because every bundle that records a
@@ -144,27 +167,77 @@ const heldLookups = new AsyncLocalStorage<{ carrier: string; records: { record: 
 export function hostStepRecorder(): StepRecorder {
   const sinks = combineRecorders(healthStepRecorder, sentryStepRecorder, prometheusStepRecorder, attemptStepRecorder, ...extraRecorders);
   return {
-    step: (record) => sinks.step(record),
+    step: (record) => {
+      const check = checkLookups.getStore();
+      if (check) release(check, record.carrier);
+      sinks.step(record);
+    },
     lookup: (record) => {
       const held = heldLookups.getStore();
       if (held && record.outcome === 'ok' && record.carrier === held.carrier) held.records.push({ record, sinks });
-      else sinks.lookup(record);
+      else deliver(record, sinks);
     },
   };
 }
 
-/** A successful lookup whose result held nothing, as every sink records an adapter's NoHistoryError. */
-function withoutHistory(record: LookupRecord): LookupRecord {
-  const error = new NoHistoryError(record.carrier, 'The carrier answered with an empty result', { reason: 'empty_answer' });
+/** A successful lookup recorded as an answer without history, as every sink records an adapter's NoHistoryError. */
+function withoutHistory(record: LookupRecord, verdict: LookupVerdict): LookupRecord {
+  const error = new NoHistoryError(record.carrier, VERDICT_MESSAGES[verdict] ?? 'Peek set the carrier\'s answer aside', { reason: verdict });
   return { ...record, outcome: outcomeOf(error), errorType: errorTypeOf(error), error };
+}
+
+/**
+ * Hands a lookup to the sinks, or holds a successful one back for the running check. Another step or lookup
+ * of the same carrier lets the carrier's held ones go first, so each carrier's records reach health in order.
+ */
+function deliver(record: LookupRecord, sinks: StepRecorder): void {
+  const check = checkLookups.getStore();
+  if (check && record.outcome === 'ok') {
+    check.records.push({ record, sinks });
+    return;
+  }
+  if (check) release(check, record.carrier);
+  sinks.lookup(record);
+}
+
+function release(check: CheckLookups, carrier?: string): void {
+  const going = check.records.filter((held) => carrier === undefined || held.record.carrier === carrier);
+  check.records = check.records.filter((held) => !going.includes(held));
+  for (const { record, sinks, verdict } of going) sinks.lookup(verdict ? withoutHistory(record, verdict) : record);
+}
+
+/**
+ * Runs a check's lookups with their successful ones held back until it ends, so that the router can say which
+ * answers it did not take: `markLookup` records such an answer as one without history, everywhere a lookup is
+ * recorded (`no_history` in the check's lookups and trail, `tracking_scrape` and `carrier_lookup_total`, health's
+ * `not_found`), and `unmarkLookups` takes the mark back when the check takes the answer after all.
+ */
+export async function withLookupVerdicts<T>(operation: () => Promise<T>): Promise<T> {
+  const check: CheckLookups = { records: [] };
+  try {
+    return await checkLookups.run(check, operation);
+  } finally {
+    try { release(check); } catch { /* Telemetry must never change a tracking result. */ }
+  }
+}
+
+/** Marks the carrier's latest successful lookup the running check holds, when unmarked, with Peek's verdict on its answer. */
+export function markLookup(carrier: string, verdict: LookupVerdict): void {
+  const held = [...checkLookups.getStore()?.records ?? []].reverse().find((candidate) => candidate.record.carrier === carrier);
+  if (held && !held.verdict) held.verdict = verdict;
+}
+
+/** Takes back the marks on the carrier's held lookups: the check took its answer after all. */
+export function unmarkLookups(carrier: string): void {
+  for (const held of checkLookups.getStore()?.records ?? []) if (held.record.carrier === carrier) delete held.verdict;
 }
 
 /**
  * Runs a carrier's tracking call with its successful lookups held back from every sink until the result is known.
  * An adapter answers a number it does not know with an empty result, such as FedEx's "could not locate the
  * shipment", which the scraper counts a success: when `empty` says the result holds nothing, the lookup that gave
- * it is recorded as an answer without history (`no_history` in the check's lookups and `tracking_scrape`, health's
- * `not_found`), as an adapter's NoHistoryError is. Its steps stay as they ran: the transport answered.
+ * it is recorded as an answer without history (`no_history` in the check's lookups and trail and `tracking_scrape`,
+ * health's `not_found`), as an adapter's NoHistoryError is. Its steps stay as they ran: the transport answered.
  */
 export async function withHeldLookups<T>(carrier: string, operation: () => Promise<T>, empty: (value: T) => boolean): Promise<T> {
   const held = { carrier, records: [] as { record: LookupRecord; sinks: StepRecorder }[] };
@@ -176,6 +249,6 @@ export async function withHeldLookups<T>(carrier: string, operation: () => Promi
     let emptied = false;
     try { emptied = answer !== undefined && empty(answer.value); } catch { /* Telemetry must never change a tracking result. */ }
     const last = held.records.length - 1;
-    held.records.forEach(({ record, sinks }, index) => sinks.lookup(emptied && index === last ? withoutHistory(record) : record));
+    held.records.forEach(({ record, sinks }, index) => deliver(emptied && index === last ? withoutHistory(record, 'empty_answer') : record, sinks));
   }
 }

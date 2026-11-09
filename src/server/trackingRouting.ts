@@ -14,6 +14,7 @@ import type { UniversalSource } from 'universal-parcel-scraper';
 import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universal-parcel-scraper/app';
 import { brandCarrierIds, carrierBrand, carrierIdFromName } from 'universal-parcel-scraper/app';
 import { errorType, reportRoutingEvent } from './observability';
+import { markLookup, unmarkLookups } from './stepRecorder';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { BLOCK_PAUSE_MS, type ProviderRefusals } from './providerRefusals';
@@ -1009,7 +1010,7 @@ export class TrackingRouter {
           if (!confirmedBefore(dated)) report('candidate_probe_confirmed', dated);
           recognizedAnswer!.confirm();
         }
-        if (taken) clearSetAside(taken);
+        if (taken) { clearSetAside(taken); unmarkLookups(taken); }
         value.correction = { carrier: named, trackingUrl: null, postcode: null };
       }
       // A carrier with an adapter of its own that this check did not ask (an Add preflight's
@@ -1107,6 +1108,7 @@ export class TrackingRouter {
       const setAsideAs = (reason: SetAsideReason, value: RoutedResult, newest?: string) => {
         const again = setAside && (setAside.reason ?? 'older') === reason && setAside.newest === newest;
         const added = this.options.newScans?.(value);
+        markLookup(carrier, `set_aside_${reason}`);
         state.set_aside = { ...state.set_aside, [carrier]: { reason, checked_at: now().toISOString(),
           ...(newest ? { newest, watermark: iso(millis(state.last_event_at)) } : {}),
           count: again ? Math.min(20, setAside.count + 1) : 1, ...(added !== undefined ? { new_scans: added } : {}) } };
@@ -1131,6 +1133,7 @@ export class TrackingRouter {
         // this one: it neither confirms the carrier nor serves the parcel, on local clocks either.
         if (oldLabel(parcel.created_at, value.result, value.earlierResult)) {
           report('foreign_history_rejected', carrier);
+          markLookup(carrier, 'older_parcel');
           throw new NoHistoryError(carrier, `${carrier} returned an older parcel for this number`);
         }
         // An answer names the rows it holds back as written ahead beside the scans it keeps, as a
@@ -1325,6 +1328,7 @@ export class TrackingRouter {
       if (!carrier || !answer || !hasRoutingProgress(answer.value.result)) return undefined;
       answer.confirm();
       clearSetAside(carrier);
+      unmarkLookups(carrier);
       localHistory = answer.history;
       state.direct_retry_at = undefined;
       return keepLocal({ value: answer.value, carrier });
@@ -1345,6 +1349,7 @@ export class TrackingRouter {
       if (!confirmedBefore(carrier)) report('candidate_probe_confirmed', carrier);
       answer.confirm();
       clearSetAside(carrier);
+      unmarkLookups(carrier);
       state.direct_retry_at = undefined;
       if (answer.history) localHistory = answer.history;
       return answer.local ? keepLocal({ value: answer.value, carrier }) : persistResult(answer.value, carrier);
@@ -1470,6 +1475,10 @@ export class TrackingRouter {
       }
       signal?.throwIfAborted();
       recognized = settleRecognition(outcomes, now()).carrier;
+      // A carrier that knows only an older shipment with the number answered without history for this parcel.
+      for (const outcome of outcomes) {
+        if (outcome.status === 'known' && settleRecognition([outcome], now()).carrier !== outcome.carrier) markLookup(outcome.carrier, 'older_answer');
+      }
       homeNetwork = recognized && !requiredRequirements(recognized, number).length
         && outcomes.some((outcome) => outcome.carrier === recognized && outcome.countryMatch === 'home') ? recognized : undefined;
       // A carrier that knows the number and needs no input gets a full

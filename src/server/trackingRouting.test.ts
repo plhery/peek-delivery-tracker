@@ -7,6 +7,7 @@ import type { JsonObject } from './types';
 import type { CarrierEvent, CarrierResult, UniversalSource } from 'universal-parcel-scraper';
 import * as monitoring from './observability';
 import * as metrics from './metrics';
+import * as stepRecorder from './stepRecorder';
 import { universalCarrierHints } from 'universal-parcel-scraper/app';
 import { BudgetExceededError, ChallengeError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, RateLimitedError, TransportError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
@@ -1186,9 +1187,11 @@ describe('persistent tracking routing', () => {
       expect(again.asked).toEqual(['brt']);
       expect(again.routing.likely_carrier).toEqual(first.routing.likely_carrier);
       // One that knows only an older parcel with the number (FAN Courier reuses its AWBs) has not answered for this one.
+      const mark = vi.spyOn(stepRecorder, 'markLookup');
       const older = await check(new Date('2026-09-10T16:00:00Z'), again.routing, (run) => {
         run.recognize.mockResolvedValue({ known: true, lastActivityAt: '2026-05-01T08:00:00Z' });
       });
+      expect(mark).toHaveBeenCalledExactlyOnceWith('brt', 'older_answer');
       expect(older.asked).toEqual(['brt']);
       expect((older.routing.candidate_probes as JsonObject).brt).not.toHaveProperty('known');
       expect(older.routing.likely_carrier).toEqual(first.routing.likely_carrier);
@@ -1309,10 +1312,11 @@ describe('persistent tracking routing', () => {
     });
     it.each([
       ['a pre-advice only', { status: 'registered', current_stage: 'registered', last_update: '2026-09-10T11:00:00Z',
-        events: [{ time: '2026-09-10T11:00:00Z', description: 'Order created', stage: 'registered' }] }],
-      ['history older than what the parcel has', history('2026-09-09T11:00:00Z')],
-    ])('does not adopt a carrier that knows the number with %s', async (_label, answer) => {
+        events: [{ time: '2026-09-10T11:00:00Z', description: 'Order created', stage: 'registered' }] }, 'set_aside_no_movement'],
+      ['history older than what the parcel has', history('2026-09-09T11:00:00Z'), 'set_aside_older'],
+    ])('does not adopt a carrier that knows the number with %s', async (_label, answer, verdict) => {
       const { router, direct, recognize } = setup();
+      const mark = vi.spyOn(stepRecorder, 'markLookup'), unmark = vi.spyOn(stepRecorder, 'unmarkLookups');
       recognize.mockImplementation(knows('dpd'));
       direct.mockResolvedValue({ ...directValue('dpd'), result: answer as CarrierResult });
       const saved = { routing: state({ last_event_at: '2026-09-10T10:00:00Z' }) };
@@ -1320,6 +1324,9 @@ describe('persistent tracking routing', () => {
       expect(result.correction).toBeUndefined();
       expect(result.result.tracking_provider).toBe('ParcelsApp');
       expect(result.result.routing).toMatchObject({ candidate_probes: { dpd: { count: 1 } }, failures: {} });
+      // Its lookup is recorded as one without history.
+      expect(mark).toHaveBeenCalledWith('dpd', verdict);
+      expect(unmark).not.toHaveBeenCalled();
     });
     describe('a label the only answer for a number nobody else tracks', () => {
       const preAdvice = (carrier: string): RoutedResult => ({ ...directValue(carrier), result: { status: 'pending', current_stage: 'registered',
@@ -1336,8 +1343,12 @@ describe('persistent tracking routing', () => {
 
       it('files the parcel under the one carrier that knows the number, confirmed', async () => {
         const { router, universal } = labelled('dpd');
+        const mark = vi.spyOn(stepRecorder, 'markLookup'), unmark = vi.spyOn(stepRecorder, 'unmarkLookups');
         const result = await router.fetch(parcel({ tracking_number: swissDpd }), false);
         expect(universal).toHaveBeenCalled();
+        // Set aside first, its answer is taken in the end: its lookup answered.
+        expect(mark).toHaveBeenCalledWith('dpd', 'set_aside_no_movement');
+        expect(unmark).toHaveBeenCalledWith('dpd');
         expect(result).toMatchObject({ sourceCarrierId: 'dpd', correction: { carrier: 'dpd' } });
         expect(result.result).toMatchObject({ current_stage: 'registered' });
         expect(routingOf(result)).toMatchObject({ configured_carrier: 'dpd', confirmed_carrier: 'dpd', confirmed_number: swissDpd });
@@ -3220,8 +3231,10 @@ describe('persistent tracking routing', () => {
       direct.mockImplementation(async (_parcel, asked: string) => ({ ...local(asked), result: { ...local(asked).result,
         last_update_local: '2026-01-08T09:00:00', events: [{ local_time: '2026-01-08T09:00:00', description: 'Departed the sorting centre', stage: 'in_transit' }] } }));
       universal.mockResolvedValue(legs(history()));
+      const mark = vi.spyOn(stepRecorder, 'markLookup');
       const result = await router.fetch(filed({}, { tracking_number: trackingNumber, created_at: '2026-09-01T00:00:00Z' }), false);
       expect(direct).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ carrier }), carrier);
+      expect(mark).toHaveBeenCalledWith(carrier, 'older_parcel');
       expect(result.correction).toBeUndefined();
       expect(result.result).toMatchObject({ tracking_provider: 'Ship24', routing: { configured_carrier: 'unknown' } });
       for (const key of ['carrier_answered', 'direct_local_history']) expect(result.result).not.toHaveProperty(key);

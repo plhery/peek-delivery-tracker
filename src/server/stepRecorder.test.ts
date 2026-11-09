@@ -11,7 +11,7 @@ const observability = {
 vi.mock('@sentry/node', () => ({ metrics }));
 vi.mock('./observability', () => observability);
 
-const { sentryStepRecorder, addStepRecorder, hostStepRecorder, withHeldLookups } = await import('./stepRecorder');
+const { sentryStepRecorder, addStepRecorder, hostStepRecorder, lookupVerdict, markLookup, unmarkLookups, withHeldLookups, withLookupVerdicts } = await import('./stepRecorder');
 
 describe('sentryStepRecorder', () => {
   beforeEach(() => {
@@ -197,5 +197,43 @@ describe('sentryStepRecorder', () => {
       throw new Error('synthetic failure after the lookup');
     }, empty)).rejects.toThrow('synthetic failure');
     expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('usps', 'success', undefined);
+  });
+
+  it('records an answer the check set aside, or an older shipment\'s, as one without history, everywhere', async () => {
+    const extra = { step: vi.fn(), lookup: vi.fn() };
+    addStepRecorder(extra);
+    const recorder = hostStepRecorder();
+    const ok = { finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 } as const;
+    const sent = () => extra.lookup.mock.calls.map(([record]) => `${record.carrier}:${record.outcome}:${record.error?.reason ?? ''}`);
+    await withLookupVerdicts(async () => {
+      // Held until the check ends: the router may yet take an answer it set aside.
+      recorder.lookup({ ...ok, carrier: 'fan-courier' });
+      markLookup('fan-courier', 'set_aside_local_clock');
+      recorder.lookup({ ...ok, carrier: 'dpd' });
+      markLookup('dpd', 'older_answer');
+      recorder.lookup({ ...ok, carrier: 'gls' });
+      markLookup('gls', 'set_aside_no_movement');
+      unmarkLookups('gls');
+      recorder.lookup({ ...ok, carrier: 'ups' });
+      expect(sent()).toEqual([]);
+      // Another lookup of a carrier, or a step, lets its held ones go first, in order.
+      recorder.lookup({ ...ok, carrier: 'dpd', outcome: 'transport', errorType: 'TransportError' });
+      expect(sent()).toEqual(['dpd:indeterminate:older_answer', 'dpd:transport:']);
+      recorder.step({ carrier: 'ups', step: 'direct', attempt: 1, outcome: 'ok', errorType: null, durationMs: 1,
+        fallbackFrom: null, fallbackReason: null, fallbackErrorType: null });
+      expect(sent().at(-1)).toBe('ups:ok:');
+      expect(extra.step).toHaveBeenCalledTimes(1);
+    });
+    expect(sent()).toEqual(['dpd:indeterminate:older_answer', 'dpd:transport:', 'ups:ok:', 'fan-courier:indeterminate:set_aside_local_clock',
+      'gls:ok:']);
+    expect(observability.logOperationalEvent).toHaveBeenCalledWith('tracking_scrape',
+      expect.objectContaining({ carrier: 'fan-courier', phase: 'total', outcome: 'no_history' }));
+    expect(observability.reportTrackingLookup).toHaveBeenCalledWith('fan-courier', 'no_history', expect.any(String));
+    // Outside a check, a mark changes nothing and a lookup goes out at once.
+    markLookup('ups', 'older_parcel');
+    recorder.lookup({ ...ok, carrier: 'ups' });
+    expect(sent().at(-1)).toBe('ups:ok:');
+    expect(['empty_answer', 'older_parcel', 'older_answer', 'set_aside_undated'].every(lookupVerdict)).toBe(true);
+    expect([undefined, 'not_found', 'several_parcels'].some(lookupVerdict)).toBe(false);
   });
 });

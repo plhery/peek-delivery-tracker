@@ -13,6 +13,7 @@ import {
 } from './observability';
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 import { healthMessage, healthReviewSignal, observeTrackingHealth, type HealthSample } from './trackingHealth';
+import { lookupVerdict, withLookupVerdicts } from './stepRecorder';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
 import { ABSTAINED_REASONS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
@@ -242,6 +243,13 @@ export class TrackingSyncAudit {
     this.#lookups.set(key, outcome.slice(0, 40));
     if (reason && outcome !== 'success') this.#lookupReasons.set(key, reason.slice(0, 100));
     else this.#lookupReasons.delete(key);
+    // An answer Peek recorded as one without history shows so in the trail, not as the step's `ok`.
+    if (outcome === 'no_history' && lookupVerdict(reason)) {
+      const name = carrier.slice(0, 40);
+      const run = [...this.#trail].reverse().find((entry) => entry.carrier === name && entry.steps.some((step) => step.endsWith(':ok')));
+      const index = run ? run.steps.map((step) => step.endsWith(':ok')).lastIndexOf(true) : -1;
+      if (run && index >= 0) run.steps[index] = `${run.steps[index]!.slice(0, -':ok'.length)}:no_history`;
+    }
   };
 
   constructor(
@@ -261,8 +269,8 @@ export class TrackingSyncAudit {
   }
 
   observeFetch<T>(operation: () => Promise<T>): Promise<T> {
-    return withTrackingAttempt(this.attemptId, () => observeTrackingHealth(this.#healthSamples, operation), this.#signal, this.#step,
-      this.#lookup, this.#browserCall);
+    return withTrackingAttempt(this.attemptId, () => observeTrackingHealth(this.#healthSamples, () => withLookupVerdicts(operation)),
+      this.#signal, this.#step, this.#lookup, this.#browserCall);
   }
 
   /**
@@ -300,9 +308,13 @@ export class TrackingSyncAudit {
     return this.#browser;
   }
 
-  /** Whether the check's lookups asked this carrier or provider and it answered that it holds no history for the number. */
+  /**
+   * Whether the check's lookups asked this carrier or provider and it answered that it holds no history for the number:
+   * not an answer Peek set aside, nor another parcel's.
+   */
   answeredWithoutHistory(source: string): boolean {
-    return ['not_found', 'no_history'].includes(this.#lookups.get(source.slice(0, 100)) ?? '');
+    const key = source.slice(0, 100), reason = this.#lookupReasons.get(key);
+    return ['not_found', 'no_history'].includes(this.#lookups.get(key) ?? '') && (reason === 'empty_answer' || !lookupVerdict(reason));
   }
 
   /** What a write of the check saved: the parcel's carrier, and the carrier that confirmed its number, if any. */

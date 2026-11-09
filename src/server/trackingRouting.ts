@@ -1522,7 +1522,8 @@ export class TrackingRouter {
       for (const carrier of new Set(outcomes.map((outcome) => outcome.carrier))) {
         const count = Math.min(20, (state.candidate_probes?.[carrier]?.count ?? 0) + 1);
         const longest = count > 6 && carrier !== guessed ? DAY : 6 * HOUR;
-        const known = outcomes.some((outcome) => outcome.carrier === carrier && outcome.status === 'known');
+        // Known only on a recent answer: an older parcel sharing the number (FAN Courier reuses its AWBs) is not this one.
+        const known = outcomes.some((outcome) => outcome.carrier === carrier && settleRecognition([outcome], now()).carrier === carrier);
         state.candidate_probes = { ...state.candidate_probes, [carrier]: {
           count, retry_at: iso(beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
           ...(known ? { known: true as const } : {}),

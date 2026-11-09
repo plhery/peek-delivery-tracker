@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { JsonObject } from './types';
-import { datedObservations, filledPlaceholders, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 
 // New events carry the sync's ISO spelling; stored rows come back from
 // PostgREST with an explicit +00:00 offset. Both name the same instant.
@@ -351,6 +351,40 @@ describe('a wall-clock take-over past when the row was first stored', () => {
     expect(withHeldClocks([pacific], [row], new Map(), held)).toEqual([pacific]);
     expect(withHeldClocks([pacific], [row], new Map([['usps:label-pacific', 'usps:other']]), held)).toEqual([pacific]);
     expect(withHeldClocks([pacific], [], new Map([['usps:label-pacific', 'usps:label-utc']]), held)).toEqual([pacific]);
+  });
+});
+
+describe('a carrier\'s scan that takes over a provider\'s row past when the row was first stored', () => {
+  // ParcelsApp gave USPS's label at its UTC instant; USPS's own label row, read on the facility's clock, has its wall clock.
+  const description = 'Shipping Label Created, USPS Awaiting Item';
+  const location = 'EXAMPLE CITY, TX 75000';
+  const copy = { provider_event_id: 'unknown:label', occurred_at: '2026-11-08T15:50:00+00:00', stage: 'registered', description, location,
+    raw_data: { universal_provider: 'ParcelsApp', time: '2026-11-08T15:50:00.000Z' }, created_at: '2026-11-08T21:04:00Z' };
+  const own = { package_id: 'package-1', provider_event_id: 'usps:label', occurred_at: '2026-11-08T21:50:00.000Z', stage: 'registered',
+    description, location, raw_data: { time: '2026-11-08T15:50:00-06:00', local_time: '2026-11-08T15:50:00', time_zone_basis: 'carrier' } };
+  const takeOver = (stored: JsonObject) => {
+    const shared = sharedScans([own], [stored]);
+    return { reused: shared.reused, persisted: withHeldClocks([own], [stored], shared.reused, heldPastFirstStored([own], [stored], shared.reused)) };
+  };
+
+  it('keeps the row\'s time', () => {
+    const { reused, persisted } = takeOver(copy);
+    expect(pairs(reused)).toEqual([['usps:label', 'unknown:label']]);
+    expect(persisted).toEqual([{ ...own, occurred_at: '2026-11-08T15:50:00Z', raw_data: { time: '2026-11-08T15:50:00.000Z' } }]);
+  });
+
+  it('moves the row to the scan\'s time stored after it, or when that is unknown', () => {
+    for (const stored of [{ ...copy, created_at: '2026-11-08T21:47:00Z' }, { ...copy, created_at: undefined }]) {
+      const { reused, persisted } = takeOver(stored);
+      expect(reused.size).toBe(1);
+      expect(persisted).toEqual([own]);
+    }
+  });
+
+  it('leaves the pairs held already, and scans that take no stored row over', () => {
+    const held = new Map([['usps:other', 'unknown:other']]);
+    expect(heldPastFirstStored([own], [copy], new Map(), held)).toEqual(held);
+    expect(heldPastFirstStored([own], [], new Map([['usps:label', 'unknown:label']]))).toEqual(new Map());
   });
 });
 

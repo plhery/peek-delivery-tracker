@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { datedAfterCheck, insteadOfAheadLine, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
+import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 
 describe('scans dated after the check', () => {
   const now = new Date('2026-10-30T13:21:00Z');
@@ -8,6 +8,13 @@ describe('scans dated after the check', () => {
     expect(datedAfterCheck('2026-10-30T14:15:00Z', 'UTC', now)).toBe(false);
     expect(datedAfterCheck('2026-10-30T19:16:41+01:00', 'UTC', now)).toBe(true);
     expect(datedAfterCheck('not a time', 'UTC', now)).toBe(false);
+  });
+
+  it('leaves out a stored row the carrier re-dated after it was stored', () => {
+    const row = { time: '2026-10-30T01:01:00-07:00', description: 'Synthetic departure', occurred_at: '2026-10-30T08:01:00Z',
+      created_at: '2026-10-30T06:38:00Z' };
+    expect(storedAheadOfCheck([row])).toEqual(new Set([scanKey(row.time, row.description)]));
+    expect(storedAheadOfCheck([{ ...row, retimed_from: '2026-10-29T23:35:00-07:00' }])).toEqual(new Set());
   });
 
   it('takes the summary from the newest scan before the check, and leaves a summary no future scan gave', () => {

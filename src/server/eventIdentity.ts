@@ -26,9 +26,9 @@
  *   Whatever the policy, a carrier's scan a release reads on another clock,
  *   its wall clock under another offset with the same wording, place and
  *   stage, takes over the row stored under the old offset (`rezonedScans`).
- *   A scan that takes a row over by its wall clock under another offset never
- *   moves the row later than it was first stored: it keeps the row's time
- *   (`withHeldClocks`).
+ *   No scan that takes a row over, by any rule here, moves the row later than
+ *   it was first stored: it keeps the row's time (`heldPastFirstStored`,
+ *   `withHeldClocks`), but for a scan the carrier re-dated (below).
  * - Whatever the policy, a scan the carrier's own answer moved up to three
  *   hours later, or up to an hour earlier, takes over the row of the old time
  *   that the answer no longer lists (`retimedScans`). The row keeps that old
@@ -276,6 +276,30 @@ function pastFirstStored(scan: JsonObject, row: JsonObject): boolean {
   const first = Date.parse(String(row.created_at ?? ''));
   const at = instantOf(scan);
   return Number.isFinite(first) && at > first + FIRST_STORED_SKEW_MS && at > instantOf(row);
+}
+
+/**
+ * `held` with each take-over in `reused` whose scan is past when its row was first stored
+ * (`pastFirstStored`), whichever rule matched them: nothing is scanned after Peek stored it, so the
+ * scan's clock is the misread one and the row keeps its time (ParcelsApp's USPS label at its UTC
+ * instant, which USPS's own label row read on the facility's clock would move later). The take-overs
+ * of a carrier re-dating its scan (`retimedScans`) are left out of `reused`: they move on purpose.
+ */
+export function heldPastFirstStored(
+  events: readonly JsonObject[],
+  stored: readonly JsonObject[],
+  reused: ReadonlyMap<string, string>,
+  held: ReadonlyMap<string, string> = new Map(),
+): Map<string, string> {
+  const scans = new Map(events.map((event) => [identity(event), event]));
+  const rows = new Map(stored.map((row) => [identity(row), row]));
+  const all = new Map(held);
+  for (const [id, saved] of reused) {
+    const scan = scans.get(id);
+    const row = rows.get(saved);
+    if (!all.has(id) && scan && row && pastFirstStored(scan, row)) all.set(id, saved);
+  }
+  return all;
 }
 
 /** The raw data keys that hold a row's clock, which the stored identities carry (`withHeldClocks`). */

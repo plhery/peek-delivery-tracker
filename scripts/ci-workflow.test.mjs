@@ -108,7 +108,9 @@ it('hands a tested commit on main to the Deploy workflow, which alone deploys', 
   }
   assert.match(handoff, /github\.ref == 'refs\/heads\/main'/);
   assert.match(handoff, /\n {4}permissions:\n {6}contents: read\n {6}actions: write\n {4}steps:/);
-  assert.match(handoff, /gh workflow run deploy\.yml --repo "\$GITHUB_REPOSITORY" --ref main -f commit="\$GITHUB_SHA"/);
+  assert.match(handoff, /gh workflow run deploy\.yml --repo "\$GITHUB_REPOSITORY" --ref main -f commit="\$GITHUB_SHA" && break/);
+  // A dispatch GitHub refuses for a moment is asked again, twice, before the job fails.
+  assert.match(handoff, /for attempt in 1 2 3; do[\s\S]*exit 1[\s\S]*sleep/);
   // A re-run hands its commit over even once main has moved on: the gate stands it down when a newer
   // commit has been handed over, and otherwise deploys web changes no later push would deploy.
   assert.doesNotMatch(handoff, /GITHUB_RUN_ATTEMPT|exit 0/);

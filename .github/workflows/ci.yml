@@ -236,7 +236,13 @@ jobs:
       # commit has been handed over, and deploys it when the commits after it handed nothing over
       # (documentation, native or SQL changes, or failed runs), which would otherwise leave its
       # web changes out of production.
+      # GitHub's API sometimes refuses a dispatch for a moment: ask three times before failing.
       - name: Hand the commit to the Deploy workflow
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main -f commit="$GITHUB_SHA"
+        run: |
+          for attempt in 1 2 3; do
+            gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main -f commit="$GITHUB_SHA" && break
+            if [ "$attempt" = 3 ]; then exit 1; fi
+            sleep $((attempt * 20))
+          done

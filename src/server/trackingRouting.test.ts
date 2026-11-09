@@ -1185,6 +1185,13 @@ describe('persistent tracking routing', () => {
       const again = await check(new Date('2026-09-10T13:30:00Z'), waiting.routing);
       expect(again.asked).toEqual(['brt']);
       expect(again.routing.likely_carrier).toEqual(first.routing.likely_carrier);
+      // One that knows only an older parcel with the number (FAN Courier reuses its AWBs) has not answered for this one.
+      const older = await check(new Date('2026-09-10T16:00:00Z'), again.routing, (run) => {
+        run.recognize.mockResolvedValue({ known: true, lastActivityAt: '2026-05-01T08:00:00Z' });
+      });
+      expect(older.asked).toEqual(['brt']);
+      expect((older.routing.candidate_probes as JsonObject).brt).not.toHaveProperty('known');
+      expect(older.routing.likely_carrier).toEqual(first.routing.likely_carrier);
       // A carrier that says it knows the number, even with no more than a pre-advice, is more than likely.
       const known = await check(new Date('2026-09-10T16:00:00Z'), again.routing, (run) => {
         run.recognize.mockImplementation(knows('brt'));

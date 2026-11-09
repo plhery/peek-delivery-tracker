@@ -102,9 +102,13 @@ export function insteadOfAheadLine(line: unknown, stored: readonly JsonObject[],
     .sort((left, right) => Date.parse(String(right.occurred_at)) - Date.parse(String(left.occurred_at)))[0] ?? null;
 }
 
-/** The stored rows dated over an hour after they were first stored, by `scanKey`. */
+/**
+ * The stored rows dated over an hour after they were first stored, by `scanKey`. Not a row a later
+ * scan moved on purpose (`retimed_from`, a carrier re-dating its scan, see eventIdentity.ts): its
+ * clock was read right, the carrier gave it a later time.
+ */
 export function storedAheadOfCheck(stored: readonly JsonObject[]): Set<string> {
-  return new Set(stored.filter((row) => datedAfterCheck(row.occurred_at, 'UTC', new Date(String(row.created_at))))
+  return new Set(stored.filter((row) => !row.retimed_from && datedAfterCheck(row.occurred_at, 'UTC', new Date(String(row.created_at))))
     .map((row) => scanKey(row.time, row.description)));
 }
 

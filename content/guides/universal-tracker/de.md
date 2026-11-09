@@ -28,7 +28,7 @@ Fang mit dem kostenlosen Angebot deiner Post an:
 | --- | --- | --- |
 | Deutschland | DHL Paketankündigung | Mit einem kostenlosen DHL Kundenkonto kündigt DHL dir deine DHL-Pakete automatisch per E-Mail an, sobald sie im Paketzentrum sind, mit dem voraussichtlichen Zustelltag. In der Post & DHL App kommt die Ankündigung auch als Push-Benachrichtigung |
 | Österreich | Post App, „Meine Sendungen“ im Post Account | Die App sammelt alle Lieferungen in einer Übersicht und meldet Statusänderungen per Push. Die e-Benachrichtigung kommt, wenn der Absender Versanddaten übermittelt hat, die zu deinem Post Account passen. Wurde das Paket von einer Privatperson, in einer Postfiliale oder bei einem Post Partner aufgegeben, fehlen diese Daten meist, außer bei einer Paketmarke |
-| Schweiz | „Meine Sendungen“ im Kundenportal „Meine Post“ | Kostenlose Infos zu allen Sendungen an die Adresse in deinem Kundenkonto, per E-Mail und Push in der Post-App, auf Wunsch per SMS. In immer mehr Gebieten meist mit einem Zeitfenster von 40 bis 90 Minuten |
+| Schweiz | „Meine Sendungen“ im Kundenportal „Meine Post“ | Kostenlose Infos zu allen Sendungen an die Adresse in deinem Kundenkonto, per E-Mail und Push in der Post-App, auf Wunsch per SMS. In immer mehr Gebieten meist mit einem Zeitfenster von 40 bis 120 Minuten |
 
 Ähnliche Dienste von [DPD](carrier:dpd-de) und [Hermes](carrier:hermes-de) stellt [Sendungsnummer finden](guide:find-tracking-number) vor.
 
@@ -149,7 +149,7 @@ Ja, und die Sendungsnummer darin beweist nichts. Die Schweizerische Post warnt: 
 - [Österreichische Post: Post App](https://www.post.at/p/c/postapp) – alle Lieferungen in einer Übersicht
 - [App Store Österreich: Post – Paket Tracking App](https://apps.apple.com/at/app/post-paket-tracking-app/id1520160912) – Push-Benachrichtigungen bei Statusänderungen
 - [Österreichische Post: Hilfe Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Meine Sendungen, Versanddaten, Paketmarke
-- [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Kundenkonto, E-Mail, Push, SMS, Zeitfenster von 40 bis 90 Minuten
+- [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Kundenkonto, E-Mail, Push, SMS, Zeitfenster von 40 bis 120 Minuten
 - [Gmail-Hilfe: Paketverfolgung in Gmail](https://support.google.com/mail/answer/13073650?hl=de) – nur teilnehmende Paketdienste in den USA, smarte Funktionen
 - [Gmail-Hilfe: Smarte Funktionen und Einstellungen](https://support.google.com/mail/answer/15604322?hl=de) – im EWR und in der Schweiz standardmäßig deaktiviert
 - [Apple Support: Bestellungen und Käufe in Apple Wallet verfolgen](https://support.apple.com/de-de/105065) – teilnehmende Apps und Websites, Daten vom Händler

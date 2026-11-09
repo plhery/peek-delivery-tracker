@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-09
 ---
 
-En España, MediaMarkt (mediamarkt.es) envía los paquetes con Paack, SEUR, Correos, TIPSA, InPost, Method, Ader o Citylogin. Cuando el pedido sale del almacén, te llega un correo para seguir el envío en la web del transportista, y el estado del pedido también está en «Mi cuenta». Si lo recoges en tienda, no hay número de seguimiento: te avisan por correo o SMS cuando está listo. Lo que venden otros vendedores del marketplace lo envía el propio vendedor, con sus condiciones.
+En España, MediaMarkt (mediamarkt.es) envía los paquetes con Paack, SEUR, Correos, TIPSA, [InPost](carrier:inpost), Method, Ader o Citylogin. Cuando el pedido sale del almacén, te llega un correo para seguir el envío en la web del transportista, y el estado del pedido también está en «Mi cuenta». Si lo recoges en tienda, no hay número de seguimiento: te avisan por correo o SMS cuando está listo. Lo que venden otros vendedores del marketplace lo envía el propio vendedor, con sus condiciones.
 
 ## ¿Qué transportista entrega mi pedido de MediaMarkt?
 

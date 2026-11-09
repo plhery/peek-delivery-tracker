@@ -124,7 +124,7 @@ Tout ce que le transporteur n'a pas publié. ParcelsApp le dit sans détour : il
 - bpost prévient qu'elle reçoit parfois le code-barres de l'expéditeur avec du retard : en attendant, My bpost ne reconnaît pas le colis.
 - Parcel dit avoir jusqu'à 90 minutes de retard sur le site du transporteur, 45 en moyenne.
 
-Le vrai « temps réel » vient du transporteur : dans de plus en plus de régions, La Poste suisse donne aux clients de « Mes envois » une plage horaire de 40 à 90 minutes, puis le trajet du colis en direct pendant les dernières minutes. Le cadre de suivi de [Quickpac](carrier:quickpac) propose parfois une « Livraison en direct de l'envoi ».
+Le vrai « temps réel » vient du transporteur : dans de plus en plus de régions, La Poste suisse donne aux clients de « Mes envois » une plage horaire de 40 à 120 minutes, puis le trajet du colis en direct pendant les dernières minutes. Le cadre de suivi de [Quickpac](carrier:quickpac) propose parfois une « Livraison en direct de l'envoi ».
 
 **Les transporteurs peuvent aussi fermer la porte.** Depuis le 1er avril 2026, la poste américaine (USPS) fait payer l'accès à ses données de suivi aux services qui n'expédient pas le colis, et 17TRACK prévient que les recherches USPS non vérifiées seront ralenties, facturées ou bloquées. L'app Deliveries, elle, n'affiche plus La Poste suisse que dans une vue web. Si un numéro n'affiche presque rien, va voir directement sur le site du transporteur.
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-07
 ---
 
-Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Con la consegna in giornata Amazon porta i pacchi fino alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-90 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
+Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Con la consegna in giornata Amazon porta i pacchi fino alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-120 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
 
 ## Fino a che ora consegna il corriere?
 
@@ -59,7 +59,7 @@ Ti serve la fascia oraria che il corriere ricava dal giro del furgone. Non la sc
 
 | Corriere | Cosa ti dice | Quando |
 | --- | --- | --- |
-| La Posta | Una fascia di 40-90 minuti, poi il percorso del pacco in tempo reale negli ultimi minuti | Il giorno della consegna, in sempre più zone della Svizzera |
+| La Posta | Una fascia di 40-120 minuti, poi il percorso del pacco in tempo reale negli ultimi minuti | Il giorno della consegna, in sempre più zone della Svizzera |
 | La Posta | Un avviso del giorno di consegna | Il giorno prima, via SMS, e-mail o Post-App: per PostPac Priority di regola tra le 18.00 e le 22.00 |
 | BRT | Data e fascia oraria, che puoi cambiare con il BRTcode | Se la spedizione lo consente |
 | GLS | Aggiornamenti e fino a sei opzioni di consegna, con FlexDeliveryService | Via e-mail o SMS, se il mittente ha attivato il servizio |
@@ -135,7 +135,7 @@ Attenzione: un locker che apri a ogni ora viene riempito solo nei giorni in cui 
 - [La Posta: Invio singolo](https://www.post.ch/it/ricezione/gestire-un-invio/invio-singolo) – sabato CHF 3.80, recapito mattutino e serale, prezzi prima del primo tentativo
 - [La Posta: Invito di ritiro](https://www.post.ch/fr/reception/invitation-a-retirer) – réexpédition gratis solo mentre il pacco è in viaggio, CHF 8.00 dal lunedì al venerdì e CHF 15.00 il sabato o al mattino dopo l'avviso, secondo recapito sabato CHF 7.00
 - [La Posta: Gestione permanente](https://www.post.ch/it/ricezione/gestire-un-invio/gestione-permanente) – sabato per tutti i pacchi, CHF 20.00 e 40.00
-- [La Posta: Monitorare gli invii](https://www.post.ch/it/ricezione/monitorare-gli-invii) – fascia di 40-90 minuti, tempo reale negli ultimi minuti
+- [La Posta: Monitorare gli invii](https://www.post.ch/it/ricezione/monitorare-gli-invii) – fascia di 40-120 minuti, tempo reale negli ultimi minuti
 - [La Posta: Aiuto e contatto, Ricezione](https://www.post.ch/it/aiuto-e-contatto/ricezione) – avviso il giorno prima, modifiche fino a mezzanotte, ricerca dopo due giorni
 - [La Posta: PostPac Priority](https://www.post.ch/it/spedire-pacchi/pacchi-svizzera/postpac-priority) – giorno feriale successivo, recapito il sabato +3.80, niente pacchi la domenica e i festivi
 - [La Posta: PostPac Economy](https://www.post.ch/it/spedire-pacchi/pacchi-svizzera/postpac-economy) – niente pacchi il sabato, la domenica e i festivi, mercoledì dopo un sabato

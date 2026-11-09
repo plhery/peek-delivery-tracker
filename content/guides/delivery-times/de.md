@@ -64,7 +64,7 @@ Das Zeitfenster ist die Spanne, in der der Paketdienst bei dir erwartet wird, be
 | DHL | 90 Minuten, oft ca. 15 Minuten vorher noch eine Nachricht | Am Liefertag in der Live-Sendungsverfolgung; mit Kundenkonto morgens per E-Mail oder Push |
 | DPD | 2 Stunden, kurz vorher auf 30 Minuten genau | Am Liefertag im Live-Tracking |
 | Hermes | 2 bis 4 Stunden, für über 90 Prozent höchstens 2; am Liefertag teils nur 30 Minuten | In der Regel am Vortag in der Sendungsverfolgung |
-| Schweizerische Post | Meist 40 bis 90 Minuten | Am Liefertag in „Meine Sendungen“, in immer mehr Gebieten |
+| Schweizerische Post | Meist 40 bis 120 Minuten | Am Liefertag in „Meine Sendungen“, in immer mehr Gebieten |
 | Österreichische Post, GLS (AT) | Keins | GLS: Die genaue Uhrzeit kannst du nicht bestimmen |
 
 Ein Zeitfenster ist eine Schätzung. DHL zeigt seins nur, wenn es mit hoher Wahrscheinlichkeit eingehalten wird, und gerade in Städten nicht immer. Hermes nennt sein Zeitfenster „unverbindlich“, und bei der Schweizerischen Post ist das Zeitfenster noch in der Testphase (Label „early“) und gilt nicht für alle Pakete. Bei Hermes zeigt das Live-Tracking vielen Empfängern ab einer Stunde vor dem Zeitfenster, wie viele Stopps der Zusteller noch vor sich hat.
@@ -146,7 +146,7 @@ Ein Haken bleibt: Eine Station, die du jederzeit öffnen kannst, wird nur an Zus
 - [Schweizerische Post: Einmalig steuern](https://www.post.ch/de/empfangen/sendung-steuern/einmalig-steuern) – Samstag, Früh- und Abendzustellung, Preise, Umleiten, Mitternacht
 - [Schweizerische Post: Invitation à retirer (FR)](https://www.post.ch/fr/reception/invitation-a-retirer) – Umleiten nach Benachrichtigung CHF 8.00, Samstag oder früh CHF 15.00
 - [Schweizerische Post: Dauerhaft steuern](https://www.post.ch/de/empfangen/sendung-steuern/dauerhaft-steuern) – Samstag CHF 20.– und CHF 40.–
-- [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – 40 bis 90 Minuten, early-Label
+- [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – 40 bis 120 Minuten, early-Label
 - [Schweizerische Post: Hilfe zum Empfangen](https://www.post.ch/de/hilfe-und-kontakt/empfangen) – Benachrichtigung 18 bis 22 Uhr, Mitternacht, Kundendienst
 - [Schweizerische Post: My Post 24](https://www.post.ch/de/empfangen/empfangsorte/pickpost-my-post-24/my-post-24) – rund um die Uhr, keine Pakete anderer Paketdienste
 :::

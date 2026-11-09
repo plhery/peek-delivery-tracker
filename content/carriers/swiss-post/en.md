@@ -42,7 +42,7 @@ post.ch prints each scan in the language you view it in (English, German, French
 
 ## Swiss Post delivery failed: collection notes and pickup
 
-The day before delivery, Swiss Post sends a notice by SMS, email or Post-App push. With "My consignments" you generally get a 40 to 90 minute time slot.
+The day before delivery, Swiss Post sends a notice by SMS, email or Post-App push. With "My consignments" you generally get a 40 to 120 minute time slot.
 
 **Missed it?** You get a collection note. Swiss Post says:
 

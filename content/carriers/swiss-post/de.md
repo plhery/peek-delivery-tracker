@@ -46,7 +46,7 @@ Auf Englisch führt `Registered for collection` in die Irre: Das klingt nach Pap
 
 ## Zustellung fehlgeschlagen: Abholungseinladung und Abholung
 
-**Vor der Zustellung.** Am Vortag schickt dir die Post eine Benachrichtigung per SMS, E-Mail oder Push-Nachricht der Post-App, bei PostPac Priority in der Regel zwischen 18 und 22 Uhr. Mit dem Kundenlogin „Meine Sendungen“ bekommst du laut Post in der Regel ein Zeitfenster von 40 bis 90 Minuten. Kleinere Pakete, die in deinen Briefkasten passen, landen dort.
+**Vor der Zustellung.** Am Vortag schickt dir die Post eine Benachrichtigung per SMS, E-Mail oder Push-Nachricht der Post-App, bei PostPac Priority in der Regel zwischen 18 und 22 Uhr. Mit dem Kundenlogin „Meine Sendungen“ bekommst du laut Post in der Regel ein Zeitfenster von 40 bis 120 Minuten. Kleinere Pakete, die in deinen Briefkasten passen, landen dort.
 
 Ist das Paket unterwegs, kannst du es mit „Meine Sendungen“ kostenlos umleiten: an einen My Post 24-Automaten, einen PickPost-Zugangspunkt oder eine andere Adresse in der Schweiz oder in Liechtenstein. Einen anderen Wochentag wählst du kostenlos, den Samstag für CHF 3.80. Kostenlos sind auch ein Ablageort, den du angibst, oder die Zustellung an Nachbarn im selben oder einem angrenzenden Haus. Zeit und Ort der Zustellung kannst du bis Mitternacht ändern. Spätere Aufträge garantiert die Post nicht.
 

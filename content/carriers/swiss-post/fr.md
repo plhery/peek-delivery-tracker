@@ -42,7 +42,7 @@ post.ch affiche chaque étape dans la langue du site : en français, tu vois les
 
 ## Livraison, invitation à retirer et retrait du colis
 
-La veille de la livraison, La Poste t'envoie un avis par SMS, e-mail ou notification de la Post-App, si tu suis tes envois dans ton espace client sur post.ch. Dans cet espace client, tu reçois en général un créneau de 40 à 90 minutes.
+La veille de la livraison, La Poste t'envoie un avis par SMS, e-mail ou notification de la Post-App, si tu suis tes envois dans ton espace client sur post.ch. Dans cet espace client, tu reçois en général un créneau de 40 à 120 minutes.
 
 **Livreur manqué ?** Tu reçois une invitation à retirer un envoi. Selon La Poste :
 
@@ -117,7 +117,7 @@ Pour un dommage, signale-le en ligne ou dans la Post-App dans les huit jours sui
 - [La Poste : Dédouanement à l'importation](https://www.post.ch/fr/reception/dedouanement-a-l-importation) – frais d'importation, paiement
 - [La Poste : Aide et contact](https://www.post.ch/fr/aide-et-contact) – téléphone, tarif, horaires, chat
 - [La Poste : Reconnaître le phishing et les escroqueries](https://site.post.ch/fr/notre-profil/securite/hameconnage-et-fraude) – faux messages
-- [Swiss Post: Track consignments](https://www.post.ch/en/receiving-mail/track-consignments) – créneau de 40 à 90 minutes
+- [Swiss Post: Track consignments](https://www.post.ch/en/receiving-mail/track-consignments) – créneau de 40 à 120 minutes
 - [Swiss Post: Manage and receive parcels](https://www.post.ch/en/receiving-mail/manage-consignment/manage-one-off) – réacheminement, jour, samedi, dépôt, petits colis
 - [Swiss Post: Questions and answers on receiving](https://www.post.ch/en/help-and-contact/receiving-mail) – avis la veille, colis livré mais pas reçu
 - [Swiss Post: Help and contact](https://www.post.ch/en/help-and-contact) – adresse postale

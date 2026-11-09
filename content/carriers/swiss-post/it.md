@@ -44,7 +44,7 @@ L'inglese `Registered for collection` sembra una formalità, ma vuol dire conseg
 
 ## Invito di ritiro, consegna mancata e ritiro del pacco
 
-Il giorno prima della consegna la Posta ti avvisa via SMS, e-mail o notifica push nella Post-App. Con «I miei invii» ricevi di solito una fascia oraria da 40 a 90 minuti.
+Il giorno prima della consegna la Posta ti avvisa via SMS, e-mail o notifica push nella Post-App. Con «I miei invii» ricevi di solito una fascia oraria da 40 a 120 minuti.
 
 **Non eri a casa?** Ricevi un invito di ritiro. Secondo la Posta:
 

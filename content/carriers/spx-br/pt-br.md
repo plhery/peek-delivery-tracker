@@ -3,7 +3,7 @@ title: Rastreio SPX Express: pedidos da Shopee, status e prazos
 description: Rastreie seu pedido da Shopee pela SPX Express: onde achar o código de rastreio BR, o que cada status significa, Agência Shopee e reembolso.
 slug: rastreio-spx-express
 published: 2026-11-01
-updated: 2026-11-04
+updated: 2026-11-09
 ---
 
 A SPX Express (Shopee Xpress) é a logística própria da Shopee no Brasil. Ela coleta os pacotes com os vendedores e entrega na sua casa ou em uma Agência Shopee, um comércio parceiro onde você retira o pedido. A Shopee chama o serviço de Entrega Padrão e orienta a acompanhar tudo pelo app, onde ficam o pedido, a data prevista e o eventual reembolso. O site spx.com.br também tem uma busca de rastreio; ou cole o código no campo acima.
@@ -43,6 +43,7 @@ O rastreio da SPX vem em português; alguns status terminam com o local depois d
 | `Pedido entregue` | A SPX registrou a entrega. | "Entregue" |
 | `Pedido será devolvido ao vendedor` | O pacote vai voltar para o vendedor. | "Devolvida ao remetente" |
 | `Pedido devolvido` | O pacote voltou para o vendedor. | "Devolvida ao remetente" |
+| `Pedido descartado` | Depois de uma entrega sem sucesso, o pacote foi descartado: não foi entregue nem devolvido ao vendedor. Fale com a Shopee. | "Precisa de atenção" |
 
 Alguns pacotes recebem, em vez disso, status da frota de entrega da SPX, que começam com `Seu pacote`, entre eles `Seu pacote foi recebido pelo centro de triagem`, `Seu pacote foi recebido pelo centro de distribuição` (o centro que entrega na sua região), `Seu pacote está sendo entregue pelo entregador` e `Seu pacote foi entregue`. O Peek mostra as mesmas etapas para eles, como "Saiu para entrega".
 

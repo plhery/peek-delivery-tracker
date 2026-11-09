@@ -73,7 +73,7 @@ Meistens, ja:
 - **Hermes:** Bei `Die Sendung befindet sich in der Zustellung` ist der Bote unterwegs, [Montag bis Samstag zwischen 8 und 20 Uhr](guide:delivery-times).
 - **DPD:** Mit Predict siehst du am Zustelltag die genaue Lieferzeit.
 - **Österreichische Post:** Bei `Sendung in Zustellung` kommt die Sendung voraussichtlich heute.
-- **Schweizerische Post:** Bei `Verlad in Zustellfahrzeug` ist das Paket in Zustellung. Mit „Meine Sendungen“ bekommst du in immer mehr Gebieten der Schweiz am Liefertag Nachrichten und meist ein Zeitfenster von 40 bis 90 Minuten.
+- **Schweizerische Post:** Bei `Verlad in Zustellfahrzeug` ist das Paket in Zustellung. Mit „Meine Sendungen“ bekommst du in immer mehr Gebieten der Schweiz am Liefertag Nachrichten und meist ein Zeitfenster von 40 bis 120 Minuten.
 
 Zwei Stolperfallen: `Sendung in Verteilung` heißt bei der Österreichischen Post noch nicht heute, sondern im Laufe der nächsten Werktage. Und taucht bei DHL der Status mit dem Zustellfahrzeug mehrmals auf, konnte der Zusteller seine Tour nicht beenden, etwa wegen einer Straßensperrung oder eines Unfalls: Dann kann es 1 bis 2 Tage länger dauern.
 
@@ -151,7 +151,7 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [Schweizerische Post: Ereignisse „Sendungen verfolgen“](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Status, Zoll, Fehlleitung, Rücksendegründe
 - [Schweizerische Post: Statustexte der Sendungsverfolgung](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – Verlad in Zustellfahrzeug
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – 7 und 15 Tage, Verlängerung, Preise
-- [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Zeitfenster von 40 bis 90 Minuten
+- [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Zeitfenster von 40 bis 120 Minuten
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage bei vollständigen Angaben
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – UPS-Scans, die Peek liest: Etikett erstellt, Access Point, „Left at“, „Exception“
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – FedEx-Scans, die Peek liest: Sendungsdaten an FedEx übermittelt

@@ -124,7 +124,7 @@ struct CarrierDefinition: Codable, Sendable {
         var recognitionRank: Int? = nil
         /// The numbers that recognition can answer; the carrier's rules only suggest it for others.
         var recognitionPattern: String? = nil
-        /// Recognition asks the carrier only for a country hint among its countries.
+        /// Recognition asks the carrier about a bare run of digits only for a country hint among its countries.
         var recognitionServedCountriesOnly: Bool? = nil
         var browserRecognitionRank: Int? = nil
     }
@@ -583,9 +583,9 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// The carriers the detect route asks about an ambiguous number, best first:
     /// number evidence, then a passing check digit, then the catalog's recognition
     /// rank. A carrier whose recognition names the numbers it answers is asked only
-    /// about those, and one asked only for its own countries is not asked: this build
-    /// gives no country hint. Mirrors `recognitionAskedCarriers`; the detection golden
-    /// file keeps them in step.
+    /// about those, and one asked only for its own countries is not asked about a bare
+    /// run of digits: this build gives no country hint. Mirrors `recognitionAskedCarriers`;
+    /// the detection golden file keeps them in step.
     func recognitionCandidates(for raw: String, browser: Bool = false) -> [CarrierID] {
         let match = detect(raw)
         let unknownPostalCarrier = match.carrier == .internationalPost
@@ -616,11 +616,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         // A preferred carrier that cannot be asked (DPD France) keeps its brand's
         // other networks out: DPD's guest API also answers for DPD France parcels.
         let shadowed = Set(preferred.filter { rank($0) == nil }.compactMap(Self.networkBrand))
+        // Coordinadora's eleven digits are GLS's abroad; Paquetexpress's guías, letters and digits, are its own.
+        let bareRun = !number.isEmpty && number.allSatisfy { $0.isASCII && $0.isNumber }
         let eligible = candidates.filter { carrier in
             guard let definition = definitions[carrier], rank(carrier) != nil,
                   definition.tracking.mode == "automatic", definition.tracking.adapter != "universal" else { return false }
             if !browser, let pattern = definition.tracking.recognitionPattern, !Self.matches(number, pattern: pattern) { return false }
-            if !browser, definition.tracking.recognitionServedCountriesOnly == true { return false }
+            if !browser, bareRun, definition.tracking.recognitionServedCountriesOnly == true { return false }
             if browser && requirements(for: carrier, trackingNumber: raw).contains(where: { $0.optional != true }) { return false }
             return Self.networkBrand(carrier).map { !shadowed.contains($0) } ?? true
         }

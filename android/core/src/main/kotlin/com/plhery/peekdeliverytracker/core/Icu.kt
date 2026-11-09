@@ -6,6 +6,9 @@ import java.math.RoundingMode
 import java.net.IDN
 import java.text.Collator
 import java.text.NumberFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Currency
 import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
@@ -34,6 +37,60 @@ object Icu {
 
     /** Lists of names, which Foundation's `ListFormatter` joins with ICU. */
     val lists: ListJoiner = packages.firstNotNullOfOrNull { IcuLists.from("$it.text") } ?: ListJoiner { names, _ -> names.joinToString(", ") }
+
+    /** Time zones' names, which Foundation's `TimeZone.localizedName(for:locale:)` reads from ICU. */
+    val zoneNames: ZoneNamer = packages.firstNotNullOfOrNull { IcuZoneNames.from(it) } ?: JdkZoneNames
+}
+
+/**
+ * A time zone's name for the whole year in a locale at `epochMillis` ("Central European Time", "Mitteleuropäische
+ * Zeit"), not its summer or winter name: the "vvvv" field, Foundation's `.generic`, the web's `longGeneric`. Null for
+ * a zone ICU doesn't know.
+ */
+fun interface ZoneNamer {
+    fun genericName(zoneId: String, locale: Locale, epochMillis: Long): String?
+}
+
+/**
+ * ICU's `TimeZoneFormat` with its `GENERIC_LONG` style (android.icu.text, com.ibm.icu.text), found by name. Not
+ * `TimeZone.getDisplayName(false, LONG_GENERIC, …)`: Android's ICU answers that with the standard name ("Central
+ * European Standard Time").
+ */
+internal class IcuZoneNames private constructor(packageName: String) : ZoneNamer {
+    private val zoneClass = Class.forName("$packageName.util.TimeZone")
+    private val formatClass = Class.forName("$packageName.text.TimeZoneFormat")
+    private val styleClass = Class.forName("$packageName.text.TimeZoneFormat\$Style")
+    private val getTimeZone = zoneClass.getMethod("getTimeZone", String::class.java)
+    private val getId = zoneClass.getMethod("getID")
+    private val getInstance = formatClass.getMethod("getInstance", Locale::class.java)
+    private val format = formatClass.getMethod("format", styleClass, zoneClass, Long::class.javaPrimitiveType)
+    private val genericLong = styleClass.getField("GENERIC_LONG").get(null)
+
+    override fun genericName(zoneId: String, locale: Locale, epochMillis: Long): String? {
+        val zone = getTimeZone.invoke(null, zoneId)
+        // ICU answers an id it doesn't know with its unknown zone.
+        if (getId.invoke(zone) == "Etc/Unknown") return null
+        // ICU keeps one frozen format for each locale, which threads share.
+        val formatter = getInstance.invoke(null, locale)
+        return (format.invoke(formatter, genericLong, zone, epochMillis) as String?)?.takeIf { it.isNotEmpty() }
+    }
+
+    companion object {
+        fun from(packageName: String): IcuZoneNames? = try {
+            IcuZoneNames(packageName)
+        } catch (_: ReflectiveOperationException) {
+            null
+        } catch (_: LinkageError) {
+            null
+        }
+    }
+}
+
+/** java.time's "vvvv"; null where it has no name but the id. */
+private object JdkZoneNames : ZoneNamer {
+    override fun genericName(zoneId: String, locale: Locale, epochMillis: Long): String? = runCatching {
+        DateTimeFormatter.ofPattern("vvvv", locale).format(Instant.ofEpochMilli(epochMillis).atZone(ZoneId.of(zoneId)))
+    }.getOrNull()?.takeIf { it.isNotEmpty() && it != zoneId }
 }
 
 /** ICU's `ListFormatter`: "A, B and C" in a locale's words. */

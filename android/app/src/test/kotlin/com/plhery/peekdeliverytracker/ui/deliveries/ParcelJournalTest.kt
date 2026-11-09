@@ -33,6 +33,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -227,6 +228,41 @@ class ParcelJournalTest {
         )
         assertEquals(listOf("Tue 20 Oct", "soon"), days())
         assertEquals(listOf("—", "Parcel expected"), rows().last())
+    }
+
+    // The zone the times are in.
+
+    private val zoneLine = "Times are in your time zone: Central European Time."
+
+    @Test
+    fun underTheLastRowALineSaysTheTimesAreThePhonesAndNamesItsZone() {
+        show()
+        val line = compose.onNodeWithTag(JOURNAL_TIME_ZONE).fetchSemanticsNode()
+        assertEquals(listOf(zoneLine), texts(line))
+        assertEquals(secondary, color(zoneLine))
+        val lastRow = compose.onAllNodes(hasTestTag(JOURNAL_ROW)).fetchSemanticsNodes().last()
+        with(compose.density) { assertEquals(22f, (line.boundsInRoot.top - lastRow.boundsInRoot.bottom).toDp().value, 0.5f) }
+        compose.onNodeWithTag(JOURNAL_TOGGLE).performClick()
+        compose.waitForIdle()
+        assertFalse(textExists(zoneLine))
+    }
+
+    @Test
+    fun aJournalWithNoTimeOfDayNamesNoZone() {
+        show(parcel(listOf(scan(1, "2026-10-26T15:00:00Z", "Delivery attempt scheduled", day = "2026-10-27"))))
+        assertEquals(listOf(listOf("Delivery attempt scheduled")), rows())
+        assertFalse(textExists(zoneLine))
+        show(parcel(emptyList()))
+        assertFalse(textExists(zoneLine))
+    }
+
+    @Test
+    fun aPlannedStepAtATimeOfDayNamesTheZoneWithoutAScanThatHasOne() {
+        val planned = PlannedTrackingEvent(description = "Delivery", stage = TrackingStage.Delivered, occurredAt = "2026-10-30T09:00:00Z")
+        show(parcel(emptyList()).copy(plannedEvents = listOf(planned)))
+        assertTrue(textExists(zoneLine))
+        show(parcel(emptyList()).copy(plannedEvents = listOf(planned.copy(day = "2026-10-30"))))
+        assertFalse(textExists(zoneLine))
     }
 
     // The rows.

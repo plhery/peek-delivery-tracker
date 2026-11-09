@@ -68,6 +68,7 @@ import com.plhery.peekdeliverytracker.core.plannedNewestFirst
 import com.plhery.peekdeliverytracker.core.plannedStepLabel
 import com.plhery.peekdeliverytracker.core.plannedWording
 import com.plhery.peekdeliverytracker.core.relayedWordings
+import com.plhery.peekdeliverytracker.core.showsTime
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -79,6 +80,7 @@ import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.time.Instant
+import java.time.ZoneId
 import java.util.UUID
 
 /**
@@ -90,6 +92,9 @@ import java.util.UUID
  * tracked 1 in the secondary grey, 22 under what comes before and 13 over its rows, which stand 18 apart; TalkBack
  * hears the heading as one, as written rather than in capitals. The row of the current scan, or of the scan whose copy it is, has its time in `tint`.
  * The steps the carrier planned and has not confirmed ([PlannedSteps]) come before the days, apart from the scans.
+ * Where a scan or a planned step shows a time of day, a line in caption2 in the opaque secondary grey, 22 under the
+ * last row, says the times are the phone's and names its zone as the app language names it all year
+ * ([Localizer.timeZoneName]).
  */
 @Composable
 internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Modifier) {
@@ -118,7 +123,8 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
         ) {
             Column(Modifier.fillMaxWidth()) {
                 val moment = now()
-                parcel.plannedEvents?.filter { it.isAhead(moment) }?.takeIf { it.isNotEmpty() }?.let { PlannedSteps(it, moment) }
+                val planned = parcel.plannedEvents?.filter { it.isAhead(moment) }.orEmpty()
+                if (planned.isNotEmpty()) PlannedSteps(planned, moment)
                 if (days.isEmpty()) {
                     Text(
                         localizer.text(if (syncing) "timeline.emptySyncing" else "timeline.empty"),
@@ -135,6 +141,19 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                         JournalHeading(day.label, bottom = 13.dp, Modifier.testTag(JOURNAL_DAY))
                     }
                     JournalDayRows(day, tint, currentId, syncing)
+                }
+                // The times are the phone's, wherever the carrier scanned: one quiet line under the history says so.
+                if (entries.any { it.event.showsTime } || planned.any { it.showsTime }) {
+                    val zone = ZoneId.systemDefault()
+                    val zoneName = remember(localizer, language, zone) { localizer.timeZoneName(zone) }
+                    Text(
+                        localizer.text("timeline.timeZone", mapOf("zone" to zoneName)),
+                        Modifier
+                            .padding(top = 22.dp)
+                            .testTag(JOURNAL_TIME_ZONE),
+                        color = colors.secondaryText,
+                        style = type.caption2.sfLines(),
+                    )
                 }
             }
         }
@@ -424,9 +443,13 @@ private const val TOGGLE = 0.2
 /** The time column's width at the Large text size (`@ScaledMetric(relativeTo: .caption2)`). */
 private const val TIME_WIDTH = 38f
 
-/** The test tags of the journal's header, its days' headings, its rows, its planned steps and their rows. */
+/**
+ * The test tags of the journal's header, its days' headings, its rows, its planned steps and their rows, and the line
+ * naming the zone its times are in.
+ */
 const val JOURNAL_TOGGLE = "journal.toggle"
 const val JOURNAL_DAY = "journal.day"
 const val JOURNAL_ROW = "journal.row"
 const val JOURNAL_PLANNED = "journal.planned"
 const val JOURNAL_PLANNED_ROW = "journal.planned.row"
+const val JOURNAL_TIME_ZONE = "journal.timeZone"

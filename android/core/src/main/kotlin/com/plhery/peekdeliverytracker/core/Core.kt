@@ -375,6 +375,13 @@ class Localizer(
         return "${twoDigits(fields.hour)}:${twoDigits(fields.minute)}"
     }
 
+    /**
+     * The zone times are shown in, the device's unless `zone` names another, as the app language names it all year
+     * round ("Central European Time"), not by its summer or winter name; the zone's id where the language has none.
+     */
+    fun timeZoneName(zone: ZoneId = ZoneId.systemDefault(), now: Instant = AppClock.now()): String =
+        Icu.zoneNames.genericName(zone.id, language.locale, now.toEpochMilli()) ?: zone.id.replace('_', ' ')
+
     /** A timestamp's day here, as "yyyy-MM-dd" in en_US_POSIX writes it: the year of the era, of four digits at least. */
     private fun localDay(timestamp: Instant): String =
         fields(timestamp).let { "${it.yearOfEra.toString().padStart(4, '0')}-${twoDigits(it.month)}-${twoDigits(it.dayOfMonth)}" }
@@ -667,11 +674,17 @@ val TrackingEvent.calendarDay: Instant? get() = day?.let(DateParser::deliveryDat
 /** The date to show for the scan: its day when it has no clock time, else its moment. */
 val TrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(occurredAt)
 
+/** Whether the scan shows a time of day, which is the device's. */
+val TrackingEvent.showsTime: Boolean get() = calendarDay == null && DateParser.date(occurredAt) != null
+
 /** The day of a step the carrier dated by its day alone, as a local calendar day. */
 val PlannedTrackingEvent.calendarDay: Instant? get() = day?.let(DateParser::deliveryDate)
 
 /** The date to show for the step: its day when it has no clock time, else its moment. */
 val PlannedTrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(occurredAt)
+
+/** Whether the step shows a time of day, which is the device's. */
+val PlannedTrackingEvent.showsTime: Boolean get() = calendarDay == null && DateParser.date(occurredAt) != null
 
 /** Foundation's `timeIntervalSince`: the seconds from `other` to this instant. */
 internal fun Instant.timeIntervalSince(other: Instant): Double =

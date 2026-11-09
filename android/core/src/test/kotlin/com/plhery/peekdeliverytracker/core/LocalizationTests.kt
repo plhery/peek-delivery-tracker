@@ -2,6 +2,9 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
@@ -13,6 +16,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.time.Instant
 import java.time.ZoneId
+import java.util.UUID
 
 /** LocalizationTests.swift: the app's copy in its ten languages, its dates, counts and places. */
 class LocalizationTests {
@@ -321,6 +325,40 @@ class LocalizationTests {
             )
         }
         assertEquals("1 dzień temu", localizer.text("time.daysAgo", mapOf("count" to 1)))
+    }
+
+    @Test
+    fun theHistoryNamesTheZoneItsTimesAreInByItsNameForTheWholeYear() {
+        val localizer = Localizer(AppLanguage.En)
+        val paris = ZoneId.of("Europe/Paris")
+        assertEquals("Central European Time", localizer.timeZoneName(paris))
+        assertEquals(
+            "Times are in your time zone: Central European Time.",
+            localizer.text("timeline.timeZone", mapOf("zone" to localizer.timeZoneName(paris))),
+        )
+        localizer.language = AppLanguage.De
+        assertEquals("Mitteleuropäische Zeit", localizer.timeZoneName(paris))
+        for (language in AppLanguage.entries) {
+            localizer.language = language
+            val zone = localizer.timeZoneName(paris)
+            val line = localizer.text("timeline.timeZone", mapOf("zone" to zone))
+            assertTrue("$language", zone.isNotEmpty())
+            assertTrue("$language", line.contains(zone))
+            assertFalse("$language", line.contains("{{"))
+        }
+        // A scan the carrier dated by its day alone shows no time to name a zone for.
+        val timed = TrackingEvent(
+            id = UUID.randomUUID(), packageId = UUID.randomUUID(), stage = TrackingStage.InTransit, description = "Update",
+            occurredAt = "2026-09-12T08:42:00Z",
+        )
+        assertTrue(timed.showsTime)
+        assertFalse(timed.copy(day = "2026-09-12").showsTime)
+        assertTrue(PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-09-12T15:00:00Z").showsTime)
+        assertFalse(
+            PlannedTrackingEvent(
+                description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-09-11T22:00:00Z", day = "2026-09-12",
+            ).showsTime,
+        )
     }
 
     /** Polish and Russian whole counts take CLDR's forms; Russian's `one` also counts 21, 31 and 101. */

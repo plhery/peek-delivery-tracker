@@ -40,6 +40,9 @@ fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 .button--primary { background: var(--yellow); color: var(--on-yellow); }
 .button--secondary { background: var(--control); color: var(--ink); }
 .button--danger { background: var(--control); color: var(--ink); }
+/* The iPhone and Android apps' buttons, each in its platform's colour. */
+.button--apple { background: var(--apple); color: var(--on-apple); }
+.button--android { background: var(--android); color: var(--on-android); }
 .button:active:not(:disabled), .text-button:active { scale: .975; }
 .button:disabled { opacity: .48; }
 .text-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; background: transparent; padding: 8px 0; font-weight: 550; transition: scale .18s; }

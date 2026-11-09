@@ -11,6 +11,8 @@
   --blue: #22588a; --blue-soft: #daeafe; --orange: #963e19; --orange-text: #963e19; --orange-soft: #ffddc7;
   --lilac: #654299; --lilac-soft: #e9deff; --rose: #9a3d5c; --rose-soft: #fadde7;
   --ochre: #745300; --ochre-soft: #ffebab;
+  /* The apps' buttons in their platforms' colours: Apple's black, white in the dark, and Android's green. */
+  --apple: #000; --on-apple: #fff; --android: #3ddc84; --on-android: #06311b;
   --shadow: 0 3px 15px rgb(25 35 20 / 4%);
   --sheet-canvas: var(--canvas); --sheet-control: var(--control); --sheet-line: var(--line); --sheet-border: var(--line);
   --sheet-shadow: 0 24px 80px rgb(0 0 0 / 14%); --sheet-rise-shadow: 0 24px 80px rgb(0 0 0 / 14%);
@@ -24,7 +26,7 @@
   --control: #322f28; --line: #433f38; --green: #9be0b5; --green-soft: #142a1d;
   --blue: #9bcbff; --blue-soft: #152636; --orange: #ffb184; --orange-text: #ffb184; --orange-soft: #341f14;
   --lilac: #d1b5ff; --lilac-soft: #272034; --rose: #ffadc8; --rose-soft: #331d27;
-  --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410;
+  --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410; --apple: #fff; --on-apple: #000;
   --shadow: 0 2px 12px rgb(0 0 0 / 45%);
   --sheet-canvas: #191612; --sheet-control: #36322c; --sheet-line: #4a463e; --sheet-border: transparent;
   --sheet-shadow: inset 0 1px 0 rgb(255 244 220 / 9%), 0 24px 64px rgb(0 0 0 / 55%);
@@ -38,7 +40,7 @@
     --control: #322f28; --line: #433f38; --green: #9be0b5; --green-soft: #142a1d;
     --blue: #9bcbff; --blue-soft: #152636; --orange: #ffb184; --orange-text: #ffb184; --orange-soft: #341f14;
     --lilac: #d1b5ff; --lilac-soft: #272034; --rose: #ffadc8; --rose-soft: #331d27;
-    --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410;
+    --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410; --apple: #fff; --on-apple: #000;
     --shadow: 0 2px 12px rgb(0 0 0 / 45%);
     --sheet-canvas: #191612; --sheet-control: #36322c; --sheet-line: #4a463e; --sheet-border: transparent;
     --sheet-shadow: inset 0 1px 0 rgb(255 244 220 / 9%), 0 24px 64px rgb(0 0 0 / 55%);

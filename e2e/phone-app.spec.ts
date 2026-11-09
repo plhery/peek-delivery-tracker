@@ -31,8 +31,8 @@ test('a computer gets the code to scan and both apps', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1, name: 'Get the app' })).toBeVisible();
   await expect(page.getByText('Scan with your phone')).toBeVisible();
   await expect(page.locator('.phone-app__qr img')).toHaveJSProperty('complete', true);
-  await expect(page.getByRole('link', { name: 'Get the iPhone app' })).toHaveAttribute('href', APP_STORE);
-  await expect(page.getByRole('link', { name: 'Get the Android app' })).toHaveAttribute('href', '/android?utm_source=landing-qr');
+  await expect(page.getByRole('link', { name: 'iPhone app' })).toHaveAttribute('href', APP_STORE);
+  await expect(page.getByRole('link', { name: 'Android app' })).toHaveAttribute('href', '/android?utm_source=landing-qr');
 });
 
 test.describe('on an Android phone', () => {

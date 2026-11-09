@@ -7,7 +7,7 @@ import { ANDROID_APP_LINK } from '../../lib/androidTest';
 import { appStoreLink } from '../../lib/appStore';
 import { LANDING_PATH, landingAtRoot } from '../../lib/experience';
 import { usePeekSession } from '../session';
-import { LandingIcon, XLogo } from './glyphs';
+import { AndroidRobotCredit, LandingIcon, XLogo } from './glyphs';
 import { GuidesLink } from './Guides';
 import { AUTHOR_URL, OTHER_SITES, SOURCE_URL } from './links';
 import './Who.css';
@@ -37,7 +37,10 @@ export function Who() {
   </section>;
 }
 
-/** The foot of the page: the name, the guides, the privacy notice, the accessibility page, the iPhone and Android apps, the code, the language, and what else its author makes. */
+/**
+ * The foot of the page: the name, the guides, the privacy notice, the accessibility page, the iPhone and Android apps, the
+ * code, the language, what else its author makes, and the Android robot's credit.
+ */
 export function LandingFooter() {
   const { t, locale } = useI18n();
   const { account } = usePeekSession();
@@ -64,5 +67,7 @@ export function LandingFooter() {
         </span>;
       })}
     </p>
+    {/* The Android app's button above draws Google's robot, whose license asks for this. */}
+    <AndroidRobotCredit className="landing-footer__credit" />
   </footer>;
 }

@@ -26,7 +26,7 @@ export type AndroidTestStep = keyof typeof ANDROID_TEST_LINKS;
 /** The steps' page. */
 export const ANDROID_TEST_PATH = '/android';
 
-/** Where the landing's "Get the Android app" leads: the steps while the test is open, Google Play once it is not. */
+/** Where the landing's "Android app" button leads: the steps while the test is open, Google Play once it is not. */
 export const ANDROID_APP_LINK: string = ANDROID_TEST_OPEN ? ANDROID_TEST_PATH : ANDROID_TEST_LINKS.install;
 
 /** Peek for Android runs on Android 12 and later. */

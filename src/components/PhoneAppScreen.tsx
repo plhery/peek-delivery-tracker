@@ -4,13 +4,12 @@ import { useEffect, useSyncExternalStore } from 'react';
 import { holdsSignIn } from '../auth/savedSignIn';
 import { I18nProvider, LanguageControl, type Locale, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
-import { ANDROID_TEST_OPEN } from '../lib/androidTest';
 import { AppearanceProvider } from '../lib/appearance';
 import { onIPad } from '../lib/appStore';
 import { backOnSite } from '../lib/backOnSite';
 import { phoneAppAndroidLink, phoneAppStoreLink } from '../lib/phoneApp';
 import { useTabTitle } from '../lib/tabTitle';
-import { LandingIcon } from '../peek/landing/glyphs';
+import { AndroidRobotCredit, PlatformLogo } from '../peek/landing/glyphs';
 import { Icon } from './Icon';
 import { PeekMark } from './PeekMark';
 import './PhoneAppScreen.css';
@@ -66,12 +65,12 @@ function PhoneApp({ source }: { source?: string }) {
         <span><strong>{t('landing.more.qr.title')}</strong><span>{t('landing.more.qr.body')}</span></span>
       </div>
       <div className="phone-app__buttons">
-        <a className="button button--secondary" href={appStore} target="_blank" rel="noopener noreferrer"><LandingIcon name="iphone" />{t('landing.more.app')}</a>
-        <a className="button button--secondary" href={phoneAppAndroidLink(source)} onClick={() => trackAction('android-test-open', undefined, 'get-app')}>
-          <LandingIcon name="android" />{t('landing.more.android')}
+        <a className="button button--apple" href={appStore} target="_blank" rel="noopener noreferrer"><PlatformLogo name="apple" />{t('landing.more.app')}</a>
+        <a className="button button--android" href={phoneAppAndroidLink(source)} onClick={() => trackAction('android-test-open', undefined, 'get-app')}>
+          <PlatformLogo name="android" />{t('landing.more.android')}
         </a>
       </div>
-      {ANDROID_TEST_OPEN && <p className="phone-app__android">{t('landing.more.androidSteps')}</p>}
+      <AndroidRobotCredit className="phone-app__credit" />
     </main>
   </div>;
 }

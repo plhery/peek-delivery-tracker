@@ -82,7 +82,7 @@ are virtual names, never real URLs.
   (`android-test`), each step's link followed: the testers' group, Google Play's opt-in and the
   install. Its events say where they come from: `spot` is `parcel` for the parcel page's row,
   `alerts` for its "Notify me", `home` for the home page's banner, `landing` and `footer` for
-  the landing's "Get the Android app" button and footer link, and `get-app` for the button of
+  the landing's "Android app" button and footer link, and `get-app` for the button of
   `/app`'s page (opened only). Google Play counts the testers ([Google Play](google-play/README.md)).
 - **Getting the app** (web): the landing's code to scan leads to `/app?utm_source=landing-qr`,
   which the server answers by the user agent: an iPhone or an iPad that says so goes to the App

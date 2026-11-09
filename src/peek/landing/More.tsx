@@ -4,11 +4,11 @@ import { Seal } from '../../components/Seal';
 import { PeekMark } from '../../components/PeekMark';
 import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
-import { ANDROID_APP_LINK, ANDROID_TEST_OPEN } from '../../lib/androidTest';
+import { ANDROID_APP_LINK } from '../../lib/androidTest';
 import { appStoreLink } from '../../lib/appStore';
 import { DEMO_PATH } from '../../lib/experience';
 import { usePeekSession } from '../session';
-import { LandingIcon } from './glyphs';
+import { PlatformLogo } from './glyphs';
 import { followDemoLink, followInPlace } from './links';
 import { lazyPicture, useNear, useRise } from './useLive';
 import './More.css';
@@ -100,13 +100,12 @@ export function More({ onSignIn, landed }: {
             </button>}
           <a className="button button--secondary" href={DEMO_PATH} onClick={followDemoLink}>{t('landing.more.demo')}</a>
         </div>
-        {/* The two apps side by side, on a row of their own. */}
+        {/* The two apps side by side, on a row of their own, each in its platform's colour. */}
         <div className="landing-more__actions">
-          <a className="button button--secondary" href={appStoreLink('web-more')} target="_blank" rel="noopener noreferrer"><LandingIcon name="iphone" />{t('landing.more.app')}</a>
+          <a className="button button--apple" href={appStoreLink('web-more')} target="_blank" rel="noopener noreferrer"><PlatformLogo name="apple" />{t('landing.more.app')}</a>
           {/* While the Android app is a closed test, the steps lead there: Google Play lets in only the testers' group. */}
-          <a className="button button--secondary" href={ANDROID_APP_LINK} onClick={() => trackAction('android-test-open', undefined, 'landing')}><LandingIcon name="android" />{t('landing.more.android')}</a>
+          <a className="button button--android" href={ANDROID_APP_LINK} onClick={() => trackAction('android-test-open', undefined, 'landing')}><PlatformLogo name="android" />{t('landing.more.android')}</a>
         </div>
-        {ANDROID_TEST_OPEN && <p className="landing-more__android">{t('landing.more.androidSteps')}</p>}
       </div>
       {/* On a computer either phone is a scan away: the code's address sends each on to its own app. */}
       <div className="landing-qr">

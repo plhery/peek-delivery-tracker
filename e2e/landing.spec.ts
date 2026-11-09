@@ -310,7 +310,7 @@ test('a section in one column stands on the page’s middle, and a tablet keeps 
   // A small window: one column, as wide as the journey's card, centred like the field above it.
   await page.setViewportSize({ width: 800, height: 900 });
   await openLanding(page);
-  for (const selector of ['.landing-moves h2', '.landing-moves__text p', '.landing-chips', '.landing-journey__card', '.landing-more h2', '.landing-phone', '.landing-more__actions', '.landing-more__actions + .landing-more__actions', '.landing-more__android']) {
+  for (const selector of ['.landing-moves h2', '.landing-moves__text p', '.landing-chips', '.landing-journey__card', '.landing-more h2', '.landing-phone', '.landing-more__actions', '.landing-more__actions + .landing-more__actions']) {
     expect(await offCentre(page, selector), selector).toBeLessThan(2);
   }
   expect(await passportOffCentre(page)).toBeLessThan(2);

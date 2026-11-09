@@ -99,7 +99,7 @@ describe('Landing', () => {
 
   it('offers the iPhone app where the answer names it and after the list, each link counted under its own campaign', () => {
     render(<Landing onSignIn={onSignIn} />);
-    expect(screen.getByRole('link', { name: 'Get the iPhone app' })).toHaveAttribute('href', 'https://apps.apple.com/app/apple-store/id6823615370?pt=129628155&ct=web-more&mt=8');
+    expect(screen.getByRole('link', { name: 'iPhone app' })).toHaveAttribute('href', 'https://apps.apple.com/app/apple-store/id6823615370?pt=129628155&ct=web-more&mt=8');
     const iphone = screen.getByRole('link', { name: 'your iPhone' });
     expect(iphone).toHaveAttribute('href', expect.stringContaining('&ct=web-moves&'));
     expect(iphone.parentElement).toHaveTextContent(/Peek notifies you when it matters, on your iPhone or in your browser\.$/);
@@ -110,12 +110,15 @@ describe('Landing', () => {
     expect(document.querySelectorAll('.landing-qr')).toHaveLength(1);
   });
 
-  it('offers the Android app beside the iPhone app, through the closed test\'s steps, which it sums up', () => {
+  it('offers the Android app beside the iPhone app, each in its platform\'s colour, the Android one through the closed test\'s steps', () => {
     render(<Landing onSignIn={onSignIn} />);
-    const android = screen.getByRole('link', { name: 'Get the Android app' });
+    const android = screen.getByRole('link', { name: 'Android app' });
+    const iphone = screen.getByRole('link', { name: 'iPhone app' });
     expect(android).toHaveAttribute('href', '/android');
-    expect(android.parentElement).toBe(screen.getByRole('link', { name: 'Get the iPhone app' }).parentElement);
-    expect(screen.getByText(/^The Android app is in early access: join the testers’ group, become a tester on Google Play, then install it\.$/)).toBeInTheDocument();
+    expect(android.parentElement).toBe(iphone.parentElement);
+    expect([iphone.className, android.className]).toEqual(['button button--apple', 'button button--android']);
+    // The steps say what the early access takes, once the link is followed.
+    expect(screen.queryByText(/early access/)).not.toBeInTheDocument();
   });
 
   it('ends with the name, the privacy notice, the iPhone and Android apps, the code and the language', () => {
@@ -129,10 +132,15 @@ describe('Landing', () => {
     expect(within(footer).getByRole('combobox', { name: 'Language' })).toHaveValue('en');
   });
 
-  it('names what else its author makes last, each at its address for the reader’s language', async () => {
-    const sites = () => within(screen.getByRole('contentinfo')).getAllByRole('link').slice(-3);
+  it('names what else its author makes after its links, each at its address for the reader’s language, and credits the Android robot last', async () => {
+    const maker = () => screen.getByRole('contentinfo').querySelector<HTMLElement>('.landing-footer__maker')!;
+    const sites = () => within(maker()).getAllByRole('link');
     const english = render(<LandingFooter />);
-    expect(screen.getByRole('contentinfo').lastElementChild).toHaveTextContent(/^By the creator of X Horoscope, UnfollowMonkey and ScootRadar$/);
+    expect(maker()).toHaveTextContent(/^By the creator of X Horoscope, UnfollowMonkey and ScootRadar$/);
+    const credit = screen.getByRole('contentinfo').lastElementChild;
+    expect(credit).toHaveTextContent(/^The Android robot is adapted from work by Google, shared under CC BY 3\.0\.$/);
+    expect(within(credit as HTMLElement).getByRole('link', { name: 'CC BY 3.0' })).toHaveAttribute('href', 'https://creativecommons.org/licenses/by/3.0/');
+    expect(credit?.previousElementSibling).toBe(maker());
     expect(sites().map((link) => [link.textContent, link.getAttribute('href')])).toEqual([
       ['X Horoscope', 'https://x-horoscope.com/en/x'], ['UnfollowMonkey', 'https://unfollow-monkey.com/en'], ['ScootRadar', 'https://scootradar.com'],
     ]);
@@ -144,7 +152,7 @@ describe('Landing', () => {
     english.unmount();
 
     const french = render(<I18nProvider initialLocale="fr" initialMessages={await loadMessages('fr')}><LandingFooter /></I18nProvider>);
-    expect(screen.getByRole('contentinfo').lastElementChild).toHaveTextContent(/^Par le créateur de X Horoscope, d’UnfollowMonkey et de ScootRadar$/);
+    expect(maker()).toHaveTextContent(/^Par le créateur de X Horoscope, d’UnfollowMonkey et de ScootRadar$/);
     expect(sites().map((link) => link.getAttribute('href'))).toEqual([
       'https://x-horoscope.com/fr/x', 'https://unfollow-monkey.com/fr', 'https://scootradar.com/fr',
     ]);
@@ -154,7 +162,7 @@ describe('Landing', () => {
 
     // ScootRadar has no Polish: its English page is linked, at its bare domain.
     render(<I18nProvider initialLocale="pl" initialMessages={await loadMessages('pl')}><LandingFooter /></I18nProvider>);
-    expect(screen.getByRole('contentinfo').lastElementChild).toHaveTextContent(/^Od twórcy X Horoscope, UnfollowMonkey i ScootRadar$/);
+    expect(maker()).toHaveTextContent(/^Od twórcy X Horoscope, UnfollowMonkey i ScootRadar$/);
     expect(sites().map((link) => link.getAttribute('href'))).toEqual([
       'https://x-horoscope.com/pl/x', 'https://unfollow-monkey.com/pl', 'https://scootradar.com',
     ]);

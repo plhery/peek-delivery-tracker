@@ -1046,6 +1046,20 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(skipped('2026-01-04T13:00:00Z', 'Out for Delivery->Your item')).toBe(0);
   });
 
+  it('reads wording followed by its place after a comma as the same wording', () => {
+    // 17TRACK's label on the scan's own offset; ParcelsApp's on its wall clock as UTC, five hours on, its place in its words.
+    const stored = [{ ...row('unknown:label', '2026-01-02T02:39:00+00:00', 'Shipping Label Created', 'registered'),
+      location: 'EXAMPLE TOWN, ST 00000' }];
+    const skipped = (description: string, location?: string) => sharedScans([{
+      ...scan('unknown:label-copy', '2026-01-01T21:39:00Z', description, 'registered'), ...(location ? { location } : {}),
+    }], stored).skipped.size;
+    expect(skipped('Shipping Label Created, EXAMPLE TOWN, ST 00000', 'EXAMPLE TOWN, ST 00000')).toBe(1);
+    expect(skipped('Shipping Label Created, Example Town, ST 00000')).toBe(1);
+    // Other words after the comma, or another place, are another scan.
+    expect(skipped('Shipping Label Created, USPS Awaiting Item', 'EXAMPLE TOWN, ST 00000')).toBe(0);
+    expect(skipped('Shipping Label Created, OTHER TOWN, ST 00000')).toBe(0);
+  });
+
   it('matches the same wording dated to the minute the other scan falls in, without a clock offset', () => {
     const precise = row('ups:label', '2026-01-02T21:25:25+00:00', 'Label Created', 'registered');
     const late = sharedScans([scan('unknown:label', '2026-01-02T21:25:00Z', 'label created')], [precise]);

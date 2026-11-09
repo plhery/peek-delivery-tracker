@@ -1010,7 +1010,9 @@ export interface CarrierCopy {
  * holds (its prefix, or a universal row naming no provider, which one of the parcel's carriers
  * took over: the one whose map knows the row's code and wording, `unnamedRowCarrier`, else the
  * one tracking it) copies that carrier's scan: in the row's words, or in words that carrier's
- * map knows with the row's code, it is observed with the row's code and stage. An unmatched
+ * map knows with the row's code, it is observed with the row's code and stage, unless that map
+ * reads them as another stage: then they are the provider's own (Postal Ninja's relay of Royal
+ * Mail's customs sentence, matched to USPS's row in transit). An unmatched
  * copy is the scan of one of the parcel's own carriers (the one tracking it, the one it is
  * filed under, the one that handed it over) whose map gives its words the stage it was seen
  * with. Any other scan, a third carrier's a provider relays or a provider's rewording, stays
@@ -1041,8 +1043,11 @@ export function carrierCopies(
       : unnamedRowCarrier(own, code(row.provider_code), String(row.description ?? '')) ?? tracking;
     if (row && directCarrier(holder)) {
       const copy = { carrier: holder, providerCode: code(row.provider_code), stage: String(row.stage ?? '') };
-      if (copy.stage && (normalizeObservedDescription(String(row.description ?? '')) === description
-        || statusMapAnswer({ carrier: holder, providerCode: copy.providerCode, description }).kind !== 'unknown')) {
+      const answer = normalizeObservedDescription(String(row.description ?? '')) === description ? null
+        : statusMapAnswer({ carrier: holder, providerCode: copy.providerCode, description });
+      // Other words the carrier's map reads as another stage are the provider's own, not the row's scan.
+      if (answer?.kind === 'mapped' && copy.stage && answer.stage !== copy.stage) continue;
+      if (copy.stage && answer?.kind !== 'unknown') {
         copies.set(id, copy);
         continue;
       }

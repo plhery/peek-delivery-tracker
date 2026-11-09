@@ -952,6 +952,25 @@ describe('status observation collection', () => {
     expect(collectStatusObservations(events, 'unknown', copies)).toEqual([]);
   });
 
+  it('keeps a matched copy in other words its carrier\'s map reads as another stage as the provider\'s own', () => {
+    // A provider relays Royal Mail's customs sentence, and the sync matched it to USPS's row in transit.
+    const parcel = { id: 'package-1', carrier: 'usps', carrier_data: {} };
+    const stored = [
+      { provider_event_id: 'usps:isc', stage: 'in_transit', description: 'Processed Through Facility' },
+      { provider_event_id: 'usps:arrived', stage: 'in_transit', description: 'Arrived at USPS Regional Facility' },
+    ];
+    const copy = (id: string, description: string, stage: string) => ({ package_id: 'package-1', provider_event_id: `unknown:${id}`,
+      description, stage, raw_data: { stage_source: 'wording:provider' } });
+    const events = [
+      copy('customs-copy', 'Your item is currently with customs in the destination country', 'customs'),
+      // Other words USPS's map reads in the row's stage stay a copy of USPS's scan.
+      copy('arrived-copy', 'Arrived at USPS Facility', 'in_transit'),
+    ];
+    const copies = carrierCopies(parcel, events, stored,
+      new Map([['unknown:customs-copy', 'usps:isc'], ['unknown:arrived-copy', 'usps:arrived']]));
+    expect(copies).toEqual(new Map([['unknown:arrived-copy', { carrier: 'usps', providerCode: null, stage: 'in_transit' }]]));
+  });
+
   it('skips events whose stage came from the carrier map', () => {
     expect(collectStatusObservations([{
       package_id: 'package-1', stage: 'delivered', description: 'Objeto entregue',

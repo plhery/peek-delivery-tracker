@@ -683,6 +683,17 @@ function sameWording(left: string, right: string): boolean {
 }
 
 /**
+ * Two rows in the same wording (`sameWording`), once the place one of them adds after a comma is left out:
+ * ParcelsApp's "Shipping Label Created, Example Town, ST 00000" is 17TRACK's bare label at that place.
+ */
+function sameWords(left: JsonObject, right: JsonObject): boolean {
+  const [first, second] = [wordingOf(left), wordingOf(right)];
+  const places = [placeOf(left), placeOf(right)].filter(Boolean);
+  const placed = (words: string, bare: string) => bare !== '' && places.some((place) => words === `${bare}, ${place}`);
+  return sameWording(first, second) || placed(first, second) || placed(second, first);
+}
+
+/**
  * Whether one wording opens with every word of the other, whatever the punctuation:
  * ParcelsApp's "Colis retardé durant l'acheminement. Livraison reportée…" and
  * Chronopost's "Colis retardé durant l'acheminement".
@@ -1084,7 +1095,8 @@ export function rewordedScans(
  * Austrian Post scans of one minute). Failing that, the same wording matches a
  * whole number of quarter hours up to 14 h away: the same scan read in the
  * wrong zone, a copy compared to the minute of a carrier's scan in whole
- * minutes (17TRACK's seconds on USPS's minute). Failing that, a carrier's row for a universal scan, or a
+ * minutes (17TRACK's seconds on USPS's minute). Wording followed by its place after a comma is the same
+ * wording in each of these (ParcelsApp's USPS label, 17TRACK's bare one). Failing that, a carrier's row for a universal scan, or a
  * universal row for a carrier's scan, at least an hour away matches in any
  * wording when the stages agree and the time has seconds other than zero: a provider whose clock is
  * off by a zone's offset from UTC. Times to the minute fall whole quarter
@@ -1249,13 +1261,12 @@ export function sharedScans(
   const matchOf = (event: JsonObject, alone: boolean): JsonObject | undefined => {
     const universal = sourceOf(identity(event)) === UNIVERSAL;
     const at = instantOf(event);
-    const wording = wordingOf(event);
     const eligible = universal ? rows : rows.filter((row) => sourceOf(identity(row)) === UNIVERSAL);
     const exact = eligible.filter((row) => instantOf(row) === at);
-    const worded = exact.filter((row) => sameWording(wordingOf(row), wording));
+    const worded = exact.filter((row) => sameWords(row, event));
     const truncated = occupied.has(at) || dayAlone(event) ? []
       : eligible.filter((row) => !dayAlone(row) && sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
-    const minuted = truncated.filter((row) => sameWording(wordingOf(row), wording));
+    const minuted = truncated.filter((row) => sameWords(row, event));
     const restaged = restagedOf(event);
     // A scan of the provider's own row dated past when the row was first stored is its next scan, not the row on a
     // corrected clock: ParcelsApp lists only FedEx's latest "On the way", 13 h after the one it replaced.
@@ -1263,7 +1274,7 @@ export function sharedScans(
       && !(followsClock(row, event) && pastFirstStored(event, row)));
     const zoned = apart.filter((row) => zoneApart(at, instantOf(row)));
     const paired = (row: JsonObject) => (sourceOf(identity(row)) === UNIVERSAL) !== universal;
-    const shifted = apart.filter((row) => sameWording(wordingOf(row), wording) && (zoneApart(at, instantOf(row))
+    const shifted = apart.filter((row) => sameWords(row, event) && (zoneApart(at, instantOf(row))
       || (paired(row) && (universal ? minuteApart(at, instantOf(row)) : minuteApart(instantOf(row), at)))));
     const reclocked = Math.floor(at / 1_000) % 60 === 0 ? [] : zoned.filter((row) => (
       (sourceOf(identity(row)) === UNIVERSAL) !== universal && Math.abs(at - instantOf(row)) >= HOUR_MS

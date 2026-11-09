@@ -19072,7 +19072,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Costa_Rica",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "aeropost"
     },
     "trackingUrlTemplate": "https://aeropost.com/en/tracking/{trackingNumber}",
     "linkRules": [
@@ -19746,9 +19746,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Beirut",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "libanpost"
     },
-    "trackingUrlTemplate": "https://www.libanpost.com/english/tools-support/track-and-trace?sn={trackingNumber}",
+    "trackingUrlTemplate": "https://www.libanpost.com/TrackandTraceMobile.aspx?sn={trackingNumber}&lang=2",
     "linkRules": [
       {
         "domains": [
@@ -19756,6 +19756,16 @@ export const CARRIER_CAPABILITIES = {
           "libanpost.com"
         ],
         "pathPattern": "^/(?:english|arabic)/tools-support/track-and-trace/?$",
+        "params": [
+          "sn"
+        ]
+      },
+      {
+        "domains": [
+          "www.libanpost.com",
+          "libanpost.com"
+        ],
+        "pathPattern": "^/TrackandTraceMobile\\.aspx$",
         "params": [
           "sn"
         ]
@@ -35359,7 +35369,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Kyiv",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "western-bid"
     },
     "trackingUrlTemplate": "https://track.westparcel.com/?trackNumber={trackingNumber}",
     "linkRules": [

@@ -70357,6 +70357,14 @@
     ]
   },
   {
+    "input": "AF999999999999999999980",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "alphastline"
+    ]
+  },
+  {
     "input": "AG0175007381",
     "carrier": "unknown",
     "confidence": "low",

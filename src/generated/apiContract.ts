@@ -51089,6 +51089,32 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.vichareloginext.com/track-shipment"
+  },
+  "alphastline": {
+    "displayName": "Alphastline",
+    "aliases": [
+      "Alphast",
+      "Alphast Line",
+      "傲飞国际快线",
+      "傲飞物流"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2637ba",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^AF\\d{21}$",
+        "confidence": "low"
+      }
+    ]
   }
 } as const;
 
@@ -52563,7 +52589,8 @@ export const CARRIER_IDS = [
   "tci-freight",
   "teleport",
   "time-matters",
-  "vichare"
+  "vichare",
+  "alphastline"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

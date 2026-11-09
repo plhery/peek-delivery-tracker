@@ -1934,7 +1934,10 @@ export class TrackingRouter {
       state.last_probe_at ??= now().toISOString();
       state.discovery_cursor = 0;
       // The carrier answered too: only its clock, a partial answer or its label alone sent the result elsewhere, so links stay with it.
-      if (localDirectFallback || partialDirect) value.result = { ...value.result, carrier_answered: true };
+      // Its label alone says so, as the provider's history keeps no row of it (the gaps view reads it).
+      if (localDirectFallback || partialDirect) {
+        value.result = { ...value.result, carrier_answered: true, ...(partialDirect?.label && !localDirectFallback ? { carrier_label_alone: true } : {}) };
+      }
       // A delivery only the provider shows, which the carrier's own answer disputes, goes (disputedDelivery.ts).
       const undisputed = localDirectFallback && universalNumber === number ? withoutDisputedDelivery(
         value.result, value.sourceCarrierId, localDirectFallback.carrier, localDirectFallback.value.result) : null;

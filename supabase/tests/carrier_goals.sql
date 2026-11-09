@@ -381,6 +381,35 @@ begin
 end;
 $$;
 
+-- flagged: La Poste answered with its label alone beside 17TRACK's progress, whose history keeps no
+-- row of it (carrier_label_alone); partial: La Poste answered in part, no row of it kept either.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f4000000-0000-4000-8000-0000000000f8', null, true, 'GOALS0028', 'la-poste',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "17TRACK", "carrier_answered": true, "carrier_label_alone": true}'),
+  ('f4000000-0000-4000-8000-0000000000f9', null, true, 'GOALS0029', 'la-poste',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "17TRACK", "carrier_answered": true}');
+insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, raw_data)
+values
+  ('f4000000-0000-4000-8000-0000000000f8', 'in_transit', 'Departed', '2026-10-08T05:46:00Z', 'unknown:goals-flagged-departed', '{}'),
+  ('f4000000-0000-4000-8000-0000000000f9', 'in_transit', 'Departed', '2026-10-08T05:46:00Z', 'unknown:goals-partial-departed', '{}');
+
+-- A label alone the provider's history keeps no row of is still no half-answer.
+do $$
+begin
+  if (select array_agg(row(tracking_number, why, reason, lane)::text order by tracking_number)
+      from private.tracking_gaps where tracking_number in ('GOALS0028', 'GOALS0029'))
+      is distinct from array[
+        row('GOALS0028', 'carrier shows its label alone', 'carrier knows its label alone', 'none')::text,
+        row('GOALS0029', 'carrier answered in part', 'half-answers', 'adapters')::text] then
+    raise exception 'A flagged label alone was misread: %', (select array_agg(row(tracking_number, why, reason, lane)::text)
+      from private.tracking_gaps where tracking_number in ('GOALS0028', 'GOALS0029'));
+  end if;
+end;
+$$;
+
 -- Grafana's role reads the counts, not the parcels behind them.
 set local role metrics_reader;
 select day, parcels, stale_parcels from metrics.goals_daily order by day desc limit 1;

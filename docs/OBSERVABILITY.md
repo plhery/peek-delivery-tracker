@@ -550,8 +550,8 @@ A parcel a provider tracks can also be **dormant**, not checked for 24 h because
 follows it any more, whatever its last check stored, a failure included, or need **none**: its carrier answers and the provider's fuller history
 is kept, a provider filled in the carrier's partial answer (`routing.partial_history`), the
 parcel already shows the newest scan of a carrier answer set aside as older, so that carrier
-only knows an earlier leg, the carrier's rows show its label alone beside a provider's earlier
-leg, or the carrier a provider names as delivering the parcel was asked and has not scanned it
+only knows an earlier leg, the carrier showed its label alone beside a provider's earlier leg
+(its rows, or `carrier_label_alone` when the provider's history keeps no row of it), or the carrier a provider names as delivering the parcel was asked and has not scanned it
 yet (`delivery_probe`).
 
 Whatever its lane, a signal that comes from a wrong routing decision is a delivery-tracker

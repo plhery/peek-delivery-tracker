@@ -2108,6 +2108,8 @@ describe('persistent tracking routing', () => {
       const result = await router.fetch(ups(), false);
       expect(result.sourceCarrierId).toBe('unknown');
       expect(result.result).toMatchObject({ tracking_provider: 'Ship24', carrier_answered: true, expected_delivery: '2026-09-12' });
+      // A partial answer is no label alone.
+      expect(result.result).not.toHaveProperty('carrier_label_alone');
       expect(result.result.events).toHaveLength(2);
       expect(result.result.routing).toMatchObject({ preferred_provider: 'Ship24', confirmed_carrier: 'ups' });
       expect((result.result.routing as JsonObject).direct_retry_at).toBeUndefined();
@@ -2174,7 +2176,8 @@ describe('persistent tracking routing', () => {
       universal.mockResolvedValue(journey());
       const result = await router.fetch(ups({ created_at: '2026-09-10T11:00:00Z' }), false);
       expect(result.sourceCarrierId).toBe('unknown');
-      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true, current_stage: 'customs', expected_delivery: '2026-09-15' });
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true, carrier_label_alone: true,
+        current_stage: 'customs', expected_delivery: '2026-09-15' });
       expect(routingOf(result)).toMatchObject({ preferred_provider: 'ParcelsApp', confirmed_carrier: 'ups' });
       expect(routingOf(result).partial_checked_at).toBeUndefined();
       // The carrier stays first on every check, its label beside the provider's progress.
@@ -2185,7 +2188,7 @@ describe('persistent tracking routing', () => {
       next.universal.mockResolvedValue(journey('2026-09-10T12:05:00Z'));
       const again = await next.router.fetch(ups({ current_stage: 'customs', carrier_data: { routing: routingOf(result) } }), false);
       expect(next.direct).toHaveBeenCalledOnce();
-      expect(again.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true });
+      expect(again.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true, carrier_label_alone: true });
     });
 
     it.each([

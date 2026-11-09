@@ -959,7 +959,7 @@ The link shown in the app follows `tracking_provider` of the result on screen: a
 ParcelsApp or Ship24 result links to that provider with the lookup number. Direct recovery
 restores the carrier link. When the carrier's own lookup answered the same check and only its
 missing clock, partial answer or label alone sent the result elsewhere, the result is marked
-`carrier_answered` and the link stays with the carrier. Postal Ninja and UPU link to their public forms. No deep links are
+`carrier_answered`, and `carrier_label_alone` too for its label alone, and the link stays with the carrier. Postal Ninja and UPU link to their public forms. No deep links are
 guessed.
 
 A carrier can answer for a number with one of its own (`canonical_tracking_number`): a

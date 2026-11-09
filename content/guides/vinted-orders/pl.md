@@ -4,7 +4,7 @@ description: Jak śledzić paczkę z Vinted jako kupujący lub sprzedający: kto
 slug: sledzenie-paczki-vinted
 picture: Dwa telefony, sprzedającego i kupującego, a między nimi paczka jadąca furgonetką, i wesoły Pip.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-11-09
 ---
 
 Na Vinted to kupujący wybiera przewoźnika i płaci za etykietę, a sprzedający dostaje ją do wydruku albo jako kod i ma 5 dni roboczych na nadanie paczki. Obie strony śledzą przesyłkę w oknie rozmowy, pod „Śledź przesyłkę”, gdzie można też skopiować numer przewoźnika. Pierwsze informacje mogą się tam pojawić do 48 godzin po nadaniu, a sprzedający dostaje pieniądze dopiero, gdy kupujący potwierdzi, że wszystko jest OK, albo 2 dni po dostawie.
@@ -38,7 +38,7 @@ Ten, którego wybrał kupujący. Polska jest połączona z 12 krajami: Szwecją,
 
 | Przewoźnik na vinted.pl | Dokąd doręcza | Za granicę, w obie strony |
 | --- | --- | --- |
-| [ORLEN Paczka](carrier:orlen-paczka) | Automat albo punkt | Litwa, Łotwa, Estonia, Finlandia, Szwecja, Czechy, Słowacja, Węgry, Rumunia |
+| [ORLEN Paczka](carrier:orlen-paczka) | Automat albo punkt (do Szwecji: pod adres domowy) | Litwa, Łotwa, Estonia, Finlandia, Szwecja, Czechy, Słowacja, Węgry, Rumunia |
 | [InPost](carrier:inpost) | Paczkomat, punkt albo dom (InPost Kurier) | Czechy, Słowacja, Węgry, Chorwacja, Rumunia, Słowenia |
 | [DPD](carrier:dpd-pl) | Punkt (DPD Pickup) albo dom, tylko w Polsce (DPD Kurier) | Litwa, Łotwa, Estonia, Finlandia, Szwecja, Dania, Czechy, Słowacja, Rumunia, Słowenia |
 | DPD Collect | Automat albo punkt | Tylko Rumunia |
@@ -47,7 +47,7 @@ Ten, którego wybrał kupujący. Polska jest połączona z 12 krajami: Szwecją,
 | [DHL Express](carrier:dhl-express) | Dom albo punkt | Wszystkie 12 krajów |
 | GLS | Punkt albo automat | Dania, Czechy, Słowacja, Węgry, Rumunia, Chorwacja |
 
-Sprzedający może wyłączyć część przewoźników w **Profil** → **Ustawienia** → **Wysyłka**. Niektórych, ustawionych jako domyślni, wyłączyć się nie da.
+Sprzedający może wyłączyć część przewoźników w **Profil** → **Ustawienia** → **Wysyłka**. Niektórych, ustawionych jako domyślni, wyłączyć się nie da. Jeśli przy zakupie nie widzisz jakiegoś przewoźnika, sprzedający mógł go wyłączyć albo przewoźnik nie przyjmuje dużych paczek lub nie dociera pod Twój adres, zwłaszcza w odległych miejscach.
 
 Vinted ma też własnego przewoźnika, Vinted Go, z automatami i punktami we Francji, Belgii, Holandii, Hiszpanii, Portugalii i Finlandii. Na liście przewoźników vinted.pl go nie ma.
 
@@ -103,11 +103,11 @@ Więcej o przerwach w śledzeniu: [dlaczego status przesyłki się nie zmienia](
 
 ## Ile paczka z Vinted czeka w punkcie odbioru?
 
-To zależy od przewoźnika: termin zwykle podaje jego wiadomość z kodem odbioru. Vinted ostrzega, że „niektórzy przewoźnicy przechowują przesyłki tylko przez 2 dni kalendarzowe”, a potem odsyłają je sprzedającemu.
+To zależy od przewoźnika: termin zwykle podaje jego wiadomość z kodem odbioru. Vinted ostrzega, że „niektórzy przewoźnicy przechowują przesyłki tylko przez 2 dni kalendarzowe”, a potem odsyłają je sprzedającemu. Odbierając w punkcie paczkę InPost albo Poczty Polskiej, miej przy sobie dokument tożsamości.
 
-- **Nie masz kodu odbioru?** Sprawdź SMS-y, maila i folder Spam, i poczekaj 24 godziny. W punkcie z obsługą zapytaj, czy wydadzą paczkę po podaniu Twoich danych i numeru przesyłki. Możesz też napisać do obsługi klienta przewoźnika: Vinted nie wygeneruje kodu odbioru za niego.
+- **Nie masz kodu odbioru?** Sprawdź SMS-y i maila, także folder Spam. Jeśli kod nie dotrze w ciągu 24 godzin albo nie działa, skontaktuj się z obsługą klienta przewoźnika: Vinted nie wygeneruje kodu odbioru za niego. W punkcie z obsługą zapytaj, czy wydadzą paczkę na podstawie dowodu tożsamości i numeru przesyłki.
 - **Paczka nieodebrana na czas?** Wraca do sprzedającego. Vinted automatycznie anuluje zamówienie i zwraca Ci pieniądze.
-- **Sprzedający, odbierajcie też zwroty.** Jeśli zwrócona paczka nie zostanie odebrana w terminie ani w dodatkowym okresie przechowywania, przechodzi na własność Vinted Go UAB.
+- **Sprzedający, odbierajcie też zwroty.** Jeśli przegapicie termin, od razu zapytajcie przewoźnika, czy paczkę da się jeszcze odebrać: zwrócona paczka nieodebrana w terminie ani w dodatkowym okresie przechowywania przechodzi na własność Vinted Go UAB.
 
 Więcej: [co się dzieje z nieodebraną paczką](guide:uncollected-parcel).
 
@@ -135,6 +135,8 @@ Gdy zamówienie jest zawieszone, Twoja płatność jest bezpiecznie przechowywan
 | DHL Express | 63 zł |
 | GLS | 6000 zł w Polsce, 3174 zł za granicę |
 
+Przy zakupach z Weryfikacją Przedmiotów albo Elektroniki, wysyłanych przez DPD, Vinted wypłaca do 2250 zł.
+
 Więcej: [zaginiona paczka](guide:lost-parcel) i [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 ## Kiedy sprzedający dostaje pieniądze na Vinted?
@@ -150,7 +152,7 @@ Polityka zwrotów Vinted obejmuje zakupy przez „Kup teraz”: zamówienie niew
 Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numer Vinted Go zaczynający się od `VGS` i link do śledzenia z vintedgo.com Peek rozpoznaje od razu; przy numerze 16-cyfrowym pyta Vinted Go, DHL eCommerce i TNT, która z tych firm go zna. Paczki GLS w Polsce Peek też śledzi: jeśli nie rozpozna przewoźnika po numerze, naciśnij „Zmień” i wybierz GLS Poland. Problemu Peek za Ciebie nie zgłosi: to zostaje w oknie rozmowy.
 
 :::sources
-- [Vinted: Wysyłka na Vinted](https://www.vinted.pl/help/234) – przewoźnicy, 12 krajów, etykieta albo kod, anulowanie, przewoźnicy domyślni
+- [Vinted: Wysyłka na Vinted](https://www.vinted.pl/help/234) – przewoźnicy, 12 krajów, etykieta albo kod, anulowanie, przewoźnicy domyślni, duże paczki i odległe adresy
 - [Vinted: Proces dostawy](https://www.vinted.pl/help/444) – kupujący wybiera, 5 dni roboczych, 48 godzin
 - [Vinted: Wysyłka przedmiotu](https://www.vinted.pl/help/482) – etykieta w rozmowie i mailu, zmiany po sprzedaży
 - [Vinted: Czas dostawy](https://www.vinted.pl/help/101) – 2 do 5 i 4 do 7 dni roboczych, weryfikacja do 10, przedłużenie o 3 lub 5 dni
@@ -160,16 +162,16 @@ Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpozn
 - [Vinted: Wysyłka indywidualna na Vinted](https://www.vinted.pl/help/443) – dawna opcja, niedostępna w nowych ogłoszeniach
 - [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/657) – nowy przewidywany termin, 25 dni roboczych
 - [Vinted: Odbiór paczki](https://www.vinted.pl/help/1601) – kod odbioru, czas przechowywania, zwrot pieniędzy, 2 dni na potwierdzenie
-- [Vinted: Odbiór zamówienia](https://www.vinted.pl/help/738) – 2 dni kalendarzowe, brak kodu, inny punkt, pusta skrytka
+- [Vinted: Odbiór zamówienia](https://www.vinted.pl/help/738) – 2 dni kalendarzowe, brak kodu: obsługa klienta przewoźnika po 24 godzinach, dowód tożsamości i numer śledzenia, inny punkt, pusta skrytka
 - [Vinted: Paczka wróciła do nadawcy](https://www.vinted.pl/help/728) – „Wszystko OK” przekazuje płatność sprzedającemu
 - [Vinted: Polityka Zwrotów Vinted](https://www.vinted.pl/help/465) – „Kup teraz”, 2 dni kalendarzowe, kilka tygodni, pełny zwrot, płatność poza Vinted
-- [Vinted: Odszkodowanie dla sprzedających w przypadku wysyłki zintegrowanej](https://www.vinted.pl/help/1018) – limity przewoźników, Vinted Go UAB
+- [Vinted: Odszkodowanie dla sprzedających w przypadku wysyłki zintegrowanej](https://www.vinted.pl/help/1018) – limity przewoźników, 2250 zł z weryfikacją, nieodebrane zwroty, Vinted Go UAB
 - [Vinted: Otrzymanie płatności za zakończoną sprzedaż](https://www.vinted.pl/help/235) – zakończenie zamówienia, 2 dni, Portfel Vinted
-- [Vinted: Wysyłka za pomocą usługi ORLEN Paczka](https://www.vinted.pl/help/681) – kraje, automat albo punkt
-- [Vinted: Wysyłka za pomocą usługi InPost](https://www.vinted.pl/help/953) – kraje, kod QR i kod nadania, dwie próby, sprzedawcy Pro
+- [Vinted: Wysyłka za pomocą usługi ORLEN Paczka](https://www.vinted.pl/help/681) – kraje, automat albo punkt, do Szwecji pod adres domowy
+- [Vinted: Wysyłka za pomocą usługi InPost](https://www.vinted.pl/help/953) – kraje, kod QR i kod nadania, dwie próby, dokument tożsamości, sprzedawcy Pro
 - [Vinted: Wysyłka za pośrednictwem DPD](https://www.vinted.pl/help/1101) – kraje, Pickup i Kurier, ustawienia wysyłki
 - [Vinted: Wysyłka przez DPD Collect](https://www.vinted.pl/help/1658) – tylko Rumunia, kod PIN do wydruku etykiety
-- [Vinted: Wysyłka za pośrednictwem Poczty Polskiej i usługi Pocztex](https://www.vinted.pl/help/669) – tylko Polska, Żabka i poczta, punkty i automaty
+- [Vinted: Wysyłka za pośrednictwem Poczty Polskiej i usługi Pocztex](https://www.vinted.pl/help/669) – tylko Polska, Żabka i poczta, punkty i automaty, dokument tożsamości
 - [Vinted: Wysyłka za pośrednictwem DHL](https://www.vinted.pl/help/1333) – kraje, kod nadania, kurier nakleja etykietę
 - [Vinted: Wysyłka DHL Express](https://www.vinted.pl/help/1606) – wszystkie kraje, dom albo punkt, dwie próby
 - [Vinted: Wysyłka za pośrednictwem GLS](https://www.vinted.pl/help/1228) – kraje, punkt albo automat

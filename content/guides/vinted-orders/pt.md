@@ -4,7 +4,7 @@ description: Seguir uma encomenda Vinted em Portugal, a comprar ou a vender: que
 slug: seguimento-encomenda-vinted
 picture: Dois telemóveis, o de quem vende e o de quem compra, com uma encomenda a viajar entre eles numa carrinha, e um Pip bem-disposto.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-11-09
 ---
 
 Na Vinted, é quem compra que escolhe a transportadora e paga a etiqueta; quem vende recebe-a como etiqueta pré-paga ou código QR e tem 5 dias úteis para enviar a encomenda. Os dois seguem-na no ecrã da conversa do pedido, em «Acompanhar encomenda», onde também podes copiar o código de acompanhamento da transportadora. O acompanhamento pode demorar até 48 horas a aparecer depois do envio, e quem vende só recebe o pagamento quando quem compra confirma que está tudo OK, ou 2 dias depois da entrega.
@@ -30,6 +30,7 @@ Cinco dias úteis a contar da compra. Se a Vinted não receber nenhuma atualiza�
 
 - **Precisas de mais tempo?** Quem vende pode pedir mais 3 ou 5 dias úteis: «Prolongar o prazo de envio», ou ⓘ no ecrã da conversa. Quem compra aceita ou recusa.
 - **Já enviaste, mas o acompanhamento não aparece?** Pressiona «Já enviei o pedido», para que o pedido não seja cancelado enquanto a primeira leitura não chega.
+- **A etiqueta não funciona no ponto de envio?** Experimenta outro ponto: encontras outros no link da transportadora, no ecrã da conversa. Se continuar a não funcionar, cancela o pedido e pede a quem comprou que faça um novo, com outra opção de envio ou outro ponto de recolha, para teres uma etiqueta nova.
 
 ## Que transportadoras entregam as encomendas Vinted em Portugal?
 
@@ -79,9 +80,10 @@ Mais formas em [como saber qual é a transportadora pelo número](guide:tracking
 Normalmente porque um código passou a etiqueta, ou porque a encomenda fez um caminho mais longo:
 
 - **Um código, depois uma etiqueta.** Com a InPost, a DPD e a CTT Expresso, quem vende pode mostrar um código QR em vez de imprimir a etiqueta. Na loja, os funcionários tratam da etiqueta; num cacifo InPost, é o estafeta que a cola. Segue o número da transportadora, não o código.
+- **Um pedido internacional.** A Vinted avisa que a etiqueta pode indicar «uma morada (ou país) diferente, por motivos de expedição e encaminhamento», sobretudo nos pedidos para o estrangeiro.
 - **Um centro de verificação.** Com Verificação de Artigos ou de Eletrónica, a encomenda vai primeiro ao centro da Vinted e só depois segue para ti.
 - **Um pedido novo.** Se o pedido foi cancelado e repetido, há uma etiqueta nova, com um número novo.
-- **Outro ponto de recolha.** A DHL Express tenta entregar duas vezes e depois deixa a encomenda num ponto próximo. Uma encomenda também pode ser redirecionada para um ponto vizinho: vê o link de acompanhamento antes de saíres.
+- **Outro ponto de recolha.** A DHL Express tenta entregar duas vezes e depois deixa a encomenda num ponto próximo. Uma encomenda também pode ser redirecionada para um ponto vizinho (a Vinted Go pode fazê-lo quando o ponto escolhido está fechado ou cheio): vê o link de acompanhamento antes de saíres.
 
 ## Porque é que o acompanhamento da Vinted não atualiza?
 
@@ -97,12 +99,12 @@ Mais sobre estes silêncios: [porque é que o tracking não atualiza](guide:trac
 
 ## Quanto tempo fica a encomenda Vinted no ponto de recolha?
 
-Depende da transportadora: o prazo vem normalmente na mensagem dela, com o código de levantamento. A Vinted avisa que «algumas transportadoras só guardam as encomendas durante 2 dias consecutivos» antes de as devolverem a quem vende. Os prazos de cada uma estão nas páginas da [InPost](carrier:inpost), da [Vinted Go](carrier:vinted-go) e dos [CTT](carrier:ctt).
+Depende da transportadora: o prazo vem normalmente na mensagem dela, com o código de levantamento. A Vinted avisa que «algumas transportadoras só guardam as encomendas durante 2 dias consecutivos» antes de as devolverem a quem vende. Os prazos de cada uma estão nas páginas da [InPost](carrier:inpost), da [Vinted Go](carrier:vinted-go) e dos [CTT](carrier:ctt); num ponto Vinted Go, por exemplo, tens 7 dias para levantar a encomenda, e esse prazo não pode ser prolongado.
 
 - **Para levantar.** Nos cacifos CTT e Vinted Go, usas o PIN que chegou por SMS ou e-mail. Na InPost, na DPD e nas Lojas CTT ou Payshop, leva um documento de identificação (nos CTT e Payshop, também o aviso de entrega).
-- **Não tens código de levantamento?** Vê os SMS, o e-mail e o spam, e espera 24 horas. Num ponto com funcionários, pergunta se podes levantar com a identificação e o número de acompanhamento. Senão, fala com a transportadora: a Vinted não te consegue dar o código.
+- **Não tens código de levantamento?** Vê as mensagens e o e-mail, incluindo o spam. Se o código não chegar em 24 horas ou não funcionar, contacta o apoio ao cliente da transportadora: a Vinted não te consegue dar o código. Num ponto com funcionários, pergunta se podes levantar com o documento de identificação e o número de envio.
 - **Não levantaste a tempo?** A encomenda volta para quem vende, o pedido é cancelado automaticamente e recebes o reembolso.
-- **Quem vende também levanta as devoluções.** Uma encomenda devolvida que fica por levantar depois do prazo e de qualquer período extra passa a ser propriedade da Vinted Go UAB.
+- **Quem vende também levanta as devoluções.** Se deixares passar o prazo de uma devolução, pergunta logo à transportadora se ainda a podes levantar: uma encomenda devolvida que fica por levantar depois do prazo e de qualquer período extra passa a ser propriedade da Vinted Go UAB.
 
 Mais em [quanto tempo tenho para levantar uma encomenda](guide:uncollected-parcel).
 
@@ -139,14 +141,15 @@ Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Um núme
 - [Vinted: Enviar um artigo](https://www.vinted.pt/help/482) – etiqueta na conversa e no e-mail, nada muda depois da venda
 - [Vinted: Tempo de entrega](https://www.vinted.pt/help/101) – 2 a 5 dias úteis, verificação até 10, prolongamento de 3 ou 5 dias
 - [Vinted: Não consigo enviar o artigo a tempo](https://www.vinted.pt/help/740) – cancelado no dia útil seguinte, «Já enviei o pedido»
+- [Vinted: Etiqueta de envio não foi recebida ou não funciona](https://www.vinted.pt/help/154) – outro ponto de envio, cancelar e repetir o pedido, morada ou país diferente
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – 48 horas, Marcar como recebido, Centro de Ajuda, botão «Comprar» e instruções da app
 - [Vinted: Envio personalizado na Vinted](https://www.vinted.pt/help/443) – opção antiga, já não disponível para novos anúncios
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/657) – nova data de entrega, 25 dias úteis
 - [Vinted: Levantar uma encomenda](https://www.vinted.pt/help/1601) – código de levantamento, prazos, reembolso, 2 dias
-- [Vinted: Recolher o teu pedido](https://www.vinted.pt/help/738) – 2 dias consecutivos, sem código, outro ponto, cacifo vazio
+- [Vinted: Recolher o teu pedido](https://www.vinted.pt/help/738) – 2 dias consecutivos, sem código: apoio ao cliente da transportadora ao fim de 24 horas, identificação e número de envio, outro ponto, cacifo vazio
 - [Vinted: A encomenda foi devolvida ao remetente](https://www.vinted.pt/help/728) – «Está tudo OK» transfere o pagamento
 - [Vinted: Política de Reembolso da Vinted](https://www.vinted.pt/help/465) – 2 dias, várias semanas, reembolso total, pagar fora da Vinted
-- [Vinted: Indemnização de vendedores para envios com etiquetas integradas](https://www.vinted.pt/help/1018) – limites por transportadora, Vinted Go UAB
+- [Vinted: Indemnização de vendedores para envios com etiquetas integradas](https://www.vinted.pt/help/1018) – limites por transportadora, devoluções por levantar, Vinted Go UAB
 - [Vinted: Receber o pagamento de uma venda concluída](https://www.vinted.pt/help/235) – conclusão, 2 dias, vendedores Pro
 - [Vinted: Taxa Vinted](https://www.vinted.pt/help/342) – nome da taxa
 - [Vinted: Envio por InPost](https://www.vinted.pt/help/953) – cacifos, código QR, países
@@ -156,5 +159,6 @@ Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Um núme
 - [Vinted: Envio DPD (com Verificação de Artigos)](https://www.vinted.pt/help/1240) – países, centro de verificação
 - [Vinted: Envio com a DHL Express](https://www.vinted.pt/help/1606) – países, duas tentativas e depois um ponto de recolha
 - [Vinted Go: página inicial](https://vintedgo.com/pt?country=pt&region=europe) – países da Vinted Go
+- [Vinted Go: perguntas frequentes](https://vintedgo.com/pt/faq?country=pt&region=europe) – 7 dias para levantar, sem prolongamento, outro ponto se o escolhido estiver fechado ou cheio
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos dos números
 :::

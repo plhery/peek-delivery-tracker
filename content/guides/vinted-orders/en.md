@@ -111,7 +111,7 @@ More on gaps: [why tracking stops updating](guide:tracking-not-updating).
 
 It depends on the carrier: its message with your pick-up code gives the deadline. Vinted warns that "some carriers will only store parcels for 2 calendar days" before sending them back; DPD UK gives 7 calendar days.
 
-- **No pick-up code?** Check your texts and spam, and wait 24 hours. Staff may hand the parcel over against your ID and the tracking number.
+- **No pick-up code?** Check your texts and email, spam folder included. If it hasn't arrived within 24 hours or doesn't work, contact the carrier's customer support. Staff may hand the parcel over against your ID and the tracking number.
 - **Not collected in time?** It goes back to the seller. Vinted cancels the order and refunds you once the return is confirmed.
 - **Sellers, collect returns too.** If a returned parcel stays uncollected past the deadline and any extra holding period, it becomes the property of Vinted Go UAB.
 
@@ -153,7 +153,7 @@ Yes: copy the number from **Track parcel** and paste it into [Peek](/). A Vinted
 - [Vinted UK: Custom shipping on Vinted](https://www.vinted.co.uk/help/443) – legacy option, no longer available for new listings
 - [Vinted UK: Parcel didn't arrive](https://www.vinted.co.uk/help/657) – delay notice, 25 business days, compensation
 - [Vinted UK: Collecting a parcel](https://www.vinted.co.uk/help/1601) – pick-up code, deadlines per carrier, refund, 2-day confirmation
-- [Vinted UK: Collecting your order](https://www.vinted.co.uk/help/738) – 2 calendar days, no code, other pick-up point, empty locker
+- [Vinted UK: Collecting your order](https://www.vinted.co.uk/help/738) – 2 calendar days, no code, carrier's customer support after 24 hours, other pick-up point, empty locker
 - [Vinted UK: Parcel was sent back to sender](https://www.vinted.co.uk/help/728) – refund once the return is confirmed
 - [Vinted UK: Vinted Refund Policy](https://www.vinted.co.uk/help/465) – 2 days, lost, several weeks, full refund, outside Vinted, no refund once completed
 - [Vinted UK: Compensation for sellers when shipping with integrated labels](https://www.vinted.co.uk/help/1018) – £500, Vinted Go UAB

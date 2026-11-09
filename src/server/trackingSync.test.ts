@@ -8724,6 +8724,34 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(store.rows.size).toBe(2);
   });
 
+  it('records no offset for a provider\'s copy of the label a mailer wrote on UTC, which USPS\'s reading keeps', async () => {
+    vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const store = eventStore();
+    const client = { ...store.client,
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-01-05T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    // The scraper reads the label's digits on UTC; 17TRACK reads them on New York's clock, five hours later.
+    const created = { time: '2026-01-04T02:35:00Z', location: 'Example City, NY 10001', description: 'Shipping Label Created', stage: 'registered' };
+    const answer = (events: JsonObject[], extra: JsonObject = {}) => ({ status: 'in_transit', current_stage: 'registered',
+      last_status_text: created.description, last_update: created.time, events, ...extra }) as CarrierResult;
+    const adapter = {
+      fetch: vi.fn().mockResolvedValueOnce(answer([created])).mockRejectedValueOnce(new Error('USPS tracking endpoint is unavailable')),
+      fetchUniversal: vi.fn().mockResolvedValue(answer([{ ...created, time: '2026-01-04T07:35:00Z' }], { tracking_provider: '17TRACK' })),
+    };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, now);
+    const sync = async () => {
+      await service.syncPackage({ id: 'usps-label', user_id: 'owner', carrier: 'usps', tracking_number: '9400100000000000000001',
+        current_stage: 'registered', [STORED_EVENT_IDENTITIES]: store.identities() });
+      return (client.completeSyncAttempt.mock.calls.at(-1)![1] as JsonObject).anomaly_codes;
+    };
+
+    await sync();
+    // USPS is down: the copy repeats its label, hours off by the scraper's choice rather than the provider's misreading.
+    expect(await sync()).not.toContain('provider_clock_offset');
+    expect(store.rows.size).toBe(1);
+  });
+
   it('starts the day of a scan a provider gives by its day alone on the clock of the carrier it names', async () => {
     vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
     const store = eventStore();

@@ -2691,12 +2691,19 @@ export class TrackingSyncService {
       // a provider's scan stored whole hours after the carrier's copy of it, or dated past the check.
       // Each stored row shows it once, at the check that first meets it, not at every check after
       // that repeats the copy. The log line names the row: the one a copy repeats, or the copy's own.
+      // USPS's "Shipping Label Created" is a mailer's label on UTC, which the scraper reads it on by
+      // design; a provider or an older row on the facility's clock is hours off, and none to fix.
+      const uspsParcel = carrierId === 'usps' || sourceCarrierId === 'usps';
+      const mailerLabel = (id: string) => (uspsParcel || id.startsWith('usps:'))
+        && [...persistedEvents, ...stored].some((row) => String(row.provider_event_id) === id
+          && /^shipping label created$/i.test(String(row.description ?? '').trim()));
       const offsetRows = [...new Set([...[...shared.shifted].filter((id) => persistedIds.has(id)),
         ...eventsToPersist.filter((event) => {
           const at = misdated.get(String(event.provider_event_id));
           return at !== undefined && !(Date.parse(String(event.occurred_at)) - at < 60 * 60 * 1_000);
         }).map((event) => String(event.provider_event_id))]
-        .map((id) => matches.reused.get(id) ?? matches.skipped.get(id) ?? dated.reused.get(id) ?? id))];
+        .map((id) => matches.reused.get(id) ?? matches.skipped.get(id) ?? dated.reused.get(id) ?? id))]
+        .filter((row) => !mailerLabel(row));
       const offsetsShown = Array.isArray(previousData.clock_offsets) ? previousData.clock_offsets.map(String) : [];
       const offsetScan = offsetRows.find((row) => !offsetsShown.includes(row));
       if (offsetScan !== undefined) {

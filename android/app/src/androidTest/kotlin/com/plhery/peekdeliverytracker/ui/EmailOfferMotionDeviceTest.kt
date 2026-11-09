@@ -31,6 +31,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_PICKUP
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_QUIET
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import kotlin.math.abs
+import kotlin.math.roundToInt
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -40,12 +41,12 @@ import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 /**
- * How the delivery email's offer moves on a delivered parcel's page (B-AN01), on this device's own window and the
+ * How the delivery email's offer moves on a delivered parcel's page (B-AN01, B-AN05), on this device's own window and the
  * test's clock, stopped and moved on a frame at a time, where the window stacks the page over the list as where it lays
  * them out side by side. Turn on eases the card into the line saying the email is on, the area taking the line's height
- * in 0.2 s on an ease in and out; Not now fades the card out in 0.1 s on an ease out while the area folds away in
- * 0.2 s on an ease in and out; the rows under the area follow it all the way, as the iPhone's column animates
- * (`DeliveryEmailOffer`, `leaving`). Under Remove animations each change is there at once. Signed in as the synthetic
+ * in 0.2 s on an ease in and out, the card fading out in 0.1 s on an ease out as the line fades in; Not now fades the
+ * card out in 0.1 s on an ease out while the area folds away in 0.2 s on an ease in and out; the rows under the area
+ * follow it all the way, as the iPhone's column animates (`DeliveryEmailOffer`, `leaving`, the line's `.opacity`). Under Remove animations each change is there at once. Signed in as the synthetic
  * reader@example.com, who never chose the email, on fake deliveries ([FakeDeliveries], [ParcelWalk]), which save each
  * answer on the window's next frame; nothing goes to the network.
  */
@@ -73,6 +74,34 @@ class EmailOfferMotionDeviceTest {
         assertEquals("The rows under it rise by the card's height less the line's", before.card.height - line.height, before.gap - end, 1f)
         val start = started(seen, before.gap)
         assertEased(seen.since(start) { (before.gap - it.gap) / (before.gap - end) })
+        assertTurnedOn()
+    }
+
+    /**
+     * B-AN05: Turn on fades the card out in 0.1 s on an ease out, as Not now does (`leaving`), while the line saying the
+     * email is on fades in with the area's 0.2 s ease in and out (`.transition(.opacity)`): well on its way as the card
+     * has gone, whole by about 0.2 s. The line comes in where the title stands, so the title is read only where the
+     * line, once whole, leaves its ground bare ([Snap.bare]).
+     */
+    @Test
+    fun turnOnFadesTheCardInATenthOfASecondAndTheLineInOverAFifth() {
+        walk.reduceMotion = false
+        val (before, seen) = answer(PAGE_EMAIL_OFFER_TURN_ON, snapped = true, lined = true)
+        val start = started(seen, before.gap)
+
+        val line = checkNotNull(snap(hasTestTag(PAGE_EMAIL_OFFER_ON))) { "The line once it has come in" }
+        val title = checkNotNull(before.snap) { "The card's title before the answer" }
+        val full = title.ink(line)
+        assertTrue("The card's title is drawn before the answer, where the line leaves bare", full > 0)
+        val fading = seen.since(start) { moment -> moment.snap?.ink(line)?.toFloat()?.div(full) ?: 0f }
+        assertTrue("The card is fading 48 ms in: $fading", fading.near(48) in 0.1f..0.6f)
+        fading.filter { it.first >= FADED_MILLIS }.forEach { (at, ink) -> assertTrue("The card has faded by $at ms: $fading", ink <= 0.05f) }
+
+        val drawn = seen.last().second.line
+        assertTrue("The line saying the email is on is drawn once it has come in", drawn > 0)
+        val showing = seen.since(start) { it.line.toFloat() / drawn }
+        assertTrue("The line is on its way, not whole, as the card has gone: $showing", showing.near(FADED_MILLIS) in 0.35f..0.9f)
+        showing.filter { it.first >= LINE_SHOWN_MILLIS }.forEach { (at, ink) -> assertEquals("The line is whole at $at ms: $showing", 1f, ink, 0.05f) }
         assertTurnedOn()
     }
 
@@ -142,9 +171,12 @@ class EmailOfferMotionDeviceTest {
     /**
      * The delivered parcel's page with the offer, scrolled to it and at rest, then the test's clock stopped; `button`
      * tapped, and frame by frame for [SETTLED] after the tap: how far under the pass the row after the area stands,
-     * and, where `inked`, how much of the card's title is drawn. What stood before the tap comes first, at -1 ms.
+     * where `inked`, how much of the card's title is drawn, and where `lined`, how much of the line saying the email is
+     * on, and where `snapped`, the title's pixels. What stood before the tap comes first, at -1 ms.
      */
-    private fun answer(button: String, inked: Boolean = false): Pair<Offer, List<Pair<Long, Moment>>> {
+    private fun answer(
+        button: String, inked: Boolean = false, lined: Boolean = false, snapped: Boolean = false,
+    ): Pair<Offer, List<Pair<Long, Moment>>> {
         walk.show(DemoCards.parcels()) { signedInWithEmail(null) }
         walk.open(delivered)
         walk.node(PAGE_EMAIL_OFFER).performScrollTo()
@@ -153,10 +185,12 @@ class EmailOfferMotionDeviceTest {
         compose.mainClock.autoAdvance = false
         val under = checkNotNull(ROWS.firstOrNull { walk.count(it) == 1 }) { "A row under the offer" }
         val card = checkNotNull(place(PAGE_EMAIL_OFFER)) { "The offer's card" }
-        val before = Offer(card, gap(under), if (inked) titleInk() else 0)
+        val before = Offer(card, gap(under), if (inked) titleInk() else 0, if (snapped) snap(title()) else null)
         walk.node(button).performClick()
-        val seen = frames(SETTLED) { Moment(gap(under), if (inked) titleInk() else 0) }
-        return before to (listOf(-1L to Moment(before.gap, before.ink)) + seen)
+        val seen = frames(SETTLED) {
+            Moment(gap(under), if (inked) titleInk() else 0, if (lined) lineInk() else 0, if (snapped) snap(title()) else null)
+        }
+        return before to (listOf(-1L to Moment(before.gap, before.ink, snap = before.snap)) + seen)
     }
 
     /**
@@ -241,10 +275,26 @@ class EmailOfferMotionDeviceTest {
      * most of them have), summed, so that the title at a third of its opacity counts a third. Nothing once it has gone,
      * or has folded out of sight.
      */
-    private fun titleInk(): Int {
-        val node = compose.onAllNodes(title(), useUnmergedTree = true).fetchSemanticsNodes().firstOrNull() ?: return 0
+    private fun titleInk(): Int = ink(title())
+
+    /** How much of the line saying the email is on is drawn, as [titleInk] reads the title; nothing while there is none. */
+    private fun lineInk(): Int = ink(hasTestTag(PAGE_EMAIL_OFFER_ON))
+
+    /** The pixels of the first part `matcher` finds, where they stand in the root; null while there is none. */
+    private fun snap(matcher: SemanticsMatcher): Snap? {
+        val node = compose.onAllNodes(matcher, useUnmergedTree = true).fetchSemanticsNodes().firstOrNull() ?: return null
+        if (node.boundsInRoot.width < 1f || node.boundsInRoot.height < 1f) return null
+        val image = compose.onAllNodes(matcher, useUnmergedTree = true)[0].captureToImage().asAndroidBitmap()
+        val pixels = IntArray(image.width * image.height)
+        image.getPixels(pixels, 0, image.width, 0, 0, image.width, image.height)
+        return Snap(node.boundsInRoot.left.roundToInt(), node.boundsInRoot.top.roundToInt(), image.width, image.height, pixels)
+    }
+
+    /** How much of the first part `matcher` finds is drawn, as [titleInk] says. */
+    private fun ink(matcher: SemanticsMatcher): Int {
+        val node = compose.onAllNodes(matcher, useUnmergedTree = true).fetchSemanticsNodes().firstOrNull() ?: return 0
         if (node.boundsInRoot.width < 1f || node.boundsInRoot.height < 1f) return 0
-        val image = compose.onNode(title(), useUnmergedTree = true).captureToImage().asAndroidBitmap()
+        val image = compose.onAllNodes(matcher, useUnmergedTree = true)[0].captureToImage().asAndroidBitmap()
         val pixels = IntArray(image.width * image.height)
         image.getPixels(pixels, 0, image.width, 0, 0, image.width, image.height)
         val paper = pixels.asIterable().groupingBy { it }.eachCount().maxBy { it.value }.key
@@ -253,11 +303,58 @@ class EmailOfferMotionDeviceTest {
         }
     }
 
-    /** What stood before the tap: the offer's card, how far under the pass the row after it stood, its title's ink. */
-    private class Offer(val card: Place, val gap: Float, val ink: Int)
+    /**
+     * What stood before the tap: the offer's card, how far under the pass the row after it stood, its title's ink and
+     * where asked its pixels.
+     */
+    private class Offer(val card: Place, val gap: Float, val ink: Int, val snap: Snap? = null)
 
-    /** In a frame, how far under the pass the row after the offer's area stands, and how much of the title is drawn. */
-    private class Moment(val gap: Float, val ink: Int)
+    /**
+     * In a frame, how far under the pass the row after the offer's area stands, how much of the card's title is drawn
+     * and how much of the line saying the email is on.
+     */
+    private class Moment(val gap: Float, val ink: Int, val line: Int = 0, val snap: Snap? = null)
+
+    /** A part's pixels, `width` across, its top left at (`left`, `top`) in the root's pixels. */
+    private class Snap(val left: Int, val top: Int, val width: Int, val height: Int, val pixels: IntArray) {
+        /** The colour most of its pixels have: the ground it stands on. */
+        val paper: Int by lazy { pixels.asIterable().groupingBy { it }.eachCount().maxBy { it.value }.key }
+
+        private fun at(x: Int, y: Int): Int? =
+            if (x in left until left + width && y in top until top + height) pixels[(y - top) * width + x - left] else null
+
+        /**
+         * Whether this leaves the root's pixel (`x`, `y`) bare: outside it, or its ground there and all round within
+         * [REACH], so that nothing it draws, its letters' soft edges included, falls on it.
+         */
+        fun bare(x: Int, y: Int): Boolean = (-REACH..REACH).all { dy ->
+            (-REACH..REACH).all { dx -> at(x + dx, y + dy)?.let { distance(it, paper) <= BARE } ?: true }
+        }
+
+        /**
+         * How much is drawn on the pixels `over` leaves bare: how far each stands from this part's ground, summed, as
+         * [titleInk] counts.
+         */
+        fun ink(over: Snap): Int {
+            val ground = paper
+            var sum = 0
+            for (row in 0 until height) for (column in 0 until width) {
+                if (over.bare(left + column, top + row)) sum += distance(pixels[row * width + column], ground)
+            }
+            return sum
+        }
+
+        companion object {
+            /** How far from its ground a pixel may stand and still be bare. */
+            const val BARE = 16
+
+            /** How many pixels round a drawn one are not bare either: the root's pixels and a capture's may differ by one. */
+            const val REACH = 2
+
+            fun distance(one: Int, other: Int): Int =
+                maxOf(abs(Color.red(one) - Color.red(other)), abs(Color.green(one) - Color.green(other)), abs(Color.blue(one) - Color.blue(other)))
+        }
+    }
 
     /** A part's bounds in the root, as drawn, in dp. */
     private data class Place(val left: Float, val top: Float, val right: Float, val bottom: Float) {
@@ -282,6 +379,9 @@ class EmailOfferMotionDeviceTest {
 
         /** By when the card's 0.1 s fade has ended, past the frame it ends on. */
         const val FADED_MILLIS = 112L
+
+        /** By when the line's 0.2 s fade in has ended, past the frame it ends on. */
+        const val LINE_SHOWN_MILLIS = 224L
 
         /** The rows the pass's column may have under the offer, any of which follows it. */
         val ROWS = listOf(PAGE_PICKUP, PAGE_CARRIER_SAYS, PAGE_QUIET, PAGE_IDENTITY, PAGE_FACTS)

@@ -14541,7 +14541,11 @@ export const CARRIER_CAPABILITIES = {
       "Toll IPEC",
       "Toll Priority",
       "Toll New Zealand",
-      "Toll NZ"
+      "Toll NZ",
+      "Team Global Express (MyTeamGE)",
+      "Team Global Express(NZ)",
+      "Team Global Express Australia",
+      "Team Global Express New Zealand"
     ],
     "countries": [
       "AU",
@@ -15073,7 +15077,9 @@ export const CARRIER_CAPABILITIES = {
       "Dhlink",
       "驼飞侠",
       "駝飛俠",
-      "XZG"
+      "XZG",
+      "QYEXP",
+      "Asus International"
     ],
     "countries": [
       "CN"
@@ -15135,6 +15141,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^AUS[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^QYE[A-Z]{2}\\d{10}YQ$",
         "confidence": "low"
       },
       {
@@ -51133,6 +51143,35 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.alphastline.com/"
+  },
+  "dpdex": {
+    "displayName": "DpdEx",
+    "aliases": [
+      "Dpdex",
+      "Duopuda",
+      "多普达国际",
+      "多普达",
+      "深圳市多普达智慧物流有限公司",
+      "Shenzhen Duopuda Smart Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#003da5",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^DPE\\d{11}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.duopudaexpress.com/"
   }
 } as const;
 
@@ -52608,7 +52647,8 @@ export const CARRIER_IDS = [
   "teleport",
   "time-matters",
   "vichare",
-  "alphastline"
+  "alphastline",
+  "dpdex"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

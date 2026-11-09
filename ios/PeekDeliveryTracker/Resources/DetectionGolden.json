@@ -78599,6 +78599,14 @@
     ]
   },
   {
+    "input": "DPE99999999990",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpdex"
+    ]
+  },
+  {
     "input": "DPK212604897303",
     "carrier": "unknown",
     "confidence": "none",
@@ -94607,6 +94615,17 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "QYEAA1999999980YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
+    ]
   },
   {
     "input": "R080065106202",

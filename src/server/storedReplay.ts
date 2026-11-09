@@ -13,7 +13,9 @@
  * pending after the delivery round), and, where the map knows neither, the wording rules for a
  * scan its adapter gave no stage. A scan its adapter gave the stage of the scan before it, with no
  * source of its own, keeps it whatever the map says of its code. A registration dated over a minute after the answer's
- * first movement is in transit, as the scraper reads each answer (`resolveResult`). A notice stored as one
+ * first movement is in transit, as the scraper reads each answer (`resolveResult`), unless the sync stored it or its
+ * source answered since Peek ran a release that reads it so: its stage is then that answer's reading, which a
+ * movement the carrier no longer lists does not change, and the next check would undo the change. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. A wording Postal Ninja relays for a carrier whose map reads it
  * whole is read with that map first (`relayedAnswer`), as its adapter reads it. A universal provider's copy of a scan to
@@ -41,6 +43,8 @@ export interface StoredScan {
   description: string;
   location: string | null;
   raw: JsonObject;
+  /** When the sync stored it. Exports before the field have none. */
+  createdAt?: string;
 }
 
 export interface StoredParcel {
@@ -54,6 +58,8 @@ export interface StoredParcel {
   archived?: boolean;
   /** The carriers whose answers it stores: its own, and the one tracking it since a hand-over. Exports before the field have none. */
   carriers?: string[];
+  /** When each source last answered one of its checks, by source; null when none did. Exports before the field have none. */
+  answered?: Record<string, string> | null;
   events: StoredScan[];
 }
 
@@ -108,8 +114,11 @@ select json_build_object('id', p.id, 'destination', p.carrier_data->>'destinatio
   'archived', p.archived_at is not null,
   'carriers', (select coalesce(json_agg(distinct c), '[]') from unnest(array[p.carrier, p.carrier_data->>'original_carrier', p.carrier_data->>'active_tracking_carrier']) c
     where c is not null and c <> 'unknown'),
+  'answered', (select json_object_agg(a.source_carrier, a.at) from (select source_carrier, max(completed_at) at from tracking_sync_attempts
+    where package_id = p.id and outcome in ('updated', 'unchanged') and source_carrier is not null group by source_carrier) a),
   'events', (select json_agg(json_build_object('id', e.id, 'providerEventId', e.provider_event_id, 'stage', e.stage,
-    'occurredAt', e.occurred_at, 'description', e.description, 'location', e.location, 'raw', e.raw_data)) from tracking_events e where e.package_id = p.id))
+    'occurredAt', e.occurred_at, 'description', e.description, 'location', e.location, 'raw', e.raw_data, 'createdAt', e.created_at))
+    from tracking_events e where e.package_id = p.id))
 from packages p where exists (select 1 from tracking_events e where e.package_id = p.id);`;
 
 /** The bases `dateLocalClocks` gives a zone it deduced; a stated offset has none of them. */
@@ -131,6 +140,13 @@ const relayedWordingStage = (scraperApp as Partial<typeof scraperApp>).relayedWo
 /** A release before 0.1022.0 keeps a provider's copies to the minute: looked up the same way. */
 const withoutMinuteCopies = (scraperApp as Partial<typeof scraperApp>).withoutMinuteCopies;
 const UNIVERSAL = 'unknown';
+/**
+ * By when Peek ran a release that reads late registrations (0.740.0, the first it adopted that does). The sync writes
+ * every row an answer lists with that answer's reading, so a row stored since, or whose source answered since, holds the
+ * scraper's reading of the answer it last came in, which may no longer list the movement the stored rows date it after.
+ * A release that reads them otherwise moves it.
+ */
+const LATE_REGISTRATIONS_READ_SINCE = Date.parse('2026-10-25T22:30:00Z');
 const MINUTE_MS = 60_000;
 const words = (value: string) => value.trim().replace(/\s+/g, ' ').toLowerCase();
 const text = (value: unknown) => typeof value === 'string' ? value : null;
@@ -304,6 +320,7 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
     reasons.push(reason);
   }
   for (const index of lateRegistrations(scans, ordered)) {
+    if (readSinceLateRegistrations(parcel, source, ordered[index])) continue;
     scans[index] = { ...scans[index], stage: 'in_transit', stage_source: 'carrier_map' };
     reasons[index] = 'late';
   }
@@ -331,6 +348,11 @@ function lateRegistrations(scans: readonly JsonObject[], ordered: readonly Store
   const read = (resolveResult({ status: 'unknown', events } as unknown as CarrierResult).events ?? []) as unknown as JsonObject[];
   return events.flatMap((event, index) => (text(event.stage) ?? classifyStage(String(event.description)).stage) === 'registered'
     && read[index]?.stage === 'in_transit' ? [index] : []);
+}
+
+/** The sync stored the row, or its source answered, since Peek ran a release that reads late registrations. */
+function readSinceLateRegistrations(parcel: StoredParcel, source: string, scan: StoredScan): boolean {
+  return [scan.createdAt, parcel.answered?.[source]].some((at) => typeof at === 'string' && Date.parse(at) >= LATE_REGISTRATIONS_READ_SINCE);
 }
 
 /**

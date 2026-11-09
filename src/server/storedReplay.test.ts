@@ -62,6 +62,24 @@ describe('stored scan replay', () => {
     expect(first).toEqual([]);
   });
 
+  it('keeps a late registration the sync stored, or whose source answered, since a release read late registrations', () => {
+    // The carrier no longer lists the first-mile movement the stored rows date the label after: the answer the sync
+    // last read gave the label its stage, and the next check would undo the change.
+    const moved = scan('moved', 'jrt', '2026-10-18T10:00:00Z', 'in_transit', 'Departed from facility', { stage: 'in_transit' });
+    const label = (createdAt: string): StoredScan => ({
+      ...scan('label', 'jrt', '2026-10-20T10:00:00Z', 'registered', 'Shipment information received', { stage: 'registered' }), createdAt,
+    });
+    const before = '2026-10-20T11:00:00Z';
+    const after = '2026-11-01T11:00:00Z';
+
+    expect(replayParcel(parcel(moved, label(after)))).toEqual([]);
+    expect(replayParcel({ ...parcel(moved, label(before)), answered: { jrt: after } })).toEqual([]);
+    expect(replayParcel({ ...parcel(moved, label(before)), answered: { 'yun-express': after, jrt: before } }))
+      .toEqual([expect.objectContaining({ row: 'label', to: 'in_transit', reason: 'late' })]);
+    expect(replayParcel({ ...parcel(moved, label(before)), answered: null }))
+      .toEqual([expect.objectContaining({ row: 'label', to: 'in_transit', reason: 'late' })]);
+  });
+
   it('reads a wording Postal Ninja relays for PostNL with PostNL\'s map, as its adapter does', () => {
     const relayed = (id: string, stage: string, description: string, raw: JsonObject) => scan(id, 'unknown', `2026-11-0${id.length % 9}T10:00:00Z`,
       stage, description, { universal_provider: 'Postal Ninja', stage, ...raw });

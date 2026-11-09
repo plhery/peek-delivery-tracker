@@ -847,6 +847,7 @@ describe('carrier brand', () => {
       'dago-express',
       'jlog',
       'time-matters',
+      'alphastline',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -730,7 +730,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'f2-logistics'
   | 'dago-express'
   | 'jlog'
-  | 'time-matters';
+  | 'time-matters'
+  | 'alphastline';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

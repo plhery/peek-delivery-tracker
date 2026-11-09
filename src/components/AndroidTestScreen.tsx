@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { holdsSignIn } from '../auth/savedSignIn';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
@@ -8,6 +8,7 @@ import {
   ANDROID_TEST_LINKS, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
 } from '../lib/androidTest';
 import { AppearanceProvider } from '../lib/appearance';
+import { backOnSite } from '../lib/backOnSite';
 import { useTabTitle } from '../lib/tabTitle';
 import { Icon } from './Icon';
 import { PeekMark } from './PeekMark';
@@ -53,19 +54,12 @@ function AndroidTest() {
   const joined = !!note?.steps?.group;
   // The first step not taken yet leads; once all are, none does.
   const next = joined ? STEPS.find(({ step }) => !note?.steps?.[step])?.step : 'group';
-  function back(event: MouseEvent<HTMLAnchorElement>) {
-    // Back where the visitor came from on this site, as it was left; anyone else goes to the home page.
-    if (history.length > 1 && document.referrer.startsWith(`${location.origin}/`)) {
-      event.preventDefault();
-      history.back();
-    }
-  }
 
   return <div className="android-steps">
     <header className="android-steps__header">
       {/* The home page is another document. */}
       {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-      <a href="/" onClick={back}><Icon name="back" />{t('androidTest.page.back')}</a>
+      <a href="/" onClick={backOnSite}><Icon name="back" />{t('androidTest.page.back')}</a>
       <LanguageControl />
     </header>
     <main className="android-steps__main" aria-labelledby="android-steps-title">

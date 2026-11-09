@@ -4,7 +4,7 @@ import { pageLocale, SUPPORTED_LOCALES } from './locale';
 export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
 type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string; androidWebsite?: string };
 /** Where on a screen an invitation stands, when one screen holds it in more than one place. */
-export type AnalyticsSpot = 'parcel' | 'alerts' | 'home' | 'landing' | 'footer';
+export type AnalyticsSpot = 'parcel' | 'alerts' | 'home' | 'landing' | 'footer' | 'get-app';
 type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; spot?: AnalyticsSpot; mode: 'demo' | 'account' | 'anonymous' };
 let config: Configuration | null = null;
 let startup: Promise<void> | undefined;

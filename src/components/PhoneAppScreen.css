@@ -1,0 +1,24 @@
+/* `/app` for whoever the server could not send on to an app: a page of its own, which loads this stylesheet itself. */
+.phone-app { min-height: 100dvh; padding: env(safe-area-inset-top) 16px max(28px, env(safe-area-inset-bottom)); background: var(--canvas); color: var(--ink); }
+.phone-app[hidden] { display: none; }
+.phone-app__header { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: min(100%, 520px); min-height: 56px; margin: 0 auto; }
+.phone-app__header > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding-inline: 4px; color: inherit; font-size: 13px; font-weight: 600; text-decoration: none; }
+.phone-app__header > a svg { width: 14px; height: 14px; stroke-width: 2.4; }
+.phone-app__header .language-control select { min-height: 40px; }
+.phone-app__main { display: grid; justify-items: center; gap: 14px; width: min(100%, 520px); margin: 0 auto; padding: 4px 8px; text-align: center; }
+.phone-app__main h1 { margin: 6px 0 4px; font-size: 28px; font-weight: 650; letter-spacing: -1px; line-height: 1.1; text-wrap: balance; }
+/* The code is for a computer only: on a phone or a tablet the buttons are the way. */
+.phone-app__qr { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .phone-app__qr { display: grid; justify-items: center; gap: 12px; padding: 18px 22px; border-radius: 20px; background: var(--paper); }
+}
+.phone-app__qr img { display: block; width: 168px; height: 168px; border-radius: 8px; }
+.phone-app__qr > span { display: grid; gap: 3px; font-size: 13px; line-height: 1.4; }
+.phone-app__qr strong { font-size: 14px; font-weight: 600; }
+.phone-app__qr > span > span { color: var(--ink-soft); }
+.phone-app__buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; }
+.phone-app__buttons .button svg { width: 19px; height: 19px; }
+.phone-app__android { max-width: 40ch; margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.5; text-wrap: balance; }
+@media (max-width: 420px) {
+  .phone-app__buttons { display: grid; width: 100%; }
+}

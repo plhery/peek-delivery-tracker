@@ -7,6 +7,7 @@ import { APPEARANCE_BOOTSTRAP } from './src/lib/appearanceConfig';
 import { ENTRY_HINT_BOOTSTRAP } from './src/lib/entryHintConfig';
 import { isPageOnlyLanguage, LOCALE_COOKIE, PAGE_LANGUAGE_HEADER, pathLanguage } from './src/lib/locale';
 import { MAIL_LINK_BOOTSTRAP } from './src/lib/mailLinkConfig';
+import { PHONE_APP_PATH, phoneAppDestination, phoneAppSource } from './src/lib/phoneApp';
 import { pageSupabaseOrigins } from './src/server/runtime';
 import { legacyHostRedirect } from './src/server/siteHosts';
 
@@ -27,6 +28,16 @@ export function proxy(request: NextRequest) {
   });
   // Never stored: the answer depends on who asks, and a later change of hosts must take effect at once.
   if (moved) return NextResponse.redirect(moved, { status: 308, headers: { 'Cache-Control': 'private, no-store' } });
+
+  // The landing's code to scan sends a phone on to its own app; the page at `/app` is for anyone else.
+  if (request.nextUrl.pathname === PHONE_APP_PATH) {
+    const source = phoneAppSource(request.nextUrl.searchParams.get('utm_source'));
+    const destination = phoneAppDestination(request.headers.get('user-agent') ?? '', source);
+    // Never stored either: the answer depends on the phone that asks.
+    if (destination) {
+      return NextResponse.redirect(new URL(destination, request.url), { status: 302, headers: { 'Cache-Control': 'private, no-store', Vary: 'User-Agent' } });
+    }
+  }
 
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const isDevelopment = process.env.NODE_ENV === 'development';

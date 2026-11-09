@@ -103,8 +103,11 @@ describe('Landing', () => {
     const iphone = screen.getByRole('link', { name: 'your iPhone' });
     expect(iphone).toHaveAttribute('href', expect.stringContaining('&ct=web-moves&'));
     expect(iphone.parentElement).toHaveTextContent(/Peek notifies you when it matters, on your iPhone or in your browser\.$/);
-    // A computer is shown the App Store's address as a code to scan.
-    expect(screen.getByText('Scan with your iPhone').closest('.landing-qr')?.querySelector('img')).toHaveAttribute('src', '/landing/app-store-qr.svg');
+    // A computer is shown one code to scan, for either phone.
+    const code = screen.getByText('Scan with your phone').closest('.landing-qr');
+    expect(code).toHaveTextContent('Opens Peek for your phone, iPhone or Android.');
+    expect(code?.querySelector('img')).toHaveAttribute('src', '/landing/app-qr.svg');
+    expect(document.querySelectorAll('.landing-qr')).toHaveLength(1);
   });
 
   it('offers the Android app beside the iPhone app, through the closed test\'s steps, which it sums up', () => {
@@ -113,8 +116,6 @@ describe('Landing', () => {
     expect(android).toHaveAttribute('href', '/android');
     expect(android.parentElement).toBe(screen.getByRole('link', { name: 'Get the iPhone app' }).parentElement);
     expect(screen.getByText(/^The Android app is in early access: join the testers’ group, become a tester on Google Play, then install it\.$/)).toBeInTheDocument();
-    // A computer is shown the steps' address as a code to scan with the phone.
-    expect(screen.getByText('Scan with your Android phone').closest('.landing-qr')?.querySelector('img')).toHaveAttribute('src', '/landing/android-qr.svg');
   });
 
   it('ends with the name, the privacy notice, the iPhone and Android apps, the code and the language', () => {

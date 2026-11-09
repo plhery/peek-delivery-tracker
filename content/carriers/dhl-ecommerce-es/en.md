@@ -3,7 +3,7 @@ title: DHL eCommerce Iberia tracking: statuses and ServicePoints
 description: Track a DHL eCommerce parcel in Spain or Portugal: what each status means, missed deliveries, ServicePoints, CTT Express and what to do if it's lost or damaged.
 slug: dhl-ecommerce-iberia-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-09
 ---
 
 DHL eCommerce Iberia is DHL's parcel network in Spain and Portugal, formerly DHL Parcel Iberia, and the DHL Parcel name still turns up in places. Paste the number in the box above to track the parcel; on its page, "Open the DHL eCommerce Iberia website" takes you to the same shipment on DHL's own tracking page. The number comes from the shop that sent the parcel.
@@ -46,7 +46,7 @@ Some need explaining:
 
 ## Missed delivery and ServicePoints
 
-**Nobody home.** A failed attempt shows as `The delivery could not be made due to consignee absent`, or `Receiver closed: delivery not possible` when the address was closed. Later scans such as `New delivery date requested` or `Delivery agreed with recipient` mean a new delivery date has been asked for or agreed.
+**Nobody home.** A failed attempt shows as `The delivery could not be made due to consignee absent`, or `Receiver closed: delivery not possible` when the address was closed. Later scans such as `New delivery date requested` or `Delivery agreed with recipient` mean a new delivery date has been asked for or agreed. If you see `Incorrect address details: delivery not possible` instead, the address details didn't let the courier deliver: Peek shows "Needs attention", and you or the sender need to sort it out before the parcel moves on.
 
 **ServicePoints.** `Parcel will be delivered to a DHL ServicePoint` and `Parcel is on it's way to our DHL ServicePoint` mean the parcel is heading for a DHL ServicePoint shop. Once it's ready there, Peek shows a "Pickup point" card with the shop's name and address, directions and a button to copy the address. Peek doesn't get the opening hours: check them, and how long the parcel waits, with DHL.
 

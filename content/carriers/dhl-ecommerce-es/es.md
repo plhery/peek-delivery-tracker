@@ -3,7 +3,7 @@ title: DHL eCommerce Iberia seguimiento: estados y ServicePoints
 description: Sigue tu paquete DHL eCommerce en España: qué significa cada estado, qué pasa si no estás, el ServicePoint, CTT Express y qué hacer si se pierde o llega dañado.
 slug: dhl-ecommerce-iberia-seguimiento
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-09
 ---
 
 DHL eCommerce Iberia es la red de paquetería de DHL en España y Portugal, la antigua DHL Parcel Iberia (ese nombre aún sale en algunos sitios). Para seguir tu paquete, pega el número en la casilla de arriba; en la ficha del paquete, «Abrir la web de DHL eCommerce Iberia» te lleva al mismo envío en la página de seguimiento de DHL. El número te lo da la tienda que te envía el paquete.
@@ -47,7 +47,7 @@ Algunos piden explicación:
 
 ## Entrega DHL eCommerce: ausente y ServicePoint
 
-**Si no estás.** El intento fallido sale como `The delivery could not be made due to consignee absent`, o como `Receiver closed: delivery not possible` si el sitio estaba cerrado. Si después ves `New delivery date requested` o `Delivery agreed with recipient`, se ha pedido o acordado una nueva fecha de entrega.
+**Si no estás.** El intento fallido sale como `The delivery could not be made due to consignee absent`, o como `Receiver closed: delivery not possible` si el sitio estaba cerrado. Si después ves `New delivery date requested` o `Delivery agreed with recipient`, se ha pedido o acordado una nueva fecha de entrega. Si en cambio ves `Incorrect address details: delivery not possible`, los datos de la dirección no han permitido entregarlo: Peek lo muestra como «Incidencia», y tú o el remitente tenéis que resolverlo antes de que el paquete siga su camino.
 
 **ServicePoint.** `Parcel will be delivered to a DHL ServicePoint` y `Parcel is on it's way to our DHL ServicePoint` quieren decir que el paquete va camino de una tienda DHL ServicePoint. Cuando ya está allí, Peek te enseña una tarjeta «Punto de recogida» con el nombre y la dirección de la tienda, cómo llegar y un botón para copiar la dirección. Peek no recibe el horario: consúltalo con DHL, igual que el tiempo que te guardan el paquete.
 

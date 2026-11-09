@@ -3,7 +3,7 @@ title: DHL eCommerce Iberia rastreio: estados e ServicePoints
 description: Rastreio DHL eCommerce (antiga DHL Parcel) em Portugal: o que quer dizer cada estado, entregas falhadas, o ServicePoint, a CTT Express e encomendas perdidas.
 slug: dhl-ecommerce-iberia-rastreio
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-09
 ---
 
 A DHL eCommerce Iberia é a rede de encomendas da DHL em Portugal e Espanha, a antiga DHL Parcel Iberia; o nome DHL Parcel ainda aparece em vários sítios. Para seguires a encomenda, cola o número na caixa acima; na página da encomenda, «Abrir o site de DHL eCommerce Iberia» leva-te ao mesmo envio na página de seguimento da DHL. O número vem da loja que te enviou a encomenda.
@@ -47,7 +47,7 @@ Alguns pedem explicação:
 
 ## Entrega falhada e ServicePoints
 
-**Ninguém em casa.** A tentativa falhada aparece como `The delivery could not be made due to consignee absent`, ou como `Receiver closed: delivery not possible` se o local estava fechado (uma loja ou um escritório, por exemplo). Se depois vires `New delivery date requested` ou `Delivery agreed with recipient`, foi pedida ou combinada uma nova data de entrega.
+**Ninguém em casa.** A tentativa falhada aparece como `The delivery could not be made due to consignee absent`, ou como `Receiver closed: delivery not possible` se o local estava fechado (uma loja ou um escritório, por exemplo). Se depois vires `New delivery date requested` ou `Delivery agreed with recipient`, foi pedida ou combinada uma nova data de entrega. Se em vez disso vires `Incorrect address details: delivery not possible`, os dados da morada não permitiram fazer a entrega: o Peek mostra «Problema reportado», e tu ou o remetente têm de resolver isso antes de a encomenda seguir caminho.
 
 **ServicePoints.** `Parcel will be delivered to a DHL ServicePoint` e `Parcel is on it's way to our DHL ServicePoint` querem dizer que a encomenda vai a caminho de uma loja DHL ServicePoint. Quando já lá está, o Peek mostra um cartão «Ponto de levantamento» com o nome e a morada da loja, como chegar e um botão para copiar a morada. O Peek não recebe o horário: confirma-o com a DHL, tal como o tempo que a encomenda fica à tua espera.
 

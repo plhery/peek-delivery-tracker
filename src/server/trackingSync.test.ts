@@ -4514,6 +4514,49 @@ describe('TrackingSyncService', () => {
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
   });
 
+  it('asks the earlier carrier every 3 h for up to 14 days while the delivery carrier has only announced the parcel', async () => {
+    // The origin hands the parcel over at the delivery carrier's pre-advice and flies it a day and more later.
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    let now = new Date('2026-01-12T10:30:00Z');
+    let origin: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti',
+      last_update: '2026-01-11T10:00:00Z', events: [{ time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] };
+    const announced = [{ time: '2026-01-12T10:00:00Z', description: 'Shipment on its way to the carrier', stage: 'in_transit' },
+      { time: '2026-01-12T09:00:00Z', description: 'Shipment information received', stage: 'registered' }];
+    let delivery: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:00:00Z', events: announced };
+    const adapter = {
+      fetch: vi.fn(async (carrier: string) => (carrier === 'posti' ? delivery : origin)),
+      fetchUniversal: vi.fn(),
+    };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'announced-only', carrier: 'la-poste', tracking_number: 'CW123456785FR' };
+    const sync = async (at: string) => {
+      now = new Date(at);
+      adapter.fetch.mockClear();
+      client.insertEvents.mockClear();
+      await service.syncPackage(parcel);
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+    expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+    expect(parcel.carrier_data).toMatchObject({ active_tracking_carrier: 'posti', handed_over_at: '2026-01-12T10:30:00.000Z' });
+    expect(await sync('2026-01-13T09:30:00Z')).toEqual(['posti', 'la-poste']);
+    // A day on, the origin's late scans still come, asked after the delivery carrier's answer and every 3 h.
+    origin = { ...origin, last_update: '2026-01-13T11:00:00Z', events: [...origin.events!,
+      { time: '2026-01-13T11:00:00Z', description: 'Handed over to the airline', stage: 'in_transit' }] };
+    expect(await sync('2026-01-13T12:00:00Z')).toEqual(['posti']);
+    expect(await sync('2026-01-13T12:30:00Z')).toEqual(['posti', 'la-poste']);
+    expect(client.insertEvents.mock.calls[0][0].map((event: JsonObject) => event.description)).toContain('Handed over to the airline');
+    expect(parcel.carrier_data).toMatchObject({ earlier_checked_at: '2026-01-13T12:30:00.000Z' });
+    expect(await sync('2026-01-13T15:00:00Z')).toEqual(['posti']);
+    expect(await sync('2026-01-25T12:00:00Z')).toEqual(['posti', 'la-poste']);
+    // Not once the delivery carrier scans the parcel after the handoff, nor 14 days after it.
+    expect(await sync('2026-01-26T11:00:00Z')).toEqual(['posti']);
+    delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-25T14:00:00Z',
+      events: [{ time: '2026-01-25T14:00:00Z', description: 'Arrived at the sorting centre', stage: 'in_transit' }, ...announced] };
+    expect(await sync('2026-01-25T16:00:00Z')).toEqual(['posti']);
+    expect(adapter.fetchUniversal).not.toHaveBeenCalled();
+  });
+
   it('takes the summary from the earlier carrier asked again when it has followed the parcel days past the partner', async () => {
     const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
     let now = new Date('2026-01-12T10:30:00Z');

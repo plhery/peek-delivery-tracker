@@ -199,6 +199,13 @@ const DELIVERY_PROBE_MAX_INTERVAL_MS = 6 * 60 * 60 * 1_000;
  * DELIVERY_PROBE_INTERVAL_MS, alongside the delivery carrier.
  */
 const EARLIER_FOLLOW_UP_MS = 24 * 60 * 60 * 1_000;
+/**
+ * After that day, while the delivery carrier has scanned nothing past the label since the handoff (JRT hands a
+ * parcel to DHL at the shipper's pre-advice and flies it days later), the earlier carrier still carries the
+ * parcel: it is asked after the delivery carrier's answer, every EARLIER_ANNOUNCED_INTERVAL_MS, this long at most.
+ */
+const EARLIER_ANNOUNCED_FOLLOW_UP_MS = 14 * 24 * 60 * 60 * 1_000;
+const EARLIER_ANNOUNCED_INTERVAL_MS = 3 * 60 * 60 * 1_000;
 
 interface DeliveryProbe extends JsonObject {
   at: string;
@@ -211,12 +218,32 @@ interface DeliveryProbe extends JsonObject {
   misses?: number;
 }
 
-/** Whether this check asks a handed-over parcel's earlier carrier again: within a day of the handoff, at most hourly. */
-function asksEarlierCarrier(metadata: JsonObject, now: Date): boolean {
+/**
+ * How this check asks a handed-over parcel's earlier carrier again: alongside the delivery carrier within a day of
+ * the handoff, at most hourly; after it, every 3 h for up to 14 days, once the delivery carrier's answer shows it
+ * still only announces the parcel (`announcedOnly`).
+ */
+function earlierFollowUp(metadata: JsonObject, now: Date): 'alongside' | 'announced' | null {
   const handedOver = Date.parse(String(metadata.handed_over_at ?? ''));
   const asked = Math.max(handedOver, Date.parse(String(metadata.earlier_checked_at ?? '')) || 0);
-  const time = now.getTime();
-  return time >= handedOver && time - handedOver < EARLIER_FOLLOW_UP_MS && time - asked >= DELIVERY_PROBE_INTERVAL_MS;
+  const since = now.getTime() - handedOver;
+  if (!(since >= 0)) return null;
+  if (since < EARLIER_FOLLOW_UP_MS) return now.getTime() - asked >= DELIVERY_PROBE_INTERVAL_MS ? 'alongside' : null;
+  return since < EARLIER_ANNOUNCED_FOLLOW_UP_MS && now.getTime() - asked >= EARLIER_ANNOUNCED_INTERVAL_MS ? 'announced' : null;
+}
+
+/** Stages a delivery carrier reports only once it holds the parcel. */
+const HELD_BY_PARTNER = new Set(['out_for_delivery', 'failed_attempt', 'ready_for_pickup', 'delivered', 'returned', 'exception']);
+
+/**
+ * Whether a delivery carrier's answer still only announces the parcel: no scan past the label dated since the
+ * handoff, and nothing it reports only once it holds the parcel, such as a delivery round.
+ */
+function announcedOnly(answer: CarrierResult, metadata: JsonObject): boolean {
+  const handedOver = Date.parse(String(metadata.handed_over_at ?? ''));
+  const events = (answer.events ?? []).filter(isRecord);
+  return !HELD_BY_PARTNER.has(resultStage(answer) ?? '') && !events.some((event) => HELD_BY_PARTNER.has(eventStage(event))
+    || (!['pending', 'registered'].includes(eventStage(event)) && Date.parse(String(event.time ?? '')) >= handedOver));
 }
 
 /** Further than any clock read a zone away (UTC−12 to UTC+14) can put one scan from another. */
@@ -2849,24 +2876,29 @@ export class TrackingSyncService {
       // The earlier carrier still publishes late scans: ask it too, as at the handoff, for a while.
       // One with no adapter of its own has none to ask.
       const followUp = metadata.original_carrier === carrierId && carrierId !== activeCarrier && directCarrier(carrierId)
-        && metadata.original_tracking_number === trackingNumber && asksEarlierCarrier(metadata, this.now())
-        && await royalBrowserAllowed(carrierId, 'handoff');
-      const [result, earlier] = await Promise.all([
+        && metadata.original_tracking_number === trackingNumber ? earlierFollowUp(metadata, this.now()) : null;
+      const askEarlier = () => this.fetchCarrier(checks, carrierId, trackingNumber,
+        typeof parcel.tracking_url === 'string' ? parcel.tracking_url : null,
+        typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language, metadata, parcelPhoneDigits(parcel, carrierId),
+      ).then(normalizeCarrierResult).catch((error: unknown) => {
+        // The delivery carrier answers for the parcel: a miss here only waits for the next follow-up.
+        if (!isUnannouncedTrackingError(error)) reportRoutingEvent('provider_failed', {
+          carrier: carrierId, provider: carrierId, trackingNumber, category: routingFailure(error).kind,
+          errorClass: errorType(error), error,
+        });
+        return null;
+      });
+      const alongside = followUp === 'alongside' && await royalBrowserAllowed(carrierId, 'handoff');
+      const [answer, alongsideAnswer] = await Promise.all([
         this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata),
-        followUp ? this.fetchCarrier(checks, carrierId, trackingNumber,
-          typeof parcel.tracking_url === 'string' ? parcel.tracking_url : null,
-          typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language, metadata, parcelPhoneDigits(parcel, carrierId),
-        ).then(normalizeCarrierResult).catch((error: unknown) => {
-          // The delivery carrier answers for the parcel: a miss here only waits for the next follow-up.
-          if (!isUnannouncedTrackingError(error)) reportRoutingEvent('provider_failed', {
-            carrier: carrierId, provider: carrierId, trackingNumber, category: routingFailure(error).kind,
-            errorClass: errorType(error), error,
-          });
-          return null;
-        }) : null,
+        alongside ? askEarlier() : null,
       ]);
+      const result = normalizeCarrierResult(answer);
+      const afterAnnouncement = followUp === 'announced' && announcedOnly(result, metadata)
+        && await royalBrowserAllowed(carrierId, 'handoff');
+      const earlier = afterAnnouncement ? await askEarlier() : alongsideAnswer;
       return {
-        result: { ...normalizeCarrierResult(result), ...(followUp ? { earlier_checked_at: this.now().toISOString() } : {}) },
+        result: { ...result, ...(alongside || afterAnnouncement ? { earlier_checked_at: this.now().toISOString() } : {}) },
         sourceCarrierId: activeCarrier, swissPostReady: activeCarrier === 'swiss-post' ? true : null, handoffFallbackErrorType: null,
         ...(earlier ? { earlierResult: earlier, earlierCarrierId: carrierId, earlierFollowUp: true } : {}),
       };

@@ -34,6 +34,8 @@ import kotlinx.coroutines.cancel
 import okhttp3.OkHttpClient
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -145,5 +147,40 @@ class ShareDeviceTest {
         compose.waitForIdle()
         assertEquals("Your parcel 1Z999AA10123456784 is on its way", fieldText(ADD_TRACKING))
         assertEquals("Running shoes", fieldText(ADD_NAME))
+    }
+
+    /**
+     * B-SE10: the card speaks the app's own language, as the extension reads `deliveryTrackerLocale` from the App Group:
+     * the language saved in the defaults the app shares with it, here French or, on a phone in French, German, rather
+     * than the phone's; its window's name too, which TalkBack reads first. Cancel takes it down. The saved language is
+     * put back.
+     */
+    @Test
+    fun theCardSpeaksTheAppsOwnLanguage() {
+        val defaults = app.shareDefaults()
+        val before = defaults.string(AppLanguage.storageKey)
+        val phone = ExtensionLocalizer(null, Device.preferredLanguages())
+        val chosen = if (phone.languageCode == "fr") "de" else "fr"
+        defaults.set(chosen, forKey = AppLanguage.storageKey)
+        try {
+            val copy = ExtensionLocalizer(chosen, emptyList())
+            assertNotEquals(phone.text("shareExtension.ready"), copy.text("shareExtension.ready"))
+            val share = Intent(Intent.ACTION_SEND).setType("text/plain").setPackage(context.packageName)
+                .putExtra(Intent.EXTRA_TEXT, "Your parcel 1Z999AA10123456784 is on its way")
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(share)
+            compose.waitUntil(10_000) { exists(SHARE_CARD) && text(SHARE_STATUS) == copy.text("shareExtension.ready") }
+            assertEquals(copy.text("shareExtension.title"), text(SHARE_TITLE))
+            assertEquals(copy.text("common.cancel"), text(SHARE_CLOSE))
+            val card = cards().single()
+            var title: CharSequence? = null
+            instrumentation.runOnMainSync { title = card.title }
+            assertEquals(copy.text("shareExtension.title"), title.toString())
+            compose.onNodeWithTag(SHARE_CLOSE).performClick()
+            compose.waitUntil(5_000) { !exists(SHARE_CARD) && cards().isEmpty() }
+            assertNull("Nothing saved", ShareInbox.consume(defaults))
+        } finally {
+            if (before != null) defaults.set(before, forKey = AppLanguage.storageKey) else defaults.removeObject(forKey = AppLanguage.storageKey)
+        }
     }
 }

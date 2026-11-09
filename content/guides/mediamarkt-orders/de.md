@@ -28,7 +28,7 @@ Beim Marketplace bezahlst du zwar im MediaMarkt-Shop, die Ware schickt dir aber 
 
 **Österreich (mediamarkt.at).** Pakete bis 31,5 kg bringen die [Österreichische Post](carrier:austrian-post) oder GLS Austria, mit einem Link zur Sendungsverfolgung „beim jeweiligen Zusteller“. Briefsendungen wie CDs, DVDs und Software haben keinen Link. Großgeräte und Fernseher über 43 Zoll liefert der MediaMarkt Powerservice, der sich schriftlich oder telefonisch für einen Termin meldet. Eine Wandhalterung kommt getrennt per GLS oder DPD.
 
-**Schweiz (mediamarkt.ch).** Pakete und Briefe bringt die [Post](carrier:swiss-post), Geräte über 30 kg ein Spediteur, der dir den Termin telefonisch mitteilt.
+**Schweiz (mediamarkt.ch).** Pakete und Briefe bringt die [Post](carrier:swiss-post), Grossartikel ein Spediteur, der dir den Termin telefonisch mitteilt: bis 30 kg bis zur Bordsteinkante, darüber bis in deine Etage.
 
 :::journey
 - warehouse | MediaMarkt oder ein Marketplace-Händler | Bei mehreren Artikeln gilt die längste Lieferzeit
@@ -182,7 +182,7 @@ Peek zeigt, was der Paketdienst veröffentlicht. Erstattungen, Retouren und Abho
 - [MediaMarkt Österreich FAQ: Lieferverzug](https://hilfe.mediamarkt.at/app/answers/detail/a_id/6908) – Kundenservice nach dem Liefertermin
 - [MediaMarkt Österreich FAQ: Lieferadresse](https://hilfe.mediamarkt.at/app/answers/detail/a_id/6801) – nicht ins Ausland
 - [MediaMarkt Österreich FAQ: Umtausch oder Kaufrücktritt](https://hilfe.mediamarkt.at/app/answers/detail/a_id/20855) – Retourenlabel, Rückgabe im Markt, Marketplace nicht im Markt
-- [MediaMarkt Schweiz: Versandkosten](https://www.mediamarkt.ch/de/service/lieferung-und-montage/versandkosten) – Post, Schweiz und Liechtenstein, vor 17 Uhr, Poststelle, Spediteur über 30 kg, Preise
+- [MediaMarkt Schweiz: Versandkosten](https://www.mediamarkt.ch/de/service/lieferung-und-montage/versandkosten) – Post, Schweiz und Liechtenstein, vor 17 Uhr, Poststelle, Spediteur für Grossartikel, Preise
 - [MediaMarkt Schweiz: Marktabholung](https://www.mediamarkt.ch/de/service/lieferung-und-montage/marktabholung) – 12 Tage, 4 Tage reserviert
 - [MediaMarkt Schweiz: Retouren](https://www.mediamarkt.ch/de/service/retouren) – 30 Tage, Markt oder Post, nur Rückerstattung per Post, Marketplace, 0848 544 455
 - [MediaMarkt Schweiz FAQ: Lieferstatus](https://faq-de.mediamarkt.ch/app/answers/detail/a_id/19955) – Tracking-Link per E-Mail oder SMS, nicht für Spediteur und Briefpost, Kundenkonto

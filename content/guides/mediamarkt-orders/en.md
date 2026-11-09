@@ -26,7 +26,7 @@ It depends on the country, the size of the item and who sells it. What each shop
 | Germany (mediamarkt.de, saturn.de) | [DHL](carrier:dhl), [Hermes](carrier:hermes-de) or [DPD](carrier:dpd-de) | Freight: Hermes, Nikos, ZAC or Power Service | "Sofort-Lieferung" (instant delivery) with Uber |
 | Spain (mediamarkt.es) | [Paack](carrier:paack), [SEUR](carrier:seur), [Correos](carrier:correos-spain), [TIPSA](carrier:tipsa), [InPost](carrier:mondial-relay), Method, Ader or Citylogin | "Productos voluminosos" (bulky items) | Glovo, or same day in parts of Madrid |
 | Austria (mediamarkt.at) | [Austrian Post](carrier:austrian-post) or GLS Austria | MediaMarkt Powerservice | "Sofort-Lieferung" with Wolt |
-| Switzerland (mediamarkt.ch) | [Swiss Post](carrier:swiss-post) | A freight carrier over 30 kg | None named |
+| Switzerland (mediamarkt.ch) | [Swiss Post](carrier:swiss-post) | A freight carrier for bulky items: to the kerb up to 30 kg, to your floor over 30 kg | None named |
 | Belgium (mediamarkt.be) | [bpost](carrier:bpost) or PostNL | Delivered by appointment | Sunday delivery in six cities |
 
 In Germany, freight means appliances from 31.5 kg, TVs from 42 inches and e-bikes. When Hermes brings one, it's the [Hermes Einrichtungs-Service](carrier:hermes-einrichtungs-service): a button on the tracking page leads to its site. In Spain, "voluminosos" are items over 31 kg or with special dimensions, such as TVs over 55 inches and washing machines.
@@ -194,7 +194,7 @@ Peek shows what the carrier publishes. Refunds, returns and appointments stay in
 - [MediaMarkt Austria FAQ: Delivery time](https://hilfe.mediamarkt.at/app/answers/detail/a_id/6903) – next working day
 - [MediaMarkt Austria FAQ: Late delivery](https://hilfe.mediamarkt.at/app/answers/detail/a_id/6908) – contact customer service
 - [MediaMarkt Austria FAQ: Delivery address](https://hilfe.mediamarkt.at/app/answers/detail/a_id/6801) – no delivery abroad
-- [MediaMarkt Switzerland: Shipping costs](https://www.mediamarkt.ch/de/service/lieferung-und-montage/versandkosten) – Swiss Post, Liechtenstein, freight over 30 kg
+- [MediaMarkt Switzerland: Shipping costs](https://www.mediamarkt.ch/de/service/lieferung-und-montage/versandkosten) – Swiss Post, Liechtenstein, freight carrier for bulky items
 - [MediaMarkt Switzerland FAQ: Delivery status](https://faq-de.mediamarkt.ch/app/answers/detail/a_id/19955) – link by email or text
 - [MediaMarkt Switzerland FAQ: Order not arrived](https://faq-de.mediamarkt.ch/app/answers/detail/a_id/19976) – spam folder, contact form
 - [MediaMarkt Belgium: Livraison](https://www.mediamarkt.be/fr/service/service-clients/livraison) – bpost, PostNL, bpost tracking link in the shipping confirmation, appointments, Sundays in six cities, refund or new item

@@ -98962,6 +98962,22 @@
     "candidates": []
   },
   {
+    "input": "TBAU193065397",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
+    "input": "TBAU999999980",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
     "input": "TBC 000000000000",
     "carrier": "amazon-logistics",
     "confidence": "high",

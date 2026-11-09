@@ -832,7 +832,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)[0-9]{10}|TB[ACM][0-9]{12})$",
+        "pattern": "^(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)[0-9]{10}|TB[ACM][0-9]{12}|TBAU[0-9]{9})$",
         "confidence": "high"
       }
     ],
@@ -876,7 +876,8 @@ export const CARRIER_CAPABILITIES = {
       "TR",
       "US",
       "CA",
-      "MX"
+      "MX",
+      "AU"
     ]
   },
   "amazon-shipping": {

@@ -132,7 +132,7 @@ Das kannst du, aber keine der Regeln oben verlangt eine Anzeige, bevor du dein G
 :::sources
 - [DHL: Meine Sendung wurde geliefert, aber es gibt ein Problem](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – „Zugestellt an“, Rücksendung eingeleitet, Nachbar, zwei Tage, 7 Tage
 - [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – Nachforschung, zuerst den Absender fragen
-- [DHL: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-07-2025.pdf) – Ablageort, Packstation, Briefkasten, Ersatzempfänger, elektronische Unterschrift
+- [DHL: AGB Paket/Express National (englische Fassung)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – Ablageort, Packstation, Briefkasten, Ersatzempfänger, elektronische Unterschrift
 - [Hermes: Wo ist meine Sendung?](https://www.myhermes.de/service/fragen/schaden-und-verlust/wo-ist-meine-sendung.html) – ungeklärte Zustellung, 5 Werktage, 20 Tage, Abgabequittung, Wertnachweis
 - [DPD: Support](https://www.dpd.com/de/de/support/) – Nachbar, Ablageorte, Paketshop, Nachforschung über den Versender
 - [Österreichische Post: Nachforschung](https://www.post.at/p/a/nachforschung) – Briefkasten, Abstellort, direkte Nachbarn, nur der Versender, kein Vertrag mit dem Empfänger, 3 und 6 Monate, kostenlos

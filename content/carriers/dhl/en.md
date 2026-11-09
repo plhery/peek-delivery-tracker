@@ -115,7 +115,7 @@ No. DHL Päckchen and DHL Päckchen International have no tracking; only parcels
 - [DHL: Parcel redirection](https://www.dhl.de/en/privatkunden/pakete-empfangen/an-einem-abholort-empfangen/paketumleitung.html) – redirection to a Packstation or branch and its exclusions
 - [DHL: Hilfe zum Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – postponing by up to six working days
 - [DHL: Pakete einfach hinterlegen lassen](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – safe place
-- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-102026.pdf) – DHL Paket GmbH, neighbours and household, seven-working-day hold
+- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – DHL Paket GmbH, neighbours and household, seven-working-day hold
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – phone number, hours, what to have ready
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – contact form and chat
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – damage form, post office hand-in, sender contacted, postal address

@@ -129,7 +129,7 @@ Peek показывает статус, каждую отметку с мест�
 - [DHL: Help with preferred delivery day](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – перенос доставки до шести рабочих дней, бесплатно для получателя
 - [DHL: Preferred location](https://www.dhl.de/en/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – место для посылки на участке
 - [DHL: Preferred neighbour](https://www.dhl.de/en/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/nachbar.html) – доставка выбранному соседу
-- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-07-2025.pdf) – DHL Paket GmbH и DHL Group, соседи и домашние, хранение 7 рабочих дней
+- [DHL Paket GmbH: AGB Paket/Express National (английская версия)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – DHL Paket GmbH и DHL Group, соседи и домашние, хранение 7 рабочих дней
 - [DHL: Kontaktkanal Telefon](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – телефон, часы работы, Postnummer или адрес
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – форма обратной связи и чат
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – форма о повреждении, только Filiale, связь с отправителем, почтовый адрес

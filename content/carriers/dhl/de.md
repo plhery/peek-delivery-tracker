@@ -122,7 +122,7 @@ Nein. DHL Päckchen und DHL Päckchen International haben keine Sendungsverfolgu
 - [DHL: Hilfe zum Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – Zustellung um bis zu sechs Werktage verschieben
 - [DHL: Pakete einfach hinterlegen lassen](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – Ablageort
 - [DHL: Live-Tracking](https://www.dhl.de/de/privatkunden/pakete-empfangen/sendungen-verfolgen/live-tracking.html) – 90-Minuten-Fenster, Postleitzahl, Ausnahmen
-- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-102026.pdf) – DHL Paket GmbH, Nachbarn und Haushalt, Benachrichtigung, sieben Werktage Lagerung
+- [DHL Paket GmbH: AGB Paket/Express National (englische Fassung)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – DHL Paket GmbH, Nachbarn und Haushalt, Benachrichtigung, sieben Werktage Lagerung
 - [DHL: Lösungen zu Problemen mit meinem internationalen Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – Päckchen International, fehlender Inhalt im Ausland
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – Telefonnummer, Zeiten, was du bereithalten sollst
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – Kontaktformular und Chat

@@ -131,7 +131,7 @@ No. DHL Päckchen e Päckchen International non hanno tracking: ce l'hanno solo 
 - [DHL: Hilfe zum Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – rinvio fino a sei giorni lavorativi
 - [DHL: Pakete einfach hinterlegen lassen](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – Ablageort
 - [DHL: DHL Nachbar](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/nachbar.html) – vicino di fiducia, per un pacco o per tutti
-- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-102026.pdf) – DHL Paket GmbH, vicini e conviventi, avviso
+- [DHL Paket GmbH: AGB Paket/Express National (versione inglese)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – DHL Paket GmbH, vicini e conviventi, avviso
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – numero, orari, cosa tenere pronto
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – modulo e chat
 - [DHL: Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – numero dall'estero

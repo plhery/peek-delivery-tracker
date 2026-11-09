@@ -109,7 +109,7 @@ Hilft weder der Händler noch die Plattform, bleibt der Zahlungsweg, und den geh
 :::sources
 - [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – mehr als 5 Werktage, Nachforschung, zuerst den Absender fragen
 - [DHL: Nachforschungsauftrag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/nachforschungsauftrag.html) – Formular
-- [DHL: AGB Paket/Express National](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – verloren nach 20 Kalendertagen
+- [DHL: AGB Paket/Express National (englische Fassung)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – verloren nach 20 Kalendertagen
 - [DHL: Transportversicherung](https://www.dhl.de/de/privatkunden/information/service-transportversicherung.html) – Haftung bis 500 € inkludiert, 2.500 € und 25.000 €, Preise, auch ohne Verschulden
 - [DHL: Päckchen](https://www.dhl.de/de/privatkunden/pakete-versenden/deutschlandweit-versenden/paeckchen.html) – Päckchen ohne Haftung
 - [DHL: Leistungsbeschreibung DHL Paket](https://www.dhl.de/dam/jcr:4756b8a3-a693-48fe-bcf2-a4e0fd6af320/dhl-paket-leistungsbeschreibung-de-092026.pdf) – Kleinpaket bis 20 €

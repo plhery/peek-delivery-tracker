@@ -266,7 +266,7 @@ export class TrackingSyncAudit {
     readonly answeredBy: string | null = null,
     /** The day the parcel was expected when the check began, so the review tells a day that passed from one dropped. */
     readonly previousExpectedDelivery: string | null = null,
-    /** The carrier a handoff moved the parcel to, whose answers its refreshes wait for: their health sample names it. */
+    /** The carrier a handoff moved the parcel to, whose answers its refreshes wait for: their health sample names it and reads its answer. */
     readonly trackedBy: string | null = null,
   ) {
     this.#startedAtIso = now.toISOString();
@@ -447,8 +447,10 @@ export class TrackingSyncAudit {
     // ended as an error or still waits for the carrier's first scan.
     // So is a number the carrier's own lookup filed with the missing inputs, such as an
     // Australia Post consignment of several articles: the owner has to give one parcel's number.
-    const ownAnswer = this.#healthSamples.get(`provider:${this.configuredCarrier}`);
-    const refused = (completion.outcome === 'error' || failedFetch) && (refusedNumber(completion, this.configuredCarrier)
+    // After a handoff, the delivery carrier's: the filed carrier asking for an input it no longer needs refuses nothing.
+    const subject = this.trackedBy ?? this.configuredCarrier;
+    const ownAnswer = this.#healthSamples.get(`provider:${subject}`);
+    const refused = (completion.outcome === 'error' || failedFetch) && (refusedNumber(completion, subject)
       || (ownAnswer?.healthy === true && ownAnswer.details.category === 'input_required'));
     // Such a check failed for its parcel, not for its carrier: error rates leave it out.
     const outcome: RecordedOutcome = refused && completion.outcome === 'error' ? 'refused' : completion.outcome;
@@ -506,19 +508,19 @@ export class TrackingSyncAudit {
       // missing input, the refresh answered. The first such answer still fails, so a scraper that drops
       // scans across many parcels still opens an incident, and every check keeps the anomaly.
       const repeated = !refused && completion.thinAnswer !== undefined && ownAnswer?.healthy === true
-        && ownAnswer.details.category === 'ok' && await this.previousThinAnswer() === completion.thinAnswer;
+        && ownAnswer.details.category === 'ok' && await this.previousThinAnswer(subject) === completion.thinAnswer;
       const healthy = refused || repeated || (completion.outcome !== 'error' && !failedFetch);
       // A carrier whose adapter declined its verification on purpose, in this check or in the one whose
       // cooldown deferred it, failed no refresh while every other source answered: the check keeps its
       // lookups' samples. Postgres counts deliberate JD abstentions as review data, not an outage.
-      const ownFailure = isRecord(completion.providerFailures) ? completion.providerFailures[this.configuredCarrier] : undefined;
+      const ownFailure = isRecord(completion.providerFailures) ? completion.providerFailures[subject] : undefined;
       const abstained = !healthy && (ownAnswer
         ? !ownAnswer.healthy && !ownAnswer.recovered && ABSTAINED_REASONS.has(String(ownAnswer.details.reason))
         : isRecord(ownFailure) && ownFailure.abstained === true)
         && [...this.#healthSamples.values()].every((sample) => sample === ownAnswer || sample.healthy || sample.recovered);
       const thin = completion.thinAnswer === undefined ? {} : { thin_answer: completion.thinAnswer };
       const samples: JsonObject[] = [...this.#healthSamples.values(), ...(abstained ? [] : [{
-        kind: 'refresh', subject: this.trackedBy ?? this.configuredCarrier, healthy,
+        kind: 'refresh', subject, healthy,
         // The failing tier's own error class is better evidence than the attempt's summary, unless
         // its lookup recovered from it.
         details: refused ? { category: 'input_required', ...refreshEvidence(completion) }
@@ -581,11 +583,11 @@ export class TrackingSyncAudit {
     });
   }
 
-  /** The thin answer the parcel's previous scheduled check recorded; null when it recorded none or cannot be read. */
-  private async previousThinAnswer(): Promise<string | null> {
+  /** The thin answer the parcel's previous scheduled check recorded under `subject`; null when it recorded none or cannot be read. */
+  private async previousThinAnswer(subject: string): Promise<string | null> {
     let previous: string | null = null;
     await this.writeAudit('read_thin_answer', async () => {
-      previous = await this.client.previousThinAnswer(this.packageId, this.configuredCarrier);
+      previous = await this.client.previousThinAnswer(this.packageId, subject);
     }, 'tracking_sync_audit_read_failed');
     return previous;
   }

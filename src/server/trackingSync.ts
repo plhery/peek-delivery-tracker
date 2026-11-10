@@ -375,10 +375,16 @@ function refreshLimit(parcel: JsonObject): { minMinutes: number; afterFailureMin
   return CARRIER_DEFINITIONS[String(active ?? parcel.carrier) as CarrierId]?.tracking.refresh;
 }
 
-/** The carrier a handoff moved the parcel to, when it is not the one the parcel is filed under. */
+/**
+ * The carrier a handoff moved the parcel to, by the router's test: the parcel is still filed under the carrier it was
+ * handed over from (`original_carrier`). Every other direct answer the router takes sets `active_tracking_carrier` too
+ * (Cainiao's leg before GoFo, an earlier leg), without handing the parcel over.
+ */
 function handedTo(parcel: JsonObject): string | null {
-  const active = isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined;
-  return typeof active === 'string' && active && active !== parcel.carrier ? active : null;
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const active = data.active_tracking_carrier;
+  return data.original_carrier === parcel.carrier && typeof active === 'string' && active && active !== parcel.carrier
+    ? active : null;
 }
 
 /**

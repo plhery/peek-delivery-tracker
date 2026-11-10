@@ -455,6 +455,40 @@ describe('a check while the carrier waits for the owner', () => {
   });
 });
 
+describe('a check of a parcel handed over to its delivery carrier', () => {
+  const handedOver = () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true), recordTrackingHealth: vi.fn().mockResolvedValue([]),
+      ackTrackingHealth: vi.fn(), previousThinAnswer: vi.fn().mockResolvedValue('thin-1') };
+    const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient, 'synthetic-package', 'TEST1234', 'gls-de',
+      'in_transit', { trigger: 'scheduled' }, new Date(), null, null, 'posti');
+    const refresh = () => (client.recordTrackingHealth.mock.lastCall![2] as JsonObject[]).find((sample) => sample.kind === 'refresh');
+    return { audit, client, refresh };
+  };
+
+  it('fails the delivery carrier\'s refresh while it is down, though the filed carrier asks for an input', async () => {
+    const { audit, client, refresh } = handedOver();
+    await audit.observeFetch(async () => {
+      healthStepRecorder.lookup({ carrier: 'posti', finalStep: 'direct', outcome: 'transport', errorType: 'TransportError', durationMs: 1, attempts: 1 });
+      healthStepRecorder.lookup({ carrier: 'gls-de', finalStep: 'direct', outcome: 'input_required', errorType: 'InputRequiredError', durationMs: 1, attempts: 1 });
+    });
+    audit.record('fetch', 'failed', 1, {});
+    await audit.finish({ outcome: 'error', sourceCarrier: null, providerFailures: {
+      posti: { kind: 'transport', count: 1 }, 'gls-de': { kind: 'input_required', count: 1, user_error: 'carrier:input_required' } } });
+    expect(refresh()).toMatchObject({ subject: 'posti', healthy: false });
+    expect(client.completeSyncAttempt.mock.lastCall![1]).toMatchObject({ outcome: 'error' });
+  });
+
+  it('reads the delivery carrier\'s previous thin answer when it repeats one', async () => {
+    const { audit, client, refresh } = handedOver();
+    await audit.observeFetch(async () => {
+      healthStepRecorder.lookup({ carrier: 'posti', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
+    });
+    await audit.finish({ outcome: 'error', sourceCarrier: 'posti', errorType: 'ProgressDisappeared', thinAnswer: 'thin-1' });
+    expect(client.previousThinAnswer).toHaveBeenCalledWith('synthetic-package', 'posti');
+    expect(refresh()).toMatchObject({ subject: 'posti', healthy: true, details: expect.objectContaining({ category: 'repeated_answer' }) });
+  });
+});
+
 describe('review signals', () => {
   it('saves the routing signals a check reported, once each, after the check itself', async () => {
     const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true), recordTrackingRoutingSignals: vi.fn() };

@@ -4694,6 +4694,20 @@ describe('TrackingSyncService', () => {
       expect(samples.filter((sample) => sample.kind === 'refresh')).toEqual([expect.objectContaining({ subject: 'posti', healthy: false })]);
     });
 
+    it('counts the refresh against the filed carrier when another carrier answered without a handoff', async () => {
+      // Cainiao's leg before GoFo, an earlier leg: the router names the carrier it took the answer from, the parcel stays its own.
+      const { answers, client, sync, parcel } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      const data = { ...parcel().carrier_data as JsonObject };
+      delete data.original_carrier;
+      Object.assign(parcel(), { carrier_data: data });
+      answers.origin = Object.assign(new Error('Bad gateway'), { status: 502 }) as unknown as CarrierResult;
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      await sync('2026-01-13T12:00:00Z', 'scheduled');
+      const samples = client.recordTrackingHealth.mock.lastCall![2] as JsonObject[];
+      expect(samples.filter((sample) => sample.kind === 'refresh')).toEqual([expect.objectContaining({ subject: 'la-poste', healthy: false })]);
+    });
+
     it('asks the earlier carrier no more once the stored rows show the delivery carrier holding the parcel', async () => {
       const { answers, sync } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));
       answers.delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:40:00Z',

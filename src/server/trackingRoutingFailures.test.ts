@@ -171,3 +171,22 @@ describe('a check every source sits out', () => {
     expect(quietUntil(parcel({ ...held, rules: 'older', direct_retry_at: '2026-09-10T15:00:00Z' }))).toBe(0);
   });
 });
+
+it.each([
+  ['transport', false],
+  ['rate_limited', false],
+  ['not_found', true],
+])('ends an earlier %s failure of the carrier a handoff asked when it answers in the same lookup: kept %s', async (kind, kept) => {
+  const run = setup();
+  const scan = { stage: 'in_transit', status: 'in_transit', timestamp: '2026-09-10T10:30:00Z' };
+  run.direct.mockResolvedValue({ result: { status: 'in_transit', current_stage: 'in_transit', events: [scan] },
+    sourceCarrierId: 'dhl', swissPostReady: null, handoffFallbackErrorType: null,
+    earlierResult: { status: 'in_transit', current_stage: 'in_transit', events: [] }, earlierCarrierId: 'jrt' });
+  const dhl = { count: 3, kind, retry_at: '2026-09-10T10:30:00.000Z' };
+  const filed = { ...parcel({ configured_carrier: 'jrt', failures: { jrt: { count: 1, kind: 'transport', retry_at: success }, dhl } }),
+    carrier: 'jrt' };
+  const { result } = await run.router().fetch(filed, true);
+  const failures = (result.routing as JsonObject).failures as JsonObject;
+  expect(failures.jrt).toBeUndefined();
+  expect(failures.dhl).toEqual(kept ? dhl : undefined);
+});

@@ -146,7 +146,10 @@ A failed source waits before it is retried for that parcel:
 | Not found by a universal provider | 24 h | 24 h |
 
 A carrier's bot check comes and goes, so the next read often passes; a provider's
-refusal does not. A longer `Retry-After` is honoured, up to 7 days. The owner changing the postcode or link
+refusal does not. A longer `Retry-After` is honoured, up to 7 days. A source that answers ends
+its wait. So does a carrier answering as the delivery leg of a handoff in the same lookup, for a
+transport, rate-limit, verification or schema failure; a failure of the number stands, since the
+leg may answer under its own number. The owner changing the postcode or link
 of the parcel's own carrier ends that carrier's wait, whatever the failure, since it answered
 for the old one, so the check that follows asks it again. A carrier often doesn't know a label
 before its first scan, hence its shorter not-found wait. While a number nobody has seen is

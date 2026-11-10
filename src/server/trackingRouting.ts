@@ -37,6 +37,8 @@ import { RoyalBrowserPaused } from './royalBrowserAdmission';
 
 const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
+/** Failures of the source's service rather than of the number asked: any answer from it ends them. */
+const SERVICE_FAILURES: readonly string[] = ['rate_limited', 'verification', 'schema', 'transport'];
 // no_history: a universal provider, or the carrier listing the parcel without scans, answered without any history.
 // invalid_input: the source refused the number or an input as one it does not issue, or found several parcels under it.
 export type RoutingFailureKind = 'rate_limited' | 'not_found' | 'no_history' | 'input_required' | 'invalid_input' | 'verification' | 'schema' | 'transport';
@@ -952,6 +954,14 @@ export class TrackingRouter {
     const persistResult = (value: RoutedResult, provider: string, withoutProgress = false): RoutedResult => {
       if (state.failures[provider]) report('provider_recovered', provider);
       delete state.failures[provider];
+      // The carrier a handoff asked answered with its own scans in the same lookup, maybe under its own
+      // number: an earlier ask's failure of its service is over, one of this number still stands.
+      const leg = value.sourceCarrierId;
+      if (leg !== provider && directCarrier(leg) && !sources.includes(provider as UniversalSource)
+        && SERVICE_FAILURES.includes(String(state.failures[leg]?.kind))) {
+        report('provider_recovered', leg);
+        delete state.failures[leg];
+      }
       // A carrier tracks the parcel directly: nothing is left to ask the user.
       if (directCarrier(provider)) delete state.input_needed;
       if (provider === declared) delete state.postcode_refused;
@@ -1283,7 +1293,7 @@ export class TrackingRouter {
         if (failure.kind === 'not_found' || failure.kind === 'no_history' || plannedStepsOf(error).length) keepPlanned(carrier, plannedStepsOf(error));
         // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
         if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
-        if (probe && ['rate_limited', 'verification', 'schema', 'transport'].includes(failure.kind)) unsettledDirect.add(carrier);
+        if (probe && SERVICE_FAILURES.includes(failure.kind)) unsettledDirect.add(carrier);
         // The carrier does not issue this number (a failed check digit): a
         // provider's name for it, saved by an older check, stops being asked.
         if (carrierErrorKind(error) === 'invalid_input' && state.discovered_carrier === carrier) delete state.discovered_carrier;
@@ -1995,7 +2005,7 @@ export class TrackingRouter {
     if (partialDirect) {
       // A round beside the label that the provider serving the parcel sat out (its cooldown, a failure on the way) says
       // nothing of its progress: it is not counted, and the providers are asked again once that provider is free.
-      const missed = preferred && partialDirect.label && ['rate_limited', 'transport', 'verification', 'schema'].includes(String(state.failures[preferred]?.kind))
+      const missed = preferred && partialDirect.label && SERVICE_FAILURES.includes(String(state.failures[preferred]?.kind))
         ? millis(state.failures[preferred]?.retry_at) : 0;
       if (missed > now().getTime()) {
         state.partial_checked_at = iso(Math.min(now().getTime(), missed - labelSpacing(state.label_rounds, scanCount(partialDirect.value.result))));

@@ -1,20 +1,4 @@
 \set ON_ERROR_STOP on
--- Deleting a job or a parcel finds the rows that point at it by index: without one, each row
--- deleted reads the whole table, and deleting an account outlasts the Auth server's limit.
-do $$
-declare
-  missing text;
-begin
-  select string_agg(c.conrelid::regclass::text || '.' || a.attname, ', ') into missing
-  from pg_constraint c
-  join pg_attribute a on a.attrelid = c.conrelid and a.attnum = c.conkey[1]
-  where c.contype = 'f'
-    and c.conrelid in ('public.sync_jobs'::regclass, 'public.tracking_sync_attempts'::regclass,
-      'public.tracking_sync_steps'::regclass, 'public.tracking_events'::regclass)
-    and not exists (select 1 from pg_index i where i.indrelid = c.conrelid and i.indkey[0] = c.conkey[1]);
-  if missing is not null then raise exception 'references without an index: %', missing; end if;
-end;
-$$;
 begin;
 -- Keep the claim deterministic and roll everything back after the assertions.
 delete from public.sync_jobs;

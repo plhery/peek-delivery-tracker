@@ -52457,6 +52457,130 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.xpcourier.gr/track"
+  },
+  "olza-logistic": {
+    "displayName": "Olza Logistic",
+    "aliases": [
+      "olzalogistic.com"
+    ],
+    "countries": [
+      "CZ",
+      "PL",
+      "SK",
+      "HU",
+      "RO",
+      "BG",
+      "SI",
+      "HR",
+      "GR",
+      "IT",
+      "DE",
+      "EE",
+      "LV",
+      "LT",
+      "DK",
+      "SE",
+      "FI",
+      "UA"
+    ],
+    "color": "#08c2ee",
+    "selectable": true,
+    "timezone": "Europe/Prague",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.olzalogistic.com/"
+  },
+  "pointpack": {
+    "displayName": "Pointpack",
+    "aliases": [
+      "Pointpack S.A."
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#fe5722",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.pointpack.pl/sledz-przesylke/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "pointpack.pl",
+          "www.pointpack.pl"
+        ],
+        "pathPattern": "^/sledz-przesylke/[^/]+/?$",
+        "path": "^/sledz-przesylke/([^/]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.pointpack.pl/sledz-przesylke"
+  },
+  "quriers": {
+    "displayName": "Quriers",
+    "countries": [
+      "PL"
+    ],
+    "color": "#85d31f",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.quriers.pl/sledz-przesylke"
+  },
+  "rgw-express": {
+    "displayName": "RGW Express",
+    "countries": [
+      "PL"
+    ],
+    "color": "#dd2928",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://trace.rgw-express.pl/search2/tracking.php?reference_no={trackingNumber}&language=polish",
+    "linkRules": [
+      {
+        "domains": [
+          "trace.rgw-express.pl"
+        ],
+        "pathPattern": "^/search2/tracking\\.php$",
+        "params": [
+          "reference_no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://trace.rgw-express.pl/search2/"
+  },
+  "riders-express": {
+    "displayName": "Riders Express",
+    "countries": [
+      "PL"
+    ],
+    "color": "#042b55",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.riders.com.pl/monitoruj-przesylke/"
   }
 } as const;
 
@@ -53983,7 +54107,12 @@ export const CARRIER_IDS = [
   "skyex-gr",
   "spourgitis",
   "west-postal",
-  "xp-courier"
+  "xp-courier",
+  "olza-logistic",
+  "pointpack",
+  "quriers",
+  "rgw-express",
+  "riders-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

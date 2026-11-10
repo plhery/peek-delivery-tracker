@@ -4737,6 +4737,22 @@ describe('TrackingSyncService', () => {
       expect(samples.filter((sample) => sample.kind === 'refresh')).toEqual([expect.objectContaining({ subject: 'posti', healthy: false })]);
     });
 
+    it('takes the delivery the earlier carrier relayed during the outage at the next answered check', async () => {
+      const { answers, sync, parcel } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      const delivered = { time: '2026-01-15T11:00:00Z', description: 'Delivered', stage: 'delivered' };
+      answers.origin = { ...origin0, status: 'delivered', current_stage: 'delivered', last_update: delivered.time,
+        events: [delivered, ...origin0.events!] };
+      expect(await sync('2026-01-15T12:00:00Z')).toEqual(['posti', 'la-poste']);
+      // The failure stands while the delivery carrier is down.
+      expect(parcel().current_stage).toBe('in_transit');
+      // It answers again with its stale announcement, the earlier carrier not due for 3 h.
+      answers.delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:00:00Z', events: announced };
+      expect(await sync('2026-01-15T13:00:00Z')).toEqual(['posti']);
+      expect(parcel()).toMatchObject({ current_stage: 'delivered', last_status_text: 'Delivered' });
+    });
+
     it('counts the refresh against the filed carrier when another carrier answered without a handoff', async () => {
       // Cainiao's leg before GoFo, an earlier leg: the router names the carrier it took the answer from, the parcel stays its own.
       const { answers, client, sync, parcel } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));

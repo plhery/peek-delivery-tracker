@@ -2266,7 +2266,14 @@ export class TrackingSyncService {
         const partnerAt = Math.max(...[newestEvents[0]?.occurred_at,
           eventTimestamp(result!.last_update, resultTimezone(sourceCarrierId!, result!))]
           .map((time) => Date.parse(String(time ?? ''))).filter(Number.isFinite));
-        const lead = fetched.earlierFollowUp ? earlierLead(earlierEvents, partnerAt, normalizedSelectedStage, now, storedAhead) : null;
+        // Between its follow-ups, the earlier carrier's stored scans past the watermark lead too: those a follow-up made
+        // while the partner's lookup failed gave, which that failed check stored without moving the stage (`besideFailure`).
+        const watermark = Date.parse(String(routingState(parcel).last_event_at ?? ''));
+        const earlierId = earlierCarrier(parcel);
+        const storedEarlier = fetched.earlierFollowUp || !earlierId ? [] : storedEventIdentities(parcel)
+          .filter((row) => String(row.provider_event_id ?? '').startsWith(`${earlierId}:`) && Date.parse(String(row.occurred_at ?? '')) > watermark)
+          .map((row) => ({ ...row, raw_data: { time: row.time, observed_without_provider_timestamp: row.observed_without_provider_timestamp } }));
+        const lead = earlierLead(fetched.earlierFollowUp ? earlierEvents : storedEarlier, partnerAt, normalizedSelectedStage, now, storedAhead);
         // A return holds while the scans after it only carry the parcel back, as the apps read it
         // (`currentScan`): a summary in transit or at customs then brings no delivery.
         const back = ['in_transit', 'customs'].includes(String(normalizedSelectedStage))

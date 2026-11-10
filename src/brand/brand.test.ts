@@ -904,6 +904,10 @@ describe('carrier brand', () => {
       'quriers',
       'pointpack',
       'olza-logistic',
+      'jet-dp',
+      'emole-express',
+      'maraton',
+      'crosswin',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

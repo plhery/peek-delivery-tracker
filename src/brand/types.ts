@@ -787,7 +787,11 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'riders-express'
   | 'quriers'
   | 'pointpack'
-  | 'olza-logistic';
+  | 'olza-logistic'
+  | 'jet-dp'
+  | 'emole-express'
+  | 'maraton'
+  | 'crosswin';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

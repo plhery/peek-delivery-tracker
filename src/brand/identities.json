@@ -916,6 +916,9 @@
   "crossflight": {
     "decal": "crossflight"
   },
+  "crosswin": {
+    "decal": "crosswin"
+  },
   "cruz-del-sur": {
     "decal": "cruz-del-sur"
   },
@@ -1350,6 +1353,9 @@
   },
   "emiro": {
     "decal": "emiro"
+  },
+  "emole-express": {
+    "decal": "emole-express"
   },
   "emons": {
     "decal": "emons"
@@ -2233,6 +2239,9 @@
   "jersey-post": {
     "decal": "jersey-post"
   },
+  "jet-dp": {
+    "decal": "jet-dp"
+  },
   "jet-global": {
     "decal": "jet-global"
   },
@@ -2614,6 +2623,9 @@
   },
   "maple-logistics": {
     "decal": "maple-logistics"
+  },
+  "maraton": {
+    "decal": "maraton"
   },
   "maritime-ontario": {
     "decal": "maritime-ontario"

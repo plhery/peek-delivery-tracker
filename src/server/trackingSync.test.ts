@@ -601,6 +601,32 @@ describe('tracking event normalization', () => {
     })]);
   });
 
+  it("dates a first answer's end no scan shows at its newest last-mile scan when the parcel was added after it", () => {
+    const observedAt = new Date('2026-11-09T12:12:26Z');
+    const answer = (newestStage: string): CarrierResult => ({
+      status: 'delivered',
+      current_stage: 'returned',
+      last_status_text: 'Returned to the sender',
+      events: [
+        { time: '2026-10-30T08:39:06Z', description: 'Delivered', stage: newestStage },
+        { time: '2026-10-30T08:05:50Z', description: 'Out for delivery', stage: 'out_for_delivery' },
+      ],
+    });
+    const parcel = (createdAt: string, stage = 'pending'): JsonObject => ({
+      id: 'package-late', carrier: 'dhl', current_stage: stage, created_at: createdAt,
+    });
+    const observed = (rows: JsonObject[]) => rows.find((row) => (row.raw_data as JsonObject | undefined)?.observed_without_provider_timestamp === true);
+    expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z'), answer('delivered'), undefined, observedAt)))
+      .toMatchObject({ stage: 'returned', occurred_at: '2026-10-30T08:39:06.000Z' });
+    // Added before that scan, after a scan short of the last mile, or after an earlier answer: the end is dated when seen.
+    expect(observed(buildEvents(parcel('2026-10-29T10:00:00Z'), answer('delivered'), undefined, observedAt)))
+      .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
+    expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z'), answer('in_transit'), undefined, observedAt)))
+      .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
+    expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z', 'in_transit'), answer('delivered'), undefined, observedAt)))
+      .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
+  });
+
   it('records an observed event when a timestamp-less current state changes', () => {
     const observedAt = new Date('2026-08-30T13:00:00Z');
     const result: CarrierResult = {

@@ -884,6 +884,25 @@ function summaryNamesWordedSetback(summary: string, summaryStage: string | null,
     && isRecord(event.raw_data) && String(event.raw_data.stage_source ?? '').startsWith('wording');
 }
 
+/** Scans a delivery or return follows at once. */
+const LAST_MILE_STAGES = new Set(['out_for_delivery', 'failed_attempt', 'ready_for_pickup', 'delivered', 'returned']);
+
+/**
+ * When a parcel's first answer states a delivery or return no scan shows, right after a last-mile scan from before the
+ * parcel was added, the instant of that scan: the parcel reached its end with it, not at the check (DHL's delivery back
+ * to the sender, ten days before the reader added the parcel). The end sorts after a scan at the same instant.
+ * Otherwise null, and the change is dated when the check saw it.
+ */
+function endWithNewestScan(parcel: JsonObject, previousStage: string, current: string, rows: readonly JsonObject[]): string | null {
+  if (previousStage !== 'pending' || !['delivered', 'returned'].includes(current)) return null;
+  const at = (row: JsonObject) => Date.parse(String(row.occurred_at ?? ''));
+  const newest = rows.filter((row) => Number.isFinite(at(row))).reduce<JsonObject | null>(
+    (latest, row) => (latest === null || at(row) > at(latest) ? row : latest), null);
+  const added = Date.parse(String(parcel.created_at ?? ''));
+  return newest && LAST_MILE_STAGES.has(String(newest.stage)) && Number.isFinite(added) && at(newest) < added
+    ? new Date(at(newest)).toISOString() : null;
+}
+
 export function buildEvents(
   parcel: JsonObject,
   result: CarrierResult,
@@ -1006,7 +1025,7 @@ export function buildEvents(
       matchingEvent?.description ?? result.last_status_text ?? UNWORDED_STEP,
     ).trim() || UNWORDED_STEP;
     const location = String(matchingEvent?.location ?? '').trim();
-    const occurredAt = observedAt.toISOString();
+    const occurredAt = endWithNewestScan(parcel, previousStage, current, rows) ?? observedAt.toISOString();
     const declaredCurrent = String(result.current_stage ?? '');
     rows.push({
       package_id: parcel.id,

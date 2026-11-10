@@ -410,6 +410,36 @@ begin
 end;
 $$;
 
+-- notice: Poste Italiane has no such parcel and Postal Ninja shows only the sender's advance notice;
+-- moved: the same, but Postal Ninja shows the parcel in transit.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f4000000-0000-4000-8000-0000000000fa', null, true, 'GOALS0030', 'poste-italiane',
+    'registered', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "Postal Ninja", "routing": {"failures": {"poste-italiane": {"kind": "not_found", "count": 2}}}}'),
+  ('f4000000-0000-4000-8000-0000000000fb', null, true, 'GOALS0031', 'poste-italiane',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "Postal Ninja", "routing": {"failures": {"poste-italiane": {"kind": "not_found", "count": 2}}}}');
+insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, raw_data)
+values
+  ('f4000000-0000-4000-8000-0000000000fa', 'registered', 'Order information received', '2026-10-07T10:00:00Z', 'unknown:goals-notice', '{}'),
+  ('f4000000-0000-4000-8000-0000000000fb', 'registered', 'Order information received', '2026-10-07T10:00:00Z', 'unknown:goals-moved-notice', '{}'),
+  ('f4000000-0000-4000-8000-0000000000fb', 'in_transit', 'Departed', '2026-10-08T05:46:00Z', 'unknown:goals-moved-departed', '{}');
+
+-- A carrier with no such parcel yet, beside a provider showing the sender's notice alone, refuses nothing.
+do $$
+begin
+  if (select array_agg(row(tracking_number, why, reason, lane)::text order by tracking_number)
+      from private.tracking_gaps where tracking_number in ('GOALS0030', 'GOALS0031'))
+      is distinct from array[
+        row('GOALS0030', 'provider shows the notice alone', 'carrier yet to scan', 'none')::text,
+        row('GOALS0031', 'adapter not_found', 'adapter refuses', 'adapters')::text] then
+    raise exception 'A carrier yet to scan the parcel was misread: %', (select array_agg(row(tracking_number, why, reason, lane)::text)
+      from private.tracking_gaps where tracking_number in ('GOALS0030', 'GOALS0031'));
+  end if;
+end;
+$$;
+
 -- Grafana's role reads the counts, not the parcels behind them.
 set local role metrics_reader;
 select day, parcels, stale_parcels from metrics.goals_daily order by day desc limit 1;

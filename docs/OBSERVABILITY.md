@@ -560,8 +560,9 @@ follows it any more, whatever its last check stored, a failure included, or need
 is kept, a provider filled in the carrier's partial answer (`routing.partial_history`), the
 parcel already shows the newest scan of a carrier answer set aside as older, so that carrier
 only knows an earlier leg, the carrier showed its label alone beside a provider's earlier leg
-(its rows, or `carrier_label_alone` when the provider's history keeps no row of it), or the carrier a provider names as delivering the parcel was asked and has not scanned it
-yet (`delivery_probe`).
+(its rows, or `carrier_label_alone` when the provider's history keeps no row of it), the carrier a provider names as delivering the parcel was asked and has not scanned it
+yet (`delivery_probe`), or the carrier has no such parcel while the provider shows only the
+sender's advance notice, so the carrier has nothing to show yet (provider shows the notice alone).
 
 Whatever its lane, a signal that comes from a wrong routing decision is a delivery-tracker
 fix. Mark a signal reviewed so that the next run leaves it out:

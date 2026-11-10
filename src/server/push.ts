@@ -1088,6 +1088,11 @@ export class ParcelLinkAlertService {
           await remove('expired');
           recordParcelAlertSent('expired', channel);
           summary.expired += 1;
+        } else if (serverCredentialsFailed(error)) {
+          // No device was tried: the alert keeps its count, or every alert of the app would go after three scans.
+          failed += 1;
+          recordParcelAlertSent('failed', channel);
+          await settle(failures);
         } else {
           failed += 1;
           recordParcelAlertSent('failed', channel);
@@ -1180,6 +1185,14 @@ export class ParcelLinkAlertService {
       ...clock,
     };
   }
+}
+
+/** APNs refusing the server's own signing key, whatever the device. */
+const APNS_PROVIDER_TOKEN_REASONS = new Set(['InvalidProviderToken', 'ExpiredProviderToken', 'MissingProviderToken']);
+
+/** Whether the server's own credentials failed (FCM's service account, APNs's signing key): no device is at fault. */
+function serverCredentialsFailed(error: unknown): boolean {
+  return error instanceof FCMAuthError || (error instanceof APNsError && APNS_PROVIDER_TOKEN_REASONS.has(error.reason));
 }
 
 export class APNsError extends Error {

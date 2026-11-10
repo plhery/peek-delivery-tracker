@@ -23,7 +23,7 @@ import {
   pushServices,
   WebPushNotificationService,
 } from './push';
-import { FCMError } from './fcm';
+import { FCMAuthError, FCMError } from './fcm';
 import { messagesFor } from './requestLocale';
 import { SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -651,6 +651,16 @@ describe('alerts in the iPhone app', () => {
     expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'ios');
   });
 
+  it('keeps the alert and its count when APNs refuses the server\'s own signing key', async () => {
+    pending([appRow({ failures: 2 })]);
+    apns.mockRejectedValue(new APNsError(403, 'InvalidProviderToken'));
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    await alerts.dispatch();
+    expect(removed).not.toHaveBeenCalled();
+    expect(failures).not.toHaveBeenCalled();
+    expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'ios');
+  });
+
   it('reads only the alerts of the channels this server sends on', async () => {
     const queue = pending([]);
     await new ParcelLinkAlertService(null, native).dispatch();
@@ -712,6 +722,16 @@ describe('alerts in the Android app', () => {
     expect(await alerts.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 0, expired: 0 });
     expect(failures).toHaveBeenCalledExactlyOnceWith('alert-1', 1);
     expect(removed).not.toHaveBeenCalled();
+    expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'android');
+  });
+
+  it('keeps the alert and its count when Google refuses the server\'s service account', async () => {
+    pending([appRow({ failures: 2 })]);
+    android.mockRejectedValue(new FCMAuthError(400, 'invalid_grant'));
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    await alerts.dispatch();
+    expect(removed).not.toHaveBeenCalled();
+    expect(failures).not.toHaveBeenCalled();
     expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'android');
   });
 

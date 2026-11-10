@@ -591,7 +591,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   browser history is consumed once by the correction lookup or the first saved sync, with the
   "Swapped automatically" notice. A carrier whose lookup hands the parcel to its delivery
   carrier in the same check is adopted the same way, with the delivery carrier as the parcel's
-  current leg. A carrier that needs the user's input is saved as
+  current leg. So is the carrier the filed one's failure says holds the record: DHL Express
+  finding only DHL Paket's record of a piece in its range (`parcel_de_division`) has DHL Paket
+  asked under the same number, in that check and while DHL Express waits out the failure. A carrier that needs the user's input is saved as
   `routing.input_needed`, and the parcel asks the user for it. So is one whose lookup finds
   the parcel behind an input it lists as optional (DHL's postcode, when several shipments
   share a twelve-digit number, and GLS Austria's); a lookup that fails on the way leaves the request.

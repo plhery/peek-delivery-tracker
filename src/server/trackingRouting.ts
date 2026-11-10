@@ -39,6 +39,11 @@ const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
 /** Failures of the source's service rather than of the number asked: any answer from it ends them. */
 const SERVICE_FAILURES: readonly string[] = ['rate_limited', 'verification', 'schema', 'transport'];
+/**
+ * A carrier's failure that names the carrier holding the number's record, which is asked under the
+ * same number: DHL's tracking holding only DHL Paket's record of a piece in DHL Express's range.
+ */
+const RECORD_HOLDERS: Readonly<Record<string, string>> = { parcel_de_division: 'dhl' };
 // no_history: a universal provider, or the carrier listing the parcel without scans, answered without any history.
 // invalid_input: the source refused the number or an input as one it does not issue, or found several parcels under it.
 export type RoutingFailureKind = 'rate_limited' | 'not_found' | 'no_history' | 'input_required' | 'invalid_input' | 'verification' | 'schema' | 'transport';
@@ -63,7 +68,8 @@ export interface RoutedResult {
  * `abstained`: the carrier's verification its adapter declined on purpose (ABSTAINED_REASONS), which the refresh health
  * leaves out. `wrong_number`: the carrier's answer said the number is wrong (R+L's failed check digit).
  */
-interface Failure { count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true; wrong_number?: true }
+/** `holder`: the carrier the failure says holds the number's record (RECORD_HOLDERS). */
+interface Failure { count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true; wrong_number?: true; holder?: string }
 /**
  * Older than the parcel's newest scan; no movement; dated only by a local clock; not dated at
  * all; or behind a provider's delivered or returned stage. Absent: older.
@@ -908,8 +914,9 @@ export class TrackingRouter {
       const unseen = kind === 'no_history' || (kind === 'not_found' && !daily);
       const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
       const wrongNumber = kind === 'invalid_input' && carrierErrorReason(error) === 'wrong_number';
+      const holder = universalSource ? undefined : RECORD_HOLDERS[carrierErrorReason(error) ?? ''];
       const failure: Failure = { count, kind, ...(userError ? { user_error: userError } : {}), ...(abstained ? { abstained: true as const } : {}),
-        ...(wrongNumber ? { wrong_number: true as const } : {}),
+        ...(wrongNumber ? { wrong_number: true as const } : {}), ...(holder && holder !== provider ? { holder } : {}),
         retry_at: iso(unseen ? Math.max(now().getTime() + retryAfterMs, beforeHourlyEnd(retryAt)) : retryAt) };
       state.failures[provider] = failure;
       if (universalSource && kind === 'input_required') {
@@ -1421,11 +1428,14 @@ export class TrackingRouter {
       return kept;
     }
 
-    // One evidence-based correction, not a fan-out to every matching number shape.
+    // One evidence-based correction, not a fan-out to every matching number shape: the carrier
+    // detection names, one confirmed or a provider named, or the one the filed carrier's failure
+    // says holds the record.
     const detected = detectCarrierMatch(number);
     const candidates = [...new Set([
       detected.confidence === 'high' ? detected.carrier : undefined,
       changed && state.confirmed_number === number ? state.confirmed_carrier : state.discovered_carrier,
+      state.failures[primary]?.holder,
     ])].filter((candidate): candidate is string => Boolean(candidate) && candidate !== primary);
     for (const candidate of partialDirect ? [] : candidates) {
       const value = await tryDirect(candidate, true);

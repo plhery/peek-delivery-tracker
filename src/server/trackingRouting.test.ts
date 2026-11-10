@@ -375,6 +375,48 @@ describe('persistent tracking routing', () => {
     expect(result.result.routing).toMatchObject({ confirmed_carrier: 'ups', configured_carrier: 'ups' });
     expect(universal).not.toHaveBeenCalled();
   });
+  describe('a piece DHL holds only as DHL Paket\'s record', () => {
+    const number = 'JJD014600000000000001';
+    const division = (reason: string) => new IndeterminateError('DHL Express', 'DHL returned a different division', { reason });
+    it('asks DHL Paket under the same number when DHL Express finds only its record, and files the parcel there', async () => {
+      const { router, direct, universal } = setup();
+      direct.mockImplementation(async (_parcel, asked) => {
+        if (asked === 'dhl-express') throw division('parcel_de_division');
+        return directValue('dhl');
+      });
+      const result = await router.fetch(parcel({ carrier: 'dhl-express', tracking_number: number }), true);
+      expect(direct.mock.calls.map(([, carrier]) => carrier)).toEqual(['dhl-express', 'dhl']);
+      expect(result.correction?.carrier).toBe('dhl');
+      expect(result.result.routing).toMatchObject({ confirmed_carrier: 'dhl', configured_carrier: 'dhl' });
+      expect(universal).not.toHaveBeenCalled();
+    });
+    it('asks DHL Paket again while DHL Express waits out its failure', async () => {
+      const { router, direct } = setup();
+      direct.mockResolvedValue(directValue('dhl'));
+      const routing = state({ configured_carrier: 'dhl-express', failures: { 'dhl-express': { count: 2, kind: 'transport',
+        retry_at: new Date(time.getTime() + 3_600_000).toISOString(), holder: 'dhl' } } });
+      const result = await router.fetch(parcel({ carrier: 'dhl-express', tracking_number: number, carrier_data: { routing } }), true);
+      expect(direct.mock.calls.map(([, carrier]) => carrier)).toEqual(['dhl']);
+      expect(result.correction?.carrier).toBe('dhl');
+    });
+    it('keeps the holder with the failure while DHL Paket has nothing yet either', async () => {
+      const { router, direct, universal } = setup();
+      universal.mockRejectedValue(new NoHistoryError('ParcelsApp', 'No history'));
+      direct.mockImplementation(async (_parcel, asked) => {
+        throw asked === 'dhl-express' ? division('parcel_de_division') : new NotFoundError('DHL');
+      });
+      const error = await router.fetch(parcel({ carrier: 'dhl-express', tracking_number: number }), true).catch((failure: unknown) => failure);
+      expect(error).toBeInstanceOf(RoutingDeferred);
+      expect((error as RoutingDeferred).routing.failures).toMatchObject({ 'dhl-express': { holder: 'dhl' }, dhl: { kind: 'not_found' } });
+    });
+    it('asks no other carrier when the record is of another division', async () => {
+      const { router, direct } = setup();
+      direct.mockRejectedValue(division('other_division'));
+      const result = await router.fetch(parcel({ carrier: 'dhl-express', tracking_number: number }), true).catch((error: unknown) => error);
+      expect(direct.mock.calls.map(([, carrier]) => carrier)).toEqual(['dhl-express']);
+      expect(JSON.stringify(result)).not.toContain('"holder"');
+    });
+  });
   it('saves a correction and clears inputs belonging to the wrong carrier', async () => {
     const { router, direct } = setup();
     direct.mockRejectedValueOnce(new Error('wrong carrier'));

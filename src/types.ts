@@ -75,7 +75,7 @@ export interface Parcel {
   /** The carrier answered the check the provider's result came from; links stay with the carrier. */
   carrierAnswered?: boolean;
   activeTrackingNumber?: string;
-  /** The carrier the followed one names as delivering, before that carrier is followed, and the number it gave. */
+  /** Who delivers, before that carrier is followed: the carrier the followed one names, else the one Peek's hand-off check found holding the parcel, and its number. */
   deliveryCarrier?: CarrierId;
   deliveryTrackingNumber?: string;
   /** That carrier lists the parcel without a scan of its own: the earlier carrier announced it there, and it has not been received. */

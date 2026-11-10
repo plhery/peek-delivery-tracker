@@ -57866,7 +57866,7 @@
                     "type": "null"
                   }
                 ],
-                "description": "The carrier the followed one names as delivering, before that carrier is followed."
+                "description": "Who delivers, before that carrier is followed: the carrier the followed one names, else the one Peek's hand-off check found holding the parcel."
               },
               "delivery_tracking_number": {
                 "type": [
@@ -59622,7 +59622,7 @@
               },
               "delivery_carrier": {
                 "$ref": "#/components/schemas/CarrierId",
-                "description": "The carrier the followed one names as delivering, before that carrier is followed."
+                "description": "Who delivers, before that carrier is followed: the carrier the followed one names, else the one Peek's hand-off check found holding the parcel."
               },
               "delivery_tracking_number": {
                 "type": "string",

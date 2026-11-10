@@ -34,6 +34,26 @@ it('says when the named delivering carrier lists the parcel without a scan of it
   expect(withoutEventSources({ carrier_data: { delivery_probe: probe } })).toEqual({ carrier_data: {} });
 });
 
+it('names the partner the hand-off check found holding the parcel when the followed carrier names none', () => {
+  const probe = { at: '2026-11-05T10:00:00Z', origin_update: null, carrier: 'dhl', number: 'TESTPARTNER001', held: true };
+  const served = (data: Record<string, unknown>, current_stage?: string) =>
+    (withEventPlaces({ current_stage, carrier_data: data }) as { carrier_data: Record<string, unknown> }).carrier_data;
+  // Scanned there: "Delivery with DHL", with the number it was asked with, delivered or not.
+  for (const stage of [undefined, 'delivered']) {
+    expect(served({ active_tracking_carrier: 'india-post', delivery_probe: probe }, stage))
+      .toEqual({ active_tracking_carrier: 'india-post', delivery_carrier: 'dhl', delivery_tracking_number: 'TESTPARTNER001' });
+  }
+  // Only told of it: "Announced to DHL, not received yet".
+  expect(served({ delivery_probe: { ...probe, listed: true } }))
+    .toEqual({ delivery_carrier: 'dhl', delivery_tracking_number: 'TESTPARTNER001', delivery_announced: true });
+  // The carrier's own partner and number stay; a partner followed now, or a check that found nothing, names none.
+  expect(served({ delivery_carrier: 'dpd', delivery_tracking_number: 'TESTPARTNER002', delivery_probe: probe }))
+    .toEqual({ delivery_carrier: 'dpd', delivery_tracking_number: 'TESTPARTNER002' });
+  expect(served({ original_carrier: 'india-post', active_tracking_carrier: 'dhl', delivery_probe: probe }))
+    .toEqual({ original_carrier: 'india-post', active_tracking_carrier: 'dhl' });
+  expect(served({ delivery_probe: { ...probe, held: undefined } })).toEqual({});
+});
+
 const event = (id: string, location: string | null, occurredAt: string) => ({
   id, package_id: 'parcel', stage: 'in_transit', description: 'Scan', location, occurred_at: occurredAt,
 });

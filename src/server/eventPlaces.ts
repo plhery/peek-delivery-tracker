@@ -87,6 +87,18 @@ function deliveryAnnounced(data: JsonObject): boolean {
     && probe.carrier === data.delivery_carrier && !data.original_carrier && data.active_tracking_carrier !== data.delivery_carrier;
 }
 
+/**
+ * The partner the last hand-off check found holding the parcel (`held`) while the followed carrier names none: served as
+ * the delivering carrier, with the number it was asked with, so every card names it as it names one the carrier names.
+ */
+function probedPartner(data: JsonObject): JsonObject {
+  const probe = data.delivery_probe;
+  if (!isRecord(probe) || probe.held !== true || typeof probe.carrier !== 'string' || typeof data.delivery_carrier === 'string'
+    || data.original_carrier || data.active_tracking_carrier === probe.carrier) return {};
+  return { delivery_carrier: probe.carrier,
+    ...typeof probe.number === 'string' && data.delivery_tracking_number == null ? { delivery_tracking_number: probe.number } : {} };
+}
+
 /** The carrier data only the service reads, the delivering carrier's last check with its number (`delivery_probe`) among them. */
 const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe'];
 
@@ -95,16 +107,18 @@ const SERVED_APART = ['planned', 'written_ahead'];
 
 /**
  * A package row without the carrier data that only the service reads (`SERVICE_DATA`), and with what the card says of
- * the delivering carrier's check (`delivery_announced`). Planned steps and the rows written ahead are served on their
- * own (`SERVED_APART`).
+ * the delivering carrier's check: the partner it found holding the parcel (`probedPartner`), and whether that carrier
+ * has only been told of it (`delivery_announced`). Planned steps and the rows written ahead are served on their own
+ * (`SERVED_APART`).
  */
 function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
   const apart = stored && isRecord(stored.routing) && SERVED_APART.some((key) => key in (stored.routing as JsonObject));
+  const named = stored && { ...stored, ...probedPartner(stored) };
   // A parcel delivered or returned waits for no partner, whatever its last probe found.
-  const announced = stored !== null && !['delivered', 'returned'].includes(String(row.current_stage ?? '')) && deliveryAnnounced(stored);
-  if (!stored || !(SERVICE_DATA.some((key) => key in stored) || apart)) return row;
-  const data: JsonObject = { ...stored, ...announced ? { delivery_announced: true } : {} };
+  const announced = named !== null && !['delivered', 'returned'].includes(String(row.current_stage ?? '')) && deliveryAnnounced(named);
+  if (!stored || !named || !(SERVICE_DATA.some((key) => key in stored) || apart)) return row;
+  const data: JsonObject = { ...named, ...announced ? { delivery_announced: true } : {} };
   for (const key of SERVICE_DATA) delete data[key];
   if (apart) {
     const routing = { ...stored.routing as JsonObject };

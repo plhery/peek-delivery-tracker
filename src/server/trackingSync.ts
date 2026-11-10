@@ -214,6 +214,11 @@ interface DeliveryProbe extends JsonObject {
   announced?: true;
   /** The partner had the parcel on record, however old the record, without a scan of its own: the card says so. */
   listed?: true;
+  /**
+   * The partner had the parcel, on record or scanned, dated no earlier than the origin's first scan, and was not
+   * adopted (its scans older than the origin's newest): the card names it when the origin names no partner.
+   */
+  held?: true;
   /** The probes in a row that found nothing while the origin (Cainiao for Swiss Post) had no news. */
   misses?: number;
 }
@@ -291,6 +296,13 @@ export function earlierLead(
   return newest && at(newest) - partnerAt > EARLIER_LEAD_MS ? newest : null;
 }
 
+/** The time of a result's first dated scan, 0 without one. */
+function earliestResultTime(result: CarrierResult, carrierId: string): number {
+  const zone = resultTimezone(carrierId, result);
+  const times = (result.events ?? []).map((event) => Date.parse(eventTimestamp(event.time, zone) ?? '')).filter((time) => time > 0);
+  return times.length ? Math.min(...times) : 0;
+}
+
 function previousDeliveryProbe(parcel: JsonObject, carrier: string, number: string): DeliveryProbe | null {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   const stored = data.delivery_probe;
@@ -299,6 +311,7 @@ function previousDeliveryProbe(parcel: JsonObject, carrier: string, number: stri
   return { at: stored.at, origin_update: typeof stored.origin_update === 'string' ? stored.origin_update : null,
     ...(stored.announced === true ? { announced: true as const } : {}),
     ...(stored.listed === true ? { listed: true as const } : {}),
+    ...(stored.held === true ? { held: true as const } : {}),
     ...(Number.isSafeInteger(stored.misses) && Number(stored.misses) > 0 ? { misses: Number(stored.misses) } : {}) };
 }
 
@@ -3113,6 +3126,10 @@ export class TrackingSyncService {
           // It has the parcel on record and no scan yet: the record the earlier carrier sent ahead. With news of
           // its own, its first scan comes next.
           if (!scanned && deliveryTime > 0) Object.assign(probe, { listed: true }, fresh ? { announced: true, misses: 1 } : {});
+          // Either way it has the parcel, unless its answer predates the origin's first scan (a reused number's
+          // earlier parcel). India Post's EMS items in Germany: DHL scans them, and India Post relays a later
+          // German scan, so the origin stays followed and the card names DHL.
+          if (deliveryTime > 0 && deliveryTime >= earliestResultTime(origin, carrierId)) probe.held = true;
         } catch (error) {
           fallbackError = errorType(error);
           // A partner that does not know the item yet, or answers inconclusively

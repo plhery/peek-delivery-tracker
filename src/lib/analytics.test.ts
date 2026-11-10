@@ -80,6 +80,19 @@ describe('safe analytics collection', () => {
     ]);
   });
 
+  it('says why a browser’s alerts did not turn on, as one fixed word, only when asked to', async () => {
+    const a = await import('./analytics');
+    a.trackScreen('parcel-link', 'anonymous');
+    await a.startAnalytics({ open: false });
+    a.trackAction('parcel-link-alerts', 'error', undefined, 'dismissed');
+    a.trackAction('parcel-link-alerts', 'success');
+    await settle();
+    const sent = requests.filter((r) => r.url === config.endpoint).map((r) => JSON.parse(r.init!.body as string).payload);
+    expect(sent.slice(1).map((payload) => [payload.name, payload.data.outcome, payload.data.reason])).toEqual([
+      ['parcel-link-alerts', 'error', 'dismissed'], ['parcel-link-alerts', 'success', undefined],
+    ]);
+  });
+
   it('counts a carrier’s page the same way, under its language and the carrier', async () => {
     const [{ id }] = CARRIER_LINKS.en;
     const a = await import('./analytics');

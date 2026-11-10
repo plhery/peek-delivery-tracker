@@ -5,7 +5,9 @@ export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
 type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string; androidWebsite?: string };
 /** Where on a screen an invitation stands, when one screen holds it in more than one place. */
 export type AnalyticsSpot = 'parcel' | 'alerts' | 'home' | 'landing' | 'footer' | 'get-app';
-type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; spot?: AnalyticsSpot; mode: 'demo' | 'account' | 'anonymous' };
+/** Why a browser's alerts for a parcel link didn't turn on, as one fixed word ([ANALYTICS.md](../../docs/ANALYTICS.md)). */
+export type AnalyticsReason = 'blocked' | 'dismissed' | 'unsupported' | 'worker' | 'subscription' | 'offline' | 'refused' | 'server' | 'other';
+type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; spot?: AnalyticsSpot; reason?: AnalyticsReason; mode: 'demo' | 'account' | 'anonymous' };
 let config: Configuration | null = null;
 let startup: Promise<void> | undefined;
 let screen = 'welcome';
@@ -148,7 +150,7 @@ async function flush() {
             ...(event.name ? { name: event.name } : {}),
             data: { platform: window.matchMedia?.('(display-mode: standalone)').matches ? 'pwa' : 'web',
               mode: event.mode, ...(locale ? { locale } : {}), ...(event.outcome ? { outcome: event.outcome } : {}),
-              ...(event.spot ? { spot: event.spot } : {}) },
+              ...(event.spot ? { spot: event.spot } : {}), ...(event.reason ? { reason: event.reason } : {}) },
           } }),
         });
         if (response.ok) {
@@ -175,9 +177,9 @@ export function trackScreen(next: string, nextMode: Event['mode'] = mode) {
   enqueue({ screen, mode });
 }
 
-export function trackAction(name: string, outcome?: AnalyticsOutcome, spot?: AnalyticsSpot) {
+export function trackAction(name: string, outcome?: AnalyticsOutcome, spot?: AnalyticsSpot, reason?: AnalyticsReason) {
   if (!catalog.actions.includes(name)) return;
-  enqueue({ screen, mode, name, outcome, ...(spot ? { spot } : {}) });
+  enqueue({ screen, mode, name, outcome, ...(spot ? { spot } : {}), ...(reason ? { reason } : {}) });
 }
 
 /** Only fixed event names leave this mapper. Paths, IDs and request bodies never do. */

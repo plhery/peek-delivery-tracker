@@ -123,15 +123,17 @@ describe('the Notify me sheet', () => {
     expect(way(/^Add the delivery window to my calendar/)).toBeChecked();
     expect(screen.queryByRole('group', { name: 'Tell me about' })).toBeNull();
     expect(mocks.set).not.toHaveBeenCalled();
-    expect(mocks.track).toHaveBeenCalledWith('parcel-link-alerts', 'error');
+    expect(mocks.track).toHaveBeenCalledExactlyOnceWith('parcel-link-alerts', 'error', undefined, 'blocked');
     expect(refused.pushManager.subscribe).not.toHaveBeenCalled();
     first.unmount();
 
+    mocks.track.mockReset();
     stubAlertBrowser({ answer: 'default' });
     open();
     await user.click(screen.getByRole('button', { name: 'Turn on' }));
     expect(await screen.findByRole('alert')).toHaveTextContent('The browser didn’t get a yes. Choose Turn on to be asked again.');
     expect(screen.getByRole('button', { name: 'Turn on' })).toBeEnabled();
+    expect(mocks.track).toHaveBeenCalledExactlyOnceWith('parcel-link-alerts', 'error', undefined, 'dismissed');
   });
 
   it('opens on plain guidance where notifications are blocked, missing, or not sent by this server', () => {

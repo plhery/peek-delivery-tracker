@@ -1,4 +1,5 @@
 import type { Locale } from '../i18n';
+import type { AnalyticsReason } from '../lib/analytics';
 import { pageLocale } from '../lib/locale';
 import { decodePublicKey } from '../lib/pushKey';
 import { uid } from '../lib/uid';
@@ -18,12 +19,25 @@ import { ownerKeyFor, recentFor } from './recents';
  */
 export type AlertSupport = 'ready' | 'install' | 'blocked' | 'unsupported' | 'unavailable';
 
-/** Why turning alerts on stopped short of the server. A refused request reaches the caller as its `ParcelLinkError`. */
+/**
+ * Why turning alerts on stopped short of the server. A refused request reaches the caller as its `ParcelLinkError`.
+ * `worker`: the page's service worker wasn't ready in time; the reader is told as for `unsupported`.
+ */
 export class AlertError extends Error {
-  constructor(readonly kind: 'blocked' | 'dismissed' | 'unsupported' | 'failed', cause?: unknown) {
+  constructor(readonly kind: 'blocked' | 'dismissed' | 'unsupported' | 'worker' | 'failed', cause?: unknown) {
     super(`Parcel alert: ${kind}`, { cause });
     this.name = 'AlertError';
   }
+}
+
+const REFUSED_KINDS: readonly string[] = ['unavailable', 'stopped', 'full', 'burst', 'daily', 'refused', 'validation'];
+
+/** Why turning alerts on failed, as analytics counts it: one fixed word, never the error itself. */
+export function alertFailure(error: unknown): AnalyticsReason {
+  if (error instanceof AlertError) return error.kind === 'failed' ? 'subscription' : error.kind;
+  if (!(error instanceof ParcelLinkError)) return 'other';
+  if (error.kind === 'offline') return 'offline';
+  return REFUSED_KINDS.includes(error.kind) ? 'refused' : 'server';
 }
 
 /** How long the page waits for its service worker before saying this browser cannot be reached. */
@@ -55,7 +69,7 @@ async function worker(): Promise<ServiceWorkerRegistration> {
   try {
     return await Promise.race([
       navigator.serviceWorker.ready,
-      new Promise<never>((_, reject) => { timer = setTimeout(() => reject(new AlertError('unsupported')), WORKER_READY_MS); }),
+      new Promise<never>((_, reject) => { timer = setTimeout(() => reject(new AlertError('worker')), WORKER_READY_MS); }),
     ]);
   } finally {
     clearTimeout(timer);

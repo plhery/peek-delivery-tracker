@@ -62,7 +62,11 @@ are virtual names, never real URLs.
   iPhone app or open the parcel in it, add the delivery to a calendar, sign in (and apart from it, sign in for the email), keep in the
   account, open the parcel already followed, forget, and the lookup's owner giving the
   postcode another carrier asks for or choosing the carrier at the front door. Sharing a parcel from an account counts under the
-  same names.
+  same names. On the web, a browser's alerts that fail to turn on say why in one word
+  (`reason`): the permission refused (`blocked`) or left unanswered (`dismissed`), no push
+  in this browser (`unsupported`), a service worker not ready in time (`worker`), a
+  subscription the push service refused (`subscription`), no answer from Peek (`offline`),
+  Peek refusing (`refused`) or failing (`server`), or `other`.
 - **Safari from an app's browser**: where notifications need the Home Screen but an app's
   own browser has no way to it, a tap on "Open in Safari" (`started`, then `error` if the
   page is still in sight a moment later) and copying the link for Safari.
@@ -151,12 +155,13 @@ README's link `github-readme`.
 
 Never sent: emails, account or parcel ids, parcel link ids or owner keys, the token of an
 email's opt-out link, labels and names, gift notes, push addresses, tracking numbers,
-postcodes, invitation codes, errors, search
+postcodes, invitation codes, error messages, search
 terms, or any query string but the campaign below. A parcel page is the `parcel-link` screen, whatever its address; the sample parcel's is in `demo` mode. Umami still
 sees the IP, user agent, basic device data and language.
 
-On the web, every event carries the app's language (`locale`) when the page declares one, and the
-Android test's events the place they come from (`spot`).
+On the web, every event carries the app's language (`locale`) when the page declares one, the
+Android test's events the place they come from (`spot`), and a failed `parcel-link-alerts`
+its `reason`.
 A page load's first page view also says where the visitor came from, since Umami counts
 sources from page views only: the `referrer`, as origin and path without query or fragment,
 when it is another site (or an Android app), and the landing address's `utm_source`,

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { IPHONE_SAFARI, restoreAlertBrowser, stubAlertBrowser, TEST_PUSH_ENDPOINT, TEST_PUSH_KEY } from '../test/alertBrowser';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
-import { AlertError, alertSupport, deviceAlert, followAlertLanguage, turnOffAlert, turnOnAlert } from './alerts';
+import { AlertError, alertFailure, alertSupport, deviceAlert, followAlertLanguage, turnOffAlert, turnOnAlert } from './alerts';
 import { forgetAllLinkNotes, linkNote, noteLink } from './deviceNotes';
 import { ParcelLinkError } from './links';
 import { forgetAllRecents, rememberParcel } from './recents';
@@ -117,12 +117,21 @@ describe('turning alerts on', () => {
     browser({ ready: false });
     const waiting = failed(turnOn());
     await vi.advanceTimersByTimeAsync(8_000);
-    expect(await waiting).toMatchObject({ name: 'AlertError', kind: 'unsupported' });
+    expect(await waiting).toMatchObject({ name: 'AlertError', kind: 'worker' });
     vi.useRealTimers();
     const { pushManager } = browser();
     pushManager.subscribe.mockRejectedValueOnce(new DOMException('Registration failed', 'AbortError'));
     expect(await failed(turnOn())).toMatchObject({ kind: 'failed' });
     expect(mocks.set).not.toHaveBeenCalled();
+  });
+
+  it('names each failure with one word for analytics, never the error itself', () => {
+    expect(['blocked', 'dismissed', 'unsupported', 'worker', 'failed'].map((kind) => alertFailure(new AlertError(kind as AlertError['kind']))))
+      .toEqual(['blocked', 'dismissed', 'unsupported', 'worker', 'subscription']);
+    expect(['offline', 'server', 'unconfigured', 'full', 'stopped', 'unavailable', 'burst', 'validation']
+      .map((kind) => alertFailure(new ParcelLinkError(kind as ParcelLinkError['kind']))))
+      .toEqual(['offline', 'server', 'server', 'refused', 'refused', 'refused', 'refused', 'refused']);
+    expect(alertFailure(new TypeError('secret detail'))).toBe('other');
   });
 
   it('passes the server’s refusal on, and drops a subscription it made only for this alert', async () => {

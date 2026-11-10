@@ -212,7 +212,9 @@ carrier, or the carrier it handed the parcel to, tracked that number directly. N
 shape several carriers issue ambiguous once the parcel's carrier, one of them, confirmed
 the number directly, or said it holds the parcel and shows it only with an input the parcel
 lacks or not with the postcode it has (`parcel_found`, `postcode_mismatch`): the owner's
-input is wrong, not the shape. A check settles that at its end, from the carrier it filed the parcel
+input is wrong, not the shape. Nor is an S10 number generic postal once the carrier the parcel
+is filed under confirmed it, whether the post its suffix names or a courier that carries such
+numbers: a check starts without that reason then, and the replay below closes its case. A check settles that at its end, from the carrier it filed the parcel
 under and the one that confirmed the number, so a first check that its carrier answers
 opens no case. When the lookup of a carrier that could have settled it failed, rate limited
 or down (the filed carrier if the shape fits it, else any carrier the shape fits), the gap
@@ -291,7 +293,7 @@ the carrier tracked and resolves to a barcode of its own (`canonical_tracking_nu
 the carrier's shape fits, such as a Hermes Germany order number: every check keeps the
 reference's reasons. So is a case whose parcels are all filed under the carrier that tracked
 the number when the shape alone keeps a reason: an S10 number detection leaves to
-international post, filed under the post its suffix names, or a shape several carriers issue,
+international post, or a shape several carriers issue,
 under whose carrier routing filed each parcel from no carrier (a swap from `unknown`, or the
 carrier a provider named), never as a correction of another carrier. So is a case on a pickup code filed under no carrier, which was never a
 tracking number. A case only the

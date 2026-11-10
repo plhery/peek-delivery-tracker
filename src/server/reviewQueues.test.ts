@@ -104,6 +104,10 @@ describe('review queue replay', () => {
     expect(replaySupportCase('123456789012', 'fedex')).toBeNull();
     expect(replaySupportCase('ZZTEST1234', 'shipup')).toBeNull();
     expect(replaySupportCase('RR123456785FI', null)).toBeNull();
+    // An S10 number the carrier it is filed under tracked directly, whichever post its suffix names.
+    expect(replaySupportCase('RR123456785FI', 'royal-mail')).toBeNull();
+    expect(replaySupportCase('RR123456785FI', 'royal-mail', 'royal-mail'))
+      .toBe('Replay found no gap: royal-mail, the carrier it is filed under, tracks this S10 number directly.');
     // Filed under the origin, verified directly by the local carrier the number names.
     expect(replaySupportCase('CNPRT12345678901234567890', 'aliexpress')).toBeNull();
     expect(replaySupportCase('CNPRT12345678901234567890', 'aliexpress', 'ecoscooting')).not.toBeNull();
@@ -235,7 +239,7 @@ describe('review queue replay', () => {
       note: 'Its parcel is filed under fedex, one of the carriers its shape fits, and fedex tracked the number: no gap left.' }]);
   });
 
-  it('ignores an S10 case filed under the post its suffix names once that post tracked the number', async () => {
+  it('ignores an S10 case once the carrier it is filed under tracked the number, whichever post its suffix names', async () => {
     const client = fakeClient();
     const parcel = (number: string, carrier: string, confirmed: boolean): JsonObject => ({ tracking_number: number, one_off: true,
       carrier, current_stage: 'in_transit', created_at: '2026-09-10T05:00:00Z',
@@ -246,14 +250,17 @@ describe('review queue replay', () => {
       configured_carrier: carrier, reasons: ['generic_postal'], last_outcome: 'unchanged' })));
     client.trackingNumberParcels.mockResolvedValue(new Map([
       ['RA123456785LT', [parcel('RA123456785LT', 'lietuvos-pastas', true)]],
-      // Not confirmed yet, and filed under another post than its suffix names.
+      // Not confirmed yet.
       ['RA876543216LT', [parcel('RA876543216LT', 'lietuvos-pastas', false)]],
+      // Filed under another post than its suffix names, which tracked it.
       ['RA111111115LT', [parcel('RA111111115LT', 'royal-mail', true)]],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
-      .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 1 });
-    expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-RA123456785LT',
-      note: 'Its parcel is filed under lietuvos-pastas, the post its suffix names, and lietuvos-pastas tracked the number: no gap left.' }]);
+      .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 2 });
+    expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [
+      { id: 'case-RA123456785LT', note: 'Its parcel is filed under lietuvos-pastas, and lietuvos-pastas tracked this S10 number: no gap left.' },
+      { id: 'case-RA111111115LT', note: 'Its parcel is filed under royal-mail, and royal-mail tracked this S10 number: no gap left.' },
+    ]);
   });
 
   it('ignores a case whose parcel routing filed from no carrier under the carrier that tracked the number', async () => {

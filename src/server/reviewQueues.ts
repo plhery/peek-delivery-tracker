@@ -1,8 +1,8 @@
 import 'server-only';
 
-import { nationalPostCandidate, statusMapAnswer } from 'universal-parcel-scraper/app';
+import { statusMapAnswer } from 'universal-parcel-scraper/app';
 import manifest from '../../package.json';
-import { isPickupCode, isValidS10TrackingNumber, normalizeTrackingNumber } from '../lib/carriers';
+import { isPickupCode, normalizeTrackingNumber } from '../lib/carriers';
 import { captureOperationalError, databaseUnavailable, errorType, inBackgroundScope, logOperationalEvent } from './observability';
 import type { SupabaseServiceClient } from './supabase';
 import { trackingSupportContext } from './trackingSupport';
@@ -45,6 +45,9 @@ export function replaySupportCase(trackingNumber: string, configuredCarrier: str
   if ((context.reasons as string[]).length > 0) return null;
   if (context.detection_carrier === 'unknown') {
     return `Replay found no gap: ${String(verifiedCarrier)}, one of the carriers its shape fits, tracks the number directly.`;
+  }
+  if (context.detection_carrier === 'intl-post') {
+    return `Replay found no gap: ${String(verifiedCarrier)}, the carrier it is filed under, tracks this S10 number directly.`;
   }
   return `Replay found no gap: detection names ${String(context.detection_carrier)} with ${String(context.detection_confidence)} confidence.`;
 }
@@ -113,10 +116,10 @@ export function unseenLookupNote(
  * one-off lookup can leave the schedule with no later check to clear the reasons. Or, filed
  * under that carrier or none, the number is a reference the carrier resolves to a barcode of its
  * own (`canonical_tracking_number`) that fits it, such as a Hermes Germany order number: every
- * check keeps the reference's reasons. Two shapes keep their reason once the carrier tracked the
- * number, and no gap is left either: an S10 number detection leaves to international post, which
- * the post its suffix names tracked, and a shape several carriers issue, whose parcels routing
- * filed under that carrier from no carrier (a swap, or the carrier a provider named).
+ * check keeps the reference's reasons. An S10 number detection leaves to international post leaves no
+ * gap once that carrier tracked it. A shape several carriers issue keeps its reason once the carrier
+ * tracked the number, and no gap is left either when routing filed its parcels under that carrier from
+ * no carrier (a swap, or the carrier a provider named).
  */
 export function filedParcelNote(supportCase: JsonObject, parcels: readonly JsonObject[] | undefined): string | null {
   const confirmed = (parcels ?? []).map((parcel) => {
@@ -131,15 +134,15 @@ export function filedParcelNote(supportCase: JsonObject, parcels: readonly JsonO
   const reasons = (number: string) => (trackingSupportContext(number, carrier, carrier).reasons as string[]).join();
   const fits = (number: string) => reasons(number) === '';
   const number = String(supportCase.tracking_number ?? '');
+  if (fits(number) && trackingSupportContext(number, carrier, carrier).detection_carrier === 'intl-post') {
+    return unfiled
+      ? `Its parcel was filed under ${carrier} once ${carrier} tracked this S10 number: no gap left.`
+      : `Its parcel is filed under ${carrier}, and ${carrier} tracked this S10 number: no gap left.`;
+  }
   if (fits(number)) {
     return unfiled
       ? `Its parcel was filed under ${carrier}, one of the carriers its shape fits, once ${carrier} tracked the number: no gap left.`
       : `Its parcel is filed under ${carrier}, one of the carriers its shape fits, and ${carrier} tracked the number: no gap left.`;
-  }
-  const normalized = normalizeTrackingNumber(number);
-  if (reasons(number) === 'generic_postal' && isValidS10TrackingNumber(normalized)
-    && nationalPostCandidate(normalized.slice(-2)) === carrier) {
-    return `Its parcel is filed under ${carrier}, the post its suffix names, and ${carrier} tracked the number: no gap left.`;
   }
   // Swapped from no carrier, or filed under the one a provider named: never a correction of another carrier.
   const routed = (parcel: JsonObject | null) => {

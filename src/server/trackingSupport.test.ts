@@ -159,6 +159,16 @@ describe('tracking support context', () => {
       .toEqual(['generic_postal']);
   });
 
+  it('leaves no generic postal gap once the carrier the parcel is filed under tracked the number', () => {
+    // The post its suffix names, or another carrier that carries S10 numbers.
+    expect(trackingSupportContext('RR123456785FI', 'posti', 'posti').reasons).toEqual([]);
+    expect(trackingSupportContext('RR123456785FI', 'royal-mail', 'royal-mail').reasons).toEqual([]);
+    // Another carrier's confirmation leaves the filed one's gap.
+    expect(trackingSupportContext('RR123456785FI', 'royal-mail', 'posti').reasons).toEqual(['generic_postal']);
+    expect(trackingSupportStart('RR123456785FI', 'posti', null).reasons).toEqual(['generic_postal']);
+    expect(trackingSupportStart('RR123456785FI', 'posti', 'posti').reasons).toEqual([]);
+  });
+
   it('does not report a direct-adapter gap for Royal Mail', () => {
     expect(trackingSupportContext('RR123456785GB', 'royal-mail')).toMatchObject({
       detection_carrier: 'royal-mail', detection_confidence: 'high', reasons: [],

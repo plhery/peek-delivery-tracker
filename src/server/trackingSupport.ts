@@ -32,7 +32,9 @@ export function trackingSupportContext(trackingNumber: string, configuredCarrier
     if (!detection.candidates.length) {
       if (configuredCarrier !== 'unknown' || !isPickupCode(number)) reasons.push('unknown_shape');
     } else if (answeredBy !== configuredCarrier || !offered(configuredCarrier)) reasons.push('ambiguous_shape');
-  } else if (detection.carrier === 'intl-post') {
+  } else if (detection.carrier === 'intl-post' && answeredBy !== configuredCarrier) {
+    // An S10 number detection leaves to international post is where it belongs once the carrier it is filed under
+    // tracked it, whether the post its suffix names or a courier that carries such numbers (Matkahuolto).
     reasons.push('generic_postal');
   }
   if (!['unknown', 'intl-post'].includes(configuredCarrier) && !directCarrier(configuredCarrier)) {

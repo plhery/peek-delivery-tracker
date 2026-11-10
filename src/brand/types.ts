@@ -734,7 +734,15 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'alphastline'
   | 'dpdex'
   | 'crc-post'
-  | 'integraa';
+  | 'integraa'
+  | 'mixpakk'
+  | 'xls-futar'
+  | 'szami-group'
+  | 'gyujtoszallitas'
+  | 'csomagpiac'
+  | 'trans-pack'
+  | 'qt-express'
+  | 'home-delivery-team';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

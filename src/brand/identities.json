@@ -877,6 +877,12 @@
   "cse-russia": {
     "decal": "cse-russia"
   },
+  "csomagpiac": {
+    "decal": "csomagpiac",
+    "palette": {
+      "accent": "#000000"
+    }
+  },
   "cst-italia": {
     "decal": "cst-italia"
   },
@@ -1802,6 +1808,9 @@
   "guatex": {
     "decal": "guatex"
   },
+  "gyujtoszallitas": {
+    "decal": "gyujtoszallitas"
+  },
   "gzyl": {
     "decal": "gzyl"
   },
@@ -1879,6 +1888,9 @@
   },
   "holisol": {
     "decal": "holisol"
+  },
+  "home-delivery-team": {
+    "decal": "home-delivery-team"
   },
   "homexpress": {
     "decal": "homexpress",
@@ -2606,6 +2618,9 @@
   "miller-deliveries": {
     "decal": "miller-deliveries"
   },
+  "mixpakk": {
+    "decal": "mixpakk"
+  },
   "mng-kargo": {
     "family": "dhl"
   },
@@ -3234,6 +3249,9 @@
   "qls-quince": {
     "decal": "qls-quince"
   },
+  "qt-express": {
+    "decal": "qt-express"
+  },
   "quality-post": {
     "decal": "quality-post",
     "palette": {
@@ -3788,6 +3806,9 @@
   "syd": {
     "decal": "syd"
   },
+  "szami-group": {
+    "decal": "szami-group"
+  },
   "t-cat": {
     "decal": "t-cat"
   },
@@ -4016,6 +4037,9 @@
   },
   "trans-ontario": {
     "decal": "trans-ontario"
+  },
+  "trans-pack": {
+    "decal": "trans-pack"
   },
   "transaher": {
     "decal": "transaher"
@@ -4384,6 +4408,9 @@
   },
   "xlmiles": {
     "decal": "xlmiles"
+  },
+  "xls-futar": {
+    "decal": "xls-futar"
   },
   "xpect-same-day": {
     "decal": "xpect-same-day"

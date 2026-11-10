@@ -746,6 +746,14 @@ describe('carrier mark', () => {
     'dpdex',
     'crc-post',
     'integraa',
+    'mixpakk',
+    'xls-futar',
+    'szami-group',
+    'gyujtoszallitas',
+    'csomagpiac',
+    'trans-pack',
+    'qt-express',
+    'home-delivery-team',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

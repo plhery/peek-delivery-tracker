@@ -851,6 +851,14 @@ describe('carrier brand', () => {
       'dpdex',
       'crc-post',
       'integraa',
+      'mixpakk',
+      'xls-futar',
+      'szami-group',
+      'gyujtoszallitas',
+      'csomagpiac',
+      'trans-pack',
+      'qt-express',
+      'home-delivery-team',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

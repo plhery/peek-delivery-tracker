@@ -1432,7 +1432,8 @@ class CarrierCatalogTests {
         assertEquals(CarrierId.PocztaPolska, polish.carrier)
         assertEquals(CarrierMatch.Confidence.High, polish.confidence)
         assertFalse(catalog.detect("12345678901234567891").candidates.contains(CarrierId.PocztaPolska))
-        assertTrue(catalog.detect("1234567890123456789").candidates.contains(CarrierId.PocztaPolska))
+        // A nineteen-digit alias is the barcode without its check digit, so it keeps the identifier 00.
+        assertTrue(catalog.detect("0012345678901234567").candidates.contains(CarrierId.PocztaPolska))
     }
 
     /** Constructed eleven-digit numbers: DHL eCommerce Poland weighs ten digits 4 and 9 from the left. */

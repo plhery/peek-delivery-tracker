@@ -567,7 +567,9 @@ and nothing typed is sent.
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a
   failed attempt, pickup readiness or a return, and whenever they are in the past. Out for
   delivery already says the parcel comes today, so the apps, notifications and Live
-  Activities then show only the hours a carrier gives for today, never a day.
+  Activities then show only the hours a carrier gives for today, never a day. A
+  notification reads an estimate in the timezone the account saved, or else, when the
+  estimate states its UTC offset, on that offset, today included; or else in Zurich's.
 - A carrier's window of several days (`expected_delivery_from` to `expected_delivery`)
   is shown whole until its first day. From then on cards, widgets, previews, shared
   lines and notifications give its last day ("by Fri 6 Nov"), since the parcel may come

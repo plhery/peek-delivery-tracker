@@ -490,8 +490,11 @@ interface ExpectedDelivery {
   form: 'day' | 'date' | 'by_day' | 'by_date' | 'window';
 }
 
-/** An estimate on the reader's clock: its day, and the time or slot the carrier gave on it. */
-function estimatePoint(value: unknown, zone: string): { day: DateTime; time: string; instant: DateTime | null } | null {
+/**
+ * An estimate on the reader's clock, or, with `ownClock`, on the offset it states (a "Z" says nothing of the place):
+ * its day, and the time or slot the carrier gave on it.
+ */
+function estimatePoint(value: unknown, zone: string, ownClock = false): { day: DateTime; time: string; instant: DateTime | null } | null {
   const cleaned = notificationText(value, 100);
   if (!cleaned) return null;
   const slot = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(cleaned);
@@ -499,7 +502,7 @@ function estimatePoint(value: unknown, zone: string): { day: DateTime; time: str
     const day = DateTime.fromISO(slot[1]!, { zone });
     return day.isValid ? { day, time: `${slot[2]}${slot[3] ? `–${slot[3]}` : ''}`, instant: null } : null;
   }
-  const expected = DateTime.fromISO(cleaned, { zone });
+  const expected = DateTime.fromISO(cleaned, { zone, setZone: ownClock && /[+-]\d{2}:?\d{2}$/.test(cleaned) });
   if (!expected.isValid) return null;
   const timed = /T\d{2}:\d{2}/.test(cleaned);
   return { day: expected.startOf('day'), time: timed ? expected.toFormat('HH:mm') : '', instant: timed ? expected : null };
@@ -508,6 +511,8 @@ function estimatePoint(value: unknown, zone: string): { day: DateTime; time: str
 /**
  * When a parcel is expected, as a notification says it. A window of days reads whole until it begins, then by its last
  * day. Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are added.
+ * A reader who chose no time zone (`ownClock`) reads an estimate that states its offset on that offset, today included,
+ * as a delivery's time (`deliveryClock`): a parcel is delivered where its reader is.
  */
 function expectedDelivery(
   value: unknown,
@@ -516,12 +521,14 @@ function expectedDelivery(
   locale: Locale,
   timezone: string,
   now: number,
+  ownClock = false,
 ): ExpectedDelivery | null {
   const zone = IANAZone.isValidZone(timezone) ? timezone : 'Europe/Zurich';
-  const today = DateTime.fromMillis(now, { zone }).startOf('day');
-  const end = estimatePoint(value, zone);
-  if (!end || !today.isValid || end.day < today) return null;
-  const start = estimatePoint(from, zone);
+  const end = estimatePoint(value, zone, ownClock);
+  if (!end) return null;
+  const today = DateTime.fromMillis(now, { zone: end.day.zone }).startOf('day');
+  if (!today.isValid || end.day < today) return null;
+  const start = estimatePoint(from, zone, ownClock);
   const sameDay = (a: DateTime, b: DateTime) => a.toISODate() === b.toISODate();
   // Two times on one day are a slot on it.
   const time = start?.instant && end.instant && start.instant < end.instant && sameDay(start.day, end.day)
@@ -559,8 +566,9 @@ export function notificationExpectedDelivery(
   now = Date.now(),
   from: unknown = null,
   stage = '',
+  ownClock = false,
 ): string {
-  const expected = expectedDelivery(value, from, stage, notificationLocale(locale), timezone, now);
+  const expected = expectedDelivery(value, from, stage, notificationLocale(locale), timezone, now, ownClock);
   if (!expected) return '';
   return expected.to ? `${expected.date} – ${expected.to}` : expected.date;
 }
@@ -620,7 +628,7 @@ function notificationDetail(row: JsonObject, locale: Locale, now: number): strin
   if (stage === 'delivered') return deliveredMessage(row, locale, now);
   const expected = ETA_NOTIFICATION_STAGES.has(stage)
     ? expectedDelivery(row.expected_delivery, row.expected_delivery_from, stage, locale,
-      stringField(row, 'timezone') || 'Europe/Zurich', now)
+      stringField(row, 'timezone') || 'Europe/Zurich', now, row.timezone_chosen === false)
     : null;
   if (!expected) return copy[`body_${stage}`] ?? copy.body_update!;
   const changed = row.expected_delivery_changed === true ? 'eta_changed' : 'eta';
@@ -1670,6 +1678,7 @@ export class DeliveryLiveActivityNotificationService {
       timestamp * 1_000,
       row.expected_delivery_from,
       stage,
+      row.timezone_chosen === false,
     );
     const phase = LIVE_ACTIVITY_PHASES.has(stage) ? stage : 'ended';
     const contentState: JsonObject = {

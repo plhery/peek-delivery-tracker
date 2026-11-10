@@ -208,6 +208,22 @@ describe('friendly parcel notifications', () => {
     expect(body({ expected_delivery_from: '2026-09-12', expected_delivery: '2026-09-11' })).toBe('Coffee beans · arriving 11 September');
   });
 
+  it('reads an estimate on the offset it states when the reader chose no timezone', () => {
+    const row = { ...delivered, stage: 'in_transit', expected_delivery_changed: false, timezone_chosen: false };
+    const body = (changes: JsonObject) => web.payload({ ...row, ...changes }).body;
+    // A slot in New York that ends after Zurich's midnight is one day, there.
+    const evening = { expected_delivery_from: '2026-09-07T14:00:00-04:00', expected_delivery: '2026-09-07T20:00:00-04:00' };
+    expect(body(evening)).toBe('Coffee beans · arriving today, 14:00–20:00');
+    expect(body({ ...evening, stage: 'out_for_delivery' })).toBe('Coffee beans · arriving today, 14:00–20:00');
+    expect(body({ expected_delivery_from: '2026-09-08T07:00:00+01:00', expected_delivery: '2026-09-08T09:00:00+01:00' }))
+      .toBe('Coffee beans · arriving tomorrow, 07:00–09:00');
+    // Today is the estimate's: 18:00 in California is still today there.
+    expect(body({ expected_delivery: '2026-09-07T18:00:00-07:00' })).toBe('Coffee beans · arriving today, 18:00');
+    // A time in UTC says nothing of the place, and a chosen timezone is the reader's.
+    expect(body({ expected_delivery: '2026-09-08T07:00:00Z' })).toBe('Coffee beans · arriving tomorrow, 09:00');
+    expect(body({ ...evening, timezone_chosen: true })).toBe('Coffee beans · arriving by tomorrow');
+  });
+
   it('says when the parcel arrives instead of what the step means, once that is known', () => {
     const row = { ...delivered, stage: 'in_transit', expected_delivery_changed: false };
     expect(web.payload({ ...row, expected_delivery: null }).body).toBe('Coffee beans · one step closer');

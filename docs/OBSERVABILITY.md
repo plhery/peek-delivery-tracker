@@ -732,6 +732,9 @@ Key JSON events:
   the streak lasted;
 - `scheduled_sync_budget_reached`: a scheduled run reached its 4 minutes and left the rest
   to the next run, with how many parcels it `checked` and how many it `left`;
+- `scheduled_sync_gave_way`: a scheduled run stopped for an account's check queued ahead of it
+  and was queued again, with how many parcels it `checked` and how many it `left`; its
+  `sync_job_completed` line says `gave_way`;
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
   (`web`, `native` for the iPhone and Android apps, `live_activity`, `link_alert`) beside the

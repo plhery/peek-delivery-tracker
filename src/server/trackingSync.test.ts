@@ -1329,6 +1329,7 @@ function fakeClient(packages: JsonObject[] = []) {
   const client = {
     listActivePackages: vi.fn().mockResolvedValue(packages),
     getPackage: vi.fn(async (id: string): Promise<JsonObject | null> => packages.find((parcel) => parcel.id === id) ?? null),
+    syncJobQueuedAhead: vi.fn().mockResolvedValue(false),
     listFollowedOneOffPackages: vi.fn().mockResolvedValue([]),
     listUnfiledOneOffPackages,
     // The unfiled lookups a run takes, read again by id as the unfiled list gave them.
@@ -9664,6 +9665,32 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     await expect(service.sync()).resolves.toMatchObject({ checked: 2 });
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['a', 'b']);
     expect(logged).toHaveBeenCalledWith('scheduled_sync_budget_reached', { checked: 2, left: 1 });
+  });
+
+  it('gives way between checks to an account\'s check queued ahead of the run, once it has checked a parcel', async () => {
+    const logged = vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
+    const parcels = ['a', 'b', 'c'].map((user): JsonObject => ({ id: user, user_id: user, one_off: false, carrier: 'swiss-post',
+      current_stage: 'in_transit', tracking_number: `TEST${user}`, created_at: '2026-09-03T09:00:00Z', last_synced_at: null,
+      sync_status: 'ok', archived_at: null }));
+    const run = async (ahead: () => Promise<boolean>) => {
+      const client = fakeClient(parcels);
+      client.syncJobQueuedAhead.mockImplementation(ahead);
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+        { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-04T10:00:00Z'));
+      const summary = await service.sync();
+      return { client, summary, checked: client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id) };
+    };
+    const gaveWay = await run(async () => true);
+    expect(gaveWay.checked).toEqual(['a']);
+    expect(gaveWay.summary).toMatchObject({ checked: 1, gave_way: true });
+    expect(gaveWay.client.syncJobQueuedAhead).toHaveBeenCalledExactlyOnceWith(-10);
+    expect(logged).toHaveBeenCalledWith('scheduled_sync_gave_way', { checked: 1, left: 2 });
+    // Nothing ahead, or no answer to the question: the run goes on.
+    for (const ahead of [async () => false, async () => { throw new Error('database down'); }]) {
+      const { checked, summary } = await run(ahead);
+      expect(checked).toEqual(['a', 'b', 'c']);
+      expect(summary).not.toHaveProperty('gave_way');
+    }
   });
 
   it('skips a recheck when another check ran since the run listed it, or it cannot tell', async () => {

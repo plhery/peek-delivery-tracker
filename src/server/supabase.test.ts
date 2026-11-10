@@ -215,6 +215,17 @@ describe('one-off parcels and their links', () => {
       order: 'completed_at.desc', limit: '1' });
   });
 
+  it('asks whether a job that goes ahead of a priority waits to be claimed', async () => {
+    vi.useFakeTimers({ now: new Date('2026-09-16T10:00:00Z') });
+    const client = service();
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'job' }]).mockResolvedValueOnce([]);
+    await expect(client.syncJobQueuedAhead(-10)).resolves.toBe(true);
+    await expect(client.syncJobQueuedAhead(-10)).resolves.toBe(false);
+    expect(Object.fromEntries(params(request.mock.calls[0][0]))).toEqual({ select: 'id', state: 'eq.queued', priority: 'gt.-10',
+      run_after: 'lte.2026-09-16T10:00:00.000Z', limit: '1' });
+    vi.useRealTimers();
+  });
+
   it('lists the recent open parcels last routed with other catalog rules, and finished ones filed under no carrier, without their events', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'parcel' }]);

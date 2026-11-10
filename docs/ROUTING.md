@@ -369,6 +369,9 @@ per account, round-robin, every 2 minutes. It lists every open parcel and lookup
 as the database's API ends each answer at its row limit, and takes the least recently checked
 first. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
 read: the run reads those of the ones it takes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
+An account's check queued meanwhile, such as a refresh or a new parcel, goes ahead of the run: once the run has checked a
+parcel, it stops between checks, leaves its upkeep (archiving, forgetting, usage counts) to the next run, and is queued
+again behind that check. A lookup's check still waits for the run.
 
 A check that nothing answered stores its next check time within the hour. When every source a
 scheduled check may ask is still waiting its turn past that time (the carrier asked first, the

@@ -336,102 +336,12 @@ export class SyncJobWorker {
         signal.throwIfAborted();
         summary = await this.service.sync({ ...context, trigger: 'scheduled' });
         signal.throwIfAborted();
-        // After a scraper release, parcels its new rules point elsewhere are checked once more.
-        if (await this.service.queueRedetections(signal) > 0) this.wake();
-        archived = await this.service.client.archiveDeliveredBefore(
-          new Date(Date.now() - AUTO_ARCHIVE_DAYS * 86_400_000),
-        );
-        try {
-          const maintenance = await this.service.client.maintainSyncAudit();
-          if (maintenance.abandoned > 0 || maintenance.purged > 0) {
-            logOperationalEvent('tracking_sync_audit_maintained', maintenance);
-          }
-          if (maintenance.abandoned > 0) {
-            captureOperationalError(new Error('Tracking sync attempts were abandoned'), {
-              component: 'tracking-sync-audit',
-              operation: 'mark_abandoned',
-              failureCount: maintenance.abandoned,
-            });
-          }
-        } catch (maintenanceError) {
-          logOperationalEvent('tracking_sync_audit_maintenance_failed', {
-            error_type: errorType(maintenanceError),
-          }, 'error');
-          captureOperationalError(maintenanceError, {
-            component: 'tracking-sync-audit',
-            operation: 'maintenance',
-            jobId,
-            trigger: kind,
-          });
-        }
-        try {
-          // Lookups without an account end here: 30 days after delivery, or 90 days without news.
-          // So do the links whose sharing an account stopped 30 days ago, and the alerts of finished journeys.
-          const forgotten = await this.service.client.forgetExpiredParcelLinks();
-          recordParcelsForgotten('expired', forgotten);
-          recordParcelsForgotten('stopped', { links: forgotten.stopped, packages: 0 });
-          recordParcelAlertRemoved('delivered', forgotten.alerts);
-          if (forgotten.links > 0 || forgotten.packages > 0 || forgotten.stopped > 0 || forgotten.alerts > 0) {
-            logOperationalEvent('parcel_links_forgotten', forgotten);
-          }
-          recordPublicLookupUsage(await this.service.client.publicLookupUsageSummary());
-        } catch (maintenanceError) {
-          logOperationalEvent('parcel_link_maintenance_failed', {
-            error_type: errorType(maintenanceError),
-          }, 'error');
-          captureOperationalError(maintenanceError, {
-            component: 'parcel-links',
-            operation: 'maintenance',
-            jobId,
-            trigger: kind,
-          });
-        }
-        try {
-          // What readers said of a parcel is deleted 90 days after they said it.
-          const forgotten = await this.service.client.forgetOldParcelFeedback();
-          if (forgotten > 0) logOperationalEvent('parcel_feedback_forgotten', { answers: forgotten });
-        } catch (maintenanceError) {
-          logOperationalEvent('parcel_feedback_maintenance_failed', {
-            error_type: errorType(maintenanceError),
-          }, 'error');
-          captureOperationalError(maintenanceError, {
-            component: 'parcel-feedback',
-            operation: 'maintenance',
-            jobId,
-            trigger: kind,
-          });
-        }
-        try {
-          // The review's cases and signals go 10 days after no parcel follows their number.
-          const forgotten = await this.service.client.forgetUnfollowedTrackingReview();
-          if (forgotten.cases > 0 || forgotten.signals > 0) logOperationalEvent('tracking_review_forgotten', forgotten);
-        } catch (maintenanceError) {
-          logOperationalEvent('tracking_review_maintenance_failed', {
-            error_type: errorType(maintenanceError),
-          }, 'error');
-          captureOperationalError(maintenanceError, {
-            component: 'tracking-review',
-            operation: 'maintenance',
-            jobId,
-            trigger: kind,
-          });
-        }
-        try {
-          // The usage dashboard's counts for today, and the last additions of yesterday.
-          await this.service.client.recordUsageMetrics();
-        } catch (maintenanceError) {
-          logOperationalEvent('usage_metrics_failed', {
-            error_type: errorType(maintenanceError),
-          }, 'error');
-          captureOperationalError(maintenanceError, {
-            component: 'usage-metrics',
-            operation: 'record',
-            jobId,
-            trigger: kind,
-          });
+        // A run that gave way to an account's check leaves this to the run queued again behind it.
+        if (!summary.gave_way) {
+          archived = await this.scheduledUpkeep(jobId, kind, signal);
+          this.state.lastAutoArchived = archived;
         }
         this.state.lastScheduledSync = Date.now() / 1_000;
-        this.state.lastAutoArchived = archived;
       } else {
         throw new TypeError('Unknown synchronization job kind');
       }
@@ -442,6 +352,7 @@ export class SyncJobWorker {
       this.state.lastSummary = result;
       this.state.lastError = null;
       logOperationalEvent('sync_job_completed', { job_id: jobId, kind, ...result });
+      if (summary.gave_way) await this.queueScheduledRunAgain();
     } catch (error) {
       if (error instanceof WorkerShutdown || signal.reason instanceof WorkerShutdown) {
         // The replacement resumes the same persisted Sentry check-in. Shutdown
@@ -494,6 +405,117 @@ export class SyncJobWorker {
       this.#ownedJob = null;
     }
     return true;
+  }
+
+  /** What a scheduled run does after its checks: redetections, archiving and the stores' upkeep. Returns the parcels archived. */
+  private async scheduledUpkeep(jobId: string, kind: string, signal: AbortSignal): Promise<number> {
+    // After a scraper release, parcels its new rules point elsewhere are checked once more.
+    if (await this.service.queueRedetections(signal) > 0) this.wake();
+    const archived = await this.service.client.archiveDeliveredBefore(
+      new Date(Date.now() - AUTO_ARCHIVE_DAYS * 86_400_000),
+    );
+    try {
+      const maintenance = await this.service.client.maintainSyncAudit();
+      if (maintenance.abandoned > 0 || maintenance.purged > 0) {
+        logOperationalEvent('tracking_sync_audit_maintained', maintenance);
+      }
+      if (maintenance.abandoned > 0) {
+        captureOperationalError(new Error('Tracking sync attempts were abandoned'), {
+          component: 'tracking-sync-audit',
+          operation: 'mark_abandoned',
+          failureCount: maintenance.abandoned,
+        });
+      }
+    } catch (maintenanceError) {
+      logOperationalEvent('tracking_sync_audit_maintenance_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'tracking-sync-audit',
+        operation: 'maintenance',
+        jobId,
+        trigger: kind,
+      });
+    }
+    try {
+      // Lookups without an account end here: 30 days after delivery, or 90 days without news.
+      // So do the links whose sharing an account stopped 30 days ago, and the alerts of finished journeys.
+      const forgotten = await this.service.client.forgetExpiredParcelLinks();
+      recordParcelsForgotten('expired', forgotten);
+      recordParcelsForgotten('stopped', { links: forgotten.stopped, packages: 0 });
+      recordParcelAlertRemoved('delivered', forgotten.alerts);
+      if (forgotten.links > 0 || forgotten.packages > 0 || forgotten.stopped > 0 || forgotten.alerts > 0) {
+        logOperationalEvent('parcel_links_forgotten', forgotten);
+      }
+      recordPublicLookupUsage(await this.service.client.publicLookupUsageSummary());
+    } catch (maintenanceError) {
+      logOperationalEvent('parcel_link_maintenance_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'parcel-links',
+        operation: 'maintenance',
+        jobId,
+        trigger: kind,
+      });
+    }
+    try {
+      // What readers said of a parcel is deleted 90 days after they said it.
+      const forgotten = await this.service.client.forgetOldParcelFeedback();
+      if (forgotten > 0) logOperationalEvent('parcel_feedback_forgotten', { answers: forgotten });
+    } catch (maintenanceError) {
+      logOperationalEvent('parcel_feedback_maintenance_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'parcel-feedback',
+        operation: 'maintenance',
+        jobId,
+        trigger: kind,
+      });
+    }
+    try {
+      // The review's cases and signals go 10 days after no parcel follows their number.
+      const forgotten = await this.service.client.forgetUnfollowedTrackingReview();
+      if (forgotten.cases > 0 || forgotten.signals > 0) logOperationalEvent('tracking_review_forgotten', forgotten);
+    } catch (maintenanceError) {
+      logOperationalEvent('tracking_review_maintenance_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'tracking-review',
+        operation: 'maintenance',
+        jobId,
+        trigger: kind,
+      });
+    }
+    try {
+      // The usage dashboard's counts for today, and the last additions of yesterday.
+      await this.service.client.recordUsageMetrics();
+    } catch (maintenanceError) {
+      logOperationalEvent('usage_metrics_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'usage-metrics',
+        operation: 'record',
+        jobId,
+        trigger: kind,
+      });
+    }
+    return archived;
+  }
+
+  /**
+   * Queues a scheduled run that gave way again, behind the checks it gave way to and ahead of
+   * lookups'. Should that fail, the next window's run takes the parcels it left.
+   */
+  private async queueScheduledRunAgain(): Promise<void> {
+    try {
+      await this.service.client.enqueueSyncJob({ scheduled: true });
+    } catch (error) {
+      logOperationalEvent('scheduled_sync_enqueue_failed', { error_type: errorType(error) }, 'error');
+    }
   }
 
   /**

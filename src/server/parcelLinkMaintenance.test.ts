@@ -145,3 +145,29 @@ it('rewrites the usage counts after each scheduled sync, and finishes the sync w
   expect(finish).toHaveBeenCalledExactlyOnceWith('job', worker.workerId, { result: expect.anything() });
   expect(state.lastError).toBeNull();
 });
+
+it('leaves the upkeep to a scheduled run that gave way, and queues that run again behind the check it gave way to', async () => {
+  const { client, finish, redetections, state, sync, usage, worker } = scheduledRun();
+  sync.mockResolvedValue({ ...emptySyncSummary(), checked: 1, gave_way: true });
+  const forget = vi.spyOn(client, 'forgetExpiredParcelLinks');
+  const queue = vi.spyOn(client, 'enqueueSyncJob').mockResolvedValue({ row: {}, queued: true });
+  worker.start();
+  await vi.advanceTimersByTimeAsync(1);
+  worker.stop();
+  expect(finish).toHaveBeenCalledExactlyOnceWith('job', worker.workerId, { result: expect.objectContaining({ checked: 1, gave_way: true }) });
+  expect(queue).toHaveBeenCalledExactlyOnceWith({ scheduled: true });
+  expect(finish.mock.invocationCallOrder[0]).toBeLessThan(queue.mock.invocationCallOrder[0]);
+  for (const upkeep of [redetections, forget, usage, client.archiveDeliveredBefore]) expect(upkeep).not.toHaveBeenCalled();
+  expect(state.lastScheduledSync).not.toBeNull();
+});
+
+it('queues no run again after a scheduled run that ended on its own', async () => {
+  const { client, worker } = scheduledRun();
+  vi.spyOn(client, 'forgetExpiredParcelLinks').mockResolvedValue({ links: 0, packages: 0, stopped: 0, alerts: 0 });
+  vi.spyOn(client, 'publicLookupUsageSummary').mockResolvedValue({ buckets: 0, p50: 0, p90: 0, max: 0, detection: { buckets: 0, p50: 0, p90: 0, max: 0 } });
+  const queue = vi.spyOn(client, 'enqueueSyncJob');
+  worker.start();
+  await vi.advanceTimersByTimeAsync(1);
+  worker.stop();
+  expect(queue).not.toHaveBeenCalled();
+});

@@ -1130,6 +1130,8 @@ function leastRecentlyChecked(parcels: JsonObject[]): JsonObject[] {
 
 /** The priority of a re-check nobody asked for, such as a scraper release's: it waits behind every other job. */
 export const BACKGROUND_SYNC_PRIORITY = -30;
+/** The scheduled run's priority: an account's check goes ahead of it, a lookup's waits behind it. */
+export const SCHEDULED_SYNC_PRIORITY = -10;
 
 export class SupabaseServiceClient extends SupabaseClient {
   /**
@@ -1937,7 +1939,7 @@ export class SupabaseServiceClient extends SupabaseClient {
       }
       kind = 'scheduled';
       dedupeKey = 'scheduled';
-      priority = -10;
+      priority = SCHEDULED_SYNC_PRIORITY;
     } else {
       if (!options.packageId) throw new TypeError('Package sync jobs require a package');
       kind = 'package';
@@ -2044,6 +2046,18 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_result: options.result ?? null, p_error: options.error?.slice(0, 500) ?? null },
     });
     if (finished !== true) throw new SyncJobLeaseLost();
+  }
+
+  /** Whether a job that goes ahead of `priority` waits to be claimed, such as an account's refresh during a scheduled run. */
+  async syncJobQueuedAhead(priority: number): Promise<boolean> {
+    const params = query([
+      ['select', 'id'],
+      ['state', 'eq.queued'],
+      ['priority', `gt.${priority}`],
+      ['run_after', `lte.${new Date().toISOString()}`],
+      ['limit', '1'],
+    ]);
+    return rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 })).length > 0;
   }
 
   /** When the last scheduled run finished, however it ended; null when none has. */

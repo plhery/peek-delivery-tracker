@@ -42,7 +42,7 @@ import {
 } from './observability';
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
-import { REDETECTION_PAGE, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
+import { REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
 import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
@@ -822,6 +822,8 @@ export interface SyncSummary extends JsonObject {
   subscriptions_expired: number;
   emails_sent: number;
   email_errors: number;
+  /** A scheduled run stopped early for an account's check queued ahead of it, and is to be queued again. */
+  gave_way?: true;
 }
 
 /** Adds what a push dispatch did to the job's counts, each channel's sends beside the total. */
@@ -1561,6 +1563,13 @@ export class TrackingSyncService {
           logOperationalEvent('scheduled_sync_budget_reached', { checked: summary.checked, left: parcels.length - index });
           break;
         }
+        // An account's check queued meanwhile, such as a refresh or a new parcel, goes ahead of the run: once
+        // the run has checked a parcel, it stops between checks and is queued again behind it (background.ts).
+        if (summary.checked > 0 && await this.jobQueuedAhead()) {
+          logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: parcels.length - index });
+          summary.gave_way = true;
+          break;
+        }
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
         if (rechecks.has(parcel) && !await this.uncheckedSinceListed(parcel, context.signal)) continue;
         // A merge earlier in the run removed the parcel or gave it the other leg: the next run checks it.
@@ -1580,6 +1589,15 @@ export class TrackingSyncService {
       await this.dispatchNotifications(summary, context.signal);
       return summary;
     });
+  }
+
+  /** Whether an account's check waits behind the scheduled run; false when that cannot be read. */
+  private async jobQueuedAhead(): Promise<boolean> {
+    try {
+      return await this.client.syncJobQueuedAhead(SCHEDULED_SYNC_PRIORITY);
+    } catch {
+      return false;
+    }
   }
 
   async syncPackage(

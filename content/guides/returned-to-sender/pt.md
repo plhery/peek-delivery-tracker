@@ -4,7 +4,7 @@ description: A encomenda volta a quem a enviou por causa da morada, de uma recus
 slug: encomenda-devolvida-ao-remetente
 picture: Uma carrinha com uma encomenda com um carimbo redondo de devolução volta para uma loja ao longo de uma seta curva, e o Pip fica a vê-la partir.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 «Devolvida ao remetente» quer dizer que a transportadora não te conseguiu entregar a encomenda e está a levá-la de volta a quem a enviou: por causa da morada, de uma recusa, de um prazo de levantamento que passou ou de um desalfandegamento por concluir. Depois de a devolução começar, os CTT dizem que não a podem cancelar. Escreve já à loja e diz-lhe, por escrito, se queres que volte a enviar a encomenda ou que te devolva o dinheiro.
@@ -99,6 +99,8 @@ A encomenda faz quase o mesmo caminho de volta, e o seguimento corre ao contrár
 
 O [Peek](/) pode enviar-te uma notificação quando uma encomenda é devolvida, com a opção «Passos importantes», para saberes logo quando dá meia-volta. Mas não a consegue travar.
 
+Quando a transportadora regista a devolução, o Peek mostra «Devolvida ao remetente», e na tua lista a encomenda passa para «Devolvidas»; em peektracker.com, a página dela acrescenta «De regresso desde» e a data, e a nota «InPost está a devolvê-la ao remetente. Contacta o remetente para um reembolso ou uma nova entrega.» (aqui com a InPost). O Peek pede o seguimento da InPost em inglês, por isso, no Peek, a `Devolução em curso` aparece com linhas como `On the way back to the Sender`. Nos CTT, «Devolvida ao remetente» chega com `Devolvido`.
+
 ## Quanto tempo demora uma encomenda devolvida ao remetente ou ao exterior?
 
 **A espera.** Uma recusa volta quase sempre logo: as regras da União Postal Universal mandam devolver cartas e pequenos pacotes recusados «sem demora», e nos Envios Online dos CTT quem envia pode escolher, logo ao enviar, que uma encomenda não entregue volte de imediato. Uma encomenda por levantar espera primeiro o fim do prazo: nos CTT, 10 dias úteis para uma Encomenda Postal numa Loja ou Ponto CTT e 5 dias num cacifo Locky; na InPost, 5 dias seguidos. [Quanto tempo tenho para levantar uma encomenda](guide:uncollected-parcel) tem os prazos de cada transportadora e como ganhar mais tempo.
@@ -127,6 +129,7 @@ Nos Envios Online dos CTT, quando não é possível entregar nem devolver, a CTT
 - [CTT: Desistir do desalfandegamento](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/utilizacao-do-portal/desistir-do-desalfandegamento-da-minha-encomenda) – devolução não prioritária, sem prazo padrão
 - [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – só IVA pago, devolução, direitos não reembolsados
 - [Universal Parcel Scraper: estados dos CTT](https://github.com/plhery/universal-parcel-scraper) – «Devolvido», visto em seguimentos reais
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – leituras da InPost que o Peek lê, em inglês fora da versão polaca: On the way back to the Sender (consultado a 10 de novembro de 2026)
 - [InPost: Fala connosco, perguntas frequentes](https://www.inpost.pt/fala-connosco) – 5 dias seguidos, regresso ao ponto de origem à custa da InPost, não conformidade
 - [InPost: Os estados de envio InPost](https://www.inpost.pt/blog/os-estados-de-envio-inpost-o-que-significa-cada-mensagem-do-rastreio) – «Devolução em curso»
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – segunda tentativa, 10 dias úteis, recusa de encomenda danificada

@@ -3,7 +3,7 @@ title: China Post rastreio: número, estados e entrega em Portugal
 description: Rastreio China Post: como é o número que acaba em CN, o que querem dizer os estados em chinês, quando a encomenda passa para os CTT e porque é que o seguimento para.
 slug: china-post-rastreio
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 A China Post, os Correios da China, é o correio nacional chinês, uma empresa do Estado, e a EMS é a sua marca de correio expresso. Se a tua encomenda do AliExpress, da Temu, da Shein ou de outra loja veio com um número de rastreio que acaba em `CN`, foi a China Post que o criou, e em Portugal quem a entrega são os [CTT](carrier:ctt), com esse mesmo número. Podes segui-la no site da China Post, o ems.com.cn, no Seguir objeto dos CTT depois de chegar a Portugal, ou na caixa acima. O número está nos detalhes de envio da encomenda, na loja onde compraste.
@@ -46,6 +46,9 @@ A China Post escreve as leituras em chinês. Os lugares aparecem entre parêntes
 | `航空公司接收`, `航空公司启运` | Uma companhia aérea recebeu-a e depois partiu com ela. |
 | `飞机进港` | O avião aterrou. |
 | `到达寄达地处理中心` | Chegou ao centro de tratamento do país de destino: para ti, Portugal. |
+| `送交境外进口海关` | Foi apresentada à alfândega de Portugal. O Peek mostra «Na alfândega». |
+| `境外进口海关留存待验` | A alfândega reteve-a para verificação. |
+| `寄达地海关允许进口` | A alfândega deixou-a entrar. |
 | `离开【…】处理中心` | Saiu desse centro. |
 | `已到达【…】投递局` | Chegou à estação que a vai distribuir. |
 | `【…】安排投递`, `邮件正在派送中` | Saiu para entrega. |
@@ -99,9 +102,11 @@ O [Peek](/) reconhece logo como China Post um número com duas letras, nove alga
 
 O Peek lê o seguimento da própria China Post. Quando a China Post pede os algarismos do telefone, o Peek tenta em vez disso a pré-visualização pública do ems.com.cn; o Peek nunca tos pede. Se também essa recusar e nenhum serviço de seguimento tiver a encomenda, o Peek diz que são necessários mais dados: procura o número no site da China Post, com os quatro algarismos. A China Post só mostra a quem visita as três leituras mais recentes, por isso o Peek junta a data de aceitação quando a China Post a dá, e vai buscar um histórico mais completo a um serviço de seguimento quando algum o tem.
 
-Mostra o estado, o histórico com a estação de cada leitura (uma estação escrita em chinês com o nome da sua cidade, ou tal como está escrita quando o Peek não a consegue localizar) e o país de destino. As leituras aparecem em inglês quando o Peek conhece o texto da China Post e, se não, em chinês; as que conhece tal e qual, como `Delivered`, mostra-as em português. A China Post data as suas próprias leituras com a hora da China, mesmo a chegada a Portugal; as seguintes, que copia dos CTT, costumam manter a hora local dos CTT. O Peek mostra cada leitura no fuso horário do teu dispositivo. A China Post não dá data prevista de entrega, peso nem ponto de levantamento, e o Peek deixa de fora o nome do serviço, os contactos, os dados do remetente e do destinatário, os nomes e telefones dos carteiros e as coordenadas no mapa.
+Mostra o estado, o histórico com a estação de cada leitura (uma estação escrita em chinês com o nome da sua cidade, ou tal como está escrita quando o Peek não a consegue localizar) e o país de destino. As leituras aparecem em inglês quando o Peek conhece o texto da China Post e, se não, em chinês; as que conhece tal e qual, como `Delivered`, mostra-as em português. A China Post data as suas próprias leituras com a hora da China, mesmo a chegada a Portugal; as seguintes, que copia dos CTT, costumam manter a hora local dos CTT. O Peek mostra cada leitura no fuso horário do teu dispositivo; em peektracker.com, uma linha no fim do histórico lembra-o: «Horas no teu fuso horário: …». A China Post não dá data prevista de entrega, peso nem ponto de levantamento, e o Peek deixa de fora o nome do serviço, os contactos, os dados do remetente e do destinatário, os nomes e telefones dos carteiros e as coordenadas no mapa.
 
-Se o número acabar em `CN` e a China Post indicar Portugal como destino, o Peek pergunta também aos CTT com o mesmo número e passa para eles assim que mostram leituras novas, sem perder o histórico da China Post. Se a China Post não indicar o destino ou não responder, o Peek escolhe o correio nacional pela região do teu telemóvel (iPhone ou Android) ou, na web, pelo país da tua ligação quando adicionaste a encomenda. Pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
+Se o número acabar em `CN` e a China Post indicar Portugal como destino, o Peek pergunta também aos CTT com o mesmo número e passa para eles assim que mostram leituras novas, sem perder o histórico da China Post. Se a China Post não indicar o destino ou não responder, o Peek escolhe o correio nacional pela região do teu telemóvel (iPhone ou Android) ou, na web, pelo país da tua ligação quando adicionaste a encomenda.
+
+O Peek verifica de 10 em 10 minutos, ou de hora a hora quando a China Post deixa de dar notícias: ao fim de 12 horas sem leituras novas enquanto a encomenda está em «Etiqueta criada» ou «Aceite pela transportadora», ou de dois dias em qualquer outro passo. Quando a encomenda sai para entrega, verifica de 2 em 2 minutos, ou de 5 em 5 quando a verificação tem de abrir um navegador, como para ler a pré-visualização pública da China Post: nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da China Post a responder. Através de serviços de seguimento, verifica de 15 em 15 minutos. Quando outra transportadora fica com a entrega, como os CTT, o Peek segue o ritmo da que entrega a encomenda. Pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
 
 ## Perguntas sobre o rastreio China Post
 
@@ -138,5 +143,5 @@ Os CTT, com o número da China Post, porque a UPU só permite um número por obj
 - [CTT: Prazo para levantar e onde se dirigir](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – 6 e 15 dias úteis, prolongamento até 30 dias
 - [CTT: Linhas de apoio](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/linhas-de-apoio) – telefone e horário
 - [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – canais, 6 meses para envios internacionais
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – leituras da China Post, pedido dos algarismos do telefone e o que o Peek mostra
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – leituras da China Post, também as da alfândega de destino, pedido dos algarismos do telefone, a pré-visualização pública lida num navegador e o que o Peek mostra
 :::

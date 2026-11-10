@@ -4,7 +4,7 @@ description: Qué significa que un paquete sea devuelto al remitente, si se pued
 slug: paquete-devuelto-al-remitente
 picture: Una furgoneta con un paquete con un sello redondo de devolución vuelve hacia una tienda siguiendo una flecha curva, y Pip la mira alejarse.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 «Devuelto al remitente» significa que el transportista no ha podido entregarte el paquete y se lo lleva de vuelta a quien lo envió: por la dirección, porque lo rehusaste, porque no lo recogiste a tiempo o porque quedaron aduanas sin pagar. Cuando la devolución ya ha empezado, transportistas como DHL dicen que no se puede parar. Escribe hoy mismo al vendedor y dile por escrito si quieres que te lo vuelva a enviar o que te devuelva el dinero.
@@ -106,6 +106,8 @@ Eso confunde a mucha gente: Correos cierra una devolución con `Entregado al rem
 
 Con las notificaciones en «Pasos importantes», [Peek](/) te avisa de las devoluciones, así que te enteras de cuándo el paquete da la vuelta. Lo que no puede es pararla.
 
+Cuando Correos escribe `En proceso de devolución`, `Finalizado plazo retirada` o, al final, `Entregado al remitente`, Peek muestra «Devuelto al remitente», no «Entregado», y en tu lista el paquete pasa a «Devueltos»; en peektracker.com, su página añade «Devolución iniciada:» con la fecha y la nota «Correos lo está devolviendo al remitente. Contacta con el remitente para un reembolso o un nuevo envío.» Con CTT Express, `En devolución` sale primero como «Incidencia»: «Devuelto al remitente» llega con `Devuelto a remitente`.
+
 ## ¿Cuánto tarda un paquete devuelto al remitente?
 
 **La espera.** Cuando un envío no se puede entregar, el Reglamento postal da al operador un máximo de 5 días para devolverlo o avisar al remitente; si le avisa, el remitente tiene 15 días para decidir. Un paquete estacionado en Correos espera 5 días naturales a que alguien corrija los datos. Si no lo recogiste, primero se agota el plazo de recogida: 15 días en una oficina de Correos, 5 o menos en un locker. [Paquete no recogido](guide:uncollected-parcel) tiene los plazos de cada transportista.
@@ -131,9 +133,9 @@ El Reglamento postal solo prevé devolverlo «cuando conste la dirección» del 
 - [Correos: Envíos estacionados](https://www.correos.es/es/es/atencion-al-cliente/recibir/envios-estacionados) – motivos, 5 días naturales, Mi Oficina, Gestión de estacionados, PIN, 915 197 197
 - [Correos: Paq Estándar](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paquete-estandar) – APE, 48 a 72 horas, devolución en el plazo de ida más 24 horas, Canarias, Ceuta y Melilla
 - [Correos: Aviso de llegada y SMS](https://www.correos.es/es/es/atencion-al-cliente/recibir/aviso-de-llegada) – 15 días, devolución al remitente al acabar el plazo
-- [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Destinatario desconocido, Finalizado plazo retirada, En proceso de devolución, Entregado al remitente, Devolución admitida
+- [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Destinatario desconocido, Finalizado plazo retirada, En proceso de devolución, Entregado al remitente, Devolución admitida; Finalizado plazo retirada, En proceso de devolución y Entregado al remitente, leídos por Peek como devolución (leído el 10 de noviembre de 2026)
 - [Universal Parcel Scraper: estados de Correos Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-express/statuses.json) – fin del periodo de recogida y devolución a origen
-- [Universal Parcel Scraper: estados de CTT Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/ctt-express/statuses.json) – En devolución, Devuelto a remitente
+- [Universal Parcel Scraper: estados de CTT Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/ctt-express/statuses.json) – En devolución, Devuelto a remitente; En devolución leído como incidencia hasta la entrega al remitente (leído el 10 de noviembre de 2026)
 - [DHL: Ayuda con una devolución (en alemán)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – una devolución no se puede parar
 - [Unión Postal Universal: Manual del Convenio (en inglés)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – motivos en francés, plazos de espera, vía de vuelta, gastos del remitente
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega

@@ -102,7 +102,7 @@ C'est le piège : à la fin d'un retour, La Poste comme La Poste suisse marquent
 
 [Peek](/) peut t'envoyer une notification pour les retours avec le réglage « Étapes importantes » : tu sais quand un colis fait demi-tour. Il ne peut pas l'arrêter.
 
-Quand Mondial Relay écrit `Retour à l'expéditeur`, Peek affiche « Retourné à l’expéditeur », avec « Sur le chemin du retour depuis » et la date, et la note « Mondial Relay le renvoie à l’expéditeur. Contacte l’expéditeur pour un remboursement ou une nouvelle livraison. » ; dans ta liste, le colis passe dans « Retournés ». Chez Chronopost, `Colis en retour expéditeur` s'affiche d'abord comme « Problème signalé » : « Retourné à l’expéditeur » ne vient qu'avec la livraison chez l'expéditeur.
+Quand Mondial Relay écrit `Retour à l'expéditeur`, Peek affiche « Retourné à l’expéditeur », avec, sur peektracker.com, « Sur le chemin du retour depuis » et la date, et la note « Mondial Relay le renvoie à l’expéditeur. Contacte l’expéditeur pour un remboursement ou une nouvelle livraison. » ; dans ta liste, le colis passe dans « Retournés ». Chez Chronopost, `Colis en retour expéditeur` s'affiche d'abord comme « Problème signalé » : « Retourné à l’expéditeur » ne vient qu'avec la livraison chez l'expéditeur.
 
 ## Retour à l'expéditeur : quel délai ?
 

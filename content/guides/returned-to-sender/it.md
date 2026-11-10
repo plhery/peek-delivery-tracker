@@ -4,7 +4,7 @@ description: Perché un pacco torna al mittente, se puoi fermarlo, quanto ci met
 slug: pacco-rispedito-al-mittente
 picture: Un furgone con un pacco con un timbro rotondo di ritorno torna indietro lungo una freccia curva verso un negozio, e Pip lo guarda andare via.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Un pacco rispedito al mittente è un pacco che il corriere non è riuscito a consegnarti e che sta riportando a chi l'ha spedito: per l'indirizzo, per un rifiuto, perché nessuno l'ha ritirato in tempo o perché c'erano spese da pagare. Quando il pacco ha preso la via del ritorno, di solito non si ferma più: DHL in Germania, per esempio, lo dice chiaramente. Scrivi subito al venditore e digli, per iscritto, se vuoi che te lo rispedisca o se vuoi il rimborso.
@@ -100,6 +100,8 @@ Il pacco rifà più o meno la stessa strada, e il tracking si legge al contrario
 
 [Peek](/) ti avvisa quando un pacco torna indietro, anche se scegli «Passaggi importanti»: i resi sono tra i passaggi importanti. Fermarlo, però, non può.
 
+Quando Poste scrive una riga che comincia con `In restituzione al mittente`, Peek mostra «Restituito al mittente», e nella tua lista il pacco passa tra i «Restituiti»; su peektracker.com la sua pagina aggiunge «In viaggio di ritorno, partito» con la data e la nota «Poste Italiane lo sta riportando al mittente. Contatta il mittente per un rimborso o una nuova consegna.»
+
 ## Quanto ci mette un pacco a tornare al mittente?
 
 **L'attesa.** Un pacco rifiutato di solito riparte subito: le regole dell'Unione postale universale vogliono che lettere e piccoli pacchetti rifiutati tornino indietro subito («forthwith»). Un pacco non ritirato aspetta prima la fine della giacenza: 10 giorni lavorativi con Poste Delivery, 7 giorni con la Posta (15 per i pacchi dall'estero), circa 3 giorni in un locker InPost. In [pacco in giacenza non ritirato](guide:uncollected-parcel) trovi i tempi di ogni corriere e come avere più tempo.
@@ -121,6 +123,7 @@ La Posta può aprire il pacco per risalire al mittente; se non ci riesce, ne dis
 :::sources
 - [Poste Italiane: FAQ Spedizioni e Consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – motivi di mancato recapito sulla busta, compiuta giacenza, giacenza e ritorno di Poste Delivery Standard, Express e International
 - [Poste Italiane: Legenda degli stati di spedizione](https://www.poste.it/cerca/views/risultati-spedizioni.html) – Resa al mittente e motivi, «Segui la spedizione di ritorno al mittente», distruzione o beneficenza
+- [Universal Parcel Scraper: Poste Italiane](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/poste-italiane) – «In restituzione al mittente», letto da Peek come reso (letta il 10 novembre 2026)
 - [BRT: Ho la spedizione in giacenza, cosa significa?](https://www.brt.it/it/faq/ho-la-spedizione-in-giacenza-cosa-significa/) – motivi della giacenza, «rintraccia giacenza»
 - [InPost Italia: Giacenza, come funziona con InPost](https://inpost.it/news-giacenza-come-funziona-con-inpost) – circa 3 giorni, ritorno automatico e gratuito, costi della nuova spedizione
 - [La Posta: Eventi «Monitorare gli invii»](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – Rinvio e motivi, rifiuto, danneggiamento, disposizione preliminare

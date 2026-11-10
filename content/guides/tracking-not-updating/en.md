@@ -4,7 +4,7 @@ description: Why parcel tracking stops updating, how long a gap is normal at eac
 slug: tracking-not-updating
 picture: A calendar with several days crossed out, a progress line that stops halfway, and Pip waiting, a little bored.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 11 working days after posting for a [Royal Mail](carrier:royal-mail) 1st Class claim), and even then, ask the seller first: it's the carrier's customer.
@@ -30,6 +30,8 @@ No carrier gives one figure for how long tracking can stay quiet. Before the del
 - handover | Local carrier | Its scans may show only on its own site.
 - home | Last mile | Out for delivery, then delivered: scans come quickly again.
 :::
+
+When a parcel is at label created, received by the carrier or in transit and its last scan is four days old or more, [Peek](/) shows "No tracking update for four days" in your list and, on the parcel's page, the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking USPS." (with USPS, for example).
 
 ### How long does a new tracking number take to update?
 
@@ -115,7 +117,7 @@ Within one country, it's slow: USPS gives Ground Advantage 2 to 5 business days,
 
 ### Can I make tracking update sooner?
 
-No, and nor can a tracker: [it only shows what the carrier publishes](guide:universal-tracker). [Peek](/) keeps checking with the carrier and can notify you when a new scan lands, so you can stop refreshing.
+No, and nor can a tracker: [it only shows what the carrier publishes](guide:universal-tracker). [Peek](/) checks up to every 10 minutes, and up to every 2 minutes once a parcel is out for delivery with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you when a new scan lands, so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail and for Morning Global; every 30 minutes for Poste Italiane, PostNL, USPS, GOFO and Cainiao). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Once the last scan is more than two days old (12 hours while the parcel is only at label created or received by the carrier) and you added the parcel longer ago than that, Peek checks it hourly until a new scan comes in.
 
 ### My tracking number isn't working
 

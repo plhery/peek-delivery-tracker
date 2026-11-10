@@ -3,7 +3,7 @@ title: China Post śledzenie przesyłki: numer, statusy, doręczenie
 description: Śledzenie przesyłki China Post: jak wygląda numer z CN, co znaczą chińskie statusy, kiedy przejmuje ją Poczta Polska i co zrobić, gdy utknie po drodze.
 slug: china-post-sledzenie
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 China Post to państwowa poczta Chin, a EMS to jej marka ekspresowa. Jeśli Twoje zamówienie z AliExpress, Temu, Shein lub innego sklepu ma numer kończący się na `CN`, nadała go China Post. W Polsce paczkę przejmuje zwykle [Poczta Polska](carrier:poczta-polska) i doręcza ją pod tym samym numerem. Śledzić ją możesz na stronie China Post, ems.com.cn, albo w polu powyżej. Numer znajdziesz w szczegółach wysyłki zamówienia w sklepie.
@@ -45,6 +45,9 @@ China Post pisze skany po chińsku. Miejsca są w nawiasach, tu jako `【…】`
 | `航空公司接收`, `航空公司启运` | Linia lotnicza ją przyjęła, a potem z nią wystartowała. |
 | `飞机进港` | Samolot wylądował. |
 | `到达寄达地处理中心` | Dotarła do centrum w kraju przeznaczenia. |
+| `送交境外进口海关` | Przekazana do odprawy celnej w Twoim kraju. Peek pokazuje „W urzędzie celnym”. |
+| `境外进口海关留存待验` | Celnicy w Twoim kraju zatrzymali ją do kontroli. |
+| `寄达地海关允许进口` | Celnicy wpuścili ją do kraju. |
 | `离开【…】处理中心` | Opuściła to centrum. |
 | `已到达【…】投递局` | Dotarła do placówki, która ją doręczy. |
 | `【…】安排投递`, `邮件正在派送中` | W doręczeniu. |
@@ -105,9 +108,11 @@ China Post nie pisze, w jakich językach tam rozmawiają. Na ems.com.cn jest te�
 
 Peek czyta śledzenie samej China Post. Gdy China Post prosi o cyfry telefonu, Peek próbuje zamiast tego publicznego podglądu na ems.com.cn. Peek nigdy nie zapyta Cię o te cyfry. Jeśli podgląd też ich zażąda albo się nie otworzy, a żaden serwis śledzący nie ma paczki, Peek napisze, że potrzeba więcej informacji: wtedy wyszukaj numer na stronie China Post z czterema cyframi. China Post pokazuje odwiedzającym tylko trzy najnowsze skany. Dlatego Peek dodaje datę przyjęcia, gdy China Post ją podaje, i bierze pełniejszą historię z serwisu śledzącego, jeśli któryś ją ma.
 
-Peek pokazuje status, historię z urzędem przy każdym skanie (urząd zapisany po chińsku pod nazwą swojego miasta albo w oryginalnym zapisie, gdy Peek nie potrafi go umiejscowić) i kraj przeznaczenia. Peek pokazuje skany po angielsku, gdy zna opis China Post, a pozostałe po chińsku; dokładne dopasowania, takie jak `Delivered`, pokazuje własnymi słowami. Własne skany China Post opatruje czasem chińskim, nawet przybycie do Polski; późniejsze, przepisane od Poczty Polskiej, mają zwykle czas polski. Peek pokazuje każdy skan w strefie czasowej Twojego urządzenia. China Post nie podaje przewidywanej daty doręczenia, wagi ani punktu odbioru. Nazwę usługi, kontakty, dane nadawcy i odbiorcy, imiona i telefony doręczycieli oraz współrzędne Peek pomija.
+Peek pokazuje status, historię z urzędem przy każdym skanie (urząd zapisany po chińsku pod nazwą swojego miasta albo w oryginalnym zapisie, gdy Peek nie potrafi go umiejscowić) i kraj przeznaczenia. Peek pokazuje skany po angielsku, gdy zna opis China Post, a pozostałe po chińsku; dokładne dopasowania, takie jak `Delivered`, pokazuje własnymi słowami. Własne skany China Post opatruje czasem chińskim, nawet przybycie do Polski; późniejsze, przepisane od Poczty Polskiej, mają zwykle czas polski. Peek pokazuje każdy skan w strefie czasowej Twojego urządzenia; na peektracker.com przypomina o tym linijka pod historią: „Godziny w Twojej strefie czasowej: …”. China Post nie podaje przewidywanej daty doręczenia, wagi ani punktu odbioru. Nazwę usługi, kontakty, dane nadawcy i odbiorcy, imiona i telefony doręczycieli oraz współrzędne Peek pomija.
 
-Jeśli numer kończy się na `CN`, a China Post poda Polskę jako kraj przeznaczenia, Peek pyta też Pocztę Polską o ten sam numer. Przechodzi na nią, gdy pokaże świeże skany, i zachowuje historię z China Post. Pocztę Polską Peek pyta po polsku, gdy używasz go po polsku: jej zdarzenia zobaczysz wtedy pod jej polskimi nazwami, a w innym języku po angielsku. Jeśli China Post nie poda kraju albo nie odpowie, Peek bierze Twój kraj: w aplikacji na iPhone’a lub Androida region ustawiony w telefonie, w przeglądarce kraj, z którego dodajesz paczkę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z China Post, Pocztą Polską ani sklepem.
+Jeśli numer kończy się na `CN`, a China Post poda Polskę jako kraj przeznaczenia, Peek pyta też Pocztę Polską o ten sam numer. Przechodzi na nią, gdy pokaże świeże skany, i zachowuje historię z China Post. Pocztę Polską Peek pyta po polsku, gdy używasz go po polsku: jej zdarzenia zobaczysz wtedy pod jej polskimi nazwami, a w innym języku po angielsku. Jeśli China Post nie poda kraju albo nie odpowie, Peek bierze Twój kraj: w aplikacji na iPhone’a lub Androida region ustawiony w telefonie, w przeglądarce kraj, z którego dodajesz paczkę.
+
+Peek sprawdza paczkę co 10 minut albo co godzinę, gdy China Post milknie: po 12 godzinach bez nowego skanu, dopóki paczka ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”, a na każdym innym etapie po dwóch dniach. Gdy paczka jest w doręczeniu, sprawdza ją co 2 minuty albo co 5, jeśli sprawdzenie wymaga otwarcia przeglądarki, jak przy publicznym podglądzie China Post: tego dnia, od 6:00 czasu lokalnego, i dopóki odpowiada samo śledzenie China Post. Przez serwisy śledzenia przesyłek sprawdza co 15 minut. Gdy doręczenie przejmuje inny przewoźnik, na przykład Poczta Polska, Peek sprawdza paczkę w tempie tego, który ją doręcza. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z China Post, Pocztą Polską ani sklepem.
 
 ## Pytania o śledzenie China Post
 
@@ -143,5 +148,5 @@ Zwykle Poczta Polska. Doręcza je pod numerem China Post, bo UPU pozwala na jede
 - [Poczta Polska: Regulamin świadczenia usług powszechnych](https://www.poczta-polska.pl/wp-content/uploads/2026/07/Regulamin-swiadczenia-uslug-powszechnych-tekst-jednolity.pdf) – awizo 7 dni, powtórne awizo, zwrot po 14 dniach, przedłużenie, reklamacja w 6 miesięcy
 - [Poczta Polska: eReklamacje, reklamacje zagraniczne](https://ereklamacje.poczta-polska.pl/sub/reklamacje-zagraniczne/paczka-pocztowa) – reklamację składa nadawca, zrzeczenie się praw, 6 miesięcy
 - [Poczta Polska: eReklamacje](https://ereklamacje.poczta-polska.pl/) – infolinia i godziny
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – chińskie skany China Post i co pokazuje Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – chińskie skany China Post, także te z odprawy celnej w kraju przeznaczenia, publiczny podgląd czytany w przeglądarce i co pokazuje Peek
 :::

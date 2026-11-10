@@ -105,7 +105,7 @@ Achte auf den letzten Scan: Bei der Österreichischen Post heißt `Sendung wurde
 
 [Peek](/) meldet dir Rücksendungen schon mit der Einstellung „Wichtige Schritte“, so merkst du, wenn ein Paket kehrtmacht. Aufhalten kann Peek es nicht.
 
-Sobald der Paketdienst die Rücksendung meldet, zeigt Peek „Zurück an Absender“, bei DHL schon mit `Die Sendung wurde nicht abgeholt und wird zurückgesandt.` Darunter steht „Auf dem Rückweg seit“ und das Datum, dazu der Hinweis „DHL bringt es zum Absender zurück. Frag beim Absender nach einer Erstattung oder einer neuen Lieferung.“, und in deiner Liste steht das Paket unter „Zurückgesendet“. Scans, die es danach nur zurücktransportieren, ändern daran nichts. DPD meldet die Rücksendung anders: Bei `At parcel delivery centre. (Return to sender)` zeigt Peek „Problem gemeldet“ und darunter, was DPD schreibt. „Zurück an Absender“ kommt erst mit `Delivered. (Return to sender)`, wenn der Absender das Paket wiederhat.
+Sobald der Paketdienst die Rücksendung meldet, zeigt Peek „Zurück an Absender“, bei DHL schon mit `Die Sendung wurde nicht abgeholt und wird zurückgesandt.` Auf peektracker.com steht darunter „Auf dem Rückweg seit“ und das Datum, dazu der Hinweis „DHL bringt es zum Absender zurück. Frag beim Absender nach einer Erstattung oder einer neuen Lieferung.“, und in deiner Liste steht das Paket unter „Zurückgesendet“. Scans, die es danach nur zurücktransportieren, ändern daran nichts. DPD meldet die Rücksendung anders: Bei `At parcel delivery centre. (Return to sender)` zeigt Peek „Problem gemeldet“ und darunter, was DPD schreibt. „Zurück an Absender“ kommt erst mit `Delivered. (Return to sender)`, wenn der Absender das Paket wiederhat.
 
 ## Wie lange dauert die Rücksendung an den Absender?
 

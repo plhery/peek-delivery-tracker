@@ -4,7 +4,7 @@ description: Paczka stoi w miejscu? Sprawdź, dlaczego status przesyłki się ni
 slug: status-przesylki-sie-nie-zmienia
 picture: Kalendarz z kilkoma skreślonymi dniami, linia postępu urwana w połowie i Pip, który czeka, trochę znudzony.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt ostatnio nie zeskanował Twojej paczki, a nie że stoi w miejscu. Przewoźnicy skanują paczki w sortowniach i na granicach, nie w trasie, więc długi przejazd, lot, odprawa celna albo weekend to czasem kilka dni bez nowego wpisu. Martw się dopiero wtedy, gdy minie termin podany przez samego przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach od nadania, nie licząc dni ustawowo wolnych od pracy, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia). I nawet wtedy najpierw napisz do sprzedawcy: to on jest klientem przewoźnika.
@@ -31,6 +31,8 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 - handover | Przewoźnik w Polsce | Jego skany bywają widoczne tylko na jego stronie.
 - home | Ostatni odcinek | Wydana do doręczenia, potem doręczona: skany znów pojawiają się szybko.
 :::
+
+Gdy paczka jest zarejestrowana, przyjęta przez przewoźnika albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, [Peek](/) pokazuje na liście „Brak aktualizacji od czterech dni”, a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika InPost.” (tu na przykładzie InPost).
 
 ### Ile trwa, zanim nowy numer przesyłki zacznie działać?
 
@@ -112,7 +114,7 @@ W kraju to długo. DPD doręcza standardowo następnego dnia roboczego, a dla pr
 
 ### Czy da się przyspieszyć aktualizację statusu?
 
-Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie lub w przeglądarce: przy każdym skanie, tylko przy ważnych krokach albo tylko w dniu dostawy. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane, PostNL, USPS, GOFO i Cainiao). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie lub w przeglądarce: przy każdym skanie, tylko przy ważnych krokach albo tylko w dniu dostawy. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail i Morning Global; co 30 minut Poste Italiane, PostNL, USPS, GOFO i Cainiao). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Gdy ostatni skan ma ponad dwa dni (12 godzin, jeśli paczka jest dopiero zarejestrowana albo przyjęta przez przewoźnika) i od jej dodania minęło więcej niż tyle, Peek sprawdza ją co godzinę, aż pojawi się nowy skan.
 
 ### Numer przesyłki nie działa
 

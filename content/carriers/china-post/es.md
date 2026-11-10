@@ -3,7 +3,7 @@ title: China Post seguimiento: número, estados y entrega en España
 description: Seguimiento de China Post: cómo es un número acabado en CN, qué significan los estados en chino, cuándo pasa a Correos y por qué se queda parado el seguimiento.
 slug: china-post-seguimiento
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 China Post, el correo de China, es el operador postal nacional chino, una empresa del Estado, y EMS es su marca urgente. Si tu pedido de AliExpress, Temu, Shein u otra tienda llegó con un número de seguimiento que acaba en `CN`, lo creó China Post, y en España lo entrega [Correos](carrier:correos-spain) con ese mismo número. Puedes seguirlo en la web de China Post, ems.com.cn, en el localizador de Correos cuando ya esté en España o en la casilla de arriba. El número está en los datos de envío de tu pedido, en la web de la tienda.
@@ -46,6 +46,9 @@ China Post escribe sus lecturas en chino. Los lugares van entre corchetes, aquí
 | `航空公司接收`, `航空公司启运` | Una aerolínea lo ha recibido y después ha salido con él. |
 | `飞机进港` | El avión ha aterrizado. |
 | `到达寄达地处理中心` | Ha llegado al centro de tratamiento del país de destino: para ti, España. |
+| `送交境外进口海关` | Se ha presentado en la aduana de España. Peek muestra «En aduanas». |
+| `境外进口海关留存待验` | La aduana lo retiene para revisarlo. |
+| `寄达地海关允许进口` | La aduana lo ha dejado entrar. |
 | `离开【…】处理中心` | Ha salido de ese centro. |
 | `已到达【…】投递局` | Ha llegado a la unidad que lo va a repartir. |
 | `【…】安排投递`, `邮件正在派送中` | En reparto. |
@@ -94,9 +97,11 @@ La investigación formal en China Post la pide el remitente, así que la tienda 
 
 Peek lee el seguimiento de la propia China Post. Cuando China Post pide las cifras del teléfono, Peek prueba en su lugar la vista previa pública de ems.com.cn; Peek nunca te las pide. Si esa vista también se niega y ningún servicio de seguimiento tiene el paquete, Peek te dice que faltan datos para consultar el envío: busca entonces el número en la web de China Post, con las cuatro cifras. China Post solo enseña a los visitantes sus tres lecturas más recientes, así que Peek añade la fecha de admisión cuando China Post la da, y toma un historial más completo de un servicio de seguimiento cuando alguno lo tiene.
 
-Muestra el estado, el historial con la oficina de cada lectura (una oficina escrita en chino, con el nombre de su ciudad, o tal cual si Peek no puede ubicarla) y el país de destino. Las lecturas salen en inglés cuando Peek conoce el texto de China Post, salvo coincidencias exactas como `Delivered`, que se muestran con las palabras de Peek, y, si no, en chino. China Post fecha sus propias lecturas con la hora de China, incluso la llegada a España; las posteriores, que copia de Correos, suelen conservar la hora local de Correos. Peek muestra cada lectura en la zona horaria de tu dispositivo. China Post no da fecha prevista de entrega, peso ni punto de recogida, y Peek deja fuera el nombre del servicio, los contactos, los datos del remitente y del destinatario, los nombres y teléfonos de los repartidores y las coordenadas del mapa.
+Muestra el estado, el historial con la oficina de cada lectura (una oficina escrita en chino, con el nombre de su ciudad, o tal cual si Peek no puede ubicarla) y el país de destino. Las lecturas salen en inglés cuando Peek conoce el texto de China Post, salvo coincidencias exactas como `Delivered`, que se muestran con las palabras de Peek, y, si no, en chino. China Post fecha sus propias lecturas con la hora de China, incluso la llegada a España; las posteriores, que copia de Correos, suelen conservar la hora local de Correos. Peek muestra cada lectura en la zona horaria de tu dispositivo; en peektracker.com, una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». China Post no da fecha prevista de entrega, peso ni punto de recogida, y Peek deja fuera el nombre del servicio, los contactos, los datos del remitente y del destinatario, los nombres y teléfonos de los repartidores y las coordenadas del mapa.
 
-Si el número acaba en `CN` y China Post indica España como destino, Peek pregunta también a Correos con el mismo número y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de China Post. Si China Post no da el destino o no responde, Peek elige el correo nacional por la región de tu móvil (iPhone o Android) o, en la web, por el país de tu conexión al añadir el paquete. Puede mandarte notificaciones: «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar por ti con China Post, con Correos ni con la tienda.
+Si el número acaba en `CN` y China Post indica España como destino, Peek pregunta también a Correos con el mismo número y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de China Post. Si China Post no da el destino o no responde, Peek elige el correo nacional por la región de tu móvil (iPhone o Android) o, en la web, por el país de tu conexión al añadir el paquete.
+
+Peek consulta cada 10 minutos, o cada hora cuando China Post deja de dar noticias: tras 12 horas sin lecturas nuevas mientras el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», o tras dos días en cualquier otro paso. Cuando el paquete está en reparto, consulta cada 2 minutos, o cada 5 cuando la consulta tiene que abrir un navegador, como para leer la vista previa pública de China Post: ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de China Post. A través de servicios de seguimiento, consulta cada 15 minutos. Si otra empresa toma el relevo para la entrega, como Correos, Peek sigue el ritmo de la que reparte el paquete. Puede mandarte notificaciones: «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar por ti con China Post, con Correos ni con la tienda.
 
 ## Preguntas sobre el seguimiento de China Post
 
@@ -132,5 +137,5 @@ Correos, con el número de China Post, porque la UPU solo permite un número por
 - [Correos: IVA de importación en el Comercio Electrónico](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/iva-de-importacion-en-el-comercio-electronico) – IVA y tasa de despacho postal antes de la entrega, pago en la app
 - [Correos: Coberturas por extravío de envíos internacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – indemnización para el remitente
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – teléfonos, horarios, dos meses para reclamaciones internacionales
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lecturas de China Post, petición de las cifras del teléfono y lo que muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lecturas de China Post, también las de la aduana de destino, petición de las cifras del teléfono, la vista previa pública leída en un navegador y lo que muestra Peek
 :::

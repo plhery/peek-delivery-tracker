@@ -4,7 +4,7 @@ description: Why a parcel is returned to sender, whether the return can be stopp
 slug: returned-to-sender
 picture: A van carrying a parcel with a round return stamp drives back along a curved arrow to a shop, and Pip watches it go.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 "Returned to sender" means the carrier couldn't hand your parcel (or package) over and is taking it back to whoever sent it, because of the address, a refusal, a missed pickup deadline or unpaid charges. Once a return has started, carriers such as [Canada Post](carrier:canada-post) and DHL say they can't stop it. Message the seller straight away and say, in writing, whether you want it sent again or your money back.
@@ -101,6 +101,8 @@ The parcel goes back along much the same route, and the tracking runs backwards:
 
 [Peek](/) can notify you of returns as an important step, so you hear when a parcel turns around. It can't stop one.
 
+When USPS scans `Refused` or returns a parcel to the sender, Peek shows "Returned to sender", and the parcel moves to "Returned" in your list; on peektracker.com, its page adds "On its way back since" and the date, and the note "USPS is taking it back to the sender. Contact the sender about a refund or a new delivery." At Canada Post, `Recipient not located at address provided. Item being returned to sender.` shows first as "Needs attention": "Returned to sender" comes only with the delivery back at the sender.
+
 ## How long does a return to sender take?
 
 **The wait.** A refused item usually goes back at once: the Universal Postal Union's rules return refused letters and small packets "forthwith", and USPS returns items it can't carry "immediately". An uncollected parcel waits out its holding period first: 15 calendar days at Canada Post, and about 3 weeks at [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce) when a customs bill is unpaid. [Parcel not collected](guide:uncollected-parcel) lists each carrier's wait and how to get more time.
@@ -127,6 +129,7 @@ DHL says a return after a refusal can't be stopped, so ask the shop to send it a
 - [Australia Post: Return to sender](https://auspost.com.au/help/delivered-parcel/return-to-sender) – reasons, statuses
 - [Australia Post: Business Support Portal](https://auspost.com.au/business/services/business-support-portal) – recall, charge
 - [Universal Parcel Scraper: An Post statuses](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/an-post/statuses.json) – not collected, returned to sender
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – how Peek reads USPS's and Canada Post's return scans (read 10 November 2026)
 - [DHL: Help with a return](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – can't stop a return
 - [Austrian Post: FAQ](https://www.post.at/p/c/faq-privat) – delivered to the sender
 - [Universal Postal Union: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – ownership, retention, route

@@ -4,7 +4,7 @@ description: Pacco fermo da giorni? Perché il tracking non si aggiorna, quanto 
 slug: tracking-non-si-aggiorna
 picture: Un calendario con diversi giorni barrati, una linea di avanzamento che si ferma a metà e Pip che aspetta, un po' annoiato.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Se il tracking non si aggiorna, di solito vuol dire solo che nessuno ha scansionato il pacco di recente, non che si è fermato. I corrieri lo scansionano nei centri di smistamento e alle frontiere, non lungo la strada: un viaggio lungo, un volo, la dogana o un fine settimana possono lasciarti per giorni senza aggiornamenti. Preoccupati solo quando è passato il termine del corriere (con Poste Delivery Standard il reclamo si può fare dal 6° giorno lavorativo dopo la spedizione; con la [Posta svizzera](carrier:swiss-post), per un invio nazionale, la ricerca si chiede quando il tempo di consegna abituale è superato di oltre due giorni). E anche allora scrivi prima al venditore: il cliente del corriere è lui.
@@ -30,6 +30,8 @@ Nessun corriere dice per quanti giorni, al massimo, il tracking può restare mut
 - handover | Corriere locale | Le sue scansioni a volte si vedono solo sul suo sito.
 - home | Ultimo tratto | In consegna, poi consegnato: le scansioni tornano frequenti.
 :::
+
+Quando un pacco ha l'etichetta creata, è preso in carico o in transito e la sua ultima scansione ha quattro giorni o più, [Peek](/) mostra «Nessun aggiornamento da quattro giorni» nella tua lista e, sulla pagina del pacco, la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Poste Italiane.» (qui con Poste Italiane).
 
 ### Dopo quanto si aggiorna un codice di tracking nuovo?
 
@@ -118,7 +120,7 @@ Per un pacco spedito in Italia è tanto: Poste consegna il 90% dei Poste Deliver
 
 ### Posso far aggiornare il tracking prima?
 
-No, e non può farlo nemmeno un tracker: mostra solo quello che pubblica il corriere. [Peek](/) ricontrolla il corriere fino a ogni 10 minuti, e fino a ogni 2 quando il pacco è in consegna con un corriere che Peek legge direttamente (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e può mandarti una notifica quando arriva una nuova scansione, così non devi più ricaricare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL, USPS, GOFO e Cainiao). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
+No, e non può farlo nemmeno un tracker: mostra solo quello che pubblica il corriere. [Peek](/) ricontrolla il corriere fino a ogni 10 minuti, e fino a ogni 2 quando il pacco è in consegna con un corriere che Peek legge direttamente, o ogni 5 quando il controllo deve aprire un browser (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e può mandarti una notifica quando arriva una nuova scansione, così non devi più ricaricare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail e Morning Global; ogni 30 minuti Poste Italiane, PostNL, USPS, GOFO e Cainiao). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Quando l'ultima scansione ha più di due giorni (12 ore se il pacco è ancora con l'etichetta creata o solo preso in carico) e l'hai aggiunto da più tempo, Peek lo controlla ogni ora, fino alla scansione successiva.
 
 ### «Spedizione non trovata»: perché il codice non funziona?
 

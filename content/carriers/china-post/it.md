@@ -3,7 +3,7 @@ title: Tracking China Post: codice, stati in cinese e consegna
 description: Tracking China Post: com'è fatto un codice che finisce con CN, cosa vogliono dire gli stati in cinese, quando passa a Poste Italiane e cosa fare se si blocca.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 China Post è la posta statale cinese, ed EMS è il suo marchio espresso. Se il tuo ordine su AliExpress, Temu, Shein o un altro negozio ha un codice che finisce con `CN`, l'ha assegnato China Post. In Italia di solito il pacco passa a [Poste Italiane](carrier:poste-italiane), che lo consegna con lo stesso codice. Puoi seguirlo sul sito di China Post, ems.com.cn, o nel box qui sopra. Il codice è nei dettagli di spedizione del tuo ordine.
@@ -45,6 +45,9 @@ China Post scrive le scansioni in cinese. I luoghi sono tra parentesi, qui come 
 | `航空公司接收`, `航空公司启运` | Una compagnia aerea l'ha preso in carico, poi è partita. |
 | `飞机进港` | L'aereo è atterrato. |
 | `到达寄达地处理中心` | È arrivato al centro di lavorazione nel Paese di destinazione. |
+| `送交境外进口海关` | Consegnato alla dogana del tuo Paese. Peek mostra «In dogana». |
+| `境外进口海关留存待验` | La dogana lo trattiene per un controllo. |
+| `寄达地海关允许进口` | La dogana l'ha fatto entrare. |
 | `离开【…】处理中心` | Ha lasciato quel centro. |
 | `已到达【…】投递局` | È arrivato all'ufficio che lo consegna. |
 | `【…】安排投递`, `邮件正在派送中` | In consegna. |
@@ -99,9 +102,11 @@ China Post non dice in che lingue rispondono. Su ems.com.cn c'è anche un'assist
 
 Peek legge il tracking di China Post. Quando China Post chiede le cifre del telefono, Peek prova invece l'anteprima pubblica su ems.com.cn. Peek non ti chiede mai quelle cifre. Se le chiede anche l'anteprima, o non si apre, e nessun servizio di tracciamento ha il pacco, Peek dice che servono più informazioni: cerca allora il codice sul sito di China Post con le quattro cifre. China Post mostra ai visitatori solo le sue tre scansioni più recenti. Per questo Peek aggiunge la data di accettazione quando China Post la dà, e prende una cronologia più completa da un servizio di tracciamento, se ne ha una.
 
-Mostra lo stato, la cronologia con l'ufficio di ogni scansione (un ufficio scritto in cinese con il nome della sua città, o così com'è se Peek non riesce a collocarlo) e il Paese di destinazione. Le scansioni compaiono in inglese se Peek conosce la dicitura di China Post, altrimenti in cinese; quelle che corrispondono esattamente alle sue, come `Delivered`, le mostra con parole sue in italiano. China Post data le proprie scansioni con l'ora della Cina, anche l'arrivo in Italia; quelle successive, che copia da Poste Italiane, di solito mantengono l'ora italiana. Peek mostra ogni scansione nel fuso orario del tuo dispositivo. China Post non dà una data di consegna prevista, il peso né un punto di ritiro, e Peek lascia fuori nome del servizio, contatti, dati di mittente e destinatario, nomi e telefoni dei corrieri e coordinate sulla mappa.
+Mostra lo stato, la cronologia con l'ufficio di ogni scansione (un ufficio scritto in cinese con il nome della sua città, o così com'è se Peek non riesce a collocarlo) e il Paese di destinazione. Le scansioni compaiono in inglese se Peek conosce la dicitura di China Post, altrimenti in cinese; quelle che corrispondono esattamente alle sue, come `Delivered`, le mostra con parole sue in italiano. China Post data le proprie scansioni con l'ora della Cina, anche l'arrivo in Italia; quelle successive, che copia da Poste Italiane, di solito mantengono l'ora italiana. Peek mostra ogni scansione nel fuso orario del tuo dispositivo; su peektracker.com lo ricorda una riga sotto la cronologia («Orari nel tuo fuso orario: …»). China Post non dà una data di consegna prevista, il peso né un punto di ritiro, e Peek lascia fuori nome del servizio, contatti, dati di mittente e destinatario, nomi e telefoni dei corrieri e coordinate sulla mappa.
 
-Per un codice che finisce con `CN`, quando China Post indica l'Italia come destinazione, Peek chiede anche a Poste Italiane con lo stesso codice. Passa a Poste appena mostra scansioni nuove e tiene la cronologia di China Post. Se China Post non indica una destinazione o non risponde, Peek usa il tuo Paese: nell'app per iPhone o Android la regione impostata, nel browser il Paese da cui hai aggiunto il pacco. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare China Post, Poste o il negozio al posto tuo.
+Per un codice che finisce con `CN`, quando China Post indica l'Italia come destinazione, Peek chiede anche a Poste Italiane con lo stesso codice. Passa a Poste appena mostra scansioni nuove e tiene la cronologia di China Post. Se China Post non indica una destinazione o non risponde, Peek usa il tuo Paese: nell'app per iPhone o Android la regione impostata, nel browser il Paese da cui hai aggiunto il pacco.
+
+Peek controlla ogni 10 minuti, oppure ogni ora quando China Post tace: dopo 12 ore senza nuove scansioni se il pacco è ancora a «Etichetta creata» o «Preso in carico», dopo due giorni negli altri passaggi. Quando il pacco è in consegna, controlla ogni 2 minuti, o ogni 5 quando il controllo deve aprire un browser, come per leggere l'anteprima pubblica di China Post: quel giorno, dalle 6.00 ora locale, finché risponde il tracking di China Post stesso. Tramite i servizi di tracciamento controlla ogni 15 minuti. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: con Poste Italiane ogni 30 minuti, anche quando il pacco è in consegna. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare China Post, Poste o il negozio al posto tuo.
 
 ## Domande sul tracking China Post
 
@@ -136,5 +141,5 @@ Di solito Poste Italiane, con il codice di China Post, perché l'UPU ammette un 
 - [Poste Italiane: Legenda degli stati di spedizione](https://www.poste.it/cerca/views/risultati-spedizioni.html) – stati, In consegna, tracciatura non disponibile, limite di 2 mesi
 - [Poste Italiane: Ricevere spedizioni dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – dichiarazione in dogana, IVA, Dazio, Diritti Postali, pagamento online, notifica
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – reclami per spedizioni dall'estero, operatore di origine, danni da contestare alla consegna
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – scansioni di China Post e cosa mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – scansioni di China Post, anche quelle della dogana di destinazione, anteprima pubblica letta in un browser, intervallo di 30 minuti di Poste Italiane e cosa mostra Peek
 :::

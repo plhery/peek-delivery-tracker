@@ -4,7 +4,7 @@ description: Ton suivi n'avance plus depuis des jours ? Les raisons, combien de 
 slug: suivi-colis-ne-bouge-plus
 picture: Un calendrier aux jours barrés, une ligne de progression arrêtée à mi-chemin et Pip qui attend, l'air de s'ennuyer.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Un suivi qui ne bouge plus veut en général dire que personne n'a scanné ton colis ces derniers temps, pas qu'il s'est arrêté. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un long trajet, un vol, la douane ou un week-end peuvent laisser plusieurs jours sans nouvelle ligne. Ne t'inquiète qu'une fois passé le délai du transporteur lui-même (chez [bpost](carrier:bpost), au moins 5 jours ouvrables pour un envoi vers un pays voisin ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard sur le délai habituel), et même là, contacte d'abord le vendeur : c'est lui, le client du transporteur.
@@ -29,6 +29,8 @@ Aucun transporteur ne donne de durée unique pendant laquelle le suivi peut rest
 - handover | Transporteur local | Ses scans n'apparaissent parfois que sur son propre site.
 - home | Dernier kilomètre | En cours de livraison, puis livré : les scans s'enchaînent de nouveau.
 :::
+
+Quand un colis en est à l'étiquette créée, à la prise en charge ou en transit et que son dernier scan a quatre jours ou plus, [Peek](/) affiche « Aucune mise à jour depuis quatre jours » dans ta liste et, sur la page du colis, la note « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger bpost. » (ici avec bpost).
 
 ### Colis envoyé mais pas de suivi : combien de temps attendre ?
 
@@ -111,7 +113,7 @@ Dans un même pays, c'est long : en Belgique, Mondial Relay compte en moyenne 3 
 
 ### Peut-on accélérer la mise à jour du suivi ?
 
-Non. Un [site de suivi universel](guide:universal-tracker) non plus : il ne montre que ce que le transporteur publie. [Peek](/) vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond), et peut t'envoyer une notification à chaque nouveau scan, pour que tu n'aies plus à actualiser la page. Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail et pour Morning Global ; toutes les 30 minutes pour Poste Italiane, PostNL, USPS, GOFO et Cainiao). Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis.
+Non. Un [site de suivi universel](guide:universal-tracker) non plus : il ne montre que ce que le transporteur publie. [Peek](/) vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond), et peut t'envoyer une notification à chaque nouveau scan, pour que tu n'aies plus à actualiser la page. Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail et pour Morning Global ; toutes les 30 minutes pour Poste Italiane, PostNL, USPS, GOFO et Cainiao). Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Si le dernier scan a plus de deux jours (12 heures si le colis en est encore à l'étiquette créée ou à la prise en charge) et que tu l'as ajouté il y a plus longtemps que ça, Peek ne vérifie plus que toutes les heures, jusqu'au scan suivant.
 
 ### Mon numéro de suivi ne fonctionne pas
 
@@ -129,7 +131,7 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [La Poste suisse : Questions et réponses concernant l'expédition de lettres et de colis](https://www.post.ch/fr/aide-et-contact/expedier) – recherches, 1 an, 6 mois, suivi vers l'étranger
 - [La Poste suisse : Formulaire de contact pour les recherches](https://www.post.ch/fr/pages/formulaires-de-contact/recherche-nationale) – plus de deux jours, expéditeur ou destinataire
 - [bpost : Mon colis reste « en préparation »](https://www.bpost.be/fr/faq/mon-colis-reste-en-preparation-quest-ce-que-cela-signifie-et-que-puis-je-faire) – en préparation, 5 jours
-- [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – « Transmission des données par l'expéditeur »
+- [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – « Transmission des données par l’expéditeur »
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – premier scan, « Exception »
 - [DHL : Why are there delays? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – problèmes d'adresse et d'étiquette
 - [DHL : My shipment has not been delivered yet (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – intempéries, embouteillages, accidents, période avant Noël

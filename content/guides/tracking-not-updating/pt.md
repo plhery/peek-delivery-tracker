@@ -4,7 +4,7 @@ description: O seguimento da encomenda não atualiza há dias? Vê as causas mai
 slug: tracking-nao-atualiza-encomenda-parada
 picture: Um calendário com vários dias riscados, uma linha de progresso interrompida a meio e o Pip à espera, um pouco aborrecido.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Quando o tracking não atualiza, normalmente é porque ninguém leu a etiqueta da tua encomenda nos últimos dias, não porque ela tenha parado. As transportadoras registam leituras nos centros operacionais e nas fronteiras, não na estrada: uma viagem longa, um voo, a alfândega ou um fim de semana podem deixar-te dias sem uma linha nova. Só vale a pena preocupares-te quando passar o prazo da própria transportadora (os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente; a [InPost](carrier:inpost) aceita uma reclamação por atraso passados mais de 5 dias desde a notificação de envio) e, mesmo assim, fala primeiro com a loja: foi ela que contratou a transportadora.
@@ -30,6 +30,8 @@ Nenhuma transportadora dá um número único para o tempo que o seguimento pode 
 - handover | Transportadora local | As leituras dela às vezes só aparecem no site dela.
 - home | Último troço | Em entrega e depois entregue: as leituras voltam a ser rápidas.
 :::
+
+Quando uma encomenda está com a etiqueta criada, aceite pela transportadora ou em trânsito e a última leitura tem quatro dias ou mais, o [Peek](/) mostra «Sem atualizações há quatro dias» na tua lista e, na página da encomenda, a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana.», que diz também que o Peek continua a perguntar à transportadora.
 
 ### Número novo ou «Aguarda entrada nos CTT» há dias: quanto tempo demora?
 
@@ -112,7 +114,7 @@ Dentro de Portugal continental, uma semana é lenta: os CTT indicam cerca de 3 d
 
 ### Posso fazer o tracking atualizar mais depressa?
 
-Não, e [um serviço de seguimento](guide:universal-tracker) também não: só mostra o que a transportadora publica. O [Peek](/) continua a consultar a transportadora e pode enviar-te uma notificação quando aparece uma leitura nova, por isso podes deixar de atualizar a página.
+Não, e [um serviço de seguimento](guide:universal-tracker) também não: só mostra o que a transportadora publica. O [Peek](/) verifica o seguimento até de 10 em 10 minutos, e até de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e pode enviar-te uma notificação quando aparece uma leitura nova, por isso podes deixar de atualizar a página. Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França e na Polónia, a DHL eCommerce na Polónia, a Royal Mail e a Morning Global; de 30 em 30 minutos a Poste Italiane, a PostNL, a USPS, a GOFO e a Cainiao). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda. Quando a última leitura tem mais de dois dias (12 horas se a encomenda ainda estiver só com a etiqueta criada ou aceite) e a adicionaste há mais tempo do que isso, o Peek passa a verificá-la de hora a hora, até aparecer uma leitura nova.
 
 ### O meu número de seguimento não funciona
 

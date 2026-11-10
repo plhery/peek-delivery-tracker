@@ -3,7 +3,7 @@ title: DSV tracking: shipment numbers, statuses and DB Schenker
 description: Track a DSV road, air or sea shipment, or a former DB Schenker one: which number to use, what each status means, delivery, claims and who to contact.
 slug: dsv-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-10
 ---
 
 DSV is a Danish transport and logistics group that moves freight by road, air and sea, and in 2025 it bought Schenker (DB Schenker) from Deutsche Bahn. On dsv.com, the "Track your shipment" box has two fields: "Track DSV shipment" opens DSV's tracker, myDSV, and "Track Schenker shipment" the former DB Schenker one. You need no account. The number comes from whoever booked the transport, usually the sender or the shop; paste it in the box above.
@@ -39,7 +39,7 @@ myDSV logs each time a shipment is scanned, from the booking to the proof of del
 | `Handover responsibilty of cargo`, `Handover of Cargo` | DSV handed the cargo over at the end of its service, which completes the shipment (the first keeps DSV's spelling). | "Delivered" |
 | `Actual delivery` | Delivered. | "Delivered" |
 
-`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` and `Requested delivery` are plans, not scans: Peek leaves them out of the history and shows `Estimated delivery` as the expected delivery day, or range of days, until delivery.
+`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` and `Requested delivery` are plans, not scans: Peek leaves them out of the history and shows `Estimated delivery` as the expected delivery day, or range of days, until the shipment is out for delivery.
 
 The former DB Schenker tracker covers road shipments with its own wording:
 

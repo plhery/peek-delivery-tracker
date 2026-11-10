@@ -3,7 +3,7 @@ title: GOFO Express rastreo: número GFUS, estados y qué hacer
 description: Rastrea tu paquete de GOFO Express en Estados Unidos: cómo es el número de rastreo, qué significa cada estado en inglés y qué hacer si tu paquete no avanza.
 slug: gofo-express-rastreo
 published: 2026-11-02
-updated: 2026-11-08
+updated: 2026-11-10
 ---
 
 GOFO Express es una empresa de paquetería que reparte en Estados Unidos: recoge los paquetes en el almacén del remitente y los lleva de centro en centro hasta la estación desde la que se reparten. Para rastrear tu paquete, pega el número de rastreo en la casilla de arriba; GOFO tiene además su propio rastreador, en gofo.com/us/track. El número te lo da la tienda que te envió el pedido. Si no lo encuentras, mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
@@ -75,7 +75,7 @@ Con un número `GFUS`, [Peek](/) reconoce GOFO Express al momento («Transportis
 
 Mientras GOFO no conozca un número `GF` o `CR`, Peek sigue comprobando y verás «Esperando el primer escaneo de GOFO Express». Si sabes que es de GOFO, elígelo con «Cambiar». Con un número `GFUS`, o una vez elegido GOFO, verás «Esperando al transportista» hasta el primer escaneo. También puedes pegar un enlace de rastreo de GOFO para Estados Unidos (de gofo.com/us o gofoexpress.com) que lleve `searchID=` y el número.
 
-Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, que Peek muestra hasta que el paquete se entrega, se devuelve o llega a un punto de recogida; Peek deja fuera las fotos de entrega, las coordenadas y el peso.
+Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, que Peek muestra hasta que el paquete sale a reparto, se entrega, se devuelve o llega a un punto de recogida; Peek deja fuera las fotos de entrega, las coordenadas y el peso.
 
 Peek consulta a GOFO cada 30 minutos, también con el paquete en reparto, y espera una hora tras una consulta fallida. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
 

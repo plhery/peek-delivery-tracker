@@ -3,7 +3,7 @@ title: GOFO Express tracking: statuses, photos and support
 description: Track a GOFO Express parcel in the US: what a GOFO tracking number looks like, what the statuses mean, missed deliveries, delivery photos and how to reach support.
 slug: gofo-express-tracking
 published: 2026-10-15
-updated: 2026-11-08
+updated: 2026-11-10
 ---
 
 GOFO Express is a US parcel carrier: it collects parcels from the sender's warehouse and moves them through its hubs to the delivery station that serves your area. Paste the number in the box above to track yours; GOFO's own site has a tracker too. The number comes from the shop that shipped your order, usually in its shipping email or on your order page. Nothing there? See [how to find a tracking number](guide:find-tracking-number).
@@ -80,7 +80,7 @@ For anything about the order itself, start with the shop that shipped it. For th
 
 [Peek](/) names GOFO Express at once for a `GFUS` number ("Detected carrier"). For a `GF` or `CR` number, it asks GOFO whether it has the parcel and names GOFO Express when it does. Spaces in the number don't matter. Until GOFO knows the number, Peek keeps checking. AliExpress / Cainiao tracks some AliExpress parcels under GOFO's `GFUS` number: when GOFO has shown only the label for two days, Peek also asks Cainiao for the journey before GOFO. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link with `searchID=` and the number in it.
 
-Peek reads GOFO's US tracking every 30 minutes, out for delivery too, and waits an hour after a failed check. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with the town and state GOFO gives for it, those places on a map, the exact time of each scan, the delivery time and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows GOFO's expected delivery day until the parcel is delivered or returned, and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
+Peek reads GOFO's US tracking every 30 minutes, out for delivery too, and waits an hour after a failed check. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with the town and state GOFO gives for it, those places on a map, the exact time of each scan, the delivery time and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows GOFO's expected delivery day until the parcel is out for delivery, delivered or returned, and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

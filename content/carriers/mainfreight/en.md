@@ -3,7 +3,7 @@ title: Mainfreight tracking: consignment numbers and statuses
 description: Track a Mainfreight consignment in New Zealand, Australia or the US: what its numbers look like, what each status means and what to do when freight is late.
 slug: mainfreight-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-10
 ---
 
 Mainfreight moves freight by road, air and sea. Peek's catalog lists it for New Zealand (its home), Australia and the United States; its tracker also covers road freight in Europe and container moves. To track freight or a large item coming to you with Mainfreight, paste the consignment number from whoever booked it in the box above. Mainfreight's own tracker is on www.mainfreight.com.
@@ -74,7 +74,7 @@ Peek's code knows no Mainfreight wording for a missed delivery, a problem or a r
 
 Peek couldn't read Mainfreight's website, so this page gives no delivery times, appointments, attempts or rules for collecting freight from a depot. Ask whoever booked the freight how and when it comes to your door.
 
-Peek's code hands Mainfreight shipments to no other carrier for delivery. The tracker can give an expected delivery day for air and ocean jobs and European road freight, and Peek shows it until delivery. It gives Peek no proof of delivery and no name of whoever took the goods.
+Peek's code hands Mainfreight shipments to no other carrier for delivery. The tracker can give an expected delivery day for air and ocean jobs and European road freight, and Peek shows it until the goods are out for delivery. It gives Peek no proof of delivery and no name of whoever took the goods.
 
 **Customs.** For goods coming into New Zealand, NZ Customs says:
 

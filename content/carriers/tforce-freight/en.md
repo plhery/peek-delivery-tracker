@@ -3,7 +3,7 @@ title: TForce Freight tracking: PRO numbers, statuses and claims
 description: Track a TForce Freight shipment in the US or Canada: what a PRO number looks like, what each tracking line means, home deliveries and freight claims.
 slug: tforce-freight-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-10
 ---
 
 TForce Freight is a less-than-truckload (LTL) carrier: it moves pallets and heavy freight between its service centers across the United States and all of Canada, and to more than 600 points in Mexico. If a large order or other freight is coming to you with TForce, track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. TForce's own tracker is the Tracking page on www.tforcefreight.com.
@@ -44,7 +44,7 @@ A `Delivered` status beside the PRO always shows as "Delivered"; otherwise the n
 
 ## How TForce Freight delivers
 
-TForce carries the freight to the service center that serves you, then delivers it by truck. Its tracker gives an estimated delivery day, which Peek shows until delivery or a failed attempt. Peek's code hands the shipment over to no other carrier.
+TForce carries the freight to the service center that serves you, then delivers it by truck. Its tracker gives an estimated delivery day, which Peek shows until the freight is out for delivery or an attempt fails. Peek's code hands the shipment over to no other carrier.
 
 TForce's rules tariff (LTL Rules Tariff UPGF 102-T, effective 17 August 2026) sets out how delivery works:
 

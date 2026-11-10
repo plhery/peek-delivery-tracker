@@ -3,7 +3,7 @@ title: GOFO Canada tracking: GFCA numbers, statuses and delays
 description: Track a GOFO parcel in Canada: what a GFCA number looks like, what GOFO's scans mean in Peek, and what to do when a parcel is late, missed or missing.
 slug: gofo-canada-tracking
 published: 2026-10-28
-updated: 2026-11-08
+updated: 2026-11-10
 ---
 
 GOFO Canada is the Canadian network of GOFO, a parcel carrier with networks in several countries, and it runs the same tracking system as GOFO in the United States. GOFO says its Canadian network is live in Toronto, with Vancouver and more coverage on the way. Its numbers begin with `GFCA`: track one on GOFO's Canadian tracking page, on gofo.com, or paste it in the box above. No number yet? See [how to find a tracking number](guide:find-tracking-number).
@@ -64,7 +64,7 @@ For a delivery issue or a tracking question, GOFO lists these channels on its [C
 
 [Peek](/) recognises a GOFO Canada number by its shape: `GFCA` and 14 digits, in capitals or not, with or without spaces. A GOFO Canada tracking link from gofo.com with `searchID=` and the number in it works too. Peek follows only the `GFCA` waybill, not the shop's reference.
 
-Peek reads GOFO Canada's own tracking: the status, each scan with its time and the town and province GOFO gives for it, those places on a map, the delivery time and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows GOFO's expected delivery date until the parcel is delivered, returned or at a pickup point, and leaves out the delivery photos, coordinates and weight.
+Peek reads GOFO Canada's own tracking: the status, each scan with its time and the town and province GOFO gives for it, those places on a map, the delivery time and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows GOFO's expected delivery date until the parcel is out for delivery, delivered, returned or at a pickup point, and leaves out the delivery photos, coordinates and weight.
 
 Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GOFO scans the parcel out for delivery, while GOFO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or delivery day only. It can't book a redelivery or contact GOFO or the shop for you.
 

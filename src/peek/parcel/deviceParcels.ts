@@ -1,7 +1,7 @@
 import type { ApiAuth } from '../../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../../types';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from '../links';
-import { forgetRecent, type RecentParcel } from '../recents';
+import { forgetRecent, ownerKeyFor, type RecentParcel } from '../recents';
 
 /**
  * "Bring these parcels too?": the other parcels this device looked up before
@@ -23,8 +23,8 @@ export function offeredParcels(): ReadonlySet<string> {
 }
 
 export function markOffered(ids: readonly string[]): void {
-  // Only the device's latest parcels can still be there to ask about.
-  const offered = [...new Set([...offeredParcels(), ...ids])].slice(-60);
+  // Only a parcel the device still holds the key of can be asked about again, which bounds the list.
+  const offered = [...new Set([...offeredParcels(), ...ids])].filter((id) => ownerKeyFor(id) !== null);
   try {
     window.localStorage.setItem(BRING_ALONG_STORAGE_KEY, JSON.stringify(offered));
     memory = null;

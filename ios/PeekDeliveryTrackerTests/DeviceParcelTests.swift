@@ -980,6 +980,9 @@ final class DeviceParcelTests: XCTestCase {
         let shown = answer("22222222222B", second, number: "TESTPARCEL456")
         let device = DeviceParcels(client: client(calls, read: { $0 == "22222222222B" ? shown : nil }), storage: storage)
         XCTAssertEqual(device.list().map(\.label), ["Lamp", "Shoes"])
+        // Its key goes to an account like the others, before it is read again.
+        XCTAssertEqual(device.claims.map(\.id), ["22222222222A", "22222222222C", "22222222222B"])
+        XCTAssertEqual(device.claims.last, ClaimParcelLink(id: "22222222222B", key: key))
 
         try await device.refresh()
 

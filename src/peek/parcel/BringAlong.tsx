@@ -11,7 +11,7 @@ import { useSheetDialog } from '../../lib/modal';
 import { useParcels } from '../../store/ParcelsContext';
 import type { ParcelRepo } from '../../types';
 import { usePendingKeep } from '../pending';
-import { useRecents, type RecentParcel } from '../recents';
+import { recentFor, useRecents, type RecentParcel } from '../recents';
 import { bringable, bringAlong, bringAlongInDemo, markOffered, type BroughtAlong } from './deviceParcels';
 import { parcelDetail, parcelHeadline } from './summary';
 import './BringAlong.css';
@@ -134,7 +134,19 @@ function BringAlong({ bring }: { bring: (parcels: RecentParcel[]) => Promise<Bro
   return <>
     {parcels && parcels.length > 0 && <Sheet parcels={parcels} onClose={() => close(parcels)} onBring={async (chosen) => {
       setAsked(parcels);
-      const { brought, refused } = await bring(chosen);
+      let outcome: BroughtAlong;
+      try {
+        outcome = await bring(chosen);
+      } catch (error) {
+        // A request that failed after another answered: what that one kept is in the account, and no longer here to offer.
+        const still = parcels.filter((recent) => recentFor(recent.id));
+        if (still.length < parcels.length) {
+          setAsked(still);
+          void retryLoad();
+        }
+        throw error;
+      }
+      const { brought, refused } = outcome;
       const full = new Set(refused.filter(({ reason }) => reason === 'quota').map(({ id }) => id));
       close(parcels, full);
       if (brought || full.size) setSaid({ brought, full: full.size });

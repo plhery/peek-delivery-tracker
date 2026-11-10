@@ -520,7 +520,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           onHave={key && delivered && link.kind === 'lookup' ? () => setForgetting('arrived') : undefined}
           onCalendar={!owner && slot ? addToCalendar : undefined}
           onShare={owner ? () => void share() : undefined}
-          onRename={present ? undefined : sample ? (next) => setRenamed({ name: next }) : (next) => renameParcel(linkId, next)} compactName={!owner} />}
+          onRename={present ? undefined : sample ? (next) => setRenamed({ name: next }) : state.onDevice ? (next) => renameParcel(linkId, next) : undefined}
+          compactName={!owner} />}
         <AndroidTestRow />
         {carrierKnown && <Notes view={view} stage={stage} flag={flag} trouble={failing} carrier={displayed} />}
         {waitingAt && <PickupPointCard point={waitingAt} />}

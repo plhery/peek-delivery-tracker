@@ -16,7 +16,7 @@ import { isFinal } from '../../lib/stages';
 import { maskedNumber } from '../links';
 import { useMedia, useNow } from '../parcel/hooks';
 import { parcelDetail, parcelFreshness, parcelHeadline, parcelStage } from '../parcel/summary';
-import { useRecents, type RecentParcel } from '../recents';
+import { strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { openParcelLink, parcelLinkPath } from '../route';
 import { usePeekSession } from '../session';
 import { forgetDeviceParcels, leadParcel, watchDeviceParcels } from './deviceList';
@@ -131,6 +131,8 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   const { t } = useI18n();
   const { account } = usePeekSession();
   const recents = useRecents();
+  // Saved parcels this version can't list keep their owner keys: Forget all is offered for them too.
+  const stranded = strandedParcels().length;
   const [asking, setAsking] = useState(false);
   const [forgetting, setForgetting] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -156,7 +158,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
     if (!kept) onForgotten();
   }
 
-  if (!listed) return null;
+  if (!listed && !stranded) return null;
   const shown = new Map(delivered.arranged.map((parcel) => [parcel.id, parcel]));
   const led = leadParcel(recents.map((recent) => ({ ...recent, snapshot: { ...recent.snapshot, parcel: shown.get(recent.id) ?? recent.snapshot.parcel } })));
   const lead = recents.find((recent) => recent.id === led?.id) ?? null;
@@ -167,7 +169,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
       {!asking && <button type="button" className="door-device__forget" onClick={() => { setFailed(false); setAsking(true); }}>{t('door.recents.forgetAll')}</button>}
     </div>
     {asking && <div ref={question} className="door-device__question" role="group" aria-labelledby="door-device-question" tabIndex={-1}>
-      <p id="door-device-question">{t('door.recents.forget.many', { count: recents.length })}</p>
+      <p id="door-device-question">{t('door.recents.forget.many', { count: recents.length + stranded })}</p>
       <div>
         <button type="button" className="door-device__cancel" disabled={forgetting} onClick={() => setAsking(false)}>{t('common.cancel')}</button>
         <button type="button" className="door-device__confirm" disabled={forgetting} onClick={() => void forget()}>{t('door.recents.forget.yes')}</button>
@@ -178,6 +180,6 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
       {lead && <li key={lead.id} className="door-device__lead"><LeadParcel recent={lead} arrived={arrived(lead)} /></li>}
       {recents.filter((recent) => recent !== lead).map((recent) => <li key={recent.id}><DeviceParcel recent={recent} arrived={arrived(recent)} /></li>)}
     </ul>
-    <p className="door-aside">{t('door.recents.kept')}{account !== 'signed-in' && <>{' '}<button type="button" className="door-link" onClick={onSignIn}>{t('door.recents.signIn')}</button></>}</p>
+    <p className="door-aside">{t('door.recents.kept')}{account !== 'signed-in' && listed && <>{' '}<button type="button" className="door-link" onClick={onSignIn}>{t('door.recents.signIn')}</button></>}</p>
   </section>;
 }

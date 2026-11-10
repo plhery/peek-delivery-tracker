@@ -4,8 +4,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ApiAuth } from '../../lib/apiClient';
 import { createDemoRepo } from '../../store/demoRepo';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../../test/parcelLinks';
+import { ParcelLinkError } from '../links';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
-import { forgetAllRecents, forgetRecent, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
+import { forgetAllRecents, forgetRecent, MAX_OWNED, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
 import { BringAlongInDemo, BringAlongParcels } from './BringAlong';
 import { bringable, BRING_ALONG_STORAGE_KEY, bringAlong, bringAlongInDemo, markOffered, offeredParcels } from './deviceParcels';
 
@@ -21,6 +22,12 @@ vi.mock('../../store/ParcelsContext', () => ({ useParcels: () => ({ retryLoad: m
 const THIRD_LINK_ID = 'p4Rs9tUv2WxY';
 const auth: ApiAuth = { userId: 'user-1', getAccessToken: async () => 'token' };
 const ups = (id: string) => testView({ id, parcel: { carrier: 'ups', trackingNumber: '1ZDEMO202600000009', expectedDelivery: '2099-01-05' } });
+const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+/** `count` link ids that start alike. */
+const linkIds = (start: string, count: number) => Array.from({ length: count }, (_, index) => `${start}${ALPHABET[Math.floor(index / 32)]}${ALPHABET[index % 32]}`);
+/** Each link given is a lookup of the device's own, the last one newest. */
+const lookUp = (ids: readonly string[], from = 10) => ids.forEach((id, index) => rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: from + index }));
+const keptAll = async (links: { id: string }[]) => links.map(({ id }) => ({ id, outcome: 'kept', packageId: 'p1' }));
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -72,7 +79,8 @@ describe('BringAlong', () => {
     unmount();
     render(<BringAlongParcels auth={auth} />);
     expect(screen.queryByRole('dialog')).toBeNull();
-    expect([...offeredParcels()].sort()).toEqual([LINK_ID, OTHER_LINK_ID].sort());
+    // The parcel the account took is no longer the device's to remember.
+    expect([...offeredParcels()]).toEqual([OTHER_LINK_ID]);
   });
 
   it('keeps everything on the device on “Not now”, and never asks about those parcels again', async () => {
@@ -111,6 +119,27 @@ describe('BringAlong', () => {
     // The parcel the account had no room for is offered again; the gone link is not.
     expect(offeredParcels().has(LINK_ID)).toBe(false);
     expect(offeredParcels().has(OTHER_LINK_ID)).toBe(true);
+  });
+
+  it('reloads the deliveries when a later request fails, and offers again only the parcels still on the device', async () => {
+    const ids = linkIds('r7Qm2xHd9R', 25);
+    lookUp(ids);
+    mocks.claim.mockImplementation(keptAll).mockImplementationOnce(keptAll).mockRejectedValueOnce(new ParcelLinkError('offline'));
+    const user = userEvent.setup();
+    render(<BringAlongParcels auth={auth} />);
+    await user.click(within(sheet()).getByRole('button', { name: 'Add 27 parcels' }));
+    expect(await within(sheet()).findByRole('alert')).toHaveTextContent('Couldn’t add these parcels. Try again.');
+    // The first twenty are in the account and gone from the device: the deliveries show them, and the sheet does not.
+    const first = (mocks.claim.mock.calls[0][0] as { id: string }[]).map(({ id }) => id);
+    expect(first).toHaveLength(20);
+    expect(first.every((id) => recentFor(id) === null)).toBe(true);
+    expect(mocks.retryLoad).toHaveBeenCalledOnce();
+    expect(within(sheet()).getAllByRole('checkbox')).toHaveLength(7);
+    await user.click(within(sheet()).getByRole('button', { name: 'Add 7 parcels' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    expect(mocks.claim.mock.calls[2][0]).toHaveLength(7);
+    expect(screen.getByRole('status')).toHaveTextContent('7 parcels added to your deliveries');
+    expect(mocks.retryLoad).toHaveBeenCalledTimes(2);
   });
 
   it('says what was added and what stayed when the account fills up halfway, and offers the rest again', async () => {
@@ -195,6 +224,20 @@ describe('the device’s parcels to bring along', () => {
     expect(JSON.parse(window.localStorage.getItem(BRING_ALONG_STORAGE_KEY)!)).toEqual([LINK_ID, OTHER_LINK_ID]);
   });
 
+  it('keep out every declined parcel still on the device, the newest too, and drop the ones that left it', () => {
+    forgetAllRecents();
+    const ids = linkIds('s7Qm2xHd9R', MAX_OWNED + 1);
+    lookUp(ids.slice(0, MAX_OWNED));
+    // Asked about all sixty, newest first, and declined.
+    markOffered(bringable(recents(), null).map((recent) => recent.id));
+    // One more lookup takes the oldest's place, and is declined in turn.
+    lookUp([ids[MAX_OWNED]], 100);
+    markOffered([ids[MAX_OWNED]]);
+    expect(bringable(recents(), null)).toEqual([]);
+    expect(offeredParcels().size).toBe(MAX_OWNED);
+    expect(offeredParcels().has(ids[0])).toBe(false);
+  });
+
   it('count what the account took, name what it refused and why, and leave the rest on the device', async () => {
     mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'quota' }]);
     expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 1, refused: [{ id: OTHER_LINK_ID, reason: 'quota' }] });
@@ -203,10 +246,9 @@ describe('the device’s parcels to bring along', () => {
   });
 
   it('keep more than twenty parcels twenty to a request', async () => {
-    const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-    const ids = Array.from({ length: 25 }, (_, index) => `r7Qm2xHd9R${ALPHABET[Math.floor(index / 32)]}${ALPHABET[index % 32]}`);
-    for (const [index, id] of ids.entries()) rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: 10 + index });
-    mocks.claim.mockImplementation(async (links: { id: string }[]) => links.map(({ id }) => ({ id, outcome: 'kept', packageId: 'p1' })));
+    const ids = linkIds('r7Qm2xHd9R', 25);
+    lookUp(ids);
+    mocks.claim.mockImplementation(keptAll);
     expect(await bringAlong(ids.map((id) => recentFor(id)!), auth)).toEqual({ brought: 25, refused: [] });
     expect(mocks.claim.mock.calls.map(([links]) => links.length)).toEqual([20, 5]);
     expect(ids.every((id) => recentFor(id) === null)).toBe(true);

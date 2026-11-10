@@ -9,7 +9,7 @@ import { ParcelLinkError, type ParcelLinkView } from './links';
 import { ParcelPage } from './ParcelPage';
 import { NoticeToast } from './parcel/Toast';
 import { clearPendingKeep, onKeepOutcome, PENDING_KEEP_STORAGE_KEY, pendingKeep, rememberPendingKeep, announceKeepOutcome, type KeepOutcome } from './pending';
-import { forgetAllRecents, recentFor, rememberParcel } from './recents';
+import { forgetAllRecents, MAX_RECENTS, recentFor, rememberParcel } from './recents';
 import { SAMPLE_LINK_ID } from './sample';
 import { PeekSessionProvider, type PeekSession } from './session';
 
@@ -687,6 +687,22 @@ describe('ParcelPage actions', () => {
     expect(screen.getByRole('button', { name: 'Name it' })).toBeVisible();
     // The name never left the device.
     expect(mocks.read.mock.calls.every(([, options]) => !JSON.stringify(options).includes('sneakers'))).toBe(true);
+  });
+
+  it('offers no name for a link from someone else that twenty lookups of the device’s own leave no room for', async () => {
+    const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    for (let index = 0; index < MAX_RECENTS; index += 1) {
+      const id = `k7Qm2xHd9R2${ALPHABET[index]}`;
+      rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: Date.now() - index * 60_000 });
+    }
+    history.replaceState(null, '', `/p/${LINK_ID}#n=${encodeURIComponent('For Mum')}`);
+    mocks.read.mockResolvedValue(testView({ owner: false }));
+    open();
+    // The name the link carries still shows; the device keeps nothing of the link.
+    expect(await screen.findByText('For Mum')).toBeVisible();
+    expect(recentFor(LINK_ID)).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Edit parcel name' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Name it' })).toBeNull();
   });
 
   it('shares the link, and only the link, through the system’s share sheet', async () => {

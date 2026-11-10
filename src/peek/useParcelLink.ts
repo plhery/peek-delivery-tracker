@@ -50,6 +50,8 @@ export interface ParcelLinkState {
   view: ParcelLinkView | null;
   /** The name this device has for the parcel, or the one the link carries. */
   name: string | null;
+  /** The device keeps the parcel, and with it a name given here: a link opened from someone else may find no room. */
+  onDevice: boolean;
   /**
    * The link's public name and protected gift message. Empty for a gift on its way.
    */
@@ -256,6 +258,7 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     status: answer.gone || (view ? 'ready' : 'loading'),
     view,
     name: recent?.name ?? words.name,
+    onDevice: !!recent,
     words,
     trouble: answer.trouble,
     checking: !!view && !firstCheckLanded(view),

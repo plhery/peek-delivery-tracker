@@ -12,7 +12,7 @@ import { ASK_PATIENCE_MS } from './lookup/useLookup';
 import { FIRST_SAMPLE_MS, SAMPLE_PERIOD_MS } from './landing/useSampleLoop';
 import { ParcelLinkError, type ParcelLookup } from './links';
 import { forgetDeviceChecks } from './lookup/deviceList';
-import { forgetAllRecents, recentFor, rememberParcel, renameParcel } from './recents';
+import { forgetAllRecents, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
 import { pickCandidate, pressEnter } from '../test/inputMethod';
@@ -1030,6 +1030,21 @@ describe('FrontDoor: on this device', () => {
     const { user } = door();
     await user.click(screen.getByRole('button', { name: 'Forget all' }));
     expect(screen.getByRole('group', { name: 'Forget this parcel?' })).toBeVisible();
+  });
+
+  it('forgets a saved parcel it cannot list, on the server too, when nothing else is on the device', async () => {
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([{ id: LINK_ID, key: OWNER_KEY, snapshot: { version: 2 } }]));
+    const { user, field } = door();
+    const list = screen.getByRole('region', { name: 'On this device' });
+    expect(within(list).queryAllByRole('link')).toHaveLength(0);
+    // Signing in would not bring it along: only Forget all is offered.
+    expect(within(list).queryByRole('button', { name: /^Sign in/ })).toBeNull();
+    await user.click(within(list).getByRole('button', { name: 'Forget all' }));
+    await user.click(within(screen.getByRole('group', { name: 'Forget this parcel?' })).getByRole('button', { name: 'Forget' }));
+    await waitFor(() => expect(screen.queryByRole('region', { name: 'On this device' })).not.toBeInTheDocument());
+    expect(mocks.forget.mock.calls).toEqual([[LINK_ID, OWNER_KEY]]);
+    expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
+    expect(field).toHaveFocus();
   });
 });
 

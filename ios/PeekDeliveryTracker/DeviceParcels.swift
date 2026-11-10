@@ -584,13 +584,18 @@ final class DeviceParcels {
     /// Whether any of the device's parcels is archived, for the account that takes them over.
     func isArchived(linkID: String) -> Bool { entries.first { $0.linkID == linkID }?.archivedAt != nil }
 
-    /// What an account needs to take the device's parcels over: its own with their keys, and
-    /// someone else's that the link lets an account keep.
+    /// What an account needs to take the device's parcels over: its own with their keys, those whose
+    /// saved copy was lost included, and someone else's that the link lets an account keep. Never a
+    /// link still to be forgotten: those are not among the keys.
     var claims: [ClaimParcelLink] {
-        entries.compactMap { entry in
+        let listed = entries.compactMap { entry -> ClaimParcelLink? in
             if entry.isViewer { return entry.canKeep == true ? ClaimParcelLink(id: entry.linkID, label: entry.label.nonEmpty) : nil }
             return keys[entry.linkID].map { ClaimParcelLink(id: entry.linkID, key: $0, label: entry.label.nonEmpty) }
         }
+        let unlisted = keys.filter { pair in !entries.contains { $0.linkID == pair.key } }
+            .sorted { $0.key < $1.key }
+            .map { ClaimParcelLink(id: $0.key, key: $0.value) }
+        return listed + unlisted
     }
 
     /// Whether the parcel behind this link is someone else's, followed here as its reader.

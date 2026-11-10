@@ -1485,6 +1485,23 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let szamiGroup = CarrierID(rawValue: "szami-group")
     static let transPack = CarrierID(rawValue: "trans-pack")
     static let xlsFutar = CarrierID(rawValue: "xls-futar")
+    static let twentyFourCurier = CarrierID(rawValue: "24curier")
+    static let albatomi = CarrierID(rawValue: "albatomi")
+    static let bestCourierRo = CarrierID(rawValue: "best-courier-ro")
+    static let cautcurier = CarrierID(rawValue: "cautcurier")
+    static let corlanPostExpress = CarrierID(rawValue: "corlan-post-express")
+    static let curiera = CarrierID(rawValue: "curiera")
+    static let intelligentLogistik = CarrierID(rawValue: "intelligent-logistik")
+    static let irsRomexpress = CarrierID(rawValue: "irs-romexpress")
+    static let matyExpress = CarrierID(rawValue: "maty-express")
+    static let optimusCourier = CarrierID(rawValue: "optimus-courier")
+    static let pinkPost = CarrierID(rawValue: "pink-post")
+    static let postaPanduri = CarrierID(rawValue: "posta-panduri")
+    static let sinapseria = CarrierID(rawValue: "sinapseria")
+    static let timeCriticalLine = CarrierID(rawValue: "time-critical-line")
+    static let transilvaniaPost = CarrierID(rawValue: "transilvania-post")
+    static let worldCourier = CarrierID(rawValue: "world-courier")
+    static let xpedist = CarrierID(rawValue: "xpedist")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2920,6 +2937,23 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .szamiGroup,
         .transPack,
         .xlsFutar,
+        .twentyFourCurier,
+        .albatomi,
+        .bestCourierRo,
+        .cautcurier,
+        .corlanPostExpress,
+        .curiera,
+        .intelligentLogistik,
+        .irsRomexpress,
+        .matyExpress,
+        .optimusCourier,
+        .pinkPost,
+        .postaPanduri,
+        .sinapseria,
+        .timeCriticalLine,
+        .transilvaniaPost,
+        .worldCourier,
+        .xpedist,
     ]
 
     init(from decoder: Decoder) throws {

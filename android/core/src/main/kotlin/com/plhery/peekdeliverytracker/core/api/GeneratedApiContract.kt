@@ -1494,6 +1494,23 @@ value class CarrierId(val rawValue: String) {
         val SzamiGroup = CarrierId("szami-group")
         val TransPack = CarrierId("trans-pack")
         val XlsFutar = CarrierId("xls-futar")
+        val TwentyFourCurier = CarrierId("24curier")
+        val Albatomi = CarrierId("albatomi")
+        val BestCourierRo = CarrierId("best-courier-ro")
+        val Cautcurier = CarrierId("cautcurier")
+        val CorlanPostExpress = CarrierId("corlan-post-express")
+        val Curiera = CarrierId("curiera")
+        val IntelligentLogistik = CarrierId("intelligent-logistik")
+        val IrsRomexpress = CarrierId("irs-romexpress")
+        val MatyExpress = CarrierId("maty-express")
+        val OptimusCourier = CarrierId("optimus-courier")
+        val PinkPost = CarrierId("pink-post")
+        val PostaPanduri = CarrierId("posta-panduri")
+        val Sinapseria = CarrierId("sinapseria")
+        val TimeCriticalLine = CarrierId("time-critical-line")
+        val TransilvaniaPost = CarrierId("transilvania-post")
+        val WorldCourier = CarrierId("world-courier")
+        val Xpedist = CarrierId("xpedist")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2929,6 +2946,23 @@ value class CarrierId(val rawValue: String) {
             SzamiGroup,
             TransPack,
             XlsFutar,
+            TwentyFourCurier,
+            Albatomi,
+            BestCourierRo,
+            Cautcurier,
+            CorlanPostExpress,
+            Curiera,
+            IntelligentLogistik,
+            IrsRomexpress,
+            MatyExpress,
+            OptimusCourier,
+            PinkPost,
+            PostaPanduri,
+            Sinapseria,
+            TimeCriticalLine,
+            TransilvaniaPost,
+            WorldCourier,
+            Xpedist,
         )
     }
 }

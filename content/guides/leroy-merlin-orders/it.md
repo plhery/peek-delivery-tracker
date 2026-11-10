@@ -4,7 +4,7 @@ description: Chi consegna un ordine di leroymerlin.it, dove vederne lo stato, co
 slug: tracciamento-ordine-leroy-merlin
 picture: Un barattolo di vernice e un rullo su una pila di assi di legno accanto a un furgone delle consegne, e Pip in piedi sulle assi.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Leroy Merlin vende online in Italia su leroymerlin.it, nell'app e per telefono. Ritiri gratis in negozio o in un locker all'ingresso, oppure ricevi a casa, fronte strada o al piano. Le sue pagine non nominano i corrieri. Lo stato di ogni ordine è in «Ordini e Resi» della tua area clienti. Quando ritiri, conta i colli e controlla gli imballi prima di firmare la bolla di consegna; per un guasto, la garanzia legale va fatta valere entro due mesi dalla scoperta del difetto.
@@ -110,7 +110,9 @@ Sì, se hai il numero di tracking del corriere, per esempio da «Segui il mio or
 
 Molti numeri hanno la stessa forma di quelli di altri corrieri. Peek interroga i corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più di uno, premi «Scegli»; se ne mostra uno sbagliato, premi «Cambia» e scegli il corriere giusto. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
 
-Se un pacco cambia corriere per strada e il primo nomina quello che lo prende in carico, Peek conserva la cronologia dall'inizio e segue il nuovo corriere. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano a Leroy Merlin o al venditore.
+Quando il pacco è in consegna, Peek lo ricontrolla fino a ogni 2 minuti con i corrieri che legge direttamente, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6:00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso). Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo.
+
+Se un pacco cambia corriere per strada e il primo nomina quello che lo prende in carico, Peek conserva la cronologia dall'inizio e segue il nuovo corriere, al ritmo di quello che consegna il pacco. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano a Leroy Merlin o al venditore.
 
 :::sources
 - [ADEO: Home](https://www.adeo.com/en/) – Leroy Merlin, marchio di ADEO

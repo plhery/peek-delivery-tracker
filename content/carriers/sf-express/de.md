@@ -3,7 +3,7 @@ title: SF Express Sendungsverfolgung: Nummer, Status, Zustellung
 description: SF-Express-Paket aus China verfolgen: die 12-stellige oder SF-Sendungsnummer, was die Status bedeuten, wie SF International zustellt und wen du fragst.
 slug: sf-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-10
 ---
 
 SF Express (顺丰, kurz SF) ist ein chinesisches Logistikunternehmen, 1993 gegründet, mit Sitz in Shenzhen. Sein Auslandszweig SF International verschickt Sendungen ins Ausland, für Firmen, Onlinehändler und Privatkunden. Jede regionale Website von SF hat eine eigene Sendungsverfolgung: www.sf-express.com für Festlandchina, hk.sf-express.com für Hongkong und htm.sf-express.com für Taiwan. Oder du fügst die Nummer oben ins Feld ein.
@@ -39,6 +39,8 @@ SFs englische Sendungsverfolgung setzt über die Zeilen jedes Frachtbriefs einen
 
 Andere Zeilen sagen, dass das Paket ein Umschlagzentrum verlassen oder erreicht hat, im Flugzeug ist oder gerade verzollt wird. Eine Zeile über eingeschränkten Zugang zur Adresse des Empfängers meldet einen gescheiterten Zustellversuch. Steht da, das Paket liege in einer Postfiliale oder an einer Selbstabholstelle, wartet es dort auf dich.
 
+Zeilen, nach denen das Paket gerade verzollt wird, zeigt Peek als „Beim Zoll“, die Zeile über die abgeschlossene Verzollung als „Unterwegs“. `The shipment is queuing up for flight resources，please wait patiently` heißt, dass das Paket auf einen Platz im Flugzeug wartet: Es ist auf dem Weg („Unterwegs“). `The shipment has arrived at the warehouse and is waiting for inspection and acceptance. Please wait patiently.` erscheint, wenn der Zusteller an ein Lager liefert, das Pakete erst prüft und dann quittiert: Peek zeigt „In Zustellung“, bis die Zeile über die Zustellung kommt.
+
 SFs Sendungsverfolgung zeigt jede Uhrzeit nach chinesischer Zeit (UTC+8), auch bei Scans in deinem Land: Ein Scan am Abend in Berlin oder Wien kann schon das Datum des nächsten Morgens tragen.
 
 ## SF Express Zustellung in Deutschland, Österreich und der Schweiz
@@ -58,7 +60,7 @@ SFs Bedingungen für Sendungen aus Festlandchina ins Ausland sagen:
 
 Welche Zölle und Steuern anfallen, hängt von deinem Land ab, siehe [Paket beim Zoll](guide:customs). In Deutschland und Österreich gilt, wie in der ganzen EU: Für Online-Bestellungen von außerhalb der EU bis 150 € fällt seit dem 1. Juli 2026 ein pauschaler Zoll von 3 € je Warenkategorie an. Seit dem 1. November 2026 kommt eine Bearbeitungsgebühr der EU (Union handling fee) von 2 € je Warenkategorie dazu, egal wie viel die Ware wert ist. Die Schweiz gehört nicht zur EU, dort gelten eigene Regeln.
 
-Verweigerst du die Annahme oder zahlst du die Abgaben nicht, darf SF das Paket laut seinen Bedingungen an den Absender zurückschicken, auf dessen Kosten. Hält der Zoll das Paket fest und kümmert sich der Absender nicht innerhalb von 30 Kalendertagen nach SFs schriftlicher Mitteilung darum, gilt das Paket als aufgegeben, und SF darf es vernichten oder verkaufen.
+Verweigerst du die Annahme oder zahlst du die Abgaben nicht, darf SF das Paket laut seinen Bedingungen an den Absender zurückschicken, auf dessen Kosten. Hält der Zoll das Paket fest und kümmert sich der Absender nicht innerhalb von 30 Kalendertagen nach SFs schriftlicher Mitteilung darum, gilt das Paket als aufgegeben, und SF darf nach eigenem Ermessen damit verfahren und es auch vernichten.
 
 ## SF-Paket kommt nicht an, ist verloren oder geht zurück
 
@@ -90,7 +92,7 @@ SFs Seiten, die hier zitiert sind, gelesen am 2. November 2026: auf www.sf-expre
 
 [Peek](/) erkennt SF Express sofort an einer Nummer mit `SF`, wenn die Prüfziffer stimmt. Eine 12-stellige Nummer passt zu vielen Paketdiensten. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Peek kann SF nicht fragen, ob es eine Nummer kennt. Erscheint SF Express also nicht, tipp auf „Ändern“ und wähl es unter „Passt zu dieser Nummer“, oder nutz später „Paketdienst ändern“ beim Paket. Auch ein Link von sf-express.com mit `waybill-detail/`, ein Link der Taiwan-Seite mit `#search/bill-number/` oder ein Link zur Sendungsverfolgung von SF International mit der Nummer hinter `No=` nennt SF Express.
 
-Peek liest die englische Sendungsverfolgung von SFs Taiwan-Seite: den Status und den Verlauf in SFs Worten, zugestellte Zeilen als „Zugestellt“ und SFs Gesamtstatus als „Cancelled“ (storniert), „Forwarded“ (weitergeleitet), „Zurück an Absender“, „Held“ (festgehalten) oder „Lost“ (verloren). Es liest SFs Uhrzeiten nach chinesischer Zeit und zeigt jeden Scan in der Zeitzone deines Geräts, nicht in der chinesischen. Ein voraussichtliches Lieferdatum oder einen Zustellnachweis gibt es nicht, und Peek verfolgt die SF-Nummer bis zum Ende, nicht die Nummer eines Partners vor Ort.
+Peek liest die englische Sendungsverfolgung von SFs Taiwan-Seite: den Status und den Verlauf in SFs Worten, zugestellte Zeilen als „Zugestellt“ und SFs Gesamtstatus als „Cancelled“ (storniert), „Forwarded“ (weitergeleitet), „Zurück an Absender“, „Held“ (festgehalten) oder „Lost“ (verloren). Es liest SFs Uhrzeiten nach chinesischer Zeit und zeigt jeden Scan in der Zeitzone deines Geräts, nicht in der chinesischen; auf peektracker.com nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Ein voraussichtliches Lieferdatum oder einen Zustellnachweis gibt es nicht, und Peek verfolgt die SF-Nummer bis zum Ende, nicht die Nummer eines Partners vor Ort.
 
 Peek schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour von 6:00 bis 24:00 Uhr chinesischer Zeit (in Deutschland und Österreich also bis 17:00 Uhr, im Sommer bis 18:00 Uhr) und solange SF selbst antwortet. Über Tracking-Dienste fragt Peek alle 15 Minuten nach. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Mitteilungen kann Peek dir schicken: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. SF oder den Händler kontaktieren kann Peek nicht für dich.
 
@@ -115,5 +117,5 @@ Nein. SFs Bedingungen für Sendungen aus Festlandchina sagen, dass SF nicht an e
 :::sources
 - [Europäische Kommission: EU customs reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenkategorie bis 150 € seit 1. Juli 2026, 2 € Union handling fee seit 1. November 2026
 - [Europäische Kommission: Customs Guidance on EUR 3 customs duty (Englisch)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – je Warenkategorie, Bearbeitungsgebühr unabhängig vom Wert
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek zeigt, Nummernformate, Links, Wortlaut der Scans, chinesische Uhrzeit
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek zeigt, Nummernformate, Links, Wortlaut der Scans (Zoll, Warten auf einen Flug, Prüfung im Lager), chinesische Uhrzeit
 :::

@@ -90,7 +90,7 @@ Stan na 11 października 2026, według stron kontaktowych Poczty Polskiej i Pocz
 
 ## Śledzenie Poczty Polskiej w Peek
 
-[Peek](/) rozpoznaje od razu numery PX oraz numery 20-cyfrowe w kształcie z tabeli i z poprawną cyfrą kontrolną. O numery 19-cyfrowe pyta tylko Pocztę Polską, dopisując cyfrę kontrolną tak jak jej strona. Poprawny numer międzynarodowy kończący się na PL Peek pokazuje najpierw jako nieznanego przewoźnika pocztowego i pyta Pocztę Polską oraz Chronopost; gdy Poczta Polska zna numer, wygrywa. Przy błędnej cyfrze kontrolnej Peek pyta tylko Chronopost. Linki z eMonitoringu z `numer=` też działają, a kodu pocztowego nie trzeba.
+[Peek](/) rozpoznaje od razu numery PX oraz numery 20-cyfrowe w kształcie z tabeli i z poprawną cyfrą kontrolną. O numery 19-cyfrowe zaczynające się od `00` pyta tylko Pocztę Polską, dopisując cyfrę kontrolną tak jak jej strona. Poprawny numer międzynarodowy kończący się na PL Peek pokazuje najpierw jako nieznanego przewoźnika pocztowego i pyta Pocztę Polską oraz Chronopost; gdy Poczta Polska zna numer, wygrywa. Przy błędnej cyfrze kontrolnej Peek pyta tylko Chronopost. Linki z eMonitoringu z `numer=` też działają, a kodu pocztowego nie trzeba.
 
 Peek odczytuje śledzenie po angielsku, więc zobaczysz w nim angielskie nazwy, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia i placówkę, w której przesyłka czeka. Planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc Peek odczytuje je według zegara kraju, z którego pochodzą. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
 

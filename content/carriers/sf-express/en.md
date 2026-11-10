@@ -3,7 +3,7 @@ title: SF Express tracking: waybill numbers, statuses and delivery
 description: Track an SF Express parcel: the 12-digit or SF waybill number, what SF's status words mean, how SF International delivers abroad and who to call.
 slug: sf-express-tracking
 published: 2026-10-23
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 SF Express (顺丰, SF) is a Chinese logistics company founded in 1993 and based in Shenzhen. Its cross-border arm, SF International, ships abroad for businesses, online sellers and private customers. Each of SF's regional sites has a tracker: [sf-express.com](https://www.sf-express.com/chn/en) for mainland China, [hk.sf-express.com](https://hk.sf-express.com/hk/en/waybill/list) for Hong Kong and [htm.sf-express.com](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) for Taiwan. Or paste the number in the box above.
@@ -21,7 +21,7 @@ Lower case and spaces don't matter in Peek.
 
 **Where to find it.** It is printed on the waybill, the label on the parcel. If a shop sent it, the number is in the shipping email or on the order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
-**Tracking on SF's sites.** The Taiwan site makes you solve a picture puzzle first, and asks for the sender's or recipient's phone number before it opens a waybill's details. A waybill "under privacy protection" shows its tracking lines but no map. In Australia, SF's FAQ says to use "Track and Trace" on [sf-international.com/au/en](https://www.sf-international.com/au/en); for mainland China waybills, SF International sends you to the SF Express site.
+**Tracking on SF's sites.** The Taiwan site makes you solve a picture puzzle first, and asks for the sender's or recipient's phone number before it opens a waybill's details. A waybill "under privacy protection" shows its tracking lines but no map. In Australia, SF's FAQ says to use "Track and Trace" on [sf-international.com/au/en](https://www.sf-international.com/au/en); for mainland China waybills, SF International asks you to log in to the SF Express site to see their details.
 
 ## SF Express tracking statuses explained
 
@@ -38,6 +38,8 @@ SF's English tracker puts a label on each waybill, above its lines:
 | `Abandoned` | 已作废: the waybill was cancelled. Ask the sender whether the parcel went out under another number. |
 
 Other lines say the parcel left or reached an operation centre, is on a flight, or is going through customs. A line about limited access to the recipient's address is a failed attempt. One saying the parcel was placed at a post office or self-pickup point means it is waiting for you there.
+
+Peek shows the lines saying the parcel is under customs clearance as "At customs", and the one saying clearance is completed as "In transit". `The shipment is queuing up for flight resources，please wait patiently` means the parcel is waiting for space on a flight: it is on its way ("In transit"). `The shipment has arrived at the warehouse and is waiting for inspection and acceptance. Please wait patiently.` comes when the courier delivers to a warehouse that inspects parcels before it signs for them: Peek shows "Out for delivery" until the delivery line.
 
 SF's tracker shows every time on China's clock (UTC+8), even for scans in your country: an evening scan in London can carry the next morning's date.
 
@@ -62,7 +64,7 @@ SF's terms for shipments from mainland China abroad say:
 
 Duties and taxes depend on the country you live in: see [the customs guide](guide:customs). In Ireland, as everywhere in the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to parcels worth up to €150 bought from outside the EU. Since 1 November 2026, a €2 EU handling fee per item applies too.
 
-If you refuse the parcel or won't pay the duties, SF's terms let it send the parcel back to the sender, at the sender's cost. If customs holds the parcel and the sender doesn't sort it out within 30 calendar days of SF's written notice, the parcel counts as abandoned and SF may destroy or sell it.
+If you refuse the parcel or won't pay the duties, SF's terms let it send the parcel back to the sender, at the sender's cost. If customs holds the parcel and the sender doesn't sort it out within 30 calendar days of SF's written notice, the parcel counts as abandoned and SF may deal with it as it sees fit, including destroying it.
 
 ## SF parcel not arriving, lost or returned
 
@@ -78,13 +80,13 @@ If you refuse the parcel or won't pay the duties, SF's terms let it send the par
 
 ## SF Express contact number and customer service
 
-As read on 23 October 2026, SF International lists these lines, with hours in local time:
+As read on 10 November 2026, SF International lists these lines, with hours in local time:
 
 - **United States**: 1 855 901 1133, Monday to Friday 06:00 to 15:00 Pacific time.
 - **Canada**: 1 289 203 2630, Monday to Friday 09:00 to 17:30 Eastern time.
 - **Australia**: 1300 148 168, Monday to Friday 09:00 to 17:00.
 - **UK**: SF lists no phone line; its UK site gives the email uk_csd@sf-express.com. There's no Irish line either.
-- **Europe**: SF International's Europe site, as read on 2 November 2026, gives a WhatsApp line, +31 6 43249528, Monday to Friday 9:00 to 17:00 (it names no time zone), closed at weekends and on public holidays.
+- **Europe**: SF International's Europe site, as read on 10 November 2026, gives a WhatsApp line, +31 6 43249528, Monday to Friday 9:00 to 17:00 (it names no time zone), closed at weekends and on public holidays.
 - **Mainland China**: 95338, or +86 755 95338 from abroad, every day 08:00 to 21:00.
 - **Hong Kong**: 273 00 273, or +852 2730 0273, Monday to Friday 08:00 to 20:30, weekends and public holidays 08:00 to 20:00.
 - **Taiwan**: 412 8830 (dial 02 first from a mobile), Monday to Friday 08:00 to 20:00, Saturday 08:00 to 17:30.
@@ -95,7 +97,7 @@ Have the waybill number ready. For the order itself, ask the seller.
 
 [Peek](/) names SF Express at once from an `SF` number whose check digit fits. A 12-digit number fits many carriers. Paste it all the same: Peek follows more than 3,500 carriers. Peek can't ask SF whether it knows a number, so if SF Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. An sf-express.com `waybill-detail/` link, the Taiwan site's `#search/bill-number/` link or an SF International tracking link with the number after `No=` names SF Express too.
 
-Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
+Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's; on peektracker.com, a line under the history names that zone. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 
 It checks every 10 minutes, or every 5 once the parcel is out for delivery, and can notify you with "Every scan", "Important steps" or "Delivery only". The faster checks run from 6 a.m. to midnight China time on the day SF scans the parcel out for delivery (in the UK and Ireland, until 4 p.m., or 5 p.m. in summer), while SF's own tracker answers; through tracking services, Peek checks every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SF or the seller for you.
 
@@ -125,7 +127,7 @@ No. SF's terms for shipments from mainland China say it doesn't deliver to an ad
 - [SF Express Taiwan: Track & Trace](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) – number shapes, picture check, phone number for details, privacy protection, summary labels
 - [SF Express Taiwan: FAQs](https://htm.sf-express.com/tw/en/Customer_Zone/download_center/FAQ/) – Taiwan hotline, 02 from a mobile
 - [SF International: Company Profile](https://www.sf-international.com/cn/en/about/intro/detail/about) – cross-border arm, its customers
-- [SF International: Tracking](https://www.sf-international.com/us/en/support/querySupport/waybill) – mainland China waybills tracked on the SF Express site
+- [SF International: Tracking](https://www.sf-international.com/us/en/support/querySupport/waybill) – mainland China waybills tracked on the SF Express site, after logging in
 - [SF International: Contact Us](https://www.sf-international.com/us/en/about/contact) – hotlines and hours by country, in local time
 - [SF International UK: Global Shipping Services](https://www.sf-international.com/gb/en) – UK email, no phone line
 - [SF International Europe: Global Shipping Services](https://www.sf-international.com/eu/en) – Europe WhatsApp line and hours
@@ -137,5 +139,5 @@ No. SF's terms for shipments from mainland China say it doesn't deliver to an ad
 - [SF International: Address Correction Service](https://www.sf-international.com/cn/en/product/addrchange?isProduct=increment) – products, who can ask, destinations, RMB 70
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 handling fee since 1 November 2026
 - [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – per item type
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, China clock
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings (customs, flight queue, warehouse inspection), China clock
 :::

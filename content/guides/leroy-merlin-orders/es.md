@@ -4,7 +4,7 @@ description: Quién entrega un pedido de leroymerlin.es, dónde ver su estado, c
 slug: seguimiento-pedido-leroy-merlin
 picture: Un bote de pintura y un rodillo sobre una pila de tablones de madera junto a una furgoneta de reparto, y Pip de pie sobre los tablones.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Leroy Merlin vende online en España en leroymerlin.es, en su app y por teléfono. Lo recoges gratis en tienda, o te lo llevan a un punto de recogida o a casa; los voluminosos llegan a pie de calle o de vehículo. Sus páginas no nombran a las agencias de transporte. El estado de cada pedido está en «Pedidos y devoluciones» de tu área personal. Si algo llega dañado o falta, comunícalo en los 7 días naturales siguientes a recibirlo.
@@ -125,7 +125,9 @@ Sí, si tienes el número de seguimiento del transportista, por ejemplo desde «
 
 Muchos números tienen la misma forma que los de otros transportistas. Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el transportista correcto. Si el pedido llega en varios paquetes, añade cada número.
 
-Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con Leroy Merlin o con el vendedor.
+Cuando el paquete está en reparto, Peek consulta el seguimiento hasta una vez cada 2 minutos con los transportistas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si el transportista da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento del transportista). A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunos transportistas fijan un intervalo más largo.
+
+Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo, al ritmo del que reparte el paquete. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con Leroy Merlin o con el vendedor.
 
 :::sources
 - [ADEO: Home](https://www.adeo.com/en/) – Leroy Merlin, marca de ADEO

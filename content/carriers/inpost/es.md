@@ -3,10 +3,10 @@ title: InPost seguimiento: estados, PIN, Locker y Punto Pack
 description: Sigue tu paquete InPost en España: cómo es el número, qué significa cada estado, cuántos días espera en el Locker o Punto Pack y cómo reclamar.
 slug: inpost-seguimiento
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
-InPost, nacida en Polonia, llegó a España en 2021 al comprar Mondial Relay. Entrega en taquillas (Locker), en tiendas de recogida (Punto Pack) y, si la tienda lo ofrece, en casa. Para seguir tu paquete, escribe el número en [el seguimiento de inpost.es](https://www.inpost.es/seguimiento-del-envio/) o pégalo en la casilla de arriba. El número te lo da la tienda o quien te lo envía; el PIN de 6 dígitos de InPost sirve para recogerlo, no para seguirlo.
+InPost, nacida en Polonia, llegó a España en 2021 al comprar Mondial Relay. Entrega en taquillas (Locker) y tiendas de recogida (Punto Pack), más de 13 000 entre España y Portugal, y, si la tienda lo ofrece, en casa. Para seguir tu paquete, escribe el número en [el seguimiento de inpost.es](https://www.inpost.es/seguimiento-del-envio) o pégalo en la casilla de arriba. El número te lo da la tienda o quien te lo envía; el PIN de 6 dígitos de InPost sirve para recogerlo, no para seguirlo.
 
 ## Número de seguimiento de InPost: cómo es y dónde encontrarlo
 
@@ -45,7 +45,7 @@ Los artículos de InPost nombran también `Último aviso` («queda poco para rec
 
 **El aviso.** InPost te manda «un email y/o SMS con tu código PIN de 6 dígitos y la dirección exacta del punto de recogida», que también ves en su app. ¿No encuentras el PIN? Mira en spam y en los SMS; mientras el paquete siga en tránsito, el código puede no funcionar.
 
-**En un Locker.** La mayoría están en la calle y abren las 24 horas. Escribe el PIN en la pantalla o escanea el QR, sin documentos; con la app puedes «Abrir casillero» a menos de 70 metros. Más en [taquillas de paquetes](guide:parcel-lockers).
+**En un Locker.** La mayoría están en la calle y abren las 24 horas. Escribe el PIN en la pantalla o escanea el QR, sin documentos; con la app puedes «Abrir casillero» a menos de 70 metros. Si no se abre, escribe el PIN completo y sin espacios, comprueba que estás en el Locker correcto y que no ha pasado el plazo, y mira si te ha llegado otro aviso con otro código o punto; si sigue sin abrir, contacta con atención al cliente con el número de seguimiento. Más en [taquillas de paquetes](guide:parcel-lockers).
 
 **En un Punto Pack.** Es una tienda de barrio con su propio horario. Das el PIN o el QR y, «en la mayoría de los casos», enseñas el DNI o NIE y firmas la entrega. Si el embalaje está dañado, rechaza el paquete antes de dar el PIN.
 
@@ -65,7 +65,7 @@ Pide la devolución a la tienda, lleva el paquete a un Punto Pack o Locker y sig
 
 ## Paquete InPost parado, perdido, dañado o entregado sin recibirlo
 
-- **Parado:** mira la fecha del último movimiento y si ha habido fin de semana o festivo. Si sigue sin moverse, usa el formulario: InPost trata estas incidencias «en un plazo máximo de 15 días». Mira [el seguimiento no se actualiza](guide:tracking-not-updating).
+- **Parado:** mira la fecha del último movimiento y si ha habido fin de semana o festivo; según InPost, «Estacionado» puede ser parte normal del proceso. Si sigue sin moverse, usa el formulario con el número, el último estado y la fecha del último movimiento a mano: InPost trata estas incidencias «en un plazo máximo de 15 días». Mira [el seguimiento no se actualiza](guide:tracking-not-updating).
 - **Retrasado:** si tarda más de 5 días desde el aviso de envío, puedes reclamar por demora en los 21 días siguientes a que esté disponible o entregado.
 - **Perdido:** a los 30 días del aviso de envío sin recibirlo, puedes reclamarlo como pérdida total. InPost indemniza al remitente según el seguro contratado. Mira [paquete perdido](guide:lost-parcel).
 - **Dañado:** avisa a InPost de un daño visible en 24 horas y de uno oculto o un artículo equivocado en 7 días naturales, con fotos. La misma página te dice también que contactes con la marca en 1 día (daño visible) o 7 (oculto): habla con las dos el primer día. Mira [paquete dañado](guide:damaged-parcel).
@@ -91,7 +91,7 @@ Canarias, Ceuta y Melilla quedan fuera del IVA de la UE, así que lo que llega d
 
 ## InPost teléfono y atención al cliente
 
-Según [Atención al Cliente de InPost](https://www.inpost.es/contacta-con-nosotros), consultada el 26 de octubre de 2026:
+Según [Atención al Cliente de InPost](https://www.inpost.es/contacta-con-nosotros), consultada el 10 de noviembre de 2026:
 
 - **Asistente virtual:** 24/7, con el botón «Hablar ahora».
 - **Formulario de contacto**, en la misma página, para incidencias.
@@ -99,7 +99,7 @@ Según [Atención al Cliente de InPost](https://www.inpost.es/contacta-con-nosot
 - **Intérprete de lengua de signos:** de lunes a viernes, de 8:00 a 22:00.
 - **WhatsApp:** InPost dice que su canal «no está operativo».
 
-> InPost nunca te pedirá pagar un servicio o la aduana por SMS, hacer una transferencia para liberar un paquete, llamar a un 807 o 906 ni darle contraseñas o datos de tarjeta, y avisa de webs falsas como inpost-es.com. Reenvía lo sospechoso a fraude@inpost.es; si diste tus datos, llama a tu banco y denúncialo ante la Policía Nacional o el INCIBE (017), como aconseja InPost. Mira [SMS falsos de paquetería](guide:delivery-scam-texts).
+> InPost nunca te pedirá pagar un servicio o la aduana por SMS, hacer una transferencia para liberar un paquete, llamar a un 807 o 906 ni darle contraseñas o datos de tarjeta, y avisa de webs falsas como inpost-es.com; sus correos solo llegan desde @inpost.es o @inpost-spain.com. Reenvía lo sospechoso a fraude@inpost.es; si diste tus datos, llama a tu banco y denúncialo ante la Policía Nacional o el INCIBE (017), como aconseja InPost. Mira [SMS falsos de paquetería](guide:delivery-scam-texts).
 
 ## Seguir un paquete InPost con Peek
 
@@ -126,19 +126,19 @@ A Lockers y Punto Pack, no: InPost reparte de lunes a viernes, sin festivos. Per
 
 ### ¿Cuánto tarda un envío de InPost?
 
-Dentro de España, una media de 3 días hábiles desde que se deposita en un Punto Pack o Locker, según InPost. Los fines de semana, los festivos y el Black Friday pueden alargarlo.
+Dentro de España, una media de 3 días hábiles desde que se deposita en un Punto Pack o Locker, según InPost; hacia otros países europeos, entre 3 y 6 días laborables de media, según el destino. Los fines de semana, los festivos y el Black Friday pueden alargarlo.
 
 :::sources
-- [InPost: Seguimiento de Envíos](https://www.inpost.es/seguimiento-del-envio/) – un campo, 8 caracteres, remitente
-- [InPost: Recoger un Paquete](https://www.inpost.es/recibe-con-nosotros/como-recoger) – PIN, QR, DNI o NIE, 5 días
+- [InPost: Seguimiento de Envíos](https://www.inpost.es/seguimiento-del-envio) – un campo, 8 caracteres, remitente
+- [InPost: Recoger un Paquete](https://www.inpost.es/recibe-con-nosotros/como-recoger) – PIN, QR, DNI o NIE, 5 días, más de 13 000 puntos, PIN que no abre (consultada el 10 de noviembre de 2026)
 - [InPost: Atención al Cliente](https://www.inpost.es/contacta-con-nosotros) – contacto, otra persona, cambios, reparto, reclamaciones, Canarias
-- [InPost: Cómo enviar, seguir y entender el estado de tu envío](https://www.inpost.es/blog/como-enviar-seguir-y-entender-el-estado-de-tu-envio-inpost) – cifras, código postal, estados
-- [InPost: No tengo el código o PIN de recogida](https://www.inpost.es/blog/no-tengo-el-codigo-o-pin-de-recogida-inpost-donde-verlo-y-que-hacer) – dónde está el PIN
-- [InPost: Cuánto tarda un envío InPost](https://www.inpost.es/blog/cuanto-tarda-un-envio-inpost-y-que-dias-se-reparten-paquetes) – 3 días hábiles, estados
+- [InPost: Cómo enviar, seguir y entender el estado de tu envío](https://www.inpost.es/blog/como-enviar-seguir-y-entender-el-estado-de-tu-envio-inpost) – cifras, código postal, estados, «Estacionado», qué tener a mano (consultada el 10 de noviembre de 2026)
+- [InPost: No tengo el código o PIN de recogida](https://www.inpost.es/blog/no-tengo-el-codigo-o-pin-de-recogida-inpost-donde-verlo-y-que-hacer) – dónde está el PIN, si no abre el Locker (consultada el 10 de noviembre de 2026)
+- [InPost: Cuánto tarda un envío InPost](https://www.inpost.es/blog/cuanto-tarda-un-envio-inpost-y-que-dias-se-reparten-paquetes) – 3 días hábiles, de 3 a 6 hacia Europa, estados (consultada el 10 de noviembre de 2026)
 - [InPost: Mi envío InPost en otro punto](https://www.inpost.es/blog/mi-envio-inpost-en-otro-punto-reubicacion-punto-cerrado-o-error) – reubicación, bloques
 - [InPost: Cambiar la entrega, devolver o resolver un problema](https://www.inpost.es/blog/cambiar-entrega-devolver-resolver-problema-paquetes-inpost) – devoluciones, la tienda
 - [InPost: Condiciones generales](https://www.inpost.es/realiza-un-envio/condiciones-generales/) – quinto día, otro punto, 25 €, arbitraje
-- [InPost: Fraude Online y Pago Seguro](https://www.inpost.es/envia-con-nosotros/como-enviar/pago-seguro/informacion-sobre-fraude/) – mensajes falsos
+- [InPost: Fraude Online y Pago Seguro](https://www.inpost.es/envia-con-nosotros/como-enviar/pago-seguro/informacion-sobre-fraude) – mensajes falsos, correos de @inpost.es o @inpost-spain.com (consultada el 10 de noviembre de 2026)
 - [InPost: App de InPost](https://www.inpost.es/consigue-la-app) – Abrir casillero
 - [InPost: Quiénes somos](https://www.inpost.es/quienes-somos) – Mondial Relay, Sending
 - [InPost: Soluciones de Envío para eCommerce](https://www.inpost.es/eres-empresa/envios-para-tu-negocio) – entrega a domicilio

@@ -4,7 +4,7 @@ description: Where to track an H&M order in the UK and US, who delivers it, what
 slug: hm-order-tracking
 picture: A coat on a hanger on a clothes rail, a stack of folded jumpers and a delivery van, and Pip standing on the jumpers.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 You track an H&M order through the link in the shipping confirmation email, or under Orders when you sign in to your H&M account. In the UK, Evri delivers H&M parcels, or InPost if you choose one of its lockers or shops; in the US, it's USPS, DHL, DoorDash, GLS or UPS, and you can't pick which. If the tracking says delivered but the parcel isn't there, ask your household and neighbours, then contact H&M.
@@ -139,7 +139,9 @@ Yes, with the carrier's tracking number: paste it into [Peek](/). Here's what nu
 
 Peek recognises these by their shape alone, except Purolator's, which other carriers' numbers share: Peek asks Purolator and shows it once Purolator knows the number. For Evri's 16-character numbers starting with H or T, Peek asks Evri and shows it once Evri knows the number. InPost and DHL numbers can share their shape with other carriers' numbers: Peek asks the likely ones the same way. If several carriers know a number, press "Choose"; if Peek shows the wrong one, press "Change" and pick the right carrier. For a GLS or DoorDash delivery in the US, or a Canadian order (H&M Canada doesn't name its carrier), paste the number all the same: Peek follows more than 3,500 carriers. If the order comes in several parcels, add each number.
 
-If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns go through H&M.
+Once the parcel is out for delivery, Peek checks up to every 2 minutes with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers). USPS sets a longer interval, every 30 minutes, and through tracking services such as 17TRACK Peek checks every 15 minutes.
+
+If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier, at the pace of the carrier delivering the parcel. Peek shows what the carrier publishes. Claims, refunds and returns go through H&M.
 
 :::sources
 - [H&M UK: Shipping and delivery](https://www2.hm.com/en_gb/customer-service/shippinganddelivery.html) – Evri, InPost, options, times, prices, members, store collection, large parcels, uncollected fee, Jersey and Guernsey VAT, tracking, chatbot, Evri app, cancelling, delivered but missing, missing and wrong items, other brands
@@ -161,5 +163,5 @@ If a parcel changes carrier on the way and the first carrier names the one takin
 - [H&M Australia: Shipping and delivery](https://www2.hm.com/en_au/customer-service/shippinganddelivery.html) – Australia Post, options, prices, members, lockers, shipping email
 - [H&M Australia: Returns](https://www2.hm.com/en_au/customer-service/returns.html) – Australia Post label, $10.95 for non-members, no store returns
 - [H&M Australia: Contact us](https://www2.hm.com/en_au/customer-service/contact.html) – phone
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – carriers Peek knows and their number shapes
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – carriers Peek knows and their number shapes, USPS's 30-minute interval
 :::

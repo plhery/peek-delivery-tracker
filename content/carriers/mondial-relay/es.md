@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-06
 ---
 
-Mondial Relay es una empresa francesa de paquetería del grupo InPost que entrega en puntos de recogida, taquillas y a domicilio; en España, InPost adquirió Mondial Relay en 2021 y mondialrelay.es lleva ahora a inpost.es. Para seguir tu paquete en España, escribe el número en [la página de seguimiento de InPost](https://www.inpost.es/seguimiento-del-envio/) o pégalo en la casilla de arriba.
+Mondial Relay es una empresa francesa de paquetería del grupo InPost que entrega en puntos de recogida, taquillas y a domicilio; en España, InPost adquirió Mondial Relay en 2021 y mondialrelay.es lleva ahora a inpost.es. Para seguir tu paquete en España, escribe el número en [la página de seguimiento de InPost](https://www.inpost.es/seguimiento-del-envio) o pégalo en la casilla de arriba.
 
 ## Número de seguimiento de Mondial Relay: dónde encontrarlo
 
@@ -104,7 +104,7 @@ En España, no en Punto Pack ni Lockers: InPost reparte de lunes a viernes, sin 
 Es el 900 900 137 de InPost, de lunes a viernes de 8:30 a 20:00 y los sábados de 9:00 a 13:00. Desde fuera de España, InPost da el +34 938 16 62 34.
 
 :::sources
-- [InPost: Seguimiento de Envíos](https://www.inpost.es/seguimiento-del-envio/) – solo el número, 8 caracteres, pedidos en la app, el remitente
+- [InPost: Seguimiento de Envíos](https://www.inpost.es/seguimiento-del-envio) – solo el número, 8 caracteres, pedidos en la app, el remitente
 - [InPost: Recoger un Paquete](https://www.inpost.es/recibe-con-nosotros/como-recoger) – PIN, QR, DNI o NIE, 5 días naturales, vuelta al remitente
 - [InPost: Atención al Cliente](https://www.inpost.es/contacta-con-nosotros) – teléfonos, plazos, reparto, reclamaciones, punto fuera de servicio, devoluciones
 - [InPost: Quiénes somos](https://www.inpost.es/quienes-somos) – compra de Mondial Relay, red, webs de Mondial Relay para Francia y Bélgica

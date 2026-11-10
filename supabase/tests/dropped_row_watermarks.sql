@@ -87,12 +87,38 @@ begin
   if pg_temp.mark(parcel.id) is distinct from '2026-11-02T00:09:24.000Z' then
     raise exception 'a moved row kept the watermark: %', pg_temp.mark(parcel.id);
   end if;
-  -- Moved later, it leaves the newest row before it, as the next answer moves the watermark on.
+  -- Moved later, as a clock fix moves the newest scan, the watermark follows it: no answer may
+  -- move it on, as when another provider serves the parcel.
   parcel := pg_temp.parcel('EXAMPLE0000000114', '2026-11-02T08:09:24.000Z');
   update public.tracking_events set occurred_at = '2026-11-02T16:09:24Z'
   where package_id = parcel.id and provider_event_id = 'kun-express:stray';
+  if pg_temp.mark(parcel.id) is distinct from '2026-11-02T16:09:24.000Z' then
+    raise exception 'a row moved later left the watermark behind: %', pg_temp.mark(parcel.id);
+  end if;
+  -- Into the future, it leaves the newest row before it.
+  parcel := pg_temp.parcel('EXAMPLE0000000115', '2026-11-02T08:09:24.000Z');
+  update public.tracking_events set occurred_at = now() + interval '1 day'
+  where package_id = parcel.id and provider_event_id = 'kun-express:stray';
   if pg_temp.mark(parcel.id) is distinct from '2026-10-20T15:15:00.000Z' then
-    raise exception 'a row moved later kept the watermark: %', pg_temp.mark(parcel.id);
+    raise exception 'a row moved into the future took the watermark: %', pg_temp.mark(parcel.id);
+  end if;
+  -- Another row moved later leaves the watermark where it is.
+  parcel := pg_temp.parcel('EXAMPLE0000000116', '2026-11-02T08:09:24.000Z');
+  update public.tracking_events set occurred_at = '2026-10-21T15:15:00Z'
+  where package_id = parcel.id and provider_event_id = 'kun-express:delivered';
+  if pg_temp.mark(parcel.id) is distinct from '2026-11-02T08:09:24.000Z' then
+    raise exception 'another row moved the watermark: %', pg_temp.mark(parcel.id);
+  end if;
+  -- A sync's answer moving the row later, the sync keeping its own watermark, as before.
+  parcel := pg_temp.parcel('EXAMPLE0000000117', '2026-11-02T08:09:24.000Z');
+  if not public.apply_tracking_sync(parcel.id, parcel.tracking_generation,
+      jsonb_build_object('sync_status', 'ok', 'carrier_data',
+        jsonb_set(parcel.carrier_data, '{routing,last_event_at}', '"2026-11-02T18:09:24.000Z"')),
+      '[{"provider_event_id":"kun-express:stray","stage":"in_transit","description":"Departed the hub","occurred_at":"2026-11-02T16:09:24Z"}]') then
+    raise exception 'the sync was not saved';
+  end if;
+  if pg_temp.mark(parcel.id) is distinct from '2026-11-02T18:09:24.000Z' then
+    raise exception 'the sync''s own watermark moved: %', pg_temp.mark(parcel.id);
   end if;
   -- A stage the replay steps back keeps the row's instant.
   parcel := pg_temp.parcel('EXAMPLE0000000107', '2026-11-02T08:09:24.000Z');

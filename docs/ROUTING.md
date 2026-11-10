@@ -928,6 +928,10 @@ parcel's rows lack, matched as the sync matches copies, those dated by their day
 (`new_scans`): none means the carrier only knows what the parcel shows. The app's "Tracking added"
 row is no scan, so a parcel added after its newest scan keeps that scan's time. Nor is a row stamped when it was
 observed, such as a UPU milestone: its observation time never holds the watermark ahead.
+When the scan row that holds the watermark is deleted or moved (a release's migration, the replay
+tool, a hand fix), the watermark comes back to the newest scan row before it, or goes with the
+parcel's last one; a row moved later, to a time already past, takes it along (database triggers on
+`tracking_events`).
 Over a parcel still pending, an answer that moved is not older for rows its provider wrote
 and no longer shows, such as a notice it dated at the lookup, when every row past its newest
 scan is one of those. A row from another source past it, a reused number's new label for

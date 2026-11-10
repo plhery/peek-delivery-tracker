@@ -380,4 +380,44 @@ begin
     from public.tracking_support_cases where tracking_number = 'OPENTEST1234'), 'Only a pending browser recognition holds a case';
 end;
 $$;
+-- A number typed again with a character more or less, within ten minutes, repeats the open case.
+insert into auth.users(id, email) values
+  ('a7100000-0000-4000-8000-000000000021', 'support-near-a@example.invalid'),
+  ('a7100000-0000-4000-8000-000000000022', 'support-near-b@example.invalid');
+insert into public.packages(id, user_id, tracking_number, carrier) values
+  ('a7100000-0000-4000-8000-000000000023', 'a7100000-0000-4000-8000-000000000021', 'NEARACCT12345', 'unknown'),
+  ('a7100000-0000-4000-8000-000000000024', 'a7100000-0000-4000-8000-000000000022', 'NEARACCT123045', 'unknown'),
+  ('a7100000-0000-4000-8000-000000000025', 'a7100000-0000-4000-8000-000000000021', 'NEARSAME12345', 'unknown'),
+  ('a7100000-0000-4000-8000-000000000026', 'a7100000-0000-4000-8000-000000000021', 'NEARSAME123405', 'unknown');
+do $$
+declare
+  unknown jsonb := '{"configured_carrier":"unknown","reasons":["unknown_shape"]}';
+  repeated uuid;
+begin
+  perform public.record_tracking_support_observation('NEARTEST12345', unknown, '{}', '2026-11-10T16:21:00Z', 'detection:near-1');
+  perform public.record_tracking_support_observation('NEARTEST123456', unknown, '{}', '2026-11-10T16:25:00Z', 'detection:near-2');
+  select duplicate_of into repeated from public.tracking_support_cases where tracking_number = 'NEARTEST123456';
+  assert repeated = (select id from public.tracking_support_cases where tracking_number = 'NEARTEST12345'),
+    'A character more, four minutes later, repeats the case';
+  perform public.record_tracking_support_observation('NEARTEST1245', unknown, '{}', '2026-11-10T16:27:00Z', 'detection:near-3');
+  assert (select duplicate_of = repeated from public.tracking_support_cases where tracking_number = 'NEARTEST1245'),
+    'A character less repeats the earliest case';
+  -- One length, a digit apart: a batch of labels.
+  perform public.record_tracking_support_observation('NEARBATCH1231', unknown, '{}', '2026-11-10T16:21:00Z', 'detection:batch-1');
+  perform public.record_tracking_support_observation('NEARBATCH1232', unknown, '{}', '2026-11-10T16:22:00Z', 'detection:batch-2');
+  assert (select duplicate_of is null from public.tracking_support_cases where tracking_number = 'NEARBATCH1232'), 'A digit apart is another parcel';
+  -- Over ten minutes later, or saved by two accounts, it is another case; one account's is the same.
+  perform public.record_tracking_support_observation('NEARLATE12345', unknown, '{}', '2026-11-10T16:21:00Z', 'detection:late-1');
+  perform public.record_tracking_support_observation('NEARLATE123456', unknown, '{}', '2026-11-10T16:32:00Z', 'detection:late-2');
+  assert (select duplicate_of is null from public.tracking_support_cases where tracking_number = 'NEARLATE123456'), 'Ten minutes bound a repeat';
+  perform public.record_tracking_support_observation('NEARACCT12345', unknown, '{}', '2026-11-10T16:21:00Z', 'detection:acct-1');
+  perform public.record_tracking_support_observation('NEARACCT123045', unknown, '{}', '2026-11-10T16:22:00Z', 'detection:acct-2');
+  assert (select duplicate_of is null from public.tracking_support_cases where tracking_number = 'NEARACCT123045'), 'Two accounts are two readers';
+  perform public.record_tracking_support_observation('NEARSAME12345', unknown, '{}', '2026-11-10T16:21:00Z', 'detection:same-1');
+  perform public.record_tracking_support_observation('NEARSAME123405', unknown, '{}', '2026-11-10T16:22:00Z', 'detection:same-2');
+  assert (select duplicate_of is not null from public.tracking_support_cases where tracking_number = 'NEARSAME123405'), 'One account is one reader';
+  assert not private.one_character_apart('ABCDEFGH1', 'ABCDEFGH1') and not private.one_character_apart('ABCDEFGH1', 'ABCDEFGH123');
+end;
+$$;
+
 rollback;

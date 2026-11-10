@@ -250,7 +250,11 @@ again: the server looks for one among the account's parcels, and the front door 
 iPhone without an account flag one their device follows (`prefixOfSaved`). When the
 account check fails, the case opens. The other way round, saving a number closes the open
 cases on its start that only detection saw within the hour before: a case has no owner,
-so the hour stands in for the same person. A failed backlog write does not change the
+so the hour stands in for the same person. A number typed again with a character more or
+less, its case opening within ten minutes of the first's, points at that case
+(`duplicate_of`), and the review counts the two once; ten minutes stand in for the same
+person again, unless accounts saved both numbers and no account saved both. Numbers of
+one length a digit apart are left apart, as a batch of labels numbers its parcels so. A failed backlog write does not change the
 detection answer. `carrier_detection_support` logs the number and
 the carriers asked, unanswered or offered as choices.
 
@@ -269,6 +273,7 @@ select id, tracking_number, reasons, detection_candidates, seen_count, fallback_
        last_outcome, last_provider, first_seen, last_seen, fix_status, fix_reference
 from public.tracking_support_cases
 where fix_status = 'open' and (held_until is null or held_until <= now()) and cardinality(reasons) > 0
+  and duplicate_of is null
 order by last_seen desc;
 ```
 

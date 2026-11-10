@@ -313,19 +313,21 @@ where e.created_at >= :since and e.created_at < :upto and e.stage = 'delivered'
 order by e.created_at desc;
 
 \echo '== Support cases: opened in the window, or held until then, and still open with a reason'
+\echo '   repeats: cases of the same number typed again with a character more or less, counted under the first'
 select configured_carrier as carrier, detection_carrier as detected, array_to_string(reasons, ',') as reasons,
        array_to_string(array_remove(array[
          case when reasons && array['unknown_shape', 'ambiguous_shape', 'generic_postal', 'carrier_mismatch',
            'recognition_unknown', 'recognition_choice'] then 'carriers' end,
          case when 'no_direct_adapter' = any(reasons) then 'adapters' end], null), '+') as lane,
        count(*) as cases,
+       sum((select count(*) from public.tracking_support_cases r where r.duplicate_of = c.id and r.fix_status = 'open')) as repeats,
        array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
-from public.tracking_support_cases
+from public.tracking_support_cases c
 -- A case held for a carrier recognition asks only through a browser waits until its hold ends.
 -- One whose parcel's latest check left no reason, its carrier having confirmed the number, needs
 -- no work: the next release's replay marks it fixed (reviewQueues.ts).
 where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
-  and cardinality(reasons) > 0
+  and cardinality(reasons) > 0 and duplicate_of is null
 group by 1, 2, 3, 4
 order by cases desc, carrier;
 

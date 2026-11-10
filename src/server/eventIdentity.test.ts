@@ -1754,6 +1754,20 @@ describe('rows only a universal provider wrote', () => {
     expect(placeWords({ location: 'Sydney, NSW, AU' })).toEqual(['sydney']);
   });
 
+  it('keeps the earlier row beside the next scan in its words on the check after, though the answer no longer shows it', () => {
+    // The answer lists the label and the newest "In Transit" only, at the same town: the first is not a stale copy of it.
+    const town = 'Example Town, TX, US';
+    const label = { ...named(row('unknown:label', '2026-11-04T08:00:30+00:00', 'Label created', 'registered')), location: town,
+      created_at: '2026-11-04T09:00:00Z' };
+    const first = { ...named(row('unknown:first', '2026-11-04T11:07:00+00:00', 'In Transit', 'in_transit')), location: town,
+      created_at: '2026-11-04T14:04:37Z' };
+    const next = { ...named(row('unknown:next', '2026-11-05T00:07:00+00:00', 'In Transit', 'in_transit')), location: town,
+      created_at: '2026-11-05T00:24:00Z' };
+    const answer = [{ ...scan('unknown:label', '2026-11-04T08:00:30Z', 'Label created', 'registered'), location: town },
+      { ...scan('unknown:next', '2026-11-05T00:07:00Z', 'In Transit', 'in_transit'), location: town }];
+    expect([...sharedScans(answer, [label, first, next]).absorbed]).toEqual([]);
+  });
+
   it('takes over a row its provider alone wrote across an offset, not within the minute', () => {
     // The fix changed the time the identity hashes, so the scan meets its old row under another identity.
     const unnamed = row('unknown:departed-late', '2026-01-04T02:30:10+00:00', 'Departed from sorting center');

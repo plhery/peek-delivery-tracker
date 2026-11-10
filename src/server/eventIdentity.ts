@@ -1410,6 +1410,8 @@ export function sharedScans(
   // A fix can change the time a scan's identity hashes too. A row its provider alone wrote,
   // at an instant the provider's answer no longer shows though another of its scans is older,
   // is the stale copy of a scan the answer shows a zone shift away, once another row holds it.
+  // A scan past when the row was first stored is a later one (`pastFirstStored`): the provider's
+  // next scan in the same words, which replaced the row's in an answer listing only the newest.
   const holders = new Map<string, string>();
   for (const event of events) {
     const id = identity(event);
@@ -1422,7 +1424,7 @@ export function sharedScans(
     if (sourceOf(id) !== UNIVERSAL || providerOf(row) === '' || claimed.has(id) || shown.has(instantOf(row))) continue;
     const answer = events.filter((event) => followsClock(row, event));
     const copy = answer.find((event) => holders.has(identity(event)) && zoneApart(instantOf(event), instantOf(row))
-      && sameWording(wordingOf(event), wordingOf(row)) && !placesApart(event, row));
+      && sameWording(wordingOf(event), wordingOf(row)) && !placesApart(event, row) && !pastFirstStored(event, row));
     if (copy && answer.some((event) => event !== copy && instantOf(event) < instantOf(row))) shared.absorbed.add(id);
   }
   // A provider's copy of a carrier's row stored before a fix read the provider's clock right goes,

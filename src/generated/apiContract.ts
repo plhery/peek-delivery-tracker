@@ -25721,7 +25721,9 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Sailpost",
     "aliases": [
       "SAILPOST",
-      "Sailpost SpA"
+      "Sailpost SpA",
+      "Citypost",
+      "Citypost S.p.A."
     ],
     "countries": [
       "IT"
@@ -51177,6 +51179,47 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.duopudaexpress.com/"
+  },
+  "crc-post": {
+    "displayName": "CRC Post",
+    "aliases": [
+      "CRCPOST",
+      "CRC Post S.r.l."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#2a3181",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.crcpost.it/"
+  },
+  "integraa": {
+    "displayName": "Integraa",
+    "aliases": [
+      "Integraa Posta",
+      "Integr@a",
+      "Integraa Holding"
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#efde48",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://integraa.net/gestione/tracking.php"
   }
 } as const;
 
@@ -52653,7 +52696,9 @@ export const CARRIER_IDS = [
   "time-matters",
   "vichare",
   "alphastline",
-  "dpdex"
+  "dpdex",
+  "crc-post",
+  "integraa"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

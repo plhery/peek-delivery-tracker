@@ -25720,7 +25720,9 @@
       "displayName": "Sailpost",
       "aliases": [
         "SAILPOST",
-        "Sailpost SpA"
+        "Sailpost SpA",
+        "Citypost",
+        "Citypost S.p.A."
       ],
       "countries": [
         "IT"
@@ -51176,6 +51178,47 @@
         }
       ],
       "trackingSearchUrl": "https://www.duopudaexpress.com/"
+    },
+    "crc-post": {
+      "displayName": "CRC Post",
+      "aliases": [
+        "CRCPOST",
+        "CRC Post S.r.l."
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#2a3181",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.crcpost.it/"
+    },
+    "integraa": {
+      "displayName": "Integraa",
+      "aliases": [
+        "Integraa Posta",
+        "Integr@a",
+        "Integraa Holding"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#efde48",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://integraa.net/gestione/tracking.php"
     }
   }
 }

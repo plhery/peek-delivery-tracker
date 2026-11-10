@@ -1841,6 +1841,9 @@
   "goodmaji": {
     "decal": "goodmaji"
   },
+  "gordom-logistika": {
+    "decal": "gordom-logistika"
+  },
   "grand-slam-express": {
     "decal": "grand-slam-express"
   },
@@ -2141,6 +2144,9 @@
   },
   "intime-bg": {
     "decal": "intime-bg"
+  },
+  "intime-hr": {
+    "decal": "intime-hr"
   },
   "intl-post": {},
   "ipostel": {
@@ -4453,6 +4459,9 @@
   },
   "we-world-express": {
     "decal": "we-world-express"
+  },
+  "webrinq": {
+    "decal": "webrinq"
   },
   "wedo": {
     "family": "allegro-one"

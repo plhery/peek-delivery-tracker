@@ -791,7 +791,10 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'jet-dp'
   | 'emole-express'
   | 'maraton'
-  | 'crosswin';
+  | 'crosswin'
+  | 'gordom-logistika'
+  | 'intime-hr'
+  | 'webrinq';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

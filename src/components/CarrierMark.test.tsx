@@ -803,6 +803,9 @@ describe('carrier mark', () => {
     'emole-express',
     'maraton',
     'crosswin',
+    'gordom-logistika',
+    'intime-hr',
+    'webrinq',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

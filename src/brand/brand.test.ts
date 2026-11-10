@@ -908,6 +908,9 @@ describe('carrier brand', () => {
       'emole-express',
       'maraton',
       'crosswin',
+      'gordom-logistika',
+      'intime-hr',
+      'webrinq',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -18,7 +18,7 @@ El motivo suele estar en el último escaneo. Además, el Reglamento postal oblig
 | Motivo | Lo que verás |
 | --- | --- |
 | Dirección incorrecta o incompleta | [Correos](carrier:correos-spain) lo deja «estacionado» si los datos del destinatario no bastan o la dirección es incorrecta o desconocida |
-| Nadie te conoce en esa dirección, o te has mudado | Correos `Destinatario desconocido`; el Reglamento postal habla de destinatario «desconocido» o «ausentado sin dejar señas» |
+| Nadie te conoce en esa dirección, o te has mudado | El Reglamento postal habla de destinatario «desconocido» o «ausentado sin dejar señas» |
 | No lo recogiste a tiempo | Correos `Finalizado plazo retirada`; [Correos Express](carrier:correos-express) `EL PERIODO DE RECOGIDA DEL ENVÍO EN EL PUNTO DE CONVENIENCIA SELECCIONADO HA FINALIZADO Y SE PROCEDERÁ A SU DEVOLUCIÓN A ORIGEN` |
 | Lo rehusaste | El Reglamento postal lo llama «rehusado» |
 | Aduanas sin pagar o papeles incompletos | Correos `En proceso de devolución` |
@@ -102,7 +102,7 @@ Vuelve, más o menos, por el mismo camino, y el seguimiento va hacia atrás:
 - shop | Vendedor | «Entregado» aquí es entregado al remitente.
 :::
 
-Eso confunde a mucha gente: Correos cierra una devolución con `Entregado al remitente`, y [CTT Express](carrier:ctt-express) con `Devuelto a remitente`. En Correos, la devolución puede ir además con un código nuevo que empieza con `Devolución admitida`. Si el seguimiento se para, pregunta a la tienda si la devolución tiene otro número, o mira [seguimiento que no se actualiza](guide:tracking-not-updating).
+Eso confunde a mucha gente: Correos cierra una devolución con `Entregado al remitente`, y [CTT Express](carrier:ctt-express) con `Devuelto a remitente`. Si el seguimiento se para, pregunta a la tienda si la devolución tiene otro número, o mira [seguimiento que no se actualiza](guide:tracking-not-updating).
 
 Con las notificaciones en «Pasos importantes», [Peek](/) te avisa de las devoluciones, así que te enteras de cuándo el paquete da la vuelta. Lo que no puede es pararla.
 
@@ -133,7 +133,7 @@ El Reglamento postal solo prevé devolverlo «cuando conste la dirección» del 
 - [Correos: Envíos estacionados](https://www.correos.es/es/es/atencion-al-cliente/recibir/envios-estacionados) – motivos, 5 días naturales, Mi Oficina, Gestión de estacionados, PIN, 915 197 197
 - [Correos: Paq Estándar](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paquete-estandar) – APE, 48 a 72 horas, devolución en el plazo de ida más 24 horas, Canarias, Ceuta y Melilla
 - [Correos: Aviso de llegada y SMS](https://www.correos.es/es/es/atencion-al-cliente/recibir/aviso-de-llegada) – 15 días, devolución al remitente al acabar el plazo
-- [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Destinatario desconocido, Finalizado plazo retirada, En proceso de devolución, Entregado al remitente, Devolución admitida; Finalizado plazo retirada, En proceso de devolución y Entregado al remitente, leídos por Peek como devolución (leído el 10 de noviembre de 2026)
+- [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Finalizado plazo retirada, En proceso de devolución, Entregado al remitente; Finalizado plazo retirada, En proceso de devolución y Entregado al remitente, leídos por Peek como devolución (leído el 10 de noviembre de 2026)
 - [Universal Parcel Scraper: estados de Correos Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-express/statuses.json) – fin del periodo de recogida y devolución a origen
 - [Universal Parcel Scraper: estados de CTT Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/ctt-express/statuses.json) – En devolución, Devuelto a remitente; En devolución leído como incidencia hasta la entrega al remitente (leído el 10 de noviembre de 2026)
 - [DHL: Ayuda con una devolución (en alemán)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – una devolución no se puede parar

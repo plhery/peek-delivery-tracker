@@ -2606,6 +2606,53 @@ describe('TrackingSyncService', () => {
     await expect(saved()).resolves.toEqual(['out_for_delivery', missed]);
   });
 
+  it('keeps that scan\'s stage check after check when no earlier scan is in the summary\'s stage', async () => {
+    // No scan out for delivery: a row dated at the check in the summary's stage would be the newest whenever the stage
+    // changes, and the parcel would flip between the two stages on the same answer (synthetic wording and times).
+    const missed = 'Incorrect address details: delivery not possible';
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'out_for_delivery', current_stage: 'out_for_delivery',
+      last_status_text: missed, last_update: '2026-11-09T08:23:00Z',
+      events: [
+        { time: '2026-11-09T08:23:00Z', description: missed },
+        { time: '2026-11-08T06:46:00Z', description: 'Accepted', stage: 'accepted' },
+      ] }) };
+    const client = fakeClient();
+    let clock = Date.parse('2026-11-09T09:00:00Z');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(clock));
+    let stage = 'in_transit';
+    const seen: string[] = [];
+    for (let check = 0; check < 4; check += 1) {
+      await service.syncPackage({ id: 'flip', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: stage });
+      stage = String((client.updatePackage.mock.calls.at(-1)![1] as JsonObject).current_stage ?? stage);
+      seen.push(stage);
+      clock += 3_600_000;
+    }
+    expect(seen).toEqual(['failed_attempt', 'failed_attempt', 'failed_attempt', 'failed_attempt']);
+  });
+
+  it('keeps an adapter\'s delivered or out-for-delivery summary over the scan it names in other words', async () => {
+    // After the scraper's resolveResult, a scan the adapter staged by the shared wording rules reads like one it left
+    // unstaged; its own delivered state (PostNL's `isDelivered`) or out-for-delivery state stands (synthetic wording).
+    const run = async (status: string, scan: { description: string; stage: string }, previous: string) => {
+      const client = fakeClient();
+      const adapter = { fetch: vi.fn().mockResolvedValue({ status, current_stage: status, current_stage_source: 'carrier_map',
+        last_status_text: scan.description, last_update: '2026-11-09T08:23:00Z',
+        events: [
+          { time: '2026-11-09T08:23:00Z', ...scan, stage_source: `wording:${scan.stage}` },
+          { time: '2026-11-08T06:46:00Z', description: 'Accepted', stage: 'accepted' },
+        ] }) };
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-09T09:00:00Z'));
+      await service.syncPackage({ id: 'worded', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: previous });
+      return (client.updatePackage.mock.calls.at(-1)![1] as JsonObject).current_stage ?? previous;
+    };
+    const pickup = { description: 'Parcel waiting at the pickup point', stage: 'ready_for_pickup' };
+    await expect(run('delivered', pickup, 'ready_for_pickup')).resolves.toBe('delivered');
+    await expect(run('delivered', pickup, 'delivered')).resolves.toBe('delivered');
+    const sorted = { description: 'Parcel sorted at the delivery depot', stage: 'in_transit' };
+    await expect(run('out_for_delivery', sorted, 'in_transit')).resolves.toBe('out_for_delivery');
+    await expect(run('out_for_delivery', sorted, 'out_for_delivery')).resolves.toBe('out_for_delivery');
+  });
+
   it('follows the carrier once no scan the parcel keeps shows the stage it was held at', async () => {
     // A scraper fix re-reads the scan that moved the parcel as a booked
     // collection (synthetic wording and times): no scan is in transit any more.

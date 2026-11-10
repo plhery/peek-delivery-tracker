@@ -844,6 +844,19 @@ export function isUnannouncedTrackingError(error: unknown): boolean {
   return false;
 }
 
+/**
+ * A summary in the words of a scan placed by its words that reads a delivery that did not happen or a problem, beside a
+ * summary short of the end: the summary's stage is then the adapter's fallback, not that scan's (DHL eCommerce Spain's
+ * shipment state, still out for delivery beside a later scan saying delivery was not possible). Only such a scan: after
+ * the scraper's `resolveResult`, a scan the adapter left in no stage and one it staged by the same wording rules read
+ * alike, and an adapter's delivered or out-for-delivery summary over a scan it worded otherwise is its own choice.
+ */
+function summaryNamesWordedSetback(summary: string, summaryStage: string | null, event: JsonObject | undefined): boolean {
+  return event !== undefined && summary !== '' && summaryStage !== null && !['delivered', 'returned'].includes(summaryStage)
+    && ['failed_attempt', 'exception'].includes(String(event.stage)) && String(event.description ?? '').trim() === summary
+    && isRecord(event.raw_data) && String(event.raw_data.stage_source ?? '').startsWith('wording');
+}
+
 export function buildEvents(
   parcel: JsonObject,
   result: CarrierResult,
@@ -947,6 +960,10 @@ export function buildEvents(
     && typeof result.last_update_local === 'string'
     && result.last_update_local > String(previousData.last_update_local ?? '');
   const currentAlreadyTimed = rows.some((row) => row.stage === current);
+  // The summary is that scan, whose stage the parcel takes (summaryNamesWordedSetback): a row dated at the check in the
+  // summary's stage would be newer and give the parcel the summary's stage at every stage change, back and forth.
+  const summary = String(result.last_status_text ?? '').trim();
+  const summaryIsWordedSetback = rows.some((row) => summaryNamesWordedSetback(summary, reportedCurrent, row));
   if (
     observedAt
     && !Number.isNaN(observedAt.getTime())
@@ -955,6 +972,7 @@ export function buildEvents(
     && current !== 'pending'
     && (current !== previousStage || newUpuMilestone)
     && !currentAlreadyTimed
+    && !summaryIsWordedSetback
   ) {
     const matchingEvent = scans.find((_, index) => stages[index] === current);
     const description = String(
@@ -2204,12 +2222,9 @@ export class TrackingSyncService {
         const summaryOfTie = progressEvent !== undefined && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at
           && event.stage === normalizedReportedStage);
         const summaryText = String(result!.last_status_text ?? '').trim();
-        // A summary naming the newest scan, which the adapter left unstaged and Peek places by its words:
-        // the summary's stage is then the adapter's fallback, not that scan's (DHL eCommerce Spain's
-        // shipment state, still out for delivery beside a later scan saying delivery was not possible).
-        const summaryOfWordedScan = progressEvent !== undefined && summaryText !== ''
-          && String(progressEvent.description ?? '').trim() === summaryText && isRecord(progressEvent.raw_data)
-          && String(progressEvent.raw_data.stage_source ?? '').startsWith('wording');
+        // A summary naming the newest scan, placed by its words as a delivery that did not happen or a problem.
+        const summaryOfWordedScan = progressEvent !== undefined
+          && summaryNamesWordedSetback(summaryText, normalizedReportedStage, progressEvent);
         // A provider's explicit non-pending summary can be newer than its last
         // timestamped milestone. Timed progress remains authoritative only
         // while the provider's summary is still pending.

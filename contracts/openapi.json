@@ -4910,7 +4910,7 @@
       ],
       "detectionRules": [
         {
-          "pattern": "^\\d{19}$",
+          "pattern": "^00\\d{17}$",
           "confidence": "low"
         },
         {
@@ -52586,6 +52586,115 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.riders.com.pl/monitoruj-przesylke/"
+    },
+    "crosswin": {
+      "displayName": "Crosswin",
+      "aliases": [
+        "Crosswin Courier & More",
+        "Romania Express"
+      ],
+      "countries": [
+        "PL",
+        "RO",
+        "HU",
+        "BG",
+        "CZ",
+        "SK",
+        "HR",
+        "SI",
+        "GR",
+        "TR"
+      ],
+      "color": "#6ca62f",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://crosswin.app/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "crosswin.app"
+          ],
+          "pathPattern": "^/tracking/[^/]+/?$",
+          "path": "^/tracking/([^/]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://crosswin.app/tracking"
+    },
+    "emole-express": {
+      "displayName": "Emole Express",
+      "aliases": [
+        "Emole"
+      ],
+      "countries": [
+        "PL",
+        "DE",
+        "ES",
+        "UA",
+        "GB"
+      ],
+      "color": "#b02525",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.emole-express.com/pl/tracking?number={trackingNumber}&autoSearch=true",
+      "linkRules": [
+        {
+          "domains": [
+            "emole-express.com",
+            "www.emole-express.com"
+          ],
+          "pathPattern": "^/(pl|en)/tracking/?$",
+          "params": [
+            "number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.emole-express.com/pl/tracking"
+    },
+    "jet-dp": {
+      "displayName": "JET DP",
+      "countries": [
+        "PL",
+        "UA"
+      ],
+      "color": "#3b5159",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://jet-dp.pl/pl/jetdp/tracking.html"
+    },
+    "maraton": {
+      "displayName": "Maraton",
+      "aliases": [
+        "Maraton Przesyłki Kurierskie"
+      ],
+      "countries": [
+        "PL"
+      ],
+      "color": "#006f3b",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://maraton.poznan.pl/tracking"
     }
   },
   "servers": [
@@ -57211,7 +57320,11 @@
           "pointpack",
           "quriers",
           "rgw-express",
-          "riders-express"
+          "riders-express",
+          "crosswin",
+          "emole-express",
+          "jet-dp",
+          "maraton"
         ]
       },
       "Stage": {

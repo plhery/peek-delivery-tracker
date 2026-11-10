@@ -86,11 +86,17 @@
   "acs-courier": {
     "decal": "acs-courier"
   },
+  "act-argos": {
+    "decal": "act-argos"
+  },
   "aeronet": {
     "decal": "aeronet"
   },
   "aeropost": {
     "decal": "aeropost"
+  },
+  "aetos-courier": {
+    "decal": "aetos-courier"
   },
   "aex-paraguay": {
     "decal": "aex-paraguay"
@@ -109,6 +115,9 @@
   },
   "aics": {
     "decal": "aics"
+  },
+  "aiolos-courier": {
+    "decal": "aiolos-courier"
   },
   "air-star-xpress": {
     "decal": "air-star-xpress"
@@ -246,6 +255,9 @@
   "anserx": {
     "decal": "anserx"
   },
+  "ant-courier": {
+    "decal": "ant-courier"
+  },
   "antaria": {
     "decal": "antaria"
   },
@@ -309,6 +321,9 @@
   "aruba-post": {
     "decal": "aruba-post"
   },
+  "asap-couriers": {
+    "decal": "asap-couriers"
+  },
   "ase-express": {
     "decal": "ase-express"
   },
@@ -323,6 +338,9 @@
   },
   "asyad-express": {
     "decal": "asyad-express"
+  },
+  "athinaiki": {
+    "decal": "athinaiki"
   },
   "atlantic-courier": {
     "decal": "atlantic-courier"
@@ -372,6 +390,9 @@
   },
   "basic-shipping": {
     "decal": "basic-shipping"
+  },
+  "bcs-courier": {
+    "decal": "bcs-courier"
   },
   "bee-fast": {
     "decal": "bee-fast"
@@ -429,6 +450,9 @@
   },
   "bigpost": {
     "decal": "bigpost"
+  },
+  "biz-courier": {
+    "decal": "biz-courier"
   },
   "bjs-home-delivery": {
     "decal": "bjs-home-delivery",
@@ -710,6 +734,9 @@
   "city-air-express": {
     "decal": "city-air-express"
   },
+  "city-courier-gr": {
+    "decal": "city-courier-gr"
+  },
   "city-express-rs": {
     "decal": "city-express-rs"
   },
@@ -727,6 +754,9 @@
   },
   "citysprint": {
     "decal": "citysprint"
+  },
+  "cityxpress": {
+    "decal": "cityxpress"
   },
   "cj-logistics": {
     "decal": "cj-logistics",
@@ -1097,6 +1127,9 @@
   "dimex": {
     "decal": "dimex"
   },
+  "direct-courier-gr": {
+    "decal": "direct-courier-gr"
+  },
   "direct-couriers": {
     "decal": "direct-couriers"
   },
@@ -1105,6 +1138,9 @@
   },
   "direx": {
     "decal": "direx"
+  },
+  "dk-express-gr": {
+    "decal": "dk-express-gr"
   },
   "dnipro-llc": {
     "decal": "dnipro-llc"
@@ -1838,6 +1874,9 @@
   "hapdong": {
     "decal": "hapdong"
   },
+  "happy-courier-gr": {
+    "decal": "happy-courier-gr"
+  },
   "happy-post": {
     "decal": "happy-post"
   },
@@ -1993,6 +2032,9 @@
   },
   "hzt": {
     "decal": "hzt"
+  },
+  "icc-courier-gr": {
+    "decal": "icc-courier-gr"
   },
   "icc-worldwide": {
     "decal": "icc-worldwide"
@@ -2265,6 +2307,9 @@
   },
   "jy-express": {
     "decal": "jy-express"
+  },
+  "kanga-services": {
+    "decal": "kanga-services"
   },
   "kargoist": {
     "decal": "kargoist"
@@ -2708,6 +2753,9 @@
   },
   "multientrega": {
     "decal": "multientrega"
+  },
+  "mvp-courier": {
+    "decal": "mvp-courier"
   },
   "myanmar-post": {
     "decal": "myanmar-post"
@@ -3224,6 +3272,9 @@
   "premier-deliveries-uk": {
     "decal": "premier-deliveries-uk"
   },
+  "prisma-courier": {
+    "decal": "prisma-courier"
+  },
   "pro-carrier": {
     "decal": "pro-carrier"
   },
@@ -3327,8 +3378,14 @@
   "rangel": {
     "decal": "rangel"
   },
+  "rapid-courier-gr": {
+    "decal": "rapid-courier-gr"
+  },
   "rayspeed": {
     "decal": "rayspeed"
+  },
+  "red-courier-gr": {
+    "decal": "red-courier-gr"
   },
   "red-express": {
     "decal": "red-express"
@@ -3640,6 +3697,9 @@
   "skyex-ae": {
     "decal": "skyex-ae"
   },
+  "skyex-gr": {
+    "decal": "skyex-gr"
+  },
   "skyking": {
     "decal": "skyking"
   },
@@ -3717,6 +3777,9 @@
   },
   "spfly": {
     "decal": "spfly"
+  },
+  "spourgitis": {
+    "decal": "spourgitis"
   },
   "spring-gds": {
     "decal": "postnl"
@@ -4373,6 +4436,9 @@
   "wepost": {
     "decal": "wepost"
   },
+  "west-postal": {
+    "decal": "west-postal"
+  },
   "western-bid": {
     "decal": "western-bid"
   },
@@ -4462,6 +4528,9 @@
   },
   "xls-futar": {
     "decal": "xls-futar"
+  },
+  "xp-courier": {
+    "decal": "xp-courier"
   },
   "xpect-same-day": {
     "decal": "xpect-same-day"

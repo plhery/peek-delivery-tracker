@@ -759,7 +759,30 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'corlan-post-express'
   | 'albatomi'
   | 'cautcurier'
-  | '24curier';
+  | '24curier'
+  | 'act-argos'
+  | 'aetos-courier'
+  | 'aiolos-courier'
+  | 'ant-courier'
+  | 'asap-couriers'
+  | 'bcs-courier'
+  | 'biz-courier'
+  | 'city-courier-gr'
+  | 'cityxpress'
+  | 'happy-courier-gr'
+  | 'icc-courier-gr'
+  | 'kanga-services'
+  | 'mvp-courier'
+  | 'prisma-courier'
+  | 'rapid-courier-gr'
+  | 'red-courier-gr'
+  | 'direct-courier-gr'
+  | 'west-postal'
+  | 'xp-courier'
+  | 'athinaiki'
+  | 'dk-express-gr'
+  | 'spourgitis'
+  | 'skyex-gr';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

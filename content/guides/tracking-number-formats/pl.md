@@ -34,7 +34,7 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 | Przewoźnik | Jak wygląda numer |
 | --- | --- |
 | InPost | zwykle 24 cyfry. W danych przewoźników, z których korzysta Peek, 24 cyfry zaczynające się od `20`, `52`, `62`–`66`, `80` albo `82` wskazują najpierw InPost |
-| Poczta Polska | kilka wariantów: `PX` i 10 cyfr (`PX1234567890`), 19 cyfr (`0015900773123456789`), 20 cyfr z `5900773` po trzech pierwszych albo format pocztowy z `PL` na końcu, zaczynający się np. od `RR`, `CP`, `VV` lub `EE`. W tej samej wyszukiwarce śledzisz też Pocztex |
+| Poczta Polska | kilka wariantów: `PX` i 10 cyfr (`PX1234567890`), 19 cyfr od `00` (`0015900773123456789`), 20 cyfr z `5900773` po trzech pierwszych albo format pocztowy z `PL` na końcu, zaczynający się np. od `RR`, `CP`, `VV` lub `EE`. W tej samej wyszukiwarce śledzisz też Pocztex |
 | [DPD](carrier:dpd-pl) | 14 znaków: w DPD Polska 13 cyfr i litera (`1234567890123A`) albo 14 cyfr zaczynających się od 13 (`13000000000000`). Wyszukiwarka DPD Polska przyjmuje też 9-znakowy kod nadania |
 | [DHL eCommerce Polska](carrier:dhl-ecommerce-pl) (paczki krajowe) | 11 cyfr, bez liter, według serwisu Mój DHL |
 | [DHL Express](carrier:dhl-express) | 10 cyfr, bez liter, według DHL Express w Holandii |
@@ -68,7 +68,7 @@ Nie ma jednej długości. Poniżej te, które przewoźnicy podają na własnych 
 | 12 znaków | Poczta Polska: `PX` i 10 cyfr |
 | 13 znaków | każda poczta w formacie pocztowym, np. `RR000000005CH`; ORLEN Paczka: 13 cyfr |
 | 14 znaków | DPD: w DPD Polska 13 cyfr i litera albo 14 cyfr od 13 |
-| 19 cyfr | Poczta Polska |
+| 19 cyfr | Poczta Polska, od `00` |
 | 20 cyfr | Poczta Polska, z `5900773` po trzech pierwszych cyfrach |
 | 24 cyfry | InPost, w danych przewoźników, z których korzysta Peek |
 | 14 do 20 znaków | Hermes w Niemczech, litery i cyfry |

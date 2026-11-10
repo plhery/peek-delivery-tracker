@@ -3,7 +3,7 @@ title: Slovenská pošta tracking: Slovak Post numbers and statuses
 description: Track a Slovenská pošta (Slovak Post) item: what the number looks like, what the English statuses mean, BalíkoBOX pickup, claims and contacts.
 slug: slovenska-posta-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Slovenská pošta (Slovak Post) is Slovakia's national post. Track an item on its English [Tracking of Items](https://www.posta.sk/en/tracking-of-items) page, in its app or by pasting the number in the box above. The number comes from the sender: the shop's shipping email or order page.
@@ -60,17 +60,17 @@ Slovak Post delivers at least once every working day. Items can go:
 
 ## Slovak Post parcel stuck, delayed or lost
 
-If nothing changes for days, Slovak Post says the item may still be in processing, waiting for customs or on its way to the destination country, and to contact customer service if it lasts. More in [tracking that isn't updating](guide:tracking-not-updating).
+If nothing changes for days, Slovak Post says the item may still be in processing, waiting for customs or on its way to the destination country, and to contact customer service if it lasts. After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update for four days" in your list and, on the parcel's page: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Slovenská pošta.", with a "Get help from Slovenská pošta" link to its contacts page. More in [tracking that isn't updating](guide:tracking-not-updating).
 
-**Customs.** For items from outside the EU, Slovak Post can act as your customs declarant. It tells you by app, email or notice; you send documents through tracking, the app or email, pay duty to the Slovak Financial Administration and a declaration fee on collection. The item is stored 18 days from the notice, extendable up to 90. See [parcels held at customs](guide:customs).
+**Customs.** For items from outside the EU, Slovak Post can act as your customs declarant. It tells you by app, email or notice; you send documents through tracking, the app or email, pay duty to the Slovak Financial Administration and a declaration fee on collection. The item is stored 18 days from the notice, extendable up to 90 by email to the clearance office. Since 1 July 2025 the power of attorney must include your birth number (rodné číslo), or Slovak Post can't represent you, and since 13 April 2026 its clearance offices no longer hand items over in person. Since 1 November 2026, the EU's €2 handling fee per kind of product is owed by whoever declares the goods; Slovak Post's customs page doesn't yet say how it passes it on. See [parcels held at customs](guide:customs).
 
 **Delivered but not received.** Check whether someone at home or at work took it, then contact Slovak Post. See [delivered but not received](guide:delivered-not-received).
 
-**Claims.** For international items, only the sender can claim, so an item from a foreign shop is a matter for the shop and its post. For domestic items the sender, the addressee or someone they authorise can claim, within 6 months of posting. Damage you couldn't see at delivery must be reported by the next working day after delivery. Claim in the app (some cases), by email with the signed form (not for damage) or at any branch; for damage, bring the item with its outer and inner packaging. Slovak Post answers within 30 days (domestic) or 60 (international).
+**Claims.** For international items, only the sender can claim, so an item from a foreign shop is a matter for the shop and its post. For domestic items the sender, the addressee or someone they authorise can claim. Both kinds of claim are due within 6 months of posting. Damage you couldn't see at delivery must be reported by the next working day after delivery. Claim in the app (some cases), by email with the signed form (not for damage) or at any branch; for damage, bring the item with its outer and inner packaging. For a damaged domestic item claimed in the app or with an online form, add photos of it as delivered. Slovak Post answers within 30 days (domestic) or 60 (international); if you disagree, appeal by email or at a branch, then to an alternative dispute resolution body.
 
 ## Slovenská pošta contact and customer service
 
-Slovak Post's channels, as listed on posta.sk in October 2026 (the contact pages are in Slovak only):
+Slovak Post's channels, as listed on posta.sk on 10 November 2026 (the contact pages are in Slovak only):
 
 - **From Slovakia:** Infolinka 0850 122 413, working days 8 a.m. to 5 p.m.
 - **From abroad:** +421 48 437 87 77, working days 8 a.m. to 4 p.m.
@@ -78,13 +78,13 @@ Slovak Post's channels, as listed on posta.sk in October 2026 (the contact pages
 - **Web form:** "Napíšte nám" on posta.sk.
 - **In person:** any post office.
 
-> Slovak Post warns about fake SMS and emails asking for postage, customs top-ups or missing details. It writes from slposta.sk addresses and never asks for delivery payments by email or SMS. Don't click or pay; check the item in its app.
+> Slovak Post warns about fake SMS and emails asking for postage, customs top-ups or missing details. It writes from slposta.sk addresses (though scammers can misuse those too), never asks for delivery payments by email or SMS and never sells undelivered parcels. Don't click or pay; check the item in its app.
 
 ## Tracking Slovenská pošta with Peek
 
 For a postal number ending `SK` with a valid check digit, [Peek](/) names Slovak Post from the number itself when the service code starts with C, E, L or R. With another first letter, such as a domestic parcel's B or D, it asks Slovak Post (and [Chronopost](carrier:chronopost)) and shows "Slovenská pošta has this parcel." when it knows the number. If it doesn't yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Slovak Post isn't asked: check the number. Another country's postal number isn't handed to Slovak Post; pick "Slovenská pošta" with "Change". Links from posta.sk/sledovanie-zasielok and tandt.posta.sk can be pasted too.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Slovak Post scans the item out for delivery, while Slovak Post's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map, with the post office, BalíkoBOX or PoštaPOINT in Slovakia and the country abroad, plus the weight, destination country, delivery time and the name of the place where the item waits (not its address or pickup deadline). Slovak Post gives no expected delivery day. Times in Slovakia are read on Bratislava time and shown in your device's time zone; a step abroad in a country with several time zones doesn't appear. Statuses keep Slovak Post's English wording, except `In transit` and `Out for delivery`, which Peek puts in its own words; `Picked up` still counts as delivered. An item going to a country whose national post is in Peek's list can be followed there.
+It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Slovak Post scans the item out for delivery, while Slovak Post's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map, with the post office, BalíkoBOX or PoštaPOINT in Slovakia and the country abroad, plus the weight, destination country, delivery time and the name of the place where the item waits (not its address or pickup deadline). Slovak Post gives no expected delivery day. Times in Slovakia are read on Bratislava time and shown in your device's time zone (on peektracker.com, the history ends with "Times are in your time zone:" and its name); a step abroad in a country with several time zones doesn't appear. Statuses keep Slovak Post's English wording (its Slovak one for a step it gives only in Slovak), except `In transit` and `Out for delivery`, which Peek puts in its own words; `Picked up` still counts as delivered. An item going to a country whose national post is in Peek's list can be followed there. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Questions about Slovenská pošta tracking
 
@@ -116,10 +116,10 @@ Slovak Post's terms give a domestic parcel D+2: delivery on the second working d
 - [Slovenská pošta: BalíkoBOX](https://www.posta.sk/balikobox) – PIN, card payment
 - [Slovenská pošta: Pobočky a BalíkoBOXy](https://www.posta.sk/pobocky-a-balikoboxy) – post offices, BalíkoBOX, PoštaPOINT
 - [Slovenská pošta: Mobilná aplikácia](https://www.posta.sk/mobilna-aplikacia) – items added to the app automatically
-- [Slovenská pošta: Preclenie zásielok](https://www.posta.sk/prijimanie/preclenie-zasielok) – customs declarant, 18 and 90 days
-- [Slovenská pošta: Reklamácie a sťažnosti](https://www.posta.sk/podpora/reklamacie) – who claims, deadlines, channels
+- [Slovenská pošta: Preclenie zásielok](https://www.posta.sk/prijimanie/preclenie-zasielok) – customs declarant, 18 and 90 days, birth number, no in-person pickup at clearance offices
+- [Slovenská pošta: Reklamácie a sťažnosti](https://www.posta.sk/podpora/reklamacie) – who claims, deadlines, channels, photos, appeals
 - [Slovenská pošta: Kontakty](https://www.posta.sk/podpora/kontakty) – phone numbers, hours, email
 - [Slovenská pošta: Napíšte nám](https://www.posta.sk/podpora/napiste-nam) – contact form
-- [Slovenská pošta: Varovania pred podvodmi](https://www.posta.sk/podpora/varovania-pred-podvodmi) – fake messages, number format
+- [Slovenská pošta: Varovania pred podvodmi](https://www.posta.sk/podpora/varovania-pred-podvodmi) – fake messages, number format, no sales of undelivered parcels
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

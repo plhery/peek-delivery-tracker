@@ -57,7 +57,7 @@ None is best for everyone: it depends on your carriers and what you'll trade for
 
 ## Free or paid: the main trackers compared
 
-Most start free, but with ads, a cap or no push notifications. Listed alphabetically, not ranked, from each one's own pages and US App Store listing on 7 October 2026. Peek, which publishes this guide, is listed like the others.
+Most start free, but with ads, a cap or no push notifications. Listed alphabetically, not ranked, from each one's own pages and US App Store listing on 10 November 2026. Peek, which publishes this guide, is listed like the others.
 
 | Tracker | Account | Ads, as declared | Free use | Paid (US) |
 | --- | --- | --- | --- | --- |
@@ -65,7 +65,7 @@ Most start free, but with ads, a cap or no push notifications. Listed alphabetic
 | AfterShip | Guest mode, up to 3 shipments | "Contains Advertising" | Free, with push notifications for "8 major" statuses | No in-app purchases listed |
 | Deliveries | Optional, for Junecloud sync | None declared | None: a subscription is needed "to start using the app" | $4.99 a year or $0.99 a month |
 | Parcel | No personal details required | "Contains Advertising" | 3 deliveries, no push notifications | $6.99 a year |
-| ParcelsApp (Packages on iPhone) | "No registration required" | "Contains Advertising" | With ads | Premium removes ads and limits: $4.49 or $0.99, period not shown |
+| ParcelsApp (Packages on iPhone) | "No registration required" | "Contains Advertising" | With ads | Premium removes ads and limits: $11.99 or $1.99, for a month or a year, without saying which is which |
 | [Peek](/) | Not to track; sign in to keep parcels together | None: it doesn't "serve advertising" | A daily lookup limit against bulk use | None: a "personal, non-commercial project" |
 
 Local App Store prices that day:
@@ -146,7 +146,7 @@ Yes, [usually by text, with a link](guide:delivery-scam-texts). The US Postal In
 - [ParcelsApp: Privacy policy](https://parcelsapp.com/en/privacy) – forwarded emails
 - [ParcelsApp: Why is my parcel not tracking?](https://parcelsapp.com/en/faq/why-is-my-parcel-not-tracking) – new numbers, no extra scans, fake messages
 - [Google Play: Parcels](https://play.google.com/store/apps/details?id=com.brightstripe.parcels) – postal websites, data deletion
-- [App Store: Packages](https://apps.apple.com/us/app/packages-track-your-parcels/id1229071393) – ads, Premium
+- [App Store: Packages](https://apps.apple.com/us/app/packages-track-your-parcels/id1229071393) – ads, Premium prices and periods
 - [Parcel: FAQ](https://parcelapp.net/help/faq/) – delay behind carriers
 - [Parcel: Real-time notifications](https://parcel.app/help/real-time-notifications.html) – paid carrier pushes
 - [App Store: Parcel](https://apps.apple.com/us/app/parcel-delivery-tracking/id375589283) – ads, free tier, price

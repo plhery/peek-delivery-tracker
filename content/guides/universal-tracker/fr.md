@@ -56,7 +56,7 @@ Aucune n'est la meilleure pour tout le monde : tout dépend de tes transporteurs
 
 ## Gratuit ou payant : les principaux services comparés
 
-La plupart sont gratuits au départ, mais avec des pubs, une limite ou sans notifications push. Par ordre alphabétique, sans classement, d'après les pages de chacun et leur fiche App Store française au 7 octobre 2026. Peek, qui publie ce guide, y figure comme les autres.
+La plupart sont gratuits au départ, mais avec des pubs, une limite ou sans notifications push. Par ordre alphabétique, sans classement, d'après les pages de chacun et leur fiche App Store française au 10 novembre 2026. Peek, qui publie ce guide, y figure comme les autres.
 
 | Service | Compte | Pubs déclarées | Usage gratuit | Payant (France, Belgique) |
 | --- | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ La plupart sont gratuits au départ, mais avec des pubs, une limite ou sans noti
 | AfterShip | Mode invité jusqu'à 3 envois | Oui | Gratuit, notifications push comprises | Aucun achat intégré |
 | Livraisons (Deliveries) | Facultatif, pour la synchro Junecloud | Non | Aucun : abonnement nécessaire pour commencer | 5,49 € par an ou 0,99 € par mois |
 | Parcel | Aucune donnée personnelle exigée | Oui | 3 colis à la fois, sans push | 6,99 € par an |
-| ParcelsApp (Packages sur iPhone) | Pas d'inscription | Oui | Avec pubs | Premium sans pubs ni limites : 4,99 € ou 0,99 €, durée non indiquée |
+| ParcelsApp (Packages sur iPhone) | Pas d'inscription | Oui | Avec pubs | Premium sans pubs ni limites : 12,99 € ou 1,99 €, pour un mois ou un an, sans préciser quel prix va avec quelle durée |
 | [Peek](/) | Pas pour suivre ; connecte-toi pour garder tes colis ensemble | Non : il ne diffuse pas de publicité | Recherches limitées par jour pour empêcher un usage massif | Rien : c'est un projet personnel, non commercial |
 
 Les prix de l'App Store ce jour-là :
@@ -163,7 +163,7 @@ Pour signaler un faux message en France, transfère le SMS au 33700. En Belgique
 - [ParcelsApp : Pourquoi mon colis n'est-il pas suivi ?](https://parcelsapp.com/fr/faq/why-is-my-parcel-not-tracking) – nouveau numéro, décalages, limites
 - [ParcelsApp : Privacy (en anglais)](https://parcelsapp.com/en/privacy) – cookies publicitaires, représentant UE
 - [Google Play : Parcels](https://play.google.com/store/apps/details?id=com.brightstripe.parcels&hl=fr) – sites postaux, suppression
-- [App Store : Packages](https://apps.apple.com/fr/app/id1229071393) – publicité, Premium
+- [App Store : Packages](https://apps.apple.com/fr/app/id1229071393) – publicité, prix et durées du Premium
 - [Parcel : FAQ (en anglais)](https://parcelapp.net/help/faq/) – retard
 - [Parcel : Real-time notifications (en anglais)](https://parcel.app/help/real-time-notifications.html) – mises à jour payées
 - [App Store : Parcel](https://apps.apple.com/fr/app/id375589283) – publicité, 3 colis, prix

@@ -100,7 +100,7 @@ Prezzi nella Francia continentale per i pacchi spediti da Cdiscount, in base al 
 | Standard, a domicilio | 4,99 € | 4,99 € sotto i 10 €, poi gratis |
 | Standard, punto di ritiro | 2,99 € sotto i 25 €, poi gratis | Gratis |
 | Express, a domicilio | 9,99 € | 9,99 € sotto i 10 €, 2,99 € da 10 a 25 €, poi gratis |
-| Express, punto di ritiro | 4,99 € sotto i 25 €, poi 3,99 € | 4,99 € sotto i 10 €, poi gratis |
+| Express, punto di ritiro | 4,99 € sotto i 25 €, poi 3,99 € (sempre 4,99 € nella pagina sulle modalità di consegna) | 4,99 € sotto i 10 €, poi gratis |
 | La sera stessa | 22,99 € | 22,99 € sotto i 10 €, poi 9,99 € |
 
 La soglia della consegna gratuita vale per pacco, e un ordine da più venditori fa più pacchi. Un venditore che spedisce da sé fissa i suoi prezzi: aggiungi l'articolo al carrello per vedere le sue opzioni.
@@ -167,7 +167,7 @@ Se il pacco di un venditore cambia corriere durante il viaggio e il primo corrie
 - [Cdiscount: Comment retourner un produit ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Comment%20retourner%20un%20produit%20%3F) – reso da «Mes commandes», 48 ore, articoli grandi, ordini fuori dalla Francia
 - [Cdiscount: Quels sont les différents modes de retour ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20diff%C3%A9rents%20modes%20de%20retour%20%3F) – etichetta prepagata, costo detratto, articoli grandi, marketplace
 - [Cdiscount: Quels sont les délais de remboursement ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20d%C3%A9lais%20de%20remboursement%20%3F) – da 5 a 7 giorni lavorativi
-- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – corrieri, tempi, giorni nei punti di ritiro, articoli grandi, venditori, prezzi per l'Italia, consegna gratuita solo in Belgio e Lussemburgo, ColisExpat, tasse e termine di recesso
+- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – corrieri, tempi, express al punto di ritiro a 4,99 €, giorni nei punti di ritiro, articoli grandi, venditori, prezzi per l'Italia, consegna gratuita solo in Belgio e Lussemburgo, ColisExpat, tasse e termine di recesso
 - [Cdiscount: Cdiscount à volonté](https://www.cdiscount.com/cdav) – prezzo, soglia per pacco, punti di ritiro
 - [Cdiscount: Conditions générales de vente](https://clients.cdiscount.com/Simple/Cgv.aspx) – paesi, modalità di consegna per paese, articoli grandi solo in Francia e Belgio, ritardo, pacco danneggiato, spese di reso, numero verde dall'Italia
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – spedizione del venditore o di Cdiscount, intervento di Cdiscount, mediatore FEVAD

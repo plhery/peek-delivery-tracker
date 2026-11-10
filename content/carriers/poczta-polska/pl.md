@@ -3,7 +3,7 @@ title: Poczta Polska śledzenie: numer, statusy, awizo i kontakt
 description: Śledzenie przesyłki Poczty Polskiej i Pocztex: jak wygląda numer, co znaczą statusy, ile czeka awizo, punkt i automat, reklamacje, cło i infolinia.
 slug: poczta-polska-sledzenie
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Poczta Polska to państwowy operator pocztowy, a Pocztex to jej usługa kurierska. Przesyłkę śledzisz w eMonitoringu Poczty Polskiej (ta sama wyszukiwarka jest na poczta-polska.pl i pocztex.pl) albo wklejając numer w pole powyżej. Numer jest na potwierdzeniu nadania, więc ma go sklep lub nadawca, a powtarzają go też SMS-y i e-maile z powiadomieniami Poczty Polskiej.
@@ -60,7 +60,7 @@ Paczka Pocztex w punkcie pokazuje „doręczono”, a nie masz jej w rękach? We
 
 ## Przesyłka nie dotarła, uszkodzona albo na cle
 
-Śledzenie Poczty Polskiej ma charakter informacyjny i nie może być podstawą roszczeń. Poczta Polska nie pisze, co robić, gdy status stoi w miejscu: zapytaj nadawcę i przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+Śledzenie Poczty Polskiej ma charakter informacyjny i nie może być podstawą roszczeń. Poczta Polska nie pisze, co robić, gdy status stoi w miejscu: zapytaj nadawcę i przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Gdy przesyłka jest zarejestrowana, przyjęta albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, Peek pokazuje na liście „Brak aktualizacji od czterech dni”, a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Poczta Polska.” z linkiem „Poproś przewoźnika Poczta Polska o pomoc” do strony kontaktowej Poczty Polskiej.
 
 **Kto składa reklamację.** Nadawca, a Ty, gdy przesyłkę Ci doręczono albo nadawca przekazał Ci roszczenie. Złożysz ją przez formularz online na poczta-polska.pl (eReklamacje), na piśmie lub ustnie w każdej placówce.
 
@@ -74,7 +74,7 @@ Paczka Pocztex w punkcie pokazuje „doręczono”, a nie masz jej w rękach? We
 
 Przesyłki zagraniczne: reklamacja w ciągu sześciu miesięcy od dnia po nadaniu. Za spóźnioną paczkę Pocztex Kurier przysługuje odszkodowanie do dwukrotności opłaty.
 
-**Cło.** Od 1 lipca 2026 przesyłki spoza UE warte do 150 EUR obciąża unijna opłata celna 3 EUR za każdy rodzaj towaru, pobierana przez Pocztę Polską; prezenty między osobami prywatnymi do 45 EUR są zwolnione. Doliczyć się może VAT (jeśli nie zapłaciłeś go przy zakupie) i opłata Poczty Polskiej za zgłoszenie celne: 20,00 zł, a 25,00 zł, gdy procedurę celną załatwiasz sam. Płacisz przy doręczeniu lub przed odbiorem, a przesyłkę możesz też odrzucić. Więcej w poradniku o [paczce zatrzymanej przez urząd celny](guide:customs).
+**Cło.** Od 1 lipca 2026 przesyłki spoza UE warte do 150 EUR obciąża unijna opłata celna 3 EUR za każdy rodzaj towaru, pobierana przez Pocztę Polską; prezenty między osobami prywatnymi do 45 EUR są zwolnione. Doliczyć się może VAT (jeśli nie zapłaciłeś go przy zakupie) i opłata Poczty Polskiej za zgłoszenie celne: 20,00 zł, a 25,00 zł, gdy procedurę celną załatwiasz sam. Od 1 listopada 2026 dochodzi unijna opłata manipulacyjna: 2 EUR za każdą pozycję towarową, bez względu na wartość przesyłki; według Poczty Polskiej ponosi ją, tak jak cło, VAT i opłatę za obsługę celną, adresat. Płacisz przy doręczeniu lub przed odbiorem, a przesyłkę możesz też odrzucić. Przy przesyłkach do 150 EUR Poczta Polska ma ustawowe pełnomocnictwo do zgłoszenia celnego; od 150 do 1000 EUR musisz go jej udzielić w urzędzie pocztowym lub filii (nie w agencji), a jeśli nie zrobiłeś tego wcześniej, dostaniesz o tym list. Więcej w poradniku o [paczce zatrzymanej przez urząd celny](guide:customs).
 
 ## Poczta Polska kontakt i infolinia
 
@@ -90,11 +90,11 @@ Stan na 11 października 2026, według stron kontaktowych Poczty Polskiej i Pocz
 
 ## Śledzenie Poczty Polskiej w Peek
 
-[Peek](/) rozpoznaje od razu numery PX oraz numery 20-cyfrowe w kształcie z tabeli i z poprawną cyfrą kontrolną. O numery 19-cyfrowe zaczynające się od `00` pyta tylko Pocztę Polską, dopisując cyfrę kontrolną tak jak jej strona. Poprawny numer międzynarodowy kończący się na PL Peek pokazuje najpierw jako nieznanego przewoźnika pocztowego i pyta Pocztę Polską oraz Chronopost; gdy Poczta Polska zna numer, wygrywa. Przy błędnej cyfrze kontrolnej Peek pyta tylko Chronopost. Linki z eMonitoringu z `numer=` też działają, a kodu pocztowego nie trzeba.
+[Peek](/) rozpoznaje od razu numery PX oraz numery 20-cyfrowe w kształcie z tabeli i z poprawną cyfrą kontrolną. O numery 19-cyfrowe zaczynające się od `00` pyta tylko Pocztę Polską, dopisując cyfrę kontrolną tak jak jej strona. Poprawny numer międzynarodowy kończący się na PL, który zaczyna się od R, E, L albo C (poza CV), na przykład `RR`, `EE` czy `CP`, Peek od razu przypisuje Poczcie Polskiej. Inny poprawny numer z PL na końcu, na przykład od `VV`, pokazuje najpierw jako nieznanego przewoźnika pocztowego i pyta Pocztę Polską oraz Chronopost; gdy Poczta Polska zna numer, wygrywa. Numeru z błędną cyfrą kontrolną nie przypisuje żadnemu przewoźnikowi i szuka go w serwisach śledzenia przesyłek. Rozpoznaje też numer 18-cyfrowy z 5900773 po pierwszej cyfrze i poprawną cyfrą kontrolną: to kod z etykiety bez początkowych zer `00`, które Peek dopisuje sam. Linki z eMonitoringu z `numer=` też działają, a kodu pocztowego nie trzeba.
 
-Peek odczytuje śledzenie po angielsku, więc zobaczysz w nim angielskie nazwy, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia i placówkę, w której przesyłka czeka. Planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc Peek odczytuje je według zegara kraju, z którego pochodzą. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
+Pocztę Polską Peek pyta po polsku, gdy używasz go po polsku: jej zdarzenia zobaczysz wtedy pod jej polskimi nazwami, na przykład `W doręczeniu`, a w innym języku po angielsku, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia i placówkę, w której przesyłka czeka. Planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc Peek odczytuje je według zegara kraju, z którego pochodzą. Wszystkie godziny pokazuje w strefie czasowej Twojego urządzenia; na peektracker.com przypomina o tym linijka pod historią: „Godziny w Twojej strefie czasowej: …”. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
 
-Peek sprawdza śledzenie co 10 minut, a co 2 minuty, gdy przesyłka jest w doręczeniu (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Poczty Polskiej; przez serwisy śledzenia przesyłek co 15 minut), i może wysyłać powiadomienia o zmianie statusu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Przy międzynarodowym numerze pocztowym paczki jadącej do Polski Peek może przejść na śledzenie w Poczcie Polskiej, gdy ta pokaże nowsze zdarzenia.
+Peek sprawdza śledzenie co 10 minut, a co 2 minuty, gdy przesyłka jest w doręczeniu (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Poczty Polskiej; przez serwisy śledzenia przesyłek co 15 minut), i może wysyłać powiadomienia o zmianie statusu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Przy międzynarodowym numerze pocztowym paczki jadącej do Polski Peek może przejść na śledzenie w Poczcie Polskiej, gdy ta pokaże nowsze zdarzenia. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 ## Pytania o śledzenie Poczty Polskiej
 
@@ -115,7 +115,7 @@ Jako odbiorca nie. Regulamin zostawia zmianę adresu lub odbiorcy nadawcy, a pac
 W eMonitoringu, tym samym numerem. Status `Przyjęta w kraju przeznaczenia` znaczy, że dotarła do kraju odbiorcy; gdy dalszych zdarzeń eMonitoring nie pokazuje, Poczta Polska odsyła na stronę operatora w tym kraju.
 
 :::sources
-- [Poczta Polska: Śledź przesyłkę](https://www.poczta-polska.pl/sledzenie-przesylek/) – format numeru, zakres śledzenia, operatorzy zagraniczni
+- [Poczta Polska: Śledź przesyłkę](https://www.poczta-polska.pl/sledzenie-przesylek/) – format numeru, zakres śledzenia, operatorzy zagraniczni, pełnomocnictwo do zgłoszenia celnego
 - [Poczta Polska: eMonitoring](https://emonitoring.poczta-polska.pl/) – przykłady, komunikat o błędnym numerze, charakter informacyjny, kontakt@, nazwy statusów
 - [Poczta Polska: eMonitoring (English)](https://emonitoring.poczta-polska.pl/?lang=en) – angielskie nazwy statusów
 - [Pocztex: Śledzenie przesyłek](https://www.pocztex.pl/sledzenie-przesylek/) – śledzenie Pocztex
@@ -129,6 +129,7 @@ W eMonitoringu, tym samym numerem. Status `Przyjęta w kraju przeznaczenia` znac
 - [Pocztex: Kontakt](https://www.pocztex.pl/kontakt/) – infolinie Pocztex i godziny
 - [Poczta Polska: Uwaga na fałszywe wiadomości „Pocztex”](https://www.poczta-polska.pl/news/uwaga-na-falszywe-wiadomosci-pocztex-grozna-kampania-phishingowa/) – fałszywe SMS-y, 8080, numery Contact Center, przesyłki niedoręczalne
 - [Poczta Polska: Zmiany w opłatach dla przesyłek spoza Unii Europejskiej od 1 lipca 2026 r.](https://www.poczta-polska.pl/news/zmiany-w-oplatach-dla-przesylek-spoza-unii-europejskiej-od-1-lipca-2026-r/) – opłata 3 EUR, prezenty do 45 EUR, odmowa przyjęcia
+- [Poczta Polska: Nowe przepisy Unii Europejskiej. Tak działa nowa opłata za przesyłki spoza UE](https://media.poczta-polska.pl/releases/nowe-przepisy-unii-europejskiej-tak-dziala-nowa-oplata-za-przesylki-spoza-ue) – 2 listopada 2026: opłata manipulacyjna 2 EUR za pozycję towarową, ponosi ją adresat, odczytane 10 listopada 2026
 - [Poczta Polska: Cennik opłat dodatkowych](https://www.poczta-polska.pl/wp-content/uploads/2025/04/cennik-oplat-dodatkowych.pdf) – opłaty za zgłoszenie celne
 - [Pocztex: Dla Ciebie](https://www.pocztex.pl/) – Pocztex jako usługa kurierska Poczty Polskiej
 - [Poczta Polska: Poczta Polska SA Group](https://www.poczta-polska.pl/en/grupa-pp/poczta-polska/) – spółka państwowa

@@ -102,7 +102,7 @@ Prices for parcels Cdiscount ships, by the value of each parcel:
 | Standard, home | €4.99 | €4.99 under €10, then free |
 | Standard, pickup point | €2.99 under €25, then free | Free |
 | Express, home | €9.99 | €9.99 under €10, €2.99 from €10 to €25, then free |
-| Express, pickup point | €4.99 under €25, then €3.99 | €4.99 under €10, then free |
+| Express, pickup point | €4.99 under €25, then €3.99 (€4.99 throughout on the delivery modes page) | €4.99 under €10, then free |
 | Same evening | €22.99 | €22.99 under €10, then €9.99 |
 
 The free threshold counts per parcel, and an order from several sellers makes several parcels. A seller who ships itself sets its own prices: add the item to your basket to see its options.
@@ -169,7 +169,7 @@ If a seller's parcel changes carrier on the way and the first carrier names the 
 - [Cdiscount: Comment retourner un produit ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Comment%20retourner%20un%20produit%20%3F) – return from "Mes commandes", 48 hours, large items, orders abroad
 - [Cdiscount: Quels sont les différents modes de retour ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20diff%C3%A9rents%20modes%20de%20retour%20%3F) – prepaid label, cost deducted, large items, marketplace
 - [Cdiscount: Quels sont les délais de remboursement ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20d%C3%A9lais%20de%20remboursement%20%3F) – 5 to 7 working days
-- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – carriers, delivery times, pickup deadlines, large items, sellers, Europe, ColisExpat, its taxes and withdrawal period
+- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – carriers, delivery times, express pickup at €4.99, pickup deadlines, large items, sellers, Europe, ColisExpat, its taxes and withdrawal period
 - [Cdiscount: Cdiscount à volonté](https://www.cdiscount.com/cdav) – price, threshold per parcel, pickup points
 - [Cdiscount: Conditions générales de vente](https://clients.cdiscount.com/Simple/Cgv.aspx) – countries, pickup points by country, large items, delay, damaged parcel, 14 days, return costs, Irish number
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – shipping by seller or Cdiscount, Cdiscount stepping in, FEVAD mediator

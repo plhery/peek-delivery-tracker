@@ -60,7 +60,7 @@ To numer przewoźnika, więc działa też na jego stronie. Kształty, które zna
 | ORLEN Paczka | `210` i 10 cyfr |
 | InPost | 24 cyfry |
 | DPD | 13 cyfr i litera albo 14 cyfr od `13`, czasem z jeszcze jednym znakiem |
-| Poczta Polska / Pocztex | 19 cyfr, 20 cyfr od `00`, `PX` i 10 cyfr albo 2 litery, 9 cyfr i `PL` |
+| Poczta Polska / Pocztex | 19 lub 20 cyfr od `00`, `PX` i 10 cyfr albo 2 litery, 9 cyfr i `PL` |
 | DHL | 11 cyfr |
 | DHL Express | 10 cyfr |
 

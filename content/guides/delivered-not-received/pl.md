@@ -138,8 +138,8 @@ Zgłoś to od razu w aplikacji InPost Mobile albo przez stronę InPost. Sprawdź
 - [UKE: Odbieram paczkę – jakie mam prawa?](https://uke.gov.pl/blog/odbieram-paczke-jakie-mam-prawa,8.html) – adresat reklamuje po doręczeniu albo po zrzeczeniu się roszczeń przez nadawcę
 - [UKE: Rejestr operatorów pocztowych, InPost Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00562) – InPost w rejestrze operatorów pocztowych
 - [Poczta Polska: eReklamacje, paczka pocztowa](https://ereklamacje.poczta-polska.pl/sub/reklamacje-krajowe/paczka-pocztowa) – kto składa reklamację, 14 dni, 12 miesięcy, odpowiedź w 30 dni
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): gotowa do odbioru, doręczona, koniec drogi do odbiorcy
-- [Universal Parcel Scraper: DPD Polska](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dpd-pl) – status doręczenia DPD, który czyta Peek (po angielsku)
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku): gotowa do odbioru, doręczona, koniec drogi do odbiorcy
+- [Universal Parcel Scraper: DPD Polska](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dpd-pl) – status doręczenia DPD, który czyta Peek (po polsku, a gdy Peek nie zna jeszcze któregoś polskiego statusu, po angielsku)
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – sąsiad, safeplace, kod odbioru e-mailem, decyzja w 30 dni
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 11 ust. 2 dorosły domownik, § 21 kto składa reklamację, 12 miesięcy
 - [GLS Polska: Co jeśli nie odbiorę paczki od kuriera?](https://gls-group.com/PL/pl/blog/co-jesli-mnie-nie-ma-w-domu/) – domownik, sąsiad za zgodą, FlexDeliveryService, miejsce bez podpisu

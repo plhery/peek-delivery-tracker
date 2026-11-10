@@ -100,7 +100,7 @@ Ceny we Francji kontynentalnej za paczki, które wysyła Cdiscount, według wart
 | Standard, do domu | 4,99 € | 4,99 € poniżej 10 €, potem za darmo |
 | Standard, punkt odbioru | 2,99 € poniżej 25 €, potem za darmo | Za darmo |
 | Ekspres, do domu | 9,99 € | 9,99 € poniżej 10 €, 2,99 € od 10 do 25 €, potem za darmo |
-| Ekspres, punkt odbioru | 4,99 € poniżej 25 €, potem 3,99 € | 4,99 € poniżej 10 €, potem za darmo |
+| Ekspres, punkt odbioru | 4,99 € poniżej 25 €, potem 3,99 € (na stronie o sposobach dostawy zawsze 4,99 €) | 4,99 € poniżej 10 €, potem za darmo |
 | Tego samego wieczoru | 22,99 € | 22,99 € poniżej 10 €, potem 9,99 € |
 
 Próg darmowej dostawy liczy się dla każdej paczki osobno, a zamówienie u kilku sprzedawców to kilka paczek. Sprzedawca, który wysyła sam, ustala własne ceny: dodaj artykuł do koszyka, żeby zobaczyć jego opcje.
@@ -167,7 +167,7 @@ Jeśli paczka sprzedawcy zmieni po drodze przewoźnika, a pierwszy przewoźnik w
 - [Cdiscount: Comment retourner un produit ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Comment%20retourner%20un%20produit%20%3F) – zwrot z „Mes commandes”, 48 godzin, duże przedmioty, zamówienia za granicę
 - [Cdiscount: Quels sont les différents modes de retour ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20diff%C3%A9rents%20modes%20de%20retour%20%3F) – opłacona etykieta, potrącony koszt, duże przedmioty, marketplace
 - [Cdiscount: Quels sont les délais de remboursement ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20d%C3%A9lais%20de%20remboursement%20%3F) – od 5 do 7 dni roboczych
-- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – przewoźnicy, czasy dostawy, terminy w punktach odbioru, duże przedmioty, sprzedawcy, ceny w Europie, ColisExpat: adres, numer odbiorcy, opłaty, podatki i termin na odstąpienie
+- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – przewoźnicy, czasy dostawy, ekspres do punktu odbioru za 4,99 €, terminy w punktach odbioru, duże przedmioty, sprzedawcy, ceny w Europie, ColisExpat: adres, numer odbiorcy, opłaty, podatki i termin na odstąpienie
 - [Cdiscount: Cdiscount à volonté](https://www.cdiscount.com/cdav) – cena, próg na paczkę, punkty odbioru
 - [Cdiscount: Conditions générales de vente](https://clients.cdiscount.com/Simple/Cgv.aspx) – kraje, duże przedmioty tylko we Francji i Belgii, opóźnienie, uszkodzona paczka, koszt zwrotu, numery obsługi klienta według kraju
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – wysyłka przez sprzedawcę albo Cdiscount, interwencja Cdiscount, mediator FEVAD

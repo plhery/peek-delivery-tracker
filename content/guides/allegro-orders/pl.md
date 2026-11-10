@@ -56,7 +56,7 @@ Nie ma numeru? Wpisuje go sprzedający, a przy części przewoźników Allegro d
 | InPost | 24 cyfry |
 | DPD | 13 cyfr i litera albo 14 cyfr od `13` |
 | ORLEN Paczka | `210` i 10 cyfr |
-| Poczta Polska, Pocztex | `PX` i 10 cyfr, 19 cyfr albo 2 litery, 9 cyfr i `PL` |
+| Poczta Polska, Pocztex | `PX` i 10 cyfr, 19 cyfr od `00` albo 2 litery, 9 cyfr i `PL` |
 | DHL | 11 cyfr |
 | GLS | 11 cyfr, jak DHL, albo 12 cyfr |
 

@@ -50,7 +50,7 @@ Dwa kody to nie numer przesyłki. 9-cyfrowy kod nadania służy sprzedającemu d
 | InPost | 24 cyfry albo `JD` lub `JJD` i 16 cyfr |
 | DPD | 13 cyfr i litera albo 14 cyfr od `13`, czasem z jeszcze jednym znakiem |
 | ORLEN Paczka | `210` i 10 cyfr |
-| Poczta Polska | 19 cyfr, 20 cyfr od `00`, `PX` i 10 cyfr albo 2 litery, 9 cyfr i `PL` |
+| Poczta Polska | 19 lub 20 cyfr od `00`, `PX` i 10 cyfr albo 2 litery, 9 cyfr i `PL` |
 
 Nie wiesz, czyj to numer? Wpisz go tutaj:
 

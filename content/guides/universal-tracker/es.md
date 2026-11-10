@@ -55,7 +55,7 @@ Ninguna es la mejor para todo el mundo: depende de tus transportistas y de lo qu
 
 ## Gratis o de pago: los principales localizadores, comparados
 
-Casi todos empiezan gratis, pero con anuncios, con un límite o sin notificaciones push. Van por orden alfabético, no por preferencia, según las páginas de cada uno y su ficha del App Store de España el 7 de octubre de 2026. Peek, que publica esta guía, aparece como los demás.
+Casi todos empiezan gratis, pero con anuncios, con un límite o sin notificaciones push. Van por orden alfabético, no por preferencia, según las páginas de cada uno y su ficha del App Store de España el 10 de noviembre de 2026. Peek, que publica esta guía, aparece como los demás.
 
 | Localizador | Cuenta | Anuncios declarados | Uso gratis | De pago en España |
 | --- | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ Casi todos empiezan gratis, pero con anuncios, con un límite o sin notificacion
 | AfterShip | Modo invitado, hasta 3 envíos | Sí | Gratis, con notificaciones push «para 8 estados más importantes» | Ninguna compra dentro de la app |
 | Deliveries | Opcional, para sincronizar con Junecloud | Ninguno | Ninguno: hace falta suscribirse para empezar a usar la app | 5,49 € al año o 0,99 € al mes |
 | Parcel | No pide datos personales | Sí | 3 envíos, sin notificaciones push | 6,99 € al año |
-| ParcelsApp (Packages en iPhone) | Sin registro | Sí | Con anuncios | Premium quita anuncios y límites: 4,99 € o 0,99 €, sin indicar el periodo |
+| ParcelsApp (Packages en iPhone) | Sin registro | Sí | Con anuncios | Premium quita anuncios y límites: 12,99 € o 1,99 €, por un mes o un año, sin decir qué precio corresponde a cada periodo |
 | [Peek](/) | No hace falta para seguir; inicia sesión solo para tener tus paquetes juntos | Ninguno: no muestra publicidad | Las búsquedas al día tienen un límite, para evitar el uso masivo | Nada: es un proyecto personal y no comercial |
 
 Los precios cambian: mira «Compras dentro de la app» en la ficha del App Store antes de suscribirte.
@@ -150,7 +150,7 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [ParcelsApp: política de privacidad (en inglés)](https://parcelsapp.com/en/privacy) – cookies publicitarias, representante en la UE
 - [ParcelsApp: Why is my parcel not tracking? (en inglés)](https://parcelsapp.com/en/faq/why-is-my-parcel-not-tracking) – números nuevos, escaneos
 - [Google Play: Parcels](https://play.google.com/store/apps/details?id=com.brightstripe.parcels&hl=es&gl=ES) – webs postales, borrado de datos
-- [App Store: Packages](https://apps.apple.com/es/app/id1229071393) – anuncios, Premium
+- [App Store: Packages](https://apps.apple.com/es/app/id1229071393) – anuncios, precios y periodos del Premium
 - [Parcel: FAQ (en inglés)](https://parcelapp.net/help/faq/) – retraso
 - [Parcel: Real-time notifications (en inglés)](https://parcel.app/help/real-time-notifications.html) – avisos pagados
 - [App Store: Parcel](https://apps.apple.com/es/app/id375589283) – versión gratis, precio

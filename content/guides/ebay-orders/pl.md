@@ -59,7 +59,7 @@ To numer przewoźnika, więc działa też na jego stronie. Formy, które możesz
 
 | Przewoźnik | Tak wygląda numer |
 | --- | --- |
-| Poczta Polska | 19 cyfr, `PX` + 10 cyfr albo 2 litery, 9 cyfr, `PL` |
+| Poczta Polska | 19 cyfr od `00`, `PX` + 10 cyfr albo 2 litery, 9 cyfr, `PL` |
 | [InPost](carrier:inpost) | 24 cyfry, `8YDR` + 9 cyfr albo `JD` lub `JJD` + 16 cyfr |
 | [DPD Polska](carrier:dpd-pl) | 13 cyfr i litera |
 | UPS | `1Z` + 16 liter lub cyfr |

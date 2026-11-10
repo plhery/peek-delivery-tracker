@@ -100,7 +100,7 @@ Preise für Pakete, die Cdiscount verschickt, nach dem Wert jedes Pakets:
 | Standard, nach Hause | 4,99 € | 4,99 € unter 10 €, darüber kostenlos |
 | Standard, Abholstelle | 2,99 € unter 25 €, darüber kostenlos | Kostenlos |
 | Express, nach Hause | 9,99 € | 9,99 € unter 10 €, 2,99 € von 10 bis 25 €, darüber kostenlos |
-| Express, Abholstelle | 4,99 € unter 25 €, darüber 3,99 € | 4,99 € unter 10 €, darüber kostenlos |
+| Express, Abholstelle | 4,99 € unter 25 €, darüber 3,99 € (auf der Seite zu den Versandarten durchgehend 4,99 €) | 4,99 € unter 10 €, darüber kostenlos |
 | Am selben Abend | 22,99 € | 22,99 € unter 10 €, darüber 9,99 € |
 
 Die Grenze für kostenlosen Versand gilt pro Paket, und eine Bestellung bei mehreren Verkäufern ergibt mehrere Pakete. Ein Verkäufer, der selbst verschickt, legt eigene Preise fest: Leg den Artikel in den Warenkorb, um seine Lieferarten zu sehen.
@@ -167,7 +167,7 @@ Wechselt das Paket eines Verkäufers unterwegs den Paketdienst und nennt der ers
 - [Cdiscount: Comment retourner un produit ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Comment%20retourner%20un%20produit%20%3F) – Rücksendung über „Mes commandes“, 48 Stunden, sperrige Artikel, Bestellungen ins Ausland
 - [Cdiscount: Quels sont les différents modes de retour ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20diff%C3%A9rents%20modes%20de%20retour%20%3F) – vorausbezahltes Etikett, Kosten abgezogen, sperrige Artikel, Marktplatz
 - [Cdiscount: Quels sont les délais de remboursement ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20d%C3%A9lais%20de%20remboursement%20%3F) – 5 bis 7 Werktage
-- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – Paketdienste, Lieferzeiten, Lagerfristen, sperrige Artikel, Verkäufer, Europa, ColisExpat mit Abgaben und Widerrufsfrist
+- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – Paketdienste, Lieferzeiten, Express an der Abholstelle für 4,99 €, Lagerfristen, sperrige Artikel, Verkäufer, Europa, ColisExpat mit Abgaben und Widerrufsfrist
 - [Cdiscount: Cdiscount à volonté](https://www.cdiscount.com/cdav) – Preis, Grenze pro Paket, Abholstellen
 - [Cdiscount: Conditions générales de vente](https://clients.cdiscount.com/Simple/Cgv.aspx) – Lieferländer, Abholstellen je Land, sperrige Artikel, Verspätung, beschädigtes Paket, 14 Tage, Rücksendekosten, Nummern aus Deutschland und Österreich
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – Versand durch Verkäufer oder Cdiscount, Eingreifen von Cdiscount, Schlichtung der FEVAD

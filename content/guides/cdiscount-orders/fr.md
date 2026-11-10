@@ -4,7 +4,7 @@ description: Qui livre ta commande Cdiscount, où trouver le suivi, quels délai
 slug: suivi-commande-cdiscount
 picture: Une rangée de consignes à colis, une pile de cartons de toutes les tailles, et Pip qui sort la tête d'une consigne ouverte.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 Ta commande Cdiscount se suit dans ton Espace client, rubrique « Mes commandes », et l'e-mail d'expédition nomme le transporteur. Ce que Cdiscount expédie part avec Colissimo, Chronopost, DPD, Mondial Relay ou Relais Colis, ou sur rendez-vous pour un gros colis. Un article vendu et expédié par un vendeur de la marketplace part avec le transporteur du vendeur, sous son propre numéro quand l'envoi est suivi.
@@ -90,18 +90,18 @@ Les prix des colis expédiés par Cdiscount, selon le montant de chaque colis :
 | Standard à domicile | 4,99 € | 4,99 € sous 10 €, gratuit au-delà |
 | Standard en point retrait | 2,99 € sous 25 €, gratuit au-delà | Gratuit |
 | Express à domicile | 9,99 € | 9,99 € sous 10 €, 2,99 € de 10 à 25 €, gratuit au-delà |
-| Express en point retrait | 4,99 € sous 25 €, 3,99 € au-delà | 4,99 € sous 10 €, gratuit au-delà |
+| Express en point retrait | 4,99 € sous 25 €, 3,99 € au-delà (4,99 € dans tous les cas sur la page des modes de livraison) | 4,99 € sous 10 €, gratuit au-delà |
 | Le soir même | 22,99 € | 22,99 € sous 10 €, 9,99 € au-delà |
 
 Le seuil de gratuité vaut par colis, et une commande chez plusieurs vendeurs fait plusieurs colis. Un vendeur qui expédie lui-même fixe ses propres frais : ajoute l'article au panier pour voir ses modes et ses prix.
 
-**Cdiscount à volonté**, l'abonnement du tableau, coûte 29 € par an après 6 jours d'essai gratuit. Ses tarifs valent pour les petits colis éligibles, chez toi ou dans l'un de ses 25 000 points retrait. « Rentabilisé ou Remboursé » : si tes économies de l'année n'atteignent pas 29 €, la différence va dans ta cagnotte. Tu l'arrêtes dans « Mon abonnement à volonté ».
+**Cdiscount à volonté**, l'abonnement du tableau, coûte 29 € par an après 6 jours d'essai gratuit. Ses tarifs valent pour les petits colis éligibles, chez toi ou dans l'un de ses 25 000 points retrait. « Rentabilisé ou Remboursé » : si tes économies de l'année n'atteignent pas 29 €, la différence va dans ta cagnotte. Tu l'arrêtes dans « Mon abonnement à volonté ». Depuis ton Espace client, tu peux aussi le partager gratuitement avec deux proches, à condition qu'ils aient un compte Cdiscount.
 
 **À domicile.** Un petit colis est livré contre signature ou dans ta boîte aux lettres ; DPD donne le matin même un créneau de 3 heures. Absent ? Un avis de passage dit où retirer le colis. S'il n'est pas retiré à temps, il repart chez Cdiscount et tu es remboursé automatiquement.
 
-**En point retrait ou en consigne.** Prends une pièce d'identité. Le colis t'attend 5 jours chez Mondial Relay, 7 jours chez Chronopost et 3 jours ouvrés dans une consigne Chronopost ; l'e-mail de mise à disposition donne le délai exact. Quelqu'un d'autre peut le retirer avec une autorisation signée, ta pièce d'identité et la sienne. Une fois le code de la consigne utilisé, plus de réclamation possible sur la livraison. Plus : [consignes et points relais](guide:parcel-lockers) et [colis non retiré](guide:uncollected-parcel).
+**En point retrait ou en consigne.** Prends une pièce d'identité ; chez Mondial Relay, le QR code ou le code PIN reçu suffit aussi. Le colis t'attend 5 jours calendaires chez Mondial Relay, en point relais comme en consigne, 7 jours chez Chronopost et 3 jours ouvrés dans une consigne Chronopost ; passé ce délai, il repart chez Cdiscount et tes produits sont remboursés. L'e-mail de mise à disposition donne le délai exact. Devant une consigne Mondial Relay, appuie sur « Retirer un colis » et tape le code de retrait à 6 chiffres reçu par e-mail et SMS. Quelqu'un d'autre peut le retirer avec une autorisation signée, ta pièce d'identité et la sienne. Une fois le code de la consigne utilisé, plus de réclamation possible sur la livraison. Plus : [consignes et points relais](guide:parcel-lockers) et [colis non retiré](guide:uncollected-parcel).
 
-**Gros colis.** Toujours sur rendez-vous : « Livraison devant chez vous » (au pied de l'immeuble), « Livraison chez vous » (dans la pièce de ton choix) ou « Livraison et installation chez vous » (électroménager, télé, hors Corse). Le livreur appelle 30 minutes avant. En point retrait gros colis, C Chez Vous garde le colis 15 jours, ou 7 jours en Express.
+**Gros colis.** Toujours sur rendez-vous : « Livraison devant chez vous » (au pied de l'immeuble), « Livraison chez vous » (dans la pièce de ton choix) ou « Livraison et installation chez vous » (électroménager, télé, hors Corse). Le livreur appelle 30 minutes avant. En point retrait gros colis, C Chez Vous garde le colis 15 jours, ou 7 jours en Express. Hors Express, cette livraison en point retrait coûte au moins 10 € et se fait sous 4 à 6 jours ouvrés au plus ; pour la Corse, Cdiscount ajoute 30 € sur ses propres envois.
 
 ## Cdiscount en Belgique, en Suisse et en outre-mer
 
@@ -165,8 +165,8 @@ Si le colis d'un vendeur change de transporteur en route et que le premier nomme
 - [Cdiscount : Comment retourner un produit ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Comment%20retourner%20un%20produit%20%3F) – « Retourner ou échanger », 48 heures, gros colis, commandes à l'étranger
 - [Cdiscount : Quels sont les différents modes de retour ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20diff%C3%A9rents%20modes%20de%20retour%20%3F) – étiquette prépayée, frais déduits, gros colis, marketplace
 - [Cdiscount : Quels sont les délais de remboursement ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20d%C3%A9lais%20de%20remboursement%20%3F) – 5 à 7 jours ouvrés
-- [Cdiscount : Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – transporteurs, délais, garde en point retrait, gros colis, vendeurs, Belgique, ColisExpat, taxes et rétractation en réexpédition
-- [Cdiscount : Cdiscount à volonté](https://www.cdiscount.com/cdav) – prix, seuil par colis, points retrait
+- [Cdiscount : Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – transporteurs, délais, garde en point retrait et remboursement, QR code et code de consigne Mondial Relay, Express en point retrait à 4,99 €, gros colis en point retrait C Chez Vous (prix, délai, Corse), vendeurs, Belgique, ColisExpat, taxes et rétractation en réexpédition
+- [Cdiscount : Cdiscount à volonté](https://www.cdiscount.com/cdav) – prix, seuil par colis, points retrait, Express en point retrait à 3,99 € au-delà de 25 €, partage avec deux proches
 - [Cdiscount : Conditions générales de vente](https://clients.cdiscount.com/Simple/Cgv.aspx) – pays livrés, retard, colis abîmé, 14 jours, frais de retour, numéro belge
 - [Cdiscount : Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – modes d'expédition, intervention de Cdiscount, médiateur FEVAD
 - [Cdiscount Marketplace : accueil](https://marketplace.cdiscount.com/) – 10 000 vendeurs

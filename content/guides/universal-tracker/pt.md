@@ -56,7 +56,7 @@ Nenhuma é a melhor para toda a gente: depende das tuas transportadoras e do que
 
 ## Grátis ou pagas: as principais apps comparadas
 
-Quase todas começam grátis, mas com anúncios, com um limite ou sem notificações push. Estão por ordem alfabética, não por preferência, segundo as páginas de cada uma e as fichas da App Store portuguesa lidas em outubro de 2026. O Peek, que publica este guia, entra na lista como as outras.
+Quase todas começam grátis, mas com anúncios, com um limite ou sem notificações push. Estão por ordem alfabética, não por preferência, segundo as páginas de cada uma e as fichas da App Store portuguesa lidas em outubro de 2026, com os preços revistos a 10 de novembro. O Peek, que publica este guia, entra na lista como as outras.
 
 | Serviço | Conta | Anúncios declarados | Uso grátis | Pago (Portugal) |
 | --- | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ Quase todas começam grátis, mas com anúncios, com um limite ou sem notificaç
 | AfterShip | Modo convidado, até 3 envios | Sim | Grátis, com notificações para cada entrega | Nenhuma compra integrada |
 | Deliveries | Opcional, para sincronizar com a Junecloud | Nenhum | Nenhum: precisas de uma assinatura para começar a usar a app | 5,49 € por ano ou 0,99 € por mês |
 | Parcel | Não pede dados pessoais | Sim | 3 encomendas de cada vez, sem notificações push | 6,99 € por ano |
-| ParcelsApp (Packages no iPhone) | Sem registo | Sim | Com anúncios | O Premium tira os anúncios e os limites: 5,49 € ou 0,99 €, por 1 mês ou 1 ano, sem dizer qual é qual |
+| ParcelsApp (Packages no iPhone) | Sem registo | Sim | Com anúncios | O Premium tira os anúncios e os limites: 12,99 € ou 1,99 €, por 1 mês ou 1 ano, sem dizer qual é qual |
 | [Peek](/) | Não precisas dela para seguir; inicia sessão para manter as encomendas juntas | Nenhum: não mostra publicidade | Pesquisas diárias limitadas, para evitar o uso em massa | Nada: é um projeto pessoal, não comercial |
 | Seguir Encomenda | A ficha não diz | Sim | A ficha não diz | Premium: 4,99 €, por ano segundo o programador |
 

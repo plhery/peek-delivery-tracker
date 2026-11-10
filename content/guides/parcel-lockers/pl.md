@@ -70,7 +70,7 @@ Co dzieje się potem i kiedy dostaniesz zwrot pieniędzy: [nieodebrana paczka](g
 
 ## Automat był pełny albo nie działał: gdzie jest paczka?
 
-Gdy w wybranym Paczkomacie nie ma wolnej skrytki, InPost może zostawić paczkę w pobliskim automacie tymczasowym. Peek pokazuje wtedy `Stored Parcel - Temporary Parcel Locker` (statusy InPost czyta po angielsku), a paczkę odbierzesz tym samym kodem. Jeśli potem pojawi się `The storage period has expired`, nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
+Gdy w wybranym Paczkomacie nie ma wolnej skrytki, InPost może zostawić paczkę w pobliskim automacie tymczasowym. Peek pokazuje wtedy status mówiący o Paczkomacie tymczasowym (w innych językach `Stored Parcel - Temporary Parcel Locker`), a paczkę odbierzesz tym samym kodem. Jeśli potem pojawi się status o upływie terminu przechowywania (`The storage period has expired`), nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
 
 Automat nie działa, gdy już stoisz przed nim?
 
@@ -93,7 +93,7 @@ Kod wysyłaj tylko osobom, które znasz. Nieoczekiwany SMS z linkiem do «odblok
 
 ## Co pokazuje śledzenie na każdym etapie?
 
-Każdy przewoźnik ma własne słowa. Tak to wygląda w InPost (Peek czyta jego statusy po angielsku):
+Każdy przewoźnik ma własne słowa. Tak wyglądają statusy InPost w Peek w innym języku niż polski (gdy korzystasz z Peek po polsku, są po polsku, tak jak pisze je InPost):
 
 :::steps
 - W drodze do automatu | `Handed over for delivery`. Kurier wiezie paczkę do automatu albo pod drzwi.
@@ -131,6 +131,6 @@ Numer InPost ma zwykle 24 cyfry, a Allegro One zaczyna się od `A0` lub `AD`; po
 - [DPD Polska: FAQ](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – kod w mailu, DPD Mobile, 2 dni robocze bez przedłużenia, inna osoba z kodem, problemy z otwarciem
 - [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – lokalizacje, SMS i mail z kodem, 3 SMS-y, Pocztex Mobile, 72 godziny, przekazanie kodu, status doręczono
 - [About Amazon Polska: Pozwól sobie nie pamiętać](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/pozwol-sobie-nie-pamietac-w-sklepie-amazon-pl-niskie-ceny-kazdego-dnia-oraz-szybka-i-darmowa-dostawa-to-mniej-stresu-przy-codziennych-zakupach) – dostawa Amazon.pl do automatów Paczkomat i punktów odbioru
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): w doręczeniu, gotowa do odbioru, przypomnienie, automat tymczasowy, doręczona, nadana w automacie, powrót do nadawcy
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku): w doręczeniu, gotowa do odbioru, przypomnienie, automat tymczasowy, doręczona, nadana w automacie, powrót do nadawcy
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – wzory numerów
 :::

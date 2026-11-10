@@ -37,7 +37,7 @@ Przewoźnik wylicza przybliżoną porę z trasy kuriera i zwykle podaje ją dopi
 | Przewoźnik | Co dostajesz | Kiedy |
 | --- | --- | --- |
 | DPD | Dokładny czas dostawy SMS-em lub e-mailem, a w dniu dostawy kuriera na mapie | W dniu dostawy; numer telefonu do kuriera po wydaniu paczki do doręczenia |
-| InPost | Status `Handed over for delivery` (Peek czyta statusy InPost po angielsku) | Gdy kurier dostanie paczkę do doręczenia, pod drzwi albo do automatu |
+| InPost | Status o wydaniu paczki do doręczenia (w Peek po polsku, gdy korzystasz z niego po polsku; w innych językach `Handed over for delivery`) | Gdy kurier dostanie paczkę do doręczenia, pod drzwi albo do automatu |
 | Pocztex, GLS | Godzin dostawy nie podają; GLS z usługą FlexDeliveryService przysyła e-mail z terminem dostawy | Licz na dzień, nie na godzinę |
 
 DPD dodaje, że jeśli przy zamówieniu w sklepie był wybór przedziału czasowego, kurier przyjedzie w wybranym. Przewidywaną porę zwykle trudno przesunąć, ale w DPD zmienisz dzień albo miejsce w aplikacji DPD Mobile, także na punkt DPD Pickup.
@@ -86,7 +86,7 @@ Tak, jeśli paczka jedzie do automatu albo punktu odbioru. Sprawdź tylko godzin
 :::sources
 - [InPost: Regulamin usługi Paczkomat 24/7 od 24 lipca 2025](https://inpost.pl/sites/default/files/docs/regulaminy/regulamin-swiadczenia-uslugi-inpost-paczkomatr-247-przez-inpost-sp-z-oo-obowiazujacy-od-24072025.pdf) – dzień roboczy
 - [InPost: Regulamin usług pocztowych i przewozowych od 24 lipca 2025](https://inpost.pl/sites/default/files/docs/regulaminy/regulamin-swiadczenia-uslug-pocztowych-i-przewozowych-przez-inpost-sp-z-oo-obowiazujacy-od-24072025.pdf) – terminy w dniach roboczych bez sobót, niedziel i świąt
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): „Handed over for delivery”, paczka u kuriera, pod drzwi albo do automatu
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku): „Handed over for delivery”, paczka u kuriera, pod drzwi albo do automatu
 - [DPD Polska: najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – usługa Sobota, wybrany przedział czasowy, numer do kuriera, 3 dni robocze, godziny punktów DPD Pickup
 - [DPD Polska: Odbieram paczkę](https://www.dpd.com/pl/pl/odbieram-paczke/) – czas dostawy SMS-em lub e-mailem, kurier na mapie, zmiana adresu i czasu doręczenia
 - [GLS Polska: Przesyłki krajowe](https://gls-group.com/PL/pl/wysylanie-paczek/przesylki-krajowe/) – doręczenie w soboty, ExpressParcel przed 10:00 lub 12:00, e-mail z terminem w FlexDeliveryService

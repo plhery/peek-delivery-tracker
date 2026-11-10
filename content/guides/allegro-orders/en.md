@@ -52,7 +52,7 @@ No tracking number? The seller adds it, and with some carriers Allegro adds it t
 | InPost | 24 digits |
 | DPD | 13 digits and a letter, or 14 digits starting `13` |
 | ORLEN Paczka | `210` and 10 digits |
-| Poczta Polska, Pocztex | `PX` and 10 digits, 19 digits, or 2 letters, 9 digits and `PL` |
+| Poczta Polska, Pocztex | `PX` and 10 digits, 19 digits starting `00`, or 2 letters, 9 digits and `PL` |
 | DHL | 11 digits |
 
 Not sure whose number it is? Type it here:

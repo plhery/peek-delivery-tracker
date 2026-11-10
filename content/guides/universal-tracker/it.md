@@ -55,7 +55,7 @@ Nessuna è la migliore per tutti: dipende dai tuoi corrieri e da cosa sei dispos
 
 ## Gratis o a pagamento: i principali tracker a confronto
 
-Quasi tutti partono gratis, ma con pubblicità, un limite o senza notifiche push. In ordine alfabetico, senza classifica, secondo le pagine di ciascuno e le schede dell'App Store italiano al 7 ottobre 2026. Peek, che pubblica questa guida, è in lista come gli altri.
+Quasi tutti partono gratis, ma con pubblicità, un limite o senza notifiche push. In ordine alfabetico, senza classifica, secondo le pagine di ciascuno e le schede dell'App Store italiano al 10 novembre 2026. Peek, che pubblica questa guida, è in lista come gli altri.
 
 | Tracker | Account | Pubblicità dichiarata | Uso gratuito | A pagamento (Italia) |
 | --- | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ Quasi tutti partono gratis, ma con pubblicità, un limite o senza notifiche push
 | AfterShip | Modalità ospite, fino a 3 spedizioni | Sì | Gratis, con notifiche push sugli stati principali della consegna | Nessun acquisto in-app |
 | Deliveries | Facoltativo, per la sincronizzazione Junecloud | Nessuna dichiarata | Nessuno: serve un abbonamento per iniziare a usare l'app | 5,49 € all'anno o 0,99 € al mese |
 | Parcel | Nessun dato personale richiesto | Sì | 3 spedizioni, senza notifiche push | 6,99 € all'anno |
-| ParcelsApp (Packages su iPhone) | Non serve registrarsi | Sì | Con pubblicità | Premium toglie pubblicità e limiti: 5,49 € o 0,99 €, durata non indicata |
+| ParcelsApp (Packages su iPhone) | Non serve registrarsi | Sì | Con pubblicità | Premium toglie pubblicità e limiti: 12,99 € o 1,99 €, per un mese o un anno, senza dire quale prezzo vale per quale durata |
 | [Peek](/) | Non serve per tracciare; accedi per tenere insieme i pacchi | Nessuna: secondo la sua informativa non mostra pubblicità | Le ricerche al giorno sono limitate, per evitare un uso massivo | Nessuno: è un progetto personale e non commerciale |
 
 I prezzi dell'App Store quel giorno:
@@ -147,7 +147,7 @@ Sì, e [il punto pericoloso è proprio il link](guide:delivery-scam-texts). Post
 - [ParcelsApp: informativa sulla privacy (in inglese)](https://parcelsapp.com/en/privacy) – e-mail inoltrate, rappresentante nell'UE
 - [ParcelsApp: Perché non riesco a tracciare il mio pacco?](https://parcelsapp.com/it/faq/why-is-my-parcel-not-tracking) – nuovi numeri, nessuna registrazione in più, sito ufficiale del corriere
 - [Google Play: Parcels](https://play.google.com/store/apps/details?id=com.brightstripe.parcels&hl=it) – siti postali, dati non eliminabili
-- [App Store Italia: Packages](https://apps.apple.com/it/app/id1229071393) – pubblicità, nessuna registrazione, Premium, prezzi
+- [App Store Italia: Packages](https://apps.apple.com/it/app/id1229071393) – pubblicità, nessuna registrazione, Premium, prezzi e durate
 - [Parcel: FAQ (in inglese)](https://parcelapp.net/help/faq/) – ritardo rispetto ai corrieri
 - [Parcel: notifiche in tempo reale (in inglese)](https://parcel.app/help/real-time-notifications.html) – notifiche dei corrieri a pagamento
 - [App Store Italia: Parcel](https://apps.apple.com/it/app/id375589283) – pubblicità, tre spedizioni, prezzo

@@ -4,7 +4,7 @@ description: Co się dzieje z nieodebraną paczką z paczkomatu, punktu albo poc
 slug: paczka-nie-odebrana
 picture: Automat paczkowy z jedną otwartą skrytką, w której czeka Pip, i kalendarz z zakreślonymi dwoma ostatnimi dniami.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 Nieodebrana paczka z automatu, punktu albo poczty wraca do nadawcy, gdy minie ostatni dzień odbioru. Najdłużej czeka na poczcie (przesyłka polecona Poczty Polskiej 14 dni od dnia po pierwszym awizo), najkrócej w automacie: w Allegro One Box 2 dni kalendarzowe. Liczy się termin z Twojego SMS-a, e-maila albo awizo. Potem to sklep decyduje, czy odda Ci pieniądze, czy wyśle paczkę jeszcze raz.
@@ -22,9 +22,9 @@ Wraca do nadawcy. Zwykle odwozi ją ta sama firma, która ją przywiozła.
 - shop | Nadawca | Decyduje, czy oddać Ci pieniądze, czy wysłać paczkę jeszcze raz.
 :::
 
-- **[InPost](carrier:inpost):** gdy paczka wraca, Peek pokazuje `On the way back to the Sender`, a na końcu `Returned to Sender` (statusy InPost czyta po angielsku).
+- **[InPost](carrier:inpost):** gdy paczka wraca, Peek pokazuje ją z etapem „Zwrócona nadawcy” (statusy InPost są po polsku, gdy korzystasz z Peek po polsku).
 - **[Poczta Polska](carrier:poczta-polska)** zwraca nadawcy przesyłkę poleconą, której nikt nie odebrał w ciągu 14 dni. Nieodebraną paczkę Pocztex zwraca nadawcy na jego koszt.
-- **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy.
+- **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy. W Peek zobaczysz wtedy `Zwrot przesyłki` (albo `Parcel return`, gdy Peek pobiera historię tej paczki po angielsku), z etapem „Zgłoszono problem”.
 - **[Allegro One](carrier:allegro-one)** i inni przewoźnicy z programu Allegro Delivery odsyłają paczkę do sprzedającego.
 
 Przewoźnik nie wyśle Ci jej drugi raz sam z siebie: o ponownej wysyłce albo zwrocie pieniędzy decyduje sklep. Gdy paczka jest już w drodze powrotnej, poradnik [paczka wraca do nadawcy](guide:returned-to-sender) opisuje tę drogę i to, o co poprosić sprzedawcę.
@@ -45,7 +45,7 @@ Termin w Paczkomacie i PaczkoPunkcie InPost sprawdź w aplikacji InPost Mobile a
 
 O paczkach Pocztex dwie strony Poczty Polskiej mówią co innego: [FAQ odbioru w punkcie](https://odbiorwpunkcie.poczta-polska.pl/faq/) podaje 3 dni w punktach, a regulamin Pocztex 7 dni w placówce pocztowej i 3 dni w innych punktach. Kieruj się datą z SMS-a, który dostaniesz.
 
-Paczka InPost może też czekać w dwóch miejscach po kolei. Status `Stored Parcel - Temporary Parcel Locker` znaczy, że w wybranym Paczkomacie nie było miejsca: paczka czeka w pobliskim automacie tymczasowym i odbierzesz ją tym samym kodem. Jeśli potem pojawi się `The storage period has expired`, nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
+Paczka InPost może też czekać w dwóch miejscach po kolei. Status mówiący o Paczkomacie tymczasowym znaczy, że w wybranym Paczkomacie nie było miejsca: paczka czeka w pobliskim automacie tymczasowym i odbierzesz ją tym samym kodem. Jeśli potem pojawi się status o upływie terminu przechowywania, nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
 
 Potocznie każdy automat to „paczkomat”, ale terminy zależą od firmy: Paczkomat InPost to co innego niż automat DPD Pickup czy ORLEN Paczka.
 
@@ -57,7 +57,7 @@ Firmy liczą różnie: Pocztex AUTOMAT w godzinach, DPD w dniach roboczych, Pocz
 
 Albo przy zamówieniu wybrano automat lub punkt odbioru, albo kurier czy listonosz nie zastał nikogo w domu. Poczta Polska może też od razu zostawić awizo, bez próby doręczenia do drzwi, przy paczce ekonomicznej cięższej niż 2 kg i przy przesyłce z należnościami celnymi, o ile nie jedzie w obrębie jednej miejscowości.
 
-U InPost Peek pokaże wtedy `Ready for collection`, a co znaczą poszczególne statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Awizo, kod odbioru i to, kto może odebrać paczkę za Ciebie, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery). Jeśli trzeba coś dopłacić, poradnik [o cle i opłatach przy odbiorze](guide:customs) wyjaśnia, kto i za co chce pieniędzy.
+U InPost Peek pokaże wtedy status o paczce gotowej do odbioru, a u DPD `Przyjęcie przesyłki do punktu Pickup` (albo `Parcel collected by pickup point`), w obu przypadkach z etapem „Do odbioru”. Co znaczą poszczególne statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Awizo, kod odbioru i to, kto może odebrać paczkę za Ciebie, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery). Jeśli trzeba coś dopłacić, poradnik [o cle i opłatach przy odbiorze](guide:customs) wyjaśnia, kto i za co chce pieniędzy.
 
 [Peek](/) może wysłać Ci powiadomienie, gdy śledzenie pokaże, że paczka czeka na odbiór. Terminu nie przedłuży: to może zrobić tylko przewoźnik albo sklep.
 
@@ -65,7 +65,7 @@ U InPost Peek pokaże wtedy `Ready for collection`, a co znaczą poszczególne s
 
 Rzadko się da. DPD pisze wprost, że czasu w punkcie i automacie DPD Pickup nie można wydłużyć, a Poczta Polska to samo o Pocztex PUNKT i AUTOMAT. Paczki Pocztex nie przekierujesz też do innego punktu.
 
-Inaczej jest na poczcie: Poczta Polska przechowa przesyłkę poleconą albo paczkę pocztową do 14 dni po terminie, jeśli złożysz [zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/). Przez internet zlecenie jest bezpłatne, na poczcie kosztuje 6,00 zł, a samo przechowanie paczki pocztowej 2,00 zł za każdy dzień. Nie dotyczy to Pocztex, PACZKI24, PACZKI48 ani Paczki+, a placówka może odmówić, gdy brakuje jej miejsca.
+Inaczej jest na poczcie: Poczta Polska przechowa przesyłkę poleconą albo paczkę pocztową do 14 dni po terminie, jeśli złożysz [zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/). Przez internet zlecenie jest bezpłatne, na poczcie kosztuje 6,00 zł, a samo przechowanie paczki pocztowej 2,00 zł za każdy dzień. Zlecenie obowiązuje od dnia następnego po jego przyjęciu, więc nie zostawiaj go na ostatni dzień odbioru. Nie dotyczy to Pocztex, PACZKI24, PACZKI48 ani Paczki+, a placówka może odmówić, gdy brakuje jej miejsca.
 
 Czy i jak przedłużysz czas w Paczkomacie InPost, sprawdź w aplikacji InPost Mobile. Allegro może dać Ci możliwość przedłużenia czasu na odbiór paczki z Allegro Delivery w wybranych punktach i automatach, na zasadach z osobnego regulaminu: sprawdź to na Allegro.
 
@@ -78,7 +78,7 @@ Jeśli i tak nie zdążysz:
 - Napisz do sklepu | Przed terminem, jeśli już jej nie chcesz, a po terminie, jeśli Ci umknął.
 :::
 
-InPost może przypomnieć o czekającej paczce statusem `Reminder of a waiting parcel`. Poczta Polska zostawia powtórne awizo dzień po upływie 7-dniowego terminu z pierwszego, a Pocztex wysyła kolejne SMS-y. Nie odkładaj odbioru do ostatniej wiadomości.
+InPost może przypomnieć o czekającej paczce osobnym statusem. Poczta Polska zostawia powtórne awizo dzień po upływie 7-dniowego terminu z pierwszego, a przy Pocztex PUNKT i AUTOMAT dostaniesz trzy SMS-y: z miejscem, terminem i kodem odbioru, a potem dwa przypomnienia (oraz powiadomienie e-mailem, jeśli nadawca podał Twój adres). Nie odkładaj odbioru do ostatniej wiadomości.
 
 ## Czy dostanę zwrot pieniędzy za nieodebraną paczkę?
 
@@ -118,12 +118,13 @@ Tutaj dlatego, że nikt jej nie odebrał w terminie. Inne powody zebraliśmy w p
 Przy automacie taki status zwykle znaczy, że paczkę ktoś wyjął. Co wtedy zrobić, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 :::sources
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): gotowa do odbioru, przypomnienie, automat tymczasowy, powrót do nadawcy
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku, gdy korzystasz z Peek po polsku): gotowa do odbioru, przypomnienie, automat tymczasowy, powrót do nadawcy
+- [Universal Parcel Scraper: DPD Polska](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dpd-pl) – statusy DPD Polska, które czyta Peek (po polsku, a gdy Peek nie zna jeszcze któregoś polskiego statusu, całą historię po angielsku): przyjęcie do punktu Pickup, zwrot przesyłki
 - [Poczta Polska: Regulamin świadczenia usług powszechnych, tekst jednolity](https://www.poczta-polska.pl/wp-content/uploads/2026/07/Regulamin-swiadczenia-uslug-powszechnych-tekst-jednolity.pdf) – awizo, paczki ponad 2 kg i z należnościami celnymi, powtórne awizo, 14 dni, przechowywanie, pełnomocnictwo
-- [Poczta Polska: Zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/) – do 14 dni po terminie, wyłączenia
+- [Poczta Polska: Zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/) – do 14 dni po terminie, wyłączenia, ważne od dnia następnego po przyjęciu
 - [Poczta Polska: Regulamin świadczenia usługi Pocztex w obrocie krajowym dla klienta biznesowego](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-biznesowego-obowiazuje-od-24.08.2026-r.pdf) – kurier 7 dni, PUNKT 7 i 3 dni, AUTOMAT 72 godziny, przypomnienia, zwrot na koszt nadawcy
 - [Poczta Polska: Cennik opłat dodatkowych](https://cennik.poczta-polska.pl/plik,1/cennik_oplat_dodatkowych_01112025.pdf) – poz. 7: zlecenie przez internet bez opłat, w placówce 6,00 zł, paczka pocztowa 2,00 zł za dzień, bez Pocztex
-- [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – 3 dni w punktach, 72 godziny w automatach, bez przedłużenia i przekierowania
+- [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – 3 dni w punktach, 72 godziny w automatach, bez przedłużenia i przekierowania, trzy SMS-y
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – DPD Pickup 2 pełne dni robocze, bez przedłużenia, zwrot do nadawcy
 - [Allegro: Program dostaw Allegro Delivery, informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – czas na odbiór: One Punkt 2 dni robocze, One Box 2 dni kalendarzowe, DHL POP i DHL BOX 2 dni robocze; nieodebrana przesyłka wraca do sprzedającego
 - [Allegro: Regulamin usługi Allegro Delivery](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – § 9 ust. 16: przedłużenie czasu odbioru w wybranych punktach i automatach na osobnych zasadach; § 12: przesyłki nieodebrane w terminie wracają do nadawcy

@@ -4,7 +4,7 @@ description: Was eine Sendungsverfolgung für alle Paketdienste kann, wie sie fu
 slug: paketverfolgung-aller-anbieter
 picture: Fünf bunte Lieferwagen, deren gepunktete Wege alle in einer Liste auf einem Handy enden, und Pip, der strahlend aus einem offenen Karton schaut.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Eine Paketverfolgung aller Anbieter, kurz Paket-Tracker, ist eine Website oder App, die Sendungsnummern jedes Paketdienstes annimmt, selbst erkennt, woher eine Nummer stammt, die Scans abruft und alle deine Pakete in einer Liste sammelt. Sie zeigt nur Scans, die der Paketdienst erfasst hat, und ist ihm deshalb nie voraus. Die Tracker unterscheiden sich vor allem darin, was sie von dir wollen: ein Konto, Zugriff auf dein Postfach, ein Abo für Mitteilungen oder Geduld mit Werbung.
@@ -18,7 +18,10 @@ Ja, und vielleicht hast du schon eine: Neben den Trackern sammeln auch die Apps 
 | Du fügst eine Nummer oder einen Link ein | Diese Nummer | Jeder Tracker |
 | Du leitest eine E-Mail weiter | Diese E-Mail | ParcelsApp, Parcello, ParcelTrack, Shop, Lieferungen (Deliveries) |
 | Du verbindest dein Postfach | Dein Postfach, gefiltert nach den Regeln des Dienstes | Shop, AfterShip, PayPal, Klarna |
+| Du meldest dich in der App beim Shop an | Deine Bestellungen, auf dem Handy von der Bestellseite gelesen | ParcelsApp bei AliExpress, Amazon, eBay, Temu, SHEIN und Lazada |
 | Der Paketdienst oder der Shop ordnet dir das Paket zu | Deinen Namen, deine Adresse, E-Mail-Adresse oder Telefonnummer | DHL, [Österreichische Post](carrier:austrian-post), [Schweizerische Post](carrier:swiss-post); Shopify-Bestellungen in Shop |
+
+Bei ParcelsApp bleibt die Anmeldung laut Datenschutzerklärung zwischen dir und dem Shop: Das Passwort sieht ParcelsApp nie, die Bestellseite wird auf dem Handy gelesen, und an den Server gehen nicht ihr Inhalt, sondern die Sendungsnummern der Bestellungen, die du auswählst; die Bestellungen selbst nur, wenn du Sync nutzt.
 
 ## Wie sehe ich alle Pakete, die zu mir unterwegs sind?
 
@@ -50,13 +53,13 @@ Keine ist für alle die beste: Es hängt von deinen Paketdiensten ab und davon, 
 | Mitteilungen | App-Beschreibung oder Hilfeseiten | Parcel schickt Push-Mitteilungen nur im Premium-Abo |
 | Dein Postfach | Musst du Gmail oder Outlook verbinden, oder reicht es, eine E-Mail weiterzuleiten? | Shop durchsucht nach dem Verbinden die E-Mails der letzten 30 Tage und schaut danach laufend weiter |
 | Deine Daten | „App-Datenschutz“ im App Store, „Datensicherheit“ bei Google Play, die Datenschutzerklärung | Im App Store steht dazu: „Diese Informationen wurden von Apple nicht verifiziert.“ Jeder Tracker gibt deine Nummer weiter |
-| Wie lange Daten gespeichert bleiben | Die Datenschutzerklärung, bei Google Play „Datensicherheit“ | Lieferungen hebt weitergeleitete E-Mails bis zu zehn Tage auf. Bei Google Play steht für die Android-App von ParcelsApp „Daten können nicht gelöscht werden“ |
+| Wie lange Daten gespeichert bleiben | Die Datenschutzerklärung, bei Google Play „Datensicherheit“ | Lieferungen hebt weitergeleitete E-Mails bis zu zehn Tage auf; ParcelsApp löscht sie nach der Verarbeitung, solche ohne Treffer nach spätestens sieben Tagen. Bei Google Play steht für die Android-App von ParcelsApp „Daten können nicht gelöscht werden“ |
 | Händlerstatus | App Store in Deutschland und Österreich, unter „Anbieter“ | Hat sich der Entwickler nicht als Händler ausgewiesen, gelten laut App Store für Verbraucher im EWR die Verbraucherrechte nicht für Verträge mit ihm |
 | Deine Paketdienste | Die Liste der Paketdienste des Trackers | Die Zahlen nennen die Anbieter selbst: 17TRACK spricht im App Store von 2500+, auf seiner USPS-Seite von 2800+ |
 
 ## Kostenlos oder mit Abo: Tracker im Vergleich
 
-Die meisten kosten erst einmal nichts, haben dann aber Werbung, eine Obergrenze oder keine Push-Mitteilungen. Die Liste ist alphabetisch, ohne Rangfolge, und stützt sich auf die eigenen Seiten der Anbieter und ihre Einträge im deutschen App Store (Stand: Anfang Oktober 2026). Peek, das diesen Ratgeber herausgibt, steht wie die anderen in der Liste.
+Die meisten kosten erst einmal nichts, haben dann aber Werbung, eine Obergrenze oder keine Push-Mitteilungen. Die Liste ist alphabetisch, ohne Rangfolge, und stützt sich auf die eigenen Seiten der Anbieter und ihre Einträge im deutschen App Store (Stand: 10. November 2026). Peek, das diesen Ratgeber herausgibt, steht wie die anderen in der Liste.
 
 | Tracker | Konto | Werbung laut Angabe | Kostenlos | Bezahlt in Deutschland |
 | --- | --- | --- | --- | --- |
@@ -65,8 +68,8 @@ Die meisten kosten erst einmal nichts, haben dann aber Werbung, eine Obergrenze 
 | Lieferungen (Deliveries) | Freiwillig, für die Synchronisierung über Junecloud | Keine angegeben | Nicht möglich: Schon zum Start braucht die App ein Abo | 5,49 € im Jahr oder 0,99 € im Monat |
 | Parcel | Keine persönlichen Angaben nötig | Ja | Bis zu 3 Sendungen gleichzeitig, ohne Push-Mitteilungen | 6,99 € im Jahr |
 | Parcello | Nicht angegeben | Ja | Mit Werbung, Push-Mitteilungen inklusive | Ohne Werbung: 0,99 € im Monat oder 4,99 € im Jahr |
-| ParcelsApp (auf dem iPhone „Packages“) | „Keine Registrierung erforderlich“ | Ja | Mit Werbung | Premium ohne Werbung und Grenzen: 4,99 € oder 0,99 €, Laufzeit nicht angegeben |
-| ParcelTrack | Nicht angegeben | Keine angegeben | Mit kostenlosen Push-Mitteilungen | Premium für 3,49 €, laut Beschreibung |
+| ParcelsApp (auf dem iPhone „Packages“) | „Keine Registrierung erforderlich“ | Ja | Mit Werbung | Premium ohne Werbung und Grenzen: 12,99 € oder 1,99 €, für einen Monat oder ein Jahr, ohne Angabe, welcher Preis wofür gilt |
+| ParcelTrack | Nicht angegeben | Keine angegeben | Mit kostenlosen Push-Mitteilungen | Premium: laut Beschreibung 3,49 €, unter „In-App-Käufe“ 2,99 € |
 | [Peek](/) | Zum Verfolgen nicht nötig; anmelden nur, um Pakete zusammenzuhalten | Keine, laut Datenschutzhinweis | Abfragen pro Tag begrenzt, um Massenabfragen zu verhindern | Gibt es nicht: laut Datenschutzhinweis ein privates, nicht kommerzielles Projekt |
 
 Die Abo-Preise in den App Stores von Deutschland, Österreich und der Schweiz:
@@ -97,7 +100,7 @@ Wie du eine Nummer selbst entschlüsselst, erklärt der Ratgeber [Sendungsnummer
 
 - **Die Schnittstelle (API) des Paketdienstes**, zu dessen Bedingungen.
 - **Die Website des Paketdienstes**, automatisch ausgelesen. Die Android-App von ParcelsApp „zeigt Informationen von offiziellen Websites der nationalen Postdienste an“.
-- **Bezahlte Echtzeit-Meldungen.** Manche Paketdienste melden neue Scans direkt an Parcel, laut Parcel meist innerhalb von 10 Minuten. Die meisten davon lassen sich aber jede verfolgte Lieferung von Parcel bezahlen. [GLS Deutschland](carrier:gls-de) verlangt dafür derzeit nichts, deshalb bekommen bei GLS alle Parcel-Nutzer diese Meldungen ohne Begrenzung.
+- **Bezahlte Echtzeit-Meldungen.** Manche Paketdienste melden neue Scans direkt an Parcel, laut Parcel meist innerhalb von 10 Minuten. Die meisten davon lassen sich aber jede verfolgte Lieferung von Parcel bezahlen, deshalb gibt es sie nur im Premium-Abo und mit strengen Grenzen. [GLS Deutschland](carrier:gls-de) verlangt dafür derzeit nichts, deshalb bekommen bei GLS laut Parcel alle Kunden diese Meldungen ohne Begrenzung.
 - **Ein anderer Tracker.** Bei PayPal werden die Tracking-Updates „von Aftership unterstützt“. Peeks Datenschutzhinweis nennt ParcelsApp, Ship24, 17TRACK und den Weltpostverein unter den Diensten, die bei Bedarf abgefragt werden.
 - **Der Händler.** In Apple Wallet werden „die vom Händler bereitgestellten Informationen angezeigt“.
 
@@ -126,6 +129,8 @@ Alles, was der Paketdienst nicht veröffentlicht hat. ParcelsApp schreibt es off
 - Laut DHL Paket kann es bis zu 24 Stunden dauern, bis eine Sendung überhaupt in der DHL Sendungsverfolgung erscheint.
 - Parcel gibt an, dass seine App der Website des Paketdienstes bis zu 90 Minuten hinterherhinkt, im Schnitt 45 Minuten.
 
+Manchmal gibt es noch gar nichts zu sehen: Laut ParcelsApp kann eine Sendungsnummer schon existieren, bevor sich das Paket bewegt, etwa wenn der Verkäufer zuerst das Etikett erstellt und das Paket erst später übergibt. Bis zum ersten Scan kann es dann heißen, die Nummer sei nicht zu finden oder nur das Etikett sei erstellt.
+
 **Für DHL Päckchen gibt es nichts zu sehen.** DHL schreibt: „Päckchen haben keine Sendungsverfolgung.“ Sendungsverfolgung gibt es laut DHL nur für DHL Pakete und für DHL Päckchen International mit dem Service „Versicherung“. Für ein normales DHL Päckchen findet also auch kein Tracker Scans.
 
 Handeln kann ein Tracker auch nicht für dich: Um eine Zustellung zu ändern, eine Gebühr zu bezahlen oder einen Verlust zu melden, schickt dich ParcelsApp auf die Website des Paketdienstes. Bewegt sich die Sendungsverfolgung seit Tagen nicht, lies nach, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating). Steht dort „Zugestellt“, aber bei dir ist nichts angekommen, hilft [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
@@ -134,7 +139,7 @@ Handeln kann ein Tracker auch nicht für dich: Um eine Zustellung zu ändern, ei
 
 Erste Anhaltspunkte liefern die Angaben der Anbieter selbst. Die Datenschutzerklärung von 17TRACK nennt für registrierte Nutzer außerhalb von Festlandchina und Hongkong die VASTAR SINGAPORE TECHNOLOGY PTE. LTD. als Verantwortliche. Kontodaten liegen auf Servern von Tencent Cloud in Guangzhou, China, und in den USA. Für Nutzer in der EU verweist 17TRACK auf die DSGVO: Verlassen ihre Daten den Europäischen Wirtschaftsraum, stützt sich 17TRACK auf Standardvertragsklauseln der EU-Kommission oder darauf, dass das Zielland ein angemessenes Datenschutzniveau bietet. Im deutschen App Store steht bei 17TRACK „Enthält Werbung“, und unter „Anbieter“ hat sich der Entwickler als Händler ausgewiesen. Was die App erfasst, prüfst du im „App-Datenschutz“.
 
-ParcelsApp hat laut Datenschutzerklärung einen EU-Vertreter nach Artikel 27 DSGVO mit Sitz in Irland bestellt. Auf der Website setzen Google und Yandex Cookies für Werbung, und die Android-App „wird durch Werbung unterstützt“. Auch der Anbieter von ParcelsApp hat sich im deutschen App Store als Händler ausgewiesen. Für jeden anderen Tracker hilft die Prüfliste oben.
+ParcelsApp hat laut Datenschutzerklärung einen EU-Vertreter nach Artikel 27 DSGVO mit Sitz in Irland bestellt. Auf der Website setzen Google und Yandex Cookies für Werbung, und die Android-App „wird durch Werbung unterstützt“. In der kostenlosen App kommt die Werbung laut Datenschutzerklärung von Google AdMob: Im EWR, in Großbritannien und in der Schweiz fragt die App vorher mit Googles Einwilligungsformular, personalisiert ist die Werbung nur mit deiner Zustimmung, und Premium ist werbefrei. Auch der Anbieter von ParcelsApp hat sich im deutschen App Store als Händler ausgewiesen. Für jeden anderen Tracker hilft die Prüfliste oben.
 
 ## Paket-SMS mit Sendungsnummer: Kann das ein Fake sein?
 
@@ -164,7 +169,7 @@ Ja, und die Sendungsnummer darin beweist nichts. Die Schweizerische Post warnt: 
 - [App Store: Parcel](https://apps.apple.com/de/app/id375589283) – Werbung, 3 Sendungen, Push nur mit Premium, Preis
 - [Parcel: Privacy policy](https://parcelapp.net/privacy.html) – keine persönlichen Angaben nötig
 - [Parcel: FAQ](https://parcelapp.net/help/faq/) – Verzögerung gegenüber den Paketdiensten
-- [Parcel: Real-time notifications](https://parcel.app/help/real-time-notifications.html) – bezahlte Echtzeit-Meldungen, GLS Deutschland
+- [Parcel: Real-time notifications](https://parcel.app/help/real-time-notifications.html) – bezahlte Echtzeit-Meldungen, nur mit Premium, GLS Deutschland
 - [App Store: 17TRACK](https://apps.apple.com/de/app/id1004956012) – Konto, Werbung, Mitgliedschaften, 2500+, Händler
 - [17TRACK: USPS Tracking](https://www.17track.net/en/uspsTracking) – 2800+ Paketdienste
 - [17TRACK: Product Privacy Policy](https://www.17track.net/privacy-en.html) – Verantwortliche, Tencent Cloud, DSGVO, Standardvertragsklauseln
@@ -172,8 +177,8 @@ Ja, und die Sendungsnummer darin beweist nichts. Die Schweizerische Post warnt: 
 - [Junecloud: Subscriptions](https://junecloud.com/support/deliveries-ios/subscriptions.html) – Abo zum Start
 - [Junecloud: Privacy overview](https://junecloud.com/support/deliveries-ios/deliveries-privacy-overview.html) – freiwilliges Konto, E-Mails bis zu zehn Tage
 - [App Store: Parcello](https://apps.apple.com/de/app/id1061039420) – Werbung, Push, Parcello-Inbox, Supporter-Preise
-- [App Store: ParcelTrack](https://apps.apple.com/de/app/id840216376) – keine fremde Werbung, Push, ParcelTrack Inbox, Premium für 3,49 €
-- [App Store: Packages](https://apps.apple.com/de/app/id1229071393) – Werbung, Premium-Preise
+- [App Store: ParcelTrack](https://apps.apple.com/de/app/id840216376) – keine fremde Werbung, Push, ParcelTrack Inbox, Premium für 3,49 € laut Beschreibung und 2,99 € unter In-App-Käufe
+- [App Store: Packages](https://apps.apple.com/de/app/id1229071393) – Werbung, Premium-Preise, ein Monat oder ein Jahr
 - [App Store Österreich: 17TRACK](https://apps.apple.com/at/app/id1004956012) – Preis in Österreich
 - [App Store Österreich: Lieferungen (Deliveries)](https://apps.apple.com/at/app/id290986013) – Preis in Österreich
 - [App Store Österreich: Parcel](https://apps.apple.com/at/app/id375589283) – Preis in Österreich
@@ -182,8 +187,8 @@ Ja, und die Sendungsnummer darin beweist nichts. Die Schweizerische Post warnt: 
 - [App Store Schweiz: Parcel](https://apps.apple.com/ch/app/id375589283) – Preis in CHF
 - [Google Play: Parcels](https://play.google.com/store/apps/details?id=com.brightstripe.parcels&hl=de) – keine Registrierung, Postwebsites, Werbung, Daten können nicht gelöscht werden
 - [ParcelsApp: Startseite](https://parcelsapp.com/en) – verknüpfte Nummern
-- [ParcelsApp: Privacy policy](https://parcelsapp.com/en/privacy) – Weiterleiten von E-Mails, EU-Vertreter, Werbe-Cookies
-- [ParcelsApp: Why is my parcel not tracking?](https://parcelsapp.com/en/faq/why-is-my-parcel-not-tracking) – neue Nummern, keine zusätzlichen Scans, Website des Paketdienstes
+- [ParcelsApp: Privacy policy](https://parcelsapp.com/en/privacy) – Weiterleiten von E-Mails und Löschfristen, Anmeldung beim Shop in der App, EU-Vertreter, Werbe-Cookies, AdMob und Einwilligungsformular
+- [ParcelsApp: Why is my parcel not tracking?](https://parcelsapp.com/en/faq/why-is-my-parcel-not-tracking) – Nummer vor dem ersten Scan, neue Nummern, keine zusätzlichen Scans, Website des Paketdienstes
 - [DHL: Probleme mit der Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – bis zu 24 Stunden, Päckchen ohne Sendungsverfolgung
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z-Nummern und ihre Prüfziffer
 - [UPU: Standards](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13-stellige Postnummern

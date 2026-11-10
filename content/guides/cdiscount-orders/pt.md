@@ -100,7 +100,7 @@ Preços em França continental das encomendas que a Cdiscount envia, conforme o 
 | Normal, ao domicílio | 4,99 € | 4,99 € abaixo de 10 €, depois grátis |
 | Normal, ponto de recolha | 2,99 € abaixo de 25 €, depois grátis | Grátis |
 | Expresso, ao domicílio | 9,99 € | 9,99 € abaixo de 10 €, 2,99 € de 10 a 25 €, depois grátis |
-| Expresso, ponto de recolha | 4,99 € abaixo de 25 €, depois 3,99 € | 4,99 € abaixo de 10 €, depois grátis |
+| Expresso, ponto de recolha | 4,99 € abaixo de 25 €, depois 3,99 € (sempre 4,99 € na página dos modos de entrega) | 4,99 € abaixo de 10 €, depois grátis |
 | Na mesma noite | 22,99 € | 22,99 € abaixo de 10 €, depois 9,99 € |
 
 O limite para a entrega grátis conta por volume, e uma encomenda a vários vendedores são vários volumes. Um vendedor que envia ele próprio define os seus preços: põe o artigo no cesto para ver as opções dele.
@@ -167,7 +167,7 @@ Se a encomenda de um vendedor mudar de transportadora pelo caminho e a primeira 
 - [Cdiscount: Comment retourner un produit ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Comment%20retourner%20un%20produit%20%3F) – devolução em «Mes commandes», 48 horas, artigos grandes, encomendas fora de França
 - [Cdiscount: Quels sont les différents modes de retour ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20diff%C3%A9rents%20modes%20de%20retour%20%3F) – etiqueta pré-paga, custo descontado, artigos grandes, Marketplace
 - [Cdiscount: Quels sont les délais de remboursement ?](https://clients.cdiscount.com/frequentlyaskedquestions.html?userinput=Quels%20sont%20les%20d%C3%A9lais%20de%20remboursement%20%3F) – de 5 a 7 dias úteis
-- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – transportadoras, prazos, dias nos pontos de recolha, artigos grandes, vendedores, preços para Portugal, entrega grátis só na Bélgica e no Luxemburgo, ColisExpat, impostos e prazo de desistência
+- [Cdiscount: Nos modes de livraison](https://www.cdiscount.com/shipping/shippinginfo.html?shippingpartnerorigin=ft) – transportadoras, prazos, expresso no ponto de recolha a 4,99 €, dias nos pontos de recolha, artigos grandes, vendedores, preços para Portugal, entrega grátis só na Bélgica e no Luxemburgo, ColisExpat, impostos e prazo de desistência
 - [Cdiscount: Cdiscount à volonté](https://www.cdiscount.com/cdav) – preço, limite por volume, pontos de recolha
 - [Cdiscount: Conditions générales de vente](https://clients.cdiscount.com/Simple/Cgv.aspx) – países, modos de entrega por país, artigos grandes só em França e na Bélgica, atraso, encomenda danificada, custos de devolução, número grátis a partir de Portugal
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – envio pelo vendedor ou pela Cdiscount, intervenção da Cdiscount, mediador FEVAD

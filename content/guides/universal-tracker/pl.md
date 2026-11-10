@@ -55,7 +55,7 @@ Nie ma jednej najlepszej dla wszystkich: to zależy od firm kurierskich, z któr
 
 ## Darmowe czy płatne: porównanie trackerów
 
-Większość trackerów jest na start darmowa, ale z reklamami, z limitem albo bez powiadomień push. Kolejność jest alfabetyczna, to nie ranking. Dane pochodzą ze stron każdego z nich i z ich kart w polskim App Store z 7 października 2026. Peek, który wydaje ten poradnik, jest na liście na tych samych zasadach co pozostali.
+Większość trackerów jest na start darmowa, ale z reklamami, z limitem albo bez powiadomień push. Kolejność jest alfabetyczna, to nie ranking. Dane pochodzą ze stron każdego z nich i z ich kart w polskim App Store z 10 listopada 2026. Peek, który wydaje ten poradnik, jest na liście na tych samych zasadach co pozostali.
 
 | Tracker | Konto | Reklamy (deklaracja twórcy) | Wersja darmowa | Wersja płatna (Polska) |
 | --- | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ Większość trackerów jest na start darmowa, ale z reklamami, z limitem albo b
 | AfterShip | Tryb gościa, do 3 przesyłek | Tak | Z powiadomieniami push o 8 głównych statusach | Brak zakupów w aplikacji |
 | Deliveries | Opcjonalne, do synchronizacji przez Junecloud | Nie | Brak: abonament jest potrzebny, żeby w ogóle zacząć | 23,99 zł rocznie lub 4,99 zł miesięcznie |
 | Parcel | Nie wymaga danych osobowych | Tak | 3 przesyłki, bez powiadomień push | 29,99 zł rocznie |
-| ParcelsApp (na iPhonie: Packages) | „Rejestracja nie jest wymagana” | Tak | Z reklamami | Premium usuwa reklamy i limity: 7,99 zł lub 24,99 zł, okres nie jest podany |
+| ParcelsApp (na iPhonie: Packages) | „Rejestracja nie jest wymagana” | Tak | Z reklamami | Premium usuwa reklamy i limity: 9,99 zł lub 49,99 zł, na miesiąc albo na rok, bez wskazania, która cena dotyczy którego okresu |
 | [Peek](/) | Niepotrzebne do śledzenia; zaloguj się, żeby mieć wszystkie paczki na jednej liście | Nie: według informacji o prywatności nie wyświetla reklam | Z dziennym limitem wyszukiwań, który chroni przed masowym użyciem | Brak: to osobisty, niekomercyjny projekt |
 
 Ceny się zmieniają: przed zakupem sprawdź „Zakupy w aplikacji” na karcie aplikacji w polskim App Store.
@@ -160,7 +160,7 @@ Tak. W kwietniu 2026 roku CERT Polska ostrzegał przed [SMS-ami podszywającymi 
 - [Parcel: Privacy policy](https://parcelapp.net/privacy.html) – bez danych osobowych
 - [Parcel: FAQ](https://parcelapp.net/help/faq/) – opóźnienie względem strony przewoźnika
 - [Parcel: Real-time notifications](https://parcel.app/help/real-time-notifications.html) – płatne powiadomienia od przewoźników
-- [App Store: Packages](https://apps.apple.com/pl/app/id1229071393) – reklamy, ceny Premium, języki
+- [App Store: Packages](https://apps.apple.com/pl/app/id1229071393) – reklamy, ceny i okresy Premium, języki
 - [Google Play: Parcels](https://play.google.com/store/apps/details?id=com.brightstripe.parcels&hl=pl) – oficjalne strony poczt, bez rejestracji, reklamy, nie można usunąć danych
 - [ParcelsApp: strona główna](https://parcelsapp.com/en) – łączenie numerów
 - [ParcelsApp: Privacy policy](https://parcelsapp.com/en/privacy) – przesyłanie e-maili, przedstawiciel w UE, reklamowe pliki cookie

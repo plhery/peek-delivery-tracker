@@ -3,7 +3,7 @@ title: GOFO Italy tracking: codici GFIT, stati e reclami
 description: Tracking GOFO in Italia: com'è fatto il codice GFIT o CIIT, cosa vogliono dire gli stati di GOFO e come fare reclamo se il pacco è in ritardo o smarrito.
 slug: gofo-italy-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 GOFO Italy è la rete italiana di GOFO, un corriere di pacchi presente in diversi Paesi, e consegna pacchi in Italia. Nell'elenco dei corrieri di Peek si chiama anche CIRRO Parcel Italy. I suoi codici di tracking iniziano con `GFIT` o `CIIT`: segui il pacco sulla pagina di tracciamento italiana di GOFO, su gofo.com, oppure incolla il codice nel campo qui sopra. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
@@ -46,7 +46,7 @@ Se GOFO Italy ha ricevuto il pacco da [YunExpress](carrier:yunexpress), il tracc
 
 ## Pacco GOFO in ritardo, non consegnato, smarrito o danneggiato
 
-**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Se un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna, la sua pagina in Peek lo segnala e rimanda alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
+**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Se un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna, Peek lo segnala nell'elenco con «Nessun aggiornamento da quattro giorni» e nella sua pagina scrive «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO Italy.», con un link alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
 
 **Consegna fallita.** Dopo `Consegna fallita, tipo:Destinatario assente` o `Consegna fallita, tipo:L'indirizzo è errato`, Peek mostra «Tentativo di consegna»; un tentativo fallito con un altro motivo dopo `tipo:` appare come «Problema segnalato». Cosa succede dopo dipende da GOFO: leggi [consegna mancata](guide:missed-delivery) per sapere cosa controllare.
 
@@ -54,27 +54,27 @@ Se GOFO Italy ha ricevuto il pacco da [YunExpress](carrier:yunexpress), il tracc
 
 **`Consegnato`, ma il pacco non c'è.** Il negozio è responsabile della consegna del tuo ordine: spetta a lui contattare il corriere e dimostrare che il pacco è stato consegnato, e se non ci riesce deve inviarti un articolo identico o rimborsarti. Per cosa controllare prima intorno a casa, leggi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-**Danneggiato.** Il negozio è responsabile dei danni dalla spedizione fino alla consegna, quindi, quando puoi, controlla il pacco in presenza del corriere. Se la scatola ha danni visibili, l'AGCOM dice che puoi rifiutarla oppure accettarla con riserva. Altro in [pacco danneggiato](guide:damaged-parcel).
+**Danneggiato.** Il negozio è responsabile dei danni dalla spedizione fino alla consegna, quindi, quando puoi, controlla il pacco in presenza del corriere. Se la scatola ha danni visibili, l'AGCOM dice che puoi rifiutarla oppure accettarla con riserva; puoi anche verificare il contenuto prima di ritirare il pacco, e l'esito finisce in un verbale che firmi. Altro in [pacco danneggiato](guide:damaged-parcel).
 
 ## Come fare reclamo per una consegna GOFO Italy
 
 Comincia dal negozio che ha spedito il pacco, perché risponde lui della consegna. Per un reclamo contro il corriere, l'AGCOM, l'autorità per le comunicazioni che regola anche il settore postale, prevede un percorso per gli operatori postali, e i pacchi fino a 31,5 kg rientrano nei servizi postali:
 
 1. Manda all'operatore un reclamo scritto, con il modulo del suo sito o uno richiesto via e-mail. Deve risponderti entro 45 giorni.
-2. Se la risposta non ti soddisfa, o non arriva entro 45 giorni, chiedi all'operatore la conciliazione. Si chiude entro 60 giorni.
+2. Se la risposta non ti soddisfa, o non arriva entro 45 giorni, chiedi all'operatore la conciliazione, con il modulo del suo sito o uno richiesto via e-mail. Puoi farti assistere da un'associazione dei consumatori o delegare una persona di fiducia, e la procedura si chiude entro 60 giorni.
 3. Se non basta, hai 90 giorni per chiedere all'AGCOM la definizione della controversia con il Formulario CP. L'AGCOM decide entro 150 giorni, e la decisione vincola entrambe le parti.
 
 L'AGCOM può imporre rimborsi o indennizzi, non risarcimenti dei danni: per quelli, e in qualsiasi momento, puoi rivolgerti al giudice ordinario. Se l'operatore non risponde al reclamo o alla richiesta di conciliazione, segnalalo sul Portale delle segnalazioni dell'AGCOM. Il Contact Center dell'AGCOM risponde dal lunedì al venerdì, dalle 10:00 alle 14:00, al numero verde 800.185060 da telefono fisso o allo 081.750750 da cellulare o dall'estero.
 
 ## Assistenza clienti GOFO Italy
 
-La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, e Peek la indica con «Chiedi aiuto a GOFO Italy» quando un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna. La società, GOFO Italia s.r.l., ha sede legale in Via Juan Manuel Fangio 11, 20045 Lainate (MI). Tieni a portata di mano il codice `GFIT` o `CIIT` e il numero d'ordine.
+La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, e Peek la indica con «Chiedi aiuto a GOFO Italy» quando un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna. La società, GOFO Italia s.r.l., ha sede legale in Via Juan Manuel Fangio 11, 20045 Lainate (MI). Tieni a portata di mano il codice `GFIT` o `CIIT` e il numero d'ordine. L'AGCOM ricorda che ogni operatore postale deve offrire agli utenti canali di comunicazione gratuiti.
 
 ## Tracking GOFO Italy con Peek
 
 [Peek](/) riconosce da solo i codici `GFIT` e `CIIT`. Puoi incollare anche un link della pagina di tracciamento italiana di GOFO (su gofo.com o gofoexpress.it, con `id=` e il codice).
 
-Peek controlla il tracciamento italiano di GOFO ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di GOFO; quando rispondono i servizi di tracciamento, ogni 15 minuti). Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e questi luoghi su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Se GOFO indica solo il codice di un deposito o il Paese, la scansione appare senza luogo. Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek mostra la data di consegna prevista da GOFO finché il pacco non viene consegnato, reso o lasciato in un punto di ritiro; non mostra il peso e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
+Peek controlla il tracciamento italiano di GOFO ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di GOFO; quando rispondono i servizi di tracciamento, ogni 15 minuti). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e questi luoghi su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Se GOFO indica solo il codice di un deposito o il Paese, la scansione appare senza luogo. Gli orari di GOFO sono letti sull'ora italiana e mostrati nel tuo fuso orario: su peektracker.com lo ricorda una riga sotto la cronologia («Orari nel tuo fuso orario: …»). Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek mostra la data di consegna prevista da GOFO finché il pacco non viene consegnato, reso o lasciato in un punto di ritiro; non mostra il peso e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
 
 ## Domande sul tracking GOFO
 
@@ -96,7 +96,7 @@ Contatta il negozio. Per le norme europee risponde della consegna finché il pac
 
 :::sources
 - [AGCOM: Determina n. 12/26/DSP](https://www.agcom.it/sites/default/files/provvedimenti/determina/2026/Determina%20arch%20parziale%2012_26_DSP%20-%20Gofo%20pdf.pdf) – GOFO Italia s.r.l., sede legale a Lainate, procedimento AGCOM del 2026 e sanzione pagata in misura ridotta (2 settembre 2026)
-- [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – reclamo entro 45 giorni, conciliazione entro 60, Formulario CP entro 90, pacchi fino a 31,5 kg, pacchi danneggiati, Contact Center
+- [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – reclamo entro 45 giorni, conciliazione entro 60 e assistenza, Formulario CP entro 90, pacchi fino a 31,5 kg, pacchi danneggiati e verifica del contenuto, canali gratuiti, Contact Center
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – consegna entro 30 giorni, proroga, danni fino alla consegna
 - [Your Europe: FAQ, spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – il negozio dimostra la consegna, controllo in presenza dello spedizioniere
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme dei codici, link, diciture italiane e categorie, scansioni di GOFO riportate da YunExpress, CIRRO Parcel Italy, cosa mostra e lascia fuori Peek

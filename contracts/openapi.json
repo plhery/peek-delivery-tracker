@@ -52695,6 +52695,94 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://maraton.poznan.pl/tracking"
+    },
+    "gordom-logistika": {
+      "displayName": "Gordom Logistika",
+      "aliases": [
+        "GORDOM logistika j.d.o.o."
+      ],
+      "countries": [
+        "HR",
+        "SI"
+      ],
+      "color": "#1f4d76",
+      "selectable": true,
+      "timezone": "Europe/Zagreb",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gordomlogistika.hr/tracking/"
+    },
+    "intime-hr": {
+      "displayName": "In Time Croatia",
+      "aliases": [
+        "IN TIME d.o.o."
+      ],
+      "countries": [
+        "HR"
+      ],
+      "color": "#00999b",
+      "selectable": true,
+      "timezone": "Europe/Zagreb",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.in-time.hr/pracenje?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "in-time.hr",
+            "www.in-time.hr"
+          ],
+          "pathPattern": "^/pracenje/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.in-time.hr/pracenje"
+    },
+    "webrinq": {
+      "displayName": "WebrinQ",
+      "aliases": [
+        "WebrinQ A/S"
+      ],
+      "countries": [
+        "DK"
+      ],
+      "color": "#2c5b5a",
+      "selectable": true,
+      "timezone": "Europe/Copenhagen",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.webrinq.com/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.webrinq.com"
+          ],
+          "pathPattern": "^/[^/]+/?$",
+          "path": "^/([^/]+)/?$"
+        },
+        {
+          "domains": [
+            "tracking.webrinq.com"
+          ],
+          "pathPattern": "^/$",
+          "params": [
+            "q"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.webrinq.com/"
     }
   },
   "servers": [
@@ -57324,7 +57412,10 @@
           "crosswin",
           "emole-express",
           "jet-dp",
-          "maraton"
+          "maraton",
+          "gordom-logistika",
+          "intime-hr",
+          "webrinq"
         ]
       },
       "Stage": {

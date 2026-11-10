@@ -347,6 +347,36 @@ class SettingsTest {
     }
 
     @Test
+    fun aGuestWhoseOnlyParcelsAreStillToBeReadAgainCanForgetThemAndHearsHowMany() {
+        // Two parcels kept by their key alone, their saved copy lost: listed nowhere, still this phone's to forget.
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            parcels.value = emptyList()
+            unlistedDeviceParcels.value = 2
+        }
+        open()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_FORGET_ALL)
+        assertTrue(shows(text("door.recents.forget.many", mapOf("count" to 2))))
+        tap(SETTINGS_ALERT_ACTION)
+        assertTrue("forgetDeviceParcels" in source.accountCalls)
+        assertFalse(exists(SETTINGS_FORGET_ALL))
+    }
+
+    @Test
+    fun forgetAllCountsTheListedParcelsWithThoseStillToBeReadAgain() {
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            unlistedDeviceParcels.value = 1
+        }
+        val count = source.parcels.value.size + 1
+        open()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_FORGET_ALL)
+        assertTrue(shows(text("door.recents.forget.many", mapOf("count" to count))))
+    }
+
+    @Test
     fun forgetAllAsksWithTheCountAndLeavesTheSheetOpen() {
         show(AuthenticationState.Welcome) { isGuest = true }
         val count = source.parcels.value.size

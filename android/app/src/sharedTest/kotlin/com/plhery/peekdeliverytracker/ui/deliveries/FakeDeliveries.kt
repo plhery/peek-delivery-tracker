@@ -85,6 +85,7 @@ class FakeDeliveries(
     val onTheWayDefaults: UserDefaults = MemoryDefaults(),
 ) : DeliveriesSource {
     override val parcels = MutableStateFlow(parcels)
+    override val unlistedDeviceParcels = MutableStateFlow(0)
     override val loading = MutableStateFlow(false)
     override val refreshing = MutableStateFlow(false)
     override val errorMessage = MutableStateFlow<String?>(null)
@@ -674,6 +675,7 @@ class FakeDeliveries(
     override suspend fun forgetDeviceParcels() {
         accountCall("forgetDeviceParcels")
         parcels.value = emptyList()
+        unlistedDeviceParcels.value = 0
     }
 
     override suspend fun deleteAccount(confirmation: String) = accountCall("deleteAccount:$confirmation")

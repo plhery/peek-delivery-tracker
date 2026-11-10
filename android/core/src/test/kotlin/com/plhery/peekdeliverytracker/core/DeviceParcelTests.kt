@@ -1303,17 +1303,40 @@ class DeviceParcelTests {
             storage, this,
         )
 
-        device.refresh()
-        assertEquals(listOf("read 22222222222C k", "read 22222222222D k", "read 22222222222E k"), calls.all)
-        assertEquals(mapOf("22222222222D" to key), storage.keys)
+        // The read that could not be answered ends the round, which fails: the rest wait, as on the iPhone.
+        assertThrows { device.refresh() }
+        assertEquals(listOf("read 22222222222C k", "read 22222222222D k"), calls.all)
+        assertEquals(mapOf("22222222222D" to key, "22222222222E" to key), storage.keys)
         assertTrue(device.isEmpty)
 
         offline = false
         device.refresh()
-        assertEquals("read 22222222222D k", calls.all.last())
+        assertEquals(listOf("read 22222222222D k", "read 22222222222E k"), calls.all.drop(2))
         assertEquals(listOf(id), device.list().map { it.id })
         assertEquals(mapOf("22222222222D" to key), storage.keys)
         assertFalse("Only an explicit forget asks the service to forget", calls.all.any { it.startsWith("forget") })
+    }
+
+    @Test
+    fun aRefreshWithOnlyAnUnreadableCopyLeftFailsWhenItsParcelCannotBeReadAgain() = runTest {
+        // A copy this build could not read: its key is kept, its parcel isn't listed.
+        val storage = Memory()
+        storage.keys = mapOf("22222222222B" to key)
+        val calls = Calls()
+        val device = device(client(calls, read = { throw IOException("The Internet connection appears to be offline.") }), storage, this)
+        assertTrue(device.isEmpty)
+
+        var thrown: Exception? = null
+        try {
+            device.refresh(all = true)
+        } catch (error: IOException) {
+            thrown = error
+        }
+        assertEquals("The Internet connection appears to be offline.", thrown?.message)
+        assertEquals(listOf("read 22222222222B k"), calls.all)
+        // Nothing is let go for it: the next refresh asks again.
+        assertEquals(mapOf("22222222222B" to key), storage.keys)
+        assertTrue(device.isEmpty)
     }
 
     @Test
@@ -1662,6 +1685,60 @@ class DeviceParcelTests {
         assertEquals(ParcelAlertPreset.All, preset(TrackingStage.Registered))
         assertEquals(ParcelAlertPreset.Important, preset(TrackingStage.Accepted))
         assertEquals(ParcelAlertPreset.Important, preset(TrackingStage.InTransit))
+    }
+
+    @Test
+    fun signedOutACheckWithOnlyAnUnreadableCopyLeftFailsOfflineRatherThanSayingNothingChanged() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        storage.keys = mapOf("22222222222B" to key)
+        val calls = Calls()
+        val device = device(client(calls, read = { throw IOException("The Internet connection appears to be offline.") }), storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val localizer = Localizer(AppLanguage.En)
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, localizer = localizer, device = device, deviceNotifications = quietNotifications(),
+        )
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertTrue(store.isGuest)
+        assertTrue(store.parcels.isEmpty())
+
+        val start = store.refreshAll()
+
+        assertEquals(
+            ParcelStore.RefreshStart.Completed(ParcelStore.RefreshResult.Failed(localizer.errorMessage(IOException("offline")))),
+            start,
+        )
+        assertTrue(calls.all.contains("read 22222222222B k"))
+        assertEquals(mapOf("22222222222B" to key), storage.keys)
+        // Settings offers Forget all for it, and counts it.
+        assertEquals(1, store.unlistedDeviceParcelsFlow.value)
+    }
+
+    @Test
+    fun signedOutForgetAllForgetsTheParcelsStillToBeReadAgainAndTheCountClears() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        storage.keys = mapOf("22222222222B" to key, "22222222222C" to key)
+        val calls = Calls()
+        val device = device(client(calls, read = { throw IOException("The Internet connection appears to be offline.") }), storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        // Opening the app loads the list, its copies unreadable offline.
+        store.load()
+        assertTrue(store.parcels.isEmpty())
+        assertEquals(2, store.unlistedDeviceParcelsFlow.value)
+
+        store.forgetDeviceParcels()
+
+        assertEquals(0, store.unlistedDeviceParcelsFlow.value)
+        assertTrue(storage.keys.isEmpty())
+        assertEquals(listOf("forget 22222222222B", "forget 22222222222C"), calls.all.filter { it.startsWith("forget") })
     }
 
     @Test

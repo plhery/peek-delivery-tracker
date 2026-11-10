@@ -175,7 +175,8 @@ Key server modules:
   - The iPhone and Android apps keep the owner keys apart from the last answers, which only
     show what was last known. An answer the app can't read, such as one another version
     wrote, is read again with its key, without the name given on the device; a key goes only
-    once the service no longer has its link. Only forgetting a parcel, or a new lookup
+    once the service no longer has its link, and a refresh that can't read it fails rather
+    than saying nothing changed. Only forgetting a parcel, or a new lookup
     taking its place, deletes its link, and the app asks again on each refresh until the
     service has answered.
   - Beside each link the browser notes what its sharer sends along (whether the name

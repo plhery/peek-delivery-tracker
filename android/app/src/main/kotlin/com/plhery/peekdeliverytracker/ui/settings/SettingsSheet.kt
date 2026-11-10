@@ -456,6 +456,7 @@ private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: Scroll
     val work = source.pageWork
     val session by source.session.collectAsState()
     val parcels by source.parcels.collectAsState()
+    val unlisted by source.unlistedDeviceParcels.collectAsState()
     val demo = source.isDemo
     val guest = source.isGuest
     val email = (session as? AuthenticationState.SignedIn)?.user?.email
@@ -499,7 +500,8 @@ private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: Scroll
                 })
             }
         } else if (guest) {
-            if (parcels.isNotEmpty()) {
+            // Parcels whose saved copy is lost and still to be read again are this phone's too: Forget all forgets them.
+            if (parcels.isNotEmpty() || unlisted > 0) {
                 SettingsGroup {
                     SettingsButtonRow(localized("door.recents.forgetAll"), SETTINGS_FORGET_ALL, { ask(ALERT_FORGET) })
                 }
@@ -644,7 +646,10 @@ private fun SettingsAlerts(state: AccountHost, nav: SettingsNav) {
             menus?.content = {
                 when (kind) {
                     ALERT_FORGET -> SettingsAlert(
-                        title = localizer.text("door.recents.forget.many", mapOf("count" to source.parcels.value.size)),
+                        title = localizer.text(
+                            "door.recents.forget.many",
+                            mapOf("count" to source.parcels.value.size + source.unlistedDeviceParcels.value),
+                        ),
                         message = null,
                         action = localizer.text("door.recents.forget.yes"),
                         actionTag = SETTINGS_ALERT_ACTION,

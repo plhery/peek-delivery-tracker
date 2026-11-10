@@ -516,6 +516,12 @@ class DeviceParcels(
 
     val isEmpty: Boolean get() = entries.isEmpty()
 
+    /**
+     * How many of this phone's own parcels are kept by their key alone, their saved copy lost and still to be read
+     * again: not listed, yet Forget all forgets them too.
+     */
+    val unlistedCount: Int get() = keys.keys.count { linkId -> entries.none { it.linkId.equalsCanonically(linkId) } }
+
     /** The parcels as the list shows them, under the names this device gave them. */
     fun list(): List<Parcel> = entries.map(::shown)
 
@@ -592,19 +598,21 @@ class DeviceParcels(
      *
      * First the service is told again of the links forgotten here that it could not be told about, and, unless `only`
      * one parcel is read, the keys whose parcels were lost on this phone (a file this build could not read, say) read
-     * their parcels again.
+     * their parcels again. A key that could not be read is trouble too, thrown once the round is done: with only such
+     * keys left, a phone offline or out of lookups hears so, not that nothing changed.
      */
     suspend fun refresh(all: Boolean = false, only: UUID? = null) {
         val client = client ?: return
         stopForgottenAlerts(client)
-        val recovered = try {
+        val recovery = try {
             tellPendingForgets(client)
-            if (only == null) recoverParcels(client) else emptySet()
+            if (only == null) recoverParcels(client) else Recovery(emptySet(), null)
         } catch (cancellation: CancellationException) {
             // What was already told or read stays so on file, as the parcels' round keeps what it read.
             save()
             throw cancellation
         }
+        val recovered = recovery.read
         var trouble: Exception? = null
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
@@ -635,8 +643,11 @@ class DeviceParcels(
             }
         }
         save()
-        trouble?.let { throw it }
+        (trouble ?: recovery.trouble)?.let { throw it }
     }
+
+    /** The links `recoverParcels` read again, and the trouble that ended its round. */
+    private class Recovery(val read: Set<String>, val trouble: Exception?)
 
     fun rename(id: UUID, label: String): Parcel = update(id) { it.copy(label = label) }
 
@@ -697,10 +708,10 @@ class DeviceParcels(
      * Reads again, with its key, each parcel of this phone's own whose saved copy was lost (a file this build could not
      * read, or a key saved without its file), and keeps it as a lookup made here, without the name it was given. A key
      * whose link leads nowhere, or that the service no longer takes as the owner's, goes; one the service could not
-     * answer for stays for the next refresh. Never a key still to be forgotten: those are not among the keys. Returns
-     * the links it read.
+     * answer for stays for the next refresh. Never a key still to be forgotten: those are not among the keys. The first
+     * trouble ends the round and is returned with the links read; the rest wait, as on the iPhone.
      */
-    private suspend fun recoverParcels(client: DeviceParcelClient): Set<String> {
+    private suspend fun recoverParcels(client: DeviceParcelClient): Recovery {
         val recovered = mutableSetOf<String>()
         for ((linkId, key) in keys) {
             if (entries.any { it.linkId.equalsCanonically(linkId) }) continue
@@ -708,8 +719,8 @@ class DeviceParcels(
                 client.read(linkId, key)
             } catch (cancellation: CancellationException) {
                 throw cancellation
-            } catch (_: Exception) {
-                continue
+            } catch (error: Exception) {
+                return Recovery(recovered, error)
             }
             // Followed or forgotten meanwhile.
             if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) == null) continue
@@ -724,7 +735,7 @@ class DeviceParcels(
             )
             recovered += linkId
         }
-        return recovered
+        return Recovery(recovered, null)
     }
 
     /**

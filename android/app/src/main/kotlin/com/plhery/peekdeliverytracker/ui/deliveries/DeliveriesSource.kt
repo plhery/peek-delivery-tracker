@@ -76,6 +76,9 @@ interface DeliveriesSource {
     val pageWork: PageWork
 
     val parcels: StateFlow<List<Parcel>>
+
+    /** `store.unlistedDeviceParcelsFlow`: signed out, this phone's parcels whose saved copy is lost and still to be read again. */
+    val unlistedDeviceParcels: StateFlow<Int>
     val loading: StateFlow<Boolean>
     val refreshing: StateFlow<Boolean>
     val errorMessage: StateFlow<String?>
@@ -409,6 +412,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val scope: CoroutineScope get() = container.scope
     override val pageWork: PageWork get() = PAGE_WORK
     override val parcels get() = container.parcels.parcelsFlow
+    override val unlistedDeviceParcels get() = container.parcels.unlistedDeviceParcelsFlow
     override val loading get() = container.parcels.loadingFlow
     override val refreshing get() = container.parcels.refreshingFlow
     override val errorMessage get() = container.parcels.errorMessageFlow

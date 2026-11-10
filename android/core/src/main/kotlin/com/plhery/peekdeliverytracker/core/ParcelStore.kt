@@ -269,6 +269,7 @@ class ParcelStore(
     private val deliveryLiveActivityErrorState = MutableStateFlow<String?>(null)
     private val undoParcelState = MutableStateFlow<Parcel?>(null)
     private val leftOnDeviceState = MutableStateFlow<LeftOnDevice?>(null)
+    private val unlistedDeviceParcelsState = MutableStateFlow(0)
 
     val parcelsFlow: StateFlow<List<Parcel>> = parcelsState.asStateFlow()
     val loadingFlow: StateFlow<Boolean> = loadingState.asStateFlow()
@@ -290,6 +291,13 @@ class ParcelStore(
     val undoParcelFlow: StateFlow<Parcel?> = undoParcelState.asStateFlow()
     val leftOnDeviceFlow: StateFlow<LeftOnDevice?> = leftOnDeviceState.asStateFlow()
 
+    /**
+     * Signed out, the parcels of this phone's own kept by their key alone, their saved copy lost and not read again yet
+     * ([DeviceParcels.unlistedCount]): Settings offers Forget all for them too, and counts them. Taken each time the
+     * list is set, the same list again included.
+     */
+    val unlistedDeviceParcelsFlow: StateFlow<Int> = unlistedDeviceParcelsState.asStateFlow()
+
     /** `objectWillChange`, for what no flow publishes: the postcodes this phone suggests. */
     val objectWillChange = PassthroughSignal()
 
@@ -297,8 +305,13 @@ class ParcelStore(
         get() = parcelsState.value
         private set(value) {
             parcelsState.value = value
+            takeUnlistedDeviceParcels()
             if (!holdingDeliverySurfaces) publishDeliverySurfaces()
         }
+
+    private fun takeUnlistedDeviceParcels() {
+        unlistedDeviceParcelsState.value = if (isGuest) device.unlistedCount else 0
+    }
 
     var loading: Boolean
         get() = loadingState.value
@@ -1573,7 +1586,13 @@ class ParcelStore(
         tryQuietly { device.refresh() }
         if (generation != session.generation || !isGuest || pendingMutations.isNotEmpty()) return
         val next = device.list()
-        if (next != parcels) parcels = next else publishDeliverySurfaces()
+        if (next != parcels) {
+            parcels = next
+        } else {
+            // A key let go, or read again into a parcel already listed through another link, leaves the list as it was.
+            takeUnlistedDeviceParcels()
+            publishDeliverySurfaces()
+        }
     }
 
     /**

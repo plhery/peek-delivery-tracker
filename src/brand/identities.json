@@ -862,6 +862,9 @@
   "crane-worldwide": {
     "decal": "crane-worldwide"
   },
+  "crc-post": {
+    "decal": "crc-post"
+  },
   "credifin": {
     "decal": "credifin"
   },
@@ -2009,6 +2012,12 @@
   },
   "instapack": {
     "decal": "instapack"
+  },
+  "integraa": {
+    "decal": "integraa",
+    "palette": {
+      "accent": "#0e1c2d"
+    }
   },
   "integral-pack": {
     "decal": "integral-pack"

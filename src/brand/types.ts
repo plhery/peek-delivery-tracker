@@ -732,7 +732,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'jlog'
   | 'time-matters'
   | 'alphastline'
-  | 'dpdex';
+  | 'dpdex'
+  | 'crc-post'
+  | 'integraa';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

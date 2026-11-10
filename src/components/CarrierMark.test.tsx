@@ -744,6 +744,8 @@ describe('carrier mark', () => {
     'time-matters',
     'alphastline',
     'dpdex',
+    'crc-post',
+    'integraa',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

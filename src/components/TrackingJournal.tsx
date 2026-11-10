@@ -72,8 +72,14 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
     {group.events.map(event => {
       const when = scanDate(event);
       const isCurrent = event.id === current?.id;
-      // A copy's words stay in sight, in case it was a scan of its own.
-      const relayed = [...new Set((relays.get(event.id) ?? []).map(wording))].filter(line => line !== wording(event));
+      // A copy's words stay in sight, in case it was a scan of its own; words composed another way are the same words.
+      const seen = new Set([wording(event).normalize('NFC')]);
+      const relayed = (relays.get(event.id) ?? []).map(wording).filter(line => {
+        const words = line.normalize('NFC');
+        if (seen.has(words)) return false;
+        seen.add(words);
+        return true;
+      });
       return <li key={event.id} className={isCurrent ? 'tracking-journal__current' : undefined} aria-current={isCurrent ? 'step' : undefined}>
         {/* A scan dated by its day alone has no time to show. */}
         {when && !when.timed ? <time dateTime={event.day} />

@@ -161,16 +161,19 @@ describe('TrackingJournal', () => {
       // Told after the scan in the same words: nothing more to show, and the scan stays the current step.
       { ...event('delivered', '2024-09-09T18:00:00', 'Delivered'), stage: 'delivered' },
       { ...event('delivered-copy', '2024-09-09T18:00:30', 'Delivered'), stage: 'delivered', relayOf: 'delivered' },
+      // The same words composed another way (an e and its accent apart).
+      { ...event('sorted-copy', '2024-09-09T15:40:10', 'Sorted, re\u0301expe\u0301die\u0301'), relayOf: 'sorted' },
+      { ...event('sorted-again', '2024-09-09T15:40:20', 'Sorted, r\u00e9exp\u00e9di\u00e9'), relayOf: 'sorted' },
       // Without the scan it repeats, a copy keeps its row.
       { ...event('orphan', '2024-09-09T10:00:00', 'Handed over'), relayOf: 'not-served' },
     ]} />);
     expect(screen.getByText('4 updates')).toBeInTheDocument();
     const rows = [...container.querySelectorAll('.tracking-journal__events li')];
     expect(rows.map(row => [...row.querySelectorAll('p')].map(line => line.textContent))).toEqual([
-      ['Delivered'], ['Sorted', 'Loaded onto a vehicle'], ['Arrival in destination country', 'The shipment has arrived in the destination country'], ['Handed over'],
+      ['Delivered'], ['Sorted', 'Loaded onto a vehicle', 'Sorted, re\u0301expe\u0301die\u0301'], ['Arrival in destination country', 'The shipment has arrived in the destination country'], ['Handed over'],
     ]);
     expect([...container.querySelectorAll('.tracking-journal__relay')].map(line => line.textContent))
-      .toEqual(['Loaded onto a vehicle', 'The shipment has arrived in the destination country']);
+      .toEqual(['Loaded onto a vehicle', 'Sorted, re\u0301expe\u0301die\u0301', 'The shipment has arrived in the destination country']);
     expect(rows[0]).toHaveAttribute('aria-current', 'step');
   });
 

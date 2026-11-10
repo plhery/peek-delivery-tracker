@@ -32555,7 +32555,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "fedex-international-connect"
+      "adapter": "fedex-international-connect",
+      "recognitionRank": 156
     },
     "trackingUrlTemplate": "https://fictracking.fedex.com/?MyFICNumber={trackingNumber}",
     "linkRules": [
@@ -52778,6 +52779,50 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://tracking.webrinq.com/"
+  },
+  "jiayang": {
+    "displayName": "Jiayang International",
+    "aliases": [
+      "JIAYANG",
+      "JYGJ",
+      "嘉扬国际",
+      "嘉揚國際",
+      "嘉扬国际物流",
+      "东莞嘉扬国际",
+      "东莞市嘉扬国际物流有限公司",
+      "Dongguan Jiayang International Logistics Co., Ltd"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#105bcc",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jiayang",
+      "recognitionRank": 719,
+      "recognitionPattern": "^JYGJ\\d{10}YQ$"
+    },
+    "trackingUrlTemplate": "https://www.jygjgyl.com/index/tracknumber/track?nos={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.jygjgyl.com"
+        ],
+        "pathPattern": "^/index/tracknumber/track/?$",
+        "params": [
+          "nos"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^JYGJ\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.jygjgyl.com/"
   }
 } as const;
 
@@ -54316,7 +54361,8 @@ export const CARRIER_IDS = [
   "maraton",
   "gordom-logistika",
   "intime-hr",
-  "webrinq"
+  "webrinq",
+  "jiayang"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

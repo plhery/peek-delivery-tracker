@@ -1910,6 +1910,49 @@ describe('TrackingSyncService', () => {
       expect(await check(answer('in_transit', { time: '2026-11-07T15:30:00+01:00', description: 'Centro di origine', stage: 'in_transit' },
         round))).toMatchObject({ current_stage: 'in_transit', expected_delivery: '2026-11-09' });
     });
+
+    const checks = () => {
+      const store = eventStore();
+      const client = Object.assign(store.client, {
+        acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+        finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
+      const adapter = { fetch: vi.fn(), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+      let now = new Date();
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+      let parcel: JsonObject = { id: 'going-back', carrier: 'poste-italiane', tracking_number: `RA${s10('31415926')}IT`,
+        current_stage: 'pending', created_at: '2026-11-03T09:00:00Z' };
+      return async (at: string, carrier: CarrierResult) => {
+        now = new Date(at);
+        adapter.fetch.mockResolvedValue(carrier);
+        await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() });
+        const values = client.applyTrackingSync.mock.calls.at(-1)![1] as JsonObject;
+        parcel = { ...parcel, ...values };
+        return { parcel, values };
+      };
+    };
+    const back = { time: '2026-11-07T15:30:00+01:00', description: 'Centro di origine', stage: 'in_transit' };
+
+    it('stays on the schedule while the return holds, until a delivery round after it', async () => {
+      const sync = checks();
+      const held = await sync('2026-11-07T18:00:00Z', answer('in_transit', back));
+      expect(held.parcel).toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
+      expect(isOpenedParcelSyncDue(held.parcel, new Date('2026-11-08T18:00:00Z'))).toBe(true);
+      // The same answer the next day keeps the hold.
+      expect((await sync('2026-11-08T18:00:00Z', answer('in_transit', back))).parcel)
+        .toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
+      const round = { time: '2026-11-09T09:00:00+01:00', description: 'In consegna', stage: 'out_for_delivery' };
+      const after = await sync('2026-11-09T10:00:00Z', answer('out_for_delivery', round, back));
+      expect(after.parcel).toMatchObject({ current_stage: 'out_for_delivery' });
+      expect(after.parcel.carrier_data).not.toHaveProperty('return_held');
+      expect(after.values.anomalies ?? []).not.toContain('terminal_stage_regression');
+    });
+
+    it('leaves a return its carrier states off the schedule', async () => {
+      const { parcel } = await checks()('2026-11-07T18:00:00Z', answer('returned', back));
+      expect(parcel).toMatchObject({ current_stage: 'returned' });
+      expect(parcel.carrier_data).not.toHaveProperty('return_held');
+      expect(isOpenedParcelSyncDue(parcel, new Date('2026-11-08T18:00:00Z'))).toBe(false);
+    });
   });
   });
 

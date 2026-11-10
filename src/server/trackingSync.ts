@@ -680,6 +680,15 @@ function waitsForPostcode(parcel: JsonObject, now: Date): boolean {
  * A delivery only a provider reported, which the parcel's carrier did not show: checked
  * daily until `unconfirmed_delivery_until`, in case the carrier disputes it.
  */
+/**
+ * Whether the parcel is returned only because the scans after its return carry it back, over a summary in
+ * transit or at customs (`return_held`): it stays on the schedule, since a delivery round, a problem or a new
+ * label after the return ends the hold.
+ */
+function returnHeld(parcel: JsonObject): boolean {
+  return parcel.current_stage === 'returned' && isRecord(parcel.carrier_data) && parcel.carrier_data.return_held === true;
+}
+
 function unconfirmedDelivery(parcel: JsonObject, now: Date): boolean {
   const until = isRecord(parcel.carrier_data) ? Date.parse(String(parcel.carrier_data.unconfirmed_delivery_until ?? '')) : Number.NaN;
   return parcel.current_stage === 'delivered' && until > now.getTime();
@@ -694,7 +703,7 @@ function unconfirmedDelivery(parcel: JsonObject, now: Date): boolean {
  */
 export function isOpenedParcelSyncDue(parcel: JsonObject, now: Date): boolean {
   const open = !['delivered', 'returned'].includes(String(parcel.current_stage))
-    || parcel.last_status_text === 'TO_BE_DELIVERED' || unconfirmedDelivery(parcel, now);
+    || parcel.last_status_text === 'TO_BE_DELIVERED' || unconfirmedDelivery(parcel, now) || returnHeld(parcel);
   return open && parcel.archived_at == null && isScheduledTrackingSyncDue(parcel, now, { opened: true });
 }
 
@@ -1380,6 +1389,8 @@ export function detectSyncAnomalies(
     (previousStage === 'delivered' || previousStage === 'returned')
     && selectedStage !== null
     && selectedStage !== previousStage
+    // A held return ends with a delivery round, a problem or a new label after it.
+    && !returnHeld(parcel)
     // A carrier may report a problem after delivery (damage, wrong address,
     // refusal), or a return. That is new information, not a rewritten history.
     && selectedStage !== 'exception'
@@ -2266,6 +2277,7 @@ export class TrackingSyncService {
           events: [...earlierEvents, ...normalizedEvents],
           relays: relayedScans(earlierEvents, normalizedEvents),
           reportedStage: normalizedReportedStage,
+          returnHeld: !lead && returned !== undefined,
           selectedStage: selected ? String(selected.stage) : normalizedSelectedStage,
           scanText: selected ? String(selected.description ?? '').trim() || null : scanText,
           leadAt: lead ? Date.parse(String(lead.occurred_at)) : Number.NaN,
@@ -2472,7 +2484,7 @@ export class TrackingSyncService {
       // A delivered or returned parcel keeps its summary, unless the answer disputes a provider's
       // delivery, reads the delivery's own scans again, or brings the return that came after the delivery.
       const preserveSummary = keepSaved || olderSnapshot || unprovenUpuSummary || unprovenLocalSummary || unprovenProviderSummary
-        || (['delivered', 'returned'].includes(previousStage) && selectedStage !== previousStage && !disputedRows.length
+        || (['delivered', 'returned'].includes(previousStage) && selectedStage !== previousStage && !disputedRows.length && !returnHeld(parcel)
           && !deliveryReread && !returnAfterDelivery(previousStage, selectedStage, [...stored, ...events], returnedEventTime));
       // The steps a carrier plans are routing's to keep (`routing.planned`), never the parcel's data,
       // and the estimate fields an adapter does not read are the review's (`unread_delivery_estimate`).
@@ -2639,6 +2651,8 @@ export class TrackingSyncService {
         const owner = fetched.correction?.carrier ?? filed;
         if (values.current_stage === 'delivered' && typeof result.tracking_provider === 'string' && typeof followed === 'string'
           && directCarrier(owner) && !result.original_carrier && !showsDelivery(answerOf(owner))) carrierData.unconfirmed_delivery_until = followed;
+        // A return the scans after it only carry back keeps the parcel checked (`returnHeld`).
+        if (normalized.returnHeld && (values.current_stage ?? previousStage) === 'returned') carrierData.return_held = true;
         // A parcel collected from its pickup point keeps the point once the carrier stops naming it.
         const collectedAt = collectedPickupPoint(parcel, carrierData, String(values.current_stage ?? previousStage),
           fetched.correction?.carrier ?? carrierId, [...stored, ...events]);

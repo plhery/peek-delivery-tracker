@@ -312,10 +312,17 @@ begin
   update public.packages set current_stage = 'delivered',
     carrier_data = jsonb_build_object('unconfirmed_delivery_until', to_jsonb(now() - interval '1 minute'))
   where tracking_number = 'ONEOFFFOLLOW07';
+  -- A return the later scans only carry back stays followed; one its carrier states does not.
+  perform public.create_one_off_parcel('ONEOFFFOLLOW08', 'unknown', null, null, key_a);
+  perform public.create_one_off_parcel('ONEOFFFOLLOW09', 'unknown', null, null, key_a);
+  update public.packages set current_stage = 'returned', last_synced_at = now() - interval '3 hours',
+    carrier_data = '{"return_held": true}' where tracking_number = 'ONEOFFFOLLOW08';
+  update public.packages set current_stage = 'returned', last_synced_at = now() - interval '3 hours'
+  where tracking_number = 'ONEOFFFOLLOW09';
 
   select array_agg(tracking_number) into followed
   from public.followed_one_off_packages(now() - interval '24 hours');
-  if followed is distinct from array['ONEOFFFOLLOW02', 'ONEOFFFOLLOW06', 'ONEOFFFOLLOW01'] then
+  if followed is distinct from array['ONEOFFFOLLOW02', 'ONEOFFFOLLOW08', 'ONEOFFFOLLOW06', 'ONEOFFFOLLOW01'] then
     raise exception 'Scheduled sync would follow %', followed;
   end if;
   delete from public.packages where tracking_number like 'ONEOFFFOLLOW%';

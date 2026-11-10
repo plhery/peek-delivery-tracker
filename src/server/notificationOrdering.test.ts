@@ -58,6 +58,35 @@ it.each(['web', 'native', 'live'] as const)('sends the latest milestone and ackn
   }
 });
 
+it.each(['web', 'native'] as const)('tells the return a batch\'s later scans only carry back, for %s notifications', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const base = { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_created_at: '2026-11-04T19:00:00Z' };
+  const events = [
+    { ...base, event_id: 'return', stage: 'returned', occurred_at: '2026-11-04T09:00:00Z' },
+    { ...base, event_id: 'back', stage: 'in_transit', occurred_at: '2026-11-04T18:00:00Z' },
+  ];
+  vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map([['pkg', '2026-11-04T18:00:00Z']]));
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  const clock = clocks('2026-11-04T19:00:30Z');
+  if (channel === 'web') {
+    vi.spyOn(client, 'listPendingPushNotifications').mockResolvedValue(events);
+    vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue();
+    vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+    const service = new WebPushNotificationService(client, '', '', '', clock.web);
+    const send = vi.spyOn(service, 'send').mockResolvedValue();
+    await service.dispatch();
+    expect(send).toHaveBeenCalledWith(events[0]);
+  } else {
+    vi.spyOn(client, 'listPendingNativePushNotifications').mockResolvedValue(events);
+    vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+    vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+    const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+    const send = vi.spyOn(apns, 'send').mockResolvedValue();
+    await apns.dispatch();
+    expect(send).toHaveBeenCalledWith(events[0]);
+  }
+});
+
 it('uses delivery progress for timestamp ties and numeric time for timezone offsets', () => {
   const created = '2026-09-08T12:00:00Z';
   const delivered = { stage: 'delivered', occurred_at: created, event_created_at: created, event_id: 'a' };

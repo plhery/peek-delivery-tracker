@@ -461,6 +461,14 @@ describe('when an alert ends', () => {
     expect(handled).not.toHaveBeenCalled();
   });
 
+  it('tells the return when the later scans of the batch only carry the parcel back', async () => {
+    pending([row({ event_id: 'event-1', stage: 'returned', occurred_at: '2026-10-02T09:00:00Z', package_stage: 'returned' }),
+      row({ event_id: 'event-2', stage: 'in_transit', occurred_at: '2026-10-02T12:30:00Z', package_stage: 'returned' })]);
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 1, sent: 1 });
+    expect(send).toHaveBeenCalledOnce();
+    expect(send.mock.calls[0]![0]).toMatchObject({ event_id: 'event-1', stage: 'returned' });
+  });
+
   it('ends with the journey even when its preset does not announce the last scan', async () => {
     pending([row({ preset: 'delivery', stage: 'returned', package_stage: 'returned' })]);
     expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });

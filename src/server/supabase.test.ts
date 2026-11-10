@@ -197,10 +197,10 @@ describe('one-off parcels and their links', () => {
     expect(params(scheduled.mock.calls[0][0]).has('archived_at')).toBe(false);
     expect(params(scheduled.mock.calls[0][0]).get('select')!.split(',')).toContain('archived_at');
     expect(params(refreshed.mock.calls[0][0]).get('archived_at')).toBe('is.null');
-    // Neither holds a delivered or returned parcel, but for a delivery its carrier may yet dispute.
+    // Neither holds a delivered or returned parcel, but for a delivery its carrier may yet dispute and a held return.
     for (const request of [scheduled, refreshed]) {
       expect(params(request.mock.calls[0][0]).get('or')).toBe('(current_stage.not.in.(delivered,returned),last_status_text.eq.TO_BE_DELIVERED,'
-        + 'carrier_data->>unconfirmed_delivery_until.gt."2026-10-21T08:00:00.000Z")');
+        + 'carrier_data->>unconfirmed_delivery_until.gt."2026-10-21T08:00:00.000Z",carrier_data->>return_held.eq.true)');
     }
     vi.useRealTimers();
   });

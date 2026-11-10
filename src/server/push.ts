@@ -1,5 +1,5 @@
 import { generatedScans } from '../lib/generatedTrack';
-import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
+import { EVENT_STAGE_ORDER, returnUnderWay, tieOrder } from '../lib/stages';
 import 'server-only';
 
 import { connect, constants as http2Constants } from 'node:http2';
@@ -802,6 +802,15 @@ function announcedScan(events: readonly JsonObject[], { known }: Pick<ParcelTime
   return events.filter((event) => !known.has(stringField(event, 'event_id'))).sort(compareNotificationEvents)[0];
 }
 
+/**
+ * The scan a batch tells of: its newest (`announcedScan`), or the return before it when the batch's scans after the
+ * return only carry the parcel back (`returnUnderWay`), as the sync stores the parcel's stage. Whether the batch is
+ * news is still judged on its newest scan.
+ */
+function toldScan(newest: JsonObject, events: readonly JsonObject[], { known }: Pick<ParcelTimes, 'known'>): JsonObject {
+  return returnUnderWay(events.filter((event) => !known.has(stringField(event, 'event_id'))).sort(compareNotificationEvents)) ?? newest;
+}
+
 const BACKFILL_TOLERANCE_MS = 60 * 60 * 1_000;
 /** The check that runs as a parcel is added stores its history within this. */
 const ADD_CHECK_MS = 5 * 60 * 1_000;
@@ -878,7 +887,7 @@ export class WebPushNotificationService {
       }
       summary.attempted += 1;
       try {
-        await this.send(newest);
+        await this.send(toldScan(newest, events, times));
         // Sent is recorded, even while the server stops: the scan must not go out twice.
         await this.client.recordPushDeliveries(
           subscriptionId,
@@ -1042,7 +1051,8 @@ export class ParcelLinkAlertService {
       signal?.throwIfAborted();
       const owner = events[0]!.owner === true;
       if (owner && !archive.ids) continue;
-      const newest = announcedScan(events.filter((event) => this.announces(event)), times);
+      const announced = events.filter((event) => this.announces(event));
+      const newest = announcedScan(announced, times);
       const transport = linkAlertTransport(events[0]!);
       const app = transport === 'apns' ? this.native : transport === 'fcm' ? this.fcm : null;
       const channel = app?.app ?? 'web';
@@ -1067,7 +1077,7 @@ export class ParcelLinkAlertService {
         continue;
       }
       summary.attempted += 1;
-      const told = this.viewerScan(newest, hiding);
+      const told = this.viewerScan(toldScan(newest, announced, times), hiding);
       try {
         if (transport !== 'web') await app!.send(this.appDevice(told), this.appPayload(told), `link-${stringField(told, 'link_id')}`);
         else await this.web!.send(told, this.payload(told));
@@ -1314,7 +1324,7 @@ abstract class AppPushNotificationService {
       }
       summary.attempted += 1;
       try {
-        await this.send(newest);
+        await this.send(toldScan(newest, events, times));
         // Sent is recorded, even while the server stops: the scan must not go out twice.
         await this.client.recordNativePushDeliveries(
           deviceId,

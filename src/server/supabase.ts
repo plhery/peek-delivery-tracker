@@ -476,7 +476,8 @@ export class SupabaseClient {
 
   /**
    * The parcels a check can still change: not delivered or returned, unless the delivery is
-   * only announced, or only a provider reported it and the carrier may yet dispute it (trackingSync.ts).
+   * only announced, or only a provider reported it and the carrier may yet dispute it, or the return
+   * is held while the carrier's later scans carry the parcel back (trackingSync.ts).
    */
   protected async activePackages(
     select: string,
@@ -484,7 +485,7 @@ export class SupabaseClient {
   ): Promise<JsonObject[]> {
     return await this.everyCandidate('/rest/v1/packages', [
       ['select', select],
-      ['or', `(current_stage.not.in.(delivered,returned),last_status_text.eq.TO_BE_DELIVERED,carrier_data->>unconfirmed_delivery_until.gt."${new Date().toISOString()}")`],
+      ['or', `(current_stage.not.in.(delivered,returned),last_status_text.eq.TO_BE_DELIVERED,carrier_data->>unconfirmed_delivery_until.gt."${new Date().toISOString()}",carrier_data->>return_held.eq.true)`],
       ...filters,
     ]);
   }

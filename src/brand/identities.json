@@ -2905,6 +2905,9 @@
       "accent": "#1f3a93"
     }
   },
+  "olza-logistic": {
+    "decal": "olza-logistic"
+  },
   "om-logistics": {
     "decal": "om-logistics"
   },
@@ -3160,6 +3163,9 @@
   "poczta-polska": {
     "decal": "poczta-polska"
   },
+  "pointpack": {
+    "decal": "pointpack"
+  },
   "polaris-transport": {
     "decal": "polaris-transport"
   },
@@ -3363,6 +3369,9 @@
   "quiqup": {
     "decal": "quiqup"
   },
+  "quriers": {
+    "decal": "quriers"
+  },
   "qwintry": {
     "decal": "qwintry"
   },
@@ -3408,11 +3417,17 @@
   "rex-indonesia": {
     "decal": "rex-indonesia"
   },
+  "rgw-express": {
+    "decal": "rgw-express"
+  },
   "rhenus-de": {
     "decal": "rhenus-de"
   },
   "rhenus-it": {
     "decal": "rhenus-it"
+  },
+  "riders-express": {
+    "decal": "riders-express"
   },
   "rika-express": {
     "decal": "rika-express"

@@ -782,7 +782,12 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'athinaiki'
   | 'dk-express-gr'
   | 'spourgitis'
-  | 'skyex-gr';
+  | 'skyex-gr'
+  | 'rgw-express'
+  | 'riders-express'
+  | 'quriers'
+  | 'pointpack'
+  | 'olza-logistic';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

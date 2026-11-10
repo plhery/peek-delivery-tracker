@@ -994,7 +994,8 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   30 minutes, it is refusing whatever it is asked, as ParcelsApp does for hours to an address
   it blocks. That second answer counts as a rate limit, not as the parcel's lack of history:
   the provider rests 30 minutes, and one such answer within 30 minutes of the pause ending
-  rests it again.
+  rests it again. The numbers behind a block count toward no other for a day: one may be a
+  number the provider lost, whose own retry would otherwise rest it at the end of every pause.
 - a budget of answers without history for a provider that refuses an address after too many
   of them ([providerMisses.ts](../src/server/providerMisses.ts)): ParcelsApp, 30 in 30
   minutes, counted across syncs and Add lookups. Once spent, checks nobody asked for stop

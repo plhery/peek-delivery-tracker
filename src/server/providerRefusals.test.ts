@@ -24,4 +24,17 @@ describe('provider refusals', () => {
     expect(refusals.refused('ParcelsApp', 'C', 69 * MINUTE)).toBe(true);
     expect(refusals.refused('ParcelsApp', 'D', 129 * MINUTE)).toBe(false);
   });
+  it('counts a number behind a block toward no other for a day, so a number it lost does not keep it blocked', () => {
+    const refusals = new ProviderRefusals();
+    refusals.refused('ParcelsApp', 'A', 0);
+    expect(refusals.refused('ParcelsApp', 'B', 10 * MINUTE)).toBe(true);
+    // A's own retries at the end of each pause, and B's beside them.
+    expect(refusals.refused('ParcelsApp', 'A', 40 * MINUTE)).toBe(false);
+    expect(refusals.refused('ParcelsApp', 'B', 41 * MINUTE)).toBe(false);
+    expect(refusals.refused('ParcelsApp', 'A', 70 * MINUTE)).toBe(false);
+    // Another number still finds a block in place, and a day on A counts again.
+    expect(refusals.refused('ParcelsApp', 'C', 45 * MINUTE)).toBe(true);
+    expect(refusals.refused('ParcelsApp', 'A', 24 * 60 * MINUTE + 10 * MINUTE)).toBe(false);
+    expect(refusals.refused('ParcelsApp', 'D', 24 * 60 * MINUTE + 20 * MINUTE)).toBe(true);
+  });
 });

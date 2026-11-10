@@ -4,26 +4,38 @@ import 'server-only';
 export const REFUSAL_WINDOW_MS = 30 * 60_000;
 /** How long a blocked provider rests before a lookup tries it again. */
 export const BLOCK_PAUSE_MS = 30 * 60_000;
+/** How long the numbers behind a block count toward no other. */
+export const BEHIND_BLOCK_MS = 24 * 60 * 60_000;
 
 /**
  * Universal providers that answer "no history" for numbers they tracked. One such answer can be
  * the provider losing one parcel; two numbers within REFUSAL_WINDOW_MS mean it refuses this server
  * whatever it is asked, as ParcelsApp does for hours to an address it blocks. After a block, one
- * refusal within REFUSAL_WINDOW_MS of the pause ending finds it still in place.
+ * refusal within REFUSAL_WINDOW_MS of the pause ending finds it still in place. The numbers behind a
+ * block count toward no other for BEHIND_BLOCK_MS: one may be a number the provider lost, whose own
+ * retry at the end of every pause would otherwise find the provider blocked again for every parcel.
  */
 export class ProviderRefusals {
   private readonly recent = new Map<string, Map<string, number>>();
   private readonly blockedAt = new Map<string, number>();
+  private readonly behind = new Map<string, Map<string, number>>();
 
   /** Records that `provider` found no history for `number`, which it had tracked; true when that finds it blocked. */
   refused(provider: string, number: string, at: number): boolean {
+    const behind = this.behind.get(provider) ?? new Map<string, number>();
+    for (const [seen, time] of behind) if (at - time >= BEHIND_BLOCK_MS) behind.delete(seen);
+    this.behind.set(provider, behind);
+    if (behind.has(number)) return false;
     const numbers = this.recent.get(provider) ?? new Map<string, number>();
     for (const [seen, time] of numbers) if (at - time >= REFUSAL_WINDOW_MS) numbers.delete(seen);
     numbers.set(number, at);
     this.recent.set(provider, numbers);
     const last = this.blockedAt.get(provider);
     const blocked = numbers.size >= 2 || (last !== undefined && at - last < BLOCK_PAUSE_MS + REFUSAL_WINDOW_MS);
-    if (blocked) this.blockedAt.set(provider, at);
+    if (blocked) {
+      this.blockedAt.set(provider, at);
+      for (const seen of numbers.keys()) behind.set(seen, at);
+    }
     return blocked;
   }
 }

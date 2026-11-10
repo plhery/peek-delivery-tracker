@@ -1,6 +1,6 @@
-import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createApiLinks } from '../links';
-import { forgetLookupProof, getLookupProof, lookupProof, mountLookupVerification } from './verification';
+import { forgetLookupProof, getLookupProof, lookupProof, LookupVerificationError, mountLookupVerification } from './verification';
 
 let options: Record<string, unknown>;
 let mounted: ReturnType<typeof mountLookupVerification>;
@@ -138,7 +138,7 @@ it('fails closed on an unavailable configuration and can retry', async () => {
 it('handles a blocked script without hanging, and retries with a fresh script', async () => {
   delete window.turnstile;
   const first = getLookupProof();
-  const rejected = expect(first).rejects.toThrow('verification');
+  const rejected = expect(first).rejects.toMatchObject({ reason: 'script' });
   await vi.waitFor(() => expect(document.querySelector('script[src*="turnstile"]')).not.toBeNull());
   document.querySelector('script[src*="turnstile"]')!.dispatchEvent(new Event('error'));
   await rejected;
@@ -232,4 +232,74 @@ it('keeps the proof for the page when session storage is unavailable', async () 
   } finally {
     verifier.dispose();
   }
+});
+
+describe('why a check failed, in one word', () => {
+  const reason = (promise: Promise<unknown>) => promise.then(() => 'passed', (error: unknown) =>
+    error instanceof LookupVerificationError ? error.reason : 'not a verification error');
+  const rendered = () => vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+
+  it.each([
+    ['300030', 'widget-300'],
+    ['600010', 'widget-600'],
+    ['110200', 'widget-110'],
+    ['110600', 'timeout'],
+    ['110620', 'timeout'],
+    ['999999', 'widget'],
+    [undefined, 'widget'],
+  ])('names the widget error %s by its family: %s', async (code, word) => {
+    const failed = reason(getLookupProof());
+    await rendered();
+    (options['error-callback'] as (code?: string) => void)(code);
+    await expect(failed).resolves.toBe(word);
+  });
+
+  it.each(['timeout-callback', 'expired-callback'])('counts the %s as a timeout', async (callback) => {
+    const failed = reason(getLookupProof());
+    await rendered();
+    (options[callback] as () => void)();
+    await expect(failed).resolves.toBe('timeout');
+  });
+
+  it('counts no token within a minute as a timeout', async () => {
+    vi.useFakeTimers();
+    try {
+      const failed = reason(getLookupProof());
+      await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+      await vi.advanceTimersByTimeAsync(60_000);
+      await expect(failed).resolves.toBe('timeout');
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('tells a token Peek refused from one it never answered', async () => {
+    const refused = reason(getLookupProof());
+    await rendered();
+    vi.mocked(fetch).mockResolvedValueOnce(Response.json({ error: 'Forbidden' }, { status: 403 }));
+    (options.callback as (token: string) => void)('single-use-token');
+    await expect(refused).resolves.toBe('refused');
+    const unanswered = reason(getLookupProof());
+    await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalledTimes(2));
+    vi.mocked(fetch).mockRejectedValueOnce(new TypeError('Failed to fetch'));
+    (options.callback as (token: string) => void)('single-use-token');
+    await expect(unanswered).resolves.toBe('unanswered');
+  });
+
+  it('counts settings it cannot read as setup', async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response('', { status: 503 }));
+    await expect(reason(getLookupProof())).resolves.toBe('setup');
+    vi.mocked(fetch).mockResolvedValueOnce(Response.json({ siteKey: 42 }));
+    await expect(reason(getLookupProof())).resolves.toBe('setup');
+  });
+
+  it('sends the failed check\'s word with the refusal, and the proof\'s when the server refuses a proof', async () => {
+    const request = vi.fn().mockImplementation(async () => required());
+    const failed = reason(createApiLinks(request).detectCarrierPublic('TEST123456'));
+    await rendered();
+    (options['error-callback'] as (code: string) => void)('300030');
+    await expect(failed).resolves.toBe('widget-300');
+    const refusedProof = reason(createApiLinks(request).detectCarrierPublic('TEST123456'));
+    await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalledTimes(2));
+    await complete();
+    await expect(refusedProof).resolves.toBe('proof');
+  });
 });

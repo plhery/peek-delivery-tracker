@@ -117,13 +117,17 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
    * A page that verifies waits for its verification, started as the visitor types, rather than
    * send a request the server would refuse for having no proof. If that verification fails, the
    * request goes without one: a server that verifies no one still answers, and a refusal is not
-   * verified again.
+   * verified again. The refusal carries why: the page's check that failed, or the proof refused.
    */
   async function protectedPost(path: string, body: unknown, signal?: AbortSignal) {
     const verifiedFirst = !lookupProof() && canVerifyLookup();
-    const current = verifiedFirst
-      ? await getLookupProof(signal).catch((error: unknown) => { if (signal?.aborted) throw error; return null; })
-      : lookupProof();
+    const first = verifiedFirst
+      ? await getLookupProof(signal).then((proof) => ({ proof, failure: null }), (error: unknown) => {
+        if (signal?.aborted) throw error;
+        return { proof: null, failure: error instanceof LookupVerificationError ? error : new LookupVerificationError('other') };
+      })
+      : { proof: lookupProof(), failure: null };
+    const current = first.proof;
     const call = (proof: string | null) => send(path, {
       method: 'POST', headers: { 'Content-Type': 'application/json', ...(proof ? { 'X-Lookup-Proof': proof } : {}) },
       body: JSON.stringify(body),
@@ -131,13 +135,14 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     const response = await call(current);
     if (response.status !== 403 || response.headers.get('X-Lookup-Verification') !== 'required') return response;
     forgetLookupProof(current);
-    if (verifiedFirst) throw new LookupVerificationError();
+    // Verification said it verifies no one, yet the server asks for it: the setup disagrees.
+    if (verifiedFirst) throw first.failure ?? new LookupVerificationError(current ? 'proof' : 'setup');
     const verified = await getLookupProof(signal);
-    if (!verified) throw new LookupVerificationError();
+    if (!verified) throw new LookupVerificationError('setup');
     const retried = await call(verified);
     if (retried.status === 403 && retried.headers.get('X-Lookup-Verification') === 'required') {
       forgetLookupProof(verified);
-      throw new LookupVerificationError();
+      throw new LookupVerificationError('proof');
     }
     return retried;
   }

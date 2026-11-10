@@ -1,5 +1,5 @@
 import type { Locale } from '../i18n';
-import type { AnalyticsReason } from '../lib/analytics';
+import type { AlertsReason } from '../lib/analytics';
 import { pageLocale } from '../lib/locale';
 import { decodePublicKey } from '../lib/pushKey';
 import { uid } from '../lib/uid';
@@ -33,7 +33,7 @@ export class AlertError extends Error {
 const REFUSED_KINDS: readonly string[] = ['unavailable', 'stopped', 'full', 'burst', 'daily', 'refused', 'validation'];
 
 /** Why turning alerts on failed, as analytics counts it: one fixed word, never the error itself. */
-export function alertFailure(error: unknown): AnalyticsReason {
+export function alertFailure(error: unknown): AlertsReason {
   if (error instanceof AlertError) return error.kind === 'failed' ? 'subscription' : error.kind;
   if (!(error instanceof ParcelLinkError)) return 'other';
   if (error.kind === 'offline') return 'offline';

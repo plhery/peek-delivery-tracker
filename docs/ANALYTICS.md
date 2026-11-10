@@ -55,8 +55,13 @@ are virtual names, never real URLs.
 - **Front door**: each notice or question that stops a lookup, once as it appears: no
   number found, an order number, a pickup code, a placeholder or phone number, a check digit, several numbers or
   carriers to choose from, a carrier asking for a postcode or link, an Amazon account, a
-  refused input, a lookup limit, offline, a server error or a failed verification. A paste
-  that fails is a paste with outcome `error`. Never the text.
+  refused input, a lookup limit, offline, a server error or a failed verification. A failed
+  verification says why in one word (`reason`): no check settings from Peek (`setup`), Cloudflare's
+  script not loaded (`script`), a widget error by its code's family, the code's first three digits
+  (`widget-300`; `widget` for a code outside the known families), a challenge not passed in time
+  (`timeout`), the token refused by Peek (`refused`) or left unanswered (`unanswered`), the proof
+  just given refused (`proof`), or `other`. A paste that fails is a paste with outcome `error`.
+  Never the text.
 - **Parcel links**: lookup without an account, share or copy the link, change what the
   link shows, stop sharing, open "Notify me", turn a browser's alerts on or off, get the
   iPhone app or open the parcel in it, add the delivery to a calendar, sign in (and apart from it, sign in for the email), keep in the
@@ -160,8 +165,8 @@ terms, or any query string but the campaign below. A parcel page is the `parcel-
 sees the IP, user agent, basic device data and language.
 
 On the web, every event carries the app's language (`locale`) when the page declares one, the
-Android test's events the place they come from (`spot`), and a failed `parcel-link-alerts`
-its `reason`.
+Android test's events the place they come from (`spot`), and a failed `parcel-link-alerts` or
+`door-verification` its `reason`.
 A page load's first page view also says where the visitor came from, since Umami counts
 sources from page views only: the `referrer`, as origin and path without query or fragment,
 when it is another site (or an Android app), and the landing address's `utm_source`,

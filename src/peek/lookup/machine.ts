@@ -1,5 +1,6 @@
 import type { MessageKey } from '../../i18n';
 import { isAmazonTrackingNumber, requiresAmazonAccount } from '../../lib/amazon';
+import type { VerificationReason } from '../../lib/analytics';
 import { isDemoBuild } from '../../lib/buildMode';
 import { canAskCarrier, carrierCheck, type CarrierCheck } from '../../lib/carrierPicker';
 import {
@@ -44,7 +45,8 @@ export type LookupTrouble =
   | { kind: 'daily' }
   | { kind: 'offline' }
   | { kind: 'server' }
-  | { kind: 'verification' }
+  /** The browser check failed; `reason` says why, for usage counts only. */
+  | { kind: 'verification'; reason?: VerificationReason }
   /** The server, or the form, refused an input. */
   | { kind: 'validation'; message: MessageKey };
 

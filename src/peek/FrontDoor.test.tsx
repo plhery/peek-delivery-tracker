@@ -12,6 +12,7 @@ import { ASK_PATIENCE_MS } from './lookup/useLookup';
 import { FIRST_SAMPLE_MS, SAMPLE_PERIOD_MS } from './landing/useSampleLoop';
 import { ParcelLinkError, type ParcelLookup } from './links';
 import { forgetDeviceChecks } from './lookup/deviceList';
+import { LookupVerificationError } from './lookup/verification';
 import { forgetAllRecents, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
@@ -618,6 +619,18 @@ describe('FrontDoor', () => {
     expect(field).toBeVisible();
     await user.click(screen.getByRole('button', { name: button }));
     await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
+  });
+
+  it('says in one word why the browser check failed with its notice, and nothing more', async () => {
+    const analytics = await import('../lib/analytics');
+    const counted = vi.spyOn(analytics, 'trackAction');
+    mocks.lookup.mockRejectedValueOnce(new LookupVerificationError('widget-300'));
+    const { user, field } = door();
+    await user.type(field, `${UPS}{Enter}`);
+    await screen.findByRole('alert');
+    expect(counted.mock.calls.filter(([name]) => name === 'door-verification')).toEqual([['door-verification', undefined, undefined, 'widget-300']]);
+    expect(JSON.stringify(counted.mock.calls)).not.toContain(UPS);
+    counted.mockRestore();
   });
 
   it('asks once while a lookup is on its way, and drops it when the door closes', async () => {

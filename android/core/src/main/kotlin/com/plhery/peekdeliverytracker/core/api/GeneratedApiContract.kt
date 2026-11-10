@@ -1511,6 +1511,29 @@ value class CarrierId(val rawValue: String) {
         val TransilvaniaPost = CarrierId("transilvania-post")
         val WorldCourier = CarrierId("world-courier")
         val Xpedist = CarrierId("xpedist")
+        val ActArgos = CarrierId("act-argos")
+        val AetosCourier = CarrierId("aetos-courier")
+        val AiolosCourier = CarrierId("aiolos-courier")
+        val AntCourier = CarrierId("ant-courier")
+        val AsapCouriers = CarrierId("asap-couriers")
+        val Athinaiki = CarrierId("athinaiki")
+        val BcsCourier = CarrierId("bcs-courier")
+        val BizCourier = CarrierId("biz-courier")
+        val CityCourierGr = CarrierId("city-courier-gr")
+        val Cityxpress = CarrierId("cityxpress")
+        val DirectCourierGr = CarrierId("direct-courier-gr")
+        val DkExpressGr = CarrierId("dk-express-gr")
+        val HappyCourierGr = CarrierId("happy-courier-gr")
+        val IccCourierGr = CarrierId("icc-courier-gr")
+        val KangaServices = CarrierId("kanga-services")
+        val MvpCourier = CarrierId("mvp-courier")
+        val PrismaCourier = CarrierId("prisma-courier")
+        val RapidCourierGr = CarrierId("rapid-courier-gr")
+        val RedCourierGr = CarrierId("red-courier-gr")
+        val SkyexGr = CarrierId("skyex-gr")
+        val Spourgitis = CarrierId("spourgitis")
+        val WestPostal = CarrierId("west-postal")
+        val XpCourier = CarrierId("xp-courier")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2963,6 +2986,29 @@ value class CarrierId(val rawValue: String) {
             TransilvaniaPost,
             WorldCourier,
             Xpedist,
+            ActArgos,
+            AetosCourier,
+            AiolosCourier,
+            AntCourier,
+            AsapCouriers,
+            Athinaiki,
+            BcsCourier,
+            BizCourier,
+            CityCourierGr,
+            Cityxpress,
+            DirectCourierGr,
+            DkExpressGr,
+            HappyCourierGr,
+            IccCourierGr,
+            KangaServices,
+            MvpCourier,
+            PrismaCourier,
+            RapidCourierGr,
+            RedCourierGr,
+            SkyexGr,
+            Spourgitis,
+            WestPostal,
+            XpCourier,
         )
     }
 }

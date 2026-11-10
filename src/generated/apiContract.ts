@@ -6458,7 +6458,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "ACS Courier",
     "aliases": [
       "ACS",
-      "ACS Courier S.A."
+      "ACS Courier S.A.",
+      "ACS Ταχυδρομικές Υπηρεσίες"
     ],
     "countries": [
       "GR",
@@ -23725,7 +23726,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Pack-Man",
     "aliases": [
       "Pack-man Courier",
-      "Pack-Man Courier"
+      "Pack-Man Courier",
+      "ΕΝΤΙΠΠΟΣ ΙΚΕ"
     ],
     "countries": [
       "GR"
@@ -51844,6 +51846,617 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.xpedist.ro/awb"
+  },
+  "act-argos": {
+    "displayName": "Argos S.A.",
+    "aliases": [
+      "ΑΡΓΟΣ Α.Ε."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#0853a6",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.argoscom.gr/index.php?page=55"
+  },
+  "aetos-courier": {
+    "displayName": "Aetos Courier",
+    "countries": [
+      "GR"
+    ],
+    "color": "#d4311f",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://aetoscourier.e-anaptixi.gr/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html?r18p01={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "aetoscourier.e-anaptixi.gr"
+        ],
+        "pathPattern": "^/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher\\.html$",
+        "params": [
+          "r18p01"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://aetoscourier.e-anaptixi.gr/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+  },
+  "aiolos-courier": {
+    "displayName": "Aiolos Courier",
+    "aliases": [
+      "Hellenic Aiolos Courier"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#1a693a",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://aioloscourier.gr/track-trace/?shipping_num={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "aioloscourier.gr",
+          "www.aioloscourier.gr"
+        ],
+        "pathPattern": "^/track-trace/?$",
+        "params": [
+          "shipping_num"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://aioloscourier.gr/track-trace/"
+  },
+  "ant-courier": {
+    "displayName": "ANT Logistics & Forwarding",
+    "aliases": [
+      "ANT Logistics",
+      "ANT A.E."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#9a235b",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ant-vl.com/%CE%B1%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7-%CE%B1%CF%80%CE%BF%CF%83%CF%84%CE%BF%CE%BB%CE%AE%CF%82/"
+  },
+  "asap-couriers": {
+    "displayName": "ASAP Couriers",
+    "aliases": [
+      "ASAP Courier",
+      "ASAP Couriers Μονοπρόσωπη Α.Ε."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#047386",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://asapcouriers.gr/tracking?number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "asapcouriers.gr",
+          "www.asapcouriers.gr"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://asapcouriers.gr/tracking"
+  },
+  "athinaiki": {
+    "displayName": "Athinaiki",
+    "aliases": [
+      "Αθηναϊκή",
+      "Γενικές Μεταφορές Αθηναϊκή Α.Ε."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#160b8b",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.athinaiki.gr/b2c/"
+  },
+  "bcs-courier": {
+    "displayName": "BCS Courier",
+    "aliases": [
+      "B.C.S. Courier"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#005395",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.bcscourier.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html?r18p01={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "bcscourier.gr",
+          "www.bcscourier.gr"
+        ],
+        "pathPattern": "^/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher\\.html$",
+        "params": [
+          "r18p01"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.bcscourier.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+  },
+  "biz-courier": {
+    "displayName": "BIZ Courier",
+    "aliases": [
+      "BIZ Courier & Logistics",
+      "Biz Courier Services"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#0f6ab2",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://trackit.bizcourier.eu/app/en/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "trackit.bizcourier.eu"
+        ],
+        "pathPattern": "^/app/[a-z]{2}(?:-[a-z]{2})?/[^/]+/?$",
+        "path": "^/app/[a-z]{2}(?:-[a-z]{2})?/([^/]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://trackit.bizcourier.eu/app/en"
+  },
+  "city-courier-gr": {
+    "displayName": "City Courier",
+    "aliases": [
+      "City Courier Services",
+      "City Delivery"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#0054a6",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.citycourier.gr/pegasus/courier04/search00.php?pcode=SEARCHVOUCHER&r18p01={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "citycourier.gr",
+          "www.citycourier.gr"
+        ],
+        "pathPattern": "^/pegasus/courier04/search00\\.php$",
+        "params": [
+          "r18p01"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.citycourier.gr/anazitisi-apostolis"
+  },
+  "cityxpress": {
+    "displayName": "CityXpress",
+    "aliases": [
+      "City Express Courier"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#9bd8f3",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://cityxpress.gr/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html?r18p01={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "cityxpress.gr",
+          "www.cityxpress.gr"
+        ],
+        "pathPattern": "^/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher\\.html$",
+        "params": [
+          "r18p01"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cityxpress.gr/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+  },
+  "direct-courier-gr": {
+    "displayName": "Direct Courier",
+    "aliases": [
+      "Direct Courier Services"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#711326",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.directcourier.gr/"
+  },
+  "dk-express-gr": {
+    "displayName": "DK Express Courier",
+    "aliases": [
+      "DK Express"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#34c3d1",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://dkexpresscourier.gr/anazitisi-apostolis/?voucher={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "dkexpresscourier.gr"
+        ],
+        "pathPattern": "^/anazitisi-apostolis/?$",
+        "params": [
+          "voucher"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://dkexpresscourier.gr/anazitisi-apostolis/"
+  },
+  "happy-courier-gr": {
+    "displayName": "Happy Courier",
+    "countries": [
+      "GR"
+    ],
+    "color": "#f8981d",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://happycourier.e-anaptixi.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html?r18p01={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "happycourier.e-anaptixi.gr"
+        ],
+        "pathPattern": "^/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher\\.html$",
+        "params": [
+          "r18p01"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://happycourier.e-anaptixi.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+  },
+  "icc-courier-gr": {
+    "displayName": "ICC Courier",
+    "aliases": [
+      "Intercity Courier",
+      "ICC Ταχυμεταφορές Ε.Ε."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#dc2626",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://icccourier.gr/voucher/search?voucher={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "icccourier.gr",
+          "www.icccourier.gr"
+        ],
+        "pathPattern": "^/(?:en/)?voucher/search/?$",
+        "params": [
+          "voucher"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://icccourier.gr/voucher/search"
+  },
+  "kanga-services": {
+    "displayName": "Kanga Services",
+    "aliases": [
+      "Kanga Services Couriers",
+      "Kanga Couriers",
+      "Kanga Services Couriers Ταχυμεταφορική Α.Ε."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#008e43",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://kanga.gr/epikoinonia/anazitisi-apostolis/"
+  },
+  "mvp-courier": {
+    "displayName": "MVP Courier",
+    "aliases": [
+      "MVP Couriers"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#093d64",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://mvp.synlog.io/?barcode={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mvp.synlog.io"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "barcode"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mvp.synlog.io/"
+  },
+  "prisma-courier": {
+    "displayName": "Prisma Courier",
+    "aliases": [
+      "Prisma Service"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#0907a6",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.prismacourier.gr/parcel-tracking"
+  },
+  "rapid-courier-gr": {
+    "displayName": "Rapid Courier",
+    "countries": [
+      "GR"
+    ],
+    "color": "#b40e21",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://rapidcourier.gr/anazhthsh-apostolhs/?voucher={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "rapidcourier.gr",
+          "www.rapidcourier.gr"
+        ],
+        "pathPattern": "^/anazhthsh-apostolhs/?$",
+        "params": [
+          "voucher"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://rapidcourier.gr/anazhthsh-apostolhs/"
+  },
+  "red-courier-gr": {
+    "displayName": "Red Courier",
+    "countries": [
+      "GR"
+    ],
+    "color": "#c10a0c",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://redcourier.gr/track-and-trace/?voucher={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "redcourier.gr"
+        ],
+        "pathPattern": "^/track-and-trace/?$",
+        "params": [
+          "voucher"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://redcourier.gr/track-and-trace/"
+  },
+  "skyex-gr": {
+    "displayName": "Skyex Bioex",
+    "countries": [
+      "GR"
+    ],
+    "color": "#42b776",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://skyex.gr/pegasus/courier04/search00.php?pcode=SEARCHVOUCHER&r18p01={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "skyex.gr"
+        ],
+        "pathPattern": "^/pegasus/courier04/search00\\.php$",
+        "params": [
+          "r18p01"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://skyex.gr/el/entopismos"
+  },
+  "spourgitis": {
+    "displayName": "Spourgitis Trans",
+    "aliases": [
+      "Σπουργίτης",
+      "Σπουργίτης Μεταφορική",
+      "Spourgitis Transport"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#d11f23",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "spourgitis.gr"
+        ],
+        "pathPattern": "^/(?:en/tracking-shipments|entopismos-apostolon)/?$",
+        "params": [
+          "shipping_code"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://spourgitis.gr/entopismos-apostolon/"
+  },
+  "west-postal": {
+    "displayName": "West Postal Services",
+    "aliases": [
+      "WEST A.E.",
+      "WEST S.A."
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#00a9a4",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.wps.com.gr/trackshipment"
+  },
+  "xp-courier": {
+    "displayName": "XP Courier",
+    "countries": [
+      "GR"
+    ],
+    "color": "#073b62",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.xpcourier.gr/track?identifier={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "xpcourier.gr",
+          "www.xpcourier.gr"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "identifier"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.xpcourier.gr/track"
   }
 } as const;
 
@@ -53347,7 +53960,30 @@ export const CARRIER_IDS = [
   "time-critical-line",
   "transilvania-post",
   "world-courier",
-  "xpedist"
+  "xpedist",
+  "act-argos",
+  "aetos-courier",
+  "aiolos-courier",
+  "ant-courier",
+  "asap-couriers",
+  "athinaiki",
+  "bcs-courier",
+  "biz-courier",
+  "city-courier-gr",
+  "cityxpress",
+  "direct-courier-gr",
+  "dk-express-gr",
+  "happy-courier-gr",
+  "icc-courier-gr",
+  "kanga-services",
+  "mvp-courier",
+  "prisma-courier",
+  "rapid-courier-gr",
+  "red-courier-gr",
+  "skyex-gr",
+  "spourgitis",
+  "west-postal",
+  "xp-courier"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

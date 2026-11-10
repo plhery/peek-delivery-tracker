@@ -1502,6 +1502,29 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let transilvaniaPost = CarrierID(rawValue: "transilvania-post")
     static let worldCourier = CarrierID(rawValue: "world-courier")
     static let xpedist = CarrierID(rawValue: "xpedist")
+    static let actArgos = CarrierID(rawValue: "act-argos")
+    static let aetosCourier = CarrierID(rawValue: "aetos-courier")
+    static let aiolosCourier = CarrierID(rawValue: "aiolos-courier")
+    static let antCourier = CarrierID(rawValue: "ant-courier")
+    static let asapCouriers = CarrierID(rawValue: "asap-couriers")
+    static let athinaiki = CarrierID(rawValue: "athinaiki")
+    static let bcsCourier = CarrierID(rawValue: "bcs-courier")
+    static let bizCourier = CarrierID(rawValue: "biz-courier")
+    static let cityCourierGr = CarrierID(rawValue: "city-courier-gr")
+    static let cityxpress = CarrierID(rawValue: "cityxpress")
+    static let directCourierGr = CarrierID(rawValue: "direct-courier-gr")
+    static let dkExpressGr = CarrierID(rawValue: "dk-express-gr")
+    static let happyCourierGr = CarrierID(rawValue: "happy-courier-gr")
+    static let iccCourierGr = CarrierID(rawValue: "icc-courier-gr")
+    static let kangaServices = CarrierID(rawValue: "kanga-services")
+    static let mvpCourier = CarrierID(rawValue: "mvp-courier")
+    static let prismaCourier = CarrierID(rawValue: "prisma-courier")
+    static let rapidCourierGr = CarrierID(rawValue: "rapid-courier-gr")
+    static let redCourierGr = CarrierID(rawValue: "red-courier-gr")
+    static let skyexGr = CarrierID(rawValue: "skyex-gr")
+    static let spourgitis = CarrierID(rawValue: "spourgitis")
+    static let westPostal = CarrierID(rawValue: "west-postal")
+    static let xpCourier = CarrierID(rawValue: "xp-courier")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2954,6 +2977,29 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .transilvaniaPost,
         .worldCourier,
         .xpedist,
+        .actArgos,
+        .aetosCourier,
+        .aiolosCourier,
+        .antCourier,
+        .asapCouriers,
+        .athinaiki,
+        .bcsCourier,
+        .bizCourier,
+        .cityCourierGr,
+        .cityxpress,
+        .directCourierGr,
+        .dkExpressGr,
+        .happyCourierGr,
+        .iccCourierGr,
+        .kangaServices,
+        .mvpCourier,
+        .prismaCourier,
+        .rapidCourierGr,
+        .redCourierGr,
+        .skyexGr,
+        .spourgitis,
+        .westPostal,
+        .xpCourier,
     ]
 
     init(from decoder: Decoder) throws {

@@ -172,7 +172,8 @@ order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 \echo '   declares): passed, or early (still ahead: the ones to read). Without either, the server reads the carrier''s'
 \echo '   catalog zone, which the database lacks: passed or early on every clock, or edge (passed on some clocks only).'
 \echo '   held: the dropping check stored a new failed-attempt or exception scan, which drops the day whenever it falls.'
-\echo '   unknown: no day recorded, as before checks kept it; latest lists the early ones first'
+\echo '   unknown: no day recorded, as before checks kept it; latest lists the early ones first. A carrier and stage whose'
+\echo '   drops all passed or were held is left out: those drops are the rule working.'
 with dropped as (
   select p.id, p.carrier, p.current_stage, p.expected_delivery_changed_at,
          case when a.previous_expected_delivery ~ '^\d{4}-\d{2}-\d{2}' then left(a.previous_expected_delivery, 10) end as day,
@@ -215,6 +216,7 @@ select carrier, current_stage as stage, 'delivery-tracker' as lane, count(*) as 
          order by not held and day >= coalesce(local, east) desc nulls last, expected_delivery_changed_at desc))[1:5], ' ') as latest
 from dropped
 group by 1, 2
+having count(*) filter (where held or day < coalesce(local, west)) < count(*)
 order by early desc, parcels desc, carrier, stage;
 
 \echo '== Planned steps passed: parcels on their way whose kept plan has a step dated over a day ago, by short id'

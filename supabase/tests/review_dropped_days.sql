@@ -22,7 +22,10 @@ values
    '2026-01-01T06:00:00Z', '{}'),
   -- Still ahead on Los Angeles's clock, but the check stored a failed attempt: held.
   ('19000000-0000-0000-0000-000000000105', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0105', 'la-poste', 'in_transit',
-   '2026-01-01T06:00:00Z', '{"timezone": "America/Los_Angeles"}');
+   '2026-01-01T06:00:00Z', '{"timezone": "America/Los_Angeles"}'),
+  -- The only DHL drop, passed on Berlin's clock (01:30 on 1 January): the section leaves DHL out.
+  ('19000000-0000-0000-0000-000000000106', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0106', 'dhl', 'in_transit',
+   '2026-01-01T00:30:00Z', '{"last_update": "2025-12-31T18:00:00+01:00"}');
 
 insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_expected_delivery)
 select id, 'scheduled', 'la-poste', expected_delivery_changed_at - interval '1 minute', '2025-12-31'

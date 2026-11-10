@@ -186,6 +186,8 @@ const CANDIDATE_PATTERNS = TRACKING_CANDIDATE_PATTERNS.map((pattern) => new RegE
  * number; each line is read on its own, so numbers on neighbouring lines
  * never run together. A link or a candidate met again reads as it did the
  * first time, so each is read once: detection reads a candidate in capitals.
+ * A candidate holds a digit: some carriers' shapes also fit a word,
+ * "additional" for one, and a word in a message is not a number.
  */
 export function numbersInText(text: string): NumberInText[] {
   const found = new Map<string, NumberInText>();
@@ -216,6 +218,7 @@ export function numbersInText(text: string): NumberInText[] {
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();
+        if (!/\d/.test(candidate)) continue;
         const detected = detection(candidate);
         if (detected?.confidence !== 'high') continue;
         const index = hit.index, end = index + hit[0].length;
@@ -264,6 +267,34 @@ function uncertainNumberInText(text: string): TrackingInputMatch | null {
   const all = [...candidates.values()];
   const introduced = all.filter((candidate) => candidate.introduced);
   return all.length === 1 ? all[0].match : introduced.length === 1 ? introduced[0].match : null;
+}
+
+/** The most labels read on one line: a row of a shipping email names a parcel or two. */
+const MOST_LABELS_PER_LINE = 4;
+
+/**
+ * The numbers a text's own words call tracking numbers, whose shape fits a carrier without proving one:
+ * "Sendungsnummer 1234567899", "Votre colis 01234567890123 arrive demain". Most couriers' numbers are plain
+ * digits, which only such a label tells from an order number or a phone number, so a shipping email is read for
+ * them. The label stands right before its number, as the parser reads one (`keywordNumberInText`); the number is
+ * as long as tracking numbers are and is no shop's order number. The carriers are then asked. Numbers a carrier
+ * claims with certainty are `numbersInText`'s.
+ */
+export function labelledNumbersInText(text: string): NumberInText[] {
+  const found = new Map<string, NumberInText>();
+  for (const line of text.split(/\r?\n/)) {
+    let prose = withoutOrders(line.replace(LINK, ' '));
+    for (let label = 0; label < MOST_LABELS_PER_LINE && found.size < MOST_CANDIDATES_READ; label += 1) {
+      const number = keywordNumberInText(prose);
+      if (!number) break;
+      prose = prose.slice(prose.indexOf(number) + number.length);
+      const normalized = normalizeTrackingNumber(number);
+      if (!normalized || found.has(normalized) || nonTrackingShape(normalized)) continue;
+      const detection = detectCarrierMatch(number);
+      if (detection.confidence === 'low') found.set(normalized, { normalized, match: { trackingNumber: number, source: 'text', ...detection } });
+    }
+  }
+  return [...found.values()];
 }
 
 const NOTHING = parseTrackingInput('');

@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { nonTrackingShape, numbersInText, type NumberInText } from '../peek/lookup/reading';
+import { labelledNumbersInText, nonTrackingShape, numbersInText, type NumberInText } from '../peek/lookup/reading';
 import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
 import { HttpError } from './api';
@@ -30,14 +30,16 @@ export type ParcelAddition =
   | { trackingNumber: string; carrier: string; outcome: 'unavailable' };
 
 /**
- * The tracking numbers a text names with certainty, read as the Add sheet reads a pasted message
- * (`numbersInText`), with its guard: a shop's order number is never one. In the order written, at most
- * MOST_NUMBERS_PER_TEXT, from the first MOST_TEXT_LENGTH of the text.
+ * The tracking numbers a text names: those a carrier claims with certainty, read as the Add sheet reads a pasted
+ * message (`numbersInText`) with its guard that a shop's order number is never one, and after them those the
+ * text's own label calls a tracking number though their shape proves no carrier (`labelledNumbersInText`). Each
+ * once, at most MOST_NUMBERS_PER_TEXT, from the first MOST_TEXT_LENGTH of the text.
  */
 export function trackingNumbersInText(text: string): NumberInText[] {
-  return numbersInText(text.slice(0, MOST_TEXT_LENGTH))
-    .filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order')
-    .slice(0, MOST_NUMBERS_PER_TEXT);
+  const read = text.slice(0, MOST_TEXT_LENGTH);
+  const certain = numbersInText(read).filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order');
+  const named = new Set(certain.map(({ normalized }) => normalized));
+  return [...certain, ...labelledNumbersInText(read).filter(({ normalized }) => !named.has(normalized))].slice(0, MOST_NUMBERS_PER_TEXT);
 }
 
 /**

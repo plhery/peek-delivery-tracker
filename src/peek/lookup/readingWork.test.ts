@@ -19,10 +19,15 @@ beforeEach(() => {
 
 describe('the work a text costs', () => {
   it('reads a word or a link met again once', () => {
-    expect(numbersInText(Array(3000).fill('abcd').join(' '))).toEqual([]);
+    expect(numbersInText(Array(3000).fill('ab1d').join(' '))).toEqual([]);
     expect(detections).toHaveBeenCalledTimes(1);
     expect(numbersInText(Array(600).fill('https://example.test/track/abcd').join('\n'))).toEqual([]);
     expect(parses).toHaveBeenCalledTimes(1);
+  });
+
+  it('asks about no word that holds no digit', () => {
+    expect(numbersInText(Array.from({ length: 900 }, (_, index) => `w${letters(index)}`).join(' '))).toEqual([]);
+    expect(detections).not.toHaveBeenCalled();
   });
 
   it('reads no more than its share of distinct candidates and links', () => {

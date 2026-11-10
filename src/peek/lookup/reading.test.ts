@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkDigitTrouble, isContainerNumber, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText } from './reading';
+import { checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText } from './reading';
 import type { Translate } from '../../lib/messages';
 import { isPickupCode, normalizeTrackingNumber } from '../../lib/carriers';
 import rules from '../../../shared/reading.json';
@@ -34,6 +34,23 @@ describe('reading the field', () => {
     if ('number' in example) expect(reading.match.trackingNumber).toBe(example.number);
     if ('carrier' in example) expect(reading.match).toMatchObject({ carrier: example.carrier, confidence: 'high' });
     if ('pickup' in example) expect(isPickupCode(normalizeTrackingNumber(reading.match.trackingNumber))).toBe(example.pickup);
+  });
+
+  it('lists the numbers a label calls tracking numbers though their shape proves no carrier', () => {
+    const labelled = (text: string) => labelledNumbersInText(text).map(({ normalized, match }) => `${normalized} ${match.confidence}`);
+    expect(labelled('Sendungsnummer 1234567899\nVotre colis 01234567890123 sera livré demain\nTracking: 1234567899'))
+      .toEqual(['1234567899 low', '01234567890123 low']);
+    expect(labelled('Tracking number: 1234567899 | Parcel number: 9987654321')).toEqual(['1234567899 low', '9987654321 low']);
+    for (const text of [
+      // A certain number is listed with the certain ones.
+      'Tracking number: 1ZDEMO202600000001',
+      // No label, or another number's label.
+      'Call us on 0441234567', 'Order number: 12345678', 'Numéro de client : 4455667788',
+      // An order number, a date, a code too short for a tracking number, and a reference no carrier's shape fits.
+      'Parcel PO-000 12345678901234567', 'Sendung 12.10.2026', 'Parcel 123456', 'Numéro de suivi : zzqx-000-000000000',
+      // A link's number is the link's.
+      'Track your parcel https://example.test/track?id=1234567899',
+    ]) expect(labelled(text), text).toEqual([]);
   });
 
   it('sets a typed number in the label’s type, and prose as prose', () => {

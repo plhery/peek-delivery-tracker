@@ -132,7 +132,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     }, async ({ text, name }) => {
       const additions = await addParcelsFromText(service, caller.userId, text, name?.trim() ?? '');
       if (!additions.length) {
-        return answer({ parcels: [] }, 'No tracking number found. Peek adds numbers whose carrier it recognises; an order number is never one.');
+        return answer({ parcels: [] }, 'No tracking number found. Peek adds numbers whose carrier it recognises and numbers the text labels as a tracking number; an order number is never one.');
       }
       const parcels = additions.map(additionSummary);
       const lines = additions.map((addition) => `${addition.trackingNumber} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): ${OUTCOME_TEXT[addition.outcome]}`);

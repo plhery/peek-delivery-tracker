@@ -38,7 +38,18 @@ const FORWARDED_FROM = /^[\s>*]*(?:from|von|de|da|van|od|от|från|fra|lähett�
 /** Parts of a sender's domain that name the mail system rather than the shop. */
 const MAIL_SUBDOMAINS = /^(?:mail|email|e|em|info|news|newsletter|notify|notifications?|noreply|no-reply|delivery|shipping|track|tracking|orders?|mailer|bounce|post)$/i;
 
-const ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
+/**
+ * Characters that show nothing: a marketing email pads its preview line with thousands of them, soft hyphens and
+ * zero-width marks between spaces, which would use up the share of the body that is read.
+ */
+const INVISIBLE = /[\u00AD\u034F\u061C\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]/g;
+/** The text without its invisible characters, and each run of spaces they leave as one space. */
+const withoutPadding = (text: string) => text.replace(INVISIBLE, '').replace(/[ \t\f\v\u00A0]{2,}/g, ' ');
+
+const ENTITIES: Record<string, string> = {
+  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', ensp: ' ', emsp: ' ', thinsp: ' ',
+  shy: '\u00AD', zwnj: '\u200C', zwj: '\u200D', lrm: '\u200E', rlm: '\u200F',
+};
 
 function decodeEntities(text: string): string {
   return text.replace(/&(#x[0-9a-f]{1,6}|#\d{1,7}|[a-z]{2,8});/gi, (whole, entity: string) => {
@@ -176,7 +187,7 @@ function gmailConfirmation(email: Email, text: string, links: string[]): Inbound
 export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   const email = await PostalMime.parse(raw, { attachmentEncoding: 'arraybuffer', maxPartCount: 500, maxNestingDepth: 32 });
   const html = email.html ?? '';
-  const body = email.text?.trim() ? email.text.slice(0, MOST_HTML_LENGTH) : htmlText(html);
+  const body = withoutPadding(email.text?.trim() ? email.text.slice(0, MOST_HTML_LENGTH) : htmlText(html));
   const links = htmlLinks(html);
   const read: string[] = [];
   let room = LINKS_SHARE;

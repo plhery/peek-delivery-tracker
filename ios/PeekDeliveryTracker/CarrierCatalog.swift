@@ -951,7 +951,8 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             for shape in Self.candidatePatterns {
                 for hit in Self.hits(in: prose, pattern: shape.pattern, caseInsensitive: shape.caseInsensitive) {
                     let number = hit.text.trimmingCharacters(in: .whitespacesAndNewlines)
-                    guard detect(number).confidence == .high else { continue }
+                    // A candidate holds a digit: some shapes also fit a word, and a word in a message is not a number.
+                    guard Self.matches(number, pattern: "[0-9]"), detect(number).confidence == .high else { continue }
                     // A shape inside another certain one is the same number read twice.
                     let overlaps = candidates.contains {
                         hit.range.location < NSMaxRange($0.range) && NSMaxRange(hit.range) > $0.range.location
@@ -1265,10 +1266,12 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         }.sorted { left, _ in left.role == .active }
     }
 
-    /// The first candidate in the text that one carrier claims with certainty.
+    /// The first candidate in the text that one carrier claims with certainty. A candidate holds a digit:
+    /// some shapes also fit a word, and a word of a message or a link is no number.
     private func recognizedNumber(in text: String) -> String? {
         for shape in Self.candidatePatterns {
             for candidate in Self.matches(in: text, pattern: shape.pattern, caseInsensitive: shape.caseInsensitive) {
+                guard Self.matches(candidate, pattern: "[0-9]") else { continue }
                 if detect(candidate).confidence == .high { return candidate.trimmingCharacters(in: .whitespaces) }
             }
         }

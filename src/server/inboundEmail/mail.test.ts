@@ -79,6 +79,40 @@ describe('reading a forwarded shipping email', () => {
   });
 });
 
+describe('the numbers a shipping email names', () => {
+  const numbers = async (subject: string, html: string) => {
+    const mail = await readInboundMail(alternative({ From: 'Example Shop <orders@example-shop.com>', Subject: subject }, null, html));
+    return trackingNumbersInText(mail.text).map(({ normalized, match }) => ({ number: normalized, carrier: match.carrier }));
+  };
+
+  it('takes no word for a number, though a carrier\'s shape fits it', async () => {
+    expect(await numbers('Dispatched: your order', `<p>Order # 302-4571983-2294617</p>
+      <p>For additional information on the scope of this notice, please contact our customer service.</p>
+      <a href="https://shop.example/help/additional">Help</a>`)).toEqual([]);
+  });
+
+  it('takes the number a label names though its shape proves no carrier, and no order or customer number', async () => {
+    expect(await numbers('Your order 12345678 has shipped', `<table>
+      <tr><td>Order number:</td><td>87654321</td></tr>
+      <tr><td>Customer number:</td><td>4455667788</td></tr>
+      <tr><td>Tracking Number:</td><td><b>1234567899</b></td></tr></table>
+      <p>Questions? Call 044 123 45 67.</p>`)).toEqual([{ number: '1234567899', carrier: 'unknown' }]);
+    expect(await numbers('Votre colis arrive', '<p>Votre colis 01234567890123 de Example Shop sera livré demain.</p>'))
+      .toEqual([{ number: '01234567890123', carrier: 'unknown' }]);
+  });
+
+  it('lists a certain number before a labelled one, each once', async () => {
+    expect(await numbers('Shipped', `<p>Sendungsnummer 1234567899</p><p>Tracking number: ${UPS}</p><p>Sendungsnummer: 1234567899</p>`))
+      .toEqual([{ number: UPS, carrier: 'ups' }, { number: '1234567899', carrier: 'unknown' }]);
+  });
+
+  it('reads past the invisible padding of a preview line', async () => {
+    const padding = '&#847;&zwnj;&nbsp;&shy; \u200B'.repeat(4000);
+    expect(await numbers('Your parcel is on its way', `<div style="display:none">On its way${padding}</div><p>Parcel ${POSTAL}</p>`))
+      .toEqual([{ number: POSTAL, carrier: expect.any(String) }]);
+  });
+});
+
 describe('a hostile email', () => {
   const big = 900_000;
   it.each([

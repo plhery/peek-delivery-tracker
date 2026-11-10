@@ -281,7 +281,11 @@ Key server modules:
     counted.
   - The server reads the subject, the text part (else the HTML's text) and the HTML's links,
     never an attachment, and takes the tracking numbers the Add sheet would, without order
-    numbers. It reads at most 16,000 characters, with patterns that stay linear on any
+    numbers: those a carrier's shape proves. It also takes a number the email's own label
+    calls a tracking number ("Sendungsnummer 1234567899") when its shape fits a carrier
+    without proving one, as most couriers' plain digits do; the carriers are then asked. A
+    number holds a digit, so no word is ever one. Invisible padding is dropped before the
+    reading. It reads at most 16,000 characters, with patterns that stay linear on any
     input, so no email holds the server up. Each is added as the Add sheet adds it, with the same daily allowance and
     parcel limit, labelled with the sender's name; one the account follows already costs
     nothing. `src/server/parcelsFromText.ts` is that step.

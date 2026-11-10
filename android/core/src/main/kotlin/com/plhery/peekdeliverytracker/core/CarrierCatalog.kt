@@ -496,6 +496,8 @@ class CarrierCatalog private constructor(
             for (shape in candidatePatterns) {
                 for (hit in hits(prose, shape.pattern, shape.caseInsensitive)) {
                     val number = hit.text.trimmingWhitespacesAndNewlines()
+                    // A candidate holds a digit: some shapes also fit a word, and a word in a message is not a number.
+                    if (!matches(number, "[0-9]")) continue
                     if (detect(number).confidence != CarrierMatch.Confidence.High) continue
                     // A shape inside another certain one is the same number read twice.
                     val overlaps = candidates.any { hit.start < it.end && hit.end > it.start }
@@ -781,10 +783,14 @@ class CarrierCatalog private constructor(
         }.sortedBy { if (it.role == ParcelTrackingLink.Role.Active) 0 else 1 }
     }
 
-    /** The first candidate in the text that one carrier claims with certainty. */
+    /**
+     * The first candidate in the text that one carrier claims with certainty. A candidate holds a digit: some
+     * shapes also fit a word, and a word of a message or a link is no number.
+     */
     private fun recognizedNumber(text: String): String? {
         for (shape in candidatePatterns) {
             for (candidate in matchesIn(text, shape.pattern, shape.caseInsensitive)) {
+                if (!matches(candidate, "[0-9]")) continue
                 if (detect(candidate).confidence == CarrierMatch.Confidence.High) return candidate.trimmingWhitespaces()
             }
         }

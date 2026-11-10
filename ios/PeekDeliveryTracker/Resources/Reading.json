@@ -225,6 +225,20 @@
       "text": "Track it with DHL: 1234567899\nUPS 1ZDEMO202600000001",
       "numbers": [],
       "why": "A number whose shape proves no carrier is not listed, and one certain number is no choice."
+    },
+    {
+      "text": "For additional information:\nUPS 1ZDEMO202600000001\nUPS 1ZDEMO202600000029",
+      "numbers": [
+        {
+          "number": "1ZDEMO202600000001",
+          "carrier": "ups"
+        },
+        {
+          "number": "1ZDEMO202600000029",
+          "carrier": "ups"
+        }
+      ],
+      "why": "A word a carrier's rule claims is not listed: a number holds a digit."
     }
   ],
   "examples": [
@@ -444,6 +458,24 @@
       "shop": null,
       "number": "",
       "why": "A word is never the number, though a carrier's rule may fit its length."
+    },
+    {
+      "text": "For additional information, please contact our customer service.",
+      "shop": null,
+      "number": "",
+      "why": "Nor is a word that a carrier's rule claims outright: ten letters that start AD have the shape of an Allegro One number."
+    },
+    {
+      "text": "https://shop.example/help/additional",
+      "shop": null,
+      "number": "",
+      "why": "A word of a link is no number either."
+    },
+    {
+      "text": "ADDITIONAL",
+      "shop": null,
+      "number": "ADDITIONAL",
+      "why": "Typed alone, it is the number meant."
     },
     {
       "text": "Thanks for your order! We'll let you know as soon as it ships.",

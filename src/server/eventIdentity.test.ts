@@ -1961,6 +1961,22 @@ describe('a provider\'s copies on a clock read in another zone', () => {
     const early = [copy('picked', '2026-10-13T16:26:21+00:00', 'Picked up', 'accepted'), copy('hub', '2026-10-13T20:03:41+00:00', 'Reached hub')];
     expect(left([booked, sorted, ...early])).toEqual([]);
   });
+
+  it('go across the misread zone\'s summer-time change, each at its side\'s shift, once three copies show the two', () => {
+    // US Eastern leaves summer time on 1 November: the shift goes from 9 h 30 to 10 h 30.
+    const winter = (day: string) => [own('hub', `${day}T12:33:00+00:00`, 'Reached hub'), own('sorted', `${day}T13:05:00+00:00`, 'Sorted')];
+    const copies = (day: string) => [copy('hub', `${day}T23:03:41+00:00`, 'Reached hub'), copy('sorted', `${day}T23:35:21+00:00`, 'Sorted')];
+    const summer = [booked, copy('picked', '2026-10-13T18:26:21+00:00', 'Picked up', 'accepted')];
+    const after = scan('shiprocket:delivered', '2026-11-04T10:00:00Z', 'Delivered', 'delivered');
+    const gone = (day: string, stored: JsonObject[]) => [...sharedScans([after], [carrier[0]!, carrier[1]!, ...winter(day), ...stored]).absorbed].sort();
+    expect(gone('2026-11-02', [...summer, copies('2026-11-02')[1]!])).toEqual(['unknown:booked', 'unknown:picked', 'unknown:sorted']);
+    expect(gone('2026-11-02', [...summer, ...copies('2026-11-02')]))
+      .toEqual(['unknown:booked', 'unknown:hub', 'unknown:picked', 'unknown:sorted']);
+    // No zone changes its offset between 13 and 15 October: two shifts an hour apart are no clock.
+    expect(gone('2026-10-15', [...summer, ...copies('2026-10-15')])).toEqual([]);
+    // Nor are they when one copy on each side shows them.
+    expect(gone('2026-11-02', [booked, copies('2026-11-02')[1]!])).toEqual([]);
+  });
 });
 
 describe('a provider\'s copies on a carrier\'s wall clocks under another offset', () => {
@@ -2084,6 +2100,20 @@ describe('a provider\'s scans on a clock whole hours off another provider\'s', (
     expect(flagged([processed, transit], stored.map((item) => ({ ...item, raw_data: { universal_provider: '17TRACK' } })))).toEqual([]);
     expect(flagged([ours('x', '2026-10-22T03:00:00Z', 'Arrived at hub'), ours('y', '2026-10-22T05:00:00Z', 'Arrived at hub')],
       [theirs('x', '2026-10-22T02:00:00+00:00', 'Hub'), theirs('y', '2026-10-22T04:00:00+00:00', 'Hub')])).toEqual([]);
+  });
+
+  it('stay out on both sides of a summer-time change, each at its side\'s shift', () => {
+    // New York's wall clock read as UTC: 4 h early in summer time, 5 h after 1 November.
+    const right = (id: string, at: string, description: string) =>
+      ({ ...theirs(id, at, description), location: 'Example City, NY', raw_data: { universal_provider: '17TRACK' } });
+    const utc = (id: string, at: string, description: string) => ({ ...ours(id, at, description), raw_data: { universal_provider: 'ParcelsApp' } });
+    const rows = [right('a', '2026-10-30T14:21:00+00:00', 'Arrived at facility'), right('b', '2026-10-30T18:42:00+00:00', 'Departed facility'),
+      right('c', '2026-11-02T15:13:00+00:00', 'Arrived at hub'), right('d', '2026-11-02T20:07:00+00:00', 'Left hub')];
+    const copies = [utc('a', '2026-10-30T10:21:00Z', 'ARRIVED AT USPS FACILITY'), utc('b', '2026-10-30T14:42:00Z', 'DEPARTED USPS FACILITY'),
+      utc('c', '2026-11-02T10:13:00Z', 'ARRIVED AT REGIONAL HUB'), utc('d', '2026-11-02T15:07:00Z', 'IN TRANSIT TO NEXT FACILITY')];
+    expect(left(copies, rows)).toEqual(['unknown:late-a', 'unknown:late-b', 'unknown:late-c', 'unknown:late-d']);
+    // One scan on each side shows no clock.
+    expect(left([copies[0]!, copies[3]!], rows)).toEqual([]);
   });
 });
 

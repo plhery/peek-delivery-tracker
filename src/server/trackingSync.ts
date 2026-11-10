@@ -252,8 +252,11 @@ function storedAnnouncedOnly(parcel: JsonObject, activeCarrier: string, metadata
 
 function announcedScans(stage: string | null | undefined, events: readonly JsonObject[], metadata: JsonObject): boolean {
   const handedOver = Date.parse(String(metadata.handed_over_at ?? ''));
+  // A scan with only its wall clock is past the handoff when it is on every clock: read at UTC+14.
+  const at = (event: JsonObject) => event.time != null ? Date.parse(String(event.time))
+    : DateTime.fromISO(String(event.local_time ?? ''), { zone: 'UTC+14' }).toMillis();
   return !HELD_BY_PARTNER.has(stage ?? '') && !events.some((event) => HELD_BY_PARTNER.has(eventStage(event))
-    || (!['pending', 'registered'].includes(eventStage(event)) && Date.parse(String(event.time ?? '')) >= handedOver));
+    || (!['pending', 'registered'].includes(eventStage(event)) && at(event) >= handedOver));
 }
 
 /** The earlier carrier's follow-up, made while the delivery carrier's lookup failed. */

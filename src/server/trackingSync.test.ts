@@ -4657,7 +4657,13 @@ describe('TrackingSyncService', () => {
     expect(parcel.carrier_data).toMatchObject({ earlier_checked_at: '2026-01-13T12:30:00.000Z' });
     expect(await sync('2026-01-13T15:00:00Z')).toEqual(['posti']);
     expect(await sync('2026-01-25T12:00:00Z')).toEqual(['posti', 'la-poste']);
-    // Not once the delivery carrier scans the parcel after the handoff, nor 14 days after it.
+    // Not once the delivery carrier scans the parcel after the handoff, a scan with only its wall clock included
+    // (past the handoff on every clock), nor 14 days after it.
+    const before = delivery;
+    delivery = { ...delivery, events: [{ local_time: '2026-01-25T09:00:00', description: 'Arrived at the sorting centre', stage: 'in_transit' },
+      ...announced] };
+    expect(await sync('2026-01-25T15:00:00Z')).toEqual(['posti']);
+    delivery = before;
     expect(await sync('2026-01-26T11:00:00Z')).toEqual(['posti']);
     delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-25T14:00:00Z',
       events: [{ time: '2026-01-25T14:00:00Z', description: 'Arrived at the sorting centre', stage: 'in_transit' }, ...announced] };

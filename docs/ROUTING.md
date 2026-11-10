@@ -782,7 +782,7 @@ A parcel often changes carrier at the border. The origin history is always kept.
 - Once adopted (`handed_over_at`), the partner answers for the parcel. The origin publishes
   some scans late, so for a day it is still asked alongside the partner, at most every 55 min
   (`earlier_checked_at`). After that day, while the partner has scanned nothing past the label
-  since the handoff and shows no delivery round, problem, delivery or return (JRT hands a parcel
+  since the handoff (a scan with only its wall clock, on every clock) and shows no delivery round, problem, delivery or return (JRT hands a parcel
   to DHL at the shipper's pre-advice and flies it days later), the origin is asked after the
   partner's answer every 3 h, for up to 14 days after the handoff. A partner whose lookup fails
   stops none of this: the origin is asked as it would have been, the partner's stored rows and

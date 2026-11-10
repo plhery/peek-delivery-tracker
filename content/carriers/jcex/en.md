@@ -3,7 +3,7 @@ title: JCEX tracking: JCZ numbers, statuses and who delivers
 description: Track a JCEX parcel from China: what a JCZ waybill number looks like, what each status means, who delivers it in your country and who to ask when it stalls.
 slug: jcex-tracking
 published: 2026-10-21
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) is a logistics company in Hangzhou, China, that ships parcels abroad for online sellers and hands them to a carrier in your country for the last stretch, such as [USPS](carrier:usps) in the United States or Colissimo in France. Track the number on JCEX's tracker, [track.jcex.com](https://track.jcex.com/), or in the box above. The shop gives it with your order's shipping details.
@@ -43,7 +43,7 @@ JCEX's tracker is in Chinese only, but each line's text can be English, Chinese 
 | `out for delivery` | Out for delivery. | "Out for delivery" |
 | `Delivered` | Delivered to you. | "Delivered" |
 
-`The order information has been sent` and `货物电子信息已经收到` mean the same as the first row, `到达收货点(包裹已入库)` that a JCEX collection point booked the parcel in. `under clearance` is import customs and `CUSTOMS CLEARANCE COMPLETE` its end. `InTransit_Arrival` and `InTransit_Departure` mark a hub in Hong Kong, and `turck transferring（卡车运输中）` (JCEX's spelling) a parcel on a truck. After the handover come the delivering carrier's own lines: USPS's in English, such as `ARRIVAL AT POST OFFICE`, Colissimo's in French.
+`The order information has been sent` and `货物电子信息已经收到` mean the same as the first row, `到达收货点(包裹已入库)` that a JCEX collection point booked the parcel in. `under clearance` is import customs and `CUSTOMS CLEARANCE COMPLETE` its end. `InTransit_Arrival` and `InTransit_Departure` mark a hub in Hong Kong, and `turck transferring（卡车运输中）` (JCEX's spelling) a parcel on a truck. After the handover come the delivering carrier's own lines: USPS's in English, such as `Departed USPS Regional Facility`, `In Transit to Next Facility` and `ARRIVAL AT POST OFFICE` (all "In transit"), Colissimo's in French. Colissimo's `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` (at the local delivery office, being prepared for the round) shows as "Out for delivery", and `Votre colis n'a pas pu vous être remis. Il sera mis en livraison demain (hors dimanche et jours fériés).` as "Delivery attempted". `Package has been created and is ready for pickup at the shippers location. This is a pre-transit status event code.` is the delivering carrier's label only, before it has the parcel: "Label created".
 
 Above the lines, JCEX's tracker files each parcel under a summary label, explained in a note: `收到信息` (waiting to be collected), `运输中` (in transit), `到达待取` (waiting at a delivery point), `派送途中` (out for delivery), `投递失败` (a failed delivery attempt), `可能异常` (a possible problem), `运输过久` (in transit a long time without delivery) or `查询不到` (no tracking found).
 
@@ -80,7 +80,7 @@ Its contact page also lists branches across China, which serve sellers, and no c
 
 [Peek](/) names JCEX at once from a `JCZ…DH` number, which no other carrier in its catalog shares. A track.jcex.com link with `?nums=` and the number can be pasted too. Peek tracks JCEX's JCZ waybill numbers only: for an order number, ask the seller for the waybill.
 
-Peek reads JCEX's own tracking and shows the status, the history with each scan's place on a map, the delivery time and the destination country. It shows a line's English text where JCEX has one, and the delivering carrier's lines as it wrote them, except exact matches such as `Delivered`, which appear in Peek's own words. `Arrive at the delivery point` and the handover to the depot count as in transit, not as ready to collect or delivered. Each scan's time is read on the clock JCEX gives it, China's or your country's, and shown in your own time zone. Rows dated after the lookup, and the timeline JCEX sometimes writes ahead up to the handover, aren't scans: Peek leaves them out, and shows a row JCEX repeats once.
+Peek reads JCEX's own tracking and shows the status, the history with each scan's place on a map, the delivery time and the destination country. It shows a line's English text where JCEX has one, and the delivering carrier's lines as it wrote them, except exact matches such as `Delivered`, which appear in Peek's own words. `Arrive at the delivery point` and the handover to the depot count as in transit, not as ready to collect or delivered. Each scan's time is read on the clock JCEX gives it, China's or your country's, and shown in your own time zone. Rows dated after the lookup, and the timeline JCEX sometimes writes ahead up to the handover, aren't scans: Peek leaves them out, and shows a row JCEX repeats once. When it has left such rows out, Peek says so under the parcel's status on peektracker.com, until the parcel is delivered or returned: "JCEX’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller."
 
 As JCEX names no delivering carrier and Peek doesn't read the second number, Peek follows the JCEX number to the end rather than switching to USPS or Colissimo, whose scans arrive through JCEX's history. It shows no expected delivery date, service or proof of delivery for JCEX.
 
@@ -118,5 +118,5 @@ On its small-parcel line, JCEX tells sellers 13 to 16 working days to the United
 - [JCEX: 国际快递与快运 (express and freight)](https://www.jcex.com/chanpinyufuwu/guojikuaiyun/1438101270410715138.html) – delivered by the post or commercial couriers
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item sold at a distance, whatever its value
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shape, warehouse and handover lines, scan wordings
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shape, warehouse and handover lines, scan wordings, USPS's and Colissimo's relayed lines, rows written ahead
 :::

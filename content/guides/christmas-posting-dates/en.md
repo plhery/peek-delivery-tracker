@@ -4,14 +4,14 @@ description: When to send for Christmas with Royal Mail, Evri, USPS, FedEx, An P
 slug: christmas-posting-dates
 picture: A December calendar page with one day circled, a van carrying a red-ribboned parcel through falling snow, and Pip hurrying alongside.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
-Royal Mail's last recommended posting dates for Christmas 2026 are Friday 18 December for 2nd Class and Wednesday 23 December for Special Delivery Guaranteed; post 1st Class by Saturday 19 December to be safe (see below). In the US, USPS says to send by Thursday 17 December with Ground Advantage or First-Class Mail, and by Saturday 19 December with Priority Mail Express. Royal Mail, USPS, FedEx, Canada Post and Australia Post have published their 2026 dates. Evri and InPost haven't yet, and An Post's aren't confirmed, so their rows still give last year's.
+Royal Mail's last recommended posting dates for Christmas 2026 are Friday 18 December for 2nd Class and Wednesday 23 December for Special Delivery Guaranteed; post 1st Class by Saturday 19 December to be safe (see below). With Evri, drop off a Standard parcel by 11am on Saturday 19 December. In the US, USPS says to send by Thursday 17 December with Ground Advantage or First-Class Mail, and by Saturday 19 December with Priority Mail Express. Royal Mail, Evri, USPS, FedEx, Canada Post and Australia Post have published their 2026 dates. InPost hasn't yet, and An Post's aren't confirmed, so their rows still give last year's.
 
 ## United Kingdom: Royal Mail, Evri and InPost
 
-Royal Mail has announced its 2026 dates. Evri and InPost haven't yet, so their dates here are last year's. All are for UK addresses.
+Royal Mail and Evri have announced their 2026 dates. InPost hasn't yet, so its date here is last year's. All are for UK addresses.
 
 | Carrier | Service | Send by |
 | --- | --- | --- |
@@ -20,11 +20,12 @@ Royal Mail has announced its 2026 dates. Evri and InPost haven't yet, so their d
 | Royal Mail | 1st Class, 1st Class Signed For | Saturday 19 December (see below) |
 | Royal Mail | Tracked 24 | Monday 21 December |
 | Royal Mail | Special Delivery Guaranteed | Wednesday 23 December |
-| [Evri](carrier:evri) | Standard, UK mainland | Not announced yet (2025: Friday 19 December) |
-| Evri | Next Day, UK mainland, drop-off by 11am | Not announced yet (2025: Saturday 20 December) |
+| [Evri](carrier:evri) | Courier collection, UK mainland | Friday 18 December |
+| Evri | Standard, UK mainland, ParcelShop or Locker drop-off by 11am | Saturday 19 December |
+| Evri | Next Day, UK mainland, ParcelShop or Locker drop-off by 11am | Monday 21 December |
 | [InPost](carrier:inpost) | Drop-off at a locker or shop | Not announced yet (2025: Saturday 20 December) |
 
-Royal Mail's announcement lists 1st Class and 1st Class Signed For under Saturday 19 December, but its text gives Monday 21 December for 1st Class, so Saturday is the safe date. [DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
+Royal Mail's announcement lists 1st Class and 1st Class Signed For under Saturday 19 December, but its text gives Monday 21 December for 1st Class, so Saturday is the safe date. Over the peak, Evri moves its Next Day drop-off cut-off to 11am. [DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
 
 ## United States: USPS and FedEx
 
@@ -36,7 +37,7 @@ Both have published their 2026 dates. USPS aims at delivery before Christmas Day
 | USPS | Priority Mail | Friday 18 December |
 | USPS | Priority Mail Express | Saturday 19 December |
 | USPS | Ground Advantage to Alaska, Hawaii, Puerto Rico and US territories | No set date: 10 days or more in transit, look up your ZIP Codes on usps.com |
-| USPS | Military APO/FPO/DPO, Ground Advantage | Wednesday 4 November |
+| USPS | Military APO/FPO/DPO, Ground Advantage | Passed (Wednesday 4 November) |
 | USPS | Military APO/FPO/DPO, First-Class Mail and Priority Mail | Wednesday 9 December |
 | [FedEx](carrier:fedex) | Ground Economy | Tuesday 15 December |
 | FedEx | Ground, Home Delivery | Thursday 17 December (5 days in transit) to Wednesday 23 December (1 day) |
@@ -85,7 +86,8 @@ To Alaska, Hawaii, Puerto Rico and US territories, USPS gives the same dates as 
 | Australia Post | Express Post, "NT and from WA" | Tuesday 22 December |
 | Australia Post | Cards and letters within your state | Monday 21 December |
 | Australia Post | Cards and letters interstate | Friday 18 December |
-| Australia Post | Parcel Post to Christmas and Cocos Islands | Wednesday 14 to Monday 26 October, by sending state |
+| Australia Post | Parcel Post to Norfolk Island | Wednesday 11 to Tuesday 17 November, by sending state (Express Post: Monday 14 to Thursday 17 December) |
+| Australia Post | Parcel Post to Christmas and Cocos Islands | Passed (Wednesday 14 to Monday 26 October); Express Post and letters: Monday 7 December |
 
 ## Sending a parcel abroad for Christmas
 
@@ -93,7 +95,8 @@ International dates come earlier than domestic ones.
 
 | From | Carrier and service | Send by |
 | --- | --- | --- |
-| UK | Evri standard to the USA or Australia, ParcelShop drop-off | Not announced yet (2025: Friday 12 December) |
+| UK | Evri standard to Ireland, France, Germany or Spain, ParcelShop drop-off | Wednesday 9 December (courier collection: Tuesday 8 December) |
+| UK | Evri standard to the USA, Canada or Australia, ParcelShop drop-off | Wednesday 2 December (courier collection: Tuesday 1 December) |
 | US | USPS Priority Mail International, First-Class Package International Service | Wednesday 9 December |
 | US | USPS Priority Mail Express International | Wednesday 16 December |
 | Ireland | An Post standard parcels to the rest of Europe | Not confirmed yet (2025: Friday 12 December) |
@@ -105,7 +108,7 @@ International dates come earlier than domestic ones.
 
 - **Cards:** Canada Post says Friday 11 December to the USA or the UK. An Post's 2025 date for letters to the USA was Wednesday 10 December.
 - **Australia:** from SA, Tas or the NT, add 2 business days for Express and 5 for Standard and Economy.
-- **Canada:** Canada Post's service alerts list France, Germany and seven other EU countries as suspended, though its Christmas page still gives dates for France and Germany.
+- **Canada:** Canada Post's service alerts of 4 November 2026 list France, Germany and the UK as served. It takes no mail for Belarus, Cuba, Haiti, Iran, North Korea, Libya, Russia, Somalia, Sudan, Syria, the West Bank and Gaza, or Yemen.
 
 ## Ordering online: leave time for customs
 
@@ -119,8 +122,8 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 
 | Carrier | Days off, Christmas 2026 |
 | --- | --- |
-| Royal Mail | No post on bank holidays: Friday 25 and Monday 28 December |
-| DPD UK | Closed Friday 25, Saturday 26 and Monday 28 December in Great Britain |
+| Royal Mail | No post on bank holidays: Friday 25 and Monday 28 December, and Friday 1 January 2027 |
+| DPD UK | Closed Friday 25, Saturday 26 and Monday 28 December, and Friday 1 January 2027, in Great Britain |
 | Australia Post | No deliveries on Christmas Day or Boxing Day |
 | Canada Post | Not announced yet |
 
@@ -131,22 +134,22 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 - Still stuck after Christmas? | See [why tracking stops updating](guide:tracking-not-updating).
 :::
 
-Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery only": it checks up to every 2 minutes once the parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers), though it can't make it arrive sooner. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail and for Morning Global; every 30 minutes for Poste Italiane, PostNL, USPS, GOFO and Cainiao).
+Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery only": it checks up to every 2 minutes once the parcel is out for delivery with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), though it can't make it arrive sooner. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail and for Morning Global; every 30 minutes for Poste Italiane, PostNL, USPS, GOFO and Cainiao). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 :::sources
-- [Royal Mail: Royal Mail announces last recommended posting dates for Christmas](https://www.internationaldistributionservices.com/en/press-centre/press-releases/royal-mail/royal-mail-announces-last-recommended-posting-dates-for-christmas/) – 2026 dates, two dates for 1st Class, 27 October 2026
+- [Royal Mail: Royal Mail announces last recommended posting dates for Christmas](https://www.internationaldistributionservices.com/en/press-centre/press-releases/royal-mail/royal-mail-announces-last-recommended-posting-dates-for-christmas/) – 2026 dates, two dates for 1st Class, 27 October 2026 (read 4 November 2026)
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – no post on bank holidays
-- [GOV.UK: UK bank holidays](https://www.gov.uk/bank-holidays) – 25 and 28 December 2026
-- [Evri: Last posting dates for Christmas 2025](https://www.evri.com/news/last-posting-dates-for-christmas-2025) – 2025 dates, service status
+- [GOV.UK: UK bank holidays](https://www.gov.uk/bank-holidays) – 25 and 28 December 2026, 1 January 2027
+- [Evri: Last posting dates for Christmas 2026](https://www.evri.com/news/last-posting-dates-for-christmas-2026) – 2026 dates, courier collections, 11am Next Day cut-off, international dates, service status, 28 October 2026
 - [InPost: Christmas drop-off date](https://inpost.co.uk/blog/do-they-know-its-xs-mas-time) – 2025 date
-- [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off in Great Britain
+- [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off in Great Britain, 1 January 2027
 - [USPS: Holiday shipping deadlines](https://www.usps.com/holiday/holiday-shipping-dates.htm) – 2026 dates, Alaska, Hawaii and territories, Hanukkah
 - [FOX 13 Tampa Bay: Here are FedEx's deadlines to ensure holiday gifts arrive by Christmas](https://www.fox13news.com/news/here-fedexs-deadlines-ensure-your-holiday-gifts-arrive-christmas) – FedEx's 2026 dates, weekends, 23 September 2026
 - [RTÉ: What are the Christmas postal dates in Ireland for 2025?](https://www.rte.ie/lifestyle/living/2025/1203/1547111-what-are-the-christmas-postal-dates-in-ireland-for-2025/) – An Post's 2025 dates, "only estimated", 3 December 2025
 - [ComReg: Latest postal dates for Christmas delivery](https://www.comreg.ie/latest-postal-dates-for-christmas-delivery-2/) – An Post's 2025 dates in Ireland and to the UK, 3 December 2025
 - [Canada Post: Holiday sending guidelines](https://www.canadapost-postescanada.ca/cpc/en/our-company/holiday-sending-guidelines.page) – 2026 dates, delivery tool
-- [Canada Post: Service alerts](https://www.canadapost-postescanada.ca/cpc/en/our-company/news-and-media/service-alerts.page) – suspensions
-- [Australia Post: Christmas sending dates](https://auspost.com.au/christmas) – 2026 dates, 2.30pm, interstate days
+- [Canada Post: Service alerts](https://www.canadapost-postescanada.ca/cpc/en/our-company/news-and-media/service-alerts.page) – suspensions, 4 November 2026
+- [Australia Post: Christmas sending dates](https://auspost.com.au/christmas) – 2026 dates, 2.30pm, interstate days, Norfolk, Christmas and Cocos Islands
 - [Australia Post: Public holiday services](https://auspost.com.au/about-us/corporate-information/public-holiday-services) – days off
 - [Cainiao: Cross-border Express Delivery](https://www.cainiao.com/en/global-express.html) – Economy delivery times
 :::

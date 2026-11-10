@@ -3,7 +3,7 @@ title: Royal Mail tracking: numbers, statuses and redelivery
 description: Track a Royal Mail parcel: number shapes, what each status means, missed deliveries and the red card, customs bills, compensation claims and who to contact.
 slug: royal-mail-tracking
 published: 2026-10-13
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
 Royal Mail is the UK's national post, and its Track your item page also tracks [Parcelforce](carrier:parcelforce) parcels. Type the number there or paste it in the box above. The number comes from the sender: look in the shop's order confirmation, shipping email or invoice.
@@ -32,14 +32,14 @@ Royal Mail writes its tracking in English. These are the lines you'll usually me
 | --- | --- |
 | `Sender preparing item` | The sender has announced it. Royal Mail doesn't have the item yet. |
 | `We're expecting it` | Announced, but not received by Royal Mail yet. |
-| `Item received` | Royal Mail has it. The same words return at mail centres and hubs, and on arrival in the destination country. |
+| `Item Received` | Royal Mail has it. The same words return at mail centres and hubs, and on arrival in the destination country. |
 | `In transit` | Moving through the network. |
 | `Item Leaving the UK` | Sent abroad: it has left the UK. |
 | `Your item is currently with Customs in the destination country.` | Customs in the country it's going to has it. |
 | `Released from Customs` | Customs there has let it go on. |
 | `Customs charges raised` | VAT, duty or a fee must be paid before delivery (see below). |
 | `Despatched to delivery office` | Heading to the office that delivers to you. |
-| `Ready for delivery` | At the delivery office that serves you, or already on the day's round. |
+| `Ready for Delivery` | At the delivery office that serves you, or already on the day's round. |
 | `Out for delivery` | With your postie today. |
 | `Delivery attempted` | Nobody could take it. |
 | `Due for Redelivery the Next Working Day` | Royal Mail will bring it again; the new round shows as its own out-for-delivery line. |
@@ -47,19 +47,19 @@ Royal Mail writes its tracking in English. These are the lines you'll usually me
 | `Delivered` | Delivered. A line may name who signed, and `Delivered to Neighbour/Reception by` names who took it in. |
 | `Returned to sender` | On its way back to the sender. |
 
-Royal Mail's summary can also read `Pending`; Peek shows it as "Waiting for an update" until a scan moves the item on.
+Royal Mail's summary can also read `Pending`, as it does beside customs scans: Peek then shows the stage of Royal Mail's newest scan that has one, such as "At customs".
 
 ## Missed delivery: red card and redelivery
 
 Royal Mail delivers Monday to Saturday, usually by 4.30pm, and on Sundays in some areas. A parcel due at a set time can come later than 4.30pm, and nothing comes on bank holidays. 2nd Class letters are moving to every other weekday, office by office until December 2026; parcels, Tracked 24 included, still come Monday to Saturday.
 
-If you don't answer the door, Royal Mail leaves a parcel in your safe place or with a neighbour. Set a safe place, or ask not to have parcels left, in the Royal Mail app or through Customer Services. To stop deliveries to neighbours, fill in Royal Mail's form: it sends you a sticker to put near your letterbox.
+If you don't answer the door, Royal Mail leaves a parcel in your safe place or with a neighbour. Set a safe place, or ask not to have parcels left, in the Royal Mail app or through Customer Services; the settings are kept for a year, so check them again after that. To stop deliveries to neighbours, fill in Royal Mail's form: it sends you a sticker to put near your letterbox.
 
 Otherwise you get a red card with the address and opening hours of the place to [collect it from](guide:missed-delivery): a Customer Service Point, usually in the delivery office. Check its opening hours on Royal Mail's website before you go, or book a redelivery to your door there.
 
-When VAT, duty or other charges are due on an item from abroad, Royal Mail sends you a bill saying exactly what to pay, and normally holds the item for about 3 weeks; unpaid by then, it goes back to the sender. Gifts worth £39 or less pay no VAT, and on goods you bought for £135 or less the seller has usually charged VAT already.
+When VAT, duty or other charges are due on an item from abroad, Royal Mail sends you a bill saying exactly what to pay, and normally holds the item for about 3 weeks; unpaid by then, it goes back to the sender. Gifts worth £39 or less pay no VAT, and on goods you bought for £135 or less the seller has usually charged VAT already. If you send the goods back or think you paid too much, claim the VAT or duty back with form BOR 286, the one for items Royal Mail or Parcelforce delivered.
 
-In Northern Ireland, goods from outside the UK and the EU may be "at risk" of entering the EU; the delivery company tells you if they are. If you're not a business, you then pay duty and a €2 handling fee per item, charged in sterling. Since 1 November 2026, goods bought online and sent from Great Britain to an EU country carry the EU's €2 handling fee per item. The shop or the delivery company pays it and may pass it on to you; in Ireland, if the shop didn't charge it at checkout, the post or courier can ask you for it before delivery. See [parcels held at customs](guide:customs).
+In Northern Ireland, goods from outside the UK and the EU may be "at risk" of entering the EU; the delivery company tells you if they are. If you're not a business, you then pay duty and a €2 handling fee per item, charged in sterling. Since 1 November 2026, goods bought online and sent from Great Britain to an EU country carry the EU's €2 handling fee per item (identical items count as one). The shop or the delivery company pays it and may pass it on to you; in Ireland, if the shop didn't charge it at checkout, the post or courier can ask you for it before delivery. See [parcels held at customs](guide:customs).
 
 ## Royal Mail parcel not moving, late or lost
 
@@ -67,9 +67,9 @@ In Northern Ireland, goods from outside the UK and the EU may be "at risk" of en
 
 **No tracking details yet.** Royal Mail may not know a number before the item's first scan, and `Sender preparing item` means it doesn't have the item yet. If nothing moves, ask the sender whether they've handed it over. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Late or lost.** If you bought it, contact the seller first: Citizens Advice says you'll usually get a better result, and you can ask for a refund or for the item to be sent again. Royal Mail compensation can be claimed by the sender or the recipient of an item posted in the UK, but only the sender for Tracked 24 and Tracked 48. You need proof of posting, and the claim has to wait:
+**Late or lost.** If you bought it, contact the seller first: Citizens Advice says you'll usually get a better result, and you can ask for a refund or for the item to be sent again. Royal Mail compensation can be claimed by the sender or the recipient of an item posted in the UK, but only the sender for Tracked 24 and Tracked 48. You need proof of posting (as the recipient, the packaging with its postmark), and the claim has to wait:
 
-- **Lost in the UK:** 11 working days after posting for 1st Class, 14 for 2nd Class, 5 working days after the due date for Special Delivery; within 80 days of posting.
+- **Lost in the UK:** 11 working days after posting for 1st Class, 14 for 2nd Class, 5 working days after the due date for Special Delivery; within 80 days of posting. For items posted between the first Monday in December and the first working day in January, wait one day more.
 - **Lost abroad:** 20 working days after the due date in Europe, 25 elsewhere; within 6 months of posting.
 
 Delays aren't compensated on Tracked 24, Tracked 48 or items sent abroad. For a lost or damaged item, Royal Mail pays up to £20 of its value on 1st or 2nd Class, £75 on Tracked 24 or Tracked 48, £50 on international tracked or signed-for items and £750 on Special Delivery Guaranteed by 1pm; on the last two, extra cover bought by the sender raises the limit. Claim on Royal Mail's website or with a paper form from a Post Office; it answers within 30 days, or 90 for items sent abroad. More in [lost parcels](guide:lost-parcel).
@@ -82,25 +82,25 @@ Citizens Advice gives these details for Royal Mail:
 
 - **Customer Services:** 03457 740 740, Monday to Friday 8am to 6.30pm, Saturday 8am to 3pm and Sunday 9am to 2pm. Textphone 03456 000 606; Relay UK 18001 then 0345 266 0075.
 - **Online:** claims, complaints and redelivery on Royal Mail's website; safe place and delivery needs in the Royal Mail app.
-- **If a complaint stalls:** the Postal Review Panel looks at it again. After that, or if Royal Mail takes longer than 90 days or skips its complaints procedure, the independent Postal Redress Service (POSTRS) can decide: 020 7520 3766, postrs@cedr.com.
+- **If a complaint stalls:** the Postal Review Panel looks at it again and should answer within 30 days. After that, or if Royal Mail takes longer than 90 days or skips its complaints procedure, the independent Postal Redress Service (POSTRS) can decide: 020 7520 3766, postrs@cedr.com.
 
 > Not sure a text or email about a parcel is genuine? Don't click its links or give bank details. Forward scam texts to 7726, free, and scam emails to report@phishing.gov.uk. More in [delivery scam texts](guide:delivery-scam-texts).
 
 ## Tracking Royal Mail parcels with Peek
 
-[Peek](/) names Royal Mail at once for a valid `AB000000005GB`-style number; if the check digit fails, check the number or press "Change". For 21- and 16-character references it asks tracking services first and Royal Mail's site last, so this can take a little while; if nothing answers, or a rare reference is named [Australia Post](carrier:australia-post), pick Royal Mail with "Change". A Royal Mail tracking link with `trackNumber=` works with any of these numbers; a `#/tracking-results/` link only with a number ending `GB`.
+[Peek](/) names Royal Mail at once for a valid `AB000000005GB`-style number and shows "Detected carrier". With a wrong check digit, it says "This number’s check digit doesn’t add up.": compare it with your shipping message, or choose "Track it as typed" and pick Royal Mail with "Change". When a letter may have been read as a digit, such as `O` for `0`, it suggests the number that adds up. For 21- and 16-character references it asks tracking services first and Royal Mail's site last, so this can take a little while; if nothing answers, or a rare reference is named [Australia Post](carrier:australia-post), pick Royal Mail with "Change". A Royal Mail tracking link with `trackNumber=` names Royal Mail at once with any of these numbers; a `#/tracking-results/` link works only with a number ending `GB`.
 
-Peek opens Royal Mail's site in a browser on its own server. Royal Mail often refuses automated visits, so a Royal Mail parcel is checked at most once an hour, even on delivery day, and tracking services hold little of its history: it can stay on its last status for hours.
+Peek opens Royal Mail's site in a browser on its own server. Royal Mail often refuses automated visits, so Peek checks a Royal Mail parcel on its own about once an hour, on an ordinary day and on delivery day alike, even when Royal Mail gives a delivery window; a refresh by hand can check it sooner. Tracking services hold little of its history, so it can stay on its last status for hours.
 
-You see the status, each scan on a map with its place (postcodes removed), the expected delivery day, the delivery time and the destination country. UK scans carry exact times. Delivered lines read "Delivered", without who signed, and the recipient, address and photo are dropped. Other statuses keep Royal Mail's wording. You can be notified of every update, important steps only or delivery day only.
+You see the status, each scan on a map with its place (postcodes removed), the expected delivery day (with Royal Mail's time window when it gives one), the delivery time and the destination country. UK scans carry exact times. Delivered lines read "Delivered", without who signed, and the recipient, address and photo are dropped. Other statuses keep Royal Mail's wording. You can be notified of every update, important steps only or delivery day only.
 
-A parcel from abroad with a postal number can be followed on Royal Mail once Royal Mail shows progress. An item sent abroad keeps its `GB` number to the door: once Royal Mail names the destination country, Peek also asks that country's post, in more than 60 countries, and switches to it when it shows newer scans. Redelivery, claims and paying a customs bill stay on Royal Mail's site.
+A parcel from abroad with a postal number can be followed on Royal Mail once Royal Mail shows progress; an EMS item, whose number starts with `E`, is Parcelforce's to deliver, so Peek looks for it there. An item sent abroad keeps its `GB` number to the door: once Royal Mail names the destination country, Peek also asks that country's post, in more than 60 countries, and switches to it when it shows newer scans. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Redelivery, claims and paying a customs bill stay on Royal Mail's site.
 
 ## Questions about Royal Mail tracking
 
 ### How long does Royal Mail tracking take to update?
 
-There's no fixed time: the status changes at the item's next scan. Peek checks a Royal Mail parcel at most once an hour.
+There's no fixed time: the status changes at the item's next scan. Peek checks a Royal Mail parcel on its own about once an hour, delivery day included.
 
 ### What time does Royal Mail deliver?
 
@@ -116,12 +116,12 @@ Not necessarily. A sender can create the number before handing the item over, an
 
 :::sources
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – delivery days and times, 2nd Class letters every other weekday, Sundays, bank holidays, Customer Service Points, phone and hours
-- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – safe place or neighbour, sticker, Royal Mail app, red card, redelivery
-- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – who can claim, proof of posting, waiting times and deadlines, delays, amounts, how to claim, reply within 30 or 90 days, textphone and Relay UK
-- [Citizens Advice: Damaged, lost or delayed post or parcel](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, Postal Review Panel, POSTRS, theft
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – safe place or neighbour, sticker, Royal Mail app, settings kept for a year, red card, redelivery
+- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – who can claim, proof of posting, postmarked packaging, waiting times and deadlines, one more day for items posted from the first Monday in December, delays, amounts, how to claim, reply within 30 or 90 days, textphone and Relay UK
+- [Citizens Advice: Damaged, lost or delayed post or parcel](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, Postal Review Panel and its 30 days, POSTRS, theft
 - [Citizens Advice: Response to Royal Mail's Quality of Service results, August 2026](https://www.citizensadvice.org.uk/about-us/media-centre/press-releases/citizens-advice-responds-to-royal-mails-latest-quality-of-service-results-august-2026/) – Ofcom's targets since 1 April 2026, missed from April to June 2026, Royal Mail's 12-month plan, alternate-weekday 2nd Class at all offices by December
-- [GOV.UK: Tax and customs for goods sent from abroad: Tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill from Royal Mail, about 3 weeks, VAT on gifts and goods up to £135, Northern Ireland's €2 handling fee for goods at risk
-- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, goods from Great Britain included, paid by the shop or the delivery company, which may pass it on; in Ireland asked by the post or courier before delivery
+- [GOV.UK: Tax and customs for goods sent from abroad: Tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill from Royal Mail, about 3 weeks, VAT on gifts and goods up to £135, refunds with form BOR 286, Northern Ireland's €2 handling fee for goods at risk
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, identical items as one, goods from Great Britain included, paid by the shop or the delivery company, which may pass it on; in Ireland asked by the post or courier before delivery
 - [GOV.UK: Avoid and report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726, report@phishing.gov.uk
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – check digit, country code of the issuing post, one number per item
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, status wordings and what Peek reads from Royal Mail

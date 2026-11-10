@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -83,7 +83,7 @@ Delivery attempts, notice cards and how long a parcel waits at the post office f
 
 ## China Post contact number and customer service
 
-As read on 4 November 2026, China Post's English site lists these lines:
+As read on 10 November 2026, China Post's English site lists these lines:
 
 - **Logistics and EMS**: 8610 11183.
 - **Postal Business**: 8610 11185.
@@ -98,7 +98,9 @@ Peek reads China Post's own tracking. When China Post asks for phone digits, Pee
 
 It shows the status, the history with the office of each scan (an office written in Chinese named by its town, or as written where Peek can't place it), and the destination country. Scans appear in English where Peek knows China Post's wording, otherwise in Chinese. China Post times its own scans on China's clock, even the arrival in your country; the later scans it copies from your national post usually keep that post's local time. Peek shows each scan in your device's time zone. China Post gives no expected delivery date, weight or pickup point, and Peek drops the service name, contacts, sender and recipient details, couriers' names and phone numbers, and map coordinates.
 
-For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post; Parcelforce for EMS numbers going to the UK) and switches to it once it shows fresh scans, keeping China Post's history. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
+For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post; Parcelforce for EMS numbers going to the UK) and switches to it once it shows fresh scans, keeping China Post's history.
+
+Peek checks every 10 minutes, or hourly once China Post has gone quiet: after 12 hours without a new scan while the parcel is still "Label created" or "Received by carrier", or after two days at any other step. Once the parcel is out for delivery, it checks every 2 minutes, or every 5 when the check has to open a browser, as it does to read China Post's public preview: on that day, from 6 a.m. local time, while China Post's own tracking answers. Through tracking services, it checks every 15 minutes. When your post takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and every 30 minutes for USPS, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
 
 ## Questions about China Post tracking
 
@@ -134,5 +136,5 @@ Your national post: USPS in the US, Royal Mail in the UK. They deliver it under 
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – tracking depends on the sending country's service
 - [Australia Post: Customs](https://auspost.com.au/help/parcel-tracking/international-parcel/customs) – up to 15 days
 - [USPS: International Inquiries – The Basics](https://faq.usps.com/s/article/International-Inquiries-The-Basics) – items from abroad: inquiry by the sender's post
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – China Post's scan wordings, its phone-digit check and what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – China Post's scan wordings, its phone-digit check, the public preview in a browser and what Peek shows
 :::

@@ -186,7 +186,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-11-09</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/guides</loc>
@@ -2586,7 +2586,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-hm" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-hm" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/hm-order-tracking" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/guides/hm-sendungsverfolgung</loc>
@@ -3042,7 +3042,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-leroy-merlin" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-leroy-merlin" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/leroy-merlin-order-tracking" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/guides/seguimiento-pedido-leroy-merlin</loc>
@@ -3054,7 +3054,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-leroy-merlin" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-leroy-merlin" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/leroy-merlin-order-tracking" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/guides/seguimento-encomenda-leroy-merlin</loc>
@@ -5038,7 +5038,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/inpost-rastreio" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/inpost-sledzenie-przesylki" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/inpost-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/inpost-rastreio</loc>
@@ -8361,14 +8361,14 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sf-express-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sf-express-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sf-express-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/sf-express-sendungsverfolgung</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sf-express-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sf-express-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sf-express-tracking" />
-<lastmod>2026-11-03</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/straightship-tracking</loc>
@@ -9116,7 +9116,7 @@
 <loc>https://peektracker.com/carriers/jd-logistics-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jd-logistics-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jd-logistics-tracking" />
-<lastmod>2026-11-02</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/singapore-post-tracking</loc>
@@ -9128,7 +9128,7 @@
 <loc>https://peektracker.com/carriers/zto-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/zto-express-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/zto-express-tracking" />
-<lastmod>2026-11-03</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/cne-express-tracking</loc>
@@ -9178,7 +9178,7 @@
 <loc>https://peektracker.com/carriers/india-post-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/india-post-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/india-post-tracking" />
-<lastmod>2026-11-02</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/morning-global-tracking</loc>

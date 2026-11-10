@@ -228,7 +228,9 @@ a neighbouring scan's, the destination the carrier delivers in, or the carrier's
 A provider's copy that states the carrier's own offset for that wall clock, to the minute and in
 the same wording (17TRACK's `carrier_reported` times for USPS), replaces the deduced zone: the
 copy takes the carrier's row over, and the carrier's scan keeps that offset from then on
-(`time_zone_basis` `stated`, [`eventIdentity.ts`](../src/server/eventIdentity.ts)).
+(`time_zone_basis` `stated`, [`eventIdentity.ts`](../src/server/eventIdentity.ts)). The offset counts
+only when the copy is dated by it: 17TRACK also marks offsets the copy's reading sets aside
+(HYWL's "+00:00", Swiss Post's on the destination post's scans it relays).
 So does a day alone from a carrier the catalog says gives such scans no clock by design
 (`tracking.dateOnlyScans`, as BRT does a delivery round and NACEX its history): no copy has
 that clock, so the carrier's answer serves the parcel and no provider is asked for it. What

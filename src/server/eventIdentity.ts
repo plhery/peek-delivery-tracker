@@ -1595,14 +1595,17 @@ function rawOf(row: JsonObject, key: string): unknown {
 /**
  * The wall clock and offset the carrier stated for a scan: a provider's copy
  * that kept the carrier's own offset (17TRACK's `carrier_reported` time), or
- * a carrier's scan that took one.
+ * a carrier's scan that took one. 17TRACK marks offsets the copy's reading sets
+ * aside too (HYWL's "+00:00", Swiss Post's on the destination post's scans it
+ * relays): the offset is the carrier's only when the copy is dated by it.
  */
 function statedClock(row: JsonObject): DateTime | null {
-  const time = rawOf(row, 'time_provenance') === 'carrier_reported' ? rawOf(row, 'provider_time_iso')
+  const reported = rawOf(row, 'time_provenance') === 'carrier_reported';
+  const time = reported ? rawOf(row, 'provider_time_iso')
     : rawOf(row, 'time_zone_basis') === STATED ? rawOf(row, 'time') : undefined;
   if (typeof time !== 'string' || !NUMERIC_OFFSET.test(time)) return null;
   const clock = DateTime.fromISO(time, { setZone: true });
-  return clock.isValid ? clock : null;
+  return clock.isValid && (!reported || clock.toMillis() === instantOf(row)) ? clock : null;
 }
 
 /** The wall clock, to the minute, of a carrier's scan whose zone the scraper deduced (`time_zone_basis`). */

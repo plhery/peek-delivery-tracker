@@ -1618,13 +1618,29 @@ describe('a carrier\'s scan whose zone the scraper deduced', () => {
       { ...storedCopy, provider_time_iso: '2026-01-14T09:41:18-07:00' }]) {
       expect(withStatedClocks([deduced], [witness])[0]).toBe(deduced);
     }
-    const disagreeing = { ...storedCopy, provider_event_id: 'unknown:other', provider_time_iso: '2026-01-14T09:40:18-06:00' };
+    const disagreeing = { ...storedCopy, provider_event_id: 'unknown:other', occurred_at: '2026-01-14T15:40:18+00:00',
+      provider_time_iso: '2026-01-14T09:40:18-06:00' };
     expect(withStatedClocks([deduced], [storedCopy, disagreeing])[0]).toBe(deduced);
     // A provider's own scan, or a carrier's scan in a stated zone, has no deduced zone to replace.
     const universal = { ...deduced, provider_event_id: 'unknown:transit' };
     expect(withStatedClocks([universal], [storedCopy])[0]).toBe(universal);
     const placed = { ...deduced, raw_data: { time: '2026-01-14T09:40:00-08:00' } };
     expect(withStatedClocks([placed], [storedCopy])[0]).toBe(placed);
+  });
+
+  it.each([
+    // HYWL's own scan on China's clock; 17TRACK marks its "+00:00" as the carrier's, and the copy is read on China's clock.
+    ['a provider offset the copy\'s reading set aside', 'hywl:sorted', 'Asia/Shanghai', '+08:00', '2026-01-14T10:00:00+00:00'],
+    // A destination post's scan Swiss Post relays: 17TRACK gives Swiss Post's offset, the copy is read on the destination's.
+    ['the relaying carrier\'s offset', 'usps:arrived', 'America/New_York', '-05:00', '2026-01-14T10:00:00+01:00'],
+  ])('keeps the deduced zone against %s', (_case, id, zone, offset, reported) => {
+    const wall = '2026-01-14T10:00:00';
+    const instant = new Date(`${wall}${offset}`).toISOString().replace('.000Z', 'Z');
+    const own = { ...scan(id, instant, wording, 'in_transit'), raw_data: {
+      time: `${wall}${offset}`, local_time: wall, time_zone: zone, time_zone_basis: 'neighbour' } };
+    const copied = { ...row(`unknown:${id}`, instant, wording, 'in_transit'), universal_provider: '17TRACK',
+      time: `${wall}${offset}`, provider_time_iso: reported, time_provenance: 'carrier_reported' };
+    expect(withStatedClocks([own], [copied])[0]).toBe(own);
   });
 });
 

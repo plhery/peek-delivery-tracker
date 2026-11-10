@@ -386,6 +386,24 @@ describe('a carrier\'s scan that takes over a provider\'s row past when the row 
     expect(heldPastFirstStored([own], [copy], new Map(), held)).toEqual(held);
     expect(heldPastFirstStored([own], [], new Map([['usps:label', 'unknown:label']]))).toEqual(new Map());
   });
+
+  // ParcelsApp's copy of FedEx's "On the way", stored while FedEx's lookup failed; FedEx lists only its latest
+  // "On the way", 13 h on at the same place, on another wall clock.
+  const onTheWay = { provider_event_id: 'unknown:copy', occurred_at: '2026-10-28T09:15:00+00:00', stage: 'in_transit',
+    description: 'On the way', location: 'EXAMPLE CITY, TN', universal_provider: 'ParcelsApp', created_at: '2026-10-28T09:40:00Z' };
+  const next = { package_id: 'package-1', provider_event_id: 'fedex:next', occurred_at: '2026-10-28T22:15:00.000Z', stage: 'in_transit',
+    description: 'On the way', location: 'EXAMPLE CITY, TN', raw_data: { time: '2026-10-28T17:15:00-05:00' } };
+
+  it('takes no row over for a carrier\'s next scan in the copy\'s words, on another wall clock', () => {
+    const shared = sharedScans([next], [onTheWay]);
+    expect([...shared.reused, ...shared.skipped]).toEqual([]);
+    expect(withHeldClocks([next], [onTheWay], shared.reused, heldPastFirstStored([next], [onTheWay], shared.reused))).toEqual([next]);
+  });
+
+  it('keeps the copy beside the carrier\'s row of that later scan: it is no misread of it', () => {
+    const stored = { ...next, occurred_at: '2026-10-28T22:15:00+00:00', time: '2026-10-28T17:15:00-05:00', created_at: '2026-10-28T22:30:00Z' };
+    expect([...sharedScans([next], [onTheWay, stored]).absorbed]).toEqual([]);
+  });
 });
 
 describe('a scan whose source\'s feeds put different offsets on its wall clock', () => {

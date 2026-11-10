@@ -845,6 +845,11 @@ function readsWallClock(copy: JsonObject, scan: JsonObject): boolean {
     && stagesAgree(stageOf(copy), stageOf(scan)) && codesAgree(copy, scan) && !placesApart(copy, scan);
 }
 
+/** Whether one of two rows shows the other's wall clock under another offset (`readsWallClock`), either way. */
+function misreadOffset(left: JsonObject, right: JsonObject): boolean {
+  return readsWallClock(left, right) || readsWallClock(right, left);
+}
+
 /**
  * The providers whose copies read two or more of a parcel's carrier scans that way, each copy the
  * one scan it reads (`readsWallClock`): the provider's clock, not two scans of one minute by chance.
@@ -1269,9 +1274,11 @@ export function sharedScans(
     const minuted = truncated.filter((row) => sameWords(row, event));
     const restaged = restagedOf(event);
     // A scan of the provider's own row dated past when the row was first stored is its next scan, not the row on a
-    // corrected clock: ParcelsApp lists only FedEx's latest "On the way", 13 h after the one it replaced.
+    // corrected clock: ParcelsApp lists only FedEx's latest "On the way", 13 h after the one it replaced. So is a
+    // carrier's scan past when a provider's copy was stored, unless one shows the other's wall clock under another
+    // offset (USPS's label, read on UTC or on Pacific time): no provider copies a scan before it happens.
     const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesApart(event, row)
-      && !(followsClock(row, event) && pastFirstStored(event, row)));
+      && !(pastFirstStored(event, row) && (followsClock(row, event) || (!universal && !misreadOffset(row, event)))));
     const zoned = apart.filter((row) => zoneApart(at, instantOf(row)));
     const paired = (row: JsonObject) => (sourceOf(identity(row)) === UNIVERSAL) !== universal;
     const shifted = apart.filter((row) => sameWords(row, event) && (zoneApart(at, instantOf(row))
@@ -1475,7 +1482,8 @@ export function sharedScans(
   }
   const carrierRowOf = (copy: JsonObject, among: readonly JsonObject[]): JsonObject | undefined => {
     const clock = clocks.get(providerOf(copy));
-    const misread = among.filter((row) => own(row) && (clock === undefined
+    // A carrier's scan past when the copy was stored is a later one, not the scan the copy misread.
+    const misread = among.filter((row) => own(row) && !(pastFirstStored(row, copy) && !misreadOffset(copy, row)) && (clock === undefined
       ? sameScan(copy, row) && hoursApart(instantOf(copy), instantOf(row))
       : placeOf(row) === placeOf(copy) && codesAgree(copy, row) && zoneShift(instantOf(copy), instantOf(row)) === clock));
     const apart = misread.length > 0 ? misread : among.filter((row) => own(row) && readsClock(copy, row));

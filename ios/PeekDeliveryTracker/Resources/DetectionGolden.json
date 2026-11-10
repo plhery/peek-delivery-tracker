@@ -71198,20 +71198,35 @@
   {
     "input": "AA3812744",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "AA7381080",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "AA9700597",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "AAH-FU-2015265",
@@ -71551,6 +71566,17 @@
   },
   {
     "input": "AF037866-6",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
+  },
+  {
+    "input": "AF5203817",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -73276,8 +73302,13 @@
   {
     "input": "BA2429694",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "BAE29011H322321841",
@@ -73964,8 +73995,13 @@
   {
     "input": "BW1940879",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "BX00000016018296FRW",
@@ -75357,8 +75393,13 @@
   {
     "input": "CH1019159",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "CH105792445NL",
@@ -76128,8 +76169,13 @@
   {
     "input": "CN6732792",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "CNA000002663047",
@@ -81620,10 +81666,12 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "forza-delivery"
+      "forza-delivery",
+      "rl-carriers"
     ],
     "asked": [
-      "forza-delivery"
+      "forza-delivery",
+      "rl-carriers"
     ]
   },
   {
@@ -85086,10 +85134,12 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ],
     "asked": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ]
   },
   {
@@ -85097,10 +85147,12 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ],
     "asked": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ]
   },
   {
@@ -85108,10 +85160,12 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ],
     "asked": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ]
   },
   {
@@ -85119,10 +85173,12 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ],
     "asked": [
-      "jeebly"
+      "jeebly",
+      "rl-carriers"
     ]
   },
   {
@@ -86191,14 +86247,24 @@
   {
     "input": "JP3564644",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "JP3911190",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "JPMY4551840739",
@@ -88044,8 +88110,13 @@
   {
     "input": "LH1602541",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "LH194723189US",
@@ -91924,50 +91995,90 @@
   {
     "input": "OS2081213",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2087867",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2107884",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2211130",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2260312",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2419468",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2483998",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OS2565049",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "OSM000000LM0060VO",
@@ -93729,8 +93840,13 @@
   {
     "input": "PN9124099",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "PNAAA500000340017101000000",
@@ -93828,8 +93944,13 @@
   {
     "input": "PP1039303",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "PQ0DK20000034530151002K",
@@ -101320,8 +101441,13 @@
   {
     "input": "UH7132876",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "UH999999987TW",
@@ -102751,8 +102877,13 @@
   {
     "input": "WA5047893",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "WB0000000110256665NPG",
@@ -102805,8 +102936,13 @@
   {
     "input": "WB7058138",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "WBX190000059587",
@@ -102835,20 +102971,35 @@
   {
     "input": "WC5017567",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "WC5019325",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "WC5120157",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "WCA0201583809",
@@ -103302,14 +103453,24 @@
   {
     "input": "WZ1209392",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "WZ1855623",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "Web-0002405927",
@@ -103991,8 +104152,13 @@
   {
     "input": "YR0931885",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "rl-carriers"
+    ],
+    "asked": [
+      "rl-carriers"
+    ]
   },
   {
     "input": "YT2508501277000294",

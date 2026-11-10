@@ -8035,6 +8035,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^I\\d{9}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^[A-Z]{2}\\d{7}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.rlcarriers.com/freight/shipping/shipment-tracing"

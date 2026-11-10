@@ -3,7 +3,7 @@ title: Correos seguimiento: estados, entregas, aduanas y teléfono
 description: Seguimiento de Correos: cómo es el número de envío, qué significa cada estado, avisos de llegada, Citypaq, aduanas, reclamaciones y teléfonos.
 slug: seguimiento-correos
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Correos es el operador postal público de España. Para seguir tu envío, escribe el código en su [localizador de envíos](https://www.correos.es/es/es/herramientas/localizador/envios) o pégalo en la casilla de arriba. El código te llega por correo electrónico, SMS o en el aviso de llegada en papel, y la tienda lo pone en su correo de confirmación de compra. [Correos Express](carrier:correos-express) es otra empresa del mismo grupo, con sus propios números y su propio buscador.
@@ -68,14 +68,14 @@ Otros estados despistan. `En proceso de entrega` no significa que vaya en la fur
 
 **Reclamaciones.** La indemnización siempre es para el remitente; tú solo la cobras si el remitente firma una solicitud que lo autorice. Por eso, pide a la tienda que reclame. Plazos de Correos: por demora en Paquete Premium y Estándar, 21 días desde el primer intento; por daños en esos dos, al entregarlo o en los 7 días naturales siguientes; por extravío de un Paquete Estándar, de 4 días a 1 año desde la admisión. En un Paquete Internacional Premium dañado, avisa al empleado antes de firmar y pide un «acta de daños».
 
-**Aduanas.** Lo que llega de fuera de la UE, y también de Canarias, Ceuta y Melilla, pasa trámites de importación. Hasta 150 € pagas el IVA (salvo que la tienda lo cobrara con IOSS) y la tarifa de Correos en correosaduanas.es o en la app antes de la entrega, o en efectivo al recibirlo. Por encima, el DUA ordinario: aranceles, IVA y tarifas, pagados antes de la entrega. Desde el 1 de julio de 2026, los envíos de hasta 150 € de fuera de la UE a la Península, Baleares y Canarias pagan además un arancel de la UE de 3 € por tipo de producto; Correos lo cobra antes de entregar, salvo que se pagara en origen, y no se queda nada. Más en [paquete retenido en aduanas](guide:customs).
+**Aduanas.** Lo que llega de fuera de la UE, y también de Canarias, Ceuta y Melilla, pasa trámites de importación. Hasta 150 € pagas el IVA (salvo que la tienda lo cobrara con IOSS) y la tarifa de Correos en correosaduanas.es o en la app antes de la entrega, o en efectivo al recibirlo. Por encima, el DUA ordinario: aranceles, IVA y tarifas, pagados antes de la entrega. Desde el 1 de julio de 2026, los envíos de hasta 150 € de fuera de la UE a la Península, Baleares y Canarias pagan además un arancel de la UE de 3 € por tipo de producto; Correos lo cobra antes de entregar, salvo que se pagara en origen, y no se queda nada. Desde el 1 de noviembre de 2026 se debe también la Tasa UE de 2 € por tipo de producto en las compras a distancia de fuera de la UE, sea cual sea su valor; Correos la recauda igualmente antes de la entrega, salvo pago en origen. Puedes pagarlos antes en la app de Correos o en mioficina.correos.es, o bien al cartero o en la oficina, en efectivo (con el importe exacto, si es al cartero) o con tarjeta (al cartero, solo donde haya cobertura móvil). Más en [paquete retenido en aduanas](guide:customs).
 
 ## Teléfono de Correos y atención al cliente
 
-Canales de Correos según su web, consultada el 13 de octubre de 2026:
+Canales de Correos según su web, consultada el 10 de noviembre de 2026:
 
 - **Teléfono:** 915 197 197 o 900 400 004, de lunes a viernes no festivos de 8 a 20 h y los sábados de 9 a 13 h. Según su aviso legal, el 900 400 004 es para los servicios básicos de interés general (postal, transporte y financiero).
-- **Web:** el [formulario de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/formulario-consultas-reclamaciones/detalle). Correos responde en un mes las reclamaciones nacionales y en dos las internacionales.
+- **Web:** el [formulario de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/formulario-consultas-reclamaciones/detalle). Correos responde en un mes las reclamaciones nacionales y en dos las internacionales (de media, en 10 y 20 días), y paga la indemnización, si la hay, en un mes como máximo desde que resuelve la reclamación.
 - **Redes sociales:** Facebook, Instagram y X (@CorreosAtiende), de lunes a viernes de 9 a 20 h.
 - **En persona:** cualquier oficina de Correos.
 - **Aduanas:** documentos y pagos en correosaduanas.es (Correos Aduanas).
@@ -86,7 +86,7 @@ Canales de Correos según su web, consultada el 13 de octubre de 2026:
 
 [Peek](/) reconoce Correos al momento con los códigos de paquete de 23 caracteres, los de expedición de 16, los `PR` y los números postales que acaban en ES. Si la letra de control no cuadra, no propone ningún transportista: revisa si hay una errata o elige Correos con «Cambiar transportista». Con un código de expedición de un solo paquete, Peek sigue ese paquete; si lleva varios, sigue cada uno con su código de 23 caracteres. También sirven los enlaces de correos.es con `tracking-number=` y los antiguos con `numero=`.
 
-Peek muestra los estados tal como los escribe Correos: en español, portugués o francés si usas Peek en uno de esos idiomas, y en inglés en los demás. Verás los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista, y lee todas las horas en hora de Madrid: un escaneo en Canarias puede salir una hora antes.
+Peek muestra los estados tal como los escribe Correos: en español, portugués o francés si usas Peek en uno de esos idiomas, y en inglés en los demás. Verás los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista. Lee las horas en hora de Madrid, salvo las de una unidad de reparto de Canarias, en hora canaria, y las del operador postal de origen en un envío del extranjero, en la hora de su país, y te las muestra en la zona horaria de tu dispositivo; en peektracker.com, una línea al final del historial lo recuerda: «Horas en tu zona horaria: …».
 
 Un envío postal que viene de otro país hacia España puede pasar a seguirse en Correos («Entrega con Correos») en cuanto Correos muestra avances. Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Correos; a través de servicios de seguimiento, cada 15 minutos), y te manda notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede pagar la aduana ni cambiar la entrega.
 
@@ -127,9 +127,9 @@ Correos da de 48 a 72 horas para el Paquete Estándar, más 5 días desde o haci
 - [Correos: Coberturas por deterioro paquete internacional](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/deterioro-internacional) – acta de daños
 - [Correos: Ayuda importación en Península y Baleares](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion/importacion-en-peninsula-y-baleares) – H7, DUA, pago
 - [Correos: Tracking items currently being imported](https://www.correos.es/es/en/customer-service/customs-information/import-sad/tracking-items-currently-being-imported) – 2 a 4 días, inspección de 8 a 15
-- [Correos: Nuevo arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto
+- [Correos: Arancel y tasas para envíos de importación a la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € y Tasa UE de 2 € por tipo de producto, pago en la app, mioficina.correos.es, al cartero o en la oficina
 - [Correos: Correos Aduanas](https://www.correos.es/es/es/herramientas/correos-aduanas) – gestiones aduaneras
-- [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – teléfonos, horarios, plazos de respuesta
+- [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – teléfonos, horarios, plazos de respuesta e indemnización
 - [Correos: Aviso legal](https://www.correos.es/es/es/legales/aviso-legal) – uso del 900 400 004
 - [Correos: Incidencias en el envío de paquetes](https://www.correos.es/es/es/atencion-al-cliente/recibir/incidencias) – oficinas, @CorreosAtiende
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – nunca pide datos ni pagos por SMS

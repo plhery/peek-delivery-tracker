@@ -6,7 +6,7 @@ published: 2026-10-10
 updated: 2026-10-27
 ---
 
-A NACEX é uma transportadora expresso do Grupo Logista que entrega em Portugal, Espanha e Andorra. Para rastrear a encomenda, escreve o número (quatro algarismos, uma barra e oito algarismos) na caixa «Seguimento de envio» do [site da NACEX](https://www.nacex.pt/) ou cola-o na caixa acima. O número junta o código da agência NACEX de onde a encomenda partiu e o número da expedição: o seguimento não pesquisa pelo número da encomenda nem pelo código postal.
+A NACEX é uma transportadora expresso do Grupo Logista que entrega em Portugal, Espanha, Andorra e nos Países Baixos. Para rastrear a encomenda, escreve o número (quatro algarismos, uma barra e oito algarismos) na caixa «Seguimento de envio» do [site da NACEX](https://www.nacex.pt/) ou cola-o na caixa acima. O número junta o código da agência NACEX de onde a encomenda partiu e o número da expedição: o seguimento não pesquisa pelo número da encomenda nem pelo código postal.
 
 ## Código de rastreio NACEX: como é e onde o encontrar
 
@@ -112,7 +112,7 @@ Não: as páginas de contacto da NACEX não indicam nenhum número de WhatsApp. 
 :::sources
 - [NACEX Portugal: Seguimento](https://www.nacex.pt/irSeguimiento.do) – Agência e Nº expedição, referência alternativa até 10 dígitos
 - [NACEX: Formulário de Seguimento](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) – ligação de seguimento, mensagem de envio inexistente
-- [NACEX Portugal: Página inicial](https://www.nacex.pt/) – caixa «Seguimento de envio», Grupo Logista, NACEX.shop com cacifos, seletor de língua
+- [NACEX Portugal: Página inicial](https://www.nacex.pt/) – caixa «Seguimento de envio», Grupo Logista, Países Baixos, NACEX.shop com cacifos, seletor de língua
 - [NACEX Portugal: FAQ](https://www.nacex.pt/irFaqs.do) – contactos, ausência, Minha Entrega Preferida, 15 dias, BI/CC, morada, recusa, envio que não chega
 - [NACEX Portugal: FAQ por categoria, entregas](https://www.nacex.pt/visualizarfaq.do?category=900) – aviso e chamada da agência, levantamento de segunda a sexta
 - [NACEX Portugal: Contacto](https://www.nacex.pt/irContactenosContacto.do) – 800 200 077, e-mail, chat, Livro de Reclamações

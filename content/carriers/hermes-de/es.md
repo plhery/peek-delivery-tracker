@@ -87,7 +87,7 @@ Según myhermes.de, consultado en octubre de 2026:
 - **Teléfono:** no tiene de atención al cliente. El número de su aviso legal lleva la nota «kein Kundenservice» (no es de atención al cliente). Tampoco se puede contactar con el repartidor.
 - **WhatsApp:** ya no funciona; Hermes remite al formulario.
 
-> Hermes Germany no envía SMS: cualquier SMS en su nombre es un fraude, salvo los de Hermes Einrichtungs Service (muebles). Nunca te pedirá datos de pago por correo electrónico o SMS ni te cobrará aduanas, y el destinatario no paga nada: el envío se paga entero al mandarlo. Más en [SMS falsos de paquetes](guide:delivery-scam-texts).
+> Hermes Germany no envía SMS: cualquier SMS en su nombre es un fraude, salvo los de Hermes Einrichtungs Service (muebles). Nunca te pedirá datos de pago ni aduanas por correo electrónico o SMS, y el destinatario no paga nada: el envío se paga entero al mandarlo. Más en [SMS falsos de paquetes](guide:delivery-scam-texts).
 
 ## Seguir un paquete Hermes con Peek
 
@@ -97,7 +97,7 @@ Peek muestra el estado, el historial, el día previsto de entrega (con la franja
 
 Los pasos en España aparecen como los demás: «En reparto», «Listo para recoger» o «Entregado». Si el paquete no se recogió y después aparece `Die Sendung wurde erfolgreich zugestellt.`, Peek lo marca como «Devuelto al remitente», no como entregado.
 
-Si Hermes enlaza el seguimiento de la empresa que reparte en España y Peek la conoce, muestra «Entrega con …» con su número y, en cuanto esa empresa tenga escaneos recientes, sigue allí el paquete. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, muestra en su lugar «Anunciado a …, aún no recibido». Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, o, si Hermes da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de Hermes o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
+Si Hermes enlaza el seguimiento de la empresa que reparte en España y Peek la conoce, muestra «Entrega con …» con su número y, en cuanto esa empresa tenga escaneos recientes, sigue allí el paquete. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, muestra en su lugar «Anunciado a …, aún no recibido». Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, o, si Hermes da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de Hermes o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Hermes
 
@@ -111,7 +111,7 @@ Una empresa local con la que trabaja Hermes, que sus páginas no nombran. Si myh
 
 ### ¿Hay que pagar aduana por un paquete de Hermes desde Alemania?
 
-No, si va a la península o a Baleares: Alemania y España están en la UE, y los derechos de aduana son para compras de fuera de la UE. Hermes Germany no cobra aduanas, así que un mensaje que te las pida en su nombre es un fraude.
+No, si va a la península o a Baleares: Alemania y España están en la UE, y los derechos de aduana son para compras de fuera de la UE. Hermes Germany no pide aduanas por correo electrónico ni por SMS, así que un mensaje que te las pida en su nombre es un fraude.
 
 ### ¿Hermes envía a Canarias?
 

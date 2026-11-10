@@ -72,11 +72,11 @@ MRW's terms are a contract with the sender, which for an order is the shop: star
 
 As MRW's sites listed them on 11 October 2026:
 
-- **Spain:** +34 91 829 66 89, which MRW's fraud page calls its only customer service number. Its FAQ also lists 900 103 668 and gives hours of 8:00 to 20:00 Monday to Friday and 9:00 to 13:00 on Saturdays, without saying for which number. On X: @mrw_clientes. Topic forms are on the [contact page](https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp).
+- **Spain:** +34 91 829 66 89, which MRW's fraud page calls its only customer service number. Its FAQ gives both +34 91 829 66 89 and 900 103 668 as the customer service phone, open 8:00 to 20:00 Monday to Friday and 9:00 to 13:00 on Saturdays. Email: informacion@mrw.es, which the contact page gives as customer service's. On X: @mrw_clientes. Topic forms are on the [contact page](https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp).
 - **Portugal:** +351 219 587 279, charged as a national landline call, @mrw_portugal on X, and the [Contate-nos page](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp).
 - **Your local office:** in the office finder; MRW suggests checking holiday hours by phone or email.
 
-MRW lists no chat or recipient email, and says to take its numbers from mrw.es or mrw.pt, not a search engine.
+MRW lists no chat, mrw.pt gives no email, and MRW says to take its numbers from mrw.es or mrw.pt, not a search engine.
 
 ## Tracking MRW parcels with Peek
 
@@ -94,7 +94,7 @@ No. MRW's site is in Spanish, Portuguese and Catalan; the table above translates
 
 ### How do I email MRW customer service?
 
-MRW lists no email address for recipients. Use the topic forms on its contact page, including "Quiero hacer una reclamación" for a claim, or phone.
+Write to informacion@mrw.es, which MRW's Spanish contact page gives as its customer service email, or use the topic forms there, including "Quiero hacer una reclamación" for a claim, or phone.
 
 ### What are MRW's delivery hours?
 
@@ -113,8 +113,8 @@ MRW's office finder lists offices; you choose an MRW Point when you check out at
 - [MRW: MRW Point, cómo funciona](https://www.mrw.es/oficina_transporte_urgente/MRW_point_funcionamiento.asp) – Point types, notice, ID, PIN
 - [MRW: Condiciones generales del servicio nacional](https://www.mrw.es/uso_MRW_mensajeria/condiciones_venta/) – delivery, ID, lockers, 15 days, claim deadlines
 - [MRW: Quiero hacer una reclamación](https://www.mrw.es/empresa_mensajeria_urgente/MRW_formulario_reclamacion.asp) – claim form, reasons
-- [MRW: Contacte con nosotros](https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – contact forms
-- [MRW Portugal: Contate-nos](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – Portuguese phone and call cost
+- [MRW: Contacte con nosotros](https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – contact forms, customer service email
+- [MRW Portugal: Contate-nos](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – Portuguese phone and call cost, no email
 - [MRW: FAQ envíos nacionales](https://www.mrw.es/enviar/nacional/faqs/index.asp) – phones, hours, X, next working day
 - [MRW: Nuestras oficinas](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp) – 550 offices, finder, holiday hours
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

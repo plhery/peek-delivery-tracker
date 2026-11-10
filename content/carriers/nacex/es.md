@@ -3,10 +3,10 @@ title: NACEX seguimiento: número de envío, estados y teléfono
 description: Pega tu número de NACEX (0000/00000000) y mira dónde está tu paquete: qué significa cada estado, qué hacer si no llega y el teléfono gratuito.
 slug: seguimiento-nacex
 published: 2026-10-10
-updated: 2026-11-04
+updated: 2026-11-10
 ---
 
-Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `0123/45678901`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal y Andorra con más de 300 franquicias.
+Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `0123/45678901`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal, Andorra y los Países Bajos con más de 300 franquicias.
 
 ## Número de envío NACEX: cómo es y dónde encontrarlo
 
@@ -66,7 +66,7 @@ Puedes rehusar el paquete en el momento de la entrega, diciéndoselo al mensajer
 
 ## Paquete NACEX no entregado, con retraso o dañado: reclamaciones
 
-La página de Reclamaciones de NACEX se dirige a su cliente, quien contrató el envío (normalmente la tienda), y cualquier abono se trata con la franquicia de ese cliente. La mercancía viaja «a riesgo y cuenta del remitente», así que, para un reembolso o un nuevo envío, habla con la tienda.
+La página de Reclamaciones de NACEX se dirige a su cliente, quien contrató el envío (normalmente la tienda), y cualquier abono se trata con la franquicia de ese cliente. NACEX revisa cada reclamación en 48 horas laborables y prevé cerrarla en un plazo de 7 días naturales. La mercancía viaja «a riesgo y cuenta del remitente», así que, para un reembolso o un nuevo envío, habla con la tienda.
 
 - **No llega o no se mueve:** la FAQ de NACEX dice que escribas a atencion.cliente@nacex.com o llames al 900 100 000, sin dar un plazo de espera. Sus condiciones avisan de que en [Black Friday y Navidad](guide:christmas-posting-dates) la entrega a particulares puede verse afectada. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 - **Con retraso:** el cliente de NACEX puede reclamar en un máximo de 31 días naturales si la entrega quedó fuera del servicio contratado sin causa justificada.
@@ -119,7 +119,7 @@ Si NACEX responde «No existe ningún albarán introducido en el sistema cumplie
 Según lo que diga la tienda: NACEX pide consultar las condiciones de devolución en la tienda online donde compraste. Si la tienda lo ofrece, la red NACEX.shop sirve también para devolver compras online. Para un cambio de producto, la tienda puede pedir NACEX cambio, que recoge tu producto y entrega el nuevo a la vez.
 
 :::sources
-- [NACEX: Inicio](https://www.nacex.es/) – Logista, franquicias, casilla de seguimiento
+- [NACEX: Inicio](https://www.nacex.es/) – Logista, franquicias, Países Bajos, casilla de seguimiento
 - [NACEX: Seguimiento de envíos](https://www.nacex.es/irSeguimiento.do) – agencia y albarán, referencia alternativa, referencia con agencia y cliente, nº de solicitud
 - [NACEX: Formulario de Seguimiento](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) – envío no encontrado
 - [NACEX: FAQS](https://www.nacex.es/irFaqs.do) – contacto, ausencia, 15 días, dirección, rehúse, recogidas, pago, 40 kg, destinos
@@ -127,7 +127,7 @@ Según lo que diga la tienda: NACEX pide consultar las condiciones de devolució
 - [NACEX: FAQ sobre servicios](https://www.nacex.es/visualizarfaq.do?category=901) – prealerta, sábados
 - [NACEX: Contacto](https://www.nacex.es/irContactenosContacto.do) – teléfono, correo, chat
 - [NACEX: Solicitar Recogida](https://www.nacex.es/irRecogida.do) – formulario, franjas, pago en la recogida
-- [NACEX: Reclamaciones](https://www.nacex.es/irReclamaciones.do) – quién reclama, plazos, fotos
+- [NACEX: Reclamaciones](https://www.nacex.es/irReclamaciones.do) – quién reclama, plazos, fotos, 48 horas
 - [NACEX: Tramitaciones aduaneras](https://www.nacex.es/irTramitacionesAduaneras.do?seccion=tramaduan) – aduana a Canarias, Ceuta, Melilla, Andorra y Gibraltar
 - [NACEX: NACEX.shop](https://www.nacex.es/irEnvioSostenible.do) – al día siguiente desde las 9:00, envíos desde un punto
 - [NACEX: Localizador de Puntos NACEX](https://www.nacex.es/irCerca.do) – puntos y franquicias

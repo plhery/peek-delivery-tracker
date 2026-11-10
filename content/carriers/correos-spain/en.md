@@ -3,7 +3,7 @@ title: Correos tracking: Spain's post, numbers and statuses
 description: Track a Correos parcel in Spain: what the tracking number looks like, what the Spanish statuses mean, missed deliveries, Citypaq, customs and contacts.
 slug: correos-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Correos is Spain's national post. Track a parcel on its English [delivery tracker](https://www.correos.es/es/en/tools/tracker/items) or paste the number in the box above. The number comes by email, SMS or on the paper notice. This page covers Correos in Spain, not Chile or Mexico; [Correos Express](carrier:correos-express) is a sister company with its own numbers.
@@ -60,7 +60,7 @@ Correos sets no number of days after which a silent parcel counts as lost: check
 
 Correos pays compensation to the sender. The recipient gets it only if the sender signs a request authorising that, so ask the shop to claim. Correos's windows: delay claims on Paquete Premium and Estándar within 21 days of the first attempt; damage on those two at delivery or within 7 calendar days; loss on Paquete Estándar from 4 days to 1 year after posting.
 
-Goods from outside the EU, and from the Canary Islands, Ceuta and Melilla, go through import formalities. Up to €150 you pay VAT (unless the seller charged it under IOSS) and Correos's fee at correosaduanas.es or in the Correos app before delivery, or in cash at the door. Since 1 July 2026, parcels worth up to €150 from outside the EU to the mainland, the Balearics and the Canaries also carry an EU duty of €3 per type of product; Correos collects it before delivery and keeps none of it. More in [parcels held at customs](guide:customs).
+Goods from outside the EU, and from the Canary Islands, Ceuta and Melilla, go through import formalities. Up to €150 you pay VAT (unless the seller charged it under IOSS) and Correos's fee at correosaduanas.es or in the Correos app before delivery, or in cash at the door. Since 1 July 2026, parcels worth up to €150 from outside the EU to the mainland, the Balearics and the Canaries also carry an EU duty of €3 per type of product; Correos collects it before delivery and keeps none of it. Since 1 November 2026, distance sales from outside the EU, whatever their value, also owe an EU fee of €2 per type of product, which Correos likewise takes before delivery unless it was paid at origin. More in [parcels held at customs](guide:customs).
 
 ## Correos customer service number
 
@@ -77,9 +77,9 @@ Correos's channels, as read on 13 October 2026, are the same for English speaker
 
 [Peek](/) names Correos at once for 23-character parcel codes, 16-character shipment codes, `PR` numbers and postal numbers ending ES. A code whose check letter fails names no carrier: check it for a typo, or pick Correos with "Change". For a shipment code with one parcel, Peek follows that parcel; with several, track each parcel's 23-character code. correos.es links with `tracking-number=` work, and so do older links with `numero=`.
 
-Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads every time on Madrid's clock, so a scan in the Canary Islands can show an hour early.
+Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads times on Madrid's clock, except a Canary Islands delivery office's, on Canary time, and the origin post's scans on an item from abroad, on that country's clock.
 
-A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes (every 2 from 6 a.m. Madrid time on the day Correos scans the parcel out for delivery, while Correos's own tracker answers; through tracking services, every 15 minutes) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
+A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes (every 2 from 6 a.m. local time on the day Correos scans the parcel out for delivery, while Correos's own tracker answers; through tracking services, every 15 minutes) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
 
 ## Questions about Correos tracking
 
@@ -119,7 +119,7 @@ Yes, with the Correos app: its Activity section shows the shipments that belong 
 - [Correos: Coberturas por extravío envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – loss windows
 - [Correos: Coberturas por deterioro paquete internacional](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/deterioro-internacional) – acta de daños
 - [Correos: Ayuda importación en Península y Baleares](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion/importacion-en-peninsula-y-baleares) – customs payment
-- [Correos: Nuevo arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – €3 duty per product type
+- [Correos: Arancel y tasas para envíos de importación a la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – €3 duty and €2 EU fee per product type
 - [Correos: Realiza tus gestiones aduaneras con Correos Aduanas](https://www.correos.es/es/es/herramientas/correos-aduanas) – Correos Aduanas
 - [Correos: Handling of queries and claims](https://www.correos.es/es/en/customer-service/your-query-your-complaint/handling-of-queries-and-claims) – phones, hours
 - [Correos: Incidencias en el envío de paquetes](https://www.correos.es/es/es/atencion-al-cliente/recibir/incidencias) – offices, @CorreosAtiende

@@ -6,7 +6,7 @@ published: 2026-10-10
 updated: 2026-10-27
 ---
 
-NACEX is an express courier of the Logista group that delivers across Spain, Portugal and Andorra. To track a parcel, type its number (four digits, a slash, eight digits) into the box on [NACEX's site](https://www.nacex.es/), or paste it in the box above. The number belongs to the shipment the sender, usually the shop, booked; NACEX can't search by order number or postcode.
+NACEX is an express courier of the Logista group that delivers across Spain, Portugal, Andorra and the Netherlands. To track a parcel, type its number (four digits, a slash, eight digits) into the box on [NACEX's site](https://www.nacex.es/), or paste it in the box above. The number belongs to the shipment the sender, usually the shop, booked; NACEX can't search by order number or postcode.
 
 ## NACEX tracking number: what it looks like
 
@@ -95,7 +95,7 @@ It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day
 
 ### What is NACEX?
 
-NACEX is an express courier founded in 1995, part of the Logista group, delivering across mainland Spain, the Balearic and Canary Islands, Andorra and Portugal.
+NACEX is an express courier founded in 1995, part of the Logista group, delivering across mainland Spain, the Balearic and Canary Islands, Andorra, Portugal and the Netherlands.
 
 ### Is NACEX legit?
 
@@ -127,7 +127,7 @@ An address change needs the authorisation of the customer paying for the shipmen
 - [NACEX: Portugal](https://www.nacex.es/irServicioNacional.do?seccion=portugal) – Azores and Madeira
 - [NACEX: General terms and conditions 2026](https://www.nacex.es/pages/img/servicios/condiciones_tramitaciones/condiciones-generales-2026-EN.pdf) – second delivery, working days, Saturday hours
 - [NACEX: Servicios y condiciones de transporte 2026](https://www.nacex.es/pages/img/servicios/condiciones_tramitaciones/condiciones-generales-2026-ES.pdf) – 50 km, Saturday 15 km area
-- [NACEX: ¿Quiénes somos?](https://www.nacex.es/irEmpresaQuienes.do) – 1995, Logista, lockers
+- [NACEX: ¿Quiénes somos?](https://www.nacex.es/irEmpresaQuienes.do) – 1995, Logista, the Netherlands, lockers
 - [BOE: Ley 15/2009](https://www.boe.es/buscar/act.php?id=BOE-A-2009-18004) – reservations, 7 days
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

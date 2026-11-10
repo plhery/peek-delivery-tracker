@@ -182,22 +182,22 @@ describe('a check that found nothing new', () => {
   });
 });
 
-describe('a direct step a fallback step rescued', () => {
+describe('a direct step\'s incident', () => {
   it('is a review signal: logged, counted and acknowledged without Sentry', async () => {
-    const rescued = { id: 'rescued-notice', kind: 'direct', subject: 'dhl-express', state: 'open', rescued: true,
+    const direct = { id: 'direct-notice', kind: 'direct', subject: 'dhl-express', state: 'open', rescued: false,
       attempts: 12, failures: 10, window_hours: 24 };
     const failing = { id: 'refresh-notice', kind: 'refresh', subject: 'dhl-express', state: 'open',
       attempts: 6, failures: 5, window_hours: 1 };
     vi.mocked(captureTrackingHealth).mockReturnValueOnce('synthetic-event');
     const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
-      recordTrackingHealth: vi.fn().mockResolvedValue([rescued, failing]), ackTrackingHealth: vi.fn() };
+      recordTrackingHealth: vi.fn().mockResolvedValue([direct, failing]), ackTrackingHealth: vi.fn() };
     const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
       'synthetic-package', 'TEST1234', 'dhl-express', 'in_transit', { trigger: 'scheduled' });
     await audit.finish({ outcome: 'unchanged', sourceCarrier: 'dhl-express' });
     // Only the failure that left a parcel without a fresh answer reaches Sentry.
     expect(captureTrackingHealth).toHaveBeenCalledTimes(1);
     expect(captureTrackingHealth).toHaveBeenCalledWith(failing);
-    expect(client.ackTrackingHealth).toHaveBeenCalledWith(['rescued-notice', 'refresh-notice']);
+    expect(client.ackTrackingHealth).toHaveBeenCalledWith(['direct-notice', 'refresh-notice']);
     expect(recordHealthIncident).toHaveBeenCalledWith('direct', 'dhl-express', 'open');
     expect(logOperationalEvent).toHaveBeenCalledWith('tracking_health_incident',
       expect.objectContaining({ kind: 'direct', state: 'open' }), 'info');
@@ -557,7 +557,7 @@ describe('review signals', () => {
   it('acknowledges a recovery or a closing without Sentry, and an outage once Sentry has it', async () => {
     const recovered = { id: 'recovered-incident', kind: 'provider', subject: '17TRACK', state: 'recovered',
       attempts: 5, failures: 0, window_hours: 24 };
-    const open = { id: 'open-incident', kind: 'direct', subject: 'dpd', state: 'open', attempts: 12, failures: 8, window_hours: 24 };
+    const open = { id: 'open-incident', kind: 'provider', subject: 'dpd', state: 'open', attempts: 12, failures: 8, window_hours: 24 };
     const closed = { id: 'closed-incident', kind: 'direct', subject: 'gls', state: 'closed', attempts: 0, failures: 0, window_hours: 24 };
     const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
       recordTrackingHealth: vi.fn().mockResolvedValue([recovered, open, closed]), ackTrackingHealth: vi.fn() };
@@ -568,7 +568,7 @@ describe('review signals', () => {
     expect(captureTrackingHealth).toHaveBeenCalledExactlyOnceWith(open);
     expect(client.ackTrackingHealth).toHaveBeenCalledExactlyOnceWith(['recovered-incident', 'closed-incident', 'open-incident']);
     expect(vi.mocked(recordHealthIncident).mock.calls)
-      .toEqual([['provider', '17TRACK', 'recovered'], ['direct', 'dpd', 'open'], ['direct', 'gls', 'closed']]);
+      .toEqual([['provider', '17TRACK', 'recovered'], ['provider', 'dpd', 'open'], ['direct', 'gls', 'closed']]);
     expect(logOperationalEvent).toHaveBeenCalledWith('tracking_health_incident', expect.objectContaining({
       kind: 'provider', subject: '17TRACK', state: 'recovered', title: 'Provider lookups recovered: 17TRACK' }), 'info');
     expect(logOperationalEvent).toHaveBeenCalledWith('tracking_health_incident', expect.objectContaining({

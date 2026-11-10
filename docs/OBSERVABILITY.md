@@ -520,9 +520,8 @@ parcels on their way whose kept plan has a step dated over a day ago (a step the
 own wording as relayed by it, beside the carrier of its sample's parcel), a universal provider's delivered rows stored in the window that a
 wording rule read, on parcels not delivered (a misread keeps no wording, so the replay cannot re-read it: the row is removed by hand once
 the scraper's rule is fixed), new open support cases that still give a reason, health incidents notified in the
-window or open and failing in it (`rescued` when every check that failed still answered
-through another step; an open one nothing checked, or whose checks answered, waits unlisted
-until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and
+window or open and failing in it, lookups and refreshes only (an open one nothing checked, or
+whose checks answered, waits unlisted until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and
 provider, with `why` they stay with it, followed parcels not checked for 24 h (a scheduler fault: an
 account's parcel with a scan, or a lookup with an alert or a link opened in 24 h; one whose check was queued in the last
 hour, as reopening a dormant lookup's link queues one, waits unlisted for it), such lookups not checked for 6 h, twice
@@ -707,10 +706,9 @@ Key JSON events:
   A `provider_clock_offset` line also has `scan_id`, the `provider_event_id` of the stored
   row whose scan came on two clocks: the row a provider's copy repeats, or the copy's own;
 - `tracking_health_incident`: a health incident opened, still fails six hours on (warning,
-  info for a carrier's own lookup failing while its direct step's incident is open and
-  alerted), recovered, or closed once no sample of it was left, the carrier answers without its
-  direct step, or every check its direct step failed in 24 hours still answered (info), with its `kind`, `subject`,
-  `title`, `failures` and `attempts`;
+  info for a direct step's), recovered, or closed once no sample of it was left, the carrier
+  answers without its direct step, or every check its direct step failed in 24 hours still
+  answered (info), with its `kind`, `subject`, `title`, `failures` and `attempts`;
 - `dpd_app_session`: the scraper took up a saved session at start (`outcome` `taken_up`,
   with `age_ms`, how long ago it opened), or an opening ended, `opened` or `failed`
   (warning, with `error_kind`). `trigger` says what began it: `start`, `retry` a quarter of
@@ -854,13 +852,12 @@ provider failure in an `AggregateError` so every cause is visible.
 - **Alerts**: notify on new issues and regressions in `production`, and keep the Cron
   alerts. Avoid "more than 0 times in 5 minutes" rules: they fire on every failed check.
 - **Incidents**: carrier and provider outages open once, from thresholds computed in
-  Postgres, and remind every six hours while they last. A direct step whose every failure a
-  fallback step covered opens none. A recovery is only logged and counted. So is a carrier's own
-  lookup (`covered`) while its direct step's incident is open and its latest notice reached
-  Sentry: one outage, one alert. Once the direct incident recovers or closes,
-  the lookup's incident alerts again at its next reminder. See [ops/sentry](../ops/sentry/README.md).
-- **Review signals**: routing signals, sync anomalies, health recoveries and covered direct
-  failures open no issue;
+  Postgres, and remind every six hours while they last. A lookup counts by its final outcome,
+  its browser or proxy step included. A recovery is only logged and counted, and so is a
+  direct step's incident: its failures say little while the lookup's next step answers. See
+  [ops/sentry](../ops/sentry/README.md).
+- **Review signals**: routing signals, sync anomalies, health recoveries and direct-step
+  incidents open no issue;
   see [Review signals](#review-signals).
 - **Push deliveries**: a send the push service refuses, other than for a subscription that is
   gone, is retried by the next dispatch, so a dispatch with failed deliveries is only logged.
@@ -1194,9 +1191,9 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
   Prometheus has no `up` series for Peek at all, as while Prometheus itself is down.
 - **Peek checks failing across carriers**: in the last 3 hours, 10 checks or more failed,
   5% of them or more, across 3 carriers or more; or 5 carriers or more have an open health
-  incident that failed in the last 3 hours. A carrier counts once, however many of its
-  incidents (direct, provider, refresh) fail, and an incident whose failed checks were all
-  still answered another way (rescued) does not count. One carrier failing is its own Sentry
+  incident that failed in the last 3 hours. A carrier counts once, however many of its lookup
+  and refresh incidents fail; an incident whose failed checks were all still answered another
+  way does not count, nor does a direct step's. One carrier failing is its own Sentry
   incident. Several at once usually mean Peek's side: the network, Chromium, the database or
   a provider many carriers share.
 - **Peek scheduled sync slow**: a scheduled sync that finished in the last 2 hours took

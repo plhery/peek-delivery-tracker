@@ -332,25 +332,20 @@ group by 1, 2, 3, 4
 order by cases desc, carrier;
 
 \echo '== Health incidents: notified in the window, or open and failing in it'
-\echo '   rescued: every check that failed still answered through another step; open: no failure in the window,'
-\echo '   the incident waits for three healthy checks, or closes once nothing was checked for 24 h'
+\echo '   lookups by their final outcome and refreshes; a direct step whose browser or proxy step answers is'
+\echo '   on the dashboard only. open: no failure in the window, the incident waits for three healthy checks,'
+\echo '   or closes once nothing was checked for 24 h'
 select i.kind, i.subject,
        case when not i.active then 'over'
             when count(s.healthy) filter (where not s.healthy) = 0 then 'open'
-            when count(s.healthy) filter (where not s.healthy and not s.rescued) = 0 then 'rescued'
             else 'failing' end as state,
        'adapters' as lane, to_char(i.last_notified_at, 'YYYY-MM-DD HH24:MI') as notified,
        count(s.healthy) filter (where not s.healthy) as failures, count(s.healthy) as checks
 from public.tracking_health_incidents i
-left join lateral (
-  -- A direct step's failure is rescued when its check's refresh answered, as record_tracking_health reads it.
-  select sample.healthy, sample.kind = 'direct' and exists (
-           select 1 from public.tracking_health_samples refresh
-           where refresh.attempt_id = sample.attempt_id and refresh.kind = 'refresh' and refresh.healthy) as rescued
-  from public.tracking_health_samples sample
-  where sample.kind = i.kind and sample.subject = i.subject and sample.observed_at >= :since and sample.observed_at < :upto
-) s on true
-where (i.last_notified_at >= :since and i.last_notified_at < :upto) or i.active or i.pending is not null
+left join public.tracking_health_samples s
+  on s.kind = i.kind and s.subject = i.subject and s.observed_at >= :since and s.observed_at < :upto
+where i.kind <> 'direct'
+  and ((i.last_notified_at >= :since and i.last_notified_at < :upto) or i.active or i.pending is not null)
 group by i.kind, i.subject, i.active, i.last_notified_at, i.pending is not null
 -- An open incident whose checks answered in the window, or that nothing checked, is not listed again
 -- until it fails, its six-hourly reminder goes out, or it recovers or closes.

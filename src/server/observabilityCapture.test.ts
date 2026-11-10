@@ -226,24 +226,22 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(wrapped.contexts?.upstream_http).toMatchObject({ body_read: 'complete', headers: { 'content-type': 'text/html' },
     body_excerpt: expect.stringContaining('Access Denied Reference') });
   expect(withoutSource(wrapped)).not.toContain('DO_NOT_CAPTURE');
-  const incidentId = captureTrackingHealth({ id: 'test-incident', kind: 'direct', subject: 'la-poste', state: 'open',
+  const incidentId = captureTrackingHealth({ id: 'test-incident', kind: 'provider', subject: 'la-poste', state: 'open',
     attempts: 12, failures: 8, window_hours: 24, evidence: { http_status: 403, category: 'challenge' } });
   await flushObservability();
   const incident = captured.events.find(event => event.event_id === incidentId)!;
-  expect(incident.message).toBe('Direct tracking repeatedly failing: la-poste (8/12 in 24h)');
+  expect(incident.message).toBe('Provider lookups repeatedly failing: la-poste (8/12 in 24h)');
   expect(incident.exception).toBeUndefined();
   expect(incident.tags).toMatchObject({ component: 'tracking-health', incident_state: 'open' });
   expect(incident.contexts?.tracking_health?.next_steps).toContain('maintenance');
-  expect(incident.fingerprint).toEqual(['delivery-tracker', 'tracking-health', 'direct', 'la-poste']);
-  // A recovery, a closing, a rescued direct step or an own lookup its direct incident covers is a review signal, not an issue.
+  expect(incident.fingerprint).toEqual(['delivery-tracker', 'tracking-health', 'provider', 'la-poste']);
+  // A recovery, a closing or a direct step's incident is a review signal, not an issue.
   const before = captured.events.length;
   expect(captureTrackingHealth({ id: 'test-recovery', kind: 'direct', subject: 'la-poste', state: 'recovered',
     attempts: 3, failures: 0, window_hours: 24 })).toBeNull();
   expect(captureTrackingHealth({ id: 'test-closing', kind: 'direct', subject: 'la-poste', state: 'closed',
     attempts: 0, failures: 0, window_hours: 24 })).toBeNull();
-  expect(captureTrackingHealth({ id: 'test-rescued', kind: 'direct', subject: 'la-poste', state: 'open', rescued: true,
-    attempts: 12, failures: 8, window_hours: 24 })).toBeNull();
-  expect(captureTrackingHealth({ id: 'test-covered', kind: 'provider', subject: 'la-poste', state: 'open', covered: true,
+  expect(captureTrackingHealth({ id: 'test-direct', kind: 'direct', subject: 'la-poste', state: 'open', rescued: false,
     attempts: 12, failures: 8, window_hours: 24 })).toBeNull();
   await flushObservability();
   expect(captured.events).toHaveLength(before);

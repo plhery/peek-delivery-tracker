@@ -228,8 +228,6 @@ describe('tracking health evidence', () => {
       title: 'Shipment refreshes closed without a recent check: ups', nextSteps: expect.stringContaining('no recovery was observed') });
     expect(healthMessage({ subject: 'dhl-express', kind: 'direct', state: 'open', attempts: 12, failures: 10, window_hours: 24,
       rescued: true }).title).toBe('Direct tracking repeatedly failing: dhl-express (10/12 in 24h; every refresh answered through another step)');
-    expect(healthMessage({ subject: 'jcex', kind: 'provider', state: 'open', attempts: 10, failures: 10, window_hours: 24,
-      covered: true }).title).toBe('Provider lookups repeatedly failing: jcex (10/10 in 24h; its direct step\'s incident tells the outage)');
     expect(healthMessage({ subject: 'royal-mail', kind: 'refresh', state: 'open', attempts: 6, failures: 4, window_hours: 1,
       consecutive_failures: true }).title).toBe('Shipment refreshes repeatedly failing: royal-mail (4/6 in 1h; 3 checks in a row failed for two parcels, or for one while no other answered)');
     expect(healthMessage({ subject: 'dpd-fr', kind: 'direct', state: 'closed', reason: 'bypassed' })).toMatchObject({
@@ -283,13 +281,18 @@ it('leaves a direct failure its lookup recovered from out of the refresh evidenc
   expect((samples.find((sample) => sample.kind === 'refresh')!.details as JsonObject).step).toBeUndefined();
 });
 
-it('marks a failed lookup recovered once a retry of it answers', async () => {
+it('counts a failed lookup by its final outcome once a retry of it answers', async () => {
   const samples = new Map<string, HealthSample>();
   await observeTrackingHealth(samples, async () => {
+    healthStepRecorder.step({ ...step, carrier: 'ups' });
     healthStepRecorder.lookup({ carrier: 'ups', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1 });
+    healthStepRecorder.step({ ...step, carrier: 'ups', outcome: 'ok', errorType: null, error: undefined });
     healthStepRecorder.lookup({ carrier: 'ups', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
   });
-  expect(samples.get('provider:ups')).toMatchObject({ healthy: false, recovered: true });
+  // One lookup, answered; its direct step keeps the failure for its own quiet incident.
+  expect(samples.get('provider:ups')).toMatchObject({ healthy: true, details: { category: 'ok' } });
+  expect(samples.get('provider:ups')).not.toHaveProperty('recovered');
+  expect(samples.get('direct:ups')).toMatchObject({ healthy: false, recovered: true });
 });
 
 it('gives a failed refresh the anomaly and each provider\'s failure kind as evidence', async () => {

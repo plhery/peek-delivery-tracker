@@ -154,8 +154,9 @@ begin
   insert into public.tracking_health_incidents (kind, subject, active)
   values ('provider', 'health-open', true), ('provider', 'health-closed', false),
     ('provider', 'health-failed-earlier', true), ('provider', 'health-healthy-since', true),
-    -- The same carrier's direct step, and a direct step whose check a fallback answered.
-    ('direct', 'health-open', true), ('direct', 'health-rescued', true);
+    -- The same carrier's direct step, a direct step whose check a fallback answered, and one whose
+    -- check went unanswered: the carrier's lookup tells the outage, not its direct step.
+    ('direct', 'health-open', true), ('direct', 'health-rescued', true), ('direct', 'health-direct-only', true);
   insert into public.tracking_health_samples (attempt_id, kind, subject, healthy, observed_at) values
     (gen_random_uuid(), 'provider', 'health-open', false, now() - interval '2 hours'),
     (gen_random_uuid(), 'provider', 'health-closed', false, now() - interval '2 hours'),
@@ -164,7 +165,8 @@ begin
     (gen_random_uuid(), 'provider', 'health-healthy-since', true, now() - interval '1 hour'),
     (gen_random_uuid(), 'direct', 'health-open', false, now() - interval '2 hours'),
     (rescued_check, 'direct', 'health-rescued', false, now() - interval '1 hour'),
-    (rescued_check, 'refresh', 'health-rescued', true, now() - interval '1 hour');
+    (rescued_check, 'refresh', 'health-rescued', true, now() - interval '1 hour'),
+    (gen_random_uuid(), 'direct', 'health-direct-only', false, now() - interval '1 hour');
   select * into strict after from metrics.health;
 
   if after.checks_3h <> before.checks_3h + 3 or after.failed_checks_3h <> before.failed_checks_3h + 2
@@ -177,14 +179,14 @@ begin
   if after.longest_scheduled_sync_2h < 400 or after.longest_scheduled_sync_2h >= 1800 then
     raise exception 'The longest scheduled sync of the last two hours was missed: %', after;
   end if;
-  if after.open_health_incidents <> before.open_health_incidents + 5 then
+  if after.open_health_incidents <> before.open_health_incidents + 6 then
     raise exception 'Open health incidents were miscounted: % then %', before, after;
   end if;
-  if after.failing_health_incidents <> before.failing_health_incidents + 3 then
+  if after.failing_health_incidents <> before.failing_health_incidents + 4 then
     raise exception 'Open incidents that failed in the last three hours were miscounted: % then %', before, after;
   end if;
   if after.failing_incident_carriers <> before.failing_incident_carriers + 1 then
-    raise exception 'The carriers of unrescued failing incidents were miscounted: % then %', before, after;
+    raise exception 'The carriers of failing lookup and refresh incidents were miscounted: % then %', before, after;
   end if;
 end;
 $$;

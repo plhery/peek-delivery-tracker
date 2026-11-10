@@ -8,9 +8,10 @@ hold only provider ids, outcome categories, HTTP statuses and opaque ids. A samp
 own, such as not-found, has none. A failed refresh's sample also names the check's anomaly
 codes (`progress_disappeared` when an answer lost the saved progress without an error) and
 routing's failure kind for each provider and carrier (`provider_failures`), which become a
-refresh incident's evidence, with the error of the last tier that failed. A tier its lookup
-answered past, a direct step whose retry or browser step answered, is still counted against
-its own transport but is never a refresh's evidence.
+refresh incident's evidence, with the error of the last tier that failed. A direct step its
+lookup answered past, through a retry or browser step, is still counted against its own
+transport but is never a refresh's evidence. A lookup counts by its final outcome: one a retry
+of it answered counts once, as answered.
 
 Individual attempts, retries and fallbacks go to logs, metrics and Prometheus instead. A
 failure that recovers never opens an issue. See [OBSERVABILITY.md](../../docs/OBSERVABILITY.md).
@@ -18,17 +19,18 @@ failure that recovers never opens an issue. See [OBSERVABILITY.md](../../docs/OB
 | Incident | Opens when | Recovers when |
 | --- | --- | --- |
 | Shipment refresh | The 3 latest scheduled checks of two parcels failed, the last within the hour, or of one parcel while no other parcel's latest check that hour answered; or ≥ 5 failures and > 20 % of checks in one hour | The 3 latest checks succeed and no threshold is still breached |
-| Direct transport | > 50 % of ≥ 10 direct probes failed in 24 h | The 3 latest direct probes succeed and no more than half of the 24 h's failed |
 | Provider lookup | > 50 % of ≥ 10 lookups failed in 24 h | The 3 latest lookups succeed and no more than half of the 24 h's failed |
+| Direct transport (no issue) | > 50 % of ≥ 10 direct probes failed in 24 h | The 3 latest direct probes succeed and no more than half of the 24 h's failed |
 
 While a threshold is still breached and the 3 latest samples are healthy, an incident
 waits: no recovery and no reminder. It recovers once enough later checks succeed or its
 failures age out of the window; a new failure meanwhile reminds as usual.
 
-A carrier's provider lookup incident opens no issue while the carrier's direct transport
-incident is open and its latest notice reached Sentry (`covered`): one outage, one issue. It
-stays open for the review, and alerts at its next reminder once the direct incident recovers
-or closes.
+A direct transport incident opens no issue: it is logged at info and counted
+(`tracking_health_incident_total{kind="direct"}`, the carrier dashboard's Health incidents
+panel). A direct step failing while the lookup's browser or proxy step answers left no parcel
+unanswered, as Mail Americas' direct step meets a firewall on every check. The carrier's own
+provider lookup incident, which counts each lookup by its final outcome, is the alert.
 
 ## Counting rules
 

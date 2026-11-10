@@ -10,7 +10,7 @@ export interface HealthSample extends JsonObject {
   subject: string;
   healthy: boolean;
   details: JsonObject;
-  /** A failure its lookup answered past, through a retry or another step: still counted, never a refresh's evidence. */
+  /** A direct step's failure its lookup answered past, through a retry or another step: still counted, never a refresh's evidence. */
   recovered?: boolean;
 }
 const observations = new AsyncLocalStorage<Map<string, HealthSample>>();
@@ -84,13 +84,17 @@ function save(kind: 'provider' | 'direct', record: StepRecord | LookupRecord): v
   // the next step asks: counted as failures, three parcels bound for France made DPD Germany's
   // direct step look broken on 95% of its checks. Nor a lookup our own pacing refused, which asked nobody.
   if (outcome === 'handed_off' || inconclusive(record, outcome) || selfPacedRefusal(record.error)) return;
-  // A retry cannot count as another lookup or erase the original failed direct attempt: one
-  // that answered only marks it recovered.
+  const sample: HealthSample = { kind, subject: record.carrier.slice(0, 100), healthy: answered.has(outcome), details: details(record, outcome) };
+  // A retry cannot count as another lookup. One that answered counts the lookup by its final
+  // outcome; a direct step keeps its failure, marked recovered.
   if (previous && !previous.healthy) {
-    if (answered.has(outcome)) previous.recovered = true;
+    if (answered.has(outcome)) {
+      if (kind === 'provider') store.set(key, sample);
+      else previous.recovered = true;
+    }
     return;
   }
-  store.set(key, { kind, subject: record.carrier.slice(0, 100), healthy: answered.has(outcome), details: details(record, outcome) });
+  store.set(key, sample);
 }
 export const healthStepRecorder = {
   step(record: StepRecord) { if (record.step === 'direct') save('direct', record); },
@@ -118,13 +122,14 @@ export function confirmationLookup<T>(operation: () => Promise<T>): Promise<T> {
 }
 
 /**
- * A recovery, a closing, a direct step failing only in checks whose refresh a fallback step
- * answered (`rescued`), or a carrier's own lookup failing while its direct step's incident is
- * open and alerted (`covered`, one outage): logged and counted, never sent to Sentry. Sentry gets
- * the failures that left a parcel without a fresh answer, once per outage.
+ * A recovery, a closing, or a direct step's incident: logged and counted, never sent to Sentry. A
+ * direct step failing says little while its browser or proxy step answers, as Mail Americas'
+ * firewall and Australia Post's refusals do on every check; the carrier's own lookup, counted by
+ * its final outcome, has the incident that tells an outage. Sentry gets the lookups and refreshes
+ * that went unanswered, once per outage.
  */
 export function healthReviewSignal(incident: JsonObject): boolean {
-  return incident.state === 'recovered' || incident.state === 'closed' || incident.rescued === true || incident.covered === true;
+  return incident.state === 'recovered' || incident.state === 'closed' || incident.kind === 'direct';
 }
 
 export function healthMessage(incident: JsonObject): { title: string; nextSteps: string; impact: string } {
@@ -157,7 +162,7 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   // A streak counts when two parcels are on one, or one while no other parcel answered
   // (record_tracking_health); the incident does not say which.
   const title = recovered ? `${scope} recovered: ${subject}`
-    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${incident.consecutive_failures ? '; 3 checks in a row failed for two parcels, or for one while no other answered' : ''}${incident.rescued === true ? '; every refresh answered through another step' : ''}${incident.covered === true ? '; its direct step\'s incident tells the outage' : ''})`;
+    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${incident.consecutive_failures ? '; 3 checks in a row failed for two parcels, or for one while no other answered' : ''}${incident.rescued === true ? '; every refresh answered through another step' : ''})`;
   let nextSteps = 'Inspect the carrier scraper dashboard and the latest error type. Check the provider response and adapter parsing; retain the working fallback and scheduled backoff.';
   if (evidence?.http_status === 429 || evidence?.category === 'rate_limited') nextSteps = 'Honor Retry-After and inspect provider cooldowns. Reduce request frequency; do not increase retries or browser parallelism.';
   else if (['input_required','not_found'].includes(String(evidence?.category))) nextSteps = 'Check whether the shipment has been announced and whether its required postcode or tracking credentials were supplied. Do not retry invalid inputs immediately.';

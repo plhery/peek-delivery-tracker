@@ -4,7 +4,7 @@ description: Gdzie śledzić zamówienie z H&M w Polsce, kto je dostarcza, ile k
 slug: sledzenie-zamowienia-hm
 picture: Płaszcz na wieszaku na stojaku na ubrania, stos złożonych swetrów i samochód dostawczy, a na swetrach stoi Pip.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Zamówienie z H&M śledzisz na stronie Obsługi Klienta, wpisując numer zamówienia z e-maila potwierdzającego, w „Moim koncie” albo pytając asystenta AI na czacie. Strony H&M Polska wymieniają InPost, z dostawą do Paczkomatu, i DHL. Jeśli brakuje produktu, najpierw sprawdź w e-mailu z potwierdzeniem dostawy, czy nie oznaczono go jako niedostępny, a potem skontaktuj się z H&M.
@@ -130,7 +130,9 @@ Tak, z numerem przesyłki od przewoźnika: wklej go do [Peek](/). Tak wyglądaj�
 
 Taki kształt mają też numery kilku innych przewoźników. Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Z numerem DHL postępuj tak samo. Dla przewoźnika, którego ten poradnik nie wymienia, na przykład przewoźnika innej marki, i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamówienie przyszło w dwóch paczkach, dodaj oba numery. Z numerem przesyłki zwrotnej postępuj tak samo.
 
-Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z H&M.
+Gdy paczka jest wydana do doręczenia, Peek sprawdza ją nawet co 2 minuty u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp, na przykład DHL eCommerce w Polsce: co godzinę.
+
+Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika, w tempie tego, który ją doręcza. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z H&M.
 
 :::sources
 - [H&M Polska: Obsługa klienta](https://www2.hm.com/pl_pl/customer-service.html) – Śledź moje zamówienie, brakujące i niedostępne produkty, zewnętrzne marki, wadliwy produkt, anulowanie, zmiana u kuriera, zwrot pieniędzy w 14 dni, opłata za dostawę, powiadomienie o anulowaniu
@@ -140,5 +142,5 @@ Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmu
 - [H&M Polska: Program lojalnościowy](https://www2.hm.com/pl_pl/member/info.html) – bezpłatna dostawa powyżej 195 zł, darmowy Click & Collect, Basic i Premium
 - [UOKiK: Odpowiedzialność sprzedawcy za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – art. 548 § 3 Kodeksu cywilnego, reklamacja u sprzedawcy
 - [UOKiK: Wydanie towaru](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/wydanie-towaru/) – 30 dni, dodatkowy termin, odstąpienie
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów i przewoźnicy, których zna Peek
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów i przewoźnicy, których zna Peek, godzinny odstęp DHL eCommerce w Polsce
 :::

@@ -4,7 +4,7 @@ description: Por qué el seguimiento de un paquete deja de actualizarse, cuánto
 slug: seguimiento-no-se-actualiza
 picture: Un calendario con varios días tachados, una línea de progreso que se queda a medias y Pip esperando, un poco aburrido.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu paquete últimamente, no porque esté parado. Los transportistas lo escanean en sus centros y al cruzar fronteras, no en la carretera: un trayecto largo, un vuelo, la aduana o un fin de semana pueden dejarte días sin una línea nueva. Preocúpate solo cuando haya pasado el plazo del propio transportista ([Correos](carrier:correos-spain) acepta reclamaciones por un Paq Estándar a partir de 4 días desde que lo admitió; InPost, por demora, si el pedido tarda más de 5 días desde el aviso de envío), y aun entonces, escribe primero a la tienda: es ella quien contrató el envío.
@@ -14,7 +14,7 @@ Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu 
 El seguimiento muestra escaneos, no movimiento, y un paquete solo se escanea en ciertos puntos:
 
 - **Sin escaneos entre centros.** [GLS](carrier:gls-es) recuerda que usa varios centros de distribución, así que la ruta no siempre es directa.
-- **Fines de semana y festivos.** GLS reparte de lunes a viernes (los sábados, solo con su servicio Express Saturday), e InPost no lleva paquetes a sus Punto Pack y Lockers ni sábados, ni domingos, ni festivos. Muchos plazos se cuentan en días laborables: los 25 días de Vinted, por ejemplo, no incluyen fines de semana ni festivos.
+- **Fines de semana y festivos.** GLS reparte de lunes a viernes (los sábados, solo con su servicio ExpressSaturday), e InPost no lleva paquetes a sus Punto Pack y Lockers ni sábados, ni domingos, ni festivos. Muchos plazos se cuentan en días laborables: los 25 días de Vinted, por ejemplo, no incluyen fines de semana ni festivos.
 - **Mal tiempo y temporada alta.** Según DHL, el mal tiempo, los atascos, los accidentes o las bajas por enfermedad pueden retrasar una entrega, y en Alemania un paquete puede tardar más [antes de Navidad](guide:christmas-posting-dates).
 - **Direcciones y etiquetas con problemas.** DHL cita códigos postales mal escritos, números de portal que faltan, etiquetas escritas a mano que no se leen bien, etiquetas despegadas y embalajes dañados: el paquete puede acabar donde no toca o quedar apartado para clasificarlo a mano, con varios días de retraso. Correos llama «envío estacionado» al que no puede entregar por una incidencia: datos del destinatario insuficientes, una dirección incorrecta o un paquete roto. Lo deja estacionado 5 días naturales a la espera de que se corrijan los datos, y puedes corregirlos tú en «Gestión de estacionados» con el número de envío y el PIN que te manda por SMS o correo electrónico.
 
@@ -31,12 +31,14 @@ Ningún transportista da una cifra de cuánto tiempo puede pasar el seguimiento 
 - home | Último tramo | En reparto y entregado: los escaneos vuelven a llegar seguidos.
 :::
 
+Cuando un paquete figura con la etiqueta creada, admitido o en tránsito y su último escaneo tiene cuatro días o más, [Peek](/) muestra «Sin novedades desde hace cuatro días» y la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Correos.» (por ejemplo, con Correos).
+
 ### ¿Cuánto tarda en actualizarse un número de seguimiento nuevo?
 
 De unas horas a unos días. Si no sale nada o sigue atascado en la primera línea, puede que el transportista aún no tenga el paquete: esa línea suele salir del programa con el que la tienda imprime la etiqueta, no de un escaneo.
 
 - **Correos:** `Pre-admisión` significa que el número ya existe, pero el paquete está «pendiente de ser entregado a Correos». Si la tienda no le ha transmitido los datos del envío (el «prerregistro»), el paquete queda estacionado y Correos lo entrega cuando los recibe.
-- **GLS:** si tu envío lleva varios días en `Etiqueta creada`, el remitente le ha pasado los datos a GLS, pero todavía no le ha entregado el paquete. GLS te sugiere preguntar a la tienda, porque no puede darte plazos hasta tenerlo físicamente.
+- **GLS:** si tu envío lleva varios días en `Etiqueta creada`, el remitente le ha pasado los datos a GLS, pero todavía no le ha entregado el paquete. GLS te sugiere preguntar a la tienda, porque no puede darte plazos hasta tenerlo físicamente. En Peek, que lee el seguimiento de GLS en inglés, esa línea es `Label created. The shipment has not yet been delivered to GLS by the sender`, con la etapa «Etiqueta creada».
 - **[UPS](carrier:ups):** la primera línea, `Shipper created a label, UPS has not received the package yet.`, dice justo eso: el remitente ha creado la etiqueta y UPS todavía no tiene el paquete.
 - **Vinted:** el seguimiento puede tardar hasta 48 horas en aparecer en la app.
 - **Zalando:** el enlace de seguimiento no funciona «hasta que el transportista no haya recibido tu paquete». Si no se actualiza en 5 o 6 días laborables, contacta con el transportista.
@@ -45,7 +47,7 @@ Los demás estados los explicamos en [los estados del seguimiento](guide:trackin
 
 ### Vuelos, aduana y cambio de transportista
 
-DHL dice que, según el país de destino, es completamente normal que un paquete que envía desde Alemania al extranjero pase un tiempo sin cambiar de estado. Si se supera el plazo de entrega habitual, ayuda a buscarlo.
+DHL dice que, según el país de destino, es completamente normal que un paquete que envía desde Alemania al extranjero pase un tiempo sin cambiar de estado: mientras tanto puede parecer que sigue en Alemania, por ejemplo con la última línea en su centro postal internacional (IPZ) de Fráncfort. Si se supera el plazo de entrega habitual, ayuda a buscarlo.
 
 - **Aduana:** varios días laborables, según lo completa que esté la documentación, dice DHL. En España no solo pasa por aduana lo que viene de fuera de la UE: según Correos, también lo que llega a la Península y Baleares desde Canarias, Ceuta o Melilla, y lo que llega a esos tres territorios desde cualquier otro sitio. Más en [paquetes retenidos en aduanas](guide:customs).
 - **Cuando toma el relevo un transportista local:** DHL avisa de que puede haber huecos en el seguimiento y recomienda probar el mismo número en la web de seguimiento del país de destino.
@@ -57,7 +59,7 @@ DHL dice que, según el país de destino, es completamente normal que un paquete
 [Si el repartidor no puede entregarlo](guide:missed-delivery), el paquete no se pierde: se queda esperándote en otro sitio.
 
 - **Correos:** si te avisa por SMS de una entrega a domicilio, cuenta con que llegue entre 24 y 72 horas más tarde, según el producto. Si al final no puede entregarlo, te manda otro SMS con la oficina donde recogerlo: tienes 15 días, y estará disponible a partir del día siguiente al mensaje.
-- **GLS:** según el servicio que contrató la tienda, puede haber un segundo intento. Si también falla, el paquete se queda en la delegación y vuelve al remitente 7 días naturales después del primer intento. Con EconomyParcel solo hay un intento, y el paquete pasa al Parcel Shop más cercano.
+- **GLS:** cuando quedan menos de 10 paradas para tu entrega, activa el seguimiento en tiempo real. Según el servicio que contrató la tienda, puede haber un segundo intento. Si también falla, el paquete se queda en la delegación y vuelve al remitente 7 días naturales después del primer intento. Con EconomyParcel solo hay un intento, y el paquete pasa al Parcel Shop más cercano.
 - **InPost:** en un Locker o un Punto Pack te espera 5 días naturales en los envíos nacionales; después vuelve al remitente.
 
 Si pone «Entregado» y no tienes nada, mira [paquete entregado pero no recibido](guide:delivered-not-received).
@@ -70,7 +72,7 @@ Si pone «Entregado» y no tienes nada, mira [paquete entregado pero no recibido
 | --- | --- | --- |
 | Correos, envíos nacionales | Paq Premium: desde 3 días después de la admisión; Paq Estándar: desde 4; Paquete Azul: desde 6. Hasta 1 año (6 meses el Paquete Azul) | La indemnización es siempre para el remitente, salvo que autorice por escrito que la cobre el destinatario |
 | Correos, envíos al extranjero | Paquete Internacional Premium: desde 7 días, hasta 4 meses. Standard: desde 15 días; Económico: desde 25, ambos hasta 6 meses | Igual que en los nacionales |
-| InPost | Por demora: cuando el pedido tarda más de 5 días desde el aviso de envío. Como pérdida total: a los 30 días de ese aviso | Tú puedes reclamar. Si se pierde, InPost contacta con el remitente para indemnizarlo |
+| InPost | Por demora: cuando el pedido tarda más de 5 días desde el aviso de envío, y hasta 21 días después de que esté disponible en el Locker o el punto de recogida o entregado en casa. Como pérdida total: a los 30 días de ese aviso | Tú puedes reclamar. Si se pierde, InPost contacta con el remitente en 7 días para indemnizarlo |
 | GLS | Su página de ayuda no da plazo de espera. Para una reclamación formal, su hoja de reclamaciones, con respuesta en 30 días | Puedes consultarle a través de su asistente virtual, por redes sociales o por teléfono, con el número de seguimiento a mano |
 
 Si el paquete solo está parado, pide información a InPost con su formulario: trata las incidencias de transporte en un máximo de 15 días. Correos responde a las reclamaciones de envíos nacionales en un mes como mucho (10 días de media) y a las internacionales en dos.
@@ -81,7 +83,7 @@ A la tienda. Fue ella quien contrató el envío: para el transportista, el clien
 
 Si le compraste a una empresa, la ley española va en la misma línea: el paquete viaja a riesgo de la tienda hasta que está en tus manos, salvo que encargaras tú el transporte o eligieras un transportista que la tienda no ofrecía. Lo explicamos en [paquete entregado pero no recibido](guide:delivered-not-received).
 
-Para un paquete que se retrasa, cuenta además esta regla: sin fecha pactada, la tienda tiene que entregar sin demora indebida y en un máximo de 30 días naturales desde la compra (art. 66 bis de la Ley General para la Defensa de los Consumidores y Usuarios). Si no cumple, puedes darle un plazo adicional adecuado, y si tampoco entrega, resolver el contrato.
+Para un paquete que se retrasa, cuenta además esta regla: sin fecha pactada, la tienda tiene que entregar sin demora indebida y en un máximo de 30 días naturales desde la compra (art. 66 bis de la Ley General para la Defensa de los Consumidores y Usuarios). Si no cumple, puedes darle un plazo adicional adecuado, y si tampoco entrega, resolver el contrato. Si antes de comprar acordasteis que era esencial recibirlo en una fecha, puedes resolverlo en cuanto pase, sin darle más plazo.
 
 ¿Compraste a un particular en Vinted o Wallapop? Esa ley no cubre las ventas entre particulares: lo que cuenta son las normas de la plataforma.
 
@@ -106,7 +108,7 @@ Una plataforma puede devolverte el dinero, pero solo dentro de su plazo:
 
 En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores externos: si tienes problemas con el plazo de entrega y no consigues resolverlos con el vendedor, puedes reclamar directamente a Amazon.
 
-En eBay puedes avisar de que no ha llegado en cuanto pasa la fecha de entrega prevista, y hasta 30 días naturales después; en Etsy, abrir un caso hasta 30 días después de la fecha de entrega estimada.
+En eBay puedes avisar de que no ha llegado en cuanto pasa la fecha de entrega prevista, y hasta 30 días naturales después; en Etsy, abrir un caso cuando ha pasado la fecha de entrega estimada máxima y escribiste al vendedor hace más de 48 horas, y hasta 30 días después de la fecha de entrega estimada.
 
 > En Vinted, si un pedido figura como entregado y no avisas de un problema en 2 días (14 si el vendedor es Pro), se completa y el vendedor cobra. No esperes a que el seguimiento vuelva a moverse.
 
@@ -114,15 +116,15 @@ En eBay puedes avisar de que no ha llegado en cuanto pasa la fecha de entrega pr
 
 ### ¿Es normal que un paquete lleve una semana en tránsito?
 
-Dentro de España, va lento. Correos da al Paq Estándar de 48 a 72 horas (5 días más si va a Canarias o sale de allí, 6 más con Ceuta y Melilla, sin contar la aduana); GLS suele entregar en 24 horas laborables fuera de las islas desde que tiene el paquete, e InPost, en 3 días laborables de media. Entre países, una semana puede entrar en lo normal: Vinted dice que la mayoría de sus envíos internacionales llegan en 7 días laborables, e InPost calcula de 3 a 6 días laborables de media para los suyos.
+Dentro de España, va lento. Correos da al Paq Estándar de 48 a 72 horas (5 días más si va a Canarias o sale de allí, 6 más con Ceuta y Melilla, sin contar la aduana); GLS suele entregar en 24 horas laborables fuera de las islas desde que tiene el paquete, e InPost, en 3 días laborables de media. Entre países, una semana puede entrar en lo normal: Vinted dice que la mayoría de sus paquetes llegan en 5 días laborables y los internacionales en 7, e InPost calcula de 3 a 6 días laborables de media para los suyos.
 
 ### ¿Puedo hacer que el seguimiento se actualice antes?
 
-No, y una [app de seguimiento](guide:universal-tracker) tampoco: solo muestra lo que publica el transportista. [Peek](/) sigue consultando al transportista por ti y puede enviarte una notificación cuando aparece un escaneo nuevo, así no tienes que estar recargando la página.
+No, y una [app de seguimiento](guide:universal-tracker) tampoco: solo muestra lo que publica el transportista. [Peek](/) consulta el seguimiento hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos cuando el paquete está en reparto con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa), y puede enviarte una notificación cuando aparece un escaneo nuevo, así no tienes que estar recargando la página. A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail y Morning Global; cada 30 minutos, Poste Italiane, PostNL, USPS, GOFO y Cainiao). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Cuando el último escaneo tiene más de dos días (12 horas si el paquete sigue con la etiqueta creada o solo admitido) y lo añadiste hace más de ese tiempo, Peek lo consulta cada hora.
 
 ### Mi número de seguimiento no aparece en Correos
 
-Puede que el paquete aún no se haya escaneado, que el número sea de otro transportista o que haya un carácter mal copiado. Correos manda el código de envío por correo electrónico, por SMS o por las dos vías, según los datos que le haya dado el remitente, y también lo pone en el aviso de llegada; si tienes dudas, confírmalo con la tienda. [Comprueba de qué transportista es](guide:tracking-number-formats) o [encuentra el número correcto](guide:find-tracking-number).
+Puede que el paquete aún no se haya escaneado, que el número sea de otro transportista o que haya un carácter mal copiado. Correos manda el código de envío por correo electrónico, por SMS o por las dos vías, según los datos que le haya dado el remitente, y también lo pone en el aviso de llegada; si tienes dudas, confírmalo con la tienda. Mientras ningún transportista conozca el número, Peek muestra «Probablemente Correos» si tiene su formato y, si no se parece a ninguno, «Transportista aún no encontrado» y «Guarda esta página: Peek sigue preguntando a los transportistas, y este enlace mostrará el paquete en cuanto uno responda.» [Comprueba de qué transportista es](guide:tracking-number-formats) o [encuentra el número correcto](guide:find-tracking-number).
 
 :::sources
 - [Correos: Extravío, envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – 3, 4 y 6 días, 1 año y 6 meses, indemnización al remitente
@@ -134,24 +136,26 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [Correos: Código de envío](https://www.correos.es/es/es/atencion-al-cliente/recibir/codigo-de-envio) – correo electrónico, SMS, aviso de llegada
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – 1 y 2 meses
 - [Correos: Gestión aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – Canarias, Ceuta y Melilla
-- [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – 5, 15 y 30 días, 3 y 3 a 6 días laborables, Locker y Punto Pack, reparto de lunes a viernes
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días, asistente virtual «Consulta», redes sociales y teléfono
+- [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5, 15 y 30 días, 3 y 3 a 6 días laborables, Locker y Punto Pack, reparto de lunes a viernes; reclamación por demora hasta 21 días, contacto con el remitente en 7 días (leído el 10 de noviembre de 2026)
+- [InPost: Seguimiento del envío](https://www.inpost.es/seguimiento-del-envio) – 5 días naturales en Locker y Punto Pack, después vuelve al remitente (leído el 10 de noviembre de 2026)
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días, asistente virtual «Consulta», redes sociales y teléfono; ExpressSaturday, seguimiento en tiempo real a menos de 10 paradas (leído el 10 de noviembre de 2026)
 - [GLS: Hoja de reclamaciones](https://gls-group.com/ES/es/hoja-de-reclamaciones/) – respuesta en 30 días
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – primera línea de UPS que lee Peek
+- [Universal Parcel Scraper: GLS España](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-es) – primera línea de GLS que lee Peek, en inglés
 - [Zalando: ¿Dónde está mi pedido?](https://www.zalando.es/faq/where-is-my-parcel.html) – enlace sin activar hasta que el transportista tiene el paquete, 5-6 días laborables
-- [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – estado sin cambios, huecos, seguimiento del país de destino
+- [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – estado sin cambios, huecos, seguimiento del país de destino; puede parecer que sigue en Alemania, IPZ de Fráncfort (leído el 10 de noviembre de 2026)
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – despacho de aduanas
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – dirección y etiqueta
 - [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – mal tiempo, atascos, accidentes, antes de Navidad
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reembolso de Amazon si no se resuelve con el vendedor
-- [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 7 días laborables, 25 con etiqueta generada en Vinted
+- [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 7 días laborables, 25 con etiqueta generada en Vinted; 5 días laborables la mayoría (leído el 10 de noviembre de 2026)
 - [Vinted: Términos y condiciones de Vinted Pro](https://www.vinted.es/pro-terms-and-conditions) – 14 días naturales con vendedores Pro, «Tengo un problema», después se completa solo
 - [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – 48 horas, «Tengo un problema» en 2 días desde que el pedido se marca como entregado
 - [Vinted: La información de seguimiento no se actualiza](https://www.vinted.es/help/1368) – días laborables sin festivos
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – 2 días naturales tras el aviso
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=es) – día 11 y 15 días
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 días naturales
-- [Etsy: Cómo abrir un caso](https://help.etsy.com/hc/es/articles/5745586898199) – 30 días
-- [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 2, 66 bis y 66 ter
+- [Etsy: Cómo abrir un caso](https://help.etsy.com/hc/es/articles/5745586898199) – 30 días; fecha de entrega estimada máxima y 48 horas desde que escribiste al vendedor (leído el 10 de noviembre de 2026)
+- [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 2, 66 bis y 66 ter; fecha esencial, resolución sin más plazo (leído el 10 de noviembre de 2026)
 :::

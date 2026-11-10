@@ -25,9 +25,9 @@ Powód zwykle widać w ostatnim statusie i na samej paczce, więc nadawca częst
 | Brak pełnomocnictwa do odprawy | Poczta Polska odsyła paczkę spoza UE, jeśli w 14 dni nie udzielisz jej pełnomocnictwa ani nie zgłosisz paczki sam |
 | Nadawca chce ją z powrotem | Poczta Polska i Pocztex: nadawca może przed doręczeniem odstąpić od umowy i zażądać zwrotu |
 
-Peek pokazuje statusy DPD, InPost i Allegro One po angielsku, tak jak je odczytuje. Przesyłki zagraniczne wracają często z adnotacją po francusku: `Inconnu` (nieznany), `Refusé` (odmowa), `Non réclamé` (nieodebrana).
+Peek pyta DPD, InPost, Allegro One i Pocztę Polską w języku aplikacji: gdy masz ją po polsku, pokazuje ich statusy po polsku, na przykład `Przesyłka niedoręczona - rezygnacja klienta z przesyłki` u DPD albo `Przesyłka została zwrócona do nadawcy` u Allegro One, a w innym języku po angielsku, jak w tabeli. Gdy Peek nie zna jeszcze któregoś polskiego statusu DPD, pobiera całą historię tej paczki po angielsku. Przesyłki zagraniczne wracają często z adnotacją po francusku: `Inconnu` (nieznany), `Refusé` (odmowa), `Non réclamé` (nieodebrana).
 
-Czasem status nie mówi wprost, co dalej: `Parcel return` u DPD znaczy, że paczka wraca do nadawcy pod nowym numerem, a historia pierwotnego numeru na tym się kończy. Co znaczą takie statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Jeśli chodziło o cło, [paczka zatrzymana przez urząd celny](guide:customs) opisuje, co było do zapłaty i co dzieje się z należnościami, gdy odmówisz przyjęcia.
+Czasem status nie mówi wprost, co dalej: `Parcel return` (po polsku `Zwrot przesyłki`) u DPD znaczy, że paczka wraca do nadawcy pod nowym numerem, a historia pierwotnego numeru na tym się kończy. Co znaczą takie statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Jeśli chodziło o cło, [paczka zatrzymana przez urząd celny](guide:customs) opisuje, co było do zapłaty i co dzieje się z należnościami, gdy odmówisz przyjęcia.
 
 ## Jak zatrzymać zwrot paczki do nadawcy?
 
@@ -97,12 +97,12 @@ W historii śledzenia zwrot wygląda jak ta sama trasa od końca:
 - shop | Sprzedawca | Wysyła paczkę do Ciebie.
 - warehouse | Sortownie | Statusy zbliżają się do Ciebie.
 - locker | Blisko Ciebie | Odmowa, nieodebranie albo nikogo pod adresem.
-- truck | Zawraca | Wpis w rodzaju `Returned` albo `On the way back to the Sender`.
+- truck | Zawraca | Wpis w rodzaju `Przesyłka została zwrócona do nadawcy`, po angielsku `Returned` albo `On the way back to the Sender`.
 - warehouse | Znowu sortownie | Ta sama trasa, od końca.
 - shop | Sprzedawca | „Doręczona” znaczy tu: doręczona nadawcy.
 :::
 
-To myli wiele osób: ostatnie „doręczona” w historii zwrotu dotyczy nadawcy. U Poczty Polskiej `Final delivery` po statusie `Returned` to właśnie doręczenie z powrotem do nadawcy. Jeśli historia się urywa, zapytaj sprzedawcę, czy zwrot dostał nowy numer przesyłki, albo przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+To myli wiele osób: ostatnie „doręczona” w historii zwrotu dotyczy nadawcy. U Poczty Polskiej `Final delivery` po statusie `Returned` (tak brzmią po angielsku) to właśnie doręczenie z powrotem do nadawcy. Jeśli historia się urywa, zapytaj sprzedawcę, czy zwrot dostał nowy numer przesyłki, albo przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 [Peek](/) przy ustawieniu „Ważne etapy” wysyła powiadomienia także o zwrotach, więc dowiesz się, gdy paczka zawróci. Zatrzymać jej nie może.
 
@@ -121,8 +121,8 @@ Poczta Polska kieruje taką przesyłkę niedoręczalną do wyznaczonej jednostki
 Po zwrocie nieodebranej przesyłki poleconej Poczta Polska może Ci podać nazwę nadawcy.
 
 :::sources
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): odmowa przyjęcia, powrót do nadawcy
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – statusy DPD, Allegro One i Poczty Polskiej, które czyta Peek (po angielsku): błędny adres, odmowa, koniec terminu odbioru, zwrot pod nowym numerem, doręczenie po zwrocie
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku albo po angielsku, w języku aplikacji): odmowa przyjęcia, powrót do nadawcy
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – statusy DPD, Allegro One i Poczty Polskiej, które czyta Peek (po polsku albo po angielsku, w języku aplikacji): błędny adres, odmowa, koniec terminu odbioru, zwrot pod nowym numerem, doręczenie po zwrocie
 - [Poczta Polska: Regulamin świadczenia usług powszechnych, tekst jednolity](https://www.poczta-polska.pl/wp-content/uploads/2026/07/Regulamin-swiadczenia-uslug-powszechnych-tekst-jednolity.pdf) – § 7, § 20, § 24, § 26, § 27, § 36: nazwa nadawcy, płatny zwrot, śmierć adresata, 14 dni, żądania nadawcy, przesyłki niedoręczalne
 - [Poczta Polska: Cennik opłat dodatkowych](https://cennik.poczta-polska.pl/plik,1/cennik_oplat_dodatkowych_01112025.pdf) – poz. 13–16: 3,00 zł, 9,00 zł, 38,00 zł, zwrot jak za przesyłkę
 - [Poczta Polska: Regulamin usługi Pocztex w obrocie krajowym dla klienta biznesowego](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-biznesowego-obowiazuje-od-24.08.2026-r.pdf) – § 22, § 23, § 24, § 29: odmowa, koszt nadawcy, domownik, żądania nadawcy

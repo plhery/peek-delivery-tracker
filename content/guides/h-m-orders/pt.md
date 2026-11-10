@@ -4,7 +4,7 @@ description: Onde segues a tua encomenda H&M em Portugal, quanto custa o envio, 
 slug: seguimento-encomenda-hm
 picture: Um casaco num cabide pendurado num varão de roupa, uma pilha de camisolas dobradas e uma carrinha de entregas, e o Pip de pé sobre as camisolas.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Segues a tua encomenda H&M com o número da encomenda do e-mail de confirmação, na página de Atendimento ao Cliente, e recebes um e-mail de confirmação de envio com tudo sobre a entrega. As páginas da H&M Portugal não dizem que transportadora a leva. Se consta como entregue e não a tens, vê na caixa do correio, pergunta à família e aos vizinhos e, 48 horas depois da última atualização, contacta a H&M.
@@ -122,7 +122,9 @@ O reembolso vai para o mesmo método de pagamento, até 14 dias depois de a H&M 
 
 Sim, se tiveres o número da transportadora: cola-o no [Peek](/). A H&M Portugal não nomeia as suas transportadoras, por isso cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Se a encomenda vier em vários pacotes, adiciona cada número.
 
-Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica com ele, o Peek guarda o histórico desde o início e segue a nova. O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e as devoluções ficam com a H&M.
+Quando o pacote sai para entrega, o Peek verifica até de 2 em 2 minutos nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder). Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior.
+
+Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica com ele, o Peek guarda o histórico desde o início e segue a nova, ao ritmo da que entrega o pacote. O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e as devoluções ficam com a H&M.
 
 :::sources
 - [H&M Portugal: Atendimento ao Cliente](https://www2.hm.com/pt_pt/customer-service.html) – Seguir a minha encomenda, entregue mas não recebida, 48 horas, devoluções em qualquer loja, reembolso em 14 dias, banco até 30 dias, vale de desconto, NIF

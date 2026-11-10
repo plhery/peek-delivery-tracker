@@ -4,7 +4,7 @@ description: Où suivre ta commande H&M en France, en Belgique et en Suisse, qui
 slug: suivi-commande-hm
 picture: Un manteau sur un cintre à un portant, une pile de pulls pliés et une camionnette de livraison, et Pip debout sur les pulls.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Tu suis une commande H&M grâce au lien de l'e-mail qu'H&M envoie dès qu'il emballe ton colis, ou dans « Mon compte », rubrique Mes commandes. En France, H&M travaille avec Chronopost, Paack et Mondial Relay ; en Belgique, avec bpost, Budbee et Mondial Relay ; en Suisse, avec La Poste et Planzer. Si le suivi indique livré mais que le colis n'est pas là, fais le tour, puis contacte le service client.
@@ -142,7 +142,9 @@ Oui, avec le numéro de suivi du transporteur : colle-le dans [Peek](/). Voici �
 
 Peek reconnaît ces numéros à leur seule forme. Les numéros Mondial Relay de 8, 10 ou 12 chiffres et les numéros bpost faits seulement de chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un numéro Budbee, colle-le, appuie sur « Changer » et choisis Budbee. Pour le colis d'une autre marque, dont H&M ne nomme pas le transporteur, colle le numéro quand même : Peek suit plus de 3 500 transporteurs. Si la commande arrive en plusieurs colis, ajoute chaque numéro.
 
-Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours passent par H&M.
+Quand le colis est en cours de livraison, Peek vérifie jusqu'à toutes les 2 minutes chez les transporteurs qu'il lit directement, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond). Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long.
+
+Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur, au rythme de celui qui livre le colis. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours passent par H&M.
 
 :::sources
 - [H&M France : Livraison](https://www2.hm.com/fr_fr/customer-service/shippinganddelivery.html) – e-mail de suivi, Chronopost, Paack, Mondial Relay, modes, délais, prix, adresse de facturation, membres, lockers, retrait en magasin, plusieurs colis, 10 jours sans mise à jour, colis non livrables, annulation, autres marques, Monaco et DOM-TOM

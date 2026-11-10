@@ -4,7 +4,7 @@ description: Quem entrega uma encomenda de leroymerlin.pt, onde ver o estado, qu
 slug: seguimento-encomenda-leroy-merlin
 picture: Uma lata de tinta e um rolo sobre uma pilha de tábuas de madeira ao lado de uma carrinha de entregas, e o Pip de pé sobre as tábuas.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 A Leroy Merlin vende online em Portugal em leroymerlin.pt e na app. Levantas grátis na loja, ao balcão ou num cacifo, ou recebes num ponto de recolha ou em casa, com entrega ao passeio. A entrega é grátis em compras acima de 99 € de pequenos volumes vendidos pela Leroy Merlin. As suas páginas não nomeiam as transportadoras. O estado de cada encomenda está na Área de Cliente, em «Encomendas». Se receberes um artigo danificado, tens 48 horas após a entrega para o comunicar.
@@ -124,7 +124,9 @@ Sim, se tiveres o número de seguimento da transportadora, por exemplo pelo link
 
 Muitos números têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. Se a encomenda vier em vários pacotes, adiciona cada número.
 
-Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica com ele, o Peek guarda o histórico desde o início e segue a nova. O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e as devoluções ficam com a Leroy Merlin ou com o vendedor.
+Quando o pacote sai para entrega, o Peek verifica até de 2 em 2 minutos nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder). Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior.
+
+Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica com ele, o Peek guarda o histórico desde o início e segue a nova, ao ritmo da que entrega o pacote. O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e as devoluções ficam com a Leroy Merlin ou com o vendedor.
 
 :::sources
 - [ADEO: Home](https://www.adeo.com/en/) – a Leroy Merlin como marca da ADEO

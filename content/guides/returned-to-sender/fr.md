@@ -4,7 +4,7 @@ description: Pourquoi un colis est retourné à l'expéditeur, si on peut annule
 slug: colis-retourne-expediteur
 picture: Une camionnette chargée d'un colis au tampon rond de retour repart le long d'une flèche courbe vers une boutique, et Pip la regarde s'éloigner.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 « Retourné à l'expéditeur » veut dire que le transporteur n'a pas pu te remettre ton colis et le rapporte à celui qui l'a envoyé : adresse incomplète, colis refusé, délai de retrait dépassé ou frais de douane impayés. Une fois lancé, un retour va en pratique jusqu'au bout : seul l'expéditeur peut rappeler un colis, et seulement avant. Écris tout de suite au vendeur, et dis-lui par écrit si tu veux un nouvel envoi ou un remboursement.
@@ -21,7 +21,7 @@ La raison est en général dans le dernier scan du suivi, et elle est notée sur
 | Nom absent de la boîte aux lettres | [La Poste suisse](carrier:swiss-post) : `Renvoi`, par exemple pour une boîte aux lettres sans nom |
 | Destinataire inconnu ou déménagé | La Poste suisse : `Destinataire introuvable à l’adresse indiquée`, `Destinataire a déménagé, délai de réexpédition expiré` |
 | Pas retiré à temps | La Poste : délai de retrait dépassé ; La Poste suisse : `Envoi non retiré` ; bpost : 14 jours en Point d'enlèvement, 5 en distributeur de colis |
-| Refusé à la porte | La Poste suisse : `Refusé` ; bpost : refusé à la porte, par exemple parce qu'il est abîmé ; [Mondial Relay](carrier:mondial-relay) : `Colis refusé` |
+| Refusé à la porte | La Poste suisse : `Refusé`, ou `Renvoi par le destinataire` si tu l'as glissé dans une boîte aux lettres de la Poste avec la mention « refusé » ; bpost : refusé à la porte, par exemple parce qu'il est abîmé ; [Mondial Relay](carrier:mondial-relay) : `Colis refusé` |
 | Douane : frais impayés, documents non conformes | La Poste : documents d'import non conformes ; La Poste suisse : envoi de l'étranger refusé faute de paiement |
 | Colis abîmé en route | La Poste suisse : `Envoi en retour en raison d’un dommage` |
 | L'expéditeur l'a demandé | La Poste suisse : `Retour direct selon instruction de l’expéditeur` |
@@ -61,7 +61,7 @@ En général oui, une fois qu'il est rentré chez le vendeur. Les plateformes on
 
 - **Amazon** : pour un article vendu et expédié par un vendeur Marketplace, contacte d'abord le vendeur. Si tu n'arrives pas à régler le problème de livraison avec lui, la Garantie A à Z te permet de demander un remboursement à Amazon.
 - **eBay** rembourse, frais de livraison compris, un objet qui n'est pas arrivé, avec sa Garantie client eBay. Elle ne couvre pas une adresse incorrecte donnée à l'achat, une livraison refusée (sauf si le vendeur avait mal affranchi le colis), des frais d'importation impayés ou un objet pas retiré à temps au point de retrait.
-- **Vinted** annule la commande quand le colis repart et procède au « remboursement intégral (y compris le prix de l'article, les frais d'envoi et les frais Vinted) ». Si le vendeur ne l'a pas reçu ou pas signalé comme reçu dans les 14 jours ouvrés, le remboursement part tout seul ; toujours rien après 25 jours ouvrés, contacte Vinted.
+- **Vinted** annule la commande dès qu'il a la confirmation que le colis repart vers le vendeur, et procède au « remboursement intégral (y compris le prix de l'article, les frais d'envoi et les frais Vinted) ». Si le vendeur ne l'a pas reçu ou pas signalé comme reçu dans les 14 jours ouvrés, le remboursement part tout seul ; toujours rien après 25 jours ouvrés, contacte Vinted.
 
 Dans une boutique en ligne ordinaire, c'est la loi de ton pays qui décide :
 
@@ -73,14 +73,14 @@ Dans une boutique en ligne ordinaire, c'est la loi de ton pays qui décide :
 
 > Refuser un colis ou le laisser au point relais, ce n'est pas annuler. En France et en Belgique, écris à la boutique ou utilise son formulaire ou sa fonction de rétractation en ligne, et garde une copie : c'est ce message qui l'oblige à te rembourser.
 
-Les boutiques en ligne doivent désormais proposer cette fonction de rétractation : en France, gratuitement, depuis le 19 juin 2026 ; en Belgique depuis le 14 août 2026, par exemple sous la forme d'un bouton ou d'un lien facile à trouver. [Que devient un colis non retiré](guide:uncollected-parcel) explique quand courent les 14 jours de rétractation.
+Les boutiques en ligne doivent désormais proposer cette fonction de rétractation : en France, gratuitement, depuis le 19 juin 2026 ; en Belgique depuis le 14 août 2026, par exemple sous la forme d'un bouton ou d'un lien facile à trouver. Quand tu te rétractes sur son site, la boutique doit t'envoyer un accusé de réception ; en Belgique, elle ne peut pas non plus t'imposer un bon d'achat à la place du remboursement. [Que devient un colis non retiré](guide:uncollected-parcel) explique quand courent les 14 jours de rétractation.
 
 ## Qui paie le retour d'un colis à l'expéditeur ?
 
 L'expéditeur paie le transporteur, selon les règles de chaque service :
 
 - **Mondial Relay**, d'après sa FAQ belge, renvoie à ses frais vers le Locker ou le Point Relais de dépôt le colis non retiré qu'un particulier a envoyé ; celui d'une boutique repart chez le vendeur.
-- **La Poste suisse** renvoie un colis non distribuable à l'expéditeur, à ses frais, sans lui rembourser l'affranchissement payé au départ.
+- **La Poste suisse** renvoie un colis non distribuable à l'expéditeur, à ses frais, sans lui rembourser l'affranchissement payé au départ. S'il refuse de le reprendre, elle en dispose librement, et les éventuels frais d'élimination sont pour lui.
 - **Depuis l'étranger**, les règles de l'Union postale universelle font payer à l'expéditeur le trajet du retour et les frais restés dus à l'arrivée.
 
 La boutique peut-elle te le faire payer ? En France et en Belgique, seulement les coûts directs de renvoi, seulement si elle t'avait prévenu, et seulement une fois que tu t'es rétracté. Elle peut aussi garder le supplément d'une livraison plus chère que la livraison standard qu'elle proposait.
@@ -98,9 +98,11 @@ Le colis repart à peu près par le même chemin, et le suivi se lit à l'envers
 - shop | Vendeur | « Livré » veut dire ici livré à l'expéditeur.
 :::
 
-C'est le piège : à la fin d'un retour, La Poste comme La Poste suisse marquent le colis comme livré, mais chez l'expéditeur. Si l'historique s'arrête, demande au vendeur si le retour a un nouveau numéro, ou lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
+C'est le piège : à la fin d'un retour, La Poste comme La Poste suisse marquent le colis comme livré, mais chez l'expéditeur ; Peek affiche alors « Retourné à l’expéditeur », pas « Livré ». Après `Renvoi avec disposition formulée d’avance par l’expéditeur`, La Poste suisse n'affiche plus rien : le colis repart en courrier A ou B. Si l'historique s'arrête, demande au vendeur si le retour a un nouveau numéro, ou lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 
 [Peek](/) peut t'envoyer une notification pour les retours avec le réglage « Étapes importantes » : tu sais quand un colis fait demi-tour. Il ne peut pas l'arrêter.
+
+Quand Mondial Relay écrit `Retour à l'expéditeur`, Peek affiche « Retourné à l’expéditeur », avec « Sur le chemin du retour depuis » et la date, et la note « Mondial Relay le renvoie à l’expéditeur. Contacte l’expéditeur pour un remboursement ou une nouvelle livraison. » ; dans ta liste, le colis passe dans « Retournés ». Chez Chronopost, `Colis en retour expéditeur` s'affiche d'abord comme « Problème signalé » : « Retourné à l’expéditeur » ne vient qu'avec la livraison chez l'expéditeur.
 
 ## Retour à l'expéditeur : quel délai ?
 
@@ -129,22 +131,22 @@ La Poste suisse peut ouvrir un colis renvoyé pour trouver son expéditeur. Si e
 - [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en Belgique, puis retour à l'expéditeur
 - [Mondial Relay Belgique : Modifier le Point Relais de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – plus de changement de Point Relais une fois le colis pris en charge
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « Retour à l'expéditeur », « Colis refusé »
-- [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Colis en retour expéditeur »
+- [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Colis en retour expéditeur », lu comme un problème, puis le retour à la livraison chez l'expéditeur
 - [Universal Parcel Scraper : codes La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – retour (adresse incorrecte, délai de retrait dépassé, documents d'import non conformes), puis livraison à l'expéditeur
 - [Universal Parcel Scraper : statuts La Poste suisse](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/swiss-post/statuses.json) – un renvoi finit en « distribué » chez l'expéditeur
 - [bpost : Mon colis a été renvoyé à l'expéditeur](https://www.bpost.be/fr/faq/mon-colis-aurait-du-etre-livre-domicile-mais-ete-renvoye-lexpediteur-pourquoi-et-comment-puis-je) – raisons, 14 et 5 jours, retour par erreur
-- [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – motifs de renvoi, retour direct selon instruction de l'expéditeur
-- [La Poste suisse : CG clientèle privée](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?vs=24&sc_lang=fr&hash=84B987128A5FDC7FD6E9EA6641A5CEBB) – renvois, frais de l'expéditeur, ouverture, importation
+- [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – motifs de renvoi, retour direct selon instruction de l'expéditeur ; renvoi par le destinataire, renvoi avec disposition formulée d'avance, plus rien dans le suivi ensuite (lu le 10 novembre 2026)
+- [La Poste suisse : CG clientèle privée](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?vs=24&sc_lang=fr&hash=84B987128A5FDC7FD6E9EA6641A5CEBB) – renvois, frais de l'expéditeur, ouverture, importation ; expéditeur qui refuse de reprendre le colis, frais d'élimination (lu le 10 novembre 2026)
 - [Union postale universelle : Manuel de la Convention (en anglais)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – propriété de l'expéditeur, motifs en français, garde, voie de retour
 - [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeurs tiers, remboursement par Amazon si le problème de livraison n'est pas réglé avec le vendeur
 - [About Amazon (Europe) : Amazon expands A-to-z Guarantee in Europe](https://www.aboutamazon.eu/news/customer-trust/amazon-expands-a-to-z-guarantee-in-europe-to-include-property-damage-and-personal-injury-claims) – Belgique, remboursement par Amazon si le problème n'est pas réglé avec le vendeur
 - [eBay : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/garantie-client-ebay?id=4210) – ce qui est couvert et exclu, affranchissement insuffisant
-- [Vinted : Le colis a été retourné à l'expéditeur](https://www.vinted.fr/help/730) – remboursement intégral
+- [Vinted : Le colis a été retourné à l'expéditeur](https://www.vinted.fr/help/730) – annulation dès la confirmation du retour, remboursement intégral
 - [Vinted : Que faire si ton colis est renvoyé à l'expéditeur ?](https://www.vinted.fr/help/1447) – 14 et 25 jours ouvrés, article à republier
 - [Vinted : Que faire si ton colis a été livré à une mauvaise adresse ?](https://www.vinted.fr/help/1450) – jusqu'à 25 jours ouvrés pour revenir au vendeur
-- [Service-Public.fr : Achat à distance, droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – refuser ne suffit pas, remboursement, coûts de renvoi, majorations
+- [Service-Public.fr : Achat à distance, droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – refuser ne suffit pas, remboursement, coûts de renvoi, majorations ; accusé de réception d'une rétractation faite sur le site (lu le 10 novembre 2026)
 - [Légifrance : Code de la consommation, art. L221-18 et suivants](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069565/LEGISCTA000032221365/2026-10-13) – fonctionnalité de rétractation depuis le 19 juin 2026
 - [SPF Economie : Le droit de rétractation dans les contrats à distance (PDF)](https://economie.fgov.be/sites/default/files/Files/Ventes/Information-droit-retractation-consommateur-vente-a-distance.pdf) – art. VI.47 et suivants : point de départ, formulaire ou déclaration dénuée d'ambiguïté, remboursement, coûts de renvoi
-- [SPF Economie : Un achat impulsif ? Vous pouvez changer d'avis](https://news.economie.fgov.be/270126-un-achat-impulsif-vous-pouvez-changer-d-avis/) – fonction de rétractation en ligne obligatoire depuis le 14 août 2026
+- [SPF Economie : Un achat impulsif ? Vous pouvez changer d'avis](https://news.economie.fgov.be/270126-un-achat-impulsif-vous-pouvez-changer-d-avis/) – fonction de rétractation en ligne obligatoire depuis le 14 août 2026 ; confirmation de la rétractation, pas de bon d'achat imposé (lu le 10 novembre 2026)
 - [ch.ch : Retourner ou échanger des produits](https://www.ch.ch/fr/securite-et-droit/retourner-ou-echanger-des-produits/) – pas de droit de retour légal, CGV
 :::

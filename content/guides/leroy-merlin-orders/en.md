@@ -4,7 +4,7 @@ description: Leroy Merlin has no online shop in the UK or the US. Tracking a ler
 slug: leroy-merlin-order-tracking
 picture: A paint tin and a roller on a stack of wooden planks beside a delivery van, and Pip standing on the planks.
 published: 2026-10-26
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 Leroy Merlin, the DIY and home-improvement chain, doesn't sell in the UK, Ireland, the US, Canada or Australia. In France it sells online at leroymerlin.fr, whose own pages give its delivery options, prices and return conditions. French law makes the seller answer for the delivery it arranges until you have the goods in your hands: it must deliver by the date it gave you, or within 30 days if it gave none, and you can change your mind about most items within 14 days of receiving them.
@@ -97,7 +97,9 @@ Yes, with the carrier's tracking number from the shipping email or your order: p
 
 Mondial Relay's numbers of 8, 10 or 12 digits share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For any other carrier, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
 
-If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns stay with Leroy Merlin or the seller.
+Once the parcel is out for delivery, Peek checks up to every 2 minutes with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers). Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval.
+
+If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier, at the pace of the carrier delivering the parcel. Peek shows what the carrier publishes. Claims, refunds and returns stay with Leroy Merlin or the seller.
 
 :::sources
 - [ADEO: ADEO in the world](https://www.adeo.com/en/adeo-in-the-world/) – ADEO's countries

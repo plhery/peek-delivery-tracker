@@ -4,7 +4,7 @@ description: Où suivre ta commande Leroy Merlin, ce que la loi impose au vendeu
 slug: suivi-commande-leroy-merlin
 picture: Un pot de peinture et un rouleau sur une pile de planches en bois à côté d'une camionnette de livraison, et Pip debout sur les planches.
 published: 2026-10-26
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 Pour suivre ta commande Leroy Merlin, pars de ton espace client sur leroymerlin.fr et des e-mails reçus pour la commande ; les pages du site donnent aussi ses modes de livraison, ses tarifs et ses conditions de retour. La loi rend le vendeur responsable de la livraison qu'il organise jusqu'à ce que tu aies la marchandise en main : il doit livrer à la date annoncée, ou dans les 30 jours s'il n'en a pas donné, et tu peux changer d'avis sur la plupart des articles dans les 14 jours suivant leur réception.
@@ -97,7 +97,9 @@ Oui, avec le numéro de suivi du transporteur, pris dans l'e-mail d'expédition 
 
 Les numéros Mondial Relay de 8, 10 ou 12 chiffres partagent leur forme avec ceux d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour tout autre transporteur, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
 
-Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours se font chez Leroy Merlin ou chez le vendeur.
+Quand le colis est en cours de livraison, Peek vérifie jusqu'à toutes les 2 minutes chez les transporteurs qu'il lit directement, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond). Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long.
+
+Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur, au rythme de celui qui livre le colis. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours se font chez Leroy Merlin ou chez le vendeur.
 
 :::sources
 - [ADEO : La marketplace ADEO](https://www.adeo.com/news/la-marketplace-adeo/) – la Marketplace de Leroy Merlin France, lancée en mai 2020

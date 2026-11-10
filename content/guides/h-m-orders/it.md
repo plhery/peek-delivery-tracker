@@ -4,7 +4,7 @@ description: Dove segui il tuo ordine H&M in Italia, chi lo consegna, quanto cos
 slug: tracciamento-ordine-hm
 picture: Un cappotto su una gruccia appeso a uno stender, una pila di maglioni piegati e un furgone delle consegne, e Pip in piedi sui maglioni.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Segui il tuo ordine H&M in «Ordini», dentro «Il mio H&M», o con il numero d'ordine dell'e-mail di conferma, e il pacco con il link nell'e-mail di spedizione. In Italia H&M lavora con Poste Italiane, InPost, GLS e Paack. Se risulta consegnato ma non ce l'hai, cerca nella cassetta, chiedi ai vicini e poi contatta H&M.
@@ -132,7 +132,9 @@ Sì, con il numero di tracciamento del corriere: incollalo in [Peek](/). Ecco co
 
 Quando più corrieri usano la stessa forma di numero, Peek chiede a quelli probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Per un corriere che questa guida non nomina, come quello di un'altra marca, incolla comunque il numero: Peek segue più di 3.500 corrieri. Se l'ordine arriva in due pacchi, aggiungi tutti e due i numeri.
 
-Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano ad H&M.
+Quando il pacco è in consegna, Peek lo ricontrolla fino a ogni 2 minuti con i corrieri che legge direttamente, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6:00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso). Poste Italiane ha un intervallo più lungo, ogni 30 minuti, e quando rispondono servizi di tracciamento come 17TRACK Peek controlla ogni 15 minuti.
+
+Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere, al ritmo di quello che consegna il pacco. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano ad H&M.
 
 :::sources
 - [H&M Italia: Consegna e spedizione](https://www2.hm.com/it_it/service-clients/shippinganddelivery.html) – Poste Italiane, In Post, GLS e Paack, età e CAP, opzioni, tempi, prezzi, membri sopra i 40 €, Click & Collect, punti di ritiro, indirizzo di fatturazione, H&M HOME, due pacchi, altre marche, pacchi non consegnati, annullare
@@ -142,5 +144,5 @@ Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo pren
 - [H&M Italia: Programma fedeltà](https://www2.hm.com/it_it/member/info.html) – programma fedeltà gratuito
 - [Normattiva: Codice del consumo, art. 61](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art61) – consegna entro 30 giorni, termine supplementare, risoluzione
 - [Normattiva: Codice del consumo, art. 63](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art63) – passaggio del rischio
-- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri e cosa riconosce Peek
+- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri e cosa riconosce Peek, intervallo di 30 minuti di Poste Italiane
 :::

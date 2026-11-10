@@ -4,7 +4,7 @@ description: Wo du deine H&M-Bestellung in Deutschland, Österreich und der Schw
 slug: hm-sendungsverfolgung
 picture: Ein Mantel auf einem Bügel an einer Kleiderstange, ein Stapel gefalteter Pullover und ein Lieferwagen, und Pip steht auf den Pullovern.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Du verfolgst eine H&M-Bestellung über den Link in der Versandbestätigung oder in deinem Kundenkonto: Bestellung öffnen, „Diese Bestellung verfolgen“. In Deutschland liefern DHL und Deutsche Post, für Express DPD; in Österreich DPD, die Österreichische Post oder GLS; in der Schweiz die Post oder Planzer. Zeigt die Sendungsverfolgung „zugestellt“, das Paket ist aber nicht da, frag Haushalt und Nachbarn und melde dich dann bei H&M.
@@ -140,7 +140,9 @@ Ja, mit der Sendungsnummer des Paketdiensts: Füg sie in [Peek](/) ein. So sehen
 
 Peek erkennt diese Nummern allein an ihrer Form. Reine Ziffernfolgen von DPD, GLS oder der Österreichischen Post und manche DHL-Nummern teilen ihre Form mit anderen Paketdiensten: Peek fragt dann die wahrscheinlichen Paketdienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tipp auf „Wählen“; zeigt Peek den falschen, tipp auf „Ändern“ und wähl den richtigen Paketdienst. Eine Instabox-Nummer fügst du ein, tippst auf „Ändern“ und wählst Instabox. Für ein Paket einer anderen Marke, deren Paketdienst H&M nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
-Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den neuen, behält Peek den Verlauf von Anfang an und verfolgt den neuen Paketdienst weiter. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rücksendungen laufen über H&M.
+Sobald ein Paket in Zustellung ist, fragt Peek bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten nach, oder alle 5 Minuten, wenn die Abfrage einen Browser öffnen muss (am Tag der Zustelltour ab 6 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet). Für GLS in Österreich gilt ein längerer Abstand, stündlich, und über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach.
+
+Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den neuen, behält Peek den Verlauf von Anfang an und verfolgt den neuen Paketdienst weiter, im Takt dessen, der das Paket zustellt. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rücksendungen laufen über H&M.
 
 :::sources
 - [H&M Deutschland: Lieferung & Versand](https://www2.hm.com/de_de/customer-service/lieferung.html) – DHL, Deutsche Post, DPD, Instabox, Optionen, Preise, Packstation, Abholfristen, Gebühr für nicht abgeholte Pakete, Sendungsverfolgung, `Versandt`, nicht erhalten, 48 Stunden, fehlende Artikel, Stornieren, Adresse, andere Marken
@@ -153,5 +155,5 @@ Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den neuen, beh�
 - [H&M Schweiz: Lieferung & Versand](https://www2.hm.com/de_ch/customer-service/shippinganddelivery.html) – Swiss Post, Planzer, Optionen, Preise, Abholfristen, Gebühr für nicht abgeholte Pakete, Liechtenstein und Samnaun, Versandbestätigung
 - [H&M Schweiz: Rückgabe](https://www2.hm.com/de_ch/customer-service/returns.html) – 30 Tage, Post, My Post 24/PickPost, CHF 3.95, ab CHF 2.95 für Members, Kundenkonto, mehrere Pakete, Store, Fehllieferungen, Reklamation
 - [H&M Schweiz: Kontakt](https://www2.hm.com/de_ch/customer-service/contact.html) – Telefon, Chat, Zeiten, zugestellt aber nicht erhalten, mehrere Pakete
-- [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Paketdienste, die Peek kennt, und ihre Nummernformen
+- [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Paketdienste, die Peek kennt, und ihre Nummernformen, stündlicher Abstand für GLS in Österreich
 :::

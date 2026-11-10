@@ -3,7 +3,7 @@ title: FAN Courier tracking: AWB numbers, statuses and FANbox
 description: Track a FAN Courier parcel in Romania: where the AWB number comes from, what the tracking statuses mean, FANbox lockers, missed deliveries and contacts.
 slug: fan-courier-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 FAN Courier (legally FAN Courier Express S.R.L.) is a Romanian courier founded in 1998, with more than 3,000 FANbox lockers across the country; it calls itself Romania's courier leader since 2006. Track a parcel with its AWB number on [fancourier.ro's AWB Tracking page](https://www.fancourier.ro/en/awb-track/), with the link in FAN's SMS or in the FAN Courier app. The AWB comes from the shop or person who sent the parcel.
@@ -50,11 +50,11 @@ Each scan has its own wording, such as `Shipment sorted`, or `Shipment taken ove
 
 Standard parcels arrive in 1 to 3 working days from collection, FAN says. Couriers deliver Monday to Friday 9:00 to 17:00, and on Saturday 9:00 to 14:00 only when the sender chose Saturday delivery.
 
-**Not home.** FAN includes two delivery attempts. The courier tries again the next day; with the link in the SMS or in the app you can pick another day, send the parcel to a FANbox or change the address. A new address counts as a new delivery and usually takes 24 to 48 hours, and needs the sender's consent. You can also ask to pick it up at a FAN office, with your ID, a passport or the SMS PIN.
+**Not home.** FAN includes two delivery attempts. The courier tries again the next day; with the link in the SMS or in the app you can pick another day, send the parcel to a FANbox (even the same day, if a locker nearby has room) or change the address. A new address counts as a new delivery and usually takes 24 to 48 hours, and needs the sender's consent. You can also ask to pick it up at a FAN office, with your ID, a passport or the SMS PIN.
 
 If FAN can't deliver, its general conditions say it notifies you and keeps the parcel at a locker or staffed point for 5 calendar days from the notice (its Standard page says up to 7).
 
-**FANbox lockers.** Outdoor lockers open 24/7. The SMS holds a secure link and a four-digit code that shows your PIN; the email and app show the PIN and a QR code to scan at the locker. You have 48 hours from the notification. The FAN Courier app sells extensions of 24, 48 or 72 hours or 5 days, before time runs out, and an automatic extension you switch on once. A parcel sent straight to a FANbox and not picked up goes back to the sender; one redirected there waits at the nearest FAN branch. Cash on delivery is paid by card at the locker, and once the door opens after paying you can't refuse the parcel.
+**FANbox lockers.** Outdoor lockers open 24/7. The SMS holds a secure link and a four-digit code that shows your PIN; the email and app show the PIN and a QR code to scan at the locker. You have 36 hours from the notification; if the locker is out of order when they run out, FAN adds 24 hours free once it works again. The FAN Courier app sells extensions of 24, 48 or 72 hours or 5 days, before time runs out, and an automatic extension you switch on once. A parcel sent straight to a FANbox and not picked up goes back to the sender; one redirected there waits at the nearest FAN branch. Cash on delivery is paid by card at the locker, and once the door opens after paying you can't refuse the parcel.
 
 **Collect Point** (PayPoint Colet Expres shops): prepaid parcels only, up to 10 kg. Bring ID and the 5-character code from the SMS or email; the shop keeps it 7 calendar days.
 
@@ -62,7 +62,7 @@ If FAN can't deliver, its general conditions say it notifies you and keeps the p
 
 ## FAN Courier parcel delayed, lost or damaged
 
-FAN gives no number of days after which to worry. If nothing moves, ask the shop: it holds the contract with FAN and can open a "Delivery Delay" ticket or email FAN with the AWB, contents and value. See [tracking that isn't updating](guide:tracking-not-updating).
+FAN gives no number of days after which to worry. Unless you agreed another date, Romanian law gives an online shop 30 days from the order to deliver, after which you can cancel, ANCOM says. If nothing moves, ask the shop: it holds the contract with FAN and can open a "Delivery Delay" ticket or email FAN with the AWB, contents and value. See [tracking that isn't updating](guide:tracking-not-updating).
 
 **Damaged at the door:** ask the courier for a damage report, then accept or refuse the parcel. Wrong item inside? Contact the sender: FAN doesn't check contents.
 
@@ -70,7 +70,7 @@ FAN gives no number of days after which to worry. If nothing moves, ask the shop
 
 ## FAN Courier contact number and customer service
 
-FAN's channels, as listed on its site on 12 October 2026:
+FAN's channels, as listed on its site on 10 November 2026:
 
 - **Phone** 021.9336 (+40 21 9336 from abroad, a normal-rate number), 0723 55 22 33 or 0742 55 22 33 from Vodafone and Orange, or \*9336. Monday to Friday, 09.00 to 17.00.
 - **Email** customer@fancourier.ro; FANbox problems fanbox@fancourier.ro; Collect Point collectpoint@fancourier.ro; parcels from or to abroad international@fancourier.ro.
@@ -81,9 +81,9 @@ FAN's channels, as listed on its site on 12 October 2026:
 
 ## Tracking FAN Courier parcels with Peek
 
-[Peek](/) asks FAN Courier itself about a 13-digit number starting with `2`, `3`, `4`, `5` or `7`, along with [Delhivery](carrier:delhivery), whose numbers can look the same. If only FAN knows it, you'll see "FAN Courier has this parcel."; if another carrier knows it too, you choose. An AWB of any other shape isn't recognised: paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". A link from FAN's tracking page, Romanian (`/awb-tracking/`) or English (`/en/awb-track/`), with `tracking=` or `awb=`, goes straight to FAN Courier.
+[Peek](/) asks FAN Courier itself about a 13-digit number starting with `2`, `3`, `4`, `5` or `7`, along with [Delhivery](carrier:delhivery), whose numbers can look the same, and Econt when your phone's region or your connection is Bulgarian. If only FAN knows it, you'll see "FAN Courier has this parcel."; if another carrier knows it too, you choose. An AWB of any other shape isn't recognised: paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". A link from FAN's tracking page, Romanian (`/awb-tracking/`) or English (`/en/awb-track/`), with `tracking=` or `awb=` or with a 13-digit AWB after `/awb-tracking/`, goes straight to FAN Courier.
 
-Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes, or every 2 from 6 a.m. Romanian time on the day FAN scans the parcel out for delivery, while FAN's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time and shows them in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes, or every 2 from 6 a.m. Romanian time on the day FAN scans the parcel out for delivery, while FAN's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 It shows no expected delivery day and no FANbox name, and leaves out the recipient's name, contents, weight and payment details. A return travels under its own AWB, so this one never shows as returned.
 
@@ -99,7 +99,7 @@ Like any FAN parcel: with its AWB on FAN's tracker or in the app, or with FAN's 
 
 ### Is FAN Courier international?
 
-Yes: FAN offers road transport to most EU countries and air transport worldwide, and has offices in Moldova. Its conditions allow up to 12 working days within the EU and EEA, 14 elsewhere.
+Yes: FAN offers road transport to most EU countries and air transport worldwide, and has offices in Moldova. Its conditions allow up to 12 working days within the EU and EEA, 14 elsewhere. If the sender shows as MEEST, the parcel most likely comes from China, FAN says: [Meest](carrier:meest) is a logistics firm that handles shipments, mainly from China.
 
 ### Does FAN Courier deliver on Saturday?
 
@@ -113,15 +113,15 @@ Not on FAN's tracker, which needs the AWB or a reference. Ask the shop, open FAN
 - [FAN Courier: AWB Tracking](https://www.fancourier.ro/en/awb-track/) – form, messages, status labels, fraud warning
 - [FAN Courier: Tracking AWB](https://www.fancourier.ro/awb-tracking/) – Romanian labels, language switch, FANbox and Collect Point messages
 - [FAN Courier: tracking lookup](https://www.fancourier.ro/limit-tracking.php) – scan wordings in English and Romanian
-- [FAN Courier: tracking page script](https://www.fancourier.ro/wp-content/themes/fancourier/dist/tracking-DzhR4qcq.js) – milestones, status line, hidden steps, return AWB
-- [FAN Courier: F.A.Q.](https://www.fancourier.ro/en/faq/) – AWB, pickup order, SMS, redirection, PIN, payment, damage, FANbox, Collect Point, locations, emails
+- [FAN Courier: tracking page script](https://www.fancourier.ro/wp-content/themes/fancourier/dist/tracking-DIhaHmX7.js) – milestones, status line, hidden steps, return AWB
+- [FAN Courier: F.A.Q.](https://www.fancourier.ro/en/faq/) – AWB, pickup order, SMS, redirection, same-day FANbox, PIN, payment, damage, MEEST, FANbox, Collect Point, locations, emails
 - [FAN Courier: F.A.Q. (Romanian)](https://www.fancourier.ro/f-a-q/) – Collect Point 7 days
 - [FAN Courier: Contact](https://www.fancourier.ro/en/contact-us/) – phones, hours, email, ȘteFAN
 - [FAN Courier: Contact (Romanian)](https://www.fancourier.ro/contact/) – normal-rate call
 - [FAN Courier: Standard](https://www.fancourier.ro/standard/) – 1 to 3 days, hours, Saturday, two attempts, 7 days
 - [FAN Courier: FANbox](https://www.fancourier.ro/en/services/fanbox-service/) – 24/7, card payment, locker map
 - [FAN Courier: FAN locations](https://www.fancourier.ro/en/fan-locations/) – offices, FANboxes, Collect Points
-- [FAN Courier: Terms and Conditions for the use of FANbox lockers](https://www.fancourier.ro/en/terms-and-conditions-for-the-use-of-fanbox-lockers/) – 30 days to drop off, code, PIN, 48 hours, extensions, uncollected parcels, ANCOM
+- [FAN Courier: Terms and Conditions for the use of FANbox lockers](https://www.fancourier.ro/en/terms-and-conditions-for-the-use-of-fanbox-lockers/) – 30 days to drop off, code, PIN, 36 hours, extensions, 24 hours if out of order, uncollected parcels, ANCOM
 - [FAN Courier: Collect Point](https://www.fancourier.ro/collect-point-service/) – PayPoint shops, limits, code
 - [FAN Courier: General Conditions Regarding The Provision Of Postal Services](https://www.fancourier.ro/en/general-conditions-regarding-the-provision-of-postal-services/) – FAN Courier Express S.R.L., times, 5-day holding, complaints, compensation to the sender, regulator or court within a year
 - [FAN Courier: Condiții generale](https://www.fancourier.ro/conditii-generale-privind-furnizarea-serviciilor-postale/) – refusals, deadlines
@@ -132,7 +132,7 @@ Not on FAN's tracker, which needs the AWB or a reference. Ask the shop, open FAN
 - [FAN Courier: FAN Courier app](https://www.fancourier.ro/en/app/) – 3,000+ lockers, login, automatic extension
 - [FAN Courier: Discover the FAN Courier Mobile App](https://www.fancourier.ro/en/discover-the-fan-courier-mobile-app/) – tracking without an account
 - [FAN Courier: Terms of use of the FAN Courier Mobile App](https://www.fancourier.ro/en/terms-of-use-of-the-fan-courier-mobile-app/) – AWB, account by phone number, registered orders, Locations
-- [ANCOM: Comanzi online? Ce obligatii au cei care iti livreaza colete?](https://www.ancom.ro/despre-noi/media/comunicate-de-presa/comanzi-online-63-ce-obligatii-au-cei-care-iti-livreaza-colete-63/) – what ANCOM can and can't do about a courier
+- [ANCOM: Comanzi online? Ce obligatii au cei care iti livreaza colete?](https://www.ancom.ro/despre-noi/media/comunicate-de-presa/comanzi-online-63-ce-obligatii-au-cei-care-iti-livreaza-colete-63/) – 30 days to deliver, what ANCOM can and can't do about a courier
 - [Cargus: Track your parcel](https://www.cargus.ro/en/personal/track-your-parcel/) – Cargus's numbers are AWBs
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

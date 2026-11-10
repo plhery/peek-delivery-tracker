@@ -58,7 +58,7 @@ Usually, once it's back with the seller. Marketplaces have their own rules:
 
 - **Amazon** orders can't be cancelled once shipped, but you can refuse the delivery, says Amazon UK; Amazon Australia gives a refund or replacement for a refused parcel it fulfilled. For a third-party seller, contact the seller first: on Amazon UK, if you want a refund and it hasn't answered within 48 hours, most orders are covered by the A-to-z Guarantee, and you claim from Amazon directly.
 - **eBay**'s Money Back Guarantee refunds an item that never reached your checkout address, postage included, but not if you gave a wrong address, refused it (unless the postage was underpaid) or didn't pay import charges.
-- **Vinted** cancels the order once the parcel is on its way back and issues "a full refund (including the item’s price, shipping cost and Vinted fees)". If the seller doesn't mark it received within 14 business days, the refund starts on its own; still nothing after 25 business days, contact Vinted.
+- **Vinted** cancels the order once it has confirmation the parcel is on its way back to the seller and issues "a full refund (including the item’s price, shipping cost and Vinted fees)". If the seller doesn't mark it received within 14 business days, the refund starts on its own; still nothing after 25 business days, contact Vinted.
 
 From an ordinary online shop, the law where you live decides:
 
@@ -134,7 +134,7 @@ DHL says a return after a refusal can't be stopped, so ask the shop to send it a
 - [About Amazon Australia: How to cancel Amazon orders](https://www.aboutamazon.com.au/news/shopping/how-to-cancel-your-order-on-amazon-australia) – refused parcel, refund or replacement (2023)
 - [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – 48 hours, A-to-z Guarantee
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – what is covered
-- [Vinted: Parcel was sent back to sender](https://www.vinted.co.uk/help/730) – full refund
+- [Vinted: Parcel was sent back to sender](https://www.vinted.co.uk/help/730) – cancellation once Vinted has confirmation of the return, full refund
 - [Vinted: My parcel is returning to the sender](https://www.vinted.co.uk/help/1447) – 14 and 25 business days
 - [Vinted: My parcel went to the wrong address](https://www.vinted.co.uk/help/1450) – 25 business days
 - [legislation.gov.uk: Consumer Contracts Regulations, reg. 32](https://www.legislation.gov.uk/uksi/2013/3134/regulation/32) – clear statement

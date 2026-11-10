@@ -3,7 +3,7 @@ title: Jifan tracking: JFGJ numbers, scans and Beijing time
 description: Track a Jifan (吉凡国际物流) parcel from China to the US: what a JFGJ…CN number looks like, what the tracker's lines mean, and why every time on it is Beijing time.
 slug: jifan-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-10
 ---
 
 Jifan is Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流 for short), a logistics company in Shenzhen, China, founded in 2017. It ships parcels from businesses in China to buyers in the United States, by air and by sea. Its tracking numbers are JFGJ, nine digits and CN. Look yours up on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track), or paste it in the box above. The seller gives you the number with your order's shipping details.
@@ -18,7 +18,7 @@ Jifan's site doesn't describe its numbers, but they have one fixed shape. JFGJ i
 | `JFGJ00000000CN` | Only eight digits: not Jifan's shape, and Peek doesn't name Jifan. Check for a missing digit. |
 | `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Jifan's, despite the same CN ending. |
 
-In Peek, lower case, spaces and dashes don't matter. On Jifan's tracker, type the number in capital letters, without spaces.
+On peektracker.com, a JFGJ…CN number one digit short gets a note: "This starts like a Jifan tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." In Peek, lower case, spaces and dashes don't matter. On Jifan's tracker, type the number in capital letters, without spaces.
 
 **Where to find it.** In the seller's shipping email, or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
@@ -81,9 +81,10 @@ Jifan's customers are the businesses that send parcels with it, not you. For a l
 
 ## Jifan contact
 
-As read on 1 November 2026 on Jifan's [home page](https://www.szjf56.cn/), in the 联系我们 (contact us) section:
+As read on 10 November 2026 on Jifan's [home page](https://www.szjf56.cn/), in the 联系我们 (contact us) section:
 
 - **Hotline**: 400-186-0001, for enquiries (咨询电话), a Chinese service number. Jifan gives no opening hours and doesn't say whether it answers from abroad or in English.
+- **Email**: 925930140@qq.com, a QQ Mail address. Jifan doesn't say who reads it or in which language.
 - **Office**: Nanwan, Longgang District, Shenzhen.
 
 The page is in Chinese only, with no contact form, chat or help for recipients. About your order, contact the seller first.
@@ -94,13 +95,13 @@ The page is in Chinese only, with no contact form, chat or help for recipients. 
 
 For any other number the seller gave you, paste it all the same: Peek follows more than 3,500 carriers. If the number's shape doesn't name one, Peek asks tracking services, as you add it or just after. If they don't name the carrier, tap "Change" and pick the one the seller names, or use "Change carrier" on a parcel you've already added. Peek reads Jifan's tracker only for JFGJ numbers: if you pick Jifan for another number, the carrier line says Jifan "doesn’t issue numbers like this one".
 
-Peek reads the parcel from Jifan's tracker: its status, every line in the tracker's English, and the country it's going to. When a line in the US starts with a town and state, Peek makes them the scan's place and drops the ZIP code. Each time is read as Beijing time and shown in your device's time zone.
+Peek reads the parcel from Jifan's tracker: its status, every line in the tracker's English, and the country it's going to. When a line in the US starts with a town and state, Peek makes them the scan's place and drops the ZIP code. Each time is read as Beijing time and shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
 
 Peek's status follows the newest line it understands, and the summary status (`运输途中`) only when it understands none. A line Peek doesn't know is read by its words.
 
 Jifan's tracker shows no delivery date, weight, service name, delivering company or second number, so Peek has none either. It keeps following the JFGJ number on Jifan's tracker to the end.
 
-Peek checks every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
+Peek checks every 10 minutes. On the day a line says the parcel is out for delivery, it checks every 2 minutes while Jifan's tracker answers, from 6 a.m. to midnight Beijing time (in the US, that day ends in the morning); through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
 
 ## Questions about Jifan tracking
 
@@ -125,7 +126,7 @@ It's Chinese for "can't be found": no parcel on Jifan's tracker matches what you
 Jifan's site gives about 8 to 10 calendar days for its US air parcels, about 10 to 12 for its economy small parcels, about 20 to 25 for its Matson sea parcels, and about 25 to 40 for oversize freight. The seller's estimate for your order is the one to go by.
 
 :::sources
-- [Jifan: 深圳市吉凡国际物流有限公司 (home page)](https://www.szjf56.cn/) – company name, founded 2017, US lines only, weights and sizes, UPS and UPS Ground delivery, Matson and COSCO, areas served, calendar days, one waybill, compensation promise to its customers, hotline, office district
+- [Jifan: 深圳市吉凡国际物流有限公司 (home page)](https://www.szjf56.cn/) – company name, founded 2017, US lines only, weights and sizes, UPS and UPS Ground delivery, Matson and COSCO, areas served, calendar days, one waybill, compensation promise to its customers, hotline, email, office district
 - [Jifan: 快件跟踪 (tracking)](https://www.szjf56.cn/index/tracknumber/track) – Chinese tracker powered by 吉凡物流, Track button, result columns, parcels from the last two months, 20 numbers at a time
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JFGJ number shape and initials, tracker link, CTTYEX's system, summary statuses and English lines, Jifan's steps in China, its agent and the delivering company abroad, Beijing time, towns, states and ZIP codes, what Peek shows and leaves out
 :::

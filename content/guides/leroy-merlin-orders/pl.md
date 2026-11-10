@@ -4,7 +4,7 @@ description: Kto dostarcza zamówienie z leroymerlin.pl, gdzie sprawdzić jego s
 slug: sledzenie-zamowienia-leroy-merlin
 picture: Puszka farby i wałek na stosie drewnianych desek obok samochodu dostawczego, a na deskach stoi Pip.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Leroy Merlin sprzedaje w Polsce przez internet w sklepie leroymerlin.pl. Paczki wysyła przez firmy kurierskie DHL, DPD, Raben, Rhenus i Geis, a kuriera dobiera do wymiarów paczki. Odbiór w sklepie jest bezpłatny, zwykle w ciągu około 2 godzin od potwierdzenia płatności, a w wybranych sklepach także w Szybkomacie 24/7. Status zamówienia sprawdzisz w sekcji „Zamówienia” na swoim koncie. Jeśli paczka od kuriera jest uszkodzona, nie przyjmuj jej.
@@ -116,7 +116,9 @@ Tak: wklej do [Peek](/) numer przesyłki od przewoźnika albo numer śledzenia o
 
 Numery DHL i Rabena mają taki sam kształt jak numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika. Dla Rhenus, Geis albo przewoźnika wybranego przez sprzedawcę Marketplace i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
 
-Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z Leroy Merlin albo ze sprzedawcą.
+Gdy paczka jest wydana do doręczenia, Peek sprawdza ją nawet co 2 minuty u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp, wśród nich DHL eCommerce w Polsce: co godzinę.
+
+Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika, w tempie tego, który ją doręcza. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z Leroy Merlin albo ze sprzedawcą.
 
 :::sources
 - [ADEO: Home](https://www.adeo.com/en/) – Leroy Merlin jako marka ADEO
@@ -134,5 +136,5 @@ Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmu
 - [Leroy Merlin Polska: Kontakt](https://www.leroymerlin.pl/kontakt) – formularz, infolinia i godziny
 - [Leroy Merlin Polska: Regulamin sklepu internetowego](https://www.leroymerlin.pl/regulamin.html) – potwierdzenie zamówienia, 21 dni roboczych, sposoby dostawy, do lokalu, protokół szkody, odbiór w sklepie, odstąpienie, zwrot pieniędzy, reklamacje, niezgodność z umową
 - [Leroy Merlin Polska: Regulamin Marketplace](https://www.leroymerlin.pl/regulamin-marketplace.html) – dostawa sprzedawcy, numer śledzenia, opóźnienie, odstąpienie, koszty zwrotu, rola operatora
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy rozpoznawani przez Peek
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy rozpoznawani przez Peek, godzinny odstęp DHL eCommerce w Polsce
 :::

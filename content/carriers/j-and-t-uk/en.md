@@ -3,7 +3,7 @@ title: J&T Express UK tracking: JTUK numbers and statuses
 description: Track a J&T Express UK parcel: what a JTUK number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-uk-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-10
 ---
 
 J&T Express UK delivers parcels in the United Kingdom. If a shop sent your order with J&T, the tracking number starts with `JTUK`: paste it in the box above, or look it up on J&T's own tracker at www.jtexpress.uk/tracking. The shop that sent your order has the number, in its shipping email or on your order page. Peek couldn't read J&T Express UK's website, so this page rests on what Peek's code knows about J&T's tracker and on official UK sources.
@@ -21,7 +21,7 @@ J&T Express UK's waybill is `JTUK` followed by 12 digits, 16 characters in all. 
 | `JTE000000000000` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east). |
 | `JT0000000000000` | `JT` and 13 digits: J&T's networks in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). |
 
-Spaces, dashes and lower case don't matter in Peek: `jtuk 0000 0000 0000` reads the same as the first line. Peek's catalog also knows the carrier as J&T Express (UK), J&T Express UK Ltd and J&T UK.
+On peektracker.com, a `JTUK` number one digit short or over gets a note, such as "This starts like a J&T Express UK tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." Spaces, dashes and lower case don't matter in Peek: `jtuk 0000 0000 0000` reads the same as the first line. Peek's catalog also knows the carrier as J&T Express (UK), J&T Express UK Ltd and J&T UK.
 
 **Where to find it.** In the shop's shipping email, on the order page of the shop or marketplace, or in any message about the delivery. If you can't find it, see [how to find your tracking number](guide:find-tracking-number), or ask the shop.
 
@@ -70,7 +70,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 ## J&T Express UK customer service and contact
 
-As of 2 November 2026, Peek couldn't read J&T Express UK's website, so this page lists no phone number, email or chat: Peek gives only contacts read on a carrier's own pages.
+As of 10 November 2026, Peek couldn't read J&T Express UK's website, so this page lists no phone number, email or chat: Peek gives only contacts read on a carrier's own pages. Companies House lists its registered office as c/o TMF Group, 13th Floor, One Angel Court, London EC2R 7HJ: the company's legal address, in another firm's care, not a parcel desk.
 
 Start with the shop: it booked the delivery with J&T. For a marketplace order, use the help on the order's page. J&T's own tracker is at www.jtexpress.uk/tracking.
 
@@ -78,7 +78,7 @@ Start with the shop: it booked the delivery with J&T. For a marketplace order, u
 
 [Peek](/) names J&T Express UK at once from a `JTUK` number ("Detected carrier") and asks J&T's own tracker with the number alone: no postcode or account. A www.jtexpress.uk/tracking link with `?q=` and the number works too; with another kind of number in it, Peek reads that number as if you had pasted it alone. If what you have isn't a `JTUK` number, paste it all the same: Peek follows more than 3,500 carriers. For a `JT` number with 13 digits, Peek shows "Checking tracking services…" while it checks the number. Picking J&T Express UK with "Change" for another shape doesn't help: Peek says it "doesn’t issue numbers like this one".
 
-Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows them in your device's time zone, in summer as in winter. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. J&T's tracker can show proof of delivery; Peek leaves it out. On a very long history it keeps the newest 100 scans. "Open the J&T Express UK website", on the parcel's page, opens your number on J&T's tracker.
+Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows them in your device's time zone, in summer as in winter; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. J&T's tracker can show proof of delivery; Peek leaves it out. On a very long history it keeps the newest 100 scans. "Open the J&T Express UK website", on the parcel's page, opens your number on J&T's tracker.
 
 Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
@@ -109,7 +109,7 @@ Ask the shop first: it booked the delivery. Peek couldn't read J&T Express UK's 
 :::sources
 - [Universal Parcel Scraper: J&T Express UK](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-uk) – names, the JTUK shape, tracking links, the tracker's sentences and their stages, the delivery round and address scans, exact scan times, no place, expected day or weight, proof of delivery left out, newest 100 scans
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – other J&T networks' shapes, customer service lines, bracketed text, names and phone numbers left out (J&T's shared lookup), no hand-over to another carrier, tracking services as a fallback
-- [Companies House: J&T EXPRESS UK LTD](https://find-and-update.company-information.service.gov.uk/company/16920174) – active private limited company, incorporated 18 December 2025, nature of business
+- [Companies House: J&T EXPRESS UK LTD](https://find-and-update.company-information.service.gov.uk/company/16920174) – active private limited company, incorporated 18 December 2025, nature of business, registered office
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill from the delivery company, held about 3 weeks, VAT at £135 or less and above, Customs Duty, Northern Ireland
 - [UK legislation: Consumer Rights Act 2015, section 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) – goods at the trader's risk until in the consumer's physical possession
 :::

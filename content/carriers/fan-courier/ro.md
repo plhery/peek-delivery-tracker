@@ -56,7 +56,7 @@ Dacă nu ești găsit la adresă sau nu ridici coletul la timp, condițiile gene
 
 **FANbox.** Lockerele din spații deschise sunt accesibile 24 de ore din 24, 7 zile din 7; cele din spații cu program limitat, doar în programul acestora. Când coletul ajunge, primești un SMS și, dacă FAN are datele tale, un email și o notificare în aplicație. SMS-ul are un link securizat și un cod de patru cifre: intri în link, introduci codul și vezi PIN-ul. În email și în aplicație ai direct PIN-ul și un cod QR. La locker scanezi codul QR sau introduci PIN-ul pe tabletă.
 
-Ai 48 de ore de la notificare, fără cost. Condițiile FANbox spun că, înainte să expire termenul, poți cumpăra din aplicația FAN Courier o prelungire de 24, 48 sau 72 de ore ori de 5 zile. Un colet trimis direct la FANbox și neridicat se întoarce la expeditor. Unul pe care l-ai redirecționat tu la FANbox ajunge, după termen, la cel mai apropiat sediu FAN și stă acolo până la termenul de retur. La locker plătești doar cu cardul, iar după ce ai plătit și s-a deschis caseta nu mai poți refuza coletul. Dacă nu se deschide caseta, sună la 021.9336 sau scrie la fanbox@fancourier.ro.
+Ai 36 de ore de la notificare, fără cost. Condițiile FANbox spun că, înainte să expire termenul, poți cumpăra din aplicația FAN Courier o prelungire de 24, 48 sau 72 de ore ori de 5 zile. Un colet trimis direct la FANbox și neridicat se întoarce la expeditor. Unul pe care l-ai redirecționat tu la FANbox ajunge, după termen, la cel mai apropiat sediu FAN și stă acolo până la termenul de retur. La locker plătești doar cu cardul, iar după ce ai plătit și s-a deschis caseta nu mai poți refuza coletul. Dacă nu se deschide caseta, sună la 021.9336 sau scrie la fanbox@fancourier.ro.
 
 **Collect Point.** Sunt magazine din rețeaua PayPoint, doar pentru colete deja plătite, de până la 10 kg. Primești prin SMS sau email un cod unic de 5 caractere și adresa magazinului. Mergi cu codul și cu cartea de identitate: fără ele nu primești coletul. Altcineva îl poate ridica în locul tău dacă îi dai codul și vine cu propria carte de identitate. Ai 7 zile calendaristice, apoi coletul se întoarce la expeditor.
 
@@ -101,7 +101,7 @@ Pe site-ul FAN nu poți: trackerul cere AWB-ul sau o referință. Cere AWB-ul ma
 
 ### Cât timp stă coletul în FANbox?
 
-48 de ore de la notificare. Înainte de termen, poți cumpăra din aplicația FAN Courier o prelungire de 24, 48 sau 72 de ore ori de 5 zile.
+36 de ore de la notificare. Înainte de termen, poți cumpăra din aplicația FAN Courier o prelungire de 24, 48 sau 72 de ore ori de 5 zile.
 
 ### Livrează FAN Courier sâmbăta?
 
@@ -121,7 +121,7 @@ Cu serviciul Standard, între o zi și 3 zile lucrătoare de la preluarea coletu
 - [FAN Courier: Contact](https://www.fancourier.ro/contact/) – telefoane, program, email, ȘteFAN
 - [FAN Courier: Standard](https://www.fancourier.ro/standard/) – 1–3 zile lucrătoare, program de livrare, sâmbăta, perioade aglomerate, două încercări, 7 zile
 - [FAN Courier: Condiții generale privind furnizarea serviciilor poștale](https://www.fancourier.ro/conditii-generale-privind-furnizarea-serviciilor-postale/) – 5 zile de păstrare, termene internaționale, reclamații, termene, despăgubirea expeditorului, plângerea la autoritatea de reglementare sau în instanță
-- [FAN Courier: Termeni și Condiții de utilizare a lockerelor FANbox](https://www.fancourier.ro/termeni-si-conditii-de-utilizare-a-lockerelor-fanbox/) – acces, notificări, cod din SMS, PIN și QR, 48 de ore, prelungiri din aplicație, colete neridicate, plata cu cardul, redirecționarea la adresă, ANCOM
+- [FAN Courier: Termeni și Condiții de utilizare a lockerelor FANbox](https://www.fancourier.ro/termeni-si-conditii-de-utilizare-a-lockerelor-fanbox/) – acces, notificări, cod din SMS, PIN și QR, 36 de ore, prelungiri din aplicație, colete neridicate, plata cu cardul, redirecționarea la adresă, ANCOM
 - [FAN Courier: Collect Point prin rețeaua PayPoint](https://www.fancourier.ro/collect-point-service/) – magazine PayPoint, limite, cod unic, carte de identitate, împuternicire, 7 zile
 - [FAN Courier: FAN Courier ajunge la 3000 de lockere FANbox](https://www.fancourier.ro/fan-courier-ajunge-la-3000-de-lockere-fanbox-si-accelereaza-extinderea-livrarilor-out-of-home/) – 3.000 de lockere în iunie 2026
 - [FAN Courier: Despre FAN](https://www.fancourier.ro/despre-fan/) – lider din 2006

@@ -3,7 +3,7 @@ title: Evri tracking: statuses, ParcelShops and missed deliveries
 description: Track an Evri parcel in the UK: where to find the 16-character number, what Evri's statuses mean, calling cards, ParcelShops, lockers and how to reach Evri.
 slug: evri-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Evri is the UK parcel carrier known as Hermes UK until March 2022. Track a parcel on [evri.com](https://www.evri.com/track-a-parcel) with its 16-character tracking number or a calling card's 8-digit number, or paste the barcode or Evri's tracking link in the box above. The sender usually emails you the number; Evri's texts and emails carry it too.
@@ -52,29 +52,29 @@ If your tracking mentions an `Evri gateway`, the parcel came from abroad: Evri h
 
 **No tracking yet** just means Evri hasn't received the parcel. If `We're expecting it` doesn't move, ask the sender; for any other status unchanged for 24 hours, start a chat. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Still waiting** after 7 days with Evri? Tell the sender, who holds the contract and contacts Evri. If you bought from a business, Citizens Advice says delivery is the seller's responsibility.
+**Still waiting** after 7 days with Evri? Tell the sender, who holds the contract and contacts Evri. If you bought from a business, Citizens Advice says delivery is the seller's responsibility: the seller, not you, should chase the courier.
 
-**Delivered but not there.** Ask your household and neighbours, then start a chat so your local depot can investigate. More in [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** Ask your household and neighbours, then start a chat so your local depot can investigate. If the parcel was left somewhere you hadn't agreed to, Citizens Advice says sorting it out is the seller's legal responsibility. More in [delivered but not received](guide:delivered-not-received).
 
 **Damaged or lost.** Ask the sender for a refund or replacement: Evri can't give either, and [only the sender can claim](guide:damaged-parcel). Evri recommends senders claim within 28 days of the order for UK services, 45 for international.
 
 ## Evri contact number and customer service
 
-Evri lists these UK channels (read 10 October 2026), and none for Ireland or elsewhere:
+Evri lists these UK channels (read 10 November 2026), and none for Ireland or elsewhere:
 
 - **Chat** 24/7 on [evri.com/contact-us](https://www.evri.com/contact-us), with a reply in 24 hours or less.
-- **Phone** 0330 808 5456, open 24/7, with advisors Monday to Friday 8am to 4pm and Saturday 8am to 2pm (other Evri pages differ). Call from the number linked to the parcel, or key in the tracking number's last 8 digits or the calling card number. GOV.UK says 03 numbers cost about the same as 01 and 02 numbers.
+- **Phone** 0330 808 5456, open 24/7, with advisors Monday to Friday 8am to 4pm and Saturday 8am to 2pm (other Evri pages differ). Call from the number linked to the parcel, or key in the tracking number's last 8 digits, the 7 digits after the P on a ParcelShop receipt, or the calling card number. GOV.UK says 03 numbers cost about the same as 01 and 02 numbers.
 - **Tell us straight:** if Customer Services couldn't help, email noreply.priority@evri.com with that subject to reach Evri's senior team.
 
 > Evri's emails typically come from @evri.com, @hermes-europe.co.uk or @myhermes.co.uk; its full list adds @custhelp.com, @globalco.uk, @globaleco.app and sub-domains of all six. Its texts come only from "Evri", never a mobile number, never ask you to reschedule a delivery, pay to do so or install an app, and link only to `evri.link` tracking, which Evri says can still be faked. Forward a suspect text to 7726 for free. More in [parcel scam texts](guide:delivery-scam-texts).
 
 ## Tracking an Evri parcel with Peek
 
-[Peek](/) asks both Evri UK and Evri International about a typed barcode whose check digit adds up, as they use the same shape, and names the one that holds the parcel; for `H` and 15 digits it asks Hermes Germany too. If neither knows it yet, press "Change" and pick "Evri UK" under "Fits this number" (the "Evri" listed first is Evri International), or paste the `evri.com/track/parcel/…/details` link from Evri's page or email, which Peek reads as Evri UK at once. For 16 digits it asks Evri UK along with other carriers when the last digit checks out, and only the others when it doesn't. No postcode needed, but Peek can't track calling card numbers.
+[Peek](/) asks both Evri UK and Evri International about a typed barcode whose check digit adds up, as they use the same shape, and names the one that holds the parcel; for `H` and 15 digits it asks Hermes Germany too. If neither knows it yet, press "Change" and pick "Evri UK" under "Fits this number" (the plain "Evri" is Evri International), or paste the `evri.com/track/parcel/…/details` link from Evri's page or email, which Peek reads as Evri UK at once. For 16 digits it asks Evri UK along with other carriers when the last digit checks out, and only the others when it doesn't. A `C00HHA` number with ten digits goes to Evri UK alone. No postcode needed, but Peek can't track calling card numbers.
 
-You see the status, the history, the sender's name when it's a business and, while out for delivery, Evri's window in UK time; no earlier date. Evri gives no scan places, so the map stays empty. A courier delivery shows as "Delivered", without where it was left. Any other scan naming the recipient reads "Delivery update", and the rest keep Evri's own sentence, not the headlines above. A parcel waiting at a ParcelShop or Locker shows as "Ready for pickup", and one collected from a ParcelShop as "Delivered". Your name, address, the delivery photo and collection codes are dropped.
+You see the status, the history, the sender's name when it's a business and, while out for delivery, Evri's window in UK time; no earlier date. Evri gives no scan places, so the map stays empty. A courier delivery shows as "Delivered", without where it was left. Any other scan naming the recipient reads "Delivery update", and the rest keep Evri's own sentence, not the headlines above. A parcel waiting at a ParcelShop or Locker shows as "Ready for pickup", and one collected from a ParcelShop as "Delivered". Your name, address, the delivery photo and collection codes are dropped. Scan times show in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
 
-Peek checks every 10 minutes, or every 2 once out for delivery (every 5 when it has to open Evri's tracker in a browser), and can notify you of every scan, important steps only or delivery day only. The faster checks run on the day Evri scans the parcel out for delivery, from 6 a.m. UK time (once Evri sends its window, from half an hour before it opens), and only while Evri's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers.
+Peek checks every 10 minutes, or every 2 once out for delivery (every 5 when it has to open Evri's tracker in a browser), and can notify you of "Every scan", "Important steps" or "Delivery only". The faster checks run on the day Evri scans the parcel out for delivery, from 6 a.m. UK time (once Evri sends its window, from half an hour before it opens), and only while Evri's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers.
 
 ## Questions about Evri tracking
 
@@ -84,7 +84,7 @@ Yes: Evri is the former Hermes UK, renamed in March 2022. Hermes in Germany is a
 
 ### Is Evri part of DHL or Royal Mail?
 
-Neither. In the deal the UK competition authority cleared in September 2025, Evri, then owned by funds managed by Apollo, was to buy DHL eCommerce UK from DHL Group, and DHL Group was to take a minority stake in Evri. Evri completed the merger on 1 October 2025, forming the Evri Group, and said DHL eCommerce UK would be renamed Evri Premium, a network of DHL, in 2026 and stay a separate network. Evri's tracker asks for a 16-digit tracking number or an 8-digit calling card number and says nothing about DHL parcels: for those, see [DHL eCommerce UK tracking](carrier:dhl-ecommerce-uk).
+Neither. In the deal the UK competition authority cleared in September 2025, Evri, then owned by funds managed by Apollo, was to buy DHL eCommerce UK from DHL Group, and DHL Group was to take a minority stake in Evri. Evri completed the merger on 1 October 2025, forming the Evri Group, and said DHL eCommerce UK would be renamed Evri Premium, a network of DHL, in 2026 and stay a separate network; Evri's site now offers Evri Premium for high-value and larger parcels. Evri's tracker asks for a 16-digit tracking number or an 8-digit calling card number and says nothing about DHL parcels: for those, see [DHL eCommerce UK tracking](carrier:dhl-ecommerce-uk).
 
 ### Is an email from noreply.priority@evri.com genuine?
 
@@ -118,7 +118,7 @@ No. Evri asks for the tracking or calling card number; the postcode comes on top
 - [Evri: Is this Evri text/email genuine?](https://www.evri.com/faqs/receiving-a-parcel/is-this-evri-text-email-genuine) – email domains, misspelt addresses, don't respond
 - [Evri: Has the retailer received my return?](https://www.evri.com/faqs/returning-a-parcel/how-will-i-know-the-retailer-has-received-my-return) – last line
 - [Evri: Claims](https://www.evri.com/faqs/account/how-do-i-submit-a-claim-for-a-lost-or-damaged-parcel) – sender claims
-- [Evri: Contact us](https://www.evri.com/contact-us) – chat, phone, Tell us straight address and replies
+- [Evri: Contact us](https://www.evri.com/contact-us) – chat, phone, ParcelShop receipt number, Tell us straight address and replies
 - [Evri: Complaints process](https://www.evri.com/complaints-procedure) – sender acts
 - [Evri: Home](https://www.evri.com/) – 1-hour slot, attempts
 - [Evri: Safe place guide](https://www.evri.com/guides/safe-place) – safe place, attempts
@@ -133,8 +133,9 @@ No. Evri asks for the tracking or calling card number; the postcode comes on top
 - [Evri: Terms and conditions](https://www.evri.com/terms-and-conditions) – return, claims
 - [Evri: About us](https://www.evri.com/about-us) – former Hermes UK
 - [Evri: Introducing the Evri Group](https://www.evri.com/press/introducing-the-evri-group-the-uks-premier-parcel-delivery-company) – merger completed 1 October 2025, Evri Premium kept separate
+- [Evri: Evri Premium, a network of DHL](https://www.evri.com/our-services/evri-premium-dhl) – separate premium network for high-value and larger parcels (read 10 November 2026)
 - [GOV.UK: EVRi / DHL merger inquiry](https://www.gov.uk/cma-cases/evri-slash-dhl-merger-inquiry) – Apollo, DHL Group's minority stake, clearance
 - [GOV.UK: Call charges](https://www.gov.uk/call-charges) – 03 numbers
-- [Citizens Advice: Something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – seller's responsibility
+- [Citizens Advice: Something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – seller's responsibility, seller chases the courier, delivery to a place you didn't agree
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

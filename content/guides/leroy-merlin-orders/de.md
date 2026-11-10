@@ -4,7 +4,7 @@ description: Leroy Merlin hat keinen Onlineshop in Deutschland, Österreich oder
 slug: leroy-merlin-bestellung-verfolgen
 picture: Eine Farbdose und eine Farbrolle auf einem Stapel Holzbretter neben einem Lieferwagen, und Pip steht auf den Brettern.
 published: 2026-10-26
-updated: 2026-10-28
+updated: 2026-11-10
 ---
 
 Leroy Merlin, die Baumarktkette, verkauft nicht in Deutschland, Österreich oder der Schweiz. In Frankreich verkauft sie online über leroymerlin.fr; Versandarten, Preise und Rückgabebedingungen stehen dort auf ihren eigenen Seiten. Nach französischem Recht haftet der Verkäufer für die Lieferung, die er organisiert, bis du die Ware in den Händen hältst: Er muss bis zu dem Datum liefern, das er dir genannt hat, ohne Datum innerhalb von 30 Tagen, und bei den meisten Artikeln kannst du es dir innerhalb von 14 Tagen nach Erhalt anders überlegen.
@@ -97,7 +97,9 @@ Ja, mit der Sendungsnummer des Paketdienstes aus der Versand-E-Mail oder aus dei
 
 Die Nummern von Mondial Relay mit 8, 10 oder 12 Ziffern teilen sich ihre Form mit Nummern anderer Dienste. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für jeden anderen Paketdienst füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
-Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rückgaben laufen über Leroy Merlin oder den Verkäufer.
+Sobald ein Paket in Zustellung ist, fragt Peek bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten nach, oder alle 5 Minuten, wenn die Abfrage einen Browser öffnen muss (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet). Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand.
+
+Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst, im Takt dessen, der das Paket zustellt. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rückgaben laufen über Leroy Merlin oder den Verkäufer.
 
 :::sources
 - [ADEO: ADEO in the world](https://www.adeo.com/en/adeo-in-the-world/) – die Länder von ADEO

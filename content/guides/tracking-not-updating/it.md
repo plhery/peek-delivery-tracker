@@ -38,7 +38,7 @@ Da qualche ora a qualche giorno. Se il tracking è fermo alla prima riga, il cor
 - **Poste Italiane:** `Presa in carico` vuol dire che Poste ha accettato la spedizione, che a breve entrerà nel ciclo di lavorazione. Per un codice molto recente Poste mostra `Tracciatura non disponibile` e consiglia di riprovare dopo qualche ora.
 - **[BRT](carrier:brt):** se il codice è giusto ma compare `BRTcode non riconosciuto`, «la spedizione potrebbe non esserci ancora stata affidata», e BRT consiglia di riprovare più tardi.
 - **[UPS](carrier:ups):** la scansione in inglese `Shipper created a label, UPS has not received the package yet.` vuol dire che il mittente ha creato l'etichetta, ma UPS non ha ancora il pacco.
-- **La Posta (Svizzera):** `Notifica dell'invio da parte dello speditore (inoltro dei dati)` vuol dire che il mittente ha creato il numero d'invio e trasmesso i dati. Di norma, in quel momento il pacco non è ancora alla Posta.
+- **La Posta (Svizzera):** `Notifica dell’invio da parte dello speditore (inoltro dei dati)` vuol dire che il mittente ha creato il numero d'invio e trasmesso i dati. Di norma, in quel momento il pacco non è ancora alla Posta.
 - **DHL:** in Germania un pacco può metterci fino a 24 ore a comparire nel tracking.
 - **Vinted:** possono volerci fino a 48 ore perché il tracciamento sia visibile su Vinted.
 - **Zalando:** il link di tracking si attiva solo quando il corriere ha ricevuto il pacco.

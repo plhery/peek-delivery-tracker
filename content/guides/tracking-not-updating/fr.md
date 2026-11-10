@@ -37,7 +37,7 @@ De quelques heures à quelques jours. Si ton nouveau numéro ne donne rien ou re
 - **Colis Privé :** `Colis attendu par Colis Privé` veut dire que l'expéditeur ne lui a pas encore remis le colis. Colis Privé te renvoie alors vers le site du vendeur.
 - **[UPS](carrier:ups) :** le premier scan, `Shipper created a label, UPS has not received the package yet.`, le dit en toutes lettres : l'expéditeur a créé l'étiquette, mais UPS n'a pas encore le colis.
 - **bpost :** `en préparation` veut dire que l'expéditeur prépare encore le colis, ou que bpost l'a mais doit encore le trier. La plupart des colis sont traités dans les 5 jours.
-- **La Poste suisse :** `Transmission des données par l'expéditeur` veut dire que le numéro existe, mais que l'envoi ne lui a normalement pas encore été remis.
+- **La Poste suisse :** `Transmission des données par l’expéditeur` veut dire que le numéro existe, mais que l'envoi ne lui a normalement pas encore été remis.
 
 Côté boutiques, Vinted prévient que le suivi peut mettre « jusqu'à 48 h » à s'afficher, et Zalando que son lien de suivi n'est pas disponible tant que le transporteur n'a pas reçu le colis.
 

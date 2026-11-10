@@ -4,7 +4,7 @@ description: Dónde seguir tu pedido de H&M en España, quién lo entrega, cuán
 slug: seguimiento-pedido-hm
 picture: Un abrigo en una percha colgado de un burro de ropa, una pila de jerséis doblados y una furgoneta de reparto, y Pip de pie sobre los jerséis.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-10
 ---
 
 Sigues tu pedido de H&M en «Mi cuenta» o con el número de pedido del correo de confirmación, y el paquete en el enlace de seguimiento del correo de envío. En España, H&M trabaja con Paack, InPost, GLS y Sending. Si consta como entregado y no lo tienes, busca en el buzón, pregunta a los vecinos y luego contacta con H&M.
@@ -133,7 +133,9 @@ Sí, con el número de seguimiento del transportista: pégalo en [Peek](/). Así
 
 Cuando varios transportistas comparten una forma de número, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. InPost, en España, está en Peek como [Mondial Relay](carrier:mondial-relay), que también encuentras buscando InPost Spain: si Peek muestra otro para un número de InPost, pulsa «Cambiar» y elige Mondial Relay. Para un transportista que esta guía no nombra, como el de otra marca, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en dos paquetes, añade los dos números.
 
-Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con H&M.
+Cuando el paquete está en reparto, Peek consulta el seguimiento hasta una vez cada 2 minutos con los transportistas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si el transportista da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento del transportista). A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunos transportistas fijan un intervalo más largo.
+
+Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo, al ritmo del que reparte el paquete. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con H&M.
 
 :::sources
 - [H&M España: Entrega](https://www2.hm.com/es_es/service-clients/shippinganddelivery.html) – Paack, In Post, GLS y Sending, solo Península, opciones, plazos, precios, miembros, Click & Collect, puntos de recogida, dirección de facturación, H&M HOME, dos paquetes, otras marcas, paquetes no entregados, cancelar, cambiar la dirección

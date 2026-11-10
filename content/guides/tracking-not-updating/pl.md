@@ -13,7 +13,7 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 
 Śledzenie pokazuje skany, a nie ruch paczki. A paczkę skanuje się tylko w niektórych miejscach:
 
-- **Między sortowniami nikt nie skanuje.** Na tym odcinku [InPost](carrier:inpost) odnotowuje przyjęcie paczki w centrum logistycznym i jej wyjazd stamtąd: w Peek to `Accepted at the Logistics Centre` i `Dispatched from the Logistics Centre` (Peek czyta statusy InPost po angielsku). Gdy paczka jedzie między takimi miejscami, kolejny wpis może długo nie przyjść.
+- **Między sortowniami nikt nie skanuje.** Na tym odcinku [InPost](carrier:inpost) odnotowuje przyjęcie paczki w centrum logistycznym i jej wyjazd stamtąd: w Peek to `Accepted at the Logistics Centre` i `Dispatched from the Logistics Centre`, gdy masz aplikację w innym języku niż polski (w polskiej wersji Peek pokazuje statusy InPost po polsku). Gdy paczka jedzie między takimi miejscami, kolejny wpis może długo nie przyjść.
 - **Weekendy i święta.** Kurierzy DPD doręczają w soboty tylko paczki z usługą dodatkową Sobota. Poczta Polska, odliczając 14 dni do reklamacji, pomija dni ustawowo wolne od pracy, a Vinted liczy dni robocze bez weekendów i świąt. Przerwy świąteczne przewoźników znajdziesz w poradniku [do kiedy wysłać paczkę przed świętami](guide:christmas-posting-dates).
 - **Pogoda i korki.** Niemiecki DHL wymienia złą pogodę, korki, wypadki i choroby, a w Niemczech przed Bożym Narodzeniem paczka może iść dłużej.
 - **Status na platformie.** Vinted uprzedza, że status u niego bywa inny niż na stronie przewoźnika.
@@ -36,7 +36,7 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 
 Od kilku godzin do kilku dni. Jeśli śledzenie pokazuje tylko utworzenie etykiety, przewoźnik może jeszcze nie mieć paczki: pierwszy wpis pochodzi zwykle z programu, w którym sprzedawca drukuje etykietę, a nie ze skanu. Co piszą przewoźnicy i sklepy:
 
-- **InPost:** `Shipment Created` znaczy tylko, że przesyłkę utworzono. Pierwszy skan pojawia się, gdy nadawca nada ją w automacie lub punkcie (`Sent through Parcel Locker/Parcel Point`) albo odbierze ją kurier (`Collected by the Courier`).
+- **InPost** (statusy w angielskiej wersji): `Shipment Created` znaczy tylko, że przesyłkę utworzono. Pierwszy skan pojawia się, gdy nadawca nada ją w automacie lub punkcie (`Sent through Parcel Locker/Parcel Point`) albo odbierze ją kurier (`Collected by the Courier`).
 - **Poczta Polska:** komunikat `Podany numer przesyłki jest błędny` pojawia się przy złym numerze, ale też wtedy, gdy system nie ma informacji o przesyłce.
 - **[DHL eCommerce Polska](carrier:dhl-ecommerce-pl):** `Brak informacji o przesyłce` może znaczyć, że nadawca nie przekazał jeszcze danych paczki albo że paczka z zagranicy nie dotarła jeszcze do Polski. DHL radzi skontaktować się z nadawcą albo sprawdzić później.
 - **DHL w Niemczech:** może minąć do 24 godzin, zanim paczka w ogóle pojawi się w śledzeniu.
@@ -125,7 +125,7 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [UKE: Reklamacje usług pocztowych](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy od nadania
 - [UKE: Co zrobić, gdy przesyłka zaginie?](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania/co-zrobic-gdy-przesylka-zaginie,2.html) – reklamacja dzień po terminie utraty z regulaminu operatora
 - [UKE: Rejestr operatorów pocztowych, InPost Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00562) – InPost w rejestrze operatorów pocztowych
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): utworzenie przesyłki, nadanie, odbiór przez kuriera, centrum logistyczne
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku albo po angielsku, w języku aplikacji): utworzenie przesyłki, nadanie, odbiór przez kuriera, centrum logistyczne
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – następny dzień roboczy, 3 dni robocze, usługa Sobota, numer do kuriera
 - [DPD Polska: Złóż reklamację](https://www.dpd.com/pl/pl/moje-dpd/zloz-reklamacje/) – utrata po 30 dniach od terminu wykonania usługi
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym (od 1 stycznia 2024 r.)](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 20 i § 21: utrata po 30 dniach, kto może złożyć reklamację

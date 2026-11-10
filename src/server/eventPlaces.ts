@@ -101,7 +101,8 @@ const SERVED_APART = ['planned', 'written_ahead'];
 function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
   const apart = stored && isRecord(stored.routing) && SERVED_APART.some((key) => key in (stored.routing as JsonObject));
-  const announced = stored !== null && deliveryAnnounced(stored);
+  // A parcel delivered or returned waits for no partner, whatever its last probe found.
+  const announced = stored !== null && !['delivered', 'returned'].includes(String(row.current_stage ?? '')) && deliveryAnnounced(stored);
   if (!stored || !(SERVICE_DATA.some((key) => key in stored) || apart)) return row;
   const data: JsonObject = { ...stored, ...announced ? { delivery_announced: true } : {} };
   for (const key of SERVICE_DATA) delete data[key];
@@ -224,11 +225,12 @@ function namesMoreOfThePlace(event: JsonObject, other: JsonObject): boolean {
 
 /**
  * Whether the earlier carrier's copy tells its scan in words that read as a stage neither row is in: TopYou tells
- * GOFO's arrival at a transfer centre as "Shipment is out for delivery", in a code it means as in transit.
+ * GOFO's arrival at a transfer centre as "Shipment is out for delivery", in a code it means as in transit. A copy that
+ * alone tells a problem keeps its words: they are why it is shown on top (`relayLeads`).
  */
 function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
   const { stage, source } = classifyWording(typeof copy.description === 'string' ? copy.description : '');
-  return source !== 'none' && stage !== copy.stage && stage !== scan.stage;
+  return source !== 'none' && stage !== copy.stage && stage !== scan.stage && !copyTellsProblem(copy, scan);
 }
 
 /**

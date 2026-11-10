@@ -450,8 +450,7 @@ function deliveryWindowOpens(parcel: JsonObject): number | null {
   if (start !== null && end !== null) return start < end ? start : null;
   const slot = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})[–-]\d{2}:\d{2}$/.exec(expected);
   if (!slot) return null;
-  const declared = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
-  const zone = declared !== 'UTC' ? declared : carrierClock(parcel);
+  const zone = deliveryClock(parcel);
   const opens = DateTime.fromISO(`${slot[1]}T${slot[2]}`, { zone });
   return zone !== 'UTC' && opens.isValid ? opens.toMillis() : null;
 }
@@ -465,12 +464,22 @@ function instant(value: unknown): number | null {
 }
 
 /**
+ * The clock a carrier's expected day and slot are on: the zone its answer declares or the catalog names for the carrier
+ * now tracking the parcel, else the carrier's clock (`carrierClock`). The newest scan's offset alone may be the origin's.
+ */
+function deliveryClock(parcel: JsonObject): DateTime['zone'] | string {
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const declared = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  return declared !== 'UTC' ? declared : carrierClock(parcel);
+}
+
+/**
  * Whether the day a parcel is expected (`expected_delivery`: a day, or a moment on it) has not passed yet on the
- * carrier's clock.
+ * delivery clock (`deliveryClock`).
  */
 function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
   const day = /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0];
-  const today = DateTime.fromJSDate(now, { zone: carrierClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
+  const today = DateTime.fromJSDate(now, { zone: deliveryClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
   return day !== undefined && day >= today;
 }
 

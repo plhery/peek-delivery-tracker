@@ -11,6 +11,9 @@ values
   -- Its newest scan states Paris's offset: 01:30 on 1 January there, the day had passed.
   ('19000000-0000-0000-0000-000000000101', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0101', 'la-poste', 'in_transit',
    '2026-01-01T00:30:00Z', '{"last_update": "2025-12-31T18:00:00+01:00"}'),
+  -- Its newest scan is in Paris, where the day had passed, but its answer declares Los Angeles's zone: still on.
+  ('19000000-0000-0000-0000-000000000107', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0107', 'la-poste', 'in_transit',
+   '2026-01-01T00:30:00Z', '{"last_update": "2025-12-31T18:00:00+01:00", "timezone": "America/Los_Angeles"}'),
   -- Its answer declares Los Angeles's zone: 22:00 on 31 December there, the day was still on.
   ('19000000-0000-0000-0000-000000000102', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0102', 'la-poste', 'in_transit',
    '2026-01-01T06:00:00Z', '{"timezone": "America/Los_Angeles"}'),

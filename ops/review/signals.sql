@@ -115,7 +115,8 @@ order by a.started_at desc;
 \echo '   between the checks outside the API (a fix script, a migration, the replay), fixes naming them (- for none);'
 \echo '   over_provider: the parcel''s own carrier answered the check after a universal provider had answered the one'
 \echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin)'
--- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check.
+-- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check. A check
+-- the fence refused (superseded) saved nothing and loaded a stage that may be stale: it is no step.
 with saved as (
   select a.id, a.package_id, a.started_at, lead(a.started_at) over w as next_at, a.source_carrier,
          a.configured_carrier as carrier, a.previous_stage as from_stage,
@@ -123,7 +124,7 @@ with saved as (
          coalesce(lead(a.configured_carrier) over w, p.carrier) as next_carrier
   from public.tracking_sync_attempts as a
   join public.packages as p on p.id = a.package_id
-  where a.started_at >= :since and a.previous_stage is not null
+  where a.started_at >= :since and a.previous_stage is not null and a.outcome <> 'superseded'
   window w as (partition by a.package_id order by a.started_at, a.id)
 ),
 ranked as (
@@ -156,10 +157,10 @@ left join lateral (
     and h.changed_at >= back.started_at and h.changed_at < coalesce(back.next_at, 'infinity')
   order by h.changed_at desc limit 1
 ) as hand on true
--- The check before this one, in the window or not: whose answer it took.
+-- The check before this one that saved, in the window or not: whose answer it took.
 left join lateral (
   select b.source_carrier from public.tracking_sync_attempts as b
-  where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id)
+  where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id) and b.outcome <> 'superseded'
   order by b.started_at desc, b.id desc limit 1
 ) as prior on true
 group by 1, 2, 3, 4, 5, 6
@@ -168,20 +169,21 @@ order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'
 \echo '   held or waiting to be collected, or its carrier changes. By the day the check that dropped it found, read on'
-\echo '   the parcel''s clock as the server reads it (the offset its newest scan states, else the zone its answer'
-\echo '   declares): passed, or early (still ahead: the ones to read). Without either, the server reads the carrier''s'
-\echo '   catalog zone, which the database lacks: passed or early on every clock, or edge (passed on some clocks only).'
+\echo '   the parcel''s clock as the server reads it (the zone its answer declares, else the carrier''s catalog zone,'
+\echo '   which the database lacks, so the offset its newest scan states stands in): passed, or early (still ahead: the'
+\echo '   ones to read). Without either: passed or early on every clock, or edge (passed on some clocks only).'
 \echo '   held: the dropping check stored a new failed-attempt or exception scan, which drops the day whenever it falls.'
 \echo '   unknown: no day recorded, as before checks kept it; latest lists the early ones first. A carrier and stage whose'
 \echo '   drops all passed or were held is left out: those drops are the rule working.'
 with dropped as (
   select p.id, p.carrier, p.current_stage, p.expected_delivery_changed_at,
          case when a.previous_expected_delivery ~ '^\d{4}-\d{2}-\d{2}' then left(a.previous_expected_delivery, 10) end as day,
-         -- The drop's date on the parcel's clock, as trackingSync.ts's carrierClock reads it: the offset of the newest
-         -- scan when it states one ("Z" and "-00:00" do not), else the zone the answer declares.
+         -- The drop's date on the parcel's clock, as trackingSync.ts's deliveryClock reads it: the zone the answer
+         -- declares, else the catalog's, for which the offset of the newest scan stands in when it states one ("Z" and
+         -- "-00:00" do not). The two agree once the parcel is in the country it is delivered in.
          to_char(case
-           when c.stated is not null then p.expected_delivery_changed_at at time zone c.stated::interval
            when z.name is not null then p.expected_delivery_changed_at at time zone z.name
+           when c.stated is not null then p.expected_delivery_changed_at at time zone c.stated::interval
          end, 'YYYY-MM-DD') as local,
          -- Else its date on the clocks furthest behind and ahead of UTC.
          to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT+12', 'YYYY-MM-DD') as west,

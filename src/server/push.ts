@@ -532,7 +532,9 @@ function expectedDelivery(
   const tag = languageTags[locale];
 
   if (stage === 'out_for_delivery') {
-    return sameDay(end.day, today) && time ? { date: dayAndTime(named(today).text, time, tag), form: 'day' } : null;
+    // The end of a window of days that began before today is not today's hours.
+    return sameDay(end.day, today) && time && !(start && start.day < today)
+      ? { date: dayAndTime(named(today).text, time, tag), form: 'day' } : null;
   }
   if (start && start.day < end.day && !sameDay(end.day, today)) {
     if (start.day > today) return { date: notificationDay(start.day, locale), to: notificationDay(end.day, locale), form: 'window' };

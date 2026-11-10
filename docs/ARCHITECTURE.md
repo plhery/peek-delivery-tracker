@@ -558,7 +558,8 @@ and nothing typed is sent.
   notification settings, or else on the scan's own clock when the carrier gave its UTC
   offset, or else in Zurich's. A link's alert never has a saved timezone.
 - An answer without an estimate, the carrier's or a provider's, keeps the stored one while
-  the parcel is on its way and its day has not passed. It goes once the parcel is delivered,
+  the parcel is on its way and its day has not passed on the delivery carrier's clock (the
+  zone its answer or the catalog gives, else its newest scan's offset). It goes once the parcel is delivered,
   held or waiting to be collected, once a new scan tells of a failed attempt or a hold, and
   when the router changes the carrier. A handover keeps it (`src/server/trackingSync.ts`).
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a

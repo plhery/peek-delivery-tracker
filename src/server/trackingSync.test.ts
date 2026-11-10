@@ -1816,6 +1816,24 @@ describe('TrackingSyncService', () => {
         expect(done).toMatchObject({ current_stage: stage, expected_delivery: null });
       }
     });
+
+    it('passes on the delivery carrier\'s clock, not the newest scan\'s, unless the catalog names none', async () => {
+      const abroad = (time: string): CarrierResult => answer('in_transit', {}, { time, description: 'Departed facility', stage: 'in_transit' });
+      const dayGiven = (time: string): CarrierResult => ({ ...abroad(time), expected_delivery: '2026-11-10' });
+      const start = { created_at: '2026-11-09T09:00:00Z' };
+      // A DHL parcel still in Hong Kong: 18:00 on the 10th in Germany, already the 11th there.
+      const east = parcel(start);
+      await east('2026-11-09T12:00:00Z', dayGiven('2026-11-09T19:30:00+08:00'));
+      expect((await east('2026-11-10T17:00:00Z', abroad('2026-11-09T19:30:00+08:00'))).expected_delivery).toBe('2026-11-10');
+      // One last scanned in Los Angeles: 08:00 on the 11th in Germany, still the 10th there.
+      const west = parcel(start);
+      await west('2026-11-10T12:00:00Z', dayGiven('2026-11-09T19:30:00-08:00'));
+      expect((await west('2026-11-11T07:00:00Z', abroad('2026-11-09T19:30:00-08:00'))).expected_delivery).toBeNull();
+      // USPS names no clock in the catalog: its newest scan's stays the one.
+      const usps = parcel({ ...start, carrier: 'usps', tracking_number: '9400100000000000000000' });
+      await usps('2026-11-10T12:00:00Z', dayGiven('2026-11-09T19:30:00-08:00'));
+      expect((await usps('2026-11-11T07:00:00Z', abroad('2026-11-09T19:30:00-08:00'))).expected_delivery).toBe('2026-11-10');
+    });
   });
 
   describe('a return after the delivery', () => {

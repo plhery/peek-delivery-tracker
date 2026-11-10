@@ -23,6 +23,11 @@ it('says when the named delivering carrier lists the parcel without a scan of it
     { delivery_probe: probe },
     { delivery_carrier: 'dhl', delivery_probe: probe, original_carrier: 'jrt', active_tracking_carrier: 'dhl' },
   ]) expect(served(data)).not.toHaveProperty('delivery_announced');
+  // A parcel the earlier carrier delivered or returned is not waiting for the partner.
+  for (const current_stage of ['delivered', 'returned']) {
+    expect((withEventPlaces({ current_stage, carrier_data: { delivery_carrier: 'dhl', delivery_probe: probe } }) as
+      { carrier_data: Record<string, unknown> }).carrier_data).not.toHaveProperty('delivery_announced');
+  }
   // The check itself, with the partner's number, stays on the server.
   expect(served({ delivery_carrier: 'dhl', delivery_probe: probe })).not.toHaveProperty('delivery_probe');
   expect(served({ delivery_probe: { ...probe, listed: undefined } })).toEqual({});
@@ -293,7 +298,7 @@ describe('withEventPlaces', () => {
       .toBe('Processing at designated facility');
   });
 
-  it('serves an earlier carrier\'s copy in words that read as a stage neither row is in, in the words of the scan it tells', () => {
+  it('serves an earlier carrier\'s copy in words that read as a stage neither row is in, in the words of the scan it tells, but a problem\'s', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
       ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
     });
@@ -313,6 +318,9 @@ describe('withEventPlaces', () => {
         scan('handed-copy', 'topyou', '2026-11-01T08:00:12+00:00', null, 'Parcel handed to GOFO'),
         scan('cleared', 'gofo-it', '2026-11-02T09:10:11+00:00', 'Milano', 'Arrivato al centro'),
         scan('cleared-copy', 'topyou', '2026-11-02T09:10:11+00:00', null, 'Customs clearance', 'customs'),
+        // On top, as it alone tells a problem, it keeps the problem's words.
+        scan('missed', 'gofo-it', '2026-11-03T16:25:17+00:00', 'Milano', 'Arrivato al centro'),
+        scan('missed-copy', 'topyou', '2026-11-03T16:25:17+00:00', null, 'Delivery failed, recipient not available', 'exception'),
       ],
     };
     const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
@@ -327,6 +335,8 @@ describe('withEventPlaces', () => {
       ['handed-copy', 'handed', 'Parcel handed to GOFO'],
       ['cleared', undefined, 'Arrivato al centro'],
       ['cleared-copy', 'cleared', 'Customs clearance'],
+      ['missed', 'missed-copy', 'Arrivato al centro'],
+      ['missed-copy', undefined, 'Delivery failed, recipient not available'],
     ]);
     // The rows stay as stored, in the account's export too.
     expect(row.tracking_events[1].description).toBe('Shipment is out for delivery');

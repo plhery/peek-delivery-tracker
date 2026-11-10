@@ -378,12 +378,22 @@ dropped_section=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01
 dropped=$(printf '%s\n' "$dropped_section" | awk '/^la-poste\|in_transit\|/' | cut -d '|' -f 4-9)
 passed_only=$(printf '%s\n' "$dropped_section" | awk '/^dhl\|/')
 psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000001'"
-if [[ "$dropped" != "5|2|1|1|0|1" ]]; then
+if [[ "$dropped" != "6|2|2|1|0|1" ]]; then
   echo "dropped expected days read on the wrong clock: parcels|passed|early|edge|unknown|held = '$dropped'" >&2
   exit 1
 fi
 if [[ -n "$passed_only" ]]; then
   echo "dropped expected days list a carrier whose drops all passed: '$passed_only'" >&2
+  exit 1
+fi
+
+# A check the fence refused saved nothing: the stale stage it loaded is no step back.
+psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_step_backs.sql"
+step_backs=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \
+  | awk '/^== Stage step-backs/ { section = 1; next } /^== / { section = 0 } section' | awk '/^la-poste\|/' | cut -d '|' -f 1-3,9-10)
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000002'"
+if [[ "$step_backs" != "la-poste|delivered|in_transit|1|19000000" ]]; then
+  echo "stage step-backs: carrier|from|to|parcels|sample = '$step_backs'" >&2
   exit 1
 fi
 

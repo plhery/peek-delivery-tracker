@@ -768,7 +768,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   links show its number (`delivery_tracking_number`) after the followed one. While that partner's
   last answer is a dated record without a scan of its own, however old, the line reads "Announced
   to DHL, not received yet" instead of "Delivery with DHL" (`delivery_announced`, served from the
-  probe's `listed` marker in [`eventPlaces.ts`](../src/server/eventPlaces.ts)).
+  probe's `listed` marker in [`eventPlaces.ts`](../src/server/eventPlaces.ts)), until the parcel
+  is delivered or returned.
 - The reverse holds too. A carrier that confirms the number and would hand the parcel to the
   carrier it is filed under, with the same number, is an earlier leg, such as a customs agent
   before the local courier. Its history is shown while the filed carrier has none, but it
@@ -835,7 +836,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   An earlier carrier's copy whose words read as a stage neither row is in is served in the words
   of the scan it tells, on top or under it, so the apps show the carrier's own words alone
   (TopYou tells GOFO's arrival at a transfer centre as "Shipment is out for delivery", in a code
-  it means as in transit). The rows stay as stored.
+  it means as in transit), unless the copy alone tells a problem: those words keep it on top.
+  The rows stay as stored.
   A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless

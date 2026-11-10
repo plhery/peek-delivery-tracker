@@ -184,6 +184,8 @@ describe('friendly parcel notifications', () => {
       { expected_delivery: '2026-09-08' },
       { expected_delivery_from: '2026-09-06', expected_delivery: '2026-09-08' },
       { expected_delivery: '2026-09-08 09:00–12:00' },
+      // A window of days that ends today: its end time is not today's hours, and the cards drop it too.
+      { expected_delivery_from: '2026-09-05', expected_delivery: '2026-09-07T18:00:00+02:00' },
       { expected_delivery: null },
     ]) expect(web.payload({ ...row, ...changes }).body).toBe('Coffee beans · almost there');
   });

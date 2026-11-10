@@ -70,9 +70,11 @@ interface ApiRouteOptions {
   /**
    * Requests per client address for a route without sign-in. Each address of
    * the route has its own allowance unless `bucket` names one to share, as the
-   * addresses of one route with an id in them must. `onLimited` counts refusals.
+   * addresses of one route with an id in them must. With `site`, an IPv6
+   * client's /48 has the same allowance too, so the /64s of one home or office
+   * share it. `onLimited` counts refusals.
    */
-  publicRateLimit?: { limit: number; window: number; bucket?: string; onLimited?: () => void };
+  publicRateLimit?: { limit: number; window: number; bucket?: string; site?: boolean; onLimited?: () => void };
   /**
    * The request's address, headers or body carry a capability (a parcel link
    * id, an owner key). Error reports for the route leave the request out.
@@ -306,11 +308,12 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
       }
 
       if (!authenticated && options.publicRateLimit) {
-        const { limit, window, bucket, onLimited } = options.publicRateLimit;
-        const retryAfter = limiters.public.retryAfter(
-          `${bucket ?? new URL(request.url).pathname}:${clientNetwork(clientIp(request))}`,
-          { limit, window },
-        );
+        const { limit, window, bucket, site, onLimited } = options.publicRateLimit;
+        const key = bucket ?? new URL(request.url).pathname;
+        const ip = clientIp(request);
+        const network = site ? clientSite(ip) : null;
+        const retryAfter = limiters.public.retryAfter(`${key}:${clientNetwork(ip)}`, { limit, window })
+          || (network ? limiters.public.retryAfter(`${key}:${network}`, { limit, window }) : 0);
         if (retryAfter) {
           onLimited?.();
           throw new HttpError(429, 'Too many requests. Try again shortly.', { 'Retry-After': String(retryAfter) });

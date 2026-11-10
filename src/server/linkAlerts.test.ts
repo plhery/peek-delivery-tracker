@@ -383,24 +383,32 @@ describe('what an alert says', () => {
     expect(payload?.body).toBe('One step closer\nLocker ••• 4321, by ••• 6789');
     expect(JSON.stringify([told, payload])).not.toMatch(/TESTPOST|TESTSFC/);
 
+    // A number the parcel is not stored with, which one of its scans names after a label and this one's place repeats.
+    hiding.mockResolvedValue(new Map([[linkId, { ...parcel, carrier_data: {}, last_status_text: 'In transit',
+      tracking_events: [{ description: 'Handed over, tracking number: TESTPOST987654321', location: null }] }]]));
+    pending([row({ location: 'Locker TESTPOST987654321' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls.at(-1)![1]?.body).toBe('One step closer\nLocker ••• 4321');
+    send.mockClear();
+
     // A link that shows its number is not among the parcels the lookup finds, and its place is told as written.
     hiding.mockResolvedValue(new Map());
     pending([row({ location: 'Locker TESTPOST987654321' })]);
     await alerts.dispatch();
-    expect(send.mock.calls[1]![1]?.body).toBe('One step closer\nLocker TESTPOST987654321');
+    expect(send.mock.calls[0]![1]?.body).toBe('One step closer\nLocker TESTPOST987654321');
 
     // Nor is the owner's own alert asked about.
     hiding.mockClear();
     pending([row({ owner: true, location: 'Locker TESTPOST987654321' })]);
     await alerts.dispatch();
     expect(hiding).not.toHaveBeenCalled();
-    expect(send.mock.calls[2]![1]?.body).toBe('One step closer\nLocker TESTPOST987654321');
+    expect(send.mock.calls[1]![1]?.body).toBe('One step closer\nLocker TESTPOST987654321');
 
     // When the numbers cannot be read, a viewer is told no place.
     hiding.mockRejectedValue(new Error('down'));
     pending([row({ location: 'Locker TESTPOST987654321' })]);
     await alerts.dispatch();
-    expect(send.mock.calls[3]![1]?.body).toBe('One step closer');
+    expect(send.mock.calls[2]![1]?.body).toBe('One step closer');
   });
 
   it('tells the owner of a gift lookup like the owner of any parcel', () => {

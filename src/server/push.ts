@@ -17,7 +17,8 @@ import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
-import { numberMask, parcelNumbers } from './hiddenNumbers';
+import { parcelNumberMask } from './hiddenNumbers';
+import { servedPlannedSteps } from './plannedSteps';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
@@ -1124,13 +1125,17 @@ export class ParcelLinkAlertService {
 
   /**
    * The scan as the alert may tell it: for a viewer of a link that hides its number, its place with the parcel's
-   * numbers masked (`numberMask`), or without its place when they could not be read.
+   * numbers masked as its page masks them (`parcelNumberMask`), or without its place when they could not be read.
    */
   viewerScan(row: JsonObject, hiding: ReadonlyMap<string, JsonObject> | null): JsonObject {
     if (row.owner === true || typeof row.location !== 'string') return row;
     if (hiding === null) return { ...row, location: null };
     const parcel = hiding.get(stringField(row, 'link_id'));
-    return parcel ? { ...row, location: numberMask(parcelNumbers(parcel), [row.location])(row.location) } : row;
+    if (!parcel) return row;
+    const events = Array.isArray(parcel.tracking_events) ? parcel.tracking_events.filter(isRecord) : [];
+    // As the link's page masks it: with the numbers every scan, planned step and worded field names.
+    const mask = parcelNumberMask(parcel, [...events, ...servedPlannedSteps(parcel, []), row]);
+    return { ...row, location: mask(row.location) };
   }
 
   /** A gift that has not arrived, for everyone but the lookup's owner. */

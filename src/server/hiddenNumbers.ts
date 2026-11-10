@@ -82,3 +82,16 @@ export function numberMask(numbers: readonly unknown[], texts: readonly unknown[
   const pattern = new RegExp(known.map((number) => [...number].join('[\\s-]*')).join('|'), 'gi');
   return (text) => text.replace(pattern, (number) => maskedNumber(numberHint(bare(number))));
 }
+
+/** The carrier data a viewer reads in the carrier's words, which may name a number. */
+export const WORDED_CARRIER_DATA = ['sender_name', 'pickup_point', 'dimensions_text'];
+
+/**
+ * What a viewer who is not shown the parcel's number reads of a text of the parcel (`numberMask`): the numbers it is
+ * stored with, and those its status line, worded carrier data and steps name. A link's page and its alerts mask alike.
+ */
+export function parcelNumberMask(row: JsonObject, steps: readonly JsonObject[]): (text: string) => string {
+  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
+  return numberMask(parcelNumbers(row), [row.last_status_text, ...WORDED_CARRIER_DATA.map((key) => data[key]),
+    ...steps.flatMap((step) => [step.description, step.location])]);
+}

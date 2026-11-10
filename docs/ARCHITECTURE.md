@@ -142,8 +142,9 @@ Key server modules:
     isn't shown the number reads the parcel's numbers masked the same way in the carrier's
     words too, spaced, dashed or inside a web address: its own, the others its carrier data
     keeps, and those the words name after "tracking no", "waybill" or "AWB" or as a web
-    address's parameter (`hiddenNumbers.ts`). A number needs six characters and a digit to
-    count. A viewer's carrier link opens the carrier's page for typing a number in (the
+    address's parameter, in any of the parcel's scans, steps or worded fields
+    (`hiddenNumbers.ts`); a link's alerts mask the scan's place alike. A number needs six
+    characters and a digit to count. A viewer's carrier link opens the carrier's page for typing a number in (the
     catalog's `trackingSearchUrl`), or is left out when the carrier has none.
   - A parcel with no new scan for four days links the help page of the carrier that has it,
     else of the one it is filed under (the catalog's `helpUrl`; no link when neither has
@@ -296,7 +297,8 @@ Key server modules:
   - Peek is the OAuth 2.1 authorization server of its own MCP endpoint, `/mcp`, with the
     canonical origin as issuer. Clients are public: PKCE with S256 only, the exact redirect
     address they registered (any port on this computer's loopback), and the issuer in each
-    answer (RFC 9207). A client registers (`/oauth/register`) or names its metadata document
+    answer (RFC 9207). A client registers (`/oauth/register`: 20 an hour per address, IPv6 /64 and
+    /48, and 1,000 an hour from all together) or names its metadata document
     by its URL; the server fetches that over HTTPS from public addresses only, at most 10 KB
     in five seconds over at most 16 connections at a time, closes a connection as soon as it
     refuses the answer, and keeps the document an hour.

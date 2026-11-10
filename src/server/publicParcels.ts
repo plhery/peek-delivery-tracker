@@ -20,7 +20,7 @@ import { appleAppIds } from './appleAppLinks';
 import { appFollowsLinks } from './appStoreRelease';
 import { emailConfigured } from './email/config';
 import { withEventPlaces } from './eventPlaces';
-import { numberHint, numberMask, parcelNumbers } from './hiddenNumbers';
+import { numberHint, parcelNumberMask, WORDED_CARRIER_DATA } from './hiddenNumbers';
 import { type AllowanceHolder, captureOverallAllowance, logOperationalEvent } from './observability';
 import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
@@ -280,8 +280,6 @@ function shownLikelyCarrier(routing: unknown): ApiLikelyCarrier | undefined {
 }
 
 /** The carrier details written in words, which can name a number. */
-const WORDED_CARRIER_DATA = ['sender_name', 'pickup_point', 'dimensions_text'];
-
 function publicCarrierData(
   value: unknown, numberShown: boolean, wrapped: boolean, told: (text: string) => string,
 ): ApiPublicPackage['carrier_data'] {
@@ -422,7 +420,7 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  *
  * Whoever is not shown the number does not read it in the carrier's words
  * either, nor another number of the parcel: the scans, planned steps, status
- * line and worded carrier details mask them (`numberMask`).
+ * line and worded carrier details mask them (`parcelNumberMask`), as a link's alerts do.
  */
 export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelAlerts): ApiPublicParcelResponse {
   const { link } = found;
@@ -436,10 +434,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
   const storedPlanned = Array.isArray(row.planned_events) ? row.planned_events.filter(isRecord) : [];
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   // The numbers as stored: a placeholder number's parcel is served without its carrier data, not without its steps.
-  const told = numberShown ? (value: string) => value : numberMask(parcelNumbers(found.package), [
-    row.last_status_text, ...WORDED_CARRIER_DATA.map((key) => carrierData[key]),
-    ...[...storedEvents, ...storedPlanned].flatMap((step) => [step.description, step.location]),
-  ]);
+  const told = numberShown ? (value: string) => value : parcelNumberMask(found.package, [...storedEvents, ...storedPlanned]);
   const toldText = (value: unknown): string | null => typeof value === 'string' ? told(value) : null;
   const events = storedEvents.map((event): ApiTrackingEventRow => ({
     id: String(event.id),

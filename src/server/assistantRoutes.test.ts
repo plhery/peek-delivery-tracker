@@ -372,6 +372,19 @@ describe('the OAuth endpoints', () => {
     expect(stored).toHaveBeenCalledTimes(1);
   });
 
+  it('register 20 clients an hour from one IPv6 /48, whichever of its /64s they come from', async () => {
+    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
+    vi.spyOn(service, 'registerAssistantClient').mockResolvedValue(undefined);
+    const from = (ip: string) => register(new NextRequest('https://peek.example/oauth/register', {
+      method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip },
+      body: JSON.stringify({ client_name: 'Example Assistant', redirect_uris: ['https://assistant.example.com/callback'] }),
+    }), none);
+    for (let index = 0; index < 20; index += 1) expect((await from(`2001:db8:4400:${index.toString(16)}::1`)).status).toBe(201);
+    expect((await from('2001:db8:4400:ff::1')).status).toBe(429);
+    expect((await from('2001:db8:4401::1')).status).toBe(201);
+    expect((await from('192.0.2.10')).status).toBe(201);
+  });
+
   it('take a token back', async () => {
     const revoked = vi.spyOn(service, 'revokeAssistantToken').mockResolvedValue(undefined);
     const secret = newSecret('refresh');

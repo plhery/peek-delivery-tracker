@@ -3,7 +3,7 @@ title: Pošta Srbije: Serbian Post tracking, statuses and help
 description: Track a Pošta Srbije or Post Express item: the 13-character number, what the English statuses mean, notices, pickup deadlines, claims and contacts.
 slug: posta-srbije-serbian-post-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Pošta Srbije (the Post of Serbia) is Serbia's national post, and Post Express is its courier service. Track an item for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above. The number comes from the sender.
@@ -51,7 +51,7 @@ If nobody is in, the postman leaves a notice of arrival, and Peek shows `Notifie
 
 - 5 working days at the post office for most items;
 - 20 days for items arriving from abroad;
-- 30 days for poste restante items.
+- 30 days for poste restante items, and for parcels from abroad where mail is delivered only once a week.
 
 You can ask in writing at any post office to keep it up to 30 days, or to forward it to another address in Serbia, with ID and postage paid. You, an authorised person or an adult family member can collect it with the notice and an ID showing the address (ID card, passport, refugee ID or foreign travel document; not the new-form driving licence).
 
@@ -63,7 +63,7 @@ You can ask in writing at any post office to keep it up to 30 days, or to forwar
 
 Pošta Srbije guarantees no deadlines abroad and expects international parcels to take 7 to 15 days; domestic parcels take up to 5 working days. Tracking of an item sent abroad ends at the office of exchange, when it leaves Serbia. If nothing moves for days, see [tracking that isn't updating](guide:tracking-not-updating).
 
-**Lost or late.** The sender starts the claim, with the confirmation of receipt, usually at the posting office, but not within 10 days of posting (express items and parcels with a set deadline can be claimed once it has passed). Deadlines: 60 days from posting within Serbia, 6 months for international items. Pošta Srbije answers within 8 days, or 2 months for international claims. Unregistered items have no claim procedure.
+**Lost or late.** The sender starts the claim, with the confirmation of receipt, usually at the posting office, but not within 10 days of posting (express items and parcels with a set deadline can be claimed once it has passed, and international express items after 3 working days). Deadlines: 60 days from posting within Serbia, 6 months for international items. Pošta Srbije answers within 8 days, or 2 months for international claims. Unregistered items have no claim procedure.
 
 **Damaged or missing contents.** Claim when you receive it, at the latest the next working day, at the post office, which inspects it with you and writes a record. Not by email; later claims bring no compensation. If the item says delivered but you don't have it, see [delivered but not received](guide:delivered-not-received).
 
@@ -83,9 +83,9 @@ Pošta Srbije's channels, as posta.rs listed them in October 2026:
 
 [Peek](/) names Pošta Srbije straight away for a number starting `C`, `E`, `L` or `R`, ending `RS` and with a valid check digit. For other letters, such as `PE` or `V`, the shape names no carrier, so Peek asks Pošta Srbije, M-ONE and [Chronopost](carrier:chronopost), and shows "Pošta Srbije has this parcel." when Pošta Srbije knows the number. If not yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit no carrier is asked: compare the number with your shipping message, as Pošta Srbije won't track it even if you pick it with "Change". Posta.rs tracking links can be pasted too and always name Pošta Srbije; from a postexpress.rs link, Peek reads the number as if you'd typed it.
 
-An item from abroad keeps its foreign post, even when it's going to Serbia. Pošta Srbije's lookup takes any postal number, though: pick "Pošta Srbije" with "Change", or paste a posta.rs link. Peek can also follow it there when the carrier abroad names "Serbian Post" or "Post Express".
+Peek follows an item from abroad at its own post first. When that post names Serbian Post or Post Express, or says the item is going to Serbia (or names no destination and you follow it from Serbia), Peek also asks Pošta Srbije with the same number. Once Pošta Srbije shows a scan at least as new as the post abroad's newest, Peek follows the item there; the earlier history stays. Pošta Srbije's lookup takes any postal number: to follow one there straight away, pick "Pošta Srbije" with "Change", or paste a posta.rs link.
 
-Peek reads the same service as Pošta Srbije's app. It checks every 10 minutes and can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map with its Serbian post office (only the country for a step abroad), with the weight and the time it was delivered. Times in Serbia are read on Belgrade time and a step abroad on that country's clock, and shown in your device's time zone; a step in a country with several time zones doesn't appear. Pošta Srbije gives no expected arrival day and names no pickup point. Who signed, postcodes and payment details are left out. Statuses keep Pošta Srbije's wording, except `Delivered`, shown in Peek's own words.
+Peek reads the same service as Pošta Srbije's app. It checks every 10 minutes and can notify you when the status changes; no Pošta Srbije status says an item is out for delivery, so there are no faster delivery-day checks. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map with its Serbian post office (only the country for a step abroad), with the weight and the time it was delivered. Times in Serbia are read on Belgrade time and a step abroad on that country's clock, and shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. A step in a country with several time zones doesn't appear. Pošta Srbije gives no expected arrival day and names no pickup point. Who signed, postcodes and payment details are left out. Statuses keep Pošta Srbije's wording, except `Delivered`, shown in Peek's own words.
 
 ## Questions about Serbian Post tracking
 
@@ -108,8 +108,8 @@ contact@ptt.rs, for complaints or compliments. Damage claims can't be made by em
 :::sources
 - [Pošta Srbije: Item's Status Tracking](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) – number types, status list, signature, free tracking, Serbian and English, tracking abroad, 0700 100 300
 - [Pošta Srbije: Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) – Cyrillic, Latin and English versions
-- [Pošta Srbije: Customer Service - Frequently Asked Questions](https://www.posta.rs/eng/korisnicki-servis/najcesca-pitanja.aspx) – number format, storage periods, extension, ID, lockers, claims and deadlines, damage, international times, contact@ptt.rs
-- [Pošta Srbije: Customer Service - Contact Center](https://www.posta.rs/eng/korisnicki-servis/kontakt-centar.aspx) – phone numbers and hours
+- [Pošta Srbije: Customer Service - Frequently Asked Questions](https://www.posta.rs/eng/korisnicki-servis/najcesca-pitanja.aspx) – number format, storage periods (30 days where delivery is weekly), extension, ID, lockers, claims and deadlines (international express after 3 working days), damage, international times, contact@ptt.rs (read 10 November 2026)
+- [Pošta Srbije: Customer Service - Contact Center](https://www.posta.rs/eng/korisnicki-servis/kontakt-centar.aspx) – phone numbers and hours (read 10 November 2026)
 - [Pošta Srbije: Korisnički servis - Kontakt centar](https://www.posta.rs/lat/korisnicki-servis/kontakt-centar.aspx) – same numbers and hours
 - [Pošta Srbije: Post Express – courier service](https://www.posta.rs/eng/stanovnistvo/usluga.aspx?usluga=postal-services%2Fexpress-services-serbia%2Fpost-express) – next day by 19:00, SMS, 1,100 post offices, Post Express contact centre, app tracking
 - [Pošta Srbije: Slanje paketa u Srbiji](https://www.posta.rs/lat/stanovnistvo/usluga.aspx?usluga=postanske-usluge/paketske-usluge-srbija/slanje-paketa-u-srbiji) – up to 5 working days, SMS to the recipient

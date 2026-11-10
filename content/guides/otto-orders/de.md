@@ -4,7 +4,7 @@ description: Wer deine OTTO-Bestellung liefert, wo du die Sendungsnummer findest
 slug: otto-sendungsverfolgung
 picture: Ein hoher Kleiderschrank-Karton auf einer Sackkarre für zwei Träger, ein Lieferwagen wie von Hermes und Pip, der die Tür aufhält.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-10
 ---
 
 Den Stand deiner OTTO-Bestellung siehst du in „Mein Konto“ unter „Bestellungen“: Am Artikel führt der Link „Sendungsverfolgung“ zu allen Infos über die Sendung. Was OTTO selbst verkauft, bringt meist Hermes, manchmal DHL, große Möbel und Geräte kommen per Spedition. Artikel anderer Verkäufer auf dem OTTO-Marktplatz verschickt der Verkäufer selbst, mit eigenem Paketdienst und eigener Sendungsnummer.
@@ -58,7 +58,7 @@ So sehen die Nummern der Paketdienste aus, die Ziffern hier erfunden:
 | Paketdienst | Die Nummer sieht so aus |
 | --- | --- |
 | Hermes | `H` und 16 bis 19 Ziffern, wie `H1234567890123456`, oder 14 Ziffern |
-| DHL | 12 Ziffern, 20 Ziffern ab `0034043`, oder `JJD` und weitere Zeichen |
+| DHL | 12 Ziffern, 18 Ziffern ab `34043` oder 20 Ziffern ab `0034043`, oder `JJD` und weitere Zeichen |
 | DHL Express | 10 Ziffern |
 | DPD | 14 Ziffern, manchmal mit einem Zeichen dahinter |
 | GLS | 11 oder 12 Ziffern |
@@ -83,7 +83,7 @@ Die Lieferzeit steht vor dem Bestellen am Artikel. Für vorrätige Ware nennt OT
 Liegt zwischen Bestellung und Lieferung ein Sonn- oder Feiertag, kann es einen Werktag länger dauern. Steht die Sendungsverfolgung still, hat das meist einen dieser Gründe:
 
 - **`Versand wird vorbereitet`.** Laut OTTO kann dieser Status „in seltenen Fällen einige Tage angezeigt werden“.
-- **Nur angekündigt.** Bei Hermes heißt der erste Status `Die Sendung wurde Hermes elektronisch angekündigt.` Das bedeutet nur, dass der Versender die Sendung gebucht hat. Ändert er sich 2 bis 3 Tage nicht, sollst du laut Hermes den Versender fragen, also OTTO oder den Verkäufer.
+- **Nur angekündigt.** Bei Hermes heißt der erste Status `Die Sendung wurde Hermes elektronisch angekündigt.`, Peek zeigt dafür „Etikett erstellt“. Das bedeutet nur, dass der Versender die Sendung gebucht hat. Ändert er sich 2 bis 3 Tage nicht, sollst du laut Hermes den Versender fragen, also OTTO oder den Verkäufer.
 - **Keine täglichen Scans.** Hermes führt nicht jeden Transportschritt auf, und bis zur Zustellung kann es ab Versand bis zu 3 Werktage dauern. Eine Sendungsrecherche ist bei Hermes frühestens nach 5 Werktagen möglich.
 - **Mehrere Pakete.** Bei `Teilweise unterwegs` kann ein Paket später kommen als die anderen.
 - **Spedition.** Sie kommt zu einem Termin, den Hermes dir per E-Mail und SMS mitteilt. Eine Spedition, die direkt vom Lieferanten kommt, kündigt sich laut OTTO etwa eine Woche vorher an, wenn du deine Telefonnummer angegeben hast.
@@ -102,11 +102,11 @@ Beim Verkäufer OTTO zahlst du unabhängig vom Bestellwert je Bestellung und Lie
 
 UP Plus ist kein Abo: Nach 12 Monaten fällst du automatisch auf UP Basic zurück. Für Artikel anderer Verkäufer gilt der Gratis-Versand mit UP nicht. Jeder Verkäufer berechnet seine eigenen Versandkosten, die am Artikel stehen. Schickst du alle Artikel einer Bestellung zurück, schreibt OTTO dir auch die normalen Versandkosten gut.
 
-**Hermes PaketShop.** Wähl ihn im Bestellvorgang unter „Anschrift ändern“, als feste Lieferanschrift speichern lässt er sich nicht. OTTO schreibt dir, sobald das Paket da ist, und es liegt bis zu 7 Werktage bereit. Abholen musst du es persönlich mit Personalausweis: Hermes nennt Otto unter den Versendern, bei denen niemand mit Vollmacht abholen darf. Nicht in den PaketShop gehen Artikel anderer Verkäufer, Speditionsware, Sperriges wie Leitern und Verderbliches wie Pflanzen. Eine DHL Packstation erwähnt OTTO als Lieferadresse nicht. Mehr zu Abholstellen: [Paketautomaten](guide:parcel-lockers).
+**Hermes PaketShop.** Wähl ihn im Bestellvorgang unter „Anschrift ändern“, als feste Lieferanschrift speichern lässt er sich nicht. OTTO schreibt dir, sobald das Paket da ist, und es liegt bis zu 7 Werktage bereit. Hermes hat über 17.000 PaketShops in Deutschland. Abholen musst du es persönlich mit Personalausweis: Hermes nennt Otto unter den Versendern, bei denen niemand mit Vollmacht abholen darf. Nicht in den PaketShop gehen Artikel anderer Verkäufer, Speditionsware, Sperriges wie Leitern und Verderbliches wie Pflanzen. Eine DHL Packstation erwähnt OTTO als Lieferadresse nicht. Mehr zu Abholstellen: [Paketautomaten](guide:parcel-lockers).
 
 **Hermes WunschZustellung.** Mit der Sendungsnummer eines Hermes-Pakets wählst du in der Hermes-Sendungsverfolgung oder der Hermes App einen Ablageort, einen Nachbarn, einen PaketShop oder einen anderen Tag. Ob sich die Zustellung noch ändern lässt, zeigt dir auch der Link „Zustellung ändern“ in deinem OTTO-Konto.
 
-**Spedition.** Für sofort lieferbare Speditionsartikel wählst du den Wunschtermin schon beim Bestellen, außer du buchst einen kostenpflichtigen Aufbau- oder Installationsservice. Hermes teilt den Termin per E-Mail und SMS mit und ruft 30 bis 60 Minuten vor der Lieferung an. In „Mein Konto“ änderst du den Termin online, und am Liefertag zeigt „Auf der Karte anzeigen“ das Live-Tracking. Bei einer anderen Spedition rufst du für einen neuen Termin die Nummer aus ihrer E-Mail an. Kommt die Ware direkt vom Lieferanten, muss die Straße für Lkw bis 40 Tonnen befahrbar sein.
+**Spedition.** Für sofort lieferbare Speditionsartikel wählst du den Wunschtermin schon beim Bestellen, außer du buchst einen kostenpflichtigen Aufbau- oder Installationsservice. Hermes teilt den Termin per E-Mail und SMS mit und ruft 30 bis 60 Minuten vor der Lieferung an. In „Mein Konto“ änderst du den Termin online, gibst einen Wunsch-Abstellort an und findest nach der Lieferung den elektronischen Lieferschein sowie die Kontaktdaten des Hermes-Depots. Am Liefertag zeigt „Auf der Karte anzeigen“ das Live-Tracking: den Liefertermin auf bis zu 30 Minuten genau und das Lieferfahrzeug in Echtzeit. Bei einer anderen Spedition rufst du für einen neuen Termin die Nummer aus ihrer E-Mail an. Kommt die Ware direkt vom Lieferanten, muss die Straße für Lkw bis 40 Tonnen befahrbar sein.
 
 ## OTTO-Paket nicht angekommen oder als zugestellt markiert: Was tun?
 
@@ -134,12 +134,12 @@ Kam das Paket beschädigt an, heb Verpackung und Inhalt auf, mach Fotos und meld
 
 Nur mit einer Lieferadresse in Deutschland. OTTO liefert „ausschließlich innerhalb Deutschlands“, an jede Adresse außer in Büsingen und auf Helgoland, und Artikel anderer Verkäufer lassen sich gar nicht aus dem Ausland bestellen. Zahlst du auf Rechnung, geht die erste Bestellung nur an die Rechnungsadresse.
 
-- **Österreich:** OTTO verweist auf die Otto GmbH in Graz, ein Unternehmen der Otto Group mit eigenem Shop unter ottoversand.at. Er liefert innerhalb Österreichs, mit eigenen Versandkosten. Unter otto.at findest du dagegen OTTO Immobilien, ein Wiener Immobilienbüro.
+- **Österreich:** OTTO verweist auf die Otto GmbH in Graz, ein Unternehmen der Otto Group mit eigenem Shop unter ottoversand.at. Er liefert innerhalb Österreichs, mit eigenen Versandkosten: Ein Paket kostet unter 75 € Bestellwert 3,99 €, eine Spedition 39,99 €, und je Bestellung kommen 2,40 € gesetzliche Paketsteuer dazu. Ab der zweiten Bestellung lässt du dir Pakete dort auch kostenlos, unabhängig vom Bestellwert, an einen von rund 1.600 Hermes PaketShops liefern. Unter otto.at findest du dagegen OTTO Immobilien, ein Wiener Immobilienbüro.
 - **Schweiz:** Hier nennt OTTO kein Unternehmen der Otto Group. OTTO'S (ottos.ch) ist eine Schweizer Ladenkette aus Sursee, 1978 von Otto Ineichen gegründet und in Familienbesitz, also kein Ableger von otto.de.
 
 ## OTTO-Bestellung zurücksenden
 
-Du meldest die Rücksendung in „Mein Konto“ an und bekommst das Etikett als QR-Code oder PDF. Kostenlos ist sie innerhalb von 30 Tagen ab Erhalt, auch bei anderen Verkäufern. Deren Artikel gehen aber an den Verkäufer zurück, nicht an OTTO. Für Speditionsware und Pakete über 25 kg vereinbarst du einen Abholtermin. Wo du die Nummer der Retoure findest und wann das Geld kommt: [Retoure verfolgen](guide:returns-tracking).
+Du meldest die Rücksendung in „Mein Konto“ an und bekommst das Etikett als QR-Code oder PDF. Kostenlos ist sie innerhalb von 30 Tagen ab Erhalt, auch bei anderen Verkäufern. Artikel, die du seit dem 1. November 2026 beim Verkäufer OTTO bestellt hast, schickst du laut OTTO bis zum 31. Januar 2027 kostenlos zurück. Artikel anderer Verkäufer gehen an den Verkäufer zurück, nicht an OTTO, mit Hermes, DHL oder GLS an ein Lager in Deutschland oder mit DHL eCommerce in eines von acht EU-Ländern, etwa Österreich oder Polen. Ist eine solche Retoure nach 14 Tagen nicht zugestellt oder fehlt 5 Werktage nach der Zustellung die Gutschrift, hilft auch hier das OTTO Versprechen. Für Speditionsware und Pakete über 25 kg vereinbarst du einen Abholtermin. Wo du die Nummer der Retoure findest und wann das Geld kommt: [Retoure verfolgen](guide:returns-tracking).
 
 ## Kann ich ein OTTO-Paket mit Peek verfolgen?
 
@@ -147,21 +147,23 @@ Ja, mit der Sendungsnummer des Paketdienstes. Kopiere sie aus der Sendungsverfol
 
 Bringt Hermes deine Speditionsware zu zweit, stammt die Nummer vom Hermes Einrichtungs-Service. Andere Paketdienste nutzen dieselben Nummernformen, deshalb fragt Peek ihn je nach Nummer neben anderen; zeigt Peek einen anderen Dienst oder keinen an, wählst du mit „Ändern“ den Hermes Einrichtungs-Service. Jedes Paket hat seine eigene Nummer, füg also jedes hinzu. OTTOs eigene Nummern, etwa deine Kundennummer, verfolgt Peek nicht.
 
+Sobald ein Paket in Zustellung ist, fragt Peek bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten nach, oder alle 5 Minuten, wenn die Abfrage einen Browser öffnen muss (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet). Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, bei GLS in Deutschland stündlich. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt.
+
 Peek zeigt, was der Paketdienst veröffentlicht. Erstattungen, das OTTO Versprechen und Rücksendungen bleiben in deinem OTTO-Konto.
 
 :::sources
-- [OTTO: Häufig gestellte Fragen](https://www.otto.de/service/faq/) – Mein Konto, Lieferzeiten, Sonn- und Feiertage, Hermes oder DHL, Status, mehrere Pakete, PaketShop im Bestellvorgang, nur Deutschland, Büsingen und Helgoland, Rechnungsadresse, Inseln, Kundennummer, Schaden, Rücksendung, Versandkosten-Gutschrift
-- [OTTO: Lieferung](https://www.otto.de/service/lieferung/) – Versandkosten, UP-Tabellen, Hermes PaketShop, 7 Werktage, Personalausweis, ausgeschlossene Artikel, WunschZustellung, Spedition, Wunschtermin, Bordsteinkante, 40 Tonnen, andere Verkäufer
+- [OTTO: Häufig gestellte Fragen](https://www.otto.de/service/faq/) – Mein Konto, Lieferzeiten, Sonn- und Feiertage, Hermes oder DHL, Status, mehrere Pakete, PaketShop im Bestellvorgang, nur Deutschland, Büsingen und Helgoland, Rechnungsadresse, Inseln, Kundennummer, Schaden, Rücksendung, kostenlose Rücksendung bis 31. Januar 2027, Versandkosten-Gutschrift (gelesen am 10. November 2026)
+- [OTTO: Lieferung](https://www.otto.de/service/lieferung/) – Versandkosten, UP-Tabellen, Hermes PaketShop, über 17.000 PaketShops, 7 Werktage, Personalausweis, ausgeschlossene Artikel, WunschZustellung, Spedition, Wunschtermin, Live-Tracking auf 30 Minuten genau, Abstellort, Lieferschein, Depot, Bordsteinkante, 40 Tonnen, andere Verkäufer (gelesen am 10. November 2026)
 - [OTTO: Hermes Live-Tracking](https://www.otto.de/shoppages/geographische_sendungsverfolgung) – „Auf der Karte anzeigen“ am Liefertag
 - [OTTO: Lieferung ins Ausland](https://www.otto.de/shoppages/lieferungausland) – nur innerhalb Deutschlands, Otto GmbH Graz, ottoversand.at, keine Schweiz
 - [OTTO: OTTO-Marktplatz FAQ](https://www.otto.de/service/faqs_otto_marktplatz/) – Name des Verkäufers, Versanddienstleister in Mein Konto, eigene Versandkosten, keine Bestellung aus dem Ausland, Rücksendung an den Verkäufer
 - [OTTO: Allgemeine Geschäftsbedingungen](https://www.otto.de/service/agb/) – Bestellbestätigung, Versandankündigung, Hermes oder DHL, mehrere Lieferungen, Versandart am Artikel
-- [OTTO: OTTO Versprechen](https://www.otto.de/service/ottoversprechen/) – 48 Stunden, 60 Tage, Ablageort, 14 Tage, keine Garantie, Streik und Unwetter
+- [OTTO: OTTO Versprechen](https://www.otto.de/service/ottoversprechen/) – 48 Stunden, 60 Tage, Ablageort, 14 Tage, Rücksendungen, keine Garantie, Streik und Unwetter (gelesen am 10. November 2026)
 - [OTTO: Verkäufer kontaktieren](https://www.otto.de/shoppages/verkaeufer_kontaktieren) – „Verkäufer kontaktieren“ in Bestellungen
 - [OTTO: Kontakt](https://www.otto.de/service/contact/) – KI-Assistent, Hilfe & Kontakt
 - [OTTO: OTTO UP](https://www.otto.de/service/up/) – Basic, Plus, 9,90 €, kein Abo, Ausnahmen
 - [OTTO: OTTO-App](https://www.otto.de/service/ordercellphonehandyservices/) – Push-Nachricht zum Lieferstatus
-- [OTTO Market: Versand & Retouren](https://www.otto.market/de/sofunktionierts/versand-retouren.html) – Paketdienste der Verkäufer, Sendungsverfolgung Pflicht, Lager in der EU, Spedition nach Wahl
+- [OTTO Market: Versand & Retouren](https://www.otto.market/de/sofunktionierts/versand-retouren.html) – Paketdienste der Verkäufer, Sendungsverfolgung Pflicht, Lager in der EU, Retouren mit Hermes, DHL, GLS oder DHL eCommerce, Spedition nach Wahl (gelesen am 10. November 2026)
 - [Hermes: Wo ist meine Sendung?](https://www.myhermes.de/service/fragen/empfangen/wo-ist-meine-sendung.html) – elektronische Ankündigung, nicht alle Schritte, 3 Werktage, Recherche nach 5 Werktagen
 - [Hermes: Ab wann kann ich meine Sendung verfolgen?](https://www.myhermes.de/service/fragen/empfangen/zeitpunkt-sendungsverfolgung.html) – erster Status, 2 bis 3 Tage, Versender fragen
 - [Hermes: Einmalige Vollmacht](https://www.myhermes.de/content/pdf/einmalige-vollmacht.pdf) – keine Abholung mit Vollmacht bei Otto
@@ -172,7 +174,7 @@ Peek zeigt, was der Paketdienst veröffentlicht. Erstattungen, das OTTO Versprec
 - [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – bei Online-Bestellungen den Absender kontaktieren, Nachforschung nach 5 Werktagen
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – Gefahrübergang beim Verbrauchsgüterkauf
 - [OTTO Österreich: Impressum](https://www.ottoversand.at/service-hilfe/ueber-uns/impressum/) – Otto GmbH Graz, Otto Austria Group
-- [OTTO Österreich: Lieferung](https://www.ottoversand.at/service-hilfe/service/lieferung) – innerhalb Österreichs
+- [OTTO Österreich: Lieferung](https://www.ottoversand.at/service-hilfe/service/lieferung) – innerhalb Österreichs, 3,99 € unter 75 €, Spedition 39,99 €, Paketsteuer 2,40 €, rund 1.600 Hermes PaketShops gratis, nicht bei der ersten Bestellung (gelesen am 10. November 2026)
 - [OTTO Immobilien: Impressum](https://www.otto.at/impressum/) – otto.at ist ein Immobilienbüro
 - [OTTO'S: Über uns](https://www.ottos.ch/de/about) – Sursee, 1978, Otto Ineichen, Familienbesitz
 - [Universal Parcel Scraper: Carrier-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Nummernformen, was Peek erkennt

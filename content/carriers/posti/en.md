@@ -3,7 +3,7 @@ title: Posti tracking: item ID, statuses, lockers and contact
 description: Track a Posti parcel in Finland: what the JJFI item ID looks like, what each English status means, how long lockers keep parcels and how to reach Posti.
 slug: posti-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Posti is Finland's postal and parcel company. Track a parcel on [Posti's tracking page](https://www.posti.fi/en/tracking) or in Posti's OmaPosti app with its item ID, or paste the number in the box above. The number comes from the sender, and it is also on Posti's notice of arrival in OmaPosti, by SMS or by email.
@@ -36,6 +36,7 @@ Posti's tracking shows its wordings in English, Finnish or Swedish, following th
 | `The item is in sorting` | At a sorting centre. Parcels are usually sorted once or twice, more on long routes. |
 | `Item accepted from transport` | Still on its way. Not delivered, despite the wording. |
 | `Item is routed to an outlet because the locker was full.` | Your chosen locker was full, so it goes to a Posti outlet instead. |
+| `Item is in delivery transportation.` | It's in the delivery vehicle on its way to you. Peek shows "Out for delivery". |
 | `Item is ready for a pick up` | Waiting for you. The notice of arrival has the place and code. |
 | `We sent the recipient a text message about the item` | Posti texted you. The parcel hasn't moved. |
 | `The item has been delivered` | Delivered, including after you picked it up. |
@@ -45,7 +46,7 @@ Posti's tracking shows its wordings in English, Finnish or Swedish, following th
 
 ## Posti parcel lockers, pickup and missed deliveries
 
-**Notice of arrival.** When a parcel reaches a Parcel Locker or service point, Posti sends the details and the opening code in OmaPosti, by SMS and by email. Pick it up within 5 days. Some parcels wait longer, so trust the last pickup date on your notice.
+**Notice of arrival.** When a parcel reaches a Parcel Locker or service point, Posti sends the details and the opening code in OmaPosti, by SMS and by email. Pick it up within 5 days. Some parcels wait longer, such as parcels arriving from abroad (usually 14 days) or those whose notice comes by letter (9 days), so trust the last pickup date on your notice.
 
 **More time.** In OmaPosti, "Extend pickup time" adds up to 14 days from the original last pickup date, for €1.90 according to Posti's English page, €1.90 a day according to its Finnish one.
 
@@ -67,7 +68,7 @@ Posti's tracking shows its wordings in English, Finnish or Swedish, following th
 
 **Damaged.** Tell the driver at handover, take photos, use Posti's damaged item form and tell the sender.
 
-**Customs.** A parcel from outside the EU may need clearing before delivery, on Finnish Customs' site or in OmaPosti. It waits 20 days in Posti's warehouse, then goes back. When taxes are due at clearance, Posti adds a €3.10 handling fee (€3.30 at an outlet), paid on Posti's own website. Since 1 November 2026 Finnish Customs also charges €2 per goods item. Current fees are on [Posti's customs page](https://www.posti.fi/en/receiving/customs-clearance).
+**Customs.** A parcel from outside the EU may need clearing before delivery, on Finnish Customs' site or in OmaPosti. It waits 20 days in Posti's warehouse, then goes back. When taxes are due at clearance, Posti adds a €3.10 handling fee (€3.30 at an outlet), paid on Posti's own website. Since 1 November 2026 Finnish Customs also charges €2 per goods item. For a purchase under €150 whose VAT the shop charged at checkout (IOSS), the sender clears customs and you pay nothing on arrival; if the payment details for the duty and fee are missing, Posti returns the parcel to the sender. Current fees are on [Posti's customs page](https://www.posti.fi/en/receiving/customs-clearance).
 
 > Posti never sends a link to pay customs or a handling fee. A fake message can even contain a genuine tracking code: delete it without opening the link.
 
@@ -85,11 +86,11 @@ Posti lists no customer email address.
 
 [Peek](/) names a `JJFI` number as Posti's straight away. A posti.fi tracking link (`/tracking/`, `/seuranta/` or `/uppfoljning/` followed by the number, also after a language such as `/en/`) names Posti for any number. No postcode needed.
 
-For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and names Posti once it knows it. If Posti doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." Added to a Peek account, the parcel is then checked hourly for 6 hours, then less and less often; without an account, checks stop after 6 hours unless you turn on "Notify me when it’s found", which keeps a daily check going until 30 days after you added it. With a wrong check digit, or for an SSCC that several carriers know, pick Posti with "Change". A foreign number tracks at Posti after "Change" or from a posti.fi link, and Peek can follow some international parcels to Posti.
+For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and names Posti once it knows it. If Posti doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." Added to a Peek account, the parcel is then checked hourly for 6 hours, then less and less often; without an account, checks stop after 6 hours unless you turn on "Notify me when it’s found", which keeps a daily check going until 30 days after you added it. For an SSCC of the shape above, Peek asks Posti, Matkahuolto, Swiss Post Cargo, PostNord and NZ Post. With a wrong check digit, or for an SSCC that several carriers know, pick Posti with "Change". A foreign number tracks at Posti after "Change" or from a posti.fi link. Otherwise Peek follows it at the sending post first; when that post says the parcel is going to Finland (or names no destination and you follow it from Finland), Peek also asks Posti with the same number and, once Posti shows a scan at least as new as the sending post's newest, follows it there, keeping the earlier history.
 
 In Estonia, Latvia and Lithuania, Posti goes by SmartPosti: Peek's carrier search finds Posti under that name ("Also called SmartPosti"), and tracking links from smartposti.ee or itella.ee (or their .lv and .lt sites) name Posti for any code. Peek keeps Posti's answer only when exactly one shipment carries the exact code you typed, so for a SmartPosti code it may find nothing; then look the parcel up on smartposti.ee.
 
-Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes (every 2 from 6 a.m. local time on the day Posti scans the parcel out for delivery, while Posti's own tracker answers; through tracking services, every 15 minutes), draws each scan on a map and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
+Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes (every 2 from 6 a.m. local time on the day Posti scans the parcel out for delivery, while Posti's own tracker answers; through tracking services, every 15 minutes), draws each scan on a map and can notify you of changes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Times are shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
 
 ## Questions about Posti tracking
 
@@ -110,11 +111,11 @@ A Small parcel arrives 2 to 5 business days after Posti receives it. Otherwise, 
 Yes, in the OmaPosti app.
 
 :::sources
-- [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage, extension, lockers, codes, power of attorney, returns, phone, chat
-- [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – in Finnish: extension €1.90 a day
+- [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage (14 days from abroad, 9 days with a letter notice), extension, lockers, codes, power of attorney, returns, phone, chat (read 10 November 2026)
+- [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – in Finnish: extension €1.90 a day (read 10 November 2026)
 - [Posti: Track item](https://www.posti.fi/en/tracking) – status wordings, explanation lines, ULKOMAILLA, languages
 - [Posti: Home delivery](https://www.posti.fi/en/receiving/home-delivery) – missed delivery, Small parcel, delivery times, delivered not received
-- [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee since 1 November 2026, IOSS
+- [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee since 1 November 2026, IOSS clearance by the sender, returns when payment details are missing (read 10 November 2026)
 - [Posti: Ordering from abroad and customs clearance](https://www.posti.fi/en/receiving/customs-clearance/ordering-from-abroard-and-custom-clearance) – 20 days in the warehouse, OmaPosti
 - [Posti: What does Posti compensate for and to whom](https://www.posti.fi/en/customer-service/damage-situations/what-does-posti-compensate-for-and-to-whom) – clarification request, compensation, damage steps
 - [Posti: Claim for compensation](https://www.posti.fi/en/customer-service/damage-situations/claim-for-compensation) – claim form

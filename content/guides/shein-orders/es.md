@@ -4,7 +4,7 @@ description: Quién reparte los pedidos de Shein en España, dónde está el nú
 slug: seguimiento-pedido-shein
 picture: Un sobre acolchado blando con una etiqueta de talla, una furgoneta y Pip probándose una bufanda.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-10
 ---
 
 Cuando sale tu pedido, Shein te manda un correo con el número de seguimiento, y en «Mis pedidos» ves el mismo número, la empresa de reparto y el último estado. Si el artículo sale de un almacén de fuera de Europa, el paquete vuela hasta España, pasa la aduana y lo entrega una empresa de aquí: en cada relevo el seguimiento puede quedarse callado unos días. Si no llega, tienes 45 días desde la fecha de pago para avisar a Shein.
@@ -77,7 +77,7 @@ Hasta la última fecha estimada, la entrega normalmente sigue su curso. Si se pa
 
 La Garantía de Entrega a Tiempo te da 200 Puntos SHEIN si el pedido no llega en la fecha límite indicada, salvo retrasos ajenos a Shein. Es gratis, también cuando el envío te sale gratis, y la eliges al terminar la compra. A qué envíos se aplica depende de la página: su ayuda dice que vale para el Envío Exprés, con la opción «Entrega a Tiempo», y los términos del servicio, que vale para todas las opciones de entrega si marcas la casilla «Entrega Puntual».
 
-Sobre la aduana, Shein dice dos cosas. Por un lado, el importe que ves al hacer el pedido es el final, y Shein no te cobrará nada más. Por otro, la aduana puede retener un paquete, los aranceles corren de tu cuenta y en Canarias, Ceuta y Melilla se aplican los impuestos locales. Si no quieres pagar, puedes rechazar el paquete: Shein te reembolsa el pedido cuando le vuelve. Desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE suma, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. Importes, Canarias, Ceuta y Melilla, y los SMS falsos que piden pagar: [paquete retenido en aduanas](guide:customs).
+Sobre la aduana, Shein dice dos cosas. Por un lado, el importe que ves al hacer el pedido es el final, y Shein no te cobrará nada más. Por otro, la aduana puede retener un paquete, los aranceles corren de tu cuenta y en Canarias, Ceuta y Melilla se aplican los impuestos locales. Si no quieres pagar, puedes rechazar el paquete: Shein te reembolsa el pedido cuando le vuelve. Desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE suma, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto, que debe en primer lugar quien declara el envío en aduana: la plataforma, el vendedor, el transportista o un agente. Importes, Canarias, Ceuta y Melilla, y los SMS falsos que piden pagar: [paquete retenido en aduanas](guide:customs).
 
 ## Paquete de Shein no recibido o marcado como entregado: qué hacer
 
@@ -103,14 +103,16 @@ Sí, con el número de la empresa de reparto. Cópialo del correo de envío o de
 
 - **Varios paquetes, varios números.** Añade cada número: Peek sigue cada paquete por separado.
 - **Una forma que comparten varias empresas.** Si Peek propone la empresa equivocada, pulsa «Cambiar» y elige la que indica Shein en «Seguimiento».
-- **Paack pide el código postal.** Si tu paquete va con Paack y Peek no la propone, elígela con «Cambiar». Luego escribe el código postal de entrega: sin él, Paack no enseña la mayoría de los envíos.
-- **El número de pedido de Shein no sirve.** No es un número de seguimiento, y Peek no puede seguirlo.
-- **Una nueva empresa en España.** Si la primera empresa indica quién toma el relevo, Peek guarda el historial anterior, pasa a la nueva en cuanto su seguimiento muestra novedades y en la tarjeta ves su nombre y su número.
+- **Paack pide el código postal.** Un número de Shein que reparte Paack puede empezar por `C` o `E` y seguir con una fecha de seis cifras (año, mes y día) y 8 cifras más. Si ninguna empresa reconoce ese número, Peek te dice «Puede que Paack tenga este paquete. Añade el código postal de entrega para seguirlo.» Si no ves ese aviso, elige Paack con «Cambiar», donde aparece en «Encaja con este número». Luego escribe el código postal de entrega: sin él, Paack no enseña la mayoría de los envíos.
+- **El número de pedido de Shein no sirve.** No es un número de seguimiento, y Peek no puede seguirlo. Si pegas uno que empieza por `GSH`, `GSO` o `GSU` y sigue con 12 letras o cifras, Peek te avisa con «Parece un número de pedido de Shein» y te indica que en «Mis pedidos» toques «Seguimiento» para ver el número de cada paquete.
+- **Una nueva empresa en España.** Si la primera empresa indica quién toma el relevo, Peek guarda el historial anterior, pasa a la nueva en cuanto su seguimiento muestra novedades, sigue el ritmo de la que reparte el paquete y en la tarjeta ves su nombre y su número.
+
+Cuando el paquete está en reparto, Peek consulta el seguimiento hasta una vez cada 2 minutos con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa). A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo.
 
 Peek muestra lo que publican las empresas de reparto. Las reclamaciones, los puntos de la garantía, las devoluciones y los reembolsos se quedan en tu cuenta de Shein.
 
 :::sources
-- [Shein España: Información de Envío](https://es.shein.com/Shipping-Info-a-280.html) – plazos y costes, procesado de 1 a 3 días, Almacén UE, aduana, Canarias, Ceuta y Melilla, correo con el número, 45 y 30 días, 200 puntos
+- [Shein España: Información de Envío](https://es.shein.com/Shipping-Info-a-280.html) – plazos y costes, procesado de 1 a 3 días, Almacén UE, aduana, Canarias, Ceuta y Melilla, correo con el número, 45 y 30 días, 200 puntos (leído el 10 de noviembre de 2026)
 - [Shein España: Cómo Rastrear El Pedido](https://es.shein.com/How-to-track-my-order-a-496.html) – Mis pedidos, Seguimiento, Recibido
 - [Shein España: ¿Dónde está mi pedido?](https://es.shein.com/faq/detail?id=56192) – Mis pedidos, Seguimiento, correo de envío
 - [Shein España: Conocer el estado de mi pedido](https://es.shein.com/faq/detail?id=56347) – fecha estimada, artículos muy vendidos, depósito de la mensajería local
@@ -134,7 +136,7 @@ Peek muestra lo que publican las empresas de reparto. Las reclamaciones, los pun
 - [Shein España: ¿Qué pasa si mi paquete no se entrega antes de la última fecha de entrega prevista?](https://es.shein.com/faq/detail?id=163705) – en curso hasta la última fecha
 - [Shein España: ¿Qué es la "Servicio de Entrega a Tiempo"?](https://es.shein.com/faq/detail?id=138095) – 200 puntos, Envío Exprés, Entrega a Tiempo al pagar
 - [Shein España: Términos y Condiciones del Servicio de Entrega Puntual](https://es.shein.com/on-time-delivery-terms-and-conditions-a-3491.html) – todas las opciones de entrega, casilla «Entrega Puntual», 200 puntos
-- [Shein España: ¿Hay algún cargo adicional?](https://es.shein.com/faq/detail?id=57097) – importe final, sin cargos posteriores
+- [Shein España: ¿Hay algún cargo adicional?](https://es.shein.com/faq/detail?id=57097) – importe final, sin cargos posteriores (leído el 10 de noviembre de 2026)
 - [Shein España: Me llegó una carta que me dice que mi pedido está retenido en aduanas](https://es.shein.com/faq/detail?id=56362) – aranceles a cargo del cliente, rechazo y reembolso
 - [Shein España: El pedido aparece como entregado, pero no lo he recibido](https://es.shein.com/faq/detail?id=60937) – las cinco comprobaciones, 48 horas, empresa de transporte, atención al cliente
 - [Shein España: ¿Dónde puedo encontrar mi comprobante de entrega?](https://es.shein.com/faq/detail?id=189385) – foto o firma, verificación con la mensajería
@@ -143,7 +145,7 @@ Peek muestra lo que publican las empresas de reparto. Las reclamaciones, los pun
 - [Shein España: ¿Por qué me devolvieron mi paquete?](https://es.shein.com/faq/detail?id=56072) – motivos de devolución, Correos
 - [Shein España: ¿Cómo puedo hacer una devolución?](https://es.shein.com/faq/detail?id=56412) – Solicitar devolución, GLS, InPost, CTT, Correos, primera etiqueta gratis
 - [Shein España: Política de devolución](https://es.shein.com/Return-Policy-a-281.html) – no a la dirección del remitente
-- [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026
-- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € y 2 € por tipo de producto
-- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forma de los números de Correos, empresas que Peek reconoce, código postal de Paack
+- [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026 (leído el 10 de noviembre de 2026)
+- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € y 2 € por tipo de producto, el declarante paga en primer lugar
+- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forma de los números de Correos, empresas que Peek reconoce, números de SHEIN de Paack y su código postal
 :::

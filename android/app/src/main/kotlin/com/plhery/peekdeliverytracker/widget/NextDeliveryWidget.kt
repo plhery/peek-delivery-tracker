@@ -33,14 +33,18 @@ import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.updateAll
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AppClock
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetListSample
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSample
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetTimeline
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetTurn
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
+import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.WidgetCenter
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.Device
@@ -150,7 +154,7 @@ class NextDeliveryWidgetReceiver : GlanceAppWidgetReceiver() {
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        DeliveryWidgetUpdates.cancel(context)
+        DeliveryWidgetUpdates.cancel(context, gone = NextDeliveryWidgetReceiver::class.java)
     }
 }
 
@@ -191,6 +195,20 @@ class DeliveryWidgetSource(
         val languageCode = snapshot?.languageCode ?: ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
         val turn = store.turn(size = DeliveryWidgetTimeline.turnSize(medium), now = at)?.parcel
         return DeliveryWidgetEntry.make(at, store.isEnabled, languageCode, snapshot, medium, turn) { card, shape -> read(card, shape) }
+    }
+
+    /** What the list widget shows: the parcels the app published for it, in its order, those delivered over a day ago gone. */
+    fun list(at: Instant): DeliveryWidgetList {
+        val snapshot = store.snapshot
+        val languageCode = snapshot?.languageCode ?: ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
+        return DeliveryWidgetList.make(at, store.isEnabled, languageCode, snapshot)
+    }
+
+    /** The list widget's sample (DeliveryWidgetListSample), in the reader's language, which its gallery picture shows. */
+    fun listSample(at: Instant): DeliveryWidgetList {
+        val languageCode = ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
+        val localizer = Localizer(AppLanguage.fromRawValue(languageCode) ?: AppLanguage.En)
+        return DeliveryWidgetList.make(at, true, languageCode, DeliveryWidgetListSample.snapshot(localizer, at), isSample = true)
     }
 
     /** `placeholder`: the demo's next deliveries, as the widget shows them in the reader's language. */
@@ -250,10 +268,11 @@ internal object WidgetPictures {
 }
 
 /**
- * WidgetKit's reloads and timeline: the widgets drawn again when the app publishes ([GlanceWidgetCenter]), when the
- * next button turns them, and when their timeline would have WidgetKit ask again: 20 minutes on, or sooner when a
- * turn's spell ends. The alarm is set only while a widget is placed; it doesn't wake the phone, as WidgetKit's timeline
- * refreshes at its own pace, and without the exact alarm permission it comes in a window ([window]).
+ * WidgetKit's reloads and timeline: the widgets, both kinds, drawn again when the app publishes ([GlanceWidgetCenter]),
+ * when the next button turns them, and when their timeline would have WidgetKit ask again: 20 minutes on, or sooner
+ * when a turn's spell ends. The alarm is set only while a widget of either kind is placed; it doesn't wake the phone, as
+ * WidgetKit's timeline refreshes at its own pace, and without the exact alarm permission it comes in a window
+ * ([window]).
  */
 object DeliveryWidgetUpdates {
     const val REFRESH = "com.plhery.peekdeliverytracker.widget.REFRESH"
@@ -262,6 +281,7 @@ object DeliveryWidgetUpdates {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val revisionState = MutableStateFlow(0)
     private var previews: WidgetGalleryPreviews? = null
+    private var listPreviews: WidgetGalleryPreviews? = null
 
     /** Bumped at each reload: a widget being shown reads the store again. */
     val revision: StateFlow<Int> = revisionState.asStateFlow()
@@ -271,6 +291,7 @@ object DeliveryWidgetUpdates {
         val app = context.applicationContext
         invalidate(app)
         NextDeliveryWidget().updateAll(app)
+        ParcelsWidget().updateAll(app)
     }
 
     /** [update], from where nothing waits for it but `done`. */
@@ -280,6 +301,7 @@ object DeliveryWidgetUpdates {
         scope.launch {
             try {
                 NextDeliveryWidget().updateAll(app)
+                ParcelsWidget().updateAll(app)
             } finally {
                 done()
             }
@@ -314,16 +336,21 @@ object DeliveryWidgetUpdates {
      */
     fun window(wait: Duration): Duration = minOf(wait.multipliedBy(3).dividedBy(4), MAX_WINDOW)
 
-    /** No refresh once the last widget is gone. */
-    fun cancel(context: Context) {
+    /** No refresh once the last widget is gone: the last of `gone`'s kind, with none of the other kind placed. */
+    fun cancel(context: Context, gone: Class<out GlanceAppWidgetReceiver>) {
+        if (receivers.any { it != gone && isPlaced(context, it) }) return
         context.getSystemService(AlarmManager::class.java)?.cancel(refresh(context))
     }
 
-    /** Whether a widget is on a home screen. */
-    fun isPlaced(context: Context): Boolean {
+    /** Whether a widget of either kind is on a home screen. */
+    fun isPlaced(context: Context): Boolean = receivers.any { isPlaced(context, it) }
+
+    private fun isPlaced(context: Context, receiver: Class<out GlanceAppWidgetReceiver>): Boolean {
         val widgets = context.getSystemService(AppWidgetManager::class.java) ?: return false
-        return widgets.getAppWidgetIds(ComponentName(context, NextDeliveryWidgetReceiver::class.java)).isNotEmpty()
+        return widgets.getAppWidgetIds(ComponentName(context, receiver)).isNotEmpty()
     }
+
+    private val receivers = listOf(NextDeliveryWidgetReceiver::class.java, ParcelsWidgetReceiver::class.java)
 
     private fun refresh(context: Context): PendingIntent = PendingIntent.getBroadcast(
         context, 0, Intent(context, NextDeliveryWidgetReceiver::class.java).setAction(REFRESH),
@@ -331,21 +358,22 @@ object DeliveryWidgetUpdates {
     )
 
     /**
-     * The gallery's pictures of the widget, generated from its content (Android 15 and later) as WidgetKit asks
-     * `getSnapshot` for them: in the app's language, with the reader's own cards once drawn ([WidgetGalleryPreviews]).
-     * Earlier Androids show the provider's preview layout.
+     * The gallery's pictures of the widgets, generated from their content (Android 15 and later) as WidgetKit asks
+     * `getSnapshot` for them: in the app's language, with the reader's own cards once drawn ([WidgetGalleryPreviews]),
+     * and the list's sample. Earlier Androids show the providers' preview layouts.
      */
     fun publishPreviews(context: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return
-        previews(context).request()
+        previews(context, list = false).request()
+        previews(context, list = true).request()
     }
 
-    /** The gallery's pictures, once the system's limit lets them through. */
-    fun retryPreviews(context: Context, done: () -> Unit) {
+    /** One kind's gallery pictures (the list's, or the next delivery's), once the system's limit lets them through. */
+    fun retryPreviews(context: Context, list: Boolean = false, done: () -> Unit) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return done()
         scope.launch {
             try {
-                previews(context).publish()
+                previews(context, list).publish()
             } finally {
                 done()
             }
@@ -353,8 +381,13 @@ object DeliveryWidgetUpdates {
     }
 
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
-    private fun previews(context: Context): WidgetGalleryPreviews = synchronized(this) {
-        previews ?: WidgetGalleryPreviews(scope, SystemGallery(context.applicationContext)).also { previews = it }
+    private fun previews(context: Context, list: Boolean): WidgetGalleryPreviews = synchronized(this) {
+        val app = context.applicationContext
+        if (list) {
+            listPreviews ?: WidgetGalleryPreviews(scope, SystemGallery.list(app)).also { listPreviews = it }
+        } else {
+            previews ?: WidgetGalleryPreviews(scope, SystemGallery.next(app)).also { previews = it }
+        }
     }
 
     /** What the gallery's pictures show: the app's version, and each size's language and cards; the sample or the reader's. */
@@ -366,28 +399,45 @@ object DeliveryWidgetUpdates {
         return WidgetGalleryPreviews.Shows(key, sample = entries.all { it.isSample })
     }
 
-    /** The system's gallery, the pictures it holds kept in the app's defaults. */
-    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
-    private class SystemGallery(private val context: Context) : WidgetGalleryPreviews.Gallery {
-        private val defaults = PreferencesDefaults.standard(context)
-        private val provider = ComponentName(context, NextDeliveryWidgetReceiver::class.java)
+    /**
+     * What the list's gallery pictures show: the sample alone, whatever the reader tracks, so they change with the
+     * app's version and the reader's language only.
+     */
+    internal fun listPreviewsShow(source: DeliveryWidgetSource, at: Instant): WidgetGalleryPreviews.Shows =
+        WidgetGalleryPreviews.Shows("${BuildConfig.VERSION_CODE}\n${source.listSample(at).languageCode}", sample = true)
 
-        override fun shows(): WidgetGalleryPreviews.Shows = previewsShow(DeliveryWidgetSource.of(context), AppClock.now())
+    /**
+     * The system's gallery for one kind of widget (its `receiver`), the pictures it holds kept in the app's defaults
+     * under `key`, tried again with the request code `retryCode`.
+     */
+    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    private class SystemGallery(
+        private val context: Context,
+        private val receiver: Class<out GlanceAppWidgetReceiver>,
+        private val key: String,
+        private val sampleKey: String,
+        private val retryCode: Int,
+        private val show: (DeliveryWidgetSource, Instant) -> WidgetGalleryPreviews.Shows,
+    ) : WidgetGalleryPreviews.Gallery {
+        private val defaults = PreferencesDefaults.standard(context)
+        private val provider = ComponentName(context, receiver)
+
+        override fun shows(): WidgetGalleryPreviews.Shows = show(DeliveryWidgetSource.of(context), AppClock.now())
 
         override var held: WidgetGalleryPreviews.Shows?
-            get() = defaults.string(PREVIEWS_KEY)?.let { WidgetGalleryPreviews.Shows(it, defaults.bool(PREVIEWS_SAMPLE_KEY)) }
+            get() = defaults.string(key)?.let { WidgetGalleryPreviews.Shows(it, defaults.bool(sampleKey)) }
             set(value) {
                 if (value == null) {
-                    defaults.removeObject(PREVIEWS_KEY)
-                    defaults.removeObject(PREVIEWS_SAMPLE_KEY)
+                    defaults.removeObject(key)
+                    defaults.removeObject(sampleKey)
                 } else {
-                    defaults.set(value.key, forKey = PREVIEWS_KEY)
-                    defaults.set(value.sample, forKey = PREVIEWS_SAMPLE_KEY)
+                    defaults.set(value.key, forKey = key)
+                    defaults.set(value.sample, forKey = sampleKey)
                 }
             }
 
         override suspend fun publish(): Int =
-            GlanceAppWidgetManager(context).setWidgetPreviews(NextDeliveryWidgetReceiver::class, intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN))
+            GlanceAppWidgetManager(context).setWidgetPreviews(receiver.kotlin, intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN))
 
         override fun remove() {
             context.getSystemService(AppWidgetManager::class.java)?.removeWidgetPreview(provider, AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN)
@@ -396,10 +446,16 @@ object DeliveryWidgetUpdates {
         override fun retry(after: Duration) {
             val alarms = context.getSystemService(AlarmManager::class.java) ?: return
             val retry = PendingIntent.getBroadcast(
-                context, 1, Intent(context, NextDeliveryWidgetReceiver::class.java).setAction(PREVIEWS),
+                context, retryCode, Intent(context, receiver).setAction(PREVIEWS),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
             )
             alarms.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + after.toMillis(), retry)
+        }
+
+        companion object {
+            fun next(context: Context) = SystemGallery(context, NextDeliveryWidgetReceiver::class.java, PREVIEWS_KEY, PREVIEWS_SAMPLE_KEY, 1, ::previewsShow)
+
+            fun list(context: Context) = SystemGallery(context, ParcelsWidgetReceiver::class.java, LIST_PREVIEWS_KEY, LIST_PREVIEWS_SAMPLE_KEY, 2, ::listPreviewsShow)
         }
     }
 
@@ -408,6 +464,8 @@ object DeliveryWidgetUpdates {
     private val MAX_WINDOW = Duration.ofMinutes(10)
     private const val PREVIEWS_KEY = "sdt.deliveryWidget.previews.v1"
     private const val PREVIEWS_SAMPLE_KEY = "sdt.deliveryWidget.previewsSample.v1"
+    private const val LIST_PREVIEWS_KEY = "sdt.deliveryListWidget.previews.v1"
+    private const val LIST_PREVIEWS_SAMPLE_KEY = "sdt.deliveryListWidget.previewsSample.v1"
 }
 
 /**

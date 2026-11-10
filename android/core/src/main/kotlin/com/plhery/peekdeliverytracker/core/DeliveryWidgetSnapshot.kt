@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
 import java.io.File
 import java.time.Instant
@@ -29,9 +30,26 @@ data class DeliveryWidgetParcel(
     @Serializable(with = ReferenceDateSerializer::class) val deliveredAt: Instant? = null,
     /** The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone. */
     val card: DeliveryWidgetCard? = null,
+    /** The parcel's stage as the app's list marks it, which the list widget shows; none from an app that didn't publish it. */
+    val stage: DeliveryWidgetStage? = null,
+    /** Whether the reader named the parcel: the list widget calls one without a name by its carrier. */
+    val named: Boolean? = null,
 ) {
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
+}
+
+/**
+ * A parcel's stage as a row of the app's list shows it: the status in the app's words, and the symbol and colour that
+ * mark it, the colour light then dark as hex.
+ */
+@Serializable
+data class DeliveryWidgetStage(val status: String, val symbol: String, val tint: List<String>) {
+    companion object {
+        /** As the list's rows mark a parcel at `stage`, `status` in the app's words (`ParcelStore.widgetParcel`). */
+        fun of(stage: TrackingStage?, status: String): DeliveryWidgetStage =
+            DeliveryWidgetStage(status, stage?.metadata?.symbol ?: "shippingbox.fill", ExperimentalPalette.tintHex(stage))
+    }
 }
 
 /**
@@ -108,6 +126,9 @@ object DeliveryWidgetSelection {
     /** How many parcels the widget's next button turns through. */
     const val limit = 8
 
+    /** How many parcels the store publishes: as many as the list widget shows at most, the first [limit] for the next button. */
+    const val listLimit = 15
+
     /** How long a delivered parcel stays in the widget, in seconds. */
     const val deliveredFor: Double = 24 * 60 * 60.0
 
@@ -119,17 +140,25 @@ object DeliveryWidgetSelection {
         onTheWay: List<DeliveryWidgetParcel>,
         delivered: List<DeliveryWidgetParcel>,
         now: Instant = AppClock.now(),
+    ): List<DeliveryWidgetParcel> = ordered(onTheWay, delivered, now).take(limit)
+
+    /** All the parcels in the widgets' order, of which the next button turns through the first [limit] ([parcels]). */
+    fun ordered(
+        onTheWay: List<DeliveryWidgetParcel>,
+        delivered: List<DeliveryWidgetParcel>,
+        now: Instant = AppClock.now(),
     ): List<DeliveryWidgetParcel> {
         val recent = delivered.filter { isShown(it, now) && it.deliveredAt != null }
-        return (onTheWay.filter { it.isOutForDelivery } + onTheWay.filter { !it.isOutForDelivery } + recent).take(limit)
+        return onTheWay.filter { it.isOutForDelivery } + onTheWay.filter { !it.isOutForDelivery } + recent
     }
 
     /**
      * What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
-     * delivery beside the parcel after it, and any other parcel alone, across it.
+     * delivery beside the parcel after it, and any other parcel alone, across it. Only the first [limit] of the
+     * parcels published, which may be up to [listLimit].
      */
     fun pages(of: List<DeliveryWidgetParcel>, medium: Boolean, now: Instant = AppClock.now()): List<List<DeliveryWidgetParcel>> {
-        val rest = ArrayDeque(of.filter { isShown(it, now) })
+        val rest = ArrayDeque(of.take(limit).filter { isShown(it, now) })
         val pages = mutableListOf<List<DeliveryWidgetParcel>>()
         while (true) {
             val first = rest.removeFirstOrNull() ?: break
@@ -140,7 +169,7 @@ object DeliveryWidgetSelection {
     }
 
     /** A delivered parcel leaves the widget a day after it arrived, whenever the app last published it. */
-    private fun isShown(parcel: DeliveryWidgetParcel, now: Instant): Boolean =
+    fun isShown(parcel: DeliveryWidgetParcel, now: Instant): Boolean =
         parcel.deliveredAt?.let { now.timeIntervalSince(it) < deliveredFor } ?: true
 }
 
@@ -166,6 +195,8 @@ data class DeliveryWidgetSnapshot(
     val generatedAt: Instant,
     val languageCode: String,
     val parcels: List<DeliveryWidgetParcel>,
+    /** How many parcels the widgets' order held when published, those past [DeliveryWidgetSelection.listLimit] too; null for `parcels.size`. */
+    val total: Int? = null,
 )
 
 /**
@@ -208,7 +239,7 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
     }
 
     fun save(snapshot: DeliveryWidgetSnapshot): Boolean {
-        val stored = StoredSnapshot(snapshot.generatedAt.timeIntervalSinceReferenceDate, snapshot.languageCode, snapshot.parcels)
+        val stored = StoredSnapshot(snapshot.generatedAt.timeIntervalSinceReferenceDate, snapshot.languageCode, snapshot.parcels, snapshot.total)
         val data = try {
             JsonEncoder().encode(StoredSnapshot.serializer(), stored)
         } catch (_: Exception) {
@@ -261,8 +292,8 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
 
 /** As the iPhone's JSONEncoder writes a snapshot: the date as seconds since 2001. */
 @Serializable
-internal class StoredSnapshot(val generatedAt: Double, val languageCode: String, val parcels: List<DeliveryWidgetParcel>) {
-    val snapshot: DeliveryWidgetSnapshot get() = DeliveryWidgetSnapshot(referenceDate(generatedAt), languageCode, parcels)
+internal class StoredSnapshot(val generatedAt: Double, val languageCode: String, val parcels: List<DeliveryWidgetParcel>, val total: Int? = null) {
+    val snapshot: DeliveryWidgetSnapshot get() = DeliveryWidgetSnapshot(referenceDate(generatedAt), languageCode, parcels, total)
 }
 
 /**

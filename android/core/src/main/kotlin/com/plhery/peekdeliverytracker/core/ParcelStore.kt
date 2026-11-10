@@ -1459,10 +1459,12 @@ class ParcelStore(
 
     private fun publishDeliveryWidget() {
         val snapshot = if (deliveryWidgetEnabled && (session.isAuthenticated || isGuest)) {
+            val ordered = widgetOrder(parcels, localizer, now())
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
-                parcels = carded(widgetDeliveries(parcels, localizer, now())),
+                parcels = carded(ordered.take(DeliveryWidgetSelection.listLimit)),
+                total = ordered.size,
             )
         } else {
             null
@@ -1486,18 +1488,20 @@ class ParcelStore(
     }
 
     /**
-     * Gives each parcel its card once the card's pictures are drawn, and starts drawing those that aren't, once each:
-     * a card that could not be drawn is not drawn again while the app runs.
+     * Gives each parcel the next button turns through its card once the card's pictures are drawn, and starts drawing
+     * those that aren't, once each: a card that could not be drawn is not drawn again while the app runs. The list
+     * widget's further parcels have none.
      */
     private fun carded(shown: List<DeliveryWidgetParcel>): List<DeliveryWidgetParcel> {
         val artist = widgetPictures ?: return shown
         val missing = mutableListOf<Pair<Parcel, DeliveryWidgetCard>>()
-        val carded = shown.map { item ->
-            val parcel = parcels.firstOrNull { it.id == item.id } ?: return@map item
+        val carded = shown.mapIndexed { index, item ->
+            if (index >= DeliveryWidgetSelection.limit) return@mapIndexed item
+            val parcel = parcels.firstOrNull { it.id == item.id } ?: return@mapIndexed item
             val card = DeliveryWidgetPictures.card(parcel, localizer, artist.scale)
             if (!DeliveryWidgetPictures.isDrawn(card, artist.folder)) {
                 if (card.pictures !in widgetPicturesFailed) missing += parcel to card
-                return@map item
+                return@mapIndexed item
             }
             item.copy(card = card)
         }
@@ -1719,7 +1723,11 @@ class ParcelStore(
         }
 
         /** The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first. */
-        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
+        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> =
+            widgetOrder(parcels, localizer, now).take(DeliveryWidgetSelection.limit)
+
+        /** All of them in that order ([DeliveryWidgetSelection.ordered]), of which the list widget shows as many as fit. */
+        fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
             val delivered = ParcelOrganizer
                 .visible(parcels, query = "", status = ParcelStatusFilter.Delivered, carrier = null, sort = ParcelSort.Updated, now = now)
                 .mapNotNull { parcel ->
@@ -1727,17 +1735,23 @@ class ParcelStore(
                     widgetParcel(parcel, localizer, localizer.parcelCompletionDate(parcel, now)).copy(deliveredAt = arrived)
                 }
             // The iPhone's nextDeliveries estimates with Date() rather than this `now`; passing it on can only make the two agree.
-            return DeliveryWidgetSelection.parcels(onTheWay = nextDeliveries(parcels, localizer, now), delivered = delivered, now = now)
+            return DeliveryWidgetSelection.ordered(onTheWay = nextDeliveries(parcels, localizer, now), delivered = delivered, now = now)
         }
 
-        private fun widgetParcel(parcel: Parcel, localizer: Localizer, detail: String?): DeliveryWidgetParcel = DeliveryWidgetParcel(
-            id = parcel.id,
-            label = parcel.label.nonEmpty ?: localizer.text("common.parcel"),
-            carrier = CarrierCatalog.shared.info(parcel.displayedCarrier, localizer.language).displayName,
-            trackingNumber = CarrierCatalog.format(parcel.trackingNumber, parcel.carrier),
-            detail = detail ?: localizer.parcelStatus(parcel),
-            isOutForDelivery = parcel.currentStage == TrackingStage.OutForDelivery,
-        )
+        private fun widgetParcel(parcel: Parcel, localizer: Localizer, detail: String?): DeliveryWidgetParcel {
+            val status = localizer.parcelStatus(parcel)
+            return DeliveryWidgetParcel(
+                id = parcel.id,
+                label = parcel.label.nonEmpty ?: localizer.text("common.parcel"),
+                carrier = CarrierCatalog.shared.info(parcel.displayedCarrier, localizer.language).displayName,
+                trackingNumber = CarrierCatalog.format(parcel.trackingNumber, parcel.carrier),
+                detail = detail ?: status,
+                isOutForDelivery = parcel.currentStage == TrackingStage.OutForDelivery,
+                // As the list's rows mark it.
+                stage = DeliveryWidgetStage.of(parcel.currentStage, status),
+                named = parcel.label.nonEmpty != null,
+            )
+        }
 
         private fun installationIdentifier(defaults: UserDefaults): UUID {
             defaults.string(forKey = installationIdKey)?.let(::uuid)?.let { return it }

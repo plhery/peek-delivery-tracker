@@ -65,6 +65,64 @@ data class DeliveryWidgetEntry<A>(
     }
 }
 
+/**
+ * What the list widget ("Parcels") shows at `date`: the parcels the store published in the widgets' order, less those
+ * delivered more than a day ago, and how many parcels there are in all, those past the ones published too ([total]).
+ */
+data class DeliveryWidgetList(
+    val date: Instant,
+    val enabled: Boolean,
+    val languageCode: String,
+    val parcels: List<DeliveryWidgetParcel>,
+    val total: Int,
+    /** The sample's parcels, which the gallery shows. */
+    val isSample: Boolean = false,
+) {
+    /** The rows a widget shows, and how many parcels its last line counts beyond them ("+N more"). */
+    data class Shown(val rows: List<DeliveryWidgetParcel>, val more: Int)
+
+    /**
+     * What a widget with room for `rows` rows shows, or for `rowsBesideMore` beside the line counting the rest: every
+     * parcel where they all fit, else as many as fit beside that line, at least one.
+     */
+    fun shown(rows: Int, rowsBesideMore: Int): Shown {
+        if (total <= rows) return Shown(parcels, 0)
+        val fitting = minOf(maxOf(rowsBesideMore, 1), parcels.size)
+        return Shown(parcels.take(fitting), total - fitting)
+    }
+
+    companion object {
+        /** `link`: the deliveries, which the last line opens ([NativeRoute.Parcels]). */
+        const val link = "peekdeliverytracker://parcels"
+
+        fun make(date: Instant, enabled: Boolean, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
+            val published = snapshot?.parcels.orEmpty()
+            val shown = published.filter { DeliveryWidgetSelection.isShown(it, date) }
+            val beyond = maxOf(0, (snapshot?.total ?: published.size) - published.size)
+            return DeliveryWidgetList(date, enabled, languageCode, shown, total = shown.size + beyond, isSample = isSample)
+        }
+    }
+}
+
+/** `listName`: the name the list widget gives the parcel, its own, else its carrier's. */
+val DeliveryWidgetParcel.listName: String
+    get() = if (named == false) carrier else label
+
+/**
+ * `listLine.status`: the parcel's stage in the list's words; published by an app that didn't publish the stage, its
+ * detail.
+ */
+val DeliveryWidgetParcel.listStatus: String
+    get() = stage?.status ?: detail
+
+/** `listLine.day`: the day the parcel is expected or arrived, when the app knows one. */
+val DeliveryWidgetParcel.listDay: String?
+    get() = stage?.let { detail.takeIf { it != stage.status } }
+
+/** `ParcelListStatus.whole`: the stage, then the day. */
+val DeliveryWidgetParcel.listLine: String
+    get() = listDay?.let { "$listStatus · $it" } ?: listStatus
+
 object DeliveryWidgetTimeline {
     /** `WidgetFamily.turnSize`: widgets of one size turn together; those of the other keep their own page. */
     fun turnSize(medium: Boolean): String = if (medium) "medium" else "small"

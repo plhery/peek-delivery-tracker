@@ -271,6 +271,9 @@ class DeliveryWidgetTests {
             val published = requireNotNull(shared.snapshot).parcels
             assertTrue(published.isNotEmpty())
             assertTrue(published.all { it.card != null })
+            // The list widget's words: each parcel's stage, whether it is named, and how many the order holds.
+            assertEquals(published.size, shared.snapshot?.total)
+            assertTrue(published.all { it.stage != null && it.named != null })
             assertEquals(published.map { it.id }.toSet(), artist.drawn.map { it.first }.toSet())
             assertEquals(published.size, artist.drawn.size)
             // One publication, one reload.
@@ -303,6 +306,150 @@ class DeliveryWidgetTests {
             assertEquals(0, folder.listFiles().orEmpty().size)
         } finally {
             folder.deleteRecursively()
+        }
+    }
+
+    private fun listed(count: Int, total: Int? = null, delivered: List<DeliveryWidgetParcel> = emptyList()) = DeliveryWidgetSnapshot(
+        now, "en", (1..count).map { widgetParcel(label = "Parcel $it", outForDelivery = it == 1) } + delivered, total = total,
+    )
+
+    /**
+     * The list widget: the rows it has room for, and the last line counting the rest, which takes a row's place only when
+     * there are more parcels than rows; the parcels published past the 15 the snapshot holds are counted too.
+     */
+    @Test
+    fun listShowsTheRowsThatFitAndCountsTheRest() {
+        fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, true, "en", snapshot)
+
+        val five = list(listed(5))
+        assertEquals(5, five.total)
+        assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.shown(rows = 6, rowsBesideMore = 5))
+        assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.shown(rows = 5, rowsBesideMore = 4))
+        // Three rows, or two beside the line: two shown and three counted.
+        assertEquals(DeliveryWidgetList.Shown(five.parcels.take(2), 3), five.shown(rows = 3, rowsBesideMore = 2))
+        // However short, a list shows a row.
+        assertEquals(DeliveryWidgetList.Shown(five.parcels.take(1), 4), five.shown(rows = 0, rowsBesideMore = 0))
+
+        // Fifteen published of twenty: fourteen rows and the six left.
+        val many = list(listed(DeliveryWidgetSelection.listLimit, total = 20))
+        assertEquals(20, many.total)
+        assertEquals(14, many.shown(rows = 15, rowsBesideMore = 14).rows.size)
+        assertEquals(6, many.shown(rows = 15, rowsBesideMore = 14).more)
+        // A snapshot written before the list had no count: what it holds.
+        assertEquals(15, list(listed(DeliveryWidgetSelection.listLimit)).total)
+
+        // A delivered parcel goes from the rows and the count a day after it arrived, the app silent since.
+        val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
+        val withArrived = listed(2, delivered = listOf(arrived))
+        assertEquals(listOf("Parcel 1", "Parcel 2", "Arrived"), list(withArrived).parcels.map { it.label })
+        val later = list(withArrived, now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong()))
+        assertEquals(listOf("Parcel 1", "Parcel 2"), later.parcels.map { it.label })
+        assertEquals(2, later.total)
+
+        assertTrue(list(null).parcels.isEmpty())
+        assertEquals(0, list(null).total)
+    }
+
+    /**
+     * The store publishes the order's first 15 for the list, and how many there are, with each parcel's stage and status
+     * line; the next delivery widget still pages through the first 8 only. A snapshot written before reads back without
+     * them.
+     */
+    @Test
+    fun theSnapshotHoldsFifteenForTheListAndTheNextDeliveryWidgetEight() {
+        val many = (1..20).map { widgetParcel(label = "Parcel $it", outForDelivery = false) }
+        val ordered = DeliveryWidgetSelection.ordered(many, emptyList(), now)
+        assertEquals(many, ordered)
+        assertEquals(DeliveryWidgetSelection.limit, DeliveryWidgetSelection.parcels(many, emptyList(), now).size)
+        assertEquals(8, DeliveryWidgetSelection.pages(ordered.take(DeliveryWidgetSelection.listLimit), medium = false, now = now).size)
+
+        val defaults = MemoryDefaults()
+        val shared = DeliveryWidgetSharedStore(defaults)
+        val parcels = ordered.take(DeliveryWidgetSelection.listLimit).mapIndexed { index, parcel ->
+            if (index == 0) parcel.copy(stage = DeliveryWidgetStage.of(TrackingStage.InTransit, "In transit"), named = true) else parcel
+        }
+        assertTrue(shared.save(DeliveryWidgetSnapshot(now, "en", parcels, total = 20)))
+        val read = requireNotNull(shared.snapshot)
+        assertEquals(20, read.total)
+        assertEquals(DeliveryWidgetSelection.listLimit, read.parcels.size)
+        assertEquals(DeliveryWidgetStage("In transit", TrackingStage.InTransit.metadata.symbol, listOf("#22588A", "#9BCBFF")), read.parcels[0].stage)
+        assertEquals(true, read.parcels[0].named)
+        assertNull(read.parcels[1].stage)
+        assertNull(read.parcels[1].named)
+
+        assertTrue(shared.save(DeliveryWidgetSnapshot(now, "en", parcels.take(2))))
+        assertNull(shared.snapshot?.total)
+    }
+
+    /** The store's order for both widgets: the list's first 8 are what the next delivery widget is handed. */
+    @Test
+    fun theListContinuesTheNextDeliveryWidgetsOrder() {
+        val localizer = Localizer(AppLanguage.En)
+        val parcels = DemoRepository(MemoryDefaults(), language = { AppLanguage.En }).list()
+        val order = ParcelStore.widgetOrder(parcels, localizer, now)
+        assertTrue(order.isNotEmpty())
+        assertEquals(ParcelStore.widgetDeliveries(parcels, localizer, now), order.take(DeliveryWidgetSelection.limit))
+    }
+
+    /**
+     * A row's words: the parcel's name, the carrier's where the reader gave it none; the stage and the day, once where
+     * they are the same words; from an app that published no stage, the detail alone, under the name it published.
+     */
+    @Test
+    fun aListRowNamesTheCarrierOfAnUnnamedParcel() {
+        val transit = DeliveryWidgetStage.of(TrackingStage.InTransit, "In transit")
+        val parcel = widgetParcel(label = "Parcel", outForDelivery = false).copy(detail = "Tomorrow", stage = transit, named = false)
+        assertEquals("Swiss Post", parcel.listName)
+        assertEquals("Wool blanket", parcel.copy(label = "Wool blanket", named = true).listName)
+        assertEquals("Parcel", parcel.copy(named = null).listName)
+        assertEquals("In transit · Tomorrow", parcel.listLine)
+        assertEquals("Tomorrow", parcel.listDay)
+        val waiting = parcel.copy(detail = "Waiting for the carrier", stage = DeliveryWidgetStage.of(null, "Waiting for the carrier"))
+        assertEquals("Waiting for the carrier", waiting.listLine)
+        assertNull(waiting.listDay)
+        assertEquals("Tomorrow", parcel.copy(stage = null).listLine)
+        assertNull(parcel.copy(stage = null).listDay)
+        assertEquals(DeliveryWidgetStage("Waiting for the carrier", "shippingbox.fill", listOf("#654299", "#D1B5FF")), waiting.stage)
+    }
+
+    /** A row's tint is the one the app's cards mark the stage with, light then dark as hex. */
+    @Test
+    fun aRowsTintIsTheStagesInTheApp() {
+        for (stage in TrackingStage.entries + listOf(null)) {
+            val events = stage?.let { listOf(ParcelLogicTestFixtures.event(UUID.randomUUID(), it, "2026-08-02T10:00:00Z")) }.orEmpty()
+            val parcel = ParcelLogicTestFixtures.makeParcel(events = events)
+            val hex = DeliveryWidgetStage.of(parcel.currentStage, "").tint
+            assertEquals("$stage", Brand.color(light = hex[0], dark = hex[1]), ExperimentalPalette.tint(parcel))
+        }
+    }
+
+    /**
+     * The list's sample, which its gallery picture and screenshots show (SAMPLE.md, the same on the iPhone): fifteen
+     * invented parcels in the widgets' order, one of each stage at least, in the app's words in every language.
+     */
+    @Test
+    fun theListsSampleIsFifteenInventedParcelsInTheWidgetsOrder() {
+        for (language in AppLanguage.entries) {
+            val localizer = Localizer(language)
+            val sample = DeliveryWidgetListSample.snapshot(localizer, now)
+            val parcels = sample.parcels
+            assertEquals(15, parcels.size)
+            assertEquals(15, sample.total)
+            assertEquals(language.rawValue, sample.languageCode)
+            assertEquals(15, parcels.map { it.id }.toSet().size)
+            assertTrue(parcels.all { it.trackingNumber.startsWith("DEMOLIST") })
+            val onTheWay = parcels.filter { it.deliveredAt == null }
+            assertEquals(parcels, DeliveryWidgetSelection.ordered(onTheWay, parcels.filter { it.deliveredAt != null }, now))
+            assertEquals(2, parcels.count { it.isOutForDelivery })
+            assertEquals(2, parcels.count { it.deliveredAt != null })
+            for (parcel in parcels) {
+                assertFalse("$language ${parcel.label}", listOf(parcel.detail, parcel.listStatus).any { it.startsWith("stage.") || it.startsWith("status.") })
+            }
+            assertEquals("Royal Mail", parcels[8].listName)
+            assertEquals(listOf(8), parcels.indices.filter { parcels[it].named == false })
+            // On its way with a day: the stage, then the day.
+            assertEquals(parcels[2].detail, parcels[2].listDay)
+            assertEquals("${parcels[2].stage?.status} · ${parcels[2].detail}", parcels[2].listLine)
         }
     }
 

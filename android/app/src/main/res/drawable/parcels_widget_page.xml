@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The list widget's page, with the launcher's corners. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/parcels_widget_page" />
+    <corners android:radius="@android:dimen/system_app_widget_background_radius" />
+</shape>

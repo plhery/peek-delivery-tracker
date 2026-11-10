@@ -381,6 +381,7 @@ class AppRoutingTests {
         val url = "peekdeliverytracker://parcel/${parcelId.uuidString}"
 
         assertEquals(NativeRoute.Parcel(parcelId), NativeRoute(url))
+        assertEquals(NativeRoute.Parcels, NativeRoute(DeliveryWidgetList.link))
     }
 
     @Test

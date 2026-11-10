@@ -570,14 +570,15 @@ private fun DayNightPicture(picture: Pair<Bitmap, Bitmap>, @LayoutRes layout: In
 }
 
 /**
- * A tap on the widget's page, behind what it shows, opening the app (widget_tap): a view TalkBack passes over, as
- * VoiceOver passes over a widget's background.
+ * A tap on the widget's page, behind what it shows, opening the app, or `intent` (widget_tap): a view TalkBack passes
+ * over, as VoiceOver passes over a widget's background.
  */
 @Composable
-private fun PageTap() {
+internal fun PageTap(intent: Intent? = null) {
     val context = LocalContext.current
+    val opened = intent ?: appIntent(context)
     val views = RemoteViews(context.packageName, R.layout.widget_tap).apply {
-        setOnClickPendingIntent(R.id.widget_tap, PendingIntent.getActivity(context, 0, appIntent(context), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT))
+        setOnClickPendingIntent(R.id.widget_tap, PendingIntent.getActivity(context, 0, opened, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT))
     }
     AndroidRemoteViews(views, GlanceModifier.fillMaxSize())
 }
@@ -593,7 +594,7 @@ internal fun appIntent(context: Context): Intent =
     Intent(context, MainActivity::class.java).setAction(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
 
 /** The widget's whole surface, its corners the launcher's, as a widget's background is. */
-private fun root(): GlanceModifier =
+internal fun root(): GlanceModifier =
     GlanceModifier.fillMaxSize().appWidgetBackground().cornerRadius(android.R.dimen.system_app_widget_background_radius)
 
 /** The copy as Android words it where it names the iPhone's things (its `android` variant: "home screen"), else as it is. */
@@ -607,7 +608,7 @@ private fun markHeight(shape: DeliveryWidgetPicture): Dp = if (shape == Delivery
 private fun DpSize.inside(padding: Dp) = DpSize(width - padding * 2, height - padding * 2)
 
 /** The app's mark at the header's size. */
-private fun peekMark(context: Context): Bitmap = bitmap(context, HEADER_MARK.value, HEADER_MARK.value) { drawPeekMark(HEADER_MARK.value.toDouble()) }
+internal fun peekMark(context: Context): Bitmap = bitmap(context, HEADER_MARK.value, HEADER_MARK.value) { drawPeekMark(HEADER_MARK.value.toDouble()) }
 
 /**
  * `DeliveryWidgetNextMark`: a chevron at 8 points bold in the ink at 60%, in a circle of the ink at 7%, with its reach
@@ -628,7 +629,7 @@ private fun nextMark(context: Context, ink: List<String>?): Pair<Bitmap, Bitmap>
 }
 
 /** A transparent picture `width` × `height` dp at the screen's density, drawn one unit to the dp but for [drawSymbol]'s own density. */
-private fun bitmap(context: Context, width: Float, height: Float, draw: DrawScope.() -> Unit): Bitmap {
+internal fun bitmap(context: Context, width: Float, height: Float, draw: DrawScope.() -> Unit): Bitmap {
     val density = context.resources.displayMetrics.density
     val pixelsWide = (width * density).roundToInt().coerceAtLeast(1)
     val pixelsHigh = (height * density).roundToInt().coerceAtLeast(1)
@@ -640,7 +641,7 @@ private fun bitmap(context: Context, width: Float, height: Float, draw: DrawScop
 }
 
 private val MARGIN = 16.dp
-private val HEADER_MARK = 16.dp
+internal val HEADER_MARK = 16.dp
 private val CARD_SPACING = 8.dp
 private val CARD_PADDING = 10.dp
 private val COLUMN_SPACING = 10.dp

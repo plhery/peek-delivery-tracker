@@ -288,6 +288,9 @@ class ParcelLinkRoute(
 sealed class NativeRoute {
     data class Parcel(val id: UUID) : NativeRoute()
 
+    /** The deliveries, as the list widget opens them. */
+    data object Parcels : NativeRoute()
+
     data class Friend(val id: UUID) : NativeRoute()
 
     data class Add(val trackingInput: String) : NativeRoute()
@@ -303,6 +306,7 @@ sealed class NativeRoute {
             return when (link.host?.lowercased()) {
                 "friend" -> link.pathComponents.lastOrNull()?.let(::uuid)?.let(::Friend)
                 "parcel" -> link.pathComponents.lastOrNull()?.let(::uuid)?.let(::Parcel)
+                "parcels" -> Parcels
                 "add" -> Add(link.components.queryItems?.firstOrNull { it.name == "tracking" }?.value ?: "")
                 else -> null
             }

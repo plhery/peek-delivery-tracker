@@ -83,8 +83,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.withContext
 
 /**
@@ -149,7 +151,8 @@ internal fun PeekRoot(
     val language by localizer.languageFlow.collectAsState()
     var tab by rememberSaveable { mutableIntStateOf(PeekTab.Deliveries.ordinal) }
     LaunchedEffect(inbox) {
-        inbox?.parcel?.filterNotNull()?.collect { tab = PeekTab.Deliveries.ordinal }
+        inbox ?: return@LaunchedEffect
+        merge(inbox.parcel.filterNotNull(), inbox.list.filter { it }).collect { tab = PeekTab.Deliveries.ordinal }
     }
     // `.onChange(of: session.user?.id, initial: true)`: a link opened before signing in comes back once someone is.
     LaunchedEffect(links) {

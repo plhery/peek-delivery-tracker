@@ -70,6 +70,9 @@ internal class WidgetText(context: Context) {
     fun height(text: String, points: Float, weight: FontWeight, width: Dp, lines: Int): Dp =
         (layout(text, points, weight, width, lines).height / metrics.density).dp
 
+    /** How wide `text` stands on one line at `points`. */
+    fun width(text: String, points: Float, weight: FontWeight): Dp = ceil(paint(points, weight).measureText(text) / metrics.density).dp
+
     /** How tall a line of `points` is, its font's padding included. */
     fun lineHeight(points: Float, weight: FontWeight): Dp {
         val font = paint(points, weight).fontMetricsInt

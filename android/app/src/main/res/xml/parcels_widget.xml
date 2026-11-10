@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ParcelsWidget: the parcels on their way as a list (widget/). Four cells by two to start, six parcels; two by two it
+     shows three, and four by four or taller up to fifteen. It updates whenever the next delivery widget does, never on
+     the system's period. Its preview is a list's outline, until Android 15's generated previews show the sample. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_list_gallery_description"
+    android:initialLayout="@layout/parcels_widget_preview"
+    android:minHeight="110dp"
+    android:minResizeHeight="110dp"
+    android:minResizeWidth="110dp"
+    android:minWidth="250dp"
+    android:previewLayout="@layout/parcels_widget_preview"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellHeight="2"
+    android:targetCellWidth="4"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen" />

@@ -13,12 +13,24 @@ import java.util.concurrent.ConcurrentHashMap
 // :app's views and canvases. The views themselves belong to :app.
 
 object ExperimentalPalette {
-    val transit = Brand.color(light = "#22588A", dark = "#9BCBFF")
+    /**
+     * The tints a row marks a parcel's stage with, light then dark, as hex: the list widget, which has no palette of its
+     * own, draws them from these.
+     */
+    private val transitHex = listOf("#22588A", "#9BCBFF")
+
+    /** `Brand.warning`. */
+    private val pickupHex = listOf("#963E19", "#FFB184")
+    private val deliveredHex = listOf("#24613E", "#9BE0B5")
+    private val lilacHex = listOf("#654299", "#D1B5FF")
+    private val ochreHex = listOf("#745300", "#FFD65F")
+
+    val transit = Brand.color(light = transitHex[0], dark = transitHex[1])
     val pickup = Brand.warning
-    val delivered = Brand.color(light = "#24613E", dark = "#9BE0B5")
-    val lilac = Brand.color(light = "#654299", dark = "#D1B5FF")
+    val delivered = Brand.color(light = deliveredHex[0], dark = deliveredHex[1])
+    val lilac = Brand.color(light = lilacHex[0], dark = lilacHex[1])
     val rose = Brand.color(light = "#9A3D5C", dark = "#FFADC8")
-    val ochre = Brand.color(light = "#745300", dark = "#FFD65F")
+    val ochre = Brand.color(light = ochreHex[0], dark = ochreHex[1])
 
     val transitSurface = Brand.color(light = "#DAEAFE", dark = "#152636")
     val pickupSurface = Brand.color(light = "#FFDDC7", dark = "#341F14")
@@ -37,15 +49,23 @@ object ExperimentalPalette {
         else -> transitSurface
     }
 
-    fun tint(parcel: Parcel): AdaptiveColor = when (parcel.currentStage) {
-        TrackingStage.Delivered -> delivered
+    fun tint(parcel: Parcel): AdaptiveColor = when (tintHex(parcel.currentStage)) {
+        deliveredHex -> delivered
+        pickupHex -> pickup
+        ochreHex -> ochre
+        lilacHex -> lilac
+        else -> transit
+    }
+
+    fun tintHex(stage: TrackingStage?): List<String> = when (stage) {
+        TrackingStage.Delivered -> deliveredHex
         TrackingStage.Customs, TrackingStage.Exception, TrackingStage.FailedAttempt, TrackingStage.ReadyForPickup,
         TrackingStage.Returned,
-        -> pickup
-        TrackingStage.InTransit -> transit
-        TrackingStage.OutForDelivery -> ochre
-        TrackingStage.Pending, TrackingStage.Registered, null -> lilac
-        else -> transit
+        -> pickupHex
+        TrackingStage.InTransit -> transitHex
+        TrackingStage.OutForDelivery -> ochreHex
+        TrackingStage.Pending, TrackingStage.Registered, null -> lilacHex
+        else -> transitHex
     }
 }
 

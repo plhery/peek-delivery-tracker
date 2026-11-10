@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A row of the list widget's outline. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/parcels_widget_line" />
+    <corners android:radius="5dp" />
+</shape>

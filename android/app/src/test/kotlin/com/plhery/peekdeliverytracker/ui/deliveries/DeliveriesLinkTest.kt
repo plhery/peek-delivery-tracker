@@ -11,6 +11,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
@@ -94,6 +95,25 @@ class DeliveriesLinkTest {
         assertFalse(exists(PeekTab.Passport.screen))
         assertEquals("parcel", window.get().views.last())
         assertNull(window.get().inbox.parcel.value)
+    }
+
+    /** The list widget's link brings the list back from the parcel open over it, and the deliveries from the passport. */
+    @Test
+    fun theListWidgetsLinkShowsTheList() {
+        val list = Intent(Intent.ACTION_VIEW, Uri.parse(DeliveryWidgetList.link))
+        val window = window(link)
+        assertEquals(listOf("parcel"), window.get().views)
+        window.newIntent(list)
+        settle()
+        assertEquals(listOf("parcel", "deliveries"), window.get().views)
+        assertFalse(window.get().inbox.list.value)
+
+        compose.onNodeWithContentDescription("Passport").performClick()
+        settle()
+        window.newIntent(list)
+        settle()
+        assertFalse(exists(PeekTab.Passport.screen))
+        assertFalse(window.get().inbox.list.value)
     }
 
     private fun exists(tag: String): Boolean = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()

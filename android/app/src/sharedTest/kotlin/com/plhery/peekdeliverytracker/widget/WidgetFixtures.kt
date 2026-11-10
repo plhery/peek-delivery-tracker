@@ -14,6 +14,8 @@ import androidx.glance.appwidget.GlanceRemoteViews
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetListSample
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPictures
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
@@ -43,6 +45,24 @@ val LAUNCHER_UPRIGHT = DpSize(130.dp, 220.dp)
 val LAUNCHER_ON_ITS_SIDE = DpSize(269.dp, 117.dp)
 val LAUNCHER_UPRIGHT_WIDE = DpSize(203.dp, 220.dp)
 val LAUNCHER_TABLET = DpSize(396.dp, 244.dp)
+
+/**
+ * The list widget's three sizes as the launcher of the phone it was tried on gives them (1080 × 2400 at 420 dpi, four
+ * columns): two cells by two (small), four by two (medium) and four by four (large).
+ */
+val LIST_SMALL = DpSize(179.dp, 209.dp)
+val LIST_MEDIUM = DpSize(373.dp, 209.dp)
+val LIST_LARGE = DpSize(373.dp, 429.dp)
+
+/** And between them, on the same phone: three cells by two, two by three, four by three, two by four. */
+val LIST_THREE_BY_TWO = DpSize(276.dp, 209.dp)
+val LIST_TWO_BY_THREE = DpSize(179.dp, 319.dp)
+val LIST_FOUR_BY_THREE = DpSize(373.dp, 319.dp)
+val LIST_TWO_BY_FOUR = DpSize(179.dp, 429.dp)
+
+/** The list's sample (DeliveryWidgetListSample) at [CAPTURED] in `language`, as its gallery picture shows it. */
+fun sampleList(language: AppLanguage = AppLanguage.En): DeliveryWidgetList =
+    DeliveryWidgetList.make(CAPTURED, true, language.rawValue, DeliveryWidgetListSample.snapshot(Localizer(language), CAPTURED), isSample = true)
 
 /** A parcel as the widget shows it, `number` its id. */
 fun widgetParcel(
@@ -109,6 +129,11 @@ suspend fun publishDemo(
 @OptIn(ExperimentalGlanceRemoteViewsApi::class)
 suspend fun widgetViews(context: Context, size: DpSize, entry: DeliveryWidgetEntry<WidgetCardArt>): RemoteViews =
     GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, size) }.remoteViews
+
+/** The list widget's RemoteViews for `list` at `size`, as Glance writes them for a launcher. */
+@OptIn(ExperimentalGlanceRemoteViewsApi::class)
+suspend fun listViews(context: Context, size: DpSize, list: DeliveryWidgetList): RemoteViews =
+    GlanceRemoteViews().compose(context, size) { ParcelsWidgetContent(list, size) }.remoteViews
 
 /** `views` as a launcher shows them: applied in the host's window, `size` big, as a home screen's cells hold a widget. */
 @Composable

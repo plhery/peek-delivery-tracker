@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The list widget's gallery preview before Android 15, and its first look until it has drawn: the outline of a list,
+     faint rows on the app's page, which reads the same in every language. Only views RemoteViews inflates, so the gap
+     between a row's bars is an empty FrameLayout (RemoteViews has no Space). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/parcels_widget_page"
+    android:clipToOutline="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="0dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.62"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.16"
+            tools:ignore="UselessLeaf" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="7dp"
+            android:layout_weight="0.22"
+            android:background="@drawable/parcels_widget_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.48"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.22"
+            tools:ignore="UselessLeaf" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="7dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/parcels_widget_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.56"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.26"
+            tools:ignore="UselessLeaf" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="7dp"
+            android:layout_weight="0.18"
+            android:background="@drawable/parcels_widget_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.4"
+            android:background="@drawable/parcels_widget_line" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="9dp"
+            android:layout_weight="0.34"
+            tools:ignore="UselessLeaf" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="7dp"
+            android:layout_weight="0.26"
+            android:background="@drawable/parcels_widget_line" />
+    </LinearLayout>
+</LinearLayout>

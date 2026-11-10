@@ -1025,6 +1025,15 @@ internal class DeliveriesState(
         navigator.open(parcelId)
     }
 
+    /**
+     * `showList()`: the list, as the list widget opens it, with nothing left over it: what [show] closes closes, and a
+     * parcel open over the list goes back to it. Beside a parcel, it is in view already.
+     */
+    fun showList() {
+        closeListCovers()
+        if (!listShown) navigator.pop(emptyList())
+    }
+
     /** Add, the account, the filters, and a card's menu and what it opened close. */
     private fun closeListCovers() {
         closeAdd()

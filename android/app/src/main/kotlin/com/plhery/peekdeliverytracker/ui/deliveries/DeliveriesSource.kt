@@ -926,6 +926,7 @@ class DeliveriesInbox(
     private val notifiedFriendState = MutableStateFlow(notifiedFriend)
     private val notifiedLinkState = MutableStateFlow(notifiedLink)
     private val linkAddedState = MutableStateFlow<LinkAdded?>(null)
+    private val listState = MutableStateFlow(false)
 
     /** The parcel waiting to be shown. */
     val parcel: StateFlow<UUID?> = parcelState.asStateFlow()
@@ -938,6 +939,14 @@ class DeliveriesInbox(
     /** The list has shown the parcel. */
     fun consume(parcelId: UUID) {
         parcelState.compareAndSet(parcelId, null)
+    }
+
+    /** Whether the list widget asked for the list ([NativeRoute.Parcels]), until the deliveries have shown it. */
+    val list: StateFlow<Boolean> = listState.asStateFlow()
+
+    /** The deliveries have shown the list. */
+    fun consumeList() {
+        listState.value = false
     }
 
     /** The friend a link asked to reveal, which the window's root reveals while someone is signed in, and then takes. */
@@ -1004,8 +1013,8 @@ class DeliveriesInbox(
      * the window itself comes here. Each is counted ([opened], `deep-link-open`), whatever it leads to, as the iPhone's
      * analytics hear every `.onOpenURL`. Each is noted as the address seen last ([repeated], `LinkDeliveries.isRepeat`),
      * and the same again within a second isn't followed again where RootView's `open(_:)` would drop it: a parcel's link,
-     * a friend, an invitation. The list's own routes, `parcel/<uuid>` and `add`, which ParcelListView's `handleURL`
-     * follows unguarded, open again. One of the shortcuts on the app's icon opens one of those, and is reported used
+     * a friend, an invitation. The list's own routes, `parcel/<uuid>`, `parcels` and `add`, which ParcelListView's
+     * `handleURL` follows unguarded, open again. One of the shortcuts on the app's icon opens one of those, and is reported used
      * ([shortcutUsed], [LauncherShortcuts]). A notification the app posted, opened, comes before them all
      * ([AppNotifications.payload], which reads the app's own alone).
      */
@@ -1021,6 +1030,7 @@ class DeliveriesInbox(
         val repeat = repeated(url)
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
+            NativeRoute.Parcels -> listState.value = true
             is NativeRoute.Add -> addState.value = AddLink(route.trackingInput)
             else -> if (!repeat && !parcelLink(url)) {
                 if (route is NativeRoute.Friend) friendState.value = route.id else invitationLink(url)
@@ -1041,7 +1051,7 @@ class DeliveriesInbox(
             is NativeRoute.Parcel -> open(route.id)
             is NativeRoute.Friend -> notifiedFriendState.value = route.id
             is NativeRoute.Link -> notifiedLinkState.value = route.id
-            is NativeRoute.Add -> Unit
+            is NativeRoute.Add, NativeRoute.Parcels -> Unit
         }
     }
 

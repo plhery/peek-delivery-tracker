@@ -418,7 +418,7 @@ current APNs token from Apple instead of persisting that token locally. It
 stores a random installation identifier and the independent Home Screen widget
 and Live Activity preferences on the device. The Android app keeps its
 session and an account-scoped parcel snapshot in the app's private storage; its
-home-screen widget and its place in Android's share menu read only what is
+home-screen widgets and its place in Android's share menu read only what is
 already on the phone. Each snapshot can include tracking history, a private
 tracking link, a supplied delivery postcode, a reference that contains the
 delivery postcode, and phone digits you gave. Signing out clears

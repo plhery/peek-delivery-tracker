@@ -111,6 +111,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -521,7 +522,8 @@ private val LOCAL_SCHEMES = setOf(ContentResolver.SCHEME_CONTENT, ContentResolve
 
 /**
  * What waits for the list in this window (A-D26, A-L14, C-W15): a parcel a link or a notification asked for, at once
- * and whenever another comes, one opened before the list was there as it appears; a parcel a parcel's link added,
+ * and whenever another comes, one opened before the list was there as it appears; the list itself, which the list
+ * widget asks for, likewise; a parcel a parcel's link added,
  * likewise; Add with a link's text (`handleURL`'s `.add`), opened or filled as what another app shared is, likewise;
  * and what another app shared, as it appears and each time the app comes back to the front.
  */
@@ -533,6 +535,13 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
         inbox.parcel.filterNotNull().collect { parcelId ->
             state.show(parcelId)
             inbox.consume(parcelId)
+        }
+    }
+    // `showList()`.
+    LaunchedEffect(inbox) {
+        inbox.list.filter { it }.collect {
+            state.showList()
+            inbox.consumeList()
         }
     }
     LaunchedEffect(inbox) {

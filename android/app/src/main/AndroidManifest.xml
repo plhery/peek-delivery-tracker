@@ -70,16 +70,17 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- The app's own links to one of the deliveries, peekdeliverytracker://parcel/<uuid>, to a friend,
-                 peekdeliverytracker://friend/<uuid>, and to Add filled with a tracking number,
-                 peekdeliverytracker://add?tracking=<text>. Android matches the scheme as written, where the iPhone
-                 takes it in any case. -->
+            <!-- The app's own links to one of the deliveries, peekdeliverytracker://parcel/<uuid>, to the deliveries,
+                 peekdeliverytracker://parcels, to a friend, peekdeliverytracker://friend/<uuid>, and to Add filled
+                 with a tracking number, peekdeliverytracker://add?tracking=<text>. Android matches the scheme as
+                 written, where the iPhone takes it in any case. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="peekdeliverytracker" />
                 <data android:host="parcel" />
+                <data android:host="parcels" />
                 <data android:host="friend" />
                 <data android:host="add" />
             </intent-filter>
@@ -202,6 +203,19 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/next_delivery_widget" />
+        </receiver>
+
+        <!-- The list widget (ParcelsWidget), next to it. -->
+        <receiver
+            android:name=".widget.ParcelsWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_list_gallery_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/parcels_widget" />
         </receiver>
 
         <!-- The app a parcel's link went to through the share sheet (ShareTargetChosen): the share sheet alone sends to

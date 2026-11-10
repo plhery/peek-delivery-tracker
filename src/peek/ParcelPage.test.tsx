@@ -689,10 +689,10 @@ describe('ParcelPage actions', () => {
     expect(mocks.read.mock.calls.every(([, options]) => !JSON.stringify(options).includes('sneakers'))).toBe(true);
   });
 
-  it('offers no name for a link from someone else that twenty lookups of the device’s own leave no room for', async () => {
+  it('offers no name for a link from someone else that a hundred lookups of the device’s own leave no room for', async () => {
     const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
     for (let index = 0; index < MAX_RECENTS; index += 1) {
-      const id = `k7Qm2xHd9R2${ALPHABET[index]}`;
+      const id = `k7Qm2xHd9R${ALPHABET[Math.floor(index / 32)]}${ALPHABET[index % 32]}`;
       rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: Date.now() - index * 60_000 });
     }
     history.replaceState(null, '', `/p/${LINK_ID}#n=${encodeURIComponent('For Mum')}`);

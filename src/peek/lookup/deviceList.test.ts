@@ -165,7 +165,7 @@ describe('forgetDeviceParcels', () => {
   beforeEach(() => { mocks.forget.mockReset(); mocks.forget.mockResolvedValue(undefined); });
   afterEach(() => { forgetAllRecents(); forgetDeviceChecks(); });
 
-  it('forgets on the server a lookup that twenty newer links did not push out, and one saved in a way it cannot read', async () => {
+  it('forgets on the server a lookup that a hundred newer links did not push out, and one saved in a way it cannot read', async () => {
     rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now });
     for (let index = 0; index < MAX_RECENTS + 3; index += 1) {
       rememberParcel({ id: shared(index), view: testView({ id: shared(index), owner: false }), now: now + 1 + index });

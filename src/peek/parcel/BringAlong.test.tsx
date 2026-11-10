@@ -6,7 +6,7 @@ import { createDemoRepo } from '../../store/demoRepo';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../../test/parcelLinks';
 import { ParcelLinkError } from '../links';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
-import { forgetAllRecents, forgetRecent, MAX_OWNED, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
+import { forgetAllRecents, forgetRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
 import { BringAlongInDemo, BringAlongParcels } from './BringAlong';
 import { bringable, BRING_ALONG_STORAGE_KEY, bringAlong, bringAlongInDemo, markOffered, offeredParcels } from './deviceParcels';
 
@@ -226,15 +226,15 @@ describe('the device’s parcels to bring along', () => {
 
   it('keep out every declined parcel still on the device, the newest too, and drop the ones that left it', () => {
     forgetAllRecents();
-    const ids = linkIds('s7Qm2xHd9R', MAX_OWNED + 1);
-    lookUp(ids.slice(0, MAX_OWNED));
-    // Asked about all sixty, newest first, and declined.
+    const ids = linkIds('s7Qm2xHd9R', MAX_RECENTS + 1);
+    lookUp(ids.slice(0, MAX_RECENTS));
+    // Asked about all hundred, newest first, and declined.
     markOffered(bringable(recents(), null).map((recent) => recent.id));
     // One more lookup takes the oldest's place, and is declined in turn.
-    lookUp([ids[MAX_OWNED]], 100);
-    markOffered([ids[MAX_OWNED]]);
+    lookUp([ids[MAX_RECENTS]], 100);
+    markOffered([ids[MAX_RECENTS]]);
     expect(bringable(recents(), null)).toEqual([]);
-    expect(offeredParcels().size).toBe(MAX_OWNED);
+    expect(offeredParcels().size).toBe(MAX_RECENTS);
     expect(offeredParcels().has(ids[0])).toBe(false);
   });
 

@@ -4,7 +4,6 @@ import {
   cleanParcelName,
   forgetAllRecents,
   forgetRecent,
-  MAX_OWNED,
   MAX_RECENTS,
   ownerKeyFor,
   recentFor,
@@ -56,7 +55,7 @@ describe('the parcels of this device', () => {
     expect(cleanParcelName(null)).toBeNull();
   });
 
-  it('lists the newest first and keeps twenty', () => {
+  it('lists the newest first and keeps a hundred', () => {
     for (let index = 0; index < MAX_RECENTS + 3; index += 1) {
       rememberParcel({ id: id(index), view: testView({ id: id(index) }), now: NOW + index });
     }
@@ -64,7 +63,7 @@ describe('the parcels of this device', () => {
     expect(result.current).toHaveLength(MAX_RECENTS);
     expect(result.current[0].id).toBe(id(MAX_RECENTS + 2));
     expect(result.current.at(-1)!.id).toBe(id(3));
-    act(() => rememberParcel({ id: id(5), view: testView({ id: id(5) }), now: NOW + 100 }));
+    act(() => rememberParcel({ id: id(5), view: testView({ id: id(5) }), now: NOW + 1_000 }));
     expect(result.current[0].id).toBe(id(5));
     act(() => forgetRecent(id(5)));
     expect(result.current.some((recent) => recent.id === id(5))).toBe(false);
@@ -73,7 +72,7 @@ describe('the parcels of this device', () => {
     expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
   });
 
-  it('keeps its own lookups when newer links push the list past twenty: links opened from someone else make way', () => {
+  it('keeps its own lookups when newer links push the list past a hundred: links opened from someone else make way', () => {
     rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), name: 'Coffee beans', now: NOW });
     for (let index = 0; index < MAX_RECENTS + 5; index += 1) {
       rememberParcel({ id: id(index), view: testView({ id: id(index), owner: false }), now: NOW + 1 + index });
@@ -82,19 +81,19 @@ describe('the parcels of this device', () => {
     expect(result.current).toHaveLength(MAX_RECENTS);
     expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, name: 'Coffee beans' });
     expect(result.current.at(-1)!.id).toBe(LINK_ID);
-    // The oldest links opened from someone else went: nineteen of them stay beside the lookup.
+    // The oldest links opened from someone else went: ninety-nine of them stay beside the lookup.
     expect(result.current.filter((recent) => !recent.key).map((recent) => recent.id)).toEqual(
       Array.from({ length: MAX_RECENTS - 1 }, (_, index) => id(MAX_RECENTS + 4 - index)),
     );
   });
 
-  it('keeps up to sixty lookups of its own, and no link opened from someone else once they fill twenty', () => {
+  it('keeps a hundred lookups of its own, and no link opened from someone else once they fill the list', () => {
     rememberParcel({ id: OTHER_LINK_ID, view: testView({ id: OTHER_LINK_ID, owner: false }), now: NOW + 1_000 });
-    for (let index = 0; index < MAX_OWNED + 2; index += 1) {
+    for (let index = 0; index < MAX_RECENTS + 2; index += 1) {
       rememberParcel({ id: id(index), key: OWNER_KEY, view: testView({ id: id(index) }), now: NOW + index });
     }
     const { result } = renderHook(() => useRecents());
-    expect(result.current).toHaveLength(MAX_OWNED);
+    expect(result.current).toHaveLength(MAX_RECENTS);
     expect(result.current.every((recent) => recent.key === OWNER_KEY)).toBe(true);
     expect(result.current.at(-1)!.id).toBe(id(2));
     expect(recentFor(OTHER_LINK_ID)).toBeNull();

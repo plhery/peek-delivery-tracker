@@ -9,13 +9,11 @@ import { isParcelLinkId, type ParcelLinkView } from './linkModel';
  * link. Their names and owner keys live here and nowhere else.
  */
 export const RECENTS_STORAGE_KEY = 'sdt.peek.parcels.v1'; // gitleaks:allow -- public localStorage name
-/** The list keeps twenty parcels; links opened from someone else make way first. */
-export const MAX_RECENTS = 20;
 /**
- * A lookup of this device's own stays beyond twenty, up to sixty: its owner key
- * is the only way to forget the parcel or keep it in an account.
+ * The list keeps a hundred parcels. Links opened from someone else make way first: the owner
+ * key of a lookup of this device's own is the only way to forget the parcel or keep it in an account.
  */
-export const MAX_OWNED = 60;
+export const MAX_RECENTS = 100;
 /** The longest name a parcel can carry into an account. */
 export const MAX_NAME_LENGTH = 80;
 const eventName = 'peek-recents-change';
@@ -110,13 +108,13 @@ function read(): RecentParcel[] {
 
 function write(list: RecentParcel[], stranded: readonly Stored[] = load().stranded) {
   const ordered = [...list].sort((a, b) => b.lastSeenAt.localeCompare(a.lastSeenAt));
-  const owned = ordered.filter((recent) => recent.key).slice(0, MAX_OWNED);
+  const owned = ordered.filter((recent) => recent.key).slice(0, MAX_RECENTS);
   const viewed = ordered.filter((recent) => !recent.key).slice(0, Math.max(0, MAX_RECENTS - owned.length));
   const kept = new Set([...owned, ...viewed]);
   const listed = new Set([...kept].map((recent) => recent.id));
   const saved: object[] = [
     ...ordered.filter((recent) => kept.has(recent)),
-    ...stranded.filter((entry, index) => !listed.has(entry.id) && stranded.findIndex((other) => other.id === entry.id) === index).slice(0, MAX_OWNED),
+    ...stranded.filter((entry, index) => !listed.has(entry.id) && stranded.findIndex((other) => other.id === entry.id) === index).slice(0, MAX_RECENTS),
   ];
   memory = saved.length ? JSON.stringify(saved) : null;
   try {

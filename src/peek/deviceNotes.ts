@@ -12,8 +12,8 @@ import { SAMPLE_LINK_ID } from './sample';
  * travel after `#`; alerts are known by the browser's push address.
  */
 export const LINK_NOTES_STORAGE_KEY = 'sdt.peek.linknotes.v1'; // gitleaks:allow -- public localStorage name
-/** Only the latest links can still matter. */
-const MAX_NOTES = 60;
+/** Only the latest links can still matter: as many as the device keeps parcels (`MAX_RECENTS`). */
+const MAX_NOTES = 100;
 const eventName = 'peek-link-notes-change';
 
 /** What a sharer chose for the link they hand out, and adds to it. */

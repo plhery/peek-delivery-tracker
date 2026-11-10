@@ -193,6 +193,13 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test
   checks them against the demo; it redraws them when run with
   `TEST_RUNNER_PEEK_WIDGET_SAMPLE` set to that folder's full path.
+- **The Parcels widget** lists the same parcels in the same order, one to a row: the name, or the
+  carrier's for a parcel without one, its stage in the list's words, symbol and colour, and the day
+  it is expected; a line too narrow for both keeps the day. A small one has three rows, a medium one two columns of three and a large one up to
+  fifteen; larger text keeps fewer. A last line counts the parcels left out. The small widget and that
+  line open the list (`peekdeliverytracker://parcels`); in the medium and large ones, a row opens its
+  parcel. The app publishes every parcel for it, and pictures only for the first few the other widget
+  turns through.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications
   has its switch, which saves the moment it is flipped. While it is on, the bell of a parcel
   still on its way opens that parcel's alerts, where notifications and the email are switched

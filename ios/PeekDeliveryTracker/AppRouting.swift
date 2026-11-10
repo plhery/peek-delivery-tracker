@@ -253,6 +253,8 @@ struct ParcelLinkRoute: Equatable, Sendable, CustomStringConvertible, CustomDebu
 
 enum NativeRoute: Equatable {
     case parcel(UUID)
+    /// The deliveries, as the list widget opens them.
+    case parcels
     case friend(UUID)
     case add(trackingInput: String)
     /// A notification about a parcel followed through its link on this iPhone, without an account.
@@ -268,6 +270,8 @@ enum NativeRoute: Equatable {
             guard let raw = url.pathComponents.last,
                   let parcelID = UUID(uuidString: raw) else { return nil }
             self = .parcel(parcelID)
+        case "parcels":
+            self = .parcels
         case "add":
             let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
             let tracking = components?.queryItems?.first(where: { $0.name == "tracking" })?.value ?? ""

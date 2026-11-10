@@ -667,13 +667,24 @@ private struct DeliveryListView: View {
     /// Shows a parcel asked for from outside the list, from a notification, a link or the widget: on the
     /// deliveries, with nothing left over them.
     private func show(_ parcelID: UUID) {
+        closeSheets()
+        navigation.open(parcelID)
+    }
+
+    /// The list, as the list widget opens it. Beside a parcel, it is in view already.
+    private func showList() {
+        closeSheets()
+        if !listShown { navigation.path = [] }
+    }
+
+    /// The deliveries in front, with nothing over them.
+    private func closeSheets() {
         bringForward()
         showingAdd = false
         showingAccount = false
         showingFilters = false
         sitePage = nil
         prompts = CardPrompts()
-        navigation.open(parcelID)
     }
 
     /// The parcels the list shows a card or a row for, in its order: the archive's rows count while they show.
@@ -1697,6 +1708,8 @@ private struct DeliveryListView: View {
         switch NativeRoute(url: url) {
         case .parcel(let parcelID):
             show(parcelID)
+        case .parcels:
+            showList()
         case .friend, .link: break // RootView owns Friends navigation and the links' notifications.
         case .add(let trackingInput):
             sharedDraft = SharedParcelDraft(trackingInput: trackingInput)

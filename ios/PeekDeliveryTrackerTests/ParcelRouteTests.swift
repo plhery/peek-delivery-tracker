@@ -929,7 +929,8 @@ extension ParcelRouteTests {
                     id: try XCTUnwrap(UUID(uuidString: "00000000-0000-4000-8000-00000000000\(index)")), label: item.label,
                     carrier: item.carrier, trackingNumber: item.trackingNumber, detail: item.detail, isOutForDelivery: item.isOutForDelivery,
                     card: DeliveryWidgetCard(surface: card.surface, ink: card.ink, status: card.status, pictures: "sample-\(index)",
-                                             scale: DeliveryWidgetPictures.scale)
+                                             scale: DeliveryWidgetPictures.scale),
+                    stage: item.stage, named: item.named
                 ))
                 guard redraw != nil, let drawn = sample.last?.card else { continue }
                 let folder = drawings.appending(path: language.rawValue)
@@ -968,7 +969,8 @@ extension ParcelRouteTests {
         // What the app would publish for the demo: the pictures' scale is the screen's they were drawn on.
         let words = { (snapshot: DeliveryWidgetSnapshot?) in
             snapshot?.parcels.map { [$0.label, $0.carrier, $0.trackingNumber, $0.detail, "\($0.isOutForDelivery)", $0.card?.status ?? "",
-                                     $0.card?.surface.joined(separator: " ") ?? "", $0.card?.ink.joined(separator: " ") ?? ""] }
+                                     $0.card?.surface.joined(separator: " ") ?? "", $0.card?.ink.joined(separator: " ") ?? "",
+                                     $0.stage.map { "\($0.status) \($0.symbol) \($0.tint.joined(separator: " "))" } ?? "", "\($0.named ?? false)"] }
         }
         for language in AppLanguage.allCases {
             let sample = DeliveryWidgetSample.snapshot(languageCode: language.rawValue, in: bundled)

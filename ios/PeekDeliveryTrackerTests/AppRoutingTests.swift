@@ -314,6 +314,7 @@ final class AppRoutingTests: XCTestCase {
         let url = URL(string: "peekdeliverytracker://parcel/\(parcelID.uuidString)")!
 
         XCTAssertEqual(NativeRoute(url: url), .parcel(parcelID))
+        XCTAssertEqual(NativeRoute(url: DeliveryWidgetList.link), .parcels)
     }
 
     func testParsesAddDeepLinkAndDecodesTrackingInput() {

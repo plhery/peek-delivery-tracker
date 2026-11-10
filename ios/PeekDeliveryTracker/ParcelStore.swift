@@ -272,7 +272,7 @@ final class ParcelStore: ObservableObject {
         deliveryWidgetStore?.clearSnapshot()
         publishedWidgetState = nil
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: [], in: widgetPictures) }
-        WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
+        for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
         scheduleDeliveryLiveActivities(forceEnd: true)
     }
 
@@ -1144,7 +1144,7 @@ final class ParcelStore: ObservableObject {
         }
     }
 
-    /// The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first.
+    /// The widgets' parcels: those on their way, then those delivered within the last day, the latest first.
     static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date()) -> [DeliveryWidgetParcel] {
         let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
             .compactMap { parcel -> DeliveryWidgetParcel? in
@@ -1153,17 +1153,26 @@ final class ParcelStore: ObservableObject {
                 item.deliveredAt = arrived
                 return item
             }
-        return DeliveryWidgetSelection.parcels(onTheWay: nextDeliveries(of: parcels, localizer: localizer), delivered: delivered, now: now)
+        return DeliveryWidgetSelection.parcels(
+            onTheWay: nextDeliveries(of: parcels, localizer: localizer), delivered: delivered, now: now, limit: .max
+        )
     }
 
     private static func widgetParcel(_ parcel: Parcel, localizer: Localizer, detail: String?) -> DeliveryWidgetParcel {
-        DeliveryWidgetParcel(
+        let status = localizer.parcelStatus(parcel)
+        return DeliveryWidgetParcel(
             id: parcel.id,
             label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
             carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
             trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
-            detail: detail ?? localizer.parcelStatus(parcel),
-            isOutForDelivery: parcel.currentStage == .outForDelivery
+            detail: detail ?? status,
+            isOutForDelivery: parcel.currentStage == .outForDelivery,
+            // As the list's rows mark it.
+            stage: DeliveryWidgetStage(
+                status: status, symbol: parcel.currentStage?.metadata.symbol ?? "shippingbox.fill",
+                tint: ExperimentalPalette.tintHex(for: parcel.currentStage)
+            ),
+            named: parcel.label.nonEmpty != nil
         )
     }
 
@@ -1197,14 +1206,15 @@ final class ParcelStore: ObservableObject {
             deliveryWidgetStore?.clearSnapshot()
         }
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: snapshot?.parcels.compactMap(\.card) ?? [], in: widgetPictures) }
-        WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
+        for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
     }
 
-    /// Gives each parcel its card once the card's pictures are drawn, and starts drawing those that aren't.
+    /// Gives each parcel the next-delivery widget turns through its card once the card's pictures are drawn, and starts
+    /// drawing those that aren't. The list widget writes words alone.
     private func carded(_ shown: [DeliveryWidgetParcel]) -> [DeliveryWidgetParcel] {
         guard let folder = widgetPictures else { return shown }
         var missing: [(parcel: Parcel, card: DeliveryWidgetCard)] = []
-        let carded = shown.map { item in
+        let carded = shown.prefix(DeliveryWidgetSelection.limit).map { item in
             guard let parcel = parcels.first(where: { $0.id == item.id }) else { return item }
             let card = DeliveryWidgetPictures.card(for: parcel, localizer: localizer)
             guard DeliveryWidgetPictures.isDrawn(card, in: folder) else {
@@ -1228,7 +1238,7 @@ final class ParcelStore: ObservableObject {
                 self?.publishDeliveryWidget()
             }
         }
-        return carded
+        return carded + shown.dropFirst(DeliveryWidgetSelection.limit)
     }
 
     #if os(iOS)

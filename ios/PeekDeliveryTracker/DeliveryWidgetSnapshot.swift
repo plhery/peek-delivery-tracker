@@ -14,10 +14,22 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     var deliveredAt: Date? = nil
     /// The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone.
     var card: DeliveryWidgetCard? = nil
+    /// The parcel's stage as the app's list marks it, which the list widget shows; none from an app that didn't publish it.
+    var stage: DeliveryWidgetStage? = nil
+    /// Whether the reader named the parcel: the list widget calls one without a name by its carrier.
+    var named: Bool? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
     }
+}
+
+/// A parcel's stage as a row of the app's list shows it: the status in the app's words, and the symbol and colour that
+/// mark it, the colour light then dark as hex.
+struct DeliveryWidgetStage: Codable, Equatable, Hashable, Sendable {
+    let status: String
+    let symbol: String
+    let tint: [String]
 }
 
 /// A parcel's card as the widget shows it. A widget has too little memory to draw the map, so the app draws the card's
@@ -114,21 +126,23 @@ enum DeliveryWidgetSelection {
     /// How long a delivered parcel stays in the widget.
     static let deliveredFor: TimeInterval = 24 * 60 * 60
 
-    /// The parcels the widget turns through: those out for delivery, then the others on their way as `onTheWay` orders
-    /// them, then those delivered within the last day, as `delivered` orders them.
+    /// The parcels the widgets show, in their order: those out for delivery, then the others on their way as `onTheWay`
+    /// orders them, then those delivered within the last day, as `delivered` orders them. The next-delivery widget turns
+    /// through the first `limit`; the app publishes them all, so that the list widget can count those it has no room for.
     static func parcels(
         onTheWay: [DeliveryWidgetParcel],
         delivered: [DeliveryWidgetParcel],
-        now: Date = Date()
+        now: Date = Date(),
+        limit: Int = limit
     ) -> [DeliveryWidgetParcel] {
         let recent = delivered.filter { isShown($0, now: now) && $0.deliveredAt != nil }
         return Array((onTheWay.filter(\.isOutForDelivery) + onTheWay.filter { !$0.isOutForDelivery } + recent).prefix(limit))
     }
 
     /// What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
-    /// delivery beside the parcel after it, and any other parcel alone, across it.
+    /// delivery beside the parcel after it, and any other parcel alone, across it. It turns through the first `limit`.
     static func pages(of parcels: [DeliveryWidgetParcel], medium: Bool, now: Date = Date()) -> [[DeliveryWidgetParcel]] {
-        var rest = parcels.filter { isShown($0, now: now) }[...]
+        var rest = parcels.prefix(limit).filter { isShown($0, now: now) }[...]
         var pages: [[DeliveryWidgetParcel]] = []
         while let first = rest.popFirst() {
             if medium, first.isOutForDelivery, let second = rest.popFirst() {
@@ -140,9 +154,60 @@ enum DeliveryWidgetSelection {
         return pages
     }
 
+    /// The parcels the list widget shows, in their order.
+    static func listed(_ parcels: [DeliveryWidgetParcel], now: Date = Date()) -> [DeliveryWidgetParcel] {
+        parcels.filter { isShown($0, now: now) }
+    }
+
     /// A delivered parcel leaves the widget a day after it arrived, whenever the app last published it.
     private static func isShown(_ parcel: DeliveryWidgetParcel, now: Date) -> Bool {
         parcel.deliveredAt.map { now.timeIntervalSince($0) < deliveredFor } ?? true
+    }
+}
+
+/// The list widget: the widgets' parcels in their order, one to a row, and a last line that counts those left out.
+enum DeliveryWidgetList {
+    /// Opens the deliveries.
+    static let link = URL(string: "peekdeliverytracker://parcels")!
+
+    enum Size: CaseIterable, Sendable {
+        case small, medium, large
+
+        /// The rows each size has at the default text size: three, two columns of three, and fifteen, or as many as the
+        /// large widget's height holds. Larger text keeps fewer.
+        var rows: Int {
+            switch self {
+            case .small: 3
+            case .medium: 6
+            case .large: 15
+            }
+        }
+    }
+
+    /// The parcels `rows` rows show, and how many there are after them.
+    static func page(of parcels: [DeliveryWidgetParcel], rows: Int) -> (shown: [DeliveryWidgetParcel], more: Int) {
+        let shown = Array(parcels.prefix(max(rows, 0)))
+        return (shown, parcels.count - shown.count)
+    }
+
+    /// A medium widget's columns: the parcels it shows in two, read down the first then the second, once one column
+    /// can't hold them all; else in one, across the widget.
+    static func columns(of shown: [DeliveryWidgetParcel], perColumn: Int) -> [[DeliveryWidgetParcel]] {
+        guard shown.count > max(perColumn, 1) else { return shown.isEmpty ? [] : [shown] }
+        let first = (shown.count + 1) / 2
+        return [Array(shown.prefix(first)), Array(shown.dropFirst(first))]
+    }
+}
+
+extension DeliveryWidgetParcel {
+    /// The name the list widget gives the parcel: its own, else its carrier's.
+    var listName: String { named == false ? carrier : label }
+
+    /// The parcel's stage, and the day it is expected or arrived when the app knows one. Published by an app that
+    /// didn't publish the stage, the parcel reads as its detail.
+    var listLine: (status: String, day: String?) {
+        guard let stage else { return (detail, nil) }
+        return (stage.status, detail == stage.status ? nil : detail)
     }
 }
 
@@ -159,6 +224,9 @@ struct DeliveryWidgetTurn: Codable, Equatable, Sendable {
 
 struct DeliveryWidgetSharedStore {
     static let kind = "NextDeliveryWidget"
+    static let listKind = "ParcelListWidget"
+    /// The widgets that read the snapshot.
+    static let kinds = [kind, listKind]
     static let defaultAppGroupIdentifier = "group.com.plhery.PeekDeliveryTracker"
 
     private static let enabledKey = "sdt.deliveryWidget.enabled.v1"

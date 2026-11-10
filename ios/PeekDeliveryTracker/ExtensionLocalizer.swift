@@ -72,4 +72,28 @@ struct ExtensionLocalizer {
             ?? dictionaries["en"]?[key]
             ?? key
     }
+
+    /// A counted text with its count, in the form the app's `Localizer` picks for it: `key` is its `.many` form.
+    func text(_ key: String, count: Int) -> String {
+        let base = key.hasSuffix(".many") ? String(key.dropLast(5)) : key
+        let form = Self.countForm(Double(count), languageCode: languageCode)
+        let messages = dictionaries[languageCode] ?? dictionaries["en"]
+        let chosen = form == "other" || messages?["\(base).\(form)"] == nil ? key : "\(base).\(form)"
+        return text(chosen).replacingOccurrences(of: "{{count}}", with: String(count))
+    }
+
+    /// The form a count takes, as the web picks it (`translateMessage`): a whole count in Polish or Russian takes
+    /// CLDR's `one`, `few` or `many`, any other count `one` for exactly 1 and `other` otherwise. Russian's `one`
+    /// also counts 21, 31 and 101, so its copy writes the number.
+    static func countForm(_ count: Double, languageCode: String) -> String {
+        if count == 1 { return "one" }
+        guard languageCode == "pl" || languageCode == "ru", count.isFinite, count >= 0, count.rounded(.towardZero) == count else {
+            return "other"
+        }
+        // 2–4 take the few form, except 12–14; in Russian 1 takes the one form, except 11.
+        let last = count.truncatingRemainder(dividingBy: 10)
+        let lastTwo = count.truncatingRemainder(dividingBy: 100)
+        if languageCode == "ru", last == 1, lastTwo != 11 { return "one" }
+        return (2...4).contains(last) && !(12...14).contains(lastTwo) ? "few" : "many"
+    }
 }

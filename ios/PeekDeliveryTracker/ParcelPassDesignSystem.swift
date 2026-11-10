@@ -1,12 +1,21 @@
 import SwiftUI
 
 enum ExperimentalPalette {
-    static let transit = Brand.color(light: "#22588A", dark: "#9BCBFF")
+    /// The tints a row marks a parcel's stage with, light then dark, as hex: the list widget, which has no palette of its
+    /// own, draws them from these.
+    private static let transitHex = ["#22588A", "#9BCBFF"]
+    /// `Brand.warning`.
+    private static let pickupHex = ["#963E19", "#FFB184"]
+    private static let deliveredHex = ["#24613E", "#9BE0B5"]
+    private static let lilacHex = ["#654299", "#D1B5FF"]
+    private static let ochreHex = ["#745300", "#FFD65F"]
+
+    static let transit = Brand.color(light: transitHex[0], dark: transitHex[1])
     static let pickup = Brand.warning
-    static let delivered = Brand.color(light: "#24613E", dark: "#9BE0B5")
-    static let lilac = Brand.color(light: "#654299", dark: "#D1B5FF")
+    static let delivered = Brand.color(light: deliveredHex[0], dark: deliveredHex[1])
+    static let lilac = Brand.color(light: lilacHex[0], dark: lilacHex[1])
     static let rose = Brand.color(light: "#9A3D5C", dark: "#FFADC8")
-    static let ochre = Brand.color(light: "#745300", dark: "#FFD65F")
+    static let ochre = Brand.color(light: ochreHex[0], dark: ochreHex[1])
 
     static let transitSurface = Brand.color(light: "#DAEAFE", dark: "#152636")
     static let pickupSurface = Brand.color(light: "#FFDDC7", dark: "#341F14")
@@ -26,19 +35,24 @@ enum ExperimentalPalette {
     }
 
     static func tint(for parcel: Parcel) -> Color {
-        switch parcel.currentStage {
+        let hex = tintHex(for: parcel.currentStage)
+        return Brand.color(light: hex[0], dark: hex[1])
+    }
+
+    static func tintHex(for stage: TrackingStage?) -> [String] {
+        switch stage {
         case .delivered:
-            delivered
+            deliveredHex
         case .customs, .exception, .failedAttempt, .readyForPickup, .returned:
-            pickup
+            pickupHex
         case .inTransit:
-            transit
+            transitHex
         case .outForDelivery:
-            ochre
+            ochreHex
         case .pending, .registered, .none:
-            lilac
+            lilacHex
         default:
-            transit
+            transitHex
         }
     }
 }

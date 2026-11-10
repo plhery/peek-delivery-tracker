@@ -22,6 +22,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Belgische Schokolade 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "In Zustellung",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -43,6 +52,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Trail-Wochenend-Set 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Beim Paketdienst eingegangen",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -70,6 +88,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Belgian chocolate 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "Out for delivery",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -91,6 +118,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Trail weekend kit 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Received by carrier",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -118,6 +154,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolate belga 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "En reparto",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -139,6 +184,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit trail de fin de semana 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Admitido por el transportista",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -166,6 +220,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolat belge 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "En livraison",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -187,6 +250,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit week-end trail 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Pris en charge",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -214,6 +286,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Cioccolato belga 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "In consegna",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -235,6 +316,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit weekend trail 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Preso in carico",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -262,6 +352,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Belgijska czekolada 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "W doręczeniu",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -283,6 +382,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Zestaw na weekend w górach 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Przyjęta przez przewoźnika",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -310,6 +418,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolate belga 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "Em distribuição",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -331,6 +448,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit trail de fim de semana 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Aceite pela transportadora",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -358,6 +484,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolate belga 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "Saiu para entrega",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -379,6 +514,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit de trilha para o fim de semana 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Recebida pela transportadora",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -406,6 +550,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Бельгийский шоколад 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "Передана курьеру",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -427,6 +580,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Набор для похода на выходные 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "Принята службой доставки",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
@@ -454,6 +616,15 @@
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "比利时巧克力 🍫",
+        "named" : true,
+        "stage" : {
+          "status" : "派送中",
+          "symbol" : "bicycle",
+          "tint" : [
+            "#745300",
+            "#FFD65F"
+          ]
+        },
         "trackingNumber" : "DEMOCHOC20260001"
       },
       {
@@ -475,6 +646,15 @@
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "周末越野装备 🏕️",
+        "named" : true,
+        "stage" : {
+          "status" : "已揽收",
+          "symbol" : "shippingbox",
+          "tint" : [
+            "#22588A",
+            "#9BCBFF"
+          ]
+        },
         "trackingNumber" : "DEMODPD20260001"
       }
     ]

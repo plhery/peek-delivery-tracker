@@ -1133,6 +1133,91 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DeliveryWidgetSelection.parcels(onTheWay: many, delivered: [arrived], now: now).count, DeliveryWidgetSelection.limit)
     }
 
+    /// The list widget lists the parcels in the next-delivery widget's order and counts those it has no room for, while
+    /// the next-delivery widget still turns through the first few.
+    func testListWidgetCountsTheParcelsItHasNoRoomFor() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let courier = widgetParcel(label: "Courier", outForDelivery: true)
+        let onTheWay = (0..<15).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
+        var arrived = widgetParcel(label: "Arrived", outForDelivery: false)
+        arrived.deliveredAt = now.addingTimeInterval(-3_600)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: onTheWay + [courier], delivered: [arrived], now: now, limit: .max)
+
+        XCTAssertEqual(parcels, [courier] + onTheWay + [arrived])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: false, now: now).flatMap { $0 }, Array(parcels.prefix(DeliveryWidgetSelection.limit)))
+        let listed = DeliveryWidgetSelection.listed(parcels, now: now)
+        XCTAssertEqual(listed, parcels)
+        XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [courier] + onTheWay)
+
+        XCTAssertEqual(DeliveryWidgetList.Size.allCases.map(\.rows), [3, 6, 15])
+        for size in DeliveryWidgetList.Size.allCases {
+            let page = DeliveryWidgetList.page(of: listed, rows: size.rows)
+            XCTAssertEqual(page.shown, Array(listed.prefix(size.rows)), "\(size)")
+            XCTAssertEqual(page.more, listed.count - size.rows, "\(size)")
+        }
+        // Room for them all, it counts none; with no parcels, it shows none.
+        XCTAssertEqual(DeliveryWidgetList.page(of: Array(listed.prefix(2)), rows: 3).more, 0)
+        XCTAssertEqual(DeliveryWidgetList.page(of: [], rows: 6).shown, [])
+        XCTAssertEqual(DeliveryWidgetList.page(of: [], rows: 6).more, 0)
+        XCTAssertEqual(DeliveryWidgetSelection.listed([], now: now), [])
+    }
+
+    /// A medium list widget reads down two columns once one can't hold its parcels, the first never the shorter.
+    func testMediumListWidgetBalancesItsColumns() {
+        let parcels = (0..<6).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
+
+        XCTAssertEqual(DeliveryWidgetList.columns(of: parcels, perColumn: 3), [Array(parcels[0..<3]), Array(parcels[3..<6])])
+        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(5)), perColumn: 3), [Array(parcels[0..<3]), Array(parcels[3..<5])])
+        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(4)), perColumn: 2), [Array(parcels[0..<2]), Array(parcels[2..<4])])
+        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(3)), perColumn: 3), [Array(parcels.prefix(3))])
+        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(2)), perColumn: 1), [[parcels[0]], [parcels[1]]])
+        XCTAssertEqual(DeliveryWidgetList.columns(of: [], perColumn: 3), [])
+    }
+
+    /// A row names the parcel, or its carrier when the reader gave it no name, and reads its stage then its day.
+    func testListWidgetRowNamesTheParcelAndReadsItsStage() {
+        let long = "Handmade oak bookshelf with matching side table and drawers"
+        var parcel = widgetParcel(label: long, outForDelivery: false)
+        XCTAssertEqual(parcel.listName, long)
+        XCTAssertEqual(parcel.listLine.status, "Today")
+        XCTAssertNil(parcel.listLine.day)
+
+        parcel.stage = DeliveryWidgetStage(status: "In transit", symbol: "shippingbox.fill", tint: ["#22588A", "#9BCBFF"])
+        parcel.named = true
+        XCTAssertEqual(parcel.listName, long)
+        XCTAssertEqual(parcel.listLine.status, "In transit")
+        XCTAssertEqual(parcel.listLine.day, "Today")
+
+        parcel.named = false
+        XCTAssertEqual(parcel.listName, "Swiss Post")
+        // A parcel with no day reads its stage once.
+        let undated = DeliveryWidgetParcel(id: UUID(), label: "", carrier: "Swiss Post", trackingNumber: "DEMOLIST0001",
+                                           detail: "In transit", isOutForDelivery: false, stage: parcel.stage, named: false)
+        XCTAssertEqual(undated.listLine.status, "In transit")
+        XCTAssertNil(undated.listLine.day)
+    }
+
+    /// The list widget's last line counts the parcels left out in the form each language gives the count.
+    func testListWidgetCountsInEachLanguagesForm() {
+        let dictionaries = [
+            "en": ["widget.listMore.one": "+{{count}} more", "widget.listMore.many": "+{{count}} more"],
+            "de": ["widget.listMore.one": "+{{count}} weiteres", "widget.listMore.many": "+{{count}} weitere"],
+            "pl": ["widget.listMore.one": "one {{count}}", "widget.listMore.few": "few {{count}}", "widget.listMore.many": "many {{count}}"],
+            "ru": ["widget.listMore.one": "one {{count}}", "widget.listMore.few": "few {{count}}", "widget.listMore.many": "many {{count}}"],
+        ]
+        let text = { (language: String, count: Int) in
+            ExtensionLocalizer(languageCode: language, dictionaries: dictionaries).text("widget.listMore.many", count: count)
+        }
+
+        XCTAssertEqual(text("en", 12), "+12 more")
+        XCTAssertEqual(text("de", 1), "+1 weiteres")
+        XCTAssertEqual(text("de", 2), "+2 weitere")
+        XCTAssertEqual([1, 3, 5, 12, 22].map { text("pl", $0) }, ["one 1", "few 3", "many 5", "many 12", "few 22"])
+        XCTAssertEqual([1, 21, 3, 11].map { text("ru", $0) }, ["one 1", "one 21", "few 3", "many 11"])
+        // A language without the copy reads English.
+        XCTAssertEqual(text("it", 4), "+4 more")
+    }
+
     /// The next button turns the widgets of one size, and for a few minutes only.
     func testWidgetTurnLastsItsSpellForOneSize() throws {
         let suiteName = "DeliveryWidgetTurnTests.\(UUID().uuidString)"

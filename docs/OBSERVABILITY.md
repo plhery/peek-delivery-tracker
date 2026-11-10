@@ -148,8 +148,10 @@ All tables and views here are service-role only.
   lookups ran a step has `lookup_trail`, the path they took: each carrier or provider asked, in
   order, with its steps and how each ended, such as `poste-italiane direct:challenge>browser:ok;
   17track api:ok` for a challenged lookup the browser answered, at most 24 steps. The step of an
-  answer recorded as one without history (below) ends `no_history`, not `ok`. It holds ids
-  and outcome kinds, never a number.
+  answer recorded as one without history (below) ends `no_history`, not `ok`. A carrier
+  recognition asked whose lookup recorded no step of its own (DHL Express's recognition calls
+  its mobile lookup directly) shows by its answer: `recognize:` and `known`, `unknown`,
+  `failed` or `no_history`. It holds ids and outcome kinds, never a number.
 
 Completed rows are kept for 90 days. A check cut off at shutdown ends `interrupted`, with
 its `tracking_sync_completed` line; one whose worker died is marked `abandoned` when its

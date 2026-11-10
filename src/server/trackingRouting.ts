@@ -13,7 +13,7 @@ import { priorityUniversalSource, universalPlan, universalSourceBudget } from 'u
 import type { UniversalSource } from 'universal-parcel-scraper';
 import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universal-parcel-scraper/app';
 import { brandCarrierIds, carrierBrand, carrierIdFromName, universalCarrierHints } from 'universal-parcel-scraper/app';
-import { errorType, reportRoutingEvent } from './observability';
+import { errorType, reportRoutingEvent, reportTrackingRecognition } from './observability';
 import { markLookup, unmarkLookups } from './stepRecorder';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
@@ -683,6 +683,8 @@ export function detectionExpects(number: string, carrier: string, countryHint?: 
 export const CANDIDATE_PROBE_WINDOW = 30 * DAY;
 /** Every recognition answer a sync waits for; later answers are ignored. */
 const RECOGNITION_BUDGET_MS = 15_000;
+/** A recognition answer in a check's trail, from the least to the most a carrier said. */
+const RECOGNITION_VERDICTS = ['failed', 'unknown', 'no_history', 'known'] as const;
 /**
  * A provider busy for no longer than this is only spaced after another check
  * (5 s after a healthy call): it is waited for, at most twice per provider.
@@ -1493,9 +1495,15 @@ export class TrackingRouter {
       signal?.throwIfAborted();
       recognized = settleRecognition(outcomes, now()).carrier;
       // A carrier that knows only an older shipment with the number answered without history for this parcel.
+      // Each carrier asked shows in the check's trail by its best answer, from known down to failed.
+      const verdicts = new Map<string, number>();
       for (const outcome of outcomes) {
-        if (outcome.status === 'known' && settleRecognition([outcome], now()).carrier !== outcome.carrier) markLookup(outcome.carrier, 'older_answer');
+        const older = outcome.status === 'known' && settleRecognition([outcome], now()).carrier !== outcome.carrier;
+        if (older) markLookup(outcome.carrier, 'older_answer');
+        const rank = RECOGNITION_VERDICTS.indexOf(older ? 'no_history' : outcome.status);
+        verdicts.set(outcome.carrier, Math.max(rank, verdicts.get(outcome.carrier) ?? -1));
       }
+      for (const [carrier, rank] of verdicts) reportTrackingRecognition(carrier, RECOGNITION_VERDICTS[rank]!);
       homeNetwork = recognized && !requiredRequirements(recognized, number).length
         && outcomes.some((outcome) => outcome.carrier === recognized && outcome.countryMatch === 'home') ? recognized : undefined;
       // A carrier that knows the number and needs no input gets a full

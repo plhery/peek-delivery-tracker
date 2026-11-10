@@ -7,6 +7,7 @@ import {
   flushObservability,
   errorType,
   logOperationalEvent,
+  RECOGNITION_STEP,
   reportRoutingEvent,
   withTrackingAttempt,
   type RoutingSignal,
@@ -229,6 +230,8 @@ export class TrackingSyncAudit {
     this.#browser = this.#browser === true || step === LOCAL_BROWSER_STEP;
     if (!carrier || !outcome || this.#trailSteps >= TRAIL_STEPS) return;
     const name = carrier.slice(0, 40), last = this.#trail.at(-1);
+    // A recognition answer stands in for the steps of a carrier whose lookup recorded none.
+    if (step === RECOGNITION_STEP && this.#trail.some((run) => run.carrier === name)) return;
     const entry = `${step.slice(0, 20)}:${outcome.slice(0, 20)}`;
     if (last?.carrier === name) last.steps.push(entry);
     else this.#trail.push({ carrier: name, steps: [entry] });

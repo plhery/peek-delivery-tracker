@@ -7,7 +7,7 @@ import { SupabaseServiceClient } from './supabase';
 import { trackingSupportEvidence } from './trackingSupport';
 import type { JsonObject } from './types';
 import {
-  captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep,
+  captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingRecognition, reportTrackingStep,
 } from './observability';
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 
@@ -357,6 +357,19 @@ describe('the lookups of a check', () => {
       for (let index = 0; index < 40; index += 1) reportTrackingStep('direct', 'poste-italiane', 'transport');
     });
     expect(long.lookupTrail).toBe(`poste-italiane ${Array(24).fill('direct:transport').join('>')}`);
+  });
+
+  it("show a recognition answer only for a carrier whose lookup left no step of its own", async () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true) };
+    const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', '1234567890', 'unknown', 'pending', { trigger: 'package' });
+    await audit.observeFetch(async () => {
+      reportTrackingStep('api', 'acs-courier', 'not_found');
+      reportTrackingRecognition('acs-courier', 'unknown');
+      reportTrackingRecognition('dhl-express', 'unknown');
+      reportTrackingStep('api', 'ParcelsApp', 'ok');
+    });
+    expect(audit.lookupTrail).toBe('acs-courier api:not_found; dhl-express recognize:unknown; ParcelsApp api:ok');
   });
 
   it('keep at most 32 carriers and providers, each name bounded', async () => {

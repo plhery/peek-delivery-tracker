@@ -64,6 +64,18 @@ export function reportTrackingStep(step: string, carrier?: string, outcome?: str
   trackingAttempts.getStore()?.step?.(step, carrier, outcome);
 }
 
+/** The step a carrier's recognition answer takes in a check's trail when its lookup recorded no step of its own. */
+export const RECOGNITION_STEP = 'recognize';
+
+/**
+ * Tells the running check what a carrier recognition asked answered: `known`, `unknown`, `failed`, or `no_history` for
+ * a shipment too old to be the parcel's. The trail keeps it only for a carrier with no step of its own there, as when
+ * the adapter's recognition calls its lookup directly (DHL Express's mobile lookup).
+ */
+export function reportTrackingRecognition(carrier: string, verdict: string): void {
+  reportTrackingStep(RECOGNITION_STEP, carrier, verdict);
+}
+
 /** Tells the running check that a lookup asked the browser service for a page it can open a browser for. */
 export function reportTrackingBrowser(): void {
   trackingAttempts.getStore()?.browser?.();

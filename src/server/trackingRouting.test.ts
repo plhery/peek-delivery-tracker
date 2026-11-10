@@ -1017,6 +1017,20 @@ describe('persistent tracking routing', () => {
       expect(refresh.universal).toHaveBeenCalled();
     });
 
+    it("gives each carrier recognition asked to the check's trail by its answer", async () => {
+      vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) => options?.phase === 'browser' ? [] : twoBatches);
+      const { router, recognize } = setup();
+      recognize.mockImplementation(async (carrier: string) => {
+        if (carrier === 'seur') throw new Error('down');
+        return { known: false };
+      });
+      const steps: string[] = [];
+      await monitoring.withTrackingAttempt('synthetic-attempt',
+        () => router.fetch(parcel({ tracking_number: '00000000000003' }), false, undefined, true),
+        undefined, (step, carrier, outcome) => { if (step === monitoring.RECOGNITION_STEP) steps.push(`${carrier} ${outcome}`); });
+      expect(steps.slice(0, 5)).toEqual(['dpd unknown', 'seur failed', 'brt unknown', 'relais-colis unknown', 'ciblex unknown']);
+    });
+
     it.each([['dpd'], ['dpd', 'seur'], ['dpd', 'relais-colis']])('does not expand a first-round match or choice: %j', async (...known) => {
       vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) => options?.phase === 'browser' ? [] : twoBatches);
       const { router, recognize } = setup();

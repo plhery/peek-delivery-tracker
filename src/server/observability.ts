@@ -120,6 +120,8 @@ export interface OperationalContext {
   jobId?: string | null;
   trigger?: string | null;
   route?: string | null;
+  /** A request's method, with `route`. */
+  method?: string | null;
   routeType?: string | null;
   requestId?: string | null;
   failureCount?: number | null;
@@ -144,6 +146,8 @@ export interface OperationalErrorMetadata {
   upstreamStatus?: number;
   databaseStatus?: number;
   databaseCode?: string;
+  /** The database call that failed (`databaseCall`). */
+  databaseOperation?: string;
   providerFailureReason?: string;
   providerCode?: number;
   upstreamHttp?: UpstreamHttpDiagnostics;
@@ -242,6 +246,10 @@ export function operationalErrorMetadata(error: unknown): OperationalErrorMetada
       }
       if (metadata.databaseCode === undefined) {
         metadata.databaseCode = safeDatabaseCode(details.code);
+      }
+      const operation = (current as Error & { operation?: unknown }).operation;
+      if (metadata.databaseOperation === undefined && typeof operation === 'string') {
+        metadata.databaseOperation = operation.slice(0, 120);
       }
     }
     current = current.cause;
@@ -478,6 +486,7 @@ function applyContext(
     carrier: boundedText(context.carrier, 100),
     component: boundedText(context.component, 100),
     database_code: boundedText(errorMetadata.databaseCode, 40),
+    database_operation: boundedText(errorMetadata.databaseOperation, 120),
     database_status: boundedText(errorMetadata.databaseStatus, 3),
     error_type: boundedText(capturedErrorType, 100),
     job_id: boundedText(context.jobId, 100),
@@ -529,12 +538,15 @@ export function captureOperationalError(
           : 'Check database availability, permissions and migrations; inspect the operation tag to distinguish shipment persistence from diagnostics.',
     });
     // A database that does not answer fails every write at once: one outage is one issue, and the tags name each write.
+    // A request's failure is grouped by its method and route, and a database refusal by the call
+    // refused: one issue held every route's database errors, a missing row beside a timeout.
     scope.setFingerprint(errorMetadata.databaseCode === 'unreachable' ? ['delivery-tracker', 'database-unreachable'] : [
       'delivery-tracker',
       context.component,
       context.operation,
       context.carrier ?? 'none',
       capturedErrorType,
+      ...(context.route ? [`${context.method ?? ''} ${context.route}`.trim(), errorMetadata.databaseOperation ?? 'none'] : []),
     ]);
     // Scope processors run after the SDK has attached the request and named
     // the transaction after its address.

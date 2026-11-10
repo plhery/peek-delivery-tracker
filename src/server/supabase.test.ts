@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { STORED_EVENT_IDENTITIES, SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
+import { databaseCall, STORED_EVENT_IDENTITIES, SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
 import { postgrestTables } from '../test/postgrest';
 import type { JsonObject } from './types';
 
@@ -1254,5 +1254,23 @@ describe('Friends passports', () => {
     // No card shares its Passport: nothing to read.
     await expect(client.passportSharers([])).resolves.toEqual(new Map());
     expect(request).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('database errors', () => {
+  it('name the call that failed, without its query or ids', async () => {
+    expect(databaseCall('DELETE', '/auth/v1/admin/users/19000000-0000-0000-0000-000000000001')).toBe('DELETE /auth/v1/admin/users/:id');
+    expect(databaseCall('GET', '/rest/v1/packages?tracking_number=eq.EXAMPLE0001&select=id')).toBe('GET /rest/v1/packages');
+    expect(databaseCall('POST', '/rest/v1/rpc/link_package_tracking')).toBe('POST /rest/v1/rpc/link_package_tracking');
+    const client = new SupabaseUserClient('https://database.example', 'anon', 'token');
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ code: '23505' }), { status: 409 })));
+    try {
+      const refused = await client.request('/rest/v1/packages?tracking_number=eq.EXAMPLE0001', { method: 'POST', body: {} })
+        .catch((error: unknown) => error);
+      expect(refused).toBeInstanceOf(SupabaseError);
+      expect(refused).toMatchObject({ status: 409, code: '23505', operation: 'POST /rest/v1/packages' });
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

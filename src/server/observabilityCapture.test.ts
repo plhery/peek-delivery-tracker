@@ -370,6 +370,30 @@ it('opens one issue for a database that does not answer, whichever write found i
   expect(refused.contexts?.next_steps?.action).toContain('PostgREST schema cache');
 });
 
+it('groups a request\'s database refusal by its method, route and the call refused', async () => {
+  vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
+  expect(initObservability()).toBe(true);
+  const refusal = (status: number, operation: string) => new SupabaseError(`Supabase request failed (${status})`, status, undefined, { operation });
+  const request = (method: string, route: string, error: Error) => captureOperationalError(error,
+    { component: 'api', operation: 'request', requestId: 'request-1', route, method });
+  const ids = [
+    request('DELETE', '/api/account', refusal(504, 'DELETE /auth/v1/admin/users/:id')),
+    request('DELETE', '/api/account', refusal(504, 'DELETE /auth/v1/admin/users/:id')),
+    request('POST', '/api/packages', refusal(409, 'POST /rest/v1/packages')),
+    request('POST', '/api/packages', refusal(500, 'POST /rest/v1/rpc/link_package_tracking')),
+    request('GET', '/api/packages', new Error('Unexpected failure')),
+  ];
+  await flushObservability();
+  const [account, again, added, linked, plain] = ids.map((id) => captured.events.find((event) => event.event_id === id)!);
+  expect(account.fingerprint).toEqual(['delivery-tracker', 'api', 'request', 'none', 'SupabaseError', 'DELETE /api/account',
+    'DELETE /auth/v1/admin/users/:id']);
+  expect(again.fingerprint).toEqual(account.fingerprint);
+  expect(added.fingerprint).toEqual(['delivery-tracker', 'api', 'request', 'none', 'SupabaseError', 'POST /api/packages', 'POST /rest/v1/packages']);
+  expect(linked.fingerprint).not.toEqual(added.fingerprint);
+  expect(plain.fingerprint).toEqual(['delivery-tracker', 'api', 'request', 'none', 'Error', 'GET /api/packages', 'none']);
+  expect(account.tags).toMatchObject({ database_operation: 'DELETE /auth/v1/admin/users/:id', database_status: '504', route: '/api/account' });
+});
+
 it('sends carriers no trace headers', async () => {
   vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
   expect(initObservability()).toBe(true);

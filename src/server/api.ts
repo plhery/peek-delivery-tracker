@@ -423,6 +423,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
         operation: 'request',
         requestId,
         route: routeLabel(request),
+        method: request.method,
         withoutRequest: options.capability,
       });
     }

@@ -822,11 +822,13 @@ provider failure in an `AggregateError` so every cause is visible.
 
 - **Titles**: messages are sent without a stack trace (`attachStacktrace: false`), so an
   issue is titled by its message rather than by a minified function name.
-- **Grouping**: by component, operation, carrier and error type. A database that does
+- **Grouping**: by component, operation, carrier and error type, and an API request's
+  by its method and route and the database call it failed on (`database_operation`: the
+  method and path, without query or ids). A database that does
   not answer (`database_code:unreachable`) fails every write at once and is one issue;
   its events' tags name each write. `attempt_id`,
-  `job_id`, `request_id`, `number_pattern`, `upstream_status` and `database_code` are
-  searchable tags.
+  `job_id`, `request_id`, `number_pattern`, `upstream_status`, `database_code` and
+  `database_operation` are searchable tags.
 - **Source maps**: the server's stay in its image. The browser's are public, beside the
   scripts; see "Browser error reports" below.
 - **Crons**: a scheduled run sends an in-progress check-in to the

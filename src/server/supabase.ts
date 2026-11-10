@@ -74,15 +74,28 @@ export class SupabaseError extends Error {
     return value instanceof Error && value.name === 'SupabaseError';
   }
 
+  /** The call that failed, as `databaseCall` names it. */
+  readonly operation?: string;
+
   constructor(
     message: string,
     readonly status?: number,
     readonly code?: string,
-    options?: ErrorOptions,
+    options?: ErrorOptions & { operation?: string },
   ) {
     super(message, options);
     this.name = 'SupabaseError';
+    if (options?.operation) this.operation = options.operation;
   }
+}
+
+/**
+ * A database call as error reports name it: the method and the path, without its query and with
+ * a segment of six characters or more holding a digit, such as a user id, read as `:id`.
+ */
+export function databaseCall(method: string, path: string): string {
+  return `${method} ${path.split(/[?#]/, 1)[0]!.split('/')
+    .map((segment) => (segment.length >= 6 && /\d/.test(segment) ? ':id' : segment)).join('/')}`;
 }
 
 /**
@@ -364,7 +377,7 @@ export class SupabaseClient {
     } catch (error) {
       // No answer, or one cut off before its end. The code tells it from a refusal.
       throw new SupabaseError('The delivery database is unreachable', undefined, 'unreachable', {
-        cause: error,
+        cause: error, operation: databaseCall(method, path),
       });
     }
 
@@ -375,7 +388,7 @@ export class SupabaseClient {
       } catch (error) {
         if (response.ok) {
           throw new SupabaseError('The delivery database returned invalid JSON', response.status, undefined, {
-            cause: error,
+            cause: error, operation: databaseCall(method, path),
           });
         }
       }
@@ -387,6 +400,7 @@ export class SupabaseClient {
         `Supabase ${method} request failed (${response.status})`,
         response.status,
         code,
+        { operation: databaseCall(method, path) },
       );
     }
     return payload as T | null;

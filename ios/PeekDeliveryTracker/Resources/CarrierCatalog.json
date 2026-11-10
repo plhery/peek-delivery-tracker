@@ -51219,6 +51219,235 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://integraa.net/gestione/tracking.php"
+    },
+    "csomagpiac": {
+      "displayName": "Csomagpiac",
+      "aliases": [
+        "Csomagpiac Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#fba817",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://bestr.csomagpiac.hu/kuldemenykovetes?ident={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "bestr.csomagpiac.hu"
+          ],
+          "pathPattern": "^/kuldemenykovetes/?$",
+          "params": [
+            "ident"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://bestr.csomagpiac.hu/kuldemenykovetes"
+    },
+    "gyujtoszallitas": {
+      "displayName": "Gyűjtőszállítás.hu",
+      "aliases": [
+        "Gyujtoszallitas.hu",
+        "Gyűjtőszállítás",
+        "Gyűjtőszállítás.hu Futárszolgálat Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#633388",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gyujtoszallitas.hu/csomagkovetes"
+    },
+    "home-delivery-team": {
+      "displayName": "Home Delivery Team",
+      "aliases": [
+        "HDT",
+        "HDT Home Delivery Team",
+        "GE Logisztika Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#dd137b",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://homedt.hu/nyomonkovetes?track_number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "homedt.hu",
+            "www.homedt.hu"
+          ],
+          "pathPattern": "^/nyomonkovetes/?$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://homedt.hu/nyomonkovetes"
+    },
+    "mixpakk": {
+      "displayName": "Mixpakk",
+      "aliases": [
+        "MXP",
+        "Mixpakk Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#1ca12a",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://mixpakk.hu/nyomkovetes/?package={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "mixpakk.hu",
+            "www.mixpakk.hu"
+          ],
+          "pathPattern": "^/nyomkovetes/?$",
+          "params": [
+            "package",
+            "q"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://mixpakk.hu/nyomkovetes/"
+    },
+    "qt-express": {
+      "displayName": "QT Express",
+      "aliases": [
+        "QT Logistics",
+        "QT Logistics Group",
+        "QT Logistics Group Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#ee7e22",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.qtlogistics.eu/hu/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.qtlogistics.eu"
+          ],
+          "pathPattern": "^/(?:hu|en)/[^/]+/?$",
+          "path": "^/(?:hu|en)/([^/]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.qtlogistics.eu/hu"
+    },
+    "szami-group": {
+      "displayName": "SZAMI Group",
+      "aliases": [
+        "SZAMI Group Logisztikai Szolgáltató Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#f02036",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.szamigroup.hu/nyomonkovetes/"
+    },
+    "trans-pack": {
+      "displayName": "Trans-Pack",
+      "aliases": [
+        "Trans-Pack Logisztika",
+        "Trans-Pack Logisztika Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#1967b0",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://partner.trans-pack.hu/csomagkovetes?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "partner.trans-pack.hu"
+          ],
+          "pathPattern": "^/csomagkovetes/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://partner.trans-pack.hu/csomagkovetes"
+    },
+    "xls-futar": {
+      "displayName": "XLS Futár",
+      "aliases": [
+        "XLS Futar",
+        "XLS Futár Zrt."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#009fe3",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://xlsfutar.hu/track?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "xlsfutar.hu",
+            "www.xlsfutar.hu"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://xlsfutar.hu/track"
     }
   }
 }

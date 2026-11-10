@@ -754,6 +754,23 @@ describe('carrier mark', () => {
     'trans-pack',
     'qt-express',
     'home-delivery-team',
+    'optimus-courier',
+    'maty-express',
+    'transilvania-post',
+    'xpedist',
+    'irs-romexpress',
+    'pink-post',
+    'time-critical-line',
+    'world-courier',
+    'posta-panduri',
+    'intelligent-logistik',
+    'best-courier-ro',
+    'curiera',
+    'sinapseria',
+    'corlan-post-express',
+    'albatomi',
+    'cautcurier',
+    '24curier',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

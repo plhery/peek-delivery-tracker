@@ -8,6 +8,9 @@
   "247express": {
     "decal": "247express"
   },
+  "24curier": {
+    "decal": "24curier"
+  },
   "2ebox": {
     "decal": "2ebox"
   },
@@ -145,6 +148,9 @@
   },
   "aland-post": {
     "decal": "aland-post"
+  },
+  "albatomi": {
+    "decal": "albatomi"
   },
   "alem-tat": {
     "decal": "alem-tat"
@@ -379,6 +385,9 @@
   "belpost": {
     "decal": "belpost"
   },
+  "best-courier-ro": {
+    "decal": "best-courier-ro"
+  },
   "best-express-kh": {
     "decal": "best-express-my"
   },
@@ -603,6 +612,9 @@
   "cathedis": {
     "decal": "cathedis"
   },
+  "cautcurier": {
+    "decal": "cautcurier"
+  },
   "cbl-logistica": {
     "decal": "cbl-logistica"
   },
@@ -772,6 +784,9 @@
   "cope-sensitive-freight": {
     "decal": "cope-sensitive-freight"
   },
+  "corlan-post-express": {
+    "decal": "corlan-post-express"
+  },
   "corporate-couriers": {
     "decal": "corporate-couriers"
   },
@@ -900,6 +915,9 @@
   },
   "cupost": {
     "decal": "cupost"
+  },
+  "curiera": {
+    "decal": "curiera"
   },
   "custom-companies": {
     "decal": "custom-companies",
@@ -2040,6 +2058,9 @@
   "intelcom": {
     "decal": "intelcom"
   },
+  "intelligent-logistik": {
+    "decal": "intelligent-logistik"
+  },
   "inter-courier": {
     "decal": "inter-courier"
   },
@@ -2079,6 +2100,9 @@
   },
   "iran-post": {
     "decal": "iran-post"
+  },
+  "irs-romexpress": {
+    "decal": "irs-romexpress"
   },
   "islandwide-express": {
     "decal": "islandwide-express"
@@ -2561,6 +2585,9 @@
   "matson": {
     "decal": "matson"
   },
+  "maty-express": {
+    "decal": "maty-express"
+  },
   "mauritius-post": {
     "decal": "mauritius-post"
   },
@@ -2860,6 +2887,9 @@
   "optima-overnight": {
     "decal": "optima-overnight"
   },
+  "optimus-courier": {
+    "decal": "optimus-courier"
+  },
   "orian": {
     "decal": "orian"
   },
@@ -3061,6 +3091,9 @@
   "pin-ag": {
     "decal": "pin-ag"
   },
+  "pink-post": {
+    "decal": "pink-post"
+  },
   "pitney-bowes": {
     "decal": "pitney-bowes"
   },
@@ -3126,6 +3159,9 @@
   },
   "posta-north-macedonia": {
     "decal": "posta-north-macedonia"
+  },
+  "posta-panduri": {
+    "decal": "posta-panduri"
   },
   "posta-romana": {
     "decal": "posta-romana"
@@ -3583,6 +3619,9 @@
   "sicepat": {
     "decal": "sicepat"
   },
+  "sinapseria": {
+    "decal": "sinapseria"
+  },
   "singapore-post": {
     "decal": "singapore-post"
   },
@@ -3939,6 +3978,9 @@
   "tiki": {
     "decal": "tiki"
   },
+  "time-critical-line": {
+    "decal": "time-critical-line"
+  },
   "time-matters": {
     "decal": "time-matters"
   },
@@ -4049,6 +4091,12 @@
   },
   "transfera": {
     "decal": "transfera"
+  },
+  "transilvania-post": {
+    "decal": "transilvania-post",
+    "palette": {
+      "accent": "#231f20"
+    }
   },
   "transmission": {
     "decal": "transmission"
@@ -4364,6 +4412,9 @@
   "wooliiporter": {
     "decal": "wooliiporter"
   },
+  "world-courier": {
+    "decal": "world-courier"
+  },
   "world-package": {
     "decal": "world-package"
   },
@@ -4414,6 +4465,9 @@
   },
   "xpect-same-day": {
     "decal": "xpect-same-day"
+  },
+  "xpedist": {
+    "decal": "xpedist"
   },
   "xpo-ltl": {
     "decal": "xpo-ltl"

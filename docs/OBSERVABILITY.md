@@ -501,7 +501,7 @@ interval to within 2 s three times or more: a generated track, which the app als
 leaving it off the map and its moves unannounced ([generatedTrack.ts](../src/lib/generatedTrack.ts))), the parcels first flagged in the window with a scan
 dated over an hour after its check (`future_event_timestamp`, by short id, with the provider that dated it), parcels whose saved
 stage went back in the window (to an earlier one of pending, registered and accepted, or from delivered or returned, read
-from each check's `previous_stage`; by short id, whether the next check filed the parcel under another carrier, and
+from each check's `previous_stage`, a linked parcel's two legs apart; by short id, whether the next check filed the parcel under another carrier, and
 whether a hand fix set the stage between the checks: a stage changed outside the API, by a fix script, a migration or the
 stored-scan replay, is kept in `private.hand_stage_changes` with the name a script gives its fix by
 `set local peek.hand_fix = '<name>'`; and whether the parcel's own carrier answered the check that stepped back after a

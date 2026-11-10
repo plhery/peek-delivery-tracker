@@ -23,4 +23,22 @@ from (values
   ('19000000-0000-0000-0000-000000000202', '2025-12-31T11:00:00Z', 'in_transit', 'updated')
 ) as checks (package_id, started_at, previous_stage, outcome);
 
+-- A later leg added as a parcel of its own, then linked: the parcel merged into it brings its checks, filed under its
+-- original carrier, which ran beside the later leg's until the link. Neither parcel stepped back.
+insert into public.packages (id, user_id, tracking_number, carrier, current_stage, carrier_data)
+values ('39000000-0000-0000-0000-000000000203', '19000000-0000-0000-0000-000000000002', 'EXAMPLESTEP0203', 'la-poste',
+  'in_transit', '{"original_carrier": "colissimo", "original_package_id": "39000000-0000-0000-0000-000000000299"}');
+
+insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_stage, outcome, completed_at)
+select '39000000-0000-0000-0000-000000000203', trigger, carrier, started_at::timestamptz, previous_stage, 'updated',
+  started_at::timestamptz + interval '1 minute'
+from (values
+  ('scheduled', 'colissimo', '2025-12-31T10:00:00Z', 'in_transit'),
+  ('added', 'la-poste', '2025-12-31T10:30:00Z', 'pending'),
+  ('scheduled', 'colissimo', '2025-12-31T10:40:00Z', 'in_transit'),
+  ('scheduled', 'la-poste', '2025-12-31T10:50:00Z', 'registered'),
+  ('scheduled', 'colissimo', '2025-12-31T11:00:00Z', 'in_transit'),
+  ('scheduled', 'la-poste', '2025-12-31T11:10:00Z', 'in_transit')
+) as checks (trigger, carrier, started_at, previous_stage);
+
 commit;

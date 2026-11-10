@@ -117,15 +117,22 @@ order by a.started_at desc;
 \echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin)'
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check. A check
 -- the fence refused (superseded) saved nothing and loaded a stage that may be stale: it is no step.
-with saved as (
-  select a.id, a.package_id, a.started_at, lead(a.started_at) over w as next_at, a.source_carrier,
-         a.configured_carrier as carrier, a.previous_stage as from_stage,
-         coalesce(lead(a.previous_stage) over w, p.current_stage) as to_stage,
-         coalesce(lead(a.configured_carrier) over w, p.carrier) as next_carrier
+-- A linked parcel holds the checks of the parcel merged into it, filed under its original_carrier: each leg's checks
+-- are read apart, as the two parcels saved their own stages, and the merged leg's last check has no next one.
+with legs as (
+  select a.*, p.current_stage, p.carrier as parcel_carrier,
+         a.configured_carrier is not distinct from p.carrier_data->>'original_carrier' as merged_leg
   from public.tracking_sync_attempts as a
   join public.packages as p on p.id = a.package_id
   where a.started_at >= :since and a.previous_stage is not null and a.outcome <> 'superseded'
-  window w as (partition by a.package_id order by a.started_at, a.id)
+),
+saved as (
+  select a.id, a.package_id, a.merged_leg, a.started_at, lead(a.started_at) over w as next_at, a.source_carrier,
+         a.configured_carrier as carrier, a.previous_stage as from_stage,
+         coalesce(lead(a.previous_stage) over w, case when not a.merged_leg then a.current_stage end) as to_stage,
+         coalesce(lead(a.configured_carrier) over w, a.parcel_carrier) as next_carrier
+  from legs as a
+  window w as (partition by a.package_id, a.merged_leg order by a.started_at, a.id)
 ),
 ranked as (
   select s.*, rank.from_rank, rank.to_rank
@@ -141,7 +148,7 @@ ranked as (
 ),
 -- The stage a check saved is read from the next one, which may be after the window.
 back as (
-  select * from ranked where to_rank < from_rank and started_at < :upto
+  select * from ranked where to_stage is not null and to_rank < from_rank and started_at < :upto
 )
 select carrier, from_stage, to_stage, carrier is distinct from next_carrier as carrier_changed,
        hand.fix is not null as by_hand,
@@ -157,10 +164,12 @@ left join lateral (
     and h.changed_at >= back.started_at and h.changed_at < coalesce(back.next_at, 'infinity')
   order by h.changed_at desc limit 1
 ) as hand on true
--- The check before this one that saved, in the window or not: whose answer it took.
+-- The check of its leg before this one that saved, in the window or not: whose answer it took.
 left join lateral (
   select b.source_carrier from public.tracking_sync_attempts as b
+  join public.packages as p on p.id = b.package_id
   where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id) and b.outcome <> 'superseded'
+    and (b.configured_carrier is not distinct from p.carrier_data->>'original_carrier') = back.merged_leg
   order by b.started_at desc, b.id desc limit 1
 ) as prior on true
 group by 1, 2, 3, 4, 5, 6

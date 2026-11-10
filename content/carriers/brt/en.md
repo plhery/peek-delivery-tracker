@@ -123,7 +123,7 @@ BRT's [fermopoint finder](https://www.mybrt.it/it/mybrt/parcel-shops/search) lis
 - [BRT: Locker](https://www.brt.it/en/network/locker/) – QR code, PIN, limits
 - [BRT: Branch pickup FAQ](https://www.brt.it/en/faq/can-i-pick-up-my-shipment-at-a-brt-branch/) – delegates
 - [BRT: Support](https://services.brt.it/en/support) – report forms, delays, delivered but not received
-- [BRT: Carta dei servizi PDF](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – attempts, holds, damage, contacts, 45 days
+- [BRT: Carta dei servizi PDF](https://www.brt.it/wp-content/uploads/sites/275/2026/11/261105-Carta-dei-Servizi.pdf) – attempts, holds, damage, contacts, 45 days
 - [BRT: Carta dei servizi](https://www.brt.it/it/carta-dei-servizi/) – complaints, conciliation, AGCOM
 - [BRT: Modulo di Reclamo](https://www.brt.it/wp-content/uploads/sites/275/2026/02/2.-Modulo-Reclamo.pdf) – recipients may file
 - [BRT: Conciliation instructions](https://www.brt.it/wp-content/uploads/sites/275/2026/02/3.-Modulo-di-Conciliazione-con-istruzioni.pdf) – membership fee

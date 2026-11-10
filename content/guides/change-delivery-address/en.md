@@ -4,7 +4,7 @@ description: Change a delivery address before or after shipping: what Amazon, eB
 slug: change-delivery-address
 picture: A road forking at a signpost, one way to a house and the other to a parcel locker, a van taking the new turn, and Pip looking along the road towards it.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Before your order ships, deal with the shop: Amazon.co.uk lets you edit a third-party seller's order for 30 minutes, and on eBay you ask the seller to cancel so you can buy again. Once it has shipped, ask the carrier: with your tracking number you can usually pick a neighbour, a safe place, a pickup point or another day. A new street address is often off the table, because the sender decides what you may change. Once the parcel is out for delivery, it's usually too late.
@@ -18,7 +18,7 @@ Only for 30 minutes, on a third-party seller's order. An order sold and dispatch
 | Amazon.co.uk (sold and dispatched by Amazon) | Amazon can't change it: request a cancellation in **Your Orders**, then place a new order | Before the order ships |
 | Amazon.co.uk (third-party sellers) | On the desktop site, **Your Orders** → **View Order Details** → **Change** next to the address. Later, ask through **Contact Seller** | 30 minutes after ordering, then through the seller |
 | eBay | Sellers "generally can't change" it. Ask the seller to cancel, then buy again with the right address | Before the seller sends it |
-| Vinted | Tell the seller, cancel together, fix your address, buy again | Before the seller sends it |
+| Vinted | Tell the seller, cancel together, fix your address, buy again once the seller relists the item | Before the seller sends it |
 
 On a phone, Amazon.co.uk only lets you cancel the order: the 30-minute change works on the desktop site.
 
@@ -61,7 +61,9 @@ What each carrier lets you change, and what it costs:
 A few catches:
 
 - **USPS:** Delivery Instructions need a USPS.com account, show under the tracking status only for eligible items, and are final once submitted.
-- **Australia Post:** redirects only if the sender passed on your email, mobile number or other details matching your MyPost account.
+- **Evri:** one choice per parcel, a neighbour or a safe place but not both, and the courier still tries your door first.
+- **DPD Ireland:** the address change is made in MyDPD or the Parcel Wizard app. If you're out and haven't rescheduled or chosen a Pickup Point, DPD delivers anyway, to a neighbour or a safe place at your property.
+- **Australia Post:** redirects only if the sender passed on your email, mobile number or other details matching your MyPost account, and only parcels addressed to a street address, not to a Parcel Locker, Post Office or PO Box. Allow an extra business day.
 
 At Canada Post, redirecting a parcel is a business service for senders ($13 plus shipping). USPS Package Intercept ($19.45) is a sender tool too: if the shop agrees to call a parcel back, see [returned to sender](guide:returned-to-sender).
 
@@ -82,13 +84,13 @@ A missing or greyed-out option usually means one of these:
 - **It needs a signature or ID.** USPS excludes items needing a delivery signature, and Canada Post's preference skips signature and proof-of-age parcels.
 - **Cash or duty is due.** USPS excludes Collect on Delivery, and in Canada a parcel with duty and taxes owed goes to the post office.
 - **It's international.** USPS Delivery Instructions don't cover international mail.
-- **The carrier doesn't do new addresses.** Evri and DPD UK send you back to the sender.
+- **The carrier doesn't do new addresses.** Evri and DPD UK send you back to the sender: retailers "prefer to manage this themselves", DPD UK says, and offers a Pickup shop instead, with the parcel ready by midday the next day.
 
 If nothing works, ask someone at the original address to take it in, or collect it from the pickup point. Left uncollected, it eventually goes back to the shop: [what happens to an uncollected parcel](guide:uncollected-parcel).
 
 ## Moving house: does mail forwarding cover parcels?
 
-Don't count on it. Canada Post doesn't forward even its own parcels, and USPS says a change of address only changes your address with the Post Office, so tell every shop your new address.
+Don't count on it. Canada Post doesn't forward even its own parcels, and USPS says a change of address only changes your address with the Post Office, so tell every shop your new address. Once USPS approves a change of address, allow at least 7 to 10 business days for it to start; you can pay to extend the 12 months of forwarding by up to 18 more.
 
 | Country | Service | Price | Parcels |
 | --- | --- | --- | --- |
@@ -106,26 +108,26 @@ Often, if the carrier has lockers and the sender allows it: Evri where available
 
 Check the address before you pay, or choose a pickup point or locker at checkout. Give the shop your email and mobile number: Australia Post needs them to offer you options, and DPD Ireland to send its notices. Turn on notifications in [Peek](/) or the carrier's app, so you can act before the parcel is out for delivery.
 
-Standing preferences help: a safe place set in the Royal Mail app or Evri's MyPlaces.
+Standing preferences help: a safe place set in the Royal Mail app or Evri's MyPlaces. Set Evri's a day ahead: Citizens Advice says they take 24 hours to save.
 
 :::sources
 - [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – no change on Amazon's own orders, cancel and reorder, 30 minutes for third-party sellers on desktop, the carrier after dispatch
 - [eBay: Changing delivery details after purchase](https://www.ebay.co.uk/help/buying/postage-delivery/changing-delivery-details-purchase?id=4028) – cancel and buy again
-- [Vinted: Delivery address is wrong](https://www.vinted.co.uk/help/660) – cancel, reroute
+- [Vinted: Delivery address is wrong](https://www.vinted.co.uk/help/660) – cancel, buy again once relisted, reroute in some cases
 - [USPS: Delivery Instructions, the basics](https://faq.usps.com/s/article/USPS-Delivery-Instructions-The-Basics) – options, fees, exclusions
 - [USPS: Package Intercept](https://www.usps.com/manage/package-intercept.htm) – sender tool, $19.45
 - [USPS: Hold Mail](https://www.usps.com/manage/hold-mail.htm) – 3 to 30 days
-- [USPS: Forward mail and change of address](https://www.usps.com/manage/forward.htm) – $1.25, 12 months, parcels forwarded, an address change with the Post Office only
-- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's other date, safe place in the app, neighbour
+- [USPS: Forward mail and change of address](https://www.usps.com/manage/forward.htm) – $1.25, 7 to 10 business days, 12 months and paid extensions, parcels forwarded, an address change with the Post Office only
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's other date, safe place in the app, neighbour, Evri settings saved in 24 hours
 - [Evri: How can I change my delivery address?](https://www.evri.com/faqs/receiving-a-parcel/how-can-i-change-my-delivery-address) – contact the sender
-- [Evri: Diversions](https://www.evri.com/diversions) – options, cut-off, MyPlaces
-- [DPD UK: How can we help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – new address via the sender, options
+- [Evri: Diversions](https://www.evri.com/diversions) – options, cut-off, one choice, door first, MyPlaces
+- [DPD UK: How can we help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – new address via the sender, why, Pickup shop by midday, options
 - [DPD Ireland: Manage my deliveries](https://www.dpd.ie/manage-my-deliveries/) – address, date, safe place, Pickup point
-- [DPD Ireland: Track Parcels in Realtime](https://www.dpd.ie/track-my-parcel/) – address up to the day before, Pickup Points
+- [DPD Ireland: Track Parcels in Realtime](https://www.dpd.ie/track-my-parcel/) – address up to the day before in MyDPD or Parcel Wizard, delivered anyway without a request, Pickup Points
 - [Canada Post: Set a delivery preference](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/setting-preferences/set-a-delivery-preference-canada-post.page) – free safe drop
-- [Canada Post: Choose a delivery preference](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/setting-preferences/choose-a-delivery-preference-canada-post.page) – limits
+- [Canada Post: Why did my package go to the post office?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/setting-preferences/choose-a-delivery-preference-canada-post.page) – limits
 - [Canada Post: Package Redirection](https://www.canadapost-postescanada.ca/cpc/en/commercial/manage-shipments/package-redirection.page) – $13 business service
 - [Canada Post: Mail Forwarding](https://www.canadapost-postescanada.ca/cpc/en/personal/mail-forwarding.page) – prices, parcels not forwarded
-- [Australia Post: Parcels in transit](https://auspost.com.au/personal/receiving/parcel-deliveries/parcels-in-transit) – MyPost redirects
+- [Australia Post: Parcels in transit](https://auspost.com.au/personal/receiving/parcel-deliveries/parcels-in-transit) – MyPost redirects, street addresses only, an extra business day, reasons it fails
 - [Australia Post: Mail redirection](https://auspost.com.au/personal/receiving/mail-redirection-and-mail-hold/redirection) – prices
 :::

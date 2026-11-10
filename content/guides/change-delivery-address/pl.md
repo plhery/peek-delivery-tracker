@@ -125,5 +125,5 @@ Nie. Peek śledzi paczkę i pokazuje, gdzie jest. Przekierować ją może tylko 
 - [Poczta Polska: Regulamin usługi Pocztex w obrocie krajowym](https://www.poczta-polska.pl/wp-content/uploads/2025/02/regulamin-swiadczenia-uslugi-pocztex-w-obrocie-krajowym_27-04-2026.pdf) – żądanie zmiany adresu składa nadawca, dyspozycja telefoniczna adresata
 - [Poczta Polska: Cennik opłat dodatkowych](https://cennik.poczta-polska.pl/plik,1/cennik_oplat_dodatkowych_01112025.pdf) – 9,00 zł za żądanie nadawcy, Dosyłanie 6,00 zł w placówce, opłata jak za przesyłkę
 - [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – Pocztex PUNKT i AUTOMAT bez przekierowania
-- [Poczta Polska: Dosyłanie](https://www.poczta-polska.pl/paczki-i-listy/odbior/przekierowanie/) – listy i paczki pocztowe, formularz online bezpłatnie, profil zaufany, 6,00 zł w placówce, 12 miesięcy, wyłączenia (PACZKI24, PACZKI48, Paczki+, Pocztex, pisma w postępowaniach)
+- [Poczta Polska: Dosyłanie](https://www.poczta-polska.pl/zlec-usluge-online/dosylanie/) – listy i paczki pocztowe, formularz online bezpłatnie, profil zaufany, 6,00 zł w placówce, 12 miesięcy, wyłączenia (PACZKI24, PACZKI48, Paczki+, Pocztex, pisma w postępowaniach)
 :::

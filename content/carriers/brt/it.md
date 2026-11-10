@@ -135,7 +135,7 @@ Chiedi prima a vicini e familiari, poi al negozio di controllare la lettera di v
 - [BRT: Download](https://www.brt.it/it/download/) – delega per privati
 - [BRT: BRT per l'e-commerce](https://www.brt.it/it/brt-per-ecommerce/) – consegna al sabato
 - [BRT: Assistenza](https://services.brt.it/it/assistenza) – segnalazioni, ritardo, consegnato ma non ricevuto, controlli prima del modulo
-- [BRT: Carta dei servizi, PDF](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – tentativi, giacenza, riserve, contatti, 45 giorni
+- [BRT: Carta dei servizi, PDF](https://www.brt.it/wp-content/uploads/sites/275/2026/11/261105-Carta-dei-Servizi.pdf) – tentativi, giacenza, riserve, contatti, 45 giorni
 - [BRT: Carta dei servizi](https://www.brt.it/it/carta-dei-servizi/) – reclamo, conciliazione, AGCOM
 - [BRT: Modulo di Reclamo](https://www.brt.it/wp-content/uploads/sites/275/2026/02/2.-Modulo-Reclamo.pdf) – anche il destinatario
 - [BRT: Modulo di Conciliazione con istruzioni](https://www.brt.it/wp-content/uploads/sites/275/2026/02/3.-Modulo-di-Conciliazione-con-istruzioni.pdf) – iscrizione

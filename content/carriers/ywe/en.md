@@ -3,7 +3,7 @@ title: YWE (YanwenExpress) tracking: numbers, scans and who to ask
 description: Track a YWE (YanwenExpress) parcel in the United States: what a YWE number looks like, what each scan means from hub to door, and who to ask.
 slug: ywe-tracking
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-10
 ---
 
 YWE (YanwenExpress, run by Yanwen Express LLC) is a last-mile delivery company in the United States: it brings parcels from its hubs to your door for online shops, retailers and marketplaces. Its numbers are YWE and 14 digits: paste yours in the box above, or in YWE's own tracker at [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -15,7 +15,7 @@ YWE's numbers are YWE and 14 digits, 17 characters in all. With invented digits:
 | Number | What it is |
 | --- | --- |
 | `YWE00000000000000` | YWE and 14 digits: a YWE number. |
-| `YWE0000000000000` | Only 13 digits: not YWE's layout. Check for a missing digit. |
+| `YWE0000000000000` | Only 13 digits: not YWE's layout. Check for a missing digit; if no carrier answers for it, its page on peektracker.com says "This starts like a YWE tracking number but is one character short, so it may be mistyped." |
 | `YWAAA000000000000` | YW, three letters and 12 digits: a [Yanwen](carrier:yanwen) number, not a YWE one. |
 
 Spaces and lower case don't matter when you paste the number into Peek.
@@ -33,23 +33,24 @@ YWE's tracker lists each scan with its date and time, its offset from GMT, and t
 | `Shipping Order Created.` | The sender has booked the delivery with YWE. YWE doesn't have the parcel yet. | "Label created" |
 | `Container picked up by YWE,LAX01 Awaiting Item.` | YWE has collected the container your parcel flew in. The parcel itself isn't scanned yet. | "In transit" |
 | `Container received` | The hub has taken the container in. | "In transit" |
-| `Parcel received by in LAX01.` | The parcel's own first scan at YWE's hub. | "In transit" |
+| `Parcel received by in LAX01.` | The parcel's own first scan at YWE's hub. `Parcel received by NJC01.`, without "in", is the same scan at another hub. | "In transit" |
 | `Parcel departed from Facility.` | It has left the hub. | "In transit" |
-| `Parcel received by transit facility.`, `In processing at transit facility.`, `In transit to next facility.` | At a hub on the way, before the station that delivers your area. | "In transit" |
+| `Parcel received by transit facility.`, `In processing at transit facility.`, `Parcel departed from Transit Facility.`, `In transit to next facility.` | At a hub on the way, before the station that delivers your area. | "In transit" |
 | `Parcel received by local  Facility.` | At the delivery station, the depot that delivers your area. | "In transit" |
 | `Parcel is out for delivery.` | On the delivery run. | "Out for delivery" |
 | `Parcel has been delivered.(Front door)` | Delivered. The brackets say where the parcel was left. | "Delivered" |
 | `Parcel delivery abnormal [Restricted Address].Parcel will be returned to the warehouse.` | The delivery failed, for the reason in square brackets. The parcel goes back to YWE's warehouse, not to the sender. | "Delivery attempted" |
+| `Parcel delivery failed [Wrong Address]. Parcel will be returned to the warehouse.` | The same, worded as failed: back to YWE's warehouse, from where the parcel can go out for delivery again. | "Delivery attempted" |
 | `Return to sender` | The parcel is being sent back. It hasn't reached the sender yet. | "Needs attention" |
 | `Returned to sender, shipment has been received in sender warehouse.` | Back with the sender. | "Returned to sender" |
 
-**Codes, reasons and places.** `LAX01` is a hub's code: scans at other hubs carry their own code in its place. In the same way, `[Restricted Address]` is one reason for a failed delivery and `(Front door)` one place a parcel is left: other scans give other reasons and places.
+**Codes, reasons and places.** `LAX01` and `NJC01` are hubs' codes: scans at other hubs carry their own code in their place. In the same way, `[Restricted Address]` is one reason for a failed delivery and `(Front door)` one place a parcel is left: other scans give other reasons and places.
 
 **Alert doesn't always mean a problem.** YWE's tracker sorts parcels into Awaiting, Transit, Delivered, Alert and Returned by their latest scan. It files `Parcel received by local  Facility.`, the delivery station's receipt, under Alert, though it's a normal step. Peek shows it as "In transit".
 
 **Other wordings.** A scan that isn't in the table shows in Peek as YWE wrote it, and Peek reads its stage from its words where it can.
 
-**Times.** Each scan comes with its hub's offset from GMT. Peek reads the times that way and shows them all in your device's time zone.
+**Times.** Each scan comes with its hub's offset from GMT. Peek reads the times that way and shows them all in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
 
 ## Who delivers YWE parcels
 
@@ -71,7 +72,7 @@ YWE says it started in Los Angeles in 2024 and plans to cover most of the United
 
 **Stuck on `Container picked up by YWE,LAX01 Awaiting Item.`** YWE has the container, but hasn't scanned your parcel out of it yet.
 
-**`Parcel delivery abnormal`.** The delivery failed for the reason in square brackets, and the parcel is going back to YWE's warehouse. Email YWE with the number, your full address and any delivery instructions, and tell the seller.
+**`Parcel delivery abnormal` or `Parcel delivery failed`.** The delivery failed for the reason in square brackets, and the parcel is going back to YWE's warehouse. Email YWE with the number, your full address and any delivery instructions, and tell the seller.
 
 **`Return to sender`.** The parcel is on its way back. Once `Returned to sender, shipment has been received in sender warehouse.` shows, the sender has it. Ask the seller for a refund or a new parcel. See [returned to sender](guide:returned-to-sender).
 
@@ -81,7 +82,7 @@ YWE says it started in Los Angeles in 2024 and plans to cover most of the United
 
 ## YWE contact number and customer service
 
-As read on 30 October 2026, YWE's site, in English, lists:
+As read on 10 November 2026, YWE's site, in English, lists:
 
 - **Email**: an address in the footer of every page. Clicking it shows what to send: your question, the tracking number, and in the email's body your full address, any delivery instructions, your phone number and email address, and what you're asking for.
 - **Phone**: none. The Customer support page says "Calling us for further enquiries" but shows no number and no hours.

@@ -3,7 +3,7 @@ title: BRT Sendungsverfolgung: Paket aus Italien, Status
 description: BRT-Paket verfolgen: wo die Sendungsnummer steht, was BRTs Statusmeldungen bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Kontakt.
 slug: brt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-10
 ---
 
 BRT ist ein italienischer Expresskurier und gehört wie DPD zur Geopost-Gruppe. Ein Paket verfolgst du mit dem Link in BRTs SMS oder E-Mail, im Suchfeld auf brt.it oder hier: Füg die Nummer oben ins Feld ein. Diese Nummer, den BRTcode, schickt dir BRT, sobald es das Paket hat und der Absender deine Kontaktdaten weitergegeben hat.
@@ -45,6 +45,8 @@ BRTs Sendungsverfolgung auf vas.brt.it öffnet auf Italienisch und lässt sich a
 | `COLLECTED AT BRT-fermopoint` | Du hast es im BRT-fermopoint abgeholt. | „Zugestellt“ |
 | `ARRIVED AT BRT LOCKER` | Es liegt in einem BRT-Locker (Paketautomat) bereit. | „Abholbereit“ |
 | `COLLECTED AT BRT LOCKER` | Du hast es aus dem Locker geholt. | „Zugestellt“ |
+| `TO BE DELIVERED` | Der zustellende Paketdienst im Ausland hat es zur Zustellung; BRT meldet das zur selben Minute wie `FOR DELIVERY`. | „Unterwegs“, zusammen mit `FOR DELIVERY` „In Zustellung“ |
+| `ABSENT AFTER ATTEMPT.DELIVERY` | Der zustellende Paketdienst im Ausland hat dich nicht angetroffen; es folgt eine weitere Tour oder die Rücksendung. | „Zustellversuch“ |
 | `To collect at the parcel shop` | Der zustellende Paketdienst im Ausland hat es in seinem Paketshop hinterlegt. | „Abholbereit“ |
 | `DELIVERED` | Zugestellt. | „Zugestellt“ |
 | `RETURNED TO SENDER` | Es geht an den Absender zurück. | „Zurück an Absender“ |
@@ -81,7 +83,7 @@ BRTs Lieferzeiten sind laut BRT nur Richtwerte. Bewegt sich die Sendungsverfolgu
 
 ## BRT Kundenservice und Kontakt
 
-So erreichst du BRT als Empfänger, Stand 5. November 2026:
+So erreichst du BRT als Empfänger, Stand 10. November 2026:
 
 - **Formulare** über die englische Seite [Support](https://services.brt.it/en/support), die die frühere Seite Contact us ersetzt: Du wählst deinen Fall, etwa eine Verspätung, einen Schaden oder ein Paket, das als zugestellt gilt, aber nicht angekommen ist, und kommst so zum passenden Formular. Eine Telefonnummer steht dort nicht.
 - **Gebührenfreie Nummer** (numero verde) 800 278 708, montags bis freitags von 8:30 bis 18:30 Uhr, laut BRTs Charta. Ob sie aus dem Ausland erreichbar ist, sagt BRT nicht.
@@ -98,7 +100,7 @@ Peek fragt BRT direkt, ohne Browser. Du siehst den Status, den Verlauf mit dem O
 
 **Aus dem Ausland nach Italien.** Bringen Chronopost oder DPD ein Paket nach Italien und stellt BRT es zu, ergänzt Peek bei der 14-stelligen Nummer die früheren Scans des Partners. Kennt BRT die Nummer noch nicht, fragt Peek Chronopost und DPD und zeigt deren Verlauf, sobald er das Paket auf dem Weg nach Italien zeigt. Ist BRTs Sendungsverfolgung wegen Wartung nicht erreichbar, zeigt Peek bei 14 Ziffern die Schritte aus dem DPD-Netz, jeden einmal und ohne Ort.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour ab 6:00 Uhr oder, wenn der Termin ein Zeitfenster hat, ab einer halben Stunde vor dessen Beginn, und solange BRT oder DPD selbst antwortet (alle 5 Minuten, wenn DPDs Abfrage einen Browser braucht); über Tracking-Dienste alle 15 Minuten. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. BRT oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour ab 6:00 Uhr oder, wenn der Termin ein Zeitfenster hat, ab einer halben Stunde vor dessen Beginn, und solange BRT oder DPD selbst antwortet (alle 5 Minuten, wenn DPDs Abfrage einen Browser braucht); über Tracking-Dienste alle 15 Minuten. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. BRT oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur BRT Sendungsverfolgung
 
@@ -112,7 +114,7 @@ Nein, aber beide gehören zur Geopost-Gruppe, und ins europäische Ausland bring
 
 ### Wie lange braucht ein Paket mit BRT?
 
-Innerhalb Italiens meist 24 bis 48 Stunden, auf der Straße in die meisten europäischen Länder 48 bis 72 Stunden, schreibt BRT, und nennt das Richtwerte.
+Innerhalb Italiens meist 24 bis 48 Stunden, auf der Straße in die meisten europäischen Länder 48 bis 72 Stunden, schreibt BRT, und nennt das Richtwerte. Als Qualitätsstandard nennt BRTs aktuelle Dienstleistungscharta (Stand Juli 2026), die für Pakete bis 31,5 kg gilt: 96 % der Sendungen innerhalb Italiens in 1 bis 2 Werktagen zugestellt, ins Ausland in 2 bis 10 Werktagen.
 
 ### Wer stellt ein BRT-Paket in Deutschland, Österreich oder der Schweiz zu?
 
@@ -126,7 +128,7 @@ Meist DPD in deinem Land, mit einer eigenen DPD-Nummer. Besteht die Sendung aus 
 - [BRT: Locker (Englisch)](https://www.brt.it/en/network/locker/) – Standorte, rund um die Uhr, QR-Code, PIN
 - [BRT: Can I pick up my shipment at a BRT branch? (Englisch)](https://www.brt.it/en/faq/can-i-pick-up-my-shipment-at-a-brt-branch/) – Abholung mit Vollmacht
 - [BRT: Support (Englisch)](https://services.brt.it/en/support) – Formulare je nach Fall, keine Telefonnummer
-- [BRT: Carta dei servizi, PDF (Italienisch)](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – Geopost, DPD-Netz, Zustellversuche, Einlagerung, Schäden, CMR, Richtwerte, Kontakt, 45 Tage, Schlichtung
+- [BRT: Carta dei servizi, PDF (Italienisch)](https://www.brt.it/wp-content/uploads/sites/275/2026/11/261105-Carta-dei-Servizi.pdf) – Stand Juli 2026, Datei vom 5. November 2026: Pakete bis 31,5 kg, Geopost, DPD-Netz, Zustellversuche, Einlagerung, Schäden, CMR, Richtwerte, 96 % in 1–2 bzw. 2–10 Werktagen, Kontakt, 45 Tage, Schlichtung
 - [BRT: Carta dei servizi (Italienisch)](https://www.brt.it/it/carta-dei-servizi/) – Beschwerde, Schlichtung, AGCOM
 - [BRT: Modulo di Conciliazione con istruzioni (Italienisch)](https://www.brt.it/wp-content/uploads/sites/275/2026/02/3.-Modulo-di-Conciliazione-con-istruzioni.pdf) – Mitgliedsbeitrag, Erstattung, andere Stellen
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernformen, Wortlaute und ihre Stufen, Uhrzeiten, was Peek zeigt und wie es an DPD übergibt

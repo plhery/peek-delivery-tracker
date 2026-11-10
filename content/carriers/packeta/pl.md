@@ -3,7 +3,7 @@ title: Packeta śledzenie: numer Z, statusy i punkty odbioru
 description: Paczka Packeta (Zásilkovna) w Polsce: jak wygląda numer Z, co znaczą statusy, ile paczka czeka w punkcie odbioru i jak skontaktować się z Packetą.
 slug: packeta-sledzenie
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-10
 ---
 
 Packeta to marka grupy przewozowej, której czeska nazwa to Zásilkovna; w Polsce działa jako Packeta Poland i wysyła przesyłki do 33 krajów. Paczkę śledzisz na [stronie śledzenia Packety](https://tracking.packeta.com/pl/) albo w polu nad tym tekstem. Numer to litera `Z` i dziesięć cyfr: znajdziesz go w e-mailu albo SMS-ie od Packety.
@@ -19,7 +19,7 @@ Strona śledzenia Packeta przyjmuje jeden kształt numeru: „Numer śledzenia m
 | `Z123456789` | Tylko dziewięć cyfr: to nie Packeta (taki kształt ma Australia Post). |
 | `Z12345678901` | Jedenaście cyfr: to nie Packeta (kształt Colis Privé). |
 
-Według polskiej strony śledzenia numer jest w e-mailu, który Packeta do Ciebie wysłała, albo w SMS-ie. Nie myl go z **kodem odbioru**: ten Packeta wysyła SMS-em i e-mailem dopiero, gdy paczka dotrze do punktu, i podajesz go przy odbiorze, nie przy śledzeniu. Nie masz numeru `Z`? Zapytaj sklep albo sprawdź, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
+Według polskiej strony śledzenia numer jest w e-mailu, który Packeta do Ciebie wysłała, albo w SMS-ie; packeta.pl dodaje, że e-mail z numerem przychodzi, gdy sklep przekaże paczkę do transportu. Nie myl go z **kodem odbioru**: ten Packeta wysyła SMS-em i e-mailem dopiero, gdy paczka dotrze do punktu, i podajesz go przy odbiorze, nie przy śledzeniu. Nie masz numeru `Z`? Zapytaj sklep albo sprawdź, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
 
 ## Packeta tracking: co znaczą statusy
 
@@ -28,6 +28,7 @@ Stronę tracking.packeta.com przełączysz na polski, ale zdania o przebiegu pac
 | Packeta pisze | Co to znaczy dla Ciebie |
 | --- | --- |
 | `We are aware of your parcel and are waiting for the sender…` | Sklep zarejestrował paczkę, ale jeszcze jej nie nadał. |
+| `Awaiting consignment by the sender.` | Pojawia się razem z poprzednim zdaniem: sklep jeszcze nie przekazał paczki. |
 | `…assigned a tracking number…` | Etykieta jest gotowa. Paczka jeszcze nie jedzie. |
 | `…successfully received the parcel for transport…` | Packeta ma już paczkę. |
 | `The parcel is currently on its way to the depot.` | Paczka jedzie do sortowni. |
@@ -39,23 +40,23 @@ Stronę tracking.packeta.com przełączysz na polski, ale zdania o przebiegu pac
 | `…investigating the status of the parcel…` | Coś poszło nie tak i Packeta to sprawdza. |
 | `Return (on the way back)` | Paczka wraca do nadawcy. |
 
-`The parcel has been handed over to the carrier…` nie oznacza błędu: do domu własnymi kurierami Packeta doręcza tylko w Czechach i na Słowacji, w innych krajach robią to przewoźnicy partnerscy. Zakończony zwrot to `We have returned the parcel back to the sender.` albo `Returned to sender`.
+`The parcel has been handed over to the carrier…` nie oznacza błędu: do domu własnymi kurierami Packeta doręcza tylko w Czechach i na Słowacji, w innych krajach robią to przewoźnicy partnerscy. Zakończony zwrot to `We have returned the parcel back to the sender.` albo `Returned to sender`. Dopóki sklep nie przekaże paczki, ogólny status Packety brzmi `We are waiting for the package handover`, a Peek pokazuje „Zarejestrowana”.
 
 Na polskiej stronie śledzenia ostatni dzień w punkcie widać jako `Ostatni dzień na odbiór przesyłki.` albo `Twoja przesyłka poczeka na ciebie tylko dziś!`, z dopiskiem: „Odbierz ją jeszcze dziś, w przeciwnym razie jutro wróci do nadawcy.” Obok jest przycisk przedłużenia, a po kliknięciu pojawia się `Przedłużyliśmy okres przechowywania`. `Nie znaleziono paczki` znaczy, że Packeta nie zna numeru albo już nie pokazuje starej przesyłki: sprawdź `Z` i dziesięć cyfr.
 
 ## Odbiór paczki Packeta: punkty odbioru, Z-BOX i kurier
 
-**Punkt odbioru.** Gdy paczka dotrze do wybranego punktu, dostaniesz SMS i e-mail z kodem. „W punkcie odbioru wystarczy podać kod z SMS lub wiadomości e-mail.” Według packeta.pl masz na odbiór 7 dni. Wyślij Packecie SMS, a czas przechowywania wydłuży się za darmo do 21 dni kalendarzowych; przedłużyć możesz też na stronie śledzenia. Packeta zastrzega, że przed świętami ten czas może być krótszy. Za paczkę za pobraniem zapłacisz w punkcie gotówką albo zbliżeniowo kartą, a towar możesz tam obejrzeć. Słowacka strona Packety dodaje, że kod możesz przekazać komuś, kto odbierze paczkę za Ciebie.
+**Punkt odbioru.** Gdy paczka dotrze do wybranego punktu, dostaniesz SMS i e-mail z kodem. „W punkcie odbioru wystarczy podać kod z SMS lub wiadomości e-mail.” Według packeta.pl masz na odbiór 7 dni. Wyślij Packecie SMS, a czas przechowywania wydłuży się za darmo do 21 dni kalendarzowych; przedłużyć możesz też na stronie śledzenia. Packeta zastrzega, że przed świętami ten czas może być krótszy. Za paczkę za pobraniem zapłacisz w punkcie gotówką albo zbliżeniowo kartą, a towar możesz tam obejrzeć. Pobranie opłacisz też z góry: kartą na stronie śledzenia („Zapłać za pobraniem”) albo w aplikacji, gdy Packeta napisze, że paczka czeka w punkcie. Słowacka strona Packety dodaje, że kod możesz przekazać komuś, kto odbierze paczkę za Ciebie.
 
 **Z-BOX.** Automaty Z-BOX Packeta działają w Czechach, na Słowacji, Węgrzech i w Rumunii; polska strona o Z-BOX-ach nie wymienia żadnego w Polsce.
 
-**Kurier.** Przy doręczeniu do domu według packeta.pl „z wyprzedzeniem skontaktuje się z Tobą nasz kurier”. Ile prób doręczenia jest w Polsce i czy paczka trafia potem do punktu, strony Packety nie mówią. Przekierowanie paczki jest według packeta.pl możliwe tylko w trzech przypadkach, opisanych na stronie obsługi klienta.
+**Kurier.** Przy doręczeniu do domu według packeta.pl „z wyprzedzeniem skontaktuje się z Tobą nasz kurier”, a o dniu i godzinie doręczenia Packeta informuje wcześniej. Ile prób doręczenia jest w Polsce i czy paczka trafia potem do punktu, strony Packety nie mówią. Przekierowanie paczki jest według packeta.pl możliwe tylko w trzech przypadkach, opisanych na stronie obsługi klienta.
 
 **Nieodebrana paczka** wraca do nadawcy. Wtedy o ponowną wysyłkę pytasz sklep.
 
 ## Paczka Packeta nie dotarła, stoi albo jest uszkodzona
 
-**Status się nie zmienia.** Packeta nie podaje rady na ten przypadek. Zapytaj sklep, bo to on zamówił przewóz, i przeczytaj, [co robić, gdy status przesyłki się nie zmienia](guide:tracking-not-updating).
+**Status się nie zmienia.** Packeta nie podaje rady na ten przypadek. Jeśli od kilku dni widzisz `We are waiting for the package handover`, sklep wciąż nie oddał paczki: Packeta śledzi ją dopiero od chwili, gdy sklep przekaże ją do transportu. Zapytaj sklep, bo to on zamówił przewóz, i przeczytaj, [co robić, gdy status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 **Zaginiona lub niedostarczona.** Na stronie reklamacji Packeta pisze: „Jeśli jesteś odbiorcą przesyłki, prosimy o bezpośredni kontakt ze sklepem lub partnerem umownym.” Reklamację składa więc sklep. Według ogólnych warunków Packety zaginięcie zgłasza nadawca w ciągu 20 dni kalendarzowych od nadania. Status mówi „doręczona”, a paczki nie ma? Zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
@@ -79,17 +80,17 @@ Adresu e-mail ani czatu polska strona nie podaje.
 
 Peek odczytuje śledzenie Packety po angielsku i pokazuje zdania tak, jak je pisze Packeta (tylko `Returned to sender` własnymi słowami: „Zwrócona nadawcy”). Widzisz status, 20 najnowszych skanów, sklep, który wysłał paczkę, godzinę doręczenia oraz adres punktu odbioru albo Z-BOX-a, gdy paczka tam jedzie (przy kurierze i zwrocie go nie ma). Twojego imienia, adresu, telefonu ani podpisu Peek nie pokazuje.
 
-Skany z nazwą magazynu albo punktu odbioru pokazują ją jako miejsce, a te, w których nazwie jest miasto, trafiają na mapę. Packeta nie podaje przewidywanej dostawy. Godziny Peek odczytuje według czasu praskiego i pokazuje w strefie czasowej Twojego urządzenia (skany z rumuńskich magazynów mogą się różnić o godzinę). Nieznany i wygasły numer wyglądają tak samo. Gdy skan zawiera link do śledzenia przewoźnika partnerskiego, którego Peek zna, Peek wskazuje go jako doręczającego, a jeśli sam potrafi go śledzić, przechodzi do niego, gdy ten pokaże świeże skany. Sprawdza śledzenie Packety co 10 minut i powiadomi Cię o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie złoży za Ciebie reklamacji.
+Skany z nazwą magazynu albo punktu odbioru pokazują ją jako miejsce, a te, w których nazwie jest miasto, trafiają na mapę. Śledzenie Packety nie podaje przewidywanej dostawy, więc dnia i godziny doręczenia, o których Packeta uprzedza, Peek nie zna. Godziny Peek odczytuje według czasu praskiego i pokazuje w strefie czasowej Twojego urządzenia (skany z rumuńskich magazynów mogą się różnić o godzinę); na peektracker.com przypomina o tym linijka pod historią: „Godziny w Twojej strefie czasowej: …”. Nieznany i wygasły numer wyglądają tak samo. Gdy skan zawiera link do śledzenia przewoźnika partnerskiego, którego Peek zna, Peek wskazuje go jako doręczającego, a jeśli sam potrafi go śledzić, przechodzi do niego, gdy ten pokaże świeże skany. Sprawdza śledzenie Packety co 10 minut i powiadomi Cię o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie złoży za Ciebie reklamacji.
 
 ## Pytania o paczki Packeta
 
 ### Co to za firma Packeta?
 
-To prawdziwy przewoźnik: marka grupy, której czeska nazwa to Zásilkovna, w Polsce spółka Packeta Poland. Packeta wysyła przesyłki do 33 krajów i ma ponad 13 978 partnerskich punktów odbioru na całym świecie.
+To prawdziwy przewoźnik: marka grupy, której czeska nazwa to Zásilkovna, w Polsce spółka Packeta Poland. Packeta wysyła przesyłki do 33 krajów i według packeta.pl ma 16 421 punktów odbioru, a do tego ponad 208 tysięcy punktów partnerskich na całym świecie.
 
 ### Czy ORLEN Paczka i Packeta to ta sama firma?
 
-Nie. [ORLEN Paczka](carrier:orlen-paczka) jest partnerem Packety: odbiera paczki od sprzedawców z Allegro w Polsce i zawozi je do magazynu Packety, a ostatni odcinek do odbiorcy należy do Packety.
+Nie. [ORLEN Paczka](carrier:orlen-paczka) jest partnerem Packety: odbiera paczki od sprzedawców z Allegro w Polsce, wysyłane do Czech, na Słowację i na Węgry, i zawozi je do magazynu Packety, a ostatni odcinek do odbiorcy należy do Packety.
 
 ### Czy w Polsce są automaty Z-BOX?
 
@@ -100,14 +101,14 @@ Packeta wymienia Z-BOX-y tylko w Czechach, na Słowacji, Węgrzech i w Rumunii. 
 Według packeta.pl 7 dni. SMS do Packety przedłuża ten czas za darmo do 21 dni kalendarzowych.
 
 :::sources
-- [Packeta.pl: Jak dokładnie działa odbiór paczek](https://www.packeta.pl/doreczanie) – kod z SMS i e-maila, 7 i 21 dni, przedłużenie SMS-em, święta, pobranie, kurier
-- [Packeta: Śledzenie paczek](https://tracking.packeta.com/pl/) – format numeru, gdzie go znaleźć, polskie komunikaty, przedłużenie
+- [Packeta.pl: Jak dokładnie działa odbiór paczek](https://www.packeta.pl/doreczanie) – kod z SMS i e-maila, 7 i 21 dni, przedłużenie SMS-em, święta, pobranie, kurier, dzień i godzina doręczenia, e-mail z numerem po nadaniu (czytane 10 listopada 2026)
+- [Packeta: Śledzenie paczek](https://tracking.packeta.com/pl/) – format numeru, gdzie go znaleźć, polskie komunikaty, przedłużenie, płatność za pobraniem online (czytane 10 listopada 2026)
 - [Packeta.pl: Kontakt i reklamacje](https://www.packeta.pl/kontakt) – telefon, godziny, formularze, adres
 - [Packeta.pl: Reklamacje przesyłek i usług](https://www.packeta.pl/reklamacje) – odbiorca kontaktuje się ze sklepem
-- [Packeta.pl: Obsługa klienta](https://www.packeta.pl/obsluga-klienta) – przekierowanie w trzech przypadkach
-- [Packeta.pl: Strona główna](https://www.packeta.pl/) – 33 kraje, punkty partnerskie, Packeta Poland
+- [Packeta.pl: Obsługa klienta](https://www.packeta.pl/obsluga-klienta) – przekierowanie w trzech przypadkach, pobranie kartą online (czytane 10 listopada 2026)
+- [Packeta.pl: Strona główna](https://www.packeta.pl/) – 33 kraje, 16 421 punktów odbioru, 208 467 punktów partnerskich, Packeta Poland (czytane 10 listopada 2026)
 - [Packeta.pl: Z-BOX](https://www.packeta.pl/zbox) – Z-BOX-y w Czechach, Słowacji, Węgrzech i Rumunii
-- [Packeta.pl: Packeta Poland i ORLEN Paczka](https://www.packeta.pl/blog/packeta-orlen-nowa-jakosc-dostaw) – ORLEN Paczka jako partner pierwszej mili dla sprzedawców z Allegro
+- [Packeta.pl: Packeta Poland i ORLEN Paczka](https://www.packeta.pl/blog/packeta-orlen-nowa-jakosc-dostaw) – ORLEN Paczka jako partner pierwszej mili dla sprzedawców z Allegro wysyłających do Czech, na Słowację i na Węgry
 - [Packeta.pl: Co zrobić, gdy przesyłka została uszkodzona](https://www.packeta.pl/blog/co-zrobic-gdy-przesylka-zostala-uszkodzona) – protokół szkody, zdjęcia, 7 dni
 - [Packeta: Parcel tracking](https://tracking.packeta.com/en/) – angielskie komunikaty strony śledzenia
 - [Packeta: Home delivery, pick-up points and Z-BOXes](https://www.packeta.com/delivery-options) – partnerzy doręczają poza Czechami i Słowacją

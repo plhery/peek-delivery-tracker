@@ -3930,7 +3930,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/mudar-morada-encomenda" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/zmiana-adresu-dostawy-przekierowanie-paczki" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/change-delivery-address" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/guides/paket-umleiten-lieferadresse-aendern</loc>
@@ -4458,7 +4458,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-09</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/ru/carriers</loc>
@@ -4600,7 +4600,7 @@
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/brt-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/brt-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/brt-tracking" />
-<lastmod>2026-11-03</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/brt-tracking</loc>
@@ -5262,7 +5262,7 @@
 <xhtml:link rel="alternate" hreflang="hu" href="https://peektracker.com/hu/carriers/packeta-csomagkovetes" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/packeta-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/packeta-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/cs/carriers/packeta-sledovani-zasilky</loc>
@@ -8512,7 +8512,7 @@
 <loc>https://peektracker.com/carriers/cttyex-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/cttyex-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/cttyex-tracking" />
-<lastmod>2026-10-28</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/speedaf-tracking</loc>
@@ -9078,7 +9078,7 @@
 <loc>https://peektracker.com/carriers/ywe-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ywe-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ywe-tracking" />
-<lastmod>2026-10-31</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/roadie-tracking</loc>
@@ -9090,7 +9090,7 @@
 <loc>https://peektracker.com/carriers/ecms-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ecms-express-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ecms-express-tracking" />
-<lastmod>2026-10-31</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/chunghwa-post-tracking</loc>
@@ -9166,7 +9166,7 @@
 <loc>https://peektracker.com/carriers/epost-global-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/epost-global-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/epost-global-tracking" />
-<lastmod>2026-11-02</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/gls-austria-tracking</loc>
@@ -9220,7 +9220,7 @@
 <loc>https://peektracker.com/carriers/ekart-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ekart-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ekart-tracking" />
-<lastmod>2026-11-02</lastmod>
+<lastmod>2026-11-10</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/jt-express-middle-east-tracking</loc>

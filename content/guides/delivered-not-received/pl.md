@@ -11,7 +11,7 @@ Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, nie zakładaj od r
 
 ## Dlaczego paczka ma status „doręczona”, skoro jej nie ma?
 
-Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do Ciebie. Każda firma nazywa go trochę inaczej: u [InPost](carrier:inpost) Peek pokazuje `Delivered`, u DPD `Parcel delivered`, a Vinted pisze „Doręczono”. Są dwa możliwe wyjaśnienia:
+Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do Ciebie. Każda firma nazywa go trochę inaczej: u [InPost](carrier:inpost) Peek pokazuje status o doręczeniu z etapem „Dostarczona” (w innych językach `Delivered`), u DPD `Przesyłka doręczona` (albo `Parcel delivered`, gdy Peek pobiera historię tej paczki po angielsku), a Vinted pisze „Doręczono”. Są dwa możliwe wyjaśnienia:
 
 - **Leży tam, gdzie nikt jeszcze nie zajrzał.** Mógł ją odebrać ktoś inny: domownik, sąsiad, a przy zamówieniu do pracy recepcja.
 - **Naprawdę zginęła.** Błędny adres w zamówieniu, kurier pomylił drzwi albo ktoś ją ukradł.
@@ -23,7 +23,7 @@ Gdzie przewoźnik może ją zostawić:
 | [Poczta Polska](carrier:poczta-polska) | Pełnoletni domownik, chyba że złożysz w placówce pocztowej zastrzeżenie. Miejsce uzgodnione z Pocztą przez Ciebie albo nadawcę. Przesyłka nierejestrowana może trafić do Twojej skrzynki na listy |
 | [DPD Polska](carrier:dpd-pl) | Dorosły domownik, chyba że nadawca zaznaczył doręczenie do rąk własnych. Sąsiad albo safeplace, jeśli wybierzesz je w aplikacji DPD Mobile lub na mojapaczka.dpd.com.pl. W automacie lub punkcie DPD Pickup paczkę odbierze każdy, kto ma kod odbioru |
 | GLS | Ktoś z rodziny albo inny domownik. Sąsiad, ale tylko za Twoją zgodą. Wskazane przez Ciebie miejsce bez podpisu, jeśli wybierzesz tę opcję w usłudze FlexDeliveryService |
-| InPost | `Delivered` znaczy tylko, że droga paczki do odbiorcy się skończyła. Paczka, która czeka w automacie Paczkomat, ma w Peek status `Ready for collection` |
+| InPost | Status o doręczeniu (w innych językach `Delivered`) znaczy tylko, że droga paczki do odbiorcy się skończyła. Paczka, która czeka w automacie Paczkomat, ma w Peek etap „Do odbioru” (w innych językach status `Ready for collection`) |
 
 Śledzenie nigdy nie pokazało „doręczona”? Zobacz, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating) albo [co znaczą statusy przesyłki](guide:tracking-statuses).
 

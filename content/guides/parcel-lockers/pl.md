@@ -70,7 +70,7 @@ Co dzieje się potem i kiedy dostaniesz zwrot pieniędzy: [nieodebrana paczka](g
 
 ## Automat był pełny albo nie działał: gdzie jest paczka?
 
-Gdy w wybranym Paczkomacie nie ma wolnej skrytki, InPost może zostawić paczkę w pobliskim automacie tymczasowym. Peek pokazuje wtedy status mówiący o Paczkomacie tymczasowym (w innych językach `Stored Parcel - Temporary Parcel Locker`), a paczkę odbierzesz tym samym kodem. Jeśli potem pojawi się status o upływie terminu przechowywania (`The storage period has expired`), nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
+Gdy w wybranym Paczkomacie nie ma wolnej skrytki, InPost może zostawić paczkę w pobliskim automacie tymczasowym. Peek pokazuje wtedy status mówiący o Paczkomacie tymczasowym (w innych językach `Stored Parcel - Temporary Parcel Locker`), a paczkę odbierzesz tym samym kodem. Jeśli potem pojawi się status o upływie terminu przechowywania (w innych językach `The storage period has expired`), nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
 
 Automat nie działa, gdy już stoisz przed nim?
 
@@ -93,21 +93,21 @@ Kod wysyłaj tylko osobom, które znasz. Nieoczekiwany SMS z linkiem do «odblok
 
 ## Co pokazuje śledzenie na każdym etapie?
 
-Każdy przewoźnik ma własne słowa. Tak wyglądają statusy InPost w Peek w innym języku niż polski (gdy korzystasz z Peek po polsku, są po polsku, tak jak pisze je InPost):
+Każdy przewoźnik ma własne słowa. Gdy korzystasz z Peek po polsku, statusy InPost są po polsku, tak jak pisze je InPost, a w innych językach po angielsku. Wyjątek: gdy śledzenie InPost zwraca błąd, Peek może pokazać z zapasowego źródła InPost sam bieżący status, po angielsku. Tak wyglądają kolejne kroki i etap, który Peek przy każdym pokazuje:
 
 :::steps
-- W drodze do automatu | `Handed over for delivery`. Kurier wiezie paczkę do automatu albo pod drzwi.
-- W automacie | `Ready for collection`. Paczka czeka w skrytce albo w punkcie.
-- Przypomnienie | `Reminder of a waiting parcel`. Paczka wciąż czeka na odbiór.
-- Czas minął, paczka wraca | `On the way back to the Sender`. Paczka jedzie z powrotem do nadawcy.
-- Zwrot | `Returned to Sender`. Tak InPost oznacza zwrot do nadawcy.
+- W drodze do automatu | Status o wydaniu paczki do doręczenia (w innych językach `Handed over for delivery`), etap «W doręczeniu». Kurier wiezie paczkę do automatu albo pod drzwi.
+- W automacie | Status o paczce gotowej do odbioru (w innych językach `Ready for collection`), etap «Do odbioru». Paczka czeka w skrytce albo w punkcie.
+- Przypomnienie | Status z przypomnieniem o czekającej paczce (w innych językach `Reminder of a waiting parcel`), etap nadal «Do odbioru». Paczka wciąż czeka na odbiór.
+- Czas minął, paczka wraca | Status o drodze powrotnej (w innych językach `On the way back to the Sender`), etap «Zwrócona nadawcy». Paczka jedzie z powrotem do nadawcy.
+- Zwrot | Status o zwrocie (w innych językach `Returned to Sender`), etap «Zwrócona nadawcy». Tak InPost oznacza zwrot do nadawcy.
 :::
 
-Po odbiorze InPost pokazuje `Delivered`. Słowa innych przewoźników: [statusy przesyłki](guide:tracking-statuses); paczka stoi w miejscu: [śledzenie się nie aktualizuje](guide:tracking-not-updating).
+Po odbiorze InPost oznacza paczkę jako doręczoną (w innych językach `Delivered`), a Peek pokazuje etap «Dostarczona». Słowa innych przewoźników: [statusy przesyłki](guide:tracking-statuses); paczka stoi w miejscu: [śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 ## Czy mogę nadać lub zwrócić paczkę w automacie?
 
-W InPost tak: gdy nadasz paczkę w Paczkomacie albo w punkcie, Peek pokaże `Sent through Parcel Locker/Parcel Point`. Jak nadać paczkę lub zwrot, sprawdzisz w aplikacji InPost Mobile albo na stronie InPost.
+W InPost tak: gdy nadasz paczkę w Paczkomacie albo w punkcie, Peek pokaże status o nadaniu (w innych językach `Sent through Parcel Locker/Parcel Point`), z etapem «Przyjęta przez przewoźnika». Jak nadać paczkę lub zwrot, sprawdzisz w aplikacji InPost Mobile albo na stronie InPost.
 
 Zwrot to zwykła paczka z własnym numerem: [śledzenie zwrotu i zwrot pieniędzy](guide:returns-tracking).
 
@@ -131,6 +131,6 @@ Numer InPost ma zwykle 24 cyfry, a Allegro One zaczyna się od `A0` lub `AD`; po
 - [DPD Polska: FAQ](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – kod w mailu, DPD Mobile, 2 dni robocze bez przedłużenia, inna osoba z kodem, problemy z otwarciem
 - [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – lokalizacje, SMS i mail z kodem, 3 SMS-y, Pocztex Mobile, 72 godziny, przekazanie kodu, status doręczono
 - [About Amazon Polska: Pozwól sobie nie pamiętać](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/pozwol-sobie-nie-pamietac-w-sklepie-amazon-pl-niskie-ceny-kazdego-dnia-oraz-szybka-i-darmowa-dostawa-to-mniej-stresu-przy-codziennych-zakupach) – dostawa Amazon.pl do automatów Paczkomat i punktów odbioru
-- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku): w doręczeniu, gotowa do odbioru, przypomnienie, automat tymczasowy, doręczona, nadana w automacie, powrót do nadawcy
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku): w doręczeniu, gotowa do odbioru, przypomnienie, automat tymczasowy, doręczona, nadana w automacie, powrót do nadawcy i etapy, które nadaje im Peek; zapasowe źródło ShipX tylko z bieżącym statusem po angielsku
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – wzory numerów
 :::

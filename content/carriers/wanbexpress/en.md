@@ -3,7 +3,7 @@ title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
 description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-11-06
+updated: 2026-11-11
 ---
 
 WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
@@ -58,7 +58,7 @@ WanbExpress's scans are in English, each with a time and sometimes a place. Here
 | `<Route not completed>`, `Back To DS.` | The run ended without the delivery, and the parcel went back to the delivery station (DS). | "Delivery attempted" |
 | `Scheduled to <2026-11-02> .` | The day booked for the next run, after the parcel came back to the station. | Still "Delivery attempted" |
 
-Other partners' moves come through the same way. On parcels to the United States, `In Processing at Transit Facility.` is the last-mile partner's sort once it has the parcel, and `In Transit to Next Facility.` its move towards the facility that delivers. `It is currently in transit to the next facility` and `The package is being transferred to the next facility` are a partner's moves between its facilities after the flight. Peek shows all four as "In transit".
+Other partners' moves come through the same way. On parcels to the United States, `In Processing at Transit Facility.` is the last-mile partner's sort once it has the parcel, and `In Transit to Next Facility.` its move towards the facility that delivers. `It is currently in transit to the next facility` and `The package is being transferred to the next facility` are a partner's moves between its facilities after the flight. Peek shows all four as "In transit". On a parcel to the UK, [InPost](carrier:inpost)'s lines can come through before WanbExpress's sorting centre has scanned the parcel: `Your parcel is on its way to InPost. Please check back for updates`, which Peek shows as "Label created", then `We have your parcel. Please check back for updates`, "Received by carrier". `We'll apply your My Account preferences to this parcel delivery` is InPost's note that the recipient's account settings apply, not a scan: Peek keeps it in the history, but it doesn't change the stage.
 
 **Times.** Each scan's time comes with its offset from UTC. Peek reads them that way and shows them all in your device's time zone, newest first. For the gaps and handovers that parcels from China go through, see [tracking a parcel from China](guide:tracking-from-china).
 
@@ -66,7 +66,7 @@ Other partners' moves come through the same way. On parcels to the United States
 
 WanbExpress's scans follow the parcel out of China, through customs and on to a local carrier, which delivers it. WanbExpress's tracker can name that carrier, give its number for the parcel and show a delivery photo. Peek keeps none of these three, so for them look at WanbExpress's tracker, or ask the seller.
 
-**What Peek's code shows.** On a parcel to Germany, WanbExpress's history shows iMile delivering, and one WanbExpress scan names Poste Italiane's network. For the United States, the UK, Ireland, Canada and Australia, Peek's code names no delivering carrier.
+**What Peek's code shows.** On a parcel to Germany, WanbExpress's history shows iMile delivering, and one WanbExpress scan names Poste Italiane's network. On a parcel to the UK, InPost's lines come through. For the United States, Ireland, Canada and Australia, Peek's code names no delivering carrier.
 
 **Delivery attempts and pickup.** Whoever delivers, its own rules apply: how many attempts it makes, whether it leaves a card, where a missed parcel waits and for how long. Peek found no WanbExpress rules for any of these. Once you know the carrier and its number, check its own tracking and ask it how to rearrange a delivery. See [missed delivery](guide:missed-delivery).
 
@@ -118,14 +118,14 @@ That a customs declaration for your parcel is done. The wording doesn't say whic
 
 ### Who delivers WanbExpress parcels in my country?
 
-A local carrier, which WanbExpress's tracker can name, with its number for the parcel. Peek's code shows iMile delivering on a parcel to Germany, but names none for the US, the UK, Ireland, Canada or Australia: check WanbExpress's tracker or ask the seller.
+A local carrier, which WanbExpress's tracker can name, with its number for the parcel. Peek's code shows iMile delivering on a parcel to Germany and InPost's lines on a parcel to the UK, but names none for the US, Ireland, Canada or Australia: check WanbExpress's tracker or ask the seller.
 
 ### Who do I contact about a missing WanbExpress parcel?
 
 The seller you ordered from: it booked the parcel with WanbExpress. Peek couldn't check WanbExpress's website for contact details.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, WNB number shape, the tracker, its reCAPTCHA check and the link that opens one parcel, scan wordings and their stages, iMile's relayed scans on a parcel to Germany and its next-run line, the US last-mile partner's and other partners' relayed moves, the scan naming Poste Italiane's network, times with UTC offsets, what the tracker shows (delivering carrier, its number, delivery photos, recipient's address), what Peek keeps and leaves out, and the tracking services it turns to
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, WNB number shape, the tracker, its reCAPTCHA check and the link that opens one parcel, scan wordings and their stages, iMile's relayed scans on a parcel to Germany and its next-run line, the US last-mile partner's and other partners' relayed moves, InPost's relayed lines on a parcel to the UK and its account-settings note that moves nothing, the scan naming Poste Italiane's network, times with UTC offsets, what the tracker shows (delivering carrier, its number, delivery photos, recipient's address), what Peek keeps and leaves out, and the tracking services it turns to
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3 duty, whatever the value
 :::

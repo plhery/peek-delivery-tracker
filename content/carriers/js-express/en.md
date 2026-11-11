@@ -3,7 +3,7 @@ title: JS Express tracking: JSE…YQ numbers, scans and who delivers
 description: Track a JS Express (急速国际) parcel from China: what a JSE…YQ number looks like, what its scans mean and who delivers it in the US, Canada and beyond.
 slug: js-express-tracking
 published: 2026-10-30
-updated: 2026-11-09
+updated: 2026-11-11
 ---
 
 JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS, GOFO or SpeedX in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany and Colissimo in France, and FedEx on some lines.
@@ -35,12 +35,13 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `Item has been collected` | JS Express's warehouse in China has the parcel: its first real scan. | "Received by carrier" |
 | `Item inbound in sorting center.`, `Item outbound in sorting center.` | Sorted at JS Express in China. | "In transit" |
 | `Domestic allocation has begun`, `Under domestic allocation` | Still at JS Express's warehouse in China, after sorting and before it leaves. | "In transit" |
-| `Waybill Generated for` | The courier in your country has made its waybill, while JS Express's warehouse in China still has the parcel. | "In transit" |
+| `Waybill Generated for` | The courier in your country has made its waybill, while JS Express's warehouse in China still has the parcel. | "Label created", or the stage the parcel already had, usually "In transit" |
 | `Arrive at transit center` | At JS Express's transit centre in China, between sorting and departure. | "In transit" |
 | `Item departed from origin.`, `Arrive at international airport to abroad` | On its way out, then at the airport in China. | "In transit" |
+| `Shipment arrived at facility and measured.`, `Depart from facility to service provider.` | A facility in China weighs and measures the parcel, then sends it on to the line that flies it. | "In transit" |
 | `Released From Export Customs` | China's export customs are done. Not your country's customs. | "In transit" |
-| `DEPART ORIGIN AIRPORT`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | The flight has left, sometimes with a stop and a connecting flight. | "In transit" |
-| `ARRIVED AT DESTINATION AIRPORT`, `Item Flight landing`, `NOA-Notification of arrival from GHA` | Landed in your country. NOA is the airport's ground handler reporting it. | "In transit" |
+| `DEPART ORIGIN AIRPORT`, `Departure from the original airport`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | The flight has left, sometimes with a stop and a connecting flight. | "In transit" |
+| `ARRIVED AT DESTINATION AIRPORT`, `Arrival to the destination airport`, `Item Flight landing`, `NOA-Notification of arrival from GHA` | Landed in your country. NOA is the airport's ground handler reporting it. | "In transit" |
 | `The goods have been picked up abroad` | The agent in your country has taken the shipment from the airport. Not a new pickup from the seller. | "In transit" |
 | `Inbound to customs temporary warehouse` | In a customs warehouse, waiting for import clearance. | "At customs" |
 | `Released From Import Customs` | Your country's customs have let it through. | "In transit" |

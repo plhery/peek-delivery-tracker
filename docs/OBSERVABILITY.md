@@ -212,8 +212,10 @@ successful fallback still leaves the gap visible. Known-carrier outages stay in 
 monitoring. A number is not marked as pointing elsewhere when detection offers its
 carrier under another id (Amazon Shipping as Amazon Logistics), or when the parcel's
 carrier, or the carrier it handed the parcel to, tracked that number directly. Nor is a
-shape several carriers issue ambiguous once the parcel's carrier, one of them, confirmed
-the number directly, or said it holds the parcel and shows it only with an input the parcel
+shape several carriers issue ambiguous once the parcel's carrier confirmed the number
+directly, whether detection offers it for the stored number or not (the Add sheet detects
+the number as typed, and the stored one has lost its hyphens, as an Ozon posting number
+does), or said it holds the parcel and shows it only with an input the parcel
 lacks or not with the postcode it has (`parcel_found`, `postcode_mismatch`): the owner's
 input is wrong, not the shape. Nor is an S10 number generic postal once the carrier the parcel
 is filed under confirmed it, whether the post its suffix names or a courier that carries such
@@ -293,7 +295,7 @@ the schedule before any carrier or provider answered for the number
 ([`unseenLookup.ts`](../src/server/unseenLookup.ts)), or whose parcels are all gone and
 whose last check got no answer (`waiting`): no check is left to update it. So is a case
 filed under no carrier or under its parcels' carrier, once every saved parcel with the
-number is filed under one carrier the shape fits that tracked it, such as FedEx, which
+number is filed under one carrier that tracked it, such as FedEx, which
 recognition asks only through a browser: a one-off lookup may get no later check to clear
 the reasons, and a parcel its carrier only announced has had no check with dated progress
 to verify the case. So is a case on a reference, filed under its parcels' carrier or none, that
@@ -301,9 +303,7 @@ the carrier tracked and resolves to a barcode of its own (`canonical_tracking_nu
 the carrier's shape fits, such as a Hermes Germany order number: every check keeps the
 reference's reasons. So is a case whose parcels are all filed under the carrier that tracked
 the number when the shape alone keeps a reason: an S10 number detection leaves to
-international post, or a shape several carriers issue,
-under whose carrier routing filed each parcel from no carrier (a swap from `unknown`, or the
-carrier a provider named), never as a correction of another carrier. So is a case on a pickup code filed under no carrier, which was never a
+international post. So is a case on a pickup code filed under no carrier, which was never a
 tracking number. A case only the
 Add sheet's recognition saw stays open, since detection could still learn its shape.
 `tracking_review_runs` keeps one row per version, so restarts and other servers do not

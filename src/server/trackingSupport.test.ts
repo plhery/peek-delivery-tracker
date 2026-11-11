@@ -118,12 +118,23 @@ describe('tracking support context', () => {
     });
   });
 
-  it('finds no ambiguity once the filed carrier, one of those the shape fits, tracked the number', () => {
+  it('finds no ambiguity once the filed carrier tracked the number', () => {
     expect(trackingSupportContext('123456789012', 'fedex', 'fedex').reasons).toEqual([]);
-    // Another carrier, or a filed one the shape does not fit, settles nothing.
+    // Another carrier settles nothing.
     expect(trackingSupportContext('123456789012', 'fedex', 'dhl').reasons).toEqual(['ambiguous_shape']);
-    expect(trackingSupportContext('HL123456789RV', 'dhl', 'dhl').reasons).toEqual(['ambiguous_shape']);
     expect(trackingSupportContext('zz-test 1234', 'ups', 'ups').reasons).toEqual(['unknown_shape']);
+  });
+
+  it('finds no ambiguity once the filed carrier tracked the number its shape as stored does not fit', () => {
+    // A made-up Ozon posting number: the Add sheet detects it with its hyphens, the parcel stores it without them.
+    expect(trackingSupportContext('0123456789-0123-4', 'ozon-logistics')).toMatchObject({
+      detection_carrier: 'unknown', detection_candidates: expect.not.arrayContaining(['ozon-logistics']),
+      reasons: ['ambiguous_shape', 'carrier_mismatch'],
+    });
+    expect(trackingSupportContext('0123456789-0123-4', 'ozon-logistics', 'ozon-logistics').reasons).toEqual([]);
+    expect(trackingSupportGap('012345678901234', 'ozon-logistics', 'ozon-logistics')).toEqual({});
+    expect(trackingSupportGap('012345678901234', 'ozon-logistics', null)).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    expect(trackingSupportContext('HL123456789RV', 'dhl', 'dhl').reasons).toEqual([]);
   });
 
   it('leaves an ambiguous shape to the end of the check, which opens it only when the filed carrier did not confirm the number', () => {

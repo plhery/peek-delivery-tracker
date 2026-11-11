@@ -5,7 +5,7 @@ import manifest from '../../package.json';
 import { isPickupCode, normalizeTrackingNumber } from '../lib/carriers';
 import { captureOperationalError, databaseUnavailable, errorType, inBackgroundScope, logOperationalEvent } from './observability';
 import type { SupabaseServiceClient } from './supabase';
-import { trackingSupportContext } from './trackingSupport';
+import { detectionOffers, trackingSupportContext } from './trackingSupport';
 import { isRecord, type JsonObject } from './types';
 import { routingState } from './trackingRouting';
 import { leftScheduleUnseen, linkAlertOn } from './unseenLookup';
@@ -44,7 +44,8 @@ export function replaySupportCase(trackingNumber: string, configuredCarrier: str
   const context = trackingSupportContext(trackingNumber, configuredCarrier ?? 'unknown', verifiedCarrier);
   if ((context.reasons as string[]).length > 0) return null;
   if (context.detection_carrier === 'unknown') {
-    return `Replay found no gap: ${String(verifiedCarrier)}, one of the carriers its shape fits, tracks the number directly.`;
+    return `Replay found no gap: ${String(verifiedCarrier)}, ${detectionOffers(context, String(verifiedCarrier))
+      ? 'one of the carriers its shape fits' : 'the carrier it is filed under'}, tracks the number directly.`;
   }
   if (context.detection_carrier === 'intl-post') {
     return `Replay found no gap: ${String(verifiedCarrier)}, the carrier it is filed under, tracks this S10 number directly.`;
@@ -117,9 +118,8 @@ export function unseenLookupNote(
  * under that carrier or none, the number is a reference the carrier resolves to a barcode of its
  * own (`canonical_tracking_number`) that fits it, such as a Hermes Germany order number: every
  * check keeps the reference's reasons. An S10 number detection leaves to international post leaves no
- * gap once that carrier tracked it. A shape several carriers issue keeps its reason once the carrier
- * tracked the number, and no gap is left either when routing filed its parcels under that carrier from
- * no carrier (a swap, or the carrier a provider named).
+ * gap once that carrier tracked it, nor does a shape several carriers issue, whether detection offers
+ * that carrier for the number as stored or not.
  */
 export function filedParcelNote(supportCase: JsonObject, parcels: readonly JsonObject[] | undefined): string | null {
   const confirmed = (parcels ?? []).map((parcel) => {
@@ -131,34 +131,27 @@ export function filedParcelNote(supportCase: JsonObject, parcels: readonly JsonO
   if (carriers.size !== 1 || !carrier || ['unknown', 'intl-post'].includes(carrier)) return null;
   const unfiled = ['unknown', 'intl-post'].includes(String(supportCase.configured_carrier ?? 'unknown'));
   if (!unfiled && supportCase.configured_carrier !== carrier) return null;
-  const reasons = (number: string) => (trackingSupportContext(number, carrier, carrier).reasons as string[]).join();
-  const fits = (number: string) => reasons(number) === '';
+  const context = (number: string) => trackingSupportContext(number, carrier, carrier);
+  const fits = (number: string) => (context(number).reasons as string[]).length === 0;
+  // A barcode of the carrier's own: detection names a carrier for it, or offers this one among those its shape fits.
+  const ownShape = (number: string) => fits(number)
+    && (context(number).detection_carrier !== 'unknown' || detectionOffers(context(number), carrier));
   const number = String(supportCase.tracking_number ?? '');
-  if (fits(number) && trackingSupportContext(number, carrier, carrier).detection_carrier === 'intl-post') {
+  if (fits(number) && context(number).detection_carrier === 'intl-post') {
     return unfiled
       ? `Its parcel was filed under ${carrier} once ${carrier} tracked this S10 number: no gap left.`
       : `Its parcel is filed under ${carrier}, and ${carrier} tracked this S10 number: no gap left.`;
   }
   if (fits(number)) {
+    const among = detectionOffers(context(number), carrier) ? ', one of the carriers its shape fits,' : '';
     return unfiled
-      ? `Its parcel was filed under ${carrier}, one of the carriers its shape fits, once ${carrier} tracked the number: no gap left.`
-      : `Its parcel is filed under ${carrier}, one of the carriers its shape fits, and ${carrier} tracked the number: no gap left.`;
-  }
-  // Swapped from no carrier, or filed under the one a provider named: never a correction of another carrier.
-  const routed = (parcel: JsonObject | null) => {
-    const data = isRecord(parcel?.carrier_data) ? parcel.carrier_data : {};
-    return data.auto_changed_from === undefined
-      ? parcel !== null && routingState(parcel).discovered_carrier === carrier
-      : ['unknown', 'intl-post'].includes(String(data.auto_changed_from)) && data.auto_changed_to === carrier;
-  };
-  if (reasons(number) === 'ambiguous_shape' && confirmed.every(routed)) {
-    return `Routing filed its parcel under ${carrier} from no carrier, and ${carrier} tracked the number: `
-      + 'several carriers issue its shape, so no gap is left.';
+      ? `Its parcel was filed under ${carrier}${among} once ${carrier} tracked the number: no gap left.`
+      : `Its parcel is filed under ${carrier}${among} and ${carrier} tracked the number: no gap left.`;
   }
   const barcodes = confirmed.map((parcel) => isRecord(parcel?.carrier_data) ? parcel.carrier_data.canonical_tracking_number : null)
     .filter((barcode): barcode is string => typeof barcode === 'string'
       && normalizeTrackingNumber(barcode) !== normalizeTrackingNumber(number));
-  if (!barcodes.some(fits)) return null;
+  if (!barcodes.some(ownShape)) return null;
   return `${carrier} resolves the number to a barcode of its own, one its shape fits, and tracks that: no gap left.`;
 }
 

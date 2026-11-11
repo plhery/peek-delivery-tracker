@@ -280,8 +280,14 @@ final class DeviceParcelTests: XCTestCase {
         let memory = PostcodeMemory(defaults: defaults)
         let storage = Memory()
         let calls = Calls()
-        let found = PublicLookupResponse(link: link("22222222222A"), key: key, package: package(UUID(), number: "JMX000000000001", carrier: .jAndTMx))
-        let device = DeviceParcels(client: client(calls, lookup: found), storage: storage, postcodes: memory)
+        // A set clock, a set id and no events: the file then holds only what the test chose, where a date or a random id
+        // could hold the digits by chance.
+        let id = try XCTUnwrap(UUID(uuidString: "00000000-0000-4000-8000-000000000001"))
+        let found = PublicLookupResponse(
+            link: link("22222222222A"), key: key, package: package(id, number: "JMX000000000001", carrier: .jAndTMx, stage: nil)
+        )
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-10-02T09:00:00Z"))
+        let device = DeviceParcels(client: client(calls, lookup: found), storage: storage, postcodes: memory, now: { now })
 
         let parcel = try await device.add(CreatePackageRequest(trackingNumber: "JMX000000000001", carrier: .jAndTMx, phoneDigits: "0472"))
 

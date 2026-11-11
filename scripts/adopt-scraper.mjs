@@ -114,6 +114,31 @@ export function adoptionSlot(now) {
   return new Date(midnight + Math.min(slot, LAST_SLOT) * MINUTE);
 }
 
+/** When the slot after `slot` starts: two hours on, or 06:07 the next day after the night's slot. */
+export function nextSlot(slot) {
+  const minute = slot.getUTCHours() * 60 + slot.getUTCMinutes();
+  return new Date(slot.getTime() + (minute === LAST_SLOT ? 24 * 60 - LAST_SLOT + FIRST_SLOT : SLOT_LENGTH) * MINUTE);
+}
+
+const clock = (date) => `${date.toISOString().slice(11, 16)} UTC`;
+
+/**
+ * What a run that leaves its slot to another says in its summary instead of a bare success: the slot's
+ * adoption (`adopted`: its run's `url` and the `version` it took, if its artifact still names it), or the
+ * release that failed in the slot (`failed`: its run's `url`, its `version` and when that Adopt job started).
+ */
+export function dueSummary(slot, { adopted, failed }) {
+  if (adopted) {
+    return `### The ${clock(slot)} slot already adopted ${adopted.version ?? 'a release'}\n\n`
+      + `[That run](${adopted.url}) adopted it, so this one adopts nothing. A newer release waits for the `
+      + `${clock(nextSlot(slot))} slot, or adopts at once by hand: \`gh workflow run adopt-scraper.yml\`.`;
+  }
+  const retry = new Date(Math.min(nextSlot(slot).getTime(), Date.parse(failed.startedAt) + SLOT_LENGTH * MINUTE));
+  return `### Universal Parcel Scraper ${failed.version} already failed in the ${clock(slot)} slot\n\n`
+    + `[That run](${failed.url}) failed with it, so this one adopts nothing. A newer release adopts at once, `
+    + `and this one is tried again from ${clock(retry)}.`;
+}
+
 /**
  * The title the workflow's `run-name` gives a run dispatched by hand, without the
  * `slot` input the server's timer sets. Every other run has the workflow's name.
@@ -138,6 +163,11 @@ export function slotAdoption(slot, runs) {
 /** The artifact by which a run's Adopt job names the release it tries. */
 export function releaseArtifact(version) {
   return `release-${version}`;
+}
+
+/** The release a run tried, from its artifacts. */
+export function triedRelease(artifacts) {
+  return artifacts.find(({ name }) => name.startsWith(releaseArtifact('')))?.name.slice(releaseArtifact('').length);
 }
 
 /** The Adopt job's steps that run the release: one failing is the release's fault, not the runner's. */
@@ -568,10 +598,17 @@ async function due() {
       failure = slotFailure(held, target.version, runs);
     }
   }
-  const name = `${slot.toISOString().slice(11, 16)} UTC slot`;
-  console.log(adoption ? `The ${name} already had its adoption: ${adoption.html_url}`
-    : failure ? `${PACKAGE_NAME} ${target.version} already failed in the ${name}: ${failure.html_url}. A newer release adopts at once.`
-      : `Nothing adopted in the ${name} yet: this run adopts.`);
+  if (adoption) {
+    // The summary names the release when the run's artifact still does: looking it up never stops the check.
+    const artifacts = await ask(`/repos/${repository}/actions/runs/${adoption.id}/artifacts?per_page=100`)
+      .then((answer) => answer.artifacts, () => []);
+    await summarize(dueSummary(slot, { adopted: { url: adoption.html_url, version: triedRelease(artifacts) } }));
+  } else if (failure) {
+    const adopt = failure.jobs.find((job) => job.name === 'Adopt' && job.conclusion === 'failure');
+    await summarize(dueSummary(slot, { failed: { url: failure.html_url, version: target.version, startedAt: adopt.started_at } }));
+  } else {
+    console.log(`Nothing adopted in the ${clock(slot)} slot yet: this run adopts.`);
+  }
   const outputs = `due=${!adoption && !failure}\n`;
   process.stdout.write(outputs);
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, outputs);

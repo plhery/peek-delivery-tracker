@@ -334,7 +334,11 @@ describe('scraper adoption validation', () => {
     assert.match(workflow, /if \[ "\$status" = 3 \]; then echo 'blocked=true' >> "\$GITHUB_OUTPUT"; else exit "\$status"; fi/);
     const gate = workflow.match(/\n  gate:\n([\s\S]*?)\n  push:\n/)?.[1];
     assert.ok(gate, 'The gate job must sit between adopt and push.');
-    assert.match(gate, /name: Database gate for \$\{\{ needs\.adopt\.outputs\.version \}\}/);
+    // A skipped job's name is never filled in: the release goes in the step's name, which finds the first failure.
+    assert.match(gate, /^    name: Database gate\n/);
+    const step = 'Fail once for release ${{ needs.adopt.outputs.version }}';
+    assert.ok(gate.includes(`- name: ${step}\n`) && gate.includes(`STEP: ${step}\n`));
+    assert.ok(gate.includes('select(.name == "Database gate" and .conclusion == "failure" and any((.steps // [])[]; .name == env.STEP'));
     assert.match(gate, /if: "!cancelled\(\) && needs\.adopt\.outputs\.blocked == 'true'"/);
     assert.match(gate, /permissions:\n\s+actions: read\n/);
     assert.doesNotMatch(gate, /\bnpm\b|secrets\./);

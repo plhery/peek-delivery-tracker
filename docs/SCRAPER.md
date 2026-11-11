@@ -100,11 +100,13 @@ before. The last slot lasts until 06:07. A systemd timer on the netcup productio
 starts the workflow at each of the 9 slots (`workflow_dispatch`). GitHub starts scheduled
 runs hours late or drops them, so its schedule, every half hour, and a CI run that ends on
 main only back the timer up. The first run in a slot that pushes a release is its slot's
-adoption; later runs look at the workflow's runs, find that one and stop at once. A run that
+adoption; later runs look at the workflow's runs, find that one and stop at once, their summary
+naming the release it took and the next slot. A run that
 finds nothing newer leaves the slot to the next run, so a release published in the meantime
 does not wait for the next slot. Each run records the release it tries as an artifact
 (`release-<version>`): when that release fails, such as the app's tests with it, the slot's
-later runs that would take it stop at once too, and a newer release still adopts. In the
+later runs that would take it stop at once too, saying when it is tried again, and a newer
+release still adopts. In the
 night's slot, which lasts eight hours, the first CI run on main from two hours after the
 failure tries it again, so a fix that lands at night does not wait for 06:07. The timer
 sets the workflow's `slot` input. A run without it, by hand, always adopts but never counts
@@ -184,7 +186,7 @@ applied: it is a comment.
 The run's summary lists each change with the constraints and functions that enforce it and
 the migration that made it. Only the first run a release stops fails, which notifies; later
 runs stop at the same release without failing until the migration is in, and their summary
-links to that first run. Write the migration with the lines the summary gives and apply it
+links to that first run, found by the gate step's name, which carries the release. Write the migration with the lines the summary gives and apply it
 to production: the next run adopts the release. To adopt it at once, continue with the
 release the run named:
 

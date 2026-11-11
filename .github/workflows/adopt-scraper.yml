@@ -304,8 +304,9 @@ jobs:
   # accepted only as changes to the files an adoption owns.
   # A release that waits for a migration fails the first run it stops, which
   # notifies; the runs after it end without failing until the migration is in.
+  # GitHub never fills in a skipped job's name, so the release goes in its step's.
   gate:
-    name: Database gate for ${{ needs.adopt.outputs.version }}
+    name: Database gate
     needs: adopt
     # Due is skipped in a run by hand: without !cancelled() a skipped ancestor skips this job.
     if: "!cancelled() && needs.adopt.outputs.blocked == 'true'"
@@ -314,16 +315,16 @@ jobs:
     permissions:
       actions: read
     steps:
-      - name: Fail once per release
+      - name: Fail once for release ${{ needs.adopt.outputs.version }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          JOB: Database gate for ${{ needs.adopt.outputs.version }}
+          STEP: Fail once for release ${{ needs.adopt.outputs.version }}
           VERSION: ${{ needs.adopt.outputs.version }}
         run: |
           first=''
           for run in $(gh api "repos/$GH_REPO/actions/workflows/adopt-scraper.yml/runs?status=failure&per_page=30" --jq '.workflow_runs[].id'); do
-            first=$(gh api "repos/$GH_REPO/actions/runs/$run/jobs" --jq '.jobs[] | select(.name == env.JOB and .conclusion == "failure") | .html_url')
+            first=$(gh api "repos/$GH_REPO/actions/runs/$run/jobs" --jq '.jobs[] | select(.name == "Database gate" and .conclusion == "failure" and any((.steps // [])[]; .name == env.STEP and .conclusion == "failure")) | .html_url')
             if [ -n "$first" ]; then break; fi
           done
           if [ -n "$first" ]; then

@@ -13,12 +13,14 @@ import {
   declarationLine,
   declaredChanges,
   decideGate,
+  dueSummary,
   diffDatabaseFacets,
   failureHeldSince,
   gateReport,
   holdsRelease,
   installedRelease,
   matchesOnlyLettersAndDigits,
+  nextSlot,
   parseVersion,
   peerMismatches,
   pinnedVersion,
@@ -26,6 +28,7 @@ import {
   retry,
   slotAdoption,
   slotFailure,
+  triedRelease,
   waitUntilServed,
 } from './adopt-scraper.mjs';
 
@@ -203,6 +206,32 @@ describe('adoption slots', () => {
       { ...failed(3, '0.689.0', 'Test the app with the release'), jobs: [adopt('2026-10-21T12:30:00Z', 'cancelled')] },
       { ...failed(4, '0.689.0', 'Test the app with the release'), jobs: [adopt('2026-10-21T12:30:00Z', null, 'in_progress')] },
     ]), undefined);
+  });
+
+  it('starts the next slot two hours on, or at 06:07 after the night', () => {
+    const after = (time) => nextSlot(new Date(time)).toISOString();
+    assert.equal(after('2026-10-21T06:07:00Z'), '2026-10-21T08:07:00.000Z');
+    assert.equal(after('2026-10-21T20:07:00Z'), '2026-10-21T22:07:00.000Z');
+    assert.equal(after('2026-10-21T22:07:00Z'), '2026-10-22T06:07:00.000Z');
+    assert.equal(after('2026-10-31T22:07:00Z'), '2026-11-01T06:07:00.000Z');
+  });
+
+  it('says in its summary which run adopted in the slot, or which release failed there', () => {
+    assert.equal(triedRelease([{ name: 'adoption-patch' }, { name: 'release-0.1059.2' }]), '0.1059.2');
+    assert.equal(triedRelease([]), undefined);
+    const url = 'https://github.com/example/runs/1';
+    const adopted = dueSummary(new Date('2026-10-21T22:07:00Z'), { adopted: { url, version: '0.1059.2' } });
+    assert.ok(adopted.startsWith('### The 22:07 UTC slot already adopted 0.1059.2\n\n'));
+    assert.ok(adopted.includes(`[That run](${url})`) && adopted.includes('the 06:07 UTC slot'));
+    assert.ok(adopted.includes('`gh workflow run adopt-scraper.yml`'));
+    assert.ok(dueSummary(new Date('2026-10-21T12:07:00Z'), { adopted: { url } }).startsWith('### The 12:07 UTC slot already adopted a release\n'));
+    const failedAt = (slotStart, startedAt) => dueSummary(new Date(slotStart), { failed: { url, version: '0.689.0', startedAt } });
+    assert.ok(failedAt('2026-10-21T12:07:00Z', '2026-10-21T12:40:00Z')
+      .startsWith('### Universal Parcel Scraper 0.689.0 already failed in the 12:07 UTC slot\n'));
+    assert.ok(failedAt('2026-10-21T12:07:00Z', '2026-10-21T12:40:00Z').endsWith('tried again from 14:07 UTC.'));
+    // The night's slot holds it for two hours.
+    assert.ok(failedAt('2026-10-21T22:07:00Z', '2026-10-21T22:11:00Z').endsWith('tried again from 00:11 UTC.'));
+    assert.ok(failedAt('2026-10-21T22:07:00Z', '2026-10-22T05:00:00Z').endsWith('tried again from 06:07 UTC.'));
   });
 });
 

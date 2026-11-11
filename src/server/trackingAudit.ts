@@ -271,6 +271,8 @@ export class TrackingSyncAudit {
     readonly previousExpectedDelivery: string | null = null,
     /** The carrier a handoff moved the parcel to, whose answers its refreshes wait for: their health sample names it and reads its answer. */
     readonly trackedBy: string | null = null,
+    /** With an expected day, the date the check began on, on the clock that day is read on: the review tells whether it had passed. */
+    readonly deliveryClockDate: string | null = null,
   ) {
     this.#startedAtIso = now.toISOString();
   }
@@ -343,6 +345,7 @@ export class TrackingSyncAudit {
         configured_carrier: this.configuredCarrier,
         previous_stage: this.previousStage,
         previous_expected_delivery: this.previousExpectedDelivery?.trim().slice(0, 100) || null,
+        delivery_clock_date: this.deliveryClockDate,
         started_at: this.#startedAtIso,
         support_context: trackingSupportStart(this.trackingNumber, this.configuredCarrier, this.answeredBy),
       }, this.context.lease);

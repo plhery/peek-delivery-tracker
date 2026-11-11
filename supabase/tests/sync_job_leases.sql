@@ -215,12 +215,12 @@ begin
   if not public.start_leased_sync_attempt(gen_random_uuid(), job_id, 'reason-worker', jsonb_build_object(
     'package_id','97000000-0000-0000-0000-000000000005', 'trigger','opened',
     'configured_carrier','ups', 'previous_stage','in_transit', 'previous_expected_delivery','2026-11-08',
-    'started_at',clock_timestamp())) then
+    'delivery_clock_date','2026-11-07', 'started_at',clock_timestamp())) then
     raise exception 'a check opened by a link was not logged';
   end if;
-  -- It keeps the day the parcel was expected when it began, beside its stage.
-  if (select previous_expected_delivery from public.tracking_sync_attempts
-      where package_id = '97000000-0000-0000-0000-000000000005') is distinct from '2026-11-08' then
+  -- It keeps the day the parcel was expected when it began, beside its stage, and the date it began on that day's clock.
+  if (select (previous_expected_delivery, delivery_clock_date) from public.tracking_sync_attempts
+      where package_id = '97000000-0000-0000-0000-000000000005') is distinct from ('2026-11-08'::text, date '2026-11-07') then
     raise exception 'a check lost the day the parcel was expected';
   end if;
   begin

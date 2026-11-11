@@ -495,8 +495,12 @@ function deliveryClock(parcel: JsonObject): DateTime['zone'] | string {
  */
 function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
   const day = /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0];
-  const today = DateTime.fromJSDate(now, { zone: deliveryClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
-  return day !== undefined && day >= today;
+  return day !== undefined && day >= deliveryToday(parcel, now);
+}
+
+/** The date `now` falls on on the delivery clock (`deliveryClock`), against which an expected day has passed or not. */
+function deliveryToday(parcel: JsonObject, now: Date): string {
+  return DateTime.fromJSDate(now, { zone: deliveryClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
 }
 
 /** Whether the carrier's page states every scan on a clock of its own, not the scan's, as Landmark Global's US Central time (the catalog's `pageClock`). */
@@ -1962,6 +1966,7 @@ export class TrackingSyncService {
       routing.confirmed_number === parcel.tracking_number ? routing.confirmed_carrier ?? null : null,
       typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery : null,
       handedTo(parcel),
+      typeof parcel.expected_delivery === 'string' && parcel.expected_delivery.trim() ? deliveryToday(parcel, now) : null,
     );
     await audit.start();
     // A parcel just added, or looked up, with no progress saved yet: its first answer.

@@ -98,7 +98,8 @@ All tables and views here are service-role only.
   changed, `scheduled`, `release` for a scraper release's re-check, and `package` for a check
   someone asked for before checks named their reason. It also holds
   the configured and actual carrier, job and package, previous and selected stage, the expected day the parcel had when
-  the check began (`previous_expected_delivery`), provider status, event counts, outcome,
+  the check began (`previous_expected_delivery`) with the date it began on, on the clock that day is read on
+  (`delivery_clock_date`), provider status, event counts, outcome,
   error class, anomaly codes and a bounded private `status_text`. A check that stored a
   scan for the first time, moved the parcel's stage or restaged a stored scan into news
   (see `scans_reannounced`) ends `updated`; one whose carrier answered with the progress
@@ -512,9 +513,9 @@ stored-scan replay, is kept in `private.hand_stage_changes` with the name a scri
 `set local peek.hand_fix = '<name>'`; and whether the parcel's own carrier answered the check that stepped back after a
 universal provider answered the one before it, as the carrier may read the provider's scans in an earlier stage),
 expected days dropped in the window from parcels still on their way (by the day the dropping check's
-`previous_expected_delivery` held, on the parcel's clock as the server reads it, the offset its newest scan states or
-else the zone its answer declares: passed or still ahead; without either, passed or ahead on every clock, or passed on
-some clocks only; held when the dropping check stored a new failed-attempt or exception scan, which drops the day
+`previous_expected_delivery` held, on the parcel's clock as the server read it: the check's `delivery_clock_date`, or
+for a check before it the offset its newest scan states or else the zone its answer declares: passed or still ahead;
+without any, passed or ahead on every clock, or passed on some clocks only; held when the dropping check stored a new failed-attempt or exception scan, which drops the day
 whenever it falls; a carrier and stage whose drops all passed or were held is left out),
 parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), a universal provider's delivered rows stored in the window that a

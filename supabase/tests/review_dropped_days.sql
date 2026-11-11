@@ -28,10 +28,15 @@ values
    '2026-01-01T06:00:00Z', '{"timezone": "America/Los_Angeles"}'),
   -- The only DHL drop, passed on Berlin's clock (01:30 on 1 January): the section leaves DHL out.
   ('19000000-0000-0000-0000-000000000106', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0106', 'dhl', 'in_transit',
-   '2026-01-01T00:30:00Z', '{"last_update": "2025-12-31T18:00:00+01:00"}');
+   '2026-01-01T00:30:00Z', '{"last_update": "2025-12-31T18:00:00+01:00"}'),
+  -- No clock of its own either, but the check recorded the date it began on its carrier's clock: passed.
+  ('19000000-0000-0000-0000-000000000108', '19000000-0000-0000-0000-000000000001', 'EXAMPLEDROP0108', 'la-poste', 'in_transit',
+   '2026-01-01T00:30:00Z', '{"last_update": "2025-12-31T17:00:00Z"}');
 
-insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_expected_delivery)
-select id, 'scheduled', 'la-poste', expected_delivery_changed_at - interval '1 minute', '2025-12-31'
+insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_expected_delivery,
+  delivery_clock_date)
+select id, 'scheduled', 'la-poste', expected_delivery_changed_at - interval '1 minute', '2025-12-31',
+  case when id = '19000000-0000-0000-0000-000000000108' then date '2026-01-01' end
 from public.packages where user_id = '19000000-0000-0000-0000-000000000001';
 
 -- The failed attempt the last parcel's dropping check stored, and an older one stored before that check.

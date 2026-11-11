@@ -178,22 +178,23 @@ order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'
 \echo '   held or waiting to be collected, or its carrier changes. By the day the check that dropped it found, read on'
-\echo '   the parcel''s clock as the server reads it (the zone its answer declares, else the carrier''s catalog zone,'
-\echo '   which the database lacks, so the offset its newest scan states stands in): passed, or early (still ahead: the'
-\echo '   ones to read). Without either: passed or early on every clock, or edge (passed on some clocks only).'
+\echo '   the parcel''s clock as the server read it (the date the check began on, which it records; for a check before'
+\echo '   that, the zone its answer declares, else the offset its newest scan states): passed, or early (still ahead:'
+\echo '   the ones to read). Without either: passed or early on every clock, or edge (passed on some clocks only).'
 \echo '   held: the dropping check stored a new failed-attempt or exception scan, which drops the day whenever it falls.'
 \echo '   unknown: no day recorded, as before checks kept it; latest lists the early ones first. A carrier and stage whose'
 \echo '   drops all passed or were held is left out: those drops are the rule working.'
 with dropped as (
   select p.id, p.carrier, p.current_stage, p.expected_delivery_changed_at,
          case when a.previous_expected_delivery ~ '^\d{4}-\d{2}-\d{2}' then left(a.previous_expected_delivery, 10) end as day,
-         -- The drop's date on the parcel's clock, as trackingSync.ts's deliveryClock reads it: the zone the answer
-         -- declares, else the catalog's, for which the offset of the newest scan stands in when it states one ("Z" and
+         -- The drop's date on the parcel's clock, as trackingSync.ts's deliveryClock reads it: the date the dropping check
+         -- began on, which it records (delivery_clock_date). For a check before that, the zone the answer declares, else
+         -- the catalog's, which the database lacks: the offset of the newest scan stands in when it states one ("Z" and
          -- "-00:00" do not). The two agree once the parcel is in the country it is delivered in.
-         to_char(case
+         coalesce(to_char(a.delivery_clock_date, 'YYYY-MM-DD'), to_char(case
            when z.name is not null then p.expected_delivery_changed_at at time zone z.name
            when c.stated is not null then p.expected_delivery_changed_at at time zone c.stated::interval
-         end, 'YYYY-MM-DD') as local,
+         end, 'YYYY-MM-DD')) as local,
          -- Else its date on the clocks furthest behind and ahead of UTC.
          to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT+12', 'YYYY-MM-DD') as west,
          to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT-14', 'YYYY-MM-DD') as east,
@@ -211,7 +212,7 @@ with dropped as (
   left join pg_timezone_names as z on z.name = p.carrier_data->>'timezone'
   -- The check that dropped it: the parcel's last one begun by then.
   left join lateral (
-    select a.started_at, a.previous_expected_delivery from public.tracking_sync_attempts as a
+    select a.started_at, a.previous_expected_delivery, a.delivery_clock_date from public.tracking_sync_attempts as a
     where a.package_id = p.id and a.started_at <= p.expected_delivery_changed_at
     order by a.started_at desc limit 1
   ) as a on true

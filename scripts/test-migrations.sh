@@ -381,7 +381,7 @@ dropped_section=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01
 dropped=$(printf '%s\n' "$dropped_section" | awk '/^la-poste\|in_transit\|/' | cut -d '|' -f 4-9)
 passed_only=$(printf '%s\n' "$dropped_section" | awk '/^dhl\|/')
 psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000001'"
-if [[ "$dropped" != "6|2|2|1|0|1" ]]; then
+if [[ "$dropped" != "7|3|2|1|0|1" ]]; then
   echo "dropped expected days read on the wrong clock: parcels|passed|early|edge|unknown|held = '$dropped'" >&2
   exit 1
 fi

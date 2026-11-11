@@ -1783,8 +1783,11 @@ describe('TrackingSyncService', () => {
       expect(after.expected_delivery).toBeNull();
       expect(after.carrier_data).not.toHaveProperty('expected_delivery_from');
       // The check that dropped it keeps the day it found, so the review tells a day that passed from one dropped early.
-      expect(after.started).toMatchObject({ previous_stage: 'out_for_delivery', previous_expected_delivery: '2026-10-29' });
-      expect(first.started).toMatchObject({ previous_stage: 'pending', previous_expected_delivery: null });
+      // With the date it began on, on the clock the day is read on, which tells whether the day had passed.
+      expect(after.started).toMatchObject({ previous_stage: 'out_for_delivery', previous_expected_delivery: '2026-10-29',
+        delivery_clock_date: '2026-10-30' });
+      expect(lastDay.started).toMatchObject({ previous_expected_delivery: '2026-10-29', delivery_clock_date: '2026-10-29' });
+      expect(first.started).toMatchObject({ previous_stage: 'pending', previous_expected_delivery: null, delivery_clock_date: null });
     });
 
     it('stays through a handover, while the delivery carrier or a provider relaying it answers without one', async () => {

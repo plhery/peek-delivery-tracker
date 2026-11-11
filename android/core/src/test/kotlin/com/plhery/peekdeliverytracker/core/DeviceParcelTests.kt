@@ -409,10 +409,13 @@ class DeviceParcelTests {
         val memory = PostcodeMemory(MemoryDefaults())
         val storage = Memory()
         val calls = Calls()
+        // A set clock, a set id and no events: the file then holds only what the test chose, where a date or a random
+        // id could hold the digits by chance.
         val found = PublicLookupResponse(
-            link = link("22222222222A"), key = key, parcel = pkg(UUID.randomUUID(), number = "JMX000000000001", carrier = CarrierId.JAndTMx),
+            link = link("22222222222A"), key = key,
+            parcel = pkg(UUID(0, 1), number = "JMX000000000001", carrier = CarrierId.JAndTMx, stage = null),
         )
-        val device = device(client(calls, lookup = found), storage, this, postcodes = memory)
+        val device = device(client(calls, lookup = found), storage, this, postcodes = memory, now = { Instant.parse("2026-10-02T09:00:00Z") })
 
         val parcel = device.add(CreatePackageRequest(trackingNumber = "JMX000000000001", carrier = CarrierId.JAndTMx, phoneDigits = "0472"))
 

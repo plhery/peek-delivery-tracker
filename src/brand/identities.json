@@ -963,6 +963,9 @@
       "accent": "#ffca43"
     }
   },
+  "cvc": {
+    "decal": "cvc"
+  },
   "cycloon": {
     "decal": "cycloon"
   },
@@ -4214,6 +4217,9 @@
   },
   "transportes-rapex": {
     "decal": "transportes-rapex"
+  },
+  "transpress": {
+    "decal": "transpress"
   },
   "trendyol-express": {
     "decal": "trendyol-express"

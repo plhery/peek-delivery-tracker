@@ -798,7 +798,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'jiayang'
   | 'msg-post'
   | 'u-post'
-  | 'bh-posta';
+  | 'bh-posta'
+  | 'transpress'
+  | 'cvc';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

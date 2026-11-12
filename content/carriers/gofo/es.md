@@ -3,7 +3,7 @@ title: GOFO Express rastreo: número GFUS, estados y qué hacer
 description: Rastrea tu paquete de GOFO Express en Estados Unidos: cómo es el número de rastreo, qué significa cada estado en inglés y qué hacer si tu paquete no avanza.
 slug: gofo-express-rastreo
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 GOFO Express es una empresa de paquetería que reparte en Estados Unidos: recoge los paquetes en el almacén del remitente y los lleva de centro en centro hasta la estación desde la que se reparten. Para rastrear tu paquete, pega el número de rastreo en la casilla de arriba; GOFO tiene además su propio rastreador, en gofo.com/us/track. El número te lo da la tienda que te envió el pedido. Si no lo encuentras, mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
@@ -14,7 +14,7 @@ GOFO usa tres formas de número en Estados Unidos. Aquí van, con cifras inventa
 
 | Número (inventado) | Qué es |
 | --- | --- |
-| `GFUS12345678901234` | GFUS y 14 cifras: el número de guía de GOFO en Estados Unidos. |
+| `GFUS12345678901234` | GFUS y 14 cifras: el número de guía de GOFO en Estados Unidos. Si tras GFUS se escribe una letra O en vez de un cero, Peek la lee como cero. |
 | `GF1234567890123` | GF y 13 cifras: una serie más antigua que GOFO sigue rastreando. |
 | `CR123456789012` | CR y 12 cifras: otra serie antigua de GOFO. |
 | `YT1234567890123456` | YT y 16 cifras: es de [YunExpress](carrier:yunexpress), aunque GOFO haga la entrega. |

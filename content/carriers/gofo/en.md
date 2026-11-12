@@ -3,7 +3,7 @@ title: GOFO Express tracking: statuses, photos and support
 description: Track a GOFO Express parcel in the US: what a GOFO tracking number looks like, what the statuses mean, missed deliveries, delivery photos and how to reach support.
 slug: gofo-express-tracking
 published: 2026-10-15
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 GOFO Express is a US parcel carrier: it collects parcels from the sender's warehouse and moves them through its hubs to the delivery station that serves your area. Paste the number in the box above to track yours; GOFO's own site has a tracker too. The number comes from the shop that shipped your order, usually in its shipping email or on your order page. Nothing there? See [how to find a tracking number](guide:find-tracking-number).
@@ -14,7 +14,7 @@ GOFO's US numbers come in three shapes. The ones Peek links to GOFO, with invent
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `GFUS12345678901234` | GFUS followed by 14 digits: GOFO's US waybill number |
+| `GFUS12345678901234` | GFUS followed by 14 digits: GOFO's US waybill number. Peek reads a letter O typed right after GFUS as a zero |
 | `GF1234567890123` | GF followed by 13 digits: an older series GOFO still tracks |
 | `CR123456789012` | CR followed by 12 digits: another older series |
 

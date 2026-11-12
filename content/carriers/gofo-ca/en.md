@@ -3,7 +3,7 @@ title: GOFO Canada tracking: GFCA numbers, statuses and delays
 description: Track a GOFO parcel in Canada: what a GFCA number looks like, what GOFO's scans mean in Peek, and what to do when a parcel is late, missed or missing.
 slug: gofo-canada-tracking
 published: 2026-10-28
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 GOFO Canada is the Canadian network of GOFO, a parcel carrier with networks in several countries, and it runs the same tracking system as GOFO in the United States. GOFO says its Canadian network is live in Toronto, with Vancouver and more coverage on the way. Its numbers begin with `GFCA`: track one on GOFO's Canadian tracking page, on gofo.com, or paste it in the box above. No number yet? See [how to find a tracking number](guide:find-tracking-number).
@@ -14,7 +14,7 @@ Peek files a number under GOFO Canada when it has this shape, in capitals or not
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `GFCA00000000000000` | GFCA followed by 14 digits, the GOFO Canada waybill number |
+| `GFCA00000000000000` | GFCA followed by 14 digits, the GOFO Canada waybill number. Peek reads a letter O typed right after GFCA as a zero |
 
 GOFO also gives each parcel a tracking number, which either repeats the `GFCA` waybill or is the shop's own reference. Peek follows the `GFCA` waybill only, so that's the number to paste.
 

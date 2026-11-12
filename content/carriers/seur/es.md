@@ -3,7 +3,7 @@ title: SEUR seguimiento: número, estados y puntos Pickup
 description: Pega tu número de SEUR y mira dónde está tu paquete: cómo es el número, qué significa cada estado, qué pasa si no estás en casa y los puntos Pickup.
 slug: seur-seguimiento
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Pega tu número de SEUR en la casilla de arriba para ver dónde está tu paquete, o escríbelo en Mis envíos de miSEUR, en seur.com, sin crear una cuenta. Suele tener 14 o 21 cifras y está en el correo de envío de la tienda o en la página de tu pedido. SEUR es una empresa española de paquetería urgente que forma parte del grupo Geopost, el mismo de DPD.
@@ -33,6 +33,12 @@ SEUR escribe sus estados en mayúsculas y en español. Esta tabla los ordena seg
 | Estado de SEUR | Qué significa para ti |
 | --- | --- |
 | `EL ENVÍO HA SIDO REGISTRADO.` | El remitente ha creado el envío, pero SEUR aún no tiene el paquete. |
+| `LA RECOGIDA HA SIDO REGISTRADA.` | Hay una recogida programada: SEUR aún no tiene el paquete. |
+| `LA RECOGIDA HA SIDO MODIFICADA.` | La recogida programada ha cambiado. |
+| `LA RECOGIDA HA SIDO CONFIRMADA POR EL REPATIDOR.` | El repartidor lleva la recogida en su ruta del día («REPATIDOR» lo escribe así SEUR). |
+| `RECOGIDA NO REALIZADA: CLIENTE CERRADO O AUSENTE. SE PUEDE REPROGRAMAR UNA NUEVA FECHA DE RECOGIDA.` | El repartidor no pudo recoger el paquete: el remitente estaba cerrado o ausente. No es un intento de entrega a ti: Peek sigue mostrando «Etiqueta creada». |
+| `LA RECOGIDA HA SIDO REALIZADA.` | El repartidor ha recogido el paquete: SEUR ya lo tiene. |
+| `EL ENVÍO HA SIDO DEPOSITADO EN UN PUNTO SEUR PICKUP.` | El remitente lo ha dejado en un punto SEUR Pickup, donde SEUR lo recoge. |
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | SEUR ya lo tiene en su centro de origen y sale hacia tu zona. |
 | `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` | Va camino de la delegación que reparte en tu zona. |
 | `EL ENVÍO ESTÁ PENDIENTE DE LLEGAR A DESTINO. EN CUANTO SE RECIBA, ACTUALIZAREMOS LA SITUACIÓN.` | Aún no ha llegado a la delegación de destino; SEUR actualizará el estado cuando llegue. |

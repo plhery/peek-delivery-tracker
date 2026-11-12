@@ -3,7 +3,7 @@ title: UPS seguimiento en España: número 1Z, estados y aduanas
 description: Seguimiento de UPS en España: cómo es el número 1Z, qué significan Exception y los demás escaneos, los Access Point, el arancel de aduanas y tus derechos.
 slug: ups-seguimiento
 published: 2026-10-13
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Los números de seguimiento de UPS (United Parcel Service) suelen empezar por `1Z`. Pega el número, o un enlace de seguimiento de UPS, en la casilla de arriba para seguir el paquete; la página de seguimiento de la propia UPS está en ups.com.
@@ -30,6 +30,7 @@ La página de seguimiento de UPS en inglés tiene una barra de progreso (`Label 
 | `Your package has been released by a government agency.` | En tránsito | El organismo lo ha liberado. |
 | `Duties or taxes are due on this package.` | En aduanas | Tienes que pagar gastos de importación antes de que UPS lo entregue (más abajo). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | En reparto | Lo lleva un repartidor. |
+| `Delivery instructions have been provided by the receiver.` | Sin cambios | El destinatario ha dado instrucciones de entrega a UPS. Es un aviso, no un escaneo: Peek mantiene el estado anterior, por ejemplo «En reparto». |
 | `The receiver was not available at the time of the final delivery attempt.` | Intento de entrega | También ha fallado el último intento de entrega. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Listo para recoger | Te espera en un UPS Access Point. |
 | `DELIVERED` | Entregado | Entregado, o recogido por ti en un Access Point. |
@@ -90,5 +91,5 @@ Desconfía. INCIBE ha avisado de una campaña de SMS falsos que se hacen pasar p
 - [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo adicional, rescisión y reembolso, el vendedor responde de los daños
 - [CNMC: Guía sobre los derechos de los usuarios postales](https://www.cnmc.es/sites/default/files/editor_contenidos/Postal/202412_STP_DTSP_070_24_Guia%20usuarios%20postales%20CNMC.pdf) – paquetes y envío urgente como servicio postal, remitente y destinatario como usuarios, reclamación en seis meses, respuesta en uno o tres meses, vías de consumo
 - [INCIBE: Campaña de smishing que suplanta a empresas de paquetería](https://www.incibe.es/ciudadania/avisos/campana-de-smishing-que-suplanta-empresas-de-paqueteria-con-la-excusa-de-que) – SMS falsos de entrega, 017, banco
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formas del número, dígito de control, escaneos de UPS (retención y liberación por un organismo público), qué lee Peek de UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formas del número, dígito de control, escaneos de UPS (retención y liberación por un organismo público, instrucciones de entrega del destinatario), qué lee Peek de UPS
 :::

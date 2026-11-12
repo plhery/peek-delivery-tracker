@@ -3,7 +3,7 @@ title: SEUR tracking: numbers, statuses and pickup points
 description: Track a SEUR parcel in Spain: what the number looks like, what SEUR's Spanish statuses mean, Pickup points, missed deliveries and how to reach SEUR.
 slug: seur-tracking
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's miSEUR tracking page on seur.com, with a SEUR tracking link or by pasting the number in the box above.
@@ -29,6 +29,12 @@ SEUR's tracking site is in Spanish and English. The statuses below are the Spani
 | SEUR's status | What it means for you |
 | --- | --- |
 | `EL ENVÍO HA SIDO REGISTRADO.` | The sender has created the shipment. SEUR doesn't have the parcel yet. |
+| `LA RECOGIDA HA SIDO REGISTRADA.` | A collection is booked: SEUR doesn't have the parcel yet. |
+| `LA RECOGIDA HA SIDO MODIFICADA.` | The booked collection has changed. |
+| `LA RECOGIDA HA SIDO CONFIRMADA POR EL REPATIDOR.` | The courier has the collection on the day's round (*REPATIDOR* is SEUR's spelling). |
+| `RECOGIDA NO REALIZADA: CLIENTE CERRADO O AUSENTE. SE PUEDE REPROGRAMAR UNA NUEVA FECHA DE RECOGIDA.` | The courier couldn't collect it: the sender was closed or out. It's not a failed delivery to you: Peek still shows "Label created". |
+| `LA RECOGIDA HA SIDO REALIZADA.` | The courier has collected the parcel: SEUR has it. |
+| `EL ENVÍO HA SIDO DEPOSITADO EN UN PUNTO SEUR PICKUP.` | The sender has dropped it at a SEUR Pickup point, where SEUR collects it. |
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | SEUR has received it at its origin depot and it's on its way. |
 | `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` | In transit to the depot that delivers in your area. |
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | A delivery day has been agreed. |

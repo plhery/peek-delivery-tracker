@@ -3,7 +3,7 @@ title: UPS tracking : suivi de colis, statuts et livraison
 description: Suivre un colis UPS : à quoi ressemble le numéro 1Z, ce que veulent dire Exception et les autres scans, Access Point, frais de douane et tes droits en cas de perte.
 slug: ups-tracking-suivi-colis
 published: 2026-10-13
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Les numéros de suivi UPS (United Parcel Service) commencent en général par `1Z`. Pour suivre ton colis, colle le numéro ou un lien de suivi UPS dans le champ ci-dessus ; la page de suivi de UPS elle-même se trouve sur ups.com.
@@ -30,6 +30,7 @@ La page de suivi anglaise de UPS affiche une barre de progression (`Label Create
 | `Your package has been released by a government agency.` | En transit | L'administration l'a libéré. |
 | `Duties or taxes are due on this package.` | À la douane | Tu dois payer des frais d'importation avant que UPS livre (voir plus bas). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | En livraison | Un livreur l'a avec lui. |
+| `Delivery instructions have been provided by the receiver.` | Inchangé | Le destinataire a donné des instructions de livraison à UPS. C'est un avis, pas un scan : Peek garde le statut d'avant, par exemple « En livraison ». |
 | `The receiver was not available at the time of the final delivery attempt.` | Tentative de livraison | La dernière tentative a échoué. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Prêt à être retiré | Il t'attend dans un point UPS Access Point. |
 | `DELIVERED` | Livré | Livré, ou retiré par toi dans un point Access Point. |
@@ -98,5 +99,5 @@ Non : Peek ne fait que lire le suivi de UPS. Les changements que tu fais auprès
 - [OFDF : Frais de dédouanement et suivi des colis](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – dédouanement par le transporteur (UPS, La Poste…), recherche de l'envoi, frais de dédouanement (Suisse)
 - [OFDF : Achats sur Internet, envois postaux et par coursier](https://www.bazg.admin.ch/fr/achat-internet-envois-postaux-importation-suisse-cout-douane-tva) – frais du transporteur facturés au destinataire avec les droits et la TVA
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – faux SMS au nom de transporteurs dont UPS, vérifier le vrai suivi, 33700
-- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formes de numéro, clé de contrôle, scans de UPS (retenue et libération par une administration), ce que Peek lit chez UPS
+- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formes de numéro, clé de contrôle, scans de UPS (retenue et libération par une administration, instructions de livraison du destinataire), ce que Peek lit chez UPS
 :::

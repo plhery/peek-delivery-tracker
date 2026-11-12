@@ -3,7 +3,7 @@ title: Vinted Go suivi : statuts, consigne, point relais et contact
 description: Suivre un colis Vinted Go : où trouver le numéro, ce que veut dire chaque statut, combien de temps le colis t'attend en consigne et qui contacter en cas de souci.
 slug: vinted-go-suivi
 published: 2026-10-11
-updated: 2026-11-05
+updated: 2026-11-12
 ---
 
 Vinted Go est le service de livraison de Vinted : il achemine les colis vendus sur Vinted d'une consigne ou d'un point relais vers une autre consigne, un point relais ou un voisin relais, et en France parfois jusqu'à ta porte. Pour suivre ton colis, ouvre la conversation de la commande sur Vinted et clique sur « Suivre le colis », ou saisis le numéro sur la [page de suivi de Vinted Go](https://vintedgo.com/fr/tracking).
@@ -98,7 +98,7 @@ Vinted prévient que l'hameçonnage passe aussi par SMS. Transfère les e-mails 
 
 Un numéro qui commence par `VGS`, Peek le reconnaît tout de suite comme Vinted Go. Si tu saisis seulement le numéro à 16 chiffres, Peek demande à Vinted Go, à TNT et à DHL eCommerce s'ils le connaissent, et retient Vinted Go si c'est lui qui le connaît ; pour un code `UW`, il interroge Vinted Go. Sinon, appuie sur « Changer » et choisis « Vinted Go », ou colle le lien de suivi vintedgo.com, avec ou sans la langue dedans : Vinted Go est reconnu tout de suite.
 
-Le suivi est vérifié toutes les 10 minutes, toutes les heures dès que 48 heures passent sans nouveau scan (ou 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge »), et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Si Vinted Go confie le colis à un autre réseau avec un nouveau numéro de suivi, Peek peut le suivre chez ce transporteur, s'il le lit directement. Peek ne peut pas contacter Vinted ou Vinted Go, ni signaler un problème à ta place.
+Le suivi est vérifié toutes les 10 minutes, toutes les heures dès que 48 heures passent sans nouveau scan (ou 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge »), et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Si Vinted Go confie le colis à un autre réseau avec un nouveau numéro de suivi, Peek peut le suivre chez ce transporteur, s'il le lit directement. Quand les 13 derniers caractères d'un code de 16 caractères avec `UW` sont un code de colis de Poste Italiane, Peek interroge le suivi de Poste Italiane sur ces 13 caractères et y suit le colis dès que Poste Italiane a le scan le plus récent. Peek ne peut pas contacter Vinted ou Vinted Go, ni signaler un problème à ta place.
 
 ## Questions sur le suivi Vinted Go
 

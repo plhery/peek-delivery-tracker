@@ -3,7 +3,7 @@ title: Colis Privé suivi : statuts, relais et service client
 description: Suivi Colis Privé en France, en Belgique et au Luxembourg : le numéro de 12 caractères et le code postal, chaque statut, les relais et qui contacter.
 slug: suivi-colis-prive
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Colis Privé est un transporteur de colis français pour les boutiques en ligne, qui livre en France, en Belgique et au Luxembourg, à domicile ou en point relais. Pour suivre ton colis, saisis son numéro de 12 caractères et le code postal de livraison sur [colisprive.fr](https://colisprive.fr/) (France) ou [colisprive.be](https://colisprive.be/) (Belgique, Luxembourg). Le numéro arrive dans l'e-mail de la boutique ou dans les notifications de Colis Privé. Rapprochés à l'été 2026, Colis Privé et [Paack](carrier:paack) passent sous une marque commune, Paack, déployée progressivement à partir de janvier 2027 ; d'ici là, la livraison et le suivi des colis continuent comme d'habitude, selon l'annonce de Colis Privé du 16 octobre 2026.
@@ -30,6 +30,8 @@ Le suivi de Colis Privé date chaque étape, sans heure. Voici les mots que Peek
 | --- | --- |
 | `en cours de préparation par l'expéditeur` | La boutique prépare encore ton colis. |
 | `Colis attendu par Colis Privé` | Colis Privé ne l'a pas encore reçu. |
+| `arrivé chez le partenaire d'expédition` | Un partenaire de transport l'a reçu et l'achemine vers Colis Privé. |
+| `en transit vers` | Il est en route vers Colis Privé. |
 | `pris en charge` | Colis Privé a ton colis. |
 | `arrivé sur notre agence` | Il est à l'agence de ta région. |
 | `rendez-vous est confirmé` | Un jour de livraison est fixé ; la date termine la ligne. |

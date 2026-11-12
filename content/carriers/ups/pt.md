@@ -3,7 +3,7 @@ title: UPS tracking: número 1Z, estados e entregas em Portugal
 description: UPS tracking em Portugal: como é o número 1Z, o que querem dizer Exception e as outras leituras, os Access Point, a alfândega e os teus direitos.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Os números de seguimento da UPS (United Parcel Service) começam normalmente por `1Z`. Cola o número, ou um link de seguimento da UPS, na caixa acima para seguires a encomenda; a página de seguimento da própria UPS está no ups.com.
@@ -30,6 +30,7 @@ A página de seguimento da UPS em inglês tem uma barra de progresso (`Label Cre
 | `Your package has been released by a government agency.` | Em trânsito | A entidade libertou-a. |
 | `Duties or taxes are due on this package.` | Na alfândega | Tens de pagar encargos de importação antes de a UPS a entregar (ver abaixo). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Em distribuição | Vai com um estafeta. |
+| `Delivery instructions have been provided by the receiver.` | Sem alteração | O destinatário deu instruções de entrega à UPS. É um aviso, não uma leitura: o Peek mantém o estado anterior, por exemplo «Em distribuição». |
 | `The receiver was not available at the time of the final delivery attempt.` | Tentativa de entrega | Também a última tentativa de entrega falhou. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Pronta para levantamento | Está à tua espera num UPS Access Point. |
 | `DELIVERED` | Entregue | Entregue, ou levantada por ti num Access Point. |
@@ -91,5 +92,5 @@ Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em
 - [Your Europe: Resolução extrajudicial de litígios](https://europa.eu/youreurope/citizens/consumers/consumers-dispute-resolution/informal-alternative-dispute-resolution/index_pt.htm) – resolver primeiro com a empresa, com documentos; depois resolução alternativa de litígios
 - [CNIACC: Rede de arbitragem de consumo](https://www.cniacc.pt/pt/rede-de-arbitragem-de-consumo) – os centros de arbitragem de conflitos de consumo
 - [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, taxa de 2 ou 3 euros, o que fazer
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS (retenção e libertação por uma entidade pública), o que o Peek lê da UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS (retenção e libertação por uma entidade pública, instruções de entrega do destinatário), o que o Peek lê da UPS
 :::

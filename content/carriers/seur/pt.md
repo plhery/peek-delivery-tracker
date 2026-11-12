@@ -3,7 +3,7 @@ title: SEUR encomenda: rastreio, estados e contactos em Portugal
 description: Seguir uma encomenda SEUR em Portugal: o número, os estados em espanhol explicados, pontos Pickup, entregas falhadas, reclamações e contactos.
 slug: seur-encomenda
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 A SEUR é uma transportadora espanhola de encomendas e envios urgentes, do grupo Geopost, o mesmo da DPD. Para seguir a tua, abre a página de seguimento miSEUR, em seur.com, sem conta, ou cola o número na caixa acima.
@@ -32,6 +32,12 @@ Os estados aparecem em espanhol e em maiúsculas, tal como a SEUR os escreve. Pe
 | Estado da SEUR | O que quer dizer para ti |
 | --- | --- |
 | `EL ENVÍO HA SIDO REGISTRADO.` | O remetente registou o envio. A SEUR ainda não tem a encomenda. |
+| `LA RECOGIDA HA SIDO REGISTRADA.` | Foi marcada uma recolha: a SEUR ainda não tem a encomenda. |
+| `LA RECOGIDA HA SIDO MODIFICADA.` | A recolha marcada foi alterada. |
+| `LA RECOGIDA HA SIDO CONFIRMADA POR EL REPATIDOR.` | O estafeta tem a recolha na volta do dia («REPATIDOR» é a grafia da SEUR). |
+| `RECOGIDA NO REALIZADA: CLIENTE CERRADO O AUSENTE. SE PUEDE REPROGRAMAR UNA NUEVA FECHA DE RECOGIDA.` | O estafeta não conseguiu recolher a encomenda: o remetente estava fechado ou ausente. Não é uma tentativa de entrega a ti: o Peek continua a mostrar «Etiqueta criada». |
+| `LA RECOGIDA HA SIDO REALIZADA.` | O estafeta recolheu a encomenda: a SEUR já a tem. |
+| `EL ENVÍO HA SIDO DEPOSITADO EN UN PUNTO SEUR PICKUP.` | O remetente deixou-a num ponto SEUR Pickup, onde a SEUR a vai recolher. |
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | A SEUR recebeu-a no centro de origem e a encomenda já vai a caminho. |
 | `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` | Em trânsito para a delegação que faz as entregas na tua zona. |
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | Já há um dia de entrega combinado. |

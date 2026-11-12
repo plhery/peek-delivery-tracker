@@ -3,7 +3,7 @@ title: NACEX rastreio: código, estados e contacto em Portugal
 description: Rastreio NACEX em Portugal: o código 0000/00000000, os estados em espanhol explicados, os pontos NACEX.shop, as entregas falhadas e o 800 200 077.
 slug: nacex-rastreio
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 A NACEX é uma transportadora expresso do Grupo Logista que entrega em Portugal, Espanha, Andorra e nos Países Baixos. Para rastrear a encomenda, escreve o número (quatro algarismos, uma barra e oito algarismos) na caixa «Seguimento de envio» do [site da NACEX](https://www.nacex.pt/) ou cola-o na caixa acima. O número junta o código da agência NACEX de onde a encomenda partiu e o número da expedição: o seguimento não pesquisa pelo número da encomenda nem pelo código postal.
@@ -39,6 +39,7 @@ A NACEX não publica uma lista dos seus estados. O formulário de seguimento apa
 | `En tránsito` | «Em trânsito»: circula entre agências e plataformas da NACEX e já não pode ser cancelada. |
 | `En reparto` | «Em distribuição»: está com o estafeta. |
 | `Ausente` | O estafeta não encontrou ninguém em casa. |
+| `Gestión de servicio, posible demora` | «Gestão de serviço, possível atraso»: a agência está a resolver um problema, por exemplo uma entrega que falhou, e avisa que a encomenda pode atrasar-se. |
 | `Solución de entrega concertada` | Depois de um problema, foi combinada uma nova entrega, por exemplo noutro dia. |
 | `Solución de entrega en punto` | A encomenda foi desviada para um ponto NACEX. |
 | `Cambio de dirección` | «Mudança de morada»: segue para uma nova morada. |

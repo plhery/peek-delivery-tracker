@@ -3,7 +3,7 @@ title: Posta Shqiptare tracking: Albanian Post numbers and statuses
 description: Track a Posta Shqiptare (Albanian Post) parcel or EMS: what an AL number looks like, what each Albanian status means, customs in Albania and who to call.
 slug: posta-shqiptare-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-12
 ---
 
 Posta Shqiptare (Albanian Post) is Albania's national post, with 533 post offices across the country. It handles mail and parcels within Albania, from abroad and to other countries, EMS included. Track an item in the "Gjurmo objektin" (track an item) box on [postashqiptare.al](https://www.postashqiptare.al/) or in its e-Posta app, or paste the number in the box above. For an online order, ask the seller for the number.
@@ -22,12 +22,13 @@ The box on Posta Shqiptare's website takes only this shape; anything else gets `
 
 ## Posta Shqiptare tracking statuses explained
 
-Posta Shqiptare's own lines are in Albanian with English after the slash; lines it passes on from the post in the destination country are in Albanian only. The wordings Peek knows, roughly in order:
+Posta Shqiptare's posting and processing lines are in Albanian with English after the slash; its dispatch abroad and the lines it passes on from the post in the destination country are in Albanian only. The wordings Peek knows, roughly in order:
 
 | Posta Shqiptare says | What it means for you |
 | --- | --- |
 | `Pranim objekti nga klienti / Receive item from customer` | Posted at a Posta Shqiptare office. |
 | `Objekti u nxor nga thesi per perpunim / Receive item at location (Inb)` | Taken out of its bag for processing at a post office or sorting centre in Albania, soon after posting and before the item leaves the country, though the English half says `(Inb)`, inbound. |
+| `Objekti u fut ne thes dhe u dergua jashte` | Put in a bag and sent abroad from Albania's office of exchange: it's leaving the country. |
 | `Objekti u pranua ne zyren e shkembimit` | The destination country's post received it at its office of exchange: it has arrived in that country. |
 | `Regjistrimi i informacionit doganor te objektit` | Customs information recorded: it is with customs there, or held by them. |
 | `Objekti u dergua ne zyren destinacion` | Sent on from the office of exchange towards delivery. |

@@ -3,7 +3,7 @@ title: Colis Privé tracking: French statuses and what to do
 description: Track a Colis Privé parcel in France, Belgium or Luxembourg: where the 12-character number is, why it needs your postcode and what its French statuses mean.
 slug: colis-prive-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Colis Privé is a French parcel carrier for online shops, delivering in France, Belgium and Luxembourg to homes, pickup points and, in France, lockers. Track a parcel with its 12-character number and the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) for France or [colisprive.be](https://colisprive.be/en/) for Belgium and Luxembourg. The number comes in the shop's shipping email or Colis Privé's notifications. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are joining under one brand, Paack, to be rolled out gradually from January 2027; until then its services, delivery and tracking included, carry on as before.
@@ -28,6 +28,8 @@ Peek reads Colis Privé's tracking in French, one dated sentence per step; its E
 
 | Colis Privé's words | What it means for you |
 | --- | --- |
+| `arrivé chez le partenaire d'expédition` | A shipping partner has it and takes it to Colis Privé. |
+| `en transit vers` | It's on its way to Colis Privé. |
 | `pris en charge` | Colis Privé has your parcel. |
 | `arrivé sur notre agence` | It's at the local depot. |
 | `rendez-vous est confirmé` | Delivery day booked; the date ends the line. |

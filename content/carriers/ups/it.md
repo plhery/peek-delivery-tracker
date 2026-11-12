@@ -3,7 +3,7 @@ title: UPS tracking: numero, stati del pacco e consegna
 description: Tracking UPS: com'è fatto il numero 1Z, cosa vogliono dire Exception e le altre scansioni, UPS Access Point, dazi e i tuoi diritti se il pacco si perde.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 I numeri di tracking UPS (United Parcel Service) di solito iniziano con `1Z`. Per seguire il pacco incolla il numero, o un link di tracciamento UPS, nel box qui sopra; il tracking di UPS vero e proprio è su ups.com.
@@ -30,6 +30,7 @@ La pagina di tracking di UPS in inglese mostra una barra di avanzamento (`Label 
 | `Your package has been released by a government agency.` | In transito | L'ente lo ha sbloccato. |
 | `Duties or taxes are due on this package.` | In dogana | Devi pagare dazi o tasse prima che UPS consegni (vedi sotto). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | In consegna | Ce l'ha un autista. |
+| `Delivery instructions have been provided by the receiver.` | Invariato | Il destinatario ha dato a UPS istruzioni per la consegna. È un avviso, non una scansione: Peek tiene lo stato di prima, per esempio «In consegna». |
 | `The receiver was not available at the time of the final delivery attempt.` | Tentativo di consegna | Anche l'ultimo tentativo è andato a vuoto. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Pronto per il ritiro | Ti aspetta in un UPS Access Point. |
 | `DELIVERED` | Consegnato | Consegnato, oppure ritirato da te in un Access Point. |
@@ -94,5 +95,5 @@ Può esserlo. La Polizia Postale ha segnalato una campagna di smishing contro ch
 - [AGCOM: Delibera n. 572/18/CONS](https://www.agcom.it/sites/default/files/migration/delibera/Delibera%20572-18-CONS.pdf) – il corriere espresso è un servizio postale, UPS citato tra gli operatori postali
 - [UDSC: Spese di imposizione e tracciabilità dei colli](https://www.bazg.admin.ch/it/costi-imposizione-e-tracciamento-pacchi) – imposizione fatta dal trasportatore (DHL, UPS, La Posta), ricerca dell'invio, spese di imposizione (Svizzera)
 - [Polizia Postale: Nuova campagna di smishing «Il tuo pacco è stato consegnato al centro di spedizione»](https://www.commissariatodips.it/notizie/articolo/nuova-campagna-di-smishing-il-tuo-pacco-e-stato-consegnato-al-centro-di-spedizione/index.html) – SMS falso nella stessa chat del corriere, telefonata con spoofing, verificare con la società di spedizione
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – forme del numero, cifra di controllo, scansioni di UPS (fermo e sblocco da parte di un ente pubblico), cosa legge Peek da UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – forme del numero, cifra di controllo, scansioni di UPS (fermo e sblocco da parte di un ente pubblico, istruzioni di consegna del destinatario), cosa legge Peek da UPS
 :::

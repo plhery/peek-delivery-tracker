@@ -3,7 +3,7 @@ title: Vinted Go seguimiento: estados, taquillas y contacto
 description: Sigue tu paquete Vinted Go: dónde está el código de seguimiento, qué significa cada estado, cuánto espera en la taquilla y a quién acudir si algo falla.
 slug: vinted-go-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Vinted Go es el servicio de paquetería del propio Vinted: lleva los paquetes vendidos en Vinted desde una taquilla o tienda de paquetería hasta otra taquilla o tienda de paquetería. Para seguir el tuyo, abre la conversación del pedido en Vinted y pulsa «Rastrear paquete», o escribe el número en la [página de seguimiento de Vinted Go](https://vintedgo.com/es/tracking?country=es&region=europe).
@@ -90,7 +90,7 @@ Vinted avisa de que el phishing también llega por mensajes de texto a tu teléf
 
 Un número que empieza por `VGS` Peek lo reconoce al momento como de Vinted Go. Si escribes solo el número de 16 cifras, Peek pregunta a Vinted Go, a TNT y a DHL eCommerce si lo conocen, y se queda con Vinted Go cuando es este quien lo conoce; por un código `UW` pregunta a Vinted Go. Si no, pulsa «Cambiar» y elige «Vinted Go», o pega el enlace de seguimiento de vintedgo.com, con o sin el idioma: Vinted Go queda reconocido al momento. Vinted Go deja de dar el seguimiento de un paquete seis meses después de crearse su etiqueta.
 
-Se consulta cada 10 minutos, cada hora en cuanto pasan 48 horas sin un escaneo nuevo (o 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista»), y puedes recibir notificaciones cuando cambia el estado. Si Vinted Go pasa el paquete a otra red con un número de seguimiento nuevo, Peek puede seguirlo con ese transportista cuando lo lee directamente. Peek no puede contactar con Vinted ni con Vinted Go, ni abrir una reclamación por ti.
+Se consulta cada 10 minutos, cada hora en cuanto pasan 48 horas sin un escaneo nuevo (o 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista»), y puedes recibir notificaciones cuando cambia el estado. Si Vinted Go pasa el paquete a otra red con un número de seguimiento nuevo, Peek puede seguirlo con ese transportista cuando lo lee directamente. Cuando los 13 últimos caracteres de un código de 16 caracteres con `UW` son un código de paquete de Poste Italiane, Peek consulta el seguimiento de Poste Italiane con esos 13 caracteres y sigue allí el paquete en cuanto Poste tiene el escaneo más reciente. Peek no puede contactar con Vinted ni con Vinted Go, ni abrir una reclamación por ti.
 
 ## Preguntas sobre el seguimiento de Vinted Go
 

@@ -3,7 +3,7 @@ title: Vinted Go tracking: statuses, lockers and who to contact
 description: Track a Vinted Go parcel: where the number is, what each status means, how long a locker or parcel shop holds it and who to ask when it goes wrong.
 slug: vinted-go-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Vinted Go is Vinted's own parcel service: it carries parcels sold on Vinted from a locker or parcel shop to another locker, parcel shop or neighbourhood point, and in some places to the buyer's door. To track one, open the order's conversation in Vinted and tap the tracking button, or enter the number on [Vinted Go's tracking page](https://vintedgo.com/en/tracking).
@@ -38,6 +38,7 @@ Vinted Go's English tracking page shows the latest stage as the headline, with i
 | `Parcel was dropped off at the locker` | The seller has dropped it off (or `Parcel was dropped off at the parcel shop`). |
 | `Shipped` | The stage for that drop-off: it's with Vinted Go now. |
 | `In transit` | Moving through sorting centres towards your point. |
+| `Parcel is on the way to <country>` | It has left Vinted Go's network and goes on with another one, such as Poste Italiane for Italy. |
 | `Ready to collect at the locker` | It's waiting for you (or `Ready to collect at the parcel shop`). Your pick-up code is on its way. |
 | `Ready to collect` | The stage name for that step. The 7-day pick-up window has started. |
 | `Parcel was collected by the recipient` | You, or someone with your code, picked it up. |
@@ -91,7 +92,7 @@ Vinted warns that phishing also arrives by SMS; its French help asks you to forw
 
 Peek names Vinted Go at once for a number starting `VGS`. Type the 16-digit number alone and Peek asks Vinted Go, TNT and DHL eCommerce whether they know it, naming Vinted Go when it does; a `UW` code it asks Vinted Go about. Otherwise press "Change" and pick "Vinted Go", or paste the vintedgo.com tracking link, which names Vinted Go at once.
 
-Peek checks every 10 minutes, or hourly once 48 hours pass with no new scan (12 hours while the parcel still shows "Label created" or "Received by carrier"), and can notify you of changes. If Vinted Go hands the parcel to another network under a new tracking code, Peek can follow it there if it reads that network directly. It can't contact Vinted or Vinted Go, or report a problem for you.
+Peek checks every 10 minutes, or hourly once 48 hours pass with no new scan (12 hours while the parcel still shows "Label created" or "Received by carrier"), and can notify you of changes. If Vinted Go hands the parcel to another network under a new tracking code, Peek can follow it there if it reads that network directly. When the last 13 characters of a 16-character `UW` code are a [Poste Italiane](carrier:poste-italiane) parcel code, Peek asks Poste Italiane's tracker about them and follows the parcel there once Poste has the latest scan. It can't contact Vinted or Vinted Go, or report a problem for you.
 
 ## Questions about Vinted Go tracking
 

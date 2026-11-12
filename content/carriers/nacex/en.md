@@ -3,7 +3,7 @@ title: NACEX tracking: number, statuses in English and contact
 description: Track a NACEX parcel in Spain, Portugal or Andorra: the 0000/00000000 number, its Spanish statuses in plain English, NACEX.shop points, claims and contacts.
 slug: nacex-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 NACEX is an express courier of the Logista group that delivers across Spain, Portugal, Andorra and the Netherlands. To track a parcel, type its number (four digits, a slash, eight digits) into the box on [NACEX's site](https://www.nacex.es/), or paste it in the box above. The number belongs to the shipment the sender, usually the shop, booked; NACEX can't search by order number or postcode.
@@ -39,6 +39,7 @@ NACEX publishes no list of its statuses. These are the Spanish wordings Peek rea
 | `En tránsito` | "In transit": moving between NACEX offices and hubs. |
 | `En reparto` | "Out for delivery": the courier has it. |
 | `Ausente` | "Absent": the courier found nobody in. |
+| `Gestión de servicio, posible demora` | "Service handling, possible delay": the office is sorting out a problem, such as a round that didn't deliver, and warns the parcel may be late. |
 | `Solución de entrega concertada` | A new delivery was arranged after a problem, such as another day. |
 | `Solución de entrega en punto` | Redirected to a NACEX pickup point. |
 | `Cambio de dirección` | "Change of address": rerouted to a new address. |

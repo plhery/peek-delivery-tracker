@@ -3,7 +3,7 @@ title: UPS tracking: śledzenie paczki w Polsce, statusy, reklamacje
 description: Śledzenie paczki UPS: jak wygląda numer 1Z, co znaczą Exception i inne skany, punkty Access Point, cło od paczek spoza UE i reklamacja w UPS Polska.
 slug: ups-tracking-sledzenie-paczki
 published: 2026-10-13
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Numery przesyłek UPS (United Parcel Service) zwykle zaczynają się od `1Z`. Wklej numer albo link do śledzenia UPS w pole powyżej, żeby śledzić paczkę; własne śledzenie UPS znajdziesz na ups.com.
@@ -30,6 +30,7 @@ Angielska strona śledzenia UPS ma pasek postępu (`Label Created`, `We Have You
 | `Your package has been released by a government agency.` | W transporcie | Urząd zwolnił paczkę. |
 | `Duties or taxes are due on this package.` | W urzędzie celnym | Musisz zapłacić należności przywozowe, zanim UPS doręczy paczkę (więcej niżej). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | W doręczeniu | Paczkę wiezie kurier. |
+| `Delivery instructions have been provided by the receiver.` | Bez zmian | Odbiorca przekazał UPS instrukcje doręczenia. To komunikat, nie skan: Peek zostawia poprzedni status, np. „W doręczeniu”. |
 | `The receiver was not available at the time of the final delivery attempt.` | Próba doręczenia | Ostatnia próba doręczenia też się nie udała. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Do odbioru | Paczka czeka na Ciebie w punkcie UPS Access Point. |
 | `DELIVERED` | Dostarczona | Doręczona albo odebrana przez Ciebie w punkcie Access Point. |
@@ -94,5 +95,5 @@ Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzegał przed SMS-ami, w kt�
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy, 30 dni, odwołanie, interwencja Prezesa UKE, ADR
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje i odszkodowania](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół szkody, 7 dni na ukryte uszkodzenia
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS (wstrzymanie i zwolnienie przez urząd państwowy), co Peek odczytuje z UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS (wstrzymanie i zwolnienie przez urząd państwowy, instrukcje doręczenia od odbiorcy), co Peek odczytuje z UPS
 :::

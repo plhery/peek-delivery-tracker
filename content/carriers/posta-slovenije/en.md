@@ -3,7 +3,7 @@ title: Pošta Slovenije tracking: statuses, pickup and contacts
 description: Track a Pošta Slovenije (Post of Slovenia) parcel: the 13-character number, what the English statuses mean, PS Paketomat pickup, claims and contacts.
 slug: posta-slovenije-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Pošta Slovenije (Post of Slovenia in English) is Slovenia's national post. Track a parcel on its [MojaPošta tracking page](https://moja.posta.si/tracking), which has an English switch, in the MojaPošta app or by pasting the number in the box above. The number usually comes in the sender's message, such as the shop's shipping email.
@@ -33,6 +33,7 @@ The tracker shows each step in Slovenian, or in English with its language switch
 | `The item has arrived at Pošta Slovenije` | Handed in at a post office or centre, or reached Slovenia from abroad. |
 | `The item is expected to be delivered today` | With the postman, out for delivery. |
 | `The item is on its way to the selected parcel locker` | On its way to the PS Paketomat locker you chose. |
+| `The item is ready for pickup at the parcel locker` | It's waiting in that locker for you to collect it. |
 | `Unsuccessful delivery attempt` | It could not be delivered, or was not collected. Read the next step below it. |
 | `The item is ready for pickup at the post office` | It waits at the post office the step names. |
 | `Unsuccessful delivery` | Nobody collected it from the parcel locker in time: it moves to a post office. |

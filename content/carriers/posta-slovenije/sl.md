@@ -3,7 +3,7 @@ title: Sledenje pošiljk Pošte Slovenije: statusi, prevzem, kontakt
 description: Sledite pošiljki Pošte Slovenije: oblika sprejemne številke, pomen statusov, koliko časa paket čaka na pošti ali v PS Paketomatu in kje dobite pomoč.
 slug: posta-slovenije-sledenje-posiljk
 published: 2026-10-25
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Pošta Slovenije je izvajalec univerzalne poštne storitve v Sloveniji: pisma in pakete dostavlja po vsej državi, tudi tiste, ki prispejo iz tujine. Pošiljki sledite v storitvi [Sledenje pošiljk](https://moja.posta.si/tracking) na moja.posta.si, v aplikaciji MojaPošta ali tako, da številko prilepite v polje zgoraj. Številko običajno najdete v sporočilu pošiljatelja, na primer v e-pošti spletne trgovine o odpremi.
@@ -38,6 +38,7 @@ Sledenje pošiljk korake privzeto izpiše v slovenščini, s preklopom na EN pa 
 | `Departure from outward OE` | Pošiljka je zapustila izmenjalno pošto in je na poti v namembno državo. |
 | `The item is expected to be delivered today` | Pošiljka je pri pismonoši in bo predvidoma dostavljena danes. |
 | `The item is on its way to the selected parcel locker` | Paket je na poti v PS Paketomat, ki ste ga izbrali. |
+| `The item is ready for pickup at the parcel locker` | Paket vas čaka v tem PS Paketomatu. |
 | `Unsuccessful delivery attempt` | Dostava ni uspela ali pošiljke niste prevzeli. Nadaljevanje pove, kaj sledi, na primer `The item will be redirected to the post office`. |
 | `The item is ready for pickup at the post office` | Pošiljka vas čaka na pošti, ki jo navaja korak. |
 | `Unsuccessful delivery` | Paketa niste pravočasno prevzeli iz PS Paketomata, zato gre na pošto. |

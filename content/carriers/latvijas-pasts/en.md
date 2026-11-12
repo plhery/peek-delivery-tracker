@@ -3,7 +3,7 @@ title: Latvijas Pasts tracking: numbers, statuses and lockers
 description: Track a Latvijas Pasts (Latvian Post) parcel in English: where the number is, what each status means, parcel lockers, missed deliveries and contacts.
 slug: latvijas-pasts-tracking
 published: 2026-10-13
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Latvijas Pasts (Latvian Post) is Latvia's state-owned national post, with the country's largest network of parcel lockers. Track an item on [mans.pasts.lv/track](https://mans.pasts.lv/track), which opens in Latvian and has an English switch, or paste the number in the box above. The number comes from the shop's or sender's shipping message, or from the courier's SMS before delivery.
@@ -38,8 +38,14 @@ The tracker shows each step with its date, time and the Latvian post office. Abo
 | `Item sent to the Customs` | Presented to customs at the exchange office, as the item leaves the sending country. |
 | `Item returned from Customs` | Customs has released it. Not a return to the sender. |
 | `Item sent abroad (EDI-received)` | The post abroad has sent the item on its way to Latvia; Latvijas Pasts knows it from that post's electronic data. |
+| `Item accepted for temporary storage` | An item from abroad, held in temporary storage under customs supervision until it's cleared. Not an acceptance from the sender. |
+| `Electonic notification (SMS) of customs clearance sent to recipient` | You've been sent an SMS about the item's customs clearance (the spelling is Latvijas Pasts's). It's still in temporary storage. |
+| `Customs clearance completed, item to be delivered to recipient` | Cleared by customs; it goes on to the office that delivers it. |
 | `Item arrived at processing facility` | At a sorting centre. |
+| `Item sent to next processing facility` | On its way to the next sorting centre. |
 | `Item received at delivery office` | At the office that will deliver it or hand it out. It can still go out for delivery from there. |
+| `Item redirected` | Sent elsewhere, for example to another pickup point (see Redirecting below). |
+| `Item address re-labelled` | Relabelled for its new address, where it now goes. |
 | `Item handed over for delivery` | Out for delivery. |
 | `Unsuccessful delivery attempt` | Delivery failed: see missed deliveries below. |
 | `Notification - pick-up invitation printed` | Ready for pickup: the post office has printed an invitation for you to collect it there. |

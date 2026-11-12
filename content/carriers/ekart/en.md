@@ -3,7 +3,7 @@ title: Ekart tracking: tracking IDs, statuses and RTO explained
 description: Track an Ekart parcel in India: what an Ekart tracking ID looks like, what codes such as InscannedAtDH and RTO mean, and what to do when it stops moving.
 slug: ekart-tracking
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 Ekart (also eKart Logistics) is an Indian courier. It collects online orders from the seller, moves them through its hubs and delivers them to you. The seller or shop gives you the tracking ID: look in its shipping message, or ask it, then paste the ID in the box above. Ekart's own tracker is on ekartlogistics.in. Peek couldn't check Ekart's website for this page, so what follows comes from Peek's own code, which reads Ekart's tracker for you.
@@ -43,9 +43,10 @@ Ekart's tracker lists each scan with a date, a time and a city. Some lines are p
 | `Unsuccessful` and a reason, such as `Unsuccessful Unable to attempt delivery due to operational issues` or `Unsuccessful Undelivered. (Rescheduled to: …)` | The day's delivery run ended without delivering, in words. A date after `Rescheduled to:` is the day of the next try. An `Unsuccessful` line about a pickup isn't read this way. | "Delivery attempted" |
 | `PickupCancel` | The pickup was cancelled before the parcel entered Ekart's network. | "Needs attention" |
 | `ShipmentRtoConfirmed` | The return to the seller (RTO) is confirmed: the parcel is going back. | "Needs attention" |
+| `Marked RTO: ORDER_REJECT` | In words, after delivery runs that didn't deliver: the parcel is marked to go back to the seller, with the reason after the colon. Later lines are on the way back. | "Needs attention" |
 | `RtoExpected`, `RtoReceived`, `ReturnInscanned` | On its way back to the seller. | "In transit" |
 
-**RTO.** Peek reads `ShipmentRtoConfirmed`, or any line whose code starts with `Rto` or `Return`, as the start of the return to the seller: that line and every later one are on the way back. `InscannedAtDH` then means the seller's hub, not yours, and a later `Delivered` means the parcel reached the seller: Peek shows it as "Returned to sender", not "Delivered". More in [what tracking statuses mean](guide:tracking-statuses).
+**RTO.** Peek reads `ShipmentRtoConfirmed`, a `Marked RTO` line, or any line whose code starts with `Rto` or `Return`, as the start of the return to the seller: that line and every later one are on the way back. `InscannedAtDH` then means the seller's hub, not yours, and a later `Delivered` means the parcel reached the seller: Peek shows it as "Returned to sender", not "Delivered". More in [what tracking statuses mean](guide:tracking-statuses).
 
 ## How Ekart delivers in India
 

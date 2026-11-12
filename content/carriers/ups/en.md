@@ -3,7 +3,7 @@ title: UPS tracking: numbers, statuses and missed deliveries
 description: Track a UPS parcel: what the 1Z tracking number looks like, what Exception and other UPS scans mean, Access Points, customs charges and your rights if it's lost.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 UPS (United Parcel Service) tracking numbers usually start with `1Z`. Paste the number, or a UPS tracking link, in the box above to follow the parcel; UPS's own tracking page is on ups.com.
@@ -30,6 +30,7 @@ UPS's tracking page has a progress bar (`Label Created`, `We Have Your Package`,
 | `Your package has been released by a government agency.` | In transit | The agency has let it go. |
 | `Duties or taxes are due on this package.` | At customs | You have to pay import charges before UPS delivers it (see below). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Out for delivery | A driver has it. |
+| `Delivery instructions have been provided by the receiver.` | Unchanged | The receiver has given UPS delivery instructions. It's a notice, not a scan: Peek keeps the status before it, such as "Out for delivery". |
 | `The receiver was not available at the time of the final delivery attempt.` | Delivery attempted | The last try failed. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Ready for pickup | It's waiting for you at a UPS Access Point. |
 | `DELIVERED` | Delivered | Delivered, or collected by you from an access point. |
@@ -97,5 +98,5 @@ It can be. Citizens Advice says a message asking you to pay to get a parcel or t
 - [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
 - [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings (a government agency's hold and release), what Peek reads from UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings (a government agency's hold and release, the receiver's delivery instructions), what Peek reads from UPS
 :::

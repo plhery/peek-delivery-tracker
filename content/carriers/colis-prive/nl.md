@@ -3,7 +3,7 @@ title: Colis Privé pakket volgen: statussen, afhaalpunt en contact
 description: Volg je Colis Privé-pakket in België met het nummer van 12 tekens en je postcode: wat elke status betekent, hoelang een afhaalpunt het bewaart en wie je contacteert.
 slug: colis-prive-pakket-volgen
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Colis Privé is een Franse pakketbezorger voor webshops. In België en Luxemburg levert Colis Privé BeLux sinds 2021 aan huis en in afhaalpunten. Je volgt je pakket op [colisprive.be](https://colisprive.be/nl/) met het pakketnummer van 12 tekens én de postcode van het leveringsadres, of je plakt ze in het veld hierboven. Colis Privé en Paack gaan voortaan samen verder onder het merk [Paack](carrier:paack), dat vanaf januari 2027 geleidelijk wordt ingevoerd; tot dan blijven levering en tracking zoals ze zijn.
@@ -33,6 +33,8 @@ Peek leest de tracking in het Frans, één regel per stap, met de dag maar zonde
 | Peek toont (Frans) | Wat het voor jou betekent |
 | --- | --- |
 | `en cours de préparation par l'expéditeur` | De webshop maakt je pakket nog klaar. |
+| `arrivé chez le partenaire d'expédition` | Een transportpartner heeft je pakket en brengt het naar Colis Privé. |
+| `en transit vers` | Het is onderweg naar Colis Privé. |
 | `pris en charge` | Colis Privé heeft je pakket. |
 | `arrivé sur notre agence` | Het ligt in het depot van je regio. |
 | `rendez-vous est confirmé` | Leverdag afgesproken; de datum staat achteraan. |

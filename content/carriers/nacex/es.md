@@ -3,7 +3,7 @@ title: NACEX seguimiento: número de envío, estados y teléfono
 description: Pega tu número de NACEX (0000/00000000) y mira dónde está tu paquete: qué significa cada estado, qué hacer si no llega y el teléfono gratuito.
 slug: seguimiento-nacex
 published: 2026-10-10
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `0123/45678901`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal, Andorra y los Países Bajos con más de 300 franquicias.
@@ -38,6 +38,7 @@ NACEX no publica una lista de sus estados ni los explica. Su historial agrupa lo
 | `En tránsito` | Viaja entre agencias y plataformas de NACEX. Ya no se puede anular. |
 | `En reparto` | Lo lleva el mensajero. |
 | `Ausente` | El mensajero no encontró a nadie. |
+| `Gestión de servicio, posible demora` | La agencia está resolviendo una incidencia, por ejemplo un reparto que no se pudo hacer, y avisa de que el paquete puede retrasarse. |
 | `Solución de entrega concertada` | Tras una incidencia, se ha acordado otra entrega, por ejemplo otro día. |
 | `Solución de entrega en punto` | El envío se desvía a un punto NACEX para que lo recojas allí. |
 | `Cambio de dirección` | La dirección ha cambiado y el paquete va hacia la nueva. |

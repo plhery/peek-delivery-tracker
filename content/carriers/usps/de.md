@@ -3,7 +3,7 @@ title: USPS Sendungsverfolgung: Nummer, Status, Paket aus den USA
 description: USPS-Paket aus den USA verfolgen: wo die Trackingnummer steht, was die Status bedeuten, Zoll, verlorene Pakete und wie du USPS erreichst.
 slug: usps-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 USPS, der United States Postal Service, ist die Post der USA. Bei vielen Sendungen ist die Sendungsverfolgung (USPS Tracking) ohne Aufpreis dabei, auch bei vielen, aber nicht allen internationalen Produkten. Gib die Trackingnummer in USPS Tracking auf usps.com ein oder füg sie oben ins Feld ein; in den USA kannst du sie auch per SMS an 28777 schicken. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops.
@@ -44,7 +44,7 @@ USPS schreibt seine Sendungsverfolgung auf Englisch. Diese Status erklärt USPS 
 | `Available for Pickup` | Nicht zustellbar: Du kannst es ab dem nächsten Werktag in der Postfiliale abholen. | „Abholbereit“ |
 | `Alert` | Eine Verzögerung, etwa durch Wetter, Naturkatastrophen oder andere Ereignisse. | „Problem gemeldet“ |
 
-Bei `Available for Pickup` lässt sich laut USPS keine erneute Zustellung buchen: Du holst das Paket mit Lichtbildausweis ab. `Notice Left (No Secure Location Available)` heißt, dass der Zusteller keinen sicheren Ablageort fand und das Paket zurück in die Postfiliale gebracht hat; auch hier gibt es keinen zweiten Zustellversuch von selbst. `Insufficient Address` und `No Such Number` heißen laut USPS, dass das Paket an den Absender zurückgeht, der es mit neuem Porto noch einmal schicken muss. In Peek zählen `No Such Number` und `Insufficient Address` als „Zustellversuch“. Geht die Sendung ins Ausland, heißt `Held at Delivery Depot/Delivery Office`, dass die Post im Zielland sie in ihrer Filiale zur Abholung für dich bereithält; die Zeile erscheint wenige Minuten nach der Ankunft dort. In Peek: „Abholbereit“. `Payment of charges - Item being held, addressee being notified` heißt, dass die Post im Zielland die Sendung zurückhält, bis der Empfänger die Einfuhrabgaben bezahlt hat, und ihn darüber benachrichtigt. In Peek: „Beim Zoll“.
+Bei `Available for Pickup` lässt sich laut USPS keine erneute Zustellung buchen: Du holst das Paket mit Lichtbildausweis ab. `Notice Left (No Secure Location Available)` heißt, dass der Zusteller keinen sicheren Ablageort fand und das Paket zurück in die Postfiliale gebracht hat; auch hier gibt es keinen zweiten Zustellversuch von selbst. `Insufficient Address` und `No Such Number` heißen laut USPS, dass das Paket an den Absender zurückgeht, der es mit neuem Porto noch einmal schicken muss. In Peek zählen `No Such Number` und `Insufficient Address` als „Zustellversuch“. Geht die Sendung ins Ausland, heißt `Attempted Delivery Abroad`, dass die Post im Zielland sie nicht zustellen konnte; ihre nächsten Scans zeigen, wie es weitergeht. In Peek: „Zustellversuch“. `Held at Delivery Depot/Delivery Office` heißt dort, dass die Post im Zielland sie in ihrer Filiale zur Abholung für dich bereithält; die Zeile erscheint wenige Minuten nach der Ankunft dort. In Peek: „Abholbereit“. `Payment of charges - Item being held, addressee being notified` heißt, dass die Post im Zielland die Sendung zurückhält, bis der Empfänger die Einfuhrabgaben bezahlt hat, und ihn darüber benachrichtigt. In Peek: „Beim Zoll“.
 
 USPS nennt die Uhrzeit eines Scans in der Ortszeit des Orts, an dem er passiert ist.
 

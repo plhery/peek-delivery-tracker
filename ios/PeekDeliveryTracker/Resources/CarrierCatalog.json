@@ -33169,7 +33169,9 @@
       "displayName": "Express One Bulgaria",
       "aliases": [
         "Express One BG",
-        "Експрес Уан"
+        "Експрес Уан",
+        "M&BM Express",
+        "М и БМ Експрес"
       ],
       "countries": [
         "BG"
@@ -52912,6 +52914,52 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.posta.ba/pracenje-posiljaka/"
+    },
+    "cvc": {
+      "displayName": "CVC",
+      "aliases": [
+        "Си Ви Си",
+        "Си Ви Си ЕООД",
+        "e-CVC"
+      ],
+      "countries": [
+        "BG"
+      ],
+      "color": "#5f3e8f",
+      "selectable": true,
+      "timezone": "Europe/Sofia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://my.e-cvc.bg/track?wb={trackingNumber}&checkit=%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B8",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://my.e-cvc.bg/track"
+    },
+    "transpress": {
+      "displayName": "Transpress",
+      "aliases": [
+        "Транспрес",
+        "Транспрес ООД",
+        "Transpres",
+        "Транспрес Деливъри",
+        "Транспрес Деливъри ЕООД"
+      ],
+      "countries": [
+        "BG"
+      ],
+      "color": "#1e6ee2",
+      "selectable": true,
+      "timezone": "Europe/Sofia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://transpress.bg/bg/prosledjavane?track-number={trackingNumber}",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://transpress.bg/bg/prosledjavane"
     }
   }
 }

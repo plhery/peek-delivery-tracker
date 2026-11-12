@@ -1124,6 +1124,51 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(initial(parcel(.springGDS, postcode: "1012 AB", data: nil)), "NL")
     }
 
+    func testAProvidersPostcodeRequestTakesTheCarriersOwnPostcodeField() throws {
+        func parcel(_ carrier: CarrierID, _ number: String, asked: Bool = true) -> Parcel {
+            let routing = CarrierDataRouting(providerInputNeeded: ProviderInputNeeded(provider: "ParcelsApp", field: .dpdPostcode))
+            return Parcel(id: UUID(), trackingNumber: number, label: "", carrier: carrier, createdAt: "2026-10-01T08:00:00Z",
+                          syncStatus: .ok, carrierData: asked ? CarrierData(routing: routing) : nil, notificationsMuted: false)
+        }
+        func request(_ parcel: Parcel, carrier: CarrierID? = nil) -> ProviderPostcodeRequest? {
+            let carrier = carrier ?? parcel.carrier
+            return ProviderPostcodeRequest(parcel: parcel, carrier: carrier,
+                                           requirements: catalog.requirements(for: carrier, trackingNumber: parcel.trackingNumber))
+        }
+
+        // PostNL's optional postcode answers it, required: every provider receives it, so it is sent as the parcel's.
+        let postNL = parcel(.springGDS, "3SABCD826405193")
+        let fields = catalog.requirements(for: .springGDS, trackingNumber: postNL.trackingNumber)
+        XCTAssertEqual(fields.map(\.field), [.dpdPostcode])
+        XCTAssertTrue(fields[0].isOptional)
+        let inField = try XCTUnwrap(request(postNL))
+        XCTAssertEqual(inField.provider, "ParcelsApp")
+        XCTAssertTrue(inField.inCarrierField)
+        let required = try XCTUnwrap(inField.requiring(fields).first { $0.field == .dpdPostcode })
+        XCTAssertFalse(required.isOptional)
+        XCTAssertFalse(required.isSatisfied(by: ""))
+        XCTAssertTrue(required.isSatisfied(by: "1234 AB"))
+        XCTAssertEqual(required.normalizedValue(" 1234 ab "), "1234 AB")
+        XCTAssertNil(inField.providerPostcode("1234 AB"), "No postcode for the provider alone")
+        // The field keeps its shape for a postcode from abroad.
+        let belgian = catalog.postcodeRequirement(fields[0], for: .springGDS, country: "BE")
+        XCTAssertFalse(try XCTUnwrap(inField.requiring([belgian]).first).isOptional)
+
+        // A carrier taking no postcode leaves the request a field of its own, sent to the provider alone.
+        let seur = parcel(.seur, "TESTPARCEL123")
+        XCTAssertEqual(catalog.requirements(for: .seur, trackingNumber: seur.trackingNumber), [])
+        let ownField = try XCTUnwrap(request(seur))
+        XCTAssertFalse(ownField.inCarrierField)
+        XCTAssertEqual(ownField.providerPostcode(" 28001 "), "28001")
+        XCTAssertEqual(ownField.providerPostcode("1234 ab"), "1234 AB")
+        XCTAssertNil(ownField.providerPostcode("12"))
+        XCTAssertNil(ownField.providerPostcode(""))
+
+        // Nothing is asked under another carrier, nor without a request.
+        XCTAssertNil(request(postNL, carrier: .dpd))
+        XCTAssertNil(request(parcel(.springGDS, "3SABCD826405193", asked: false)))
+    }
+
     func testTheDevicesCountryIsItsClocksThenItsRegionSetting() {
         XCTAssertEqual(CarrierCatalog.deviceCountry(timeZone: "Europe/Zurich", region: "FR"), "CH")
         XCTAssertEqual(CarrierCatalog.deviceCountry(timeZone: "America/New_York", region: "FR"), "FR", "A clock several countries keep")

@@ -5548,6 +5548,39 @@ describe('TrackingSyncService', () => {
     }
   });
 
+  it.each(['listed', 'unlisted'] as const)('saves a PostNL parcel only announced, %s at its postcode, without asking for it again', async (domestic) => {
+    // PostNL's own tracker lists an announced 3S parcel at its postcode without scans; its international
+    // one knows no such barcode. A provider still gated with the postcode asks the owner nothing more.
+    const number = '3SABCD826405193';
+    const fetcher = vi.fn<typeof fetch>().mockImplementation(async (url) => {
+      const address = String(url);
+      if (address.includes('jouw.postnl.nl')) {
+        return Response.json({ colli: domestic === 'listed' ? { [number]: { barcode: number, observations: [],
+          statusPhase: { index: 0, message: 'Expected' } } } : {} });
+      }
+      return Response.json(address.endsWith('/token') ? { access_token: 'visitor-token' }
+        : { data: { items: [{ item: number, message: 'The barcode was not found', events: [] }] } });
+    });
+    const registry = new AdapterRegistry({ factories: { 'spring-gds': REGISTRY.factories['spring-gds'] },
+      carriers: { 'spring-gds': 'spring-gds' } }, { fetcher, trawl: null, browserExecutablePath: null, recorder: NOOP_RECORDER, env: {} });
+    const direct = new CarrierTrackingAdapter(undefined, registry, NOOP_RECORDER);
+    const fetchUniversal = vi.fn(async (source: string) => {
+      throw source === 'ParcelsApp' ? new InputRequiredError(source, 'postcode') : new NoHistoryError(source);
+    });
+    const adapter = { fetch: vi.fn(direct.fetch.bind(direct)), fetchUniversal };
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage({ id: 'announced', carrier: 'spring-gds', tracking_number: number, dpd_postcode: '1234 AB',
+      user_id: 'owner', current_stage: null, sync_status: 'pending' });
+    const values = client.updatePackage.mock.calls.at(-1)![1];
+    expect(values).toMatchObject(domestic === 'listed' ? { current_stage: 'registered', sync_status: 'ok', sync_error: null }
+      : { sync_status: 'waiting', sync_error: null });
+    expect(values.carrier_data.routing).not.toHaveProperty('provider_input_needed');
+    expect(values.carrier_data.routing).not.toHaveProperty('postcode_refused');
+  });
+
   it('confirms a PostNL destination lookup through the real adapter, normalization and router', async () => {
     const number = 'LX314159268NL';
     const fetcher = vi.fn<typeof fetch>().mockImplementation(async (url) => Response.json(

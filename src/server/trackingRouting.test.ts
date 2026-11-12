@@ -3888,6 +3888,32 @@ describe('universal preflight and recipient input', () => {
     const asked = await filed.router.fetch(parcel({ carrier: 'dpd', tracking_number: 'NOSHAPE42' }), true).catch((error) => error);
     expect(asked.routing.provider_input_needed).toMatchObject({ field: 'dpdPostcode' });
   });
+  it('asks no second postcode of a parcel holding its own', async () => {
+    // PostNL's postcode for a 3S parcel goes to every provider. One gated all the same, now or in the
+    // Add preflight that asked without it, would have the owner type the same postcode in a second field.
+    const recorded = vi.spyOn(metrics, 'recordProviderInput').mockImplementation(() => undefined);
+    const announced = parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB' });
+    const preflightInputNeeded = vi.fn(() => ({ provider: '17TRACK', field: 'dpdPostcode' as const }));
+    for (const saved of [announced, { ...announced, carrier_data: { routing: state({ configured_carrier: 'spring-gds',
+      provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } }) } }]) {
+      const value = setup(time, { preflightInputNeeded });
+      value.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+      value.universal.mockImplementation(async (source) => {
+        throw source === 'ParcelsApp' ? new InputRequiredError(source, 'postcode') : new NoHistoryError(source);
+      });
+      const { routing } = await value.router.fetch(saved, true).catch((error) => error);
+      expect(value.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '1234 AB', 'Europe/Amsterdam', 'spring-gds');
+      expect(routing.failures.ParcelsApp).toMatchObject({ kind: 'input_required' });
+      expect(routing).not.toHaveProperty('provider_input_needed');
+    }
+    expect(recorded).not.toHaveBeenCalledWith(expect.anything(), 'asked');
+    // Without one, the request stands.
+    const bare = setup(time, { preflightInputNeeded });
+    bare.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+    bare.universal.mockRejectedValue(new NoHistoryError('Ship24'));
+    const { routing } = await bare.router.fetch({ ...announced, dpd_postcode: null }, true).catch((error) => error);
+    expect(routing.provider_input_needed).toEqual({ provider: '17TRACK', field: 'dpdPostcode' });
+  });
 });
 
 describe('a universal history naming the filed carrier by a name of several networks', () => {

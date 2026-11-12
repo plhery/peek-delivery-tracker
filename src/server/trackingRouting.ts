@@ -843,8 +843,9 @@ export class TrackingRouter {
       ? metadata.active_tracking_carrier : declared;
     const inputPlausible = plausibleInputRequest(universalNumber, [universalCarrier, state.discovered_carrier,
       state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined]);
-    // A request saved before it was found implausible stops asking the owner.
-    if (!inputPlausible) delete state.provider_input_needed;
+    // A request saved before it was found implausible stops asking the owner. So does one for a parcel
+    // holding its own postcode: every provider receives it, and the owner changes it in the carrier's field.
+    if (!inputPlausible || postcode) delete state.provider_input_needed;
     else if (!metadata.universal_input && !state.provider_input_needed) {
       state.provider_input_needed = this.options.preflightInputNeeded?.(universalNumber);
       if (state.provider_input_needed) recordProviderInput(state.provider_input_needed.provider, 'asked');
@@ -919,7 +920,7 @@ export class TrackingRouter {
         ...(wrongNumber ? { wrong_number: true as const } : {}), ...(holder && holder !== provider ? { holder } : {}),
         retry_at: iso(unseen ? Math.max(now().getTime() + retryAfterMs, beforeHourlyEnd(retryAt)) : retryAt) };
       state.failures[provider] = failure;
-      if (universalSource && kind === 'input_required') {
+      if (universalSource && kind === 'input_required' && !postcode) {
         // Counted when a parcel starts asking; a supplied postcode that is refused counts as still_required.
         if (!state.provider_input_needed && !providerInput) recordProviderInput(provider, 'asked');
         state.provider_input_needed = { provider, field: 'dpdPostcode' };

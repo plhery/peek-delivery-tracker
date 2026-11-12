@@ -12,7 +12,7 @@ struct CarrierRequirement: Codable, Hashable, Sendable {
     let field: Field
     let validator: String?
     let whenTrackingNumber: String?
-    let optional: Bool?
+    var optional: Bool?
     /// An optional input the carrier shows more of the parcel with, worth asking for when the parcel has none.
     let showsMore: Bool?
     /// The carrier's lookup reads the country the postcode is from, so the field names it; others read the postcode alone.
@@ -112,6 +112,41 @@ struct GivenPostcode: Codable, Hashable, Sendable {
         parcels.sorted { $0.createdAt > $1.createdAt }
             .compactMap { parcel in parcel.dpdPostcode.map { GivenPostcode(carrier: parcel.carrier, postcode: $0) } }
             + remembered
+    }
+}
+
+/// A tracking provider's request for the delivery postcode (ParcelsApp's, say), as the change-carrier editor takes
+/// it while the parcel keeps its carrier.
+struct ProviderPostcodeRequest: Equatable {
+    /// The provider asking.
+    let provider: String
+    /// The carrier's own postcode field answers it when the carrier has one (PostNL's for a 3S parcel): every
+    /// provider receives that postcode. Otherwise the request has a field of its own.
+    let inCarrierField: Bool
+
+    /// The request while the parcel stays with `carrier`, whose fields are `requirements`; nil when none is made.
+    init?(parcel: Parcel, carrier: CarrierID, requirements: [CarrierRequirement]) {
+        guard carrier == parcel.carrier, let needed = parcel.carrierData?.routing?.providerInputNeeded else { return nil }
+        provider = needed.provider
+        inCarrierField = requirements.contains { $0.field == .dpdPostcode }
+    }
+
+    /// The carrier's fields, the postcode the provider asks for required.
+    func requiring(_ requirements: [CarrierRequirement]) -> [CarrierRequirement] {
+        requirements.map { requirement in
+            guard requirement.field == .dpdPostcode else { return requirement }
+            var required = requirement
+            required.optional = false
+            return required
+        }
+    }
+
+    /// The postcode sent to the provider alone: the request's own field's, once it reads as a postcode. None while
+    /// the carrier's field answers it, whose postcode goes with the parcel.
+    func providerPostcode(_ typed: String) -> String? {
+        guard !inCarrierField else { return nil }
+        let value = typed.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        return value.range(of: CarrierRequirement.anyPostcode, options: .regularExpression) != nil ? value : nil
     }
 }
 

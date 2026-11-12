@@ -112,4 +112,30 @@ describe('ChangeCarrierSheet', () => {
     expect(within(picker).getByRole('option', { name: /^Detect automatically/ })).toHaveAttribute('aria-selected', 'true');
     expect(within(picker).queryByText('Current')).not.toBeInTheDocument();
   });
+
+  it('takes a provider’s postcode request in the carrier’s own postcode field', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+    const onChange = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    const asked = { ...parcel, providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode' as const } };
+    const { unmount } = render(<ChangeCarrierSheet parcel={{ ...asked, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
+      onChange={onChange} onClose={vi.fn()} />);
+    const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+    // PostNL's optional postcode is the one asked for: every provider receives it.
+    const [field] = within(sheet).getAllByRole('textbox');
+    expect(within(sheet).getAllByRole('textbox')).toHaveLength(1);
+    expect(field).toBeRequired();
+    expect(within(sheet).getByText('ParcelsApp needs the delivery postcode to look up this parcel.')).toBeInTheDocument();
+    await user.type(field, '1234 AB');
+    await user.click(within(sheet).getByRole('button', { name: 'Save carrier' }));
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'spring-gds', dpdPostcode: '1234 AB', providerPostcode: undefined }));
+    unmount();
+    // A carrier taking no postcode leaves the request a field of its own.
+    onChange.mockClear();
+    render(<ChangeCarrierSheet parcel={asked} onChange={onChange} onClose={vi.fn()} />);
+    const own = screen.getByRole('dialog', { name: 'Change carrier' });
+    await user.type(within(own).getByRole('textbox', { name: /^Delivery postcode/ }), '28001');
+    await user.click(within(own).getByRole('button', { name: 'Save carrier' }));
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'seur', providerPostcode: '28001', dpdPostcode: undefined }));
+  });
 });

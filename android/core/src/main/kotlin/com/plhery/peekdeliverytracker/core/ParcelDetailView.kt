@@ -239,12 +239,17 @@ data class CarrierChange(
         if (automatic) automaticDescription(localizer)
         else localizer.text(catalog.trackingHintKey(selectedCarrier), mapOf("carrier" to catalog.info(selectedCarrier, localizer.language).displayName))
 
-    /** The carrier's fields, the postcode's shaped for the country beside it. */
+    /**
+     * The carrier's fields, the postcode's shaped for the country beside it, and required while a provider asks for it
+     * ([providerAsks]).
+     */
     val requirements: List<CarrierRequirement>
         get() {
             val country = postcodeCountry
+            val asked = providerAsks
             return catalog.requirements(selectedCarrier, parcel.trackingNumber).map {
-                catalog.postcodeRequirement(it, selectedCarrier, country)
+                val requirement = catalog.postcodeRequirement(it, selectedCarrier, country)
+                if (asked && requirement.field == CarrierRequirement.Field.DpdPostcode) requirement.copy(optional = false) else requirement
             }
         }
 
@@ -312,13 +317,19 @@ data class CarrierChange(
         get() = requirements.firstOrNull { it.field == CarrierRequirement.Field.PhoneDigits }
 
     /**
-     * Under the fields (`requirementsHelp`): what an optional postcode gives, and why phone digits are asked and where
-     * they go, one under the other; none without either.
+     * Under the fields (`requirementsHelp`): that the provider needs the postcode while it asks for it, else what an
+     * optional postcode gives, and why phone digits are asked and where they go, one under the other; none without either.
      */
     fun requirementsHelp(localizer: Localizer): String? {
         val carrier = mapOf("carrier" to catalog.info(selectedCarrier, localizer.language).displayName)
+        val postcode = postcodeRequirement
         return listOfNotNull(
-            if (postcodeRequirement?.isOptional == true) localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier) else null,
+            when {
+                postcode == null -> null
+                providerAsks -> localizer.text("detail.providerInputNeeded", mapOf("provider" to inputProvider.orEmpty()))
+                postcode.isOptional -> localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier)
+                else -> null
+            },
             if (phoneDigitsRequirement != null) localizer.text("add.requirement.phoneDigitsHelp", carrier) else null,
         ).joinToString("\n").nonEmpty
     }
@@ -337,10 +348,17 @@ data class CarrierChange(
     }
 
     /** The lookup's provider asks for the delivery postcode, while the parcel stays with its carrier. */
-    val needsProviderPostcode: Boolean
+    val providerAsks: Boolean
         get() = selectedCarrier == parcel.carrier && parcel.carrierData?.routing?.providerInputNeeded != null
 
-    /** The provider that asks for it ([needsProviderPostcode]). */
+    /**
+     * The provider's postcode gets a field of its own: the carrier has no postcode field. One that has (PostNL's for a
+     * 3S number) takes the request, since every provider receives the parcel's postcode.
+     */
+    val needsProviderPostcode: Boolean
+        get() = providerAsks && carrierPostcodeRequirement == null
+
+    /** The provider that asks for it ([providerAsks]). */
     val inputProvider: String? get() = parcel.carrierData?.routing?.providerInputNeeded?.provider
 
     /** The provider's postcode as sent: trimmed, in capitals, and none unless it has the shape of a postcode. */

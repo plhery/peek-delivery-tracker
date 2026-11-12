@@ -217,8 +217,11 @@ class CarrierChangeTests {
         val asked = CarrierData(
             routing = CarrierDataRouting(providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode)),
         )
-        val change = start(parcel(CarrierId.Dpd, data = asked))
+        // SEUR takes no postcode: the provider's gets a field of its own.
+        val change = start(parcel(CarrierId.Seur, data = asked))
+        assertTrue(change.providerAsks)
         assertTrue(change.needsProviderPostcode)
+        assertNull(change.requirementsHelp(localizer))
         assertEquals("Example Provider", change.inputProvider)
         assertFalse(change.canSave)
         assertNull(change.copy(providerPostcode = "ab").normalizedProviderPostcode)
@@ -227,10 +230,48 @@ class CarrierChangeTests {
         assertEquals("SW1A 1AA", typed.normalizedProviderPostcode)
         assertTrue(typed.changed)
         assertTrue(typed.canSave)
+        assertNull(typed.sentPostcode)
         // Another carrier isn't the provider's to ask for.
         val other = typed.choosing(CarrierId.GlsCh)
         assertFalse(other.needsProviderPostcode)
         assertNull(other.normalizedProviderPostcode)
+    }
+
+    @Test
+    fun aProvidersPostcodeGoesInTheCarriersOwnPostcodeFieldWhenItHasOne() {
+        val asked = CarrierData(
+            destinationCountry = "NL",
+            routing = CarrierDataRouting(providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode)),
+        )
+        // PostNL's optional postcode for a 3S number is the one asked for: every provider receives it.
+        val change = start(parcel(CarrierId.SpringGDS, number = "3SABCD826405193", data = asked))
+        assertTrue(change.providerAsks)
+        assertFalse(change.needsProviderPostcode)
+        assertFalse(change.postcodeRequirement!!.isOptional)
+        assertEquals("NL", change.postcodeCountry)
+        assertEquals(
+            localizer.text("detail.providerInputNeeded", mapOf("provider" to "Example Provider")), change.requirementsHelp(localizer),
+        )
+        assertFalse(change.canSave)
+        // The provider's separate postcode counts for nothing here: it is never sent.
+        assertFalse(change.copy(providerPostcode = "1234 AB").canSave)
+        val typed = change.copy(deliveryPostcode = "1234 ab")
+        assertTrue(typed.canSave)
+        assertEquals("1234 AB", typed.sentPostcode)
+        assertNull(typed.sentPostcodeCountry)
+        assertNull(typed.copy(providerPostcode = "1234 AB").normalizedProviderPostcode)
+
+        // Not asked, the field stays optional under PostNL's own line.
+        val unasked = start(parcel(CarrierId.SpringGDS, number = "3SABCD826405193", data = CarrierData(destinationCountry = "NL")))
+        assertFalse(unasked.providerAsks)
+        assertTrue(unasked.postcodeRequirement!!.isOptional)
+        assertEquals(
+            localizer.text("add.requirement.postnlPostcodeOptionalHelp", mapOf("carrier" to "PostNL")), unasked.requirementsHelp(localizer),
+        )
+        // Nor for another carrier, whose postcode field keeps its own rule.
+        val other = change.choosing(CarrierId.Dpd)
+        assertFalse(other.providerAsks)
+        assertTrue(other.postcodeRequirement!!.isOptional)
     }
 
     @Test

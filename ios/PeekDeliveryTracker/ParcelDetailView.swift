@@ -1326,12 +1326,12 @@ struct ChangeCarrierView: View {
                     }
                 }
 
-                if needsProviderPostcode {
+                if let request = providerRequest, !request.inCarrierField {
                     Section {
                         TextField(localizer.text("add.requirement.dpdPostcode"), text: $providerPostcode)
                             .textContentType(.postalCode).textInputAutocapitalization(.characters).autocorrectionDisabled()
                     } footer: {
-                        Text(localizer.text("detail.providerInputNeeded", ["provider": parcel.carrierData!.routing!.providerInputNeeded!.provider]))
+                        Text(localizer.text("detail.providerInputNeeded", ["provider": request.provider]))
                     }
                 }
                 if let errorMessage {
@@ -1406,12 +1406,19 @@ struct ChangeCarrierView: View {
         return localizer.text("picker.auto.detected", ["carrier": catalog.info(for: carrier, language: localizer.language).displayName])
     }
 
-    /// The carrier's fields, the postcode's shaped for the country beside it.
+    /// The carrier's fields, the postcode's shaped for the country beside it and required while a provider asks for it.
     private var requirements: [CarrierRequirement] {
         let country = postcodeCountry
-        return catalog.requirements(for: selectedCarrier, trackingNumber: parcel.trackingNumber).map {
+        let fields = catalog.requirements(for: selectedCarrier, trackingNumber: parcel.trackingNumber).map {
             catalog.postcodeRequirement($0, for: selectedCarrier, country: country)
         }
+        return providerRequest?.requiring(fields) ?? fields
+    }
+
+    /// A tracking provider asking for the delivery postcode while the parcel keeps its carrier.
+    private var providerRequest: ProviderPostcodeRequest? {
+        ProviderPostcodeRequest(parcel: parcel, carrier: selectedCarrier,
+                                requirements: catalog.requirements(for: selectedCarrier, trackingNumber: parcel.trackingNumber))
     }
 
     private var refusalQuestion: NumberRefusalRequest? {
@@ -1480,21 +1487,26 @@ struct ChangeCarrierView: View {
         requirements.first(where: { $0.field == .phoneDigits })
     }
 
-    /// Under the fields: what an optional postcode gives, and why phone digits are asked and where they go.
+    /// Under the fields: the provider asking for the postcode or what an optional one gives, and why phone digits are
+    /// asked and where they go.
     private var requirementsHelp: String? {
         let carrier = ["carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName]
+        let postcodeHelp: String? = if let request = providerRequest, request.inCarrierField {
+            localizer.text("detail.providerInputNeeded", ["provider": request.provider])
+        } else if postcodeRequirement?.isOptional == true {
+            localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier)
+        } else {
+            nil
+        }
         return [
-            postcodeRequirement?.isOptional == true ? localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier) : nil,
+            postcodeHelp,
             phoneDigitsRequirement != nil ? localizer.text("add.requirement.phoneDigitsHelp", carrier) : nil,
         ].compactMap { $0 }.joined(separator: "\n").nonEmpty
     }
 
-    private var needsProviderPostcode: Bool { selectedCarrier == parcel.carrier && parcel.carrierData?.routing?.providerInputNeeded != nil }
-    private var normalizedProviderPostcode: String? {
-        guard needsProviderPostcode else { return nil }
-        let value = providerPostcode.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        return value.range(of: "^(?=.{3,12}$)(?=.*[0-9])[A-Z0-9]+(?:[ -][A-Z0-9]+)*$", options: .regularExpression) != nil ? value : nil
-    }
+    /// The provider's request has a field of its own: the carrier takes no postcode.
+    private var needsProviderPostcode: Bool { providerRequest?.inCarrierField == false }
+    private var normalizedProviderPostcode: String? { providerRequest?.providerPostcode(providerPostcode) }
     private var canSave: Bool {
         if needsProviderPostcode && normalizedProviderPostcode == nil { return false }
         guard changed else { return false }

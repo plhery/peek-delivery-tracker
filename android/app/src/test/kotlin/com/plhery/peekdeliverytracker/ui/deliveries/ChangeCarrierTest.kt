@@ -427,7 +427,9 @@ class ChangeCarrierTest {
 
     @Test
     fun aProvidersPromptOpensTheEditorOnItsPostcodeWithItsFooter() {
+        // SEUR takes no postcode: the provider's gets a field of its own.
         val asked = kettle.copy(
+            carrier = CarrierId.Seur, dpdPostcode = null,
             carrierData = CarrierData(routing = CarrierDataRouting(providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode))),
         )
         show(listOf(lamp, chair, asked, boots))
@@ -436,6 +438,7 @@ class ChangeCarrierTest {
         compose.onNode(hasText("Add postcode") and hasClickAction()).performClick()
         settle()
         node(CHANGE_CARRIER_PROVIDER_POSTCODE).assertExists()
+        assertTrue(!exists(CHANGE_CARRIER_POSTCODE))
         compose.onNode(hasText("Example Provider needs the delivery postcode to look up this parcel.")).assertExists()
         assertEquals(ContentType.PostalCode, node(CHANGE_CARRIER_PROVIDER_POSTCODE).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ContentType))
         node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
@@ -451,7 +454,41 @@ class ChangeCarrierTest {
         node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
         settle()
         assertEquals(
-            listOf(FakeDeliveries.CarrierChangeRequest(asked.id, CarrierId.Dpd, null, "8000", null, "SW1A 1AA")),
+            listOf(FakeDeliveries.CarrierChangeRequest(asked.id, CarrierId.Seur, null, null, null, "SW1A 1AA")),
+            source.carrierRequests,
+        )
+    }
+
+    @Test
+    fun aProvidersPromptOnACarrierWithItsOwnPostcodeOpensTheEditorOnThatField() {
+        // PostNL's optional postcode for a 3S number is the one asked for: every provider receives it.
+        val asked = parcel(
+            5, "Postcard", CarrierId.SpringGDS, "3SABCD826405193",
+            data = CarrierData(
+                destinationCountry = "NL",
+                routing = CarrierDataRouting(providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode)),
+            ),
+        )
+        show(listOf(lamp, chair, asked, boots))
+        compose.openCard(asked.label)
+        settle()
+        compose.onNode(hasText("Add postcode") and hasClickAction()).performClick()
+        settle()
+        node(CHANGE_CARRIER_POSTCODE).assertExists()
+        assertTrue(!exists(CHANGE_CARRIER_PROVIDER_POSTCODE))
+        // Required while the provider asks, under its line rather than PostNL's.
+        assertTrue(compose.onAllNodes(hasText("Optional"), useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
+        compose.onNode(hasText("Example Provider needs the delivery postcode to look up this parcel.")).assertExists()
+        assertTrue(
+            compose.onAllNodes(hasText("PostNL shows a parcel sent within the Netherlands only with the delivery postcode."), useUnmergedTree = true)
+                .fetchSemanticsNodes().isEmpty(),
+        )
+        node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
+        node(CHANGE_CARRIER_POSTCODE).performTextInput("1234 ab")
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.CarrierChangeRequest(asked.id, CarrierId.SpringGDS, null, "1234 AB", null, null)),
             source.carrierRequests,
         )
     }

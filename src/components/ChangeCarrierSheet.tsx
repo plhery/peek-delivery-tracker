@@ -69,9 +69,6 @@ export function ChangeCarrierSheet({
   const [postcodeCountry, setPostcodeCountry] = useState(() => startingCountry(
     selectedCarrier === 'auto' ? automaticCarrier ?? parcel.carrier : selectedCarrier));
   const [providerPostcode, setProviderPostcode] = useState('');
-  const needsProviderPostcode = Boolean(parcel.providerInputNeeded && chosenCarrier === parcel.carrier);
-  let normalizedProviderPostcode: string | undefined;
-  if (needsProviderPostcode) { try { normalizedProviderPostcode = normalizeDeliveryPostcode(providerPostcode); } catch { /* The field stays invalid until complete. */ } }
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -94,8 +91,16 @@ export function ChangeCarrierSheet({
     { key: 'fits', title: t(detected.confidence === 'high' ? 'picker.section.detected' : 'picker.section.fits'), carriers: fitting },
     { key: 'used', title: t('picker.section.used'), carriers: usedCarriers.filter((id) => !fitting.includes(id) && !own.includes(id)) },
   ].filter((section) => section.carriers.length > 0);
+  const providerAsks = Boolean(parcel.providerInputNeeded && chosenCarrier === parcel.carrier);
+  // A provider asking for the delivery postcode is answered in the carrier's own postcode field when it has
+  // one (PostNL's for a 3S parcel): every provider receives that postcode. Otherwise it gets a field of its own.
+  const ownPostcode = carrierRequirements(chosenCarrier, parcel.trackingNumber).some(({ field }) => field === 'dpdPostcode');
   const requirements = carrierRequirements(chosenCarrier, parcel.trackingNumber)
-    .map((requirement) => postcodeFieldFor(requirement, chosenCarrier, parcel.trackingNumber, postcodeCountry));
+    .map((requirement) => postcodeFieldFor(requirement, chosenCarrier, parcel.trackingNumber, postcodeCountry))
+    .map((requirement) => providerAsks && requirement.field === 'dpdPostcode' ? { ...requirement, optional: false } : requirement);
+  const needsProviderPostcode = providerAsks && !ownPostcode;
+  let normalizedProviderPostcode: string | undefined;
+  if (needsProviderPostcode) { try { normalizedProviderPostcode = normalizeDeliveryPostcode(providerPostcode); } catch { /* The field stays invalid until complete. */ } }
   const valueFor = (field: CarrierInputField) => field === 'trackingUrl' ? trackingUrl
     : field === 'phoneDigits' ? phoneDigits : dpdPostcode;
   const requirementsSatisfied = (!needsProviderPostcode || Boolean(normalizedProviderPostcode)) && requirements.every((requirement) =>
@@ -235,7 +240,9 @@ export function ChangeCarrierSheet({
                   required={!requirement.optional}
                 />
               </PostcodeCountry>
-              {requirement.help && (
+              {providerAsks && requirement.field === 'dpdPostcode' ? <small className="field__help">
+                {t('detail.providerInputNeeded', { provider: parcel.providerInputNeeded!.provider })}
+              </small> : requirement.help && (
                 <small className="field__help">
                   {t(requirementHelpKey(chosenCarrier, requirement), { carrier: carrier.name })}
                 </small>

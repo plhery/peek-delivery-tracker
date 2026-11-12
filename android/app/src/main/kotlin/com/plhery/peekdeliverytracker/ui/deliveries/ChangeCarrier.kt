@@ -294,7 +294,8 @@ private fun ChangeCarrierView(
 
 /**
  * `ChangeCarrierView`'s `Form`: the number and what changing its carrier does; the carrier, whose row pushes the picker,
- * and how it tracks; the fields the carrier asks for; the postcode a provider asks for; and why the change failed.
+ * and how it tracks; the fields the carrier asks for; the postcode a provider asks for, in the carrier's own field when
+ * it has one ([CarrierChange.needsProviderPostcode]); and why the change failed.
  * Cancel and Save in the bar, Save on only once the change is complete, and both off while it is saved. TalkBack starts
  * at the title.
  */

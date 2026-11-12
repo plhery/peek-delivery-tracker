@@ -125,6 +125,10 @@ class AppNotificationsTest {
         // The evening before, there, though it is the same day in Zurich.
         assertEquals("Books · delivered on 6 September at 16:51", told(deliveredPush("2026-09-06T23:51:00.000Z")))
         assertEquals("Books · am 6. September um 16:51 Uhr zugestellt", told(deliveredPush("2026-09-06T23:51:00.000Z", "de-CH")))
+        assertEquals(
+            "Books · delivered on 6 September at 4:51 PM",
+            AppNotifications.deviceClockBody(deliveredPush("2026-09-06T23:51:00.000Z"), now, pacific, use24HourTime = false),
+        )
         // A scan this clock calls the future, or a push without the fields, keeps the service's body.
         assertNull(told(deliveredPush("2026-09-07T12:50:00.000Z")))
         assertNull(told(deliveredPush("not a time")))
@@ -133,6 +137,21 @@ class AppNotificationsTest {
         notifications.post(deliveredPush(now.minusSeconds(60).toString()))
         val written = AppNotifications.deviceClockBody(deliveredPush(now.minusSeconds(60).toString()))
         assertEquals(written, posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
+    }
+
+    @Test
+    fun aTimedEstimateUsesTheClockPreferenceWhenPosted() {
+        val defaults = PreferencesDefaults.standard(context)
+        val push = parcelPush("Arriving at 16:00") + ("body_12_hour" to "Arriving at 4:00 pm")
+        notifications.post(push)
+        assertEquals("Arriving at 16:00", posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
+        try {
+            defaults.set(true, forKey = PreferencesDefaults.USE_12_HOUR_TIME)
+            notifications.post(push)
+            assertEquals("Arriving at 4:00 pm", posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
+        } finally {
+            defaults.removeObject(forKey = PreferencesDefaults.USE_12_HOUR_TIME)
+        }
     }
 
     @Test

@@ -12,7 +12,7 @@ self.addEventListener('activate', (event) => {
  * sentence with the time left out, for a delivery today and on another day (deviceClockFields in
  * src/server/push.ts). Null when it sent none, and the service's own body shows.
  */
-function deviceClockBody(payload) {
+function deviceClockBody(payload, use24HourTime) {
   const { scan_at: at, body_same_day: sameDay, body_other_day: otherDay, date_locale: dateLocale } = payload;
   if (typeof at !== 'string' || typeof sameDay !== 'string' || typeof otherDay !== 'string') return null;
   const scanned = new Date(at);
@@ -20,14 +20,26 @@ function deviceClockBody(payload) {
   if (Number.isNaN(scanned.getTime()) || scanned > now) return null;
   const today = scanned.toDateString() === now.toDateString();
   const two = (value) => String(value).padStart(2, '0');
-  const time = `${two(scanned.getHours())}:${two(scanned.getMinutes())}`;
-  let date;
+  const dayOptions = { day: 'numeric', month: 'long' };
+  let day;
   try {
-    date = new Intl.DateTimeFormat(typeof dateLocale === 'string' ? dateLocale : undefined, { day: 'numeric', month: 'long' }).format(scanned);
+    day = new Intl.DateTimeFormat(typeof dateLocale === 'string' ? dateLocale : undefined, dayOptions);
   } catch {
-    date = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'long' }).format(scanned);
+    day = new Intl.DateTimeFormat(undefined, dayOptions);
   }
+  const time = use24HourTime ? `${two(scanned.getHours())}:${two(scanned.getMinutes())}`
+    : new Intl.DateTimeFormat(day.resolvedOptions().locale, { hour: 'numeric', minute: '2-digit', hourCycle: 'h12' }).format(scanned);
+  const date = day.format(scanned);
   return (today ? sameDay : otherDay).replaceAll('{{time}}', () => time).replaceAll('{{date}}', () => date);
+}
+
+async function pushUses24HourTime() {
+  try {
+    const preference = await caches.match('/__peek/preferences/clock', { cacheName: 'peek-preferences' });
+    return (await preference?.text()) !== 'false';
+  } catch {
+    return true;
+  }
 }
 
 self.addEventListener('push', (event) => {
@@ -63,17 +75,22 @@ self.addEventListener('push', (event) => {
   const lang = Object.hasOwn(fallbackCopy, requestedLanguage) ? requestedLanguage : 'en';
   const [fallbackTitle, fallbackBody] = fallbackCopy[lang];
   const title = text(payload.title, fallbackTitle, 120);
-  const options = {
-    body: text(deviceClockBody(payload) ?? payload.body, fallbackBody, 500),
-    lang,
-    icon: text(payload.icon, '/icons/icon-192.png', 2_048),
-    badge: text(payload.badge, '/icons/badge-96.png', 2_048),
-    tag: text(payload.tag, 'parcel-update', 120),
-    renotify: true,
-    data: payload.data && typeof payload.data === 'object' ? payload.data : { url: '/' },
+  const show = async () => {
+    const use24HourTime = typeof payload.scan_at !== 'string' && typeof payload.body_12_hour !== 'string'
+      ? true : await pushUses24HourTime();
+    const fallback = use24HourTime ? payload.body : text(payload.body_12_hour, payload.body, 500);
+    return self.registration.showNotification(title, {
+      body: text(deviceClockBody(payload, use24HourTime) ?? fallback, fallbackBody, 500),
+      lang,
+      icon: text(payload.icon, '/icons/icon-192.png', 2_048),
+      badge: text(payload.badge, '/icons/badge-96.png', 2_048),
+      tag: text(payload.tag, 'parcel-update', 120),
+      renotify: true,
+      data: payload.data && typeof payload.data === 'object' ? payload.data : { url: '/' },
+    });
   };
 
-  const tasks = [self.registration.showNotification(title, options)];
+  const tasks = [show()];
   if (self.navigator && typeof self.navigator.setAppBadge === 'function') {
     tasks.push(Promise.resolve(self.navigator.setAppBadge(1)).catch(() => undefined));
   }

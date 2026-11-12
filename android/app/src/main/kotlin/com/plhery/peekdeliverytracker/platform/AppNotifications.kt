@@ -82,7 +82,9 @@ class AppNotifications(
      */
     fun post(data: Map<String, String>) {
         val title = data["title"].orEmpty()
-        val body = deviceClockBody(data) ?: data["body"].orEmpty()
+        val defaults = PreferencesDefaults.standard(context)
+        val use24HourTime = !defaults.bool(PreferencesDefaults.USE_12_HOUR_TIME)
+        val body = deviceClockBody(data, use24HourTime = use24HourTime) ?: data["body"].orEmpty()
         if (title.isEmpty() && body.isEmpty()) return
         if (!manager.areNotificationsEnabled()) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
@@ -91,7 +93,6 @@ class AppNotifications(
             return
         }
         if (manager.getNotificationChannel(PARCELS) == null || manager.getNotificationChannel(FRIENDS) == null) {
-            val defaults = PreferencesDefaults.standard(context)
             updateChannels(Localizer(AppLanguage.current(defaults.string(AppLanguage.storageKey), Device.preferredLanguages()), variant = "android"))
         }
         val route = NativeRoute(remoteNotification = data)
@@ -222,17 +223,24 @@ class AppNotifications(
          * A delivery's time on the phone's clock, wherever it is now: the service sends the scan's instant (`scan_at`)
          * and the sentence with the time left out, for a delivery on the phone's day and on another (`body_same_day`,
          * `body_other_day`), and the language tag its day is written in (`date_locale`), as `deviceClockFields` in
-         * src/server/push.ts sends them. Null when it sent none, or a scan this clock calls the future: the service's
-         * own body shows. "HH:mm" as the service writes it, and the day as the browser's push worker does.
+         * src/server/push.ts sends them. Estimates and deliveries without a usable scan time use the server's
+         * alternate body when the app uses a 12 hour clock.
          */
-        fun deviceClockBody(data: Map<String, String>, now: Instant = AppClock.now(), zone: ZoneId = ZoneId.systemDefault()): String? {
-            val sameDay = data["body_same_day"] ?: return null
-            val otherDay = data["body_other_day"] ?: return null
-            val scanned = data["scan_at"]?.let { runCatching { Instant.parse(it) }.getOrNull() } ?: return null
-            if (scanned.isAfter(now)) return null
+        fun deviceClockBody(
+            data: Map<String, String>,
+            now: Instant = AppClock.now(),
+            zone: ZoneId = ZoneId.systemDefault(),
+            use24HourTime: Boolean = true,
+        ): String? {
+            val alternate = if (use24HourTime) null else data["body_12_hour"]
+            val sameDay = data["body_same_day"] ?: return alternate
+            val otherDay = data["body_other_day"] ?: return alternate
+            val scanned = data["scan_at"]?.let { runCatching { Instant.parse(it) }.getOrNull() } ?: return alternate
+            if (scanned.isAfter(now)) return alternate
             val local = scanned.atZone(zone)
-            val time = "%02d:%02d".format(Locale.ROOT, local.hour, local.minute)
             val locale = data["date_locale"]?.let(Locale::forLanguageTag)?.takeIf { it.language.isNotEmpty() } ?: Locale.getDefault()
+            val time = if (use24HourTime) "%02d:%02d".format(Locale.ROOT, local.hour, local.minute)
+                else Localizer(AppLanguage.fromTag(locale.toLanguageTag()) ?: AppLanguage.En, use24HourTime = false).clockTime(scanned, zone)
             val day = android.icu.text.DateFormat.getInstanceForSkeleton("dMMMM", locale).apply {
                 timeZone = android.icu.util.TimeZone.getTimeZone(zone.id)
             }.format(Date.from(scanned))

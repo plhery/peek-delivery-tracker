@@ -54,6 +54,8 @@ class PreferencesDefaults(private val preferences: SharedPreferences) : UserDefa
     override fun hasObject(forKey: String): Boolean = preferences.contains(forKey)
 
     companion object {
+        internal const val USE_12_HOUR_TIME = "sdt.native.use12HourTime"
+
         /** `UserDefaults.standard`: the file the appearance is kept in too. */
         fun standard(context: Context): PreferencesDefaults =
             PreferencesDefaults(context.getSharedPreferences(AppearanceStore.PREFERENCES, Context.MODE_PRIVATE))

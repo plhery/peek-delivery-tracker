@@ -289,6 +289,7 @@ describe('what an alert says', () => {
     expect(payload).toEqual({
       title: 'It’s arrived',
       body: 'Delivered at 14:30\nExample Town',
+      body_12_hour: 'Delivered at 2:30 pm\nExample Town',
       scan_at: '2026-10-02T12:30:00.000Z',
       body_same_day: 'Delivered at {{time}}\nExample Town',
       body_other_day: 'Delivered on {{date}} at {{time}}\nExample Town',
@@ -329,7 +330,9 @@ describe('what an alert says', () => {
       body_other_day: 'Delivered on {{date}} at {{time}}\nExample Town', date_locale: 'en-CH',
     };
     expect(alerts.payload(delivered)).toMatchObject(clock);
-    expect(alerts.appPayload(delivered)).toMatchObject({ aps: { 'mutable-content': 1 }, ...clock });
+    expect(alerts.appPayload(delivered)).toMatchObject({
+      aps: { 'mutable-content': 1 }, body_12_hour: 'Delivered at 2:30 pm\nExample Town', ...clock,
+    });
     const travelling = alerts.appPayload(row());
     expect(travelling.aps).not.toHaveProperty('mutable-content');
     expect(Object.keys(travelling)).toEqual(['aps', 'link_id']);

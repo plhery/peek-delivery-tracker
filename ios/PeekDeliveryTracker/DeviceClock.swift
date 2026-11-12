@@ -6,18 +6,40 @@ import Foundation
 /// `deviceClockFields` in src/server/push.ts writes them. The notification service extension fills them in as the push
 /// arrives. Nil keeps the server's own sentence: a push without them, or a delivery later than this device's clock.
 enum DeviceClock {
-    static func body(_ userInfo: [AnyHashable: Any], now: Date = Date(), timeZone: TimeZone = .current) -> String? {
+    static let preferenceKey = "sdt.native.use24HourTime"
+
+    static func sharedDefaults(bundle: Bundle = .main) -> UserDefaults? {
+        guard let group = bundle.object(forInfoDictionaryKey: "SDTAppGroupIdentifier") as? String, !group.isEmpty else {
+            return nil
+        }
+        return UserDefaults(suiteName: group)
+    }
+
+    static func body(
+        _ userInfo: [AnyHashable: Any], now: Date = Date(), timeZone: TimeZone = .current, use24HourTime: Bool = true
+    ) -> String? {
         guard let sameDay = userInfo["body_same_day"] as? String, let otherDay = userInfo["body_other_day"] as? String,
-              let scanned = (userInfo["scan_at"] as? String).flatMap(instant), scanned <= now else { return nil }
+              let scanned = (userInfo["scan_at"] as? String).flatMap(instant), scanned <= now else {
+            return use24HourTime ? nil : userInfo["body_12_hour"] as? String
+        }
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone
-        let clock = calendar.dateComponents([.hour, .minute], from: scanned)
-        let time = "\(twoDigits(clock.hour ?? 0)):\(twoDigits(clock.minute ?? 0))"
         let day = DateFormatter()
         let tag = userInfo["date_locale"] as? String ?? ""
         day.locale = tag.isEmpty ? .current : Locale(identifier: tag)
         day.timeZone = timeZone
         day.setLocalizedDateFormatFromTemplate("dMMMM")
+        let time: String
+        if use24HourTime {
+            let clock = calendar.dateComponents([.hour, .minute], from: scanned)
+            time = "\(twoDigits(clock.hour ?? 0)):\(twoDigits(clock.minute ?? 0))"
+        } else {
+            let formatter = DateFormatter()
+            formatter.locale = day.locale
+            formatter.timeZone = timeZone
+            formatter.dateFormat = day.locale.language.languageCode?.identifier == "zh" ? "ah:mm" : "h:mm a"
+            time = formatter.string(from: scanned)
+        }
         return (calendar.isDate(scanned, inSameDayAs: now) ? sameDay : otherDay)
             .replacingOccurrences(of: "{{time}}", with: time)
             .replacingOccurrences(of: "{{date}}", with: day.string(from: scanned))

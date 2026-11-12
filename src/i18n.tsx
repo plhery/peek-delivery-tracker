@@ -34,6 +34,16 @@ const CLOCK_STORAGE_KEY = 'deliveryTrackerUse24HourTime';
 
 import en from '../shared/locales/en.json';
 
+async function savePushClockPreference(use24HourTime: boolean) {
+  try {
+    if (!window.caches) return;
+    const cache = await window.caches.open('peek-preferences');
+    try { use24HourTime = window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false'; }
+    catch { /* Use the choice from this tab. */ }
+    await cache.put('/__peek/preferences/clock', new Response(String(use24HourTime)));
+  } catch { /* Push notifications use the default when shared storage is unavailable. */ }
+}
+
 // English ships with the app. The server sends the page's own language with
 // the page, and the others load only when someone chooses them.
 const loaders: Record<Exclude<Locale, 'en'>, () => Promise<{ default: Messages }>> = {
@@ -130,7 +140,11 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
 
   useLayoutEffect(() => {
     const readClock = () => {
-      try { setClock(window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false'); }
+      try {
+        const enabled = window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false';
+        setClock(enabled);
+        void savePushClockPreference(enabled);
+      }
       catch { /* Keep the current clock when storage is unavailable. */ }
     };
     const syncClock = (event: StorageEvent) => {
@@ -145,6 +159,7 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     setClock(enabled);
     try { window.localStorage.setItem(CLOCK_STORAGE_KEY, String(enabled)); }
     catch { /* Keep the choice for this session. */ }
+    void savePushClockPreference(enabled);
   }, []);
 
   const show = useCallback((next: Locale) => {

@@ -228,7 +228,7 @@ describe('an Android phone\'s notifications', () => {
     const { message } = sentBody(request!);
     expect(message.data).toEqual({ title: aps.alert.title, body: aps.alert.body, ...fields });
     // A delivery carries its time for the phone's clock.
-    expect(Object.keys(message.data).sort()).toEqual(['body', 'body_other_day', 'body_same_day', 'date_locale', 'parcel_id', 'scan_at', 'title']);
+    expect(Object.keys(message.data).sort()).toEqual(['body', 'body_12_hour', 'body_other_day', 'body_same_day', 'date_locale', 'parcel_id', 'scan_at', 'title']);
     expect(Object.values(message.data).every((value) => typeof value === 'string')).toBe(true);
     expect(message.notification).toBeUndefined();
     expect(message).toMatchObject({ token: deviceToken, android: { collapse_key: 'package-1' } });

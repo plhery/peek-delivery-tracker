@@ -118,6 +118,7 @@ describe('friendly parcel notifications', () => {
       body_same_day: 'Coffee beans · delivered at {{time}}',
       body_other_day: 'Coffee beans · delivered on {{date}} at {{time}}',
       date_locale: 'en-CH',
+      body_12_hour: 'Coffee beans · delivered at 2:32 pm',
     };
     expect(web.payload(delivered)).toMatchObject({ body: 'Coffee beans · delivered at 14:32', ...clock });
     const app = native.eventPayload(delivered);
@@ -130,10 +131,22 @@ describe('friendly parcel notifications', () => {
     for (const changes of [{ stage: 'out_for_delivery' }, { event_has_time: false }, { occurred_at: '2026-09-08T12:32:00Z' }]) {
       const payload = web.payload({ ...delivered, ...changes });
       expect(Object.keys(payload)).not.toContain('scan_at');
+      expect(payload).not.toHaveProperty('body_12_hour');
       const quiet = native.eventPayload({ ...delivered, ...changes });
       expect(Object.keys(quiet)).not.toContain('scan_at');
       expect(quiet.aps).not.toHaveProperty('mutable-content');
     }
+  });
+
+  it('sends both clock formats for a timed delivery estimate', () => {
+    const estimate = { ...delivered, stage: 'out_for_delivery', expected_delivery: '2026-09-07 14:00–16:30' };
+    const browser = web.payload(estimate);
+    expect(browser.body).toContain('14:00–16:30');
+    expect(browser.body_12_hour).toContain('2:00 pm–4:30 pm');
+    expect(native.eventPayload(estimate)).toMatchObject({
+      aps: { 'mutable-content': 1, alert: { body: browser.body } },
+      body_12_hour: browser.body_12_hour,
+    });
   });
 
   it('does not call delayed alerts recent, and dates deliveries from a previous day', () => {
@@ -377,7 +390,7 @@ describe('service worker fallback copy', () => {
     expect(shown[0]![1].lang).toBe(locale);
   });
 
-  it('writes a delivery\'s time on the device\'s clock, wherever it is', () => {
+  it.each([true, false])('writes a delivery on the device clock with 24 hour time set to %s', async (use24HourTime) => {
     const zone = process.env.TZ;
     process.env.TZ = 'America/Los_Angeles';
     try {
@@ -386,28 +399,41 @@ describe('service worker fallback copy', () => {
       vi.useFakeTimers({ now, toFake: ['Date'] });
       runInNewContext(worker, {
         Date,
-        caches: { delete: async () => true },
+        caches: {
+          delete: async () => true,
+          match: async () => use24HourTime ? undefined : { text: async () => 'false' },
+        },
         self: {
           addEventListener: (type: string, listener: (event: unknown) => void) => { listeners[type] = listener; },
           registration: { showNotification: async (_title: string, options: { body: string }) => { shown.push(options.body); } },
         },
       });
-      const show = (payload: JsonObject) => listeners.push!({ data: { json: () => payload }, waitUntil: () => undefined });
-      show(web.payload(delivered));
+      const show = (payload: JsonObject) => new Promise<void>((resolve, reject) => {
+        listeners.push!({ data: { json: () => payload }, waitUntil: (work: Promise<unknown>) => { void work.then(() => resolve(), reject); } });
+      });
+      await show(web.payload(delivered));
       // The evening before, there, though it is the same day in Zurich.
-      show(web.payload({ ...delivered, occurred_at: '2026-09-06T23:51:00Z' }));
-      show(web.payload({ ...delivered, locale: 'de', occurred_at: '2026-09-06T23:51:00Z' }));
-      show({ ...web.payload(delivered), scan_at: '2026-09-07T12:50:00Z' });
-      show({ ...web.payload(delivered), date_locale: 'not a language' });
-      show(web.payload({ ...delivered, stage: 'out_for_delivery' }));
-      expect(shown).toEqual([
+      await show(web.payload({ ...delivered, occurred_at: '2026-09-06T23:51:00Z' }));
+      await show(web.payload({ ...delivered, locale: 'de', occurred_at: '2026-09-06T23:51:00Z' }));
+      await show({ ...web.payload(delivered), scan_at: '2026-09-07T12:50:00Z' });
+      await show({ ...web.payload(delivered), date_locale: 'not a language' });
+      const eta = web.payload({ ...delivered, stage: 'out_for_delivery', expected_delivery: '2026-09-07 14:00–16:30' });
+      await show(eta);
+      expect(shown.map((message) => message.toLowerCase())).toEqual(use24HourTime ? [
         'Coffee beans · delivered at 05:32',
         'Coffee beans · delivered on 6 September at 16:51',
         'Coffee beans · am 6. September um 16:51 Uhr zugestellt',
         // A scan the device's clock calls the future is told as the service wrote it.
         'Coffee beans · delivered at 14:32',
         'Coffee beans · delivered at 05:32',
-        web.payload({ ...delivered, stage: 'out_for_delivery' }).body,
+        eta.body,
+      ].map((message) => String(message).toLowerCase()) : [
+        'coffee beans · delivered at 5:32 am',
+        'coffee beans · delivered on 6 september at 4:51 pm',
+        'coffee beans · am 6. september um 4:51 pm uhr zugestellt',
+        'coffee beans · delivered at 2:32 pm',
+        'coffee beans · delivered at 5:32 am',
+        String(eta.body_12_hour).toLowerCase(),
       ]);
     } finally {
       vi.useRealTimers();

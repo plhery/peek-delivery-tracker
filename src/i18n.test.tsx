@@ -342,6 +342,20 @@ describe('localization', () => {
       .toBe(`time.today, ${time}`);
   });
 
+  it('uses the chosen clock for delivery windows and keeps date only estimates as dates', () => {
+    const t = ((key: string) => key) as Translate;
+    const now = new Date(2026, 10, 12, 8).getTime();
+    const range = '2026-11-12 00:15–15:30';
+
+    expect(localizedExpectedDelivery(range, t, 'en-US', now)).toBe('time.today, 00:15–15:30');
+    expect(localizedExpectedDelivery(range, t, 'en-US', now, false)).toBe('time.today, 12:15 AM–3:30 PM');
+    expect(localizedDeliveryWindow('2026-11-12T11:30:00', '2026-11-12T12:30:00', t, 'en-US', now, false))
+      .toBe('time.today, 11:30 AM–12:30 PM');
+    expect(localizedExpectedDelivery('2026-11-12 23:00–24:00', t, 'en-US', now, false))
+      .toBe('time.today, 11:00 PM–12:00 AM');
+    expect(localizedExpectedDelivery('2026-11-12', t, 'en-US', now, false)).toBe('time.today');
+  });
+
   it('formats calendar dates with the selected language tag', () => {
     const t = ((key: string) => key) as Translate;
     const now = new Date(2026, 0, 1, 12).getTime();

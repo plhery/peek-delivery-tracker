@@ -152,7 +152,7 @@ class AppContainer(
      * change ([deviceLanguagesChanged]). Where the copy names the iPhone, its `.android` variant names this device and
      * Android's settings, as an iPad reads `.ipad`.
      */
-    val localizer = Localizer(deviceLanguage(), variant = "android")
+    val localizer = Localizer(deviceLanguage(), variant = "android", use24HourTime = !defaults.bool(USE_12_HOUR_TIME))
 
     /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
     private var followed: AppLanguage? = null
@@ -438,6 +438,14 @@ class AppContainer(
             combine(identity, localizer.languageFlow) { _, language -> language }.collectLatest { session.saveEmailLanguage(it) }
         }
         scope.launch { localizer.languageFlow.drop(1).collect(::languageChanged) }
+        scope.launch {
+            localizer.use24HourTimeFlow.collect { enabled ->
+                if (defaults.bool(USE_12_HOUR_TIME) == enabled) {
+                    defaults.set(!enabled, forKey = USE_12_HOUR_TIME)
+                    parcels.refreshDeliverySurfaces()
+                }
+            }
+        }
         context.registerComponentCallbacks(object : ComponentCallbacks {
             override fun onConfigurationChanged(newConfig: Configuration) = deviceLanguagesChanged()
 
@@ -574,6 +582,7 @@ class AppContainer(
         private const val DEBUG_PARCEL_FEEDBACK_PARCEL = "sdt.debug.parcelFeedback.parcel"
         private const val DEBUG_PARCEL_SHARE = "sdt.debug.parcelShare"
         private const val DEBUG_REVIEW_DUE = "sdt.debug.reviewDue"
+        private const val USE_12_HOUR_TIME = "sdt.native.use12HourTime"
         private const val DEBUG_STORE_SCREENSHOTS = "sdt.debug.storeScreenshots"
 
         /** A container made on the IO dispatcher, where its stores first read the Keystore and the disk. */

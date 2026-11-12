@@ -141,7 +141,8 @@
 .tracking-journal[open] > summary svg { transform: rotate(180deg); }
 .tracking-journal ol { list-style: none; margin: 0; padding: 0; }
 .tracking-journal h3 { color: var(--ink-soft); text-transform: uppercase; font-size: 10px; font-weight: 400; letter-spacing: 1px; margin: 22px 0 14px; }
-.tracking-journal__events > li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; margin-bottom: 20px; }
+.tracking-journal__events > li { display: grid; grid-template-columns: var(--journal-clock-width, 40px) minmax(0, 1fr); gap: 12px; margin-bottom: 20px; }
+.tracking-journal--am-pm { --journal-clock-width: 64px; }
 .tracking-journal time { color: var(--ink-soft); font-size: 11px; padding-top: 1px; font-variant-numeric: tabular-nums; }
 .tracking-journal__current time { color: var(--tone); }
 .tracking-journal p { margin: 0; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }

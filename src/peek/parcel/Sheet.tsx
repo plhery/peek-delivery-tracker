@@ -42,7 +42,7 @@ export function Sheet({ title, intro, className = '', onClose, children }: {
  * switch describes it.
  */
 export function SwitchRow({ icon, title, hint, value, checked, disabled = false, busy = false, onChange }: {
-  icon: ReactNode;
+  icon?: ReactNode;
   title: string;
   hint?: string;
   /** What the switch is about, such as the name it shows. */
@@ -57,7 +57,7 @@ export function SwitchRow({ icon, title, hint, value, checked, disabled = false,
   const described = [hint && `${id}-hint`, value && `${id}-value`].filter(Boolean).join(' ') || undefined;
   return <div className="peeks-switch" data-disabled={disabled || undefined}>
     <label htmlFor={id}>
-      <span className="peeks-switch__icon" aria-hidden="true">{icon}</span>
+      {icon && <span className="peeks-switch__icon" aria-hidden="true">{icon}</span>}
       <span className="peeks-switch__text">
         <strong id={`${id}-title`}>{title}</strong>
         {hint && <small id={`${id}-hint`}>{hint}</small>}

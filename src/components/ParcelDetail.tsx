@@ -122,7 +122,7 @@ export function ParcelDetail({
   onArchive: (parcel: ParcelWithEvents) => Promise<unknown>;
   onDelete: (parcel: ParcelWithEvents) => Promise<unknown>;
 }) {
-  const { locale, languageTag, t } = useI18n();
+  const { locale, languageTag, t, use24HourTime } = useI18n();
   const carrier = carrierInfo(activeTrackingCarrierId(parcel), locale);
   const displayedCarrier = carrierInfo(displayedCarrierId(parcel), locale);
   // While no carrier is known, the header names the one the number points to, as probable.
@@ -671,7 +671,7 @@ export function ParcelDetail({
           <p className="detail__arrival">
             {completionDate
               ? localizedDatePhrase(completionDate, t)
-              : localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate!, t, languageTag)}
+              : localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate!, t, languageTag, undefined, use24HourTime)}
           </p>
         )}
         <div className="detail__progress"><ProgressTrack stage={current?.stage ?? null} /></div>
@@ -766,7 +766,7 @@ export function ParcelDetail({
       <div className="detail__sync">
         <div className="detail__freshness">
           <div className="detail__freshness-times">
-            {parcel.nextCheckAt && !parcel.archivedAt && <span>{t('detail.nextCheckAfter', { date: new Date(parcel.nextCheckAt).toLocaleString(languageTag) })}</span>}
+            {parcel.nextCheckAt && !parcel.archivedAt && <span>{t('detail.nextCheckAfter', { date: new Date(parcel.nextCheckAt).toLocaleString(languageTag, { hourCycle: use24HourTime ? 'h23' : 'h12' }) })}</span>}
             {lastChecked && <span>{t('detail.lastChecked', { date: lastChecked })}</span>}
             {lastUpdate && <span>{t('detail.lastUpdate', { date: lastUpdate })}</span>}
           </div>

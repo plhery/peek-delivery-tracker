@@ -499,6 +499,8 @@ struct AccountView: View {
                         SettingsAppearancePicker(appearance: $appearance)
                         settingsDivider
                         SettingsLanguageRow()
+                        settingsDivider
+                        SettingsClockRow()
                     }
                     SettingsGroup {
                         NavigationLink { accountPage } label: {
@@ -877,6 +879,20 @@ private struct SettingsLanguageRow: View {
     }
 }
 
+private struct SettingsClockRow: View {
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        Toggle(isOn: $localizer.use24HourTime) {
+            SettingsRow(title: localizer.text("settings.use24HourTime"), padded: false)
+        }
+        .rowToggle()
+        .padding(15)
+        .tint(settingsGreen)
+        .accessibilityIdentifier("settings.clock")
+    }
+}
+
 private struct SettingsAppearancePicker: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -986,6 +1002,8 @@ private struct GeneralSettings: View {
                 SettingsAppearancePicker(appearance: $appearance)
                 settingsDivider
                 SettingsLanguageRow()
+                settingsDivider
+                SettingsClockRow()
             }
             SettingsGroup {
                 Toggle(isOn: $menuBarShown) {

@@ -15,11 +15,11 @@ import { openParcelLink, parcelLinkPath } from '../route';
 const LISTED = 3;
 
 function OtherParcel({ recent }: { recent: RecentParcel }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const { parcel, numberHint } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
   const estimate = parcelDeliveryEstimate(parcel);
-  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : localizedParcelCompletionDate(parcel, languageTag, t);
+  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
   const number = parcel.trackingNumber ? shortNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : t('common.parcel');
   function open(event: MouseEvent) {

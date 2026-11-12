@@ -868,7 +868,7 @@ struct ParcelDetailView: View {
             // When the carrier was last asked and last said something, as the web says them.
             VStack(alignment: .leading, spacing: 3) {
                 if let next = parcel.carrierData?.routing?.nextCheckAt.flatMap(DateParser.date), !parcel.isArchived {
-                    Text(localizer.text("detail.nextCheckAfter", ["date": next.formatted(Date.FormatStyle(date: .abbreviated, time: .shortened).locale(localizer.language.locale))]))
+                    Text(localizer.text("detail.nextCheckAfter", ["date": localizer.abbreviatedDateTime(next)]))
                         .font(.caption)
                 }
                 if let lastSyncedAt = parcel.lastSyncedAt {
@@ -1777,15 +1777,17 @@ private struct JournalEventRow: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     /// The time's column grows with its text; at the largest sizes the time goes above the scan instead.
     @ScaledMetric(relativeTo: .caption2) private var timeWidth: CGFloat = 38
+    @ScaledMetric(relativeTo: .caption2) private var timeWidthWithPeriod: CGFloat = 64
 
     var body: some View {
         let layout = typeSize.isAccessibilitySize
             ? AnyLayout(VStackLayout(alignment: .leading, spacing: 2)) : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        let column = localizer.use24HourTime ? timeWidth : timeWidthWithPeriod
         layout {
             Text(time)
                 .font(.caption2).monospacedDigit()
                 .foregroundStyle(isCurrent ? tint : Brand.secondaryText)
-                .frame(width: typeSize.isAccessibilitySize ? nil : timeWidth, alignment: .leading)
+                .frame(width: typeSize.isAccessibilitySize ? nil : column, alignment: .leading)
                 .padding(.top, 2)
             VStack(alignment: .leading, spacing: 4) {
                 Text(syncing && isCurrent && event.stage == .pending
@@ -1872,12 +1874,14 @@ private struct PlannedStepRow: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     /// The time column of a scan's row, which the circle stands in.
     @ScaledMetric(relativeTo: .caption2) private var timeWidth: CGFloat = 38
+    @ScaledMetric(relativeTo: .caption2) private var timeWidthWithPeriod: CGFloat = 64
     /// The circle, 12 across beside footnote words at the default size, grown with them.
     @ScaledMetric(relativeTo: .footnote) private var mark: CGFloat = 12
 
     var body: some View {
         let large = typeSize.isAccessibilitySize
         let scale = mark / 12
+        let column = localizer.use24HourTime ? timeWidth : timeWidthWithPeriod
         let wording = localizer.eventDescription(step.description.nonEmpty ?? localizer.text(step.stage.localizationKey))
         let when = localizer.plannedDate(step)
         let location = step.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
@@ -1887,7 +1891,7 @@ private struct PlannedStepRow: View {
                 .stroke(Brand.secondaryText, style: StrokeStyle(lineWidth: 1.2 * scale, dash: [2.4 * scale, 1.9 * scale]))
                 .frame(width: mark, height: mark)
                 .padding(.top, 3 * scale)
-                .frame(width: large ? mark : max(mark, timeWidth), alignment: .leading)
+                .frame(width: large ? mark : max(mark, column), alignment: .leading)
             VStack(alignment: .leading, spacing: 0) {
                 Text(wording)
                     .font(.footnote).foregroundStyle(Brand.secondaryText)

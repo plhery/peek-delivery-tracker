@@ -1153,9 +1153,29 @@ final class ParcelStore: ObservableObject {
                 item.deliveredAt = arrived
                 return item
             }
-        return DeliveryWidgetSelection.parcels(
+        let listed = DeliveryWidgetSelection.parcels(
             onTheWay: nextDeliveries(of: parcels, localizer: localizer), delivered: delivered, now: now, limit: .max
         )
+        // Preview: where the app's list puts each parcel, which one it shows as Next up, and each parcel's last steps.
+        var sections: [UUID: String] = [:]
+        for section in ParcelOrganizer.sections(from: parcels, now: now) {
+            for parcel in section.parcels { sections[parcel.id] = section.kind.rawValue }
+        }
+        let next = ParcelOrganizer.nextDelivery(from: parcels, now: now)?.id
+        let byID = Dictionary(parcels.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        return listed.map { item in
+            var item = item
+            item.section = sections[item.id]
+            item.nextUp = item.id == next
+            item.steps = byID[item.id].map { parcel in
+                parcel.trackingEvents
+                    .compactMap { event in DateParser.date(event.occurredAt).map { (event, $0) } }
+                    .sorted { $0.1 > $1.1 }
+                    .prefix(4)
+                    .map { event, at in DeliveryWidgetStep(at: at, text: event.description, place: event.location ?? event.place?.name) }
+            }
+            return item
+        }
     }
 
     private static func widgetParcel(_ parcel: Parcel, localizer: Localizer, detail: String?) -> DeliveryWidgetParcel {
@@ -1214,7 +1234,8 @@ final class ParcelStore: ObservableObject {
     private func carded(_ shown: [DeliveryWidgetParcel]) -> [DeliveryWidgetParcel] {
         guard let folder = widgetPictures else { return shown }
         var missing: [(parcel: Parcel, card: DeliveryWidgetCard)] = []
-        let carded = shown.prefix(DeliveryWidgetSelection.limit).map { item in
+        // Preview: every parcel gets its card, which the designs to choose from draw rows with.
+        let carded = shown.map { item in
             guard let parcel = parcels.first(where: { $0.id == item.id }) else { return item }
             let card = DeliveryWidgetPictures.card(for: parcel, localizer: localizer)
             guard DeliveryWidgetPictures.isDrawn(card, in: folder) else {
@@ -1238,7 +1259,7 @@ final class ParcelStore: ObservableObject {
                 self?.publishDeliveryWidget()
             }
         }
-        return carded + shown.dropFirst(DeliveryWidgetSelection.limit)
+        return carded
     }
 
     #if os(iOS)

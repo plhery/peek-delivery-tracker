@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 import XCTest
 @testable import PeekDeliveryTracker
 
@@ -897,7 +898,7 @@ extension ParcelRouteTests {
         DeliveryWidgetPictures.sweep(keeping: [plain], in: folder)
         XCTAssertFalse(DeliveryWidgetPictures.isDrawn(card, in: folder))
         XCTAssertTrue(DeliveryWidgetPictures.isDrawn(plain, in: folder))
-        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: folder.path).count, 2 + DeliveryWidgetPicture.routes.count * 2)
+        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: folder.path).count, (2 + DeliveryWidgetPicture.routes.count) * 2)
     }
 
     /// Until the app has drawn the reader's own cards, the widget gallery shows the demo's next deliveries from the widget's
@@ -986,5 +987,141 @@ extension ParcelRouteTests {
                 }
             }
         }
+    }
+}
+
+// Preview: puts invented parcels in the Parcels widget's designs, for screenshots. With `PEEK_WIDGET_PREVIEW` set to 15,
+// 3 or 1 (`TEST_RUNNER_PEEK_WIDGET_PREVIEW` through xcodebuild), it shows that many; it is skipped otherwise. The app
+// clears the widgets when it opens signed out, so the test waits for that first.
+extension ParcelRouteTests {
+    @MainActor func testPreviewTheParcelsWidgetDesigns() async throws {
+        guard let wanted = ProcessInfo.processInfo.environment["PEEK_WIDGET_PREVIEW"].flatMap(Int.init) else {
+            throw XCTSkip("Set PEEK_WIDGET_PREVIEW to 15, 3 or 1 to preview the Parcels widget's designs.")
+        }
+        let localizer = Localizer()
+        localizer.language = .en
+        let now = Date()
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+        func day(_ offset: Int) -> String { formatter.string(from: calendar.date(byAdding: .day, value: offset, to: now)!) }
+        let iso = ISO8601DateFormatter()
+        func ago(_ hours: Double) -> Date { now.addingTimeInterval(-hours * 3_600) }
+        /// A clock time `days` days from today, never later than an hour ago.
+        func at(_ days: Int, _ hour: Int, _ minute: Int) -> Date {
+            let start = calendar.date(byAdding: .day, value: days, to: calendar.startOfDay(for: now))!
+            return min(calendar.date(bySettingHour: hour, minute: minute, second: 0, of: start)!, ago(1))
+        }
+        func place(_ name: String, _ country: String, _ latitude: Double, _ longitude: Double) -> EventPlace {
+            EventPlace(latitude: latitude, longitude: longitude, precision: .city, country: country, name: name)
+        }
+        typealias Step = (stage: TrackingStage, text: String, at: Date, place: EventPlace?)
+        struct Row {
+            let name: String
+            let carrier: String
+            let expected: String?
+            let steps: [Step]
+        }
+        let lyon = place("Lyon", "FR", 45.76, 4.84)
+        let rows: [Row] = [
+            Row(name: "Ceramic pour-over set", carrier: "dhl-express", expected: "\(day(0)) 14:00–16:00", steps: [
+                (.outForDelivery, "Out for delivery", at(0, 8, 10), lyon),
+                (.inTransit, "Arrived at the delivery depot", at(-1, 21, 40), lyon),
+                (.inTransit, "Left the sorting hub", at(-1, 5, 55), place("Leipzig", "DE", 51.34, 12.37)),
+                (.accepted, "Picked up from the shop", at(-2, 18, 20), place("Copenhagen", "DK", 55.68, 12.57)),
+            ]),
+            Row(name: "Trail running shoes", carrier: "la-poste", expected: nil, steps: [
+                (.outForDelivery, "Out for delivery", ago(2), place("Paris", "FR", 48.86, 2.35)),
+                (.accepted, "Picked up", ago(30), place("Lille", "FR", 50.63, 3.06)),
+            ]),
+            Row(name: "Vintage vinyl records", carrier: "ups", expected: day(1), steps: [
+                (.inTransit, "Departed facility", ago(3), place("Cologne", "DE", 50.94, 6.96)),
+                (.accepted, "Picked up", ago(40), place("London", "GB", 51.51, -0.13)),
+            ]),
+            Row(name: "Wool blanket", carrier: "spring-gds", expected: day(1), steps: [
+                (.accepted, "Received by the carrier", ago(6), place("Amsterdam", "NL", 52.37, 4.90)),
+            ]),
+            Row(name: "Mechanical keyboard", carrier: "dpd-de", expected: day(2), steps: [
+                (.inTransit, "At the parcel centre", ago(4), place("Strasbourg", "FR", 48.57, 7.75)),
+                (.accepted, "Picked up", ago(36), place("Berlin", "DE", 52.52, 13.40)),
+            ]),
+            Row(name: "Terracotta plant pots", carrier: "gls-de", expected: day(3), steps: [
+                (.registered, "Label created", ago(10), place("Hamburg", "DE", 53.55, 9.99)),
+            ]),
+            Row(name: "Camera lens from Japan", carrier: "japan-post", expected: day(4), steps: [
+                (.customs, "At customs", ago(24), place("Paris", "FR", 48.86, 2.35)),
+                (.accepted, "Posted", ago(120), place("Tokyo", "JP", 35.68, 139.69)),
+            ]),
+            Row(name: "Handmade oak bookshelf with matching side table and drawers", carrier: "bpost", expected: day(6), steps: [
+                (.inTransit, "In transit", ago(25), place("Brussels", "BE", 50.85, 4.35)),
+                (.accepted, "Picked up", ago(60), place("Antwerp", "BE", 51.22, 4.40)),
+            ]),
+            Row(name: "", carrier: "royal-mail", expected: nil, steps: []),
+            Row(name: "Single-origin coffee beans", carrier: "swiss-post", expected: nil, steps: [
+                (.inTransit, "Sorted", ago(3), place("Basel", "CH", 47.56, 7.59)),
+                (.accepted, "Posted", ago(28), place("Zürich", "CH", 47.37, 8.54)),
+            ]),
+            Row(name: "Kids' science kit", carrier: "evri", expected: nil, steps: [
+                (.failedAttempt, "Delivery attempted", ago(5), place("Manchester", "GB", 53.48, -2.24)),
+                (.accepted, "Picked up", ago(50), place("Leeds", "GB", 53.80, -1.55)),
+            ]),
+            Row(name: "Phone case", carrier: "inpost", expected: nil, steps: [
+                (.readyForPickup, "Ready for pickup at the parcel locker", ago(8), place("Warsaw", "PL", 52.23, 21.01)),
+                (.accepted, "Posted", ago(52), place("Kraków", "PL", 50.06, 19.94)),
+            ]),
+            Row(name: "Garden hose reel", carrier: "la-poste", expected: nil, steps: [
+                (.exception, "Delivery problem", ago(48), place("Bordeaux", "FR", 44.84, -0.58)),
+            ]),
+            Row(name: "Paperback novels", carrier: "poste-italiane", expected: nil, steps: [
+                (.delivered, "Delivered", ago(3), place("Rome", "IT", 41.90, 12.50)),
+                (.accepted, "Accepted", ago(70), place("Milan", "IT", 45.46, 9.19)),
+            ]),
+            Row(name: "Desk lamp", carrier: "correos-spain", expected: nil, steps: [
+                (.delivered, "Delivered", ago(20), place("Valencia", "ES", 39.47, -0.38)),
+                (.accepted, "Accepted", ago(80), place("Madrid", "ES", 40.42, -3.70)),
+            ]),
+        ]
+        let picked = wanted == 1 ? [0] : wanted == 3 ? [0, 4, 11] : Array(rows.indices)
+        let parcels = picked.map { index in
+            let row = rows[index]
+            let id = UUID()
+            let added = (row.steps.last?.at ?? ago(1)).addingTimeInterval(-3_600)
+            return Parcel(
+                id: id, trackingNumber: String(format: "DEMOLIST%04d", index + 1), label: row.name, carrier: CarrierID(rawValue: row.carrier),
+                createdAt: iso.string(from: added), expectedDelivery: row.expected, syncStatus: .ok, notificationsMuted: false,
+                trackingEvents: row.steps.map { step in
+                    TrackingEvent(id: UUID(), packageID: id, stage: step.stage, description: step.text, location: step.place?.name,
+                                  occurredAt: iso.string(from: step.at), place: step.place)
+                }
+            )
+        }
+        let published = ParcelStore.widgetDeliveries(of: parcels, localizer: localizer, now: now)
+        XCTAssertEqual(published.count, picked.count)
+
+        try await Task.sleep(for: .seconds(4))
+        let identifier = DeliveryWidgetSharedStore.defaultAppGroupIdentifier
+        let store = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: identifier))
+        let folder = try XCTUnwrap(DeliveryWidgetPicture.folder(appGroupIdentifier: identifier))
+        let atlas = await WorldAtlas.bundled.value
+        var carded: [DeliveryWidgetParcel] = []
+        for item in published {
+            let parcel = try XCTUnwrap(parcels.first { $0.id == item.id })
+            let card = DeliveryWidgetPictures.card(for: parcel, localizer: localizer)
+            let drawn = await DeliveryWidgetPictures.draw(parcel, as: card, atlas: atlas, localizer: localizer, in: folder)
+            XCTAssertTrue(drawn)
+            var item = item
+            item.card = card
+            carded.append(item)
+            print("WIDGET-PREVIEW \(item.listName) | \(item.listLine.status) | \(item.listLine.day ?? "-") | \(item.section ?? "-")\(item.nextUp == true ? " | next up" : "") | \(item.steps?.count ?? 0) steps")
+        }
+        store.setEnabled(true)
+        store.setLanguageCode("en")
+        // `PEEK_WIDGET_DESIGN` (list, passes, sections or nextUp) has every preview widget show that design.
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: identifier))
+        defaults.set(ProcessInfo.processInfo.environment["PEEK_WIDGET_DESIGN"], forKey: ParcelPreviewAlternative.chosenKey)
+        XCTAssertTrue(store.save(DeliveryWidgetSnapshot(generatedAt: now, languageCode: "en", parcels: carded)))
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

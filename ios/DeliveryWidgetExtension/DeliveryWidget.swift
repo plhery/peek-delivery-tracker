@@ -492,7 +492,11 @@ private extension DeliveryActivityParcel {
 struct DeliveryTrackerWidgetBundle: WidgetBundle {
     var body: some Widget {
         NextDeliveryWidget()
-        ParcelListWidget()
+        // Preview: the designs to choose from, in place of the list as built.
+        ParcelPreviewListWidget()
+        ParcelPreviewPassesWidget()
+        ParcelPreviewSectionsWidget()
+        ParcelPreviewNextUpWidget()
         #if os(iOS)
         DeliveryLiveActivityWidget()
         #endif

@@ -18,6 +18,11 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     var stage: DeliveryWidgetStage? = nil
     /// Whether the reader named the parcel: the list widget calls one without a name by its carrier.
     var named: Bool? = nil
+    /// Preview: the section of the app's list the parcel is in (`ParcelSectionKind`), and whether it is the list's Next up.
+    var section: String? = nil
+    var nextUp: Bool? = nil
+    /// Preview: the parcel's last steps, the latest first, which a widget given to the parcel alone shows.
+    var steps: [DeliveryWidgetStep]? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
@@ -30,6 +35,13 @@ struct DeliveryWidgetStage: Codable, Equatable, Hashable, Sendable {
     let status: String
     let symbol: String
     let tint: [String]
+}
+
+/// Preview: a step of a parcel's tracking, as the app's history writes it.
+struct DeliveryWidgetStep: Codable, Equatable, Hashable, Sendable {
+    let at: Date
+    let text: String
+    let place: String?
 }
 
 /// A parcel's card as the widget shows it. A widget has too little memory to draw the map, so the app draws the card's
@@ -50,6 +62,8 @@ struct DeliveryWidgetCard: Codable, Equatable, Hashable, Sendable {
 /// shows it, across the top of the card.
 enum DeliveryWidgetPicture: String, CaseIterable, Sendable {
     case mark, small, half, wide
+    /// Preview: the carrier's truck alone, without its name.
+    case truck
 
     static let routes: [DeliveryWidgetPicture] = [.small, .half, .wide]
 
@@ -211,6 +225,29 @@ extension DeliveryWidgetParcel {
     }
 }
 
+/// Preview: the designs of the Parcels widget to choose from, each its own widget reading the same parcels.
+enum ParcelPreviewAlternative: String, CaseIterable, Sendable {
+    case list, passes, sections, nextUp
+
+    var kind: String { "ParcelPreview.\(rawValue)" }
+
+    /// The design every preview widget shows instead of its own, for screenshots of one size after another.
+    static let chosenKey = "sdt.parcelPreview.design.v1"
+
+    static func chosen(appGroupIdentifier: String) -> ParcelPreviewAlternative? {
+        UserDefaults(suiteName: appGroupIdentifier)?.string(forKey: chosenKey).flatMap(Self.init(rawValue:))
+    }
+
+    var name: String {
+        switch self {
+        case .list: "A · List"
+        case .passes: "B · Passes"
+        case .sections: "C · Sections"
+        case .nextUp: "D · Next up"
+        }
+    }
+}
+
 /// A widget turned to other parcels with its next button: the first of them, and when. It shows its first parcels again
 /// a few minutes later, as its job is the next delivery.
 struct DeliveryWidgetTurn: Codable, Equatable, Sendable {
@@ -226,7 +263,7 @@ struct DeliveryWidgetSharedStore {
     static let kind = "NextDeliveryWidget"
     static let listKind = "ParcelListWidget"
     /// The widgets that read the snapshot.
-    static let kinds = [kind, listKind]
+    static let kinds = [kind, listKind] + ParcelPreviewAlternative.allCases.map(\.kind)
     static let defaultAppGroupIdentifier = "group.com.plhery.PeekDeliveryTracker"
 
     private static let enabledKey = "sdt.deliveryWidget.enabled.v1"

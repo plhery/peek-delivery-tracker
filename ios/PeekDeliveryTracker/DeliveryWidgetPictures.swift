@@ -99,6 +99,10 @@ enum DeliveryWidgetPictures {
             }
         }
         for dark in [false, true] {
+            let truck = CarrierTruckMark(identity: identity)
+            guard write(truck, dark: dark, localizer: localizer, to: DeliveryWidgetPicture.truck.file(of: card, dark: dark, in: folder)) else { return false }
+        }
+        for dark in [false, true] {
             let mark = CarrierFleetMark(identity: identity).fixedSize()
             guard write(mark, dark: dark, localizer: localizer, to: DeliveryWidgetPicture.mark.file(of: card, dark: dark, in: folder)) else { return false }
         }

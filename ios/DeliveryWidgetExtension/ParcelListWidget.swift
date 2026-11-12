@@ -85,7 +85,7 @@ private struct ParcelListWidgetView: View {
 /// The rows, as many as the widget holds at the reader's text size: its size's number at the default size, fewer with
 /// larger text, and a last line for the others. A small or medium widget tries its rows in smaller type before it
 /// gives one up, so that the smallest, an iPhone SE's or an iPad mini's, still hold three to a column.
-private struct ParcelListRows: View {
+struct ParcelListRows: View {
     let parcels: [DeliveryWidgetParcel]
     let size: DeliveryWidgetList.Size
     let copy: ExtensionLocalizer
@@ -171,7 +171,7 @@ private struct ParcelListRows: View {
     }
 }
 
-private struct ParcelListMetrics {
+struct ParcelListMetrics {
     let compact: Bool
     /// The box a stage's symbol fits in: wide ones, the bicycle and the truck, take its width, the others its height,
     /// so that the names line up.
@@ -186,7 +186,7 @@ private struct ParcelListMetrics {
 
 /// The symbol the app's list marks the parcel's stage with, in the stage's colour. A tinted Home Screen paints it
 /// in its accent.
-private struct ParcelListMark: View {
+struct ParcelListMark: View {
     let parcel: DeliveryWidgetParcel
     let metrics: ParcelListMetrics
 
@@ -197,20 +197,31 @@ private struct ParcelListMark: View {
         return parcel.isOutForDelivery ? "bicycle" : parcel.deliveredAt != nil ? "checkmark.circle.fill" : "shippingbox.fill"
     }
 
+    /// Preview: the carrier's truck, where a design marks rows with it.
+    @Environment(\.parcelTrucks) private var trucks
+
     var body: some View {
-        Image(systemName: symbol)
-            .resizable()
-            .fontWeight(.semibold)
-            .scaledToFit()
-            .frame(width: metrics.markWidth, height: metrics.markHeight)
-            .foregroundStyle(parcel.stage.map { DeliveryWidgetCardColors.color($0.tint, scheme) } ?? Color.secondary)
-            .widgetAccentable()
-            .accessibilityHidden(true)
+        if let truck = trucks[parcel.id] {
+            truck.image(scheme)
+                .resizable()
+                .scaledToFit()
+                .frame(width: metrics.markWidth, height: metrics.markHeight)
+                .accessibilityHidden(true)
+        } else {
+            Image(systemName: symbol)
+                .resizable()
+                .fontWeight(.semibold)
+                .scaledToFit()
+                .frame(width: metrics.markWidth, height: metrics.markHeight)
+                .foregroundStyle(parcel.stage.map { DeliveryWidgetCardColors.color($0.tint, scheme) } ?? Color.secondary)
+                .widgetAccentable()
+                .accessibilityHidden(true)
+        }
     }
 }
 
 /// What VoiceOver reads for a row: the parcel's name, its carrier, its stage and its day.
-private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel) -> String {
+func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel) -> String {
     let line = parcel.listLine
     return ([parcel.listName, parcel.named == false ? nil : parcel.carrier, line.status, line.day] as [String?])
         .compactMap { $0 }.joined(separator: ", ")
@@ -218,8 +229,12 @@ private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel) -> String {
 
 /// The stage, then the day. Where the line can't hold both, the day stays, as the symbol and its colour still mark the
 /// stage; VoiceOver reads both.
-private struct ParcelListStatus: View {
+struct ParcelListStatus: View {
     let parcel: DeliveryWidgetParcel
+
+    /// Preview: a parcel that needs the reader says so in the app's warning colour.
+    @Environment(\.parcelListWarns) private var warns
+    @Environment(\.colorScheme) private var scheme
 
     /// The stage and the day on one line.
     static func whole(_ parcel: DeliveryWidgetParcel) -> String {
@@ -237,12 +252,12 @@ private struct ParcelListStatus: View {
             }
         }
         .lineLimit(1)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(warns && parcel.section == "attention" ? AnyShapeStyle(ParcelPreviewPalette.warning(scheme)) : AnyShapeStyle(.secondary))
     }
 }
 
 /// A row of a small or medium widget: the mark beside the name, over the stage and the day.
-private struct ParcelListStackedRow: View {
+struct ParcelListStackedRow: View {
     let parcel: DeliveryWidgetParcel
     let metrics: ParcelListMetrics
 
@@ -266,11 +281,14 @@ private struct ParcelListStackedRow: View {
 
 /// A row of a large widget, on one line: the mark, the name, and at the end the stage and the day. Where the row can't
 /// hold them whole, the name keeps at least two fifths of it.
-private struct ParcelListLineRow: View {
+struct ParcelListLineRow: View {
     let parcel: DeliveryWidgetParcel
     let metrics: ParcelListMetrics
     /// The widget's width.
     let width: CGFloat
+
+    @Environment(\.parcelListWarns) private var warns
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         ViewThatFits(in: .horizontal) {
@@ -280,7 +298,7 @@ private struct ParcelListLineRow: View {
                 Spacer(minLength: 4)
                 Text(ParcelListStatus.whole(parcel))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(warns && parcel.section == "attention" ? AnyShapeStyle(ParcelPreviewPalette.warning(scheme)) : AnyShapeStyle(.secondary))
                     .lineLimit(1)
             }
             HStack(spacing: metrics.markSpacing) {
@@ -306,7 +324,7 @@ private struct ParcelListLineRow: View {
 }
 
 /// Nothing to list, or the widgets turned off: in the words and the shape of the next-delivery widget's.
-private struct ParcelListState: View {
+struct ParcelListState: View {
     let symbol: String
     let title: String
     let description: String

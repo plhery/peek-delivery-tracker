@@ -68,6 +68,7 @@ import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults.Companion.USE_12_HOUR_TIME
 import com.plhery.peekdeliverytracker.platform.PushTokens
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
@@ -582,7 +583,6 @@ class AppContainer(
         private const val DEBUG_PARCEL_FEEDBACK_PARCEL = "sdt.debug.parcelFeedback.parcel"
         private const val DEBUG_PARCEL_SHARE = "sdt.debug.parcelShare"
         private const val DEBUG_REVIEW_DUE = "sdt.debug.reviewDue"
-        private const val USE_12_HOUR_TIME = "sdt.native.use12HourTime"
         private const val DEBUG_STORE_SCREENSHOTS = "sdt.debug.storeScreenshots"
 
         /** A container made on the IO dispatcher, where its stores first read the Keystore and the disk. */

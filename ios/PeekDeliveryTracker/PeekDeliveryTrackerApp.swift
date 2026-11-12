@@ -19,7 +19,7 @@ struct PeekDeliveryTrackerApp: App {
     #endif
 
     init() {
-        let localizer = Localizer()
+        let localizer = Localizer(sharedClockDefaults: DeviceClock.sharedDefaults())
         let session = SessionStore(configuration: .current)
         let parcels = ParcelStore(
             configuration: .current,

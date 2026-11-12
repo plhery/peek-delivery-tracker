@@ -12,7 +12,7 @@ import { locatePlace } from 'universal-parcel-scraper/places';
 import { CARRIER_CAPABILITIES, type ApiParcelAlertPreset } from '../generated/apiContract';
 import { dayAndTime } from '../lib/format';
 import { catalogLanguage, tagLocale, type Locale } from '../lib/locale';
-import { languageTags } from '../lib/messages';
+import { deliveryWallClock, languageTags } from '../lib/messages';
 import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
@@ -494,18 +494,21 @@ interface ExpectedDelivery {
  * An estimate on the reader's clock, or, with `ownClock`, on the offset it states (a "Z" says nothing of the place):
  * its day, and the time or slot the carrier gave on it.
  */
-function estimatePoint(value: unknown, zone: string, ownClock = false): { day: DateTime; time: string; instant: DateTime | null } | null {
+function estimatePoint(
+  value: unknown, zone: string, ownClock: boolean, languageTag: string, use24HourTime: boolean,
+): { day: DateTime; time: string; instant: DateTime | null } | null {
   const cleaned = notificationText(value, 100);
   if (!cleaned) return null;
   const slot = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(cleaned);
+  const clock = (time: string) => deliveryWallClock(time, languageTag, use24HourTime);
   if (slot) {
     const day = DateTime.fromISO(slot[1]!, { zone });
-    return day.isValid ? { day, time: `${slot[2]}${slot[3] ? `–${slot[3]}` : ''}`, instant: null } : null;
+    return day.isValid ? { day, time: `${clock(slot[2]!)}${slot[3] ? `–${clock(slot[3])}` : ''}`, instant: null } : null;
   }
   const expected = DateTime.fromISO(cleaned, { zone, setZone: ownClock && /[+-]\d{2}:?\d{2}$/.test(cleaned) });
   if (!expected.isValid) return null;
   const timed = /T\d{2}:\d{2}/.test(cleaned);
-  return { day: expected.startOf('day'), time: timed ? expected.toFormat('HH:mm') : '', instant: timed ? expected : null };
+  return { day: expected.startOf('day'), time: timed ? clock(expected.toFormat('HH:mm')) : '', instant: timed ? expected : null };
 }
 
 /**
@@ -522,13 +525,15 @@ function expectedDelivery(
   timezone: string,
   now: number,
   ownClock = false,
+  use24HourTime = true,
 ): ExpectedDelivery | null {
   const zone = IANAZone.isValidZone(timezone) ? timezone : 'Europe/Zurich';
-  const end = estimatePoint(value, zone, ownClock);
+  const tag = languageTags[locale];
+  const end = estimatePoint(value, zone, ownClock, tag, use24HourTime);
   if (!end) return null;
   const today = DateTime.fromMillis(now, { zone: end.day.zone }).startOf('day');
   if (!today.isValid || end.day < today) return null;
-  const start = estimatePoint(from, zone, ownClock);
+  const start = estimatePoint(from, zone, ownClock, tag, use24HourTime);
   const sameDay = (a: DateTime, b: DateTime) => a.toISODate() === b.toISODate();
   // Two times on one day are a slot on it.
   const time = start?.instant && end.instant && start.instant < end.instant && sameDay(start.day, end.day)
@@ -537,8 +542,6 @@ function expectedDelivery(
     const relative = sameDay(day, today) ? 'time.today' : sameDay(day, today.plus({ days: 1 })) ? 'time.tomorrow' : null;
     return { text: relative ? appWord(locale, relative)! : notificationDay(day, locale), relative: !!relative };
   };
-  const tag = languageTags[locale];
-
   if (stage === 'out_for_delivery') {
     // The end of a window of days that began before today is not today's hours.
     return sameDay(end.day, today) && time && !(start && start.day < today)
@@ -595,7 +598,7 @@ function deliveredInstant(row: JsonObject, now: number): DateTime | null {
   return delivered.isValid && delivered.toMillis() <= now ? delivered : null;
 }
 
-function deliveredMessage(row: JsonObject, locale: Locale, now: number): string {
+function deliveredMessage(row: JsonObject, locale: Locale, now: number, use24HourTime: boolean): string {
   const copy = PUSH_COPY[locale];
   const instant = deliveredInstant(row, now);
   const zone = deliveryClock(row);
@@ -606,7 +609,7 @@ function deliveredMessage(row: JsonObject, locale: Locale, now: number): string 
   const sameDay = delivered.toISODate() === current.toISODate();
   const template = sameDay ? copy.delivered_time : copy.delivered_date;
   return template!
-    .replace('{{time}}', delivered.toFormat('HH:mm'))
+    .replace('{{time}}', deliveryWallClock(delivered.toFormat('HH:mm'), languageTags[locale], use24HourTime))
     .replace('{{date}}', notificationDay(delivered, locale));
 }
 
@@ -622,13 +625,13 @@ function notificationTitle(row: JsonObject, locale: Locale): string {
 }
 
 /** What the step means: when the parcel arrives if that is known, the stage's own sentence otherwise. */
-function notificationDetail(row: JsonObject, locale: Locale, now: number): string {
+function notificationDetail(row: JsonObject, locale: Locale, now: number, use24HourTime = true): string {
   const stage = stringField(row, 'stage');
   const copy = PUSH_COPY[locale];
-  if (stage === 'delivered') return deliveredMessage(row, locale, now);
+  if (stage === 'delivered') return deliveredMessage(row, locale, now, use24HourTime);
   const expected = ETA_NOTIFICATION_STAGES.has(stage)
     ? expectedDelivery(row.expected_delivery, row.expected_delivery_from, stage, locale,
-      stringField(row, 'timezone') || 'Europe/Zurich', now, row.timezone_chosen === false)
+      stringField(row, 'timezone') || 'Europe/Zurich', now, row.timezone_chosen === false, use24HourTime)
     : null;
   if (!expected) return copy[`body_${stage}`] ?? copy.body_update!;
   const changed = row.expected_delivery_changed === true ? 'eta_changed' : 'eta';
@@ -665,7 +668,14 @@ function notificationBody(
   return location ? `${primary}\n${location}` : primary;
 }
 
-const DEVICE_CLOCK_KEYS = ['scan_at', 'body_same_day', 'body_other_day', 'date_locale'] as const;
+function notificationBodies(row: JsonObject, locale: Locale, now: number, lead = row.label) {
+  const detail = notificationDetail(row, locale, now);
+  const alternate = notificationDetail(row, locale, now, false);
+  const body = notificationBody(row, locale, now, lead, detail);
+  return alternate === detail ? { body } : { body, body_12_hour: notificationBody(row, locale, now, lead, alternate) };
+}
+
+const DEVICE_CLOCK_KEYS = ['scan_at', 'body_same_day', 'body_other_day', 'date_locale', 'body_12_hour'] as const;
 
 /**
  * What lets a device write a delivery's time on its own clock as the notification arrives, wherever it is
@@ -973,10 +983,11 @@ export class WebPushNotificationService {
   payload(row: JsonObject): JsonObject {
     const locale = notificationLocale(row.locale);
     const packageId = stringField(row, 'package_id');
+    const now = this.now();
     return {
       title: notificationTitle(row, locale),
-      body: notificationBody(row, locale, this.now()),
-      ...deviceClockFields(row, locale, this.now()),
+      ...notificationBodies(row, locale, now),
+      ...deviceClockFields(row, locale, now),
       ...WEB_NOTIFICATION_PICTURES,
       tag: `parcel-${packageId}`,
       lang: locale,
@@ -1168,10 +1179,11 @@ export class ParcelLinkAlertService {
       ...row, timezone: 'Europe/Zurich', timezone_chosen: false,
       ...this.wrappedGift(row) ? { location: null, event_time: null } : {},
     };
+    const now = this.now();
     return {
       title: notificationText(title, 80),
-      body: notificationBody(told, locale, this.now(), lead),
-      ...deviceClockFields(told, locale, this.now(), lead),
+      ...notificationBodies(told, locale, now, lead),
+      ...deviceClockFields(told, locale, now, lead),
       ...WEB_NOTIFICATION_PICTURES,
       tag: `parcel-link-${linkId}`,
       lang: locale,
@@ -1393,11 +1405,16 @@ abstract class AppPushNotificationService {
 
   eventPayload(row: JsonObject): JsonObject {
     const locale = this.locale(row);
+    const now = this.now() * 1_000;
+    const { body, body_12_hour } = notificationBodies(row, locale, now);
     return this.payload(
       notificationTitle(row, locale),
-      notificationBody(row, locale, this.now() * 1_000),
+      body,
       stringField(row, 'package_id'),
-      deviceClockFields(row, locale, this.now() * 1_000),
+      {
+        ...deviceClockFields(row, locale, now),
+        ...body_12_hour ? { body_12_hour } : {},
+      },
     );
   }
 

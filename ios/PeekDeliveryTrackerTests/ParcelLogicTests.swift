@@ -1505,8 +1505,13 @@ final class ParcelLogicTests: XCTestCase {
     @MainActor func testClockPreferencePersistsAndFormatsDeliveryWindows() throws {
         let suite = "clock-preference-\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
-        let localizer = Localizer(defaults: defaults)
+        let sharedSuite = "\(suite).shared"
+        let shared = try XCTUnwrap(UserDefaults(suiteName: sharedSuite))
+        defer {
+            defaults.removePersistentDomain(forName: suite)
+            shared.removePersistentDomain(forName: sharedSuite)
+        }
+        let localizer = Localizer(defaults: defaults, sharedClockDefaults: shared)
         let midnight = Date(timeIntervalSince1970: 0)
         let noon = midnight.addingTimeInterval(12 * 3_600)
         let day = "2026-11-12"
@@ -1515,11 +1520,15 @@ final class ParcelLogicTests: XCTestCase {
         let originalWindow = localizer.expectedDelivery(window)
 
         XCTAssertTrue(localizer.use24HourTime)
+        XCTAssertTrue(shared.bool(forKey: DeviceClock.preferenceKey))
         XCTAssertEqual(localizer.clockTime(midnight, in: .gmt), "00:00")
         XCTAssertTrue(originalWindow.hasSuffix("11:30–15:30"))
 
         localizer.use24HourTime = false
-        let reopened = Localizer(defaults: defaults)
+        XCTAssertFalse(shared.bool(forKey: DeviceClock.preferenceKey))
+        shared.removeObject(forKey: DeviceClock.preferenceKey)
+        let reopened = Localizer(defaults: defaults, sharedClockDefaults: shared)
+        XCTAssertEqual(shared.object(forKey: DeviceClock.preferenceKey) as? Bool, false)
         XCTAssertFalse(reopened.use24HourTime)
         let morning = reopened.clockTime(midnight, in: .gmt)
         let afternoon = reopened.clockTime(noon, in: .gmt)

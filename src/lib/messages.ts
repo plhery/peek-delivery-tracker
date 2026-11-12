@@ -95,7 +95,7 @@ export function localizedDeliveryDate(
   return localizedCalendarDate(date, languageTag);
 }
 
-function deliveryWallClock(value: string, languageTag: string, use24HourTime: boolean): string {
+export function deliveryWallClock(value: string, languageTag: string, use24HourTime: boolean): string {
   if (use24HourTime) return value;
   // A carrier's wall clock has no zone. Format it in UTC so its hours survive local clock changes.
   const date = new Date(`2000-01-01T${value}:00Z`);

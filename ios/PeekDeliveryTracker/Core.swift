@@ -213,11 +213,14 @@ enum AppLanguage: String, CaseIterable, Identifiable, Codable, Hashable {
 
 @MainActor
 final class Localizer: ObservableObject {
-    private static let clockStorageKey = "sdt.native.use24HourTime"
     @Published var use24HourTime: Bool {
-        didSet { defaults.set(use24HourTime, forKey: Self.clockStorageKey) }
+        didSet {
+            defaults.set(use24HourTime, forKey: DeviceClock.preferenceKey)
+            saveSharedClock()
+        }
     }
     private let defaults: UserDefaults
+    private let sharedClockDefaults: UserDefaults?
 
     @Published var language: AppLanguage {
         didSet {
@@ -236,9 +239,13 @@ final class Localizer: ObservableObject {
     /// Where the copy names the iPhone, an iPad reads the key's `.ipad` variant and a Mac its `.mac` one.
     private let variant: String?
 
-    init(bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad, defaults: UserDefaults = .standard) {
+    init(
+        bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad, defaults: UserDefaults = .standard,
+        sharedClockDefaults: UserDefaults? = nil
+    ) {
         self.defaults = defaults
-        use24HourTime = defaults.object(forKey: Self.clockStorageKey) as? Bool ?? true
+        self.sharedClockDefaults = sharedClockDefaults
+        use24HourTime = defaults.object(forKey: DeviceClock.preferenceKey) as? Bool ?? true
         #if os(macOS)
         variant = "mac"
         #else
@@ -260,6 +267,11 @@ final class Localizer: ObservableObject {
             dictionaries = ["en": [:]]
         }
         saveSharedLanguage()
+        saveSharedClock()
+    }
+
+    private func saveSharedClock() {
+        sharedClockDefaults?.set(use24HourTime, forKey: DeviceClock.preferenceKey)
     }
 
     private func saveSharedLanguage() {

@@ -374,9 +374,9 @@ class Localizer(
     private fun fields(date: Instant): FoundationDates.DateFields = FoundationDates.dateFields(date, ZoneId.systemDefault())
 
     /** Hours and minutes in the app language, as event rows show them. */
-    fun clockTime(date: Instant): String {
+    fun clockTime(date: Instant, timeZone: ZoneId = ZoneId.systemDefault()): String {
         if (!FoundationDates.calendarHolds(date)) return ""
-        val fields = fields(date)
+        val fields = FoundationDates.dateFields(date, timeZone)
         return clockTime(fields.hour, fields.minute)
     }
 

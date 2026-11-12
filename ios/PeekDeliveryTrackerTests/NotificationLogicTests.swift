@@ -421,6 +421,14 @@ final class NotificationLogicTests: XCTestCase {
         let evening = try instant("2026-09-07T03:00:00Z")
         XCTAssertEqual(DeviceClock.body(push, now: evening, timeZone: california), "Kitchen scale · delivered at 16:51")
         XCTAssertEqual(DeviceClock.body(push, now: evening, timeZone: zurich), "Kitchen scale · delivered at 01:51")
+        XCTAssertEqual(
+            DeviceClock.body(push, now: evening, timeZone: california, use24HourTime: false)?.lowercased(),
+            "kitchen scale · delivered at 4:51 pm"
+        )
+        XCTAssertEqual(
+            DeviceClock.body(push, now: evening, timeZone: zurich, use24HourTime: false)?.lowercased(),
+            "kitchen scale · delivered at 1:51 am"
+        )
         let twoDaysLater = try instant("2026-09-08T12:00:00Z")
         XCTAssertEqual(
             DeviceClock.body(push, now: twoDaysLater, timeZone: california),
@@ -440,6 +448,9 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertNil(DeviceClock.body(push.filter { $0.key as? String != "scan_at" }, now: evening, timeZone: california))
         XCTAssertNil(DeviceClock.body(push.merging(["scan_at": "yesterday"]) { $1 }, now: evening, timeZone: california))
         XCTAssertNil(DeviceClock.body(["body": "Kitchen scale · in transit"], now: evening, timeZone: california))
+        let estimate = ["body": "Arriving at 16:00", "body_12_hour": "Arriving at 4:00 pm"]
+        XCTAssertNil(DeviceClock.body(estimate))
+        XCTAssertEqual(DeviceClock.body(estimate, use24HourTime: false), "Arriving at 4:00 pm")
         // Without a language for the date, the device's own writes it.
         var unnamed = push
         unnamed["date_locale"] = ""

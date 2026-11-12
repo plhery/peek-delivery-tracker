@@ -52893,6 +52893,26 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.upost.com.ua/tracking/"
+  },
+  "bh-posta": {
+    "displayName": "BH Pošta",
+    "aliases": [
+      "JP BH Pošta",
+      "JP BH POŠTA d.o.o. Sarajevo"
+    ],
+    "countries": [
+      "BA"
+    ],
+    "color": "#034ea2",
+    "selectable": true,
+    "timezone": "Europe/Sarajevo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.posta.ba/pracenje-posiljaka/"
   }
 } as const;
 
@@ -54434,7 +54454,8 @@ export const CARRIER_IDS = [
   "webrinq",
   "jiayang",
   "msg-post",
-  "u-post"
+  "u-post",
+  "bh-posta"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

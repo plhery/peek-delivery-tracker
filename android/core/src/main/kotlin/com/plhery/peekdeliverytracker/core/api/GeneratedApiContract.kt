@@ -1547,6 +1547,8 @@ value class CarrierId(val rawValue: String) {
         val IntimeHr = CarrierId("intime-hr")
         val Webrinq = CarrierId("webrinq")
         val Jiayang = CarrierId("jiayang")
+        val MsgPost = CarrierId("msg-post")
+        val UPost = CarrierId("u-post")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3035,6 +3037,8 @@ value class CarrierId(val rawValue: String) {
             IntimeHr,
             Webrinq,
             Jiayang,
+            MsgPost,
+            UPost,
         )
     }
 }

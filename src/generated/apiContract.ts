@@ -1145,7 +1145,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Paris",
     "tracking": {
       "mode": "automatic",
-      "adapter": "dpd-fr"
+      "adapter": "dpd-fr",
+      "browserRecognitionRank": 700,
+      "browserRecognitionPattern": "^(?:10\\d{12}|250\\d{13})$"
     },
     "trackingUrlTemplate": "https://trace.dpd.fr/fr/trace/{trackingNumber}",
     "linkRules": [
@@ -9658,7 +9660,8 @@ export const CARRIER_CAPABILITIES = {
   "ppl": {
     "displayName": "PPL",
     "aliases": [
-      "PPL CZ"
+      "PPL CZ",
+      "PPL CZ s.r.o."
     ],
     "countries": [
       "CZ"
@@ -11402,7 +11405,9 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Cycloon Post & Fietskoeriers",
       "Fietskoeriers.nl",
-      "Cycloon Fietskoeriers"
+      "Cycloon Fietskoeriers",
+      "Cycloon Post B.V.",
+      "Cycloon Fietskoeriers B.V."
     ],
     "countries": [
       "NL"
@@ -12450,7 +12455,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jadlog",
+      "recognitionRank": 717,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {
@@ -12463,7 +12470,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{14}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.jadlog.com.br/jadlog/home"
   },
   "jersey-post": {
@@ -24719,7 +24731,8 @@ export const CARRIER_CAPABILITIES = {
       "NOX Nachtexpress",
       "nox Germany",
       "Innight Express",
-      "TNT Innight"
+      "TNT Innight",
+      "nox Belgium N.V."
     ],
     "countries": [
       "DE"
@@ -34983,12 +34996,18 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "sengi-express",
+      "recognitionRank": 119,
+      "recognitionPattern": "^\\d{3}C\\d{8}F$"
     },
     "linkRules": [],
     "detectionRules": [
       {
         "pattern": "^[A-Z]{5}\\d{9}MT$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^\\d{3}C\\d{8}F$",
         "confidence": "low"
       }
     ],
@@ -52827,6 +52846,47 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.jygjgyl.com/"
+  },
+  "msg-post": {
+    "displayName": "MSG Post & Koeriers",
+    "aliases": [
+      "MSG Post en Koeriers B.V."
+    ],
+    "countries": [
+      "NL"
+    ],
+    "color": "#111860",
+    "selectable": true,
+    "timezone": "Europe/Amsterdam",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://app.veloyd.nl/track&trace/{trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://app.veloyd.nl/track&trace"
+  },
+  "u-post": {
+    "displayName": "U Post",
+    "aliases": [
+      "U Post International",
+      "U POST s. r. o."
+    ],
+    "countries": [
+      "UA",
+      "SK"
+    ],
+    "color": "#ffbe00",
+    "selectable": true,
+    "timezone": "Europe/Kyiv",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.upost.com.ua/tracking/"
   }
 } as const;
 
@@ -54366,7 +54426,9 @@ export const CARRIER_IDS = [
   "gordom-logistika",
   "intime-hr",
   "webrinq",
-  "jiayang"
+  "jiayang",
+  "msg-post",
+  "u-post"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

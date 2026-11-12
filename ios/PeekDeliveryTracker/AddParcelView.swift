@@ -22,11 +22,11 @@ struct AddParcelView: View {
     @State private var label: String
     @State private var trackingInput: String
     @State private var trackingURL = ""
-    @State private var deliveryPostcode = ""
+    /// The delivery postcode typed, accepted or filled for each carrier in this sheet.
+    @State private var postcodes = CarrierPostcodes()
     /// The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows.
     @State private var phoneDigits = ""
-    @State private var postcodeFill = PostcodeFill()
-    /// The delivery country chosen beside the postcode, kept, as the postcode is, for each carrier whose field takes it.
+    /// The delivery country chosen beside the postcode, used by every carrier whose field takes it.
     @State private var chosenPostcodeCountry: String?
     @State private var showingScanner = false
     @State private var showingCarrierPicker = false
@@ -694,7 +694,7 @@ struct AddParcelView: View {
                                 }
                                 Divider().padding(.vertical, 12)
                             }
-                            TextField(example ?? "", text: $deliveryPostcode)
+                            TextField(example ?? "", text: Binding(get: { deliveryPostcode }, set: { deliveryPostcode = $0 }))
                                 .drawnField()
                                 .font(.body.monospacedDigit())
                                 .keyboardType(requirement.inputMode == "numeric" ? .numberPad
@@ -711,18 +711,16 @@ struct AddParcelView: View {
                         }
                     }
                     // An optional postcode is offered, never filled in for the user.
-                    if requirement.isOptional, deliveryPostcode.isEmpty,
-                       let suggestion = postcodeFill.offering(previousPostcode(for: resolvedCarrier, requirement: requirement)) {
+                    if let suggestion = postcodes.offering(resolvedCarrier, requirement: requirement, among: store.givenPostcodes) {
                         Button(localizer.text("add.usePostcode", ["postcode": suggestion])) {
-                            deliveryPostcode = postcodeFill.fill(suggestion)
+                            postcodes.use(suggestion, for: resolvedCarrier)
                         }
                         .font(.subheadline)
                     }
                     // Without an account every suggestion is this iPhone's own, so it can forget them.
-                    if store.isGuest, postcodeFill.holds(deliveryPostcode) {
+                    if store.isGuest, postcodes.holdsFill(resolvedCarrier) {
                         Button(localizer.text("add.forgetPostcode")) {
-                            if let postcode = postcodeFill.forget(deliveryPostcode) { store.forgetPostcode(postcode) }
-                            deliveryPostcode = ""
+                            if let postcode = postcodes.forget(resolvedCarrier) { store.forgetPostcode(postcode) }
                         }
                         .font(.subheadline)
                     }
@@ -1141,19 +1139,16 @@ struct AddParcelView: View {
         return true
     }
 
-    /// The last postcode given that fits the field, this carrier's first: from the parcels,
-    /// then from what this iPhone remembers.
-    private func previousPostcode(for carrier: CarrierID, requirement: CarrierRequirement) -> String? {
-        requirement.suggestedPostcode(for: carrier, among: store.givenPostcodes)
+    /// The postcode in the field: the current carrier's own, the one sent with the parcel.
+    private var deliveryPostcode: String {
+        get { postcodes[resolvedCarrier] }
+        nonmutating set { postcodes[resolvedCarrier] = newValue }
     }
 
     /// A required postcode starts from the last one that fits; an optional one is
     /// only offered (see `requiredDetails`).
     private func prepareRequiredDetails(for carrier: CarrierID) {
-        postcodeFill.prepare()
-        guard let requirement = postcodeRequirement, !requirement.isOptional, deliveryPostcode.isEmpty,
-              let suggestion = previousPostcode(for: carrier, requirement: requirement) else { return }
-        deliveryPostcode = postcodeFill.fill(suggestion)
+        postcodes.prepare(carrier, requirement: postcodeRequirement, among: store.givenPostcodes)
     }
 
     private func paste() {
@@ -1287,6 +1282,59 @@ struct PostcodeFill: Equatable {
 
     /// Another carrier's details: what was given before may fill the field again.
     mutating func prepare() { forgotten = false }
+}
+
+/// The delivery postcode the Add sheet holds for each carrier. One typed, accepted or filled for a carrier
+/// stays with it: another carrier's field shows its own, and switching back shows the first one's again.
+/// `given` is the postcodes given before, from which the last one that fits is suggested, the carrier's own first.
+struct CarrierPostcodes {
+    /// What each carrier's field holds; nothing until a postcode is typed, accepted or filled in it.
+    private var values: [CarrierID: String] = [:]
+    /// What each carrier's field was filled with from the postcodes given before.
+    private var fills: [CarrierID: PostcodeFill] = [:]
+
+    /// What `carrier`'s field holds. Writing what it already shows changes nothing, so a field never given
+    /// a postcode, written back as it is shown, can still be filled when it is prepared.
+    subscript(carrier: CarrierID) -> String {
+        get { values[carrier] ?? "" }
+        set { if newValue != self[carrier] { values[carrier] = newValue } }
+    }
+
+    /// The carrier's field as it is shown: a required postcode starts from the last one given that fits,
+    /// unless the field already holds one from earlier in the sheet; an optional one is only offered.
+    mutating func prepare(_ carrier: CarrierID, requirement: CarrierRequirement?, among given: [GivenPostcode]) {
+        fills[carrier]?.prepare()
+        guard let requirement, !requirement.isOptional, values[carrier] == nil,
+              let suggestion = requirement.suggestedPostcode(for: carrier, among: given) else { return }
+        use(suggestion, for: carrier)
+    }
+
+    /// The postcode offered for an optional field while it is empty.
+    func offering(_ carrier: CarrierID, requirement: CarrierRequirement, among given: [GivenPostcode]) -> String? {
+        guard requirement.isOptional, self[carrier].isEmpty else { return nil }
+        return (fills[carrier] ?? PostcodeFill()).offering(requirement.suggestedPostcode(for: carrier, among: given))
+    }
+
+    /// Fills the carrier's field with a postcode given before.
+    mutating func use(_ postcode: String, for carrier: CarrierID) {
+        values[carrier] = fills[carrier, default: PostcodeFill()].fill(postcode)
+    }
+
+    /// The carrier's field still holds the postcode it was filled with.
+    func holdsFill(_ carrier: CarrierID) -> Bool { fills[carrier]?.holds(self[carrier]) == true }
+
+    /// Empties the carrier's field and returns the postcode it was filled with, to forget. The other fields
+    /// still holding it as filled empty too, and fill again from what is left when shown.
+    mutating func forget(_ carrier: CarrierID) -> String? {
+        let field = self[carrier]
+        guard let postcode = fills[carrier]?.forget(field) else { return nil }
+        values[carrier] = nil
+        for (other, fill) in fills where self[other] == postcode && fill.holds(postcode) {
+            values[other] = nil
+            fills[other] = nil
+        }
+        return postcode
+    }
 }
 
 /// The country a delivery postcode is from, beside its field: its flag and code, opening on the countries the

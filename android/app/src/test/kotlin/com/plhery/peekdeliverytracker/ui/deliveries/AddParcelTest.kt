@@ -863,6 +863,120 @@ class AddParcelTest {
         assertFalse(exists(ADD_FORGET_POSTCODE))
     }
 
+    /** Add on [POSTNL], PostNL's by its shape, its postcode optional, with `given` the postcodes given before. */
+    private fun showPostNL(guest: Boolean = false, given: List<GivenPostcode> = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"))) {
+        show {
+            isGuest = guest
+            givenPostcodes = given
+        }
+        open()
+        type(POSTNL)
+        leave()
+    }
+
+    /** Automatic detection chosen again in the picker: PostNL, by the number's shape. */
+    private fun backToPostNL() {
+        node(ADD_CARRIER).performClick()
+        settle()
+        node(CARRIER_PICKER_AUTOMATIC).performClick()
+        settle()
+        assertEquals("PostNL, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
+    }
+
+    /** As the web's sheet: the postcode filled in Packs' required field is only offered in PostNL's optional one. */
+    @Test
+    fun aPostcodeFilledForOneCarrierIsOnlyOfferedForAnothersOptionalFieldAndSentOnceUsed() {
+        showPostNL()
+        assertEquals("", fieldText(ADD_POSTCODE))
+        pick(PACKS, "Packs")
+        assertEquals("1234 AB", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_USE_POSTCODE))
+
+        backToPostNL()
+        assertEquals("", fieldText(ADD_POSTCODE))
+        node(ADD_USE_POSTCODE).assert(hasText(text("add.usePostcode", mapOf("postcode" to "1234 AB")))).performClick()
+        settle()
+        assertEquals("1234 AB", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_USE_POSTCODE))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(POSTNL, "", CarrierId.SpringGDS, null, "1234 AB", "CH")), source.additions)
+    }
+
+    @Test
+    fun aPostcodeOnlyOfferedIsNotSent() {
+        showPostNL()
+        pick(PACKS, "Packs")
+        backToPostNL()
+        assertTrue(exists(ADD_USE_POSTCODE))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(POSTNL, "", CarrierId.SpringGDS, null, "", null)), source.additions)
+    }
+
+    /** One typed for PostNL is neither shown nor sent for Packs, whose field starts from the one given; back, it is. */
+    @Test
+    fun aPostcodeTypedForOneCarrierIsNeitherShownNorSentForAnotherAndShowsAgainOnItsOwn() {
+        showPostNL()
+        node(ADD_POSTCODE).performTextInput("1011 CD")
+        compose.waitForIdle()
+        pick(PACKS, "Packs")
+        assertEquals("1234 AB", fieldText(ADD_POSTCODE))
+        node(ADD_POSTCODE).performTextReplacement("2000 EF")
+        compose.waitForIdle()
+
+        backToPostNL()
+        assertEquals("1011 CD", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_USE_POSTCODE))
+        pick(PACKS, "Packs")
+        assertEquals("2000 EF", fieldText(ADD_POSTCODE))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(POSTNL, "", PACKS, null, "2000 EF", null)), source.additions)
+    }
+
+    /** A guest's postcode forgotten in one carrier's field leaves the others' that held it, which start afresh. */
+    @Test
+    fun aPostcodeForgottenForOneCarrierLeavesEveryOther() {
+        showPostNL(guest = true, given = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"), GivenPostcode(CarrierId.Dpd, "5678 CD")))
+        pick(PACKS, "Packs")
+        assertEquals("1234 AB", fieldText(ADD_POSTCODE))
+        backToPostNL()
+        node(ADD_USE_POSTCODE).performClick()
+        settle()
+        node(ADD_FORGET_POSTCODE).performClick()
+        settle()
+        assertEquals(listOf("1234 AB"), source.forgottenPostcodes)
+        assertEquals("", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_USE_POSTCODE))
+
+        pick(PACKS, "Packs")
+        assertEquals("5678 CD", fieldText(ADD_POSTCODE))
+        assertTrue(exists(ADD_FORGET_POSTCODE))
+    }
+
+    /** Each carrier's postcode stays through the window made again, the process gone meanwhile. */
+    @Test
+    fun eachCarriersPostcodeStaysThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open()
+        type(POSTNL)
+        leave()
+        node(ADD_POSTCODE).performTextInput("1011 CD")
+        compose.waitForIdle()
+        pick(PACKS, "Packs")
+        node(ADD_POSTCODE).performTextInput("2000 EF")
+        compose.waitForIdle()
+
+        recreation.recreate(parceled = true)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals("2000 EF", fieldText(ADD_POSTCODE))
+        backToPostNL()
+        assertEquals("1011 CD", fieldText(ADD_POSTCODE))
+    }
+
     @Test
     fun aPostcodeFromAnotherCountryIsSentWithIt() {
         show()
@@ -1965,3 +2079,9 @@ private class FeelingView(context: Context) : View(context) {
         return true
     }
 }
+
+/** A synthetic 3S number: PostNL's, its postcode optional. */
+private const val POSTNL = "3SABCD826405193"
+
+/** Packs, whose lookup needs the postcode. */
+private val PACKS = CarrierId("packs")

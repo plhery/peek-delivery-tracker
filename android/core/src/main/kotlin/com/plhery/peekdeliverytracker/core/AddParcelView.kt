@@ -89,6 +89,39 @@ data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = f
 }
 
 /**
+ * The postcodes typed, accepted or filled in while Add is up, each kept for the carrier it was given for: a carrier's
+ * field shows its own, and one given for a carrier never shows or goes with another. A value, as [PostcodeFill] is.
+ */
+data class CarrierPostcodes(val given: Map<CarrierId, String> = emptyMap()) {
+    /** What `carrier`'s field holds: its own, else nothing. */
+    operator fun get(carrier: CarrierId): String = given[carrier].orEmpty()
+
+    /** Whether `carrier`'s field was given something, even one emptied since. */
+    operator fun contains(carrier: CarrierId): Boolean = carrier in given
+
+    /** `carrier`'s field holding `postcode`. */
+    fun with(carrier: CarrierId, postcode: String): CarrierPostcodes = CarrierPostcodes(given + (carrier to postcode))
+
+    /**
+     * `postcode` forgotten: every field holding it, its capitals and spaces aside as this phone forgets it, starts
+     * afresh when its carrier's details come up again.
+     */
+    fun without(postcode: String): CarrierPostcodes =
+        CarrierPostcodes(given.filterValues { !bare(it).equalsCanonically(bare(postcode)) })
+
+    /** Each carrier and its postcode in turn, as text for a window to keep. */
+    val kept: List<String> get() = given.flatMap { (carrier, postcode) -> listOf(carrier.rawValue, postcode) }
+
+    companion object {
+        /** The postcodes [kept] kept. */
+        fun from(kept: List<String>): CarrierPostcodes =
+            CarrierPostcodes(kept.chunked(2).filter { it.size == 2 }.associate { (carrier, postcode) -> CarrierId(carrier) to postcode })
+
+        private fun bare(postcode: String): String = postcode.uppercased().removingWhitespace()
+    }
+}
+
+/**
  * What the Add sheet (`AddParcelView`) holds and works out from it: the field's text, the number chosen among several,
  * the carrier picked by hand, the number added as typed despite its check digit, the carrier check's answers, the
  * Amazon number's verification, the link, the postcode and the phone digits typed, and the postcode's country chosen. The view's own
@@ -440,6 +473,31 @@ data class ParcelAddition(
     /** The last postcode given that fits the field, this carrier's first (`previousPostcode(for:requirement:)`). */
     fun previousPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): String? =
         requirement.suggestedPostcode(resolvedCarrier, given)
+
+    /** The postcode field holding what `postcodes` keeps for the carrier in play, and nothing given for another. */
+    fun withPostcode(postcodes: CarrierPostcodes): ParcelAddition = copy(deliveryPostcode = postcodes[resolvedCarrier])
+
+    /**
+     * `prepareRequiredDetails(for:)`'s postcode, as the carrier's details come up: its field keeps what was given for
+     * it earlier in Add; otherwise a required one starts from the last postcode given that fits, and an optional one
+     * stays empty, that postcode only offered. What was given before may fill the field again, and the carrier's own,
+     * where it is that postcode, can still be forgotten.
+     */
+    fun preparePostcode(
+        postcodes: CarrierPostcodes,
+        fill: PostcodeFill,
+        given: List<GivenPostcode>,
+    ): Pair<CarrierPostcodes, PostcodeFill> {
+        val prepared = fill.prepare()
+        val requirement = postcodeRequirement ?: return postcodes to prepared
+        val suggestion = previousPostcode(requirement, given) ?: return postcodes to prepared
+        return when {
+            resolvedCarrier in postcodes ->
+                postcodes to if (PostcodeFill(suggestion).holds(postcodes[resolvedCarrier])) prepared.fill(suggestion) else prepared
+            requirement.isOptional -> postcodes to prepared
+            else -> postcodes.with(resolvedCarrier, suggestion) to prepared.fill(suggestion)
+        }
+    }
 
     /**
      * The field's text changed (`onChange(of: trackingInput)`): no carrier picked by hand any more, and a number chosen

@@ -312,6 +312,73 @@ class ParcelAdditionTests {
         assertEquals("3011", gls.previousPostcode(requirement, given))
     }
 
+    /**
+     * Each carrier's postcode is its own, as the web's `carrierPostcodes`: a required field starts from the last postcode
+     * given, PostNL's optional one for a 3S number is only offered, and one typed for a carrier never shows or goes
+     * with another, which shows its own again.
+     */
+    @Test
+    fun eachCarrierKeepsItsOwnPostcodeARequiredOneFilledAnOptionalOneOffered() {
+        val given = listOf(GivenPostcode(carrier = CarrierId.Dpd, postcode = "1234 AB"))
+        val postnl = addition("3SABCD826405193")
+        assertEquals(CarrierId.SpringGDS, postnl.resolvedCarrier)
+        assertTrue(postnl.postcodeRequirement!!.isOptional)
+        val packs = postnl.copy(carrierOverride = CarrierId("packs"))
+        assertFalse(packs.postcodeRequirement!!.isOptional)
+        fun ParcelAddition.prepared(postcodes: CarrierPostcodes, fill: PostcodeFill = PostcodeFill()) =
+            preparePostcode(postcodes, fill, given)
+
+        // A required postcode starts from the last given that fits.
+        val (filled, fill) = packs.prepared(CarrierPostcodes())
+        assertEquals("1234 AB", packs.withPostcode(filled).deliveryPostcode)
+        assertTrue(fill.holds("1234 AB"))
+        assertEquals("1234 AB", packs.withPostcode(filled).sentPostcode)
+
+        // PostNL's optional one stays empty, that postcode offered, and nothing goes with the parcel.
+        val (offered, offeredFill) = postnl.prepared(filled, fill)
+        val shown = postnl.withPostcode(offered)
+        assertEquals("", shown.deliveryPostcode)
+        assertEquals("1234 AB", offeredFill.offering(shown.previousPostcode(shown.postcodeRequirement!!, given)))
+        assertEquals("", shown.sentPostcode)
+        assertTrue(shown.canSave)
+        // Accepted, it is PostNL's, and goes with the parcel.
+        val accepted = offered.with(CarrierId.SpringGDS, "1234 AB")
+        assertEquals("1234 AB", postnl.withPostcode(accepted).sentPostcode)
+
+        // One typed for PostNL is not Packs', which starts from the one given; back on PostNL, it is there again.
+        val typed = CarrierPostcodes().with(CarrierId.SpringGDS, "1011 CD")
+        val (other, _) = packs.prepared(typed)
+        assertEquals("1234 AB", packs.withPostcode(other).deliveryPostcode)
+        val (back, _) = postnl.prepared(other.with(CarrierId("packs"), "2000 EF"))
+        assertEquals("1011 CD", postnl.withPostcode(back).sentPostcode)
+        assertEquals("2000 EF", packs.withPostcode(back).deliveryPostcode)
+        // A carrier with no postcode field sends none, whatever another's holds.
+        assertNull(addition("1Z999AA10123456784").withPostcode(back).sentPostcode)
+
+        // A field emptied stays so: the postcode given before doesn't fill it again.
+        val (emptied, _) = packs.prepared(CarrierPostcodes().with(CarrierId("packs"), ""))
+        assertEquals("", packs.withPostcode(emptied).deliveryPostcode)
+        assertFalse(packs.withPostcode(emptied).canSave)
+        // A carrier's own, where it is the postcode given before, can still be forgotten.
+        val (own, ownFill) = packs.prepared(CarrierPostcodes().with(CarrierId("packs"), "1234 AB"), PostcodeFill("9999"))
+        assertEquals("1234 AB", packs.withPostcode(own).deliveryPostcode)
+        assertTrue(ownFill.holds("1234 AB"))
+    }
+
+    @Test
+    fun aForgottenPostcodeLeavesEveryCarriersFieldAndThePostcodesAreKeptAsText() {
+        val postcodes = CarrierPostcodes()
+            .with(CarrierId.SpringGDS, "1234 AB").with(CarrierId("packs"), "1234ab").with(CarrierId.GlsCh, "3011")
+        val forgotten = postcodes.without("1234 AB")
+        assertEquals(CarrierPostcodes().with(CarrierId.GlsCh, "3011"), forgotten)
+        // Gone, not emptied: a required field fills again from what is left when its carrier comes back.
+        assertFalse(CarrierId("packs") in forgotten)
+
+        val emptied = postcodes.with(CarrierId.Dpd, "")
+        assertEquals(emptied, CarrierPostcodes.from(emptied.kept))
+        assertEquals(CarrierPostcodes(), CarrierPostcodes.from(emptyList()))
+    }
+
     @Test
     fun theFieldSettlesOnTheNumberAPasteOrADraftNames() {
         val form = addition("").typing("1Z999AA10123456784").settling("1Z999AA10123456784")

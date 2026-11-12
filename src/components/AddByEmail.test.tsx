@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ApiAddByEmail, ApiAddByEmailResponse } from '../generated/apiContract';
 import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
+import { gmailFilter } from '../lib/emailFilter';
 import { AccountMenu } from './AccountMenu';
 import { AddByEmailPage } from './AddByEmail';
 
@@ -43,6 +44,29 @@ describe('adding parcels by email in Settings', () => {
     await user.click(screen.getByRole('button', { name: 'Copy address' }));
     expect(copy).toHaveBeenCalledWith(inbox.address);
     expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument();
+  });
+
+  it('offers the filter for the languages the reader picks, and copies it', async () => {
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
+    const copy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    const user = userEvent.setup();
+    render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} />);
+    const languages = screen.getByRole('group', { name: 'Languages your shops and carriers write in' });
+    const chosen = () => within(languages).getAllByRole('button', { pressed: true }).map((button) => button.textContent);
+    expect(chosen()).toEqual(['English', 'French']);
+    expect(screen.getByText(/^subject:\(shipped OR .* OR "en transit"\)$/)).toBeInTheDocument();
+
+    await user.click(within(languages).getByRole('button', { name: 'German' }));
+    await user.click(within(languages).getByRole('button', { name: 'English' }));
+    expect(chosen()).toEqual(['German', 'French']);
+    await user.click(screen.getByRole('button', { name: 'Copy filter' }));
+    expect(copy).toHaveBeenCalledWith(gmailFilter(['de', 'fr']));
+    expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument();
+
+    await user.click(within(languages).getByRole('button', { name: 'German' }));
+    await user.click(within(languages).getByRole('button', { name: 'French' }));
+    expect(chosen()).toEqual(['French']);
+    expect(screen.getByRole('button', { name: 'Copy filter' })).toBeInTheDocument();
   });
 
   it('shows Gmail\'s confirmation and the last email, renews only once confirmed, and turns off', async () => {

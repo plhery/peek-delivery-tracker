@@ -6,6 +6,8 @@ import PostalMime, { type Address, type Email } from 'postal-mime';
 export interface InboundMail {
   /** The shop or sender that wrote the email, as the parcels it names are labelled. Empty when it has none. */
   sender: string;
+  /** The address the email is from, in lower case. Empty when it has none. */
+  from: string;
   /** The subject, the body as text, and the links of its HTML, one per line. */
   text: string;
   /** Gmail asking to confirm that it may forward to the address, with its code and link when they are there. */
@@ -199,6 +201,7 @@ export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   const text = [(email.subject ?? '').slice(0, MOST_SUBJECT_LENGTH), body.slice(0, BODY_SHARE), ...read].join('\n');
   return {
     sender: senderOf(email, body),
+    from: mailbox(email.from)?.address.trim().toLowerCase() ?? '',
     text,
     confirmation: gmailConfirmation(email, body, links),
   };

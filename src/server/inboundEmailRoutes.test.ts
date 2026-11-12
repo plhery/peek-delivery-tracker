@@ -151,6 +151,16 @@ describe('an email to a forwarding address', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'known', 0);
   });
 
+  it('drops the server\'s own email about a parcel, which a filter sent back', async () => {
+    vi.stubEnv('EMAIL_FROM', 'Peek <Hello@Peek.example>');
+    const db = account();
+    await posted(mail('Peek <hello@peek.example>', 'Delivered: Example Shop', `Your parcel ${UPS} was delivered.`));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.record).not.toHaveBeenCalled();
+    await posted(mail('Peek fans <hello@peek-fans.example>', 'Delivered', `Your parcel ${UPS} was delivered.`));
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1);
+  });
+
   it('reads no order number as a tracking number', () => {
     expect(trackingNumbersInText(`Order 111-2345678-9012345 shipped with ${UPS}`).map(({ normalized }) => normalized)).toEqual([UPS]);
     expect(trackingNumbersInText('Your order PO-211-01234567890123456 is confirmed')).toEqual([]);

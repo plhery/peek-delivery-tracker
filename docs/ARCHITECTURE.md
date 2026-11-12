@@ -274,6 +274,10 @@ Key server modules:
 - **Adding parcels by email**: an account the server opens it to (`INBOUND_EMAIL_ACCOUNTS`)
   gets a forwarding address whose random token (16 base32 characters, 80 bits) names it.
   Every other account gets 404 from `/api/account/inbox`, so Settings shows no row.
+  - Settings gives the search to paste into Gmail's filter: the reader picks the languages
+    their shops and carriers write in, and the filter looks for those languages' shipping
+    words in the subject (`src/lib/emailFilter.ts`). It starts with the language Peek
+    shows, the browser's and English.
   - A Cloudflare Email Worker (`ops/cloudflare/inbound-email-worker.js`) posts each email to
     `POST /api/inbound/email`, signed with a secret it shares with the server: an HMAC over
     the time, the recipient and the raw mail, valid for five minutes. An unsigned or stale
@@ -292,6 +296,8 @@ Key server modules:
     nothing. `src/server/parcelsFromText.ts` is that step.
   - Gmail's request to confirm forwarding is kept for three days for the owner to finish in
     Gmail, never followed by the server: its code and a link only to Google's own hosts.
+  - The server's own emails (`EMAIL_FROM`) are dropped: a delivery email that a filter
+    sends back names a parcel the account follows already.
   - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
     only.

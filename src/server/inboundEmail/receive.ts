@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { ownSenderAddress } from '../email/config';
 import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, type ParcelAddition } from '../parcelsFromText';
 import type { InboundMailResult, SupabaseServiceClient } from '../supabase';
@@ -22,7 +23,8 @@ export function mailResult(additions: readonly ParcelAddition[]): InboundMailRes
 /**
  * Takes one email the Worker passed on: finds the account its address names and, when that account takes email,
  * counts it against the allowances and adds the numbers it holds, labelled with its sender. Gmail's request to
- * confirm forwarding is kept for the owner instead. The email itself is never stored.
+ * confirm forwarding is kept for the owner instead, and the server's own emails are dropped. The email itself is never
+ * stored.
  */
 export async function receiveInboundMail(
   service: SupabaseServiceClient,
@@ -53,6 +55,8 @@ export async function receiveInboundMail(
     await service.recordInboundMail(userId, 'none', 0);
     return finish('none', 'unreadable');
   }
+  // The server's own email about a parcel names one the account follows already: a filter that sends it back adds nothing.
+  if (mail.from && mail.from === ownSenderAddress()) return finish('dropped', 'own');
   if (mail.confirmation) {
     await service.recordInboundMail(userId, 'confirmation', 0, mail.confirmation);
     return finish('confirmation');

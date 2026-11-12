@@ -86,6 +86,13 @@ export function emailSettings(env: NodeJS.ProcessEnv = process.env): EmailSettin
   };
 }
 
+/** The address the server's own emails are from, in lower case, or null when `EMAIL_FROM` names none. */
+export function ownSenderAddress(env: NodeJS.ProcessEnv = process.env): string | null {
+  const from = env.EMAIL_FROM?.trim() ?? '';
+  const bare = (senderPattern.exec(from)?.[1] ?? from).toLowerCase();
+  return addressPattern.test(bare) ? bare : null;
+}
+
 /** The same reading for request handling: a malformed set sends nothing, and startup reports it. */
 export function emailConfigured(env: NodeJS.ProcessEnv = process.env): boolean {
   try {

@@ -495,6 +495,18 @@ describe('migrations that already made a change', () => {
     assert.doesNotMatch(report, /Blocked|gh workflow run|```sql/);
   });
 
+  it('reads a carrier declared as a sentence, closed with a full stop, and a pattern as written', async () => {
+    const { blocked } = await decideGate({
+      before,
+      after,
+      migrations: [migration('20261017100000_example_post', `${allChanges[0]}.`), migration('20261017110000_optional_dpd', ...allChanges.slice(1))],
+      missingMigrations: ledger().missingMigrations,
+    });
+    assert.equal(blocked, false);
+    assert.deepEqual(declaredChanges([migration('20261017100000_example', 'carriers added example-post.', 'inputs added dpd: pattern ^[0-9]{4}.')])
+      .map(({ entry }) => entry), ['example-post', 'dpd: pattern ^[0-9]{4}.']);
+  });
+
   it('blocks a change no applied migration declares', async () => {
     const cases = {
       'no migration declares it': [migration('20261017100000_example_post', allChanges[0])],

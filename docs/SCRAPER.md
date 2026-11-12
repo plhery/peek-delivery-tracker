@@ -177,7 +177,8 @@ the run's summary gives:
 -- Database gate: inputs added example-post: postcode, validator internationalPostcode, optional
 ```
 
-A change passes once a migration that declares it is in production's ledger of applied
+A carrier id, provider or stage closed with a full stop still counts; a pattern is read as
+written. A change passes once a migration that declares it is in production's ledger of applied
 migrations, which the gate reads with the publishable key, as the deployment does. For one
 change, the latest migration that names it decides. So a migration applied before the
 release lets the scheduled run adopt it. A line can be added to a migration after it is

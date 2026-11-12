@@ -3,7 +3,7 @@ title: TopYou tracking: TYZR numbers, scans and who delivers
 description: Track a TopYou (通邮) parcel from China: what a TYZR…YQ number looks like, what its English scans mean and who takes the parcel over in your country.
 slug: topyou-tracking
 published: 2026-10-28
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
@@ -69,6 +69,8 @@ TopYou writes its scans in English. In the order a parcel gets them:
 In Germany, iMile's scans come as iMile's name for the step, a comma and iMile's sentence: `In Transit, Your order has been shipped from 【iMile Köln DC Center】.` (sent on from an iMile centre: "In transit"), `Delivery, Your order has arrived at 【Dortmund01】` (at the iMile station it is delivered from: "In transit"), `Delivery, Your order has assigned delivery drvier.` (a driver is named but hasn't set out; the misspelling is iMile's: "In transit") and `Delivery, Our delivery associate is out for delivery.` (iMile's driver is bringing it: "Out for delivery"). So a line that opens with `Delivery` doesn't mean the driver has set out. An iMile line that moves nothing, such as a stock count, leaves the status as it was. A pickup point's notice that opens `Arrived, The parcel has been delivered to 【】. Please collect your parcel promptly at 【】 using your pickup code.` means the parcel is waiting there for you to collect it with your pickup code: "Ready for pickup".
 
 In Austria, DPD's scans come in DPD's English: `In parcel delivery center` (at DPD's delivery depot: "In transit"), `In delivery` (DPD's driver is bringing it: "Out for delivery"), `Unfortunately, consignee not present. Notification was left.` (nobody was in, and DPD left a card: "Delivery attempted"), `Parcel was handed over to Pickup parcel shop` and `Takeover by Pickup parcel shop` (it waits for you at a DPD Pickup parcelshop: "Ready for pickup") and `Parcel was not picked up` (not collected in time, so DPD sends it back to the sender: "Needs attention").
+
+In Spain, the delivering partner's scan after customs can read `Parcel in transit` (it's on its way to you: "In transit").
 
 ## Who delivers TopYou parcels
 

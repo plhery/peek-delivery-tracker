@@ -3,7 +3,7 @@ title: Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza
 description: Tracking Poste Italiane: dove trovi il codice spedizione (anche 1UW e 3UW), cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-11-05
+updated: 2026-11-12
 ---
 
 Poste Italiane consegna i pacchi dei negozi online italiani e quelli che arrivano dall'estero. Per seguire il tuo pacco cerca il codice spedizione in «Cerca Spedizioni» su poste.it (il servizio che prima si chiamava Dove Quando) o nell'App Poste Italiane, oppure incollalo nel box qui sopra. Il codice è sulla ricevuta di chi ha spedito; se hai comprato online, te lo dà il venditore.
@@ -46,6 +46,7 @@ Su poste.it ogni passaggio ha un'etichetta breve, spiegata nella «Legenda degli
 | `completata la fase di verifica per lo svincolo…` | I controlli doganali sono finiti. |
 | `In transito` | Viaggia da un centro di Poste all'altro (centri di smistamento, centri operativi). |
 | `In transito presso il Centro di lavorazione Internazionale` | Ha lasciato l'Italia. Per Postapriority Internazionale e Poste Delivery International Standard è l'ultima traccia. |
+| `presso il Centro di lavorazione Internazionale` | Una raccomandata al Centro di lavorazione Internazionale di Poste, ancora in transito. Compare su una riga a sé, dopo il movimento in transito. |
 | `In consegna` | È stato affidato a chi lo consegna. |
 | `consegna non andata a buon fine…` | La consegna non è riuscita, per esempio per un indirizzo sbagliato o incompleto. |
 | `disponibile per il ritiro dal giorno lavorativo successivo alla data indicata` | Ti aspetta dove dice l'avviso del portalettere: puoi ritirarlo dal giorno lavorativo dopo la data indicata. |

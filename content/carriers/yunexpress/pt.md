@@ -3,7 +3,7 @@ title: YunExpress rastreio: código YT, estados e contactos
 description: Rastreio YunExpress em Portugal: o código YT, o que quer dizer cada estado em inglês, a ligação aos CTT e a quem perguntar quando a encomenda para.
 slug: yunexpress-rastreio
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 A YunExpress, também escrita Yun Express, é uma empresa de logística de Shenzhen que envia pequenas encomendas da China para vendedores online, incluindo os da Amazon, da Temu e da SHEIN. Para rastrear a encomenda, escreve o número que começa por YT no [yuntrack.com](https://www.yuntrack.com/), o site de seguimento da YunExpress, ou cola-o na caixa acima. O site da YunExpress não fala de SMS ou e-mails para quem recebe: procura o número no e-mail de envio da loja ou na página da tua encomenda.
@@ -38,6 +38,7 @@ O yuntrack só existe em inglês: não tem seletor de idioma nem versão em port
 | `Clearance processing completed - Import` | Desalfandegada: segue caminho. |
 | `Delivered to local carrier` | Entregue à transportadora local que a vai distribuir, não a ti. |
 | `Package accepted at courier partner` | A transportadora parceira recebeu-a: uma passagem de mãos, não a tua entrega. |
+| `Your parcel is out for delivery.` | Linha da J&T Express na Austrália, para uma encomenda com destino lá: saiu para entrega. Pode acabar com o número do apoio ao cliente da J&T. |
 | `Delivered by Mailbox` | Deixada na tua caixa do correio. |
 | `Returned` | Encomenda devolvida. A YunExpress não publica regras de devolução para quem recebe. |
 

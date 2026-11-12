@@ -3,7 +3,7 @@ title: TopYou tracking: codice TYZR, stati e consegna in Italia
 description: Tracking TopYou (通邮) per un pacco dalla Cina: com'è fatto un codice TYZR…YQ, cosa vogliono dire le scansioni in inglese e chi prende il pacco in Italia.
 slug: topyou-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-12
 ---
 
 TopYou (通邮, Tongyou, anche 通邮集团 o SZTY56) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZ e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
@@ -62,7 +62,7 @@ TopYou scrive le scansioni in inglese, e Peek le mostra così come sono. Nell'or
 | `Export clearance success` | La dogana cinese l'ha lasciato partire: non è fermo. | «In transito» |
 | `Import clearance success` | La dogana del Paese di destinazione l'ha sdoganato per la posta. La posta può ancora mostrare scansioni doganali sue. | «In transito» |
 
-**Dopo il passaggio.** Il sito di TopYou può continuare con le scansioni del corriere che consegna, nelle sue parole. In Italia, per esempio, quelle di GOFO: `Arrived at sorting center`, `The package left sorting center` e `Package departed from sorting center` (il pacco è in un centro di smistamento di GOFO o lo lascia: «In transito»), `Arrived at GOFO Regional Destination Facility` (il pacco è arrivato alla struttura regionale di GOFO: «In transito») e `The driver is out for delivery` (il corriere di GOFO è partito per il giro di consegna: «In consegna»).
+**Dopo il passaggio.** Il sito di TopYou può continuare con le scansioni del corriere che consegna, nelle sue parole. In Italia, per esempio, quelle di GOFO: `Arrived at sorting center`, `The package left sorting center` e `Package departed from sorting center` (il pacco è in un centro di smistamento di GOFO o lo lascia: «In transito»), `Arrived at GOFO Regional Destination Facility` (il pacco è arrivato alla struttura regionale di GOFO: «In transito») e `The driver is out for delivery` (il corriere di GOFO è partito per il giro di consegna: «In consegna»). In Spagna, dopo la dogana, il corriere che consegna può mandare `Parcel in transit` (il pacco è in viaggio verso di te: «In transito»).
 
 ## Chi consegna i pacchi TopYou in Italia
 

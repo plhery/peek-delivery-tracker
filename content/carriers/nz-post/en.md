@@ -3,7 +3,7 @@ title: NZ Post tracking: numbers, statuses and missed parcels
 description: Track an NZ Post or CourierPost parcel: where the tracking number is, what each status means, card left, Collect my parcel, delays and how to contact NZ Post.
 slug: nz-post-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 NZ Post is New Zealand's state-owned postal service, and its CourierPost courier services are tracked the same way. You can follow a parcel with NZ Post's [Track a parcel](https://www.nzpost.co.nz/tools/tracking) tool on nzpost.co.nz, in the [NZ Post app](https://www.nzpost.co.nz/personal/app) or by pasting the number in the box above.
@@ -39,6 +39,8 @@ NZ Post's site and tracking are in English only. These are the statuses most par
 | `Collected from sender` | A courier driver picked it up from the sender, or it was dropped at an NZ Post outlet. |
 | `International arrival` | A parcel from abroad has arrived in New Zealand. |
 | `Held for clearance` | Waiting for a border agency: it may need an MPI inspection or Customs charges. |
+| `MoH - Medsafe assessment` | Held at the border while Medsafe, the Ministry of Health's medicines regulator, assesses it. |
+| `Presented for border assessment` | Presented to the border agency for assessment: still held at the border. |
 | `Processed at depot` | Sorted at a depot on its way to you. |
 | `Ready for courier` | At your local depot, waiting for your courier driver. |
 | `With courier for delivery` | Out for delivery: NZ Post says it should arrive today. |

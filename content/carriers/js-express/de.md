@@ -3,7 +3,7 @@ title: JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller
 description: JS-Express-Paket (急速国际) aus China verfolgen: wie die JSE…YQ-Nummer aussieht, was die Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: js-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-11
+updated: 2026-11-12
 ---
 
 JS Express (急速国际, auch JS EXP) ist ein chinesisches Logistikunternehmen für grenzüberschreitende Onlineshops, betrieben von 急创速供应链管理（苏州）有限公司 in Suzhou. Hat ein Shop deine Bestellung mit JS Express verschickt, beginnt die Sendungsnummer mit JSE und endet auf YQ: Füg sie oben ins Feld ein. JS Express bringt das Paket aus China in dein Land, die Zustellung übernimmt dann ein Paketdienst vor Ort. In Deutschland tauchen im Verlauf von JS Express die Scans von DHL, iMile oder J&T Express auf.
@@ -43,6 +43,7 @@ Die Seite von JS Express listet jeden Scan mit Datum und Uhrzeit, einem Ort in �
 | `DEPART ORIGIN AIRPORT`, `Departure from the original airport`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | Der Flug ist gestartet, manchmal mit Zwischenlandung und Anschlussflug. | „Unterwegs“ |
 | `ARRIVED AT DESTINATION AIRPORT`, `Arrival to the destination airport`, `Item Flight landing`, `NOA-Notification of arrival from GHA` | Am Zielflughafen gelandet. Mit NOA meldet der Abfertiger am Flughafen die Ankunft. | „Unterwegs“ |
 | `The goods have been picked up abroad` | Der Partner von JS Express hat die Sendung am Zielflughafen übernommen. Eine neue Abholung beim Verkäufer ist das nicht. | „Unterwegs“ |
+| `Customs clearance agent received the shipment in destnation country.` | Der Zollagent in deinem Land hat die Sendung nach dem Flug für die Einfuhrabfertigung übernommen. „destnation“ schreibt JS Express selbst so. | „Beim Zoll“ |
 | `Inbound to customs temporary warehouse` | In einem Zolllager, wo es auf die Einfuhrabfertigung wartet. | „Beim Zoll“ |
 | `Released From Import Customs` | Der Zoll hat das Paket zur Einfuhr freigegeben. | „Unterwegs“ |
 | `collection by overseas warehouse` | Das Lager von JS Express in deinem Land hat das Paket nach dem Zoll übernommen. | „Unterwegs“ |

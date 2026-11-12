@@ -3,7 +3,7 @@ title: YunExpress seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de YunExpress desde China: cómo es el número YT, qué significa cada estado en inglés, quién lo entrega en España y a quién preguntar.
 slug: yunexpress-seguimiento
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 YunExpress, también escrito Yun Express, es una empresa de logística de Shenzhen que envía [paquetes pequeños desde China](guide:tracking-from-china) para vendedores online, también los de Amazon, Temu o SHEIN. Para seguir tu paquete, escribe el número que empieza por YT en [yuntrack.com](https://www.yuntrack.com/), su web de seguimiento, o pégalo en la casilla de arriba. La web de YunExpress no habla de SMS ni correos a los destinatarios: busca el número en el correo de envío de la tienda o en la página de tu pedido.
@@ -38,6 +38,7 @@ Yuntrack solo está en inglés y no tiene selector de idioma. Cada paquete apare
 | `Clearance processing completed - Import` | Despachado en aduana; sigue su camino. |
 | `Delivered to local carrier` | Entregado al transportista local que lo reparte, no a ti. |
 | `Package accepted at courier partner` | La empresa de reparto asociada lo ha recibido: un traspaso, no tu entrega. |
+| `Your parcel is out for delivery.` | Línea de J&T Express en Australia, para un paquete con destino allí: está en reparto. Puede acabar con el número de atención al cliente de J&T. |
 | `Delivered by Mailbox` | Dejado en tu buzón. |
 | `Returned` | Vuelve al remitente. |
 

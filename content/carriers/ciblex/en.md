@@ -3,7 +3,7 @@ title: Ciblex tracking: numbers, French statuses and contact
 description: Track a Ciblex Express parcel in France or Belgium: which barcode to use, what Ciblex's French statuses mean, deliveries, C Dispo relays, claims and contacts.
 slug: ciblex-tracking
 published: 2026-10-11
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 Ciblex, or Ciblex Express, is a French express carrier founded in 1977 that delivers between businesses in France, Belgium and abroad, often early in the morning. Track a parcel with the barcode from its label on [Ciblex's tracking page](https://ciblex.eu/en/fast-tracking-of-your-parcels/), which is free, or paste the number in the box above. The number comes from the sender: if you don't have it, ask the shop or supplier that shipped the parcel.
@@ -77,7 +77,7 @@ The contact form on ciblex.eu is for companies' sales enquiries, not tracking qu
 
 ## Tracking a Ciblex parcel with Peek
 
-[Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Chronopost and Ciblex first, after DPD, DHL or another network only when the number's start points to it; elsewhere Ciblex comes sixth or later and may only be asked after you save the parcel. For 24 digits it asks Ciblex, Austrian Post and InPost, and bpost, first, only for a number starting 3232 or 3299. If two carriers know the number, you pick with "Change". Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
+[Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Chronopost and Ciblex first, after DPD, DHL or another network only when the number's start points to it; elsewhere Ciblex comes eleventh or later, after the ten carriers Peek can ask before you save, so it can only be asked once you save the parcel. A 14-digit number starting 10 is the exception, in France or elsewhere: Peek asks Ciblex, SEUR and BRT, not Chronopost, and only if none of them, nor the tracking services it checks next, knows the number does it ask [DPD France](carrier:dpd-fr), whose tracker it opens in a browser. For 24 digits it asks Ciblex, Austrian Post and InPost, and bpost, first, only for a number starting 3232 or 3299. If two carriers know the number, you pick with "Change". Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
 
 It checks Ciblex every 10 minutes, and every 2 minutes from 6 a.m. Paris time on the day Ciblex scans the parcel out for delivery, while Ciblex's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's depot town on a map, and the delivery time, with times read on Paris time and shown in your device's time zone. Lines Peek knows show in plain words such as Delivered, Out for delivery, Ready for pickup, Delivery issue, "Shipment exception" (for `PROBLEME DESTINATAIRE` or `COMPLEMENT ADRESSE`) or "Parcel processed at a Ciblex facility"; other lines, `COLIS NON REMIS` and the 48-hour line included, keep Ciblex's French words. It can notify you of every scan, important steps only or delivery day only.
 

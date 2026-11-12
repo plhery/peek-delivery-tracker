@@ -3,7 +3,7 @@ title: Packeta tracking: Z numbers, statuses and pickup points
 description: Track a Packeta (Zásilkovna) parcel: what the Z number looks like, what each status means, how long pickup points keep parcels and how to reach Packeta.
 slug: packeta-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Packeta is the group brand behind Zásilkovna, its Czech name, and ships to 33 countries. Track a parcel on [Packeta's tracking page](https://tracking.packeta.com/en/), in the Packeta app or in the box above. The number is a `Z` and ten digits, found in Packeta's email, its SMS or the app.
@@ -32,6 +32,7 @@ These are Packeta's English step sentences, in the order a parcel meets them; "�
 | `…successfully received the parcel for transport…` | Packeta has the parcel. |
 | `The parcel is currently on its way to the depot.` | On the road to a sorting depot. |
 | `…arrived at the depot…` | Being sorted at a depot. |
+| `The parcel has arrived at the micro-depot.` | At a small last-mile depot; its town and street follow the sentence. |
 | `The parcel has been handed over to the carrier…` | Passed to the company that delivers it, often a partner carrier abroad. |
 | `…on its way to you…` | Out for delivery. |
 | `The parcel is ready for pickup…` | Waiting at the pickup point or Z-BOX. Use your pick-up code. |

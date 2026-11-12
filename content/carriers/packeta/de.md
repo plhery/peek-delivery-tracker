@@ -3,7 +3,7 @@ title: Packeta Sendungsverfolgung: Z-Nummer, Status und Abholung
 description: Packeta-Paket in Deutschland verfolgen: wie die Z-Nummer aussieht, was die Status heißen, wie lange der Pick-Up Point dein Paket aufhebt und wen du fragst.
 slug: packeta-sendungsverfolgung
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Packeta bringt Bestellungen aus Online-Shops an Abholstellen oder direkt an deine Adresse. Dahinter steht die Packeta Group, die 2010 in Tschechien als Zásilkovna begann und heute unter anderem in der Slowakei, Ungarn, Polen und Rumänien tätig ist. In Deutschland ist das die Packeta eCommerce GmbH in Leipzig. Dein Paket verfolgst du in [Packetas Sendungsverfolgung](https://tracking.packeta.com/de/), in der Packeta-App oder oben im Feld. Die Sendungsnummer besteht aus einem `Z` und zehn Ziffern. Sie steht in der E-Mail oder SMS von Packeta und in der App.
@@ -31,6 +31,7 @@ Peek fragt Packeta auf Englisch ab und zeigt die Schritte so, wie Packeta sie sc
 | `…successfully received the parcel for transport…` | Packeta hat das Paket übernommen. |
 | `The parcel is currently on its way to the depot.` | Es ist auf dem Weg in ein Depot. |
 | `…arrived at the depot…` | Es ist im Depot und wird für die Zustellung vorbereitet. |
+| `The parcel has arrived at the micro-depot.` | Es ist in einem Mikrodepot, einem kleinen Depot für die letzte Strecke. Ort und Straße stehen hinter dem Satz. |
 | `The parcel has been handed over to the carrier…` | Ein anderer Paketdienst hat es jetzt, etwa der Partner, der in Deutschland zustellt. |
 | `…on its way to you…` | Es ist auf dem Weg zu dir. |
 | `The parcel is ready for pickup…` | Es liegt an deinem Pick-Up Point. Nimm den Abholcode mit. |

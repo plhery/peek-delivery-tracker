@@ -3,7 +3,7 @@ title: Spåra paket med TopYou: TYZR-nummer, statusar och leverans
 description: Spåra ditt TopYou-paket (通邮) från Kina: så ser TYZR-numret ut, det här betyder de engelska skanningarna och så går det till när paketet når Sverige.
 slug: topyou-spara-paket
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-12
 ---
 
 TopYou (通邮, Tongyou, även 通邮集团 eller SZTY56) är 深圳市通邮物流科技（集团）股份有限公司, en speditör i Shenzhen i Kina som kör internationella fraktlinjer och skickar beställningar från kinesiska webbutiker till kunder utomlands. Skickar butiken din beställning med TopYou får du ett spårningsnummer som börjar med TYZ och slutar på YQ: klistra in det i fältet ovanför. TopYous spårning följer paketet från lagret i Kina, genom flyget och tullen, och kan sedan fortsätta med skanningar från bolaget som delar ut det.
@@ -62,7 +62,7 @@ TopYou skriver sina skanningar på engelska. I den ordning paketet får dem:
 | `Export clearance success` | Exporttullen i Kina har klarerat paketet. Det har inte fastnat. | "In transit" |
 | `Import clearance success` | Tullen i Sverige har klarerat paketet för posten. Posten kan ändå visa egna tullskanningar efteråt. | "In transit" |
 
-**Skanningar från leveransbolaget.** Efter överlämningen kan TopYous spårningssida fortsätta med leveransbolagets skanningar, med dess egna ord. Så gör den till exempel med USPS i USA, GOFO i Frankrike och Italien och iMile i Tyskland. GOFOs `The driver is out for delivery` och iMiles `Delivery, Our delivery associate is out for delivery.` visar Peek som "Out for delivery" (ute för leverans), medan till exempel GOFOs `Arrived at sorting center` blir "In transit". En rad från iMile som inte flyttar paketet, som en inventering, lämnar statusen som den var.
+**Skanningar från leveransbolaget.** Efter överlämningen kan TopYous spårningssida fortsätta med leveransbolagets skanningar, med dess egna ord. Så gör den till exempel med USPS i USA, GOFO i Frankrike och Italien och iMile i Tyskland. GOFOs `The driver is out for delivery` och iMiles `Delivery, Our delivery associate is out for delivery.` visar Peek som "Out for delivery" (ute för leverans), medan till exempel GOFOs `Arrived at sorting center` blir "In transit". Detsamma gäller `Parcel in transit`, som leveransbolaget i Spanien kan skicka efter tullen när paketet är på väg till dig. En rad från iMile som inte flyttar paketet, som en inventering, lämnar statusen som den var.
 
 ## Vem som delar ut TopYou-paket i Sverige
 

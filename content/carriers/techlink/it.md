@@ -3,7 +3,7 @@ title: Techlink tracking: numero ZHPHD…ML, stati e chi consegna
 description: Tracking Techlink (智禾) per i pacchi dalla Cina: com'è fatto il numero ZHPHD…ML, cosa vogliono dire le scansioni e cosa fare se il tracciamento si ferma.
 slug: techlink-tracking
 published: 2026-11-01
-updated: 2026-11-06
+updated: 2026-11-12
 ---
 
 Techlink (智禾国际物流, Zhihe International Logistics) è un'azienda di logistica di Shenzhen che spedisce pacchi dalla Cina verso l'Europa e l'America per conto dei venditori online. Un numero Techlink inizia con ZHPHD e finisce con ML: inseriscilo nella pagina di tracking di Techlink, www.techlinksz.cn/trajectory, o incollalo nel box qui sopra. Il numero te lo dà il negozio che ha spedito l'ordine, nei dettagli di spedizione.
@@ -45,6 +45,9 @@ Techlink non pubblica un elenco delle sue scansioni. Le registra in inglese e in
 | `Your shipment has been processed at sorting center and ready for shipping` | Quel centro ha smistato il pacco per la tappa successiva. |
 | `Your shipment has departed from the transit origin` | Ha lasciato quel centro di smistamento per la tappa successiva. |
 | `In transit, it is currently in transit to the next facility` | È in viaggio tra due strutture nel Paese di destinazione. |
+| `The parcel has been successfully picked up and is being prepared for transportation.` | Per un pacco diretto in Australia: dopo il volo, J&T Express Australia l'ha preso in carico da Techlink. Può seguire il numero del servizio clienti di J&T. |
+| `The parcel is dispatched from the transit center to the next destination` | Scansione di J&T Express Australia: ha lasciato un centro di transito per la tappa successiva. |
+| `The parcel arrives at the distribution center and is prepared for transport to the next destination.` | Scansione di J&T Express Australia: è in un centro di distribuzione, pronto per la tappa successiva. |
 
 Per un numero che non conosce, la pagina mostra `查询不到轨迹` (nessun tracciamento trovato), `未知 → 未知` (Paesi sconosciuti) e `暂无最新轨迹` (ancora nessuna scansione recente).
 
@@ -60,7 +63,7 @@ Il servizio espresso porta a porta di Techlink è DDP (dazi pagati) o DDU (dazi 
 
 **Solo `Parcel electronic information received`.** Il venditore ha prenotato la spedizione, ma il pacco non è ancora arrivato al magazzino di Techlink. Se per qualche giorno non succede niente, chiedi al venditore se l'ha spedito davvero.
 
-**Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale. Le righe viste finora dopo questa sul tracking di Techlink riguardano solo il Paese di destinazione: un hub, un centro di smistamento e il tragitto da lì, le ultime cinque righe della tabella, e per alcuni pacchi le scansioni del corriere che consegna, scritte con le sue parole, fino a `Parcel is out for delivery.` o a una consegna non riuscita. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale. Le righe viste finora dopo questa sul tracking di Techlink riguardano solo il Paese di destinazione: un hub, un centro di smistamento e il tragitto da lì, le cinque righe della tabella a partire da `Shipment Received at Facility`, e per alcuni pacchi le scansioni del corriere che consegna, scritte con le sue parole, fino a `Parcel is out for delivery.` o a una consegna non riuscita. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun risultato.** Controlla il numero con il venditore: un numero ZHPHD ha esattamente 19 caratteri. Anche un pacco appena prenotato potrebbe non mostrare ancora niente. Peek mostra «In attesa del corriere» e continua a controllare.
 

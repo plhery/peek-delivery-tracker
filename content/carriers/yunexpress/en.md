@@ -3,7 +3,7 @@ title: YunExpress tracking: YT numbers, statuses and who delivers
 description: Track a YunExpress (Yun Express) parcel from China: the YT number, what each status means, who delivers in the UK or US and who to ask when it stalls.
 slug: yunexpress-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 YunExpress, also written Yun Express, is a Shenzhen logistics company that ships small parcels from China for online sellers, including sellers on Amazon, Temu, SHEIN and AliExpress. A tracking number made of YT and 16 digits is a YunExpress number. Track it on [yuntrack.com](https://www.yuntrack.com/), YunExpress's own tracking site, or paste it in the box above. YunExpress's site doesn't mention texts or emails to recipients, so look in the shop's shipping email or your order page.
@@ -41,6 +41,7 @@ Yuntrack is in English only. It files each parcel under a tab (`Processing`, `Tr
 | `Delivered to local carrier` | Handed to the carrier that delivers it, not to you. |
 | `Arrived at GOFO Regional Destination Facility` | Reached GOFO, the last-mile carrier named in the scan. |
 | `The driver is out for delivery` | Out with the driver. |
+| `Your parcel is out for delivery.` | Relayed from J&T Express Australia, for a parcel to Australia: out with the driver. It can end with J&T's customer service number. |
 | `Delivered by Mailbox` | In your letterbox or mailbox. |
 
 `Transit` means on the way; the latest scan gives the step. YunExpress doesn't explain `Alert`, its tab for parcels with a problem: read the line under it and ask the shop if nothing changes.

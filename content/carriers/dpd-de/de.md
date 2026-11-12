@@ -3,7 +3,7 @@ title: DPD Sendungsverfolgung Deutschland: Status und Hilfe
 description: DPD-Paket in Deutschland verfolgen: wo die 14-stellige Paketnummer steht, was die Status heißen, wie Predict und der Paketshop funktionieren und wen du anrufst.
 slug: dpd-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-11-05
+updated: 2026-11-12
 ---
 
 DPD in Deutschland ist die DPD Deutschland GmbH aus Aschaffenburg, ein Paketdienst im Geopost-Netz mit 10.300 Pickup Paketshops. Dein Paket verfolgst du mit der 14-stelligen Paketnummer auf DPDs Seite, mit deiner Postleitzahl siehst du dort alle Details. Oder du fügst die Nummer oben ins Feld ein. Je nachdem, was du in der Hand hast:
@@ -33,6 +33,7 @@ DPDs deutsche Hilfeseiten beschreiben die Schritte auf Deutsch. Peek fragt DPD a
 | DPD schreibt | Was es für dich heißt |
 | --- | --- |
 | `Order information has been transmitted to DPD.` | Angekündigt: Der Versender hat das Paket angemeldet, DPD hat es aber noch nicht. |
+| `Parcelinfo handed to DPD` | Die Paketdaten des Versenders sind bei DPD, das Paket noch nicht; Peek zeigt „Etikett erstellt“. Die Zeile kommt nur über Tracking-Dienste, nicht aus DPDs eigener Sendungsverfolgung. |
 | `Parcel handed to DPD` | DPD hat das Paket, vom Fahrer abgeholt oder im Paketshop abgegeben. |
 | `Parcel handed to Pickup parcelshop by consignor.` | Der Versender hat es in einem Pickup Paketshop abgegeben. |
 | `In transit.`, `Your parcel is on its way` | Unterwegs im DPD-Netz. |

@@ -3,7 +3,7 @@ title: YunExpress Sendungsverfolgung: Status, Zusteller, Kontakt
 description: YunExpress-Paket aus China verfolgen: die YT-Nummer, was die englischen Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, wen du fragst.
 slug: yunexpress-sendungsverfolgung
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 YunExpress, oft auch Yun Express geschrieben, ist ein Logistikunternehmen aus Shenzhen, das für Onlinehändler kleine Pakete aus China verschickt, auch für Verkäufer auf Amazon, Temu oder SHEIN. Für die Sendungsverfolgung gibst du die Nummer, die mit YT beginnt, auf [yuntrack.com](https://www.yuntrack.com/) ein, der Tracking-Seite von YunExpress, oder fügst sie oben ins Feld ein. Eine SMS oder E-Mail an Empfänger beschreibt YunExpress nirgends: Die Nummer steht in der Versand-E-Mail des Shops oder in deiner Bestellübersicht.
@@ -38,6 +38,7 @@ Yuntrack gibt es nur auf Englisch, auch mit deutsch eingestelltem Browser, und e
 | `Clearance processing completed - Import` | Verzollt, es geht weiter. |
 | `Delivered to local carrier` | An den Paketdienst vor Ort übergeben, nicht an dich. |
 | `Shipment in transit to DHL` | Unterwegs zu DHL, das die letzte Strecke übernimmt. |
+| `Your parcel is out for delivery.` | Von J&T Express in Australien, bei einem Paket nach Australien: Der Fahrer bringt es heute. Manchmal folgt die Nummer des Kundendiensts von J&T. |
 | `Delivered by Mailbox` | In deinen Briefkasten gelegt. |
 | `POD available` | Von DPD: Der Zustellnachweis liegt vor, das Paket ist zugestellt. |
 

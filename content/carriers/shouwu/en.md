@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -57,6 +57,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Your country's customs have let it through. | "In transit" |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Handed to the courier that delivers in your country, not delivered to you ("deliverey" is Shouwu's spelling). | "In transit" |
 | `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
+| `The shipment has been processed in the destination parcel center` | DHL has sorted it at the parcel centre that serves your address, before its delivery round. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
 | `Abnormal delivery` | The round didn't deliver. The courier's reason follows as a scan of its own in angle brackets, such as `<Incorrect address.>`. | "Delivery attempted" |
 | `Delivered by post man`, `This parcel has been delivered` | The local post or courier has delivered it. | "Delivered", once Shouwu's status says `Delivered` |

@@ -3,7 +3,7 @@ title: YunExpress suivi : numéro YT, statuts et qui livre
 description: Suivre un colis YunExpress (Yun Express) venu de Chine : le numéro YT, les statuts en anglais expliqués, qui livre en France, en Belgique et en Suisse.
 slug: yunexpress-suivi
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 YunExpress, aussi écrit Yun Express, est une société de logistique chinoise, basée à Shenzhen, qui expédie depuis la Chine les petits colis de vendeurs en ligne, notamment de vendeurs présents sur Amazon, Temu, SHEIN ou la Fnac. Pour suivre ton colis, saisis le numéro qui commence par YT sur [yuntrack.com](https://www.yuntrack.com/), le site de suivi de YunExpress, ou colle-le dans le champ ci-dessus. YunExpress ne décrit aucun SMS ni e-mail aux destinataires : le numéro se trouve dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
@@ -38,6 +38,7 @@ Yuntrack n'existe qu'en anglais, sans choix de langue. Chaque colis y est rangé
 | `Clearance processing completed - Import` | Dédouané, le colis repart. |
 | `Delivered to local carrier` | Remis au transporteur local qui va te livrer, pas à toi. |
 | `Your package is ready to be picked up.` | Ligne relayée de DHL : ton colis t'attend dans un DHL ServicePoint. |
+| `Your parcel is out for delivery.` | Ligne relayée de J&T Express en Australie, pour un colis envoyé là-bas : le livreur l'a dans sa tournée. Elle peut finir par le numéro du service client de J&T. |
 | `Delivered by Mailbox` | Déposé dans ta boîte aux lettres. |
 | `POD available` | Ligne relayée de DPD : la preuve de livraison existe, le colis est livré. |
 

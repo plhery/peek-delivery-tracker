@@ -3,7 +3,7 @@ title: Packeta csomagkövetés: Z-szám, státuszok, átvétel
 description: Így követheti a Z betűvel kezdődő Packeta-csomagot: mit jelentenek a státuszok, meddig vár a csomag a Z-Ponton, hogyan fizetheti ki az utánvétet, hol reklamálhat.
 slug: packeta-csomagkovetes
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 A Packeta és a FOXPOST egyaránt a cseh anyavállalatú Packeta Group tagja. Magyarországon a két cég összeolvadóban van, a packeta.hu mögött ma a FoxPost Kft. áll. Belföldi csomagot Packeta néven nem szállítanak, így a `Z` betűvel kezdődő számú csomag külföldről érkezik Önhöz. A [Packeta Csomagkövetés](https://tracking.packeta.com/hu/) oldalán vagy a fenti mezőben követheti.
@@ -32,6 +32,7 @@ A tracking.packeta.com/hu magyarul írja a lépéseket, a Peek viszont angolul k
 | `…successfully received the parcel for transport…` | A Packeta átvette a csomagot. A mondat után a depó neve áll. |
 | `The parcel is currently on its way to the depot.` | Úton van a depó felé. |
 | `…arrived at the depot…` | Megérkezett a mondatban megnevezett depóba. |
+| `The parcel has arrived at the micro-depot.` | Megérkezett egy mikrodepóba, az út utolsó szakaszát kiszolgáló kis depóba. A mondat után a település és az utca áll. |
 | `The parcel has been handed over to the carrier…` | Egy partner szállító vette át. Ha a Csomagkövetésben „Szállító nyomon követése” hivatkozás látszik, ott követheti tovább. |
 | `…on its way to you…` | Úton van Ön felé. |
 | `The parcel is ready for pickup…` | Átveheti; az átvételi pont neve a mondat után áll. A Packeta magyar oldalain ez az „Átvételre kész” állapot. |

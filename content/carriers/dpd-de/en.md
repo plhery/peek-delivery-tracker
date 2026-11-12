@@ -3,7 +3,7 @@ title: DPD tracking in Germany: what statuses mean and what to do
 description: Track a DPD parcel in Germany: where the 14-digit number is, what DPD's English statuses mean, delivery windows, Pickup parcelshops and who to contact.
 slug: dpd-tracking-germany
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 DPD in Germany is DPD Deutschland GmbH, a parcel carrier in the Geopost network, with over 10,300 Pickup parcelshops. Track a parcel on DPD's tracking page with its 14-digit parcel number, adding your postcode for the details, or paste the number in the box above. It's in the shop's shipping confirmation and in DPD's email or SMS.
@@ -26,6 +26,7 @@ DPD's English wordings, in order. Its German pages word steps differently (`Auft
 | DPD says | What it means for you |
 | --- | --- |
 | `Order information has been transmitted to DPD.` | Label created: DPD doesn't have the parcel yet. |
+| `Parcelinfo handed to DPD` | Label created: the sender's parcel data has reached DPD, but not the parcel. It shows only through tracking services, not in DPD's own tracking. |
 | `Parcel handed to DPD` | DPD has it. |
 | `In transit.`, `Your parcel is on its way` | Travelling through DPD's network. |
 | `At parcel delivery centre.` | At the depot that delivers it. |

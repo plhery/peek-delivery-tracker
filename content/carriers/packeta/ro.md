@@ -3,7 +3,7 @@ title: Urmărire colet Packeta: numărul Z, statusuri și Z-BOX
 description: Urmărește un colet Packeta: unde găsești numărul care începe cu Z, ce înseamnă statusurile, cât stă coletul la punctul pick-up sau în Z-BOX și cum faci reclamație.
 slug: packeta-urmarire-colet
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Packeta, membră a Packeta Group, e prezentă în România din 2017 și livrează coletele magazinelor online la punctele sale pick-up, în lockerele Z-BOX sau la adresă. Coletul îl urmărești pe [pagina de urmărire Packeta](https://tracking.packeta.com/ro/), în aplicația Packeta sau în căsuța de mai sus. Numărul de urmărire începe cu `Z`. Packeta ți-l trimite pe e-mail imediat ce magazinul îi predă coletul; îl mai găsești în SMS sau în aplicație.
@@ -33,6 +33,7 @@ Peek citește pașii Packeta în engleză și ți-i arată exact cum îi scrie P
 | `…successfully received the parcel for transport…` | Packeta a preluat coletul. |
 | `The parcel is currently on its way to the depot.` | Coletul e pe drum spre un depozit. |
 | `…arrived at the depot…` | A ajuns într-un depozit și e pregătit pentru livrare. |
+| `The parcel has arrived at the micro-depot.` | A ajuns într-un micro-depozit, un depozit mic pentru ultima etapă a drumului. După propoziție urmează localitatea și strada. |
 | `The parcel has been handed over to the carrier…` | L-a preluat un transportator partener, care îl duce mai departe. |
 | `…on its way to you…` | Coletul e pe drum spre tine. |
 | `The parcel is ready for pickup…` | Te așteaptă la punctul pick-up sau în Z-BOX. Pe paginile Packeta în română, statusul se numește „Pregătit pentru preluare”. |

@@ -3,7 +3,7 @@ title: Sledovanie zásielky Packeta: číslo Z, stavy a Z-BOX
 description: Ako sledovať zásielku Packeta: kde nájdete číslo začínajúce na Z, čo znamenajú stavy, ako dlho zásielka čaká na výdajnom mieste a v Z-BOXe, reklamácie a kontakty.
 slug: packeta-sledovanie-zasielky
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Packeta, na Slovensku do roku 2021 Zásielkovňa, doručuje zásielky z e-shopov na výdajné miesta, do Z-BOXov aj na adresu. Zásielku môžete sledovať v [Sledovaní zásielky](https://tracking.packeta.com/sk/) na tracking.packeta.com, v aplikácii Packeta alebo tak, že trasovacie číslo vložíte do poľa vyššie. Číslo vám Packeta pošle e-mailom, hneď ako jej e-shop zásielku odovzdá do prepravy. Nájdete ho aj v SMS a v aplikácii.
@@ -33,6 +33,7 @@ Na tracking.packeta.com/sk čítate kroky po slovensky, Peek ich však číta z 
 | `…successfully received the parcel for transport…` | Packeta zásielku prevzala. Za vetou býva názov depa. |
 | `The parcel is currently on its way to the depot.` | Zásielka ide na depo. |
 | `…arrived at the depot…` | Je na depe, ktoré veta uvádza, a pripravuje sa na doručenie. |
+| `The parcel has arrived at the micro-depot.` | Je na mikrodepe, malom depe pre posledný úsek cesty. Za vetou je jeho obec a ulica. |
 | `The parcel has been handed over to the carrier…` | Zásielku prevzal iný prepravca. V zahraničí Packeta spolupracuje so zmluvnými prepravcami. |
 | `…on its way to you…` | Zásielka ide k vám. |
 | `The parcel is ready for pickup…` | Čaká na výdajnom mieste alebo v Z-BOXe, názov miesta nasleduje za vetou. Na packeta.sk sa tento stav volá „Pripravená k vyzdvihnutiu“. |

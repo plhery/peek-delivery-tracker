@@ -3,7 +3,7 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
@@ -58,6 +58,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è un ritiro dal venditore, né da parte tua. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
+| `The shipment has been processed in the destination parcel center` | DHL l'ha smistato nel centro pacchi che serve il tuo indirizzo, prima del giro di consegna. | «In transito» |
 | `Out for delivery` | Il giro di consegna del corriere locale. | «In consegna» |
 | `The shipment could not be delivered. Please find more information here.` | Il corriere non è riuscito a consegnare; segue un altro giro. Il link annunciato non viene riportato. | «Tentativo di consegna» |
 | `Delivered by post man`, `This parcel has been delivered` | La posta o il corriere locale l'ha consegnato. | «Consegnato», quando anche lo stato di Shouwu è `Delivered` |

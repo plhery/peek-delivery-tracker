@@ -3,7 +3,7 @@ title: YunExpress śledzenie przesyłki: statusy, kurier, kontakt
 description: Paczka YunExpress z Chin: co znaczy numer YT, co mówią angielskie statusy, kto doręcza w Polsce i do kogo pisać, gdy paczka utknie.
 slug: yunexpress-sledzenie
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 YunExpress, pisany też Yun Express, to firma logistyczna z Shenzhen, która wysyła z Chin małe paczki dla sprzedawców internetowych, także tych z Allegro, Temu, SHEIN czy Amazona. Paczkę śledzisz numerem zaczynającym się od YT na stronie YunExpress, [yuntrack.com](https://www.yuntrack.com/), albo wklejasz go w pole powyżej. YunExpress nigdzie nie opisuje SMS-ów ani e-maili do odbiorców, więc numeru szukaj w e-mailu sklepu o wysyłce albo na stronie zamówienia.
@@ -38,6 +38,7 @@ Yuntrack działa tylko po angielsku, także w przeglądarce ustawionej na polski
 | `Clearance processing completed - Import` | Odprawa zakończona, paczka jedzie dalej. |
 | `Delivered to local carrier` | Przekazana lokalnemu przewoźnikowi, nie Tobie. |
 | `Shipment in transit to DHL` | W drodze do DHL, który przejmuje ostatni odcinek. |
+| `Your parcel is out for delivery.` | Linia od J&T Express w Australii, przy paczce wysłanej tam: kurier wiezie ją do adresata. Może kończyć się numerem obsługi klienta J&T. |
 | `Delivered by Mailbox` | Włożona do Twojej skrzynki pocztowej. |
 | `POD available` | Linia od DPD: jest potwierdzenie doręczenia, paczka doręczona. |
 

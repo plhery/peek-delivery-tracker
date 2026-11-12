@@ -3,7 +3,7 @@ title: YunExpress tracking: stati, consegna in Italia e contatti
 description: Tracking YunExpress dalla Cina: il numero YT, cosa vogliono dire gli stati in inglese, chi consegna in Italia e in Ticino, a chi scrivere se il pacco non arriva.
 slug: yunexpress-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 YunExpress, che trovi scritto anche Yun Express, è un'azienda di logistica di Shenzhen che spedisce dalla Cina i piccoli pacchi dei venditori online e lavora con marketplace come Amazon, Temu e SHEIN. Per il tracking inserisci il numero che inizia con YT su [yuntrack.com](https://www.yuntrack.com/), il sito di tracciamento di YunExpress, oppure incollalo nel box qui sopra. YunExpress non descrive SMS o e-mail ai destinatari: il numero lo trovi nell'e-mail di spedizione del negozio o nella pagina dell'ordine.
@@ -39,6 +39,7 @@ Yuntrack è solo in inglese, senza scelta della lingua, e in inglese arrivano an
 | `Delivered to local carrier` | Affidato al corriere locale, non consegnato a te. |
 | `First parcel scan along Poste Italiane’s logistic network` | Se il pacco passa a Poste Italiane: la prima scansione nella sua rete. |
 | `Preparing for delivery` | Se invece passa a GOFO, in Italia: il pacco è in deposito, prima che parta il corriere. |
+| `Your parcel is out for delivery.` | Riga di J&T Express in Australia, per un pacco diretto lì: il corriere è in giro per consegnarlo. Può finire con il numero del servizio clienti di J&T. |
 | `Delivered by Mailbox` | Lasciato nella tua cassetta delle lettere. |
 
 Quello che confonde di più è `Delivered to local carrier`: «delivered» qui vuol dire solo che YunExpress ha passato il pacco al corriere del Paese di destinazione. Dopo arrivano le righe di quel corriere, anche loro in inglese. Le fasi comuni a ogni corriere sono spiegate in [stati della spedizione](guide:tracking-statuses).

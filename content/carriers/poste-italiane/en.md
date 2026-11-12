@@ -3,7 +3,7 @@ title: Poste Italiane tracking: numbers, statuses and pickup
 description: Track a Poste Italiane parcel: where the code is, what the Italian statuses mean, missed deliveries, Punto Poste lockers, claims and how to call from abroad.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Poste Italiane is the Italian post, based in Rome, and it delivers parcels from Italian shops and from abroad. Track one with "Cerca Spedizioni" on poste.it, in the Poste Italiane app or by pasting the code in the box above. The code is on the sender's receipt; for an online order, the shop gives it to you.
@@ -35,6 +35,7 @@ Poste's tracking and its status legend exist only in Italian: poste.it shows a s
 | `In attesa di sdoganamento` | Customs is checking it. You may be asked for documents. |
 | `completata la fase di verifica per lo svincolo…` | Customs checks are done. |
 | `In transito` | On its way between Poste's centres. |
+| `presso il Centro di lavorazione Internazionale` | Registered mail at Poste's international processing centre, still in transit. It comes on a line of its own, after the movement in transit. |
 | `In consegna` | Handed to the person who delivers it. |
 | `consegna non andata a buon fine…` | The delivery failed, for example because the address was wrong or incomplete. |
 | `disponibile per il ritiro dal giorno lavorativo successivo alla data indicata` | Waiting at a post office or Punto Poste, from the next working day. |

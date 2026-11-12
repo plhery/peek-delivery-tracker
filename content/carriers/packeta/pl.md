@@ -3,7 +3,7 @@ title: Packeta śledzenie: numer Z, statusy i punkty odbioru
 description: Paczka Packeta (Zásilkovna) w Polsce: jak wygląda numer Z, co znaczą statusy, ile paczka czeka w punkcie odbioru i jak skontaktować się z Packetą.
 slug: packeta-sledzenie
 published: 2026-10-11
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 Packeta to marka grupy przewozowej, której czeska nazwa to Zásilkovna; w Polsce działa jako Packeta Poland i wysyła przesyłki do 33 krajów. Paczkę śledzisz na [stronie śledzenia Packety](https://tracking.packeta.com/pl/) albo w polu nad tym tekstem. Numer to litera `Z` i dziesięć cyfr: znajdziesz go w e-mailu albo SMS-ie od Packety.
@@ -33,6 +33,7 @@ Stronę tracking.packeta.com przełączysz na polski, ale zdania o przebiegu pac
 | `…successfully received the parcel for transport…` | Packeta ma już paczkę. |
 | `The parcel is currently on its way to the depot.` | Paczka jedzie do sortowni. |
 | `…arrived at the depot…` | Paczka jest sortowana w magazynie. |
+| `The parcel has arrived at the micro-depot.` | Paczka dotarła do małego lokalnego magazynu, z którego rusza ostatni odcinek; po zdaniu podane są miejscowość i ulica. |
 | `The parcel has been handed over to the carrier…` | Paczkę przejęła firma, która ją doręczy, często przewoźnik partnerski. |
 | `…on its way to you…` | Paczka jest w doręczeniu. |
 | `The parcel is ready for pickup…` | Paczka czeka w punkcie odbioru. Potrzebny będzie kod odbioru. |

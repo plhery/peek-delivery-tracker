@@ -3,7 +3,7 @@ title: Techlink tracking: ZHPHD numbers, statuses and help
 description: Track a Techlink (智禾) parcel from China: what a ZHPHD number looks like, what its scans mean, who delivers it and what to do when tracking stops.
 slug: techlink-tracking
 published: 2026-10-22
-updated: 2026-11-06
+updated: 2026-11-12
 ---
 
 Techlink (智禾国际物流, Zhihe International Logistics) is a Shenzhen logistics company that ships parcels from China to Europe and America for online sellers. Its numbers start with ZHPHD and end in ML: type yours on Techlink's tracking page, www.techlinksz.cn/trajectory, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -45,6 +45,9 @@ Techlink publishes no list of its scans. It records each one in English and Chin
 | `Your shipment has been processed at sorting center and ready for shipping` | That sorting centre has sorted it for its next leg. |
 | `Your shipment has departed from the transit origin` | It has left that sorting centre for its next leg. |
 | `In transit, it is currently in transit to the next facility` | It's on its way between two facilities in the destination country. |
+| `The parcel has been successfully picked up and is being prepared for transportation.` | For a parcel to Australia: J&T Express Australia has taken it over from Techlink after the flight. J&T's customer service number can follow. |
+| `The parcel is dispatched from the transit center to the next destination` | J&T Express Australia's scan: it has left a transit centre for its next leg. |
+| `The parcel arrives at the distribution center and is prepared for transport to the next destination.` | J&T Express Australia's scan: it's at a distribution centre, being readied for its next leg. |
 
 In Peek, the parcel's status is "Label created" after the first line, "Received by carrier" after the second and "In transit" after any of the others.
 
@@ -62,7 +65,7 @@ Techlink's door-to-door express service comes duties paid (DDP) or duties unpaid
 
 **Only `Parcel electronic information received`.** The seller has booked the parcel, but it hasn't reached Techlink's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
-**Stuck after `Arrive at the destination airport`.** The flight has landed in your country. Import customs and the handover to the local carrier come next and can bring days without a scan. After this line, Techlink's tracker has so far shown only steps inside the destination country: a hub, a sorting centre and the way on from it, the last five lines in the table above, and, for some parcels, the delivering carrier's own scans in its words, up to `Parcel is out for delivery.` or a failed delivery. If it stays quiet, ask the seller which carrier delivers in your country and for that carrier's number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck after `Arrive at the destination airport`.** The flight has landed in your country. Import customs and the handover to the local carrier come next and can bring days without a scan. After this line, Techlink's tracker has so far shown only steps inside the destination country: a hub, a sorting centre and the way on from it, the five lines starting with `Shipment Received at Facility` in the table above, and, for some parcels, the delivering carrier's own scans in its words, up to `Parcel is out for delivery.` or a failed delivery. If it stays quiet, ask the seller which carrier delivers in your country and for that carrier's number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing found.** Check the number with the seller: a ZHPHD number has exactly 19 characters. A parcel the seller has only just booked may not show anything yet either.
 

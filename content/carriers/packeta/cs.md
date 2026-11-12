@@ -3,7 +3,7 @@ title: Sledování zásilky Zásilkovny: číslo Z, stavy a Z-BOX
 description: Jak sledovat zásilku Zásilkovny (Packeta): kde najdete číslo začínající Z, co znamenají stavy, jak dlouho zásilka čeká na výdejním místě a v Z-BOXu a kam volat.
 slug: packeta-sledovani-zasilky
 published: 2026-10-25
-updated: 2026-10-27
+updated: 2026-11-12
 ---
 
 Zásilkovna je česká firma, která vozí zásilky z e-shopů na svá výdejní místa, do Z-BOXů a až domů. Patří do mezinárodní skupiny Packeta, a proto její sledování běží na adrese tracking.packeta.com. Zásilku sledujete ve [Sledování zásilky](https://tracking.packeta.com/cs/), v aplikaci Zásilkovna, nebo tak, že číslo vložíte do pole nahoře. Trasovací číslo vám Zásilkovna pošle e-mailem, jakmile jí e-shop zásilku předá. Najdete ho i v SMS a v aplikaci.
@@ -33,6 +33,7 @@ Ve Sledování zásilky na tracking.packeta.com/cs/ čtete kroky česky, Peek je
 | `…successfully received the parcel for transport…` | Zásilkovna zásilku převzala. Za větou bývá název depa. |
 | `The parcel is currently on its way to the depot.` | Jede na depo. |
 | `…arrived at the depot…` | Je na depu, které věta jmenuje, a chystá se k doručení. |
+| `The parcel has arrived at the micro-depot.` | Je na mikrodepu, malém depu pro poslední úsek cesty. Za větou je jeho obec a ulice. |
 | `The parcel has been handed over to the carrier…` | Zásilku převzal jiný dopravce. V zahraničí Zásilkovna spolupracuje s partnery. |
 | `…on its way to you…` | Zásilka je na cestě k vám. |
 | `The parcel is ready for pickup…` | Čeká na výdejním místě nebo v Z-BOXu, jehož název je za větou. Zásilkovna tomu stavu říká „Připravena k vyzvednutí“. |

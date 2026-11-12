@@ -73,7 +73,7 @@ As listed on DPD's Swiss pages on 10 October 2026, for the whole country:
 
 ## Tracking a DPD Switzerland parcel with Peek
 
-[Peek](/) takes the 14 digits, with or without the check character, and asks the likely carriers, usually DPD Switzerland first. DPD Switzerland answers only for parcels DPD places in Switzerland: you'll see "DPD Switzerland has this parcel." or can pick it with "Change", as you must for 14-digit numbers starting 10 or 1550. A dpd.com or dpdgroup.com link with `parcelNumber=` works too, read as DPD Switzerland whatever country it names.
+[Peek](/) takes the 14 digits, with or without the check character, and asks the likely carriers, usually DPD Switzerland first. DPD Switzerland answers only for parcels DPD places in Switzerland: you'll see "DPD Switzerland has this parcel." or can pick it with "Change", as you must for 14-digit numbers starting 10 or 1550. A dpd.com or dpdgroup.com link with `parcelNumber=` works too: one whose path starts with `/ch/` is read as DPD Switzerland, and one starting with another country, such as `/de/`, as that country's DPD when Peek follows it.
 
 The optional "Delivery postcode" field takes any country's format and is sent to DPD and, when needed, to tracking services. Without it you get one line per step and the expected day, when DPD has one. With it, DPD's scans appear on the map with town and country, plus its notices, the delivery window (in Swiss time), the sender's name and the weight. If DPD refuses the postcode, the parcel page says so and offers "Edit postcode".
 

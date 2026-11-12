@@ -3,7 +3,7 @@ title: Techlink tracking: numero ZHPHD…ML, stati e chi consegna
 description: Tracking Techlink (智禾) per i pacchi dalla Cina: com'è fatto il numero ZHPHD…ML, cosa vogliono dire le scansioni e cosa fare se il tracciamento si ferma.
 slug: techlink-tracking
 published: 2026-11-01
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 Techlink (智禾国际物流, Zhihe International Logistics) è un'azienda di logistica di Shenzhen che spedisce pacchi dalla Cina verso l'Europa e l'America per conto dei venditori online. Un numero Techlink inizia con ZHPHD e finisce con ML: inseriscilo nella pagina di tracking di Techlink, www.techlinksz.cn/trajectory, o incollalo nel box qui sopra. Il numero te lo dà il negozio che ha spedito l'ordine, nei dettagli di spedizione.
@@ -53,7 +53,7 @@ Per un numero che non conosce, la pagina mostra `查询不到轨迹` (nessun tra
 
 ## Chi consegna i pacchi Techlink in Italia
 
-Techlink non lo dice. La sua home page descrive linee porta a porta: trasporto aereo dalla Cina, sdoganamento all'estero affidato a una società propria, fondata nel 2023, e consegna tramite i suoi account presso i corrieri del Paese di destinazione. Non nomina nessuno di questi corrieri sul sito, e il tracking non dà il nome di nessun corriere. In Italia, però, nelle cronologie lette da Peek i pacchi passano a [iMile](carrier:imile): il tracking di Techlink ne riporta le righe, che si aprono con il nome del centro tra parentesi, come `【Milan center】Parcel shipped to【VEN 07】.` Tentativi, giacenza e contatti di iMile in Italia sono sulla sua pagina.
+Techlink non lo dice. La sua home page descrive linee porta a porta: trasporto aereo dalla Cina, sdoganamento all'estero affidato a una società propria, fondata nel 2023, e consegna tramite i suoi account presso i corrieri del Paese di destinazione. Non nomina nessuno di questi corrieri sul sito, e il tracking non dà il nome di nessun corriere. In Italia, però, nelle cronologie lette da Peek i pacchi passano a [iMile](carrier:imile): il tracking di Techlink ne riporta le righe, che si aprono con il nome del centro tra parentesi, come `【Milan center】Parcel shipped to【VEN 07】.` Tentativi, giacenza e contatti di iMile in Italia sono sulla sua pagina. Fuori dall'Italia, un pacco diretto in Australia passa dopo il volo a J&T Express Australia: le sue scansioni compaiono nella cronologia di Techlink a partire da `The parcel has been successfully picked up and is being prepared for transportation.` (vedi la tabella sopra).
 
 I dati del suo tracking possono contenere il numero del corriere che consegna, ma non il suo nome, e la pagina di Techlink non ha un campo per mostrarlo. Quando sai chi consegna, il resto è sul suo tracking, e tentativi, avvisi, punti di ritiro e giacenza seguono le sue regole. Techlink non ne pubblica nessuna.
 
@@ -97,7 +97,7 @@ Una lettera di vettura Techlink: ZHPHD, sei cifre che si leggono come una data, 
 
 ### Chi consegna i pacchi Techlink in Italia?
 
-Techlink non lo nomina, ma nelle cronologie lette da Peek compare iMile: il tracking di Techlink ne riporta le righe, con il centro tra 【】. Il tracking può avere anche il numero del corriere, senza il nome: se non vedi righe di iMile, chiedi al venditore chi consegna, oppure lascia che Peek segua il numero quando la forma rivela il corriere (con un numero postale internazionale, Peek interroga Poste Italiane).
+Techlink non lo nomina, ma nelle cronologie lette da Peek compare iMile: il tracking di Techlink ne riporta le righe, con il centro tra 【】. Il tracking può avere anche il numero del corriere, senza il nome: se non vedi righe di iMile, chiedi al venditore chi consegna, oppure lascia che Peek segua il numero quando la forma rivela il corriere (con un numero postale internazionale, Peek interroga Poste Italiane). Per un pacco diretto in Australia, invece, dopo il volo le scansioni sono di J&T Express Australia.
 
 ### Perché il tracking Techlink non si aggiorna più?
 
@@ -106,5 +106,5 @@ Le righe viste finora sul tracking di Techlink si fermano all'atterraggio nel Pa
 :::sources
 - [Techlink: 智禾官网 (home page)](http://www.techlinksz.cn/) – nome dell'azienda, linee per piccoli pacchi verso Europa e America, Amazon, Walmart, TK e negozi indipendenti, porta a porta DDU e DDP, sdoganamento all'estero e società del 2023, account di consegna a destinazione, link ai contatti che non porta da nessuna parte
 - [Techlink: 轨迹跟踪 (tracking)](http://www.techlinksz.cn/trajectory) – fino a 40 numeri, pagina in cinese, Paesi, simboli di stato, risposta per un numero sconosciuto
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero ZHPHD, righe in inglese e in cinese, righe di iMile in Italia, risposte del tracking e numero del corriere che consegna, orari, Poste Italiane per un numero postale diretto in Italia, cosa mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero ZHPHD, righe in inglese e in cinese, righe di iMile in Italia, J&T Express Australia per i pacchi diretti in Australia, risposte del tracking e numero del corriere che consegna, orari, Poste Italiane per un numero postale diretto in Italia, cosa mostra Peek
 :::

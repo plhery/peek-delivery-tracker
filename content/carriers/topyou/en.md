@@ -3,7 +3,7 @@ title: TopYou tracking: TYZR numbers, scans and who delivers
 description: Track a TopYou (通邮) parcel from China: what a TYZR…YQ number looks like, what its English scans mean and who takes the parcel over in your country.
 slug: topyou-tracking
 published: 2026-10-28
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
@@ -63,6 +63,7 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | `Airline arrived at destination country`, `Arrive at destination country` | It has reached your country. | "In transit" |
 | `Export clearance success` | China's export customs have cleared it. It isn't held. | "In transit" |
 | `Import clearance success` | Your country's customs have cleared it for the post. The post can still show customs scans of its own. | "In transit" |
+| `Customs Clearance Completed Successfully` | Your country's customs have cleared it, minutes after the hand-over to the delivering carrier, which now has the parcel. | "In transit" |
 
 **The delivering carrier's scans.** After the hand-over, TopYou's tracker can go on with the delivering carrier's own scans: USPS's on a parcel to the United States, GOFO's in France and Italy, such as `Arrived at sorting center`, `The package left sorting center` and `Package departed from sorting center` (at or leaving one of GOFO's sorting centres: "In transit"), `Arrived at GOFO Regional Destination Facility` (at GOFO's regional depot: "In transit") and `The driver is out for delivery` (GOFO's driver is bringing it: "Out for delivery").
 

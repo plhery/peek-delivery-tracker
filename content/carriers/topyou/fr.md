@@ -3,7 +3,7 @@ title: TopYou suivi colis : numéro TYZR, statuts et livraison
 description: Suivre un colis TopYou (通邮) venu de Chine : le numéro TYZR, ce que disent ses scans en anglais et qui prend le relais en France, en Belgique et en Suisse.
 slug: topyou-suivi-colis
 published: 2026-10-30
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 TopYou (通邮, Tongyou, aussi 通邮集团 ou SZTY56) est 深圳市通邮物流科技（集团）股份有限公司, un transitaire de Shenzhen, en Chine, qui fait voyager des colis sur ses propres lignes internationales. Si une boutique chinoise a confié ta commande à TopYou, ton numéro commence par TYZ et finit par YQ : colle-le dans le champ ci-dessus. Le suivi de TopYou va de son entrepôt en Chine jusqu'à ton pays, vol et douane compris ; un transporteur local prend ensuite le relais.
@@ -58,6 +58,7 @@ TopYou écrit ses scans en anglais, et Peek les affiche tels quels. Dans l'ordre
 | `Airline arrived at destination country`, `Arrive at destination country` | Le colis est arrivé dans ton pays. | En transit |
 | `Export clearance success` | La douane chinoise a laissé sortir le colis : rien ne le retient. | En transit |
 | `Import clearance success` | La douane de ton pays a dédouané le colis pour la poste. La poste peut encore afficher ses propres scans de douane. | En transit |
+| `Customs Clearance Completed Successfully` | La douane de ton pays a dédouané le colis, quelques minutes après sa remise au transporteur qui le livre : c'est lui qui l'a maintenant. | En transit |
 
 **Ensuite.** Le site de TopYou peut reprendre les scans du transporteur local jusqu'à la livraison, dans les mots de ce transporteur. En France et en Italie, ce sont ceux de GOFO, comme `Arrived at sorting center`, `The package left sorting center` et `Package departed from sorting center` (le colis est dans un centre de tri de GOFO ou le quitte : « En transit »), `Arrived at GOFO Regional Destination Facility` (le colis est arrivé au dépôt régional de GOFO : « En transit ») et `The driver is out for delivery` (le livreur de GOFO est en tournée avec le colis : « En livraison »). En Espagne, après la douane, le transporteur qui livre peut envoyer `Parcel in transit` (le colis est en route vers toi : « En transit »).
 

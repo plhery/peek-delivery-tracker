@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-12
 ---
 
-JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS, GOFO or SpeedX in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany and Colissimo in France, and FedEx on some lines.
+JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS, GOFO or SpeedX in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany, Colissimo in France and CTT Express in Spain, and FedEx on some lines.
 
 ## JS Express tracking number: what it looks like
 
@@ -71,7 +71,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 
 **Canada.** [Straightship](carrier:straightship), a Canadian courier, delivers some JS Express parcels; its scans show in JS Express's history.
 
-**Germany and France.** JS Express's Europe line serves countries such as the UK, France, Germany, Italy, Spain, Switzerland and Denmark, though not some remote postcodes. For Germany, JS Express names DPD and other couriers for the last mile and says over 98% of parcels are delivered within 8 working days; its history there has shown [DHL Paket](carrier:dhl)'s scans, [iMile](carrier:imile)'s from a German centre, and [J&T Express Germany](carrier:j-and-t-de)'s, in German. In France it has shown [Colissimo](carrier:la-poste)'s, in French, and in Spain [CTT Express](carrier:ctt-express)'s.
+**Germany, France and Spain.** JS Express's Europe line serves countries such as the UK, France, Germany, Italy, Spain, Switzerland and Denmark, though not some remote postcodes. For Germany, JS Express names DPD and other couriers for the last mile and says over 98% of parcels are delivered within 8 working days; its history there has shown [DHL Paket](carrier:dhl)'s scans, [iMile](carrier:imile)'s from a German centre, and [J&T Express Germany](carrier:j-and-t-de)'s, in German. In France it has shown [Colissimo](carrier:la-poste)'s, in French, and in Spain [CTT Express](carrier:ctt-express)'s.
 
 **UK, Ireland, Australia and elsewhere.** On some lines the history shows [FedEx](carrier:fedex)'s scans. In the UK, JS Express's history shows Yodel's scans; two of them, `DESPATCHED AND ON ROUTE TO YODEL` and `PARCEL PICKED UP`, come while the parcel is still at JS Express's warehouse in China. For Australia, JS Express names Australia Post and Fastway, now [Aramex Australia](carrier:aramex-au), below 4 kg, and DPEX above. JS Express's record can hold the local courier's number, but not its name, and JS Express's page shows neither. Peek names the courier when that number fits one carrier in your country, and asks your country's post about a [postal number](guide:tracking-number-formats) (two letters, nine digits, two letters); more below. If Peek names no courier, ask the seller who delivers.
 
@@ -130,7 +130,7 @@ In the box above, or on JS Express's English "Express Query" page at js-exp.com.
 
 ### Who delivers JS Express parcels in my country?
 
-A courier in your country. JS Express's history shows USPS, GOFO or SpeedX delivering in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany and Colissimo in France, and FedEx on some lines. Elsewhere, ask the seller which company delivers.
+A courier in your country. JS Express's history shows USPS, GOFO or SpeedX delivering in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany, Colissimo in France and CTT Express in Spain, and FedEx on some lines. Elsewhere, ask the seller which company delivers.
 
 ### Who do I contact about a missing JS Express parcel?
 

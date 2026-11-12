@@ -3,7 +3,7 @@ title: TopYou Sendungsverfolgung: TYZR-Nummer, Status, Zustellung
 description: TopYou-Paket (通邮) aus China verfolgen: wie die TYZR-Nummer aussieht, was die englischen Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: topyou-sendungsverfolgung
 published: 2026-10-30
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 TopYou (通邮, Tongyou, auch 通邮集团 oder SZTY56) ist 深圳市通邮物流科技（集团）股份有限公司, ein Spediteur aus Shenzhen in China, der Sendungen über eigene internationale Linien ins Ausland bringt. Hat ein chinesischer Shop deine Bestellung mit TopYou verschickt, bekommst du eine Nummer, die mit TYZ beginnt und auf YQ endet: Füg sie oben ins Feld ein. TopYous Verlauf reicht vom Lager in China über Flug und Zoll bis in dein Land, wo ein Paketdienst vor Ort das Paket übernimmt.
@@ -60,6 +60,7 @@ TopYou schreibt seine Scans auf Englisch, und so zeigt sie auch Peek. In der Rei
 | `Airline arrived at destination country`, `Arrive at destination country` | Das Paket ist in deinem Land angekommen. | „Unterwegs“ |
 | `Export clearance success` | Der Ausfuhrzoll in China hat es freigegeben. Es hängt nicht fest. | „Unterwegs“ |
 | `Import clearance success` | Der Zoll in deinem Land hat es für die Post freigegeben. Danach kann die Post noch eigene Zollscans zeigen. | „Unterwegs“ |
+| `Customs Clearance Completed Successfully` | Der Zoll in deinem Land hat es freigegeben, wenige Minuten nach der Übergabe an den Zusteller, der das Paket jetzt hat. | „Unterwegs“ |
 
 **Danach.** TopYous Tracking-Seite kann die Scans des Zustellers weitergeben, bis zur Zustellung und in dessen eigenen Worten. In Frankreich und Italien sind das die Scans von GOFO, etwa `Arrived at sorting center`, `The package left sorting center` und `Package departed from sorting center` (das Paket ist in einem Sortierzentrum von GOFO oder verlässt es: „Unterwegs“), `Arrived at GOFO Regional Destination Facility` (das Paket ist in GOFOs Regionaldepot: „Unterwegs“) und `The driver is out for delivery` (GOFOs Fahrer bringt es: „In Zustellung“). In Spanien kann der Zusteller nach dem Zoll `Parcel in transit` melden (das Paket ist auf dem Weg zu dir: „Unterwegs“).
 

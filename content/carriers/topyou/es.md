@@ -3,7 +3,7 @@ title: TopYou seguimiento: número TYZR, estados y entrega en España
 description: Sigue tu paquete de TopYou (通邮) desde China: cómo es un número TYZR…YQ, qué significan sus escaneos en inglés, quién lo entrega en España y qué se paga en aduanas.
 slug: topyou-seguimiento
 published: 2026-11-03
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 TopYou (通邮, Tongyou, también 通邮集团 o SZTY56) es 深圳市通邮物流科技（集团）股份有限公司, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Si una tienda online china te ha enviado el pedido con TopYou, te habrá dado un número de seguimiento que empieza por TYZ y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El historial de TopYou va desde su almacén en China hasta el vuelo y la aduana, y a veces sigue con los escaneos de la empresa que hace la entrega.
@@ -61,6 +61,7 @@ TopYou escribe sus escaneos en inglés, y Peek los muestra tal cual. En el orden
 | `Airline arrived at destination country`, `Arrive at destination country` | Ha llegado al país de destino. | «En tránsito» |
 | `Export clearance success` | La aduana china lo ha dejado salir: no está retenido. | «En tránsito» |
 | `Import clearance success` | La aduana del país de destino lo ha despachado para el correo. El correo todavía puede mostrar escaneos de aduana propios. | «En tránsito» |
+| `Customs Clearance Completed Successfully` | La aduana del país de destino lo ha despachado, minutos después del traspaso a la empresa que lo entrega, que ya lo tiene. | «En tránsito» |
 
 **Los escaneos de la empresa que entrega.** Después del traspaso, la web de TopYou puede seguir con los escaneos de la empresa que hace la entrega. En Francia y en Italia son los de GOFO ([GOFO France](carrier:gofo-fr) o GOFO Italy): `Arrived at sorting center`, `The package left sorting center` y `Package departed from sorting center`, la llegada a uno de sus centros de clasificación o la salida de él («En tránsito»), `Arrived at GOFO Regional Destination Facility`, la llegada a su centro regional («En tránsito»), y `The driver is out for delivery`, el repartidor ya ha salido con el paquete («En reparto»). En España, después de la aduana, la empresa que lo entrega puede mandar `Parcel in transit`: el paquete va de camino hacia ti («En tránsito»).
 

@@ -708,7 +708,7 @@ Key JSON events:
   A `provider_clock_offset` line also has `scan_id`, the `provider_event_id` of the stored
   row whose scan came on two clocks: the row a provider's copy repeats, or the copy's own;
 - `tracking_health_incident`: a health incident opened, still fails six hours on (warning,
-  info for a direct step's), recovered, or closed once no sample of it was left, the carrier
+  info for a direct step's), recovered, or closed once it had no sample in 24 hours, the carrier
   answers without its direct step, or every check its direct step failed in 24 hours still
   answered (info), with its `kind`, `subject`, `title`, `failures` and `attempts`;
 - `dpd_app_session`: the scraper took up a saved session at start (`outcome` `taken_up`,
@@ -1038,7 +1038,7 @@ dashboard's failure panels leave out.
 | `carrier_refresh_total` (carrier, served_by, outcome) | Who served each refresh: `adapter`, `other_adapter`, `provider` or `none`, and how it ended: `updated` (a new scan or stage), `unchanged`, `waiting`, `error`, `refused` (the number or its details are the owner's to correct) or `superseded`. A `skipped` check asked nobody and is not counted |
 | `tracking_routing_signal_total` (signal, carrier, subject) | Routing signals for the review: `subject` is the carrier the signal is about, `uncatalogued` for a name a provider gave |
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
-| `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample left, a direct step the carrier has not run for six hours, or direct failures whose checks all answered |
+| `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample in 24 hours, a direct step the carrier has not run for six hours, or direct failures whose checks all answered |
 | `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them. Many an hour mean a burst kept stopping the run, so accounts' scheduled checks fell behind |
 | `scheduled_sync_due` (kind) | Parcels the latest scheduled run found due when it started: an `account`'s or a `lookup` |
 | `scheduled_sync_overdue_seconds` (kind) | How long the longest-waiting of those parcels had been due, to the minute. A lookup checked late shows here before its check |
@@ -1103,7 +1103,8 @@ Useful questions:
 - **Would trying again help?** Compare how often a parcel's next check fails after a
   failure with how often checks fail overall. Much more often, and the failure stays with the
   parcel or the service's address: retrying sooner will not help. About as often, and it comes
-  and goes: another attempt could rescue it. Samples are kept for a day:
+  and goes: another attempt could rescue it. Samples are kept for a week; the incident rules
+  read the last 24 hours:
 
   ```sql
   with checks as (

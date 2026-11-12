@@ -1683,10 +1683,14 @@ export class SupabaseServiceClient extends SupabaseClient {
     return answer[0]?.active === true;
   }
 
-  /** The thin answer the parcel's latest scheduled refresh under `carrier` kept in its health sample (trackingAudit.ts), if any. */
+  /**
+   * The thin answer the parcel's latest scheduled refresh under `carrier` in the last 24 hours kept in its
+   * health sample (trackingAudit.ts), if any. Samples are kept a week; the health rules read a day.
+   */
   async previousThinAnswer(packageId: string, carrier: string): Promise<string | null> {
     const params = query({
       select: 'details', kind: 'eq.refresh', subject: `eq.${carrier}`, package_id: `eq.${packageId}`,
+      observed_at: `gte.${new Date(Date.now() - 24 * 60 * 60_000).toISOString()}`,
       order: 'observed_at.desc,attempt_id.asc', limit: '1',
     });
     const details = rows(await this.request(`/rest/v1/tracking_health_samples?${params}`, { timeoutMs: 3_000 }))[0]?.details;

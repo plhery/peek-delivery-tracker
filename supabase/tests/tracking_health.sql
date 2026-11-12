@@ -153,6 +153,19 @@ begin
     where subject='probe-carrier' and not healthy;
   result := pg_temp.answered_sample('probe-carrier');
   assert result->0->>'state'='recovered', 'Answered probes must recover an incident once its failures have aged out';
+  -- Samples are kept a week, but the rules read the last day: a parcel's two failures 25 hours ago
+  -- and one now are no streak.
+  for i in 1..2 loop perform pg_temp.health_sample('aged-carrier',false,'refresh','20000000-0000-4000-8000-000000000003'); end loop;
+  update public.tracking_health_samples set observed_at=now()-interval '25 hours' where subject='aged-carrier';
+  assert pg_temp.health_sample('aged-carrier',false,'refresh','20000000-0000-4000-8000-000000000003')='[]',
+    'Failures older than a day must not make a streak';
+  assert (select count(*) from public.tracking_health_samples where subject='aged-carrier')=3,
+    'Samples older than a day must be kept for the week';
+  update public.tracking_health_samples set observed_at=now()-interval '8 days'
+    where subject='aged-carrier' and observed_at < now()-interval '1 day';
+  perform pg_temp.health_sample('other-tier',true);
+  assert (select count(*) from public.tracking_health_samples where subject='aged-carrier')=1,
+    'Samples older than a week must be deleted';
   -- A tier that is no longer probed cannot recover; its incident closes when the evidence expires.
   for i in 1..10 loop result := pg_temp.health_sample('retired-tier',false,'direct'); end loop;
   assert result->0->>'state'='open';

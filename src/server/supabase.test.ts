@@ -215,14 +215,14 @@ describe('one-off parcels and their links', () => {
       order: 'completed_at.desc', limit: '1' });
   });
 
-  it('asks whether a job that goes ahead of a priority waits to be claimed', async () => {
+  it('answers the highest priority of the jobs that go ahead of a priority and wait to be claimed', async () => {
     vi.useFakeTimers({ now: new Date('2026-09-16T10:00:00Z') });
     const client = service();
-    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'job' }]).mockResolvedValueOnce([]);
-    await expect(client.syncJobQueuedAhead(-10)).resolves.toBe(true);
-    await expect(client.syncJobQueuedAhead(-10)).resolves.toBe(false);
-    expect(Object.fromEntries(params(request.mock.calls[0][0]))).toEqual({ select: 'id', state: 'eq.queued', priority: 'gt.-10',
-      run_after: 'lte.2026-09-16T10:00:00.000Z', limit: '1' });
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ priority: -5 }]).mockResolvedValueOnce([]);
+    await expect(client.syncJobQueuedAhead(-10)).resolves.toBe(-5);
+    await expect(client.syncJobQueuedAhead(-10)).resolves.toBeNull();
+    expect(Object.fromEntries(params(request.mock.calls[0][0]))).toEqual({ select: 'priority', state: 'eq.queued', priority: 'gt.-10',
+      run_after: 'lte.2026-09-16T10:00:00.000Z', order: 'priority.desc', limit: '1' });
     vi.useRealTimers();
   });
 
@@ -394,7 +394,7 @@ describe('one-off parcels and their links', () => {
     await expect(client.accountLastOpened('owner-2')).resolves.toBeNull();
   });
 
-  it('queues a one-off parcel\'s check without an owner, behind accounts and the scheduled run', async () => {
+  it('queues a one-off parcel\'s check without an owner, behind accounts and ahead of the scheduled run', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'job' }]);
     await expect(client.enqueueSyncJob({ packageId: 'package-1' })).resolves.toEqual({ row: { id: 'job' }, queued: true });
@@ -402,10 +402,11 @@ describe('one-off parcels and their links', () => {
     await client.enqueueSyncJob({ scheduled: true });
     await client.enqueueSyncJob({ userId: 'owner-1', packageId: 'package-2', background: true });
     const queued = request.mock.calls.map(([, options]) => options!.body as Record<string, unknown>);
-    expect(queued[0]).toEqual({ user_id: null, package_id: 'package-1', kind: 'package', dedupe_key: 'package:package-1', priority: -20, reason: null });
+    expect(queued[0]).toEqual({ user_id: null, package_id: 'package-1', kind: 'package', dedupe_key: 'package:package-1', priority: -5, reason: null });
     expect(queued[1]).toMatchObject({ user_id: 'owner-1', priority: 10 });
     expect(queued[2]).toMatchObject({ kind: 'scheduled', priority: -10 });
-    expect(queued[0].priority).toBeLessThan(queued[2].priority as number);
+    expect(queued[0].priority).toBeLessThan(queued[1].priority as number);
+    expect(queued[0].priority).toBeGreaterThan(queued[2].priority as number);
     // A re-check nobody asked for waits behind everything else, a lookup's check too.
     expect(queued[3]).toMatchObject({ user_id: 'owner-1', priority: -30, reason: 'release' });
     expect(queued[2]).not.toHaveProperty('reason');
@@ -465,9 +466,9 @@ describe('one-off parcels and their links', () => {
     const request = vi.spyOn(client, 'request').mockImplementation(table(release));
     await client.enqueueSyncJob({ packageId: 'package-1', reason: 'opened' });
     // A link opened moves a release's re-check up and leaves it the release's.
-    expect(request.mock.calls[2][1]).toMatchObject({ method: 'PATCH', body: { priority: -20 } });
+    expect(request.mock.calls[2][1]).toMatchObject({ method: 'PATCH', body: { priority: -5 } });
     expect(request.mock.calls[2][1]!.body).not.toHaveProperty('reason');
-    const opened = { ...release, priority: -20, reason: 'opened' };
+    const opened = { ...release, priority: -5, reason: 'opened' };
     for (const reason of ['added', 'changed', 'refresh'] as const) {
       request.mockReset().mockImplementation(table(opened));
       // Filing a postcode, adding or claiming the parcel takes over the check its link queued, at
@@ -476,7 +477,7 @@ describe('one-off parcels and their links', () => {
         .toEqual({ row: { ...opened, reason }, queued: false });
       const [path, options] = request.mock.calls[2]!;
       expect(Object.fromEntries(params(path))).toEqual({ id: 'eq.job', state: 'eq.queued' });
-      expect(options).toMatchObject({ method: 'PATCH', body: { priority: -20, reason } });
+      expect(options).toMatchObject({ method: 'PATCH', body: { priority: -5, reason } });
     }
     request.mockReset().mockImplementation(table(opened));
     await client.enqueueSyncJob({ packageId: 'package-1', reason: 'opened' });

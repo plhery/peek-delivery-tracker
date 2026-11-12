@@ -1235,12 +1235,61 @@
       }
     },
     {
+      "type": "timeseries",
+      "id": 75,
+      "title": "Scheduled runs that gave way, hourly",
+      "description": "Scheduled runs per hour that stopped for an account's or a lookup's check queued ahead of them and were queued again. Many in an hour mean a burst kept stopping the run, and accounts' scheduled checks fell behind. The carrier filter does not apply; the counters restart with each deploy.",
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "gridPos": {"x": 0, "y": 56, "w": 24, "h": 8},
+      "interval": "1h",
+      "targets": [
+        {
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "refId": "A",
+          "expr": "sum by (to) (increase(scheduled_sync_gave_way_total[1h]))",
+          "legendFormat": "{{to}}",
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "min": 0,
+          "color": {"mode": "palette-classic"},
+          "custom": {
+            "drawStyle": "bars",
+            "barAlignment": -1,
+            "fillOpacity": 80,
+            "lineWidth": 1,
+            "showPoints": "never",
+            "stacking": {"mode": "normal", "group": "A"},
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "account"},
+            "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "blue"}}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "lookup"},
+            "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "orange"}}]
+          }
+        ]
+      },
+      "options": {
+        "legend": {"showLegend": true, "displayMode": "list", "placement": "bottom"},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      }
+    },
+    {
       "type": "table",
       "id": 20,
       "title": "Refreshes served by a universal provider",
       "description": "Per configured carrier, in the time range. A carrier with its own adapter should stay near zero: every point above it is a direct failure followed by the router's cooldown. Universal-only carriers, such as unknown, read 100%.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 56, "w": 12, "h": 8},
+      "gridPos": {"x": 0, "y": 64, "w": 12, "h": 8},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1310,7 +1359,7 @@
       "title": "Silent carriers",
       "description": "Carriers with lookups in the last 7 days and none in the last 48 hours, whatever the time range or carrier filter. Silence isn't success: a carrier with active parcels and no lookups is worth a look.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 12, "y": 56, "w": 12, "h": 8},
+      "gridPos": {"x": 12, "y": 64, "w": 12, "h": 8},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1349,7 +1398,7 @@
       "id": 29,
       "title": "Review signals",
       "collapsed": false,
-      "gridPos": {"x": 0, "y": 64, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 72, "w": 24, "h": 1},
       "panels": []
     },
     {
@@ -1358,7 +1407,7 @@
       "title": "Routing signals",
       "description": "What checks learnt that the catalog, detection or the adapters could act on, by signal, the parcel's carrier and the carrier the signal is about (uncatalogued: a name a provider gave). Postgres keeps each number in tracking_routing_signals for the hourly review.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 65, "w": 8, "h": 8},
+      "gridPos": {"x": 0, "y": 73, "w": 8, "h": 8},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1393,7 +1442,7 @@
       "title": "Sync anomalies",
       "description": "Suspicious decisions of checks, by carrier and anomaly code. Each stays on its attempt in tracking_sync_attempts; none reaches Sentry.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 8, "y": 65, "w": 8, "h": 8},
+      "gridPos": {"x": 8, "y": 73, "w": 8, "h": 8},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1428,7 +1477,7 @@
       "title": "Health incidents",
       "description": "Refresh, provider and direct-tracking incidents that opened (or still fail six hours on), recovered, or closed with no sample left. Open ones are also Sentry issues; the others are not.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 16, "y": 65, "w": 8, "h": 8},
+      "gridPos": {"x": 16, "y": 73, "w": 8, "h": 8},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1468,7 +1517,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 73,
+        "y": 81,
         "w": 24,
         "h": 8
       },
@@ -1522,7 +1571,7 @@
       "id": 22,
       "title": "Statuses and detection",
       "collapsed": false,
-      "gridPos": {"x": 0, "y": 81, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 89, "w": 24, "h": 1},
       "panels": []
     },
     {
@@ -1531,7 +1580,7 @@
       "title": "Status mapping source by carrier",
       "description": "Persisted events in the time range by how their stage was decided: the carrier's map, the wording classifier, or neither. Unmapped events are new wording to review in tracking_status_observations.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 82, "w": 12, "h": 9},
+      "gridPos": {"x": 0, "y": 90, "w": 12, "h": 9},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1624,7 +1673,7 @@
       "title": "Unmapped status share",
       "description": "Share of each carrier's events over the trailing 24 hours that no map or wording decided. Carriers with none are hidden. A rising line is new wording.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 12, "y": 82, "w": 12, "h": 9},
+      "gridPos": {"x": 12, "y": 90, "w": 12, "h": 9},
       "interval": "1h",
       "targets": [
         {
@@ -1662,7 +1711,7 @@
       "title": "Detection confidence",
       "description": "Tracking-number detections served to clients in the time range, by confidence.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 91, "w": 6, "h": 7},
+      "gridPos": {"x": 0, "y": 99, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1702,7 +1751,7 @@
       "title": "Checksum rejections",
       "description": "Parcels a carrier's own lookup confirmed although detection had left that carrier out on a failed check digit, by carrier and rule id. A rule that keeps counting has a wrong check digit.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 6, "y": 91, "w": 6, "h": 7},
+      "gridPos": {"x": 6, "y": 99, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1734,7 +1783,7 @@
       "title": "Provider postcode requests",
       "description": "Whether relaying a provider's postcode request pays off: asked, supplied, then each lookup made with it.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 12, "y": 91, "w": 6, "h": 7},
+      "gridPos": {"x": 12, "y": 99, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1766,7 +1815,7 @@
       "title": "DPD app sessions",
       "description": "DPD app sessions taken up at start, and openings that ended opened or failed, by what began them. Openings by lookup or refused mean lookups waited for one.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 18, "y": 91, "w": 6, "h": 7},
+      "gridPos": {"x": 18, "y": 99, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1800,7 +1849,7 @@
       "id": 7,
       "title": "Lookups",
       "collapsed": true,
-      "gridPos": {"x": 0, "y": 98, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 106, "w": 24, "h": 1},
       "panels": [
         {
           "type": "timeseries",
@@ -1808,7 +1857,7 @@
           "title": "Successful lookups by serving step",
           "description": "Which step produced the result, per hour. A step that never serves can be removed; a direct step that never serves means the direct path is dead.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 0, "y": 91, "w": 12, "h": 8},
+          "gridPos": {"x": 0, "y": 99, "w": 12, "h": 8},
           "interval": "1h",
           "targets": [
             {
@@ -1873,7 +1922,7 @@
           "title": "Lookup outcomes",
           "description": "Every lookup by how it ended, per hour.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 12, "y": 91, "w": 12, "h": 8},
+          "gridPos": {"x": 12, "y": 99, "w": 12, "h": 8},
           "interval": "1h",
           "targets": [
             {
@@ -1970,7 +2019,7 @@
           "title": "Lookups lost after every step",
           "description": "Lookups that failed once every step was used, per hour, excluding answers about the number. Each one benches that adapter for the router's cooldown and sends the parcel to a universal provider.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 0, "y": 99, "w": 12, "h": 8},
+          "gridPos": {"x": 0, "y": 107, "w": 12, "h": 8},
           "interval": "1h",
           "targets": [
             {
@@ -2010,7 +2059,7 @@
           "title": "Lookups saved by a later step",
           "description": "Successful lookups that needed more than one step attempt, per hour. For La Poste, final_step=retry with attempts 2, 3 or 4 is a 403 incident page recovered by the first, second or third retry; an attempts value that never appears is a retry that never helps.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 12, "y": 99, "w": 12, "h": 8},
+          "gridPos": {"x": 12, "y": 107, "w": 12, "h": 8},
           "interval": "1h",
           "targets": [
             {
@@ -2051,7 +2100,7 @@
       "id": 12,
       "title": "Steps",
       "collapsed": true,
-      "gridPos": {"x": 0, "y": 99, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 107, "w": 24, "h": 1},
       "panels": [
         {
           "type": "timeseries",
@@ -2059,7 +2108,7 @@
           "title": "Step failures",
           "description": "Failed step attempts by carrier, step, error class and reason, per hour, including those a later step recovered. Answers about the number are left out.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 0, "y": 92, "w": 12, "h": 8},
+          "gridPos": {"x": 0, "y": 100, "w": 12, "h": 8},
           "interval": "1h",
           "targets": [
             {
@@ -2099,7 +2148,7 @@
           "title": "Fallbacks",
           "description": "Recovery steps run after an earlier step failed, per hour, by reason. A rising count with successful lookups means a hidden regression of the direct path.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 12, "y": 92, "w": 12, "h": 8},
+          "gridPos": {"x": 12, "y": 100, "w": 12, "h": 8},
           "interval": "1h",
           "targets": [
             {
@@ -2139,7 +2188,7 @@
           "title": "Step p95 duration",
           "description": "95th percentile of one step attempt's duration over the past hour. Few attempts make it coarse: the histogram's buckets stop at 0.1, 0.25, 0.5, 1, 2, 5, 10, 20, 30, 60 and 120 s.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 0, "y": 100, "w": 15, "h": 9},
+          "gridPos": {"x": 0, "y": 108, "w": 15, "h": 9},
           "interval": "1h",
           "targets": [
             {
@@ -2184,7 +2233,7 @@
           "title": "Direct-path success by carrier",
           "description": "Share of direct step attempts that succeeded in the time range, worst first.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
-          "gridPos": {"x": 15, "y": 100, "w": 9, "h": 9},
+          "gridPos": {"x": 15, "y": 108, "w": 9, "h": 9},
           "targets": [
             {
               "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -2251,7 +2300,7 @@
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 100,
+        "y": 108,
         "w": 24,
         "h": 1
       },
@@ -2268,7 +2317,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 101,
+        "y": 109,
         "w": 8,
         "h": 4
       },
@@ -2330,7 +2379,7 @@
       },
       "gridPos": {
         "x": 8,
-        "y": 101,
+        "y": 109,
         "w": 8,
         "h": 4
       },
@@ -2392,7 +2441,7 @@
       },
       "gridPos": {
         "x": 16,
-        "y": 101,
+        "y": 109,
         "w": 8,
         "h": 4
       },
@@ -2456,7 +2505,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 105,
+        "y": 113,
         "w": 8,
         "h": 5
       },
@@ -2520,7 +2569,7 @@
       },
       "gridPos": {
         "x": 8,
-        "y": 105,
+        "y": 113,
         "w": 8,
         "h": 5
       },
@@ -2584,7 +2633,7 @@
       },
       "gridPos": {
         "x": 16,
-        "y": 105,
+        "y": 113,
         "w": 8,
         "h": 5
       },
@@ -2648,7 +2697,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 110,
+        "y": 118,
         "w": 16,
         "h": 5
       },
@@ -2712,7 +2761,7 @@
       },
       "gridPos": {
         "x": 16,
-        "y": 110,
+        "y": 118,
         "w": 8,
         "h": 5
       },
@@ -2776,7 +2825,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 115,
+        "y": 123,
         "w": 12,
         "h": 8
       },
@@ -2839,7 +2888,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 115,
+        "y": 123,
         "w": 12,
         "h": 8
       },
@@ -2903,7 +2952,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 123,
+        "y": 131,
         "w": 12,
         "h": 8
       },
@@ -2966,7 +3015,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 123,
+        "y": 131,
         "w": 12,
         "h": 8
       },
@@ -3030,7 +3079,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 131,
+        "y": 139,
         "w": 24,
         "h": 8
       },
@@ -3088,7 +3137,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 139,
+        "y": 147,
         "w": 24,
         "h": 8
       },

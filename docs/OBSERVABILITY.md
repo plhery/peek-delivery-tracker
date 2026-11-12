@@ -734,9 +734,9 @@ Key JSON events:
   the streak lasted;
 - `scheduled_sync_budget_reached`: a scheduled run reached its 4 minutes and left the rest
   to the next run, with how many parcels it `checked` and how many it `left`;
-- `scheduled_sync_gave_way`: a scheduled run stopped for an account's check queued ahead of it
-  and was queued again, with how many parcels it `checked` and how many it `left`; its
-  `sync_job_completed` line says `gave_way`;
+- `scheduled_sync_gave_way`: a scheduled run stopped for a check queued ahead of it, an
+  `account`'s or a `lookup`'s (`to`), and was queued again, with how many parcels it `checked`
+  and how many it `left`; its `sync_job_completed` line says `gave_way`;
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
   (`web`, `native` for the iPhone and Android apps, `live_activity`, `link_alert`) beside the
@@ -1039,6 +1039,7 @@ dashboard's failure panels leave out.
 | `tracking_routing_signal_total` (signal, carrier, subject) | Routing signals for the review: `subject` is the carrier the signal is about, `uncatalogued` for a name a provider gave |
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
 | `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample left, a direct step the carrier has not run for six hours, or direct failures whose checks all answered |
+| `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them. Many an hour mean a burst kept stopping the run, so accounts' scheduled checks fell behind |
 | `carrier_checksum_rejection_total` (carrier, rule) | Parcels a carrier's own lookup first confirmed although detection had left that carrier out on a failed check digit. `rule` is the failing rule's id in the scraper's `carrier.json` |
 | `typo_candidate_total` (checksum, carrier, origin, first_check) | Parcels just added whose number reads as a digit typed twice, by whether their first check found scans, as the `typo_candidate` line says |
 | `public_lookup_total` (outcome) | Lookups without an account: `created`, `reused` (the number was already stored), `limited_burst`, `limited_daily` (the client's day is used up), `limited_network` (its IPv6 /48's day), `limited_global` |

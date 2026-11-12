@@ -95,4 +95,31 @@ describe('SharedLookups', () => {
     expect(second.reuse(['universal', '17TRACK'])).toBeUndefined();
     expect(failing).toHaveBeenCalledOnce();
   });
+
+  it('takes over the answers and outages of a run that stopped, until its time is up', async () => {
+    let now = 0;
+    vi.spyOn(performance, 'now').mockImplementation(() => now);
+    const stopped = new SharedLookups();
+    const fetch = vi.fn().mockResolvedValue({ status: 'in_transit', events: [] });
+    const key = carrierLookupKey('ups', 'TEST1234', null, null);
+    await stopped.for(copy('first')).once(key, fetch);
+    stopped.for(copy('first')).down('dpd', new Error('down'));
+    now = 60_000;
+    const again = new SharedLookups([], { lookups: stopped, until: 240_000 });
+    const check = again.for(copy('second'));
+    await check.once(key, fetch);
+    expect(fetch).toHaveBeenCalledOnce();
+    expect(check.outage('dpd')).toBeInstanceOf(Error);
+    // Its own answers come first, and stay once the stopped run's time is up.
+    const own = carrierLookupKey('ups', 'TEST5678', null, null);
+    await check.once(own, fetch);
+    now = 240_000;
+    const late = again.for(copy('third'));
+    expect(late.reuse(key)).toBeUndefined();
+    expect(late.outage('dpd')).toBeUndefined();
+    expect(late.reuse(own)).toBeDefined();
+    // The stopped run keeps nothing of the run that took over.
+    expect(stopped.for(copy('fourth')).reuse(own)).toBeUndefined();
+    vi.restoreAllMocks();
+  });
 });

@@ -32,7 +32,7 @@ import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
 import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { hostStepRecorder, withHeldLookups } from './stepRecorder';
-import { recordStatusMapping } from './metrics';
+import { recordScheduledRunGaveWay, recordStatusMapping } from './metrics';
 import {
   captureOperationalError,
   errorType,
@@ -42,7 +42,7 @@ import {
 } from './observability';
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
-import { REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
+import { LOOKUP_SYNC_PRIORITY, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
 import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
@@ -826,7 +826,7 @@ export interface SyncSummary extends JsonObject {
   subscriptions_expired: number;
   emails_sent: number;
   email_errors: number;
-  /** A scheduled run stopped early for an account's check queued ahead of it, and is to be queued again. */
+  /** A scheduled run stopped early for an account's or a lookup's check queued ahead of it, and is to be queued again. */
   gave_way?: true;
 }
 
@@ -1524,6 +1524,11 @@ export class TrackingSyncService {
    */
   #redetections: { rules: string; listed: boolean; waiting: Array<{ packageId: string; userId: string | null; dueAt: number }>;
     batch: string[] } | null = null;
+  /**
+   * The lookups of the scheduled run that last stopped for another check, and when its time is up
+   * (performance.now()): the run queued again, when this process runs it, takes them over until then.
+   */
+  #gaveWay: { lookups: SharedLookups; until: number } | null = null;
 
   constructor(
     readonly client: SupabaseServiceClient,
@@ -1536,6 +1541,8 @@ export class TrackingSyncService {
   async sync(context: SyncRunContext = { trigger: 'scheduled' }): Promise<SyncSummary> {
     return await this.exclusive(async () => {
       context.signal?.throwIfAborted();
+      const earlier = this.#gaveWay;
+      this.#gaveWay = null;
       const summary = emptySyncSummary();
       const now = this.now();
       const started = performance.now();
@@ -1555,8 +1562,9 @@ export class TrackingSyncService {
         ...await this.oneOffPackages(due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
           (parcel) => !unwatched.has(String(parcel.id)), context.signal),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)];
-      // Copies of one number, in several accounts or followed without one, share their lookups.
-      const lookups = new SharedLookups(parcels);
+      // Copies of one number, in several accounts or followed without one, share their lookups, with
+      // those of the run that stopped for another check before this one, while its time lasts.
+      const lookups = new SharedLookups(parcels, earlier && performance.now() < earlier.until ? earlier : undefined);
       // The accounts whose parcels a merge changed during the run.
       const merged = new Set<string>();
       for (const [index, parcel] of parcels.entries()) {
@@ -1567,11 +1575,16 @@ export class TrackingSyncService {
           logOperationalEvent('scheduled_sync_budget_reached', { checked: summary.checked, left: parcels.length - index });
           break;
         }
-        // An account's check queued meanwhile, such as a refresh or a new parcel, goes ahead of the run: once
-        // the run has checked a parcel, it stops between checks and is queued again behind it (background.ts).
-        if (summary.checked > 0 && await this.jobQueuedAhead()) {
-          logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: parcels.length - index });
+        // An account's or a lookup's check queued meanwhile, such as a refresh, a new lookup or a link opened,
+        // goes ahead of the run: once the run has checked a parcel, it stops between checks and is queued
+        // again behind it (background.ts), with this run's lookups.
+        const ahead = summary.checked > 0 ? await this.jobQueuedAhead() : null;
+        if (ahead !== null) {
+          const to = ahead <= LOOKUP_SYNC_PRIORITY ? 'lookup' : 'account';
+          logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: parcels.length - index, to });
+          recordScheduledRunGaveWay(to);
           summary.gave_way = true;
+          this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS };
           break;
         }
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
@@ -1595,12 +1608,12 @@ export class TrackingSyncService {
     });
   }
 
-  /** Whether an account's check waits behind the scheduled run; false when that cannot be read. */
-  private async jobQueuedAhead(): Promise<boolean> {
+  /** The priority of an account's or a lookup's check queued while the scheduled run runs; null when none is, or that cannot be read. */
+  private async jobQueuedAhead(): Promise<number | null> {
     try {
       return await this.client.syncJobQueuedAhead(SCHEDULED_SYNC_PRIORITY);
     } catch {
-      return false;
+      return null;
     }
   }
 
@@ -1611,8 +1624,8 @@ export class TrackingSyncService {
     return await this.exclusive(async () => {
       context.signal?.throwIfAborted();
       const summary = emptySyncSummary();
-      // A link read queued this check because one was due. The scheduled run this check waited
-      // for may have checked the parcel meanwhile, which stands in for it.
+      // A link read queued this check because one was due. A check of the parcel under way when the
+      // link was read, such as the scheduled run's, may have checked it meanwhile, which stands in for it.
       if (context.trigger === 'opened') {
         const current = await this.client.getPackage(String(parcel.id));
         if (!current || !isOpenedParcelSyncDue(current, this.now())) return summary;

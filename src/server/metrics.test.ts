@@ -228,6 +228,15 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('tracking_health_incident_total{kind="provider",subject="17TRACK",state="recovered"} 1');
   });
 
+  it('counts scheduled runs that gave way by whose check went ahead, both from 0', async () => {
+    expect(await metrics.metricsText()).toContain('scheduled_sync_gave_way_total{to="lookup"} 0');
+    metrics.recordScheduledRunGaveWay('lookup');
+    metrics.recordScheduledRunGaveWay('lookup');
+    const text = await scraped();
+    expect(text).toContain('scheduled_sync_gave_way_total{to="lookup"} 2');
+    expect(text).toContain('scheduled_sync_gave_way_total{to="account"} 0');
+  });
+
   it('labels a lookup with the attempts it took, capped to keep the label set small', async () => {
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'ok', errorType: null, durationMs: 3200, attempts: 3 });
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'challenge', errorType: 'UpstreamHttpError', durationMs: 6000, attempts: 40 });

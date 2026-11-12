@@ -336,7 +336,7 @@ export class SyncJobWorker {
         signal.throwIfAborted();
         summary = await this.service.sync({ ...context, trigger: 'scheduled' });
         signal.throwIfAborted();
-        // A run that gave way to an account's check leaves this to the run queued again behind it.
+        // A run that gave way to an account's or a lookup's check leaves this to the run queued again behind it.
         if (!summary.gave_way) {
           archived = await this.scheduledUpkeep(jobId, kind, signal);
           this.state.lastAutoArchived = archived;
@@ -508,7 +508,7 @@ export class SyncJobWorker {
 
   /**
    * Queues a scheduled run that gave way again, behind the checks it gave way to and ahead of
-   * lookups'. Should that fail, the next window's run takes the parcels it left.
+   * a release's re-checks. Should that fail, the next window's run takes the parcels it left.
    */
   private async queueScheduledRunAgain(): Promise<void> {
     try {

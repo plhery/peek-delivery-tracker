@@ -1130,8 +1130,15 @@ function leastRecentlyChecked(parcels: JsonObject[]): JsonObject[] {
 
 /** The priority of a re-check nobody asked for, such as a scraper release's: it waits behind every other job. */
 export const BACKGROUND_SYNC_PRIORITY = -30;
-/** The scheduled run's priority: an account's check goes ahead of it, a lookup's waits behind it. */
+/** The scheduled run's priority: an account's check and a lookup's go ahead of it. */
 export const SCHEDULED_SYNC_PRIORITY = -10;
+/**
+ * A lookup's check, such as a new lookup's first check or a link opened: behind every account's
+ * check, ahead of the scheduled run, which stops for it between checks.
+ */
+export const LOOKUP_SYNC_PRIORITY = -5;
+/** An account's check, such as a refresh or a new parcel: ahead of every other job. */
+export const ACCOUNT_SYNC_PRIORITY = 10;
 
 export class SupabaseServiceClient extends SupabaseClient {
   /**
@@ -1944,9 +1951,9 @@ export class SupabaseServiceClient extends SupabaseClient {
       if (!options.packageId) throw new TypeError('Package sync jobs require a package');
       kind = 'package';
       dedupeKey = `package:${options.packageId}`;
-      // A one-off parcel has no owner. Its check waits behind every account's
-      // refresh and the scheduled run, so lookups cannot starve accounts.
-      priority = options.background ? BACKGROUND_SYNC_PRIORITY : options.userId ? 10 : -20;
+      // A one-off parcel has no owner. Its check waits behind every account's own check and goes
+      // ahead of the scheduled run, accounts' parcels' scheduled checks included.
+      priority = options.background ? BACKGROUND_SYNC_PRIORITY : options.userId ? ACCOUNT_SYNC_PRIORITY : LOOKUP_SYNC_PRIORITY;
       reason = options.background ? 'release' : options.reason ?? null;
     }
 
@@ -2048,16 +2055,21 @@ export class SupabaseServiceClient extends SupabaseClient {
     if (finished !== true) throw new SyncJobLeaseLost();
   }
 
-  /** Whether a job that goes ahead of `priority` waits to be claimed, such as an account's refresh during a scheduled run. */
-  async syncJobQueuedAhead(priority: number): Promise<boolean> {
+  /**
+   * The highest priority of the jobs that go ahead of `priority` and wait to be claimed, such as an
+   * account's refresh or a lookup's check during a scheduled run; null when none waits.
+   */
+  async syncJobQueuedAhead(priority: number): Promise<number | null> {
     const params = query([
-      ['select', 'id'],
+      ['select', 'priority'],
       ['state', 'eq.queued'],
       ['priority', `gt.${priority}`],
       ['run_after', `lte.${new Date().toISOString()}`],
+      ['order', 'priority.desc'],
       ['limit', '1'],
     ]);
-    return rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 })).length > 0;
+    const ahead = rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 }))[0];
+    return ahead ? Number(ahead.priority) : null;
   }
 
   /** When the last scheduled run finished, however it ended; null when none has. */

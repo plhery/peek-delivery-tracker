@@ -45,6 +45,32 @@ function pick(source: JsonObject, keys: readonly string[]): JsonObject {
 }
 
 /**
+ * A run's own entries, then those of the run that stopped for another check before it, until
+ * that run's time is up (`until`, on performance.now()), as they would have lasted in it.
+ */
+class Carried<V> extends Map<string, V> {
+  #earlier: Map<string, V> | null;
+
+  constructor(earlier: Map<string, V>, private readonly until: number) {
+    super();
+    this.#earlier = earlier;
+  }
+
+  #fresh(): Map<string, V> | null {
+    if (this.#earlier && performance.now() >= this.until) this.#earlier = null;
+    return this.#earlier;
+  }
+
+  override get(key: string): V | undefined {
+    return super.has(key) ? super.get(key) : this.#fresh()?.get(key);
+  }
+
+  override has(key: string): boolean {
+    return super.has(key) || (this.#fresh()?.has(key) ?? false);
+  }
+}
+
+/**
  * The lookups of one scheduled run. Several accounts, or a lookup without
  * one, can follow the same number: each copy is checked and saved on its own,
  * but the copies share every carrier and provider answer, keyed by what was
@@ -53,11 +79,17 @@ function pick(source: JsonObject, keys: readonly string[]): JsonObject {
  * parcel's name, notes or other inputs.
  */
 export class SharedLookups {
-  readonly #answers = new Map<string, Promise<unknown>>();
-  readonly #outages = new Map<string, unknown>();
+  readonly #answers: Map<string, Promise<unknown>>;
+  readonly #outages: Map<string, unknown>;
   readonly #routing = new Map<string, { routing: JsonObject; data: JsonObject }>();
 
-  constructor(parcels: readonly JsonObject[] = []) {
+  /**
+   * `earlier`: the lookups of a run that stopped for another check and was queued again as this one.
+   * Its answers and the carriers it found down hold until `until`, when that run's time is up.
+   */
+  constructor(parcels: readonly JsonObject[] = [], earlier?: { lookups: SharedLookups; until: number }) {
+    this.#answers = earlier ? new Carried(earlier.lookups.#answers, earlier.until) : new Map();
+    this.#outages = earlier ? new Carried(earlier.lookups.#outages, earlier.until) : new Map();
     const copies = new Map<string, JsonObject[]>();
     for (const parcel of parcels) {
       const identity = lookupIdentity(parcel);

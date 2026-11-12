@@ -35,7 +35,7 @@ import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './
  */
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 18;
+const RUNTIME_VERSION = 19;
 
 interface PrometheusRuntime {
   version: number;
@@ -72,6 +72,7 @@ interface PrometheusRuntime {
   routingSignalTotal: Counter<'signal' | 'carrier' | 'subject'>;
   syncAnomalyTotal: Counter<'carrier' | 'anomaly'>;
   healthIncidentTotal: Counter<'kind' | 'subject' | 'state'>;
+  scheduledRunGaveWayTotal: Counter<'to'>;
   nativeVerificationTotal: Counter<'kind' | 'outcome' | 'reason'>;
   lookupProofTotal: Counter<'kind' | 'proof'>;
   publicLookupClients: Gauge;
@@ -286,6 +287,12 @@ function createRuntime(): PrometheusRuntime {
       name: 'tracking_health_incident_total',
       help: 'Health incidents of refreshes, providers and direct tracking that opened (or still fail six hours on), recovered or closed unobserved, by kind and subject.',
       labelNames: ['kind', 'subject', 'state'] as const,
+      registers: [registry],
+    }),
+    scheduledRunGaveWayTotal: new Counter({
+      name: 'scheduled_sync_gave_way_total',
+      help: 'Scheduled runs that stopped for a check queued ahead of them and were queued again, by whose check: account or lookup.',
+      labelNames: ['to'] as const,
       registers: [registry],
     }),
     nativeVerificationTotal: new Counter({
@@ -641,6 +648,13 @@ export function recordSyncAnomaly(carrier: string, anomaly: string): void {
 export function recordHealthIncident(kind: string, subject: string, state: string): void {
   count(runtime.healthIncidentTotal, 'tracking_health_incident_total', { kind, subject, state });
 }
+
+/** A scheduled run stopped for an account's or a lookup's check queued ahead of it. */
+export function recordScheduledRunGaveWay(to: 'account' | 'lookup'): void {
+  count(runtime.scheduledRunGaveWayTotal, 'scheduled_sync_gave_way_total', { to });
+}
+// Both series show from the start, so an hour in which no run gave way reads 0 rather than no data.
+for (const to of ['account', 'lookup'] as const) runtime.scheduledRunGaveWayTotal.inc({ to }, 0);
 
 interface UsageStats { buckets: number; p50: number; p90: number; max: number }
 

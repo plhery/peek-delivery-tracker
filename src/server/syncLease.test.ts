@@ -41,8 +41,8 @@ it.each([false, true])('renews a long-running job and stops writes after renewal
   expect(renew).toHaveBeenCalledTimes(calls);
 });
 
-it.each([[10, null, 'package'], [-20, null, 'package'], [-30, null, 'release'], [10, 'refresh', 'refresh'], [-20, 'opened', 'opened'],
-  [-20, 'added', 'added'], [-30, 'release', 'release']])('runs a parcel\'s job of priority %i, queued for %s, as a %s check', async (priority, reason, trigger) => {
+it.each([[10, null, 'package'], [-20, null, 'package'], [-30, null, 'release'], [10, 'refresh', 'refresh'], [-5, 'opened', 'opened'],
+  [-5, 'added', 'added'], [-30, 'release', 'release']])('runs a parcel\'s job of priority %i, queued for %s, as a %s check', async (priority, reason, trigger) => {
   vi.useFakeTimers();
   const client = new SupabaseServiceClient('https://database.test', 'test');
   const state: BackgroundState = { workerHeartbeat: null, lastScheduledSync: null, nextScheduledSync: null, lastSummary: null, lastError: null, lastAutoArchived: 0 };

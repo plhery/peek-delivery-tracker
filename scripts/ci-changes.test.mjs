@@ -6,7 +6,7 @@ import path from 'node:path';
 import { describe, it } from 'node:test';
 import { runInNewContext } from 'node:vm';
 import { planChanges, selectSuites, successfulBaseline } from './ci-changes.mjs';
-import { BY_HAND_TITLE, RELEASE_STEPS } from './adopt-scraper.mjs';
+import { BY_HAND_TITLE, RELEASE_STEPS, heldStep } from './adopt-scraper.mjs';
 
 const none = { web: false, migrations: false, ios: false, android: false };
 const web = { ...none, web: true };
@@ -330,17 +330,16 @@ describe('scraper adoption validation', () => {
     assert.match(push, /if: "!cancelled\(\) && needs\.adopt\.result == 'success' && needs\.adopt\.outputs\.adopt == 'true'"/);
   });
 
-  it('fails once for a release that waits for a migration, not on every run', () => {
+  it('fails the first run a release that waits for a migration stops, then once a slot after a few hours', () => {
     assert.match(workflow, /if \[ "\$status" = 3 \]; then echo 'blocked=true' >> "\$GITHUB_OUTPUT"; else exit "\$status"; fi/);
     const gate = workflow.match(/\n  gate:\n([\s\S]*?)\n  push:\n/)?.[1];
     assert.ok(gate, 'The gate job must sit between adopt and push.');
-    // A skipped job's name is never filled in: the release goes in the step's name, which finds the first failure.
+    // A skipped job's name is never filled in: the release goes in the step's name, which finds the earlier failures.
     assert.match(gate, /^    name: Database gate\n/);
-    const step = 'Fail once for release ${{ needs.adopt.outputs.version }}';
-    assert.ok(gate.includes(`- name: ${step}\n`) && gate.includes(`STEP: ${step}\n`));
-    assert.ok(gate.includes('select(.name == "Database gate" and .conclusion == "failure" and any((.steps // [])[]; .name == env.STEP'));
+    assert.ok(gate.includes(`- name: ${heldStep('${{ needs.adopt.outputs.version }}')}\n`));
+    assert.ok(gate.includes('run: node scripts/adopt-scraper.mjs held "--version=$VERSION"\n'));
     assert.match(gate, /if: "!cancelled\(\) && needs\.adopt\.outputs\.blocked == 'true'"/);
-    assert.match(gate, /permissions:\n\s+actions: read\n/);
+    assert.match(gate, /permissions:\n\s+actions: read\n\s+contents: read\n/);
     assert.doesNotMatch(gate, /\bnpm\b|secrets\./);
   });
 

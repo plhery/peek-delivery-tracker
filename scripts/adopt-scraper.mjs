@@ -9,6 +9,7 @@
 //   node scripts/adopt-scraper.mjs gate <file> [--database-ready]   exits 3 when the release waits for a migration
 //   node scripts/adopt-scraper.mjs peers
 //   node scripts/adopt-scraper.mjs holds <package.json> --version=1.2.3   prints whether it pins that release or a newer one
+//   node scripts/adopt-scraper.mjs held --version=1.2.3   the database gate's verdict for a release it stops (reads the adopt runs)
 import { appendFile, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -188,6 +189,35 @@ export function releaseFailed(since, run) {
   return run.jobs.some((job) => job.name === 'Adopt' && job.status === 'completed' && job.conclusion === 'failure'
     && Date.parse(job.started_at) >= since.getTime()
     && (job.steps ?? []).some((step) => step.conclusion === 'failure' && RELEASE_STEPS.has(step.name)));
+}
+
+/** How long a release the database gate stops waits before the first run of each slot fails again. */
+export const HELD_ALERT_HOURS = 4;
+
+/** The name of the Database gate job's step for `version`: it fails when the run has to notify. */
+export function heldStep(version) {
+  return `Held release ${version}`;
+}
+
+/**
+ * What the Database gate job does with release `version`, stopped at `now`: `failures` are the gate's failures for it
+ * so far (`url`, `startedAt`). The first run it stops fails, which notifies. Once the release has waited
+ * HELD_ALERT_HOURS, the first run of each slot fails again, so a held adoption never looks green for long; other runs
+ * pass and link to the first failure.
+ */
+export function gateHold(version, now, failures) {
+  const sorted = [...failures].sort((a, b) => Date.parse(a.startedAt) - Date.parse(b.startedAt));
+  const first = sorted[0];
+  if (!first) {
+    return { fail: true, message: `Universal Parcel Scraper ${version} waits for a migration. The adopt job's summary lists what it changes.` };
+  }
+  const hours = Math.floor((now.getTime() - Date.parse(first.startedAt)) / (60 * MINUTE));
+  const slot = adoptionSlot(now);
+  if (hours >= HELD_ALERT_HOURS && !sorted.some((failure) => Date.parse(failure.startedAt) >= slot.getTime())) {
+    return { fail: true, message: `Universal Parcel Scraper ${version} has waited ${hours} h for its migration, since ${first.url}. `
+      + 'Write the migration with the lines that run\'s adopt job lists and apply it, or adopt it by hand once applied.' };
+  }
+  return { fail: false, message: `Universal Parcel Scraper ${version} still waits for its migration, which ${first.url} reported first.` };
 }
 
 /**
@@ -626,6 +656,35 @@ async function summarize(markdown) {
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${markdown}\n`);
 }
 
+/**
+ * The Database gate job: the gate's earlier failures for `version`, from the adopt workflow's failed runs of the last
+ * week, decide whether this run fails (gateHold).
+ */
+async function held(version) {
+  const repository = process.env.GITHUB_REPOSITORY;
+  if (!repository) throw new Error('GITHUB_REPOSITORY is required to read the adoption runs');
+  const ask = (pathname) => retry(() => github(pathname), { attempts: 3, pauseMs: 5_000 });
+  const now = new Date();
+  const query = new URLSearchParams({ status: 'failure', created: `>=${new Date(now.getTime() - 7 * 24 * 60 * MINUTE).toISOString()}`, per_page: '100' });
+  const { workflow_runs: runs } = await ask(`/repos/${repository}/actions/workflows/adopt-scraper.yml/runs?${query}`);
+  const failures = [];
+  for (const run of runs) {
+    const { jobs } = await ask(`/repos/${repository}/actions/runs/${run.id}/jobs?per_page=100`);
+    for (const job of jobs) {
+      if (job.name === 'Database gate' && job.conclusion === 'failure'
+        && (job.steps ?? []).some((step) => step.conclusion === 'failure' && step.name === heldStep(version))) {
+        failures.push({ url: job.html_url, startedAt: job.started_at });
+      }
+    }
+  }
+  const verdict = gateHold(version, now, failures);
+  await summarize(verdict.message);
+  if (verdict.fail) {
+    console.error(`::error::${verdict.message}`);
+    process.exitCode = 1;
+  }
+}
+
 async function resolveTarget(requested, databaseReady) {
   const current = pinnedVersion(await readJson(path.join(root, 'package.json')));
   const distTags = requested ? {} : (await retry(registryDocument, { attempts: 3, pauseMs: 5_000 })).distTags;
@@ -712,10 +771,11 @@ async function main() {
   if (command === 'snapshot' && file) return writeFile(file, `${JSON.stringify(await installedRelease(), null, 2)}\n`);
   if (command === 'gate' && file) return gate(file, values['database-ready']);
   if (command === 'peers') return checkPeers();
+  if (command === 'held' && values.version) return held(values.version.trim());
   if (command === 'holds' && file && values.version) {
     return void process.stdout.write(`${holdsRelease(await readJson(file), values.version.trim())}\n`);
   }
-  throw new Error('Usage: adopt-scraper.mjs due | resolve [--version=X.Y.Z] [--database-ready] | snapshot <file> | gate <file> [--database-ready] | peers | holds <package.json> --version=X.Y.Z');
+  throw new Error('Usage: adopt-scraper.mjs due | resolve [--version=X.Y.Z] [--database-ready] | snapshot <file> | gate <file> [--database-ready] | peers | holds <package.json> --version=X.Y.Z | held --version=X.Y.Z');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

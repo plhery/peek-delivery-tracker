@@ -16,7 +16,9 @@ import {
   dueSummary,
   diffDatabaseFacets,
   failureHeldSince,
+  gateHold,
   gateReport,
+  heldStep,
   holdsRelease,
   installedRelease,
   matchesOnlyLettersAndDigits,
@@ -232,6 +234,36 @@ describe('adoption slots', () => {
     // The night's slot holds it for two hours.
     assert.ok(failedAt('2026-10-21T22:07:00Z', '2026-10-21T22:11:00Z').endsWith('tried again from 00:11 UTC.'));
     assert.ok(failedAt('2026-10-21T22:07:00Z', '2026-10-22T05:00:00Z').endsWith('tried again from 06:07 UTC.'));
+  });
+});
+
+describe('a release the database gate holds', () => {
+  const first = { url: 'https://example.test/first', startedAt: '2026-11-11T06:09:00Z' };
+  const at = (time, failures) => gateHold('1.2.3', new Date(time), failures);
+
+  it('fails the first run it stops', () => {
+    assert.equal(at('2026-11-11T06:09:00Z', []).fail, true);
+    assert.equal(heldStep('1.2.3'), 'Held release 1.2.3');
+  });
+
+  it('lets the runs after it pass for a few hours, linking to the first failure', () => {
+    const verdict = at('2026-11-11T08:20:00Z', [first]);
+    assert.equal(verdict.fail, false);
+    assert.match(verdict.message, /which https:\/\/example\.test\/first reported first/);
+    assert.equal(at('2026-11-11T10:06:00Z', [first]).fail, false);
+  });
+
+  it('fails the first run of each slot once the release has waited four hours', () => {
+    const late = at('2026-11-11T10:09:00Z', [first]);
+    assert.equal(late.fail, true);
+    assert.match(late.message, /has waited 4 h for its migration, since https:\/\/example\.test\/first/);
+    const reported = { url: 'https://example.test/again', startedAt: '2026-11-11T10:09:30Z' };
+    assert.equal(at('2026-11-11T11:40:00Z', [reported, first]).fail, false);
+    assert.equal(at('2026-11-11T12:08:00Z', [reported, first]).fail, true);
+    // The night's slot fails once, from 22:07 until 06:07.
+    const night = { url: 'https://example.test/night', startedAt: '2026-11-11T22:08:00Z' };
+    assert.equal(at('2026-11-12T03:00:00Z', [night, reported, first]).fail, false);
+    assert.equal(at('2026-11-12T06:08:00Z', [night, reported, first]).fail, true);
   });
 });
 

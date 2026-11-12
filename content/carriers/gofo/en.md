@@ -53,7 +53,7 @@ GOFO's delivered scan can add a detail after the comma, and its tracking page al
 
 **Delivery photos.** Once you enter the recipient name used on the order, GOFO's tracking page shows the proof of delivery, in most cases with a photo of where the parcel was left. Peek leaves the photos out.
 
-**Missed delivery.** `Delivery Exception` means the driver tried and couldn't deliver. The reason follows the comma and varies; `Business Closed` is one of them. Peek then shows the parcel as "Delivery attempted" and quotes GOFO's line under "What GOFO Express says". GOFO says it usually tries again within 24 hours. An address problem, such as a missing apartment number, can send the parcel back to the local warehouse: tell the shop that shipped it. You can't collect a parcel from GOFO yourself.
+**Missed delivery.** `Delivery Exception` means the driver tried and couldn't deliver. The reason follows the comma and varies; `Business Closed` is one of them. Peek then shows the parcel as "Delivery attempted" and quotes GOFO's line under "What GOFO Express says". GOFO says it usually tries again within 24 hours. An address problem, such as a missing apartment number, which GOFO's tracking can show as `Incorrect/Insufficient Address…` (see the table above), can send the parcel back to the local warehouse: tell the shop that shipped it. You can't collect a parcel from GOFO yourself.
 
 ## GOFO package delayed, not received or not ordered
 

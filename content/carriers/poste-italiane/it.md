@@ -46,7 +46,7 @@ Su poste.it ogni passaggio ha un'etichetta breve, spiegata nella «Legenda degli
 | `completata la fase di verifica per lo svincolo…` | I controlli doganali sono finiti. |
 | `In transito` | Viaggia da un centro di Poste all'altro (centri di smistamento, centri operativi). |
 | `In transito presso il Centro di lavorazione Internazionale` | Ha lasciato l'Italia. Per Postapriority Internazionale e Poste Delivery International Standard è l'ultima traccia. |
-| `presso il Centro di lavorazione Internazionale` | Una raccomandata al Centro di lavorazione Internazionale di Poste, ancora in transito. Compare su una riga a sé, dopo il movimento in transito. |
+| `presso il Centro di lavorazione Internazionale` | La stessa tappa per una raccomandata: Poste la scrive su una riga a sé, dopo `In transito`. |
 | `In consegna` | È stato affidato a chi lo consegna. |
 | `consegna non andata a buon fine…` | La consegna non è riuscita, per esempio per un indirizzo sbagliato o incompleto. |
 | `disponibile per il ritiro dal giorno lavorativo successivo alla data indicata` | Ti aspetta dove dice l'avviso del portalettere: puoi ritirarlo dal giorno lavorativo dopo la data indicata. |

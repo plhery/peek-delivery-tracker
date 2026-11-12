@@ -60,7 +60,7 @@ Los escaneos de GOFO que lee Peek están en inglés. Estos son los que puede enc
 
 **Parado en el camino.** Si pasan cuatro días sin escaneos nuevos antes de que el paquete salga a reparto, avísale a la tienda o usa el enlace de ayuda que entonces te muestra Peek (más abajo).
 
-**Intento de entrega fallido.** Lee el motivo que da GOFO después de la coma. Si depende de ti, como un negocio cerrado a la hora del reparto, o si hay un error en tu dirección, avísale a la tienda.
+**Intento de entrega fallido.** Lee el motivo que da GOFO después de la coma. Si depende de ti, como un negocio cerrado a la hora del reparto, o si hay un error en tu dirección, que GOFO puede señalar con `Incorrect/Insufficient Address…`, avísale a la tienda.
 
 **Entregado, pero no lo tienes.** Peek no muestra las fotos de entrega que guarda GOFO. Avísale a la tienda y mira [paquete entregado pero no recibido](guide:delivered-not-received).
 

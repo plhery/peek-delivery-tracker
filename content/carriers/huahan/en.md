@@ -81,7 +81,7 @@ HuaHan files the local carrier's out-for-delivery, pickup-point and delivery sca
 
 After `Has been given to local carrier`, a carrier in the destination country delivers the parcel, and HuaHan's tracker can name it and give its number. Peek couldn't check HuaHan's website, so this page has no list of HuaHan's partners.
 
-**What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. Beyond these two, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
+**What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. [DHL](carrier:dhl) is booked for the last leg of some parcels: the data line quoted above is its record of the sender's data. Beyond these, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
 
 **Delivery attempts and pickup.** Attempts, notice cards and where a missed parcel waits, and for how long, follow the local carrier's rules: ask that carrier, with its number, to rearrange a delivery. See [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
@@ -135,7 +135,7 @@ Import customs have let the parcel through, and HuaHan has handed it to the carr
 
 ### Who delivers HuaHan parcels in my country?
 
-A local carrier, which HuaHan's tracker can name, with its number for the parcel. Peek's code shows Sameday in one history and reads USPS numbers, and names no other: check HuaHan's tracker or ask the seller.
+A local carrier, which HuaHan's tracker can name, with its number for the parcel. Peek's code shows Sameday in one history, reads USPS numbers and holds DHL's data for the last leg of some parcels: check HuaHan's tracker or ask the seller.
 
 ### Who do I contact about a missing HuaHan parcel?
 

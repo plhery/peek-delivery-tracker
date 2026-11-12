@@ -62,7 +62,7 @@ This page gives no delivery times, attempt rules or ways to reschedule, and Peek
 
 **`undelivered_attempted`, `undelivered_unattempted` or `Unsuccessful`.** Delivery didn't happen; `Rescheduled to:` gives the day Ekart plans to try again. The tracker's next lines show whether the parcel goes out again or heads back. Make sure the shop has your right address and phone number.
 
-**`ShipmentRtoConfirmed`.** The parcel is going back to the seller. Once Ekart's tracker shows it `Delivered` there, Peek shows "Returned to sender". Ask the shop for a refund or to send it again: see [returned to sender](guide:returned-to-sender).
+**`ShipmentRtoConfirmed` or `Marked RTO: ORDER_REJECT`.** The parcel is going back to the seller. Once Ekart's tracker shows it `Delivered` there, Peek shows "Returned to sender". Ask the shop for a refund or to send it again: see [returned to sender](guide:returned-to-sender).
 
 **`PickupCancel`.** The pickup from the seller was cancelled, so the parcel never entered Ekart's network. Ask the seller whether your order is still coming.
 
@@ -98,7 +98,7 @@ Three letters, then `C`, `P` or `R`, then ten digits, such as `FMPP0000000000` (
 
 ### What does RTO mean in Ekart tracking?
 
-The parcel is going back to the seller. `ShipmentRtoConfirmed` starts the return, and a later `Delivered` means it reached the seller. Ask the shop for a refund or a new delivery.
+The parcel is going back to the seller. `ShipmentRtoConfirmed` or `Marked RTO: ORDER_REJECT` starts the return, and a later `Delivered` means it reached the seller. Ask the shop for a refund or a new delivery.
 
 ### What does InscannedAtDH mean in Ekart tracking?
 

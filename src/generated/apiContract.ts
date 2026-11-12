@@ -7744,6 +7744,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^IHB\\d{10}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^ANS\\d{13}UA$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://t.meest-group.com/n/"
@@ -9430,7 +9434,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Omniva",
     "aliases": [
       "Eesti Post",
-      "Estonian Post"
+      "Estonian Post",
+      "Estonia Post"
     ],
     "countries": [
       "EE",
@@ -10743,6 +10748,7 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Български пощи",
       "Bulgarian Post",
+      "Bulgaria Post",
       "BG Post",
       "Balgarski Poshti"
     ],

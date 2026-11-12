@@ -72486,6 +72486,17 @@
     ]
   },
   {
+    "input": "ANS8000000000046UA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "meest"
+    ],
+    "asked": [
+      "meest"
+    ]
+  },
+  {
     "input": "AP00808868960945",
     "carrier": "aliexpress",
     "confidence": "high",

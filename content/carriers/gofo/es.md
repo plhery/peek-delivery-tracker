@@ -47,9 +47,10 @@ Los escaneos de GOFO que lee Peek están en inglés. Estos son los que puede enc
 | `Out for Delivery` | Va con el repartidor. |
 | `Delivered` | Entregado. |
 | `Delivery Exception, Business Closed` | El repartidor no pudo entregarlo porque el negocio estaba cerrado. |
+| `Incorrect/Insufficient Address, Additional Details Required for Delivery.` | La dirección es incorrecta o incompleta, a veces al día siguiente de un intento fallido: el paquete espera a que alguien complete los datos que faltan. |
 | `Label Cancelled` | Se anuló la etiqueta: con ese número no viene ningún paquete. |
 
-`Delivery Exception` es un intento de entrega fallido, y el motivo que va después de la coma cambia de un intento a otro; `Business Closed` es solo uno. Peek pone entonces el paquete en «Intento de entrega» y copia la línea de GOFO bajo «Lo que dice GOFO Express». Con `Label Cancelled`, el estado pasa a «Incidencia» y no llega ningún escaneo más: pídele a la tienda que te confirme si tu pedido salió con otro número.
+`Delivery Exception` es un intento de entrega fallido, y el motivo que va después de la coma cambia de un intento a otro; `Business Closed` es solo uno. Peek pone entonces el paquete en «Intento de entrega» y copia la línea de GOFO bajo «Lo que dice GOFO Express». Con `Incorrect/Insufficient Address…`, el estado pasa a «Incidencia»: avísale a la tienda para que corrija la dirección. Con `Label Cancelled`, el estado también pasa a «Incidencia» y no llega ningún escaneo más: pídele a la tienda que te confirme si tu pedido salió con otro número.
 
 **Horas.** GOFO fecha cada escaneo con la zona horaria que asigna a cada centro, y la creación de la etiqueta, siempre con la del Pacífico. Peek te muestra cada hora en la zona de tu celular o computadora y en formato de 24 horas (15:40 son las 3:40 p. m.): una etiqueta creada a las 10 p. m., hora del Pacífico, aparece como 01:00 del día siguiente si estás en la hora del Este.
 

@@ -3,7 +3,7 @@ title: Cainiao tracking: numero, stati e pacco che non arriva
 description: Tracking Cainiao per i pacchi AliExpress: quale numero usare, cosa vogliono dire gli stati in inglese e a chi scrivere se il pacco non arriva in Italia.
 slug: cainiao-tracking
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Cainiao è il gruppo logistico di Alibaba: spedisce all'estero i pacchi dei venditori di piattaforme come AliExpress. Il suo sito di tracciamento, [global.cainiao.com](https://global.cainiao.com/), segue solo i pacchi Cainiao e AliExpress: inserisci lì il numero, oppure incollalo nel box qui sopra. Su AliExpress parti da «My Orders»: trova l'ordine e clicca «Tracking».
@@ -32,6 +32,7 @@ Il sito di Cainiao si apre in inglese, a meno che tu non scelga un'altra lingua 
 | --- | --- |
 | `Nessun aggiornamento di tracciamento` | Sul sito in italiano: ancora nessuna scansione. Cainiao ti chiede di aspettare la spedizione o di sentire il venditore. |
 | `Shipment information received by warehouse electronically` | Il magazzino del venditore ha i dati dell'ordine. |
+| `Warehouse packaging complete` | Il magazzino del venditore ha imballato l'ordine; nessun corriere ce l'ha ancora. |
 | `Received by logistics company` | La prima scansione di un corriere. |
 | `Export customs clearance complete` | Sdoganato per l'esportazione: il pacco è in viaggio. |
 | `Departed from departure country/region` | Sta lasciando il Paese di partenza. |

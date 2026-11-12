@@ -32,12 +32,12 @@ Yuntrack solo está en inglés y no tiene selector de idioma. Cada paquete apare
 | `Shipment information received` | La tienda ha enviado los datos del paquete; puede que YunExpress aún no lo tenga. |
 | `Shipment picked up` | YunExpress lo ha recogido del vendedor. |
 | `The country of origin commences customs declaration.` | Aduana de exportación en el país de origen, todavía no la española. |
-| `International flight has departed` | Ha salido el vuelo internacional. |
+| `International flight has departed`, `Departed from AIRPORT` | Ha salido el vuelo internacional. |
 | `Start Customs Clearence` | Empieza el despacho de importación (la errata es de YunExpress). |
 | `Customs inspection - Import` | La aduana lo ha elegido para una inspección. |
 | `Clearance processing completed - Import` | Despachado en aduana; sigue su camino. |
 | `Delivered to local carrier` | Entregado al transportista local que lo reparte, no a ti. |
-| `Package accepted at courier partner` | La empresa de reparto asociada lo ha recibido: un traspaso, no tu entrega. |
+| `Package accepted at courier partner`, `Item accepted` | La empresa de reparto asociada lo ha recibido: un traspaso, no tu entrega. |
 | `Your parcel is out for delivery.` | Línea de J&T Express en Australia, para un paquete con destino allí: está en reparto. Puede acabar con el número de atención al cliente de J&T. |
 | `Delivered by Mailbox` | Dejado en tu buzón. |
 | `Returned` | Vuelve al remitente. |

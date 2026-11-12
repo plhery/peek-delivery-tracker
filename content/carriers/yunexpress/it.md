@@ -32,11 +32,12 @@ Yuntrack è solo in inglese, senza scelta della lingua, e in inglese arrivano an
 | `Shipment information received` | Il venditore ha inviato i dati della spedizione; YunExpress forse non ha ancora il pacco. |
 | `Shipment picked up` | YunExpress ha ritirato il pacco dal venditore in Cina. |
 | `The country of origin commences customs declaration.` | Dichiarazione di esportazione in Cina, non ancora la tua dogana. |
-| `International flight has departed` | È partito il volo verso il Paese di destinazione. |
+| `International flight has departed`, `Departed from AIRPORT` | È partito il volo verso il Paese di destinazione. |
 | `Start Customs Clearence` | Inizia lo sdoganamento all'importazione (l'ortografia è di YunExpress). |
 | `Customs inspection - Import` | La dogana ha scelto il pacco per un controllo. |
 | `Clearance processing completed - Import` | Sdoganato, il viaggio continua. |
 | `Delivered to local carrier` | Affidato al corriere locale, non consegnato a te. |
+| `Item accepted` | Riga ripresa dal corriere locale: ha preso in carico il pacco da YunExpress. Un passaggio di mano, non la consegna a te. |
 | `First parcel scan along Poste Italiane’s logistic network` | Se il pacco passa a Poste Italiane: la prima scansione nella sua rete. |
 | `Preparing for delivery` | Se invece passa a GOFO, in Italia: il pacco è in deposito, prima che parta il corriere. |
 | `Your parcel is out for delivery.` | Riga di J&T Express in Australia, per un pacco diretto lì: il corriere è in giro per consegnarlo. Può finire con il numero del servizio clienti di J&T. |

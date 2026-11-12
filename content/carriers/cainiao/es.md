@@ -3,7 +3,7 @@ title: Cainiao seguimiento en España: estados, entregas y teléfono
 description: Sigue tu paquete de Cainiao o AliExpress en España: cómo es el número, qué significa cada estado, qué pasa si falla la entrega y a quién llamar.
 slug: cainiao-seguimiento
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Cainiao es el grupo logístico de Alibaba: lleva al extranjero los paquetes de vendedores de plataformas como AliExpress y en España dice tener su propia red de reparto. Para seguir tu paquete, escribe el número en [global.cainiao.com](https://global.cainiao.com/), su web de seguimiento, que solo sigue paquetes de Cainiao y AliExpress, o pégalo en la casilla de arriba. En AliExpress, el número está en tu pedido: entra en «My Orders», busca el pedido y pulsa «Tracking».
@@ -31,6 +31,7 @@ La web de Cainiao sale en español si lo eliges con el botón de idioma, arriba 
 | Cainiao escribe | Qué significa para ti |
 | --- | --- |
 | `Shipment information received by warehouse electronically` | El almacén del vendedor ya tiene los datos del pedido. |
+| `Warehouse packaging complete` | El almacén del vendedor ya empaquetó el pedido; todavía no lo tiene ninguna empresa de transporte. |
 | `Received by logistics company` | El primer escaneo de una empresa de transporte. |
 | `Export customs clearance complete` | Despacho de exportación hecho en origen; sigue en tránsito. |
 | `Departed from departure country/region` | Sale del país de origen. |

@@ -3,7 +3,7 @@ title: Yanwen śledzenie przesyłki: statusy, kurier, kontakt
 description: Paczka Yanwen z Chin: jak wygląda numer, co znaczą angielskie statusy, kto doręcza w Polsce i do kogo się zwrócić, gdy paczka utknie.
 slug: yanwen-sledzenie
 published: 2026-10-11
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Yanwen to chińska firma logistyczna założona w 1998 roku w Pekinie, która wysyła paczki za granicę dla sprzedawców internetowych, a ostatni odcinek oddaje lokalnemu przewoźnikowi. Paczkę śledzisz na stronie Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), albo wklejasz numer w pole powyżej. Numer dostajesz od sklepu lub platformy, na której kupowałeś: szukaj go w danych wysyłki przy zamówieniu.
@@ -45,7 +45,7 @@ Strona śledzenia Yanwen ma tylko wersję angielską i chińską, a własne lini
 | `Parcel dispatched to be delivered` | Linia od DPD: kurier wiezie paczkę do Ciebie. |
 | `Parcel delivered` | Linia od DPD: paczka doręczona. |
 
-`Order Submited.` (pisownia Yanwen), `Waybill Generated` i `Shipping Order Created.` znaczą to samo co pierwszy wiersz: istnieje tylko etykieta, a paczka mogła jeszcze nie opuścić sprzedawcy. `Pick up by local carrier at destination port` znaczy to samo co `Batch delivery to carrier`. Mylić może `Registered parcel data, parcel not dispatched yet`: to linia od DPD Polska: DPD ma już dane paczki, ale jeszcze nie samą paczkę. Nie znaczy to, że utknęła w Polsce. Później przychodzą linie DPD, na przykład `SMS notification` albo `Mail notification`, gdy DPD wysyła Ci wiadomość. Linia DHL `The recipient has selected a Packstation as the new delivery address.` może się pojawić, gdy paczka jest jeszcze w Chinach: odnotowuje tylko, że jako nowy adres doręczenia wybrano automat Packstation DHL, więc Peek zostawia dotychczasowy status i nie pokazuje przy niej żadnego miejsca.
+`Order Submited.` (pisownia Yanwen), `Waybill Generated` i `Shipping Order Created.` znaczą to samo co pierwszy wiersz: istnieje tylko etykieta, a paczka mogła jeszcze nie opuścić sprzedawcy. `Pick up by local carrier at destination port` znaczy to samo co `Batch delivery to carrier`. Mylić może `Registered parcel data, parcel not dispatched yet`: to linia od DPD Polska: DPD ma już dane paczki, ale jeszcze nie samą paczkę. Nie znaczy to, że utknęła w Polsce. Później przychodzą linie DPD, na przykład `SMS notification` albo `Mail notification`, gdy DPD wysyła Ci wiadomość. Jeden z przewoźników pisze wielkimi literami i bez swojej nazwy: `ARRIVE TRANSITHUB` (jego centrum przeładunkowe), `TASK ASSIGNED` (przydzielone doręczenie) i `ORDER SORTED` (sortowanie), w Peek wszystkie jako „W transporcie”. We Włoszech `First parcel scan along Poste Italiane’s logistic network` to pierwszy skan Poste Italiane po przekazaniu paczki przez Yanwen, a nie nowy odbiór („W transporcie”). Linia DHL `The recipient has selected a Packstation as the new delivery address.` może się pojawić, gdy paczka jest jeszcze w Chinach: odnotowuje tylko, że jako nowy adres doręczenia wybrano automat Packstation DHL, więc Peek zostawia dotychczasowy status i nie pokazuje przy niej żadnego miejsca.
 
 Niektóre paczki Yanwen przekazuje po `Yanwen facility - Outbound` do China Post. Pokazuje wtedy skany China Post po chińsku, objaśnione na stronie [China Post](carrier:china-post); `中国邮政已收取邮件` to właśnie to przekazanie. `【…】退回，备注:安检退回` znaczy, że kontrola bezpieczeństwa centrum sortowania odrzuciła paczkę, a centrum załatwia sprawę przed dalszą wysyłką: paczka nie wraca do sprzedawcy. Peek pokazuje to jako „Zgłoszono problem”.
 
@@ -122,5 +122,5 @@ Yanwen nie publikuje czasów doręczenia dla odbiorców, więc kieruj się termi
 - [Komisja Europejska: EU Customs Reform (po angielsku)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 euro cła za rodzaj produktu do 150 euro od 1 lipca 2026 r., opłata manipulacyjna 2 euro od 1 listopada 2026 r.
 - [Komisja Europejska: Customs Guidance on EUR 3 customs duty (PDF, po angielsku)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 euro za rodzaj produktu, tak jak cło 3 euro, bez względu na wartość
 - [Yanwen: 关于官方快件查询入口及服务的通告 (oficjalne kanały śledzenia)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numerów, limit jednego roku, sprawdzanie przez infolinię, czat, portal, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DPD Polska i J&T Express Australia w historiach Yanwen, komunikat DHL o automacie Packstation
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DPD Polska i J&T Express Australia w historiach Yanwen, komunikat DHL o automacie Packstation, skany przewoźnika pisane wielkimi literami, pierwszy skan Poste Italiane
 :::

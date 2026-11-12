@@ -3,7 +3,7 @@ title: JD Logistics tracking: JD numbers, statuses and contact
 description: Track a JD Logistics (京东物流) parcel: what JD and VG numbers look like, what JD's tracking steps mean, who delivers in the US and how to reach JD.
 slug: jd-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-12
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) is JD.com's logistics business, itself listed in Hong Kong. Abroad it works under the brands JoyLogistics and JoyExpress: it ships sellers' stock from its warehouses in the US, the UK, Australia and other countries, and carries parcels from China for online sellers. Track a parcel on [JD's international tracker](https://www.jingdonglogistics.com/Tracking), in English, or paste the number in the box above. The number comes from the shop that shipped your order.
@@ -45,7 +45,7 @@ JD's international tracking gives each step in English, with the place where it 
 
 Peek reads JD's other steps by the code JD gives each: the order created ("Label created"); customs clearance started ("At customs"); clearance finished, unloading or loading at a sorting centre, unloading at the destination site, and a parcel sent on to or arriving at a sorting centre abroad ("In transit"); JD's courier on the way to you ("Out for delivery"); signed for ("Delivered"). Each line keeps JD's own words. JD's out-for-delivery line names the courier and gives their phone number: Peek leaves both out.
 
-**Lines from JD's Chinese tracker.** For a parcel inside China, the lines are in Chinese. Among them: `京东快件已取件` (collected from the sender), `已到达【…】` (arrived at the site named in the brackets), `正在派送中` (out for delivery) and `已送达` (delivered).
+**Lines from JD's Chinese tracker.** For a parcel inside China, the lines are in Chinese. Among them: `京东快件已取件` (collected from the sender), `已到达【…】` (arrived at the site named in the brackets: a sorting centre, or the delivery station before the courier's round), `正在派送中` (out for delivery) and `已送达` (delivered).
 
 ## JD Logistics delivery in the US, UK, Canada and Australia
 

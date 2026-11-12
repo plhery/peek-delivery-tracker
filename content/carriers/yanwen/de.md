@@ -3,7 +3,7 @@ title: Yanwen Sendungsverfolgung: Nummern, Status und Kontakt
 description: Yanwen-Paket aus China verfolgen: wie die Nummer aussieht, was die englischen Status bedeuten, wer in DE, AT und CH zustellt und wen du fragst.
 slug: yanwen-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Yanwen ist ein chinesischer Logistiker, 1998 in Peking gegründet, der Pakete für Onlinehändler ins Ausland bringt und sie dort einem Paketdienst vor Ort übergibt. Verfolgen kannst du die Nummer auf Yanwens eigener Seite [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oder oben im Feld. Die Nummer bekommst du vom Shop oder Marktplatz, bei dem du bestellt hast, in den Versanddetails deiner Bestellung.
@@ -45,7 +45,7 @@ Eine deutsche Version hat Yanwens Tracking-Seite nicht: Es gibt sie nur auf Engl
 | `<User not at home>` | Ein Zustellversuch ist gescheitert, gemeldet vom Paketdienst vor Ort. |
 | `Delivered.` | Zugestellt, ebenfalls in den Worten eines Paketdiensts vor Ort. |
 
-`Order Submited.` (so geschrieben), `Waybill Generated` und `Shipping Order Created.` heißen dasselbe wie die erste Zeile: Es gibt nur das Etikett, das Paket ist vielleicht noch beim Händler. `Pick up by local carrier at destination port` heißt dasselbe wie `Batch delivery to carrier`. Danach stammen die Zeilen vom Paketdienst vor Ort, manchmal mit einem Länderkürzel davor oder einem Depotnamen in Klammern. `<wrong address>` ist ebenfalls ein gescheiterter Zustellversuch, diesmal wegen der Adresse. DHLs Zeile `The recipient has selected a Packstation as the new delivery address.` kann schon kommen, solange das Paket noch in China ist: DHL hält damit nur fest, dass du eine Packstation als neue Lieferadresse gewählt hast. Peek behält deshalb den bisherigen Status bei und zeigt keinen Ort an.
+`Order Submited.` (so geschrieben), `Waybill Generated` und `Shipping Order Created.` heißen dasselbe wie die erste Zeile: Es gibt nur das Etikett, das Paket ist vielleicht noch beim Händler. `Pick up by local carrier at destination port` heißt dasselbe wie `Batch delivery to carrier`. Danach stammen die Zeilen vom Paketdienst vor Ort, manchmal mit einem Länderkürzel davor oder einem Depotnamen in Klammern. Ein Paketdienst schreibt in Großbuchstaben und ohne seinen Namen: `ARRIVE TRANSITHUB` (sein Umschlagzentrum), `TASK ASSIGNED` (sein Zustellauftrag) und `ORDER SORTED` (seine Sortierung), bei Peek alle „Unterwegs“. In Italien ist `First parcel scan along Poste Italiane’s logistic network` der erste Scan von Poste Italiane nach der Übergabe durch Yanwen, keine neue Abholung („Unterwegs“). `<wrong address>` ist ebenfalls ein gescheiterter Zustellversuch, diesmal wegen der Adresse. DHLs Zeile `The recipient has selected a Packstation as the new delivery address.` kann schon kommen, solange das Paket noch in China ist: DHL hält damit nur fest, dass du eine Packstation als neue Lieferadresse gewählt hast. Peek behält deshalb den bisherigen Status bei und zeigt keinen Ort an.
 
 Manche Pakete übergibt Yanwen nach `Yanwen facility - Outbound` an China Post. Dann zeigt Yanwen die Scans von China Post auf Chinesisch, erklärt auf der Seite zu [China Post](carrier:china-post); `中国邮政已收取邮件` ist diese Übergabe. `【…】退回，备注:安检退回` heißt, dass ein Sortierzentrum das Paket bei seiner Sicherheitskontrolle zurückgeschickt hat und sich darum kümmert, bevor es weitergeht: Es geht nicht an den Händler zurück. Peek zeigt dafür „Problem gemeldet“.
 
@@ -122,5 +122,5 @@ Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwen
 - [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll pro Ware bis 150 € ab 1. Juli 2026, 2 € Bearbeitungsgebühr ab 1. November 2026
 - [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Position bei Online-Bestellungen, bei jedem Warenwert
 - [Yanwen: 关于官方快件查询入口及服务的通告 (offizielle Tracking-Wege)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 Nummern, Ein-Jahres-Grenze, Abfrage per Telefon, Chat, Portal, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, Scans von J&T Express Australia nach der Übergabe, DHLs Hinweis zur Packstation
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, Scans von J&T Express Australia nach der Übergabe, DHLs Hinweis zur Packstation, Scans eines Paketdiensts in Großbuchstaben, erster Scan von Poste Italiane
 :::

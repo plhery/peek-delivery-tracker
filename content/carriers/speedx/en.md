@@ -3,7 +3,7 @@ title: SpeedX tracking: statuses, missed deliveries and contact
 description: Track a SpeedX package in the US: what an SPX tracking number looks like, what SpeedX's statuses mean, attempted deliveries, photos and how to reach support.
 slug: speedx-tracking
 published: 2026-10-15
-updated: 2026-11-06
+updated: 2026-11-12
 ---
 
 SpeedX (Speed Xpress Inc., New Hyde Park, New York) is a last-mile delivery company that brings online orders to the door in the United States. Track a parcel on [tracking.speedx.io](https://tracking.speedx.io/) or paste its number in the box above. The number comes from the shop you ordered from: SpeedX makes the label for the shop, so the shop has it before SpeedX has the parcel.
@@ -40,6 +40,8 @@ SpeedX's tracking page is in English only. These are the lines a parcel usually 
 | `Out for Delivery` | A driver has it and it's on the way to you today. | "Out for delivery" |
 | `Attempted Delivery: No access` | The driver couldn't get to your door: a gate, an apartment building, construction or bad weather. | "Delivery attempted" |
 | `Delivered` | Delivered. The page adds where it was left, such as the mailroom, and a photo. | "Delivered" |
+| `Waiting for collection from Parcelshop` | After the round, the parcel was left at a parcelshop, where it waits for you to collect it. | "Ready for pickup" |
+| `Self picked up from Parcelshop` | The parcel has been collected from the parcelshop. | "Delivered" |
 | `Parcel Void` | SpeedX flagged a problem with the parcel. Ask the shop. | "Needs attention" |
 | `Exception- Parcel not found at the sort facility` | The parcel couldn't be found at the sort facility. Ask the shop. | "Needs attention" |
 | `Parcel Disposal` | SpeedX reported a problem and doesn't explain it. Ask the shop what happens next. | "Needs attention" |
@@ -62,7 +64,7 @@ When the latest event is a problem (`Parcel Void`, `Parcel Disposal`, a parcel n
 
 **Missed delivery.** If an attempt was recorded and you think it shouldn't have been, check the address on the shop's website, then send corrections or instructions through the chat. SpeedX says the parcel should then be redelivered within 1 to 2 business days. SpeedX doesn't publish how many attempts it makes or how long it keeps a parcel.
 
-**No pickup.** SpeedX has no pickup points or lockers, and you can't collect a parcel from its facilities: it has to deliver it.
+**Pickup.** SpeedX says you can't collect a parcel from its facilities: it has to deliver it. Some parcels still end up at a parcelshop after a round: then the history shows `Waiting for collection from Parcelshop`, and you collect the parcel there.
 
 ## SpeedX package not moving, not delivered or lost
 
@@ -98,7 +100,7 @@ Yes. SpeedX is the brand of Speed Xpress Inc., a last-mile delivery company foun
 
 ### Can I pick up my SpeedX package?
 
-No. SpeedX doesn't allow pickups from its facilities and has no pickup points, so it has to deliver the parcel.
+Not from SpeedX: it doesn't allow pickups from its facilities, so it has to deliver the parcel. If the tracking shows `Waiting for collection from Parcelshop`, though, the parcel was left at a parcelshop after a round, and you collect it there.
 
 ### How long does SpeedX take to deliver?
 

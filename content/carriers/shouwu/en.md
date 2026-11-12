@@ -53,8 +53,9 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |
 | `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Landed in your country. | "In transit" |
 | `NOA received` | The agent in your country has the airline's notice of arrival; customs comes next. | "In transit" |
-| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` | Your country's customs are clearing it. | "At customs" |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` | Your country's customs are clearing it. | "At customs" |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Your country's customs have let it through. | "In transit" |
+| `Scheduled For Delivery` | Shouwu's line after import clearance, days before the courier's depot and round: a delivery is planned, not under way. | "In transit" |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Handed to the courier that delivers in your country, not delivered to you ("deliverey" is Shouwu's spelling). | "In transit" |
 | `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
 | `The shipment has been processed in the destination parcel center` | DHL has sorted it at the parcel centre that serves your address, before its delivery round. | "In transit" |
@@ -73,6 +74,8 @@ When iMile delivers in Italy, Shouwu's history relays iMile's lines, with the ce
 | `【ROM 10】Parcel shipped to【Milan Transit Center】.` | After two failed rounds, the station sends it back to iMile's centre. | "In transit" |
 | `Back to Sender for reason: wrong recipient address or address related problem` | After its failed rounds, iMile is sending the parcel back, here over the address (another reason can follow the colon): on its way back, not with the sender yet. Ask the seller. | "Needs attention" |
 | `【Milan Transit Center】Order Closed.` | iMile closes the delivery order without delivering; ask the seller. | "Needs attention" |
+
+**When DPD delivers.** On a line [DPD](carrier:dpd-de) delivers, Shouwu's history goes on in DPD's words, each ending with a full stop: `In transit.`, then `At parcel delivery centre.`, DPD's depot that delivers, before the round and again after a missed one ("In transit"), and `Out for delivery.` ("Out for delivery"). `Unfortunately we have not been able to deliver your parcel. Consignee address not correct.` is a round that failed over a wrong address: the parcel goes back to DPD's depot, not to the sender ("Delivery attempted").
 
 **Lines in Chinese.** Some parcels also get lines Shouwu writes in Chinese, which Peek shows as written. `货物电子信息已经收到` (the goods' electronic data received) comes with the order data: "Label created". Then, all "In transit": `申报过港中` after a batch's code (the batch is declared for the road to Hong Kong), `已到港，安排航班中` (at the port of departure, waiting for a flight), `预计23号的航班` (the flight booked, here for the 23rd; with `二程` in front, for the second leg), `航班已飞` and `二程航班已飞` (the flight, or the second leg's, has left) and `已落地` (landed). `已落地，清关提货中` (landed, being cleared and collected from the airline) is "At customs"; `清关完成` (cleared) and `已交仓扫描` (scanned in at the delivering courier's depot) are "In transit" again.
 
@@ -162,5 +165,5 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, choice of number, 10 to 12 working days
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November), iMile's lines relayed in Italy (its return to sender too), clocks, places, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November), iMile's lines relayed in Italy (its return to sender too), DPD's lines, clocks, places, what Peek shows
 :::

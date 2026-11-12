@@ -3,7 +3,7 @@ title: Cainiao śledzenie przesyłki: numery, statusy i kontakt
 description: Paczka z AliExpress wysłana przez Cainiao: jakie numery są Cainiao, co znaczą angielskie statusy, co z doręczeniem w Polsce i gdzie pytać, gdy utknie.
 slug: cainiao-sledzenie
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Cainiao to grupa logistyczna Alibaby: wysyła za granicę paczki sprzedawców z platform takich jak AliExpress, a jej strona śledzenia, [global.cainiao.com](https://global.cainiao.com/), pokazuje tylko przesyłki Cainiao i AliExpress. Wpisz numer na global.cainiao.com albo wklej go w pole na samej górze tej strony. Na AliExpress numer jest przy zamówieniu: pomoc AliExpress, także w wersji polskiej, opisuje to po angielsku jako „My Orders”, potem zamówienie i „Tracking”.
@@ -30,6 +30,7 @@ Stronę global.cainiao.com przełączysz na polski przyciskiem języka w prawym 
 | Cainiao pisze | Co to znaczy dla Ciebie |
 | --- | --- |
 | `Shipment information received by warehouse electronically` | Magazyn sprzedawcy dostał dane zamówienia. |
+| `Warehouse packaging complete` | Magazyn sprzedawcy spakował zamówienie; żaden przewoźnik jeszcze go nie ma. |
 | `Received by logistics company` | Pierwszy skan u przewoźnika. |
 | `Export customs clearance complete` | Odprawa wywozowa w kraju nadania zakończona, to jeszcze nie Twoje cło. |
 | `Departed from departure country/region` | Paczka opuszcza kraj nadania, samolotem albo ciężarówką. |

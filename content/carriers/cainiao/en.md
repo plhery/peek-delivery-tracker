@@ -3,7 +3,7 @@ title: Cainiao tracking: numbers, statuses and who to contact
 description: Track a Cainiao parcel from AliExpress: which numbers are Cainiao's, what each status means, where a missed parcel waits and who to ask when it stalls.
 slug: cainiao-tracking
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Cainiao is Alibaba's logistics group: it ships parcels abroad for sellers on platforms such as AliExpress, and its tracking site, [global.cainiao.com](https://global.cainiao.com/), follows Cainiao and AliExpress parcels only. Type the number there or in the box above. On AliExpress, the number is under My Orders: find the order and click Tracking.
@@ -29,6 +29,7 @@ The main lines, in the order a parcel meets them:
 | Cainiao says | What it means for you |
 | --- | --- |
 | `Shipment information received by warehouse electronically` | The seller's warehouse has the order data. |
+| `Warehouse packaging complete` | The seller's warehouse has packed the order; no carrier has it yet. |
 | `Received by logistics company` | The first carrier scan. |
 | `Export customs clearance complete` | Export clearance is done; the parcel is in transit. |
 | `Departed from departure country/region` | Leaving the origin country. |

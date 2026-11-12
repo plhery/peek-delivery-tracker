@@ -3,7 +3,7 @@ title: Cainiao em Portugal: rastreio, estados e contactos
 description: A Cainiao é o grupo de logística da Alibaba. Vê os seus números e estados, como saber quem entrega em Portugal e os contactos da Cainiao e da Ecoscooting.
 slug: cainiao-rastreio
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 A Cainiao é o grupo de logística da Alibaba: envia para o estrangeiro as encomendas de vendedores de plataformas como o AliExpress, e o seu site de seguimento, [global.cainiao.com](https://global.cainiao.com/), só segue encomendas Cainiao e AliExpress. Escreve o número no site da Cainiao ou cola-o na caixa no topo desta página. No AliExpress, o número está na encomenda: a ajuda do AliExpress manda abrir «My Orders», encontrar a encomenda e carregar em «Tracking».
@@ -31,6 +31,7 @@ O site muda de idioma no botão do canto superior direito, mas o português fica
 | --- | --- |
 | `No tracking updates yet` | Ainda sem leituras. |
 | `Shipment information received by warehouse electronically` | O armazém do vendedor recebeu os dados da encomenda. |
+| `Warehouse packaging complete` | O armazém do vendedor embalou a encomenda; ainda não está com nenhuma transportadora. |
 | `Received by logistics company` | A primeira leitura da transportadora. |
 | `Export customs clearance complete` | Desalfandegada à saída do país de origem, ainda não em Portugal. |
 | `Departed from departure country/region` | Saiu do país de origem. |

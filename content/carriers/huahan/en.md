@@ -3,7 +3,7 @@ title: HuaHan Logistics tracking: HHW…YQ numbers and who delivers
 description: Track a HuaHan Logistics (华翰物流) parcel from China: what an HHW…YQ number looks like, what its scans mean and how to find who delivers it in your country.
 slug: huahan-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-06
+updated: 2026-11-12
 ---
 
 HuaHan Logistics (华翰物流, also HuaHan Express or 华翰速递) is a Chinese carrier that flies parcels out of China and hands them to a local carrier in the destination country, which delivers them. If a shop sent your order with HuaHan, look for a number that starts with HHW and ends with YQ, and paste it in the box above. HuaHan's own tracker is on its website, hh-exp.cn, and can name the carrier that delivers near you, with that carrier's number for your parcel.
@@ -57,6 +57,8 @@ HuaHan's tracker lists each scan with a time, a wording and a place, newest firs
 HuaHan files the local carrier's out-for-delivery, pickup-point and delivery scans under codes of its own, and Peek shows them as "Out for delivery", "Ready for pickup" or "Delivered", unless the words name another step: HuaHan also puts USPS's departure from a distribution centre under its out-for-delivery code.
 
 **Two lines that confuse people.** `We will pick up your parcel from the sender soon.` can turn up near the start, before HuaHan has even received the parcel in China: it's the local carrier's notice that it has been told about the parcel, not a pickup from you. Peek shows "Label created". `The parcel was redirected. As soon as it is in the couriers possession, it will be processed as requested.` is that carrier noting a redirection you asked for, also written while the parcel is still in China. It moves nothing, and Peek gives it no status of its own.
+
+**Data, not scans.** `The instruction data for this shipment have been provided by the sender to DHL electronically.`, sometimes without the full stop, is DHL's record of the parcel's data for the last leg, passed on before HuaHan has the parcel in China or after it has left there. `货物电子信息已经收到` (the goods' electronic data received), in Chinese, is the order's data, and can come after HuaHan has the parcel. Neither is a movement: Peek shows "Label created", or keeps the status the parcel already had.
 
 **One scan, two lines.** HuaHan's tracker can list one of the local carrier's scans twice at the same time: in that carrier's words with its place, and with no place in HuaHan's generic words, such as `Delivered, Parcel was delivered successfully`. Peek keeps the line with the place.
 

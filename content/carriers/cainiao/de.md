@@ -3,7 +3,7 @@ title: Cainiao Sendungsverfolgung: Nummern, Status und Kontakt
 description: AliExpress-Paket mit Cainiao verfolgen: welche Nummern dazugehören, was die englischen Status bedeuten und wen du in Deutschland, Österreich und der Schweiz fragst.
 slug: cainiao-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Cainiao ist die Logistiksparte der Alibaba-Gruppe und verschickt Pakete über Grenzen hinweg, für Händler auf Plattformen wie AliExpress. Seine Tracking-Seite [global.cainiao.com](https://global.cainiao.com/) verfolgt nur Cainiao- und AliExpress-Pakete: Gib die Nummer dort ein oder füg sie oben ins Feld ein. Bei AliExpress steht sie in der Bestellung, laut AliExpress-Hilfe unter „My Orders“ und dann „Tracking“.
@@ -30,6 +30,7 @@ Die Tracking-Seite lässt sich über den Sprachknopf oben rechts auf Deutsch ums
 | Cainiao schreibt | Was es für dich heißt |
 | --- | --- |
 | `Shipment information received by warehouse electronically` | Das Lager des Händlers hat die Bestelldaten. |
+| `Warehouse packaging complete` | Das Lager des Händlers hat die Bestellung verpackt; noch hat sie kein Logistiker. |
 | `Received by logistics company` | Der erste Scan beim Logistiker. |
 | `Export customs clearance complete` | Die Ausfuhr im Absenderland ist abgefertigt, das ist noch nicht dein Zoll. |
 | `Departed from departure country/region` | Das Paket verlässt das Absenderland, per Flugzeug oder Lkw. |

@@ -3,7 +3,7 @@ title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
 description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-11-11
+updated: 2026-11-12
 ---
 
 WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
@@ -42,7 +42,7 @@ WanbExpress's scans are in English, each with a time and sometimes a place. Here
 | `Parcel arrives at Airport, Parcel Arrival` | Landed in your country, or near it. Customs come next. | "In transit" |
 | `Custom clearance completed` | Import customs have let it through. | "In transit" |
 | `Parcel received by in JFK01.` | WanbExpress files it as a receipt for the last leg. The wording leaves out who received it. | "In transit" |
-| `Your package is being prepared by the sender and will be handed over to us soon` | A partner's notice in its own words, passed on without a WanbExpress code: the parcel hasn't been handed over to it yet. | "Label created", or a later stage if a scan has already moved the parcel |
+| `Your package is being prepared by the sender and will be handed over to us soon`, `Order information received. We're expecting your parcel to arrive with us.` | A partner's notice in its own words, passed on without a WanbExpress code: the parcel hasn't been handed over to it yet. | "Label created", or a later stage if a scan has already moved the parcel |
 | `In transit along Poste Italiane’s logistic network` | On its way to you through the delivering carrier's network, here [Poste Italiane](carrier:poste-italiane)'s. | "In transit" |
 | `Parcel is out for delivery.` | On the delivery run. | "Out for delivery" |
 | `Parcel has been delivered.(Front door)` | Delivered. `(Front door)` says where it was left. | "Delivered" |

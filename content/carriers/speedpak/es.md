@@ -3,7 +3,7 @@ title: SpeedPAK seguimiento: paquetes de eBay, estados y contacto
 description: Sigue tu paquete SpeedPAK de eBay: cómo es el número de 28 caracteres, qué significa cada estado en inglés, quién lo entrega y a quién preguntar si se para.
 slug: speedpak-seguimiento
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 SpeedPAK es el servicio de envíos internacionales de eBay, gestionado con la empresa logística Orange Connex y pensado para paquetes que salen de China. Su número tiene 28 caracteres y empieza por ES, EE o EX: escríbelo en la web de seguimiento de Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), o pégalo en la casilla de arriba. En eBay, el número aparece como un vínculo junto al artículo, en tu «Historial de compras».
@@ -43,7 +43,7 @@ El seguimiento de Orange Connex solo está en inglés y en chino: no hay versió
 
 Algunas líneas cambian de un paquete a otro: `Arrived at destination country` y `The consignment has arrived in the country of destination` significan lo mismo que `Arrived at Destination Hub`. `Shipment Picked Up (A-SCAN)` es el primer escaneo físico después de la recogida.
 
-Una línea del tipo `LM Carrier: [carrier] , LM tracking No.: [number]` es el traspaso: LM significa «last mile», la última milla, y nombra a la empresa que te lo lleva a casa, con su número. A partir de ahí, el historial copia los escaneos de esa empresa con sus propias palabras, por ejemplo `The item is received by PostNL`. Algunas líneas salen en chino incluso en la vista en inglés: `货物运输中` solo quiere decir «mercancía en tránsito». `Delivered. (Recipient's front door)` indica dónde se dejó el paquete, aquí en la puerta del destinatario.
+Una línea del tipo `LM Carrier: [carrier] , LM tracking No.: [number]` es el traspaso: LM significa «last mile», la última milla, y nombra a la empresa que te lo lleva a casa, con su número. A partir de ahí, el historial copia los escaneos de esa empresa con sus propias palabras, por ejemplo `The item is received by PostNL`. En la línea internacional de PostNL siguen los pasos del correo del país de destino, en inglés: `Item is cleared by customs` (la aduana lo ha despachado) y `Arrival at Delivery Post Office` (en la oficina de correos que lo reparte), las dos «En tránsito» en Peek, y, tras una entrega fallida, `The item is being held, addressee being notified`: el envío te espera en esa oficina y te avisan para que lo recojas («Listo para recoger»). Algunas líneas salen en chino incluso en la vista en inglés: `货物运输中` solo quiere decir «mercancía en tránsito». `Delivered. (Recipient's front door)` indica dónde se dejó el paquete, aquí en la puerta del destinatario.
 
 El seguimiento puede quedarse varios días en `Arrived at Destination Hub` o en una línea de aduana antes de que la empresa de reparto lo escanee. Para lo que pasa en la frontera, mira [paquete retenido en aduanas](guide:customs).
 

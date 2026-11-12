@@ -3,7 +3,7 @@ title: SpeedPAK tracking: eBay parcels, statuses and who to ask
 description: Track an eBay SpeedPAK parcel: what the 28-character number looks like, what each status means, who delivers it and who to ask when it stalls.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 SpeedPAK is eBay's shipping service for cross-border orders, run with the logistics company Orange Connex and built for parcels leaving China. Its number has 28 characters and starts with ES, EE or EX: type it on Orange Connex's tracking page, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), or in the box above. On eBay, the number shows as a link beside the item in your Purchase history.
@@ -43,7 +43,7 @@ Orange Connex's tracking is in English or Chinese only. If the page opens in Chi
 
 Some lines read differently from parcel to parcel: `Arrived at destination country` and `The consignment has arrived in the country of destination` mean the same as `Arrived at Destination Hub`. `Shipment Picked Up (A-SCAN)` is the first physical scan after collection.
 
-A line such as `LM Carrier: [carrier] , LM tracking No.: [number]` is the handover: LM means last mile, and it names the carrier that delivers to your door, with its number. After it, the history relays that carrier's scans in its own words, for example `The item is received by PostNL`. Some lines appear in Chinese even in the English view: `货物运输中` simply means "goods in transit". `Delivered. (Recipient's front door)` says where the parcel was left.
+A line such as `LM Carrier: [carrier] , LM tracking No.: [number]` is the handover: LM means last mile, and it names the carrier that delivers to your door, with its number. After it, the history relays that carrier's scans in its own words, for example `The item is received by PostNL`. On PostNL's international line, the destination post's steps follow in English: `Item is cleared by customs` (customs has released it) and `Arrival at Delivery Post Office` (at the post office that delivers it), both "In transit" in Peek, then, after a missed delivery, `The item is being held, addressee being notified`: it waits at that office and you are told to collect it ("Ready for pickup"). Some lines appear in Chinese even in the English view: `货物运输中` simply means "goods in transit". `Delivered. (Recipient's front door)` says where the parcel was left.
 
 The tracking can sit at `Arrived at Destination Hub` or a customs line for several days before the delivering carrier scans it. For what happens at the border, see [parcels held at customs](guide:customs).
 

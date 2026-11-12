@@ -50,8 +50,9 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | Am Flughafen Shanghai, dann aus China abgeflogen. | „Unterwegs“ |
 | `Arrived at airport of Destination` | In deinem Land gelandet. | „Unterwegs“ |
 | `NOA received` | Der Agent vor Ort hat die Ankunftsmeldung der Fluggesellschaft bekommen; danach kommt der Zoll. | „Unterwegs“ |
-| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country` | Der Zoll in deinem Land fertigt es ab. | „Beim Zoll“ |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` | Der Zoll in deinem Land fertigt es ab. | „Beim Zoll“ |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Der Zoll in deinem Land hat es freigegeben. | „Unterwegs“ |
+| `Scheduled For Delivery` | Shouwus Zeile nach der Verzollung, Tage vor dem Depot und der Tour des Paketdiensts: Die Zustellung ist geplant, läuft aber noch nicht. | „Unterwegs“ |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | An den Paketdienst übergeben, der bei dir zustellt: Zugestellt ist es damit noch nicht („deliverey“ schreibt Shouwu so). | „Unterwegs“ |
 | `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: keine Abholung beim Händler und keine durch dich. | „Unterwegs“ |
 | `The shipment has been processed in the parcel center of origin` | DHLs erster Scan in Deutschland, nach dem Zoll. | „Unterwegs“ |
@@ -77,6 +78,8 @@ Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 | `<Incorrect address.>` | So nennt der Paketdienst vor Ort den Grund, in spitzen Klammern: Die Adresse stimmt nicht. | „Zustellversuch“ |
 
 Zeilen wie `Shipment departed from facility`, `Depart from the sorting center` oder `Shipment arrived at an air hub` sind Zwischenstationen: Peek zeigt „Unterwegs“.
+
+**Wenn DPD zustellt.** Auf einer Linie, die [DPD](carrier:dpd-de) zustellt, geht Shouwus Verlauf mit DPDs Zeilen weiter, auf Englisch und jeweils mit Schlusspunkt: `In transit.`, dann `At parcel delivery centre.`, DPDs zustellendes Depot, vor der Tour und nach einer erfolglosen noch einmal („Unterwegs“), und `Out for delivery.` („In Zustellung“). `Unfortunately we have not been able to deliver your parcel. Consignee address not correct.` ist eine Tour, die an einer falschen Adresse gescheitert ist: Das Paket geht zurück ins DPD-Depot, nicht an den Absender („Zustellversuch“).
 
 Stellt in Italien iMile zu, übernimmt Shouwus Verlauf dessen Zeilen, mit dem Zentrum in 【】-Klammern (bei dir kann statt Milan center oder ROM 10 ein anderes stehen):
 
@@ -166,5 +169,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei Shouwu gebucht und kann
 - [Shouwu International: 德国经济 (Deutschland, Economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=22) – vor allem Hermes, 4 bis 7 Arbeitstage
 - [Shouwu International: 德国带电 (Deutschland, mit Batterien)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=25) – vor allem DPD, 4 bis 7 Arbeitstage
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll seit 1. Juli 2026, Bearbeitungsgebühr von 2 € seit 1. November 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst), Zeilen von DHL und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst), Zeilen von DHL, DPD und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
 :::

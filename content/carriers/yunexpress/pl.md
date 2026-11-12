@@ -32,11 +32,12 @@ Yuntrack działa tylko po angielsku, także w przeglądarce ustawionej na polski
 | `Shipment information received` | Sprzedawca przesłał dane paczki. YunExpress może jeszcze jej nie mieć. |
 | `Shipment picked up` | YunExpress odebrał paczkę od sprzedawcy. |
 | `The country of origin commences customs declaration.` | Zgłoszenie wywozowe w kraju nadania, jeszcze nie Twoja odprawa celna. |
-| `International flight has departed` | Paczka leci do kraju docelowego. |
+| `International flight has departed`, `Departed from AIRPORT` | Paczka leci do kraju docelowego. |
 | `Start Customs Clearence` | Zaczyna się odprawa celna przywozowa (pisownia YunExpress). |
 | `Customs inspection - Import` | Celnicy wybrali paczkę do kontroli. |
 | `Clearance processing completed - Import` | Odprawa zakończona, paczka jedzie dalej. |
 | `Delivered to local carrier` | Przekazana lokalnemu przewoźnikowi, nie Tobie. |
+| `Item accepted` | Linia od tego przewoźnika: przyjął paczkę od YunExpress. To przekazanie, a nie doręczenie do Ciebie. |
 | `Shipment in transit to DHL` | W drodze do DHL, który przejmuje ostatni odcinek. |
 | `Your parcel is out for delivery.` | Linia od J&T Express w Australii, przy paczce wysłanej tam: kurier wiezie ją do adresata. Może kończyć się numerem obsługi klienta J&T. |
 | `Delivered by Mailbox` | Włożona do Twojej skrzynki pocztowej. |

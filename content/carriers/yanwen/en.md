@@ -3,7 +3,7 @@ title: Yanwen tracking number: UL…YP format and who delivers
 description: Two letters (often UL or UK), 9 digits, then YP: that's a Yanwen tracking number. Track it here, see what each status means and who delivers it in your country.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Yanwen is a Chinese logistics company, founded in Beijing in 1998, that ships parcels abroad for online sellers and hands them to a local carrier for the last mile. Track the number on Yanwen's own site, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), or in the box above. The number comes from the shop or marketplace you bought from, in the shipping details of your order.
@@ -44,7 +44,7 @@ Yanwen's tracking site comes in English and Chinese only, and Yanwen's own scan 
 | `<User not at home>` | A delivery attempt failed, as relayed from the local carrier. |
 | `Delivered.` | Delivered, in the words of one local carrier. |
 
-`Order Submited.`, `Waybill Generated` and `Shipping Order Created.` mean the same as the first row: only the label exists, and the parcel may not have left the seller. `Pick up by local carrier at destination port` means the same as `Batch delivery to carrier`. After that, the lines are the local carrier's own, sometimes with a country prefix or a depot name in brackets: USPS's `Out for Delivery` or `Delivered, In/At Mailbox`, for example. USPS's `Shipping Label Created, USPS Awaiting Item` can turn up while the parcel is still in China: it is only USPS's record of the label, so Peek keeps the stage the parcel already had and shows no place for it. DHL's `The recipient has selected a Packstation as the new delivery address.` can also come while the parcel is still in China: it only records that you chose a DHL Packstation for delivery, and Peek treats it the same way.
+`Order Submited.`, `Waybill Generated` and `Shipping Order Created.` mean the same as the first row: only the label exists, and the parcel may not have left the seller. `Pick up by local carrier at destination port` means the same as `Batch delivery to carrier`. After that, the lines are the local carrier's own, sometimes with a country prefix or a depot name in brackets: USPS's `Out for Delivery` or `Delivered, In/At Mailbox`, for example. One local carrier's come in capitals, without its name: `ARRIVE TRANSITHUB` (its transit hub), `TASK ASSIGNED` (its delivery task) and `ORDER SORTED` (its sorting), all "In transit" in Peek. In Italy, `First parcel scan along Poste Italiane’s logistic network` is Poste Italiane's first scan after Yanwen's hand-over, not a new pickup ("In transit"). USPS's `Shipping Label Created, USPS Awaiting Item` can turn up while the parcel is still in China: it is only USPS's record of the label, so Peek keeps the stage the parcel already had and shows no place for it. DHL's `The recipient has selected a Packstation as the new delivery address.` can also come while the parcel is still in China: it only records that you chose a DHL Packstation for delivery, and Peek treats it the same way.
 
 Some parcels are handed to China Post after `Yanwen facility - Outbound`. Yanwen then relays China Post's scans in Chinese, explained on the [China Post](carrier:china-post) page; `中国邮政已收取邮件` is that hand-over. `【…】退回，备注:安检退回` means a sorting centre sent the parcel back at its security check and deals with it before sending it on: it isn't a return to the seller. Peek shows it as "Needs attention".
 
@@ -119,5 +119,5 @@ Yanwen publishes no delivery times for recipients, so go by the estimate the sho
 - [Yanwen: 关于官方快件查询入口及服务的通告 (official tracking channels)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numbers, one-year limit, phone lookup, chat, portal, WeChat
 - [YanwenExpress: home page](https://www.yanwenexpress.com/) – last-mile delivery in the US
 - [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – email, no phone
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, J&T Express Australia's scans after the batch hand-over, DHL's Packstation notice
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, J&T Express Australia's scans after the batch hand-over, DHL's Packstation notice, a local carrier's scans in capitals, Poste Italiane's first scan
 :::

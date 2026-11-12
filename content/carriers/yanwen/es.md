@@ -3,7 +3,7 @@ title: Yanwen seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de Yanwen desde China: cómo es el número, qué significa cada estado en inglés, quién lo reparte en España y a quién preguntar si se para.
 slug: yanwen-seguimiento
 published: 2026-10-11
-updated: 2026-11-08
+updated: 2026-11-12
 ---
 
 Yanwen es una empresa de logística china, fundada en Pekín en 1998, que envía al extranjero los paquetes de vendedores online y se los entrega a un transportista local para el último tramo. Para seguir tu paquete, escribe el número en su web de seguimiento, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), o pégalo en la casilla de arriba. El número te lo da la tienda o el marketplace donde compraste, en los datos de envío de tu pedido.
@@ -43,7 +43,7 @@ La web de seguimiento de Yanwen solo está en inglés y en chino, y los escaneos
 | `Batch delivery to carrier` | Entregado al transportista local. Siguen sus escaneos. |
 | `Delivery to last mile operator` | Lo mismo: ahora lo tiene la empresa del último tramo. |
 
-`Order Submited.` (la errata es de Yanwen), `Waybill Generated` y `Shipping Order Created.` significan lo mismo que la primera fila: solo existe la etiqueta y puede que el paquete no haya salido del vendedor. `Pick up by local carrier at destination port` equivale a `Batch delivery to carrier`. Ojo con la palabra «delivery» en estas líneas: es la entrega al transportista local, no a ti. A partir de ahí, las líneas son las de la empresa local, a veces con un prefijo de país o el nombre de un almacén entre corchetes. La línea de DHL `The recipient has selected a Packstation as the new delivery address.` puede aparecer cuando el paquete sigue en China: solo registra que elegiste una Packstation de DHL como nueva dirección de entrega, así que Peek mantiene el estado que ya tenía el paquete y no le asigna ningún lugar.
+`Order Submited.` (la errata es de Yanwen), `Waybill Generated` y `Shipping Order Created.` significan lo mismo que la primera fila: solo existe la etiqueta y puede que el paquete no haya salido del vendedor. `Pick up by local carrier at destination port` equivale a `Batch delivery to carrier`. Ojo con la palabra «delivery» en estas líneas: es la entrega al transportista local, no a ti. A partir de ahí, las líneas son las de la empresa local, a veces con un prefijo de país o el nombre de un almacén entre corchetes. Una de ellas escribe en mayúsculas y sin dar su nombre: `ARRIVE TRANSITHUB` (su centro de tránsito), `TASK ASSIGNED` (la entrega asignada) y `ORDER SORTED` (su clasificación), todas «En tránsito» en Peek. En Italia, `First parcel scan along Poste Italiane’s logistic network` es el primer escaneo de Poste Italiane tras el traspaso de Yanwen, no una nueva recogida («En tránsito»). La línea de DHL `The recipient has selected a Packstation as the new delivery address.` puede aparecer cuando el paquete sigue en China: solo registra que elegiste una Packstation de DHL como nueva dirección de entrega, así que Peek mantiene el estado que ya tenía el paquete y no le asigna ningún lugar.
 
 Algunos paquetes pasan a China Post después de `Yanwen facility - Outbound`. Yanwen muestra entonces los escaneos de China Post en chino, explicados en la página de [China Post](carrier:china-post); `中国邮政已收取邮件` es ese traspaso. `【…】退回，备注:安检退回` significa que el control de seguridad de un centro de clasificación lo rechazó, y el centro lo resuelve antes de volver a enviarlo: no vuelve al vendedor. Peek lo muestra como «Incidencia».
 
@@ -119,5 +119,5 @@ Yanwen no publica horarios de reparto, porque en España no reparte ella: lo hac
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por tipo de producto, como los 3 €, sea cual sea el valor
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canales oficiales de seguimiento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 números, límite de un año, búsqueda por teléfono, chat, portal, WeChat
 - [YanwenExpress: página principal](https://www.yanwenexpress.com/) – reparto de última milla en Estados Unidos
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, escaneos de J&T Express Australia tras la entrega por lotes, aviso de DHL sobre la Packstation
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, escaneos de J&T Express Australia tras la entrega por lotes, aviso de DHL sobre la Packstation, escaneos de un transportista en mayúsculas, primer escaneo de Poste Italiane
 :::

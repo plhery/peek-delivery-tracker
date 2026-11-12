@@ -3,7 +3,7 @@ title: SpeedPAK Sendungsverfolgung: eBay-Pakete, Status, Kontakt
 description: eBay-Paket mit SpeedPAK verfolgen: wie die 28-stellige Nummer aussieht, was die englischen Status bedeuten, wer zustellt und wen du fragst, wenn nichts passiert.
 slug: speedpak-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 SpeedPAK ist der Versandservice von eBay für grenzüberschreitende Bestellungen, betrieben mit dem Logistiker Orange Connex und gedacht für Pakete aus China. Die Nummer hat 28 Zeichen und beginnt mit ES, EE oder EX: Gib sie auf der Tracking-Seite von Orange Connex ein, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), oder füg sie oben ins Feld ein. Bei eBay findest du sie unter „Mein eBay“ und „Käufe“, als Link neben dem Artikel.
@@ -43,7 +43,7 @@ Die Tracking-Seite von Orange Connex gibt es nur auf Englisch und Chinesisch, ei
 
 Manche Zeilen heißen je nach Paket anders: `Arrived at destination country` und `The consignment has arrived in the country of destination` bedeuten dasselbe wie `Arrived at Destination Hub`. `Shipment Picked Up (A-SCAN)` ist der erste Scan, nachdem das Paket abgeholt wurde.
 
-Eine Zeile wie `LM Carrier: [carrier] , LM tracking No.: [number]` ist die Übergabe: LM steht für „last mile“, die letzte Meile. Sie nennt den Paketdienst, der bis zu deiner Tür liefert, und seine Nummer. Danach gibt der Verlauf dessen Scans in seinen eigenen Worten wieder, etwa `The item is received by PostNL`. Einige Zeilen stehen auch in der englischen Ansicht auf Chinesisch: `货物运输中` heißt einfach „Ware unterwegs“. `Delivered. (Recipient's front door)` sagt, wo das Paket abgelegt wurde, hier vor der Haustür.
+Eine Zeile wie `LM Carrier: [carrier] , LM tracking No.: [number]` ist die Übergabe: LM steht für „last mile“, die letzte Meile. Sie nennt den Paketdienst, der bis zu deiner Tür liefert, und seine Nummer. Danach gibt der Verlauf dessen Scans in seinen eigenen Worten wieder, etwa `The item is received by PostNL`. Auf der internationalen Linie von PostNL folgen die Schritte der Post im Zielland, auf Englisch: `Item is cleared by customs` (der Zoll hat es freigegeben) und `Arrival at Delivery Post Office` (bei der Postfiliale, die zustellt), bei Peek beide „Unterwegs“, dann nach einem gescheiterten Zustellversuch `The item is being held, addressee being notified`: Die Sendung wartet in dieser Filiale, und du wirst benachrichtigt, sie abzuholen („Abholbereit“). Einige Zeilen stehen auch in der englischen Ansicht auf Chinesisch: `货物运输中` heißt einfach „Ware unterwegs“. `Delivered. (Recipient's front door)` sagt, wo das Paket abgelegt wurde, hier vor der Haustür.
 
 Bei `Arrived at Destination Hub` oder einer Zollzeile kann das Tracking mehrere Tage stehen bleiben, bevor der Paketdienst vor Ort scannt. Orange Connex schreibt selbst, es könne je nach Zielort einige Tage dauern, bis der Transportdienst das Paket zur nächsten Einrichtung in der Region bringt. Was an der Grenze passiert, erklärt [Paket beim Zoll](guide:customs).
 

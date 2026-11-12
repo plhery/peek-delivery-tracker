@@ -3,7 +3,7 @@ title: Cainiao suivi : numéros, statuts et qui contacter
 description: Suivre un colis Cainiao venu d'AliExpress : à quoi ressemble le numéro, ce que veut dire chaque statut, où il t'attend en France et qui contacter s'il bloque.
 slug: cainiao-suivi
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-12
 ---
 
 Cainiao est le groupe logistique d'Alibaba : il achemine à l'étranger les colis de vendeurs de plateformes comme AliExpress et, en France, il a aussi son propre réseau de livraison. Pour suivre ton colis, saisis son numéro sur [global.cainiao.com](https://global.cainiao.com/), le site de suivi de Cainiao, qui ne suit que les colis Cainiao et AliExpress, ou colle-le dans le champ ci-dessus. Sur AliExpress, le numéro se trouve dans le suivi de ta commande : l'aide d'AliExpress indique « My Orders », puis la commande, puis « Tracking ».
@@ -29,6 +29,7 @@ Le site de Cainiao s'ouvre en anglais tant que tu n'as pas choisi une autre lang
 | Ce qu'affiche Cainiao | Ce que ça veut dire pour toi |
 | --- | --- |
 | `Shipment information received by warehouse electronically` | L'entrepôt du vendeur a reçu les données de ta commande. |
+| `Warehouse packaging complete` | L'entrepôt du vendeur a emballé ta commande ; aucun transporteur ne l'a encore. |
 | `Received by logistics company` | Le premier scan d'un transporteur. |
 | `Export customs clearance complete` | Dédouané à l'export, le colis poursuit sa route. |
 | `Departed from departure country/region` | Il quitte le pays de départ. |

@@ -3,7 +3,7 @@ title: TSJY tracking (通世集运): order numbers and statuses
 description: Track a TSJY (通世集运) consolidated parcel from China: what a TSJY…CN number looks like, what each Chinese status means, and when 17FEIA takes over.
 slug: tsjy-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-12
 ---
 
 TSJY (通世集运) is a consolidation service in China, run by 苏州通世供应链有限公司, a supply chain company in Suzhou. You buy on Chinese shopping sites such as Taobao, Tmall, Pinduoduo, JD or Douyin, and the shops send your goods to TSJY's warehouse in Suzhou. TSJY stores them, packs them together and ships them abroad. Track your TSJY number on [TSJY's site](https://www.tsjy56.com/), under 订单查询 (order search), or paste it in the box above.
@@ -62,6 +62,8 @@ On the 17FEIA line, TSJY then copies 17FEIA's lines, in English:
 | `Broker picked up Shipment and delivered to warehouse.` | A customs broker took it to its warehouse for clearance. Not a delivery to you. | "At customs" |
 | `Customs Clearance is in progress.` | Import customs is checking it. | "At customs" |
 | `Customs Clearance Completed.` | Customs released it. | "In transit" |
+
+On another line, that line's order can show too: `已下单` (order placed), in Chinese and without a place, between TSJY's packing and its dispatch. Like 17FEIA's `Item information received.`, it comes while TSJY still has the parcel: "Received by carrier".
 
 Peek leaves out 17FEIA's line with an estimated departure date, which isn't a scan, and any line dated in the future. Peek reads other lines, such as the delivering company's, by their words, such as delivered or customs.
 

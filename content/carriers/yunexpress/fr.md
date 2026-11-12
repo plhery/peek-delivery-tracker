@@ -32,11 +32,12 @@ Yuntrack n'existe qu'en anglais, sans choix de langue. Chaque colis y est rangé
 | `Shipment information received` | Le vendeur a transmis les données ; YunExpress n'a peut-être pas encore le colis. |
 | `Shipment picked up` | YunExpress a récupéré le colis chez le vendeur, en Chine. |
 | `The country of origin commences customs declaration.` | La déclaration d'export en Chine, pas ta douane. |
-| `International flight has departed` | L'avion vers ton pays a décollé. |
+| `International flight has departed`, `Departed from AIRPORT` | L'avion vers ton pays a décollé. |
 | `Start Customs Clearence` | Le dédouanement à l'import commence (orthographe de YunExpress). |
 | `Customs inspection - Import` | La douane a choisi le colis pour un contrôle. |
 | `Clearance processing completed - Import` | Dédouané, le colis repart. |
 | `Delivered to local carrier` | Remis au transporteur local qui va te livrer, pas à toi. |
+| `Item accepted` | Ligne reprise de ce transporteur : il a reçu le colis de YunExpress. Un passage de relais, pas une livraison chez toi. |
 | `Your package is ready to be picked up.` | Ligne relayée de DHL : ton colis t'attend dans un DHL ServicePoint. |
 | `Your parcel is out for delivery.` | Ligne relayée de J&T Express en Australie, pour un colis envoyé là-bas : le livreur l'a dans sa tournée. Elle peut finir par le numéro du service client de J&T. |
 | `Delivered by Mailbox` | Déposé dans ta boîte aux lettres. |

@@ -44,6 +44,7 @@ GOFO's scans are in English. These are the ones a parcel may meet, roughly in or
 | `Out for Delivery` | With the driver today. | "Out for delivery" |
 | `Delivered` | The driver delivered the parcel. | "Delivered" |
 | `Delivery Exception, Business Closed` | The driver couldn't deliver because the business was closed. | "Delivery attempted" |
+| `Incorrect/Insufficient Address, Additional Details Required for Delivery.` | The address is wrong or incomplete, sometimes noted the day after a missed delivery: the parcel waits until someone adds the missing details. | "Needs attention" |
 | `Label Cancelled` | The label was cancelled: no parcel is coming under this number. | "Needs attention" |
 
 GOFO's delivered scan can add a detail after the comma, and its tracking page also shows an estimated delivery date.

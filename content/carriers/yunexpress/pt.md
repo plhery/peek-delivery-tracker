@@ -32,12 +32,12 @@ O yuntrack só existe em inglês: não tem seletor de idioma nem versão em port
 | `Shipment information received` | A loja enviou os dados da encomenda; a YunExpress pode ainda não a ter. |
 | `Shipment picked up` | A YunExpress recolheu-a no vendedor. |
 | `The country of origin commences customs declaration.` | Alfândega de exportação no país de origem, ainda não a portuguesa. |
-| `International flight has departed` | Partiu no voo internacional. |
+| `International flight has departed`, `Departed from AIRPORT` | Partiu no voo internacional. |
 | `Start Customs Clearence` | Começou o desalfandegamento de importação no destino (o erro de ortografia é da YunExpress). |
 | `Customs inspection - Import` | A alfândega escolheu-a para uma inspeção. |
 | `Clearance processing completed - Import` | Desalfandegada: segue caminho. |
 | `Delivered to local carrier` | Entregue à transportadora local que a vai distribuir, não a ti. |
-| `Package accepted at courier partner` | A transportadora parceira recebeu-a: uma passagem de mãos, não a tua entrega. |
+| `Package accepted at courier partner`, `Item accepted` | A transportadora parceira recebeu-a: uma passagem de mãos, não a tua entrega. |
 | `Your parcel is out for delivery.` | Linha da J&T Express na Austrália, para uma encomenda com destino lá: saiu para entrega. Pode acabar com o número do apoio ao cliente da J&T. |
 | `Delivered by Mailbox` | Deixada na tua caixa do correio. |
 | `Returned` | Encomenda devolvida. A YunExpress não publica regras de devolução para quem recebe. |

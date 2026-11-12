@@ -34,11 +34,12 @@ Yuntrack is in English only. It files each parcel under a tab (`Processing`, `Tr
 | `Shipment information received` | The seller has sent the details; YunExpress may not have the parcel yet. |
 | `Shipment picked up` | YunExpress has collected it from the seller. |
 | `The country of origin commences customs declaration.` | Export customs where it ships from, not yours. |
-| `International flight has departed` | On its international flight. |
+| `International flight has departed`, `Departed from AIRPORT` | On its international flight. |
 | `Start Customs Clearence` | Import customs has started (YunExpress's spelling). |
 | `Customs inspection - Import` | Picked for a customs check. |
 | `Clearance processing completed - Import` | Cleared customs. |
 | `Delivered to local carrier` | Handed to the carrier that delivers it, not to you. |
+| `Item accepted` | Relayed from that carrier: it has taken the parcel in from YunExpress. A hand-over, not a delivery to you. |
 | `Arrived at GOFO Regional Destination Facility` | Reached GOFO, the last-mile carrier named in the scan. |
 | `The driver is out for delivery` | Out with the driver. |
 | `Your parcel is out for delivery.` | Relayed from J&T Express Australia, for a parcel to Australia: out with the driver. It can end with J&T's customer service number. |

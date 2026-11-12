@@ -6,6 +6,7 @@ import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
 import { EMAIL_STAGES, type DeliveredTime, type EmailStage } from './email/types';
 import type { AssistantClient } from './assistants/clients';
+import type { SyncQueue } from './metrics';
 import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
 import type { SyncReason } from './trackingAudit';
@@ -2070,6 +2071,34 @@ export class SupabaseServiceClient extends SupabaseClient {
     ]);
     const ahead = rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 }))[0];
     return ahead ? Number(ahead.priority) : null;
+  }
+
+  /**
+   * The checks waiting for a worker, by whose, with how long the oldest has waited since it was
+   * queued. The oldest thousand are read.
+   */
+  async syncQueue(now = new Date()): Promise<SyncQueue> {
+    const params = query([
+      ['select', 'kind,user_id,priority,requested_at'],
+      ['state', 'eq.queued'],
+      ['order', 'requested_at.asc'],
+      ['limit', '1000'],
+    ]);
+    const queue: SyncQueue = {
+      account: { queued: 0, oldestSeconds: 0 },
+      lookup: { queued: 0, oldestSeconds: 0 },
+      scheduled: { queued: 0, oldestSeconds: 0 },
+      release: { queued: 0, oldestSeconds: 0 },
+    };
+    for (const job of rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 }))) {
+      const kind = job.kind === 'scheduled' ? 'scheduled'
+        : Number(job.priority) === BACKGROUND_SYNC_PRIORITY ? 'release'
+          : job.user_id ? 'account' : 'lookup';
+      const waited = (now.getTime() - Date.parse(String(job.requested_at ?? ''))) / 1_000;
+      queue[kind].queued += 1;
+      if (waited > queue[kind].oldestSeconds) queue[kind].oldestSeconds = Math.round(waited);
+    }
+    return queue;
   }
 
   /** When the last scheduled run finished, however it ended; null when none has. */

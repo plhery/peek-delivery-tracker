@@ -32,7 +32,7 @@ import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
 import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { hostStepRecorder, withHeldLookups } from './stepRecorder';
-import { recordScheduledRunGaveWay, recordStatusMapping } from './metrics';
+import { recordScheduledBacklog, recordScheduledRunGaveWay, recordStatusMapping } from './metrics';
 import {
   captureOperationalError,
   errorType,
@@ -721,6 +721,33 @@ function returnHeld(parcel: JsonObject): boolean {
 function unconfirmedDelivery(parcel: JsonObject, now: Date): boolean {
   const until = isRecord(parcel.carrier_data) ? Date.parse(String(parcel.carrier_data.unconfirmed_delivery_until ?? '')) : Number.NaN;
   return parcel.current_stage === 'delivered' && until > now.getTime();
+}
+
+/**
+ * How long the longest-waiting of these due parcels has been due, to the minute. A parcel stays due
+ * from the moment its cadence comes round until its check, so a search between its last check, or
+ * its addition, and now finds that moment. The stalest go first: one not due as long ago as the
+ * longest wait found so far cannot have waited longer, which a single look settles.
+ */
+function longestOverdueMs(parcels: JsonObject[], dueAt: (parcel: JsonObject, at: Date) => boolean, now: Date): number {
+  const end = now.getTime();
+  const since = (parcel: JsonObject) => Date.parse(String(parcel.last_synced_at ?? parcel.created_at ?? ''));
+  const stalest = parcels.map((parcel) => [since(parcel), parcel] as const)
+    .filter(([from]) => from < end).sort(([left], [right]) => left - right);
+  let longest = 0;
+  for (const [from, parcel] of stalest) {
+    if (end - from <= longest) break;
+    let low = from;
+    let high = end - longest;
+    if (longest > 0 && !dueAt(parcel, new Date(high))) continue;
+    while (high - low > 60_000) {
+      const middle = Math.floor((low + high) / 2);
+      if (dueAt(parcel, new Date(middle))) high = middle;
+      else low = middle;
+    }
+    longest = end - high;
+  }
+  return longest;
 }
 
 /**
@@ -1549,10 +1576,11 @@ export class TrackingSyncService {
       const unwatched = await this.unwatchedPackages(now, context.signal);
       const active = await this.client.listActivePackages();
       const shared = await this.sharedAlertPackages(active, context.signal);
-      const due = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject) => isScheduledTrackingSyncDue(parcel, now, {
+      const due = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => isScheduledTrackingSyncDue(parcel, at, {
         unwatched: unwatched.has(String(parcel.id)), oneOff, unfollowed, sharedAlerts: shared.has(String(parcel.id)),
       });
-      const owned = active.filter(due(false));
+      const owned = active.filter((parcel) => due(false)(parcel, now));
+      recordScheduledBacklog('account', owned.length, longestOverdueMs(owned, due(false), now));
       // An account's parcel whose number nobody has answered for a day is rechecked after every
       // other parcel and lookup, within its account's share, a few a run.
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
@@ -1748,8 +1776,8 @@ export class TrackingSyncService {
    * `limit`; the others take what is left, and `UNWATCHED_ONE_OFF_SHARE` at least.
    */
   private async oneOffPackages(
-    followedDue: (parcel: JsonObject) => boolean,
-    unfollowedDue: (parcel: JsonObject) => boolean,
+    followedDue: (parcel: JsonObject, at: Date) => boolean,
+    unfollowedDue: (parcel: JsonObject, at: Date) => boolean,
     now: Date,
     limit: number,
     watched: (parcel: JsonObject) => boolean,
@@ -1768,8 +1796,11 @@ export class TrackingSyncService {
     const listed = new Set(followed.map((parcel) => String(parcel.id)));
     const unfiled = await list('list_unfiled_one_off_packages',
       () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
-    const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel)));
-    const due = [...followed.filter(followedDue), ...unfollowed];
+    const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel, now)));
+    const followedNow = followed.filter((parcel) => followedDue(parcel, now));
+    const due = [...followedNow, ...unfollowed];
+    recordScheduledBacklog('lookup', due.length, Math.max(longestOverdueMs(followedNow, followedDue, now),
+      longestOverdueMs([...unfollowed], unfollowedDue, now)));
     const waited = due.filter(watched).slice(0, limit);
     const others = due.filter((parcel) => !watched(parcel));
     const taken = [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];
@@ -1781,7 +1812,7 @@ export class TrackingSyncService {
     return taken.flatMap((parcel) => {
       if (!unfollowed.has(parcel)) return [parcel];
       const current = read.get(String(parcel.id));
-      return current && unfollowedDue(current) ? [current] : [];
+      return current && unfollowedDue(current, now) ? [current] : [];
     });
   }
 

@@ -3287,6 +3287,32 @@ describe('TrackingSyncService', () => {
     }
   });
 
+  it('records how many parcels of each kind a run finds due, and how long the longest-waiting has been due', async () => {
+    const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234', sync_status: 'ok' };
+    // An account's parcel, checked every 10 minutes: due since 09:10.
+    const client = fakeClient([{ ...due, id: 'a1', user_id: 'a', last_synced_at: '2026-09-09T09:00:00Z' }]);
+    client.listFollowedOneOffPackages.mockResolvedValue([
+      // Nobody reads it, so it is checked every 3 hours, at the minute its number opens its hours (48): due since 05:48.
+      { ...due, id: 'unread', user_id: null, one_off: true, last_synced_at: '2026-09-09T03:00:00Z' },
+      // Read, so checked every 10 minutes: due since 10:10.
+      { ...due, id: 'read', user_id: null, one_off: true, last_synced_at: '2026-09-09T10:05:00Z' },
+      // Checked within the current window: not due.
+      { ...due, id: 'fresh', user_id: null, one_off: true, last_synced_at: '2026-09-09T10:10:30Z' },
+    ]);
+    client.listUnwatchedPackageIds.mockResolvedValue(['unread']);
+    const recorded = vi.spyOn(metrics, 'recordScheduledBacklog');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T10:12:00Z'));
+    await service.sync();
+    const [account, lookup] = recorded.mock.calls;
+    expect(account.slice(0, 2)).toEqual(['account', 1]);
+    expect(account[2]).toBeGreaterThan(61 * 60_000);
+    expect(account[2]).toBeLessThanOrEqual(62 * 60_000);
+    expect(lookup.slice(0, 2)).toEqual(['lookup', 2]);
+    expect(lookup[2]).toBeGreaterThan((4 * 60 + 23) * 60_000);
+    expect(lookup[2]).toBeLessThanOrEqual((4 * 60 + 24) * 60_000);
+  });
+
   it('checks five one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       sync_status: 'ok', user_id: null, one_off: true };

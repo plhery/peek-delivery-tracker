@@ -32,10 +32,17 @@ import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './
  * App Attest is counted by the request's kind, how it ended and a reason code,
  * and the proof each lookup without an account came with by its kind: never by
  * key, device or address.
+ * The sync worker's queue and the scheduled run's backlog are counted by
+ * whose check they are (account, lookup, scheduled run, release) only.
  */
 
+/** Whose check waits for the sync worker: an account's, a lookup's, the scheduled run, or a scraper release's re-check. */
+export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
+/** The checks waiting for the sync worker, by whose, with how long the oldest has waited. */
+export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
+
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 19;
+const RUNTIME_VERSION = 20;
 
 interface PrometheusRuntime {
   version: number;
@@ -79,6 +86,12 @@ interface PrometheusRuntime {
   publicLookupsPerClient: Gauge<'stat'>;
   publicDetectionClients: Gauge;
   publicDetectionsPerClient: Gauge<'stat'>;
+  syncJobsQueued: Gauge<'kind'>;
+  syncJobsOldestWait: Gauge<'kind'>;
+  scheduledSyncDue: Gauge<'kind'>;
+  scheduledSyncOverdue: Gauge<'kind'>;
+  /** Where the sync worker runs, how its queue is read at each scrape, and the read under way. */
+  syncQueue: { read: (() => Promise<SyncQueue>) | null; reading: Promise<void> | null };
   /** Series a scrape has shown; they count at once. */
   scraped: Set<string>;
   /** Series created at 0 since the last scrape, with the updates they wait to apply. */
@@ -329,6 +342,33 @@ function createRuntime(): PrometheusRuntime {
       labelNames: ['stat'] as const,
       registers: [registry],
     }),
+    syncJobsQueued: new Gauge({
+      name: 'sync_jobs_queued',
+      help: 'Checks waiting for the sync worker, by whose: account, lookup, scheduled (the scheduled run) or release (a scraper release re-check). Read from the queue at each scrape, where the worker runs.',
+      labelNames: ['kind'] as const,
+      registers: [registry],
+      collect: () => readSyncQueue(),
+    }),
+    syncJobsOldestWait: new Gauge({
+      name: 'sync_jobs_oldest_wait_seconds',
+      help: 'How long the oldest check waiting for the sync worker has waited since it was queued, by whose; 0 when none waits.',
+      labelNames: ['kind'] as const,
+      registers: [registry],
+      collect: () => readSyncQueue(),
+    }),
+    scheduledSyncDue: new Gauge({
+      name: 'scheduled_sync_due',
+      help: 'Parcels the latest scheduled run found due when it started, by whose: account or lookup.',
+      labelNames: ['kind'] as const,
+      registers: [registry],
+    }),
+    scheduledSyncOverdue: new Gauge({
+      name: 'scheduled_sync_overdue_seconds',
+      help: 'How long the longest-waiting parcel the latest scheduled run found due had been due, to the minute, by whose: account or lookup; 0 when none was.',
+      labelNames: ['kind'] as const,
+      registers: [registry],
+    }),
+    syncQueue: { read: null, reading: null },
     scraped: new Set(),
     held: new Map(),
   };
@@ -655,6 +695,33 @@ export function recordScheduledRunGaveWay(to: 'account' | 'lookup'): void {
 }
 // Both series show from the start, so an hour in which no run gave way reads 0 rather than no data.
 for (const to of ['account', 'lookup'] as const) runtime.scheduledRunGaveWayTotal.inc({ to }, 0);
+
+/** Where the sync worker runs, its queue is read at each scrape. */
+export function readSyncQueueWith(read: (() => Promise<SyncQueue>) | null): void {
+  runtime.syncQueue.read = read;
+}
+
+/** Both queue series come from one read per scrape. A read that fails shows neither, rather than stale values. */
+function readSyncQueue(): Promise<void> {
+  const { read } = runtime.syncQueue;
+  if (!read) return Promise.resolve();
+  runtime.syncQueue.reading ??= read().then((queue) => {
+    for (const [kind, { queued, oldestSeconds }] of Object.entries(queue)) {
+      runtime.syncJobsQueued.set({ kind }, queued);
+      runtime.syncJobsOldestWait.set({ kind }, oldestSeconds);
+    }
+  }, () => {
+    runtime.syncJobsQueued.reset();
+    runtime.syncJobsOldestWait.reset();
+  }).finally(() => { runtime.syncQueue.reading = null; });
+  return runtime.syncQueue.reading;
+}
+
+/** At its start, the scheduled run's due parcels of one kind, and how long the longest-waiting of them has been due. */
+export function recordScheduledBacklog(kind: 'account' | 'lookup', due: number, overdueMs: number): void {
+  runtime.scheduledSyncDue.set({ kind }, due);
+  runtime.scheduledSyncOverdue.set({ kind }, Math.round(overdueMs / 1_000));
+}
 
 interface UsageStats { buckets: number; p50: number; p90: number; max: number }
 

@@ -16,7 +16,7 @@ import {
   type ScheduledCheckIn,
 } from './observability';
 import { deliveryEmailService } from './email/deliveryEmails';
-import { recordParcelAlertRemoved, recordParcelsForgotten, recordPublicLookupUsage } from './metrics';
+import { readSyncQueueWith, recordParcelAlertRemoved, recordParcelsForgotten, recordPublicLookupUsage } from './metrics';
 import { pushServices } from './push';
 import { FriendshipPushService, FriendshipPushWorker } from './friendshipPush';
 import { ReviewQueueReplay } from './reviewQueues';
@@ -676,6 +676,8 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   const reviews = new ReviewQueueReplay(client);
   const runtime = { client, state, worker, scheduler, friendshipWorker, reviews };
   globalBackground.__deliveryBackgroundRuntime = runtime;
+  // Each scrape reads the queue this worker serves.
+  readSyncQueueWith(() => client.syncQueue());
   worker.start();
   scheduler.start();
   friendshipWorker.start();

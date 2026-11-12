@@ -1240,7 +1240,7 @@
       "title": "Scheduled runs that gave way, hourly",
       "description": "Scheduled runs per hour that stopped for an account's or a lookup's check queued ahead of them and were queued again. Many in an hour mean a burst kept stopping the run, and accounts' scheduled checks fell behind. The carrier filter does not apply; the counters restart with each deploy.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 56, "w": 24, "h": 8},
+      "gridPos": {"x": 0, "y": 56, "w": 8, "h": 8},
       "interval": "1h",
       "targets": [
         {
@@ -1277,6 +1277,81 @@
             "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "orange"}}]
           }
         ]
+      },
+      "options": {
+        "legend": {"showLegend": true, "displayMode": "list", "placement": "bottom"},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 76,
+      "title": "Longest wait for a check",
+      "description": "How long the longest-waiting parcel the scheduled run found due had been due when the run started (due), and how long the oldest check queued for the sync worker had waited (queued), by account or lookup. A lookup due for hours is checked late. The carrier filter does not apply.",
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "gridPos": {"x": 8, "y": 56, "w": 8, "h": 8},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "refId": "A",
+          "expr": "max by (kind) (scheduled_sync_overdue_seconds)",
+          "legendFormat": "{{kind}} due",
+          "range": true
+        },
+        {
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "refId": "B",
+          "expr": "max by (kind) (sync_jobs_oldest_wait_seconds{kind=~\"account|lookup\"})",
+          "legendFormat": "{{kind}} queued",
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "min": 0,
+          "color": {"mode": "palette-classic"},
+          "custom": {"drawStyle": "line", "lineWidth": 1, "fillOpacity": 10, "showPoints": "never", "axisSoftMin": 0}
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {"showLegend": true, "displayMode": "list", "placement": "bottom"},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 77,
+      "title": "Checks waiting for the sync worker",
+      "description": "Parcels the scheduled run found due when it started (due), and checks queued for the sync worker (queued), by account, lookup, the scheduled run or a scraper release's re-check. The carrier filter does not apply.",
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "gridPos": {"x": 16, "y": 56, "w": 8, "h": 8},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "refId": "A",
+          "expr": "max by (kind) (scheduled_sync_due)",
+          "legendFormat": "{{kind}} due",
+          "range": true
+        },
+        {
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "refId": "B",
+          "expr": "max by (kind) (sync_jobs_queued)",
+          "legendFormat": "{{kind}} queued",
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "min": 0,
+          "color": {"mode": "palette-classic"},
+          "custom": {"drawStyle": "line", "lineWidth": 1, "fillOpacity": 10, "showPoints": "never", "axisSoftMin": 0}
+        },
+        "overrides": []
       },
       "options": {
         "legend": {"showLegend": true, "displayMode": "list", "placement": "bottom"},

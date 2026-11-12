@@ -215,6 +215,25 @@ describe('one-off parcels and their links', () => {
       order: 'completed_at.desc', limit: '1' });
   });
 
+  it('reads the queued checks by whose, with how long the oldest of each has waited', async () => {
+    const client = service();
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([
+      { kind: 'package', user_id: null, priority: -5, requested_at: '2026-09-16T09:50:00Z' },
+      { kind: 'package', user_id: null, priority: -5, requested_at: '2026-09-16T09:59:30Z' },
+      { kind: 'package', user_id: 'synthetic-user', priority: -30, requested_at: '2026-09-16T09:00:00Z' },
+      { kind: 'package', user_id: 'synthetic-user', priority: 10, requested_at: '2026-09-16T09:59:58Z' },
+      { kind: 'scheduled', user_id: null, priority: -10, requested_at: '2026-09-16T09:58:00Z' },
+    ]);
+    await expect(client.syncQueue(new Date('2026-09-16T10:00:00Z'))).resolves.toEqual({
+      account: { queued: 1, oldestSeconds: 2 },
+      lookup: { queued: 2, oldestSeconds: 600 },
+      scheduled: { queued: 1, oldestSeconds: 120 },
+      release: { queued: 1, oldestSeconds: 3600 },
+    });
+    expect(Object.fromEntries(params(request.mock.calls[0][0]))).toEqual({ select: 'kind,user_id,priority,requested_at',
+      state: 'eq.queued', order: 'requested_at.asc', limit: '1000' });
+  });
+
   it('answers the highest priority of the jobs that go ahead of a priority and wait to be claimed', async () => {
     vi.useFakeTimers({ now: new Date('2026-09-16T10:00:00Z') });
     const client = service();

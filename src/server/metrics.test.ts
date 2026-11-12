@@ -237,6 +237,37 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('scheduled_sync_gave_way_total{to="account"} 0');
   });
 
+  it('reads the sync worker queue once per scrape, and shows nothing of a read that fails', async () => {
+    const queue = {
+      account: { queued: 0, oldestSeconds: 0 },
+      lookup: { queued: 3, oldestSeconds: 412 },
+      scheduled: { queued: 1, oldestSeconds: 30 },
+      release: { queued: 0, oldestSeconds: 0 },
+    };
+    const read = vi.fn().mockResolvedValueOnce(queue).mockRejectedValueOnce(new Error('unreachable'));
+    metrics.readSyncQueueWith(read);
+    let text = await metrics.metricsText();
+    expect(read).toHaveBeenCalledTimes(1);
+    expect(text).toContain('sync_jobs_queued{kind="lookup"} 3');
+    expect(text).toContain('sync_jobs_queued{kind="account"} 0');
+    expect(text).toContain('sync_jobs_oldest_wait_seconds{kind="lookup"} 412');
+    expect(text).toContain('sync_jobs_oldest_wait_seconds{kind="scheduled"} 30');
+    text = await metrics.metricsText();
+    expect(read).toHaveBeenCalledTimes(2);
+    expect(text).not.toContain('sync_jobs_queued{');
+    expect(text).not.toContain('sync_jobs_oldest_wait_seconds{');
+    metrics.readSyncQueueWith(null);
+  });
+
+  it('shows the scheduled run backlog of each kind, its longest wait in seconds', async () => {
+    metrics.recordScheduledBacklog('lookup', 42, 3 * 60 * 60_000 + 29_600);
+    metrics.recordScheduledBacklog('account', 0, 0);
+    const text = await metrics.metricsText();
+    expect(text).toContain('scheduled_sync_due{kind="lookup"} 42');
+    expect(text).toContain('scheduled_sync_overdue_seconds{kind="lookup"} 10830');
+    expect(text).toContain('scheduled_sync_overdue_seconds{kind="account"} 0');
+  });
+
   it('labels a lookup with the attempts it took, capped to keep the label set small', async () => {
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'ok', errorType: null, durationMs: 3200, attempts: 3 });
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'challenge', errorType: 'UpstreamHttpError', durationMs: 6000, attempts: 40 });

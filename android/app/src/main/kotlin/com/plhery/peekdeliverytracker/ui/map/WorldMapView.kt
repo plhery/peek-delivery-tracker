@@ -51,6 +51,8 @@ import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.createFontFamilyResolver
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import com.plhery.peekdeliverytracker.core.DistanceUnit
+import com.plhery.peekdeliverytracker.ui.LocalDistanceUnit
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DetailTile
 import com.plhery.peekdeliverytracker.core.EdgeInsets
@@ -159,6 +161,7 @@ fun WorldMapView(
     onFreeChange: (Boolean) -> Unit = {},
 ) {
     val colors = PeekTheme.colors
+    val distanceUnit = LocalDistanceUnit.current
     val reduceMotion = PeekTheme.reduceMotion
     val context = LocalContext.current.applicationContext
     BoxWithConstraints(modifier.clearAndSetSemantics {}) {
@@ -166,7 +169,7 @@ fun WorldMapView(
         // Everything the picture depends on but the tiles it draws: what frames the map, which a tile that comes leaves.
         val bare = MapSceneRequest(
             atlas, route, mode, palette, labels, sites, showsContext, night, pip, quiet, insets, covered, buttons, language,
-            size.width, size.height, colors.dark, colors.highContrast, detail?.let { SceneDetail(it.pack, emptyMap()) },
+            size.width, size.height, colors.dark, colors.highContrast, detail?.let { SceneDetail(it.pack, emptyMap()) }, distanceUnit,
         )
         // The tiles read so far, read here rather than where they are kept, so that each one composes only the map again.
         val stored by (detail?.tiles ?: NO_TILES).collectAsState()
@@ -519,6 +522,7 @@ internal data class MapSceneRequest(
     val dark: Boolean,
     val highContrast: Boolean,
     val detail: SceneDetail?,
+    val distanceUnit: DistanceUnit = DistanceUnit.Kilometres,
 )
 
 /** What an opened map has of its close-ups as its picture is made: the pack, and the tiles it is handed. */
@@ -671,7 +675,7 @@ internal object MapScenes {
             MapOverlay(
                 route, camera, Size(width, height), insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas,
                 locale = language.locale, countryName = { TrackingLocation.countryName(it, language) }, pip = standing, covered = covered,
-                buttons = buttons, measurer = widths,
+                buttons = buttons, measurer = widths, distanceUnit = distanceUnit,
             ).pip?.spot
         }
     }
@@ -699,7 +703,7 @@ internal object MapScenes {
         val shown = { camera: GlobeCamera, box: Rect? ->
             MapOverlay(
                 route, camera, size, insets, labels, sites = sites, mode = mode, context = false, atlas = atlas, locale = language.locale,
-                countryName = { it }, pip = standing, covered = box, buttons = buttons, measurer = widths,
+                countryName = { it }, pip = standing, covered = box, buttons = buttons, measurer = widths, distanceUnit = distanceUnit,
             ).shown
         }
         GlobeCamera.framing(route, mode, size, insets, covered = covered, shown = shown, pip = standing != null, closeUps = closeUps)
@@ -732,7 +736,7 @@ internal object MapScenes {
         val overlay = MapOverlay(
             route, camera, size, insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas, locale = language.locale,
             countryName = { TrackingLocation.countryName(it, language) }, pip = standing, towns = towns, covered = covered,
-            buttons = buttons, measurer = widths,
+            buttons = buttons, measurer = widths, distanceUnit = distanceUnit,
         )
         val base = MapPainter.drawBase(size, atlas, route, camera, palette, night = night, tiles = tiles, tiled = tiled) +
             MapPainter.drawLegs(overlay, palette, quiet)

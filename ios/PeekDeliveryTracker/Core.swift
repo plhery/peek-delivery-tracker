@@ -211,11 +211,33 @@ enum AppLanguage: String, CaseIterable, Identifiable, Codable, Hashable {
     }
 }
 
+enum DistanceUnit: String, CaseIterable {
+    case kilometres = "km"
+    case miles = "mi"
+
+    var labelKey: String { self == .miles ? "settings.miles" : "settings.kilometers" }
+}
+
+private struct DistanceUnitKey: EnvironmentKey {
+    static let defaultValue = DistanceUnit.kilometres
+}
+
+extension EnvironmentValues {
+    var distanceUnit: DistanceUnit {
+        get { self[DistanceUnitKey.self] }
+        set { self[DistanceUnitKey.self] = newValue }
+    }
+}
+
 @MainActor
 final class Localizer: ObservableObject {
     private static let clockStorageKey = "sdt.native.use24HourTime"
     @Published var use24HourTime: Bool {
         didSet { defaults.set(use24HourTime, forKey: Self.clockStorageKey) }
+    }
+    private static let distanceStorageKey = "sdt.native.distanceUnit"
+    @Published var distanceUnit: DistanceUnit {
+        didSet { defaults.set(distanceUnit.rawValue, forKey: Self.distanceStorageKey) }
     }
     private let defaults: UserDefaults
 
@@ -239,6 +261,7 @@ final class Localizer: ObservableObject {
     init(bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad, defaults: UserDefaults = .standard) {
         self.defaults = defaults
         use24HourTime = defaults.object(forKey: Self.clockStorageKey) as? Bool ?? true
+        distanceUnit = defaults.string(forKey: Self.distanceStorageKey).flatMap(DistanceUnit.init(rawValue:)) ?? .kilometres
         #if os(macOS)
         variant = "mac"
         #else

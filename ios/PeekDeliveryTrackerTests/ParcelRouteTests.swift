@@ -132,8 +132,8 @@ final class ParcelRouteTests: XCTestCase {
     }
 
     func testDistancesAreRoundedTheWayAJourneyIsTold() {
-        func text(_ kilometres: Double, _ locale: String = "en") -> String {
-            ParcelRoute.formattedKilometres(kilometres, locale: Locale(identifier: locale))
+        func text(_ kilometres: Double, _ locale: String = "en", unit: DistanceUnit = .kilometres) -> String {
+            ParcelRoute.formattedKilometres(kilometres, locale: Locale(identifier: locale), unit: unit)
                 .replacingOccurrences(of: "\u{00A0}", with: " ")
                 .replacingOccurrences(of: "\u{202F}", with: " ")
         }
@@ -142,6 +142,8 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertEqual(text(447), "450 km")
         XCTAssertEqual(text(9_321), "9,300 km")
         XCTAssertEqual(text(9_321, "de"), "9.300 km")
+        XCTAssertEqual(text(0.2, unit: .miles), "1 mi")
+        XCTAssertEqual(text(447, unit: .miles), "280 mi")
     }
 
     func testTheCameraFramesTheRouteAndSeesWhatItShows() {

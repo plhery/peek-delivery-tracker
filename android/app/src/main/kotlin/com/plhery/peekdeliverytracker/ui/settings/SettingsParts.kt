@@ -47,9 +47,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.LocalDistanceUnit
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
@@ -249,23 +251,46 @@ internal fun SettingsToggleRow(
     }
 }
 
-/**
- * `SettingsLanguageRow`: "language.label" in subheadline, and the app's language by its own name with the menu's
- * chevrons in the secondary grey, beside it, 54 tall at least and 15 in, or under it at the accessibility sizes. A tap
- * on the language and its chevrons, the menu `Picker`'s button, opens iOS's menu of the languages by their own names
- * over the sheet ([SheetMenu]), the one in use checked, and fades them alone while pressed; the rest of the row takes no
- * finger. A choice sets the app's language (`localizer.language`), which the app saves and passes on. TalkBack still
- * stops on the row as one, read as its label with the language as its state, and opens the menu from there: the row
- * keeps the semantics, which clear the picker's own.
- */
 @Composable
 internal fun SettingsLanguageRow() {
-    val colors = PeekTheme.colors
-    val type = PeekTheme.type
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    SettingsPickerRow(
+        label = localized("language.label"),
+        options = AppLanguage.entries.map { MenuOption(it.nativeName, tag = settingsLanguageTag(it)) },
+        selected = AppLanguage.entries.indexOf(language),
+        rowTag = SETTINGS_LANGUAGE,
+        pickerTag = SETTINGS_LANGUAGE_PICKER,
+    ) { localizer.language = AppLanguage.entries[it] }
+}
+
+@Composable
+internal fun SettingsDistanceRow() {
+    val localizer = LocalLocalizer.current
+    val unit = LocalDistanceUnit.current
+    SettingsPickerRow(
+        label = localized("settings.distanceUnits"),
+        options = DistanceUnit.entries.map { MenuOption(localized(it.labelKey), tag = "$SETTINGS_DISTANCE.${it.code}") },
+        selected = DistanceUnit.entries.indexOf(unit),
+        rowTag = SETTINGS_DISTANCE,
+        pickerTag = "$SETTINGS_DISTANCE.picker",
+    ) { localizer.distanceUnit = DistanceUnit.entries[it] }
+}
+
+/** A picker row whose value sits under the label at the largest text sizes. */
+@Composable
+private fun SettingsPickerRow(
+    label: String,
+    options: List<MenuOption>,
+    selected: Int,
+    rowTag: String,
+    pickerTag: String,
+    onSelect: (Int) -> Unit,
+) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
     val menus = LocalSheetMenus.current
-    val label = localized("language.label")
+    val selectedName = options[selected].title
     var row by remember { mutableStateOf(Rect.Zero) }
     var value by remember { mutableStateOf(Rect.Zero) }
     val returnFocus = remember { AccessibilityFocus() }
@@ -274,8 +299,8 @@ internal fun SettingsLanguageRow() {
     val open = {
         menus?.content = {
             SheetMenu(
-                options = AppLanguage.entries.map { MenuOption(it.nativeName, tag = settingsLanguageTag(it)) },
-                selected = AppLanguage.entries.indexOf(language),
+                options = options,
+                selected = selected,
                 row = row,
                 trailing = value.right,
                 leading = if (stacked) value.left else null,
@@ -284,7 +309,7 @@ internal fun SettingsLanguageRow() {
                     returnFocus.request()
                 },
                 behind = behind,
-            ) { localizer.language = AppLanguage.entries[it] }
+            ) { onSelect(it) }
         }
     }
     val picker = @Composable {
@@ -293,12 +318,12 @@ internal fun SettingsLanguageRow() {
         Row(
             Modifier
                 .onGloballyPositioned { value = it.boundsInWindow() }
-                .testTag(SETTINGS_LANGUAGE_PICKER)
+                .testTag(pickerTag)
                 .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
                 .padding(end = PICKER_TRAILING),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(language.nativeName, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(selectedName, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
             PeekSymbol(
                 "chevron.up.chevron.down", Modifier.padding(start = PICKER_GAP),
                 font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.secondaryLabel,
@@ -307,12 +332,12 @@ internal fun SettingsLanguageRow() {
     }
     val frame = Modifier
         .fillMaxWidth()
-        .testTag(SETTINGS_LANGUAGE)
+        .testTag(rowTag)
         .onGloballyPositioned { row = it.boundsInWindow() }
         .accessibilityFocus(returnFocus)
         .clearAndSetSemantics {
             contentDescription = label
-            stateDescription = language.nativeName
+            stateDescription = selectedName
             role = Role.DropdownList
             onClick {
                 open()

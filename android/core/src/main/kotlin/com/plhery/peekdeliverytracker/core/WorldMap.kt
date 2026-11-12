@@ -1418,6 +1418,7 @@ class MapOverlay(
     covered: Rect? = null,
     buttons: Rect? = null,
     measurer: TextMeasurer,
+    distanceUnit: DistanceUnit = DistanceUnit.Kilometres,
 ) {
     enum class LegKind { Travelled, Approximate, Remaining }
     enum class DotKind { Origin, Stop, Current, LastKnown, Area, Destination }
@@ -1737,7 +1738,7 @@ class MapOverlay(
                         Double.POSITIVE_INFINITY
                     },
                 )
-                val detail = ParcelRoute.formattedKilometres(currentStop.place.point.kilometres(place.point), locale)
+                val detail = ParcelRoute.formattedKilometres(currentStop.place.point.kilometres(place.point), locale, distanceUnit)
                 val name = place.name(sites)
                 val width = measure(name, Fonts.pointerName) + measure(" $detail", Fonts.pointerDetail) + 34
                 val half = width / 2

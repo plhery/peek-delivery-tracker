@@ -1507,9 +1507,10 @@ class ParcelStore(
         }
         if (missing.isNotEmpty() && widgetPicturesTask == null) {
             val language = localizer.language
+            val distanceUnit = localizer.distanceUnit
             widgetPicturesTask = scope.launch {
                 for ((parcel, card) in missing) {
-                    if (!artist.draw(parcel, card, language)) widgetPicturesFailed += card.pictures
+                    if (!artist.draw(parcel, card, language, distanceUnit)) widgetPicturesFailed += card.pictures
                 }
                 widgetPicturesTask = null
                 publishDeliveryWidget()

@@ -501,6 +501,8 @@ struct AccountView: View {
                         SettingsLanguageRow()
                         settingsDivider
                         SettingsClockRow()
+                        settingsDivider
+                        SettingsDistanceRow()
                     }
                     SettingsGroup {
                         NavigationLink { accountPage } label: {
@@ -847,22 +849,45 @@ private struct SettingsRow: View {
     }
 }
 
-/// The app's language beside its label, or under it at the largest text sizes.
 private struct SettingsLanguageRow: View {
     @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        SettingsPickerRow(title: localizer.text("language.label"), selection: $localizer.language) {
+            ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
+        }
+    }
+}
+
+private struct SettingsDistanceRow: View {
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        SettingsPickerRow(title: localizer.text("settings.distanceUnits"), selection: $localizer.distanceUnit) {
+            ForEach(DistanceUnit.allCases, id: \.self) { unit in Text(localizer.text(unit.labelKey)).tag(unit) }
+        }
+        .accessibilityIdentifier("settings.distanceUnits")
+    }
+}
+
+/// The picker sits under its label at the largest text sizes.
+private struct SettingsPickerRow<Value: Hashable, Options: View>: View {
+    let title: String
+    @Binding var selection: Value
+    @ViewBuilder let options: () -> Options
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         if dynamicTypeSize.isAccessibilitySize {
             VStack(alignment: .leading, spacing: 4) {
-                Text(localizer.text("language.label")).font(.subheadline)
+                Text(title).font(.subheadline)
                 picker
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(15)
         } else {
             HStack {
-                Text(localizer.text("language.label")).font(.subheadline)
+                Text(title).font(.subheadline)
                 Spacer()
                 picker
             }
@@ -872,10 +897,8 @@ private struct SettingsLanguageRow: View {
     }
 
     private var picker: some View {
-        Picker(localizer.text("language.label"), selection: $localizer.language) {
-            ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
-        }
-        .labelsHidden().pickerStyle(.menu).tint(.secondary)
+        Picker(title, selection: $selection, content: options)
+            .labelsHidden().pickerStyle(.menu).tint(.secondary)
     }
 }
 
@@ -1004,6 +1027,8 @@ private struct GeneralSettings: View {
                 SettingsLanguageRow()
                 settingsDivider
                 SettingsClockRow()
+                settingsDivider
+                SettingsDistanceRow()
             }
             SettingsGroup {
                 Toggle(isOn: $menuBarShown) {

@@ -54,7 +54,7 @@ until it arrives.
 Also in the box: light and dark themes, ten languages (English, German, French, Italian,
 Spanish, Portuguese, Brazilian Portuguese, Polish, Russian and Simplified Chinese), a web app you can install, and on iPhone a barcode
 scanner, a Share extension and widgets. To use AM and PM, turn off **24 hour time** below
-**Language** in **Settings → Preferences**.
+**Language** in **Settings → Preferences**. Choose kilometers or miles under **Distance units**.
 
 Peek shows no ads and sells no data. A parcel followed without an account is forgotten 30
 days after it arrives. The [privacy notice](PRIVACY.md) has the rest.

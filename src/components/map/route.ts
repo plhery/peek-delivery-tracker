@@ -1,3 +1,4 @@
+import type { DistanceUnit } from '../../i18n';
 import { geoDistance } from 'd3-geo';
 import { withoutGeneratedScans } from '../../lib/generatedTrack';
 import { sortEventsDesc } from '../../lib/stages';
@@ -183,9 +184,13 @@ export function defaultMode(route: Route, stage?: Stage): MapMode {
 }
 
 /** Kilometres, rounded as a journey is told: "8 km", "450 km", "9,300 km". */
-export function formatKm(km: number, languageTag = 'en'): string {
-  const rounded = km < 100 ? Math.round(km) : km < 1000 ? Math.round(km / 10) * 10 : Math.round(km / 100) * 100;
-  return new Intl.NumberFormat(languageTag, { style: 'unit', unit: 'kilometer', maximumFractionDigits: 0 }).format(Math.max(rounded, 1));
+export function formatKm(km: number, languageTag = 'en', unit: DistanceUnit = 'km'): string {
+  const distance = unit === 'mi' ? km / 1.609344 : km;
+  const step = distance < 100 ? 1 : distance < 1000 ? 10 : 100;
+  const rounded = Math.round(distance / step) * step;
+  return new Intl.NumberFormat(languageTag, {
+    style: 'unit', unit: unit === 'mi' ? 'mile' : 'kilometer', maximumFractionDigits: 0,
+  }).format(Math.max(rounded, 1));
 }
 
 export function flag(code: string): string {

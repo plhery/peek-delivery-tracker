@@ -56,7 +56,7 @@ enum DeliveryWidgetPictures {
         let shown = [
             "\(version)", parcel.id.uuidString, identity.name, identity.family, identity.colors.joined(separator: ","),
             localizer.language.rawValue, "\(scale)", parcel.currentStage?.rawValue ?? "", parcel.carrierData?.destinationCountry ?? "",
-        ] + parcel.trackingEvents.map { "\($0.stage.rawValue) \($0.occurredAt) \($0.location ?? "") \($0.place.map { "\($0)" } ?? "")" }
+        ] + (localizer.distanceUnit == .miles ? [DistanceUnit.miles.rawValue] : []) + parcel.trackingEvents.map { "\($0.stage.rawValue) \($0.occurredAt) \($0.location ?? "") \($0.place.map { "\($0)" } ?? "")" }
         let digest = SHA256.hash(data: Data(shown.joined(separator: "\n").utf8)).prefix(8).map { String(format: "%02x", $0) }.joined()
         return DeliveryWidgetCard(
             surface: [identity.colors[0], identity.colors[1]], ink: [identity.colors[2], identity.colors[3]],
@@ -70,11 +70,12 @@ enum DeliveryWidgetPictures {
     }
 
     /// Draws a card's pictures; false when one could not be written.
-    static func draw(_ parcel: Parcel, as card: DeliveryWidgetCard, atlas: WorldAtlas?, localizer: Localizer, in folder: URL) async -> Bool {
+    static func draw(_ parcel: Parcel, as card: DeliveryWidgetCard, atlas: WorldAtlas?, localizer: Localizer, in folder: URL, distanceUnit: DistanceUnit? = nil) async -> Bool {
         guard (try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)) != nil else { return false }
         // The list's card: the carrier the parcel came with, after a handover too.
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let placed = parcel.hasMappedPlace
+        let unit = distanceUnit ?? localizer.distanceUnit
         for dark in [false, true] {
             for picture in DeliveryWidgetPicture.routes {
                 let frame = frame(of: picture)
@@ -85,6 +86,7 @@ enum DeliveryWidgetPictures {
                         stage: parcel.currentStage, identity: identity, peek: false, insets: frame.insets, ceiling: frame.ceiling,
                         floor: frame.floor
                     )
+                    .environment(\.distanceUnit, unit)
                     .frame(width: frame.size.width, height: frame.size.height)
                     .mask(LinearGradient(stops: [.init(color: .clear, location: frame.fade.lowerBound / frame.size.height),
                                                  .init(color: .black, location: frame.fade.upperBound / frame.size.height)],

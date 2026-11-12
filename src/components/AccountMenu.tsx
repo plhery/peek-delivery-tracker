@@ -38,7 +38,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   apiAuth?: ApiAuth;
   signIn?: SignInMethods;
 }) {
-  const { t, use24HourTime, setUse24HourTime } = useI18n();
+  const { t, use24HourTime, setUse24HourTime, distanceUnit, setDistanceUnit } = useI18n();
   const [appearance, setAppearance] = useAppearance();
   const initial = email?.trim().charAt(0).toUpperCase();
   const [open, setOpen] = useState(false);
@@ -138,6 +138,13 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
             </fieldset>
               <LanguageControl className="language-control--account" />
               <SwitchRow title={t('settings.use24HourTime')} checked={use24HourTime} onChange={setUse24HourTime} />
+              <label className="language-control language-control--account">
+                <span>{t('settings.distanceUnits')}</span>
+                <select value={distanceUnit} onChange={(event) => setDistanceUnit(event.target.value === 'mi' ? 'mi' : 'km')}>
+                  <option value="km">{t('settings.kilometers')}</option>
+                  <option value="mi">{t('settings.miles')}</option>
+                </select>
+              </label>
             </div>
           </section>
           <div className="settings-box"><button ref={accountButton} className="settings-row" type="button" onClick={() => navigate('account')}>{accountTitle}<span className="settings-chevron" aria-hidden="true">›</span></button>

@@ -173,7 +173,7 @@ object DeliveryWidgetPictures {
         val shown = listOf(
             "$version", parcel.id.uuidString, identity.name, identity.family, identity.colors.joinToString(","), localizer.language.rawValue,
             "$scale", parcel.currentStage?.rawValue ?: "", parcel.carrierData?.destinationCountry ?: "",
-        ) + parcel.trackingEvents.map { "${it.stage.rawValue} ${it.occurredAt} ${it.location ?: ""} ${it.place?.toString() ?: ""}" }
+        ) + listOfNotNull(localizer.distanceUnit.takeIf { it == DistanceUnit.Miles }?.code) + parcel.trackingEvents.map { "${it.stage.rawValue} ${it.occurredAt} ${it.location ?: ""} ${it.place?.toString() ?: ""}" }
         val digest = MessageDigest.getInstance("SHA-256").digest(shown.joinToString("\n").toByteArray(Charsets.UTF_8))
             .take(8).joinToString("") { "%02x".format(it) }
         return DeliveryWidgetCard(
@@ -207,5 +207,5 @@ interface DeliveryWidgetArtist {
     val scale: Double
 
     /** A card's pictures, the mark last; false when one could not be written. */
-    suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage): Boolean
+    suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage, distanceUnit: DistanceUnit = DistanceUnit.Kilometres): Boolean
 }

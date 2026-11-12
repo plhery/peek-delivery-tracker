@@ -466,7 +466,7 @@ class DeliveryWidgetTests {
         var attempts = 0
         var refusing = false
 
-        override suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage): Boolean {
+        override suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage, distanceUnit: DistanceUnit): Boolean {
             attempts += 1
             if (refusing) return false
             draw(card, folder)

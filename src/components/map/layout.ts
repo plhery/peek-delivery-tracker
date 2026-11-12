@@ -1,3 +1,4 @@
+import type { DistanceUnit } from '../../i18n';
 // What a map shows and where everything on it goes, worked out without a browser: the canvas map draws from it, and so does the server.
 import { geoDistance, geoInterpolate, geoPath } from 'd3-geo';
 import { CLOSE_UP_KM, fitCamera, projection, type Box, type Camera } from './camera';
@@ -296,7 +297,7 @@ function runThrough(track: readonly (readonly [number, number])[], box: Rect): {
  */
 export function layout(route: Route, camera: Camera, size: Size, insets: Insets, shape: Shape, labels: 'all' | 'ends' | 'none', sites: boolean,
   mode: MapMode, context: boolean, languageTag: string, pip: PipPlacing | null, textWidth: (text: string) => number,
-  towns?: readonly Town[], covered?: Rect): Overlay {
+  towns?: readonly Town[], covered?: Rect, distanceUnit: DistanceUnit = 'km'): Overlay {
   // Long legs are cut a little outside the frame.
   const cut: Rect = { x: -400, y: -400, width: size.width + 800, height: size.height + 800 };
   const project = projection(camera).clipExtent([[cut.x, cut.y], [cut.x + cut.width, cut.y + cut.height]]);
@@ -501,7 +502,7 @@ export function layout(route: Route, camera: Camera, size: Size, insets: Insets,
         x = viewCenter[0] + dx * reach;
         y = viewCenter[1] + dy * reach;
       }
-      const detail = formatKm(distanceKm(route.current.place.coordinate, place.coordinate), languageTag);
+      const detail = formatKm(distanceKm(route.current.place.coordinate, place.coordinate), languageTag, distanceUnit);
       // Keep the whole chip inside the frame, whichever edge it points past.
       const name = placeName(place, sites);
       const half = (textWidth(`${name} ${detail}`) + 38) / 2;

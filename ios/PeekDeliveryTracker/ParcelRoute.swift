@@ -213,12 +213,13 @@ struct ParcelRoute: Sendable {
         }
     }
 
-    /// Kilometres rounded the way a journey is told: "8 km", "450 km", "9,300 km".
-    static func formattedKilometres(_ kilometres: Double, locale: Locale) -> String {
-        let rounded = kilometres < 100 ? kilometres.rounded()
-            : kilometres < 1_000 ? (kilometres / 10).rounded() * 10
-            : (kilometres / 100).rounded() * 100
-        return Measurement(value: max(rounded, 1), unit: UnitLength.kilometers).formatted(
+    /// Rounds the distance in the selected unit before formatting it in the reader's language.
+    static func formattedKilometres(_ kilometres: Double, locale: Locale, unit: DistanceUnit = .kilometres) -> String {
+        let length = unit == .miles ? UnitLength.miles : .kilometers
+        let distance = unit == .miles ? kilometres / 1.609344 : kilometres
+        let step: Double = distance < 100 ? 1 : distance < 1_000 ? 10 : 100
+        let rounded = (distance / step).rounded() * step
+        return Measurement(value: max(rounded, 1), unit: length).formatted(
             .measurement(width: .abbreviated, usage: .asProvided, numberFormatStyle: .number.precision(.fractionLength(0)))
                 .locale(locale)
         )

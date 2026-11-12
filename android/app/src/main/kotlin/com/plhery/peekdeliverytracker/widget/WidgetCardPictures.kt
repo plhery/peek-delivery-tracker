@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.CarrierTruckGeometry
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetArtist
@@ -88,7 +89,7 @@ class WidgetCardPictures(
      */
     override val scale: Double get() = fixedScale ?: context.resources.displayMetrics.density.toDouble()
 
-    override suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage): Boolean = withContext(Dispatchers.Default) {
+    override suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage, distanceUnit: DistanceUnit): Boolean = withContext(Dispatchers.Default) {
         val scale = card.scale
         try {
             if (!folder.isDirectory && !folder.mkdirs()) return@withContext false
@@ -99,7 +100,7 @@ class WidgetCardPictures(
                 for (picture in DeliveryWidgetPicture.routes) {
                     val frame = DeliveryWidgetPictures.frame(picture)
                     val drawn = if (world != null) {
-                        route(parcel, identity, world, frame, dark, language, scale)
+                        route(parcel, identity, world, frame, dark, language, scale, distanceUnit)
                     } else {
                         // With no route to draw, Pip still stands where he would be.
                         lonePip(PipMood(parcel.currentStage) ?: PipMood.Look, identity, frame, dark, scale)
@@ -128,6 +129,7 @@ class WidgetCardPictures(
         dark: Boolean,
         language: AppLanguage,
         scale: Double,
+        distanceUnit: DistanceUnit,
     ): Bitmap {
         val route = ParcelRoute(parcel, atlas, language)
         val stage = parcel.currentStage
@@ -135,7 +137,7 @@ class WidgetCardPictures(
             atlas, route, route.defaultMode(stage), MapPalette.tint(identity.ink, identity.surface), MapLabels.Ends, sites = false,
             showsContext = false, night = null, pip = PipMood(stage)?.let { PipRequest(it, ceiling = frame.ceiling, floor = frame.floor) },
             quiet = false, insets = frame.insets, covered = null, buttons = null, language = language, width = frame.size.width,
-            height = frame.size.height, dark = dark, highContrast = false, detail = null,
+            height = frame.size.height, dark = dark, highContrast = false, detail = null, distanceUnit = distanceUnit,
         )
         val scene = MapScenes.made(request, context).await()
         val width = frame.size.width.toFloat()

@@ -66,6 +66,7 @@ import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.WorldAtlas
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.LocalDistanceUnit
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -301,6 +302,7 @@ private fun MapSummary(route: ParcelRoute, stage: TrackingStage?, large: Boolean
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val origin = route.origin ?: return
+    val distanceUnit = LocalDistanceUnit.current
     val current = route.current ?: return
     val delivered = stage == TrackingStage.Delivered
     // A finished journey has a length, not a distance "so far".
@@ -327,14 +329,14 @@ private fun MapSummary(route: ParcelRoute, stage: TrackingStage?, large: Boolean
             }
         }
         if (!single) {
-            fun kilometres(value: Double) = ParcelRoute.formattedKilometres(value, language.locale)
+            fun distanceLabel(value: Double) = ParcelRoute.formattedKilometres(value, language.locale, distanceUnit)
             val figures = buildList {
                 if (route.kilometres >= 1) {
-                    val distance = kilometres(route.kilometres)
+                    val distance = distanceLabel(route.kilometres)
                     add(if (finished) distance else localizer.text("map.soFar", mapOf("distance" to distance)))
                 }
                 val remaining = route.remainingKilometres
-                if (!finished && remaining != null) add(localizer.text("map.toGo", mapOf("distance" to kilometres(remaining))))
+                if (!finished && remaining != null) add(localizer.text("map.toGo", mapOf("distance" to distanceLabel(remaining))))
                 if (route.countries.size > 1) add(localizer.text("map.countries.many", mapOf("count" to route.countries.size)))
             }
             if (figures.isNotEmpty()) {

@@ -148,6 +148,8 @@ describe('formatting', () => {
     expect(formatKm(447)).toBe('450 km');
     expect(formatKm(9321)).toBe('9,300 km');
     expect(formatKm(9321, 'de-CH')).toMatch(/^9.300 km$/);
+    expect(formatKm(0.2, 'en', 'mi')).toBe('1 mi');
+    expect(formatKm(447, 'en', 'mi')).toBe('280 mi');
     expect(flag('CH')).toBe('🇨🇭');
   });
 });

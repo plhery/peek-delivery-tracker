@@ -141,7 +141,7 @@ export function CardRoute({ route }: { route: Route | null }) {
 }
 
 function RouteSummary({ route, stage }: { route: Route; stage?: Stage }) {
-  const { t, languageTag } = useI18n();
+  const { t, languageTag, distanceUnit } = useI18n();
   const origin = route.origin;
   const current = route.current;
   if (!origin || !current) return null;
@@ -165,8 +165,8 @@ function RouteSummary({ route, stage }: { route: Route; stage?: Stage }) {
       <small><span aria-hidden="true">{flag(end.country)}</span> {countryName(end.country, languageTag)}</small>
     </div>
     {!single && <p className="parcel-map__facts">
-      {route.km >= 1 && <span>{finished ? formatKm(route.km, languageTag) : t('map.soFar', { distance: formatKm(route.km, languageTag) })}</span>}
-      {!finished && route.remainingKm !== undefined && <span>{t('map.toGo', { distance: formatKm(route.remainingKm, languageTag) })}</span>}
+      {route.km >= 1 && <span>{finished ? formatKm(route.km, languageTag, distanceUnit) : t('map.soFar', { distance: formatKm(route.km, languageTag, distanceUnit) })}</span>}
+      {!finished && route.remainingKm !== undefined && <span>{t('map.toGo', { distance: formatKm(route.remainingKm, languageTag, distanceUnit) })}</span>}
       {route.countries.length > 1 && <span>{t('map.countries.many', { count: route.countries.length })}</span>}
     </p>}
   </div>;

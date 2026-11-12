@@ -111,6 +111,11 @@ data class RoutePlace(
     }
 }
 
+enum class DistanceUnit(val code: String, val labelKey: String) {
+    Kilometres("km", "settings.kilometers"),
+    Miles("mi", "settings.miles"),
+}
+
 /**
  * A parcel's scans as a journey: its stops, the legs between them and what is left to go.
  * It follows the same rules as the web map (`src/components/map/route.ts`).
@@ -248,17 +253,19 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
          * Kilometres rounded the way a journey is told: "8 km", "450 km", "9,300 km". In the app's languages, as the
          * iPhone writes them (`foundationKilometres`); another locale is the phone's ICU's.
          */
-        fun formattedKilometres(kilometres: Double, locale: Locale): String {
-            val rounded = if (kilometres < 100) {
-                kilometres.rounded()
-            } else if (kilometres < 1_000) {
-                (kilometres / 10).rounded() * 10
+        fun formattedKilometres(kilometres: Double, locale: Locale, unit: DistanceUnit = DistanceUnit.Kilometres): String {
+            val distance = if (unit == DistanceUnit.Miles) kilometres / 1.609344 else kilometres
+            val rounded = if (distance < 100) {
+                distance.rounded()
+            } else if (distance < 1_000) {
+                (distance / 10).rounded() * 10
             } else {
-                (kilometres / 100).rounded() * 100
+                (distance / 100).rounded() * 100
             }
             val language = AppLanguage.entries.firstOrNull { it.locale == locale }
             val value = swiftMax(rounded, 1.0)
-            return if (language != null) foundationKilometres(value, language) else Icu.lengths.kilometres(value, locale)
+            return if (language != null && unit == DistanceUnit.Kilometres) foundationKilometres(value, language)
+            else Icu.lengths.format(value, locale, unit)
         }
     }
 }

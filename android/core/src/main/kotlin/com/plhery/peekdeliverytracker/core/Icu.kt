@@ -304,7 +304,7 @@ private object JdkCurrencies : CurrencyFormatter {
  * numberFormatStyle: .number.precision(.fractionLength(0))).locale(_:))`: ICU's short unit width, in whole numbers.
  */
 fun interface LengthFormatter {
-    fun kilometres(value: Double, locale: Locale): String
+    fun format(value: Double, locale: Locale, distanceUnit: DistanceUnit): String
 }
 
 /** ICU's `NumberFormatter` with the kilometre unit, found by name like `IcuCurrencies`. */
@@ -319,17 +319,19 @@ internal class IcuLengths private constructor(val packageName: String) : LengthF
     private val precision = localized.getMethod("precision", precisionClass)
     private val format = localized.getMethod("format", Double::class.javaPrimitiveType)
     private val kilometre = measureUnitClass.getField("KILOMETER").get(null)
+    private val mile = measureUnitClass.getField("MILE").get(null)
     private val short = unitWidthClass.getField("SHORT").get(null)
     private val whole = precisionClass.getMethod("integer").invoke(null)
     private val grouping = IcuGrouping(packageName)
 
     /** A formatter for each locale met: ICU's are immutable, so threads share them. */
-    private val formatters = ConcurrentHashMap<Locale, Any>()
+    private val formatters = ConcurrentHashMap<Pair<Locale, DistanceUnit>, Any>()
 
-    override fun kilometres(value: Double, locale: Locale): String {
-        val formatter = formatters.getOrPut(locale) {
+    override fun format(value: Double, locale: Locale, distanceUnit: DistanceUnit): String {
+        val formatter = formatters.getOrPut(locale to distanceUnit) {
+            val measure = if (distanceUnit == DistanceUnit.Miles) mile else kilometre
             grouping.apply(
-                precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), kilometre), short), whole),
+                precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), measure), short), whole),
                 locale,
             )
         }
@@ -366,9 +368,9 @@ internal object JdkLengths : LengthFormatter {
         "pl" to Style("\u00A0", groupsFourDigits = false, space = " "),
     )
 
-    override fun kilometres(value: Double, locale: Locale): String {
+    override fun format(value: Double, locale: Locale, distanceUnit: DistanceUnit): String {
         val style = styles[locale.language] ?: styles.getValue("en")
-        if (!value.isFinite()) return (if (value.isNaN()) "NaN" else if (value > 0) "\u221E" else "-\u221E") + style.space + "km"
+        if (!value.isFinite()) return (if (value.isNaN()) "NaN" else if (value > 0) "\u221E" else "-\u221E") + style.space + distanceUnit.code
         // Whole kilometres, halves to even, as ICU rounds.
         val whole = BigDecimal(value).setScale(0, RoundingMode.HALF_EVEN)
         val digits = whole.toBigInteger().abs().toString()
@@ -377,6 +379,6 @@ internal object JdkLengths : LengthFormatter {
         } else {
             digits.reversed().chunked(3).joinToString(style.separator).reversed()
         }
-        return (if (whole.signum() < 0) "-" else "") + grouped + style.space + "km"
+        return (if (whole.signum() < 0) "-" else "") + grouped + style.space + distanceUnit.code
     }
 }

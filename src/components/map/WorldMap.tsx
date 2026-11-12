@@ -1,5 +1,6 @@
 'use client';
 
+import { useI18n, type DistanceUnit } from '../../i18n';
 import { geoCircle, geoDistance, geoGraticule, geoPath } from 'd3-geo';
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type MouseEvent, type PointerEvent } from 'react';
 import { easeInOut, interpolateCamera, projection, subsolarPoint, zoomCamera, type Camera } from './camera';
@@ -70,6 +71,7 @@ export function WorldMap({
   /** A box the card writes over the map, such as a second carrier's mark: the route, the names and Pip keep clear of it. */
   covered?: Rect | null;
 }) {
+  const { distanceUnit } = useI18n();
   const ready = useWorld();
   const root = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -123,9 +125,9 @@ export function WorldMap({
     // his spot beside the parcel; and a route that leaves him no spot at its end is framed with room for him there.
     const standing = pipMood ? { mood: pipMood, ceiling: pipCeiling, floor: pipFloor, inset: pipInset } : null;
     const shown = (camera: Camera, box?: Rect) =>
-      shownOf(layout(framed, camera, size, room, shape, labels, sites, mode, false, languageTag, standing, textWidth, undefined, box));
+      shownOf(layout(framed, camera, size, room, shape, labels, sites, mode, false, languageTag, standing, textWidth, undefined, box, distanceUnit));
     return targetCamera(framed, mode, size, room, shape, written, written || standing ? shown : undefined, !!standing, detail);
-  }, [ready, framed, mode, size, top, right, bottom, left, shape, written, labels, sites, languageTag, pipMood, pipCeiling, pipFloor, pipInset, detail]);
+  }, [ready, framed, mode, size, top, right, bottom, left, shape, written, labels, sites, languageTag, distanceUnit, pipMood, pipCeiling, pipFloor, pipInset, detail]);
 
   // Only a change of view, or recentering, brings a moved map back; a new frame or scan leaves it where it was put.
   useEffect(() => {
@@ -208,7 +210,7 @@ export function WorldMap({
 
   // Pip waits for the camera to land, like the faint names, and then keeps his spot while the map is moved under him.
   const pipNow = !pip || (interactive && moving) ? null : pipSpot ? { ...pip, held: pipSpot } : pip;
-  const overlay = camera && size ? layout(route, camera, size, insets, shape, labels, sites, mode, context, languageTag, pipNow, textWidth, towns, written) : null;
+  const overlay = camera && size ? layout(route, camera, size, insets, shape, labels, sites, mode, context, languageTag, pipNow, textWidth, towns, written, distanceUnit) : null;
   const circle = shape === 'circle' && size ? circleOf(size, insets) : null;
   useEffect(() => {
     shownPip.current = overlay?.pip ?? null;
@@ -325,7 +327,7 @@ export function WorldMap({
   }
 
   return <div ref={root} className={`${styles.worldMap} ${className}`} style={style} data-shape={shape} data-look={look}
-    role="img" aria-label={label ?? describe(route)}
+    role="img" aria-label={label ?? describe(route, languageTag, distanceUnit)}
     data-interactive={interactive || undefined} data-peek={peek || undefined} data-quiet={quiet || undefined} data-scale={route.scale} data-mode={mode}
     onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerEnd} onPointerCancel={onPointerEnd}
     onLostPointerCapture={onLostCapture} onClickCapture={onClickCapture}>
@@ -436,11 +438,11 @@ function Leg({ leg: { d, kind, pen }, late }: { leg: Overlay['legs'][number]; la
     style={pen && { '--pen-from': pen.from.toFixed(4), '--pen-share': pen.share.toFixed(4), '--pen-reach': pen.reach.toFixed(4) } as CSSProperties} />;
 }
 
-function describe(route: Route): string {
+function describe(route: Route, languageTag: string, distanceUnit: DistanceUnit): string {
   if (!route.origin) return 'Map: no places reported yet';
   const end = route.destination ?? route.current!.place;
   if (end === route.origin.place) return `Map: ${end.name}`;
-  return `Map: from ${route.origin.place.name} to ${end.name}${route.km >= 1 ? `, ${formatKm(route.km)} so far` : ''}`;
+  return `Map: from ${route.origin.place.name} to ${end.name}${route.km >= 1 ? `, ${formatKm(route.km, languageTag, distanceUnit)} so far` : ''}`;
 }
 
 /** Where zooming settles a globe that no longer fills the view, and how much view there is. */

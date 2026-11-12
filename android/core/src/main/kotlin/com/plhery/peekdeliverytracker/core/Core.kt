@@ -201,6 +201,7 @@ class Localizer(
     /** Where the copy names the device, a variant such as `ipad` replaces the key when it has one. */
     private val variant: String? = null,
     use24HourTime: Boolean = true,
+    distanceUnit: DistanceUnit = DistanceUnit.Kilometres,
 ) {
     private val clockState = MutableStateFlow(use24HourTime)
     val use24HourTimeFlow: StateFlow<Boolean> = clockState.asStateFlow()
@@ -208,6 +209,13 @@ class Localizer(
     var use24HourTime: Boolean
         get() = clockState.value
         set(value) { clockState.value = value }
+
+    private val distanceState = MutableStateFlow(distanceUnit)
+    val distanceUnitFlow: StateFlow<DistanceUnit> = distanceState.asStateFlow()
+
+    var distanceUnit: DistanceUnit
+        get() = distanceState.value
+        set(value) { distanceState.value = value }
 
     private val languageState = MutableStateFlow(language)
 

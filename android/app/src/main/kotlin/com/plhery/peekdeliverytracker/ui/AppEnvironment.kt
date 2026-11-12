@@ -21,7 +21,14 @@ import java.time.Instant
  * The app's copy, the iPhone's `@EnvironmentObject var localizer`: AppContainer's localizer, with the `android`
  * variant, for everything inside [ProvideLocalizer].
  */
-val LocalLocalizer = staticCompositionLocalOf<Localizer> { error("No Localizer: wrap the content in ProvideLocalizer") }
+object LocalLocalizer {
+    val current: Localizer
+        @Composable get() = LocalFormatting.current.localizer
+}
+
+private data class AppFormatting(val localizer: Localizer, val use24HourTime: Boolean)
+
+private val LocalFormatting = compositionLocalOf<AppFormatting> { error("No Localizer: wrap the content in ProvideLocalizer") }
 
 /** The localizer's language as it changes, so what is written in it is written again. */
 val LocalLanguage = compositionLocalOf { AppLanguage.En }
@@ -30,7 +37,8 @@ val LocalLanguage = compositionLocalOf { AppLanguage.En }
 @Composable
 fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
     val language by localizer.languageFlow.collectAsState()
-    CompositionLocalProvider(LocalLocalizer provides localizer, LocalLanguage provides language) {
+    val use24HourTime by localizer.use24HourTimeFlow.collectAsState()
+    CompositionLocalProvider(LocalFormatting provides AppFormatting(localizer, use24HourTime), LocalLanguage provides language) {
         ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize, language, content)
     }
 }

@@ -1,6 +1,7 @@
 import { useId, useState, type FormEvent } from 'react';
 import { PostcodeCountry } from '../../components/PostcodeCountry';
 import { useI18n, type MessageKey } from '../../i18n';
+import { localizedClockTime } from '../../lib/format';
 import { trackAction } from '../../lib/analytics';
 import { carrierInfo } from '../../lib/carriers';
 import { initialPostcodeCountry, postcodeCountries, sentPostcodeCountry } from '../../lib/postcodeCountry';
@@ -47,7 +48,7 @@ export function PostcodeSheet({ linkId, ownerKey, carrier, trackingNumber, desti
   onAdded: (view: ParcelLinkView) => void;
   onClose: () => void;
 }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const field = useId();
   const name = carrierInfo(carrier, locale).name;
   const [postcode, setPostcode] = useState('');
@@ -59,7 +60,7 @@ export function PostcodeSheet({ linkId, ownerKey, carrier, trackingNumber, desti
     if (reason instanceof ParcelLinkError && reason.kind === 'refused') return t('link.postcode.refused', { carrier: name });
     if (reason instanceof ParcelLinkError && reason.kind === 'burst') {
       const until = new Date(now.getTime() + (reason.retryAfterSeconds ?? 60) * 1_000);
-      return t('link.postcode.tries', { time: until.toLocaleTimeString(languageTag, { hour: '2-digit', minute: '2-digit' }) });
+      return t('link.postcode.tries', { time: localizedClockTime(until, languageTag, use24HourTime) });
     }
     // The carrier could not be asked, or the service is in trouble: either way, later.
     if (reason instanceof ParcelLinkError && reason.kind === 'server') return t('link.postcode.unreachable', { carrier: name });

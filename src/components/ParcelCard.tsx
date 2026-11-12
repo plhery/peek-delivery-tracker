@@ -25,13 +25,13 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   /** Just delivered, and still shown where it stood: the card says so before it leaves for the past deliveries. */
   arrived?: boolean;
 }) {
-  const { locale, languageTag, t } = useI18n();
+  const { locale, languageTag, t, use24HourTime } = useI18n();
   const carrier = shownCarrier(parcel, carrierInfo(displayedCarrierId(parcel), locale), t, locale);
   const deliveryCarrier = deliveringCarrierId(parcel);
   const deliveryLabel = deliveryCarrier ? t(deliveryLineKey(parcel), { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
   const current = currentEvent(parcel.events);
   const estimate = parcelDeliveryEstimate(parcel);
-  const expectedDelivery = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : null;
+  const expectedDelivery = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : null;
   const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
   // A parcel waiting for collection says where.

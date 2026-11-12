@@ -1,5 +1,5 @@
 import { useId, useState, useSyncExternalStore } from 'react';
-import { dayAndTime, localizedCalendarDate, scanDate, timeZoneName } from '../lib/format';
+import { dayAndTime, localizedCalendarDate, localizedClockTime, scanDate, timeZoneName } from '../lib/format';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
@@ -38,7 +38,7 @@ function withRelays(events: TrackingEvent[]): { listed: TrackingEvent[]; relays:
 export function TrackingJournal({ events: allEvents, planned = [], syncing = false, fold = false }: {
   events: TrackingEvent[]; planned?: PlannedEvent[]; syncing?: boolean; fold?: boolean;
 }) {
-  const { languageTag, t } = useI18n();
+  const { languageTag, t, use24HourTime } = useI18n();
   const [oldestShown, setOldestShown] = useState(false);
   const { listed: events, relays } = withRelays(allEvents);
   const current = currentEvent(events);
@@ -83,7 +83,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
       return <li key={event.id} className={isCurrent ? 'tracking-journal__current' : undefined} aria-current={isCurrent ? 'step' : undefined}>
         {/* A scan dated by its day alone has no time to show. */}
         {when && !when.timed ? <time dateTime={event.day} />
-          : <time dateTime={when ? event.occurredAt : undefined}>{when ? new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(when.date) : '—'}</time>}
+          : <time dateTime={when ? event.occurredAt : undefined}>{when ? localizedClockTime(when.date, languageTag, use24HourTime) : '—'}</time>}
         <div><p>{syncing && isCurrent && event.stage === 'pending' ? t('timeline.syncing') : wording(event)}</p>
           {event.location?.trim() && <EventPlace location={event.location} placed={event.place} />}
           {relayed.map(line => <p key={line} className="tracking-journal__relay">{line}</p>)}
@@ -92,7 +92,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
     })}
   </ol>;
 
-  return <details className="tracking-journal" open>
+  return <details className={use24HourTime ? 'tracking-journal' : 'tracking-journal tracking-journal--am-pm'} open>
     <summary><span>{t('timeline.label')}</span><span className="tracking-journal__count">{updates(events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg></span></summary>
     {ahead.length > 0 && <PlannedSteps steps={ahead} />}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
@@ -141,7 +141,7 @@ export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day'>, now
  * dashed mark instead of a time, with its planned day. They are no scans and count as no update.
  */
 function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
-  const { languageTag, t } = useI18n();
+  const { languageTag, t, use24HourTime } = useI18n();
   const heading = useId();
   const now = new Date();
   const offset = (days: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + days).toDateString();
@@ -151,7 +151,7 @@ function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
     const { date, timed } = scan;
     const day = date.toDateString() === offset(0) ? t('time.today') : date.toDateString() === offset(1) ? t('time.tomorrow')
       : date.toDateString() === offset(-1) ? t('time.yesterday') : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
-    return timed ? dayAndTime(day, new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(date), languageTag) : day;
+    return timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day;
   };
   const newestFirst = [...steps].sort((a, b) => (scanDate(b)?.date.getTime() ?? 0) - (scanDate(a)?.date.getTime() ?? 0));
   return <section className="tracking-journal__planned" aria-labelledby={heading}>

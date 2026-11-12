@@ -209,14 +209,14 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   view: ParcelLinkView;
   onHome: () => void;
 }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const session = usePeekSession();
   const leave = useContext(Leave);
   const { trouble, checking, live, refreshing, seenAt, news, unseen, previousEstimate, refresh, dismissNews, adopt } = state;
   const { parcel, numberHint, link } = view;
   const now = useNow();
   const wide = useWideLayout();
-  const wording = { t, languageTag, now };
+  const wording = { t, languageTag, now, use24HourTime };
 
   const stage = parcelStage(parcel);
   const delivered = stage === 'delivered';
@@ -413,7 +413,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   }, [linkId, final]);
   const estimate = parcelDeliveryEstimate(parcel, now);
   const slot = deliverySlot(parcel, now);
-  const calendarWindow = slot && estimate ? capitalized(localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now), languageTag) : null;
+  const calendarWindow = slot && estimate ? capitalized(localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now, use24HourTime), languageTag) : null;
   function calendarFile(): boolean {
     return !!slot && downloadCalendar(deliveryCalendar({
       slot, title: name ?? headline, description: t('link.preview.follow'), url: address, uid: `${linkId}@peek`,

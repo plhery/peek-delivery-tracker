@@ -31,6 +31,9 @@
 .refined-settings .language-control--account { padding: 5px 13px; min-height: 54px; border-top: 1px solid var(--line); }
 .refined-settings .language-control--account > span { font-weight: 400; }
 .refined-settings .language-control--account select { background: transparent; color: var(--ink-soft); padding-right: 0; font-size: 12px; max-width: 60%; }
+.refined-settings .settings-box > .peeks-switch { border-top: 1px solid var(--line); border-radius: 0; }
+.refined-settings .settings-box > .peeks-switch > label { min-height: 54px; padding: 9px 14px; }
+.refined-settings .settings-box > .peeks-switch .peeks-switch__text strong { font-weight: 400; }
 .settings-back { display: flex; gap: 6px; align-items: center; background: transparent; color: var(--ink-soft); padding: 0; min-height: 44px; font-size: 12px; }
 .settings-back > span { font-size: 23px; font-weight: 300; }
 .settings-description { font-size: 12px; color: var(--ink-soft); margin-bottom: 24px; overflow-wrap: anywhere; }

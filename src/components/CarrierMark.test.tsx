@@ -807,6 +807,8 @@ describe('carrier mark', () => {
     'intime-hr',
     'webrinq',
     'jiayang',
+    'msg-post',
+    'u-post',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

@@ -795,7 +795,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'gordom-logistika'
   | 'intime-hr'
   | 'webrinq'
-  | 'jiayang';
+  | 'jiayang'
+  | 'msg-post'
+  | 'u-post';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

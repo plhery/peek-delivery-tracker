@@ -912,6 +912,8 @@ describe('carrier brand', () => {
       'intime-hr',
       'webrinq',
       'jiayang',
+      'msg-post',
+      'u-post',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

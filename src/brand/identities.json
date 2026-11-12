@@ -2769,6 +2769,9 @@
   "mrw": {
     "decal": "mrw"
   },
+  "msg-post": {
+    "decal": "msg-post"
+  },
   "mte-xpress": {
     "decal": "mte-xpress"
   },
@@ -4259,6 +4262,9 @@
   },
   "u-envios": {
     "decal": "u-envios"
+  },
+  "u-post": {
+    "decal": "u-post"
   },
   "ubi-smart-parcel": {
     "decal": "ubi-smart-parcel"

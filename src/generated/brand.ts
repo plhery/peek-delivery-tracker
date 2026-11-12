@@ -744,6 +744,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "better-trucks": "better-trucks",
   "bex-express": "bex-express",
   "bfe-express": "bfe-express",
+  "bh-posta": "bh-posta",
   "big-smart": "big-smart",
   "bigfoot-express": "bigfoot-express",
   "bigpost": "bigpost",
@@ -38457,6 +38458,48 @@ export const CARRIER_TRUCK: TruckGeometry = {
         "cy": 10.19,
         "r": 0.5,
         "fill": "#26272b"
+      }
+    ],
+    "bh-posta": [
+      {
+        "type": "polygon",
+        "d": "M11.26 4.62L2.9 4.62L11.04 6.01Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.83 7.41L11.05 6.01L4.07 6.01Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.6 8.8L10.82 7.41L5.25 7.41Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.07 7.96L12.14 7.96L11.44 12.28L13.76 12.28L14.09 12.12L14.4 11.86L14.63 11.51L14.74 11.16L14.79 10.9L14.79 10.53L14.65 10.14L14.45 9.9L14.6 9.69L14.7 9.36L14.74 9.13L14.74 8.78L14.61 8.42L14.37 8.13Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.89 10.68L13.89 10.83L13.87 10.95L13.82 11.12L13.73 11.26L13.6 11.37L13.46 11.43L13.29 11.46L12.48 11.46L12.64 10.46L13.59 10.46L13.73 10.48L13.81 10.53L13.86 10.59Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.71 9.4L13.61 9.49L13.49 9.54L13.35 9.57L12.78 9.57L12.91 8.78L13.62 8.78L13.73 8.8L13.79 8.83L13.82 8.87L13.84 8.93L13.84 9.05L13.83 9.15L13.78 9.3Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.41 12.28L19.1 7.96L18.2 7.96L17.92 9.67L16.61 9.67L16.88 7.96L15.98 7.96L15.29 12.28L16.19 12.28L16.47 10.57L17.78 10.57L17.5 12.28Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.94 12.98L6.42 8.8L10.6 8.8Z",
+        "fill": "#ffcb04"
       }
     ]
   }

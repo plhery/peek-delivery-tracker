@@ -914,6 +914,7 @@ describe('carrier brand', () => {
       'jiayang',
       'msg-post',
       'u-post',
+      'bh-posta',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

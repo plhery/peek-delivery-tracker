@@ -130,7 +130,7 @@ class SyncLineTest {
         val parcel = parcel()
         assertEquals(
             listOf(
-                "Next check after Oct 30, 2026 at 3:05 PM",
+                "Next check after Oct 30, 2026 at 15:05",
                 "Last checked: ${localizer.relativeTime(parcel.lastSyncedAt!!, CAPTURED)}",
                 "Last shipment update: ${localizer.relativeTime(parcel.currentEvent!!, CAPTURED)}",
             ),

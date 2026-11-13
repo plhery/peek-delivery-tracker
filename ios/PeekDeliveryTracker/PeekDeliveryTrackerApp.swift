@@ -92,6 +92,7 @@ struct PeekDeliveryTrackerApp: App {
             .environmentObject(friendsActivity)
             .environmentObject(links)
             .environment(\.locale, localizer.language.locale)
+            .environment(\.distanceUnit, localizer.distanceUnit)
             .background { AppWindowAppearance(appearance: appearance) }
             .tint(Brand.accent)
     }
@@ -268,6 +269,12 @@ struct RootView: View {
         }
         .task(id: "\(sessionIdentity)-\(localizer.language.rawValue)") {
             await session.saveEmailLanguage(localizer.language)
+        }
+        .onChange(of: localizer.use24HourTime) { _, _ in
+            parcels.refreshDeliverySurfaces()
+        }
+        .onChange(of: localizer.distanceUnit) { _, _ in
+            parcels.refreshDeliverySurfaces()
         }
         .onChange(of: localizer.language) { _, language in
             parcels.demoLanguageChanged()

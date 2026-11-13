@@ -30,6 +30,10 @@ export {
 export type { MessageKey, Messages, Translate };
 
 const STORAGE_KEY = 'deliveryTrackerLocale';
+const CLOCK_STORAGE_KEY = 'deliveryTrackerUse24HourTime';
+const DISTANCE_STORAGE_KEY = 'deliveryTrackerDistanceUnit';
+
+export type DistanceUnit = 'km' | 'mi';
 
 import en from '../shared/locales/en.json';
 
@@ -60,6 +64,10 @@ interface I18nValue {
   locale: Locale;
   languageTag: string;
   setLocale: (locale: Locale) => void;
+  use24HourTime: boolean;
+  setUse24HourTime: (enabled: boolean) => void;
+  distanceUnit: DistanceUnit;
+  setDistanceUnit: (unit: DistanceUnit) => void;
   t: Translate;
 }
 
@@ -77,6 +85,10 @@ const defaultValue: I18nValue = {
   locale: 'en',
   languageTag: 'en-CH',
   setLocale: () => undefined,
+  use24HourTime: true,
+  setUse24HourTime: () => undefined,
+  distanceUnit: 'km',
+  setDistanceUnit: () => undefined,
   t: (key, variables) => translate('en', key, variables),
 };
 
@@ -121,6 +133,39 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     return messages ? { locale, messages } : { locale: 'en' as Locale, messages: en };
   });
   const requested = useRef(language.locale);
+  const [use24HourTime, setClock] = useState(true);
+  const [distanceUnit, setDistance] = useState<DistanceUnit>('km');
+
+  useLayoutEffect(() => {
+    const readClock = () => {
+      try { setClock(window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false'); }
+      catch { /* Keep the current clock when storage is unavailable. */ }
+    };
+    const readDistance = () => {
+      try { setDistance(window.localStorage.getItem(DISTANCE_STORAGE_KEY) === 'mi' ? 'mi' : 'km'); }
+      catch { /* Keep the current units when storage is unavailable. */ }
+    };
+    const syncPreferences = (event: StorageEvent) => {
+      if (event.key === CLOCK_STORAGE_KEY || event.key === null) readClock();
+      if (event.key === DISTANCE_STORAGE_KEY || event.key === null) readDistance();
+    };
+    readClock();
+    readDistance();
+    window.addEventListener('storage', syncPreferences);
+    return () => window.removeEventListener('storage', syncPreferences);
+  }, []);
+
+  const setUse24HourTime = useCallback((enabled: boolean) => {
+    setClock(enabled);
+    try { window.localStorage.setItem(CLOCK_STORAGE_KEY, String(enabled)); }
+    catch { /* Keep the choice for this session. */ }
+  }, []);
+
+  const setDistanceUnit = useCallback((unit: DistanceUnit) => {
+    setDistance(unit);
+    try { window.localStorage.setItem(DISTANCE_STORAGE_KEY, unit); }
+    catch { /* Keep the choice for this session. */ }
+  }, []);
 
   const show = useCallback((next: Locale) => {
     requested.current = next;
@@ -175,12 +220,17 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     show(next);
   }, [show]);
 
+  const t = useCallback<Translate>((key, variables) => translate(language.locale, key, variables, language.messages), [language]);
   const value = useMemo<I18nValue>(() => ({
     locale: language.locale,
     languageTag: languageTags[language.locale],
     setLocale: chooseLocale,
-    t: (key, variables) => translate(language.locale, key, variables, language.messages),
-  }), [language, chooseLocale]);
+    use24HourTime,
+    setUse24HourTime,
+    distanceUnit,
+    setDistanceUnit,
+    t,
+  }), [language, chooseLocale, use24HourTime, setUse24HourTime, distanceUnit, setDistanceUnit, t]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

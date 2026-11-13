@@ -21,9 +21,9 @@ export function SharePreview({ parcel, name, showNumber, gift }: {
   showNumber: boolean;
   gift: boolean;
 }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const caption = useId();
-  const wording = { t, languageTag };
+  const wording = { t, languageTag, use24HourTime };
   const delivered = parcelStage(parcel) === 'delivered';
   const wrapped = gift && !delivered;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);

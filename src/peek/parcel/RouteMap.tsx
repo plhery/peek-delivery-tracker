@@ -38,7 +38,7 @@ export function RouteMap({ route, parcel, stage, shape, pip, covered, room = 0, 
   room?: number;
   onOpen: () => void;
 }) {
-  const { t, languageTag } = useI18n();
+  const { t, languageTag, distanceUnit } = useI18n();
   const [time] = useState(() => new Date());
   const current = stage ?? undefined;
   const finished = !!stage && isFinal(stage);
@@ -52,7 +52,7 @@ export function RouteMap({ route, parcel, stage, shape, pip, covered, room = 0, 
     </div>
     <button type="button" className="peekp-map__open" disabled={!route} onClick={onOpen} aria-label={t('map.open')} />
     {shape === 'tile' && route && route.stops.length > 0 && <p className="peekp-map__facts">
-      {route.km >= 1 && <span>{finished ? formatKm(route.km, languageTag) : t('map.soFar', { distance: formatKm(route.km, languageTag) })}</span>}
+      {route.km >= 1 && <span>{finished ? formatKm(route.km, languageTag, distanceUnit) : t('map.soFar', { distance: formatKm(route.km, languageTag, distanceUnit) })}</span>}
       {route.countries.length > 1 && <span>{t('map.countries.many', { count: route.countries.length })}</span>}
       {duration && <span>{duration}</span>}
     </p>}

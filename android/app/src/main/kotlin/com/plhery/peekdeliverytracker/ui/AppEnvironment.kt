@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
@@ -21,16 +22,31 @@ import java.time.Instant
  * The app's copy, the iPhone's `@EnvironmentObject var localizer`: AppContainer's localizer, with the `android`
  * variant, for everything inside [ProvideLocalizer].
  */
-val LocalLocalizer = staticCompositionLocalOf<Localizer> { error("No Localizer: wrap the content in ProvideLocalizer") }
+object LocalLocalizer {
+    val current: Localizer
+        @Composable get() = LocalFormatting.current.localizer
+}
+
+private data class AppFormatting(val localizer: Localizer, val use24HourTime: Boolean)
+
+private val LocalFormatting = compositionLocalOf<AppFormatting> { error("No Localizer: wrap the content in ProvideLocalizer") }
 
 /** The localizer's language as it changes, so what is written in it is written again. */
 val LocalLanguage = compositionLocalOf { AppLanguage.En }
+
+val LocalDistanceUnit = compositionLocalOf { DistanceUnit.Kilometres }
 
 /** `localizer` and its language for `content`, with the fonts spaced for the language ([PeekTypography]). */
 @Composable
 fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
     val language by localizer.languageFlow.collectAsState()
-    CompositionLocalProvider(LocalLocalizer provides localizer, LocalLanguage provides language) {
+    val use24HourTime by localizer.use24HourTimeFlow.collectAsState()
+    val distanceUnit by localizer.distanceUnitFlow.collectAsState()
+    CompositionLocalProvider(
+        LocalFormatting provides AppFormatting(localizer, use24HourTime),
+        LocalLanguage provides language,
+        LocalDistanceUnit provides distanceUnit,
+    ) {
         ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize, language, content)
     }
 }

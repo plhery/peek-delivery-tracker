@@ -394,6 +394,14 @@ private fun SettingsRootPage(
                         }
                         SettingsDivider()
                         SettingsLanguageRow()
+                        SettingsDivider()
+                        val localizer = LocalLocalizer.current
+                        SettingsToggleRow(
+                            localizer.use24HourTime, { localizer.use24HourTime = it },
+                            localized("settings.use24HourTime"), SETTINGS_CLOCK,
+                        )
+                        SettingsDivider()
+                        SettingsDistanceRow()
                     }
                     SettingsGroup {
                         Box(Modifier.accessibilityFocus(rowFocus)) {
@@ -763,6 +771,8 @@ internal const val SETTINGS_CLOSE = "$SETTINGS_SHEET.close"
 internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
+internal const val SETTINGS_DISTANCE = "$SETTINGS_SHEET.distance"
+internal const val SETTINGS_CLOCK = "$SETTINGS_SHEET.clock"
 internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"

@@ -32,6 +32,7 @@ import com.plhery.peekdeliverytracker.core.DeviceParcelFiles
 import com.plhery.peekdeliverytracker.core.DeviceParcels
 import com.plhery.peekdeliverytracker.core.HttpTransport
 import com.plhery.peekdeliverytracker.core.LiveActivityRevocations
+import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeVerification
 import com.plhery.peekdeliverytracker.core.ParcelLinkReader
@@ -152,7 +153,10 @@ class AppContainer(
      * change ([deviceLanguagesChanged]). Where the copy names the iPhone, its `.android` variant names this device and
      * Android's settings, as an iPad reads `.ipad`.
      */
-    val localizer = Localizer(deviceLanguage(), variant = "android")
+    val localizer = Localizer(
+        deviceLanguage(), variant = "android", use24HourTime = !defaults.bool(USE_12_HOUR_TIME),
+        distanceUnit = if (defaults.string(DISTANCE_UNIT) == DistanceUnit.Miles.code) DistanceUnit.Miles else DistanceUnit.Kilometres,
+    )
 
     /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
     private var followed: AppLanguage? = null
@@ -438,6 +442,23 @@ class AppContainer(
             combine(identity, localizer.languageFlow) { _, language -> language }.collectLatest { session.saveEmailLanguage(it) }
         }
         scope.launch { localizer.languageFlow.drop(1).collect(::languageChanged) }
+        scope.launch {
+            localizer.use24HourTimeFlow.collect { enabled ->
+                if (defaults.bool(USE_12_HOUR_TIME) == enabled) {
+                    defaults.set(!enabled, forKey = USE_12_HOUR_TIME)
+                    parcels.refreshDeliverySurfaces()
+                }
+            }
+        }
+        scope.launch {
+            localizer.distanceUnitFlow.collect { unit ->
+                val saved = defaults.string(DISTANCE_UNIT) ?: DistanceUnit.Kilometres.code
+                if (saved != unit.code) {
+                    defaults.set(unit.code, forKey = DISTANCE_UNIT)
+                    parcels.refreshDeliverySurfaces()
+                }
+            }
+        }
         context.registerComponentCallbacks(object : ComponentCallbacks {
             override fun onConfigurationChanged(newConfig: Configuration) = deviceLanguagesChanged()
 
@@ -574,6 +595,8 @@ class AppContainer(
         private const val DEBUG_PARCEL_FEEDBACK_PARCEL = "sdt.debug.parcelFeedback.parcel"
         private const val DEBUG_PARCEL_SHARE = "sdt.debug.parcelShare"
         private const val DEBUG_REVIEW_DUE = "sdt.debug.reviewDue"
+        private const val DISTANCE_UNIT = "sdt.native.distanceUnit"
+        private const val USE_12_HOUR_TIME = "sdt.native.use12HourTime"
         private const val DEBUG_STORE_SCREENSHOTS = "sdt.debug.storeScreenshots"
 
         /** A container made on the IO dispatcher, where its stores first read the Keystore and the disk. */

@@ -1226,10 +1226,11 @@ final class ParcelStore: ObservableObject {
             return item
         }
         if !missing.isEmpty, widgetPicturesTask == nil {
+            let distanceUnit = localizer.distanceUnit
             widgetPicturesTask = Task { [weak self, localizer] in
                 let atlas = await WorldAtlas.bundled.value
                 for (parcel, card) in missing {
-                    guard await DeliveryWidgetPictures.draw(parcel, as: card, atlas: atlas, localizer: localizer, in: folder) else {
+                    guard await DeliveryWidgetPictures.draw(parcel, as: card, atlas: atlas, localizer: localizer, in: folder, distanceUnit: distanceUnit) else {
                         self?.widgetPicturesFailed.insert(card.pictures)
                         continue
                     }

@@ -198,8 +198,8 @@ class ParcelRouteTests {
 
     @Test
     fun distancesAreRoundedTheWayAJourneyIsTold() {
-        fun text(kilometres: Double, locale: String = "en"): String =
-            ParcelRoute.formattedKilometres(kilometres, Locale.forLanguageTag(locale))
+        fun text(kilometres: Double, locale: String = "en", unit: DistanceUnit = DistanceUnit.Kilometres): String =
+            ParcelRoute.formattedKilometres(kilometres, Locale.forLanguageTag(locale), unit)
                 .replace("\u00A0", " ")
                 .replace("\u202F", " ")
         assertEquals("1 km", text(0.2))
@@ -207,6 +207,8 @@ class ParcelRouteTests {
         assertEquals("450 km", text(447.0))
         assertEquals("9,300 km", text(9_321.0))
         assertEquals("9.300 km", text(9_321.0, "de"))
+        assertEquals("1 mi", text(0.2, unit = DistanceUnit.Miles))
+        assertEquals("280 mi", text(447.0, unit = DistanceUnit.Miles))
     }
 
     /**
@@ -227,7 +229,7 @@ class ParcelRouteTests {
         for (formatter in listOf(Icu.lengths, JdkLengths)) {
             for ((language, texts) in written) {
                 val locale = Locale.forLanguageTag(language)
-                assertEquals(texts, listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { formatter.kilometres(it, locale) })
+                assertEquals(texts, listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { formatter.format(it, locale, DistanceUnit.Kilometres) })
             }
         }
         // The plain JVM's stand-in knows only the first seven; the app writes these from its own table.

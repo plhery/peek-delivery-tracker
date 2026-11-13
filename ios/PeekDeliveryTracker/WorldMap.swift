@@ -625,7 +625,7 @@ struct MapOverlay {
     init(route: ParcelRoute, camera: GlobeCamera, size: CGSize, insets: EdgeInsets, labels labelSet: MapLabels,
          sites: Bool = false, mode: ParcelRoute.Mode, context: Bool, atlas: WorldAtlas, locale: Locale,
          countryName: (String) -> String, pip request: PipRequest? = nil, towns: [DetailTile.Town]? = nil, covered: CGRect? = nil,
-         buttons: CGRect? = nil) {
+         buttons: CGRect? = nil, distanceUnit: DistanceUnit = .kilometres) {
         let projection = GlobeProjection(camera)
         let visible = { (point: GeoPoint) in projection.sees(point) }
         let at = { (point: GeoPoint) in projection.project(point) }
@@ -813,7 +813,7 @@ struct MapOverlay {
                     dy > 0 ? (size.height - insets.bottom - margin - viewCenter.y) / dy
                         : dy < 0 ? (insets.top + margin - viewCenter.y) / dy : .infinity
                 )
-                let detail = ParcelRoute.formattedKilometres(current.place.point.kilometres(to: place.point), locale: locale)
+                let detail = ParcelRoute.formattedKilometres(current.place.point.kilometres(to: place.point), locale: locale, unit: distanceUnit)
                 let name = place.name(sites: sites)
                 let width = Fonts.width(name, Fonts.pointerName) + Fonts.width(" " + detail, Fonts.pointerDetail) + 34
                 let half = width / 2
@@ -1319,6 +1319,7 @@ struct WorldMapView: View {
     var onFreeChange: (Bool) -> Void = { _ in }
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.distanceUnit) private var distanceUnit
     @State private var camera: GlobeCamera?
     @State private var flight: Flight?
     @State private var gestureStart: GlobeCamera?
@@ -1350,7 +1351,7 @@ struct WorldMapView: View {
                 let overlay = MapOverlay(
                     route: route, camera: shown, size: size, insets: insets, labels: labels, sites: sites, mode: mode, context: showsContext,
                     atlas: atlas, locale: language.locale, countryName: { TrackingLocation.countryName($0, language: language) },
-                    pip: pipRequest(moving: moving), towns: close.towns, covered: covered, buttons: buttons
+                    pip: pipRequest(moving: moving), towns: close.towns, covered: covered, buttons: buttons, distanceUnit: distanceUnit
                 )
                 ZStack(alignment: .topLeading) {
                     ZStack(alignment: .topLeading) {
@@ -1395,7 +1396,7 @@ struct WorldMapView: View {
         // end is framed with room for him there.
         let shown = { (camera: GlobeCamera, box: CGRect?) in
             MapOverlay(route: route, camera: camera, size: size, insets: insets, labels: labels, sites: sites, mode: mode, context: false,
-                       atlas: atlas, locale: language.locale, countryName: { $0 }, pip: standing, covered: box, buttons: buttons).shown
+                       atlas: atlas, locale: language.locale, countryName: { $0 }, pip: standing, covered: box, buttons: buttons, distanceUnit: distanceUnit).shown
         }
         return .framing(route, mode: mode, in: size, insets: insets, covered: covered, shown: shown, pip: standing != nil, closeUps: detail != nil)
     }
@@ -1421,7 +1422,7 @@ struct WorldMapView: View {
         let overlay = MapOverlay(
             route: route, camera: camera, size: size, insets: insets, labels: labels, sites: sites, mode: mode, context: showsContext,
             atlas: atlas, locale: language.locale, countryName: { TrackingLocation.countryName($0, language: language) }, pip: pip,
-            covered: covered, buttons: buttons
+            covered: covered, buttons: buttons, distanceUnit: distanceUnit
         )
         return overlay.pip?.spot
     }

@@ -263,7 +263,7 @@ struct ParcelMapScreen: View {
     }
 
     private func kilometres(_ value: Double) -> String {
-        ParcelRoute.formattedKilometres(value, locale: localizer.language.locale)
+        ParcelRoute.formattedKilometres(value, locale: localizer.language.locale, unit: localizer.distanceUnit)
     }
 
     private func endpoint(_ title: String, _ place: RoutePlace, alignment: HorizontalAlignment) -> some View {

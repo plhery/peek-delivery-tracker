@@ -261,30 +261,34 @@ class CoreParityTests {
         }
     }
 
-    /** The parcel page's next check: `Date.FormatStyle(date: .abbreviated, time: .shortened)` in each language, in the phone's zone. */
     @Test
-    fun datesWithTheirTimeAreWrittenAsEachLanguagesFormatStyleWritesThem() {
+    fun nextCheckKeepsLocalizedDatesAndUsesTheSelectedClockFormat() {
         fun at(month: Int, day: Int, hour: Int, minute: Int): Instant =
             LocalDateTime.of(2026, month, day, hour, minute).atZone(ZoneId.systemDefault()).toInstant()
         val expected = mapOf(
             at(10, 30, 15, 5) to listOf(
-                "Oct 30, 2026 at 3:05\u202FPM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", "30 ott 2026, 15:05", "30 oct 2026, 15:05",
+                "Oct 30, 2026 at 15:05", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", "30 ott 2026, 15:05", "30 oct 2026, 15:05",
                 "30/10/2026, 15:05", "30 de out. de 2026, 15:05", "30 paź 2026 o 15:05", "30 окт. 2026\u202Fг., 15:05",
                 "2026年10月30日 15:05",
             ),
             at(5, 3, 9, 45) to listOf(
-                "May 3, 2026 at 9:45\u202FAM", "3. Mai 2026, 9:45", "3 mai 2026 à 9:45", "3 mag 2026, 9:45", "3 may 2026, 9:45",
-                "3/05/2026, 9:45", "3 de mai. de 2026, 9:45", "3 maj 2026 o 9:45", "3 мая 2026\u202Fг., 9:45", "2026年5月3日 9:45",
+                "May 3, 2026 at 09:45", "3. Mai 2026, 09:45", "3 mai 2026 à 09:45", "3 mag 2026, 09:45", "3 may 2026, 09:45",
+                "3/05/2026, 09:45", "3 de mai. de 2026, 09:45", "3 maj 2026 o 09:45", "3 мая 2026\u202Fг., 09:45", "2026年5月3日 09:45",
             ),
             at(9, 1, 0, 0) to listOf(
-                "Sep 1, 2026 at 12:00\u202FAM", "1. Sept. 2026, 0:00", "1 sept. 2026 à 0:00", "1 set 2026, 0:00", "1 sept 2026, 0:00",
-                "1/09/2026, 0:00", "1 de set. de 2026, 0:00", "1 wrz 2026 o 0:00", "1 сент. 2026\u202Fг., 0:00", "2026年9月1日 0:00",
+                "Sep 1, 2026 at 00:00", "1. Sept. 2026, 00:00", "1 sept. 2026 à 00:00", "1 set 2026, 00:00", "1 sept 2026, 00:00",
+                "1/09/2026, 00:00", "1 de set. de 2026, 00:00", "1 wrz 2026 o 00:00", "1 сент. 2026\u202Fг., 00:00", "2026年9月1日 00:00",
             ),
             at(3, 1, 12, 30) to listOf(
-                "Mar 1, 2026 at 12:30\u202FPM", "1. März 2026, 12:30", "1 mars 2026 à 12:30", "1 mar 2026, 12:30", "1 mar 2026, 12:30",
+                "Mar 1, 2026 at 12:30", "1. März 2026, 12:30", "1 mars 2026 à 12:30", "1 mar 2026, 12:30", "1 mar 2026, 12:30",
                 "1/03/2026, 12:30", "1 de mar. de 2026, 12:30", "1 mar 2026 o 12:30", "1 марта 2026\u202Fг., 12:30", "2026年3月1日 12:30",
             ),
         )
+        val english = Localizer(AppLanguage.En, use24HourTime = false)
+        assertEquals("Oct 30, 2026 at 3:05 PM", english.abbreviatedDateTime(at(10, 30, 15, 5)))
+        assertEquals("12:00 AM", english.clockTime(at(9, 1, 0, 0)))
+        assertEquals("12:30 PM", english.clockTime(at(3, 1, 12, 30)))
+        assertEquals("today, 11:45 AM–12:30 PM", english.expectedDelivery("2026-03-01 11:45–12:30", at(3, 1, 8, 0)))
         for ((date, texts) in expected) {
             assertEquals("$date", texts, AppLanguage.entries.map { Localizer(it).abbreviatedDateTime(date) })
         }

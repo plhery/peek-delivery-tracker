@@ -32,8 +32,8 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
  * `syncStatus` (B-S08): when the carrier was last asked and last said something, as the web says them, 3 apart, in
- * caption medium in the opaque secondary grey: when the next check comes, in caption regular, as the iPhone's format
- * style writes a date with its time ([com.plhery.peekdeliverytracker.core.Localizer.abbreviatedDateTime]), while the
+ * caption medium in the opaque secondary grey: when the next check comes, in caption regular, with the selected
+ * clock format, while the
  * parcel isn't archived; how long ago the carrier was last asked; and how long ago its latest scan was, but a pending
  * one. The times are those of when the page was drawn, as the iPhone's are. Then, 7 after them and centred on them, the
  * refresh where `onRefresh` is given ([RefreshButton]), waiting while `working`. The refresh keeps its 26 and the lines

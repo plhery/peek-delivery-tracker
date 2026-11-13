@@ -3956,6 +3956,9 @@
   "sxjd-freight": {
     "decal": "sxjd-freight"
   },
+  "sxw-express": {
+    "decal": "sxw-express"
+  },
   "syd": {
     "decal": "syd"
   },
@@ -4615,6 +4618,9 @@
   },
   "xpressen": {
     "decal": "xpressen"
+  },
+  "xuchuan-logistics": {
+    "decal": "xuchuan-logistics"
   },
   "xyl": {
     "decal": "xyl",

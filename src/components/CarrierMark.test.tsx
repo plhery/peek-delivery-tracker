@@ -814,6 +814,8 @@ describe('carrier mark', () => {
     'cvc',
     'poste-srpske',
     'trustexpress',
+    'sxw-express',
+    'xuchuan-logistics',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

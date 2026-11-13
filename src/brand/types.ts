@@ -802,7 +802,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'transpress'
   | 'cvc'
   | 'poste-srpske'
-  | 'trustexpress';
+  | 'trustexpress'
+  | 'sxw-express'
+  | 'xuchuan-logistics';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

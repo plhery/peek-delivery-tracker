@@ -165,6 +165,9 @@ struct FirstOpenView: View {
     /// Where an iPad's question ends and its parcel's name starts: the route keeps between the two.
     @State private var posterTop: CGFloat = 0
     @State private var posterFloor: CGFloat = 0
+    /// How tall a phone's masthead and the parcel's name under its map stand: both grow with the text size.
+    @State private var heroMasthead: CGFloat = 0
+    @State private var heroCaption: CGFloat = 0
     @Namespace private var transition
     @ObservedObject private var catalog = CarrierCatalog.shared
 
@@ -239,39 +242,56 @@ struct FirstOpenView: View {
 
     // MARK: - The sample parcel on its map
 
-    /// `beside` stands it as a page beside the question, its trailing corners rounded, over the whole height.
-    private func hero(height: CGFloat, top: CGFloat, beside: Bool = false) -> some View {
-        let parcel = FirstOpenJourney.parcel(step: step, name: FirstOpenJourney.name(localizer))
+    /// `beside` stands it as a page beside the question, its trailing corners rounded, over the whole height. On a
+    /// phone it grows past `height` when its words need more room; beside a fold, where the fold sets it, it doesn't.
+    private func hero(height fits: CGFloat, top: CGFloat, beside: Bool = false, grows: Bool = true) -> some View {
+        let layout = FirstOpenHeroLayout(fits: fits, top: top, masthead: heroMasthead, caption: heroCaption, grows: grows)
+        let height = layout.height
+        let name = FirstOpenJourney.name(localizer)
+        let parcel = FirstOpenJourney.parcel(step: step, name: name)
         let corners = beside
             ? UnevenRoundedRectangle(bottomTrailingRadius: 38, topTrailingRadius: 38, style: .continuous)
             : UnevenRoundedRectangle(bottomLeadingRadius: 38, bottomTrailingRadius: 38, style: .continuous)
         return Button(action: openSample) {
             ZStack(alignment: .bottom) {
                 identity.surface
-                if let atlas {
+                // The map waits for the words to be measured, so it opens framed where it stays rather than flying there,
+                // and opens afresh when they change, never left framed for a size the screen only passed through.
+                if let atlas, heroCaption > 0 {
                     RouteEngraving(
                         atlas: atlas, route: ParcelRoute(parcel: parcel, atlas: atlas, language: localizer.language),
                         stage: parcel.currentStage, identity: identity, peek: false,
-                        insets: EdgeInsets(top: top + 112, leading: 88, bottom: 128, trailing: 54), floor: height - 118
+                        insets: EdgeInsets(top: layout.routeTop, leading: 88, bottom: layout.routeBottom, trailing: 54),
+                        floor: layout.floor
                     )
+                    .id(layout)
                     .transition(.opacity)
                 }
                 HStack(alignment: .bottom, spacing: 16) {
                     VStack(alignment: .leading, spacing: 9) {
                         CarrierFleetMark(identity: identity)
                         Text(parcel.label).font(.title2.weight(.semibold)).foregroundStyle(Color.primary)
-                        Text(status(parcel))
-                            .font(.caption)
-                            .foregroundStyle(identity.ink)
-                            .id(step)
-                            .transition(.opacity)
+                        // Each scan's status takes as many lines as the longest, so the picture holds still as they come.
+                        ZStack(alignment: .topLeading) {
+                            ForEach(1...FirstOpenJourney.steps, id: \.self) { step in
+                                Text(status(FirstOpenJourney.parcel(step: step, name: name))).hidden()
+                            }
+                            Text(status(parcel))
+                                .foregroundStyle(identity.ink)
+                                .id(step)
+                                .transition(.opacity)
+                        }
+                        .font(.caption)
                     }
                     Spacer(minLength: 0)
                     DeliveryPostageStamp(parcel: parcel, identity: identity, width: 50, appeared: appeared)
                 }
                 .multilineTextAlignment(.leading)
+                // The name and status take the lines they need; the picture makes room for them.
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 26)
                 .padding(.bottom, 24)
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { heroCaption = $0 }
             }
             .frame(height: height)
             .clipShape(corners)
@@ -281,8 +301,9 @@ struct FirstOpenView: View {
         .buttonStyle(FirstOpenHeroStyle())
         .accessibilityLabel(localizer.text("landing.pip.open"))
         .overlay(alignment: .top) {
-            VStack(spacing: 12) {
+            VStack(spacing: FirstOpenHeroLayout.pingGap) {
                 masthead
+                    .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { heroMasthead = $0 }
                 if let ping = FirstOpenJourney.ping(step: step, localizer: localizer) {
                     FirstOpenPing(detail: ping, identity: identity)
                         .id(step)
@@ -292,7 +313,7 @@ struct FirstOpenView: View {
                 }
             }
             .padding(.horizontal, 24)
-            .padding(.top, top + 10)
+            .padding(.top, top + FirstOpenHeroLayout.mastheadTop)
         }
     }
 
@@ -304,7 +325,7 @@ struct FirstOpenView: View {
         let beside = fold.height > fold.width
         let layout = beside ? AnyLayout(HStackLayout(spacing: 0)) : AnyLayout(VStackLayout(spacing: 0))
         return layout {
-            hero(height: beside ? screen : fold.minY + top, top: top, beside: beside)
+            hero(height: beside ? screen : fold.minY + top, top: top, beside: beside, grows: false)
                 .frame(width: beside ? fold.minX : nil)
                 .offset(x: beside && !appeared ? -18 : 0, y: !beside && !appeared ? -18 : 0)
                 .opacity(appeared ? 1 : 0)
@@ -596,6 +617,42 @@ struct FirstParcelPrimaryLabel: View {
     }
 }
 
+/// A phone's picture: the masthead and the alerts at its top, the parcel's name and status at its foot, and the
+/// route between them. It is as tall as the screen leaves it (`fits`), and at large text sizes taller by what its
+/// words outgrow, so they never meet and the route keeps the room it has at the usual size, or a phone's 144 points.
+/// The screen then scrolls.
+struct FirstOpenHeroLayout: Hashable {
+    static let mastheadTop: CGFloat = 10
+    static let pingGap: CGFloat = 12
+    static let pingHeight: CGFloat = 26
+    /// Where the route starts under the top, and how far above the foot it ends, at the usual text size.
+    static let routeTop: CGFloat = 112
+    static let routeBottom: CGFloat = 128
+    /// The least room the route keeps once the words grow, on a screen that gives it less at the usual size.
+    static let leastRoom: CGFloat = 144
+    /// How far above the foot Pip stays at the usual text size.
+    static let floor: CGFloat = 118
+
+    let height: CGFloat
+    /// The route's room, from the top and from the foot of the picture.
+    let routeTop: CGFloat
+    let routeBottom: CGFloat
+    /// The lowest Pip goes, from the top of the picture.
+    let floor: CGFloat
+
+    /// `masthead` and `caption` are the heights measured on screen, nothing until they are. An alert always has room
+    /// under the masthead, so the picture holds still as alerts come and go.
+    init(fits: CGFloat, top: CGFloat, masthead: CGFloat, caption: CGFloat, grows: Bool = true) {
+        let ceiling = top + Self.mastheadTop + masthead + Self.pingGap + Self.pingHeight
+        routeTop = max(top + Self.routeTop, ceiling + 16)
+        routeBottom = max(Self.routeBottom, caption + 10)
+        let usual = fits - top - Self.routeTop - Self.routeBottom
+        let outgrown = routeTop > top + Self.routeTop || routeBottom > Self.routeBottom
+        height = grows ? max(fits, routeTop + (outgrown ? max(usual, Self.leastRoom) : usual) + routeBottom) : fits
+        floor = height - max(Self.floor, caption)
+    }
+}
+
 /// What an alert would say, as a small mark on the map in the card's own ink: the parcel is
 /// nearly there, or there. It belongs to the picture and does not ask to be read first.
 private struct FirstOpenPing: View {
@@ -609,7 +666,7 @@ private struct FirstOpenPing: View {
         }
         .foregroundStyle(identity.ink)
         .padding(.horizontal, 10)
-        .frame(height: 26)
+        .frame(height: FirstOpenHeroLayout.pingHeight)
         .background(identity.ink.opacity(0.1), in: Capsule())
         .accessibilityHidden(true)
     }

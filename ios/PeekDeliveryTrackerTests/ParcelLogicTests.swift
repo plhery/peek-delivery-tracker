@@ -4024,11 +4024,44 @@ extension ParcelLogicTests {
         }
     }
 
+    /// The welcome screen at the largest text size, on the smallest iPhone the app runs on (an iPhone SE), a 6.1-inch
+    /// one and an 11-inch iPad either way up: the picture grows, so the masthead, the route and the parcel's name
+    /// keep apart and the screen scrolls. Each is drawn once its map has landed, before the next scan comes in.
+    @MainActor func testTheWelcomeScreenMakesRoomForTheLargestText() async throws {
+        try await draw(.en, named: "first-open-largest", in: [CGSize(width: 375, height: 667), CGSize(width: 390, height: 844),
+                                                              CGSize(width: 820, height: 1180), CGSize(width: 1180, height: 820)],
+                       largeType: .accessibility5, settle: .seconds(2)) { _ in
+            FirstOpenView(covered: false) { _ in }
+        }
+    }
+
+    func testTheWelcomePictureGrowsByWhatItsWordsOutgrow() {
+        // At the usual text size it keeps the height the screen leaves it, and the route its place.
+        let usual = FirstOpenHeroLayout(fits: 446, top: 62, masthead: 44, caption: 108)
+        XCTAssertEqual([usual.height, usual.routeTop, usual.routeBottom, usual.floor], [446, 174, 128, 328])
+        let small = FirstOpenHeroLayout(fits: 300, top: 20, masthead: 44, caption: 108)
+        XCTAssertEqual([small.height, small.routeTop, small.routeBottom, small.floor], [300, 132, 128, 182])
+        // At the largest, on an iPhone SE, the masthead stands taller and the name and status take several lines.
+        let largest = FirstOpenHeroLayout(fits: 300, top: 20, masthead: 64, caption: 420)
+        XCTAssertGreaterThanOrEqual(largest.routeTop, 20 + 10 + 64 + 12 + 26, "the masthead and its alert end over the route")
+        XCTAssertGreaterThanOrEqual(largest.routeBottom, 420, "the route ends over the name")
+        XCTAssertLessThanOrEqual(largest.floor, largest.height - 420, "Pip stays over the name")
+        XCTAssertEqual(largest.height - largest.routeTop - largest.routeBottom, 144, "the route keeps 144 points at least")
+        // A taller phone's route keeps the room it has at the usual size.
+        let tall = FirstOpenHeroLayout(fits: 446, top: 62, masthead: 64, caption: 420)
+        XCTAssertEqual(tall.height - tall.routeTop - tall.routeBottom, usual.height - usual.routeTop - usual.routeBottom)
+        // Beside a fold, the fold sets its height.
+        XCTAssertEqual(FirstOpenHeroLayout(fits: 300, top: 20, masthead: 64, caption: 420, grows: false).height, 300)
+    }
+
     /// Draws a screen over the demo's parcels in a window of each size, and checks it asks for no more width than it has.
+    /// Each is drawn at the usual text size in light and at `largeType` in dark, `settle` after it opens.
     @MainActor private func draw<Content: View>(
         _ language: AppLanguage,
         named name: String,
         in sizes: [CGSize],
+        largeType largeSize: DynamicTypeSize = .accessibility3,
+        settle: Duration = .milliseconds(400),
         @ViewBuilder content: (ParcelStore) throws -> Content
     ) async throws {
         let localizer = Localizer()
@@ -4056,7 +4089,7 @@ extension ParcelLogicTests {
                     .environmentObject(FriendsActivityStore())
                     .environmentObject(links)
                     .environment(\.locale, language.locale)
-                    .environment(\.dynamicTypeSize, largeType ? .accessibility3 : .large))
+                    .environment(\.dynamicTypeSize, largeType ? largeSize : .large))
                 host.overrideUserInterfaceStyle = largeType ? .dark : .light
                 // The window takes the simulator's shape: the screen is a view of the size asked for inside it.
                 let window = UIWindow(windowScene: scene)
@@ -4068,7 +4101,7 @@ extension ParcelLogicTests {
                 host.didMove(toParent: container)
                 window.isHidden = false
                 defer { window.isHidden = true }
-                try await Task.sleep(for: .milliseconds(400))
+                try await Task.sleep(for: settle)
                 let label = "\(name)-\(Int(size.width))x\(Int(size.height))-\(language.rawValue)-\(largeType ? "large-dark" : "regular-light")"
                 XCTAssertLessThanOrEqual(host.sizeThatFits(in: size).width, size.width + 0.5, label)
                 let image = UIGraphicsImageRenderer(size: size).image { _ in

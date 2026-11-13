@@ -73,15 +73,16 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• A package out for delivery is coming today, so its card, widget, and Live Activity no longer show a day, only the hours the carrier gives for today.
-• When the carrier that will deliver a package has been told about it but hasn’t scanned it yet, the card now says, for example, “Announced to DHL, not received yet” instead of “Delivery with DHL”.
-• A package returned to its sender now stays returned while the carrier scans it on its way back, instead of showing as in transit again.
-• A place written in another script, such as Chinese, Japanese, or Korean, now shows its town and country, like “Shenzhen, China”, in scans and planned steps alike; and one like “SCARBOROUGH - ON - CANADA” now shows Canada and its flag.
-• When a carrier publishes its timeline in advance, the package’s page now says that Peek shows the real scans as they arrive, and a planned step goes away as soon as its time has passed.
-• 72 more carriers now have a truck of their own, in their colors, and when you choose a carrier, those from your country come first among the ones that fit the number.
-• A shipping container number is now recognized: the package’s page says so, tells you where to find the tracking number, and offers to choose the carrier.
-• J&T Express Mexico and China show a package’s scans with the last 4 digits of the recipient’s or sender’s phone: you can now add them with the package, or later from its page.
-• After you sign in, if your account has no room for all the packages on this device, Peek now says how many stayed on it.
-• Without an account, a package looked up with a postal code no longer asks for it again, a package whose saved copy can’t be read comes back to the list, and forgetting a package works at once, even offline.
-• Refreshing your packages no longer says “No new updates” beside a connection error, and some C Chez Vous steps now appear in your language instead of French.
+• In “Add a parcel”, each carrier now keeps its own postcode and delivery country: one carrier’s postcode no longer carries over when you switch to another, and switching back shows it again.
+• “Change carrier” now fills in a required postcode with the last one you gave that fits, and suggests it for an optional one, as “Add a parcel” does.
+• A parcel saved with its postcode, such as a PostNL parcel that hasn’t been scanned yet, no longer asks for the delivery postcode a second time.
+• Peek now tracks 83 more carriers, each with a truck in its own colors, among them GLS US, BH Pošta, Pošte Srpske, and couriers in Greece, Romania, Hungary, Poland, and Bulgaria.
+• When no carrier finds a number that starts like one carrier’s but has a character missing or one too many, such as a UPS number beginning 1Z, the parcel’s page now says the number may be mistyped and names the carrier.
+• A line under a parcel’s history now says its times are in your time zone and names it, such as “Central European Time”.
+• A delivery window in a notification or Live Activity now shows the carrier’s own hours, so a British 07:00–09:00 slot no longer reads 08:00–10:00.
+• Until the carrier that will deliver a parcel scans it, as with JRT parcels handed to DHL, Peek now keeps checking the first carrier for up to 14 days, so its later scans still show up.
+• While a parcel is on its way back to its sender, notifications now say “On its way back” instead of “On its way”, and Peek keeps checking it in case it goes out for delivery after all.
+• When a carrier such as GZYL or Xinghe Freight writes its steps in advance, even the delivery, the parcel’s page now says Peek leaves them out, and suggests looking on the carrier’s site for the company that delivers in your country.
+• In an AliExpress parcel’s history, Cainiao’s “Last-mile delivery forecast” now reads “Announced to the local courier”.
+• At the largest text sizes on a small iPhone such as the SE, the welcome screen’s “Sign in” button and sample parcel name no longer run into each other or over the route: the picture grows and the screen scrolls.
 ```

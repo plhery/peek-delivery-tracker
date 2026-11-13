@@ -71,15 +71,16 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Un paquete en reparto llega hoy, así que su tarjeta, el widget y la actividad en directo ya no mencionan un día: solo quedan las horas que da el transportista para hoy.
-• Cuando el transportista que entregará un paquete ya está avisado pero aún no lo ha escaneado, la tarjeta ahora dice, por ejemplo, «Anunciado a DHL, aún no recibido» en lugar de «Entrega con DHL».
-• Un paquete devuelto al remitente ahora sigue como devuelto mientras el transportista lo escanea en el camino de vuelta, en lugar de volver a aparecer como «En tránsito».
-• Un lugar escrito en otro alfabeto, como el chino, el japonés o el coreano, ahora muestra su ciudad y su país, por ejemplo «Shenzhen, China», tanto en los escaneos como en los pasos previstos; y un lugar como «SCARBOROUGH - ON - CANADA» ahora muestra Canadá y su bandera.
-• Cuando un transportista publica su seguimiento por adelantado, la página del paquete ahora indica que Peek muestra los escaneos reales a medida que llegan, y un paso previsto desaparece en cuanto pasa su hora.
-• 72 transportistas más tienen ahora su propia furgoneta, con sus colores, y, al elegir un transportista, los de tu país salen primero entre los que encajan con el número.
-• Ahora se reconoce un número de contenedor marítimo: la página del paquete lo indica, te dice dónde encontrar el número de seguimiento y te ofrece elegir el transportista.
-• En México y China, J&T Express muestra los escaneos de un paquete con los últimos 4 dígitos del teléfono del destinatario o del remitente: ahora puedes añadirlos con el paquete o más tarde desde su página.
-• Al iniciar sesión, si tu cuenta no tiene sitio para todos los paquetes de este dispositivo, Peek ahora te dice cuántos se han quedado en él.
-• Sin cuenta, un paquete buscado con código postal ya no lo vuelve a pedir, un paquete cuya copia guardada no se puede leer vuelve a la lista y olvidar un paquete funciona al instante, incluso sin conexión.
-• Al actualizar tus paquetes ya no aparece «No hay novedades» junto a un error de conexión, y algunos pasos de C Chez Vous ahora aparecen en tu idioma en lugar de en francés.
+• En «Añadir un paquete», cada transportista guarda ahora su propio código postal y país de entrega: el código postal de uno ya no pasa al siguiente cuando cambias de transportista, y vuelve a aparecer cuando regresas.
+• «Cambiar transportista» rellena ahora un código postal obligatorio con el último que diste que encaje, y lo sugiere para uno opcional, como hace «Añadir un paquete».
+• Un paquete guardado con su código postal, como uno de PostNL aún sin escanear, ya no pide el código postal de entrega por segunda vez.
+• Peek sigue ahora 83 transportistas más, cada uno con una furgoneta con sus colores, entre ellos GLS US, BH Pošta, Pošte Srpske y empresas de mensajería de Grecia, Rumanía, Hungría, Polonia y Bulgaria.
+• Cuando ningún transportista encuentra un número que empieza como los de un transportista pero le falta o le sobra un carácter, como un número de UPS que empieza por 1Z, la página del paquete indica ahora que puede tener una errata y nombra al transportista.
+• Una línea bajo el historial de un paquete indica ahora que sus horas están en tu zona horaria y la nombra, por ejemplo «hora de Europa central».
+• Una franja de entrega en una notificación o una actividad en directo muestra ahora las horas del transportista, así que una franja británica de 07:00 a 09:00 ya no aparece como de 08:00 a 10:00.
+• Hasta que el transportista que entregará un paquete lo escanee, como con los paquetes que JRT pasa a DHL, Peek sigue consultando ahora al primer transportista hasta 14 días, para que sus escaneos posteriores sigan apareciendo.
+• Mientras un paquete vuelve a su remitente, las notificaciones dicen ahora «Camino de vuelta» en lugar de «En camino», y Peek sigue consultándolo por si al final sale en reparto.
+• Cuando un transportista como GZYL o Xinghe Freight escribe sus etapas por adelantado, incluso la entrega, la página del paquete dice ahora que Peek las omite y te sugiere buscar en su web la empresa que reparte en tu país.
+• En el historial de los paquetes de AliExpress, la línea «Last-mile delivery forecast» de Cainiao aparece ahora como «Anunciado al transportista local».
+• Con los tamaños de texto más grandes, en un iPhone pequeño como el SE, «Iniciar sesión» y el nombre del paquete de ejemplo ya no se solapan en la pantalla de bienvenida ni invaden la ruta: la imagen crece y la pantalla se desplaza.
 ```

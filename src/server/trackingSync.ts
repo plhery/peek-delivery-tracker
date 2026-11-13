@@ -1799,8 +1799,9 @@ export class TrackingSyncService {
     const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel, now)));
     const followedNow = followed.filter((parcel) => followedDue(parcel, now));
     const due = [...followedNow, ...unfollowed];
-    recordScheduledBacklog('lookup', due.length, Math.max(longestOverdueMs(followedNow, followedDue, now),
-      longestOverdueMs([...unfollowed], unfollowedDue, now)));
+    // Apart, since the unfollowed ones come last and can wait days behind the followed.
+    recordScheduledBacklog('lookup', followedNow.length, longestOverdueMs(followedNow, followedDue, now));
+    recordScheduledBacklog('unfollowed', unfollowed.size, longestOverdueMs([...unfollowed], unfollowedDue, now));
     const waited = due.filter(watched).slice(0, limit);
     const others = due.filter((parcel) => !watched(parcel));
     const taken = [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];

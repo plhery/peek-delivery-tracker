@@ -3299,18 +3299,27 @@ describe('TrackingSyncService', () => {
       // Checked within the current window: not due.
       { ...due, id: 'fresh', user_id: null, one_off: true, last_synced_at: '2026-09-09T10:10:30Z' },
     ]);
-    client.listUnwatchedPackageIds.mockResolvedValue(['unread']);
+    // Filed under no carrier and followed by nobody: every 6 hours, from 5 hours after the hour
+    // its number opens (48) that follows its check, so due since 07:48.
+    const routing = { version: 1, configured_carrier: 'unknown', failures: {}, last_success_at: '2026-09-08T10:00:00Z',
+      last_event_at: '2026-09-08T09:00:00Z' };
+    client.listUnfiledOneOffPackages.mockResolvedValue([{ ...due, carrier: 'unknown', id: 'unfollowed', user_id: null, one_off: true,
+      created_at: '2026-09-05T10:00:00Z', archived_at: null, last_synced_at: '2026-09-09T02:00:00Z', carrier_data: { routing } }]);
+    client.listUnwatchedPackageIds.mockResolvedValue(['unread', 'unfollowed']);
     const recorded = vi.spyOn(metrics, 'recordScheduledBacklog');
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T10:12:00Z'));
     await service.sync();
-    const [account, lookup] = recorded.mock.calls;
+    const [account, lookup, unfollowed] = recorded.mock.calls;
     expect(account.slice(0, 2)).toEqual(['account', 1]);
     expect(account[2]).toBeGreaterThan(61 * 60_000);
     expect(account[2]).toBeLessThanOrEqual(62 * 60_000);
     expect(lookup.slice(0, 2)).toEqual(['lookup', 2]);
     expect(lookup[2]).toBeGreaterThan((4 * 60 + 23) * 60_000);
     expect(lookup[2]).toBeLessThanOrEqual((4 * 60 + 24) * 60_000);
+    expect(unfollowed.slice(0, 2)).toEqual(['unfollowed', 1]);
+    expect(unfollowed[2]).toBeGreaterThan((2 * 60 + 23) * 60_000);
+    expect(unfollowed[2]).toBeLessThanOrEqual((2 * 60 + 24) * 60_000);
   });
 
   it('checks five one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {

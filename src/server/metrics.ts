@@ -358,13 +358,13 @@ function createRuntime(): PrometheusRuntime {
     }),
     scheduledSyncDue: new Gauge({
       name: 'scheduled_sync_due',
-      help: 'Parcels the latest scheduled run found due when it started, by whose: account or lookup.',
+      help: 'Parcels the latest scheduled run found due when it started, by whose: account, lookup, or unfollowed lookup.',
       labelNames: ['kind'] as const,
       registers: [registry],
     }),
     scheduledSyncOverdue: new Gauge({
       name: 'scheduled_sync_overdue_seconds',
-      help: 'How long the longest-waiting parcel the latest scheduled run found due had been due, to the minute, by whose: account or lookup; 0 when none was.',
+      help: 'How long the longest-waiting parcel the latest scheduled run found due had been due, to the minute, by whose: account, lookup, or unfollowed lookup; 0 when none was.',
       labelNames: ['kind'] as const,
       registers: [registry],
     }),
@@ -718,7 +718,7 @@ function readSyncQueue(): Promise<void> {
 }
 
 /** At its start, the scheduled run's due parcels of one kind, and how long the longest-waiting of them has been due. */
-export function recordScheduledBacklog(kind: 'account' | 'lookup', due: number, overdueMs: number): void {
+export function recordScheduledBacklog(kind: 'account' | 'lookup' | 'unfollowed', due: number, overdueMs: number): void {
   runtime.scheduledSyncDue.set({ kind }, due);
   runtime.scheduledSyncOverdue.set({ kind }, Math.round(overdueMs / 1_000));
 }

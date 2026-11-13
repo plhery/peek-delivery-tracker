@@ -1904,6 +1904,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Xinghe Freight tracking: GZXH…YQ numbers and scans",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "cvc-tracking",
+      "title": "CVC tracking (Си Ви Си): follow a parcel in Bulgaria",
+      "name": "CVC",
+      "color": "#5f3e8f"
+    },
+    {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "transpress-tracking",
+      "title": "Transpress tracking (Транспрес): track a parcel in Bulgaria",
+      "name": "Transpress",
+      "color": "#1e6ee2"
     }
   ],
   "de": [
@@ -4398,6 +4414,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка GZYL: номер YL…YQ и статуси",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "cvc-prosledyavane-na-pratka",
+      "title": "Проследяване на пратка CVC (Си Ви Си): номер и статуси",
+      "name": "CVC",
+      "color": "#5f3e8f"
+    },
+    {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "transpress-prosledyavane-na-pratka",
+      "title": "Транспрес (Transpress): проследяване на пратка и статуси",
+      "name": "Transpress",
+      "color": "#1e6ee2"
     }
   ],
   "el": [

@@ -329,6 +329,9 @@ no 429 of the carrier's. For the parcel's own carrier, the check is deferred to 
 `retryAfterMs`, when the next search frees up, with no provider asked meanwhile, so a busy
 hour's parcels spread over it. It counts no failure, takes no health sample and ends
 `skipped`. A carrier asked as a candidate stays unanswered. A carrier's own 429 has no reason.
+Spring GDS's lookups go through PostNL's API, whose 20 calls a minute every caller shares: its
+429 is waited out like any other, but takes no health sample, since it says how busy the API
+is rather than whether Spring GDS works.
 
 ## Refresh cadence
 

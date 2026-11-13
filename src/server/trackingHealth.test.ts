@@ -65,6 +65,27 @@ describe('tracking health evidence', () => {
     expect([...samples.values()]).toEqual([expect.objectContaining({ kind: 'provider', subject: 'dhl', healthy: false })]);
   });
 
+  it('takes no sample of a refusal under the quota PostNL shares with every caller, which Spring GDS goes through', async () => {
+    const samples = new Map<string, HealthSample>();
+    const quota = new RateLimitedError('PostNL', 30_000, 'PostNL refused the request with HTTP 429',
+      { cause: new UpstreamHttpError('PostNL', 429, 30_000), status: 429 });
+    await observeTrackingHealth(samples, async () => {
+      healthStepRecorder.step({ ...step, carrier: 'spring-gds', outcome: 'rate_limited', errorType: 'RateLimitedError', error: quota });
+      healthStepRecorder.lookup({ carrier: 'spring-gds', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1, error: quota });
+      // Asked whether it holds a parcel, too.
+      await confirmationLookup(async () => {
+        healthStepRecorder.lookup({ carrier: 'spring-gds', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1, error: quota });
+      });
+    });
+    expect(samples.size).toBe(0);
+    // Its other failures still count.
+    await observeTrackingHealth(samples, async () => {
+      healthStepRecorder.lookup({ carrier: 'spring-gds', finalStep: 'direct', outcome: 'error', errorType: 'UpstreamHttpError', durationMs: 1, attempts: 1,
+        error: new UpstreamHttpError('PostNL', 503) });
+    });
+    expect([...samples.values()]).toEqual([expect.objectContaining({ kind: 'provider', subject: 'spring-gds', healthy: false })]);
+  });
+
   it('files a number that names several parcels with the missing inputs', async () => {
     const samples = new Map<string, HealthSample>();
     const several = new IndeterminateError('Australia Post', 'Australia Post lists several articles under this consignment', { reason: 'several_parcels' });

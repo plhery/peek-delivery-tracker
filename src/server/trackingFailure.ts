@@ -41,6 +41,19 @@ export function selfPacedRefusal(error: unknown): boolean {
   return carrierErrorKind(error) === 'rate_limited' && carrierErrorReason(error) === 'self_paced';
 }
 
+/**
+ * Carriers whose 429 is a quota their API shares with every caller: Spring GDS's lookups go
+ * through PostNL's API, 20 calls a minute for everyone. Such a refusal tells how busy the API
+ * is, not whether the carrier works, so tracking health leaves it out; the lookup still counts
+ * as rate limited, and routing still waits as for any 429.
+ */
+const SHARED_QUOTA_CARRIERS: ReadonlySet<string> = new Set(['spring-gds']);
+
+/** A carrier's refusal under such a shared quota. */
+export function sharedQuotaRefusal(carrier: string, error: unknown): boolean {
+  return SHARED_QUOTA_CARRIERS.has(carrier) && carrierErrorKind(error) === 'rate_limited';
+}
+
 /** Why a carrier answered as it did (`parcel_found`, `postcode_mismatch`): the first reason in the error's causes. */
 export function carrierErrorReason(error: unknown): string | undefined {
   const seen = new Set<Error>();

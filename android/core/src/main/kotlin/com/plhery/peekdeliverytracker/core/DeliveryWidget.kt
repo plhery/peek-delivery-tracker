@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.io.File
 import java.security.MessageDigest
 import java.time.Instant
+import java.util.Locale
 import java.util.UUID
 
 // DeliveryWidget.swift's provider, the part of it that is logic: what a widget shows at a time, where its next button
@@ -119,6 +120,9 @@ val DeliveryWidgetParcel.listDay: String?
 /** `ParcelListStatus.whole`: the stage, then the day. */
 val DeliveryWidgetParcel.listLine: String
     get() = listDay?.let { "$listStatus · $it" } ?: listStatus
+
+/** `openingLine(in:)`: the words as they open a line, where a day the app writes to follow a status, "tomorrow", takes a capital. */
+fun String.openingLine(locale: Locale): String = take(1).uppercase(locale) + drop(1)
 
 object DeliveryWidgetTimeline {
     /** `WidgetFamily.turnSize`: widgets of one size turn together; those of the other keep their own page. */

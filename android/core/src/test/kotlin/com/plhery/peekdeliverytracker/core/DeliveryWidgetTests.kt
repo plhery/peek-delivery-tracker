@@ -456,6 +456,20 @@ class DeliveryWidgetTests {
         assertEquals(DeliveryWidgetStage("Waiting for the carrier", "shippingbox.fill", listOf("#654299", "#D1B5FF")), waiting.stage)
     }
 
+    /** A day the app writes to follow a status takes a capital where it opens a line, in each language's own way. */
+    @Test
+    fun aDayOpeningAWidgetLineTakesACapital() {
+        assertEquals("Tomorrow", "tomorrow".openingLine(Locale.forLanguageTag("en")))
+        assertEquals("Today, 14:00–16:00", "today, 14:00–16:00".openingLine(Locale.forLanguageTag("en")))
+        assertEquals("Aujourd’hui", "aujourd’hui".openingLine(Locale.forLanguageTag("fr")))
+        assertEquals("Sam 12 sept", "sam 12 sept".openingLine(Locale.forLanguageTag("fr")))
+        assertEquals("Завтра", "завтра".openingLine(Locale.forLanguageTag("ru")))
+        assertEquals("İyi", "iyi".openingLine(Locale.forLanguageTag("tr")))
+        assertEquals("明天", "明天".openingLine(Locale.forLanguageTag("zh-Hans")))
+        assertEquals("In transit", "In transit".openingLine(Locale.forLanguageTag("en")))
+        assertEquals("", "".openingLine(Locale.forLanguageTag("en")))
+    }
+
     /** A row's tint is the one the app's cards mark the stage with, light then dark as hex. */
     @Test
     fun aRowsTintIsTheStagesInTheApp() {

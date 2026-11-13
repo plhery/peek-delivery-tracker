@@ -45,17 +45,20 @@ import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
+import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.listDay
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
 import com.plhery.peekdeliverytracker.core.listStatus
+import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.core.metadata
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.symbols.drawSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.materialSymbols
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.toColor
+import java.util.Locale
 import kotlin.math.floor
 
 // The "Parcels" widget's look: the parcels on their way as the app's list shows them, one row each, on the app's page,
@@ -80,6 +83,7 @@ private object ListColors {
  * line counts, and whether the app's header stands above them, which goes first where it would cost a row.
  */
 internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText) {
+    val locale: Locale = ExtensionLocalizer.locale(list.languageCode)
     val wide = size.width >= WIDE_WIDTH
     val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN_VERTICAL * 2)
     val namePoints = type.points(IosTextStyle.Subheadline)
@@ -164,16 +168,16 @@ private fun openList(context: Context): Action = actionStartActivity(listIntent(
 
 /**
  * `ParcelListStatus`'s `ViewThatFits`: a row's line where it fits `width`, the stage and the day; else the day alone;
- * else the stage, cut short.
+ * else the stage, cut short. What opens the line takes a capital, "Tomorrow" ([openingLine]).
  */
 internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width: Dp): String {
-    val whole = parcel.listLine
-    val day = parcel.listDay ?: return whole
+    val whole = parcel.listLine.openingLine(layout.locale)
+    val day = parcel.listDay?.openingLine(layout.locale) ?: return whole
     fun fits(text: String) = layout.type.width(text, layout.linePoints, FontWeight.Normal) <= width
     return when {
         fits(whole) -> whole
         fits(day) -> day
-        else -> parcel.listStatus
+        else -> parcel.listStatus.openingLine(layout.locale)
     }
 }
 

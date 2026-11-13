@@ -30,10 +30,12 @@ import com.plhery.peekdeliverytracker.core.listDay
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
 import com.plhery.peekdeliverytracker.core.listStatus
+import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import java.time.Duration
+import java.util.Locale
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -109,9 +111,9 @@ class ParcelsWidgetTest {
             for (parcel in sample.parcels.take(3)) onNode(hasTextEqualTo(parcel.label)).assertExists()
             onNode(hasTextEqualTo(sample.parcels[3].label)).assertDoesNotExist()
             onNode(hasTextEqualTo("+12 more") and opensList).assertExists()
-            // Two cells across leave the first row's line too little room for its stage: its day stays.
+            // Two cells across leave the first row's line too little room for its stage: its day stays, opening the line.
             onNode(hasTextEqualTo(narrowLine(sample.parcels[0], sample))).assertExists()
-            assertEquals(sample.parcels[0].listDay, narrowLine(sample.parcels[0], sample))
+            assertEquals(sample.parcels[0].listDay?.openingLine(Locale.ENGLISH), narrowLine(sample.parcels[0], sample))
         }
         show(sample, LIST_MEDIUM) {
             onNode(hasTextEqualTo(sample.parcels[5].label)).assertExists()
@@ -161,17 +163,20 @@ class ParcelsWidgetTest {
         assertEquals(15 - larger.shown.rows.size, larger.shown.more)
     }
 
-    /** A line too long for its room keeps the day, and the stage where even the day is too long; TalkBack reads both. */
+    /**
+     * A line too long for its room keeps the day, and the stage where even the day is too long; TalkBack reads both. The
+     * day takes a capital where it opens the line.
+     */
     @Test
     fun aLineTooLongKeepsTheDay() {
         val layout = ListLayout(sample, LIST_SMALL, WidgetText(app))
-        val parcel = sample.parcels.first { it.listDay != null }
+        val parcel = sample.parcels.first { it.listDay != null }.copy(detail = "tomorrow")
         val status = parcel.listStatus
         fun width(text: String) = layout.type.width(text, layout.linePoints, FontWeight.Normal)
-        assertEquals("$status · ${parcel.detail}", fittingLine(parcel, layout, width(parcel.listLine)))
-        assertEquals(parcel.detail, fittingLine(parcel, layout, width(parcel.listLine) - 1.dp))
-        assertEquals(status, fittingLine(parcel, layout, width(parcel.detail) - 1.dp))
-        assertTrue(rowDescription(parcel).endsWith("$status, ${parcel.detail}"))
+        assertEquals("$status · tomorrow", fittingLine(parcel, layout, width(parcel.listLine)))
+        assertEquals("Tomorrow", fittingLine(parcel, layout, width(parcel.listLine) - 1.dp))
+        assertEquals(status, fittingLine(parcel, layout, width("Tomorrow") - 1.dp))
+        assertTrue(rowDescription(parcel).endsWith("$status, tomorrow"))
     }
 
     /** A row opens its parcel, and TalkBack reads its name, stage and day as one item. */

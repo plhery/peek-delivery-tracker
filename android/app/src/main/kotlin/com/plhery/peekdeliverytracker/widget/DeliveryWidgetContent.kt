@@ -70,6 +70,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPictures
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetTimeline
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
+import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.ui.draw.drawPeekMark
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
@@ -379,7 +380,7 @@ private fun SmallContent(layout: SmallWords, type: WidgetText) {
                 Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption, FontWeight.Medium, 0.68f))
                 Spacer(GlanceModifier.height(1.dp))
             }
-            Text(parcel.detail, maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
+            Text(parcel.detail.openingLine(ExtensionLocalizer.locale(layout.copy.languageCode)), maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
         }
     }
 }
@@ -440,7 +441,7 @@ private fun MediumContent(layout: MediumWords, type: WidgetText) {
                         Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption2, FontWeight.Medium, 0.64f))
                         Spacer(GlanceModifier.height(3.dp))
                     }
-                    Text(parcel.detail, maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
+                    Text(parcel.detail.openingLine(ExtensionLocalizer.locale(layout.copy.languageCode)), maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
                 }
             }
             if (layout.shown.size == 1) {

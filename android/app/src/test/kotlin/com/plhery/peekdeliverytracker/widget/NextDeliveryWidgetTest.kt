@@ -112,14 +112,17 @@ class NextDeliveryWidgetTest {
         widgetParcel(3, "Desk lamp", detail = "Friday"),
     )
 
-    /** `testSmallWidgetShowsItsParcelInWords` (C-W05, C-W23): the header, the badge, the name, the carrier and when. */
+    /**
+     * `testSmallWidgetShowsItsParcelInWords` (C-W05, C-W23): the header, the badge, the name, the carrier and when, which
+     * takes a capital as it opens its line.
+     */
     @Test
     fun smallWidgetShowsItsParcelInWordsAndOpensIt() = show(wordsEntry(three, medium = false), IPHONE_SMALL) {
         onNode(hasTextEqualTo(english.text("app.title").uppercase())).assertExists()
         onNode(hasTextEqualTo(english.text("stage.out_for_delivery").uppercase())).assertExists()
         onNode(hasTextEqualTo("Belgian chocolate")).assertExists()
         onNode(hasTextEqualTo("FedEx")).assertExists()
-        onNode(hasTextEqualTo("today")).assertExists()
+        onNode(hasTextEqualTo("Today")).assertExists()
         onNode(hasTextEqualTo("Trail weekend kit")).assertDoesNotExist()
         // `widgetURL`: the whole widget opens its parcel through the app's routing.
         onNode(opens(three[0]) and hasAnyDescendant(hasTextEqualTo("Belgian chocolate"))).assertExists()
@@ -130,6 +133,7 @@ class NextDeliveryWidgetTest {
     fun mediumWidgetShowsTwoParcelsEachOpeningItself() = show(wordsEntry(three, medium = true), IPHONE_MEDIUM) {
         onNode(hasTextEqualTo("Belgian chocolate")).assertExists()
         onNode(hasTextEqualTo("Trail weekend kit")).assertExists()
+        onNode(hasTextEqualTo("Tomorrow")).assertExists()
         onNode(hasTextEqualTo("Desk lamp")).assertDoesNotExist()
         onNode(hasTextEqualTo(english.text("app.onTheWaySection").uppercase())).assertExists()
         onNode(opens(three[0]) and hasAnyDescendant(hasTextEqualTo("Belgian chocolate"))).assertExists()

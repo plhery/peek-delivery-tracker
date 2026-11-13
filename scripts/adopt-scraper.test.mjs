@@ -539,6 +539,21 @@ describe('migrations that already made a change', () => {
       .map(({ entry }) => entry), ['example-post', 'dpd: pattern ^[0-9]{4}.']);
   });
 
+  it('reads a line that lists several ids as each of them', async () => {
+    const listed = migration('20261017100000_example', 'carriers added example-post, example-courier, example-freight.');
+    assert.deepEqual(declaredChanges([listed]).map(({ entry }) => entry), ['example-post', 'example-courier', 'example-freight']);
+    const { blocked } = await decideGate({
+      before: { version: '1.0.0', facets: { carriers: ['dhl'] } },
+      after: { version: '1.0.1', facets: { carriers: ['dhl', 'example-courier', 'example-freight', 'example-post'] } },
+      migrations: [listed],
+      missingMigrations: ledger().missingMigrations,
+    });
+    assert.equal(blocked, false);
+    for (const line of ['carriers added example-post,', 'carriers added example-post,, example-courier']) {
+      assert.throws(() => declaredChanges([migration('20261017100000_example', line)]), /does not understand/, line);
+    }
+  });
+
   it('blocks a change no applied migration declares', async () => {
     const cases = {
       'no migration declares it': [migration('20261017100000_example_post', allChanges[0])],

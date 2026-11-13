@@ -390,18 +390,22 @@ export async function readMigrations(directory = path.join(root, 'supabase', 'mi
 const ID_FACETS = new Set(['carriers', 'providers', 'stages']);
 
 /**
- * The changes each migration declares, in the order of `migrations`. A line about an id closed with a
- * full stop, as a sentence, still declares that id; a pattern is taken as written.
+ * The changes each migration declares, in the order of `migrations`. A line about ids may list several,
+ * separated by commas, and one closed with a full stop, as a sentence, still declares them; a pattern is
+ * taken as written.
  */
 export function declaredChanges(migrations) {
   return migrations.flatMap(({ name, sql }) => sql.split('\n').filter((line) => line.startsWith(declarationPrefix))
-    .map((line) => {
+    .flatMap((line) => {
       const match = declarationPattern.exec(line.trimEnd());
       if (!match || !Object.hasOwn(ENFORCED_BY, match[1])) {
         throw new Error(`${name} has a database gate line the gate does not understand: ${line.slice(0, 200)}`);
       }
-      const entry = ID_FACETS.has(match[1]) ? match[3].replace(/\.$/, '') : match[3];
-      return { migration: name, facet: match[1], change: match[2], entry };
+      const entries = ID_FACETS.has(match[1]) ? match[3].replace(/\.$/, '').split(/\s*,\s*/) : [match[3]];
+      if (entries.some((entry) => !entry)) {
+        throw new Error(`${name} has a database gate line the gate does not understand: ${line.slice(0, 200)}`);
+      }
+      return entries.map((entry) => ({ migration: name, facet: match[1], change: match[2], entry }));
     }));
 }
 

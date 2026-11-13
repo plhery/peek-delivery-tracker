@@ -2015,6 +2015,20 @@ describe('a provider\'s copies on a clock read in another zone', () => {
     expect(gone('2026-10-15', [...summer, ...copies('2026-10-15')])).toEqual([]);
     // Nor are they when one copy on each side shows them.
     expect(gone('2026-11-02', [booked, copies('2026-11-02')[1]!])).toEqual([]);
+    // Nor across a change of no zone the provider can have misread: India's clock at 9 h 30, then at 8 h 30, would be
+    // a zone moving from -04:00 to -03:00 in November, though US and European zones change then.
+    const ahead = (day: string) => [copy('hub', `${day}T21:03:41+00:00`, 'Reached hub'), copy('sorted', `${day}T21:35:21+00:00`, 'Sorted')];
+    expect(gone('2026-11-02', [...summer, ...ahead('2026-11-02')])).toEqual([]);
+  });
+
+  it('take a new copy after the misread zone\'s change at its new shift, once the copies before it show the clock', () => {
+    const stored = [carrier[0]!, carrier[1]!, own('hub', '2026-11-02T12:33:00+00:00', 'Reached hub'),
+      booked, copy('picked', '2026-10-13T18:26:21+00:00', 'Picked up', 'accepted')];
+    const arrived = (at: string) => ({ ...copy('hub', at, 'Arrived at hub'), package_id: 'package-1' });
+    // US Eastern left summer time on 1 November: 10 h 30 from the carrier's row, in the provider's own words.
+    expect([...sharedScans([arrived('2026-11-02T23:03:41Z')], stored).skipped]).toEqual([['unknown:hub', 'shiprocket:hub']]);
+    // Half an hour off is no zone's change.
+    expect(sharedScans([arrived('2026-11-02T22:33:41Z')], stored).skipped.size).toBe(0);
   });
 });
 

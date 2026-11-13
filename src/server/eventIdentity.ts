@@ -906,24 +906,30 @@ function shiftsAt(clock: LearnedShift, instant: number): readonly number[] {
 
 /**
  * The shift most instants show (`shifts`: each nonzero shift → the instants showing it): two instants at least, more
- * than `met` and more than any other shift. Two shifts exactly an hour apart are one clock, three instants at least,
- * when all the instants of one come before all those of the other and some zone changes its offset by an hour between
- * them: the zone a provider misreads, or the parcel's own, entered or left summer time within the parcel's history.
- * A plain hour's leeway would match unrelated scans. Null when no shift stands out.
+ * than `met` and more than any other shift. Two shifts an hour apart are one clock, three instants at least, when all
+ * the instants of one come before all those of the other and the clock changed between them (`changed`, by default
+ * some zone changing its offset by an hour): the zone a provider misreads, or the parcel's own, entered or left summer
+ * time within the parcel's history. A plain hour's leeway would match unrelated scans. `steps` are the gaps between
+ * the two shifts a clock change can make. Null when no shift stands out.
  */
-function learnedShift(shifts: ReadonlyMap<number, readonly number[]>, met = 0): LearnedShift | null {
+function learnedShift(
+  shifts: ReadonlyMap<number, readonly number[]>, met = 0,
+  changed: (clock: LearnedShift) => boolean = (clock) => zoneChangesBetween(clock.from, clock.to),
+  steps: readonly number[] = [HOUR_MS],
+): LearnedShift | null {
   const ranked = [...shifts].map(([shift, instants]) => ({ shift, instants: [...instants].sort((left, right) => left - right) }))
     .sort((left, right) => right.instants.length - left.instants.length);
   const pairs = ranked.flatMap((early) => ranked.flatMap((late) => {
     const from = early.instants.at(-1)!;
     const to = late.instants[0]!;
-    return Math.abs(early.shift - late.shift) === HOUR_MS && from < to
+    return steps.includes(Math.abs(early.shift - late.shift)) && from < to
       ? [{ early, late, from, to, size: early.instants.length + late.instants.length }] : [];
   })).sort((left, right) => right.size - left.size);
   const [pair, rival] = pairs;
-  if (pair && pair.size >= 3 && pair.size > met && (!rival || rival.size < pair.size)
+  const paired = pair && { before: pair.early.shift, after: pair.late.shift, from: pair.from, to: pair.to };
+  if (pair && paired && pair.size >= 3 && pair.size > met && (!rival || rival.size < pair.size)
     && ranked.every((group) => group === pair.early || group === pair.late || group.instants.length < pair.size)
-    && zoneChangesBetween(pair.from, pair.to)) return { before: pair.early.shift, after: pair.late.shift, from: pair.from, to: pair.to };
+    && changed(paired)) return paired;
   const [first, second] = ranked;
   return first && first.instants.length >= 2 && first.instants.length > met && (!second || second.instants.length < first.instants.length)
     ? { before: first.shift, after: first.shift, from: Infinity, to: Infinity } : null;
@@ -949,6 +955,34 @@ function providerShift(scans: readonly JsonObject[], rows: readonly JsonObject[]
   const met = shifts.get(0)?.size ?? 0;
   shifts.delete(0);
   return learnedShift(new Map([...shifts].map(([shift, instants]) => [shift, [...instants]])), met);
+}
+
+/** A carrier row's own offset in minutes: the one its time states, else its carrier's home zone's then. Null if neither. */
+function rowOffset(row: JsonObject): number | null {
+  const shown = labelledTime(row);
+  if (shown) return shown.offset;
+  const zone = carrierHomeZone(sourceOf(identity(row)));
+  return zone ? DateTime.fromMillis(instantOf(row), { zone }).offset : null;
+}
+
+/** A provider's copy a shift from a carrier's row of the scan: the copy's instant, and the row's offset in minutes. */
+interface ShiftedCopy { at: number; offset: number | null; shift: number }
+
+/**
+ * The zones a provider can have read a carrier's wall clocks in, from its copies a shift from the carrier's rows: those
+ * whose offset at each copy's instant is the row's offset less the shift. Shiprocket's India clock read at +9 h 30 is
+ * US Eastern summer time, or a Caribbean clock that keeps -04:00 all year. None when a row's offset is unknown.
+ */
+function misreadZones(copies: readonly ShiftedCopy[]): string[] {
+  if (copies.length === 0 || copies.some(({ offset }) => offset === null)) return [];
+  zoneNames ??= Intl.supportedValuesOf('timeZone');
+  return zoneNames.filter((zone) => copies.every(({ at, offset, shift }) =>
+    DateTime.fromMillis(at, { zone }).offset * MINUTE_MS === offset! * MINUTE_MS - shift));
+}
+
+/** The copies a learned clock stands on: its shift before its change up to it, its shift after from then. */
+function standingOn(clock: LearnedShift, copies: readonly ShiftedCopy[]): ShiftedCopy[] {
+  return copies.filter(({ at, shift }) => (shift === clock.before && at <= clock.from) || (shift === clock.after && at >= clock.to));
 }
 
 export interface SharedScans {
@@ -1522,28 +1556,46 @@ export function sharedScans(
     if (sourceOf(id) !== UNIVERSAL || providerOf(row) === '' || holding.has(id) || candidates.has(id)) continue;
     candidates.set(id, [row, [...carrierRows, ...batchScans]]);
   }
-  // The shift most of a provider's copies show from carrier rows of the same scan (`learnedShift`), each copy counted once.
+  // The shift most of a provider's copies show from carrier rows of the same scan (`learnedShift`), each copy counted
+  // once, and the zones the provider can have misread (`misreadZones`). Two shifts make one clock only when a zone it
+  // can have misread changed between them, by an hour or by half an hour (Lord Howe Island).
   const shiftsOf = new Map<string, Map<number, Map<string, number>>>();
+  const copiesBy = new Map<string, ShiftedCopy[]>();
   for (const [id, [copy, among]] of candidates) {
     const shifts = shiftsOf.get(providerOf(copy)) ?? new Map<number, Map<string, number>>();
     shiftsOf.set(providerOf(copy), shifts);
     for (const row of among) {
       const shift = own(row) && sameScan(copy, row) ? zoneShift(instantOf(copy), instantOf(row)) : 0;
-      if (shift !== 0) shifts.set(shift, (shifts.get(shift) ?? new Map<string, number>()).set(id, instantOf(copy)));
+      if (shift === 0 || shifts.get(shift)?.has(id)) continue;
+      shifts.set(shift, (shifts.get(shift) ?? new Map<string, number>()).set(id, instantOf(copy)));
+      copiesBy.set(providerOf(copy), [...copiesBy.get(providerOf(copy)) ?? [], { at: instantOf(copy), offset: rowOffset(row), shift }]);
     }
   }
-  const clocks = new Map<string, LearnedShift>();
+  const clocks = new Map<string, { clock: LearnedShift; zones: readonly string[] }>();
   for (const [provider, shifts] of shiftsOf) {
-    const clock = learnedShift(new Map([...shifts].map(([shift, copies]) => [shift, [...copies.values()]])));
-    if (clock) clocks.set(provider, clock);
+    const copies = copiesBy.get(provider) ?? [];
+    const clock = learnedShift(new Map([...shifts].map(([shift, found]) => [shift, [...found.values()]])), 0,
+      (paired) => misreadZones(standingOn(paired, copies)).length > 0, [HOUR_MS, HOUR_MS / 2]);
+    if (clock) clocks.set(provider, { clock, zones: misreadZones(standingOn(clock, copies)) });
   }
   const carrierRowOf = (copy: JsonObject, among: readonly JsonObject[]): JsonObject | undefined => {
-    const clock = clocks.get(providerOf(copy));
-    const shifts = clock ? shiftsAt(clock, instantOf(copy)) : [];
+    const learned = clocks.get(providerOf(copy));
+    const shifts = learned ? shiftsAt(learned.clock, instantOf(copy)) : [];
+    // A copy past the copies the clock was learned from, across a change of a zone the provider can have misread, is
+    // on that zone's new offset: the provider read the next scans on it too.
+    const zoned = (row: JsonObject) => {
+      const offset = rowOffset(row);
+      return offset === null ? [] : (learned?.zones ?? []).map((zone) =>
+        offset * MINUTE_MS - DateTime.fromMillis(instantOf(copy), { zone }).offset * MINUTE_MS);
+    };
+    const onClock = (row: JsonObject) => {
+      const shift = zoneShift(instantOf(copy), instantOf(row));
+      return shifts.includes(shift) || zoned(row).includes(shift);
+    };
     // A carrier's scan past when the copy was stored is a later one, not the scan the copy misread.
-    const misread = among.filter((row) => own(row) && !(pastFirstStored(row, copy) && !misreadOffset(copy, row)) && (clock === undefined
+    const misread = among.filter((row) => own(row) && !(pastFirstStored(row, copy) && !misreadOffset(copy, row)) && (learned === undefined
       ? sameScan(copy, row) && hoursApart(instantOf(copy), instantOf(row))
-      : placeOf(row) === placeOf(copy) && codesAgree(copy, row) && shifts.includes(zoneShift(instantOf(copy), instantOf(row)))));
+      : placeOf(row) === placeOf(copy) && codesAgree(copy, row) && onClock(row)));
     const apart = misread.length > 0 ? misread : among.filter((row) => own(row) && readsClock(copy, row));
     if (apart.length !== 1) return undefined;
     const carrier = apart[0]!;

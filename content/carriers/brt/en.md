@@ -3,7 +3,7 @@ title: BRT tracking: numbers, statuses and missed deliveries
 description: Track a BRT parcel in or from Italy: where to find the BRTcode or shipment number, what BRT's English statuses mean, missed deliveries, lockers and contacts.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 BRT is an Italian express courier, part of the Geopost group like DPD. Track a parcel with the link in BRT's SMS or email, with "Where is my shipment?" on [brt.it](https://www.brt.it/en/) or by pasting the number in the box above. BRT sends that number, the BRTcode, when it takes charge of the parcel, if the sender gave it your contact details.
@@ -41,6 +41,7 @@ BRT's tracking at vas.brt.it opens in Italian, with a switch to English; these a
 | `NOTICE OF ATTEMPTED DELIVERY` | Not delivered: nobody was in, so the courier left a notice. |
 | `UNKNOWN/INCOMPLETE CONSIGNEE` | Not delivered: the recipient or address wasn't found. |
 | `TURMOIL` | A public demonstration is holding it up for now. |
+| `PATRONAL HOLIDAY` | The patron saint's holiday where it's going holds it for the day, before it reaches the depot that delivers it. No delivery is tried. |
 | `DELIVERED` | Delivered. |
 | `ARRIVED AT BRT-fermopoint` | Waiting for you at a BRT-fermopoint shop. |
 | `COLLECTED AT BRT-fermopoint` | Picked up at the fermopoint. |

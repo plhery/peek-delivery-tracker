@@ -3,7 +3,7 @@ title: BRT Sendungsverfolgung: Paket aus Italien, Status
 description: BRT-Paket verfolgen: wo die Sendungsnummer steht, was BRTs Statusmeldungen bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Kontakt.
 slug: brt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 BRT ist ein italienischer Expresskurier und gehört wie DPD zur Geopost-Gruppe. Ein Paket verfolgst du mit dem Link in BRTs SMS oder E-Mail, im Suchfeld auf brt.it oder hier: Füg die Nummer oben ins Feld ein. Diese Nummer, den BRTcode, schickt dir BRT, sobald es das Paket hat und der Absender deine Kontaktdaten weitergegeben hat.
@@ -41,6 +41,7 @@ BRTs Sendungsverfolgung auf vas.brt.it öffnet auf Italienisch und lässt sich a
 | `NOTICE OF ATTEMPTED DELIVERY` | Der Zusteller hat niemanden angetroffen und eine Nachricht hinterlassen. | „Zustellversuch“ |
 | `UNKNOWN/INCOMPLETE CONSIGNEE` | Nicht zugestellt: Empfänger nicht gefunden oder Adresse unvollständig. | „Zustellversuch“ |
 | `TURMOIL` | Eine Demonstration hält das Paket vorübergehend auf. | „Problem gemeldet“ |
+| `PATRONAL HOLIDAY` | Am Zielort ist der Feiertag des Schutzpatrons: Das Paket bleibt den Tag über liegen, bevor es die zustellende Filiale erreicht. Einen Zustellversuch gibt es nicht. | „Unterwegs“ |
 | `ARRIVED AT BRT-fermopoint` | Es liegt in einem BRT-fermopoint (Abholstelle in einem Geschäft) für dich bereit. | „Abholbereit“ |
 | `COLLECTED AT BRT-fermopoint` | Du hast es im BRT-fermopoint abgeholt. | „Zugestellt“ |
 | `ARRIVED AT BRT LOCKER` | Es liegt in einem BRT-Locker (Paketautomat) bereit. | „Abholbereit“ |

@@ -3,7 +3,7 @@ title: USPS tracking: numbers, statuses and missed deliveries
 description: Track a USPS parcel: where the tracking number is, what USPS's statuses mean, redelivery and Post Office pickup, lost parcels and how to reach USPS.
 slug: usps-tracking
 published: 2026-10-13
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 USPS, the U.S. Postal Service, delivers to every address in the United States, and tracking comes free with most of its domestic parcel services. Type the number into USPS Tracking on usps.com, text it to 28777 or paste it in the box above. The number comes from the sender, usually in the shop's shipping email.
@@ -31,6 +31,7 @@ USPS writes its tracking in English. These are the steps a parcel usually shows,
 
 | USPS status | What it means for you |
 | --- | --- |
+| `Merchant Order Receipt Notification` | The shop's electronic notice that it has received your order, before any scan: USPS doesn't have the parcel yet. |
 | `Shipping Label Created, USPS Awaiting Item` | The sender made a label; USPS doesn't have the parcel yet. Questions go to the shop. |
 | `Picked Up by Shipping Partner, USPS Awaiting Item` | A shipping partner has it and will hand it to USPS. The delivery date comes once USPS receives it. |
 | `USPS in Possession of Item` | USPS has received or picked it up. Nothing to do. |

@@ -3,7 +3,7 @@ title: USPS Sendungsverfolgung: Nummer, Status, Paket aus den USA
 description: USPS-Paket aus den USA verfolgen: wo die Trackingnummer steht, was die Status bedeuten, Zoll, verlorene Pakete und wie du USPS erreichst.
 slug: usps-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 USPS, der United States Postal Service, ist die Post der USA. Bei vielen Sendungen ist die Sendungsverfolgung (USPS Tracking) ohne Aufpreis dabei, auch bei vielen, aber nicht allen internationalen Produkten. Gib die Trackingnummer in USPS Tracking auf usps.com ein oder füg sie oben ins Feld ein; in den USA kannst du sie auch per SMS an 28777 schicken. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops.
@@ -27,10 +27,11 @@ Manche Nummernformen nutzen auch andere Paketdienste: 22-stellige Nummern, die m
 
 ## USPS Sendungsverfolgung: was die Status bedeuten
 
-USPS schreibt seine Sendungsverfolgung auf Englisch. Diese Status erklärt USPS in seiner Hilfe; sie beschreiben den Weg bis zur Zustellung in den USA, in der Reihenfolge, in der ein Paket sie meist bekommt:
+USPS schreibt seine Sendungsverfolgung auf Englisch. Fast alle dieser Status erklärt USPS in seiner Hilfe; sie beschreiben den Weg bis zur Zustellung in den USA, in der Reihenfolge, in der ein Paket sie meist bekommt:
 
 | USPS schreibt | Was es für dich heißt | In Peek |
 | --- | --- | --- |
+| `Merchant Order Receipt Notification` | Die elektronische Meldung des Shops, dass deine Bestellung bei ihm eingegangen ist; gescannt ist noch nichts. | „Etikett erstellt“ |
 | `Shipping Label Created, USPS Awaiting Item` | Der Absender hat ein Etikett erstellt, USPS hat das Paket aber noch nicht. Fragen gehen an den Shop. | „Etikett erstellt“ |
 | `Picked Up by Shipping Partner, USPS Awaiting Item` | Ein Versandpartner hat das Paket und übergibt es an USPS. Ein Lieferdatum gibt es, sobald USPS es hat. | „Etikett erstellt“ |
 | `USPS in Possession of Item` | USPS hat das Paket angenommen oder abgeholt. Du musst nichts tun. | „Beim Paketdienst eingegangen“ |

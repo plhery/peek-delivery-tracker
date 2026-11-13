@@ -3,7 +3,7 @@ title: Poczta Polska tracking: numbers, statuses and pickups
 description: Track a Poczta Polska or Pocztex parcel in English: the number shapes, what each status means, notices, pickup points, lockers, customs and contacts.
 slug: poczta-polska-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Poczta Polska is Poland's state-owned postal company, and Pocztex is its courier service. Track a parcel or registered letter on Poczta Polska's eMonitoring page, which has an English version, or paste the number in the box above. The number is the one on the sender's posting confirmation, so the shop that sent it has it, and Poczta Polska's own SMS and notices repeat it.
@@ -34,19 +34,23 @@ eMonitoring opens in Polish; the English version shows these wordings, with the 
 | Poczta Polska's status | What it means for you |
 | --- | --- |
 | `Electronic item data received` | The sender has registered the item. Poczta Polska doesn't have it yet. |
-| `Posting/collection` | Posted at an office or collected from the sender. |
+| `Posting/collection`, `Item arrived at the shipping point` | Posted at an office or a point, or collected from the sender. |
 | `In transport` | Moving between sorting centres. |
 | `Departure from Poland` | It has left Poland for another country. |
 | `Arrival at inward office of exchange (Poland)` | A parcel from abroad has reached Poland's exchange office. |
 | `Customs service` | Customs handling. |
-| `In delivery` | Out for delivery. |
-| `Unsuccessful (physical) delivery` | Nobody was in. A notice was left and the item goes to the post office. |
-| `Ready for pick-up at the Post Office` | Waiting for you at the office named in the scan. |
-| `Collected at the post office` | Picked up at the office. |
-| `Final delivery` | Delivered. |
-| `Returned` | Going back to the sender. |
+| `Item returned from import customs` | Released by import customs. |
+| `In delivery` | Out for delivery, or a failed attempt (see below). |
+| `Unsuccessful (physical) delivery` | Nobody was in. A notice was left and the item goes to the post office or out again. |
+| `Attempted delivery - redirected` | An attempt, after which the item is forwarded. |
+| `Delivery at sender's request - delivery attempt` | An attempt at a delivery the sender asked for. |
+| `Unsuccessful (physical) delivery - lost` | Lost during delivery. |
+| `Ready for pick-up at the Post Office`, `Added to postal notice book - Item can be collected`, `Ready for pick up at the point` | Waiting for you at the office or point named in the scan. |
+| `Collected at the post office`, `Collected at the delivery point` | Picked up at the office or point. |
+| `Final delivery`, `Delivered to the PO box`, `Delivery at sender's request - delivered` | Delivered. |
+| `Returned`, `Returned to sender`, `Not collected at the delivery point` | Going back to the sender. |
 
-`Posting/collection` is the sender's step, not yours. `In delivery` can also follow a failed attempt, so read the line above it. A `Customs service` line can appear after delivery: it books duty collected at the door. Without "(Poland)", `Arrival at inward office of exchange` means a parcel sent from Poland has reached its destination country. On the Polish page, a missed delivery reads `Awizowana` and a parcel waiting at an office `Oczekuje na odbiór`. Poczta Polska says event names may change.
+`Posting/collection` is the sender's step, not yours. Poczta Polska also names one of its failed-delivery events `In delivery`: Peek tells the two apart by the event's code, and shows "Delivery attempted" for that one rather than "Out for delivery". A `Customs service` line can appear after delivery: it books duty collected at the door. Without "(Poland)", `Arrival at inward office of exchange` means a parcel sent from Poland has reached its destination country. On the Polish page, a missed delivery reads `Awizowana` and a parcel waiting at an office `Oczekuje na odbiór`. Poczta Polska says event names may change.
 
 ## Poczta Polska delivery failed: notices, pickup points and lockers
 

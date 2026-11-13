@@ -3,7 +3,7 @@ title: USPS seguimiento: estados, reintento de entrega y envíos
 description: Sigue tu paquete de USPS: dónde está el número, qué significan sus estados en inglés, cómo pedir un reintento de entrega y qué pasa si el envío va a España.
 slug: usps-seguimiento
 published: 2026-10-22
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 USPS, el U.S. Postal Service, es el correo de Estados Unidos: llega a todas las direcciones del país, y la mayoría de sus servicios de paquetes nacionales incluyen seguimiento gratis. Para seguir un paquete, escribe el número en USPS Tracking, en usps.com o en su versión en español, es.usps.com; también puedes mandarlo por SMS al 28777 o pegarlo en la casilla de arriba. El número te lo da quien envía, normalmente en el correo de envío de la tienda. Esta página te sirve si vives en Estados Unidos y también si estás en España esperando un paquete que viene de allí.
@@ -31,6 +31,7 @@ Aquí van los estados en inglés, tal como los escribe USPS en usps.com: primero
 
 | USPS dice | Qué significa para ti |
 | --- | --- |
+| `Merchant Order Receipt Notification` | Aviso electrónico de la tienda de que ha recibido tu pedido. Aún no se ha escaneado nada: USPS todavía no tiene el paquete. |
 | `Shipping Label Created, USPS Awaiting Item` | El remitente hizo la etiqueta, pero USPS aún no tiene el paquete. Si tarda, pregunta a la tienda. |
 | `Picked Up by Shipping Partner, USPS Awaiting Item` | Lo tiene una empresa asociada, que se lo pasará a USPS. La fecha de entrega sale cuando USPS lo recibe. |
 | `USPS in Possession of Item` | USPS ya lo tiene y empieza a moverlo hacia tu oficina de correos. |

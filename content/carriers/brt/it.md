@@ -3,7 +3,7 @@ title: BRT tracking: dov'è il pacco e cosa fare se non arriva
 description: Tracking BRT: dove trovi il BRTcode, cosa vogliono dire gli stati, giacenza, BRT-fermopoint e locker, numero verde e cosa fare se il pacco non arriva.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 BRT è un corriere espresso italiano del gruppo Geopost, come DPD. Per seguire il pacco apri il link nell'SMS o nell'e-mail di BRT, cerca il numero in «Dov'è la mia spedizione?» su [brt.it](https://www.brt.it/it/) oppure incollalo nel box qui sopra. Il numero, il BRTcode, te lo comunica BRT quando prende in carico la spedizione, se il mittente le ha dato il tuo cellulare o la tua e-mail.
@@ -30,7 +30,7 @@ Le stesse forme le usano altri corrieri: 14 cifre anche DPD in Svizzera, Germani
 
 ## Stati del tracciamento BRT: cosa significano
 
-Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, Français o Deutsch. Nessuna pagina di BRT elenca gli stati: qui sotto trovi le diciture della versione italiana e, accanto, quelle della versione inglese (per i locker e per le consegne all'estero, Peek conosce solo quelle inglesi); myBRT può usare parole diverse. Anche in inglese le colonne restano Data, Ora, Filiale ed Evento, e la filiale accanto a ogni stato è quella a cui chiedere informazioni. Le fasi che ogni pacco attraversa, con qualsiasi corriere, le trovi in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses). Nell'ultima colonna c'è lo stato che Peek mostra per il pacco.
+Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, Français o Deutsch. Nessuna pagina di BRT elenca gli stati: qui sotto trovi le diciture della versione italiana e, accanto, quelle della versione inglese (per i locker, per le consegne all'estero e per la festa patronale, Peek conosce solo quelle inglesi); myBRT può usare parole diverse. Anche in inglese le colonne restano Data, Ora, Filiale ed Evento, e la filiale accanto a ogni stato è quella a cui chiedere informazioni. Le fasi che ogni pacco attraversa, con qualsiasi corriere, le trovi in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses). Nell'ultima colonna c'è lo stato che Peek mostra per il pacco.
 
 | Stato BRT | In inglese | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- | --- |
@@ -42,6 +42,7 @@ Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, F
 | `Destin.Assente:LASCIATO AVVISO` | `NOTICE OF ATTEMPTED DELIVERY` | Il corriere non ha trovato nessuno e ha lasciato un avviso. | «Tentativo di consegna» |
 | `DESTINATAR.SCONOSC./INCOMPLETO` | `UNKNOWN/INCOMPLETE CONSIGNEE` | Non consegnato: destinatario o indirizzo non trovati. | «Tentativo di consegna» |
 | `MANIFESTAZIONE PUBBLICA` | `TURMOIL` | Una manifestazione lo blocca temporaneamente. | «Problema segnalato» |
+| – | `PATRONAL HOLIDAY` | Nella località di destinazione è la festa patronale: il pacco resta fermo per la giornata, prima di arrivare alla filiale che lo consegna, e non si tenta la consegna. | «In transito» |
 | `CONSEGNATA` | `DELIVERED` | Consegnato. | «Consegnato» |
 | `ARRIVATA AL BRT-fermopoint` | `ARRIVED AT BRT-fermopoint` | Ti aspetta in un BRT-fermopoint. | «Pronto per il ritiro» |
 | `RITIRATA AL BRT-fermopoint` | `COLLECTED AT BRT-fermopoint` | Ritirato al BRT-fermopoint. | «Consegnato» |

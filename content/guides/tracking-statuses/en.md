@@ -4,7 +4,7 @@ description: What each tracking status means, from "label created" to "delivered
 slug: tracking-status-meanings
 picture: A winding route with ticked stops (label, depot, plane), a van at the current stop, a house ahead and Pip hurrying.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 A tracking status is the carrier's latest scan in a few words, and most ask nothing of you. "Label created" means the carrier doesn't have your parcel yet, "in transit" means it's somewhere between two scans, and "out for delivery" means it's on today's van. Only a few need you: a missed delivery, a parcel waiting for pickup, a customs charge and a "delivered" with nothing at the door.
@@ -39,7 +39,7 @@ Same stages, different words:
 
 ## "Label created" or "pre-shipment": does the carrier have it?
 
-No: the seller has printed a label and sent the details, nothing more. [USPS](carrier:usps) says the parcel "has not yet been given to USPS", and [UPS](carrier:ups)'s first scan reads `Shipper created a label, UPS has not received the package yet.` [An Post](carrier:an-post) words it `We have received information about your incoming item from the sender`. Some US parcels show `Picked Up by Shipping Partner, USPS Awaiting Item`: a partner company has it and will hand it to USPS.
+No: the seller has printed a label and sent the details, nothing more. [USPS](carrier:usps) says the parcel "has not yet been given to USPS", and [UPS](carrier:ups)'s first scan reads `Shipper created a label, UPS has not received the package yet.` [An Post](carrier:an-post) words it `We have received information about your incoming item from the sender`. Some US parcels show `Picked Up by Shipping Partner, USPS Awaiting Item`: a partner company has it and will hand it to USPS. Others start with `Merchant Order Receipt Notification`, the shop's electronic notice that it has received the order.
 
 [Australia Post](carrier:australia-post)'s `Pending` (nothing scanned yet) should update within 24 to 48 hours. If nothing moves, ask the seller, not the carrier: USPS and [Evri](carrier:evri) say so.
 
@@ -128,7 +128,7 @@ Don't count on stopping it: "Once the return process starts, we can't stop it," 
 - [USPS: Where is my package?](https://faq.usps.com/s/article/Where-is-my-package) – statuses, 9 pm rule
 - [USPS: Redelivery, the basics](https://faq.usps.com/s/article/Redelivery-The-Basics) – holding periods
 - [Royal Mail: Tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – Internal exception occurred
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail, An Post and FedEx status wordings
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail, An Post and FedEx status wordings, USPS's "Merchant Order Receipt Notification"
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – UPS scans Peek reads: first scan, Ground Saver handed to USPS, missed deliveries, Access Point, "Left at", Exception
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's red card
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – pay-by-link messages

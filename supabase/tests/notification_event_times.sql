@@ -62,7 +62,7 @@ declare
   queue text;
   written integer;
 begin
-  foreach queue in array array['pending_push_notifications', 'pending_native_push_notifications'] loop
+  foreach queue in array array['pending_push_notifications', 'pending_native_push_notifications', 'pending_live_activity_events'] loop
     execute format('select count(*) from public.%I as pending
       where package_id = %L and timezone_chosen is false and event_time is not distinct from
         (select raw_data ->> ''time'' from public.tracking_events where id = pending.event_id)',
@@ -87,6 +87,8 @@ begin
       where package_id = '97000000-0000-0000-0000-000000000002' and timezone_chosen
         and timezone = 'America/Los_Angeles') <> 5
      or (select count(*) from public.pending_native_push_notifications
+      where package_id = '97000000-0000-0000-0000-000000000002' and timezone_chosen) <> 5
+     or (select count(*) from public.pending_live_activity_events
       where package_id = '97000000-0000-0000-0000-000000000002' and timezone_chosen) <> 5 then
     raise exception 'The queues missed the time zone the account chose';
   end if;

@@ -53055,7 +53055,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://gls-group.com/US/en/send-and-receive/track-a-parcel/"
+    "trackingSearchUrl": "https://gls-group.com/US/en/send-and-receive/track-a-parcel/",
+    "helpUrl": "https://gls-group.com/US/en/support/customer-support/"
   },
   "poste-srpske": {
     "displayName": "Pošte Srpske",
@@ -53078,6 +53079,28 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.postesrpske.com/pracenje-posiljaka/"
+  },
+  "trustexpress": {
+    "displayName": "Trustexpress",
+    "aliases": [
+      "Trust Express",
+      "Тръстекспрес",
+      "Тръстекспрес ООД",
+      "Тръст Експрес"
+    ],
+    "countries": [
+      "BG"
+    ],
+    "color": "#095da8",
+    "selectable": true,
+    "timezone": "Europe/Sofia",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://trustexpress.bg/tracking"
   }
 } as const;
 
@@ -54624,7 +54647,8 @@ export const CARRIER_IDS = [
   "cvc",
   "transpress",
   "gls-us",
-  "poste-srpske"
+  "poste-srpske",
+  "trustexpress"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

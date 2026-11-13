@@ -73,15 +73,16 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Un colis en livraison arrive aujourd’hui, donc sa carte, le widget et l’activité en direct ne nomment plus de jour : seules restent les heures que le transporteur donne pour aujourd’hui.
-• Quand le transporteur qui doit livrer un colis en a été informé sans l’avoir encore scanné, la carte affiche désormais, par exemple, « Annoncé à DHL, pas encore reçu » au lieu de « Livraison par DHL ».
-• Un colis retourné à l’expéditeur reste désormais indiqué comme retourné pendant que le transporteur le scanne sur le chemin du retour, au lieu de repasser « En transit ».
-• Un lieu écrit dans un autre alphabet, en chinois, en japonais ou en coréen par exemple, affiche désormais sa ville et son pays, comme « Shenzhen, Chine », dans les scans comme dans les étapes prévues ; et un lieu comme « SCARBOROUGH - ON - CANADA » affiche maintenant le Canada et son drapeau.
-• Quand un transporteur publie son suivi à l’avance, la page du colis indique désormais que Peek affiche les vrais scans dès qu’ils arrivent, et une étape prévue disparaît sitôt son heure passée.
-• 72 transporteurs de plus ont maintenant leur propre camion, à leurs couleurs, et quand tu choisis un transporteur, ceux de ton pays passent en tête parmi ceux qui correspondent au numéro.
-• Un numéro de conteneur maritime est désormais reconnu : la page du colis le dit, t’indique où trouver le numéro de suivi et te propose de choisir le transporteur.
-• Au Mexique et en Chine, J&T Express affiche les scans d’un colis avec les 4 derniers chiffres du téléphone du destinataire ou de l’expéditeur : tu peux désormais les ajouter avec le colis, ou plus tard depuis sa page.
-• Quand tu te connectes, si ton compte n’a pas de place pour tous les colis de cet appareil, Peek te dit désormais combien y sont restés.
-• Sans compte, un colis recherché avec un code postal ne te le redemande plus, un colis dont la copie enregistrée est illisible revient dans la liste, et oublier un colis fonctionne tout de suite, même hors connexion.
-• Actualiser tes colis n’affiche plus « Aucune nouvelle mise à jour » à côté d’une erreur de connexion, et certaines étapes de C Chez Vous sont désormais traduites quand l’app est dans une autre langue.
+• Dans « Ajouter un colis », chaque transporteur garde désormais son propre code postal et son pays de livraison : le code postal de l’un ne passe plus à l’autre quand tu changes de transporteur, et il réapparaît quand tu reviens au premier.
+• « Changer de transporteur » remplit désormais un code postal obligatoire avec le dernier que tu as donné et qui convient, et te le propose pour un code postal facultatif, comme « Ajouter un colis ».
+• Un colis enregistré avec son code postal, comme un colis PostNL pas encore scanné, ne demande plus le code postal de livraison une deuxième fois.
+• Peek suit désormais 83 transporteurs de plus, chacun avec un camion à ses couleurs, dont GLS US, BH Pošta, Pošte Srpske et des transporteurs de Grèce, de Roumanie, de Hongrie, de Pologne et de Bulgarie.
+• Quand aucun transporteur ne trouve un numéro qui commence comme ceux d’un transporteur mais a un caractère de moins ou de trop, comme un numéro UPS commençant par 1Z, la page du colis dit désormais qu’il y a peut-être une faute de frappe et nomme le transporteur.
+• Une ligne sous l’historique d’un colis indique désormais que ses heures sont dans ton fuseau horaire et le nomme, par exemple « heure d’Europe centrale ».
+• Une plage de livraison dans une notification ou une activité en direct affiche désormais les heures du transporteur : une plage britannique de 07:00 à 09:00 ne s’affiche plus de 08:00 à 10:00.
+• Tant que le transporteur qui doit livrer un colis ne l’a pas scanné, comme pour les colis JRT remis à DHL, Peek continue désormais de vérifier le premier transporteur pendant 14 jours au plus, pour que ses scans suivants s’affichent encore.
+• Pendant qu’un colis repart vers son expéditeur, les notifications disent désormais « Sur le chemin du retour » au lieu de « En route », et Peek continue de le vérifier au cas où il partirait finalement en livraison.
+• Quand un transporteur comme GZYL ou Xinghe Freight écrit ses étapes à l’avance, même la livraison, la page du colis dit désormais que Peek les laisse de côté et te propose de chercher sur son site le transporteur qui livre dans ton pays.
+• Dans l’historique d’un colis AliExpress, la ligne « Last-mile delivery forecast » de Cainiao devient « Annoncé au transporteur local ».
+• Avec les plus grandes tailles de texte, sur un petit iPhone comme le SE, le bouton « Se connecter » et le nom du colis d’exemple ne se chevauchent plus sur l’écran d’accueil et ne débordent plus sur le trajet : l’image s’agrandit et l’écran défile.
 ```

@@ -71,15 +71,16 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Un pacco in consegna arriva oggi, quindi la sua scheda, il widget e l’Attività Live non indicano più un giorno: restano solo gli orari che il corriere dà per oggi.
-• Quando il corriere che consegnerà un pacco ne è stato avvisato ma non l’ha ancora scansionato, la scheda ora dice, per esempio, «Annunciato a DHL, non ancora ricevuto» invece di «Consegna con DHL».
-• Un pacco restituito al mittente ora rimane tale mentre il corriere lo scansiona durante il ritorno, invece di tornare «In transito».
-• Un luogo scritto in un altro alfabeto, per esempio in cinese, giapponese o coreano, ora mostra la sua città e il suo paese, come «Shenzhen, Cina», sia nelle scansioni sia nei passaggi previsti; e un luogo come «SCARBOROUGH - ON - CANADA» ora mostra il Canada e la sua bandiera.
-• Quando un corriere pubblica il tracciamento in anticipo, la pagina del pacco ora dice che Peek mostra le scansioni reali man mano che arrivano, e un passaggio previsto sparisce appena il suo orario è passato.
-• 72 corrieri in più ora hanno un furgone tutto loro, nei loro colori, e quando scegli un corriere, quelli del tuo paese vengono prima tra quelli compatibili con il numero.
-• Un numero di container marittimo ora viene riconosciuto: la pagina del pacco lo dice, indica dove trovare il numero di tracciamento e propone di scegliere il corriere.
-• In Messico e in Cina, J&T Express mostra le scansioni di un pacco con le ultime 4 cifre del telefono del destinatario o del mittente: ora puoi aggiungerle insieme al pacco o più tardi dalla sua pagina.
-• Quando accedi, se il tuo account non ha spazio per tutti i pacchi di questo dispositivo, Peek ora ti dice quanti ne sono rimasti sul dispositivo.
-• Senza account, un pacco cercato con un codice postale non lo richiede più, un pacco la cui copia salvata non è leggibile torna nell’elenco e dimenticare un pacco funziona subito, anche offline.
-• Aggiornando i pacchi non compare più «Nessun nuovo aggiornamento» accanto a un errore di connessione e alcuni passaggi di C Chez Vous ora appaiono nella tua lingua invece che in francese.
+• In «Aggiungi un pacco» ogni corriere ora conserva il proprio codice postale e Paese di consegna: il codice postale di un corriere non passa più al successivo quando cambi, e ricompare quando torni indietro.
+• «Cambia corriere» ora compila un codice postale obbligatorio con l’ultimo che hai dato e che corrisponde, e lo suggerisce per uno facoltativo, come fa «Aggiungi un pacco».
+• Un pacco salvato con il suo codice postale, come un pacco PostNL non ancora scansionato, non chiede più il codice postale di consegna una seconda volta.
+• Peek ora segue 83 corrieri in più, ognuno con un furgone nei suoi colori, tra cui GLS US, BH Pošta, Pošte Srpske e corrieri di Grecia, Romania, Ungheria, Polonia e Bulgaria.
+• Quando nessun corriere trova un numero che inizia come quelli di un corriere ma ha un carattere in meno o in più, come un numero UPS che inizia con 1Z, la pagina del pacco ora dice che forse c’è un errore di battitura e nomina il corriere.
+• Una riga sotto la cronologia di un pacco ora dice che gli orari sono nel tuo fuso orario e lo nomina, ad esempio «Ora dell’Europa centrale».
+• Una fascia di consegna in una notifica o in un’Attività Live ora mostra gli orari del corriere, così una fascia britannica dalle 07:00 alle 09:00 non appare più dalle 08:00 alle 10:00.
+• Finché il corriere che consegnerà un pacco non lo scansiona, come per i pacchi JRT affidati a DHL, Peek ora continua a controllare il primo corriere fino a 14 giorni, così le sue scansioni successive compaiono ancora.
+• Mentre un pacco torna al mittente, le notifiche ora dicono «Sulla via del ritorno» invece di «In viaggio», e Peek continua a controllarlo nel caso venga comunque messo in consegna.
+• Quando un corriere come GZYL o Xinghe Freight scrive in anticipo le sue tappe, persino la consegna, la pagina del pacco ora dice che Peek non le mostra e suggerisce di cercare sul suo sito il corriere che consegna nel tuo Paese.
+• Nella cronologia dei pacchi AliExpress, la riga «Last-mile delivery forecast» di Cainiao ora diventa «Annunciato al corriere locale».
+• Con le dimensioni del testo più grandi, su un iPhone piccolo come l’SE, «Accedi» e il nome del pacco di esempio nella schermata di benvenuto non si sovrappongono più tra loro né al percorso: l’immagine si ingrandisce e la schermata scorre.
 ```

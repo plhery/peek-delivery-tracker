@@ -71,15 +71,16 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Przesyłka w doręczeniu dotrze dziś, więc jej karta, widżet i aktywność na żywo nie podają już dnia: zostają tylko godziny wskazane przez przewoźnika na dziś.
-• Gdy przewoźnik, który ma doręczyć przesyłkę, wie już o niej, ale jeszcze jej nie zeskanował, karta pokazuje teraz na przykład „Zgłoszona przewoźnikowi DHL, jeszcze nieprzyjęta” zamiast „Doręcza: DHL”.
-• Przesyłka zwrócona nadawcy zachowuje teraz status zwrotu, gdy przewoźnik skanuje ją w drodze powrotnej, i nie wraca już do statusu „W transporcie”.
-• Miejsce zapisane innym pismem, takim jak chińskie, japońskie czy koreańskie, pokazuje teraz miasto i kraj, np. „Shenzhen, Chiny”, zarówno w skanach, jak i w zaplanowanych krokach, a miejsce w rodzaju „SCARBOROUGH - ON - CANADA” pokazuje Kanadę i jej flagę.
-• Gdy przewoźnik publikuje historię przesyłki z wyprzedzeniem, strona przesyłki informuje teraz, że Peek pokazuje prawdziwe skany, gdy tylko się pojawią, a zaplanowany krok znika zaraz po tym, jak minie jego czas.
-• Kolejnych 72 przewoźników ma teraz własną furgonetkę w swoich barwach, a przy wyborze przewoźnika ci z Twojego kraju są na początku listy pasujących do numeru.
-• Numer kontenera morskiego jest teraz rozpoznawany: strona przesyłki wyjaśnia, co to jest i gdzie znaleźć numer śledzenia, oraz proponuje wybór przewoźnika.
-• W Meksyku i Chinach J&T Express pokazuje skany przesyłki z ostatnimi 4 cyframi telefonu odbiorcy lub nadawcy: możesz je teraz podać przy dodawaniu przesyłki albo później na jej stronie.
-• Jeśli po zalogowaniu na koncie zabraknie miejsca na wszystkie przesyłki z tego urządzenia, Peek poda teraz, ile z nich zostało na urządzeniu.
-• Bez konta przesyłka wyszukana z kodem pocztowym nie prosi już ponownie o ten kod, przesyłka, której zapisanej kopii nie da się odczytać, wraca na listę, a zapomnienie przesyłki działa od razu, nawet offline.
-• Odświeżanie przesyłek nie pokazuje już „Brak nowych aktualizacji” obok błędu połączenia, a niektóre kroki C Chez Vous są teraz w Twoim języku zamiast po francusku.
+• W „Dodaj przesyłkę” każdy przewoźnik zachowuje teraz własny kod pocztowy i kraj doręczenia: kod jednego przewoźnika nie przechodzi już do następnego po zmianie, a po powrocie znów się pojawia.
+• „Zmień przewoźnika” wpisuje teraz w wymagane pole ostatni podany pasujący kod pocztowy, a przy polu opcjonalnym go proponuje, tak jak „Dodaj przesyłkę”.
+• Przesyłka zapisana z kodem pocztowym, np. jeszcze niezeskanowana przesyłka PostNL, nie prosi już drugi raz o kod pocztowy odbiorcy.
+• Peek śledzi teraz 83 kolejnych przewoźników, każdego z furgonetką w jego barwach, a wśród nich GLS US, BH Pošta, Pošte Srpske oraz firmy kurierskie z Grecji, Rumunii, Węgier, Polski i Bułgarii.
+• Gdy żaden przewoźnik nie znajduje numeru, który zaczyna się jak numery jednego przewoźnika, ale ma o jeden znak za mało lub za dużo, np. numeru UPS zaczynającego się od 1Z, strona przesyłki informuje teraz, że może być w nim literówka, i podaje przewoźnika.
+• Wiersz pod historią śledzenia mówi teraz, że godziny są podane w Twojej strefie czasowej, i podaje jej nazwę, np. „czas środkowoeuropejski”.
+• Przedział doręczenia w powiadomieniu lub aktywności na żywo pokazuje teraz godziny przewoźnika, więc brytyjski przedział 07:00–09:00 nie wyświetla się już jako 08:00–10:00.
+• Dopóki przewoźnik, który ma doręczyć przesyłkę, jej nie zeskanuje, jak w przypadku przesyłek JRT przekazanych DHL, Peek sprawdza teraz pierwszego przewoźnika nawet przez 14 dni, więc jego późniejsze skany nadal się pojawiają.
+• Gdy przesyłka wraca do nadawcy, powiadomienia mówią teraz „W drodze powrotnej” zamiast „W drodze”, a Peek nadal ją sprawdza na wypadek, gdyby jednak trafiła do doręczenia.
+• Gdy przewoźnik taki jak GZYL czy Xinghe Freight zapisuje etapy z wyprzedzeniem, nawet doręczenie, strona przesyłki mówi teraz, że Peek ich nie pokazuje, i radzi poszukać na jego stronie firmy, która doręcza w Twoim kraju.
+• W historii przesyłek z AliExpress wiersz Cainiao „Last-mile delivery forecast” brzmi teraz „Zgłoszono lokalnemu kurierowi”.
+• Przy największych rozmiarach tekstu na małym iPhonie, takim jak SE, „Zaloguj się” i nazwa przykładowej przesyłki na ekranie powitalnym nie nachodzą już na siebie ani na trasę: obraz się powiększa, a ekran się przewija.
 ```

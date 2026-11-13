@@ -71,15 +71,16 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Uma encomenda em distribuição chega hoje, por isso o cartão, o widget e a atividade em direto já não indicam um dia: ficam só as horas que a transportadora dá para hoje.
-• Quando a transportadora que vai entregar uma encomenda já foi avisada, mas ainda não fez nenhum registo, o cartão diz agora, por exemplo, «Anunciada a DHL, ainda não recebida» em vez de «Entrega: DHL».
-• Uma encomenda devolvida ao remetente fica agora como devolvida enquanto a transportadora a regista no caminho de volta, em vez de voltar a «Em trânsito».
-• Um local escrito noutro alfabeto, como o chinês, o japonês ou o coreano, mostra agora a sua cidade e o seu país, por exemplo «Shenzhen, China», tanto nos registos como nos passos previstos; e um local como «SCARBOROUGH - ON - CANADA» mostra agora o Canadá e a sua bandeira.
-• Quando uma transportadora publica o percurso com antecedência, a página da encomenda diz agora que o Peek mostra os registos reais à medida que chegam, e um passo previsto desaparece assim que a sua hora passa.
-• Mais 72 transportadoras têm agora a sua própria carrinha, com as suas cores, e, ao escolheres uma transportadora, as do teu país aparecem primeiro entre as que correspondem ao número.
-• Um número de contentor marítimo é agora reconhecido: a página da encomenda explica o que é e onde encontrar o número de seguimento, e propõe escolher a transportadora.
-• No México e na China, a J&T Express mostra os registos de uma encomenda com os últimos 4 dígitos do telefone do destinatário ou do remetente: agora podes adicioná-los com a encomenda ou mais tarde, na página dela.
-• Ao iniciares sessão, se a tua conta não tiver espaço para todas as encomendas deste dispositivo, o Peek diz-te agora quantas ficaram nele.
-• Sem conta, uma encomenda procurada com um código postal já não o volta a pedir, uma encomenda cuja cópia guardada não se consegue ler volta à lista e esquecer uma encomenda funciona logo, mesmo sem ligação.
-• Ao atualizar as encomendas, já não aparece «Sem novas atualizações» ao lado de um erro de ligação, e alguns passos da C Chez Vous aparecem agora no teu idioma em vez de em francês.
+• Em «Adicionar uma encomenda», cada transportadora guarda agora o seu próprio código postal e país de entrega: o código postal de uma já não passa para a seguinte quando mudas de transportadora, e volta a aparecer quando regressas.
+• «Alterar transportadora» preenche agora um código postal obrigatório com o último que deste e que corresponda, e sugere-o para um opcional, como faz «Adicionar uma encomenda».
+• Uma encomenda guardada com o seu código postal, como uma encomenda PostNL ainda sem registos, já não pede o código postal de entrega uma segunda vez.
+• O Peek segue agora mais 83 transportadoras, cada uma com uma carrinha nas suas cores, entre elas a GLS US, a BH Pošta, a Pošte Srpske e transportadoras da Grécia, da Roménia, da Hungria, da Polónia e da Bulgária.
+• Quando nenhuma transportadora encontra um número que começa como os de uma transportadora mas tem um carácter a menos ou a mais, como um número UPS começado por 1Z, a página da encomenda diz agora que pode estar mal escrito e indica a transportadora.
+• Uma linha por baixo do histórico de uma encomenda diz agora que as horas estão no teu fuso horário e indica qual é, por exemplo «Hora da Europa Central».
+• Um intervalo de entrega numa notificação ou atividade em direto mostra agora as horas da transportadora, por isso um intervalo britânico das 07:00 às 09:00 já não aparece como das 08:00 às 10:00.
+• Até a transportadora que vai entregar uma encomenda a registar, como nas encomendas da JRT passadas à DHL, o Peek continua agora a consultar a primeira transportadora até 14 dias, para que os registos seguintes dela continuem a aparecer.
+• Enquanto uma encomenda regressa ao remetente, as notificações dizem agora «De regresso» em vez de «A caminho», e o Peek continua a consultá-la caso acabe por sair para distribuição.
+• Quando uma transportadora como a GZYL ou a Xinghe Freight escreve as etapas com antecedência, até mesmo a entrega, a página da encomenda diz agora que o Peek as omite e sugere que procures no site dela a transportadora que entrega no teu país.
+• No histórico das encomendas AliExpress, a linha «Last-mile delivery forecast» da Cainiao aparece agora como «Anunciada à transportadora local».
+• Com os maiores tamanhos de texto, num iPhone pequeno como o SE, «Iniciar sessão» e o nome da encomenda de exemplo já não se sobrepõem no ecrã de boas-vindas nem invadem o percurso: a imagem cresce e o ecrã desliza.
 ```

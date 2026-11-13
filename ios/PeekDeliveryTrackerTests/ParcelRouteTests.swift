@@ -656,6 +656,27 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertEqual(name(clear, "Bern"), name(plain, "Bern"))
     }
 
+    func testARouteStaysInARoomSmallerThanItsLeastFrame() {
+        // 16 points between the card's top row and its title: less than the least frame, which keeps on the room's middle.
+        let size = CGSize(width: 358, height: 100)
+        let card = EdgeInsets(top: 40, leading: 16, bottom: 44, trailing: 16)
+        let dot = GlobeProjection(.framing(ParcelRoute(places: [zurich]), mode: .journey, in: size, insets: card)).project(zurich.point)
+        XCTAssertEqual(dot.y, 48, accuracy: 0.5)
+        XCTAssertEqual(dot.x, 179, accuracy: 0.5)
+    }
+
+    func testPipsRoomNeverTakesTheRouteOutOfItsRoom() {
+        // 60 points of room, and the parcel's dot in its top half: a frame with more room above it moves the route down.
+        let size = CGSize(width: 358, height: 176)
+        let card = EdgeInsets(top: 40, leading: 16, bottom: 76, trailing: 16)
+        let route = ParcelRoute(places: [zurich, leipzig])
+        let inRoom = { (camera: GlobeCamera) in (40...100).contains(GlobeProjection(camera).project(leipzig.point).y) }
+        XCTAssertTrue(inRoom(.framing(route, mode: .journey, in: size, insets: card)))
+        // Pip finds his spot only where the dot has left the room: no frame he may take goes there.
+        let framed = GlobeCamera.framing(route, mode: .journey, in: size, insets: card, shown: { camera, _ in inRoom(camera) ? 1 : 1.5 }, pip: true)
+        XCTAssertTrue(inRoom(framed))
+    }
+
     func testAMapKeepsItsNamesAndPipOffTheCardsButtons() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "World", withExtension: "json"))
         let atlas = try WorldAtlas(data: Data(contentsOf: url))

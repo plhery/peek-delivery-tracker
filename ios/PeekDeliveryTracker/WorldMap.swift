@@ -1146,6 +1146,9 @@ enum MapPainter {
 }
 
 extension GlobeCamera {
+    /// The least room a route is framed in, across and down.
+    static let leastBox: CGFloat = 40
+
     /// The camera that frames a route in the room the insets leave: the whole journey, or the parcel's surroundings.
     /// `covered` is a box the card writes over the map, such as a second carrier's mark in its corner, and `shown` tells
     /// how much of the journey a camera shows (see `MapOverlay.shown`), around the box when it is given one. A route that
@@ -1207,6 +1210,10 @@ extension GlobeCamera {
         let leading = dot.x < (insets.leading + size.width - insets.trailing) / 2
         let top = dot.y < (insets.top + size.height - insets.bottom) / 2
         var frames: [GlobeCamera] = []
+        // Never into less room than the least box: the route would leave the room the insets give it.
+        let roomy = { (room: EdgeInsets) in
+            size.width - room.leading - room.trailing >= leastBox && size.height - room.top - room.bottom >= leastBox
+        }
         for step in 1...6 {
             let further = CGFloat(step) * 16
             var across = insets
@@ -1215,7 +1222,7 @@ extension GlobeCamera {
             if top { along.top += further } else { along.bottom += further }
             var both = across
             if top { both.top += further } else { both.bottom += further }
-            frames += [across, along, both].map(framed)
+            frames += [across, along, both].filter(roomy).map(framed)
         }
         // The largest frame first, and of two as large, the one with less room added.
         return frames.enumerated().sorted { ($0.element.scale, -$0.offset) > ($1.element.scale, -$1.offset) }
@@ -1239,11 +1246,12 @@ extension GlobeCamera {
     }
 
     private static func framed(_ route: ParcelRoute, mode: ParcelRoute.Mode, in size: CGSize, insets: EdgeInsets, closeUps: Bool) -> GlobeCamera {
-        let inner = min(size.width - insets.leading - insets.trailing, size.height - insets.top - insets.bottom)
-        let pad = min(40, inner * 0.12)
-        let box = CGRect(x: insets.leading + pad, y: insets.top + pad,
-                         width: max(size.width - insets.leading - insets.trailing - pad * 2, 40),
-                         height: max(size.height - insets.top - insets.bottom - pad * 2, 40))
+        let room = CGRect(x: insets.leading, y: insets.top, width: size.width - insets.leading - insets.trailing,
+                          height: size.height - insets.top - insets.bottom)
+        let pad = max(0, min(40, min(room.width, room.height) * 0.12))
+        let width = max(room.width - pad * 2, leastBox), height = max(room.height - pad * 2, leastBox)
+        // A room smaller than the least box keeps the box on its middle, so the route never hangs out of one side of it.
+        let box = CGRect(x: room.midX - width / 2, y: room.midY - height / 2, width: width, height: height)
         let destination = route.destination?.point
         if mode == .now, let current = route.current?.place.point {
             var points = route.near.map(\.place.point)
@@ -1319,6 +1327,7 @@ struct WorldMapView: View {
     var onFreeChange: (Bool) -> Void = { _ in }
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// Where a hand has put the map, while it is held there.
     @State private var camera: GlobeCamera?
     @State private var flight: Flight?
     @State private var gestureStart: GlobeCamera?
@@ -1327,14 +1336,18 @@ struct WorldMapView: View {
     /// Where Pip stood when the map was last moved by hand: he keeps his spot beside the dot while it is.
     @State private var heldPip: PipSpot?
 
+    /// A flight from where the map was to its frame, whatever the frame is by the time it lands.
     private struct Flight {
         let id = UUID()
-        let path: (Double) -> GlobeCamera
+        let from: GlobeCamera
         let start: Date
         let duration: Double
+        let viewport: Double
 
         func progress(at date: Date) -> Double { min(1, max(0, date.timeIntervalSince(start) / duration)) }
-        func camera(at date: Date) -> GlobeCamera { path(GlobeCamera.easeInOut(progress(at: date))) }
+        func camera(at date: Date, to target: GlobeCamera) -> GlobeCamera {
+            GlobeCamera.flight(from: from, to: target, viewport: viewport)(GlobeCamera.easeInOut(progress(at: date)))
+        }
     }
 
     var body: some View {
@@ -1342,9 +1355,9 @@ struct WorldMapView: View {
             let size = proxy.size
             let target = targetCamera(in: size)
             // A close-up reads the tiles it shows, and draws them as they come.
-            let wanted = detail?.pack.keys(in: camera ?? target, size: size) ?? []
+            let wanted = detail?.pack.keys(in: held ? camera ?? target : target, size: size) ?? []
             TimelineView(.animation(paused: flight == nil)) { timeline in
-                let shown = flight?.camera(at: timeline.date) ?? camera ?? target
+                let shown = onScreen(at: timeline.date, target: target)
                 let moving = flight.map { $0.progress(at: timeline.date) < 1 } ?? false
                 let close = closeUp(shown, in: size)
                 let overlay = MapOverlay(
@@ -1375,14 +1388,15 @@ struct WorldMapView: View {
                     }
                 }
             }
-            .onAppear { if camera == nil { camera = target } }
             // Only a change of view, or recentering, brings a moved map back; a new frame or scan leaves it where it was put.
-            .onChange(of: target) { _, next in if !free { fly(to: next, size: size) } }
-            .onChange(of: mode) { _, _ in fly(to: target, size: size) }
-            .onChange(of: recenter) { _, _ in fly(to: target, size: size) }
+            // A map nobody holds is drawn on its latest frame, or flying to it, so a frame SwiftUI never reports, as
+            // in a quick run of sizes while a screen settles, can't leave it on one it only passed through.
+            .onChange(of: target) { old, _ in if !free { fly(from: onScreen(at: .now, target: old), to: target, size: size) } }
+            .onChange(of: mode) { _, _ in if free, let camera { fly(from: camera, to: target, size: size) } }
+            .onChange(of: recenter) { _, _ in if free, let camera { fly(from: camera, to: target, size: size) } }
             .onChange(of: wanted, initial: true) { _, keys in detail?.need(keys) }
             .contentShape(Rectangle())
-            .gesture(moveGesture(size: size), including: interactive ? .all : .subviews)
+            .gesture(moveGesture(size: size, target: target), including: interactive ? .all : .subviews)
             .simultaneousGesture(peekGesture(size: size, target: target), including: peek && !interactive ? .all : .subviews)
         }
     }
@@ -1426,22 +1440,28 @@ struct WorldMapView: View {
         return overlay.pip?.spot
     }
 
-    private func fly(to target: GlobeCamera, size: CGSize) {
-        // Already there or on the way, as when a new view also changes the target.
-        if !free, camera == target { return }
-        let from = flight?.camera(at: .now) ?? camera
+    /// Whether a hand holds the map where it put it.
+    private var held: Bool { camera != nil && (free || gestureStart != nil) }
+
+    /// Where the map is at `date`: where a hand put it, or on its way to its frame, or on it.
+    private func onScreen(at date: Date, target: GlobeCamera) -> GlobeCamera {
+        if held, let camera { return camera }
+        return flight?.camera(at: date, to: target) ?? target
+    }
+
+    /// Flies the map from where it is to its frame, letting go of where a hand put it.
+    private func fly(from: GlobeCamera, to target: GlobeCamera, size: CGSize) {
         if free {
             free = false
             onFreeChange(false)
         }
         heldPip = nil
-        camera = target
-        guard let from, from != target, !reduceMotion else {
+        guard from != target, !reduceMotion else {
             flight = nil
             return
         }
-        let next = Flight(path: GlobeCamera.flight(from: from, to: target, viewport: max(size.width, size.height)), start: .now,
-                          duration: GlobeCamera.flightDuration(from: from, to: target))
+        let next = Flight(from: from, start: .now, duration: GlobeCamera.flightDuration(from: from, to: target),
+                          viewport: max(size.width, size.height))
         flight = next
         DispatchQueue.main.asyncAfter(deadline: .now() + next.duration) {
             if flight?.id == next.id { flight = nil }
@@ -1454,18 +1474,20 @@ struct WorldMapView: View {
          min(size.width - insets.leading - insets.trailing, size.height - insets.top - insets.bottom))
     }
 
-    /// The camera the gesture starts from: wherever a flight has got to.
-    private func beginGesture() {
+    /// The camera the gesture starts from: wherever the map is, a flight's way included.
+    private func beginGesture(target: GlobeCamera) {
         guard gestureStart == nil else { return }
-        gestureStart = flight?.camera(at: .now) ?? camera
+        let start = onScreen(at: .now, target: target)
+        gestureStart = start
+        camera = start
         flight = nil
     }
 
     /// Pinching zooms about the fingers; one finger turns the globe.
-    private func moveGesture(size: CGSize) -> some Gesture {
+    private func moveGesture(size: CGSize, target: GlobeCamera) -> some Gesture {
         SimultaneousGesture(DragGesture(minimumDistance: 4), MagnifyGesture())
             .onChanged { value in
-                beginGesture()
+                beginGesture(target: target)
                 if let zoom = value.second {
                     // A pinch starts from where the map is now, even mid-drag.
                     if !zooming {
@@ -1501,14 +1523,15 @@ struct WorldMapView: View {
     private func peekGesture(size: CGSize, target: GlobeCamera) -> some Gesture {
         MagnifyGesture()
             .onChanged { zoom in
-                beginGesture()
+                beginGesture(target: target)
                 guard let start = gestureStart else { return }
                 let view = zoomArea(size)
                 camera = start.zoomed(by: zoom.magnification, around: zoom.startLocation, middle: view.middle, viewport: view.viewport)
             }
             .onEnded { _ in
+                let peeked = camera ?? target
                 gestureStart = nil
-                fly(to: target, size: size)
+                fly(from: peeked, to: target, size: size)
             }
     }
 }

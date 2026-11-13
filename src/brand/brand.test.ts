@@ -917,6 +917,8 @@ describe('carrier brand', () => {
       'bh-posta',
       'transpress',
       'cvc',
+      'poste-srpske',
+      'trustexpress',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

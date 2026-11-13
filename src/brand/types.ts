@@ -800,7 +800,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'u-post'
   | 'bh-posta'
   | 'transpress'
-  | 'cvc';
+  | 'cvc'
+  | 'poste-srpske'
+  | 'trustexpress';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

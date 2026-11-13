@@ -3278,6 +3278,9 @@
     },
     "decal": "poste-italiane"
   },
+  "poste-srpske": {
+    "decal": "poste-srpske"
+  },
   "postex": {
     "decal": "postex"
   },
@@ -4232,6 +4235,9 @@
   },
   "trumpcard": {
     "decal": "trumpcard"
+  },
+  "trustexpress": {
+    "decal": "trustexpress"
   },
   "tsb-es": {
     "decal": "tsb-es"

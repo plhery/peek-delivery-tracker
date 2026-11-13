@@ -69,6 +69,7 @@ env:
     ios/PeekDeliveryTracker/Resources/DetectionGolden.json
     ios/PeekDeliveryTracker/Resources/ChecksumVectors.json
     ios/PeekDeliveryTracker/Resources/Reading.json
+    src/generated/carriers.ts
 
 jobs:
   # A scheduled run, or one a CI run on main started, adopts when no run but
@@ -219,9 +220,11 @@ jobs:
       - name: Regenerate the contract and the iPhone resources
         id: regenerate
         if: steps.target.outputs.adopt == 'true' && steps.gate.outputs.blocked != 'true'
+        # The carrier pages' links carry each carrier's brand colour from the catalog.
         run: |
           npm run contract:generate
           npm run ios:resources
+          npm run guides
 
       - name: Write the adoption as a patch
         id: patch
@@ -285,7 +288,7 @@ jobs:
           FAILED: >-
             ${{ steps.install.outcome == 'failure' && 'npm could not install the release.'
             || steps.peers.outcome == 'failure' && 'The app does not have the optional peer versions this release needs.'
-            || steps.regenerate.outcome == 'failure' && 'The contract or the iPhone resources could not be regenerated.'
+            || steps.regenerate.outcome == 'failure' && 'The contract, the iPhone resources or the carrier pages could not be regenerated.'
             || steps.patch.outcome == 'failure' && 'The release changed files an adoption does not own.'
             || steps.tests.outcome == 'failure' && 'The app fails its typecheck or unit tests with this release.'
             || steps.android.outcome == 'failure' && 'The Android core fails its tests with this release.'

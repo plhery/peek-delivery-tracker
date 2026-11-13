@@ -121,7 +121,8 @@ gh workflow run adopt-scraper.yml -f version=1.2.3   # one exact release
 It never downgrades. npm lists a release before it serves its tarball, so the run waits up
 to half an hour until the tarball answers, and tries the install again for a few minutes
 while it still answers 404. It then pins the release, checks the database gate and optional
-peers, regenerates the contract and iPhone resources, and runs the app's typecheck and unit
+peers, regenerates the contract, the iPhone resources and the carrier pages' links (which carry
+each carrier's brand colour), and runs the app's typecheck and unit
 tests and the Android core's tests with them: the Android core builds with the same catalog,
 and a carrier it cannot read would leave the Android app. A second job, which runs nothing
 of the release, pushes the result to `main` as one commit. CI validates that final commit
@@ -137,14 +138,14 @@ release fails the same way until the app is fixed. When the release changed an a
 purpose, such as the carrier a number is detected as, either make the app's tests accept
 both answers on `main` and start the adoption again, or adopt the release by hand: one
 commit with `npm install --save-exact universal-parcel-scraper@<version>`,
-`npm run contract:generate`, `npm run ios:resources` and the fixes, with Android's for a
+`npm run contract:generate`, `npm run ios:resources`, `npm run guides` and the fixes, with Android's for a
 catalog field it does not read yet (`./gradlew :core:test` in `android/`).
 
 `playwright-core`, `sharp` and `onnxruntime-web` are the scraper's optional peers. npm does
 not check them here, so [a test](../src/server/scraperDependency.test.ts) does. When a
 release asks for other versions than the app pins, the run fails and names them: move
 those pins and the scraper in one commit by hand, with `npm run contract:generate`,
-`npm run ios:resources` and the app's validation. A new `playwright-core` also moves
+`npm run ios:resources`, `npm run guides` and the app's validation. A new `playwright-core` also moves
 `@playwright/test` and the browser journeys' Playwright image in `.github/workflows/ci.yml`.
 
 `SCRAPER_ADOPTION_TOKEN` is a fine-grained token with read and write access to this

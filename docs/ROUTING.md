@@ -55,7 +55,8 @@ has one (PostNL's for a 3S number), which every provider receives: a parcel hold
 of its own is asked for none, even by a provider that stays gated with it. Otherwise the
 postcode goes in a field of its own. That one is bound to the number providers are
 asked about (the delivery leg's after a handoff), kept across checks, kept private, and
-ignored for a different tracking number. Updating it invalidates an older
+ignored for a different tracking number, and replaced by a new postcode the owner gives the
+parcel in a carrier's own field. Updating it invalidates an older
 sync and clears universal providers' missing-input backoffs. Other failure backoffs stay in place. Missing recipient input does not
 open the shared provider circuit. Another source with progress clears the prompt.
 While the parcel has no postcode to send, scheduled checks skip a provider that asked for

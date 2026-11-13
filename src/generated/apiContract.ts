@@ -16566,7 +16566,8 @@ export const CARRIER_CAPABILITIES = {
       "BUFFALO International Logistics",
       "Buffalo International",
       "Buffaloex",
-      "Buffalo Express"
+      "Buffalo Express",
+      "Buffalo Logistics"
     ],
     "countries": [
       "ZA",
@@ -16602,7 +16603,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^BUFZA\\d{10}YQ$",
+        "pattern": "^BUFZA(?:\\d{10}|\\dSK\\d{5}BU)YQ$",
         "confidence": "high"
       }
     ],

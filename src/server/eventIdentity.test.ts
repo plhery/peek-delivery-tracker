@@ -404,6 +404,29 @@ describe('a carrier\'s scan that takes over a provider\'s row past when the row 
     const stored = { ...next, occurred_at: '2026-10-28T22:15:00+00:00', time: '2026-10-28T17:15:00-05:00', created_at: '2026-10-28T22:30:00Z' };
     expect([...sharedScans([next], [onTheWay, stored]).absorbed]).toEqual([]);
   });
+
+  // A forwarder's scan without an offset of its own, read on the destination's clock though it is on the origin's,
+  // lands hours past 17TRACK's copy stored before it. 17TRACK states the wall clock apart from the instant.
+  const words = 'Airline arrived at destination country';
+  const stated = { provider_event_id: 'unknown:arrived', occurred_at: '2026-11-11T17:29:27+00:00', stage: 'in_transit', description: words,
+    location: null, universal_provider: '17TRACK', time: '2026-11-11T17:29:27.000Z', provider_time_iso: '2026-11-12T01:29:27+08:00',
+    created_at: '2026-11-11T17:41:56Z' };
+  const guessed = { package_id: 'package-1', provider_event_id: 'example-forwarder:arrived', occurred_at: '2026-11-12T00:29:27.000Z',
+    stage: 'in_transit', description: words, location: null,
+    raw_data: { time: '2026-11-12T01:29:27+01:00', local_time: '2026-11-12T01:29:27', time_zone_basis: 'destination' } };
+
+  it('takes over a copy whose provider states the scan\'s wall clock under another offset, and keeps its instant', () => {
+    const shared = sharedScans([guessed], [stated]);
+    expect(pairs(shared.reused)).toEqual([['example-forwarder:arrived', 'unknown:arrived']]);
+    const [row] = withHeldClocks([guessed], [stated], shared.reused, heldPastFirstStored([guessed], [stated], shared.reused));
+    expect((row as JsonObject).occurred_at).toBe('2026-11-11T17:29:27Z');
+    // The carrier's row stored at the guessed instant leaves no copy beside it.
+    const stored = { ...guessed, occurred_at: '2026-11-12T00:29:27+00:00', time: guessed.raw_data.time, local_time: guessed.raw_data.local_time,
+      time_zone_basis: 'destination', created_at: '2026-11-12T00:34:44Z' };
+    expect([...sharedScans([guessed], [stated, stored]).absorbed]).toEqual(['unknown:arrived']);
+    // Stated on the scan's own offset, it is no misread.
+    expect(sharedScans([guessed], [{ ...stated, provider_time_iso: '2026-11-12T01:29:27+01:00' }]).reused.size).toBe(0);
+  });
 });
 
 describe('a scan whose source\'s feeds put different offsets on its wall clock', () => {

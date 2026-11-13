@@ -845,9 +845,22 @@ function readsWallClock(copy: JsonObject, scan: JsonObject): boolean {
     && stagesAgree(stageOf(copy), stageOf(scan)) && codesAgree(copy, scan) && !placesApart(copy, scan);
 }
 
-/** Whether one of two rows shows the other's wall clock under another offset (`readsWallClock`), either way. */
+/**
+ * Whether one of two rows shows the other's wall clock under another offset (`readsWallClock`), either way,
+ * in its time or in a provider's own reading of the scan's clock (`statesWallClock`).
+ */
 function misreadOffset(left: JsonObject, right: JsonObject): boolean {
-  return readsWallClock(left, right) || readsWallClock(right, left);
+  return readsWallClock(left, right) || readsWallClock(right, left) || statesWallClock(left, right) || statesWallClock(right, left);
+}
+
+/**
+ * A copy whose provider states the scan's wall clock apart from its instant (17TRACK's `provider_time_iso`)
+ * and shows there the scan's wall clock under another offset: a carrier's scan without an offset of its own,
+ * dated on a guessed clock, still takes over the copy stored before it.
+ */
+function statesWallClock(copy: JsonObject, scan: JsonObject): boolean {
+  const stated = rawOf(copy, 'provider_time_iso');
+  return typeof stated === 'string' && readsWallClock({ ...copy, time: stated }, scan);
 }
 
 /**

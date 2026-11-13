@@ -3287,6 +3287,25 @@ describe('TrackingSyncService', () => {
     }
   });
 
+  it('gives the places of a carrier that spaces its lookups out first to its parcels out for delivery or expected today', async () => {
+    const due = { carrier: 'poste-italiane', current_stage: 'in_transit', last_synced_at: '2026-09-09T20:00:00Z',
+      sync_status: 'ok', user_id: 'owner' };
+    const client = fakeClient([
+      { ...due, id: 'in-transit', tracking_number: 'TEST0001', last_synced_at: '2026-09-09T19:00:00Z' },
+      { ...due, id: 'other-carrier', tracking_number: 'TEST0002', carrier: 'swiss-post' },
+      { ...due, id: 'out-for-delivery', tracking_number: 'TEST0003', current_stage: 'out_for_delivery',
+        carrier_data: { last_update: '2026-09-10T00:10:00+02:00' } },
+      // 22:30 UTC is already the 10th on Poste Italiane's clock: yesterday's expected day has passed.
+      { ...due, id: 'expected-yesterday', tracking_number: 'TEST0004', expected_delivery: '2026-09-09' },
+      { ...due, id: 'expected-today', tracking_number: 'TEST0005', expected_delivery: '2026-09-10' },
+    ]);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T22:30:00Z'));
+    await service.sync();
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
+      .toEqual(['out-for-delivery', 'other-carrier', 'expected-today', 'in-transit', 'expected-yesterday']);
+  });
+
   it('records how many parcels of each kind a run finds due, and how long the longest-waiting has been due', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234', sync_status: 'ok' };
     // An account's parcel, checked every 10 minutes: due since 09:10.

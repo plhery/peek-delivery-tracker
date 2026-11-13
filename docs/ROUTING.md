@@ -374,7 +374,9 @@ without waiting the provider's 15 minutes, archived or delivered too (`carrier_n
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
 per account, round-robin, every 2 minutes. It lists every open parcel and lookup in pages by id,
 as the database's API ends each answer at its row limit, and takes the least recently checked
-first. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
+first. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
+its parcels out for delivery today or expected today, as its own pacing may refuse the run's later
+lookups (Poste Italiane's searches an hour); every other parcel keeps its place. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
 read: the run reads those of the ones it takes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
 An account's or a lookup's check queued meanwhile, such as a refresh, a new parcel, a new lookup's first check or a link
 opened, goes ahead of the run: once the run has checked a parcel, it stops between checks, leaves its upkeep (archiving,

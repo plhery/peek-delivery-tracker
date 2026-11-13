@@ -564,6 +564,25 @@ function deliveringToday(parcel: JsonObject, now: Date): boolean {
 }
 
 /**
+ * A run's parcels, each carrier that spaces its lookups out (`refreshLimit`) giving its places in
+ * the run first to its parcels out for delivery today or expected today: such a carrier can refuse
+ * a run's later lookups once its own budget is spent, as Poste Italiane past its searches of the
+ * hour. Every other parcel keeps its place, and no carrier's places go to another.
+ */
+export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
+  const carrier = (parcel: JsonObject) => String((isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined) ?? parcel.carrier);
+  const urgent = (parcel: JsonObject) => (parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now))
+    || (!['delivered', 'returned'].includes(String(parcel.current_stage))
+      && /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0] === deliveryToday(parcel, now));
+  const queues = new Map<string, JsonObject[]>();
+  for (const parcel of parcels.filter((parcel) => refreshLimit(parcel) !== undefined)) {
+    queues.set(carrier(parcel), [...queues.get(carrier(parcel)) ?? [], parcel]);
+  }
+  for (const [key, queue] of queues) queues.set(key, [...queue.filter(urgent), ...queue.filter((parcel) => !urgent(parcel))]);
+  return parcels.map((parcel) => refreshLimit(parcel) !== undefined ? queues.get(carrier(parcel))!.shift()! : parcel);
+}
+
+/**
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
  * its start, so no run takes them all. Copies of one number open at the same minute
@@ -1586,10 +1605,10 @@ export class TrackingSyncService {
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
       const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks],
         MAX_PACKAGES_PER_OWNER_PER_SYNC);
-      const parcels = [...shares.filter((parcel) => !rechecks.has(parcel)),
+      const parcels = urgentFirst([...shares.filter((parcel) => !rechecks.has(parcel)),
         ...await this.oneOffPackages(due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
           (parcel) => !unwatched.has(String(parcel.id)), context.signal),
-        ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)];
+        ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], now);
       // Copies of one number, in several accounts or followed without one, share their lookups, with
       // those of the run that stopped for another check before this one, while its time lasts.
       const lookups = new SharedLookups(parcels, earlier && performance.now() < earlier.until ? earlier : undefined);

@@ -5,7 +5,7 @@ import kotlin.math.floor
 /**
  * The passport's times as `DateComponentsFormatter` writes them in PassportView's `formattedDuration`: days and hours
  * from a day up, else hours and minutes, at most two units, the zero ones dropped, each unit truncated (119 s is one
- * minute), abbreviated ("1d 2h") or, at the accessibility sizes, spelled out ("1 day, 2 hours"). The words are
+ * minute), abbreviated ("1d 2h") on the page or spelled out ("1 day, 2 hours") for TalkBack. The words are
  * Foundation's in each app language, a small table here: ICU's MeasureFormat on a phone writes others ("1 day 2 hr",
  * "1 j 2 h"), and Foundation joins the spelled-out units with its own words ("und", "et", none in Russian).
  */

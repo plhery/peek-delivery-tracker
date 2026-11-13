@@ -2465,7 +2465,8 @@ export class SupabaseServiceClient extends SupabaseClient {
     const found = await Promise.all(pages.map(async (page) => rows(await this.request(`/rest/v1/parcel_links?${query([
       ['id', `in.(${page.join(',')})`],
       ['show_number', 'is.false'],
-      ['select', 'id,package:packages(tracking_number,carrier_data,last_status_text,tracking_events(description,location))'],
+      // The carrier and stage find the planned steps the page masks numbers from.
+      ['select', 'id,package:packages(tracking_number,carrier,current_stage,carrier_data,last_status_text,tracking_events(description,location))'],
     ])}`))));
     return new Map(found.flat().flatMap((row) => typeof row.id === 'string' && isRecord(row.package) ? [[row.id, row.package]] : []));
   }

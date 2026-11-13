@@ -389,6 +389,13 @@ describe('what an alert says', () => {
     pending([row({ location: 'Locker TESTPOST987654321' })]);
     await alerts.dispatch();
     expect(send.mock.calls.at(-1)![1]?.body).toBe('One step closer\nLocker ••• 4321');
+    // One only a step still ahead names, kept for the carrier the parcel is filed under.
+    hiding.mockResolvedValue(new Map([[linkId, { ...parcel, carrier: 'yunexpress', current_stage: 'in_transit', last_status_text: 'In transit',
+      carrier_data: { routing: { planned: { number: parcel.tracking_number, carriers: { yunexpress: [{ time: '2099-01-05T10:00:00Z',
+        description: 'Handed over to the delivery partner, tracking number: TESTPOST987654321', stage: 'in_transit' }] } } } } }]]));
+    pending([row({ location: 'Locker TESTPOST987654321' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls.at(-1)![1]?.body).toBe('One step closer\nLocker ••• 4321');
     send.mockClear();
 
     // A link that shows its number is not among the parcels the lookup finds, and its place is told as written.

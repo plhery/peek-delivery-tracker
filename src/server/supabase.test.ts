@@ -679,7 +679,7 @@ describe('one-off parcels and their links', () => {
     const [path] = request.mock.calls[0]!;
     expect(path).toMatch(/^\/rest\/v1\/parcel_links\?/);
     expect(Object.fromEntries(params(path))).toEqual({
-      id: 'in.(k7Qm2xHd9RtW,m8Rn3yJe4SuX)', show_number: 'is.false', select: 'id,package:packages(tracking_number,carrier_data,last_status_text,tracking_events(description,location))',
+      id: 'in.(k7Qm2xHd9RtW,m8Rn3yJe4SuX)', show_number: 'is.false', select: 'id,package:packages(tracking_number,carrier,current_stage,carrier_data,last_status_text,tracking_events(description,location))',
     });
   });
 

@@ -3,7 +3,7 @@ title: FedEx tracking: número, estados e entregas em Portugal
 description: FedEx tracking em Portugal: o número de 12 dígitos, o que quer dizer «Delivery exception» e outras leituras, a alfândega e os teus direitos se a encomenda se perder.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 Para seguir a tua encomenda, cola o número de rastreio FedEx, ou uma ligação de rastreio da FedEx, na caixa acima. O rastreio da própria FedEx está no fedex.com.
@@ -15,7 +15,7 @@ Procura no e-mail de envio ou na página da encomenda da loja. Uma ligação de 
 | Número (inventado) | O que é |
 | --- | --- |
 | `123456789012` | 12 dígitos: um número de rastreio FedEx. O último dígito é um dígito de controlo calculado a partir dos 11 anteriores. |
-| `123456789012343` | 15 dígitos: uma forma que o Peek também atribui à FedEx. |
+| `123456789012343` | 15 dígitos: uma forma que o Peek também atribui à FedEx, exceto se começar por 8880 (o Peek propõe a J&T Express Brazil) ou por 30000, 31000 ou 36000 (Andreani). |
 | `61290000000000000014` | 20 dígitos começados por `6129` ou `7489`: FedEx Ground Economy (antes SmartPost), nos Estados Unidos. |
 
 Doze dígitos também servem a outras transportadoras, como a [MRW](carrier:mrw), a [Mondial Relay](carrier:mondial-relay), a DPD France, a BRT e várias transportadoras asiáticas; quinze dígitos também a DPD France, a BRT e a Yunda Express. Se o fedex.com não conhecer o número, confirma no e-mail da loja qual é a transportadora.
@@ -62,7 +62,7 @@ Se compraste numa loja, é ela que responde pela entrega, mesmo que seja a FedEx
 
 ## Seguir uma encomenda FedEx com o Peek
 
-O [Peek](/) reconhece os números FedEx de 12 e 15 dígitos quando o dígito de controlo está certo. Outras transportadoras usam as mesmas formas, por isso a encomenda é muitas vezes identificada por um serviço de seguimento ou ao fim de uma pequena espera. Um número que falha o controlo não é proposto à FedEx: escolhe a transportadora em «Alterar transportadora». Os números Ground Economy de 20 dígitos são logo atribuídos à FedEx, os códigos de barras da etiqueta (22 dígitos começados por `96` ou 34 dígitos) são seguidos pelo número FedEx que trazem, e também podes colar ligações do fedex.com com `trknbr=` ou `tracknumbers=`. Os números FedEx de 13 dígitos dos envios nacionais na Polónia são seguidos como FedEx Poland.
+O [Peek](/) reconhece os números FedEx de 12 e 15 dígitos quando o dígito de controlo está certo. Outras transportadoras usam as mesmas formas, por isso a encomenda é muitas vezes identificada por um serviço de seguimento ou ao fim de uma pequena espera. Um número que falha o controlo, ou um de 15 dígitos começado por 8880, 30000, 31000 ou 36000, não é proposto à FedEx: escolhe a transportadora em «Alterar transportadora». Os números Ground Economy de 20 dígitos são logo atribuídos à FedEx, os códigos de barras da etiqueta (22 dígitos começados por `96` ou 34 dígitos) são seguidos pelo número FedEx que trazem, e também podes colar ligações do fedex.com com `trknbr=` ou `tracknumbers=`. Os números FedEx de 13 dígitos dos envios nacionais na Polónia são seguidos como FedEx Poland.
 
 Um servidor do Peek abre a página de rastreio do fedex.com num navegador. Quando a FedEx recusa, ou pede a verificação do destinatário, serviços de seguimento preenchem o histórico.
 

@@ -3,7 +3,7 @@ title: FedEx suivi : numéro, statuts et livraison manquée
 description: Suivre un colis FedEx : le numéro à 12 chiffres, le sens de « Delivery exception » et des autres scans, les frais de douane et tes droits si le colis se perd.
 slug: fedex-suivi-colis
 published: 2026-10-13
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 Pour suivre ton colis, colle le numéro de suivi FedEx, ou un lien de suivi FedEx, dans le champ ci-dessus. Le suivi de FedEx lui-même se trouve sur fedex.com.
@@ -15,7 +15,7 @@ Regarde dans l'e-mail d'expédition ou sur la page de commande de la boutique. U
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
 | `123456789012` | 12 chiffres : un numéro de suivi FedEx. Le dernier chiffre est une clé de contrôle calculée à partir des 11 précédents. |
-| `123456789012343` | 15 chiffres : une forme que Peek classe aussi chez FedEx. |
+| `123456789012343` | 15 chiffres : une forme que Peek classe aussi chez FedEx, sauf si le numéro commence par 8880 (Peek propose alors J&T Express Brazil) ou par 30000, 31000 ou 36000 (Andreani). |
 | `61290000000000000014` | 20 chiffres commençant par `6129` ou `7489` : FedEx Ground Economy (anciennement SmartPost), aux États-Unis. |
 
 Attention aux numéros qui se ressemblent : 12 chiffres, c'est aussi la longueur des numéros de [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay) ou [Colis Privé](carrier:colis-prive), et 15 chiffres celle de DPD France, de BRT ou de Yunda Express. Si fedex.com ne trouve rien, regarde quel transporteur la boutique nomme dans son e-mail.
@@ -67,7 +67,7 @@ En France, selon Service-Public.fr, quand la livraison passe par le transporteur
 
 ## Suivre un colis FedEx avec Peek
 
-[Peek](/) reconnaît les numéros FedEx à 12 et 15 chiffres quand leur clé de contrôle est bonne. D'autres transporteurs partagent ces formes, alors le colis est souvent nommé par un service de suivi, ou après une courte attente. Un numéro dont la clé est fausse n'est pas proposé à FedEx : choisis le transporteur avec « Changer de transporteur ». Les liens fedex.com avec `trknbr=` ou `tracknumbers=` fonctionnent aussi. Peek suit les numéros FedEx à 13 chiffres des colis nationaux en Pologne sous le nom FedEx Poland.
+[Peek](/) reconnaît les numéros FedEx à 12 et 15 chiffres quand leur clé de contrôle est bonne. D'autres transporteurs partagent ces formes, alors le colis est souvent nommé par un service de suivi, ou après une courte attente. Un numéro dont la clé est fausse, ou un numéro à 15 chiffres qui commence par 8880, 30000, 31000 ou 36000, n'est pas proposé à FedEx : choisis le transporteur avec « Changer de transporteur ». Les liens fedex.com avec `trknbr=` ou `tracknumbers=` fonctionnent aussi. Peek suit les numéros FedEx à 13 chiffres des colis nationaux en Pologne sous le nom FedEx Poland.
 
 Pour FedEx, il ouvre la page de suivi de fedex.com dans un navigateur, sur son propre serveur. Quand FedEx refuse, ou exige une vérification du destinataire, des services de suivi prennent le relais.
 

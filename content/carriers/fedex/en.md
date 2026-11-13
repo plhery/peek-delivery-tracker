@@ -3,7 +3,7 @@ title: FedEx tracking: numbers, statuses and missed deliveries
 description: Track a FedEx parcel: what the 12-digit tracking number looks like, what Delivery exception and other scans mean, customs charges and your rights if it's lost.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 Paste a FedEx tracking number, or a FedEx tracking link, in the box above to follow the parcel. FedEx's own tracking is on fedex.com.
@@ -15,7 +15,7 @@ Look in the shop's shipping email or on your order page. A fedex.com tracking li
 | Shape (invented) | What it is |
 | --- | --- |
 | `123456789012` | 12 digits: a FedEx tracking number. The last digit is a check digit worked out from the 11 before it. |
-| `123456789012343` | 15 digits: a shape Peek also files under FedEx. |
+| `123456789012343` | 15 digits: a shape Peek also files under FedEx, unless it starts 8880 (Peek suggests J&T Express Brazil) or 30000, 31000 or 36000 ([Andreani](carrier:andreani)). |
 | `61290000000000000014` | 20 digits starting `6129` or `7489`: FedEx Ground Economy (formerly SmartPost) in the US. |
 
 Twelve digits also fit [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay), [BRT](carrier:brt) and several Asian couriers, and fifteen fit DPD France, BRT and Yunda Express too. If fedex.com doesn't know the number, check which carrier the shop's email names.
@@ -66,7 +66,7 @@ Marked `Delivered` but not there? FedEx's delivery scan names who signed, which 
 
 ## Tracking FedEx parcels with Peek
 
-[Peek](/) recognises FedEx's 12- and 15-digit numbers when their check digit is right. Other carriers share those shapes, so the parcel is often named by a tracking service or after a short wait. A number that fails the check isn't offered to FedEx: pick the carrier with "Change". Ground Economy's 20-digit numbers are named FedEx at once, scanned label barcodes are read for the number inside, and fedex.com links with `trknbr=` or `tracknumbers=` work too. FedEx's 13-digit domestic numbers from Poland are followed as [FedEx Poland](carrier:fedex-pl).
+[Peek](/) recognises FedEx's 12- and 15-digit numbers when their check digit is right. Other carriers share those shapes, so the parcel is often named by a tracking service or after a short wait. A number that fails the check, or a 15-digit one starting 8880, 30000, 31000 or 36000, isn't offered to FedEx: pick the carrier with "Change". Ground Economy's 20-digit numbers are named FedEx at once, scanned label barcodes are read for the number inside, and fedex.com links with `trknbr=` or `tracknumbers=` work too. FedEx's 13-digit domestic numbers from Poland are followed as [FedEx Poland](carrier:fedex-pl).
 
 Peek opens fedex.com's tracking page in a browser on its own server. When FedEx refuses, or asks for recipient verification, tracking services fill in.
 

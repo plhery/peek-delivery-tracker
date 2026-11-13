@@ -6,7 +6,7 @@ published: 2026-11-13
 updated: 2026-11-13
 ---
 
-Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste its number in the box above and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape.
+Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste a link to Transpress's tracker in the box above, or paste its number and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape.
 
 ## Transpress tracking number: what it looks like
 
@@ -15,7 +15,7 @@ Peek's catalog has no number shape for Transpress, and Transpress's tracker asks
 | What you paste | What Peek does |
 | --- | --- |
 | The Transpress number alone | Peek may list other carriers under "Fits this number": they only fit its shape. Pick Transpress yourself (see below). |
-| A link to Transpress's tracker on transpress.bg | Peek has no rule for Transpress's links, so the link doesn't name Transpress either. Paste the number from it instead: on the tracker's own link, it comes after `track-number=`. |
+| A link to Transpress's tracker: `transpress.bg/bg/prosledjavane?track-number=` or `/en/prosledjavane?track-number=`, then the number | Peek takes the number out of the link and names Transpress at once ("Detected carrier"). |
 | A number the shop says is another carrier's | Track it with that carrier: the shop's email is the best clue to who delivers. |
 
 **Where to find it.** In the shop's shipping email or on your order page; for a parcel from a person, ask them. No number at all? See [how to find a tracking number](guide:find-tracking-number).
@@ -87,7 +87,7 @@ As transpress.bg's Contacts page listed them on 13 November 2026:
 
 ## Track a Transpress parcel with Peek
 
-[Peek](/) follows more than 3,500 carriers but can't tell a Transpress number by its shape, so pick the carrier yourself:
+[Peek](/) follows more than 3,500 carriers but can't tell a Transpress number by its shape. A link to Transpress's tracker names Transpress at once; with the number alone, pick the carrier yourself:
 
 1. Paste the number in the box above.
 2. Press "Change" beside the carrier line and search for Transpress. "Транспрес" finds it too, shown with "Also called …", and so does "Bulgaria".
@@ -109,7 +109,7 @@ Peek can't contact Transpress, the shop or the sender for you, change the delive
 
 ### How do I track a Transpress parcel?
 
-Paste the number in the box above, press "Change" and pick Transpress: Peek can't recognise a Transpress number by its shape. It then follows the parcel through tracking services. Transpress's own tracker is "Shipment tracking" on transpress.bg.
+Paste a link to Transpress's tracker in the box above and Peek names Transpress itself. With the number alone, press "Change" and pick Transpress: Peek can't recognise a Transpress number by its shape. It then follows the parcel through tracking services. Transpress's own tracker is "Shipment tracking" on transpress.bg.
 
 ### How many times does Transpress try to deliver?
 
@@ -132,6 +132,6 @@ In writing, within 6 months of the day Transpress accepted the parcel, with the 
 - [Transpress: Общи условия](https://transpress.bg/bg/obshti-uslovija) – the two companies' courier terms
 - [Transpress: Контакти](https://transpress.bg/bg/kontakti) – phones, hours, emails, offices, chat hours
 - [Transpress: График за обслужване](https://transpress.bg/bg/za-klienti/grafik-za-obslujvane) – schedule by town
-- [Universal Parcel Scraper: Transpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/transpress) – names and other names, Bulgaria, tracker address, no number shape or link rule, no wordings, tracking services only
+- [Universal Parcel Scraper: Transpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/transpress) – names and other names, Bulgaria, tracker address, link rule, no number shape, no wordings, tracking services only
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – tracking services, a service's carrier name matched to Transpress, links to the carrier's or the service's page
 :::

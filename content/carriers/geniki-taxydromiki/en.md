@@ -3,7 +3,7 @@ title: Geniki Taxydromiki tracking: vouchers, statuses, contacts
 description: Track a Geniki Taxydromiki parcel in Greece or Cyprus: the 10-digit voucher, what each status means, missed deliveries, claims and how to reach Geniki.
 slug: geniki-taxydromiki-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
 Geniki Taxydromiki (Γενική Ταχυδρομική, sometimes called General Post) is a Greek courier with its own network in Greece, Cyprus, Bulgaria and Romania. Track a parcel with its 10-digit voucher number on the Track & Trace page at taxydromiki.com, or paste it in the box above. The number comes from whoever booked the delivery, usually the shop you ordered from.
@@ -80,7 +80,7 @@ As listed on taxydromiki.com on 13 October 2026:
 
 ## Tracking a Geniki Taxydromiki parcel with Peek
 
-[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express and the digits are typed without spaces or dashes, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and, if the first digit isn't 0, [Packeta](carrier:packeta), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change", or paste a full tracking link such as `https://taxydromiki.com/track/0000000000` (or `/en/track/`), which names Geniki at once. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
+[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express and the digits are typed without spaces or dashes, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and, if the first digit isn't 0, [Packeta](carrier:packeta), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change": searching Bulgaria, Cyprus or Romania finds it too, as does its Bulgarian name, Геники Тахидромики. Or paste a full tracking link such as `https://taxydromiki.com/track/0000000000` (or `/en/track/`, `/bg/track/`, `/ro/track/`), which names Geniki at once. Under "Fits this number", a reader in Greece, Bulgaria, Cyprus or Romania sees Geniki ahead of carriers that, in Peek's catalog, don't cover that country. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
 
 Geniki's tracker gives times without a time zone: Peek reads them on Greek time and lists Geniki's own history. Scans appear in Geniki's English wording, as in the table. A scan the table doesn't list keeps Geniki's wording, without a stage of its own. A scan Geniki cancelled is hidden together with its cancellation.
 

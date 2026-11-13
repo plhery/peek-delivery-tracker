@@ -3,7 +3,7 @@ title: FedEx Tracking und Sendungsverfolgung: Status und Hilfe
 description: FedEx-Paket verfolgen: wie die 12-stellige Sendungsnummer aussieht, was „Delivery exception“ und andere Scans bedeuten, Zollgebühren und deine Rechte bei Verlust.
 slug: fedex-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 Füg eine FedEx-Sendungsnummer oder einen FedEx-Tracking-Link oben ins Feld ein, um dein Paket zu verfolgen. FedEx' eigene Sendungsverfolgung findest du auf fedex.com.
@@ -15,7 +15,7 @@ Schau in die Versandbestätigung des Shops oder auf die Bestellseite. Ein Tracki
 | Form (Ziffern erfunden) | Was es ist |
 | --- | --- |
 | `123456789012` | 12 Ziffern: eine FedEx-Sendungsnummer. Die letzte Ziffer ist eine Prüfziffer, berechnet aus den 11 davor. |
-| `123456789012343` | 15 Ziffern: eine Form, die Peek unter anderem FedEx zuordnet. |
+| `123456789012343` | 15 Ziffern: eine Form, die Peek unter anderem FedEx zuordnet, außer wenn die Nummer mit 8880 beginnt (dann schlägt Peek J&T Express Brazil vor) oder mit 30000, 31000 oder 36000 (Andreani). |
 | `61290000000000000014` | 20 Ziffern, beginnt mit 6129 oder 7489: FedEx Ground Economy (früher SmartPost) in den USA. |
 
 Zwölf Ziffern sind keine Besonderheit von FedEx: Je nach Prüfziffer passt dieselbe Form zu [GLS](carrier:gls-de), [GLS Schweiz](carrier:gls-ch) oder [DHL](carrier:dhl), dazu zu DPD France, Mondial Relay, BRT und mehreren asiatischen Paketdiensten. Auch eine 15-stellige Nummer kann von DPD France, BRT oder Yunda Express stammen. Eine Nummer, die mit `1Z` beginnt, ist von [UPS](carrier:ups), eine 10-stellige Frachtbriefnummer kann von [DHL Express](carrier:dhl-express) sein. Kennt fedex.com deine Nummer nicht, schau, welchen Paketdienst die Mail des Shops nennt.
@@ -64,7 +64,7 @@ In Deutschland gilt laut Verbraucherzentrale außerdem: Du musst nichts bezahlen
 
 ## FedEx-Paket mit Peek verfolgen
 
-Bei 12- und 15-stelligen Nummern mit gültiger Prüfziffer denkt [Peek](/) zuerst an FedEx, ist sich aber nicht sicher: Andere Paketdienste teilen diese Formen, und bei FedEx fragt Peek erst zuletzt nach, im Browser. Oft nennt deshalb ein Tracking-Dienst den Paketdienst, oder es dauert einen Moment. Fällt eine Nummer durch FedEx' Prüfung, wird FedEx nicht angeboten: Dann wählst du den Paketdienst mit „Paketdienst ändern“. Ground-Economy-Nummern mit 20 Ziffern erkennt Peek sofort als FedEx, bei gescannten Etikett-Barcodes liest es die Nummer darin. Links von fedex.com mit `trknbr=` oder `tracknumbers=` kannst du ebenfalls einfügen. 13-stellige FedEx-Nummern für Inlandspakete in Polen verfolgt Peek als FedEx Poland.
+Bei 12- und 15-stelligen Nummern mit gültiger Prüfziffer denkt [Peek](/) zuerst an FedEx (bei 15-stelligen, die mit 8880, 30000, 31000 oder 36000 beginnen, gar nicht), ist sich aber nicht sicher: Andere Paketdienste teilen diese Formen, und bei FedEx fragt Peek erst zuletzt nach, im Browser. Oft nennt deshalb ein Tracking-Dienst den Paketdienst, oder es dauert einen Moment. Fällt eine Nummer durch FedEx' Prüfung, wird FedEx nicht angeboten: Dann wählst du den Paketdienst mit „Paketdienst ändern“. Ground-Economy-Nummern mit 20 Ziffern erkennt Peek sofort als FedEx, bei gescannten Etikett-Barcodes liest es die Nummer darin. Links von fedex.com mit `trknbr=` oder `tracknumbers=` kannst du ebenfalls einfügen. 13-stellige FedEx-Nummern für Inlandspakete in Polen verfolgt Peek als FedEx Poland.
 
 Peeks Server öffnet dafür die Tracking-Seite von fedex.com in einem Browser. Das klappt nicht immer: Blockt FedEx den Abruf oder verlangt FedEx eine Bestätigung durch den Empfänger, springen Tracking-Dienste ein.
 

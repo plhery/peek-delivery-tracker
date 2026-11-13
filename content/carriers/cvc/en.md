@@ -6,7 +6,7 @@ published: 2026-11-13
 updated: 2026-11-13
 ---
 
-CVC is a carrier in Bulgaria. Peek's catalog also knows it as Си Ви Си, Си Ви Си ЕООД and e-CVC. To track a CVC parcel, paste its number in the box above and pick CVC as the carrier: Peek can't tell a CVC number from its shape. The number comes from the shop or the person who sent the parcel. CVC's own tracker is at my.e-cvc.bg/track, in Bulgarian: it asks for the waybill number and has a single button, "Провери" (Check).
+CVC is a carrier in Bulgaria. Peek's catalog also knows it as Си Ви Си, Си Ви Си ЕООД and e-CVC. To track a CVC parcel, paste a link to CVC's tracker in the box above, or paste its number and pick CVC as the carrier: Peek can't tell a CVC number from its shape. The number comes from the shop or the person who sent the parcel. CVC's own tracker is at my.e-cvc.bg/track, in Bulgarian: it asks for the waybill number and has a single button, "Провери" (Check).
 
 CVC's own sites say little more. On 13 November 2026, my.e-cvc.bg showed only that tracker and a login page, and e-cvc.bg answered "404 Not Found". So this page says what CVC's tracker asks for and what Peek does with a CVC parcel, but nothing about CVC's delivery rules, prices or contacts.
 
@@ -17,7 +17,7 @@ CVC's tracker asks for a waybill number ("товарителница" in Bulgari
 | What you paste | What Peek does |
 | --- | --- |
 | The CVC number alone | It doesn't name CVC. It may list other carriers whose shapes the number fits, or none. Pick CVC yourself, as shown under "Track a CVC parcel with Peek" below. |
-| A link to CVC's tracker on my.e-cvc.bg | Peek has no rule for CVC's links, so the link doesn't name CVC either. Copy the number out of it (on the tracker's own link, it comes after `wb=`) and paste that. |
+| A link to CVC's tracker: `my.e-cvc.bg/track?wb=`, then the number | Peek takes the number out of the link and names CVC at once ("Detected carrier"). |
 | A number the shop says is another carrier's | Track it with that carrier: the shop's email is the best clue to who delivers. |
 
 **Where to find it.** In the shop's shipping email or on your order page, sometimes as the waybill number. For a parcel from a person, ask them. No number at all? See [how to find a tracking number](guide:find-tracking-number), and [tracking number formats](guide:tracking-number-formats) for what other carriers' numbers look like.
@@ -62,7 +62,7 @@ CVC's own sites list no phone number, email or office: on 13 November 2026, my.e
 
 ## Track a CVC parcel with Peek
 
-[Peek](/) follows more than 3,500 carriers, CVC among them, but it can't tell a CVC parcel by its number alone. Pick the carrier yourself:
+[Peek](/) follows more than 3,500 carriers, CVC among them, but it can't tell a CVC parcel by its number alone. A link to CVC's tracker names CVC at once; with just the number, pick the carrier yourself:
 
 1. Paste the number in the box above.
 2. Press "Change" beside the carrier line and search for CVC. "e-CVC" or "Си Ви Си" finds it too, with "Also called e-CVC" or "Also called Си Ви Си" under the name, and so does "Bulgaria".
@@ -84,7 +84,7 @@ Peek can't contact CVC, the shop or the sender for you, change the delivery or f
 
 ### How do I track a CVC parcel?
 
-Paste the number in the box above, press "Change" and pick CVC: Peek can't recognise a CVC number by its shape. Peek then follows the parcel through tracking services. On a parcel you've already added, use "Change carrier". CVC's own tracker is at my.e-cvc.bg/track: type the waybill number and press "Провери".
+Paste a link to CVC's tracker in the box above and Peek names CVC itself. With the number alone, press "Change" and pick CVC: Peek can't recognise a CVC number by its shape. Peek then follows the parcel through tracking services. On a parcel you've already added, use "Change carrier". CVC's own tracker is at my.e-cvc.bg/track: type the waybill number and press "Провери".
 
 ### What does a CVC tracking number look like?
 
@@ -105,6 +105,6 @@ This page gives none: CVC's own sites list no phone number. Ask the shop that se
 :::sources
 - [CVC: e-CVC.bg tracking](https://my.e-cvc.bg/track) – tracker in Bulgarian, "Потърсете товарителница", digits, at most 20 characters, "Провери", number after `wb=`, e-CVC.bg name, CVC logo
 - [CVC: e-CVC.bg login](https://my.e-cvc.bg/) – login page only, no delivery, prices or contact pages
-- [Universal Parcel Scraper: CVC](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cvc) – names and other names, Bulgaria, tracker address, no number shape or link rule, no wordings, tracking services only
+- [Universal Parcel Scraper: CVC](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cvc) – names and other names, Bulgaria, tracker address, link rule, no number shape, no wordings, tracking services only
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – tracking services, a service's carrier name matched to CVC, links to the carrier's or the service's page
 :::

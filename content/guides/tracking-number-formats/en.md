@@ -33,7 +33,7 @@ Here's what the carriers and the postal standard say about the numbers you're mo
 | --- | --- |
 | [UPS](carrier:ups) | `1Z` + 16 letters and digits, 18 characters in all, such as `1Z999AA10123456784`, an example that passes UPS's check digit |
 | [USPS](carrier:usps) | 22 digits starting `92`, `93`, `94` or `95`, printed in groups of four, such as `9212 3912 3456 7812 3456 70`; 26 digits on some labels; international items can carry the postal format ending `US` |
-| [FedEx](carrier:fedex) | 12 digits, or 15 for FedEx Ground, the last one a check digit: when it checks out, Peek puts FedEx first among the carriers that length fits. In Peek's carrier data, 20 digits starting `6129` or `7489` is FedEx Ground Economy when its check digit passes |
+| [FedEx](carrier:fedex) | 12 digits, or 15 for FedEx Ground, the last one a check digit: when it checks out, Peek puts FedEx first among the carriers that length fits, except for 15 digits starting `8880`, `30000`, `31000` or `36000`. In Peek's carrier data, 20 digits starting `6129` or `7489` is FedEx Ground Economy when its check digit passes |
 | DHL | [DHL Express](carrier:dhl-express): 10 digits, never letters. [DHL in Germany](carrier:dhl): 10 to 39 characters |
 | [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce) | the postal format ending `GB`. In Peek's carrier data, those starting `E` and any letter, `CP` or `GI` are Parcelforce's, and so is `PB` + two letters + 10 digits, 14 characters in all, such as `PBAB1234567890`; Royal Mail also has 16- or 21-character references made of digits and the letters A to F |
 | [Evri](carrier:evri) | 16 characters (Evri's page says both "16 digit" and "16 character") |

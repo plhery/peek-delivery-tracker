@@ -98,7 +98,7 @@ Peek legge il tracker internazionale di Chunghwa Post e mostra ogni scansione in
 
 Per un codice che finisce con `TW`, quando lo segui dall'Italia Peek chiede anche a Poste Italiane, con lo stesso codice. Appena Poste mostra una scansione non più vecchia dell'ultima di Chunghwa Post, Peek segue il pacco su Poste e tiene la cronologia di Chunghwa Post. Al contrario, un pacco che spedisci a Taiwan con Poste Italiane non passa da solo a Chunghwa Post, perché il tracking di Poste non indica la destinazione. Per seguirlo a Taiwan, cerca il codice di Poste sul tracker di Chunghwa Post, che segue la posta dall'estero con il codice della posta di partenza, per sei mesi.
 
-Peek controlla ogni 10 minuti, ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Chunghwa Post; quando rispondono i servizi di tracciamento, ogni 15 minuti; quando Peek lo segue su Poste Italiane, ogni 30 minuti), e ogni ora dopo due giorni senza novità. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Chunghwa Post, Poste o il negozio al posto tuo.
+Peek controlla ogni 10 minuti, ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Chunghwa Post; quando rispondono i servizi di tracciamento, ogni 15 minuti; quando Peek lo segue su Poste Italiane, ogni ora), e ogni ora dopo due giorni senza novità. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Chunghwa Post, Poste o il negozio al posto tuo.
 
 ## Domande sul tracking Chunghwa Post
 

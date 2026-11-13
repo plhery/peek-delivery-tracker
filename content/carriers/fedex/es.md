@@ -3,7 +3,7 @@ title: FedEx seguimiento: número, estados del envío y aduanas
 description: Seguimiento de FedEx en España: cómo es el número de 12 cifras, qué significan «Delivery exception» y otros escaneos, aduanas y tus derechos si se pierde.
 slug: fedex-seguimiento
 published: 2026-10-13
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 Pega un número de seguimiento de FedEx, o un enlace de seguimiento de FedEx, en la casilla de arriba para seguir el paquete. El seguimiento propio de FedEx está en fedex.com.
@@ -15,7 +15,7 @@ Míralo en el correo de envío de la tienda o en la página de tu pedido. Un enl
 | Número (inventado) | Qué es |
 | --- | --- |
 | `123456789012` | 12 cifras: un número de seguimiento de FedEx. La última cifra es un dígito de control calculado con las 11 anteriores. |
-| `123456789012343` | 15 cifras: otra forma de número de FedEx. |
+| `123456789012343` | 15 cifras: otra forma de número de FedEx. Si empieza por 8880, Peek propone en su lugar J&T Express Brazil, y si empieza por 30000, 31000 o 36000, Andreani. |
 | `61290000000000000014` | 20 cifras que empiezan por `6129` o `7489`: FedEx Ground Economy (antes SmartPost), en Estados Unidos. |
 
 Las 12 cifras también las usan [MRW](carrier:mrw), [Mondial Relay](carrier:mondial-relay) y varias empresas europeas y asiáticas; las 15, DPD France, BRT y Yunda Express. Si fedex.com no encuentra el número, comprueba qué empresa nombra el correo de la tienda. Un número que empieza por `1Z` es de [UPS](carrier:ups), y los números de 10 cifras de [DHL Express](carrier:dhl-express) tampoco son de FedEx.
@@ -62,7 +62,7 @@ Si compraste en una tienda, es ella quien responde de que el paquete te llegue, 
 
 ## Seguimiento de FedEx con Peek
 
-[Peek](/) reconoce los números de 12 y 15 cifras de FedEx cuando su dígito de control es correcto. Otras empresas comparten esas formas, así que a menudo es un servicio de seguimiento el que identifica a FedEx, o Peek lo hace tras una breve espera. Un número que falla el control no se ofrece a FedEx: elige la empresa con «Cambiar». Los números Ground Economy de 20 cifras se asignan a FedEx al momento, los códigos de barras escaneados de la etiqueta se leen por el número que llevan y también valen los enlaces de fedex.com con `trknbr=` o `tracknumbers=`. Peek sigue como FedEx Poland los números de 13 cifras de los envíos nacionales de FedEx en Polonia.
+[Peek](/) reconoce los números de 12 y 15 cifras de FedEx cuando su dígito de control es correcto. Otras empresas comparten esas formas, así que a menudo es un servicio de seguimiento el que identifica a FedEx, o Peek lo hace tras una breve espera. Un número que falla el control, o uno de 15 cifras que empieza por 8880, 30000, 31000 o 36000, no se ofrece a FedEx: elige la empresa con «Cambiar». Los números Ground Economy de 20 cifras se asignan a FedEx al momento, los códigos de barras escaneados de la etiqueta se leen por el número que llevan y también valen los enlaces de fedex.com con `trknbr=` o `tracknumbers=`. Peek sigue como FedEx Poland los números de 13 cifras de los envíos nacionales de FedEx en Polonia.
 
 Para leer los datos, el servidor de Peek abre la página de seguimiento de fedex.com en un navegador. Cuando FedEx la rechaza, o pide verificar al destinatario, los servicios de seguimiento completan el historial.
 

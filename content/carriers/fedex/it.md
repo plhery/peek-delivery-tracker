@@ -3,7 +3,7 @@ title: FedEx tracking: numero, stati e consegna del pacco
 description: Tracking FedEx: com'è fatto il numero di 12 cifre, cosa vogliono dire «Delivery exception» e le altre scansioni, i dazi e i tuoi diritti se il pacco si perde.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 Per seguire il pacco incolla il numero di tracking FedEx, o un link di tracking FedEx, nel box qui sopra. Il tracking di FedEx stesso è su fedex.com.
@@ -15,7 +15,7 @@ Cercalo nell'e-mail di spedizione o nella pagina dell'ordine del negozio. Anche 
 | Numero (inventato) | Che cos'è |
 | --- | --- |
 | `123456789012` | 12 cifre: un numero di tracking FedEx. L'ultima cifra è una cifra di controllo calcolata sulle 11 precedenti. |
-| `123456789012343` | 15 cifre: una forma che Peek collega anche a FedEx. |
+| `123456789012343` | 15 cifre: una forma che Peek collega anche a FedEx, tranne quando il numero inizia con 8880 (Peek propone J&T Express Brazil) o con 30000, 31000 o 36000 (Andreani). |
 | `61290000000000000014` | 20 cifre che iniziano con `6129` o `7489`: FedEx Ground Economy, negli Stati Uniti. |
 
 Attenzione ai numeri simili: 12 cifre le usano anche [BRT](carrier:brt), DPD France, Mondial Relay e diversi corrieri asiatici, 15 cifre anche BRT, DPD France e Yunda Express. Se fedex.com non trova il numero, controlla quale corriere nomina l'e-mail del negozio.
@@ -65,7 +65,7 @@ Se hai comprato da un negozio, il tuo interlocutore è lui, anche se il pacco lo
 
 ## Seguire un pacco FedEx con Peek
 
-[Peek](/) riconosce i numeri FedEx di 12 e 15 cifre quando la cifra di controllo è giusta. Le stesse forme le usano altri corrieri, quindi spesso il pacco viene attribuito da un servizio di tracking o dopo una breve attesa. Un numero che non supera il controllo non viene proposto a FedEx: scegli tu il corriere con «Cambia corriere». I numeri Ground Economy di 20 cifre vengono riconosciuti subito, i codici a barre dell'etichetta vengono letti per il numero che contengono, e funzionano anche i link di fedex.com con `trknbr=` o `tracknumbers=`. I numeri FedEx di 13 cifre delle spedizioni nazionali in Polonia li segue come FedEx Poland.
+[Peek](/) riconosce i numeri FedEx di 12 e 15 cifre quando la cifra di controllo è giusta. Le stesse forme le usano altri corrieri, quindi spesso il pacco viene attribuito da un servizio di tracking o dopo una breve attesa. Un numero che non supera il controllo, o uno di 15 cifre che inizia con 8880, 30000, 31000 o 36000, non viene proposto a FedEx: scegli tu il corriere con «Cambia corriere». I numeri Ground Economy di 20 cifre vengono riconosciuti subito, i codici a barre dell'etichetta vengono letti per il numero che contengono, e funzionano anche i link di fedex.com con `trknbr=` o `tracknumbers=`. I numeri FedEx di 13 cifre delle spedizioni nazionali in Polonia li segue come FedEx Poland.
 
 Il server di Peek apre la pagina di monitoraggio di fedex.com in un browser. Quando FedEx rifiuta la richiesta, o chiede di verificare il destinatario, subentrano servizi di tracking.
 

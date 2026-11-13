@@ -3,7 +3,7 @@ title: FedEx 联邦快递物流查询：单号格式、状态含义与派送失�
 description: FedEx（联邦快递）包裹跟踪：12 位快递单号长什么样，Delivery exception 等物流状态是什么意思，清关要交哪些费用，丢件或显示已签收却没收到怎么办。
 slug: fedex-wuliu-chaxun
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-13
 ---
 
 把 FedEx（联邦快递）的快递单号或 FedEx 查询链接粘贴到上方的查询框，就能跟踪包裹。FedEx 自己的物流查询在 fedex.com 官网上。
@@ -15,7 +15,7 @@ updated: 2026-11-02
 | 格式（数字为虚构） | 说明 |
 | --- | --- |
 | `123456789012` | 12 位数字：FedEx 快递单号。最后一位是校验位，由前 11 位算出。 |
-| `123456789012343` | 15 位数字：Peek 也把这种格式归到 FedEx。 |
+| `123456789012343` | 15 位数字：Peek 也把这种格式归到 FedEx；不过以 8880 开头的，Peek 会建议 J&T Express Brazil，以 30000、31000 或 36000 开头的，则建议 Andreani。 |
 | `61290000000000000014` | 20 位数字，以 `6129` 或 `7489` 开头：美国的 FedEx Ground Economy（原 SmartPost）。 |
 
 12 位数字也可能是 DPD France、Mondial Relay、BRT 的单号，或者顺丰（SF Express）、申通（STO Express）、中通（ZTO Express）等亚洲快递公司的单号；15 位数字也可能属于 DPD France、BRT 或韵达（Yunda Express）。如果在 fedex.com 上查不到，请看商家邮件里写的是哪家快递公司。
@@ -66,7 +66,7 @@ updated: 2026-11-02
 
 ## 用 Peek 跟踪 FedEx 包裹
 
-[Peek](/) 能认出校验位正确的 12 位和 15 位 FedEx 单号。不过别的快递公司也用这些格式，所以 Peek 往往要稍等片刻，或者等第三方物流查询服务确认，才能定下是 FedEx。校验位不对的单号，Peek 不会自动归到 FedEx，请点“更换”自己选快递公司。Ground Economy 的 20 位单号，Peek 马上就能认作 FedEx；扫描面单条形码得到的一长串数字，Peek 会从中读出单号；带 `trknbr=` 或 `tracknumbers=` 的 fedex.com 链接也可以直接粘贴。FedEx 在波兰国内用的 13 位单号，Peek 按 FedEx Poland 跟踪。
+[Peek](/) 能认出校验位正确的 12 位和 15 位 FedEx 单号。不过别的快递公司也用这些格式，所以 Peek 往往要稍等片刻，或者等第三方物流查询服务确认，才能定下是 FedEx。校验位不对的单号，以及以 8880、30000、31000 或 36000 开头的 15 位单号，Peek 不会自动归到 FedEx，请点“更换”自己选快递公司。Ground Economy 的 20 位单号，Peek 马上就能认作 FedEx；扫描面单条形码得到的一长串数字，Peek 会从中读出单号；带 `trknbr=` 或 `tracknumbers=` 的 fedex.com 链接也可以直接粘贴。FedEx 在波兰国内用的 13 位单号，Peek 按 FedEx Poland 跟踪。
 
 Peek 在自己的服务器上用浏览器打开 fedex.com 的查询页面。FedEx 拒绝查询或要求验证收件人身份时，改由第三方物流查询服务补上。
 

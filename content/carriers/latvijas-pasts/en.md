@@ -44,7 +44,7 @@ The tracker shows each step with its date, time and the Latvian post office. Abo
 | `Item accepted for temporary storage` | An item from abroad, held in temporary storage under customs supervision until it's cleared. Not an acceptance from the sender. |
 | `Electonic notification (SMS) of customs clearance sent to recipient` | You've been sent an SMS about the item's customs clearance (the spelling is Latvijas Pasts's). It's still in temporary storage. |
 | `Customs clearance completed, item to be delivered to recipient` | Cleared by customs; it goes on to the office that delivers it. |
-| `Item arrived at processing facility` | At a sorting centre. |
+| `Item arrived at processing facility`, `Item arrived at sorting centre` | At a sorting centre. |
 | `Item sent to next processing facility` | On its way to the next sorting centre. |
 | `Item sent to delivery facility` | On its way to the office that will deliver it or hand it out. |
 | `Item received at delivery office` | At the office that will deliver it or hand it out. It can still go out for delivery from there. |

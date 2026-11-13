@@ -123,7 +123,7 @@ Oft, als letzter Schritt. Schreib vorher dem Händler, denn Banken wollen sehen,
 
 ### Kann Peek mein Paket finden?
 
-Nein. [Peek](/) zeigt wie [jeder Paket-Tracker](guide:universal-tracker) nur, was der Paketdienst veröffentlicht, und kann weder den Paketdienst kontaktieren noch für dich reklamieren. Ist ein Paket in Zustellung, fragt Peek aber bis zu alle 2 Minuten nach (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange der Paketdienst selbst antwortet) und kann dir eine Mitteilung schicken, sobald es zugestellt ist. So stehst du kurz nach dem Scan an der Tür. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail und Morning Global; alle 30 Minuten Poste Italiane, PostNL, USPS, GOFO und Cainiao).
+Nein. [Peek](/) zeigt wie [jeder Paket-Tracker](guide:universal-tracker) nur, was der Paketdienst veröffentlicht, und kann weder den Paketdienst kontaktieren noch für dich reklamieren. Ist ein Paket in Zustellung, fragt Peek aber bis zu alle 2 Minuten nach (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange der Paketdienst selbst antwortet) und kann dir eine Mitteilung schicken, sobald es zugestellt ist. So stehst du kurz nach dem Scan an der Tür. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail, Poste Italiane und Morning Global; alle 30 Minuten PostNL, USPS, GOFO und Cainiao).
 
 ### Soll ich den Diebstahl bei der Polizei anzeigen?
 

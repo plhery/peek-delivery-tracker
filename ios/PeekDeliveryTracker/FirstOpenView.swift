@@ -262,7 +262,7 @@ struct FirstOpenView: View {
                         atlas: atlas, route: ParcelRoute(parcel: parcel, atlas: atlas, language: localizer.language),
                         stage: parcel.currentStage, identity: identity, peek: false,
                         insets: EdgeInsets(top: layout.routeTop, leading: 88, bottom: layout.routeBottom, trailing: 54),
-                        floor: layout.floor
+                        ceiling: layout.ceiling, floor: layout.floor
                     )
                     .id(layout)
                     .transition(.opacity)
@@ -360,7 +360,7 @@ struct FirstOpenView: View {
                             atlas: atlas, route: ParcelRoute(parcel: parcel, atlas: atlas, language: localizer.language),
                             stage: parcel.currentStage, identity: identity, peek: false,
                             insets: EdgeInsets(top: routeTop, leading: 110, bottom: size.height - routeFloor + 40, trailing: 100),
-                            floor: routeFloor - 12
+                            ceiling: routeTop - 24, floor: routeFloor - 12
                         )
                         .transition(.opacity)
                     }
@@ -421,7 +421,9 @@ struct FirstOpenView: View {
                 .padding(.top, portrait ? 72 : 28)
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(Self.posterSpace)).maxY } action: { posterTop = $0 }
                 .offset(y: appeared ? 0 : 14)
-                Spacer(minLength: 24)
+                // At the accessibility sizes the route keeps a phone's least room between the two, or the screen takes
+                // the phone's layout, whose picture grows with its words.
+                Spacer(minLength: dynamicTypeSize.isAccessibilitySize ? FirstOpenHeroLayout.leastRoom + 80 : 24)
                 posterCaption(parcel)
                     .padding(.horizontal, 44)
                     .padding(.bottom, 26)
@@ -444,12 +446,16 @@ struct FirstOpenView: View {
     private func posterCaption(_ parcel: Parcel) -> some View {
         HStack(alignment: .bottom, spacing: 18) {
             VStack(alignment: .leading, spacing: 10) {
-                if let ping = FirstOpenJourney.ping(step: step, localizer: localizer) {
-                    FirstOpenPing(detail: ping, identity: identity)
-                        .id(step)
-                        .transition(.offset(y: 6).combined(with: .opacity))
-                        .padding(.bottom, 8)
+                // The alert keeps its room when none shows, so the route holds still as alerts come and go.
+                ZStack(alignment: .leading) {
+                    FirstOpenPing(detail: " ", identity: identity).hidden()
+                    if let ping = FirstOpenJourney.ping(step: step, localizer: localizer) {
+                        FirstOpenPing(detail: ping, identity: identity)
+                            .id(step)
+                            .transition(.offset(y: 6).combined(with: .opacity))
+                    }
                 }
+                .padding(.bottom, 8)
                 CarrierFleetMark(identity: identity)
                 Text(parcel.label).font(.largeTitle.weight(.semibold)).foregroundStyle(Color.primary)
                 Text(status(parcel))
@@ -637,13 +643,15 @@ struct FirstOpenHeroLayout: Hashable {
     /// The route's room, from the top and from the foot of the picture.
     let routeTop: CGFloat
     let routeBottom: CGFloat
-    /// The lowest Pip goes, from the top of the picture.
+    /// The highest Pip goes, under the masthead and its alert, and the lowest, over the parcel's name; from the top of
+    /// the picture.
+    let ceiling: CGFloat
     let floor: CGFloat
 
     /// `masthead` and `caption` are the heights measured on screen, nothing until they are. An alert always has room
     /// under the masthead, so the picture holds still as alerts come and go.
     init(fits: CGFloat, top: CGFloat, masthead: CGFloat, caption: CGFloat, grows: Bool = true) {
-        let ceiling = top + Self.mastheadTop + masthead + Self.pingGap + Self.pingHeight
+        ceiling = top + Self.mastheadTop + masthead + Self.pingGap + Self.pingHeight
         routeTop = max(top + Self.routeTop, ceiling + 16)
         routeBottom = max(Self.routeBottom, caption + 10)
         let usual = fits - top - Self.routeTop - Self.routeBottom

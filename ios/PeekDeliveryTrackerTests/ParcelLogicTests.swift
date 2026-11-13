@@ -4046,6 +4046,8 @@ extension ParcelLogicTests {
         XCTAssertGreaterThanOrEqual(largest.routeTop, 20 + 10 + 64 + 12 + 26, "the masthead and its alert end over the route")
         XCTAssertGreaterThanOrEqual(largest.routeBottom, 420, "the route ends over the name")
         XCTAssertLessThanOrEqual(largest.floor, largest.height - 420, "Pip stays over the name")
+        XCTAssertEqual(largest.ceiling, 20 + 10 + 64 + 12 + 26, "Pip stays under the masthead and its alert")
+        XCTAssertEqual(usual.ceiling, 62 + 10 + 44 + 12 + 26)
         XCTAssertEqual(largest.height - largest.routeTop - largest.routeBottom, 144, "the route keeps 144 points at least")
         // A taller phone's route keeps the room it has at the usual size.
         let tall = FirstOpenHeroLayout(fits: 446, top: 62, masthead: 64, caption: 420)

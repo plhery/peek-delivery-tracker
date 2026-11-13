@@ -625,6 +625,17 @@ describe('tracking event normalization', () => {
       .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
     expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z', 'in_transit'), answer('delivered'), undefined, observedAt)))
       .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
+    // A failed attempt or a parcel waiting at a pickup point can wait days for its end.
+    for (const stage of ['failed_attempt', 'ready_for_pickup']) {
+      expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z'), answer(stage), undefined, observedAt)))
+        .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
+    }
+    // The delivery round dates the end, but not in a universal provider's copy, whose clock the carrier may correct.
+    expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z'), answer('out_for_delivery'), undefined, observedAt)))
+      .toMatchObject({ occurred_at: '2026-10-30T08:39:06.000Z' });
+    expect(observed(buildEvents({ ...parcel('2026-11-09T12:09:13Z'), carrier: 'unknown' },
+      { ...answer('out_for_delivery'), tracking_provider: 'ParcelsApp' }, 'unknown', observedAt)))
+      .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
   });
 
   it('records an observed event when a timestamp-less current state changes', () => {

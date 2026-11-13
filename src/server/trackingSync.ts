@@ -954,22 +954,28 @@ function summaryNamesWordedSetback(summary: string, summaryStage: string | null,
     && isRecord(event.raw_data) && String(event.raw_data.stage_source ?? '').startsWith('wording');
 }
 
-/** Scans a delivery or return follows at once. */
-const LAST_MILE_STAGES = new Set(['out_for_delivery', 'failed_attempt', 'ready_for_pickup', 'delivered', 'returned']);
+/**
+ * Scans a delivery or return follows at once: the delivery round, or the end's own scan. A failed attempt or a parcel
+ * waiting at a pickup point can wait days for its end.
+ */
+const END_EVE_STAGES = new Set(['out_for_delivery', 'delivered', 'returned']);
 
 /**
- * When a parcel's first answer states a delivery or return no scan shows, right after a last-mile scan from before the
- * parcel was added, the instant of that scan: the parcel reached its end with it, not at the check (DHL's delivery back
- * to the sender, ten days before the reader added the parcel). The end sorts after a scan at the same instant.
- * Otherwise null, and the change is dated when the check saw it.
+ * When a carrier's first answer for a parcel states a delivery or return no scan shows, right after a scan of its eve
+ * (`END_EVE_STAGES`) from before the parcel was added, the instant of that scan: the parcel reached its end with it,
+ * not at the check (DHL's delivery back to the sender, ten days before the reader added the parcel). The end sorts
+ * after a scan at the same instant. Otherwise null, and the change is dated when the check saw it: a universal
+ * provider's copy may sit on a misread clock that the carrier's own scan later corrects, leaving the end behind.
  */
-function endWithNewestScan(parcel: JsonObject, previousStage: string, current: string, rows: readonly JsonObject[]): string | null {
-  if (previousStage !== 'pending' || !['delivered', 'returned'].includes(current)) return null;
+function endWithNewestScan(
+  parcel: JsonObject, previousStage: string, current: string, rows: readonly JsonObject[], providerCopy: boolean,
+): string | null {
+  if (providerCopy || previousStage !== 'pending' || !['delivered', 'returned'].includes(current)) return null;
   const at = (row: JsonObject) => Date.parse(String(row.occurred_at ?? ''));
   const newest = rows.filter((row) => Number.isFinite(at(row))).reduce<JsonObject | null>(
     (latest, row) => (latest === null || at(row) > at(latest) ? row : latest), null);
   const added = Date.parse(String(parcel.created_at ?? ''));
-  return newest && LAST_MILE_STAGES.has(String(newest.stage)) && Number.isFinite(added) && at(newest) < added
+  return newest && END_EVE_STAGES.has(String(newest.stage)) && Number.isFinite(added) && at(newest) < added
     ? new Date(at(newest)).toISOString() : null;
 }
 
@@ -990,8 +996,8 @@ export function buildEvents(
   const identities = new Set<string>();
   // A universal provider's scans name it, so their rows follow its clock until a carrier writes them (eventIdentity.ts).
   // The stage change seen without a provider time names it too: no copy or clock rule reads that row.
-  const provider = carrierId === 'unknown' && typeof result.tracking_provider === 'string'
-    ? { [UNIVERSAL_PROVIDER]: result.tracking_provider } : {};
+  const providerCopy = carrierId === 'unknown' && typeof result.tracking_provider === 'string';
+  const provider = providerCopy ? { [UNIVERSAL_PROVIDER]: result.tracking_provider } : {};
   // A scan the carrier dates by its day alone, with no clock (NACEX's calendar headings), is
   // dated in the carrier's order, newest first: a second after the scan listed after it when
   // that one is of the same day, else at the start of its day on the carrier's home clock, the
@@ -1095,7 +1101,7 @@ export function buildEvents(
       matchingEvent?.description ?? result.last_status_text ?? UNWORDED_STEP,
     ).trim() || UNWORDED_STEP;
     const location = String(matchingEvent?.location ?? '').trim();
-    const occurredAt = endWithNewestScan(parcel, previousStage, current, rows) ?? observedAt.toISOString();
+    const occurredAt = endWithNewestScan(parcel, previousStage, current, rows, providerCopy) ?? observedAt.toISOString();
     const declaredCurrent = String(result.current_stage ?? '');
     rows.push({
       package_id: parcel.id,

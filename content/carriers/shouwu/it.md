@@ -3,7 +3,7 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
@@ -62,6 +62,8 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `The shipment has been processed in the destination parcel center` | DHL l'ha smistato nel centro pacchi che serve il tuo indirizzo, prima del giro di consegna. | «In transito» |
 | `Out for delivery` | Il giro di consegna del corriere locale. | «In consegna» |
 | `The shipment could not be delivered. Please find more information here.` | Il corriere non è riuscito a consegnare; segue un altro giro. Il link annunciato non viene riportato. | «Tentativo di consegna» |
+| `The recipient is unknown` | Nel giro di DHL in Germania il destinatario risulta sconosciuto all'indirizzo: il pacco torna indietro. | «Tentativo di consegna» |
+| `Shipment will be returned to origin-Bad address` | DHL rimanda indietro il pacco perché non ha trovato l'indirizzo: è in viaggio di ritorno, non ancora dal mittente. Chiedi al venditore. | «Problema segnalato» |
 | `Delivered by post man`, `This parcel has been delivered` | La posta o il corriere locale l'ha consegnato. | «Consegnato», quando anche lo stato di Shouwu è `Delivered` |
 
 Quando in Italia consegna iMile, la cronologia riprende le sue righe, con il centro tra 【】 (al posto di Milan center o ROM 10 può comparirne un altro):

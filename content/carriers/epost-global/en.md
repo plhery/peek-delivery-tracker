@@ -3,7 +3,7 @@ title: ePost Global tracking: EPG numbers and who delivers
 description: Track an ePost Global parcel: what an EPG number looks like, what the lines on its tracker mean and how Peek follows the partner that delivers it.
 slug: epost-global-tracking
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-13
 ---
 
 ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track, and as RR Donnelley, RRD Donnelley or RRD International Logistics: searching any of these names when you pick a carrier in Peek finds ePost Global.
@@ -53,6 +53,8 @@ ePost Global's tracker lists each line with a time, a wording and, mostly, a pla
 | `The item is tied to a MAWB and ready for shipment` | PostNL, through Spring, has added it to an air shipment. | "In transit" |
 | `Your item has been dropped off by the sender with our postal partner in the country of origin.`, `Your item is ready to be forwarded from its foreign territory. It will be given to the carrier for forwarding.` | La Poste's notices for a parcel PostNL brings to France: it is still on its way there. | "In transit" |
 | `The parcel has left the parcel center.`, `The parcel has reached the parcel center.` | GLS's European network: the parcel has left its hub, then reached a parcel centre in your country. | "In transit" |
+| `The parcel is expected to be delivered during the day.` | GLS's European network: the parcel is out with the driver today. | "Out for delivery" |
+| `The parcel has been delivered.` | GLS's European network: delivered. | "Delivered" |
 | `Departed Hub`, `Shipment Received in Depot`, `Shipment Departed Depot` | For a parcel [Royal Mail](carrier:royal-mail) delivers, its partner in the UK: on its way to the UK, at a depot, before and after customs, then on to the delivery office. | "In transit" |
 | `Arrived in customs` | The same partner: at UK customs, in the minute the depot scans the parcel in. | "At customs" |
 | `Ready for Collection` | The same partner: the parcel waits for you at a collection point. | "Ready for pickup" |

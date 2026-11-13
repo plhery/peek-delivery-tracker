@@ -3,7 +3,7 @@ title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
 description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
@@ -42,9 +42,11 @@ WanbExpress's scans are in English, each with a time and sometimes a place. Here
 | `Parcel arrives at Airport, Parcel Arrival` | Landed in your country, or near it. Customs come next. | "In transit" |
 | `Custom clearance completed` | Import customs have let it through. | "In transit" |
 | `Parcel received by in JFK01.` | WanbExpress files it as a receipt for the last leg. The wording leaves out who received it. | "In transit" |
-| `Your package is being prepared by the sender and will be handed over to us soon`, `Order information received. We're expecting your parcel to arrive with us.` | A partner's notice in its own words, passed on without a WanbExpress code: the parcel hasn't been handed over to it yet. | "Label created", or a later stage if a scan has already moved the parcel |
+| `Your package is being prepared by the sender and will be handed over to us soon`, `Your parcel will soon be handed over to us! It is being prepared by the sender.`, `Order information received. We're expecting your parcel to arrive with us.` | A partner's notice in its own words, passed on without a WanbExpress code: the parcel hasn't been handed over to it yet. | "Label created", or a later stage if a scan has already moved the parcel |
 | `In transit along Poste Italiane’s logistic network` | On its way to you through the delivering carrier's network, here [Poste Italiane](carrier:poste-italiane)'s. | "In transit" |
 | `Parcel is out for delivery.` | On the delivery run. | "Out for delivery" |
+| `Consignee absent, Consignee could not be found.` | The delivering partner's run found no one. | "Delivery attempted" |
+| `Placed in Parcelshop/Parcel locker` | After the missed run, the partner left the parcel at a parcel shop or locker for you to collect. | "Ready for pickup" |
 | `Parcel has been delivered.(Front door)` | Delivered. `(Front door)` says where it was left. | "Delivered" |
 
 **The delivering carrier's scans.** After the flight, WanbExpress's tracker passes on the delivering carrier's own scans in that carrier's words, mostly without a WanbExpress code. On a parcel to Germany, WanbExpress's history shows [iMile](carrier:imile) delivering, each iMile line after the name of its centre or station in 【brackets】:
@@ -58,7 +60,7 @@ WanbExpress's scans are in English, each with a time and sometimes a place. Here
 | `<Route not completed>`, `Back To DS.` | The run ended without the delivery, and the parcel went back to the delivery station (DS). | "Delivery attempted" |
 | `Scheduled to <2026-11-02> .` | The day booked for the next run, after the parcel came back to the station. | Still "Delivery attempted" |
 
-Other partners' moves come through the same way. On parcels to the United States, `In Processing at Transit Facility.` is the last-mile partner's sort once it has the parcel, and `In Transit to Next Facility.` its move towards the facility that delivers. `It is currently in transit to the next facility` and `The package is being transferred to the next facility` are a partner's moves between its facilities after the flight. Peek shows all four as "In transit". On a parcel to the UK, [InPost](carrier:inpost)'s lines can come through before WanbExpress's sorting centre has scanned the parcel: `Your parcel is on its way to InPost. Please check back for updates`, which Peek shows as "Label created", then `We have your parcel. Please check back for updates`, "Received by carrier". `We'll apply your My Account preferences to this parcel delivery` is InPost's note that the recipient's account settings apply, not a scan: Peek keeps it in the history, but it doesn't change the stage.
+Other partners' moves come through the same way. On parcels to the United States, `In Processing at Transit Facility.` is the last-mile partner's sort once it has the parcel, and `In Transit to Next Facility.` its move towards the facility that delivers. `It is currently in transit to the next facility` and `The package is being transferred to the next facility` are a partner's moves between its facilities after the flight, and `Shipment arrived to sorting centre / Shipment in the sorting centre` is a partner's sorting centre taking the parcel in before its run. Peek shows all five as "In transit". On a parcel to the UK, [InPost](carrier:inpost)'s lines can come through before WanbExpress's sorting centre has scanned the parcel: `Your parcel is on its way to InPost. Please check back for updates`, which Peek shows as "Label created", then `We have your parcel. Please check back for updates`, "Received by carrier". `We'll apply your My Account preferences to this parcel delivery` is InPost's note that the recipient's account settings apply, not a scan: Peek keeps it in the history, but it doesn't change the stage. Nor does `Consignee Contacted`, a partner's courier calling you, logged at the same minute as a run that found no one.
 
 **Times.** Each scan's time comes with its offset from UTC. Peek reads them that way and shows them all in your device's time zone, newest first. For the gaps and handovers that parcels from China go through, see [tracking a parcel from China](guide:tracking-from-china).
 

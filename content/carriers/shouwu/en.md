@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -61,6 +61,8 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `The shipment has been processed in the destination parcel center` | DHL has sorted it at the parcel centre that serves your address, before its delivery round. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
 | `Abnormal delivery` | The round didn't deliver. The courier's reason follows as a scan of its own in angle brackets, such as `<Incorrect address.>`. | "Delivery attempted" |
+| `The recipient is unknown` | DHL's round in Germany found no such recipient at the address; the parcel goes back. | "Delivery attempted" |
+| `Shipment will be returned to origin-Bad address` | DHL is sending the parcel back because it couldn't find the address: on its way back, not with the sender yet. Ask the seller. | "Needs attention" |
 | `Delivered by post man`, `This parcel has been delivered` | The local post or courier has delivered it. | "Delivered", once Shouwu's status says `Delivered` |
 
 When iMile delivers in Italy, Shouwu's history relays iMile's lines, with the centre in 【】 brackets (yours may name another centre than Milan center or ROM 10):

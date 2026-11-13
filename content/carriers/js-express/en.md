@@ -3,7 +3,7 @@ title: JS Express tracking: JSE…YQ numbers, scans and who delivers
 description: Track a JS Express (急速国际) parcel from China: what a JSE…YQ number looks like, what its scans mean and who delivers it in the US, Canada and beyond.
 slug: js-express-tracking
 published: 2026-10-30
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS, GOFO or SpeedX in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany, Colissimo in France and CTT Express in Spain, and FedEx on some lines.
@@ -50,6 +50,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `Inbound to customs temporary warehouse` | In a customs warehouse, waiting for import clearance. | "At customs" |
 | `Released From Import Customs`, `Released from customs: customs cleared.` | Your country's customs have let it through. | "In transit" |
 | `Depart from the destination distribution center.` | A distribution centre in your country sends the parcel on, after customs. | "In transit" |
+| `In transit, it's progressing through post network` | The post in your country carries the parcel on through its network, before any delivery round. | "In transit" |
 | `collection by overseas warehouse` | JS Express's warehouse in your country has taken the parcel, after customs. | "In transit" |
 | `Load cargo overseas`, `Vehicles depart from` | That warehouse loads the parcel for the courier, then the truck leaves from the place shown with the scan. | "In transit" |
 | `Delivery to local courier`, `Last Mile Delivery` | Handed to the courier that delivers in your country, before its first scan. Not delivered to you yet. | "In transit" |

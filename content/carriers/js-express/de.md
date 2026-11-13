@@ -3,7 +3,7 @@ title: JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller
 description: JS-Express-Paket (急速国际) aus China verfolgen: wie die JSE…YQ-Nummer aussieht, was die Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: js-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 JS Express (急速国际, auch JS EXP) ist ein chinesisches Logistikunternehmen für grenzüberschreitende Onlineshops, betrieben von 急创速供应链管理（苏州）有限公司 in Suzhou. Hat ein Shop deine Bestellung mit JS Express verschickt, beginnt die Sendungsnummer mit JSE und endet auf YQ: Füg sie oben ins Feld ein. JS Express bringt das Paket aus China in dein Land, die Zustellung übernimmt dann ein Paketdienst vor Ort. In Deutschland tauchen im Verlauf von JS Express die Scans von DHL, iMile oder J&T Express auf.
@@ -50,6 +50,7 @@ Die Seite von JS Express listet jeden Scan mit Datum und Uhrzeit, einem Ort in �
 | `Inbound to customs temporary warehouse` | In einem Zolllager, wo es auf die Einfuhrabfertigung wartet. | „Beim Zoll“ |
 | `Released From Import Customs`, `Released from customs: customs cleared.` | Der Zoll hat das Paket zur Einfuhr freigegeben. | „Unterwegs“ |
 | `Depart from the destination distribution center.` | Ein Verteilzentrum in deinem Land schickt das Paket nach dem Zoll weiter. | „Unterwegs“ |
+| `In transit, it's progressing through post network` | Die Post in deinem Land befördert das Paket durch ihr Netz weiter, noch vor jeder Zustelltour. | „Unterwegs“ |
 | `collection by overseas warehouse` | Das Lager von JS Express in deinem Land hat das Paket nach dem Zoll übernommen. | „Unterwegs“ |
 | `Load cargo overseas`, `Vehicles depart from` | Dieses Lager verlädt das Paket für den Zusteller, dann fährt der Lkw ab; der Ort steht beim Scan. | „Unterwegs“ |
 | `Delivery to local courier`, `Last Mile Delivery` | Übergabe an den Paketdienst, der in deinem Land zustellt, noch vor dessen erstem Scan. Bei dir ist das Paket noch nicht. | „Unterwegs“ |

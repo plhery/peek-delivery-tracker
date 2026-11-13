@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -60,6 +60,8 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Germany, Die Sendung wurde im Briefzentrum bearbeitet.,运输途中` | Der Zusteller in Deutschland hat es in einem Briefzentrum bearbeitet; davor steht das Land, dahinter „unterwegs“ auf Chinesisch. | „Unterwegs“ |
 | `Out for delivery` | Die Zustelltour des Paketdiensts vor Ort. | „In Zustellung“ |
 | `The shipment could not be delivered. Please find more information here.` | Der Paketdienst konnte nicht zustellen; eine weitere Tour folgt. Den angekündigten Link gibt Shouwu nicht weiter. | „Zustellversuch“ |
+| `The recipient is unknown` | DHLs Zustelltour in Deutschland: Unter der Adresse ist der Empfänger unbekannt, das Paket geht zurück. | „Zustellversuch“ |
+| `Shipment will be returned to origin-Bad address` | DHL schickt das Paket zurück, weil die Adresse nicht zu finden war: Es ist auf dem Rückweg, noch nicht beim Absender. Frag den Shop. | „Problem gemeldet“ |
 | `Delivered by post man`, `This parcel has been delivered` | Die Post oder der Paketdienst vor Ort hat es zugestellt. | „Zugestellt“, sobald auch Shouwus Status `Delivered` lautet |
 
 Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:

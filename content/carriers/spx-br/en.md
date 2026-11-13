@@ -3,7 +3,7 @@ title: SPX Express Brazil tracking: Shopee orders and statuses
 description: Track an SPX Express parcel from a Shopee order in Brazil: where to follow it, what BR numbers and SPX's Portuguese statuses mean, Agência Shopee pickup and refunds.
 slug: spx-express-brazil-tracking
 published: 2026-10-26
-updated: 2026-11-09
+updated: 2026-11-13
 ---
 
 *Leia em português:* [rastreio da SPX Express, status, prazos e reembolso](https://peektracker.com/pt-br/carriers/rastreio-spx-express). SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil. It collects orders from sellers and brings them to your door or to an Agência Shopee, a partner shop where you pick parcels up. Shopee calls the service Entrega Padrão (standard delivery), and says you track it in the Shopee app, where the order, its delivery date and any refund live. spx.com.br has a tracking box too, or you can paste the number in the box above.
@@ -41,7 +41,7 @@ SPX writes its tracking in Portuguese; some lines end with the place after a col
 | `Pedido em rota de entrega para seu endereço, aguarde pelas próximas horas.` | Out for delivery to your address, in the next few hours. | "Out for delivery" |
 | `Houve um imprevisto durante a entrega do seu pedido …`, `Um imprevisto ocorreu …` | The delivery couldn't be completed that day; SPX says it will try again at your address as soon as it can. See the attempts below. | "Delivery attempted" |
 | `Pedido entregue` | Delivered. | "Delivered" |
-| `Pedido será devolvido ao vendedor` | It's going back to the seller. | "Returned to sender" |
+| `Pedido será devolvido ao vendedor`, `Pedido será devolvido ao vendedor. Por favor, aguarde.` | It's going back to the seller; the longer line only adds "please wait". | "Returned to sender" |
 | `Pedido devolvido` | Returned to the seller. | "Returned to sender" |
 | `Pedido descartado` | After a failed delivery, the parcel was disposed of: it was neither delivered nor returned to the seller. Ask Shopee about it. | "Needs attention" |
 

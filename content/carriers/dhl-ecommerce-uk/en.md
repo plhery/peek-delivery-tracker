@@ -3,7 +3,7 @@ title: DHL eCommerce UK tracking: statuses, ServicePoints, contact
 description: Track a DHL eCommerce UK parcel (formerly DHL Parcel UK): the 14-digit number, what each status means, ServicePoint pickup and how to reach DHL.
 slug: dhl-ecommerce-uk-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
 DHL eCommerce UK, formerly DHL Parcel UK and UK Mail, is DHL's domestic parcel network in the United Kingdom: it delivers for online shops and other businesses, with next-day delivery among its services. Track a parcel on [DHL eCommerce UK's tracker](https://track.dhlecommerce.co.uk/) with the shipment number and, ideally, your postcode, or paste the number in the box above. The number is in DHL's notification or on a driver's calling card; without one, the tracker says to contact your sender.
@@ -31,11 +31,15 @@ The tracker is in English and lists the newest message first. These are the mess
 | `Your shipment has been collected` | DHL has picked the parcel up from the sender. |
 | `Your shipment is due to be delivered on Monday 02nd November 2026` | DHL has planned the delivery day, which also heads the tracker as the expected delivery. |
 | `Your shipment is at the delivery depot` | It's at the depot that will deliver it. |
+| `Your shipment is at the delivery location` | Between the depot and the delivery round: not delivered yet. |
 | `We're sorry but the delivery of your shipment has been delayed. We expect to deliver on the next working day` | Running late: DHL expects to deliver the next working day. |
 | `We're sorry but we haven't been able to locate the delivery address from the information provided by the sender.` | DHL can't find your address from what the sender gave, so the parcel waits for a better one: check your address with the sender. |
 | `Your shipment is out for delivery` | With the driver today. |
 | `Your shipment is delivered` | Delivered. The tracker may also show who signed. |
 | `Delivery Attempted` | The driver called but couldn't deliver. |
+| `We're sorry but we haven't been able to deliver your shipment as our driver was unable to gain access to the delivery address` | The driver couldn't get access to the address, so the delivery failed. |
+| `Your shipment is due to be delivered to your ServicePoint on Wednesday 04th November 2026` | After a missed delivery, DHL plans to bring the parcel to a ServicePoint on that day. It isn't there yet. |
+| `Delayed` | Running late after a missed delivery; the parcel is still on its way. |
 | `Collected` | You collected the parcel yourself. |
 | `We're sorry but your shipment was refused on delivery. Please contact your sender for further information` | The parcel was refused at the door; the headline then says it has gone back to the sender. |
 

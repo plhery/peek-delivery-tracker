@@ -4,7 +4,7 @@ description: Ce que veut dire chaque étape du suivi d'un colis, de « pris en c
 slug: etapes-suivi-colis-signification
 picture: Une route sinueuse aux étapes cochées (étiquette, dépôt, avion), une camionnette à l'étape en cours, une maison plus loin et Pip qui file.
 published: 2026-10-09
-updated: 2026-11-08
+updated: 2026-11-13
 ---
 
 Un statut de suivi résume en quelques mots le dernier scan du transporteur, et la plupart ne te demandent rien. « En préparation chez l'expéditeur » veut dire que le transporteur n'a pas encore ton colis, « en cours d'acheminement » qu'il est quelque part entre deux scans, et « en cours de livraison » qu'il est dans la camionnette du jour. Seuls quelques-uns demandent une action de ta part : un avis de passage, un colis en instance, des frais de douane, ou un « livré » alors que rien n'est arrivé.
@@ -57,7 +57,7 @@ Chez Chronopost, `Colis retardé durant l'acheminement` et `Livraison reportée`
 
 Chez Mondial Relay, `Sollicitation Client pour replace colis` : le Point Relais n'a pas pu prendre le colis, il faut en choisir un autre. `Colis en route vers le point de livraison` reste « En transit » vers un Point Relais, mais devient « En livraison » à domicile.
 
-Chez DPD France, l'avis du jour par SMS et e-mail (… `de la livraison de son colis ce jour`) donne « En livraison » ; l'avis de prise en charge (… `de la prise en charge de son colis`) ne change pas l'étape.
+Chez DPD France, l'avis du jour (SMS, e-mail : … `de la livraison de son colis ce jour`) donne « En livraison » ; l'avis de prise en charge (… `de la prise en charge de son colis`) et le SMS de tournée (… `de l'étape actuelle de sa livraison`) ne changent pas l'étape.
 
 ## « En préparation chez l'expéditeur » ou « étiquette créée » : le colis est-il parti ?
 

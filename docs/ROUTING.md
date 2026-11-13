@@ -347,7 +347,7 @@ and providers scan parcels across every time zone.
 | Other stages (direct adapter) | every 10 min |
 | Served by a universal provider, out for delivery too | every 15 min |
 | PostNL | every 30 min, also after a failure and out for delivery |
-| A carrier whose catalog entry sets a refresh limit (`tracking.refresh`) | no more often than its interval, out for delivery too; when it also sets a wait after a failure, that wait follows a failed check and the limit holds for a manual refresh too |
+| A carrier whose catalog entry sets a refresh limit (`tracking.refresh`): after a handoff, the one it went to; else the stricter of the carrier filed and an earlier leg that answered last, as a check may ask both | no more often than its interval, out for delivery too; when it also sets a wait after a failure, that wait follows a failed check and the limit holds for a manual refresh too |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | Nobody waiting for it | hourly around the clock; manual refresh still allowed |
@@ -409,8 +409,8 @@ would keep the cadence of one someone is waiting for).
 
 **Out for delivery**, the news is the delivery. A carrier's own adapter is cheap and as
 fresh as the carrier, so a parcel it answers for is checked every 2 minutes whether or not
-anyone is looking, unless nobody is waiting for it or the carrier now tracking it (after a
-handoff, the one it went to) sets a longer interval of its own. While its lookups open a browser, as FedEx's and UPS's do, each takes seconds of
+anyone is looking, unless nobody is waiting for it or its refresh limit (above) sets a longer
+interval. While its lookups open a browser, as FedEx's and UPS's do, each takes seconds of
 the browser service, so it is checked every 5 minutes: the last check that ran a lookup
 says which (`browser_check` in its routing). A lookup that only sends a plain HTTP request
 through the browser service, as TopYou's and Spee-Dee's do, opens no browser and keeps the 2 minutes. A universal provider has quotas, costs more and lags behind the carrier: its

@@ -382,13 +382,33 @@ export function isTrackingSyncDue(parcel: JsonObject, now: Date): boolean {
   return now.getTime() >= trackingSyncDueAt(parcel);
 }
 
-/**
- * The least interval between two checks of the carrier now tracking the parcel (the one a handoff
- * moved it to, else its own), and after a failed one, when its catalog entry sets any.
- */
+/** The least interval between two checks of the carrier that paces the parcel (`pacedBy`), and after a failed one. */
 function refreshLimit(parcel: JsonObject): { minMinutes: number; afterFailureMinutes?: number } | undefined {
-  const active = isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined;
-  return CARRIER_DEFINITIONS[String(active ?? parcel.carrier) as CarrierId]?.tracking.refresh;
+  const carrier = pacedBy(parcel);
+  return carrier ? CARRIER_DEFINITIONS[carrier as CarrierId].tracking.refresh : undefined;
+}
+
+/**
+ * The carrier whose catalog entry spaces the parcel's checks out, if any: the one a handoff moved it to, else the
+ * stricter of the carrier it is filed under and an earlier leg that answered last (`active_tracking_carrier`), as a
+ * check may ask both.
+ */
+function pacedBy(parcel: JsonObject): string | undefined {
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const handed = handedTo(parcel);
+  const limit = (carrier: string) => CARRIER_DEFINITIONS[carrier as CarrierId]?.tracking.refresh;
+  const carriers = (handed ? [handed] : [String(parcel.carrier), data.active_tracking_carrier])
+    .filter((carrier): carrier is string => typeof carrier === 'string' && limit(carrier) !== undefined);
+  return carriers.sort((a, b) => limit(b)!.minMinutes - limit(a)!.minMinutes
+    || (limit(b)!.afterFailureMinutes ?? 0) - (limit(a)!.afterFailureMinutes ?? 0))[0];
+}
+
+/**
+ * The carrier now tracking the parcel: the one a handoff moved it to, else the one it is filed under,
+ * not an earlier leg that gave the last direct answer (`active_tracking_carrier` names that one too).
+ */
+function deliveringCarrier(parcel: JsonObject): string {
+  return handedTo(parcel) ?? String(parcel.carrier);
 }
 
 /**
@@ -486,7 +506,7 @@ function instant(value: unknown): number | null {
  */
 function deliveryClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const declared = resultTimezone(handedTo(parcel) ?? String(parcel.carrier), data as CarrierResult);
+  const declared = resultTimezone(deliveringCarrier(parcel), data as CarrierResult);
   return declared !== 'UTC' ? declared : carrierClock(parcel);
 }
 
@@ -511,13 +531,14 @@ function pageClock(carrier: string): boolean {
 
 /**
  * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00", or "+00:00" from
- * a Canary Islands office in winter), else the carrier's zone in the catalog. A "Z" is a UTC
+ * a Canary Islands office in winter), else the zone of the carrier now tracking the parcel
+ * (`deliveringCarrier`) in the catalog, not an earlier leg's that answered last. A "Z" is a UTC
  * instant, and "-00:00" an unknown offset, not the scan's own clock. A carrier that states its
  * page's clock (`pageClock`) is read on the clock of the place its newest stored scan names.
  */
 function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const carrier = String(data.active_tracking_carrier ?? parcel.carrier);
+  const carrier = deliveringCarrier(parcel);
   const placed = pageClock(carrier) ? newestPlaceZone(parcel, carrier) : null;
   if (placed) return placed;
   const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
@@ -571,7 +592,7 @@ function deliveringToday(parcel: JsonObject, now: Date): boolean {
  * hour. Every other parcel keeps its place, and no carrier's places go to another.
  */
 export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
-  const carrier = (parcel: JsonObject) => String((isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined) ?? parcel.carrier);
+  const carrier = (parcel: JsonObject) => pacedBy(parcel)!;
   const urgent = (parcel: JsonObject) => (parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now))
     || (!['delivered', 'returned'].includes(String(parcel.current_stage))
       && /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0] === deliveryToday(parcel, now));

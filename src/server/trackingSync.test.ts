@@ -754,6 +754,22 @@ describe('fair scheduling', () => {
     expect(() => idlePollDelay(1_000, 1.5)).toThrow('non-negative');
   });
 
+  it('spaces a parcel\'s checks out by the stricter of its carrier and an earlier leg that answered last', () => {
+    const at = (minutes: number) => new Date(Date.parse('2026-11-13T10:00:00Z') + minutes * 60_000);
+    const checked = { current_stage: 'in_transit', sync_status: 'ok', last_synced_at: '2026-11-13T10:00:00Z' };
+    // Poste Italiane is checked hourly at most; Cainiao's leg before it sets no interval.
+    const poste = { ...checked, carrier: 'poste-italiane', carrier_data: { active_tracking_carrier: 'cainiao' } };
+    expect(isTrackingSyncDue(poste, at(59))).toBe(false);
+    expect(isTrackingSyncDue(poste, at(60))).toBe(true);
+    // Poste Italiane's hour outlasts AliExpress's half hour.
+    const both = { ...poste, carrier_data: { active_tracking_carrier: 'aliexpress' } };
+    expect(isTrackingSyncDue(both, at(59))).toBe(false);
+    expect(isTrackingSyncDue(both, at(60))).toBe(true);
+    // After a handoff, only the carrier it moved the parcel to.
+    const handed = { ...checked, carrier: 'aliexpress', carrier_data: { original_carrier: 'aliexpress', active_tracking_carrier: 'correios-br' } };
+    expect(isTrackingSyncDue(handed, at(1))).toBe(true);
+  });
+
   it('backs off boundedly when the job store is unavailable', () => {
     expect(workerPollDelay(1_000, 0)).toBe(1_000);
     expect(workerPollDelay(1_000, 1)).toBe(1_000);
@@ -4029,6 +4045,8 @@ describe('TrackingSyncService', () => {
     { scan: 'from 03:00 in Zurich, at 06:00', lastEvent: '2026-09-09T01:00:00Z', time: '04:02:00', every2Minutes: true },
     { scan: 'from 05:00 in Sydney, before 06:00', carrier: 'j-and-t-au', lastEvent: '2026-09-09T19:00:00Z', time: '19:52:00', every2Minutes: false },
     { scan: 'from 05:00 in Sydney, at 06:00', carrier: 'j-and-t-au', lastEvent: '2026-09-09T19:00:00Z', time: '20:02:00', every2Minutes: true },
+    // On the clock of the carrier filed, not of an earlier leg that answered last (Zurich's, 21:52).
+    { scan: 'from 05:00 in Sydney, before 06:00, after a leg in Zurich', carrier: 'j-and-t-au', active: 'swiss-post', lastEvent: '2026-09-09T19:00:00Z', time: '19:52:00', every2Minutes: false },
     { scan: 'from 05:00 at +10:00, before 06:00', carrier: 'australia-post', lastEvent: '2026-09-09T19:00:00Z', lastUpdate: '2026-09-10T05:00:00+10:00', time: '19:52:00', every2Minutes: false },
     // Landmark Global states every scan on US Central time: its day and 06:00 are the scan place's, when the place is found.
     { scan: 'from 06:30 near London, stated at -05:00', carrier: 'landmark-global', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', place: 'Feltham, SRY', time: '05:52:00', every2Minutes: true },
@@ -4036,13 +4054,13 @@ describe('TrackingSyncService', () => {
     { scan: 'from 06:30 at an unknown place, before 06:00 in Chicago', carrier: 'landmark-global', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', place: 'Unit 7', time: '05:52:00', every2Minutes: false },
     // Another carrier's stated offset stays its clock, whatever the place.
     { scan: 'from 06:30 near London, stated at -05:00 by UPS', carrier: 'ups', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', place: 'Feltham, SRY', time: '05:52:00', every2Minutes: false },
-  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', lastEvent, lastUpdate, localDay, place, time = '10:02:00', every2Minutes }) => {
+  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', active, lastEvent, lastUpdate, localDay, place, time = '10:02:00', every2Minutes }) => {
     const at = (time: string) => new Date(`2026-09-09T${time}Z`);
     const checked = new Date(at(time).getTime() - 2 * 60_000 + 15_000).toISOString();
     const parcel = { carrier, current_stage: 'out_for_delivery', tracking_number: 'TEST1234', created_at: '2026-09-09T00:00:00Z',
       last_synced_at: checked, sync_status: 'ok', archived_at: null,
       carrier_data: { ...(lastUpdate ? { last_update: lastUpdate } : {}), ...(localDay ? { last_update_local: localDay } : {}),
-        routing: { version: 1, configured_carrier: carrier, last_event_at: lastEvent } },
+        ...(active ? { active_tracking_carrier: active } : {}), routing: { version: 1, configured_carrier: carrier, last_event_at: lastEvent } },
       ...(place ? { [STORED_EVENT_IDENTITIES]: [{ provider_event_id: `${carrier}:out`, occurred_at: lastEvent, stage: 'out_for_delivery', location: place },
         { provider_event_id: `${carrier}:earlier`, occurred_at: '2026-09-08T12:00:00Z', stage: 'in_transit', location: 'Chicago, IL' }] } : {}) };
     expect(isOpenedParcelSyncDue(parcel, at(time))).toBe(every2Minutes);
@@ -4097,7 +4115,7 @@ describe('TrackingSyncService', () => {
       id: 'scheduled', carrier, current_stage: stage, tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T10:00:15Z', sync_status: failed ? 'error' : 'ok',
       ...(provider ? { carrier_data: { tracking_provider: provider } } : {}),
-      ...(active ? { carrier_data: { active_tracking_carrier: active } } : {}),
+      ...(active ? { carrier_data: { original_carrier: carrier, active_tracking_carrier: active } } : {}),
       ...(browser ? { carrier_data: { routing: { version: 1, configured_carrier: carrier, browser_check: true } } } : {}),
     };
     const client = fakeClient([parcel]);

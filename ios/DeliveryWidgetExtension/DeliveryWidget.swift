@@ -492,7 +492,6 @@ private extension DeliveryActivityParcel {
 struct DeliveryTrackerWidgetBundle: WidgetBundle {
     var body: some Widget {
         NextDeliveryWidget()
-        ParcelListWidget()
         #if os(iOS)
         DeliveryLiveActivityWidget()
         #endif

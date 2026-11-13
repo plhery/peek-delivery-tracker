@@ -48,6 +48,8 @@ describe('reading the field', () => {
       'Call us on 0441234567', 'Order number: 12345678', 'Numéro de client : 4455667788',
       // An order number, a date, a code too short for a tracking number, and a reference no carrier's shape fits.
       'Parcel PO-000 12345678901234567', 'Sendung 12.10.2026', 'Parcel 123456', 'Numéro de suivi : zzqx-000-000000000',
+      // A date written year first.
+      "Date d'envoi : 2026-11-12", 'Fecha de envío: 2026-11-12', 'Tracking: 2026.11.12', 'Sendung 2026/1/5',
       // A link's number is the link's.
       'Track your parcel https://example.test/track?id=1234567899',
     ]) expect(labelled(text), text).toEqual([]);

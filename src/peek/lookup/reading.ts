@@ -272,6 +272,9 @@ function uncertainNumberInText(text: string): TrackingInputMatch | null {
 /** The most labels read on one line: a row of a shipping email names a parcel or two. */
 const MOST_LABELS_PER_LINE = 4;
 
+/** A date written year first ("2026-11-12"), which a label such as "Date d'envoi :" may stand before. */
+const YEAR_FIRST_DATE = /^\d{4}([./-])\d{1,2}\1\d{1,2}$/;
+
 /**
  * The numbers a text's own words call tracking numbers, whose shape fits a carrier without proving one:
  * "Sendungsnummer 1234567899", "Votre colis 01234567890123 arrive demain". Most couriers' numbers are plain
@@ -289,7 +292,7 @@ export function labelledNumbersInText(text: string): NumberInText[] {
       if (!number) break;
       prose = prose.slice(prose.indexOf(number) + number.length);
       const normalized = normalizeTrackingNumber(number);
-      if (!normalized || found.has(normalized) || nonTrackingShape(normalized)) continue;
+      if (!normalized || found.has(normalized) || nonTrackingShape(normalized) || YEAR_FIRST_DATE.test(number.trim())) continue;
       const detection = detectCarrierMatch(number);
       if (detection.confidence === 'low') found.set(normalized, { normalized, match: { trackingNumber: number, source: 'text', ...detection } });
     }

@@ -136,8 +136,8 @@ internal fun SettingsDivider() {
  * `SettingsRow`: the [symbol] in 15 light in the secondary grey, 17 wide, 11 from the [title] in subheadline in the
  * ink, the [detail] under it in caption secondary, then the [value] in caption at the trailing end and a chevron of 10
  * light, both in the opaque secondary grey; 15 in and 54 tall at least where [padded]. At the accessibility sizes the
- * value goes under the title, a value of one word made smaller down to half rather than broken, and the symbol gives
- * its room to the words.
+ * value goes under the title, a value of one word made smaller down to half rather than broken and ending in an
+ * ellipsis past that, and the symbol gives its room to the words.
  */
 @Composable
 internal fun SettingsRow(
@@ -170,7 +170,7 @@ internal fun SettingsRow(
                 val style = type.caption.sfLines().copy(color = colors.secondaryText)
                 if (' ' !in value) {
                     BasicText(
-                        value, style = style, maxLines = 1,
+                        value, style = style, maxLines = 1, overflow = TextOverflow.Ellipsis,
                         autoSize = MinimumScale(style.fontSize, 0.5f),
                     )
                 } else {

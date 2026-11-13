@@ -1068,9 +1068,9 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
 
 /**
  * `quietButtons(wraps:)`: Scan barcode where the device scans ([scan]), then Add a parcel, side by side 10 apart, each
- * half the row and its words on one line, shrinking to 80 % rather than wrap; or, where [wraps], one under the other 10
- * apart, each across the column, its words wrapping. Scan barcode opens Add on the camera, Add a parcel opens it empty,
- * and TalkBack goes back to the one tapped once Add has gone.
+ * half the row and its words on one line, shrinking to 80 % rather than wrap and ending in an ellipsis past that; or,
+ * where [wraps], one under the other 10 apart, each across the column, its words wrapping. Scan barcode opens Add on the
+ * camera, Add a parcel opens it empty, and TalkBack goes back to the one tapped once Add has gone.
  */
 @Composable
 private fun QuietButtons(state: DeliveriesState, scan: Boolean, wraps: Boolean) {
@@ -1091,7 +1091,7 @@ private fun QuietButtons(state: DeliveriesState, scan: Boolean, wraps: Boolean) 
  * gives under the finger (`TactileButtonStyle`).
  */
 @Composable
-private fun QuietButton(title: String, symbol: String, wraps: Boolean, tag: String, focus: AccessibilityFocus, open: () -> Unit) {
+internal fun QuietButton(title: String, symbol: String, wraps: Boolean, tag: String, focus: AccessibilityFocus, open: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val shape = ContinuousRoundedShape(14.dp)
@@ -1114,7 +1114,7 @@ private fun QuietButton(title: String, symbol: String, wraps: Boolean, tag: Stri
         } else {
             Text(
                 title, Modifier.weight(1f, fill = false), color = colors.ink, style = style, maxLines = 1,
-                autoSize = MinimumScale(style.fontSize, QUIET_MINIMUM_SCALE),
+                overflow = TextOverflow.Ellipsis, autoSize = MinimumScale(style.fontSize, QUIET_MINIMUM_SCALE),
             )
         }
     }

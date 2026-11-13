@@ -714,7 +714,7 @@ private fun stepSize() = SizeTransform(clip = false) { _, _ -> Motion.easeInOut(
  * 26 tall. It belongs to the picture: TalkBack doesn't read it.
  */
 @Composable
-private fun FirstOpenPing(detail: String, identity: CarrierVisualIdentity, modifier: Modifier = Modifier) {
+internal fun FirstOpenPing(detail: String, identity: CarrierVisualIdentity, modifier: Modifier = Modifier) {
     val type = PeekTheme.type
     val ink = PeekTheme.colors.resolve(identity.ink)
     Row(

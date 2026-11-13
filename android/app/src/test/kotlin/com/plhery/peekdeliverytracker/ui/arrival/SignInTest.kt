@@ -64,6 +64,7 @@ import com.plhery.peekdeliverytracker.ui.LocalRootFade
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.RootScreen
 import com.plhery.peekdeliverytracker.ui.awaitFrame
+import com.plhery.peekdeliverytracker.ui.assertLaidOutAt
 import com.plhery.peekdeliverytracker.ui.deliveries.assertAnnounced
 import com.plhery.peekdeliverytracker.ui.deliveries.editorInfo
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_PHONE
@@ -754,6 +755,40 @@ class SignInTest {
         assertEquals(1, layout.lineCount)
         assertEquals("Whole", layout.layoutInput.text.length, layout.getLineEnd(0))
         assertFalse("Clipped: ${layout.multiParagraph.width} in ${layout.size.width}", layout.hasVisualOverflow)
+    }
+
+    /** The layout of Google's button's words, their style's size 18 points. */
+    private fun google(): TextLayoutResult {
+        val layouts = mutableListOf<TextLayoutResult>()
+        compose.onNode(hasText(text("auth.google")), useUnmergedTree = true).fetchSemanticsNode()
+            .config[SemanticsActions.GetTextLayoutResult].action!!.invoke(layouts)
+        val layout = layouts.single()
+        assertEquals(18f, with(layout.layoutInput.density) { layout.layoutInput.style.fontSize.toDp().value }, 0.01f)
+        return layout
+    }
+
+    /** Google's button's words at their 18 points, whole, with the room of a phone. */
+    @Test
+    fun withRoomGooglesWordsAreWholeAtTheirSize() {
+        show(signInConfiguration(google = true))
+        val layout = google()
+        assertLaidOutAt(layout.layoutInput.style.fontSize, layout)
+        assertFalse(layout.isLineEllipsized(0))
+        assertFalse(layout.hasVisualOverflow)
+    }
+
+    /**
+     * As `.lineLimit(1).minimumScaleFactor(0.7)`: on a window too narrow for them Google's button's words shrink to 70 %,
+     * then end in "…" rather than be cut at the button's edge.
+     */
+    @Test
+    @Config(qualifiers = "w160dp-h800dp-xhdpi")
+    fun onANarrowWindowGooglesWordsShrinkThenEndInAnEllipsis() {
+        show(signInConfiguration(google = true))
+        val layout = google()
+        assertLaidOutAt(layout.layoutInput.style.fontSize * 0.7f, layout)
+        assertEquals(1, layout.lineCount)
+        assertTrue(layout.isLineEllipsized(0))
     }
 
     /**

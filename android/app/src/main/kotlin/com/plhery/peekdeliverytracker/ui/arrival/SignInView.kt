@@ -93,6 +93,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -530,7 +531,7 @@ private fun Methods(
                 val style = type.fixed(18f, FontWeight.Medium).sfLines()
                 Text(
                     localized(if (active) "auth.googleOpening" else "auth.google"), color = colors.ink, style = style, maxLines = 1, softWrap = false,
-                    autoSize = MinimumScale(style.fontSize, 0.7f),
+                    overflow = TextOverflow.Ellipsis, autoSize = MinimumScale(style.fontSize, 0.7f),
                 )
                 if (active) ActivityIndicator(Modifier.clearAndSetSemantics {}, size = SMALL_SPINNER)
             }
@@ -708,11 +709,11 @@ private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
  * A field of the form: one line, centred in its 54, the [placeholder] in the placeholder grey while it is empty, the
  * cursor in the accent, read by TalkBack as [label] and offered by autofill as [autofill]. The placeholder shrinks to
  * keep to its one line where the field is too narrow for it at the reader's size, as UITextField's does
- * (`you@example.com` in about 33 points at the largest size). The cursor stays where the reader left it, at the end of
- * what came otherwise.
+ * (`you@example.com` in about 33 points at the largest size), ending in an ellipsis past a quarter. The cursor stays
+ * where the reader left it, at the end of what came otherwise.
  */
 @Composable
-private fun SignInTextField(
+internal fun SignInTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
@@ -748,7 +749,7 @@ private fun SignInTextField(
                     val probe = LocalSignInPlaceholder.current
                     Text(
                         placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = style, maxLines = 1, softWrap = false,
-                        autoSize = MinimumScale(style.fontSize, PLACEHOLDER_SHRINK),
+                        overflow = TextOverflow.Ellipsis, autoSize = MinimumScale(style.fontSize, PLACEHOLDER_SHRINK),
                         onTextLayout = { probe?.invoke(it) },
                     )
                 }

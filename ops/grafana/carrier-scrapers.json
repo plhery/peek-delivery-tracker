@@ -1238,7 +1238,7 @@
       "type": "timeseries",
       "id": 75,
       "title": "Scheduled runs that gave way, hourly",
-      "description": "Scheduled runs per hour that stopped for an account's or a lookup's check queued ahead of them and were queued again. Many in an hour mean a burst kept stopping the run, and accounts' scheduled checks fell behind. The carrier filter does not apply; the counters restart with each deploy.",
+      "description": "Scheduled runs per hour that stopped for an account's or a lookup's check queued ahead of them and were queued again. Routine while lookups are opened and added: the next run checks first the parcels a stopped one left. Whether checks fall behind shows in Longest wait for a check. The carrier filter does not apply; the counters restart with each deploy.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
       "gridPos": {"x": 0, "y": 56, "w": 8, "h": 8},
       "interval": "1h",

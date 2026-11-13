@@ -37,7 +37,7 @@ begin
     end;
   end loop;
   begin
-    perform test_support.add_parcel('UC0000000099', 'Unknown carrier', 'gls-us');
+    perform test_support.add_parcel('UC0000000099', 'Unknown carrier', 'not-a-carrier');
     raise exception 'Unknown carrier was accepted';
   exception when sqlstate '22023' then null;
   end;

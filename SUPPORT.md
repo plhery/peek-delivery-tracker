@@ -53,8 +53,10 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
   Settings › Notifications covers every parcel in the account.
 - Nothing arrives? Check that Peek may send notifications: in the browser's
   site settings, or in iPhone or Android settings.
-- Peek announces only the updates you chose: every scan, the important steps
-  or delivery only.
+- In a browser or signed in, Peek announces only the updates you chose: every
+  scan, the important steps or delivery only. The apps without an account
+  choose for you: every scan for a parcel not yet on its way when added, the
+  important steps for one already on its way.
 - Signed in, Settings › Notifications also has
   **Email me when a parcel arrives**.
 

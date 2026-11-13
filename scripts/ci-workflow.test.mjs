@@ -146,6 +146,21 @@ it('waits in a job a newer commit queues behind, and deploys in one that is neve
   }
 });
 
+// A run that deployed nothing must not read as a deploy: one a newer commit replaced cancels
+// itself, from a job of its own, which alone may; one CI did not pass fails in the gate. GitHub
+// files the run under main's newest commit, so its name says which commit it deploys.
+it('ends a run that deployed nothing as cancelled, and names each run after its commit', () => {
+  const workflow = read('.github/workflows/deploy.yml');
+  assert.match(workflow, /\nrun-name: Deploy \$\{\{ inputs\.commit \|\| 'the newest tested commit' \}\}\n/);
+  assert.match(job(workflow, 'deploy'), /\n {6}replaced: \$\{\{ steps\.current\.outputs\.deploy == 'false' \}\}\n/);
+  const standDown = job(workflow, 'stand-down');
+  assert.match(standDown, /\n {4}needs: \[settle, deploy\]\n {4}if: \$\{\{ !cancelled\(\) && \(needs\.settle\.outputs\.deploy == 'false' \|\| needs\.deploy\.outputs\.replaced == 'true'\) \}\}\n/);
+  assert.match(standDown, /\n {4}permissions:\n {6}actions: write\n {4}steps:/);
+  assert.match(standDown, /gh run cancel "\$GITHUB_RUN_ID" --repo "\$GITHUB_REPOSITORY" && break/);
+  assert.match(standDown, /exit 1\n$/);
+  assert.equal(workflow.match(/actions: write/g).length, 1, 'only the stand-down job may cancel the run');
+});
+
 // IndexNow compares the live sitemap with the one it last took (refs/indexnow/submitted), so it
 // runs once the public site served the deploy's commit, even if the smoke check then failed: the
 // pages of a deploy it missed go with the next. It runs in a job of its own, which alone may push,

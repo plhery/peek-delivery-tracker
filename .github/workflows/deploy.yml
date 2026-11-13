@@ -3,7 +3,12 @@ name: Deploy
 # Puts a commit that CI tested on main into production. CI hands each one over; run by hand,
 # it deploys the newest tested commit at once. Every deploy restarts the server, so a commit
 # waits while CI tests a newer one pushed before it was handed over, and leaves the deploy to
-# it if it passes (scripts/deploy-gate.mjs, docs/DEPLOYMENT.md).
+# it if it passes (scripts/deploy-gate.mjs, docs/DEPLOYMENT.md). Only a run that deployed ends
+# as a success: one that a newer commit replaced ends as cancelled, one CI did not pass fails.
+
+# GitHub files a dispatched run under main's newest commit, not the one it deploys: the name
+# says which.
+run-name: Deploy ${{ inputs.commit || 'the newest tested commit' }}
 
 on:
   workflow_dispatch:
@@ -63,6 +68,7 @@ jobs:
     outputs:
       # Whether the public site served this commit, even if the smoke check then failed.
       live: ${{ steps.live.outcome == 'success' }}
+      replaced: ${{ steps.current.outputs.deploy == 'false' }}
     env:
       COMMIT: ${{ needs.settle.outputs.commit }}
     steps:
@@ -151,6 +157,32 @@ jobs:
           sentry releases set-commits "$COMMIT" --auto --ignore-missing
           sentry releases finalize "$COMMIT"
           sentry deploys new --release "$COMMIT" --env production
+
+  # A run that a newer commit replaced deployed nothing, and would otherwise end as a success: it
+  # cancels itself, its reason in the summary, so nothing reading the run takes it for a deploy.
+  # Its own job, so only it may cancel. A run GitHub did not cancel fails rather than pass.
+  stand-down:
+    name: Stand down
+    needs: [settle, deploy]
+    if: ${{ !cancelled() && (needs.settle.outputs.deploy == 'false' || needs.deploy.outputs.replaced == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: write
+    steps:
+      - name: End the run as cancelled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for attempt in 1 2 3; do
+            gh run cancel "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" && break
+            if [ "$attempt" = 3 ]; then exit 1; fi
+            sleep $((attempt * 20))
+          done
+          # The cancel ends this step within seconds.
+          sleep 300
+          echo '::error::GitHub did not cancel this run, which deployed nothing.'
+          exit 1
 
   # The pages new or redated in the sitemap since IndexNow last took them go to it, which Bing and
   # the engines that use its index read (scripts/indexnow.mjs). It reads the live sitemap, so it

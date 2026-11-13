@@ -220,20 +220,21 @@ private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel) -> String {
 /// stage; VoiceOver reads both.
 private struct ParcelListStatus: View {
     let parcel: DeliveryWidgetParcel
+    @Environment(\.locale) private var locale
 
     /// The stage and the day on one line.
-    static func whole(_ parcel: DeliveryWidgetParcel) -> String {
+    static func whole(_ parcel: DeliveryWidgetParcel, locale: Locale) -> String {
         let line = parcel.listLine
-        return line.day.map { "\(line.status) · \($0)" } ?? line.status
+        return (line.day.map { "\(line.status) · \($0)" } ?? line.status).openingLine(in: locale)
     }
 
     var body: some View {
         let line = parcel.listLine
         ViewThatFits(in: .horizontal) {
-            Text(Self.whole(parcel))
+            Text(Self.whole(parcel, locale: locale))
             if let day = line.day {
-                Text(day)
-                Text(line.status)
+                Text(day.openingLine(in: locale))
+                Text(line.status.openingLine(in: locale))
             }
         }
         .lineLimit(1)
@@ -271,6 +272,7 @@ private struct ParcelListLineRow: View {
     let metrics: ParcelListMetrics
     /// The widget's width.
     let width: CGFloat
+    @Environment(\.locale) private var locale
 
     var body: some View {
         ViewThatFits(in: .horizontal) {
@@ -278,7 +280,7 @@ private struct ParcelListLineRow: View {
                 ParcelListMark(parcel: parcel, metrics: metrics)
                 name
                 Spacer(minLength: 4)
-                Text(ParcelListStatus.whole(parcel))
+                Text(ParcelListStatus.whole(parcel, locale: locale))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)

@@ -1197,6 +1197,18 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(undated.listLine.day)
     }
 
+    /// A day the app writes to follow a status takes a capital where it opens a line, in each language's own way.
+    func testADayOpeningAWidgetLineTakesACapital() {
+        XCTAssertEqual("tomorrow".openingLine(in: Locale(identifier: "en")), "Tomorrow")
+        XCTAssertEqual("today, 14:00–16:00".openingLine(in: Locale(identifier: "en")), "Today, 14:00–16:00")
+        XCTAssertEqual("aujourd’hui".openingLine(in: Locale(identifier: "fr")), "Aujourd’hui")
+        XCTAssertEqual("sam 12 sept".openingLine(in: Locale(identifier: "fr")), "Sam 12 sept")
+        XCTAssertEqual("завтра".openingLine(in: Locale(identifier: "ru")), "Завтра")
+        XCTAssertEqual("明天".openingLine(in: Locale(identifier: "zh-Hans")), "明天")
+        XCTAssertEqual("In transit".openingLine(in: Locale(identifier: "en")), "In transit")
+        XCTAssertEqual("".openingLine(in: Locale(identifier: "en")), "")
+    }
+
     /// The list widget's last line counts the parcels left out in the form each language gives the count.
     func testListWidgetCountsInEachLanguagesForm() {
         let dictionaries = [

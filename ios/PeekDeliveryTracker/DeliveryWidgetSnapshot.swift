@@ -199,6 +199,13 @@ enum DeliveryWidgetList {
     }
 }
 
+extension String {
+    /// The words as they open a line: a day the app writes to follow a status, "tomorrow", takes a capital there.
+    func openingLine(in locale: Locale) -> String {
+        prefix(1).uppercased(with: locale) + dropFirst()
+    }
+}
+
 extension DeliveryWidgetParcel {
     /// The name the list widget gives the parcel: its own, else its carrier's.
     var listName: String { named == false ? carrier : label }

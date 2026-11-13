@@ -239,7 +239,7 @@ private struct DeliveryWidgetView: View {
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(WidgetPalette.ink.opacity(0.68))
                     .lineLimit(1)
-                Text(parcel.detail)
+                Text(parcel.detail.openingLine(in: ExtensionLocalizer.locale(for: entry.languageCode)))
                     .font(.caption.weight(.bold))
                     .lineLimit(1)
             }
@@ -264,7 +264,7 @@ private struct DeliveryWidgetView: View {
                                 .font(.caption2.weight(.semibold))
                                 .foregroundStyle(WidgetPalette.ink.opacity(0.64))
                                 .lineLimit(1)
-                            Text(parcel.detail)
+                            Text(parcel.detail.openingLine(in: ExtensionLocalizer.locale(for: entry.languageCode)))
                                 .font(.caption.weight(.bold))
                                 .lineLimit(1)
                         }

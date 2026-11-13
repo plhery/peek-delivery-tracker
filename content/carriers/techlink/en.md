@@ -55,7 +55,7 @@ For a number it doesn't know, the page shows `查询不到轨迹` ("no tracking 
 
 ## Who delivers Techlink parcels
 
-Techlink doesn't say. Its home page describes door-to-door lines: air freight out of China, customs clearance by a company of its own abroad, set up in 2023, and delivery through its own accounts with carriers in the destination country. It names none of those carriers on its site, and its tracking gives no carrier's name. In Italy, though, histories Peek has read show parcels going to [iMile](carrier:imile): Techlink's tracking passes on iMile's lines, which open with the centre's name in brackets, as in `【Milan center】Parcel shipped to【VEN 07】.` In Australia, [J&T Express Australia](carrier:j-and-t-au) takes parcels over from Techlink after the flight: its scans show in Techlink's history from `The parcel has been successfully picked up and is being prepared for transportation.` (see the table above).
+Techlink doesn't say. Its home page describes door-to-door lines: air freight out of China, customs clearance by a company of its own abroad, set up in 2023, and delivery through its own accounts with carriers in the destination country. It names none of those carriers on its site, and its tracking gives no carrier's name. In Italy, though, histories Peek has read show parcels going to [iMile](carrier:imile): Techlink's tracking passes on iMile's lines, which open with the centre's name in brackets, as in `【Milan center】Parcel shipped to【VEN 07】.` In Australia, [J&T Express Australia](carrier:j-and-t-au) takes parcels over from Techlink after the flight: its scans show in Techlink's history from `The parcel has been successfully picked up and is being prepared for transportation.` (see the table above). In the United States, Techlink passes on the scans of [YWE](carrier:ywe), which delivers some parcels there, such as `Parcel departed from Facility.` and `Parcel received by local Facility.` (its delivery station), up to `Parcel is out for delivery.` or a failed delivery.
 
 Its tracker's records can hold the delivering carrier's own number, but without the carrier's name, and Techlink's page has no field for it. Once you know which carrier delivers, its tracking has the rest, and its rules apply to delivery attempts, notice cards, pickup points and how long a parcel is held. Techlink publishes none of these.
 
@@ -99,7 +99,7 @@ A Techlink waybill: ZHPHD, six digits that read as a date, six more digits and M
 
 ### Who delivers Techlink parcels?
 
-A carrier in your country that Techlink doesn't name; in Italy, its tracking has passed on iMile's scans, and in Australia J&T Express Australia's, which takes parcels over after the flight. Its tracker can hold that carrier's number without the name, so ask the seller which carrier it is, or let Peek follow the number when its shape gives the carrier away.
+A carrier in your country that Techlink doesn't name; in Italy, its tracking has passed on iMile's scans, in the United States YWE's, and in Australia J&T Express Australia's, which takes parcels over after the flight. Its tracker can hold that carrier's number without the name, so ask the seller which carrier it is, or let Peek follow the number when its shape gives the carrier away.
 
 ### Why has my Techlink tracking stopped?
 
@@ -108,5 +108,5 @@ The scans seen on Techlink's tracker so far end when the flight lands in your co
 :::sources
 - [Techlink: 智禾官网 (home)](http://www.techlinksz.cn/) – company name, small-parcel lines to Europe and America, Amazon, Walmart, TK and independent shops, DDU and DDP door-to-door, customs clearance abroad and the 2023 company, delivery accounts at destination, contact link with no target
 - [Techlink: 轨迹跟踪 (tracking)](http://www.techlinksz.cn/trajectory) – up to 40 numbers, Chinese page, countries, status signs, answer for an unknown number
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ZHPHD number shape, scan wordings in English and Chinese, iMile's lines in Italy, J&T Express Australia's takeover in Australia, the tracker's answers and the delivering carrier's number, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ZHPHD number shape, scan wordings in English and Chinese, iMile's lines in Italy, J&T Express Australia's takeover in Australia, YWE's scans in the United States, the tracker's answers and the delivering carrier's number, what Peek shows
 :::

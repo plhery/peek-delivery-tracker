@@ -3,7 +3,7 @@ title: YunExpress seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de YunExpress desde China: cómo es el número YT, qué significa cada estado en inglés, quién lo entrega en España y a quién preguntar.
 slug: yunexpress-seguimiento
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 YunExpress, también escrito Yun Express, es una empresa de logística de Shenzhen que envía [paquetes pequeños desde China](guide:tracking-from-china) para vendedores online, también los de Amazon, Temu o SHEIN. Para seguir tu paquete, escribe el número que empieza por YT en [yuntrack.com](https://www.yuntrack.com/), su web de seguimiento, o pégalo en la casilla de arriba. La web de YunExpress no habla de SMS ni correos a los destinatarios: busca el número en el correo de envío de la tienda o en la página de tu pedido.
@@ -80,7 +80,7 @@ El cuadro «Feedback» de Yuntrack es para opinar sobre la web, no sobre tu paqu
 
 ## Seguir un paquete de YunExpress con Peek
 
-[Peek](/) reconoce YT y 16 cifras como YunExpress, y también acepta enlaces de yuntrack.com. Consulta el seguimiento cada 10 minutos (cada 5 minutos el día del reparto, desde las 6:00, hora local, mientras responda el propio seguimiento de YunExpress; a través de servicios de seguimiento, cada 15 minutos), pone cada escaneo en un mapa y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Verás el estado, el historial, el lugar de cada escaneo y la hora de entrega.
+[Peek](/) reconoce YT y 16 cifras como YunExpress, y también acepta enlaces de yuntrack.com. Consulta el seguimiento cada 10 minutos (cada 5 minutos el día del reparto, desde las 6:00, hora local, mientras responda el propio seguimiento de YunExpress; a través de servicios de seguimiento, cada 15 minutos), pone cada escaneo en un mapa y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Verás el estado, el historial, el lugar de cada escaneo y la hora de entrega. Peek lee los escaneos en China con la hora de China; la llegada del vuelo y las líneas que acaban en `- Import`, cuando no nombran ciudad, con la del aeropuerto de llegada que indica YunExpress; los de J&T Express en Australia de un paquete con destino allí, con la de Sídney, esté en el estado que esté el centro de reparto; y la mayoría de los demás, con la de su lugar o, si no lo indican, con la de los escaneos de antes o de después. Después te los muestra en la zona horaria de tu dispositivo.
 
 Si el registro de YunExpress da el número del transportista local y Peek reconoce su formato, puede seguir el paquete con esa empresa, aunque no pasa con todos. No muestra fecha prevista de entrega ni punto de recogida para los paquetes de YunExpress, deja fuera las referencias de pedido y no puede contactar con YunExpress ni reclamar por ti.
 
@@ -127,5 +127,5 @@ No publica ninguna, ni en Madrid ni en Barcelona ni en otra ciudad. Según su hi
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – teléfono de China continental
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – contactos regionales
 - [CTT: CTT and Zongteng Group develop partnership to manage parcel lockers’ network in Portugal and Spain](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-and-zongteng-group-develop-partnership-to-manage-parcel-lockers-network-in-portugal-and-spain) – taquillas en Portugal y España
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, líneas de DPD
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, líneas de DPD, hora de los escaneos
 :::

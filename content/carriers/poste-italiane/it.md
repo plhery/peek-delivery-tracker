@@ -3,7 +3,7 @@ title: Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza
 description: Tracking Poste Italiane: dove trovi il codice spedizione (anche 1UW e 3UW), cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 Poste Italiane consegna i pacchi dei negozi online italiani e quelli che arrivano dall'estero. Per seguire il tuo pacco cerca il codice spedizione in «Cerca Spedizioni» su poste.it (il servizio che prima si chiamava Dove Quando) o nell'App Poste Italiane, oppure incollalo nel box qui sopra. Il codice è sulla ricevuta di chi ha spedito; se hai comprato online, te lo dà il venditore.
@@ -45,7 +45,7 @@ Su poste.it ogni passaggio ha un'etichetta breve, spiegata nella «Legenda degli
 | `In attesa di sdoganamento` | La dogana controlla il pacco. Potrebbero chiederti dei documenti. |
 | `completata la fase di verifica per lo svincolo…` | I controlli doganali sono finiti. |
 | `In transito` | Viaggia da un centro di Poste all'altro (centri di smistamento, centri operativi). |
-| `In transito presso il Centro di lavorazione Internazionale` | Ha lasciato l'Italia. Per Postapriority Internazionale e Poste Delivery International Standard è l'ultima traccia. |
+| `In transito presso il Centro di lavorazione Internazionale` | La spedizione ha lasciato l'Italia e sarà presa in carico da un operatore postale estero. Per Postapriority Internazionale e Poste Delivery International Standard è l'ultima traccia. |
 | `presso il Centro di lavorazione Internazionale` | La stessa tappa per una raccomandata: Poste la scrive su una riga a sé, dopo `In transito`. |
 | `In consegna` | È stato affidato a chi lo consegna. |
 | `consegna non andata a buon fine…` | La consegna non è riuscita, per esempio per un indirizzo sbagliato o incompleto. |
@@ -130,7 +130,7 @@ Chiama l'803 160 da rete fissa o il +39 06 4526 3160 da cellulare, dal lunedì a
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – codice, Cerca Spedizioni, avviso, delega, prenotazione, pacchi dall'estero, raccomandate
 - [Poste Italiane: FAQ Poste Delivery Web](https://www.poste.it/assistenza/faq-poste-delivery-web) – lettera di vettura, tentativi, giacenza, PIN, piano strada, ritiro a domicilio
 - [Poste Italiane: Ritiri](https://www.poste.it/prenota-ritiri/index.html) – verifica online del ritiro
-- [Poste Italiane: Legenda degli stati di spedizione](https://www.poste.it/cerca/views/risultati-spedizioni.html) – stati, cosa si traccia, codice d'esempio, date indicative, limiti di 2 e 24 mesi
+- [Poste Italiane: Legenda degli stati di spedizione](https://www.poste.it/cerca/views/risultati-spedizioni.html) – stati, cosa si traccia, codice d'esempio, date indicative, limiti di 2 e 24 mesi, operatore postale estero dopo il Centro di lavorazione Internazionale
 - [TG Poste: Tracking Poste](https://tgposte.poste.it/2022/03/09/tracking-poste-come-seguire-lo-stato-delle-spedizioni-di-poste-italiane/) – «ex servizio Dove Quando», «In transito»
 - [Poste Italiane: FAQ Scegli Tu](https://www.poste.it/assistenza/faq-scegli-tu) – notifiche e opzioni di consegna
 - [Poste Italiane: FAQ PostePlus](https://www.poste.it/assistenza/faq-posteplus) – notifiche e preferenze del destinatario

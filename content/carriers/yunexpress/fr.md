@@ -3,7 +3,7 @@ title: YunExpress suivi : numéro YT, statuts et qui livre
 description: Suivre un colis YunExpress (Yun Express) venu de Chine : le numéro YT, les statuts en anglais expliqués, qui livre en France, en Belgique et en Suisse.
 slug: yunexpress-suivi
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 YunExpress, aussi écrit Yun Express, est une société de logistique chinoise, basée à Shenzhen, qui expédie depuis la Chine les petits colis de vendeurs en ligne, notamment de vendeurs présents sur Amazon, Temu, SHEIN ou la Fnac. Pour suivre ton colis, saisis le numéro qui commence par YT sur [yuntrack.com](https://www.yuntrack.com/), le site de suivi de YunExpress, ou colle-le dans le champ ci-dessus. YunExpress ne décrit aucun SMS ni e-mail aux destinataires : le numéro se trouve dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
@@ -81,7 +81,7 @@ L'encadré « Feedback » de yuntrack concerne le site, pas ton colis. Commence 
 
 ## Suivre un colis YunExpress avec Peek
 
-[Peek](/) reconnaît YT suivi de 16 chiffres comme YunExpress, même avec des espaces, et accepte les liens de yuntrack.com. Il vérifie le suivi toutes les 10 minutes (toutes les 5 minutes une fois le colis en livraison, ce jour-là seulement, dès 6 h, heure locale, et tant que c'est le suivi de YunExpress qui répond ; via des services de suivi, toutes les 15 minutes), place chaque scan sur une carte et peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou avec l'option « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il affiche le statut, l'historique, le lieu de chaque scan et l'heure de livraison.
+[Peek](/) reconnaît YT suivi de 16 chiffres comme YunExpress, même avec des espaces, et accepte les liens de yuntrack.com. Il vérifie le suivi toutes les 10 minutes (toutes les 5 minutes une fois le colis en livraison, ce jour-là seulement, dès 6 h, heure locale, et tant que c'est le suivi de YunExpress qui répond ; via des services de suivi, toutes les 15 minutes), place chaque scan sur une carte et peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou avec l'option « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il affiche le statut, l'historique, le lieu de chaque scan et l'heure de livraison. Il lit l'heure des scans en Chine à l'heure de Pékin ; celle de l'arrivée du vol et des lignes finissant par `- Import`, quand elles ne nomment pas de ville, à l'heure de l'aéroport d'arrivée indiqué par YunExpress ; celle des scans de J&T Express en Australie, pour un colis envoyé là-bas, à l'heure de Sydney, quel que soit l'État du dépôt ; et celle de la plupart des autres à l'heure de leur lieu ou, à défaut, des scans d'avant ou d'après. Il affiche chaque heure dans le fuseau horaire de ton appareil.
 
 Quand YunExpress donne le numéro du transporteur local sous une forme connue, Peek peut suivre le colis chez ce transporteur, mais pas pour chaque colis. Il n'affiche ni date de livraison prévue ni point relais pour les colis YunExpress, laisse de côté les références de commande et ne peut ni contacter YunExpress ni réclamer à ta place.
 
@@ -128,5 +128,5 @@ Oui, si le vendeur a choisi une ligne de retrait de YunExpress : le suivi affich
 - [YunExpress : 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – contrôles douaniers
 - [YunExpress : 云途物流YunExpress](https://www.yunexpress.cn/) – numéro en Chine
 - [YunExpress : Contact Us](https://sg.yunexpress.com/contact/) – contacts régionaux
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formes de numéros reconnues par Peek, ce que Peek lit et affiche, Not Found sans scan, transporteur local tiré des Additional Notes, lignes bpost, DHL Parcel et DPD
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formes de numéros reconnues par Peek, ce que Peek lit et affiche, Not Found sans scan, transporteur local tiré des Additional Notes, lignes bpost, DHL Parcel et DPD, heure des scans
 :::

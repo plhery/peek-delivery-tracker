@@ -3,7 +3,7 @@ title: YunExpress Sendungsverfolgung: Status, Zusteller, Kontakt
 description: YunExpress-Paket aus China verfolgen: die YT-Nummer, was die englischen Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, wen du fragst.
 slug: yunexpress-sendungsverfolgung
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 YunExpress, oft auch Yun Express geschrieben, ist ein Logistikunternehmen aus Shenzhen, das für Onlinehändler kleine Pakete aus China verschickt, auch für Verkäufer auf Amazon, Temu oder SHEIN. Für die Sendungsverfolgung gibst du die Nummer, die mit YT beginnt, auf [yuntrack.com](https://www.yuntrack.com/) ein, der Tracking-Seite von YunExpress, oder fügst sie oben ins Feld ein. Eine SMS oder E-Mail an Empfänger beschreibt YunExpress nirgends: Die Nummer steht in der Versand-E-Mail des Shops oder in deiner Bestellübersicht.
@@ -79,7 +79,7 @@ Das Feld „Feedback“ auf Yuntrack betrifft die Website, nicht dein Paket. Fan
 
 ## YunExpress-Paket mit Peek verfolgen
 
-[Peek](/) erkennt YT mit 16 Ziffern als YunExpress und nimmt auch Links von yuntrack.com an. Es schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange YunExpress selbst antwortet; über Tracking-Dienste alle 15 Minuten), zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen, wenn sich der Status ändert. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Du siehst Status, Verlauf, den Ort jedes Scans und die Zustellzeit.
+[Peek](/) erkennt YT mit 16 Ziffern als YunExpress und nimmt auch Links von yuntrack.com an. Es schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange YunExpress selbst antwortet; über Tracking-Dienste alle 15 Minuten), zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen, wenn sich der Status ändert. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Du siehst Status, Verlauf, den Ort jedes Scans und die Zustellzeit. Die Uhrzeiten liest Peek bei Scans in China nach chinesischer Zeit; bei der Flugankunft und den Zeilen, die auf `- Import` enden, wenn sie keinen Ort nennen, nach der Zeit des Ankunftsflughafens, den YunExpress angibt; bei den Scans von J&T Express in Australien nach der Zeit von Sydney, wenn das Paket nach Australien geht, egal in welchem Bundesstaat das Depot liegt; und bei den meisten übrigen nach der Zeit ihres Orts oder, fehlt er, nach den Scans davor oder danach. Angezeigt werden sie in der Zeitzone deines Geräts.
 
 Nennt YunExpress die Nummer des Paketdiensts vor Ort in einer Form, die Peek kennt, verfolgt Peek das Paket dort weiter, allerdings nicht bei jedem Paket. Ein voraussichtliches Lieferdatum oder eine Abholstelle zeigt es bei YunExpress-Paketen nicht, die Bestellnummern des Händlers lässt es weg, und YunExpress kontaktieren oder etwas reklamieren kann es nicht für dich.
 
@@ -124,5 +124,5 @@ Ja, wenn der Händler eine der Abhollinien von YunExpress gebucht hat: Dann zeig
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – Servicenummer in Festlandchina
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – regionale Kontakte
 - [Deutsche Post: Mitteilungsblatt, Kapitel 4, Großempfänger, Zugänge](https://www.deutschepost.de/dam/jcr:4c156648-2f5f-4784-ad71-3fcb5c9982eb/dp-ddp-mtb-ge-zugaenge-122025.pdf) – YUN DE in Dreieich
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, DHL- und DPD-Zeilen in YunExpress-Verläufen
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, DHL- und DPD-Zeilen in YunExpress-Verläufen, Uhrzeiten der Scans
 :::

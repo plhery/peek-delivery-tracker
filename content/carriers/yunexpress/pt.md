@@ -3,7 +3,7 @@ title: YunExpress rastreio: código YT, estados e contactos
 description: Rastreio YunExpress em Portugal: o código YT, o que quer dizer cada estado em inglês, a ligação aos CTT e a quem perguntar quando a encomenda para.
 slug: yunexpress-rastreio
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 A YunExpress, também escrita Yun Express, é uma empresa de logística de Shenzhen que envia pequenas encomendas da China para vendedores online, incluindo os da Amazon, da Temu e da SHEIN. Para rastrear a encomenda, escreve o número que começa por YT no [yuntrack.com](https://www.yuntrack.com/), o site de seguimento da YunExpress, ou cola-o na caixa acima. O site da YunExpress não fala de SMS ou e-mails para quem recebe: procura o número no e-mail de envio da loja ou na página da tua encomenda.
@@ -80,7 +80,7 @@ A caixa «Feedback» do yuntrack serve para comentar o site, não a tua encomend
 
 ## Seguir encomenda YunExpress com o Peek
 
-O [Peek](/) reconhece YT e 16 algarismos como YunExpress e aceita ligações do yuntrack.com. Verifica o seguimento de 10 em 10 minutos (de 5 em 5 minutos no dia em que a encomenda sai para entrega, a partir das 6h00, hora local, enquanto for o próprio seguimento da YunExpress a responder; através de serviços de seguimento, de 15 em 15 minutos), põe cada leitura num mapa e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Mostra o estado, o histórico, o local de cada leitura e, depois da entrega, a hora a que foi entregue.
+O [Peek](/) reconhece YT e 16 algarismos como YunExpress e aceita ligações do yuntrack.com. Verifica o seguimento de 10 em 10 minutos (de 5 em 5 minutos no dia em que a encomenda sai para entrega, a partir das 6h00, hora local, enquanto for o próprio seguimento da YunExpress a responder; através de serviços de seguimento, de 15 em 15 minutos), põe cada leitura num mapa e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Mostra o estado, o histórico, o local de cada leitura e, depois da entrega, a hora a que foi entregue. Data as leituras na China pela hora de Pequim; a chegada do voo e as linhas que terminam em `- Import`, quando não indicam cidade, pela hora do aeroporto de chegada indicado pela YunExpress; as leituras da J&T Express na Austrália de uma encomenda com destino lá, pela hora de Sydney, seja qual for o estado onde fica o centro de distribuição; e a maioria das outras, pela hora do seu local ou, se não o indicarem, pela das leituras de antes ou de depois. Depois mostra cada uma no fuso horário do teu dispositivo.
 
 Quando a YunExpress indica a transportadora local e o número dela, pode seguir a encomenda nessa transportadora, mas não acontece com todas. Não mostra data prevista de entrega nem ponto de levantamento para as encomendas YunExpress, deixa de fora as referências de encomenda da loja e não pode contactar a YunExpress nem reclamar por ti.
 
@@ -123,5 +123,5 @@ Não publica nenhuma morada em Portugal: a empresa está no distrito de Longgang
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – número da China continental
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – contactos regionais
 - [CTT: CTT e Zongteng Group estabelecem parceria para gerir rede de Cacifos em Portugal e Espanha](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-zongteng-group-estabelecem-parceria-para-gerir-rede-de-cacifos-em-portugal-e-espanha) – parceira e cliente dos CTT, cacifos, 66% e 34% (lida a 10 de outubro de 2026)
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, linhas da DPD
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, linhas da DPD, hora das leituras
 :::

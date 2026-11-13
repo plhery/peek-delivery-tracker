@@ -3,7 +3,7 @@ title: YunExpress tracking: YT numbers, statuses and who delivers
 description: Track a YunExpress (Yun Express) parcel from China: the YT number, what each status means, who delivers in the UK or US and who to ask when it stalls.
 slug: yunexpress-tracking
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 YunExpress, also written Yun Express, is a Shenzhen logistics company that ships small parcels from China for online sellers, including sellers on Amazon, Temu, SHEIN and AliExpress. A tracking number made of YT and 16 digits is a YunExpress number. Track it on [yuntrack.com](https://www.yuntrack.com/), YunExpress's own tracking site, or paste it in the box above. YunExpress's site doesn't mention texts or emails to recipients, so look in the shop's shipping email or your order page.
@@ -81,7 +81,7 @@ Yuntrack's Feedback box is about the website. Start with the shop, which holds t
 
 ## Tracking a YunExpress parcel with Peek
 
-[Peek](/) recognises YT and 16 digits as YunExpress and takes yuntrack.com links. It checks every 10 minutes (every 5 minutes from 6 a.m. local time on the day the parcel is scanned out for delivery, while YunExpress's own tracker answers; every 15 minutes through tracking services), puts each scan on a map and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, history, place of each scan and delivery time.
+[Peek](/) recognises YT and 16 digits as YunExpress and takes yuntrack.com links. It checks every 10 minutes (every 5 minutes from 6 a.m. local time on the day the parcel is scanned out for delivery, while YunExpress's own tracker answers; every 15 minutes through tracking services), puts each scan on a map and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, history, place of each scan and delivery time. It reads scans in China on China's clock; the flight's landing and the lines ending in `- Import`, when they name no town, on the clock of the arrival airport YunExpress gives; J&T Express Australia's scans of a parcel to Australia on Sydney time, whichever state the depot is in; and most others on the clock of their place or, when they name none, of the scans before or after them. It shows each time in your device's time zone.
 
 When YunExpress names the local carrier and its number, Peek can follow the parcel to that carrier, though not for every parcel. It shows no expected delivery date or pickup point for YunExpress parcels, leaves out order references and can't contact YunExpress or file a claim for you.
 
@@ -123,5 +123,5 @@ By YunExpress's own estimates for sellers, Standard Express takes 3 to 5 busines
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – customs checks
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – small parcels, China number, CIRRO-E-COMMERCE
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – regional contacts
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows, GOFO's scans in YunExpress histories
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows, GOFO's scans in YunExpress histories, scan clocks
 :::

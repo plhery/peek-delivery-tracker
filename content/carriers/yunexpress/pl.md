@@ -3,7 +3,7 @@ title: YunExpress śledzenie przesyłki: statusy, kurier, kontakt
 description: Paczka YunExpress z Chin: co znaczy numer YT, co mówią angielskie statusy, kto doręcza w Polsce i do kogo pisać, gdy paczka utknie.
 slug: yunexpress-sledzenie
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 YunExpress, pisany też Yun Express, to firma logistyczna z Shenzhen, która wysyła z Chin małe paczki dla sprzedawców internetowych, także tych z Allegro, Temu, SHEIN czy Amazona. Paczkę śledzisz numerem zaczynającym się od YT na stronie YunExpress, [yuntrack.com](https://www.yuntrack.com/), albo wklejasz go w pole powyżej. YunExpress nigdzie nie opisuje SMS-ów ani e-maili do odbiorców, więc numeru szukaj w e-mailu sklepu o wysyłce albo na stronie zamówienia.
@@ -79,7 +79,7 @@ Pole „Feedback” na yuntrack dotyczy strony, a nie Twojej paczki. Zacznij wi�
 
 ## Śledzenie paczki YunExpress w Peek
 
-[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu (tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego, i dopóki odpowiada własne śledzenie YunExpress; przez serwisy śledzenia przesyłek co 15 minut), pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia.
+[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu (tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego, i dopóki odpowiada własne śledzenie YunExpress; przez serwisy śledzenia przesyłek co 15 minut), pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia. Godziny skanów Peek odczytuje tak: w Chinach według czasu chińskiego; przy przylocie samolotu i liniach kończących się na `- Import`, gdy nie podają miasta, według czasu lotniska docelowego, które podaje YunExpress; przy skanach J&T Express dla paczki wysłanej do Australii według czasu Sydney, niezależnie od tego, w którym stanie jest oddział; a przy większości pozostałych według czasu ich miejsca albo, gdy go nie podają, według skanów przed nimi lub po nich. Każdą godzinę pokazuje w strefie czasowej Twojego urządzenia.
 
 Gdy YunExpress podaje lokalnego przewoźnika i jego numer, Peek może śledzić paczkę dalej u tego przewoźnika, choć nie przy każdej paczce. Przy paczkach YunExpress nie pokazuje przewidywanej daty doręczenia ani punktu odbioru, pomija numery zamówienia i nie skontaktuje się za Ciebie z YunExpressem ani nie złoży reklamacji.
 
@@ -117,5 +117,5 @@ DHL przejmuje ostatni odcinek: linia `Shipment in transit to DHL` znaczy, że pa
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – czas kontroli celnych
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – numer w Chinach kontynentalnych
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – kontakty regionalne
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DHL i DPD w historiach YunExpress
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DHL i DPD w historiach YunExpress, godziny skanów
 :::

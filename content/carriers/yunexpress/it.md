@@ -3,7 +3,7 @@ title: YunExpress tracking: stati, consegna in Italia e contatti
 description: Tracking YunExpress dalla Cina: il numero YT, cosa vogliono dire gli stati in inglese, chi consegna in Italia e in Ticino, a chi scrivere se il pacco non arriva.
 slug: yunexpress-tracking
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-13
 ---
 
 YunExpress, che trovi scritto anche Yun Express, è un'azienda di logistica di Shenzhen che spedisce dalla Cina i piccoli pacchi dei venditori online e lavora con marketplace come Amazon, Temu e SHEIN. Per il tracking inserisci il numero che inizia con YT su [yuntrack.com](https://www.yuntrack.com/), il sito di tracciamento di YunExpress, oppure incollalo nel box qui sopra. YunExpress non descrive SMS o e-mail ai destinatari: il numero lo trovi nell'e-mail di spedizione del negozio o nella pagina dell'ordine.
@@ -81,7 +81,7 @@ Il riquadro «Feedback» di yuntrack riguarda il sito, non il tuo pacco. Cominci
 
 ## Tracciare un pacco YunExpress con Peek
 
-[Peek](/) riconosce YT seguito da 16 cifre come YunExpress e accetta anche i link di yuntrack.com. Controlla il tracciamento ogni 10 minuti (ogni 5 quando il pacco è in consegna, solo quel giorno, dalle 6.00 ora locale, e finché risponde il tracking di YunExpress; tramite i servizi di tracciamento, ogni 15 minuti), mette ogni scansione su una mappa e può mandarti notifiche quando lo stato cambia: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra lo stato, la cronologia, il luogo di ogni scansione e l'ora della consegna.
+[Peek](/) riconosce YT seguito da 16 cifre come YunExpress e accetta anche i link di yuntrack.com. Controlla il tracciamento ogni 10 minuti (ogni 5 quando il pacco è in consegna, solo quel giorno, dalle 6.00 ora locale, e finché risponde il tracking di YunExpress; tramite i servizi di tracciamento, ogni 15 minuti), mette ogni scansione su una mappa e può mandarti notifiche quando lo stato cambia: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra lo stato, la cronologia, il luogo di ogni scansione e l'ora della consegna. Per le scansioni in Cina usa l'ora di Pechino; per l'arrivo del volo e le righe che finiscono con `- Import`, se non nominano una città, l'ora dell'aeroporto di arrivo indicato da YunExpress; per le scansioni di J&T Express in Australia su un pacco diretto lì, l'ora di Sydney, in qualunque Stato si trovi il deposito; per la maggior parte delle altre, l'ora del loro luogo o, se non ne indicano uno, quella delle scansioni prima o dopo. Poi le mostra tutte nel fuso orario del tuo dispositivo.
 
 Se YunExpress indica il numero del corriere locale in una forma che Peek conosce, Peek segue il pacco anche lì, ma non succede per ogni pacco. Per i pacchi YunExpress non mostra una data di consegna prevista né un punto di ritiro, lascia fuori i riferimenti d'ordine del venditore e non può contattare YunExpress né aprire un reclamo al posto tuo.
 
@@ -126,5 +126,5 @@ Non ne indica: la sede è a Shenzhen, in Cina, e per l'Italia YunExpress non pub
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – durata dei controlli doganali
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – numero della Cina continentale
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – contatti regionali
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, righe di Poste Italiane e GOFO nelle cronologie YunExpress
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, righe di Poste Italiane e GOFO nelle cronologie YunExpress, ora delle scansioni
 :::

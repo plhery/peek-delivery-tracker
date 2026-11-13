@@ -77,7 +77,7 @@ Si se trata de un número postal internacional válido (dos letras, nueve cifras
 
 **Parado en `Shipment started the customs clearance process at destination`.** La aduana de importación tiene el paquete. Si te piden pagar algo para recibirlo, mira [paquete retenido en aduanas](guide:customs); si pasan días sin novedades, avisa a la tienda. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
-**Nada después de `Departed from customs`, de `Shipment completed the customs clearance process at destination` o de `Import clearance success`.** El paquete debería estar ya en manos de la empresa que lo entrega. Busca su número en la web de seguimiento de TopYou, o pregunta a la tienda qué empresa lo reparte y con qué número. Más información en [seguimiento de paquetes de China](guide:tracking-from-china).
+**Nada después de `Departed from customs`, de `Shipment completed the customs clearance process at destination`, de `Customs Clearance Completed Successfully` o de `Import clearance success`.** El paquete debería estar ya en manos de la empresa que lo entrega. Busca su número en la web de seguimiento de TopYou, o pregunta a la tienda qué empresa lo reparte y con qué número. Más información en [seguimiento de paquetes de China](guide:tracking-from-china).
 
 **No sale nada o todavía no hay escaneos.** Si no conoce el número, la web de TopYou responde 查询不到 (no encontrado), y si lo conoce pero aún no ha escaneado el paquete, puede responder 暂无轨迹信息 (todavía no hay información de seguimiento). En los dos casos, Peek muestra «Esperando al transportista» y sigue comprobando. Compara el número con el mensaje de la tienda, carácter por carácter; si en unos días no aparece nada, pregunta a la tienda si de verdad envió el paquete.
 

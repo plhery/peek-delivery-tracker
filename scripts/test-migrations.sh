@@ -411,6 +411,21 @@ if grep -q '39000000' <<< "$step_section"; then
   echo "stage step-backs read across a linked parcel's legs: $(grep '39000000' <<< "$step_section")" >&2
   exit 1
 fi
+# A parcel handed over in place keeps one leg: its step back is listed.
+if ! grep -q '49000000' <<< "$step_section"; then
+  echo "stage step-backs miss a parcel handed over in place: '$step_section'" >&2
+  exit 1
+fi
+
+# A repeat of a closed case is listed as a case of its own; one of an open case counts under it.
+psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_support_repeats.sql"
+support=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \
+  | awk '/^== Support cases/ { section = 1; next } /^== / { section = 0 } section' | awk '/^unknown\|/' | cut -d '|' -f 5-6)
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from public.tracking_support_cases where tracking_number like 'REVIEW%'"
+if [[ "$support" != "2|1" ]]; then
+  echo "support cases: cases|repeats = '$support'" >&2
+  exit 1
+fi
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/j_and_t_phone_digits.sql"

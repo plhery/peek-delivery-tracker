@@ -41,4 +41,14 @@ from (values
   ('scheduled', 'la-poste', '2025-12-31T11:10:00Z', 'in_transit')
 ) as checks (trigger, carrier, started_at, previous_stage);
 
+-- A parcel handed over in place records its own carrier as the original: one leg, whose step back is listed.
+insert into public.packages (id, user_id, tracking_number, carrier, current_stage, carrier_data)
+values ('49000000-0000-0000-0000-000000000204', '19000000-0000-0000-0000-000000000002', 'EXAMPLESTEP0204', 'dhl',
+  'accepted', '{"original_carrier": "dhl", "active_tracking_carrier": "dhl-express"}');
+
+insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_stage, outcome, completed_at)
+select '49000000-0000-0000-0000-000000000204', 'scheduled', 'dhl', started_at::timestamptz, previous_stage, 'updated',
+  started_at::timestamptz + interval '1 minute'
+from (values ('2025-12-31T10:00:00Z', 'accepted'), ('2025-12-31T11:00:00Z', 'in_transit')) as checks (started_at, previous_stage);
+
 commit;

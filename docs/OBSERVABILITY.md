@@ -255,7 +255,8 @@ account check fails, the case opens. The other way round, saving a number closes
 cases on its start that only detection saw within the hour before: a case has no owner,
 so the hour stands in for the same person. A number typed again with a character more or
 less, its case opening within ten minutes of the first's, points at that case
-(`duplicate_of`), and the review counts the two once; ten minutes stand in for the same
+(`duplicate_of`), and the review counts the two once, the repeat on its own once the first
+case is closed; ten minutes stand in for the same
 person again, unless accounts saved both numbers and no account saved both. Numbers of
 one length a digit apart are left apart, as a batch of labels numbers its parcels so. A failed backlog write does not change the
 detection answer. `carrier_detection_support` logs the number and
@@ -274,9 +275,10 @@ confirmed the number, needs no work: the next version's replay (below) marks it 
 ```sql
 select id, tracking_number, reasons, detection_candidates, seen_count, fallback_count,
        last_outcome, last_provider, first_seen, last_seen, fix_status, fix_reference
-from public.tracking_support_cases
+from public.tracking_support_cases as c
 where fix_status = 'open' and (held_until is null or held_until <= now()) and cardinality(reasons) > 0
-  and duplicate_of is null
+  and (duplicate_of is null or not exists (
+    select from public.tracking_support_cases as t where t.id = c.duplicate_of and t.fix_status = 'open'))
 order by last_seen desc;
 ```
 

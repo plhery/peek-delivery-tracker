@@ -117,11 +117,13 @@ order by a.started_at desc;
 \echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin)'
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check. A check
 -- the fence refused (superseded) saved nothing and loaded a stage that may be stale: it is no step.
--- A linked parcel holds the checks of the parcel merged into it, filed under its original_carrier: each leg's checks
--- are read apart, as the two parcels saved their own stages, and the merged leg's last check has no next one.
+-- A linked parcel holds the checks of the parcel merged into it (original_package_id), filed under its
+-- original_carrier: each leg's checks are read apart, as the two parcels saved their own stages, and the merged leg's
+-- last check has no next one. A handover in place records the parcel's own carrier as its original_carrier: one leg.
 with legs as (
   select a.*, p.current_stage, p.carrier as parcel_carrier,
-         a.configured_carrier is not distinct from p.carrier_data->>'original_carrier' as merged_leg
+         p.carrier_data ? 'original_package_id'
+           and a.configured_carrier is not distinct from p.carrier_data->>'original_carrier' as merged_leg
   from public.tracking_sync_attempts as a
   join public.packages as p on p.id = a.package_id
   where a.started_at >= :since and a.previous_stage is not null and a.outcome <> 'superseded'
@@ -169,7 +171,8 @@ left join lateral (
   select b.source_carrier from public.tracking_sync_attempts as b
   join public.packages as p on p.id = b.package_id
   where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id) and b.outcome <> 'superseded'
-    and (b.configured_carrier is not distinct from p.carrier_data->>'original_carrier') = back.merged_leg
+    and (p.carrier_data ? 'original_package_id'
+      and b.configured_carrier is not distinct from p.carrier_data->>'original_carrier') = back.merged_leg
   order by b.started_at desc, b.id desc limit 1
 ) as prior on true
 group by 1, 2, 3, 4, 5, 6
@@ -328,7 +331,10 @@ from public.tracking_support_cases c
 -- One whose parcel's latest check left no reason, its carrier having confirmed the number, needs
 -- no work: the next release's replay marks it fixed (reviewQueues.ts).
 where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
-  and cardinality(reasons) > 0 and duplicate_of is null
+  and cardinality(reasons) > 0
+  -- A repeat counts under its first case while that is open, and stands on its own once it is closed.
+  and (duplicate_of is null or not exists (
+    select from public.tracking_support_cases as t where t.id = c.duplicate_of and t.fix_status = 'open'))
 group by 1, 2, 3, 4
 order by cases desc, carrier;
 

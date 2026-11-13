@@ -36004,7 +36004,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "peninsula-truck-lines"
     },
     "trackingUrlTemplate": "https://www.peninsulatruck.com/track/?pro_number={trackingNumber}",
     "linkRules": [
@@ -52971,6 +52971,60 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://transpress.bg/bg/prosledjavane"
+  },
+  "gls-us": {
+    "displayName": "GLS US",
+    "aliases": [
+      "GLS USA",
+      "GSO",
+      "Golden State Overnight",
+      "Golden State Overnight Delivery Service",
+      "GSO (GLS US)"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#ffdd00",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gls-us",
+      "recognitionRank": 652
+    },
+    "trackingUrlTemplate": "https://gls-group.com/US/en/send-and-receive/track-a-parcel/?TrackingNumbers={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gls-group.com",
+          "gls-group.eu"
+        ],
+        "pathPattern": "^/US/",
+        "params": [
+          "TrackingNumbers",
+          "match",
+          "unitno"
+        ]
+      },
+      {
+        "domains": [
+          "gls-us.com",
+          "gso.com"
+        ],
+        "params": [
+          "TrackingNumbers",
+          "TrackingNumber",
+          "trackingnum"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^SH\\d{18}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://gls-group.com/US/en/send-and-receive/track-a-parcel/"
   }
 } as const;
 
@@ -54515,7 +54569,8 @@ export const CARRIER_IDS = [
   "u-post",
   "bh-posta",
   "cvc",
-  "transpress"
+  "transpress",
+  "gls-us"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -98909,6 +98909,17 @@
     "candidates": []
   },
   {
+    "input": "SH468637583456552026",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-us"
+    ],
+    "asked": [
+      "gls-us"
+    ]
+  },
+  {
     "input": "SH6345114278",
     "carrier": "unknown",
     "confidence": "low",
@@ -98921,6 +98932,17 @@
       "colis-prive",
       "aramex-au",
       "aramex-nz"
+    ]
+  },
+  {
+    "input": "SH730418265903174526",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-us"
+    ],
+    "asked": [
+      "gls-us"
     ]
   },
   {

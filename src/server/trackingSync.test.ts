@@ -3322,6 +3322,22 @@ describe('TrackingSyncService', () => {
     expect(unfollowed[2]).toBeLessThanOrEqual((2 * 60 + 24) * 60_000);
   });
 
+  it('leaves a kind of lookup unknown, not empty, when the run cannot list it', async () => {
+    const client = fakeClient([]);
+    client.listFollowedOneOffPackages.mockRejectedValue(new Error('timeout'));
+    const recorded = vi.spyOn(metrics, 'recordScheduledBacklog');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn() }, null, () => new Date('2026-09-09T10:12:00Z'));
+    await service.sync();
+    // The unfollowed ones are those the followed list leaves out: unknown too.
+    expect(recorded.mock.calls.map(([kind, due]) => [kind, due])).toEqual([['account', 0], ['lookup', null], ['unfollowed', null]]);
+    recorded.mockClear();
+    client.listFollowedOneOffPackages.mockResolvedValue([]);
+    client.listUnfiledOneOffPackages.mockRejectedValue(new Error('timeout'));
+    await service.sync();
+    expect(recorded.mock.calls.map(([kind, due]) => [kind, due])).toEqual([['account', 0], ['lookup', 0], ['unfollowed', null]]);
+  });
+
   it('checks five one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       sync_status: 'ok', user_id: null, one_off: true };

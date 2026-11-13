@@ -1040,7 +1040,7 @@ dashboard's failure panels leave out.
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
 | `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample in 24 hours, a direct step the carrier has not run for six hours, or direct failures whose checks all answered |
 | `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them. Many an hour mean a burst kept stopping the run, so accounts' scheduled checks fell behind |
-| `scheduled_sync_due` (kind) | Parcels the latest scheduled run found due when it started: an `account`'s, a `lookup`, or an `unfollowed` lookup filed under no carrier, which a run takes only when the followed ones leave room |
+| `scheduled_sync_due` (kind) | Parcels the latest scheduled run found due when it started: an `account`'s, a `lookup`, or an `unfollowed` lookup filed under no carrier, which a run takes only when the followed ones leave room. A kind shows no value when the run could not list it |
 | `scheduled_sync_overdue_seconds` (kind) | How long the longest-waiting of those parcels had been due, to the minute. A lookup checked late shows here before its check |
 | `sync_jobs_queued` (kind) | Checks waiting for the sync worker, read from the queue at each scrape where the worker runs: an `account`'s, a `lookup`'s, the `scheduled` run, or a scraper `release`'s re-check |
 | `sync_jobs_oldest_wait_seconds` (kind) | How long the oldest of those checks has waited since it was queued |

@@ -718,7 +718,13 @@ function readSyncQueue(): Promise<void> {
 }
 
 /** At its start, the scheduled run's due parcels of one kind, and how long the longest-waiting of them has been due. */
-export function recordScheduledBacklog(kind: 'account' | 'lookup' | 'unfollowed', due: number, overdueMs: number): void {
+/** `null` when the run could not list them: the kind shows no value rather than an empty backlog. */
+export function recordScheduledBacklog(kind: 'account' | 'lookup' | 'unfollowed', due: number | null, overdueMs = 0): void {
+  if (due === null) {
+    runtime.scheduledSyncDue.remove({ kind });
+    runtime.scheduledSyncOverdue.remove({ kind });
+    return;
+  }
   runtime.scheduledSyncDue.set({ kind }, due);
   runtime.scheduledSyncOverdue.set({ kind }, Math.round(overdueMs / 1_000));
 }

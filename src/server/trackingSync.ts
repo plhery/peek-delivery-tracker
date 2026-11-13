@@ -1783,11 +1783,13 @@ export class TrackingSyncService {
     watched: (parcel: JsonObject) => boolean,
     signal?: AbortSignal,
   ): Promise<JsonObject[]> {
+    const failed = new Set<string>();
     const list = async (operation: string, read: () => Promise<JsonObject[]>) => {
       try { return await read(); }
       catch (error) {
         signal?.throwIfAborted();
         captureOperationalError(error, { component: 'tracking', operation });
+        failed.add(operation);
         return [];
       }
     };
@@ -1799,9 +1801,13 @@ export class TrackingSyncService {
     const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel, now)));
     const followedNow = followed.filter((parcel) => followedDue(parcel, now));
     const due = [...followedNow, ...unfollowed];
-    // Apart, since the unfollowed ones come last and can wait days behind the followed.
-    recordScheduledBacklog('lookup', followedNow.length, longestOverdueMs(followedNow, followedDue, now));
-    recordScheduledBacklog('unfollowed', unfollowed.size, longestOverdueMs([...unfollowed], unfollowedDue, now));
+    // Apart, since the unfollowed ones come last and can wait days behind the followed. A list
+    // that could not be read leaves its kind unknown, not empty; the unfollowed ones are those
+    // the followed list leaves out, so they need both.
+    const followedRead = !failed.has('list_one_off_packages');
+    recordScheduledBacklog('lookup', followedRead ? followedNow.length : null, longestOverdueMs(followedNow, followedDue, now));
+    recordScheduledBacklog('unfollowed', followedRead && !failed.has('list_unfiled_one_off_packages') ? unfollowed.size : null,
+      longestOverdueMs([...unfollowed], unfollowedDue, now));
     const waited = due.filter(watched).slice(0, limit);
     const others = due.filter((parcel) => !watched(parcel));
     const taken = [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];

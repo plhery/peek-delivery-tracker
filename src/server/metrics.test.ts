@@ -266,6 +266,12 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('scheduled_sync_due{kind="lookup"} 42');
     expect(text).toContain('scheduled_sync_overdue_seconds{kind="lookup"} 10830');
     expect(text).toContain('scheduled_sync_overdue_seconds{kind="account"} 0');
+    // A run that could not list the lookups knows nothing of them.
+    metrics.recordScheduledBacklog('lookup', null);
+    const unknown = await metrics.metricsText();
+    expect(unknown).not.toContain('scheduled_sync_due{kind="lookup"}');
+    expect(unknown).not.toContain('scheduled_sync_overdue_seconds{kind="lookup"}');
+    expect(unknown).toContain('scheduled_sync_due{kind="account"} 0');
   });
 
   it('labels a lookup with the attempts it took, capped to keep the label set small', async () => {

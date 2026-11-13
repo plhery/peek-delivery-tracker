@@ -3,7 +3,7 @@ title: DPD Portugal rastreio: estados, pontos Pickup e contactos
 description: Rastreio DPD Portugal: onde está o número de 14 algarismos, o que quer dizer cada estado, o Predict, os pontos Pickup e cacifos, reclamações e contactos.
 slug: dpd-portugal-rastreio
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 A DPD Portugal é a transportadora de encomendas da Geopost em Portugal, o mesmo grupo da [Chronopost](carrier:chronopost). Entrega no continente, na Madeira e nos Açores. Para saberes onde está a tua encomenda, escreve o número no [Track & Trace](https://tracking.dpd.pt/track-and-trace) da DPD ou cola-o na caixa no topo desta página.
@@ -37,6 +37,7 @@ O Track & Trace abre em português e também tem versão inglesa e francesa. Cad
 | `ENDEREÇO DO DESTINATÁRIO INCOMPLETO OU ILEGÍVEL` | Falta parte da morada ou não se percebe. |
 | `DESTINATÁRIO ENCERRADO PARA FÉRIAS` | A morada de entrega (uma loja, uma empresa) estava fechada para férias. |
 | `LOCKER / PICKUP LOTADO` | O cacifo ou o ponto Pickup estava cheio; a encomenda vai para outro. |
+| `ANOMALIA OPERACIONAL` | Um problema da própria DPD impediu a entrega durante a distribuição; a encomenda regressa ao armazém para sair de novo. O Peek mostra «Tentativa de entrega». |
 | `RETORNO ARMAZÉM PARA ENTREGA` | Voltou ao armazém para sair de novo. |
 | `ENTREGUE PELA DPD NO PONTO DE ENTREGA` | O estafeta deixou-a num ponto Pickup ou num cacifo. |
 | `RECEPCIONADO PELO PONTO DE ENTREGA` | O ponto Pickup já a tem: podes ir levantá-la. |

@@ -3,7 +3,7 @@ title: Seguimiento iMile: números, estados y quién reparte
 description: Sigue tu paquete de iMile en España: cómo es el número, qué significan sus estados en inglés, quién lo reparte y cómo contactar con iMile si se atasca.
 slug: imile-seguimiento
 published: 2026-10-22
-updated: 2026-11-06
+updated: 2026-11-13
 ---
 
 iMile es una empresa de reparto para el comercio electrónico, fundada en Dubái en 2017. Lleva paquetes de un país a otro, por ejemplo desde China, se encarga del despacho de aduanas y en España tiene su propia sociedad, iMile Logistics & Transportation, S.L., con sede en Madrid. Sigue el número en la página de seguimiento de iMile, [imile.com/track](https://www.imile.com/en/track), o en el recuadro de arriba. El número te lo da la tienda, en los datos de envío del pedido.
@@ -48,7 +48,7 @@ Los escaneos de iMile están en inglés, tal como los lee Peek. Lo que va entre 
 
 En paquetes europeos, la primera línea aparece como `Order Submited.`, con la falta de ortografía de iMile, igual que `Your order has assigned delivery drvier.`, que indica que ya hay repartidor asignado antes de que salga la furgoneta. Si ves `Shipment is scheduled to` seguido de una fecha entre corchetes, se ha fijado un día de entrega.
 
-Otros motivos que puede anotar el repartidor, además de `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, una línea que empieza por «failed to schedule due to» con un motivo entre corchetes, como «noanswer» (el repartidor no pudo acordar la entrega contigo), y `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` También puede aparecer `Lost order` como motivo durante una ruta de reparto. Por sí solo no significa que el paquete se haya perdido: fíjate en los escaneos siguientes. Si se queda parado en la aduana, mira la [guía de aduanas](guide:customs).
+Otros motivos que puede anotar el repartidor, además de `User not at home`: `wrong address` (o, con el detalle de iMile entre paréntesis, `Wrong Address(Insufficient address details)`: faltan datos en la dirección), `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, una línea que empieza por «failed to schedule due to» con un motivo entre corchetes, como «noanswer» (el repartidor no pudo acordar la entrega contigo), y `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` También puede aparecer `Lost order` como motivo durante una ruta de reparto. Por sí solo no significa que el paquete se haya perdido: fíjate en los escaneos siguientes. Si se queda parado en la aduana, mira la [guía de aduanas](guide:customs).
 
 ## Entrega de iMile en España
 

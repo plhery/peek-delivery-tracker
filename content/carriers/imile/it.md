@@ -3,7 +3,7 @@ title: Tracking iMile: codici, stati e consegna in Italia
 description: Tracking iMile in Italia: com'è fatto il codice, cosa vogliono dire gli stati in inglese, quanti tentativi fa, come fare reclamo e il numero del servizio clienti.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-11-06
+updated: 2026-11-13
 ---
 
 iMile è una società di consegne per l'e-commerce, fondata a Dubai nel 2017. Porta pacchi da un paese all'altro, anche dalla Cina, e in Italia consegna con iMile Italy S.r.l., che ha sede a San Giuliano Milanese. Segui il codice sulla [pagina di tracciamento di iMile](https://www.imile.com/en/track) o nel riquadro qui sopra. Il codice te lo dà il negozio: lo trovi nei dati di spedizione dell'ordine.
@@ -48,7 +48,7 @@ Le scansioni di iMile sono in inglese, così come le legge Peek. Tra le parentes
 
 Sui pacchi europei la prima riga compare come `Order Submited.`: l'errore di battitura è di iMile, come in `Your order has assigned delivery drvier.`, che indica il corriere assegnato prima che il furgone parta. `Shipment is scheduled to` seguito da una data tra parentesi quadre vuol dire che è stato fissato un giorno di consegna.
 
-Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, una riga che inizia con «failed to schedule due to» e indica un motivo tra parentesi quadre, come «noanswer» (il corriere non è riuscito a concordare la consegna con te), e `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Anche `Lost order` può comparire come motivo durante un giro di consegna: da solo non vuol dire che il pacco sia perso, guarda le scansioni successive. Per i pacchi fermi in dogana c'è la [guida alla dogana](guide:customs).
+Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong address` (o, con il dettaglio di iMile tra parentesi, `Wrong Address(Insufficient address details)`: nell'indirizzo mancano dei dati), `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, una riga che inizia con «failed to schedule due to» e indica un motivo tra parentesi quadre, come «noanswer» (il corriere non è riuscito a concordare la consegna con te), e `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Anche `Lost order` può comparire come motivo durante un giro di consegna: da solo non vuol dire che il pacco sia perso, guarda le scansioni successive. Per i pacchi fermi in dogana c'è la [guida alla dogana](guide:customs).
 
 ## Consegna iMile in Italia: tentativi, giacenza e ritiro
 

@@ -3,7 +3,7 @@ title: DPD Portugal tracking: statuses, Pickup points and contact
 description: Track a DPD Portugal parcel: the 14-digit number, what the Portuguese statuses mean, Predict, Pickup points and lockers, claims and who to call.
 slug: dpd-portugal-tracking
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-13
 ---
 
 DPD Portugal is the Portuguese parcel carrier of Geopost, the parcel group behind DPD and [Chronopost](carrier:chronopost). It delivers parcels across mainland Portugal, Madeira and the Azores. Track a parcel on DPD's [Track & Trace](https://tracking.dpd.pt/track-and-trace) with its 14-digit number, or paste the number in the box above.
@@ -36,6 +36,7 @@ DPD's tracker opens in Portuguese, with English and French versions. Peek shows 
 | `AUSÊNCIA DO DESTINATÁRIO` | The driver found nobody in. |
 | `ENDEREÇO DO DESTINATÁRIO INCOMPLETO OU ILEGÍVEL` | The address is incomplete or unreadable. |
 | `LOCKER / PICKUP LOTADO` | The locker or Pickup point was full; the parcel goes to another one. |
+| `ANOMALIA OPERACIONAL` | A problem on DPD's side kept the parcel from being delivered on the round; it goes back to the depot to go out again. Peek shows "Delivery attempted". |
 | `RETORNO ARMAZÉM PARA ENTREGA` | Back at the depot, to go out again. |
 | `ENTREGUE PELA DPD NO PONTO DE ENTREGA` | The driver left it at a Pickup point or locker for you. |
 | `RECEPCIONADO PELO PONTO DE ENTREGA` | The Pickup point has it: you can collect it. |

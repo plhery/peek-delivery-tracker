@@ -3,7 +3,7 @@ title: iMile tracking: numbers, statuses and who delivers
 description: Track an iMile parcel: what iMile numbers look like, what its English scans mean, who delivers in your country and how to reach iMile when it stalls.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-11-06
+updated: 2026-11-13
 ---
 
 iMile is an e-commerce delivery company founded in Dubai in 2017. It carries parcels across borders, including from China, clears customs and delivers the last mile with its own couriers in some countries. Track the number on iMile's own page, [imile.com/track](https://www.imile.com/en/track), or in the box above. The number comes from the shop, in your order's shipping details.
@@ -48,7 +48,7 @@ iMile's scans below are in its English wording, as Peek reads them. Names in 【
 
 `Order Submited.` means the same as the first row on a European parcel; the misspelling is iMile's, as in `Your order has assigned delivery drvier.`, which names the driver before the van leaves. `Shipment is scheduled to` followed by a date in square brackets books a delivery day.
 
-The driver's reasons for a failed attempt, besides `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, a line starting "failed to schedule due to" with a reason in square brackets, such as "noanswer" (the driver couldn't arrange the delivery with you), and `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` `Lost order` can also turn up as a driver's reason on a delivery run. It doesn't mean on its own that the parcel is gone: watch the next scans. For customs stops, see [customs and import fees](guide:customs).
+The driver's reasons for a failed attempt, besides `User not at home`: `wrong address` (or, with iMile's detail in brackets, `Wrong Address(Insufficient address details)`: the address lacks details), `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, a line starting "failed to schedule due to" with a reason in square brackets, such as "noanswer" (the driver couldn't arrange the delivery with you), and `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` `Lost order` can also turn up as a driver's reason on a delivery run. It doesn't mean on its own that the parcel is gone: watch the next scans. For customs stops, see [customs and import fees](guide:customs).
 
 ## iMile delivery in the UK, US, Ireland, Canada and Australia
 

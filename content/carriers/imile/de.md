@@ -3,7 +3,7 @@ title: iMile Sendungsverfolgung: Nummer, Status, Zustellung
 description: iMile Sendungsverfolgung in Deutschland, Österreich und der Schweiz: wie die Nummer aussieht, was die Status heißen, wer zustellt und wie du iMile erreichst.
 slug: imile-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-11-06
+updated: 2026-11-13
 ---
 
 iMile ist ein Zustelldienst für den Onlinehandel, 2017 in Dubai gegründet. Er bringt Pakete über Grenzen, auch aus China, und hat Gesellschaften in Deutschland (Düsseldorf) und Österreich (Wien). Verfolge die Nummer auf iMiles [Tracking-Seite](https://www.imile.com/en/track) oder oben im Feld. Die Nummer bekommst du vom Shop, in den Versanddaten deiner Bestellung.
@@ -48,7 +48,7 @@ iMiles Scans sind auf Englisch, so wie Peek sie liest. In den Klammern 【】 st
 
 Bei europäischen Paketen lautet die erste Zeile `Order Submited.`; der Tippfehler stammt von iMile, genau wie in `Your order has assigned delivery drvier.`, das den zugeteilten Fahrer meldet, bevor der Wagen losfährt. `Shipment is scheduled to` mit einem Datum in eckigen Klammern heißt: Ein Zustelltag ist eingeplant.
 
-Weitere Gründe, die der Fahrer eintragen kann, neben `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, eine Zeile, die mit „failed to schedule due to“ beginnt und einen Grund in eckigen Klammern nennt, etwa „noanswer“ (der Fahrer konnte die Zustellung nicht mit dir vereinbaren), und `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Auch `Lost order` kann auf einer Zustelltour als Grund auftauchen. Für sich allein heißt das nicht, dass das Paket weg ist: Achte auf die nächsten Scans. Hängt es beim Zoll, hilft der [Zoll-Ratgeber](guide:customs).
+Weitere Gründe, die der Fahrer eintragen kann, neben `User not at home`: `wrong address` (oder, mit iMiles Angabe in Klammern, `Wrong Address(Insufficient address details)`: In der Adresse fehlen Angaben), `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, eine Zeile, die mit „failed to schedule due to“ beginnt und einen Grund in eckigen Klammern nennt, etwa „noanswer“ (der Fahrer konnte die Zustellung nicht mit dir vereinbaren), und `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Auch `Lost order` kann auf einer Zustelltour als Grund auftauchen. Für sich allein heißt das nicht, dass das Paket weg ist: Achte auf die nächsten Scans. Hängt es beim Zoll, hilft der [Zoll-Ratgeber](guide:customs).
 
 ## iMile Zustellung in Deutschland, Österreich und der Schweiz
 

@@ -100432,6 +100432,14 @@
     "candidates": []
   },
   {
+    "input": "SXW999999999980",
+    "carrier": "sxw-express",
+    "confidence": "high",
+    "candidates": [
+      "sxw-express"
+    ]
+  },
+  {
     "input": "SY15077455811",
     "carrier": "sunyou",
     "confidence": "high",
@@ -104015,6 +104023,14 @@
       "colis-prive",
       "tnt-au",
       "purolator"
+    ]
+  },
+  {
+    "input": "XC9999999980CN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "xuchuan-logistics"
     ]
   },
   {

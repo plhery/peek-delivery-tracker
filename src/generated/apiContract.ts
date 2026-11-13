@@ -53102,6 +53102,58 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://trustexpress.bg/tracking"
+  },
+  "sxw-express": {
+    "displayName": "SXW Express",
+    "aliases": [
+      "SXW",
+      "SXW Wuliu",
+      "Shengxingwang",
+      "Shenzhen Shengxingwang Supply Chain Management Co., Ltd."
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1291c5",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sxw-express"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^SXW\\d{12}$",
+        "confidence": "high"
+      }
+    ]
+  },
+  "xuchuan-logistics": {
+    "displayName": "Xuchuan International Logistics",
+    "aliases": [
+      "XC",
+      "Xuchuan Logistics",
+      "旭川国际物流",
+      "xcwl.ltd Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0a2463",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^XC\\d{10}CN$",
+        "confidence": "low"
+      }
+    ]
   }
 } as const;
 
@@ -54649,7 +54701,9 @@ export const CARRIER_IDS = [
   "transpress",
   "gls-us",
   "poste-srpske",
-  "trustexpress"
+  "trustexpress",
+  "sxw-express",
+  "xuchuan-logistics"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -63,6 +63,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -84,6 +85,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsSnapshot
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.deliveries.AccountBar
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcements
@@ -418,6 +420,7 @@ private enum class Slot { DemoBar, Content, Band }
  * The tab's chrome, the circle's and a friend's page's (`.safeAreaInset(edge: .top) { DemoModeBar() }` under the inline
  * bar): what [content] shows from the window's top, given where it starts clear of the bar's foot [barBottom] and, in
  * the demo, of the demo's bar under it; behind the bar, the cream in the demo, else the soft edge the scroll fades under.
+ * TalkBack reaches the demo's bar before [content], as VoiceOver reaches a `safeAreaInset` at the top.
  */
 @Composable
 internal fun FriendsChrome(
@@ -430,10 +433,16 @@ internal fun FriendsChrome(
     content: @Composable (top: Dp) -> Unit,
 ) {
     val colors = PeekTheme.colors
-    SubcomposeLayout(modifier) { constraints ->
+    SubcomposeLayout(modifier.semantics { isTraversalGroup = true }) { constraints ->
         val loose = constraints.copy(minWidth = 0, minHeight = 0)
         val bar = subcompose(Slot.DemoBar) {
-            if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
+            if (demo) {
+                DemoModeBar(
+                    onExit = source::showWelcome,
+                    modifier = Modifier.readFirst(),
+                    sides = PaddingValues(start = start, end = end),
+                )
+            }
         }.map { it.measure(loose) }
         val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
         val shown = subcompose(Slot.Content) { content(chromeBottom) }.map { it.measure(constraints) }

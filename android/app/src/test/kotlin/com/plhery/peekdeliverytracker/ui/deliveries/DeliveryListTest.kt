@@ -181,11 +181,15 @@ class DeliveryListTest {
         assertTrue("$tag never took the focus", focused(tag))
     }
 
-    /** What holds the focus without being a control: a column that takes the keys. */
-    private fun focusTargets(): List<SemanticsNode> = compose.onAllNodes(
+    /** What TalkBack could stop on without its being a control: none, the columns' focus for the keys hidden from it. */
+    private fun focusableForTalkBack(): List<SemanticsNode> = compose.onAllNodes(
         SemanticsMatcher.keyIsDefined(SemanticsProperties.Focused) and SemanticsMatcher.keyNotDefined(SemanticsActions.OnClick),
         useUnmergedTree = true,
     ).fetchSemanticsNodes()
+
+    /** The columns that take the deliveries' keys. */
+    private fun keyTargets(): List<SemanticsNode> =
+        compose.onAllNodes(SemanticsMatcher.keyIsDefined(KeysFocused), useUnmergedTree = true).fetchSemanticsNodes()
 
     /** Whether the window has work waiting for a frame, such as an animation running. */
     private fun waitsForAFrame(): Boolean {
@@ -470,13 +474,15 @@ class DeliveryListTest {
     @Test
     fun onlyTheListBesideAParcelTakesTheFocusForItsKeys() {
         show(width = 600.dp)
-        assertEquals(emptyList<SemanticsNode>(), focusTargets())
+        assertEquals(emptyList<SemanticsNode>(), keyTargets())
 
         resize(1032.dp)
-        val targets = focusTargets()
+        val targets = keyTargets()
         assertEquals(1, targets.size)
         assertEquals(LIST_COLUMN, targets.single().config[SemanticsProperties.TestTag])
-        assertEquals(true, targets.single().config[SemanticsProperties.Focused])
+        assertEquals(true, targets.single().config[KeysFocused])
+        // TalkBack doesn't stop on the column, which would read its headings as one.
+        assertEquals(emptyList<SemanticsNode>(), focusableForTalkBack())
     }
 
     @Test

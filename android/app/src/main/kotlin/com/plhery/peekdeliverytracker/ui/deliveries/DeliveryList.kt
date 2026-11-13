@@ -77,6 +77,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -97,6 +98,7 @@ import com.plhery.peekdeliverytracker.core.notice
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -220,11 +222,19 @@ internal fun DeliveryList(state: DeliveriesState) {
         // iOS's are modal; the tab shell hides the tab bar the same way.
         Box(Modifier.fillMaxSize().then(if (state.modal) Modifier.clearAndSetSemantics {} else Modifier)) {
             // What the bar's glass shows through: the list, the band behind the bar and the demo's bar. The demo's bar
-            // is measured first and the list starts under it, from the first frame at any size of text.
-            SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop)) { constraints ->
+            // is measured first and the list starts under it, from the first frame at any size of text. TalkBack
+            // reaches the demo's bar before the list that goes on under it, as VoiceOver reaches a `safeAreaInset` at
+            // the top.
+            SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop).semantics { isTraversalGroup = true }) { constraints ->
                 val loose = constraints.copy(minWidth = 0, minHeight = 0)
                 val bar = subcompose(ChromeSlot.DemoBar) {
-                    if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
+                    if (demo) {
+                        DemoModeBar(
+                            onExit = source::showWelcome,
+                            modifier = Modifier.readFirst(),
+                            sides = PaddingValues(start = start, end = end),
+                        )
+                    }
                 }.map { it.measure(loose) }
                 val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
                 val list = subcompose(ChromeSlot.List) {

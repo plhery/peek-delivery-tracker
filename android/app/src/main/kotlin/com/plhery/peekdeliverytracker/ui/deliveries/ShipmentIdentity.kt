@@ -22,8 +22,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.ParcelTrackingLink
@@ -44,8 +46,9 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
  * hides). What a number is in caption2 (`trackingNumberLabel`), 4 above it in monospaced caption as its carrier writes
  * it (`CarrierCatalog.format`), which a long press selects (B-G04); at the line's end its copy, a 14-point copy symbol
  * in the secondary grey in 44 square, a check while its row says it copied the number (`copied`). TalkBack hears the
- * copy as "Copy tracking number" or "Copied", and which number it copies where there are several. A copy calls
- * `onCopy`, which puts the number on the clipboard (B-H03).
+ * copy as "Copy tracking number" or "Copied", and which number it copies where there are several, after what the
+ * number is and the number, as VoiceOver reads them in the order they are written. A copy calls `onCopy`, which puts
+ * the number on the clipboard (B-H03).
  *
  * Under each number its carrier's own pages, and after the numbers the pages that are none of theirs
  * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`.
@@ -81,7 +84,7 @@ internal fun ShipmentNumbers(
                 val says = copied == entry.number
                 val copyLabel = localizer.text(if (says) "detail.copied" else "detail.copyTracking") + if (numbers.size > 1) " — $label" else ""
                 val number = @Composable { numberModifier: Modifier ->
-                    Column(numberModifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Column(numberModifier.semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(label, color = if (padded) colors.secondaryText else colors.secondaryLabel, style = type.caption2.sfLines())
                         SelectionContainer {
                             Text(

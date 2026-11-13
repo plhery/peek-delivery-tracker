@@ -76,6 +76,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -237,7 +238,8 @@ internal fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBac
  * title in its middle as a heading, [leading] at its leading end (the stack's ‹, or a [BarCancel]). The title keeps as
  * clear of the trailing end as of a ‹, and moves over where [leading] is wider, as UIKit's does past a Cancel, cut short
  * where even that room is too little. Under a large title, the inline one shows as much as [titleAlpha] says, as it
- * fades in once the large one has scrolled under the bar, and TalkBack reads the large one alone.
+ * fades in once the large one has scrolled under the bar, and TalkBack reads the large one alone. TalkBack reaches the
+ * row before what scrolls under it, as VoiceOver reaches a navigation bar's items first.
  */
 @Composable
 internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifier: Modifier = Modifier, titleAlpha: (() -> Float)? = null) {
@@ -261,7 +263,7 @@ internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifi
             }
             if (leading != null) Box { leading() }
         },
-        modifier = modifier.fillMaxWidth().height(BAR_ROW),
+        modifier = modifier.readFirst().fillMaxWidth().height(BAR_ROW),
     ) { measurables, constraints ->
         val loose = constraints.copy(minWidth = 0, minHeight = 0)
         val width = constraints.maxWidth

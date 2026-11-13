@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,7 +39,8 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
  * one. The times are those of when the page was drawn, as the iPhone's are. Then, 7 after them and centred on them, the
  * refresh where `onRefresh` is given ([RefreshButton]), waiting while `working`. The refresh keeps its 26 and the lines
  * wrap in what is left, as SwiftUI sizes the fixed button first, at the largest text or in a narrow column. Nothing
- * where there is nothing to say, so the page leaves no gap for it.
+ * where there is nothing to say, so the page leaves no gap for it. TalkBack reads the lines before the refresh, as
+ * VoiceOver reads them in the order they are written.
  */
 @Composable
 internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: (() -> Unit)?, modifier: Modifier = Modifier) {
@@ -52,7 +54,7 @@ internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: 
     val secondary = PeekTheme.colors.secondaryText
     val medium = type.style(IosTextStyle.Caption, FontWeight.Medium).sfLines()
     Row(modifier, horizontalArrangement = Arrangement.spacedBy(7.dp), verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(1f, fill = false), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+        Column(Modifier.weight(1f, fill = false).semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(3.dp)) {
             if (next != null) {
                 Text(
                     localizer.text("detail.nextCheckAfter", mapOf("date" to localizer.abbreviatedDateTime(next))),

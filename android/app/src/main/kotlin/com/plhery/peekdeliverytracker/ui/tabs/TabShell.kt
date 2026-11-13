@@ -60,6 +60,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.core.view.ViewCompat
@@ -67,6 +68,7 @@ import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
 import com.plhery.peekdeliverytracker.ui.WindowKey
 import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
@@ -512,9 +514,11 @@ fun TabShell(
         val barHidden = if (presented || covered || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
         val barShut = Modifier.onFocusChanged { focus.bar = it.hasFocus }.then(shut)
         if (top) {
+            // TalkBack reaches the bar at the top first, before tabs whose content goes on under it.
             TopTabBar(
                 labels, selection, tap, backdrop,
-                Modifier.align(Alignment.TopStart).then(shown).clearOfTheHinge(hinge).padding(top = topGap).then(barHidden).then(barShut),
+                Modifier.align(Alignment.TopStart).then(shown).clearOfTheHinge(hinge).padding(top = topGap)
+                    .readFirst().then(barHidden).then(barShut),
             )
         } else {
             // Clear of a cutout or of navigation buttons at the side, unless a hinge already puts it in the start half.

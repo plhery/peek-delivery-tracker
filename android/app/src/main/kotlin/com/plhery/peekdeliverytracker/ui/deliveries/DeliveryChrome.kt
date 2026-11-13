@@ -143,6 +143,7 @@ import com.plhery.peekdeliverytracker.ui.LocalStatusBarHidden
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.WindowKey
 import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
@@ -195,7 +196,8 @@ internal fun barRowTop(): Dp {
  * edge. Beside a parcel: the mark and the title, in the middle of the list's column; adding and the account stand over
  * the parcel ([PageToolbar]). The glass shows the list scrolling under it ([backdrop]). As a parcel's page zooms over
  * the list, the title fades with the list's coming under it and comes back as the page shrinks off it, and the other
- * items give way to the page's ‹ and ••• ([givingWayToPageBar]).
+ * items give way to the page's ‹ and ••• ([givingWayToPageBar]). TalkBack reaches the bar before the list under it
+ * ([readFirst]).
  */
 @Composable
 internal fun ListToolbar(
@@ -208,7 +210,7 @@ internal fun ListToolbar(
     modifier: Modifier = Modifier,
 ) {
     val title = localized("native.deliveries")
-    Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
+    Box(modifier.readFirst().fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
         // The mark stands on its own, not on a control's glass.
         PeekMark(
             30.dp,
@@ -249,7 +251,8 @@ internal fun ListToolbar(
 /**
  * Beside a parcel, adding one and the account on one glass at the window's trailing edge, over the parcel's page, as
  * the iPad's detail toolbar has them, and the parcel's ••• menu after them while a parcel of the deliveries shows
- * (ParcelDetailView's `.topBarTrailing` item): none for the sample, nor while no parcel shows.
+ * (ParcelDetailView's `.topBarTrailing` item): none for the sample, nor while no parcel shows. TalkBack reaches them
+ * before the page that goes on under them, as VoiceOver reaches the detail's bar first.
  */
 @Composable
 internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
@@ -260,7 +263,7 @@ internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
     }
     val shown = state.navigator.navigation.shown
     val parcel = state.liveMenuParcel(shown)
-    Box(Modifier.fillMaxWidth().padding(top = barRowTop()).height(ROW_HEIGHT)) {
+    Box(Modifier.readFirst().fillMaxWidth().padding(top = barRowTop()).height(ROW_HEIGHT)) {
         GlassSurface(
             CapsuleShape,
             Modifier
@@ -310,6 +313,7 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
  * stands half open [titleWidth] from the window's leading edge (in a window too narrow or too short for the tab bar at
  * the top, where [TabRowAccount] stands instead), the title centres over that first half, clear of it. Under a page
  * that zooms over the tab ([zoom]), the title fades as the list's does and the account gives way to the page's bar.
+ * TalkBack reaches the bar before the tab under it ([readFirst]).
  */
 @Composable
 internal fun AccountBar(
@@ -325,7 +329,7 @@ internal fun AccountBar(
     titleWidth: Dp? = null,
     zoom: ZoomTransition? = null,
 ) {
-    Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
+    Box(modifier.readFirst().fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
         val place = if (titleWidth != null) {
             Modifier.align(Alignment.CenterStart).width(titleWidth).padding(start = start + FOLD_TITLE_MARGIN, end = FOLD_TITLE_MARGIN)
         } else {
@@ -363,7 +367,8 @@ private val FOLD_TITLE_MARGIN = 16.dp
  * Where the tab bar stands at the top, a tab's `AccountToolbarItem` as the iPad places it with no title: the account's
  * glass in the tab bar's row, centred on it, 10 in from the window's trailing edge and [end], clear of the system's
  * bars and cutout there (ipad-07). It opens the tab's own Settings ([onAccount]); its button is tagged [accountTag].
- * Under a page that zooms over the tab ([zoom]), it gives way to the page's bar.
+ * Under a page that zooms over the tab ([zoom]), it gives way to the page's bar. TalkBack reaches it after the tabs
+ * beside it, before the tab under it ([readFirst]).
  */
 @Composable
 internal fun TabRowAccount(
@@ -383,7 +388,8 @@ internal fun TabRowAccount(
                 .align(Alignment.CenterEnd)
                 .offset(x = -(end + TAB_ROW_ACCOUNT_MARGIN))
                 .then(if (zoom != null) Modifier.givingWayToPageBar(zoom) else Modifier)
-                .size(TAB_ROW_ACCOUNT_WIDTH, ROW_HEIGHT),
+                .size(TAB_ROW_ACCOUNT_WIDTH, ROW_HEIGHT)
+                .readFirst(),
             backdrop,
         ) {
             AccountButton(session, onAccount, accountTag, Modifier.align(Alignment.Center))

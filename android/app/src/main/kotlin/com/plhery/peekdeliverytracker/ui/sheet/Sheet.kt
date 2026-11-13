@@ -858,7 +858,7 @@ private fun Grabber(toggle: GrabberToggle?, modifier: Modifier) {
             .testTag(SHEET_GRABBER)
             .clearAndSetSemantics {
                 contentDescription = name
-                traversalIndex = -1f
+                traversalIndex = -2f
                 if (toggle != null) {
                     role = Role.Button
                     onClick(action) {

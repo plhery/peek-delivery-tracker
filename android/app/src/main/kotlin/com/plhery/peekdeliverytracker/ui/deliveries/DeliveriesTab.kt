@@ -13,7 +13,6 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -42,6 +41,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -56,6 +56,12 @@ import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.focusTarget
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -644,17 +650,28 @@ private fun DeliveriesKeys(state: DeliveriesState, scope: CoroutineScope, reduce
 
 /**
  * The list's column beside a parcel takes the focus and the deliveries' keys, after what has the focus in it: a card
- * or a button reached with the keyboard opens or presses on Return itself.
+ * or a button reached with the keyboard opens or presses on Return itself. TalkBack doesn't take the column for one
+ * of its stops, which would read the column's headings and count as one: the focus is the keyboard's alone, and the
+ * column tells it as [KeysFocused].
  */
 @Composable
 private fun Modifier.listKeys(state: DeliveriesState): Modifier {
     val scope = rememberCoroutineScope()
     val reduceMotion = PeekTheme.reduceMotion
     val focus = remember { FocusRequester() }
+    var focused by remember { mutableStateOf(false) }
     LaunchedEffect(focus) { focus.requestFocus() }
     val refreshable = state.refreshKey()
-    return focusRequester(focus).onKeyEvent { state.key(it.nativeKeyEvent, scope, reduceMotion, refreshable()) }.focusable()
+    return focusRequester(focus)
+        .onKeyEvent { state.key(it.nativeKeyEvent, scope, reduceMotion, refreshable()) }
+        .semantics { keysFocused = focused }
+        .onFocusChanged { focused = it.isFocused }
+        .focusTarget()
 }
+
+/** Whether the list's column has the focus for the deliveries' keys ([listKeys]), which accessibility doesn't see. */
+internal val KeysFocused = SemanticsPropertyKey<Boolean>("KeysFocused")
+private var SemanticsPropertyReceiver.keysFocused by KeysFocused
 
 /** The keys the deliveries answer now ([DeliveriesKey.available]). */
 private fun DeliveriesState.keys(): Set<DeliveriesKey> = DeliveriesKey.available(
@@ -764,6 +781,7 @@ private fun still(): ContentTransform = EnterTransition.None togetherWith ExitTr
  * NavigationSplitView's columns: the list `listWidth` wide, about 380 (480 at the accessibility text sizes) and no
  * wider than leaves the parcel its width, and the page beside it, or the page's ground while none shows. Adding a
  * parcel and the account stand at the window's trailing edge, over the page. A hinge splits them at the fold instead.
+ * TalkBack reads each column as one, the list's before the page's, as VoiceOver reads a split view's columns.
  */
 @Composable
 private fun SideBySideColumns(
@@ -788,12 +806,12 @@ private fun SideBySideColumns(
             pageStart = listWidth
         }
         CompositionLocalProvider(LocalColumnEdges provides ColumnEdges(start = true, end = false)) {
-            Box(Modifier.width(listWidth).fillMaxHeight().testTag(LIST_COLUMN).listKeys(state)) { list() }
+            Box(Modifier.width(listWidth).fillMaxHeight().testTag(LIST_COLUMN).semantics { isTraversalGroup = true }.listKeys(state)) { list() }
         }
         CompositionLocalProvider(LocalColumnEdges provides ColumnEdges(start = false, end = true)) {
             // The toolbar's glass shows the page under it.
             val backdrop = rememberMaterialBackdrop()
-            Box(Modifier.offset(x = pageStart).width(maxWidth - pageStart).fillMaxHeight().testTag(PAGE_COLUMN)) {
+            Box(Modifier.offset(x = pageStart).width(maxWidth - pageStart).fillMaxHeight().testTag(PAGE_COLUMN).semantics { isTraversalGroup = true }) {
                 Box(Modifier.fillMaxSize().materialBackdrop(backdrop)) {
                     if (page != null) page() else Box(Modifier.fillMaxSize().background(PeekTheme.colors.background))
                 }

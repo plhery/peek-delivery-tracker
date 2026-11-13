@@ -26,6 +26,8 @@ import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,6 +35,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.PassportSpread
 import com.plhery.peekdeliverytracker.core.PassportStatistics
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.deliveries.AccountBar
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcements
@@ -231,11 +234,17 @@ internal fun PassportTab(source: DeliveriesSource) {
             maxWidth - start - end, maxWidth, maxHeight, largeText, hinge?.let { it.start - startPx to it.end - startPx }, contentPx,
         )
         // What the bar's glass shows through: the pages, the band behind the bar and the demo's bar, which is measured
-        // first so the pages start under it, as the deliveries' list does.
-        SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop)) { constraints ->
+        // first so the pages start under it, and which TalkBack reaches first, as the deliveries' list does.
+        SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop).semantics { isTraversalGroup = true }) { constraints ->
             val loose = constraints.copy(minWidth = 0, minHeight = 0)
             val bar = subcompose(Slot.DemoBar) {
-                if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
+                if (demo) {
+                    DemoModeBar(
+                        onExit = source::showWelcome,
+                        modifier = Modifier.readFirst(),
+                        sides = PaddingValues(start = start, end = end),
+                    )
+                }
             }.map { it.measure(loose) }
             val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
             val pages = subcompose(Slot.Pages) {

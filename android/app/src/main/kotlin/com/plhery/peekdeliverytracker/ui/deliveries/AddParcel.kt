@@ -1719,10 +1719,10 @@ private fun AddButton(
 
 /**
  * Words centred on the lines they need, or on two at most where [twoLines], only a longer title than those hold made
- * smaller, down to 70 % (`lineLimit(2)`, `minimumScaleFactor(0.7)`).
+ * smaller, down to 70 %, then ending in an ellipsis (`lineLimit(2)`, `minimumScaleFactor(0.7)`).
  */
 @Composable
-private fun ShrinkingText(text: String, style: TextStyle, color: Color, twoLines: Boolean) {
+internal fun ShrinkingText(text: String, style: TextStyle, color: Color, twoLines: Boolean) {
     if (!twoLines) {
         Text(text, color = color, style = style, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
         return
@@ -1730,7 +1730,7 @@ private fun ShrinkingText(text: String, style: TextStyle, color: Color, twoLines
     androidx.compose.foundation.text.BasicText(
         text,
         style = style.copy(color = color, textAlign = androidx.compose.ui.text.style.TextAlign.Center),
-        maxLines = 2,
+        maxLines = 2, overflow = TextOverflow.Ellipsis,
         autoSize = MinimumScale(style.fontSize, MINIMUM_SCALE),
     )
 }

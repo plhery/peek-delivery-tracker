@@ -778,10 +778,11 @@ private fun FirstOpenMasthead(scene: FirstOpenScene, modifier: Modifier = Modifi
 
 /**
  * `ask(roomy:centred:)`: Track any parcel. in large title rounded bold, tightened 1.2, in the ink, on at most two lines
- * shrinking to 70 % rather than be cut (at the accessibility sizes on the lines it needs), a heading; under it the lead
- * in subheadline; then the field over Paste and track, or the demo where the build has no server. Roomy, it stands
- * lower and further apart, the carriers rolling at its foot. [centred] stands it in the middle of its room, and where
- * it [fills] its room the carriers keep to its foot. 24 in from the sides and no wider than 560, centred.
+ * shrinking to 70 % rather than be cut and ending in an ellipsis past that (at the accessibility sizes on the lines it
+ * needs), a heading; under it the lead in subheadline; then the field over Paste and track, or the demo where the build
+ * has no server. Roomy, it stands lower and further apart, the carriers rolling at its foot. [centred] stands it in the
+ * middle of its room, and where it [fills] its room the carriers keep to its foot. 24 in from the sides and no wider
+ * than 560, centred.
  */
 @Composable
 private fun FirstOpenAsk(
@@ -804,7 +805,7 @@ private fun FirstOpenAsk(
             localized("peek.title"), Modifier.padding(top = if (roomy) 26.dp else 18.dp).semantics { heading() },
             // At the accessibility sizes the question takes the lines it needs, and the screen scrolls.
             color = colors.ink, style = title, textAlign = TextAlign.Center,
-            maxLines = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) Int.MAX_VALUE else 2,
+            maxLines = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) Int.MAX_VALUE else 2, overflow = TextOverflow.Ellipsis,
             autoSize = MinimumScale(title.fontSize, ASK_TITLE_MINIMUM_SCALE),
         )
         Text(
@@ -1038,7 +1039,7 @@ private fun PosterForeground(
             val title = type.tracking(type.fixed(titleSize, FontWeight.Bold, FontDesign.Rounded), -titleSize * 0.035f)
             Text(
                 localized("peek.title"), Modifier.takesTaps().semantics { heading() },
-                color = colors.ink, style = title, textAlign = TextAlign.Center, maxLines = 2,
+                color = colors.ink, style = title, textAlign = TextAlign.Center, maxLines = 2, overflow = TextOverflow.Ellipsis,
                 autoSize = MinimumScale(title.fontSize, POSTER_TITLE_MINIMUM_SCALE),
             )
             Text(

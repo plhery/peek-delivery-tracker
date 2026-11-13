@@ -30,6 +30,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FirstOpenPing
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalFirstOpenPing
 import com.plhery.peekdeliverytracker.ui.deliveries.QuietButton
+import com.plhery.peekdeliverytracker.ui.deliveries.ShrinkingText
 import com.plhery.peekdeliverytracker.ui.settings.SettingsRow
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -43,13 +44,13 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * Words kept to one line by `.lineLimit(1).minimumScaleFactor(x)` on the iPhone: whole where they fit, shrunk to x
- * where they don't, and ending in "…" past that, as SwiftUI truncates them, rather than cut mid-letter at the edge.
+ * Words kept to their lines by `.lineLimit(n).minimumScaleFactor(x)` on the iPhone: whole where they fit, shrunk to x
+ * where they don't, and ending in "…" past that, as SwiftUI truncates them, rather than cut at the edge.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(qualifiers = PHONE)
-class OneLineEllipsisTest {
+class ShrinkThenEllipsisTest {
     @get:Rule
     val compose = createComposeRule()
 
@@ -89,8 +90,8 @@ class OneLineEllipsisTest {
         return layouts.single()
     }
 
-    /** Whole and at its size with room, then at [scale] of that size and ending in "…" when [narrow] wide. */
-    private fun assertShrinksThenEllipsizes(scale: Float, narrow: Dp, layout: () -> TextLayoutResult) {
+    /** Whole and at its size with room, then at [scale] of that size and its [lines] ending in "…" when [narrow] wide. */
+    private fun assertShrinksThenEllipsizes(scale: Float, narrow: Dp, lines: Int = 1, layout: () -> TextLayoutResult) {
         val wide = layout()
         assertFalse("Whole with room: ${wide.layoutInput.text}", wide.isLineEllipsized(0))
         assertFalse(wide.hasVisualOverflow)
@@ -98,9 +99,9 @@ class OneLineEllipsisTest {
         resize(narrow)
         val cut = layout()
         assertEquals(wide.layoutInput.text.text, cut.layoutInput.text.text)
-        assertEquals(1, cut.lineCount)
+        assertEquals(lines, cut.lineCount)
         assertLaidOutAt(wide.layoutInput.style.fontSize * scale, cut)
-        assertTrue("Ends in an ellipsis: ${cut.layoutInput.text}", cut.isLineEllipsized(0))
+        assertTrue("Ends in an ellipsis: ${cut.layoutInput.text}", cut.isLineEllipsized(lines - 1))
     }
 
     /** The list's quiet buttons side by side: their words shrink to 80 %, then end in "…" (FirstOpenView.quiet). */
@@ -129,6 +130,14 @@ class OneLineEllipsisTest {
             )
         }
         assertShrinksThenEllipsizes(0.25f, 24.dp) { checkNotNull(probed) }
+    }
+
+    /** At the accessibility sizes Add's button keeps to two lines, shrinking to 70 %, then ends in "…" (AddParcelView). */
+    @Test
+    fun addsButtonShrinksOnItsTwoLinesThenEndsInAnEllipsis() {
+        val title = localizer.text("app.addParcel")
+        show(fontScale = 2f) { ShrinkingText(title, PeekTheme.type.headline.sfLines(), PeekTheme.colors.onAccent, twoLines = true) }
+        assertShrinksThenEllipsizes(0.7f, 60.dp, lines = 2) { layout(title) }
     }
 
     /** The welcome's alert over the picture shrinks to 80 %, then ends in "…" (FirstOpenPing). */

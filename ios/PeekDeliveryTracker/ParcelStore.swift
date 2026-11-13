@@ -832,6 +832,9 @@ final class ParcelStore: ObservableObject {
         parcels = demo.list()
     }
 
+    /// Signed out, this iPhone's parcels whose saved copy is lost and still to be read again: Forget all forgets them too.
+    var unlistedDeviceParcels: Int { isGuest ? device.unlisted : 0 }
+
     /// Forgets every parcel followed on this iPhone without an account, here and on the service.
     func forgetDeviceParcels() async {
         guard isGuest else { return }

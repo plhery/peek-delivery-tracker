@@ -332,6 +332,10 @@ final class DeviceParcels {
 
     var isEmpty: Bool { entries.isEmpty }
 
+    /// This iPhone's own parcels kept by their key alone, their saved copy lost or unreadable: listed nowhere until
+    /// they are read again, and forgotten with the rest.
+    var unlisted: Int { keys.keys.filter { linkID in !entries.contains { $0.linkID == linkID } }.count }
+
     /// The parcels as the list shows them, under the names this device gave them.
     func list() -> [Parcel] { entries.map(Self.shown) }
 

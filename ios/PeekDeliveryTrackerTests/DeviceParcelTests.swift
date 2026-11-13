@@ -1160,6 +1160,7 @@ final class DeviceParcelTests: XCTestCase {
         let shown = answer("22222222222B", second, number: "TESTPARCEL456")
         let device = DeviceParcels(client: client(calls, read: { $0 == "22222222222B" ? shown : nil }), storage: storage)
         XCTAssertEqual(device.list().map(\.label), ["Lamp", "Shoes"])
+        XCTAssertEqual(device.unlisted, 1, "Forget all counts it")
         // Its key goes to an account like the others, before it is read again.
         XCTAssertEqual(device.claims.map(\.id), ["22222222222A", "22222222222C", "22222222222B"])
         XCTAssertEqual(device.claims.last, ClaimParcelLink(id: "22222222222B", key: key))
@@ -1168,6 +1169,7 @@ final class DeviceParcelTests: XCTestCase {
 
         XCTAssertEqual(calls.all, ["read 22222222222B k"], "Read again with its key, and nothing forgotten")
         XCTAssertEqual(device.list().map(\.id), [first, third, second])
+        XCTAssertEqual(device.unlisted, 0)
         XCTAssertEqual(storage.keys, keys)
     }
 
@@ -1312,12 +1314,41 @@ final class DeviceParcelTests: XCTestCase {
         storage.keys = ["22222222222A": key]
         let calls = Calls()
         let device = DeviceParcels(client: client(calls), storage: storage)
+        XCTAssertTrue(device.isEmpty)
+        XCTAssertEqual(device.unlisted, 1, "Nothing listed, one parcel to forget")
 
         await device.forgetAll()
 
         XCTAssertEqual(calls.all, ["forget 22222222222A"])
+        XCTAssertEqual(device.unlisted, 0)
         XCTAssertEqual(storage.keys, [:])
         XCTAssertEqual(storage.forgetting, [:])
+    }
+
+    /// Signed out, Settings offers Forget all for parcels kept by their key alone, and its question counts them.
+    func testSignedOutForgetAllCountsTheParcelsStillToBeReadAgain() async {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        PostcodeTestURLProtocol.handler = { _ in (404, Data()) }
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: storage)
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.showWelcome()
+
+        XCTAssertTrue(store.parcels.isEmpty)
+        XCTAssertEqual(store.unlistedDeviceParcels, 2)
+
+        await store.forgetDeviceParcels()
+
+        XCTAssertEqual(Set(calls.all), ["forget 22222222222A", "forget 22222222222B"])
+        XCTAssertEqual(store.unlistedDeviceParcels, 0)
     }
 
     func testARoundEndingLeavesAnotherUnderWayMarked() async throws {

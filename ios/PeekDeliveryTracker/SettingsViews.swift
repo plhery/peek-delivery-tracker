@@ -574,7 +574,7 @@ struct AccountView: View {
 
     /// "Forget this parcel?", or how many.
     private var forgetQuestion: String {
-        localizer.text("door.recents.forget.many", ["count": store.parcels.count])
+        localizer.text("door.recents.forget.many", ["count": store.parcels.count + store.unlistedDeviceParcels])
     }
 
     private var notificationSummary: String {
@@ -676,7 +676,8 @@ struct AccountView: View {
                 }
             }
         } else if store.isGuest {
-            if !store.parcels.isEmpty {
+            // Parcels whose saved copy is lost and still to be read again are this iPhone's too: Forget all forgets them.
+            if !store.parcels.isEmpty || store.unlistedDeviceParcels > 0 {
                 SettingsGroup {
                     Button { confirmingForget = true } label: {
                         SettingsRow(title: localizer.text("door.recents.forgetAll"))

@@ -156,7 +156,7 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(parcel.trackingNumbers.count, 1)
         XCTAssertEqual(parcel.displayedCarrier, .dhl)
         XCTAssertEqual(links.map(\.carrier), [.swissPost, .dhl])
-        XCTAssertEqual(links[0].url.host, "service.post.ch")
+        XCTAssertEqual(links[0].url.host, "www.post.ch")
         XCTAssertEqual(links[1].url.host, "www.dhl.de")
     }
 
@@ -1239,7 +1239,7 @@ final class CarrierCatalogTests: XCTestCase {
         ]
         let sites: [AppLanguage: String] = [.ptBR: "pt", .ru: "en", .zh: "en"]
         for language in AppLanguage.allCases {
-            for savedURL in [nil, "https://service.post.ch/ekp-web/ui/entry/search/RA123456785IR"] as [String?] {
+            for savedURL in [nil, "https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA123456785IR"] as [String?] {
                 parcel.trackingURL = savedURL
                 let link = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: language).first)
                 XCTAssertEqual(catalog.info(for: .internationalPost, language: language).displayName, names[language])
@@ -1256,7 +1256,7 @@ final class CarrierCatalogTests: XCTestCase {
         parcel.trackingURL = nil
         let swissPost = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .fr).first)
         XCTAssertEqual(swissPost.name, "Swiss Post")
-        XCTAssertEqual(swissPost.url.absoluteString, "https://service.post.ch/ekp-web/ui/entry/search/RA999999987CH?lang=fr")
+        XCTAssertEqual(swissPost.url.absoluteString, "https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA999999987CH&lang=fr")
 
         parcel.carrier = .dhl
         parcel.trackingNumber = "LF999999987DE"

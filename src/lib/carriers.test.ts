@@ -1670,7 +1670,7 @@ describe('supportsSwissPostHandoff', () => {
       originalCarrier: 'dhl', originalTrackingNumber: 'LF999999987DE',
     }, 'en');
     expect(links.map(({ carrier }) => carrier.id)).toEqual(['swiss-post', 'dhl']);
-    expect(links[0].url).toContain('https://service.post.ch/');
+    expect(links[0].url).toContain('https://www.post.ch/swisspost-tracking?');
     expect(links[1].url).toContain('dhl.de');
   });
 
@@ -1696,7 +1696,7 @@ describe('supportsSwissPostHandoff', () => {
     expect(links.map(({ carrier, role }) => [carrier.id, role])).toEqual([
       ['swiss-post', 'active'], ['gls-de', 'history'],
     ]);
-    expect(links[0].url).toContain('993412345699999980?lang=fr');
+    expect(links[0].url).toContain('formattedParcelCodes=993412345699999980&lang=fr');
     expect(links[1].url).toBe(parcel.originalTrackingUrl);
   });
 
@@ -1728,11 +1728,11 @@ describe('supportsSwissPostHandoff', () => {
     const [link] = parcelTrackingLinks({
       carrier: 'swiss-post',
       trackingNumber: '993412345699999980',
-      trackingUrl: 'https://service.post.ch/ekp-web/ui/entry/search/993412345699999980?lang=de',
+      trackingUrl: 'https://www.post.ch/swisspost-tracking?formattedParcelCodes=993412345699999980&lang=de',
     }, 'fr');
 
     expect(link.url).toBe(
-      'https://service.post.ch/ekp-web/ui/entry/search/993412345699999980?lang=fr',
+      'https://www.post.ch/swisspost-tracking?formattedParcelCodes=993412345699999980&lang=fr',
     );
   });
 });
@@ -1757,7 +1757,7 @@ describe('unknown postal carrier links', () => {
     ['pt', 'Operador postal desconhecido'],
     ['pl', 'Nieznany operator pocztowy'],
   ])('names the fallback and opens 17TRACK in %s', (locale, name) => {
-    for (const trackingUrl of [undefined, 'https://service.post.ch/ekp-web/ui/entry/search/RA123456785IR']) {
+    for (const trackingUrl of [undefined, 'https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA123456785IR']) {
       const [link] = parcelTrackingLinks({
         carrier: 'intl-post', trackingNumber: 'RA123456785IR', trackingUrl,
       }, locale);
@@ -1784,7 +1784,7 @@ describe('unknown postal carrier links', () => {
       carrier: 'swiss-post', trackingNumber: 'RA999999987CH',
     }, 'fr');
     expect(swissPost.name).toBe('Swiss Post');
-    expect(swissPost.url).toBe('https://service.post.ch/ekp-web/ui/entry/search/RA999999987CH?lang=fr');
+    expect(swissPost.url).toBe('https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA999999987CH&lang=fr');
   });
 });
 
@@ -2014,7 +2014,7 @@ describe('parseTrackingInput', () => {
 describe('carrier metadata', () => {
   it('links Swiss Post deliveries to the Post tracking service', () => {
     expect(CARRIERS['swiss-post'].trackingUrl?.('996013175411004730')).toBe(
-      'https://service.post.ch/ekp-web/ui/entry/search/996013175411004730',
+      'https://www.post.ch/swisspost-tracking?formattedParcelCodes=996013175411004730',
     );
   });
 

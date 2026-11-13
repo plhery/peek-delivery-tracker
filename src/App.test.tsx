@@ -120,7 +120,7 @@ describe('App', () => {
     const [sample] = await repo.list();
     const parcel: ParcelWithEvents = {
       ...sample, carrier: 'intl-post', trackingNumber: 'RA123436785IR',
-      trackingUrl: 'https://service.post.ch/ekp-web/ui/entry/search/RA123436785IR',
+      trackingUrl: 'https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA123436785IR',
       label: 'Postal shipment', syncStatus: 'pending', events: [], archivedAt: undefined,
       syncError: undefined,
     };
@@ -1368,7 +1368,7 @@ describe('App', () => {
       .toHaveAttribute('href', expect.stringContaining('global.cainiao.com'));
     expect(within(detail).queryByText('Active source')).not.toBeInTheDocument();
     expect(within(detail).getByRole('link', { name: /open the swiss post website.*not ready yet/i }))
-      .toHaveAttribute('href', expect.stringContaining('service.post.ch'));
+      .toHaveAttribute('href', expect.stringContaining('www.post.ch/swisspost-tracking'));
     // One number and one carrier doing the tracking: the card keeps a single mark.
     expect(within(detail).queryByText(/^Delivery with/)).not.toBeInTheDocument();
   });

@@ -240,7 +240,7 @@ class CarrierCatalogTests {
         assertEquals(1, parcel.trackingNumbers.size)
         assertEquals(CarrierId.Dhl, parcel.displayedCarrier)
         assertEquals(listOf(CarrierId.SwissPost, CarrierId.Dhl), links.map { it.carrier })
-        assertEquals("service.post.ch", host(links[0].url))
+        assertEquals("www.post.ch", host(links[0].url))
         assertEquals("www.dhl.de", host(links[1].url))
     }
 
@@ -1343,7 +1343,7 @@ class CarrierCatalogTests {
         )
         val sites = mapOf(AppLanguage.PtBr to "pt", AppLanguage.Ru to "en", AppLanguage.Zh to "en")
         for (language in AppLanguage.entries) {
-            for (savedUrl in listOf(null, "https://service.post.ch/ekp-web/ui/entry/search/RA123456785IR")) {
+            for (savedUrl in listOf(null, "https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA123456785IR")) {
                 parcel = parcel.copy(trackingUrl = savedUrl)
                 val link = catalog.trackingLinks(parcel, language).first()
                 assertEquals(names[language], catalog.info(CarrierId.InternationalPost, language = language).displayName)
@@ -1358,7 +1358,7 @@ class CarrierCatalogTests {
         parcel = parcel.copy(carrier = CarrierId.SwissPost, trackingNumber = "RA999999987CH", trackingUrl = null)
         val swissPost = catalog.trackingLinks(parcel, AppLanguage.Fr).first()
         assertEquals("Swiss Post", swissPost.name)
-        assertEquals("https://service.post.ch/ekp-web/ui/entry/search/RA999999987CH?lang=fr", swissPost.url)
+        assertEquals("https://www.post.ch/swisspost-tracking?formattedParcelCodes=RA999999987CH&lang=fr", swissPost.url)
 
         parcel = parcel.copy(
             carrier = CarrierId.Dhl,

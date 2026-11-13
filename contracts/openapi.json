@@ -15,13 +15,23 @@
         "mode": "automatic",
         "adapter": "swiss-post"
       },
-      "trackingUrlTemplate": "https://service.post.ch/ekp-web/ui/entry/search/{trackingNumber}",
+      "trackingUrlTemplate": "https://www.post.ch/swisspost-tracking?formattedParcelCodes={trackingNumber}",
       "linkRules": [
         {
           "domains": [
             "service.post.ch"
           ],
-          "path": "/entry/search/([^/?#]+)"
+          "path": "/(?:entry/search|external/view)/([^/?#]+)"
+        },
+        {
+          "domains": [
+            "www.post.ch",
+            "mys.post.ch"
+          ],
+          "pathPattern": "^/(?:swisspost-tracking|my-consignments/deeplink-search)/?$",
+          "params": [
+            "formattedParcelCodes"
+          ]
         }
       ],
       "detectionRules": [

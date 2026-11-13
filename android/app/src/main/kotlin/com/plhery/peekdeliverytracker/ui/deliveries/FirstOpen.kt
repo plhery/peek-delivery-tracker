@@ -88,6 +88,7 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.Dp
@@ -709,8 +710,8 @@ private fun stepSize() = SizeTransform(clip = false) { _, _ -> Motion.easeInOut(
 
 /**
  * `FirstOpenPing`: what an alert would say, a bell 9 points tall and the words in caption medium on one line, shrinking
- * to 80 % rather than be cut, both in the carrier's ink on a capsule of it at 10 %, 26 tall. It belongs to the picture:
- * TalkBack doesn't read it.
+ * to 80 % rather than be cut and ending in an ellipsis past that, both in the carrier's ink on a capsule of it at 10 %,
+ * 26 tall. It belongs to the picture: TalkBack doesn't read it.
  */
 @Composable
 private fun FirstOpenPing(detail: String, identity: CarrierVisualIdentity, modifier: Modifier = Modifier) {
@@ -730,7 +731,8 @@ private fun FirstOpenPing(detail: String, identity: CarrierVisualIdentity, modif
         val probe = LocalFirstOpenPing.current
         Text(
             detail, Modifier.weight(1f, fill = false), color = ink, style = style, maxLines = 1, softWrap = false,
-            autoSize = MinimumScale(style.fontSize, PING_MINIMUM_SCALE), onTextLayout = { probe?.invoke(it) },
+            overflow = TextOverflow.Ellipsis, autoSize = MinimumScale(style.fontSize, PING_MINIMUM_SCALE),
+            onTextLayout = { probe?.invoke(it) },
         )
     }
 }

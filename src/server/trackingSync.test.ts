@@ -9830,6 +9830,27 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     await expect(lookups(4 * 60_000)).resolves.toBe(2);
   });
 
+  it('checks first the parcels a run that gave way left, so a run that keeps giving way reaches the end of its list', async () => {
+    vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
+    const parcel = (id: string, values: JsonObject = {}): JsonObject => ({ id, user_id: id, one_off: false, carrier: 'swiss-post',
+      current_stage: 'in_transit', tracking_number: `TEST${id}`, created_at: '2026-09-03T09:00:00Z',
+      last_synced_at: '2026-09-04T05:00:00Z', sync_status: 'ok', archived_at: null, ...values });
+    // Someone reads the first lookup; nobody has read the second in the last hour, so it comes last.
+    const lookups = [parcel('read', { user_id: null, one_off: true }), parcel('unread', { user_id: null, one_off: true })];
+    const client = fakeClient();
+    client.listActivePackages.mockResolvedValueOnce([parcel('a'), parcel('b')])
+      // The second run finds another account's parcel due, and the first one checked.
+      .mockResolvedValueOnce([parcel('b'), parcel('c')]);
+    client.listFollowedOneOffPackages.mockResolvedValue(lookups);
+    client.listUnwatchedPackageIds.mockResolvedValue(['unread']);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-04T10:00:00Z'));
+    client.syncJobQueuedAhead.mockResolvedValueOnce(-5);
+    await expect(service.sync()).resolves.toMatchObject({ checked: 1, gave_way: true });
+    await expect(service.sync()).resolves.toMatchObject({ checked: 4 });
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['a', 'b', 'read', 'unread', 'c']);
+  });
+
   it('skips a recheck when another check ran since the run listed it, or it cannot tell', async () => {
     vi.stubEnv('TRACKING_ENABLE_UNSEEN_RECHECKS', 'true');
     const parcel = unseen('unseen', { last_synced_at: '2026-09-02T10:00:15Z' });

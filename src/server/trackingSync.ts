@@ -582,6 +582,11 @@ export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
   return parcels.map((parcel) => refreshLimit(parcel) !== undefined ? queues.get(carrier(parcel))!.shift()! : parcel);
 }
 
+/** The parcels whose id is in `left` first, each part in its order. */
+function leftFirst(parcels: JsonObject[], left: ReadonlySet<string>): JsonObject[] {
+  return [...parcels.filter((parcel) => left.has(String(parcel.id))), ...parcels.filter((parcel) => !left.has(String(parcel.id)))];
+}
+
 /**
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
@@ -1573,8 +1578,9 @@ export class TrackingSyncService {
   /**
    * The lookups of the scheduled run that last stopped for another check, and when its time is up
    * (performance.now()): the run queued again, when this process runs it, takes them over until then.
+   * And the parcels it left (`left`, by id), which that run checks first if they are still due.
    */
-  #gaveWay: { lookups: SharedLookups; until: number } | null = null;
+  #gaveWay: { lookups: SharedLookups; until: number; left: ReadonlySet<string> } | null = null;
 
   constructor(
     readonly client: SupabaseServiceClient,
@@ -1605,10 +1611,13 @@ export class TrackingSyncService {
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
       const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks],
         MAX_PACKAGES_PER_OWNER_PER_SYNC);
-      const parcels = urgentFirst([...shares.filter((parcel) => !rechecks.has(parcel)),
+      // The parcels a run that stopped for another check left go first: otherwise a run that keeps
+      // stopping starts over with the accounts each time, and the lookups at the end of its list wait.
+      const left = earlier?.left ?? new Set<string>();
+      const parcels = urgentFirst(leftFirst([...shares.filter((parcel) => !rechecks.has(parcel)),
         ...await this.oneOffPackages(due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
-          (parcel) => !unwatched.has(String(parcel.id)), context.signal),
-        ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], now);
+          (parcel) => !unwatched.has(String(parcel.id)), left, context.signal),
+        ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], left), now);
       // Copies of one number, in several accounts or followed without one, share their lookups, with
       // those of the run that stopped for another check before this one, while its time lasts.
       const lookups = new SharedLookups(parcels, earlier && performance.now() < earlier.until ? earlier : undefined);
@@ -1631,7 +1640,8 @@ export class TrackingSyncService {
           logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: parcels.length - index, to });
           recordScheduledRunGaveWay(to);
           summary.gave_way = true;
-          this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS };
+          this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS,
+            left: new Set(parcels.slice(index).map((parcel) => String(parcel.id))) };
           break;
         }
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
@@ -1793,6 +1803,7 @@ export class TrackingSyncService {
    * cannot be read, the others are still checked. The ones someone waits for
    * (`watched`: an alert on, or a link read in the last hour) go first, up to
    * `limit`; the others take what is left, and `UNWATCHED_ONE_OFF_SHARE` at least.
+   * Among each, the ones the run that stopped for another check `left` go first.
    */
   private async oneOffPackages(
     followedDue: (parcel: JsonObject, at: Date) => boolean,
@@ -1800,6 +1811,7 @@ export class TrackingSyncService {
     now: Date,
     limit: number,
     watched: (parcel: JsonObject) => boolean,
+    left: ReadonlySet<string>,
     signal?: AbortSignal,
   ): Promise<JsonObject[]> {
     const failed = new Set<string>();
@@ -1827,8 +1839,8 @@ export class TrackingSyncService {
     recordScheduledBacklog('lookup', followedRead ? followedNow.length : null, longestOverdueMs(followedNow, followedDue, now));
     recordScheduledBacklog('unfollowed', followedRead && !failed.has('list_unfiled_one_off_packages') ? unfollowed.size : null,
       longestOverdueMs([...unfollowed], unfollowedDue, now));
-    const waited = due.filter(watched).slice(0, limit);
-    const others = due.filter((parcel) => !watched(parcel));
+    const waited = leftFirst(due.filter(watched), left).slice(0, limit);
+    const others = leftFirst(due.filter((parcel) => !watched(parcel)), left);
     const taken = [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];
     // The unfiled list comes without the stored rows, which the cadence of a lookup nobody follows
     // does not read: the ones taken are read again with them, and checked if still due.

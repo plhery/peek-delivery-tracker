@@ -382,7 +382,8 @@ An account's or a lookup's check queued meanwhile, such as a refresh, a new parc
 opened, goes ahead of the run: once the run has checked a parcel, it stops between checks, leaves its upkeep (archiving,
 forgetting, usage counts) to the next run, and is queued again behind that check. An account's check goes ahead of a
 lookup's. When the same server runs the run queued again, it takes over the stopped run's answers and the carriers that
-run found down until the stopped run's 4 minutes are up.
+run found down until the stopped run's 4 minutes are up, and checks first the parcels the stopped run left that are still
+due, before the ones due since: a run that keeps stopping still reaches the lookups at the end of its list.
 
 A check that nothing answered stores its next check time within the hour. When every source a
 scheduled check may ask is still waiting its turn past that time (the carrier asked first, the

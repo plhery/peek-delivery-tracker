@@ -1875,6 +1875,15 @@ describe('TrackingSyncService', () => {
       await usps('2026-11-10T12:00:00Z', dayGiven('2026-11-09T19:30:00-08:00'));
       expect((await usps('2026-11-11T07:00:00Z', abroad('2026-11-09T19:30:00-08:00'))).expected_delivery).toBe('2026-11-10');
     });
+
+    it('passes on the filed carrier\'s clock after an earlier leg answered directly last', async () => {
+      // AliExpress's leg before DHL's names no clock in the catalog; its newest scan is at +08:00.
+      const relayed = answer('in_transit', {}, { time: '2026-11-09T19:30:00+08:00', description: 'Departed facility', stage: 'in_transit' });
+      const leg = parcel({ created_at: '2026-11-09T09:00:00Z', expected_delivery: '2026-11-10',
+        carrier_data: { active_tracking_carrier: 'aliexpress', last_update: '2026-11-09T19:30:00+08:00' } });
+      // 18:00 on the 10th in Germany, already the 11th at +08:00.
+      expect((await leg('2026-11-10T17:00:00Z', new Error('down'), relayed)).expected_delivery).toBe('2026-11-10');
+    });
   });
 
   describe('a return after the delivery', () => {

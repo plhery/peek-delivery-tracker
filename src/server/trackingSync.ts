@@ -481,11 +481,12 @@ function instant(value: unknown): number | null {
 
 /**
  * The clock a carrier's expected day and slot are on: the zone its answer declares or the catalog names for the carrier
- * now tracking the parcel, else the carrier's clock (`carrierClock`). The newest scan's offset alone may be the origin's.
+ * delivering the parcel (the one a handoff moved it to, else the one it is filed under, not an earlier leg that answered
+ * last), else the carrier's clock (`carrierClock`). The newest scan's offset alone may be the origin's.
  */
 function deliveryClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const declared = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  const declared = resultTimezone(handedTo(parcel) ?? String(parcel.carrier), data as CarrierResult);
   return declared !== 'UTC' ? declared : carrierClock(parcel);
 }
 

@@ -9,6 +9,7 @@ import { useSheetDialog } from '../lib/modal';
 import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
 import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
 import { followInPlace } from '../peek/landing/links';
+import { SwitchRow } from '../peek/parcel/Sheet';
 import type { SignInMethods } from '../peek/session';
 import { AddByEmailPage, useAddByEmail } from './AddByEmail';
 import { AssistantsPage, useAssistants, type TokenDraft } from './Assistants';
@@ -37,7 +38,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   apiAuth?: ApiAuth;
   signIn?: SignInMethods;
 }) {
-  const { t } = useI18n();
+  const { t, use24HourTime, setUse24HourTime } = useI18n();
   const [appearance, setAppearance] = useAppearance();
   const initial = email?.trim().charAt(0).toUpperCase();
   const [open, setOpen] = useState(false);
@@ -134,7 +135,10 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
           <section className="settings-group" aria-labelledby="settings-preferences"><h3 className="settings-group__title" id="settings-preferences">{t('settings.preferences')}</h3>
             <div className="settings-box"><fieldset className="settings-appearance"><legend>{t('native.appearance.title')}</legend>
               <div>{(['system', 'light', 'dark'] as Appearance[]).map((option) => <button type="button" key={option} aria-pressed={appearance === option} onClick={() => { setAppearance(option); trackAction('appearance-change'); }}><span className={`settings-mini-screen settings-mini-screen--${option}`} aria-hidden="true"><i /><i /></span>{t(`native.appearance.${option}`)}</button>)}</div>
-            </fieldset><LanguageControl className="language-control--account" /></div>
+            </fieldset>
+              <LanguageControl className="language-control--account" />
+              <SwitchRow title={t('settings.use24HourTime')} checked={use24HourTime} onChange={setUse24HourTime} />
+            </div>
           </section>
           <div className="settings-box"><button ref={accountButton} className="settings-row" type="button" onClick={() => navigate('account')}>{accountTitle}<span className="settings-chevron" aria-hidden="true">›</span></button>
             {onOpenLanding && <a className="settings-row" href={LANDING_PATH} onClick={(event) => followInPlace(event, onOpenLanding)}>{t('app.homePage')}<span className="settings-value">{window.location.host}</span><span className="settings-chevron" aria-hidden="true">›</span></a>}</div>

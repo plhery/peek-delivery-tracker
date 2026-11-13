@@ -153,9 +153,15 @@ export function dayAndTime(day: string, time: string, languageTag: string): stri
   return new Intl.Locale(languageTag).language === 'zh' ? `${day} ${time}` : `${day}, ${time}`;
 }
 
-export function localizedCalendarDateTime(date: Date, languageTag: string): string {
-  const time = new Intl.DateTimeFormat(languageTag, {
-    hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+export function localizedClockTime(date: Date, languageTag: string, use24HourTime = true, timeZone?: string): string {
+  return new Intl.DateTimeFormat(languageTag, {
+    hour: use24HourTime ? '2-digit' : 'numeric',
+    minute: '2-digit',
+    hourCycle: use24HourTime ? 'h23' : 'h12',
+    timeZone,
   }).format(date);
-  return dayAndTime(localizedCalendarDate(date, languageTag), time, languageTag);
+}
+
+export function localizedCalendarDateTime(date: Date, languageTag: string, use24HourTime = true): string {
+  return dayAndTime(localizedCalendarDate(date, languageTag), localizedClockTime(date, languageTag, use24HourTime), languageTag);
 }

@@ -22,10 +22,10 @@ function shortNumber(number: string): string {
 }
 
 function Row({ recent, checked, onChange }: { recent: RecentParcel; checked: boolean; onChange: (checked: boolean) => void }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const { parcel } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
-  const detail = parcelDetail(parcel, { t, languageTag });
+  const detail = parcelDetail(parcel, { t, languageTag, use24HourTime });
   return <label className="peekp-bring__row" style={carrierBrand(carrier).style}>
     <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
     <CarrierTruck carrier={carrier} />

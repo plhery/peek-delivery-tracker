@@ -49,11 +49,11 @@ const DOOR_CARDS: CardList = { card: '[data-parcel-link]', id: 'data-parcel-link
 
 /** A card of the list, with the parcel's route small at its end once a scan has a place. `arrived` marks one whose parcel has just been delivered. */
 function DeviceParcel({ recent, arrived = false }: { recent: RecentParcel; arrived?: boolean }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const { parcel } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
   const estimate = parcelDeliveryEstimate(parcel);
-  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : localizedParcelCompletionDate(parcel, languageTag, t);
+  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
   const title = useParcelTitle(recent);
   const { placed, route } = useParcelRoute(parcel, languageTag);
   return <a className={`door-parcel${placed ? ' door-parcel--route' : ''}`} style={carrierBrand(carrier).style} href={parcelLinkPath(recent.id)} data-parcel-link={recent.id} data-arrived={arrived ? '' : undefined} onClick={openOnClick(recent.id)}>
@@ -81,7 +81,7 @@ const LEAD_FLOOR = 150;
  * the carrier's colours with Pip beside the parcel.
  */
 function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived?: boolean }) {
-  const { t, locale, languageTag } = useI18n();
+  const { t, locale, languageTag, use24HourTime } = useI18n();
   const now = useNow();
   const beside = useMedia(BESIDE);
   const [time] = useState(() => new Date());
@@ -90,7 +90,7 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
   const stage = parcelStage(parcel);
   const title = useParcelTitle(recent);
   const { route } = useParcelRoute(parcel, languageTag);
-  const wording = { t, languageTag, now };
+  const wording = { t, languageTag, now, use24HourTime };
   const freshness = parcelFreshness({ parcel, checking: false, offline: false, trouble: false, seenAt: recent.lastSeenAt }, wording);
   // A parcel waiting to be collected says where.
   const detail = parcelDetail(parcel, wording) ?? (stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint)?.name : null);

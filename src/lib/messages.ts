@@ -1,7 +1,7 @@
 import trackingMessages from '../../shared/tracking-messages.json';
 import type en from '../../shared/locales/en.json';
 import type { Stage, TrackingEvent } from '../types';
-import { dayAndTime, localizedCalendarDate, localizedCalendarDateTime, scanDate } from './format';
+import { dayAndTime, localizedCalendarDate, localizedCalendarDateTime, localizedClockTime, scanDate } from './format';
 import type { Locale } from './locale';
 
 /**
@@ -95,16 +95,26 @@ export function localizedDeliveryDate(
   return localizedCalendarDate(date, languageTag);
 }
 
+export function deliveryWallClock(value: string, languageTag: string, use24HourTime: boolean): string {
+  if (use24HourTime) return value;
+  // A carrier's wall clock has no zone. Format it in UTC so its hours survive local clock changes.
+  const date = new Date(`2000-01-01T${value}:00Z`);
+  return Number.isNaN(date.getTime()) ? value : localizedClockTime(date, languageTag, false, 'UTC');
+}
+
 export function localizedExpectedDelivery(
   value: string,
   t: Translate,
   languageTag: string,
   now: number = Date.now(),
+  use24HourTime = true,
 ): string {
   const windowMatch = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(value.trim());
   if (windowMatch) {
-    const date = localizedExpectedDelivery(windowMatch[1], t, languageTag, now);
-    return dayAndTime(date, `${windowMatch[2]}${windowMatch[3] ? `–${windowMatch[3]}` : ''}`, languageTag);
+    const date = localizedExpectedDelivery(windowMatch[1], t, languageTag, now, use24HourTime);
+    const start = deliveryWallClock(windowMatch[2], languageTag, use24HourTime);
+    const end = windowMatch[3] ? `–${deliveryWallClock(windowMatch[3], languageTag, use24HourTime)}` : '';
+    return dayAndTime(date, start + end, languageTag);
   }
   const expected = /^\d{4}-\d{2}-\d{2}$/.test(value)
     ? new Date(`${value}T00:00:00`)
@@ -112,7 +122,7 @@ export function localizedExpectedDelivery(
   if (Number.isNaN(expected.getTime())) return value;
   const day = localizedDeliveryDate(expected, t, languageTag, now);
   if (/T\d{2}:\d{2}/.test(value)) {
-    const time = new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(expected);
+    const time = localizedClockTime(expected, languageTag, use24HourTime);
     return dayAndTime(day, time, languageTag);
   }
   return day;
@@ -181,31 +191,31 @@ export function deliveryWindowOpen(from: string | undefined, to: string, now = D
  * A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day has
  * passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
  */
-export function localizedDeliveryWindow(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now()): string {
-  const end = localizedExpectedDelivery(to, t, languageTag, now);
+export function localizedDeliveryWindow(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now(), use24HourTime = true): string {
+  const end = localizedExpectedDelivery(to, t, languageTag, now, use24HourTime);
   if (!from || !Number.isFinite(Date.parse(from)) || !Number.isFinite(Date.parse(to)) || Date.parse(from) >= Date.parse(to)) return end;
   const timed = (value: string) => /T\d{2}:\d{2}/.test(value);
   const [first, last] = [new Date(from), new Date(to)];
   if (timed(from) && timed(to) && first.toDateString() === last.toDateString()) {
-    const clock = new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
-    return dayAndTime(localizedDeliveryDate(first, t, languageTag, now), `${clock.format(first)}–${clock.format(last)}`, languageTag);
+    const times = [first, last].map((date) => localizedClockTime(date, languageTag, use24HourTime));
+    return dayAndTime(localizedDeliveryDate(first, t, languageTag, now), times.join('–'), languageTag);
   }
   const days = windowDays(from, to);
   if (days && days.first < startOfToday(now)) {
-    const ending = timed(to) ? localizedCalendarDateTime(last, languageTag) : localizedCalendarDate(days.last, languageTag);
+    const ending = timed(to) ? localizedCalendarDateTime(last, languageTag, use24HourTime) : localizedCalendarDate(days.last, languageTag);
     return `${localizedCalendarDate(days.first, languageTag)} – ${ending}`;
   }
-  return `${localizedExpectedDelivery(from, t, languageTag, now)} – ${end}`;
+  return `${localizedExpectedDelivery(from, t, languageTag, now, use24HourTime)} – ${end}`;
 }
 
 /**
  * An estimate as short as a card writes it. A window of several days reads whole until it begins, then by the day it
  * ends, since the parcel may come any day until then: "by Fri 6 Nov". The parcel's page gives the whole window.
  */
-export function localizedDeliveryEstimate(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now()): string {
+export function localizedDeliveryEstimate(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now(), use24HourTime = true): string {
   const days = windowDays(from, to);
   const today = startOfToday(now);
-  if (!days || days.first > today || days.last < today) return localizedDeliveryWindow(from, to, t, languageTag, now);
+  if (!days || days.first > today || days.last < today) return localizedDeliveryWindow(from, to, t, languageTag, now, use24HourTime);
   if (days.last.getTime() === today.getTime()) return t('time.today');
   const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
   return days.last.getTime() === tomorrow.getTime() ? t('parcel.byTomorrow')

@@ -1502,6 +1502,44 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(makeParcel(id: id).awaitingHandover(now: now))
     }
 
+    @MainActor func testClockPreferencePersistsAndFormatsDeliveryWindows() throws {
+        let suite = "clock-preference-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        let sharedSuite = "\(suite).shared"
+        let shared = try XCTUnwrap(UserDefaults(suiteName: sharedSuite))
+        defer {
+            defaults.removePersistentDomain(forName: suite)
+            shared.removePersistentDomain(forName: sharedSuite)
+        }
+        let localizer = Localizer(defaults: defaults, sharedClockDefaults: shared)
+        let midnight = Date(timeIntervalSince1970: 0)
+        let noon = midnight.addingTimeInterval(12 * 3_600)
+        let day = "2026-11-12"
+        let originalDay = localizer.expectedDelivery(day)
+        let window = "\(day) 11:30–15:30"
+        let originalWindow = localizer.expectedDelivery(window)
+
+        XCTAssertTrue(localizer.use24HourTime)
+        XCTAssertTrue(shared.bool(forKey: DeviceClock.preferenceKey))
+        XCTAssertEqual(localizer.clockTime(midnight, in: .gmt), "00:00")
+        XCTAssertTrue(originalWindow.hasSuffix("11:30–15:30"))
+
+        localizer.use24HourTime = false
+        XCTAssertFalse(shared.bool(forKey: DeviceClock.preferenceKey))
+        shared.removeObject(forKey: DeviceClock.preferenceKey)
+        let reopened = Localizer(defaults: defaults, sharedClockDefaults: shared)
+        XCTAssertEqual(shared.object(forKey: DeviceClock.preferenceKey) as? Bool, false)
+        XCTAssertFalse(reopened.use24HourTime)
+        let morning = reopened.clockTime(midnight, in: .gmt)
+        let afternoon = reopened.clockTime(noon, in: .gmt)
+        XCTAssertTrue(morning.contains("12:00"))
+        XCTAssertTrue(afternoon.contains("12:00"))
+        XCTAssertNotEqual(morning, afternoon)
+        XCTAssertFalse(reopened.expectedDelivery(window).contains("15:30"))
+        XCTAssertTrue(reopened.expectedDelivery("\(day) 23:00–24:00").hasSuffix("–" + morning))
+        XCTAssertEqual(reopened.expectedDelivery(day), originalDay)
+    }
+
     func testScheduledDeliveryMatchesWebApp() {
         let id = UUID()
         var delivered = makeParcel(id: id, events: [event(id, .delivered, "2026-08-08T12:00:00Z")])

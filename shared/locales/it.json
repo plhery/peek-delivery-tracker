@@ -879,6 +879,7 @@
   "detail.updateCount.one": "1 aggiornamento",
   "detail.updateCount.many": "{{count}} aggiornamenti",
   "settings.title": "Impostazioni",
+  "settings.use24HourTime": "Formato 24 ore",
   "settings.preferences": "Preferenze",
   "settings.accountData": "Account e dati",
   "settings.demoData": "Demo e dati",

@@ -200,7 +200,15 @@ class Localizer(
     language: AppLanguage,
     /** Where the copy names the device, a variant such as `ipad` replaces the key when it has one. */
     private val variant: String? = null,
+    use24HourTime: Boolean = true,
 ) {
+    private val clockState = MutableStateFlow(use24HourTime)
+    val use24HourTimeFlow: StateFlow<Boolean> = clockState.asStateFlow()
+
+    var use24HourTime: Boolean
+        get() = clockState.value
+        set(value) { clockState.value = value }
+
     private val languageState = MutableStateFlow(language)
 
     /** The language as it changes, for the screens and for saving it. */
@@ -365,14 +373,26 @@ class Localizer(
      */
     private fun fields(date: Instant): FoundationDates.DateFields = FoundationDates.dateFields(date, ZoneId.systemDefault())
 
-    /**
-     * Hours and minutes in the app language, as event rows show them: "HH:mm", in ASCII digits in every language. The
-     * formatter keeps the language's own calendar, which writes nothing for a date ICU's calendar does not hold.
-     */
-    fun clockTime(date: Instant): String {
+    /** Hours and minutes in the app language, as event rows show them. */
+    fun clockTime(date: Instant, timeZone: ZoneId = ZoneId.systemDefault()): String {
         if (!FoundationDates.calendarHolds(date)) return ""
-        val fields = fields(date)
-        return "${twoDigits(fields.hour)}:${twoDigits(fields.minute)}"
+        val fields = FoundationDates.dateFields(date, timeZone)
+        return clockTime(fields.hour, fields.minute)
+    }
+
+    private fun clockTime(hour: Int, minute: Int): String {
+        if (use24HourTime) return "${twoDigits(hour)}:${twoDigits(minute)}"
+        val time = "${(hour + 11) % 12 + 1}:${twoDigits(minute)}"
+        val period = FormatData.language(language).dayPeriods[if (hour < 12) 0 else 1]
+        return if (language == AppLanguage.Zh) "$period$time" else "$time $period"
+    }
+
+    private fun deliveryWallClock(value: String): String {
+        if (use24HourTime) return value
+        val hour = value.take(2).toInt()
+        val minute = value.takeLast(2).toInt()
+        if (hour == 24 && minute == 0) return clockTime(0, 0)
+        return if (hour < 24 && minute < 60) clockTime(hour, minute) else value
     }
 
     /**
@@ -390,8 +410,8 @@ class Localizer(
         val match = deliveryWindowPattern?.matcher(value)
         if (match != null && match.find()) {
             val day = expectedDelivery(match.group(1), now)
-            var window = match.group(2)
-            match.group(3)?.let { window += "–$it" }
+            var window = deliveryWallClock(match.group(2))
+            match.group(3)?.let { window += "–${deliveryWallClock(it)}" }
             return dayAndTime(day, window)
         }
 
@@ -430,14 +450,10 @@ class Localizer(
         return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month" + if (withYear) " ${fields.yearOfEra}" else ""
     }
 
-    /**
-     * A date and its time as `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes them in the app language,
-     * in the phone's zone: "Oct 30, 2026 at 3:05 PM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", in the
-     * iPhone's pattern and names (FormatData.kt), not the phone's CLDR.
-     */
     fun abbreviatedDateTime(date: Instant): String {
         val format = FormatData.language(language)
-        return foundationPattern(format.dateTime, fields(date), format)
+        val datePattern = format.dateTime.substringBeforeLast(if (language == AppLanguage.En) "h:mm" else "H:mm")
+        return foundationPattern(datePattern, fields(date), format) + clockTime(date)
     }
 
     fun dateTime(value: String): String {

@@ -68,6 +68,7 @@ import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults.Companion.USE_12_HOUR_TIME
 import com.plhery.peekdeliverytracker.platform.PushTokens
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
@@ -152,7 +153,7 @@ class AppContainer(
      * change ([deviceLanguagesChanged]). Where the copy names the iPhone, its `.android` variant names this device and
      * Android's settings, as an iPad reads `.ipad`.
      */
-    val localizer = Localizer(deviceLanguage(), variant = "android")
+    val localizer = Localizer(deviceLanguage(), variant = "android", use24HourTime = !defaults.bool(USE_12_HOUR_TIME))
 
     /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
     private var followed: AppLanguage? = null
@@ -438,6 +439,14 @@ class AppContainer(
             combine(identity, localizer.languageFlow) { _, language -> language }.collectLatest { session.saveEmailLanguage(it) }
         }
         scope.launch { localizer.languageFlow.drop(1).collect(::languageChanged) }
+        scope.launch {
+            localizer.use24HourTimeFlow.collect { enabled ->
+                if (defaults.bool(USE_12_HOUR_TIME) == enabled) {
+                    defaults.set(!enabled, forKey = USE_12_HOUR_TIME)
+                    parcels.refreshDeliverySurfaces()
+                }
+            }
+        }
         context.registerComponentCallbacks(object : ComponentCallbacks {
             override fun onConfigurationChanged(newConfig: Configuration) = deviceLanguagesChanged()
 

@@ -879,6 +879,7 @@
   "detail.updateCount.one": "{{count}} обновление",
   "detail.updateCount.many": "{{count}} обновлений",
   "settings.title": "Настройки",
+  "settings.use24HourTime": "24 часовой формат",
   "settings.preferences": "Параметры",
   "settings.accountData": "Аккаунт и данные",
   "settings.demoData": "Демо и данные",

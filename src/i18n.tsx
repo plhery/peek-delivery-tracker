@@ -30,8 +30,19 @@ export {
 export type { MessageKey, Messages, Translate };
 
 const STORAGE_KEY = 'deliveryTrackerLocale';
+const CLOCK_STORAGE_KEY = 'deliveryTrackerUse24HourTime';
 
 import en from '../shared/locales/en.json';
+
+async function savePushClockPreference(use24HourTime: boolean) {
+  try {
+    if (!window.caches) return;
+    const cache = await window.caches.open('peek-preferences');
+    try { use24HourTime = window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false'; }
+    catch { /* Use the choice from this tab. */ }
+    await cache.put('/__peek/preferences/clock', new Response(String(use24HourTime)));
+  } catch { /* Push notifications use the default when shared storage is unavailable. */ }
+}
 
 // English ships with the app. The server sends the page's own language with
 // the page, and the others load only when someone chooses them.
@@ -60,6 +71,8 @@ interface I18nValue {
   locale: Locale;
   languageTag: string;
   setLocale: (locale: Locale) => void;
+  use24HourTime: boolean;
+  setUse24HourTime: (enabled: boolean) => void;
   t: Translate;
 }
 
@@ -77,6 +90,8 @@ const defaultValue: I18nValue = {
   locale: 'en',
   languageTag: 'en-CH',
   setLocale: () => undefined,
+  use24HourTime: true,
+  setUse24HourTime: () => undefined,
   t: (key, variables) => translate('en', key, variables),
 };
 
@@ -121,6 +136,31 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     return messages ? { locale, messages } : { locale: 'en' as Locale, messages: en };
   });
   const requested = useRef(language.locale);
+  const [use24HourTime, setClock] = useState(true);
+
+  useLayoutEffect(() => {
+    const readClock = () => {
+      try {
+        const enabled = window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false';
+        setClock(enabled);
+        void savePushClockPreference(enabled);
+      }
+      catch { /* Keep the current clock when storage is unavailable. */ }
+    };
+    const syncClock = (event: StorageEvent) => {
+      if (event.key === CLOCK_STORAGE_KEY || event.key === null) readClock();
+    };
+    readClock();
+    window.addEventListener('storage', syncClock);
+    return () => window.removeEventListener('storage', syncClock);
+  }, []);
+
+  const setUse24HourTime = useCallback((enabled: boolean) => {
+    setClock(enabled);
+    try { window.localStorage.setItem(CLOCK_STORAGE_KEY, String(enabled)); }
+    catch { /* Keep the choice for this session. */ }
+    void savePushClockPreference(enabled);
+  }, []);
 
   const show = useCallback((next: Locale) => {
     requested.current = next;
@@ -175,12 +215,15 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     show(next);
   }, [show]);
 
+  const t = useCallback<Translate>((key, variables) => translate(language.locale, key, variables, language.messages), [language]);
   const value = useMemo<I18nValue>(() => ({
     locale: language.locale,
     languageTag: languageTags[language.locale],
     setLocale: chooseLocale,
-    t: (key, variables) => translate(language.locale, key, variables, language.messages),
-  }), [language, chooseLocale]);
+    use24HourTime,
+    setUse24HourTime,
+    t,
+  }), [language, chooseLocale, use24HourTime, setUse24HourTime, t]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

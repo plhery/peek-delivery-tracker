@@ -213,6 +213,15 @@ enum AppLanguage: String, CaseIterable, Identifiable, Codable, Hashable {
 
 @MainActor
 final class Localizer: ObservableObject {
+    @Published var use24HourTime: Bool {
+        didSet {
+            defaults.set(use24HourTime, forKey: DeviceClock.preferenceKey)
+            saveSharedClock()
+        }
+    }
+    private let defaults: UserDefaults
+    private let sharedClockDefaults: UserDefaults?
+
     @Published var language: AppLanguage {
         didSet {
             UserDefaults.standard.set(language.rawValue, forKey: AppLanguage.storageKey)
@@ -230,7 +239,13 @@ final class Localizer: ObservableObject {
     /// Where the copy names the iPhone, an iPad reads the key's `.ipad` variant and a Mac its `.mac` one.
     private let variant: String?
 
-    init(bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad) {
+    init(
+        bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad, defaults: UserDefaults = .standard,
+        sharedClockDefaults: UserDefaults? = nil
+    ) {
+        self.defaults = defaults
+        self.sharedClockDefaults = sharedClockDefaults
+        use24HourTime = defaults.object(forKey: DeviceClock.preferenceKey) as? Bool ?? true
         #if os(macOS)
         variant = "mac"
         #else
@@ -252,6 +267,11 @@ final class Localizer: ObservableObject {
             dictionaries = ["en": [:]]
         }
         saveSharedLanguage()
+        saveSharedClock()
+    }
+
+    private func saveSharedClock() {
+        sharedClockDefaults?.set(use24HourTime, forKey: DeviceClock.preferenceKey)
     }
 
     private func saveSharedLanguage() {
@@ -441,8 +461,7 @@ final class Localizer: ObservableObject {
     /// every render. Keep one per pattern, language and time zone.
     private var formatters: [String: DateFormatter] = [:]
 
-    private func formatter(_ pattern: String, posix: Bool = false, gregorian: Bool = false) -> DateFormatter {
-        let timeZone = TimeZone.current
+    private func formatter(_ pattern: String, posix: Bool = false, gregorian: Bool = false, timeZone: TimeZone = .current) -> DateFormatter {
         let key = "\(posix ? "posix" : language.rawValue)|\(gregorian)|\(timeZone.identifier)|\(pattern)"
         if let formatter = formatters[key] { return formatter }
         let formatter = DateFormatter()
@@ -455,8 +474,22 @@ final class Localizer: ObservableObject {
     }
 
     /// Hours and minutes in the app language, as event rows show them.
-    func clockTime(_ date: Date) -> String {
-        formatter("HH:mm").string(from: date)
+    func clockTime(_ date: Date, in timeZone: TimeZone = .current) -> String {
+        let pattern = use24HourTime ? "HH:mm" : (language == .zh ? "ah:mm" : "h:mm a")
+        return formatter(pattern, timeZone: timeZone).string(from: date)
+    }
+
+    func abbreviatedDateTime(_ date: Date) -> String {
+        let day = date.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted).locale(language.locale))
+        return dayAndTime(day, clockTime(date))
+    }
+
+    private func deliveryWallClock(_ value: Substring) -> String {
+        guard !use24HourTime, let hour = Int(value.prefix(2)), let minute = Int(value.suffix(2)),
+              minute < 60, hour < 24 || hour == 24 && minute == 0 else { return String(value) }
+        // A carrier's wall clock has no zone. Use UTC to preserve its hours.
+        let date = Date(timeIntervalSince1970: TimeInterval(hour * 3_600 + minute * 60))
+        return clockTime(date, in: .gmt)
     }
 
     /// The zone times are shown in, the device's unless `zone` names another, as the app language names it all year
@@ -471,10 +504,10 @@ final class Localizer: ObservableObject {
            let dayRange = Range(match.range(at: 1), in: value),
            let timeRange = Range(match.range(at: 2), in: value) {
             let day = expectedDelivery(String(value[dayRange]), now: now)
-            var window = String(value[timeRange])
+            var window = deliveryWallClock(value[timeRange])
             if match.range(at: 3).location != NSNotFound,
                let endRange = Range(match.range(at: 3), in: value) {
-                window += "–\(value[endRange])"
+                window += "–\(deliveryWallClock(value[endRange]))"
             }
             return dayAndTime(day, window)
         }

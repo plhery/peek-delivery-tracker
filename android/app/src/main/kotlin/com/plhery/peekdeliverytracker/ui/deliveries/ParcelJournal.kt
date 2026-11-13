@@ -243,8 +243,9 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
     // The circle, 12 across beside footnote words at the default size, grown with them.
     val mark = type.scaled(12f, IosTextStyle.Footnote)
     val scale = mark / 12f
+    val timeWidth = if (localizer.use24HourTime) TIME_WIDTH else TIME_WIDTH_WITH_PERIOD
     val circle = @Composable {
-        Box(Modifier.padding(top = (3f * scale).dp).width((if (large) mark else maxOf(mark, type.scaled(TIME_WIDTH, IosTextStyle.Caption2))).dp)) {
+        Box(Modifier.padding(top = (3f * scale).dp).width((if (large) mark else maxOf(mark, type.scaled(timeWidth, IosTextStyle.Caption2))).dp)) {
             Canvas(Modifier.size(mark.dp)) {
                 drawCircle(
                     secondary, radius = (4.6f * scale).dp.toPx(),
@@ -358,7 +359,8 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val event = entry.event
     val time = localizer.journalTime(event)
-    val timeFrame = Modifier.padding(top = 2.dp).then(if (large) Modifier else Modifier.width(type.scaled(TIME_WIDTH, IosTextStyle.Caption2).dp))
+    val timeWidth = if (localizer.use24HourTime) TIME_WIDTH else TIME_WIDTH_WITH_PERIOD
+    val timeFrame = Modifier.padding(top = 2.dp).then(if (large) Modifier else Modifier.width(type.scaled(timeWidth, IosTextStyle.Caption2).dp))
     val timeView = @Composable {
         if (time.isEmpty()) {
             Box(timeFrame)
@@ -442,6 +444,7 @@ private const val TOGGLE = 0.2
 
 /** The time column's width at the Large text size (`@ScaledMetric(relativeTo: .caption2)`). */
 private const val TIME_WIDTH = 38f
+private const val TIME_WIDTH_WITH_PERIOD = 64f
 
 /**
  * The test tags of the journal's header, its days' headings, its rows, its planned steps and their rows, and the line

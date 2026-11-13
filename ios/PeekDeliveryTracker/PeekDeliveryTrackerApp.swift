@@ -19,7 +19,7 @@ struct PeekDeliveryTrackerApp: App {
     #endif
 
     init() {
-        let localizer = Localizer()
+        let localizer = Localizer(sharedClockDefaults: DeviceClock.sharedDefaults())
         let session = SessionStore(configuration: .current)
         let parcels = ParcelStore(
             configuration: .current,
@@ -268,6 +268,9 @@ struct RootView: View {
         }
         .task(id: "\(sessionIdentity)-\(localizer.language.rawValue)") {
             await session.saveEmailLanguage(localizer.language)
+        }
+        .onChange(of: localizer.use24HourTime) { _, _ in
+            parcels.refreshDeliverySurfaces()
         }
         .onChange(of: localizer.language) { _, language in
             parcels.demoLanguageChanged()

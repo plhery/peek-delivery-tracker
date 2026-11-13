@@ -68,6 +68,24 @@ describe('relayCopies', () => {
     ]))).toEqual(new Map());
   });
 
+  it('pairs two rows on a minute\'s first second that tell the same words, when only one names the place', () => {
+    const told = (id: string, source: string, stage: string, description: string, location?: string) =>
+      ({ ...scan(id, source, stage, '2026-11-12T09:00:00Z'), description, location });
+    const parcel = (tracking_events: object[]) => ({
+      carrier: 'la-poste', carrier_data: { original_carrier: 'la-poste', active_tracking_carrier: 'chronopost' }, tracking_events,
+    });
+    // Both carriers tell the posting in one sentence, each in its own stage.
+    expect(relayCopies(parcel([
+      told('posted', 'la-poste', 'accepted', 'Parcel handed over.'),
+      told('announced', 'chronopost', 'registered', 'parcel handed  over', 'Example Town'),
+    ]))).toEqual(new Map([['posted', 'announced']]));
+    // In other words, they stay two.
+    expect(relayCopies(parcel([
+      told('posted', 'la-poste', 'accepted', 'Parcel handed over'),
+      told('announced', 'chronopost', 'registered', 'Shipment announced', 'Example Town'),
+    ]))).toEqual(new Map());
+  });
+
   it('pairs a row of a carrier keeping minutes with the other carrier\'s row of that minute, in any stage', () => {
     const placed = (id: string, source: string, stage: string, at: string, location?: string) => ({ ...scan(id, source, stage, at), location });
     const parcel = (tracking_events: object[]) => ({

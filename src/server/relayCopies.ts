@@ -17,7 +17,9 @@
  * second (4PX's "Parcel handed to dpd" and DPD's acceptance, Chronopost's
  * departure sort and DPD's): a second the two share, from places that do not
  * conflict, is one scan. On a minute's first second, which a carrier keeping
- * minutes gives every scan, the places must also share a word. A carrier that
+ * minutes gives every scan, the places must also share a word, or the two rows
+ * tell the same words (La Poste's posting and Chronopost's, which alone names
+ * the place). A carrier that
  * keeps minutes tells the other's scan on that minute's first second: such a
  * row and the other carrier's row within that minute, with seconds, are one
  * scan in any stage too (Poczta Polska's posting and DHL's or bpost's first
@@ -123,11 +125,20 @@ export function copyTellsProblem(copy: JsonObject, scan: JsonObject): boolean {
   return PROBLEM_STAGES.has(String(copy.stage)) && ROUTINE_STAGES.has(String(scan.stage));
 }
 
-/** Whether two scans at one second are one: places that do not conflict, sharing a word when the second is a minute's first. */
-function sameSecond(copy: { at: number; words: string[] }, scan: { at: number; words: string[] }): boolean {
+/** A scan's words, case, spacing and punctuation aside. */
+function told(text: string): string {
+  return text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+}
+
+/**
+ * Whether two scans at one second are one: places that do not conflict and, when the second is a minute's first,
+ * sharing a word or telling the same words.
+ */
+function sameSecond(copy: { at: number; words: string[]; text: string }, scan: { at: number; words: string[]; text: string }): boolean {
   const second = (at: number) => Math.floor(at / SECOND_MS);
   if (second(copy.at) !== second(scan.at) || placesConflict(copy.words, scan.words)) return false;
-  return second(copy.at) % 60 !== 0 || copy.words.some((word) => scan.words.includes(word));
+  return second(copy.at) % 60 !== 0 || copy.words.some((word) => scan.words.includes(word))
+    || (told(copy.text) !== '' && told(copy.text) === told(scan.text));
 }
 
 /**

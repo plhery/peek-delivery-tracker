@@ -18,3 +18,4 @@ rootProject.name = "PeekDeliveryTracker"
 include(":app")
 include(":core")
 include(":coredevice")
+include(":baselineprofile")

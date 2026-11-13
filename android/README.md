@@ -90,6 +90,31 @@ It installs the release in place of any build there, opens it and fails unless i
 removes shows only when the shrunk app runs. CI's "Release build opens" job does the same on each change, with a key
 and settings made up for the run.
 
+## Macrobenchmarks and the baseline profile
+
+`:baselineprofile` holds the app's macrobenchmarks, run on a device or emulator against the app's `benchmark` build
+type: the release as R8 shrinks it, signed with the debug key and profileable. `StartupBenchmark` times a cold start on
+the list, `ScrollBenchmark` the list's frames as it is flung to its end and back, each with JIT alone and with the APK's
+baseline profile installed as Google Play installs it; the instrumentation argument `peek.compilation` (`none` or
+`profile`) keeps one, to time two builds in turn. On a fresh install they open the demo from the welcome.
+`BaselineProfileGenerator` collects a profile from the unshrunk `nonMinifiedBenchmark` build.
+
+The app ships only the profiles its libraries bring. One of its own goes in `app/src/main/baselineProfiles/` when the
+benchmarks show it helps.
+
+```sh
+./gradlew :app:assembleBenchmark :app:assembleNonMinifiedBenchmark :baselineprofile:assembleBenchmark
+adb install -r app/build/outputs/apk/benchmark/app-benchmark.apk
+adb install -r baselineprofile/build/outputs/apk/benchmark/baselineprofile-benchmark.apk
+adb shell am instrument -w -r -e class com.plhery.peekdeliverytracker.baselineprofile.StartupBenchmark \
+  -e androidx.benchmark.suppressErrors EMULATOR \
+  com.plhery.peekdeliverytracker.baselineprofile/androidx.test.runner.AndroidJUnitRunner
+```
+
+`suppressErrors` is for an emulator alone, whose timings vary with the computer's load. For the profile, install the
+`nonMinifiedBenchmark` APK and run `BaselineProfileGenerator`. The results, traces and profile land in
+`/sdcard/Android/media/com.plhery.peekdeliverytracker.baselineprofile/`.
+
 ## Core tests on a device
 
 `./gradlew :core:test` runs the core's JUnit tests on the JVM, with ICU4J standing in for the phone's ICU.

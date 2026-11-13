@@ -131,6 +131,20 @@ android {
                 releaseOverrides[setting]?.let { buildConfigField("String", key, javaString(it)) }
             }
         }
+        // What :baselineprofile's macrobenchmarks measure: the release as it is shrunk, signed with the debug key so
+        // an emulator takes it, and profileable (src/benchmark).
+        create("benchmark") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += "release"
+        }
+        // The same unshrunk, which the baseline profile is collected from: its rules name the classes as written, and
+        // R8 rewrites them as it shrinks a release.
+        create("nonMinifiedBenchmark") {
+            initWith(getByName("benchmark"))
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
     }
 
     buildFeatures {
@@ -156,6 +170,7 @@ android {
         for (tests in listOf("test", "androidTest")) {
             named(tests) { kotlin.directories += "src/sharedTest/kotlin" }
         }
+        named("nonMinifiedBenchmark") { manifest.srcFile("src/benchmark/AndroidManifest.xml") }
     }
 
     testOptions {

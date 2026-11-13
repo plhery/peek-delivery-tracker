@@ -1438,7 +1438,7 @@ and [`truck.json`](truck.json).
 | `thailand-post` | Envelope folded into a dart, in blue, white and grey on red; the blue and grey are approximations | [international.thailandpost.com](https://international.thailandpost.com/) |
 | `bring` (`bring-posten`) | Ring in a white half and a grey half on green; the grey is an approximation | [bring.com](https://www.bring.com/) |
 | `packeta` | White taped box drawn as a solid on red; the greys are approximations | [packeta.com](https://www.packeta.com/) |
-| `gls` (`gls-ch`, `gls-de`, `gls-es`, `gls-fr`, `gls-it`, `gls-at`) | White letters and the yellow dot on blue | [gls-group.com](https://gls-group.com/) |
+| `gls` (`gls-ch`, `gls-de`, `gls-es`, `gls-fr`, `gls-it`, `gls-at`, `gls-us`) | White letters and the yellow dot on blue | [gls-group.com](https://gls-group.com/) |
 | `evri` (`evri`, `evri-uk`) | Cyan letters on navy | [evri.com](https://www.evri.com/) |
 | `postnord` | White lowercase name on two lines on blue | [postnord.com](https://www.postnord.com/) |
 | `poste-italiane` | Blue word Poste on yellow | [poste.it](https://www.poste.it/) |

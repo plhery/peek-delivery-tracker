@@ -42,6 +42,7 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "gls-fr": "gls",
   "gls-it": "gls",
   "gls-pl": "gls",
+  "gls-us": "gls",
   "gofo-ca": "gofo",
   "gofo-es": "gofo",
   "gofo-fr": "gofo",
@@ -349,6 +350,17 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
     "accent": "#ffcf00"
   },
   "gls-pl": {
+    "surface-light": "#dfebfa",
+    "surface-dark": "#152538",
+    "ink-light": "#355e8a",
+    "ink-dark": "#b7d1ee",
+    "brand-light": "#1634a7",
+    "brand-dark": "#abc7ff",
+    "truck": "#1634a7",
+    "edge": "#1634a7",
+    "accent": "#ffcf00"
+  },
+  "gls-us": {
     "surface-light": "#dfebfa",
     "surface-dark": "#152538",
     "ink-light": "#355e8a",
@@ -1154,6 +1166,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "gls-fr": "gls",
   "gls-it": "gls",
   "gls-pl": "gls",
+  "gls-us": "gls",
   "gms-worldwide": "gms-worldwide",
   "go-express": "go-express",
   "go-logistics-au": "go-logistics-au",

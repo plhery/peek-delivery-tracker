@@ -7255,10 +7255,15 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Γενική Ταχυδρομική",
       "Geniki Taxidromiki",
-      "General Post"
+      "General Post",
+      "Геники Тахидромики",
+      "ГЕНИКИ ТАХИДРОМИКИ ООД"
     ],
     "countries": [
-      "GR"
+      "GR",
+      "BG",
+      "CY",
+      "RO"
     ],
     "color": "#004fa0",
     "selectable": true,
@@ -7274,7 +7279,7 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "taxydromiki.com"
         ],
-        "path": "^/(?:en/)?track/([^/?#]+)/?$"
+        "path": "^/(?:(?:en|bg|ro)/)?track/([^/?#]+)/?$"
       }
     ],
     "detectionRules": [
@@ -21247,7 +21252,13 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^8880\\d{11}$",
+        "confidence": "low",
+        "preferred": true
+      }
+    ],
     "trackingSearchUrl": "https://www.jtexpress.com.br/trajectoryQuery"
   },
   "j-and-t-mx": {
@@ -52936,7 +52947,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "BG"
     ],
-    "color": "#5f3e8f",
+    "color": "#652b9e",
     "selectable": true,
     "timezone": "Europe/Sofia",
     "tracking": {
@@ -52944,7 +52955,17 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "trackingUrlTemplate": "https://my.e-cvc.bg/track?wb={trackingNumber}&checkit=%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B8",
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "my.e-cvc.bg"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "wb"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://my.e-cvc.bg/track"
   },
@@ -52968,7 +52989,17 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "trackingUrlTemplate": "https://transpress.bg/bg/prosledjavane?track-number={trackingNumber}",
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "transpress.bg"
+        ],
+        "pathPattern": "^/(?:bg|en)/prosledjavane/?$",
+        "params": [
+          "track-number"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://transpress.bg/bg/prosledjavane"
   },
@@ -53025,6 +53056,28 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://gls-group.com/US/en/send-and-receive/track-a-parcel/"
+  },
+  "poste-srpske": {
+    "displayName": "Pošte Srpske",
+    "aliases": [
+      "Pošta Srpske",
+      "Poste Srpske",
+      "Поште Српске",
+      "Preduzeće za poštanski saobraćaj Republike Srpske"
+    ],
+    "countries": [
+      "BA"
+    ],
+    "color": "#feb715",
+    "selectable": true,
+    "timezone": "Europe/Sarajevo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.postesrpske.com/pracenje-posiljaka/"
   }
 } as const;
 
@@ -54570,7 +54623,8 @@ export const CARRIER_IDS = [
   "bh-posta",
   "cvc",
   "transpress",
-  "gls-us"
+  "gls-us",
+  "poste-srpske"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

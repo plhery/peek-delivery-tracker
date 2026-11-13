@@ -489,6 +489,12 @@ class ParcelRouteTests {
         assertEquals(peeked.camera, back.flight?.from)
         assertEquals(home, back.flight?.to)
         assertEquals(home, back.ended().flown(home, progress = 0.0, viewport = 360.0, reduceMotion = true).camera)
+        // A new frame while the fingers hold it leaves the map under them, and it flies to that frame once they lift.
+        val moved = GlobeCamera(center = basel.point, scale = 2_500.0, offset = Point(180.0, 90.0))
+        assertEquals(peeked, peeked.flown(moved, progress = 0.0, viewport = 360.0, reduceMotion = false))
+        val settled = peeked.ended().flown(moved, progress = 0.0, viewport = 360.0, reduceMotion = false)
+        assertEquals(peeked.camera, settled.flight?.from)
+        assertEquals(moved, settled.flight?.to)
     }
 
     /** CGPath's even-odd `contains` becomes MapPath.containsEvenOdd, which flattens the rim's arcs and the disk. */
@@ -1269,6 +1275,31 @@ class ParcelRouteTests {
         val parcel = checkNotNull(clear.dots.firstOrNull { it.kind == MapOverlay.DotKind.Current }).point
         assertFalse(chip(clear).intersects(Rect(parcel.x - 10, parcel.y - 10, 20.0, 20.0)))
         assertEquals(name(plain, "Bern"), name(clear, "Bern"))
+    }
+
+    @Test
+    fun aRouteStaysInARoomSmallerThanItsLeastFrame() {
+        // 16 points between the card's top row and its title: less than the least frame, which keeps on the room's middle.
+        val size = Size(358.0, 100.0)
+        val card = EdgeInsets(top = 40.0, leading = 16.0, bottom = 44.0, trailing = 16.0)
+        val dot = GlobeProjection(GlobeCamera.framing(ParcelRoute(listOf(zurich)), ParcelRoute.Mode.Journey, size, card)).project(zurich.point)
+        assertEquals(48.0, dot.y, 0.5)
+        assertEquals(179.0, dot.x, 0.5)
+    }
+
+    @Test
+    fun pipsRoomNeverTakesTheRouteOutOfItsRoom() {
+        // 60 points of room, and the parcel's dot in its top half: a frame with more room above it moves the route down.
+        val size = Size(358.0, 176.0)
+        val card = EdgeInsets(top = 40.0, leading = 16.0, bottom = 76.0, trailing = 16.0)
+        val route = ParcelRoute(listOf(zurich, leipzig))
+        val inRoom = { camera: GlobeCamera -> GlobeProjection(camera).project(leipzig.point).y in 40.0..100.0 }
+        assertTrue(inRoom(GlobeCamera.framing(route, ParcelRoute.Mode.Journey, size, card)))
+        // Pip finds his spot only where the dot has left the room: no frame he may take goes there.
+        val framed = GlobeCamera.framing(
+            route, ParcelRoute.Mode.Journey, size, card, shown = { camera, _ -> if (inRoom(camera)) 1.0 else 1.5 }, pip = true,
+        )
+        assertTrue(inRoom(framed))
     }
 
     @Test

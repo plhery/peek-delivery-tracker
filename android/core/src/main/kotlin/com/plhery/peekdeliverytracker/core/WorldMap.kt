@@ -213,6 +213,9 @@ data class GlobeCamera(
     }
 
     companion object {
+        /** The least room a route is framed in, across and down. */
+        const val LEAST_BOX = 40.0
+
         /**
          * Frames the points in `box`, never closer than `minimumKilometres` across, and shows the
          * whole globe past `globeAbove` radians. `tilt` looks at a long route from nearer the
@@ -407,12 +410,16 @@ data class GlobeCamera(
             val leading = dot.x < (insets.leading + size.width - insets.trailing) / 2
             val top = dot.y < (insets.top + size.height - insets.bottom) / 2
             val frames = mutableListOf<GlobeCamera>()
+            // Never into less room than the least box: the route would leave the room the insets give it.
+            val roomy = { room: EdgeInsets ->
+                size.width - room.leading - room.trailing >= LEAST_BOX && size.height - room.top - room.bottom >= LEAST_BOX
+            }
             for (step in 1..6) {
                 val further = step * 16.0
                 val across = if (leading) insets.copy(leading = insets.leading + further) else insets.copy(trailing = insets.trailing + further)
                 val along = if (top) insets.copy(top = insets.top + further) else insets.copy(bottom = insets.bottom + further)
                 val both = if (top) across.copy(top = across.top + further) else across.copy(bottom = across.bottom + further)
-                frames += listOf(across, along, both).map(framed)
+                frames += listOf(across, along, both).filter(roomy).map(framed)
             }
             // The largest frame first, and of two as large, the one with less room added.
             return frames.withIndex()
@@ -443,13 +450,12 @@ data class GlobeCamera(
         }
 
         private fun framed(route: ParcelRoute, mode: ParcelRoute.Mode, size: Size, insets: EdgeInsets, closeUps: Boolean): GlobeCamera {
-            val inner = swiftMin(size.width - insets.leading - insets.trailing, size.height - insets.top - insets.bottom)
-            val pad = swiftMin(40.0, inner * 0.12)
-            val box = Rect(
-                insets.leading + pad, insets.top + pad,
-                swiftMax(size.width - insets.leading - insets.trailing - pad * 2, 40.0),
-                swiftMax(size.height - insets.top - insets.bottom - pad * 2, 40.0),
-            )
+            val room = Rect(insets.leading, insets.top, size.width - insets.leading - insets.trailing, size.height - insets.top - insets.bottom)
+            val pad = swiftMax(0.0, swiftMin(40.0, swiftMin(room.width, room.height) * 0.12))
+            val width = swiftMax(room.width - pad * 2, LEAST_BOX)
+            val height = swiftMax(room.height - pad * 2, LEAST_BOX)
+            // A room smaller than the least box keeps the box on its middle, so the route never hangs out of one side of it.
+            val box = Rect(room.midX - width / 2, room.midY - height / 2, width, height)
             val destination = route.destination?.point
             val current = route.current?.place?.point
             if (mode == ParcelRoute.Mode.Now && current != null) {
@@ -566,10 +572,11 @@ data class GlobeMotion(
     /**
      * `fly(to:size:)`: to `target`, from wherever the flight on the screen has got to, over a view `viewport` across;
      * at once under Reduce Motion. A moved map is no longer free, and Pip looks for his best spot again. Nothing
-     * changes for a map already there or on its way.
+     * changes for a map already there or on its way, nor for one fingers hold, as the iPhone's `held` map stays under
+     * them: a card's flies to its target, as it is by then, once they lift.
      */
     fun flown(target: GlobeCamera, progress: Double, viewport: Double, reduceMotion: Boolean): GlobeMotion {
-        if (!free && camera == target) return this
+        if ((!free && camera == target) || gestureStart != null) return this
         val from = flight?.camera(progress) ?: camera
         val landed = copy(camera = target, flight = null, free = false, heldPip = null)
         if (from == null || from == target || reduceMotion) return landed

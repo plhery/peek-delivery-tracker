@@ -48,9 +48,9 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
 - In a browser on an iPhone, notifications only come from a site added to the
   Home Screen. Peek shows the steps. Then open Peek from the Home Screen and
   turn notifications on there.
-- In the iPhone and Android apps, a parcel's link has **Notify me**, no
-  account needed. Signed in, Settings › Notifications covers every parcel in
-  the account.
+- In the iPhone and Android apps, no account is needed: the app asks once to
+  send notifications, then announces each parcel still on its way. Signed in,
+  Settings › Notifications covers every parcel in the account.
 - Nothing arrives? Check that Peek may send notifications: in the browser's
   site settings, or in iPhone or Android settings.
 - Peek announces only the updates you chose: every scan, the important steps

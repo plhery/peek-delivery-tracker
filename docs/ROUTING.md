@@ -1029,6 +1029,9 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   the provider rests 30 minutes, and one such answer within 30 minutes of the pause ending
   rests it again. The numbers behind a block count toward no other for a day: one may be a
   number the provider lost, whose own retry would otherwise rest it at the end of every pause.
+  Their own answers without history meanwhile are no lack of history either, while the block may
+  last: their parcel waits as on a rate limit, the provider does not rest, and the answer is not
+  spent from its budget.
 - a budget of answers without history for a provider that refuses an address after too many
   of them ([providerMisses.ts](../src/server/providerMisses.ts)): ParcelsApp, 30 in 30
   minutes, counted across syncs and Add lookups. Once spent, checks nobody asked for stop

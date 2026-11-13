@@ -4039,6 +4039,33 @@ describe('a provider refusing numbers it tracked', () => {
     expect(parcelsApp(health)).toEqual([['not_found', expect.any(Number)], ['rate_limited', 1_800_000]]);
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_blocked', expect.objectContaining({ provider: 'ParcelsApp', category: 'rate_limited' }));
   });
+  it('waits out a number behind the block for its parcel alone, and takes it as no lack of history', async () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const refusals = new ProviderRefusals();
+    const misses = new ProviderMisses({ ParcelsApp: 30 });
+    const missed = vi.spyOn(misses, 'missed');
+    const at = (iso: string) => {
+      const value = setup(new Date(iso), { refusals, misses });
+      value.universal.mockImplementation(async (source: string) => {
+        if (source === 'ParcelsApp') throw new NoHistoryError(source, 'ParcelsApp has no usable shipment history');
+        return { ...history(), tracking_provider: source };
+      });
+      return value;
+    };
+    await at('2026-09-10T11:50:00Z').router.fetch(tracked('TEST1234'), false);
+    await at('2026-09-10T12:00:00Z').router.fetch(tracked('TEST5678'), false);
+    vi.mocked(monitoring.reportRoutingEvent).mockClear();
+    missed.mockClear();
+    // The pause is over and ParcelsApp still finds nothing for the number that found it blocked.
+    const later = at('2026-09-10T12:30:00Z');
+    const again = await later.router.fetch(tracked('TEST5678'), false);
+    expect(again.result).toMatchObject({ tracking_provider: 'Ship24',
+      routing: { failures: { ParcelsApp: { kind: 'rate_limited', retry_at: '2026-09-10T13:00:00.000Z' } } } });
+    // The provider does not rest, nor is the answer spent from its budget.
+    expect(parcelsApp(later.health)).toEqual([['not_found', 1_800_000]]);
+    expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_blocked', expect.anything());
+    expect(missed).not.toHaveBeenCalled();
+  });
   it('counts no answer about a number the provider never tracked', async () => {
     const { router, health } = refusing();
     for (const number of ['TEST1234', 'TEST5678', 'TEST9012']) await router.fetch(parcel({ id: number, tracking_number: number }), false);

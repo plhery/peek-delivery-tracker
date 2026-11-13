@@ -1742,6 +1742,8 @@ export class TrackingRouter {
       let kind: RoutingFailureKind | null = null;
       let retryAfterMs = 0;
       let answered = false;
+      // The number is behind a block the provider is still found in: this parcel waits, the provider does not rest.
+      let behindBlock = false;
       try {
         const answer = await (reused ?? this.options.universal(source, universalNumber,
           Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier));
@@ -1764,13 +1766,16 @@ export class TrackingRouter {
       } catch (caught) {
         // The provider this number was tracked through finds no history for it. With another number
         // it tracked soon after, it refuses this server whatever it is asked (providerRefusals.ts):
-        // it rests as on a rate limit, and the answer is no lack of history for this parcel.
-        const blocked = token !== null && !answered && tracked
+        // it rests as on a rate limit, and the answer is no lack of history for this parcel. Nor is it
+        // for a number behind that block, which this parcel alone waits out.
+        const refusal = token !== null && !answered && tracked
           && (caught instanceof NoHistoryError || carrierErrorKind(caught) === 'not_found')
-          && this.options.refusals?.refused(source, universalNumber, now().getTime()) === true;
-        if (blocked) report('provider_blocked', source, 'rate_limited', caught);
-        const error = blocked
-          ? new RateLimitedError(source, BLOCK_PAUSE_MS, `${source} finds no history for numbers it tracked`, { reason: 'refuses_tracked_numbers', cause: caught })
+          ? this.options.refusals?.refused(source, universalNumber, now().getTime()) : undefined;
+        if (refusal === 'blocked') report('provider_blocked', source, 'rate_limited', caught);
+        behindBlock = refusal === 'behind';
+        const error = refusal
+          ? new RateLimitedError(source, BLOCK_PAUSE_MS, refusal === 'blocked' ? `${source} finds no history for numbers it tracked`
+            : `${source} still finds no history for a number behind its block`, { reason: 'refuses_tracked_numbers', cause: caught })
           : !inputPlausible && carrierErrorKind(caught) === 'input_required'
             ? new NoHistoryError(source, `${source} asked for a postcode for a number that no carrier issues`, { cause: caught }) : caught;
         const failure = fail(source, error, true);
@@ -1797,7 +1802,7 @@ export class TrackingRouter {
             report('provider_input_lookup', source, step);
           }
           // An answer about this number, a refusal included, keeps the provider's circuit closed, like not-found.
-          try { await this.options.health.finishTrackingProvider(source, token, kind === 'no_history' || kind === 'input_required' || kind === 'invalid_input' ? 'not_found' : kind, retryAfterMs, performance.now() - before); }
+          try { await this.options.health.finishTrackingProvider(source, token, behindBlock || kind === 'no_history' || kind === 'input_required' || kind === 'invalid_input' ? 'not_found' : kind, retryAfterMs, performance.now() - before); }
           catch { report('health_store_unavailable', source, 'transport'); }
         }
       }

@@ -14,18 +14,23 @@ export const BEHIND_BLOCK_MS = 24 * 60 * 60_000;
  * refusal within REFUSAL_WINDOW_MS of the pause ending finds it still in place. The numbers behind a
  * block count toward no other for BEHIND_BLOCK_MS: one may be a number the provider lost, whose own
  * retry at the end of every pause would otherwise find the provider blocked again for every parcel.
+ * Their own refusals meanwhile are `behind`: no lack of history for them either, while the block may
+ * still be in place, and waited out by their parcel alone.
  */
 export class ProviderRefusals {
   private readonly recent = new Map<string, Map<string, number>>();
   private readonly blockedAt = new Map<string, number>();
   private readonly behind = new Map<string, Map<string, number>>();
 
-  /** Records that `provider` found no history for `number`, which it had tracked; true when that finds it blocked. */
-  refused(provider: string, number: string, at: number): boolean {
+  /**
+   * Records that `provider` found no history for `number`, which it had tracked: `blocked` when that finds it
+   * blocked, `behind` for a number behind a block, undefined for the parcel's own lack of history.
+   */
+  refused(provider: string, number: string, at: number): 'blocked' | 'behind' | undefined {
     const behind = this.behind.get(provider) ?? new Map<string, number>();
     for (const [seen, time] of behind) if (at - time >= BEHIND_BLOCK_MS) behind.delete(seen);
     this.behind.set(provider, behind);
-    if (behind.has(number)) return false;
+    if (behind.has(number)) return 'behind';
     const numbers = this.recent.get(provider) ?? new Map<string, number>();
     for (const [seen, time] of numbers) if (at - time >= REFUSAL_WINDOW_MS) numbers.delete(seen);
     numbers.set(number, at);
@@ -36,7 +41,7 @@ export class ProviderRefusals {
       this.blockedAt.set(provider, at);
       for (const seen of numbers.keys()) behind.set(seen, at);
     }
-    return blocked;
+    return blocked ? 'blocked' : undefined;
   }
 }
 

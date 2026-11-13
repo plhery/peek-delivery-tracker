@@ -226,6 +226,28 @@ function sameWords(event: JsonObject, other: JsonObject): boolean {
   return words !== '' && words === wordsRead(other);
 }
 
+/** A row's words of three letters or more, as a reader tells them apart. None for a scan its source gave no words for. */
+function longWords(event: JsonObject): string[] {
+  if (event.description === UNWORDED_STEP) return [];
+  return String(event.description ?? '').normalize('NFC').toLocaleLowerCase('en-US').split(/[^\p{L}\p{N}]+/u)
+    .filter((word) => [...word].length >= 3);
+}
+
+/**
+ * Whether an earlier carrier's copy tells its scan in other words: in the same stage, at the same second (not a
+ * minute's first, which a carrier keeping minutes gives every scan, nor of a row dated by its day), sharing no word of
+ * three letters or more. The copy is then the scan in its own language (TopYou tells GOFO France's "Colis en cours
+ * d'acheminement" as "The package left sorting center"); a copy that shares a word may say more.
+ */
+function translated(copy: JsonObject, scan: JsonObject): boolean {
+  const second = (row: JsonObject) => row.observed === true || scanDay(row) || clockDay(row)
+    ? NaN : Math.floor(Date.parse(String(row.occurred_at)) / 1000);
+  const copyWords = longWords(copy);
+  const scanWords = longWords(scan);
+  return copy.stage === scan.stage && second(copy) === second(scan) && second(copy) % 60 !== 0
+    && copyWords.length > 0 && scanWords.length > 0 && !copyWords.some((word) => scanWords.includes(word));
+}
+
 /**
  * Whether a row names more of the place than another, every word of the other's included. A postcode or a number is
  * no more of the place for a reader: 4PX adds the ZIP code, its leading zero dropped, to SpeedX's town and state.
@@ -353,13 +375,19 @@ function placedEvents(row: JsonObject): JsonObject {
   const notices = noticeLeads(events, apart, repeats);
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
-  // otherwise, it is served in the other row's spelling, so they are shown once. So is a copy whose words read as
-  // a stage neither row is in, in the words of the carrier whose scan it tells, whichever row is on top.
-  const misled = new Map([...pairs].filter(([copy, scan]) => copyMisleads(byId.get(copy)!, byId.get(scan)!))
-    .map(([copy, scan]) => [copy, byId.get(scan)!.description]));
-  const spelt = (event: JsonObject, under: JsonObject | undefined) => misled.has(String(event.id))
-    ? { ...event, description: misled.get(String(event.id)) }
-    : under && sameWords(event, under) && event.description !== under.description ? { ...event, description: under.description } : event;
+  // otherwise, it is served in the other row's spelling, so they are shown once. So is an earlier carrier's copy whose
+  // words read as a stage neither row is in, or that tells the scan's second and stage in other words (`translated`),
+  // in the words of the carrier whose scan it tells, whichever row is on top.
+  const retold = new Map([...pairs].map(([copy, scan]) => [byId.get(copy)!, byId.get(scan)!] as const)
+    .filter(([copy, scan]) => copyMisleads(copy, scan) || (translated(copy, scan) && !copyTellsProblem(copy, scan)))
+    .map(([copy, scan]) => [String(copy.id), scan.description]));
+  const told = (event: JsonObject) => retold.has(String(event.id)) ? { ...event, description: retold.get(String(event.id)) } : event;
+  const spelt = (event: JsonObject, under: JsonObject | undefined) => {
+    const own = told(event);
+    const other = under && told(under);
+    return other && sameWords(own, other) && own.description !== other.description
+      ? { ...own, description: other.description } : own;
+  };
   const shown = (event: JsonObject) => {
     const relayOf = relays.get(String(event.id));
     return served(spelt(event, relayOf ? byId.get(relayOf) : undefined),

@@ -862,10 +862,12 @@ A parcel often changes carrier at the border. The origin history is always kept.
   `relay_of` as a line under the other row instead of a step of its own, unless they are the other
   row's words: a row in those words spelt otherwise, case, spacing and punctuation aside (4PX's
   "designated facility" for SpeedX's "Designated Facility"), is served in the other row's spelling.
-  An earlier carrier's copy whose words read as a stage neither row is in is served in the words
-  of the scan it tells, on top or under it, so the apps show the carrier's own words alone
+  An earlier carrier's copy whose words read as a stage neither row is in, or that tells the scan's
+  second (not a minute's first) and stage in words sharing none of three letters or more, is served
+  in the words of the scan it tells, on top or under it, so the apps show the carrier's own words alone
   (TopYou tells GOFO's arrival at a transfer centre as "Shipment is out for delivery", in a code
-  it means as in transit), unless the copy alone tells a problem: those words keep it on top.
+  it means as in transit, and GOFO France's French scans in English), unless the copy alone tells a
+  problem: those words keep it on top. A copy sharing a word keeps its line: it may say more.
   The rows stay as stored.
   A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row

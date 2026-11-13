@@ -1037,7 +1037,8 @@ export function redatedDeparture(source: string, scan: JsonObject): boolean {
  * stored row of that source the answer moved to it: USPS moved a departure from 01:55 to 03:00,
  * and then listed only the later one, and a facility arrival from 20:53 to 20:52. The scan is no
  * more than three hours after the row or an hour before it, with the same wording, place and
- * stage, and codes that agree when both carry one. The answer no longer lists the row but still
+ * stage (any, for a row stored with no stage of its own: `stageless`, as Chronopost's SM notice
+ * moved 3 seconds earlier), and codes that agree when both carry one. The answer no longer lists the row but still
  * lists a scan of the source older than both, so it is no shorter window of the history, and
  * neither the answer nor the stored rows hold a scan of the source between the two. Scans and rows another rule matched, observations, scans dated by their day alone and
  * universal or app rows are left out, and the match is one to one. A carrier that lists only the
@@ -1072,7 +1073,7 @@ export function retimedScans(
       && from - to <= RETIMED_EARLIER_WITHIN_MS
       && earliest < Math.min(from, to)
       && wordingOf(scan) !== '' && wordingOf(scan) === wordingOf(row) && placeOf(scan) === placeOf(row)
-      && stageOf(scan) !== '' && stageOf(scan) === stageOf(row) && codesAgree(scan, row)
+      && stageOf(scan) !== '' && (stageOf(scan) === stageOf(row) || stageless(row)) && codesAgree(scan, row)
       && (departure || !pastFirstStored(scan, row));
   };
   for (const scan of scans) {

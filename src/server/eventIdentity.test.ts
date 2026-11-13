@@ -915,6 +915,19 @@ describe('a scan its carrier moves a little', () => {
     expect(retimedScans([minute], stored, 'usps').size).toBe(0);
   });
 
+  it('takes over a row stored with no stage of its own, whatever its stage', () => {
+    // A notice keeps the stage of the scan before it: an older release stored this one pending.
+    const notice = (time: string, id: string, stage: string) => at(time, id, 'Notice sent', { stage, raw_data: { time, provider_code: 'NT', stage_source: 'none' } });
+    const before = at('2026-10-23T01:50:00-07:00', 'chronopost:ready', 'Ready at pickup point', { stage: 'ready_for_pickup' });
+    const scans = of('chronopost', label, arrived, before);
+    const row = notice('2026-10-23T01:55:30-07:00', 'chronopost:notice', 'pending');
+    const earlier = notice('2026-10-23T01:55:27-07:00', 'chronopost:notice-earlier', 'ready_for_pickup');
+    expect(pairs(retimedScans([...scans, earlier], [...scans, row], 'chronopost'))).toEqual([['chronopost:notice-earlier', 'chronopost:notice']]);
+    // A row with a stage of its own keeps it apart.
+    const staged = { ...row, raw_data: { ...row.raw_data, stage_source: 'carrier_map' } };
+    expect(retimedScans([...scans, earlier], [...scans, staged], 'chronopost').size).toBe(0);
+  });
+
   it('needs the same wording, place and stage, and codes that agree', () => {
     for (const scan of [
       { ...later, description: 'Departed Post Office' },

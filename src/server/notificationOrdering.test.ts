@@ -58,9 +58,9 @@ it.each(['web', 'native', 'live'] as const)('sends the latest milestone and ackn
   }
 });
 
-it.each(['web', 'native'] as const)('tells the return a batch\'s later scans only carry back, for %s notifications', async (channel) => {
+it.each(['web', 'native', 'live'] as const)('tells the return a batch\'s later scans only carry back, for %s notifications', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
-  const base = { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_created_at: '2026-11-04T19:00:00Z' };
+  const base = { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', update_token: 'token', update_token_id: 'update', event_created_at: '2026-11-04T19:00:00Z' };
   const events = [
     { ...base, event_id: 'return', stage: 'returned', occurred_at: '2026-11-04T09:00:00Z' },
     { ...base, event_id: 'back', stage: 'in_transit', occurred_at: '2026-11-04T18:00:00Z' },
@@ -76,7 +76,7 @@ it.each(['web', 'native'] as const)('tells the return a batch\'s later scans onl
     const send = vi.spyOn(service, 'send').mockResolvedValue();
     await service.dispatch();
     expect(send).toHaveBeenCalledWith(events[0]);
-  } else {
+  } else if (channel === 'native') {
     vi.spyOn(client, 'listPendingNativePushNotifications').mockResolvedValue(events);
     vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
     vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
@@ -84,6 +84,45 @@ it.each(['web', 'native'] as const)('tells the return a batch\'s later scans onl
     const send = vi.spyOn(apns, 'send').mockResolvedValue();
     await apns.dispatch();
     expect(send).toHaveBeenCalledWith(events[0]);
+  } else {
+    // The activity ends on the return, not on the scan carrying the parcel back.
+    vi.spyOn(client, 'listPendingLiveActivityEvents').mockResolvedValue(events);
+    vi.spyOn(client, 'recordLiveActivityDeliveries').mockResolvedValue();
+    vi.spyOn(client, 'deleteLiveActivityTokenById').mockResolvedValue();
+    const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+    const service = new DeliveryLiveActivityNotificationService(client, apns);
+    const send = vi.spyOn(service, 'send').mockResolvedValue();
+    await service.dispatch();
+    expect(send).toHaveBeenCalledWith(events[0], 'end');
+  }
+});
+
+it.each(['web', 'native'] as const)('tells a held return\'s later batch carrying the parcel back as the trip back, for %s notifications', async (channel) => {
+  // The return went out in an earlier batch; the parcel, stored as returned and kept on the schedule, moves on its way back.
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const events = [{ subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_created_at: '2026-11-05T19:00:00Z',
+    event_id: 'back', stage: 'in_transit', occurred_at: '2026-11-05T18:00:00Z', package_stage: 'returned' }];
+  vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map([['pkg', '2026-11-05T18:00:00Z']]));
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  const clock = clocks('2026-11-05T19:00:30Z');
+  const told = { ...events[0], stage: 'returned' };
+  if (channel === 'web') {
+    vi.spyOn(client, 'listPendingPushNotifications').mockResolvedValue(events);
+    vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue();
+    vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+    const service = new WebPushNotificationService(client, '', '', '', clock.web);
+    const send = vi.spyOn(service, 'send').mockResolvedValue();
+    await service.dispatch();
+    expect(send).toHaveBeenCalledWith(told);
+    expect(service.payload(told).title).toBe('On its way back');
+  } else {
+    vi.spyOn(client, 'listPendingNativePushNotifications').mockResolvedValue(events);
+    vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+    vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+    const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+    const send = vi.spyOn(apns, 'send').mockResolvedValue();
+    await apns.dispatch();
+    expect(send).toHaveBeenCalledWith(told);
   }
 });
 

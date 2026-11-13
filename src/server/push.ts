@@ -1,5 +1,5 @@
 import { generatedScans } from '../lib/generatedTrack';
-import { EVENT_STAGE_ORDER, returnUnderWay, tieOrder } from '../lib/stages';
+import { carriesBack, EVENT_STAGE_ORDER, returnUnderWay, tieOrder } from '../lib/stages';
 import 'server-only';
 
 import { connect, constants as http2Constants } from 'node:http2';
@@ -815,11 +815,14 @@ function announcedScan(events: readonly JsonObject[], { known }: Pick<ParcelTime
 
 /**
  * The scan a batch tells of: its newest (`announcedScan`), or the return before it when the batch's scans after the
- * return only carry the parcel back (`returnUnderWay`), as the sync stores the parcel's stage. Whether the batch is
- * news is still judged on its newest scan.
+ * return only carry the parcel back (`returnUnderWay`), as the sync stores the parcel's stage. A later batch of a
+ * return held on the schedule, stored as returned, carries the parcel back further: its newest scan is told as the
+ * return's trip back. Whether the batch is news is still judged on its newest scan.
  */
 function toldScan(newest: JsonObject, events: readonly JsonObject[], { known }: Pick<ParcelTimes, 'known'>): JsonObject {
-  return returnUnderWay(events.filter((event) => !known.has(stringField(event, 'event_id'))).sort(compareNotificationEvents)) ?? newest;
+  const returned = returnUnderWay(events.filter((event) => !known.has(stringField(event, 'event_id'))).sort(compareNotificationEvents));
+  if (returned) return returned;
+  return stringField(newest, 'package_stage') === 'returned' && carriesBack(newest.stage) ? { ...newest, stage: 'returned' } : newest;
 }
 
 const BACKFILL_TOLERANCE_MS = 60 * 60 * 1_000;
@@ -1067,7 +1070,8 @@ export class ParcelLinkAlertService {
       const transport = linkAlertTransport(events[0]!);
       const app = transport === 'apns' ? this.native : transport === 'fcm' ? this.fcm : null;
       const channel = app?.app ?? 'web';
-      const finished = FINISHED_STAGES.has(stringField(events[0]!, 'package_stage'));
+      // A return held on the schedule (`return_held`) is still followed: its alert stays for the scan that ends the hold.
+      const finished = FINISHED_STAGES.has(stringField(events[0]!, 'package_stage')) && events[0]!.return_held !== true;
       const failures = Number(events[0]!.failures ?? 0);
       const eventIds = events.map((event) => stringField(event, 'event_id')).filter(Boolean);
       const remove = async (reason: 'delivered' | 'expired' | 'failed') => {
@@ -1583,7 +1587,7 @@ export class DeliveryLiveActivityNotificationService {
       const updateTokenId = stringField(newest, 'update_token_id');
       summary.attempted += 1;
       try {
-        await this.send(newest, kind);
+        await this.send(toldScan(newest, events, { known }), kind);
         // Sent is recorded, even while the server stops: the scan must not go out twice.
         await record(events, kind);
         if (kind === 'end' && updateTokenId) {

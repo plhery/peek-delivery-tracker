@@ -146,6 +146,11 @@ export function returnUnderWay<T extends { stage?: unknown }>(newestFirst: reado
   return before?.stage === 'returned' ? before : undefined;
 }
 
+/** Whether a scan of this stage after a return only carries the parcel back (`returnUnderWay`). */
+export function carriesBack(stage: unknown): boolean {
+  return RETURN_TRIP.has(stage);
+}
+
 /** How long a label may wait before the page explains that the sender still has the parcel. */
 export const HANDOVER_WAIT_MS = 24 * 3_600_000;
 

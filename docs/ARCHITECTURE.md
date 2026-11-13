@@ -521,6 +521,8 @@ and nothing typed is sent.
 - **A lookup without an account** stores the number once per carrier and inputs, with one
   link per lookup. A link is forgotten 30 days after the parcel is delivered or returned,
   after 90 days without news (a scan, or the link being opened), or when its owner asks.
+  A return held on the schedule (`return_held`, [ROUTING.md](ROUTING.md)) counts as on its
+  way: its link keeps the 90 days, and its alerts stay on.
   The parcel goes with its last link. The scheduled sync's maintenance pass does the
   forgetting.
 - **Keeping a looked-up parcel** after signing in moves it into the account when nobody

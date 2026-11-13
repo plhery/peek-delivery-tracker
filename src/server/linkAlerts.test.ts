@@ -484,6 +484,22 @@ describe('when an alert ends', () => {
     expect(send.mock.calls[0]![0]).toMatchObject({ event_id: 'event-1', stage: 'returned' });
   });
 
+  it('stays on for a return held on the schedule, and tells its later scans as the trip back', async () => {
+    const held = (changes: JsonObject) => row({ package_stage: 'returned', return_held: true, ...changes });
+    pending([held({ event_id: 'event-1', stage: 'returned', occurred_at: '2026-10-02T09:00:00Z' }),
+      held({ event_id: 'event-2', stage: 'in_transit', occurred_at: '2026-10-02T12:30:00Z' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[0]![0]).toMatchObject({ event_id: 'event-1', stage: 'returned' });
+    // A delivery-only preset tells nothing of the trip back, and stays on as well.
+    pending([held({ event_id: 'event-3', stage: 'in_transit', occurred_at: '2026-10-02T12:35:00Z' }),
+      held({ alert_id: 'alert-2', preset: 'delivery', event_id: 'event-3', stage: 'in_transit', occurred_at: '2026-10-02T12:35:00Z' })]);
+    await alerts.dispatch();
+    expect(send).toHaveBeenCalledTimes(2);
+    expect(send.mock.calls[1]![0]).toMatchObject({ event_id: 'event-3', stage: 'returned' });
+    expect(removed).not.toHaveBeenCalled();
+    expect(handled).toHaveBeenCalledTimes(3);
+  });
+
   it('ends with the journey even when its preset does not announce the last scan', async () => {
     pending([row({ preset: 'delivery', stage: 'returned', package_stage: 'returned' })]);
     expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });

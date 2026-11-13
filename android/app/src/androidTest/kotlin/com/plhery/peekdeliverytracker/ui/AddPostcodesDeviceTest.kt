@@ -4,18 +4,24 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextReplacement
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.api.CarrierData
+import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ProviderInputNeeded
+import com.plhery.peekdeliverytracker.core.api.ProviderInputNeededField
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.LONG_MILLIS
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.READER
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_BUTTON
@@ -29,9 +35,12 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ADD_POSTCODE
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_SAVE
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_TRACKING
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_USE_POSTCODE
+import com.plhery.peekdeliverytracker.ui.deliveries.CARRIER_PICKER_AUTOMATIC
 import com.plhery.peekdeliverytracker.ui.deliveries.CARRIER_PICKER_SEARCH
 import com.plhery.peekdeliverytracker.ui.deliveries.CHANGE_CARRIER_COUNTRY
 import com.plhery.peekdeliverytracker.ui.deliveries.CHANGE_CARRIER_POSTCODE
+import com.plhery.peekdeliverytracker.ui.deliveries.CHANGE_CARRIER_PROVIDER_POSTCODE
+import com.plhery.peekdeliverytracker.ui.deliveries.CHANGE_CARRIER_SAVE
 import com.plhery.peekdeliverytracker.ui.deliveries.CHANGE_CARRIER_SHEET
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
@@ -50,8 +59,9 @@ import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 /**
- * Add's postcodes on this device's own window (B-SE08, B-SE09), as AddParcelView's postcode field, its country menu
- * and the postcodes given before, and Change carrier's country (ParcelDetailView's ChangeCarrierView). In Zurich's time
+ * Add's postcodes on this device's own window (B-SE08, B-SE09), as AddParcelView's postcode field, its country menu,
+ * the postcodes given before and each carrier's own, and Change carrier's country and the postcode a provider asks for
+ * (ParcelDetailView's ChangeCarrierView). In Zurich's time
  * zone, which names the phone's country; signed in as the synthetic reader@example.com, or as a guest, on fake
  * deliveries ([ParcelWalk]) whose stores answer every read in memory; the numbers and postcodes are synthetic or public
  * samples, and nothing goes to the network. Each saved as addpostcodes/<row>-<moment>.png in the test package's
@@ -98,19 +108,41 @@ class AddPostcodesDeviceTest {
     private fun chooseMondialRelay() {
         walk.node(ADD_TRACKING).performTextInput(MONDIAL_NUMBER)
         walk.settle()
+        choose(CarrierId.MondialRelay, "Mondial")
+        compose.waitUntil(LONG_MILLIS) { walk.exists(ADD_COUNTRY) }
+        walk.awaitStill()
+    }
+
+    /** The carrier line's picker opened, until it has settled. */
+    private fun openPicker() {
         compose.waitUntil(LONG_MILLIS) { walk.exists(ADD_CARRIER) }
         walk.tap(ADD_CARRIER)
         walk.settle()
         compose.waitUntil(LONG_MILLIS) { walk.exists(CARRIER_PICKER_SEARCH) }
         walk.awaitStill()
-        walk.node(CARRIER_PICKER_SEARCH).performTextInput("Mondial")
-        walk.settle()
-        val row = carrierPickerRowTag(CarrierId.MondialRelay)
+    }
+
+    /** The picker's row tagged `row` tapped, until the picker has gone. */
+    private fun pickRow(row: String) {
         compose.waitUntil(LONG_MILLIS) { walk.exists(row) }
         walk.tap(row)
         walk.settle()
-        compose.waitUntil(LONG_MILLIS) { !walk.exists(ADD_PICKER) && walk.exists(ADD_COUNTRY) }
+        compose.waitUntil(LONG_MILLIS) { !walk.exists(ADD_PICKER) }
         walk.awaitStill()
+    }
+
+    /** `carrier` chosen from the carrier line's picker, found by `search`. */
+    private fun choose(carrier: CarrierId, search: String) {
+        openPicker()
+        walk.node(CARRIER_PICKER_SEARCH).performTextInput(search)
+        walk.settle()
+        pickRow(carrierPickerRowTag(carrier))
+    }
+
+    /** Automatic detection chosen again from the picker. */
+    private fun chooseAutomatic() {
+        openPicker()
+        pickRow(CARRIER_PICKER_AUTOMATIC)
     }
 
     /** `code` chosen from the country menu tagged `menu`. */
@@ -252,6 +284,70 @@ class AddPostcodesDeviceTest {
         assertFalse("Nothing of this phone's to forget", walk.exists(ADD_FORGET_POSTCODE))
     }
 
+    /**
+     * Each carrier's field keeps its own postcode, as on the web. PostNL's for a 3S number is optional, so the one
+     * given before is only offered there; Packs' is required and starts from it. One typed for PostNL is neither shown
+     * nor sent for Packs, and each shows again when its carrier comes back.
+     */
+    @Test
+    fun eachCarrierKeepsItsOwnPostcode() {
+        openAdd { givenPostcodes = listOf(GivenPostcode(carrier = CarrierId.Dpd, postcode = "1234 AB")) }
+        typeAndLeave(POSTNL_NUMBER)
+        assertEquals("PostNL's optional field, only offered", "", walk.editable(ADD_POSTCODE))
+        assertTrue(walk.exists(ADD_USE_POSTCODE))
+        walk.node(ADD_POSTCODE).performTextInput("1011 CD")
+        walk.settle()
+
+        choose(PACKS, "Packs")
+        assertEquals("Packs' required field, from the one given", "1234 AB", walk.editable(ADD_POSTCODE))
+        walk.node(ADD_POSTCODE).performTextReplacement("2000 EF")
+        walk.settle()
+        walk.shot("own-postcode-packs", alsoDark = false)
+
+        chooseAutomatic()
+        assertEquals("PostNL's own again", "1011 CD", walk.editable(ADD_POSTCODE))
+        assertFalse(walk.exists(ADD_USE_POSTCODE))
+        walk.shot("own-postcode-postnl", alsoDark = false)
+        choose(PACKS, "Packs")
+        assertEquals("2000 EF", walk.editable(ADD_POSTCODE))
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(POSTNL_NUMBER, "", PACKS, null, "2000 EF", null)), save())
+    }
+
+    /**
+     * A provider asking for the postcode of a parcel whose carrier has a postcode field of its own (PostNL's for a 3S
+     * number) is asked in that field, required while it asks and under the provider's line, never in a second one.
+     */
+    @Test
+    fun aProvidersRequestTakesTheCarriersOwnPostcodeField() {
+        val parcel = lamp.copy(
+            carrier = CarrierId.SpringGDS, trackingNumber = POSTNL_NUMBER, dpdPostcode = null,
+            carrierData = CarrierData(
+                destinationCountry = "NL",
+                routing = CarrierDataRouting(providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode)),
+            ),
+        )
+        walk.show(listOf(parcel))
+        walk.open(parcel)
+        walk.tap(walk.pageButton(walk.text("detail.inputNeededAction")))
+        walk.settle()
+        compose.waitUntil(LONG_MILLIS) { walk.exists(CHANGE_CARRIER_SHEET) && walk.exists(CHANGE_CARRIER_POSTCODE) }
+        walk.awaitStill()
+        assertFalse("No second field", walk.exists(CHANGE_CARRIER_PROVIDER_POSTCODE))
+        assertTrue("Required", compose.onAllNodes(hasText(walk.text("add.optional")), useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
+        assertTrue(walk.shows(CHANGE_CARRIER_SHEET, walk.text("detail.providerInputNeeded", "provider" to "Example Provider")))
+        walk.node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
+        walk.shot("provider-postcode", alsoDark = false)
+        walk.node(CHANGE_CARRIER_POSTCODE).performTextInput("1234 ab")
+        walk.settle()
+        walk.tap(CHANGE_CARRIER_SAVE)
+        walk.settle()
+        compose.waitUntil(LONG_MILLIS) { walk.onUi { walk.source.carrierRequests.isNotEmpty() } }
+        assertEquals(
+            listOf(FakeDeliveries.CarrierChangeRequest(parcel.id, CarrierId.SpringGDS, null, "1234 AB", null, null)),
+            walk.onUi { walk.source.carrierRequests.toList() },
+        )
+    }
+
     private companion object {
         const val FOLDER = "addpostcodes"
 
@@ -262,5 +358,10 @@ class AddPostcodesDeviceTest {
         const val GLS_NUMBER = "12345478901"
 
         val GLS_AT = CarrierId("gls-at")
+
+        /** A synthetic 3S number: PostNL's by its shape, its postcode optional. */
+        const val POSTNL_NUMBER = "3SABCD826405193"
+
+        val PACKS = CarrierId("packs")
     }
 }

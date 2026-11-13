@@ -6,6 +6,7 @@ import {
   MAX_POSTCODES,
   POSTCODES_STORAGE_KEY,
   rememberedPostcode,
+  rememberedPostcodeField,
   rememberPostcode,
   usePostcodeMemory,
 } from './postcodeMemory';
@@ -42,6 +43,16 @@ describe('remembered postcodes', () => {
       { carrier: 'gls-de', postcode: ' sw1a  1aa ' },
     ])).toBe('SW1A 1AA');
     expect(rememberedPostcode('dpd', dpd, [])).toBeUndefined();
+  });
+
+  it('fills a required field and offers it to an optional one, until the reader types', () => {
+    const given = [{ carrier: 'dpd' as const, postcode: '8004' }];
+    expect(rememberedPostcodeField('gls-ch', glsSwitzerland, undefined, given)).toEqual({ value: '8004', offered: undefined });
+    expect(rememberedPostcodeField('dpd', dpd, undefined, given)).toEqual({ value: '', offered: '8004' });
+    expect(rememberedPostcodeField('gls-ch', glsSwitzerland, '', given)).toEqual({ value: '', offered: undefined });
+    expect(rememberedPostcodeField('dpd', dpd, '', given)).toEqual({ value: '', offered: '8004' });
+    expect(rememberedPostcodeField('dpd', dpd, '3011', given)).toEqual({ value: '3011', offered: undefined });
+    expect(rememberedPostcodeField('dpd', undefined, undefined, given)).toEqual({ value: '', offered: undefined });
   });
 });
 

@@ -236,7 +236,7 @@ internal fun AddParcelHost(state: DeliveriesState) {
 /**
  * What Add holds (`AddParcelView`'s `@State`): the name and the text typed, the number chosen among several, the
  * carrier chosen, the number to add as typed, recognition and the answers of the checks, the link and the phone digits
- * typed, each carrier's postcode, the postcode's country chosen and the postcode filled in from those given before,
+ * typed, each carrier's postcode and the country chosen beside it, the postcode filled in from those given before,
  * Amazon's check asked again,
  * the picker or the scanner open, the keyboard or the scanner opened once, and a paste that found nothing. All of it
  * stays through a window made again, as the iPhone's `@State` does, so no check is asked again for what it answered.
@@ -254,7 +254,6 @@ internal class AddForm(
     lookedUp: String?,
     trackingUrl: String,
     postcodes: CarrierPostcodes,
-    chosenPostcodeCountry: String?,
     postcodeFill: PostcodeFill,
     lookupAttempt: Int,
     showingPicker: Boolean,
@@ -277,9 +276,8 @@ internal class AddForm(
     var lookedUp = lookedUp
     var trackingUrl by mutableStateOf(trackingUrl)
 
-    /** The postcode given for each carrier: the field shows the one for the carrier in play. */
+    /** The postcode given for each carrier and the country chosen beside it: the field shows the carrier in play's. */
     var postcodes by mutableStateOf(postcodes)
-    var chosenPostcodeCountry by mutableStateOf(chosenPostcodeCountry)
     var postcodeFill by mutableStateOf(postcodeFill)
 
     /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
@@ -295,7 +293,7 @@ internal class AddForm(
 
     fun addition(demo: Boolean, catalog: CarrierCatalog, region: String?) = ParcelAddition(
         trackingInput, pick, carrierOverride, asTyped, recognition, refusedQuestion, verifiedCarrier, trackingUrl,
-        chosenPostcodeCountry = chosenPostcodeCountry, phoneDigits = phoneDigits, demo = demo, catalog = catalog, region = region,
+        phoneDigits = phoneDigits, demo = demo, catalog = catalog, region = region,
     ).withPostcode(postcodes)
 
     /** Takes the text, the number chosen, the carrier chosen and recognition from `addition`. */
@@ -312,7 +310,7 @@ internal class AddForm(
             label = label, trackingInput = draft.orEmpty(), pick = null, carrierOverride = null, asTyped = null,
             recognition = CarrierRecognition(draft?.let { ParcelAddition.trackingNumber(it, catalog) }), refusedQuestion = null,
             verifiedCarrier = null, lookedUp = null, trackingUrl = "", postcodes = CarrierPostcodes(),
-            chosenPostcodeCountry = null, postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
+            postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
             didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false, phoneDigits = "",
         )
 
@@ -321,7 +319,7 @@ internal class AddForm(
                 val recognition = it.recognition
                 listOf(
                     it.label, it.trackingInput, it.pick.orEmpty(), it.carrierOverride?.rawValue.orEmpty(), it.asTyped.orEmpty(),
-                    recognition.settledNumber ?: NONE, it.trackingUrl, it.postcodes.kept, it.chosenPostcodeCountry.orEmpty(),
+                    recognition.settledNumber ?: NONE, it.trackingUrl, it.postcodes.kept, it.postcodes.keptCountries,
                     it.postcodeFill.postcode ?: NONE, it.postcodeFill.forgotten, it.lookupAttempt, it.showingPicker, it.didFocus,
                     it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
@@ -332,11 +330,12 @@ internal class AddForm(
             restore = {
                 fun text(index: Int) = (it[index] as String).ifEmpty { null }
                 fun kept(index: Int) = (it[index] as String).takeIf { value -> value != NONE }
+                fun texts(index: Int) = (it[index] as List<*>).map { value -> value as String }
                 AddForm(
                     it[0] as String, it[1] as String, text(2), text(3)?.let(::CarrierId), text(4),
                     CarrierRecognition(kept(5), kept(17)?.let(ParcelAddition::answer), kept(16)),
                     kept(19)?.let(ParcelAddition::question), kept(18)?.let(ParcelAddition::answer), kept(20),
-                    it[6] as String, CarrierPostcodes.from((it[7] as List<*>).map { postcode -> postcode as String }), text(8),
+                    it[6] as String, CarrierPostcodes.from(texts(7), texts(8)),
                     PostcodeFill(kept(9), it[10] as Boolean), it[11] as Int,
                     it[12] as Boolean, it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId), it[21] as Boolean,
                     it[22] as String,
@@ -1010,6 +1009,12 @@ private fun AmazonOrdersLink(number: String) {
     TintedButton(AnnotatedString(localized("add.openAmazonOrders")), { uriHandler.openUri(CarrierCatalog.amazonOrdersUrl(number)) }, ADD_AMAZON_ORDERS)
 }
 
+/** "Use {{postcode}}" under an optional postcode field that is empty, in Add and in Change carrier: a tap fills it in. */
+@Composable
+internal fun UsePostcodeButton(postcode: String, tag: String, onUse: () -> Unit) {
+    TintedButton(AnnotatedString(LocalLocalizer.current.text("add.usePostcode", mapOf("postcode" to postcode))), onUse, tag)
+}
+
 /**
  * A button as SwiftUI draws one by default: its words in subheadline, in the accent, fading under the finger; grey while
  * off.
@@ -1318,7 +1323,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                             addition.resolvedCarrier, carrierRequirement, country, catalog,
                             Modifier.padding(start = 14.dp, top = 14.dp, bottom = 14.dp, end = 10.dp), ADD_COUNTRY,
                             enabled = LocalFormEnabled.current,
-                        ) { form.chosenPostcodeCountry = it }
+                        ) { form.postcodes = form.postcodes.withCountry(carrier, it) }
                         // `Divider().padding(.vertical, 12)`: the row's height, less 12 at each end.
                         Box(
                             Modifier
@@ -1351,21 +1356,16 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                     )
                 }
                 // An optional postcode is offered, never filled in for the reader.
-                if (requirement.isOptional && addition.deliveryPostcode.isEmpty()) {
-                    val suggestion = form.postcodeFill.offering(addition.previousPostcode(requirement, state.source.givenPostcodes))
-                    if (suggestion != null) {
-                        TintedButton(
-                            AnnotatedString(localizer.text("add.usePostcode", mapOf("postcode" to suggestion))),
-                            {
-                                form.postcodeFill = form.postcodeFill.fill(suggestion)
-                                form.postcodes = form.postcodes.with(carrier, suggestion)
-                            },
-                            ADD_USE_POSTCODE,
-                        )
+                val suggestion = form.postcodeFill.offering(addition.offeredPostcode(state.source.givenPostcodes))
+                if (suggestion != null) {
+                    UsePostcodeButton(suggestion, ADD_USE_POSTCODE) {
+                        form.postcodeFill = form.postcodeFill.fill(suggestion)
+                        form.postcodes = form.postcodes.with(carrier, suggestion)
                     }
                 }
-                // Without an account every suggestion is this phone's own, so it can forget them: no other carrier's
-                // field keeps it either.
+                // Without an account every suggestion is this phone's own, so it can forget them. Every field holding
+                // it, this one too, empties and starts afresh when its carrier's details come up again; until then
+                // nothing fills this one or is offered in it.
                 if (state.source.isGuest && form.postcodeFill.holds(addition.deliveryPostcode)) {
                     TintedButton(
                         AnnotatedString(localized("add.forgetPostcode")),
@@ -1375,7 +1375,6 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                                 form.postcodeFill = fill
                                 form.postcodes = form.postcodes.without(postcode)
                             }
-                            form.postcodes = form.postcodes.with(carrier, "")
                         },
                         ADD_FORGET_POSTCODE,
                     )

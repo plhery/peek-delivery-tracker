@@ -39,6 +39,11 @@ final class DeviceParcelTests: XCTestCase {
 
     private func given(_ carrier: CarrierID, _ postcode: String) -> GivenPostcode { GivenPostcode(carrier: carrier, postcode: postcode) }
 
+    /// The carrier's postcode field for a number of that shape.
+    private func postcodeField(_ carrier: CarrierID, _ number: String) throws -> CarrierRequirement {
+        try XCTUnwrap(CarrierCatalog.shared.requirements(for: carrier, trackingNumber: number).first { $0.field == .dpdPostcode })
+    }
+
     private func defaults() -> (UserDefaults, String) {
         let suite = "DeviceParcelTests.\(UUID().uuidString)"
         return (UserDefaults(suiteName: suite)!, suite)
@@ -664,6 +669,126 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(filled[.mondialRelay], "")
         filled.prepare(.mondialRelay, requirement: mondialRelay, among: [given(.mondialRelay, "75002")])
         XCTAssertEqual(filled[.mondialRelay], "75002")
+    }
+
+    func testAForgottenPostcodeEmptiesEveryOtherCarriersFieldHoldingItWhateverItsCapitalsAndSpaces() throws {
+        let mondialRelay = try postcodeField(.mondialRelay, "12345678")
+        let glsSpain = try postcodeField(.glsEs, "12345678901")
+        let postNL = try postcodeField(.springGDS, "3SABCD826405193")
+        XCTAssertFalse(mondialRelay.isOptional)
+        XCTAssertFalse(glsSpain.isOptional)
+        XCTAssertTrue(postNL.isOptional)
+        let earlier = [given(.mondialRelay, "1234ab"), given(.springGDS, "1234 AB"), given(.dpd, "75002")]
+        var postcodes = CarrierPostcodes()
+
+        // Mondial Relay's field is filled with the postcode as it was given to it, GLS's typed in other capitals and
+        // spaces, DPD's typed with another one.
+        postcodes.prepare(.mondialRelay, requirement: mondialRelay, among: earlier)
+        XCTAssertEqual(postcodes[.mondialRelay], "1234AB")
+        postcodes[.glsEs] = "1234ab"
+        postcodes[.dpd] = "75002"
+        postcodes.prepare(.springGDS, requirement: postNL, among: earlier)
+        postcodes.use(try XCTUnwrap(postcodes.offering(.springGDS, requirement: postNL, among: earlier)), for: .springGDS)
+        XCTAssertEqual(postcodes[.springGDS], "1234 AB")
+
+        XCTAssertEqual(postcodes.forget(.springGDS), "1234 AB")
+        XCTAssertEqual(postcodes[.springGDS], "")
+        XCTAssertNil(postcodes.offering(.springGDS, requirement: postNL, among: earlier), "Not offered again straight away")
+        XCTAssertEqual(postcodes[.mondialRelay], "", "Filled with it")
+        XCTAssertEqual(postcodes[.glsEs], "", "Typed with it")
+        XCTAssertEqual(postcodes[.dpd], "75002", "Another postcode stays")
+
+        // Each fills again from what is left when its carrier comes up.
+        let left = [given(.dpd, "75002")]
+        postcodes.prepare(.mondialRelay, requirement: mondialRelay, among: left)
+        XCTAssertEqual(postcodes[.mondialRelay], "75002")
+        postcodes.prepare(.glsEs, requirement: glsSpain, among: left)
+        XCTAssertEqual(postcodes[.glsEs], "75002")
+    }
+
+    func testEachCarrierKeepsTheCountryChosenBesideItsPostcode() throws {
+        let catalog = CarrierCatalog.shared
+        let postNL = try postcodeField(.springGDS, "3SABCD826405193")
+        let mondialRelay = try postcodeField(.mondialRelay, "12345678")
+        let dpd = try postcodeField(.dpd, "06080000000001")
+        var postcodes = CarrierPostcodes()
+
+        // Both take any country's postcode, and start on the iPhone's.
+        XCTAssertEqual(postcodes.country(.springGDS, requirement: postNL, region: "FR"), "FR")
+        XCTAssertEqual(postcodes.country(.mondialRelay, requirement: mondialRelay, region: "FR"), "FR")
+
+        // A country chosen for one carrier's field leaves the other's where it starts, and stays when switching back.
+        postcodes.choose("LU", for: .springGDS)
+        XCTAssertEqual(postcodes.country(.mondialRelay, requirement: mondialRelay, region: "FR"), "FR")
+        XCTAssertEqual(postcodes.country(.springGDS, requirement: postNL, region: "FR"), "LU")
+        postcodes.choose("BE", for: .mondialRelay)
+        XCTAssertEqual(postcodes.country(.springGDS, requirement: postNL, region: "FR"), "LU")
+        XCTAssertEqual(postcodes.country(.mondialRelay, requirement: mondialRelay, region: "FR"), "BE")
+
+        // The country sent with the postcode is the shown carrier's own.
+        let sent = catalog.sentPostcodeCountry(postcodes.country(.springGDS, requirement: postNL, region: "FR"),
+                                               postcode: "L-1009", for: .springGDS)
+        XCTAssertEqual(sent, "LU")
+
+        // A country the field doesn't take leaves it where it starts.
+        postcodes.choose("FR", for: .dpd)
+        XCTAssertEqual(postcodes.country(.dpd, requirement: dpd, region: "FR"), "CH")
+
+        // Change carrier starts each carrier picked afresh: the parcel's own postcode keeps the country saved with it,
+        // another carrier's field starts on the parcel's destination.
+        let parcel = Parcel(id: UUID(), trackingNumber: "3SABCD826405193", label: "", carrier: .springGDS, createdAt: "2026-10-01T08:00:00Z",
+                            syncStatus: .ok, dpdPostcode: "1000",
+                            carrierData: CarrierData(postcodeCountry: PostcodeCountry(postcode: "1000", country: "BE"), destinationCountry: "LU"),
+                            notificationsMuted: false)
+        var picked = CarrierPostcodes(parcel: parcel)
+        XCTAssertEqual(picked.country(.springGDS, requirement: postNL, parcel: parcel, region: "FR"), "BE")
+        picked.choose("ES", for: .springGDS)
+        XCTAssertEqual(picked.country(.springGDS, requirement: postNL, parcel: parcel, region: "FR"), "ES")
+        picked = CarrierPostcodes(parcel: parcel)
+        XCTAssertEqual(picked.country(.mondialRelay, requirement: mondialRelay, parcel: parcel, region: "FR"), "LU")
+        XCTAssertEqual(picked.country(.springGDS, requirement: postNL, parcel: parcel, region: "FR"), "BE")
+    }
+
+    func testTheChangeCarrierSheetFillsOrOffersAPostcodeGivenBeforeAndKeepsTheParcelsOwn() throws {
+        let mondialRelay = try postcodeField(.mondialRelay, "12345678")
+        let postNL = try postcodeField(.springGDS, "3SABCD826405193")
+        let earlier = [given(.dpd, "1234 AB")]
+        func parcel(_ carrier: CarrierID, _ number: String, postcode: String?) -> Parcel {
+            Parcel(id: UUID(), trackingNumber: number, label: "", carrier: carrier, createdAt: "2026-10-01T08:00:00Z",
+                   syncStatus: .ok, dpdPostcode: postcode, notificationsMuted: false)
+        }
+
+        // Another carrier's required field starts from the last postcode given that fits, not the parcel's own for
+        // its carrier; what is typed wins.
+        var other = CarrierPostcodes(parcel: parcel(.dpd, "12345678", postcode: "8000"))
+        other.prepare(.mondialRelay, requirement: mondialRelay, among: earlier)
+        XCTAssertEqual(other[.mondialRelay], "1234 AB")
+        XCTAssertNil(other.offering(.mondialRelay, requirement: mondialRelay, among: earlier))
+        other[.mondialRelay] = ""
+        XCTAssertEqual(other[.mondialRelay], "")
+        XCTAssertNil(other.offering(.mondialRelay, requirement: mondialRelay, among: earlier))
+
+        // The parcel's own postcode stays in its own carrier's field, required or optional, and nothing is offered.
+        var ownRequired = CarrierPostcodes(parcel: parcel(.mondialRelay, "12345678", postcode: "75001"))
+        ownRequired.prepare(.mondialRelay, requirement: mondialRelay, among: earlier)
+        XCTAssertEqual(ownRequired[.mondialRelay], "75001")
+        var ownOptional = CarrierPostcodes(parcel: parcel(.springGDS, "3SABCD826405193", postcode: "1012 AB"))
+        ownOptional.prepare(.springGDS, requirement: postNL, among: earlier)
+        XCTAssertEqual(ownOptional[.springGDS], "1012 AB")
+        XCTAssertNil(ownOptional.offering(.springGDS, requirement: postNL, among: earlier))
+
+        // The parcel's own carrier without a postcode: a required field is filled, an optional one only offered it.
+        var unsetRequired = CarrierPostcodes(parcel: parcel(.mondialRelay, "12345678", postcode: nil))
+        unsetRequired.prepare(.mondialRelay, requirement: mondialRelay, among: earlier)
+        XCTAssertEqual(unsetRequired[.mondialRelay], "1234 AB")
+        var unsetOptional = CarrierPostcodes(parcel: parcel(.springGDS, "3SABCD826405193", postcode: nil))
+        unsetOptional.prepare(.springGDS, requirement: postNL, among: earlier)
+        XCTAssertEqual(unsetOptional[.springGDS], "")
+        XCTAssertTrue(postNL.isSatisfied(by: unsetOptional[.springGDS]))
+        XCTAssertEqual(unsetOptional.offering(.springGDS, requirement: postNL, among: earlier), "1234 AB")
+        unsetOptional.use("1234 AB", for: .springGDS)
+        XCTAssertEqual(unsetOptional[.springGDS], "1234 AB")
+        XCTAssertNil(unsetOptional.offering(.springGDS, requirement: postNL, among: earlier))
     }
 
     func testAFileWithAPostcodeOnItsParcelsStillOpens() throws {

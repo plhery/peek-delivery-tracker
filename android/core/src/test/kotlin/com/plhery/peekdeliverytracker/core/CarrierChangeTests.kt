@@ -144,6 +144,48 @@ class CarrierChangeTests {
         assertEquals("x", unfiled.choosing(CarrierId.Unknown).deliveryPostcode)
     }
 
+    /**
+     * As in Add, an empty postcode field starts from the postcodes given before: a required one is filled with the last
+     * that fits, the carrier's own first, and an optional one only offers it. The parcel's own on its own carrier stays.
+     */
+    @Test
+    fun anEmptyPostcodeFieldStartsFromThePostcodesGivenBeforeAsInAdd() {
+        val given = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"), GivenPostcode(CarrierId.GlsCh, "3011"), GivenPostcode(CarrierId.Dpd, "8000"))
+        val kettle = parcel(CarrierId.Dpd, postcode = "8001")
+        val own = CarrierChange.start(kettle, catalog = catalog, region = "CH", given = given)
+        assertEquals("8001", own.deliveryPostcode)
+        assertFalse(own.changed)
+        // DPD's own is optional: nothing is offered while the field holds the parcel's.
+        assertNull(own.offeredPostcode(given))
+
+        // GLS requires one: its own last, filled in, and sent.
+        val gls = own.choosing(CarrierId.GlsCh, given)
+        assertEquals("3011", gls.deliveryPostcode)
+        assertNull(gls.offeredPostcode(given))
+        assertTrue(gls.canSave)
+        assertEquals("3011", gls.sentPostcode)
+        // The parcel's own carrier gets the parcel's back, not one given before.
+        assertEquals("8001", gls.choosing(CarrierId.Dpd, given).deliveryPostcode)
+        // Emptied by the reader, it stays so; the same carrier again leaves what is typed.
+        assertEquals("", gls.copy(deliveryPostcode = "").choosing(CarrierId.GlsCh, given).deliveryPostcode)
+        assertEquals("8002", gls.copy(deliveryPostcode = "8002").choosing(CarrierId.GlsCh, given).deliveryPostcode)
+
+        // DPD for another parcel: optional, so only offered, the last given that fits, and not sent.
+        val relay = start(parcel(CarrierId.MondialRelay, number = "76434219")).choosing(CarrierId.Dpd, given)
+        assertEquals("", relay.deliveryPostcode)
+        assertEquals("1234 AB", relay.offeredPostcode(given))
+        assertNull(relay.sentPostcode)
+        assertNull(relay.copy(deliveryPostcode = "8000").offeredPostcode(given))
+
+        // A parcel without a postcode on its own carrier, which requires one, starts filled; one that fits none, empty.
+        val boots = parcel(CarrierId.GlsCh)
+        val filled = CarrierChange.start(boots, catalog = catalog, region = "CH", given = given)
+        assertEquals("3011", filled.deliveryPostcode)
+        assertTrue(filled.canSave)
+        assertEquals("", CarrierChange.start(boots, catalog = catalog, region = "CH", given = given.take(1)).deliveryPostcode)
+        assertEquals("", CarrierChange.start(boots, catalog = catalog, region = "CH").deliveryPostcode)
+    }
+
     @Test
     fun thePostcodesCountryIsOfferedWhereTheFieldTakesSeveralAndShapesIt() {
         val change = start(parcel(CarrierId.Unknown, number = "76434219"), CarrierId.MondialRelay, region = "FR")

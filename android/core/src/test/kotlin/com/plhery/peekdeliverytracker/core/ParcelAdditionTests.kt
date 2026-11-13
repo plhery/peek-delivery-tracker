@@ -379,6 +379,39 @@ class ParcelAdditionTests {
         assertEquals(CarrierPostcodes(), CarrierPostcodes.from(emptyList()))
     }
 
+    /**
+     * The country chosen beside a carrier's postcode is that carrier's alone, as the web's `postcodeCountryChoices`:
+     * another carrier's field starts where it starts, going back shows the one chosen, and the country sent is the
+     * carrier in play's.
+     */
+    @Test
+    fun eachCarrierKeepsTheCountryChosenBesideItsPostcode() {
+        val relay = addition("76434219").copy(carrierOverride = CarrierId.MondialRelay)
+        val postnl = addition("3SABCD826405193")
+        assertEquals(CarrierId.SpringGDS, postnl.resolvedCarrier)
+        assertEquals("CH", postnl.withPostcode(CarrierPostcodes()).offeredPostcodeCountry)
+
+        val belgium = CarrierPostcodes().withCountry(CarrierId.MondialRelay, "BE").with(CarrierId.MondialRelay, "1000")
+        assertEquals("BE", relay.withPostcode(belgium).offeredPostcodeCountry)
+        assertEquals("BE", relay.withPostcode(belgium).sentPostcodeCountry)
+        // PostNL's takes Belgium too, but starts on the phone's country: Mondial Relay's choice is not its own.
+        assertEquals("CH", postnl.withPostcode(belgium).offeredPostcodeCountry)
+        assertEquals("CH", postnl.withPostcode(belgium.with(CarrierId.SpringGDS, "8000")).sentPostcodeCountry)
+
+        val both = belgium.withCountry(CarrierId.SpringGDS, "AT").with(CarrierId.SpringGDS, "1010")
+        assertEquals("AT", postnl.withPostcode(both).offeredPostcodeCountry)
+        assertEquals("AT", postnl.withPostcode(both).sentPostcodeCountry)
+        // Back on Mondial Relay, its own choice; a carrier given none starts where its field does.
+        assertEquals("BE", relay.withPostcode(both).sentPostcodeCountry)
+        assertEquals("FR", addition("76434219", region = "FR").copy(carrierOverride = CarrierId.MondialRelay)
+            .withPostcode(CarrierPostcodes().withCountry(CarrierId.SpringGDS, "BE")).offeredPostcodeCountry)
+
+        // A postcode forgotten leaves the countries chosen; the window keeps them with the postcodes.
+        assertEquals(both.countries, both.without("1000").countries)
+        assertEquals(both, CarrierPostcodes.from(both.kept, both.keptCountries))
+        assertEquals(listOf("mondial-relay", "BE", "spring-gds", "AT"), both.keptCountries)
+    }
+
     @Test
     fun theFieldSettlesOnTheNumberAPasteOrADraftNames() {
         val form = addition("").typing("1Z999AA10123456784").settling("1Z999AA10123456784")

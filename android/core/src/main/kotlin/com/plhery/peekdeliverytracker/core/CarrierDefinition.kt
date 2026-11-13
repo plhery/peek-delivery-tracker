@@ -102,6 +102,17 @@ data class CarrierRequirement(
     }
 
     /**
+     * What this field starts with for `carrier` while it is empty, in Add and in Change carrier: the postcode it
+     * suggests where it is required; none where it is optional, as that one is only offered ([offeredPostcode]).
+     */
+    fun startingPostcode(carrier: CarrierId, given: List<GivenPostcode>): String? =
+        if (isOptional) null else suggestedPostcode(carrier, given)
+
+    /** The postcode offered under this field ("add.usePostcode") while it is optional and `field` is empty. */
+    fun offeredPostcode(carrier: CarrierId, field: String, given: List<GivenPostcode>): String? =
+        if (isOptional && field.isEmpty()) suggestedPostcode(carrier, given) else null
+
+    /**
      * A postcode as this field takes it, or nil when it does not fit as written: "1012 AB" is not "1012" in a
      * four-digit field. Like the web, the pattern is tried on the postcode in capitals with single spaces.
      */

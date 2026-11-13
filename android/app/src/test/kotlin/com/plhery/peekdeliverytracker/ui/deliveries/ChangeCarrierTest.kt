@@ -58,6 +58,7 @@ import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierChange
 import com.plhery.peekdeliverytracker.core.DateParser
+import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
@@ -94,7 +95,8 @@ import org.robolectric.annotation.GraphicsMode
  * Changing a parcel's carrier (B-S13, B-ST27, ChangeCarrierView): the sheet from a page's ••• menu, from its prompts on
  * the carrier they name and from a card's menu; automatic detection at the medium detent, a carrier that asks for a
  * postcode at the large one with its country beside it; the picker pushed from the carrier's row and taken away by a
- * choice, the ‹ or the back; the fields as they are typed; the save, which waits with Cancel and dismissal off, closes
+ * choice, the ‹ or the back; the fields as they are typed, and an empty postcode filled or offered from those given
+ * before, as in Add; the save, which waits with Cancel and dismissal off, closes
  * once saved and says why in red once failed; a refused number under the carrier; the sheet through a window made
  * again; and its carrier row as TalkBack reads it. On synthetic parcels.
  */
@@ -416,6 +418,86 @@ class ChangeCarrierTest {
         pick(CarrierId.MondialRelay)
         assertEquals("", fieldText(CHANGE_CARRIER_POSTCODE))
         assertEquals("Switzerland", node(CHANGE_CARRIER_COUNTRY).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription))
+    }
+
+    /** The postcodes given before: one given to DPD, and one to GLS. */
+    private val given = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"), GivenPostcode(CarrierId.GlsCh, "3011"))
+
+    /**
+     * As in Add, a carrier's empty required postcode field starts from the last postcode given that fits, its own first;
+     * the parcel's own on its own carrier stays, and what is typed goes.
+     */
+    @Test
+    fun aRequiredPostcodeStartsFromTheLastGivenAndTheParcelsOwnStays() {
+        show { givenPostcodes = given }
+        fromPage(kettle)
+        assertEquals("8000", fieldText(CHANGE_CARRIER_POSTCODE))
+        assertTrue(!exists(CHANGE_CARRIER_USE_POSTCODE))
+
+        pushPicker()
+        pick(CarrierId.GlsCh)
+        assertEquals("3011", fieldText(CHANGE_CARRIER_POSTCODE))
+        assertTrue(!exists(CHANGE_CARRIER_USE_POSTCODE))
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled()
+        // Back on DPD, the kettle's own carrier, its own postcode.
+        pushPicker()
+        pick(CarrierId.Dpd)
+        assertEquals("8000", fieldText(CHANGE_CARRIER_POSTCODE))
+        node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
+
+        pushPicker()
+        pick(CarrierId.GlsCh)
+        node(CHANGE_CARRIER_POSTCODE).performTextReplacement("8001")
+        compose.waitForIdle()
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(kettle.id, CarrierId.GlsCh, null, "8001", null, null)), source.carrierRequests)
+    }
+
+    /** The parcel's own carrier, which requires a postcode the parcel was given none for, opens on the last given. */
+    @Test
+    fun aParcelWithoutThePostcodeItsCarrierRequiresOpensOnTheLastGiven() {
+        show { givenPostcodes = given }
+        fromPage(boots)
+        assertEquals("3011", fieldText(CHANGE_CARRIER_POSTCODE))
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(boots.id, CarrierId.GlsCh, null, "3011", null, null)), source.carrierRequests)
+    }
+
+    /** As in Add, an optional postcode is offered from those given before, never filled in, and sent once used. */
+    @Test
+    fun anOptionalPostcodeIsOfferedFromThoseGivenAndSentOnceUsed() {
+        show { givenPostcodes = given }
+        fromPage(chair)
+        pushPicker()
+        pick(CarrierId.Dpd)
+        assertEquals("", fieldText(CHANGE_CARRIER_POSTCODE))
+        node(CHANGE_CARRIER_USE_POSTCODE).assertTextEquals("Use 1234 AB").performClick()
+        compose.waitForIdle()
+        assertEquals("1234 AB", fieldText(CHANGE_CARRIER_POSTCODE))
+        assertTrue(!exists(CHANGE_CARRIER_USE_POSTCODE))
+        // Emptied, it is offered again.
+        node(CHANGE_CARRIER_POSTCODE).performTextReplacement("")
+        compose.waitForIdle()
+        assertTrue(exists(CHANGE_CARRIER_USE_POSTCODE))
+        node(CHANGE_CARRIER_USE_POSTCODE).performClick()
+        compose.waitForIdle()
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(chair.id, CarrierId.Dpd, null, "1234 AB", null, null)), source.carrierRequests)
+    }
+
+    @Test
+    fun anOptionalPostcodeOnlyOfferedIsNotSent() {
+        show { givenPostcodes = given }
+        fromPage(chair)
+        pushPicker()
+        pick(CarrierId.Dpd)
+        assertTrue(exists(CHANGE_CARRIER_USE_POSTCODE))
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(chair.id, CarrierId.Dpd, null, null, null, null)), source.carrierRequests)
     }
 
     @Test

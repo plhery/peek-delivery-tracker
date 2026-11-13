@@ -411,12 +411,22 @@ data class CarrierChange(
     /** The country sent with the postcode: none without one, nor for the carrier's home country. */
     val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, normalizedPostcode, selectedCarrier)
 
+    /** The postcode offered under the optional field while it is empty, as in Add, filled in only at a tap. */
+    fun offeredPostcode(given: List<GivenPostcode>): String? =
+        postcodeRequirement?.offeredPostcode(selectedCarrier, deliveryPostcode, given)
+
+    /** An empty required postcode field starting, as in Add, from the last postcode given that fits. */
+    private fun prefilled(given: List<GivenPostcode>): CarrierChange {
+        if (deliveryPostcode.isNotEmpty()) return this
+        return postcodeRequirement?.startingPostcode(selectedCarrier, given)?.let { copy(deliveryPostcode = it) } ?: this
+    }
+
     /**
      * The change with `carrier` chosen (null for automatic detection). Another carrier to file under starts its fields
-     * from the parcel's own on its own carrier, else empty, and the country from the field's start
-     * (`onChange(of: selectedCarrier)`).
+     * from the parcel's own on its own carrier, else empty, an empty required postcode from those `given` before, and
+     * the country from the field's start (`onChange(of: selectedCarrier)`).
      */
-    fun choosing(carrier: CarrierId?): CarrierChange {
+    fun choosing(carrier: CarrierId?, given: List<GivenPostcode> = emptyList()): CarrierChange {
         val next = copy(chosenCarrier = carrier)
         if (next.selectedCarrier == selectedCarrier) return next
         val own = next.selectedCarrier == parcel.carrier
@@ -425,21 +435,23 @@ data class CarrierChange(
             deliveryPostcode = if (own) parcel.dpdPostcode ?: "" else "",
             phoneDigits = if (own) parcel.phoneDigits ?: "" else "",
             chosenPostcodeCountry = null,
-        )
+        ).prefilled(given)
     }
 
     companion object {
         /**
          * The sheet as it opens on [parcel] (`init(parcel:initialCarrier:)`), on [initialCarrier] where a prompt names
          * one: an unfiled parcel on its own carrier starts on automatic detection, but for an Amazon number; the link,
-         * the postcode and the phone digits start from the parcel's on its own carrier. A parcel followed without an
-         * account has no digits: its link never shows them, so its field starts empty.
+         * the postcode and the phone digits start from the parcel's on its own carrier, and an empty required postcode
+         * from those [given] before. A parcel followed without an account has no digits: its link never shows them, so
+         * its field starts empty.
          */
         fun start(
             parcel: Parcel,
             initialCarrier: CarrierId? = null,
             catalog: CarrierCatalog = CarrierCatalog.shared,
             region: String? = CarrierCatalog.deviceCountry(),
+            given: List<GivenPostcode> = emptyList(),
         ): CarrierChange {
             val carrier = initialCarrier ?: parcel.carrier
             val unfiled = parcel.carrier == CarrierId.Unknown || parcel.carrier == CarrierId.InternationalPost
@@ -452,7 +464,7 @@ data class CarrierChange(
                 phoneDigits = if (own) parcel.phoneDigits ?: "" else "",
                 catalog = catalog,
                 region = region,
-            )
+            ).prefilled(given)
         }
 
         /** A postcode as a provider takes it, in capitals. */

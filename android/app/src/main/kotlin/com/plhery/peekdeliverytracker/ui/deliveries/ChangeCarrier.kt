@@ -53,6 +53,7 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierChange
 import com.plhery.peekdeliverytracker.core.CarrierRequirement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.NumberRefusals
 import com.plhery.peekdeliverytracker.core.ParcelLookupCountry
 import com.plhery.peekdeliverytracker.core.TrackingLocation
@@ -122,7 +123,9 @@ internal fun CarrierEditorHost(state: DeliveriesState) {
     val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
     val region = remember { CarrierCatalog.deviceCountry() }
     val parcel = editing?.let { state.carrierEditorParcel(it, state.parcels) }
-    val form = rememberSaveable(editing?.id, saver = CarrierEditorForm.Saver) { CarrierEditorForm.start(editing, parcel, catalog, region) }
+    val form = rememberSaveable(editing?.id, saver = CarrierEditorForm.Saver) {
+        CarrierEditorForm.start(editing, parcel, catalog, region, state.source.givenPostcodes)
+    }
     val change = parcel?.let { form.change(it, catalog, region) }
     // Inputs and their help sit below the half-height sheet: open fully for them, each time they come
     // (`.onChange(of: requirements.isEmpty, initial: true)`), and not again for the window made again.
@@ -195,10 +198,19 @@ internal class CarrierEditorForm(
     }
 
     companion object {
-        /** The editor as `request` opens it on `parcel` (`init(parcel:initialCarrier:)`): empty without one. */
-        fun start(request: CarrierEditorRequest?, parcel: Parcel?, catalog: CarrierCatalog, region: String?): CarrierEditorForm {
+        /**
+         * The editor as `request` opens it on `parcel` (`init(parcel:initialCarrier:)`), an empty required postcode
+         * filled from those `given` before: empty without one.
+         */
+        fun start(
+            request: CarrierEditorRequest?,
+            parcel: Parcel?,
+            catalog: CarrierCatalog,
+            region: String?,
+            given: List<GivenPostcode> = emptyList(),
+        ): CarrierEditorForm {
             if (request == null || parcel == null) return CarrierEditorForm(null, "", "", null, "", pushed = false, large = false)
-            val change = CarrierChange.start(parcel, request.initialCarrier, catalog, region)
+            val change = CarrierChange.start(parcel, request.initialCarrier, catalog, region, given)
             return CarrierEditorForm(
                 change.chosenCarrier, change.trackingUrl, change.deliveryPostcode, null, "",
                 pushed = false, large = change.requirements.isNotEmpty(), phoneDigits = change.phoneDigits,
@@ -272,7 +284,7 @@ private fun ChangeCarrierView(
                     PushedPicker(
                         state, change,
                         onChoose = { carrier ->
-                            val next = change.choosing(carrier)
+                            val next = change.choosing(carrier, state.source.givenPostcodes)
                             if (next.selectedCarrier != change.selectedCarrier) work.dismiss(request.id)
                             form.take(next)
                         },
@@ -294,8 +306,9 @@ private fun ChangeCarrierView(
 
 /**
  * `ChangeCarrierView`'s `Form`: the number and what changing its carrier does; the carrier, whose row pushes the picker,
- * and how it tracks; the fields the carrier asks for; the postcode a provider asks for, in the carrier's own field when
- * it has one ([CarrierChange.needsProviderPostcode]); and why the change failed.
+ * and how it tracks; the fields the carrier asks for, an optional postcode offered from those given before as in Add;
+ * the postcode a provider asks for, in the carrier's own field when it has one ([CarrierChange.needsProviderPostcode]);
+ * and why the change failed.
  * Cancel and Save in the bar, Save on only once the change is complete, and both off while it is saved. TalkBack starts
  * at the title.
  */
@@ -370,27 +383,37 @@ private fun ChangeCarrierForm(
                                 singleLine = false,
                             )
                         }
-                        CarrierRequirement.Field.DpdPostcode -> FormRowFrame(Modifier) {
-                            val country = change.offeredPostcodeCountry
-                            val carrierRequirement = change.carrierPostcodeRequirement
-                            if (country != null && carrierRequirement != null) {
-                                PostcodeCountryMenu(change.selectedCarrier, carrierRequirement, country, catalog) { form.chosenPostcodeCountry = it }
-                                Spacer(Modifier.width(6.dp))
-                            }
-                            CarrierField(
-                                form.deliveryPostcode, { form.deliveryPostcode = requirement.typedValue(it) },
-                                localized("add.requirement.dpdPostcode"), CHANGE_CARRIER_POSTCODE,
-                                KeyboardOptions(
-                                    KeyboardCapitalization.Characters, autoCorrectEnabled = false,
-                                    keyboardType = postcodeKeyboard(change.postcodeKeys(requirement)),
-                                ),
-                                postalCode = true,
-                            )
-                            if (requirement.isOptional) {
-                                Text(
-                                    localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryLabel,
-                                    style = type.caption.sfLines(),
+                        CarrierRequirement.Field.DpdPostcode -> {
+                            FormRowFrame(Modifier) {
+                                val country = change.offeredPostcodeCountry
+                                val carrierRequirement = change.carrierPostcodeRequirement
+                                if (country != null && carrierRequirement != null) {
+                                    PostcodeCountryMenu(change.selectedCarrier, carrierRequirement, country, catalog) { form.chosenPostcodeCountry = it }
+                                    Spacer(Modifier.width(6.dp))
+                                }
+                                CarrierField(
+                                    form.deliveryPostcode, { form.deliveryPostcode = requirement.typedValue(it) },
+                                    localized("add.requirement.dpdPostcode"), CHANGE_CARRIER_POSTCODE,
+                                    KeyboardOptions(
+                                        KeyboardCapitalization.Characters, autoCorrectEnabled = false,
+                                        keyboardType = postcodeKeyboard(change.postcodeKeys(requirement)),
+                                    ),
+                                    postalCode = true,
                                 )
+                                if (requirement.isOptional) {
+                                    Text(
+                                        localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryLabel,
+                                        style = type.caption.sfLines(),
+                                    )
+                                }
+                            }
+                            // An optional postcode is offered from those given before, as in Add, never filled in for
+                            // the reader.
+                            val offered = change.offeredPostcode(state.source.givenPostcodes)
+                            if (offered != null) {
+                                FormRowFrame(Modifier) {
+                                    UsePostcodeButton(offered, CHANGE_CARRIER_USE_POSTCODE) { form.deliveryPostcode = offered }
+                                }
                             }
                         }
                         // Number keys, and no autofill hint: nothing on the phone fills in these digits.
@@ -686,6 +709,7 @@ internal const val CHANGE_CARRIER_REFUSED = "changeCarrier.refused"
 internal const val CHANGE_CARRIER_HINT = "changeCarrier.hint"
 internal const val CHANGE_CARRIER_URL = "changeCarrier.trackingUrl"
 internal const val CHANGE_CARRIER_POSTCODE = "changeCarrier.postcode"
+internal const val CHANGE_CARRIER_USE_POSTCODE = "changeCarrier.usePostcode"
 internal const val CHANGE_CARRIER_PHONE_DIGITS = "changeCarrier.phoneDigits"
 internal const val CHANGE_CARRIER_COUNTRY = "changeCarrier.country"
 internal const val CHANGE_CARRIER_PROVIDER_POSTCODE = "changeCarrier.providerPostcode"

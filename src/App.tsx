@@ -799,6 +799,7 @@ export default function App({
           onRename={(p, label) => renameParcel(p.id, label)}
           onChangeCarrier={(p, input) => changeParcelCarrier(p.id, input)}
           usedCarriers={usedCarriers}
+          postcodes={givenPostcodes}
           apiAuth={apiAuth}
           accountEmail={mode === 'api' ? accountEmail : undefined}
           onSetNotificationsMuted={(p, muted) =>

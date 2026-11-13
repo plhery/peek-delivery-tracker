@@ -197,7 +197,7 @@ interface DeliveriesSource {
      */
     suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse
 
-    /** `store.givenPostcodes`: the postcodes Add suggests, the parcels' newest first, then this phone's. */
+    /** `store.givenPostcodes`: the postcodes Add and Change carrier suggest, the parcels' newest first, then this phone's. */
     val givenPostcodes: List<GivenPostcode>
 
     /** `store.forgetPostcode(_:)`: this phone stops suggesting the postcode. */

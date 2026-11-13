@@ -22,12 +22,10 @@ struct AddParcelView: View {
     @State private var label: String
     @State private var trackingInput: String
     @State private var trackingURL = ""
-    /// The delivery postcode typed, accepted or filled for each carrier in this sheet.
+    /// The delivery postcode typed, accepted or filled for each carrier in this sheet, and the country chosen beside it.
     @State private var postcodes = CarrierPostcodes()
     /// The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows.
     @State private var phoneDigits = ""
-    /// The delivery country chosen beside the postcode, used by every carrier whose field takes it.
-    @State private var chosenPostcodeCountry: String?
     @State private var showingScanner = false
     @State private var showingCarrierPicker = false
     @State private var didFocusTracking = false
@@ -690,7 +688,7 @@ struct AddParcelView: View {
                             if let country = offeredPostcodeCountry, let carrierRequirement = carrierPostcodeRequirement {
                                 PostcodeCountryMenu(carrier: resolvedCarrier, requirement: carrierRequirement, country: country,
                                                     inset: EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 10)) {
-                                    chosenPostcodeCountry = $0
+                                    postcodes.choose($0, for: resolvedCarrier)
                                 }
                                 Divider().padding(.vertical, 12)
                             }
@@ -717,7 +715,8 @@ struct AddParcelView: View {
                         }
                         .font(.subheadline)
                     }
-                    // Without an account every suggestion is this iPhone's own, so it can forget them.
+                    // Without an account every suggestion is this iPhone's own, so it can forget them: no other carrier's
+                    // field keeps it either.
                     if store.isGuest, postcodes.holdsFill(resolvedCarrier) {
                         Button(localizer.text("add.forgetPostcode")) {
                             if let postcode = postcodes.forget(resolvedCarrier) { store.forgetPostcode(postcode) }
@@ -1088,14 +1087,10 @@ struct AddParcelView: View {
         catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber).first(where: { $0.field == .dpdPostcode })
     }
 
-    /// The country the postcode is from: the one chosen while this field takes it, otherwise where the field starts.
+    /// The country the postcode is from: the one chosen for this carrier while its field takes it, otherwise where
+    /// the field starts.
     private var postcodeCountry: String? {
-        guard let requirement = carrierPostcodeRequirement else { return nil }
-        if let chosenPostcodeCountry,
-           catalog.postcodeCountries(for: resolvedCarrier, requirement: requirement).contains(chosenPostcodeCountry) {
-            return chosenPostcodeCountry
-        }
-        return catalog.initialPostcodeCountry(for: resolvedCarrier, requirement: requirement)
+        carrierPostcodeRequirement.flatMap { postcodes.country(resolvedCarrier, requirement: $0, catalog: catalog) }
     }
 
     /// The postcode's country, offered beside the field when it takes more than one.
@@ -1284,14 +1279,24 @@ struct PostcodeFill: Equatable {
     mutating func prepare() { forgotten = false }
 }
 
-/// The delivery postcode the Add sheet holds for each carrier. One typed, accepted or filled for a carrier
-/// stays with it: another carrier's field shows its own, and switching back shows the first one's again.
+/// The delivery postcode the Add sheet holds for each carrier, and the country chosen beside it. One typed,
+/// accepted, filled or chosen for a carrier stays with it: another carrier's field shows its own, and switching
+/// back shows the first one's again. The Change carrier sheet starts one afresh for each carrier picked.
 /// `given` is the postcodes given before, from which the last one that fits is suggested, the carrier's own first.
 struct CarrierPostcodes {
     /// What each carrier's field holds; nothing until a postcode is typed, accepted or filled in it.
     private var values: [CarrierID: String] = [:]
     /// What each carrier's field was filled with from the postcodes given before.
     private var fills: [CarrierID: PostcodeFill] = [:]
+    /// The country chosen beside each carrier's field.
+    private var countries: [CarrierID: String] = [:]
+
+    init() {}
+
+    /// The parcel's own postcode in its carrier's field, which nothing given before replaces.
+    init(parcel: Parcel) {
+        if let postcode = parcel.dpdPostcode?.nonEmpty { values[parcel.carrier] = postcode }
+    }
 
     /// What `carrier`'s field holds. Writing what it already shows changes nothing, so a field never given
     /// a postcode, written back as it is shown, can still be filled when it is prepared.
@@ -1323,18 +1328,33 @@ struct CarrierPostcodes {
     /// The carrier's field still holds the postcode it was filled with.
     func holdsFill(_ carrier: CarrierID) -> Bool { fills[carrier]?.holds(self[carrier]) == true }
 
-    /// Empties the carrier's field and returns the postcode it was filled with, to forget. The other fields
-    /// still holding it as filled empty too, and fill again from what is left when shown.
+    /// Empties the carrier's field and returns the postcode it was filled with, to forget. Every other field
+    /// holding it, typed or filled, its capitals and spaces aside as this iPhone forgets it, empties too and
+    /// fills again from what is left when its carrier comes up.
     mutating func forget(_ carrier: CarrierID) -> String? {
         let field = self[carrier]
         guard let postcode = fills[carrier]?.forget(field) else { return nil }
         values[carrier] = nil
-        for (other, fill) in fills where self[other] == postcode && fill.holds(postcode) {
+        let forgotten = PostcodeMemory.bare(postcode)
+        for (other, value) in values where PostcodeMemory.bare(value) == forgotten {
             values[other] = nil
             fills[other] = nil
         }
         return postcode
     }
+
+    /// The country beside the carrier's field: the one chosen for it while the field takes it, otherwise where
+    /// the field starts (see `CarrierCatalog.initialPostcodeCountry`).
+    func country(_ carrier: CarrierID, requirement: CarrierRequirement, parcel: Parcel? = nil,
+                 region: String? = CarrierCatalog.deviceCountry(), catalog: CarrierCatalog = .shared) -> String? {
+        if let chosen = countries[carrier], catalog.postcodeCountries(for: carrier, requirement: requirement).contains(chosen) {
+            return chosen
+        }
+        return catalog.initialPostcodeCountry(for: carrier, requirement: requirement, parcel: parcel, region: region)
+    }
+
+    /// Chooses the country beside the carrier's field; the other carriers' stay as they are.
+    mutating func choose(_ country: String, for carrier: CarrierID) { countries[carrier] = country }
 }
 
 /// The country a delivery postcode is from, beside its field: its flag and code, opening on the countries the

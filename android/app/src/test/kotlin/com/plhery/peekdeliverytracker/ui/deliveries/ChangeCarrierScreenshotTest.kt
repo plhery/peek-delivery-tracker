@@ -22,6 +22,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
+import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -43,8 +44,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * Changing a parcel's carrier over the demo's list, with the iPhone's bars: automatic detection at the medium detent,
  * light and dark; Mondial Relay's postcode at the large detent with its country beside it, light and dark, its
- * countries' menu, and at the largest Android text size; DPD's optional postcode while the change is saved, and once
- * it failed; and the picker pushed in the sheet. On synthetic parcels, with the catalog pinned ([pinnedIdentities]).
+ * countries' menu, and at the largest Android text size; DPD's optional postcode while the change is saved, once
+ * it failed, and offered from those given before; and the picker pushed in the sheet. On synthetic parcels, with the
+ * catalog pinned ([pinnedIdentities]).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -166,6 +168,13 @@ class ChangeCarrierScreenshotTest {
         chooseDpd()
         click(CHANGE_CARRIER_SAVE)
         compose.screenshot("change_carrier_error_light")
+    }
+
+    @Test
+    fun anOptionalPostcodeOfferedFromThoseGivenBefore() {
+        show(lamp) { givenPostcodes = listOf(GivenPostcode(CarrierId.Dpd, "8000")) }
+        chooseDpd()
+        compose.screenshot("change_carrier_offer_light")
     }
 
     @Test

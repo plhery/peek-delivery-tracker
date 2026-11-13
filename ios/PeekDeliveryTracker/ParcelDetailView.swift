@@ -1227,11 +1227,11 @@ struct ChangeCarrierView: View {
     /// Nil while automatic detection is chosen.
     @State private var chosenCarrier: CarrierID?
     @State private var trackingURL: String
-    @State private var deliveryPostcode: String
+    /// The postcode in the carrier's field and the country chosen beside it, started afresh for each carrier picked:
+    /// the parcel's own in its carrier's field, otherwise filled or offered from the postcodes given before, as in Add.
+    @State private var postcodes: CarrierPostcodes
     /// The parcel's own digits while its carrier stays; none for another. Cleared, none are sent, which removes them.
     @State private var phoneDigits: String
-    /// The delivery country chosen beside the postcode, until another carrier is chosen.
-    @State private var chosenPostcodeCountry: String?
     @State private var providerPostcode = ""
     @State private var saving = false
     @State private var errorMessage: String?
@@ -1248,7 +1248,7 @@ struct ChangeCarrierView: View {
         _chosenCarrier = State(initialValue: unfiled && carrier == parcel.carrier
             && !CarrierCatalog.shared.isAmazonTrackingNumber(parcel.trackingNumber) ? nil : carrier)
         _trackingURL = State(initialValue: carrier == parcel.carrier ? parcel.trackingURL ?? "" : "")
-        _deliveryPostcode = State(initialValue: carrier == parcel.carrier ? parcel.dpdPostcode ?? "" : "")
+        _postcodes = State(initialValue: CarrierPostcodes(parcel: parcel))
         _phoneDigits = State(initialValue: carrier == parcel.carrier ? parcel.phoneDigits ?? "" : "")
     }
 
@@ -1300,13 +1300,6 @@ struct ChangeCarrierView: View {
                     .accessibilityValue([carrierName,
                                          refused ? localizer.text("add.line.refused") : nil].compactMap { $0 }.joined(separator: ", "))
                     .accessibilityAddTraits(.isButton)
-                    .onChange(of: selectedCarrier) { _, carrier in
-                        trackingURL = carrier == parcel.carrier ? parcel.trackingURL ?? "" : ""
-                        deliveryPostcode = carrier == parcel.carrier ? parcel.dpdPostcode ?? "" : ""
-                        phoneDigits = carrier == parcel.carrier ? parcel.phoneDigits ?? "" : ""
-                        chosenPostcodeCountry = nil
-                        errorMessage = nil
-                    }
                     Text(automatic ? automaticDescription : localizer.text(catalog.trackingHintKey(for: selectedCarrier), [
                         "carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName,
                     ]))
@@ -1369,6 +1362,15 @@ struct ChangeCarrierView: View {
         .presentationDragIndicator(.visible)
         .onChange(of: requirements.isEmpty, initial: true) { _, empty in
             if !empty { detent = .large }
+        }
+        // Each carrier picked starts afresh: the parcel's own details for its own carrier, none for another. A
+        // required postcode then starts from the last one given that fits; an optional one is only offered.
+        .onChange(of: selectedCarrier, initial: true) { _, carrier in
+            trackingURL = carrier == parcel.carrier ? parcel.trackingURL ?? "" : ""
+            phoneDigits = carrier == parcel.carrier ? parcel.phoneDigits ?? "" : ""
+            postcodes = CarrierPostcodes(parcel: parcel)
+            postcodes.prepare(carrier, requirement: postcodeRequirement, among: store.givenPostcodes)
+            errorMessage = nil
         }
         .task(id: refusalQuestion) {
             guard let question = refusalQuestion else { return }
@@ -1464,12 +1466,13 @@ struct ChangeCarrierView: View {
 
     /// The country the postcode is from: the one chosen while this field takes it, otherwise where it starts.
     private var postcodeCountry: String? {
-        guard let requirement = carrierPostcodeRequirement else { return nil }
-        if let chosenPostcodeCountry,
-           catalog.postcodeCountries(for: selectedCarrier, requirement: requirement).contains(chosenPostcodeCountry) {
-            return chosenPostcodeCountry
-        }
-        return initialPostcodeCountry
+        carrierPostcodeRequirement.flatMap { postcodes.country(selectedCarrier, requirement: $0, parcel: parcel, catalog: catalog) }
+    }
+
+    /// The postcode in the field, the one sent.
+    private var deliveryPostcode: String {
+        get { postcodes[selectedCarrier] }
+        nonmutating set { postcodes[selectedCarrier] = newValue }
     }
 
     /// The postcode's country, offered beside the field when it takes more than one.
@@ -1568,12 +1571,12 @@ struct ChangeCarrierView: View {
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 if let country = offeredPostcodeCountry, let carrierRequirement = carrierPostcodeRequirement {
                     PostcodeCountryMenu(carrier: selectedCarrier, requirement: carrierRequirement, country: country) {
-                        chosenPostcodeCountry = $0
+                        postcodes.choose($0, for: selectedCarrier)
                     }
                 }
                 TextField(
                     localizer.text("add.requirement.dpdPostcode"),
-                    text: $deliveryPostcode
+                    text: Binding(get: { deliveryPostcode }, set: { deliveryPostcode = $0 })
                 )
                 .drawnField()
                 .keyboardType(requirement.inputMode == "numeric" ? .numberPad
@@ -1592,6 +1595,13 @@ struct ChangeCarrierView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
+            }
+            // An optional postcode is offered, never filled in for the reader.
+            if let suggestion = postcodes.offering(selectedCarrier, requirement: requirement, among: store.givenPostcodes) {
+                Button(localizer.text("add.usePostcode", ["postcode": suggestion])) {
+                    postcodes.use(suggestion, for: selectedCarrier)
+                }
+                .font(.subheadline)
             }
         case .phoneDigits:
             HStack(alignment: .firstTextBaseline, spacing: 6) {

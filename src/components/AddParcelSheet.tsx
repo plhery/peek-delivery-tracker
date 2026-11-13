@@ -21,7 +21,7 @@ import {
 } from '../lib/carriers';
 import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
 import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../lib/postcodeCountry';
-import { rememberedPostcode, type GivenPostcode } from '../lib/postcodeMemory';
+import { rememberedPostcodeField, type GivenPostcode } from '../lib/postcodeMemory';
 import { canAskCarrier, carrierCheck, carrierChoiceSections, carrierChoiceTags, carrierNameList, shapeCarrier } from '../lib/carrierPicker';
 import {
   ParcelAlreadyExistsError,
@@ -252,15 +252,12 @@ export function AddParcelSheet({
   const parsedCarrierTrackingUrl =
     parsedTracking.carrier === resolvedCarrier ? parsedTracking.trackingUrl : undefined;
   // A required postcode starts from one given before; an optional one is only offered.
-  const postcodeRequirement = requirements.find(({ field }) => field === 'dpdPostcode');
-  const remembered = postcodeRequirement ? rememberedPostcode(resolvedCarrier, postcodeRequirement, postcodes) : undefined;
+  const { value: postcodeValue, offered: offeredPostcode } = rememberedPostcodeField(resolvedCarrier,
+    requirements.find(({ field }) => field === 'dpdPostcode'), carrierPostcodes[resolvedCarrier], postcodes);
   const carrierInputValue = (field: CarrierInputField) =>
     field === 'trackingUrl' && parsedCarrierTrackingUrl
       ? parsedCarrierTrackingUrl
-      : field === 'dpdPostcode'
-        ? carrierPostcodes[resolvedCarrier] ?? (postcodeRequirement?.optional ? undefined : remembered) ?? ''
-        : carrierInputs[field];
-  const offeredPostcode = postcodeRequirement?.optional && !carrierInputValue('dpdPostcode') ? remembered : undefined;
+      : field === 'dpdPostcode' ? postcodeValue : carrierInputs[field];
   const requirementsSatisfied = requirements.every((requirement) =>
     requirementSatisfied(requirement, carrierInputValue(requirement.field)));
   const carrierHint = carrier
@@ -560,7 +557,7 @@ export function AddParcelSheet({
                         }}
                         onBlur={requirement.field === 'dpdPostcode' ? () => setCarrierPostcodes((current) => ({
                           ...current,
-                          [resolvedCarrier]: (current[resolvedCarrier] ?? '').trim(),
+                          [resolvedCarrier]: current[resolvedCarrier]?.trim(),
                         })) : undefined}
                         autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined}
                         autoCorrect="off"

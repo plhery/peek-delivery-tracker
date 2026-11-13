@@ -61,6 +61,7 @@ import { importChargesLine } from '../lib/importCharges';
 import type { CardOrigin } from '../lib/cardTransition';
 import { useRefreshAnimation } from '../lib/useRefreshAnimation';
 import type { ApiAuth } from '../lib/apiClient';
+import type { GivenPostcode } from '../lib/postcodeMemory';
 import { createAccountFeedback, createAccountShare, demoAccountShare } from '../peek/links';
 import { nonTrackingNote, nonTrackingShape } from '../peek/lookup/reading';
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from '../peek/parcel/Feedback';
@@ -89,6 +90,7 @@ export function ParcelDetail({
   onExitDemo,
   openingOrigin,
   usedCarriers,
+  postcodes,
   apiAuth,
   accountEmail,
 }: {
@@ -99,6 +101,8 @@ export function ParcelDetail({
   accountEmail?: string;
   /** The carriers of the latest parcels, offered first when changing the carrier. */
   usedCarriers?: readonly CarrierId[];
+  /** The postcodes given for earlier parcels, newest first, which changing the carrier suggests. */
+  postcodes?: readonly GivenPostcode[];
   openingOrigin?: CardOrigin | null;
   onExitDemo?: () => void;
   onBack: () => void;
@@ -817,6 +821,7 @@ export function ParcelDetail({
           parcel={parcel}
           initialCarrier={carrierSheetInitial}
           usedCarriers={usedCarriers}
+          postcodes={postcodes}
           onChange={(input) => onChangeCarrier(parcel, input)}
           onClose={() => { setEditingCarrier(false); setCarrierSheetInitial(undefined); }}
         />

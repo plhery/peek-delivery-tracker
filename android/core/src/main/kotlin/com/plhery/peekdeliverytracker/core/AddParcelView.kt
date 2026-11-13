@@ -89,10 +89,15 @@ data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = f
 }
 
 /**
- * The postcodes typed, accepted or filled in while Add is up, each kept for the carrier it was given for: a carrier's
- * field shows its own, and one given for a carrier never shows or goes with another. A value, as [PostcodeFill] is.
+ * The postcodes typed, accepted or filled in while Add is up, and the countries chosen beside them, each kept for the
+ * carrier it was given for, as the web's `carrierPostcodes` and `postcodeCountryChoices`: a carrier's field shows its
+ * own, and one given for a carrier never shows or goes with another. A value, as [PostcodeFill] is.
  */
-data class CarrierPostcodes(val given: Map<CarrierId, String> = emptyMap()) {
+data class CarrierPostcodes(
+    val given: Map<CarrierId, String> = emptyMap(),
+    /** The country chosen beside each carrier's postcode; a carrier without one starts where its field does. */
+    val countries: Map<CarrierId, String> = emptyMap(),
+) {
     /** What `carrier`'s field holds: its own, else nothing. */
     operator fun get(carrier: CarrierId): String = given[carrier].orEmpty()
 
@@ -100,22 +105,37 @@ data class CarrierPostcodes(val given: Map<CarrierId, String> = emptyMap()) {
     operator fun contains(carrier: CarrierId): Boolean = carrier in given
 
     /** `carrier`'s field holding `postcode`. */
-    fun with(carrier: CarrierId, postcode: String): CarrierPostcodes = CarrierPostcodes(given + (carrier to postcode))
+    fun with(carrier: CarrierId, postcode: String): CarrierPostcodes = copy(given = given + (carrier to postcode))
+
+    /** The country chosen beside `carrier`'s postcode, none while the reader has chosen none. */
+    fun country(carrier: CarrierId): String? = countries[carrier]
+
+    /** `country` chosen beside `carrier`'s postcode, leaving every other carrier's. */
+    fun withCountry(carrier: CarrierId, country: String): CarrierPostcodes = copy(countries = countries + (carrier to country))
 
     /**
      * `postcode` forgotten: every field holding it, its capitals and spaces aside as this phone forgets it, starts
-     * afresh when its carrier's details come up again.
+     * afresh when its carrier's details come up again. The countries chosen stay.
      */
     fun without(postcode: String): CarrierPostcodes =
-        CarrierPostcodes(given.filterValues { !bare(it).equalsCanonically(bare(postcode)) })
+        copy(given = given.filterValues { !bare(it).equalsCanonically(bare(postcode)) })
 
     /** Each carrier and its postcode in turn, as text for a window to keep. */
-    val kept: List<String> get() = given.flatMap { (carrier, postcode) -> listOf(carrier.rawValue, postcode) }
+    val kept: List<String> get() = flat(given)
+
+    /** Each carrier and the country chosen beside its postcode in turn, as text for a window to keep. */
+    val keptCountries: List<String> get() = flat(countries)
 
     companion object {
-        /** The postcodes [kept] kept. */
-        fun from(kept: List<String>): CarrierPostcodes =
-            CarrierPostcodes(kept.chunked(2).filter { it.size == 2 }.associate { (carrier, postcode) -> CarrierId(carrier) to postcode })
+        /** The postcodes [kept] kept, and the countries [keptCountries] kept. */
+        fun from(kept: List<String>, keptCountries: List<String> = emptyList()): CarrierPostcodes =
+            CarrierPostcodes(pairs(kept), pairs(keptCountries))
+
+        private fun flat(values: Map<CarrierId, String>): List<String> =
+            values.flatMap { (carrier, value) -> listOf(carrier.rawValue, value) }
+
+        private fun pairs(kept: List<String>): Map<CarrierId, String> =
+            kept.chunked(2).filter { it.size == 2 }.associate { (carrier, value) -> CarrierId(carrier) to value }
 
         private fun bare(postcode: String): String = postcode.uppercased().removingWhitespace()
     }
@@ -141,7 +161,7 @@ data class ParcelAddition(
     val verifiedCarrier: CarrierDetectionResponse? = null,
     val trackingUrl: String = "",
     val deliveryPostcode: String = "",
-    /** The delivery country chosen beside the postcode, kept for each carrier whose field takes it. */
+    /** The delivery country chosen beside the postcode for the carrier in play ([CarrierPostcodes] keeps each carrier's). */
     val chosenPostcodeCountry: String? = null,
     /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
     val phoneDigits: String = "",
@@ -474,8 +494,16 @@ data class ParcelAddition(
     fun previousPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): String? =
         requirement.suggestedPostcode(resolvedCarrier, given)
 
-    /** The postcode field holding what `postcodes` keeps for the carrier in play, and nothing given for another. */
-    fun withPostcode(postcodes: CarrierPostcodes): ParcelAddition = copy(deliveryPostcode = postcodes[resolvedCarrier])
+    /** The postcode offered under the optional field while it is empty, filled in only at a tap. */
+    fun offeredPostcode(given: List<GivenPostcode>): String? =
+        postcodeRequirement?.offeredPostcode(resolvedCarrier, deliveryPostcode, given)
+
+    /**
+     * The postcode field holding what `postcodes` keeps for the carrier in play, beside the country chosen for it, and
+     * nothing given for another.
+     */
+    fun withPostcode(postcodes: CarrierPostcodes): ParcelAddition =
+        copy(deliveryPostcode = postcodes[resolvedCarrier], chosenPostcodeCountry = postcodes.country(resolvedCarrier))
 
     /**
      * `prepareRequiredDetails(for:)`'s postcode, as the carrier's details come up: its field keeps what was given for
@@ -490,13 +518,13 @@ data class ParcelAddition(
     ): Pair<CarrierPostcodes, PostcodeFill> {
         val prepared = fill.prepare()
         val requirement = postcodeRequirement ?: return postcodes to prepared
-        val suggestion = previousPostcode(requirement, given) ?: return postcodes to prepared
-        return when {
-            resolvedCarrier in postcodes ->
-                postcodes to if (PostcodeFill(suggestion).holds(postcodes[resolvedCarrier])) prepared.fill(suggestion) else prepared
-            requirement.isOptional -> postcodes to prepared
-            else -> postcodes.with(resolvedCarrier, suggestion) to prepared.fill(suggestion)
+        if (resolvedCarrier !in postcodes) {
+            val start = requirement.startingPostcode(resolvedCarrier, given) ?: return postcodes to prepared
+            return postcodes.with(resolvedCarrier, start) to prepared.fill(start)
         }
+        val suggestion = previousPostcode(requirement, given)
+        return postcodes to
+            if (suggestion != null && PostcodeFill(suggestion).holds(postcodes[resolvedCarrier])) prepared.fill(suggestion) else prepared
     }
 
     /**

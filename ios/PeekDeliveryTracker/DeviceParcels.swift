@@ -80,7 +80,8 @@ struct PostcodeMemory {
         defaults.set(try? JSONEncoder().encode(Array(entries.prefix(Self.limit))), forKey: Self.key)
     }
 
-    private static func bare(_ postcode: String) -> String { postcode.uppercased().filter { !$0.isWhitespace } }
+    /// The postcode with its capitals and spaces aside, as this iPhone tells two apart.
+    static func bare(_ postcode: String) -> String { postcode.uppercased().filter { !$0.isWhitespace } }
 }
 
 /// Lookups are counted for each network; the day's count is spent.

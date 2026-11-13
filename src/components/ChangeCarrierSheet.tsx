@@ -17,6 +17,7 @@ import {
 import { inReaderCountryFirst } from '../lib/carrierPicker';
 import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
 import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../lib/postcodeCountry';
+import { rememberedPostcodeField, type GivenPostcode } from '../lib/postcodeMemory';
 import { useI18n } from '../i18n';
 import { useSheetDialog } from '../lib/modal';
 import { useNumberRefusal } from '../lib/numberRefusal';
@@ -34,6 +35,7 @@ export function ChangeCarrierSheet({
   parcel,
   initialCarrier = parcel.carrier,
   usedCarriers = [],
+  postcodes = [],
   onChange,
   onClose: onDismissed,
 }: {
@@ -42,6 +44,8 @@ export function ChangeCarrierSheet({
   initialCarrier?: CarrierId;
   /** The carriers of the latest parcels, offered first in the picker. */
   usedCarriers?: readonly CarrierId[];
+  /** The postcodes given for earlier parcels, newest first. */
+  postcodes?: readonly GivenPostcode[];
   onChange: (input: ParcelCarrierInput) => Promise<unknown>;
   onClose: () => void;
 }) {
@@ -58,7 +62,9 @@ export function ChangeCarrierSheet({
   const automatic = selectedCarrier === 'auto';
   const chosenCarrier = selectedCarrier === 'auto' ? automaticCarrier ?? parcel.carrier : selectedCarrier;
   const [trackingUrl, setTrackingUrl] = useState(initialCarrier === parcel.carrier ? parcel.trackingUrl ?? '' : '');
-  const [dpdPostcode, setDpdPostcode] = useState(initialCarrier === parcel.carrier ? parcel.dpdPostcode ?? '' : '');
+  // The parcel's postcode for its own carrier, then what the reader types; until then the field starts from the
+  // postcodes given before.
+  const [dpdPostcode, setDpdPostcode] = useState(initialCarrier === parcel.carrier ? parcel.dpdPostcode || undefined : undefined);
   const [phoneDigits, setPhoneDigits] = useState(initialCarrier === parcel.carrier ? parcel.phoneDigits ?? '' : '');
   // The country of the parcel's postcode, the home country when it was given without one or the carrier reads the
   // postcode alone; for a carrier without a postcode yet, the parcel's destination or the device's country when the
@@ -101,15 +107,18 @@ export function ChangeCarrierSheet({
   const needsProviderPostcode = providerAsks && !ownPostcode;
   let normalizedProviderPostcode: string | undefined;
   if (needsProviderPostcode) { try { normalizedProviderPostcode = normalizeDeliveryPostcode(providerPostcode); } catch { /* The field stays invalid until complete. */ } }
+  // A required postcode starts from one given before; an optional one is only offered.
+  const postcodeField = rememberedPostcodeField(chosenCarrier,
+    requirements.find(({ field }) => field === 'dpdPostcode'), dpdPostcode, postcodes);
   const valueFor = (field: CarrierInputField) => field === 'trackingUrl' ? trackingUrl
-    : field === 'phoneDigits' ? phoneDigits : dpdPostcode;
+    : field === 'phoneDigits' ? phoneDigits : postcodeField.value;
   const requirementsSatisfied = (!needsProviderPostcode || Boolean(normalizedProviderPostcode)) && requirements.every((requirement) =>
     requirementSatisfied(requirement, valueFor(requirement.field)));
   const nextTrackingUrl = requirements.some(({ field }) => field === 'trackingUrl')
     ? trackingUrl.trim()
     : undefined;
   const nextPostcode = requirements.some(({ field }) => field === 'dpdPostcode')
-    ? dpdPostcode.trim().toUpperCase()
+    ? postcodeField.value.trim().toUpperCase()
     : undefined;
   const nextPostcodeCountry = nextPostcode ? sentPostcodeCountry(chosenCarrier, postcodeCountry) : undefined;
   const nextPhoneDigits = requirements.some(({ field }) => field === 'phoneDigits') ? phoneDigits.trim() : undefined;
@@ -123,7 +132,7 @@ export function ChangeCarrierSheet({
     const id = value === 'auto' ? automaticCarrier : value;
     setSelectedCarrier(value);
     setTrackingUrl(id === parcel.carrier ? parcel.trackingUrl ?? '' : '');
-    setDpdPostcode(id === parcel.carrier ? parcel.dpdPostcode ?? '' : '');
+    setDpdPostcode(id === parcel.carrier ? parcel.dpdPostcode || undefined : undefined);
     setPhoneDigits(id === parcel.carrier ? parcel.phoneDigits ?? '' : '');
     setPostcodeCountry(startingCountry(id ?? parcel.carrier));
     setError(null);
@@ -233,13 +242,18 @@ export function ChangeCarrierSheet({
                     else if (requirement.field === 'phoneDigits') setPhoneDigits(value);
                     else setDpdPostcode(value);
                   }}
-                  onBlur={requirement.field === 'dpdPostcode' ? () => setDpdPostcode((value) => value.trim()) : undefined}
+                  onBlur={requirement.field === 'dpdPostcode' ? () => setDpdPostcode((value) => value?.trim()) : undefined}
                   autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined}
                   autoCorrect="off"
                   spellCheck={false}
                   required={!requirement.optional}
                 />
               </PostcodeCountry>
+              {requirement.field === 'dpdPostcode' && postcodeField.offered && (
+                <button type="button" className="field__suggestion" onClick={() => setDpdPostcode(postcodeField.offered)}>
+                  {t('add.usePostcode', { postcode: postcodeField.offered })}
+                </button>
+              )}
               {providerAsks && requirement.field === 'dpdPostcode' ? <small className="field__help">
                 {t('detail.providerInputNeeded', { provider: parcel.providerInputNeeded!.provider })}
               </small> : requirement.help && (

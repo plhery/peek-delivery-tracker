@@ -276,10 +276,16 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Change carrier from DHL' }));
     let sheet = screen.getByRole('dialog', { name: 'Change carrier' });
     await pickCarrier(user, within(sheet).getByRole('button', { name: /^Carrier / }), 'GLS Switzerland');
-    expect(within(sheet).getByLabelText(/delivery postcode/i)).toBeRequired();
+    const required = within(sheet).getByLabelText(/delivery postcode/i);
+    expect(required).toBeRequired();
+    // It starts from the DPD parcel's postcode; emptied, the change can't be saved.
+    expect(required).toHaveValue('8000');
+    await user.clear(required);
     expect(within(sheet).getByRole('button', { name: 'Save carrier' })).toBeDisabled();
     await pickCarrier(user, within(sheet).getByRole('button', { name: /^Carrier / }), 'DPD Switzerland');
     expect(within(sheet).getByLabelText(/delivery postcode/i)).not.toBeRequired();
+    // Optional, so it is only offered.
+    expect(within(sheet).getByRole('button', { name: 'Use 8000' })).toBeInTheDocument();
     await user.click(within(sheet).getByRole('button', { name: 'Save carrier' }));
     expect(changeCarrier).toHaveBeenLastCalledWith(expect.any(String), {
       carrier: 'dpd',
@@ -943,6 +949,10 @@ describe('App', () => {
     expect(postcode).toHaveValue('8000');
     expect(postcode).toHaveAttribute('maxlength', '12');
     expect(within(sheet).queryByRole('button', { name: 'Use 8000' })).not.toBeInTheDocument();
+    // Leaving the field keeps it.
+    await user.click(postcode);
+    await user.tab();
+    expect(postcode).toHaveValue('8000');
     expect(within(sheet).getByText(/carrier needs the delivery postcode/i))
       .toBeInTheDocument();
 

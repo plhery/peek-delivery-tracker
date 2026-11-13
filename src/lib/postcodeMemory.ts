@@ -40,6 +40,22 @@ export function rememberedPostcode(
   return (accepted.find(({ to }) => to === carrier) ?? accepted[0])?.value;
 }
 
+/**
+ * A carrier's postcode field and the postcode it offers. What the reader typed
+ * stays, even emptied; until then a required field starts from the postcode
+ * given before that fits, and an optional one stays empty and only offers it.
+ */
+export function rememberedPostcodeField(
+  carrier: CarrierId,
+  requirement: CarrierInputRequirement | undefined,
+  typed: string | undefined,
+  given: readonly GivenPostcode[],
+): { value: string; offered?: string } {
+  const remembered = requirement ? rememberedPostcode(carrier, requirement, given) : undefined;
+  const value = typed ?? (requirement?.optional ? undefined : remembered) ?? '';
+  return { value, offered: requirement?.optional && !value ? remembered : undefined };
+}
+
 interface Kept { carrier: CarrierId; postcode: string }
 const EMPTY: Kept[] = [];
 // Storage that cannot be read or written leaves the memory working for as long as the page lives.

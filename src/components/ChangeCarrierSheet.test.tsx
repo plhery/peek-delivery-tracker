@@ -138,4 +138,127 @@ describe('ChangeCarrierSheet', () => {
     await user.click(within(own).getByRole('button', { name: 'Save carrier' }));
     expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'seur', providerPostcode: '28001', dpdPostcode: undefined }));
   });
+
+  describe('postcodes given before', () => {
+    const postcodeField = (sheet: HTMLElement) => within(sheet).getByRole('textbox', { name: /^Delivery postcode/ });
+    const save = (sheet: HTMLElement) => within(sheet).getByRole('button', { name: 'Save carrier' });
+
+    it('starts a required postcode from the last one given, and keeps what the reader types instead', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      const onChange = vi.fn().mockResolvedValue(undefined);
+      const user = userEvent.setup();
+      const open = async () => {
+        const view = render(<ChangeCarrierSheet parcel={parcel} postcodes={[{ carrier: 'dpd', postcode: '8000' }]}
+          onChange={onChange} onClose={vi.fn()} />);
+        const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+        await pickCarrier(user, within(sheet).getByRole('button', { name: /^Carrier / }), 'GLS Switzerland');
+        return { view, sheet };
+      };
+
+      const filled = await open();
+      expect(postcodeField(filled.sheet)).toBeRequired();
+      expect(postcodeField(filled.sheet)).toHaveValue('8000');
+      expect(within(filled.sheet).queryByRole('button', { name: 'Use 8000' })).not.toBeInTheDocument();
+      // Leaving the field keeps it.
+      await user.click(postcodeField(filled.sheet));
+      await user.tab();
+      expect(postcodeField(filled.sheet)).toHaveValue('8000');
+      await user.click(save(filled.sheet));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'gls-ch', dpdPostcode: '8000' }));
+      filled.view.unmount();
+
+      onChange.mockClear();
+      const typed = await open();
+      await user.clear(postcodeField(typed.sheet));
+      expect(postcodeField(typed.sheet)).toHaveValue('');
+      expect(save(typed.sheet)).toBeDisabled();
+      await user.type(postcodeField(typed.sheet), '3000');
+      await user.click(save(typed.sheet));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'gls-ch', dpdPostcode: '3000' }));
+    });
+
+    it('offers an optional postcode given before, and fills it in only when it is used', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      const onChange = vi.fn().mockResolvedValue(undefined);
+      const user = userEvent.setup();
+      // The parcel's own carrier, PostNL, without a postcode yet: nothing to save until the postcode is used.
+      const { unmount } = render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
+        postcodes={[{ carrier: 'packs', postcode: '1234 AB' }]} onChange={onChange} onClose={vi.fn()} />);
+      const postnl = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(postnl)).not.toBeRequired();
+      expect(postcodeField(postnl)).toHaveValue('');
+      expect(save(postnl)).toBeDisabled();
+      await user.click(within(postnl).getByRole('button', { name: 'Use 1234 AB' }));
+      expect(postcodeField(postnl)).toHaveValue('1234 AB');
+      expect(within(postnl).queryByRole('button', { name: 'Use 1234 AB' })).not.toBeInTheDocument();
+      await user.click(save(postnl));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'spring-gds', dpdPostcode: '1234 AB' }));
+      unmount();
+
+      // Another carrier's optional field: offered, and not sent unless used.
+      onChange.mockClear();
+      render(<ChangeCarrierSheet parcel={parcel} postcodes={[{ carrier: 'gls-ch', postcode: '8000' }]} onChange={onChange} onClose={vi.fn()} />);
+      const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+      await pickCarrier(user, within(sheet).getByRole('button', { name: /^Carrier / }), 'DPD Switzerland');
+      expect(postcodeField(sheet)).toHaveValue('');
+      expect(within(sheet).getByRole('button', { name: 'Use 8000' })).toBeInTheDocument();
+      await user.click(save(sheet));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'dpd', dpdPostcode: '' }));
+    });
+
+    it('keeps the parcel’s own postcode for its own carrier', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      const user = userEvent.setup();
+      render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'gls-ch', dpdPostcode: '3000' }}
+        postcodes={[{ carrier: 'gls-ch', postcode: '8000' }, { carrier: 'gls-ch', postcode: '3000' }]}
+        onChange={vi.fn()} onClose={vi.fn()} />);
+      const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(sheet)).toHaveValue('3000');
+      expect(save(sheet)).toBeDisabled();
+      // Another carrier's field starts from the last postcode given; the parcel's comes back with its carrier.
+      const carrier = within(sheet).getByRole('button', { name: /^Carrier / });
+      await pickCarrier(user, carrier, 'GLS Germany');
+      expect(postcodeField(sheet)).toHaveValue('8000');
+      await pickCarrier(user, carrier, 'GLS Switzerland');
+      expect(postcodeField(sheet)).toHaveValue('3000');
+      expect(save(sheet)).toBeDisabled();
+    });
+
+    it('passes over a postcode given before that the field doesn’t take', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      const user = userEvent.setup();
+      render(<ChangeCarrierSheet parcel={parcel} postcodes={[{ carrier: 'packs', postcode: '1234 AB' }, { carrier: 'dpd', postcode: '8000' }]}
+        onChange={vi.fn()} onClose={vi.fn()} />);
+      const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+      const carrier = within(sheet).getByRole('button', { name: /^Carrier / });
+      // GLS Switzerland takes four digits: the Dutch postcode, given last, is left out.
+      await pickCarrier(user, carrier, 'GLS Switzerland');
+      expect(postcodeField(sheet)).toHaveValue('8000');
+      // DPD Germany takes five: neither is offered.
+      await pickCarrier(user, carrier, 'DPD Germany');
+      expect(postcodeField(sheet)).toHaveValue('');
+      expect(within(sheet).queryByRole('button', { name: /^Use / })).not.toBeInTheDocument();
+    });
+
+    it('starts a provider’s postcode request from one given before only in the carrier’s own field', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      const onChange = vi.fn().mockResolvedValue(undefined);
+      const user = userEvent.setup();
+      const asked = { ...parcel, providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode' as const } };
+      const postcodes = [{ carrier: 'packs' as const, postcode: '1234 AB' }];
+      // PostNL's field, required while the provider asks, starts from it.
+      const { unmount } = render(<ChangeCarrierSheet parcel={{ ...asked, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
+        postcodes={postcodes} onChange={onChange} onClose={vi.fn()} />);
+      const postnl = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(postnl)).toHaveValue('1234 AB');
+      await user.click(save(postnl));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'spring-gds', dpdPostcode: '1234 AB', providerPostcode: undefined }));
+      unmount();
+      // The provider's own field is left to the reader.
+      render(<ChangeCarrierSheet parcel={asked} postcodes={postcodes} onChange={vi.fn()} onClose={vi.fn()} />);
+      const own = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(own)).toHaveValue('');
+      expect(save(own)).toBeDisabled();
+    });
+  });
 });

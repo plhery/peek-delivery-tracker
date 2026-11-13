@@ -844,13 +844,17 @@ class AddParcelTest {
         )
     }
 
+    /**
+     * A required postcode starts from the last given, which a guest can forget: the field empties, and fills again from
+     * what is left only once its carrier's details come up again.
+     */
     @Test
     fun aRequiredPostcodeStartsFromTheLastGivenWhichAGuestCanForget() {
         val number = "12345478901"
         show {
             isGuest = true
             detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh)
-            givenPostcodes = listOf(GivenPostcode(carrier = CarrierId.GlsCh, postcode = "3011"))
+            givenPostcodes = listOf(GivenPostcode(carrier = CarrierId.GlsCh, postcode = "3011"), GivenPostcode(carrier = CarrierId.GlsCh, postcode = "8000"))
         }
         open()
         type(number)
@@ -861,6 +865,15 @@ class AddParcelTest {
         assertEquals("", fieldText(ADD_POSTCODE))
         assertEquals(listOf("3011"), source.forgottenPostcodes)
         assertFalse(exists(ADD_FORGET_POSTCODE))
+        node(ADD_SAVE).assertIsNotEnabled()
+
+        pick(PACKS, "Packs")
+        node(ADD_CARRIER).performClick()
+        settle()
+        node(CARRIER_PICKER_AUTOMATIC).performClick()
+        settle()
+        assertEquals("8000", fieldText(ADD_POSTCODE))
+        assertTrue(exists(ADD_FORGET_POSTCODE))
     }
 
     /** Add on [POSTNL], PostNL's by its shape, its postcode optional, with `given` the postcodes given before. */
@@ -953,6 +966,82 @@ class AddParcelTest {
         pick(PACKS, "Packs")
         assertEquals("5678 CD", fieldText(ADD_POSTCODE))
         assertTrue(exists(ADD_FORGET_POSTCODE))
+    }
+
+    /**
+     * A guest's postcode forgotten empties every other field holding it, whether filled with it or typed with other
+     * capitals and spaces, and each fills again from what is left as its carrier comes up. The field it was forgotten
+     * in offers nothing until its carrier comes up again.
+     */
+    @Test
+    fun aForgottenPostcodeEmptiesEveryFieldHoldingItFilledOrTypedWhichFillAgainFromWhatIsLeft() {
+        showPostNL(guest = true, given = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"), GivenPostcode(CarrierId.Dpd, "5678 CD")))
+        pick(PACKS, "Packs")
+        assertEquals("1234 AB", fieldText(ADD_POSTCODE))
+        pick(TRANSMISSION, "TransMission")
+        node(ADD_POSTCODE).performTextReplacement("1234ab")
+        compose.waitForIdle()
+        assertEquals("1234AB", fieldText(ADD_POSTCODE))
+        backToPostNL()
+        node(ADD_USE_POSTCODE).performClick()
+        settle()
+        node(ADD_FORGET_POSTCODE).performClick()
+        settle()
+        assertEquals(listOf("1234 AB"), source.forgottenPostcodes)
+        assertEquals("", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_USE_POSTCODE))
+        assertFalse(exists(ADD_FORGET_POSTCODE))
+
+        pick(TRANSMISSION, "TransMission")
+        assertEquals("5678 CD", fieldText(ADD_POSTCODE))
+        pick(PACKS, "Packs")
+        assertEquals("5678 CD", fieldText(ADD_POSTCODE))
+        backToPostNL()
+        assertEquals("", fieldText(ADD_POSTCODE))
+        node(ADD_USE_POSTCODE).assert(hasText(text("add.usePostcode", mapOf("postcode" to "5678 CD"))))
+    }
+
+    /** `code` chosen in the menu beside the postcode field. */
+    private fun chooseCountry(code: String) {
+        node(ADD_COUNTRY).performClick()
+        settle()
+        node(postcodeCountryTag(code)).performScrollTo().performClick()
+        settle()
+    }
+
+    /**
+     * As the web's sheet: the country chosen beside one carrier's postcode is that carrier's, another's field starts on
+     * its own, and each carrier's stays through the window made again, the process gone meanwhile, and goes with its
+     * postcode.
+     */
+    @Test
+    fun eachCarriersPostcodeCountryIsItsOwnAndStaysThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open()
+        type("76434219")
+        pick(CarrierId.MondialRelay, "Mondial")
+        chooseCountry("BE")
+        assertEquals("Belgium", value(ADD_COUNTRY))
+        // PostNL's field, for a 3S number, takes Belgium too, but starts on the phone's country.
+        type(POSTNL)
+        leave()
+        assertEquals("Switzerland", value(ADD_COUNTRY))
+        chooseCountry("AT")
+        assertEquals("Austria", value(ADD_COUNTRY))
+
+        recreation.recreate(parceled = true)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals("Austria", value(ADD_COUNTRY))
+        type("76434219")
+        pick(CarrierId.MondialRelay, "Mondial")
+        assertEquals("Belgium", value(ADD_COUNTRY))
+        node(ADD_POSTCODE).performTextInput("1000")
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest("76434219", "", CarrierId.MondialRelay, null, "1000", "BE")), source.additions)
     }
 
     /** Each carrier's postcode stays through the window made again, the process gone meanwhile. */
@@ -2085,3 +2174,6 @@ private const val POSTNL = "3SABCD826405193"
 
 /** Packs, whose lookup needs the postcode. */
 private val PACKS = CarrierId("packs")
+
+/** TransMission, whose lookup needs the postcode too. */
+private val TRANSMISSION = CarrierId("transmission")

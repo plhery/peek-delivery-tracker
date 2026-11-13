@@ -537,8 +537,8 @@ class ParcelStore(
         get() = configuration.mode == AppConfiguration.Mode.Api
 
     /**
-     * The postcodes given before, for the add sheet to suggest: the parcels' own, then the ones this phone remembers
-     * from lookups without an account.
+     * The postcodes given before, for Add and Change carrier to suggest: the parcels' own, then the ones this phone
+     * remembers from lookups without an account.
      */
     val givenPostcodes: List<GivenPostcode>
         get() = GivenPostcode.candidates(parcels, device.postcodes.entries)

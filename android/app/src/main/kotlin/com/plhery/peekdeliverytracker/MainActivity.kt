@@ -34,6 +34,7 @@ import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.ui.LAUNCH_SLOW_MILLIS
 import com.plhery.peekdeliverytracker.ui.LocalWindowShortcuts
 import com.plhery.peekdeliverytracker.ui.PeekRoot
+import com.plhery.peekdeliverytracker.ui.StatusBarAsOnIPhone
 import com.plhery.peekdeliverytracker.ui.WindowShortcuts
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
@@ -113,7 +114,10 @@ class MainActivity : ComponentActivity() {
             val shows = container != null && identities != null && laidOut
             PeekTheme(appearance = appearance, dark = dark, carrierIdentities = identities) {
                 if (shows) {
-                    CompositionLocalProvider(LocalWindowShortcuts provides shortcuts) { PeekRoot(container, inbox) }
+                    // Landscape on a phone gives the screens the status bar's room, as on an iPhone.
+                    StatusBarAsOnIPhone(window, isInMultiWindowMode) {
+                        CompositionLocalProvider(LocalWindowShortcuts provides shortcuts) { PeekRoot(container, inbox) }
+                    }
                 } else {
                     // Under the launch window.
                     Box(Modifier.fillMaxSize().background(PeekTheme.colors.background))

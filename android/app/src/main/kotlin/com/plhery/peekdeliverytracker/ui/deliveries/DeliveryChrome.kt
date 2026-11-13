@@ -139,6 +139,7 @@ import com.plhery.peekdeliverytracker.core.MotionCurve
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.LocalStatusBarHidden
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.WindowKey
 import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
@@ -177,13 +178,15 @@ internal fun localized(key: String): String {
 
 /**
  * Where the bar's row stands: under the status bar, or 10 under a tab bar at the top, as the iPad's does under its
- * tabs.
+ * tabs. With the status bar hidden, as in a phone's landscape ([LocalStatusBarHidden]), it stands as far under the
+ * window's edge as the bar leaves under it.
  */
 @Composable
 internal fun barRowTop(): Dp {
     val tabTop = LocalTabBarPadding.current.calculateTopPadding()
     if (tabTop > 0.dp) return tabTop + 10.dp
-    return WindowInsets.systemBars.union(WindowInsets.displayCutout).asPaddingValues().calculateTopPadding()
+    val top = WindowInsets.systemBars.union(WindowInsets.displayCutout).asPaddingValues().calculateTopPadding()
+    return if (LocalStatusBarHidden.current) maxOf(top, BAR_HEIGHT - ROW_HEIGHT) else top
 }
 
 /**

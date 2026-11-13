@@ -39,10 +39,12 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
+import com.plhery.peekdeliverytracker.ui.LocalStatusBarHidden
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
 import java.util.UUID
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -71,7 +73,10 @@ class DeliveryListScreenshotTest {
     /** The window's bars in points: the status bar at the top, the gesture bar at the bottom, a cutout at the start. */
     private class Bars(val top: Int = 62, val bottom: Int = 24, val cutout: Int = 0)
 
-    /** The demo's list as the captures show it, or `parcels` in `session`, its stores as `prepare` leaves them. */
+    /**
+     * The demo's list as the captures show it, or `parcels` in `session`, its stores as `prepare` leaves them;
+     * `statusBarHidden` as the window hides it in a phone's landscape.
+     */
     private fun show(
         language: AppLanguage = AppLanguage.En,
         dark: Boolean = false,
@@ -79,6 +84,7 @@ class DeliveryListScreenshotTest {
         parcels: List<Parcel> = DemoCards.parcels(language),
         session: AuthenticationState = AuthenticationState.Demo,
         bars: Bars = Bars(),
+        statusBarHidden: Boolean = false,
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
         val source = FakeDeliveries(parcels, session).apply(prepare)
@@ -87,7 +93,7 @@ class DeliveryListScreenshotTest {
             view = LocalView.current
             activity = requireNotNull(LocalActivity.current)
             val density = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
+            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalStatusBarHidden provides statusBarHidden) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = session, language = language, dark = dark, source = source)
                 }
@@ -362,12 +368,21 @@ class DeliveryListScreenshotTest {
         compose.screenshot("list_foldable_light")
     }
 
-    /** A phone turned sideways, its camera's cutout at the start. */
+    /** A phone turned sideways, its camera's cutout at the start, its status bar hidden: the bar's row stands 10 down. */
     @Test
     @Config(qualifiers = "w956dp-h440dp-land-xxhdpi")
     fun aPhoneTurnedSideways() {
-        show(bars = Bars(top = 0, bottom = 21, cutout = 62))
+        show(bars = Bars(top = 0, bottom = 21, cutout = 62), statusBarHidden = true)
+        assertEquals(10f, compose.onNodeWithTag(ADD_BUTTON).getBoundsInRoot().top.value, 0.01f)
         compose.screenshot("list_landscape_light")
+    }
+
+    /** A small phone turned sideways in German at twice the text size, its status bar hidden as an iPhone's is. */
+    @Test
+    @Config(qualifiers = "w640dp-h360dp-land-xhdpi")
+    fun aSmallPhoneTurnedSidewaysAtTwiceTheTextSize() {
+        show(AppLanguage.De, fontScale = 2f, bars = Bars(top = 0, bottom = 0), statusBarHidden = true)
+        compose.screenshot("list_landscape_small_de_text2")
     }
 }
 

@@ -1920,6 +1920,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Transpress tracking (Транспрес): track a parcel in Bulgaria",
       "name": "Transpress",
       "color": "#1e6ee2"
+    },
+    {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "gls-us-tracking",
+      "title": "GLS US tracking (GSO): numbers and statuses explained",
+      "name": "GLS US",
+      "color": "#ffdd00"
     }
   ],
   "de": [

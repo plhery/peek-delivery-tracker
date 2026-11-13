@@ -237,5 +237,6 @@
   { "id": "early-bird", "catalog": "early-bird", "name": "Early Bird", "languages": ["en"] },
   { "id": "xinghe-freight", "catalog": "xinghe-freight", "name": "Xinghe Freight", "languages": ["en"] },
   { "id": "cvc", "catalog": "cvc", "name": "CVC", "languages": ["en", "bg"] },
-  { "id": "transpress", "catalog": "transpress", "name": "Transpress", "languages": ["en", "bg"] }
+  { "id": "transpress", "catalog": "transpress", "name": "Transpress", "languages": ["en", "bg"] },
+  { "id": "gls-us", "catalog": "gls-us", "name": "GLS US", "languages": ["en"] }
 ]

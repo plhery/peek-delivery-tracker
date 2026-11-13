@@ -71,6 +71,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.layout.SubcomposeMeasureScope
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalDensity
@@ -361,8 +362,8 @@ private fun rememberScene(
  * ([FirstOpenSpread]). Otherwise the first that fits the height, as `ViewThatFits(in: .vertical)` picks: the poster
  * ([FirstOpenPoster]) where the window is at least 600 wide and the screen 600 tall; the page held still, the picture
  * over the question; the page scrolling. The picture is as tall as the question and its field leave, between 300 and a
- * phone's 446, or half a screen 1000 tall or more (`heroHeight`); the question is roomier on a screen 800 tall or more.
- * It runs under the status bar.
+ * phone's 446, or half a screen 1000 tall or more (`fits`), and taller where its words need more room
+ * ([FirstOpenHeroLayout]); the question is roomier on a screen 800 tall or more. It runs under the status bar.
  */
 @Composable
 private fun FirstOpenLayouts(scene: FirstOpenScene) {
@@ -380,7 +381,7 @@ private fun FirstOpenLayouts(scene: FirstOpenScene) {
     BoxWithConstraints(Modifier.fillMaxSize().testTag(FIRST_OPEN)) {
         val screen = maxHeight
         val width = maxWidth - insets.start - insets.end
-        val heroHeight = minOf(if (screen >= 1000.dp) screen / 2 else 446.dp, maxOf(300.dp, screen - 404.dp))
+        val fits = minOf(if (screen >= 1000.dp) screen / 2 else 446.dp, maxOf(300.dp, screen - 404.dp))
         val roomy = screen >= 800.dp
         when {
             upright != null -> with(density) {
@@ -389,7 +390,7 @@ private fun FirstOpenLayouts(scene: FirstOpenScene) {
             level != null -> with(density) {
                 FirstOpenSpread(scene, insets, screen, beside = false, level.top.toDp(), level.bottom.toDp())
             }
-            else -> FirstOpenFits(scene, insets, heroHeight, roomy, poster = minOf(width, screen) >= 600.dp, width, screen)
+            else -> FirstOpenFits(scene, insets, fits, roomy, poster = minOf(width, screen) >= 600.dp, width, screen)
         }
     }
 }
@@ -403,9 +404,10 @@ private enum class FirstOpenFit { Poster, Page, Scroll }
 /**
  * `ViewThatFits(in: .vertical)`: each layout's height as it would lay itself out with all the height it wants (the
  * poster's spacer at its 24, the question's at none) against the window's above its safe bottom, the first that fits.
+ * The page's picture is `fits` tall, or as tall as its words need ([FirstOpenHeroLayout]).
  */
 @Composable
-private fun FirstOpenFits(scene: FirstOpenScene, insets: Safe, heroHeight: Dp, roomy: Boolean, poster: Boolean, width: Dp, screen: Dp) {
+private fun FirstOpenFits(scene: FirstOpenScene, insets: Safe, fits: Dp, roomy: Boolean, poster: Boolean, width: Dp, screen: Dp) {
     SubcomposeLayout(Modifier.fillMaxSize()) { constraints ->
         val room = constraints.maxHeight - insets.bottom.roundToPx()
         // Each at the width it is drawn at: the poster across the window, keeping clear of its safe sides itself, and
@@ -414,6 +416,7 @@ private fun FirstOpenFits(scene: FirstOpenScene, insets: Safe, heroHeight: Dp, r
         val between = Constraints(maxWidth = (constraints.maxWidth - insets.start.roundToPx() - insets.end.roundToPx()).coerceAtLeast(0))
         fun height(slot: FirstOpenFit, within: Constraints, content: @Composable () -> Unit): Int =
             subcompose("probe-$slot") { Box(Modifier.clearAndSetSemantics {}) { content() } }.maxOfOrNull { it.measure(within).height } ?: 0
+        val heroHeight = heroLayout(scene, insets.top, between.maxWidth).height(fits)
         val fit = when {
             // The poster's height holds its safe bottom already.
             poster && height(FirstOpenFit.Poster, window) { PosterForeground(scene, insets, width, screen, probe = true) } <= constraints.maxHeight ->
@@ -492,16 +495,16 @@ private fun FirstOpenSpread(scene: FirstOpenScene, insets: Safe, screen: Dp, bes
 }
 
 /**
- * `hero(height:top:beside:)`: the sample parcel on its map in DHL's colours, its route below the masthead (112 under
- * the status bar) and Pip above its name, which stands at its foot with the carrier's mark, its status and the stamp.
- * Its bottom corners are rounded 38, or the corners on the fold's side ([beside]). Tapped, it opens the parcel's page,
- * zooming out of it, and gives a little under the finger (`FirstOpenHeroStyle`); TalkBack reads it as "Open a sample".
- * The masthead and, when a scan is worth one, the alert it would bring stand at its top.
+ * `hero(height:top:beside:)`: the sample parcel on its map in DHL's colours, its route below the masthead and Pip above
+ * its name, which stands at its foot with the carrier's mark, its status and the stamp ([HeroFoot]), the route and Pip
+ * kept clear of both as [FirstOpenHeroLayout] places them. Its bottom corners are rounded 38, or the corners on the
+ * fold's side ([beside]). Tapped, it opens the parcel's page, zooming out of it, and gives a little under the finger
+ * (`FirstOpenHeroStyle`); TalkBack reads it as "Open a sample". The masthead and, when a scan is worth one, the alert it
+ * would bring stand at its top.
  */
 @Composable
 private fun FirstOpenHero(scene: FirstOpenScene, top: Dp, height: Dp, beside: Boolean, modifier: Modifier) {
     val colors = PeekTheme.colors
-    val type = PeekTheme.type
     val identity = scene.identity
     val shape = if (beside) {
         UnevenContinuousRoundedShape(bottomTrailing = Radii.heroBottom, topTrailing = Radii.heroBottom)
@@ -509,39 +512,113 @@ private fun FirstOpenHero(scene: FirstOpenScene, top: Dp, height: Dp, beside: Bo
         UnevenContinuousRoundedShape(bottomLeading = Radii.heroBottom, bottomTrailing = Radii.heroBottom)
     }
     val label = localized("landing.pip.open")
-    Box(modifier) {
-        Box(
-            Modifier
-                .fillMaxSize()
-                .samplePicture(scene, label, shape)
-                .clip(shape)
-                .background(colors.resolve(identity.surface)),
-            contentAlignment = Alignment.BottomStart,
-        ) {
-            Box(Modifier.fillMaxSize().clearAndSetSemantics {}) {
-                SampleRoute(
-                    scene, EdgeInsets(top = top.value + 112.0, leading = 88.0, bottom = 128.0, trailing = 54.0), floor = height.value - 118.0,
-                )
-            }
-            Row(
-                Modifier.fillMaxWidth().padding(start = 26.dp, end = 26.dp, bottom = 24.dp).clearAndSetSemantics {},
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.Bottom,
-            ) {
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-                    CarrierFleetMark(identity)
-                    Text(scene.parcel.label, color = colors.label, style = type.style(IosTextStyle.Title2, FontWeight.SemiBold))
-                    StepStatus(scene, type.caption)
+    val told = LocalFirstOpenHero.current
+    SubcomposeLayout(modifier) { constraints ->
+        val geometry = heroLayout(scene, top, constraints.maxWidth)
+        told?.invoke(geometry)
+        val placeables = subcompose("hero") {
+            Box(Modifier.fillMaxSize()) {
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .samplePicture(scene, label, shape)
+                        .clip(shape)
+                        .background(colors.resolve(identity.surface)),
+                    contentAlignment = Alignment.BottomStart,
+                ) {
+                    Box(Modifier.fillMaxSize().clearAndSetSemantics {}) {
+                        SampleRoute(
+                            scene,
+                            EdgeInsets(top = geometry.routeTop.value.toDouble(), leading = 88.0, bottom = geometry.routeBottom.value.toDouble(), trailing = 54.0),
+                            floor = (height - geometry.pipRoom).value.toDouble(),
+                        )
+                    }
+                    HeroFoot(scene)
                 }
-                DeliveryPostageStamp(scene.parcel, identity, scene.appeared, width = 50.dp)
+                Column(
+                    Modifier.fillMaxWidth().padding(start = MASTHEAD_INSET, top = top + 10.dp, end = MASTHEAD_INSET),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    FirstOpenMasthead(scene)
+                    StepPing(scene, rise = -PING_TRAVEL)
+                }
             }
-        }
-        Column(Modifier.fillMaxWidth().padding(start = 24.dp, top = top + 10.dp, end = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            FirstOpenMasthead(scene)
-            StepPing(scene, rise = -PING_TRAVEL)
-        }
+        }.map { it.measure(constraints) }
+        layout(constraints.maxWidth, constraints.maxHeight) { placeables.forEach { it.place(0, 0) } }
     }
 }
+
+/**
+ * The picture's foot: the carrier's mark, the parcel's name in title 2 semibold and its status at the journey's step,
+ * 9 apart, the stamp beside them, 26 in from the sides and 24 over the bottom; TalkBack doesn't read it. Measured
+ * ([probe]), every step's status stands in one place and the stamp is drawn at once, so the foot is as tall as at its
+ * tallest step and the picture holds still as the journey moves on.
+ */
+@Composable
+private fun HeroFoot(scene: FirstOpenScene, probe: Boolean = false) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Row(
+        Modifier.fillMaxWidth().padding(start = 26.dp, end = 26.dp, bottom = 24.dp).clearAndSetSemantics {},
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.Bottom,
+    ) {
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            CarrierFleetMark(scene.identity)
+            Text(scene.parcel.label, color = colors.label, style = type.style(IosTextStyle.Title2, FontWeight.SemiBold))
+            if (probe) {
+                Box { for (step in 1..FirstOpenJourney.steps) Text(scene.status(step), style = type.caption) }
+            } else {
+                StepStatus(scene, type.caption)
+            }
+        }
+        DeliveryPostageStamp(scene.parcel, scene.identity, probe || scene.appeared, width = 50.dp)
+    }
+}
+
+/**
+ * `FirstOpenHeroLayout`: where the picture's route and Pip stand, and how tall it is, from what its words take: the
+ * masthead ([masthead] tall, 10 under the status bar's [top]) and the foot ([foot] tall with its padding). The route
+ * keeps 112 under the status bar and 128 over the bottom, and Pip's floor 118, unless the words need more: 16 under the
+ * masthead and the alert's room (12 and 26, kept with no alert showing so the picture holds still as alerts come and
+ * go), and 10 over the foot, Pip on it. Once the words outgrow those, the picture grows so the route keeps the room it
+ * has at the usual text size, or 144 where the screen gives it less, and the page scrolls as it does when it is too
+ * short; at the usual text sizes nothing moves. Beside or above a fold, where the fold sets the picture's height, it
+ * doesn't grow.
+ */
+internal data class FirstOpenHeroLayout(val top: Dp, val masthead: Dp, val foot: Dp) {
+    /** The route's top, from the picture's. */
+    val routeTop: Dp get() = maxOf(top + 112.dp, top + 10.dp + masthead + 12.dp + 26.dp + 16.dp)
+
+    /** The route's room over the picture's bottom. */
+    val routeBottom: Dp get() = maxOf(128.dp, foot + 10.dp)
+
+    /** Pip's floor's height over the picture's bottom. */
+    val pipRoom: Dp get() = maxOf(118.dp, foot)
+
+    /** The picture's height where the screen leaves it [fits]: that, or taller once its words outgrow the usual insets. */
+    fun height(fits: Dp): Dp {
+        val usual = fits - top - 112.dp - 128.dp
+        val outgrown = routeTop > top + 112.dp || routeBottom > 128.dp
+        return maxOf(fits, routeTop + (if (outgrown) maxOf(usual, 144.dp) else usual) + routeBottom)
+    }
+}
+
+/** [FirstOpenHeroLayout] for a picture [width] pixels wide under [top]: its masthead and its foot measured as drawn. */
+private fun SubcomposeMeasureScope.heroLayout(scene: FirstOpenScene, top: Dp, width: Int): FirstOpenHeroLayout {
+    fun height(slot: String, within: Int, content: @Composable () -> Unit): Int =
+        subcompose("hero-$slot") { Box(Modifier.clearAndSetSemantics {}) { content() } }
+            .maxOfOrNull { it.measure(Constraints(maxWidth = within.coerceAtLeast(0))).height } ?: 0
+    val masthead = height("masthead", width - (MASTHEAD_INSET * 2).roundToPx()) { FirstOpenMasthead(scene) }
+    val foot = height("foot", width) { HeroFoot(scene, probe = true) }
+    return FirstOpenHeroLayout(top, masthead.toDp(), foot.toDp())
+}
+
+/** Told where the picture's route and Pip stand: the tests check they keep clear of its words. */
+internal val LocalFirstOpenHero = staticCompositionLocalOf<((FirstOpenHeroLayout) -> Unit)?> { null }
+
+/** The masthead's inset from the picture's sides. */
+private val MASTHEAD_INSET = 24.dp
 
 /**
  * The picture's button: it opens the sample parcel's page out of itself (`matchedTransitionSource`), its corners

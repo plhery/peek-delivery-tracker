@@ -57,7 +57,8 @@ postcode goes in a field of its own. That one is bound to the number providers a
 asked about (the delivery leg's after a handoff), kept across checks, kept private, and
 ignored for a different tracking number, and replaced by a new postcode the owner gives the
 parcel in a carrier's own field. Updating it invalidates an older
-sync and clears universal providers' missing-input backoffs. Other failure backoffs stay in place. Missing recipient input does not
+sync and clears universal providers' missing-input backoffs, as does the first check after a
+postcode in the carrier's own field answers a request. Other failure backoffs stay in place. Missing recipient input does not
 open the shared provider circuit. Another source with progress clears the prompt.
 While the parcel has no postcode to send, scheduled checks skip a provider that asked for
 one, since it would only ask again; a refresh by hand still asks once its backoff is over.

@@ -843,6 +843,13 @@ export class TrackingRouter {
       ? metadata.active_tracking_carrier : declared;
     const inputPlausible = plausibleInputRequest(universalNumber, [universalCarrier, state.discovered_carrier,
       state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined]);
+    // A request is saved only while the parcel holds no postcode: one it holds now was given since, as the
+    // owner's answer in the carrier's field, and the providers that asked wait for it no longer.
+    if (postcode && state.provider_input_needed) {
+      for (const [provider, failure] of Object.entries(state.failures)) {
+        if (failure.kind === 'input_required' && !directCarrier(provider)) delete state.failures[provider];
+      }
+    }
     // A request saved before it was found implausible stops asking the owner. So does one for a parcel
     // holding its own postcode: every provider receives it, and the owner changes it in the carrier's field.
     if (!inputPlausible || postcode) delete state.provider_input_needed;

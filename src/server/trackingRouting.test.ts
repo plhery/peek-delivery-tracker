@@ -3914,6 +3914,27 @@ describe('universal preflight and recipient input', () => {
     const { routing } = await bare.router.fetch({ ...announced, dpd_postcode: null }, true).catch((error) => error);
     expect(routing.provider_input_needed).toEqual({ provider: '17TRACK', field: 'dpdPostcode' });
   });
+  it('asks a provider that wanted a postcode at once when the owner answers in the carrier\'s field', async () => {
+    // ParcelsApp asked at 12:00; the owner typed PostNL's postcode at 12:05, which leaves the routing as it was.
+    const asked = state({ configured_carrier: 'spring-gds', provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' },
+      failures: { ParcelsApp: { count: 2, kind: 'input_required', retry_at: '2026-09-10T12:25:00.000Z' },
+        'spring-gds': { count: 1, kind: 'input_required', retry_at: '2026-09-10T12:15:00.000Z' } } });
+    const answered = parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB', carrier_data: { routing: asked } });
+    const value = setup(new Date('2026-09-10T12:05:00Z'));
+    value.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+    value.universal.mockImplementation(async (source) => { if (source === 'ParcelsApp') return history(); throw new NoHistoryError(source); });
+    const result = await value.router.fetch(answered, false);
+    expect(value.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '1234 AB', 'Europe/Amsterdam', 'spring-gds');
+    expect(result.result.tracking_provider).toBe('ParcelsApp');
+    // The carrier's own wait is its own.
+    expect((result.result.routing as JsonObject & { failures: JsonObject }).failures['spring-gds']).toMatchObject({ kind: 'input_required' });
+    // A postcode held before the request was refused with it: that wait stands.
+    const refused = setup(new Date('2026-09-10T12:05:00Z'));
+    refused.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+    refused.universal.mockRejectedValue(new NoHistoryError('Ship24'));
+    await refused.router.fetch({ ...answered, carrier_data: { routing: { ...asked, provider_input_needed: undefined } } }, false).catch(() => undefined);
+    expect(refused.universal.mock.calls.map(([source]) => source)).not.toContain('ParcelsApp');
+  });
 });
 
 describe('a universal history naming the filed carrier by a name of several networks', () => {

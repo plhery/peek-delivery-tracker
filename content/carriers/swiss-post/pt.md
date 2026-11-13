@@ -3,10 +3,10 @@ title: Swiss Post rastreio: correios suíços e entrega em Portugal
 description: Rastreio Swiss Post, os correios suíços: como é o número, o que querem dizer os estados, quem entrega em Portugal e como pagar o IVA na alfândega.
 slug: correios-suicos-rastreio
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
-A Swiss Post é o correio da Suíça: Die Post em alemão, La Poste em francês, La Posta em italiano. Segues a encomenda no Track & Trace do post.ch, em alemão, francês, italiano ou inglês, ou colando o número na caixa acima. O número dá-to quem envia.
+A Swiss Post é o correio da Suíça: Die Post em alemão, La Poste em francês, La Posta em italiano. Segues a encomenda no Track & Trace do post.ch (www.post.ch/swisspost-tracking), em alemão, francês, italiano ou inglês, ou colando o número na caixa acima. O número dá-to quem envia.
 
 ## Número de rastreio Swiss Post: como é
 
@@ -85,7 +85,7 @@ Segundo as páginas de cada empresa, consultadas em outubro de 2026:
 
 ## Rastrear uma encomenda Swiss Post com o Peek
 
-O [Peek](/) reconhece as duas formas logo, com pontos ou espaços, e não precisa de código postal. Um link do service.post.ch que acabe em `/entry/search/` e o número também funciona.
+O [Peek](/) reconhece as duas formas logo, com pontos ou espaços, e não precisa de código postal. Também funcionam os links do service.post.ch que acabem em `/entry/search/` ou `/external/view/` e o número, e os do www.post.ch ou do mys.post.ch para `/swisspost-tracking` ou `/my-consignments/deeplink-search` com o número em `formattedParcelCodes`. Na página da encomenda, «Abrir o site de Swiss Post» abre o número na página de rastreio da Swiss Post, www.post.ch/swisspost-tracking, que faz parte de «My consignments».
 
 O Peek lê o rastreio da Swiss Post em inglês, seja qual for a tua língua. Mostra o estado, cada leitura no mapa, o dia previsto (com janela horária, se houver) ou o intervalo de dias, o peso, o tamanho, a hora de entrega e o país de destino; enquanto a encomenda espera, a estação ou o My Post 24 com morada. Deixa de fora o teu nome, a morada e a assinatura, e não lê o prazo de levantamento. `Registered for collection` aparece como «Pronta para levantamento».
 

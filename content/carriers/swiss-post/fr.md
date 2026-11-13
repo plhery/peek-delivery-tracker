@@ -3,7 +3,7 @@ title: Swiss Post : suivi colis La Poste suisse et statuts
 description: Suivre un colis de La Poste suisse : à quoi ressemble le numéro, ce que veut dire chaque statut, que faire après une invitation à retirer, et qui contacter.
 slug: swiss-post-suivi-colis
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
 La Poste suisse (Swiss Post, Die Post, La Posta) est le service postal national : elle livre les colis en Suisse et au Liechtenstein. Tu suis ton colis gratuitement sur [post.ch](https://www.post.ch/fr/reception/suivi-des-envois) avec son numéro d'envoi, ou en le collant dans le champ ci-dessus. Ce numéro vient de l'expéditeur : cherche d'abord dans l'e-mail d'expédition de la boutique.
@@ -81,7 +81,7 @@ Relevé sur post.ch le 11 octobre 2026 :
 
 ## Suivre un colis La Poste suisse avec Peek
 
-[Peek](/) reconnaît les deux formes tout de suite, avec ou sans points ni espaces. Un lien service.post.ch finissant par `/entry/search/` et le numéro fonctionne aussi ; les autres liens post.ch, seulement s'ils contiennent un de ces numéros. Aucun code postal à saisir.
+[Peek](/) reconnaît les deux formes tout de suite, avec ou sans points ni espaces. Les liens fonctionnent aussi : un lien service.post.ch finissant par `/entry/search/` ou `/external/view/` et le numéro, ou un lien www.post.ch ou mys.post.ch vers `/swisspost-tracking` ou `/my-consignments/deeplink-search` avec le numéro dans `formattedParcelCodes` ; les autres liens post.ch, seulement s'ils contiennent un de ces numéros. Aucun code postal à saisir. Sur la page du colis, « Ouvrir le site Swiss Post » ouvre le numéro sur la page de suivi de La Poste, www.post.ch/swisspost-tracking, qui fait partie de « Mes envois ».
 
 Peek lit le suivi de La Poste en anglais, quelle que soit ta langue : tu y verras par exemple `Registered for collection` pour l'invitation à retirer, et `Delivered to the mailbox/letter box` tel quel. `Delivered` s'affiche comme « Livré ». Avec `Registered for collection` ou `Deposited in the MyPost24 machine`, le colis passe à l'étape « Prêt à être retiré ».
 

@@ -3,7 +3,7 @@ title: Swiss Post tracking: Posta Svizzera, stati e ritiro
 description: Segui un pacco della Posta Svizzera in Ticino: com'è fatto il numero, cosa vogliono dire gli stati, cosa fare con l'invito di ritiro e come contattare la Posta.
 slug: swiss-post-tracking-posta-svizzera
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
 La Posta Svizzera (Swiss Post, Die Post, La Poste) consegna pacchi e raccomandate in tutta la Svizzera e nel Principato del Liechtenstein. Puoi seguire il pacco gratis su [post.ch](https://www.post.ch/it/ricezione/monitorare-gli-invii) con il numero d'invio, oppure incollare il numero nel box qui sopra. Il numero lo crea il mittente: cercalo prima nell'e-mail di spedizione del negozio.
@@ -80,7 +80,7 @@ Come risultavano su post.ch l'11 ottobre 2026:
 
 ## Tracciare un pacco della Posta Svizzera con Peek
 
-[Peek](/) riconosce subito entrambe le forme, anche con punti o spazi. Funziona anche un link di service.post.ch con `/entry/search/` seguito dal numero; gli altri link di post.ch solo se contengono uno di questi numeri. Non serve un NPA.
+[Peek](/) riconosce subito entrambe le forme, anche con punti o spazi. Funzionano anche i link di service.post.ch con `/entry/search/` o `/external/view/` seguito dal numero e quelli di www.post.ch o mys.post.ch verso `/swisspost-tracking` o `/my-consignments/deeplink-search` con il numero in `formattedParcelCodes`; gli altri link di post.ch solo se contengono uno di questi numeri. Non serve un NPA. Nella pagina del pacco, «Apri il sito Swiss Post» apre il numero sulla pagina di tracking della Posta, www.post.ch/swisspost-tracking, che fa parte di «I miei invii».
 
 Legge i testi inglesi della Posta, in qualunque lingua usi Peek. Mostra lo stato, il luogo di ogni scansione su una mappa, il giorno di consegna previsto (con una fascia oraria quando la Posta la dà) o l'intervallo di giorni, peso, dimensioni, ora di consegna e paese di destinazione. Mentre il pacco aspetta, mostra nome e indirizzo della filiale o del My Post 24, che spariscono dopo il ritiro. Lascia fuori nome e indirizzo del destinatario, firma e istruzioni di recapito, e non legge il termine di ritiro.
 

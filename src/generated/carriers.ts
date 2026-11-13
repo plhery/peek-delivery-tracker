@@ -1925,7 +1925,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gls-us",
       "catalog": "gls-us",
       "slug": "gls-us-tracking",
-      "title": "GLS US tracking (GSO): numbers and statuses explained",
+      "title": "GLS US tracking (GSO): numbers, statuses and delivery",
       "name": "GLS US",
       "color": "#ffdd00"
     }

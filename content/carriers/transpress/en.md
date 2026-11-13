@@ -6,23 +6,23 @@ published: 2026-11-13
 updated: 2026-11-13
 ---
 
-Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste its number in the box above and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape. Transpress's own tracker is "Shipment tracking" on transpress.bg.
+Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste its number in the box above and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape.
 
 ## Transpress tracking number: what it looks like
 
-Peek's catalog has no number shape for Transpress, and Transpress's tracker just asks for the "Shipment number" ("Номер на пратката" in Bulgarian) without saying what it looks like. So Peek can't recognise a Transpress number, Transpress never appears under "Fits this number" when you add one, and this page gives no example.
+Peek's catalog has no number shape for Transpress, and Transpress's tracker asks for the "Shipment number" ("Номер на пратката" in Bulgarian) without saying what it looks like. So Transpress never appears under "Fits this number", and this page gives no example.
 
 | What you paste | What Peek does |
 | --- | --- |
-| The Transpress number alone | Its shape doesn't point to Transpress, and Peek may list other carriers whose shapes the number fits. Pick Transpress yourself (see "Track a Transpress parcel with Peek" below). |
-| A link to Transpress's tracker on transpress.bg | Peek has no rule for Transpress's links, so the link doesn't name Transpress either. Copy the number out of it (on the tracker's own link, it comes after `track-number=`) and paste that. |
+| The Transpress number alone | Peek may list other carriers under "Fits this number": they only fit its shape. Pick Transpress yourself (see below). |
+| A link to Transpress's tracker on transpress.bg | Peek has no rule for Transpress's links, so the link doesn't name Transpress either. Paste the number from it instead: on the tracker's own link, it comes after `track-number=`. |
 | A number the shop says is another carrier's | Track it with that carrier: the shop's email is the best clue to who delivers. |
 
 **Where to find it.** In the shop's shipping email or on your order page; for a parcel from a person, ask them. No number at all? See [how to find a tracking number](guide:find-tracking-number).
 
 ## What Transpress tracking statuses mean in Peek
 
-Peek's code holds no Transpress wordings: it doesn't ask Transpress's tracker. It asks tracking services, such as ParcelsApp, Ship24 and 17TRACK, for the number and shows the history of the first one that has the parcel, each line in that service's words. A service can lag behind Transpress's own tracker, or not follow Transpress parcels at all. Peek sorts each line into one of its own statuses:
+Peek doesn't ask Transpress's tracker, so its code holds no Transpress wordings. It asks tracking services, such as ParcelsApp, Ship24 and 17TRACK, and shows the history of the first one that has the parcel, each line in that service's words. A service can lag behind Transpress's own tracker. Peek sorts each line into one of its own statuses:
 
 | Peek shows | What it means for you |
 | --- | --- |
@@ -37,7 +37,7 @@ Peek's code holds no Transpress wordings: it doesn't ask Transpress's tracker. I
 | "Returned to sender" | It went back to the sender. |
 | "Needs attention" | The service reports a problem. Read the line under it. |
 
-Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for the carrier". If you leave the carrier to Peek instead of picking Transpress, the same wait usually reads "No tracking history yet". "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
+Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for the carrier". If you leave the carrier to Peek, the same wait usually reads "No tracking history yet". "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
 
 ## Transpress delivery in Bulgaria
 
@@ -49,19 +49,19 @@ From Transpress's courier services page and its courier terms, in force since 1 
 
 **Two attempts.** The delivery price includes up to two attempts. The second comes within 3 working days after the first delivery's deadline.
 
-**Refusing a parcel.** You confirm the refusal in writing on a Transpress document. The parcel goes back to the sender, at the sender's cost.
+**Refusing a parcel.** You confirm the refusal in writing on a Transpress document.
 
-**At an office.** A parcel can also be delivered to a Transpress office. There are offices in Bozhurishte (its central office), Blagoevgrad, Burgas, Varna, Veliko Tarnovo, Vratsa, Pleven, Plovdiv, Ruse, Stara Zagora and Shumen. After 3 working days at an office, the sender pays a storage fee.
+**At an office.** A parcel can also be delivered to a Transpress office, in Bozhurishte, Blagoevgrad, Burgas, Varna, Veliko Tarnovo, Vratsa, Pleven, Plovdiv, Ruse, Stara Zagora and Shumen. After 3 working days at an office, the sender pays a storage fee.
 
 **Paying and messages.** Cash on delivery is one of Transpress's extra services. Card payment by POS terminal and notification by SMS or Viber are among its free ones.
 
-**Check it at the door.** Check the contents when the parcel arrives, with the courier there. If something is damaged, the two of you sign a report in two copies or a note on the delivery document.
+**Check it at the door.** Check the contents with the courier there. If something is damaged, the two of you sign a report in two copies or a note on the delivery document.
 
-If a delivery fails or the parcel waits somewhere for you, see [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel). For a parcel from outside the EU, see [customs](guide:customs).
+If a delivery fails or the parcel waits for you, see [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel). For a parcel from outside the EU, see [customs](guide:customs).
 
 ## Transpress parcel not updating, lost or returned
 
-**Nothing yet.** A tracking service may not know the number yet, or may not follow Transpress's parcels at all. Peek then shows "Waiting for the carrier" and keeps asking, each service again at most a day after it last had nothing. If there's still no line two days after you added the parcel, Peek flags it: "Still waiting for the carrier’s first update". Check the number against the shop's email. If nothing comes after a few days, open Transpress's own tracker with "Open the Transpress website" on the parcel's page, and ask the shop whether the parcel was really sent.
+**Nothing yet.** A tracking service may not know the number yet, or may not follow Transpress's parcels at all. Peek keeps asking, each service again at most a day after it last had nothing. If there's still no line two days after you added the parcel, Peek flags it: "Still waiting for the carrier’s first update". Check the number against the shop's email. If nothing comes after a few days, open Transpress's own tracker with "Open the Transpress website" and ask the shop whether the parcel was really sent.
 
 **No news for days.** After four days without a new line, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag: "No tracking update for four days". See [why tracking stops updating](guide:tracking-not-updating).
 
@@ -69,11 +69,11 @@ If a delivery fails or the parcel waits somewhere for you, see [missed delivery]
 
 **Delivered, but nothing came.** Check around the door and with neighbours, then ask the shop. See [delivered but not received](guide:delivered-not-received).
 
-**Lost or damaged.** A parcel counts as lost if Transpress can't locate it within 30 days. You can claim in writing within 6 months of the day Transpress accepted the parcel: for a parcel lost, destroyed or robbed, for damage, for late delivery, for a return with no reason given, or for cash on delivery paid out late. The claim form is under "Complaints" on transpress.bg. Transpress answers within 30 days for parcels within Bulgaria and 90 days for international ones, and pays an accepted claim within 30 days of its answer.
+**Lost or damaged.** A parcel counts as lost if Transpress can't locate it within 30 days. You can claim in writing within 6 months of the day Transpress accepted the parcel: for a parcel lost, destroyed or robbed, for damage, for late delivery, for a return with no reason given, or for cash on delivery paid out late. Transpress answers within 30 days for parcels within Bulgaria and 90 days for international ones, and pays an accepted claim within 30 days of its answer.
 
 Without insurance, compensation is the price of the courier service, up to €7.67 within Bulgaria and €25.56 internationally, against proof of value and damage; €3.00 for a return with no reason given. An insured parcel is paid at the real damage, up to its insured value. More than 2 working days late: 10% of the service price per day within Bulgaria, 2% internationally, up to 50%. If you can't agree, the terms let you ask the Communications Regulation Commission (КРС) for help or take it to a Bulgarian court.
 
-For an online order, tell the shop first: it booked the delivery with Transpress and can take it up or send you a new parcel. See [lost parcels](guide:lost-parcel) and [damaged parcels](guide:damaged-parcel).
+For an online order, tell the shop first: it booked the delivery and can take it up or send you a new parcel. See [lost parcels](guide:lost-parcel) and [damaged parcels](guide:damaged-parcel).
 
 ## Transpress contact and customer service
 
@@ -85,19 +85,17 @@ As transpress.bg's Contacts page listed them on 13 November 2026:
 - **Chat:** on transpress.bg, every day from 7:00 to 23:00, or send your question through the chat's form.
 - **Claims:** the form under "Complaints" ("Рекламации" on the Bulgarian site).
 
-Have your tracking number ready.
-
 ## Track a Transpress parcel with Peek
 
-[Peek](/) can't tell a Transpress parcel by its number alone, so paste it all the same: Peek follows more than 3,500 carriers. Then pick the carrier yourself:
+[Peek](/) follows more than 3,500 carriers but can't tell a Transpress number by its shape, so pick the carrier yourself:
 
 1. Paste the number in the box above.
 2. Press "Change" beside the carrier line and search for Transpress. "Транспрес" finds it too, shown with "Also called …", and so does "Bulgaria".
 3. Pick Transpress: the line then reads "Chosen by you". Track the parcel.
 
-On a parcel you've already added, use "Change carrier". If Peek lists other carriers under "Fits this number", they only fit the number's shape. Before you choose, the carrier line may say "Peek looks it up when you track" or "not found yet · Peek keeps checking": both are normal for a new number.
+On a parcel you've already added, use "Change carrier". Before you choose, the carrier line may say "Peek looks it up when you track" or "not found yet · Peek keeps checking": both are normal for a new number.
 
-If you leave the carrier to Peek, it looks the number up with tracking services. If they show the parcel moving and name Transpress as its carrier, Peek files the parcel under Transpress by itself.
+If you leave the carrier to Peek, it asks tracking services, and files the parcel under Transpress by itself once they show it moving with Transpress named as its carrier.
 
 **What you see.** The status, and each line from the tracking service with its date and place when the service gives one. Until a service has the parcel, "Open the Transpress website" on the parcel's page opens the number on Transpress's own tracker, in Bulgarian; the site has an English version too. Once a service shows the history, that link opens the service's page instead.
 

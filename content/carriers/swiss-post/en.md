@@ -3,7 +3,7 @@ title: Swiss Post tracking: statuses, collection notes and contact
 description: Track a Swiss Post parcel: what its numbers look like, what each English status means, what to do after a collection note, and how to reach Swiss Post.
 slug: swiss-post-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
 Swiss Post (Die Post, La Poste, La Posta) is Switzerland's national postal service and delivers parcels across Switzerland and Liechtenstein. Track one free on [post.ch](https://www.post.ch/en/receiving-mail/track-consignments) with the consignment number, or paste it in the box above. The number comes from the sender, so look in the shop's shipping email first.
@@ -78,7 +78,7 @@ As listed on post.ch on 11 October 2026:
 
 ## Tracking Swiss Post parcels with Peek
 
-[Peek](/) recognises both shapes at once, with dots or spaces. A service.post.ch link ending in `/entry/search/` and the number works too; other post.ch links only when one of those numbers is inside. No postcode needed.
+[Peek](/) recognises both shapes at once, with dots or spaces. Links work too: a service.post.ch link ending in `/entry/search/` or `/external/view/` and the number, or a www.post.ch or mys.post.ch link to `/swisspost-tracking` or `/my-consignments/deeplink-search` with the number in `formattedParcelCodes`; other post.ch links only when one of those numbers is inside. No postcode needed. On the parcel's page, "Open the Swiss Post website" opens the number on Swiss Post's tracking page, www.post.ch/swisspost-tracking, part of "My consignments".
 
 Peek reads Swiss Post's English texts, whatever your language. It shows the status, each scan's facility on a map, the expected delivery day (with a time window when Swiss Post gives one) or range of days, the weight, size, delivery time and destination country. While the parcel waits, it shows the branch or My Post 24 terminal's name and address, gone once delivered. It leaves out your name, address, signature and delivery instructions, and doesn't read the pickup deadline.
 

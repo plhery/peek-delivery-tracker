@@ -3,7 +3,7 @@ title: Swiss Post Sendungsverfolgung: Status, Abholung, Kontakt
 description: Post-Paket verfolgen: wie die Sendungsnummer aussieht, was die Status heißen, was nach einer Abholungseinladung zu tun ist und wie du die Post erreichst.
 slug: swiss-post-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-13
 ---
 
 Die Post (Swiss Post, Schweizerische Post) ist der nationale Postdienst der Schweiz und stellt Pakete in der Schweiz und in Liechtenstein zu. Verfolgen kannst du ein Paket kostenlos auf [post.ch](https://www.post.ch/de/empfangen/sendung-verfolgen) mit der Sendungsnummer, oder du fügst die Nummer oben ins Feld ein. Die Nummer vergibt der Absender, schau also zuerst in die Versandbestätigung des Shops.
@@ -87,7 +87,7 @@ Eine E-Mail-Adresse für Empfänger steht auf den Kontaktseiten nicht.
 
 ## Swiss Post Sendungen mit Peek verfolgen
 
-[Peek](/) erkennt beide Nummernformen sofort, auch mit Punkten oder Leerzeichen. Ein Link von service.post.ch, der auf `/entry/search/` und die Nummer endet, funktioniert ebenso. Andere post.ch-Links nur, wenn eine der beiden Nummern darin steht. Eine Postleitzahl braucht es nicht.
+[Peek](/) erkennt beide Nummernformen sofort, auch mit Punkten oder Leerzeichen. Links funktionieren ebenso: von service.post.ch, wenn sie auf `/entry/search/` oder `/external/view/` und die Nummer enden, und von www.post.ch oder mys.post.ch zu `/swisspost-tracking` oder `/my-consignments/deeplink-search` mit der Nummer in `formattedParcelCodes`. Andere post.ch-Links nur, wenn eine der beiden Nummern darin steht. Eine Postleitzahl braucht es nicht. Auf der Seite des Pakets öffnet „Website von Swiss Post öffnen“ die Nummer auf der Tracking-Seite der Post, www.post.ch/swisspost-tracking, die zu „Meine Sendungen“ gehört.
 
 Es liest die englischen Texte der Post, egal in welcher Sprache du die Seite nutzt, und zeigt den Status, die Stelle jedes Scans auf der Karte, die voraussichtliche Zustellung (den Tag, mit Zeitfenster, wenn die Post eines nennt, oder mehrere Tage, wenn sie keinen einzelnen nennt), Gewicht, Maße, Zeitpunkt der Zustellung und Zielland. Wartet das Paket auf dich, siehst du Namen und Adresse der Filiale oder des My Post 24-Automaten, bis es abgeholt ist. Deinen Namen, deine Adresse, die Unterschrift und Zustellanweisungen zeigt es nicht, und die Abholfrist liest es nicht.
 

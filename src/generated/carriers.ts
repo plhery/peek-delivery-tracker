@@ -1911,7 +1911,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "cvc-tracking",
       "title": "CVC tracking (Си Ви Си): follow a parcel in Bulgaria",
       "name": "CVC",
-      "color": "#5f3e8f"
+      "color": "#652b9e"
     },
     {
       "id": "transpress",
@@ -4429,7 +4429,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "cvc-prosledyavane-na-pratka",
       "title": "Проследяване на пратка CVC (Си Ви Си): номер и статуси",
       "name": "CVC",
-      "color": "#5f3e8f"
+      "color": "#652b9e"
     },
     {
       "id": "transpress",

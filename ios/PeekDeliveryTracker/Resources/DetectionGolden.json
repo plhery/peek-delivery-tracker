@@ -34457,13 +34457,11 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "fedex",
       "andreani",
       "brt",
       "yunda"
     ],
     "preferred": [
-      "fedex",
       "andreani"
     ],
     "asked": [
@@ -65478,13 +65476,11 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "fedex",
       "j-and-t-br",
       "brt",
       "yunda"
     ],
     "preferred": [
-      "fedex",
       "j-and-t-br"
     ],
     "asked": [

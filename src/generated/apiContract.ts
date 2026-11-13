@@ -982,7 +982,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^\\d{15}$",
+        "pattern": "^(?!8880|3[016]000)\\d{15}$",
         "confidence": "low",
         "checksum": "gs1",
         "preferred": true
@@ -53017,7 +53017,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "color": "#ffdd00",
     "selectable": true,
-    "timezone": "UTC",
+    "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
       "adapter": "gls-us",

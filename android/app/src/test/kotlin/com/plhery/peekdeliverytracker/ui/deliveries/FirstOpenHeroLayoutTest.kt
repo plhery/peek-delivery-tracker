@@ -11,6 +11,7 @@ class FirstOpenHeroLayoutTest {
     fun atTheUsualSizesNothingMoves() {
         val usual = FirstOpenHeroLayout(top = 62.dp, masthead = 44.dp, foot = 106.dp)
         assertEquals(174.dp, usual.routeTop)
+        assertEquals(62.dp + 10.dp + 44.dp + 12.dp + 26.dp, usual.ceiling)
         assertEquals(128.dp, usual.routeBottom)
         assertEquals(118.dp, usual.pipRoom)
         assertEquals(446.dp, usual.height(446.dp))
@@ -25,6 +26,8 @@ class FirstOpenHeroLayoutTest {
         val large = FirstOpenHeroLayout(top = 24.dp, masthead = 50.dp, foot = 190.dp)
         // 16 under the masthead and the alert's room, 10 over the foot, Pip on it.
         assertEquals(24.dp + 10.dp + 50.dp + 12.dp + 26.dp + 16.dp, large.routeTop)
+        // Pip under the masthead and its alert.
+        assertEquals(24.dp + 10.dp + 50.dp + 12.dp + 26.dp, large.ceiling)
         assertEquals(200.dp, large.routeBottom)
         assertEquals(190.dp, large.pipRoom)
         val height = large.height(300.dp)

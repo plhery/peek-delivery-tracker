@@ -58,6 +58,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
@@ -404,7 +405,7 @@ private enum class FirstOpenFit { Poster, Page, Scroll }
 
 /**
  * `ViewThatFits(in: .vertical)`: each layout's height as it would lay itself out with all the height it wants (the
- * poster's spacer at its 24, the question's at none) against the window's above its safe bottom, the first that fits.
+ * poster's spacer at its least, the question's at none) against the window's above its safe bottom, the first that fits.
  * The page's picture is `fits` tall, or as tall as its words need ([FirstOpenHeroLayout]).
  */
 @Composable
@@ -531,6 +532,7 @@ private fun FirstOpenHero(scene: FirstOpenScene, top: Dp, height: Dp, beside: Bo
                         SampleRoute(
                             scene,
                             EdgeInsets(top = geometry.routeTop.value.toDouble(), leading = 88.0, bottom = geometry.routeBottom.value.toDouble(), trailing = 54.0),
+                            ceiling = geometry.ceiling.value.toDouble(),
                             floor = (height - geometry.pipRoom).value.toDouble(),
                         )
                     }
@@ -582,14 +584,17 @@ private fun HeroFoot(scene: FirstOpenScene, probe: Boolean = false) {
  * masthead ([masthead] tall, 10 under the status bar's [top]) and the foot ([foot] tall with its padding). The route
  * keeps 112 under the status bar and 128 over the bottom, and Pip's floor 118, unless the words need more: 16 under the
  * masthead and the alert's room (12 and 26, kept with no alert showing so the picture holds still as alerts come and
- * go), and 10 over the foot, Pip on it. Once the words outgrow those, the picture grows so the route keeps the room it
+ * go), Pip under them, and 10 over the foot, Pip on it. Once the words outgrow those, the picture grows so the route keeps the room it
  * has at the usual text size, or 144 where the screen gives it less, and the page scrolls as it does when it is too
  * short; at the usual text sizes nothing moves. Beside or above a fold, where the fold sets the picture's height, it
  * doesn't grow.
  */
 internal data class FirstOpenHeroLayout(val top: Dp, val masthead: Dp, val foot: Dp) {
+    /** The highest Pip goes, under the masthead and its alert, from the picture's top. */
+    val ceiling: Dp get() = top + 10.dp + masthead + 12.dp + 26.dp
+
     /** The route's top, from the picture's. */
-    val routeTop: Dp get() = maxOf(top + 112.dp, top + 10.dp + masthead + 12.dp + 26.dp + 16.dp)
+    val routeTop: Dp get() = maxOf(top + 112.dp, ceiling + 16.dp)
 
     /** The route's room over the picture's bottom. */
     val routeBottom: Dp get() = maxOf(128.dp, foot + 10.dp)
@@ -601,7 +606,7 @@ internal data class FirstOpenHeroLayout(val top: Dp, val masthead: Dp, val foot:
     fun height(fits: Dp): Dp {
         val usual = fits - top - 112.dp - 128.dp
         val outgrown = routeTop > top + 112.dp || routeBottom > 128.dp
-        return maxOf(fits, routeTop + (if (outgrown) maxOf(usual, 144.dp) else usual) + routeBottom)
+        return maxOf(fits, routeTop + (if (outgrown) maxOf(usual, LEAST_ROOM) else usual) + routeBottom)
     }
 }
 
@@ -641,12 +646,12 @@ private fun Modifier.samplePicture(
  * only while the journey runs, as Core Animation's costs the iPhone no frame of its own.
  */
 @Composable
-private fun SampleRoute(scene: FirstOpenScene, insets: EdgeInsets, floor: Double) {
+private fun SampleRoute(scene: FirstOpenScene, insets: EdgeInsets, ceiling: Double, floor: Double) {
     val atlas = scene.atlas ?: return
     val route = rememberParcelRoute(scene.parcel, atlas, scene.language)
     RouteEngraving(
         atlas = atlas, route = route, stage = scene.parcel.currentStage, identity = scene.identity, language = scene.language,
-        modifier = Modifier.fillMaxSize(), insets = insets, floor = floor, peek = false, running = scene.running,
+        modifier = Modifier.fillMaxSize(), insets = insets, ceiling = ceiling, floor = floor, peek = false, running = scene.running,
     )
 }
 
@@ -666,16 +671,16 @@ private fun StepStatus(scene: FirstOpenScene, style: TextStyle) {
 /**
  * The alert a scan worth one would bring (`FirstOpenPing`), the next coming in from [rise] above or below as the last
  * leaves that way, fading, (`.transition(.offset(y:).combined(with: .opacity))`); nothing at a step without one. It
- * takes no touch: a tap on it reaches the picture. [bottom] is the room under it while it shows.
+ * takes no touch: a tap on it reaches the picture.
  */
 @Composable
-private fun StepPing(scene: FirstOpenScene, rise: Dp, bottom: Dp = 0.dp) {
+private fun StepPing(scene: FirstOpenScene, rise: Dp) {
     val reduceMotion = PeekTheme.reduceMotion
     val density = LocalDensity.current
     val travel = with(density) { rise.roundToPx() }
     AnimatedContent(scene.step, transitionSpec = { stepPingTransform(reduceMotion, travel) }, label = "ping") { step ->
         val ping = scene.ping(step) ?: return@AnimatedContent
-        FirstOpenPing(ping, scene.identity, Modifier.padding(bottom = bottom))
+        FirstOpenPing(ping, scene.identity)
     }
 }
 
@@ -972,6 +977,7 @@ private fun FirstOpenPoster(scene: FirstOpenScene, insets: Safe, width: Dp, scre
                 SampleRoute(
                     scene,
                     EdgeInsets(top = routeTop.toDouble(), leading = 110.0, bottom = (screen.value - routeFloor + 40f).toDouble(), trailing = 100.0),
+                    ceiling = (routeTop - 24f).toDouble(),
                     floor = (routeFloor - 12f).toDouble(),
                 )
                 // The question reads over a quiet sky: a route that leaves the screen fades out under it.
@@ -995,7 +1001,8 @@ private class PosterBounds {
 
 /**
  * What stands over the poster's map: the masthead, the question, the parcel's name ([PosterCaption]) and the carriers.
- * A [probe] measures the height it wants, its spacer at its 24, and keeps still.
+ * A [probe] measures the height it wants, its spacer at its least ([POSTER_GAP], or [LEAST_ROOM] and 80 at the
+ * accessibility sizes), and keeps still.
  */
 @Composable
 private fun PosterForeground(
@@ -1067,7 +1074,10 @@ private fun PosterForeground(
                 DemoButton(scene, large = true, Modifier.padding(top = 30.dp).widthIn(max = 420.dp).fillMaxWidth())
             }
         }
-        Spacer(if (probe) Modifier.height(POSTER_GAP) else Modifier.weight(1f).heightIn(min = POSTER_GAP))
+        // At the accessibility sizes the route keeps a phone's least room between the two, or the screen takes the
+        // phone's layout, whose picture grows with its words.
+        val gap = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) LEAST_ROOM + 80.dp else POSTER_GAP
+        Spacer(if (probe) Modifier.height(gap) else Modifier.weight(1f).heightIn(min = gap))
         PosterCaption(
             scene,
             Modifier
@@ -1099,7 +1109,11 @@ private fun PosterCaption(scene: FirstOpenScene, modifier: Modifier) {
         verticalAlignment = Alignment.Bottom,
     ) {
         Column(Modifier.weight(1f)) {
-            StepPing(scene, rise = PING_TRAVEL, bottom = 18.dp)
+            // The alert keeps its room when none shows, so the route holds still as alerts come and go.
+            Box(Modifier.padding(bottom = 18.dp)) {
+                FirstOpenPing(" ", scene.identity, Modifier.alpha(0f))
+                StepPing(scene, rise = PING_TRAVEL)
+            }
             CarrierFleetMark(scene.identity)
             Text(
                 scene.parcel.label, Modifier.padding(top = 10.dp),
@@ -1234,6 +1248,9 @@ private val POSTER_COLUMN = 780.dp
 
 /** The least room between the poster's question and its parcel's name. */
 private val POSTER_GAP = 24.dp
+
+/** The least room the route keeps between the words over and under it, as the phone's picture grows to keep it. */
+private val LEAST_ROOM = 144.dp
 
 /** The fleet, as the site's ribbon has it. */
 private val FLEET = listOf(

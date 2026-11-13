@@ -126,7 +126,7 @@ object DeliveryWidgetSelection {
     /** How many parcels the widget's next button turns through. */
     const val limit = 8
 
-    /** How many parcels the store publishes: as many as the list widget shows at most, the first [limit] for the next button. */
+    /** How many rows the list widget shows at most, four cells by four. */
     const val listLimit = 15
 
     /** How long a delivered parcel stays in the widget, in seconds. */
@@ -155,7 +155,7 @@ object DeliveryWidgetSelection {
     /**
      * What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
      * delivery beside the parcel after it, and any other parcel alone, across it. Only the first [limit] of the
-     * parcels published, which may be up to [listLimit].
+     * parcels published.
      */
     fun pages(of: List<DeliveryWidgetParcel>, medium: Boolean, now: Instant = AppClock.now()): List<List<DeliveryWidgetParcel>> {
         val rest = ArrayDeque(of.take(limit).filter { isShown(it, now) })
@@ -194,9 +194,8 @@ data class DeliveryWidgetTurn(
 data class DeliveryWidgetSnapshot(
     val generatedAt: Instant,
     val languageCode: String,
+    /** Every parcel in the widgets' order: the list widget shows as many as fit and counts the rest. */
     val parcels: List<DeliveryWidgetParcel>,
-    /** How many parcels the widgets' order held when published, those past [DeliveryWidgetSelection.listLimit] too; null for `parcels.size`. */
-    val total: Int? = null,
 )
 
 /**
@@ -239,7 +238,7 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
     }
 
     fun save(snapshot: DeliveryWidgetSnapshot): Boolean {
-        val stored = StoredSnapshot(snapshot.generatedAt.timeIntervalSinceReferenceDate, snapshot.languageCode, snapshot.parcels, snapshot.total)
+        val stored = StoredSnapshot(snapshot.generatedAt.timeIntervalSinceReferenceDate, snapshot.languageCode, snapshot.parcels)
         val data = try {
             JsonEncoder().encode(StoredSnapshot.serializer(), stored)
         } catch (_: Exception) {
@@ -292,8 +291,8 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
 
 /** As the iPhone's JSONEncoder writes a snapshot: the date as seconds since 2001. */
 @Serializable
-internal class StoredSnapshot(val generatedAt: Double, val languageCode: String, val parcels: List<DeliveryWidgetParcel>, val total: Int? = null) {
-    val snapshot: DeliveryWidgetSnapshot get() = DeliveryWidgetSnapshot(referenceDate(generatedAt), languageCode, parcels, total)
+internal class StoredSnapshot(val generatedAt: Double, val languageCode: String, val parcels: List<DeliveryWidgetParcel>) {
+    val snapshot: DeliveryWidgetSnapshot get() = DeliveryWidgetSnapshot(referenceDate(generatedAt), languageCode, parcels)
 }
 
 /**

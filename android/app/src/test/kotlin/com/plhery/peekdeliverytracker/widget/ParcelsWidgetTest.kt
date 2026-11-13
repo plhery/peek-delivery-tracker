@@ -236,12 +236,9 @@ class ParcelsWidgetTest {
 
         val arrived = widgetParcel(9, "Moon lamp", deliveredAt = CAPTURED.minus(Duration.ofHours(2)))
         val published = (1..3).map { widgetParcel(it) } + arrived
-        store.save(DeliveryWidgetSnapshot(CAPTURED, "en", published, total = 20))
-        val read = source.list(CAPTURED)
-        assertEquals(published, read.parcels)
-        assertEquals(20, read.total)
+        store.save(DeliveryWidgetSnapshot(CAPTURED, "en", published))
+        assertEquals(published, source.list(CAPTURED).parcels)
         assertEquals(published.take(3), source.list(CAPTURED.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())).parcels)
-        assertEquals(19, source.list(CAPTURED.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())).total)
 
         store.setEnabled(false)
         assertFalse(source.list(CAPTURED).enabled)

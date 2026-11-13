@@ -67,14 +67,13 @@ data class DeliveryWidgetEntry<A>(
 
 /**
  * What the list widget ("Parcels") shows at `date`: the parcels the store published in the widgets' order, less those
- * delivered more than a day ago, and how many parcels there are in all, those past the ones published too ([total]).
+ * delivered more than a day ago.
  */
 data class DeliveryWidgetList(
     val date: Instant,
     val enabled: Boolean,
     val languageCode: String,
     val parcels: List<DeliveryWidgetParcel>,
-    val total: Int,
     /** The sample's parcels, which the gallery shows. */
     val isSample: Boolean = false,
 ) {
@@ -83,12 +82,12 @@ data class DeliveryWidgetList(
 
     /**
      * What a widget with room for `rows` rows shows, or for `rowsBesideMore` beside the line counting the rest: every
-     * parcel where they all fit, else as many as fit beside that line, at least one.
+     * parcel where they all fit, else as many as fit beside that line, `rows` at most and at least one.
      */
     fun shown(rows: Int, rowsBesideMore: Int): Shown {
-        if (total <= rows) return Shown(parcels, 0)
-        val fitting = minOf(maxOf(rowsBesideMore, 1), parcels.size)
-        return Shown(parcels.take(fitting), total - fitting)
+        if (parcels.size <= rows) return Shown(parcels, 0)
+        val fitting = maxOf(minOf(rowsBesideMore, rows), 1)
+        return Shown(parcels.take(fitting), parcels.size - fitting)
     }
 
     companion object {
@@ -96,10 +95,8 @@ data class DeliveryWidgetList(
         const val link = "peekdeliverytracker://parcels"
 
         fun make(date: Instant, enabled: Boolean, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
-            val published = snapshot?.parcels.orEmpty()
-            val shown = published.filter { DeliveryWidgetSelection.isShown(it, date) }
-            val beyond = maxOf(0, (snapshot?.total ?: published.size) - published.size)
-            return DeliveryWidgetList(date, enabled, languageCode, shown, total = shown.size + beyond, isSample = isSample)
+            val shown = snapshot?.parcels.orEmpty().filter { DeliveryWidgetSelection.isShown(it, date) }
+            return DeliveryWidgetList(date, enabled, languageCode, shown, isSample = isSample)
         }
     }
 }

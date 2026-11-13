@@ -271,8 +271,8 @@ class DeliveryWidgetTests {
             val published = requireNotNull(shared.snapshot).parcels
             assertTrue(published.isNotEmpty())
             assertTrue(published.all { it.card != null })
-            // The list widget's words: each parcel's stage, whether it is named, and how many the order holds.
-            assertEquals(published.size, shared.snapshot?.total)
+            // The list widget's words: each parcel's stage and whether it is named, for every parcel in the order.
+            assertEquals(ParcelStore.widgetOrder(store.parcels, Localizer(AppLanguage.En)).map { it.id }, published.map { it.id })
             assertTrue(published.all { it.stage != null && it.named != null })
             assertEquals(published.map { it.id }.toSet(), artist.drawn.map { it.first }.toSet())
             assertEquals(published.size, artist.drawn.size)
@@ -309,20 +309,61 @@ class DeliveryWidgetTests {
         }
     }
 
-    private fun listed(count: Int, total: Int? = null, delivered: List<DeliveryWidgetParcel> = emptyList()) = DeliveryWidgetSnapshot(
-        now, "en", (1..count).map { widgetParcel(label = "Parcel $it", outForDelivery = it == 1) } + delivered, total = total,
+    /**
+     * The store publishes every parcel in the widgets' order, as the iPhone does, so the list's count follows a parcel
+     * leaving past the fifteenth row as it follows one among them.
+     */
+    @Test
+    fun theStorePublishesEveryParcelSoTheCountFollowsThoseBeyondTheRows() = runTest {
+        val reloads = mutableListOf<String>()
+        val defaults = MemoryDefaults()
+        val demo = AppConfiguration(
+            mode = AppConfiguration.Mode.Demo, apiBaseUrl = "https://widget.test", supabaseUrl = null, supabasePublishableKey = "",
+            googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = false, appGroupIdentifier = "widget.test",
+        )
+        val transport = RecordingTransport()
+        val localizer = Localizer(AppLanguage.En)
+        val session = testSessionStore(demo, backgroundScope, transport = transport, defaults = defaults)
+        val store = testParcelStore(demo, session, transport, backgroundScope, defaults, localizer = localizer, widgetCenter = { reloads += it })
+        val shared = DeliveryWidgetSharedStore(defaults)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.enterDemo()
+        runCurrent()
+        fun order() = ParcelStore.widgetOrder(store.parcels, localizer).map { it.id }
+        var added = 0
+        while (order().size < DeliveryWidgetSelection.listLimit + 3) {
+            added += 1
+            store.add(trackingNumber = "TESTPARCEL9%03d".format(added), label = "Parcel $added", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+            runCurrent()
+        }
+        assertEquals(order(), shared.snapshot?.parcels?.map { it.id })
+
+        // The first parcel archived, then the last, past the fifteenth: each time the widget reloads with the order left.
+        for (gone in listOf(order().first(), order().last())) {
+            val before = reloads.size
+            store.archive(store.parcels.first { it.id == gone })
+            runCurrent()
+            assertFalse(gone in order())
+            assertEquals(order(), shared.snapshot?.parcels?.map { it.id })
+            assertTrue(reloads.size > before)
+        }
+        assertTrue(order().size > DeliveryWidgetSelection.listLimit)
+    }
+
+    private fun listed(count: Int, delivered: List<DeliveryWidgetParcel> = emptyList()) = DeliveryWidgetSnapshot(
+        now, "en", (1..count).map { widgetParcel(label = "Parcel $it", outForDelivery = it == 1) } + delivered,
     )
 
     /**
-     * The list widget: the rows it has room for, and the last line counting the rest, which takes a row's place only when
-     * there are more parcels than rows; the parcels published past the 15 the snapshot holds are counted too.
+     * The list widget: the rows it has room for, fifteen at most, and the last line counting the rest, which takes a
+     * row's place only when there are more parcels than rows.
      */
     @Test
     fun listShowsTheRowsThatFitAndCountsTheRest() {
         fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, true, "en", snapshot)
 
         val five = list(listed(5))
-        assertEquals(5, five.total)
+        assertEquals(5, five.parcels.size)
         assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.shown(rows = 6, rowsBesideMore = 5))
         assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.shown(rows = 5, rowsBesideMore = 4))
         // Three rows, or two beside the line: two shown and three counted.
@@ -330,13 +371,10 @@ class DeliveryWidgetTests {
         // However short, a list shows a row.
         assertEquals(DeliveryWidgetList.Shown(five.parcels.take(1), 4), five.shown(rows = 0, rowsBesideMore = 0))
 
-        // Fifteen published of twenty: fourteen rows and the six left.
-        val many = list(listed(DeliveryWidgetSelection.listLimit, total = 20))
-        assertEquals(20, many.total)
-        assertEquals(14, many.shown(rows = 15, rowsBesideMore = 14).rows.size)
-        assertEquals(6, many.shown(rows = 15, rowsBesideMore = 14).more)
-        // A snapshot written before the list had no count: what it holds.
-        assertEquals(15, list(listed(DeliveryWidgetSelection.listLimit)).total)
+        // Twenty: fourteen rows and the six left; however tall the widget, fifteen rows and the five left.
+        val many = list(listed(20))
+        assertEquals(DeliveryWidgetList.Shown(many.parcels.take(14), 6), many.shown(rows = 15, rowsBesideMore = 14))
+        assertEquals(DeliveryWidgetList.Shown(many.parcels.take(15), 5), many.shown(rows = 15, rowsBesideMore = 19))
 
         // A delivered parcel goes from the rows and the count a day after it arrived, the app silent since.
         val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
@@ -344,41 +382,47 @@ class DeliveryWidgetTests {
         assertEquals(listOf("Parcel 1", "Parcel 2", "Arrived"), list(withArrived).parcels.map { it.label })
         val later = list(withArrived, now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong()))
         assertEquals(listOf("Parcel 1", "Parcel 2"), later.parcels.map { it.label })
-        assertEquals(2, later.total)
+        // Ten on their way and eight delivered within the hour: a day later, the ten alone, four rows and "+6 more".
+        val delivered = (1..8).map { widgetParcel(label = "Delivered $it", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600L + it)) }
+        val dayLater = list(listed(10, delivered = delivered), now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong()))
+        assertEquals(10, dayLater.parcels.size)
+        assertEquals(DeliveryWidgetList.Shown(dayLater.parcels.take(4), 6), dayLater.shown(rows = 5, rowsBesideMore = 4))
 
-        assertTrue(list(null).parcels.isEmpty())
-        assertEquals(0, list(null).total)
+        assertEquals(DeliveryWidgetList.Shown(emptyList(), 0), list(null).shown(rows = 3, rowsBesideMore = 2))
     }
 
     /**
-     * The store publishes the order's first 15 for the list, and how many there are, with each parcel's stage and status
-     * line; the next delivery widget still pages through the first 8 only. A snapshot written before reads back without
-     * them.
+     * The snapshot holds every parcel, with each one's stage and status line; the next delivery widget still pages
+     * through the first 8 only. A snapshot written before reads back without them, and one written with the count the
+     * list once kept beside its first fifteen still reads.
      */
     @Test
-    fun theSnapshotHoldsFifteenForTheListAndTheNextDeliveryWidgetEight() {
+    fun theSnapshotHoldsEveryParcelAndTheNextDeliveryWidgetPagesThroughEight() {
         val many = (1..20).map { widgetParcel(label = "Parcel $it", outForDelivery = false) }
         val ordered = DeliveryWidgetSelection.ordered(many, emptyList(), now)
         assertEquals(many, ordered)
         assertEquals(DeliveryWidgetSelection.limit, DeliveryWidgetSelection.parcels(many, emptyList(), now).size)
-        assertEquals(8, DeliveryWidgetSelection.pages(ordered.take(DeliveryWidgetSelection.listLimit), medium = false, now = now).size)
+        assertEquals(8, DeliveryWidgetSelection.pages(ordered, medium = false, now = now).size)
 
         val defaults = MemoryDefaults()
         val shared = DeliveryWidgetSharedStore(defaults)
-        val parcels = ordered.take(DeliveryWidgetSelection.listLimit).mapIndexed { index, parcel ->
+        val parcels = ordered.mapIndexed { index, parcel ->
             if (index == 0) parcel.copy(stage = DeliveryWidgetStage.of(TrackingStage.InTransit, "In transit"), named = true) else parcel
         }
-        assertTrue(shared.save(DeliveryWidgetSnapshot(now, "en", parcels, total = 20)))
+        assertTrue(shared.save(DeliveryWidgetSnapshot(now, "en", parcels)))
         val read = requireNotNull(shared.snapshot)
-        assertEquals(20, read.total)
-        assertEquals(DeliveryWidgetSelection.listLimit, read.parcels.size)
+        assertEquals(parcels.map { it.id }, read.parcels.map { it.id })
         assertEquals(DeliveryWidgetStage("In transit", TrackingStage.InTransit.metadata.symbol, listOf("#22588A", "#9BCBFF")), read.parcels[0].stage)
         assertEquals(true, read.parcels[0].named)
         assertNull(read.parcels[1].stage)
         assertNull(read.parcels[1].named)
 
-        assertTrue(shared.save(DeliveryWidgetSnapshot(now, "en", parcels.take(2))))
-        assertNull(shared.snapshot?.total)
+
+        val key = "sdt.deliveryWidget.snapshot.v1"
+        val stored = String(requireNotNull(defaults.data(forKey = key)))
+        assertTrue(stored.startsWith("{"))
+        defaults.set("{\"total\":20,${stored.removePrefix("{")}".toByteArray(), forKey = key)
+        assertEquals(parcels.map { it.id }, shared.snapshot?.parcels?.map { it.id })
     }
 
     /** The store's order for both widgets: the list's first 8 are what the next delivery widget is handed. */
@@ -434,7 +478,6 @@ class DeliveryWidgetTests {
             val sample = DeliveryWidgetListSample.snapshot(localizer, now)
             val parcels = sample.parcels
             assertEquals(15, parcels.size)
-            assertEquals(15, sample.total)
             assertEquals(language.rawValue, sample.languageCode)
             assertEquals(15, parcels.map { it.id }.toSet().size)
             assertTrue(parcels.all { it.trackingNumber.startsWith("DEMOLIST") })

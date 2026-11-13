@@ -48,14 +48,15 @@ Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.s
 
 ## Home screen widgets
 
-Both read only what the app publishes for them (`DeliveryWidgetSharedStore`): the parcels on their way in the widgets'
-order, 15 at most. They are drawn again whenever it publishes, and at least every 20 minutes while either is placed.
+Both read only what the app publishes for them (`DeliveryWidgetSharedStore`): every parcel on its way, then those
+delivered within a day, in the widgets' order. They are drawn again whenever it publishes, and at least every 20
+minutes while either is placed.
 
 - **Next delivery** (`NextDeliveryWidget.kt`) shows the first of them as a card, or two side by side. Like the
   iPhone's, which has no large size, it grows no taller than two rows of cells (`maxResizeHeight`).
 - **Parcels** (`ParcelsWidget.kt`) lists them, as many rows as its height holds, then a line counting the rest. Under
   250 dp wide a row takes two lines, the name over the stage and day; wider, one, the stage and day at its end. Where
-  both don't fit, the day stays. A phone's two cells by two show 3 rows, four by two 6, four by four all 15
+  both don't fit, the day stays. A phone's two cells by two show 3 rows, four by two 6, four by four up to 15
   (`ListLayout`). Each row opens its parcel; the rest of the widget opens the list (`peekdeliverytracker://parcels`).
 
 Their gallery pictures show invented parcels in the phone's language (`DeliveryWidgetSample`,

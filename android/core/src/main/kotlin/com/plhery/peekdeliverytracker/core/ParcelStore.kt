@@ -1459,12 +1459,10 @@ class ParcelStore(
 
     private fun publishDeliveryWidget() {
         val snapshot = if (deliveryWidgetEnabled && (session.isAuthenticated || isGuest)) {
-            val ordered = widgetOrder(parcels, localizer, now())
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
-                parcels = carded(ordered.take(DeliveryWidgetSelection.listLimit)),
-                total = ordered.size,
+                parcels = carded(widgetOrder(parcels, localizer, now())),
             )
         } else {
             null

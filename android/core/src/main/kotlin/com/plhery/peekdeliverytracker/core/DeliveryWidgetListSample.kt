@@ -75,6 +75,6 @@ object DeliveryWidgetListSample {
                 named = sample.name != null,
             )
         }
-        return DeliveryWidgetSnapshot(now, localizer.language.rawValue, parcels, total = parcels.size)
+        return DeliveryWidgetSnapshot(now, localizer.language.rawValue, parcels)
     }
 }

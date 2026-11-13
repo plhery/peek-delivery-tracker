@@ -35,6 +35,7 @@ DPD's tracker opens in Portuguese, with English and French versions. Peek shows 
 | `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` | DPD sent you the delivery time slot: a message, not a movement. |
 | `AUSÊNCIA DO DESTINATÁRIO` | The driver found nobody in. |
 | `ENDEREÇO DO DESTINATÁRIO INCOMPLETO OU ILEGÍVEL` | The address is incomplete or unreadable. |
+| `DESTINATÁRIO ENCERRADO PARA FÉRIAS` | The delivery address (a shop or a business) was closed for holidays. |
 | `LOCKER / PICKUP LOTADO` | The locker or Pickup point was full; the parcel goes to another one. |
 | `ANOMALIA OPERACIONAL` | A problem on DPD's side kept the parcel from being delivered on the round; it goes back to the depot to go out again. Peek shows "Delivery attempted". |
 | `RETORNO ARMAZÉM PARA ENTREGA` | Back at the depot, to go out again. |
@@ -44,7 +45,7 @@ DPD's tracker opens in Portuguese, with English and French versions. Peek shows 
 | `DEVOLUÇÃO AO EXPEDIDOR` | Return to the sender ordered. |
 | `PROVA DE ENTREGA` | Proof of delivery: delivered. |
 
-`PEDIDO DE NOVA ENTREGA` and `PEDIDO DE ALTERAÇÃO DE MORADA` only record a request for a new day or address. `RETORNO ARMAZÉM (PÁRA AEP)` after a missed delivery means back at the depot, not on the way to the shop. A `PROVA DE ENTREGA` after `DEVOLUÇÃO AO EXPEDIDOR` is the delivery back to the shop.
+`PEDIDO DE NOVA ENTREGA` and `PEDIDO DE ALTERAÇÃO DE MORADA` only record a request for a new day or address. `MORADA CORRIGIDA PELO EXPEDIDOR` means the shop corrected the address after a failed attempt. `RETORNO ARMAZÉM (PÁRA AEP)` after a missed delivery means back at the depot, not on the way to the shop. A `PROVA DE ENTREGA` after `DEVOLUÇÃO AO EXPEDIDOR` is the delivery back to the shop.
 
 ## DPD delivery in Portugal: Predict, Pickup points and lockers
 

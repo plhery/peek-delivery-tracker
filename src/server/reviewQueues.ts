@@ -44,8 +44,7 @@ export function replaySupportCase(trackingNumber: string, configuredCarrier: str
   const context = trackingSupportContext(trackingNumber, configuredCarrier ?? 'unknown', verifiedCarrier);
   if ((context.reasons as string[]).length > 0) return null;
   if (context.detection_carrier === 'unknown') {
-    return `Replay found no gap: ${String(verifiedCarrier)}, ${detectionOffers(context, String(verifiedCarrier))
-      ? 'one of the carriers its shape fits' : 'the carrier it is filed under'}, tracks the number directly.`;
+    return `Replay found no gap: ${String(verifiedCarrier)}, one of the carriers its shape fits, tracks the number directly.`;
   }
   if (context.detection_carrier === 'intl-post') {
     return `Replay found no gap: ${String(verifiedCarrier)}, the carrier it is filed under, tracks this S10 number directly.`;
@@ -118,8 +117,8 @@ export function unseenLookupNote(
  * under that carrier or none, the number is a reference the carrier resolves to a barcode of its
  * own (`canonical_tracking_number`) that fits it, such as a Hermes Germany order number: every
  * check keeps the reference's reasons. An S10 number detection leaves to international post leaves no
- * gap once that carrier tracked it, nor does a shape several carriers issue, whether detection offers
- * that carrier for the number as stored or not.
+ * gap once that carrier tracked it, nor does a shape several carriers issue once that carrier, one of
+ * them, tracked it. While detection offers only other carriers, the case stays open.
  */
 export function filedParcelNote(supportCase: JsonObject, parcels: readonly JsonObject[] | undefined): string | null {
   const confirmed = (parcels ?? []).map((parcel) => {

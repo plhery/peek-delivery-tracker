@@ -260,10 +260,14 @@ describe('a release the database gate holds', () => {
     const reported = { url: 'https://example.test/again', startedAt: '2026-11-11T10:09:30Z' };
     assert.equal(at('2026-11-11T11:40:00Z', [reported, first]).fail, false);
     assert.equal(at('2026-11-11T12:08:00Z', [reported, first]).fail, true);
-    // The night's slot fails once, from 22:07 until 06:07.
+    // The night's slot, from 22:07 until 06:07, fails again a slot's length after its last failure.
     const night = { url: 'https://example.test/night', startedAt: '2026-11-11T22:08:00Z' };
-    assert.equal(at('2026-11-12T03:00:00Z', [night, reported, first]).fail, false);
-    assert.equal(at('2026-11-12T06:08:00Z', [night, reported, first]).fail, true);
+    assert.equal(at('2026-11-11T23:30:00Z', [night, reported, first]).fail, false);
+    assert.equal(at('2026-11-12T00:09:00Z', [night, reported, first]).fail, true);
+    const midnight = { url: 'https://example.test/midnight', startedAt: '2026-11-12T00:09:30Z' };
+    assert.equal(at('2026-11-12T01:40:00Z', [midnight, night, reported, first]).fail, false);
+    assert.equal(at('2026-11-12T03:00:00Z', [midnight, night, reported, first]).fail, true);
+    assert.equal(at('2026-11-12T06:08:00Z', [{ ...midnight, startedAt: '2026-11-12T05:00:00Z' }, night, reported, first]).fail, true);
   });
 });
 

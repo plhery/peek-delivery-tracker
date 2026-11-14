@@ -114,9 +114,9 @@ describe('review queue replay', () => {
     // An ambiguous shape its filed carrier tracked directly.
     expect(replaySupportCase('123456789012', 'fedex', 'fedex'))
       .toBe('Replay found no gap: fedex, one of the carriers its shape fits, tracks the number directly.');
-    // One its shape as stored does not fit, such as a made-up Ozon posting number without its hyphens.
-    expect(replaySupportCase('012345678901234', 'ozon-logistics', 'ozon-logistics'))
-      .toBe('Replay found no gap: ozon-logistics, the carrier it is filed under, tracks the number directly.');
+    // One its shape as stored does not fit, such as a made-up Ozon posting number without its hyphens, stays open:
+    // detection offers only other carriers.
+    expect(replaySupportCase('012345678901234', 'ozon-logistics', 'ozon-logistics')).toBeNull();
     expect(replaySupportCase('012345678901234', 'ozon-logistics')).toBeNull();
   });
 
@@ -211,18 +211,17 @@ describe('review queue replay', () => {
       ['314159265355', [filed('314159265355', 'fedex', 'fedex')]],
       // Filed under FedEx, which has not confirmed the number.
       ['123456789012', [filed('123456789012', 'fedex', null)]],
-      // Filed under a carrier the shape does not fit, which tracked it.
+      // Filed under a carrier the shape does not fit, which tracked it: detection has the shape to learn.
       ['271828182845', [filed('271828182845', 'royal-mail', 'royal-mail')]],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
-      .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 2 });
+      .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 1 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [
       { id: 'case-314159265355', note: 'Its parcel was filed under fedex, one of the carriers its shape fits, once fedex tracked the number: no gap left.' },
-      { id: 'case-271828182845', note: 'Its parcel was filed under royal-mail once royal-mail tracked the number: no gap left.' },
     ]);
   });
 
-  it('ignores a case filed under the carrier that tracked the number', async () => {
+  it('ignores a case filed under the carrier that tracked the number when its shape fits that carrier', async () => {
     const client = fakeClient();
     const parcel = (number: string, carrier: string, confirmed: boolean, oneOff = true): JsonObject => ({ tracking_number: number,
       one_off: oneOff, carrier, current_stage: 'registered', created_at: '2026-09-10T05:00:00Z',
@@ -236,14 +235,13 @@ describe('review queue replay', () => {
       ['314159265355', [parcel('314159265355', 'fedex', true, false), parcel('314159265355', 'fedex', true)]],
       // One of its parcels FedEx has not confirmed.
       ['123456789012', [parcel('123456789012', 'fedex', true), parcel('123456789012', 'fedex', false)]],
-      // Filed under a carrier the shape does not fit, which tracked it.
+      // Filed under a carrier the shape does not fit, which tracked it: detection has the shape to learn.
       ['271828182845', [parcel('271828182845', 'royal-mail', true)]],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
-      .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 2 });
+      .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 1 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [
       { id: 'case-314159265355', note: 'Its parcel is filed under fedex, one of the carriers its shape fits, and fedex tracked the number: no gap left.' },
-      { id: 'case-271828182845', note: 'Its parcel is filed under royal-mail and royal-mail tracked the number: no gap left.' },
     ]);
   });
 
@@ -271,7 +269,7 @@ describe('review queue replay', () => {
     ]);
   });
 
-  it('ignores a case filed under the carrier that tracked the number when its shape does not fit that carrier', async () => {
+  it('keeps a case open while detection offers only other carriers, though the carrier it is filed under tracked the number', async () => {
     const client = fakeClient();
     const parcel = (number: string, data: JsonObject): JsonObject => ({ tracking_number: number, one_off: true, carrier: 'seur',
       current_stage: 'in_transit', created_at: '2026-09-10T05:00:00Z', carrier_data: { ...data,
@@ -287,10 +285,10 @@ describe('review queue replay', () => {
       ['271828182845', [parcel('271828182845', { auto_changed_from: 'correos-express', auto_changed_to: 'seur' })]],
       ['161803398874', [parcel('161803398874', {})]],
     ]));
+    // However routing or its owner filed the parcel: detection has the shape to learn.
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
-      .resolves.toMatchObject({ cases_replayed: 4, cases_ignored: 4 });
-    const note = 'Its parcel is filed under seur and seur tracked the number: no gap left.';
-    expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', numbers.map((number) => ({ id: `case-${number}`, note })));
+      .resolves.toMatchObject({ cases_replayed: 4, cases_ignored: 0 });
+    expect(client.ignoreReplayedTrackingSupportCases).not.toHaveBeenCalled();
   });
 
   it('ignores a case on a reference its carrier resolves to a barcode of its own that fits that carrier', async () => {

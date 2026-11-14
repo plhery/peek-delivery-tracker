@@ -212,12 +212,12 @@ successful fallback still leaves the gap visible. Known-carrier outages stay in 
 monitoring. A number is not marked as pointing elsewhere when detection offers its
 carrier under another id (Amazon Shipping as Amazon Logistics), or when the parcel's
 carrier, or the carrier it handed the parcel to, tracked that number directly. Nor is a
-shape several carriers issue ambiguous once the parcel's carrier confirmed the number
-directly, whether detection offers it for the stored number or not (the Add sheet detects
-the number as typed, and the stored one has lost its hyphens, as an Ozon posting number
-does), or said it holds the parcel and shows it only with an input the parcel
+shape several carriers issue ambiguous once the parcel's carrier, one of them, confirmed
+the number directly, or said it holds the parcel and shows it only with an input the parcel
 lacks or not with the postcode it has (`parcel_found`, `postcode_mismatch`): the owner's
-input is wrong, not the shape. Nor is an S10 number generic postal once the carrier the parcel
+input is wrong, not the shape. While detection offers only other carriers, the shape stays
+ambiguous even once the parcel's carrier tracked the number: detection has that shape to
+learn. Nor is an S10 number generic postal once the carrier the parcel
 is filed under confirmed it, whether the post its suffix names or a courier that carries such
 numbers. A check settles both at its end, from the carrier it filed the parcel
 under and the one that confirmed the number, so a first check that its carrier answers
@@ -297,7 +297,7 @@ the schedule before any carrier or provider answered for the number
 ([`unseenLookup.ts`](../src/server/unseenLookup.ts)), or whose parcels are all gone and
 whose last check got no answer (`waiting`): no check is left to update it. So is a case
 filed under no carrier or under its parcels' carrier, once every saved parcel with the
-number is filed under one carrier that tracked it, such as FedEx, which
+number is filed under one carrier the shape fits that tracked it, such as FedEx, which
 recognition asks only through a browser: a one-off lookup may get no later check to clear
 the reasons, and a parcel its carrier only announced has had no check with dated progress
 to verify the case. So is a case on a reference, filed under its parcels' carrier or none, that

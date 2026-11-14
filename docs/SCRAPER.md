@@ -193,7 +193,8 @@ The run's summary lists each change with the constraints and functions that enfo
 the migration that made it. The first run a release stops fails, which notifies; later runs
 stop at the same release and link to that first run, found by the gate step's name, which
 carries the release. Once the release has waited 4 hours, the first run of each slot fails
-again until the migration is in. Write the migration with the lines the summary gives and apply it
+again, and in the night's 8-hour slot the first run two hours after the last failure, until
+the migration is in. Write the migration with the lines the summary gives and apply it
 to production: the next run adopts the release. To adopt it at once, continue with the
 release the run named:
 

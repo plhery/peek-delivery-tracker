@@ -313,7 +313,8 @@ jobs:
   # A release that waits for a migration fails the first run it stops, which
   # notifies. The runs after it pass, linking to that first failure, until the
   # release has waited 4 hours: from then the first run of each slot fails
-  # again until the migration is in (scripts/adopt-scraper.mjs held).
+  # again, and in the night's 8-hour slot the first run two hours after the
+  # last failure, until the migration is in (scripts/adopt-scraper.mjs held).
   # GitHub never fills in a skipped job's name, so the release goes in its step's.
   gate:
     name: Database gate

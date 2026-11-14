@@ -202,8 +202,9 @@ export function heldStep(version) {
 /**
  * What the Database gate job does with release `version`, stopped at `now`: `failures` are the gate's failures for it
  * so far (`url`, `startedAt`). The first run it stops fails, which notifies. Once the release has waited
- * HELD_ALERT_HOURS, the first run of each slot fails again, so a held adoption never looks green for long; other runs
- * pass and link to the first failure.
+ * HELD_ALERT_HOURS, the first run of each slot fails again, and in the night's longer slot the first run a slot's
+ * length after the last failure (failureHeldSince), so a held adoption never looks green for long; other runs pass
+ * and link to the first failure.
  */
 export function gateHold(version, now, failures) {
   const sorted = [...failures].sort((a, b) => Date.parse(a.startedAt) - Date.parse(b.startedAt));
@@ -212,8 +213,8 @@ export function gateHold(version, now, failures) {
     return { fail: true, message: `Universal Parcel Scraper ${version} waits for a migration. The adopt job's summary lists what it changes.` };
   }
   const hours = Math.floor((now.getTime() - Date.parse(first.startedAt)) / (60 * MINUTE));
-  const slot = adoptionSlot(now);
-  if (hours >= HELD_ALERT_HOURS && !sorted.some((failure) => Date.parse(failure.startedAt) >= slot.getTime())) {
+  const since = failureHeldSince(adoptionSlot(now), now);
+  if (hours >= HELD_ALERT_HOURS && !sorted.some((failure) => Date.parse(failure.startedAt) >= since.getTime())) {
     return { fail: true, message: `Universal Parcel Scraper ${version} has waited ${hours} h for its migration, since ${first.url}. `
       + 'Write the migration with the lines that run\'s adopt job lists and apply it, or adopt it by hand once applied.' };
   }

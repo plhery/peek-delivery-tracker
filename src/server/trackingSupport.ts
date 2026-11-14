@@ -26,13 +26,14 @@ export function trackingSupportContext(trackingNumber: string, configuredCarrier
   const reasons: string[] = [];
   const offered = (carrier: string) => detection.candidates.some((candidate) => candidate === (DETECTED_AS[carrier] ?? carrier));
   if (detection.carrier === 'unknown') {
-    // A shape several carriers issue leaves no gap once the filed carrier tracked the number, among them or not:
-    // the Add sheet detects the number as typed, and the stored one has lost its hyphens (an Ozon posting number).
+    // A shape several carriers issue leaves no gap once the filed one, among them, tracked the number. While detection
+    // offers only other carriers, the gap stays open even though the filed carrier tracked it: detection has its shape
+    // to learn, as for an Ozon posting number stored without its hyphens.
     // Six digits filed under no carrier are a pickup code, not a shape detection misses: the apps ask for the
     // parcel's tracking number instead.
     if (!detection.candidates.length) {
       if (configuredCarrier !== 'unknown' || !isPickupCode(number)) reasons.push('unknown_shape');
-    } else if (answeredBy !== configuredCarrier) reasons.push('ambiguous_shape');
+    } else if (answeredBy !== configuredCarrier || !offered(configuredCarrier)) reasons.push('ambiguous_shape');
   } else if (detection.carrier === 'intl-post' && answeredBy !== configuredCarrier) {
     // An S10 number detection leaves to international post is where it belongs once the carrier it is filed under
     // tracked it, whether the post its suffix names or a courier that carries such numbers (Matkahuolto).

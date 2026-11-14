@@ -15,7 +15,7 @@ Look in the shop's shipping email or on your order page. A fedex.com tracking li
 | Shape (invented) | What it is |
 | --- | --- |
 | `123456789012` | 12 digits: a FedEx tracking number. The last digit is a check digit worked out from the 11 before it. |
-| `123456789012343` | 15 digits: a shape Peek also files under FedEx, unless it starts 8880 (Peek suggests J&T Express Brazil) or 30000, 31000 or 36000 ([Andreani](carrier:andreani)). |
+| `123456789012343` | 15 digits: a shape Peek also files under FedEx, unless it starts 8880 (Peek recognises it as J&T Express Brazil) or 30000, 31000 or 36000 ([Andreani](carrier:andreani)). |
 | `61290000000000000014` | 20 digits starting `6129` or `7489`: FedEx Ground Economy (formerly SmartPost) in the US. |
 
 Twelve digits also fit [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay), [BRT](carrier:brt) and several Asian couriers, and fifteen fit DPD France, BRT and Yunda Express too. If fedex.com doesn't know the number, check which carrier the shop's email names.

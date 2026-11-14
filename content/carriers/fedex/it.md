@@ -15,7 +15,7 @@ Cercalo nell'e-mail di spedizione o nella pagina dell'ordine del negozio. Anche 
 | Numero (inventato) | Che cos'è |
 | --- | --- |
 | `123456789012` | 12 cifre: un numero di tracking FedEx. L'ultima cifra è una cifra di controllo calcolata sulle 11 precedenti. |
-| `123456789012343` | 15 cifre: una forma che Peek collega anche a FedEx, tranne quando il numero inizia con 8880 (Peek propone J&T Express Brazil) o con 30000, 31000 o 36000 (Andreani). |
+| `123456789012343` | 15 cifre: una forma che Peek collega anche a FedEx, tranne quando il numero inizia con 8880 (Peek lo riconosce come J&T Express Brazil) o con 30000, 31000 o 36000 (Andreani). |
 | `61290000000000000014` | 20 cifre che iniziano con `6129` o `7489`: FedEx Ground Economy, negli Stati Uniti. |
 
 Attenzione ai numeri simili: 12 cifre le usano anche [BRT](carrier:brt), DPD France, Mondial Relay e diversi corrieri asiatici, 15 cifre anche BRT, DPD France e Yunda Express. Se fedex.com non trova il numero, controlla quale corriere nomina l'e-mail del negozio.

@@ -15,7 +15,7 @@ Míralo en el correo de envío de la tienda o en la página de tu pedido. Un enl
 | Número (inventado) | Qué es |
 | --- | --- |
 | `123456789012` | 12 cifras: un número de seguimiento de FedEx. La última cifra es un dígito de control calculado con las 11 anteriores. |
-| `123456789012343` | 15 cifras: otra forma de número de FedEx. Si empieza por 8880, Peek propone en su lugar J&T Express Brazil, y si empieza por 30000, 31000 o 36000, Andreani. |
+| `123456789012343` | 15 cifras: otra forma de número de FedEx. Si empieza por 8880, Peek lo reconoce como un número de J&T Express Brazil, y si empieza por 30000, 31000 o 36000, propone Andreani. |
 | `61290000000000000014` | 20 cifras que empiezan por `6129` o `7489`: FedEx Ground Economy (antes SmartPost), en Estados Unidos. |
 
 Las 12 cifras también las usan [MRW](carrier:mrw), [Mondial Relay](carrier:mondial-relay) y varias empresas europeas y asiáticas; las 15, DPD France, BRT y Yunda Express. Si fedex.com no encuentra el número, comprueba qué empresa nombra el correo de la tienda. Un número que empieza por `1Z` es de [UPS](carrier:ups), y los números de 10 cifras de [DHL Express](carrier:dhl-express) tampoco son de FedEx.

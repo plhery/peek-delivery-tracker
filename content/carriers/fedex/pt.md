@@ -15,7 +15,7 @@ Procura no e-mail de envio ou na página da encomenda da loja. Uma ligação de 
 | Número (inventado) | O que é |
 | --- | --- |
 | `123456789012` | 12 dígitos: um número de rastreio FedEx. O último dígito é um dígito de controlo calculado a partir dos 11 anteriores. |
-| `123456789012343` | 15 dígitos: uma forma que o Peek também atribui à FedEx, exceto se começar por 8880 (o Peek propõe a J&T Express Brazil) ou por 30000, 31000 ou 36000 (Andreani). |
+| `123456789012343` | 15 dígitos: uma forma que o Peek também atribui à FedEx, exceto se começar por 8880 (o Peek reconhece-o como J&T Express Brazil) ou por 30000, 31000 ou 36000 (Andreani). |
 | `61290000000000000014` | 20 dígitos começados por `6129` ou `7489`: FedEx Ground Economy (antes SmartPost), nos Estados Unidos. |
 
 Doze dígitos também servem a outras transportadoras, como a [MRW](carrier:mrw), a [Mondial Relay](carrier:mondial-relay), a DPD France, a BRT e várias transportadoras asiáticas; quinze dígitos também a DPD France, a BRT e a Yunda Express. Se o fedex.com não conhecer o número, confirma no e-mail da loja qual é a transportadora.

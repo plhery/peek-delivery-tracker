@@ -15,7 +15,7 @@ Schau in die Versandbestätigung des Shops oder auf die Bestellseite. Ein Tracki
 | Form (Ziffern erfunden) | Was es ist |
 | --- | --- |
 | `123456789012` | 12 Ziffern: eine FedEx-Sendungsnummer. Die letzte Ziffer ist eine Prüfziffer, berechnet aus den 11 davor. |
-| `123456789012343` | 15 Ziffern: eine Form, die Peek unter anderem FedEx zuordnet, außer wenn die Nummer mit 8880 beginnt (dann schlägt Peek J&T Express Brazil vor) oder mit 30000, 31000 oder 36000 (Andreani). |
+| `123456789012343` | 15 Ziffern: eine Form, die Peek unter anderem FedEx zuordnet, außer wenn die Nummer mit 8880 beginnt (dann erkennt Peek sie als Nummer von J&T Express Brazil) oder mit 30000, 31000 oder 36000 (Andreani). |
 | `61290000000000000014` | 20 Ziffern, beginnt mit 6129 oder 7489: FedEx Ground Economy (früher SmartPost) in den USA. |
 
 Zwölf Ziffern sind keine Besonderheit von FedEx: Je nach Prüfziffer passt dieselbe Form zu [GLS](carrier:gls-de), [GLS Schweiz](carrier:gls-ch) oder [DHL](carrier:dhl), dazu zu DPD France, Mondial Relay, BRT und mehreren asiatischen Paketdiensten. Auch eine 15-stellige Nummer kann von DPD France, BRT oder Yunda Express stammen. Eine Nummer, die mit `1Z` beginnt, ist von [UPS](carrier:ups), eine 10-stellige Frachtbriefnummer kann von [DHL Express](carrier:dhl-express) sein. Kennt fedex.com deine Nummer nicht, schau, welchen Paketdienst die Mail des Shops nennt.

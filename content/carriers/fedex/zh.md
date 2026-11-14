@@ -15,7 +15,7 @@ updated: 2026-11-13
 | 格式（数字为虚构） | 说明 |
 | --- | --- |
 | `123456789012` | 12 位数字：FedEx 快递单号。最后一位是校验位，由前 11 位算出。 |
-| `123456789012343` | 15 位数字：Peek 也把这种格式归到 FedEx；不过以 8880 开头的，Peek 会建议 J&T Express Brazil，以 30000、31000 或 36000 开头的，则建议 Andreani。 |
+| `123456789012343` | 15 位数字：Peek 也把这种格式归到 FedEx；不过以 8880 开头的，Peek 会直接认作 J&T Express Brazil；以 30000、31000 或 36000 开头的，则建议 Andreani。 |
 | `61290000000000000014` | 20 位数字，以 `6129` 或 `7489` 开头：美国的 FedEx Ground Economy（原 SmartPost）。 |
 
 12 位数字也可能是 DPD France、Mondial Relay、BRT 的单号，或者顺丰（SF Express）、申通（STO Express）、中通（ZTO Express）等亚洲快递公司的单号；15 位数字也可能属于 DPD France、BRT 或韵达（Yunda Express）。如果在 fedex.com 上查不到，请看商家邮件里写的是哪家快递公司。

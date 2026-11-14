@@ -20,7 +20,7 @@ failure that recovers never opens an issue. See [OBSERVABILITY.md](../../docs/OB
 | --- | --- | --- |
 | Shipment refresh | The 3 latest scheduled checks of two parcels failed, the last within the hour, or of one parcel while no other parcel's latest check that hour answered; or ≥ 5 failures and > 20 % of checks in one hour | The 3 latest checks succeed and no threshold is still breached |
 | Provider lookup | > 50 % of ≥ 10 lookups failed in 24 h | The 3 latest lookups succeed and no more than half of the 24 h's failed |
-| Direct transport (no issue) | > 50 % of ≥ 10 direct probes failed in 24 h | The 3 latest direct probes succeed and no more than half of the 24 h's failed |
+| Direct transport (no issue) | > 50 % of ≥ 10 direct probes failed in 24 h, not counting a failure whose check still answered | The 3 latest direct probes succeed and no more than half of the 24 h's failed |
 
 While a threshold is still breached and the 3 latest samples are healthy, an incident
 waits: no recovery and no reminder. It recovers once enough later checks succeed or its
@@ -102,12 +102,12 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   its last direct attempt, answered and that attempt is six hours old: a `closed` notice
   with the reason `bypassed`. A direct step paused for less, as DHL Express's is for half
   an hour after a CAPTCHA, keeps its incident until it recovers.
-- A direct step whose failures in the window all came from checks whose refresh still
-  answered, through the carrier's browser step or a provider, left no parcel without a fresh
-  answer (Correos Brazil's direct step meets a CAPTCHA, its browser step answers). Such
-  failures open no incident, and an open direct incident closes once every failure of its
-  24-hour window was rescued: a `closed` notice with the reason `rescued`. One failure that
-  left its parcel without an answer opens one, and Sentry hears of it.
+- A direct failure from a check whose refresh still answered, through the carrier's browser
+  step or a provider, left no parcel without a fresh answer (Correos Brazil's and Australia
+  Post's direct steps meet a challenge, their browser steps answer). It counts toward no
+  incident: the rate reads the failures that left a parcel without an answer, so one such
+  check in a day of rescued ones opens nothing. An open direct incident closes once every
+  failure of its 24-hour window was rescued: a `closed` notice with the reason `rescued`.
 
 ## Delivery
 

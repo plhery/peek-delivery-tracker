@@ -243,10 +243,11 @@ begin
     and (select not active from public.tracking_health_incidents where kind='direct' and subject='rescued-direct'),
     'A direct step every refresh survived must open no incident';
   -- An open direct incident closes once every failure of its window was rescued, and stays closed.
-  perform pg_temp.direct_check('rescued-later',false,false);
-  for i in 1..9 loop result := pg_temp.direct_check('rescued-later',false,true); end loop;
+  for i in 1..10 loop result := pg_temp.direct_check('rescued-later',false,false); end loop;
+  assert pg_temp.direct_notice(result,'rescued-later')->>'state'='open',
+    'Direct failures whose checks went unanswered must open an incident';
   perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
-  assert pg_temp.direct_check('rescued-later',false,true)='[]',
+  assert pg_temp.direct_notice(pg_temp.direct_check('rescued-later',false,true),'rescued-later') is null,
     'A direct incident with an unrescued failure in its window must stay open';
   update public.tracking_health_samples set observed_at=now()-interval '25 hours'
     where kind='direct' and subject='rescued-later' and attempt_id in (
@@ -257,25 +258,30 @@ begin
     'A direct incident whose window was all rescued must close';
   perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
   update public.tracking_health_incidents set last_notified_at=now()-interval '7 hours' where kind='direct' and subject='rescued-later';
-  assert pg_temp.direct_check('rescued-later',false,true)='[]'
+  assert pg_temp.direct_notice(pg_temp.direct_check('rescued-later',false,true),'rescued-later') is null
     and (select not active from public.tracking_health_incidents where kind='direct' and subject='rescued-later'),
     'A closed rescued direct incident must not reopen while its failures are rescued';
-  result := pg_temp.direct_check('rescued-later',false,false);
-  assert pg_temp.direct_notice(result,'rescued-later')->>'state'='open',
-    'A failure whose check went unanswered must reopen it';
+  -- A rescued failure counts toward no outage: one unanswered check among rescued ones reopens nothing.
+  assert pg_temp.direct_notice(pg_temp.direct_check('rescued-later',false,false),'rescued-later') is null
+    and (select not active from public.tracking_health_incidents where kind='direct' and subject='rescued-later'),
+    'One unanswered check among rescued ones must not reopen a direct incident';
+  for i in 1..9 loop result := pg_temp.direct_check('rescued-later',false,false); end loop;
+  assert pg_temp.direct_notice(result,'rescued-later')->>'state'='open'
+    and (pg_temp.direct_notice(result,'rescued-later')->>'attempts')::int=10
+    and (pg_temp.direct_notice(result,'rescued-later')->>'failures')::int=10
+    and not (pg_temp.direct_notice(result,'rescued-later')->'rescued')::boolean,
+    'Unanswered checks that fail most of the day must reopen it, counted without the rescued ones';
   perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
-  -- One failure that left its parcel without a fresh answer, now or earlier in the window, is not.
+  -- Nor does a day of rescued failures with one unanswered check, now or earlier in the window, open one.
   for i in 1..9 loop perform pg_temp.direct_check('unrescued-now',false,true); end loop;
-  result := pg_temp.direct_check('unrescued-now',false,false);
-  assert pg_temp.direct_notice(result,'unrescued-now')->>'state'='open'
-    and not (pg_temp.direct_notice(result,'unrescued-now')->'rescued')::boolean,
-    'A direct failure whose refresh failed must not be rescued';
-  perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'unrescued-now')->>'id')::uuid]);
+  assert pg_temp.direct_notice(pg_temp.direct_check('unrescued-now',false,false),'unrescued-now') is null
+    and (select not active from public.tracking_health_incidents where kind='direct' and subject='unrescued-now'),
+    'A direct failure whose refresh failed among rescued ones must open no incident';
   perform pg_temp.direct_check('unrescued-earlier',false,false);
   for i in 1..9 loop result := pg_temp.direct_check('unrescued-earlier',false,true); end loop;
-  assert not (pg_temp.direct_notice(result,'unrescued-earlier')->'rescued')::boolean,
-    'An earlier direct failure whose refresh failed must keep the incident from being rescued';
-  perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'unrescued-earlier')->>'id')::uuid]);
+  assert pg_temp.direct_notice(result,'unrescued-earlier') is null
+    and (select not active from public.tracking_health_incidents where kind='direct' and subject='unrescued-earlier'),
+    'An earlier unanswered direct failure among rescued ones must open no incident';
   -- A tier still failing when traffic resumes opens a new incident at once.
   for i in 1..10 loop result := pg_temp.health_sample('retired-tier',false,'direct'); end loop;
   assert result->0->>'state'='open', 'A closed incident must reopen on fresh failures';
@@ -288,8 +294,8 @@ $$;
 do $$
 declare result jsonb;
 begin
-  -- Both open in one check that got no answer at all: each has its notice, the lookup's not deferring.
-  for i in 1..10 loop result := pg_temp.own_check('unanswered-carrier',false,false,i<10); end loop;
+  -- Both open in checks that got no answer at all: each has its notice, the lookup's not deferring.
+  for i in 1..10 loop result := pg_temp.own_check('unanswered-carrier',false,false,false); end loop;
   assert pg_temp.notice(result,'direct','unanswered-carrier')->>'state'='open'
     and pg_temp.notice(result,'provider','unanswered-carrier')->>'state'='open'
     and not pg_temp.notice(result,'provider','unanswered-carrier') ? 'covered',

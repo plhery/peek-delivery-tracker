@@ -255,7 +255,7 @@ describe('tracking health evidence', () => {
       title: 'Direct tracking closed: dpd-fr answers through another step', nextSteps: expect.stringContaining('has not run for six hours') });
     expect(healthMessage({ subject: 'correios-br', kind: 'direct', state: 'closed', reason: 'rescued' })).toMatchObject({
       title: 'Direct tracking closed: every correios-br check answered through another step',
-      nextSteps: expect.stringContaining('open no incident') });
+      nextSteps: expect.stringContaining('count toward no incident') });
     expect(healthMessage({ subject: 'jd-logistics', kind: 'provider', state: 'closed', reason: 'verification_abstained' }))
       .toMatchObject({ title: expect.stringContaining('review signals'), impact: expect.stringContaining('No successful lookup or recovery'),
         nextSteps: expect.stringContaining('other lookup failures still open incidents') });

@@ -152,7 +152,7 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   }
   if (incident.state === 'closed' && incident.reason === 'rescued') {
     return { title: `${scope} closed: every ${subject} check answered through another step`,
-      nextSteps: 'Each direct failure of the last 24 hours came from a check the lookup\'s next step answered (a browser step after a CAPTCHA). Such failures open no incident; one whose check goes unanswered opens a new one.',
+      nextSteps: 'Each direct failure of the last 24 hours came from a check the lookup\'s next step answered (a browser step after a CAPTCHA). Such failures count toward no incident; checks that go unanswered open a new one when they fail more than half of at least 10 direct checks in 24 hours.',
       impact: 'This describes one direct transport. No parcel was left without a fresh answer.' };
   }
   if (incident.state === 'closed') {

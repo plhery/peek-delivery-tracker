@@ -8,7 +8,8 @@
 // fails on that import. The report names rows by their ids'
 // first eight characters and shows no number, place or wording. `--sql <file>` writes the guarded
 // transaction that would apply the changes and step back the open parcels no row then shows past
-// the label and the delivered ones still checked that no row then shows delivered, and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
+// the label and the delivered ones still checked that no row then shows delivered, printing each row
+// and parcel it changes first (its backup), and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -103,5 +104,6 @@ for (const step of stepBacks) console.log(`        ${short(step.parcel)} ${step.
 const sqlFile = option('--sql');
 if (sqlFile) {
   writeFileSync(sqlFile, replaySql(changes, stepBacks), { mode: 0o600 });
-  console.log(`\nWrote the guarded transaction for ${changes.length} rows and ${stepBacks.length} parcels to ${sqlFile}; it ends open, to roll back or commit.`);
+  console.log(`\nWrote the guarded transaction for ${changes.length} rows and ${stepBacks.length} parcels to ${sqlFile}; it ends open, to roll back or commit.`
+    + ' Before any change it prints the rows it changes, one JSON line each: keep the output of the run that commits as the backup.');
 }

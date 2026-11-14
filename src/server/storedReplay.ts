@@ -387,10 +387,29 @@ export function steppedBack(parcels: readonly StoredParcel[], changes: readonly 
 
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 
+const idList = (ids: readonly string[]) => `array[${[...new Set(ids)].sort().map(literal).join(', ')}]::uuid[]`;
+
+/**
+ * The rows the transaction changes, as they stand inside it before any change, one JSON line each
+ * (`{"table": ..., "row": ...}`): every row it re-dates, re-stages or deletes, every row that takes a
+ * deleted copy's place, and each parcel it steps back (its id and saved stage). psql, quiet and
+ * printing tuples only, prints them alone, so its output is the backup.
+ */
+function backupSql(changes: readonly ReplayedChange[], placed: readonly CopyChange[], stepBacks: readonly StepBack[]): string {
+  const rows = [...changes.map((change) => change.row), ...placed.map((copy) => copy.to)];
+  return [
+    ...rows.length ? [`select json_build_object('table', 'tracking_events', 'row', to_jsonb(e)) from public.tracking_events e
+ where e.id = any(${idList(rows)}) order by e.id;`] : [],
+    ...stepBacks.length ? [`select json_build_object('table', 'packages', 'row', jsonb_build_object('id', p.id, 'current_stage', p.current_stage))
+  from public.packages p where p.id = any(${idList(stepBacks.map((step) => step.parcel))}) order by p.id;`] : [],
+  ].join('\n');
+}
+
 /**
  * One transaction that writes the changes as the release would, each guarded on the row's stored
  * values, and steps the parcels back, each guarded on its saved stage, failing unless every one
  * applies. A copy is deleted after the other changes, and the row that stays then takes its place.
+ * Before any change it prints the rows it changes (`backupSql`), so its run keeps its own backup.
  * It ends open: the operator rolls it back for a dry run or commits it.
  */
 export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): string {
@@ -418,8 +437,12 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
    where id = ${literal(step.parcel)} and current_stage = ${literal(step.from)};
   get diagnostics n = row_count; stepped := stepped + n;`);
   return `\\set ON_ERROR_STOP on
+\\set QUIET on
+\\pset tuples_only on
+\\pset format unaligned
 begin;
 set local peek.hand_fix = 'stored-scan replay';
+${backupSql(changes, placed, stepBacks)}
 do $$
 declare n int; total int := 0; filled int := 0; stepped int := 0;
 begin

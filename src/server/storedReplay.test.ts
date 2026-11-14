@@ -209,6 +209,39 @@ describe('stored scan replay', () => {
       copy('minute', '2026-10-28T09:14:00Z', null, { universal_provider: undefined })))).toEqual([expect.objectContaining({ kind: 'copy', row: 'minute' })]);
   });
 
+  it('prints every row and parcel it changes, as they stand, before its first change: its own backup', () => {
+    const copy = (id: string, time: string, location: string | null): StoredScan => ({
+      ...scan(id, 'unknown', time, 'in_transit', 'Departed from sorting center', { time, universal_provider: 'ParcelsApp', stage: 'in_transit' }),
+      providerEventId: providerEventId('unknown', time, location ?? '', 'Departed from sorting center'), location,
+    });
+    const label = scan('label', 'gofo', '2026-10-19T10:00:00Z', 'in_transit', 'Shipping Label Created', { provider_code: '100', stage: 'in_transit' });
+    const open = { ...parcel(label), stage: 'in_transit' };
+    const copies = { ...parcel(copy('second', '2026-10-28T09:14:37Z', null), copy('minute', '2026-10-28T09:14:00Z', 'Example Town')), id: 'parcel-2' };
+    const changes = [open, copies].flatMap(replayParcel);
+    expect(changes.map((change) => `${change.kind} ${change.row}`)).toEqual(['stage label', 'copy minute']);
+    const stepBacks = steppedBack([open, copies], changes);
+    expect(stepBacks).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'registered' }]);
+
+    const sql = replaySql(changes, stepBacks);
+    // The deleted copy, the re-staged row and the row that takes the copy's place, then the parcel's saved stage.
+    const events = "select json_build_object('table', 'tracking_events', 'row', to_jsonb(e)) from public.tracking_events e\n"
+      + " where e.id = any(array['label', 'minute', 'second']::uuid[]) order by e.id;";
+    const packages = "select json_build_object('table', 'packages', 'row', jsonb_build_object('id', p.id, 'current_stage', p.current_stage))\n"
+      + "  from public.packages p where p.id = any(array['parcel-1']::uuid[]) order by p.id;";
+    expect(sql).toContain(events);
+    expect(sql).toContain(packages);
+    // Inside the transaction, ahead of every change, and printed alone (no header, count or command tag).
+    const first = Math.min(...['update public.', 'delete from public.'].map((statement) => sql.indexOf(statement)).filter((at) => at >= 0));
+    expect(sql.indexOf('begin;')).toBeLessThan(sql.indexOf(events));
+    expect(sql.indexOf(events)).toBeLessThan(sql.indexOf(packages));
+    expect(sql.indexOf(packages)).toBeLessThan(first);
+    expect(sql.startsWith('\\set ON_ERROR_STOP on\n\\set QUIET on\n\\pset tuples_only on\n\\pset format unaligned\nbegin;\n')).toBe(true);
+
+    // Nothing to change, nothing to print.
+    expect(replaySql([])).not.toContain('select json_build_object');
+    expect(replaySql(changes)).not.toContain("'table', 'packages'");
+  });
+
   it("leaves rows to the minute another provider, another minute, wording or stage, or two rows to the second share", () => {
     const at = (id: string, time: string, raw: JsonObject = {}, description = 'Departed from sorting center', stage = 'in_transit') =>
       scan(id, 'unknown', time, stage, description, { time, universal_provider: 'ParcelsApp', stage, ...raw });
@@ -231,7 +264,7 @@ describe('stored scan replay', () => {
     ));
     const sql = replaySql(changes);
 
-    expect(sql).toMatch(/^\\set ON_ERROR_STOP on\nbegin;\n/);
+    expect(sql).toMatch(/^\\set ON_ERROR_STOP on\n(\\[^\n]+\n)*begin;\n/);
     expect(sql).toContain("set stage = 'accepted'");
     expect(sql).toContain("where id = 'origin' and stage = 'in_transit'");
     expect(sql).toContain('if total <> 1 then raise exception');

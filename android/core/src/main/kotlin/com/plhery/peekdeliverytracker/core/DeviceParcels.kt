@@ -669,6 +669,8 @@ class DeviceParcels(
         val key = keys.keyOf(entry.linkId)
         entries = entries.filter { !it.linkId.equalsCanonically(entry.linkId) }
         keys = keys.setting(entry.linkId, null)
+        // Followed again, it is signed up again.
+        alertsAsked = alertsAsked.setting(entry.linkId, null)
         // On file as still to be forgotten before the service is asked, so that nothing stopping the app loses it.
         if (client != null && key != null) pendingForgets = pendingForgets.setting(entry.linkId, key)
         // A forgotten link of this phone's own takes its notifications with it; someone else's goes on.
@@ -961,6 +963,8 @@ class DeviceParcels(
         try {
             val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && it.parcel.currentStage?.isFinal != true }.take(alertsPerRound)
             for (entry in due) {
+                // Forgotten, or followed through another link, since the round began.
+                if (entries.none { it.linkId.equalsCanonically(entry.linkId) }) continue
                 val preset = entry.alertPreset ?: alertPreset(entry.parcel)
                 val answer = try {
                     client.setAlert(
@@ -976,9 +980,15 @@ class DeviceParcels(
                     break
                 }
                 if (answer == DeviceAlertAnswer.Unavailable) break
-                alertsAsked = alertsAsked.setting(entry.linkId, asked)
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
-                if (answer != DeviceAlertAnswer.On || index < 0) continue
+                if (index < 0) {
+                    // Forgotten, or followed through another link, while the service was asked: the link hears nothing
+                    // more here.
+                    if (answer == DeviceAlertAnswer.On) stopAlert(entry, token, client)
+                    continue
+                }
+                alertsAsked = alertsAsked.setting(entry.linkId, asked)
+                if (answer != DeviceAlertAnswer.On) continue
                 val old = entries[index].alertToken
                 change(index) { it.copy(alertToken = token, alertPreset = preset) }
                 save()
@@ -990,6 +1000,19 @@ class DeviceParcels(
         } finally {
             alertRounds.remove(round)
         }
+    }
+
+    /**
+     * Turns off a link's notifications on [token], for a link no longer followed here. Someone else's link the service
+     * can't be told about yet waits with the parcels forgotten here, and each refresh tells it again; a link of this
+     * phone's own takes its notifications with it when the service forgets it.
+     */
+    private suspend fun stopAlert(entry: DeviceParcel, token: String, client: DeviceParcelClient) {
+        if (succeeds { client.removeAlert(entry.linkId, removal(token)) } || !entry.isViewer) return
+        if (entries.any { it.linkId.equalsCanonically(entry.linkId) }) return
+        forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(token)) } +
+            entry.copy(alertToken = token, forgotten = true)
+        save()
     }
 
     private fun update(id: UUID, change: (DeviceParcel) -> DeviceParcel): Parcel {

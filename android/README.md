@@ -35,7 +35,9 @@ through the same Firebase project ([docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md)).
 
 As on the iPhone, signing out, an expired session or a deleted account takes the phone's token off the server but
 keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another
-account sees the prompt first.
+account sees the prompt first. A parcel followed without an account takes its notifications with it when it is
+forgotten, or followed through another link, even while the launch's round signs it up; someone else's that the
+service can't be told about yet is told again on each refresh.
 
 ## Shortcuts on the app's icon
 

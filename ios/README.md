@@ -114,7 +114,7 @@ English text in both places at once; the generator fails when they differ.
 2. Register the four bundle ids (`com.plhery.PeekDeliveryTracker` and its extensions),
    or change them to your own.
 3. Create the App Group, set `SDT_APP_GROUP_IDENTIFIER` in `Shared.xcconfig`, and enable
-   it on the app, `ShareExtension` and `DeliveryWidget`.
+   it on the app, `ShareExtension`, `DeliveryWidget` and `NotificationService`.
 4. Enable Push Notifications, Associated Domains and App Attest on the app id.
 5. Create an APNs key and set `APNS_TEAM_ID`, `APNS_KEY_ID`, `APNS_PRIVATE_KEY` and
    `APNS_BUNDLE_ID` on the server. The bundle id must match the installed app.

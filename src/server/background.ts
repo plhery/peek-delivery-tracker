@@ -130,6 +130,8 @@ export class SyncJobWorker {
   #draining: Promise<void> | null = null;
   #ownedJob: string | null = null;
   #handoff: Promise<void> | null = null;
+  /** When a scheduled run last did its upkeep (Date.now()). */
+  #upkeptAt = Number.NEGATIVE_INFINITY;
 
   constructor(
     readonly service: TrackingSyncService,
@@ -336,9 +338,12 @@ export class SyncJobWorker {
         signal.throwIfAborted();
         summary = await this.service.sync({ ...context, trigger: 'scheduled' });
         signal.throwIfAborted();
-        // A run that gave way to an account's or a lookup's check leaves this to the run queued again behind it.
-        if (!summary.gave_way) {
+        // A run that gave way to an account's or a lookup's check leaves this to the run queued again
+        // behind it. So does one queued again at once for the lookups it left, within a window of the
+        // runs every 2 minutes: the upkeep keeps their pace.
+        if (!summary.gave_way && !(summary.lookups_left && Date.now() - this.#upkeptAt < RUN_MINUTES * 60_000)) {
           archived = await this.scheduledUpkeep(jobId, kind, signal);
+          this.#upkeptAt = Date.now();
           this.state.lastAutoArchived = archived;
         }
         this.state.lastScheduledSync = Date.now() / 1_000;
@@ -352,7 +357,7 @@ export class SyncJobWorker {
       this.state.lastSummary = result;
       this.state.lastError = null;
       logOperationalEvent('sync_job_completed', { job_id: jobId, kind, ...result });
-      if (summary.gave_way) await this.queueScheduledRunAgain();
+      if (summary.gave_way || summary.lookups_left) await this.queueScheduledRunAgain();
     } catch (error) {
       if (error instanceof WorkerShutdown || signal.reason instanceof WorkerShutdown) {
         // The replacement resumes the same persisted Sentry check-in. Shutdown
@@ -508,7 +513,8 @@ export class SyncJobWorker {
 
   /**
    * Queues a scheduled run that gave way again, behind the checks it gave way to and ahead of
-   * a release's re-checks. Should that fail, the next window's run takes the parcels it left.
+   * a release's re-checks, or one that left lookups due. Should that fail, the next window's run
+   * takes the parcels it left.
    */
   private async queueScheduledRunAgain(): Promise<void> {
     try {

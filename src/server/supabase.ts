@@ -1115,9 +1115,9 @@ const CANDIDATE_PAGE = 1000;
 const SYNC_CANDIDATES_PER_READ = 100;
 
 /**
- * The parcels the least recently checked first, as the schedule takes them: never checked
- * first, then the first added, then by id, so that parcels checked at the same time keep
- * one order from run to run.
+ * The parcels the least recently checked first, the order the schedule keeps among those due as
+ * long: never checked first, then the first added, then by id, so that parcels checked at the
+ * same time keep one order from run to run.
  */
 function leastRecentlyChecked(parcels: JsonObject[]): JsonObject[] {
   const time = (value: unknown) => {

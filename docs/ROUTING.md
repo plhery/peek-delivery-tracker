@@ -376,18 +376,21 @@ carrier whose provider relays only a label naming such a carrier, when that carr
 input the parcel lacks: that carrier is asked
 without waiting the provider's 15 minutes, archived or delivered too (`carrier_named_at` in its
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
-per account, round-robin, every 2 minutes. It lists every open parcel and lookup in pages by id,
-as the database's API ends each answer at its row limit, and takes the least recently checked
-first. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
+per account, each account's longest due, every 2 minutes. It lists every open parcel and lookup in pages by id,
+as the database's API ends each answer at its row limit, and checks the parcels it takes the longest due
+first, accounts' and lookups' alike, an account's parcel as if it had come due 10 minutes earlier: when the worker
+can't keep up, every kind waits about as long past its cadence, accounts' parcels a little less. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
 its parcels out for delivery today or expected today, as its own pacing may refuse the run's later
 lookups (Poste Italiane's searches an hour); every other parcel keeps its place. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
 read: the run reads those of the ones it takes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
+A run that checked every parcel it took and left more lookups due than its twenty (below) is queued again at once rather
+than in the next window, and does its upkeep at most once in 2 minutes.
 An account's or a lookup's check queued meanwhile, such as a refresh, a new parcel, a new lookup's first check or a link
 opened, goes ahead of the run: once the run has checked a parcel, it stops between checks, leaves its upkeep (archiving,
 forgetting, usage counts) to the next run, and is queued again behind that check. An account's check goes ahead of a
 lookup's. When the same server runs the run queued again, it takes over the stopped run's answers and the carriers that
-run found down until the stopped run's 4 minutes are up, and checks first the parcels the stopped run left that are still
-due, before the ones due since: a run that keeps stopping still reaches the lookups at the end of its list.
+run found down until the stopped run's 4 minutes are up. The parcels the stopped run left keep their place by how long
+they have been due, so a run that keeps stopping still reaches the end of its list.
 
 A check that nothing answered stores its next check time within the hour. When every source a
 scheduled check may ask is still waiting its turn past that time (the carrier asked first, the
@@ -482,9 +485,8 @@ check at its cadence, daily rather than weekly after 7 days, since someone is lo
 past its hourly checks unseen, alert on or not, or the daily check of one with an alert on,
 contacts one universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
 on is checked every 3 hours: nobody reads it, and a number no carrier is known for asks every
-provider in turn. A scheduled run checks at most twenty of them, after every account's share: the
-ones with an alert on or a link read in the last hour first, each the least recently checked first,
-and five of the others besides when those fill the twenty, so the others' checks still come round. Their own checks queue behind every account's
+provider in turn. A scheduled run takes at most twenty lookups, the longest due, whether someone waits
+for them or not, and checks them in its order (above). Their own checks queue behind every account's
 own check and go ahead of the scheduled run (above). A delivered or returned one is not checked, but for a
 delivery only a provider reported (above).
 

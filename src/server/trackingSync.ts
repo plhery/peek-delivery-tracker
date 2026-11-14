@@ -85,17 +85,16 @@ const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
  */
 const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
 /**
- * One-off parcels have no owner: a scheduled run checks this many of them, all together, the ones
- * someone waits for first. With a run every few minutes, that keeps dozens of lookups someone waits
- * for on the 10 minutes an account's parcel gets; past that, theirs come round more slowly.
+ * One-off parcels have no owner: a scheduled run checks this many of them, all together, the
+ * longest due first. A run that checks them all and leaves more due is queued again at once.
  */
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 20;
 /**
- * And this many more of the ones nobody waits for, when the ones someone waits for fill the run:
- * their checks every 3 hours would otherwise wait as long as those keep coming due, and a backlog
- * of them clears within hours.
+ * A scheduled run checks the parcels it takes the longest due first, an account's as if it had come
+ * due this much earlier: when the worker cannot keep up, every kind waits about as long past its
+ * cadence, the accounts' parcels a little less.
  */
-const UNWATCHED_ONE_OFF_SHARE = 5;
+const ACCOUNT_HEAD_START_MS = 10 * 60_000;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
 const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 /** A one-off parcel stays on the schedule this long after one of its links was last opened. */
@@ -604,9 +603,10 @@ export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
   return parcels.map((parcel) => refreshLimit(parcel) !== undefined ? queues.get(carrier(parcel))!.shift()! : parcel);
 }
 
-/** The parcels whose id is in `left` first, each part in its order. */
-function leftFirst(parcels: JsonObject[], left: ReadonlySet<string>): JsonObject[] {
-  return [...parcels.filter((parcel) => left.has(String(parcel.id))), ...parcels.filter((parcel) => !left.has(String(parcel.id)))];
+/** The parcels the longest due first (`late`, by id), the others in their order. */
+function latestFirst(parcels: Iterable<JsonObject>, late: ReadonlyMap<string, number>): JsonObject[] {
+  const due = (parcel: JsonObject) => late.get(String(parcel.id)) ?? 0;
+  return [...parcels].sort((left, right) => due(right) - due(left));
 }
 
 /**
@@ -784,28 +784,40 @@ function unconfirmedDelivery(parcel: JsonObject, now: Date): boolean {
 }
 
 /**
- * How long the longest-waiting of these due parcels has been due, to the minute. A parcel stays due
- * from the moment its cadence comes round until its check, so a search between its last check, or
- * its addition, and now finds that moment. The stalest go first: one not due as long ago as the
- * longest wait found so far cannot have waited longer, which a single look settles.
+ * How long a due parcel has been due, from the minute it came due. A parcel stays due from the moment
+ * its cadence comes round until its check, so a search between its last check, or its addition, and
+ * now finds that minute; parcels that came due in the same minute have waited as long. 0 for one that
+ * came due this minute.
  */
-function longestOverdueMs(parcels: JsonObject[], dueAt: (parcel: JsonObject, at: Date) => boolean, now: Date): number {
-  const end = now.getTime();
-  const since = (parcel: JsonObject) => Date.parse(String(parcel.last_synced_at ?? parcel.created_at ?? ''));
-  const stalest = parcels.map((parcel) => [since(parcel), parcel] as const)
-    .filter(([from]) => from < end).sort(([left], [right]) => left - right);
+function overdueMs(parcel: JsonObject, dueAt: (parcel: JsonObject, at: Date) => boolean, now: Date): number {
+  const minute = (at: number) => new Date(at * 60_000);
+  let low = Math.floor(Date.parse(String(parcel.last_synced_at ?? parcel.created_at ?? '')) / 60_000);
+  let high = Math.floor(now.getTime() / 60_000);
+  if (!(low < high) || !dueAt(parcel, minute(high))) return 0;
+  while (high - low > 1) {
+    const middle = Math.floor((low + high) / 2);
+    if (dueAt(parcel, minute(middle))) high = middle;
+    else low = middle;
+  }
+  return now.getTime() - high * 60_000;
+}
+
+/**
+ * Sets in `late`, by id, how long each of these due parcels has been due, plus `headStart`, and
+ * returns how long the longest-waiting of them has been due.
+ */
+function measureOverdue(
+  parcels: Iterable<JsonObject>,
+  dueAt: (parcel: JsonObject, at: Date) => boolean,
+  now: Date,
+  late: Map<string, number>,
+  headStart = 0,
+): number {
   let longest = 0;
-  for (const [from, parcel] of stalest) {
-    if (end - from <= longest) break;
-    let low = from;
-    let high = end - longest;
-    if (longest > 0 && !dueAt(parcel, new Date(high))) continue;
-    while (high - low > 60_000) {
-      const middle = Math.floor((low + high) / 2);
-      if (dueAt(parcel, new Date(middle))) high = middle;
-      else low = middle;
-    }
-    longest = end - high;
+  for (const parcel of parcels) {
+    const overdue = overdueMs(parcel, dueAt, now);
+    late.set(String(parcel.id), overdue + headStart);
+    longest = Math.max(longest, overdue);
   }
   return longest;
 }
@@ -915,6 +927,8 @@ export interface SyncSummary extends JsonObject {
   email_errors: number;
   /** A scheduled run stopped early for an account's or a lookup's check queued ahead of it, and is to be queued again. */
   gave_way?: true;
+  /** A scheduled run checked every parcel it took and left lookups due beyond its share: it is queued again at once. */
+  lookups_left?: true;
 }
 
 /** Adds what a push dispatch did to the job's counts, each channel's sends beside the total. */
@@ -1625,9 +1639,8 @@ export class TrackingSyncService {
   /**
    * The lookups of the scheduled run that last stopped for another check, and when its time is up
    * (performance.now()): the run queued again, when this process runs it, takes them over until then.
-   * And the parcels it left (`left`, by id), which that run checks first if they are still due.
    */
-  #gaveWay: { lookups: SharedLookups; until: number; left: ReadonlySet<string> } | null = null;
+  #gaveWay: { lookups: SharedLookups; until: number } | null = null;
 
   constructor(
     readonly client: SupabaseServiceClient,
@@ -1656,30 +1669,33 @@ export class TrackingSyncService {
         unwatched: unwatched.has(String(parcel.id)), oneOff, unfollowed, sharedAlerts: shared.has(String(parcel.id)),
       });
       const owned = active.filter((parcel) => due(false)(parcel, now));
-      recordScheduledBacklog('account', owned.length, longestOverdueMs(owned, due(false), now));
+      // How long each parcel the run may take has been due, by id: the run checks the longest due
+      // first, accounts' and lookups' alike, so a parcel a run that stopped for another check left
+      // keeps its place, and none waits behind parcels that came due after it.
+      const late = new Map<string, number>();
+      recordScheduledBacklog('account', owned.length, measureOverdue(owned, due(false), now, late, ACCOUNT_HEAD_START_MS));
       // An account's parcel whose number nobody has answered for a day is rechecked after every
       // other parcel and lookup, within its account's share, a few a run.
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
-      const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks],
-        MAX_PACKAGES_PER_OWNER_PER_SYNC);
-      // The parcels a run that stopped for another check left go first: otherwise a run that keeps
-      // stopping starts over with the accounts each time, and the lookups at the end of its list wait.
-      const left = earlier?.left ?? new Set<string>();
-      const parcels = urgentFirst(leftFirst([...shares.filter((parcel) => !rechecks.has(parcel)),
-        ...await this.oneOffPackages(lookupLists, due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
-          (parcel) => !unwatched.has(String(parcel.id)), left, context.signal),
-        ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], left), now);
+      const shares = fairSyncPackages([...latestFirst(owned.filter((parcel) => !rechecks.has(parcel)), late),
+        ...latestFirst(rechecks, late)], MAX_PACKAGES_PER_OWNER_PER_SYNC);
+      const oneOff = await this.oneOffPackages(lookupLists, due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
+        late, context.signal);
+      const parcels = urgentFirst([...latestFirst([...shares.filter((parcel) => !rechecks.has(parcel)), ...oneOff.parcels], late),
+        ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], now);
       // Copies of one number, in several accounts or followed without one, share their lookups, with
       // those of the run that stopped for another check before this one, while its time lasts.
       const lookups = new SharedLookups(parcels, earlier && performance.now() < earlier.until ? earlier : undefined);
       // The accounts whose parcels a merge changed during the run.
       const merged = new Set<string>();
+      let stopped = false;
       for (const [index, parcel] of parcels.entries()) {
         // At shutdown the run stops between checks; its job goes back to the queue, and the
         // replacement checks the parcels still due.
         if (context.stopping?.aborted) throw context.stopping.reason;
         if (performance.now() - started >= SCHEDULED_RUN_BUDGET_MS) {
           logOperationalEvent('scheduled_sync_budget_reached', { checked: summary.checked, left: parcels.length - index });
+          stopped = true;
           break;
         }
         // An account's or a lookup's check queued meanwhile, such as a refresh, a new lookup or a link opened,
@@ -1691,8 +1707,8 @@ export class TrackingSyncService {
           logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: parcels.length - index, to });
           recordScheduledRunGaveWay(to);
           summary.gave_way = true;
-          this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS,
-            left: new Set(parcels.slice(index).map((parcel) => String(parcel.id))) };
+          this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS };
+          stopped = true;
           break;
         }
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
@@ -1710,6 +1726,10 @@ export class TrackingSyncService {
         // run; the last parcel's goes with the run's own dispatch.
         if (index < parcels.length - 1) await this.dispatchNotifications(summary, context.signal);
       }
+      // The worker would otherwise wait for the next window with lookups due: the run that checked
+      // every parcel it took is queued again at once (background.ts). It checked one at least, so
+      // the next run finds that one done and none goes round for ever.
+      if (!stopped && oneOff.more && summary.checked > 0) summary.lookups_left = true;
       await this.linkConfirmedParcels();
       await this.dispatchNotifications(summary, context.signal);
       return summary;
@@ -1848,13 +1868,10 @@ export class TrackingSyncService {
    * One-off parcels stay on the schedule while a link was opened lately, and
    * those filed under no carrier, or under one with no adapter of its own, while
    * they are new, followed or not: a check can find their carrier, or the one
-   * that delivers them. They come after every account's share and count as
-   * one owner, the followed ones first, each the least recently checked first,
-   * so lookups cannot starve accounts. Nor can they stop them: when a list
-   * cannot be read, the others are still checked. The ones someone waits for
-   * (`watched`: an alert on, or a link read in the last hour) go first, up to
-   * `limit`; the others take what is left, and `UNWATCHED_ONE_OFF_SHARE` at least.
-   * Among each, the ones the run that stopped for another check `left` go first.
+   * that delivers them. They count as one owner, `limit` a run, the longest due
+   * first, so lookups cannot starve accounts. Nor can they stop them: when a list
+   * cannot be read, the others are still checked. Sets in `late`, by id, how long
+   * each due one has been due, and says whether more were due than the run takes.
    */
   private async oneOffPackages(
     { followed, unfiled, failed }: OneOffLists,
@@ -1862,35 +1879,32 @@ export class TrackingSyncService {
     unfollowedDue: (parcel: JsonObject, at: Date) => boolean,
     now: Date,
     limit: number,
-    watched: (parcel: JsonObject) => boolean,
-    left: ReadonlySet<string>,
+    late: Map<string, number>,
     signal?: AbortSignal,
-  ): Promise<JsonObject[]> {
+  ): Promise<{ parcels: JsonObject[]; more: boolean }> {
     const list = (operation: string, read: () => Promise<JsonObject[]>) => this.readList(operation, read, failed, signal);
     const listed = new Set(followed.map((parcel) => String(parcel.id)));
     const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel, now)));
     const followedNow = followed.filter((parcel) => followedDue(parcel, now));
-    const due = [...followedNow, ...unfollowed];
-    // Apart, since the unfollowed ones come last and can wait days behind the followed. A list
-    // that could not be read leaves its kind unknown, not empty; the unfollowed ones are those
-    // the followed list leaves out, so they need both.
+    // Apart, since the unfollowed ones have a slower cadence of their own. A list that could not be
+    // read leaves its kind unknown, not empty; the unfollowed ones are those the followed list
+    // leaves out, so they need both.
     const followedRead = !failed.has('list_one_off_packages');
-    recordScheduledBacklog('lookup', followedRead ? followedNow.length : null, longestOverdueMs(followedNow, followedDue, now));
+    recordScheduledBacklog('lookup', followedRead ? followedNow.length : null, measureOverdue(followedNow, followedDue, now, late));
     recordScheduledBacklog('unfollowed', followedRead && !failed.has('list_unfiled_one_off_packages') ? unfollowed.size : null,
-      longestOverdueMs([...unfollowed], unfollowedDue, now));
-    const waited = leftFirst(due.filter(watched), left).slice(0, limit);
-    const others = leftFirst(due.filter((parcel) => !watched(parcel)), left);
-    const taken = [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];
+      measureOverdue(unfollowed, unfollowedDue, now, late));
+    const due = latestFirst([...followedNow, ...unfollowed], late);
+    const taken = due.slice(0, limit);
     // The unfiled list comes without the stored rows, which the cadence of a lookup nobody follows
     // does not read: the ones taken are read again with them, and checked if still due.
     const ids = taken.filter((parcel) => unfollowed.has(parcel)).map((parcel) => String(parcel.id));
     const read = new Map((ids.length ? await list('read_unfiled_one_off_packages', () => this.client.listSyncCandidates(ids)) : [])
       .map((parcel) => [String(parcel.id), parcel]));
-    return taken.flatMap((parcel) => {
+    return { more: due.length > limit, parcels: taken.flatMap((parcel) => {
       if (!unfollowed.has(parcel)) return [parcel];
       const current = read.get(String(parcel.id));
       return current && unfollowedDue(current, now) ? [current] : [];
-    });
+    }) };
   }
 
   /** The one-off parcels oneOffPackages takes from, both lists read at once, with the ones that could not be read. */

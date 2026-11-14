@@ -161,6 +161,32 @@ it('leaves the upkeep to a scheduled run that gave way, and queues that run agai
   expect(state.lastScheduledSync).not.toBeNull();
 });
 
+it('queues a scheduled run that left lookups due again at once, and does the upkeep once in 2 minutes', async () => {
+  const { client, finish, sync, usage, worker } = scheduledRun();
+  vi.spyOn(client, 'forgetExpiredParcelLinks').mockResolvedValue({ links: 0, packages: 0, stopped: 0, alerts: 0 });
+  vi.spyOn(client, 'publicLookupUsageSummary').mockResolvedValue({ buckets: 0, p50: 0, p90: 0, max: 0, detection: { buckets: 0, p50: 0, p90: 0, max: 0 } });
+  sync.mockResolvedValue({ ...emptySyncSummary(), checked: 20, lookups_left: true });
+  const claim = vi.mocked(client.claimSyncJob).mockReset()
+    .mockResolvedValueOnce({ id: 'job', kind: 'scheduled' }).mockResolvedValueOnce({ id: 'again', kind: 'scheduled' })
+    .mockResolvedValue(null);
+  const queue = vi.spyOn(client, 'enqueueSyncJob').mockResolvedValue({ row: {}, queued: true });
+  worker.start();
+  await vi.advanceTimersByTimeAsync(1);
+  // The first run does the upkeep; the run queued again right behind it leaves it.
+  expect(finish.mock.calls.map(([jobId]) => jobId)).toEqual(['job', 'again']);
+  expect(queue.mock.calls).toEqual([[{ scheduled: true }], [{ scheduled: true }]]);
+  expect(usage).toHaveBeenCalledOnce();
+  expect(client.archiveDeliveredBefore).toHaveBeenCalledOnce();
+  // Two minutes on, the next one does it again.
+  vi.setSystemTime(Date.now() + 2 * 60_000);
+  claim.mockResolvedValueOnce({ id: 'later', kind: 'scheduled' });
+  worker.wake();
+  await vi.advanceTimersByTimeAsync(1);
+  worker.stop();
+  expect(finish.mock.calls.map(([jobId]) => jobId)).toEqual(['job', 'again', 'later']);
+  expect(usage).toHaveBeenCalledTimes(2);
+});
+
 it('queues no run again after a scheduled run that ended on its own', async () => {
   const { client, worker } = scheduledRun();
   vi.spyOn(client, 'forgetExpiredParcelLinks').mockResolvedValue({ links: 0, packages: 0, stopped: 0, alerts: 0 });

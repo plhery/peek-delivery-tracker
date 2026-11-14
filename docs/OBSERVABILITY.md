@@ -531,7 +531,7 @@ whose checks answered, waits unlisted until it fails, recovers or closes), the u
 provider, with `why` they stay with it, followed parcels not checked for 24 h (a scheduler fault: an
 account's parcel with a scan, or a lookup with an alert or a link opened in 24 h; one whose check was queued in the last
 hour, as reopening a dormant lookup's link queues one, waits unlisted for it), such lookups not checked for 6 h, twice
-the 3 h of one nobody waits for (many at once: the scheduled runs' share of lookups is full), and readers' answers that something is off. It
+the 3 h of one nobody waits for (many at once: the worker can't keep up), and readers' answers that something is off. It
 only reads, and shows a number as its shape (`MY + 10 digits + US`, from
 `private.tracking_number_pattern`). Free text can name a place, a shop or a person, so
 wording shows `…` for each word fewer than five stored wordings share and `#` for digits,
@@ -741,7 +741,9 @@ Key JSON events:
   to the next run, with how many parcels it `checked` and how many it `left`;
 - `scheduled_sync_gave_way`: a scheduled run stopped for a check queued ahead of it, an
   `account`'s or a `lookup`'s (`to`), and was queued again, with how many parcels it `checked`
-  and how many it `left`; its `sync_job_completed` line says `gave_way`;
+  and how many it `left`; its `sync_job_completed` line says `gave_way`. One that checked every
+  parcel it took and left lookups due beyond its twenty says `lookups_left`, and is queued again
+  at once;
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
   (`web`, `native` for the iPhone and Android apps, `live_activity`, `link_alert`) beside the
@@ -1044,8 +1046,8 @@ dashboard's failure panels leave out.
 | `tracking_routing_signal_total` (signal, carrier, subject) | Routing signals for the review: `subject` is the carrier the signal is about, `uncatalogued` for a name a provider gave |
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
 | `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample in 24 hours, a direct step the carrier has not run for six hours, or direct failures whose checks all answered (a direct failure whose check answered counts toward no incident) |
-| `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them. Routine while lookups are opened and added: the next run checks first the parcels a stopped one left. Whether checks fall behind shows in `scheduled_sync_overdue_seconds` |
-| `scheduled_sync_due` (kind) | Parcels the latest scheduled run found due when it started: an `account`'s, a `lookup`, or an `unfollowed` lookup filed under no carrier, which a run takes only when the followed ones leave room. A kind shows no value when the run could not list it, or when no run has started for 15 minutes |
+| `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them. Routine while lookups are opened and added: the parcels a stopped run left keep their place in the next, the longest due first. Whether checks fall behind shows in `scheduled_sync_overdue_seconds` |
+| `scheduled_sync_due` (kind) | Parcels the latest scheduled run found due when it started: an `account`'s, a `lookup`, or an `unfollowed` lookup filed under no carrier and followed by nobody. A kind shows no value when the run could not list it, or when no run has started for 15 minutes |
 | `scheduled_sync_overdue_seconds` (kind) | How long the longest-waiting of those parcels had been due, to the minute. A lookup checked late shows here before its check |
 | `sync_jobs_queued` (kind) | Checks waiting for the sync worker, read from the queue at each scrape where the worker runs: an `account`'s, a `lookup`'s, the `scheduled` run, or a scraper `release`'s re-check |
 | `sync_jobs_oldest_wait_seconds` (kind) | How long the oldest of those checks has waited since it was queued |

@@ -289,7 +289,17 @@ class ParcelSearchTest {
         // Clear filters puts the three back and leaves the query.
         tap(FILTERS_CLEAR)
         compose.onNodeWithTag("$FILTERS_STATUS.${ParcelStatusFilter.All.rawValue}").assertIsSelected()
-        compose.onNodeWithTag("$FILTERS_SORT.${ParcelSort.Priority.rawValue}").assertIsSelected()
+        compose.onNodeWithTag("$FILTERS_SORT.${ParcelSort.Eta.rawValue}").assertIsSelected()
+    }
+
+    /** Delivery date is the list's own order, as on the web: chosen from the start, no dot, and no Priority to pick. */
+    @Test
+    fun theFiltersStartOnDeliveryDateAndOfferNoPriority() {
+        show()
+        assertFalse(exists(FILTERS_DOT))
+        openFilters()
+        compose.onNodeWithTag("$FILTERS_SORT.${ParcelSort.Eta.rawValue}").assertIsSelected()
+        assertFalse(exists("$FILTERS_SORT.priority"))
     }
 
     @Test
@@ -394,7 +404,7 @@ class ParcelSearchTest {
         compose.mainClock.advanceTimeBy(1_000)
         assertEquals(full, dotWidth(), 0.5f)
 
-        compose.runOnUiThread { deliveries.sort = ParcelSort.Priority; Snapshot.sendApplyNotifications() }
+        compose.runOnUiThread { deliveries.sort = ParcelSort.Eta; Snapshot.sendApplyNotifications() }
         repeat(2) { compose.mainClock.advanceTimeByFrame() }
         compose.mainClock.advanceTimeBy(48)
         assertTrue("At ${dotWidth()} of $full", dotWidth() in 0.5f..full - 0.5f)

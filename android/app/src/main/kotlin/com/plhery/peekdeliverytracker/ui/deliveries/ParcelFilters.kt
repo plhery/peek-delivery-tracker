@@ -116,7 +116,7 @@ private fun ParcelFilterView(state: DeliveriesState, close: () -> Unit, modifier
             FormButtonRow(localized("view.clear"), destructive = true, onClick = {
                 state.statusFilter = ParcelStatusFilter.All
                 state.carrierFilter = null
-                state.sort = ParcelSort.Priority
+                state.sort = ParcelSort.Eta
             }, tag = FILTERS_CLEAR)
         }
     }

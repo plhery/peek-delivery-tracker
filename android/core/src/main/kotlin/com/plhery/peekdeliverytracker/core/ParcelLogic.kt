@@ -709,8 +709,12 @@ enum class ParcelStatusFilter(val rawValue: String) {
     val localizationKey: String get() = "view.filter.$rawValue"
 }
 
+/**
+ * The list's orders, the web's (`ParcelSort`). [Eta], Delivery date, is the list's own: the soonest expected day first,
+ * parcels with no day last, and of those due the same day the one that moved last first.
+ */
 enum class ParcelSort(val rawValue: String) {
-    Priority("priority"), Updated("updated"), Newest("newest"), Eta("eta"), Carrier("carrier");
+    Updated("updated"), Newest("newest"), Eta("eta"), Carrier("carrier");
 
     val id: String get() = rawValue
     val localizationKey: String get() = "view.sort.$rawValue"
@@ -801,7 +805,7 @@ object ParcelOrganizer {
         for (parcel in candidates) {
             val candidate = Candidate(
                 urgency(parcel), parcel.trackingEvents.any { it.place != null },
-                SortKey(parcel, ParcelSort.Priority, CarrierCatalog.shared, collator),
+                SortKey(parcel, ParcelSort.Eta, CarrierCatalog.shared, collator),
             )
             if (next == null || less(candidate, next)) next = candidate
         }
@@ -836,19 +840,17 @@ object ParcelOrganizer {
         catalog: CarrierCatalog,
         private val collator: Comparator<String>,
     ) {
-        val expected: String =
-            if (sort == ParcelSort.Priority || sort == ParcelSort.Eta) parcel.expectedDayKey ?: "9999-99-99" else ""
+        val expected: String = if (sort == ParcelSort.Eta) parcel.expectedDayKey ?: "9999-99-99" else ""
         val updated: String =
-            if (sort == ParcelSort.Priority || sort == ParcelSort.Updated) parcel.currentEvent?.occurredAt ?: parcel.createdAt else ""
+            if (sort == ParcelSort.Eta || sort == ParcelSort.Updated) parcel.currentEvent?.occurredAt ?: parcel.createdAt else ""
         val carrierName: String = if (sort == ParcelSort.Carrier) catalog.info(parcel.carrier).displayName else ""
 
         fun precedes(other: SortKey): Boolean {
             val comparison = when (sort) {
-                ParcelSort.Priority ->
-                    if (expected.compareTo(other.expected) == 0) other.updated.compareTo(updated) else expected.compareTo(other.expected)
                 ParcelSort.Updated -> other.updated.compareTo(updated)
                 ParcelSort.Newest -> other.parcel.createdAt.compareTo(parcel.createdAt)
-                ParcelSort.Eta -> expected.compareTo(other.expected)
+                ParcelSort.Eta ->
+                    if (expected.compareTo(other.expected) == 0) other.updated.compareTo(updated) else expected.compareTo(other.expected)
                 ParcelSort.Carrier -> collator.compare(carrierName, other.carrierName)
             }
             if (comparison != 0) return comparison < 0

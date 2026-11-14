@@ -147,17 +147,17 @@ class ParcelSearchScreenshotTest {
         compose.screenshot("search_chips_light")
     }
 
-    /** The list by delivery date, the filters closed: the dot on their button, as the web's capture has it. */
+    /** The list newest first, not by delivery date, its own order, the filters closed: the dot on their button. */
     @Test
-    fun theDotOnTheFiltersButton() = sortedByDeliveryDate("search_sorted_light")
+    fun theDotOnTheFiltersButton() = sortedByNewest("search_sorted_light")
 
     @Test
-    fun theDotOnTheFiltersButtonInDark() = sortedByDeliveryDate("search_sorted_dark", dark = true)
+    fun theDotOnTheFiltersButtonInDark() = sortedByNewest("search_sorted_dark", dark = true)
 
-    private fun sortedByDeliveryDate(name: String, dark: Boolean = false) {
+    private fun sortedByNewest(name: String, dark: Boolean = false) {
         show(dark = dark)
         openFilters()
-        choose("$FILTERS_SORT.${ParcelSort.Eta.rawValue}")
+        choose("$FILTERS_SORT.${ParcelSort.Newest.rawValue}")
         compose.onNodeWithTag(FILTERS_DONE).performClick()
         compose.waitForIdle()
         compose.screenshot(name)

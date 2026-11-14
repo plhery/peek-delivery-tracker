@@ -1426,7 +1426,7 @@ class ParcelLogicTests {
             query = "9934 123456",
             status = ParcelStatusFilter.All,
             carrier = null,
-            sort = ParcelSort.Priority,
+            sort = ParcelSort.Eta,
         )
         assertEquals(listOf(parcel.id), result.map { it.id })
     }

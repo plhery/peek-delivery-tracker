@@ -828,7 +828,7 @@ internal fun FilterChips(state: DeliveriesState) {
             val name = identities?.displayName(carrier, language) ?: CarrierCatalog.shared.info(carrier, language).displayName
             FilterChip(name, "carrier") { state.carrierFilter = null }
         }
-        if (sort != ParcelSort.Priority) FilterChip(localized(sort.localizationKey), "sort") { state.sort = ParcelSort.Priority }
+        if (sort != ParcelSort.Eta) FilterChip(localized(sort.localizationKey), "sort") { state.sort = ParcelSort.Eta }
         // As tall as a chip, so that the row is as tall as the iPhone's, and Clear all as easy to tap as a chip.
         Box(
             Modifier

@@ -273,7 +273,7 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
     query = rememberForLaunch(launch, ""),
     status = rememberForLaunch(launch, ParcelStatusFilter.All),
     carrier = rememberForLaunch<String?>(launch, null),
-    sort = rememberForLaunch(launch, ParcelSort.Priority),
+    sort = rememberForLaunch(launch, ParcelSort.Eta),
     showingFilters = rememberForLaunch(launch, false),
     showingAccount = rememberForLaunch(launch, false),
     sheetsAsForms = rememberForLaunch(launch, false),
@@ -457,7 +457,7 @@ internal class DeliveriesState(
     val searched: Boolean get() = query.isNotBlank()
 
     /** A status, a carrier or an order other than the usual one (`filtered`), which the filters' button marks. */
-    val filtered: Boolean get() = statusFilter != ParcelStatusFilter.All || carrierFilter != null || sort != ParcelSort.Priority
+    val filtered: Boolean get() = statusFilter != ParcelStatusFilter.All || carrierFilter != null || sort != ParcelSort.Eta
 
     /** A search, a status, a carrier or a sort other than the list's own (`hasCustomView`). */
     val hasCustomView: Boolean get() = searched || filtered
@@ -467,7 +467,7 @@ internal class DeliveriesState(
         query = ""
         statusFilter = ParcelStatusFilter.All
         carrierFilter = null
-        sort = ParcelSort.Priority
+        sort = ParcelSort.Eta
     }
 
     /** `find()` and the search's button: the search shows and its field takes the focus. */

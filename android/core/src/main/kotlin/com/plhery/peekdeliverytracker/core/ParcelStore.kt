@@ -1736,7 +1736,7 @@ class ParcelStore(
             now: Instant = AppClock.now(),
             midnights: List<Instant> = emptyList(),
         ): List<DeliveryWidgetParcel> {
-            val ordered = ParcelOrganizer.visible(parcels, query = "", status = ParcelStatusFilter.Active, carrier = null, sort = ParcelSort.Priority, now = now)
+            val ordered = ParcelOrganizer.visible(parcels, query = "", status = ParcelStatusFilter.Active, carrier = null, sort = ParcelSort.Eta, now = now)
             return ordered.map { parcel -> widgetParcel(parcel, localizer, now, midnights) { localizer.parcelDeliveryEstimate(parcel, it) } }
         }
 

@@ -34,7 +34,7 @@ class ParcelLogicListTests {
         // The same news makes the lamp the most urgent parcel: on its own, that would move the tea out of its place.
         now[1] = now[1].copy(trackingEvents = now[1].trackingEvents + event(lamp, TrackingStage.ReadyForPickup, lately))
         fun layout(parcels: List<Parcel>): DeliveryListLayout =
-            DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true)
+            DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Eta, featuresNext = true)
 
         var hold = DeliveredHold().receive(shown = shown, next = now, watching = true)
         assertEquals(setOf(tea), hold.ids)
@@ -85,7 +85,7 @@ class ParcelLogicListTests {
         val book = UUID.randomUUID()
         fun ago(hours: Double): String = DateParser.isoString(Instant.now().minusMillis((hours * 3_600_000).toLong()))
         fun layout(parcels: List<Parcel>): DeliveryListLayout =
-            DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true)
+            DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Eta, featuresNext = true)
         val shown = listOf(
             makeParcel(id = tea, events = listOf(event(tea, TrackingStage.OutForDelivery, ago(2.0)))),
             makeParcel(id = lamp, events = listOf(event(lamp, TrackingStage.InTransit, ago(2.0)))),
@@ -198,7 +198,7 @@ class ParcelLogicListTests {
     fun deliveryListLayoutFeaturesOneArrivalAndKeepsIssuesOnTheirOwnCards() {
         val now = DateParser.date("2026-09-09T12:00:00Z")!!
         val parcels = DemoRepository.seed(now = now)
-        val layout = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true, now = now)
+        val layout = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Eta, featuresNext = true, now = now)
         val next = layout.next
         assertNotNull(next)
         assertEquals("New trainers 👟", next?.label)
@@ -211,7 +211,7 @@ class ParcelLogicListTests {
         assertTrue(layout.attention.all { it.attention(now = now) != null })
         assertTrue(layout.remaining.all { it.attention(now = now) == null })
         assertEquals(listOf(ParcelSectionKind.Delivered, ParcelSectionKind.Archived), layout.sections.map { it.kind })
-        val searched = DeliveryListLayout(parcels, query = "trainers", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = false, now = now)
+        val searched = DeliveryListLayout(parcels, query = "trainers", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Eta, featuresNext = false, now = now)
         assertNull(searched.next)
         assertEquals(listOf("New trainers 👟"), searched.visible.map { it.label })
     }
@@ -293,7 +293,7 @@ class ParcelLogicListTests {
     fun theListsCardsRunFromNextUpToThePastDeliveriesWithoutTheArchive() {
         val now = DateParser.date("2026-09-09T12:00:00Z")!!
         val parcels = DemoRepository.seed(now = now)
-        val layout = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true, now = now)
+        val layout = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Eta, featuresNext = true, now = now)
         val delivered = layout.sections.first { it.kind == ParcelSectionKind.Delivered }
         assertEquals((listOfNotNull(layout.next) + layout.attention + layout.remaining + delivered.parcels).map { it.id }, layout.cards)
         assertEquals(layout.next?.id, layout.cards.firstOrNull())
@@ -430,14 +430,14 @@ class ParcelLogicListTests {
         val older = makeParcel().copy(archivedAt = "2026-08-09T12:00:00Z")
         val newer = makeParcel().copy(archivedAt = "2026-08-10T12:00:00Z")
         val parcels = listOf(onTheWay, older, newer)
-        val all = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true)
+        val all = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Eta, featuresNext = true)
         val archive = all.sections.first { it.kind == ParcelSectionKind.Archived }.parcels.map { it.id }
         assertEquals(setOf(older.id, newer.id), archive.toSet())
         // A closed shelf shows no row; an open one, or a filter, shows them after the cards.
         assertEquals(listOf(onTheWay.id), all.rows(archiveOpen = false))
         assertEquals(listOf(onTheWay.id) + archive, all.rows(archiveOpen = true))
         // The Archived filter shows rows and no card: the first row shows beside the list by itself.
-        val archived = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.Archived, carrier = null, sort = ParcelSort.Priority, featuresNext = false)
+        val archived = DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.Archived, carrier = null, sort = ParcelSort.Eta, featuresNext = false)
         assertEquals(emptyList<UUID>(), archived.cards)
         val rows = archived.rows(archiveOpen = true)
         assertEquals(setOf(older.id, newer.id), rows.toSet())

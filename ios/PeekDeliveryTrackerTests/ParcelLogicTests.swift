@@ -1743,6 +1743,47 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(round.heldReturn)
     }
 
+    // The list's orders against the web's (src/lib/parcelView.test.ts) and Android's (ParcelSortTests), with their parcels.
+    func testTheOrdersAreTheWebsWithoutPriority() {
+        XCTAssertEqual(ParcelSort.allCases.map(\.rawValue), ["updated", "newest", "eta", "carrier"])
+        XCTAssertEqual(ParcelSort.standard, .eta)
+    }
+
+    func testOfTwoDueTheSameDayTheOneThatMovedLastComesFirst() {
+        // "alpha" comes first by name, "zulu" moved last; "date" moved last of all but has no expected day.
+        let alpha = sortParcel("alpha", moved: "2026-08-02T09:00:00Z", expected: "2026-08-08")
+        let zulu = sortParcel("zulu", moved: "2026-08-04T09:00:00Z", expected: "2026-08-08 13:00–15:00")
+        let soon = sortParcel("soon", moved: "2026-08-01T09:00:00Z", expected: "2026-08-06")
+        let undated = sortParcel("date", moved: "2026-08-05T09:00:00Z", expected: nil)
+        let now = ISO8601DateFormatter().date(from: "2026-08-05T12:00:00Z")!
+
+        let listed = ParcelOrganizer.visible([undated, alpha, zulu, soon], query: "", status: .all, carrier: nil, sort: .eta, now: now)
+        XCTAssertEqual(listed.map(\.label), ["soon", "zulu", "alpha", "date"])
+    }
+
+    func testAParcelWithoutAScanMovedWhenItWasAdded() {
+        let scanned = sortParcel("scanned", moved: "2026-08-03T09:00:00Z", expected: "2026-08-08")
+        var unscanned = sortParcel("unscanned", moved: nil, expected: "2026-08-08")
+        unscanned.createdAt = "2026-08-04T09:00:00Z"
+
+        XCTAssertEqual(ParcelOrganizer.sorted([scanned, unscanned], by: .eta).map(\.label), ["unscanned", "scanned"])
+    }
+
+    func testTheSameDayAndTheSameMoveFallBackToTheName() {
+        let bravo = sortParcel("bravo", moved: "2026-08-03T09:00:00Z", expected: "2026-08-08")
+        let alpha = sortParcel("alpha", moved: "2026-08-03T09:00:00Z", expected: "2026-08-08")
+
+        XCTAssertEqual(ParcelOrganizer.sorted([bravo, alpha], by: .eta).map(\.label), ["alpha", "bravo"])
+    }
+
+    private func sortParcel(_ name: String, moved: String?, expected: String?) -> Parcel {
+        let id = UUID()
+        var parcel = makeParcel(id: id, events: moved.map { [event(id, .inTransit, $0)] } ?? [])
+        parcel.label = name
+        parcel.expectedDelivery = expected
+        return parcel
+    }
+
     func testFiltersSearchCompactTrackingNumbers() {
         let parcel = makeParcel(trackingNumber: "99.34.123456.99999980")
         let result = ParcelOrganizer.visible(
@@ -1750,7 +1791,7 @@ final class ParcelLogicTests: XCTestCase {
             query: "9934 123456",
             status: .all,
             carrier: nil,
-            sort: .priority
+            sort: .standard
         )
         XCTAssertEqual(result.map(\.id), [parcel.id])
     }
@@ -2382,7 +2423,7 @@ final class ParcelLogicTests: XCTestCase {
         // The same news makes the lamp the most urgent parcel: on its own, that would move the tea out of its place.
         now[1].trackingEvents.append(event(lamp, .readyForPickup, lately))
         func layout(_ parcels: [Parcel]) -> DeliveryListLayout {
-            DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .priority, featuresNext: true)
+            DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .standard, featuresNext: true)
         }
 
         var hold = DeliveredHold()
@@ -2431,7 +2472,7 @@ final class ParcelLogicTests: XCTestCase {
         let tea = UUID(), lamp = UUID(), mug = UUID(), vase = UUID(), pen = UUID(), book = UUID()
         func ago(_ hours: Double) -> String { DateParser.isoString(Date().addingTimeInterval(-hours * 3_600)) }
         func layout(_ parcels: [Parcel]) -> DeliveryListLayout {
-            DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .priority, featuresNext: true)
+            DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .standard, featuresNext: true)
         }
         let shown = [
             makeParcel(id: tea, events: [event(tea, .outForDelivery, ago(2))]),
@@ -3846,7 +3887,7 @@ extension ParcelLogicTests {
     func testDeliveryListLayoutFeaturesOneArrivalAndKeepsIssuesOnTheirOwnCards() {
         let now = DateParser.date("2026-09-09T12:00:00Z")!
         let parcels = DemoRepository.seed(now: now)
-        let layout = DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .priority, featuresNext: true, now: now)
+        let layout = DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .standard, featuresNext: true, now: now)
         let next = try? XCTUnwrap(layout.next)
         XCTAssertEqual(next?.label, "New trainers 👟")
         XCTAssertEqual(Set(layout.active.map(\.id)), Set(parcels.filter(\.isActive).map(\.id)))
@@ -3856,7 +3897,7 @@ extension ParcelLogicTests {
         XCTAssertTrue(layout.attention.allSatisfy { $0.attention(now: now) != nil })
         XCTAssertTrue(layout.remaining.allSatisfy { $0.attention(now: now) == nil })
         XCTAssertEqual(layout.sections.map(\.kind), [.delivered, .archived])
-        let searched = DeliveryListLayout(parcels: parcels, query: "trainers", status: .all, carrier: nil, sort: .priority, featuresNext: false, now: now)
+        let searched = DeliveryListLayout(parcels: parcels, query: "trainers", status: .all, carrier: nil, sort: .standard, featuresNext: false, now: now)
         XCTAssertNil(searched.next)
         XCTAssertEqual(searched.visible.map(\.label), ["New trainers 👟"])
     }
@@ -3963,7 +4004,7 @@ extension ParcelLogicTests {
     func testTheListsCardsRunFromNextUpToThePastDeliveriesWithoutTheArchive() throws {
         let now = DateParser.date("2026-09-09T12:00:00Z")!
         let parcels = DemoRepository.seed(now: now)
-        let layout = DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .priority, featuresNext: true, now: now)
+        let layout = DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .standard, featuresNext: true, now: now)
         let delivered = try XCTUnwrap(layout.sections.first { $0.kind == .delivered })
         XCTAssertEqual(layout.cards, ([layout.next].compactMap { $0 } + layout.attention + layout.remaining + delivered.parcels).map(\.id))
         XCTAssertEqual(layout.cards.first, layout.next?.id)
@@ -4091,14 +4132,14 @@ extension ParcelLogicTests {
         var newer = makeParcel()
         newer.archivedAt = "2026-08-10T12:00:00Z"
         let parcels = [onTheWay, older, newer]
-        let all = DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .priority, featuresNext: true)
+        let all = DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .standard, featuresNext: true)
         let archive = try XCTUnwrap(all.sections.first { $0.kind == .archived }).parcels.map(\.id)
         XCTAssertEqual(Set(archive), [older.id, newer.id])
         // A closed shelf shows no row; an open one, or a filter, shows them after the cards.
         XCTAssertEqual(all.rows(archiveOpen: false), [onTheWay.id])
         XCTAssertEqual(all.rows(archiveOpen: true), [onTheWay.id] + archive)
         // The Archived filter shows rows and no card: the first row shows beside the list by itself.
-        let archived = DeliveryListLayout(parcels: parcels, query: "", status: .archived, carrier: nil, sort: .priority, featuresNext: false)
+        let archived = DeliveryListLayout(parcels: parcels, query: "", status: .archived, carrier: nil, sort: .standard, featuresNext: false)
         XCTAssertEqual(archived.cards, [])
         let rows = archived.rows(archiveOpen: true)
         XCTAssertEqual(Set(rows), [older.id, newer.id])

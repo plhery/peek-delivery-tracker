@@ -1646,7 +1646,7 @@ struct ParcelFilterView: View {
                     Button(localizer.text("view.clear"), role: .destructive) {
                         status = .all
                         carrier = nil
-                        sort = .priority
+                        sort = .standard
                     }
                 }
             }

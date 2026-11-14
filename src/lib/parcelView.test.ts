@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  DEFAULT_PARCEL_SORT,
+  PARCEL_SORTS,
+  parcelComparator,
   parcelMatchesSearch,
   parcelMatchesStatus,
   sortPastParcels,
@@ -71,6 +74,49 @@ describe('parcel view', () => {
     expect(viewParcels([swiss, ups, delivered], {
       query: 'coffee', status: 'all', carrier: 'swiss-post', sort: 'newest', now: NOW,
     }).map((item) => item.id)).toEqual(['long-name', 'past']);
+  });
+
+  // The same cases as the apps' tests (Android ParcelSortTests, iPhone ParcelLogicTests): keep the three in step.
+  it('offers the orders without Priority, Delivery date being the list\'s own', () => {
+    expect(PARCEL_SORTS).toEqual(['updated', 'newest', 'eta', 'carrier']);
+    expect(DEFAULT_PARCEL_SORT).toBe('eta');
+  });
+
+  it('puts the one that moved last first of two due the same day, and parcels with no day last', () => {
+    const moved = (id: string, at: string, expected?: string) => {
+      const item = parcel(id, 'in_transit');
+      item.events[0].occurredAt = at;
+      item.expectedDelivery = expected;
+      return item;
+    };
+    // "alpha" comes first by name, "zulu" moved last; "date" moved last of all but has no expected day.
+    const alpha = moved('alpha', '2026-08-02T09:00:00Z', '2026-08-08');
+    const zulu = moved('zulu', '2026-08-04T09:00:00Z', '2026-08-08 13:00–15:00');
+    const soon = moved('soon', '2026-08-01T09:00:00Z', '2026-08-06');
+    const undated = moved('date', '2026-08-05T09:00:00Z');
+
+    expect(viewParcels([undated, alpha, zulu, soon], { query: '', status: 'all', sort: 'eta', now: NOW })
+      .map((item) => item.id)).toEqual(['soon', 'zulu', 'alpha', 'date']);
+  });
+
+  it('takes a parcel without a scan as moved when it was added', () => {
+    const scanned = parcel('scanned', 'in_transit');
+    scanned.events[0].occurredAt = '2026-08-03T09:00:00Z';
+    scanned.expectedDelivery = '2026-08-08';
+    const unscanned = { ...parcel('unscanned', 'in_transit'), createdAt: '2026-08-04T09:00:00Z', events: [], expectedDelivery: '2026-08-08' };
+
+    expect([scanned, unscanned].sort(parcelComparator('eta')).map((item) => item.id)).toEqual(['unscanned', 'scanned']);
+  });
+
+  it('falls back to the name for the same day and the same move', () => {
+    const bravo = parcel('bravo', 'in_transit');
+    const alpha = parcel('alpha', 'in_transit');
+    for (const item of [bravo, alpha]) {
+      item.events[0].occurredAt = '2026-08-03T09:00:00Z';
+      item.expectedDelivery = '2026-08-08';
+    }
+
+    expect([bravo, alpha].sort(parcelComparator('eta')).map((item) => item.id)).toEqual(['alpha', 'bravo']);
   });
 
   it('orders archived parcels by their latest completion, newest first', () => {

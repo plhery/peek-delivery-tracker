@@ -262,7 +262,7 @@ private struct DeliveryListView: View {
     @State private var query = ""
     @State private var statusFilter: ParcelStatusFilter = .all
     @State private var carrierFilter: CarrierID?
-    @State private var sort: ParcelSort = .priority
+    @State private var sort: ParcelSort = .standard
     @State private var showingFilters = false
     @State private var showingSearch = false
     @FocusState private var searchFocused: Bool
@@ -1255,7 +1255,7 @@ private struct DeliveryListView: View {
     private var searched: Bool { !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
 
     /// A status, a carrier or an order other than the usual one, which the filters' button marks.
-    private var filtered: Bool { statusFilter != .all || carrierFilter != nil || sort != .priority }
+    private var filtered: Bool { statusFilter != .all || carrierFilter != nil || sort != .standard }
 
     private var hasCustomView: Bool { searched || filtered }
 
@@ -1271,8 +1271,8 @@ private struct DeliveryListView: View {
                 if let carrierFilter {
                     filterChip(catalog.info(for: carrierFilter, language: localizer.language).displayName) { self.carrierFilter = nil }
                 }
-                if sort != .priority {
-                    filterChip(localizer.text(sort.localizationKey)) { sort = .priority }
+                if sort != .standard {
+                    filterChip(localizer.text(sort.localizationKey)) { sort = .standard }
                 }
                 Button(localizer.text("view.clearAll")) { clearFilters() }
                     .font(.caption.weight(.semibold))
@@ -1619,7 +1619,7 @@ private struct DeliveryListView: View {
         query = ""
         statusFilter = .all
         carrierFilter = nil
-        sort = .priority
+        sort = .standard
     }
 
     /// Opens the sheet that adds a parcel, the way the person asked for it.

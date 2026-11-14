@@ -1,6 +1,6 @@
 import { type MessageKey, useI18n } from '../i18n';
 import { carrierInfo } from '../lib/carriers';
-import type { ParcelSort, ParcelStatusFilter } from '../lib/parcelView';
+import { DEFAULT_PARCEL_SORT, PARCEL_SORTS, type ParcelSort, type ParcelStatusFilter } from '../lib/parcelView';
 import type { CarrierId } from '../types';
 
 const STATUS_LABELS: Record<ParcelStatusFilter, MessageKey> = {
@@ -13,7 +13,6 @@ const STATUS_LABELS: Record<ParcelStatusFilter, MessageKey> = {
 };
 
 const SORT_LABELS: Record<ParcelSort, MessageKey> = {
-  priority: 'view.sort.priority',
   updated: 'view.sort.updated',
   newest: 'view.sort.newest',
   eta: 'view.sort.eta',
@@ -93,8 +92,8 @@ export function ParcelViewControls({
                 <span>{carrierInfo(carrier, locale).name}</span><b aria-hidden="true">×</b>
               </button>
             )}
-            {sort !== 'priority' && (
-              <button type="button" onClick={() => onSortChange('priority')}>
+            {sort !== DEFAULT_PARCEL_SORT && (
+              <button type="button" onClick={() => onSortChange(DEFAULT_PARCEL_SORT)}>
                 <span>{t(SORT_LABELS[sort])}</span><b aria-hidden="true">×</b>
               </button>
             )}
@@ -140,7 +139,7 @@ export function ParcelViewControls({
                 value={sort}
                 onChange={(event) => onSortChange(event.target.value as ParcelSort)}
               >
-                {(Object.keys(SORT_LABELS) as ParcelSort[]).map((value) => (
+                {PARCEL_SORTS.map((value) => (
                   <option key={value} value={value}>{t(SORT_LABELS[value])}</option>
                 ))}
               </select>

@@ -1146,7 +1146,7 @@ final class ParcelStore: ObservableObject {
             query: "",
             status: .active,
             carrier: nil,
-            sort: .priority
+            sort: .standard
         )
         return ordered.map { parcel in
             widgetParcel(parcel, localizer: localizer, now: now, midnights: midnights) { localizer.parcelDeliveryEstimate(parcel, now: $0) }
@@ -1313,7 +1313,7 @@ final class ParcelStore: ObservableObject {
             query: "",
             status: .active,
             carrier: nil,
-            sort: .priority
+            sort: .standard
         ).filter { $0.currentStage == .outForDelivery }
         var desiredParcelIDs: [UUID] = []
         for activity in activities where !duplicateActivityIDs.contains(activity.id) {

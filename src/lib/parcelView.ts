@@ -16,7 +16,15 @@ export type ParcelStatusFilter =
   | 'delivered'
   | 'archived';
 
-export type ParcelSort = 'priority' | 'updated' | 'newest' | 'eta' | 'carrier';
+/**
+ * The list's orders. `eta`, Delivery date, is the list's own (`DEFAULT_PARCEL_SORT`): the soonest expected day first,
+ * parcels with no day last, and of those due the same day the one that moved last first.
+ */
+export const PARCEL_SORTS = ['updated', 'newest', 'eta', 'carrier'] as const;
+
+export type ParcelSort = typeof PARCEL_SORTS[number];
+
+export const DEFAULT_PARCEL_SORT: ParcelSort = 'eta';
 
 export interface ParcelViewOptions {
   query: string;
@@ -102,21 +110,15 @@ export function parcelComparator(
   return (first, second) => {
     let compared = 0;
     switch (sort) {
-      case 'priority':
-        compared = compareParcelPriority(first, second);
-        break;
       case 'updated':
         compared = updatedAt(second).localeCompare(updatedAt(first));
         break;
       case 'newest':
         compared = second.createdAt.localeCompare(first.createdAt);
         break;
-      case 'eta': {
-        const firstEta = expectedDeliveryDay(first.expectedDelivery) ?? '9999-99-99';
-        const secondEta = expectedDeliveryDay(second.expectedDelivery) ?? '9999-99-99';
-        compared = firstEta.localeCompare(secondEta);
+      case 'eta':
+        compared = compareParcelPriority(first, second);
         break;
-      }
       case 'carrier':
         compared = carrierInfo(first.carrier).name.localeCompare(
           carrierInfo(second.carrier).name,

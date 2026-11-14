@@ -630,8 +630,11 @@ enum ParcelStatusFilter: String, CaseIterable, Identifiable {
     var localizationKey: String { "view.filter.\(rawValue)" }
 }
 
+/// The list's orders, the web's (`ParcelSort`). `eta`, Delivery date, is the list's own (`standard`): the soonest
+/// expected day first, parcels with no day last, and of those due the same day the one that moved last first.
 enum ParcelSort: String, CaseIterable, Identifiable {
-    case priority, updated, newest, eta, carrier
+    case updated, newest, eta, carrier
+    static let standard: ParcelSort = .eta
     var id: String { rawValue }
     var localizationKey: String { "view.sort.\(rawValue)" }
 }
@@ -706,7 +709,7 @@ enum ParcelOrganizer {
         }
         let next = candidates
             .map { (urgency: urgency($0), placed: $0.trackingEvents.contains { $0.place != nil },
-                    key: SortKey($0, sort: .priority, catalog: .shared)) }
+                    key: SortKey($0, sort: .standard, catalog: .shared)) }
             .min { left, right in
                 if left.urgency != right.urgency { return left.urgency < right.urgency }
                 // Next up draws the parcel's route: of two due the same day, the one with places to draw goes first.
@@ -748,8 +751,8 @@ enum ParcelOrganizer {
         init(_ parcel: Parcel, sort: ParcelSort, catalog: CarrierCatalog) {
             self.parcel = parcel
             self.sort = sort
-            expected = sort == .priority || sort == .eta ? parcel.expectedDayKey ?? "9999-99-99" : ""
-            updated = sort == .priority || sort == .updated
+            expected = sort == .eta ? parcel.expectedDayKey ?? "9999-99-99" : ""
+            updated = sort == .eta || sort == .updated
                 ? parcel.currentEvent?.occurredAt ?? parcel.createdAt
                 : ""
             carrierName = sort == .carrier ? catalog.info(for: parcel.carrier).displayName : ""
@@ -758,16 +761,14 @@ enum ParcelOrganizer {
         func precedes(_ other: SortKey) -> Bool {
             let comparison: ComparisonResult
             switch sort {
-            case .priority:
-                comparison = expected.compare(other.expected) == .orderedSame
-                    ? other.updated.compare(updated)
-                    : expected.compare(other.expected)
             case .updated:
                 comparison = other.updated.compare(updated)
             case .newest:
                 comparison = other.parcel.createdAt.compare(parcel.createdAt)
             case .eta:
-                comparison = expected.compare(other.expected)
+                comparison = expected.compare(other.expected) == .orderedSame
+                    ? other.updated.compare(updated)
+                    : expected.compare(other.expected)
             case .carrier:
                 comparison = carrierName.localizedCaseInsensitiveCompare(other.carrierName)
             }

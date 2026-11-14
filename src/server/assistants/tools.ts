@@ -54,7 +54,7 @@ export async function listParcels(
   service: SupabaseServiceClient, userId: string, status: ParcelStatus = 'active', limit = 20,
 ): Promise<ApiTokenParcelsResponse> {
   const now = Date.now();
-  const parcels = viewParcels((await service.listAccountPackages(userId)).map(asParcel), { query: '', status, sort: 'priority', now });
+  const parcels = viewParcels((await service.listAccountPackages(userId)).map(asParcel), { query: '', status, sort: 'eta', now });
   return { total: parcels.length, parcels: parcels.slice(0, limit).map((parcel) => parcelSummary(parcel, now)) };
 }
 

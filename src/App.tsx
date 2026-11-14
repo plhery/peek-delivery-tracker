@@ -43,6 +43,7 @@ import {
 } from './lib/parcelPriority';
 import { numberToCheck } from './lib/messages';
 import {
+  DEFAULT_PARCEL_SORT,
   parcelComparator,
   sortPastParcels,
   viewParcels,
@@ -155,7 +156,7 @@ export default function App({
   const [query, setQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<ParcelStatusFilter>('all');
   const [carrierFilter, setCarrierFilter] = useState<CarrierId | ''>('');
-  const [sort, setSort] = useState<ParcelSort>('priority');
+  const [sort, setSort] = useState<ParcelSort>(DEFAULT_PARCEL_SORT);
   const [viewControlsOpen, setViewControlsOpen] = useState(false);
   const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
   const searchToggle = useRef<HTMLButtonElement>(null);
@@ -345,7 +346,7 @@ export default function App({
   }, [loading, parcelOpen]);
 
   const searched = query.trim().length > 0;
-  const filtered = statusFilter !== 'all' || carrierFilter !== '' || sort !== 'priority';
+  const filtered = statusFilter !== 'all' || carrierFilter !== '' || sort !== DEFAULT_PARCEL_SORT;
   const hasCustomView = searched || filtered;
   // A parcel delivered since the list was last shown keeps its place until its card leaves for the past deliveries,
   // even one delivered while the list was out of view, but for the demo's.
@@ -442,7 +443,7 @@ export default function App({
     setQuery('');
     setStatusFilter('all');
     setCarrierFilter('');
-    setSort('priority');
+    setSort(DEFAULT_PARCEL_SORT);
   }
 
   async function handleRestore(parcel: ParcelWithEvents) {

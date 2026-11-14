@@ -523,16 +523,19 @@ final class DeviceParcels {
         }
     }
 
-    /// Forgets every parcel, with those still to be read again. The links the service could not be
-    /// told about yet are forgotten on a later refresh.
+    /// Forgets every parcel, with those still to be read again. Their keys are set aside before the service is asked
+    /// anything: a refresh running meanwhile no longer reads them again, and a read already under way lands for a key
+    /// that has gone and is dropped (`recover`). The links the service could not be told about yet are forgotten on a
+    /// later refresh.
     func forgetAll() async {
-        for entry in entries { await forget(id: entry.parcel.id) }
         let unread = keys.filter { linkID, _ in !entries.contains { $0.linkID == linkID } }
-        guard !unread.isEmpty else { return }
-        forgetting.merge(unread) { _, key in key }
-        for linkID in unread.keys { keys[linkID] = nil }
-        save()
-        if let client { await tellForgotten(client) }
+        if !unread.isEmpty {
+            forgetting.merge(unread) { _, key in key }
+            for linkID in unread.keys { keys[linkID] = nil }
+            save()
+        }
+        for entry in entries { await forget(id: entry.parcel.id) }
+        if !unread.isEmpty, let client { await tellForgotten(client) }
     }
 
     /// Follows the same number with another carrier, link, postcode or phone digits: a new lookup, which takes the old

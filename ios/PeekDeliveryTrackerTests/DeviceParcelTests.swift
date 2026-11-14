@@ -1347,6 +1347,37 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.forgetting, [:])
     }
 
+    /// Signed out, the poll can come round while Forget all turns a parcel's notifications off: it no longer reads
+    /// again the parcel whose saved copy was lost, so nothing is left, listed or with its key, after Forget all.
+    func testForgetAllLeavesNothingWhenARefreshComesRoundMeanwhile() async throws {
+        let storage = Memory()
+        var listed = DeviceParcel(linkID: "22222222222A", label: "Lamp", archivedAt: nil,
+                                  parcel: Parcel(shared: package(UUID())), checkedAt: Date())
+        listed.alertToken = "token-1"
+        storage.parcels = [listed]
+        storage.keys = ["22222222222A": key, "22222222222C": key]
+        let lost = PublicParcelResponse(link: link("22222222222C"), package: package(UUID()))
+        let calls = Calls()
+        let gate = AlertGate()
+        var gated = client(calls, read: { linkID in linkID == "22222222222C" ? lost : nil })
+        gated.removeAlert = { linkID, request in
+            calls.add("unalert \(linkID) \(request.token)")
+            await gate.pass(request.token)
+        }
+        let device = DeviceParcels(client: gated, storage: storage)
+
+        let forgetting = Task { await device.forgetAll() }
+        await gate.arrived("token-1")
+        try await device.refresh()
+        await gate.release("token-1")
+        await forgetting.value
+
+        XCTAssertEqual(device.list().map(\.id), [], "The lost parcel read again by the refresh is still listed")
+        XCTAssertEqual(storage.keys, [:], "A key stays on the iPhone after Forget all")
+        XCTAssertEqual(storage.forgetting, [:])
+        XCTAssertFalse(calls.all.contains("read 22222222222C k"), "The refresh read the lost parcel again")
+    }
+
     /// Signed out, Settings offers Forget all for parcels kept by their key alone, and its question counts them.
     func testSignedOutForgetAllCountsTheParcelsStillToBeReadAgain() async {
         let transport = PostcodeTestURLProtocol.transport()

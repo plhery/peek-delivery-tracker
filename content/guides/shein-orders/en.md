@@ -4,7 +4,7 @@ description: Where's my Shein order? Who delivers it in the UK, Europe, the US, 
 slug: shein-order-tracking
 picture: A soft mailer bag with a size tag, a van, and Pip trying on a scarf.
 published: 2026-10-17
-updated: 2026-11-05
+updated: 2026-11-14
 ---
 
 To see where your Shein order is, open My orders, pick the order and press **Track**: it shows each package's carrier, tracking number and latest status, and Shein also emails the number as each package ships. Paste that tracking number, not the order number, into [Peek](/) or the carrier's site. Most orders fly from China, clear customs and reach you with a local post or courier, so tracking goes quiet at each handover. Each Shein site (US, UK, Canada, Australia, and the European one for Ireland) sets its own delivery times.
@@ -24,7 +24,7 @@ Shein picks it, and you can't swap it: "The system assigns the carrier based on 
 | Italy | [Poste Italiane](carrier:poste-italiane), [GLS](carrier:gls-it), [BRT](carrier:brt), InPost, Paack |
 | Poland | InPost lockers (Paczkomat 24/7); for standard and economy delivery, look on the Track page |
 | Canada | [Canada Post](carrier:canada-post), [UniUni](carrier:uniuni), [FedEx](carrier:fedex), DHL, Neighbour Express |
-| Australia | [Australia Post](carrier:australia-post), [Aramex](carrier:aramex-au), iMile, HOMEXPRESS |
+| Australia | [Australia Post](carrier:australia-post), [Aramex](carrier:aramex-au), [iMile](carrier:imile), HOMEXPRESS |
 
 That 6-digit code, like a locker or pick-up code, is not a tracking number. More on who delivers parcels from China: [tracking a parcel from China](guide:tracking-from-china).
 
@@ -95,7 +95,7 @@ Customs rarely costs extra:
 - **Canada:** "all orders to Canada will be delivered duty paid (DDP)", says Shein.
 - **Australia:** a package over AUD 1,000 may owe a tariff, and you pay it.
 
-What the EU's €3 per item and the €2 handling fee due since 1 November 2026 mean for Ireland and the rest of the EU, and how to spot a fake fee text: [parcels held at customs](guide:customs).
+Since 1 July 2026, a parcel from outside the EU worth up to €150 pays €3 of customs duty per kind of product, and since 1 November 2026 the EU also charges a €2 handling fee per kind of product, whatever the value, owed by whoever declares the parcel to customs. What that means for Ireland and the rest of the EU, and how to spot a fake fee text: [parcels held at customs](guide:customs).
 
 ## Shein package not received or marked delivered: what to do
 
@@ -113,11 +113,15 @@ A parcel sent back to Shein is different: in the US, "Contact Agent" under the "
 
 ## Returning a Shein order
 
-A return travels under its own tracking number. Shein keeps the label under My Orders → Returns → Return & Refund Record → Details. Don't send it to the sender's address on the parcel you received: Shein says it isn't the return address. Which carrier takes the return in each country, and when the refund comes: [return tracking](guide:returns-tracking).
+A return travels under its own tracking number. Shein keeps the label under My Orders → Returns → Return & Refund Record → Details. Don't send it to the sender's address on the parcel you received: Shein says it isn't the return address. In the US and the UK, most items can go back within 30 days of delivery, and your first return from an order is free with one of Shein's return methods; each later return from the same order costs $6.99 in the US or £2.50 in the UK, taken off the refund. Which carrier takes the return in each country, and when the refund comes: [return tracking](guide:returns-tracking).
 
 ## Can I track a Shein parcel in Peek?
 
 Yes, with the carrier's number. Copy it from the shipping email or from Track and paste it into [Peek](/). Peek works out most carriers from the number alone. A shape several carriers share, such as 12 digits, may need you to press "Change" and pick the carrier the Track page names. When the first carrier names the partner taking over, Peek keeps the first carrier's history and follows the partner once its own tracking shows fresh progress.
+
+A Paack number on a Shein parcel can start with `C` or `E`, then a six-digit date (year, month, day) and 8 more digits, like the made-up `C26111412345678`. Another carrier shares that shape, and Peek asks Paack about it only with the delivery postcode, so it may say "Paack may have this parcel. Add the delivery postcode to track it." The postcode is optional; with it, Peek files the parcel with Paack.
+
+Peek checks up to every 2 minutes once a parcel is out for delivery with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you on delivery day only, so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US and Cainiao). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 Each package has its own number, so add each one. The Shein order number isn't a tracking number: paste one that starts `GSU`, `GSO` or `GSH` and has 12 more letters or digits into Peek, and it says "That looks like a Shein order number" and sends you back to Track for the carrier's number.
 
@@ -141,7 +145,7 @@ Peek shows what the carrier publishes. A refund request, On-Time Delivery points
 - [Shein US: Why was my package returned to sender?](https://us.shein.com/faq/detail?id=8938) – Contact Agent, reshipment or refund
 - [Shein US: Why are some items missing?](https://us.shein.com/faq/detail?id=10713) – separate packages, missing items
 - [Shein US: Are there any additional fees for customs?](https://us.shein.com/faq/detail?id=9283) – no fees at delivery
-- [Shein US: Return Policy](https://us.shein.com/Return-Policy-a-281.html) – not the sender's address
+- [Shein US: Return Policy](https://us.shein.com/Return-Policy-a-281.html) – not the sender's address, 30 days, first return free, $6.99 (read 14 November 2026)
 - [Shein US: On-Time Delivery Service Terms and Conditions](https://us.shein.com/on-time-delivery-terms-and-conditions-a-3491.html) – all delivery options, check the box at checkout
 - [Shein UK: Shipping info](https://www.shein.co.uk/Shipping-Info-a-280.html) – times, EU/UK Warehouse, customs, 45/30 days, On-Time Delivery
 - [Shein UK: Delivered but not received](https://www.shein.co.uk/faq/detail?id=1952) – Evri, InPost, Royal Mail, contact the carrier
@@ -150,7 +154,7 @@ Peek shows what the carrier publishes. A refund request, On-Time Delivery points
 - [Shein UK: What does "Arrived at Airport, Ready for Departure" mean?](https://www.shein.co.uk/faq/detail?id=167015) – UK status wording
 - [Shein UK: What is "On-Time Delivery Guarantee"?](https://www.shein.co.uk/faq/detail?id=138085) – Express options, select at checkout
 - [Shein UK: On-Time Delivery Service Terms and Conditions](https://www.shein.co.uk/on-time-delivery-terms-and-conditions-a-3491.html) – all delivery options, check the box at checkout
-- [Shein UK: Return Policy](https://www.shein.co.uk/Return-Policy-a-281.html) – return label path, not the sender's address
+- [Shein UK: Return Policy](https://www.shein.co.uk/Return-Policy-a-281.html) – return label path, not the sender's address, 30 days, first return free, £2.50 for later returns (read 14 November 2026)
 - [Shein Europe: Shipping info](https://eur.shein.com/Shipping-Info-a-280.html) – Ireland: times, processing, 45/30 days
 - [Shein Europe: What is my tracking number?](https://eur.shein.com/faq/detail?id=154840) – the shipping email
 - [Shein Europe: Why does the tracking number not work?](https://eur.shein.com/faq/detail?id=154845) – local carrier picks it up on arrival
@@ -173,5 +177,6 @@ Peek shows what the carrier publishes. A refund request, On-Time Delivery points
 - [Shein Australia: How to contact shipping courier company?](https://au.shein.com/faq/detail?id=13627) – iMile, Australia Post, Aramex, HOMEXPRESS
 - [Shein Australia: Why there is no tracking updated?](https://au.shein.com/faq/detail?id=12237) – quiet days, Urge Delivery
 - [Shein Australia: Delivered but not received](https://au.shein.com/faq/detail?id=12147) – Parcel Delivered, Not Received
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – YunExpress number shape, what Peek checks
+- [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €3 from 1 July 2026 and €2 from 1 November 2026 per kind of product, the declarant pays
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – YunExpress and Paack number shapes, what Peek checks
 :::

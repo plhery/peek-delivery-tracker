@@ -97,7 +97,7 @@ Ein Spediteur aus Shanghai, der Pakete von Verkäufern in China ins Ausland brin
 
 ### Wo kann ich ein Juxi-Express-Paket verfolgen?
 
-Oben im Feld, denn eine eigene Sendungsverfolgung hat Juxi nicht mehr. Eine JXC-Nummer erkennt Peek als Juxi-Nummer; nur bei YI oder ZO nach JXC fragt Peek zuerst DHLink, dessen Sendungsverfolgung manche dieser Nummern kennt. Willst du ein solches Paket als Juxi-Paket verfolgen, tipp beim Hinzufügen auf „Ändern“ und wähl Juxi Express. Für seine Kleinpaketlinie nach Großbritannien und Deutschland verweist Juxi auf den Tracking-Dienst 17TRACK, der Juxi unter SHJX führt. 17TRACK zeigt nur die Sendungsverfolgung an: Lieferdaten ändern, Geld erstatten oder Ansprüche anerkennen kann es nach eigenen Angaben nicht. Übernimmt DHL oder die Post deines Landes, kannst du das Paket auch dort mit deren Nummer verfolgen.
+Oben im Feld, denn eine eigene Sendungsverfolgung hat Juxi nicht mehr. Eine JXC-Nummer erkennt Peek als Juxi-Nummer; nur bei YI oder ZO nach JXC fragt Peek zuerst DHLink, dessen Sendungsverfolgung manche dieser Nummern kennt. Willst du ein solches Paket als Juxi-Paket verfolgen, tipp beim Hinzufügen auf „Ändern“ und wähl Juxi Express. Für seine Kleinpaketlinie nach Großbritannien und Deutschland verweist Juxi auf den Tracking-Dienst 17TRACK, der Juxi unter SHJX führt. Übernimmt DHL oder die Post deines Landes, kannst du das Paket auch dort mit deren Nummer verfolgen.
 
 ### Wer stellt Juxi-Express-Pakete in Deutschland, Österreich und der Schweiz zu?
 
@@ -123,6 +123,5 @@ Das hängt von der Linie ab. Auf Juxis DDP-Linien kassiert Juxi die Mehrwertsteu
 - [Europäische Kommission: EU customs reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenkategorie bis 150 € seit 1. Juli 2026, 2 € Union handling fee seit 1. November 2026
 - [Europäische Kommission: Customs Guidance on EUR 3 customs duty (Englisch)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – je Warenkategorie, befristeter Zoll, Bearbeitungsgebühr unabhängig vom Wert
 - [BAZG: Interneteinkauf, Post- und Kuriersendungen: Allgemeine Informationen zur Einfuhr in die Schweiz](https://www.bazg.admin.ch/de/interneteinkauf-postsendungen-informationen-einfuhr) – Zoll und Mehrwertsteuer grundsätzlich fällig, Kosten in der Regel beim Empfänger, beim Transporteur nachfragen
-- [17TRACK: SHJX Tracking (Englisch)](https://www.17track.net/en/carriers/shjx) – Juxi als SHJX gelistet, Rolle von 17TRACK
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC-Nummernform, DHLink bei JXCYI- und JXCZO-Nummern zuerst gefragt, SHJX und 驹隙 als Namen von Juxi, keine Juxi-Sendungsverfolgung mehr, wie Peek Juxi-Pakete über Tracking-Dienste verfolgt und an den Zusteller übergibt
 :::

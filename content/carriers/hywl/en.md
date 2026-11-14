@@ -3,7 +3,7 @@ title: HYWL tracking: Huiyi Logistics TRK numbers and scans
 description: Track an HYWL (Huiyi Logistics, 汇一物流) parcel from China: what its TRK numbers look like, what its English and Chinese scans mean and who to ask.
 slug: hywl-tracking
 published: 2026-10-31
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) is 深圳市汇一物流有限公司, a logistics company in Shenzhen, China, that ships parcels abroad for online sellers. If a shop sent your order with HYWL, your number is TRK and twelve more characters, or four letters, two digits, D, four digits and four letters: paste it in the box above. HYWL's own tracker is on its website, in Chinese, and its steps come in English, Chinese or both. HYWL doesn't name the company that delivers in your country.
@@ -95,7 +95,7 @@ The seller booked the parcel with HYWL and is the one to ask about your order, a
 
 If you add a TRK number without picking a carrier and HYWL doesn't list it yet, Peek shows "Probably Huiyi Logistics" and "Waiting for Huiyi Logistics’s first scan", and keeps asking. After a week, it asks you to check the number or choose another carrier.
 
-Peek shows the status, each step with its place, and the destination country when HYWL's record gives it. It reads steps in China on Beijing time, works out the others' clock from their place or from the leg the parcel was on, and shows every time in your device's time zone, newest first. It leaves out postcodes and the origin country. HYWL gives no expected delivery date, weight, delivering company or its number, sender or recipient name, or proof of delivery, so Peek shows none of them.
+Peek shows the status, each step with its place, and the destination country when HYWL's record gives it. It reads steps in China on Beijing time, works out the others' clock from their place or from the leg the parcel was on, and shows every time in your device's time zone, newest first; on peektracker.com, the history ends with "Times are in your time zone:" and its name. It leaves out postcodes and the origin country. HYWL gives no expected delivery date, weight, delivering company or its number, sender or recipient name, or proof of delivery, so Peek shows none of them.
 
 When HYWL's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words. Their copies can show steps dated ahead, but a step dated more than an hour after Peek's check never becomes the parcel's status. So check each step's time.
 

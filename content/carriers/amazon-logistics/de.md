@@ -3,7 +3,7 @@ title: Amazon Logistics Tracking: Paket verfolgen und Hilfe
 description: Amazon-Logistics-Paket verfolgen: Meine Bestellungen und Live-Karte, TBA- und DE-Nummern, Locker, Kundenservice und wer in Österreich und der Schweiz liefert.
 slug: amazon-logistics-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Amazon Logistics ist Amazons eigener Lieferdienst für die letzte Meile: Lieferpartner bringen Amazon-Bestellungen im Auftrag von Amazon vom Verteilzentrum bis zu deiner Haustür. Nicht jedes Paket kommt so, denn Amazon arbeitet daneben mit Paketdiensten wie [DHL](carrier:dhl), [DPD](carrier:dpd-de) oder [Hermes](carrier:hermes-de). Dein Paket verfolgst du in deinem Amazon-Konto unter „Meine Bestellungen“ mit „Lieferung verfolgen“.
@@ -22,6 +22,7 @@ Diese Formen erkennt Peek als Amazon Logistics (Ziffern erfunden):
 | `TBA000000000000` | `TBA` und 12 Ziffern. |
 | `TBC000000000000` | `TBC` und 12 Ziffern. |
 | `TBM000000000000` | `TBM` und 12 Ziffern. |
+| `TBAU000000000` | `TBAU` und 9 Ziffern: eine Nummer von Amazon in Australien. |
 
 Auch klein geschrieben, mit Leerzeichen oder mit Bindestrichen wird die Nummer erkannt.
 
@@ -59,7 +60,7 @@ Für Fragen zu deiner Lieferung ist der Amazon-Kundenservice da. Für Chat und R
 
 [Peek](/) kann ein Amazon-Logistics-Paket weder verfolgen noch speichern: Status, Verlauf und Zustellungsfoto zeigt Amazon nur in deinem Konto. Fügst du eine der Nummern oben oder einen track.amazon-Link ein, prüft Peek zuerst Amazons öffentliche Sendungsverfolgung von Amazon Shipping. Antwortet Amazon dort, ist es ein Paket von [Amazon Shipping](carrier:amazon-shipping) oder eine Bestellung aus einem anderen Onlineshop, die Amazon für den Händler verschickt, und Peek verfolgt es: „Amazon Shipping bietet eine öffentliche Sendungsverfolgung an. Peek hält diese Lieferung für dich aktuell.“ Stellt Amazon den Verlauf nicht mehr bereit, kannst du das Paket als Referenz behalten.
 
-Sonst schreibt Peek „Lieferungen von Amazon Logistics lassen sich meist unter „Meine Bestellungen“ bei Amazon verfolgen.“ und bietet „Meine Amazon-Bestellungen öffnen“ an. Der Knopf öffnet die Bestellübersicht der Amazon-Seite, auf die das Kürzel zeigt: amazon.de für `DE`, `AT` und `CH`, amazon.com für `TBA`. Klappt die Prüfung gerade nicht, tippst du auf „Erneut prüfen“. Eine Bestellnummer erkennt Peek: „Das sieht nach einer Amazon-Bestellnummer aus“.
+Sonst schreibt Peek „Lieferungen von Amazon Logistics lassen sich meist unter „Meine Bestellungen“ bei Amazon verfolgen.“ und bietet „Meine Amazon-Bestellungen öffnen“ an. Der Knopf öffnet die Bestellübersicht der Amazon-Seite, auf die das Kürzel zeigt: amazon.de für `DE`, `AT` und `CH`, amazon.com für `TBA`, amazon.com.au für `TBAU`. Klappt die Prüfung gerade nicht, tippst du auf „Erneut prüfen“. Eine Bestellnummer erkennt Peek: „Das sieht nach einer Amazon-Bestellnummer aus“.
 
 ## Fragen zu Amazon Logistics
 

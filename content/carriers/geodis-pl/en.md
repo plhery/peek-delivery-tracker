@@ -3,7 +3,7 @@ title: GEODIS Poland tracking: shipment number, statuses, delivery
 description: Track a GEODIS Poland (formerly Pekaes) shipment: what its number looks like, what each status means, delivery, terminal pickup, claims and who to call.
 slug: geodis-poland-tracking
 published: 2026-10-30
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 GEODIS Poland is the Polish pallet and parcel network of GEODIS, the French transport group owned by SNCF. GEODIS bought PEKAES in 2021, and the network is now run by GEODIS Road Network, based in Błonie. What to do depends on what the sender gave you:
@@ -21,7 +21,7 @@ GEODIS works for businesses only, so the number is with whoever sent you somethi
 | `PL0000000000000000` | PL and 16 digits: a GEODIS Poland shipment number, the one its tracker calls "Shipment No.". |
 | `1G0000000000` | 1G and 10 capital letters or digits: a number from [GEODIS](carrier:geodis) in France, tracked on GEODIS's French recipient space, not on Strefa Klienta. |
 
-If the tracker answers `Shipment with such number does not exist`, it doesn't know the number: contact the shop or sender, as GEODIS advises when a number doesn't work. A reply in Polish, `Proszę wprowadzić właściwy numer przesyłki.`, asks for a valid shipment number: look for a typo.
+On Strefa Klienta, type the number in the "Enter Shipment No." field and press "Search". If the tracker answers `Shipment with such number does not exist`, it doesn't know the number: contact the shop or sender, as GEODIS advises when a number doesn't work. A reply in Polish, `Proszę wprowadzić właściwy numer przesyłki.`, asks for a valid shipment number: look for a typo.
 
 ## What GEODIS Poland's tracking statuses mean
 
@@ -69,7 +69,7 @@ GEODIS's general terms, in force since 4 November 2024, set how deliveries work.
 
 ## GEODIS Poland contact and customer service
 
-GEODIS's channels in Poland, as read on 30 October 2026:
+GEODIS's channels in Poland, as read on 14 November 2026:
 
 - **Customer service (Dział Obsługi Klienta):** +48 22 460 26 26, as listed on Strefa Klienta's Polish page. No opening hours are given.
 - **Claims by post:** Dział Reklamacji, ul. Spedycyjna 1, 05-870 Błonie. The claim and damage report forms are on Strefa Klienta.
@@ -78,9 +78,9 @@ GEODIS's channels in Poland, as read on 30 October 2026:
 
 ## Tracking a GEODIS Poland parcel with Peek
 
-PL and 16 digits isn't a shape GEODIS owns (PL stands for Poland), so Peek can't tell GEODIS Poland by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. It asks GEODIS Poland whether it knows the number and shows "GEODIS Poland has this parcel." when it does. If GEODIS doesn't list it yet, the parcel reads "Probably GEODIS Poland" and "Waiting for GEODIS Poland’s first scan" while Peek keeps asking. To set the carrier yourself, press "Change" on the carrier line and pick "GEODIS Poland" under "Fits this number", or search for it; typing Pekaes finds it too. "GEODIS" alone is GEODIS France. On a parcel you've already added, use "Change carrier". A link to Strefa Klienta that holds the number needs none of this: Peek takes it as GEODIS Poland's.
+PL and 16 digits isn't a shape GEODIS owns (PL stands for Poland), so Peek can't tell GEODIS Poland by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. It asks GEODIS Poland whether it knows the number and shows "GEODIS Poland has this parcel." when it does. If GEODIS doesn't list it yet, the parcel reads "Probably GEODIS Poland" and "Waiting for GEODIS Poland’s first scan" while Peek keeps asking; if GEODIS still doesn't list it after a week, Peek suggests checking the number with the sender or choosing another carrier. To set the carrier yourself, press "Change" on the carrier line and pick "GEODIS Poland" under "Fits this number", or search for it; typing Pekaes finds it too. "GEODIS" alone is GEODIS France. On a parcel you've already added, use "Change carrier". A link to Strefa Klienta that holds the number needs none of this: Peek takes it as GEODIS Poland's.
 
-Peek reads Strefa Klienta in English and shows the status, each scan in GEODIS's English wording with the terminal's place, the delivery time and the destination country. Scans at Polish terminals are read on Warsaw time; a terminal abroad keeps its own clock. When a `Pseudoscan` row cancels earlier scans, Peek drops them too, and `Claim Received` leaves the status as it was. GEODIS's tracker gives no expected delivery date, weight, service name, recipient name or proof of delivery. Peek leaves out the delivery postcode and address, the item count, the terminals' codes and the remarks, which can name who signed.
+Peek reads Strefa Klienta in English and shows the status, each scan in GEODIS's English wording with the terminal's place, the delivery time and the destination country. Scans at Polish terminals are read on Warsaw time; a terminal abroad keeps its own clock. Peek shows each in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. When a `Pseudoscan` row cancels earlier scans, Peek drops them too, and `Claim Received` leaves the status as it was. GEODIS's tracker gives no expected delivery date, weight, service name, recipient name or proof of delivery. Peek leaves out the delivery postcode and address, the item count, the terminals' codes and the remarks, which can name who signed.
 
 Peek checks every 10 minutes, and every 2 from 6 a.m. local time on the day GEODIS scans the shipment out for delivery, while GEODIS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or the delivery day only. It can't set a delivery date, arrange a pickup or file a claim: call GEODIS or ask the shop.
 
@@ -103,7 +103,7 @@ Only a pallet shipment, and only if the client ordered carry-in: up to 300 kg, n
 GEODIS quotes 24 to 48 hours within Poland as standard, or next day before noon by express. Its terms give parcels up to 30 kg 48 hours from pickup, not counting weekends and public holidays, and pallets 2 working days, both "as a rule".
 
 :::sources
-- [GEODIS Poland: Strefa Klienta, shipment tracking](https://strefaklienta.pekaes.geodis.pl/en/) – not-found reply, claim and damage report forms
+- [GEODIS Poland: Strefa Klienta, shipment tracking](https://strefaklienta.pekaes.geodis.pl/en/) – search field and button (read 14 November 2026), not-found reply, claim and damage report forms
 - [GEODIS Poland: Strefa Klienta, Śledzenie przesyłek](https://strefaklienta.pekaes.geodis.pl/pl/) – customer service number, general terms
 - [GEODIS Road Network: Ogólny Regulamin Świadczenia Usług, from 4 November 2024](https://strefaklienta.pekaes.geodis.pl/pl/?file=files/pekaes/Dla%20Klienta%20-%20nowe%20www/GEODIS_SK/GEODIS%20RN_Ogolny%20Regulamin%20Swiadczenia%20Uslug_od%2004.11.2024.pdf) – the client, attempts, pallets to private addresses, notice, unloading, carry-in, terminal pickup, cash on delivery, signing, delivery times, claims
 - [GEODIS Road Network: Formularz zgłoszenia reklamacji](https://strefaklienta.pekaes.geodis.pl/pl/?file=files/pekaes/Dla%20Klienta%20-%20nowe%20www/GEODIS_SK/GRN%20Formularz%20zgloszenia%20reklamacji.pdf) – claims address, damage report isn't a claim

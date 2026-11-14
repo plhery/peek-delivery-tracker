@@ -107,7 +107,7 @@ Un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en 
 
 ### Où suivre un colis Juxi Express ?
 
-Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Peek reconnaît un numéro JXC comme celui de Juxi, sauf s'il porte YI ou ZO après JXC : pour ceux-là, Peek interroge d'abord DHLink, dont le suivi en connaît certains ; pour suivre un tel colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. 17TRACK ne fait qu'afficher le suivi : il dit ne pouvoir ni modifier une livraison, ni rembourser, ni accepter une réclamation. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
+Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Peek reconnaît un numéro JXC comme celui de Juxi, sauf s'il porte YI ou ZO après JXC : pour ceux-là, Peek interroge d'abord DHLink, dont le suivi en connaît certains ; pour suivre un tel colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
 
 ### Qui livre les colis Juxi Express en Belgique et en France ?
 
@@ -133,6 +133,5 @@ Un transporteur de ton pays, mais Juxi ne dit pas lequel. Pour ses produits post
 - [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – TVA dès le premier euro, seuil de 22 € supprimé le 1er juillet 2021, taux normal de 20 %, IOSS, frais de dossier du transporteur
 - [Douane : IMPORT-EXPORT : quels changements sont à attendre dans les prochaines semaines ?](https://www.douane.gouv.fr/actualites/import-export-quels-changements-sont-attendre-dans-les-prochaines-semaines) – taxe « petits colis » remplacée par le droit forfaitaire de 3 € le 1er juillet 2026
 - [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de traitement de 2 € par article depuis le 1er novembre 2026
-- [17TRACK : Suivi SHJX](https://www.17track.net/fr/carriers/shjx) – Juxi listé sous SHJX, rôle de 17TRACK
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, DHLink interrogé en premier pour les numéros JXCYI et JXCZO, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, SHJX, le nom de Juxi chez 17TRACK, DHLink interrogé en premier pour les numéros JXCYI et JXCZO, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
 :::

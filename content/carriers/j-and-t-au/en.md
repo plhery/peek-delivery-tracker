@@ -3,7 +3,7 @@ title: J&T Express Australia tracking: JTAU numbers and statuses
 description: Track a J&T Express Australia parcel: what a JTAU number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-australia-tracking
 published: 2026-10-21
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 J&T Express Australia (J&T Express Australia Pty Ltd, Villawood NSW) is the Australian arm of J&T Express, the parcel group behind J&T in South-East Asia and China. It delivers parcels in Australia for e-commerce platforms, brands and retailers, including orders from overseas once they've cleared customs. If a shop sent your order with J&T, the tracking number starts with `JTAU`: paste it in the box above, or look it up on [J&T's own tracker](https://www.jtexpress.au/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -15,7 +15,7 @@ J&T calls it the tracking number or waybill number. An Australian J&T waybill is
 | Number (invented) | What it is |
 | --- | --- |
 | `JTAU000000000000` | `JTAU` and 12 digits: a J&T Express Australia parcel. Peek names J&T Express Australia at once. |
-| `JTAU00000000000` | One digit short. Not J&T Express Australia's shape, and Peek recognises no carrier: check for a missing digit. |
+| `JTAU00000000000` | One digit short. Not J&T Express Australia's shape, and Peek recognises no carrier: check for a missing digit. If no carrier answers for it, peektracker.com says "This starts like a J&T Express Australia tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." |
 | `JTUK000000000000` | `JTUK` and 12 digits: [J&T Express UK](carrier:j-and-t-uk), not the Australian network. |
 | `JTDE000000000000` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de). |
 | `JTE000000000000` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east), in Saudi Arabia, the UAE and Kuwait. |
@@ -96,9 +96,9 @@ J&T can text you a proof-of-delivery link after a delivery, so a text about a J&
 
 ## Tracking J&T Express Australia parcels with Peek
 
-[Peek](/) names J&T Express Australia at once from a `JTAU` number ("Detected carrier"), typed with or without spaces, in capitals or not, and asks J&T's own tracker with the number alone: no postcode or account. A www.jtexpress.au/tracking link with `?q=` and the number works too; with another kind of number in it, Peek reads that number as if you had pasted it alone. If what you have isn't a `JTAU` number, paste it all the same: Peek follows more than 3,500 carriers. For a `JT` number with 13 digits, Peek shows "Checking tracking services…" while it checks the number. Picking J&T Express Australia with "Change" for another shape doesn't help: Peek says it "doesn’t issue numbers like this one".
+[Peek](/) names J&T Express Australia at once from a `JTAU` number ("Detected carrier"), typed with or without spaces, in capitals or not, and asks J&T's own tracker with the number alone: no postcode or account. A www.jtexpress.au/tracking link with `?q=` and the number works too; with another kind of number in it, Peek reads that number as if you had pasted it alone. If what you have isn't a `JTAU` number, paste it all the same: Peek follows more than 3,500 carriers. A `JT` number with 13 digits fits J&T's networks in South-East Asia and in China: Peek asks J&T Express, and tracking services if J&T Express doesn't know it ("Checking tracking services…"). Picking J&T Express Australia with "Change" for another shape doesn't help: Peek says it "doesn’t issue numbers like this one".
 
-Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. Peek doesn't show J&T's proof of delivery either: open the link in J&T's text for the photo. J&T's tracker can also show office contact details; Peek leaves them out. On a very long history it keeps the newest 100 scans. "Open the J&T Express Australia website", on the parcel's page, opens your number on J&T's tracker.
+Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. Peek doesn't show J&T's proof of delivery either: open the link in J&T's text for the photo. J&T's tracker can also show office contact details; Peek leaves them out. On a very long history it keeps the newest 100 scans. "Open the J&T Express Australia website", on the parcel's page, opens your number on J&T's tracker.
 
 Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 

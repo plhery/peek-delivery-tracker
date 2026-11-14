@@ -73,7 +73,7 @@ Superata la prima data stimata, la consegna di solito è ancora regolare fino al
 
 La Garanzia di consegna puntuale ti dà 200 Punti SHEIN se l'ordine non arriva entro la data indicata, salvo ritardi che non dipendono da Shein. È gratuita, e secondo la pagina di aiuto di Shein Italia vale per la Spedizione Express, anche con la spedizione gratuita: la scegli al momento dell'acquisto selezionando "Garanzia di consegna puntuale".
 
-Sulla dogana, Shein dice che di solito non paghi niente, ma che le autorità possono chiedere al destinatario un importo per sdoganare il pacco, e che quello resta a tuo carico. Se non vuoi pagarlo, puoi rifiutare il pacco: Shein ti rimborsa l'ordine quando il pacco le torna indietro. Dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per articolo. Importi, eccezioni e SMS falsi che chiedono di pagare: [pacco fermo in dogana](guide:customs).
+Sulla dogana, Shein dice che di solito non paghi niente, ma che le autorità possono chiedere al destinatario un importo per sdoganare il pacco, e che quello resta a tuo carico. Se non vuoi pagarlo, puoi rifiutare il pacco: Shein ti rimborsa l'ordine quando il pacco le torna indietro. Dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per tipo di prodotto anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per tipo di prodotto. Importi, eccezioni e SMS falsi che chiedono di pagare: [pacco fermo in dogana](guide:customs).
 
 ## Pacco Shein non arrivato o segnato come consegnato: cosa fare
 
@@ -138,6 +138,6 @@ Peek vede quello che pubblicano i corrieri. Le segnalazioni, i punti della garan
 - [Shein Italia: Qual è il metodo di reso? Devo pagare per la spedizione del reso?](https://it.shein.com/faq/detail?id=49017) – BRT, InPost con PIN o QR, Poste Italiane, non all'indirizzo sul pacco
 - [Shein Italia: Politica di reso](https://it.shein.com/Return-Policy-a-281.html) – percorso dell'etichetta di reso
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
-- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per articolo, 2 € per articolo
+- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € e 2 € per tipo di prodotto
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forma dei codici di Poste Italiane, corrieri che Peek riconosce
 :::

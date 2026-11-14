@@ -16,7 +16,7 @@ Allegro shows the carrier, the parcel number and the status in:
 - **"Moje zakupy"** (My purchases), under the purchase's details.
 - **The email** you get once the seller adds the number.
 
-Peek's catalog knows these shapes (characters invented):
+Peek can track these shapes with Allegro One (characters invented):
 
 | Shape | Whose it is |
 | --- | --- |

@@ -57,7 +57,7 @@ UniUni livre seulement à une adresse physique, jamais à un bureau de poste ni 
 
 **Code d'entrée, numéro d'appartement, téléphone.** Envoie-les par le chatbot de la page de soutien. Si le colis est déjà en cours de livraison, l'information risque de ne pas joindre le livreur à temps.
 
-**NIP de livraison.** Au Canada, l'expéditeur peut exiger que tu donnes un NIP au livreur. Tu le reçois par courriel, et aussi par texto s'il a fourni ton numéro de cellulaire. Le livreur ne le connaît pas : tu le lui dis de vive voix, et il peut te le renvoyer aux mêmes coordonnées si tu ne l'as plus. Sans NIP valide, la livraison échoue et le colis repart lors d'une prochaine tournée ; il n'est jamais laissé sans surveillance.
+**NIP de livraison.** Au Canada, l'expéditeur peut exiger que tu donnes un NIP au livreur. Tu le reçois par courriel, et parfois aussi par texto s'il a fourni ton numéro de cellulaire. Le livreur ne le connaît pas : tu le lui dis de vive voix, et il peut te le renvoyer aux mêmes coordonnées si tu ne l'as plus. Sans NIP valide, la livraison échoue et le colis repart lors d'une prochaine tournée ; il n'est jamais laissé sans surveillance.
 
 **Preuve de livraison.** UniUni joint des photos à chaque livraison. Pour les voir, suis ton colis sur uniuni.com, choisis « Voir la confirmation de livraison » et entre le code postal de livraison. Photos floues ? Ouvre une demande au soutien en le précisant.
 
@@ -131,7 +131,7 @@ Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date es
 - [UniUni : Services](https://www.uniuni.com/fr/services-fr/) – livraison le lendemain, photos de preuve, textos et courriels
 - [UniUni : En savoir plus](https://www.uniuni.com/fr/en-savoir-plus/) – fondée à Vancouver en 2019
 - [UniUni : Termes et conditions](https://www.uniuni.com/fr/termes-et-conditions/) – Uni Express inc., Richmond (C.-B.)
-- [UniUni : script de la page de suivi](https://www.uniuni.com/_next/static/chunks/0z-~y0mss68d2.js) – étapes en français, confirmation de livraison, numéro à appeler
+- [UniUni : script de la page de suivi](https://www.uniuni.com/_next/static/chunks/0cw7bc4-7e3jd.js) – étapes du résultat, adresse incomplète ou non livrable, livré, transféré, retourné ou exception, confirmation de livraison, numéro à appeler
 - [UniUni : Customer Support (en anglais)](https://www.uniuni.com/support/) – chatbot : nouvelle livraison, adresse et consignes, dommages, commentaires sur un livreur ; retours au marchand
 - [UniUni Platform : Vérification de livraison](https://help.ship.uniuni.com/fr/shipments/canada/delivery-verification) – NIP au Canada
 - [UniUni Platform : Déposer une réclamation](https://help.ship.uniuni.com/fr/services/add-on/deposer-une-reclamation) – réclamations des expéditeurs

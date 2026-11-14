@@ -3,7 +3,7 @@ title: Amazon Logistics rastreio: onde seguir e o que fazer
 description: Rastreio de uma encomenda Amazon Logistics em «Os meus pedidos» da Amazon.es: que número é, o que fazer se não chegar e como falar com a Amazon em português.
 slug: amazon-logistics-rastreio
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 A Amazon Logistics (também chamada AMZL) é a rede de entregas da própria Amazon. Não tem uma página de rastreio pública. Em Portugal compras na Amazon.es, e é aí que segues a encomenda: em «Os meus pedidos».
@@ -20,6 +20,7 @@ Estas são as formas que o Peek reconhece como Amazon Logistics (todos os númer
 | `TBA000000000000` | `TBA` e 12 algarismos. |
 | `TBC000000000000` | `TBC` e 12 algarismos. |
 | `TBM000000000000` | `TBM` e 12 algarismos. |
+| `TBAU000000000` | `TBAU` e 9 algarismos: um número da Amazon na Austrália. |
 
 Dois números que se confundem facilmente. Um número de pedido como `000-0000000-0000000` identifica a compra, não a entrega. E duas letras que não são um código de país europeu seguidas de 10 algarismos, como `US0000000000`, não têm a forma da Amazon Logistics. Não encontras número nenhum? Vê [onde encontrar o número de seguimento da encomenda](guide:find-tracking-number).
 
@@ -45,7 +46,7 @@ Recebeste um SMS ou um e-mail sobre uma entrega que não esperavas? Antes de car
 
 O [Peek](/) não consegue seguir nem guardar uma encomenda da Amazon Logistics: a Amazon só mostra o estado, o histórico e a fotografia dentro da tua conta. Se colares um destes números ou um link do track.amazon, o Peek consulta primeiro o seguimento público da Amazon Shipping. Se a Amazon responder, a encomenda é da Amazon Shipping ou de uma venda feita fora da Amazon que a Amazon envia em nome do vendedor, e o Peek segue-a: «A Amazon Shipping disponibiliza seguimento público para esta encomenda. O Peek mantém esta entrega atualizada.» Se a Amazon já não disponibilizar o histórico, o Peek diz-te isso e podes guardá-la como referência.
 
-Caso contrário, o Peek diz «As entregas da Amazon Logistics são geralmente acompanhadas na página «Os meus pedidos» da Amazon.» e mostra o botão «Abrir os meus pedidos Amazon», que abre o histórico de pedidos do site que o número indica: a Amazon.es para `PT` e `ES`, a Amazon.com para `TBA`. Se a consulta falhar, toca em «Tentar novamente». Com um número de pedido, vês «Parece um número de pedido da Amazon».
+Caso contrário, o Peek diz «As entregas da Amazon Logistics são geralmente acompanhadas na página «Os meus pedidos» da Amazon.» e mostra o botão «Abrir os meus pedidos Amazon», que abre o histórico de pedidos do site que o número indica: a Amazon.es para `PT` e `ES`, a Amazon.com para `TBA`, a Amazon.com.au para `TBAU`. Se a consulta falhar, toca em «Tentar novamente». Com um número de pedido, vês «Parece um número de pedido da Amazon».
 
 ## Perguntas sobre a Amazon Logistics
 

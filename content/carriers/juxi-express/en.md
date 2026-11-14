@@ -3,7 +3,7 @@ title: Juxi Express tracking: JXC numbers, delivery and help
 description: Track a Juxi Express (SHJX) parcel from China: what the JXC waybill looks like, why Juxi has no tracker, who delivers it and who to ask when it stalls.
 slug: juxi-express-tracking
 published: 2026-10-21
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) is a Shanghai forwarder that ships parcels abroad for online sellers in China, on its own lines and through the post. It has no tracking page of its own: paste the number in the box above, or look it up on a tracking service such as 17TRACK, which lists Juxi as SHJX. The seller who booked Juxi has the number and gives it with your order's shipping details.
@@ -82,7 +82,7 @@ Juxi has no tracking page left for Peek to read: the tracking button on its home
 
 If a tracking service names the carrier that took the parcel over, with that carrier's own number, Peek shows "Delivery with" and that carrier's name, with its number. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. Where Peek can read that carrier's own tracking, it asks there too, and once a scan there is at least as new as the newest in the history, it follows the parcel there and keeps the earlier scans.
 
-While Peek follows the parcel through tracking services, it checks every 15 minutes, out for delivery too. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
+While Peek follows the parcel through tracking services, it checks every 15 minutes, out for delivery too. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
 
 ## Questions about Juxi Express tracking
 
@@ -92,7 +92,7 @@ A Shanghai forwarder, Shanghai Juxi International Freight Forwarding Co., Ltd., 
 
 ### Where can I track a Juxi Express parcel?
 
-In the box above, since Juxi has no tracker of its own any more. Peek takes a JXC number as Juxi's, except one with YI or ZO after JXC: it asks DHLink first about those, since DHLink's tracker knows some of them; to follow such a parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. 17TRACK only shows tracking: it says it can't change a delivery, refund you or approve a claim. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
+In the box above, since Juxi has no tracker of its own any more. Peek takes a JXC number as Juxi's, except one with YI or ZO after JXC: it asks DHLink first about those, since DHLink's tracker knows some of them; to follow such a parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
 
 ### Who delivers Juxi Express parcels?
 
@@ -119,6 +119,5 @@ It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line,
 - [GOV.UK: Tax and customs for goods sent from abroad: Tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill from Royal Mail or the courier, parcel held about 3 weeks, then returned
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 customs duty per item up to €150 from 1 July 2026, €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee per item like the €3, at any value, collected by customs from the declarant, which can charge it to the buyer at sale
-- [17TRACK: SHJX Tracking](https://www.17track.net/en/carriers/shjx) – Juxi listed as SHJX, 17TRACK's role
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, DHLink asked first for JXCYI and JXCZO numbers, DHLink's tracker answering some JXC numbers on a US line, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, SHJX as 17TRACK lists Juxi, DHLink asked first for JXCYI and JXCZO numbers, DHLink's tracker answering some JXC numbers on a US line, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
 :::

@@ -3,7 +3,7 @@ title: Amazon Logistics tracking: gdzie śledzić paczkę Amazon
 description: Paczka Amazon Logistics: gdzie ją śledzić na Amazon.pl, jakie numery rozpoznaje Peek, co zrobić, gdy nie dotarła, i jak bezpiecznie skontaktować się z Amazonem.
 slug: amazon-logistics-sledzenie-przesylki
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Amazon Logistics (AMZL) to własna sieć dostaw Amazona: w stacjach dostawczych paczki są sortowane według tras, a ostatni etap dostawy przejmują partnerzy Amazona. Publicznej strony śledzenia nie ma. Paczkę z Amazon.pl śledzisz na swoim koncie, na stronie zamówień: w serwisie Amazon.pl albo w aplikacji Amazon.
@@ -17,6 +17,7 @@ Takie kształty numerów Peek rozpoznaje jako Amazon Logistics:
 | `TBA000000000000` | `TBA` i 12 cyfr (również `TBC` lub `TBM`). |
 | `PL0000000000` | Kod kraju europejskiego i 10 cyfr, tu `PL`. |
 | `DE0000000000` | To samo z `DE`; są też `UK`, `GB`, `AT`, `FR` i inne. |
+| `TBAU000000000` | `TBAU` i 9 cyfr: numer Amazona z Australii. |
 
 Uwaga na podobne numery: numer zamówienia w rodzaju `000-0000000-0000000` nie jest numerem śledzenia, a inne dwie litery z 10 cyframi, np. `US0000000000`, to nie kształt Amazon Logistics. Nie masz numeru? Zobacz, [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
@@ -48,7 +49,7 @@ W sprawie paczki kontaktujesz się z obsługą klienta Amazona, a przy zakupie o
 
 [Peek](/) nie śledzi i nie zapisuje paczek Amazon Logistics: Amazon pokazuje ich status i historię tylko na Twoim koncie. Gdy wkleisz taki numer albo link z track.amazon, Peek najpierw sprawdza publiczne śledzenie Amazon Shipping. Jeśli Amazon odpowie, to przesyłka Amazon Shipping albo przesyłka ze sprzedaży poza Amazonem, którą Amazon wysyła w imieniu sprzedawcy, i Peek ją śledzi: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli Amazon nie udostępnia już historii, możesz zachować przesyłkę jako informację.
 
-W przeciwnym razie Peek pisze „Dostawy Amazon Logistics można zwykle śledzić w sekcji »Twoje zamówienia« na Amazonie.” i pokazuje przycisk „Otwórz moje zamówienia Amazon”. Otwiera on historię zamówień na stronie, na którą wskazuje numer: amazon.pl dla `PL`, amazon.de dla `DE` i `AT`, amazon.co.uk dla `UK` i `GB`, amazon.com dla `TBA`. Gdy sprawdzenie się nie uda, kliknij „Sprawdź ponownie”. Numer zamówienia dostaje komunikat „To wygląda na numer zamówienia Amazon”.
+W przeciwnym razie Peek pisze „Dostawy Amazon Logistics można zwykle śledzić w sekcji »Twoje zamówienia« na Amazonie.” i pokazuje przycisk „Otwórz moje zamówienia Amazon”. Otwiera on historię zamówień na stronie, na którą wskazuje numer: amazon.pl dla `PL`, amazon.de dla `DE` i `AT`, amazon.co.uk dla `UK` i `GB`, amazon.com dla `TBA`, amazon.com.au dla `TBAU`. Gdy sprawdzenie się nie uda, kliknij „Sprawdź ponownie”. Numer zamówienia dostaje komunikat „To wygląda na numer zamówienia Amazon”.
 
 ## Pytania o Amazon Logistics
 

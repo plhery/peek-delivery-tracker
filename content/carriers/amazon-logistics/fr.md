@@ -3,7 +3,7 @@ title: Amazon Logistics suivi : où suivre ton colis et que faire
 description: Suivre un colis Amazon Logistics dans Vos commandes : le numéro TBA ou FR, qui livre en France et en Belgique, les Amazon Locker et comment joindre Amazon.
 slug: amazon-logistics-suivi
 published: 2026-10-11
-updated: 2026-11-05
+updated: 2026-11-14
 ---
 
 Amazon Logistics est le réseau de livraison d'Amazon. En France, ce sont des entreprises de livraison indépendantes qui travaillent avec les agences de livraison de proximité d'Amazon ; Amazon confie aussi des colis au groupe [La Poste](carrier:la-poste) et à d'autres transporteurs, qui livrent avec leur propre réseau. En Belgique, Amazon Logistics travaille avec des entreprises de livraison locales, notamment depuis l'agence de livraison d'Amazon à Anvers, et Amazon continue de livrer avec [bpost](carrier:bpost), son partenaire de longue date.
@@ -24,6 +24,7 @@ Voici les formes que Peek reconnaît comme Amazon Logistics, avec des chiffres i
 | `CH0000000000` | Un autre code pays européen et 10 chiffres (`DE`, `ES`, `IT`, `CH`…). |
 | `TBA000000000000` | TBA et 12 chiffres. |
 | `TBC000000000000` | TBC ou TBM et 12 chiffres. |
+| `TBAU000000000` | TBAU et 9 chiffres : un numéro d'Amazon en Australie. |
 
 Majuscules, minuscules, espaces et tirets sont acceptés.
 
@@ -62,7 +63,7 @@ Pour une question de livraison, Amazon renvoie vers son service client. Voici ce
 
 [Peek](/) ne peut ni suivre ni enregistrer un colis Amazon Logistics : Amazon n'affiche son statut, son historique et sa photo que dans ton compte. Colle l'un de ces numéros, ou un lien track.amazon, et Peek vérifie d'abord le suivi public d'Amazon Shipping (track.amazon.fr pour un numéro FR ou BE). Si Amazon répond, Peek suit le colis comme un colis [Amazon Shipping](carrier:amazon-shipping) et affiche « Le suivi public est disponible avec Amazon Shipping. Peek te tiendra au courant de cette livraison. » Si Amazon ne donne plus son historique, Peek le dit et tu peux garder le colis comme référence.
 
-Sinon, tu lis « Les livraisons Amazon Logistics se suivent généralement dans Vos commandes sur Amazon. », avec le bouton « Voir mes commandes Amazon », qui ouvre l'historique de commandes du site que désigne le numéro : amazon.fr pour FR, amazon.com.be pour BE, amazon.de pour CH, amazon.com pour TBA. Si la vérification échoue, touche « Réessayer ». Un numéro de commande donne « On dirait un numéro de commande Amazon ».
+Sinon, tu lis « Les livraisons Amazon Logistics se suivent généralement dans Vos commandes sur Amazon. », avec le bouton « Voir mes commandes Amazon », qui ouvre l'historique de commandes du site que désigne le numéro : amazon.fr pour FR, amazon.com.be pour BE, amazon.de pour CH, amazon.com pour TBA, amazon.com.au pour TBAU. Si la vérification échoue, touche « Réessayer ». Un numéro de commande donne « On dirait un numéro de commande Amazon ».
 
 ## Questions sur le suivi Amazon Logistics
 

@@ -3,7 +3,7 @@ title: Straightship（迅联捷航）物流查询：STRTD 单号、状态与派�
 description: Straightship（迅联捷航）物流查询：STRTD、STRCA、STSH 单号怎么查，各物流状态什么意思，派送失败、延误或退回时怎么办，以及客服电话和邮箱。
 slug: straightship-wuliu-chaxun
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-14
 ---
 
 Straightship（中文名迅联捷航，公司全称 Straightship Solutions Limited）是一家总部在加拿大不列颠哥伦比亚省本拿比（Burnaby）的物流公司，把货物从亚洲运到北美，并用自己的司机在加拿大各地派送包裹。它的官网把 SHEIN 列为合作伙伴之一。如果网购包裹的快递单号以 `STRTD` 或 `STRCA` 开头，就是 Straightship 在送；以 `STSH` 开头的也可能是它。你可以在 [Straightship 中文官网](https://www.straightship.com/new/cn/)首页的“跟踪您的货物”一栏输入单号查询，也可以把单号粘贴到上方的查询框。单号在商家的发货邮件或订单页面里。
@@ -31,6 +31,7 @@ Straightship 的查询页面是英文的。上方是摘要，其中一栏是“P
 | `Package Received with Origin Scan warehouse` | Straightship 在加拿大的第一次扫描，后面附有城市和省份。 |
 | `Package is received at a Straightship station` | 包裹到了 Straightship 的一个网点。较早的记录写作 `Arrived at Facility`。 |
 | `Package arrived at transit station` | 到了中转站，正运往离你最近的网点。 |
+| `Package is in transit to a Straightship station` | 正在网点之间运输，还没到负责派送的网点。 |
 | `Loading` | 派送前在网点装车，有时几秒内出现两次。 |
 | `Package will be delivered before 9:00pm` | 今天派送。当天会送达；送不成的话，会记一次派送失败。 |
 | `Attempted Delivery` | 司机上门了，但没能送达。 |
@@ -64,6 +65,8 @@ Straightship 没有公布会上门几次、会不会留取件通知单、没送�
 
 Straightship 为用它发货的企业办理清关，它的页面没有说会不会向收件人收费。如果有人要你为 Straightship 的包裹付钱，先问卖家。
 
+在加拿大的第一次扫描之前，物流记录里还可能出现 `Customs Held For Examination`（海关正在查验包裹）或 `Customs Rejected`。`Customs Rejected` 字面上是“海关拒绝”，但不一定就此结束：Peek 跟踪过的一个包裹，随后经海关查验，两天后就放行了。Peek 把这两条都显示为“清关中”；如果好几天都没有变化，请联系卖家。
+
 快递寄来的包裹，加拿大边境服务局（CBSA）允许快递公司代你申报，并代缴关税和税款。按 CBSA 的说法，快递公司会在派送前联系你，安排缴纳关税和税款，在你付清之前由快递公司扣着包裹；快递公司收的清关手续费和关税、税款是两回事，不归 CBSA 管。CBSA 从不通过电话、短信或电子邮件主动索要你的社会保险号（SIN）和信用卡号：收到这样的消息就是诈骗。要交多少、免税额和退税，见 [海关扣留包裹指南](guide:customs)（英文）。
 
 ## Straightship 包裹没到、丢了或被退回怎么办
@@ -80,7 +83,7 @@ Straightship 为用它发货的企业办理清关，它的页面没有说会不�
 
 ## Straightship 客服电话和联系方式
 
-截至 2026 年 10 月 31 日，Straightship 公布的联系方式：
+截至 2026 年 11 月 14 日，Straightship 公布的联系方式：
 
 - **电话**：+1 (800) 452-3304，加拿大东部时间周一至周五 08:00–21:00，周六 08:00–16:00。
 - **邮箱**：SS@straightship.com，也就是派送失败记录里给出的地址。
@@ -92,7 +95,7 @@ Straightship 为用它发货的企业办理清关，它的页面没有说会不�
 
 [Peek](/) 看到上面那几种 `STRTD` 或 `STRCA` 单号，会马上认出 Straightship，查询框里显示“识别出的快递公司”：Peek 收录的快递公司里，没有别家用这种单号。`STSH` 单号就不一定了，有些也符合 Colis Privé 的单号格式：Peek 会先问 Straightship 有没有这个包裹（显示“正在查询物流服务…”），有的话就选它（显示“查到了这个包裹”）。如果没出现 Straightship，点“更换”，在“符合这个单号”下面选它。straightship.com 的查询链接（`/track-your-shipment/tracking-id/` 加单号）也可以直接粘贴。Peek 只按这几种格式向 Straightship 查询：如果你用“更换”给别的单号选了 Straightship，Peek 会提示它“不使用这种格式的单号”。其他格式的 Straightship 单号，请到 Straightship 官网查。
 
-Peek 读取的是 Straightship 自己的查询页面，显示状态、物流记录（含每次扫描的城市和省份）和送达时间。页面注明时间是 UTC，Peek 就按 UTC 读取，再换算成你设备所在的时区显示。`Package will be delivered before 9:00pm` 算作“派送中”，`Attempted Delivery` 和上面两条派送失败记录算作“派送未成功”，`Delivery is in progress` 算作“运输中”；`Delivered` 这一行在 Peek 里显示为“已签收”。Straightship 不提供预计送达日期，Peek 也就不显示；客户参考号和送达照片 Peek 不显示，请到 Straightship 的查询页面看。Straightship 不写其他快递公司，所以 Peek 一直用 Straightship 的单号跟踪到底。
+Peek 读取的是 Straightship 自己的查询页面，显示状态、物流记录（含每次扫描的城市和省份）和送达时间。页面注明时间是 UTC，Peek 就按 UTC 读取，再换算成你设备所在的时区显示；在 peektracker.com 网页上，物流记录末尾会写明“时间按你所在的时区显示：”和时区名称。`Package will be delivered before 9:00pm` 算作“派送中”，`Attempted Delivery` 和上面两条派送失败记录算作“派送未成功”，`Delivery is in progress` 算作“运输中”；`Delivered` 这一行在 Peek 里显示为“已签收”。Straightship 不提供预计送达日期，Peek 也就不显示；客户参考号和送达照片 Peek 不显示，请到 Straightship 的查询页面看。Straightship 不写其他快递公司，所以 Peek 一直用 Straightship 的单号跟踪到底。
 
 Straightship 还查不到这个单号时，Peek 显示“等待快递公司更新”；有了面单信息，就显示“已生成面单”。Peek 全天候每 10 分钟查询一次，包裹派送中时每 2 分钟一次（只在派送当天太平洋时间早上 6 点以后，且结果来自 Straightship 官方查询时；结果来自第三方查询服务时每 15 分钟一次）。两天没有新记录（状态还是“已生成面单”或“已揽收”时为 12 小时），Peek 就改为每小时查询一次。“通知范围”可以选“每次扫描”“重要环节”或“仅派送当天”。Peek 不能替你联系 Straightship 或卖家。
 
@@ -120,7 +123,7 @@ Straightship 没有公布从亚洲寄来的包裹要多久。请以商家给你�
 
 :::sources
 - [Straightship：首页（英文）](https://www.straightship.com/new/) – 从亚洲到北美的门到门运输、自有车队、查询框、电话、邮箱、服务时间、合作伙伴
-- [迅联捷航（Straightship）：中文首页](https://www.straightship.com/new/cn/) – 中文名、“跟踪您的货物”查询框、“和POD图像 (如有)”、加拿大东部时间的服务时间
+- [迅联捷航（Straightship）：中文首页](https://www.straightship.com/new/cn/) – 中文名、“跟踪您的货物”查询框、“和POD图像 (如有)”、电话、加拿大东部时间的服务时间（2026 年 11 月 14 日查阅）
 - [Straightship：服务（英文）](https://www.straightship.com/new/services.html) – 自营网络覆盖加拿大 95% 的人口；美转加服务的尾程派送：自营网络、Canada Post、Purolator 或 UPS；为企业清关
 - [迅联捷航：服务](https://www.straightship.com/new/cn/services.html) – 美转加跨境集运，尾程派送：自营、加邮、FedEx 或 UPS
 - [Straightship：资源（英文）](https://www.straightship.com/new/resources.html) – 85 个以上的派送站点
@@ -128,5 +131,5 @@ Straightship 没有公布从亚洲寄来的包裹要多久。请以商家给你�
 - [Straightship：隐私政策（英文）](https://www.straightship.com/new/privacy.html) – 公司全称 Straightship Solutions Limited，位于本拿比
 - [加拿大边境服务局（CBSA）：Importing casual goods by courier](https://www.cbsa-asfc.gc.ca/import/courier/lvs-efv/prsn-eng.html) – 快递公司代为申报、代缴关税和税款；清关手续费不归 CBSA 管
 - [加拿大边境服务局（CBSA）：Protect yourself against fraud](https://www.cbsa-asfc.gc.ca/security-securite/pyaf-pvcf-eng.html) – 快递公司在派送前联系收件人付款，付清前扣着包裹；CBSA 不会主动索要 SIN 和信用卡号
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 显示的内容、单号格式、扫描记录原文、UTC 说明、摘要状态值、查询页面标题和 No results found!
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 显示的内容、单号格式、扫描记录原文、UTC 说明、摘要状态值、海关查验两天后放行、查询页面标题和 No results found!
 :::

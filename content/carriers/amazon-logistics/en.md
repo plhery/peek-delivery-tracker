@@ -3,7 +3,7 @@ title: Amazon Logistics tracking: where to look and what to do
 description: Track an Amazon Logistics parcel in Your Orders: what a TBA number is, map tracking, Amazon Lockers and Counters, sellers, and how to reach Amazon.
 slug: amazon-logistics-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Amazon Logistics is Amazon's own delivery network: the Delivery Service Partners and Amazon Flex drivers who bring Amazon orders to your door. You track the parcel in Your Orders on the Amazon site you ordered from, under Track Package.
@@ -21,6 +21,7 @@ These are the shapes Peek recognises as Amazon Logistics:
 | `TBA000000000000` | `TBA` and 12 digits. |
 | `TBC000000000000` | `TBC` and 12 digits. |
 | `TBM000000000000` | `TBM` and 12 digits. |
+| `TBAU000000000` | `TBAU` and 9 digits: a number from Amazon in Australia. |
 | `UK0000000000` | A European country code and 10 digits (`UK`, `GB`, `IE`, `FR`, `DE` and others). |
 
 Two lookalikes. An order number such as `000-0000000-0000000` is not a tracking number. And two other letters followed by 10 digits, such as `US0000000000`, aren't an Amazon Logistics shape. No number at all? See [how to find your tracking number](guide:find-tracking-number).
@@ -55,7 +56,7 @@ Amazon Customer Service handles questions about your orders. On Amazon.co.uk:
 
 [Peek](/) can't track or save an Amazon Logistics parcel: Amazon shows its status, history and photo only in your account. Paste one of these numbers, or a track.amazon link, and Peek first checks Amazon's public Amazon Shipping tracker. If Amazon answers, it's an [Amazon Shipping](carrier:amazon-shipping) parcel, or a sale made away from Amazon that Amazon ships for the seller, and Peek tracks it: "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." If Amazon no longer gives its history, it can stay as a reference.
 
-Otherwise Peek says "Amazon Logistics deliveries are usually tracked in Your Orders on Amazon." and offers "Open my Amazon orders", which opens the order history on the site the number points to: amazon.co.uk for `UK` and `GB`, amazon.ie for `IE`, amazon.com for `TBA`. If the check can't run, tap "Check again". An order number gets "That looks like an Amazon order number".
+Otherwise Peek says "Amazon Logistics deliveries are usually tracked in Your Orders on Amazon." and offers "Open my Amazon orders", which opens the order history on the site the number points to: amazon.co.uk for `UK` and `GB`, amazon.ie for `IE`, amazon.com for `TBA`, amazon.com.au for `TBAU`. If the check can't run, tap "Check again". An order number gets "That looks like an Amazon order number".
 
 ## Questions about Amazon Logistics
 

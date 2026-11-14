@@ -3,7 +3,7 @@ title: Amazon Logistics tracking: dove seguire il pacco e contatti
 description: Amazon Logistics tracking in Italia: dove segui il pacco, che numero è, chi lo consegna, Locker e Counter, cosa fare se non arriva e come contattare Amazon.
 slug: amazon-logistics-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Amazon Logistics (sigla AMZL) è la rete con cui Amazon porta i suoi ordini nell'ultimo miglio, dal deposito di smistamento fino a casa tua. In Italia Amazon collabora con decine di fornitori di servizi di consegna: sono loro ad assumere i corrieri che ti consegnano il pacco. Amazon Logistics non ha una pagina di tracking pubblica: il pacco si segue nello storico ordini del tuo account Amazon, in «I miei ordini» su Amazon.it o nell'app.
@@ -18,6 +18,7 @@ Queste sono le forme che Peek riconosce come Amazon Logistics (cifre inventate):
 | `TBA000000000000` | `TBA` e 12 cifre. |
 | `TBC000000000000` | `TBC` e 12 cifre. |
 | `TBM000000000000` | `TBM` e 12 cifre. |
+| `TBAU000000000` | `TBAU` e 9 cifre: un numero di Amazon in Australia. |
 
 Vanno bene anche minuscole, spazi e trattini.
 
@@ -52,7 +53,7 @@ Per assistenza su un ordine, e quindi anche su un pacco Amazon Logistics, Amazon
 
 [Peek](/) non può seguire né salvare un pacco Amazon Logistics: stato, cronologia e foto Amazon li mostra solo nel tuo account. Se incolli uno di questi numeri, o un link track.amazon, Peek controlla prima il tracker pubblico di Amazon Shipping. Se Amazon risponde, è un pacco [Amazon Shipping](carrier:amazon-shipping) o un ordine fatto fuori da Amazon che Amazon spedisce per conto del venditore, e Peek lo segue: «Il tracciamento pubblico è disponibile con Amazon Shipping. Peek terrà aggiornata questa consegna.» Se Amazon non fornisce più la cronologia, puoi tenerlo come riferimento.
 
-Altrimenti compare «Le consegne Amazon Logistics si seguono solitamente da I miei ordini su Amazon.», con il pulsante «Apri i miei ordini Amazon», che apre lo storico ordini del sito indicato dal numero: amazon.it per `IT`, amazon.com per `TBA`. Se il controllo non riesce, tocca «Riprova». Con un numero d'ordine compare invece «Sembra un numero d’ordine Amazon».
+Altrimenti compare «Le consegne Amazon Logistics si seguono solitamente da I miei ordini su Amazon.», con il pulsante «Apri i miei ordini Amazon», che apre lo storico ordini del sito indicato dal numero: amazon.it per `IT`, amazon.com per `TBA`, amazon.com.au per `TBAU`. Se il controllo non riesce, tocca «Riprova». Con un numero d'ordine compare invece «Sembra un numero d’ordine Amazon».
 
 ## Domande su Amazon Logistics
 

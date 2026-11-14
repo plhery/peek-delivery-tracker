@@ -3,7 +3,7 @@ title: Straightship tracking: STRTD numbers, statuses and delivery
 description: Track a Straightship parcel in Canada: what STRTD, STRCA and STSH numbers look like, what each status means, missed deliveries, customs and who to contact.
 slug: straightship-tracking
 published: 2026-10-23
-updated: 2026-11-05
+updated: 2026-11-14
 ---
 
 Straightship (Straightship Solutions Limited) is a logistics company based in Burnaby, British Columbia, that ships goods from Asia to North America and delivers parcels across Canada with its own drivers. Its site lists SHEIN among its partners. If an online order came with a number starting `STRTD` or `STRCA`, Straightship has it; one starting `STSH` can be Straightship's too. Track it on [straightship.com](https://www.straightship.com/new/), in the "Track Your Shipment" box, or in the box above. The shop gives the number in its shipping email or on the order page.
@@ -31,6 +31,7 @@ Straightship's tracker is in English. It shows a summary, with a "Package Status
 | `Package Received with Origin Scan warehouse` | Straightship's first scan in Canada, with the town and province. |
 | `Package is received at a Straightship station` | It reached one of Straightship's depots. Older pages say `Arrived at Facility`. |
 | `Package arrived at transit station` | At a transit depot, on its way to your local one. |
+| `Package is in transit to a Straightship station` | On the road between depots, before the one that delivers it. |
 | `Loading` | Being loaded at the depot before the delivery round. It can appear twice, seconds apart. |
 | `Package will be delivered before 9:00pm` | Out for delivery today. A delivery or an attempt follows the same day. |
 | `Attempted Delivery` | The driver tried and couldn't deliver. |
@@ -50,7 +51,7 @@ A parcel being returned can still be scanned at a depot and sent out again: `Pac
 
 ## Straightship delivery in Canada: who brings it
 
-Straightship's tracker is for Canada: its heading reads "Canada B2C Shipment Tracking". Straightship says its own delivery network reaches 90% of Canadian postal codes and over 95% of the population, with over 85 delivery hubs, and its out-for-delivery line promises delivery before 9 pm. It also delivers for [JS Express](carrier:js-express), a Chinese logistics company: JS Express's tracking shows Straightship's scans in Canada, and when JS Express's record holds a `STRTD` or `STRCA` number, Peek asks Straightship as well.
+Straightship's tracker is for Canada: its heading reads "Canada B2C Shipment Tracking". Straightship says its own delivery network covers 95% of Canada's population, with over 85 delivery hubs, and its out-for-delivery line promises delivery before 9 pm. It also delivers for [JS Express](carrier:js-express), a Chinese logistics company: JS Express's tracking shows Straightship's scans in Canada, and when JS Express's record holds a `STRTD` or `STRCA` number, Peek asks Straightship as well.
 
 For parcels it brings into Canada from the US, Straightship offers "different options on last-mile carriers": its own network, [Canada Post](carrier:canada-post) or [UPS](carrier:ups), plus [Purolator](carrier:purolator) on its English page but FedEx on its Chinese one. Which one depends on the shipment. Straightship says this service delivers within 6 to 10 days and clears customs within 24 hours. Its tracker shows only Straightship's own depots and names no other carrier or second number.
 
@@ -62,7 +63,7 @@ Straightship publishes no rules for how many attempts it makes, whether it leave
 
 ## Customs on a Straightship parcel from Asia
 
-Straightship clears customs for the businesses it ships for, and its pages don't say whether it ever bills recipients. If you're asked to pay for a Straightship parcel, check with the seller first. SHEIN says all its orders to Canada are delivered duty paid, with no customs fees for you to pay. Other trackers can show `Customs Released` before the first scan in Canada; Straightship's own tracker doesn't.
+Straightship clears customs for the businesses it ships for, and its pages don't say whether it ever bills recipients. If you're asked to pay for a Straightship parcel, check with the seller first. SHEIN says all its orders to Canada are delivered duty paid, with no customs fees for you to pay. Other trackers can show `Customs Released` before the first scan in Canada; Straightship's own tracker doesn't. Before that first scan, the history can also show `Customs Held For Examination`, while customs examine the parcel, or `Customs Rejected`, which isn't always the end: on a parcel Peek followed, customs examined it and released it two days later. Peek shows both lines as "At customs"; if one stays for days, ask the seller.
 
 What's owed depends on the value and where the goods come from. By courier, nothing is due up to CAD 20 from China or any country other than the US and Mexico, and duty and taxes above that. From the US or Mexico, nothing is due up to CAD 40, taxes only up to CAD 150, and duty and taxes above.
 
@@ -82,7 +83,7 @@ For a parcel coming by courier, the Canada Border Services Agency (CBSA) lets th
 
 ## Straightship contact number and customer service
 
-As read on 23 October 2026, Straightship lists:
+As read on 14 November 2026, Straightship lists:
 
 - **Phone**: +1 (800) 452-3304, Monday to Friday 08:00 to 21:00 and Saturday 08:00 to 16:00, Eastern time.
 - **Email**: SS@straightship.com, the address its failed-attempt lines give.
@@ -94,7 +95,7 @@ For the order itself, a refund or a return, contact the seller.
 
 [Peek](/) names Straightship at once from a `STRTD` or `STRCA` number of the shapes above, which no other carrier in its catalog shares. From an `STSH` number it can't, as some also fit Colis Privé's numbers: Peek asks Straightship whether it has the parcel and picks it when it does. If Straightship doesn't come up, tap "Change" and pick it under "Fits this number". A straightship.com tracking link (`/track-your-shipment/tracking-id/` and the number) can be pasted too. Peek tracks only these shapes with Straightship: if you pick Straightship with "Change" for another number, Peek says it "doesn’t issue numbers like this one". For a Straightship number of another shape, use Straightship's own tracker.
 
-Peek reads Straightship's own tracker and shows the status, the history with the town and province of each scan, and the delivery time. It reads the tracker's times as UTC, as the tracker states. `Package will be delivered before 9:00pm` counts as out for delivery, the attempt lines as failed attempts, and `Delivery is in progress` as in transit. Peek shows no expected delivery date, and it leaves out the customer reference and the delivery photo: see those on Straightship's tracker. As Straightship names no other carrier, Peek follows the Straightship number to the end.
+Peek reads Straightship's own tracker and shows the status, the history with the town and province of each scan, and the delivery time. It reads the tracker's times as UTC, as the tracker states, and shows them in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. `Package will be delivered before 9:00pm` counts as out for delivery, the attempt lines as failed attempts, and `Delivery is in progress` as in transit. Peek shows no expected delivery date, and it leaves out the customer reference and the delivery photo: see those on Straightship's tracker. As Straightship names no other carrier, Peek follows the Straightship number to the end.
 
 Peek checks every 10 minutes, or every 2 from 6 a.m. Pacific time on the day Straightship scans the parcel out for delivery, evening deliveries included, while Straightship's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Straightship or the seller for you.
 
@@ -102,7 +103,7 @@ Peek checks every 10 minutes, or every 2 from 6 a.m. Pacific time on the day Str
 
 ### Is Straightship legit?
 
-Yes. Straightship Solutions Limited is a logistics company in Burnaby, British Columbia. Its site lists SHEIN, Canada Post, FedEx, COSCO and YTO among its partners and says it has over 85 delivery hubs.
+Yes. Straightship Solutions Limited is a logistics company in Burnaby, British Columbia. Its site lists SHEIN, Canada Post, FedEx, COSCO and YTO among its partners, names Walmart and Costco among the retailers it works with, and says it has over 85 delivery hubs and handles over 500,000 Amazon packages a day.
 
 ### What does "Package will be delivered before 9:00pm" mean?
 
@@ -121,17 +122,17 @@ Straightship publishes no delivery time for parcels from Asia; for its service f
 Straightship's own drivers, from its depots across Canada, as far as its tracker shows: it names no other carrier. For parcels from the US, Straightship also lists Canada Post and UPS for the last mile, and Purolator on its English page but FedEx on its Chinese one.
 
 :::sources
-- [Straightship: Home](https://www.straightship.com/new/) – Asia to North America, own fleet, tracking box, POD image, partners, phone, email, hours
+- [Straightship: Home](https://www.straightship.com/new/) – Asia to North America, own fleet, tracking box, POD image, partners, phone, email, hours (read 14 November 2026)
 - [Straightship: About](https://www.straightship.com/new/about.html) – door-to-door from Asia to North America
-- [Straightship: Services](https://www.straightship.com/new/services.html) – own network reaching 90% of postal codes and 95% of Canada's population; US-to-Canada service in 6 to 10 days, customs within 24 hours, last-mile options of its own network, Canada Post, Purolator or UPS; customs clearance
+- [Straightship: Services](https://www.straightship.com/new/services.html) – own network covering 95% of Canada's population; US-to-Canada service in 6 to 10 days, customs within 24 hours, last-mile options of its own network, Canada Post, Purolator or UPS; customs clearance
 - [Straightship: 服务 (services, Chinese)](https://www.straightship.com/new/cn/services.html) – the same US-to-Canada service with its own network, Canada Post, FedEx or UPS for the last mile
-- [Straightship: Resources](https://www.straightship.com/new/resources.html) – over 85 delivery hubs
-- [Straightship: Contact](https://www.straightship.com/new/contact.html) – contact reasons, tracking number required, 2 business days
+- [Straightship: Resources](https://www.straightship.com/new/resources.html) – over 85 delivery hubs, over 500,000 Amazon packages a day, Walmart and Costco (read 14 November 2026)
+- [Straightship: Contact](https://www.straightship.com/new/contact.html) – contact reasons, tracking number required, 2 business days (read 14 November 2026)
 - [Straightship: Privacy Policy](https://www.straightship.com/new/privacy.html) – Straightship Solutions Limited, Burnaby
 - [CBSA: Importing casual goods by courier](https://www.cbsa-asfc.gc.ca/import/courier/lvs-efv/prsn-eng.html) – couriers account for duty and taxes, clearance fees outside the CBSA's control
 - [CBSA: Protect yourself against fraud](https://www.cbsa-asfc.gc.ca/security-securite/pyaf-pvcf-eng.html) – the courier organizes payment before delivery and holds the parcel, no SIN or card requests
 - [CBSA: Low-value shipment thresholds](https://www.cbsa-asfc.gc.ca/services/cusma-aceum/lvs-efv-eng.html) – by courier: CAD 20 from other countries, CAD 40 and CAD 150 from the US and Mexico
 - [SHEIN Canada: Are there any additional fees for customs?](https://ca.shein.com/faq/detail?id=2307) – orders to Canada delivered duty paid
 - [SHEIN Canada: My order is marked as delivered, but I haven't received it](https://ca.shein.com/faq/detail?id=2362) – delivered up to 48 hours early, Parcel Delivered, Not Received
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, UTC note, summary values, `Customs Released` on other trackers, the hand-off from JS Express
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, UTC note, summary values, `Customs Released` on other trackers, customs holds released two days later, the hand-off from JS Express
 :::

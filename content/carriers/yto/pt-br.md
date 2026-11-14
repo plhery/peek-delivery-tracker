@@ -43,7 +43,7 @@ Cada registro no rastreio da YTO tem um nome curto em chinês, um horário da Ch
 | `PDA正常签收扫描` | "Entregue" | Entrega com assinatura (`签收`), registrada no aparelho portátil do entregador. |
 | `退回件扫描` | `Return to the sender started` | Começou a devolução ao remetente. |
 
-As três linhas entre aspas aparecem em português no Peek; as outras da tabela ficam em inglês, e os registros que não estão na tabela, no chinês da YTO. Já o status do pacote vem sempre em português, como "Recebida pela transportadora" ou "Pronta para retirada". Depois de `入柜|入库`, porém, o status nem sempre é "Pronta para retirada": conforme um código que a YTO anexa ao registro, o Peek mantém "Em trânsito".
+As três linhas entre aspas aparecem em português no Peek; as outras da tabela ficam em inglês, e os registros que não estão na tabela, no chinês da YTO. Já o status do pacote vem sempre em português, como "Recebida pela transportadora" ou "Pronta para retirada". Depois de `入柜|入库`, o status passa a "Pronta para retirada"; se o entregador tirar o pacote de lá (`小件员取出`), ele volta a "Em trânsito".
 
 Se o endereço de entrega for o armazém de um redirecionador, `PDA正常签收扫描` quer dizer que o armazém recebeu seu pacote. Dali em diante, vale o código do próprio redirecionador.
 

@@ -921,6 +921,11 @@ describe('carrier brand', () => {
       'trustexpress',
       'sxw-express',
       'xuchuan-logistics',
+      'siuntos-autobusais',
+      'samus',
+      'zipasgo',
+      'dk-logistics-ee',
+      'jet-express-ee',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

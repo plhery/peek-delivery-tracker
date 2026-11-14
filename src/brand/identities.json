@@ -1151,6 +1151,9 @@
   "dk-express-gr": {
     "decal": "dk-express-gr"
   },
+  "dk-logistics-ee": {
+    "decal": "dk-logistics-ee"
+  },
   "dnipro-llc": {
     "decal": "dnipro-llc"
   },
@@ -2256,6 +2259,9 @@
   },
   "jet-dp": {
     "decal": "jet-dp"
+  },
+  "jet-express-ee": {
+    "decal": "jet-express-ee"
   },
   "jet-global": {
     "decal": "jet-global"
@@ -3576,6 +3582,9 @@
   "samoa-post": {
     "decal": "samoa-post"
   },
+  "samus": {
+    "decal": "samus"
+  },
   "sapx-express": {
     "decal": "sapx-express"
   },
@@ -3732,6 +3741,9 @@
   },
   "singapore-post": {
     "decal": "singapore-post"
+  },
+  "siuntos-autobusais": {
+    "decal": "siuntos-autobusais"
   },
   "sjl-express": {
     "decal": "sjl-express"
@@ -4722,6 +4734,9 @@
   },
   "zimpost": {
     "decal": "zimpost"
+  },
+  "zipasgo": {
+    "decal": "zipasgo"
   },
   "zippd": {
     "decal": "zippd"

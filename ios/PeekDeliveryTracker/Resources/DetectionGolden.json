@@ -28462,6 +28462,24 @@
     ]
   },
   {
+    "input": "222405116",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ]
+  },
+  {
     "input": "22268132900533",
     "carrier": "unknown",
     "confidence": "low",
@@ -34644,6 +34662,35 @@
     "confidence": "high",
     "candidates": [
       "fm-transportes"
+    ]
+  },
+  {
+    "input": "300575212335",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "japan-post",
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
     ]
   },
   {
@@ -41062,6 +41109,22 @@
     ]
   },
   {
+    "input": "3SBOLD24991971",
+    "carrier": "spring-gds",
+    "confidence": "high",
+    "candidates": [
+      "spring-gds"
+    ]
+  },
+  {
+    "input": "3SCETC00030631",
+    "carrier": "spring-gds",
+    "confidence": "high",
+    "candidates": [
+      "spring-gds"
+    ]
+  },
+  {
     "input": "3SCKP00380671",
     "carrier": "dhl-ecommerce-nl",
     "confidence": "high",
@@ -41155,6 +41218,14 @@
     "confidence": "high",
     "candidates": [
       "dhl-ecommerce-nl"
+    ]
+  },
+  {
+    "input": "3STXKC12593883",
+    "carrier": "spring-gds",
+    "confidence": "high",
+    "candidates": [
+      "spring-gds"
     ]
   },
   {
@@ -85979,10 +86050,10 @@
   },
   {
     "input": "JJD00006135051474093003",
-    "carrier": "dhl",
+    "carrier": "dhl-ecommerce-es",
     "confidence": "high",
     "candidates": [
-      "dhl"
+      "dhl-ecommerce-es"
     ]
   },
   {
@@ -86056,34 +86127,34 @@
   },
   {
     "input": "JJD00026906000002411001",
-    "carrier": "dhl",
+    "carrier": "dhl-ecommerce-es",
     "confidence": "high",
     "candidates": [
-      "dhl"
+      "dhl-ecommerce-es"
     ]
   },
   {
     "input": "JJD00026926000797050001",
-    "carrier": "dhl",
+    "carrier": "dhl-ecommerce-es",
     "confidence": "high",
     "candidates": [
-      "dhl"
+      "dhl-ecommerce-es"
     ]
   },
   {
     "input": "JJD00026926000832370001",
-    "carrier": "dhl",
+    "carrier": "dhl-ecommerce-es",
     "confidence": "high",
     "candidates": [
-      "dhl"
+      "dhl-ecommerce-es"
     ]
   },
   {
     "input": "JJD00036806102768486001",
-    "carrier": "dhl",
+    "carrier": "dhl-ecommerce-es",
     "confidence": "high",
     "candidates": [
-      "dhl"
+      "dhl-ecommerce-es"
     ]
   },
   {

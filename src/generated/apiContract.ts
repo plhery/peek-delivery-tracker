@@ -425,7 +425,7 @@ export const CARRIER_CAPABILITIES = {
       "requirements": [
         {
           "field": "dpdPostcode",
-          "whenTrackingNumber": "^(?=.{13}$|.{15}$)3S[A-Z]{1,4}[0-9]+$",
+          "whenTrackingNumber": "^(?:(?=.{13}$|.{15}$)3S[A-Z]{1,4}[0-9]+|3S[A-Z]{4}[0-9]{8})$",
           "validator": "internationalPostcode",
           "optional": true,
           "readsCountry": true,
@@ -476,7 +476,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "s10"
       },
       {
-        "pattern": "^3S[A-Z]{4}(?:\\d{7}|\\d{9})$",
+        "pattern": "^3S[A-Z]{4}\\d{7,9}$",
         "confidence": "high"
       },
       {
@@ -652,12 +652,16 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "frankier-id"
       },
       {
-        "pattern": "^JJD(?!\\d{16}$)(?!0146\\d{14}$)(?!000090\\d{14,16}$)[A-Z0-9]{8,}$",
-        "confidence": "high"
+        "pattern": "^JJD(?:0146\\d{14}|000090\\d{14,16}|000(?:061|268|269|368)\\d{14})$",
+        "confidence": "low"
       },
       {
         "pattern": "^JJD\\d{16}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^JJD[A-Z0-9]{8,}$",
+        "confidence": "high"
       },
       {
         "pattern": "^JD(?!01)\\d{18}$",
@@ -6096,6 +6100,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^[A-Z]{2}\\d{7}0$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^JJD000(?:061|268|269|368)\\d{14}$",
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://clientesparcel.dhl.es/LiveTracking/"
@@ -8074,7 +8082,8 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^[A-Z]{2}\\d{7}$",
-        "confidence": "low"
+        "confidence": "low",
+        "standalone": true
       }
     ],
     "trackingSearchUrl": "https://www.rlcarriers.com/freight/shipping/shipment-tracing"
@@ -42049,7 +42058,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ane-logistics"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -51120,7 +51129,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tci-freight"
     },
     "linkRules": [],
     "detectionRules": [],

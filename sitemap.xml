@@ -4880,6 +4880,7 @@
 <loc>https://peektracker.com/carriers/gls-tracking-germany</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-tracking-germany" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gls-sendungsverfolgung-deutschland" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gls-allemagne-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="uk" href="https://peektracker.com/uk/carriers/gls-vidstezhennia-posylky-nimechchyna" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-tracking-germany" />
 <lastmod>2026-11-09</lastmod>
@@ -4888,14 +4889,25 @@
 <loc>https://peektracker.com/de/carriers/gls-sendungsverfolgung-deutschland</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-tracking-germany" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gls-sendungsverfolgung-deutschland" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gls-allemagne-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="uk" href="https://peektracker.com/uk/carriers/gls-vidstezhennia-posylky-nimechchyna" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-tracking-germany" />
 <lastmod>2026-11-09</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/fr/carriers/gls-allemagne-suivi-colis</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-tracking-germany" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gls-sendungsverfolgung-deutschland" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gls-allemagne-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="uk" href="https://peektracker.com/uk/carriers/gls-vidstezhennia-posylky-nimechchyna" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-tracking-germany" />
+<lastmod>2026-11-14</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/uk/carriers/gls-vidstezhennia-posylky-nimechchyna</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-tracking-germany" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gls-sendungsverfolgung-deutschland" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gls-allemagne-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="uk" href="https://peektracker.com/uk/carriers/gls-vidstezhennia-posylky-nimechchyna" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-tracking-germany" />
 <lastmod>2026-11-09</lastmod>
@@ -5217,13 +5229,23 @@
 <url>
 <loc>https://peektracker.com/carriers/ctt-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ctt-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/ctt-portugal-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/ctt-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ctt-tracking" />
 <lastmod>2026-10-27</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/es/carriers/ctt-portugal-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ctt-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/ctt-portugal-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/ctt-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ctt-tracking" />
+<lastmod>2026-11-14</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/pt/carriers/ctt-rastreio</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ctt-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/ctt-portugal-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/ctt-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ctt-tracking" />
 <lastmod>2026-10-27</lastmod>
@@ -5686,6 +5708,7 @@
 <loc>https://peektracker.com/carriers/vinted-go-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
@@ -5696,6 +5719,7 @@
 <loc>https://peektracker.com/fr/carriers/vinted-go-suivi</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
@@ -5703,9 +5727,21 @@
 <lastmod>2026-11-12</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/it/carriers/vinted-go-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<lastmod>2026-11-14</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/es/carriers/vinted-go-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
@@ -5716,6 +5752,7 @@
 <loc>https://peektracker.com/pt/carriers/vinted-go-encomenda</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
@@ -5726,6 +5763,7 @@
 <loc>https://peektracker.com/nl/carriers/vinted-go-pakket-volgen</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
@@ -6441,6 +6479,7 @@
 <url>
 <loc>https://peektracker.com/carriers/omniva-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/omniva-sledzenie" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
 <xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
@@ -6448,8 +6487,19 @@
 <lastmod>2026-10-27</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/pl/carriers/omniva-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/omniva-sledzenie" />
+<xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
+<xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/omniva-tracking" />
+<lastmod>2026-11-14</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/lt/carriers/omniva-siuntu-sekimas</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/omniva-sledzenie" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
 <xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
@@ -6459,6 +6509,7 @@
 <url>
 <loc>https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/omniva-sledzenie" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
 <xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
@@ -6468,6 +6519,7 @@
 <url>
 <loc>https://peektracker.com/et/carriers/omniva-saadetise-jalgimine</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/omniva-sledzenie" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
 <xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />

@@ -414,7 +414,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/tracking-nao-atualiza-encomenda-parada" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/status-przesylki-sie-nie-zmienia" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/tracking-not-updating" />
-<lastmod>2026-11-10</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/guides/suivi-colis-ne-bouge-plus</loc>
@@ -426,7 +426,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/tracking-nao-atualiza-encomenda-parada" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/status-przesylki-sie-nie-zmienia" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/tracking-not-updating" />
-<lastmod>2026-11-10</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/guides/tracking-non-si-aggiorna</loc>
@@ -450,7 +450,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/tracking-nao-atualiza-encomenda-parada" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/status-przesylki-sie-nie-zmienia" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/tracking-not-updating" />
-<lastmod>2026-11-10</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/guides/tracking-nao-atualiza-encomenda-parada</loc>
@@ -786,7 +786,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-amazon" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-amazon" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/amazon-order-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/guides/seguimento-encomenda-amazon</loc>
@@ -798,7 +798,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-amazon" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-amazon" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/amazon-order-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/guides/sledzenie-zamowienia-amazon</loc>
@@ -6544,7 +6544,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis</loc>
@@ -6552,7 +6552,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen</loc>
@@ -6560,7 +6560,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
-<lastmod>2026-10-27</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/heppner-tracking</loc>
@@ -9496,7 +9496,7 @@
 <loc>https://peektracker.com/carriers/gls-us-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-us-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-us-tracking" />
-<lastmod>2026-11-13</lastmod>
+<lastmod>2026-11-14</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/sxw-express-tracking</loc>

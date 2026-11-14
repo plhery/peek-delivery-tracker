@@ -105,7 +105,10 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
     val reduceMotion = PeekTheme.reduceMotion
     val now = LocalNow.current
     val entries = remember(parcel) { parcel.journalEntries }
-    val days = remember(localizer, language, entries, now) { localizer.journalDays(entries, now()) }
+    // Worked out again on the day it has become and in the zone the phone is in, as the iPhone works them out each time.
+    val zone = ZoneId.systemDefault()
+    val today = now().atZone(zone).toLocalDate()
+    val days = remember(localizer, language, entries, zone, today) { localizer.journalDays(entries, now()) }
     // A copy the journal shows under its scan is current through that scan.
     val currentId = remember(parcel, entries) {
         parcel.currentEvent?.let { current -> entries.firstOrNull { it.id == current.id || current in it.relays }?.id }
@@ -144,7 +147,6 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                 }
                 // The times are the phone's, wherever the carrier scanned: one quiet line under the history says so.
                 if (entries.any { it.event.showsTime } || planned.any { it.showsTime }) {
-                    val zone = ZoneId.systemDefault()
                     val zoneName = remember(localizer, language, zone) { localizer.timeZoneName(zone) }
                     Text(
                         localizer.text("timeline.timeZone", mapOf("zone" to zoneName)),

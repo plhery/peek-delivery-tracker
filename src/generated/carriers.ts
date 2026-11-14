@@ -1944,6 +1944,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Xuchuan Logistics tracking: XC numbers, delivery and help",
       "name": "Xuchuan International Logistics",
       "color": "#0a2463"
+    },
+    {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "samus-tracking",
+      "title": "SAMUS tracking: numbers, statuses and Vilnius pickup",
+      "name": "SAMUS",
+      "color": "#e50079"
+    },
+    {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "siuntos-autobusais-tracking",
+      "title": "Siuntos autobusais tracking: bus parcels in Lithuania",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
+    },
+    {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "zipasgo-tracking",
+      "title": "ZipasGo tracking: Parcel Stars, partner couriers and help",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "dk-logistics-tracking",
+      "title": "DK Logistics tracking: waybill, delivery and contact",
+      "name": "DK Logistics",
+      "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "jet-express-tracking",
+      "title": "Jet Express tracking: order number, delivery and contact",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "de": [
@@ -4582,6 +4622,30 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Lietuvos paštas siuntų sekimas: statusai ir paštomatai",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "samus-siuntu-sekimas",
+      "title": "SAMUS siuntų sekimas: numeris, būsenos ir atsiėmimas",
+      "name": "SAMUS",
+      "color": "#e50079"
+    },
+    {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "siuntos-autobusais-siuntu-sekimas",
+      "title": "Siuntos autobusais: sekimas, terminalai ir atsiėmimas",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
+    },
+    {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "zipasgo-siuntu-sekimas",
+      "title": "ZipasGo siuntų sekimas: Parcel Stars, kurjeriai ir pagalba",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
     }
   ],
   "lv": [
@@ -4626,6 +4690,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Venipaki saadetise jälgimine: olekud, pakiautomaat ja kuller",
       "name": "Venipak",
       "color": "#9339f2"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "dk-logistics-saadetise-jalgimine",
+      "title": "DK Logisticsi saadetise jälgimine: saateleht ja kontaktid",
+      "name": "DK Logistics",
+      "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "jet-expressi-saadetise-jalgimine",
+      "title": "Jet Expressi saadetise jälgimine: tarneajad ja kontakt",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "uk": [

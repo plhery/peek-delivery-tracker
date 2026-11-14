@@ -240,5 +240,10 @@
   { "id": "transpress", "catalog": "transpress", "name": "Transpress", "languages": ["en", "bg"] },
   { "id": "gls-us", "catalog": "gls-us", "name": "GLS US", "languages": ["en"] },
   { "id": "sxw-express", "catalog": "sxw-express", "name": "SXW Express", "languages": ["en"] },
-  { "id": "xuchuan-logistics", "catalog": "xuchuan-logistics", "name": "Xuchuan International Logistics", "languages": ["en"] }
+  { "id": "xuchuan-logistics", "catalog": "xuchuan-logistics", "name": "Xuchuan International Logistics", "languages": ["en"] },
+  { "id": "samus", "catalog": "samus", "name": "SAMUS", "languages": ["en", "lt"] },
+  { "id": "siuntos-autobusais", "catalog": "siuntos-autobusais", "name": "Siuntos autobusais", "languages": ["en", "lt"] },
+  { "id": "zipasgo", "catalog": "zipasgo", "name": "ZipasGo", "languages": ["en", "lt"] },
+  { "id": "dk-logistics-ee", "catalog": "dk-logistics-ee", "name": "DK Logistics", "languages": ["en", "et"] },
+  { "id": "jet-express-ee", "catalog": "jet-express-ee", "name": "Jet Express", "languages": ["en", "et"] }
 ]

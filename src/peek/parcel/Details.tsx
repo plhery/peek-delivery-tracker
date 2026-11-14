@@ -20,6 +20,7 @@ import {
   type ParcelTrackingLink,
 } from '../../lib/carriers';
 import type { ParcelAttention } from '../../lib/parcelPriority';
+import { awaitedCarrier } from '../../lib/parcelStatus';
 import { currentEvent } from '../../lib/stages';
 import type { ParcelWithEvents, Stage } from '../../types';
 import { maskedNumber, parcelLinkErrorKey, type ParcelLinkError, type ParcelLinkView } from '../links';
@@ -176,8 +177,10 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
       body: t((expired ? 'add.amazonHistoryExpired' : carrierTrackingHintKey(active.id)) as MessageKey, { carrier: carrier.name }),
     });
   } else if (parcel.syncError && !numberToCheck(parcel.syncError)) {
-    // A number to check says so on the card.
-    notes.push({ id: 'sync', icon: <Glyph name="info" />, body: trackingFailureMessage(parcel.syncError, t) });
+    // A number to check says so on the card. A carrier that could not be reached yet for a parcel with no scans is asked again.
+    const awaited = awaitedCarrier(parcel);
+    notes.push({ id: 'sync', icon: <Glyph name="info" />,
+      body: awaited ? t('detail.waitingForCarrier', { carrier: carrierInfo(awaited, locale).name }) : trackingFailureMessage(parcel.syncError, t) });
   }
   if (flag === 'stalled') notes.push(quietNote(parcel, carrier, t, locale));
   if (flag === 'generated') notes.push({ id: 'generated', icon: <Glyph name="warning" />, body: t('link.generated', { carrier: carrier.name }), paper: true });

@@ -407,9 +407,32 @@ val Parcel.activeTrackingCarrier: CarrierId
         return if (CarrierCatalog.supportsSwissPostHandoff(trackingNumber)) CarrierId.Aliexpress else carrier
     }
 
-/** Whether only the owner can make the number trackable: a placeholder, or one its carrier does not issue. */
+/**
+ * Whether only the owner can make the number trackable: a placeholder, one its carrier does not issue, or one its
+ * carrier has not known for two days (`carrier:number_unknown`).
+ */
 val Parcel.numberToCheck: Boolean
-    get() = syncError == "carrier:placeholder_number" || syncError == "carrier:refused_number"
+    get() = syncError == "carrier:placeholder_number" || syncError == "carrier:refused_number" || syncError == "carrier:number_unknown"
+
+/** Failures only the owner's details can fix. Any other failure of a parcel with no scans is its carrier's. */
+private val ownerFailures = setOf("carrier:input_required", "carrier:invalid_input", "carrier:several_parcels")
+
+/**
+ * The carrier a parcel with no scans waits for while nothing is asked of its owner: its own, which has not listed the
+ * number yet or could not be reached. Null under no carrier, or a postal service not named yet.
+ */
+val Parcel.awaitedCarrier: CarrierId?
+    get() {
+        if (hasCarrierUpdate || carrier == CarrierId.Unknown || carrier == CarrierId.InternationalPost ||
+            !CarrierCatalog.shared.tracksAutomatically(activeTrackingCarrier)
+        ) return null
+        val waits = when (syncStatus) {
+            SyncStatus.Waiting -> carrierData?.routing?.providerInputNeeded == null
+            SyncStatus.Error -> !numberToCheck && syncError !in ownerFailures
+            else -> false
+        }
+        return if (waits) carrier else null
+    }
 
 val Parcel.displayStatus: ParcelDisplayStatus
     get() {
@@ -422,6 +445,8 @@ val Parcel.displayStatus: ParcelDisplayStatus
         if (!hasCarrierUpdate && (syncStatus == SyncStatus.Pending || syncStatus == SyncStatus.Syncing)) {
             return ParcelDisplayStatus("status.syncing", ParcelTone.Normal, syncing = true)
         }
+        // Its carrier has not listed the number yet, or could not be reached: Peek keeps asking.
+        if (awaitedCarrier != null) return ParcelDisplayStatus("status.waitingFor", ParcelTone.Normal, syncing = false)
         if (!hasCarrierUpdate && syncStatus == SyncStatus.Error) {
             return ParcelDisplayStatus("status.failed", ParcelTone.Warning, syncing = false)
         }
@@ -447,8 +472,11 @@ fun Parcel.notice(now: Instant = AppClock.now()): ParcelAttention? {
     return if (reason == ParcelAttention.SyncError && numberToCheck) null else reason
 }
 
-/** Whether a card says the latest update failed: not for a number only the owner can correct. */
-val Parcel.updateFailed: Boolean get() = syncStatus == SyncStatus.Error && !numberToCheck
+/**
+ * Whether a card says the latest update failed: not for a number only the owner can correct, nor for a parcel with no
+ * scans whose carrier could not be reached yet, whose status says it waits for that carrier.
+ */
+val Parcel.updateFailed: Boolean get() = syncStatus == SyncStatus.Error && !numberToCheck && awaitedCarrier == null
 
 fun Parcel.attention(now: Instant = AppClock.now()): ParcelAttention? {
     // The carrier waits on the recipient until a later scan says it moved on.
@@ -462,7 +490,8 @@ fun Parcel.attention(now: Instant = AppClock.now()): ParcelAttention? {
     }
     // Made-up moves say nothing of where the parcel is, whether the latest check failed or how old they are.
     if (GeneratedTrack.scans(trackingEvents).isNotEmpty()) return ParcelAttention.Generated
-    if (syncStatus == SyncStatus.Error) return ParcelAttention.SyncError
+    // A parcel with no scans whose carrier could not be reached says it waits for that carrier.
+    if (syncStatus == SyncStatus.Error && awaitedCarrier == null) return ParcelAttention.SyncError
     val event = currentEvent
     if (event != null && event.stage in listOf(TrackingStage.Registered, TrackingStage.Accepted, TrackingStage.InTransit)) {
         val update = DateParser.date(event.occurredAt)

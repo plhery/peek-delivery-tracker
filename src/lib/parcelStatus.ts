@@ -62,6 +62,21 @@ export function likelyCarrier(parcel: ParcelWithEvents, now = Date.now()): { car
   return { carrier: likely.carrier, waited: now - Date.parse(likely.since) >= LIKELY_CARRIER_WAIT_MS };
 }
 
+/** Failures only the owner's details can fix. Any other failure of a parcel with no scans is its carrier's. */
+const OWNER_FAILURES = new Set(['carrier:input_required', 'carrier:invalid_input', 'carrier:several_parcels']);
+
+/**
+ * The carrier a parcel with no scans waits for while nothing is asked of its owner: its own, which has not listed the
+ * number yet or could not be reached. Null under no carrier, or a postal service not named yet.
+ */
+export function awaitedCarrier(parcel: ParcelWithEvents): CarrierId | null {
+  if (parcelHasCarrierUpdate(parcel) || parcel.carrier === 'unknown' || parcel.carrier === 'intl-post'
+    || !tracksAutomatically(activeTrackingCarrierId(parcel))) return null;
+  const waits = parcel.syncStatus === 'waiting' ? !parcel.providerInputNeeded
+    : parcel.syncStatus === 'error' && !numberToCheck(parcel.syncError) && !OWNER_FAILURES.has(parcel.syncError ?? '');
+  return waits ? parcel.carrier : null;
+}
+
 export function parcelIsUnannounced(parcel: ParcelWithEvents): boolean {
   return !parcelHasCarrierUpdate(parcel) && parcel.syncStatus === 'waiting';
 }
@@ -81,6 +96,7 @@ export function parcelDisplayStatus(parcel: ParcelWithEvents): ParcelDisplayStat
   if (!hasCarrierUpdate && (parcel.syncStatus === 'pending' || parcel.syncStatus === 'syncing')) {
     return { label: 'Checking for updates', tone: 'ok', syncing: true };
   }
+  if (awaitedCarrier(parcel)) return { label: 'Waiting for the carrier', tone: 'ok', syncing: false };
   if (!hasCarrierUpdate && parcel.syncStatus === 'error') {
     return { label: 'Update unavailable', tone: 'warn', syncing: false };
   }
@@ -114,6 +130,8 @@ export function parcelDisplayStatusKey(parcel: ParcelWithEvents): MessageKey {
   if (!hasCarrierUpdate && (parcel.syncStatus === 'pending' || parcel.syncStatus === 'syncing')) {
     return 'status.syncing';
   }
+  // Its carrier has not listed the number yet, or could not be reached: Peek keeps asking.
+  if (awaitedCarrier(parcel)) return 'status.waitingFor';
   if (!hasCarrierUpdate && parcel.syncStatus === 'error') return 'status.failed';
   if (!hasCarrierUpdate && parcel.syncStatus === 'unsupported') return 'status.unsupported';
   if (!hasCarrierUpdate && parcel.syncStatus === 'waiting') {
@@ -123,11 +141,14 @@ export function parcelDisplayStatusKey(parcel: ParcelWithEvents): MessageKey {
   return current ? (`stage.${current.stage}` as MessageKey) : 'status.unannounced';
 }
 
-/** The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan. */
+/**
+ * The status line, which names the carrier a parcel waits for, or probably travels with while it waits for that carrier's
+ * first scan.
+ */
 export function parcelStatusLabel(parcel: ParcelWithEvents, t: Translate, locale?: string): string {
   const key = parcelDisplayStatusKey(parcel);
-  const likely = key === 'status.likelyCarrier' ? likelyCarrier(parcel) : null;
-  return likely ? t(key, { carrier: carrierInfo(likely.carrier, locale).name }) : t(key);
+  const named = key === 'status.waitingFor' ? awaitedCarrier(parcel) : key === 'status.likelyCarrier' ? likelyCarrier(parcel)?.carrier : null;
+  return named ? t(key, { carrier: carrierInfo(named, locale).name }) : t(key);
 }
 
 /**

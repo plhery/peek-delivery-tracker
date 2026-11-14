@@ -27,6 +27,8 @@ export function userErrorKey(error: unknown): MessageKey | null {
   const code = String(value.code ?? '').toLowerCase();
   const status = Number(value.status ?? value.statusCode);
   if (value.name === 'ApiAuthenticationError' || status === 401 || status === 403) return 'error.signIn';
+  // The day's allowance lasts until tomorrow, not a moment.
+  if ((status === 429 && value.scope === 'daily') || /allowance is used up/.test(message)) return 'error.allowanceUsed';
   if (status === 429 || /rate.?limit|too many requests|over_email_send_rate_limit/.test(message + code)) {
     return 'error.rateLimited';
   }

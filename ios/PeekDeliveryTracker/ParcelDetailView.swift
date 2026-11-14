@@ -570,7 +570,11 @@ struct ParcelDetailView: View {
                 // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
                 let claiming = error == "carrier:refused_number"
                     ? catalog.claimingCarrier(for: parcel.trackingNumber, besides: parcel.carrier) : nil
+                // A carrier that could not be reached for a parcel with no scans yet: Peek keeps trying.
+                let awaited = parcel.awaitedCarrier
                 Text(claiming.map { localizer.text("detail.refusedNumberLooksLike", [
+                    "carrier": catalog.info(for: $0, language: localizer.language).displayName,
+                ]) } ?? awaited.map { localizer.text("detail.waitingForCarrier", [
                     "carrier": catalog.info(for: $0, language: localizer.language).displayName,
                 ]) } ?? localizer.trackingFailureMessage(error))
                     .font(.footnote).foregroundStyle(Brand.warning)
@@ -586,9 +590,15 @@ struct ParcelDetailView: View {
                         .font(.footnote.weight(.semibold)).foregroundStyle(branding.ink)
                         .disabled(working)
                 }
-                if editable, error == "carrier:refused_number" {
+                if editable, error == "carrier:refused_number" || error == Parcel.numberUnknown {
                     Button(localizer.text("detail.changeCarrier")) { carrierEditor = CarrierEditorRequest() }
                         .font(.footnote).foregroundStyle(branding.ink)
+                }
+                // Two days on, its carrier still doesn't know the number: the parcel can go for good, as from the ••• menu.
+                if sample == nil, error == Parcel.numberUnknown {
+                    Button(localizer.text("detail.delete")) { showingDeleteConfirmation = true }
+                        .font(.footnote).foregroundStyle(branding.ink)
+                        .disabled(working)
                 }
             }
             if divided { Divider() }

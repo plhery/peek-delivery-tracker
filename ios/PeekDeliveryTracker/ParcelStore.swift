@@ -1755,7 +1755,9 @@ final class ParcelStore: ObservableObject {
                     // Whoever stopped the wait has let its jobs and this task go.
                     guard (try? self.session.checkGeneration(generation)) != nil, !error.isCancellation else { return }
                     self.pendingJobIDs.subtract(current)
-                    self.errorMessage = self.localizer.errorMessage(error)
+                    // A failed check says why on its parcel, read again here: the list's notice is for a list that can't be
+                    // read. A lapsed sign-in signs out on its own.
+                    await self.load(showSpinner: false)
                 }
             }
             guard (try? self.session.checkGeneration(generation)) != nil else { return }

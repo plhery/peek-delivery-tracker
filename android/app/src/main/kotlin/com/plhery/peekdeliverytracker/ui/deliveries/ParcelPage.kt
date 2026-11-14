@@ -439,17 +439,20 @@ private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUI
  * After the numbers, the shipment's facts where the parcel has carrier data ([ShipmentFacts]), then what the page says
  * where no carrier is asked, or why the last check failed ([TrackingNotes]): its carrier changes open the editor, and
  * its switch moves the parcel to the carrier its number names, where the parcel is the reader's to change rather than
- * the sample or followed through someone else's link.
+ * the sample or followed through someone else's link. Its Delete asks as the ••• menu's does, wherever the page has
+ * one: not on the sample's.
  */
 @Composable
 private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val localizer = LocalLocalizer.current
     localizer.shipmentFacts(parcel)?.let { ShipmentFacts(it, Modifier.testTag(PAGE_FACTS)) }
     val identity = shownCarrierIdentity(parcel, localizer, LocalLanguage.current) ?: return
+    val sample = state.sample(pageId) != null
     TrackingNotes(
-        parcel, editable = state.sample(pageId) == null && state.source.viewerLink(parcel) == null, working = state.pageWorking(pageId),
+        parcel, editable = !sample && state.source.viewerLink(parcel) == null, working = state.pageWorking(pageId),
         ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId, focus = it) },
         onSwitch = { carrier, focus -> state.switchCarrierOnPage(pageId, parcel, carrier, focus) },
+        onDelete = if (sample) null else { focus -> state.deleteOnPage(pageId, focus) },
     )
 }
 

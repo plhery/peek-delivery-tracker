@@ -1,6 +1,6 @@
 import 'server-only';
 import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NEW_SCANS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
-import { REFUSED_NUMBER } from '../lib/messages';
+import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
 import { CarrierError, carrierErrorKind, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
@@ -60,7 +60,7 @@ import { UNIVERSAL_SOURCES, type UniversalSource } from 'universal-parcel-scrape
 import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
-import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
+import { ALERTED_UNSEEN_MS, NUMBER_UNKNOWN_AFTER_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
 import { afterSameDayScans } from './dayScans';
 import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
@@ -2436,6 +2436,18 @@ export class TrackingSyncService {
         if (!hasProgress && (isUnannouncedTrackingError(error) || routingUnannounced)) {
           // A carrier saying the label has no scans is an answer, not a missed check.
           if (error instanceof RoutingDeferred) error.routing.consecutive_failures = 0;
+          // A parcel with nothing yet whose own carrier, asked directly, still does not know the number two days after it
+          // first said so asks its owner to check the number or the carrier; a check that could not ask the carrier keeps
+          // that. Any answer clears it.
+          const routing = error instanceof RoutingDeferred && previousStage === 'pending'
+            && !error.routing.input_needed && !error.routing.provider_input_needed ? error.routing : null;
+          const unknown = routing !== null && ['not_found', 'no_history'].includes(routing.failures[carrierId]?.kind ?? '');
+          if (unknown) {
+            routing.unknown_since = { carrier: carrierId,
+              since: routing.unknown_since?.carrier === carrierId ? routing.unknown_since.since : now.toISOString() };
+          }
+          const gaveUp = routing?.unknown_since?.carrier === carrierId && (unknown
+            ? now.getTime() - Date.parse(routing.unknown_since.since) >= NUMBER_UNKNOWN_AFTER_MS : parcel.sync_error === NUMBER_UNKNOWN);
           // A parcel that showed its label first answering without it is a review signal, as when
           // its carrier lists fewer of its scans (`scans_withdrawn`, below): once a source that showed
           // the label answered without it this round. One the round did not ask has withdrawn nothing.
@@ -2449,8 +2461,8 @@ export class TrackingSyncService {
           operation = 'persist_package';
           const waiting = besideFailure({
             last_synced_at: this.now().toISOString(),
-            sync_status: 'waiting',
-            sync_error: null,
+            sync_status: gaveUp ? 'error' : 'waiting',
+            sync_error: gaveUp ? NUMBER_UNKNOWN : null,
             ...(error instanceof RoutingDeferred || withdrawn ? { carrier_data: {
               ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
               ...(error instanceof RoutingDeferred ? { routing: error.routing } : {}),
@@ -3124,10 +3136,13 @@ export class TrackingSyncService {
         const probe = lookupProbe ?? (isRecord(parcel.carrier_data) ? parcel.carrier_data.delivery_probe : undefined);
         const listed = noNews && isRecord(probe) && probe.listed === true;
         const failing = (error.stale && !listed) || refused;
-        const syncError = !failing ? null : noNews ? NO_NEW_SCANS : await failureCopy(code, carrierId, parcel,
+        // A carrier that did not know the number for two days and could not be asked this time still does not know it.
+        const gaveUp = !refused && previousStage === 'pending' && parcel.sync_error === NUMBER_UNKNOWN
+          && error.routing.unknown_since?.carrier === carrierId;
+        const syncError = gaveUp ? NUMBER_UNKNOWN : !failing ? null : noNews ? NO_NEW_SCANS : await failureCopy(code, carrierId, parcel,
           error.routing.failures[carrierId]?.wrong_number === true) ?? error.message;
         const deferred = besideFailure({ last_synced_at: this.now().toISOString(),
-          sync_status: failing ? 'error' : previousStage === 'pending' ? 'waiting' : 'ok',
+          sync_status: failing || gaveUp ? 'error' : previousStage === 'pending' ? 'waiting' : 'ok',
           sync_error: syncError,
           carrier_data: { ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}), routing: error.routing },
         });

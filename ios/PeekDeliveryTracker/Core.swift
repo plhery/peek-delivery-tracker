@@ -306,6 +306,8 @@ final class Localizer: ObservableObject {
                 return text("app.refreshTimeout")
             case .rateLimited:
                 return text("native.error.rateLimited")
+            case .allowanceUsed:
+                return text("error.allowanceUsed")
             case .service(let message):
                 return serviceErrorMessage(message)
             case .serviceFailed(let status):
@@ -342,6 +344,8 @@ final class Localizer: ObservableObject {
     private func serviceErrorMessage(_ message: String, fallback: String = "error.generic") -> String {
         let value = message.lowercased()
         let rules: [(String, String)] = [
+            // The day's allowance lasts until tomorrow, not a moment.
+            ("allowance is used up", "error.allowanceUsed"),
             ("rate.?limit|too many requests", "error.rateLimited"),
             ("otp_expired|invalid.*(code|token)|(code|token).*expired", "error.invalidCode"),
             ("email.*(invalid|valid)|invalid.*email", "error.invalidEmail"),
@@ -552,11 +556,13 @@ final class Localizer: ObservableObject {
         language == .zh ? "\(day) \(time)" : "\(day), \(time)"
     }
 
-    /// The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan.
+    /// The status line, which names the carrier a parcel waits for, or probably travels with while it waits for that
+    /// carrier's first scan.
     func parcelStatus(_ parcel: Parcel) -> String {
         let key = parcel.displayStatus.key
-        guard key == "status.likelyCarrier", let likely = parcel.likelyCarrier else { return text(key) }
-        return text(key, ["carrier": CarrierCatalog.shared.info(for: likely, language: language).displayName])
+        let named = key == "status.waitingFor" ? parcel.awaitedCarrier : key == "status.likelyCarrier" ? parcel.likelyCarrier : nil
+        guard let named else { return text(key) }
+        return text(key, ["carrier": CarrierCatalog.shared.info(for: named, language: language).displayName])
     }
 
     /// The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends.

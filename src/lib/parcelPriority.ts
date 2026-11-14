@@ -1,6 +1,6 @@
 import { generatedScans } from './generatedTrack';
 import { currentEvent, currentStage } from './stages';
-import { parcelIsUnannounced } from './parcelStatus';
+import { awaitedCarrier, parcelIsUnannounced } from './parcelStatus';
 import type { ParcelWithEvents, RecipientAction } from '../types';
 
 const DAY = 86_400_000;
@@ -47,7 +47,8 @@ export function parcelAttention(
   }
   // Made-up moves say nothing of where the parcel is, whether the latest check failed or how old they are.
   if (generatedScans(parcel.events).length) return 'generated';
-  if (parcel.syncStatus === 'error') return 'sync_error';
+  // A parcel with no scans whose carrier could not be reached says it waits for that carrier.
+  if (parcel.syncStatus === 'error' && !awaitedCarrier(parcel)) return 'sync_error';
 
   const latestTime = current ? new Date(current.occurredAt).getTime() : NaN;
   if (

@@ -33,6 +33,7 @@ it('claims configurable daily and hourly budgets and returns Retry-After on exha
   // Every account's allowance for the hour is used up: until the next hour.
   claim.mockResolvedValue({ allowed: false, scope: 'overall', overallUsed: 50 });
   await expect(claimAccountTracking(client, userId, 'lookup')).rejects.toMatchObject({ status: 429, headers: { 'Retry-After': '900' } });
+  await expect(claimAccountTracking(client, userId, 'lookup')).rejects.toMatchObject({ scope: undefined });
 });
 
 it('says once an hour that every account’s allowance is running out, and that it is used up', async () => {
@@ -72,6 +73,8 @@ it('refuses additions and provider detection before spending provider resources'
       body: JSON.stringify({ trackingNumber: 'FR0000000099', carrier: 'amazon-shipping' }),
     }), { params: Promise.resolve({}) });
     expect(result.status).toBe(429);
+    // The day's allowance says so, for the app to say until when.
+    expect(await result.json()).toEqual({ error: 'Today’s tracking allowance is used up. Try again tomorrow.', scope: 'daily' });
   }
   expect(verify).not.toHaveBeenCalled();
   expect(check).not.toHaveBeenCalled();

@@ -748,7 +748,8 @@ class ParcelLogicTests {
         // Once another carrier answers for the number, the parcel is filed under it and the guess goes.
         val filed = parcel.copy(carrier = CarrierId.Seur)
         assertNull(filed.likelyCarrier)
-        assertEquals("status.unannounced", filed.displayStatus.key)
+        assertEquals("status.waitingFor", filed.displayStatus.key)
+        assertEquals("Waiting for SEUR", localizer.parcelStatus(filed))
         assertEquals("SEUR", CarrierVisualIdentity.shown(filed, localizer = localizer).name)
     }
 
@@ -1264,7 +1265,7 @@ class ParcelLogicTests {
         assertEquals(ParcelAttention.SyncError, failed.notice(now))
         assertTrue(failed.updateFailed)
         // A number only the owner can correct still sorts first, but its card does not say the update failed.
-        for (code in listOf("carrier:refused_number", "carrier:placeholder_number")) {
+        for (code in listOf("carrier:refused_number", "carrier:placeholder_number", "carrier:number_unknown")) {
             val refused = failed.copy(syncError = code)
             assertEquals(ParcelAttention.SyncError, refused.attention(now))
             assertNull(refused.notice(now))
@@ -1292,11 +1293,81 @@ class ParcelLogicTests {
         assertNull(announced.attention(now))
 
         val oldUnannounced = announced.copy(syncStatus = SyncStatus.Waiting)
-        assertEquals("status.unannounced", oldUnannounced.displayStatus.key)
+        assertEquals("status.waitingFor", oldUnannounced.displayStatus.key)
         assertEquals(ParcelAttention.NotAnnounced, oldUnannounced.attention(now))
 
         val recentUnannounced = oldUnannounced.copy(createdAt = "2026-08-08T12:01:00Z")
         assertNull(recentUnannounced.attention(now))
+    }
+
+    /**
+     * As parcelStatus.test.ts: a parcel with no scans names the carrier it waits for, which has not listed the number yet
+     * or could not be reached, without a failed update.
+     */
+    @Test
+    fun namesTheCarrierAParcelWithNoScansWaitsFor() {
+        val now = DateParser.date("2026-08-09T12:00:00Z")!!
+        val localizer = Localizer(AppLanguage.En)
+        val id = UUID.randomUUID()
+        // Added this morning: one its carrier has not listed for two days says so ([ParcelAttention.NotAnnounced]).
+        val added = makeParcel(id, events = listOf(event(id, TrackingStage.Pending, "2026-08-09T08:00:00Z"))).copy(createdAt = "2026-08-09T08:00:00Z")
+        fun with(status: SyncStatus, error: String? = null) = added.copy(syncStatus = status, syncError = error)
+        for (unreached in listOf(with(SyncStatus.Waiting), with(SyncStatus.Error), with(SyncStatus.Error, "carrier:transport"))) {
+            assertEquals(CarrierId.Ups, unreached.awaitedCarrier)
+            assertEquals("status.waitingFor", unreached.displayStatus.key)
+            assertEquals(ParcelTone.Normal, unreached.displayStatus.tone)
+            assertEquals("Waiting for UPS", localizer.parcelStatus(unreached))
+            // Not a missed update.
+            assertNull(unreached.attention(now))
+            assertFalse(unreached.updateFailed)
+        }
+        // Every language names the carrier.
+        for (language in AppLanguage.entries) {
+            localizer.language = language
+            assertTrue("$language", localizer.parcelStatus(with(SyncStatus.Error, "carrier:transport")).contains("UPS"))
+        }
+        localizer.language = AppLanguage.En
+
+        // What only its owner can fix, or a postal service not named yet, keeps its words.
+        val input = with(SyncStatus.Error, "carrier:input_required")
+        assertNull(input.awaitedCarrier)
+        assertEquals("status.failed", input.displayStatus.key)
+        assertEquals(ParcelAttention.SyncError, input.attention(now))
+        assertTrue(input.updateFailed)
+        val posted = with(SyncStatus.Waiting).copy(carrier = CarrierId.InternationalPost)
+        assertNull(posted.awaitedCarrier)
+        assertEquals("status.unannounced", posted.displayStatus.key)
+        // Its first scan says more.
+        val scanned = with(SyncStatus.Error, "carrier:transport").let {
+            it.copy(trackingEvents = it.trackingEvents + event(id, TrackingStage.InTransit, "2026-08-09T10:00:00Z"))
+        }
+        assertNull(scanned.awaitedCarrier)
+        assertEquals("stage.in_transit", scanned.displayStatus.key)
+        assertEquals(ParcelAttention.SyncError, scanned.attention(now))
+    }
+
+    /**
+     * Two days on, a carrier that still doesn't know its number asks its owner to check it, choose another carrier or
+     * delete the parcel: no failed update, and no carrier waited for.
+     */
+    @Test
+    fun aNumberItsCarrierHasNotKnownForTwoDaysIsOneToCheck() {
+        val now = DateParser.date("2026-08-09T12:00:00Z")!!
+        val localizer = Localizer(AppLanguage.En)
+        val id = UUID.randomUUID()
+        val parcel = makeParcel(id, events = listOf(event(id, TrackingStage.Pending, "2026-08-07T08:00:00Z")))
+            .copy(syncStatus = SyncStatus.Error, syncError = "carrier:number_unknown")
+        assertTrue(parcel.numberToCheck)
+        assertNull(parcel.awaitedCarrier)
+        assertEquals("status.checkNumber", parcel.displayStatus.key)
+        assertEquals(ParcelTone.Warning, parcel.displayStatus.tone)
+        assertEquals("Check the tracking number", localizer.parcelStatus(parcel))
+        assertNull(parcel.notice(now))
+        assertFalse(parcel.updateFailed)
+        assertEquals(
+            "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.",
+            localizer.trackingFailureMessage("carrier:number_unknown"),
+        )
     }
 
     @Test

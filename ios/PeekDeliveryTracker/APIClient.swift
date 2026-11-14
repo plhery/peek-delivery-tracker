@@ -28,6 +28,8 @@ enum DeliveryAPIError: LocalizedError {
     case refreshFailed
     case refreshTimeout
     case rateLimited(TimeInterval)
+    /// The account's tracking allowance for the day is used up: it lasts until tomorrow, not a moment.
+    case allowanceUsed
     case service(String)
     case serviceFailed(Int)
 
@@ -43,6 +45,7 @@ enum DeliveryAPIError: LocalizedError {
         case .refreshFailed: "Tracking refresh failed. Try again."
         case .refreshTimeout: "The tracking refresh is taking longer than expected."
         case .rateLimited: "Too many requests. Try again shortly."
+        case .allowanceUsed: "Today’s tracking allowance is used up. Try again tomorrow."
         case .service(let message): message
         case .serviceFailed(let status): "Delivery service failed (\(status))."
         }
@@ -496,12 +499,13 @@ final class DeliveryAPIClient {
             throw DeliveryAPIError.authenticationExpired
         }
         guard (200..<300).contains(result.1.statusCode) else {
+            let error = try? JSONDecoder().decode(ErrorResponse.self, from: result.0)
             if result.1.statusCode == 429 {
+                if let error, Self.allowanceUsed(error) { throw DeliveryAPIError.allowanceUsed }
                 throw DeliveryAPIError.rateLimited(Self.retryAfterSeconds(
                     result.1.value(forHTTPHeaderField: "Retry-After")
                 ))
             }
-            let error = try? JSONDecoder().decode(ErrorResponse.self, from: result.0)
             if result.1.statusCode == 409, let packageID = error?.packageID {
                 throw DeliveryAPIError.duplicateTracking(packageID)
             }
@@ -509,6 +513,11 @@ final class DeliveryAPIClient {
             throw DeliveryAPIError.serviceFailed(result.1.statusCode)
         }
         return result
+    }
+
+    /// Whether a refusal is the day's allowance used up, which lasts until tomorrow, as the web's `userErrorKey` tells it.
+    static func allowanceUsed(_ error: ErrorResponse) -> Bool {
+        error.scope == .daily || error.error.range(of: "allowance is used up", options: .caseInsensitive) != nil
     }
 
     /// Requests that have carriers asked or checks queued; the server counts their App Attest signatures.

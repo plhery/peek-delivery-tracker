@@ -744,7 +744,8 @@ final class ParcelLogicTests: XCTestCase {
         var filed = parcel
         filed.carrier = .seur
         XCTAssertNil(filed.likelyCarrier)
-        XCTAssertEqual(filed.displayStatus.key, "status.unannounced")
+        XCTAssertEqual(filed.displayStatus.key, "status.waitingFor")
+        XCTAssertEqual(localizer.parcelStatus(filed), "Waiting for SEUR")
         XCTAssertEqual(CarrierVisualIdentity.shown(for: filed, localizer: localizer).name, "SEUR")
     }
 
@@ -1456,7 +1457,7 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(failed.notice(now: now), .syncError)
         XCTAssertTrue(failed.updateFailed)
         // A number only the owner can correct still sorts first, but its card does not say the update failed.
-        for code in ["carrier:refused_number", "carrier:placeholder_number"] {
+        for code in ["carrier:refused_number", "carrier:placeholder_number", "carrier:number_unknown"] {
             var refused = failed
             refused.syncError = code
             XCTAssertEqual(refused.attention(now: now), .syncError)
@@ -1487,12 +1488,88 @@ final class ParcelLogicTests: XCTestCase {
 
         var oldUnannounced = announced
         oldUnannounced.syncStatus = .waiting
-        XCTAssertEqual(oldUnannounced.displayStatus.key, "status.unannounced")
+        XCTAssertEqual(oldUnannounced.displayStatus.key, "status.waitingFor")
         XCTAssertEqual(oldUnannounced.attention(now: now), .notAnnounced)
 
         var recentUnannounced = oldUnannounced
         recentUnannounced.createdAt = "2026-08-08T12:01:00Z"
         XCTAssertNil(recentUnannounced.attention(now: now))
+    }
+
+    /// As parcelStatus.test.ts: a parcel with no scans names the carrier it waits for, which has not listed the number yet
+    /// or could not be reached, without a failed update.
+    @MainActor
+    func testNamesTheCarrierAParcelWithNoScansWaitsFor() {
+        let now = DateParser.date("2026-08-09T12:00:00Z")!
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let id = UUID()
+        let added = makeParcel(id: id, events: [event(id, .pending, "2026-08-09T08:00:00Z")])
+        func with(_ status: SyncStatus, _ error: String? = nil) -> Parcel {
+            var parcel = added
+            parcel.syncStatus = status
+            parcel.syncError = error
+            return parcel
+        }
+        for unreached in [with(.waiting), with(.error), with(.error, "carrier:transport")] {
+            XCTAssertEqual(unreached.awaitedCarrier, .ups)
+            XCTAssertEqual(unreached.displayStatus.key, "status.waitingFor")
+            XCTAssertEqual(unreached.displayStatus.tone, .normal)
+            XCTAssertEqual(localizer.parcelStatus(unreached), "Waiting for UPS")
+            // Not a missed update.
+            if unreached.syncStatus == .error { XCTAssertNil(unreached.attention(now: now)) }
+            XCTAssertFalse(unreached.updateFailed)
+        }
+        // Every language names the carrier.
+        for language in AppLanguage.allCases {
+            localizer.language = language
+            XCTAssertTrue(localizer.parcelStatus(with(.error, "carrier:transport")).contains("UPS"), "\(language)")
+        }
+        localizer.language = .en
+
+        // What only its owner can fix, or a postal service not named yet, keeps its words.
+        let input = with(.error, "carrier:input_required")
+        XCTAssertNil(input.awaitedCarrier)
+        XCTAssertEqual(input.displayStatus.key, "status.failed")
+        XCTAssertEqual(input.attention(now: now), .syncError)
+        XCTAssertTrue(input.updateFailed)
+        var posted = with(.waiting)
+        posted.carrier = .internationalPost
+        XCTAssertNil(posted.awaitedCarrier)
+        XCTAssertEqual(posted.displayStatus.key, "status.unannounced")
+        // Its first scan says more.
+        var scanned = with(.error, "carrier:transport")
+        scanned.trackingEvents.append(event(id, .inTransit, "2026-08-09T10:00:00Z"))
+        XCTAssertNil(scanned.awaitedCarrier)
+        XCTAssertEqual(scanned.displayStatus.key, "stage.in_transit")
+        XCTAssertEqual(scanned.attention(now: now), .syncError)
+    }
+
+    /// Two days on, a carrier that still doesn't know its number asks its owner to check it, choose another carrier or
+    /// delete the parcel: no failed update, and no carrier waited for.
+    @MainActor
+    func testANumberItsCarrierHasNotKnownForTwoDaysIsOneToCheck() {
+        let now = DateParser.date("2026-08-09T12:00:00Z")!
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let id = UUID()
+        var parcel = makeParcel(id: id, events: [event(id, .pending, "2026-08-07T08:00:00Z")])
+        parcel.syncStatus = .error
+        parcel.syncError = Parcel.numberUnknown
+        XCTAssertEqual(Parcel.numberUnknown, "carrier:number_unknown")
+        XCTAssertTrue(parcel.numberToCheck)
+        XCTAssertNil(parcel.awaitedCarrier)
+        XCTAssertEqual(parcel.displayStatus.key, "status.checkNumber")
+        XCTAssertEqual(parcel.displayStatus.tone, .warning)
+        XCTAssertEqual(localizer.parcelStatus(parcel), "Check the tracking number")
+        XCTAssertNil(parcel.notice(now: now))
+        XCTAssertFalse(parcel.updateFailed)
+        XCTAssertEqual(localizer.trackingFailureMessage(Parcel.numberUnknown),
+                       "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.")
     }
 
     func testAwaitingHandoverMatchesWebApp() {
@@ -3562,6 +3639,71 @@ extension SessionIsolationTests {
                 XCTAssertNotNil(session.user)
             }
         }
+    }
+
+    /// A refused add says why in the Add sheet: the day's allowance until tomorrow, any other limit a moment. The list
+    /// raises no notice of its own.
+    @MainActor func testRefusedAddSaysWhyWithoutAListNotice() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        respond(Data(#"{"error":"Today’s tracking allowance is used up. Try again tomorrow.","scope":"daily"}"#.utf8), status: 429)
+        do {
+            _ = try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+            XCTFail("Expected the refusal")
+        } catch DeliveryAPIError.allowanceUsed {}
+        respond(Data(#"{"error":"Too many requests"}"#.utf8), status: 429)
+        do {
+            _ = try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+            XCTFail("Expected the refusal")
+        } catch DeliveryAPIError.rateLimited {}
+        XCTAssertNil(store.errorMessage)
+        XCTAssertNotNil(session.user)
+    }
+
+    /// The first check of a parcel just added can fail, as when its carrier can't be reached: the list is read again, so the
+    /// parcel says why, and raises no notice of its own.
+    @MainActor func testFailedFirstCheckOfAnAddedParcelRereadsTheListWithoutAListNotice() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let job = UUID()
+        let added = parcel()
+        let created = try JSONEncoder.deliveryTracker.encode(CreatePackageResponse(package: added, jobIDs: [job]))
+        let jobs = try JSONEncoder.deliveryTracker.encode(SyncJobListResponse(jobs: [
+            SyncJobResponse(id: job, status: .succeeded, requestedAt: "2026-09-25T10:00:00Z", result: SyncSummary(errors: 1)),
+        ]))
+        var checked = added
+        checked.syncStatus = .error
+        checked.syncError = "carrier:transport"
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [checked]))
+        let reread = expectation(description: "The list was read again after the check")
+        reread.assertForOverFulfill = false
+        nonisolated(unsafe) var checkAnswered = false
+        SessionTestURLProtocol.handler = { request, callback in
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/api/packages"): callback(.success((201, created)))
+            case ("GET", "/api/sync/jobs"):
+                checkAnswered = true
+                callback(.success((200, jobs)))
+            case ("GET", "/api/packages"):
+                callback(.success((200, list)))
+                if checkAnswered { reread.fulfill() }
+            default: callback(.success((200, Data("{}".utf8))))
+            }
+        }
+        _ = try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+        await fulfillment(of: [reread], timeout: 3)
+        let deadline = Date().addingTimeInterval(2)
+        while store.parcels.first?.syncError == nil, Date() < deadline { try await Task.sleep(for: .milliseconds(20)) }
+        XCTAssertEqual(store.parcels.map(\.syncError), ["carrier:transport"])
+        XCTAssertNil(store.errorMessage)
     }
 }
 

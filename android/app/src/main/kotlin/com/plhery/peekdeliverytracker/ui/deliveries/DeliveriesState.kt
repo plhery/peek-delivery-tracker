@@ -1870,6 +1870,18 @@ internal class DeliveriesState(
     }
 
     /**
+     * The Delete under why the last check of the page with `pageId` failed, as its ••• menu's Delete (`chose(.delete,
+     * on:)`): the question stands off the •••, and TalkBack goes back to `focus` once it has closed. Nothing while the
+     * page saves a change.
+     */
+    fun deleteOnPage(pageId: UUID, focus: AccessibilityFocus?) {
+        if (modal || pageWorking(pageId)) return
+        val parcel = menuParcel(pageId) ?: return
+        returnFocus = focus
+        deleting = DeleteRequest(parcel.id, pageId)
+    }
+
+    /**
      * The rename alert's Save: the name typed, trimmed and cut to 80 characters ([parcelName]), goes to the store
      * (`store.rename(_:label:)`) for the parcel as it is now. Asked from a page, in its `run`: one change at a time, and
      * an alert over the page says why it failed. Asked from a card, in the app's scope, for the parcel the menu found

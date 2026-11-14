@@ -53,5 +53,5 @@ export async function claimAccountTracking(service: SupabaseServiceClient, userI
   }
   throw new HttpError(429, 'Today’s tracking allowance is used up. Try again tomorrow.', {
     'Retry-After': String(secondsUntilUtcMidnight(now)),
-  });
+  }, { scope: 'daily' });
 }

@@ -325,9 +325,27 @@ extension Parcel {
         return CarrierCatalog.supportsSwissPostHandoff(trackingNumber) ? .aliexpress : carrier
     }
 
-    /// Whether only the owner can make the number trackable: a placeholder, or one its carrier does not issue.
+    /// A number its carrier still did not know two days after it first said so, with nothing else answering for it: Peek
+    /// stopped waiting, though it still looks now and then, and its first scan clears this.
+    static let numberUnknown = "carrier:number_unknown"
+
+    /// Whether only the owner can make the number trackable: a placeholder, one its carrier does not issue, or one its
+    /// carrier has not known for two days.
     var numberToCheck: Bool {
-        syncError == "carrier:placeholder_number" || syncError == "carrier:refused_number"
+        syncError == "carrier:placeholder_number" || syncError == "carrier:refused_number" || syncError == Self.numberUnknown
+    }
+
+    /// Failures only the owner's details can fix. Any other failure of a parcel with no scans is its carrier's.
+    private static let ownerFailures: Set<String> = ["carrier:input_required", "carrier:invalid_input", "carrier:several_parcels"]
+
+    /// The carrier a parcel with no scans waits for while nothing is asked of its owner: its own, which has not listed the
+    /// number yet or could not be reached. Nil under no carrier, or a postal service not named yet. As the web's `awaitedCarrier`.
+    var awaitedCarrier: CarrierID? {
+        guard !hasCarrierUpdate, carrier != .unknown, carrier != .internationalPost,
+              CarrierCatalog.shared.tracksAutomatically(activeTrackingCarrier) else { return nil }
+        let waits = syncStatus == .waiting ? carrierData?.routing?.providerInputNeeded == nil
+            : syncStatus == .error && !numberToCheck && !Self.ownerFailures.contains(syncError ?? "")
+        return waits ? carrier : nil
     }
 
     var displayStatus: ParcelDisplayStatus {
@@ -339,6 +357,10 @@ extension Parcel {
         }
         if !hasCarrierUpdate && (syncStatus == .pending || syncStatus == .syncing) {
             return ParcelDisplayStatus(key: "status.syncing", tone: .normal, syncing: true)
+        }
+        // Its carrier has not listed the number yet, or could not be reached: Peek keeps asking.
+        if awaitedCarrier != nil {
+            return ParcelDisplayStatus(key: "status.waitingFor", tone: .normal, syncing: false)
         }
         if !hasCarrierUpdate && syncStatus == .error {
             return ParcelDisplayStatus(key: "status.failed", tone: .warning, syncing: false)
@@ -367,8 +389,9 @@ extension Parcel {
         return reason == .syncError && numberToCheck ? nil : reason
     }
 
-    /// Whether a card says the latest update failed: not for a number only the owner can correct.
-    var updateFailed: Bool { syncStatus == .error && !numberToCheck }
+    /// Whether a card says the latest update failed: not for a number only the owner can correct, nor for a parcel with no
+    /// scans whose carrier could not be reached, whose status says it waits for that carrier.
+    var updateFailed: Bool { syncStatus == .error && !numberToCheck && awaitedCarrier == nil }
 
     func attention(now: Date = Date()) -> ParcelAttention? {
         // The carrier waits on the recipient until a later scan says it moved on.
@@ -382,7 +405,8 @@ extension Parcel {
         }
         // Made-up moves say nothing of where the parcel is, whether the latest check failed or how old they are.
         if !GeneratedTrack.scans(trackingEvents).isEmpty { return .generated }
-        if syncStatus == .error { return .syncError }
+        // A parcel with no scans whose carrier could not be reached says it waits for that carrier.
+        if syncStatus == .error && awaitedCarrier == nil { return .syncError }
         if let event = currentEvent,
            [.registered, .accepted, .inTransit].contains(event.stage),
            let update = DateParser.date(event.occurredAt),

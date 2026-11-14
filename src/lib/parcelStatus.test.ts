@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import type { ParcelWithEvents, SyncStatus } from '../types';
 import { parcelDeliveryEstimate, localizedParcelCompletionDate, parcelDisplayStatus, parcelDisplayStatusKey, parcelStatusLabel, shownCarrier } from './parcelStatus';
 import { carrierInfo } from './carriers';
+import { parcelAttention } from './parcelPriority';
 import { translateMessage } from './messages';
 
 function parcel(syncStatus: SyncStatus, stage: 'pending' | 'in_transit' = 'pending'): ParcelWithEvents {
@@ -37,11 +38,28 @@ describe('parcelDisplayStatus', () => {
   });
 
   it('makes first-sync failures and unsupported carriers explicit', () => {
-    expect(parcelDisplayStatus(parcel('error')).label).toBe("Update unavailable");
+    expect(parcelDisplayStatus({ ...parcel('error'), syncError: 'carrier:several_parcels' }).label).toBe("Update unavailable");
     expect(parcelDisplayStatus(parcel('unsupported')).label).toBe("Check tracking website");
   });
 
-  it.each(['carrier:refused_number', 'carrier:placeholder_number'])('asks to check a number no carrier will answer for (%s)', (syncError) => {
+  it('names the carrier a parcel with no scans waits for, which has not listed it yet or could not be reached', () => {
+    const t = (key: Parameters<typeof translateMessage>[1], values?: Record<string, string | number>) => translateMessage('en', key, values, en);
+    for (const unreached of [parcel('waiting'), parcel('error'), { ...parcel('error'), syncError: 'carrier:transport' }]) {
+      expect(parcelDisplayStatusKey(unreached)).toBe('status.waitingFor');
+      expect(parcelStatusLabel(unreached, t)).toBe('Waiting for Swiss Post');
+      expect(parcelDisplayStatus(unreached)).toEqual({ label: 'Waiting for the carrier', tone: 'ok', syncing: false });
+      // Not a missed update.
+      if (unreached.syncStatus === 'error') expect(parcelAttention(unreached)).toBeNull();
+    }
+    // What only its owner can fix, or a postal service not named yet, keeps its words.
+    expect(parcelDisplayStatusKey({ ...parcel('error'), syncError: 'carrier:input_required' })).toBe('status.failed');
+    expect(parcelAttention({ ...parcel('error'), syncError: 'carrier:input_required' })).toBe('sync_error');
+    expect(parcelDisplayStatusKey({ ...parcel('waiting'), carrier: 'intl-post' })).toBe('status.unannounced');
+    // Its first scan says more.
+    expect(parcelDisplayStatusKey({ ...parcel('error', 'in_transit'), syncError: 'carrier:transport' })).toBe('stage.in_transit');
+  });
+
+  it.each(['carrier:refused_number', 'carrier:placeholder_number', 'carrier:number_unknown'])('asks to check a number no carrier will answer for (%s)', (syncError) => {
     for (const carrier of ['swiss-post', 'unknown'] as const) {
       const refused = { ...parcel('error'), carrier, syncError };
       expect(parcelDisplayStatusKey(refused)).toBe('status.checkNumber');
@@ -81,7 +99,7 @@ describe('parcelDisplayStatus', () => {
     expect(shownCarrier(shared, carrierInfo('unknown'), t).name).toBe('Unknown carrier');
     // Filed under the carrier that answered, the parcel shows it.
     const filed = { ...likely, carrier: 'seur' as const };
-    expect(parcelStatusLabel(filed, t)).toBe('Waiting for the carrier');
+    expect(parcelStatusLabel(filed, t)).toBe('Waiting for SEUR');
     expect(shownCarrier(filed, carrierInfo('seur'), t).name).toBe('SEUR');
   });
 

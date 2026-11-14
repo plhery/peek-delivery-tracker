@@ -44,6 +44,7 @@ import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.amazonShippingHistoryExpired
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.awaitedCarrier
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -310,13 +311,15 @@ internal fun ShipmentFacts(facts: List<ShipmentFact>, modifier: Modifier = Modif
  *   `ink`, a way to change the carrier where the parcel is the reader's to change (`editable`), unless Amazon wants
  *   an account or no longer has the history.
  * - Otherwise why the last check failed (B-ST07), in the warning colour: that the number looks like one of the carrier
- *   it names, where the parcel's carrier refused it and one other claims it, or else
- *   `trackingFailureMessage`. Then, each a part of the page's own, in `ink` where the parcel is the reader's: a way to
- *   update the details its carrier asked for and still needs, the switch to the carrier that claims the number
- *   (semibold, `onSwitch`, waiting while a change is saved, `working`), and the carrier's change for a refused number.
+ *   it names, where the parcel's carrier refused it and one other claims it, that Peek keeps trying the carrier a
+ *   parcel with no scans waits for (`awaitedCarrier`), or else `trackingFailureMessage`. Then, each a part of the
+ *   page's own, in `ink` where the parcel is the reader's: a way to update the details its carrier asked for and still
+ *   needs, the switch to the carrier that claims the number (semibold, `onSwitch`, waiting while a change is saved,
+ *   `working`), and the carrier's change for a refused number or one its carrier has not known for two days. For that
+ *   one, Delete too where the page offers it (`onDelete`), waiting while a change is saved.
  *
- * The carrier's changes open the editor (`onEditCarrier`), and the switch moves the parcel or opens it, TalkBack coming
- * back to the button that did.
+ * The carrier's changes open the editor (`onEditCarrier`), the switch moves the parcel or opens it, and Delete asks
+ * first, as the ••• menu's does, TalkBack coming back to the button that did.
  */
 @Composable
 internal fun TrackingNotes(
@@ -326,6 +329,7 @@ internal fun TrackingNotes(
     ink: Color,
     onEditCarrier: (AccessibilityFocus) -> Unit,
     onSwitch: (CarrierId, AccessibilityFocus) -> Unit,
+    onDelete: ((AccessibilityFocus) -> Unit)? = null,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -354,8 +358,11 @@ internal fun TrackingNotes(
     val error = parcel.syncError ?: return
     // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
     val claiming = if (error == "carrier:refused_number") catalog.claimingCarrier(parcel.trackingNumber, besides = parcel.carrier) else null
+    // A carrier that could not be reached yet for a parcel with no scans: Peek keeps trying.
+    val awaited = parcel.awaitedCarrier
     Text(
         claiming?.let { localizer.text("detail.refusedNumberLooksLike", mapOf("carrier" to identities.displayName(it, language))) }
+            ?: awaited?.let { localizer.text("detail.waitingForCarrier", mapOf("carrier" to identities.displayName(it, language))) }
             ?: localizer.trackingFailureMessage(error),
         Modifier.testTag(PAGE_SYNC_ERROR),
         color = colors.warning,
@@ -370,7 +377,10 @@ internal fun TrackingNotes(
             FontWeight.SemiBold, enabled = !working,
         ) { onSwitch(claiming, it) }
     }
-    if (editable && error == "carrier:refused_number") NoteButton(localizer.text("detail.changeCarrier"), ink, action = onEditCarrier)
+    if (editable && error in CARRIER_ERRORS) NoteButton(localizer.text("detail.changeCarrier"), ink, action = onEditCarrier)
+    if (onDelete != null && error == "carrier:number_unknown") {
+        NoteButton(localizer.text("detail.delete"), ink, enabled = !working, action = onDelete)
+    }
 }
 
 /**
@@ -398,6 +408,9 @@ private fun NoteButton(
 
 /** The errors whose details the parcel's carrier asked for. */
 private val INPUT_ERRORS = listOf("carrier:input_required", "carrier:invalid_input")
+
+/** The numbers another carrier may know: one its carrier does not issue, or has not known for two days. */
+private val CARRIER_ERRORS = listOf("carrier:refused_number", "carrier:number_unknown")
 
 private val CARD_RADIUS = 16.dp
 private val BUTTON_RADIUS = 12.dp

@@ -226,6 +226,27 @@ describe('shipment details', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
+  it('offers to change the carrier or delete a parcel whose carrier has not known its number for two days', async () => {
+    const notice = () => screen.getByText('After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.')
+      .closest('.detail__sync-error') as HTMLElement;
+    const view = show({ syncStatus: 'error', syncError: 'carrier:number_unknown' });
+    expect(screen.getByText('Check the tracking number')).toBeInTheDocument();
+    await userEvent.click(within(notice()).getByRole('button', { name: 'Delete permanently' }));
+    expect(screen.getByRole('dialog', { name: 'Permanently delete Books?' })).toBeInTheDocument();
+    view.unmount();
+    show({ syncStatus: 'error', syncError: 'carrier:number_unknown' });
+    await userEvent.click(within(notice()).getByRole('button', { name: 'Change carrier' }));
+    expect(screen.getByRole('button', { name: 'Carrier Heppner' })).toBeInTheDocument();
+  });
+
+  it('says Peek keeps trying a carrier it could not reach for a parcel with no scans', () => {
+    show({ syncStatus: 'error', syncError: 'carrier:transport' });
+    expect(screen.getByText('Waiting for Heppner')).toBeInTheDocument();
+    const box = screen.getByText('Heppner couldn’t be reached yet. Peek keeps trying.').closest('.detail__sync-error') as HTMLElement;
+    expect(within(box).queryByRole('button')).not.toBeInTheDocument();
+    expect(screen.queryByText('The tracking service couldn’t be reached. Try again later.')).not.toBeInTheDocument();
+  });
+
   it('names the one carrier a refused number fits, and switches to it in one tap', async () => {
     const onChangeCarrier = vi.fn().mockResolvedValue(undefined);
     const refused = { trackingNumber: 'JJD000390012345678', syncStatus: 'error', syncError: 'carrier:refused_number' } as const;

@@ -7325,6 +7325,60 @@ describe('TrackingSyncService', () => {
       expect.arrayContaining([expect.objectContaining({ kind: 'refresh', healthy: true })]));
   });
 
+  it('asks the owner to check a number its carrier has not known for two days, through an outage, until it answers', async () => {
+    let now = new Date('2026-09-10T12:00:00Z');
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn(async () => ({ token: 'lease', retry_at: now.toISOString() })),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = { fetch: vi.fn().mockRejectedValue(Object.assign(new Error('not live'), { status: 404 })),
+      fetchUniversal: vi.fn(async (source: string) => { throw new NotFoundError(source); }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'unknown-number', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'pending',
+      created_at: '2026-09-10T11:59:00Z' };
+    const check = async (at: string) => {
+      now = new Date(at);
+      const outcome = await service.syncPackage(parcel, { trigger: 'scheduled' });
+      const saved = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+      parcel = { ...parcel, ...saved };
+      return { outcome, saved };
+    };
+    expect(await check('2026-09-10T12:00:00Z')).toMatchObject({ outcome: { waiting: 1, errors: 0 }, saved: { sync_status: 'waiting',
+      sync_error: null, carrier_data: { routing: { unknown_since: { carrier: 'dhl', since: '2026-09-10T12:00:00.000Z' } } } } });
+    expect(await check('2026-09-12T11:00:00Z')).toMatchObject({ outcome: { waiting: 1 }, saved: { sync_status: 'waiting', sync_error: null,
+      carrier_data: { routing: { unknown_since: { since: '2026-09-10T12:00:00.000Z' } } } } });
+    // Two days on: no failed check, a number to check. It leaves the hourly checks.
+    expect(await check('2026-09-12T12:00:00Z')).toMatchObject({ outcome: { waiting: 1, errors: 0 },
+      saved: { sync_status: 'error', sync_error: 'carrier:number_unknown' } });
+    expect(unseenFor(parcel, now)).not.toBeNull();
+    // The carrier out of reach changes nothing.
+    adapter.fetch.mockRejectedValue(new UpstreamHttpError('dhl', 502));
+    expect(await check('2026-09-13T12:00:00Z')).toMatchObject({ saved: { sync_status: 'error', sync_error: 'carrier:number_unknown' } });
+    // Its first scan clears it.
+    adapter.fetch.mockResolvedValue({ status: 'in_transit', current_stage: 'in_transit', current_stage_source: 'carrier_map',
+      events: [{ time: '2026-09-14T09:00:00Z', description: 'Sorted in regional hub', provider_code: 'HUB', stage: 'in_transit', stage_source: 'carrier_map' }] });
+    const { saved } = await check('2026-09-14T12:00:00Z');
+    expect(saved).toMatchObject({ sync_status: 'ok', sync_error: null });
+    expect((saved.carrier_data as { routing: JsonObject }).routing.unknown_since).toBeUndefined();
+  });
+
+  it('starts the two days again for another carrier', async () => {
+    const now = new Date('2026-09-10T12:00:00Z');
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn(async () => ({ token: 'lease', retry_at: now.toISOString() })),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = { fetch: vi.fn().mockRejectedValue(Object.assign(new Error('not live'), { status: 404 })),
+      fetchUniversal: vi.fn(async (source: string) => { throw new NotFoundError(source); }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    const routing = { version: 1, configured_carrier: 'dpd', failures: {}, probe_cursor: 0, discovery_cursor: 0, consecutive_failures: 0,
+      unknown_since: { carrier: 'dpd', since: '2026-09-01T12:00:00.000Z' } };
+    await expect(service.syncPackage({ id: 'changed', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'pending',
+      created_at: '2026-09-01T11:59:00Z', carrier_data: { routing } }, { trigger: 'scheduled' })).resolves.toMatchObject({ waiting: 1 });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ sync_status: 'waiting', sync_error: null,
+      carrier_data: { routing: { unknown_since: { carrier: 'dhl', since: '2026-09-10T12:00:00.000Z' } } } });
+  });
+
   it('keeps an unknown-carrier parcel waiting while no provider has history for it', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),

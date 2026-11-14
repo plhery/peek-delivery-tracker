@@ -14,6 +14,7 @@ import com.plhery.peekdeliverytracker.core.api.DeleteLiveActivityDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.DeleteLiveActivityUpdateTokenRequest
 import com.plhery.peekdeliverytracker.core.api.DeleteNativePushDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.ErrorResponse
+import com.plhery.peekdeliverytracker.core.api.ErrorResponseScope
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
 import com.plhery.peekdeliverytracker.core.api.FriendsActivity
@@ -205,6 +206,8 @@ sealed class DeliveryApiError(message: String) : Exception(message) {
     class RefreshTimeout : DeliveryApiError("The tracking refresh is taking longer than expected.")
     /** `retryAfter` in seconds. */
     class RateLimited(val retryAfter: Double) : DeliveryApiError("Too many requests. Try again shortly.")
+    /** The account's tracking allowance for the day is used up: it lasts until tomorrow, not a moment. */
+    class AllowanceUsed : DeliveryApiError("Today’s tracking allowance is used up. Try again tomorrow.")
     class Service(val serviceMessage: String) : DeliveryApiError(serviceMessage)
     class ServiceFailed(val status: Int) : DeliveryApiError("Delivery service failed ($status).")
 }
@@ -524,12 +527,15 @@ class DeliveryApiClient(
             throw DeliveryApiError.AuthenticationExpired()
         }
         if (result.statusCode !in 200 until 300) {
-            if (result.statusCode == 429) throw DeliveryApiError.RateLimited(retryAfterSeconds(result.header("Retry-After"), now()))
             // The plain JSONDecoder, as on the iPhone: the keys exactly as the contract names them.
             val error = try {
                 decodeJson(ErrorResponse.serializer(), result.body)
             } catch (_: Exception) {
                 null
+            }
+            if (result.statusCode == 429) {
+                if (error != null && allowanceUsed(error)) throw DeliveryApiError.AllowanceUsed()
+                throw DeliveryApiError.RateLimited(retryAfterSeconds(result.header("Retry-After"), now()))
             }
             val packageId = error?.packageId
             if (result.statusCode == 409 && packageId != null) throw DeliveryApiError.DuplicateTracking(packageId)
@@ -620,6 +626,10 @@ class DeliveryApiClient(
                 else -> throw DeliveryApiError.ServiceFailed(response.statusCode)
             }
         }
+
+        /** Whether a refusal is the day's allowance used up, which lasts until tomorrow, as the web's `userErrorKey` tells it. */
+        fun allowanceUsed(error: ErrorResponse): Boolean =
+            error.scope == ErrorResponseScope.Daily || error.error.contains("allowance is used up", ignoreCase = true)
 
         /** Requests that have carriers asked or checks queued; the server counts their App Attest signatures. */
         fun signsWithAppAttest(path: String, method: String): Boolean {

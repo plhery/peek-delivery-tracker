@@ -10,6 +10,7 @@ import com.plhery.peekdeliverytracker.core.api.SyncJobListResponse
 import com.plhery.peekdeliverytracker.core.api.SyncJobResponse
 import com.plhery.peekdeliverytracker.core.api.SyncJobStatus
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.SyncSummary
 import java.io.IOException
 import java.time.Instant
 import java.time.ZoneId
@@ -1240,6 +1241,65 @@ class SessionIsolationTests {
         runCurrent()
         assertNull(store.errorMessage)
         assertEquals(2, transport.requests.count { it.method == "GET" && it.path == "/api/sync/jobs" })
+    }
+
+    /**
+     * A refused add says why in the Add sheet: the day's allowance until tomorrow, any other limit a moment. The list
+     * raises no notice of its own.
+     */
+    @Test
+    fun refusedAddSaysWhyWithoutAListNotice() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        authorize(session, transport)
+        val store = store(session, transport)
+        transport.respond("""{"error":"Today’s tracking allowance is used up. Try again tomorrow.","scope":"daily"}""", status = 429)
+        try {
+            store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+            fail("Expected the refusal")
+        } catch (_: DeliveryApiError.AllowanceUsed) {
+        }
+        transport.respond("""{"error":"Too many requests"}""", status = 429)
+        try {
+            store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+            fail("Expected the refusal")
+        } catch (_: DeliveryApiError.RateLimited) {
+        }
+        assertNull(store.errorMessage)
+        assertNotNull(session.user)
+    }
+
+    /**
+     * The first check of a parcel just added can fail, as when its carrier can't be reached: the list is read again, so
+     * the parcel says why, and raises no notice of its own.
+     */
+    @Test
+    fun failedFirstCheckOfAnAddedParcelRereadsTheListWithoutAListNotice() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        authorize(session, transport)
+        val store = store(session, transport)
+        val job = UUID.randomUUID()
+        val added = parcel()
+        val created = json(CreatePackageResponse.serializer(), CreatePackageResponse(parcel = added, jobIds = listOf(job)))
+        val jobs = json(
+            SyncJobListResponse.serializer(),
+            SyncJobListResponse(listOf(SyncJobResponse(id = job, status = SyncJobStatus.Succeeded, requestedAt = "2026-09-25T10:00:00Z", result = SyncSummary(errors = 1)))),
+        )
+        val list = packageList(added.copy(syncStatus = SyncStatus.Error, syncError = "carrier:transport"))
+        transport.handler = { request ->
+            when (request.method to request.path) {
+                "POST" to "/api/packages" -> jsonResponse(201, created)
+                "GET" to "/api/sync/jobs" -> jsonResponse(200, jobs)
+                "GET" to "/api/packages" -> jsonResponse(200, list)
+                else -> jsonResponse(200, "{}")
+            }
+        }
+        store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+        store.parcelsFlow.first { it.singleOrNull()?.syncError != null }
+        runCurrent()
+        assertEquals(listOf("carrier:transport"), store.parcels.map { it.syncError })
+        assertNull(store.errorMessage)
     }
 
     /**

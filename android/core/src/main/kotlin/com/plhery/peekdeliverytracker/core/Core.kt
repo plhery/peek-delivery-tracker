@@ -251,6 +251,7 @@ class Localizer(
                 is DeliveryApiError.RefreshFailed -> text("native.error.refreshFailed")
                 is DeliveryApiError.RefreshTimeout -> text("app.refreshTimeout")
                 is DeliveryApiError.RateLimited -> text("native.error.rateLimited")
+                is DeliveryApiError.AllowanceUsed -> text("error.allowanceUsed")
                 is DeliveryApiError.Service -> serviceErrorMessage(error.serviceMessage)
                 is DeliveryApiError.ServiceFailed -> text("native.error.serviceFailed", mapOf("status" to error.status))
             }
@@ -469,12 +470,18 @@ class Localizer(
      */
     private fun dayAndTime(day: String, time: String): String = if (language == AppLanguage.Zh) "$day $time" else "$day, $time"
 
-    /** The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan. */
+    /**
+     * The status line, which names the carrier a parcel waits for, or probably travels with while it waits for that
+     * carrier's first scan.
+     */
     fun parcelStatus(parcel: Parcel): String {
         val key = parcel.displayStatus.key
-        val likely = parcel.likelyCarrier
-        if (key != "status.likelyCarrier" || likely == null) return text(key)
-        return text(key, mapOf("carrier" to CarrierCatalog.shared.info(likely, language).displayName))
+        val named = when (key) {
+            "status.waitingFor" -> parcel.awaitedCarrier
+            "status.likelyCarrier" -> parcel.likelyCarrier
+            else -> null
+        } ?: return text(key)
+        return text(key, mapOf("carrier" to CarrierCatalog.shared.info(named, language).displayName))
     }
 
     /** The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends. */
@@ -637,6 +644,8 @@ class Localizer(
 
         // String's `.regularExpression` search, which iOS 27 runs as a Swift Regex over Characters (`nativeMatches`).
         private val serviceErrorRules: List<Pair<String, String>> = listOf(
+            // The day's allowance lasts until tomorrow, not a moment.
+            "allowance is used up" to "error.allowanceUsed",
             "rate.?limit|too many requests" to "error.rateLimited",
             "otp_expired|invalid.*(code|token)|(code|token).*expired" to "error.invalidCode",
             "email.*(invalid|valid)|invalid.*email" to "error.invalidEmail",

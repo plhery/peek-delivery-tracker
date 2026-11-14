@@ -784,6 +784,52 @@ class PassNotesTest {
     }
 
     @Test
+    fun aParcelWithNoScansWhoseCarrierCouldNotBeReachedSaysPeekKeepsTryingAndOffersNothing() {
+        val vinyl = id("Kind of Blue")
+        show(demo("Kind of Blue") { it.copy(trackingEvents = emptyList()).failing("carrier:transport") })
+        open(vinyl)
+        compose.onNodeWithTag(PAGE_SYNC_ERROR).performScrollTo()
+        assertEquals(listOf("UPS couldn’t be reached yet. Peek keeps trying."), texts(node(PAGE_SYNC_ERROR)))
+        assertTrue(textExists("Waiting for UPS"))
+        for (text in listOf("Update tracking details", "Change carrier", "Delete permanently")) assertEquals(text, 0, buttons(text))
+    }
+
+    @Test
+    fun aNumberItsCarrierHasNotKnownForTwoDaysOffersTheChangeAndTheDelete() {
+        show(demo("Birthday gift") { it.failing("carrier:number_unknown") })
+        open(gift)
+        compose.onNodeWithTag(PAGE_SYNC_ERROR).performScrollTo()
+        assertEquals(
+            listOf("After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel."),
+            texts(node(PAGE_SYNC_ERROR)),
+        )
+        assertEquals(0, buttons("Update tracking details"))
+        button("Change carrier").performScrollTo().performClick()
+        settle()
+        assertEquals(gift to null, editor())
+        cancelEditor()
+
+        // Delete asks as the ••• menu's does.
+        button("Delete permanently").performScrollTo().performClick()
+        settle()
+        assertTrue(exists(DELETE_POPOVER))
+        assertEquals(gift, deliveries.deleting?.parcelId)
+        assertEquals(true, deliveries.deleting?.fromPage)
+        compose.onNodeWithTag(DELETE_CONFIRM).performClick()
+        settle()
+        assertEquals(listOf(gift), source.deleted)
+    }
+
+    @Test
+    fun someoneElsesNumberItsCarrierHasNotKnownOffersOnlyTheDelete() {
+        show(demo("Birthday gift") { it.failing("carrier:number_unknown") }) { viewerLinks = mapOf(gift to "link-0001") }
+        open(gift)
+        assertTrue(exists(PAGE_SYNC_ERROR))
+        assertEquals(0, buttons("Change carrier"))
+        assertEquals(1, buttons("Delete permanently"))
+    }
+
+    @Test
     fun detailsTheCarrierAskedForAreUpdatedInTheEditorWhereItIsTheCarrierAsked() {
         val kit = id("Trail weekend kit")
         val number = DemoCards.parcel("Trail weekend kit").trackingNumber

@@ -119,6 +119,11 @@ export interface RoutingState extends JsonObject {
    * the number (likelyCarrier.ts), and when a check first found it so.
    */
   likely_carrier?: { carrier: string; since: string };
+  /**
+   * When the filed carrier first answered that it has not found the number, or has no history for it, while nothing had
+   * answered for the parcel: two days on, the parcel asks its owner to check it (NUMBER_UNKNOWN). Any answer clears it.
+   */
+  unknown_since?: { carrier: string; since: string };
   provider_input_needed?: { provider: string; field: 'dpdPostcode' };
   /**
    * When providers last held no fuller history than the filed carrier's partial answer, or no
@@ -985,6 +990,7 @@ export class TrackingRouter {
       if (provider === declared) delete state.postcode_refused;
       if (!withoutProgress) delete state.provider_input_needed;
       if (!withoutProgress) state.last_success_at = now().toISOString();
+      delete state.unknown_since;
       // A thin answer cannot reset a universal-only parcel's missed-check
       // streak. Count this check once even if a later rate limit deferred it.
       state.consecutive_failures = withoutProgress && !directCarrier(declared)

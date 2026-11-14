@@ -164,7 +164,13 @@ last of them asks again. When a universal provider shows
 progress the parcel hasn't had yet and names a carrier that said not found, that carrier is
 asked again in the same check. A pending parcel, or one that only showed its label, whose failures
 are all not-found or `no_history` shows as waiting, not as an outage, unless its own carrier asks
-for an input: the missed checks then show that request. The first such check of a parcel that
+for an input: the missed checks then show that request. The status line names the carrier it waits
+for ("Waiting for DHL"), as it does for a parcel without scans whose carrier could not be reached,
+which shows no error chip either. Two days after its own carrier first said it has not found the
+number or has no history for it (`routing.unknown_since`, which any answer clears and a change of
+carrier starts again), the check stores `carrier:number_unknown`: the parcel asks its owner to check
+the number, choose another carrier or delete it, a check that cannot reach the carrier keeps that,
+and it is scheduled as a number nobody has seen (Refresh cadence, below). The first such check of a parcel that
 showed its label carries the `scans_withdrawn` signal ([OBSERVABILITY.md](OBSERVABILITY.md)), once a source whose
 row showed the label answered without history in that check: one the check did not ask withdrew nothing. A provider resting on a rate limit was
 not asked, and a universal provider that failed (transport, verification, an unreadable
@@ -358,7 +364,7 @@ and providers scan parcels across every time zone.
 | Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h |
 | Without an account, filed under no carrier or one with no adapter of its own, newest scan over 14 days old, no link opened for an hour and no alert on | daily; opening a link queues a check at once |
 | A carrier waits for the delivery postcode (`routing.input_needed`): one that knows the number, whether the parcel is filed under it yet or not, or its own; or its own refuses the one stored (`routing.postcode_refused`); and nothing has answered for the parcel for a day since it was added | daily; adding or changing the postcode checks it at once |
-| Number no carrier or provider has seen (no carrier identified, no history, no input asked) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below). An account's parcel whose number points to a carrier (`routing.likely_carrier`, Carrier recognition, below): hourly, as a parcel waiting for its carrier's first scan, for 30 days after it was added |
+| Number no carrier or provider has seen (no carrier identified, no history, no input asked), or whose own carrier has not known it for two days (`carrier:number_unknown`) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below). An account's parcel whose number points to a carrier (`routing.likely_carrier`, Carrier recognition, below): hourly, as a parcel waiting for its carrier's first scan, for 30 days after it was added |
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
 | Delivered on a provider's word alone, which the parcel's carrier did not show (below) | daily around the clock for 3 days |
 

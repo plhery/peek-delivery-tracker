@@ -1667,10 +1667,12 @@ class ParcelStore(
                     api.waitForJobs(current)
                     pendingJobIds -= current.toSet()
                     load(showSpinner = false)
-                } catch (error: Exception) {
+                } catch (_: Exception) {
                     if (!stillCurrent(generation)) return@launch
                     pendingJobIds -= current.toSet()
-                    errorMessage = localizer.errorMessage(error)
+                    // A failed check says why on its parcel, read again here: the list's notice is for a list that can't be
+                    // read. A lapsed sign-in signs out on its own.
+                    load(showSpinner = false)
                 }
             }
             // A monitor a sign-out or deletion cancelled ends in stillCurrent, with no error and the next one's handle left alone.

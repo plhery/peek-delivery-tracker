@@ -185,7 +185,7 @@ export function toPlannedEvent(row: ApiPlannedTrackingEvent): PlannedEvent {
 }
 
 class ApiResponseError extends Error {
-  constructor(message: string, readonly status: number, readonly retryAfterMs: number) {
+  constructor(message: string, readonly status: number, readonly retryAfterMs: number, readonly scope?: string) {
     super(message);
   }
 }
@@ -200,7 +200,7 @@ function retryAfterMilliseconds(value: string | null): number {
 async function apiRequest<T>(path: string, auth: ApiAuth | undefined, init?: RequestInit): Promise<T> {
   const response = await authenticatedFetch(path, auth, init);
   const payload = (await response.json().catch(() => null)) as (
-    T & { error?: string; packageId?: string }
+    T & { error?: string; packageId?: string; scope?: string }
   ) | null;
   if (!response.ok) {
     if (response.status === 409 && typeof payload?.packageId === 'string') {
@@ -213,6 +213,7 @@ async function apiRequest<T>(path: string, auth: ApiAuth | undefined, init?: Req
       payload?.error ?? `Delivery service failed (${response.status})`,
       response.status,
       retryAfterMilliseconds(response.headers?.get('Retry-After') ?? null),
+      typeof payload?.scope === 'string' ? payload.scope : undefined,
     );
   }
   if (payload === null) throw new Error('The delivery service returned an empty response');

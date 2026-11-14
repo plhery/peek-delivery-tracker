@@ -137,9 +137,18 @@ export const PLACEHOLDER_NUMBER = 'carrier:placeholder_number';
 /** A number the parcel's carrier does not issue, such as one whose carrier was chosen by hand. */
 export const REFUSED_NUMBER = 'carrier:refused_number';
 
-/** Whether only the owner can make the number trackable: a placeholder, or one its carrier does not issue. */
+/**
+ * A number its carrier still did not know two days after it first said so, with nothing else answering for it: Peek
+ * stopped waiting, though it still looks now and then, and its first scan clears this.
+ */
+export const NUMBER_UNKNOWN = 'carrier:number_unknown';
+
+/**
+ * Whether only the owner can make the number trackable: a placeholder, one its carrier does not issue, or one its carrier
+ * has not known for two days.
+ */
 export function numberToCheck(error: string | null | undefined): boolean {
-  return error === PLACEHOLDER_NUMBER || error === REFUSED_NUMBER;
+  return error === PLACEHOLDER_NUMBER || error === REFUSED_NUMBER || error === NUMBER_UNKNOWN;
 }
 
 /** Only stable service codes select specific copy; diagnostics never reach the UI. */

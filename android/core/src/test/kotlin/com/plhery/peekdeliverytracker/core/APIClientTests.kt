@@ -85,6 +85,7 @@ class APIClientTests {
         is DeliveryApiError.RefreshFailed -> "refreshFailed"
         is DeliveryApiError.RefreshTimeout -> "refreshTimeout"
         is DeliveryApiError.RateLimited -> "rateLimited(${error.retryAfter})"
+        is DeliveryApiError.AllowanceUsed -> "allowanceUsed"
         is DeliveryApiError.Service -> "service(${error.serviceMessage})"
         is DeliveryApiError.ServiceFailed -> "serviceFailed(${error.status})"
         is ParcelLinkStopped -> "stopped"
@@ -333,6 +334,9 @@ class APIClientTests {
             jsonResponse(409, """{"error":"Duplicate"}""") to "service(Duplicate)",
             jsonResponse(429, headers = mapOf("Retry-After" to "30")) to "rateLimited(30.0)",
             jsonResponse(429, """{"error":"Slow down"}""") to "rateLimited(0.0)",
+            // The day's allowance, which lasts until tomorrow, by its scope or by its words.
+            jsonResponse(429, """{"error":"private diagnostics","scope":"daily"}""", mapOf("Retry-After" to "3600")) to "allowanceUsed",
+            jsonResponse(429, """{"error":"Today’s tracking allowance is used up. Try again tomorrow."}""") to "allowanceUsed",
             jsonResponse(403, """{"error":"Please verify"}""", mapOf("X-Lookup-Verification" to "required")) to "verificationFailed",
             SocketTimeoutException("timeout") to "network",
             IOException("offline") to "network",

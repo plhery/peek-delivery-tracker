@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ErrorResponse
+import com.plhery.peekdeliverytracker.core.api.ErrorResponseScope
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
@@ -309,6 +311,21 @@ class LocalizationTests {
             localizer.text("error.invalidCode"),
             localizer.errorMessage(AuthenticationError.Server("Token has expired or is invalid")),
         )
+    }
+
+    /** As userMessages.test.tsx: the day's allowance lasts until tomorrow, not a moment. */
+    @Test
+    fun aUsedUpAllowanceSaysTomorrowAndOtherLimitsAMoment() {
+        val localizer = Localizer(AppLanguage.En)
+        val tomorrow = "Today’s tracking allowance is used up. Try again tomorrow."
+        assertEquals(tomorrow, localizer.errorMessage(DeliveryApiError.AllowanceUsed()))
+        assertEquals(tomorrow, localizer.errorMessage(DeliveryApiError.Service("Today’s tracking allowance is used up. Try again tomorrow.")))
+        assertEquals("Please wait a moment before trying again.", localizer.errorMessage(DeliveryApiError.RateLimited(30.0)))
+        assertTrue(DeliveryApiClient.allowanceUsed(ErrorResponse(error = "private diagnostics", scope = ErrorResponseScope.Daily)))
+        assertTrue(DeliveryApiClient.allowanceUsed(ErrorResponse(error = "Today’s device allowance is used up. Try again tomorrow.")))
+        assertFalse(DeliveryApiClient.allowanceUsed(ErrorResponse(error = "Too many requests")))
+        localizer.language = AppLanguage.Fr
+        assertEquals("La limite de suivi du jour est atteinte. Réessaie demain.", localizer.errorMessage(DeliveryApiError.AllowanceUsed()))
     }
 
     @Test

@@ -1896,7 +1896,7 @@ describe('App', () => {
     renderApp(repo);
 
     const card = await screen.findByRole('button', {
-      name: /Early shipping label — Waiting for the carrier/i,
+      name: /Early shipping label — Waiting for Swiss Post/i,
     });
     expect(card.closest('.parcel-card-swipe')).toHaveAttribute('data-carrier', 'swiss-post');
     expect(screen.queryByText("Update unavailable")).not.toBeInTheDocument();
@@ -1975,7 +1975,7 @@ describe('App', () => {
     expect(within(card).getByText('No tracking update for four days')).toHaveClass('parcel-card__notice');
   });
 
-  it('explains unavailable tracking without exposing carrier diagnostics', async () => {
+  it('says Peek keeps trying a carrier it could not reach, without exposing carrier diagnostics', async () => {
     const parcel: ParcelWithEvents = {
       id: 'pkg-error',
       trackingNumber: '993412345699999980',
@@ -1999,14 +1999,13 @@ describe('App', () => {
     const user = userEvent.setup();
     renderApp(repo);
 
-    const card = await screen.findByRole('button', { name: /Parcel — Update unavailable/ });
+    const card = await screen.findByRole('button', { name: /Parcel — Waiting for Swiss Post/ });
     expect(card.querySelector('.carrier-mark')).toHaveTextContent('Swiss Post');
-    expect(within(card).getByText('Couldn’t get the latest update')).toHaveClass('parcel-card__notice');
-    expect(card.querySelector('.parcel-card__state')).not.toBeInTheDocument();
-    await user.click(
-      screen.getByRole('button', { name: /Parcel — Update unavailable/i }),
-    );
-    expect(screen.getByRole('status')).toHaveTextContent("The carrier’s latest update is unavailable.");
+    // No update was missed: nothing has come yet.
+    expect(within(card).queryByText('Couldn’t get the latest update')).not.toBeInTheDocument();
+    await user.click(card);
+    expect(screen.getByRole('status')).toHaveTextContent('Swiss Post couldn’t be reached yet. Peek keeps trying.');
+    expect(screen.queryByText(/Carrier maintenance/)).not.toBeInTheDocument();
     expect(
       screen.getByText(/No tracking updates yet/i),
     ).toBeInTheDocument();

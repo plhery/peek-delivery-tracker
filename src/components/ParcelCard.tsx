@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { deliveringCarrierId, deliveryLineKey, displayedCarrierId, carrierInfo } from '../lib/carriers';
 import { localizedDatePhrase, localizedDeliveryEstimate, useI18n } from '../i18n';
 import { numberToCheck } from '../lib/messages';
-import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
+import { awaitedCarrier, localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { currentEvent } from '../lib/stages';
 import { userErrorMessage } from '../lib/userMessages';
@@ -45,9 +45,9 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   // the reader for something, the carrier waits on the reader.
   const actionNeeded = Boolean(current?.recipientAction) || ['failed_attempt', 'exception'].includes(current?.stage ?? '');
   const carrierIssue = !actionNeeded && ['customs', 'ready_for_pickup'].includes(current?.stage ?? '');
-  // A number to check says so in the status line: no update was missed.
+  // A number to check, or a carrier that could not be reached yet, says so in the status line: no update was missed.
   const flag = (notice && !carrierIssue ? notice : null)
-    ?? (parcel.syncStatus === 'error' && !numberToCheck(parcel.syncError) ? t('attention.sync_error') : null);
+    ?? (parcel.syncStatus === 'error' && !numberToCheck(parcel.syncError) && !awaitedCarrier(parcel) ? t('attention.sync_error') : null);
   const flagIcon = notice && actionNeeded ? <Glyph name="warning" /> : <Icon name={parcel.syncStatus === 'error' ? 'refresh' : 'clock'} />;
   const flagChip = flag && <span className="parcel-card__notice">{flagIcon}{flag}</span>;
   const row = useRef<HTMLDivElement>(null);

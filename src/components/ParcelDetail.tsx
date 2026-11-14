@@ -30,8 +30,9 @@ import {
   localizedScanAge,
   useI18n,
 } from '../i18n';
-import { numberToCheck, REFUSED_NUMBER } from '../lib/messages';
+import { NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
 import {
+  awaitedCarrier,
   localizedParcelCompletionDate,
   parcelDeliveryEstimate,
   parcelDisplayStatus,
@@ -184,6 +185,8 @@ export function ParcelDetail({
     && !current && !numberToCheck(parcel.syncError) ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
   // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
   const claimingCarrier = parcel.syncError === REFUSED_NUMBER ? carrierClaimingNumber(parcel.trackingNumber, parcel.carrier) : null;
+  // A carrier that could not be reached for a parcel with no scans yet: Peek keeps trying.
+  const awaited = awaitedCarrier(parcel);
   const status = parcelDisplayStatus(parcel);
   const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
@@ -738,7 +741,8 @@ export function ParcelDetail({
         {automaticTracking && parcel.syncError && (
           <div className="detail__sync-error" role="status">
             <p>{claimingCarrier ? t('detail.refusedNumberLooksLike', { carrier: carrierInfo(claimingCarrier, locale).name })
-              : trackingFailureMessage(parcel.syncError, t)}</p>
+              : awaited ? t('detail.waitingForCarrier', { carrier: carrierInfo(awaited, locale).name })
+                : trackingFailureMessage(parcel.syncError, t)}</p>
             {(parcel.syncError === 'carrier:input_required' || parcel.syncError === 'carrier:invalid_input') && carrier.id === parcel.carrier
               && carrierRequirements(parcel.carrier, parcel.trackingNumber).length > 0 && (
               <button type="button" className="button button--secondary" onClick={() => setEditingCarrier(true)}>{t('detail.updateTrackingDetails')}</button>
@@ -748,8 +752,13 @@ export function ParcelDetail({
                 {t('detail.switchCarrier', { carrier: carrierInfo(claimingCarrier, locale).name })}
               </button>
             )}
-            {parcel.syncError === REFUSED_NUMBER && (
+            {(parcel.syncError === REFUSED_NUMBER || parcel.syncError === NUMBER_UNKNOWN) && (
               <button type="button" className={claimingCarrier ? 'text-button' : 'button button--secondary'} onClick={() => setEditingCarrier(true)}>{t('detail.changeCarrier')}</button>
+            )}
+            {parcel.syncError === NUMBER_UNKNOWN && (
+              <button type="button" className="text-button" disabled={deleting} onClick={() => { setCheckError(null); setConfirmingDelete(true); }}>
+                {t('detail.delete')}
+              </button>
             )}
           </div>
         )}

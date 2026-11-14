@@ -8,6 +8,8 @@ const keyOnly = ((key: string) => key) as Translate;
 it.each([
   [Object.assign(new Error('private diagnostics'), { status: 401 }), 'error.signIn'],
   [Object.assign(new Error('private diagnostics'), { status: 429 }), 'error.rateLimited'],
+  [Object.assign(new Error('private diagnostics'), { status: 429, scope: 'daily' }), 'error.allowanceUsed'],
+  [new Error('Today’s tracking allowance is used up. Try again tomorrow.'), 'error.allowanceUsed'],
   [new Error('Token has expired or is invalid'), 'error.invalidCode'],
   [new Error('Email rate limit reached'), 'error.rateLimited'],
   [new Error('Failed to fetch'), 'error.connection'],

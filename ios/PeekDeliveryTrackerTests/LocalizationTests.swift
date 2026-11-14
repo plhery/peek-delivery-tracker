@@ -243,6 +243,23 @@ final class LocalizationTests: XCTestCase {
         XCTAssertEqual(localizer.errorMessage(AuthenticationError.server("Token has expired or is invalid")), localizer.text("error.invalidCode"))
     }
 
+    /// As userMessages.test.tsx: the day's allowance lasts until tomorrow, not a moment.
+    func testUsedUpAllowanceSaysTomorrowAndOtherLimitsAMoment() {
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let tomorrow = "Today’s tracking allowance is used up. Try again tomorrow."
+        XCTAssertEqual(localizer.errorMessage(DeliveryAPIError.allowanceUsed), tomorrow)
+        XCTAssertEqual(localizer.errorMessage(DeliveryAPIError.service("Today’s tracking allowance is used up. Try again tomorrow.")), tomorrow)
+        XCTAssertEqual(localizer.errorMessage(DeliveryAPIError.rateLimited(30)), "Please wait a moment before trying again.")
+        XCTAssertTrue(DeliveryAPIClient.allowanceUsed(ErrorResponse(error: "private diagnostics", scope: .daily)))
+        XCTAssertTrue(DeliveryAPIClient.allowanceUsed(ErrorResponse(error: "Today’s device allowance is used up. Try again tomorrow.")))
+        XCTAssertFalse(DeliveryAPIClient.allowanceUsed(ErrorResponse(error: "Too many requests")))
+        localizer.language = .fr
+        XCTAssertEqual(localizer.errorMessage(DeliveryAPIError.allowanceUsed), "La limite de suivi du jour est atteinte. Réessaie demain.")
+    }
+
     func testPolishPluralForms() {
         let localizer = Localizer()
         localizer.language = .pl

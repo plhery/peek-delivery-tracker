@@ -314,6 +314,7 @@
     "invalid_input": "tracking.failure.input",
     "several_parcels": "tracking.failure.severalParcels",
     "refused_number": "tracking.failure.refusedNumber",
+    "number_unknown": "tracking.failure.numberUnknown",
     "placeholder_number": "tracking.failure.placeholderNumber",
     "maintenance": "tracking.failure.maintenance",
     "rate_limited": "tracking.failure.rateLimited",

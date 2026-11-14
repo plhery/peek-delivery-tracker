@@ -429,7 +429,8 @@ carrier detections: `ACCOUNT_LOOKUPS_PER_DAY` (default 15) and
 account also shares an hourly budget for each: `ACCOUNT_LOOKUPS_PER_HOUR` (default 50)
 and `ACCOUNT_DETECTIONS_PER_HOUR` (default 200). Once it is used up, every account is
 refused until the next hour (UTC). `0` disables that work. Cached and local carrier
-detection does not spend the detection budgets.
+detection does not spend the detection budgets. A refusal of an account's daily budget carries
+`scope: "daily"`, so the apps say it lasts until tomorrow.
 
 See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
 

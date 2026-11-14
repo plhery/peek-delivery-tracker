@@ -1,5 +1,5 @@
 import 'server-only';
-import { REFUSED_NUMBER } from '../lib/messages';
+import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
 import { CANDIDATE_PROBE_WINDOW, routingState } from './trackingRouting';
 import { isRecord, type JsonObject } from './types';
 
@@ -20,6 +20,12 @@ export const ALERTED_UNSEEN_MS = 30 * DAY_MS;
 
 /** After this long unseen, a number is checked daily. */
 const UNSEEN_DAILY_AFTER_MS = 48 * 60 * 60 * 1_000;
+
+/**
+ * How long a parcel's carrier may go on not knowing its number, from its first such answer, before the parcel asks its
+ * owner to check it (NUMBER_UNKNOWN).
+ */
+export const NUMBER_UNKNOWN_AFTER_MS = 48 * 60 * 60 * 1_000;
 
 /**
  * After this long unseen, the checks nobody asked for, the schedule's and a scraper
@@ -43,7 +49,8 @@ export function unseenIntervalHours(unseen: number, opened = false): number {
  * for its number yet: no carrier identified or recognised, no history and
  * nothing asked of the user. Null once one has. A parcel filed under a carrier
  * counts only while that carrier refuses its number as one it does not issue
- * (`carrier:refused_number`): asking it again changes nothing. So does a lookup
+ * (`carrier:refused_number`), or has not known it for two days (`carrier:number_unknown`):
+ * asking it again changes nothing, or hardly anything. So does a lookup
  * without an account while its carrier's last answer is that it has not found
  * the number or has no history for it, so it leaves the schedule as an unfiled
  * one does; the carrier's outage is no answer. An account's parcel whose number
@@ -55,7 +62,7 @@ export function unseenFor(parcel: JsonObject, now: Date): number | null {
   if (String(parcel.current_stage ?? 'pending') !== 'pending') return null;
   const carrier = String(parcel.carrier);
   const routing = routingState(parcel);
-  const unfiled = ['unknown', 'intl-post'].includes(carrier) || parcel.sync_error === REFUSED_NUMBER
+  const unfiled = ['unknown', 'intl-post'].includes(carrier) || parcel.sync_error === REFUSED_NUMBER || parcel.sync_error === NUMBER_UNKNOWN
     || (parcel.one_off === true && ['not_found', 'no_history'].includes(routing.failures[carrier]?.kind ?? ''));
   if (!unfiled) return null;
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};

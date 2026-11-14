@@ -366,6 +366,14 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.queryByRole('button', { name: /^Notify me/ })).toBeNull();
   });
 
+  it('waits for a carrier it could not reach for a parcel with no scans, without a failed update', async () => {
+    await shown(view([scan('pending', 60, 'Tracking added')], { syncStatus: 'error', syncError: 'carrier:transport' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Waiting for DHL' })).toBeVisible();
+    expect(screen.getByText('DHL couldn’t be reached yet. Peek keeps trying.')).toBeVisible();
+    expect(card().querySelector('.peekp-card__flag')).toBeNull();
+    expect(screen.queryByText('The tracking service couldn’t be reached. Try again later.')).toBeNull();
+  });
+
   it('asks for the right number instead of waiting for a carrier when the number is a placeholder', async () => {
     await shown(view([scan('pending', 60, 'Tracking added')], { carrier: 'unknown', syncStatus: 'error', syncError: 'carrier:placeholder_number' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Check the tracking number' })).toBeVisible();

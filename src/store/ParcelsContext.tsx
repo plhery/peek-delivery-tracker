@@ -9,7 +9,6 @@ import {
   type ReactNode,
 } from 'react';
 import {
-  ParcelAlreadyExistsError,
   RefreshTimeoutError,
   type NewParcelInput,
   type ParcelCarrierInput,
@@ -168,7 +167,8 @@ export function ParcelsProvider({
         void reload();
         return parcel;
       } catch (error) {
-        if (!(error instanceof ParcelAlreadyExistsError)) rememberError(error);
+        // The add sheet says why it failed; only a lapsed sign-in concerns the whole list.
+        if (error instanceof ApiAuthenticationError) rememberError(error);
         throw error;
       }
     },

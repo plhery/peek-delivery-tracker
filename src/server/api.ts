@@ -50,16 +50,19 @@ export interface ApiContext<Parameters extends RouteParameters = RouteParameters
 export class HttpError extends Error {
   /** Said in the answer beside the message, for a client to tell this refusal from others of its status. */
   readonly code?: ApiErrorResponse['code'];
+  /** For a refusal of the allowance, the one used up: `daily` lasts until tomorrow. */
+  readonly scope?: ApiErrorResponse['scope'];
 
   constructor(
     readonly status: number,
     message: string,
     readonly headers?: HeadersInit,
-    options?: ErrorOptions & { code?: ApiErrorResponse['code'] },
+    options?: ErrorOptions & { code?: ApiErrorResponse['code']; scope?: ApiErrorResponse['scope'] },
   ) {
     super(message, options);
     this.name = 'HttpError';
     if (options?.code) this.code = options.code;
+    if (options?.scope) this.scope = options.scope;
   }
 }
 
@@ -244,7 +247,8 @@ export function expectedFailure(response: Response): Response {
 
 function failure(error: unknown): Response {
   if (error instanceof HttpError) {
-    return apiResponse(error.status, { error: error.message, ...(error.code ? { code: error.code } : {}) }, error.headers);
+    return apiResponse(error.status, { error: error.message, ...(error.code ? { code: error.code } : {}),
+      ...(error.scope ? { scope: error.scope } : {}) }, error.headers);
   }
   if (error instanceof SupabaseError) {
     if (error.status === 401 || error.status === 403) {

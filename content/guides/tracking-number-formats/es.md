@@ -4,7 +4,7 @@ description: Pega tu número de seguimiento y mira de qué empresa es tu paquete
 slug: que-empresa-es-numero-de-seguimiento
 picture: Tres etiquetas con números de seguimiento divididos en colores, una lupa sobre el código de país CH y Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Pega tu número de seguimiento en la casilla de abajo y verás de qué empresa es: Peek reconoce al transportista por la forma del número, y con «Seguir tu paquete» ves dónde está. Si sale «Podría ser», esa forma la usan varias empresas, y la buena es la que nombra el correo de envío de la tienda; si pegas un número de pedido de Amazon, Shein o Temu, te dice dónde está el de seguimiento. A ojo, las letras y la longitud suelen bastar: `1Z` y 16 letras o cifras es UPS, `0000/00000000` es NACEX, y 13 caracteres como `RR000000005ES` (dos letras, nueve cifras, dos letras) son casi siempre un número postal, de Correos si acaba en `ES`. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas.
@@ -23,7 +23,7 @@ Cuatro comprobaciones, en este orden:
 - Prueba con los candidatos | Introduce el número en la web de cada transportista posible. El que muestre movimientos de ese número tiene tu paquete.
 :::
 
-La casilla de arriba hace por ti las dos primeras comprobaciones, y también lee un enlace del transportista o el correo de envío entero. Cuando sigues el paquete, [Peek](/) hace la cuarta: pregunta por turnos a los transportistas más probables, entre más de 3500. Es lo que hace un [localizador universal de paquetes](guide:universal-tracker).
+La casilla de arriba hace por ti las dos primeras comprobaciones, y también lee un enlace del transportista o el correo de envío entero. Cuando sigues el paquete, [Peek](/) hace la cuarta: pregunta a los transportistas más probables, entre más de 3500, hasta cinco a la vez. Mientras tanto, la línea del transportista muestra «Comprobando servicios de seguimiento…». Solo cuenta la respuesta sobre un paquete reciente, porque los transportistas acaban reutilizando sus números. Si solo uno conoce el número, ves su nombre y «tiene este paquete». Si son varios, ves por ejemplo «3 transportistas conocen este número» y «elige el tuyo»: elige el que nombra el correo de envío. Si ninguno lo conoce todavía, lees «aún no encontrado · Peek seguirá comprobando». Es lo que hace un [localizador universal de paquetes](guide:universal-tracker).
 
 ## El formato del número de seguimiento en cada empresa
 
@@ -45,6 +45,7 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 | [InPost](carrier:inpost) (Punto Pack, Locker) | «número de expedición»; el ejemplo de su localizador tiene 8 caracteres, y según esos datos hay también números con `FV` y 8 cifras. La web de Mondial Relay en España ya lleva a la de InPost |
 | [Ecoscooting](carrier:ecoscooting) | según esos datos, `CNESP` y 20 cifras; uno de 18 cifras también puede ser suyo |
 | [Paack](carrier:paack) | su seguimiento pide el número de pedido o el del código de barras de la etiqueta, junto con el código postal de entrega. Según esos datos, casi siempre es el número de pedido de la tienda o el código de barras, sin formato fijo, así que puede parecerse al número de otra empresa. Hay tres excepciones: `PK` y 18 cifras es de Paack (paquetes que entrega para Evri International), `5340` y 14 cifras apunta primero a Paack, y un número de paquete de SHEIN (`C` o `E`, una fecha de seis cifras y 8 cifras más) puede ser de Paack |
+| GOFO | según esos datos, `GFES` o `CIES` y 13 o 14 cifras es GOFO en España, y Peek lo reconoce al momento; con `GFFR` o `CIFR` es [GOFO France](carrier:gofo-fr) |
 | Amazon | en los datos de transportistas de Peek, `ES` seguido de 10 cifras o `TBA` seguido de 12; se explican más abajo |
 | [Vinted Go](carrier:vinted-go) | no publica formato; según esos datos, `VGS` y 13 o 14 cifras, o 16 cifras que empiezan por `17` o `18`, la última de control. Si tu paquete de Vinted va con otra empresa, lleva el número de esa empresa: mira el [seguimiento de envío Vinted](guide:vinted-orders) |
 | [Sending](carrier:sending) | su buscador pide «el código de tu envío»; según esos datos, 12 cifras, la misma longitud que MRW, FedEx y otras |
@@ -151,7 +152,7 @@ Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede i
 
 ## El número de seguimiento no aparece o no funciona
 
-Un número que no devuelve nada no siempre está mal escrito. Correos Express avisa de que un envío recién registrado puede tardar unas horas en mostrar información, y te pide comprobar que el número «corresponde a Correos Express». CTT, en Portugal, da otros dos motivos: el código solo existe para la [aduana](guide:customs), u otra empresa entrega el envío. Si un número válido simplemente no se mueve todavía, lee [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+Un número que no devuelve nada no siempre está mal escrito. Correos Express avisa de que un envío recién registrado puede tardar unas horas en mostrar información, y te pide comprobar que el número «corresponde a Correos Express». CTT, en Portugal, da otros dos motivos: el código solo existe para la [aduana](guide:customs), u otra empresa entrega el envío. En peektracker.com, si ningún transportista responde a un número `1Z` de 17 caracteres, uno menos que los de UPS, Peek muestra «Empieza como un número de seguimiento de UPS, pero le falta un carácter: puede que tenga una errata. Compáralo con tu mensaje de envío.» Si un número válido simplemente no se mueve todavía, lee [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 :::sources
 - [UPU: norma S10, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – el formato postal, sus letras, el dígito de control, el código de país y el código de barras añadido en destino
@@ -184,9 +185,9 @@ Un número que no devuelve nada no siempre está mal escrito. Correos Express av
 - [Sending: Localiza tu envío](https://www.sending.es/localiza-tu-envio/) – «Introduce el código de tu envío», o tu referencia
 - [Comisión Europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de 2 € por categoría de artículos, que suele cobrar la plataforma al comprar o, si no, el transportista antes de entregar
-- [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – las formas de Correos (`PR` y 15 cifras y `C`), Correos Express, SEUR, GLS, MRW, NACEX, CTT Express, InPost (`FV`), Ecoscooting, Vinted Go, Sending, DHL eCommerce Iberia, FedEx, Amazon, AliExpress y Cainiao (`CNG`, `AP`, `LP`), 4PX, Yanwen, YunExpress, YTO Express y Royal Mail en los datos de Peek
+- [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – las formas de Correos (`PR` y 15 cifras y `C`), Correos Express, SEUR, GLS, MRW, NACEX, CTT Express, InPost (`FV`), Ecoscooting, GOFO (`GFES`, `CIES`, `GFFR`, `CIFR`), Vinted Go, Sending, DHL eCommerce Iberia, FedEx, Amazon, AliExpress y Cainiao (`CNG`, `AP`, `LP`), 4PX, Yanwen, YunExpress, YTO Express y Royal Mail en los datos de Peek
 - [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – código del propietario, U para los contenedores de carga, número de serie de seis cifras y dígito de control
 - [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer](https://www.textainer.com/) – alquiler de contenedores
-- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – número de contenedor por el que no responde ningún transportista: dónde está el número de seguimiento, elegir transportista
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – cómo confirma Peek el transportista de un número ambiguo: hasta cinco a la vez, solo cuentan los paquetes recientes, eliges tú cuando varios lo conocen; número de contenedor por el que no responde ningún transportista: dónde está el número de seguimiento, elegir transportista; número con un carácter de menos o de más: posible errata
 :::

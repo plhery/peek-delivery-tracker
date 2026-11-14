@@ -4,7 +4,7 @@ description: Descobre que transportadora tem a tua encomenda pelo número de seg
 slug: como-saber-qual-e-a-transportadora
 picture: Três etiquetas de seguimento divididas em partes coloridas, uma lupa sobre o código de país CH e o Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 As letras e o comprimento de um número de seguimento dizem muitas vezes que transportadora tem a tua encomenda. `1Z` seguido de 16 letras e algarismos é UPS, e 13 caracteres como `RR000000005CH` (duas letras, nove algarismos, duas letras) costumam ser de um operador postal, com o país que emitiu o número nas duas últimas letras: `PT` é Portugal. Os números só com algarismos são o caso difícil: 10, 12 ou 14 algarismos podem ser de várias transportadoras, e aí quem decide é o e-mail de envio, ou um serviço de seguimento que as experimente uma a uma.
@@ -141,7 +141,7 @@ Uma encomenda que atravessa uma fronteira muda muitas vezes de mãos, e cada emp
 - **Nos envios que os CTT mandam para fora**, depois de saírem de Portugal o Seguir objeto só mostra o que os países de trânsito e de destino passam aos CTT, e essa informação pode chegar tarde ou nem chegar.
 - **Nos envios económicos do AliExpress**, a Cainiao diz que o seguimento acaba na entrega à transportadora local, e que o vendedor te pode dizer como contactar essa transportadora. Mais em [como seguir uma encomenda da China](guide:tracking-from-china).
 
-Um número que não dá resultados nem sempre está mal escrito. Os CTT dão duas razões: o número pode servir apenas para [fins aduaneiros](guide:customs), ou o envio pode ser entregue em Portugal por outra empresa. Em qualquer dos casos, dizem para contactares o remetente. Se um número válido simplesmente ainda não se mexeu, lê [porque é que o tracking não atualiza](guide:tracking-not-updating).
+Um número que não dá resultados nem sempre está mal escrito. Os CTT dão duas razões: o número pode servir apenas para [fins aduaneiros](guide:customs), ou o envio pode ser entregue em Portugal por outra empresa. Em qualquer dos casos, dizem para contactares o remetente. Em peektracker.com, se nenhuma transportadora responder a um número `1Z` de 17 caracteres, menos um do que os da UPS, o Peek diz «Começa como um número de seguimento de UPS, mas falta-lhe um carácter: pode estar mal escrito. Compara-o com a tua mensagem de envio.» Se um número válido simplesmente ainda não se mexeu, lê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
 :::sources
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – o formato postal, as letras, o dígito de controlo, o código de país, o código acrescentado no destino
@@ -172,7 +172,7 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – o seguimento da Yanwen, sem número de exemplo
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – o código de envio
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 algarismos
-- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – como o Peek confirma a transportadora de um número ambíguo: até cinco de cada vez, só encomendas recentes, escolha tua quando várias o conhecem; número de contentor sem resposta de nenhuma transportadora: onde está o número de seguimento, escolher a transportadora
+- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – como o Peek confirma a transportadora de um número ambíguo: até cinco de cada vez, só encomendas recentes, escolha tua quando várias o conhecem; número de contentor sem resposta de nenhuma transportadora: onde está o número de seguimento, escolher a transportadora; número com um carácter a menos ou a mais: talvez mal escrito
 - [BIC: Container Identification Number (em inglês)](https://www.bic-code.org/identification-number/) – código do proprietário, U para os contentores de carga, número de série de seis algarismos e algarismo de controlo
 - [BIC: Registered BIC Code TEMU (em inglês)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer (em inglês)](https://www.textainer.com/) – aluguer de contentores

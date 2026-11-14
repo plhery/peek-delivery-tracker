@@ -83,7 +83,7 @@ Peek asks R+L's tracer by the PRO alone: no account or postcode. It shows the st
 
 When R+L's tracer can't be reached or can't read the shipment, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 
-R+L's lines have a date and a time but no time zone. Peek reads each one on the clock of its terminal's town, else of the line before or after it, else on Eastern time, and shows every time in your device's time zone.
+R+L's lines have a date and a time but no time zone. Peek reads each one on the clock of its terminal's town, else of the terminal's state (the main one where a state has more than one), else of the line before or after it, else on Eastern time, and shows every time in your device's time zone.
 
 Peek checks every 10 minutes; a shipment with no new line for two days (12 hours while it still shows "Label created" or "Received by carrier") is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact R+L, the shop or the shipper for you, book a delivery or file a claim.
 

@@ -101,7 +101,7 @@ A PRO's shape doesn't tell Peek it's TForce's: nine digits fit TNT and XPO too. 
 
 Peek asks TForce's tracker by the PRO alone. It shows the status, each line with its town and state, the estimated delivery day, the destination country on the shipment's map and the weight in kilograms; it leaves out names, the appointment, BOL and PO numbers and the piece count, and gets no proof of delivery. "Open the TForce Freight website" opens your number on TForce's tracker, or for a PARS number the PRO in it. If that tracker can't be reached or asks for a CAPTCHA, Peek asks [tracking services](guide:universal-tracker).
 
-TForce gives each line its service center's local time, with no time zone. Peek reads it on the clock of the line's town, else of a line next to it or of where the freight is going, else on Eastern time, and shows it in your device's time zone.
+TForce gives each line its service center's local time, with no time zone. Peek reads it on the clock of the line's town, else of its state or province when Peek can tell which one it is (the main clock where there are several), else of a line next to it or of where the freight is going, else on Eastern time, and shows it in your device's time zone.
 
 Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day TForce scans the freight out for delivery, while TForce's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
 

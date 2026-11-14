@@ -3,7 +3,7 @@ title: BYHD tracking: BYHD numbers, scans and who delivers
 description: Track a BYHD (博益弘达) parcel from Shenzhen: what a BYHD number looks like, what its few scans mean and why its tracker shows another company's number.
 slug: byhd-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-14
 ---
 
 BYHD (博益弘达, Bo Yi Hong Da in pinyin) is the short name of 深圳市博益弘达物流有限公司, a logistics company in Shenzhen, China, that ships parcels abroad for online sellers. Its waybill numbers are BYHD and nine digits: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on BYHD's site, byhd56.com, which opens BYHD's tracker. Expect a short history from BYHD, and a second number: the one the company that delivers your parcel uses.
@@ -62,7 +62,7 @@ BYHD lists no customer service line. As of 28 October 2026, its site, in Chinese
 
 Paste a BYHD number into [Peek](/) and it goes straight to BYHD: no other carrier in Peek's catalog uses that layout. There's no BYHD tracking link to paste, as its tracker takes a form. A seller's reference has no shape to go by, but Peek follows more than 3,500 carriers: add it anyway, press "Change" and pick BYHD (typing 博益弘达 or Boyi Hongda finds it too), or use "Change carrier" on a parcel you already added. Peek drops dashes, though, so look up a reference with dashes in BYHD's own box.
 
-Peek reads BYHD's own tracker and shows each line in BYHD's words with its place when there is one, and the destination country when BYHD's record gives it. `The electronic cargo information has been received` shows as "Label created", `到达收货点` as "Received by carrier" and `Goods leaving the operation center` as "In transit". Times are read on Beijing's clock and shown in your device's time zone. A line dated after the moment Peek checks waits until then, and a line BYHD's record shows was written more than twelve hours before the time it carries is left out as a forecast, not a scan. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery stay out of Peek, and there's no expected delivery date: BYHD gives none.
+Peek reads BYHD's own tracker and shows each line in BYHD's words with its place when there is one, and the destination country when BYHD's record gives it. `The electronic cargo information has been received` shows as "Label created", `到达收货点` as "Received by carrier" and `Goods leaving the operation center` as "In transit". Times are read on Beijing's clock and shown in your device's time zone. A line dated after the moment Peek checks waits until then, and a line BYHD's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line, is left out as a forecast, not a scan. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery stay out of Peek, and there's no expected delivery date: BYHD gives none.
 
 **The delivering company's number.** For an order BYHD hasn't scanned yet, Peek reads that number from BYHD's tracking page and asks one company whether it has the parcel: the post of the country the parcel is going to, such as [USPS](carrier:usps) or [Royal Mail](carrier:royal-mail), when it's an international postal number (two letters, nine digits and two letters); otherwise the one carrier whose layout the number fits, if Peek tracks that carrier directly. Once that company shows a scan at least as recent as BYHD's latest line, Peek follows the parcel there and keeps BYHD's lines in the history.
 

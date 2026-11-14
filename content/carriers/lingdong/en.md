@@ -3,7 +3,7 @@ title: Lingdong International tracking: SZLD numbers and statuses
 description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking often stops before the delivery.
 slug: lingdong-tracking
 published: 2026-10-21
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a freight forwarder in Shenzhen, China, that ships parcels abroad for online sellers. Its numbers start with SZLD: type yours in the 快件查询 (parcel lookup) box on Lingdong's site, lingdong56.com, which opens its tracker, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -82,7 +82,7 @@ Lingdong lists no email and no office outside China. For anything about your ord
 
 [Peek](/) names Lingdong International at once for an SZLD number, a shape no other carrier in its catalog uses. A link to Lingdong's tracker with `documentCode=` and the number in it can be pasted too.
 
-Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek never shows a line written more than 12 hours before the time it gives, or one from the tracking system's custom-track feature (轨迹定制), which can place a parcel abroad before it reaches the airport: both are forecasts, not scans. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
+Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek never shows a line written more than 12 hours before the time it gives, or more than 6 hours before it in the same second as such a line, or one from the tracking system's custom-track feature (轨迹定制), which can place a parcel abroad before it reaches the airport: these are forecasts, not scans. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. The only such carrier Peek recognises in it is [Swiss Post](carrier:swiss-post), when the record names Swiss Post as its line, holds a Swiss Post number and gives no destination outside Switzerland and Liechtenstein: the parcel then shows "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek follows it there once Swiss Post has a scan at least as recent as Lingdong's newest, keeping Lingdong's scans. Lingdong doesn't say it ships with Swiss Post. If the seller gives you the local carrier's number, add it as a parcel of its own.
 

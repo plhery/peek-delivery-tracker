@@ -3,7 +3,7 @@ title: Xinghe Freight tracking: GZXH…YQ numbers and scans
 description: Track a Xinghe Freight (星和货运) parcel from Guangzhou: what a GZXH…YQ number looks like, whose tracker it runs on, what its steps mean and who to ask.
 slug: xinghe-freight-tracking
 published: 2026-11-03
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 Xinghe Freight (星和货运, 广州星和货运代理有限公司) is a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with Xinghe, look for a number of GZXH, ten digits and YQ, the shape Peek knows as Xinghe's, and paste it in the box above. Xinghe's tracking runs on the tracker of GZYL, another Guangzhou forwarder: the tracking box on Xinghe's website sends your number there. That tracker sits on a bare server address, over plain HTTP. Peek reads it for you, and asks tracking services when that tracker doesn't know your number.
@@ -93,7 +93,7 @@ Peek asks GZYL's tracker, as Xinghe's own tracking box does. It shows the status
 
 When the tracker doesn't know your number, Peek asks tracking services instead and shows their copy of the steps, which may be all Peek has for a Xinghe number. While neither has a step for it, the parcel shows "Waiting for the carrier".
 
-Peek holds back any step written more than 12 hours before the time it shows, and any step dated after the moment it checks, on Beijing time. On a record with steps written ahead, it holds back `Delivered` too, even one written on its own day. It goes by the steps it keeps, not by the record's summary status, and sets aside tracking services' copies of the steps it holds back as written ahead, `Delivered` included, even when it keeps other steps. When the tracker has no record of your number or can't be reached, though, Peek can't tell a planned step in a tracking service's copy from a scan.
+Peek holds back any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step, and any step dated after the moment it checks, on Beijing time. On a record with steps written ahead, it holds back `Delivered` too, even one written on its own day. It goes by the steps it keeps, not by the record's summary status, and sets aside tracking services' copies of the steps it holds back as written ahead, `Delivered` included, even when it keeps other steps. When the tracker has no record of your number or can't be reached, though, Peek can't tell a planned step in a tracking service's copy from a scan.
 
 Swiss Post aside, Peek doesn't follow a Xinghe parcel on to the company that delivers it: if the seller gives you that company's number, add it as a parcel of its own. Peek checks every 10 minutes, and hourly once the parcel has gone quiet. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers the two customs steps and `Delivered`, not flights or sorting. Peek can't contact Xinghe Freight, GZYL or the seller for you.
 

@@ -83,7 +83,7 @@ SXW's customer is the seller, so ask the seller about your order first, and the 
 
 Peek asks SXW's own tracker, the one the box on sxwexpress.cn opens, with no account, postcode or phone number. It shows the status, each step with its place when the tracker gives one, and the destination country. It leaves out the names, address, postcodes, weight, number of pieces, customer reference, payment details, signature and proof of delivery the record can hold. SXW's tracker gives no delivery date, so Peek shows none.
 
-Peek holds back any step dated after the moment it checks, and any step written more than 12 hours before the time it shows: such a step is a plan, not a scan. When SXW's tracker doesn't know your number or can't be reached, Peek asks tracking services instead and shows their copy of the steps, in their own words.
+Peek holds back any step dated after the moment it checks, and any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step: steps written ahead are plans, not scans. When SXW's tracker doesn't know your number or can't be reached, Peek asks tracking services instead and shows their copy of the steps, in their own words.
 
 Apart from the GOFO hand-over above, Peek stays with SXW's tracker. If the seller gives you the delivering company's number, add it to Peek as a parcel of its own.
 

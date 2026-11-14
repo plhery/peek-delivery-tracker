@@ -90,7 +90,7 @@ On a parcel you've already added, use "Change carrier". Peek asks GLS US only ab
 
 **What you see.** Peek asks GLS US's tracker by the number alone: no account and no ZIP code. It shows the status, each scan with its town and state on a map, and, when GLS US's tracker gives one, the expected delivery day until the parcel is delivered or returned. It leaves out the recipient's name and address, who signed, the signature and proof of delivery, and the shipper's reference. Peek's code hands GLS US parcels over to no other carrier. If GLS US files several shipments under one number, Peek follows the one with the newest scan. "Open the GLS US website", on the parcel's page, opens the number on GLS's US tracker.
 
-**Times.** GLS US gives each scan's time without a time zone. Peek reads it on the clock of the scan's town or, when it can't place the scan in a town, on that of the closest earlier scan it can place, else of the closest later one. Failing both, a scan that names no place is read on Pacific time, and one whose place Peek can't pin to a town on Eastern time, whatever its state. Peek shows every time in your device's time zone.
+**Times.** GLS US gives each scan's time without a time zone. Peek reads it on the clock of the scan's town or, when it doesn't know the town, on that of the scan's state (the main one where a state has more than one). For a scan that names no town or state, it uses the clock of the closest earlier scan it can place, else of the closest later one; failing both, Pacific time. Peek shows every time in your device's time zone.
 
 **When GLS US doesn't answer.** If GLS US's tracker can't be reached, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 

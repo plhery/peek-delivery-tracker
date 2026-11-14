@@ -3,7 +3,7 @@ title: Pengyou tracking: PY numbers, scans and who to ask
 description: Track a Pengyou (捧友) parcel from Shenzhen: what its PY number looks like, where its tracker is, why some steps are written in advance and who to ask.
 slug: pengyou-tracking
 published: 2026-10-28
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 Pengyou (捧友, 深圳市捧友供应链有限公司), which writes its English name as Shenzhen Pony Supply Chain Co., Ltd, is a Shenzhen forwarder whose lines carry parcels by air to Europe and the United States for exporters, other forwarders and online sellers. To track a parcel, type its number in the 运单查询 (waybill lookup) box on Pengyou's site, szpy56.com, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -71,7 +71,7 @@ Pengyou lists no email address and no street address. For anything about your or
 
 Peek reads Pengyou's own tracker and shows the status, each scan with its place, and the destination country when Pengyou's record gives it. Scans show as Pengyou writes them, city in brackets included, except that a `Delivered` line followed by a town shows as `Delivered`, with the town as its place and without the postcode. `Shenzhen Processing Center has received it` counts as received by the carrier. Scan times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, fees and signature Pengyou's record can hold, and shows no expected delivery date: Pengyou gives none.
 
-Peek never shows a step written more than twelve hours before the time it carries, and holds back any step dated after the moment it checks, on Beijing time. On an order with steps written ahead, it holds back `Delivered` too, even one written on its own day: Pengyou's platform adds that step in an evening batch. When the tracker's data interface has no steps for a number, Peek reads Pengyou's tracking page instead; that page doesn't show when a step was written, so there Peek holds back every `Delivered`. It also sets aside the copies tracking services make of those steps, and goes by the scans it keeps, not by the record's summary status. An order whose steps are all written ahead has no history in Peek yet.
+Peek never shows a step written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a step, and holds back any step dated after the moment it checks, on Beijing time. On an order with steps written ahead, it holds back `Delivered` too, even one written on its own day: Pengyou's platform adds that step in an evening batch. When the tracker's data interface has no steps for a number, Peek reads Pengyou's tracking page instead; that page doesn't show when a step was written, so there Peek holds back every `Delivered`. It also sets aside the copies tracking services make of those steps, and goes by the scans it keeps, not by the record's summary status. An order whose steps are all written ahead has no history in Peek yet.
 
 Peek checks every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Pengyou or the seller for you.
 

@@ -66,7 +66,7 @@ iMile's International Dropship Delivery service lists a "Self-owned last-mile de
 - to change the address, contact customer support "before the shipment reaches the final delivery stage", or use the iMile Online Bot;
 - its proof of delivery is "A photo of the delivered parcel at the drop-off location" and "A digital signature from the recipient (If applicable)".
 
-iMile's tracking page has a proof-of-delivery view that asks you to confirm you're the authorised user. On iMile's own page, some out-for-delivery scans add the driver's phone number. More in [missed delivery](guide:missed-delivery).
+iMile's tracking page has a proof-of-delivery view that asks you to confirm you're the authorised user. On iMile's own page, some out-for-delivery scans add the driver's phone number or iMile's customer service hotline. More in [missed delivery](guide:missed-delivery).
 
 ## iMile package not updating, lost or returned
 
@@ -100,7 +100,7 @@ For the order itself, the shop is quicker. It booked iMile and can open a case w
 
 Peek reads iMile's tracker in English. It shows the status, the history with the centre or town of each scan on a map, and the destination country, with scan times read on that country's clock and shown in your device's time zone. For a parcel Cainiao carries out of China for iMile, Peek adds Cainiao's earlier scans (pickup, sorting, export, flight, import) in front of iMile's history.
 
-Peek shows the day booked by the newest `Shipment is scheduled to` line as the expected delivery, until a failed attempt, a problem, arrival at a pickup point, the delivery, a return or a scan dated after that day. It leaves out iMile's scheduled flight, proof of delivery, who signed, contacts and payment details, and drops the driver's phone from scans. Labels such as "Out for delivery" and "Delivery attempted" are Peek's own; the scan lines appear as iMile wrote them. Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day iMile scans the parcel out for delivery, while iMile's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact iMile or the shop for you.
+Peek shows the day booked by the newest `Shipment is scheduled to` line as the expected delivery, until a failed attempt, a problem, arrival at a pickup point, the delivery, a return or a scan dated after that day. It leaves out iMile's scheduled flight, proof of delivery, who signed, contacts and payment details, and drops the driver's phone and iMile's hotline from scans. Labels such as "Out for delivery" and "Delivery attempted" are Peek's own; the scan lines appear as iMile wrote them. Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day iMile scans the parcel out for delivery, while iMile's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact iMile or the shop for you.
 
 ## Questions about iMile tracking
 

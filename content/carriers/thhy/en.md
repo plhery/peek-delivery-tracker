@@ -3,7 +3,7 @@ title: Tianhui Hengyuan (THHY) tracking: AT numbers and scans
 description: Track a Tianhui Hengyuan (天汇恒源, THHY) parcel from China: what its AT…TH number looks like, which of its lines are real scans and who to ask.
 slug: tianhui-hengyuan-tracking
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-14
 ---
 
 Tianhui Hengyuan (天汇恒源, also written THHY or TH) is a Chinese forwarder. If a shop in China sent your order with it, your number is AT, ten digits and TH: paste it in the box above. Peek knows of no website for the company, and its tracker runs on a bare server address. Read that tracker with care: after Tianhui Hengyuan's own first lines, the ones that follow are written to a script and don't show where your parcel is.
@@ -81,7 +81,7 @@ As of 29 October 2026, Peek found no contact details for Tianhui Hengyuan: it kn
 
 Peek reads Tianhui Hengyuan's own tracker and shows the status, each line with its place, and the destination country when Tianhui Hengyuan's record gives it. The two Chinese lines show in the English the platform's other forwarders give them: `Goods leave the operation center` and `The electronic cargo information has been received`. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, fees, signature and proof of delivery Tianhui Hengyuan's record can hold, and shows no expected delivery date: Tianhui Hengyuan gives none.
 
-From Tianhui Hengyuan's tracker, Peek leaves out the scripted lines, any line written more than twelve hours before the time it carries, and any line dated after the moment it checks, on Beijing time. It goes by the lines it keeps, not by the record's summary status. An order whose lines are all held back has no tracking history in Peek yet. Whether Peek holds back some lines or all of them, it also sets aside tracking services' copies of those lines. When the tracker can't be reached, though, Peek turns to tracking services, and their copies can include the scripted lines.
+From Tianhui Hengyuan's tracker, Peek leaves out the scripted lines, any line written more than twelve hours before the time it carries or, in the same second as such a line, more than six hours before its own, and any line dated after the moment it checks, on Beijing time. It goes by the lines it keeps, not by the record's summary status. An order whose lines are all held back has no tracking history in Peek yet. Whether Peek holds back some lines or all of them, it also sets aside tracking services' copies of those lines. When the tracker can't be reached, though, Peek turns to tracking services, and their copies can include the scripted lines.
 
 **Swiss Post.** Peek hands a parcel over only when Tianhui Hengyuan's record names Swiss Post as its channel, holds a Swiss Post number and names no destination outside Switzerland and Liechtenstein. The parcel then shows "Delivery with Swiss Post" and that number (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and once Swiss Post shows a scan at least as recent as Tianhui Hengyuan's latest, Peek follows the parcel there and keeps Tianhui Hengyuan's lines in the history. Otherwise Peek stays with Tianhui Hengyuan's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own.
 

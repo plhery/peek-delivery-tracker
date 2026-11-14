@@ -39,7 +39,7 @@ eMonitoring otwiera się po polsku i dla każdego kroku pokazuje nazwę zdarzeni
 | `Wysłano z Polski` | Wyjechała z Polski za granicę. |
 | `Przyjęta w Polsce` | Przesyłka z zagranicy dotarła do polskiego urzędu wymiany. |
 | `Obsługa celna` | Odprawa celna. |
-| `W doręczeniu` | Listonosz lub kurier wiezie ją do Ciebie. |
+| `W doręczeniu` | Listonosz lub kurier wiezie ją do Ciebie. W tym samym stanie Poczta Polska zapisuje też nieudaną próbę doręczenia: Peek odróżnia ją po kodzie zdarzenia i pokazuje wtedy „Próba doręczenia”. |
 | `Awizowana` | Nikogo nie było. Zostało awizo, a przesyłka trafia do placówki. |
 | `Oczekuje na odbiór` | Czeka na Ciebie w placówce podanej w zdarzeniu. |
 | `Odebrana w urzędzie pocztowym` | Została odebrana w placówce. |
@@ -121,7 +121,7 @@ W eMonitoringu, tym samym numerem. Status `Przyjęta w kraju przeznaczenia` znac
 - [Pocztex: Śledzenie przesyłek](https://www.pocztex.pl/sledzenie-przesylek/) – śledzenie Pocztex
 - [Poczta Polska: Regulamin usługi Pocztex](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-detalicznego-obowiazuje-od-24.08.2026-r.pdf) – doręczenie, awizo, PUNKT i AUTOMAT, terminy, reklamacje, gwarancja, przekierowanie
 - [Poczta Polska: Regulamin usług powszechnych](https://www.poczta-polska.pl/wp-content/uploads/2026/07/Regulamin-swiadczenia-uslug-powszechnych-tekst-jednolity.pdf) – awizo 7 i 14 dni, przechowanie, zaginięcie, reklamacje zagraniczne
-- [Poczta Polska: Lista zdarzeń dla przesyłki](https://www.poczta-polska.pl/wp-content/uploads/2025/02/PPSA_events_lists.pdf) – nazwy zdarzeń, które mogą się zmieniać
+- [Poczta Polska: Lista zdarzeń dla przesyłki](https://www.poczta-polska.pl/wp-content/uploads/2025/02/PPSA_events_lists.pdf) – nazwy zdarzeń, które mogą się zmieniać, i stan każdego z nich (nieudana próba doręczenia w stanie „W doręczeniu”)
 - [Poczta Polska: FAQ odbioru w punkcie](https://odbiorwpunkcie.poczta-polska.pl/en/faq/) – sklepy partnerskie, automaty, brak przekierowania, „doręczono”, Contact Center
 - [Pocztex: FAQ](https://www.pocztex.pl/en/faq-en/) – powiadomienia, punkty, protokół szkody
 - [Poczta Polska: eReklamacje, paczka pocztowa](https://ereklamacje.poczta-polska.pl/sub/reklamacje-krajowe/paczka-pocztowa) – kto i kiedy reklamuje, 30 dni

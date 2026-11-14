@@ -254,7 +254,7 @@ internal class AddForm(
     lookedUp: String?,
     trackingUrl: String,
     postcodes: CarrierPostcodes,
-    postcodeFill: PostcodeFill,
+    postcodeFills: Map<CarrierId, PostcodeFill>,
     lookupAttempt: Int,
     showingPicker: Boolean,
     didFocus: Boolean,
@@ -278,7 +278,9 @@ internal class AddForm(
 
     /** The postcode given for each carrier and the country chosen beside it: the field shows the carrier in play's. */
     var postcodes by mutableStateOf(postcodes)
-    var postcodeFill by mutableStateOf(postcodeFill)
+
+    /** What each carrier's field was filled with from the postcodes given before (`CarrierPostcodes.fills`). */
+    var postcodeFills by mutableStateOf(postcodeFills)
 
     /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
     var phoneDigits by mutableStateOf(phoneDigits)
@@ -310,7 +312,7 @@ internal class AddForm(
             label = label, trackingInput = draft.orEmpty(), pick = null, carrierOverride = null, asTyped = null,
             recognition = CarrierRecognition(draft?.let { ParcelAddition.trackingNumber(it, catalog) }), refusedQuestion = null,
             verifiedCarrier = null, lookedUp = null, trackingUrl = "", postcodes = CarrierPostcodes(),
-            postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
+            postcodeFills = emptyMap(), lookupAttempt = 0, showingPicker = false,
             didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false, phoneDigits = "",
         )
 
@@ -320,7 +322,7 @@ internal class AddForm(
                 listOf(
                     it.label, it.trackingInput, it.pick.orEmpty(), it.carrierOverride?.rawValue.orEmpty(), it.asTyped.orEmpty(),
                     recognition.settledNumber ?: NONE, it.trackingUrl, it.postcodes.kept, it.postcodes.keptCountries,
-                    it.postcodeFill.postcode ?: NONE, it.postcodeFill.forgotten, it.lookupAttempt, it.showingPicker, it.didFocus,
+                    PostcodeFill.kept(it.postcodeFills), it.lookupAttempt, it.showingPicker, it.didFocus,
                     it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
                     it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
@@ -333,12 +335,12 @@ internal class AddForm(
                 fun texts(index: Int) = (it[index] as List<*>).map { value -> value as String }
                 AddForm(
                     it[0] as String, it[1] as String, text(2), text(3)?.let(::CarrierId), text(4),
-                    CarrierRecognition(kept(5), kept(17)?.let(ParcelAddition::answer), kept(16)),
-                    kept(19)?.let(ParcelAddition::question), kept(18)?.let(ParcelAddition::answer), kept(20),
+                    CarrierRecognition(kept(5), kept(16)?.let(ParcelAddition::answer), kept(15)),
+                    kept(18)?.let(ParcelAddition::question), kept(17)?.let(ParcelAddition::answer), kept(19),
                     it[6] as String, CarrierPostcodes.from(texts(7), texts(8)),
-                    PostcodeFill(kept(9), it[10] as Boolean), it[11] as Int,
-                    it[12] as Boolean, it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId), it[21] as Boolean,
-                    it[22] as String,
+                    PostcodeFill.from(texts(9)), it[10] as Int,
+                    it[11] as Boolean, it[12] as Boolean, it[13] as Boolean, kept(14)?.let(::CarrierId), it[20] as Boolean,
+                    it[21] as String,
                 )
             },
         )
@@ -742,9 +744,9 @@ private class AddActions(
 
 /** `prepareRequiredDetails(for:)`. */
 private fun prepareRequiredDetails(form: AddForm, addition: ParcelAddition, given: List<GivenPostcode>) {
-    val (postcodes, fill) = addition.preparePostcode(form.postcodes, form.postcodeFill, given)
+    val (postcodes, fills) = addition.preparePostcode(form.postcodes, form.postcodeFills, given)
     form.postcodes = postcodes
-    form.postcodeFill = fill
+    form.postcodeFills = fills
 }
 
 /**
@@ -1357,24 +1359,26 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                     )
                 }
                 // An optional postcode is offered, never filled in for the reader.
-                val suggestion = form.postcodeFill.offering(addition.offeredPostcode(state.source.givenPostcodes))
+                val fill = form.postcodeFills[carrier] ?: PostcodeFill()
+                val suggestion = fill.offering(addition.offeredPostcode(state.source.givenPostcodes))
                 if (suggestion != null) {
                     UsePostcodeButton(suggestion, ADD_USE_POSTCODE) {
-                        form.postcodeFill = form.postcodeFill.fill(suggestion)
+                        form.postcodeFills += carrier to fill.fill(suggestion)
                         form.postcodes = form.postcodes.with(carrier, suggestion)
                     }
                 }
-                // Without an account every suggestion is this phone's own, so it can forget them. Every field holding
-                // it, this one too, empties and starts afresh when its carrier's details come up again; until then
-                // nothing fills this one or is offered in it.
-                if (state.source.isGuest && form.postcodeFill.holds(addition.deliveryPostcode)) {
+                // Without an account every suggestion is this phone's own, so it can forget one this field was filled
+                // with. Every field holding it, typed or filled, this one too, empties and starts afresh when its
+                // carrier's details come up again; until then nothing fills this one or is offered in it.
+                if (state.source.isGuest && fill.holds(addition.deliveryPostcode)) {
                     TintedButton(
                         AnnotatedString(localized("add.forgetPostcode")),
                         {
-                            form.postcodeFill.forget(addition.deliveryPostcode)?.let { (postcode, fill) ->
+                            fill.forget(addition.deliveryPostcode)?.let { (postcode, forgotten) ->
                                 state.source.forgetPostcode(postcode)
-                                form.postcodeFill = fill
-                                form.postcodes = form.postcodes.without(postcode)
+                                val left = form.postcodes.without(postcode)
+                                form.postcodeFills = form.postcodeFills.filterKeys { it in left } + (carrier to forgotten)
+                                form.postcodes = left
                             }
                         },
                         ADD_FORGET_POSTCODE,

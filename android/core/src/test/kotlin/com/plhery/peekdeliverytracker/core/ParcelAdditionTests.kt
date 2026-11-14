@@ -325,20 +325,21 @@ class ParcelAdditionTests {
         assertTrue(postnl.postcodeRequirement!!.isOptional)
         val packs = postnl.copy(carrierOverride = CarrierId("packs"))
         assertFalse(packs.postcodeRequirement!!.isOptional)
-        fun ParcelAddition.prepared(postcodes: CarrierPostcodes, fill: PostcodeFill = PostcodeFill()) =
-            preparePostcode(postcodes, fill, given)
+        fun ParcelAddition.prepared(postcodes: CarrierPostcodes, fills: Map<CarrierId, PostcodeFill> = emptyMap()) =
+            preparePostcode(postcodes, fills, given)
 
         // A required postcode starts from the last given that fits.
-        val (filled, fill) = packs.prepared(CarrierPostcodes())
+        val (filled, fills) = packs.prepared(CarrierPostcodes())
         assertEquals("1234 AB", packs.withPostcode(filled).deliveryPostcode)
-        assertTrue(fill.holds("1234 AB"))
+        assertTrue(fills.getValue(CarrierId("packs")).holds("1234 AB"))
         assertEquals("1234 AB", packs.withPostcode(filled).sentPostcode)
 
         // PostNL's optional one stays empty, that postcode offered, and nothing goes with the parcel.
-        val (offered, offeredFill) = postnl.prepared(filled, fill)
+        val (offered, offeredFills) = postnl.prepared(filled, fills)
         val shown = postnl.withPostcode(offered)
         assertEquals("", shown.deliveryPostcode)
-        assertEquals("1234 AB", offeredFill.offering(shown.previousPostcode(shown.postcodeRequirement!!, given)))
+        assertNull("Packs' fill is Packs' own", offeredFills[CarrierId.SpringGDS])
+        assertEquals("1234 AB", PostcodeFill().offering(shown.previousPostcode(shown.postcodeRequirement!!, given)))
         assertEquals("", shown.sentPostcode)
         assertTrue(shown.canSave)
         // Accepted, it is PostNL's, and goes with the parcel.
@@ -359,10 +360,16 @@ class ParcelAdditionTests {
         val (emptied, _) = packs.prepared(CarrierPostcodes().with(CarrierId("packs"), ""))
         assertEquals("", packs.withPostcode(emptied).deliveryPostcode)
         assertFalse(packs.withPostcode(emptied).canSave)
-        // A carrier's own, where it is the postcode given before, can still be forgotten.
-        val (own, ownFill) = packs.prepared(CarrierPostcodes().with(CarrierId("packs"), "1234 AB"), PostcodeFill("9999"))
+        // A carrier's field filled earlier can still forget what it was filled with as its carrier comes back.
+        val (own, ownFills) = packs.prepared(filled, fills)
         assertEquals("1234 AB", packs.withPostcode(own).deliveryPostcode)
-        assertTrue(ownFill.holds("1234 AB"))
+        assertTrue(ownFills.getValue(CarrierId("packs")).holds("1234 AB"))
+        // One typed by hand stays the reader's own, though it is the postcode given before and another field was
+        // filled with it.
+        val (typedOwn, typedFills) =
+            packs.prepared(CarrierPostcodes().with(CarrierId("packs"), "1234 AB"), mapOf(CarrierId.SpringGDS to PostcodeFill("1234 AB")))
+        assertEquals("1234 AB", packs.withPostcode(typedOwn).deliveryPostcode)
+        assertNull(typedFills[CarrierId("packs")])
     }
 
     @Test
@@ -377,6 +384,10 @@ class ParcelAdditionTests {
         val emptied = postcodes.with(CarrierId.Dpd, "")
         assertEquals(emptied, CarrierPostcodes.from(emptied.kept))
         assertEquals(CarrierPostcodes(), CarrierPostcodes.from(emptyList()))
+        // What each carrier's field was filled with is kept as text too.
+        val fills = mapOf(CarrierId("packs") to PostcodeFill("1234 AB"), CarrierId.SpringGDS to PostcodeFill(forgotten = true))
+        assertEquals(fills, PostcodeFill.from(PostcodeFill.kept(fills)))
+        assertEquals(emptyMap<CarrierId, PostcodeFill>(), PostcodeFill.from(emptyList()))
     }
 
     /**

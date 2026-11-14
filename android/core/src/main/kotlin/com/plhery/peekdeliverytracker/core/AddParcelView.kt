@@ -84,8 +84,22 @@ data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = f
         return postcode to copy(postcode = null, forgotten = true)
     }
 
-    /** Another carrier's details: what was given before may fill the field again. */
+    /** Its carrier's details again: what was given before may fill the field again. */
     fun prepare(): PostcodeFill = copy(forgotten = false)
+
+    companion object {
+        /** Each carrier's fill in turn, as text for a window to keep: its carrier, its postcode, whether it was forgotten. */
+        fun kept(fills: Map<CarrierId, PostcodeFill>): List<String> =
+            fills.flatMap { (carrier, fill) -> listOf(carrier.rawValue, fill.postcode ?: NONE, if (fill.forgotten) "1" else "") }
+
+        /** The fills [kept] kept. */
+        fun from(kept: List<String>): Map<CarrierId, PostcodeFill> =
+            kept.chunked(3).filter { it.size == 3 }.associate { (carrier, postcode, forgotten) ->
+                CarrierId(carrier) to PostcodeFill(postcode.takeIf { it != NONE }, forgotten.isNotEmpty())
+            }
+
+        private const val NONE = "\u0000"
+    }
 }
 
 /**
@@ -506,25 +520,24 @@ data class ParcelAddition(
         copy(deliveryPostcode = postcodes[resolvedCarrier], chosenPostcodeCountry = postcodes.country(resolvedCarrier))
 
     /**
-     * `prepareRequiredDetails(for:)`'s postcode, as the carrier's details come up: its field keeps what was given for
-     * it earlier in Add; otherwise a required one starts from the last postcode given that fits, and an optional one
-     * stays empty, that postcode only offered. What was given before may fill the field again, and the carrier's own,
-     * where it is that postcode, can still be forgotten.
+     * `CarrierPostcodes.prepare(_:requirement:among:)`, as the carrier's details come up: its field keeps what was
+     * given for it earlier in Add; otherwise a required one starts from the last postcode given that fits, and an
+     * optional one stays empty, that postcode only offered. `fills` holds what each carrier's field was filled with
+     * (`CarrierPostcodes.fills`): what was given before may fill this one again, and only a field filled from memory,
+     * never one typed by hand, can forget it.
      */
     fun preparePostcode(
         postcodes: CarrierPostcodes,
-        fill: PostcodeFill,
+        fills: Map<CarrierId, PostcodeFill>,
         given: List<GivenPostcode>,
-    ): Pair<CarrierPostcodes, PostcodeFill> {
-        val prepared = fill.prepare()
+    ): Pair<CarrierPostcodes, Map<CarrierId, PostcodeFill>> {
+        val carrier = resolvedCarrier
+        val own = fills[carrier]?.prepare()
+        val prepared = if (own != null) fills + (carrier to own) else fills
         val requirement = postcodeRequirement ?: return postcodes to prepared
-        if (resolvedCarrier !in postcodes) {
-            val start = requirement.startingPostcode(resolvedCarrier, given) ?: return postcodes to prepared
-            return postcodes.with(resolvedCarrier, start) to prepared.fill(start)
-        }
-        val suggestion = previousPostcode(requirement, given)
-        return postcodes to
-            if (suggestion != null && PostcodeFill(suggestion).holds(postcodes[resolvedCarrier])) prepared.fill(suggestion) else prepared
+        if (carrier in postcodes) return postcodes to prepared
+        val start = requirement.startingPostcode(carrier, given) ?: return postcodes to prepared
+        return postcodes.with(carrier, start) to prepared + (carrier to (own ?: PostcodeFill()).fill(start))
     }
 
     /**

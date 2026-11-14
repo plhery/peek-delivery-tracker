@@ -674,7 +674,7 @@ describe('alerts in the iPhone app', () => {
 
   it('counts another refusal as a failed send, as for a browser', async () => {
     pending([appRow()]);
-    apns.mockRejectedValue(new APNsError(500, 'InternalServerError'));
+    apns.mockRejectedValue(new APNsError(400, 'PayloadTooLarge'));
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     expect(await alerts.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 0, expired: 0 });
     expect(failures).toHaveBeenCalledExactlyOnceWith('alert-1', 1);
@@ -682,9 +682,14 @@ describe('alerts in the iPhone app', () => {
     expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'ios');
   });
 
-  it('keeps the alert and its count when APNs refuses the server\'s own signing key', async () => {
+  it.each([
+    ['refuses the server\'s own signing key', new APNsError(403, 'InvalidProviderToken')],
+    ['refuses the app\'s topic', new APNsError(400, 'BadTopic')],
+    ['is down', new APNsError(503, 'ServiceUnavailable')],
+    ['cannot be reached', new TypeError('fetch failed')],
+  ])('keeps the alert and its count when APNs %s', async (_, error) => {
     pending([appRow({ failures: 2 })]);
-    apns.mockRejectedValue(new APNsError(403, 'InvalidProviderToken'));
+    apns.mockRejectedValue(error);
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     await alerts.dispatch();
     expect(removed).not.toHaveBeenCalled();
@@ -748,7 +753,7 @@ describe('alerts in the Android app', () => {
 
   it('counts another refusal as a failed send', async () => {
     pending([appRow()]);
-    android.mockRejectedValue(new FCMError(503, 'UNAVAILABLE'));
+    android.mockRejectedValue(new FCMError(403, 'SENDER_ID_MISMATCH'));
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     expect(await alerts.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 0, expired: 0 });
     expect(failures).toHaveBeenCalledExactlyOnceWith('alert-1', 1);
@@ -756,9 +761,15 @@ describe('alerts in the Android app', () => {
     expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'android');
   });
 
-  it('keeps the alert and its count when Google refuses the server\'s service account', async () => {
+  it.each([
+    ['Google refuses the server\'s service account', new FCMAuthError(400, 'invalid_grant')],
+    ['FCM refuses the service account\'s rights', new FCMError(403, 'PERMISSION_DENIED')],
+    ['FCM is down', new FCMError(503, 'UNAVAILABLE')],
+    ['FCM limits the server', new FCMError(429, 'QUOTA_EXCEEDED')],
+    ['FCM cannot be reached', new TypeError('fetch failed')],
+  ])('keeps the alert and its count when %s', async (_, error) => {
     pending([appRow({ failures: 2 })]);
-    android.mockRejectedValue(new FCMAuthError(400, 'invalid_grant'));
+    android.mockRejectedValue(error);
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     await alerts.dispatch();
     expect(removed).not.toHaveBeenCalled();

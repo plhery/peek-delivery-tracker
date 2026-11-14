@@ -228,8 +228,9 @@ Key server modules:
     and leaves the place out when they can't be read. An alert ends with the journey, when
     the push service says the subscription is gone, or after three failed sends in a row; a
     failed send is not repeated, so an endpoint anyone can add costs a bounded number of
-    requests. A send the server's own credentials failed (FCM's service account, APNs's
-    signing key) tried no device and is not counted.
+    requests. An app's send that failed on the server's side is not counted: its own
+    credentials or settings (FCM's service account, APNs's signing key and topic), the push
+    service's outage or limit, or the network.
     The browser is asked for the permission, and subscribes, only on "Turn on". It reuses
     the subscription an account or another parcel already made, so turning one alert off
     leaves the subscription in place. Turning the account's alerts off, signing out or

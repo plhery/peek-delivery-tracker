@@ -1103,8 +1103,8 @@ export class ParcelLinkAlertService {
           await remove('expired');
           recordParcelAlertSent('expired', channel);
           summary.expired += 1;
-        } else if (serverCredentialsFailed(error)) {
-          // No device was tried: the alert keeps its count, or every alert of the app would go after three scans.
+        } else if (transport !== 'web' && appSendFailedServerSide(error)) {
+          // No device is at fault: the alert keeps its count, or every alert of the app would go after three scans.
           failed += 1;
           recordParcelAlertSent('failed', channel);
           await settle(failures);
@@ -1206,12 +1206,25 @@ export class ParcelLinkAlertService {
   }
 }
 
-/** APNs refusing the server's own signing key, whatever the device. */
-const APNS_PROVIDER_TOKEN_REASONS = new Set(['InvalidProviderToken', 'ExpiredProviderToken', 'MissingProviderToken']);
+/** APNs refusing the server's own signing key or its app's topic, whatever the device. */
+const APNS_SERVER_REASONS = new Set([
+  'InvalidProviderToken', 'ExpiredProviderToken', 'MissingProviderToken', 'TooManyProviderTokenUpdates',
+  'BadTopic', 'MissingTopic', 'TopicDisallowed', 'BadCertificate', 'BadCertificateEnvironment',
+]);
 
-/** Whether the server's own credentials failed (FCM's service account, APNs's signing key): no device is at fault. */
-function serverCredentialsFailed(error: unknown): boolean {
-  return error instanceof FCMAuthError || (error instanceof APNsError && APNS_PROVIDER_TOKEN_REASONS.has(error.reason));
+/**
+ * Whether an app's send failed on the server's side, whatever the device: its own credentials or settings (FCM's
+ * service account, APNs's signing key and topic), the push service's outage or limit, or the network. Apple and
+ * Google answer for those, never whoever added the alert, so they don't count toward the failures that end it.
+ */
+function appSendFailedServerSide(error: unknown): boolean {
+  if (error instanceof FCMAuthError) return true;
+  if (error instanceof FCMError) {
+    return error.statusCode === 401 || error.statusCode === 429 || error.statusCode >= 500
+      || (error.statusCode === 403 && error.reason !== 'SENDER_ID_MISMATCH');
+  }
+  if (error instanceof APNsError) return error.statusCode === 429 || error.statusCode >= 500 || APNS_SERVER_REASONS.has(error.reason);
+  return true;
 }
 
 export class APNsError extends Error {

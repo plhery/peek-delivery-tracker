@@ -3,7 +3,7 @@ title: UPS seguimiento en España: número 1Z, estados y aduanas
 description: Seguimiento de UPS en España: cómo es el número 1Z, qué significan Exception y los demás escaneos, los Access Point, el arancel de aduanas y tus derechos.
 slug: ups-seguimiento
 published: 2026-10-13
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 Los números de seguimiento de UPS (United Parcel Service) suelen empezar por `1Z`. Pega el número, o un enlace de seguimiento de UPS, en la casilla de arriba para seguir el paquete; la página de seguimiento de la propia UPS está en ups.com.
@@ -48,6 +48,8 @@ UPS también puede llevar el paquete a un UPS Access Point. Allí los escaneos d
 
 Un paquete que llega de fuera de la UE puede tener gastos de importación que hay que pagar antes de que UPS lo entregue; el seguimiento muestra entonces `Duties or taxes are due on this package.` y `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
+Si aduanas necesita tu número fiscal, el escaneo de UPS dice `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: el despacho espera el número de identificación del importador, particular o empresa, y tienes que darlo tú, como destinatario. Peek muestra «En aduanas» con el aviso «Aduanas necesita tu número fiscal».
+
 Según la Agencia Tributaria, desde el 1 de julio de 2026 las compras por internet de hasta 150 euros enviadas desde fuera de la UE (China, Estados Unidos o Reino Unido, por ejemplo) pagan, además del IVA, un arancel fijo de 3 euros por cada categoría de artículos. Cuándo se paga depende de la tienda: si sus condiciones de compra dicen que el precio incluye el arancel, el transportista no te cobrará nada por él. Si no, el transportista puede pedirte el arancel y el IVA, y quizá unos gastos de gestión, antes de entregarte el paquete. Desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 euros por categoría de artículos, que se paga junto con el arancel. Lo que decide si pagas es el lugar desde el que se envía la mercancía, no el dominio de la web ni que los precios estén en euros. Más en [paquete retenido en aduanas](guide:customs).
 
 ## Paquete de UPS retrasado, perdido o entregado sin recibirlo
@@ -91,5 +93,5 @@ Desconfía. INCIBE ha avisado de una campaña de SMS falsos que se hacen pasar p
 - [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo adicional, rescisión y reembolso, el vendedor responde de los daños
 - [CNMC: Guía sobre los derechos de los usuarios postales](https://www.cnmc.es/sites/default/files/editor_contenidos/Postal/202412_STP_DTSP_070_24_Guia%20usuarios%20postales%20CNMC.pdf) – paquetes y envío urgente como servicio postal, remitente y destinatario como usuarios, reclamación en seis meses, respuesta en uno o tres meses, vías de consumo
 - [INCIBE: Campaña de smishing que suplanta a empresas de paquetería](https://www.incibe.es/ciudadania/avisos/campana-de-smishing-que-suplanta-empresas-de-paqueteria-con-la-excusa-de-que) – SMS falsos de entrega, 017, banco
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formas del número, dígito de control, escaneos de UPS (retención y liberación por un organismo público, instrucciones de entrega del destinatario), qué lee Peek de UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formas del número, dígito de control, escaneos de UPS (retención y liberación por un organismo público, instrucciones de entrega del destinatario, petición del número de identificación del importador), qué lee Peek de UPS
 :::

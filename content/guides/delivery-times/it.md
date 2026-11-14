@@ -4,7 +4,7 @@ description: Fino a che ora consegnano Poste Italiane, BRT, GLS e Amazon, se il 
 slug: a-che-ora-consegna-il-corriere
 picture: Un orologio che segna le otto di sera sotto una falce di luna, un calendario con i fine settimana evidenziati, un furgone a fari accesi e Pip che guarda da una finestra.
 published: 2026-10-14
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Con la consegna in giornata Amazon porta i pacchi fino alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-120 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
@@ -20,10 +20,11 @@ Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno t
 | [Amazon](carrier:amazon-logistics) | Fino alle 22:00 con la consegna in giornata, nelle città dove c'è | Sì | Sì, «sette giorni su sette» |
 | [La Posta](carrier:swiss-post) (Ticino) | Nessun orario pubblicato; di sera dalle 16.30 alle 21.00 se lo paghi | PostPac Priority sì, con un supplemento; PostPac Economy no | Non prevista |
 
-Due cose che la tabella non dice:
+Tre cose che la tabella non dice:
 
 - **Amazon** arriva fino alle 22:00 con la consegna in giornata, che c'è in oltre 30 città italiane: nell'area di Milano, per esempio, per alcuni dei prodotti più richiesti ordini entro le 17:00 e ricevi il pacco la sera stessa. Per i clienti Prime è gratuita sopra i 29 euro, per gli altri costa 8,99 euro.
 - **Poste Italiane** fa due tentativi di consegna per ogni pacco, ma non dice a che ora. Se ti serve un orario preciso, devono averlo scelto il negozio o chi ti spedisce il pacco, con le opzioni di Poste Delivery Business Express.
+- **SDA** ha trasferito a Poste Italiane i suoi servizi di corriere espresso: una spedizione SDA si cerca su poste.it, e su Peek la segui come Poste Italiane, che trovi anche cercando «SDA».
 
 ## Quanto ci mette un pacco ad arrivare?
 
@@ -65,13 +66,13 @@ Ti serve la fascia oraria che il corriere ricava dal giro del furgone. Non la sc
 | GLS | Aggiornamenti e fino a sei opzioni di consegna, con FlexDeliveryService | Via e-mail o SMS, se il mittente ha attivato il servizio |
 | Poste Italiane | Nessuna fascia per Poste Delivery Express e Standard | Conta il giorno, non l'ora |
 
-Una fascia è una stima e non sempre puoi spostarla, ma puoi cambiare altro: con il BRTcode scegli un'altra data o fascia, un BRT-fermopoint o il ritiro in filiale, e la Posta svizzera ti lascia cambiare luogo e momento del recapito fino a mezzanotte del giorno prima.
+Una fascia è una stima e non sempre puoi spostarla, ma puoi cambiare altro: con il BRTcode scegli un'altra data o fascia, un BRT-fermopoint o il ritiro in filiale, e la Posta svizzera ti lascia cambiare luogo e momento del recapito fino a mezzanotte del giorno prima. Il BRTcode è negli SMS e nelle e-mail con cui BRT ti avvisa dell'affidamento della spedizione, o sul tagliando che il corriere lascia dopo un tentativo di consegna. Con Poste Delivery Business Express, se il negozio ha attivato «Scegli Tu», il link nella notifica sullo stato della spedizione ti fa scegliere tra le opzioni che ha previsto: un'altra data o un altro indirizzo, il vicino, il ritiro in ufficio postale, in un Punto Poste o in un Punto Poste Locker, un luogo sicuro o la giacenza mentre sei in vacanza.
 
 Un orario preciso, di solito, si paga. In Ticino, con «Invio singolo», la Posta vende il «Recapito mattutino» dal martedì al sabato dalle 7.00 alle 9.00 (CHF 7.00) e il «Recapito serale» dal lunedì al venerdì dalle 16.30 alle 21.00 (CHF 7.90). In Italia lo decide il mittente: Poste Delivery Business Express offre la consegna su appuntamento, o una finestra di due ore scelta in anticipo. Su [Peek](/), la fascia che il corriere ti dà puoi aggiungerla al calendario con «Aggiungi al calendario».
 
 ## Perché il pacco è ancora in consegna alle 20?
 
-Perché il tuo indirizzo non è l'unica tappa. `In consegna` vuol dire che il pacco è sul furgone di oggi, e l'ora dipende da che fermata sei nel giro: la 15 o la 115.
+Perché il tuo indirizzo non è l'unica tappa. `In consegna` vuol dire che il pacco è sul furgone di oggi, e l'ora dipende da che fermata sei nel giro: la 15 o la 115. Quel giorno Poste Italiane scrive `In consegna` o `la spedizione è in consegna`, BRT `IN CONSEGNA` e GLS `Consegna prevista nel corso della giornata odierna.`: su Peek sono tutti «In consegna».
 
 :::journey
 - warehouse | Deposito | Smistato e caricato sul furgone.
@@ -81,7 +82,7 @@ Perché il tuo indirizzo non è l'unica tappa. `In consegna` vuol dire che il pa
 
 Gli orari più tardi sono normali: Amazon fino alle 22:00 con la consegna in giornata, Poste Delivery Business Express con «Consegna di Sera» fino alle 21:00, la Posta con il «Recapito serale» fino alle 21.00. Un corriere che suona alle 20:45 sta facendo una giornata normale. Cosa vuol dire ogni stato lungo il percorso lo trovi negli [stati della spedizione](guide:tracking-statuses).
 
-A volte il giro non si chiude. DHL, in Germania, cita il corriere che si ammala o esaurisce le ore di lavoro, le strade chiuse e gli incidenti. Di solito il pacco riparte il giorno lavorativo dopo. Con Poste Italiane ogni pacco ha due tentativi di consegna; se nessuno va a buon fine, va in giacenza all'ufficio postale indicato sull'avviso.
+A volte il giro non si chiude. DHL, in Germania, cita il corriere che si ammala o esaurisce le ore di lavoro, le strade chiuse e gli incidenti. Di solito il pacco riparte il giorno lavorativo dopo. Con Poste Italiane ogni pacco ha due tentativi di consegna; se nessuno va a buon fine, va in giacenza all'ufficio postale indicato sull'avviso, dove con Poste Delivery Express e Standard hai 10 giorni lavorativi, sabato incluso, per ritirarlo. Anche GLS fa un primo e un secondo tentativo, poi tiene il pacco in giacenza nella sede GLS di zona.
 
 ## Pacco in consegna ma non arriva: cosa fare
 
@@ -96,7 +97,7 @@ Chiamare la sera stessa serve a poco: DHL, per esempio, dice che i suoi corrieri
 
 Per Poste Delivery Standard, Poste Italiane prevede la consegna in 5 giorni lavorativi nel 90% dei casi, sabato e festivi esclusi. In Ticino, per un invio nazionale la Posta accetta una ricerca quando sono passati più di due giorni dai tempi di consegna previsti e tu confermi di non averlo ricevuto.
 
-Hai trovato un avviso perché non eri in casa? Leggi [mancata consegna pacco](guide:missed-delivery). Nessuna nuova scansione da giorni? Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
+Se BRT non ti ha trovato, il tracking scrive `Destin.Assente:LASCIATO AVVISO` («Tentativo di consegna» su Peek), e sul tagliando trovi il BRTcode per fissare un'altra consegna. Hai trovato un avviso perché non eri in casa? Leggi [mancata consegna pacco](guide:missed-delivery). Nessuna nuova scansione da giorni? Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
 Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato fino a ogni 2 minuti, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti e Cainiao). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
 
@@ -112,8 +113,9 @@ Sì, se lo fai arrivare in un locker o in un negozio:
 
 - **BRT** ha oltre 12.400 BRT-fermopoint, tra edicole, tabaccherie, cartolerie e locker, alcuni con orari estesi anche nel fine settimana. Con il BRTcode puoi scegliere un fermopoint anche dopo la spedizione.
 - **La Posta** in Ticino ti fa spostare un pacco su uno sportello automatico My Post 24 gratis, ma solo finché il pacco è in viaggio: dopo un avviso di mancata consegna costa CHF 8.00 dal lunedì al venerdì, CHF 15.00 il sabato o al mattino presto. Si usa 24 ore su 24, ma solo per i pacchi della Posta: quelli di DHL, DPD, FedEx o UPS non ci arrivano.
-- **GLS**, se il mittente lo prevede, tiene il pacco in sede: le sedi sono aperte dal lunedì al venerdì dalle 8.30 alle 13.00 e dalle 14.30 alle 18.30, il sabato dalle 8.30 alle 12.00.
-- **Poste Italiane** ti fa ritirare un Poste Delivery Business Express in giacenza all'ufficio postale anche il sabato, negli orari di apertura.
+- **GLS**, se il mittente lo prevede, tiene il pacco in sede: le sedi sono aperte dal lunedì al venerdì dalle 8.30 alle 13.00 e dalle 14.30 alle 18.30, il sabato dalle 8.30 alle 12.00. Con Smart Delivery Service il pacco va in un punto di ritiro e ci resta 10 giorni in un GLS Point o in sede, 8 se il GLS Point è un locker.
+- **Poste Italiane** ti fa ritirare un Poste Delivery Business Express in giacenza all'ufficio postale anche il sabato, negli orari di apertura. Se il negozio lo prevede, puoi farti consegnare in uno degli oltre 18.000 Punto Poste, tra negozi e locker: al locker inserisci il PIN o scansioni il QR code che ricevi via SMS o e-mail.
+- **Amazon** ti fa scegliere un Amazon Locker quando ordini: all'arrivo del pacco ricevi un'e-mail con le istruzioni e le credenziali per il ritiro, e hai tre giorni. Poi il pacco torna ad Amazon, con il rimborso totale in automatico.
 
 Attenzione: un locker che apri a ogni ora viene riempito solo nei giorni in cui il corriere lavora. Se il corriere non consegna la domenica, la domenica nel locker non arriva niente. Per mandare il pacco altrove quando è già partito, leggi [come cambiare l'indirizzo di consegna](guide:change-delivery-address).
 
@@ -122,14 +124,18 @@ Attenzione: un locker che apri a ogni ora viene riempito solo nei giorni in cui 
 - [About Amazon Italia: Nuova tecnologia robotica ed espansione delle consegne veloci](https://www.aboutamazon.it/notizie/company-news/amazon-annuncia-nuova-tecnologia-robotica-lespansione-consegne-veloci-1-miliardo-dollari-formazione) – ordini fino alle 17:00 consegnati entro le 22:00 dello stesso giorno, siti per la consegna in giornata anche a Milano
 - [About Amazon Italia: Nuove soluzioni per consegne più veloci in Italia](https://www.aboutamazon.it/notizie/logistica/amazon-introduce-nuove-soluzioni-per-consegne-piu-veloci-e-piu-sostenibili-in-italia) – area di Milano, ordini fino alle 17:00 e consegna la sera stessa, consegna in giornata in oltre 30 città
 - [About Amazon Italia: Nuovo record di velocità nelle consegne Prime nel 2025](https://www.aboutamazon.it/notizie/company-news/amazon-nuovo-record-velocita-consegne-prime-2025-italia-230-milioni-prodotti) – consegna in giornata gratuita per i clienti Prime sopra i 29 euro, 8,99 euro per gli altri
-- [Poste Italiane: Poste Delivery Express](https://www.poste.it/pacchi/poste-delivery-express) – 1-4 giorni lavorativi, sabato e festivi esclusi, due tentativi
-- [Poste Italiane: Poste Delivery Standard](https://www.poste.it/pacchi/poste-delivery-standard) – 5 giorni lavorativi nel 90% dei casi, due tentativi, oltre l'orario limite dal giorno lavorativo successivo
-- [Poste Italiane: Poste Delivery Business Express](https://business.poste.it/professionisti-imprese/prodotti/poste-delivery-business-express.html) – consegna di sabato e di sera (18:30-21:00), appuntamento, finestra di due ore, ritiro il sabato, indicativamente 1-2 giorni lavorativi dopo il ritiro
-- [BRT: FAQ](https://www.brt.it/it/servizio-clienti/faq/) – BRTcode, data e fascia oraria, BRT-fermopoint
+- [About Amazon Italia: Il volto gentile dietro gli Amazon Locker](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-volto-gentile-dietro-gli-amazon-locker) – credenziali via e-mail, tre giorni, rimborso automatico (articolo del 2018, letto il 14 novembre 2026)
+- [Poste Italiane: Poste Delivery Express](https://www.poste.it/pacchi/poste-delivery-express) – 1-4 giorni lavorativi, sabato e festivi esclusi, due tentativi, 10 giorni lavorativi di giacenza, sabato incluso (letto il 14 novembre 2026)
+- [Poste Italiane: Poste Delivery Standard](https://www.poste.it/pacchi/poste-delivery-standard) – 5 giorni lavorativi nel 90% dei casi, due tentativi, 10 giorni lavorativi di giacenza, oltre l'orario limite dal giorno lavorativo successivo (letto il 14 novembre 2026)
+- [Poste Italiane: Poste Delivery Business Express](https://business.poste.it/professionisti-imprese/prodotti/poste-delivery-business-express.html) – consegna di sabato e di sera (18:30-21:00), appuntamento, finestra di due ore, ritiro il sabato, indicativamente 1-2 giorni lavorativi dopo il ritiro, Scegli Tu (letto il 14 novembre 2026)
+- [Poste Italiane: Rete Punto Poste](https://www.poste.it/punto-poste/rete-punto-poste) – oltre 18.000 punti di ritiro e locker, PIN o QR code via SMS o e-mail (letto il 14 novembre 2026)
+- [SDA: Home page](https://www.sda.it/wps/portal/sdait.home/) – corriere espresso ex SDA passato a Poste Italiane, ricerca delle spedizioni su poste.it (letto il 14 novembre 2026)
+- [BRT: FAQ](https://www.brt.it/it/servizio-clienti/faq/) – BRTcode, dove trovarlo, data e fascia oraria, BRT-fermopoint (letto il 14 novembre 2026)
 - [BRT: Quali sono i vostri tempi di consegna?](https://www.brt.it/it/faq/quali-sono-i-vostri-tempi-di-consegna/) – in Italia generalmente 24/48 ore, calcolo per CAP
 - [BRT: Privati](https://www.brt.it/it/privati/) – oltre 12.400 BRT-fermopoint, orari estesi nel fine settimana
 - [BRT: Condizioni generali di contratto](https://vas.brt.it/vas/info/it/CONDIZIONI%20GENERALI%20CONTRATTO%20TARIFFARIO.pdf) – tempi sospesi sabato, domenica, festivi e ferie
-- [GLS Italy: La consegna e le possibili opzioni](https://gls-group.com/IT/it/spedire-ricevere/opzioni-consegna/) – Express12Service, SaturdayExpressService, FlexDeliveryService, orari delle sedi
+- [GLS Italy: La consegna e le possibili opzioni](https://gls-group.com/IT/it/spedire-ricevere/opzioni-consegna/) – Express12Service, SaturdayExpressService, FlexDeliveryService, orari delle sedi, due tentativi e giacenza in sede (letto il 14 novembre 2026)
+- [GLS Italy: Smart Delivery Service](https://gls-group.com/IT/it/smartdeliveryservice/) – 10 giorni in un GLS Point o in sede, 8 in un locker (letto il 14 novembre 2026)
 - [GLS Italy: Carta dei servizi postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – National Express in 24 ore nella penisola e 48 ore in Sicilia, Calabria e Sardegna, 99% in 4 giorni lavorativi
 - [GLS Italy: Tempi di consegna](https://gls-group.com/IT/it/spedire-ricevere/info-utili-spedire/destinazioni-tempi/) – tempi indicativi per località o CAP
 - [La Posta: Invio singolo](https://www.post.ch/it/ricezione/gestire-un-invio/invio-singolo) – sabato CHF 3.80, recapito mattutino e serale, prezzi prima del primo tentativo
@@ -140,5 +146,6 @@ Attenzione: un locker che apri a ogni ora viene riempito solo nei giorni in cui 
 - [La Posta: PostPac Priority](https://www.post.ch/it/spedire-pacchi/pacchi-svizzera/postpac-priority) – giorno feriale successivo, recapito il sabato +3.80, niente pacchi la domenica e i festivi
 - [La Posta: PostPac Economy](https://www.post.ch/it/spedire-pacchi/pacchi-svizzera/postpac-economy) – niente pacchi il sabato, la domenica e i festivi, mercoledì dopo un sabato
 - [La Posta: My Post 24](https://www.post.ch/it/ricezione/luoghi-di-ricezione/pickpost-my-post-24/my-post-24) – 24 ore su 24, solo pacchi della Posta
+- [Universal Parcel Scraper: corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – stati del giorno di consegna di Poste Italiane, BRT e GLS che legge Peek, tentativo di consegna BRT, SDA sotto Poste Italiane
 - [DHL: Cosa significa lo stato della mia spedizione? (in tedesco)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – giri interrotti, corrieri non contattabili
 :::

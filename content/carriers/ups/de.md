@@ -3,7 +3,7 @@ title: UPS Sendungsverfolgung: Nummer, Status und Zustellung
 description: UPS-Paket verfolgen: wie die 1Z-Trackingnummer aussieht, was Scans wie „Exception“ bedeuten, Access Point, Zollgebühren und deine Rechte bei Verlust.
 slug: ups-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 Um ein UPS-Paket zu verfolgen, füg die Sendungsnummer oder einen UPS-Tracking-Link oben ins Feld ein. Die Nummer beginnt meist mit `1Z` und hat 18 Zeichen, etwa `1Z1234567812345674`; du findest sie in der Versandbestätigung des Shops. UPS' eigene Sendungsverfolgung (UPS steht für United Parcel Service) findest du auf ups.com.
@@ -49,6 +49,8 @@ UPS kann das Paket auch in einen UPS Access Point bringen. Dort lauten die Scans
 
 Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden, bevor UPS zustellt. Die Sendungsverfolgung zeigt dann `Duties or taxes are due on this package.` und `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
+Braucht der Zoll stattdessen deine Steuernummer, schreibt UPS `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: Die Verzollung wartet auf die Identifikationsnummer des Importeurs, ob Privatperson oder Unternehmen, und die musst du als Empfänger angeben. Peek zeigt „Beim Zoll“ und den Hinweis „Der Zoll braucht deine Steuernummer“.
+
 In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich. Seit dem 1. November 2026 kommt eine Abfertigungspauschale der EU von 2 € dazu, laut Zoll je Warenkategorie und unabhängig vom Warenwert. Mehr in [Paket beim Zoll](guide:customs).
 
 ## UPS Paket kommt nicht an, ist verspätet oder beschädigt
@@ -93,5 +95,5 @@ Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienst
 - [Verbraucherzentrale: Paketdienst-SMS: Vorsicht, Abzocke!](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-SMS, Zollgebühren bei Zustellung, Nummer selbst eingeben
 - [Bundesnetzagentur: Schlichtungsstelle Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/start.html) – gebührenfrei, Voraussetzungen, 10 bis 2.500 €, Teilnahmepflicht
 - [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – UPS (UPS Management LLC, Neuss) als Postdienstleister eingetragen
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Nummernformen, Prüfziffer, UPS' Scans (Halt und Freigabe durch eine Behörde, Zustellanweisungen des Empfängers), was Peek bei UPS liest
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Nummernformen, Prüfziffer, UPS' Scans (Halt und Freigabe durch eine Behörde, Zustellanweisungen des Empfängers, Frage nach der Identifikationsnummer des Importeurs), was Peek bei UPS liest
 :::

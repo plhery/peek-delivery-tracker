@@ -78,7 +78,7 @@ Automat nie działa, gdy już stoisz przed nim?
 - **DPD.** Zadzwoń do pomocy technicznej automatów DPD Pickup. Skrytkę da się otworzyć wygenerowanym linkiem, przekierować paczkę do punktu DPD Pickup albo skorzystać z pomocy kuriera.
 - **ORLEN Paczka.** Skontaktuj się z ORLEN Paczką przez jej stronę.
 
-Śledzenie mówi «doręczono», a paczki nie odebrałeś? Poczta Polska pisze, że taki status przed odbiorem to prawdopodobnie pomyłka, a właściwy brzmi «dostarczono do punktu odbioru»; zgłoś to do Contact Center. Jeśli paczka zniknęła ze skrytki, zobacz [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+Śledzenie mówi „doręczono”, a paczki nie odebrałeś? Poczta Polska pisze, że taki status przed odbiorem to prawdopodobnie pomyłka, a właściwy brzmi „dostarczono do punktu odbioru”; zgłoś to do Contact Center. Jeśli paczka zniknęła ze skrytki, zobacz [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 ## Czy ktoś inny może odebrać paczkę i czy da się bez aplikacji?
 
@@ -89,37 +89,37 @@ W DPD i Pocztex tak, i to bez aplikacji.
 
 Czy w InPost, Allegro One i ORLEN Paczce paczkę może odebrać ktoś inny, sprawdzisz w aplikacji InPost Mobile, na Allegro i na stronie ORLEN Paczki.
 
-Kod wysyłaj tylko osobom, które znasz. Nieoczekiwany SMS z linkiem do «odblokowania» paczki nie pochodzi od automatu: zobacz [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
+Kod wysyłaj tylko osobom, które znasz. Nieoczekiwany SMS z linkiem do „odblokowania” paczki nie pochodzi od automatu: zobacz [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
 
 ## Co pokazuje śledzenie na każdym etapie?
 
 Każdy przewoźnik ma własne słowa. Gdy korzystasz z Peek po polsku, statusy InPost są po polsku, tak jak pisze je InPost, a w innych językach po angielsku. Wyjątek: gdy śledzenie InPost zwraca błąd, Peek może pokazać z zapasowego źródła InPost sam bieżący status, po angielsku. Tak wyglądają kolejne kroki i etap, który Peek przy każdym pokazuje:
 
 :::steps
-- W drodze do automatu | Status o wydaniu paczki do doręczenia (w innych językach `Handed over for delivery`), etap «W doręczeniu». Kurier wiezie paczkę do automatu albo pod drzwi.
-- W automacie | Status o paczce gotowej do odbioru (w innych językach `Ready for collection`), etap «Do odbioru». Paczka czeka w skrytce albo w punkcie.
-- Przypomnienie | Status z przypomnieniem o czekającej paczce (w innych językach `Reminder of a waiting parcel`), etap nadal «Do odbioru». Paczka wciąż czeka na odbiór.
-- Czas minął, paczka wraca | Status o drodze powrotnej (w innych językach `On the way back to the Sender`), etap «Zwrócona nadawcy». Paczka jedzie z powrotem do nadawcy.
-- Zwrot | Status o zwrocie (w innych językach `Returned to Sender`), etap «Zwrócona nadawcy». Tak InPost oznacza zwrot do nadawcy.
+- W drodze do automatu | Status o wydaniu paczki do doręczenia (w innych językach `Handed over for delivery`), etap „W doręczeniu”. Kurier wiezie paczkę do automatu albo pod drzwi.
+- W automacie | Status o paczce gotowej do odbioru (w innych językach `Ready for collection`), etap „Do odbioru”. Paczka czeka w skrytce albo w punkcie.
+- Przypomnienie | Status z przypomnieniem o czekającej paczce (w innych językach `Reminder of a waiting parcel`), etap nadal „Do odbioru”. Paczka wciąż czeka na odbiór.
+- Czas minął, paczka wraca | Status o drodze powrotnej (w innych językach `On the way back to the Sender`), etap „Zwrócona nadawcy”. Paczka jedzie z powrotem do nadawcy.
+- Zwrot | Status o zwrocie (w innych językach `Returned to Sender`), etap „Zwrócona nadawcy”. Tak InPost oznacza zwrot do nadawcy.
 :::
 
-Po odbiorze InPost oznacza paczkę jako doręczoną (w innych językach `Delivered`), a Peek pokazuje etap «Dostarczona». Słowa innych przewoźników: [statusy przesyłki](guide:tracking-statuses); paczka stoi w miejscu: [śledzenie się nie aktualizuje](guide:tracking-not-updating).
+Po odbiorze InPost oznacza paczkę jako doręczoną (w innych językach `Delivered`), a Peek pokazuje etap „Dostarczona”. Słowa innych przewoźników: [statusy przesyłki](guide:tracking-statuses); paczka stoi w miejscu: [śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 ## Czy mogę nadać lub zwrócić paczkę w automacie?
 
-W InPost tak: gdy nadasz paczkę w Paczkomacie albo w punkcie, Peek pokaże status o nadaniu (w innych językach `Sent through Parcel Locker/Parcel Point`), z etapem «Przyjęta przez przewoźnika». Jak nadać paczkę lub zwrot, sprawdzisz w aplikacji InPost Mobile albo na stronie InPost.
+W InPost tak: gdy nadasz paczkę w Paczkomacie albo w punkcie, Peek pokaże status o nadaniu (w innych językach `Sent through Parcel Locker/Parcel Point`), z etapem „Przyjęta przez przewoźnika”. Jak nadać paczkę lub zwrot, sprawdzisz w aplikacji InPost Mobile albo na stronie InPost.
 
 Zwrot to zwykła paczka z własnym numerem: [śledzenie zwrotu i zwrot pieniędzy](guide:returns-tracking).
 
 ## Czy mogę śledzić paczkę z automatu w Peek?
 
-Tak. W [Peek](/) wklejasz numer przesyłki przewoźnika, jak dla każdej innej paczki. Gdy przewoźnik umieści paczkę w automacie, Peek pokazuje etap «Do odbioru».
+Tak. W [Peek](/) wklejasz numer przesyłki przewoźnika, jak dla każdej innej paczki. Gdy przewoźnik umieści paczkę w automacie, Peek pokazuje etap „Do odbioru”.
 
-Jeśli przewoźnik podaje punkt, karta paczki pokazuje go jako Punkt odbioru, z przyciskami Wyznacz trasę, Pokaż na mapie i Kopiuj adres. Po odbiorze pojawia się «Odebrano w» i nazwa miejsca. Większość przewoźników podaje punkt tylko wtedy, gdy paczka tam czeka.
+Jeśli przewoźnik podaje punkt, karta paczki pokazuje go jako Punkt odbioru, z przyciskami Wyznacz trasę, Pokaż na mapie i Kopiuj adres. Po odbiorze pojawia się „Odebrano w” i nazwa miejsca. Większość przewoźników podaje punkt tylko wtedy, gdy paczka tam czeka.
 
 Powiadomienia informują cię, gdy paczka czeka na odbiór. Jest też opcjonalny mail, wyłączony, dopóki go nie włączysz: przychodzi raz, gdy paczka czeka na odbiór, i raz, gdy zostanie doręczona.
 
-Peek nie pokazuje i nie przechowuje kodu do otwarcia skrytki. Ten kod przychodzi tylko w aplikacji, SMS-ie albo mailu od przewoźnika. Jeśli wkleisz do Peek 6-cyfrowy kod bez wybrania przewoźnika, Peek wyświetli «To wygląda na kod odbioru» i poprosi zamiast niego o numer przesyłki, który znajdziesz w mailu o wysyłce.
+Peek nie pokazuje i nie przechowuje kodu do otwarcia skrytki. Ten kod przychodzi tylko w aplikacji, SMS-ie albo mailu od przewoźnika. Jeśli wkleisz do Peek 6-cyfrowy kod bez wybrania przewoźnika, Peek wyświetli „To wygląda na kod odbioru” i poprosi zamiast niego o numer przesyłki, który znajdziesz w mailu o wysyłce.
 
 Numer InPost ma zwykle 24 cyfry, a Allegro One zaczyna się od `A0` lub `AD`; pozostałe wzory: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
 

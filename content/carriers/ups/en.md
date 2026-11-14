@@ -3,7 +3,7 @@ title: UPS tracking: numbers, statuses and missed deliveries
 description: Track a UPS parcel: what the 1Z tracking number looks like, what Exception and other UPS scans mean, Access Points, customs charges and your rights if it's lost.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 UPS (United Parcel Service) tracking numbers usually start with `1Z`. Paste the number, or a UPS tracking link, in the box above to follow the parcel; UPS's own tracking page is on ups.com.
@@ -47,6 +47,8 @@ UPS can also take the parcel to a UPS Access Point. Once it's there, the scans r
 ## Customs charges on UPS parcels
 
 A parcel from outside the UK, or from outside the EU for Ireland, may need import charges paid before UPS delivers it; the tracking then shows `Duties or taxes are due on this package.` and `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+
+If customs need your tax number instead, UPS's scan reads `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: clearance waits for the importer's consumer or business identification number, and you, the receiver, have to give it. Peek shows "At customs" with the notice "Customs needs your tax number".
 
 - **UK**: GOV.UK says the courier contacts you with a bill for any VAT, duty or delivery charges, and normally holds the parcel for about 3 weeks. Unpaid, it goes back to the sender.
 - **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item. If the shop didn't collect it at checkout, Revenue says the courier will ask you for it before delivering, and couriers charge their own administration fee on top.
@@ -98,5 +100,5 @@ It can be. Citizens Advice says a message asking you to pay to get a parcel or t
 - [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
 - [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings (a government agency's hold and release, the receiver's delivery instructions), what Peek reads from UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings (a government agency's hold and release, the receiver's delivery instructions, the request for the importer's identification number), what Peek reads from UPS
 :::

@@ -44,6 +44,7 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Le vendeur a réservé l'envoi. Shouwu n'a pas encore le colis. | « Étiquette créée » |
 | `Carrier received the shipment` | Shouwu écrit cette ligne deux heures après les données de commande, des jours avant le premier scan de l'entrepôt : personne n'a encore le colis. | « Étiquette créée » |
+| `Picked up by Shipping Partner` | Le partenaire de Shouwu a enlevé le colis chez le vendeur : c'est le premier scan après les données de commande. | « Pris en charge » |
 | `Arrival processing center`, `Package processing completed` | L'entrepôt de Shouwu en Chine a reçu le colis, puis l'a préparé pour le vol. | « Pris en charge » |
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | La Chine l'a dédouané à l'export ; rien n'est bloqué. | « En transit » |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | Arrivé à l'aéroport de départ après le dédouanement à l'export, il est chargé dans un avion. | « En transit » |
@@ -54,7 +55,7 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | La douane de ton pays l'a libéré. | « En transit » |
 | `Scheduled For Delivery` | Ligne de Shouwu après le dédouanement, des jours avant l'agence et la tournée du transporteur : la livraison est prévue, pas encore en cours. | « En transit » |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Remis au transporteur qui livre chez toi : ce n'est pas encore la livraison (« deliverey » est l'orthographe de Shouwu). | « En transit » |
-| `Your consignment has been picked up` | Le transporteur l'a récupéré à l'entrepôt de Shouwu à l'étranger, après la douane : ce n'est ni un enlèvement chez le vendeur, ni un retrait par toi. | « En transit » |
+| `Your consignment has been picked up` | Le transporteur l'a récupéré à l'entrepôt de Shouwu à l'étranger, après la douane : ce n'est ni l'enlèvement chez le vendeur (celui-là, c'est `Picked up by Shipping Partner`, plus haut), ni un retrait par toi. | « En transit » |
 | `FR, Votre envoi est en transit sur nos plateformes logistiques.,运输途中` | Une ligne du transporteur qui livre en France, reprise avec le code du pays devant et « en transit » en chinois derrière. | « En transit » |
 | `The shipment has been processed in the destination parcel center` | DHL l'a trié au centre colis qui dessert ton adresse, avant sa tournée. | « En transit » |
 | `Mis routed` | Le transporteur qui livre en Allemagne a envoyé le colis au mauvais site et le réachemine : un retard, pas un blocage. La tournée peut passer le jour même. | « En transit » |
@@ -160,5 +161,5 @@ Le vendeur chez qui tu as commandé : il a réservé l'envoi chez Shouwu et peut
 - [Shouwu International : 法国经济 (France, économique)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=23) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Shouwu International : 法国带电 (France, avec batteries)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=26) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droits de 3 € depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes (depuis le 9 novembre aussi le dédouanement à l'export et à l'arrivée, le chargement à l'aéroport et la remise au transporteur), lignes de Colis Privé et du transporteur français, lignes d'iMile en Italie (renvoi à l'expéditeur compris), lignes de DPD, heures, lieux, ce qu'affiche Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes (depuis le 9 novembre aussi le dédouanement à l'export et à l'arrivée, le chargement à l'aéroport et la remise au transporteur, depuis le 14 novembre l'enlèvement chez le vendeur par le partenaire), lignes de Colis Privé et du transporteur français, lignes d'iMile en Italie (renvoi à l'expéditeur compris), lignes de DPD, heures, lieux, ce qu'affiche Peek
 :::

@@ -44,6 +44,7 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Der Händler hat den Versand gebucht. Shouwu hat das Paket noch nicht. | „Etikett erstellt“ |
 | `Carrier received the shipment` | Diese Zeile schreibt Shouwu zwei Stunden nach den Bestelldaten, Tage vor dem ersten Lagerscan: Noch hat niemand das Paket. | „Etikett erstellt“ |
+| `Picked up by Shipping Partner` | Shouwus Versandpartner hat das Paket beim Händler abgeholt: der erste Scan nach den Bestelldaten. | „Beim Paketdienst eingegangen“ |
 | `Arrival processing center` | Shouwus Lager in China hat das Paket angenommen. | „Beim Paketdienst eingegangen“ |
 | `Package processing completed` | Das Lager ist damit fertig, der Flug steht noch aus. | „Beim Paketdienst eingegangen“ |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | Nach der Ausfuhrabfertigung am Abflughafen angekommen; es wird gerade in ein Flugzeug verladen. | „Unterwegs“ |
@@ -54,7 +55,7 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Der Zoll in deinem Land hat es freigegeben. | „Unterwegs“ |
 | `Scheduled For Delivery` | Shouwus Zeile nach der Verzollung, Tage vor dem Depot und der Tour des Paketdiensts: Die Zustellung ist geplant, läuft aber noch nicht. | „Unterwegs“ |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | An den Paketdienst übergeben, der bei dir zustellt: Zugestellt ist es damit noch nicht („deliverey“ schreibt Shouwu so). | „Unterwegs“ |
-| `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: keine Abholung beim Händler und keine durch dich. | „Unterwegs“ |
+| `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: nicht die Abholung beim Händler (die heißt `Picked up by Shipping Partner`, siehe oben) und keine durch dich. | „Unterwegs“ |
 | `The shipment has been processed in the parcel center of origin` | DHLs erster Scan in Deutschland, nach dem Zoll. | „Unterwegs“ |
 | `The shipment has been processed in the destination parcel center` | DHL hat es im Paketzentrum sortiert, das deine Adresse beliefert, vor der Zustelltour. | „Unterwegs“ |
 | `Mis routed` | Der Zusteller in Deutschland hat das Paket an den falschen Standort geleitet und schickt es weiter: Das verzögert es, hält es aber nicht auf. Die Zustelltour kann noch am selben Tag kommen. | „Unterwegs“ |
@@ -172,5 +173,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei Shouwu gebucht und kann
 - [Shouwu International: 德国经济 (Deutschland, Economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=22) – vor allem Hermes, 4 bis 7 Arbeitstage
 - [Shouwu International: 德国带电 (Deutschland, mit Batterien)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=25) – vor allem DPD, 4 bis 7 Arbeitstage
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll seit 1. Juli 2026, Bearbeitungsgebühr von 2 € seit 1. November 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst), Zeilen von DHL, DPD und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst, seit 14. November die Abholung beim Händler durch den Versandpartner), Zeilen von DHL, DPD und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
 :::

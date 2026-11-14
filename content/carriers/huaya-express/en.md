@@ -3,7 +3,7 @@ title: Huaya Express tracking: HYYT numbers and where they stop
 description: Huaya Express (华亚运通) ships online orders from Guangzhou. How to read an HYYT…GZ number and its English scans, and who to ask after the hand-over.
 slug: huaya-express-tracking
 published: 2026-10-28
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 Huaya Express (华亚运通) is the brand on the logo of 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), a forwarder in Guangzhou, China, that carries parcels abroad for online shops. A Huaya waybill opens with HYYT and closes with GZ. Put it in the box above, or follow the 物流跟踪 (logistics tracking) link in the top menu of hyytgz.com to Huaya's own tracker. Huaya's history ends when it hands the parcel to a carrier in your country, or after some of that carrier's scans (in the US, at times up to the delivery), and it never says which carrier that is, except on a line through DHL in Germany: there it copies DHL's scans too.
@@ -31,6 +31,7 @@ Huaya's tracker has a Chinese and an English version. The scan lines Peek knows 
 | Huaya says | What it means for you |
 | --- | --- |
 | `Shipping Label Created` | The label of the carrier that will deliver it in your country exists: order data only, Huaya doesn't have the parcel yet. |
+| `Shipment not yet received or processed` | Also the delivering carrier's line, relayed before the parcel reaches Huaya's collection point: that carrier has only the order data, and Huaya doesn't have the parcel yet either. |
 | `Package received & scanned at warehouse`, `到达收货点` | Huaya has the parcel at its Guangzhou warehouse: the first scan in its hands. The Chinese line says it arrived at the receiving point. |
 | `Package departed from the warehouse` | It has left that warehouse. |
 | `Customs export clearance completed` | China has cleared it for export. Your country's import check comes later. |
@@ -73,7 +74,7 @@ The 关于我们 (about us) and 服务网点 (branches) pages hold nothing but a
 
 Paste an HYYT…GZ number, or a link to Huaya's tracker with it after `documentCode=`, and [Peek](/) files it under Huaya Express straight away: in Peek's catalog that layout belongs to Huaya alone. A shop's order reference looks like nothing in particular, but Peek follows more than 3,500 carriers: enter the reference, then pick Huaya Express under "Change" (华亚运通 or GZHY bring it up too). For a parcel you've added already, use "Change carrier". Peek then also shows the number Huaya tracks the order under. Peek drops dashes, though, so look up a reference with dashes on Huaya's own tracker.
 
-Peek gets its updates from Huaya's own tracker: each line in Huaya's own words with its place when it has one, plus the destination country. The label line shows as "Label created", the warehouse scan as "Received by carrier", the later lines above as "In transit", and the US carrier's `Out for Delivery` and `Delivered` as "Out for delivery" and "Delivered". Times are converted from Beijing to your device's time zone (DHL's copied scans and the US carrier's scans at a US town from the time where the parcel was scanned), and if Huaya's tracker shows a line whose time hasn't come yet in Beijing, Peek leaves it out until then. Huaya gives no delivery date, so Peek shows none.
+Peek gets its updates from Huaya's own tracker: each line in Huaya's own words with its place when it has one, plus the destination country. The label line and `Shipment not yet received or processed` show as "Label created", the warehouse scan as "Received by carrier", the later lines above as "In transit", and the US carrier's `Out for Delivery` and `Delivered` as "Out for delivery" and "Delivered". Times are converted from Beijing to your device's time zone (DHL's copied scans and the US carrier's scans at a US town from the time where the parcel was scanned), and if Huaya's tracker shows a line whose time hasn't come yet in Beijing, Peek leaves it out until then. Huaya gives no delivery date, so Peek shows none.
 
 Huaya's record gives Peek no delivering company or number to follow, so Peek stays with Huaya's tracker, whose history ends at the hand-over line or with a US carrier's scans after it, at times up to the delivery; only on a line through DHL in Germany does it go on, with the DHL scans Huaya copies. To follow the rest, add the local carrier's number from the seller as a second parcel.
 
@@ -100,5 +101,5 @@ The shop you bought from: it's Huaya's customer for that parcel, and Huaya's cla
 - [Huaya Express: 投诉建议 (complaints and suggestions)](http://hyytgz.com/message.php) – the form's fields
 - [Huaya Express: 关于我们 (about us)](http://hyytgz.com/about.php) – no content
 - [Huaya Express: 服务网点 (branches)](http://hyytgz.com/outlets.php) – no content
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – English company name, tracker address and links, HYYT shape, scan wordings and meanings (the US carrier's up to `Delivered`), Beijing clock (the local clock for DHL's copied scans and the US carrier's scans at a US town), lines dated after a check, unknown-number answer, search by reference, no delivering carrier named, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – English company name, tracker address and links, HYYT shape, scan wordings and meanings (the US carrier's up to `Delivered`, the delivering carrier's line before the collection point since 14 November), Beijing clock (the local clock for DHL's copied scans and the US carrier's scans at a US town), lines dated after a check, unknown-number answer, search by reference, no delivering carrier named, what Peek shows
 :::

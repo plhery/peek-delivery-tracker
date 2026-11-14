@@ -55,7 +55,7 @@ Bist du nicht da, kann DHL das Paket bei Nachbarn oder jemandem aus deinem Haush
 
 Vor der Zustellung kannst du den Liefertag kostenlos um bis zu sechs Werktage verschieben, einen Ablageort auf deinem Grundstück oder einen Nachbarn angeben und als registrierter Kunde das Paket an eine Packstation oder Filiale umleiten. Die Adresse selbst lässt sich nicht mehr ändern, wenn das Paket unterwegs ist, und im Paketzentrum abholen kannst du es nicht.
 
-Am Zustelltag bietet DHL für ausgewählte Pakete Live-Tracking an: ein Zeitfenster von 90 Minuten, das Zustellfahrzeug auf der Karte und die Zahl der Stopps bis zu dir, nachdem du deine Postleitzahl eingegeben hast. Dafür musst du für die Ankündigung am Morgen registriert sein. Für Päckchen und Pakete an eine Filiale oder Packstation gibt es das nicht, und auch nicht in jeder Region.
+Am Zustelltag bietet DHL für ausgewählte Pakete Live-Tracking an: ein Zeitfenster von 90 Minuten, das Zustellfahrzeug auf der Karte und die Zahl der Stopps bis zu dir, nachdem du deine Postleitzahl eingegeben hast. Ein Kundenkonto brauchst du dafür nicht. Hat DHL deine E-Mail-Adresse, etwa weil du registriert bist, bekommst du am Morgen der Zustellung eine E-Mail mit dem Link zum Live-Tracking, als registrierter Kunde auch mit dem voraussichtlichen Zeitfenster. Für Päckchen und Pakete an eine Filiale oder Packstation gibt es das nicht, und auch nicht in jeder Region.
 
 ## DHL Paket nicht angekommen oder beschädigt
 
@@ -122,6 +122,7 @@ Nein. DHL Päckchen und DHL Päckchen International haben keine Sendungsverfolgu
 - [DHL: Hilfe zum Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – Zustellung um bis zu sechs Werktage verschieben
 - [DHL: Pakete einfach hinterlegen lassen](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – Ablageort
 - [DHL: Live-Tracking](https://www.dhl.de/de/privatkunden/pakete-empfangen/sendungen-verfolgen/live-tracking.html) – 90-Minuten-Fenster, Postleitzahl, Ausnahmen
+- [DHL: Hilfe zum Live Tracking](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/live-tracking.html) – Live-Tracking auch ohne Kundenkonto, E-Mail am Morgen der Zustellung, wenn DHL die E-Mail-Adresse hat, Zeitfenster für registrierte Kunden (gelesen am 14. November 2026)
 - [DHL Paket GmbH: AGB Paket/Express National (englische Fassung)](https://www.dhl.de/dam/jcr:939f6bf6-5864-474c-a21c-08c009931ccf/agb-paket-express-national-en-07-2025.pdf) – DHL Paket GmbH, Nachbarn und Haushalt, Benachrichtigung, sieben Werktage Lagerung
 - [DHL: Lösungen zu Problemen mit meinem internationalen Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – Päckchen International, fehlender Inhalt im Ausland
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – Telefonnummer, Zeiten, was du bereithalten sollst

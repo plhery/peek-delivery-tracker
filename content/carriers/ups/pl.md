@@ -3,7 +3,7 @@ title: UPS tracking: śledzenie paczki w Polsce, statusy, reklamacje
 description: Śledzenie paczki UPS: jak wygląda numer 1Z, co znaczą Exception i inne skany, punkty Access Point, cło od paczek spoza UE i reklamacja w UPS Polska.
 slug: ups-tracking-sledzenie-paczki
 published: 2026-10-13
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 Numery przesyłek UPS (United Parcel Service) zwykle zaczynają się od `1Z`. Wklej numer albo link do śledzenia UPS w pole powyżej, żeby śledzić paczkę; własne śledzenie UPS znajdziesz na ups.com.
@@ -47,6 +47,8 @@ UPS może też zawieźć paczkę do punktu UPS Access Point. Wtedy skany brzmią
 ## Cło za paczkę UPS spoza UE
 
 Jeśli w śledzeniu pojawi się `Duties or taxes are due on this package.`, UPS doręczy paczkę dopiero, gdy zapłacisz należności przywozowe; zaraz potem zwykle widać `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+
+Gdy urząd celny potrzebuje Twojego numeru podatkowego, UPS pisze `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: odprawa czeka na numer identyfikacyjny importera, osoby prywatnej lub firmy, a podać go musisz Ty jako odbiorca. Peek pokazuje „W urzędzie celnym” i komunikat „Urząd celny potrzebuje Twojego numeru podatkowego”.
 
 Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym: dwie bawełniane koszulki to jedna pozycja, koszulka i etui na telefon – dwie. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Po zwrocie towaru cło i VAT nie są zwracane. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
@@ -95,5 +97,5 @@ Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzegał przed SMS-ami, w kt�
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy, 30 dni, odwołanie, interwencja Prezesa UKE, ADR
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje i odszkodowania](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół szkody, 7 dni na ukryte uszkodzenia
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS (wstrzymanie i zwolnienie przez urząd państwowy, instrukcje doręczenia od odbiorcy), co Peek odczytuje z UPS
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS (wstrzymanie i zwolnienie przez urząd państwowy, instrukcje doręczenia od odbiorcy, prośba o numer identyfikacyjny importera), co Peek odczytuje z UPS
 :::

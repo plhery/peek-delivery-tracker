@@ -3,7 +3,7 @@ title: UPS tracking : suivi de colis, statuts et livraison
 description: Suivre un colis UPS : à quoi ressemble le numéro 1Z, ce que veulent dire Exception et les autres scans, Access Point, frais de douane et tes droits en cas de perte.
 slug: ups-tracking-suivi-colis
 published: 2026-10-13
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 Les numéros de suivi UPS (United Parcel Service) commencent en général par `1Z`. Pour suivre ton colis, colle le numéro ou un lien de suivi UPS dans le champ ci-dessus ; la page de suivi de UPS elle-même se trouve sur ups.com.
@@ -47,6 +47,8 @@ UPS peut aussi déposer le colis dans un point UPS Access Point. Une fois qu'il 
 ## Frais de douane sur un colis UPS
 
 Un colis venu de l'extérieur de l'UE, ou de l'étranger pour la Suisse, peut demander des frais d'importation avant que UPS le livre. Le suivi affiche alors `Duties or taxes are due on this package.` et `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+
+Si la douane a besoin de ton numéro fiscal, le scan de UPS dit `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.` : le dédouanement attend le numéro d'identification de l'importateur, particulier ou entreprise, et c'est à toi, le destinataire, de le donner. Peek affiche « À la douane » avec l'avis « La douane a besoin de ton numéro fiscal ».
 
 - **France et Belgique** : comme partout dans l'UE depuis le 1er juillet 2026, une commande de 150 € ou moins venue de l'extérieur de l'UE paie un droit de douane forfaitaire de 3 € par article (les articles semblables comptent ensemble), en plus de la TVA ; c'est le vendeur ou le transporteur qui le perçoit. En France métropolitaine, la douane précise que la TVA est due dès le premier euro et que le transporteur peut te demander ces taxes à la réception, en y ajoutant ses propres frais de dédouanement, sans lien avec ce que perçoit la douane.
 - **Suisse** : selon l'OFDF, dans le trafic postal et de courrier rapide, c'est le transporteur (UPS, La Poste, etc.) qui dédouane, et lui seul peut t'aider à rechercher ton envoi. Il perçoit des frais de dédouanement pour ce travail, en général facturés au destinataire avec les droits de douane et la TVA ; pour leur montant, renseigne-toi auprès de lui.
@@ -99,5 +101,5 @@ Non : Peek ne fait que lire le suivi de UPS. Les changements que tu fais auprès
 - [OFDF : Frais de dédouanement et suivi des colis](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – dédouanement par le transporteur (UPS, La Poste…), recherche de l'envoi, frais de dédouanement (Suisse)
 - [OFDF : Achats sur Internet, envois postaux et par coursier](https://www.bazg.admin.ch/fr/achat-internet-envois-postaux-importation-suisse-cout-douane-tva) – frais du transporteur facturés au destinataire avec les droits et la TVA
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – faux SMS au nom de transporteurs dont UPS, vérifier le vrai suivi, 33700
-- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formes de numéro, clé de contrôle, scans de UPS (retenue et libération par une administration, instructions de livraison du destinataire), ce que Peek lit chez UPS
+- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formes de numéro, clé de contrôle, scans de UPS (retenue et libération par une administration, instructions de livraison du destinataire, demande du numéro d'identification de l'importateur), ce que Peek lit chez UPS
 :::

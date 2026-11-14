@@ -44,6 +44,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Il venditore ha prenotato la spedizione. Shouwu non ha ancora il pacco. | «Etichetta creata» |
 | `Carrier received the shipment` | Shouwu la scrive due ore dopo i dati dell'ordine, giorni prima della prima scansione in magazzino: nessuno ha ancora il pacco. | «Etichetta creata» |
+| `Picked up by Shipping Partner` | Il partner di spedizione di Shouwu ha ritirato il pacco dal venditore: è la prima scansione dopo i dati dell'ordine. | «Preso in carico» |
 | `Arrival processing center` | Il magazzino di Shouwu in Cina ha preso in carico il pacco. | «Preso in carico» |
 | `Package processing completed` | Il magazzino ha finito di lavorarlo, prima del volo. | «Preso in carico» |
 | `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Partito dal magazzino di transito verso l'aeroporto, dove è in corso lo sdoganamento in uscita dalla Cina, un passaggio di routine prima del volo: non è la dogana del tuo Paese. | «In transito» |
@@ -56,7 +57,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
 | `Scheduled For Delivery` | Riga di Shouwu dopo lo sdoganamento, giorni prima del deposito e del giro del corriere: la consegna è in programma, non ancora in corso. | «In transito» |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Passato al corriere che consegna nel tuo Paese: a te non è ancora stato consegnato («deliverey» è scritto così da Shouwu). | «In transito» |
-| `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è un ritiro dal venditore, né da parte tua. | «In transito» |
+| `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è il ritiro dal venditore (quello è `Picked up by Shipping Partner`, più in alto), né un ritiro da parte tua. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
 | `The shipment has been processed in the destination parcel center` | DHL l'ha smistato nel centro pacchi che serve il tuo indirizzo, prima del giro di consegna. | «In transito» |
@@ -159,5 +160,5 @@ Al venditore da cui hai comprato: ha prenotato lui la spedizione con Shouwu e pu
 - [Shouwu International: 美国标快 (Stati Uniti, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=1) – soprattutto USPS, da 6 a 8 giorni lavorativi, niente ritorno in Cina, reclami
 - [Shouwu International: 美国经济 (Stati Uniti, economica)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=21) – da 8 a 12 giorni lavorativi
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere), righe di Poste Italiane e di iMile (anche il rinvio al mittente), righe di DPD, orari, luoghi, cosa mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere, dal 14 novembre il ritiro dal venditore da parte del partner), righe di Poste Italiane e di iMile (anche il rinvio al mittente), righe di DPD, orari, luoghi, cosa mostra Peek
 :::

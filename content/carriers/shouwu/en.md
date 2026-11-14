@@ -44,6 +44,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | The seller has booked the parcel. Shouwu doesn't have it yet. | "Label created" |
 | `Carrier received the shipment` | Shouwu writes it two hours after the order data, days before the first warehouse scan: no one has the parcel yet. | "Label created" |
+| `Picked up by Shipping Partner` | Shouwu's shipping partner has collected the parcel from the seller: the first scan after the order data. | "Received by carrier" |
 | `Arrival processing center` | Shouwu's warehouse in China has taken the parcel in. | "Received by carrier" |
 | `Package processing completed` | The warehouse is done with it, before the flight. | "Received by carrier" |
 | `Shipment started the customs clearance process at origin` | Export clearance in China has started, a routine step before the flight. Customs aren't holding the parcel. | "In transit" |
@@ -57,7 +58,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Your country's customs have let it through. | "In transit" |
 | `Scheduled For Delivery` | Shouwu's line after import clearance, days before the courier's depot and round: a delivery is planned, not under way. | "In transit" |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Handed to the courier that delivers in your country, not delivered to you ("deliverey" is Shouwu's spelling). | "In transit" |
-| `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
+| `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: not the pickup from the seller (that one is `Picked up by Shipping Partner`, near the start), nor a pickup by you. | "In transit" |
 | `The shipment has been processed in the destination parcel center` | DHL has sorted it at the parcel centre that serves your address, before its delivery round. | "In transit" |
 | `Mis routed` | The courier delivering in Germany sent the parcel to the wrong facility and is sending it on: a delay, not a stop. The delivery round can still come the same day. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
@@ -168,5 +169,5 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, choice of number, 10 to 12 working days
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November), iMile's lines relayed in Italy (its return to sender too), DPD's lines, clocks, places, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November, the partner's pickup from the seller since 14 November), iMile's lines relayed in Italy (its return to sender too), DPD's lines, clocks, places, what Peek shows
 :::

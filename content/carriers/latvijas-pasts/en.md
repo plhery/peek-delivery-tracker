@@ -3,7 +3,7 @@ title: Latvijas Pasts tracking: numbers, statuses and lockers
 description: Track a Latvijas Pasts (Latvian Post) parcel in English: where the number is, what each status means, parcel lockers, missed deliveries and contacts.
 slug: latvijas-pasts-tracking
 published: 2026-10-13
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 Latvijas Pasts (Latvian Post) is Latvia's state-owned national post, with the country's largest network of parcel lockers. Track an item on [mans.pasts.lv/track](https://mans.pasts.lv/track), which opens in Latvian and has an English switch, or paste the number in the box above. The number comes from the shop's or sender's shipping message, or from the courier's SMS before delivery.
@@ -51,7 +51,7 @@ The tracker shows each step with its date, time and the Latvian post office. Abo
 | `Item redirected` | Sent elsewhere, for example to another pickup point (see Redirecting below). |
 | `Item address re-labelled` | Relabelled for its new address, where it now goes. |
 | `Item handed over for delivery` | Out for delivery. |
-| `Unsuccessful delivery attempt` | Delivery failed: see missed deliveries below. |
+| `Unsuccessful delivery attempt` | Delivery failed: see missed deliveries below. At the same second as `Item address re-labelled`, though, it records a redirection: the item goes on, for example to another pickup point, and Peek shows "In transit", not "Delivery attempted". |
 | `Notification - pick-up invitation printed` | Ready for pickup: the post office has printed an invitation for you to collect it there. |
 | `Item arrived at pick-up point` | A foreign post's scan: the item waits at a pickup point abroad. It names the country, not the point. |
 | `Item delivered` | Delivered, also when the destination country's post delivers an item sent abroad. |

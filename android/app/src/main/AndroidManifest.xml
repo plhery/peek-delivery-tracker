@@ -221,6 +221,7 @@
         <!-- The list widget (ParcelsWidget), next to it. -->
         <receiver
             android:name=".widget.ParcelsWidgetReceiver"
+            android:enabled="false"
             android:exported="true"
             android:label="@string/widget_list_gallery_name">
             <intent-filter>

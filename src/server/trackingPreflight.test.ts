@@ -11,7 +11,7 @@ const health = () => ({
   finishTrackingProvider: vi.fn<ProviderHealth['finishTrackingProvider']>(async () => undefined),
 });
 const history = { status: 'delivered' as const, events: [{ time: '2026-10-01T12:00:00Z', description: 'Delivered', stage: 'delivered' as const }] };
-afterEach(() => { vi.restoreAllMocks(); vi.useRealTimers(); });
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); vi.useRealTimers(); });
 it('shares concurrent work and lets one caller cancel while another reuses anonymous history once', async () => {
   const lookup = vi.spyOn(UniversalTracker.prototype, 'fetchSource').mockImplementation(async (_source, _number, _timeout, _postcode, _zone, signal) => {
     await new Promise((resolve) => setTimeout(resolve, 5)); signal?.throwIfAborted(); return history;
@@ -65,6 +65,16 @@ it('takes a refused number as no history and keeps the provider circuit closed',
   // The reader is told the number has no history yet, not that the check failed and will be retried.
   expect(await preflightTracking('9876000061', service)).toEqual({ providers: [{ provider: 'Ship24', outcome: 'no_history' }, { provider: 'ParcelsApp', outcome: 'no_history' }] });
   expect(service.finishTrackingProvider.mock.calls.map((call) => call[2])).toEqual(['not_found', 'not_found']);
+});
+it('asks only the providers the setting allows, and none once it stops them', async () => {
+  const lookup = vi.spyOn(UniversalTracker.prototype, 'fetchSource').mockRejectedValue(new NotFoundError('Ship24'));
+  vi.stubEnv('TRACKING_UNIVERSAL_PROVIDERS', 'ship24');
+  expect(await preflightTracking('1234500501', health())).toEqual({ providers: [{ provider: 'Ship24', outcome: 'no_history' }] });
+  vi.stubEnv('TRACKING_UNIVERSAL_PROVIDERS', 'none');
+  const service = health();
+  expect(await preflightTracking('1234500502', service)).toEqual({ providers: [] });
+  expect(service.acquireTrackingProvider).not.toHaveBeenCalled();
+  expect(lookup).toHaveBeenCalledTimes(1);
 });
 it('takes a postcode request for a number no carrier issues in that shape as no history', async () => {
   vi.spyOn(UniversalTracker.prototype, 'fetchSource').mockImplementation(async (source) => {

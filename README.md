@@ -65,8 +65,8 @@ Stuck? [Help](SUPPORT.md) says what to check and where to write.
 Reading carriers is a job of its own, so it has a repository of its own:
 **[Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper)**. It
 works out which carrier a number belongs to, reads that carrier's own site, falls back on
-universal trackers such as ParcelsApp, Ship24 and 17TRACK, and turns everyone's wording
-into the same delivery stages.
+universal trackers such as ParcelsApp, Ship24 and 17TRACK only where it has to, and turns
+everyone's wording into the same delivery stages.
 
 Peek installs it from npm and builds the rest around it: accounts, checks in the
 background, notifications and the two apps.

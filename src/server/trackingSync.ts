@@ -2401,6 +2401,7 @@ export class TrackingSyncService {
               once(recognitionKey('browser', carrier, number), () => this.adapter.recognizeBrowser!(carrier, number, context, previousError)) } : {}),
             enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true',
             enableTrack123: true,
+            providers: process.env.TRACKING_UNIVERSAL_PROVIDERS,
           }).fetch(subject, !askedForCheck(context.trigger), context.signal, addition, sparse)
           : await this.fetchResult(subject, carrierId, checks, askedForCheck(context.trigger), lookupCountry, keep));
       } catch (error) {

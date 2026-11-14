@@ -81,6 +81,14 @@ settings; requests to other carriers and the browser service stay direct.
 2. **Carriers that recognize the number**, when the filed carrier cannot track it (see
    Carrier recognition below).
 3. **Universal providers**, by default ParcelsApp → Ship24 → 17TRACK → UPU.
+   - They are a fallback meant to shrink, since one may refuse a client that asks it too much:
+     they serve a carrier without an adapter, a number no carrier is known for, and a
+     carrier's failed, partial or label-only answer. `TRACKING_UNIVERSAL_PROVIDERS` names the
+     ones checks and the Add preflight may ask, separated by commas (`ParcelsApp,Ship24`);
+     `none` stops them all, and unset allows every one
+     ([providerPolicy.ts](../src/server/providerPolicy.ts)). A parcel only a stopped provider
+     answered waits for a carrier's adapter. What is sent to each provider, and why, is in
+     [OBSERVABILITY.md](OBSERVABILITY.md).
    - A carrier with results in [coverage.json](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/coverage.json)
      gets its own order, listed in [COVERAGE.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COVERAGE.md):
      providers by the tier its results give them (full history, partial history, nothing
@@ -101,7 +109,7 @@ settings; requests to other carriers and the browser service stay direct.
    - UPU is only for checksum-valid postal S10 numbers, always last, never remembered as
      the preferred source and never used for shadow checks.
    - Postal Ninja is off by default. `TRACKING_ENABLE_POSTAL_NINJA=true` adds it after the
-     other aggregators, whatever its tier, before UPU.
+     other aggregators, whatever its tier, before UPU, when the list above allows it.
    - Exception: checksum-valid China Post `C…CN` and `L…CN` numbers try 17TRACK first,
      because it returns much richer history for them (see
      [COMPARISON.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COMPARISON.md)), and ten-digit

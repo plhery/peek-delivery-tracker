@@ -1887,6 +1887,26 @@ describe('persistent tracking routing', () => {
         ['17TRACK', 'ParcelsApp', ...(enablePostalNinja ? ['Postal Ninja'] : []), 'Ship24']);
     }
   });
+  it('asks only the providers the setting allows, and none once it stops them', async () => {
+    const { direct, universal, health } = setup();
+    universal.mockRejectedValue(new Error('down'));
+    for (const [providers, asked] of [['ParcelsApp, ship24', ['ParcelsApp', 'Ship24']], ['none', []]] as const) {
+      universal.mockClear(); health.acquireTrackingProvider.mockClear();
+      const router = new TrackingRouter({ direct, universal, health, now: () => time, enablePostalNinja: true, providers });
+      // A parcel a stopped provider served is asked of nobody else in its place.
+      const deferred = await router.fetch(parcel({ carrier_data: { routing: state({ preferred_provider: '17TRACK' }) } }), false)
+        .catch((error: unknown) => error);
+      expect(deferred).toBeInstanceOf(RoutingDeferred);
+      expect(universal.mock.calls.map(([source]) => source).sort()).toEqual(asked);
+      expect(health.acquireTrackingProvider.mock.calls.map(([source]) => source).sort()).toEqual(asked);
+    }
+  });
+  it('leaves a stopped provider out of a recheck that asks one provider', async () => {
+    const { router, universal } = setup(time, { providers: 'Ship24' });
+    universal.mockRejectedValue(new Error('down'));
+    await expect(router.fetch(parcel({ tracking_number: 'NOSHAPE42' }), true, undefined, false, true)).rejects.toBeInstanceOf(RoutingDeferred);
+    expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
+  });
   it('never starts a check with Postal Ninja, even from a cursor saved over four providers', async () => {
     let elapsed = 0;
     vi.spyOn(performance, 'now').mockImplementation(() => elapsed);

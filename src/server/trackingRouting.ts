@@ -19,6 +19,7 @@ import { recordChecksumRejection, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { BLOCK_PAUSE_MS, type ProviderRefusals } from './providerRefusals';
 import type { ProviderMisses } from './providerMisses';
+import { providerAllowed } from './providerPolicy';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
@@ -773,6 +774,8 @@ export class TrackingRouter {
     wait?: (ms: number, signal?: AbortSignal) => Promise<unknown>;
     enablePostalNinja?: boolean;
     enableTrack123?: boolean;
+    /** `TRACKING_UNIVERSAL_PROVIDERS`: the universal providers a check may ask (providerPolicy.ts); all of them when unset. */
+    providers?: string;
   }) {}
 
   /**
@@ -871,7 +874,7 @@ export class TrackingRouter {
       carriers: [universalCarrier, state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined, state.discovered_carrier],
       trackingNumber: universalNumber, enablePostalNinja: this.options.enablePostalNinja, enableTrack123: this.options.enableTrack123,
     });
-    const sources = plan.sources;
+    const sources = plan.sources.filter((source) => providerAllowed(source, this.options.providers));
     // A provider that asked for a postcode the parcel still lacks would only ask
     // again: scheduled checks leave it until a postcode is given.
     const awaitsInput = (provider: string) => sources.includes(provider as UniversalSource)

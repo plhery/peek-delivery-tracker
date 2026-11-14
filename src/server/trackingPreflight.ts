@@ -10,6 +10,7 @@ import { providerCarrier } from './providerCarrier';
 import { refusesNumber } from './numberRefusal';
 import { reportRoutingEvent } from './observability';
 import { providerMisses } from './providerMisses';
+import { providerAllowed } from './providerPolicy';
 
 export type PreflightOutcome = { provider: UniversalSource; outcome: 'history' | 'no_history' | 'input_required' | 'unavailable' | 'deferred' };
 const BUDGET_MS = 8_000;
@@ -70,7 +71,8 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
   const stop = AbortSignal.any([signal, settled.signal]);
   const bounded = AbortSignal.any([stop, AbortSignal.timeout(BUDGET_MS)]);
   const deadline = performance.now() + BUDGET_MS;
-  const sources = universalPlan({ trackingNumber: number }).sources.filter((source) => source === 'Ship24' || source === 'ParcelsApp');
+  const sources = universalPlan({ trackingNumber: number }).sources.filter((source) => (source === 'Ship24' || source === 'ParcelsApp')
+    && providerAllowed(source, process.env.TRACKING_UNIVERSAL_PROVIDERS));
   const identities = new Set<ApiCarrierId | undefined>();
   let grace: ReturnType<typeof setTimeout> | undefined;
   // A provider cancelled after the other answered has no outcome to report.

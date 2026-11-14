@@ -581,15 +581,18 @@ where signal = 'SIGNAL' and carrier = 'CARRIER_ID' and subject = 'SUBJECT' and r
 
 ## Carrier goals
 
-The carrier dashboard starts with three goals: few errors a reader sees, good tracking, and
+The carrier dashboard starts with its goals: few errors a reader sees, good tracking, and
 parcels answered by their carrier's own tracking rather than a universal provider
-(ParcelsApp, 17TRACK, Ship24, Postal Ninja, UPU). `metrics.goals_daily` counts them per UTC
-day; `record_usage_metrics` rewrites today's row at most every ten minutes and yesterday's
-once more as of its end.
+(ParcelsApp, 17TRACK, Ship24, Postal Ninja, UPU, Track718, Track123). `metrics.goals_daily`
+counts them per UTC day; `record_usage_metrics` rewrites today's row at most every ten
+minutes and yesterday's once more as of its end.
 
 - **Answered directly**: of the unfinished parcels with a scan (a check answered with a stage
   other than pending), those whose latest answered check came from a carrier's adapter, theirs
-  or the one it was handed to; and the same share of the day's answered checks.
+  or the one it was handed to; and the same share of the day's answered checks. Each provider
+  has its column, and one the scraper adds counts under `parcels_other_provider`.
+- **First scans a provider found**: of the parcels whose first scan a check stored that day,
+  those a provider's answer gave it. It is what new parcels would lose without the providers.
 - **Failed checks**: checks that ended `error` or `abandoned`.
 - **Stale parcels**: followed parcels without an answered check for 24 h. A parcel is followed
   when it belongs to an account or had a check in the last 24 h other than a scraper
@@ -598,6 +601,27 @@ once more as of its end.
 - **Readers who say it's right**: right answers among the last 7 days' answers, with their count.
 - **Quality**: scans no map read or a wording rule read, new unmapped wording, checks with an
   anomaly, and parcels showing a provider's copy of a carrier's scan (counted live only).
+
+A provider may refuse a client that asks it too much, so the providers are a fallback meant
+to shrink, and the dashboard's "Universal providers" row follows what is sent to them, not only
+what they answer. `metrics.provider_requests_daily` counts each provider's lookups per UTC day
+from the checks' audit rows (`tracking_sync_attempts.lookups`), with how they ended (history,
+none, a failure) and how many returned history in a check that changed the parcel, by why the
+check asked:
+
+- `unseen`: the parcel had shown no scan, the kind a wrong number or an order number stays;
+- `no_adapter`: it is filed under no carrier, or under one whose own adapter answered no
+  check in the 30 days before;
+- `adapter_failed`: its carrier's adapter failed in that check;
+- `adapter_no_answer`: its carrier's adapter was resting after failures, waiting for an input
+  or set aside, or held no history;
+- `label_only`: the carrier answered and the parcel had not moved past its label;
+- `beside_carrier`: the carrier answered a moving parcel, and a provider was asked to complete it.
+
+A reason with many requests and few that changed a parcel is where asking less costs least.
+The Add preflight's lookups belong to no check: they count in `carrier_lookup_total` alone,
+which the row's hourly panels and the "Busiest provider" tile read.
+`TRACKING_UNIVERSAL_PROVIDERS` limits or stops the providers ([ROUTING.md](ROUTING.md)).
 
 The gap is the unfinished parcels whose latest answer came from a provider, and the followed
 ones that went 24 h without an answer or show an error. `metrics.carrier_gaps` ranks it by the
@@ -617,6 +641,17 @@ from metrics.goals_daily where day > current_date - 7 order by day;
 
 select rank, carrier, reason, lane, parcels, cumulative_percent
 from metrics.carrier_gaps where rank <= 10 order by rank, parcels desc;
+```
+
+What was sent to each provider over the last 7 full days, and why:
+
+```sql
+select provider, purpose, round(sum(requests) / 7.0) as requests_a_day,
+       round(100.0 * sum(with_history) / sum(requests)) as history,
+       round(100.0 * sum(with_news) / sum(requests), 1) as changed_the_parcel
+from metrics.provider_requests_daily
+where day >= current_date - 7 and day < current_date
+group by provider, purpose order by requests_a_day desc;
 ```
 
 The hourly review lists the gap's parcels with their number shapes.
@@ -1157,8 +1192,10 @@ Useful questions:
   `_cap` means a daily allowance is too small for the traffic, and those emails are lost.
 
 [ops/grafana/carrier-scrapers.json](../ops/grafana/carrier-scrapers.json) is an importable
-Grafana dashboard with these panels, below the carrier goals; choose its Prometheus data
-source and the usage dashboard's PostgreSQL one at the top. Its "Silent carriers" table lists carriers with lookups last week but none in two
+Grafana dashboard; choose its Prometheus data source and the usage dashboard's PostgreSQL one
+at the top. It opens on the carrier goals, the universal providers, the carriers to fix and the
+tracking quality, with the scrapers' state in one line of tiles; the rows below, collapsed,
+hold these panels. Its "Silent carriers" table lists carriers with lookups last week but none in two
 days: silence isn't success. Its "Review signals" row counts what the hourly review lists.
 The "Deploys" toggle marks app restarts, where the counters start again.
 

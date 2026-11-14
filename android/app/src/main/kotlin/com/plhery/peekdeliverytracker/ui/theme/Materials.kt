@@ -264,8 +264,8 @@ fun MaterialSurface(
  * maps the backdrop's luminance L onto `black + (white − black) L`, held at most [maxLuma] by taking the excess off
  * every channel alike; multiplies its saturation by `saturation`; and lays a grey `fill` over the result at
  * `fillAlpha`. `lift` is what the iPhone draws on top of the matrix, its blurred fill (`inputBlurFill*`), measured on
- * its screenshots as a uniform lightening in light; dark's darkening of the same size, its mirror, is taken rather
- * than measured.
+ * its screenshots as a uniform lightening, a little less in dark than in light; Increase Contrast and Reduce
+ * Transparency take the same.
  */
 @Immutable
 class GlassRecipe(
@@ -340,15 +340,15 @@ class GlassRecipe(
 enum class GlassFace(private val light: GlassRecipe, private val dark: GlassRecipe) {
     Standard(
         GlassRecipe(0.96f, 0.4f, 1.2f, 1f, 0.18f, GLASS_LIFT, 0.94f, dimsWhenLarge = false),
-        GlassRecipe(1.125f, 0.08f, 1.3f, 0.0125f, 0f, -GLASS_LIFT, 0.6f, dimsWhenLarge = true),
+        GlassRecipe(1.125f, 0.08f, 1.3f, 0.0125f, 0f, GLASS_DARK_LIFT, 0.6f, dimsWhenLarge = true),
     ),
     IncreasedContrast(
         GlassRecipe(0.96f, 0.5f, 0.8f, 1f, 0.45f, GLASS_LIFT, 0.94f, dimsWhenLarge = false),
-        GlassRecipe(0.3f, 0.1f, 0.8f, 0.12f, 0.4f, -GLASS_LIFT, 0.6f, dimsWhenLarge = true),
+        GlassRecipe(0.3f, 0.1f, 0.8f, 0.12f, 0.4f, GLASS_DARK_LIFT, 0.6f, dimsWhenLarge = true),
     ),
     ReducedTransparency(
         GlassRecipe(1.03f, 0.9f, 0.9f, 1f, 0.72f, GLASS_LIFT, 0.94f, dimsWhenLarge = false),
-        GlassRecipe(0.2f, 0.2f, 0.7f, 0f, 0.54f, -GLASS_LIFT, 0.6f, dimsWhenLarge = true),
+        GlassRecipe(0.2f, 0.2f, 0.7f, 0f, 0.54f, GLASS_DARK_LIFT, 0.6f, dimsWhenLarge = true),
     ),
     ;
 
@@ -372,8 +372,14 @@ const val GLASS_BLUR = 5f
  */
 private val GLASS_MARGIN = 1.dp
 
-/** What the iPhone's glass lightens its face by in light, in 0…1 (and darkens it by in dark). */
+/** What the iPhone's glass lightens its face by in light, in 0…1. */
 private const val GLASS_LIFT = 0.035f
+
+/**
+ * What it lightens its face by in dark, measured on its screenshots: its toolbar's glass buttons over the bar's plain
+ * ground show 0.025 to 0.030 lighter than the matrix makes them, and its tab bar about as much over the cards.
+ */
+private const val GLASS_DARK_LIFT = 0.027f
 
 /**
  * The glass's lens (`inputInnerRefraction*`): along its edge, a band [height] points deep shows what lies further in

@@ -75,24 +75,24 @@ class GlassTest {
         assertEquals(1f, red.red, EIGHT_BITS)
         assertEquals(0.4314f, red.green, EIGHT_BITS)
         assertEquals(0.4314f, red.blue, EIGHT_BITS)
-        // Dark: 0.08 + 1.045 L, darkened 0.035, held to 0.6 on a small glass and to 0.36 from 120 points.
+        // Dark: 0.08 + 1.045 L, lifted 0.027, held to 0.6 on a small glass and to 0.36 from 120 points.
         val dark = GlassFace.Standard.recipe(dark = true)
-        assertGrey(0.045f, dark.over(Color.Black, 44f))
-        assertGrey(0.565f, dark.over(Color.White, 44f))
-        assertGrey(0.325f, dark.over(Color.White, 120f))
+        assertGrey(0.107f, dark.over(Color.Black, 44f))
+        assertGrey(0.627f, dark.over(Color.White, 44f))
+        assertGrey(0.387f, dark.over(Color.White, 120f))
         // Yellow (1, 0.8, 0) on a 100-point glass, held to 0.384: luminance 0.7848 maps to 0.9001, saturation × 1.3
-        // gives (1.1799, 0.9199, −0.1201), 0.5161 over the ceiling comes off each channel, then 0.035: still orange.
+        // gives (1.1799, 0.9199, −0.1201), 0.5161 over the ceiling comes off each channel, then 0.027 on: still orange.
         val yellow = dark.over(Color(1f, 0.8f, 0f), 100f)
-        assertEquals(0.6288f, yellow.red, EIGHT_BITS)
-        assertEquals(0.3688f, yellow.green, EIGHT_BITS)
+        assertEquals(0.6908f, yellow.red, EIGHT_BITS)
+        assertEquals(0.4308f, yellow.green, EIGHT_BITS)
         assertEquals(0f, yellow.blue, EIGHT_BITS)
         // Increase Contrast: white at 45 % over 0.5 + 0.46 L in light; grey 0.12 at 40 % over 0.1 + 0.2 L in dark.
         assertGrey(0.76f, GlassFace.IncreasedContrast.recipe(dark = false).over(Color.Black, 44f))
-        assertGrey(0.073f, GlassFace.IncreasedContrast.recipe(dark = true).over(Color.Black, 44f))
-        // Reduce Transparency: all but opaque, white in light and 0.057 in dark whatever lies behind.
+        assertGrey(0.135f, GlassFace.IncreasedContrast.recipe(dark = true).over(Color.Black, 44f))
+        // Reduce Transparency: all but opaque, white in light and 0.119 in dark whatever lies behind.
         assertGrey(1f, GlassFace.ReducedTransparency.recipe(dark = false).over(Color.Black, 44f))
-        assertGrey(0.057f, GlassFace.ReducedTransparency.recipe(dark = true).over(Color.White, 44f))
-        assertGrey(0.057f, GlassFace.ReducedTransparency.recipe(dark = true).over(Color.Black, 44f))
+        assertGrey(0.119f, GlassFace.ReducedTransparency.recipe(dark = true).over(Color.White, 44f))
+        assertGrey(0.119f, GlassFace.ReducedTransparency.recipe(dark = true).over(Color.Black, 44f))
     }
 
     @Test
@@ -257,13 +257,13 @@ class GlassTest {
 
     @Test
     fun inDarkLargerGlassIsDarker() {
-        // Over white, a 44-point glass shows dark's ceiling 0.6, a 120-point one 0.36, each darkened 0.035.
+        // Over white, a 44-point glass shows dark's ceiling 0.6, a 120-point one 0.36, each lifted 0.027.
         val bitmap = capture(dark = true, backdrop = Color.White) {
             GlassSurface(CircleShape, Modifier.offset(24.dp, 24.dp).size(44.dp)) {}
             GlassSurface(ContinuousRoundedShape(24.dp), Modifier.offset(100.dp, 24.dp).size(120.dp)) {}
         }
-        assertEquals(0.565 * 255, green(bitmap, 138, 138).toDouble(), 2.0)
-        assertEquals(0.325 * 255, green(bitmap, 480, 252).toDouble(), 2.0)
+        assertEquals(0.627 * 255, green(bitmap, 138, 138).toDouble(), 2.0)
+        assertEquals(0.387 * 255, green(bitmap, 480, 252).toDouble(), 2.0)
     }
 
     @Test
@@ -272,7 +272,7 @@ class GlassTest {
         val bitmap = capture(dark = true, backdrop = YELLOW) {
             GlassSurface(ContinuousRoundedShape(24.dp), Modifier.offset(24.dp, 24.dp).size(100.dp)) {}
         }
-        val expected = face(YELLOW, white = 1.125f, black = 0.08f, saturation = 1.3f, fill = 0.0125f, fillAlpha = 0f, lift = -0.035f, maxLuma = 0.384f)
+        val expected = face(YELLOW, white = 1.125f, black = 0.08f, saturation = 1.3f, fill = 0.0125f, fillAlpha = 0f, lift = 0.027f, maxLuma = 0.384f)
         assertRgb(expected, bitmap.getPixel(222, 222), 2)
     }
 
@@ -283,7 +283,7 @@ class GlassTest {
         val bitmap = capture(dark = true, backdrop = YELLOW) {
             GlassSurface(ContinuousRoundedShape(24.dp), Modifier.offset(24.dp, 24.dp).size(100.dp)) {}
         }
-        val ceiling = ((0.384f - 0.035f) * 255).roundToInt()
+        val ceiling = ((0.384f + 0.027f) * 255).roundToInt()
         assertRgb(listOf(ceiling, ceiling, 0), bitmap.getPixel(222, 222), 2)
     }
 

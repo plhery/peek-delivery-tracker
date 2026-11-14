@@ -65362,130 +65362,66 @@
   },
   {
     "input": "888001019297643",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888001249185591",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888001572170942",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888001678925872",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888002073028825",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888002176140930",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888002423592016",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888002555905321",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
@@ -65509,82 +65445,42 @@
   },
   {
     "input": "888030024900956",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888030251186245",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888030343199693",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888030453066181",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
     "input": "888030473211131",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
     "candidates": [
-      "j-and-t-br",
-      "brt",
-      "yunda"
-    ],
-    "preferred": [
       "j-and-t-br"
-    ],
-    "asked": [
-      "brt"
     ]
   },
   {
@@ -71161,6 +71057,17 @@
       "chronopost",
       "dpd-uk",
       "dpd-pt"
+    ]
+  },
+  {
+    "input": "9999999999999980F0001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fan-courier-international"
+    ],
+    "asked": [
+      "fan-courier-international"
     ]
   },
   {

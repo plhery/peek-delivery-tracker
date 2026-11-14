@@ -2250,7 +2250,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "s10"
       },
       {
-        "pattern": "^(?:32\\d{11}[A-F0-9]{8}|(?=[A-F0-9]*[A-F])[A-F0-9]{2}\\d{7}[A-F0-9]{12})$",
+        "pattern": "^(?!\\d{16}F\\d{4}$)(?:32\\d{11}[A-F0-9]{8}|(?=[A-F0-9]*[A-F])[A-F0-9]{2}\\d{7}[A-F0-9]{12})$",
         "confidence": "low"
       },
       {
@@ -21261,8 +21261,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^8880\\d{11}$",
-        "confidence": "low",
-        "preferred": true
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://www.jtexpress.com.br/trajectoryQuery"
@@ -53290,6 +53289,28 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://zipasgo.com/lt/siuntimas"
+  },
+  "fan-courier-international": {
+    "displayName": "FAN Courier International",
+    "countries": [
+      "RO"
+    ],
+    "color": "#2daae1",
+    "selectable": true,
+    "timezone": "Europe/Bucharest",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "fan-courier-international",
+      "recognitionRank": 16
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{16}F\\d{4}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://fancourier.eu/track-order"
   }
 } as const;
 
@@ -54844,7 +54865,8 @@ export const CARRIER_IDS = [
   "jet-express-ee",
   "samus",
   "siuntos-autobusais",
-  "zipasgo"
+  "zipasgo",
+  "fan-courier-international"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

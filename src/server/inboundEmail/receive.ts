@@ -4,7 +4,7 @@ import { ownSenderAddress } from '../email/config';
 import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, type ParcelAddition } from '../parcelsFromText';
 import type { InboundMailResult, SupabaseServiceClient } from '../supabase';
-import { readInboundMail, type InboundMail } from './mail';
+import { headerFromAddress, readInboundMail, type InboundMail } from './mail';
 import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } from './settings';
 
 /** What an email did; `dropped` when its address names nobody who takes email. */
@@ -41,6 +41,10 @@ export async function receiveInboundMail(
     const email = account?.emailConfirmed ? account.email : null;
     if (!account || !inboundEmailOpenTo(settings, { id: userId, email })) return finish('dropped', 'closed');
   }
+  // The server's own email about a parcel names one the account follows already: a filter that sends it back adds
+  // nothing, and spends no allowance. Its header is read first; the parsed email is checked again below.
+  const own = ownSenderAddress();
+  if (own && headerFromAddress(raw) === own) return finish('dropped', 'own');
   const claim = await service.claimInboundMail(userId, { perAccount: settings.perAccountPerDay, overall: settings.perHour });
   if (!claim.allowed) {
     await service.recordInboundMail(userId, 'limited', 0);
@@ -55,8 +59,7 @@ export async function receiveInboundMail(
     await service.recordInboundMail(userId, 'none', 0);
     return finish('none', 'unreadable');
   }
-  // The server's own email about a parcel names one the account follows already: a filter that sends it back adds nothing.
-  if (mail.from && mail.from === ownSenderAddress()) return finish('dropped', 'own');
+  if (mail.from && mail.from === own) return finish('dropped', 'own');
   if (mail.confirmation) {
     await service.recordInboundMail(userId, 'confirmation', 0, mail.confirmation);
     return finish('confirmation');

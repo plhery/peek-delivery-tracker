@@ -155,6 +155,9 @@ describe('an email to a forwarding address', () => {
     vi.stubEnv('EMAIL_FROM', 'Peek <Hello@Peek.example>');
     const db = account();
     await posted(mail('Peek <hello@peek.example>', 'Delivered: Example Shop', `Your parcel ${UPS} was delivered.`));
+    // A From line that goes on over two lines, with an encoded name and the address in capitals: read from the header too.
+    await posted(mail('=?utf-8?q?Peek?=\r\n <HELLO@peek.example>', 'Delivered', `Your parcel ${UPS} was delivered.`));
+    expect(db.claimMail).not.toHaveBeenCalled();
     expect(db.create).not.toHaveBeenCalled();
     expect(db.record).not.toHaveBeenCalled();
     await posted(mail('Peek fans <hello@peek-fans.example>', 'Delivered', `Your parcel ${UPS} was delivered.`));

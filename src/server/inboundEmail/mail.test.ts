@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { trackingNumbersInText } from '../parcelsFromText';
-import { htmlLinks, htmlText, readInboundMail } from './mail';
+import { headerFromAddress, htmlLinks, htmlText, readInboundMail } from './mail';
 
 // Synthetic mails only: example.com senders, UPS's published sample number and made-up numbers in valid shapes.
 const UPS = '1Z999AA10123456784';
@@ -76,6 +76,18 @@ describe('reading a forwarded shipping email', () => {
     ].join('\r\n'), 'multipart/mixed; boundary="m"');
     const mail = await readInboundMail(raw);
     expect(mail.text).not.toContain(UPS);
+  });
+});
+
+describe('the From address in an email\'s header', () => {
+  const raw = (text: string) => new TextEncoder().encode(text);
+
+  it('reads the address of the email\'s own From line, and nothing below its header', () => {
+    expect(headerFromAddress(raw('Subject: Hi\r\nFrom: Shop <Orders@Shop.example>\r\n\r\nFrom: other@example.com'))).toBe('orders@shop.example');
+    expect(headerFromAddress(raw('from:orders@shop.example\n\nbody'))).toBe('orders@shop.example');
+    expect(headerFromAddress(raw('From:\r\n "Shop, Inc." <orders@shop.example>\r\n\r\n'))).toBe('orders@shop.example');
+    expect(headerFromAddress(raw('X-Original-From: orders@shop.example\r\nReply-To: a@shop.example\r\n\r\nFrom: b@shop.example'))).toBe('');
+    expect(headerFromAddress(raw('From: Shop\r\n\r\n'))).toBe('');
   });
 });
 

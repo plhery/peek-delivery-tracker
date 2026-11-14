@@ -186,6 +186,23 @@ function gmailConfirmation(email: Email, text: string, links: string[]): Inbound
 }
 
 /** Reads a raw email (MIME). Attachments are never opened. */
+/** How much of an email is searched for its own From header: a header block is far shorter. */
+const MOST_HEADER_BYTES = 65_536;
+
+/**
+ * The address in the email's own From header, in lower case, read from its header block alone so that nothing
+ * else is parsed; empty when there is none. Its display name is left aside.
+ */
+export function headerFromAddress(raw: Uint8Array): string {
+  const head = new TextDecoder('latin1').decode(raw.subarray(0, MOST_HEADER_BYTES));
+  const end = head.search(/\r?\n\r?\n/);
+  // A header can go on over several lines, each next one starting with a space.
+  const lines = (end < 0 ? head : head.slice(0, end)).replace(/\r?\n[ \t]+/g, ' ').split(/\r?\n/);
+  const value = lines.find((line) => /^from[ \t]*:/i.test(line))?.replace(/^[^:]*:/, '') ?? '';
+  const address = /<([^<>\s@]+@[^<>\s@]+)>/.exec(value)?.[1] ?? /(?:^|[\s,])([^\s<>"(),;:@]+@[^\s<>"(),;:@]+)/.exec(value)?.[1] ?? '';
+  return address.toLowerCase();
+}
+
 export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   const email = await PostalMime.parse(raw, { attachmentEncoding: 'arraybuffer', maxPartCount: 500, maxNestingDepth: 32 });
   const html = email.html ?? '';

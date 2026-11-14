@@ -300,8 +300,9 @@ Key server modules:
     nothing. `src/server/parcelsFromText.ts` is that step.
   - Gmail's request to confirm forwarding is kept for three days for the owner to finish in
     Gmail, never followed by the server: its code and a link only to Google's own hosts.
-  - The server's own emails (`EMAIL_FROM`) are dropped: a delivery email that a filter
-    sends back names a parcel the account follows already.
+  - The server's own emails (`EMAIL_FROM`) are dropped, read from their From header before
+    they count against the allowances: a delivery email that a filter sends back names a
+    parcel the account follows already.
   - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
     only.

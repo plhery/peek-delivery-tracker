@@ -133,7 +133,15 @@ function ipv6Groups(ip: string): string[] {
   return groups.map((group) => group.replace(/^0+(?=.)/, '').toLowerCase());
 }
 
-const MAPPED_IPV4 = /^::ffff:(\d+\.\d+\.\d+\.\d+)$/i;
+/** The IPv4 address an IPv4-mapped IPv6 address carries, written dotted or in hex (`::ffff:c000:20a`); null for any other. */
+function mappedIpv4(ip: string): string | null {
+  const dotted = /^(.*:)(\d+\.\d+\.\d+\.\d+)$/.exec(ip);
+  const groups = ipv6Groups(dotted ? `${dotted[1]}0:0` : ip);
+  if (groups.length !== 8 || groups.slice(0, 5).some((group) => group !== '0') || groups[5] !== 'ffff') return null;
+  if (dotted) return dotted[2]!;
+  const [high, low] = [Number.parseInt(groups[6]!, 16), Number.parseInt(groups[7]!, 16)];
+  return [high >> 8, high & 255, low >> 8, low & 255].join('.');
+}
 
 /**
  * The address a limit without sign-in counts. An IPv6 client is its /64: a
@@ -141,8 +149,8 @@ const MAPPED_IPV4 = /^::ffff:(\d+\.\d+\.\d+\.\d+)$/i;
  */
 export function clientNetwork(ip: string): string {
   if (isIP(ip) !== 6) return ip;
-  const mapped = MAPPED_IPV4.exec(ip);
-  if (mapped) return mapped[1]!;
+  const mapped = mappedIpv4(ip);
+  if (mapped) return mapped;
   return `${ipv6Groups(ip).slice(0, 4).join(':')}::/64`;
 }
 
@@ -152,7 +160,7 @@ export function clientNetwork(ip: string): string {
  * clientNetwork counts apart: a daily allowance counts the /48 as well.
  */
 export function clientSite(ip: string): string | null {
-  if (isIP(ip) !== 6 || MAPPED_IPV4.test(ip)) return null;
+  if (isIP(ip) !== 6 || mappedIpv4(ip)) return null;
   return `${ipv6Groups(ip).slice(0, 3).join(':')}::/48`;
 }
 

@@ -166,6 +166,11 @@ describe('API request boundaries', () => {
   it('counts an IPv6 client as its /64 and every other address as itself', () => {
     expect(clientNetwork('198.51.100.7')).toBe('198.51.100.7');
     expect(clientNetwork('::ffff:198.51.100.7')).toBe('198.51.100.7');
+    // The same address in hex, or written out in full.
+    expect(clientNetwork('::ffff:c633:6407')).toBe('198.51.100.7');
+    expect(clientNetwork('::FFFF:C633:6407')).toBe('198.51.100.7');
+    expect(clientNetwork('0:0:0:0:0:ffff:198.51.100.7')).toBe('198.51.100.7');
+    expect(clientNetwork('::ffff:0:c633:6407')).toBe('0:0:0:0::/64');
     expect(clientNetwork('2001:db8:1:2:aaaa:bbbb:cccc:dddd')).toBe('2001:db8:1:2::/64');
     expect(clientNetwork('2001:0DB8:0001:0002::1')).toBe('2001:db8:1:2::/64');
     expect(clientNetwork('2001:db8::1')).toBe('2001:db8:0:0::/64');
@@ -181,7 +186,7 @@ describe('API request boundaries', () => {
     expect(clientSite('2001:0DB8:0001:ffff::1')).toBe('2001:db8:1::/48');
     expect(clientSite('2001:db8::1')).toBe('2001:db8:0::/48');
     expect(clientSite('::1')).toBe('0:0:0::/48');
-    for (const address of ['198.51.100.7', '::ffff:198.51.100.7', 'untrusted', 'unknown']) {
+    for (const address of ['198.51.100.7', '::ffff:198.51.100.7', '::ffff:c633:6407', 'untrusted', 'unknown']) {
       expect(clientSite(address)).toBeNull();
     }
   });

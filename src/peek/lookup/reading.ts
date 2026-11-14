@@ -275,6 +275,13 @@ const MOST_LABELS_PER_LINE = 4;
 /** A date written year first ("2026-11-12"), which a label such as "Date d'envoi :" may stand before. */
 const YEAR_FIRST_DATE = /^\d{4}([./-])\d{1,2}\1\d{1,2}$/;
 
+/** Where a number the label reader read ends in the text: it joins a number printed in groups ("1234 5678 9012"). */
+function numberEnd(prose: string, number: string): number {
+  const printed = new RegExp([...number].map((char) => char.replace(/[.*+?^${}()|[\]\\-]/g, '\\$&')).join('\\s?'));
+  const found = printed.exec(prose);
+  return found ? found.index + found[0].length : prose.length;
+}
+
 /**
  * The numbers a text's own words call tracking numbers, whose shape fits a carrier without proving one:
  * "Sendungsnummer 1234567899", "Votre colis 01234567890123 arrive demain". Most couriers' numbers are plain
@@ -290,7 +297,7 @@ export function labelledNumbersInText(text: string): NumberInText[] {
     for (let label = 0; label < MOST_LABELS_PER_LINE && found.size < MOST_CANDIDATES_READ; label += 1) {
       const number = keywordNumberInText(prose);
       if (!number) break;
-      prose = prose.slice(prose.indexOf(number) + number.length);
+      prose = prose.slice(numberEnd(prose, number));
       const normalized = normalizeTrackingNumber(number);
       if (!normalized || found.has(normalized) || nonTrackingShape(normalized) || YEAR_FIRST_DATE.test(number.trim())) continue;
       const detection = detectCarrierMatch(number);

@@ -41,6 +41,9 @@ describe('reading the field', () => {
     expect(labelled('Sendungsnummer 1234567899\nVotre colis 01234567890123 sera livré demain\nTracking: 1234567899'))
       .toEqual(['1234567899 low', '01234567890123 low']);
     expect(labelled('Tracking number: 1234567899 | Parcel number: 9987654321')).toEqual(['1234567899 low', '9987654321 low']);
+    // A number printed in groups is read whole, and the next label is read after it.
+    expect(labelled('Parcel 1234 5678 9012, parcel 2345 6789 0123, parcel 3456 7890 1234, parcel 4567 8901 2345').map((number) => number.split(' ')[0]))
+      .toEqual(['123456789012', '234567890123', '345678901234', '456789012345']);
     for (const text of [
       // A certain number is listed with the certain ones.
       'Tracking number: 1ZDEMO202600000001',

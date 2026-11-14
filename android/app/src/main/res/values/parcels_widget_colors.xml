@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The list widget's preview (parcels_widget_preview): the app's page (Brand.background) and its ink, faint. -->
+    <!-- The list widget's preview (parcels_widget_preview): the app's page (Brand.background) and the label colour its
+         rows write in (SystemColors.label), faint. -->
     <color name="parcels_widget_page">#F4F5F1</color>
-    <color name="parcels_widget_line">#2920251E</color>
+    <color name="parcels_widget_line">#29000000</color>
 </resources>

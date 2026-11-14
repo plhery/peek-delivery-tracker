@@ -57,6 +57,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.symbols.drawSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.materialSymbols
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import com.plhery.peekdeliverytracker.ui.theme.toColor
 import java.util.Locale
 import kotlin.math.floor
@@ -68,14 +69,20 @@ import kotlin.math.floor
 // widget's (WidgetText), and as there, the layout works out from the measured text how many rows it keeps. Names keep
 // one size down the list and end in an ellipsis where they are too long; a line too long for its room keeps the day.
 
-/** The widget's colours: the app's page and ink, light and dark as the launcher's mode picks. */
+/**
+ * The widget's colours, light and dark as the launcher's mode picks: the app's page, and on it the system's label
+ * colours the iPhone's list widget writes in (`.primary`, `.secondary`).
+ */
 private object ListColors {
+    /** `color` light and dark, its own opacity times `alpha`. */
     fun of(color: AdaptiveColor, alpha: Float = 1f): ColorProvider =
-        ColorProvider(day = color.light.toColor().copy(alpha = alpha), night = color.dark.toColor().copy(alpha = alpha))
+        ColorProvider(day = color.light.toColor().faded(alpha), night = color.dark.toColor().faded(alpha))
+
+    private fun Color.faded(alpha: Float): Color = copy(alpha = this.alpha * alpha)
 
     val page = of(Brand.background)
-    val ink = of(Brand.ink)
-    val secondary = of(Brand.secondaryText)
+    val primary = of(SystemColors.label)
+    val secondary = of(SystemColors.secondaryLabel)
 }
 
 /**
@@ -195,7 +202,7 @@ private fun ListRow(parcel: DeliveryWidgetParcel, layout: ListLayout, top: Dp) {
     val context = LocalContext.current
     val name = parcel.listName
     val type = layout.type
-    val nameStyle = TextStyle(color = ListColors.ink, fontSize = type.sp(layout.namePoints), fontWeight = FontWeight.Medium)
+    val nameStyle = TextStyle(color = ListColors.primary, fontSize = type.sp(layout.namePoints), fontWeight = FontWeight.Medium)
     Row(
         GlanceModifier.fillMaxWidth().height(layout.rowHeight + top).padding(top = top).semantics { contentDescription = rowDescription(parcel) }.clickable(openParcel(context, parcel)),
         verticalAlignment = Alignment.CenterVertically,
@@ -281,9 +288,9 @@ private fun ListState(symbol: String, title: String, description: String, size: 
     val next = type.height("1\n2", caption, FontWeight.Normal, room.width, 2) - first
     val lines = if (left < first) 0 else minOf(3, 1 + floor((left - first) / next).toInt())
     Column(GlanceModifier.fillMaxSize().clickable(openList(context)), verticalAlignment = Alignment.CenterVertically) {
-        TintedSymbol(symbol, symbolPoints, ListColors.ink)
+        TintedSymbol(symbol, symbolPoints, ListColors.primary)
         Spacer(GlanceModifier.height(6.dp))
-        Text(title, maxLines = 2, style = TextStyle(color = ListColors.ink, fontSize = type.sp(titlePoints), fontWeight = FontWeight.Bold))
+        Text(title, maxLines = 2, style = TextStyle(color = ListColors.primary, fontSize = type.sp(titlePoints), fontWeight = FontWeight.Bold))
         if (lines > 0) {
             Spacer(GlanceModifier.height(6.dp))
             Text(description, maxLines = lines, style = TextStyle(color = ListColors.secondary, fontSize = type.sp(caption)))

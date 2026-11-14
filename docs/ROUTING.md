@@ -793,8 +793,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   already name the partner the origin names (`delivery_carrier`) as who delivers, and the cards and
   links show its number (`delivery_tracking_number`) after the followed one. When the origin names
   none, they name the partner the last confirmation found with the parcel, scanned or on record,
-  dated no earlier than the origin's first scan (the probe's `held` marker, served as
-  `delivery_carrier`): DHL for an India Post EMS item whose later German scan India Post relays,
+  dated no earlier than the origin's first dated scan, which an origin without one lacks (the
+  probe's `held` marker, served as `delivery_carrier`): DHL for an India Post EMS item whose later German scan India Post relays,
   which keeps India Post followed. While that partner's
   last answer is a dated record without a scan of its own, however old, the line reads "Announced
   to DHL, not received yet" instead of "Delivery with DHL" (`delivery_announced`, served from the

@@ -6135,14 +6135,19 @@ describe('TrackingSyncService', () => {
 
   it('marks a partner holding the parcel with scans older than the origin’s newest, not one whose scans predate it', async () => {
     const originUpdate = '2026-09-10T17:19:00+02:00';
-    for (const [partnerScan, held] of [['2026-09-10T09:00:00+02:00', true], ['2026-08-01T09:00:00+02:00', false]] as const) {
+    for (const [partnerScan, held, dated = true] of [
+      ['2026-09-10T09:00:00+02:00', true], ['2026-08-01T09:00:00+02:00', false],
+      // An origin with no dated scan can't tell a reused number's earlier parcel.
+      ['2026-08-01T09:00:00+02:00', false, false],
+    ] as const) {
       const client = fakeClient();
       const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => carrier === 'swiss-post'
         ? { status: 'in_transit', last_update: partnerScan, timezone: 'Europe/Zurich',
           events: [{ time: partnerScan, description: 'Arrived at sorting centre', stage: 'in_transit' }] }
         : { status: 'in_transit', delivery_carrier: 'swiss-post', last_update: originUpdate, timezone: 'Europe/Paris',
-          events: [{ time: '2026-09-08T10:00:00+02:00', description: 'Posted', stage: 'in_transit' },
-            { time: originUpdate, description: 'Arrived in destination country', stage: 'in_transit' }] }) };
+          events: dated ? [{ time: '2026-09-08T10:00:00+02:00', description: 'Posted', stage: 'in_transit' },
+            { time: originUpdate, description: 'Arrived in destination country', stage: 'in_transit' }]
+            : [{ time: '', description: 'Arrived in destination country', stage: 'in_transit' }] }) };
       const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T16:00:00Z'));
       await service.syncPackage({ id: 'older-partner', carrier: 'la-poste', tracking_number: 'LX123456785FR' }, { trigger: 'scheduled' });
       expect(adapter.fetch.mock.calls.map((call) => call[0])).toEqual(['la-poste', 'swiss-post']);

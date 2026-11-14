@@ -3303,9 +3303,10 @@ export class TrackingSyncService {
           // its own, its first scan comes next.
           if (!scanned && deliveryTime > 0) Object.assign(probe, { listed: true }, fresh ? { announced: true, misses: 1 } : {});
           // Either way it has the parcel, unless its answer predates the origin's first scan (a reused number's
-          // earlier parcel). India Post's EMS items in Germany: DHL scans them, and India Post relays a later
-          // German scan, so the origin stays followed and the card names DHL.
-          if (deliveryTime > 0 && deliveryTime >= earliestResultTime(origin, carrierId)) probe.held = true;
+          // earlier parcel); an origin with no dated scan can't tell. India Post's EMS items in Germany: DHL scans
+          // them, and India Post relays a later German scan, so the origin stays followed and the card names DHL.
+          const originFirst = earliestResultTime(origin, carrierId);
+          if (deliveryTime > 0 && originFirst > 0 && deliveryTime >= originFirst) probe.held = true;
         } catch (error) {
           fallbackError = errorType(error);
           // A partner that does not know the item yet, or answers inconclusively

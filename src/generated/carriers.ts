@@ -1928,6 +1928,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS US tracking (GSO): numbers, statuses and delivery",
       "name": "GLS US",
       "color": "#ffdd00"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "sxw-express-tracking",
+      "title": "SXW Express tracking: SXW numbers, scans and who delivers",
+      "name": "SXW Express",
+      "color": "#003876"
+    },
+    {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "xuchuan-logistics-tracking",
+      "title": "Xuchuan Logistics tracking: XC numbers, delivery and help",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
     }
   ],
   "de": [

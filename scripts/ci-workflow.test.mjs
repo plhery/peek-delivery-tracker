@@ -1,12 +1,32 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { it } from 'node:test';
 import { execFileSync } from 'node:child_process';
+import { load } from 'js-yaml';
 import { DEPLOY_JOB, DEPLOY_STEP, HANDOFF_JOB, MAX_WAIT_MS } from './deploy-gate.mjs';
 
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+
+// GitHub runs none of a workflow it cannot parse ("workflow file issue"), and the checks below read the files as text.
+// A `: ` inside a plain `run:` line is the usual slip: write the step as a block (`run: |`).
+it('keeps every workflow and GitHub file valid YAML', () => {
+  const files = readdirSync(new URL('../.github', import.meta.url), { recursive: true })
+    .filter((file) => /\.ya?ml$/.test(file)).map((file) => `.github/${file}`).sort();
+  assert.ok(files.includes('.github/workflows/deploy.yml'), 'the workflows were not found');
+  for (const file of files) {
+    let parsed;
+    try {
+      parsed = load(read(file));
+    } catch (error) {
+      assert.fail(`${file} is not valid YAML: ${error.message}`);
+    }
+    if (file.startsWith('.github/workflows/')) {
+      assert.ok(parsed?.on && parsed.jobs && typeof parsed.jobs === 'object', `${file} must say when it runs and list its jobs`);
+    }
+  }
+});
 
 // The browser journeys run in Playwright's image, which holds only its own version's browsers.
 it('runs the browser journeys in the image of the installed Playwright', () => {

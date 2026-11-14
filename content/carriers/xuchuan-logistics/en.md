@@ -78,7 +78,7 @@ While a service has the parcel, Peek checks every 15 minutes, out for delivery t
 
 ### What is Xuchuan International Logistics?
 
-A freight forwarder in Xiamen, Fujian, called 旭川国际物流 in Chinese, with the website xcwl.ltd. Its site, in Chinese, offers air, sea and multimodal freight, warehousing, and logistics for online sellers shipping abroad. In Peek's carrier list, it's also found as Xuchuan Logistics, XC and xcwl.ltd Logistics.
+A freight forwarder in Xiamen, Fujian, called 旭川国际物流 in Chinese, with the website xcwl.ltd. Its site, in Chinese, offers air, sea and multimodal freight, warehousing, and logistics for online sellers shipping abroad. In Peek's carrier list, it's also found as Xuchuan Logistics and xcwl.ltd Logistics.
 
 ### Does Xuchuan have a tracking page?
 
@@ -100,5 +100,5 @@ Through xcwl.ltd, in Chinese: a customer service mobile number, an email address
 - [Xuchuan International Logistics: xcwl.ltd Logistics, 连接世界，精准送达 (home page)](https://xcwl.ltd/) – Chinese name 旭川国际物流, Xiamen, services (freight, supply chain, cross-border e-commerce logistics with last-mile delivery and returns, project cargo, warehousing), tracking box running 17TRACK's widget, phone, chat, email, hours, district address, Chinese only
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 from 1 July 2026, €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee per item like the €3, at any value
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – the XC number shape (a weak match, no other carrier with it), no Xuchuan tracker or status wording, Xuchuan Logistics, XC, 旭川国际物流 and xcwl.ltd Logistics as names for Xuchuan, tracking services asked for Xuchuan parcels, the China Post shape
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – the XC number shape (a weak match, no other carrier with it), no Xuchuan tracker or status wording, Xuchuan Logistics, 旭川国际物流 and xcwl.ltd Logistics as names for Xuchuan, tracking services asked for Xuchuan parcels, the China Post shape
 :::

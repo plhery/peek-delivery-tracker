@@ -30,11 +30,15 @@ export type ParcelAddition =
   | { trackingNumber: string; carrier: string; outcome: 'full' }
   | { trackingNumber: string; carrier: string; outcome: 'unavailable' };
 
+/** A label that ends its line, as an email's plain text prints a table: "Sendungsnummer:" and the number below. */
+const LABEL_ENDING_ITS_LINE = /:[ \t]*(?:\r?\n[ \t]*){1,2}(?=\S)/g;
+
 /**
  * The tracking numbers a text names: those a carrier claims with certainty, read as the Add sheet reads a pasted
  * message (`numbersInText`) with its guard that a shop's order number is never one, and after them those the
  * text's own label calls a tracking number though their shape proves no carrier (`labelledNumbersInText`). Each
- * once, at most MOST_NUMBERS_PER_TEXT, from the first MOST_TEXT_LENGTH of the text.
+ * once, at most MOST_NUMBERS_PER_TEXT, from the first MOST_TEXT_LENGTH of the text. A label alone on its line
+ * names the number on the next.
  *
  * `carriers` are those the text's writer is, when it is a carrier's own email: a number whose shape proved no
  * carrier is then theirs (`fromCarrier`), and when no number was read, the one that stands without a label in
@@ -44,7 +48,7 @@ export function trackingNumbersInText(text: string, carriers: readonly CarrierId
   const read = text.slice(0, MOST_TEXT_LENGTH);
   const certain = numbersInText(read).filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order');
   const named = new Set(certain.map(({ normalized }) => normalized));
-  const numbers = [...certain, ...labelledNumbersInText(read).filter(({ normalized }) => !named.has(normalized))];
+  const numbers = [...certain, ...labelledNumbersInText(read.replace(LABEL_ENDING_ITS_LINE, ': ')).filter(({ normalized }) => !named.has(normalized))];
   if (!numbers.length) {
     const bare = carrierNumberInText(read, carriers);
     if (bare) numbers.push(bare);

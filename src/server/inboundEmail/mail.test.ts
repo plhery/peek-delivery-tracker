@@ -137,6 +137,10 @@ describe('a carrier\'s own email', () => {
       .toEqual([{ number: '4612345678', carrier: 'dhl' }]);
     expect(await read('info@planzergroup.com', 'Sendung unterwegs', 'Sendungsnummer: 92123.0012345678'))
       .toEqual([{ number: '921230012345678', carrier: 'planzer' }]);
+    expect(await read('info@planzergroup.com', 'Ihre Sendung ist unterwegs zu Ihnen', 'Zustelltag:\nMontag\nSendungsnummer:\n\n92123.0012345678\nBitte überprüfen Sie Ihre Adresse.'))
+      .toEqual([{ number: '921230012345678', carrier: 'planzer' }]);
+    expect(await read('info@planzergroup.com', 'Ihre Sendung ist unterwegs zu Ihnen', 'Zustelltag:\tMontag\nSendungsnummer:\t92123.0012345678\nBitte überprüfen Sie Ihre Adresse.'))
+      .toEqual([{ number: '921230012345678', carrier: 'planzer' }]);
   });
 
   it('leaves a number another carrier claims with that carrier', async () => {

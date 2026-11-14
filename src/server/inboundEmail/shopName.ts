@@ -2,8 +2,9 @@ import 'server-only';
 
 /**
  * A carrier's email names the shop it carries for, in its subject ("Colis de Example Shop livré", "Paket von
- * Example Shop ist unterwegs", "Your Example Shop shipment is on its way") or beside the number ("Sendungsnummer
- * 1234567890 von Example Shop wurde zugestellt", "Absender: Example Shop"). That name is the parcel's, where the
+ * Example Shop ist unterwegs", "Your Example Shop shipment is on its way"), in its first sentence ("Ihre Sendung
+ * von Example Shop ist unterwegs") or beside the number ("Sendungsnummer 1234567890 von Example Shop wurde
+ * zugestellt", "Absender: Example Shop"). That name is the parcel's, where the
  * carrier's own mailbox name ("noreply", "Info") says nothing.
  */
 
@@ -23,6 +24,8 @@ const YOUR_WORDS = String.raw`your|ihre?|votre|il\s+tuo|la\s+tua|tu|uw|deine?`;
 const PARCEL_FROM = new RegExp(String.raw`(?<![\p{L}])(?:${PARCEL_WORDS})\s+(?:${FROM_WORDS})\s+(?!\s)(.{1,${MOST_NAME_LENGTH}})`, 'giu');
 /** "Your X shipment", "Ihre X-Sendung". */
 const YOUR_PARCEL = new RegExp(String.raw`(?<![\p{L}])(?:${YOUR_WORDS})\s+(?!\s)(.{1,${MOST_NAME_LENGTH}}?)[\s-]+(?:${PARCEL_WORDS})(?![\p{L}])`, 'giu');
+/** "Ihre Sendung von X ist unterwegs": in the email's text only a parcel called yours names its shop. */
+const YOUR_PARCEL_FROM = new RegExp(String.raw`(?<![\p{L}])(?:${YOUR_WORDS})\s+(?:${PARCEL_WORDS})\s+(?:${FROM_WORDS})\s+(?!\s)(.{1,${MOST_NAME_LENGTH}})`, 'giu');
 /** "1234567890 von X wurde zugestellt": the shop right after the parcel's number. */
 const NUMBER_FROM = new RegExp(String.raw`\d{6,}\s+(?:${FROM_WORDS})\s+(?!\s)(.{1,${MOST_NAME_LENGTH}})`, 'giu');
 /** "Absender: X", "vom Auftraggeber X". */
@@ -117,6 +120,7 @@ export function shopNamedIn(subject: string, text: string, carrierNames: readonl
   const candidates = [
     () => named(PARCEL_FROM, title),
     () => named(YOUR_PARCEL, title, true),
+    () => named(YOUR_PARCEL_FROM, body),
     () => named(NUMBER_FROM, body),
     () => named(SENDER_LABEL, body),
   ];

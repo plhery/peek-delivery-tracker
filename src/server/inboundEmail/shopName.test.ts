@@ -43,6 +43,14 @@ describe('the shop a carrier\'s email names', () => {
     expect(shopNamedIn('Info', 'Rufen Sie 0848123456 von Montag bis Freitag an.')).toBe('');
   });
 
+  it('reads the shop of a parcel the text calls yours', () => {
+    expect(shopNamedIn('Ihre Sendung ist unterwegs zu Ihnen', 'Grüezi\nIhre Sendung von Example Shop ist unterwegs zu Ihnen.')).toBe('Example Shop');
+    expect(shopNamedIn('Livraison', 'Bonjour,\nVotre colis de Example Shop SA sera livré demain.')).toBe('Example Shop');
+    expect(shopNamedIn('On its way', 'Hello\nYour parcel from Example Shop is on its way.')).toBe('Example Shop');
+    expect(shopNamedIn('Info', 'Ihre Sendung von heute wurde zugestellt.')).toBe('');
+    expect(shopNamedIn('Info', 'Die Zustellung von Paketen erfolgt werktags.')).toBe('');
+  });
+
   it('never takes the carrier\'s own name for a shop', () => {
     expect(shopNamedIn('Your Example Express shipment is on its way', '', ['Example Express'])).toBe('');
     expect(shopNamedIn('Info', 'Absender: Example Express AG', ['Example Express'])).toBe('');

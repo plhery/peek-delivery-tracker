@@ -1521,9 +1521,11 @@ export function detectSyncAnomalies(
   if (events.some((event) => datedAfterCheck(event.occurred_at, 'UTC', now))) {
     anomalies.add('future_event_timestamp');
   }
+  // Cainiao never dates AliExpress's announcement, so the check that sees it is the only time it can have.
   if (events.some((event) => (
     isRecord(event.raw_data)
     && event.raw_data.observed_without_provider_timestamp === true
+    && !(sourceCarrierId === 'aliexpress' && event.stage === 'registered')
   ))) {
     anomalies.add('observed_without_timestamp');
   }
@@ -2949,11 +2951,12 @@ export class TrackingSyncService {
       // Each stored row shows it once, at the check that first meets it, not at every check after
       // that repeats the copy. The log line names the row: the one a copy repeats, or the copy's own.
       // USPS's "Shipping Label Created" is a mailer's label on UTC, which the scraper reads it on by
-      // design; a provider or an older row on the facility's clock is hours off, and none to fix.
+      // design; a provider or an older row on the facility's clock is hours off, and none to fix. So
+      // is ParcelsApp's copy of it, "Shipping Label Created, USPS Awaiting Item" with the place after it.
       const uspsParcel = carrierId === 'usps' || sourceCarrierId === 'usps';
       const mailerLabel = (id: string) => (uspsParcel || id.startsWith('usps:'))
         && [...persistedEvents, ...stored].some((row) => String(row.provider_event_id) === id
-          && /^shipping label created$/i.test(String(row.description ?? '').trim()));
+          && /^shipping label created(?:$|, usps awaiting item\b)/i.test(String(row.description ?? '').trim()));
       const offsetRows = [...new Set([...[...shared.shifted].filter((id) => persistedIds.has(id)),
         ...eventsToPersist.filter((event) => {
           const at = misdated.get(String(event.provider_event_id));

@@ -7947,6 +7947,17 @@ describe('tracking anomaly detection', () => {
     ]));
   });
 
+  it('expects no time for AliExpress\'s announcement, which Cainiao never dates', () => {
+    const now = new Date('2026-08-31T12:00:00Z');
+    const sighted = (carrier: string, stage: string) => detectSyncAnomalies({ current_stage: 'pending' },
+      { status: 'in_transit', events: [] },
+      [{ occurred_at: now.toISOString(), stage, raw_data: { observed_without_provider_timestamp: true } }],
+      carrier, stage, now);
+    expect(sighted('aliexpress', 'registered')).not.toContain('observed_without_timestamp');
+    expect(sighted('aliexpress', 'in_transit')).toContain('observed_without_timestamp');
+    expect(sighted('colis-prive', 'registered')).toContain('observed_without_timestamp');
+  });
+
   it('flags a scan two hours ahead, the mark of a local clock read as UTC, but not minor skew', () => {
     const now = new Date('2026-06-10T07:00:00Z');
     const ahead = (occurred_at: string) => detectSyncAnomalies({ current_stage: 'in_transit' },
@@ -9190,20 +9201,25 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(store.rows.size).toBe(2);
   });
 
-  it('records no offset for a provider\'s copy of the label a mailer wrote on UTC, which USPS\'s reading keeps', async () => {
+  it.each([
+    ['17TRACK', 'Shipping Label Created', 'Example City, NY 10001', 1],
+    // ParcelsApp words the label its own way, with the place after it, and stores it beside USPS's.
+    ['ParcelsApp', 'Shipping Label Created, USPS Awaiting Item, Example City, NY', '', 2],
+  ])('records no offset for %s\'s copy of the label a mailer wrote on UTC, which USPS\'s reading keeps', async (provider, wording, place, rows) => {
     vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
     const store = eventStore();
     const client = { ...store.client,
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-01-05T12:01:30Z' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
     };
-    // The scraper reads the label's digits on UTC; 17TRACK reads them on New York's clock, five hours later.
+    // The scraper reads the label's digits on UTC; the provider reads them on New York's clock, five hours later.
     const created = { time: '2026-01-04T02:35:00Z', location: 'Example City, NY 10001', description: 'Shipping Label Created', stage: 'registered' };
     const answer = (events: JsonObject[], extra: JsonObject = {}) => ({ status: 'in_transit', current_stage: 'registered',
       last_status_text: created.description, last_update: created.time, events, ...extra }) as CarrierResult;
+    const copy = { ...created, time: '2026-01-04T07:35:00Z', description: wording, location: place };
     const adapter = {
       fetch: vi.fn().mockResolvedValueOnce(answer([created])).mockRejectedValueOnce(new Error('USPS tracking endpoint is unavailable')),
-      fetchUniversal: vi.fn().mockResolvedValue(answer([{ ...created, time: '2026-01-04T07:35:00Z' }], { tracking_provider: '17TRACK' })),
+      fetchUniversal: vi.fn().mockResolvedValue(answer([copy], { tracking_provider: provider })),
     };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, now);
     const sync = async () => {
@@ -9215,7 +9231,7 @@ describe('scans a carrier and a universal provider both report', () => {
     await sync();
     // USPS is down: the copy repeats its label, hours off by the scraper's choice rather than the provider's misreading.
     expect(await sync()).not.toContain('provider_clock_offset');
-    expect(store.rows.size).toBe(1);
+    expect(store.rows.size).toBe(rows);
   });
 
   it('starts the day of a scan a provider gives by its day alone on the clock of the carrier it names', async () => {

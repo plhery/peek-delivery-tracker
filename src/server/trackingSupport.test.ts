@@ -176,8 +176,21 @@ describe('tracking support context', () => {
     expect(trackingSupportContext('RR123456785FI', 'royal-mail', 'royal-mail').reasons).toEqual([]);
     // Another carrier's confirmation leaves the filed one's gap.
     expect(trackingSupportContext('RR123456785FI', 'royal-mail', 'posti').reasons).toEqual(['generic_postal']);
-    expect(trackingSupportStart('RR123456785FI', 'posti', null).reasons).toEqual(['generic_postal']);
-    expect(trackingSupportStart('RR123456785FI', 'posti', 'posti').reasons).toEqual([]);
+    // A check settles it at its end, from the carrier it filed the parcel under and the one that confirmed the number.
+    expect(trackingSupportStart('RR123456785FI', 'posti', null).reasons).toEqual([]);
+    expect(trackingSupportGap('RR123456785FI', 'posti', 'posti')).toEqual({});
+    expect(trackingSupportGap('RR123456785FI', 'posti', null)).toEqual({ support_gap_reason: 'generic_postal' });
+    expect(trackingSupportGap('RR123456785FI', 'royal-mail', 'posti')).toEqual({ support_gap_reason: 'generic_postal' });
+  });
+
+  it('leaves a generic postal gap undecided while the filed carrier\'s lookup failed', () => {
+    const failed = (carriers: string[]) => (carrier: string) => carriers.includes(carrier);
+    expect(trackingSupportGap('RR123456785RU', 'russian-post', null, failed(['russian-post'])))
+      .toEqual({ support_gap_reason: 'generic_postal', support_gap_undecided: true });
+    // Another carrier's outage changes nothing: the number is the filed carrier's to confirm.
+    expect(trackingSupportGap('RR123456785RU', 'russian-post', null, failed(['usps'])))
+      .toEqual({ support_gap_reason: 'generic_postal' });
+    expect(trackingSupportGap('RR123456785RU', 'russian-post', 'russian-post', failed(['russian-post']))).toEqual({});
   });
 
   it('does not report a direct-adapter gap for Royal Mail', () => {

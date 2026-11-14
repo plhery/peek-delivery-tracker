@@ -135,6 +135,32 @@ describe('tracking support audit persistence', () => {
     expect(step.details).toMatchObject({ support_gap_reason: 'ambiguous_shape', support_gap_undecided: true });
   });
 
+  it.each([
+    ['opens no case once the filed carrier confirmed it', 'success', 'russian-post', {}],
+    ['leaves the gap undecided while the filed carrier\'s lookup failed', 'error', null,
+      { support_gap_reason: 'generic_postal', support_gap_undecided: true }],
+    ['still opens one while the filed carrier answered without confirming it', 'not_found', null, { support_gap_reason: 'generic_postal' }],
+  ] as const)('for an S10 number detection leaves to international post, %s', async (_case, lookup, answeredBy, gap) => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue(true);
+    // A synthetic S10 number filed under Russian Post on its first check: nothing confirmed it yet.
+    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'RR123456785RU', 'russian-post', 'pending', { trigger: 'added' });
+    await audit.start();
+    await audit.observeFetch(async () => {
+      reportTrackingLookup('russian-post', lookup, lookup === 'error' ? 'transport' : undefined);
+      reportTrackingLookup('ParcelsApp', 'success');
+    });
+    audit.filed('russian-post', answeredBy);
+    await audit.finish({ outcome: 'updated', sourceCarrier: answeredBy ?? 'unknown', evaluateHealth: false });
+    expect(request).toHaveBeenNthCalledWith(1, '/rest/v1/tracking_sync_attempts', expect.objectContaining({
+      body: expect.objectContaining({ support_context: expect.objectContaining({ detection_carrier: 'intl-post', reasons: [] }) }),
+    }));
+    const [step] = (request.mock.calls[1][1] as { body: { p_steps: JsonObject[] } }).body.p_steps;
+    const details = step.details as JsonObject;
+    expect({ support_gap_reason: details.support_gap_reason, support_gap_undecided: details.support_gap_undecided })
+      .toEqual({ support_gap_reason: undefined, support_gap_undecided: undefined, ...gap });
+  });
+
   it('records a fallback success without losing the unresolved detection context', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue(true);

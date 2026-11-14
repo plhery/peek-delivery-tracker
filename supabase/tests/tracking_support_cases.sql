@@ -182,6 +182,36 @@ begin
 end;
 $$;
 
+-- So does a generic postal gap the filed carrier's outage left undecided; a check's start leaves an open case that
+-- reason, and only a check's end that no longer reports it takes it off.
+do $$
+declare
+  context jsonb := '{"configured_carrier":"synthetic-post", "detection_carrier":"intl-post", "reasons":[]}';
+  case_id uuid;
+begin
+  assert public.record_tracking_support_observation('RR123456785RU', context,
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"generic_postal", "support_gap_undecided":true}',
+    '2026-10-04T10:00:00Z', 'attempt:a7100000-0000-4000-8000-0000000000a4') is null, 'An outage must not open a generic postal case';
+  case_id := public.record_tracking_support_observation('RR123456785RU', context,
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"generic_postal"}',
+    '2026-10-04T11:00:00Z', 'attempt:a7100000-0000-4000-8000-0000000000a5');
+  assert case_id is not null;
+  perform public.record_tracking_support_observation('RR123456785RU', context, '{}',
+    '2026-10-04T12:00:00Z', 'attempt:a7100000-0000-4000-8000-0000000000a6');
+  assert (select reasons = array['generic_postal'] from public.tracking_support_cases where id = case_id),
+    'A check''s start must leave the generic postal reason to its end';
+  perform public.record_tracking_support_observation('RR123456785RU', context,
+    '{"outcome":"updated", "source_carrier":"unknown", "support_gap_reason":"generic_postal", "support_gap_undecided":true}',
+    '2026-10-04T12:00:00Z', 'attempt:a7100000-0000-4000-8000-0000000000a6');
+  assert (select reasons = array['generic_postal'] from public.tracking_support_cases where id = case_id),
+    'An open case keeps the generic postal reason an outage left undecided';
+  perform public.record_tracking_support_observation('RR123456785RU', context, '{"outcome":"unchanged", "source_carrier":"synthetic-post"}',
+    '2026-10-04T13:00:00Z', 'attempt:a7100000-0000-4000-8000-0000000000a7');
+  assert (select reasons = '{}' from public.tracking_support_cases where id = case_id),
+    'A check that ends without the gap takes the generic postal reason off';
+end;
+$$;
+
 -- A check's start leaves an open case its shape reason, which only the check's end replaces: a check cut short never
 -- ends, and a case left without reasons is one the replay marks fixed.
 insert into public.packages(id, user_id, tracking_number, carrier) values

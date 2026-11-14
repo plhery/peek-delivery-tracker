@@ -219,16 +219,16 @@ does), or said it holds the parcel and shows it only with an input the parcel
 lacks or not with the postcode it has (`parcel_found`, `postcode_mismatch`): the owner's
 input is wrong, not the shape. Nor is an S10 number generic postal once the carrier the parcel
 is filed under confirmed it, whether the post its suffix names or a courier that carries such
-numbers: a check starts without that reason then, and the replay below closes its case. A check settles that at its end, from the carrier it filed the parcel
+numbers. A check settles both at its end, from the carrier it filed the parcel
 under and the one that confirmed the number, so a first check that its carrier answers
 opens no case. When the lookup of a carrier that could have settled it failed, rate limited
-or down (the filed carrier if the shape fits it, else any carrier the shape fits), the gap
-is undecided (`support_gap_undecided`): the check opens no case for it, and a case already
-open keeps it.
+or down (for an S10 number the filed carrier; for a shape several carriers issue the filed
+carrier if the shape fits it, else any carrier the shape fits), the gap is undecided
+(`support_gap_undecided`): the check opens no case for it, and a case already open keeps it.
 
 Each check computes the shape and carrier reasons afresh and replaces them on its case.
-The ambiguous shape is replaced only at the check's end, so a check cut short (superseded,
-abandoned, interrupted) leaves it on the case. Recognition reasons from the Add sheet, gap
+The ambiguous shape and the generic postal number are replaced only at the check's end, so a
+check cut short (superseded, abandoned, interrupted) leaves them on the case. Recognition reasons from the Add sheet, gap
 evidence, and sightings older than the case's latest still add to them, so a reason that no
 longer applies leaves with the next check.
 

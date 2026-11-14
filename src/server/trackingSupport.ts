@@ -62,31 +62,38 @@ export function detectionOffers(context: JsonObject, carrier: string): boolean {
   return Array.isArray(context.detection_candidates) && context.detection_candidates.includes(DETECTED_AS[carrier] ?? carrier);
 }
 
+/** Reasons a check settles at its end, from the carrier it filed the parcel under and the one that confirmed the number. */
+const GAP_REASONS = new Set(['ambiguous_shape', 'generic_postal']);
+
 /**
- * The context a check records when it begins. Whether a shape several carriers issue leaves a gap
- * depends on the check's answer, so that reason waits for its end (`trackingSupportGap`): a check whose
- * carrier confirms the number opens no case. An open case keeps the reason until a check ends: one cut short never does.
+ * The context a check records when it begins. Whether a shape several carriers issue, or an S10 number detection
+ * leaves to international post, leaves a gap depends on the check's answer, so those reasons wait for its end
+ * (`trackingSupportGap`): a check whose carrier confirms the number opens no case. An open case keeps the reason
+ * until a check ends: one cut short never does.
  */
 export function trackingSupportStart(trackingNumber: string, configuredCarrier: string, answeredBy: string | null = null): JsonObject {
   const context = trackingSupportContext(trackingNumber, configuredCarrier, answeredBy);
-  context.reasons = (context.reasons as string[]).filter((reason) => reason !== 'ambiguous_shape');
+  context.reasons = (context.reasons as string[]).filter((reason) => !GAP_REASONS.has(reason));
   return context;
 }
 
 /**
- * The ambiguous shape a check leaves, from the carrier it filed the parcel under and the one that confirmed the number.
- * When a carrier that could have settled it failed its lookup in the check (`failed`: rate limited or down), the
- * filed one if the shape fits it, or else any the shape fits, the gap is undecided: such a check opens no case for
- * it, the outage being health monitoring's, and a case already open keeps it.
+ * The ambiguous shape or generic postal number a check leaves, from the carrier it filed the parcel under and the one
+ * that confirmed the number. When a carrier that could have settled it failed its lookup in the check (`failed`: rate
+ * limited or down), the gap is undecided: such a check opens no case for it, the outage being health monitoring's, and
+ * a case already open keeps it. An S10 number is the filed carrier's to confirm; a shape several carriers issue, the
+ * filed one's if the shape fits it, or else any carrier it fits.
  */
 export function trackingSupportGap(
   trackingNumber: string, filedCarrier: string, answeredBy: string | null, failed: (carrier: string) => boolean = () => false,
 ): JsonObject {
   const context = trackingSupportContext(trackingNumber, filedCarrier, answeredBy);
-  if (!(context.reasons as string[]).includes('ambiguous_shape')) return {};
+  const reason = (context.reasons as string[]).find((tag) => GAP_REASONS.has(tag));
+  if (!reason) return {};
   const candidates = context.detection_candidates as string[];
-  const settling = candidates.includes(DETECTED_AS[filedCarrier] ?? filedCarrier) ? [filedCarrier] : candidates;
-  return { support_gap_reason: 'ambiguous_shape', ...(settling.some(failed) ? { support_gap_undecided: true } : {}) };
+  const settling = reason === 'generic_postal' || candidates.includes(DETECTED_AS[filedCarrier] ?? filedCarrier)
+    ? [filedCarrier] : candidates;
+  return { support_gap_reason: reason, ...(settling.some(failed) ? { support_gap_undecided: true } : {}) };
 }
 
 /** Whether the Add sheet's recognition asks the carrier over plain HTTP; any other it asks through a browser, if at all. */

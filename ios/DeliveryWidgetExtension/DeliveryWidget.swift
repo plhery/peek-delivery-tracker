@@ -239,9 +239,11 @@ private struct DeliveryWidgetView: View {
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(WidgetPalette.ink.opacity(0.68))
                     .lineLimit(1)
-                Text(parcel.detail.openingLine(in: ExtensionLocalizer.locale(for: entry.languageCode)))
-                    .font(.caption.weight(.bold))
-                    .lineLimit(1)
+                if let detail = detail(parcel) {
+                    Text(detail)
+                        .font(.caption.weight(.bold))
+                        .lineLimit(1)
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -264,9 +266,11 @@ private struct DeliveryWidgetView: View {
                                 .font(.caption2.weight(.semibold))
                                 .foregroundStyle(WidgetPalette.ink.opacity(0.64))
                                 .lineLimit(1)
-                            Text(parcel.detail.openingLine(in: ExtensionLocalizer.locale(for: entry.languageCode)))
-                                .font(.caption.weight(.bold))
-                                .lineLimit(1)
+                            if let detail = detail(parcel) {
+                                Text(detail)
+                                    .font(.caption.weight(.bold))
+                                    .lineLimit(1)
+                            }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding(.horizontal, 10)
@@ -303,18 +307,27 @@ private struct DeliveryWidgetView: View {
     }
 
     private func parcelBadge(_ parcel: DeliveryWidgetParcel) -> some View {
-        let delivered = parcel.deliveredAt != nil
         // Tighter than a Label, so "Out for delivery" fits a small widget's width.
-        return HStack(spacing: 4) {
-            Image(systemName: parcel.isOutForDelivery ? "bicycle" : delivered ? "checkmark.circle.fill" : "arrow.right.circle.fill")
+        HStack(spacing: 4) {
+            Image(systemName: parcel.isOutForDelivery ? "bicycle" : parcel.deliveredAt != nil ? "checkmark.circle.fill" : "arrow.right.circle.fill")
                 .imageScale(.small)
                 .accessibilityHidden(true)
-            Text(copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : delivered ? "stage.delivered" : "app.onTheWaySection"))
+            Text(badge(parcel))
                 .minimumScaleFactor(0.7)
         }
         .font(.caption2.weight(.heavy))
         .textCase(.uppercase)
         .lineLimit(1)
+    }
+
+    private func badge(_ parcel: DeliveryWidgetParcel) -> String {
+        copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : parcel.deliveredAt != nil ? "stage.delivered" : "app.onTheWaySection")
+    }
+
+    /// The parcel's last line, unless it would say what its badge says: "Out for delivery" with no hours.
+    private func detail(_ parcel: DeliveryWidgetParcel) -> String? {
+        guard parcel.detail.compare(badge(parcel), options: .caseInsensitive) != .orderedSame else { return nil }
+        return parcel.detail.openingLine(in: ExtensionLocalizer.locale(for: entry.languageCode))
     }
 
     private func stateView(symbol: String, title: String, description: String) -> some View {

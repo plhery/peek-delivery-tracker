@@ -1565,10 +1565,10 @@ describe('persistent tracking routing', () => {
       refused.direct.mockRejectedValue(new InputRequiredError('PostNL', 'postcode', 'PostNL\'s domestic tracker takes a Dutch delivery postcode'));
       const kept = await refused.router.fetch(parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB' }), false);
       expect(kept.result.routing).not.toHaveProperty('input_needed');
-      // A 14-character barcode isn't one the domestic tracker holds.
+      // A 14-character barcode with three letters isn't one the domestic tracker holds.
       const other = setup();
       other.direct.mockRejectedValue(new InputRequiredError('PostNL', 'postcode'));
-      const unlisted = await other.router.fetch(parcel({ carrier: 'spring-gds', tracking_number: '3SABCD82640519' }), false);
+      const unlisted = await other.router.fetch(parcel({ carrier: 'spring-gds', tracking_number: '3SABC826405193' }), false);
       expect(unlisted.result.routing).not.toHaveProperty('input_needed');
     });
     it('tells the owner when the filed carrier refuses the postcode stored for it, until it answers', async () => {

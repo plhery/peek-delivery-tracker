@@ -114,7 +114,9 @@ order by a.started_at desc;
 \echo '   under another carrier at the next check, as an owner''s change or a correction starts over; by_hand: set'
 \echo '   between the checks outside the API (a fix script, a migration, the replay), fixes naming them (- for none);'
 \echo '   over_provider: the parcel''s own carrier answered the check after a universal provider had answered the one'
-\echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin)'
+\echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin).'
+\echo '   A held return ending is left out: the check before saved the return over the carrier''s summary in transit or at'
+\echo '   customs (return_held), which a delivery round, a problem or a new label ends.'
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check. A check
 -- the fence refused (superseded) saved nothing and loaded a stage that may be stale: it is no step.
 -- A linked parcel holds the checks of the parcel merged into it (original_package_id), filed under its
@@ -166,15 +168,17 @@ left join lateral (
     and h.changed_at >= back.started_at and h.changed_at < coalesce(back.next_at, 'infinity')
   order by h.changed_at desc limit 1
 ) as hand on true
--- The check of its leg before this one that saved, in the window or not: whose answer it took.
+-- The check of its leg before this one that saved, in the window or not: whose answer it took, and whether it held a return.
 left join lateral (
-  select b.source_carrier from public.tracking_sync_attempts as b
+  select b.source_carrier, b.selected_stage, b.reported_stage from public.tracking_sync_attempts as b
   join public.packages as p on p.id = b.package_id
   where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id) and b.outcome <> 'superseded'
     and (p.carrier_data ? 'original_package_id'
       and b.configured_carrier is not distinct from p.carrier_data->>'original_carrier') = back.merged_leg
   order by b.started_at desc, b.id desc limit 1
 ) as prior on true
+where not coalesce(back.from_stage = 'returned' and prior.selected_stage = 'returned'
+  and prior.reported_stage in ('in_transit', 'customs'), false)
 group by 1, 2, 3, 4, 5, 6
 order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 
@@ -386,13 +390,15 @@ order by parcels desc, could_take, provider;
 \echo '   an account''s parcel with a scan, or a lookup with an alert or a link opened in 24 h; never-checked Amazon parcels'
 \echo '   and routing deferrals left out, a hold until every source''s turn (quiet_until) to the parcel''s next hour after it.'
 \echo '   Lookups nobody follows leave the schedule (the dormant lane above); a parcel whose check was queued in the last'
-\echo '   hour, as opening a link queues one, is left out until that check has come.'
+\echo '   hour, as opening a link queues one, is left out until that check has come. A held return (return_held) is open:'
+\echo '   the schedule keeps it, here and in the list below.'
 select case when package.user_id is not null then 'account' else 'lookup' end as kind, package.carrier,
        package.carrier_data->>'tracking_provider' as provider, package.sync_status,
        count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
        min(package.last_synced_at)::timestamp(0) as oldest_check
 from public.packages as package
-where package.archived_at is null and package.current_stage not in ('pending', 'delivered', 'returned')
+where package.archived_at is null
+  and (package.current_stage not in ('pending', 'delivered', 'returned') or package.carrier_data->>'return_held' = 'true')
   and package.last_synced_at < now() - interval '24 hours' and package.sync_status is distinct from 'unsupported'
   and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'next_check_at', 'timestamptz')
     then (package.carrier_data->'routing'->>'next_check_at')::timestamptz > now() end, false)
@@ -418,7 +424,8 @@ select package.carrier, package.sync_status,
        count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
        min(package.last_synced_at)::timestamp(0) as oldest_check
 from public.packages as package
-where package.one_off and package.archived_at is null and package.current_stage not in ('pending', 'delivered', 'returned')
+where package.one_off and package.archived_at is null
+  and (package.current_stage not in ('pending', 'delivered', 'returned') or package.carrier_data->>'return_held' = 'true')
   and package.last_synced_at < now() - interval '6 hours' and package.last_synced_at >= now() - interval '24 hours'
   and package.sync_status is distinct from 'unsupported'
   and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'next_check_at', 'timestamptz')

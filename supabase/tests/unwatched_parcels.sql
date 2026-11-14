@@ -74,6 +74,10 @@ begin
   update public.packages set archived_at = now() where tracking_number = 'UNWATCHED03';
   perform pg_temp.parcel(quiet, 'UNWATCHED04', 'delivered');
   update public.packages set last_status_text = 'TO_BE_DELIVERED' where tracking_number = 'UNWATCHED04';
+  -- So is a return the carrier's later scans only carry back; any other return is not.
+  perform pg_temp.parcel(quiet, 'UNWATCHED05', 'returned');
+  update public.packages set carrier_data = '{"return_held": true}' where tracking_number = 'UNWATCHED05';
+  perform pg_temp.parcel(quiet, 'UNWATCHED06', 'returned');
 
   insert into public.push_subscriptions (user_id, endpoint, p256dh, auth)
   values (browser, 'https://fcm.googleapis.com/fcm/send/unwatched', 'k', 'a');
@@ -101,7 +105,7 @@ begin
   perform set_config('request.jwt.claim.sub', reader::text, true);
   perform public.record_account_opened();
 
-  if pg_temp.unwatched() <> array['UNWATCHED01', 'UNWATCHED04', 'UNWATCHED11', 'UNWATCHED21', 'UNWATCHED41'] then
+  if pg_temp.unwatched() <> array['UNWATCHED01', 'UNWATCHED04', 'UNWATCHED05', 'UNWATCHED11', 'UNWATCHED21', 'UNWATCHED41'] then
     raise exception 'Nobody would be waiting for %', pg_temp.unwatched();
   end if;
 
@@ -110,7 +114,7 @@ begin
   update public.native_push_devices set disabled_at = now() where user_id = phone;
   update public.live_activity_devices set disabled_at = now() where user_id = activity;
   update public.notification_preferences set email_on_delivery = false where user_id = email;
-  if pg_temp.unwatched() <> array['UNWATCHED01', 'UNWATCHED04', 'UNWATCHED10', 'UNWATCHED11', 'UNWATCHED20',
+  if pg_temp.unwatched() <> array['UNWATCHED01', 'UNWATCHED04', 'UNWATCHED05', 'UNWATCHED10', 'UNWATCHED11', 'UNWATCHED20',
       'UNWATCHED21', 'UNWATCHED30', 'UNWATCHED40', 'UNWATCHED41'] then
     raise exception 'With everything switched off, nobody would be waiting for %', pg_temp.unwatched();
   end if;

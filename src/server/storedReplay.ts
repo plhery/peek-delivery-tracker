@@ -50,7 +50,7 @@ export interface StoredScan {
 export interface StoredParcel {
   id: string;
   destination: string | null;
-  /** Neither archived nor delivered or returned: still checked. */
+  /** Neither archived nor delivered or returned, unless the return is held (`return_held`): still checked. */
   open: boolean;
   /** Its saved stage. Exports before the field have none. */
   stage?: string | null;
@@ -110,7 +110,8 @@ export interface StepBack { parcel: string; from: string; to: string }
 /** The read-only export the replay reads, one parcel a line. */
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
 select json_build_object('id', p.id, 'destination', p.carrier_data->>'destination_country',
-  'open', p.archived_at is null and coalesce(p.current_stage, '') not in ('delivered', 'returned'), 'stage', p.current_stage,
+  'open', p.archived_at is null and (coalesce(p.current_stage, '') not in ('delivered', 'returned')
+    or p.carrier_data->>'return_held' = 'true'), 'stage', p.current_stage,
   'archived', p.archived_at is not null,
   'carriers', (select coalesce(json_agg(distinct c), '[]') from unnest(array[p.carrier, p.carrier_data->>'original_carrier', p.carrier_data->>'active_tracking_carrier']) c
     where c is not null and c <> 'unknown'),

@@ -88,6 +88,15 @@ export function writtenAheadNote(parcel: ParcelWithEvents, t: Translate, locale:
   return t(shown ? 'parcel.writtenAheadShown' : 'parcel.writtenAhead', { carrier: carrierInfo(parcel.writtenAheadBy, locale).name });
 }
 
+/**
+ * A universal provider's postcode request as the parcel page and the carrier editor word it: the provider needs the
+ * delivery postcode, or found no parcel with the parcel's own, which the owner is asked to check.
+ */
+export function providerRequestText(request: NonNullable<ParcelWithEvents['providerInputNeeded']>, t: Translate): string {
+  return request.refusedPostcode ? t('detail.postcodeRefused', { carrier: request.provider, postcode: request.refusedPostcode })
+    : t('detail.providerInputNeeded', { provider: request.provider });
+}
+
 export function parcelIsUnannounced(parcel: ParcelWithEvents): boolean {
   return !parcelHasCarrierUpdate(parcel) && parcel.syncStatus === 'waiting';
 }

@@ -139,6 +139,25 @@ describe('ChangeCarrierSheet', () => {
     expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'seur', providerPostcode: '28001', dpdPostcode: undefined }));
   });
 
+  it('offers the parcel’s postcode a provider asked for one with all the same, to correct', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+    const onChange = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'spring-gds', trackingNumber: '3SABCD826405193', dpdPostcode: '1234 AB',
+      providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode', refusedPostcode: '1234 AB' } }} onChange={onChange} onClose={vi.fn()} />);
+    const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+    const field = within(sheet).getByRole('textbox', { name: /^Delivery postcode/ });
+    expect(field).toHaveValue('1234 AB');
+    expect(field).toBeRequired();
+    expect(within(sheet).getByText('ParcelsApp didn’t find this parcel with postcode 1234 AB.')).toBeInTheDocument();
+    // The same postcode again changes nothing.
+    expect(within(sheet).getByRole('button', { name: 'Save carrier' })).toBeDisabled();
+    await user.clear(field);
+    await user.type(field, '1234 AC');
+    await user.click(within(sheet).getByRole('button', { name: 'Save carrier' }));
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'spring-gds', dpdPostcode: '1234 AC', providerPostcode: undefined }));
+  });
+
   describe('postcodes given before', () => {
     const postcodeField = (sheet: HTMLElement) => within(sheet).getByRole('textbox', { name: /^Delivery postcode/ });
     const save = (sheet: HTMLElement) => within(sheet).getByRole('button', { name: 'Save carrier' });

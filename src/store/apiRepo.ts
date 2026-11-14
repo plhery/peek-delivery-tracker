@@ -114,6 +114,15 @@ export function toEvent(row: ApiTrackingEventRow): TrackingEvent {
   };
 }
 
+/** A provider's postcode request, naming the postcode it asked again with while that is still the parcel's. */
+function providerInputNeeded(row: ApiPackageRow): ParcelWithEvents['providerInputNeeded'] {
+  const needed = row.carrier_data?.routing?.provider_input_needed;
+  if (!needed) return undefined;
+  const refused = needed.refused_postcode?.trim();
+  return { provider: needed.provider, field: needed.field,
+    ...(refused && refused === row.dpd_postcode?.trim() ? { refusedPostcode: refused } : {}) };
+}
+
 /** A package row as the client model; a parcel link's package maps through it too. */
 export function toParcel(row: ApiPackageRow): ParcelWithEvents {
   return {
@@ -126,7 +135,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     autoChangedFrom: row.carrier_data?.auto_changed_from ?? undefined,
     autoChangedTo: row.carrier_data?.auto_changed_to ?? undefined,
     autoChangedAt: row.carrier_data?.auto_changed_at ?? undefined,
-    providerInputNeeded: row.carrier_data?.routing?.provider_input_needed,
+    providerInputNeeded: providerInputNeeded(row),
     nextCheckAt: row.carrier_data?.routing?.next_check_at,
     inputNeeded: row.carrier_data?.routing?.input_needed ?? undefined,
     inputSuggested: row.carrier_data?.routing?.input_suggested ?? undefined,

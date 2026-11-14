@@ -150,6 +150,16 @@ val Parcel.refusedPostcode: String?
         return dpdPostcode?.nonEmpty
     }
 
+/**
+ * The parcel's own postcode a tracking provider was sent and asked for one all the same (ParcelsApp's request), which
+ * its owner is asked to check; null once they have changed it, until the next check answers.
+ */
+val Parcel.providerRefusedPostcode: String?
+    get() {
+        val refused = carrierData?.routing?.providerInputNeeded?.refusedPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty ?: return null
+        return refused.takeIf { it == dpdPostcode?.trimmingWhitespacesAndNewlines() }
+    }
+
 /** Nobody has answered for the number yet, and its shape points to a carrier that needs the delivery postcode before it can be asked about it. */
 val Parcel.inputSuggestedPrompt: CarrierInputSuggested?
     get() {

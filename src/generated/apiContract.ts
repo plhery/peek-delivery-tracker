@@ -56029,6 +56029,7 @@ export interface ApiPackageRow {
   "provider_input_needed"?: {
   "provider": string;
   "field": "dpdPostcode";
+  "refused_postcode"?: string;
 };
   "next_check_at"?: string;
 };

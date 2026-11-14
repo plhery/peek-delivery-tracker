@@ -132,7 +132,11 @@ export interface RoutingState extends JsonObject {
    * answered for the parcel: two days on, the parcel asks its owner to check it (NUMBER_UNKNOWN). Any answer clears it.
    */
   unknown_since?: { carrier: string; since: string };
-  provider_input_needed?: { provider: string; field: 'dpdPostcode' };
+  /**
+   * A universal provider asks the owner for the delivery postcode. `refused_postcode`: the parcel's own postcode it was
+   * sent and asked again with, which the owner is asked to check; the request ends once they change it.
+   */
+  provider_input_needed?: { provider: string; field: 'dpdPostcode'; refused_postcode?: string };
   /**
    * When providers last held no fuller history than the filed carrier's partial answer, or no
    * progress beside its label alone (LABEL_WAIT).
@@ -897,20 +901,24 @@ export class TrackingRouter {
       ? metadata.active_tracking_carrier : declared;
     const inputPlausible = plausibleInputRequest(universalNumber, [universalCarrier, state.discovered_carrier,
       state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined]);
-    // A request is saved only while the parcel holds no postcode: one it holds now was given since, as the
-    // owner's answer in the carrier's field, and the providers that asked wait for it no longer.
-    // Counted as the separate field's answer was, with what this check's lookups find with it.
-    const answeredInField = Boolean(postcode && state.provider_input_needed);
-    if (postcode && state.provider_input_needed) {
-      recordProviderInput(state.provider_input_needed.provider, 'supplied');
+    // A provider sent the parcel's own postcode that asked for one all the same asks the owner to check it, until they
+    // change it.
+    const refusedOwn = Boolean(postcode && !providerInput && state.provider_input_needed?.refused_postcode === postcode);
+    // Any other request is saved only while the parcel holds no postcode: one it holds now, or one other than the
+    // postcode refused, was given since, as the owner's answer in the carrier's field, and the providers that asked
+    // wait for it no longer. Counted as the separate field's answer was, with what this check's lookups find with it.
+    const answeredInField = Boolean(postcode && state.provider_input_needed && !refusedOwn);
+    if (answeredInField) {
+      recordProviderInput(state.provider_input_needed!.provider, 'supplied');
       for (const [provider, failure] of Object.entries(state.failures)) {
         if (failure.kind === 'input_required' && !directCarrier(provider)) delete state.failures[provider];
       }
     }
-    // A request saved before it was found implausible stops asking the owner. So does one for a parcel
-    // holding its own postcode: every provider receives it, and the owner changes it in the carrier's field.
-    if (!inputPlausible || postcode) delete state.provider_input_needed;
-    else if (!metadata.universal_input && !state.provider_input_needed) {
+    // A request saved before it was found implausible stops asking the owner. So does one answered in the carrier's
+    // field: every provider receives that postcode. One the parcel holds no postcode for names none refused.
+    if (!inputPlausible || (postcode && !refusedOwn)) delete state.provider_input_needed;
+    else if (!postcode) delete state.provider_input_needed?.refused_postcode;
+    if (inputPlausible && !postcode && !metadata.universal_input && !state.provider_input_needed) {
       state.provider_input_needed = this.options.preflightInputNeeded?.(universalNumber);
       if (state.provider_input_needed) recordProviderInput(state.provider_input_needed.provider, 'asked');
     }
@@ -922,7 +930,8 @@ export class TrackingRouter {
     });
     const sources = plan.sources.filter((source) => providerAllowed(source, this.options.providers));
     // A provider that asked for a postcode the parcel still lacks would only ask
-    // again: scheduled checks leave it until a postcode is given.
+    // again: scheduled checks leave it until a postcode is given. One that asked with the
+    // parcel's own is asked again after its wait: it may find the parcel once the carrier lists it.
     const awaitsInput = (provider: string) => sources.includes(provider as UniversalSource)
       && state.failures[provider]?.kind === 'input_required' && !providerPostcode;
     const prefetchedUniversal = new Map<UniversalSource, CarrierResult>();
@@ -987,10 +996,12 @@ export class TrackingRouter {
         ...(wrongNumber ? { wrong_number: true as const } : {}), ...(holder && holder !== provider ? { holder } : {}),
         retry_at: iso(unseen ? Math.max(now().getTime() + retryAfterMs, beforeHourlyEnd(retryAt)) : retryAt) };
       state.failures[provider] = failure;
-      if (universalSource && kind === 'input_required' && !postcode) {
+      // A provider sent the parcel's own postcode that asks for one all the same asks its owner to check it, in the
+      // carrier's field. One sent the postcode given it in a field of its own beside the parcel's asks nothing.
+      if (universalSource && kind === 'input_required' && !(postcode && providerInput)) {
         // Counted when a parcel starts asking; a supplied postcode that is refused counts as still_required.
-        if (!state.provider_input_needed && !providerInput) recordProviderInput(provider, 'asked');
-        state.provider_input_needed = { provider, field: 'dpdPostcode' };
+        if (!state.provider_input_needed && !providerInput && !answeredInField) recordProviderInput(provider, 'asked');
+        state.provider_input_needed = { provider, field: 'dpdPostcode', ...(postcode ? { refused_postcode: postcode } : {}) };
       }
       // The filed carrier asks for the delivery postcode it lists for the number (PostNL's for a 3S
       // parcel sent within the Netherlands): its owner is offered it while other sources track the parcel.

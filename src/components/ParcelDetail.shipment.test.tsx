@@ -337,6 +337,21 @@ describe('shipment details', () => {
     expect(screen.queryByText(/didn’t find this parcel/)).not.toBeInTheDocument();
   });
 
+  it('asks again to check the postcode a provider was sent and asked for one all the same, in the carrier’s field', async () => {
+    const view = show({ carrier: 'spring-gds', trackingNumber: '3SABCD826405193', dpdPostcode: '1234 AB',
+      providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode', refusedPostcode: '1234 AB' } });
+    expect(screen.getByText('ParcelsApp didn’t find this parcel with postcode 1234 AB.')).toBeInTheDocument();
+    expect(screen.queryByText(/needs the delivery postcode/)).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Edit postcode' }));
+    const sheet = screen.getByRole('dialog', { name: 'Change carrier' });
+    expect(within(sheet).getByRole('textbox', { name: /^Delivery postcode/ })).toHaveValue('1234 AB');
+    view.unmount();
+    // A request the parcel held no postcode for asks for one.
+    show({ carrier: 'spring-gds', trackingNumber: '3SABCD826405193', providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode' } });
+    expect(screen.getByText('ParcelsApp needs the delivery postcode to look up this parcel.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add postcode' })).toBeInTheDocument();
+  });
+
   it('offers the carrier that recognized the number and needs a postcode', async () => {
     const view = show({ carrier: 'unknown', trackingNumber: '12345678901', inputNeeded: { carrier: 'gls-ch', field: 'dpdPostcode' } });
     const prompt = screen.getByText('GLS Switzerland has this parcel. Add the delivery postcode to track it.');

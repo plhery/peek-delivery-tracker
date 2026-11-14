@@ -130,6 +130,15 @@ extension Parcel {
         return dpdPostcode?.nonEmpty
     }
 
+    /// The parcel's own postcode a tracking provider was sent and asked for one all the same (ParcelsApp's request),
+    /// which its owner is asked to check; nil once they have changed it, until the next check answers.
+    var providerRefusedPostcode: String? {
+        let trimmed = { (value: String?) in value?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty }
+        guard let refused = trimmed(carrierData?.routing?.providerInputNeeded?.refusedPostcode),
+              refused == trimmed(dpdPostcode) else { return nil }
+        return refused
+    }
+
     /// Nobody has answered for the number yet, and its shape points to a carrier that needs
     /// the delivery postcode before it can be asked about it.
     var inputSuggestedPrompt: CarrierInputSuggested? {

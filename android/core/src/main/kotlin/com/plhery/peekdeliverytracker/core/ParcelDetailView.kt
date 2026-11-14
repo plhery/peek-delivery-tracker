@@ -184,6 +184,14 @@ fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClo
 }
 
 /**
+ * A tracking provider's postcode request as the parcel page and the carrier editor word it: the provider needs the
+ * delivery postcode, or found no parcel with the parcel's own ([refused]), which its owner is asked to check.
+ */
+fun Localizer.providerRequest(provider: String, refused: String?): String =
+    if (refused == null) text("detail.providerInputNeeded", mapOf("provider" to provider))
+    else text("detail.postcodeRefused", mapOf("carrier" to provider, "postcode" to refused))
+
+/**
  * What the change-carrier sheet (`ChangeCarrierView`) holds and works out for [parcel]: the carrier chosen, null while
  * automatic detection is, the fields typed, and the delivery country chosen beside the postcode until another carrier
  * is chosen. The view's own state is the app's; this is its arithmetic, with [region] the phone's country
@@ -327,7 +335,7 @@ data class CarrierChange(
         return listOfNotNull(
             when {
                 postcode == null -> null
-                providerAsks -> localizer.text("detail.providerInputNeeded", mapOf("provider" to inputProvider.orEmpty()))
+                providerAsks -> localizer.providerRequest(inputProvider.orEmpty(), refusedPostcode)
                 postcode.isOptional -> localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier)
                 else -> null
             },
@@ -361,6 +369,13 @@ data class CarrierChange(
 
     /** The provider that asks for it ([providerAsks]). */
     val inputProvider: String? get() = parcel.carrierData?.routing?.providerInputNeeded?.provider
+
+    /**
+     * The parcel's postcode, in the carrier's field, that the provider was sent and asked for one with all the same
+     * ([providerAsks]): the owner is asked to check it.
+     */
+    val refusedPostcode: String?
+        get() = if (providerAsks && carrierPostcodeRequirement != null) parcel.providerRefusedPostcode else null
 
     /** The provider's postcode as sent: trimmed, in capitals, and none unless it has the shape of a postcode. */
     val normalizedProviderPostcode: String?

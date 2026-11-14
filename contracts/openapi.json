@@ -59629,6 +59629,7 @@
                     "$ref": "#/components/schemas/LikelyCarrier"
                   },
                   "provider_input_needed": {
+                    "description": "A universal provider asks for the delivery postcode, answered in the carrier's own postcode field when it has one.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -59644,6 +59645,10 @@
                         "enum": [
                           "dpdPostcode"
                         ]
+                      },
+                      "refused_postcode": {
+                        "description": "The parcel's own postcode the provider was sent and asked for one all the same: the owner is asked to check it. While it differs from `dpd_postcode`, the owner has changed it and the next check answers.",
+                        "type": "string"
                       }
                     }
                   },

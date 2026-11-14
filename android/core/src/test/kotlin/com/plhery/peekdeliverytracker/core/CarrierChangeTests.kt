@@ -317,6 +317,41 @@ class CarrierChangeTests {
     }
 
     @Test
+    fun aPostcodeAProviderAskedForOneWithAllTheSameIsOfferedInTheCarriersFieldToCorrect() {
+        val refused = CarrierData(
+            destinationCountry = "NL",
+            routing = CarrierDataRouting(
+                providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode, refusedPostcode = "1234 AB"),
+            ),
+        )
+        val held = parcel(CarrierId.SpringGDS, number = "3SABCD826405193", postcode = "1234 AB", data = refused)
+        assertEquals("1234 AB", held.providerRefusedPostcode)
+        val change = start(held)
+        assertTrue(change.providerAsks)
+        assertEquals("1234 AB", change.refusedPostcode)
+        assertEquals("1234 AB", change.deliveryPostcode)
+        assertEquals(
+            localizer.text("detail.postcodeRefused", mapOf("carrier" to "Example Provider", "postcode" to "1234 AB")),
+            change.requirementsHelp(localizer),
+        )
+        // The same postcode again changes nothing; a corrected one is sent.
+        assertFalse(change.canSave)
+        val corrected = change.copy(deliveryPostcode = "1234 ac")
+        assertTrue(corrected.canSave)
+        assertEquals("1234 AC", corrected.sentPostcode)
+
+        // Once the parcel's postcode differs from the refused one, the request is an ordinary one again.
+        val changed = held.copy(dpdPostcode = "1234 AC")
+        assertNull(changed.providerRefusedPostcode)
+        assertNull(start(changed).refusedPostcode)
+        assertEquals(
+            localizer.text("detail.providerInputNeeded", mapOf("provider" to "Example Provider")), start(changed).requirementsHelp(localizer),
+        )
+        // Another carrier's field isn't the provider's.
+        assertNull(change.choosing(CarrierId.Dpd).refusedPostcode)
+    }
+
+    @Test
     fun theRefusalQuestionIsAboutACarrierChosenByHandOutsideTheDemo() {
         val change = start(parcel(CarrierId.Dpd, number = "test parcel 123"))
         assertEquals(NumberRefusalRequest("TESTPARCEL123", CarrierId.Dpd), change.refusalQuestion(demo = false))

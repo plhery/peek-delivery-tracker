@@ -4035,31 +4035,119 @@ describe('universal preflight and recipient input', () => {
     const asked = await filed.router.fetch(parcel({ carrier: 'dpd', tracking_number: 'NOSHAPE42' }), true).catch((error) => error);
     expect(asked.routing.provider_input_needed).toMatchObject({ field: 'dpdPostcode' });
   });
-  it('asks no second postcode of a parcel holding its own', async () => {
-    // PostNL's postcode for a 3S parcel goes to every provider. One gated all the same, now or in the
-    // Add preflight that asked without it, would have the owner type the same postcode in a second field.
+  it('asks the owner to check the parcel\'s own postcode a provider asks for all the same', async () => {
+    // PostNL's postcode for a 3S parcel goes to every provider. One that asks for a postcode all the same may have
+    // been sent a wrong one: the request comes back, naming the postcode refused, for the carrier's field.
     const recorded = vi.spyOn(metrics, 'recordProviderInput').mockImplementation(() => undefined);
     const announced = parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB' });
     const preflightInputNeeded = vi.fn(() => ({ provider: '17TRACK', field: 'dpdPostcode' as const }));
-    for (const saved of [announced, { ...announced, carrier_data: { routing: state({ configured_carrier: 'spring-gds',
-      provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } }) } }]) {
-      const value = setup(time, { preflightInputNeeded });
+    const gated = (value: ReturnType<typeof setup>) => {
       value.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
       value.universal.mockImplementation(async (source) => {
         throw source === 'ParcelsApp' ? new InputRequiredError(source, 'postcode') : new NoHistoryError(source);
       });
-      const { routing } = await value.router.fetch(saved, true).catch((error) => error);
-      expect(value.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '1234 AB', 'Europe/Amsterdam', 'spring-gds');
-      expect(routing.failures.ParcelsApp).toMatchObject({ kind: 'input_required' });
-      expect(routing).not.toHaveProperty('provider_input_needed');
-    }
+      return value;
+    };
+    const first = gated(setup(time, { preflightInputNeeded }));
+    const { routing } = await first.router.fetch(announced, true).catch((error) => error);
+    expect(first.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '1234 AB', 'Europe/Amsterdam', 'spring-gds');
+    expect(routing.failures.ParcelsApp).toMatchObject({ kind: 'input_required' });
+    expect(routing.provider_input_needed).toEqual({ provider: 'ParcelsApp', field: 'dpdPostcode', refused_postcode: '1234 AB' });
+    expect(recorded.mock.calls).toEqual([['ParcelsApp', 'asked']]);
+    recorded.mockClear();
+    // A request saved while the parcel held no postcode is answered by the one it holds now: if that is refused
+    // too, the request comes back for it, counted as a postcode given that is still required.
+    const answered = gated(setup(time, { preflightInputNeeded }));
+    const again = await answered.router.fetch({ ...announced, carrier_data: { routing: state({ configured_carrier: 'spring-gds',
+      provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } }) } }, true).catch((error) => error);
+    expect(again.routing.provider_input_needed).toEqual({ provider: 'ParcelsApp', field: 'dpdPostcode', refused_postcode: '1234 AB' });
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'supplied');
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'still_required');
     expect(recorded).not.toHaveBeenCalledWith(expect.anything(), 'asked');
-    // Without one, the request stands.
+    recorded.mockClear();
+    // The Add preflight asked without the postcode, and a provider that was never asked for one asks nothing.
+    const quiet = setup(time, { preflightInputNeeded });
+    quiet.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+    quiet.universal.mockImplementation(async (source) => { throw new NoHistoryError(source); });
+    const unasked = await quiet.router.fetch(announced, true).catch((error) => error);
+    expect(unasked.routing).not.toHaveProperty('provider_input_needed');
+    expect(recorded).not.toHaveBeenCalled();
+    // Without a postcode, the request stands, naming none refused.
     const bare = setup(time, { preflightInputNeeded });
     bare.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
     bare.universal.mockRejectedValue(new NoHistoryError('Ship24'));
-    const { routing } = await bare.router.fetch({ ...announced, dpd_postcode: null }, true).catch((error) => error);
-    expect(routing.provider_input_needed).toEqual({ provider: '17TRACK', field: 'dpdPostcode' });
+    const without = await bare.router.fetch({ ...announced, dpd_postcode: null, carrier_data: { routing: routing as JsonObject } }, true)
+      .catch((error) => error);
+    expect(without.routing.provider_input_needed).toEqual({ provider: 'ParcelsApp', field: 'dpdPostcode' });
+    // A postcode the provider was given in a field of its own beside the parcel's is not the parcel's to check.
+    const separate = gated(setup(time));
+    const beside = await separate.router.fetch({ ...announced, carrier_data: { universal_input: { number: '3SABCD826405193', postcode: '5678 CD' } } }, true)
+      .catch((error) => error);
+    expect(separate.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '5678 CD', 'Europe/Amsterdam', 'spring-gds');
+    expect(beside.routing).not.toHaveProperty('provider_input_needed');
+  });
+  it('keeps one request for a refused postcode until the owner changes it or a source answers', async () => {
+    const recorded = vi.spyOn(metrics, 'recordProviderInput').mockImplementation(() => undefined);
+    const asked = (value: ReturnType<typeof setup>) => value.universal.mock.calls.map(([source]) => source);
+    const request = { provider: 'ParcelsApp', field: 'dpdPostcode', refused_postcode: '1234 AB' };
+    const wait = { count: 1, kind: 'input_required', retry_at: '2026-09-10T12:15:00.000Z' };
+    const standing = state({ configured_carrier: 'spring-gds', provider_input_needed: request, failures: { ParcelsApp: wait } });
+    const refused = parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB',
+      carrier_data: { routing: standing } });
+    const gated = (value: ReturnType<typeof setup>) => {
+      value.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+      value.universal.mockImplementation(async (source) => {
+        throw source === 'ParcelsApp' ? new InputRequiredError(source, 'postcode') : new NoHistoryError(source);
+      });
+      return value;
+    };
+    const later = new Date('2026-09-10T13:00:00Z');
+    // Nothing changed: while the provider's wait lasts, checks leave it, and the request stands as it was.
+    const waiting = gated(setup(new Date('2026-09-10T12:05:00Z')));
+    const kept = await waiting.router.fetch(refused, true).catch((error) => error);
+    expect(asked(waiting)).not.toContain('ParcelsApp');
+    expect(kept.routing.provider_input_needed).toEqual(request);
+    expect(kept.routing.failures.ParcelsApp).toEqual(wait);
+    // A scheduled check asks it again after its wait, as it may find the parcel once the carrier lists it; refusing
+    // the same postcode keeps the one request, counted once already, and the wait grows.
+    const scheduled = gated(setup(later));
+    const repeated = await scheduled.router.fetch(refused, true).catch((error) => error);
+    expect(asked(scheduled)).toContain('ParcelsApp');
+    expect(repeated.routing.provider_input_needed).toEqual(request);
+    expect(repeated.routing.failures.ParcelsApp).toMatchObject({ kind: 'input_required', count: 2 });
+    expect(recorded).not.toHaveBeenCalled();
+    // The owner changes the postcode before the provider's wait is over: it is asked at once with the new one.
+    const changed = { ...refused, dpd_postcode: '1234 AC' };
+    const corrected = setup(new Date('2026-09-10T12:05:00Z'));
+    corrected.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+    corrected.universal.mockImplementation(async (source) => { if (source === 'ParcelsApp') return history(); throw new NoHistoryError(source); });
+    const result = await corrected.router.fetch(changed, false);
+    expect(corrected.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '1234 AC', 'Europe/Amsterdam', 'spring-gds');
+    expect(result.result.tracking_provider).toBe('ParcelsApp');
+    expect(result.result.routing).not.toHaveProperty('provider_input_needed');
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'supplied');
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'history');
+    expect(recorded).not.toHaveBeenCalledWith(expect.anything(), 'asked');
+    recorded.mockClear();
+    // A new postcode the provider still asks with is the one the request names, counted as still required.
+    const stillGated = gated(setup(new Date('2026-09-10T12:05:00Z')));
+    const renamed = await stillGated.router.fetch(changed, false).catch((error) => error);
+    expect(renamed.routing.provider_input_needed).toEqual({ provider: 'ParcelsApp', field: 'dpdPostcode', refused_postcode: '1234 AC' });
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'supplied');
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'still_required');
+    expect(recorded).not.toHaveBeenCalledWith(expect.anything(), 'asked');
+    // Another source answering ends the request, the postcode unchanged.
+    const tracked = setup(later);
+    tracked.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
+    tracked.universal.mockImplementation(async (source) => { if (source === 'Ship24') return history(); throw new NoHistoryError(source); });
+    const answered = await tracked.router.fetch(refused, true);
+    expect(answered.result.tracking_provider).toBe('Ship24');
+    expect(answered.result.routing).not.toHaveProperty('provider_input_needed');
+    // So does finding the request implausible.
+    const misread = gated(setup(later));
+    const dropped = await misread.router.fetch({ ...refused, carrier: 'unknown', tracking_number: 'NOSHAPE42',
+      carrier_data: { routing: { ...standing, configured_carrier: 'unknown' } } }, false).catch((error) => error);
+    expect(dropped.routing).not.toHaveProperty('provider_input_needed');
   });
   it('asks a provider that wanted a postcode at once when the owner answers in the carrier\'s field', async () => {
     // ParcelsApp asked at 12:00; the owner typed PostNL's postcode at 12:05, which leaves the routing as it was.

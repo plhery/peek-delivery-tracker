@@ -123,12 +123,16 @@ struct ProviderPostcodeRequest: Equatable {
     /// The carrier's own postcode field answers it when the carrier has one (PostNL's for a 3S parcel): every
     /// provider receives that postcode. Otherwise the request has a field of its own.
     let inCarrierField: Bool
+    /// The parcel's postcode, in the carrier's field, that the provider was sent and asked for one with all the same:
+    /// the owner is asked to check it.
+    let refusedPostcode: String?
 
     /// The request while the parcel stays with `carrier`, whose fields are `requirements`; nil when none is made.
     init?(parcel: Parcel, carrier: CarrierID, requirements: [CarrierRequirement]) {
         guard carrier == parcel.carrier, let needed = parcel.carrierData?.routing?.providerInputNeeded else { return nil }
         provider = needed.provider
         inCarrierField = requirements.contains { $0.field == .dpdPostcode }
+        refusedPostcode = inCarrierField ? parcel.providerRefusedPostcode : nil
     }
 
     /// The carrier's fields, the postcode the provider asks for required.

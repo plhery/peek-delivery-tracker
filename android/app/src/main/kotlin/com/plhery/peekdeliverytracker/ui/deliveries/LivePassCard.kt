@@ -79,6 +79,8 @@ import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.isEmailMuted
 import com.plhery.peekdeliverytracker.core.likelyCarrierPrompt
 import com.plhery.peekdeliverytracker.core.nonTrackingShape
+import com.plhery.peekdeliverytracker.core.providerRefusedPostcode
+import com.plhery.peekdeliverytracker.core.providerRequest
 import com.plhery.peekdeliverytracker.core.refusedPostcode
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
@@ -308,14 +310,15 @@ internal fun LivePassCard(
             AutomaticCarrierNotice(parcel)
             val needed = parcel.carrierData?.routing?.providerInputNeeded
             if (editable && needed != null && !parcel.isArchived) {
+                val refused = parcel.providerRefusedPostcode
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        localizer.text("detail.providerInputNeeded", mapOf("provider" to needed.provider)),
+                        localizer.providerRequest(needed.provider, refused),
                         color = colors.label,
                         style = type.footnote.sfLines(),
                     )
                     Text(
-                        localizer.text("detail.inputNeededAction"),
+                        localizer.text(if (refused == null) "detail.inputNeededAction" else "detail.editPostcode"),
                         Modifier
                             .accessibilityFocus(neededFocus)
                             .button(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null, neededFocus) },

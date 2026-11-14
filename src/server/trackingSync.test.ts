@@ -6051,9 +6051,10 @@ describe('TrackingSyncService', () => {
     }
   });
 
-  it.each(['listed', 'unlisted'] as const)('saves a PostNL parcel only announced, %s at its postcode, without asking for it again', async (domestic) => {
+  it.each(['listed', 'unlisted'] as const)('saves a PostNL parcel only announced, %s at its postcode, asking to check it only while nothing lists it', async (domestic) => {
     // PostNL's own tracker lists an announced 3S parcel at its postcode without scans; its international
-    // one knows no such barcode. A provider still gated with the postcode asks the owner nothing more.
+    // one knows no such barcode. A provider still gated with the postcode asks the owner to check it,
+    // unless PostNL lists the parcel at it.
     const number = '3SABCD826405193';
     const fetcher = vi.fn<typeof fetch>().mockImplementation(async (url) => {
       const address = String(url);
@@ -6080,7 +6081,8 @@ describe('TrackingSyncService', () => {
     const values = client.updatePackage.mock.calls.at(-1)![1];
     expect(values).toMatchObject(domestic === 'listed' ? { current_stage: 'registered', sync_status: 'ok', sync_error: null }
       : { sync_status: 'waiting', sync_error: null });
-    expect(values.carrier_data.routing).not.toHaveProperty('provider_input_needed');
+    if (domestic === 'listed') expect(values.carrier_data.routing).not.toHaveProperty('provider_input_needed');
+    else expect(values.carrier_data.routing.provider_input_needed).toEqual({ provider: 'ParcelsApp', field: 'dpdPostcode', refused_postcode: '1234 AB' });
     expect(values.carrier_data.routing).not.toHaveProperty('postcode_refused');
   });
 

@@ -21,6 +21,7 @@ import { rememberedPostcodeField, type GivenPostcode } from '../lib/postcodeMemo
 import { useI18n } from '../i18n';
 import { useSheetDialog } from '../lib/modal';
 import { useNumberRefusal } from '../lib/numberRefusal';
+import { providerRequestText } from '../lib/parcelStatus';
 import type {
   CarrierId,
   ParcelCarrierInput,
@@ -255,7 +256,7 @@ export function ChangeCarrierSheet({
                 </button>
               )}
               {providerAsks && requirement.field === 'dpdPostcode' ? <small className="field__help">
-                {t('detail.providerInputNeeded', { provider: parcel.providerInputNeeded!.provider })}
+                {providerRequestText(parcel.providerInputNeeded!, t)}
               </small> : requirement.help && (
                 <small className="field__help">
                   {t(requirementHelpKey(chosenCarrier, requirement), { carrier: carrier.name })}

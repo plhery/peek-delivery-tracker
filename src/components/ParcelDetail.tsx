@@ -42,6 +42,7 @@ import {
   likelyCarrier,
   parcelHasCarrierUpdate,
   writtenAheadNote,
+  providerRequestText,
 } from '../lib/parcelStatus';
 import { awaitingHandover, currentEvent } from '../lib/stages';
 import { parcelAttention } from '../lib/parcelPriority';
@@ -584,10 +585,10 @@ export function ParcelDetail({
         </div>
         <AutoCarrierNotice parcel={parcel} className="detail__sender" />
         {parcel.providerInputNeeded && !parcel.archivedAt && <div className="detail__input-needed" role="status">
-          <p>{t('detail.providerInputNeeded', { provider: parcel.providerInputNeeded.provider })}</p>
+          <p>{providerRequestText(parcel.providerInputNeeded, t)}</p>
           <button type="button" className="text-button" onClick={() => {
             setCarrierSheetInitial(parcel.carrier); setEditingCarrier(true);
-          }}>{t('detail.inputNeededAction')}</button>
+          }}>{t(parcel.providerInputNeeded.refusedPostcode ? 'detail.editPostcode' : 'detail.inputNeededAction')}</button>
         </div>}
         {postcodePrompt && (
           <div className="detail__input-needed" role="status">

@@ -87,6 +87,19 @@ describe('createApiRepo', () => {
     expect(parcel.events.map((event) => event.description)).not.toContain('Delivered');
   });
 
+  it('names the postcode a provider asked for one with while it is still the parcel’s', async () => {
+    const asked = (postcode: string | null, refused?: string) => ({ ...packageRow, dpd_postcode: postcode, carrier_data: { ...packageRow.carrier_data,
+      routing: { provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode', ...(refused ? { refused_postcode: refused } : {}) } } } });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response({ packages: [asked('1234 AB', '1234 AB'), asked('1234 AC', '1234 AB'), asked(null)] })));
+    const parcels = await createApiRepo().list();
+    expect(parcels.map((parcel) => parcel.providerInputNeeded)).toEqual([
+      { provider: 'ParcelsApp', field: 'dpdPostcode', refusedPostcode: '1234 AB' },
+      // Changed since: the next check answers.
+      { provider: 'ParcelsApp', field: 'dpdPostcode' },
+      { provider: 'ParcelsApp', field: 'dpdPostcode' },
+    ]);
+  });
+
   it('returns the merged parcel after refreshing its former id', async () => {
     const originalId = '10000000-0000-0000-0000-000000000099';
     vi.stubGlobal('fetch', vi.fn()

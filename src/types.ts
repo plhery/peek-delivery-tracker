@@ -41,8 +41,11 @@ export interface Parcel {
   autoChangedFrom?: CarrierId;
   autoChangedTo?: CarrierId;
   autoChangedAt?: string;
-  /** A carrier that knows the number but needs this input before it can track the parcel. */
-  providerInputNeeded?: { provider: string; field: 'dpdPostcode' };
+  /**
+   * A universal provider asking for the delivery postcode. `refusedPostcode`: the parcel's own postcode, which the
+   * provider was sent and asked again with: the owner is asked to check it.
+   */
+  providerInputNeeded?: { provider: string; field: 'dpdPostcode'; refusedPostcode?: string };
   nextCheckAt?: string;
   inputNeeded?: { carrier: CarrierId; field: 'dpdPostcode' | 'trackingUrl' };
   /** A carrier the number points to that needs the delivery postcode before it can be asked about it. */

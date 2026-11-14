@@ -4399,6 +4399,7 @@ struct CarrierInputSuggested: Codable, Equatable, Hashable, Sendable {
 struct ProviderInputNeeded: Codable, Equatable, Hashable, Sendable {
     var provider: String
     var field: ProviderInputNeededField
+    var refusedPostcode: String? = nil
 }
 
 enum CarrierInputNeededField: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {

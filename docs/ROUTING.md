@@ -51,9 +51,11 @@ policy. These caches are transient; persisted routing remains the source of retr
 
 An explicit universal postcode requirement is retained separately from carrier inputs.
 The owner supplies it through the carrier editor, in the carrier's own postcode field when it
-has one (PostNL's for a 3S number), which every provider receives: a parcel holding a postcode
-of its own is asked for none, even by a provider that stays gated with it. Otherwise the
-postcode goes in a field of its own. That one is bound to the number providers are
+has one (PostNL's for a 3S number), which every provider receives, and otherwise in a field
+of its own. A provider sent the parcel's own postcode that asks for one all the same asks the
+owner to check it: the request names that postcode, which the carrier's field offers to
+correct, and stands until the owner changes it or a source finds the parcel. A refusal of a
+separate postcode given beside the parcel's own asks nothing. The separate one is bound to the number providers are
 asked about (the delivery leg's after a handoff), kept across checks, kept private, and
 ignored for a different tracking number, and replaced by a new postcode the owner gives the
 parcel in a carrier's own field. Updating it invalidates an older
@@ -62,6 +64,9 @@ postcode in the carrier's own field answers a request. Other failure backoffs st
 open the shared provider circuit. Another source with progress clears the prompt.
 While the parcel has no postcode to send, scheduled checks skip a provider that asked for
 one, since it would only ask again; a refresh by hand still asks once its backoff is over.
+One that asked with the parcel's own postcode is asked again after its backoff, as it may
+find the parcel once the carrier lists it; asking again for the same postcode keeps the one
+request.
 A postcode request for a number whose shape fits no carrier, on a parcel that names no
 carrier taking a postcode, is the provider misreading the number: it counts as
 `no_history` and asks the owner nothing.

@@ -26,6 +26,7 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
@@ -571,6 +572,35 @@ class ChangeCarrierTest {
         settle()
         assertEquals(
             listOf(FakeDeliveries.CarrierChangeRequest(asked.id, CarrierId.SpringGDS, null, "1234 AB", null, null)),
+            source.carrierRequests,
+        )
+    }
+
+    @Test
+    fun aProvidersRequestWithTheParcelsOwnPostcodeOffersItToCorrect() {
+        val asked = parcel(
+            5, "Postcard", CarrierId.SpringGDS, "3SABCD826405193", postcode = "1234 AB",
+            data = CarrierData(
+                destinationCountry = "NL",
+                routing = CarrierDataRouting(
+                    providerInputNeeded = ProviderInputNeeded("Example Provider", ProviderInputNeededField.DpdPostcode, refusedPostcode = "1234 AB"),
+                ),
+            ),
+        )
+        show(listOf(lamp, chair, asked, boots))
+        compose.openCard(asked.label)
+        settle()
+        compose.onNode(hasText("Edit postcode") and hasClickAction()).performClick()
+        settle()
+        node(CHANGE_CARRIER_POSTCODE).assertTextContains("1234 AB")
+        compose.onNode(hasText("Example Provider didn’t find this parcel with postcode 1234 AB.")).assertExists()
+        // The same postcode again changes nothing; a corrected one is sent.
+        node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
+        node(CHANGE_CARRIER_POSTCODE).performTextReplacement("1234 ac")
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.CarrierChangeRequest(asked.id, CarrierId.SpringGDS, null, "1234 AC", null, null)),
             source.carrierRequests,
         )
     }

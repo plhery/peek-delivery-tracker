@@ -379,9 +379,12 @@ struct ParcelDetailView: View {
                 }
                 AutomaticCarrierNotice(parcel: parcel)
                 if editable, let needed = parcel.carrierData?.routing?.providerInputNeeded, !parcel.isArchived {
+                    let refused = parcel.providerRefusedPostcode
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(localizer.text("detail.providerInputNeeded", ["provider": needed.provider]))
-                        Button(localizer.text("detail.inputNeededAction")) { carrierEditor = CarrierEditorRequest() }
+                        Text(localizer.providerRequest(needed.provider, refused: refused))
+                        Button(localizer.text(refused == nil ? "detail.inputNeededAction" : "detail.editPostcode")) {
+                            carrierEditor = CarrierEditorRequest()
+                        }
                     }.font(.footnote)
                 }
                 if editable {
@@ -1227,6 +1230,15 @@ private struct ParcelDeleteConfirmation: ViewModifier {
     }
 }
 
+extension Localizer {
+    /// A tracking provider's postcode request as the parcel page and the carrier editor word it: the provider needs the
+    /// delivery postcode, or found no parcel with the parcel's own (`refused`), which its owner is asked to check.
+    func providerRequest(_ provider: String, refused: String?) -> String {
+        guard let refused else { return text("detail.providerInputNeeded", ["provider": provider]) }
+        return text("detail.postcodeRefused", ["carrier": provider, "postcode": refused])
+    }
+}
+
 struct ChangeCarrierView: View {
     let parcel: Parcel
 
@@ -1505,7 +1517,7 @@ struct ChangeCarrierView: View {
     private var requirementsHelp: String? {
         let carrier = ["carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName]
         let postcodeHelp: String? = if let request = providerRequest, request.inCarrierField {
-            localizer.text("detail.providerInputNeeded", ["provider": request.provider])
+            localizer.providerRequest(request.provider, refused: request.refusedPostcode)
         } else if postcodeRequirement?.isOptional == true {
             localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), carrier)
         } else {

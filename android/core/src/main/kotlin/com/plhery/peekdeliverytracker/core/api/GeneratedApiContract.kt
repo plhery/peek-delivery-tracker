@@ -4379,6 +4379,7 @@ data class CarrierInputSuggested(
 data class ProviderInputNeeded(
     val provider: String,
     val field: ProviderInputNeededField,
+    @SerialName("refused_postcode") val refusedPostcode: String? = null,
 )
 
 @Serializable

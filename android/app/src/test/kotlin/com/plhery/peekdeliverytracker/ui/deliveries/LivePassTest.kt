@@ -476,6 +476,13 @@ class LivePassTest {
         assertFalse(exists(PAGE_PROMPT))
         assertTrue(textExists("Example Post needs the delivery postcode to look up this parcel."))
         compose.onNode(hasText("Add postcode") and hasClickAction()).assertExists()
+
+        // Asked for one all the same with the parcel's own postcode: the owner is asked to check it.
+        val refused = ProviderInputNeeded("Example Post", ProviderInputNeededField.DpdPostcode, refusedPostcode = "1234 AB")
+        parcel = birthday.copy(dpdPostcode = "1234 AB", carrierData = CarrierData(routing = CarrierDataRouting(providerInputNeeded = refused)))
+        compose.waitForIdle()
+        assertTrue(textExists("Example Post didn’t find this parcel with postcode 1234 AB."))
+        compose.onNode(hasText("Edit postcode") and hasClickAction()).assertExists()
     }
 
     @Test

@@ -1169,6 +1169,33 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertNil(request(parcel(.springGDS, "3SABCD826405193", asked: false)))
     }
 
+    @MainActor
+    func testAProvidersRequestNamesTheParcelsPostcodeItAskedForOneWithAllTheSame() throws {
+        func parcel(postcode: String?, refused: String?) -> Parcel {
+            let needed = ProviderInputNeeded(provider: "ParcelsApp", field: .dpdPostcode, refusedPostcode: refused)
+            return Parcel(id: UUID(), trackingNumber: "3SABCD826405193", label: "", carrier: .springGDS, createdAt: "2026-10-01T08:00:00Z",
+                          syncStatus: .waiting, dpdPostcode: postcode,
+                          carrierData: CarrierData(routing: CarrierDataRouting(providerInputNeeded: needed)), notificationsMuted: false)
+        }
+        func request(_ parcel: Parcel) throws -> ProviderPostcodeRequest {
+            try XCTUnwrap(ProviderPostcodeRequest(parcel: parcel, carrier: parcel.carrier,
+                                                  requirements: catalog.requirements(for: parcel.carrier, trackingNumber: parcel.trackingNumber)))
+        }
+        let refused = parcel(postcode: "1234 AB", refused: "1234 AB")
+        XCTAssertEqual(refused.providerRefusedPostcode, "1234 AB")
+        XCTAssertEqual(try request(refused).refusedPostcode, "1234 AB")
+        // Changed since, the next check answers; without a postcode, the provider needs one.
+        XCTAssertNil(parcel(postcode: "1234 AC", refused: "1234 AB").providerRefusedPostcode)
+        XCTAssertNil(try request(parcel(postcode: nil, refused: nil)).refusedPostcode)
+
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        XCTAssertEqual(localizer.providerRequest("ParcelsApp", refused: "1234 AB"), "ParcelsApp didn’t find this parcel with postcode 1234 AB.")
+        XCTAssertEqual(localizer.providerRequest("ParcelsApp", refused: nil), "ParcelsApp needs the delivery postcode to look up this parcel.")
+    }
+
     func testTheDevicesCountryIsItsClocksThenItsRegionSetting() {
         XCTAssertEqual(CarrierCatalog.deviceCountry(timeZone: "Europe/Zurich", region: "FR"), "CH")
         XCTAssertEqual(CarrierCatalog.deviceCountry(timeZone: "America/New_York", region: "FR"), "FR", "A clock several countries keep")

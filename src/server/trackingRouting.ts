@@ -845,7 +845,10 @@ export class TrackingRouter {
       state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined]);
     // A request is saved only while the parcel holds no postcode: one it holds now was given since, as the
     // owner's answer in the carrier's field, and the providers that asked wait for it no longer.
+    // Counted as the separate field's answer was, with what this check's lookups find with it.
+    const answeredInField = Boolean(postcode && state.provider_input_needed);
     if (postcode && state.provider_input_needed) {
+      recordProviderInput(state.provider_input_needed.provider, 'supplied');
       for (const [provider, failure] of Object.entries(state.failures)) {
         if (failure.kind === 'input_required' && !directCarrier(provider)) delete state.failures[provider];
       }
@@ -1794,7 +1797,7 @@ export class TrackingRouter {
       } finally {
         // A reused answer was counted, and its lease released, by the check that asked.
         if (token) {
-          if (providerInput) {
+          if (providerInput || answeredInField) {
             // Every provider receives the postcode; supported sources can submit it.
             const step = kind === null ? 'history' : kind === 'input_required' ? 'still_required'
               : kind === 'not_found' || kind === 'no_history' ? 'no_history' : 'failed';

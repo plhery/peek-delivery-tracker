@@ -3920,12 +3920,16 @@ describe('universal preflight and recipient input', () => {
       failures: { ParcelsApp: { count: 2, kind: 'input_required', retry_at: '2026-09-10T12:25:00.000Z' },
         'spring-gds': { count: 1, kind: 'input_required', retry_at: '2026-09-10T12:15:00.000Z' } } });
     const answered = parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB', carrier_data: { routing: asked } });
+    const recorded = vi.spyOn(metrics, 'recordProviderInput').mockImplementation(() => undefined);
     const value = setup(new Date('2026-09-10T12:05:00Z'));
     value.direct.mockRejectedValue(new NoHistoryError('spring-gds'));
     value.universal.mockImplementation(async (source) => { if (source === 'ParcelsApp') return history(); throw new NoHistoryError(source); });
     const result = await value.router.fetch(answered, false);
     expect(value.universal).toHaveBeenCalledWith('ParcelsApp', '3SABCD826405193', expect.any(Number), '1234 AB', 'Europe/Amsterdam', 'spring-gds');
     expect(result.result.tracking_provider).toBe('ParcelsApp');
+    // The answer counts as given to the provider that asked, as in the field it replaced.
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'supplied');
+    expect(recorded).toHaveBeenCalledWith('ParcelsApp', 'history');
     // The carrier's own wait is its own.
     expect((result.result.routing as JsonObject & { failures: JsonObject }).failures['spring-gds']).toMatchObject({ kind: 'input_required' });
     // A postcode held before the request was refused with it: that wait stands.

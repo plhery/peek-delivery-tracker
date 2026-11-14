@@ -1768,7 +1768,7 @@ final class ParcelLogicTests: XCTestCase {
     func testEstimatesKeepOnlyTodaysHoursWhileOutForDeliveryAndHideObsoleteDates() {
         let id = UUID()
         let now = DateParser.date("2026-09-07T12:00:00Z")!
-        let localizer = Localizer()
+        let localizer = Localizer(systemUses24HourTime: { true })
         localizer.language = .fr
         for stage in [TrackingStage.delivered, .returned, .failedAttempt, .readyForPickup, .exception] {
             var parcel = makeParcel(id: id, events: [event(id, stage, "2026-09-07T10:00:00Z")])
@@ -1868,7 +1868,7 @@ final class ParcelLogicTests: XCTestCase {
 
     @MainActor
     func testALinksCardSaysWhenAParcelArrivesAndAGiftNoMoreThanThat() {
-        let localizer = Localizer()
+        let localizer = Localizer(systemUses24HourTime: { true })
         localizer.language = .en
         let id = UUID()
         let now = Date()
@@ -3845,7 +3845,7 @@ extension ParcelLogicTests {
     }
 
     @MainActor func testDayKeysAndEstimatesAreStableAcrossRepeatedFormatting() throws {
-        let localizer = Localizer()
+        let localizer = Localizer(systemUses24HourTime: { true })
         localizer.language = .en
         let day = try XCTUnwrap(DateParser.deliveryDate("2026-09-12"))
         XCTAssertEqual(ParcelOrganizer.dayKey(day), "2026-09-12")
@@ -4513,7 +4513,7 @@ extension ParcelLogicTests {
 
     @MainActor
     func testAPlannedStepReadsItsDayAsTheJournalDoesAndItsTimeWhenItHasOne() throws {
-        let localizer = Localizer()
+        let localizer = Localizer(systemUses24HourTime: { true })
         let originalLanguage = localizer.language
         defer { localizer.language = originalLanguage }
         let calendar = Calendar.current

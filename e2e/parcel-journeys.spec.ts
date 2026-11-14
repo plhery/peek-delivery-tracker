@@ -376,7 +376,8 @@ test('keeps translated add-parcel guidance readable in every app language', asyn
     ['en', 'Add a parcel', 'Add a parcel', 'Close'],
   ] as const) {
     await page.locator('.account-trigger').click();
-    await page.locator('.language-control select').selectOption(locale);
+    // The language is the first of the settings' choices, before the time format and the distance units.
+    await page.locator('.language-control select').first().selectOption(locale);
     await page.keyboard.press('Escape');
     await expect(page.locator('.settings-sheet')).toBeHidden();
     await expect(page.locator('html')).toHaveAttribute('lang', documentLanguage(locale));

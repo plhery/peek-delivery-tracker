@@ -173,7 +173,8 @@ test('a gift stays a surprise until it is delivered, then shows its note and wha
   await expect(status(page)).toHaveText('Delivered');
   await show(page, recipient, link);
   await expect(status(recipient)).toHaveText('It’s here');
-  await expect(recipient.locator('.peekp-card__detail')).toHaveText(/^Delivered today at \d\d:\d\d$/);
+  // Times follow the browser, and Playwright's is American: a 12-hour clock.
+  await expect(recipient.locator('.peekp-card__detail')).toHaveText(/^Delivered today at \d{1,2}:\d\d [AP]M$/);
   await expect(recipient.getByText('Happy birthday, Alex! Enjoy every piece.')).toBeVisible();
   await expect(recipient.getByText('— Sam')).toBeVisible();
   await expect(recipient.locator('.peekp-giftnote__inside')).toHaveText('Inside: Belgian chocolate');

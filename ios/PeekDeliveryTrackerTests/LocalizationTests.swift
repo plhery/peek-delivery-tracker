@@ -68,7 +68,7 @@ final class LocalizationTests: XCTestCase {
     }
 
     func testDeliveryWindowNamesTheDayOfAWindowWithinOneDayOnce() throws {
-        let localizer = Localizer()
+        let localizer = Localizer(systemUses24HourTime: { true })
         localizer.language = .en
         let now = try XCTUnwrap(DateParser.deliveryDate("2026-09-09"))
         func at(_ day: Int, _ hour: Int) throws -> String {
@@ -409,7 +409,7 @@ final class LocalizationTests: XCTestCase {
     }
 
     func testRelativeDeliveryDatesInEveryLanguage() throws {
-        let localizer = Localizer()
+        let localizer = Localizer(systemUses24HourTime: { true })
         let now = try XCTUnwrap(DateParser.deliveryDate("2026-09-09"))
         let cases: [(AppLanguage, [String])] = [
             (.en, ["yesterday", "today", "tomorrow"]),

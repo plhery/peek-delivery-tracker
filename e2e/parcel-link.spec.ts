@@ -79,8 +79,9 @@ test('a manual check moves the fictional parcel on, down to delivery, where the 
   await expect(page).toHaveTitle(/^Out for delivery · /);
   await check.click();
   await expect(status(page)).toHaveText('Delivered');
-  await expect(page).toHaveTitle(/^Delivered at \d\d:\d\d · Peek$/);
-  await expect(page.locator('.peekp-card__detail')).toHaveText(/^Today, \d\d:\d\d$/);
+  // Times follow the browser, and Playwright's is American: a 12-hour clock.
+  await expect(page).toHaveTitle(/^Delivered at \d{1,2}:\d\d [AP]M · Peek$/);
+  await expect(page.locator('.peekp-card__detail')).toHaveText(/^Today, \d{1,2}:\d\d [AP]M$/);
   await expect(page.getByText(/^Peek forgets this parcel on \d+ \p{L}+\.$/u)).toBeVisible();
   // The journey is over: nothing is left to check.
   await expect(check).toHaveCount(0);

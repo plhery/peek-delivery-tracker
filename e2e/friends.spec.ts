@@ -69,7 +69,8 @@ test('Circle and sharing fit narrow screens in all languages', async ({ page }) 
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
   for (const language of ['fr', 'de', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh', 'en'] as const) {
     await page.locator('.account-trigger').click();
-    await page.getByRole('dialog').getByRole('combobox').selectOption(language);
+    // The language is the first of the settings' choices, before the time format and the distance units.
+    await page.getByRole('dialog').getByRole('combobox').first().selectOption(language);
     await expect(page.locator('html')).toHaveAttribute('lang', documentLanguage(language));
     await page.keyboard.press('Escape');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

@@ -29,7 +29,6 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
-import androidx.glance.layout.size
 import androidx.glance.layout.width
 import androidx.glance.semantics.contentDescription
 import androidx.glance.semantics.semantics
@@ -44,7 +43,6 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.listDay
@@ -56,67 +54,122 @@ import com.plhery.peekdeliverytracker.core.metadata
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.symbols.drawSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.materialSymbols
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import com.plhery.peekdeliverytracker.ui.theme.toColor
 import java.util.Locale
 import kotlin.math.floor
+import kotlin.math.roundToInt
 
-// The "Parcels" widget's look: the parcels on their way as the app's list shows them, one row each, on the app's page,
-// as many as the widget's height holds (15 at most), then a line counting the rest. Each row is the stage's symbol in
-// its colour, the parcel's name, and its stage and day, as the app published them (DeliveryWidgetStage). Narrow, a row
-// takes two lines, the name over the stage and day; wide, one, the stage and day at its end. Text is the existing
-// widget's (WidgetText), and as there, the layout works out from the measured text how many rows it keeps. Names keep
-// one size down the list and end in an ellipsis where they are too long; a line too long for its room keeps the day.
+// The "Parcels" widget's look, the iPhone's list widget (ParcelListWidget.swift): the parcels on their way as the app's
+// list shows them, one row each, on the app's page, then a line counting the rest at the widget's foot. Each row is the
+// stage's symbol in its colour, the parcel's name, and its stage and day, as the app published them
+// (DeliveryWidgetStage). The widget's size stands for one of the iPhone's three ([ListLayout]): small, a column of rows
+// of two lines, the name over the stage and day; medium, two such columns; large, rows of one line, the stage and day at
+// their end. Text is the existing widget's (WidgetText), and as there, the layout works out from the measured text how
+// many rows it keeps. Names end in an ellipsis where they are too long; a line too long for its room keeps the day.
 
 /**
  * The widget's colours, light and dark as the launcher's mode picks: the app's page, and on it the system's label
  * colours the iPhone's list widget writes in (`.primary`, `.secondary`).
  */
 private object ListColors {
-    /** `color` light and dark, its own opacity times `alpha`. */
-    fun of(color: AdaptiveColor, alpha: Float = 1f): ColorProvider =
-        ColorProvider(day = color.light.toColor().faded(alpha), night = color.dark.toColor().faded(alpha))
-
-    private fun Color.faded(alpha: Float): Color = copy(alpha = this.alpha * alpha)
+    fun of(color: AdaptiveColor): ColorProvider = ColorProvider(day = color.light.toColor(), night = color.dark.toColor())
 
     val page = of(Brand.background)
     val primary = of(SystemColors.label)
     val secondary = of(SystemColors.secondaryLabel)
 }
 
+/** `ParcelListMetrics`: a row's name and the box of its stage's symbol, each smaller where [compact]. */
+internal class ListMetrics(val compact: Boolean, type: WidgetText) {
+    /** The width of the stage's symbol, which grows with the text (`@ScaledMetric`). */
+    val markWidth: Dp = if (compact) {
+        18.dp * (type.points(IosTextStyle.Caption) / IosTextStyle.Caption.pointSize(DynamicTypeSize.Large))
+    } else {
+        20.dp * (type.points(IosTextStyle.Footnote) / IosTextStyle.Footnote.pointSize(DynamicTypeSize.Large))
+    }
+
+    /** The symbol's box is three quarters as tall: wide symbols, the bicycle and the truck, take its width, the others its height. */
+    val markHeight: Dp = (markWidth.value * 0.75f).roundToInt().dp
+    val markSpacing: Dp = if (compact) 5.dp else 6.dp
+    val rowSpacing: Dp = if (compact) 3.dp else 5.dp
+
+    /** The name's size, semibold: caption where compact, else footnote. */
+    val namePoints: Float = type.points(if (compact) IosTextStyle.Caption else IosTextStyle.Footnote)
+}
+
 /**
- * What the list keeps at `size`: whether rows take one line ([wide]) or two, how many it shows and how many the last
- * line counts, and whether the app's header stands above them, which goes first where it would cost a row.
+ * What the list keeps at `size`: the iPhone's widget the size stands for ([size]), its rows' metrics, the parcels it
+ * shows in one column or two and how many the last line counts. As `ParcelListRows`, it tries its size's rows to a column
+ * (three, or fifteen for a large one), then each fewer, a small or medium widget in smaller type ([ListMetrics.compact])
+ * before it gives a row up, and keeps the first that the height holds, with the last line where parcels are left out.
  */
 internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText) {
     val locale: Locale = ExtensionLocalizer.locale(list.languageCode)
-    val wide = size.width >= WIDE_WIDTH
-    val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN_VERTICAL * 2)
-    val namePoints = type.points(IosTextStyle.Subheadline)
-    val linePoints = type.points(IosTextStyle.Caption)
-    val rowHeight: Dp = type.lineHeight(namePoints, FontWeight.Medium).let { name ->
-        if (wide) maxOf(name, ICON) else name + type.lineHeight(linePoints, FontWeight.Normal)
+    val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN * 2)
+
+    /** From [TALL_HEIGHT] the large widget, else from [WIDE_WIDTH] the medium one, else the small. */
+    val size: DeliveryWidgetList.Size = when {
+        size.height >= TALL_HEIGHT -> DeliveryWidgetList.Size.Large
+        size.width >= WIDE_WIDTH -> DeliveryWidgetList.Size.Medium
+        else -> DeliveryWidgetList.Size.Small
     }
-    val gap = if (wide) WIDE_GAP else NARROW_GAP
-    val moreHeight = type.lineHeight(linePoints, FontWeight.Medium)
-    val header: Boolean
+
+    /** Whether rows take one line, the stage and day at their end, as a large widget's: where it is wide enough. */
+    val lineRows = this.size == DeliveryWidgetList.Size.Large && size.width >= WIDE_WIDTH
+
+    /** The stage and day's size: caption beside the name, caption2 under it. */
+    val statusPoints: Float = type.points(if (lineRows) IosTextStyle.Caption else IosTextStyle.Caption2)
+    val morePoints: Float = type.points(IosTextStyle.Caption)
+    val moreHeight: Dp = type.lineHeight(morePoints, FontWeight.Medium)
+    val metrics: ListMetrics
+    val rowHeight: Dp
     val shown: DeliveryWidgetList.Shown
 
+    /** The rows in their columns: two in a medium widget once one can't hold them ([DeliveryWidgetList.columns]). */
+    val columns: List<List<DeliveryWidgetParcel>>
+
     /** The width a row leaves its words, past the stage's symbol. */
-    val words = room.width - ICON - ICON_GAP
+    val words: Dp
 
     init {
-        fun shown(height: Dp): DeliveryWidgetList.Shown =
-            list.shown(rows(height).coerceAtMost(DeliveryWidgetSelection.listLimit), rows(height - moreHeight - gap))
-        val withHeader = shown(room.height - headerHeight(type) - HEADER_GAP)
-        val without = shown(room.height)
-        header = withHeader.rows.size >= without.rows.size
-        shown = if (header) withHeader else without
+        val medium = this.size == DeliveryWidgetList.Size.Medium
+        val most = minOf(this.size.rows / if (medium) 2 else 1, list.parcels.size).coerceAtLeast(1)
+        val tries = (most downTo 1).flatMap { rows ->
+            if (this.size == DeliveryWidgetList.Size.Large) listOf(rows to false) else listOf(rows to false, rows to true)
+        }
+
+        class Try(val metrics: ListMetrics, val rowHeight: Dp, val shown: DeliveryWidgetList.Shown, val columns: List<List<DeliveryWidgetParcel>>) {
+            val height: Dp = (columns.maxOfOrNull { it.size } ?: 0).let { rows ->
+                rowHeight * rows + metrics.rowSpacing * (rows - 1).coerceAtLeast(0) +
+                    if (shown.more > 0) metrics.rowSpacing * 2 + moreHeight else 0.dp
+            }
+        }
+
+        fun attempt(rows: Int, compact: Boolean): Try {
+            val metrics = ListMetrics(compact, type)
+            val page = list.page(rows * if (medium) 2 else 1)
+            val columns = if (medium) DeliveryWidgetList.columns(page.rows, rows) else listOf(page.rows).filter { it.isNotEmpty() }
+            return Try(metrics, rowHeight(metrics), page, columns)
+        }
+        val kept = tries.asSequence().map { (rows, compact) -> attempt(rows, compact) }.firstOrNull { it.height <= room.height }
+            ?: tries.last().let { (rows, compact) -> attempt(rows, compact) }
+        metrics = kept.metrics
+        rowHeight = kept.rowHeight
+        shown = kept.shown
+        columns = kept.columns
+        val column = if (columns.size == 2) (room.width - COLUMN_GAP) / 2 else room.width
+        words = column - metrics.markWidth - metrics.markSpacing
     }
 
-    /** How many rows stand in `height`. */
-    private fun rows(height: Dp): Int = if (height < rowHeight) 0 else 1 + floor((height - rowHeight) / (rowHeight + gap)).toInt()
+    /** A row's height: its name over its line, or both on one line, and the symbol's box. */
+    private fun rowHeight(metrics: ListMetrics): Dp {
+        val name = type.lineHeight(metrics.namePoints, FontWeight.Medium)
+        val line = type.lineHeight(statusPoints, FontWeight.Normal)
+        return maxOf(if (lineRows) maxOf(name, line) else name + line, metrics.markHeight)
+    }
 }
 
 /**
@@ -130,7 +183,7 @@ fun ParcelsWidgetContent(list: DeliveryWidgetList, size: DpSize) {
     val type = WidgetText(context)
     Box(root().background(ListColors.page)) {
         PageTap(listIntent(context))
-        Box(GlanceModifier.fillMaxSize().padding(horizontal = MARGIN, vertical = MARGIN_VERTICAL)) {
+        Box(GlanceModifier.fillMaxSize().padding(MARGIN)) {
             when {
                 !list.enabled -> ListState("rectangle.slash", copy.text("widget.disabledTitle"), copy.text("widget.disabledDescription"), size, type)
                 list.parcels.isEmpty() -> ListState("shippingbox", copy.text("app.noneOnWay"), copy.text("app.emptyDescription"), size, type)
@@ -140,26 +193,40 @@ fun ParcelsWidgetContent(list: DeliveryWidgetList, size: DpSize) {
     }
 }
 
-/** The rows, in groups of five, as a layout of Glance's shows ten children at most. */
+/**
+ * The rows: in a medium widget's two columns, side by side, else down the widget in groups of five, as a layout of
+ * Glance's shows ten children at most; then the line counting the rest at the widget's foot, level with the names.
+ */
 @Composable
 private fun Rows(layout: ListLayout, copy: Localizer) {
     val context = LocalContext.current
+    val metrics = layout.metrics
     Column(GlanceModifier.fillMaxSize()) {
-        if (layout.header) ListHeader(layout.type, copy)
-        layout.shown.rows.chunked(5).forEachIndexed { group, rows ->
-            Column(GlanceModifier.fillMaxWidth()) {
-                rows.forEachIndexed { index, parcel ->
-                    ListRow(parcel, layout, top = if (group == 0 && index == 0) 0.dp else layout.gap)
+        if (layout.columns.size == 2) {
+            Row(GlanceModifier.fillMaxWidth()) {
+                layout.columns.forEachIndexed { index, column ->
+                    if (index > 0) Spacer(GlanceModifier.width(COLUMN_GAP))
+                    Column(GlanceModifier.defaultWeight()) {
+                        column.forEachIndexed { row, parcel -> ListRow(parcel, layout, top = if (row == 0) 0.dp else metrics.rowSpacing) }
+                    }
+                }
+            }
+        } else {
+            layout.columns.firstOrNull().orEmpty().chunked(5).forEachIndexed { group, rows ->
+                Column(GlanceModifier.fillMaxWidth()) {
+                    rows.forEachIndexed { index, parcel ->
+                        ListRow(parcel, layout, top = if (group == 0 && index == 0) 0.dp else metrics.rowSpacing)
+                    }
                 }
             }
         }
         if (layout.shown.more > 0) {
-            val more = moreParcels(copy, layout.shown.more)
+            Spacer(GlanceModifier.defaultWeight())
             Text(
-                more,
-                GlanceModifier.fillMaxWidth().padding(start = ICON + ICON_GAP, top = layout.gap).clickable(openList(context)),
+                moreParcels(copy, layout.shown.more),
+                GlanceModifier.fillMaxWidth().padding(start = metrics.markWidth + metrics.markSpacing, top = metrics.rowSpacing * 2).clickable(openList(context)),
                 maxLines = 1,
-                style = TextStyle(color = ListColors.secondary, fontSize = layout.type.sp(layout.linePoints), fontWeight = FontWeight.Medium),
+                style = TextStyle(color = ListColors.secondary, fontSize = layout.type.sp(layout.morePoints), fontWeight = FontWeight.Medium),
             )
         }
     }
@@ -180,7 +247,7 @@ private fun openList(context: Context): Action = actionStartActivity(listIntent(
 internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width: Dp): String {
     val whole = parcel.listLine.openingLine(layout.locale)
     val day = parcel.listDay?.openingLine(layout.locale) ?: return whole
-    fun fits(text: String) = layout.type.width(text, layout.linePoints, FontWeight.Normal) <= width
+    fun fits(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal) <= width
     return when {
         fits(whole) -> whole
         fits(day) -> day
@@ -193,122 +260,128 @@ internal fun rowDescription(parcel: DeliveryWidgetParcel): String =
     listOfNotNull(parcel.listName, parcel.carrier.takeIf { parcel.named != false }, parcel.listStatus, parcel.listDay).joinToString(", ")
 
 /**
+ * The stage and day a large widget's row ends in, `ParcelListLineRow`'s: the whole line where it fits beside the name,
+ * else what fits beside the name kept to [NAME_SHARE] of the widget ([fittingLine]); its width, and the gap before it.
+ */
+internal class LineRowEnd(val line: String, val width: Dp, val gap: Dp)
+
+internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineRowEnd {
+    val type = layout.type
+    val spacing = layout.metrics.markSpacing
+    val name = type.width(parcel.listName, layout.metrics.namePoints, FontWeight.Medium)
+    val whole = parcel.listLine.openingLine(layout.locale)
+    val wholeWidth = type.width(whole, layout.statusPoints, FontWeight.Normal)
+    // The name, a spacer at least END_GAP wide and the line, spaced as the symbol and the name.
+    val apart = spacing * 2 + END_GAP
+    if (name + apart + wholeWidth <= layout.words) return LineRowEnd(whole, wholeWidth, apart)
+    val room = (layout.words - spacing - END_GAP - layout.room.width * NAME_SHARE).coerceAtLeast(0.dp)
+    val line = fittingLine(parcel, layout, room)
+    return LineRowEnd(line, minOf(type.width(line, layout.statusPoints, FontWeight.Normal), room), spacing + END_GAP)
+}
+
+/**
  * A parcel's row, `top` below the one before it (Glance's padding is inside a view's height): the stage's symbol in its
- * colour, then its name over its stage and day, or, wide, its name and then its stage and day at the row's end, given
- * what the name leaves them and at least [LINE_SHARE] of the row ([fittingLine]).
+ * colour, then its name over its stage and day (`ParcelListStackedRow`), or, in a large widget, its name and then its
+ * stage and day at the row's end ([lineRowEnd]).
  */
 @Composable
 private fun ListRow(parcel: DeliveryWidgetParcel, layout: ListLayout, top: Dp) {
     val context = LocalContext.current
     val name = parcel.listName
     val type = layout.type
-    val nameStyle = TextStyle(color = ListColors.primary, fontSize = type.sp(layout.namePoints), fontWeight = FontWeight.Medium)
+    val metrics = layout.metrics
+    val nameStyle = TextStyle(color = ListColors.primary, fontSize = type.sp(metrics.namePoints), fontWeight = FontWeight.Medium)
+    val lineStyle = TextStyle(color = ListColors.secondary, fontSize = type.sp(layout.statusPoints))
     Row(
         GlanceModifier.fillMaxWidth().height(layout.rowHeight + top).padding(top = top).semantics { contentDescription = rowDescription(parcel) }.clickable(openParcel(context, parcel)),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        StageSymbol(parcel)
-        Spacer(GlanceModifier.width(ICON_GAP))
-        if (layout.wide) {
-            val words = layout.words - ROW_GAP
-            val room = maxOf(words - type.width(name, layout.namePoints, FontWeight.Medium), words * LINE_SHARE)
-            val line = fittingLine(parcel, layout, room)
-            val lineWidth = minOf(type.width(line, layout.linePoints, FontWeight.Normal), room)
+        StageSymbol(parcel, metrics)
+        Spacer(GlanceModifier.width(metrics.markSpacing))
+        if (layout.lineRows) {
+            val end = lineRowEnd(parcel, layout)
             Text(name, GlanceModifier.defaultWeight(), maxLines = 1, style = nameStyle)
-            Spacer(GlanceModifier.width(ROW_GAP))
-            Text(
-                line, GlanceModifier.width(lineWidth), maxLines = 1,
-                style = TextStyle(color = ListColors.secondary, fontSize = type.sp(layout.linePoints), textAlign = TextAlign.End),
-            )
+            Spacer(GlanceModifier.width(end.gap))
+            Text(end.line, GlanceModifier.width(end.width), maxLines = 1, style = lineStyle.copy(textAlign = TextAlign.End))
         } else {
             Column(GlanceModifier.defaultWeight()) {
                 Text(name, maxLines = 1, style = nameStyle)
-                Text(fittingLine(parcel, layout, layout.words), maxLines = 1, style = TextStyle(color = ListColors.secondary, fontSize = type.sp(layout.linePoints)))
+                Text(fittingLine(parcel, layout, layout.words), maxLines = 1, style = lineStyle)
             }
         }
     }
 }
 
 /**
- * `ParcelListMark`: the stage's symbol in its colour, drawn once in white and tinted light and dark; from an app that
- * didn't publish the stage, the parcel's state in grey.
+ * `ParcelListMark`: the stage's symbol in its colour, semibold, fitted to the metrics' box, drawn once in white and tinted
+ * light and dark; from an app that didn't publish the stage, the parcel's state in grey.
  */
 @Composable
-private fun StageSymbol(parcel: DeliveryWidgetParcel) {
+private fun StageSymbol(parcel: DeliveryWidgetParcel, metrics: ListMetrics) {
     val stage = parcel.stage
     val symbol = stage?.symbol?.takeIf { it in materialSymbols }
         ?: if (parcel.isOutForDelivery) "bicycle" else if (parcel.deliveredAt != null) "checkmark.circle.fill" else "shippingbox.fill"
-    Box(GlanceModifier.width(ICON), contentAlignment = Alignment.Center) {
-        TintedSymbol(symbol, SYMBOL_POINTS, stage?.let { WidgetCardColors.pair(it.tint) } ?: ListColors.secondary)
+    // `.resizable().scaledToFit()`: the symbol's image as large as the box holds.
+    val unit = requireNotNull(materialSymbols[symbol]).box(1f)
+    val points = minOf(metrics.markWidth.value / unit[0], metrics.markHeight.value / unit[1])
+    Box(GlanceModifier.width(metrics.markWidth).height(metrics.markHeight), contentAlignment = Alignment.Center) {
+        TintedSymbol(symbol, points, ComposeFontWeight.SemiBold, stage?.let { WidgetCardColors.pair(it.tint) } ?: ListColors.secondary)
     }
 }
 
 @Composable
-private fun TintedSymbol(name: String, points: Float, tint: ColorProvider) {
+private fun TintedSymbol(name: String, points: Float, weight: ComposeFontWeight, tint: ColorProvider) {
     val context = LocalContext.current
     val art = requireNotNull(materialSymbols[name])
     val box = art.box(points)
-    val bitmap = remember(name, points) {
-        bitmap(context, box[0], box[1]) { drawSymbol(art, points, ComposeFontWeight.Medium.weight, Color.White, SymbolRenderingMode.Monochrome) }
+    val bitmap = remember(name, points, weight) {
+        bitmap(context, box[0], box[1]) { drawSymbol(art, points, weight.weight, Color.White, SymbolRenderingMode.Monochrome) }
     }
     Image(ImageProvider(bitmap), contentDescription = null, modifier = GlanceModifier.width(box[0].dp).height(box[1].dp), colorFilter = ColorFilter.tint(tint))
 }
 
-/** The app's mark and name over the rows, as the existing widget's header. */
-@Composable
-private fun ListHeader(type: WidgetText, copy: Localizer) {
-    val context = LocalContext.current
-    val mark = remember { peekMark(context) }
-    Column(GlanceModifier.fillMaxWidth()) {
-        Row(GlanceModifier.fillMaxWidth().height(headerHeight(type)), verticalAlignment = Alignment.CenterVertically) {
-            Image(ImageProvider(mark), contentDescription = null, modifier = GlanceModifier.size(HEADER_MARK))
-            Spacer(GlanceModifier.width(6.dp))
-            val name = copy.text("app.title").uppercase(copy.language.locale)
-            Text(
-                name, maxLines = 1,
-                style = TextStyle(color = ListColors.of(Brand.ink, 0.72f), fontSize = type.sp(type.points(IosTextStyle.Caption2)), fontWeight = FontWeight.Bold),
-            )
-        }
-        Spacer(GlanceModifier.height(HEADER_GAP))
-    }
-}
-
-/** Nothing to list, or the widget switched off: the existing widget's symbol, title and words, centred; it opens the app. */
+/**
+ * Nothing to list, or the widget switched off, `ParcelListState`: the existing widget's symbol, title and words, at the
+ * leading edge and centred down; the words on three lines at most in a narrow widget, else two. It opens the app.
+ */
 @Composable
 private fun ListState(symbol: String, title: String, description: String, size: DpSize, type: WidgetText) {
     val context = LocalContext.current
-    val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN_VERTICAL * 2)
+    val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN * 2)
     val symbolPoints = type.points(IosTextStyle.Title3)
     val symbolHeight = requireNotNull(materialSymbols[symbol]).box(symbolPoints)[1].dp
     val caption = type.points(IosTextStyle.Caption)
     val titlePoints = type.fit(title, type.points(IosTextStyle.Headline), FontWeight.Bold, room.width, 2, 0.82f)
     val titleHeight = type.height(title, titlePoints, FontWeight.Bold, room.width, 2)
-    val left = room.height - symbolHeight - titleHeight - 12.dp
+    val left = room.height - symbolHeight - titleHeight - STATE_SPACING * 2
     val first = type.lineHeight(caption, FontWeight.Normal)
     val next = type.height("1\n2", caption, FontWeight.Normal, room.width, 2) - first
-    val lines = if (left < first) 0 else minOf(3, 1 + floor((left - first) / next).toInt())
+    val most = if (size.width < WIDE_WIDTH) 3 else 2
+    val lines = if (left < first) 0 else minOf(most, 1 + floor((left - first) / next).toInt())
     Column(GlanceModifier.fillMaxSize().clickable(openList(context)), verticalAlignment = Alignment.CenterVertically) {
-        TintedSymbol(symbol, symbolPoints, ListColors.primary)
-        Spacer(GlanceModifier.height(6.dp))
+        TintedSymbol(symbol, symbolPoints, ComposeFontWeight.Bold, ListColors.primary)
+        Spacer(GlanceModifier.height(STATE_SPACING))
         Text(title, maxLines = 2, style = TextStyle(color = ListColors.primary, fontSize = type.sp(titlePoints), fontWeight = FontWeight.Bold))
         if (lines > 0) {
-            Spacer(GlanceModifier.height(6.dp))
+            Spacer(GlanceModifier.height(STATE_SPACING))
             Text(description, maxLines = lines, style = TextStyle(color = ListColors.secondary, fontSize = type.sp(caption)))
         }
     }
 }
 
-private fun headerHeight(type: WidgetText): Dp = maxOf(HEADER_MARK, type.lineHeight(type.points(IosTextStyle.Caption2), FontWeight.Bold))
-
-/** The narrowest list whose rows take one line, the stage and day at their end: four cells across on a phone. */
+/** The narrowest list that stands for the iPhone's medium or large widget: four cells across on a phone. */
 private val WIDE_WIDTH = 250.dp
-private val MARGIN = 14.dp
-private val MARGIN_VERTICAL = 12.dp
-private val HEADER_GAP = 6.dp
-private val NARROW_GAP = 8.dp
-private val WIDE_GAP = 4.dp
-private val ICON = 20.dp
-private val ICON_GAP = 8.dp
-private val ROW_GAP = 8.dp
-private const val SYMBOL_POINTS = 14f
-private const val LINE_SHARE = 0.45f
+
+/** The shortest list that stands for the iPhone's large widget, fifteen rows: three cells down on a phone. */
+private val TALL_HEIGHT = 280.dp
+
+/** WidgetKit's margins around a widget's content. */
+private val MARGIN = 16.dp
+private val COLUMN_GAP = 12.dp
+private val STATE_SPACING = 6.dp
+
+/** The least room between a large widget's name and the stage and day at its row's end. */
+private val END_GAP = 4.dp
+
+/** The share of a large widget's width its names keep where a line can't hold the whole stage and day beside them. */
+private const val NAME_SHARE = 0.4f

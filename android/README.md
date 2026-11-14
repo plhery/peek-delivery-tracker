@@ -60,10 +60,12 @@ delivery "yesterday", and a passed estimate gives way to the status.
 
 - **Next delivery** (`NextDeliveryWidget.kt`) shows the first of them as a card, or two side by side. Like the
   iPhone's, which has no large size, it grows no taller than two rows of cells (`maxResizeHeight`).
-- **Parcels** (`ParcelsWidget.kt`) lists them, as many rows as its height holds, then a line counting the rest. Under
-  250 dp wide a row takes two lines, the name over the stage and day; wider, one, the stage and day at its end. Where
-  both don't fit, the day stays. A phone's two cells by two show 3 rows, four by two 6, four by four up to 15
-  (`ListLayout`). Each row opens its parcel; the rest of the widget opens the list (`peekdeliverytracker://parcels`).
+- **Parcels** (`ParcelsWidget.kt`) lists them as the iPhone's list widget does, then a line at its foot counting the
+  rest. Its size stands for one of the iPhone's three (`ListLayout`): under 250 dp wide the small one, a column of 3
+  rows, the name over the stage and day; wider, the medium one, two such columns of 3; from 280 dp tall the large one,
+  up to 15 rows, each on one line with the stage and day at its end where it is 250 dp wide. A small or medium widget
+  takes smaller type before it gives a row up, and larger text keeps fewer rows. Where a line doesn't fit, the day
+  stays. Each row opens its parcel; the rest of the widget opens the list (`peekdeliverytracker://parcels`).
 
 Their gallery pictures show invented parcels in the phone's language (`DeliveryWidgetSample`,
 `DeliveryWidgetListSample`), never the reader's.

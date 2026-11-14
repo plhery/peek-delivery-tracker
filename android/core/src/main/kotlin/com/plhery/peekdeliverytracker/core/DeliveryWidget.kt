@@ -82,18 +82,34 @@ data class DeliveryWidgetList(
     data class Shown(val rows: List<DeliveryWidgetParcel>, val more: Int)
 
     /**
-     * What a widget with room for `rows` rows shows, or for `rowsBesideMore` beside the line counting the rest: every
-     * parcel where they all fit, else as many as fit beside that line, `rows` at most and at least one.
+     * `Size`: the iPhone's three list widgets, and the rows each has at the default text size: three, two columns of
+     * three, and fifteen, or as many as the large widget's height holds. Larger text keeps fewer.
      */
-    fun shown(rows: Int, rowsBesideMore: Int): Shown {
-        if (parcels.size <= rows) return Shown(parcels, 0)
-        val fitting = maxOf(minOf(rowsBesideMore, rows), 1)
-        return Shown(parcels.take(fitting), parcels.size - fitting)
+    enum class Size(val rows: Int) {
+        Small(3),
+        Medium(6),
+        Large(DeliveryWidgetSelection.listLimit),
+    }
+
+    /** `page(of:rows:)`: the parcels `rows` rows show, and how many there are after them. */
+    fun page(rows: Int): Shown {
+        val shown = parcels.take(maxOf(rows, 0))
+        return Shown(shown, parcels.size - shown.size)
     }
 
     companion object {
         /** `link`: the deliveries, which the last line opens ([NativeRoute.Parcels]). */
         const val link = "peekdeliverytracker://parcels"
+
+        /**
+         * `columns(of:perColumn:)`: a medium widget's columns, the parcels it shows in two, read down the first then the
+         * second, once one column can't hold them all; else in one, across the widget.
+         */
+        fun <P> columns(shown: List<P>, perColumn: Int): List<List<P>> {
+            if (shown.size <= maxOf(perColumn, 1)) return if (shown.isEmpty()) emptyList() else listOf(shown)
+            val first = (shown.size + 1) / 2
+            return listOf(shown.take(first), shown.drop(first))
+        }
 
         fun make(date: Instant, enabled: Boolean, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
             val shown = snapshot?.parcels.orEmpty().filter { DeliveryWidgetSelection.isShown(it, date) }.map { it.worded(date) }

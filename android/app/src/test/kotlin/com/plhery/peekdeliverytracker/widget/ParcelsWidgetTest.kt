@@ -103,9 +103,18 @@ class ParcelsWidgetTest {
         val large = shown(sample, LIST_LARGE)
         assertEquals(sample.parcels, large.rows)
         assertEquals(0, large.more)
-        // Narrow, a row takes two lines; four cells across, one.
-        assertFalse(ListLayout(sample, LIST_SMALL, WidgetText(app)).wide)
-        assertTrue(ListLayout(sample, LIST_MEDIUM, WidgetText(app)).wide)
+        // The iPhone's widget each size stands for: under four cells across the small one, from there the medium one,
+        // from three cells down the large one, its rows on one line where it is four cells across.
+        fun layout(size: DpSize) = ListLayout(sample, size, WidgetText(app))
+        assertEquals(DeliveryWidgetList.Size.Small, layout(LIST_SMALL).size)
+        for (size in listOf(LIST_THREE_BY_TWO, LIST_MEDIUM)) assertEquals("$size", DeliveryWidgetList.Size.Medium, layout(size).size)
+        for (size in listOf(LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE)) {
+            assertEquals("$size", DeliveryWidgetList.Size.Large, layout(size).size)
+        }
+        assertEquals(listOf(LIST_FOUR_BY_THREE, LIST_LARGE), listOf(LIST_SMALL, LIST_MEDIUM, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE).filter { layout(it).lineRows })
+        assertEquals(listOf(sample.parcels.take(3)), layout(LIST_SMALL).columns)
+        assertEquals(listOf(sample.parcels.take(3), sample.parcels.subList(3, 6)), layout(LIST_MEDIUM).columns)
+        assertEquals(listOf(sample.parcels), layout(LIST_LARGE).columns)
 
         show(sample, LIST_SMALL) {
             for (parcel in sample.parcels.take(3)) onNode(hasTextEqualTo(parcel.label)).assertExists()
@@ -119,6 +128,8 @@ class ParcelsWidgetTest {
             onNode(hasTextEqualTo(sample.parcels[5].label)).assertExists()
             onNode(hasTextEqualTo(sample.parcels[6].label)).assertDoesNotExist()
             onNode(hasTextEqualTo("+9 more")).assertExists()
+            // As on the iPhone, no header above the rows.
+            onNode(hasTextEqualTo(english.text("app.title").uppercase(Locale.ENGLISH))).assertDoesNotExist()
         }
         show(sample, LIST_LARGE) {
             onNode(hasTextEqualTo(sample.parcels.last().label)).assertExists()
@@ -148,6 +159,56 @@ class ParcelsWidgetTest {
         }
     }
 
+    /**
+     * A medium widget reads down two columns once one can't hold its parcels, the first never the shorter; three, it
+     * lists down one, across the widget.
+     */
+    @Test
+    fun mediumListReadsDownTwoColumns() {
+        fun columns(count: Int) = ListLayout(list(sample.parcels.take(count)), LIST_MEDIUM, WidgetText(app)).columns.map { it.size }
+        assertEquals(listOf(3, 3), columns(7))
+        assertEquals(listOf(3, 3), columns(6))
+        assertEquals(listOf(3, 2), columns(5))
+        assertEquals(listOf(2, 2), columns(4))
+        assertEquals(listOf(3), columns(3))
+        assertEquals(listOf(1), columns(1))
+    }
+
+    /**
+     * At the iPhone's own small size, the three rows and the last line fit only in smaller type, which the widget takes
+     * before it gives a row up; three parcels alone keep the larger.
+     */
+    @Test
+    fun aShortListTakesSmallerTypeBeforeItGivesARowUp() {
+        val iPhoneSmall = DpSize(158.dp, 158.dp)
+        val crowded = ListLayout(sample, iPhoneSmall, WidgetText(app))
+        assertEquals(sample.parcels.take(3), crowded.shown.rows)
+        assertTrue(crowded.metrics.compact)
+        val three = ListLayout(list(sample.parcels.take(3)), iPhoneSmall, WidgetText(app))
+        assertEquals(3, three.shown.rows.size)
+        assertFalse(three.metrics.compact)
+        // A large widget keeps its type and gives rows up.
+        assertFalse(ListLayout(sample, LIST_LARGE, WidgetText(fontScaled(2f))).metrics.compact)
+    }
+
+    /**
+     * A large widget's row ends in the whole stage and day where they fit beside the name; beside a long name, in what
+     * fits once the name keeps two fifths of the widget.
+     */
+    @Test
+    fun aLargeRowEndsInWhatFitsBesideItsName() {
+        val layout = ListLayout(sample, LIST_LARGE, WidgetText(app))
+        val short = sample.parcels.first { it.listName.length < 12 }
+        val end = lineRowEnd(short, layout)
+        assertEquals(short.listLine.openingLine(Locale.ENGLISH), end.line)
+        assertEquals(16.dp, end.gap)
+        val long = sample.parcels.first { it.listName.startsWith("Handmade oak bookshelf") }
+        val cut = lineRowEnd(long, layout)
+        assertEquals(10.dp, cut.gap)
+        assertTrue(cut.width <= layout.words - 10.dp - layout.room.width * 0.4f)
+        assertEquals(fittingLine(long, layout, layout.words - 10.dp - layout.room.width * 0.4f), cut.line)
+    }
+
     /** The unnamed parcel is named by its carrier; a long name keeps its one line, which ends in an ellipsis. */
     @Test
     fun rowsNameTheCarrierOfAnUnnamedParcelAndKeepLongNamesToALine() {
@@ -172,7 +233,7 @@ class ParcelsWidgetTest {
         val layout = ListLayout(sample, LIST_SMALL, WidgetText(app))
         val parcel = sample.parcels.first { it.listDay != null }.copy(detail = "tomorrow")
         val status = parcel.listStatus
-        fun width(text: String) = layout.type.width(text, layout.linePoints, FontWeight.Normal)
+        fun width(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal)
         assertEquals("$status · tomorrow", fittingLine(parcel, layout, width(parcel.listLine)))
         assertEquals("Tomorrow", fittingLine(parcel, layout, width(parcel.listLine) - 1.dp))
         assertEquals(status, fittingLine(parcel, layout, width("Tomorrow") - 1.dp))

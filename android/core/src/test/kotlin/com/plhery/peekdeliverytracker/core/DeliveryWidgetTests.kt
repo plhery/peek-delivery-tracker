@@ -355,26 +355,25 @@ class DeliveryWidgetTests {
     )
 
     /**
-     * The list widget: the rows it has room for, fifteen at most, and the last line counting the rest, which takes a
-     * row's place only when there are more parcels than rows.
+     * The list widget (ParcelLogicTests' `testListWidgetCountsTheParcelsItHasNoRoomFor`): each size's rows, in the widgets'
+     * order, and the count of the rest, which goes where every parcel has its row.
      */
     @Test
-    fun listShowsTheRowsThatFitAndCountsTheRest() {
+    fun listPagesItsParcelsBySize() {
         fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, true, "en", snapshot)
 
-        val five = list(listed(5))
-        assertEquals(5, five.parcels.size)
-        assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.shown(rows = 6, rowsBesideMore = 5))
-        assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.shown(rows = 5, rowsBesideMore = 4))
-        // Three rows, or two beside the line: two shown and three counted.
-        assertEquals(DeliveryWidgetList.Shown(five.parcels.take(2), 3), five.shown(rows = 3, rowsBesideMore = 2))
-        // However short, a list shows a row.
-        assertEquals(DeliveryWidgetList.Shown(five.parcels.take(1), 4), five.shown(rows = 0, rowsBesideMore = 0))
-
-        // Twenty: fourteen rows and the six left; however tall the widget, fifteen rows and the five left.
+        assertEquals(listOf(3, 6, 15), DeliveryWidgetList.Size.entries.map { it.rows })
         val many = list(listed(20))
-        assertEquals(DeliveryWidgetList.Shown(many.parcels.take(14), 6), many.shown(rows = 15, rowsBesideMore = 14))
-        assertEquals(DeliveryWidgetList.Shown(many.parcels.take(15), 5), many.shown(rows = 15, rowsBesideMore = 19))
+        for (size in DeliveryWidgetList.Size.entries) {
+            val page = many.page(size.rows)
+            assertEquals("$size", many.parcels.take(size.rows), page.rows)
+            assertEquals("$size", many.parcels.size - size.rows, page.more)
+        }
+        val five = list(listed(5))
+        assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.page(6))
+        assertEquals(DeliveryWidgetList.Shown(five.parcels.take(2), 3), five.page(2))
+        assertEquals(DeliveryWidgetList.Shown(emptyList(), 5), five.page(-1))
+        assertEquals(DeliveryWidgetList.Shown(emptyList(), 0), list(null).page(6))
 
         // A delivered parcel goes from the rows and the count a day after it arrived, the app silent since.
         val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
@@ -386,9 +385,19 @@ class DeliveryWidgetTests {
         val delivered = (1..8).map { widgetParcel(label = "Delivered $it", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600L + it)) }
         val dayLater = list(listed(10, delivered = delivered), now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong()))
         assertEquals(10, dayLater.parcels.size)
-        assertEquals(DeliveryWidgetList.Shown(dayLater.parcels.take(4), 6), dayLater.shown(rows = 5, rowsBesideMore = 4))
+        assertEquals(DeliveryWidgetList.Shown(dayLater.parcels.take(4), 6), dayLater.page(4))
+    }
 
-        assertEquals(DeliveryWidgetList.Shown(emptyList(), 0), list(null).shown(rows = 3, rowsBesideMore = 2))
+    /** `testMediumListWidgetBalancesItsColumns`: two columns once one can't hold the parcels, the first never the shorter. */
+    @Test
+    fun mediumListBalancesItsColumns() {
+        val parcels = (1..6).toList()
+        assertEquals(listOf(listOf(1, 2, 3), listOf(4, 5, 6)), DeliveryWidgetList.columns(parcels, perColumn = 3))
+        assertEquals(listOf(listOf(1, 2, 3), listOf(4, 5)), DeliveryWidgetList.columns(parcels.take(5), perColumn = 3))
+        assertEquals(listOf(listOf(1, 2), listOf(3, 4)), DeliveryWidgetList.columns(parcels.take(4), perColumn = 2))
+        assertEquals(listOf(listOf(1, 2, 3)), DeliveryWidgetList.columns(parcels.take(3), perColumn = 3))
+        assertEquals(listOf(listOf(1), listOf(2)), DeliveryWidgetList.columns(parcels.take(2), perColumn = 1))
+        assertEquals(emptyList<List<Int>>(), DeliveryWidgetList.columns(emptyList<Int>(), perColumn = 3))
     }
 
     /**

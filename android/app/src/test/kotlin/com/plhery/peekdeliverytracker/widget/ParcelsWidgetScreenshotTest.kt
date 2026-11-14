@@ -87,14 +87,14 @@ class ParcelsWidgetScreenshotTest {
     @Config(qualifiers = "+night")
     fun dark() = sizes("dark", dark = true)
 
-    /** At the phone's largest font scale (WidgetKit's largest for a widget): fewer rows, names shrunk to fit. */
+    /** At the phone's largest font scale (WidgetKit's largest for a widget): fewer rows. */
     @Test
     @Config(fontScale = 2.0f)
     fun largestText() = sizes("largest_text", dark = false)
 
     /**
-     * Between the three: three cells by two (one-line rows), two by three and two by four (two-line rows), four by three;
-     * and the widget's first look until it has drawn (parcels_widget_preview).
+     * Between the three: three cells by two (two columns), two by three and two by four (one column of two-line rows),
+     * four by three (one-line rows); and the widget's first look until it has drawn (parcels_widget_preview).
      */
     @Test
     @Config(qualifiers = "w600dp-h1100dp-xhdpi")

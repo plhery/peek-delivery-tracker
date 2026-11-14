@@ -16,6 +16,7 @@
     "com.apple.security.application-groups": ["group.com.plhery.PeekDeliveryTracker"]
   },
   "NotificationService": {
-    "com.apple.security.app-sandbox": true
+    "com.apple.security.app-sandbox": true,
+    "com.apple.security.application-groups": ["group.com.plhery.PeekDeliveryTracker"]
   }
 }

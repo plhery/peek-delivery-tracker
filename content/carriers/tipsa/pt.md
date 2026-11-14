@@ -3,7 +3,7 @@ title: TIPSA rastreio: número, estados, agências e contactos
 description: Rastreio TIPSA em Portugal: o número de 22 algarismos, os estados em espanhol explicados, entregas falhadas, levantamento na agência e contactos.
 slug: tipsa-rastreio
 published: 2026-10-26
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 A TIPSA (Transporte Integral de Paquetería) é uma transportadora espanhola de encomendas urgentes, da rede Geopost, com agências em Espanha, Portugal e Andorra. Para seguir a encomenda, escreve o número de 22 algarismos no [localizador de envios](https://www.tip-sa.com/pt/localizador-envios) do site português da TIPSA ou cola-o na caixa acima. Quem te dá o número é o remetente, normalmente a loja onde compraste. Se não o tens, pede-o à loja ou à delegação da TIPSA que entrega na tua zona, que encontras escrevendo a tua morada no [localizador de agências](https://www.tip-sa.com/pt/agencias-de-transporte). É também com essa delegação que combinas a entrega se o seguimento disser `Ausente`, ou o levantamento se preferires ir lá buscá-la; se a encomenda se perder ou chegar danificada, avisa a loja.
@@ -30,7 +30,7 @@ Os 22 algarismos também têm a forma dos números da Austrian Post, da USPS e d
 
 ## Estados TIPSA: o que querem dizer
 
-O Peek lê o seguimento da TIPSA em espanhol e mostra os estados tal como a TIPSA os escreve. Estes são os que já registou, pela ordem em que costumam aparecer:
+Segundo a FAQ da TIPSA, a página do envio a que o localizador te leva mostra o estado e a data prevista de entrega. O Peek lê o seguimento da TIPSA em espanhol e mostra os estados tal como a TIPSA os escreve. Estes são os que já registou, pela ordem em que costumam aparecer:
 
 | Estado TIPSA | O que quer dizer para ti |
 | --- | --- |
@@ -99,7 +99,7 @@ Mais em [alfândega e taxas](guide:customs).
 
 ## Contactos TIPSA em Portugal
 
-Como as páginas portuguesas da TIPSA os indicavam a 26 de outubro de 2026:
+Como as páginas portuguesas da TIPSA os indicavam a 14 de novembro de 2026:
 
 - **Telefone:** 902 10 10 47 ou 900 10 10 47. A TIPSA não indica horário nem custo da chamada.
 - **Formulário** em [tip-sa.com/pt/contacto](https://www.tip-sa.com/pt/contacto), com o motivo «Tenho um problema com o meu envio» e o «Número da remessa».
@@ -112,9 +112,9 @@ Cola os 22 algarismos, com ou sem espaços, e o [Peek](/) consulta ao mesmo temp
 
 Um albarán de 10 algarismos não dá para seguir na TIPSA, nem com «Alterar» nem numa ligação. O Peek não sugere a TIPSA para 10 algarismos nem a consulta sobre eles; se escolheres a TIPSA, avisa que a TIPSA «não emite números como este» e consulta serviços de seguimento. Procura os 22 algarismos, ou a ligação de seguimento, no e-mail ou SMS de envio, ou pede-os à loja. Uma ligação do tip-sa.com com `id=` (`datos_env.php`, `datos_prestashop.php` ou `datos.php`) serve; as do localizador ou do tipsa-dinapaq.com não.
 
-O Peek mostra o estado, o histórico com a localidade de cada leitura no mapa, o remetente quando a TIPSA não o esconde com asteriscos e o «Peso». Lê todas as horas como hora de Madrid, também as das agências portuguesas. Não mostra o destinatário, a morada, a referência, o número de volumes, o comprovativo de entrega nem a data prevista de entrega, e não segue a encomenda se ela passar para outra transportadora.
+O Peek mostra o estado, o histórico com a localidade de cada leitura no mapa, o remetente quando a TIPSA não o esconde com asteriscos e o «Peso». Lê todas as horas como hora de Madrid, também as das agências portuguesas, e mostra-as no teu fuso horário: no peektracker.com, uma linha no fim do histórico lembra-o («Horas no teu fuso horário: …»). Não mostra o destinatário, a morada, a referência, o número de volumes, o comprovativo de entrega nem a data prevista de entrega, e não segue a encomenda se ela passar para outra transportadora.
 
-Consulta a TIPSA de 10 em 10 minutos, e de 2 em 2 quando a encomenda está em `REPARTO` («Em distribuição»): só no dia dessa leitura, a partir das 6h de Madrid (5h em Lisboa) e enquanto o próprio seguimento da TIPSA responder (através de serviços de seguimento, de 15 em 15 minutos). Pode avisar-te de todas as atualizações, só das importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`, mostra «Pronta para levantamento». Não muda a entrega nem reclama por ti.
+Consulta a TIPSA de 10 em 10 minutos, e de 2 em 2 quando a encomenda está em `REPARTO` («Em distribuição»): só no dia dessa leitura, a partir das 6h de Madrid (5h em Lisboa) e enquanto o próprio seguimento da TIPSA responder (através de serviços de seguimento, de 15 em 15 minutos). Pode avisar-te de todas as atualizações, só das importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`, mostra «Pronta para levantamento»; com `Ausente`, `Cerrado` ou `Faltan Datos / Datos incorrectos`, «Tentativa de entrega»; com `Devolver a Origen`, «Problema reportado». Não muda a entrega nem reclama por ti.
 
 ## Perguntas sobre o rastreio TIPSA
 
@@ -136,8 +136,8 @@ Diz que sim, com pontos e cacifos, mas não diz onde ficam nem quanto tempo lá 
 
 :::sources
 - [TIPSA: Rastrear o meu envio](https://www.tip-sa.com/pt/localizador-envios) – 22 algarismos, campo de 22 carateres, pesquisa pela referência com identificador (agência + cliente)
-- [TIPSA: Perguntas Frequentes](https://www.tip-sa.com/pt/recursos/faqs) – número em falta, 15 dias, documentos, morada, perda, telefones, DPDgroup
-- [TIPSA: Contacto](https://www.tip-sa.com/pt/contacto) – telefones, formulário
+- [TIPSA: Perguntas Frequentes](https://www.tip-sa.com/pt/recursos/faqs) – número em falta, estado e data prevista na página do envio, 15 dias, documentos, morada, perda, telefones, DPDgroup (relida a 14 de novembro de 2026)
+- [TIPSA: Contacto](https://www.tip-sa.com/pt/contacto) – telefones, formulário (relida a 14 de novembro de 2026)
 - [TIPSA: Página inicial](https://www.tip-sa.com/pt) – mais de 300 agências
 - [TIPSA: Sobre a TIPSA](https://www.tip-sa.com/pt/tipsa) – Geopost, 330 agências, plataformas, cacifos
 - [TIPSA: Portugal](https://www.tip-sa.com/pt/servicos/portugal) – prazos e serviços em Portugal

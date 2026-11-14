@@ -83,7 +83,7 @@ Ecoscooting's legal notice gives another number, 931 222 879, for queries and co
 
 ## Tracking Ecoscooting parcels with Peek
 
-[Peek](/) recognises a `CNESP` or `CNPRT` number with 20 digits as Ecoscooting's straight away, and most 18-digit Spanish labels that start with the postcode and then `0000`. For a SHEIN parcel number (`C` or `E`, a six-digit date, then 8 digits), which [Paack](carrier:paack) also delivers in Spain, Peek asks Ecoscooting whether it knows it. Another 18-digit number could also be [bpost](carrier:bpost)'s. If Ecoscooting isn't offered, press "Change" and pick it, or paste the ecoscooting.com tracking link, which names Ecoscooting.
+[Peek](/) recognises a `CNESP` or `CNPRT` number with 20 digits as Ecoscooting's straight away, and most 18-digit Spanish labels that start with the postcode and then `0000`. For a SHEIN parcel number (`C` or `E`, a six-digit date, then 8 digits), which [Paack](carrier:paack) also delivers in Spain, Peek asks Ecoscooting whether it knows it. Another 18-digit number could also be [bpost](carrier:bpost)'s or GLS Spain's. If Ecoscooting isn't offered, press "Change" and pick it, or paste the ecoscooting.com tracking link, which names Ecoscooting.
 
 When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, or a label Peek recognises as Ecoscooting's, Peek follows the parcel on to Ecoscooting; another 18-digit number isn't followed.
 

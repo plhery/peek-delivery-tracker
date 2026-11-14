@@ -3,7 +3,7 @@ title: Ecoscooting rastreio: estados, pontos de recolha e contacto
 description: Rastreio Ecoscooting em Portugal: que número usar, o que querem dizer os estados, entregas falhadas, pontos de recolha e como contactar a Ecoscooting.
 slug: ecoscooting-rastreio
 published: 2026-10-12
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 A Ecoscooting é uma empresa de entregas em Portugal e Espanha para compras feitas em plataformas internacionais, e pertence à Cainiao, a empresa de logística do grupo Alibaba. Faz só a última parte do caminho: a entrega em casa ou num ponto de recolha. Segue a encomenda no ecoscooting.com com o número que vem nos e-mails da Ecoscooting, ou cola-o na caixa no topo desta página.
@@ -42,7 +42,7 @@ O ecoscooting.com mostra o seguimento em português, espanhol ou inglês, confor
 | `Sua encomenda expirou no ponto de retirada e será devolvida ao remetente` | Ninguém a levantou a tempo. Vai voltar ao remetente. |
 | `Sua remessa será devolvida ao remetente original` | Está a voltar ao remetente. |
 
-O estado que mais confunde é a passagem para o ponto de recolha. O título a negrito é `Entregue ao PUDO` (PUDO quer dizer ponto de recolha e entrega), o que parece uma entrega a ti. Não é: espera pelo e-mail ou SMS com o PIN antes de lá ires. O passo seguinte tem um título que fica em inglês, `PUDO Inbound Success`, e esse sim quer dizer que já a podes levantar. No Peek, que consulta o seguimento em inglês, pode aparecer também `Service point closed`: depois das tentativas falhadas em tua casa, o estafeta também não conseguiu deixar a encomenda no ponto de recolha, por isso ela não está lá à tua espera.
+O estado que mais confunde é a passagem para o ponto de recolha. O título a negrito é `Entregue ao PUDO` (PUDO quer dizer ponto de recolha e entrega), o que parece uma entrega a ti. Não é: espera pelo e-mail ou SMS com o PIN antes de lá ires. O passo seguinte tem um título que fica em inglês, `PUDO Inbound Success`, e esse sim quer dizer que já a podes levantar. No Peek, que consulta o seguimento em inglês, pode aparecer também `Service point closed`: depois das tentativas falhadas em tua casa, o estafeta também não conseguiu deixar a encomenda no ponto de recolha, por isso ela não está lá à tua espera, e o Peek mostra «Tentativa de entrega».
 
 Por cima do histórico, o ecoscooting.com mostra um título geral. Diz `Em trânsito` mesmo depois da entrega, por isso lê antes a última linha. `Falha na entrega` aparece quando a Ecoscooting assinala um problema numa leitura, `Tempo de recolha excedido` quando a encomenda ficou tempo demais num ponto de recolha, e `Sem trajetória` quer dizer que ainda não há leituras.
 
@@ -66,13 +66,13 @@ A Ecoscooting diz que só trata da entrega local. Para artigos em falta ou errad
 
 As páginas da Ecoscooting não falam de encomendas danificadas, prazos de reclamação nem indemnizações, por isso começa pelo vendedor.
 
-**Alfândega e taxas.** As páginas da Ecoscooting também não falam de alfândega: uma encomenda de fora da UE passa-a antes da entrega local. Desde 1 de novembro de 2026, a UE cobra ainda uma taxa de tratamento de 2 € por artigo; deve-a quem declara a encomenda, a loja ou a transportadora, que ta pode cobrar. Se te pedirem dinheiro pela encomenda, fala primeiro com o vendedor. Mais em [encomenda retida na alfândega](guide:customs).
+**Alfândega e taxas.** As páginas da Ecoscooting também não falam de alfândega: uma encomenda de fora da UE passa-a antes da entrega local. Desde 1 de novembro de 2026, a UE cobra ainda uma taxa de tratamento de 2 € por tipo de produto; deve-a quem declara a encomenda, a loja ou a transportadora, que ta pode cobrar. Se te pedirem dinheiro pela encomenda, fala primeiro com o vendedor. Mais em [encomenda retida na alfândega](guide:customs).
 
 > A FAQ da Ecoscooting pede que tenhas atenção a mensagens suspeitas por telefone ou e-mail e que nunca dês informação confidencial a terceiros.
 
 ## Ecoscooting Portugal contacto: telefone, e-mail e chat
 
-Assim os listava a página portuguesa do ecoscooting.com a 12 de outubro de 2026:
+Assim os listava a página portuguesa do ecoscooting.com a 14 de novembro de 2026:
 
 - **Telefone:** +351 300 609 006.
 - **E-mail:** suportecliente@ecoscooting.com.
@@ -83,11 +83,11 @@ A Ecoscooting não publica o preço das chamadas. A empresa é a Ecoscooting Del
 
 ## Seguir encomendas Ecoscooting com o Peek
 
-O [Peek](/) reconhece logo como sendo da Ecoscooting um número CNPRT ou CNESP com 20 algarismos (escrito sem CN, o Peek acrescenta-o) e a maioria das etiquetas espanholas de 18 algarismos que começam pelo código postal seguido de `0000`. Para um número de pacote da SHEIN (C ou E, uma data de seis algarismos e depois oito algarismos), que a [Paack](carrier:paack) também entrega em Espanha, o Peek pergunta à Ecoscooting se o conhece. Outro número de 18 algarismos também pode ser da bpost. Se a Ecoscooting não aparecer, carrega em «Alterar transportadora» e escolhe-a, ou cola a ligação de seguimento do ecoscooting.com, que leva à Ecoscooting seja qual for o número.
+O [Peek](/) reconhece logo como sendo da Ecoscooting um número CNPRT ou CNESP com 20 algarismos e a maioria das etiquetas espanholas de 18 algarismos que começam pelo código postal seguido de `0000`. Para um número de pacote da SHEIN (C ou E, uma data de seis algarismos e depois oito algarismos), que a [Paack](carrier:paack) também entrega em Espanha, o Peek pergunta à Ecoscooting se o conhece. Outro número de 18 algarismos também pode ser da bpost ou da GLS em Espanha. Se a Ecoscooting não aparecer, carrega em «Alterar transportadora» e escolhe-a, ou cola a ligação de seguimento do ecoscooting.com, que leva à Ecoscooting seja qual for o número.
 
 Quando a Cainiao ou a CACESA dão um número CNPRT ou CNESP, ou uma etiqueta que o Peek reconhece como da Ecoscooting, a encomenda é acompanhada até à Ecoscooting; outro número de 18 algarismos não é acompanhado.
 
-O Peek mostra o estado, o histórico com as horas exatas da Ecoscooting mas sem locais, o peso, a hora da entrega e, quando a encomenda chega a um ponto de recolha, o nome e a morada do ponto, que ficam depois do levantamento. Não há data prevista de entrega. Quando o estafeta deixa a encomenda no ponto de recolha (`Delivered to PUDO`), o Peek ainda mostra «Em distribuição»: só passa a «Pronta para levantamento» quando o ponto a recebe. Espera mesmo assim pelo e-mail ou SMS com o PIN. Ficam de fora o PIN, o telefone e o horário do ponto, os códigos postais e as referências do pedido. O seguimento é pedido em inglês, por isso as linhas aparecem no inglês da Ecoscooting, por exemplo `Your shipment is out for delivery`; um `Out for delivery` simples aparece nas palavras do Peek, «Em distribuição». A Ecoscooting nunca diz que um número não existe, por isso um número errado fica simplesmente sem atualizações.
+O Peek mostra o estado, o histórico com as horas exatas da Ecoscooting mas sem locais, o peso, a hora da entrega e, quando a encomenda chega a um ponto de recolha, o nome e a morada do ponto, que ficam depois do levantamento. Não há data prevista de entrega. As horas aparecem no teu fuso horário, e no peektracker.com uma linha no fim do histórico lembra-o: «Horas no teu fuso horário: …». Quando o estafeta deixa a encomenda no ponto de recolha (`Delivered to PUDO`), o Peek ainda mostra «Em distribuição»: só passa a «Pronta para levantamento» quando o ponto a recebe. Espera mesmo assim pelo e-mail ou SMS com o PIN. Ficam de fora o PIN, o telefone e o horário do ponto, os códigos postais e as referências do pedido. O seguimento é pedido em inglês, por isso as linhas aparecem no inglês da Ecoscooting, por exemplo `Your shipment is out for delivery`; um `Out for delivery` simples aparece nas palavras do Peek, «Em distribuição». A Ecoscooting nunca diz que um número não existe, por isso um número errado fica simplesmente sem atualizações.
 
 O Peek verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda está em distribuição (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da Ecoscooting a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora.
 
@@ -116,7 +116,7 @@ A sede da Ecoscooting Delivery, S.L. fica em San Fernando de Henares, perto de M
 - [Ecoscooting: Entrega ao domicílio](https://www.ecoscooting.com/toDoor) – duas tentativas, terceira num ponto de recolha em Espanha
 - [Ecoscooting: Rede de pontos de recolha e cacifos](https://www.ecoscooting.com/pickUpPoint) – mais de 8.000 pontos de recolha, cacifos
 - [Ecoscooting: Aviso legal](https://www.ecoscooting.com/aviso-legal) – nome da empresa, sede, reclamações
-- [Ecoscooting: textos do site](https://www.ecoscooting.com/static/js/main.0cb02ae4.js) – textos das páginas nas três línguas
+- [Ecoscooting: textos do site](https://www.ecoscooting.com/static/js/main.c7031648.js) – textos das páginas nas três línguas; contactos, horário, tentativas, 10 dias úteis e aviso legal relidos a 14 de novembro de 2026
 - [Air Cargo Week: Cainiao expands delivery network in Spain](https://aircargoweek.com/cainiao-expands-delivery-network-in-spain) – compra da Ecoscooting pela Cainiao
 - [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento de 2 € desde 1 de novembro de 2026
 - [Revenue: Union Handling Fee (em inglês)](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – paga pela loja ou por quem entrega, que a pode cobrar ao cliente

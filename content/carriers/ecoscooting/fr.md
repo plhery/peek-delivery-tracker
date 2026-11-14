@@ -85,7 +85,7 @@ Pages d'Ecoscooting citées ici, en espagnol, en anglais et en portugais : sur w
 
 ## Suivre un colis Ecoscooting avec Peek
 
-[Peek](/) reconnaît tout de suite comme Ecoscooting un numéro `CNESP` ou `CNPRT` suivi de 20 chiffres (tapé sans `CN`, Peek le rajoute) et la plupart des étiquettes espagnoles de 18 chiffres qui commencent par le code postal puis `0000`. Pour un numéro de colis SHEIN (`C` ou `E`, une date en six chiffres, puis 8 chiffres), que [Paack](carrier:paack) livre aussi en Espagne, Peek demande à Ecoscooting s'il le connaît. Un autre numéro de 18 chiffres peut aussi être un numéro [bpost](carrier:bpost). Si Ecoscooting n'est pas proposé, appuie sur « Changer » et choisis-le, ou colle le lien de suivi d'ecoscooting.com, qui nomme Ecoscooting.
+[Peek](/) reconnaît tout de suite comme Ecoscooting un numéro `CNESP` ou `CNPRT` suivi de 20 chiffres et la plupart des étiquettes espagnoles de 18 chiffres qui commencent par le code postal puis `0000`. Pour un numéro de colis SHEIN (`C` ou `E`, une date en six chiffres, puis 8 chiffres), que [Paack](carrier:paack) livre aussi en Espagne, Peek demande à Ecoscooting s'il le connaît. Un autre numéro de 18 chiffres peut aussi être un numéro [bpost](carrier:bpost) ou GLS Espagne. Si Ecoscooting n'est pas proposé, appuie sur « Changer » et choisis-le, ou colle le lien de suivi d'ecoscooting.com, qui nomme Ecoscooting.
 
 Quand Cainiao ou CACESA donne un numéro `CNESP` ou `CNPRT`, ou une étiquette que Peek reconnaît comme celle d'Ecoscooting, il suit le colis jusque chez Ecoscooting ; un autre numéro de 18 chiffres n'est pas suivi.
 

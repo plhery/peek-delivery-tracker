@@ -3,7 +3,7 @@ title: Ecoscooting seguimiento: estados, entregas y teléfono
 description: Sigue tu paquete de Ecoscooting en España: qué número usar, qué significa cada estado, qué pasa si falla la entrega, puntos de recogida y teléfonos.
 slug: ecoscooting-seguimiento
 published: 2026-10-12
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Ecoscooting es una empresa de reparto de compras online de plataformas extranjeras en España y Portugal, del grupo Cainiao, la logística de Alibaba. Solo hace el último tramo: lleva el paquete a tu casa o a un punto de recogida. Para seguirlo, escribe en ecoscooting.com el número que aparece en sus correos, o pégalo en la casilla de arriba.
@@ -18,7 +18,7 @@ Tampoco publica un formato de número. Su seguimiento responde a estos (cifras i
 | --- | --- |
 | `CNESP12345678901234567890` | CNESP y 20 cifras: un paquete para España. |
 | `CNPRT00000000000000000000` | CNPRT y 20 cifras: un paquete para Portugal. |
-| `123456789012345678` | 18 cifras. |
+| `280010000123456789` | 18 cifras: la etiqueta de Ecoscooting en España, con el código postal, `0000` y 9 cifras. |
 
 Hay números parecidos que son de otros. En un pedido de AliExpress sueles ver un número LP con 14 cifras: es la referencia logística de AliExpress y se sigue con [Cainiao](carrier:cainiao). Un paquete de China pasa la aduana antes de la entrega local, por ejemplo con [CACESA](carrier:cacesa), un agente de aduanas. Si ecoscooting.com no reconoce tu número, sigue el que aparece en el pedido. Más en [seguimiento de paquetes de China](guide:tracking-from-china).
 
@@ -41,7 +41,7 @@ ecoscooting.com sale en español, inglés o portugués según tu navegador, y ti
 | `Su envío será devuelto al lugar de origen` | Empieza la devolución al remitente. |
 | `Su envío tiene una incidencia en la estación de última milla [Paquete perdido]` | Se ha perdido en la base local. Mira más abajo qué hacer. |
 
-El que más confunde es el paso al punto de recogida. Su título en negrita es `Entregado por el repartidor`, y en inglés `Delivered to PUDO` (PUDO es el punto de recogida y entrega), y suena a que ya te lo han entregado. No es así: espera el mensaje del punto antes de ir. En Peek, que consulta el seguimiento en inglés, puede salir también `Service point closed`: tras los intentos fallidos en tu domicilio, el repartidor tampoco pudo dejar el paquete en el punto de recogida, así que no te está esperando allí.
+El que más confunde es el paso al punto de recogida. Su título en negrita es `Entregado por el repartidor`, y en inglés `Delivered to PUDO` (PUDO es el punto de recogida y entrega), y suena a que ya te lo han entregado. No es así: espera el mensaje del punto antes de ir. En Peek, que consulta el seguimiento en inglés, puede salir también `Service point closed`: tras los intentos fallidos en tu domicilio, el repartidor tampoco pudo dejar el paquete en el punto de recogida, así que no te está esperando allí, y Peek muestra «Intento de entrega».
 
 Encima del historial, ecoscooting.com pone un titular. Dice `En tránsito` incluso después de la entrega, así que fíjate en la última línea. `Fallo en la entrega` aparece cuando el seguimiento marca un error, como un paquete robado. `Tiempo de recogida excedido` sale cuando el paquete se quedó demasiado tiempo en un punto, y `Sin trayectoria` significa que todavía no hay escaneos.
 
@@ -57,7 +57,7 @@ Ecoscooting habla de más de 8000 puntos de recogida, además de taquillas. Cuan
 
 ## Paquete de Ecoscooting que no llega, perdido o robado
 
-Ecoscooting dice que solo se encarga del reparto local. Si faltan artículos o no son los que pediste, para devoluciones y para reembolsos, habla con la tienda o la plataforma donde compraste. Si el seguimiento lleva días sin moverse, mira [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
+Ecoscooting dice que solo se encarga del reparto local. Si faltan artículos o no son los que pediste, para devoluciones y para reembolsos, habla con la tienda o la plataforma donde compraste. Si el seguimiento lleva días sin moverse, mira [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating). Con la línea `Your shipment has an operational anomaly occurred at the sorting center. Issue is being resolved, updates will follow`, Peek pasa a «Incidencia»: Ecoscooting dice que está resolviendo un problema en el centro de clasificación y que dará novedades.
 
 **Entregado, pero no lo tienes.** Busca el correo de entrega de Ecoscooting, «¡Bien! Hemos entregado tu paquete», con el número en el asunto, y pulsa «No recibido». También puedes escribir al chat de atención al cliente o mandar su formulario, que Ecoscooting responde en un plazo de 10 días hábiles. Más en [paquete entregado pero no recibido](guide:delivered-not-received).
 
@@ -67,11 +67,13 @@ Ecoscooting dice que solo se encarga del reparto local. Si faltan artículos o n
 
 Las páginas de Ecoscooting no dicen nada de paquetes dañados, plazos de reclamación ni indemnizaciones, así que empieza por el vendedor. Para una reclamación formal, su aviso legal da otro teléfono (abajo) y dice que facilita las hojas oficiales de reclamaciones a través de su web cuando legalmente proceda.
 
+**Aduanas.** Las páginas de Ecoscooting tampoco hablan de aduanas: un paquete de fuera de la UE las pasa antes del reparto local. Si te piden dinero por el paquete, habla antes con el vendedor; qué se paga y quién lo cobra, en [paquete retenido en aduanas](guide:customs).
+
 > Ecoscooting pide estar atento a llamadas, mensajes y correos sospechosos y no dar nunca información confidencial a terceros.
 
 ## Ecoscooting: teléfono y atención al cliente
 
-Datos de ecoscooting.com consultados el 12 de octubre de 2026:
+Datos de ecoscooting.com consultados el 14 de noviembre de 2026:
 
 - **Teléfono:** +34 912 15 93 69, o la línea gratuita +34 800 00 03 69.
 - **Correo:** customersupport@ecoscooting.com.
@@ -83,11 +85,11 @@ El aviso legal da otro teléfono para consultas y reclamaciones, el 931 222 879,
 
 ## Seguir un paquete de Ecoscooting con Peek
 
-[Peek](/) reconoce enseguida como de Ecoscooting un número CNESP o CNPRT con 20 cifras y la mayoría de las etiquetas españolas de 18 cifras que empiezan por el código postal seguido de `0000`. Para un número de paquete de SHEIN (C o E, una fecha de seis cifras y luego ocho cifras), que [Paack](carrier:paack) también reparte en España, Peek pregunta a Ecoscooting si lo conoce. Otro número de 18 cifras también podría ser de bpost. Si no aparece Ecoscooting, pulsa «Cambiar» y elígelo, o pega el enlace de seguimiento de ecoscooting.com, que lleva a Ecoscooting.
+[Peek](/) reconoce enseguida como de Ecoscooting un número CNESP o CNPRT con 20 cifras y la mayoría de las etiquetas españolas de 18 cifras que empiezan por el código postal seguido de `0000`. Para un número de paquete de SHEIN (C o E, una fecha de seis cifras y luego ocho cifras), que [Paack](carrier:paack) también reparte en España, Peek pregunta a Ecoscooting si lo conoce. Otro número de 18 cifras también podría ser de bpost o de GLS en España. Si no aparece Ecoscooting, pulsa «Cambiar» y elígelo, o pega el enlace de seguimiento de ecoscooting.com, que lleva a Ecoscooting.
 
 Cuando Cainiao o CACESA dan un número CNESP o CNPRT, o una etiqueta que Peek reconoce como de Ecoscooting, Peek puede seguir el paquete hasta Ecoscooting; con otro número de 18 cifras no.
 
-Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
+Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Las horas salen en tu zona horaria, y en peektracker.com una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». Cuando el repartidor deja el paquete en el punto (`Delivered to PUDO`), Peek sigue mostrando «En reparto»: solo pasa a «Listo para recoger» cuando el punto lo recibe. Aun así, espera el correo o el SMS con el PIN. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
 
 Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Ecoscooting; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
@@ -120,7 +122,7 @@ El +34 800 00 03 69, que Ecoscooting marca como «Línea gratuita». También at
 - [Ecoscooting: Entrega a domicilio](https://www.ecoscooting.com/toDoor) – dos intentos, tercero en un punto de recogida en España
 - [Ecoscooting: Red de puntos de recogida y lockers](https://www.ecoscooting.com/pickUpPoint) – más de 8000 puntos, taquillas
 - [Ecoscooting: Aviso legal](https://www.ecoscooting.com/aviso-legal) – empresa, sede, teléfono de reclamaciones, hojas de reclamaciones
-- [Ecoscooting: textos de la web](https://www.ecoscooting.com/static/js/main.0cb02ae4.js) – textos de las páginas en tres idiomas
+- [Ecoscooting: textos de la web](https://www.ecoscooting.com/static/js/main.c7031648.js) – textos de las páginas en tres idiomas; teléfonos, horario, 14 días y aviso legal consultados el 14 de noviembre de 2026
 - [Air Cargo Week: Cainiao expands delivery network in Spain](https://aircargoweek.com/cainiao-expands-delivery-network-in-spain) – compra de Ecoscooting por Cainiao
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek
 :::

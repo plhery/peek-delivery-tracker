@@ -3,7 +3,7 @@ title: Suivi colis Speedaf Express : numéro, statuts et contacts
 description: Suivre un colis Speedaf Express envoyé de Chine au Maroc, au Nigeria, au Kenya ou aux Émirats : le numéro, chaque statut, les tentatives de livraison, les contacts.
 slug: speedaf-suivi
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-14
 ---
 
 Speedaf Express (速达非) est un réseau de livraison fondé en 2019 qui envoie par avion les colis de ses entrepôts en Chine vers l'Afrique, le Moyen-Orient, le Pakistan et quelques pays d'Europe, puis les livre lui-même. Pour suivre ton colis, saisis son numéro sous « Track » sur [speedaf.com](https://www.speedaf.com/cn-en/send-parcel) ou colle-le ci-dessus. Le numéro figure dans les détails d'expédition de ta commande.
@@ -83,7 +83,7 @@ Le suivi de Speedaf indique qui a signé pour le colis : vérifie-le d'abord. Vo
 
 ## Contacter Speedaf : téléphone et service client
 
-Coordonnées relevées le 28 octobre 2026 en bas de page de chaque site national de Speedaf (pour l'Irlande et la Zambie, passe par le choix du pays, puis English), horaires à l'heure locale :
+Coordonnées relevées le 28 octobre 2026 (Égypte, Maroc et Chine le 14 novembre 2026) en bas de page de chaque site national de Speedaf (pour l'Irlande et la Zambie, passe par le choix du pays, puis English), horaires à l'heure locale :
 
 | Pays | Téléphone | E-mail | Horaires |
 | --- | --- | --- | --- |
@@ -97,14 +97,17 @@ Coordonnées relevées le 28 octobre 2026 en bas de page de chaque site national
 | Émirats | +971 800 178 | ae.info@speedaf.com | lun.-sam. 9 h-18 h |
 | Arabie saoudite | aucun | sa.info@speedaf.com | non indiqués |
 | Irlande | +35312633068, WhatsApp +353 834281088 | info_customerserviceie@speedaf.com | lun.-ven. 8 h 30-17 h 30 |
+| Égypte | +20 15818, +20 1050383370 | eg.info@speedaf.com | sam.-jeu. 9 h-18 h |
+| Maroc | +212 522 100 888 | ma.info@speedaf.com | lun.-ven. 9 h-18 h |
+| Chine | +86 400 888 0975 | info@speedaf.com | lun.-ven. 9 h 30-18 h 30 |
 
-Chaque site a aussi un formulaire « Customer Support ».
+Le centre d'aide de Speedaf donne aussi une ligne pour les autres pays de sa liste : Kazakhstan +7 778 371 9358, Maurice 4687316, Maldives +960 7678788, Suisse et Serbie +41 798559737, Monténégro +382 60021040, Albanie +355 45620111. Chaque site a aussi un formulaire « Customer Support ».
 
 ## Suivre un colis Speedaf avec Peek
 
 [Peek](/) reconnaît un numéro Speedaf à sa forme quand il commence par NG, GH, KE, UG, RW, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU, RE, MV ou TR, puis 9 chiffres et R ou E. Avec 12 chiffres à la place, ou IE et 12 chiffres pour l'Irlande, la forme ne suffit pas : Peek affiche « Vérification des services de suivi… », puis « Speedaf a ce colis. » si Speedaf le connaît. Peek ne connaît aucun format pour la Suisse, l'Albanie, le Monténégro ou la Serbie : pour ces pays et tout numéro hors de ces deux formes, choisis « Speedaf » avec « Changer ». Un lien speedaf.com contenant `tradeNo=` est lu comme Speedaf, quel que soit le numéro. Peek envoie le numéro en majuscules : les minuscules passent.
 
-Peek lit directement le suivi de Speedaf : statut, historique, pays de destination et heure de livraison. Chaque scan est à l'heure de son site (UTC+8 dans les entrepôts chinois, puis celle de ton pays), affichée dans le fuseau horaire de ton appareil. Les sites ne sont nommés que dans les lignes, donc pas de carte, et Speedaf ne donne pas de date de livraison prévue. Si Speedaf connaît le numéro sans montrer de scan, comme pour certains colis anciens, Peek continue de vérifier et affiche « En attente du transporteur », ou « En attente du premier scan de Speedaf » pour un numéro à 12 chiffres si tu n'as pas choisi Speedaf.
+Peek lit directement le suivi de Speedaf : statut, historique, pays de destination et heure de livraison. Chaque scan est à l'heure de son site (UTC+8 dans les entrepôts chinois, puis celle de ton pays), affichée dans le fuseau horaire de ton appareil ; sur peektracker.com, une ligne sous l'historique nomme ce fuseau (« Heures dans ton fuseau horaire : … »). Les sites ne sont nommés que dans les lignes, donc pas de carte, et Speedaf ne donne pas de date de livraison prévue. Si Speedaf connaît le numéro sans montrer de scan, comme pour certains colis anciens, Peek continue de vérifier et affiche « En attente du transporteur », ou « En attente du premier scan de Speedaf » pour un numéro à 12 chiffres si tu n'as pas choisi Speedaf.
 
 Les lignes s'affichent telles qu'écrites, en anglais sinon en chinois, sans les noms du livreur, de l'agent et du signataire ni le téléphone du livreur. Peek écarte aussi la preuve de livraison, le lien de paiement des droits et le nombre de colis, et ne suit que ton numéro, pas les autres colis de la même lettre de transport.
 
@@ -130,11 +133,11 @@ Des droits ou taxes sont dus avant que la douane de ton pays libère le colis ; 
 
 :::sources
 - [Speedaf : Enterprise Introduction](https://www.speedaf.com/ng-en/business/about-us) – fondation en 2019, ZTO
-- [Speedaf : Select your location and language](https://www.speedaf.com/cn-en/user-opt/locale-select) – pays ; contacts irlandais et zambiens (le pays, puis English)
+- [Speedaf : Select your location and language](https://www.speedaf.com/cn-en/user-opt/locale-select) – pays ; contacts irlandais et zambiens (le pays, puis English) ; contacts en Chine (relus le 14 novembre 2026)
 - [Speedaf : Speedaf eParcel](https://www.speedaf.com/ke-en/product/intl-straight-small) – colis de Chine, 5 à 10 jours ouvrés
 - [Speedaf : Warehouse & Fulfillment](https://www.speedaf.com/ke-en/product/warehouse-promise) – livreurs du dernier kilomètre, paiement à la livraison
 - [Speedaf : Last-mile delivery](https://www.speedaf.com/ke-en/product/warehouse-delivery) – paiement à la livraison, livraison à domicile
-- [Speedaf : Help Center](https://www.speedaf.com/ng-en/help) – délai d'acheminement
+- [Speedaf : Help Center](https://www.speedaf.com/ng-en/help) – délai d'acheminement ; lignes par pays (relues le 14 novembre 2026)
 - [Speedaf : Track](https://www.speedaf.com/ng-en/send-parcel) – 20 numéros ; paiement des droits en Afrique du Sud
 - [Speedaf : Look for Service Site](https://www.speedaf.com/ke-en/location-map) – carte des sites
 - [Speedaf : Customer Support](https://www.speedaf.com/ng-en/service/support) – formulaire de contact
@@ -146,6 +149,8 @@ Des droits ou taxes sont dus avant que la douane de ton pays libère le colis ; 
 - [Speedaf Pakistan : Home](https://www.speedaf.com/pk-en) – téléphone, e-mail, horaires, WhatsApp
 - [Speedaf UAE : Home](https://www.speedaf.com/ae-en) – téléphone, e-mail, horaires
 - [Speedaf Saudi Arabia : Home](https://www.speedaf.com/sa-en) – e-mail
+- [Speedaf Egypt : Home](https://www.speedaf.com/eg-en) – téléphones, e-mail, horaires (relus le 14 novembre 2026)
+- [Speedaf Maroc : Accueil](https://www.speedaf.com/ma-fr) – téléphone, e-mail, horaires (relus le 14 novembre 2026)
 - [Speedaf Kenya : Terms and Conditions](https://www.speedaf.com/ke-en/service-rule) – tentatives, refus, destinataire, réclamations, délais
 - [Speedaf Uganda : Terms and Conditions](https://www.speedaf.com/ug-en/service-rule) – idem pour l'Ouganda
 - [Speedaf Pakistan : Terms and Conditions](https://www.speedaf.com/pk-en/service-rule) – tentatives, destinataire, réclamations, preuve de livraison contestée

@@ -229,23 +229,33 @@ function sameWords(event: JsonObject, other: JsonObject): boolean {
 /** A row's words of three letters or more, as a reader tells them apart. None for a scan its source gave no words for. */
 function longWords(event: JsonObject): string[] {
   if (event.description === UNWORDED_STEP) return [];
-  return String(event.description ?? '').normalize('NFC').toLocaleLowerCase('en-US').split(/[^\p{L}\p{N}]+/u)
+  return textWords(event.description);
+}
+
+function textWords(text: unknown): string[] {
+  return String(text ?? '').normalize('NFC').toLocaleLowerCase('en-US').split(/[^\p{L}\p{N}]+/u)
     .filter((word) => [...word].length >= 3);
 }
 
 /**
- * Whether an earlier carrier's copy tells its scan in other words: in the same stage, at the same second (not a
- * minute's first, which a carrier keeping minutes gives every scan, nor of a row dated by its day), sharing no word of
- * three letters or more. The copy is then the scan in its own language (TopYou tells GOFO France's "Colis en cours
- * d'acheminement" as "The package left sorting center"); a copy that shares a word may say more.
+ * Whether an earlier carrier's copy tells its scan and nothing more: in the same stage, at the same second (not a
+ * minute's first, which a carrier keeping minutes gives every scan, nor of a row dated by its day), in words of three
+ * letters or more that share none with the scan's, or that add none to the scan's words and place. The copy is then
+ * the scan in its own language (TopYou tells GOFO France's "Colis en cours d'acheminement" as "The package left
+ * sorting center"), or the scan cut short (4PX tells iMile's "Your order has been received" at a centre as
+ * "【<centre>】received"); a copy that shares a word and adds one may say more. A copy in the scan's very words is
+ * served in the upper row's spelling (`spelt`).
  */
-function translated(copy: JsonObject, scan: JsonObject): boolean {
+function toldAgain(copy: JsonObject, scan: JsonObject): boolean {
   const second = (row: JsonObject) => row.observed === true || scanDay(row) || clockDay(row)
     ? NaN : Math.floor(Date.parse(String(row.occurred_at)) / 1000);
   const copyWords = longWords(copy);
   const scanWords = longWords(scan);
-  return copy.stage === scan.stage && second(copy) === second(scan) && second(copy) % 60 !== 0
-    && copyWords.length > 0 && scanWords.length > 0 && !copyWords.some((word) => scanWords.includes(word));
+  if (copy.stage !== scan.stage || second(copy) !== second(scan) || second(copy) % 60 === 0
+    || !copyWords.length || !scanWords.length) return false;
+  const told = [...scanWords, ...textWords(scan.location)];
+  return !copyWords.some((word) => scanWords.includes(word))
+    || (copyWords.every((word) => told.includes(word)) && !sameWords(copy, scan));
 }
 
 /**
@@ -376,10 +386,10 @@ function placedEvents(row: JsonObject): JsonObject {
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
   // otherwise, it is served in the other row's spelling, so they are shown once. So is an earlier carrier's copy whose
-  // words read as a stage neither row is in, or that tells the scan's second and stage in other words (`translated`),
+  // words read as a stage neither row is in, or that tells the scan's second and stage and nothing more (`toldAgain`),
   // in the words of the carrier whose scan it tells, whichever row is on top.
   const retold = new Map([...pairs].map(([copy, scan]) => [byId.get(copy)!, byId.get(scan)!] as const)
-    .filter(([copy, scan]) => copyMisleads(copy, scan) || (translated(copy, scan) && !copyTellsProblem(copy, scan)))
+    .filter(([copy, scan]) => copyMisleads(copy, scan) || (toldAgain(copy, scan) && !copyTellsProblem(copy, scan)))
     .map(([copy, scan]) => [String(copy.id), scan.description]));
   const told = (event: JsonObject) => retold.has(String(event.id)) ? { ...event, description: retold.get(String(event.id)) } : event;
   const spelt = (event: JsonObject, under: JsonObject | undefined) => {

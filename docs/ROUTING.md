@@ -863,12 +863,13 @@ A parcel often changes carrier at the border. The origin history is always kept.
   row's words: a row in those words spelt otherwise, case, spacing and punctuation aside (4PX's
   "designated facility" for SpeedX's "Designated Facility"), is served in the other row's spelling.
   An earlier carrier's copy whose words read as a stage neither row is in, or that tells the scan's
-  second (not a minute's first) and stage in words sharing none of three letters or more, is served
-  in the words of the scan it tells, on top or under it, so the apps show the carrier's own words alone
-  (TopYou tells GOFO's arrival at a transfer centre as "Shipment is out for delivery", in a code
-  it means as in transit, and GOFO France's French scans in English), unless the copy alone tells a
-  problem: those words keep it on top. A copy sharing a word keeps its line: it may say more.
-  The rows stay as stored.
+  second (not a minute's first) and stage in words sharing none of three letters or more, or adding
+  none to the scan's words and place, is served in the words of the scan it tells, on top or under it,
+  so the apps show the carrier's own words alone (TopYou tells GOFO's arrival at a transfer centre as
+  "Shipment is out for delivery", in a code it means as in transit, and GOFO France's French scans in
+  English; 4PX tells iMile's scans cut short to the centre's name and "arrived"), unless the copy alone
+  tells a problem: those words keep it on top. A copy that shares a word and adds one keeps its line:
+  it may say more. The rows stay as stored.
   A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless

@@ -414,6 +414,43 @@ describe('withEventPlaces', () => {
       .toBe('The package left sorting center');
   });
 
+  it('serves an earlier carrier\'s copy telling a scan\'s second and stage in no word beyond the scan\'s words and place in the scan\'s words', () => {
+    const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const row = {
+      id: 'parcel', carrier: 'four-px', carrier_data: { original_carrier: 'four-px', active_tracking_carrier: 'imile' },
+      tracking_events: [
+        // 4PX tells iMile's scans cut short, at their second: the apps show the scan once.
+        scan('arrived', 'imile', '2026-11-03T03:17:59+00:00', 'Varese Hub', 'Your order has arrived at Varese Hub'),
+        scan('arrived-copy', 'four-px', '2026-11-03T03:17:59+00:00', 'Varese Hub', '【varese hub】arrived.'),
+        scan('received', 'imile', '2026-11-02T14:55:33+00:00', 'Varese Hub', 'Your order has been received.'),
+        scan('received-copy', 'four-px', '2026-11-02T14:55:33+00:00', 'Varese Hub', '【varese hub】received.'),
+        // A copy that adds a word, the station it is shipped to, keeps its line.
+        scan('shipped', 'imile', '2026-11-03T03:32:34+00:00', 'Varese Hub', 'Your order has been shipped from Varese Hub'),
+        scan('shipped-copy', 'four-px', '2026-11-03T03:32:34+00:00', 'Varese Hub', '【varese hub】parcel shipped to【station 01】.'),
+        // In the scan's very words, it keeps the upper row's spelling.
+        scan('sorted', 'imile', '2026-11-04T08:10:11+00:00', 'Varese Hub', 'SORTED AT HUB'),
+        scan('sorted-copy', 'four-px', '2026-11-04T08:10:11+00:00', null, 'Sorted at hub'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of, description }) => [id, relay_of, description])).toEqual([
+      ['arrived', undefined, 'Your order has arrived at Varese Hub'],
+      ['arrived-copy', 'arrived', 'Your order has arrived at Varese Hub'],
+      ['received', undefined, 'Your order has been received.'],
+      ['received-copy', 'received', 'Your order has been received.'],
+      ['shipped', undefined, 'Your order has been shipped from Varese Hub'],
+      ['shipped-copy', 'shipped', '【varese hub】parcel shipped to【station 01】.'],
+      ['sorted', undefined, 'SORTED AT HUB'],
+      ['sorted-copy', 'sorted', 'SORTED AT HUB'],
+    ]);
+    // The rows stay as stored, in the account's export too.
+    expect(row.tracking_events[1].description).toBe('【varese hub】arrived.');
+    expect((withoutEventSources(row) as { tracking_events: Record<string, unknown>[] }).tracking_events[1].description)
+      .toBe('【varese hub】arrived.');
+  });
+
   it('serves a carrier\'s repeats of one scan under the newest of them', () => {
     const scan = (id: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), stage: 'failed_attempt', description: 'Address details incorrect',

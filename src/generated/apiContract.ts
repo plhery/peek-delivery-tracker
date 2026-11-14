@@ -3982,6 +3982,11 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^EM\\d{16}CA$",
         "confidence": "low",
         "preferred": true
+      },
+      {
+        "pattern": "^311\\d{9}$",
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingUrlTemplate": "https://track.4px.com/#/result/0/{trackingNumber}",
@@ -53114,7 +53119,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "color": "#1291c5",
+    "color": "#003876",
     "selectable": true,
     "timezone": "Asia/Shanghai",
     "tracking": {

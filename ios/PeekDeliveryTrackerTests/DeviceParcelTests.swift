@@ -1487,6 +1487,81 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertTrue(storage.parcels.isEmpty)
     }
 
+    /// The launch's round works from the parcels listed when it began. Someone else's parcel forgotten before the round
+    /// reaches it isn't signed up; one forgotten while it is being signed up is turned off again, and when the service
+    /// can't be told, a refresh tells it.
+    func testAParcelForgottenDuringTheRoundHearsNothingMore() async throws {
+        let first = UUID(), second = UUID()
+        let storage = Memory()
+        storage.parcels = [(first, "33333333333A"), (second, "33333333333B")].map { id, linkID in
+            var entry = DeviceParcel(linkID: linkID, label: "", archivedAt: nil,
+                                     parcel: Parcel(shared: package(id, number: "TESTPARCEL\(linkID.suffix(1))")), checkedAt: Date())
+            entry.viewer = true
+            return entry
+        }
+        let calls = Calls()
+        let gate = AlertGate()
+        var gated = client(calls, unalert: { _ in throw DeliveryAPIError.serviceFailed(503) })
+        gated.setAlert = { linkID, _, request in
+            calls.add("alert \(linkID) \(request.token)")
+            if linkID == "33333333333A" { await gate.pass(linkID) }
+            return .on
+        }
+        let device = DeviceParcels(client: gated, storage: storage)
+        let round = Task { await device.registerAlerts(token: "token1", locale: .en) }
+        await gate.arrived("33333333333A")
+        // Both leave the list while the service is asked about the first; neither had notifications yet.
+        await device.forget(id: second)
+        await device.forget(id: first)
+        await gate.release("33333333333A")
+        await round.value
+        XCTAssertEqual(calls.all, ["alert 33333333333A token1", "unalert 33333333333A token1"])
+        XCTAssertTrue(device.list().isEmpty)
+
+        let relaunched = DeviceParcels(client: client(calls), storage: storage)
+        XCTAssertTrue(relaunched.list().isEmpty)
+        try await relaunched.refresh()
+        XCTAssertEqual(calls.all.last, "unalert 33333333333A token1")
+        XCTAssertTrue(storage.parcels.isEmpty)
+    }
+
+    /// The owner's link taking a reader link's place while the round signs the reader link up: the reader link's
+    /// notifications stop, so each scan doesn't arrive twice.
+    func testAReaderLinkReplacedByTheOwnersDuringTheRoundHearsNothingMore() async throws {
+        let id = UUID()
+        let calls = Calls()
+        let gate = AlertGate()
+        var gated = client(calls)
+        gated.setAlert = { linkID, _, request in
+            calls.add("alert \(linkID) \(request.token)")
+            await gate.pass(linkID)
+            return .on
+        }
+        let device = DeviceParcels(client: gated, storage: Memory())
+        _ = try device.follow(PublicParcelResponse(link: reader("33333333333A"), package: package(id)), key: nil, label: nil)
+        let round = Task { await device.registerAlerts(token: "token1", locale: .en) }
+        await gate.arrived("33333333333A")
+        _ = try device.follow(PublicParcelResponse(link: link("22222222222A"), package: package(id)), key: key, label: nil)
+        await gate.release("33333333333A")
+        await round.value
+        XCTAssertEqual(calls.all, ["alert 33333333333A token1", "unalert 33333333333A token1"])
+    }
+
+    /// Forgotten and followed again in the same run, a parcel is signed up again.
+    func testAParcelFollowedAgainAfterBeingForgottenIsSignedUpAgain() async throws {
+        let id = UUID()
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: Memory())
+        let shown = PublicParcelResponse(link: reader("33333333333A"), package: package(id))
+        _ = try device.follow(shown, key: nil, label: nil)
+        await device.registerAlerts(token: "token1", locale: .en, environment: .development)
+        await device.forget(id: id)
+        _ = try device.follow(shown, key: nil, label: nil)
+        await device.registerAlerts(token: "token1", locale: .en, environment: .development)
+        XCTAssertEqual(calls.all, ["alert 33333333333A - important token1 en development", "unalert 33333333333A token1",
+                                   "alert 33333333333A - important token1 en development"])
+    }
+
     func testARoundOfNotificationRequestsEndsQuietlyWhenTheServiceWantsAPause() async {
         let storage = Memory()
         storage.keys = ["22222222222A": key, "22222222222B": key]

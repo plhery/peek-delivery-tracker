@@ -493,6 +493,8 @@ final class DeviceParcels {
         var entry = entries.remove(at: index)
         let key = keys.removeValue(forKey: entry.linkID)
         if let key { forgetting[entry.linkID] = key }
+        // Followed again, it is signed up again.
+        alertsAsked[entry.linkID] = nil
         // A forgotten link of this iPhone's own takes its notifications with it; someone else's goes
         // on, and stays on file until its notifications here are turned off.
         let token = client == nil ? nil : entry.alertToken
@@ -703,6 +705,8 @@ final class DeviceParcels {
         defer { alertRounds.remove(asked) }
         let due = entries.filter { alertsAsked[$0.linkID] != asked && $0.parcel.currentStage?.isFinal != true }.prefix(Self.alertsPerRound)
         for entry in due {
+            // Forgotten, or followed through another link, since the round began.
+            guard entries.contains(where: { $0.linkID == entry.linkID }) else { continue }
             let preset = entry.alertPreset ?? Self.alertPreset(for: entry.parcel)
             let answer: DeviceAlertAnswer
             do {
@@ -712,8 +716,14 @@ final class DeviceParcels {
                 break
             }
             if answer == .unavailable { break }
+            guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else {
+                // Forgotten, or followed through another link, while the service was asked: the link hears
+                // nothing more here.
+                if answer == .on { await stopAlert(entry, token: token, client) }
+                continue
+            }
             alertsAsked[entry.linkID] = asked
-            guard answer == .on, let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { continue }
+            guard answer == .on else { continue }
             let old = entries[index].alertToken
             entries[index].alertToken = token
             entries[index].alertPreset = preset
@@ -723,6 +733,20 @@ final class DeviceParcels {
                 try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: old))
             }
         }
+    }
+
+    /// Turns off a link's notifications on the token, for a link no longer followed here. Someone else's link the
+    /// service can't be told about yet waits with the parcels forgotten here, and each refresh tells it again; a link
+    /// of this iPhone's own takes its notifications with it when the service forgets it.
+    private func stopAlert(_ entry: DeviceParcel, token: String, _ client: DeviceParcelClient) async {
+        guard (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) == nil, entry.isViewer,
+              !entries.contains(where: { $0.linkID == entry.linkID }) else { return }
+        var left = entry
+        left.alertToken = token
+        left.forgotten = true
+        forgotten.removeAll { $0.linkID == entry.linkID && $0.alertToken == token }
+        forgotten.append(left)
+        save()
     }
 
     private func update(_ id: UUID, _ change: (inout DeviceParcel) -> Void) throws -> Parcel {

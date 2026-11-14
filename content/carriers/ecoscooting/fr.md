@@ -3,7 +3,7 @@ title: Ecoscooting suivi colis : statuts, point relais et contact
 description: Suivre un colis Ecoscooting en Espagne ou au Portugal : quel numéro utiliser, ce que veulent dire les statuts, les points relais et comment joindre Ecoscooting.
 slug: ecoscooting-suivi
 published: 2026-11-03
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Ecoscooting livre en Espagne et au Portugal les commandes passées sur des plateformes de vente en ligne transfrontalières. Il ne fait que la dernière étape : la livraison locale, à ta porte ou dans un point de retrait. Avant lui, le suivi montre les étapes de [Cainiao](carrier:cainiao), qui achemine le colis jusqu'en Espagne ou au Portugal. Suis ton colis sur ecoscooting.com avec le numéro des e-mails d'Ecoscooting, ou colle-le dans le champ ci-dessus.
@@ -38,7 +38,7 @@ ecoscooting.com affiche son suivi en espagnol, en portugais ou en anglais selon 
 | `Your shipment has arrived at sorting center` | Il est dans un centre de tri. |
 | `Your shipment is out for delivery` | Il est avec le livreur aujourd'hui. |
 | `Your shipment delivery attempt failed [Recipient not at home]` | Le livreur est passé et personne n'a répondu. Regarde tes e-mails pour la suite. |
-| `Service point closed` | Après des tentatives manquées chez toi, le livreur n'a pas pu le déposer non plus au point de retrait. Il ne t'y attend pas. |
+| `Service point closed` | Après des tentatives manquées chez toi, le livreur n'a pas pu le déposer non plus au point de retrait. Il ne t'y attend pas, et Peek affiche « Tentative de livraison ». |
 | `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | Remis à un point de retrait. Pas encore prêt, et pas encore entre tes mains. |
 | `Your shipment has arrived at parcelshop and you‘ll receive pickup instructions shortly` | Il t'attend au point de retrait. Le code PIN arrive par e-mail ou SMS. |
 | `Your shipment has been collected by consignee at the parcelshop` | Retiré au point de retrait. |
@@ -62,7 +62,7 @@ Ecoscooting compte plus de 8 000 points de retrait, ainsi que des consignes. Qua
 
 ## Colis Ecoscooting non livré, perdu ou volé
 
-Ecoscooting dit ne s'occuper que de la livraison locale. Article manquant ou erroné, retour, remboursement : contacte la boutique ou la plateforme où tu as acheté. Si le suivi ne bouge plus depuis des jours, lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
+Ecoscooting dit ne s'occuper que de la livraison locale. Article manquant ou erroné, retour, remboursement : contacte la boutique ou la plateforme où tu as acheté. Si le suivi ne bouge plus depuis des jours, lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating). Avec la ligne `Your shipment has an operational anomaly occurred at the sorting center. Issue is being resolved, updates will follow`, Peek passe à « Problème signalé » : Ecoscooting dit qu'il règle un problème au centre de tri et qu'il donnera des nouvelles.
 
 **Livré mais pas reçu.** Retrouve l'e-mail de livraison d'Ecoscooting (en Espagne « ¡Bien! Hemos entregado tu paquete », suivi du numéro ; au Portugal « Bom! Entregamos seu pacote ») et clique sur « No recibido » (« Não recebido » au Portugal), ou remplis le formulaire du service client : Ecoscooting répond sous 10 jours ouvrables. La suite dans [colis livré mais non reçu](guide:delivered-not-received).
 
@@ -74,7 +74,7 @@ Les pages d'Ecoscooting ne disent rien des colis abîmés, des délais de récla
 
 ## Contacter Ecoscooting : téléphone, e-mail et chat
 
-Relevé sur ecoscooting.com le 2 novembre 2026 :
+Relevé sur ecoscooting.com le 14 novembre 2026 :
 
 - **Espagne :** +34 912 15 93 69, ou la ligne gratuite +34 800 00 03 69 ; customersupport@ecoscooting.com.
 - **Portugal :** +351 300 609 006 ; suportecliente@ecoscooting.com.
@@ -89,7 +89,7 @@ Pages d'Ecoscooting citées ici, en espagnol, en anglais et en portugais : sur w
 
 Quand Cainiao ou CACESA donne un numéro `CNESP` ou `CNPRT`, ou une étiquette que Peek reconnaît comme celle d'Ecoscooting, il suit le colis jusque chez Ecoscooting ; un autre numéro de 18 chiffres n'est pas suivi.
 
-Tu vois le statut, l'historique avec l'heure de chaque scan d'Ecoscooting (mais pas les lieux), le poids, l'heure de livraison et, une fois le colis au point de retrait, le nom et l'adresse du point, gardés après le retrait. Pas de date de livraison prévue. Le code PIN, le téléphone et les horaires du point, le code postal de destination et les références de commande ne sont pas repris. Les lignes restent dans l'anglais d'Ecoscooting, sauf un simple `Out for delivery`, qui s'affiche « En livraison ». Dès la remise au point de retrait, Peek affiche « Prêt à être retiré » : attends quand même le message avec le code PIN. Ecoscooting ne dit jamais qu'un numéro n'existe pas : un mauvais numéro reste simplement sans nouvelles.
+Tu vois le statut, l'historique avec l'heure de chaque scan d'Ecoscooting (mais pas les lieux), le poids, l'heure de livraison et, une fois le colis au point de retrait, le nom et l'adresse du point, gardés après le retrait. Pas de date de livraison prévue. Les heures s'affichent dans ton fuseau horaire, et sur peektracker.com une ligne sous l'historique le rappelle (« Heures dans ton fuseau horaire : … »). Le code PIN, le téléphone et les horaires du point, le code postal de destination et les références de commande ne sont pas repris. Les lignes restent dans l'anglais d'Ecoscooting, sauf un simple `Out for delivery`, qui s'affiche « En livraison ». Quand le livreur dépose le colis au point de retrait (`Delivered to PUDO`), Peek affiche encore « En livraison » ; il ne passe à « Prêt à être retiré » qu'une fois le colis reçu par le point. Attends quand même l'e-mail ou le SMS avec le code PIN. Ecoscooting ne dit jamais qu'un numéro n'existe pas : un mauvais numéro reste simplement sans nouvelles.
 
 Peek vérifie le suivi toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi d'Ecoscooting qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouveau scan, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », il ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni Ecoscooting ni la boutique à ta place.
 

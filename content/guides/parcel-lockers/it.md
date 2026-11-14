@@ -4,7 +4,7 @@ description: Come funzionano i locker InPost, Poste, Amazon, BRT e GLS: dove tro
 slug: pacco-locker-codice-ritiro
 picture: Una fila di locker con uno sportello aperto, un telefono che mostra un codice e Pip che esce da una cassetta.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Un locker è un punto di ritiro senza nessuno allo sportello: una parete di cassette che si apre con un codice o con l'app del corriere. Il tracciamento ti dice quando il pacco è dentro, il corriere ti manda il codice per aprirlo, e da quel momento hai pochi giorni, spesso solo 3. Se non passi in tempo, il pacco torna a chi l'ha spedito.
@@ -38,7 +38,7 @@ I tempi in tabella sono quelli standard, e il negozio può cambiarli. InPost lo 
 
 La rete Punto Poste conta oltre 18.000 punti di ritiro e Locker. I punti di ritiro sono tabaccherie, bar, cartolerie, edicole, supermercati e negozi KiPoint; i Locker si trovano anche in alcuni uffici postali. I BRT Locker stanno in negozi, centri commerciali e distributori di carburante, con orari ampi anche nel weekend; quelli all'esterno funzionano 24 ore su 24.
 
-Non tutti i pacchi ci entrano. Con Poste Delivery Business, in un Punto Poste o in un Locker di Poste arriva solo un pacco singolo fino a 36 x 37 x 56 cm e 15 kg: se è più grande o più pesante, torna al mittente senza essere consegnato. Nei BRT Locker il lato più lungo deve restare sotto i 50 cm, il volume sotto 0,07 m³ e il peso entro 20 kg; le spedizioni in più colli non sono ammesse.
+Non tutti i pacchi ci entrano. Con Poste Delivery Business, in un Punto Poste o in un Locker di Poste arriva solo un pacco singolo fino a 36 x 37 x 56 cm e 15 kg: se è più grande o più pesante, torna al mittente senza essere consegnato. Gli stessi limiti valgono per tutte le spedizioni consegnate o accettate nella rete Punto Poste. Nei BRT Locker il lato più lungo deve restare sotto i 50 cm, il volume sotto 0,07 m³ e il peso entro 20 kg; le spedizioni in più colli non sono ammesse.
 
 Compri da privati? Per Subito vedi [ordini dell'usato](guide:second-hand-orders), per Vinted [ordini Vinted](guide:vinted-orders).
 
@@ -68,7 +68,7 @@ Meno che in un ufficio postale o in un punto con personale.
 - **Punto Poste Locker.** 3 giorni lavorativi, contro i 7 di un Punto Poste con personale, per le spedizioni Poste Delivery Business.
 - **Amazon Locker.** 3 giorni dall'e-mail con le credenziali per il ritiro. Poi il pacco torna ad Amazon, con un rimborso totale automatico.
 - **Locker GLS.** 8 giorni, contro i 10 di un GLS Point in negozio o di una sede GLS.
-- **BRT Locker.** Le pagine di BRT non indicano un termine per i locker: guarda l'avviso di BRT.
+- **BRT Locker.** Le pagine di BRT non indicano un termine per i locker: guarda l'avviso di BRT. Nei BRT-fermopoint, i punti di ritiro in edicole, tabaccherie, cartolerie e altri negozi convenzionati, la giacenza è di 10 giorni, con avviso per e-mail o SMS.
 
 Cosa succede dopo, e come si ottiene il rimborso: [pacco in giacenza non ritirato](guide:uncollected-parcel) e [pacco rispedito al mittente](guide:returned-to-sender).
 
@@ -89,9 +89,9 @@ Prima di uscire di casa, rileggi l'ultimo avviso e il tracciamento. Se l'indiriz
 Sì a tutte e due, con qualche limite.
 
 - **InPost.** Ritira solo chi ha il QR o il PIN: basta inoltrare l'e-mail o l'SMS con i codici. Senza app, al locker scegli «Ritira il pacco», poi avvicini il QR al lettore o digiti il tuo numero di telefono e il codice. L'app serve per aprire a distanza, stando entro circa 70 metri.
-- **Poste Italiane.** Puoi delegare qualcun altro, ma solo per il ritiro standard con il codice PIN.
+- **Poste Italiane.** Puoi delegare qualcun altro, ma solo per il ritiro standard con il codice PIN. Al Locker inserisci il PIN o scansioni il QR ricevuto per SMS o e-mail; in un Punto Poste con personale dai il codice all'operatore.
 - **Amazon.** Il cassetto si apre inserendo il codice personale che ricevi per e-mail.
-- **BRT.** Al locker premi «Ritirare» o il tasto 1 - CLIENTE, poi scansioni il QR o digiti il PIN. Non serve un'app.
+- **BRT.** I BRT Locker hanno uno schermo touch o un tastierino numerico con display: sul primo tocchi «Ritirare», sul secondo premi il tasto 1 - CLIENTE. Poi scansioni il QR o digiti il PIN, e lo sportello si apre da solo. Non serve un'app.
 
 Manda il codice solo a chi conosci. Un SMS inatteso con un link per «sbloccare» un pacco non viene dal locker: vedi [SMS truffa sui pacchi](guide:delivery-scam-texts).
 
@@ -126,7 +126,7 @@ Se il corriere indica il punto, la scheda del pacco lo mostra in Punto di ritiro
 
 Le notifiche ti avvisano quando il pacco è pronto per il ritiro. C'è anche un'e-mail facoltativa, spenta finché non la attivi: arriva una volta quando il pacco è pronto per il ritiro e una volta quando è consegnato.
 
-Peek non mostra e non conserva il codice per aprire il locker. Quel codice arriva solo dall'app, dall'SMS o dall'e-mail del corriere.
+Peek non mostra e non conserva il codice per aprire il locker. Quel codice arriva solo dall'app, dall'SMS o dall'e-mail del corriere. Se incolli in Peek un codice di 6 cifre senza scegliere il corriere, Peek ti avvisa «Sembra un codice di ritiro» e ti chiede il codice di tracciamento, che trovi nell'e-mail di spedizione.
 
 Il codice di tracciamento InPost ha 24 cifre; le altre forme sono in [riconoscere il corriere dal codice](guide:tracking-number-formats).
 
@@ -138,13 +138,14 @@ Il codice di tracciamento InPost ha 24 cifre; le altre forme sono in [riconoscer
 - [InPost: Contatti e assistenza](https://inpost.it/contatti-e-assistenza) – PIN da InPost, recapiti dati al negozio, tempi decisi dal negozio, delega con e-mail o SMS, locker guasto, numero gratuito 02 38582894 dal lunedì al sabato dalle 8 alle 20, 24 cifre, consegna a domicilio non dirottabile «per ora», due tentativi e poi il locker o l'InPost Point più vicino se il venditore lo consente
 - [InPost: Giacenza, come funziona con InPost](https://inpost.it/news-giacenza-come-funziona-con-inpost) – circa 3 giorni, nessuna proroga, promemoria, ritorno senza costi
 - [InPost: App InPost](https://inpost.it/app-inpost) – codice e QR nell'app, apertura a distanza entro circa 70 metri, consegna a domicilio spostata nel locker dal link nell'e-mail, non dall'app
-- [Poste Italiane: Rete Punto Poste](https://www.poste.it/punto-poste/rete-punto-poste) – PIN o QR per SMS o e-mail, delega solo con PIN, spedire dal Locker, oltre 18.000 punti di ritiro e Locker, tipi di negozio, Locker anche in alcuni uffici postali, assistenza 803 160 e +39 06 4526 3160
+- [Poste Italiane: Rete Punto Poste](https://www.poste.it/punto-poste/rete-punto-poste) – PIN o QR per SMS o e-mail, delega solo con PIN, spedire dal Locker, oltre 18.000 punti di ritiro e Locker, tipi di negozio, Locker anche in alcuni uffici postali, assistenza 803 160 e +39 06 4526 3160, codice all'operatore, massimo 36 x 37 x 56 cm e 15 kg in tutta la rete (letto il 14 novembre 2026)
 - [Poste Italiane: Poste Delivery Business, scheda prodotto](https://business.poste.it/business/files/1476520760931/poste-delivery-business-express-standard-scheda-prodotto.pdf) – 3 giorni lavorativi nel Locker e 7 al Punto Poste, punto alternativo entro 700 metri o 4 km, resi con QR, massimo 36 x 37 x 56 cm e 15 kg, niente multicollo, ritorno al mittente dei pacchi troppo grandi o pesanti
 - [Poste Italiane: FAQ Scegli Tu](https://www.poste.it/assistenza/faq-scegli-tu) – consegna spostata in un Locker dal link nell'avviso, servizio clienti 803 160 e 06 4526 3160, orari
-- [About Amazon Italia: Il volto gentile dietro gli Amazon Locker](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-volto-gentile-dietro-gli-amazon-locker) – codice personale, e-mail con le istruzioni e le credenziali per il ritiro, tre giorni, ritorno ad Amazon e rimborso totale automatico (articolo del 2018)
-- [BRT: Locker](https://www.brt.it/it/network/locker/) – QR o PIN di 8 cifre, «Ritirare» o tasto 1, spedizioni e resi, negozi, centri commerciali e distributori di carburante, 24 ore all'aperto, lato maggiore sotto 50 cm, volume sotto 0,07 m³, 20 kg, niente multicollo
+- [About Amazon Italia: Il volto gentile dietro gli Amazon Locker](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-volto-gentile-dietro-gli-amazon-locker) – codice personale, e-mail con le istruzioni e le credenziali per il ritiro, tre giorni, ritorno ad Amazon e rimborso totale automatico (articolo del 2018, riletto il 14 novembre 2026)
+- [BRT: Locker](https://www.brt.it/it/network/locker/) – schermo touch o tastierino, QR o PIN di 8 cifre, «Ritirare» o tasto 1, spedizioni e resi, negozi, centri commerciali e distributori di carburante, 24 ore all'aperto, lato maggiore sotto 50 cm, volume sotto 0,07 m³, 20 kg, niente multicollo, nessun termine di giacenza indicato (letto il 14 novembre 2026)
+- [BRT: BRT-fermopoint](https://www.brt.it/it/brt-fermopoint/) – edicole, tabaccherie e cartolerie, avviso per e-mail o SMS, 10 giorni di giacenza (letto il 14 novembre 2026)
 - [BRT: Cosa devo fare se lo schermo del locker non funziona?](https://www.brt.it/it/faq/cosa-devo-fare-se-lo-schermo-del-locker-non-funziona/) – modulo in fondo all'e-mail di ritiro
 - [BRT: Posso scegliere un punto di ritiro?](https://www.brt.it/it/faq/posso-scegliere-un-punto-di-ritiro/) – scelta del punto dal tracciamento su MyBRT
-- [GLS: Smart Delivery Service](https://gls-group.com/IT/it/smartdeliveryservice/) – 8 giorni nel locker, 10 al GLS Point, avvisi per e-mail e SMS
+- [GLS: Smart Delivery Service](https://gls-group.com/IT/it/smartdeliveryservice/) – 8 giorni nel locker, 10 al GLS Point, avvisi per e-mail e SMS (letto il 14 novembre 2026)
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici
 :::

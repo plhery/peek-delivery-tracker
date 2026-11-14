@@ -3,7 +3,7 @@ title: J&T Express Sendungsverfolgung: JTDE-Nummer und Status
 description: J&T-Paket in Deutschland verfolgen: wie eine JTDE-Nummer aussieht, was jede Zeile der Sendungsverfolgung heißt und was du tust, wenn das Paket fehlt.
 slug: jt-express-sendungsverfolgung
 published: 2026-10-21
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 J&T Express Germany (J&T Express Germany GmbH aus Frankfurt am Main) ist das deutsche Netz der Paketgruppe J&T Express und stellt Pakete in Deutschland zu. Hat ein Shop deine Bestellung mit J&T verschickt, beginnt die Sendungsnummer mit `JTDE`: Füg sie oben ins Feld ein oder schau in der [Sendungsverfolgung auf jtexpress.de](https://www.jtexpress.de/tracking) nach. Der Shop, der deine Bestellung verschickt hat, kennt die Nummer: Sie steht in seiner Versand-E-Mail oder in deinen Bestelldetails.
@@ -58,11 +58,11 @@ Ein beim Nachbarn abgegebenes Paket steht in Peek also als `Your package has bee
 
 ## J&T Zustellung: Nachbar, Ablageort und Zustellfoto
 
-In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket für eine Zustelltour ein und stellt es dann zu oder meldet, warum die Zustellung gescheitert ist. Eine Übergabe an einen anderen Paketdienst zeigt Peeks Code nicht: Die Sendungsverfolgung von J&T begleitet das Paket bis zu deiner Tür.
+In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket für eine Zustelltour ein und stellt es dann zu oder meldet, warum die Zustellung gescheitert ist. Eine Übergabe an einen anderen Paketdienst zeigt Peeks Code nicht: Die Sendungsverfolgung von J&T begleitet das Paket bis zu deiner Tür. Wer klingelt, kann auch für einen Franchise-Partner von J&T fahren: Laut jtexpress.de sucht J&T in ganz Deutschland Partner, deren Teams Pakete zustellen.
 
 **In Zustellung.** `Your package has been loaded and is on its way to you` heißt: Dein Paket ist auf einer Zustelltour. In diesen Verläufen kommt die Zeile Stunden vor der Zustellung, am selben Morgen. Ein Zeitfenster oder einen erwarteten Zustelltag gibt die Sendungsverfolgung von J&T nicht an, also kann Peek auch keinen zeigen.
 
-**Zustellpräferenzen.** In deiner Versandbenachrichtigung steckt ein Link zur Seite [„Zustellpräferenzen festlegen“](https://www.jtexpress.de/delivery-preference). Dort bestätigst du deine Postleitzahl und wählst aus den Zustellarten, die J&T dir anbietet: mit Unterschrift „Vom Empfänger unterschrieben“, „Beim Nachbarn abgegeben“ (mit dem Namen des Nachbarn und ob er nebenan oder auf derselben Etage wohnt) oder „Empfang/Reception“; ohne Unterschrift Haustür oder Veranda, Garten oder Hof, Briefkasten oder Garage. Laut J&T hält sich der Zusteller an deine Wahl. Wählst du einen Ort ohne Unterschrift, weist die Seite darauf hin, dass du das Verlustrisiko trägst, sobald das Paket dort liegt. Lässt der Stand der Sendung keine Wahl mehr zu, sagt sie dir das.
+**Zustellpräferenzen.** In deiner Versandbenachrichtigung steckt ein Link zur Seite [„Zustellpräferenzen festlegen“](https://www.jtexpress.de/delivery-preference). Dort bestätigst du deine Postleitzahl und wählst aus den Zustellarten, die J&T dir anbietet: mit Unterschrift „Vom Empfänger unterschrieben“, „Beim Nachbarn abgegeben“ (mit dem Namen des Nachbarn und ob er nebenan oder auf derselben Etage wohnt) oder „Empfang/Reception“; ohne Unterschrift Haustür oder Veranda, Garten oder Hof, Briefkasten oder Garage. Laut J&T hält sich der Zusteller an deine Wahl; das vermeide Zweitzustellungen und Fehlzustellungen, und deine Angaben nutze J&T nur für diese Zustellung. Wählst du einen Ort ohne Unterschrift, weist die Seite darauf hin, dass du das Verlustrisiko trägst, sobald das Paket dort liegt. Lässt der Stand der Sendung keine Wahl mehr zu, sagt sie dir das.
 
 **Zustellfoto.** Laut dem Datenschutzhinweis zum fotografischen Zustellnachweis macht der Zusteller ein Foto vom Paket, wenn er es dir gibt oder am vereinbarten Ort abstellt. Auf dem Bild sollen nur das Paket und so viel vom Ablageort wie nötig zu sehen sein; wer versehentlich mit draufkommt, wird automatisch unkenntlich gemacht. J&T löscht das Foto in der Regel 6 Monate nach der Zustellung; geht in dieser Zeit eine Reklamation ein, kann es bis zu deren Abschluss gespeichert bleiben. Um eine Reklamation zu klären, kann J&T es dem Absender zeigen.
 
@@ -84,9 +84,9 @@ Den Auftrag an J&T hat der Shop erteilt, bei einem Online-Kauf ist er also deine
 
 ## J&T Kontakt und Kundenservice
 
-So stand es am 10. November 2026 auf der [Kontaktseite von J&T](https://www.jtexpress.de/contact):
+So stand es am 14. November 2026 auf der [Kontaktseite von J&T](https://www.jtexpress.de/contact):
 
-- **Hotline:** +49 6931090650, Mo. – Fr. 8:00 bis 20:00 Uhr, an Feiertagen geschlossen.
+- **Hotline:** +49 6931090650 (aus Deutschland 069 31090650), Mo. – Fr. 8:00 bis 20:00 Uhr, an Feiertagen geschlossen.
 - **Live-Chat:** „Chat starten“ auf der Kontakt- und der FAQ-Seite.
 - **E-Mail:** de-jtservice@jtexpress.de.
 - **Büro:** J&T Express Germany GmbH, Am Giener 2, 55268 Nieder-Olm. Das Impressum nennt als Anschrift Wiesenhüttenstraße 11, 60329 Frankfurt am Main.
@@ -100,7 +100,7 @@ Bei einer Online-Bestellung ist trotzdem der Shop deine erste Adresse: Er hat di
 
 Peek zeigt den Status, jeden Scan mit genauer Uhrzeit und den Zeitpunkt der Zustellung. J&T gibt jeden Scan als genauen Zeitpunkt an, Peek zeigt ihn also in der Zeitzone deines Geräts; auf peektracker.com steht sie in der letzten Zeile unter dem Verlauf („Uhrzeiten in deiner Zeitzone: …“). Die Scans zeigt Peek im englischen Wortlaut von J&T. Orte, einen erwarteten Zustelltag oder das Gewicht gibt J&T nicht heraus, Peek zeigt also keine Karte. Bei sehr langem Verlauf behält Peek die neuesten 100 Scans. „Website von J&T Express Germany öffnen“ auf der Seite des Pakets öffnet deine Nummer in der Sendungsverfolgung von J&T.
 
-Bis J&T das Paket scannt, zeigt Peek „Warten auf den Paketdienst“ und fragt weiter nach. Ist die Sendungsverfolgung von J&T nicht erreichbar oder kennt sie die Nummer nicht, fragt Peek bei Tracking-Diensten nach und zeigt deren Verlauf in deren Worten.
+Bis J&T das Paket scannt, zeigt Peek „Warten auf den Paketdienst“ und fragt weiter nach. Ist die Sendungsverfolgung von J&T nicht erreichbar oder kennt sie die Nummer nicht, fragt Peek bei Tracking-Diensten nach und zeigt deren Verlauf in deren Worten. Antworten später J&T und die Tracking-Dienste ohne Scan für ein Paket, das schon welche hat, behält Peek die gefundenen Scans und schreibt, wenn das anhält: „Der Paketdienst hat gerade keine neuen Scans. Die bisherigen bleiben erhalten, und Peek prüft weiter.“
 
 Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange J&T selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang kein neuer Scan (solange es „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek stündlich nach. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. J&T oder den Shop kann Peek nicht für dich kontaktieren, und es kann weder die Adresse ändern noch eine neue Zustellung buchen.
 
@@ -129,11 +129,11 @@ Ruf +49 6931090650 an (Mo. – Fr. 8:00 bis 20:00 Uhr), nutze den Live-Chat auf 
 :::sources
 - [J&T Express: Sendungsverfolgung](https://www.jtexpress.de/tracking) – Abfrage, bis zu 10 Nummern, Sprachen, Scans neu laden, Meldung ohne Ergebnis, Nachbardetails mit Postleitzahl, fünf Versuche
 - [J&T Express: Häufig gestellte Fragen](https://www.jtexpress.de/faq) – JTDE-Nummern und wo sie stehen, zugestellt aber nicht erhalten, falsche Adresse, Live-Chat; keine Laufzeiten, Zustellversuche oder Schadensregeln
-- [J&T Express: Zustellpräferenzen festlegen](https://www.jtexpress.de/delivery-preference) – Link in der Versandbenachrichtigung, Postleitzahl, Zustellarten mit und ohne Unterschrift, Verlustrisiko
+- [J&T Express: Zustellpräferenzen festlegen](https://www.jtexpress.de/delivery-preference) – Link in der Versandbenachrichtigung, Postleitzahl, Zustellarten mit und ohne Unterschrift, Verlustrisiko, weniger Zweit- und Fehlzustellungen, Angaben nur für diese Zustellung
 - [J&T Express: Kontaktieren Sie uns](https://www.jtexpress.de/contact) – Hotline, Servicezeiten, Chat, E-Mail, Büroadresse
 - [J&T Express: Impressum](https://www.jtexpress.de/legal-statement) – J&T Express Germany GmbH, Frankfurt am Main
 - [J&T Express: POD Datenschutzerklärung](https://www.jtexpress.de/pod-policy) – Zustellfoto, 6 Monate, Reklamation, Datenschutzkontakt
-- [J&T Express: Werden Sie unser Partner](https://www.jtexpress.de/career) – Franchise-Partner für Zustellung und Abholung auf der letzten Meile
+- [J&T Express: Werden Sie unser Partner](https://www.jtexpress.de/career) – Franchise-Partner in ganz Deutschland für Zustellung und Abholung auf der letzten Meile
 - [J&T Express: Über uns](https://www.jtexpress.de/about) – Gründung 2015 in Indonesien, Börsennotierung in Hongkong
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – Namen, JTDE-Nummern, Tracking-Links, Sätze der Sendungsverfolgung von echten Paketen und ihre Status, Zustelltouren, Zustellarten, was Peek weglässt, Hilfeseite
 - [Universal Parcel Scraper: gemeinsame Abfrage der J&T-Netze](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – englische Sätze, genaue Scanzeiten, kein Ort, kein Zustelltag, kein Gewicht, Namen und Telefonnummern weggelassen, neueste 100 Scans

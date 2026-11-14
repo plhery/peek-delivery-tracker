@@ -3,7 +3,7 @@ title: J&T Express Germany tracking: JTDE numbers and statuses
 description: Track a J&T Express parcel in Germany: what a JTDE number looks like, what each tracking line means, and what to do when your parcel is late, lost or missing.
 slug: jt-express-germany-tracking
 published: 2026-10-21
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt am Main) is the German network of the J&T Express parcel group: it delivers parcels in Germany. If a shop sent your order with J&T, the tracking number starts with `JTDE`: paste it in the box above, or look it up on [J&T's own tracker at jtexpress.de](https://www.jtexpress.de/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -58,11 +58,11 @@ So a parcel left with a neighbour reads `Your package has been successfully deli
 
 ## J&T Express Germany delivery: neighbours, safe places and photos
 
-In the histories Peek's code holds, J&T's courier loads the parcel for a delivery run and then either delivers it or reports why the delivery failed. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel to your door.
+In the histories Peek's code holds, J&T's courier loads the parcel for a delivery run and then either delivers it or reports why the delivery failed. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel to your door. The driver at your door may work for one of J&T's franchise partners: J&T's website says it is looking for partners all over Germany whose teams deliver parcels.
 
 **Out for delivery.** `Your package has been loaded and is on its way to you` means your parcel is on a delivery run. In those histories it comes hours before the delivery, the same morning. J&T's tracker gives no delivery window or expected day, so Peek can't show one either.
 
-**Delivery preferences.** The delivery notification email for your parcel carries a link to J&T's [delivery preferences page](https://www.jtexpress.de/delivery-preference). Confirm your postcode, then pick one of the methods J&T offers you: signed for by you, by a neighbour (you give their name and whether they live next door or on your floor) or at a reception desk, or left without a signature at the front door, in the garden, in the mailbox or in the garage. J&T says the driver follows your choice. Pick a place without a signature and the page warns that the risk of loss is yours once the parcel is left there. If the parcel's status no longer allows a choice, the page says so.
+**Delivery preferences.** The delivery notification email for your parcel carries a link to J&T's [delivery preferences page](https://www.jtexpress.de/delivery-preference). Confirm your postcode, then pick one of the methods J&T offers you: signed for by you, by a neighbour (you give their name and whether they live next door or on your floor) or at a reception desk, or left without a signature at the front door, in the garden, in the mailbox or in the garage. J&T says the driver follows your choice, which avoids second deliveries and misdeliveries, and that what you enter is used only for that delivery. Pick a place without a signature and the page warns that the risk of loss is yours once the parcel is left there. If the parcel's status no longer allows a choice, the page says so.
 
 **Delivery photo.** J&T's proof-of-delivery privacy notice says the driver photographs the parcel when handing it to you or leaving it at an agreed place, framing only the parcel and the part of the spot needed; anyone caught by accident is blurred automatically. J&T deletes the photo six months after delivery as a rule, may keep it until a complaint raised in that time is closed, and may show it to the sender to resolve a complaint.
 
@@ -84,9 +84,9 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 ## J&T Express Germany customer service and contact
 
-J&T Express Germany's channels, as read on [its contact page](https://www.jtexpress.de/contact) on 3 November 2026:
+J&T Express Germany's channels, as read on [its contact page](https://www.jtexpress.de/contact) on 14 November 2026:
 
-- **Phone:** +49 6931090650, Monday to Friday 8:00 to 20:00, closed on public holidays.
+- **Phone:** +49 6931090650 (069 31090650 from within Germany), Monday to Friday 8:00 to 20:00, closed on public holidays.
 - **Email:** de-jtservice@jtexpress.de.
 - **Live chat:** "Start Chat" on the contact and FAQ pages.
 - **Delivery photos and personal data:** de-dpo@jtexpress.de (from the proof-of-delivery privacy notice).
@@ -100,7 +100,7 @@ For an online order, start with the shop all the same: it booked the delivery wi
 
 Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone; on peektracker.com, the last line under the history names it ("Times are in your time zone: …"). Scans come in J&T's English, even if you read them in German on jtexpress.de. J&T gives no place, expected delivery day or weight, so Peek shows no map. On a very long history it keeps the newest 100 scans. "Open the J&T Express Germany website", on the parcel's page, opens your number on J&T's tracker.
 
-Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
+Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words. If J&T's tracker and the tracking services later all answer without a scan for a parcel that already has some, Peek keeps the scans it found and, if that lasts, says "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking."
 
 Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 
@@ -129,11 +129,11 @@ Call +49 6931090650 (Monday to Friday, 8:00 to 20:00), use the live chat on jtex
 :::sources
 - [J&T Express Germany: Track & Trace](https://www.jtexpress.de/tracking) – tracker, up to 10 numbers, languages, scans reloaded, the no-records message, neighbour details behind the postcode, five tries
 - [J&T Express Germany: Frequently Asked Questions](https://www.jtexpress.de/faq) – JTDE numbers and where to find them, delivered not received, wrong address, live chat; no delivery times, attempts or claim rules
-- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – link in the notification email, postcode check, methods with and without a signature, risk at a chosen place
+- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – link in the notification email, postcode check, methods with and without a signature, risk at a chosen place, fewer second deliveries and misdeliveries, details used only for that delivery
 - [J&T Express Germany: Contact Us](https://www.jtexpress.de/contact) – phone, hours, chat, email, office address
 - [J&T Express Germany: Legal notice](https://www.jtexpress.de/legal-statement) – J&T Express Germany GmbH, Frankfurt am Main
 - [J&T Express Germany: POD Privacy Policy](https://www.jtexpress.de/pod-policy) – delivery photos, six months, complaints, data protection contact
-- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – franchise partners for last-mile delivery and collection
+- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – franchise partners all over Germany for last-mile delivery and collection
 - [J&T Express Germany: About Us](https://www.jtexpress.de/about) – founded 2015 in Indonesia, Hong Kong listing
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – names, the JTDE shape, tracking links, the tracker's sentences read on live parcels and their stages, delivery runs, delivery types, what is left out, help page
 - [Universal Parcel Scraper: J&T's shared tracker lookup](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – English sentences, exact scan times, no place, expected day or weight, names and phone numbers left out, newest 100 scans

@@ -3,7 +3,7 @@ title: Ecoscooting tracking: statuses, pickup points and contact
 description: Track an Ecoscooting parcel in Spain or Portugal: which number to use, what its statuses mean, missed deliveries, parcelshops and how to reach Ecoscooting.
 slug: ecoscooting-tracking
 published: 2026-10-12
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Ecoscooting is a delivery company for online orders from cross-border platforms in Spain and Portugal. It only does the last leg: the local delivery to your door or to a pickup point. Track the parcel on ecoscooting.com with the number from Ecoscooting's emails, or paste it in the box above.
@@ -36,7 +36,7 @@ ecoscooting.com shows its tracking in English, Spanish or Portuguese, following 
 | `Your shipment has arrived at sorting center` | It's at a sorting centre. |
 | `Your shipment is out for delivery` | It's with the courier today. |
 | `Your shipment delivery attempt failed [Recipient not at home]` | The courier came and nobody answered. Check your email for what happens next. |
-| `Service point closed` | After failed attempts at your door, the courier couldn't leave it at the pickup point either. It isn't waiting there. |
+| `Service point closed` | After failed attempts at your door, the courier couldn't leave it at the pickup point either. It isn't waiting there, and Peek shows "Delivery attempted". |
 | `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | Handed to a pickup point. Not yet ready, and not with you. |
 | `Your shipment has arrived at parcelshop and you‘ll receive pickup instructions shortly` | Ready to pick up. The PIN comes by email or SMS. |
 | `Your shipment has been collected by consignee at the parcelshop` | Picked up at the parcelshop. |
@@ -60,7 +60,7 @@ Ecoscooting lists more than 8,000 pickup points, plus lockers. When your parcel 
 
 ## Ecoscooting parcel not delivered, lost or stolen
 
-Ecoscooting says it handles only the local delivery. For missing or wrong items, returns and refunds, contact the shop or platform you bought from. If the tracking hasn't moved for days, see [tracking that isn't updating](guide:tracking-not-updating).
+Ecoscooting says it handles only the local delivery. For missing or wrong items, returns and refunds, contact the shop or platform you bought from. If the tracking hasn't moved for days, see [tracking that isn't updating](guide:tracking-not-updating). With the line `Your shipment has an operational anomaly occurred at the sorting center. Issue is being resolved, updates will follow`, Peek switches to "Needs attention": Ecoscooting says it's sorting out a problem at the sorting centre and will post updates.
 
 **Marked delivered but not received.** Find Ecoscooting's delivery email (in Spanish, "¡Bien! Hemos entregado tu paquete", with the number) and press "No recibido" ("Não recebido" in Portuguese), or send its request form, which Ecoscooting answers within 10 business days. More in [delivered but not received](guide:delivered-not-received).
 
@@ -72,7 +72,7 @@ Ecoscooting's pages say nothing about damaged parcels, claim deadlines or compen
 
 ## Ecoscooting contact: phone, email and chat
 
-As listed on ecoscooting.com on 12 October 2026:
+As listed on ecoscooting.com on 14 November 2026:
 
 - **Spain:** +34 912 15 93 69, or the free line +34 800 00 03 69; customersupport@ecoscooting.com.
 - **Portugal:** +351 300 609 006; suportecliente@ecoscooting.com.
@@ -87,7 +87,7 @@ Ecoscooting's legal notice gives another number, 931 222 879, for queries and co
 
 When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, or a label Peek recognises as Ecoscooting's, Peek follows the parcel on to Ecoscooting; another 18-digit number isn't followed.
 
-Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. It leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
+Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. Times show in your time zone, and on peektracker.com a line at the end of the history says so: "Times are in your time zone: …". When the courier leaves the parcel at the pickup point (`Delivered to PUDO`), Peek still shows "Out for delivery"; it switches to "Ready for pickup" only once the point has received it. Wait for the email or SMS with the PIN all the same. Peek leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
 
 Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day Ecoscooting scans the parcel out for delivery, while Ecoscooting's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 

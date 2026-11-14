@@ -173,7 +173,8 @@ jobs:
     steps:
       - name: Say that deploys are off here
         if: vars.DEPLOY_ENABLED != 'true'
-        run: echo 'Not deploying: the DEPLOY_ENABLED variable is not true here.' >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          echo 'Not deploying: the DEPLOY_ENABLED variable is not true here.' >> "$GITHUB_STEP_SUMMARY"
       - name: End the run as cancelled
         env:
           GH_TOKEN: ${{ github.token }}

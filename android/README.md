@@ -46,7 +46,8 @@ Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.s
 - **Add a parcel** (`res/xml/shortcuts.xml`), there from install on, opens Add with its field empty.
 - **Next delivery** (`LauncherShortcuts.kt`) follows what the app publishes for the widget. It is named after the
   first parcel on its way in the widget's order and opens its page. It goes when nothing is on the way, the widget's
-  switch is off or nobody is signed in; a copy pinned to the home screen stays, greyed, as "Next delivery".
+  switch is off or nobody is signed in; a copy pinned to the home screen stays, greyed, as "Next delivery" in the
+  app's language, renamed when it changes.
 
 ## Home screen widgets
 

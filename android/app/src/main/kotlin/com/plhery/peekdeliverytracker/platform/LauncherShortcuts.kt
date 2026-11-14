@@ -80,8 +80,13 @@ object LauncherShortcuts {
             ShortcutManagerCompat.setDynamicShortcuts(context, listOf(shortcut))
         } else {
             val copy = ExtensionLocalizer(store.languageCode, Device.preferredLanguages())
+            val name = copy.text("appIntents.nextDelivery")
+            // A greyed copy is renamed too: after a change of the app's language, or where the system turned down its
+            // rename as it greyed.
+            if (published != null && (published.isEnabled || published.shortLabel.toString() != name)) {
+                ShortcutManagerCompat.updateShortcuts(context, listOf(nextDelivery(context, name, null)))
+            }
             if (published != null && published.isEnabled) {
-                ShortcutManagerCompat.updateShortcuts(context, listOf(nextDelivery(context, copy.text("appIntents.nextDelivery"), null)))
                 ShortcutManagerCompat.removeDynamicShortcuts(context, listOf(NEXT_DELIVERY))
             }
             ShortcutManagerCompat.disableShortcuts(context, listOf(NEXT_DELIVERY), greyed(store.isEnabled, snapshot != null, copy))

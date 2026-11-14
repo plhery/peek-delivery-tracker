@@ -652,7 +652,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "frankier-id"
       },
       {
-        "pattern": "^JJD(?!\\d{16}$)(?!0146\\d{14}$)[A-Z0-9]{8,}$",
+        "pattern": "^JJD(?!\\d{16}$)(?!0146\\d{14}$)(?!000090\\d{14,16}$)[A-Z0-9]{8,}$",
         "confidence": "high"
       },
       {
@@ -6144,6 +6144,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^3S[A-Z]{2,3}\\d{7,12}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^JJD000090\\d{14,16}$",
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://my.dhlecommerce.nl/home/tracktrace/",
@@ -45485,7 +45489,7 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.coupangls.com/"
   },
   "der-kurier-sk": {
-    "displayName": "DER KURIER",
+    "displayName": "DER KURIER Slovakia",
     "aliases": [
       "DER KURIER Slovakia, spol. s r.o."
     ],
@@ -53034,7 +53038,9 @@ export const CARRIER_CAPABILITIES = {
       "GSO",
       "Golden State Overnight",
       "Golden State Overnight Delivery Service",
-      "GSO (GLS US)"
+      "GSO (GLS US)",
+      "GLS United States",
+      "General Logistics Systems US"
     ],
     "countries": [
       "US"

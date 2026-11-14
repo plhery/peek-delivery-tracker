@@ -3393,6 +3393,57 @@ describe('TrackingSyncService', () => {
     expect(recorded.mock.calls.map(([kind, due]) => [kind, due])).toEqual([['account', 0], ['lookup', 0], ['unfollowed', null]]);
   });
 
+  it('reads the lists a run starts from at once, and fails once they are all in', async () => {
+    const pending = <T,>() => {
+      let resolve!: (value: T) => void;
+      let reject!: (error: unknown) => void;
+      const promise = new Promise<T>((settle, fail) => { resolve = settle; reject = fail; });
+      return { promise, resolve, reject };
+    };
+    const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
+    const client = fakeClient([]);
+    const unwatched = pending<string[]>();
+    const active = pending<JsonObject[]>();
+    const followed = pending<JsonObject[]>();
+    const unfiled = pending<JsonObject[]>();
+    client.listUnwatchedPackageIds.mockReturnValue(unwatched.promise);
+    client.listActivePackages.mockReturnValue(active.promise);
+    client.listFollowedOneOffPackages.mockReturnValue(followed.promise);
+    client.listUnfiledOneOffPackages.mockReturnValue(unfiled.promise);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn() }, null, () => new Date('2026-09-09T10:12:00Z'));
+    let settled = false;
+    const run = service.sync().finally(() => { settled = true; });
+    await tick();
+    // All four are read before any answers; the shared alerts wait for the parcels they are among.
+    expect(client.listUnwatchedPackageIds).toHaveBeenCalledOnce();
+    expect(client.listActivePackages).toHaveBeenCalledOnce();
+    expect(client.listFollowedOneOffPackages).toHaveBeenCalledOnce();
+    expect(client.listUnfiledOneOffPackages).toHaveBeenCalledOnce();
+    expect(client.sharedAlertPackageIds).not.toHaveBeenCalled();
+    active.resolve([{ id: 'archived', archived_at: '2026-09-01T00:00:00Z', user_id: 'user' }]);
+    await tick();
+    expect(client.sharedAlertPackageIds).toHaveBeenCalledExactlyOnceWith(['archived']);
+    unwatched.resolve([]);
+    followed.resolve([]);
+    unfiled.resolve([]);
+    await expect(run).resolves.toMatchObject({ checked: 0 });
+
+    // A read that fails fails the run, once the others are in.
+    const lateUnwatched = pending<string[]>();
+    client.listUnwatchedPackageIds.mockReturnValue(lateUnwatched.promise);
+    client.listActivePackages.mockRejectedValue(new Error('timeout'));
+    client.listFollowedOneOffPackages.mockResolvedValue([]);
+    client.listUnfiledOneOffPackages.mockResolvedValue([]);
+    settled = false;
+    const failing = service.sync().finally(() => { settled = true; });
+    failing.catch(() => undefined);
+    await tick();
+    expect(settled).toBe(false);
+    lateUnwatched.resolve([]);
+    await expect(failing).rejects.toThrow('timeout');
+  });
+
   it('checks five one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       sync_status: 'ok', user_id: null, one_off: true };

@@ -610,6 +610,20 @@ function leftFirst(parcels: JsonObject[], left: ReadonlySet<string>): JsonObject
 }
 
 /**
+ * What these reads answer, read at once, as Promise.all does; but a failure is thrown only
+ * once every read is in, so none is still running when the caller gives up.
+ */
+export async function allRead<T extends readonly unknown[] | []>(reads: T): Promise<{ -readonly [K in keyof T]: Awaited<T[K]> }> {
+  const settled = await Promise.allSettled(reads as readonly unknown[]);
+  const values: unknown[] = [];
+  for (const result of settled) {
+    if (result.status === 'rejected') throw result.reason;
+    values.push(result.value);
+  }
+  return values as { -readonly [K in keyof T]: Awaited<T[K]> };
+}
+
+/**
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
  * its start, so no run takes them all. Copies of one number open at the same minute
@@ -1587,6 +1601,9 @@ function untilShutdown<T>(work: Promise<T>, signal?: AbortSignal): Promise<T> {
   });
 }
 
+/** The one-off parcels a scheduled run reads: the followed ones, the unfiled ones, and the lists that could not be read. */
+type OneOffLists = { followed: JsonObject[]; unfiled: JsonObject[]; failed: Set<string> };
+
 class SupersededTrackingSync extends Error {}
 /** Another check wrote the parcel after this one read it: only the scans new to the parcel were stored. */
 class OvertakenTrackingSync extends SupersededTrackingSync {}
@@ -1626,9 +1643,13 @@ export class TrackingSyncService {
       const summary = emptySyncSummary();
       const now = this.now();
       const started = performance.now();
-      const unwatched = await this.unwatchedPackages(now, context.signal);
-      const active = await this.client.listActivePackages();
-      const shared = await this.sharedAlertPackages(active, context.signal);
+      // The lists the run starts from are read at once: none needs another's answer but the shared
+      // alerts, which need the parcels, so the run waits for the slowest rather than for them all.
+      const [unwatched, { active, shared }, lookupLists] = await allRead([
+        this.unwatchedPackages(now, context.signal),
+        this.client.listActivePackages().then(async (active) => ({ active, shared: await this.sharedAlertPackages(active, context.signal) })),
+        this.readOneOffPackages(now, context.signal),
+      ]);
       const due = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => isScheduledTrackingSyncDue(parcel, at, {
         unwatched: unwatched.has(String(parcel.id)), oneOff, unfollowed, sharedAlerts: shared.has(String(parcel.id)),
       });
@@ -1643,7 +1664,7 @@ export class TrackingSyncService {
       // stopping starts over with the accounts each time, and the lookups at the end of its list wait.
       const left = earlier?.left ?? new Set<string>();
       const parcels = urgentFirst(leftFirst([...shares.filter((parcel) => !rechecks.has(parcel)),
-        ...await this.oneOffPackages(due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
+        ...await this.oneOffPackages(lookupLists, due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
           (parcel) => !unwatched.has(String(parcel.id)), left, context.signal),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], left), now);
       // Copies of one number, in several accounts or followed without one, share their lookups, with
@@ -1834,6 +1855,7 @@ export class TrackingSyncService {
    * Among each, the ones the run that stopped for another check `left` go first.
    */
   private async oneOffPackages(
+    { followed, unfiled, failed }: OneOffLists,
     followedDue: (parcel: JsonObject, at: Date) => boolean,
     unfollowedDue: (parcel: JsonObject, at: Date) => boolean,
     now: Date,
@@ -1842,21 +1864,8 @@ export class TrackingSyncService {
     left: ReadonlySet<string>,
     signal?: AbortSignal,
   ): Promise<JsonObject[]> {
-    const failed = new Set<string>();
-    const list = async (operation: string, read: () => Promise<JsonObject[]>) => {
-      try { return await read(); }
-      catch (error) {
-        signal?.throwIfAborted();
-        captureOperationalError(error, { component: 'tracking', operation });
-        failed.add(operation);
-        return [];
-      }
-    };
-    const followed = await list('list_one_off_packages',
-      () => this.client.listFollowedOneOffPackages(new Date(now.getTime() - ONE_OFF_FOLLOWED_MS)));
+    const list = (operation: string, read: () => Promise<JsonObject[]>) => this.readList(operation, read, failed, signal);
     const listed = new Set(followed.map((parcel) => String(parcel.id)));
-    const unfiled = await list('list_unfiled_one_off_packages',
-      () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
     const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel, now)));
     const followedNow = followed.filter((parcel) => followedDue(parcel, now));
     const due = [...followedNow, ...unfollowed];
@@ -1880,6 +1889,29 @@ export class TrackingSyncService {
       const current = read.get(String(parcel.id));
       return current && unfollowedDue(current, now) ? [current] : [];
     });
+  }
+
+  /** The one-off parcels oneOffPackages takes from, both lists read at once, with the ones that could not be read. */
+  private async readOneOffPackages(now: Date, signal?: AbortSignal): Promise<OneOffLists> {
+    const failed = new Set<string>();
+    const [followed, unfiled] = await Promise.all([
+      this.readList('list_one_off_packages',
+        () => this.client.listFollowedOneOffPackages(new Date(now.getTime() - ONE_OFF_FOLLOWED_MS)), failed, signal),
+      this.readList('list_unfiled_one_off_packages',
+        () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS), failed, signal),
+    ]);
+    return { followed, unfiled, failed };
+  }
+
+  /** A list of parcels the run reads, empty when it cannot be read, whose operation `failed` then names. */
+  private async readList(operation: string, read: () => Promise<JsonObject[]>, failed: Set<string>, signal?: AbortSignal): Promise<JsonObject[]> {
+    try { return await read(); }
+    catch (error) {
+      signal?.throwIfAborted();
+      captureOperationalError(error, { component: 'tracking', operation });
+      failed.add(operation);
+      return [];
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { earlierParcelRows, foreignHistory, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
 import type { JsonObject } from './types';
@@ -1361,6 +1361,64 @@ describe('persistent tracking routing', () => {
       expect((await check('2026-09-10T11:40:00Z', null)).probes).toEqual(probes(3, '2026-09-10T15:40:00.000Z'));
       saved = before;
       expect((await check('2026-09-10T14:40:00Z')).probes).toEqual(probes(3, '2026-09-10T18:40:00.000Z'));
+    });
+    it('asks a carrier with a minimum interval of its own no sooner than it allows, and once it has passed', async () => {
+      // Only Poste Italiane fits this number, and it allows an hour between two lookups of a number.
+      const number = '123456A123456';
+      expect(minimumInterval('poste-italiane')).toBe(60 * 60_000);
+      let saved: JsonObject | undefined;
+      const check = async (at: string, change?: (run: ReturnType<typeof setup>) => void) => {
+        const run = setup(new Date(at), { hourlyUntil: Date.parse('2026-09-10T14:20:00Z') });
+        run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+        change?.(run);
+        const outcome = await run.router.fetch(parcel({ tracking_number: number, created_at: '2026-09-10T08:20:00Z',
+          ...(saved ? { carrier_data: { routing: saved } } : {}) }), false).catch((deferred: unknown) => deferred);
+        saved = (outcome instanceof RoutingDeferred ? outcome.routing : (outcome as RoutedResult).result.routing) as JsonObject;
+        return { recognized: asked(run.recognize), looked: run.direct.mock.calls.map(([, carrier]) => carrier), outcome };
+      };
+      expect((await check('2026-09-10T12:00:00Z')).recognized).toEqual(['poste-italiane']);
+      expect((await check('2026-09-10T13:00:00Z')).recognized).toEqual(['poste-italiane']);
+      // The last hourly check would ask again half an hour later: the hour holds, and counts no miss.
+      expect(saved).toMatchObject({ candidate_probes: { 'poste-italiane': { count: 2, retry_at: '2026-09-10T13:30:00.000Z' } },
+        paced_asks: { 'poste-italiane': '2026-09-10T13:00:00.000Z' } });
+      expect((await check('2026-09-10T13:30:00Z')).recognized).toEqual([]);
+      expect(saved).toMatchObject({ candidate_probes: { 'poste-italiane': { count: 2 } } });
+      const waiting = saved;
+      // Our own pacing refusing the read sends nothing: the hour does not start again.
+      const refused = await check('2026-09-10T14:00:00Z', (run) => run.recognize.mockRejectedValue(
+        new RateLimitedError('Poste Italiane', 60_000, 'Searched as often as an hour allows', { reason: 'self_paced' })));
+      expect(refused.recognized).toEqual(['poste-italiane']);
+      expect(saved).not.toHaveProperty('paced_asks');
+      // Once the hour has passed it is asked, and the lookup that follows a read that knows the number is the same ask.
+      saved = waiting;
+      const known = await check('2026-09-10T14:00:00Z', (run) => {
+        run.recognize.mockImplementation(knows('poste-italiane'));
+        run.direct.mockResolvedValue(directValue('poste-italiane'));
+      });
+      expect([known.recognized, known.looked]).toEqual([['poste-italiane'], ['poste-italiane']]);
+      expect((known.outcome as RoutedResult).correction?.carrier).toBe('poste-italiane');
+    });
+    it('asks a carrier named for the number no sooner than its minimum interval allows, and the filed one as its checks come', async () => {
+      const recent = { 'poste-italiane': '2026-09-10T11:30:00.000Z' };
+      const named = setup();
+      named.universal.mockResolvedValue({ ...history(), discovered_carrier: 'poste-italiane' });
+      await named.router.fetch(parcel({ tracking_number: '123456A123456',
+        carrier_data: { routing: state({ discovered_carrier: 'poste-italiane', paced_asks: recent }) } }), false);
+      expect(named.direct.mock.calls.map(([, carrier]) => carrier)).not.toContain('poste-italiane');
+      expect(named.recognize).not.toHaveBeenCalled();
+      // The carrier the parcel is filed under keeps its own checks' cadence.
+      const filed = setup();
+      filed.direct.mockResolvedValue(directValue('poste-italiane'));
+      const own = await filed.router.fetch(parcel({ carrier: 'poste-italiane', tracking_number: '123456A123456',
+        carrier_data: { routing: state({ configured_carrier: 'poste-italiane', paced_asks: recent }) } }), false);
+      expect(filed.direct.mock.calls.map(([, carrier]) => carrier)).toEqual(['poste-italiane']);
+      expect(own.result.routing).toMatchObject({ paced_asks: recent });
+      // A carrier without a minimum interval records no ask, and is asked again once its retry is due.
+      const dpd = setup();
+      const asks = await dpd.router.fetch(parcel({ tracking_number: swissDpd }), false);
+      expect(minimumInterval('dpd')).toBe(0);
+      expect(Object.keys((asks.result.routing as JsonObject).paced_asks ?? {}))
+        .toEqual(fourteen.filter((carrier) => minimumInterval(carrier) > 0));
     });
     it.each([
       // Past its hourly checks, a provider without history for a number nothing has answered for waits a day.

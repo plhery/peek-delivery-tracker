@@ -40,7 +40,7 @@ import {
 import type { JsonObject } from './types';
 import * as observability from './observability';
 import * as metrics from './metrics';
-import { catalogRules, recognizers, routingFailure, routingState, RoutingDeferred, TrackingRouter, type RoutedResult, type RoutingFailureKind } from './trackingRouting';
+import { catalogRules, minimumInterval, recognizers, routingFailure, routingState, RoutingDeferred, TrackingRouter, type RoutedResult, type RoutingFailureKind } from './trackingRouting';
 import { TrackingSyncAudit, WorkerShutdown } from './trackingAudit';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
@@ -49,7 +49,7 @@ import { healthStepRecorder } from './trackingHealth';
 import { hostStepRecorder, markLookup, unmarkLookups } from './stepRecorder';
 import { RoyalBrowserPaused, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { unseenFor } from './unseenLookup';
-import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, SchemaError } from 'universal-parcel-scraper';
+import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, RateLimitedError, SchemaError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
 import { doubled, s10 } from '../test/trackingNumbers';
 import { withEventPlaces } from './eventPlaces';
@@ -769,6 +769,9 @@ describe('fair scheduling', () => {
     // After a handoff, only the carrier it moved the parcel to.
     const handed = { ...checked, carrier: 'aliexpress', carrier_data: { original_carrier: 'aliexpress', active_tracking_carrier: 'correios-br' } };
     expect(isTrackingSyncDue(handed, at(1))).toBe(true);
+    // A partner's hour holds its probe, not the checks of the carrier the parcel is filed under.
+    const probing = { ...checked, carrier: 'la-poste', carrier_data: { delivery_probe: { carrier: 'poste-italiane', at: checked.last_synced_at } } };
+    expect(isTrackingSyncDue(probing, at(10))).toBe(true);
   });
 
   it('backs off boundedly when the job store is unavailable', () => {
@@ -5125,6 +5128,33 @@ describe('TrackingSyncService', () => {
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
   });
 
+  it('asks an earlier carrier with a minimum interval of its own no sooner than it allows', async () => {
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    let now = new Date('2026-01-12T10:30:00Z');
+    const adapter = {
+      fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => carrier === 'posti'
+        ? { status: 'in_transit', current_stage: 'ready_for_pickup', last_update: '2026-01-12T10:00:00Z',
+          events: [{ time: '2026-01-12T10:00:00Z', description: 'Ready for pickup', stage: 'ready_for_pickup' }] }
+        : { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti', last_update: '2026-01-11T10:00:00Z',
+          events: [{ time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] }),
+      fetchUniversal: vi.fn(),
+    };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'from-italy', carrier: 'poste-italiane', tracking_number: 'RA123456785IT' };
+    const sync = async (at: string) => {
+      now = new Date(at);
+      adapter.fetch.mockClear();
+      await service.syncPackage(parcel);
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+    expect(await sync('2026-01-12T10:30:00Z')).toEqual(['poste-italiane', 'posti']);
+    expect(parcel.carrier_data).toMatchObject({ active_tracking_carrier: 'posti', original_carrier: 'poste-italiane' });
+    // La Poste would be asked again after 55 min: Poste Italiane's hour holds.
+    expect(await sync('2026-01-12T11:25:00Z')).toEqual(['posti']);
+    expect(await sync('2026-01-12T11:30:00Z')).toEqual(['posti', 'poste-italiane']);
+  });
+
   it('asks the earlier carrier every 3 h for up to 14 days while the delivery carrier has only announced the parcel', async () => {
     // The origin hands the parcel over at the delivery carrier's pre-advice and flies it a day and more later.
     const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
@@ -6317,6 +6347,51 @@ describe('TrackingSyncService', () => {
     now = new Date('2026-09-10T16:20:00Z');
     expect(await refresh()).toEqual(['la-poste', 'swiss-post']);
     expect(parcel.carrier_data).toMatchObject({ active_tracking_carrier: 'swiss-post', original_carrier: 'la-poste' });
+  });
+
+  it('asks a partner with a minimum interval of its own no sooner than it allows, and asks once it has passed', async () => {
+    const report = vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const client = fakeClient();
+    let now = new Date('2026-09-10T10:00:00Z');
+    let originUpdate = '2026-09-10T11:00:00+02:00';
+    let partner = (): CarrierResult => { throw Object.assign(new Error('Shipment not found'), { status: 404 }); };
+    const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => carrier === 'poste-italiane' ? partner()
+      : { status: 'in_transit', delivery_carrier: 'poste-italiane', delivery_tracking_number: '3UW1234567890',
+        last_update: originUpdate, timezone: 'Europe/Paris', events: [{ time: originUpdate, description: 'In transit', stage: 'in_transit' }] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'to-italy', carrier: 'la-poste', tracking_number: 'CW123456785FR' };
+    const refresh = async (time: string, trigger: 'scheduled' | 'refresh' = 'scheduled') => {
+      now = new Date(`2026-09-10T${time}:00Z`);
+      adapter.fetch.mockClear();
+      await service.syncPackage(parcel, { trigger });
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+
+    // Poste Italiane allows an hour between two lookups of a number; Swiss Post, in the tests above, sets none.
+    expect([minimumInterval('poste-italiane'), minimumInterval('swiss-post')]).toEqual([60 * 60_000, 0]);
+    expect(await refresh('10:00')).toEqual(['la-poste', 'poste-italiane']);
+    expect(parcel.carrier_data).toMatchObject({ delivery_probe: { carrier: 'poste-italiane', at: '2026-09-10T10:00:00.000Z', misses: 1 } });
+    // The origin's news and a refresh by hand would ask at once: within the hour they wait, counting no miss.
+    originUpdate = '2026-09-10T12:20:00+02:00';
+    expect(await refresh('10:20')).toEqual(['la-poste']);
+    expect(await refresh('10:40', 'refresh')).toEqual(['la-poste']);
+    expect(parcel.carrier_data).toMatchObject({ delivery_probe: { at: '2026-09-10T10:00:00.000Z', misses: 1 } });
+    // Once it has passed, the news it waited through asks.
+    expect(await refresh('11:00')).toEqual(['la-poste', 'poste-italiane']);
+    expect(parcel.carrier_data).toMatchObject({ delivery_probe: { at: '2026-09-10T11:00:00.000Z', origin_update: originUpdate, misses: 1 } });
+    // A partner that has announced the parcel is asked every hour, not on every check.
+    partner = () => ({ status: 'pending', current_stage: 'registered', last_update: '2026-09-10T13:30:00+02:00', timezone: 'Europe/Rome',
+      events: [{ time: '2026-09-10T13:30:00+02:00', description: 'Announced', stage: 'registered' }] });
+    expect(await refresh('12:00')).toEqual(['la-poste', 'poste-italiane']);
+    expect(parcel.carrier_data).toMatchObject({ delivery_probe: { at: '2026-09-10T12:00:00.000Z', announced: true } });
+    expect(await refresh('12:10')).toEqual(['la-poste']);
+    // Our own pacing refusing the lookup sends nothing: no miss, no failure, and the next check asks.
+    partner = () => { throw new RateLimitedError('Poste Italiane', 60_000, 'Searched as often as an hour allows', { reason: 'self_paced' }); };
+    expect(await refresh('13:00')).toEqual(['la-poste', 'poste-italiane']);
+    expect(parcel.carrier_data).toMatchObject({ delivery_probe: { at: '2026-09-10T12:00:00.000Z', announced: true, misses: 1 } });
+    expect(report).not.toHaveBeenCalledWith('provider_failed', expect.anything());
+    expect(await refresh('13:10')).toEqual(['la-poste', 'poste-italiane']);
   });
 
   it('keeps the long gap for a partner whose record is older than the origin’s news', async () => {

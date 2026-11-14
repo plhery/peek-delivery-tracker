@@ -1,5 +1,5 @@
 import 'server-only';
-import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NEW_SCANS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
+import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NEW_SCANS, PLACEHOLDER_NUMBER, selfPacedRefusal, trackingFailureCode } from './trackingFailure';
 import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
 import { CarrierError, carrierErrorKind, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
@@ -57,7 +57,7 @@ import {
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import { UNIVERSAL_SOURCES, type UniversalSource } from 'universal-parcel-scraper';
-import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, minimumInterval, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, NUMBER_UNKNOWN_AFTER_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
@@ -235,15 +235,17 @@ interface DeliveryProbe extends JsonObject {
 /**
  * How this check asks a handed-over parcel's earlier carrier again: alongside the delivery carrier within a day of
  * the handoff, at most hourly; after it, every 3 h for up to 14 days, once the delivery carrier's answer shows it
- * still only announces the parcel (`announcedOnly`).
+ * still only announces the parcel (`announcedOnly`). Never sooner than that carrier's own minimum interval.
  */
 function earlierFollowUp(metadata: JsonObject, now: Date): 'alongside' | 'announced' | null {
   const handedOver = Date.parse(String(metadata.handed_over_at ?? ''));
   const asked = Math.max(handedOver, Date.parse(String(metadata.earlier_checked_at ?? '')) || 0);
   const since = now.getTime() - handedOver;
   if (!(since >= 0)) return null;
-  if (since < EARLIER_FOLLOW_UP_MS) return now.getTime() - asked >= DELIVERY_PROBE_INTERVAL_MS ? 'alongside' : null;
-  return since < EARLIER_ANNOUNCED_FOLLOW_UP_MS && now.getTime() - asked >= EARLIER_ANNOUNCED_INTERVAL_MS ? 'announced' : null;
+  const minimum = minimumInterval(String(metadata.original_carrier ?? ''));
+  if (since < EARLIER_FOLLOW_UP_MS) return now.getTime() - asked >= Math.max(DELIVERY_PROBE_INTERVAL_MS, minimum) ? 'alongside' : null;
+  return since < EARLIER_ANNOUNCED_FOLLOW_UP_MS && now.getTime() - asked >= Math.max(EARLIER_ANNOUNCED_INTERVAL_MS, minimum)
+    ? 'announced' : null;
 }
 
 /** Stages a delivery carrier reports only once it holds the parcel. */
@@ -3319,8 +3321,9 @@ export class TrackingSyncService {
         typeof parcel.tracking_url === 'string' ? parcel.tracking_url : null,
         typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language, metadata, parcelPhoneDigits(parcel, carrierId),
       ).then(normalizeCarrierResult).catch((error: unknown) => {
-        // The delivery carrier answers for the parcel: a miss here only waits for the next follow-up.
-        if (!isUnannouncedTrackingError(error)) reportRoutingEvent('provider_failed', {
+        // The delivery carrier answers for the parcel: a miss here, or our own pacing's refusal, only waits for the
+        // next follow-up.
+        if (!isUnannouncedTrackingError(error) && !selfPacedRefusal(error)) reportRoutingEvent('provider_failed', {
           carrier: carrierId, provider: carrierId, trackingNumber, category: routingFailure(error).kind,
           errorClass: errorType(error), error,
         });
@@ -3385,8 +3388,12 @@ export class TrackingSyncService {
       // While the origin is down, the saved partner alone can show the delivery: its gap does not grow.
       const gap = byHand || previousProbe?.announced ? DELIVERY_PROBE_SHORT_INTERVAL_MS
         : Math.min(DELIVERY_PROBE_MAX_INTERVAL_MS, DELIVERY_PROBE_INTERVAL_MS * 2 ** (originError ? 0 : misses - 1));
-      const askedRecently = previousProbe !== null && originUpdate === previousProbe.origin_update
-        && sinceProbe >= 0 && sinceProbe < gap;
+      // The partner's minimum interval between two lookups of a number (Poste Italiane's searches an hour) holds
+      // whatever would ask it sooner: the origin's news, its announcement, a refresh by hand. The probe waits, with
+      // no miss counted, and the origin's news it waited through asks once the interval has passed.
+      const minimum = candidate ? minimumInterval(candidate.carrier) : 0;
+      const askedRecently = previousProbe !== null && sinceProbe >= 0
+        && (sinceProbe < minimum || (originUpdate === previousProbe.origin_update && sinceProbe < gap));
       if (candidate && askedRecently) {
         // carrier_data is rebuilt from the result on every refresh: carry the marker forward.
         origin.delivery_probe = { ...previousProbe, carrier: candidate.carrier, number: candidate.number };
@@ -3447,12 +3454,19 @@ export class TrackingSyncService {
           if (deliveryTime > 0 && originFirst > 0 && deliveryTime >= originFirst) probe.held = true;
         } catch (error) {
           fallbackError = errorType(error);
-          // A partner that does not know the item yet, or answers inconclusively
-          // (a national post's miss), is waited for, not reported as failing.
-          if (!isUnannouncedTrackingError(error) && !answeredWithoutHistory(error)) reportRoutingEvent('provider_failed', {
-            carrier: carrierId, provider: candidate.carrier, trackingNumber, category: routingFailure(error).kind,
-            errorClass: fallbackError, error,
-          });
+          if (selfPacedRefusal(error)) {
+            // Our own pacing refused the probe before any request (Poste Italiane's searches an hour): the partner
+            // was not asked, so it counts no miss, and the next check asks it.
+            if (previousProbe) origin.delivery_probe = { ...previousProbe, carrier: candidate.carrier, number: candidate.number };
+            else delete origin.delivery_probe;
+          } else if (!isUnannouncedTrackingError(error) && !answeredWithoutHistory(error)) {
+            // The partner's service failed. One that does not know the item yet, or answers inconclusively
+            // (a national post's miss), is waited for, not reported as failing.
+            reportRoutingEvent('provider_failed', {
+              carrier: carrierId, provider: candidate.carrier, trackingNumber, category: routingFailure(error).kind,
+              errorClass: fallbackError, error,
+            });
+          }
         }
       }
       // The check saves the probe's marker although the origin's error carries no result, or routing sets the result aside.

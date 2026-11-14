@@ -388,6 +388,17 @@ and providers scan parcels across every time zone.
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
 | Delivered on a provider's word alone, which the parcel's carrier did not show (below) | daily around the clock for 3 days |
 
+A carrier the parcel is not filed under keeps that interval (`tracking.refresh.minMinutes`) for the
+number it is asked about. A handoff probe, a recognition read, a lookup of a carrier that detection,
+recognition or a provider points to, and the earlier carrier asked after a handoff wait that long
+after the last ask, whatever would ask sooner (the origin's news, an announcement, a refresh by hand).
+The wait is no failure and no miss, and the carrier is asked once it has passed. It holds per
+number, not across the carrier: the carrier's own pacing keeps the total (Poste Italiane's searches
+an hour), and its interval is sized for the parcels that fit it, so a number asked this way costs
+what a parcel filed under the carrier does. Copies of a number share the router's asks
+(`routing.paced_asks`); a handoff probe and the earlier carrier keep their own (`delivery_probe`,
+`earlier_checked_at`). A read our own pacing refuses sends nothing and starts no wait.
+
 A parcel checked hourly or less often has an hour of its own, opening at a minute its
 number gives, so those checks spread over the hour rather than all falling in its
 first runs; copies of one number open together and share their lookups. A carrier tracked only through its own browser, such
@@ -736,6 +747,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   has seen, a wait that would outlast its hourly checks ends an hour before they do, half
   an hour after the ask at the soonest: the last of them asks the carriers again, those
   ranked first among them, before the checks slow down or a lookup leaves the schedule.
+  A carrier with a minimum interval of its own is not asked sooner than it allows
+  (Refresh cadence); the lookup that follows its read in the same check is the same ask.
 - **After a scraper release.** A parcel keeps a digest of the catalog that last routed it
   (`routing.rules`: the scraper release, each carrier's detection rules, names, whether it
   has an adapter of its own and whether that adapter's clocks are local), so every release
@@ -814,7 +827,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   5 min on a refresh by hand, and once the partner has announced the parcel: a dated
   record no older than the origin's newest scan, without a scan of its own. An origin
   asked without the parcel's data, as for a parcel filed under no carrier, keeps the same
-  wait.
+  wait. A partner with a minimum interval of its own (Refresh cadence) is not asked sooner,
+  the origin's news included: the news it waited through asks once the interval has passed.
+  A probe our own pacing refuses counts no miss, and the next check asks again.
   A partner that does not know the item yet, or answers inconclusively, is not
   reported as `provider_failed`; its network failures and server errors still are.
 - A parcel filed under a carrier only universal providers track has no origin adapter to name
@@ -845,8 +860,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   handoff, and the parcel keeps the handoff. The database takes such a correction only when
   the handoff starts from the new carrier under the parcel's own number.
 - Once adopted (`handed_over_at`), the partner answers for the parcel. The origin publishes
-  some scans late, so for a day it is still asked alongside the partner, at most every 55 min
-  (`earlier_checked_at`). After that day, while the partner has scanned nothing past the label
+  some scans late, so for a day it is still asked alongside the partner, at most every 55 min,
+  or its own minimum interval when longer (`earlier_checked_at`). After that day, while the partner has scanned nothing past the label
   since the handoff (a scan with only its wall clock, on every clock) and shows no delivery round, problem, delivery or return (JRT hands a parcel
   to DHL at the shipper's pre-advice and flies it days later), the origin is asked after the
   partner's answer every 3 h, for up to 14 days after the handoff. A partner whose lookup fails

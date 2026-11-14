@@ -111,6 +111,11 @@ export interface RoutingState extends JsonObject {
    * it knows the number, though its lookup was not adopted.
    */
   candidate_probes?: Record<string, { count: number; retry_at: string; known?: true }>;
+  /**
+   * When the number last asked each carrier with a minimum interval of its own (`minimumInterval`) that the parcel
+   * is not filed under, by recognition or a lookup: until the interval has passed, it is not asked again.
+   */
+  paced_asks?: Record<string, string>;
   /** A carrier that knows the number but cannot track it without the user's input. */
   input_needed?: { carrier: string; field: string };
   /** The filed carrier refused the delivery postcode stored for it, until it answers. */
@@ -204,6 +209,14 @@ export function catalogRules(): string {
       definition.tracking.localClocks === true])]))
     .digest('base64url').slice(0, 16);
   return rules;
+}
+
+/**
+ * The least time between two lookups of one number a carrier allows (the catalog's `tracking.refresh.minMinutes`), in
+ * milliseconds, zero when it sets none: Poste Italiane's hour keeps the parcels it follows within its searches an hour.
+ */
+export function minimumInterval(carrier: string): number {
+  return (CARRIER_DEFINITIONS[carrier as keyof typeof CARRIER_DEFINITIONS]?.tracking.refresh?.minMinutes ?? 0) * 60_000;
 }
 
 /** Carriers whose lookup can open a browser (the catalog's `tracking.browser`). */
@@ -823,6 +836,11 @@ export class TrackingRouter {
     }
     delete state.carrier_named_at;
     delete state.quiet_until;
+    // A carrier whose minimum interval has passed may be asked again: its ask is forgotten.
+    const pacedAsks = Object.entries(isRecord(state.paced_asks) ? state.paced_asks : {})
+      .filter(([carrier, at]) => millis(at) + minimumInterval(carrier) > now().getTime());
+    if (pacedAsks.length) state.paced_asks = Object.fromEntries(pacedAsks);
+    else delete state.paced_asks;
     const previousFailures = state.consecutive_failures;
     const declared = String(parcel.carrier);
     const number = String(parcel.tracking_number ?? '');
@@ -1123,6 +1141,19 @@ export class TrackingRouter {
     const unsettledDirect = new Set<string>();
     // Carriers our own pacing refused before any request (`self_paced`): asked, but nobody contacted.
     const pacedDirect = new Set<string>();
+    // When a carrier the parcel is not filed under may next be asked about its number, as epoch milliseconds: once its
+    // minimum interval since the last ask has passed (`paced_asks`), zero when it sets none. The parcel's own checks
+    // keep its carrier's interval (trackingSyncDueAt).
+    const askableAt = (carrier: string): number => carrier === declared ? 0
+      : millis(state.paced_asks?.[carrier]) + minimumInterval(carrier);
+    // Those this check asked: the lookup that follows a carrier's recognition is part of the same ask.
+    const askedNow = new Set<string>();
+    const pacedOut = (carrier: string) => !askedNow.has(carrier) && askableAt(carrier) > now().getTime();
+    const noteAsk = (carrier: string) => {
+      if (carrier === declared || !minimumInterval(carrier)) return;
+      state.paced_asks = { ...state.paced_asks, [carrier]: now().toISOString() };
+      askedNow.add(carrier);
+    };
     // When the parcel's own carrier frees up, paced while the providers stood in for it (0: they did not).
     let pacedUntil = 0;
     // The clocks of rows a carrier holds back as written ahead of them: a provider relaying them shows them as scans.
@@ -1189,6 +1220,9 @@ export class TrackingRouter {
         report('carrier_input_required', carrier); return null;
       }
       if (millis(state.failures[carrier]?.retry_at) > now().getTime()) return null;
+      // A carrier the parcel is not filed under waits out its minimum interval since this number last asked it
+      // (Poste Italiane's searches an hour): no failure, and it is asked once the interval has passed.
+      if (pacedOut(carrier)) return null;
       attemptedDirect.add(carrier);
       const setAside = state.set_aside?.[carrier];
       clearSetAside(carrier);
@@ -1214,6 +1248,7 @@ export class TrackingRouter {
         // A carrier not confirmed for the number is asked whether it holds the parcel.
         const lookup = () => this.options.direct(lookupParcel, carrier);
         const value = await (candidate && !ownInputs ? confirmationLookup(lookup) : lookup());
+        noteAsk(carrier);
         value.result = normalizeCarrierResult(value.result);
         if (!usable(value.result)) throw Object.assign(new Error('No confirmed shipment progress'), { status: 404 });
         // It answers for the number, on local clocks too: a refusal an older release recorded no longer holds.
@@ -1356,6 +1391,7 @@ export class TrackingRouter {
           // Nobody answered, so the parcel's chip stays as the last answered checks left it.
           defer();
         }
+        noteAsk(carrier);
         const failure = fail(carrier, error);
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         holdBack(carrier, writtenAheadClocks(error));
@@ -1567,16 +1603,22 @@ export class TrackingRouter {
       const excluded = ownBrand(primary);
       const skip = (candidate: string) => excluded(candidate) || attemptedDirect.has(candidate)
           || millis(state.candidate_probes?.[candidate]?.retry_at) > now().getTime()
-          || millis(state.failures[candidate]?.retry_at) > now().getTime();
+          || millis(state.failures[candidate]?.retry_at) > now().getTime() || pacedOut(candidate);
       const ordering = recognitionOrder(skip);
       const eligible = recognize ? recognitionCandidates(number, ordering) : [];
       const due = eligible.slice(0, MAX_RECOGNITIONS);
       const next = addition ? eligible.slice(MAX_RECOGNITIONS, 2 * MAX_RECOGNITIONS) : [];
       const recognitionDeadline = performance.now() + RECOGNITION_BUDGET_MS;
       const errors = new Map<string, unknown>();
+      // Carriers whose last read our own pacing refused before any request: not asked, so their interval does not start.
+      const refused = new Set<string>();
+      const settled = (candidate: string, error?: unknown) => {
+        if (error !== undefined && selfPacedRefusal(error)) refused.add(candidate);
+        else refused.delete(candidate);
+      };
       const ask = async (candidate: string, context: TrackingContext) => {
-        try { return await recognize!(candidate, number, context); }
-        catch (error) { errors.set(candidate, error); throw error; }
+        try { const answer = await recognize!(candidate, number, context); settled(candidate); return answer; }
+        catch (error) { errors.set(candidate, error); settled(candidate, error); throw error; }
       };
       const outcomes = due.length ? await recognizeAll(due, ask,
         next.length ? Math.floor(RECOGNITION_BUDGET_MS / 2) : RECOGNITION_BUDGET_MS, signal) : [];
@@ -1590,9 +1632,11 @@ export class TrackingRouter {
         const browserDue = recognitionCandidates(number, { ...ordering, phase: 'browser',
           skip: (candidate) => skip(candidate) || outcomes.some((outcome) => outcome.carrier === candidate && outcome.status !== 'failed'),
         }).slice(0, MAX_BROWSER_RECOGNITIONS);
-        outcomes.push(...await recognizeAll(browserDue, (candidate, context) => this.options.recognizeBrowser!(candidate, number, context, errors.get(candidate)),
+        outcomes.push(...await recognizeAll(browserDue, (candidate, context) => this.options.recognizeBrowser!(candidate, number, context, errors.get(candidate))
+          .then((answer) => { settled(candidate); return answer; }, (error: unknown) => { settled(candidate, error); throw error; }),
           BROWSER_RECOGNITION_BUDGET_MS, signal));
       }
+      for (const outcome of outcomes) if (!refused.has(outcome.carrier)) noteAsk(outcome.carrier);
       signal?.throwIfAborted();
       recognized = settleRecognition(outcomes, now()).carrier;
       // A carrier that knows only an older shipment with the number answered without history for this parcel.
@@ -1689,7 +1733,8 @@ export class TrackingRouter {
     // once their failure's wait is over (the one asked first, while a provider serves the parcel,
     // once its own wait is too); each carrier recognition may ask once its probe's wait and its
     // failure's are; each provider but one waiting for a postcode the parcel lacks once its
-    // failure's wait is. Zero when nothing is listed.
+    // failure's wait is. A carrier the parcel is not filed under also waits out its minimum
+    // interval (askableAt). Zero when nothing is listed.
     const nextTurn = (): number => {
       const filed = state.confirmed_number === number && state.confirmed_carrier ? state.confirmed_carrier : declared;
       // As tryDirect: a carrier with an adapter, given the input it needs.
@@ -1697,16 +1742,17 @@ export class TrackingRouter {
         && (carrier === declared || (state.confirmed_carrier === carrier && state.confirmed_number === number)
           || !requiredRequirements(carrier, number).length);
       const turns = everyProvider.filter((source) => !awaitsInput(source)).map((source) => millis(state.failures[source]?.retry_at));
-      const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider ? millis(state.direct_retry_at) : 0) : null;
+      const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider ? millis(state.direct_retry_at) : 0,
+        askableAt(filed)) : null;
       if (own !== null) turns.push(own);
       for (const carrier of [detected.confidence === 'high' ? detected.carrier : undefined, state.discovered_carrier]) {
-        if (carrier && carrier !== filed && asks(carrier)) turns.push(millis(state.failures[carrier]?.retry_at));
+        if (carrier && carrier !== filed && asks(carrier)) turns.push(Math.max(millis(state.failures[carrier]?.retry_at), askableAt(carrier)));
       }
       if (recognizes(filed)) {
         const ordering = recognitionOrder(ownBrand(filed));
         for (const { carrier } of [...(recognize ? recognitionCandidates(number, ordering) : []),
           ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...ordering, phase: 'browser' }) : [])]) {
-          turns.push(Math.max(millis(state.candidate_probes?.[carrier]?.retry_at), millis(state.failures[carrier]?.retry_at)));
+          turns.push(Math.max(millis(state.candidate_probes?.[carrier]?.retry_at), millis(state.failures[carrier]?.retry_at), askableAt(carrier)));
         }
       }
       const earliest = turns.length ? Math.min(...turns) : 0;

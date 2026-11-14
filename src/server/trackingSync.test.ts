@@ -6844,9 +6844,10 @@ describe('TrackingSyncService', () => {
     const parcel = {
       id: 'thin-fallback', carrier: 'dpd', tracking_number: '06080000000002', current_stage: 'registered',
       last_status_text: 'Order created',
+      // The carrier's second missed check in a row: one alone waits for its retry, asking no provider.
       carrier_data: { status: 'pending', current_stage: 'registered', routing: { version: 1, configured_carrier: 'dpd',
         confirmed_carrier: 'dpd', confirmed_number: '06080000000002', failures: {}, probe_cursor: 0, discovery_cursor: 0,
-        ...(watermark ? { last_event_at: watermark } : {}) } },
+        consecutive_failures: 1, ...(watermark ? { last_event_at: watermark } : {}) } },
     };
     let now = new Date('2026-09-10T12:00:00Z');
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);

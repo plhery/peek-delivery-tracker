@@ -186,6 +186,12 @@ not asked, and a universal provider that failed (transport, verification, an unr
 answer) did not answer, so neither changes that; a carrier's own adapter failing does. When a failed direct adapter recovers, it
 takes over from the universal provider again.
 
+The carrier that answers for a parcel failing in passing (transport, a bot check) leaves a
+scheduled check without a provider: the check comes back at the carrier's retry time. The
+providers are asked once the parcel would show the failure, its last answer an hour old and a
+second check in a row failing. They are asked at once on a refresh by hand, for a parcel out for
+delivery, for one a provider answers for, and when the carrier's answer cannot be read (`schema`).
+
 When every source fails, the parcel keeps its last progress. The error chip appears only
 after two consecutive checks fail and the last successful check
 is at least 1 h old. An answer with progress, or one for a parcel
@@ -1094,6 +1100,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `paced_fallback` | Our own pacing refused the carrier of an account's parcel nothing has answered for an hour, and the check asks the providers meanwhile |
+| `carrier_retry_awaited` | The carrier that answers for the parcel failed in passing and the scheduled check waits for its retry, asking no provider |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |
 | `carrier_auto_swapped` | A carrier correction was committed. A signal, unless detection already names the new carrier for the number or lists it first among the carriers recognition asks for the parcel's lookup country: then the line has `category` `detected` |

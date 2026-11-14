@@ -40,6 +40,8 @@ const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
 /** Failures of the source's service rather than of the number asked: any answer from it ends them. */
 const SERVICE_FAILURES: readonly string[] = ['rate_limited', 'verification', 'schema', 'transport'];
+/** Those that come and go, so the carrier's next read usually passes: its site unreachable or on an outage page, a bot check. */
+const PASSING_FAILURES: readonly string[] = ['verification', 'transport'];
 /**
  * A carrier's failure that names the carrier holding the number's record, which is asked under the
  * same number: DHL's tracking holding only DHL Paket's record of a piece in DHL Express's range.
@@ -1402,6 +1404,21 @@ export class TrackingRouter {
         partialDirect = { value: filed, carrier: primary, label: true };
       }
       if (value && !partialDirect) return persistResult(value, primary);
+    }
+    // The carrier that answers for the parcel failed in passing: a scheduled check asks no provider in its
+    // place and comes back at the carrier's retry time. The providers are asked once the parcel would show the
+    // failure, its last answer an hour old and a second check in a row failing, and at once while it is out
+    // for delivery, when the news is the delivery.
+    const ownFailure = state.failures[primary];
+    if (scheduled && !changed && universalNumber === number && attemptedDirect.has(primary) && ownFailure
+      && PASSING_FAILURES.includes(ownFailure.kind) && millis(ownFailure.retry_at) > now().getTime()
+      && state.confirmed_carrier === primary && state.confirmed_number === number
+      && typeof metadata.tracking_provider !== 'string' && !localDirectFallback
+      && parcel.current_stage !== 'out_for_delivery' && (recent() || state.consecutive_failures === 0)) {
+      state.next_check_at = iso(recent()
+        ? Math.min(millis(ownFailure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS) : millis(ownFailure.retry_at));
+      report('carrier_retry_awaited', primary, ownFailure.kind);
+      defer();
     }
     // The filed carrier's answer, kept although its clocks are local: it
     // creates no scan instants, and a provider's history already shown stays.

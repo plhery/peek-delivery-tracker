@@ -157,6 +157,59 @@ describe('an account parcel our own pacing refuses once nothing has answered for
   });
 });
 
+describe('the carrier that answers for a parcel failing in passing', () => {
+  const answered = (routing: JsonObject = {}, values: JsonObject = {}): JsonObject => {
+    const base = parcel({ confirmed_carrier: 'la-poste', confirmed_number: 'TEST1234', ...routing });
+    return { ...base, ...values, carrier_data: { ...(base.carrier_data as JsonObject), ...(values.carrier_data as JsonObject | undefined) } };
+  };
+
+  it('waits for its retry on scheduled checks, and asks the providers once its last answer is an hour old', async () => {
+    const run = setup('2026-09-10T10:20:00.000Z');
+    const first = await missed(run.router(), answered(), true);
+    expect(first).toMatchObject({ stale: false, attempted: 1, routing: { consecutive_failures: 1,
+      next_check_at: '2026-09-10T10:35:00.000Z', failures: { 'la-poste': { kind: 'transport' } } } });
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('carrier_retry_awaited', expect.objectContaining({ provider: 'la-poste' }));
+    run.advance(15 * 60_000);
+    // Its second wait would outlast the hour: the check comes back when the answer is an hour old.
+    const second = await missed(run.router(), answered(first.routing), true);
+    expect(second).toMatchObject({ stale: false, attempted: 1, routing: { consecutive_failures: 2, next_check_at: '2026-09-10T11:00:00.000Z' } });
+    expect(run.universal).not.toHaveBeenCalled();
+    run.advance(25 * 60_000);
+    await missed(run.router(), answered(second.routing), true);
+    expect(run.direct).toHaveBeenCalledTimes(2);
+    expect(run.universal).toHaveBeenCalled();
+  });
+
+  it('spares an hourly parcel the providers for one missed check, not for a second', async () => {
+    const run = setup();
+    const first = await missed(run.router(), answered(), true);
+    expect(first).toMatchObject({ stale: false, attempted: 1, routing: { consecutive_failures: 1, next_check_at: '2026-09-10T11:15:00.000Z' } });
+    expect(run.universal).not.toHaveBeenCalled();
+    run.advance(HOUR);
+    expect(await missed(run.router(), answered(first.routing), true)).toMatchObject({ stale: true, routing: { consecutive_failures: 2 } });
+    expect(run.direct).toHaveBeenCalledTimes(2);
+    expect(run.universal).toHaveBeenCalled();
+  });
+
+  it.each([
+    ['a refresh by hand', {}, false],
+    ['a parcel out for delivery', { current_stage: 'out_for_delivery' }, true],
+    ['a parcel a provider answers for', { carrier_data: { tracking_provider: 'ParcelsApp' } }, true],
+  ])('asks the providers at once on %s', async (_name, values, scheduled) => {
+    const run = setup('2026-09-10T10:20:00.000Z');
+    await missed(run.router(), answered({}, values), scheduled);
+    expect(run.universal).toHaveBeenCalled();
+    expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('carrier_retry_awaited', expect.anything());
+  });
+
+  it('asks the providers at once when the carrier cannot read its own answer', async () => {
+    const run = setup('2026-09-10T10:20:00.000Z');
+    run.direct.mockRejectedValue(new TypeError('Unexpected answer'));
+    await missed(run.router(), answered(), true);
+    expect(run.universal).toHaveBeenCalled();
+  });
+});
+
 describe('a check every source sits out', () => {
   const waiting = (turns: Record<string, string>, kind = 'no_history') => Object.fromEntries(Object.entries(turns)
     .map(([source, retry]) => [source, { count: 3, kind, retry_at: retry }]));

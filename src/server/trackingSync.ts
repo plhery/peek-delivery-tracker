@@ -6,6 +6,7 @@ export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } 
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
 import { isLocale } from '../lib/locale';
+import { carrierAdapter } from './carriers';
 import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 
 import { createHash } from 'node:crypto';
@@ -84,6 +85,8 @@ const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
  * and checks queued meanwhile, such as a link opened, go between runs.
  */
 const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
+/** A scheduled run checks this many parcels at once, no two sharing what checkKeys names. */
+const SCHEDULED_RUN_LANES = 2;
 /**
  * One-off parcels have no owner: a scheduled run checks this many of them, all together, the
  * longest due first. A run that checks them all and leaves more due is queued again at once.
@@ -601,6 +604,24 @@ export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
   }
   for (const [key, queue] of queues) queues.set(key, [...queue.filter(urgent), ...queue.filter((parcel) => !urgent(parcel))]);
   return parcels.map((parcel) => refreshLimit(parcel) !== undefined ? queues.get(carrier(parcel))!.shift()! : parcel);
+}
+
+/**
+ * What two checks of a scheduled run never share at once: the account, whose merges run between its
+ * checks; the number, whose copies share their lookups; the carrier's adapter, so each carrier keeps
+ * the pace and limits of one check at a time (carriers on one adapter, as Parcelforce on Royal Mail's,
+ * share them); and the universal provider that tracks the number, which takes one call at a time
+ * across servers (acquire_tracking_provider), so a second check would find it busy.
+ */
+function checkKeys(parcel: JsonObject): string[] {
+  const carrier = String(parcel.carrier ?? '');
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const routing = isRecord(data.routing) ? data.routing : {};
+  const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '');
+  return [`carrier:${directCarrier(carrier) ? carrierAdapter(carrier) : carrier}`,
+    `number:${normalizeTrackingNumber(String(parcel.tracking_number ?? ''))}`,
+    ...(typeof parcel.user_id === 'string' ? [`account:${parcel.user_id}`] : []),
+    ...(typeof provider === 'string' ? [`provider:${provider}`] : [])];
 }
 
 /** The parcels the longest due first (`late`, by id), the others in their order. */
@@ -1688,44 +1709,85 @@ export class TrackingSyncService {
       const lookups = new SharedLookups(parcels, earlier && performance.now() < earlier.until ? earlier : undefined);
       // The accounts whose parcels a merge changed during the run.
       const merged = new Set<string>();
+      // The parcels not started yet, in the run's order, with what each holds while it is checked;
+      // what the checks under way hold, and those checks.
+      const waiting = [...parcels];
+      const keys = new Map(parcels.map((parcel) => [parcel, checkKeys(parcel)]));
+      const held = new Set<string>();
+      const running = new Set<Promise<void>>();
+      // Whether the run starts no more checks, and why: shutdown, or a check that failed.
       let stopped = false;
-      for (const [index, parcel] of parcels.entries()) {
-        // At shutdown the run stops between checks; its job goes back to the queue, and the
-        // replacement checks the parcels still due.
-        if (context.stopping?.aborted) throw context.stopping.reason;
-        if (performance.now() - started >= SCHEDULED_RUN_BUDGET_MS) {
-          logOperationalEvent('scheduled_sync_budget_reached', { checked: summary.checked, left: parcels.length - index });
-          stopped = true;
-          break;
-        }
-        // An account's or a lookup's check queued meanwhile, such as a refresh, a new lookup or a link opened,
-        // goes ahead of the run: once the run has checked a parcel, it stops between checks and is queued
-        // again behind it (background.ts), with this run's lookups.
-        const ahead = summary.checked > 0 ? await this.jobQueuedAhead() : null;
-        if (ahead !== null) {
-          const to = ahead <= LOOKUP_SYNC_PRIORITY ? 'lookup' : 'account';
-          logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: parcels.length - index, to });
-          recordScheduledRunGaveWay(to);
-          summary.gave_way = true;
-          this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS };
-          stopped = true;
-          break;
-        }
+      let shutdown = false;
+      let failed: { error: unknown } | null = null;
+      // The steps after a check, its merges and its news, one check's at a time.
+      let after = Promise.resolve();
+      const check = async (parcel: JsonObject): Promise<void> => {
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
-        if (rechecks.has(parcel) && !await this.uncheckedSinceListed(parcel, context.signal)) continue;
+        if (rechecks.has(parcel) && !await this.uncheckedSinceListed(parcel, context.signal)) return;
         // A merge earlier in the run removed the parcel or gave it the other leg: the next run checks it.
-        if (merged.has(String(parcel.user_id)) && !await this.unmergedSinceListed(parcel, context.signal)) continue;
+        if (merged.has(String(parcel.user_id)) && !await this.unmergedSinceListed(parcel, context.signal)) return;
         summary.checked += 1;
         const outcome = await this.syncOne(parcel, context, lookups);
         summary[outcome] += 1;
-        if (outcome !== 'updated') continue;
-        // The news can show the parcel is a leg of another of its account's parcels: they merge
-        // before it goes out, so the merged parcel announces its newest scan once.
-        if (typeof parcel.user_id === 'string' && await this.linkConfirmedParcels(parcel.user_id) > 0) merged.add(parcel.user_id);
-        // A parcel's news goes out once it is stored, not after the slowest check of the
-        // run; the last parcel's goes with the run's own dispatch.
-        if (index < parcels.length - 1) await this.dispatchNotifications(summary, context.signal);
+        if (outcome !== 'updated') return;
+        const steps = after.then(async () => {
+          // The news can show the parcel is a leg of another of its account's parcels: they merge
+          // before it goes out, so the merged parcel announces its newest scan once. No other
+          // check of the account runs meanwhile.
+          if (typeof parcel.user_id === 'string' && await this.linkConfirmedParcels(parcel.user_id) > 0) merged.add(parcel.user_id);
+          // A parcel's news goes out once it is stored, not after the slowest check of the
+          // run; the last check's goes with the run's own dispatch, and at shutdown before the run stops.
+          if (running.size > 1 || shutdown || (!stopped && waiting.length > 0)) await this.dispatchNotifications(summary, context.signal);
+        });
+        after = steps.catch(() => undefined);
+        await steps;
+      };
+      const start = (parcel: JsonObject) => {
+        for (const key of keys.get(parcel)!) held.add(key);
+        const task: Promise<void> = check(parcel)
+          .catch((error: unknown) => { failed ??= { error }; stopped = true; })
+          .finally(() => { for (const key of keys.get(parcel)!) held.delete(key); running.delete(task); });
+        running.add(task);
+      };
+      for (;;) {
+        while (!stopped && running.size < SCHEDULED_RUN_LANES && waiting.length > 0) {
+          // At shutdown the run starts no more checks; once those under way end, its job goes back to
+          // the queue, and the replacement checks the parcels still due.
+          if (context.stopping?.aborted) {
+            stopped = shutdown = true;
+            break;
+          }
+          if (performance.now() - started >= SCHEDULED_RUN_BUDGET_MS) {
+            logOperationalEvent('scheduled_sync_budget_reached', { checked: summary.checked, left: waiting.length });
+            stopped = true;
+            break;
+          }
+          // An account's or a lookup's check queued meanwhile, such as a refresh, a new lookup or a link opened,
+          // goes ahead of the run: once the run has checked a parcel, it starts no more and, once the checks
+          // under way end, is queued again behind it (background.ts), with this run's lookups.
+          const ahead = summary.checked > 0 ? await this.jobQueuedAhead() : null;
+          if (ahead !== null) {
+            const to = ahead <= LOOKUP_SYNC_PRIORITY ? 'lookup' : 'account';
+            logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: waiting.length, to });
+            recordScheduledRunGaveWay(to);
+            summary.gave_way = true;
+            this.#gaveWay = { lookups, until: started + SCHEDULED_RUN_BUDGET_MS };
+            stopped = true;
+            break;
+          }
+          // The first parcel in the run's order that holds nothing a check under way holds; a recheck
+          // only once every other parcel has started.
+          const others = waiting.some((parcel) => !rechecks.has(parcel));
+          const next = waiting.findIndex((parcel) => !(others && rechecks.has(parcel))
+            && keys.get(parcel)!.every((key) => !held.has(key)));
+          if (next < 0) break;
+          start(waiting.splice(next, 1)[0]);
+        }
+        if (running.size === 0) break;
+        await Promise.race(running);
       }
+      if (failed) throw (failed as { error: unknown }).error;
+      if (shutdown) throw context.stopping!.reason;
       // The worker would otherwise wait for the next window with lookups due: the run that checked
       // every parcel it took is queued again at once (background.ts). It checked one at least, so
       // the next run finds that one done and none goes round for ever.

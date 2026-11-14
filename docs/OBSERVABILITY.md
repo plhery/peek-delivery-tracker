@@ -738,8 +738,8 @@ Key JSON events:
   `sync_claim_recovered` follows with the first claim that works again and says how long
   the streak lasted;
 - `scheduled_sync_budget_reached`: a scheduled run reached its 4 minutes and left the rest
-  to the next run, with how many parcels it `checked` and how many it `left`;
-- `scheduled_sync_gave_way`: a scheduled run stopped for a check queued ahead of it, an
+  to the next run, with how many parcels it `checked` (those under way included) and how many it `left`;
+- `scheduled_sync_gave_way`: a scheduled run started no more checks for one queued ahead of it, an
   `account`'s or a `lookup`'s (`to`), and was queued again, with how many parcels it `checked`
   and how many it `left`; its `sync_job_completed` line says `gave_way`. One that checked every
   parcel it took and left lookups due beyond its twenty says `lookups_left`, and is queued again

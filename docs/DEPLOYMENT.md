@@ -344,8 +344,8 @@ host answers. Point `UMAMI_APP_ORIGIN` and the smoke test at the new host.
 
 ## Shutdown and crash recovery
 
-On SIGTERM/SIGINT the process turns unready at once and stops taking new work. A check
-in progress gets 10 s to end; a scheduled run stops before its next parcel. A job that
+On SIGTERM/SIGINT the process turns unready at once and stops taking new work. Checks
+in progress get 10 s to end; a scheduled run starts no other parcel. A job that
 finishes in time is done. Otherwise the check is aborted and logged and recorded as
 `interrupted`, and its job goes back to the queue without using up a retry; the
 replacement checks what is still due. Its first scheduled run starts after 8 s, unless

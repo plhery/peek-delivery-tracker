@@ -379,14 +379,19 @@ routing, which that check clears and which lapses after 15 minutes). A scheduled
 per account, each account's longest due, every 2 minutes. It lists every open parcel and lookup in pages by id,
 as the database's API ends each answer at its row limit, and checks the parcels it takes the longest due
 first, accounts' and lookups' alike, an account's parcel as if it had come due 10 minutes earlier: when the worker
-can't keep up, every kind waits about as long past its cadence, accounts' parcels a little less. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
+can't keep up, every kind waits about as long past its cadence, accounts' parcels a little less. It checks two
+parcels at once, never two of one account, one number, one carrier (carriers on one adapter count as one) or one
+universal provider tracking them, so each keeps the pace of one check at a time: the run starts the first parcel in
+its order that shares none of these with the check under way. A merge with a parcel's other leg and its news go out
+one check at a time, as the checks end. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
 its parcels out for delivery today or expected today, as its own pacing may refuse the run's later
 lookups (Poste Italiane's searches an hour); every other parcel keeps its place. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
-read: the run reads those of the ones it takes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
+read: the run reads those of the ones it takes. A run starts no check after 4 minutes and ends once those under way
+end; the next run takes the parcels it left, which are still due.
 A run that checked every parcel it took and left more lookups due than its twenty (below) is queued again at once rather
 than in the next window, and does its upkeep at most once in 2 minutes.
 An account's or a lookup's check queued meanwhile, such as a refresh, a new parcel, a new lookup's first check or a link
-opened, goes ahead of the run: once the run has checked a parcel, it stops between checks, leaves its upkeep (archiving,
+opened, goes ahead of the run: once the run has checked a parcel, it starts no other, ends once the checks under way end, leaves its upkeep (archiving,
 forgetting, usage counts) to the next run, and is queued again behind that check. An account's check goes ahead of a
 lookup's. When the same server runs the run queued again, it takes over the stopped run's answers and the carriers that
 run found down until the stopped run's 4 minutes are up. The parcels the stopped run left keep their place by how long

@@ -3098,8 +3098,129 @@ describe('TrackingSyncService', () => {
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, notifier as never).sync();
     expect(notifier.dispatch).toHaveBeenCalledTimes(2);
     expect(client.autoLinkPackages.mock.calls).toEqual([['owner'], ['neighbour'], [undefined]]);
+    // Checked at once, each parcel's merge and news go out in turn.
     expect(notifier.dispatch.mock.invocationCallOrder[0]).toBeGreaterThan(client.autoLinkPackages.mock.invocationCallOrder[0]!);
-    expect(notifier.dispatch.mock.invocationCallOrder[0]).toBeLessThan(client.completeSyncAttempt.mock.invocationCallOrder[1]!);
+    expect(notifier.dispatch.mock.invocationCallOrder[0]).toBeLessThan(client.autoLinkPackages.mock.invocationCallOrder[1]!);
+  });
+
+  describe('two checks at once', () => {
+    // A carrier whose answers the test gives, by carrier and number, and the lookups asked so far.
+    const answers = () => {
+      const pending = new Map<string, (result: CarrierResult) => void>();
+      const asked: string[] = [];
+      const adapter = { fetch: vi.fn((carrier: string, number: string) => new Promise<CarrierResult>((resolve) => {
+        asked.push(`${carrier} ${number}`);
+        pending.set(`${carrier} ${number}`, resolve);
+      })) };
+      const answer = async (lookup: string) => {
+        await vi.waitFor(() => expect(pending.has(lookup)).toBe(true));
+        pending.get(lookup)!({ status: 'in_transit' });
+        pending.delete(lookup);
+      };
+      return { adapter, asked, answer };
+    };
+    const parcel = (id: string, user: string | null, carrier: string, number: string, provider?: string): JsonObject => ({
+      id, user_id: user, one_off: user === null, carrier, tracking_number: number, created_at: '2026-09-03T09:00:00Z',
+      last_synced_at: '2026-09-04T09:00:00Z', sync_status: 'ok', archived_at: null,
+      ...(provider ? { carrier_data: { routing: { version: 1, configured_carrier: carrier, preferred_provider: provider } } } : {}) });
+    const at = () => new Date('2026-09-04T10:00:00Z');
+    const pause = () => new Promise((resolve) => setTimeout(resolve, 10));
+    const three = () => [parcel('a', 'a', 'ctt', 'TEST0001'), parcel('b', 'b', 'la-poste', 'TEST0002'), parcel('c', 'c', 'gls-de', 'TEST0003')];
+
+    it('checks two parcels at once, and starts the next when one ends', async () => {
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient(three());
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at).sync();
+      await vi.waitFor(() => expect(asked).toHaveLength(2));
+      expect([...asked].sort()).toEqual(['ctt TEST0001', 'la-poste TEST0002']);
+      await answer('la-poste TEST0002');
+      await vi.waitFor(() => expect(asked).toHaveLength(3));
+      expect(asked[2]).toBe('gls-de TEST0003');
+      await answer('gls-de TEST0003');
+      await answer('ctt TEST0001');
+      await expect(running).resolves.toMatchObject({ checked: 3, updated: 3 });
+    });
+
+    it.each([
+      ['an account', parcel('second', 'a', 'la-poste', 'TEST0002'), 'ctt'],
+      ['a number', parcel('second', 'b', 'la-poste', 'TEST0001'), 'ctt'],
+      ['a carrier', parcel('second', 'b', 'ctt', 'TEST0002'), 'ctt'],
+      ['a carrier\'s adapter', parcel('second', 'b', 'gls-at', 'TEST0002'), 'gls-de'],
+      ['the provider that tracks the number', parcel('second', 'b', 'la-poste', 'TEST0002', 'ParcelsApp'), 'ctt'],
+    ])('never checks two parcels sharing %s at once, and takes the next parcel meanwhile', async (_shared, second, carrier) => {
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient([parcel('first', 'a', carrier, 'TEST0001', 'ParcelsApp'), second, parcel('third', 'c', 'swiss-post', 'TEST0003')]);
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at).sync();
+      await vi.waitFor(() => expect(asked).toHaveLength(2));
+      expect([...asked].sort()).toEqual([`${carrier} TEST0001`, 'swiss-post TEST0003']);
+      await answer('swiss-post TEST0003');
+      await pause();
+      expect(asked).toHaveLength(2);
+      await answer(`${carrier} TEST0001`);
+      await answer(`${String(second.carrier)} ${String(second.tracking_number)}`);
+      await expect(running).resolves.toMatchObject({ checked: 3 });
+      expect(asked).toHaveLength(3);
+    });
+
+    it('gives way once the checks under way end, starting no other', async () => {
+      const logged = vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient(three());
+      client.syncJobQueuedAhead.mockResolvedValueOnce(null).mockResolvedValue(-5);
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at).sync();
+      let settled = false;
+      void running.finally(() => { settled = true; });
+      await vi.waitFor(() => expect(asked).toHaveLength(2));
+      await answer('ctt TEST0001');
+      await pause();
+      expect(asked).toHaveLength(2);
+      expect(settled).toBe(false);
+      await answer('la-poste TEST0002');
+      await expect(running).resolves.toMatchObject({ checked: 2, updated: 2, gave_way: true });
+      expect(logged).toHaveBeenCalledWith('scheduled_sync_gave_way', { checked: 2, left: 1, to: 'lookup' });
+    });
+
+    it('at shutdown, starts no other check, sends the news of those under way and fails once they end', async () => {
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient(three());
+      const notifier = { dispatch: vi.fn().mockResolvedValue({ sent: 0, failed: 0, expired: 0 }) };
+      const stopping = new AbortController();
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, notifier as never, at)
+        .sync({ trigger: 'scheduled', stopping: stopping.signal });
+      running.catch(() => undefined);
+      await vi.waitFor(() => expect(asked).toHaveLength(2));
+      stopping.abort(new WorkerShutdown());
+      let settled = false;
+      void running.catch(() => undefined).finally(() => { settled = true; });
+      await answer('ctt TEST0001');
+      await pause();
+      expect(settled).toBe(false);
+      await answer('la-poste TEST0002');
+      await expect(running).rejects.toBeInstanceOf(WorkerShutdown);
+      expect(asked).toHaveLength(2);
+      expect(client.completeSyncAttempt).toHaveBeenCalledTimes(2);
+      expect(notifier.dispatch).toHaveBeenCalledTimes(2);
+    });
+
+    it('fails the run once the other check under way ends, when one fails', async () => {
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient(three());
+      const lease = new AbortController();
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at)
+        .sync({ trigger: 'scheduled', signal: lease.signal });
+      let settled = false;
+      void running.catch(() => undefined).finally(() => { settled = true; });
+      await vi.waitFor(() => expect(asked).toHaveLength(2));
+      const lost = new Error('lease lost');
+      lease.abort(lost);
+      await answer('ctt TEST0001');
+      await pause();
+      expect(asked).toHaveLength(2);
+      expect(settled).toBe(false);
+      await answer('la-poste TEST0002');
+      await expect(running).rejects.toBe(lost);
+      expect(asked).toHaveLength(2);
+    });
   });
 
   it('leaves to the next run a parcel a merge earlier in the run removed or gave another leg', async () => {

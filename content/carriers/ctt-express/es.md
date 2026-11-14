@@ -3,7 +3,7 @@ title: CTT Express seguimiento: número, estados y teléfono
 description: Sigue tu paquete CTT Express: el número de 22 cifras, qué significa cada estado, los puntos Collectt, qué hacer si no estabas y los teléfonos de CTT Express.
 slug: ctt-express-seguimiento
 published: 2026-10-11
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 CTT Express es la filial española de paquetería urgente del grupo portugués CTT, la antigua Tourline Express, y reparte en toda España y Portugal. Para seguir tu paquete, escribe el número en el [localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) de cttexpress.com o pégalo en la casilla de arriba. El número te llega en el SMS o en el correo de confirmación de CTT Express.
@@ -37,6 +37,7 @@ El seguimiento de CTT Express está solo en español. La página muestra cuatro 
 | `Enviado` o `En tránsito` | Se mueve por la red hacia su destino. |
 | `En reparto` o `Entrega hoy` | Está asignado a una ruta y ha salido para entregártelo. |
 | `Incidencia en el reparto` o `Reparto fallido` | Algo ha impedido la entrega; el motivo aparece debajo. |
+| `Recogerán en Delegación` | En un paquete que CTT reparte en Portugal, la entrega ha fallado y el paquete espera a que vayas a recogerlo. El seguimiento de CTT muestra el intento fallido en el mismo momento y, más tarde, que el paquete está listo para recoger. |
 | `Almacenado temporalmente` | Ha vuelto a la delegación tras un intento fallido y espera un nuevo reparto o la devolución. |
 | `Nuevo reparto` | Sale de nuevo para otro intento. |
 | `Disponible en Punto Collectt Express` | Te espera en un punto Collectt; el PIN te llega por correo y SMS. |
@@ -58,7 +59,7 @@ Bajo una incidencia, el motivo te dice qué pasó: `No pudimos contactar contigo
 
 **Cambiar la entrega.** También puedes cambiarla tú en el localizador, con el número de envío completo, el código postal de destino y el teléfono o el correo que dio el remitente. Puedes elegir otra dirección, otra fecha, un punto Collectt, mañana o tarde, o un vecino. Solo se puede mientras el envío no esté `En reparto`, y el cambio puede retrasar la entrega 24 horas. Cambiar a otra dirección de la misma zona de reparto no cuesta nada, y pasarlo a un punto Collectt es gratis. Si la incidencia no es una ausencia ni una dirección incompleta, contacta con CTT Express.
 
-**Puntos Collectt Express.** CTT Express tiene más de 20 000 puntos y taquillas Locky en España y Portugal. Un punto guarda el paquete 10 días y una taquilla, 5. Recogerlo es gratis con el PIN que te llega por correo o SMS, y CTT Express te manda recordatorios. Si nadie lo recoge a tiempo, se gestiona según las condiciones del envío. Si una taquilla no se abre, llama al número que aparece en ella o en el correo de seguimiento.
+**Puntos Collectt Express.** CTT Express tiene más de 20 000 puntos y taquillas Locky en España y Portugal. Un punto guarda el paquete 10 días (hasta 10 días laborables, según su página de horarios) y una taquilla, 5. Recogerlo es gratis con el PIN que te llega por correo o SMS, y CTT Express te manda recordatorios. Si nadie lo recoge a tiempo, se gestiona según las condiciones del envío. Si una taquilla no se abre, llama al número que aparece en ella o en el correo de seguimiento.
 
 ## Paquete CTT Express retrasado, perdido o dañado: reclamación
 
@@ -73,7 +74,7 @@ Las páginas de CTT Express no dan un plazo para reclamar una pérdida o un retr
 
 ## CTT Express teléfono, correo electrónico y atención al cliente
 
-Así lo indicaban las páginas de CTT Express el 27 de octubre de 2026:
+Así lo indicaban las páginas de CTT Express el 14 de noviembre de 2026:
 
 - **Teléfono gratuito:** 900 841 352, el que dan sus páginas de ayuda; su artículo sobre aduanas del 27 de octubre de 2026 da en cambio el 900 110 898. De lunes a viernes de 9:00 a 19:00, salvo festivos.
 - **Otro teléfono:** 916 602 200, con tarifa normal, en el mismo horario.
@@ -88,7 +89,7 @@ La atención al cliente está centralizada en Madrid, solo por teléfono o corre
 
 Pega un número de 22 o 25 cifras de las dos primeras formas de arriba y [Peek](/) lo asigna a CTT Express al momento, incluida la forma de 25 cifras de un número que empieza por `00001000`. Con 22 cifras que empiezan por `00001000`, verás «preguntando a» TIPSA, Austrian Post y CTT Express; si no queda claro cuál lo tiene, elige con «Cambiar». También sirve un enlace de la página de seguimiento de CTT Express.
 
-Peek consulta el seguimiento de CTT Express cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de CTT Express; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Verás el estado, el historial (sin lugares), el día de entrega previsto mientras el paquete avanza, el peso, la hora de entrega y, si otro operador postal le pasó el paquete, su número internacional. Los textos de los escaneos salen tal como los escribe CTT Express, como `En reparto`. En un punto Collectt, Peek muestra `Disponible en Punto Collectt Express`, pero no el nombre ni la dirección del punto. A partir de `En devolución`, Peek marca el paquete como un problema. Los envíos de varios bultos se siguen a través de servicios universales de seguimiento.
+Peek consulta el seguimiento de CTT Express cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de CTT Express; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Verás el estado, el historial (sin lugares), el día de entrega previsto mientras el paquete avanza, el peso, la hora de entrega y, si otro operador postal le pasó el paquete, su número internacional. Si ese número es un código de CTT que acaba en `PT`, CTT entrega el paquete en Portugal: la tarjeta dice «Entrega con CTT Portugal» y muestra el código («Anunciado a CTT Portugal, aún no recibido» mientras CTT tenga el paquete registrado sin un escaneo propio). Cuando el seguimiento de CTT muestra un escaneo al menos tan reciente como el último de CTT Express, Peek sigue el paquete allí y conserva el historial de CTT Express. Las horas salen en tu zona horaria, y en peektracker.com una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». Los textos de los escaneos salen tal como los escribe CTT Express, como `En reparto`. En un punto Collectt, Peek muestra `Disponible en Punto Collectt Express`, pero no el nombre ni la dirección del punto. A partir de `En devolución`, Peek marca el paquete como un problema. Los envíos de varios bultos se siguen a través de servicios universales de seguimiento.
 
 ## Preguntas sobre el seguimiento de CTT Express
 
@@ -126,19 +127,19 @@ Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pe
 - [CTT: Serviço Postal Universal](https://www.ctt.pt/home/servico-postal-universal/condicoes-gerais-de-acesso-e-utilizacao-do-servico-universal) – CTT, Correios de Portugal, concesionaria del servicio postal universal en Portugal
 - [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – estados, «pendiente de entrada en red» y formulario tras 24 horas, entregado pero no recibido, daños en 7 días
 - [CTT Express: Preguntas frecuentes de incidencias](https://www.cttexpress.com/preguntas-frecuentes/incidencias) – dos intentos, retrasos, expedientes
-- [CTT Express: Horarios de reparto](https://www.cttexpress.com/preguntas-frecuentes/horarios) – horario, sábados en Navidad, llamadas del repartidor
+- [CTT Express: Horarios de reparto](https://www.cttexpress.com/preguntas-frecuentes/horarios) – horario, sábados en Navidad, llamadas del repartidor, hasta 10 días laborables en un punto Collectt (consultada el 14 de noviembre de 2026)
 - [CTT Express: Cambiar dirección de entrega](https://www.cttexpress.com/cambiar-direccion-entrega/) – dónde está el número, condiciones del cambio
 - [CTT Express: Servicios incluidos y adicionales](https://www.cttexpress.com/servicios/incluidos-y-adicionales) – opciones del destinatario, cobertura de hasta 2000 €
 - [CTT Express: Recoge y devuelve tus paquetes en nuestros puntos](https://www.cttexpress.com/red-collectt-express/envio-y-recogida) – puntos Collectt, 10 y 5 días, PIN
 - [CTT Express: Preguntas frecuentes Puntos Collectt Express](https://www.cttexpress.com/preguntas-frecuentes/puntos-collectt-express) – PIN, cambio gratuito a un punto
 - [CTT Express: Qué significa «aceptado por la última milla»](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – significado de los estados
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – «en tránsito», compras en marketplaces internacionales
-- [CTT Express: ¿Cómo contactar con CTT Express?](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – teléfonos, horario, correo, Madrid, aviso sobre los 807
+- [CTT Express: ¿Cómo contactar con CTT Express?](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – teléfonos, horario, correo, Madrid, aviso sobre los 807 (consultada el 14 de noviembre de 2026)
 - [CTT Express: Servicio de importación de paquetería para empresas](https://www.cttexpress.com/servicios/importacion/) – importaciones de fuera de la UE, despacho de aduanas en 12 horas de media, entrega en 24 o 48 horas
-- [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artículo del 27 de octubre de 2026, retenciones visibles en el seguimiento o por notificación, impuestos y derechos, atención al cliente, 900 110 898
+- [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artículo del 27 de octubre de 2026, retenciones visibles en el seguimiento o por notificación, impuestos y derechos, atención al cliente, 900 110 898 (consultado el 14 de noviembre de 2026)
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € desde el 1 de julio de 2026 en envíos de hasta 150 €, tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Guidance on the €3 customs duty and Union handling fee (PDF, en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € se aplica como el arancel de 3 €, pero sea cual sea el valor
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulario de contacto y sus opciones
 - [CTT Express: ¿Qué es Phishing y cómo evitar sufrirlo?](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – SMS y correos falsos
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, `Recogerán en Delegación`, relevo a CTT en los códigos `PT`
 :::

@@ -3,7 +3,7 @@ title: DPD UK tracking: statuses, Pickup shops and contact
 description: Track a DPD UK parcel: where the 14-digit number is, what each status means, your Predict delivery options, Pickup shops and how to reach DPD.
 slug: dpd-uk-tracking
 published: 2026-10-11
-updated: 2026-11-08
+updated: 2026-11-14
 ---
 
 DPD UK is a British parcel company that delivers for many online shops. Track a parcel on [DPD's tracking page](https://track.dpd.co.uk/) with the parcel number and your postcode, or paste the number in the box above. The number comes from the shop, from DPD's SMS or email, or from the "sorry we missed you" card.
@@ -49,7 +49,7 @@ DPD UK's tracking is in English only. These are the lines most parcels show, in 
 
 **Predict.** DPD sends a one-hour delivery window by SMS and email. It arrives on the day once the driver has loaded the van, usually by 12 noon. A live map then narrows it to a 15-minute slot. You can't change the slot itself.
 
-**Changing the delivery.** The night before and on the day, the SMS, email or DPD app lets you pick another day, a neighbour, a safe place or a DPD Pickup Shop, or upgrade to an earlier, afternoon or weekend delivery. If the sender asked for a signature, some of these options aren't offered. To send it to [a different address](guide:change-delivery-address), contact the shop.
+**Changing the delivery.** The night before and on the day, the SMS, email or DPD app lets you pick another day, a neighbour, a safe place or a DPD Pickup Shop, or upgrade to delivery before 10:30 or before 12, in the afternoon, or on a Saturday or Sunday. If the sender asked for a signature, some of these options aren't offered. To send it to [a different address](guide:change-delivery-address), contact the shop.
 
 **Not in.** DPD automatically tries a neighbour. Its terms define one as someone living or working within 50 metres' walk. You can name a preferred neighbour or a safe place in advance. Otherwise the driver leaves a card, and you can choose a new date, a safe place, a neighbour or a Pickup Shop with your reference number and postcode. DPD's pages don't say how many attempts it makes. If you were in and the driver didn't come, DPD's tracking page shows where the driver left the "sorry we missed you" card and lets you choose a redelivery or collection; the driver can't come back the same day. Tracking says delivered but you can't find it? Check your safe place and your neighbours first, since DPD tries a neighbour automatically, then see [delivered but not received](guide:delivered-not-received).
 
@@ -69,18 +69,18 @@ DPD UK's tracking is in English only. These are the lines most parcels show, in 
 
 ## DPD UK contact number and customer service
 
-As listed on dpd.co.uk on 8 November 2026:
+As listed on dpd.co.uk on 14 November 2026:
 
-- **Phone:** 0121 275 0500, Monday to Friday 8am to 6.30pm, Saturday 8am to 4pm, Sunday 9am to 3pm, excluding bank holidays. Have your parcel number and postcode ready.
+- **Phone:** 0121 275 0500, Monday to Friday 8am to 6.30pm, Saturday 8am to 4pm, Sunday 9am to 3pm, excluding bank holidays. DPD expects a 5 to 10 minute wait. Have your parcel number and postcode ready.
 - **Chat:** on the [contact page](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp), which says it runs 24/7; enter the reference number and delivery postcode to start it.
-- **DPD app:** chat or call from the buttons below the tracking map.
+- **DPD app:** chat or call from the buttons below the tracking map; DPD says a call from the app goes to the front of the queue.
 - **Post:** Customer Services, DPD UK, Roebuck Lane, Smethwick, B66 1BY.
 
 ## Tracking DPD UK parcels with Peek
 
 [Peek](/) recognises a 14-digit DPD number, but the shape is shared, so Peek asks the carriers that use it whether they know the number: DPD UK first when the number starts `1550` or `1597`, otherwise the carriers serving your country first. When DPD UK knows it, the carrier line says DPD UK "has this parcel" and Peek follows it there. If the line says "not found yet · Peek keeps checking" or names another carrier, press "Change" and pick "DPD UK". A track.dpd.co.uk or tracking.dpd.co.uk link with `reference=` or `parcelNumber=` names DPD UK straight away. Order and collection references that need a postcode aren't tracked.
 
-DPD UK's scans carry no time zone: Peek reads them on UK time and lists DPD's own history. Statuses keep DPD's English wording, and a cancelled delivery shows as "Needs attention". Peek can notify you when the status changes.
+DPD UK's scans carry no time zone: Peek reads them on UK time, shows them in your time zone and lists DPD's own history. On peektracker.com, the history ends with "Times are in your time zone:" and its name. Statuses keep DPD's English wording, and a cancelled delivery shows as "Needs attention". Peek can notify you when the status changes.
 
 DPD gives no place for its scans, and Peek doesn't read DPD's expected day or Predict window. It drops your details, references and delivery photos. Peek shows the shop that booked the delivery as "From …", as DPD's page names it, except on a parcel its sender handed in at a Pickup Shop: the account that booked that label didn't send it (on a return label, it's the shop the parcel goes back to). DPD reuses numbers after some months, so an old number can show a newer parcel.
 
@@ -106,8 +106,8 @@ DPD UK doesn't publish a set period. The tracking page shows the date by which y
 
 :::sources
 - [DPD UK: Help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – parcel number, calling card, one-hour window, neighbour, safe place, Pickup shops, ID, missed delivery, where the driver left the card, address change, company (read 8 November 2026)
-- [DPD UK: Contact Us](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp) – phone and hours, chat, app chat (read 8 November 2026)
-- [DPD UK: Predict & Follow My Parcel](https://www.dpd.co.uk/content/products_services/predict_fmp.jsp) – one-hour window, 15-minute slot, driver name, delivery options (read 8 November 2026)
+- [DPD UK: Contact Us](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp) – phone, hours and expected wait, chat, app chat and calls from the app first in the queue (read 14 November 2026)
+- [DPD UK: Predict & Follow My Parcel](https://www.dpd.co.uk/content/products_services/predict_fmp.jsp) – one-hour window, 15-minute slot, driver name, delivery options, upgrades before 10:30 or 12, afternoon, Saturday or Sunday (read 14 November 2026)
 - [DPD UK: Follow My Parcel](https://track.dpd.co.uk/) – tracking fields, collect-by date, delays, import charges, status wordings
 - [DPD UK: Cyber Security, phishing and smishing](https://www.dpd.co.uk/content/about_dpd/phishing.jsp) – SMS sender names, scam warning, 7726, alerts by SMS, the sites its links use, report@phishing.gov.uk (read 8 November 2026)
 - [DPD UK: DPD Pickup](https://www.dpd.co.uk/content/products_services/dpd_pickup.jsp) – in-flight diversion to a Pickup point

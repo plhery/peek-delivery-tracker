@@ -3,7 +3,7 @@ title: Speedaf Express tracking: numbers, statuses and contacts
 description: Track a Speedaf Express parcel from China to Nigeria, Kenya, Ghana, Pakistan or the UAE: number shapes, what each status means, delivery attempts and contacts.
 slug: speedaf-tracking
 published: 2026-10-28
-updated: 2026-11-08
+updated: 2026-11-14
 ---
 
 Speedaf Express (速达非) is a courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in Speedaf's customer app or in the box above. The number is in the shop's shipping details.
@@ -47,7 +47,7 @@ Speedaf writes its scans in English, otherwise in Chinese, and sometimes in your
 | `Transported to the warehouse，【Return Overdue】` | Needs attention | It's going back to Speedaf's warehouse. |
 | `Warehouse received` | Returned to sender | The returned parcel is back at Speedaf's warehouse. |
 
-A bare `In Transit` can hide a hold: Speedaf's code behind it is a parcel held for a stock count. `Products not for personal use` and `Clearance Exception` mean customs has a question or a problem; `Long Time Tax No Paid,Email To Sender` that the duty has waited a long time and Speedaf is writing to the sender.
+A bare `In Transit` can hide a hold: Speedaf's code behind it is a parcel held for a stock count. `Products not for personal use` and `Clearance Exception` mean customs has a question or a problem; `Long Time Tax No Paid,Email To Sender` that the duty has waited a long time and Speedaf is writing to the sender. In Chinese, look for `进行处理，订单已操作入库` ("Received by carrier"), `清关中` ("At customs"), `已做派件扫描` ("Out for delivery") and `包裹【已签收】` ("Delivered").
 
 ## Speedaf delivery: door, pickup site and attempts
 
@@ -83,7 +83,7 @@ Speedaf's tracking page names who signed for the parcel: check it first. More in
 
 ## Speedaf contact number and customer service
 
-As read on 28 October 2026 (Egypt, Morocco and China on 8 November 2026), each Speedaf country site lists its own contacts at the foot of the page (Ireland's and Zambia's open from the country chooser: pick the country, then English):
+As read on 28 October 2026 (Egypt and Morocco on 8 November, Nigeria and China on 14 November 2026), each Speedaf country site lists its own contacts at the foot of the page (Ireland's and Zambia's open from the country chooser: pick the country, then English):
 
 | Country | Phone | Email | Hours |
 | --- | --- | --- | --- |
@@ -107,7 +107,7 @@ Speedaf's Help Center adds a hotline for the other countries on its list: Kazakh
 
 [Peek](/) recognises a Speedaf number by its shape when it starts with NG, GH, KE, UG, RW, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU, RE, MV or TR, then 9 digits and R or E. With 12 digits instead, after one of those codes or IE, the shape isn't enough on its own: Peek asks Speedaf, and you'll see "Checking tracking services…", then "Speedaf has this parcel." if Speedaf knows the number. Peek knows no number shape for Switzerland, Albania, Montenegro or Serbia: for those, and any number that fits neither shape, pick "Speedaf" with "Change". A speedaf.com tracking link with `tradeNo=` is read as Speedaf whatever number it holds. Peek sends the number in capitals, so lower case is fine.
 
-Peek reads Speedaf's own tracking: the status, the history, the destination country and the delivery time. Each scan carries its site's clock, China's in the warehouses, then your country's, and Peek shows it in your device's time zone. Speedaf names its sites only inside the lines, so there's no map, and it gives no expected delivery date. If Speedaf knows the number but shows no scans, as with some older parcels, Peek shows "Waiting for the carrier", or "Waiting for Speedaf’s first scan" for a 12-digit number that isn't filed under Speedaf, and keeps checking.
+Peek reads Speedaf's own tracking: the status, the history, the destination country and the delivery time. Each scan carries its site's clock, China's in the warehouses, then your country's, and Peek shows it in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Speedaf names its sites only inside the lines, so there's no map, and it gives no expected delivery date. If Speedaf knows the number but shows no scans, as with some older parcels, Peek shows "Waiting for the carrier", or "Waiting for Speedaf’s first scan" for a 12-digit number that isn't filed under Speedaf, and keeps checking.
 
 Speedaf's lines appear as written, in English or else Chinese, minus the courier's, clerk's and signer's names and the courier's phone. Peek also leaves out the proof of delivery, the duty payment link and the box count, and follows only the number you added, not a waybill's other boxes. Speedaf delivers itself, so there's no second carrier.
 
@@ -133,15 +133,15 @@ Duty or tax is due before customs in your country releases the parcel. Once it's
 
 :::sources
 - [Speedaf: Enterprise Introduction](https://www.speedaf.com/ng-en/business/about-us) – founded 2019, ZTO
-- [Speedaf: Select your location and language](https://www.speedaf.com/cn-en/user-opt/locale-select) – countries; Ireland's and Zambia's contacts (pick the country, then English); China's contacts (read 8 November 2026)
+- [Speedaf: Select your location and language](https://www.speedaf.com/cn-en/user-opt/locale-select) – countries; Ireland's and Zambia's contacts (pick the country, then English); China's contacts (read 14 November 2026)
 - [Speedaf: Speedaf eParcel](https://www.speedaf.com/ke-en/product/intl-straight-small) – parcels from China for online sellers, 5-10 working days
 - [Speedaf: Warehouse & Fulfillment](https://www.speedaf.com/ke-en/product/warehouse-promise) – own last-mile couriers, COD
 - [Speedaf: Last-mile delivery](https://www.speedaf.com/ke-en/product/warehouse-delivery) – COD, door-to-door
-- [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – transit time; tracking on the website or the customer app, hotlines by country (read 8 November 2026)
+- [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – transit time; tracking on the website or the customer app, hotlines by country (read 14 November 2026)
 - [Speedaf: Track](https://www.speedaf.com/ng-en/send-parcel) – up to 20 numbers; duty link for South Africa
 - [Speedaf: Look for Service Site](https://www.speedaf.com/ke-en/location-map) – map of sites
 - [Speedaf: Customer Support](https://www.speedaf.com/ng-en/service/support) – contact form
-- [Speedaf Nigeria: Home](https://www.speedaf.com/ng-en) – phones, emails, hours, WhatsApp
+- [Speedaf Nigeria: Home](https://www.speedaf.com/ng-en) – phones, emails, hours, WhatsApp (read 14 November 2026)
 - [Speedaf Ghana: Home](https://www.speedaf.com/gh-en) – phone, email, hours
 - [Speedaf Kenya: Home](https://www.speedaf.com/ke-en) – phones, email, hours, WhatsApp
 - [Speedaf Uganda: Home](https://www.speedaf.com/ug-en) – phone, email, hours

@@ -2774,6 +2774,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-suivi",
+      "title": "Suivi colis DHLink\u00a0: numéro DHgate, statuts et livraison",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-suivi-colis",
@@ -2886,6 +2894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "InPost tracking: codice, stati e ritiro al locker",
       "name": "InPost",
       "color": "#ffcc05"
+    },
+    {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-tracking",
+      "title": "Chronopost tracking: pacco dalla Francia, stati e ritiro",
+      "name": "Chronopost",
+      "color": "#0056a7"
     },
     {
       "id": "poste-italiane",
@@ -3184,6 +3200,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Paack seguimiento: estados, entrega fallida y teléfono",
       "name": "Paack",
       "color": "#5b2dee"
+    },
+    {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-seguimiento",
+      "title": "Chronopost seguimiento: paquete desde Francia y estados",
+      "name": "Chronopost",
+      "color": "#0056a7"
     },
     {
       "id": "seur",
@@ -3762,6 +3786,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "China Post rastreio: número, estados e entrega em Portugal",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-rastreio",
+      "title": "DHLink rastreio: número da DHgate, estados e quem entrega",
+      "name": "DHLink",
+      "color": "#143167"
     },
     {
       "id": "dpd-pt",

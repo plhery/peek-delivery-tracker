@@ -113,6 +113,18 @@ It installs the release in place of any build there, opens it and fails unless i
 removes shows only when the shrunk app runs. CI's "Release build opens" job does the same on each change, with a key
 and settings made up for the run.
 
+Once Google Play has a beta, its APK as Google Play signs it goes to the F-Droid repository and GitHub Releases:
+
+```sh
+PEEK_FDROID_DIR=<path> scripts/publish-fdroid.sh <play-signed.apk> <commit> [notes.md]
+```
+
+The APK is Play Console's signed universal APK (App bundle explorer, the version, Downloads). The script refuses an APK
+Google Play did not sign, signs the repository's index with the repository's key, which stays outside the repository
+in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on the `fdroid` branch, which
+raw.githubusercontent.com serves, and attaches the APK to a pre-release. The app's entry in the repository is
+[`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml).
+
 ## Macrobenchmarks and the baseline profile
 
 `:baselineprofile` holds the app's macrobenchmarks, run on a device or emulator against the app's `benchmark` build

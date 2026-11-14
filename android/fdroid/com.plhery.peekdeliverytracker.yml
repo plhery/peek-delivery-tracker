@@ -1,0 +1,38 @@
+# The app's entry in the F-Droid repository of the Android beta, which scripts/publish-fdroid.sh copies there.
+Categories:
+  - Internet
+License: Apache-2.0
+AuthorName: Peek
+WebSite: https://peektracker.com
+SourceCode: https://github.com/plhery/peek-delivery-tracker
+IssueTracker: https://github.com/plhery/peek-delivery-tracker/issues
+Changelog: https://github.com/plhery/peek-delivery-tracker/releases
+
+AntiFeatures:
+  NonFreeDep:
+    en-US: Firebase Cloud Messaging for notifications, and Google Play's in-app review.
+  Tracking:
+    en-US: Sends which screens and actions are used to the project's own Umami analytics.
+
+Name: Peek
+Summary: Track a package from any carrier on a map, no account needed
+Description: |-
+  This is the beta of Peek for Android: the same APK, signed by Google Play, as Google Play's closed test. Its notifications come through Firebase Cloud Messaging, so on the phone they need Google Play services.
+
+  Where’s my package?
+
+  Paste a tracking number, a carrier link, or a whole shipping email, or scan the barcode on the label. Peek figures out which of 3,500+ carriers has the package and shows its journey on a map, every scan, and the day it should arrive.
+
+  No account needed. No ads.
+
+  Will I know when it arrives? Sign in with Google or a code sent to your email, and an email can tell you it has arrived.
+
+  Following more than one? They share one list, the next to arrive on top, riding on its map. With an account, the same list is on your phone and on the web at peektracker.com. A widget keeps your next delivery on the home screen.
+
+  Someone else waiting for it? Share the package’s page with a link. They need no app and no account. Wrap it as a gift, and what’s inside stays a surprise until it arrives.
+
+  With an account, every delivery counts in your passport, and some earn a stamp. Compare passports with friends; your packages stay private.
+
+  Peek shows no ads and sells no data. It draws its own maps, so no map service sees where your packages travel. A package followed without an account is forgotten 30 days after it arrives. Download your data or delete your account from the app, whenever you like.
+
+  Peek is independent of the carriers it reads. Their names belong to their owners.

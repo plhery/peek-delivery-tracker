@@ -115,6 +115,8 @@ team.
 The [iPhone guide](ios/README.md) covers connecting it to a server, signing it for a real
 phone, notifications and widgets.
 
+The Android beta, signed by Google Play, is in [Peek's F-Droid repository](https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7) and on [GitHub Releases](https://github.com/plhery/peek-delivery-tracker/releases).
+
 ## Host your own
 
 Peek is one long-running container (the web app, the API and the worker that keeps

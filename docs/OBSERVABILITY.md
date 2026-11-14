@@ -325,7 +325,8 @@ was found for. `parcel_feedback` keeps one row per answer, service-role only: th
 tracking number, the carrier, the answer (`right`, `wrong` with its reasons and note, or
 `found_elsewhere` with a carrier name or tracking page), where it was asked, and `shown`,
 what the service held about the parcel at that moment (status, last check, newest scans
-as its timeline shows them, and the carrier the page says writes the timeline in advance).
+as its timeline shows them, the carrier the page says writes the timeline in advance, and
+the newest steps it wrote that the page shows greyed).
 A row names no account, link or device. A note may follow its reason within the hour and
 replaces the row; a tracking number takes twenty answers a day. Rows are deleted 90 days
 after they were given, by the scheduled sync's maintenance pass.
@@ -559,7 +560,8 @@ Each row names the lane that acts on it:
   filed under a carrier only providers track, the carrier a provider names as delivering it) or had its answer
   set aside as older than the parcel's newest scan without the parcel showing that answer's
   newest scan, a check whose worker died, a generated track (`looping_track`), a stage that went
-  back, an expected day dropped, a planned step past its time, or a reader's answer that gives no reason.
+  back, an expected day dropped, a planned step past its time that its carrier did not write
+  ahead, or a reader's answer that gives no reason.
 
 A parcel a provider tracks can also be **dormant**, not checked for 24 h because nobody
 follows it any more, whatever its last check stored, a failure included, or need **none**: its carrier answers and the provider's fuller history

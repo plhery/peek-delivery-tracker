@@ -169,6 +169,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     emailMuted: row.email_muted,
     events: (row.tracking_events ?? []).map(toEvent),
     ...(row.planned_events?.length ? { plannedEvents: row.planned_events.map(toPlannedEvent) } : {}),
+    ...(row.written_ahead_events?.length ? { writtenAheadEvents: row.written_ahead_events.map(toPlannedEvent) } : {}),
   };
 }
 

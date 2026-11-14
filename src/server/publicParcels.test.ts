@@ -603,12 +603,23 @@ describe('a gift on its way', () => {
     expect(answer.package.tracking_events).toHaveLength(4);
   });
 
-  it('names the carrier writing the timeline ahead on any link but a wrapped gift', () => {
-    const ahead = { current_stage: 'in_transit', carrier_data: { routing: { written_ahead: {
-      number: 'TESTGIFT23406789', carriers: { gzyl: ['2026-10-04T08:00:00+08:00'] } } } } };
-    const gift = stored(crossing(), ahead);
+  it('names the carrier writing the timeline ahead, and its steps whose time has passed, on any link but a wrapped gift', () => {
+    const script = [{ time: '2026-10-04T08:00:00+08:00', description: 'Delivered, waybill TESTGIFT23406789', stage: 'delivered' }];
+    const ahead = { current_stage: 'in_transit', carrier_data: { routing: {
+      planned: { number: 'TESTGIFT23406789', carriers: { gzyl: script } },
+      written_ahead: { number: 'TESTGIFT23406789', carriers: { gzyl: ['2026-10-04T08:00:00+08:00'] } } } } };
+    const gift = stored(journey(scan('registered', 'Hamburg, DE'), scan('accepted', 'Hamburg, DE')), ahead);
     expect(publicParcelResponse(gift, alerts).package).not.toHaveProperty('written_ahead_by');
-    expect(publicParcelResponse({ ...gift, link: { ...gift.link, gift: false } }, alerts).package.written_ahead_by).toBe('gzyl');
+    expect(publicParcelResponse(gift, alerts).package).not.toHaveProperty('written_ahead_events');
+    const open = publicParcelResponse({ ...gift, link: { ...gift.link, gift: false } }, alerts).package;
+    expect(open).toMatchObject({ written_ahead_by: 'gzyl',
+      written_ahead_events: [{ description: 'Delivered, waybill TESTGIFT23406789', stage: 'delivered', occurred_at: '2026-10-04T00:00:00.000Z' }] });
+    // Apart from the scans, which it adds nothing to.
+    expect(open.tracking_events.map((event) => event.stage)).toEqual(['accepted', 'registered']);
+    expect(open).not.toHaveProperty('planned_events');
+    // Whoever is not shown the number does not read it in a written step either.
+    const hidden = publicParcelResponse({ ...gift, link: { ...gift.link, gift: false, show_number: false } }, alerts).package;
+    expect(hidden.written_ahead_events?.[0]?.description).toBe('Delivered, waybill ••• 6789');
     expect(publicParcelResponse({ ...gift, link: { ...gift.link, owner: true } }, alerts).package.written_ahead_by).toBe('gzyl');
     expect(JSON.stringify(publicParcelResponse({ ...gift, link: { ...gift.link, owner: true } }, alerts))).not.toContain('2026-10-04T08');
   });

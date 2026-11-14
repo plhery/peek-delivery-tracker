@@ -399,6 +399,17 @@ if [[ -n "$passed_only" ]]; then
   exit 1
 fi
 
+# It counts a passed planned step at a clock its carrier holds back as written ahead apart (written), which the server
+# serves greyed, from one only a broken rule shows (passed).
+psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_planned_steps.sql"
+planned_steps=$(psql "$database_url" -X -A -F '|' -v hours=24 -f "$repo_root/ops/review/signals.sql" \
+  | awk '/^== Planned steps passed/ { section = 1; next } /^== / { section = 0 } section' | awk '/^gzyl\|/' | cut -d '|' -f 3-5)
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000002'"
+if [[ "$planned_steps" != "4|2|2" ]]; then
+  echo "passed planned steps not told apart from those written ahead: with_plan|passed|written = '$planned_steps'" >&2
+  exit 1
+fi
+
 # A check the fence refused saved nothing: the stale stage it loaded is no step back.
 psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_step_backs.sql"
 step_section=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \

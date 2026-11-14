@@ -161,8 +161,9 @@ export interface RoutingState extends JsonObject {
   written_ahead?: { number: string; carriers: Record<string, string[]> };
   /**
    * The steps each carrier listed for the number before they happen (`plannedStepsOf`): rows written ahead of their
-   * clock and scans not due yet. Only the timeline shows them, greyed (`servedPlannedSteps`). The carrier's answer
-   * replaces its own, as does its finding no history for the number; a failed check keeps them.
+   * clock and scans not due yet, kept as listed whether their time has passed or not. Only the timeline shows them,
+   * greyed (`servedPlannedSteps`, and once passed those at a clock in `written_ahead`, `servedWrittenSteps`). The
+   * carrier's answer replaces its own, as does its finding no history for the number; a failed check keeps them.
    */
   planned?: { number: string; carriers: Record<string, PlannedStep[]> };
   probe_cursor: number;

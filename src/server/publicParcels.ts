@@ -421,8 +421,9 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * other. Its owner always sees everything.
  *
  * Whoever is not shown the number does not read it in the carrier's words
- * either, nor another number of the parcel: the scans, planned steps, status
- * line and worded carrier details mask them (`parcelNumberMask`), as a link's alerts do.
+ * either, nor another number of the parcel: the scans, planned and written
+ * steps, status line and worded carrier details mask them (`parcelNumberMask`),
+ * as a link's alerts do.
  */
 export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelAlerts): ApiPublicParcelResponse {
   const { link } = found;
@@ -434,9 +435,11 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
   const trackingNumber = String(row.tracking_number ?? '');
   const storedEvents = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [];
   const storedPlanned = Array.isArray(row.planned_events) ? row.planned_events.filter(isRecord) : [];
+  const storedWritten = Array.isArray(row.written_ahead_events) ? row.written_ahead_events.filter(isRecord) : [];
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   // The numbers as stored: a placeholder number's parcel is served without its carrier data, not without its steps.
-  const told = numberShown ? (value: string) => value : parcelNumberMask(found.package, [...storedEvents, ...storedPlanned]);
+  const told = numberShown ? (value: string) => value
+    : parcelNumberMask(found.package, [...storedEvents, ...storedPlanned, ...storedWritten]);
   const toldText = (value: unknown): string | null => typeof value === 'string' ? told(value) : null;
   const events = storedEvents.map((event): ApiTrackingEventRow => ({
     id: String(event.id),
@@ -450,12 +453,14 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     ...(typeof event.recipient_action === 'string' ? { recipient_action: event.recipient_action as ApiTrackingEventRow['recipient_action'] } : {}),
     ...(tieOrder(event.tie_order) >= 0 ? { tie_order: tieOrder(event.tie_order) } : {}),
   }));
-  const planned: ApiPlannedTrackingEvent[] = storedPlanned.map((step) => ({
-    description: told(String(step.description ?? '')), stage: String(step.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],
-    location: toldText(step.location), occurred_at: String(step.occurred_at ?? ''),
-    ...(typeof step.day === 'string' ? { day: step.day } : {}),
-    place: (isRecord(step.place) ? step.place : null) as ApiPlannedTrackingEvent['place'],
-  }));
+  const step = (stored: JsonObject): ApiPlannedTrackingEvent => ({
+    description: told(String(stored.description ?? '')), stage: String(stored.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],
+    location: toldText(stored.location), occurred_at: String(stored.occurred_at ?? ''),
+    ...(typeof stored.day === 'string' ? { day: stored.day } : {}),
+    place: (isRecord(stored.place) ? stored.place : null) as ApiPlannedTrackingEvent['place'],
+  });
+  const planned = storedPlanned.map(step);
+  const written = storedWritten.map(step);
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)
     ? carrierData.destination_country.toUpperCase() : null;
   const shownLink: ApiParcelLink = {
@@ -506,6 +511,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       // A wrapped gift tells nothing of where its parcel is going before it gets there.
       ...(!wrapped && planned.length ? { planned_events: planned } : {}),
       ...(!wrapped && typeof row.written_ahead_by === 'string' ? { written_ahead_by: row.written_ahead_by as ApiCarrierId } : {}),
+      ...(!wrapped && written.length ? { written_ahead_events: written } : {}),
     },
   };
 }

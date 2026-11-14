@@ -102,10 +102,11 @@ struct ParcelLinkSheet: View {
         let gift = response.gift
         let wrapped = gift == .wrapped
         var parcel = Parcel(shared: response.package)
-        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned.
+        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned or wrote ahead.
         if wrapped {
             parcel.trackingEvents = parcel.trackingEvents.collapsingGiftRows()
             parcel.plannedEvents = nil
+            parcel.writtenAheadEvents = nil
         }
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let tint = wrapped || gift == .opened ? ExperimentalPalette.lilac : identity.ink
@@ -547,9 +548,9 @@ private struct SharedParcelCard: View {
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(.secondary)
                     }
-                    // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
-                    if !gift, let ahead = parcel.writtenAheadBy {
-                        Text(localizer.text("parcel.writtenAhead",
+                    // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
+                    if !gift, let ahead = parcel.writtenAheadBy, let note = parcel.writtenAheadNoteKey {
+                        Text(localizer.text(note,
                                             ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(.secondary)
                     }

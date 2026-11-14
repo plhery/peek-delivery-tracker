@@ -56039,6 +56039,7 @@ export interface ApiPackageRow {
   "tracking_events": Array<ApiTrackingEventRow> | null;
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
   "written_ahead_by"?: ApiCarrierId;
+  "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
   "email_muted"?: boolean;
 }
 
@@ -56400,6 +56401,7 @@ export interface ApiPublicPackage {
   "tracking_events": Array<ApiTrackingEventRow>;
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
   "written_ahead_by"?: ApiCarrierId;
+  "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
 }
 
 export interface ApiPublicParcelResponse {

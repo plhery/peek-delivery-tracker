@@ -129,6 +129,20 @@ describe('what the service held when an answer arrived', () => {
     expect(shownParcel(storedPackage())).not.toHaveProperty('written_ahead_by');
   });
 
+  it('holds the steps the page shows greyed as written in advance, newest first, apart from the scans', () => {
+    const script = [{ time: '2026-10-04T08:00:00+08:00', description: 'Departed the origin facility', stage: 'in_transit' },
+      { time: '2026-10-07T15:00:00+08:00', description: 'Delivered', stage: 'delivered' }];
+    const routing = { planned: { number: trackingNumber, carriers: { gzyl: script } },
+      written_ahead: { number: trackingNumber, carriers: { gzyl: script.map((step) => step.time) } } };
+    const shown = shownParcel(storedPackage({ carrier: 'gzyl', carrier_data: { active_tracking_carrier: 'gzyl', routing } }));
+    expect(shown.written_ahead_events).toEqual([
+      { stage: 'delivered', description: 'Delivered', location: null, occurred_at: '2026-10-07T07:00:00.000Z' },
+      { stage: 'in_transit', description: 'Departed the origin facility', location: null, occurred_at: '2026-10-04T00:00:00.000Z' },
+    ]);
+    expect(shown.event_count).toBe(2);
+    expect((shown.events as JsonObject[]).map((event) => event.stage)).toEqual(['in_transit', 'accepted']);
+  });
+
   it('orders scans of one instant and stage as the timeline does, by their source\'s order and then by id', () => {
     const at = '2026-10-01T10:00:00+00:00';
     const scan = (id: string, tieOrder?: number) => ({

@@ -240,9 +240,19 @@ order by early desc, parcels desc, carrier, stage;
 
 \echo '== Planned steps passed: parcels on their way whose kept plan has a step dated over a day ago, by short id'
 \echo '   the server serves a planned step only while it is ahead and the apps hide one as it passes, so such a step'
-\echo '   shows only if that rule broke; with_plan: parcels whose plan the server can serve'
+\echo '   shows only if that rule broke; with_plan: parcels whose plan the server can serve; written: parcels whose'
+\echo '   passed step is at a clock the carrier holds back as written ahead, which the server serves apart, greyed'
 with planned as (
-  select p.id, p.carrier, coalesce(step->>'time', step->>'local_time') as dated
+  select p.id, p.carrier, s.dated, s.dated is not null and exists (
+           -- At a clock the carrier holds back for this number: the same wall minute, or a clock on its bare day.
+           select 1 from jsonb_array_elements_text(case
+             when p.carrier_data->'routing'->'written_ahead'->>'number' = p.tracking_number
+               and jsonb_typeof(p.carrier_data #> array['routing', 'written_ahead', 'carriers', c.planner]) = 'array'
+               then p.carrier_data #> array['routing', 'written_ahead', 'carriers', c.planner]
+             else '[]'::jsonb end) as clock
+           where left(replace(clock, ' ', 'T'), 16) = left(replace(s.dated, ' ', 'T'), 16)
+              or (s.dated ~ '^\d{4}-\d{2}-\d{2}$' and clock like s.dated || '%')
+         ) as written
   from public.packages as p
   -- The plan of the carrier tracking the parcel now, as plannedSteps.ts serves it.
   cross join lateral (
@@ -253,15 +263,19 @@ with planned as (
     when jsonb_typeof(p.carrier_data #> array['routing', 'planned', 'carriers', c.planner]) = 'array'
       then p.carrier_data #> array['routing', 'planned', 'carriers', c.planner]
     else '[]'::jsonb end) as step
+  cross join lateral (select trim(coalesce(step->>'time', step->>'local_time')) as dated) as s
   where p.carrier_data->'routing'->'planned'->>'number' = p.tracking_number
     and p.current_stage not in ('delivered', 'returned')
+), passed as (
+  -- A day before yesterday in UTC has passed in every zone.
+  select *, substring(dated from '^\d{4}-\d{2}-\d{2}') < to_char(now() at time zone 'UTC' - interval '1 day', 'YYYY-MM-DD') as gone
+  from planned
 )
 select carrier, 'delivery-tracker' as lane, count(distinct id) as with_plan,
-       -- A day before yesterday in UTC has passed in every zone.
-       count(distinct id) filter (where substring(dated from '^\d{4}-\d{2}-\d{2}') < to_char(now() at time zone 'UTC' - interval '1 day', 'YYYY-MM-DD')) as passed,
-       array_to_string((array_agg(distinct left(id::text, 8)) filter (
-         where substring(dated from '^\d{4}-\d{2}-\d{2}') < to_char(now() at time zone 'UTC' - interval '1 day', 'YYYY-MM-DD')))[1:5], ' ') as sample
-from planned
+       count(distinct id) filter (where gone and not written) as passed,
+       count(distinct id) filter (where gone and written) as written,
+       array_to_string((array_agg(distinct left(id::text, 8)) filter (where gone and not written))[1:5], ' ') as sample
+from passed
 group by 1
 order by passed desc, with_plan desc, carrier;
 

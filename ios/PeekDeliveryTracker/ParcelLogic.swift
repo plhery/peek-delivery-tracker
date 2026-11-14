@@ -443,6 +443,15 @@ extension Parcel {
         currentStage == .delivered && Self.scheduledDeliveries.contains(displayedCarrier) && deliveringCarrier == nil
     }
 
+    /// The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page
+    /// lists steps Peek can't confirm, which the timeline shows greyed once the carrier names them in words
+    /// (`writtenAheadEvents`, or still ahead `plannedEvents`), and leaves out until then. None for another carrier.
+    var writtenAheadNoteKey: String? {
+        guard writtenAheadBy != nil else { return nil }
+        let shown = !(writtenAheadEvents ?? []).isEmpty || !(plannedEvents ?? []).isEmpty
+        return shown ? "parcel.writtenAheadShown" : "parcel.writtenAhead"
+    }
+
     private static let expectedDayPattern = try? NSRegularExpression(pattern: "^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])")
 
     var expectedDayKey: String? {

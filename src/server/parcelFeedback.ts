@@ -4,7 +4,7 @@ import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { shownEvents, withoutPlaceholderAnswers } from './eventPlaces';
 import { recordParcelFeedback } from './metrics';
 import { logOperationalEvent } from './observability';
-import { servedWrittenAhead } from './plannedSteps';
+import { servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { deployedVersion } from './reviewQueues';
 import type { SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
@@ -27,8 +27,9 @@ function cut(value: unknown, limit: number): string | null {
  * What the service holds about a parcel when an answer arrives: its status,
  * its last check and its newest scans, as its timeline shows them: without
  * a provider's copies of its carrier's scans, or Peek's own "Tracking added"
- * once carrier scans reach back to it, and the carrier the page says writes the
- * timeline in advance (`written_ahead_by`). A placeholder number's parcel is held as
+ * once carrier scans reach back to it, the carrier the page says writes the
+ * timeline in advance (`written_ahead_by`) and the newest steps it wrote that the page
+ * shows greyed (`written_ahead_events`). A placeholder number's parcel is held as
  * it is shown, without what was stored from it (`withoutPlaceholderAnswers`). A private
  * tracking link, a postcode and a name the reader gave the parcel are left out.
  */
@@ -41,6 +42,13 @@ export function shownParcel(row: JsonObject): JsonObject {
   row = withoutPlaceholderAnswers(row);
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   const writtenAheadBy = servedWrittenAhead(row);
+  const written = servedWrittenSteps(row, events).reverse();
+  const shown = (event: JsonObject) => ({
+    stage: cut(event.stage, 40),
+    description: cut(event.description, 200),
+    location: cut(event.location, 100),
+    occurred_at: cut(event.occurred_at, 40),
+  });
   return {
     status: cut(row.last_status_text, 300),
     sync_status: cut(row.sync_status, 40),
@@ -51,13 +59,9 @@ export function shownParcel(row: JsonObject): JsonObject {
     active_carrier: cut(carrierData.active_tracking_carrier, 60),
     delivery_carrier: cut(carrierData.delivery_carrier, 60),
     event_count: events.length,
-    events: events.slice(0, SHOWN_EVENTS).map((event) => ({
-      stage: cut(event.stage, 40),
-      description: cut(event.description, 200),
-      location: cut(event.location, 100),
-      occurred_at: cut(event.occurred_at, 40),
-    })),
+    events: events.slice(0, SHOWN_EVENTS).map(shown),
     ...writtenAheadBy ? { written_ahead_by: writtenAheadBy } : {},
+    ...written.length ? { written_ahead_events: written.slice(0, SHOWN_EVENTS).map(shown) } : {},
   };
 }
 

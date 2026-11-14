@@ -77,6 +77,17 @@ export function awaitedCarrier(parcel: ParcelWithEvents): CarrierId | null {
   return waits ? parcel.carrier : null;
 }
 
+/**
+ * The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page lists
+ * steps Peek can't confirm, which the timeline shows greyed once the carrier names them in words (`writtenAheadEvents`,
+ * or still ahead `plannedEvents`), and leaves out until then. None for another carrier.
+ */
+export function writtenAheadNote(parcel: ParcelWithEvents, t: Translate, locale: string): string | null {
+  if (!parcel.writtenAheadBy) return null;
+  const shown = !!(parcel.writtenAheadEvents?.length || parcel.plannedEvents?.length);
+  return t(shown ? 'parcel.writtenAheadShown' : 'parcel.writtenAhead', { carrier: carrierInfo(parcel.writtenAheadBy, locale).name });
+}
+
 export function parcelIsUnannounced(parcel: ParcelWithEvents): boolean {
   return !parcelHasCarrierUpdate(parcel) && parcel.syncStatus === 'waiting';
 }

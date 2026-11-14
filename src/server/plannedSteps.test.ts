@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NoHistoryError } from 'universal-parcel-scraper';
-import { plannedSteps, plannedStepsOf, PLANNED_STEPS_KEPT, servedPlannedSteps, servedWrittenAhead } from './plannedSteps';
+import { atWrittenClock, plannedSteps, plannedStepsOf, PLANNED_STEPS_KEPT, servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import type { JsonObject } from './types';
 
 vi.mock('server-only', () => ({}));
@@ -122,7 +122,106 @@ describe('servedWrittenAhead', () => {
   });
 });
 
+// A GZYL script read on 10 November: its order row is a scan, every other row it wrote on 9 October for later dates.
+const written = [
+  { time: '2026-10-12T09:00:00+08:00', description: 'Departed the origin facility', stage: 'in_transit', location: 'Guangzhou' },
+  { time: '2026-10-20T18:00:00+08:00', description: 'Arrived in the destination country', stage: 'in_transit' },
+  { local_time: '2026-11-06', description: 'Out for delivery', stage: 'out_for_delivery' },
+  { time: '2026-11-07T15:00:00+08:00', description: 'Delivered', stage: 'delivered' },
+  { time: '2026-11-20T10:00:00+08:00', description: 'Proof of delivery filed' },
+];
+const held = ['2026-10-12T09:00:00+08:00', '2026-10-20T18:00:00+08:00', '2026-11-06T10:00:00', '2026-11-07T15:00:00+08:00', '2026-11-20T10:00:00+08:00'];
+const ordered = { id: 'order', description: 'Order received', stage: 'registered', occurred_at: '2026-10-09T02:00:00.000Z', provider_event_id: 'gzyl:1' };
+const READ = Date.parse('2026-11-10T00:00:00Z');
+const scripted = (overrides: JsonObject = {}, clocks: string[] = held, steps: unknown[] = written): JsonObject => ({
+  id: 'parcel', carrier: 'gzyl', tracking_number: 'TEST1234', current_stage: 'registered', tracking_events: [ordered],
+  carrier_data: { routing: { version: 1, planned: { number: 'TEST1234', carriers: { gzyl: steps } },
+    written_ahead: { number: 'TEST1234', carriers: { gzyl: clocks } } } },
+  ...overrides,
+});
+
+describe('atWrittenClock', () => {
+  it('matches a step to a held clock by its instant, its wall clock or its day', () => {
+    expect(atWrittenClock({ time: '2026-10-12T09:00:00+08:00' }, ['2026-10-12T01:00:30Z'])).toBe(true);
+    expect(atWrittenClock({ time: '2026-10-12T09:00:00+08:00' }, ['2026-10-12T09:00:00'])).toBe(true);
+    expect(atWrittenClock({ local_time: '2026-10-12T09:00' }, ['2026-10-12T09:00:59'])).toBe(true);
+    expect(atWrittenClock({ local_time: '2026-11-06' }, ['2026-11-06T10:00:00'])).toBe(true);
+    expect(atWrittenClock({ time: '2026-10-12T09:00:00+08:00' }, ['2026-10-12T09:02:00+08:00', '2026-10-13T09:00:00'])).toBe(false);
+    expect(atWrittenClock({ local_time: '2026-11-06' }, ['2026-11-07T10:00:00'])).toBe(false);
+    expect(atWrittenClock({}, held)).toBe(false);
+  });
+});
+
+describe('servedWrittenSteps', () => {
+  it('serves the steps the carrier wrote in advance whose time has passed, oldest first, a delivery among them, and plans the rest', () => {
+    expect(servedWrittenSteps(scripted(), [ordered], READ)).toEqual([
+      { description: 'Departed the origin facility', stage: 'in_transit', location: 'Guangzhou', occurred_at: '2026-10-12T01:00:00.000Z' },
+      { description: 'Arrived in the destination country', stage: 'in_transit', location: null, occurred_at: '2026-10-20T10:00:00.000Z' },
+      { description: 'Out for delivery', stage: 'out_for_delivery', location: null, occurred_at: '2026-11-05T16:00:00.000Z', day: '2026-11-06' },
+      { description: 'Delivered', stage: 'delivered', location: null, occurred_at: '2026-11-07T07:00:00.000Z' },
+    ]);
+    // The step still ahead is planned, and no step is both.
+    expect(servedPlannedSteps(scripted(), [ordered], READ).map((step) => step.description)).toEqual(['Proof of delivery filed']);
+  });
+
+  it('serves a written "Delivered" before any real scan, which leaves the parcel as it was', () => {
+    const added = { id: 'added', description: 'Tracking added', stage: 'pending', occurred_at: '2026-10-09T00:00:00.000Z', provider_event_id: 'app:added' };
+    const parcel = scripted({ current_stage: 'pending', tracking_events: [added] });
+    expect(servedWrittenSteps(parcel, [added], READ).at(-1)).toMatchObject({ description: 'Delivered', stage: 'delivered' });
+    expect(parcel.current_stage).toBe('pending');
+  });
+
+  it('serves a step dated by its day alone once that day is over, and a timed one once its minute has come', () => {
+    const outForDelivery = (now: string) => servedWrittenSteps(scripted(), [ordered], Date.parse(now)).map((step) => step.description);
+    expect(outForDelivery('2026-11-06T15:59:00Z')).not.toContain('Out for delivery');
+    expect(outForDelivery('2026-11-06T16:00:00Z')).toContain('Out for delivery');
+    expect(outForDelivery('2026-11-07T06:59:00Z')).not.toContain('Delivered');
+    expect(outForDelivery('2026-11-07T07:00:00Z')).toContain('Delivered');
+  });
+
+  it('leaves out a step at no held clock: a scan not due yet becomes the carrier\'s scan, and one it showed freed its clock', () => {
+    const steps = servedWrittenSteps(scripted({}, held.filter((clock) => !clock.startsWith('2026-10-20'))), [ordered], READ);
+    expect(steps.map((step) => step.description)).toEqual(['Departed the origin facility', 'Out for delivery', 'Delivered']);
+  });
+
+  it('leaves out a step a shown scan tells: at its minute, or in its words within a day', () => {
+    const departed = { ...ordered, id: 'departed', description: 'Departed  the origin FACILITY', stage: 'in_transit', occurred_at: '2026-10-12T20:00:00.000Z' };
+    const arrived = { ...ordered, id: 'arrived', description: 'Landed', stage: 'in_transit', occurred_at: '2026-10-20T10:00:30.000Z' };
+    expect(servedWrittenSteps(scripted(), [ordered, departed, arrived], READ).map((step) => step.description))
+      .toEqual(['Out for delivery', 'Delivered']);
+    // The same words days apart are another step.
+    const later = { ...departed, occurred_at: '2026-10-15T00:00:00.000Z' };
+    expect(servedWrittenSteps(scripted(), [ordered, later], READ)).toHaveLength(4);
+  });
+
+  it('serves none once the parcel is delivered or returned, for another number, without a held clock, or for a carrier that holds none', () => {
+    expect(servedWrittenSteps(scripted({ current_stage: 'delivered' }), [ordered], READ)).toEqual([]);
+    expect(servedWrittenSteps(scripted(), [ordered, { ...ordered, id: 'back', stage: 'returned' }], READ)).toEqual([]);
+    expect(servedWrittenSteps(scripted({ tracking_number: 'TEST5678' }), [ordered], READ)).toEqual([]);
+    expect(servedWrittenSteps(scripted({}, []), [ordered], READ)).toEqual([]);
+    // A carrier entering scans at their planned time names no clock as written ahead: its passed steps are no script.
+    expect(servedWrittenSteps(row(), [pickedUp], Date.parse('2026-11-10T00:00:00Z'))).toEqual([]);
+  });
+});
+
 describe('withEventPlaces', () => {
+  it('serves the written steps whose time has passed apart from the scans and the plan, placed, and the stage untouched', () => {
+    vi.setSystemTime(READ);
+    try {
+      const served = withEventPlaces(scripted({ current_stage: 'pending', tracking_events: [] }));
+      expect(served).toMatchObject({ current_stage: 'pending', written_ahead_by: 'gzyl', tracking_events: [] });
+      expect((served.written_ahead_events as JsonObject[]).map((step) => [step.description, step.stage]))
+        .toEqual([['Departed the origin facility', 'in_transit'], ['Arrived in the destination country', 'in_transit'],
+          ['Out for delivery', 'out_for_delivery'], ['Delivered', 'delivered']]);
+      expect((served.written_ahead_events as JsonObject[])[0]!.place).toMatchObject({ country: 'CN', name: 'Guangzhou' });
+      expect((served.planned_events as JsonObject[]).map((step) => step.description)).toEqual(['Proof of delivery filed']);
+      expect((served.carrier_data as JsonObject).routing).toEqual({ version: 1 });
+      expect(withEventPlaces(scripted({ current_stage: 'delivered' }))).not.toHaveProperty('written_ahead_events');
+    } finally {
+      vi.setSystemTime(new Date('2026-10-18T03:00:00Z'));
+    }
+  });
+
   it('serves the plan beside the scans, and keeps the stored plan out of the carrier data', () => {
     const served = withEventPlaces(row());
     expect(served.planned_events).toHaveLength(4);

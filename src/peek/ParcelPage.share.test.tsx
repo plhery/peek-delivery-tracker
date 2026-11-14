@@ -386,6 +386,14 @@ describe('a gift', () => {
     expect(document.querySelector('.peekp-actions')).toBeNull();
   });
 
+  it('shows a wrapped gift none of the steps its carrier wrote in advance', async () => {
+    const shown = wrapped();
+    open({ ...shown, parcel: { ...shown.parcel, carrier: 'gzyl', writtenAheadBy: 'gzyl',
+      writtenAheadEvents: [{ stage: 'delivered', description: 'Delivered', occurredAt: '2026-01-01T00:00:00Z' }] } }, { hash: words });
+    await screen.findByRole('region', { name: 'Something’s on its way to you' });
+    expect(screen.queryByRole('region', { name: /^Written in advance by/ })).toBeNull();
+  });
+
   it('tells where it comes from once: the scans the server blurred alike are one row', async () => {
     const newest = origin('c', 26);
     open(wrapped([origin('a', 30), origin('b', 28), newest, scan('customs', 10, 'Cleared customs', { location: 'Basel, Switzerland' }), scan('out_for_delivery', 2, 'With the courier')]), { hash: words });

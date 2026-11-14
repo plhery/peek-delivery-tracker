@@ -3281,6 +3281,7 @@ data class Parcel(
     @SerialName("tracking_events") @Serializable(with = TrackingEventsSerializer::class) val trackingEvents: List<TrackingEvent> = emptyList(),
     @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("written_ahead_by") val writtenAheadBy: CarrierId? = null,
+    @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("email_muted") val emailMuted: Boolean? = null,
 )
 
@@ -3760,6 +3761,7 @@ data class PublicPackage(
     @SerialName("tracking_events") val trackingEvents: List<TrackingEvent>,
     @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("written_ahead_by") val writtenAheadBy: CarrierId? = null,
+    @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
 )
 
 @Serializable

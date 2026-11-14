@@ -166,9 +166,10 @@ val PlannedTrackingEvent.journalLocation: String?
 /**
  * What TalkBack reads of a planned step's row: "Planned, not confirmed: " and its words, its day ([Localizer.plannedDate])
  * and where it will be as the location row reads it (the town its place names, for one written in another script),
- * without the flag, joined by ", ".
+ * without the flag, joined by ", ". A step written in advance whose time has passed reads `timeline.writtenAhead.step`
+ * ("Written in advance, not confirmed: ") instead, as `key`.
  */
-fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
+fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClock.now(), key: String = "timeline.planned.step"): String {
     val place = step.journalLocation?.let { location ->
         val place = TrackingLocation.place(location, step.place, language)
         val country = place.country
@@ -179,7 +180,7 @@ fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClo
         }
     }
     val parts = listOfNotNull(plannedWording(step), plannedDate(step, now), place).filter { it.isNotEmpty() }
-    return text("timeline.planned.step", mapOf("step" to parts.joinToString(", ")))
+    return text(key, mapOf("step" to parts.joinToString(", ")))
 }
 
 /**

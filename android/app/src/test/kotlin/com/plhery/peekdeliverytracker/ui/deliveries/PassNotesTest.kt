@@ -52,6 +52,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierPostcodeRefused
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeeded
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeededField
 import com.plhery.peekdeliverytracker.core.api.RecipientAction
@@ -373,6 +374,13 @@ class PassNotesTest {
         passParcel = lamp.copy(carrier = CarrierId.Gzyl)
         compose.waitForIdle()
         assertFalse(textExists(line))
+
+        // Once the carrier names its steps in words, the timeline shows them greyed, and the line says so.
+        val written = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z")
+        passParcel = lamp.copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(written))
+        compose.waitForIdle()
+        assertFalse(textExists(line))
+        assertTrue(textExists(line.replace("so it leaves them out", "so it shows them greyed")))
     }
 
     @Test

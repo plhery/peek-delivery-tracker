@@ -199,4 +199,49 @@ class PlannedStepsTests {
         assertEquals(parcel.plannedEvents, Parcel(shared = shared).plannedEvents)
         assertEquals(parcel.trackingEvents, Parcel(shared = shared).trackingEvents)
     }
+
+    @Test
+    fun aLinkCarriesTheStepsItsCarrierWroteAheadApartFromItsScans() {
+        val parcel = DemoRepository.seed(DateParser.date("2026-09-09T12:00:00Z")!!).first { it.label == vinyl }
+        val written = listOf(PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-09-08T07:00:00Z"))
+        val shared = PublicPackage(
+            id = parcel.id, trackingNumber = parcel.trackingNumber, label = "", carrier = CarrierId.Gzyl, createdAt = parcel.createdAt,
+            syncStatus = SyncStatus.Ok, carrierData = PublicPackageCarrierData(), notificationsMuted = false,
+            trackingEvents = emptyList(), writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = written,
+        )
+        val linked = Parcel(shared = shared)
+        assertEquals(written, linked.writtenAheadEvents)
+        assertNull(linked.plannedEvents)
+        assertTrue(linked.trackingEvents.isEmpty())
+        assertEquals("parcel.writtenAheadShown", linked.writtenAheadNoteKey)
+    }
+
+    @Test
+    fun theWrittenAheadNoteSaysTheCarriersStepsShowGreyedOnceItNamesThem() {
+        val step = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-08-09T07:00:00Z")
+        val parcel = makeParcel().copy(carrier = CarrierId.Gzyl)
+        assertNull(parcel.writtenAheadNoteKey)
+        assertEquals("parcel.writtenAhead", parcel.copy(writtenAheadBy = CarrierId.Gzyl).writtenAheadNoteKey)
+        // A "Delivered" the carrier wrote in advance, before any real scan, is no scan: the parcel is not delivered.
+        val written = parcel.copy(writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(step))
+        assertEquals("parcel.writtenAheadShown", written.writtenAheadNoteKey)
+        assertNull(written.currentEvent)
+        assertFalse(written.currentStage == TrackingStage.Delivered)
+        assertFalse(written.scheduledDelivery)
+        val planned = parcel.copy(writtenAheadBy = CarrierId.Gzyl, plannedEvents = listOf(step.copy(occurredAt = "2026-08-20T07:00:00Z")))
+        assertEquals("parcel.writtenAheadShown", planned.writtenAheadNoteKey)
+    }
+
+    @Test
+    fun aStepWrittenInAdvanceIsReadAsSuch() {
+        val zone = ZoneId.systemDefault()
+        val now = ZonedDateTime.of(2026, 11, 4, 12, 0, 0, 0, zone).toInstant()
+        val yesterday = DateParser.isoString(ZonedDateTime.of(2026, 11, 3, 7, 54, 0, 0, zone).toInstant())
+        val step = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = yesterday)
+        val localizer = Localizer(AppLanguage.En)
+        assertEquals(
+            "Written in advance, not confirmed: ${localizer.eventDescription("Delivered")}, yesterday, 07:54",
+            localizer.plannedStepLabel(step, now, "timeline.writtenAhead.step"),
+        )
+    }
 }

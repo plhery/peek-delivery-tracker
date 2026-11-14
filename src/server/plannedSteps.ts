@@ -9,7 +9,8 @@ import { isRecord, type JsonObject } from './types';
  * A step the carrier lists before it happens: a row written ahead of its own clock (a tenant's script of the
  * whole journey, written when the order is made) or a scan entered at its planned time and not due yet. The
  * scraper holds such rows out of a result's scans and names them beside them (`planned_events`, or an error's
- * `plannedEvents` when nothing else remains), as its scans are shaped.
+ * `plannedEvents` when nothing else remains), as its scans are shaped. A row written ahead stays listed once its own
+ * clock has passed, as long as the carrier keeps it, and so does its clock among those held back (`written_ahead`).
  */
 export interface PlannedStep {
   time?: string;
@@ -84,6 +85,39 @@ export function servedWrittenAhead(row: JsonObject): CarrierId | null {
   return (tracking ?? named[0] ?? null) as CarrierId | null;
 }
 
+/** The steps each carrier listed for the parcel's own number (`routing.planned`), or null. */
+function keptPlans(row: JsonObject): JsonObject | null {
+  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
+  const routing = isRecord(data.routing) ? data.routing : {};
+  const kept = isRecord(routing.planned) ? routing.planned : null;
+  return kept && kept.number === row.tracking_number && isRecord(kept.carriers) ? kept.carriers : null;
+}
+
+/** The shown scans that are a carrier's: Peek's own rows ("Tracking added") aside. */
+const carrierScans = (events: readonly JsonObject[]) =>
+  events.filter((event) => !(typeof event.provider_event_id === 'string' && event.provider_event_id.startsWith('app:')));
+
+/**
+ * When a step is planned, read in the carrier's zone: its moment, the moment it stops being ahead (a step dated by its
+ * day alone stands until the end of that day) and that day. Null when its date does not read.
+ */
+function stepTime(step: PlannedStep, zone: string): { instant: number; until: number; day: string | null } | null {
+  const day = scanDay(step as unknown as JsonObject) ?? clockDay(step as unknown as JsonObject);
+  const at = day ? DateTime.fromISO(day, { zone }).toUTC().toISO() : eventTimestamp(step.time ?? step.local_time, zone);
+  const instant = Date.parse(at ?? '');
+  if (!Number.isFinite(instant)) return null;
+  return { instant, until: day ? DateTime.fromISO(day, { zone }).endOf('day').toMillis() : instant, day };
+}
+
+/** A step as the API serves it (`PlannedTrackingEvent`): one the carrier gave no stage is in transit. */
+function servedStep(step: PlannedStep, time: { instant: number; day: string | null }): JsonObject {
+  const stage = step.stage && EVENT_STAGE_ORDER.includes(step.stage) ? step.stage : 'in_transit';
+  return { description: step.description, stage, location: step.location ?? null,
+    occurred_at: new Date(time.instant).toISOString(), ...(time.day ? { day: time.day } : {}) };
+}
+
+const oldestFirst = (a: JsonObject, b: JsonObject) => String(a.occurred_at).localeCompare(String(b.occurred_at));
+
 /**
  * The planned steps a parcel's timeline shows, greyed under "Planned by the carrier", as the API serves them
  * (`planned_events`): those its routing kept for the carrier tracking it now (`routing.planned`) and still ahead of
@@ -91,36 +125,84 @@ export function servedWrittenAhead(row: JsonObject): CarrierId | null {
  * estimate, alert, email, count or drawing. A step goes once its time has passed (a step dated by its day alone, once
  * that day has), once the parcel is delivered or returned, once a shown scan (`events`, as served) is as late or later,
  * tells it in the same words or has come further, and for a placeholder number: a carrier's script that has run past
- * its "Delivered" never shows that step as planned for a time gone by.
+ * its "Delivered" never shows that step as planned for a time gone by. One the carrier wrote ahead is then served
+ * apart (`servedWrittenSteps`).
  */
 export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[], now = Date.now()): JsonObject[] {
-  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
-  const routing = isRecord(data.routing) ? data.routing : {};
-  const kept = isRecord(routing.planned) ? routing.planned : null;
-  const listed = kept && kept.number === row.tracking_number && isRecord(kept.carriers) ? kept.carriers : null;
+  const listed = keptPlans(row);
   if (!listed) return [];
   if (FINAL_STAGES.has(String(row.current_stage ?? ''))) return [];
+  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
   const carriers = [...new Set([data.active_tracking_carrier, row.carrier].filter((carrier): carrier is string => typeof carrier === 'string'))];
   const carrier = carriers.find((name) => Array.isArray(listed[name]));
   if (!carrier) return [];
-  const own = (event: JsonObject) => typeof event.provider_event_id === 'string' && event.provider_event_id.startsWith('app:');
-  const scans = events.filter((event) => !own(event));
+  const scans = carrierScans(events);
   const latest = Math.max(...scans.map((event) => Date.parse(String(event.occurred_at))).filter(Number.isFinite));
   const told = new Set(scans.map((event) => words(event.description)));
   const reached = Math.max(-1, ...[row.current_stage, ...scans.map((event) => event.stage)].map((stage) => PROGRESS.indexOf(String(stage))));
   if (scans.some((event) => FINAL_STAGES.has(String(event.stage)))) return [];
   const zone = carrierTimezone(carrier as Parameters<typeof carrierTimezone>[0]) ?? 'UTC';
   return plannedSteps(listed[carrier] as unknown[]).flatMap((step) => {
-    const day = scanDay(step as unknown as JsonObject) ?? clockDay(step as unknown as JsonObject);
-    const at = day ? DateTime.fromISO(day, { zone }).toUTC().toISO() : eventTimestamp(step.time ?? step.local_time, zone);
-    const instant = Date.parse(at ?? '');
-    if (!Number.isFinite(instant)) return [];
-    // A day-only step stands until the end of its day.
-    const until = day ? DateTime.fromISO(day, { zone }).endOf('day').toMillis() : instant;
-    if (until <= Math.max(latest, now) || told.has(words(step.description))) return [];
-    const stage = step.stage && EVENT_STAGE_ORDER.includes(step.stage) ? step.stage : 'in_transit';
-    if (PROGRESS.indexOf(stage) >= 0 && PROGRESS.indexOf(stage) < reached) return [];
-    return [{ description: step.description, stage, location: step.location ?? null,
-      occurred_at: new Date(instant).toISOString(), ...(day ? { day } : {}) }];
-  }).sort((a, b) => String(a.occurred_at).localeCompare(String(b.occurred_at)));
+    const time = stepTime(step, zone);
+    if (!time || time.until <= Math.max(latest, now) || told.has(words(step.description))) return [];
+    const served = servedStep(step, time);
+    const progress = PROGRESS.indexOf(String(served.stage));
+    return progress >= 0 && progress < reached ? [] : [served];
+  }).sort(oldestFirst);
+}
+
+const OFFSET = /(?:Z|[+-]\d{2}:?\d{2})$/i;
+const WALL_MINUTE = /^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})/;
+const BARE_DAY = /^\d{4}-\d{2}-\d{2}$/;
+const MINUTE_MS = 60_000;
+const DAY_MS = 86_400_000;
+
+/**
+ * Whether a step stands at a clock its carrier holds back as written ahead (`routing.written_ahead`), matched as the
+ * scraper matches a provider's copy to one: the same instant within a minute when both carry their offset, else the
+ * same wall clock to the minute, and for a step dated by its day alone a clock on that day.
+ */
+export function atWrittenClock(step: Pick<PlannedStep, 'time' | 'local_time'>, clocks: readonly string[]): boolean {
+  const value = (step.time ?? step.local_time ?? '').trim();
+  const instant = OFFSET.test(value) ? Date.parse(value) : NaN;
+  const wall = WALL_MINUTE.exec(value);
+  return clocks.some((clock) => {
+    if (Number.isFinite(instant) && OFFSET.test(clock) && Math.abs(Date.parse(clock) - instant) < MINUTE_MS) return true;
+    const other = WALL_MINUTE.exec(clock);
+    if (wall) return other !== null && wall[1] === other[1] && wall[2] === other[2];
+    return BARE_DAY.test(value) && clock.startsWith(value);
+  });
+}
+
+/**
+ * The steps the carrier writing the timeline in advance (`servedWrittenAhead`) wrote and whose time has passed, as the
+ * API serves them (`written_ahead_events`), oldest first. The timeline shows them greyed in the carrier's own words,
+ * under "Written in advance by <carrier>", as its own page lists them. A step is one when that carrier listed it
+ * (`routing.planned`) at a clock it holds back as written ahead (`routing.written_ahead`, `atWrittenClock`): a scan
+ * entered at its planned time that the carrier then shows as a scan frees its clock, and a step merely not due yet is
+ * the carrier's scan once due. Until its time passes a step is planned (`servedPlannedSteps`). A step goes once a shown
+ * scan (`events`, as served) stands at its minute or tells it in the same words within a day of it, and every step once
+ * the parcel is delivered or returned, and for a placeholder number. They are never scans either: a written
+ * "Delivered" sets no stage, status line, estimate, alert, email, count or drawing.
+ */
+export function servedWrittenSteps(row: JsonObject, events: readonly JsonObject[], now = Date.now()): JsonObject[] {
+  const carrier = servedWrittenAhead(row);
+  const listed = keptPlans(row)?.[carrier ?? ''];
+  if (!carrier || !Array.isArray(listed)) return [];
+  const routing = (row.carrier_data as JsonObject).routing as JsonObject;
+  const held = ((routing.written_ahead as JsonObject).carriers as JsonObject)[carrier] as unknown[];
+  const clocks = held.filter((clock): clock is string => typeof clock === 'string');
+  const scans = carrierScans(events);
+  if (scans.some((event) => FINAL_STAGES.has(String(event.stage)))) return [];
+  const shown = scans.map((event) => ({ at: Date.parse(String(event.occurred_at)), words: words(event.description) }))
+    .filter((scan) => Number.isFinite(scan.at));
+  const zone = carrierTimezone(carrier) ?? 'UTC';
+  return plannedSteps(listed).flatMap((step) => {
+    const time = stepTime(step, zone);
+    if (!time || time.until > now || !atWrittenClock(step, clocks)) return [];
+    const said = words(step.description);
+    const told = shown.some((scan) => Math.abs(scan.at - time.instant) < MINUTE_MS
+      || (scan.words === said && scan.at > time.instant - DAY_MS && scan.at < time.until + DAY_MS));
+    return told ? [] : [servedStep(step, time)];
+  }).sort(oldestFirst);
 }

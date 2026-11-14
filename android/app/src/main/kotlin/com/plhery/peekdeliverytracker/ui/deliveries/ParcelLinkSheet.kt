@@ -129,6 +129,7 @@ import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
+import com.plhery.peekdeliverytracker.core.writtenAheadNoteKey
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -534,8 +535,12 @@ private fun LinkShared(
     val opened = gift == ParcelLinkGift.Opened
     val parcel = remember(response, wrapped) {
         val shared = Parcel(shared = response.parcel)
-        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned.
-        if (wrapped) shared.copy(trackingEvents = shared.trackingEvents.collapsingGiftRows(), plannedEvents = null) else shared
+        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned or wrote ahead.
+        if (wrapped) {
+            shared.copy(trackingEvents = shared.trackingEvents.collapsingGiftRows(), plannedEvents = null, writtenAheadEvents = null)
+        } else {
+            shared
+        }
     }
     val identity = remember(identities, parcel, language) { identities.of(parcel.displayedCarrier, language) }
     val colors = PeekTheme.colors
@@ -1047,11 +1052,12 @@ private fun SharedParcelCard(
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
                     }
-                    // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
+                    // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
                     val ahead = parcel.writtenAheadBy
-                    if (!gift && ahead != null) {
+                    val aheadNote = parcel.writtenAheadNoteKey
+                    if (!gift && ahead != null && aheadNote != null) {
                         Text(
-                            localizer.text("parcel.writtenAhead", mapOf("carrier" to identities.displayName(ahead, language))),
+                            localizer.text(aheadNote, mapOf("carrier" to identities.displayName(ahead, language))),
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
                     }

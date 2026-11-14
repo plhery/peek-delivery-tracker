@@ -52,6 +52,7 @@ import { unseenFor } from './unseenLookup';
 import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, SchemaError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
 import { doubled, s10 } from '../test/trackingNumbers';
+import { withEventPlaces } from './eventPlaces';
 
 // Keep the published plan configurable without changing the scraper's other exports.
 vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
@@ -4075,6 +4076,37 @@ describe('TrackingSyncService', () => {
     // A parcel with no scan yet has none to keep.
     const notFound = { ups: { count: 3, kind: 'not_found' as const, user_error: 'carrier:not_found', retry_at: '2026-09-10T13:00:00Z' } };
     expect((await check({ ...parcel, carrier: 'ups', current_stage: 'pending' }, notFound)).sync_error).not.toBe('carrier:no_new_scans');
+  });
+
+  it('keeps the steps a carrier with no scans wrote ahead, a passed "Delivered" among them, as no scan: the parcel stays pending and the step is served greyed', async () => {
+    const added = { id: 'added', description: 'Tracking added', stage: 'pending', occurred_at: '2026-11-01T00:00:00Z', provider_event_id: 'app:added' };
+    const parcel = { id: 'scripted', carrier: 'gzyl', tracking_number: 'TEST1234', current_stage: 'pending', tracking_events: [added] };
+    const script = [{ time: '2026-11-03T10:00:00+08:00', description: 'Departed the origin facility', stage: 'in_transit' },
+      { time: '2026-11-07T15:00:00+08:00', description: 'Delivered', stage: 'delivered' }];
+    const clocks = script.map((step) => step.time);
+    // What the router keeps once the carrier names its script and a provider's copy of it is set aside.
+    vi.spyOn(TrackingRouter.prototype, 'fetch').mockRejectedValue(new RoutingDeferred({ ...routingState(parcel),
+      planned: { number: 'TEST1234', carriers: { gzyl: script } }, written_ahead: { number: 'TEST1234', carriers: { gzyl: clocks } } }, false, 2));
+    const client = fakeClient();
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn(), fetchUniversal: vi.fn() }, null,
+      () => new Date('2026-11-10T00:00:00Z'));
+    await service.syncPackage(parcel, { trigger: 'scheduled' });
+    expect(client.insertEvents).not.toHaveBeenCalled();
+    expect(client.reopenScanAnnouncements).not.toHaveBeenCalled();
+    const values = client.updatePackage.mock.lastCall![1] as JsonObject;
+    expect(values.current_stage ?? 'pending').toBe('pending');
+    expect(values).not.toHaveProperty('expected_delivery');
+    vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-11-10T00:00:00Z') });
+    try {
+      const served = withEventPlaces({ ...parcel, ...values });
+      expect(served).toMatchObject({ current_stage: 'pending', written_ahead_by: 'gzyl' });
+      expect((served.tracking_events as JsonObject[]).map((event) => event.id)).toEqual(['added']);
+      expect((served.written_ahead_events as JsonObject[]).map((step) => [step.description, step.stage]))
+        .toEqual([['Departed the origin facility', 'in_transit'], ['Delivered', 'delivered']]);
+      expect(served).not.toHaveProperty('planned_events');
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('checks a parcel whose link was opened only if the scheduled run has not checked it meanwhile', async () => {

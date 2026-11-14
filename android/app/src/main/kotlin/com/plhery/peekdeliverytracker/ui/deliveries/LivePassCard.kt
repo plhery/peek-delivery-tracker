@@ -83,6 +83,7 @@ import com.plhery.peekdeliverytracker.core.refusedPostcode
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
+import com.plhery.peekdeliverytracker.core.writtenAheadNoteKey
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -409,10 +410,12 @@ internal fun LivePassCard(
                     style = type.caption.sfLines(),
                 )
             }
-            // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
-            parcel.writtenAheadBy?.let { ahead ->
+            // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
+            val ahead = parcel.writtenAheadBy
+            val aheadNote = parcel.writtenAheadNoteKey
+            if (ahead != null && aheadNote != null) {
                 Text(
-                    localizer.text("parcel.writtenAhead", mapOf("carrier" to identities.displayName(ahead, language))),
+                    localizer.text(aheadNote, mapOf("carrier" to identities.displayName(ahead, language))),
                     color = secondary,
                     style = type.caption.sfLines(),
                 )

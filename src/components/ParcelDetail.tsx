@@ -41,6 +41,7 @@ import {
   shownCarrier,
   likelyCarrier,
   parcelHasCarrierUpdate,
+  writtenAheadNote,
 } from '../lib/parcelStatus';
 import { awaitingHandover, currentEvent } from '../lib/stages';
 import { parcelAttention } from '../lib/parcelPriority';
@@ -153,8 +154,10 @@ export function ParcelDetail({
   // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
   const stageNote = !parcel.archivedAt && awaitingHandover(parcel.events) ? t('parcel.awaitingHandover', { carrier: displayedCarrier.name })
     : scheduledDelivery(parcel, current?.stage) ? t('parcel.scheduledDelivery', { carrier: displayedCarrier.name }) : null;
-  // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
-  const writtenAheadNote = parcel.writtenAheadBy ? t('parcel.writtenAhead', { carrier: carrierInfo(parcel.writtenAheadBy, locale).name }) : null;
+  // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm.
+  const writtenAheadLine = writtenAheadNote(parcel, t, locale);
+  const writtenSteps = parcel.writtenAheadBy && parcel.writtenAheadEvents?.length
+    ? { by: carrierInfo(parcel.writtenAheadBy, locale).name, steps: parcel.writtenAheadEvents } : undefined;
   const { placed, route } = useParcelRoute(parcel, languageTag);
   const [mapOpen, setMapOpen] = useState(false);
   // Recognition found the carrier, but it needs the postcode before it can track. Or the parcel's own carrier
@@ -672,7 +675,7 @@ export function ParcelDetail({
         )}
         <p className="detail__state">{statusLabel}</p>
         {stageNote && <p className="detail__handover">{stageNote}</p>}
-        {writtenAheadNote && <p className="detail__handover">{writtenAheadNote}</p>}
+        {writtenAheadLine && <p className="detail__handover">{writtenAheadLine}</p>}
         {carrierWaits && <p className="parcel-card__notice detail__flag"><Glyph name="warning" />{t(carrierWaits.recipientAction ? `attention.customs_${carrierWaits.recipientAction}`
           : carrierWaits.stage === 'failed_attempt' ? 'attention.failed_attempt' : 'attention.exception')}</p>}
         {(completionDate || estimate) && (
@@ -773,7 +776,7 @@ export function ParcelDetail({
 
       {(automaticTracking || parcelHasCarrierUpdate(parcel)) && (
         <section className="detail__timeline">
-          <TrackingJournal events={parcel.events} planned={parcel.plannedEvents} syncing={status.syncing} />
+          <TrackingJournal events={parcel.events} planned={parcel.plannedEvents} written={writtenSteps} syncing={status.syncing} />
         </section>
       )}
 

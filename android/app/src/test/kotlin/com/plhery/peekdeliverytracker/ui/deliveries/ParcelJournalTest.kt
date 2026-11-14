@@ -265,6 +265,33 @@ class ParcelJournalTest {
         assertFalse(textExists(zoneLine))
     }
 
+    @Test
+    fun theStepsACarrierWroteInAdvanceShowGreyedUnderItsNameAfterThePlannedOnesADeliveryAmongThem() {
+        val planned = PlannedTrackingEvent(description = "Proof of delivery filed", stage = TrackingStage.InTransit, occurredAt = "2026-10-30T09:00:00Z")
+        val written = listOf(
+            PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-10-27T01:00:00Z"),
+            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z"),
+        )
+        val scripted = parcel(emptyList()).copy(carrier = CarrierId.Gzyl, plannedEvents = listOf(planned), writtenAheadEvents = written)
+        // Without the carrier named as writing ahead, its steps are not shown.
+        show(scripted)
+        assertTrue(compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN)).fetchSemanticsNodes().isEmpty())
+        show(scripted.copy(writtenAheadBy = CarrierId.Gzyl))
+        val section = compose.onNodeWithTag(JOURNAL_WRITTEN).fetchSemanticsNode()
+        assertTrue(compose.onAllNodes(hasText("Written in advance by ", substring = true), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty())
+        assertTrue(textExists("No scan confirms them."))
+        val labels = compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN_ROW)).fetchSemanticsNodes()
+            .map { it.config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString() }
+        assertEquals(2, labels.size)
+        assertTrue(labels[0], labels[0].startsWith("Written in advance, not confirmed: Delivered"))
+        assertTrue(labels[1], labels[1].startsWith("Written in advance, not confirmed: Departed the origin facility"))
+        // The planned step still ahead comes first, and no scan is counted.
+        val plannedSection = compose.onNodeWithTag(JOURNAL_PLANNED).fetchSemanticsNode()
+        assertTrue(plannedSection.boundsInRoot.bottom <= section.boundsInRoot.top)
+        assertTrue(rows().isEmpty())
+        assertTrue(textExists(zoneLine))
+    }
+
     // The rows.
 
     @Test

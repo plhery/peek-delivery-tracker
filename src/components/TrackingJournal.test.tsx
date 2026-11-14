@@ -77,6 +77,31 @@ describe('TrackingJournal', () => {
     expect(container.querySelector('.tracking-journal__planned-mark')).toBeNull();
   });
 
+  it('shows the steps a carrier wrote in advance whose time has passed apart, greyed under its name, a delivery among them, without counting them', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2024-09-20T00:00:00Z'));
+    const { container } = render(<TrackingJournal events={[]} planned={[
+      { stage: 'in_transit', description: 'Proof of delivery filed', occurredAt: '2024-09-25T02:00:00Z' },
+    ]} written={{ by: 'GZYL', steps: [
+      { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T01:00:00Z', location: 'Guangzhou, China' },
+      { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' },
+    ] }} />);
+    expect(screen.getByText('0 updates')).toBeInTheDocument();
+    expect(screen.getByText('No tracking updates yet.')).toBeInTheDocument();
+    const written = screen.getByRole('region', { name: 'Written in advance by GZYL' });
+    expect(written).toHaveClass('tracking-journal__planned--written');
+    expect(within(written).getByText('No scan confirms them.')).toBeInTheDocument();
+    expect([...written.querySelectorAll('li p')].map(line => line.textContent))
+      .toEqual(['Written in advance, not confirmed: Delivered', 'Written in advance, not confirmed: Departed the origin facility']);
+    expect(written.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Guangzhou, China$/u);
+    // The steps still ahead come first, under their own heading.
+    const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
+    expect([...planned.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Planned, not confirmed: Proof of delivery filed']);
+    expect(planned.compareDocumentPosition(written) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelectorAll('.tracking-journal__planned-mark')).toHaveLength(3);
+    expect(screen.queryByRole('list', { name: 'Tracking history' })).not.toBeInTheDocument();
+  });
+
   it('says under the history that its times are the reader’s, and names the reader’s zone', () => {
     const { container } = render(<TrackingJournal events={[event('scan', '2024-09-09T08:42:00', 'With courier', 'Helsinki, FI')]} />);
     const line = container.querySelector('.tracking-journal__zone');

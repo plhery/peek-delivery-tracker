@@ -1712,6 +1712,23 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(moving.scheduledDelivery)
     }
 
+    func testTheWrittenAheadNoteSaysTheCarriersStepsShowGreyedOnceItNamesThem() {
+        var parcel = makeParcel()
+        parcel.carrier = .gzyl
+        XCTAssertNil(parcel.writtenAheadNoteKey)
+        parcel.writtenAheadBy = .gzyl
+        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAhead")
+        // A "Delivered" the carrier wrote in advance, before any real scan, is no scan: the parcel is not delivered.
+        parcel.writtenAheadEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-09T07:00:00Z")]
+        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
+        XCTAssertNil(parcel.currentEvent)
+        XCTAssertNotEqual(parcel.currentStage, .delivered)
+        XCTAssertFalse(parcel.scheduledDelivery)
+        parcel.writtenAheadEvents = nil
+        parcel.plannedEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-20T07:00:00Z")]
+        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
+    }
+
     func testFiltersSearchCompactTrackingNumbers() {
         let parcel = makeParcel(trackingNumber: "99.34.123456.99999980")
         let result = ParcelOrganizer.visible(
@@ -4550,12 +4567,51 @@ extension ParcelLogicTests {
         XCTAssertEqual(Parcel(shared: package).trackingEvents, vinyl.trackingEvents)
     }
 
+    func testALinkCarriesTheStepsItsCarrierWroteAheadApartFromItsScans() throws {
+        let now = DateParser.date("2026-09-09T12:00:00Z")!
+        let vinyl = try XCTUnwrap(DemoRepository.seed(now: now).first { $0.label == Self.vinyl })
+        let written = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-09-08T07:00:00Z")]
+        let package = PublicPackage(
+            id: vinyl.id, trackingNumber: vinyl.trackingNumber, label: "", carrier: .gzyl, createdAt: vinyl.createdAt,
+            syncStatus: .ok, carrierData: PublicPackageCarrierData(), notificationsMuted: false,
+            trackingEvents: [], writtenAheadBy: .gzyl, writtenAheadEvents: written
+        )
+        let parcel = Parcel(shared: package)
+        XCTAssertEqual(parcel.writtenAheadEvents, written)
+        XCTAssertNil(parcel.plannedEvents)
+        XCTAssertTrue(parcel.trackingEvents.isEmpty)
+        XCTAssertNotEqual(parcel.currentStage, .delivered)
+        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
+    }
+
     /// The journal of the demo's vinyl, with the steps its carrier planned over the scans, at regular type in light and
     /// at large type in dark, each picture kept with the test's results.
     @MainActor func testTheJournalDrawsThePlannedStepsOverTheScans() async throws {
         try await draw(.en, named: "journal-planned", in: [CGSize(width: 390, height: 1000)]) { store in
             let vinyl = try XCTUnwrap(store.parcels.first { $0.label == Self.vinyl })
             ScrollView { ParcelJournal(parcel: vinyl, tint: .orange).padding(16) }
+        }
+    }
+
+    /// The same journal once its carrier's pre-written steps have passed: greyed under "Written in advance by", a
+    /// delivery among them, over the scans.
+    @MainActor func testTheJournalDrawsTheStepsWrittenInAdvanceOverTheScans() async throws {
+        try await draw(.en, named: "journal-written", in: [CGSize(width: 390, height: 1000)]) { store in
+            let vinyl = try XCTUnwrap(store.parcels.first { $0.label == Self.vinyl })
+            let written: [PlannedTrackingEvent] = (vinyl.plannedEvents ?? []).enumerated().map { index, step in
+                var past = step
+                past.occurredAt = DateParser.isoString(Date().addingTimeInterval(-3_600 * Double(10 - index)))
+                past.day = nil
+                return past
+            }
+            let scripted: Parcel = {
+                var parcel = vinyl
+                parcel.plannedEvents = nil
+                parcel.writtenAheadBy = .gzyl
+                parcel.writtenAheadEvents = written
+                return parcel
+            }()
+            ScrollView { ParcelJournal(parcel: scripted, tint: .orange).padding(16) }
         }
     }
 }

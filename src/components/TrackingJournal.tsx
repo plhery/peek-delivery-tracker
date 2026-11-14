@@ -33,10 +33,12 @@ function withRelays(events: TrackingEvent[]): { listed: TrackingEvent[]; relays:
  * The whole journey grouped by local calendar day, newest first. With `fold`,
  * a long journey shows its newest days, the days before as one line each to
  * open, and keeps the oldest behind a button. The steps the carrier planned
- * and has not confirmed (`planned`) open it, greyed, apart from the scans.
+ * and has not confirmed (`planned`) open it, greyed, apart from the scans, then
+ * those the carrier named in `written.by` wrote in advance and whose time has
+ * passed (`written.steps`), greyed too under "Written in advance by" it.
  */
-export function TrackingJournal({ events: allEvents, planned = [], syncing = false, fold = false }: {
-  events: TrackingEvent[]; planned?: PlannedEvent[]; syncing?: boolean; fold?: boolean;
+export function TrackingJournal({ events: allEvents, planned = [], written, syncing = false, fold = false }: {
+  events: TrackingEvent[]; planned?: PlannedEvent[]; written?: { by: string; steps: PlannedEvent[] }; syncing?: boolean; fold?: boolean;
 }) {
   const { languageTag, t, use24HourTime } = useI18n();
   const [oldestShown, setOldestShown] = useState(false);
@@ -52,6 +54,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
   }
   const now = new Date();
   const ahead = planned.filter((step) => plannedAhead(step, now.getTime()));
+  const writtenSteps = written?.steps ?? [];
   const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
@@ -60,7 +63,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
   const updates = (count: number) => t(count === 1 ? 'detail.updateCount.one' : 'detail.updateCount.many', { count });
   const zone = useReaderTimeZone(languageTag);
   // The times are the reader's, wherever the carrier scanned: one quiet line says so under the history.
-  const timed = events.some((event) => scanDate(event)?.timed) || ahead.some((step) => scanDate(step)?.timed);
+  const timed = events.some((event) => scanDate(event)?.timed) || [...ahead, ...writtenSteps].some((step) => scanDate(step)?.timed);
 
   // A scan dated by its day alone can sort among the day before's scans, west of the carrier's zone.
   const days = [...groups].sort(([, a], [, b]) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0));
@@ -94,7 +97,10 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
 
   return <details className={use24HourTime ? 'tracking-journal' : 'tracking-journal tracking-journal--am-pm'} open>
     <summary><span>{t('timeline.label')}</span><span className="tracking-journal__count">{updates(events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg></span></summary>
-    {ahead.length > 0 && <PlannedSteps steps={ahead} />}
+    {ahead.length > 0 && <PlannedSteps steps={ahead} title={t('timeline.planned.title')} note={t('timeline.planned.note')}
+      label={t('timeline.planned.step', { step: '' }).trim()} />}
+    {written && writtenSteps.length > 0 && <PlannedSteps steps={writtenSteps} written title={t('timeline.writtenAhead.title', { carrier: written.by })}
+      note={t('timeline.writtenAhead.note')} label={t('timeline.writtenAhead.step', { step: '' }).trim()} />}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
@@ -137,10 +143,13 @@ export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day'>, now
 }
 
 /**
- * The steps the carrier listed before they happen, newest first, under a heading that says so: greyed, each on a
- * dashed mark instead of a time, with its planned day. They are no scans and count as no update.
+ * The steps the carrier listed before they happen, or those it wrote in advance whose time has passed (`written`),
+ * newest first, under a heading that says so (`title`, `note`, and `label` before each step's words for a screen
+ * reader): greyed, each on a dashed mark instead of a time, with its day. They are no scans and count as no update.
  */
-function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
+function PlannedSteps({ steps, written = false, title, note, label }: {
+  steps: PlannedEvent[]; written?: boolean; title: string; note: string; label: string;
+}) {
   const { languageTag, t, use24HourTime } = useI18n();
   const heading = useId();
   const now = new Date();
@@ -154,16 +163,16 @@ function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
     return timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day;
   };
   const newestFirst = [...steps].sort((a, b) => (scanDate(b)?.date.getTime() ?? 0) - (scanDate(a)?.date.getTime() ?? 0));
-  return <section className="tracking-journal__planned" aria-labelledby={heading}>
-    <h3 id={heading}>{t('timeline.planned.title')}</h3>
-    <p className="tracking-journal__planned-note">{t('timeline.planned.note')}</p>
+  return <section className={written ? 'tracking-journal__planned tracking-journal__planned--written' : 'tracking-journal__planned'} aria-labelledby={heading}>
+    <h3 id={heading}>{title}</h3>
+    <p className="tracking-journal__planned-note">{note}</p>
     <ol className="tracking-journal__events">
       {newestFirst.map((step, index) => {
         const wording = localizedEventDescription(step.description, t) || stageLabel(t, step.stage);
         return <li key={`${step.occurredAt}-${index}`}>
           <svg className="tracking-journal__planned-mark" aria-hidden="true" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" /></svg>
           <div>
-            <p><span className="sr-only">{t('timeline.planned.step', { step: '' }).trim()} </span>{wording}</p>
+            <p><span className="sr-only">{label} </span>{wording}</p>
             <time className="tracking-journal__planned-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
             {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
           </div>

@@ -79,6 +79,7 @@ fun Parcel(shared: PublicPackage): Parcel {
         trackingEvents = shared.trackingEvents,
         plannedEvents = shared.plannedEvents,
         writtenAheadBy = shared.writtenAheadBy,
+        writtenAheadEvents = shared.writtenAheadEvents,
     )
 }
 

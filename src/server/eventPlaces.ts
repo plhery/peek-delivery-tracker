@@ -9,7 +9,7 @@ import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCop
 import { copyTellsProblem, relayCopies } from './relayCopies';
 import { repeatLeads } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
-import { servedPlannedSteps, servedWrittenAhead } from './plannedSteps';
+import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
 
@@ -102,7 +102,10 @@ function probedPartner(data: JsonObject): JsonObject {
 /** The carrier data only the service reads, the delivering carrier's last check with its number (`delivery_probe`) among them. */
 const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe'];
 
-/** The routing state served on its own: planned steps (`planned_events`) and the rows written ahead (`written_ahead_by`). */
+/**
+ * The routing state served on its own: planned steps (`planned_events`) and the rows written ahead (`written_ahead_by`,
+ * `written_ahead_events`).
+ */
 const SERVED_APART = ['planned', 'written_ahead'];
 
 /**
@@ -341,15 +344,19 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`). The steps its carrier
  * listed before they happen and that are still ahead are served apart from the scans, each with its place
  * (`planned_events`, plannedSteps.ts and `placedSteps`), and so is the carrier that writes the timeline in advance
- * (`written_ahead_by`, `servedWrittenAhead`).
+ * (`written_ahead_by`, `servedWrittenAhead`), with the steps it wrote whose time has passed (`written_ahead_events`,
+ * `servedWrittenSteps`).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const served = placedEvents(row);
   const answered = withoutPlaceholderAnswers(row);
-  const planned = placedSteps(row, servedPlannedSteps(answered, shownEvents(row)));
+  const shown = shownEvents(row);
+  const planned = placedSteps(row, servedPlannedSteps(answered, shown));
   const ahead = servedWrittenAhead(answered);
+  const written = ahead ? placedSteps(row, servedWrittenSteps(answered, shown)) : [];
   if (!planned.length && !ahead) return served;
-  return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {} };
+  return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
+    ...written.length ? { written_ahead_events: written } : {} };
 }
 
 /**

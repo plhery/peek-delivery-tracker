@@ -850,6 +850,24 @@ describe('persistent tracking routing', () => {
     const left = empty instanceof RoutingDeferred ? empty.routing : (empty as RoutedResult).result.routing as JsonObject;
     expect(left.planned).toEqual({ number: 'TEST1234', carriers: { ups: planned.slice(1) } });
   });
+  it('keeps every step a carrier with no scans wrote ahead, a delivery whose time has passed too, and sets aside a provider\'s copy of it', async () => {
+    const { router, direct, universal } = setup();
+    // At 12:00 UTC: the departure and the delivery at 11:00 UTC have passed, the proof of delivery is still ahead.
+    const script = [{ time: '2026-09-08T10:00:00+08:00', description: 'Departed the origin hub', stage: 'in_transit' },
+      { time: '2026-09-10T19:00:00+08:00', description: 'Delivered', stage: 'delivered' },
+      { local_time: '2026-09-15T10:00:00', description: 'Proof of delivery filed' }];
+    const clocks = ['2026-09-08T10:00:00+08:00', '2026-09-10T19:00:00+08:00', '2026-09-15T10:00:00'];
+    direct.mockRejectedValue(new NoHistoryError('UPS', 'UPS has no scans for the shipment yet', { reason: 'written_ahead', writtenAhead: clocks,
+      cause: Object.assign(new Error('script'), { plannedEvents: script }) }));
+    universal.mockResolvedValue({ status: 'delivered', current_stage: 'delivered', last_update: '2026-09-10T11:00:00Z', discovered_carrier: 'ups',
+      events: [{ time: '2026-09-10T11:00:00Z', description: 'Delivered', stage: 'delivered' }] });
+    const deferred = await router.fetch(parcel({ carrier: 'ups' }), false).catch((error: unknown) => error);
+    expect(deferred).toBeInstanceOf(RoutingDeferred);
+    expect((deferred as RoutingDeferred).routing).toMatchObject({
+      planned: { number: 'TEST1234', carriers: { ups: script } },
+      written_ahead: { number: 'TEST1234', carriers: { ups: clocks } },
+    });
+  });
   it('sets aside a provider\'s copies of the rows a carrier answering on local clocks names as written ahead', async () => {
     fixedPlan('Ship24');
     const { router, direct, universal } = setup();

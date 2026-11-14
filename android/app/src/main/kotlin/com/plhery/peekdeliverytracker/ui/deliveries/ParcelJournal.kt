@@ -75,6 +75,7 @@ import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.button
@@ -92,8 +93,10 @@ import java.util.UUID
  * being asked while the parcel syncs, and that there is nothing yet otherwise. Each day is headed in caption2 capitals
  * tracked 1 in the secondary grey, 22 under what comes before and 13 over its rows, which stand 18 apart; TalkBack
  * hears the heading as one, as written rather than in capitals. The row of the current scan, or of the scan whose copy it is, has its time in `tint`.
- * The steps the carrier planned and has not confirmed ([PlannedSteps]) come before the days, apart from the scans.
- * Where a scan or a planned step shows a time of day, a line in caption2 in the opaque secondary grey, 22 under the
+ * The steps the carrier planned and has not confirmed ([PlannedSteps]) come before the days, apart from the scans, then
+ * those the carrier in `writtenAheadBy` wrote in advance whose time has passed (`writtenAheadEvents`), greyed alike
+ * under "Written in advance by" it. Where a scan or such a step shows a time of day, a line in caption2 in the opaque
+ * secondary grey, 22 under the
  * last row, says the times are the phone's and names its zone as the app language names it all year
  * ([Localizer.timeZoneName]).
  */
@@ -128,7 +131,22 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
             Column(Modifier.fillMaxWidth()) {
                 val moment = now()
                 val planned = parcel.plannedEvents?.filter { it.isAhead(moment) }.orEmpty()
-                if (planned.isNotEmpty()) PlannedSteps(planned, moment)
+                if (planned.isNotEmpty()) {
+                    PlannedSteps(
+                        planned, moment, localizer.text("timeline.planned.title"), localizer.text("timeline.planned.note"),
+                        stepKey = "timeline.planned.step", tag = JOURNAL_PLANNED, rowTag = JOURNAL_PLANNED_ROW,
+                    )
+                }
+                // The steps the carrier wrote in advance whose time has passed, under its name once the identities are read.
+                val writer = parcel.writtenAheadBy?.let { LocalCarrierIdentities.current?.displayName(it, language) }
+                val written = if (writer == null) emptyList() else parcel.writtenAheadEvents.orEmpty()
+                if (writer != null && written.isNotEmpty()) {
+                    PlannedSteps(
+                        written, moment, localizer.text("timeline.writtenAhead.title", mapOf("carrier" to writer)),
+                        localizer.text("timeline.writtenAhead.note"),
+                        stepKey = "timeline.writtenAhead.step", tag = JOURNAL_WRITTEN, rowTag = JOURNAL_WRITTEN_ROW,
+                    )
+                }
                 if (days.isEmpty()) {
                     Text(
                         localizer.text(if (syncing) "timeline.emptySyncing" else "timeline.empty"),
@@ -147,7 +165,7 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                     JournalDayRows(day, tint, currentId, syncing)
                 }
                 // The times are the phone's, wherever the carrier scanned: one quiet line under the history says so.
-                if (entries.any { it.event.showsTime } || planned.any { it.showsTime }) {
+                if (entries.any { it.event.showsTime } || (planned + written).any { it.showsTime }) {
                     val zoneName = remember(localizer, language, zone) { localizer.timeZoneName(zone) }
                     Text(
                         localizer.text("timeline.timeZone", mapOf("zone" to zoneName)),
@@ -189,27 +207,37 @@ private fun JournalHeading(label: String, bottom: Dp, modifier: Modifier = Modif
 }
 
 /**
- * `PlannedSteps`: the steps the carrier listed before they happen, newest first ([plannedNewestFirst]), under the
- * heading "Planned by the carrier" ([JournalHeading], 4 over the note) and a note in caption2 in the opaque secondary
- * grey that they are not confirmed, 15 over the steps. The steps stand 18 apart ([PlannedStepRow]), and a dashed line
+ * `PlannedSteps`: the steps the carrier listed before they happen, or those it wrote in advance whose time has passed,
+ * newest first ([plannedNewestFirst]), under the heading `title` ("Planned by the carrier", or "Written in advance by"
+ * the carrier; [JournalHeading], 4 over the note) and the `note` in caption2 in the opaque secondary grey that they are
+ * not confirmed, 15 over the steps. The steps stand 18 apart ([PlannedStepRow], read with `stepKey`), and a dashed line
  * in the separator's colour, 1 high, closes them 18 under the last. They are no scans and count as no update.
  */
 @Composable
-private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
-    val localizer = LocalLocalizer.current
+private fun PlannedSteps(
+    steps: List<PlannedTrackingEvent>,
+    now: Instant,
+    title: String,
+    note: String,
+    stepKey: String,
+    tag: String,
+    rowTag: String,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val ordered = remember(steps) { plannedNewestFirst(steps) }
-    Column(Modifier.fillMaxWidth().testTag(JOURNAL_PLANNED)) {
-        JournalHeading(localizer.text("timeline.planned.title"), bottom = 4.dp)
+    Column(Modifier.fillMaxWidth().testTag(tag)) {
+        JournalHeading(title, bottom = 4.dp)
         Text(
-            localizer.text("timeline.planned.note"),
+            note,
             Modifier.padding(bottom = 15.dp),
             color = colors.secondaryText,
             style = type.caption2.sfLines(),
         )
         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
-            ordered.forEachIndexed { index, step -> PlannedStepRow(step, joinsNext = index < ordered.lastIndex, now = now) }
+            ordered.forEachIndexed { index, step ->
+                PlannedStepRow(step, joinsNext = index < ordered.lastIndex, now = now, stepKey = stepKey, rowTag = rowTag)
+            }
         }
         val separator = colors.separator
         Canvas(
@@ -236,7 +264,7 @@ private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
  * too. TalkBack reads the row as one ([plannedStepLabel]).
  */
 @Composable
-private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: Instant) {
+private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: Instant, stepKey: String, rowTag: String) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -269,10 +297,10 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
             step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, step.place) } }
         }
     }
-    val label = localizer.plannedStepLabel(step, now)
+    val label = localizer.plannedStepLabel(step, now, stepKey)
     val row = Modifier
         .fillMaxWidth()
-        .testTag(JOURNAL_PLANNED_ROW)
+        .testTag(rowTag)
         .then(
             if (joinsNext) {
                 Modifier.drawBehind {
@@ -451,12 +479,14 @@ private const val TIME_WIDTH = 38f
 private const val TIME_WIDTH_WITH_PERIOD = 64f
 
 /**
- * The test tags of the journal's header, its days' headings, its rows, its planned steps and their rows, and the line
- * naming the zone its times are in.
+ * The test tags of the journal's header, its days' headings, its rows, its planned steps and their rows, the steps
+ * written in advance and their rows, and the line naming the zone its times are in.
  */
 const val JOURNAL_TOGGLE = "journal.toggle"
 const val JOURNAL_DAY = "journal.day"
 const val JOURNAL_ROW = "journal.row"
 const val JOURNAL_PLANNED = "journal.planned"
 const val JOURNAL_PLANNED_ROW = "journal.planned.row"
+const val JOURNAL_WRITTEN = "journal.written"
+const val JOURNAL_WRITTEN_ROW = "journal.written.row"
 const val JOURNAL_TIME_ZONE = "journal.timeZone"

@@ -93,6 +93,24 @@ describe('shipment details', () => {
     expect(screen.queryByText(/site shows steps written in advance/)).not.toBeInTheDocument();
   });
 
+  it('shows a delivery the carrier wrote in advance, before any real scan, greyed under its name, and the parcel stays undelivered', () => {
+    const name = carrierInfo('gzyl', 'en').name;
+    show({ carrier: 'gzyl', syncStatus: 'waiting', writtenAheadBy: 'gzyl', writtenAheadEvents: [
+      { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2026-09-11T01:00:00Z' },
+      { stage: 'delivered', description: 'Delivered', occurredAt: '2026-09-14T07:00:00Z' },
+    ] });
+    expect(screen.getByText(`${name}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it shows them greyed. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.`))
+      .toHaveClass('detail__handover');
+    const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
+    expect([...written.querySelectorAll('li p')].map(line => line.textContent))
+      .toEqual(['Written in advance, not confirmed: Delivered', 'Written in advance, not confirmed: Departed the origin facility']);
+    // The status, the date beside it and the count read the scans alone: there are none.
+    expect(document.querySelector('.detail__state')).toHaveTextContent(`Waiting for ${name}`);
+    expect(document.querySelector('.detail__state')).not.toHaveTextContent(/Delivered/);
+    expect(screen.queryByText(/^Delivered (on|today|yesterday)/)).not.toBeInTheDocument();
+    expect(screen.getByText('0 updates')).toBeInTheDocument();
+  });
+
   it('says the sender still has the parcel once its only scan, the label, is a day old', () => {
     const label = (hoursAgo: number) => [{ id: 'label', parcelId: 'parcel', stage: 'registered' as const, description: 'Label created', occurredAt: new Date(Date.now() - hoursAgo * 3_600_000).toISOString() }];
     const note = 'The sender hasn’t handed it to Chronopost yet. Tracking starts when they do.';

@@ -137,6 +137,8 @@ export interface ParcelWithEvents extends Parcel {
   events: TrackingEvent[];
   /** The carrier's planned steps still ahead of its scans, oldest first. */
   plannedEvents?: PlannedEvent[];
+  /** The steps `writtenAheadBy` wrote in advance whose time has passed, oldest first: greyed, never scans. */
+  writtenAheadEvents?: PlannedEvent[];
 }
 
 export interface NewParcelInput {

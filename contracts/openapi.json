@@ -59231,7 +59231,7 @@
           "location",
           "occurred_at"
         ],
-        "description": "A step the carrier listed before it happened, not a scan: a row it wrote ahead of its own date, such as a script of the whole journey written when the order was made, or a scan it entered at its planned time. Apps show it greyed in the timeline, as planned by the carrier and not confirmed, and nowhere else: it sets no stage, status, estimate, alert or count. The server serves only those still ahead of the parcel's scans and of now, a step dated by its day alone through that day; a scan that tells one replaces it. Apps hide one whose time passes while it is shown.",
+        "description": "A step the carrier listed before it happened, not a scan: a row it wrote ahead of its own date, such as a script of the whole journey written when the order was made, or a scan it entered at its planned time. Apps show it greyed in the timeline, apart from the scans and not confirmed, and nowhere else: it sets no stage, status, estimate, alert or count, even one that says delivered. planned_events lists those still ahead, written_ahead_events those the carrier wrote in advance whose time has passed.",
         "properties": {
           "description": {
             "type": "string"
@@ -59690,11 +59690,18 @@
             "items": {
               "$ref": "#/components/schemas/PlannedTrackingEvent"
             },
-            "description": "The steps the carrier planned that are still ahead of the scans and of now, oldest first; absent when none. Never scans: see PlannedTrackingEvent."
+            "description": "The steps the carrier planned that are still ahead of the scans and of now, oldest first; absent when none. The server serves a step only while it is ahead of the parcel's scans and of now, a step dated by its day alone through that day, and a scan that tells one replaces it; apps hide one whose time passes while it is shown, under the heading Planned by the carrier. Never scans: see PlannedTrackingEvent."
           },
           "written_ahead_by": {
-            "description": "The carrier whose tracker writes the parcel's timeline in advance: its answers for this number held rows back as written ahead of their own dates. The apps say so in one line. Absent when none, once the parcel is delivered or returned, and on a wrapped gift.",
+            "description": "The carrier whose tracker writes the parcel's timeline in advance: its answers for this number held rows back as written ahead of their own dates. The apps say so in one line, and title written_ahead_events with its name. Absent when none, once the parcel is delivered or returned, and on a wrapped gift.",
             "$ref": "#/components/schemas/CarrierId"
+          },
+          "written_ahead_events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedTrackingEvent"
+            },
+            "description": "The steps the carrier named in written_ahead_by wrote in advance whose time has passed, in its own words, oldest first; absent when none, with written_ahead_by, and on a wrapped gift. Apps list them greyed in the timeline under Written in advance by that carrier, as its own page shows them. A step goes once a scan stands at its minute or tells it in the same words within a day. Never scans: see PlannedTrackingEvent."
           },
           "email_muted": {
             "type": "boolean",
@@ -61245,11 +61252,18 @@
             "items": {
               "$ref": "#/components/schemas/PlannedTrackingEvent"
             },
-            "description": "The steps the carrier planned that are still ahead of the scans and of now, oldest first; absent when none. Never scans: see PlannedTrackingEvent."
+            "description": "The steps the carrier planned that are still ahead of the scans and of now, oldest first; absent when none. The server serves a step only while it is ahead of the parcel's scans and of now, a step dated by its day alone through that day, and a scan that tells one replaces it; apps hide one whose time passes while it is shown, under the heading Planned by the carrier. Never scans: see PlannedTrackingEvent."
           },
           "written_ahead_by": {
-            "description": "The carrier whose tracker writes the parcel's timeline in advance: its answers for this number held rows back as written ahead of their own dates. The apps say so in one line. Absent when none, once the parcel is delivered or returned, and on a wrapped gift.",
+            "description": "The carrier whose tracker writes the parcel's timeline in advance: its answers for this number held rows back as written ahead of their own dates. The apps say so in one line, and title written_ahead_events with its name. Absent when none, once the parcel is delivered or returned, and on a wrapped gift.",
             "$ref": "#/components/schemas/CarrierId"
+          },
+          "written_ahead_events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedTrackingEvent"
+            },
+            "description": "The steps the carrier named in written_ahead_by wrote in advance whose time has passed, in its own words, oldest first; absent when none, with written_ahead_by, and on a wrapped gift. Apps list them greyed in the timeline under Written in advance by that carrier, as its own page shows them. A step goes once a scan stands at its minute or tells it in the same words within a day. Never scans: see PlannedTrackingEvent."
           }
         }
       },

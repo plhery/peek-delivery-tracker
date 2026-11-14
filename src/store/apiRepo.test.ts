@@ -77,6 +77,16 @@ describe('createApiRepo', () => {
     expect(createApiRepo().cachedList?.()?.[0].senderName).toBe('Example sender');
   });
 
+  it('keeps the steps a carrier wrote in advance apart from its scans and its planned steps', async () => {
+    const written = { description: 'Delivered', stage: 'delivered', location: null, occurred_at: '2026-07-14T07:00:00.000Z', place: null };
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response({ packages: [{ ...packageRow, written_ahead_by: 'gzyl', written_ahead_events: [written] }] })));
+    const [parcel] = await createApiRepo().list();
+    expect(parcel).toMatchObject({ writtenAheadBy: 'gzyl',
+      writtenAheadEvents: [{ description: 'Delivered', stage: 'delivered', occurredAt: '2026-07-14T07:00:00.000Z' }] });
+    expect(parcel).not.toHaveProperty('plannedEvents');
+    expect(parcel.events.map((event) => event.description)).not.toContain('Delivered');
+  });
+
   it('returns the merged parcel after refreshing its former id', async () => {
     const originalId = '10000000-0000-0000-0000-000000000099';
     vi.stubGlobal('fetch', vi.fn()

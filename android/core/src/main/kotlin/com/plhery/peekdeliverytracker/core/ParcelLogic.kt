@@ -531,6 +531,18 @@ private val SCHEDULED_DELIVERIES = setOf(CarrierId.Gzyl, CarrierId.XingheFreight
 val Parcel.scheduledDelivery: Boolean
     get() = currentStage == TrackingStage.Delivered && displayedCarrier in SCHEDULED_DELIVERIES && deliveringCarrier == null
 
+/**
+ * The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page lists
+ * steps Peek can't confirm, which the timeline shows greyed once the carrier names them in words (`writtenAheadEvents`,
+ * or still ahead `plannedEvents`), and leaves out until then. None for another carrier.
+ */
+val Parcel.writtenAheadNoteKey: String?
+    get() {
+        if (writtenAheadBy == null) return null
+        val shown = !writtenAheadEvents.isNullOrEmpty() || !plannedEvents.isNullOrEmpty()
+        return if (shown) "parcel.writtenAheadShown" else "parcel.writtenAhead"
+    }
+
 private val expectedDayPattern: Pattern =
     Pattern.compile("^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])", unicodeCharacterClass)
 

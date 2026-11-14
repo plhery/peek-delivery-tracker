@@ -18,7 +18,7 @@ import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
 import { parcelNumberMask } from './hiddenNumbers';
-import { servedPlannedSteps } from './plannedSteps';
+import { servedPlannedSteps, servedWrittenSteps } from './plannedSteps';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
@@ -1156,8 +1156,8 @@ export class ParcelLinkAlertService {
     const parcel = hiding.get(stringField(row, 'link_id'));
     if (!parcel) return row;
     const events = Array.isArray(parcel.tracking_events) ? parcel.tracking_events.filter(isRecord) : [];
-    // As the link's page masks it: with the numbers every scan, planned step and worded field names.
-    const mask = parcelNumberMask(parcel, [...events, ...servedPlannedSteps(parcel, []), row]);
+    // As the link's page masks it: with the numbers every scan, planned or written step and worded field names.
+    const mask = parcelNumberMask(parcel, [...events, ...servedPlannedSteps(parcel, []), ...servedWrittenSteps(parcel, []), row]);
     return { ...row, location: mask(row.location) };
   }
 

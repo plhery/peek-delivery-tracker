@@ -511,7 +511,8 @@ and nothing typed is sent.
   the whole route written when the order is made, a scan entered at its planned time). The
   scraper holds them out of the scans and names them (`planned_events`). The router keeps
   each carrier's latest list for the number in `routing.planned`, at most 30, the earliest,
-  until that carrier answers again or finds no history. `src/server/plannedSteps.ts` serves
+  whether their time has passed or not, until that carrier answers again or finds no
+  history. `src/server/plannedSteps.ts` serves
   those of the carrier delivering now as `planned_events`, apart from the scans: a step goes
   once a shown scan tells it in the same words, is as late or has come further, or once its
   time has passed (a step dated by its day alone, once that day has), and every step goes
@@ -521,9 +522,17 @@ and nothing typed is sent.
 - **A timeline written ahead**: when a carrier's answers for the number held rows back as
   written ahead of their own clocks (the scraper's `written_ahead`, kept in
   `routing.written_ahead`), the row names that carrier as `written_ahead_by`, the carrier
-  tracking the parcel first, until the parcel is delivered or returned. The apps say in one
-  line under the status that the carrier publishes its timeline in advance and that Peek
-  shows the real scans as they arrive; a wrapped gift's link does not.
+  tracking the parcel first, until the parcel is delivered or returned. That carrier's
+  planned steps at one of those clocks whose time has passed are served apart as
+  `written_ahead_events` (`servedWrittenSteps`): a step on the same wall minute as a clock,
+  or dated by its day alone with a clock on that day. A step goes once a shown carrier scan
+  tells it at the same minute, or in the same words within a day of it, and all go once a
+  carrier scan says delivered or returned. A row the carrier later shows as a scan frees its
+  clock, so it is told once, as a scan. The apps list these steps greyed after the planned
+  ones, under "Written in advance by" the carrier, and say in one line under the status that
+  its site shows steps written in advance, greyed here, or left out while it names none in
+  words. They are never scans either: a written "Delivered" sets no stage, status, estimate,
+  alert, email, count, map or drawing. A wrapped gift's link shows neither the line nor the steps.
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

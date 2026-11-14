@@ -20,7 +20,7 @@ import { numberToCheck } from '../lib/messages';
 import { captureCardOrigin } from '../lib/cardTransition';
 import { useCardDialog } from '../lib/cardDialog';
 import { focusClickedButton } from '../lib/modal';
-import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced } from '../lib/parcelStatus';
+import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced, writtenAheadNote } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { awaitingHandover, currentEvent, isFinal, sortEventsDesc } from '../lib/stages';
 import { useTabTitle } from '../lib/tabTitle';
@@ -285,8 +285,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     checking ? null : awaitingHandover(parcel.events, now) ? t('parcel.awaitingHandover', { carrier: displayed.name })
       : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name })
         : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name }) : null,
-    // A carrier that writes the whole timeline in advance: its page lists steps Peek shows only once they happen.
-    !checking && parcel.writtenAheadBy ? t('parcel.writtenAhead', { carrier: carrierInfo(parcel.writtenAheadBy, locale).name }) : null,
+    // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm.
+    checking ? null : writtenAheadNote(parcel, t, locale),
   ].filter((note): note is string => !!note);
 
   // The reveal's last beat: the parcel's own link, offered once the card has settled.
@@ -531,7 +531,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {!wrapped && <NumberSection view={view} links={links} onVisit={(link) => feedback.visited(link.name)} />}
         <ShipmentFacts parcel={parcel} stage={stage} />
         {carrierKnown && (automatic || moving) && <section className="peekp-journal">
-          <TrackingJournal events={wrapped ? collapseGiftRows(parcel.events) : parcel.events} planned={wrapped ? undefined : parcel.plannedEvents} syncing={checking} fold />
+          <TrackingJournal events={wrapped ? collapseGiftRows(parcel.events) : parcel.events} planned={wrapped ? undefined : parcel.plannedEvents}
+            written={!wrapped && parcel.writtenAheadBy && parcel.writtenAheadEvents?.length
+              ? { by: carrierInfo(parcel.writtenAheadBy, locale).name, steps: parcel.writtenAheadEvents } : undefined}
+            syncing={checking} fold />
         </section>}
         {!final && freshness.kind !== 'live' && <FreshnessLine freshness={freshness} busy={refreshing} onCheck={() => void check()} />}
         <FeedbackQuestion feedback={feedback} />

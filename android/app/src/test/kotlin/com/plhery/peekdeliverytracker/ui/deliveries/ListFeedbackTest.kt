@@ -335,6 +335,69 @@ class ListFeedbackTest {
         assertEquals(null, source.undoParcel.value)
     }
 
+    /** The demo's parcels in a window that the test makes again, the clock in the test's hands. */
+    private fun recreatable(): Recreation {
+        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        recreation.setContent { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) }
+        compose.waitForIdle()
+        compose.mainClock.autoAdvance = false
+        return recreation
+    }
+
+    /** As the Undo does, a message outlives the window made again, which shows it out: its four seconds go on. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun aMessageKeepsItsFourSecondsThoughTheWindowIsMadeAgain() {
+        val recreation = recreatable()
+        compose.onNodeWithTag(REFRESH_BUTTON).performClick()
+        advance(100)
+        toast("No new updates").assertExists()
+        advance(2000)
+        recreation.recreate()
+        advance(500)
+        toast("No new updates").assertExists()
+        advance(1300)
+        toast("No new updates").assertExists()
+        advance(300)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+    }
+
+    /** A check the button started goes on as the window is made again, and the window made again says how it went. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun aCheckTheButtonStartedIsSaidInTheWindowMadeAgain() {
+        val recreation = recreatable()
+        val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
+        source.checking = checked
+        compose.onNodeWithTag(REFRESH_BUTTON).performClick()
+        advance(500)
+        recreation.recreate()
+        advance(500)
+        compose.runOnUiThread { checked.complete(ParcelStore.RefreshResult.Updated) }
+        advance(100)
+        toast("Tracking updated").assertExists()
+        assertEquals(1, source.refreshes)
+    }
+
+    /** A pull's check goes on as the window is made again; the window made again, with no pull open, says how it went under the list. */
+    @Test
+    fun aPullsCheckIsSaidUnderTheListOfTheWindowMadeAgain() {
+        val recreation = recreatable()
+        val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
+        source.checking = checked
+        pull(520f)
+        advance(1500)
+        assertEquals(1, source.refreshes)
+        recreation.recreate()
+        advance(500)
+        compose.runOnUiThread { checked.complete(ParcelStore.RefreshResult.Failed("The service is down")) }
+        advance(100)
+        toast("The service is down").assertExists()
+        advance(4000)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+    }
+
     private fun accessibility() = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
 
     /** TalkBack, which explores by touch, turned on or off, and the window told, the clock kept where it is. */

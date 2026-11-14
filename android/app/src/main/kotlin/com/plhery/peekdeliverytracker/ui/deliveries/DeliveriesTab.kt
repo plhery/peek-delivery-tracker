@@ -159,19 +159,10 @@ fun DeliveriesTab(
     val now = LocalNow.current
     val scope = state.scope
     LocalDeliveriesState.current?.invoke(state)
-    // A message under the list has four seconds while it shows, from when it came, and the parcels a full account
-    // left on this phone eight; a newer one, even in the same words, has its own. Counted here rather than by the list,
-    // which a turn of the window draws anew. An archive's Undo counts its seven in the app's scope, held while TalkBack
-    // or Switch Access is on ([UndoClock]).
+    // A message under the list counts its four seconds, or eight, in the app's scope ([ListMessages]), and an archive's
+    // Undo its seven, held while TalkBack or Switch Access is on ([UndoClock]): a window made again gives them no more.
     val holdsUndo = holdsUndo()
     SideEffect { source.undoClock.held.value = holdsUndo }
-    val undo by source.undoParcel.collectAsState()
-    val toast = state.toast.takeIf { undo == null }
-    LaunchedEffect(toast?.id) {
-        if (toast == null) return@LaunchedEffect
-        delay(if (toast.leftOnDevice) LEFT_ON_DEVICE_DURATION else TOAST_DURATION)
-        state.dismiss(toast.id)
-    }
     LaunchedEffect(state) { source.leftOnDevice.filterNotNull().collect(state::tellLeftOnDevice) }
     ListPullEffects(state)
     val reduceMotion = PeekTheme.reduceMotion
@@ -519,10 +510,6 @@ private const val LATE_POSTMARK_MILLIS = 700L
 
 private const val READ_MILLIS = 650L
 
-/** How long a message under the list stays, in milliseconds. */
-private const val TOAST_DURATION = 4_000L
-private const val LEFT_ON_DEVICE_DURATION = 8_000L
-
 /** The schemes of what the phone holds itself, a file or an image, rather than a link. */
 private val LOCAL_SCHEMES = setOf(ContentResolver.SCHEME_CONTENT, ContentResolver.SCHEME_FILE, ContentResolver.SCHEME_ANDROID_RESOURCE)
 
@@ -556,10 +543,11 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
             inbox.consume(added)
         }
     }
-    // `sharedDraft = SharedParcelDraft(trackingInput:); showingAdd = true`, uncounted.
+    // `sharedDraft = SharedParcelDraft(trackingInput:); showingAdd = true`, uncounted. The shortcut on the app's icon
+    // leaves Add already up as it is, a number typed in it included.
     LaunchedEffect(inbox) {
         inbox.add.filterNotNull().collect { add ->
-            state.addSharedDraft(SharedParcelDraft(trackingInput = add.trackingInput))
+            if (!add.shortcut || state.addition == null) state.addSharedDraft(SharedParcelDraft(trackingInput = add.trackingInput))
             inbox.consume(add)
         }
     }

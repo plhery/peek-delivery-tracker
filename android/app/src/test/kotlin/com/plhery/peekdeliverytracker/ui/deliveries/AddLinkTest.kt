@@ -15,8 +15,11 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextReplacement
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.AddShortcutActivity
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.arrival.INVITATION_WELCOME
@@ -178,6 +181,35 @@ class AddLinkTest {
         assertEquals(opening, deliveries.addition?.id)
         assertEquals("", fieldText(ADD_TRACKING))
         assertEquals("Lamp", fieldText(ADD_NAME))
+    }
+
+    /**
+     * The "Add a parcel" shortcut on the app's icon, which brings no text, while Add is up with a number typed: Add
+     * stays as it is, as the window it comes to does ([com.plhery.peekdeliverytracker.AddShortcutActivity]).
+     */
+    @Test
+    fun theShortcutOnTheIconWhileAddIsUpKeepsTheNumberTyped() {
+        val window = window()
+        compose.onNodeWithTag(ADD_BUTTON).performClick()
+        settle()
+        val opening = deliveries.addition?.id
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement("TESTTYPED0001")
+        settle()
+
+        val shortcut = Intent().putExtra(ShortcutManagerCompat.EXTRA_SHORTCUT_ID, LauncherShortcuts.ADD)
+        window.newIntent(AddShortcutActivity.window(window.get(), shortcut).setClass(window.get(), AddLinkWindow::class.java))
+        settle()
+        assertEquals("The same Add", opening, deliveries.addition?.id)
+        assertEquals("The shortcut empties the number typed in Add", "TESTTYPED0001", fieldText(ADD_TRACKING))
+        assertEquals(listOf(LauncherShortcuts.ADD), window.get().shortcuts)
+
+        // Closed, the shortcut opens it empty.
+        compose.onNodeWithTag(ADD_CLOSE).performClick()
+        settle()
+        window.newIntent(AddShortcutActivity.window(window.get(), shortcut).setClass(window.get(), AddLinkWindow::class.java))
+        settle()
+        assertTrue(exists(ADD_PARCEL))
+        assertEquals("", fieldText(ADD_TRACKING))
     }
 
     @Test

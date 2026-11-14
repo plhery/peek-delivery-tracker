@@ -697,6 +697,22 @@ class DeviceParcels(
     }
 
     /**
+     * Tells the service what was forgotten here while it couldn't be told, the notifications to stop and this phone's
+     * own links, without reading any parcel: signed in, the account's list stands in for this phone's, and this goes on
+     * at each of its loads rather than waiting for a sign-out's first refresh.
+     */
+    suspend fun tellForgotten() {
+        val client = client ?: return
+        if (forgotten.isEmpty() && pendingForgets.isEmpty()) return
+        stopForgottenAlerts(client)
+        try {
+            tellPendingForgets(client)
+        } finally {
+            save()
+        }
+    }
+
+    /**
      * Tells the service of the links forgotten here while it couldn't be told. One it has forgotten, or no longer has,
      * is done with; the others wait for the next refresh.
      */

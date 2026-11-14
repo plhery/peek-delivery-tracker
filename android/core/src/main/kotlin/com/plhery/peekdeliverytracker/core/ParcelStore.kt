@@ -664,6 +664,9 @@ class ParcelStore(
             return
         }
         loadAccountParcels(showSpinner)
+        // What was forgotten on this phone before signing in, while the service couldn't be told, is told now rather
+        // than at the sign-out's first refresh.
+        if (session.isAuthenticated && !isDemo) tryQuietly { device.tellForgotten() }
     }
 
     /** Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read. */
@@ -1059,7 +1062,8 @@ class ParcelStore(
 
     /**
      * Asks the service to check every parcel and returns once the check is queued, so pull-to-refresh ends quickly.
-     * `refreshing` stays on until the results are loaded, and `refreshOutcome` then reports how the check ended.
+     * `refreshing` stays on until the results are loaded, and `refreshOutcome` then reports how the check ended. Signed
+     * out, the phone checks its parcels before this returns, and reports how that ended too, to a pull made meanwhile.
      */
     suspend fun refreshAll(): RefreshStart {
         val generation = session.generation
@@ -1081,11 +1085,18 @@ class ParcelStore(
             }
             if (generation != session.generation) throw CancellationException("The signed-in account changed.")
             parcels = device.list()
-            refreshing = false
             // The caller's own cancellation goes on, once the list is shown as it is.
-            if (trouble is CancellationException) currentCoroutineContext().ensureActive()
-            if (trouble != null) return RefreshStart.Completed(RefreshResult.Failed(localizer.errorMessage(trouble)))
-            return RefreshStart.Completed(if (Parcel.trackingChanged(before, parcels)) RefreshResult.Updated else RefreshResult.Unchanged)
+            val givenUp = trouble is CancellationException && !currentCoroutineContext().isActive
+            val result = when {
+                trouble != null -> RefreshResult.Failed(localizer.errorMessage(trouble))
+                Parcel.trackingChanged(before, parcels) -> RefreshResult.Updated
+                else -> RefreshResult.Unchanged
+            }
+            // A pull made while this check ran (`AlreadyRunning`) waits for it and shows how it ended.
+            if (!givenUp) refreshOutcome = RefreshOutcome(result)
+            refreshing = false
+            if (givenUp) currentCoroutineContext().ensureActive()
+            return RefreshStart.Completed(result)
         }
         val jobIds = try {
             api.queueRefreshAll().also { session.checkGeneration(generation) }

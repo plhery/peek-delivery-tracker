@@ -254,6 +254,8 @@ class FakeDeliveries(
 
     override val undoClock = UndoClock()
 
+    override val listMessages = ListMessages()
+
     override suspend fun archive(parcel: Parcel) {
         archiving?.await()
         failure?.let { throw it }

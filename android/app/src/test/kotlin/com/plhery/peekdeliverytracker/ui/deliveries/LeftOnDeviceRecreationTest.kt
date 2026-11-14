@@ -21,7 +21,7 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The message saying how many of this phone's parcels a full account left here outlives a window made again within its
- * eight seconds, which then gives it eight more; once it has run, its news is let go and no later window says it again.
+ * eight seconds, which go on from when it came; once it has run, its news is let go and no later window says it again.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -54,8 +54,10 @@ class LeftOnDeviceRecreationTest {
         recreation.recreate()
         compose.mainClock.advanceTimeBy(500)
         assertTrue("kept by the window made again 2 s into it", toastShown())
-        compose.mainClock.advanceTimeBy(8500)
-        assertFalse("gone once it has run", toastShown())
+        compose.mainClock.advanceTimeBy(5200)
+        assertTrue("shown to the end of its eight seconds", toastShown())
+        compose.mainClock.advanceTimeBy(400)
+        assertFalse("gone once its eight seconds have run, the window made again giving it no more", toastShown())
         assertEquals("let go once it has run", null, source.leftOnDevice.value)
         recreation.recreate()
         compose.mainClock.advanceTimeBy(500)

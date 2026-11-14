@@ -35,6 +35,7 @@ import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -185,6 +186,7 @@ class DeviceParcelTests {
     private fun DeviceParcelClient.replacing(
         forget: suspend (String, String) -> Unit = this.forget,
         setAlert: suspend (String, String?, ParcelAppAlertRequest) -> DeviceAlertAnswer = this.setAlert,
+        read: suspend (String, String?) -> PublicParcelResponse? = this.read,
     ) = DeviceParcelClient(lookup, read, forget, update, detect, feedback, setAlert, removeAlert)
 
     private fun device(
@@ -1019,9 +1021,21 @@ class DeviceParcelTests {
     }
 
     /** This phone following `links` as its own, and a sign-in into `account`, whose list is empty. */
-    private class SigningIn(val transport: RecordingTransport, val device: DeviceParcels, val defaults: MemoryDefaults, val persistence: MemorySessionPersistence)
+    private class SigningIn(
+        val transport: RecordingTransport,
+        val device: DeviceParcels,
+        val defaults: MemoryDefaults,
+        val persistence: MemorySessionPersistence,
+        val storage: Memory,
+        val calls: Calls,
+    )
 
-    private fun signingIn(links: List<String>, account: AccountRoom, scope: CoroutineScope): SigningIn {
+    private fun signingIn(
+        links: List<String>,
+        account: AccountRoom,
+        scope: CoroutineScope,
+        pendingForgets: Map<String, String> = emptyMap(),
+    ): SigningIn {
         val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
         val signedIn = JsonEncoder.deliveryTracker.encode(
             AuthSession.serializer(),
@@ -1047,7 +1061,9 @@ class DeviceParcelTests {
         storage.parcels = links.mapIndexed { index, link ->
             UUID.randomUUID().let { parcel(link, "", it, pkg = pkg(it, number = "TESTPARCEL12300$index")) }
         }
-        return SigningIn(transport, device(client(Calls()), storage, scope), MemoryDefaults(), MemorySessionPersistence())
+        storage.pendingForgets = pendingForgets
+        val calls = Calls()
+        return SigningIn(transport, device(client(calls), storage, scope), MemoryDefaults(), MemorySessionPersistence(), storage, calls)
     }
 
     private fun SigningIn.session(scope: CoroutineScope) =
@@ -1058,6 +1074,32 @@ class DeviceParcelTests {
     ).apply {
         setDeliveryWidgetEnabled(false)
         setDeliveryLiveActivitiesEnabled(false)
+    }
+
+    /**
+     * A link of this phone's own forgotten without an account while the service couldn't be told is told at the
+     * account's start, not left until a sign-out's first refresh.
+     */
+    @Test
+    fun signedInALinkForgottenOfflineBeforeSigningInIsToldWithoutASignOut() = runTest {
+        val phone = signingIn(emptyList(), AccountRoom(0), backgroundScope, pendingForgets = mapOf("22222222222D" to key))
+        val session = phone.session(backgroundScope)
+        session.showWelcome()
+        val store = phone.store(session, backgroundScope)
+        runCurrent()
+        // Control: signed out, nothing has told it yet.
+        assertEquals(emptyList<String>(), phone.calls.all)
+
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.start()
+
+        assertEquals(
+            "Signed in, the link forgotten here before signing in waits for a sign-out to reach the service",
+            listOf("forget 22222222222D"),
+            phone.calls.all,
+        )
+        assertEquals(emptyMap<String, String>(), phone.storage.pendingForgets)
+        session.forceSignOut()
     }
 
     @Test
@@ -1693,6 +1735,43 @@ class DeviceParcelTests {
         assertEquals(ParcelAlertPreset.All, preset(TrackingStage.Registered))
         assertEquals(ParcelAlertPreset.Important, preset(TrackingStage.Accepted))
         assertEquals(ParcelAlertPreset.Important, preset(TrackingStage.InTransit))
+    }
+
+    /**
+     * Signed out, a pull made while a check of every parcel runs gets `AlreadyRunning`, and the list waits for the
+     * check's outcome to show it, as a signed-in pull waits for the service's.
+     */
+    @Test
+    fun signedOutAPullDuringACheckIsToldHowThatCheckEnded() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        val id = UUID.randomUUID()
+        storage.keys = mapOf("22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222B", "", id))
+        val gate = CompletableDeferred<Unit>()
+        val delivered = PublicParcelResponse(link = link("22222222222B"), parcel = pkg(id, stage = TrackingStage.Delivered))
+        val client = client(Calls()).replacing(read = { _, _ -> gate.await(); delivered })
+        val device = device(client, storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertTrue(store.isGuest)
+
+        val first = async { store.refreshAll() }
+        runCurrent()
+        assertTrue(store.refreshing)
+        val before = store.refreshOutcomeFlow.value?.id
+        assertEquals(ParcelStore.RefreshStart.AlreadyRunning, store.refreshAll())
+        gate.complete(Unit)
+
+        assertEquals(ParcelStore.RefreshStart.Completed(ParcelStore.RefreshResult.Updated), first.await())
+        assertEquals(
+            "Signed out, a pull made during a check is left without that check's outcome, so it shows nothing",
+            ParcelStore.RefreshResult.Updated,
+            store.refreshOutcomeFlow.value?.takeIf { it.id != before }?.result,
+        )
     }
 
     @Test

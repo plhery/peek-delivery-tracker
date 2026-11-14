@@ -79,6 +79,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.max
@@ -1142,20 +1143,22 @@ internal class DeliveriesState(
     /** The finger's pull on the list, kept here rather than with the list so that a turn of the window keeps it. */
     val listPull = ListPull(pull, scope, ::refreshFromPull)
 
-    var toast: ListToast? by mutableStateOf(null)
-        private set
-
-    private var toasts = 0
+    /** The message under the list, the same in every window this process makes ([ListMessages]). */
+    val toast: ListToast? get() = source.listMessages.toast
 
     /**
-     * Shows a message under the list, and tells TalkBack where the iPhone posts it too (`announce`): not the failed
+     * Shows a message under the list, for its four seconds, or eight for the parcels left here, which a window made again
+     * meanwhile shows out ([ListMessages]); and tells TalkBack where the iPhone posts it too (`announce`): not the failed
      * pull's message, whose result TalkBack has already heard. An Undo held for TalkBack or Switch Access gives way to
      * it (`onChange(of: toast)`, [UndoClock.held]).
      */
     fun show(text: String, warning: Boolean = false, announce: Boolean = true, news: ParcelStore.LeftOnDevice? = null) {
+        val source = source
         // The parcels left here, said once: a message taking that one's place lets its news go.
         toast?.news?.let(source::forgetLeftOnDevice)
-        toast = ListToast(++toasts, text, warning, news)
+        source.listMessages.show(text, warning, news, source.undoParcel, source.scope) { shown ->
+            source.listMessages.dismiss(shown.id)?.news?.let(source::forgetLeftOnDevice)
+        }
         if (source.undoClock.held.value) source.undoParcel.value?.let(source::forgetUndo)
         if (announce) announce(text)
     }
@@ -1163,20 +1166,16 @@ internal class DeliveriesState(
     /**
      * The account had no room for some of the parcels this phone followed before signing in: the list says how many
      * stayed here, once, as the web's deliveries do after bringing parcels along, and lets the news go once the message
-     * has run. A window made again meanwhile says it again, for its eight seconds, as the iPhone's view state keeps it
-     * through a turn.
+     * has run. A window made again meanwhile shows it out, as the iPhone's view state keeps it through a turn.
      */
     fun tellLeftOnDevice(news: ParcelStore.LeftOnDevice) {
         if (toast?.news?.id == news.id) return
         show(text("link.bring.full.many", mapOf("count" to news.count)), news = news)
     }
 
-    /** The message `id` has had its four seconds, unless a newer one took its place. */
+    /** The message `id` goes before its time is up, unless a newer one took its place. */
     fun dismiss(id: Int) {
-        val shown = toast ?: return
-        if (shown.id != id) return
-        shown.news?.let(source::forgetLeftOnDevice)
-        toast = null
+        source.listMessages.dismiss(id)?.news?.let(source::forgetLeftOnDevice)
     }
 
     /** What the toast of an archived parcel says (`app.archivedToast`). */
@@ -1716,14 +1715,22 @@ internal class DeliveriesState(
         if (!Device.confirmsCopies) announce(text("detail.copied"))
     }
 
-    /** `refreshFromPull()`: holds the pull open until every parcel has been checked, then shows the result on the seal. */
+    /**
+     * `refreshFromPull()`: holds the pull open until every parcel has been checked, then shows the result on the seal.
+     * The check runs in the app's scope: a window made again meanwhile, which has no pull of its own open, says how it
+     * went under the list.
+     */
     fun refreshFromPull() {
-        scope.launch {
+        source.scope.launch {
             pull.begin(text("app.refreshing"))
             val result = coroutineScope {
                 // A check that answers at once still shows the arrow turning.
                 val turning = launch { delay(PULL_MINIMUM) }
                 source.checkAllParcels().also { turning.join() }
+            }
+            if (!scope.isActive) {
+                result?.let(::showResult)
+                return@launch
             }
             when (result) {
                 is ParcelStore.RefreshResult.Failed -> {
@@ -1753,16 +1760,18 @@ internal class DeliveriesState(
         announce(label)
     }
 
-    /** `refreshFromButton()`: the button turns while the parcels are checked, then a toast says how it went. */
+    /**
+     * `refreshFromButton()`: the button turns while the parcels are checked, then a toast says how it went, in the
+     * window made again meanwhile too: the check runs in the app's scope.
+     */
     fun refreshFromButton() {
         if (source.refreshing.value) return
-        scope.launch {
-            when (val result = source.checkAllParcels()) {
-                is ParcelStore.RefreshResult.Failed -> show(result.message, warning = true)
-                null -> Unit
-                else -> show(text(result.messageKey))
-            }
-        }
+        source.scope.launch { source.checkAllParcels()?.let(::showResult) }
+    }
+
+    /** How a check went, under the list. */
+    private fun showResult(result: ParcelStore.RefreshResult) {
+        if (result is ParcelStore.RefreshResult.Failed) show(result.message, warning = true) else show(text(result.messageKey))
     }
 
     /**

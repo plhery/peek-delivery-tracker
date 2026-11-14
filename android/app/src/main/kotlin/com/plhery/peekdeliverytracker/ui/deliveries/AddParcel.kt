@@ -409,11 +409,12 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         if (request.scanning && canScan) form.showingScanner = true else focus.request(ParcelAddition.Field.Tracking)
     }
     // A carrier's postcode field shows what was given for it in Add; else a required one starts from the last one given
-    // that fits, and an optional one is only offered.
+    // that fits, and an optional one is only offered. The phone digits typed for one carrier don't go to the next.
     val resolved = addition.resolvedCarrier
     LaunchedEffect(resolved) {
         if (form.preparedFor == resolved) return@LaunchedEffect
         form.preparedFor = resolved
+        form.phoneDigits = ""
         prepareRequiredDetails(form, current(), source.givenPostcodes)
     }
     SensoryFeedbackEffect(SensoryFeedback.Selection, resolved) { old, new -> old != new && new != CarrierId.Unknown }

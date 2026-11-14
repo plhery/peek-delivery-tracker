@@ -575,6 +575,21 @@ class AddParcelTest {
         )
     }
 
+    /** The digits typed for one J&T go with it alone: another carrier chosen starts its field empty. */
+    @Test
+    fun thePhoneDigitsClearWhenTheCarrierChanges() {
+        show()
+        open()
+        type("JMX000000000001")
+        leave()
+        node(ADD_PHONE_DIGITS).performTextInput("0472")
+        compose.waitForIdle()
+        assertEquals("0472", fieldText(ADD_PHONE_DIGITS))
+        pick(CarrierId.JAndTCn, "J&T Express China")
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        assertEquals("J&T Express Mexico's phone digits are carried over to J&T Express China", "", fieldText(ADD_PHONE_DIGITS))
+    }
+
     /** A parcel followed without an account: the digits go with its lookup alone, which the lock line says. */
     @Test
     fun aGuestIsToldTheDigitsStayPrivate() {

@@ -23,6 +23,7 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.AddShortcutActivity
 import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -132,13 +133,33 @@ class LauncherShortcutsTest {
         assertEquals("Add a parcel", app.getString(R.string.shortcut_add_parcel))
     }
 
+    /**
+     * Android starts a manifest shortcut in a task made again, which would close the window and an Add open in it: the
+     * shortcut goes to [AddShortcutActivity], which hands Add's link to the window in its own task, and goes.
+     */
     @Test
     fun addAParcelOpensAddWithItsFieldEmptyAndIsReportedUsed() {
-        val (_, intent) = manifestShortcut()
+        val (_, shortcut) = manifestShortcut()
+        assertEquals(Intent.ACTION_VIEW, shortcut.action)
+        assertEquals(Uri.parse("peekdeliverytracker://add"), shortcut.data)
+        assertEquals(
+            "The shortcut starts the window itself, in a task Android makes again",
+            ComponentName(app, AddShortcutActivity::class.java),
+            shortcut.component,
+        )
+        val started = Intent(shortcut).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        val trampoline = Robolectric.buildActivity(AddShortcutActivity::class.java, started).setup()
+        assertTrue(trampoline.get().isFinishing)
+        val intent = checkNotNull(shadowOf(trampoline.get()).nextStartedActivity)
+        assertEquals(ComponentName(app, MainActivity::class.java), intent.component)
         assertEquals(Intent.ACTION_VIEW, intent.action)
         assertEquals(Uri.parse("peekdeliverytracker://add"), intent.data)
-        assertEquals(ComponentName(app, MainActivity::class.java), intent.component)
+        assertEquals(Intent.FLAG_ACTIVITY_NEW_TASK, intent.flags and Intent.FLAG_ACTIVITY_NEW_TASK)
+        assertEquals("The window's task is kept", 0, intent.flags and Intent.FLAG_ACTIVITY_CLEAR_TASK)
         assertEquals(LauncherShortcuts.ADD, LauncherShortcuts.shortcut(intent))
+        val declared = app.packageManager.getActivityInfo(ComponentName(app, AddShortcutActivity::class.java), 0)
+        assertTrue("No affinity for the app's task: ${declared.taskAffinity}", declared.taskAffinity.isNullOrEmpty())
+        assertFalse(declared.exported)
 
         AddLinkWindow.state.value = AuthenticationState.Demo
         AddLinkWindow.source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)

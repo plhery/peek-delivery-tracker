@@ -37,13 +37,16 @@ As on the iPhone, signing out, an expired session or a deleted account takes the
 keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another
 account sees the prompt first. A parcel followed without an account takes its notifications with it when it is
 forgotten, or followed through another link, even while the launch's round signs it up; someone else's that the
-service can't be told about yet is told again on each refresh.
+service can't be told about yet is told again on each refresh, and, once signed in, on each load of the account's
+list, as are this phone's own links still to be forgotten.
 
 ## Shortcuts on the app's icon
 
 Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.swift`) as launcher shortcuts:
 
-- **Add a parcel** (`res/xml/shortcuts.xml`), there from install on, opens Add with its field empty.
+- **Add a parcel** (`res/xml/shortcuts.xml`), there from install on, opens Add with its field empty over the app as
+  it was, or leaves Add already open as it is. Android starts a manifest shortcut in a new task, so it goes through
+  `AddShortcutActivity`, which hands Add's link to the app's window in its own task.
 - **Next delivery** (`LauncherShortcuts.kt`) follows what the app publishes for the widget. It is named after the
   first parcel on its way in the widget's order and opens its page. It goes when nothing is on the way, the widget's
   switch is off or nobody is signed in; a copy pinned to the home screen stays, greyed, as "Next delivery" in the

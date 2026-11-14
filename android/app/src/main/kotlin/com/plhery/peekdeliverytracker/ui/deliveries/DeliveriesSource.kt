@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -124,6 +127,9 @@ interface DeliveriesSource {
 
     /** What counts the Undo's seven seconds, for every window this process makes ([UndoClock]). */
     val undoClock: UndoClock
+
+    /** The message under the list and its time, for every window this process makes ([ListMessages]). */
+    val listMessages: ListMessages
 
     /**
      * `checkAllParcels()`: checks every parcel and says how it went, waiting for a check the service queued. Null when
@@ -441,6 +447,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val undoClock: UndoClock get() = UNDO_CLOCK
 
+    override val listMessages: ListMessages get() = LIST_MESSAGES
+
     override suspend fun checkAllParcels(): ParcelStore.RefreshResult? {
         val store = container.parcels
         val previousOutcome = store.refreshOutcomeFlow.value?.id
@@ -626,6 +634,9 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         /** What counts this process's Undo, for every window it makes, as its pages' work is. */
         val UNDO_CLOCK = UndoClock()
 
+        /** This process's message under the list, for every window it makes, as its Undo is. */
+        val LIST_MESSAGES = ListMessages()
+
         /** What a page's answers say they come from, which the service counts them under. */
         val FEEDBACK_APP = ParcelFeedbackRequestApp.Android
     }
@@ -674,6 +685,73 @@ class UndoClock {
 
     private companion object {
         const val UNDO_DURATION = 7_000L
+    }
+}
+
+/**
+ * The message under the list ([ListToast]): how a check went, a link's parcel added, a number copied, the parcels a full
+ * account left on this phone. As the archive's Undo does, it outlives the window that showed it: a window made again (a
+ * rotation, a fold, a resize) shows it still, and its four seconds, or eight for the parcels left here, are counted in
+ * the app's scope, while it shows and no Undo stands over it, as the window counted them: from when it came, and whole
+ * again once an Undo over it has gone. A window made again doesn't give it more.
+ */
+@Stable
+class ListMessages {
+    /** The message the list shows, unless an Undo stands over it. */
+    internal var toast: ListToast? by mutableStateOf(null)
+        private set
+
+    /** [toast], for the clock. */
+    private val shown = MutableStateFlow<ListToast?>(null)
+
+    private var count = 0
+
+    /**
+     * Shows a message in place of the one before, a new one even in the same words, and counts its time in `scope`
+     * while it shows and `undo` shows none, then has it go ([end]).
+     */
+    internal fun show(
+        text: String,
+        warning: Boolean,
+        news: ParcelStore.LeftOnDevice?,
+        undo: StateFlow<Parcel?>,
+        scope: CoroutineScope,
+        end: (ListToast) -> Unit,
+    ): ListToast {
+        val toast = ListToast(++count, text, warning, news)
+        set(toast)
+        scope.launch {
+            combine(shown, undo) { now, undoing -> if (now === toast) undoing == null else null }
+                .distinctUntilChanged()
+                // Over once another message, or none, shows: the last null cancels what was counting.
+                .transformWhile { counting ->
+                    emit(counting)
+                    counting != null
+                }
+                .collectLatest { counting ->
+                    if (counting != true) return@collectLatest
+                    delay(if (toast.leftOnDevice) LEFT_ON_DEVICE_DURATION else TOAST_DURATION)
+                    end(toast)
+                }
+        }
+        return toast
+    }
+
+    /** The message `id` goes, unless a newer one took its place: the one that went, if it did. */
+    internal fun dismiss(id: Int): ListToast? {
+        val going = toast?.takeIf { it.id == id } ?: return null
+        set(null)
+        return going
+    }
+
+    private fun set(toast: ListToast?) {
+        this.toast = toast
+        shown.value = toast
+    }
+
+    private companion object {
+        const val TOAST_DURATION = 4_000L
+        const val LEFT_ON_DEVICE_DURATION = 8_000L
     }
 }
 
@@ -916,12 +994,12 @@ class DeliveriesInbox(
     notifiedFriend: UUID? = null,
     notifiedLink: String? = null,
     private val notificationOpened: (NativeRoute) -> Unit = {},
-    add: String? = null,
+    add: AddLink? = null,
     private val repeated: (String) -> Boolean = { false },
     private val shortcutUsed: (String) -> Unit = {},
 ) {
     private val parcelState = MutableStateFlow(parcel)
-    private val addState = MutableStateFlow(add?.let(::AddLink))
+    private val addState = MutableStateFlow(add)
     private val friendState = MutableStateFlow(friend)
     private val notifiedFriendState = MutableStateFlow(notifiedFriend)
     private val notifiedLinkState = MutableStateFlow(notifiedLink)
@@ -1026,12 +1104,13 @@ class DeliveriesInbox(
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
         opened()
-        LauncherShortcuts.shortcut(intent)?.let(shortcutUsed)
+        val shortcut = LauncherShortcuts.shortcut(intent)
+        shortcut?.let(shortcutUsed)
         val repeat = repeated(url)
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
             NativeRoute.Parcels -> listState.value = true
-            is NativeRoute.Add -> addState.value = AddLink(route.trackingInput)
+            is NativeRoute.Add -> addState.value = AddLink(route.trackingInput, shortcut = shortcut == LauncherShortcuts.ADD)
             else -> if (!repeat && !parcelLink(url)) {
                 if (route is NativeRoute.Friend) friendState.value = route.id else invitationLink(url)
             }
@@ -1065,6 +1144,7 @@ class DeliveriesInbox(
         private const val NOTIFIED_FRIEND = "notifiedFriend"
         private const val NOTIFIED_LINK = "notifiedLink"
         private const val ADD = "add"
+        private const val ADD_SHORTCUT = "addShortcut"
 
         /**
          * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
@@ -1095,7 +1175,7 @@ class DeliveriesInbox(
             val inbox = DeliveriesInbox(
                 saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
                 invitationLink, opened, saved?.getString(NOTIFIED_FRIEND)?.let(UUID::fromString), saved?.getString(NOTIFIED_LINK),
-                notificationOpened, saved?.getString(ADD), repeated, shortcutUsed,
+                notificationOpened, saved?.getString(ADD)?.let { AddLink(it, saved.getBoolean(ADD_SHORTCUT)) }, repeated, shortcutUsed,
             )
             registry.registerSavedStateProvider(SAVED) {
                 Bundle().apply {
@@ -1104,6 +1184,7 @@ class DeliveriesInbox(
                     putString(NOTIFIED_FRIEND, inbox.notifiedFriend.value?.toString())
                     putString(NOTIFIED_LINK, inbox.notifiedLink.value)
                     putString(ADD, inbox.add.value?.trackingInput)
+                    putBoolean(ADD_SHORTCUT, inbox.add.value?.shortcut == true)
                 }
             }
             val intent = activity.intent
@@ -1121,6 +1202,7 @@ class LinkAdded(val parcelId: UUID?)
 
 /**
  * Add with the text of one `peekdeliverytracker://add` link, opened once ([DeliveriesInbox.add]); a new one for each,
- * even with the same text, as each link makes the iPhone a new `SharedParcelDraft`.
+ * even with the same text, as each link makes the iPhone a new `SharedParcelDraft`. The "Add a parcel" shortcut on the
+ * app's icon ([shortcut]) brings no text: Add already up keeps what it holds.
  */
-class AddLink(val trackingInput: String)
+class AddLink(val trackingInput: String, val shortcut: Boolean = false)

@@ -139,7 +139,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
           <div className="settings-box"><button ref={accountButton} className="settings-row" type="button" onClick={() => navigate('account')}>{accountTitle}<span className="settings-chevron" aria-hidden="true">›</span></button>
             {onOpenLanding && <a className="settings-row" href={LANDING_PATH} onClick={(event) => followInPlace(event, onOpenLanding)}>{t('app.homePage')}<span className="settings-value">{window.location.host}</span><span className="settings-chevron" aria-hidden="true">›</span></a>}</div>
         </div>
-        {page === 'inbox' && apiAuth && addByEmail && <AddByEmailPage apiAuth={apiAuth} offer={addByEmail} onChange={setAddByEmail} onBusy={setInboxBusy} />}
+        {page === 'inbox' && apiAuth && addByEmail && <AddByEmailPage apiAuth={apiAuth} email={email} offer={addByEmail} onChange={setAddByEmail} onBusy={setInboxBusy} />}
         {page === 'assistants' && otherAccountNotice}
         {page === 'assistants' && apiAuth && assistants && <AssistantsPage apiAuth={apiAuth} offer={assistants} onChange={setAssistants}
           onBusy={(next) => { setAssistantsBusy(next); if (next) setOtherAccount(null); }} signIn={signIn} email={email} draft={tokenDraft} />}

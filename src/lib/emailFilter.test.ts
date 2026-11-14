@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FILTER_LANGUAGES, SHIPPING_SUBJECT_WORDS, filterLanguagesFor, gmailFilter } from './emailFilter';
+import { FILTER_LANGUAGES, MAIN_SUBJECT_WORDS, SHIPPING_SUBJECT_WORDS, filterLanguagesFor, gmailFilter, gmailFilterLink, mailServiceOf, subjectWords } from './emailFilter';
 
 describe('the mail filter for shipping emails', () => {
   it('searches the subject for one language\'s words, quoting those of several words', () => {
@@ -37,5 +37,43 @@ describe('the mail filter for shipping emails', () => {
 
   it('stays within what Gmail\'s filter takes when every language is chosen', () => {
     expect(gmailFilter(FILTER_LANGUAGES).length).toBeLessThan(1_500);
+  });
+
+  it('opens Gmail\'s filter form with the words already in its Subject field', () => {
+    const link = gmailFilterLink(['en', 'fr']);
+    expect(link.startsWith('https://mail.google.com/mail/#create-filter/subject=')).toBe(true);
+    expect(decodeURIComponent(link.split('subject=')[1] ?? '')).toBe(gmailFilter(['en', 'fr']).slice('subject:'.length));
+    // Nothing a browser or Gmail would read as the end of the field.
+    expect(link.split('#')[1]).toMatch(/^create-filter\/subject=[A-Za-z0-9%().~*'!_-]+$/);
+    expect(gmailFilterLink([])).toBe('');
+  });
+
+  it('gives a one-word-at-a-time rule each language\'s main words, every first word before any second', () => {
+    expect(subjectWords(['fr'])).toEqual(['colis', 'livraison', 'expédié', 'livré', 'expédition']);
+    expect(subjectWords(['fr', 'en']).slice(0, 4)).toEqual(['shipped', 'colis', 'shipment', 'livraison']);
+    // "entrega" is Spanish and Portuguese: named once.
+    expect(subjectWords(['es', 'pt']).filter((word) => word === 'entrega')).toHaveLength(1);
+    expect(subjectWords([])).toEqual([]);
+    for (const language of FILTER_LANGUAGES) {
+      const all: readonly string[] = SHIPPING_SUBJECT_WORDS[language];
+      for (const word of MAIN_SUBJECT_WORDS[language]) {
+        expect(all).toContain(word);
+        expect(word).not.toContain(' ');
+      }
+    }
+  });
+
+  it('reads the mail service off an address, and starts any other on Gmail', () => {
+    expect(mailServiceOf('someone@gmail.com')).toBe('gmail');
+    expect(mailServiceOf('someone@googlemail.com')).toBe('gmail');
+    expect(mailServiceOf('Someone@Hotmail.FR')).toBe('outlook');
+    expect(mailServiceOf('someone@live.co.uk')).toBe('outlook');
+    expect(mailServiceOf('someone@icloud.com')).toBe('icloud');
+    expect(mailServiceOf('someone@me.com')).toBe('icloud');
+    expect(mailServiceOf('someone@yahoo.co.uk')).toBe('yahoo');
+    expect(mailServiceOf('someone@me.example.test')).toBe('gmail');
+    expect(mailServiceOf('someone@example.test')).toBe('gmail');
+    expect(mailServiceOf('constructor@constructor.test')).toBe('gmail');
+    expect(mailServiceOf(undefined)).toBe('gmail');
   });
 });

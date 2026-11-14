@@ -279,10 +279,16 @@ Key server modules:
   gets a forwarding address whose random token (16 base32 characters, 80 bits) names it.
   Every other account gets 404 from `/api/account/inbox`, so Settings shows no row.
   - Settings shows the address to forward one email to, and what the last emails did. The
-    steps for forwarding by a Gmail filter are folded away under it: the reader picks the
-    languages their shops and carriers write in, and the filter looks for those languages'
-    shipping words in the subject (`src/lib/emailFilter.ts`). It starts with the language
-    Peek shows, the browser's and English.
+    steps for having the mail service forward by itself are folded away under it
+    (`src/lib/emailFilter.ts`). The reader names their service, which starts on the one the
+    account's address belongs to, and the languages their shops and carriers write in,
+    which start with the language Peek shows, the browser's and English.
+    - Gmail gets links to its forwarding settings and to its filter form, opened with
+      those languages' shipping words already in the Subject field.
+    - Outlook, iCloud and any other service whose rules forward get each language's main
+      words, copied one at a time, since their rules take them so.
+    - Yahoo forwards no chosen email, and a service that emails the address a link to
+      confirm (GMX, Proton) cannot be set up: only Gmail's confirmation is shown.
   - A Cloudflare Email Worker (`ops/cloudflare/inbound-email-worker.js`) posts each email to
     `POST /api/inbound/email`, signed with a secret it shares with the server: an HMAC over
     the time, the recipient and the raw mail, valid for five minutes. An unsigned or stale

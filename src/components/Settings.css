@@ -87,15 +87,16 @@
 [aria-checked=true] > .settings-switch { background: var(--green); }
 [aria-checked=true] > .settings-switch::after { left: 15px; }
 
-/* Adding parcels by email: the address to copy, the filter for the chosen languages, Gmail's steps and confirmation, and the last email's outcome. */
+/* Adding parcels by email: the address to copy, each mail service's steps with the filter or the words for the chosen languages, Gmail's confirmation, and the last emails' outcome. */
 .add-by-email__start { display: inline-flex; align-items: center; gap: 8px; }
 .add-by-email__address { margin: 0; padding: 14px; font: 500 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; user-select: all; border-bottom: 1px solid var(--line); }
 .add-by-email__note { margin: 9px 2px 0; color: var(--ink-soft); font-size: 11px; line-height: 1.5; }
 .add-by-email__note--lead { margin: 0 2px 9px; }
-.add-by-email__languages { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-.add-by-email__language { padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink-soft); font: inherit; font-size: 12px; line-height: 1.3; cursor: pointer; }
-.add-by-email__language[aria-pressed=true] { border-color: var(--green); box-shadow: inset 0 0 0 .5px var(--green); color: var(--ink); background: color-mix(in srgb,var(--green) 5%,var(--paper)); }
-.add-by-email__language:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.add-by-email__choices { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.add-by-email__auto-body > .add-by-email__note--lead:first-child { margin-top: 10px; }
+.add-by-email__choice { padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink-soft); font: inherit; font-size: 12px; line-height: 1.3; cursor: pointer; }
+.add-by-email__choice[aria-pressed=true] { border-color: var(--green); box-shadow: inset 0 0 0 .5px var(--green); color: var(--ink); background: color-mix(in srgb,var(--green) 5%,var(--paper)); }
+.add-by-email__choice:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .add-by-email__code { margin: 0; padding: 14px; font-size: 13px; overflow-wrap: anywhere; }
 .add-by-email__code + .settings-row { border-top: 1px solid var(--line); }
 .add-by-email__recent { margin: 0; padding: 0; list-style: none; }
@@ -111,6 +112,12 @@
 .add-by-email__auto-body { padding: 4px 14px 14px; border-top: 1px solid var(--line); }
 .add-by-email__auto-body .settings-box { background: var(--canvas); }
 .add-by-email__steps { margin: 10px 0 14px; padding-left: 18px; display: grid; gap: 8px; font-size: 12px; line-height: 1.5; }
+.add-by-email__steps--none { padding-left: 2px; margin-bottom: 0; }
+.add-by-email__link { display: block; width: fit-content; margin-top: 3px; color: var(--ink); font-weight: 550; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.add-by-email__words { display: flex; flex-wrap: wrap; gap: 6px; }
+.add-by-email__word { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px 6px 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--canvas); color: var(--ink); font: 500 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; }
+.add-by-email__word svg { width: 13px; height: 13px; color: var(--ink-soft); }
+.add-by-email__word:focus-visible, .add-by-email__link:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .settings-badge { flex: none; padding: 2px 7px; border-radius: 999px; background: var(--yellow-soft); color: var(--ochre); font-size: 10px; font-weight: 550; letter-spacing: .5px; line-height: 1.5; text-transform: uppercase; }
 .sheet__title .settings-badge { display: inline-block; margin-left: 4px; vertical-align: middle; letter-spacing: .5px; }
 .settings-badge + .settings-chevron { margin-left: auto; }

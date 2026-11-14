@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ApiAddByEmail, ApiAddByEmailResponse } from '../generated/apiContract';
 import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
-import { gmailFilter } from '../lib/emailFilter';
+import { gmailFilter, gmailFilterLink } from '../lib/emailFilter';
 import { AccountMenu } from './AccountMenu';
 import { AddByEmailPage } from './AddByEmail';
 
@@ -73,6 +73,55 @@ describe('adding parcels by email in Settings', () => {
     expect(screen.getByRole('button', { name: 'Copy filter' })).toBeInTheDocument();
   });
 
+  it('walks through Gmail with its own pages opened, the filter already filled', async () => {
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
+    const user = userEvent.setup();
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.test" offer={offer(inbox)} onChange={vi.fn()} />);
+    await user.click(screen.getByText('Forward automatically'));
+    // An address of a domain no service owns starts on Gmail.
+    const services = screen.getByRole('group', { name: 'Your mail service' });
+    expect(within(services).getAllByRole('button').map((button) => button.textContent)).toEqual(['Gmail', 'Outlook', 'iCloud', 'Yahoo', 'Other']);
+    expect(within(services).getByRole('button', { pressed: true })).toHaveTextContent('Gmail');
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+    expect(screen.getByRole('link', { name: /Open Gmail’s forwarding settings/ })).toHaveAttribute('href', 'https://mail.google.com/mail/#settings/fwdandpop');
+    expect(screen.getByRole('link', { name: /Open the filter in Gmail/ })).toHaveAttribute('href', gmailFilterLink(['en', 'fr']));
+    await user.click(screen.getByRole('button', { name: 'German' }));
+    expect(screen.getByRole('link', { name: /Open the filter in Gmail/ })).toHaveAttribute('href', gmailFilterLink(['en', 'de', 'fr']));
+  });
+
+  it('starts on the service the account\'s address belongs to, and gives a rule its words one at a time', async () => {
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
+    const copy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    const user = userEvent.setup();
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@hotmail.fr" offer={offer(inbox)} onChange={vi.fn()} />);
+    await user.click(screen.getByText('Forward automatically'));
+    const services = screen.getByRole('group', { name: 'Your mail service' });
+    expect(within(services).getByRole('button', { pressed: true })).toHaveTextContent('Outlook');
+    expect(screen.getByRole('link', { name: /Open Outlook’s rules/ })).toHaveAttribute('href', 'https://outlook.live.com/mail/0/options/mail/rules');
+    expect(screen.queryByRole('button', { name: 'Copy filter' })).not.toBeInTheDocument();
+    const words = screen.getByRole('group', { name: 'Words to look for in the subject' });
+    // Each language's first word comes before any second one.
+    expect(within(words).getAllByRole('button').map((button) => button.textContent).slice(0, 4)).toEqual(['shipped', 'colis', 'shipment', 'livraison']);
+    expect(screen.getByText('Tap a word to copy it.')).toBeInTheDocument();
+    await user.click(within(words).getByRole('button', { name: 'colis' }));
+    expect(copy).toHaveBeenCalledWith('colis');
+    expect(screen.getByRole('status')).toHaveTextContent('Copied');
+
+    await user.click(within(services).getByRole('button', { name: 'iCloud' }));
+    expect(screen.getByRole('link', { name: /Open iCloud Mail/ })).toHaveAttribute('href', 'https://www.icloud.com/mail');
+    expect(screen.getByText(/iCloud takes one word a rule/)).toBeInTheDocument();
+
+    // Yahoo forwards no chosen email: it says so and asks for nothing else.
+    await user.click(within(services).getByRole('button', { name: 'Yahoo' }));
+    expect(screen.getByText(/Yahoo Mail can’t forward chosen emails by itself/)).toBeInTheDocument();
+    expect(screen.queryByRole('group', { name: 'Languages your shops and carriers write in' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+
+    await user.click(within(services).getByRole('button', { name: 'Other' }));
+    expect(screen.getByText(/like GMX or Proton, doesn’t work yet/)).toBeInTheDocument();
+    expect(within(screen.getByRole('group', { name: 'Words to look for in the subject' })).getAllByRole('button').length).toBeGreaterThan(5);
+  });
+
   it('shows Gmail\'s confirmation and what the last emails did, renews only once confirmed, and turns off', async () => {
     const onChange = vi.fn();
     const now = Date.now();
@@ -89,11 +138,12 @@ describe('adding parcels by email in Settings', () => {
     vi.mocked(openAddByEmail).mockResolvedValue(offer({ ...inbox, address: 'add+qrstuvwxyz234567@in.example.com' }));
     vi.mocked(closeAddByEmail).mockResolvedValue();
     const user = userEvent.setup();
-    render(<AddByEmailPage apiAuth={apiAuth} offer={offer(shown)} onChange={onChange} />);
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@outlook.com" offer={offer(shown)} onChange={onChange} />);
     expect(screen.getByText('Enter this code in Gmail’s forwarding settings: 123456789')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Gmail’s confirmation link/ })).toHaveAttribute('href', shown.confirmation!.link);
-    // The steps open by themselves while Gmail's confirmation waits.
+    // The steps open by themselves while Gmail's confirmation waits, on Gmail whatever the account's address.
     expect(screen.getByText('Forward automatically').closest('details')).toHaveAttribute('open');
+    expect(within(screen.getByRole('group', { name: 'Your mail service' })).getByRole('button', { pressed: true })).toHaveTextContent('Gmail');
     const recent = within(screen.getByRole('region', { name: 'Recent emails' }));
     expect(recent.getAllByRole('listitem').map((item) => item.querySelector('.add-by-email__what')?.textContent)).toEqual([
       'Example Shop2 parcels added', 'Other ShopNo tracking number in it', 'Not read: today’s limit is reached', 'Old Shop 0Already in your deliveries', 'Old Shop 1Already in your deliveries',

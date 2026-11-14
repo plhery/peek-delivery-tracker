@@ -164,7 +164,7 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   // A streak counts when two parcels are on one, or one while no other parcel answered
   // (record_tracking_health); the incident does not say which.
   const title = recovered ? `${scope} recovered: ${subject}`
-    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${incident.consecutive_failures ? '; 3 checks in a row failed for two parcels, or for one while no other answered' : ''}${incident.rescued === true ? '; every refresh answered through another step' : ''})`;
+    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${incident.consecutive_failures ? '; 3 checks in a row failed for two parcels, or for one while no other answered' : ''})`;
   let nextSteps = 'Inspect the carrier scraper dashboard and the latest error type. Check the provider response and adapter parsing; retain the working fallback and scheduled backoff.';
   if (evidence?.http_status === 429 || evidence?.category === 'rate_limited') nextSteps = 'Honor Retry-After and inspect provider cooldowns. Reduce request frequency; do not increase retries or browser parallelism.';
   else if (['input_required','not_found'].includes(String(evidence?.category))) nextSteps = 'Check whether the shipment has been announced and whether its required postcode or tracking credentials were supplied. Do not retry invalid inputs immediately.';

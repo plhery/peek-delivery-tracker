@@ -431,6 +431,13 @@ class Localizer(
         return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month" + if (withYear) " ${fields.yearOfEra}" else ""
     }
 
+    /** A tracking step's time as the list widget writes it: the time alone on `now`'s day, else after the short weekday ("Thu 21:40"). */
+    fun stepTime(date: Instant, now: Instant = AppClock.now()): String {
+        if (localDay(date) == localDay(now)) return clockTime(date)
+        val weekday = FormatData.language(language).weekdays[fields(date).weekday - 1].replace(".", "")
+        return "$weekday ${clockTime(date)}"
+    }
+
     /**
      * A date and its time as `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes them in the app language,
      * in the phone's zone: "Oct 30, 2026 at 3:05 PM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", in the

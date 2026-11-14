@@ -11,6 +11,8 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.File
 import java.nio.file.Files
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.Locale
 import java.util.UUID
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -442,6 +444,104 @@ class DeliveryWidgetTests {
         val order = ParcelStore.widgetOrder(parcels, localizer, now)
         assertTrue(order.isNotEmpty())
         assertEquals(ParcelStore.widgetDeliveries(parcels, localizer, now), order.take(DeliveryWidgetSelection.limit))
+    }
+
+    /**
+     * The list's design by how many parcels it shows (for-iphone.md, the same on the iPhone): up to one card a small
+     * widget, two a medium one, three a large one; passes up to twice as many; rows under the sections beyond.
+     */
+    @Test
+    fun theListPicksItsDesignByHowManyParcelsItShows() {
+        fun designs(size: DeliveryWidgetList.Size) = (1..8).map { count ->
+            DeliveryWidgetList.make(now, true, "en", listed(count)).design(size).name.first()
+        }.joinToString("")
+        assertEquals("CPSSSSSS", designs(DeliveryWidgetList.Size.Small))
+        assertEquals("CCPPSSSS", designs(DeliveryWidgetList.Size.Medium))
+        assertEquals("CCCPPPSS", designs(DeliveryWidgetList.Size.Large))
+        // A parcel delivered within the day counts; a day after it arrived, it no longer does.
+        val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
+        val withArrived = listed(1, delivered = listOf(arrived))
+        assertEquals(DeliveryWidgetList.Design.Passes, DeliveryWidgetList.make(now, true, "en", withArrived).design(DeliveryWidgetList.Size.Small))
+        val later = now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())
+        assertEquals(DeliveryWidgetList.Design.Cards, DeliveryWidgetList.make(later, true, "en", withArrived).design(DeliveryWidgetList.Size.Small))
+    }
+
+    /**
+     * Its sections are the app list's, in its order, each with its Next up first; its cards put the Next up first. From
+     * an app that published no sections, the parcels stay together in the widgets' order.
+     */
+    @Test
+    fun theListsSectionsAreTheAppListsWithItsNextUpFirst() {
+        fun parcel(label: String, section: ParcelSectionKind?, nextUp: Boolean = false) =
+            widgetParcel(label = label, outForDelivery = false).copy(section = section?.rawValue, nextUp = nextUp)
+        val parcels = listOf(
+            parcel("Tomorrow", ParcelSectionKind.Active),
+            parcel("Customs", ParcelSectionKind.Attention),
+            parcel("Today", ParcelSectionKind.Today),
+            parcel("Pickup", ParcelSectionKind.Attention, nextUp = true),
+            parcel("Arrived", ParcelSectionKind.Delivered),
+        )
+        val list = DeliveryWidgetList(now, true, "en", parcels)
+        assertEquals(
+            listOf(
+                ParcelSectionKind.Attention to listOf("Pickup", "Customs"),
+                ParcelSectionKind.Today to listOf("Today"),
+                ParcelSectionKind.Active to listOf("Tomorrow"),
+                ParcelSectionKind.Delivered to listOf("Arrived"),
+            ),
+            list.sections.map { section -> section.kind to section.parcels.map { it.label } },
+        )
+        assertEquals(listOf("Pickup", "Tomorrow", "Customs", "Today", "Arrived"), list.cardOrder.map { it.label })
+
+        val unsorted = list.copy(parcels = parcels + parcel("Older app", null))
+        assertEquals(listOf(DeliveryWidgetList.Section(null, unsorted.parcels)), unsorted.sections)
+        assertEquals(emptyList<DeliveryWidgetList.Section>(), list.copy(parcels = emptyList()).sections)
+    }
+
+    /**
+     * What the store publishes for the list besides: each parcel's section and carrier as the app's list has them, its
+     * one Next up, and the last steps, latest first, of the first 8.
+     */
+    @Test
+    fun theStorePublishesEachParcelsSectionNextUpAndLastSteps() {
+        val localizer = Localizer(AppLanguage.En)
+        val parcels = DemoRepository(MemoryDefaults(), language = { AppLanguage.En }).list()
+        val order = ParcelStore.widgetOrder(parcels, localizer, now)
+        val byId = parcels.associateBy { it.id }
+        val sections = ParcelOrganizer.sections(parcels, now).flatMap { section -> section.parcels.map { it.id to section.kind.rawValue } }.toMap()
+        assertTrue(order.size > DeliveryWidgetSelection.limit)
+        for ((index, item) in order.withIndex()) {
+            val parcel = requireNotNull(byId[item.id])
+            assertEquals(item.label, sections[item.id], item.section)
+            assertEquals(item.label, parcel.displayedCarrier.rawValue, item.carrierId)
+            val steps = item.steps
+            if (index >= DeliveryWidgetSelection.limit) {
+                assertNull(item.label, steps)
+                continue
+            }
+            if (parcel.trackingEvents.isEmpty()) {
+                assertNull(item.label, steps)
+                continue
+            }
+            requireNotNull(steps)
+            assertEquals(item.label, minOf(parcel.trackingEvents.size, DeliveryWidgetSelection.steps), steps.size)
+            assertEquals(item.label, steps.sortedByDescending { it.at }, steps)
+            assertTrue(item.label, steps.all { it.text.isNotEmpty() })
+        }
+        assertEquals(listOf(ParcelOrganizer.nextDelivery(parcels, now)?.id), order.filter { it.nextUp == true }.map { it.id })
+    }
+
+    /** A step's time in the list: the time alone on the day, else after the short weekday, in the app's language. */
+    @Test
+    fun aStepsTimeNamesItsWeekdayFromAnotherDay() {
+        val zone = ZoneId.systemDefault()
+        val today = LocalDateTime.of(2026, 11, 14, 12, 0).atZone(zone).toInstant()
+        val earlier = LocalDateTime.of(2026, 11, 14, 8, 5).atZone(zone).toInstant()
+        val thursday = LocalDateTime.of(2026, 11, 12, 21, 40).atZone(zone).toInstant()
+        assertEquals("08:05", Localizer(AppLanguage.En).stepTime(earlier, today))
+        assertEquals("Thu 21:40", Localizer(AppLanguage.En).stepTime(thursday, today))
+        assertEquals("jeu 21:40", Localizer(AppLanguage.Fr).stepTime(thursday, today))
+        assertEquals("Do 21:40", Localizer(AppLanguage.De).stepTime(thursday, today))
     }
 
     /**

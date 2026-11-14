@@ -83,13 +83,49 @@ data class DeliveryWidgetList(
 
     /**
      * `Size`: the iPhone's three list widgets, and the rows each has at the default text size: three, two columns of
-     * three, and fifteen, or as many as the large widget's height holds. Larger text keeps fewer.
+     * three, and fifteen, or as many as the large widget's height holds. Larger text keeps fewer. Up to `cards`
+     * parcels it shows as cards ([Design]): one, two side by side, three one above another.
      */
-    enum class Size(val rows: Int) {
-        Small(3),
-        Medium(6),
-        Large(DeliveryWidgetSelection.listLimit),
+    enum class Size(val rows: Int, val cards: Int) {
+        Small(3, 1),
+        Medium(6, 2),
+        Large(DeliveryWidgetSelection.listLimit, 3),
     }
+
+    /**
+     * How the list shows its parcels, by how many there are for its size: up to [Size.cards] of them as cards, up to
+     * twice as many as passes, more as rows under the app list's sections. Each shows every parcel whole up to there:
+     * a large widget holds three cards and six passes, one above another.
+     */
+    enum class Design { Cards, Passes, Sections }
+
+    fun design(size: Size): Design = when {
+        parcels.size <= size.cards -> Design.Cards
+        parcels.size <= size.cards * 2 -> Design.Passes
+        else -> Design.Sections
+    }
+
+    /** The parcels as its cards show them: the app list's Next up first, then the widget's order. */
+    val cardOrder: List<DeliveryWidgetParcel>
+        get() = parcels.sortedBy { if (it.nextUp == true) 0 else 1 }
+
+    /** A section of the app's list and the parcels under it; none where the app didn't publish the sections. */
+    data class Section(val kind: ParcelSectionKind?, val parcels: List<DeliveryWidgetParcel>)
+
+    /**
+     * The parcels under the app list's sections, in its order (Needs attention, Arriving today, On the way, Past
+     * deliveries), each with its Next up parcel first, then the widget's order; under none, in the widget's order,
+     * where one has no section, as from an app that didn't publish them.
+     */
+    val sections: List<Section>
+        get() {
+            val kinds = parcels.map { parcel -> ParcelSectionKind.entries.firstOrNull { it.rawValue == parcel.section } }
+            if (kinds.any { it == null }) return if (parcels.isEmpty()) emptyList() else listOf(Section(null, parcels))
+            return ParcelSectionKind.entries.mapNotNull { kind ->
+                val under = parcels.filterIndexed { index, _ -> kinds[index] == kind }
+                if (under.isEmpty()) null else Section(kind, under.sortedBy { if (it.nextUp == true) 0 else 1 })
+            }
+        }
 
     /** `page(of:rows:)`: the parcels `rows` rows show, and how many there are after them. */
     fun page(rows: Int): Shown {

@@ -17,6 +17,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetListSample
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPictures
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
@@ -130,10 +131,14 @@ suspend fun publishDemo(
 suspend fun widgetViews(context: Context, size: DpSize, entry: DeliveryWidgetEntry<WidgetCardArt>): RemoteViews =
     GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, size) }.remoteViews
 
-/** The list widget's RemoteViews for `list` at `size`, as Glance writes them for a launcher. */
+/** The list widget's RemoteViews for `list` at `size`, its cards' pictures read by `art`, as Glance writes them for a launcher. */
 @OptIn(ExperimentalGlanceRemoteViewsApi::class)
-suspend fun listViews(context: Context, size: DpSize, list: DeliveryWidgetList): RemoteViews =
-    GlanceRemoteViews().compose(context, size) { ParcelsWidgetContent(list, size) }.remoteViews
+suspend fun listViews(
+    context: Context,
+    size: DpSize,
+    list: DeliveryWidgetList,
+    art: (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt? = { _, _ -> null },
+): RemoteViews = GlanceRemoteViews().compose(context, size) { ParcelsWidgetContent(list, size, art) }.remoteViews
 
 /** `views` as a launcher shows them: applied in the host's window, `size` big, as a home screen's cells hold a widget. */
 @Composable

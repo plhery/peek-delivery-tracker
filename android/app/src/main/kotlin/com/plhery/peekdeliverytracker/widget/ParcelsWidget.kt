@@ -17,10 +17,11 @@ import androidx.glance.appwidget.provideContent
 import com.plhery.peekdeliverytracker.core.AppClock
 
 /**
- * `ParcelsWidget`: the parcels on their way as a list on the home screen, next to [NextDeliveryWidget], in its order and
- * from what the app published for it (DeliveryWidgetSharedStore). One widget whose rows follow the size the launcher
- * gives it ([SizeMode.Exact]): two cells by two show three parcels, four by two six, four by four up to fifteen
- * ([ListLayout]). It is drawn again whenever the other one is ([DeliveryWidgetUpdates]).
+ * `ParcelsWidget`: the parcels on their way on the home screen, next to [NextDeliveryWidget], in its order and from what
+ * the app published for it (DeliveryWidgetSharedStore). One widget whose design follows how many parcels there are for
+ * the size the launcher gives it ([SizeMode.Exact], [DeliveryWidgetList.design]): cards, passes, or rows under the app
+ * list's sections, of which two cells by two show three, four by two six, four by four up to fifteen ([ListLayout]).
+ * It is drawn again whenever the other one is ([DeliveryWidgetUpdates]).
  */
 class ParcelsWidget : GlanceAppWidget() {
     override val sizeMode = SizeMode.Exact
@@ -53,7 +54,7 @@ class ParcelsWidget : GlanceAppWidget() {
 internal fun ParcelsWidgetBody(source: DeliveryWidgetSource) {
     val revision by DeliveryWidgetUpdates.revision.collectAsState()
     val list = remember(revision) { source.list(AppClock.now()) }
-    ParcelsWidgetContent(list, LocalSize.current)
+    ParcelsWidgetContent(list, LocalSize.current, source::read)
 }
 
 /** The list's receiver: the launcher's updates, and its gallery pictures tried again once the system takes them. */

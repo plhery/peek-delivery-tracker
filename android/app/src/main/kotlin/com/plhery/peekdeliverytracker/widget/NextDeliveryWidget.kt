@@ -223,7 +223,7 @@ class DeliveryWidgetSource(
         current(medium, at).takeIf { it.art.isNotEmpty() } ?: placeholder(medium, at)
 
     /** `DeliveryWidgetCardArt`: the mark, and the route as `shape` shows it; null while the mark isn't there. */
-    private fun read(card: DeliveryWidgetCard, shape: DeliveryWidgetPicture): WidgetCardArt? {
+    internal fun read(card: DeliveryWidgetCard, shape: DeliveryWidgetPicture): WidgetCardArt? {
         fun image(picture: DeliveryWidgetPicture, dark: Boolean): Bitmap? = picture.file(card, dark, folder).let { file ->
             WidgetPictures.get(file.path) { if (file.exists()) BitmapFactory.decodeFile(file.path) else null }
         }

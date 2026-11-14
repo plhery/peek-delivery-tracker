@@ -127,15 +127,15 @@ private object NextMark {
 /**
  * `DeliveryWidgetView`: the cards once the app has drawn every one the widget shows, else words, at the widget's
  * `size`: the iPhone's systemMedium family where it is wide for its height ([NextDeliveryWidget.isMedium]). A tap opens
- * the parcel shown, or the app where none is.
+ * the parcel shown, or the app where none is; the page between two cards opens `page` where one is given, else the app.
  */
 @Composable
-fun DeliveryWidgetContent(entry: DeliveryWidgetEntry<WidgetCardArt>, size: DpSize) {
+fun DeliveryWidgetContent(entry: DeliveryWidgetEntry<WidgetCardArt>, size: DpSize, page: Intent? = null) {
     val context = LocalContext.current
     val copy = remember(entry.languageCode) { ExtensionLocalizer(entry.languageCode) }
     val type = WidgetText(context)
     val cards = entry.cards
-    if (cards.isEmpty()) Words(entry, size, type, copy) else Cards(entry, cards, size, type, copy)
+    if (cards.isEmpty()) Words(entry, size, type, copy) else Cards(entry, cards, size, type, copy, page)
 }
 
 @Composable
@@ -145,6 +145,7 @@ private fun Cards(
     size: DpSize,
     type: WidgetText,
     copy: ExtensionLocalizer,
+    page: Intent?,
 ) {
     val context = LocalContext.current
     val only = cards.singleOrNull()
@@ -162,7 +163,7 @@ private fun Cards(
         // The page between the cards opens the app, as WidgetKit's does, but isn't an item of its own for TalkBack, as
         // the iPhone's page isn't one for VoiceOver: its cards are.
         Box(root().background(WidgetCardColors.page)) {
-            PageTap()
+            PageTap(page)
             Row(GlanceModifier.fillMaxSize().padding(MARGIN)) {
                 cards.forEachIndexed { index, (parcel, card, art) ->
                     if (index > 0) Spacer(GlanceModifier.width(CARD_SPACING))
@@ -190,7 +191,7 @@ private fun Cards(
  * A card's words as they fit `room`, the card inside its padding: the label on two lines where the card is tall enough
  * for them, else one, shrunk to 0.82 of its style to fit them, and the status line shrunk to 0.8 to fit its one.
  */
-private class CardWords(
+internal class CardWords(
     parcel: DeliveryWidgetParcel,
     card: DeliveryWidgetCard,
     val shape: DeliveryWidgetPicture,
@@ -213,7 +214,7 @@ private class CardWords(
 }
 
 /** A line of text at the size it fits its room, and how tall it stands. */
-private class FittedLine(val text: String, val points: Float, val lines: Int, val height: Dp) {
+internal class FittedLine(val text: String, val points: Float, val lines: Int, val height: Dp) {
     companion object {
         fun of(text: String, style: IosTextStyle, weight: FontWeight, width: Dp, lines: Int, minimumScale: Float, type: WidgetText): FittedLine {
             val points = type.fit(text, type.points(style), weight, width, lines, minimumScale)
@@ -228,7 +229,7 @@ private class FittedLine(val text: String, val points: Float, val lines: Int, va
  * can be, its sides fade into the card rather than end in edges.
  */
 @Composable
-private fun CardBackground(art: WidgetCardArt, shape: DeliveryWidgetPicture, card: DpSize) {
+internal fun CardBackground(art: WidgetCardArt, shape: DeliveryWidgetPicture, card: DpSize) {
     val drawn = art.route ?: return
     val frame = DeliveryWidgetPictures.frame(shape)
     val scale = minOf(1.0, card.width.value / frame.size.width, card.height.value / frame.size.height)
@@ -241,7 +242,7 @@ private fun CardBackground(art: WidgetCardArt, shape: DeliveryWidgetPicture, car
 }
 
 /** A copy of `picture`, drawn `points` wide, fading out over its outer [SIDE_FADE] on each side. */
-private fun fadedSides(picture: Bitmap, points: Double): Bitmap {
+internal fun fadedSides(picture: Bitmap, points: Double): Bitmap {
     val faded = picture.copy(Bitmap.Config.ARGB_8888, true)
     val width = faded.width.toFloat()
     val fade = (SIDE_FADE.value / points).toFloat().coerceAtMost(0.5f)
@@ -261,7 +262,7 @@ private fun fadedSides(picture: Bitmap, points: Double): Bitmap {
  * over the route, and the parcel's name and status at the bottom.
  */
 @Composable
-private fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, art: WidgetCardArt, words: CardWords) {
+internal fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, art: WidgetCardArt, words: CardWords) {
     val type = words.type
     Column(GlanceModifier.fillMaxSize()) {
         Row(GlanceModifier.fillMaxWidth()) {
@@ -572,7 +573,7 @@ private fun Symbol(name: String, points: Float, weight: ComposeFontWeight, tint:
  * app: an image view of `layout` (widget_route, widget_mark, widget_symbol) given both.
  */
 @Composable
-private fun DayNightPicture(picture: Pair<Bitmap, Bitmap>, @LayoutRes layout: Int, modifier: GlanceModifier, description: String?) {
+internal fun DayNightPicture(picture: Pair<Bitmap, Bitmap>, @LayoutRes layout: Int, modifier: GlanceModifier, description: String?) {
     val context = LocalContext.current
     val views = RemoteViews(context.packageName, layout).apply {
         setIcon(R.id.widget_picture, "setImageIcon", Icon.createWithBitmap(picture.first), Icon.createWithBitmap(picture.second))
@@ -615,7 +616,7 @@ internal fun ExtensionLocalizer.onAndroid(key: String): String = text("$key.andr
 private fun words(type: WidgetText, points: Float, weight: FontWeight, opacity: Float = 1f) =
     TextStyle(color = ColorProvider(WidgetPalette.ink.copy(alpha = opacity)), fontSize = type.sp(points), fontWeight = weight)
 
-private fun markHeight(shape: DeliveryWidgetPicture): Dp = if (shape == DeliveryWidgetPicture.Half) 13.dp else 15.dp
+internal fun markHeight(shape: DeliveryWidgetPicture): Dp = if (shape == DeliveryWidgetPicture.Half) 13.dp else 15.dp
 
 private fun DpSize.inside(padding: Dp) = DpSize(width - padding * 2, height - padding * 2)
 

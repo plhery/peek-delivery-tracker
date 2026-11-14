@@ -1745,10 +1745,30 @@ class ParcelStore(
                     widgetParcel(parcel, localizer, now, midnights) { localizer.parcelCompletionDate(parcel, it) }.copy(deliveredAt = arrived)
                 }
             // The iPhone's nextDeliveries estimates with Date() rather than this `now`; passing it on can only make the two agree.
-            return DeliveryWidgetSelection.ordered(
+            val ordered = DeliveryWidgetSelection.ordered(
                 onTheWay = nextDeliveries(parcels, localizer, now, midnights), delivered = delivered, now = now,
             )
+            // What the list widget shows besides: where the app's list puts each parcel, which is its Next up, the
+            // carrier shown, and the last steps of the first parcels. Whichever ends up alone in the list is among
+            // them: one on its way comes first, and with none, the one delivered last stays longest and leads.
+            val sections = ParcelOrganizer.sections(parcels, now).flatMap { section -> section.parcels.map { it.id to section.kind.rawValue } }.toMap()
+            val next = ParcelOrganizer.nextDelivery(parcels, now)?.id
+            val byId = parcels.associateBy { it.id }
+            return ordered.mapIndexed { index, item ->
+                val parcel = byId[item.id] ?: return@mapIndexed item
+                item.copy(
+                    section = sections[item.id], nextUp = item.id == next, carrierId = parcel.displayedCarrier.rawValue,
+                    steps = if (index < DeliveryWidgetSelection.limit) widgetSteps(parcel).ifEmpty { null } else null,
+                )
+            }
         }
+
+        /** The parcel's last steps, latest first: when, the carrier's words, and the place, else its name on the map. */
+        private fun widgetSteps(parcel: Parcel): List<DeliveryWidgetStep> = parcel.trackingEvents
+            .mapNotNull { event -> DateParser.date(event.occurredAt)?.let { event to it } }
+            .sortedByDescending { it.second }
+            .take(DeliveryWidgetSelection.steps)
+            .map { (event, at) -> DeliveryWidgetStep(at, event.description, event.location ?: event.place?.name) }
 
         /** `detail` words when the parcel is expected or arrived, as of a moment. */
         private fun widgetParcel(

@@ -41,6 +41,14 @@ data class DeliveryWidgetParcel(
      * becomes "today" while the app stays closed. None from an app that didn't write them.
      */
     val later: List<DeliveryWidgetWording>? = null,
+    /** The section of the app's list the parcel is in (`ParcelSectionKind`), which the list widget's sections follow. */
+    val section: String? = null,
+    /** Whether it is the app list's Next up, which leads the list widget's cards and its section there. */
+    val nextUp: Boolean? = null,
+    /** The carrier shown, whose truck marks the parcel's row in the list widget's sections. */
+    val carrierId: String? = null,
+    /** Its last tracking steps, latest first, which the list widget shows of a parcel alone in it. */
+    val steps: List<DeliveryWidgetStep>? = null,
 ) {
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
@@ -57,6 +65,14 @@ data class DeliveryWidgetParcel(
 data class DeliveryWidgetWording(
     @Serializable(with = ReferenceDateSerializer::class) val from: Instant,
     val detail: String,
+)
+
+/** A step of a parcel's tracking: when, the carrier's words, and where. */
+@Serializable
+data class DeliveryWidgetStep(
+    @Serializable(with = ReferenceDateSerializer::class) val at: Instant,
+    val text: String,
+    val place: String? = null,
 )
 
 /**
@@ -179,6 +195,9 @@ object DeliveryWidgetSelection {
 
     /** How many rows the list widget shows at most, four cells by four. */
     const val listLimit = 15
+
+    /** How many of a parcel's last steps the list widget shows of it alone, which the first [limit] parcels carry. */
+    const val steps = 4
 
     /** How long a delivered parcel stays in the widget, in seconds. */
     const val deliveredFor: Double = 24 * 60 * 60.0

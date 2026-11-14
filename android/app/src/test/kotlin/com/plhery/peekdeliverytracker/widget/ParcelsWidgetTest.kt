@@ -20,8 +20,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
@@ -36,6 +38,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import java.time.Duration
 import java.util.Locale
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -49,9 +52,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The "Parcels" widget (ParcelsWidget) as Glance composes it, without a launcher: the rows each size keeps, in the
- * widgets' order, the line counting the rest, the empty and switched-off states, where taps go, what TalkBack reads,
- * and what it reads from the store the app publishes to.
+ * The "Parcels" widget (ParcelsWidget) as Glance composes it, without a launcher: the design its number of parcels
+ * takes at each size, the rows under the app list's sections and the line counting the rest, the empty and
+ * switched-off states, where taps go, what TalkBack reads, and what it reads from the store the app publishes to.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -72,12 +75,20 @@ class ParcelsWidgetTest {
 
     private val opensList = hasStartActivityClickAction(Intent(Intent.ACTION_VIEW, Uri.parse(DeliveryWidgetList.link), app, MainActivity::class.java))
 
-    private fun show(list: DeliveryWidgetList, size: DpSize, test: GlanceAppWidgetUnitTest.() -> Unit) = runGlanceAppWidgetUnitTest {
+    private fun show(
+        list: DeliveryWidgetList,
+        size: DpSize,
+        art: (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt? = { _, _ -> null },
+        test: GlanceAppWidgetUnitTest.() -> Unit,
+    ) = runGlanceAppWidgetUnitTest {
         setContext(app)
         setAppWidgetSize(size)
-        provideComposable { ParcelsWidgetContent(list, size) }
+        provideComposable { ParcelsWidgetContent(list, size, art) }
         test()
     }
+
+    /** The rows under the sections at `size`, in the sections' order, and the count of the rest. */
+    private fun sections(list: DeliveryWidgetList, size: DpSize) = SectionsLayout(list, size, WidgetText(app))
 
     private fun shown(list: DeliveryWidgetList, size: DpSize) = ListLayout(list, size, WidgetText(app)).shown
 
@@ -89,11 +100,11 @@ class ParcelsWidgetTest {
         DeliveryWidgetList.make(CAPTURED, enabled, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
 
     /**
-     * Three rows two cells by two, six four by two, and all fifteen four by four, in the widgets' order; the line counting
-     * the rest where there are more.
+     * The rows each size has room for, which its sections keep: three two cells by two, six four by two, and all
+     * fifteen four by four, in the order they are given; the line counting the rest where there are more.
      */
     @Test
-    fun eachSizeShowsItsRowsInTheWidgetsOrder() {
+    fun eachSizeHasRoomForItsRows() {
         val small = shown(sample, LIST_SMALL)
         assertEquals(sample.parcels.take(3), small.rows)
         assertEquals(12, small.more)
@@ -116,24 +127,123 @@ class ParcelsWidgetTest {
         assertEquals(listOf(sample.parcels.take(3), sample.parcels.subList(3, 6)), layout(LIST_MEDIUM).columns)
         assertEquals(listOf(sample.parcels), layout(LIST_LARGE).columns)
 
+        // Two cells across leave the first row's line too little room for its stage: its day stays, opening the line.
+        assertEquals(sample.parcels[0].listDay?.openingLine(Locale.ENGLISH), narrowLine(sample.parcels[0], sample))
+    }
+
+    /**
+     * Fifteen parcels are rows under the app list's sections, in its order: in a small widget three rows without the
+     * headings, in a medium one the headings and rows down two columns, in a large one down one; a heading never ends a
+     * column; then the count of the rest, which opens the list.
+     */
+    @Test
+    fun manyParcelsAreRowsUnderTheAppListsSections() {
+        val order = sample.sections.flatMap { it.parcels }
+        assertEquals(listOf("Phone case", "Camera lens from Japan", "Kids' science kit", "Garden hose reel", "Ceramic pour-over set"), order.take(5).map { it.label })
+        val small = sections(sample, LIST_SMALL)
+        assertEquals(order.take(3), small.rows)
+        assertEquals(12, small.more)
+        assertTrue(small.columns.flatten().all { it is SectionEntry.Row })
         show(sample, LIST_SMALL) {
-            for (parcel in sample.parcels.take(3)) onNode(hasTextEqualTo(parcel.label)).assertExists()
-            onNode(hasTextEqualTo(sample.parcels[3].label)).assertDoesNotExist()
+            for (parcel in order.take(3)) onNode(hasTextEqualTo(parcel.listName)).assertExists()
+            for (parcel in order.take(3)) onNode(hasTextEqualTo(narrowLine(parcel, sample))).assertExists()
+            onNode(hasTextEqualTo(order[3].label)).assertDoesNotExist()
             onNode(hasTextEqualTo("+12 more") and opensList).assertExists()
-            // Two cells across leave the first row's line too little room for its stage: its day stays, opening the line.
-            onNode(hasTextEqualTo(narrowLine(sample.parcels[0], sample))).assertExists()
-            assertEquals(sample.parcels[0].listDay?.openingLine(Locale.ENGLISH), narrowLine(sample.parcels[0], sample))
+            onNode(hasTextEqualTo(english.text("app.needsAttention"))).assertDoesNotExist()
         }
+        for (size in listOf(LIST_MEDIUM, LIST_FOUR_BY_THREE, LIST_LARGE)) {
+            val laid = sections(sample, size)
+            assertEquals("$size", if (size == LIST_MEDIUM) 2 else 1, laid.columns.size)
+            assertEquals("$size", order.take(laid.rows.size), laid.rows)
+            assertEquals("$size", 15 - laid.rows.size, laid.more)
+            assertTrue("$size", laid.more > 0)
+            for (column in laid.columns) {
+                assertTrue("$size", column.first() is SectionEntry.Heading || column.first() is SectionEntry.Row)
+                assertTrue("$size", column.last() is SectionEntry.Row)
+            }
+            assertTrue("$size", laid.columns.first().first() is SectionEntry.Heading)
+        }
+        val medium = sections(sample, LIST_MEDIUM)
         show(sample, LIST_MEDIUM) {
-            onNode(hasTextEqualTo(sample.parcels[5].label)).assertExists()
-            onNode(hasTextEqualTo(sample.parcels[6].label)).assertDoesNotExist()
-            onNode(hasTextEqualTo("+9 more")).assertExists()
+            // The heading, besides the stage of the parcel held up, in the same words.
+            onAllNodes(hasTextEqualTo(english.text("app.needsAttention"))).assertCountEquals(2)
+            onNode(hasTextEqualTo("4")).assertExists()
+            for (parcel in medium.rows) onNode(hasTextEqualTo(parcel.listName)).assertExists()
+            onNode(hasTextEqualTo("+${medium.more} more") and opensList).assertExists()
             // As on the iPhone, no header above the rows.
             onNode(hasTextEqualTo(english.text("app.title").uppercase(Locale.ENGLISH))).assertDoesNotExist()
         }
+        val large = sections(sample, LIST_LARGE)
+        assertTrue(large.rows.size > medium.rows.size)
         show(sample, LIST_LARGE) {
-            onNode(hasTextEqualTo(sample.parcels.last().label)).assertExists()
-            onAllNodes(hasTextEqualTo("+1 more")).assertCountEquals(0)
+            for (kind in listOf("app.arrivingToday", "app.onTheWaySection")) onNode(hasTextEqualTo(english.text(kind))).assertExists()
+            onNode(hasTextEqualTo(large.rows.last().listName)).assertExists()
+            onNode(hasTextEqualTo("+${large.more} more")).assertExists()
+        }
+        // From an app that published no sections, the rows in the widgets' order, without headings.
+        val older = list(sample.parcels.map { it.copy(section = null) })
+        assertEquals(listOf(older.parcels.take(3), older.parcels.subList(3, 6)), sections(older, LIST_MEDIUM).columns.map { column -> column.map { (it as SectionEntry.Row).parcel } })
+    }
+
+    /**
+     * Its design by how many parcels it shows, from the demo's cards: one a small widget shows as Next delivery's card,
+     * two as passes, three as rows; a medium one two cards, four passes; a large one three cards, six passes. Until a
+     * parcel's pictures are drawn, its rows.
+     */
+    @Test
+    fun theDesignTakesTheNumberOfParcels() {
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val folder = files.newFolder("WidgetCards")
+        runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble(), drawn = DeliveryWidgetSelection.limit) }
+        val source = widgetSource(app, folder, store)
+        val demo = source.list(CAPTURED)
+        assertTrue(demo.parcels.size >= 7)
+        assertTrue(demo.parcels.all { it.section != null && it.carrierId != null })
+        fun some(count: Int) = demo.copy(parcels = demo.parcels.take(count))
+
+        // One: the card, Next delivery's, which opens the parcel; the rest of the widget opens the list.
+        val one = some(1).parcels.single()
+        show(some(1), LIST_SMALL, source::read) {
+            onNode(hasTextEqualTo(one.label)).assertExists()
+            onAllNodes(opens(one))[0].assertExists()
+        }
+        // Two in a small widget: passes, each opening its parcel and read as one.
+        show(some(2), LIST_SMALL, source::read) {
+            for (parcel in some(2).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+        }
+        // Three: rows, under no headings.
+        show(some(3), LIST_SMALL, source::read) {
+            for (parcel in sections(some(3), LIST_SMALL).rows) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+        }
+        // Two in a medium widget: the cards, the Next up first; four: passes in two columns; five: the sections.
+        show(some(2), LIST_MEDIUM, source::read) {
+            for (parcel in some(2).parcels) onNode(hasTextEqualTo(parcel.label)).assertExists()
+        }
+        show(some(4), LIST_MEDIUM, source::read) {
+            for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+        }
+        val five = sections(some(5), LIST_MEDIUM)
+        val headings = five.columns.flatten().filterIsInstance<SectionEntry.Heading>()
+        assertTrue(headings.isNotEmpty())
+        show(some(5), LIST_MEDIUM, source::read) {
+            for (heading in headings) onAllNodes(hasTextEqualTo(english.text(sectionTitleKey(heading.kind))))[0].assertExists()
+            for (parcel in five.rows) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+        }
+        // A large widget: one card over its last steps, then two and three cards, six passes, seven rows.
+        val steps = requireNotNull(one.steps)
+        assertTrue(steps.isNotEmpty())
+        show(some(1), LIST_LARGE, source::read) {
+            onNode(hasTextEqualTo(steps.first().text)).assertExists()
+        }
+        for (count in 2..3) show(some(count), LIST_LARGE, source::read) {
+            for (parcel in some(count).parcels) onAllNodes(opens(parcel))[0].assertExists()
+        }
+        show(some(6), LIST_LARGE, source::read) {
+            for (parcel in some(6).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+        }
+        // Without the pictures, the rows, whatever their number.
+        show(some(2), LIST_SMALL) {
+            for (parcel in some(2).parcels) onNode(opens(parcel) and hasAnyDescendant(hasTextEqualTo(parcel.listName))).assertExists()
         }
     }
 
@@ -212,7 +322,7 @@ class ParcelsWidgetTest {
     /** The unnamed parcel is named by its carrier; a long name keeps its one line, which ends in an ellipsis. */
     @Test
     fun rowsNameTheCarrierOfAnUnnamedParcelAndKeepLongNamesToALine() {
-        show(sample, LIST_LARGE) {
+        show(list(sample.parcels.filter { it.section == "active" }), LIST_LARGE) {
             onNode(hasTextEqualTo("Royal Mail")).assertExists()
             onNode(hasTextEqualTo(english.text("common.parcel"))).assertDoesNotExist()
             onNode(hasTextEqualTo("Handmade oak bookshelf with matching side table and drawers")).assertExists()
@@ -243,7 +353,7 @@ class ParcelsWidgetTest {
     /** A row opens its parcel, and TalkBack reads its name, stage and day as one item. */
     @Test
     fun eachRowOpensItsParcelAndReadsAsOne() = show(sample, LIST_MEDIUM) {
-        for (parcel in sample.parcels.take(6)) {
+        for (parcel in sections(sample, LIST_MEDIUM).rows) {
             onNode(opens(parcel) and hasAnyDescendant(hasTextEqualTo(parcel.listName))).assertExists()
             onNode(hasContentDescriptionEqualTo(rowDescription(parcel)) and opens(parcel)).assertExists()
         }
@@ -283,8 +393,10 @@ class ParcelsWidgetTest {
         val french = sampleList(AppLanguage.Fr)
         show(french, LIST_SMALL) {
             onNode(hasTextEqualTo("+12 autres")).assertExists()
-            val first = narrowLine(french.parcels[0], french)
-            onAllNodes(hasTextEqualTo(first)).assertCountEquals(french.parcels.take(3).count { narrowLine(it, french) == first })
+            val rows = sections(french, LIST_SMALL).rows
+            val first = narrowLine(rows[0], french)
+            onAllNodes(hasTextEqualTo(first)).assertCountEquals(rows.count { narrowLine(it, french) == first })
+            onNode(hasTextEqualTo(Localizer(AppLanguage.Fr).text("app.needsAttention"))).assertDoesNotExist()
         }
         assertNotEquals(sample.parcels[0].listLine, french.parcels[0].listLine)
     }

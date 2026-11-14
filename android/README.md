@@ -60,12 +60,22 @@ delivery "yesterday", and a passed estimate gives way to the status.
 
 - **Next delivery** (`NextDeliveryWidget.kt`) shows the first of them as a card, or two side by side. Like the
   iPhone's, which has no large size, it grows no taller than two rows of cells (`maxResizeHeight`).
-- **Parcels** (`ParcelsWidget.kt`) lists them as the iPhone's list widget does, then a line at its foot counting the
-  rest. Its size stands for one of the iPhone's three (`ListLayout`): under 250 dp wide the small one, a column of 3
-  rows, the name over the stage and day; wider, the medium one, two such columns of 3; from 280 dp tall the large one,
-  up to 15 rows, each on one line with the stage and day at its end where it is 250 dp wide. A small or medium widget
-  takes smaller type before it gives a row up, and larger text keeps fewer rows. Where a line doesn't fit, the day
-  stays. Each row opens its parcel; the rest of the widget opens the list (`peekdeliverytracker://parcels`).
+- **Parcels** (`ParcelsWidget.kt`) shows them as the iPhone's list widget does. Its size stands for one of the
+  iPhone's three (`listSize`): from 280 dp tall the large one, else from 250 dp wide the medium one, else the small
+  one. Its design follows how many parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the
+  small, medium or large size:
+  - up to `k`, cards, the app list's Next up first: Next delivery's card or two side by side; in a large widget one
+    wide card over the parcel's last four steps, two wide cards, or three of the app list's cards;
+  - up to `2k`, passes in each carrier's colours, in two columns in a medium widget;
+  - more, rows under the app list's sections, each marked by its carrier's truck, then a line counting the rest
+    (`ParcelsWidgetDesigns.kt`). A small widget leaves the headings out and keeps the sections' order. The rows keep
+    `ListLayout`'s sizes: a column of 3, the name over the stage and day; two such columns; up to 15 on one line each
+    where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up, and larger
+    text keeps fewer rows. Where a line doesn't fit, the day stays.
+
+  Cards and passes use the pictures the app draws for Next delivery's first 8 parcels; until those are drawn, the
+  widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list
+  (`peekdeliverytracker://parcels`).
 
 Their gallery pictures show invented parcels in the phone's language (`DeliveryWidgetSample`,
 `DeliveryWidgetListSample`), never the reader's.

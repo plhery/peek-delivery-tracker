@@ -41,8 +41,10 @@ import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Brand
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.listDay
@@ -62,24 +64,30 @@ import java.util.Locale
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
-// The "Parcels" widget's look, the iPhone's list widget (ParcelListWidget.swift): the parcels on their way as the app's
-// list shows them, one row each, on the app's page, then a line counting the rest at the widget's foot. Each row is the
-// stage's symbol in its colour, the parcel's name, and its stage and day, as the app published them
-// (DeliveryWidgetStage). The widget's size stands for one of the iPhone's three ([ListLayout]): small, a column of rows
-// of two lines, the name over the stage and day; medium, two such columns; large, rows of one line, the stage and day at
-// their end. Text is the existing widget's (WidgetText), and as there, the layout works out from the measured text how
-// many rows it keeps. Names end in an ellipsis where they are too long; a line too long for its room keeps the day.
+// The "Parcels" widget's look, the iPhone's list widget (ParcelListWidget.swift): the parcels on their way, in the
+// design their number takes at the widget's size ([DeliveryWidgetList.design]): cards or passes for a few
+// (ParcelsWidgetDesigns.kt), else rows under the app list's sections on the app's page, then a line counting the rest
+// at the widget's foot. Each row is the carrier's truck, the parcel's name, and its stage and day, as the app published
+// them (DeliveryWidgetStage). The widget's size stands for one of the iPhone's three ([listSize]): small, a column of
+// rows of two lines, the name over the stage and day; medium, two such columns; large, rows of one line, the stage and
+// day at their end. Text is the existing widget's (WidgetText), and as there, the layout works out from the measured
+// text how many rows it keeps. Names end in an ellipsis where they are too long; a line too long for its room keeps
+// the day.
 
 /**
  * The widget's colours, light and dark as the launcher's mode picks: the app's page, and on it the system's label
  * colours the iPhone's list widget writes in (`.primary`, `.secondary`).
  */
-private object ListColors {
-    fun of(color: AdaptiveColor): ColorProvider = ColorProvider(day = color.light.toColor(), night = color.dark.toColor())
+internal object ListColors {
+    fun of(color: AdaptiveColor, alpha: Float = 1f): ColorProvider =
+        ColorProvider(day = color.light.toColor().copy(alpha = alpha), night = color.dark.toColor().copy(alpha = alpha))
 
     val page = of(Brand.background)
     val primary = of(SystemColors.label)
     val secondary = of(SystemColors.secondaryLabel)
+
+    /** The stage of a parcel that needs the reader, as the app's list writes it. */
+    val warning = of(Brand.warning)
 }
 
 /** `ParcelListMetrics`: a row's name and the box of its stage's symbol, each smaller where [compact]. */
@@ -110,12 +118,7 @@ internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: Widg
     val locale: Locale = ExtensionLocalizer.locale(list.languageCode)
     val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN * 2)
 
-    /** From [TALL_HEIGHT] the large widget, else from [WIDE_WIDTH] the medium one, else the small. */
-    val size: DeliveryWidgetList.Size = when {
-        size.height >= TALL_HEIGHT -> DeliveryWidgetList.Size.Large
-        size.width >= WIDE_WIDTH -> DeliveryWidgetList.Size.Medium
-        else -> DeliveryWidgetList.Size.Small
-    }
+    val size: DeliveryWidgetList.Size = listSize(size)
 
     /** Whether rows take one line, the stage and day at their end, as a large widget's: where it is wide enough. */
     val lineRows = this.size == DeliveryWidgetList.Size.Large && size.width >= WIDE_WIDTH
@@ -172,62 +175,44 @@ internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: Widg
     }
 }
 
-/**
- * The list at the widget's `size`: its rows, each opening its parcel, and the count of the rest, which opens the app's
- * list ([DeliveryWidgetList.link]), as the page behind them does; or why there are none, in the existing widget's words.
- */
-@Composable
-fun ParcelsWidgetContent(list: DeliveryWidgetList, size: DpSize) {
-    val context = LocalContext.current
-    val copy = remember(list.languageCode) { Localizer(AppLanguage.fromRawValue(list.languageCode) ?: AppLanguage.En, variant = "android") }
-    val type = WidgetText(context)
-    Box(root().background(ListColors.page)) {
-        PageTap(listIntent(context))
-        Box(GlanceModifier.fillMaxSize().padding(MARGIN)) {
-            when {
-                !list.enabled -> ListState("rectangle.slash", copy.text("widget.disabledTitle"), copy.text("widget.disabledDescription"), size, type)
-                list.parcels.isEmpty() -> ListState("shippingbox", copy.text("app.noneOnWay"), copy.text("app.emptyDescription"), size, type)
-                else -> Rows(ListLayout(list, size, type), copy)
-            }
-        }
-    }
+/** The iPhone's list widget a size stands for: from [TALL_HEIGHT] the large one, else from [WIDE_WIDTH] the medium one, else the small. */
+internal fun listSize(size: DpSize): DeliveryWidgetList.Size = when {
+    size.height >= TALL_HEIGHT -> DeliveryWidgetList.Size.Large
+    size.width >= WIDE_WIDTH -> DeliveryWidgetList.Size.Medium
+    else -> DeliveryWidgetList.Size.Small
 }
 
 /**
- * The rows: in a medium widget's two columns, side by side, else down the widget in groups of five, as a layout of
- * Glance's shows ten children at most; then the line counting the rest at the widget's foot, level with the names.
+ * The list at the widget's `size`, in the design its number of parcels takes there ([DeliveryWidgetList.design]):
+ * cards, passes, or rows under the app list's sections, which it also shows until the cards' pictures `art` reads are
+ * drawn. Each parcel opens itself, and the rest of the widget the app's list ([DeliveryWidgetList.link]). Or why there
+ * are none, in the existing widget's words.
  */
 @Composable
-private fun Rows(layout: ListLayout, copy: Localizer) {
+fun ParcelsWidgetContent(
+    list: DeliveryWidgetList,
+    size: DpSize,
+    art: (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt? = { _, _ -> null },
+) {
     val context = LocalContext.current
-    val metrics = layout.metrics
-    Column(GlanceModifier.fillMaxSize()) {
-        if (layout.columns.size == 2) {
-            Row(GlanceModifier.fillMaxWidth()) {
-                layout.columns.forEachIndexed { index, column ->
-                    if (index > 0) Spacer(GlanceModifier.width(COLUMN_GAP))
-                    Column(GlanceModifier.defaultWeight()) {
-                        column.forEachIndexed { row, parcel -> ListRow(parcel, layout, top = if (row == 0) 0.dp else metrics.rowSpacing) }
-                    }
+    val copy = remember(list.languageCode) { Localizer(AppLanguage.fromRawValue(list.languageCode) ?: AppLanguage.En, variant = "android") }
+    val type = WidgetText(context)
+    val design = if (list.enabled && list.parcels.isNotEmpty()) list.design(listSize(size)) else DeliveryWidgetList.Design.Sections
+    val shown = if (design == DeliveryWidgetList.Design.Cards) list.cardOrder else list.parcels
+    val shape = if (design == DeliveryWidgetList.Design.Cards) cardShape(listSize(size), shown.size, size) else DeliveryWidgetPicture.Half
+    val drawn = if (design == DeliveryWidgetList.Design.Sections) emptyList() else shown.map { parcel -> parcel.card?.let { art(it, shape) } }
+    when {
+        drawn.isNotEmpty() && drawn.all { it != null } && design == DeliveryWidgetList.Design.Cards -> ListCards(list, shown, drawn.filterNotNull(), size, type)
+        drawn.isNotEmpty() && drawn.all { it != null } -> Passes(list, drawn.filterNotNull(), size, type, copy)
+        else -> Box(root().background(ListColors.page)) {
+            PageTap(listIntent(context))
+            Box(GlanceModifier.fillMaxSize().padding(MARGIN)) {
+                when {
+                    !list.enabled -> ListState("rectangle.slash", copy.text("widget.disabledTitle"), copy.text("widget.disabledDescription"), size, type)
+                    list.parcels.isEmpty() -> ListState("shippingbox", copy.text("app.noneOnWay"), copy.text("app.emptyDescription"), size, type)
+                    else -> Sections(list, size, type, copy)
                 }
             }
-        } else {
-            layout.columns.firstOrNull().orEmpty().chunked(5).forEachIndexed { group, rows ->
-                Column(GlanceModifier.fillMaxWidth()) {
-                    rows.forEachIndexed { index, parcel ->
-                        ListRow(parcel, layout, top = if (group == 0 && index == 0) 0.dp else metrics.rowSpacing)
-                    }
-                }
-            }
-        }
-        if (layout.shown.more > 0) {
-            Spacer(GlanceModifier.defaultWeight())
-            Text(
-                moreParcels(copy, layout.shown.more),
-                GlanceModifier.fillMaxWidth().padding(start = metrics.markWidth + metrics.markSpacing, top = metrics.rowSpacing * 2).clickable(openList(context)),
-                maxLines = 1,
-                style = TextStyle(color = ListColors.secondary, fontSize = layout.type.sp(layout.morePoints), fontWeight = FontWeight.Medium),
-            )
         }
     }
 }
@@ -238,7 +223,7 @@ internal fun moreParcels(copy: Localizer, count: Int): String = copy.text("widge
 /** `DeliveryWidgetList.link`: the deliveries, through the app's routing, in the app's window. */
 internal fun listIntent(context: Context): Intent = Intent(Intent.ACTION_VIEW, DeliveryWidgetList.link.toUri(), context, MainActivity::class.java)
 
-private fun openList(context: Context): Action = actionStartActivity(listIntent(context))
+internal fun openList(context: Context): Action = actionStartActivity(listIntent(context))
 
 /**
  * `ParcelListStatus`'s `ViewThatFits`: a row's line where it fits `width`, the stage and the day; else the day alone;
@@ -285,18 +270,24 @@ internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineR
  * stage and day at the row's end ([lineRowEnd]).
  */
 @Composable
-private fun ListRow(parcel: DeliveryWidgetParcel, layout: ListLayout, top: Dp) {
+internal fun ListRow(
+    parcel: DeliveryWidgetParcel,
+    layout: ListLayout,
+    top: Dp,
+    lineColor: ColorProvider = ListColors.secondary,
+    mark: @Composable () -> Unit = { StageSymbol(parcel, layout.metrics) },
+) {
     val context = LocalContext.current
     val name = parcel.listName
     val type = layout.type
     val metrics = layout.metrics
     val nameStyle = TextStyle(color = ListColors.primary, fontSize = type.sp(metrics.namePoints), fontWeight = FontWeight.Medium)
-    val lineStyle = TextStyle(color = ListColors.secondary, fontSize = type.sp(layout.statusPoints))
+    val lineStyle = TextStyle(color = lineColor, fontSize = type.sp(layout.statusPoints))
     Row(
         GlanceModifier.fillMaxWidth().height(layout.rowHeight + top).padding(top = top).semantics { contentDescription = rowDescription(parcel) }.clickable(openParcel(context, parcel)),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        StageSymbol(parcel, metrics)
+        mark()
         Spacer(GlanceModifier.width(metrics.markSpacing))
         if (layout.lineRows) {
             val end = lineRowEnd(parcel, layout)
@@ -317,7 +308,7 @@ private fun ListRow(parcel: DeliveryWidgetParcel, layout: ListLayout, top: Dp) {
  * light and dark; from an app that didn't publish the stage, the parcel's state in grey.
  */
 @Composable
-private fun StageSymbol(parcel: DeliveryWidgetParcel, metrics: ListMetrics) {
+internal fun StageSymbol(parcel: DeliveryWidgetParcel, metrics: ListMetrics) {
     val stage = parcel.stage
     val symbol = stage?.symbol?.takeIf { it in materialSymbols }
         ?: if (parcel.isOutForDelivery) "bicycle" else if (parcel.deliveredAt != null) "checkmark.circle.fill" else "shippingbox.fill"
@@ -330,7 +321,7 @@ private fun StageSymbol(parcel: DeliveryWidgetParcel, metrics: ListMetrics) {
 }
 
 @Composable
-private fun TintedSymbol(name: String, points: Float, weight: ComposeFontWeight, tint: ColorProvider) {
+internal fun TintedSymbol(name: String, points: Float, weight: ComposeFontWeight, tint: ColorProvider) {
     val context = LocalContext.current
     val art = requireNotNull(materialSymbols[name])
     val box = art.box(points)

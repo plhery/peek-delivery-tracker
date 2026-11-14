@@ -332,6 +332,7 @@ private fun headerHeight(type: WidgetText): Dp = maxOf(HEADER_MARK, type.lineHei
 /** `smallContent`'s lines as they fit `room`, the widget inside its margins. */
 private class SmallWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val parcel: DeliveryWidgetParcel, room: DpSize, type: WidgetText, val copy: ExtensionLocalizer) {
     val caption = type.points(IosTextStyle.Caption)
+    val detail = lastLine(parcel, copy)
     val lines: WordsLines
     val badge: BadgeLine
     val label: FittedLine
@@ -341,13 +342,13 @@ private class SmallWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val parcel: 
 
     init {
         val carrierHeight = type.lineHeight(caption, FontWeight.Medium)
-        val detailHeight = type.lineHeight(caption, FontWeight.Bold)
+        val detailHeight = if (detail != null) type.lineHeight(caption, FontWeight.Bold) else 0.dp
         fun badge(lines: WordsLines) = BadgeLine(parcel, room.width, leaves = if (!lines.header && entry.next != null) NextMark.room else 0.dp, type, copy)
         fun label(lines: WordsLines) = FittedLine.of(parcel.label, IosTextStyle.Headline, FontWeight.Bold, room.width, lines.labelLines, 0.82f, type)
         val choices = listOf(WordsLines(true, 2, true), WordsLines(true, 1, true), WordsLines(false, 1, true), WordsLines(false, 1, false))
         lines = choices.firstOrNull { lines ->
             (if (lines.header) headerHeight(type) + 6.dp else 0.dp) + badge(lines).height + 3.dp + label(lines).height + 6.dp +
-                (if (lines.carrier) carrierHeight + 1.dp else 0.dp) + detailHeight <= room.height
+                (if (lines.carrier) carrierHeight + (if (detail != null) 1.dp else 0.dp) else 0.dp) + detailHeight <= room.height
         } ?: choices.last()
         badge = badge(lines)
         label = label(lines)
@@ -378,9 +379,9 @@ private fun SmallContent(layout: SmallWords, type: WidgetText) {
         Column {
             if (layout.lines.carrier) {
                 Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption, FontWeight.Medium, 0.68f))
-                Spacer(GlanceModifier.height(1.dp))
+                if (layout.detail != null) Spacer(GlanceModifier.height(1.dp))
             }
-            Text(parcel.detail.openingLine(ExtensionLocalizer.locale(layout.copy.languageCode)), maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
+            layout.detail?.let { Text(it, maxLines = 1, style = words(type, layout.caption, FontWeight.Bold)) }
         }
     }
 }
@@ -389,6 +390,7 @@ private fun SmallContent(layout: SmallWords, type: WidgetText) {
 private class MediumWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val shown: List<DeliveryWidgetParcel>, room: DpSize, type: WidgetText, val copy: ExtensionLocalizer) {
     val caption = type.points(IosTextStyle.Caption)
     val caption2 = type.points(IosTextStyle.Caption2)
+    val details = shown.map { lastLine(it, copy) }
     val lines: WordsLines
     val badges: List<BadgeLine>
     val labels: List<FittedLine>
@@ -401,7 +403,7 @@ private class MediumWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val shown: 
         // Two columns whatever is shown, as the iPhone's single parcel takes half the width.
         val column = (room.width - COLUMN_SPACING) / 2 - COLUMN_PADDING * 2
         val carrierHeight = type.lineHeight(caption2, FontWeight.Medium)
-        val detailHeight = type.lineHeight(caption, FontWeight.Bold)
+        val detailHeight = if (details.any { it != null }) type.lineHeight(caption, FontWeight.Bold) + 3.dp else 0.dp
         fun badges(lines: WordsLines) = shown.mapIndexed { index, parcel ->
             val leavesNext = !lines.header && entry.next != null && shown.size == 2 && index == 1
             BadgeLine(parcel, column, leaves = if (leavesNext) NextMark.room else 0.dp, type, copy)
@@ -410,7 +412,7 @@ private class MediumWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val shown: 
         val choices = listOf(WordsLines(true, 1, true), WordsLines(false, 1, true), WordsLines(false, 1, false))
         lines = choices.firstOrNull { lines ->
             (if (lines.header) headerHeight(type) + 8.dp else 0.dp) + COLUMN_TOP * 2 + badges(lines).maxOf { it.height } + 3.dp +
-                labels.maxOf { it.height } + 3.dp + (if (lines.carrier) carrierHeight + 3.dp else 0.dp) + detailHeight <= room.height
+                labels.maxOf { it.height } + (if (lines.carrier) 3.dp + carrierHeight else 0.dp) + detailHeight <= room.height
         } ?: choices.last()
         badges = badges(lines)
         buttonTop = if (lines.header) headerHeight(type) / 2 else COLUMN_TOP + badges.last().height / 2
@@ -436,12 +438,14 @@ private fun MediumContent(layout: MediumWords, type: WidgetText) {
                     Badge(layout.badges[index], type)
                     Spacer(GlanceModifier.height(3.dp))
                     Text(layout.labels[index].text, maxLines = 1, style = words(type, layout.labels[index].points, FontWeight.Bold))
-                    Spacer(GlanceModifier.height(3.dp))
                     if (layout.lines.carrier) {
-                        Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption2, FontWeight.Medium, 0.64f))
                         Spacer(GlanceModifier.height(3.dp))
+                        Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption2, FontWeight.Medium, 0.64f))
                     }
-                    Text(parcel.detail.openingLine(ExtensionLocalizer.locale(layout.copy.languageCode)), maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
+                    layout.details[index]?.let {
+                        Spacer(GlanceModifier.height(3.dp))
+                        Text(it, maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
+                    }
                 }
             }
             if (layout.shown.size == 1) {
@@ -477,13 +481,20 @@ private class BadgeLine(parcel: DeliveryWidgetParcel, width: Dp, leaves: Dp, typ
     val symbol = if (parcel.isOutForDelivery) "bicycle" else if (parcel.deliveredAt != null) "checkmark.circle.fill" else "arrow.right.circle.fill"
     val symbolPoints = type.points(IosTextStyle.Caption2)
     private val box = requireNotNull(materialSymbols[symbol]).box(symbolPoints, SymbolScale.Small.factor)
-    val text = copy.text(if (parcel.isOutForDelivery) "stage.out_for_delivery" else if (parcel.deliveredAt != null) "stage.delivered" else "app.onTheWaySection")
-        .uppercase(ExtensionLocalizer.locale(copy.languageCode))
+    val text = badgeWords(parcel, copy).uppercase(ExtensionLocalizer.locale(copy.languageCode))
     /** The words' width where the badge leaves room for the button, which the row's own width wouldn't hold them to. */
     val textWidth: Dp? = (width - leaves - box[0].dp - 4.dp).takeIf { leaves > 0.dp }
     val points = type.fit(text, symbolPoints, FontWeight.Bold, width - leaves - box[0].dp - 4.dp, 1, 0.7f)
     val height = maxOf(box[1].dp, type.lineHeight(points, FontWeight.Bold))
 }
+
+/** `badge(_:)`: what a parcel's badge says, before the badge puts it in capitals. */
+private fun badgeWords(parcel: DeliveryWidgetParcel, copy: ExtensionLocalizer): String =
+    copy.text(if (parcel.isOutForDelivery) "stage.out_for_delivery" else if (parcel.deliveredAt != null) "stage.delivered" else "app.onTheWaySection")
+
+/** `detail(_:)`: the parcel's last line, unless it would say what its badge says: "Out for delivery" with no hours. */
+private fun lastLine(parcel: DeliveryWidgetParcel, copy: ExtensionLocalizer): String? =
+    parcel.detail.takeUnless { it.equals(badgeWords(parcel, copy), ignoreCase = true) }?.openingLine(ExtensionLocalizer.locale(copy.languageCode))
 
 /** `parcelBadge`: tighter than a Label, so "Out for delivery" fits a small widget. */
 @Composable

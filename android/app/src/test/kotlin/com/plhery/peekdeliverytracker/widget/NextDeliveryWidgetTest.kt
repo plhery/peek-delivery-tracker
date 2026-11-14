@@ -152,6 +152,35 @@ class NextDeliveryWidgetTest {
     }
 
     /**
+     * `detail(_:)`: a parcel out for delivery with no hours says "Out for delivery" once, in its badge, not again on its
+     * last line, whatever its case; another line, or a status unlike its badge's, stays.
+     */
+    @Test
+    fun lastLineThatSaysWhatTheBadgeSaysIsLeftOut() {
+        val badge = english.text("stage.out_for_delivery")
+        val courier = widgetParcel(1, "Belgian chocolate", carrier = "FedEx", detail = badge, outForDelivery = true)
+        val shouting = widgetParcel(2, "Trail weekend kit", carrier = "DPD Switzerland", detail = badge.uppercase(), outForDelivery = true)
+        show(wordsEntry(listOf(courier), medium = false), IPHONE_SMALL) {
+            onNode(hasTextEqualTo(badge.uppercase())).assertExists()
+            onNode(hasTextEqualTo("FedEx")).assertExists()
+            onNode(hasTextEqualTo(badge)).assertDoesNotExist()
+        }
+        show(wordsEntry(listOf(courier, shouting), medium = true), IPHONE_MEDIUM) {
+            onAllNodes(hasTextEqualTo(badge.uppercase())).assertCountEquals(2)
+            onNode(hasTextEqualTo(badge)).assertDoesNotExist()
+            onNode(hasTextEqualTo("DPD Switzerland")).assertExists()
+        }
+        // On its way, the same words aren't its badge's.
+        show(wordsEntry(listOf(courier.copy(isOutForDelivery = false)), medium = false), IPHONE_SMALL) {
+            onNode(hasTextEqualTo(badge)).assertExists()
+        }
+        show(wordsEntry(listOf(courier, widgetParcel(3, "Desk lamp", detail = "Friday")), medium = true), IPHONE_MEDIUM) {
+            onNode(hasTextEqualTo(badge)).assertDoesNotExist()
+            onNode(hasTextEqualTo("Friday")).assertExists()
+        }
+    }
+
+    /**
      * `ShowNextParcelIntent` (C-W21): with more parcels than fit, the next button turns the widgets of its size to the
      * next ones; with all of them shown at once there is none.
      */

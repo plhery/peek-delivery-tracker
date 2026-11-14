@@ -528,7 +528,9 @@ own wording as relayed by it, beside the carrier of its sample's parcel), a univ
 wording rule read, on parcels not delivered (a misread keeps no wording, so the replay cannot re-read it: the row is removed by hand once
 the scraper's rule is fixed), new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it, lookups and refreshes only (an open one nothing checked, or
-whose checks answered, waits unlisted until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and
+whose checks answered, waits unlisted until it fails, recovers or closes), carriers whose direct step failed ten times
+or more while the check still answered (no alert reads these; the weekly review runs the file with `hours=168`, as
+samples are kept a week), the unfinished parcels a provider tracks, grouped by type, carrier and
 provider, with `why` they stay with it, followed parcels not checked for 24 h (a scheduler fault: an
 account's parcel with a scan, or a lookup with an alert or a link opened in 24 h; one whose check was queued in the last
 hour, as reopening a dormant lookup's link queues one, waits unlisted for it), such lookups not checked for 6 h, twice

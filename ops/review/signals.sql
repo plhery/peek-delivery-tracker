@@ -377,6 +377,22 @@ group by i.kind, i.subject, i.active, i.last_notified_at, i.pending is not null
 having (i.last_notified_at >= :since and i.last_notified_at < :upto) or i.pending is not null or count(s.healthy) filter (where not s.healthy) > 0
 order by i.active desc, i.last_notified_at desc;
 
+\echo '== Direct steps failing behind a fallback: carriers whose direct step failed ten times or more in the window'
+\echo '   while the check still answered through the browser step or a provider (rescued). No alert reads these, and'
+\echo '   each costs a browser or proxy step: a direct step that nearly always fails may be worth skipping. The weekly'
+\echo '   review runs this with hours=168; samples are kept a week. usual: the most common failure category'
+select d.subject as carrier, 'adapters' as lane, count(*) as direct_checks,
+       count(*) filter (where not d.healthy) as failed,
+       count(*) filter (where not d.healthy and r.rescued) as rescued,
+       mode() within group (order by d.details->>'category') filter (where not d.healthy) as usual
+from public.tracking_health_samples d
+cross join lateral (select exists (select from public.tracking_health_samples r
+  where r.attempt_id = d.attempt_id and r.kind = 'refresh' and r.healthy) as rescued) r
+where d.kind = 'direct' and d.observed_at >= :since and d.observed_at < :upto
+group by d.subject
+having count(*) filter (where not d.healthy and r.rescued) >= 10
+order by rescued desc, carrier;
+
 \echo '== Unfinished parcels a provider tracks, by the carrier that could take them (new: added in the window)'
 \echo '   carriers: no carrier known; adapters: the adapter refuses, fails or half-answers the number, answered it without'
 \echo '   movement, on local clocks only, without dates or behind a provider''s delivered or returned stage, or gave no'

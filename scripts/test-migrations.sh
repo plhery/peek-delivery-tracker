@@ -410,6 +410,16 @@ if [[ "$planned_steps" != "4|2|2" ]]; then
   exit 1
 fi
 
+# A direct failure whose check still answered is rescued; a carrier is listed from ten of them.
+psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_direct_rescued.sql"
+direct_rescued=$(psql "$database_url" -X -A -F '|' -v hours=24 -f "$repo_root/ops/review/signals.sql" \
+  | awk '/^== Direct steps failing/ { section = 1; next } /^== / { section = 0 } section' | awk '/^review-direct/')
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from public.tracking_health_samples where subject like 'review-direct%'"
+if [[ "$direct_rescued" != "review-direct|adapters|15|14|12|challenge" ]]; then
+  echo "direct steps behind a fallback: carrier|lane|direct_checks|failed|rescued|usual = '$direct_rescued'" >&2
+  exit 1
+fi
+
 # A check the fence refused saved nothing: the stale stage it loaded is no step back.
 psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_step_backs.sql"
 step_section=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \

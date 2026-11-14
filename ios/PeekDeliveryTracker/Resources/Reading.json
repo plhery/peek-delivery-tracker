@@ -527,6 +527,22 @@
       "shop": null,
       "number": "1234567",
       "pickup": false
+    },
+    {
+      "text": "AB1234567",
+      "shop": null,
+      "number": "AB1234567"
+    },
+    {
+      "text": "Invoice AB1234567 is attached to this email.",
+      "shop": null,
+      "number": "",
+      "why": "R+L's two letters and seven digits name it only for a number given on its own: in a text they are as often an invoice or a reference."
+    },
+    {
+      "text": "Track your R+L shipment WG123456-7",
+      "shop": null,
+      "number": "WG123456-7"
     }
   ],
   "candidates": [

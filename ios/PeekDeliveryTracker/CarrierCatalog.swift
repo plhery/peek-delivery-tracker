@@ -190,6 +190,8 @@ struct CarrierDefinition: Codable, Sendable {
         let checksum: String?
         /// Low-confidence number evidence: the carrier is listed first among suggestions.
         let preferred: Bool?
+        /// A low-confidence shape that names its carrier only for a number given on its own, never one read out of a text.
+        let standalone: Bool?
     }
 
     var displayName: String
@@ -874,15 +876,18 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         }
     }
 
-    func detect(_ raw: String) -> CarrierMatch {
+    /// What a number's shape says. `inText` reads a number out of a text, as the shared engine's
+    /// `detectCarrierMatch(raw, { inText: true })` does: a standalone rule then names no carrier.
+    func detect(_ raw: String, inText: Bool = false) -> CarrierMatch {
         let number = Self.normalize(raw)
         guard !number.isEmpty else {
             return CarrierMatch(carrier: .unknown, confidence: .none, candidates: [])
         }
         let printed = raw.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        if let memo = detections.object(forKey: printed as NSString) { return memo.value }
-        let match = detectNormalized(number, printed: printed)
-        detections.setObject(Memo(match), forKey: printed as NSString)
+        let key = (inText ? "\n" + printed : printed) as NSString
+        if let memo = detections.object(forKey: key) { return memo.value }
+        let match = detectNormalized(number, printed: printed, inText: inText)
+        detections.setObject(Memo(match), forKey: key)
         return match
     }
 
@@ -895,10 +900,11 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return match.carrier
     }
 
-    private func detectNormalized(_ number: String, printed: String) -> CarrierMatch {
+    private func detectNormalized(_ number: String, printed: String, inText: Bool) -> CarrierMatch {
         var matches: [(carrier: CarrierID, confidence: CarrierMatch.Confidence, preferred: Bool)] = []
         for (carrier, definition) in definitions {
             for rule in definition.detectionRules {
+                if inText, rule.standalone == true { continue }
                 guard Self.matches(number, pattern: rule.pattern) else { continue }
                 if let rawPattern = rule.rawPattern, !Self.matches(printed, pattern: rawPattern) { continue }
                 var confidence: CarrierMatch.Confidence = rule.confidence == "high" ? .high : .low
@@ -1156,7 +1162,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             for shape in Self.candidatePatterns {
                 for hit in Self.matches(in: prose, pattern: shape.pattern, caseInsensitive: shape.caseInsensitive) {
                     let number = hit.trimmingCharacters(in: .whitespacesAndNewlines)
-                    guard Self.matches(number, pattern: "[0-9]"), detect(number).confidence == .low else { continue }
+                    guard Self.matches(number, pattern: "[0-9]"), detect(number, inText: true).confidence == .low else { continue }
                     let normalized = Self.normalize(number)
                     candidates[normalized] = (number, introduced || candidates[normalized]?.introduced == true)
                 }
@@ -1322,7 +1328,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }
 
     private func makeMatch(_ number: String, source: TrackingInputMatch.Source) -> TrackingInputMatch {
-        let result = detect(number)
+        let result = detect(number, inText: source == .text)
         return TrackingInputMatch(
             trackingNumber: number,
             carrier: result.carrier,

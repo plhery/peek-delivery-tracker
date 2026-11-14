@@ -364,11 +364,15 @@ class CarrierCatalog private constructor(
         }
     }
 
-    fun detect(raw: String): CarrierMatch {
+    /**
+     * What a number's shape says. [inText] reads a number out of a text, as the shared engine's
+     * `detectCarrierMatch(raw, { inText: true })` does: a standalone rule then names no carrier.
+     */
+    fun detect(raw: String, inText: Boolean = false): CarrierMatch {
         val number = normalize(raw)
         if (number.isEmpty()) return CarrierMatch(CarrierId.Unknown, CarrierMatch.Confidence.None, emptyList())
         val printed = raw.trimmingWhitespacesAndNewlines().uppercase()
-        return memos.detections.getOrPut(printed) { detectNormalized(number, printed) }
+        return memos.detections.getOrPut(if (inText) "\n$printed" else printed) { detectNormalized(number, printed, inText) }
     }
 
     /**
@@ -403,10 +407,11 @@ class CarrierCatalog private constructor(
 
     private class RuleMatch(val carrier: CarrierId, val confidence: CarrierMatch.Confidence, val preferred: Boolean)
 
-    private fun detectNormalized(number: String, printed: String): CarrierMatch {
+    private fun detectNormalized(number: String, printed: String, inText: Boolean): CarrierMatch {
         val found = mutableListOf<RuleMatch>()
         for ((carrier, definition) in definitions) {
             for (rule in definition.detectionRules) {
+                if (inText && rule.standalone == true) continue
                 if (!matches(number, rule.pattern)) continue
                 val rawPattern = rule.rawPattern
                 if (rawPattern != null && !matches(printed, rawPattern)) continue
@@ -640,7 +645,7 @@ class CarrierCatalog private constructor(
             for (shape in candidatePatterns) {
                 for (hit in matchesIn(prose, shape.pattern, shape.caseInsensitive)) {
                     val number = hit.trimmingWhitespacesAndNewlines()
-                    if (!matches(number, "[0-9]") || detect(number).confidence != CarrierMatch.Confidence.Low) continue
+                    if (!matches(number, "[0-9]") || detect(number, inText = true).confidence != CarrierMatch.Confidence.Low) continue
                     val normalized = normalize(number)
                     candidates[normalized] = number to (introduced || candidates[normalized]?.second == true)
                 }
@@ -805,7 +810,7 @@ class CarrierCatalog private constructor(
     }
 
     private fun makeMatch(number: String, source: TrackingInputMatch.Source): TrackingInputMatch {
-        val result = detect(number)
+        val result = detect(number, inText = source == TrackingInputMatch.Source.Text)
         return TrackingInputMatch(
             trackingNumber = number,
             carrier = result.carrier,

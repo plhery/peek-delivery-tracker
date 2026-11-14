@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText } from './reading';
+import { carrierNumberInText, checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText } from './reading';
 import type { Translate } from '../../lib/messages';
 import { isPickupCode, normalizeTrackingNumber } from '../../lib/carriers';
 import rules from '../../../shared/reading.json';
@@ -34,6 +34,16 @@ describe('reading the field', () => {
     if ('number' in example) expect(reading.match.trackingNumber).toBe(example.number);
     if ('carrier' in example) expect(reading.match).toMatchObject({ carrier: example.carrier, confidence: 'high' });
     if ('pickup' in example) expect(isPickupCode(normalizeTrackingNumber(reading.match.trackingNumber))).toBe(example.pickup);
+  });
+
+  it('reads R+L’s two letters and seven digits as its PRO only given on their own, never out of a text', () => {
+    expect(readText('AB1234567').match).toMatchObject({ trackingNumber: 'AB1234567', candidates: ['rl-carriers'] });
+    expect(readText('Invoice AB1234567 is attached to this email.').match.trackingNumber).toBe('');
+    expect(labelledNumbersInText('Tracking number: AB1234567')).toEqual([]);
+    expect(carrierNumberInText('Your shipment\nAB1234567', ['rl-carriers'])).toBeNull();
+    // The PRO printed with its dash before the check digit is R+L's in a text too.
+    expect(labelledNumbersInText('Tracking number: AB123456-7').map(({ normalized, match }) => [normalized, match.candidates]))
+      .toEqual([['AB1234567', ['rl-carriers']]]);
   });
 
   it('lists the numbers a label calls tracking numbers though their shape proves no carrier', () => {

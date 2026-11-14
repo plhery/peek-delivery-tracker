@@ -233,6 +233,12 @@ export function numbersInText(text: string): NumberInText[] {
   return [...found.values()];
 }
 
+/**
+ * How a number read out of a text is detected: a shape that fits words and references as often as tracking numbers,
+ * such as R+L's two letters and seven digits, names its carrier only for a number given on its own.
+ */
+const IN_TEXT = { inText: true } as const;
+
 /** Words that introduce a tracking number in the door's languages. */
 const NUMBER_WORDS = new RegExp(rules.numberWords, 'i');
 
@@ -253,7 +259,7 @@ function uncertainNumberInText(text: string): TrackingInputMatch | null {
       for (const hit of prose.matchAll(new RegExp(pattern.source, pattern.flags))) {
         const candidate = hit[0].trim();
         if (!/\d/.test(candidate)) continue;
-        const detection = detectCarrierMatch(candidate);
+        const detection = detectCarrierMatch(candidate, IN_TEXT);
         if (detection.confidence !== 'low') continue;
         const normalized = normalizeTrackingNumber(candidate);
         const known = candidates.get(normalized);
@@ -300,7 +306,7 @@ export function labelledNumbersInText(text: string): NumberInText[] {
       prose = prose.slice(numberEnd(prose, number));
       const normalized = normalizeTrackingNumber(number);
       if (!normalized || found.has(normalized) || nonTrackingShape(normalized) || YEAR_FIRST_DATE.test(number.trim())) continue;
-      const detection = detectCarrierMatch(number);
+      const detection = detectCarrierMatch(number, IN_TEXT);
       if (detection.confidence === 'low') found.set(normalized, { normalized, match: { trackingNumber: number, source: 'text', ...detection } });
     }
   }
@@ -333,7 +339,7 @@ export function carrierNumberInText(text: string, carriers: readonly CarrierId[]
         const normalized = normalizeTrackingNumber(candidate);
         if (!normalized || found.has(normalized) || nonTrackingShape(normalized)) continue;
         if (found.size >= MOST_CANDIDATES_READ) return null;
-        const detection = detectCarrierMatch(candidate);
+        const detection = detectCarrierMatch(candidate, IN_TEXT);
         if (detection.confidence !== 'low' || !detection.candidates.some((carrier) => carriers.includes(carrier))) continue;
         found.set(normalized, { normalized, match: { trackingNumber: candidate, source: 'text', ...detection } });
       }
@@ -365,7 +371,7 @@ function parse(text: string): TrackingInputMatch {
   if (parsed.source !== 'text' || !orderShop(text)) return parsed;
   const prose = withoutOrders(text);
   const number = recognizedNumberInText(prose) ?? keywordNumberInText(prose);
-  if (number) return { trackingNumber: number, source: 'text', ...detectCarrierMatch(number) };
+  if (number) return { trackingNumber: number, source: 'text', ...detectCarrierMatch(number, IN_TEXT) };
   const whole = text.trim();
   return !whole.includes('://') && validTrackingNumber(whole) ? { trackingNumber: whole, source: 'number', ...detectCarrierMatch(whole) } : NOTHING;
 }

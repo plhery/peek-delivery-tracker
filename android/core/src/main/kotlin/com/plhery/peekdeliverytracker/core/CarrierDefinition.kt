@@ -207,6 +207,8 @@ data class CarrierDefinition(
         val checksum: String? = null,
         /** Low-confidence number evidence: the carrier is listed first among suggestions. */
         val preferred: Boolean? = null,
+        /** A low-confidence shape that names its carrier only for a number given on its own, never one read out of a text. */
+        val standalone: Boolean? = null,
     )
 }
 

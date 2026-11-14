@@ -1580,6 +1580,22 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let xpressLogisticsLu = CarrierID(rawValue: "xpress-logistics-lu")
     static let fuduLogistics = CarrierID(rawValue: "fudu-logistics")
     static let xylShips = CarrierID(rawValue: "xyl-ships")
+    static let baikalService = CarrierID(rawValue: "baikal-service")
+    static let citytrans = CarrierID(rawValue: "citytrans")
+    static let dalliService = CarrierID(rawValue: "dalli-service")
+    static let derKurier = CarrierID(rawValue: "der-kurier")
+    static let kurierzentrale = CarrierID(rawValue: "kurierzentrale")
+    static let logsis = CarrierID(rawValue: "logsis")
+    static let lvzPost = CarrierID(rawValue: "lvz-post")
+    static let magnitPost = CarrierID(rawValue: "magnit-post")
+    static let nightStarExpress = CarrierID(rawValue: "night-star-express")
+    static let nordbrief = CarrierID(rawValue: "nordbrief")
+    static let peshkariki = CarrierID(rawValue: "peshkariki")
+    static let railContinent = CarrierID(rawValue: "rail-continent")
+    static let skifCargo = CarrierID(rawValue: "skif-cargo")
+    static let swissconnect = CarrierID(rawValue: "swissconnect")
+    static let veloblitz = CarrierID(rawValue: "veloblitz")
+    static let yandexDelivery = CarrierID(rawValue: "yandex-delivery")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3110,6 +3126,22 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .xpressLogisticsLu,
         .fuduLogistics,
         .xylShips,
+        .baikalService,
+        .citytrans,
+        .dalliService,
+        .derKurier,
+        .kurierzentrale,
+        .logsis,
+        .lvzPost,
+        .magnitPost,
+        .nightStarExpress,
+        .nordbrief,
+        .peshkariki,
+        .railContinent,
+        .skifCargo,
+        .swissconnect,
+        .veloblitz,
+        .yandexDelivery,
     ]
 
     init(from decoder: Decoder) throws {

@@ -157,6 +157,7 @@ A failed source waits before it is retried for that parcel:
 | Transport, a bot check met by a carrier's own adapter (`challenge`), a missing input, and `no_history` (a provider answered but has nothing, or the carrier lists the parcel without scans or does not know it yet; either answered with a reused number's earlier parcel) | 15 min | 6 h |
 | Other verification, schema, or a number or input the source refuses (`invalid_input`), as one it does not issue or one it finds several parcels under; not found by a carrier's own adapter | 1 h | 6 h |
 | Not found by a universal provider | 24 h | 24 h |
+| `no_history` from a universal provider for a number nothing has answered for yet | 45 min, then 4 h, then 12 h | 24 h |
 
 A carrier's bot check comes and goes, so the next read often passes; a provider's
 refusal does not. A longer `Retry-After` is honoured, up to 7 days. A source that answers ends
@@ -317,7 +318,7 @@ confirming them again reports no `…_confirmed` decision and adds nothing to
 The filed carrier's partial answer, its status without scans or only its newest scans
 (`summary_only`, `history_truncated`), stands unless a provider holds a fuller history that is
 not behind it, as the scraper's `fillPartialAnswer` decides. That history then takes the
-carrier's facts it lacks, such as the estimate. The carrier is still asked first on every check. While no provider holds more, the providers are asked again every 15 min.
+carrier's facts it lacks, such as the estimate. The carrier is still asked first on every check. While no provider holds more, the providers are asked again an hour after a round that filled nothing and 6 h after a second (`routing.label_rounds`); a scan the carrier adds, or its answer in another stage than the parcel's, brings their 15 min back.
 
 The same holds for the filed carrier's own answer with the parcel's label alone, nothing past
 registration, once its earliest scan, else the day the parcel was added, is two days old: a
@@ -327,7 +328,7 @@ has any, the providers are asked again 6 h after a round in which the carrier or
 added a scan, 12 h after a round that added none and a day after a second such round
 (`routing.label_rounds`), each within its own backoff (a day for a number it does not know).
 A round the provider serving the parcel sat out, in a cooldown or failing on the way, is not
-counted: the providers are asked again once it is free. The carrier is still asked on every check. A younger label stands alone, and progress the
+counted: the providers are asked again once it is free. The carrier is still asked on every check. A carrier that writes its timeline ahead (below) leaves the providers only its script to relay, so they are not asked beside its label. A younger label stands alone, and progress the
 parcel has shown stays (Older or regressing result, under Scenarios).
 
 When detection lists Cainiao for the number, or names it as an origin that follows the number
@@ -366,7 +367,8 @@ and providers scan parcels across every time zone.
 | Out for delivery, until 30 min before its delivery window opens | every 10 min |
 | Out for delivery since an earlier day | every 10 min |
 | Other stages (direct adapter) | every 10 min |
-| Served by a universal provider, out for delivery too | every 15 min |
+| A universal provider alone answers for it (its carrier's own adapter did not answer beside it) | hourly, whoever waits for it; every 3 h once its newest scan is a day old; out for delivery today, every 15 min |
+| A universal provider answers beside the carrier's own partial answer, label or local clocks | the carrier's cadence; the providers every 15 min at most |
 | PostNL | every 30 min, also after a failure and out for delivery |
 | A carrier whose catalog entry sets a refresh limit (`tracking.refresh`): after a handoff, the one it went to; else the stricter of the carrier filed and an earlier leg that answered last, as a check may ask both | no more often than its interval, out for delivery too; when it also sets a wait after a failure, that wait follows a failed check and the limit holds for a manual refresh too |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
@@ -1024,7 +1026,7 @@ swapped carriers. The map draws the rest of the way to it.
 
 After a provider fills China Post's partial history, scheduled checks that fetch the exact
 same direct preview keep the saved summary, scans and source. Providers backfill the rest
-hourly; a changed preview, lookup input, carrier or scraper release, or a manual refresh,
+every 3 hours; a changed preview, lookup input, carrier or scraper release, or a manual refresh,
 asks for it immediately. The preview is still partial, and keeping history does not claim
 a fresh provider lookup or change any scan's clock. Parcel checks keep their existing cadence.
 

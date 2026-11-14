@@ -8340,7 +8340,31 @@ function eventStore() {
   };
 }
 
-it.each([false, true])('retains China Post provider history between hourly backfills (local clocks: %s)', async local => {
+it('checks a parcel a provider alone answers for hourly, every 3 hours once it has not moved for a day', () => {
+  const number = 'TEST1234';
+  // The minute the number's hours open at, and a check half an hour into one.
+  const minute = createHash('sha256').update(number).digest().readUInt32BE(0) % 60;
+  const opened = Date.parse('2026-09-10T12:00:00Z') + minute * 60_000;
+  const now = new Date(opened + 30 * 60_000);
+  const at = (minutes: number) => new Date(opened + minutes * 60_000).toISOString();
+  const tracked = (lastSynced: string, newest: string, data: JsonObject = { tracking_provider: 'ParcelsApp' }, stage = 'in_transit'): JsonObject => ({
+    id: 'provided', user_id: 'owner', carrier: 'dhl', tracking_number: number, current_stage: stage, created_at: '2026-09-01T08:00:00Z',
+    last_synced_at: lastSynced, sync_status: 'ok',
+    carrier_data: { ...data, last_update: newest, routing: { version: 1, configured_carrier: 'dhl', last_event_at: newest } } });
+  // Checked since its hour opened, it waits for the next; its carrier's own answer is asked for again within minutes.
+  expect(isOpenedParcelSyncDue(tracked(at(5), at(-120)), now)).toBe(false);
+  expect(isOpenedParcelSyncDue(tracked(at(-1), at(-120)), now)).toBe(true);
+  expect(isOpenedParcelSyncDue(tracked(at(5), at(-120), {}), now)).toBe(true);
+  // Its carrier answered beside the provider (in part, a label, local clocks): the carrier's cadence.
+  expect(isOpenedParcelSyncDue(tracked(at(5), at(-120), { tracking_provider: 'ParcelsApp', carrier_answered: true }), now)).toBe(true);
+  // Silent for a day: every 3 hours.
+  expect(isOpenedParcelSyncDue(tracked(at(-119), at(-25 * 60)), now)).toBe(false);
+  expect(isOpenedParcelSyncDue(tracked(at(-121), at(-25 * 60)), now)).toBe(true);
+  // Out for delivery today, the regular cadence.
+  expect(isOpenedParcelSyncDue(tracked(at(5), at(-120), { tracking_provider: 'ParcelsApp' }, 'out_for_delivery'), now)).toBe(true);
+});
+
+it.each([false, true])('retains China Post provider history between backfills (local clocks: %s)', async local => {
   vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
   vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['Ship24'], carrier: null, tier: () => 'unknown', rank: () => 0 });
   const store = eventStore();
@@ -8385,7 +8409,7 @@ it.each([false, true])('retains China Post provider history between hourly backf
   expect(store.batch()).toEqual([]);
   // An older scan uploaded later does not appear in the direct window. The bounded backfill still finds it.
   provider.events!.push({ time: '2026-09-09T10:00:00Z', description: 'Sorted', stage: 'in_transit' });
-  now = new Date('2026-09-10T13:00:00Z');
+  now = new Date('2026-09-10T15:00:00Z');
   await sync();
   expect(adapter.fetchUniversal).toHaveBeenCalledTimes(2);
   expect([...store.rows.values()]).toEqual(expect.arrayContaining(rows));

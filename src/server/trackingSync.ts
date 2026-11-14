@@ -151,6 +151,13 @@ const ON_THE_WAY: ReadonlySet<string> = new Set(['registered', 'accepted', 'in_t
 /** A lookup without an account that nobody watches is checked this often. */
 const UNWATCHED_ONE_OFF_HOURS = 3;
 /**
+ * A parcel a universal provider alone answers for is checked hourly, whoever waits for it, and every this many
+ * hours once its newest scan is PROVIDED_QUIET_AFTER_MS old: a provider has quotas and publishes scans late, and
+ * a parcel that has not moved for a day rarely moves within the hour.
+ */
+const PROVIDED_QUIET_HOURS = 3;
+const PROVIDED_QUIET_AFTER_MS = 24 * 60 * 60 * 1_000;
+/**
  * A lookup without an account filed under no carrier, or under one with no adapter of its
  * own, that nobody follows any more is checked this often while it is new (REDETECTION_WINDOW_MS),
  * once a carrier or provider has answered for its number: the next answer can name its carrier,
@@ -468,6 +475,15 @@ function answeredByCarrier(parcel: JsonObject): boolean {
   return !isRecord(parcel.carrier_data) || typeof parcel.carrier_data.tracking_provider !== 'string';
 }
 
+/**
+ * Whether a universal provider alone answers for the parcel: its summary is a provider's, and its carrier's own
+ * adapter did not answer beside it. A carrier answering in part, with its label alone or on local clocks is
+ * asked at every check, so its parcel keeps the carrier's cadence.
+ */
+function answeredByProviderAlone(parcel: JsonObject): boolean {
+  return !answeredByCarrier(parcel) && !(isRecord(parcel.carrier_data) && parcel.carrier_data.carrier_answered === true);
+}
+
 /** Whether the parcel's last check that ran a lookup opened a browser (`browser_check` in its routing). */
 function checkedInBrowser(parcel: JsonObject): boolean {
   return isRecord(parcel.carrier_data) && isRecord(parcel.carrier_data.routing) && parcel.carrier_data.routing.browser_check === true;
@@ -746,6 +762,12 @@ function isScheduledTrackingSyncDue(
   // until 06:00 on the carrier's clock, a round sorted overnight.
   const minimum = refreshLimit(parcel)?.minMinutes;
   const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
+  // A provider alone answers for it: hourly, every 3 hours once it has not moved for a day. Out for
+  // delivery today it keeps the regular cadence, at the providers' own spacing.
+  if (answeredByProviderAlone(parcel) && !delivering) {
+    const quiet = newest !== null && now.getTime() - newest >= PROVIDED_QUIET_AFTER_MS;
+    return lastChecked < hourStart.minus({ hours: (quiet ? PROVIDED_QUIET_HOURS : 1) - 1 }).toMillis();
+  }
   const opens = delivering ? deliveryWindowOpens(parcel) : null;
   const lastMile = delivering && !minimum && answeredByCarrier(parcel)
     && (opens === null || now.getTime() >= opens - BEFORE_WINDOW_MS)

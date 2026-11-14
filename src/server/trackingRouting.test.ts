@@ -1345,9 +1345,10 @@ describe('persistent tracking routing', () => {
       expect((await check('2026-09-10T14:40:00Z')).probes).toEqual(probes(3, '2026-09-10T18:40:00.000Z'));
     });
     it.each([
-      ['a provider without history', new NoHistoryError('ParcelsApp'), 'no_history', 4, '2026-09-10T13:20:00.000Z', '2026-09-10T15:40:00.000Z'],
+      // Past its hourly checks, a provider without history for a number nothing has answered for waits a day.
+      ['a provider without history', new NoHistoryError('ParcelsApp'), 'no_history', 4, '2026-09-10T13:20:00.000Z', '2026-09-11T11:40:00.000Z'],
       // Asked an hour and a half before the end, the wait still lets the next hourly check ask.
-      ['a provider without history late', new NoHistoryError('ParcelsApp'), 'no_history', 4, '2026-09-10T13:20:00.000Z', '2026-09-10T16:50:00.000Z', '2026-09-10T12:50:00Z'],
+      ['a provider without history late', new NoHistoryError('ParcelsApp'), 'no_history', 4, '2026-09-10T13:20:00.000Z', '2026-09-11T12:50:00.000Z', '2026-09-10T12:50:00Z'],
       // A provider's "not found" holds for a day: providers have quotas, and it seldom changes within hours.
       ['a provider\'s not found', new NotFoundError('ParcelsApp'), 'not_found', 0, '2026-09-11T11:40:00.000Z', '2026-09-11T11:40:00.000Z'],
       // A refusal is no sign the number is unseen.
@@ -1841,13 +1842,29 @@ describe('persistent tracking routing', () => {
     });
     await expect(router.fetch(parcel(), false)).rejects.toMatchObject({ routing: { failures: {
       Ship24: { kind: 'not_found' },
-      ParcelsApp: { kind: 'no_history', retry_at: '2026-09-10T12:15:00.000Z' },
+      ParcelsApp: { kind: 'no_history', retry_at: '2026-09-10T12:45:00.000Z' },
       '17TRACK': { kind: 'transport' },
     } } });
     // Only the HTTP 5xx says anything about a provider's own health.
     expect(health.finishTrackingProvider.mock.calls.map(([source, , kind]) => [source, kind])).toEqual([
       ['ParcelsApp', 'not_found'], ['Ship24', 'not_found'], ['17TRACK', 'transport'],
     ]);
+  });
+  it('asks a provider without history for a number nothing has answered for after 45 minutes, 4 hours, half a day, then daily', async () => {
+    fixedPlan('ParcelsApp');
+    let routing: RoutingDeferred['routing'] | undefined;
+    const waits: string[] = [];
+    for (const at of ['2026-09-10T12:00:00Z', '2026-09-10T12:45:00Z', '2026-09-10T16:45:00Z', '2026-09-11T04:45:00Z', '2026-09-12T04:45:00Z']) {
+      const run = setup(new Date(at));
+      run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+      const outcome = await run.router.fetch(parcel(routing ? { carrier_data: { routing } } : {}), false).catch((deferred: unknown) => deferred);
+      expect(outcome).toBeInstanceOf(RoutingDeferred);
+      expect(run.universal).toHaveBeenCalledOnce();
+      routing = (outcome as RoutingDeferred).routing;
+      waits.push(routing.failures.ParcelsApp!.retry_at);
+    }
+    expect(waits).toEqual(['2026-09-10T12:45:00.000Z', '2026-09-10T16:45:00.000Z', '2026-09-11T04:45:00.000Z',
+      '2026-09-12T04:45:00.000Z', '2026-09-13T04:45:00.000Z']);
   });
   it('keeps provider circuits closed when providers refuse the number', async () => {
     const { router, universal, health } = setup();
@@ -2240,6 +2257,30 @@ describe('persistent tracking routing', () => {
         .toMatchObject({ tracking_provider: 'Ship24' });
     });
 
+    it('asks the providers again an hour after a round that fills nothing, and 6 h after a second', async () => {
+      fixedPlan('Ship24');
+      let routing: JsonObject | undefined;
+      // Whether a check at `at` asks the provider, whose history is behind the carrier's answer.
+      const asks = async (at: string, answer = summary()) => {
+        const check = setup(new Date(at));
+        check.direct.mockResolvedValue(answer);
+        check.universal.mockResolvedValue(history('2026-09-10T09:00:00Z'));
+        const result = await check.router.fetch(ups({ current_stage: 'in_transit', ...(routing ? { carrier_data: { routing } } : {}) }), false);
+        expect(result).toMatchObject({ sourceCarrierId: 'ups' });
+        routing = result.result.routing as JsonObject;
+        return check.universal.mock.calls.length > 0;
+      };
+      expect(await asks('2026-09-10T12:00:00Z')).toBe(true);
+      expect(await asks('2026-09-10T12:59:00Z')).toBe(false);
+      expect(await asks('2026-09-10T13:00:00Z')).toBe(true);
+      expect(await asks('2026-09-10T18:59:00Z')).toBe(false);
+      expect(await asks('2026-09-10T19:00:00Z')).toBe(true);
+      // The carrier's answer in another stage than the parcel's is news: the providers' own spacing holds.
+      const delivering: RoutedResult = { ...summary(), result: { ...summary().result, status: 'out_for_delivery', current_stage: 'out_for_delivery' } };
+      expect(await asks('2026-09-10T19:14:00Z', delivering)).toBe(false);
+      expect(await asks('2026-09-10T19:15:00Z', delivering)).toBe(true);
+    });
+
     it('stands when a provider is rate limited after a recent check', async () => {
       fixedPlan('Ship24');
       const { router, direct, universal } = setup();
@@ -2347,6 +2388,16 @@ describe('persistent tracking routing', () => {
         // A provider's "not found" still holds for a day.
         expect(later.universal.mock.calls.map(([source]) => source)).toEqual(asked);
       }
+    });
+
+    it('asks no provider beside the label of a carrier that writes its timeline ahead', async () => {
+      fixedPlan('ParcelsApp');
+      const { router, direct, universal } = setup();
+      direct.mockResolvedValue({ ...label(), result: { ...label().result, written_ahead: ['2026-09-12T08:00:00Z'] } });
+      const result = await router.fetch(ups(), false);
+      expect(result).toMatchObject({ sourceCarrierId: 'ups', result: { current_stage: 'registered' } });
+      expect(universal).not.toHaveBeenCalled();
+      expect(routingOf(result).partial_checked_at).toBeUndefined();
     });
 
     it('asks again 12 h after a round that adds no scan and a day after a second, and 6 h after a scan', async () => {
@@ -2527,7 +2578,7 @@ describe('persistent tracking routing', () => {
 
     it.each([false, true])('keeps saved fuller history after a fresh identical preview (local clocks: %s)', async local => {
       let filed = await saved(local);
-      for (const at of ['12:15', '12:45']) {
+      for (const at of ['12:15', '12:45', '14:45']) {
         const next = setup(new Date(`2026-09-10T${at}:00Z`));
         next.direct.mockResolvedValue(preview(local));
         const value = await next.router.fetch(filed, true);
@@ -2539,7 +2590,7 @@ describe('persistent tracking routing', () => {
         // The sync retains the saved provider result and persists only the fresh route.
         filed = { ...filed, carrier_data: { ...filed.carrier_data as JsonObject, routing: value.result.routing } };
       }
-      const due = setup(new Date('2026-09-10T13:00:00Z'));
+      const due = setup(new Date('2026-09-10T15:00:00Z'));
       due.direct.mockResolvedValue(preview(local));
       due.universal.mockResolvedValue(full());
       expect(await due.router.fetch(filed, true)).not.toHaveProperty('preserveHistory');
@@ -3503,7 +3554,7 @@ describe('coverage-based provider order', () => {
     direct.mockRejectedValue(new Error('carrier down'));
     // Ship24 was label-only for a La Poste reference.
     const pinned = (extra: JsonObject = {}) => parcel({ carrier: 'la-poste', carrier_data: { routing: state({
-      configured_carrier: 'la-poste', preferred_provider: 'Ship24', preferred_number: 'TEST1234', ...extra }) } });
+      configured_carrier: 'la-poste', preferred_provider: 'Ship24', preferred_number: 'TEST1234', last_success_at: '2026-09-09T12:00:00Z', ...extra }) } });
     const moved = await router.fetch(pinned(), false);
     expect(sources(universal)).toEqual(['ParcelsApp']);
     expect(moved.result.routing).toMatchObject({ preferred_provider: 'ParcelsApp' });

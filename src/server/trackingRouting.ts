@@ -132,8 +132,8 @@ export interface RoutingState extends JsonObject {
    */
   partial_checked_at?: string;
   /**
-   * The providers' last rounds beside the filed carrier's label alone: how many in a row added no
-   * scan (labelSpacing), and the most scans the carrier and a provider held at the last one.
+   * The providers' last rounds beside the filed carrier's label alone or its partial answer: how many in a row
+   * added no scan (labelSpacing, partialSpacing), and the most scans the carrier and a provider held at the last one.
    */
   label_rounds?: LabelRounds;
   /** The China Post preview whose fuller provider history was last fetched. The digest binds the lookup inputs and scraper rules too. */
@@ -296,6 +296,17 @@ const iso = (value: number): string => new Date(value).toISOString();
  * after a border, within days.
  */
 const LABEL_WAIT = 2 * DAY;
+/**
+ * How long a provider's fuller history stands beside the carrier's partial answer while that answer stays the
+ * same: any scan the carrier adds ends it at once.
+ */
+const PARTIAL_HOLD = 3 * HOUR;
+/**
+ * How long a provider without history for a number nothing has answered for waits before it is asked again:
+ * at the first hourly check, at the last one, half a day on, then daily. Carriers find nearly every first scan
+ * that comes after the first hour.
+ */
+const UNANSWERED_PROVIDER_WAITS = [45 * 60_000, 4 * HOUR, 12 * HOUR, DAY];
 const LABEL_SPACING = 6 * HOUR;
 interface LabelRounds { empty: number; carrier: number; providers: number }
 const scanCount = (result: CarrierResult): number => result.events?.length ?? 0;
@@ -307,6 +318,15 @@ const scanCount = (result: CarrierResult): number => result.events?.length ?? 0;
 function labelSpacing(rounds: LabelRounds | undefined, carrierScans: number): number {
   if (!rounds || rounds.empty === 0 || carrierScans > rounds.carrier) return LABEL_SPACING;
   return rounds.empty === 1 ? 12 * HOUR : DAY;
+}
+/**
+ * How long the providers wait after their last round beside the carrier's partial answer that held no fuller
+ * history: UNIVERSAL_SPACING_MS, an hour after a round that filled nothing and 6 h after a second. A scan the
+ * carrier adds since brings UNIVERSAL_SPACING_MS back, as does its answer in another stage than the parcel's.
+ */
+function partialSpacing(rounds: LabelRounds | undefined, carrierScans: number): number {
+  if (!rounds || rounds.empty === 0 || carrierScans > rounds.carrier) return UNIVERSAL_SPACING_MS;
+  return rounds.empty === 1 ? HOUR : 6 * HOUR;
 }
 /** The round just made, which no provider's progress served: `providers` is the most scans one held beside the label. */
 function labelRound(last: LabelRounds | undefined, carrier: number, providers: number): LabelRounds {
@@ -934,7 +954,10 @@ export class TrackingRouter {
         && !(kind === 'verification' && !universalSource && carrierErrorKind(error) === 'challenge');
       const base = daily ? DAY : hourly ? HOUR : 15 * 60_000;
       const userError = trackingFailureCode(error);
-      const retryAt = now().getTime() + Math.max(retryAfterMs, Math.min(daily ? DAY : 6 * HOUR, base * 2 ** (count - 1)));
+      const unanswered = universalSource && kind === 'no_history' && !state.last_success_at && !state.last_event_at;
+      const wait = unanswered ? UNANSWERED_PROVIDER_WAITS[Math.min(count, UNANSWERED_PROVIDER_WAITS.length) - 1]!
+        : Math.min(daily ? DAY : 6 * HOUR, base * 2 ** (count - 1));
+      const retryAt = now().getTime() + Math.max(retryAfterMs, wait);
       const unseen = kind === 'no_history' || (kind === 'not_found' && !daily);
       const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
       const wrongNumber = kind === 'invalid_input' && carrierErrorReason(error) === 'wrong_number';
@@ -1367,11 +1390,14 @@ export class TrackingRouter {
       const sinceChecked = now().getTime() - millis(state.partial_checked_at);
       // The carrier's own label alone, no handoff's, LABEL_WAIT after it first listed the parcel.
       const since = filed ? listedSince(filed, parcel.created_at) : 0;
+      // A carrier that writes its timeline ahead leaves the providers only its script to relay: they are not asked beside its label.
       const label = filed && filed.sourceCarrierId === declared && !filed.earlierResult && !hasRoutingProgress(filed.result)
-        && since > 0 && now().getTime() - since >= LABEL_WAIT;
+        && since > 0 && now().getTime() - since >= LABEL_WAIT && !heldBackBy()[declared]?.length;
       // Providers are asked for the rest at their own cadence, and on the next check after one held it.
       if (filed && isPartialAnswer(filed.result)) {
-        if (sinceChecked >= UNIVERSAL_SPACING_MS) partialDirect = { value: filed, carrier: primary };
+        const spacing = resultStage(filed.result) === parcel.current_stage
+          ? partialSpacing(state.label_rounds, scanCount(filed.result)) : UNIVERSAL_SPACING_MS;
+        if (sinceChecked >= spacing) partialDirect = { value: filed, carrier: primary };
       } else if (filed && label && sinceChecked >= labelSpacing(state.label_rounds, scanCount(filed.result))) {
         partialDirect = { value: filed, carrier: primary, label: true };
       }
@@ -1427,14 +1453,14 @@ export class TrackingRouter {
       if (answer.history) localHistory = answer.history;
       return answer.local ? keepLocal({ value: answer.value, carrier }) : persistResult(answer.value, carrier);
     };
-    // A freshly checked preview can keep the already saved fuller history for an hour.
+    // A freshly checked preview can keep the already saved fuller history for PARTIAL_HOLD.
     // Compare the whole answer: a new scan can replace one in a fixed-size window without
     // changing its count or stage. A manual refresh still asks for the rest immediately.
     const partial = partialDirect ?? localDirectFallback;
     const held = state.partial_history;
     const historyAge = now().getTime() - millis(held?.checked_at);
     if (scheduled && !changed && !released && universalNumber === number && partial && held
-      && held.fingerprint === partialHistoryKey(partial.value) && historyAge >= 0 && historyAge < HOUR
+      && held.fingerprint === partialHistoryKey(partial.value) && historyAge >= 0 && historyAge < PARTIAL_HOLD
       && metadata.tracking_provider === held.provider && sources.includes(held.provider as UniversalSource)
       && resultStage(partial.value.result) === parcel.current_stage) {
       state.direct_retry_at = undefined;
@@ -2063,7 +2089,7 @@ export class TrackingRouter {
         state.partial_checked_at = iso(Math.min(now().getTime(), missed - labelSpacing(state.label_rounds, scanCount(partialDirect.value.result))));
       } else {
         state.partial_checked_at = now().toISOString();
-        if (partialDirect.label) state.label_rounds = labelRound(state.label_rounds, scanCount(partialDirect.value.result), fullest);
+        state.label_rounds = labelRound(state.label_rounds, scanCount(partialDirect.value.result), fullest);
       }
       return persistResult(partialDirect.value, partialDirect.carrier);
     }

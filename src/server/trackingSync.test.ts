@@ -2633,6 +2633,28 @@ describe('TrackingSyncService', () => {
       expect.objectContaining({ anomaly_codes: [] }), expect.any(Array));
   });
 
+  it('keeps the stage a provider read for a parcel filed under none once its carrier answers with a scan in it', async () => {
+    // Synthetic wording and times: the carrier's summary names its pick-up while its newest scan moves on.
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const pickedUp = { time: '2026-09-09T18:00:00Z', description: 'Picked up', stage: 'accepted' };
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'accepted',
+      last_status_text: 'Picked up', last_update: '2026-09-10T08:00:00Z',
+      events: [{ time: '2026-09-10T08:00:00Z', description: 'Arrived at the sorting hub', stage: 'in_transit' }, pickedUp] }),
+    fetchUniversal: vi.fn() };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-09-10T12:00:00Z'));
+    const parcel = { id: 'filed-unknown', carrier: 'unknown', tracking_number: '1Z999AA10123456784', current_stage: 'in_transit' };
+    await service.syncPackage(parcel);
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ carrier: 'ups', current_stage: 'in_transit' });
+    // An answer with no scan in transit takes its own stage: what the provider read was not this carrier's.
+    adapter.fetch.mockResolvedValue({ status: 'in_transit', current_stage: 'accepted', last_status_text: 'Picked up',
+      last_update: pickedUp.time, events: [pickedUp] });
+    await service.syncPackage(parcel);
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ carrier: 'ups', current_stage: 'accepted' });
+  });
+
   it('reads scans of one second by delivery progress when the summary waits', async () => {
     // Accepted and moved on within one second (synthetic wording and times),
     // the acceptance listed first: the parcel is in transit.

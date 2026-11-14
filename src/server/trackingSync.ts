@@ -2832,8 +2832,11 @@ export class TrackingSyncService {
         values.carrier_data = carrierData;
         if (selectedStage && (hasUpdate || !swissPostReady)) {
           const rows = rowsOnceSaved();
-          // A carrier the router swapped to may rightly know less than a mistaken one did.
-          values.current_stage = fetched.correction ? selectedStage : stageToSave(heldStage(parcel, previousStage, rows), selectedStage);
+          // A carrier the router swapped to may rightly know less than a mistaken one did, but not
+          // when its own answer shows a scan in the saved stage: then the parcel is the one the
+          // saved stage was read from (a provider's copies of its scans, for a parcel filed under none).
+          const swappedBehind = fetched.correction && !events.some((event) => event.stage === previousStage);
+          values.current_stage = swappedBehind ? selectedStage : stageToSave(heldStage(parcel, previousStage, rows), selectedStage);
           // Only the check that brings such a scan, dated after the stored progress, flags it: not the
           // later checks that repeat it, nor an answer that only lacks the later scans.
           const cameAfter = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))

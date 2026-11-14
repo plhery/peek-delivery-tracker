@@ -5,6 +5,8 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
@@ -83,7 +85,8 @@ data class CarrierBrandAssets(
     val families: Map<String, String>,
     val palettes: Map<String, Map<String, String>>,
     val decals: Map<String, String>,
-    val truck: Truck,
+    /** Read apart from the rest of Brand.json ([shared]). */
+    @Transient val truck: Truck = Truck(emptyMap()),
 ) {
     /** How one property is mixed out of the carrier's catalog colour, then settled by [tone] if it has one. */
     @Serializable
@@ -143,13 +146,128 @@ data class CarrierBrandAssets(
             }
     }
 
-    @Serializable
     data class Truck(val decals: Map<String, List<DecalShape>>)
 
+    /**
+     * The carriers' truck decals by name, each decoded from Brand.json the first time it's asked for: a screen shows a
+     * few of more than a thousand, whose shapes are most of the file, so the app doesn't decode them all as it opens.
+     */
+    internal class Decals(private val data: ByteArray, private val spans: Map<String, IntRange>) :
+        AbstractMap<String, List<DecalShape>>() {
+        private val decoded = ConcurrentHashMap<String, List<DecalShape>>()
+
+        override val keys: Set<String> get() = spans.keys
+        override val size: Int get() = spans.size
+
+        override fun containsKey(key: String): Boolean = key in spans
+
+        override fun get(key: String): List<DecalShape>? {
+            decoded[key]?.let { return it }
+            val span = spans[key] ?: return null
+            val text = String(data, span.first, span.last - span.first + 1, Charsets.UTF_8)
+            val shapes = brandJson.decodeFromString(ListSerializer(DecalShape.serializer()), text)
+            return decoded.putIfAbsent(key, shapes) ?: shapes
+        }
+
+        override val entries: Set<Map.Entry<String, List<DecalShape>>>
+            get() = spans.keys.mapTo(LinkedHashSet()) { java.util.AbstractMap.SimpleImmutableEntry(it, getValue(it)) }
+    }
+
     companion object {
-        /** Brand.json is bundled with the app: unreadable, it fails at once, as on the iPhone. */
-        val shared: CarrierBrandAssets by lazy {
-            Json { ignoreUnknownKeys = true }.decodeFromString(serializer(), SharedResources.text("Brand.json"))
+        private val brandJson = Json { ignoreUnknownKeys = true }
+
+        /**
+         * Brand.json is bundled with the app: unreadable, it fails at once, as on the iPhone. All of it is decoded but
+         * the truck's decals, which are only found ([Decals]).
+         */
+        val shared: CarrierBrandAssets by lazy { read(SharedResources.open("Brand.json").use { it.readBytes() }) }
+
+        internal fun read(data: ByteArray): CarrierBrandAssets {
+            val members = JsonMembers(data)
+            val top = members.of(0)
+            val decals = members.of(members.of(top.getValue("truck").value.first).getValue("decals").value.first)
+            val rest = top.filterKeys { it != "truck" }.values.joinToString(",", "{", "}") { member ->
+                String(data, member.key.first, member.value.last + 1 - member.key.first, Charsets.UTF_8)
+            }
+            return brandJson.decodeFromString(serializer(), rest).copy(truck = Truck(Decals(data, decals.mapValues { it.value.value })))
+        }
+    }
+}
+
+/**
+ * Where an object's members lie in JSON text, by name: each one's key, from its opening quote, and its value, without
+ * decoding either. Brand.json is ASCII; any UTF-8 would do, as its structural bytes are ASCII too.
+ */
+internal class JsonMembers(private val data: ByteArray) {
+    class Member(val key: IntRange, val value: IntRange)
+
+    /** The members of the object opening at `start`, in their order. */
+    fun of(start: Int): Map<String, Member> {
+        check(data[start] == '{'.code.toByte()) { "No object at $start" }
+        val members = LinkedHashMap<String, Member>()
+        var at = space(start + 1)
+        while (data[at] != '}'.code.toByte()) {
+            val keyStart = at
+            val keyEnd = stringEnd(keyStart)
+            val key = String(data, keyStart, keyEnd - keyStart, Charsets.UTF_8)
+            val name = if ('\\' in key) Json.decodeFromString<String>(key) else key.substring(1, key.length - 1)
+            at = space(keyEnd)
+            check(data[at] == ':'.code.toByte()) { "No colon at $at" }
+            at = space(at + 1)
+            val valueEnd = valueEnd(at)
+            members[name] = Member(keyStart until keyEnd, at until valueEnd)
+            at = space(valueEnd)
+            if (data[at] == ','.code.toByte()) at = space(at + 1)
+        }
+        return members
+    }
+
+    private fun space(from: Int): Int {
+        var at = from
+        while (data[at] == ' '.code.toByte() || data[at] == '\n'.code.toByte() || data[at] == '\r'.code.toByte() || data[at] == '\t'.code.toByte()) at++
+        return at
+    }
+
+    /** Past the string opening at `start`. */
+    private fun stringEnd(start: Int): Int {
+        var at = start + 1
+        while (true) {
+            when (data[at]) {
+                '\\'.code.toByte() -> at += 2
+                '"'.code.toByte() -> return at + 1
+                else -> at++
+            }
+        }
+    }
+
+    /** Past the value starting at `start`. */
+    private fun valueEnd(start: Int): Int {
+        when (data[start]) {
+            '"'.code.toByte() -> return stringEnd(start)
+            '{'.code.toByte(), '['.code.toByte() -> {
+                var depth = 0
+                var at = start
+                while (true) {
+                    when (data[at]) {
+                        '"'.code.toByte() -> {
+                            at = stringEnd(at)
+                            continue
+                        }
+                        '{'.code.toByte(), '['.code.toByte() -> depth++
+                        '}'.code.toByte(), ']'.code.toByte() -> if (--depth == 0) return at + 1
+                    }
+                    at++
+                }
+            }
+            else -> {
+                var at = start
+                while (at < data.size && data[at] != ','.code.toByte() && data[at] != '}'.code.toByte() && data[at] != ']'.code.toByte() &&
+                    data[at] > ' '.code.toByte()
+                ) {
+                    at++
+                }
+                return at
+            }
         }
     }
 }

@@ -50759,7 +50759,8 @@
       "displayName": "International Bridge",
       "aliases": [
         "International Bridge, Inc.",
-        "ParcelPool"
+        "ParcelPool",
+        "MyIB International Bridge"
       ],
       "countries": [
         "US"
@@ -53885,6 +53886,39 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.xpress-logistics.lu/suivi-colis/"
+    },
+    "fudu-logistics": {
+      "displayName": "Fudu Logistics",
+      "countries": [
+        "CN"
+      ],
+      "color": "#000000",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "xyl-ships": {
+      "displayName": "XYL-Ships",
+      "aliases": [
+        "FXYL"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#b13c3c",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": []
     }
   }
 }

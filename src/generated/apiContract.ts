@@ -50760,7 +50760,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "International Bridge",
     "aliases": [
       "International Bridge, Inc.",
-      "ParcelPool"
+      "ParcelPool",
+      "MyIB International Bridge"
     ],
     "countries": [
       "US"
@@ -53886,6 +53887,39 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.xpress-logistics.lu/suivi-colis/"
+  },
+  "fudu-logistics": {
+    "displayName": "Fudu Logistics",
+    "countries": [
+      "CN"
+    ],
+    "color": "#000000",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "xyl-ships": {
+    "displayName": "XYL-Ships",
+    "aliases": [
+      "FXYL"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#b13c3c",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -55465,7 +55499,9 @@ export const CARRIER_IDS = [
   "tribex-courier",
   "unipost-express",
   "x-express-rs",
-  "xpress-logistics-lu"
+  "xpress-logistics-lu",
+  "fudu-logistics",
+  "xyl-ships"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

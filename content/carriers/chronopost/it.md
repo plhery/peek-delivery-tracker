@@ -6,7 +6,7 @@ published: 2026-11-14
 updated: 2026-11-14
 ---
 
-Chronopost è il corriere espresso francese del gruppo La Poste e fa parte di Geopost, la divisione pacchi a cui appartengono anche DPD e [BRT](carrier:brt). Questa guida è pensata per chi aspetta in Italia o nella Svizzera italiana una spedizione partita dalla Francia con Chronopost — per esempio da un negozio online o con Shop2Shop — con una parte dedicata ai punti di ritiro in Francia. Segui il pacco su chronopost.fr o incolla il codice qui sopra. Anche laposte.fr risponde ai numeri Chronopost, ma può omettere scansioni e riferimenti presenti su Chronopost.
+Chronopost è il corriere espresso francese del gruppo La Poste e fa parte di Geopost, la divisione pacchi a cui appartengono anche DPD e [BRT](carrier:brt). Questa guida è pensata per chi aspetta in Italia o nella Svizzera italiana una spedizione partita dalla Francia con Chronopost, per esempio da un negozio online, con una parte dedicata ai punti di ritiro in Francia. Segui il pacco su chronopost.fr o incolla il codice qui sopra. Anche laposte.fr risponde ai numeri Chronopost, ma può omettere scansioni e riferimenti presenti su Chronopost.
 
 ## Numero di tracciamento Chronopost: com'è fatto
 
@@ -49,11 +49,11 @@ Chronopost scrive gli stati in francese; Peek li conserva nella cronologia e tra
 
 ## Pacco Chronopost verso l'Italia o la Svizzera
 
-Secondo La Poste Groupe, Chronopost spedisce colli fino a 30 kg in 230 Paesi. In Italia fa parte di Geopost dal 2020 [BRT](carrier:brt), con oltre 550 locker e più di 11.600 punti BRT-fermopoint (dove i pacchi fino a 20 kg restano 10 giorni).
+Secondo La Poste Groupe, Chronopost spedisce colli fino a 30 kg in 230 Paesi. In Italia il marchio di Geopost è [BRT](carrier:brt), nel gruppo dal 2020, con oltre 550 locker e più di 11.600 punti BRT-fermopoint (dove i pacchi fino a 20 kg restano 10 giorni).
 
-**Consegna locale.** A differenza di Germania e Portogallo, per Italia e Svizzera Peek non riceve da Chronopost un numero partner automatico e prosegue il monitoraggio su Chronopost. Se per la tratta italiana ricevi via SMS o e-mail un BRTcode (es. 14 cifre), puoi cercarlo su brt.it o incollarlo su Peek per seguire [BRT](carrier:brt).
+**Consegna locale.** Per alcuni pacchi verso Germania o Portogallo Chronopost indica a Peek il corriere partner che consegna; per Italia e Svizzera no, quindi Peek continua a seguire il pacco su Chronopost. Se per la tratta italiana ricevi via SMS o e-mail un BRTcode (es. 14 cifre), puoi cercarlo su brt.it o incollarlo su Peek per seguire [BRT](carrier:brt).
 
-**Dogana.** Sugli acquisti online provenienti da fuori UE, dal 1° luglio 2026 nell'UE si applica un dazio fisso di 3 € per articolo fino a 150 € e, dal 1° novembre 2026, una commissione doganale UE di 2 € fissi per articolo sulle vendite a distanza di qualsiasi valore, dovuta all'accettazione della dichiarazione. In Svizzera (fuori UE), l'UFDSC ricorda che gli invii dall'estero sono soggetti a dazi e IVA: sdogana il corriere, che riscuote le relative spese e risponde sui costi e sulla ricerca del pacco. `Problème douanier résolu, colis en cours d'acheminement` indica che l'intoppo doganale è risolto («In transito»). Vedi [pacco fermo in dogana](guide:customs).
+**Dogana.** Sugli acquisti online provenienti da fuori UE, dal 1° luglio 2026 nell'UE si applica un dazio fisso di 3 € per articolo fino a 150 € e, dal 1° novembre 2026, una commissione doganale UE di 2 € fissi per articolo sulle vendite a distanza di qualsiasi valore, dovuta all'accettazione della dichiarazione. In Svizzera (fuori UE), l'UFDSC ricorda che gli invii dall'estero sono in linea di principio soggetti a dazi e IVA: sdogana il corriere, che riscuote le relative spese e risponde sui costi e sulla ricerca del pacco. `Problème douanier résolu, colis en cours d'acheminement` indica che l'intoppo doganale è risolto («In transito»). Vedi [pacco fermo in dogana](guide:customs).
 
 ## In Francia: punti Pickup, locker e assenza
 
@@ -66,11 +66,11 @@ Poi il pacco torna automaticamente al mittente ([pacco non ritirato](guide:uncol
 
 ## Pacco bloccato, danneggiato o non ricevuto
 
-**Fermo o in ritardo.** Rivolgiti al negozio. Negli acquisti a distanza da un venditore francese, questi risponde da solo della consegna e, salvo diversa data concordata, deve consegnare entro 30 giorni dall'ordine; oltre puoi chiedergli per iscritto un termine supplementare ragionevole prima di risolvere il contratto. Vedi [tracciamento che non si aggiorna](guide:tracking-not-updating).
+**Fermo o in ritardo.** Rivolgiti al negozio. Negli acquisti a distanza da un venditore francese, se il corriere è quello proposto dal venditore, quest'ultimo risponde da solo della consegna e, salvo diversa data concordata, deve consegnare entro 30 giorni dall'ordine; oltre puoi chiedergli per iscritto un termine supplementare ragionevole prima di risolvere il contratto. Vedi [tracciamento che non si aggiorna](guide:tracking-not-updating).
 
-**Danneggiato o smarrito.** Reclama con il venditore. A domicilio annota riserve sulla bolla se il pacco è rovinato e avvisa subito il negozio; in un negozio Pickup fai registrare le riserve al commerciante prima di ritirarlo o rifiutarlo. Leggi [pacco smarrito](guide:lost-parcel) e [pacco danneggiato](guide:damaged-parcel).
+**Danneggiato o smarrito.** Fai reclamo al venditore. A domicilio annota riserve sulla bolla se il pacco è rovinato e avvisa subito il negozio; in un negozio Pickup fai registrare le riserve al commerciante prima di ritirarlo o rifiutarlo. Leggi [pacco smarrito](guide:lost-parcel) e [pacco danneggiato](guide:damaged-parcel).
 
-**Consegnato ma assente.** Contatta il negozio: se non prova la consegna fisica a te, il rischio resta suo ([consegnato ma non ricevuto](guide:delivered-not-received)).
+**Consegnato ma non ricevuto.** Contatta il negozio: se non prova la consegna fisica a te, il rischio resta suo ([consegnato ma non ricevuto](guide:delivered-not-received)).
 
 ## Contatti Chronopost
 
@@ -80,19 +80,19 @@ Oltre alla pagina contatti su chronopost.fr, La Poste Groupe, Geopost e Pickup i
 - **Telefono:** `09 69 39 13 91` (numero francese, utile se mancano i codici di ritiro).
 - **Shop2Shop** (es. acquisti su leboncoin): chronoshop2shop.fr.
 
-Se un reclamo scritto, datato e firmato resta senza risposta per almeno due mesi, o la risposta non ti soddisfa, puoi rivolgerti entro un anno al *Médiateur du Groupe La Poste*.
+Se un reclamo scritto, datato e firmato inviato a Chronopost resta senza risposta per almeno due mesi, o la risposta non ti soddisfa, puoi rivolgerti al *Médiateur du Groupe La Poste* entro un anno dal reclamo.
 
 > Pickup avverte di SMS ed e-mail truffa che chiedono oneri doganali o affrancatura, usano link non ufficiali o mettono fretta («ultima occasione»). Non cliccare sul link: verifica sul sito ufficiale. Leggi [SMS truffa sulle consegne](guide:delivery-scam-texts).
 
 ## Seguire un pacco Chronopost con Peek
 
-[Peek](/) riconosce subito i codici di 13 caratteri che iniziano con `PZ`, `XR`, `XT`, `XU`, `XW` o `XY` con cifra di controllo valida e finiscono in `FR` o `IT`, o che terminano in `JB`, `JF` o `TS`. Con finale `CH` (possibile anche [La Posta Svizzera](carrier:swiss-post)) o `GB` verifica con Chronopost. Se la cifra di controllo non torna, o se il codice finisce in `RV`/`VF` o inizia con `XN`, interroga solo Chronopost; altri prefissi validi in `FR` vanno a La Poste.
+[Peek](/) riconosce subito i codici di 13 caratteri che iniziano con `PZ`, `XR`, `XT`, `XU`, `XW` o `XY` con cifra di controllo valida e finiscono in `FR` o `IT`, o che terminano in `JB`, `JF` o `TS`. Con finale `CH` interroga Chronopost e [La Posta Svizzera](carrier:swiss-post), con `GB` Chronopost e Royal Mail. Se la cifra di controllo non torna, o se il codice finisce in `RV`/`VF` o inizia con `XN`, interroga solo Chronopost; altri prefissi validi in `FR` vanno a La Poste.
 
 Con 15 caratteri mostra «Verifica dei servizi di tracciamento…» e interroga Chronopost e le quattro reti DPD; con 14 cifre senza `10` iniziale interroga più corrieri, inclusi Chronopost, DPD e [BRT](carrier:brt). Quando Chronopost risponde vedi «ha questo pacco»; se rispondono più corrieri premi «Scegli», oppure usa «Cambia» sotto «Compatibili con questo numero» o «Tutti i corrieri». Accetta link chronopost.fr e chronoshop2shop.fr senza codice postale.
 
-Peek mostra sulla mappa ogni filiale, il Paese di destinazione, l'ora di consegna, il numero partner per Germania o Portogallo e, durante l'attesa, nome e indirizzo del punto di ritiro (scartando il tuo indirizzo e i contatti del punto). Mostra una data prevista solo con riconsegna o fascia prenotata, o con `Livraison prévue lundi prochain` tra venerdì e domenica. Le scansioni con fuso appaiono nel tuo fuso orario («Orari nel tuo fuso orario: …» su peektracker.com); quelle senza fuso seguono l'ora locale.
+Peek mette ogni filiale sulla mappa e mostra il Paese di destinazione, l'ora di consegna, il numero partner per Germania o Portogallo e, durante l'attesa, nome e indirizzo del punto di ritiro (scartando il tuo indirizzo e i contatti del punto). Mostra una data prevista solo con riconsegna o fascia prenotata, o con `Livraison prévue lundi prochain` tra venerdì e domenica. Le scansioni con fuso appaiono nel tuo fuso orario («Orari nel tuo fuso orario: …» su peektracker.com); quelle senza fuso Peek le legge nell'ora locale del luogo della scansione.
 
-Controlla ogni 10 minuti, e in consegna ogni 2 minuti dalle 6:00 (ora francese, italiana e svizzera) se risponde Chronopost — 15 minuti dopo un errore o tramite servizi di tracciamento. Resta a 10 minuti fino a 30 minuti prima di una fascia oraria o se è in consegna da un giorno precedente; dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Quando subentra un altro corriere, Peek segue il suo ritmo. Scegli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non invia reclami per te.
+Controlla ogni 10 minuti, e in consegna ogni 2 minuti dalle 6.00 (ora francese, italiana e svizzera) se risponde Chronopost — 15 minuti dopo un errore o tramite servizi di tracciamento. Resta a 10 minuti fino a 30 minuti prima di una fascia oraria o se è in consegna da un giorno precedente; dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Scegli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non invia reclami per te.
 
 ## Domande sul tracking Chronopost
 
@@ -124,4 +124,5 @@ In Francia fino a 8 giorni in un negozio Pickup e fino a 5 giorni in un locker P
 - [UFDSC: Frais de dédouanement et suivi des colis (in francese)](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – in Svizzera dazi, IVA e spese di sdoganamento del corriere
 - [Universal Parcel Scraper: Chronopost (in inglese)](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/chronopost) – numeri, stati, partner per Germania e Portogallo e cosa mostra Peek
 - [Universal Parcel Scraper: La Poste (in inglese)](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – risposta La Poste ai numeri Chronopost
+- [Universal Parcel Scraper: BRT (in inglese)](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/brt) – pacchi Chronopost consegnati da BRT con un BRTcode
 :::

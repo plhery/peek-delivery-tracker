@@ -128,8 +128,11 @@ and a carrier it cannot read would leave the Android app. A second job, which ru
 of the release, pushes the result to `main` as one commit. CI validates that final commit
 before deployment ([deployment](DEPLOYMENT.md)); adoption leaves the browser journeys, the
 production build and the iPhone app to it. A commit that reached `main` in the meantime is
-kept when it leaves the adoption's files alone; otherwise the run fails and its summary
-gives the command that starts it again. When `main` already pins the release or a newer one,
+kept when it leaves the adoption's files alone. One that changed them, such as a carrier page
+that regenerates `src/generated/carriers.ts`, is never merged: the run starts a new one for the
+same release on `main` as it is now, which counts as its slot's adoption as this one would have,
+and ends without pushing or failing. The fourth such run in a row fails, and its summary gives
+the command that starts it again. When `main` already pins the release or a newer one,
 such as after a second run for the same release, the run ends without pushing or failing.
 
 When the app fails its typecheck or unit tests, or the Android core its tests, with a

@@ -343,6 +343,60 @@ describe('scraper adoption validation', () => {
     assert.doesNotMatch(gate, /\bnpm\b|secrets\./);
   });
 
+  it('makes the adoption again, without failing, when main changed one of its files after it was prepared', () => {
+    const step = workflow.match(/      - name: Commit the adoption\n[\s\S]*?        run: \|\n([\s\S]*?)\n\n/)?.[1];
+    assert.ok(step, 'The adoption commit step must exist.');
+    const script = step.split('\n').map(line => line.replace(/^          /, '')).join('\n');
+    const directory = mkdtempSync(path.join(tmpdir(), 'delivery-adoption-again-'));
+    const repository = path.join(directory, 'main');
+    const git = (...args) => execFileSync('git', args, { cwd: repository, encoding: 'utf8' }).trim();
+    try {
+      mkdirSync(path.join(repository, 'scripts'), { recursive: true });
+      mkdirSync(path.join(repository, 'src', 'generated'), { recursive: true });
+      writeFileSync(path.join(repository, 'scripts', 'adopt-scraper.mjs'),
+        readFileSync(new URL('./adopt-scraper.mjs', import.meta.url)));
+      writeFileSync(path.join(repository, 'package.json'), JSON.stringify({ dependencies: { 'universal-parcel-scraper': '1.0.0' } }));
+      writeFileSync(path.join(repository, 'src', 'generated', 'carriers.ts'), 'prepared\n');
+      git('init', '--quiet');
+      git('-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '--quiet', '--allow-empty', '-m', 'empty');
+      git('add', '.');
+      git('-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '--quiet', '-m', 'base');
+      const base = git('rev-parse', 'HEAD');
+      // A carrier page landed meanwhile and regenerated the carriers' links.
+      writeFileSync(path.join(repository, 'src', 'generated', 'carriers.ts'), 'a carrier page later\n');
+      git('-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '--quiet', '-am', 'carrier page');
+      const head = git('rev-parse', 'HEAD');
+      const run = (again) => {
+        const output = path.join(directory, `output-${again}`);
+        const summary = path.join(directory, `summary-${again}`);
+        writeFileSync(output, '');
+        writeFileSync(summary, '');
+        execFileSync('bash', ['-e', '-o', 'pipefail', '-c', script], {
+          cwd: repository, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+          env: { ...process.env, VERSION: '1.1.0', BASE: base, ADOPTION_FILES: 'package.json src/generated/carriers.ts',
+            AGAIN: String(again), MAX_AGAIN: '3', RUNNER_TEMP: directory, GITHUB_OUTPUT: output, GITHUB_STEP_SUMMARY: summary },
+        });
+        return { output: readFileSync(output, 'utf8'), summary: readFileSync(summary, 'utf8') };
+      };
+      const first = run(0);
+      assert.equal(first.output, 'again=true\n');
+      assert.match(first.summary, /main changed src\/generated\/carriers\.ts after the adoption was prepared, so a new run makes it again/);
+      assert.equal(git('rev-parse', 'HEAD'), head, 'Nothing is committed.');
+      // The fourth run in a row fails, and says why.
+      assert.throws(() => run(3), error => error.status === 1);
+      assert.match(readFileSync(path.join(directory, 'stopped'), 'utf8'), /main changed src\/generated\/carriers\.ts after the adoption was prepared, 4 runs in a row/);
+      // The Again job starts the same release again, as its slot's adoption unless this run was one by hand.
+      const again = workflow.match(/\n  again:\n([\s\S]*)$/)?.[1] ?? '';
+      assert.match(again, /needs: \[adopt, push\]\n\s+if: "!cancelled\(\) && needs\.push\.outputs\.again == 'true'"/);
+      assert.match(again, /permissions:\n\s+actions: write\n\s+steps:/);
+      assert.ok(again.includes("SLOT: ${{ github.event_name != 'workflow_dispatch' || inputs.slot == true }}"));
+      assert.ok(again.includes('-f "version=$VERSION" -f "slot=$SLOT" -f "database_ready=$DATABASE_READY" -f "again=$((AGAIN + 1))"'));
+      assert.doesNotMatch(again, /\bnpm\b|secrets\./);
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
+
   it('refuses to push without the token that starts validation workflows', () => {
     const step = workflow.match(/      - name: Push to main[\s\S]*?        run: \|\n([\s\S]*?)(?=\n      - name:)/)?.[1];
     assert.ok(step, 'The adoption push step must exist.');

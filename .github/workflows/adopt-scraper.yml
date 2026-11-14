@@ -41,6 +41,11 @@ on:
         required: false
         type: boolean
         default: false
+      again:
+        description: How many runs in a row made this adoption again before this one, main having changed one of its files meanwhile.
+        required: false
+        type: number
+        default: 0
 
 permissions:
   contents: read
@@ -345,11 +350,15 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+    outputs:
+      again: ${{ steps.commit.outputs.again == 'true' || steps.push.outputs.again == 'true' }}
     env:
       VERSION: ${{ needs.adopt.outputs.version }}
       CURRENT: ${{ needs.adopt.outputs.current }}
       BASE: ${{ needs.adopt.outputs.base }}
       DATABASE_READY: ${{ inputs.database_ready == true }}
+      AGAIN: ${{ inputs.again || 0 }}
+      MAX_AGAIN: 3
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -366,9 +375,12 @@ jobs:
           node-version: 26
 
       # A lockfile or a generated file is never merged: when main changed one
-      # since preparation, the adoption is made again instead. When main already
-      # pins the release or a newer one, another run or a commit by hand adopted
-      # it, and the run ends without pushing or failing.
+      # since preparation, such as a carrier page that regenerates
+      # src/generated/carriers.ts, the Again job makes the adoption again on
+      # main as it is now, and this run ends without pushing or failing; after
+      # MAX_AGAIN such runs in a row, it fails. When main already pins the
+      # release or a newer one, another run or a commit by hand adopted it, and
+      # the run ends without pushing or failing.
       - name: Commit the adoption
         id: commit
         run: |
@@ -376,6 +388,12 @@ jobs:
             echo "$1" > "$RUNNER_TEMP/stopped"
             echo "::error::$1"
             exit 1
+          }
+          again() {
+            if [ "$AGAIN" -ge "$MAX_AGAIN" ]; then stop "main changed $1 after the adoption was prepared, $((AGAIN + 1)) runs in a row."; fi
+            echo 'again=true' >> "$GITHUB_OUTPUT"
+            printf '### Universal Parcel Scraper %s is adopted again\n\nmain changed %s after the adoption was prepared, so a new run makes it again on main as it is now.\n' "$VERSION" "$1" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
           }
           read -r -a files <<< "$ADOPTION_FILES"
           [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-main\.[0-9]+)?$ && "$BASE" =~ ^[0-9a-f]{40}$ ]] \
@@ -387,8 +405,8 @@ jobs:
             printf '### Universal Parcel Scraper %s is already on main\n\nmain pins it or a newer release, so nothing was pushed.\n' "$VERSION" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
-          git diff --quiet "$BASE" HEAD -- "${files[@]}" \
-            || stop "main changed a file of the adoption after it was prepared."
+          changed=$(git diff --name-only "$BASE" HEAD -- "${files[@]}" | paste -sd ' ' -)
+          if [ -n "$changed" ]; then again "$changed"; fi
           # Into the index only: nothing is written to disk before the check.
           git apply --cached "$RUNNER_TEMP/adoption/adoption.patch" \
             || stop "The patch does not apply to main."
@@ -407,7 +425,8 @@ jobs:
       # The workflow token suppresses downstream workflows. Require the adoption
       # token so the final commit, including any rebase, is tested before deployment.
       - name: Push to main
-        if: steps.commit.outputs.held != 'true'
+        id: push
+        if: steps.commit.outputs.held != 'true' && steps.commit.outputs.again != 'true'
         env:
           PUSH_TOKEN: ${{ secrets.SCRAPER_ADOPTION_TOKEN }}
         run: |
@@ -427,6 +446,12 @@ jobs:
             echo "::error::$1"
             exit 1
           }
+          again() {
+            if [ "$AGAIN" -ge "$MAX_AGAIN" ]; then stop "main changed $1 after the adoption was prepared, $((AGAIN + 1)) runs in a row."; fi
+            echo 'again=true' >> "$GITHUB_OUTPUT"
+            printf '### Universal Parcel Scraper %s is adopted again\n\nmain changed %s after the adoption was prepared, so a new run makes it again on main as it is now.\n' "$VERSION" "$1" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          }
           read -r -a files <<< "$ADOPTION_FILES"
           pushed=false
           for attempt in 1 2 3 4 5; do
@@ -444,8 +469,8 @@ jobs:
               printf '### Universal Parcel Scraper %s is already on main\n\nmain adopted it or a newer release meanwhile, so nothing was pushed.\n' "$VERSION" >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
-            git diff --quiet HEAD~1 origin/main -- "${files[@]}" \
-              || stop "main changed a file of the adoption after it was prepared."
+            changed=$(git diff --name-only HEAD~1 origin/main -- "${files[@]}" | paste -sd ' ' -)
+            if [ -n "$changed" ]; then again "$changed"; fi
             echo "main moved; rebasing (attempt $attempt)."
             if ! git rebase --quiet origin/main; then
               git rebase --abort
@@ -475,3 +500,26 @@ jobs:
             echo "$again"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # Makes the adoption again when main changed one of its files after it was
+  # prepared: a new run prepares the same release on main as it is now. It
+  # counts as its slot's adoption as this one would have, or is one by hand.
+  again:
+    name: Again
+    needs: [adopt, push]
+    if: "!cancelled() && needs.push.outputs.again == 'true'"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Start the adoption again
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.adopt.outputs.version }}
+          SLOT: ${{ github.event_name != 'workflow_dispatch' || inputs.slot == true }}
+          DATABASE_READY: ${{ inputs.database_ready == true }}
+          AGAIN: ${{ inputs.again || 0 }}
+        run: |
+          gh workflow run adopt-scraper.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f "version=$VERSION" -f "slot=$SLOT" -f "database_ready=$DATABASE_READY" -f "again=$((AGAIN + 1))"

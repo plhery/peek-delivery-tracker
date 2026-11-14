@@ -2430,6 +2430,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "gls-allemagne-suivi-colis",
+      "title": "GLS Allemagne suivi colis\u00a0: statuts, relais et contact",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
       "id": "gls-ch",
       "catalog": "gls-ch",
       "slug": "gls-suisse-suivi-colis",
@@ -2920,6 +2928,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-tracking",
+      "title": "Vinted Go tracking: stati, ritiro in Italia e assistenza",
+      "name": "Vinted Go",
+      "color": "#004654"
+    },
+    {
       "id": "amazon-logistics",
       "catalog": "amazon-logistics",
       "slug": "amazon-logistics-tracking",
@@ -3184,6 +3200,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "MRW seguimiento: número de envío, estados y teléfono",
       "name": "MRW",
       "color": "#19133b"
+    },
+    {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "ctt-portugal-seguimiento",
+      "title": "Seguimiento CTT Portugal: números, estados y recogida",
+      "name": "CTT",
+      "color": "#df0024"
     },
     {
       "id": "4px",
@@ -3886,6 +3910,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SunYou tracking: numer SY, statusy i kontakt",
       "name": "SunYou",
       "color": "#02a232"
+    },
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-sledzenie",
+      "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
+      "name": "Omniva",
+      "color": "#f86300"
     },
     {
       "id": "meest",

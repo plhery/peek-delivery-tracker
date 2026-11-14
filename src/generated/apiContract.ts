@@ -55644,6 +55644,7 @@ export interface ApiPackageRow {
 };
   "next_check_at"?: string;
 };
+  "return_held"?: boolean | null;
 };
   "archived_at": string | null;
   "notifications_muted": boolean;
@@ -56004,6 +56005,7 @@ export interface ApiPublicPackage {
   "import_charges"?: ApiImportCharges;
   "destination_country"?: string;
   "likely_carrier"?: ApiLikelyCarrier;
+  "return_held"?: boolean;
 };
   "archived_at": string | null;
   "notifications_muted": boolean;

@@ -84,6 +84,11 @@ export interface Parcel {
   canonicalTrackingNumber?: string;
   /** Whether Swiss Post has announced a Swiss-issued inbound shipment. */
   swissPostReady?: boolean;
+  /**
+   * Returned only because the scans after the return carry the parcel back: the server keeps checking it until a
+   * delivery round, a problem or a new label ends the hold.
+   */
+  returnHeld?: boolean;
   archivedAt?: string;
   notificationsMuted?: boolean;
   /** The account's delivery email is off for this parcel. */

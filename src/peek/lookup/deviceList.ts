@@ -4,7 +4,10 @@ import { forgetParcelLink, ParcelLinkError, readParcelLink } from '../links';
 import { journeyEndedBefore } from '../parcel/summary';
 import { forgetRecent, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
 
-/** How long an answer is fresh enough for the list: a parcel on its way moves, one that arrived rests. */
+/**
+ * How long an answer is fresh enough for the list: a parcel on its way moves, one that arrived rests. A held
+ * return is on its way: the server still follows it.
+ */
 const FRESH_MS = 5 * 60_000;
 const SETTLED_FRESH_MS = 12 * 60 * 60_000;
 /** A lookup the carrier has not answered yet is asked about again soon. */
@@ -47,7 +50,8 @@ export async function refreshDeviceParcels(recents: readonly RecentParcel[], sig
   for (const recent of recents) {
     if (signal.aborted || (typeof navigator !== 'undefined' && navigator.onLine === false)) return false;
     const seen = Date.parse(recent.lastSeenAt) || 0;
-    const fresh = waiting(recent) ? WAITING_FRESH_MS : recent.stage && isFinal(recent.stage) ? SETTLED_FRESH_MS : FRESH_MS;
+    const settled = recent.stage && isFinal(recent.stage) && !recent.snapshot.parcel.returnHeld;
+    const fresh = waiting(recent) ? WAITING_FRESH_MS : settled ? SETTLED_FRESH_MS : FRESH_MS;
     if (now() - Math.max(seen, checkedAt.get(recent.id) ?? 0) < fresh) {
       unanswered ||= waiting(recent);
       continue;

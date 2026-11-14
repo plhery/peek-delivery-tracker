@@ -90,6 +90,28 @@ describe('watchDeviceParcels', () => {
     stop();
   });
 
+  const returned = (held: boolean) => testView({ stages: ['in_transit', 'returned'], parcel: held ? { returnHeld: true } : {} });
+
+  it('reads a returned parcel again twice a day', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: returned(false), now: Date.now() });
+    mocks.read.mockResolvedValue(returned(false));
+    const stop = watch();
+    await pass(11 * 60 * MINUTE);
+    expect(mocks.read).not.toHaveBeenCalled();
+    await pass(60 * MINUTE);
+    expect(mocks.read).toHaveBeenCalledOnce();
+    stop();
+  });
+
+  it('reads a held return, which the server still follows, as often as a parcel on its way', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: returned(true), now: Date.now() });
+    mocks.read.mockResolvedValue(returned(true));
+    const stop = watch();
+    await pass(5 * MINUTE);
+    expect(mocks.read).toHaveBeenCalledOnce();
+    stop();
+  });
+
   it('waits while the list is out of sight, and reads at once when it is shown again', async () => {
     rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
     const stop = watch();

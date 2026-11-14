@@ -162,6 +162,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     deliveryAnnounced: row.carrier_data?.delivery_announced ?? undefined,
     canonicalTrackingNumber: row.carrier_data?.canonical_tracking_number ?? undefined,
     swissPostReady: row.carrier_data?.swiss_post_ready ?? undefined,
+    returnHeld: row.carrier_data?.return_held ?? undefined,
     destinationCountry: row.carrier_data?.destination_country ?? undefined,
     archivedAt: row.archived_at ?? undefined,
     notificationsMuted: row.notifications_muted,

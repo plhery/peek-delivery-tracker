@@ -235,6 +235,8 @@ const SHOWN_CARRIER_DATA: Record<string, (value: unknown) => boolean> = {
   import_charges: isRecord,
   destination_country: text,
   likely_carrier: isRecord,
+  // A return the later scans only carry back stays followed: a device's list keeps reading it.
+  return_held: flag,
 };
 /** The other leg's number, and the one the carrier tracks the parcel by, are tracking numbers too: shown only where the parcel's own is. */
 const SHOWN_WITH_NUMBER: Record<string, (value: unknown) => boolean> = {
@@ -254,7 +256,7 @@ const SHOWN_WITH_NUMBER: Record<string, (value: unknown) => boolean> = {
 const SHOWN_IN_GIFT = new Set([
   'active_tracking_carrier', 'original_carrier', 'delivery_carrier', 'delivery_announced', 'tracking_provider', 'carrier_answered', 'auto_changed_from',
   'auto_changed_to', 'auto_changed_at', 'swiss_post_ready', 'expected_delivery_from', 'import_charges', 'destination_country',
-  'likely_carrier',
+  'likely_carrier', 'return_held',
 ]);
 
 const IMPORT_CHARGE_AMOUNTS = ['customs', 'carrier_fee', 'carrier_fee_online'] as const;

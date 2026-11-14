@@ -620,7 +620,8 @@ class DeviceParcels(
             val key = keys.keyOf(entry.linkId)
             if (key == null && !entry.isViewer) continue
             val age = now().timeIntervalSinceReferenceDate - entry.checkedAt
-            val fresh = if (waiting(entry.parcel)) waitingFresh else if (entry.parcel.currentStage?.isFinal == true) settledFresh else fresh
+            val settled = entry.parcel.currentStage?.isFinal == true && entry.parcel.carrierData?.returnHeld != true
+            val fresh = if (waiting(entry.parcel)) waitingFresh else if (settled) settledFresh else fresh
             if (!(all || only != null || age < 0 || age >= fresh)) continue
             try {
                 val response = client.read(entry.linkId, key)
@@ -1032,7 +1033,8 @@ class DeviceParcels(
     companion object {
         /**
          * How long an answer is good for, in seconds: a parcel on its way moves, one that arrived rests, and one its
-         * carrier has not answered about yet is asked about again at once.
+         * carrier has not answered about yet is asked about again at once. A held return is on its way: the server still
+         * follows it.
          */
         const val fresh: Double = 5.0 * 60
         const val settledFresh: Double = 12.0 * 60 * 60

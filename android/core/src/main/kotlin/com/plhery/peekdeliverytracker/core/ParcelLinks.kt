@@ -72,6 +72,7 @@ fun Parcel(shared: PublicPackage): Parcel {
             importCharges = data.importCharges,
             destinationCountry = data.destinationCountry,
             routing = data.likelyCarrier?.let { CarrierDataRouting(likelyCarrier = it) },
+            returnHeld = data.returnHeld,
         ),
         archivedAt = shared.archivedAt,
         notificationsMuted = shared.notificationsMuted,

@@ -4138,6 +4138,7 @@ data class CarrierData(
     @SerialName("postcode_country") val postcodeCountry: PostcodeCountry? = null,
     @SerialName("destination_country") val destinationCountry: String? = null,
     val routing: CarrierDataRouting? = null,
+    @SerialName("return_held") val returnHeld: Boolean? = null,
 )
 
 @Serializable
@@ -4234,6 +4235,7 @@ data class PublicPackageCarrierData(
     @SerialName("import_charges") val importCharges: ImportCharges? = null,
     @SerialName("destination_country") val destinationCountry: String? = null,
     @SerialName("likely_carrier") val likelyCarrier: LikelyCarrier? = null,
+    @SerialName("return_held") val returnHeld: Boolean? = null,
 )
 
 @Serializable

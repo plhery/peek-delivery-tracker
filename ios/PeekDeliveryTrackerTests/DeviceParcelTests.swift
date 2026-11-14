@@ -388,18 +388,23 @@ final class DeviceParcelTests: XCTestCase {
     }
 
     func testOnlyStaleParcelsAreReadAgainAndAForgottenOneLeaves() async throws {
-        let moving = UUID(), arrived = UUID(), gone = UUID()
+        let moving = UUID(), arrived = UUID(), gone = UUID(), held = UUID()
         var now = Date(timeIntervalSince1970: 1_800_000_000)
         let storage = Memory()
-        storage.keys = ["22222222222A": key, "22222222222B": key, "22222222222C": key]
+        storage.keys = ["22222222222A": key, "22222222222B": key, "22222222222C": key, "22222222222D": key]
+        // A return the server still follows, as the scans after it carry the parcel back, is read as one on its way.
+        var heldReturn = package(held, stage: .returned)
+        heldReturn.carrierData.returnHeld = true
         storage.parcels = [
             DeviceParcel(linkID: "22222222222A", label: "Moving", archivedAt: nil, parcel: Parcel(shared: package(moving)), checkedAt: now),
             DeviceParcel(linkID: "22222222222B", label: "Arrived", archivedAt: nil, parcel: Parcel(shared: package(arrived, stage: .delivered)), checkedAt: now),
             DeviceParcel(linkID: "22222222222C", label: "Gone", archivedAt: nil, parcel: Parcel(shared: package(gone)), checkedAt: now),
+            DeviceParcel(linkID: "22222222222D", label: "Held", archivedAt: nil, parcel: Parcel(shared: heldReturn), checkedAt: now),
         ]
         let calls = Calls()
         let answers: [String: PublicParcelResponse] = [
             "22222222222A": PublicParcelResponse(link: link("22222222222A"), package: package(moving, stage: .outForDelivery)),
+            "22222222222D": PublicParcelResponse(link: link("22222222222D"), package: heldReturn),
         ]
         let device = DeviceParcels(client: client(calls, read: { answers[$0] }), storage: storage, now: { now })
 
@@ -409,8 +414,8 @@ final class DeviceParcelTests: XCTestCase {
         now += DeviceParcels.fresh + 1
         try await device.refresh()
         // A parcel that arrived rests for hours; the one the service forgot leaves the list.
-        XCTAssertEqual(calls.all, ["read 22222222222A k", "read 22222222222C k"])
-        XCTAssertEqual(device.list().map(\.label), ["Moving", "Arrived"])
+        XCTAssertEqual(calls.all, ["read 22222222222A k", "read 22222222222C k", "read 22222222222D k"])
+        XCTAssertEqual(device.list().map(\.label), ["Moving", "Arrived", "Held"])
         XCTAssertEqual(device.list().first?.currentStage, .outForDelivery)
         XCTAssertNil(storage.keys["22222222222C"])
     }

@@ -286,7 +286,8 @@ struct DeviceParcelFiles: DeviceParcelStorage {
 @MainActor
 final class DeviceParcels {
     /// How long an answer is good for: a parcel on its way moves, one that arrived rests, and
-    /// one its carrier has not answered about yet is asked about again at once.
+    /// one its carrier has not answered about yet is asked about again at once. A held return is
+    /// on its way: the server still follows it.
     static let fresh: TimeInterval = 5 * 60
     static let settledFresh: TimeInterval = 12 * 60 * 60
     static let waitingFresh: TimeInterval = 1.5
@@ -412,8 +413,8 @@ final class DeviceParcels {
             let key = keys[entry.linkID]
             guard key != nil || entry.isViewer else { continue }
             let age = now().timeIntervalSince(entry.checkedAt)
-            let fresh = Self.waiting(entry.parcel) ? Self.waitingFresh
-                : entry.parcel.currentStage?.isFinal == true ? Self.settledFresh : Self.fresh
+            let settled = entry.parcel.currentStage?.isFinal == true && entry.parcel.carrierData?.returnHeld != true
+            let fresh = Self.waiting(entry.parcel) ? Self.waitingFresh : settled ? Self.settledFresh : Self.fresh
             guard all || id != nil || age < 0 || age >= fresh else { continue }
             do {
                 let response = try await client.read(entry.linkID, key)

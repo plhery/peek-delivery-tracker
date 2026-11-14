@@ -39,7 +39,8 @@ extension Parcel {
                 weightKg: data.weightKg,
                 importCharges: data.importCharges,
                 destinationCountry: data.destinationCountry,
-                routing: data.likelyCarrier.map { CarrierDataRouting(likelyCarrier: $0) }
+                routing: data.likelyCarrier.map { CarrierDataRouting(likelyCarrier: $0) },
+                returnHeld: data.returnHeld
             ),
             archivedAt: package.archivedAt,
             notificationsMuted: package.notificationsMuted,

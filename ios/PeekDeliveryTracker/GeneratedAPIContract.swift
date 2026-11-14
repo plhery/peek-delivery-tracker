@@ -4181,6 +4181,7 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
     var postcodeCountry: PostcodeCountry? = nil
     var destinationCountry: String? = nil
     var routing: CarrierDataRouting? = nil
+    var returnHeld: Bool? = nil
 
     private enum CodingKeys: String, CodingKey {
         case activeTrackingCarrier
@@ -4210,6 +4211,7 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
         case postcodeCountry
         case destinationCountry
         case routing
+        case returnHeld
     }
 }
 
@@ -4281,6 +4283,7 @@ struct PublicPackageCarrierData: Codable, Equatable, Hashable, Sendable {
     var importCharges: ImportCharges? = nil
     var destinationCountry: String? = nil
     var likelyCarrier: LikelyCarrier? = nil
+    var returnHeld: Bool? = nil
 }
 
 enum ClaimParcelResultOutcome: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {

@@ -563,17 +563,22 @@ class DeviceParcelTests {
         val moving = UUID.randomUUID()
         val arrived = UUID.randomUUID()
         val gone = UUID.randomUUID()
+        val held = UUID.randomUUID()
         var now = Instant.ofEpochSecond(1_800_000_000)
         val storage = Memory()
-        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key, "22222222222C" to key)
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key, "22222222222C" to key, "22222222222D" to key)
+        // A return the server still follows, as the scans after it carry the parcel back, is read as one on its way.
+        val heldReturn = pkg(held, stage = TrackingStage.Returned).copy(carrierData = PublicPackageCarrierData(returnHeld = true))
         storage.parcels = listOf(
             parcel("22222222222A", "Moving", moving, date(now)),
             parcel("22222222222B", "Arrived", arrived, date(now), pkg(arrived, stage = TrackingStage.Delivered)),
             parcel("22222222222C", "Gone", gone, date(now)),
+            parcel("22222222222D", "Held", held, date(now), heldReturn),
         )
         val calls = Calls()
         val answers = mapOf(
             "22222222222A" to PublicParcelResponse(link = link("22222222222A"), parcel = pkg(moving, stage = TrackingStage.OutForDelivery)),
+            "22222222222D" to PublicParcelResponse(link = link("22222222222D"), parcel = heldReturn),
         )
         val device = device(client(calls, read = { answers[it] }), storage, this, now = { now })
 
@@ -583,8 +588,8 @@ class DeviceParcelTests {
         now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
         device.refresh()
         // A parcel that arrived rests for hours; the one the service forgot leaves the list.
-        assertEquals(listOf("read 22222222222A k", "read 22222222222C k"), calls.all)
-        assertEquals(listOf("Moving", "Arrived"), device.list().map { it.label })
+        assertEquals(listOf("read 22222222222A k", "read 22222222222C k", "read 22222222222D k"), calls.all)
+        assertEquals(listOf("Moving", "Arrived", "Held"), device.list().map { it.label })
         assertEquals(TrackingStage.OutForDelivery, device.list().first().currentStage)
         assertNull(storage.keys["22222222222C"])
     }

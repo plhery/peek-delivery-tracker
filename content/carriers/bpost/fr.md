@@ -3,7 +3,7 @@ title: bpost suivi : code-barres, statuts et point relais
 description: Suivre un colis bpost : où trouver le code-barres, ce que veut dire chaque statut du Track & Trace, combien de temps le colis attend et comment joindre bpost.
 slug: bpost-suivi
 published: 2026-10-11
-updated: 2026-10-28
+updated: 2026-11-14
 ---
 
 bpost est l'entreprise postale belge, la marque du groupe bnode qui livre les colis en Belgique et aux Pays-Bas. Pour suivre ton colis, saisis son code-barres sur le [Track & Trace de bpost](https://track.bpost.cloud/), dans l'app My bpost ou dans le champ ci-dessus. Ce code-barres figure dans l'e-mail d'expédition de la boutique, dans le SMS ou l'e-mail de bpost, sur l'étiquette ou sur l'avis de passage.
@@ -49,6 +49,8 @@ Le Track & Trace de bpost existe en français, en néerlandais, en anglais et en
 
 Après `Votre envoi est arrivé chez l'opérateur postal du pays de destination et sera livré dans les prochains jours`, bpost dépend des informations de la poste étrangère. bpost conseille alors d'essayer aussi l'outil de suivi de cette poste.
 
+Dans Peek, qui affiche les libellés anglais de bpost, une tournée interrompue tient en deux lignes : `Delivery interrupted due to unforeseen circumstances`, la tournée du facteur s'est arrêtée avant d'arriver à ton colis, pour une raison du côté de bpost, et un nouveau jour de livraison suit ; puis `New delivery scheduled`, ce nouveau jour est fixé et ton colis l'attend.
+
 ## Livraison bpost, point relais et absence
 
 **Tu n'étais pas là.** Sans préférence de livraison, le facteur essaie en général un voisin ou un lieu sûr. Sinon, tu reçois un avis de passage et tu peux retirer le colis au Point d'enlèvement indiqué, à partir du jour ouvrable suivant. bpost t'envoie toujours un e-mail quand le colis est prêt ; l'avis papier n'arrive que si bpost ne peut pas te joindre par voie numérique. Le point peut changer dans des cas exceptionnels, alors vérifie le statut sur le Track & Trace avant d'y aller. Le facteur ne repasse pas le même jour. Si tu as manqué une livraison un samedi, il repasse le jour ouvrable suivant.
@@ -62,6 +64,8 @@ Après `Votre envoi est arrivé chez l'opérateur postal du pays de destination 
 ## Colis bpost pas reçu, bloqué ou perdu
 
 **Le suivi ne bouge plus.** Pour un envoi vers l'étranger, bpost demande d'attendre au moins 5 jours ouvrables sans changement (pays voisin) ou 10 jours ouvrables (Royaume-Uni et autres pays), puis de demander à l'expéditeur de contacter le service clientèle de bpost. Voir aussi [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
+
+**Tournée interrompue.** Avec `Delivery interrupted due to unforeseen circumstances`, l'arrêt vient de bpost et un nouveau jour de livraison suit, annoncé par `New delivery scheduled`. Peek affiche « Problème signalé » pour la première ligne, puis de nouveau « En transit ».
 
 **Qui réclame.** En tant que destinataire, tu ne peux pas introduire toi-même une plainte. La plupart des expéditeurs ont un accord avec bpost pour les colis perdus ou abîmés : demande à la boutique un nouvel envoi ou un remboursement. Seul l'expéditeur peut lancer une enquête chez bpost.
 

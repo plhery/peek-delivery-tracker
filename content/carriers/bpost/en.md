@@ -3,7 +3,7 @@ title: bpost tracking: statuses, Pick-up points and contact
 description: Track a bpost parcel: where the barcode is, what each Track & Trace status means, how long Pick-up points and lockers keep it and how to reach bpost.
 slug: bpost-tracking
 published: 2026-10-11
-updated: 2026-10-28
+updated: 2026-11-14
 ---
 
 bpost is Belgium's postal company, the brand of the bnode group that delivers the last mile in Belgium and the Netherlands. Track a parcel on [bpost's Track & Trace](https://track.bpost.cloud/) or in the My bpost app with its barcode, or paste the number in the box above. The barcode comes from the shop's shipping email, bpost's text or email, the shipping label or the notice in your letterbox.
@@ -41,6 +41,8 @@ bpost's Track & Trace is available in English, French, Dutch and German. These a
 | `Departure to country of destination` | Leaving for the country it is going to. |
 | `Your shipment has arrived at the postal operator of the country of destination and will be delivered in the coming days` | The destination's post has it and will deliver it. |
 | `The postman's delivery round for your item has started` | Out for delivery today. |
+| `Delivery interrupted due to unforeseen circumstances` | The postman's round stopped before it reached your parcel, for a reason on bpost's side. A new delivery day follows. |
+| `New delivery scheduled` | bpost has set that new delivery day, and your parcel waits for it. |
 | `Item available at Pick-up point` | Ready to pick up at a Pick-up point. |
 | `Item available at the bbox locker` | Ready to pick up from a bbox locker. |
 | `Item delivered` | Delivered, or picked up at the point. |
@@ -58,6 +60,8 @@ If you're out and set no preferences, the postman will generally try a neighbour
 ## bpost parcel delayed, lost or not delivered
 
 **Stuck.** For parcels going abroad, bpost asks you to wait at least 5 working days without a change (neighbouring countries) or 10 (the UK and everywhere else), then ask the sender to contact bpost. See [why tracking stops updating](guide:tracking-not-updating).
+
+**Round interrupted.** After `Delivery interrupted due to unforeseen circumstances`, the round stopped on bpost's side and a new delivery day follows, shown as `New delivery scheduled`. Peek shows "Needs attention" for the first line and "In transit" again for the second.
 
 **Who complains.** As the recipient you can't file a complaint yourself. Most senders have an arrangement with bpost for lost or damaged parcels, so ask the shop for a reship or refund. Only the sender can start an investigation.
 

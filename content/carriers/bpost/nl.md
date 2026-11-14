@@ -3,7 +3,7 @@ title: bpost pakje volgen: barcode, statussen en Afhaalpunt
 description: Volg je bpost-pakje: waar je de barcode vindt, wat Track & Trace toont, hoelang een Afhaalpunt of bbox-automaat je pakje bewaart en hoe je bpost bereikt.
 slug: bpost-pakje-volgen
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-14
 ---
 
 bpost is het Belgische postbedrijf. Binnen de bnode-groep, tot december 2025 bpostgroup, is bpost het merk dat pakjes en post aan de deur brengt in België en Nederland. Je volgt je pakje met de barcode in [bpost Track & Trace](https://track.bpost.cloud/) of in de My bpost app, of je plakt de barcode in het veld hierboven. Die barcode staat in de verzendmail van de webshop, in de e-mail of sms van bpost, op het verzendetiket of op het afwezigheidsbericht in je brievenbus.
@@ -50,6 +50,8 @@ In Peek, en in de Engelstalige Track & Trace, lees je de scans in het Engels. Di
 | `Departure to country of destination` | Je zending naar het buitenland vertrekt naar het land van bestemming. |
 | `Your shipment has arrived at the postal operator of the country of destination and will be delivered in the coming days` | De buitenlandse post heeft je zending en levert ze. Vanaf nu hangt bpost af van haar informatie. |
 | `The postman's delivery round for your item has started` | De postbode heeft je pakje vandaag mee op ronde. |
+| `Delivery interrupted due to unforeseen circumstances` | De ronde van de postbode stopte voor hij bij je pakje was, door een oorzaak bij bpost. Er volgt een nieuwe leveringsdag. |
+| `New delivery scheduled` | bpost heeft die nieuwe leveringsdag vastgelegd, en je pakje wacht erop. |
 | `Item available at Pick-up point` | Het ligt klaar in een Afhaalpunt. |
 | `Item available at the bbox locker` | Het ligt klaar in de bbox-automaat. |
 | `Item delivered` | Geleverd, of afgehaald in het Afhaalpunt. |
@@ -70,6 +72,8 @@ In Peek, en in de Engelstalige Track & Trace, lees je de scans in het Engels. Di
 ## Pakje vertraagd, verloren, beschadigd of terug naar afzender
 
 **Track & Trace beweegt niet meer.** Voor een zending naar een buurland wacht je minstens 5 werkdagen zonder nieuwe status, voor het Verenigd Koninkrijk en alle andere landen minstens 10. Vraag daarna de afzender om de klantendienst van bpost te contacteren. Lees ook [waarom tracking niet meer bijwerkt](guide:tracking-not-updating) (in het Engels).
+
+**Ronde onderbroken.** Na `Delivery interrupted due to unforeseen circumstances` stopte de ronde door een oorzaak bij bpost, en er volgt een nieuwe leveringsdag, die je ziet als `New delivery scheduled`. Peek toont bij de eerste regel ‘Needs attention’ en bij de tweede weer ‘In transit’.
 
 **Wie dient een klacht in?** Als ontvanger kan je zelf geen klacht indienen: alleen de afzender kan bij bpost een onderzoek starten. De meeste webshops hebben vaste afspraken met bpost voor verloren of beschadigde pakjes, dus vraag de webshop om je bestelling opnieuw te verzenden of je terug te betalen.
 

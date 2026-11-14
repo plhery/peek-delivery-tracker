@@ -3,7 +3,7 @@ title: bpost Sendungsverfolgung: Status, Abholung, bbox, Zoll
 description: bpost-Paket verfolgen: wo der Strichcode steht, was die Status heißen, wie lange Abholstelle und bbox warten, was der Zoll kostet und wie du bpost erreichst.
 slug: bpost-sendungsverfolgung
 published: 2026-10-27
-updated: 2026-10-28
+updated: 2026-11-14
 ---
 
 bpost ist die Post Belgiens. Dein Paket verfolgst du mit dem Strichcode, so heißt bei bpost die Sendungsnummer: in [Track & Trace](https://track.bpost.cloud/), das es auch auf Deutsch gibt, in der App My bpost oder oben im Feld. Den Strichcode schickt dir meist der Absender per E-Mail oder SMS. Er steht auch auf dem Versandetikett, dem Beleg vom Postamt und der Abwesenheitsbenachrichtigung.
@@ -41,6 +41,8 @@ In Track & Trace stehen die Schritte in der Sprache, die du dort wählst: Deutsc
 | `No extra costs` | Verzollt, du zahlst nichts nach. |
 | `Your item has been sorted` | Sortiert und unterwegs. |
 | `The postman's delivery round for your item has started` | Der Briefträger hat dein Paket dabei, es kommt heute. |
+| `Delivery interrupted due to unforeseen circumstances` | Die Runde des Briefträgers endete, bevor er bei deinem Paket war, aus Gründen, die bei bpost liegen. Ein neuer Liefertag folgt. |
+| `New delivery scheduled` | bpost hat den neuen Liefertag festgelegt, dein Paket wartet darauf. |
 | `Shipment presented without success. Addressee is informed.` | Die Zustellung hat nicht geklappt, du wirst benachrichtigt. |
 | `Item available at Pick-up point` | Es liegt an einer Abholstelle bereit. |
 | `Item available at the bbox locker` | Es liegt in einem bbox-Automaten bereit. |
@@ -64,6 +66,8 @@ Pakete innerhalb Belgiens will bpost am nächsten Werktag zustellen. Das angekü
 **Wenn die Optionen nicht greifen.** Sie hängen an der E-Mail-Adresse, mit der du bestellst: Trag in deinem Konto jede ein, die du nutzt. Nachnahmepakete, Einschreiben und Pakete mit Sicherheitscode, Garantie oder Versicherung landen nie beim Nachbarn oder an einem sicheren Ort. Passt ein Paket in den Briefkasten, steckt es der Briefträger meist hinein, auch wenn du eine Abholstelle gewählt hast.
 
 ## Paket hängt fest, ist verloren, beschädigt oder zurück
+
+**Runde abgebrochen.** Nach `Delivery interrupted due to unforeseen circumstances` endete die Runde aus Gründen, die bei bpost liegen, und ein neuer Liefertag folgt, erkennbar an `New delivery scheduled`. Peek zeigt bei der ersten Zeile „Problem gemeldet“, bei der zweiten wieder „Unterwegs“.
 
 **Keine Bewegung.** Ändert sich bei einer Sendung ins Ausland der Status nicht mehr, wende dich an den Absender: bei einem Nachbarland nach mindestens 5 Werktagen, beim Vereinigten Königreich und allen anderen Ländern nach mindestens 10. Der Absender meldet sich dann bei bpost, denn nur er kann eine Beschwerde einreichen. Ist das Paket laut Track & Trace noch unterwegs nach Belgien, ist es noch nicht hier: Track & Trace zeigt, wie lange das im Schnitt dauert. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 

@@ -3,7 +3,7 @@ title: HuaHan Logistics tracking: HHW…YQ numbers and who delivers
 description: Track a HuaHan Logistics (华翰物流) parcel from China: what an HHW…YQ number looks like, what its scans mean and how to find who delivers it in your country.
 slug: huahan-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 HuaHan Logistics (华翰物流, also HuaHan Express or 华翰速递) is a Chinese carrier that flies parcels out of China and hands them to a local carrier in the destination country, which delivers them. If a shop sent your order with HuaHan, look for a number that starts with HHW and ends with YQ, and paste it in the box above. HuaHan's own tracker is on its website, hh-exp.cn, and can name the carrier that delivers near you, with that carrier's number for your parcel.
@@ -79,11 +79,24 @@ HuaHan files the local carrier's out-for-delivery, pickup-point and delivery sca
 | `寄达地海关允许进口（无需缴税）` | Import customs have let it in, with no duty to pay. | "In transit" |
 | `离开【…】处理中心`, `已到达【…】投递局` | Left the processing centre in the country named in 【】, then arrived at the delivery office. | "In transit" |
 
+**Through Landmark Global.** For some parcels, HuaHan's tracker relays the lines of [Landmark Global](carrier:landmark-global), in English. The first two come before HuaHan has the parcel in China; the others follow Landmark Global's hand-off to [bpost](carrier:bpost)'s network, which delivers:
+
+| HuaHan relays | What it means for you | Peek shows |
+| --- | --- | --- |
+| `Shipment Data Uploaded` | Landmark Global's record of the sender's data. Not a movement. | "Label created" |
+| `Processed` | Landmark Global's processing, in the same minute as that record. Not a receipt of the parcel: Peek reads it as transit. | "In transit" |
+| `Incoming scan at facility` | A depot has the parcel, after the hand-off to bpost's network. | "In transit" |
+| `Outgoing scan at facility` | It has left that depot. The delivery round can still be days away. | "In transit" |
+| `Out for delivery (On the way)` | On the delivery round. | "Out for delivery" |
+| `Delivery attempt (Delivery not possible)` | A delivery round that didn't deliver it. | "Delivery attempted" |
+
+HuaHan files `Outgoing scan at facility` under its out-for-delivery code, but the words name a depot departure, so Peek shows "In transit".
+
 ## Who delivers HuaHan parcels
 
 After `Has been given to local carrier`, a carrier in the destination country delivers the parcel, and HuaHan's tracker can name it and give its number. Peek couldn't check HuaHan's website, so this page has no list of HuaHan's partners.
 
-**What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. [DHL](carrier:dhl) is booked for the last leg of some parcels: the data line quoted above is its record of the sender's data. DPD delivers some: its depot scans, such as `In Transit, Scanned By DPD At parcel delivery centre.`, are in the table above. [CTT Express](carrier:ctt-express) is announced for the last leg of others: HuaHan's tracker passes on its notice `Pendiente de recepción en CTT Express` ("awaiting receipt at CTT Express") hours before HuaHan has the parcel in China, and Peek shows "Label created". Beyond these, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
+**What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. [DHL](carrier:dhl) is booked for the last leg of some parcels: the data line quoted above is its record of the sender's data. DPD delivers some: its depot scans, such as `In Transit, Scanned By DPD At parcel delivery centre.`, are in the table above. [CTT Express](carrier:ctt-express) is announced for the last leg of others: HuaHan's tracker passes on its notice `Pendiente de recepción en CTT Express` ("awaiting receipt at CTT Express") hours before HuaHan has the parcel in China, and Peek shows "Label created". Others go through [Landmark Global](carrier:landmark-global): HuaHan's tracker relays its lines from its record of the sender's data to the delivery round, and after Landmark Global's hand-off, bpost's network delivers (see "Through Landmark Global" above). Beyond these, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
 
 **Delivery attempts and pickup.** Attempts, notice cards and where a missed parcel waits, and for how long, follow the local carrier's rules: ask that carrier, with its number, to rearrange a delivery. See [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
@@ -137,7 +150,7 @@ Import customs have let the parcel through, and HuaHan has handed it to the carr
 
 ### Who delivers HuaHan parcels in my country?
 
-A local carrier, which HuaHan's tracker can name, with its number for the parcel. Peek's code shows Sameday in one history and DPD's depot scans, reads USPS numbers, and holds DHL's data and CTT Express's notice for the last leg of some parcels: check HuaHan's tracker or ask the seller.
+A local carrier, which HuaHan's tracker can name, with its number for the parcel. Peek's code shows Sameday in one history and DPD's depot scans, reads USPS numbers, holds DHL's data and CTT Express's notice for the last leg of some parcels, and reads Landmark Global's lines for others, with bpost's network delivering after its hand-off: check HuaHan's tracker or ask the seller.
 
 ### Who do I contact about a missing HuaHan parcel?
 
@@ -146,5 +159,5 @@ The seller you ordered from: it booked the parcel with HuaHan. Peek couldn't che
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, HHW number shape, the tracker and its sum check, scan wordings, codes and their stages, the local carrier's relayed scans and duplicate lines, Sameday's wording, DPD's depot scans, attempts and pickup point, CTT Express's notice, China Post's and the destination post's scans in Chinese on the postal line and their stages, the local carrier's name and number with the underscore suffix and USPS barcodes, clocks, destination country, no delivery date or weight, the hand-off
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, HHW number shape, the tracker and its sum check, scan wordings, codes and their stages, the local carrier's relayed scans and duplicate lines, Sameday's wording, DPD's depot scans, attempts and pickup point, CTT Express's notice, China Post's and the destination post's scans in Chinese on the postal line and their stages, Landmark Global's relayed lines, the hand-off to bpost's network and their stages, the local carrier's name and number with the underscore suffix and USPS barcodes, clocks, destination country, no delivery date or weight, the hand-off
 :::

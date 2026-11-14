@@ -740,19 +740,22 @@ class DeviceParcels(
 
     /**
      * Forgets every parcel, those whose saved copy was lost and is still to be read again included. The ones the
-     * service could not be told about leave the list too, and each refresh tells it again.
+     * service could not be told about leave the list too, and each refresh tells it again. The keys of the lost ones
+     * are set aside before any call to the service: a refresh that runs meanwhile no longer reads them again, and a
+     * read already under way lands for a key that has gone and is dropped (`recoverParcels`).
      */
     suspend fun forgetAll() {
-        for (entry in entries) forget(entry.parcel.id)
-        val unread = keys.filterKeys { linkId -> entries.none { it.linkId.equalsCanonically(linkId) } }
-        if (unread.isEmpty()) return
         val client = client
-        for ((linkId, key) in unread) {
-            keys = keys.setting(linkId, null)
-            if (client != null) pendingForgets = pendingForgets.setting(linkId, key)
+        val unread = keys.filterKeys { linkId -> entries.none { it.linkId.equalsCanonically(linkId) } }
+        if (unread.isNotEmpty()) {
+            for ((linkId, key) in unread) {
+                keys = keys.setting(linkId, null)
+                if (client != null) pendingForgets = pendingForgets.setting(linkId, key)
+            }
+            save()
         }
-        save()
-        if (client != null) {
+        for (entry in entries) forget(entry.parcel.id)
+        if (unread.isNotEmpty() && client != null) {
             tellPendingForgets(client)
             save()
         }

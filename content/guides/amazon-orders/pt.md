@@ -4,7 +4,7 @@ description: Quem envia a tua encomenda da Amazon, que transportadora a entrega,
 slug: seguimento-encomenda-amazon
 picture: Um telemóvel mostra o progresso de uma encomenda, duas carrinhas passam uma encomenda de uma para a outra e o Pip observa.
 published: 2026-10-16
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Para seguir uma encomenda da Amazon, abre Os meus pedidos na Amazon.es. Se é a Amazon a entregar, é aí que vês o estado, o histórico, a data prevista e a fotografia da entrega. Quem te ajuda quando algo corre mal depende de quem envia. A Amazon trata das encomendas que ela própria envia, incluindo as dos vendedores que usam a logística da Amazon, enquanto um vendedor que envia por conta própria responde pela entrega.
@@ -89,7 +89,7 @@ Pelas regras da UE, o vendedor tem de entregar no prazo combinado ou, se não fo
 
 :::steps
 - Vê Os meus pedidos | Se é a Amazon a entregar, aí vês o estado, a data prevista e a fotografia da entrega.
-- Procura à volta | Vê na caixa do correio e no sítio onde costumam deixar as encomendas, e pergunta aos vizinhos. Se escolheste um cacifo ou um ponto CTT, vê se a encomenda já lá está.
+- Procura à volta | Vê na caixa do correio e no sítio onde costumam deixar as encomendas, e pergunta aos vizinhos. Se escolheste um cacifo ou um ponto CTT, vê se a encomenda já lá está. Num envio dos CTT, o SMS ou o e-mail só chega quando a encomenda já está disponível para levantar e indica o local e a data-limite; num cacifo Locky, traz também o PIN a marcar no ecrã, e o prazo para levantar é de 5 dias.
 - Pergunta à transportadora | Se o número é dos CTT, da SEUR ou de outra transportadora, segue a encomenda no site dela ou no Peek.
 - Contacta o vendedor | Se foi ele a vender e enviar: é o responsável pela entrega e, se não conseguir provar que a fez, tem de te enviar um artigo idêntico ou reembolsar-te.
 - Fala com a Amazon | Encomendas da Amazon: serviço de apoio ao cliente, para pedir uma substituição ou um reembolso. Encomendas de vendedores que não te resolvem o problema: Garantia de A a Z.
@@ -114,6 +114,7 @@ Depende do número. Cola-o no [Peek](/):
 - [About Amazon (Europe): Amazon Prime now available to customers in Portugal](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal) – clientes em Portugal na Amazon.es, site em português, informações do pedido e do envio e apoio por telefone e e-mail em português
 - [About Amazon (Europe): Portuguese Sellers explore growth opportunities](https://www.aboutamazon.eu/news/empowering-small-business/portuguese-sellers-explore-growth-opportunities-during-amazon-fulfilment-centre-tour-in-spain) – Amazon.es e sell.amazon.es adaptadas ao mercado português, FBA: armazenamento, embalagem e entrega, clientes Prime
 - [CTT: Os clientes Amazon podem agora recolher as suas encomendas em toda a rede dos CTT](https://www.ctt.pt/grupo-ctt/media/noticias/os-clientes-amazon-podem-agora-recolher-as-suas-encomendas-utilizando-toda-a-rede-dos-ctt-em-portugal) – parceria com a Amazon, lojas, Pontos CTT, agentes Payshop e cacifos Locky, arranque progressivo, casa e cacifos da Amazon
+- [CTT: Prazo para levantar e onde se dirigir](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – SMS ou e-mail só quando o envio está disponível, local e data-limite, cacifo Locky: PIN e 5 dias (lido a 14 de novembro de 2026)
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z para produtos de vendedores externos, reclamação diretamente à Amazon
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primeiro o vendedor, reembolso da Amazon
 - [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – problema com um pedido da Amazon: substituição ou reembolso

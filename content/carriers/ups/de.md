@@ -47,7 +47,7 @@ UPS kann das Paket auch in einen UPS Access Point bringen. Dort lauten die Scans
 
 ## Zollgebühren bei UPS-Paketen
 
-Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden, bevor UPS zustellt. Die Sendungsverfolgung zeigt dann `Duties or taxes are due on this package.` und `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden, bevor UPS zustellt. Die Sendungsverfolgung zeigt dann `Duties or taxes are due on this package.` und `Your package is being held until duties and taxes are paid. Awaiting customer action.` Peek zeigt „Beim Zoll“ und den Hinweis „Zoll oder Einfuhrsteuern zu zahlen“.
 
 Braucht der Zoll stattdessen deine Steuernummer, schreibt UPS `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: Die Verzollung wartet auf die Identifikationsnummer des Importeurs, ob Privatperson oder Unternehmen, und die musst du als Empfänger angeben. Peek zeigt „Beim Zoll“ und den Hinweis „Der Zoll braucht deine Steuernummer“.
 

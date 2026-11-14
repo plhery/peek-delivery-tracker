@@ -88,7 +88,7 @@ J&T Express Germany's channels, as read on [its contact page](https://www.jtexpr
 
 - **Phone:** +49 6931090650 (069 31090650 from within Germany), Monday to Friday 8:00 to 20:00, closed on public holidays.
 - **Email:** de-jtservice@jtexpress.de.
-- **Live chat:** "Start Chat" on the contact and FAQ pages.
+- **Live chat:** "Start Chat" on the English contact and FAQ pages, as read on 3 November 2026 (on 14 November, the German pages say "Chat starten").
 - **Delivery photos and personal data:** de-dpo@jtexpress.de (from the proof-of-delivery privacy notice).
 - **Office:** J&T Express Germany GmbH, Am Giener 2, 55268 Nieder-Olm. The legal notice gives the registered address, Wiesenhüttenstraße 11, 60329 Frankfurt am Main.
 

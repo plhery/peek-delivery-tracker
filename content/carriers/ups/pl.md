@@ -46,11 +46,11 @@ UPS może też zawieźć paczkę do punktu UPS Access Point. Wtedy skany brzmią
 
 ## Cło za paczkę UPS spoza UE
 
-Jeśli w śledzeniu pojawi się `Duties or taxes are due on this package.`, UPS doręczy paczkę dopiero, gdy zapłacisz należności przywozowe; zaraz potem zwykle widać `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+Jeśli w śledzeniu pojawi się `Duties or taxes are due on this package.`, UPS doręczy paczkę dopiero, gdy zapłacisz należności przywozowe; zaraz potem zwykle widać `Your package is being held until duties and taxes are paid. Awaiting customer action.` Peek pokazuje wtedy „W urzędzie celnym” i komunikat „Cło lub podatki do zapłaty”.
 
 Gdy urząd celny potrzebuje Twojego numeru podatkowego, UPS pisze `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: odprawa czeka na numer identyfikacyjny importera, osoby prywatnej lub firmy, a podać go musisz Ty jako odbiorca. Peek pokazuje „W urzędzie celnym” i komunikat „Urząd celny potrzebuje Twojego numeru podatkowego”.
 
-Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym: dwie bawełniane koszulki to jedna pozycja, koszulka i etui na telefon – dwie. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Po zwrocie towaru cło i VAT nie są zwracane. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
+Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym: dwie bawełniane koszulki to jedna pozycja, koszulka i etui na telefon – dwie. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Po zwrocie towaru cło i VAT nie są zwracane. Od 1 listopada 2026 r. przy zakupach na odległość spoza UE dochodzi też unijna opłata manipulacyjna (Union handling fee): 2 EUR za każdą pozycję towarową, bez względu na wartość. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Paczka UPS opóźniona, zaginiona lub uszkodzona
 
@@ -96,6 +96,8 @@ Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzegał przed SMS-ami, w kt�
 - [UKE: Rejestr operatorów pocztowych, UPS Polska Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00044) – wpis B-00044 od 17.12.2004
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy, 30 dni, odwołanie, interwencja Prezesa UKE, ADR
 - [UKE, Centrum Informacji Konsumenckiej: Reklamacje i odszkodowania](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół szkody, 7 dni na ukryte uszkodzenia
+- [Komisja Europejska: EU Customs Reform (po angielsku)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – unijna opłata manipulacyjna 2 EUR od 1 listopada 2026 r.
+- [Komisja Europejska: The temporary EUR 3 customs duty and the Union handling fee (po angielsku)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 EUR za pozycję przy sprzedaży na odległość, bez względu na wartość
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS (wstrzymanie i zwolnienie przez urząd państwowy, instrukcje doręczenia od odbiorcy, prośba o numer identyfikacyjny importera), co Peek odczytuje z UPS
 :::

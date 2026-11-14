@@ -95,7 +95,7 @@ If the order is late, or shows as delivered but you don't have it, go in this or
 
 :::steps
 - Check the tracking | Track Package in Your Orders opens the Progress Tracker, with a map once the driver is 10 stops away.
-- Look around | Check the spot named in your delivery instructions and, if the driver took one, the delivery photo.
+- Look around | Check the spot named in your delivery instructions and, if the driver took one, the delivery photo. At an Amazon Locker in the US, the delivery confirmation email says how to open it (a six-digit code, a barcode or the Amazon Shopping app), and you can forward it to someone who'll collect for you; you have three calendar days, after which Amazon returns the item and refunds you.
 - Ask the carrier | If another carrier delivered it, Amazon's Carrier Contact Information page says how to reach it.
 - Contact the seller | If a seller sold and shipped it, use Contact Seller from the order in Your Orders. On Amazon.co.uk, sellers should reply within two business days.
 - Ask Amazon | Orders Amazon shipped: Amazon Customer Service, by chat or phone from the Customer Service page. Seller orders: the A-to-z Guarantee.
@@ -134,6 +134,7 @@ It depends on the number. Paste it into [Peek](/):
 - [About Amazon: Contact Amazon Customer Service](https://www.aboutamazon.com/news/company-news/contact-amazon-customer-service) – chat or phone, help with late deliveries
 - [About Amazon UK: How to contact Amazon UK Customer Service](https://www.aboutamazon.co.uk/news/retail/how-to-contact-amazon-uk-customer-service) – chat and phone from the Customer Service page
 - [About Amazon: How do Amazon packages get delivered](https://www.aboutamazon.com/news/operations/how-do-amazon-packages-get-delivered) – sort centres, U.S. Post Offices, Delivery Service Partners, Flex, Lockers
+- [About Amazon: How to use Amazon Locker](https://www.aboutamazon.com/news/operations/how-to-use-amazon-locker) – delivery confirmation email, six-digit code, barcode or Amazon Shopping app, forwarding the email, three calendar days, return and refund (updated August 2026, read 14 November 2026)
 - [About Amazon UK: How are Amazon parcels delivered in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – labelling, sortation centres, Hermes, DPD, Royal Mail, Delivery Service Partners
 - [About Amazon EU: Amazon's €25 billion commitment to Ireland](https://www.aboutamazon.eu/news/job-creation-and-investment/amazons-25-billion-commitment-to-ireland-creating-jobs-driving-growth-and-building-infrastructure) – Irish delivery stations, seven days a week
 - [About Amazon Canada: New Delivery Service Partner Hubs in Lethbridge and Owen Sound](https://www.aboutamazon.ca/news/operations/amazon-announces-new-delivery-service-partner-hubs-in-lethbridge-and-owen-sound) – Delivery Service Partners in Canada

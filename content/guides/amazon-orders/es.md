@@ -4,7 +4,7 @@ description: Quién envía tu pedido de Amazon, qué transportista lo entrega, p
 slug: seguimiento-pedido-amazon
 picture: Un móvil muestra el avance de un pedido, dos furgonetas se pasan un paquete y Pip lo observa.
 published: 2026-10-16
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Para seguir un pedido de Amazon, entra en Mis pedidos, en Amazon.es o en la app de Amazon. Si el paquete lo reparte Amazon, ahí ves su estado, su historial, la fecha prevista y la foto de entrega. Quién te ayuda si algo falla depende de quién lo envía. Amazon se ocupa de los pedidos que envía, también los de vendedores que usan Logística de Amazon, mientras que un vendedor que envía por su cuenta responde de la entrega.
@@ -83,7 +83,7 @@ Según las normas de la UE, el vendedor tiene que entregarte el pedido en el pla
 
 :::steps
 - Mira Mis pedidos | Si el paquete lo reparte Amazon, ahí ves el estado, la fecha prevista y la foto de entrega.
-- Busca alrededor | Mira en el buzón, donde suelen dejarte los paquetes, y pregunta a los vecinos. Si elegiste un Amazon Locker o un punto de recogida, el correo de confirmación de entrega trae las instrucciones para recogerlo.
+- Busca alrededor | Mira en el buzón, donde suelen dejarte los paquetes, y pregunta a los vecinos. Si elegiste un Amazon Locker o un punto de recogida, el correo de confirmación de entrega trae las instrucciones para recogerlo. En un Amazon Locker, según explicaba Amazon en 2017, ese correo lleva un código único, la dirección y el horario: abres la taquilla introduciendo el código o escaneando el código de barras, y el paquete te espera 3 días; si no lo recoges, vuelve a Amazon.
 - Pregunta al transportista | Si el número es de Correos, SEUR u otro transportista, sigue el paquete en su web o en Peek.
 - Contacta con el vendedor | Si lo vendió y envió él: es el responsable de la entrega, y si no puede demostrar que te lo entregó, tiene que enviarte un producto idéntico o devolverte el dinero.
 - Acude a Amazon | Pedidos de Amazon: atención al cliente, para pedir un reemplazo o un reembolso. Pedidos de vendedores que no te lo resuelven: Garantía de la A a la Z.
@@ -109,6 +109,7 @@ Depende del número. Pégalo en [Peek](/):
 - [About Amazon España: Nueva estación logística de Málaga](https://www.aboutamazon.es/noticias/trabajar-en-amazon/nueva-estacion-logistica-malaga) – empresas externas de reparto desde las estaciones logísticas
 - [About Amazon España: Amazon Hub Delivery alcanza los 2.500 colaboradores](https://www.aboutamazon.es/noticias/apoyo-a-las-pymes/amazon-hub-delivery-2500-colaboradores-casabermeja) – tiendas de barrio que entregan pedidos de Amazon
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Amazon Locker y puntos de recogida, correo de confirmación de entrega, Garantía de la A a la Z
+- [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – correo con código único, dirección y horario, código o código de barras, 3 días, devolución a Amazon (2017, leído el 14 de noviembre de 2026)
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – productos de vendedores, primero el vendedor, reembolso de Amazon
 - [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – problema con un pedido: reemplazo o reembolso
 - [About Amazon España: Amazon Marketplace](https://www.aboutamazon.es/noticias/inversiones-y-creacion-de-empleo/amazon-marketplace) – ofertas de vendedores externos en las páginas de producto, junto a las de Amazon (2016)

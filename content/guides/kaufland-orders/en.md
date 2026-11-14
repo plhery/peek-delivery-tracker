@@ -122,11 +122,11 @@ Items that the law excludes from returns, such as hygiene products, perishable f
 
 Yes: paste the tracking number from Kaufland's shipping email into [Peek](/). Peek recognises these numbers by their shape alone:
 
-- DHL: most 20-digit numbers starting `00340434`, like `00340434100000000007`, and most international numbers ending in `DE`, like `RR000000005DE`.
+- DHL: most numbers of `JJD` and 18 digits, most 20-digit numbers starting `00340434`, like `00340434100000000007`, and most international numbers ending in `DE`, like `RR000000005DE`.
 - Hermes: `H` and 16 to 19 digits, like `H1000000000000000`.
 - UPS: `1Z` and 16 letters or digits.
 
-DHL's `JJD` and 12-digit numbers, the 14-digit numbers of Hermes and DPD, and GLS's 11 or 12 digits share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier, the one named in Kaufland's shipping email if the seller gave it. For Schenker, paste its number, and if Peek shows another carrier, press "Change" and pick Schenker, which Peek lists under DSV. For another freight forwarder, a seller abroad or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
+DHL's 12-digit numbers, the 14-digit numbers of Hermes and DPD, and GLS's 11 or 12 digits share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier, the one named in Kaufland's shipping email if the seller gave it. For Schenker, paste its number, and if Peek shows another carrier, press "Change" and pick Schenker, which Peek lists under DSV. For another freight forwarder, a seller abroad or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Tickets, cancellations, refunds and returns stay with Kaufland and the seller.
 

@@ -3,7 +3,7 @@ title: DHL eCommerce Netherlands suivi colis : statuts et contact
 description: Suivre un colis DHL eCommerce (ex-DHL Parcel) en Belgique ou aux Pays-Bas : le numéro JVGL, ce que veut dire chaque statut, les points bpost et qui contacter.
 slug: dhl-ecommerce-netherlands-suivi-colis
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 DHL eCommerce, l'ancien DHL Parcel, livre les colis des boutiques en ligne en Belgique et aux Pays-Bas ; son site belge signe « DHL eCommerce Benelux (anciennement DHL Parcel Benelux) ». Pour suivre ton colis, saisis le numéro de suivi et ton code postal sur le [Track & Trace de DHL](https://www.dhlecommerce.be/fr/particuliers/track-trace), ou colle-le dans le champ ci-dessus. Ce numéro t'est envoyé par la boutique ou par DHL dans l'e-mail d'expédition.
@@ -16,9 +16,10 @@ DHL rappelle que le numéro vient de l'expéditeur : c'est « le numéro de suiv
 | --- | --- |
 | `JVGL1234567890` | JVGL suivi d'au moins 8 lettres et chiffres : le numéro habituel d'un colis DHL eCommerce. |
 | `3SABC12345678` | 3S, trois lettres, puis 8 à 10 chiffres : un autre code-barres de DHL eCommerce. |
+| `JJD00009012345678901234` | JJD000090 suivi de 14 à 16 chiffres : une étiquette JJD du réseau néerlandais de DHL. |
 | Code de l'avis de passage | Le code de livraison imprimé en bas à droite de l'avis. Saisis-le avec ton code postal dans le Track & Trace. |
 
-**Attention aux numéros qui se ressemblent.** Un code 3S suivi de quatre lettres est en général celui de PostNL. Un numéro JJD a la forme de DHL en Allemagne, même si le suivi néerlandais de DHL peut le connaître. Un colis [DHL Express](carrier:dhl-express) porte un numéro Waybill sous son code-barres : c'est un autre réseau. Certains codes 3S à 12 caractères ont aussi la forme d'un numéro [Colis Privé](carrier:colis-prive). En cas de doute, regarde quel transporteur l'e-mail de la boutique cite.
+**Attention aux numéros qui se ressemblent.** Un code 3S suivi de quatre lettres est en général celui de PostNL. Les autres numéros JJD ont la forme de DHL en Allemagne, même si le suivi néerlandais de DHL peut les connaître. Un colis [DHL Express](carrier:dhl-express) porte un numéro Waybill sous son code-barres : c'est un autre réseau. Certains codes 3S à 12 caractères ont aussi la forme d'un numéro [Colis Privé](carrier:colis-prive). En cas de doute, regarde quel transporteur l'e-mail de la boutique cite.
 
 ## Suivi DHL Parcel : ce que veulent dire les statuts
 
@@ -79,7 +80,7 @@ Garde ton numéro de suivi sous la main. Pour une réclamation, passe par la bou
 
 ## Suivre un colis DHL eCommerce avec Peek
 
-[Peek](/) reconnaît tout de suite DHL eCommerce Netherlands pour un numéro JVGL et pour 3S suivi de trois lettres et de 8 à 10 chiffres. Les autres codes 3S avec deux ou trois lettres et 7 à 12 chiffres sont demandés à DHL eCommerce Netherlands, avec Colis Privé pour certaines longueurs. Certains ont aussi la forme d'un numéro PostNL, que Peek ne peut pas interroger. Un code-barres DHL avec quatre lettres après 3S passe pour un numéro PostNL ou ne correspond à rien : choisis alors DHL eCommerce Netherlands avec « Changer ». Un numéro JJD est attribué à DHL, sauf si tu le changes. Tu peux aussi coller un lien my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be ou dhlparcel.be en `/home/tracktrace/` suivi du numéro.
+[Peek](/) reconnaît tout de suite DHL eCommerce Netherlands pour un numéro JVGL, pour 3S suivi de trois lettres et de 8 à 10 chiffres, et pour JJD000090 suivi de 14 à 16 chiffres. Les autres codes 3S avec deux ou trois lettres et 7 à 12 chiffres sont demandés à DHL eCommerce Netherlands, avec Colis Privé pour certaines longueurs. Certains ont aussi la forme d'un numéro PostNL, que Peek ne peut pas interroger. Un code-barres DHL avec quatre lettres après 3S passe pour un numéro PostNL ou ne correspond à rien : choisis alors DHL eCommerce Netherlands avec « Changer ». Les autres numéros JJD sont en général attribués à DHL, sauf si tu changes de transporteur. Tu peux aussi coller un lien my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be ou dhlparcel.be en `/home/tracktrace/` suivi du numéro.
 
 Peek interroge DHL sans ton code postal : DHL n'affiche alors ni le destinataire, ni l'adresse, ni la signature, ni le point de retrait. Tu vois le statut, l'historique, la livraison prévue (un créneau ou un moment, quand DHL en planifie une) et l'heure de livraison. L'historique n'indique pas le lieu des scans. Le colis est vérifié toutes les 10 minutes, puis toutes les 2 minutes quand il est en cours de livraison (le jour même, dès 6 h, heure locale, ou, quand DHL planifie un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi de DHL qui répond ; via des services de suivi, toutes les 15 minutes) ; les notifications te préviennent quand le statut change : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 

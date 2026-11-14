@@ -31,20 +31,21 @@ Lingdong no publica la lista de sus estados. Sus pasos van en inglés, o en chin
 | Lingdong escribe | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
 | `货物电子信息已经收到` | Datos electrónicos del envío recibidos: la tienda ha creado el pedido, pero Lingdong todavía no tiene el paquete. | «Etiqueta creada» |
+| `Shipping Label Created` | La etiqueta del pedido, creada unas horas antes del primer escaneo en el almacén de Lingdong. | «Etiqueta creada» |
 | `Shipment arrived at facility` | El paquete ha llegado al almacén de Lingdong en Shenzhen: es el primer escaneo con el paquete en sus manos. | «Admitido por el transportista» |
 | `Shipment departed from facility` | Ha salido de ese almacén camino del extranjero. | «En tránsito» |
-| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】` | Ya tiene vuelo reservado. En lugar de los puntos aparece el día del vuelo (en el primero, como mes.día: 10.28 es el 28 de octubre). | «En tránsito» |
+| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】`, `预计…航班/Scheduled flight on …` | Ya tiene vuelo reservado. En lugar de los puntos aparece el día del vuelo (en el primero, como mes.día: 10.28 es el 28 de octubre). | «En tránsito» |
 | `送往航司途中【On the way to the airline company】` | Va camino de la aerolínea. | «En tránsito» |
 | `航班已起飞【The flight has taken off.】`, `航班已启运/Package in transit to destination country` | El vuelo ha despegado. | «En tránsito» |
 | `航班抵达【Flight arrival】`, `航班已落地，拆板中/Package arrived at destination country` | El vuelo ha aterrizado; con el segundo texto, además, se están deshaciendo los palés. | «En tránsito» |
 | `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | Tras el aterrizaje, se están deshaciendo los palés del vuelo mientras la carga espera a que la recojan para el despacho de aduana: tú no tienes que recoger nada. | «En tránsito» |
 | `货物在清关【Customs clearance in progress】` | Está en la aduana del país de destino, después del aterrizaje. | «En aduanas» |
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | La aduana del país de destino lo ha despachado, después del aterrizaje y antes de la entrega. Aquí *Domestic* (nacional) se refiere al país de destino, no a China. | «En tránsito» |
-| `货物已交服务商【The shipment has been transferred to the logistics partner.】` | Tras el despacho de aduana, Lingdong ha entregado el paquete a la empresa que lo reparte. | «En tránsito» |
+| `货物已交服务商【The shipment has been transferred to the logistics partner.】`, `包裹交接给本地物流商处理/Received by local delivery company` | Tras el despacho de aduana, Lingdong ha entregado el paquete a la empresa que lo reparte. | «En tránsito» |
 
 `货物电子信息已经收到`, el único paso solo en chino, no es un escaneo del paquete: el sistema de seguimiento de Lingdong lo escribe por su cuenta en un pedido que aún no tiene escaneos, con la fecha en que se creó el pedido.
 
-Ninguno de los pasos propios de Lingdong es de reparto o de entrega: el último es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. En Italia, la web de seguimiento de Lingdong puede mostrar después los escaneos de Poste Italiane: `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` y `In transito, la spedizione è in transito`, hasta `In consegna` («En reparto») y `Consegnata, la spedizione è stata consegnata` («Entregado»). La entrega en España la hace otra empresa, y el resto está en su seguimiento.
+Ninguno de los pasos propios de Lingdong es de reparto o de entrega: el último es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. En Italia, la web de seguimiento de Lingdong puede mostrar después los escaneos de Poste Italiane: `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` y `In transito, la spedizione è in transito`, hasta `In consegna` («En reparto») y `Consegnata, la spedizione è stata consegnata` («Entregado»). En Estados Unidos puede mostrar `Arrived at GOFO Regional Hub`, la llegada del paquete al centro regional de GOFO («En tránsito»). La entrega en España la hace otra empresa, y el resto está en su seguimiento.
 
 ## Quién reparte los paquetes de Lingdong en España
 

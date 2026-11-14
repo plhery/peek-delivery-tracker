@@ -3,10 +3,10 @@ title: GLS US tracking (GSO): numbers, statuses and delivery
 description: Track a GLS US parcel, also listed as GSO: what its SH number looks like, what each scan means, delivery days, signatures, missed deliveries and contacts.
 slug: gls-us-tracking
 published: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
-GLS US (General Logistics Systems US, Inc.) is GLS Group's parcel company in the United States, delivering across the Western U.S. Peek's catalog also knows it as GLS USA, GSO and Golden State Overnight, the company GLS bought in 2016. To track a GLS US parcel, paste its number in the box above or enter it on [GLS's US tracking page](https://gls-group.com/US/en/send-and-receive/track-a-parcel/).
+GLS US (General Logistics Systems US, Inc.) is GLS Group's parcel company in the United States, delivering across the Western U.S. Peek's catalog also knows it as GLS USA, GLS United States, General Logistics Systems US, GSO and Golden State Overnight, the company GLS bought in 2016. To track a GLS US parcel, paste its number in the box above or enter it on [GLS's US tracking page](https://gls-group.com/US/en/send-and-receive/track-a-parcel/).
 
 ## GLS US tracking number: what it looks like
 
@@ -83,7 +83,7 @@ As listed on GLS US's [customer support page](https://gls-group.com/US/en/suppor
 
 **Another number.** Paste it all the same: Peek follows more than 3,500 carriers. Then pick GLS US yourself:
 
-1. Press "Change" beside the carrier line and search for GLS US ("GSO", "Golden State Overnight" or "United States" finds it too).
+1. Press "Change" beside the carrier line and search for GLS US ("GSO", "Golden State Overnight", "General Logistics Systems US" or "United States" finds it too).
 2. Pick GLS US: the line then reads "Chosen by you". Track the parcel.
 
 On a parcel you've already added, use "Change carrier". Peek asks GLS US only about numbers of 5 to 20 letters and digits.
@@ -102,7 +102,7 @@ Peek can't contact GLS US or the shop for you, change the delivery or file a cla
 
 ### Is GSO the same as GLS US?
 
-GLS bought Golden State Overnight (GSO) in 2016, and gso.com now leads to GLS US's site. GSO was founded in 1995 to deliver parcels in California, Arizona, Nevada and New Mexico. Peek treats them as one: its catalog lists GSO, Golden State Overnight and GLS USA as other names for GLS US, so searching for any of them finds GLS US, and it reads tracking links from gso.com and gls-us.com as GLS US's.
+GLS bought Golden State Overnight (GSO) in 2016, and gso.com now leads to GLS US's site. GSO was founded in 1995 to deliver parcels in California, Arizona, Nevada and New Mexico. Peek treats them as one: its catalog lists GSO, Golden State Overnight, GLS USA, GLS United States and General Logistics Systems US as other names for GLS US, so searching for any of them finds GLS US, and it reads tracking links from gso.com and gls-us.com as GLS US's.
 
 ### What does a GLS US tracking number look like?
 

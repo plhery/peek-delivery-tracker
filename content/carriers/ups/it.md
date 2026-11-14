@@ -46,11 +46,11 @@ UPS può anche portare il pacco in un UPS Access Point. Lì le scansioni diventa
 
 ## Dazi e dogana sui pacchi UPS
 
-Un pacco che arriva da fuori UE, o dall'estero se abiti in Svizzera, può richiedere dazi o tasse prima della consegna. Il tracking mostra allora `Duties or taxes are due on this package.` e `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+Un pacco che arriva da fuori UE, o dall'estero se abiti in Svizzera, può richiedere dazi o tasse prima della consegna. Il tracking mostra allora `Duties or taxes are due on this package.` e `Your package is being held until duties and taxes are paid. Awaiting customer action.` Peek mostra «In dogana» con l'avviso «Dazi o tasse da pagare».
 
 Se la dogana ha bisogno del tuo codice fiscale, la scansione di UPS dice `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: lo sdoganamento aspetta il numero identificativo dell'importatore, privato o azienda, e devi fornirlo tu, come destinatario. Peek mostra «In dogana» con l'avviso «La dogana ha bisogno del tuo codice fiscale».
 
-- **Italia**: secondo Your Europe, in tutta l'UE agli ordini fino a 150 euro comprati online da paesi extra UE si applica un dazio di 3 euro per articolo merceologico (i prodotti con lo stesso codice merci e lo stesso paese di origine contano come uno), in aggiunta all'IVA e alle spese di consegna. A riscuoterlo è il venditore o il vettore.
+- **Italia**: secondo Your Europe, in tutta l'UE agli ordini fino a 150 euro comprati online da paesi extra UE si applica un dazio di 3 euro per articolo merceologico (i prodotti con lo stesso codice merci e lo stesso paese di origine contano come uno), in aggiunta all'IVA e alle spese di consegna. A riscuoterlo è il venditore o il vettore. Dal 1° novembre 2026 sugli acquisti a distanza da paesi extra UE si paga anche la tassa di gestione dell'Unione (Union handling fee), di 2 euro per articolo merceologico, qualunque sia il valore.
 - **Svizzera (Ticino)**: secondo l'UDSC, nel traffico postale e di corriere l'imposizione la fa il trasportatore (DHL, UPS, La Posta ecc.), e solo lui può aiutarti a cercare un invio. Per questo lavoro riscuote spese di imposizione, e anche per qualsiasi domanda devi rivolgerti a lui.
 
 Altro in [pacco fermo in dogana](guide:customs).
@@ -96,6 +96,8 @@ Può esserlo. La Polizia Postale ha segnalato una campagna di smishing contro ch
 - [AGCOM: FAQ Contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – reclamo, 45 giorni, conciliazione in 60 giorni, definizione entro 90 giorni, pacchi fino a 31,5 kg, procedura gratuita
 - [AGCOM: Delibera n. 572/18/CONS](https://www.agcom.it/sites/default/files/migration/delibera/Delibera%20572-18-CONS.pdf) – il corriere espresso è un servizio postale, UPS citato tra gli operatori postali
 - [UDSC: Spese di imposizione e tracciabilità dei colli](https://www.bazg.admin.ch/it/costi-imposizione-e-tracciamento-pacchi) – imposizione fatta dal trasportatore (DHL, UPS, La Posta), ricerca dell'invio, spese di imposizione (Svizzera)
+- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione dell'Unione di 2 euro dal 1° novembre 2026
+- [Commissione europea: The temporary EUR 3 customs duty and the Union handling fee (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 euro per articolo sugli acquisti a distanza, qualunque sia il valore
 - [Polizia Postale: Nuova campagna di smishing «Il tuo pacco è stato consegnato al centro di spedizione»](https://www.commissariatodips.it/notizie/articolo/nuova-campagna-di-smishing-il-tuo-pacco-e-stato-consegnato-al-centro-di-spedizione/index.html) – SMS falso nella stessa chat del corriere, telefonata con spoofing, verificare con la società di spedizione
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – forme del numero, cifra di controllo, scansioni di UPS (fermo e sblocco da parte di un ente pubblico, istruzioni di consegna del destinatario, richiesta del numero identificativo dell'importatore), cosa legge Peek da UPS
 :::

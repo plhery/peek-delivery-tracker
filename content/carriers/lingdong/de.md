@@ -31,20 +31,21 @@ Eine Liste seiner Status veröffentlicht Lingdong nicht. Seine Zeilen schreibt e
 | Lingdong schreibt | Was es für dich heißt | Peek zeigt |
 | --- | --- | --- |
 | `货物电子信息已经收到` | Chinesisch für: elektronische Sendungsdaten erhalten. Der Shop hat den Auftrag angelegt, aber Lingdong hat das Paket noch nicht. | „Etikett erstellt“ |
+| `Shipping Label Created` | Das Etikett für den Auftrag, einige Stunden vor dem ersten Scan in Lingdongs Lager erstellt. | „Etikett erstellt“ |
 | `Shipment arrived at facility` | Das Paket ist in Lingdongs Lager in Shenzhen angekommen: der erste Scan, bei dem Lingdong es wirklich hat. | „Beim Paketdienst eingegangen“ |
 | `Shipment departed from facility` | Es hat dieses Lager auf dem Weg ins Ausland verlassen. | „Unterwegs“ |
-| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】` | Für einen Flug gebucht. Statt der Punkte steht dort der Tag des Flugs, in der ersten Form als Monat.Tag (10.28 ist der 28. Oktober), in der zweiten nur der Tag im Monat. | „Unterwegs“ |
+| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】`, `预计…航班/Scheduled flight on …` | Für einen Flug gebucht. Statt der Punkte steht dort der Tag des Flugs, in der ersten Form als Monat.Tag (10.28 ist der 28. Oktober), in der zweiten nur der Tag im Monat. | „Unterwegs“ |
 | `送往航司途中【On the way to the airline company】` | Auf dem Weg zur Fluggesellschaft. | „Unterwegs“ |
 | `航班已起飞【The flight has taken off.】`, `航班已启运/Package in transit to destination country` | Der Flug ist gestartet. | „Unterwegs“ |
 | `航班抵达【Flight arrival】`, `航班已落地，拆板中/Package arrived at destination country` | Der Flug ist gelandet; die zweite Zeile meldet außerdem, dass die Frachtpaletten entladen werden. | „Unterwegs“ |
 | `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | Nach der Landung werden die Frachtpaletten entladen, und die Ladung wartet darauf, zur Verzollung abgeholt zu werden. Abholen musst du nichts. | „Unterwegs“ |
 | `货物在清关【Customs clearance in progress】` | Beim Einfuhrzoll, nach der Landung. | „Beim Zoll“ |
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | Der Einfuhrzoll hat das Paket freigegeben, nach der Landung und vor der Zustellung. *Domestic* (inländisch) meint hier das Einfuhrland, nicht China. | „Unterwegs“ |
-| `货物已交服务商【The shipment has been transferred to the logistics partner.】` | Nach der Verzollung hat Lingdong das Paket dem Unternehmen übergeben, das es zustellt. | „Unterwegs“ |
+| `货物已交服务商【The shipment has been transferred to the logistics partner.】`, `包裹交接给本地物流商处理/Received by local delivery company` | Nach der Verzollung hat Lingdong das Paket dem Unternehmen übergeben, das es zustellt. | „Unterwegs“ |
 
 `货物电子信息已经收到` ist kein Scan deines Pakets. Lingdongs Tracking-System schreibt diese Zeile selbst für einen Auftrag, der noch keinen Scan hat, und datiert sie auf den Zeitpunkt, an dem der Auftrag angelegt wurde.
 
-Keine von Lingdongs eigenen Zeilen meldet eine Zustellung: Lingdongs letzte eigene Zeile ist die Übergabe nach der Verzollung. In Italien kann Lingdongs Tracking-Seite danach noch die Scans der Poste Italiane zeigen: `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` und `In transito, la spedizione è in transito`, bis zu `In consegna` („In Zustellung“) und `Consegnata, la spedizione è stata consegnata` („Zugestellt“). Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
+Keine von Lingdongs eigenen Zeilen meldet eine Zustellung: Lingdongs letzte eigene Zeile ist die Übergabe nach der Verzollung. In Italien kann Lingdongs Tracking-Seite danach noch die Scans der Poste Italiane zeigen: `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` und `In transito, la spedizione è in transito`, bis zu `In consegna` („In Zustellung“) und `Consegnata, la spedizione è stata consegnata` („Zugestellt“). In den USA kann sie `Arrived at GOFO Regional Hub` von GOFO zeigen: Das Paket ist im Regionallager von GOFO angekommen („Unterwegs“). Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
 
 ## Wer Lingdong-Pakete in Deutschland, Österreich und der Schweiz zustellt
 

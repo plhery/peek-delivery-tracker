@@ -46,7 +46,7 @@ UPS también puede llevar el paquete a un UPS Access Point. Allí los escaneos d
 
 ## Aduanas: qué se paga por un paquete de UPS
 
-Un paquete que llega de fuera de la UE puede tener gastos de importación que hay que pagar antes de que UPS lo entregue; el seguimiento muestra entonces `Duties or taxes are due on this package.` y `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+Un paquete que llega de fuera de la UE puede tener gastos de importación que hay que pagar antes de que UPS lo entregue; el seguimiento muestra entonces `Duties or taxes are due on this package.` y `Your package is being held until duties and taxes are paid. Awaiting customer action.` Peek muestra «En aduanas» con el aviso «Aranceles o impuestos por pagar».
 
 Si aduanas necesita tu número fiscal, el escaneo de UPS dice `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: el despacho espera el número de identificación del importador, particular o empresa, y tienes que darlo tú, como destinatario. Peek muestra «En aduanas» con el aviso «Aduanas necesita tu número fiscal».
 

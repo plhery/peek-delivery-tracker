@@ -33,7 +33,7 @@ Il tracking di Shouwu è in inglese, sotto un titolo in cinese. Per ogni pacco d
 | Stato di Shouwu | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
 | `Not Found` | Shouwu non ha ancora niente con quel numero: «We seem can't identify the number.» | «In attesa del corriere» |
-| `Preparing` | Secondo Shouwu il pacco è stato consegnato al suo magazzino in Cina, o lì viene pesato e sigillato. Può comparire prima ancora delle scansioni. | «Etichetta creata», poi «Preso in carico» dopo una scansione del magazzino |
+| `Preparing` | Secondo Shouwu il pacco è stato consegnato al suo magazzino in Cina, o lì viene pesato e sigillato. Può comparire prima ancora delle scansioni. | «Etichetta creata», poi «Preso in carico» dopo il ritiro da parte del partner o una scansione del magazzino |
 | `In Transit` | Tutto il viaggio, dal passaggio a un vettore fino alla dogana e al trasporto nel Paese di arrivo. | «In transito», oppure la fase dell'ultima scansione, come «In dogana»; «Etichetta creata» finché ci sono solo i dati dell'ordine e `Carrier received the shipment` |
 | `Undelivered` | Un tentativo di consegna non è riuscito. | «Tentativo di consegna», oppure «Pronto per il ritiro» o «Restituito al mittente» se lo dice l'ultima scansione |
 | `Delivered` | Consegnato al destinatario. | «Consegnato» |
@@ -51,6 +51,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | La Cina l'ha sdoganato in uscita: non è fermo in dogana. | «In transito» |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | Arrivato all'aeroporto di partenza dopo lo sdoganamento in uscita, viene caricato su un volo. | «In transito» |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | All'aeroporto di Shanghai, poi decollato dalla Cina. | «In transito» |
+| `The ship has already set sail` | Su una linea via mare: la nave ha lasciato la Cina, dopo lo sdoganamento in uscita e prima di arrivare al porto di destinazione. | «In transito» |
 | `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Atterrato nel Paese di arrivo. | «In transito» |
 | `NOA received` | L'agente sul posto ha ricevuto l'avviso di arrivo della compagnia aerea; poi viene la dogana. | «In transito» |
 | `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
@@ -58,6 +59,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Scheduled For Delivery` | Riga di Shouwu dopo lo sdoganamento, giorni prima del deposito e del giro del corriere: la consegna è in programma, non ancora in corso. | «In transito» |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Passato al corriere che consegna nel tuo Paese: a te non è ancora stato consegnato («deliverey» è scritto così da Shouwu). | «In transito» |
 | `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è il ritiro dal venditore (quello è `Picked up by Shipping Partner`, più in alto), né un ritiro da parte tua. | «In transito» |
+| `Picked up` | Negli Stati Uniti, FedEx ha ritirato il pacco dal magazzino di Shouwu dopo lo sdoganamento (la sua riga indica città e codice postale). Non è il ritiro dal venditore, `Picked up by Shipping Partner`, né un ritiro da parte tua. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
 | `The shipment has been processed in the destination parcel center` | DHL l'ha smistato nel centro pacchi che serve il tuo indirizzo, prima del giro di consegna. | «In transito» |
@@ -84,14 +86,14 @@ Quando in Italia consegna iMile, la cronologia riprende le sue righe, con il cen
 
 **Righe in cinese.** Alcuni pacchi hanno anche righe che Shouwu scrive in cinese, e Peek le mostra così come sono. `货物电子信息已经收到` (i dati elettronici della merce sono arrivati) accompagna i dati dell'ordine: «Etichetta creata». Poi, tutte «In transito»: `申报过港中` dopo il codice di un lotto (il lotto è dichiarato per la strada verso Hong Kong), `已到港，安排航班中` (arrivato al punto di partenza, in attesa di un volo), `预计23号的航班` (il volo prenotato, qui il 23; con `二程` davanti, per la seconda tratta), `航班已飞` (il volo è partito), `二程航班已飞` (è partito il volo della seconda tratta) e `已落地` (atterrato). `已落地，清关提货中` (atterrato, in sdoganamento e ritiro dalla compagnia aerea) compare come «In dogana», mentre `清关完成` (sdoganato) e `已交仓扫描` (scansionato al magazzino del corriere che consegna) tornano «In transito».
 
-**Orari sballati di qualche ora.** Il sistema di Shouwu registra l'ora locale di ogni scansione come se fosse ora di Pechino, anche per le scansioni all'estero, e il suo tracking la mostra nel tuo fuso orario. Così una scansione fatta in Italia alle 10:00 compare alle 3:00 con l'ora solare e alle 4:00 con l'ora legale, e il volo sembra durare ore in meno. Fidati dell'ordine delle righe. Peek ricava l'ora di ogni scansione dal suo luogo, o dalla tratta in cui si trovava il pacco, e la mostra nel fuso orario del tuo dispositivo.
+**Orari sballati di qualche ora.** Il sistema di Shouwu registra l'ora locale di ogni scansione come se fosse ora di Pechino, anche per le scansioni all'estero, e il suo tracking la mostra nel tuo fuso orario. Così una scansione fatta in Italia alle 10:00 compare alle 3:00 con l'ora solare e alle 4:00 con l'ora legale, e il volo sembra durare ore in meno. Fidati dell'ordine delle righe. Peek ricava l'ora di ogni scansione dal suo luogo, o dalla tratta in cui si trovava il pacco, e la mostra nel fuso orario del tuo dispositivo; su peektracker.com lo ricorda una riga sotto la cronologia («Orari nel tuo fuso orario: …»).
 
 ## Chi consegna i pacchi Shouwu in Italia
 
 Shouwu dice di lavorare direttamente con USPS, Royal Mail, La Poste, DHL, DPD e Hermes. Nelle sue pagine sulle linee, in cinese:
 
 - **Italia.** Tra le linee che Shouwu gestisce in proprio (自营专线) c'è una linea economica per l'Italia (意大利经济), con tempi di riferimento da 10 a 12 giorni lavorativi. Per l'ultimo tratto la sua pagina indica UniUni e Poste Italiane (意邮). Nelle cronologie lette da Peek compaiono [Poste Italiane](carrier:poste-italiane), con le due righe della tabella qui sopra, e [iMile](carrier:imile), con le sue righe tra 【】: tentativi, giacenza e contatti di iMile in Italia sono sulla sua pagina.
-- **Regno Unito e Stati Uniti.** Le pagine delle linee per il Regno Unito nominano Royal Mail, Yodel ed Evri (scritto ERVI), quelle per gli Stati Uniti soprattutto USPS.
+- **Regno Unito e Stati Uniti.** Le pagine delle linee per il Regno Unito nominano Royal Mail, Yodel ed Evri (scritto ERVI), quelle per gli Stati Uniti soprattutto USPS; nelle cronologie lette da Peek, negli Stati Uniti consegna anche [FedEx](carrier:fedex).
 
 Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a quello che può dire la descrizione di una scansione. Se nella cronologia non vedi un corriere, chiedi al venditore chi consegna e con che numero.
 
@@ -160,5 +162,5 @@ Al venditore da cui hai comprato: ha prenotato lui la spedizione con Shouwu e pu
 - [Shouwu International: 美国标快 (Stati Uniti, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=1) – soprattutto USPS, da 6 a 8 giorni lavorativi, niente ritorno in Cina, reclami
 - [Shouwu International: 美国经济 (Stati Uniti, economica)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=21) – da 8 a 12 giorni lavorativi
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere, dal 14 novembre il ritiro dal venditore da parte del partner), righe di Poste Italiane e di iMile (anche il rinvio al mittente), righe di DPD, orari, luoghi, cosa mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere, dal 14 novembre il ritiro dal venditore da parte del partner, il ritiro di FedEx negli Stati Uniti e la partenza della nave dalla Cina), righe di Poste Italiane e di iMile (anche il rinvio al mittente), righe di DPD, orari, luoghi, cosa mostra Peek
 :::

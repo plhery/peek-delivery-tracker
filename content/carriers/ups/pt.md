@@ -46,11 +46,11 @@ A UPS também pode levar a encomenda a um UPS Access Point. Aí as leituras dize
 
 ## Alfândega: o que pagas numa encomenda UPS
 
-Uma encomenda que chega de fora da UE pode ter encargos de importação a pagar antes de a UPS a entregar; o seguimento mostra então `Duties or taxes are due on this package.` e `Your package is being held until duties and taxes are paid. Awaiting customer action.`
+Uma encomenda que chega de fora da UE pode ter encargos de importação a pagar antes de a UPS a entregar; o seguimento mostra então `Duties or taxes are due on this package.` e `Your package is being held until duties and taxes are paid. Awaiting customer action.` O Peek mostra «Na alfândega» com o aviso «Direitos ou impostos a pagar».
 
 Se a alfândega precisar do teu número fiscal, a leitura da UPS diz `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: o desalfandegamento espera pelo número de identificação do importador, particular ou empresa, e és tu, como destinatário, quem o tem de dar. O Peek mostra «Na alfândega» com o aviso «A alfândega precisa do teu número fiscal».
 
-Segundo a Autoridade Tributária e Aduaneira, desde 1 de julho de 2026 as compras online importadas numa remessa até 150 € pagam, além do IVA, 3 € de direitos aduaneiros por adição, ou seja, por tipo de produto: uma remessa de 100 € com uma camisa e um chapéu paga 6 €. Encomendas feitas e enviadas em separado contam como remessas distintas, mesmo que cheguem no mesmo dia. Segundo o portal Your Europe da UE, cobrar este direito cabe ao vendedor ou à transportadora, e pode já vir incluído no que pagas online. Mais em [encomenda retida na alfândega](guide:customs).
+Segundo a Autoridade Tributária e Aduaneira, desde 1 de julho de 2026 as compras online importadas numa remessa até 150 € pagam, além do IVA, 3 € de direitos aduaneiros por adição, ou seja, por tipo de produto: uma remessa de 100 € com uma camisa e um chapéu paga 6 €. Encomendas feitas e enviadas em separado contam como remessas distintas, mesmo que cheguem no mesmo dia. Segundo o portal Your Europe da UE, cobrar este direito cabe ao vendedor ou à transportadora, e pode já vir incluído no que pagas online. Desde 1 de novembro de 2026 soma-se, nas vendas à distância de fora da UE, a taxa de tratamento da União (Union handling fee), de 2 € por tipo de produto, seja qual for o valor. Mais em [encomenda retida na alfândega](guide:customs).
 
 ## Encomenda UPS parada, atrasada ou perdida
 
@@ -93,6 +93,8 @@ Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão e reembolso, responsabilidade do vendedor, quem cobra os 3 €
 - [Your Europe: Resolução extrajudicial de litígios](https://europa.eu/youreurope/citizens/consumers/consumers-dispute-resolution/informal-alternative-dispute-resolution/index_pt.htm) – resolver primeiro com a empresa, com documentos; depois resolução alternativa de litígios
 - [CNIACC: Rede de arbitragem de consumo](https://www.cniacc.pt/pt/rede-de-arbitragem-de-consumo) – os centros de arbitragem de conflitos de consumo
+- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento da União de 2 € desde 1 de novembro de 2026
+- [Comissão Europeia: The temporary EUR 3 customs duty and the Union handling fee (em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo nas vendas à distância, seja qual for o valor
 - [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, taxa de 2 ou 3 euros, o que fazer
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS (retenção e libertação por uma entidade pública, instruções de entrega do destinatário, pedido do número de identificação do importador), o que o Peek lê da UPS
 :::

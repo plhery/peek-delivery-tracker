@@ -4,7 +4,7 @@ description: Por qué el seguimiento de un paquete deja de actualizarse, cuánto
 slug: seguimiento-no-se-actualiza
 picture: Un calendario con varios días tachados, una línea de progreso que se queda a medias y Pip esperando, un poco aburrido.
 published: 2026-10-09
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu paquete últimamente, no porque esté parado. Los transportistas lo escanean en sus centros y al cruzar fronteras, no en la carretera: un trayecto largo, un vuelo, la aduana o un fin de semana pueden dejarte días sin una línea nueva. Preocúpate solo cuando haya pasado el plazo del propio transportista ([Correos](carrier:correos-spain) acepta reclamaciones por un Paq Estándar a partir de 4 días desde que lo admitió; InPost, por demora, si el pedido tarda más de 5 días desde el aviso de envío), y aun entonces, escribe primero a la tienda: es ella quien contrató el envío.
@@ -31,14 +31,14 @@ Ningún transportista da una cifra de cuánto tiempo puede pasar el seguimiento 
 - home | Último tramo | En reparto y entregado: los escaneos vuelven a llegar seguidos.
 :::
 
-Cuando un paquete figura con la etiqueta creada, admitido o en tránsito y su último escaneo tiene cuatro días o más, [Peek](/) muestra «Sin novedades desde hace cuatro días» y la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Correos.» (por ejemplo, con Correos).
+Cuando un paquete figura con la etiqueta creada, admitido o en tránsito y su último escaneo tiene cuatro días o más, [Peek](/) muestra «Sin novedades desde hace cuatro días» y la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Correos.» (por ejemplo, con Correos). Si el transportista y los servicios de seguimiento responden sin ningún escaneo (no encuentran el número, o lo tienen sin historial) cuando el paquete ya tenía escaneos, Peek conserva los que encontró y muestra en la página del paquete «El transportista no tiene escaneos nuevos por ahora. Los que ya se encontraron se guardan, y Peek sigue comprobando.»
 
 ### ¿Cuánto tarda en actualizarse un número de seguimiento nuevo?
 
 De unas horas a unos días. Si no sale nada o sigue atascado en la primera línea, puede que el transportista aún no tenga el paquete: esa línea suele salir del programa con el que la tienda imprime la etiqueta, no de un escaneo.
 
 - **Correos:** `Pre-admisión` significa que el número ya existe, pero el paquete está «pendiente de ser entregado a Correos». Si la tienda no le ha transmitido los datos del envío (el «prerregistro»), el paquete queda estacionado y Correos lo entrega cuando los recibe.
-- **GLS:** si tu envío lleva varios días en `Etiqueta creada`, el remitente le ha pasado los datos a GLS, pero todavía no le ha entregado el paquete. GLS te sugiere preguntar a la tienda, porque no puede darte plazos hasta tenerlo físicamente. En Peek, que lee el seguimiento de GLS en inglés, esa línea es `Label created. The shipment has not yet been delivered to GLS by the sender`, con la etapa «Etiqueta creada».
+- **GLS:** si tu envío lleva varios días en `Etiqueta creada`, el remitente le ha pasado los datos a GLS, pero todavía no le ha entregado el paquete. GLS te sugiere preguntar a la tienda, porque no puede darte plazos hasta tenerlo físicamente. Para consultarlo en su web, GLS pide el número de seguimiento y el código postal de destino; si no tienes el número, te lo da la tienda. En Peek, que lee el seguimiento de GLS en inglés, esa línea es `Label created. The shipment has not yet been delivered to GLS by the sender`, con la etapa «Etiqueta creada».
 - **[UPS](carrier:ups):** la primera línea, `Shipper created a label, UPS has not received the package yet.`, dice justo eso: el remitente ha creado la etiqueta y UPS todavía no tiene el paquete.
 - **Vinted:** el seguimiento puede tardar hasta 48 horas en aparecer en la app.
 - **Zalando:** el enlace de seguimiento no funciona «hasta que el transportista no haya recibido tu paquete». Si no se actualiza en 5 o 6 días laborables, contacta con el transportista.
@@ -138,8 +138,9 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [Correos: Gestión aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – Canarias, Ceuta y Melilla
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5, 15 y 30 días, 3 y 3 a 6 días laborables, Locker y Punto Pack, reparto de lunes a viernes; reclamación por demora hasta 21 días, contacto con el remitente en 7 días (leído el 10 de noviembre de 2026)
 - [InPost: Seguimiento del envío](https://www.inpost.es/seguimiento-del-envio) – 5 días naturales en Locker y Punto Pack, después vuelve al remitente (leído el 10 de noviembre de 2026)
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días, asistente virtual «Consulta», redes sociales y teléfono; ExpressSaturday, seguimiento en tiempo real a menos de 10 paradas (leído el 10 de noviembre de 2026)
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días, asistente virtual «Consulta», redes sociales y teléfono; ExpressSaturday, seguimiento en tiempo real a menos de 10 paradas (leído el 10 de noviembre de 2026); número de seguimiento y código postal de destino, número a través del proveedor (leído el 14 de noviembre de 2026)
 - [GLS: Hoja de reclamaciones](https://gls-group.com/ES/es/hoja-de-reclamaciones/) – respuesta en 30 días
+- [Peek: Routing (en inglés)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – sin escaneos nuevos cuando todas las fuentes responden sin escaneo, se conservan los encontrados (leído el 14 de noviembre de 2026)
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – primera línea de UPS que lee Peek
 - [Universal Parcel Scraper: GLS España](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-es) – primera línea de GLS que lee Peek, en inglés
 - [Zalando: ¿Dónde está mi pedido?](https://www.zalando.es/faq/where-is-my-parcel.html) – enlace sin activar hasta que el transportista tiene el paquete, 5-6 días laborables

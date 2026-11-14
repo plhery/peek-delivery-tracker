@@ -4,7 +4,7 @@ description: Ton suivi n'avance plus depuis des jours ? Les raisons, combien de 
 slug: suivi-colis-ne-bouge-plus
 picture: Un calendrier aux jours barrés, une ligne de progression arrêtée à mi-chemin et Pip qui attend, l'air de s'ennuyer.
 published: 2026-10-09
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 Un suivi qui ne bouge plus veut en général dire que personne n'a scanné ton colis ces derniers temps, pas qu'il s'est arrêté. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un long trajet, un vol, la douane ou un week-end peuvent laisser plusieurs jours sans nouvelle ligne. Ne t'inquiète qu'une fois passé le délai du transporteur lui-même (chez [bpost](carrier:bpost), au moins 5 jours ouvrables pour un envoi vers un pays voisin ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard sur le délai habituel), et même là, contacte d'abord le vendeur : c'est lui, le client du transporteur.
@@ -13,7 +13,7 @@ Un suivi qui ne bouge plus veut en général dire que personne n'a scanné ton c
 
 Le suivi montre des scans, pas des déplacements, et plusieurs choses peuvent les espacer :
 
-- **Les week-ends et les jours fériés.** On compte en jours ouvrables ou ouvrés : Vinted, par exemple, ne compte ni les week-ends ni les jours fériés dans ses jours ouvrés. Les jours sans service autour de Noël sont listés dans [les dates limites d'envoi des fêtes](guide:christmas-posting-dates).
+- **Les week-ends et les jours fériés.** On compte en jours ouvrables ou ouvrés : Vinted, par exemple, ne compte ni les week-ends ni les jours fériés dans ses jours ouvrés, et [GLS](carrier:gls-fr) livre en France du lundi au vendredi, entre 8 h et 18 h. Les jours sans service autour de Noël sont listés dans [les dates limites d'envoi des fêtes](guide:christmas-posting-dates).
 - **La météo et les pics d'activité.** [Colis Privé](carrier:colis-prive) cite la météo défavorable et les problèmes logistiques. DHL ajoute les embouteillages, les accidents et les cas de maladie, et prévient qu'en Allemagne, un colis peut mettre plus longtemps avant Noël.
 - **Une adresse fausse ou une étiquette illisible.** Colis Privé cite l'erreur dans l'adresse de livraison. DHL détaille : faute de frappe dans le code postal, numéro de rue manquant, étiquette manuscrite difficile à lire, étiquette décollée, emballage ouvert ou abîmé qu'il faut refaire. Le colis peut alors partir au mauvais endroit ou être trié à la main, avec plusieurs jours de retard.
 
@@ -30,13 +30,14 @@ Aucun transporteur ne donne de durée unique pendant laquelle le suivi peut rest
 - home | Dernier kilomètre | En cours de livraison, puis livré : les scans s'enchaînent de nouveau.
 :::
 
-Quand un colis en est à l'étiquette créée, à la prise en charge ou en transit et que son dernier scan a quatre jours ou plus, [Peek](/) affiche « Aucune mise à jour depuis quatre jours » dans ta liste et, sur la page du colis, la note « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger bpost. » (ici avec bpost).
+Quand un colis en est à l'étiquette créée, à la prise en charge ou en transit et que son dernier scan a quatre jours ou plus, [Peek](/) affiche « Aucune mise à jour depuis quatre jours » dans ta liste et, sur la page du colis, la note « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger bpost. » (ici avec bpost). Si le transporteur et les services de suivi répondent sans aucun scan (numéro introuvable, ou connu mais sans historique) pour un colis qui en a déjà, Peek garde ceux qu'il a trouvés et affiche sur la page du colis « Le transporteur n’a pas de nouveau scan pour l’instant. Ceux déjà trouvés sont gardés, et Peek continue de vérifier. »
 
 ### Colis envoyé mais pas de suivi : combien de temps attendre ?
 
 De quelques heures à quelques jours. Si ton nouveau numéro ne donne rien ou reste bloqué sur `Étiquette créée`, le transporteur n'a peut-être pas encore le colis : cette première ligne vient en général du logiciel d'étiquettes du vendeur, pas d'un scan. Transporteur par transporteur :
 
 - **Colis Privé :** `Colis attendu par Colis Privé` veut dire que l'expéditeur ne lui a pas encore remis le colis. Colis Privé te renvoie alors vers le site du vendeur.
+- **[DPD France](carrier:dpd-fr) :** un numéro de colis « inconnu » veut très certainement dire que l'expéditeur ne lui a pas encore remis le colis. Un colis venu de l'étranger par une filiale de DPD (DPD UK, DPD Allemagne…) peut être pris en charge par [Chronopost](carrier:chronopost) à son arrivée en France : DPD France ne le reconnaît pas, essaie alors le suivi de Chronopost. Si le numéro reste inconnu, il est erroné ou hors du réseau Geopost : contacte l'expéditeur.
 - **[UPS](carrier:ups) :** le premier scan, `Shipper created a label, UPS has not received the package yet.`, le dit en toutes lettres : l'expéditeur a créé l'étiquette, mais UPS n'a pas encore le colis.
 - **bpost :** `en préparation` veut dire que l'expéditeur prépare encore le colis, ou que bpost l'a mais doit encore le trier. La plupart des colis sont traités dans les 5 jours.
 - **La Poste suisse :** `Transmission des données par l’expéditeur` veut dire que le numéro existe, mais que l'envoi ne lui a normalement pas encore été remis.
@@ -72,7 +73,7 @@ Il n'y a pas de délai unique. La plupart des transporteurs disent à partir de 
 
 ## Qui contacter : le vendeur ou le transporteur ?
 
-Le vendeur. C'est lui qui a choisi le transporteur et passé le contrat de transport : c'est lui, son client. bpost, DPD et La Poste suisse renvoient d'ailleurs les destinataires vers l'expéditeur.
+Le vendeur. C'est lui qui a choisi le transporteur et passé le contrat de transport : c'est lui, son client. bpost, DPD et La Poste suisse renvoient d'ailleurs les destinataires vers l'expéditeur, et chez GLS France, une demande d'indemnisation pour un retard s'adresse à l'expéditeur.
 
 La loi va dans le même sens quand tu achètes à un professionnel : en France et en Belgique, le colis voyage aux risques du vendeur, sauf si tu as choisi toi-même un transporteur que la boutique ne proposait pas. En France, le risque ne passe à toi qu'une fois le colis entre tes mains ou celles d'une personne que tu as désignée. La Suisse a d'autres règles : tes droits, pays par pays, sont dans [colis livré mais pas reçu](guide:delivered-not-received).
 
@@ -109,7 +110,7 @@ AliExpress te laisse ouvrir un litige jusqu'à 15 jours après la fin du délai 
 
 ### Colis en transit depuis une semaine : est-ce normal ?
 
-Dans un même pays, c'est long : en Belgique, Mondial Relay compte en moyenne 3 jours ouvrés après la prise en charge pour une livraison en Point Relais. Entre deux pays, une semaine n'a rien d'anormal : Vinted indique que la plupart de ses colis internationaux arrivent sous 7 jours ouvrés, et, depuis la Belgique, Mondial Relay compte 3 à 6 jours ouvrés vers l'étranger.
+Dans un même pays, c'est long : en Belgique, Mondial Relay compte en moyenne 3 jours ouvrés après la prise en charge pour une livraison en Point Relais, et en France, GLS livre en 24 h dans la plupart des départements. Entre deux pays, une semaine n'a rien d'anormal : Vinted indique que la plupart de ses colis internationaux arrivent sous 7 jours ouvrés, et, depuis la Belgique, Mondial Relay compte 3 à 6 jours ouvrés vers l'étranger.
 
 ### Peut-on accélérer la mise à jour du suivi ?
 
@@ -132,6 +133,9 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [La Poste suisse : Formulaire de contact pour les recherches](https://www.post.ch/fr/pages/formulaires-de-contact/recherche-nationale) – plus de deux jours, expéditeur ou destinataire
 - [bpost : Mon colis reste « en préparation »](https://www.bpost.be/fr/faq/mon-colis-reste-en-preparation-quest-ce-que-cela-signifie-et-que-puis-je-faire) – en préparation, 5 jours
 - [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – « Transmission des données par l’expéditeur »
+- [DPD France : Pourquoi mon suivi colis indique-t-il « numéro de colis inconnu » ?](https://www.dpd.com/fr/fr/faq/pourquoi-mon-suivi-colis-indique-t-il-numero-de-colis-inconnu/) – colis pas encore remis par l'expéditeur, colis de filiales DPD pris en charge par Chronopost, numéro erroné ou hors du réseau Geopost (lu le 14 novembre 2026)
+- [GLS France : Aide](https://gls-group.com/FR/fr/recevoir-colis/aide/) – livraison du lundi au vendredi de 8 h à 18 h, 24 h dans la plupart des départements, indemnisation d'un retard demandée à l'expéditeur (lu le 14 novembre 2026)
+- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – aucun nouveau scan quand toutes les sources répondent sans scan, scans déjà trouvés gardés (lu le 14 novembre 2026)
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – premier scan, « Exception »
 - [DHL : Why are there delays? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – problèmes d'adresse et d'étiquette
 - [DHL : My shipment has not been delivered yet (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – intempéries, embouteillages, accidents, période avant Noël

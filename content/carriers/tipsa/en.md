@@ -63,6 +63,8 @@ TIPSA delivers through its own network across mainland Spain and Portugal, the B
 
 Some shops also book Saturday delivery or a pre-alert, an SMS and email telling you the day the parcel reaches its destination. With the Premium service you can also pick a delivery time slot, give or take an hour; TIPSA doesn't say where you pick it, so ask the destination agency.
 
+**Paying on delivery.** With cash on delivery (contrarreembolso), TIPSA collects the amount the shop set when it delivers the parcel, up to €1,000 per shipment; with carriage forward (portes debidos), it collects the shipping cost at the destination. TIPSA doesn't say whether you pay in cash or by card: ask the shop or the destination agency. Both are paid when the parcel reaches you, so a text or email "from TIPSA" asking you to pay through a link fits neither: don't pay, and look the number up on tip-sa.com's locator. More in [delivery scam texts](guide:delivery-scam-texts).
+
 ## TIPSA parcel late, lost or returned
 
 TIPSA's pages don't cover a parcel whose tracking stops moving. Call the destination agency named on the shipment page, or ask the shop; [tracking that isn't updating](guide:tracking-not-updating) explains when to worry.
@@ -88,7 +90,7 @@ Portugal has no separate line: TIPSA's Portuguese contact page gives the same tw
 
 A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Peek doesn't suggest TIPSA for ten digits or ask it about them; if you pick TIPSA, Peek says TIPSA "doesn’t issue numbers like this one" and asks tracking services instead. Look for the full 22-digit number, or the tracking link, in the shop's shipping email or SMS, or ask the shop. Links from a shop's TIPSA email can be pasted: Peek reads tip-sa.com links with `id=` on pages ending `datos_env.php`, `datos_prestashop.php` or `datos.php`, and on the bare tip-sa.com address. Links to TIPSA's locator or its shipment pages on tipsa-dinapaq.com are not read.
 
-Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written. Peek reads every scan time as Madrid time, Portuguese agencies included, and shows it in your time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks every 10 minutes, and every 2 minutes from 6 a.m. Madrid time on the day TIPSA scans the parcel out for delivery, while TIPSA's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written, and Peek also sums each one up in its own words: `PENDIENTE DE ENTREGAR A TIPSA` shows as "Label created"; `REPARTO` as "Out for delivery"; `Ausente`, `Cerrado` and `Faltan Datos / Datos incorrectos` as "Delivery attempted"; `DISPONIBLE` and `Pendiente de recoger en Tipsa` as "Ready for pickup"; `Devolver a Origen` as "Needs attention"; `ENTREGADO` as "Delivered"; and the other scans as "In transit". Peek reads every scan time as Madrid time, Portuguese agencies included, and shows it in your time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks every 10 minutes, and every 2 minutes from 6 a.m. Madrid time on the day TIPSA scans the parcel out for delivery, while TIPSA's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about TIPSA tracking
 
@@ -125,7 +127,9 @@ Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 
 - [TIPSA: Recogida en puntos de recogida](https://www.tip-sa.com/es/envios-de-paquetes/puntos-de-recogidas) – shared with SEUR, 7 days, opening days
 - [TIPSA: Agencias de transporte](https://www.tip-sa.com/es/agencias-de-transporte) – agency finder
 - [TIPSA: Puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/) – pickup point finder
+- [TIPSA: Contrarreembolso](https://www.tip-sa.com/es/envios-de-paquetes/reembolso) – amount collected at the destination on delivery, up to €1,000 per shipment
+- [TIPSA: Portes debidos](https://www.tip-sa.com/es/envios-de-paquetes/portes-debidos) – shipping cost collected at the destination
 - [TIPSA: Aviso legal](https://www.tip-sa.com/es/aviso-legal) – company name
 - [TIPSA: Contacto (Portugal)](https://www.tip-sa.com/pt/contacto) – same numbers for Portugal
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, `Cerrado`
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, `Cerrado`, each status's stage
 :::

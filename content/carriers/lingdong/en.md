@@ -31,22 +31,23 @@ Lingdong publishes no list of its statuses. It writes its scans in English, or i
 | Lingdong says | What it means for you |
 | --- | --- |
 | `货物电子信息已经收到` | Chinese for electronic shipment information received: the seller has created the order. Lingdong doesn't have the parcel yet. |
+| `Shipping Label Created` | The label made for the order, a few hours before the first scan at Lingdong's warehouse. |
 | `Shipment arrived at facility` | The parcel reached Lingdong's warehouse in Shenzhen. It's the first scan in Lingdong's hands. |
 | `Shipment departed from facility` | It left that warehouse on its way abroad. |
-| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】` | Booked on a flight: the flight's day stands where the dots are. |
+| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】`, `预计…航班/Scheduled flight on …` | Booked on a flight: the flight's day stands where the dots are. |
 | `送往航司途中【On the way to the airline company】` | On its way to the airline. |
 | `航班已起飞【The flight has taken off.】`, `航班已启运/Package in transit to destination country` | The flight has left. |
 | `航班抵达【Flight arrival】`, `航班已落地，拆板中/Package arrived at destination country` | The flight has landed; with the second wording, its pallets are being broken down. |
 | `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | After the landing, the flight's pallets are being broken down while the cargo waits to be collected for customs clearance: you don't have to collect anything. |
 | `货物在清关【Customs clearance in progress】` | In customs in the destination country, after the landing. |
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | The destination country's customs have cleared it, after the landing and before the delivery. "Domestic" here means the destination country's, not China's. |
-| `货物已交服务商【The shipment has been transferred to the logistics partner.】` | After customs clearance, Lingdong has handed the parcel to the company that delivers it. |
+| `货物已交服务商【The shipment has been transferred to the logistics partner.】`, `包裹交接给本地物流商处理/Received by local delivery company` | After customs clearance, Lingdong has handed the parcel to the company that delivers it. |
 
 The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes it by itself for an order that has no scans yet, dated when the order was created.
 
-In Peek, the Chinese line shows as "Label created", `Shipment arrived at facility` as "Received by carrier", `货物在清关【Customs clearance in progress】` as "At customs", and every other line in the table as "In transit".
+In Peek, the Chinese line and `Shipping Label Created` show as "Label created", `Shipment arrived at facility` as "Received by carrier", `货物在清关【Customs clearance in progress】` as "At customs", and every other line in the table as "In transit".
 
-None of Lingdong's own lines is a delivery line: the last is the hand-over after customs clearance in the destination country. In Italy its tracker can then pass on Poste Italiane's scans, `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` and `In transito, la spedizione è in transito`, up to `In consegna` ("Out for delivery") and `Consegnata, la spedizione è stata consegnata` ("Delivered"). Another company delivers the parcel there, and its tracking has the rest.
+None of Lingdong's own lines is a delivery line: the last is the hand-over after customs clearance in the destination country. In Italy its tracker can then pass on Poste Italiane's scans, `First parcel scan along Poste Italiane’s logistic network`, `In transit along Poste Italiane’s logistic network` and `In transito, la spedizione è in transito`, up to `In consegna` ("Out for delivery") and `Consegnata, la spedizione è stata consegnata` ("Delivered"). In the US it can pass on GOFO's `Arrived at GOFO Regional Hub`, the parcel taken in at GOFO's regional hub ("In transit"). Another company delivers the parcel there, and its tracking has the rest.
 
 ## Who delivers Lingdong parcels
 

@@ -114,12 +114,12 @@ Tickets gibt es auf jedem Kaufland-Marktplatz: Die Antwortzeit der Verkäufer re
 
 Ja: Füg die Sendungsnummer aus der Versand-E-Mail von Kaufland in [Peek](/) ein. Peek erkennt allein an ihrer Form:
 
-- DHL: die meisten 20-stelligen Nummern ab `00340434`, wie `00340434100000000007`, und die meisten internationalen Nummern mit `DE` am Ende, wie `RR000000005DE`.
+- DHL: die meisten Nummern aus `JJD` und 18 Ziffern, die meisten 20-stelligen Nummern ab `00340434`, wie `00340434100000000007`, und die meisten internationalen Nummern mit `DE` am Ende, wie `RR000000005DE`.
 - Hermes: `H` und 16 bis 19 Ziffern, wie `H1000000000000000`.
 - UPS: `1Z` und 16 Buchstaben oder Ziffern.
 - Österreichische Post: internationale Nummern mit `AT` am Ende, wie `RR000000005AT`.
 
-Die `JJD`- und 12-stelligen Nummern von DHL, die 14-stelligen von Hermes und DPD, die 11 oder 12 Ziffern von GLS und die 22-stelligen der Österreichischen Post teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Paketdienst, also den aus der Versand-E-Mail von Kaufland, wenn der Verkäufer ihn angegeben hat. Für DPD Austria oder Schenker füg die Nummer ein, und zeigt Peek einen anderen Dienst, tippst du auf „Ändern“ und wählst ihn; Schenker steht in Peek unter DSV. Für eine andere Spedition, einen Händler im Ausland oder einen Dienst, den dieser Ratgeber nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
+Die 12-stelligen Nummern von DHL, die 14-stelligen von Hermes und DPD, die 11 oder 12 Ziffern von GLS und die 22-stelligen der Österreichischen Post teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Paketdienst, also den aus der Versand-E-Mail von Kaufland, wenn der Verkäufer ihn angegeben hat. Für DPD Austria oder Schenker füg die Nummer ein, und zeigt Peek einen anderen Dienst, tippst du auf „Ändern“ und wählst ihn; Schenker steht in Peek unter DSV. Für eine andere Spedition, einen Händler im Ausland oder einen Dienst, den dieser Ratgeber nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Tickets, Stornierungen, Erstattungen und Rücksendungen laufen weiter über Kaufland und den Verkäufer.
 

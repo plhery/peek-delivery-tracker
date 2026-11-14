@@ -106,7 +106,7 @@ DHL podaje orientacyjnie 2–3 dni robocze. W Niemczech paczka dociera zwykle 1�
 
 ### Czy paczkę DHL Paket sprawdzę w Mój DHL?
 
-Czasem tak. Mój DHL podaje, że paczkę nadaną za granicą da się tam śledzić, gdy dotrze do magazynu DHL eCommerce Polska. Wtedy Mój DHL może znać jej numer `JJD`: w Peek wybierz DHL eCommerce Poland przez „Zmień przewoźnika”, bo sam numer `JJD` trafia do DHL z Niemiec. Jeśli Mój DHL nie zna numeru, śledź paczkę na dhl.de.
+Czasem tak. Mój DHL podaje, że paczkę nadaną za granicą da się tam śledzić, gdy dotrze do magazynu DHL eCommerce Polska. Wtedy Mój DHL może znać jej numer `JJD`: w Peek wybierz DHL eCommerce Poland przez „Zmień przewoźnika”, bo sam numer `JJD` trafia do DHL z Niemiec (a `JJD000090` z 14–16 cyframi do DHL eCommerce Netherlands). Jeśli Mój DHL nie zna numeru, śledź paczkę na dhl.de.
 
 ### Czy da się śledzić DHL Päckchen?
 

@@ -33,7 +33,7 @@ Shouwu's tracker is in English under a Chinese heading. It gives each parcel a s
 | Shouwu's status | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Not Found` | Shouwu has nothing under that number yet: "We seem can't identify the number." | "Waiting for the carrier" |
-| `Preparing` | Shouwu explains it as a parcel handed to its warehouse in China, or being weighed and sealed there. It can show before the first scan. | "Label created", then "Received by carrier" after a warehouse scan |
+| `Preparing` | Shouwu explains it as a parcel handed to its warehouse in China, or being weighed and sealed there. It can show before the first scan. | "Label created", then "Received by carrier" after the partner's pickup or a warehouse scan |
 | `In Transit` | Anything from the handover to a carrier to customs and the trip inside your country. | "In transit", or the newest scan's stage, such as "At customs"; "Label created" while there is only the order data and `Carrier received the shipment` |
 | `Undelivered` | A delivery attempt failed. | "Delivery attempted", or "Ready for pickup" or "Returned to sender" if the newest scan says so |
 | `Delivered` | Delivered to the addressee. | "Delivered" |
@@ -52,6 +52,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | China has cleared it for export; nothing is held. | "In transit" |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | At the departure airport after export clearance, being loaded onto a flight. | "In transit" |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |
+| `The ship has already set sail` | On a sea line: the ship has left China, after export clearance and before it reaches the port abroad. | "In transit" |
 | `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Landed in your country. | "In transit" |
 | `NOA received` | The agent in your country has the airline's notice of arrival; customs comes next. | "In transit" |
 | `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` | Your country's customs are clearing it. | "At customs" |
@@ -59,6 +60,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Scheduled For Delivery` | Shouwu's line after import clearance, days before the courier's depot and round: a delivery is planned, not under way. | "In transit" |
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Handed to the courier that delivers in your country, not delivered to you ("deliverey" is Shouwu's spelling). | "In transit" |
 | `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: not the pickup from the seller (that one is `Picked up by Shipping Partner`, near the start), nor a pickup by you. | "In transit" |
+| `Picked up` | In the US, FedEx has collected the parcel from Shouwu's depot after import clearance (its line gives the town and postcode). Not the pickup from the seller, `Picked up by Shipping Partner`, nor a pickup by you. | "In transit" |
 | `The shipment has been processed in the destination parcel center` | DHL has sorted it at the parcel centre that serves your address, before its delivery round. | "In transit" |
 | `Mis routed` | The courier delivering in Germany sent the parcel to the wrong facility and is sending it on: a delay, not a stop. The delivery round can still come the same day. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
@@ -83,14 +85,14 @@ When iMile delivers in Italy, Shouwu's history relays iMile's lines, with the ce
 
 **Lines in Chinese.** Some parcels also get lines Shouwu writes in Chinese, which Peek shows as written. `货物电子信息已经收到` (the goods' electronic data received) comes with the order data: "Label created". Then, all "In transit": `申报过港中` after a batch's code (the batch is declared for the road to Hong Kong), `已到港，安排航班中` (at the port of departure, waiting for a flight), `预计23号的航班` (the flight booked, here for the 23rd; with `二程` in front, for the second leg), `航班已飞` and `二程航班已飞` (the flight, or the second leg's, has left) and `已落地` (landed). `已落地，清关提货中` (landed, being cleared and collected from the airline) is "At customs"; `清关完成` (cleared) and `已交仓扫描` (scanned in at the delivering courier's depot) are "In transit" again.
 
-**Times out by hours.** Shouwu's system records every scan's local time as if it were Beijing time, scans abroad too, and its tracker shows that in your time zone. So a scan in the UK or the US shows hours early, and the flight looks hours shorter. Go by the order of the rows. Peek works out each scan's clock from its place, or from the leg the parcel was on, and shows them in your device's time zone.
+**Times out by hours.** Shouwu's system records every scan's local time as if it were Beijing time, scans abroad too, and its tracker shows that in your time zone. So a scan in the UK or the US shows hours early, and the flight looks hours shorter. Go by the order of the rows. Peek works out each scan's clock from its place, or from the leg the parcel was on, and shows them in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
 
 ## Who delivers Shouwu parcels
 
 Shouwu says it works directly with USPS, Royal Mail, La Poste, DHL, DPD and Hermes. Its line pages, in Chinese, name the couriers by country:
 
 - **United Kingdom.** The UK lines cover the whole of the UK. Their last-mile couriers are Royal Mail, Yodel and Evri (spelt ERVI there); the line for goods with batteries goes mainly by Royal Mail.
-- **United States.** The US lines cover the whole country, delivered mainly by USPS.
+- **United States.** The US lines cover the whole country, delivered mainly by USPS; in histories Peek has read, [FedEx](carrier:fedex) delivers there too.
 - **European Union.** Shouwu also has lines to Germany, delivered mainly by [DHL](carrier:dhl), [Hermes](carrier:hermes-de) or [DPD](carrier:dpd-de) depending on the line, France (mainly [Colissimo](carrier:la-poste)), the Netherlands (mainly DHL), Sweden (mainly [Early Bird](carrier:early-bird)) and Italy (an economy line, 10 to 12 working days, delivered by UniUni and [Poste Italiane](carrier:poste-italiane); in histories Peek has read, [iMile](carrier:imile) delivers there too, with the lines above). Here too the seller may pass on the courier's number.
 - **Ireland, Canada and Australia.** Shouwu lists no line for them and names no courier. Ask the seller who delivers.
 
@@ -169,5 +171,5 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, choice of number, 10 to 12 working days
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November, the partner's pickup from the seller since 14 November), iMile's lines relayed in Italy (its return to sender too), DPD's lines, clocks, places, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages (the export and destination clearance, airport loading and hand-over rows read since 9 November, the partner's pickup from the seller, FedEx's pickup from the US depot and the ship leaving China since 14 November), iMile's lines relayed in Italy (its return to sender too), DPD's lines, clocks, places, what Peek shows
 :::

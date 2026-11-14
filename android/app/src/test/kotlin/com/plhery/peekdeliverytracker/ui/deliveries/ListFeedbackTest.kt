@@ -240,12 +240,12 @@ class ListFeedbackTest {
         advance(100)
         toast(words).assertExists()
         assertEquals(words, announced())
-        // Said, the news is let go: nothing brings it back.
-        assertEquals(null, source.leftOnDevice.value)
         advance(7800)
         toast(words).assertExists()
         advance(200)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+        // Said, the news is let go: nothing brings it back.
+        assertEquals(null, source.leftOnDevice.value)
         advance(8000)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
 

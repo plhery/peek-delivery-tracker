@@ -310,12 +310,14 @@ internal fun rememberPromptStates(launch: UUID, adding: MutableState<String?>): 
 
 /**
  * A message under the list (`ListToast`): what a check of the parcels found, how many of this phone's parcels a full
- * account left here ([leftOnDevice]), or, up to Android 12L, that a number was copied ([Device.confirmsCopies]). Each
- * one shown is another ([id]), even with the same words, and has its own four seconds; the parcels left here, under the
- * archive's box, have eight, the time it takes to read what to do about them.
+ * account left here ([news]), or, up to Android 12L, that a number was copied ([Device.confirmsCopies]). Each one shown
+ * is another ([id]), even with the same words, and has its own four seconds; the parcels left here, under the archive's
+ * box, have eight, the time it takes to read what to do about them.
  */
 @Immutable
-internal data class ListToast(val id: Int, val text: String, val warning: Boolean = false, val leftOnDevice: Boolean = false)
+internal data class ListToast(val id: Int, val text: String, val warning: Boolean = false, val news: ParcelStore.LeftOnDevice? = null) {
+    val leftOnDevice: Boolean get() = news != null
+}
 
 /** News TalkBack is told that nothing on screen says (`AccessibilityNotification.Announcement`), each one once. */
 @Immutable
@@ -1150,24 +1152,31 @@ internal class DeliveriesState(
      * pull's message, whose result TalkBack has already heard. An Undo held for TalkBack or Switch Access gives way to
      * it (`onChange(of: toast)`, [UndoClock.held]).
      */
-    fun show(text: String, warning: Boolean = false, announce: Boolean = true, leftOnDevice: Boolean = false) {
-        toast = ListToast(++toasts, text, warning, leftOnDevice)
+    fun show(text: String, warning: Boolean = false, announce: Boolean = true, news: ParcelStore.LeftOnDevice? = null) {
+        // The parcels left here, said once: a message taking that one's place lets its news go.
+        toast?.news?.let(source::forgetLeftOnDevice)
+        toast = ListToast(++toasts, text, warning, news)
         if (source.undoClock.held.value) source.undoParcel.value?.let(source::forgetUndo)
         if (announce) announce(text)
     }
 
     /**
      * The account had no room for some of the parcels this phone followed before signing in: the list says how many
-     * stayed here, once, as the web's deliveries do after bringing parcels along, and lets the news go.
+     * stayed here, once, as the web's deliveries do after bringing parcels along, and lets the news go once the message
+     * has run. A window made again meanwhile says it again, for its eight seconds, as the iPhone's view state keeps it
+     * through a turn.
      */
     fun tellLeftOnDevice(news: ParcelStore.LeftOnDevice) {
-        source.forgetLeftOnDevice(news)
-        show(text("link.bring.full.many", mapOf("count" to news.count)), leftOnDevice = true)
+        if (toast?.news?.id == news.id) return
+        show(text("link.bring.full.many", mapOf("count" to news.count)), news = news)
     }
 
     /** The message `id` has had its four seconds, unless a newer one took its place. */
     fun dismiss(id: Int) {
-        if (toast?.id == id) toast = null
+        val shown = toast ?: return
+        if (shown.id != id) return
+        shown.news?.let(source::forgetLeftOnDevice)
+        toast = null
     }
 
     /** What the toast of an archived parcel says (`app.archivedToast`). */

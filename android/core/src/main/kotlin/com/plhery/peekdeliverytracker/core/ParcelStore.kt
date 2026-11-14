@@ -1750,14 +1750,24 @@ class ParcelStore(
             )
             // What the list widget shows besides: where the app's list puts each parcel, which is its Next up, the
             // carrier shown, and the last steps of the first parcels. Whichever ends up alone in the list is among
-            // them: one on its way comes first, and with none, the one delivered last stays longest and leads.
-            val sections = ParcelOrganizer.sections(parcels, now).flatMap { section -> section.parcels.map { it.id to section.kind.rawValue } }.toMap()
+            // them: one on its way comes first, and with none, the one delivered last stays longest and leads. The
+            // sections and Next up are also written for the next midnights, as the details are.
+            fun sections(at: Instant) = ParcelOrganizer.sections(parcels, at).flatMap { section -> section.parcels.map { it.id to section.kind.rawValue } }.toMap()
+            val sections = sections(now)
             val next = ParcelOrganizer.nextDelivery(parcels, now)?.id
+            val sectionsLater = midnights.map(::sections)
+            val nextLater = midnights.map { ParcelOrganizer.nextDelivery(parcels, it)?.id }
             val byId = parcels.associateBy { it.id }
             return ordered.mapIndexed { index, item ->
                 val parcel = byId[item.id] ?: return@mapIndexed item
+                val section = sections[item.id]
+                val nextUp = item.id == next
+                val later = DeliveryWidgetDays.later(DeliveryWidgetWording(now, item.detail, section, nextUp), midnights) { midnight ->
+                    val at = midnights.indexOf(midnight)
+                    DeliveryWidgetWording(midnight, item.worded(midnight).detail, sectionsLater[at][item.id], item.id == nextLater[at])
+                }
                 item.copy(
-                    section = sections[item.id], nextUp = item.id == next, carrierId = parcel.displayedCarrier.rawValue,
+                    later = later, section = section, nextUp = nextUp, carrierId = parcel.displayedCarrier.rawValue,
                     steps = if (index < DeliveryWidgetSelection.limit) widgetSteps(parcel).ifEmpty { null } else null,
                 )
             }

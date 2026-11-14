@@ -1056,7 +1056,9 @@ class ParcelLogicTests {
         val next = ParcelStore.nextDeliveries(parcels, localizer, now).single()
         assertEquals("Waiting for DPD Switzerland’s first scan", next.detail)
         // The list widget's fields besides: on its way, the app list's Next up, its carrier still unknown, no steps yet.
-        val published = next.copy(section = ParcelSectionKind.Active.rawValue, nextUp = true, carrierId = "unknown")
+        // Two days after it was added it needs attention, which the widget follows from the midnight after.
+        val attention = DeliveryWidgetWording(DeliveryWidgetDays.midnights(after = now)[2], next.detail, ParcelSectionKind.Attention.rawValue, nextUp = false)
+        val published = next.copy(section = ParcelSectionKind.Active.rawValue, nextUp = true, carrierId = "unknown", later = listOf(attention))
         assertEquals(listOf(published), ParcelStore.widgetDeliveries(parcels, localizer, now))
     }
 

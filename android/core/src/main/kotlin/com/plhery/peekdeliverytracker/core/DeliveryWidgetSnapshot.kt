@@ -37,8 +37,9 @@ data class DeliveryWidgetParcel(
     /** Whether the reader named the parcel: the list widget calls one without a name by its carrier. */
     val named: Boolean? = null,
     /**
-     * The detail from each of the next midnights where its words change, which the app writes ahead: "tomorrow"
-     * becomes "today" while the app stays closed. None from an app that didn't write them.
+     * The detail, section and Next up from each of the next midnights where one changes, which the app writes ahead:
+     * "tomorrow" becomes "today", under Arriving today, while the app stays closed. None from an app that didn't write
+     * them.
      */
     val later: List<DeliveryWidgetWording>? = null,
     /** The section of the app's list the parcel is in (`ParcelSectionKind`), which the list widget's sections follow. */
@@ -53,18 +54,20 @@ data class DeliveryWidgetParcel(
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
 
-    /** The parcel as the widgets word it at `date`: the detail the app wrote for the last midnight before it. */
+    /** The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it. */
     fun worded(at: Instant): DeliveryWidgetParcel {
         val wording = later?.lastOrNull { it.from <= at } ?: return this
-        return copy(detail = wording.detail)
+        return copy(detail = wording.detail, section = wording.section ?: section, nextUp = wording.nextUp ?: nextUp)
     }
 }
 
-/** A parcel's detail from a moment on. */
+/** A parcel's detail from a moment on, and its section and whether it is Next up, where the app published them. */
 @Serializable
 data class DeliveryWidgetWording(
     @Serializable(with = ReferenceDateSerializer::class) val from: Instant,
     val detail: String,
+    val section: String? = null,
+    val nextUp: Boolean? = null,
 )
 
 /** A step of a parcel's tracking: when, the carrier's words, and where. */
@@ -77,7 +80,8 @@ data class DeliveryWidgetStep(
 
 /**
  * The days the widgets' words follow while the app stays closed: "today", "tomorrow" and "yesterday" change at
- * midnight, and an estimate that has passed gives way to the status.
+ * midnight, and an estimate that has passed gives way to the status. The app list's sections and its Next up change
+ * with them: a parcel due today is under Arriving today.
  */
 object DeliveryWidgetDays {
     /** How many midnights ahead the app words the parcels. */
@@ -90,20 +94,30 @@ object DeliveryWidgetDays {
     }
 
     /** The detail's words at each of `midnights` where they change from those before. */
-    fun later(than: String, at: List<Instant>, words: (Instant) -> String): List<DeliveryWidgetWording>? {
+    fun later(than: String, at: List<Instant>, words: (Instant) -> String): List<DeliveryWidgetWording>? =
+        later(DeliveryWidgetWording(Instant.EPOCH, than), at) { DeliveryWidgetWording(it, words(it)) }
+
+    /** The parcel's wording at each of `midnights` where it changes from the one before, its moment aside. */
+    fun later(than: DeliveryWidgetWording, at: List<Instant>, wording: (Instant) -> DeliveryWidgetWording): List<DeliveryWidgetWording>? {
         var last = than
         val changes = at.mapNotNull { midnight ->
-            val next = words(midnight)
-            if (next == last) return@mapNotNull null
+            val next = wording(midnight)
+            if (next.copy(from = last.from) == last) return@mapNotNull null
             last = next
-            DeliveryWidgetWording(midnight, next)
+            next
         }
         return changes.ifEmpty { null }
     }
 
-    /** When the parcels' words change after `now`: a widget is drawn again at each. */
-    fun changes(`in`: List<DeliveryWidgetParcel>, after: Instant): List<Instant> =
-        `in`.flatMap { it.later.orEmpty() }.map { it.from }.filter { it > after }.toSortedSet().toList()
+    /**
+     * When the parcels' words change after `now`, and the midnight after each of their steps, from which a step's time
+     * names its weekday: a widget is drawn again at each.
+     */
+    fun changes(`in`: List<DeliveryWidgetParcel>, after: Instant, zone: ZoneId = ZoneId.systemDefault()): List<Instant> {
+        val worded = `in`.flatMap { it.later.orEmpty() }.map { it.from }
+        val stepped = `in`.flatMap { it.steps.orEmpty() }.map { midnights(after = it.at, count = 1, zone = zone).first() }
+        return (worded + stepped).filter { it > after }.toSortedSet().toList()
+    }
 }
 
 /**

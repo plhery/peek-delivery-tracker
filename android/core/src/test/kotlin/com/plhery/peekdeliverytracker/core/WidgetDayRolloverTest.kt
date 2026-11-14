@@ -93,7 +93,9 @@ class WidgetDayRolloverTest {
         val parcels = storedAt23h30().parcels
         val friday = Instant.parse("2026-11-12T23:00:00Z") // midnight in Zurich
         val saturday = Instant.parse("2026-11-13T23:00:00Z")
-        assertEquals(listOf(friday, saturday), DeliveryWidgetDays.changes(parcels, after = published))
+        // And on Tuesday, four days without a scan, it needs attention.
+        val tuesday = Instant.parse("2026-11-16T23:00:00Z")
+        assertEquals(listOf(friday, saturday, tuesday), DeliveryWidgetDays.changes(parcels, after = published))
         // At 23:50 midnight comes before the refresh.
         val late = Instant.parse("2026-11-12T22:50:00Z")
         assertEquals(friday, DeliveryWidgetTimeline.next(late, turns = emptyList(), parcels = parcels))
@@ -103,6 +105,60 @@ class WidgetDayRolloverTest {
         // Mid-afternoon on Friday, the refresh comes first.
         val afternoon = Instant.parse("2026-11-13T14:00:00Z")
         assertEquals(afternoon.plusSeconds(20 * 60), DeliveryWidgetTimeline.next(afternoon, turns = emptyList(), parcels = parcels))
+    }
+
+    /**
+     * The Parcels widget's sections and Next up follow the day too: published at 23:30 on Thursday, a parcel due that
+     * day is under Arriving today and Next up, one due Friday under On the way. On Friday morning the app's list has
+     * them the other way round, and so does the widget, with no "Arriving today" over yesterday's parcel.
+     */
+    @Test
+    fun theParcelsWidgetsSectionsAndNextUpFollowTheDay() {
+        val thursdayId = UUID.fromString("00000000-0000-4000-8000-000000000002")
+        val dueThursday = makeParcel(id = thursdayId, trackingNumber = "TEST0000000002").copy(
+            expectedDelivery = "2026-11-12",
+            trackingEvents = listOf(event(thursdayId, TrackingStage.InTransit, "2026-11-12T09:00:00Z")),
+        )
+        val parcels = listOf(parcel, dueThursday)
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        store.save(DeliveryWidgetSnapshot(published, "en", ParcelStore.widgetOrder(parcels, localizer, published)))
+        fun sections(list: DeliveryWidgetList) = list.sections.map { section -> section.kind to section.parcels.map { it.id } }
+
+        val evening = DeliveryWidgetList.make(published, enabled = true, languageCode = "en", snapshot = store.snapshot)
+        assertEquals(listOf(ParcelSectionKind.Today to listOf(thursdayId), ParcelSectionKind.Active to listOf(id)), sections(evening))
+        assertEquals(thursdayId, evening.cardOrder.first().id)
+
+        // Control: the app's own list on Friday morning.
+        val fresh = DeliveryWidgetList(morning, true, "en", ParcelStore.widgetOrder(parcels, localizer, morning))
+        val friday = listOf(ParcelSectionKind.Today to listOf(id), ParcelSectionKind.Active to listOf(thursdayId))
+        assertEquals(friday, sections(fresh))
+
+        val list = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = store.snapshot)
+        assertEquals(
+            "At 08:00 on Fri 13 Nov the Parcels widget should show Friday's parcel under Arriving today and Thursday's " +
+                "under On the way, as the app's list does; it keeps the sections the app published at 23:30 on Thursday",
+            friday,
+            sections(list),
+        )
+        assertEquals("Friday's parcel leads the cards as Next up", id, list.cardOrder.first().id)
+        assertEquals(listOf("In transit · today", "In transit"), list.sections.flatMap { it.parcels }.map { it.listLine })
+    }
+
+    /**
+     * A step's time names its weekday from the day after ("Thu 21:00" on Friday), so the widget is drawn again at the
+     * midnight after a step, even where the parcel's words stay the same.
+     */
+    @Test
+    fun theWidgetsAreDrawnAgainAtTheMidnightAfterAStep() {
+        val noEstimate = parcel.copy(
+            expectedDelivery = null,
+            trackingEvents = listOf(event(id, TrackingStage.InTransit, "2026-11-12T20:00:00Z")),
+        )
+        val shown = ParcelStore.widgetOrder(listOf(noEstimate), localizer, published).single()
+        val midnight = Instant.parse("2026-11-12T23:00:00Z")
+        assertEquals("the parcel's words stay the same at midnight", null, shown.later?.firstOrNull { it.from == midnight })
+        assertEquals(midnight, DeliveryWidgetTimeline.next(Instant.parse("2026-11-12T22:50:00Z"), turns = emptyList(), parcels = listOf(shown)))
+        assertEquals("Thu 21:00", localizer.stepTime(shown.steps!!.single().at, morning))
     }
 
     /** The same for a delivery: "Delivered · today" at 20:00 is still "today" the next morning (the widget keeps it 24 h). */

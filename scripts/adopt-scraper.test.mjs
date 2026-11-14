@@ -537,6 +537,10 @@ describe('migrations that already made a change', () => {
     assert.equal(blocked, false);
     assert.deepEqual(declaredChanges([migration('20261017100000_example', 'carriers added example-post.', 'inputs added dpd: pattern ^[0-9]{4}.')])
       .map(({ entry }) => entry), ['example-post', 'dpd: pattern ^[0-9]{4}.']);
+    // An input's line that ends in its requirement, closed as a sentence, declares the input.
+    assert.deepEqual(declaredChanges([migration('20261017100000_example', 'inputs added example-post: postcode, validator internationalPostcode, optional.',
+      'inputs removed dpd: dpdPostcode, validator swissPostcode, required.')]).map(({ entry }) => entry),
+    ['example-post: postcode, validator internationalPostcode, optional', 'dpd: dpdPostcode, validator swissPostcode, required']);
   });
 
   it('reads a line that lists several ids as each of them', async () => {

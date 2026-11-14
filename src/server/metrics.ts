@@ -42,7 +42,7 @@ export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
 export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 20;
+const RUNTIME_VERSION = 21;
 
 interface PrometheusRuntime {
   version: number;
@@ -90,6 +90,8 @@ interface PrometheusRuntime {
   syncJobsOldestWait: Gauge<'kind'>;
   scheduledSyncDue: Gauge<'kind'>;
   scheduledSyncOverdue: Gauge<'kind'>;
+  /** When a scheduled run last read each kind's backlog, in milliseconds. */
+  backlogReadAt: Map<string, number>;
   /** Where the sync worker runs, how its queue is read at each scrape, and the read under way. */
   syncQueue: { read: (() => Promise<SyncQueue>) | null; reading: Promise<void> | null };
   /** Series a scrape has shown; they count at once. */
@@ -361,13 +363,16 @@ function createRuntime(): PrometheusRuntime {
       help: 'Parcels the latest scheduled run found due when it started, by whose: account, lookup, or unfollowed lookup.',
       labelNames: ['kind'] as const,
       registers: [registry],
+      collect: () => dropStaleBacklog(),
     }),
     scheduledSyncOverdue: new Gauge({
       name: 'scheduled_sync_overdue_seconds',
       help: 'How long the longest-waiting parcel the latest scheduled run found due had been due, to the minute, by whose: account, lookup, or unfollowed lookup; 0 when none was.',
       labelNames: ['kind'] as const,
       registers: [registry],
+      collect: () => dropStaleBacklog(),
     }),
+    backlogReadAt: new Map(),
     syncQueue: { read: null, reading: null },
     scraped: new Set(),
     held: new Map(),
@@ -717,16 +722,32 @@ function readSyncQueue(): Promise<void> {
   return runtime.syncQueue.reading;
 }
 
+/** A run starts every 2 minutes: a backlog none has read for this long is no longer known. */
+const BACKLOG_STALE_MS = 15 * 60_000;
+
+function forgetBacklog(kind: string): void {
+  runtime.scheduledSyncDue.remove({ kind });
+  runtime.scheduledSyncOverdue.remove({ kind });
+  runtime.backlogReadAt.delete(kind);
+}
+
+/** At each scrape, a kind no scheduled run has read for 15 minutes shows no value rather than the last one. */
+function dropStaleBacklog(now = Date.now()): void {
+  for (const [kind, readAt] of runtime.backlogReadAt) {
+    if (now - readAt >= BACKLOG_STALE_MS) forgetBacklog(kind);
+  }
+}
+
 /** At its start, the scheduled run's due parcels of one kind, and how long the longest-waiting of them has been due. */
 /** `null` when the run could not list them: the kind shows no value rather than an empty backlog. */
 export function recordScheduledBacklog(kind: 'account' | 'lookup' | 'unfollowed', due: number | null, overdueMs = 0): void {
   if (due === null) {
-    runtime.scheduledSyncDue.remove({ kind });
-    runtime.scheduledSyncOverdue.remove({ kind });
+    forgetBacklog(kind);
     return;
   }
   runtime.scheduledSyncDue.set({ kind }, due);
   runtime.scheduledSyncOverdue.set({ kind }, Math.round(overdueMs / 1_000));
+  runtime.backlogReadAt.set(kind, Date.now());
 }
 
 interface UsageStats { buckets: number; p50: number; p90: number; max: number }

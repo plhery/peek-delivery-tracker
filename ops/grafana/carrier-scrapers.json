@@ -1287,7 +1287,7 @@
       "type": "timeseries",
       "id": 76,
       "title": "Longest wait for a check",
-      "description": "How long the longest-waiting parcel the scheduled run found due had been due when the run started (due), and how long the oldest check queued for the sync worker had waited (queued), by account or lookup. A lookup due for hours is checked late. The carrier filter does not apply.",
+      "description": "How long the longest-waiting parcel the scheduled run found due had been due when the run started (due), and how long the oldest check queued for the sync worker had waited (queued), by account or lookup. A lookup due for hours is checked late. An unfollowed lookup, which a run takes only when the followed ones leave room, can be days late: it has the right-hand axis. The carrier filter does not apply.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
       "gridPos": {"x": 8, "y": 56, "w": 8, "h": 8},
       "targets": [
@@ -1313,7 +1313,12 @@
           "color": {"mode": "palette-classic"},
           "custom": {"drawStyle": "line", "lineWidth": 1, "fillOpacity": 10, "showPoints": "never", "axisSoftMin": 0}
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "unfollowed due"},
+            "properties": [{"id": "custom.axisPlacement", "value": "right"}]
+          }
+        ]
       },
       "options": {
         "legend": {"showLegend": true, "displayMode": "list", "placement": "bottom"},

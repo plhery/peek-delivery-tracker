@@ -402,7 +402,8 @@ where package.archived_at is null and package.current_stage not in ('pending', '
     select 1 from public.parcel_links as link
     where link.package_id = package.id and (link.last_opened_at > now() - interval '24 hours' or exists (
       select 1 from public.parcel_link_alerts as alert where alert.link_id = link.id and (link.shared or alert.owner))))))
-  -- A dormant lookup's reopened link queues its check, which waits behind the scheduled run: the check is coming.
+  -- A dormant lookup's reopened link queues its check, which a scheduled run makes way for after its current check:
+  -- the check is coming.
   -- One queued for over an hour stays listed, since the queue is stuck.
   and not exists (select 1 from public.sync_jobs as job where job.package_id = package.id and job.state in ('queued', 'running')
     and job.requested_at > now() - interval '1 hour')

@@ -391,8 +391,8 @@ const ID_FACETS = new Set(['carriers', 'providers', 'stages']);
 
 /**
  * The changes each migration declares, in the order of `migrations`. A line about ids may list several,
- * separated by commas, and one closed with a full stop, as a sentence, still declares them; a pattern is
- * taken as written.
+ * separated by commas, and one closed with a full stop, as a sentence, still declares them, as does an
+ * input's line that ends in `optional.` or `required.`; a pattern is taken as written.
  */
 export function declaredChanges(migrations) {
   return migrations.flatMap(({ name, sql }) => sql.split('\n').filter((line) => line.startsWith(declarationPrefix))
@@ -401,7 +401,8 @@ export function declaredChanges(migrations) {
       if (!match || !Object.hasOwn(ENFORCED_BY, match[1])) {
         throw new Error(`${name} has a database gate line the gate does not understand: ${line.slice(0, 200)}`);
       }
-      const entries = ID_FACETS.has(match[1]) ? match[3].replace(/\.$/, '').split(/\s*,\s*/) : [match[3]];
+      const entries = ID_FACETS.has(match[1]) ? match[3].replace(/\.$/, '').split(/\s*,\s*/)
+        : [match[1] === 'inputs' ? match[3].replace(/, (optional|required)\.$/, ', $1') : match[3]];
       if (entries.some((entry) => !entry)) {
         throw new Error(`${name} has a database gate line the gate does not understand: ${line.slice(0, 200)}`);
       }

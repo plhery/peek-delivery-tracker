@@ -274,6 +274,25 @@ describe('prometheus carrier metrics', () => {
     expect(unknown).toContain('scheduled_sync_due{kind="account"} 0');
   });
 
+  it('shows no backlog for a kind no scheduled run has read for 15 minutes', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    try {
+      metrics.recordScheduledBacklog('account', 3, 60_000);
+      vi.advanceTimersByTime(14 * 60_000);
+      metrics.recordScheduledBacklog('lookup', 5, 120_000);
+      expect(await metrics.metricsText()).toContain('scheduled_sync_due{kind="account"} 3');
+      vi.advanceTimersByTime(60_000);
+      const stale = await metrics.metricsText();
+      expect(stale).not.toContain('scheduled_sync_due{kind="account"}');
+      expect(stale).not.toContain('scheduled_sync_overdue_seconds{kind="account"}');
+      expect(stale).toContain('scheduled_sync_due{kind="lookup"} 5');
+      metrics.recordScheduledBacklog('account', 1, 0);
+      expect(await metrics.metricsText()).toContain('scheduled_sync_due{kind="account"} 1');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('labels a lookup with the attempts it took, capped to keep the label set small', async () => {
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'ok', errorType: null, durationMs: 3200, attempts: 3 });
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'challenge', errorType: 'UpstreamHttpError', durationMs: 6000, attempts: 40 });

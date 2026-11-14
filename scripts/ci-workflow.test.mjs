@@ -154,7 +154,7 @@ it('ends a run that deployed nothing as cancelled, and names each run after its 
   assert.match(workflow, /\nrun-name: Deploy \$\{\{ inputs\.commit \|\| 'the newest tested commit' \}\}\n/);
   assert.match(job(workflow, 'deploy'), /\n {6}replaced: \$\{\{ steps\.current\.outputs\.deploy == 'false' \}\}\n/);
   const standDown = job(workflow, 'stand-down');
-  assert.match(standDown, /\n {4}needs: \[settle, deploy\]\n {4}if: \$\{\{ !cancelled\(\) && \(needs\.settle\.outputs\.deploy == 'false' \|\| needs\.deploy\.outputs\.replaced == 'true'\) \}\}\n/);
+  assert.match(standDown, /\n {4}needs: \[settle, deploy\]\n {4}if: \$\{\{ !cancelled\(\) && \(vars\.DEPLOY_ENABLED != 'true' \|\| needs\.settle\.outputs\.deploy == 'false' \|\| needs\.deploy\.outputs\.replaced == 'true'\) \}\}\n/);
   assert.match(standDown, /\n {4}permissions:\n {6}actions: write\n {4}steps:/);
   assert.match(standDown, /gh run cancel "\$GITHUB_RUN_ID" --repo "\$GITHUB_REPOSITORY" && break/);
   assert.match(standDown, /exit 1\n$/);

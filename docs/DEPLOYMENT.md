@@ -189,10 +189,13 @@ its next look and the newer one's deploy includes it; if it fails, this one depl
 pushed on its own deploys as soon as it passes, and none waits more than 30 minutes. Runs
 handed over meanwhile queue instead of replacing one another, so each gets its turn.
 When its turn comes, in the wait or in the Deploy job, a run stands down and says why if a
-newer commit has passed since, then cancels itself: only a run that deployed ends as a
-success, and one for a commit CI did not pass fails. GitHub files a dispatched run under
-`main`'s newest commit, not the one it deploys, so each run is named after its commit:
-`gh run list --workflow deploy.yml --json displayTitle,conclusion` says which commits went out. Newer means later in `main`'s git history, which the gate reads
+newer commit has passed since, then cancels itself, as does one started by hand where
+`DEPLOY_ENABLED` is off: only a run that deployed ends as a success, and one for a commit CI
+did not pass fails. GitHub files a dispatched run under `main`'s newest commit, not the one
+it deploys, so each run CI hands over is named after its commit:
+`gh run list --workflow deploy.yml --json displayTitle,conclusion` says which commits went out.
+One started by hand is named "Deploy the newest tested commit", and its summary names the
+commit it chose. Newer means later in `main`'s git history, which the gate reads
 from GitHub's compare of the commit with `main`, not from when CI's runs started: GitHub
 sometimes logs a push minutes late, so a commit's run can start after its child's. GitHub's
 list of CI's runs sometimes leaves a run out, so the commit's own runs are read from the

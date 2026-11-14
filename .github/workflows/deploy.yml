@@ -160,16 +160,20 @@ jobs:
 
   # A run that a newer commit replaced deployed nothing, and would otherwise end as a success: it
   # cancels itself, its reason in the summary, so nothing reading the run takes it for a deploy.
-  # Its own job, so only it may cancel. A run GitHub did not cancel fails rather than pass.
+  # So does one started by hand where deploys are off. Its own job, so only it may cancel. A run
+  # GitHub did not cancel fails rather than pass.
   stand-down:
     name: Stand down
     needs: [settle, deploy]
-    if: ${{ !cancelled() && (needs.settle.outputs.deploy == 'false' || needs.deploy.outputs.replaced == 'true') }}
+    if: ${{ !cancelled() && (vars.DEPLOY_ENABLED != 'true' || needs.settle.outputs.deploy == 'false' || needs.deploy.outputs.replaced == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       actions: write
     steps:
+      - name: Say that deploys are off here
+        if: vars.DEPLOY_ENABLED != 'true'
+        run: echo 'Not deploying: the DEPLOY_ENABLED variable is not true here.' >> "$GITHUB_STEP_SUMMARY"
       - name: End the run as cancelled
         env:
           GH_TOKEN: ${{ github.token }}

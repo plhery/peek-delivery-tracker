@@ -1019,8 +1019,8 @@ internal fun UsePostcodeButton(postcode: String, tag: String, onUse: () -> Unit)
 }
 
 /**
- * A button as SwiftUI draws one by default: its words in subheadline, in the accent, fading under the finger; grey while
- * off.
+ * A button as SwiftUI draws one by default: its words in subheadline, in the tint, fading under the finger; grey while
+ * off. Add opens from the tabs, which the iPhone tints in ink (ParcelListView's `.tint(Brand.ink)`).
  */
 @Composable
 private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String, label: String? = null) {
@@ -1033,7 +1033,7 @@ private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String
             .testTag(tag)
             .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
             .then(if (label != null) Modifier.semantics { contentDescription = label } else Modifier),
-        color = if (enabled) colors.accent else colors.tertiaryLabel,
+        color = if (enabled) colors.ink else colors.tertiaryLabel,
         style = PeekTheme.type.subheadline.sfLines(),
     )
 }
@@ -1213,7 +1213,8 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
                             state.closeAdd()
                             state.source.showSignIn()
                         },
-                    color = if (enabled) colors.accent else colors.tertiaryLabel,
+                    // In the tabs' ink, as TintedButton's words.
+                    color = if (enabled) colors.ink else colors.tertiaryLabel,
                     style = type.style(IosTextStyle.Caption, FontWeight.Medium).copy(textDecoration = TextDecoration.Underline).sfLines(),
                 )
             }

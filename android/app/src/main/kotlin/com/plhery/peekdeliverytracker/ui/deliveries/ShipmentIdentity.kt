@@ -158,7 +158,7 @@ private fun CopyButton(label: String, action: () -> Unit, content: @Composable (
  * `carrierLinks` (B-S07, B-G05, B-L05): the carriers' own pages, each "Open the {carrier} website" and a 10-point
  * arrow 6 after it, in caption in `tint`, 44 tall at least, and where `padded` (the page's, not a link sheet's) 10
  * above and below, so that words on two lines make it taller. Under its own number a page needs
- * no more words; another, but the one the parcel is followed on, says at the line's end in caption2 secondary what
+ * no more words; another, but the one the parcel is followed on, says at the line's end in caption2, the tint at half, what
  * it is to the parcel: not ready yet, or an earlier journey. A tap calls `onLink`, then opens the page in the browser,
  * as the iPhone's opens Safari. TalkBack hears the words alone: the arrow says nothing, as the sheet's
  * `.accessibilityHidden(true)` arrow.
@@ -209,7 +209,8 @@ internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: C
                 if (role != null) {
                     // 6 either side of the spacer, at least 4 long.
                     Spacer(Modifier.width(16.dp))
-                    Text(role, color = PeekTheme.colors.secondaryLabel, style = type.caption2.sfLines())
+                    // `.secondary` over the link's tint: the tint at half.
+                    Text(role, color = tint.copy(alpha = tint.alpha * 0.5f), style = type.caption2.sfLines())
                 }
             }
         }

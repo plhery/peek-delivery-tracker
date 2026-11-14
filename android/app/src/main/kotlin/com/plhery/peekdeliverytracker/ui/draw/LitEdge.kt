@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.draw
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -77,4 +78,14 @@ internal fun litEdgePath(shape: Shape, size: Size, density: Density): Path {
     val outline = Path().apply { addOutline(shape.createOutline(size, LayoutDirection.Ltr, density)) }
     val lower = Path().apply { addPath(outline, Offset(0f, with(density) { 1.dp.toPx() })) }
     return Path.combine(PathOperation.Difference, outline, lower)
+}
+
+/**
+ * A sheet's lit edge, `SheetGround`'s: a flat strip one dp tall across its top, cut by [shape]'s corners, which the
+ * light stops at rather than following them down.
+ */
+internal fun sheetEdgePath(shape: Shape, size: Size, density: Density): Path {
+    val outline = Path().apply { addOutline(shape.createOutline(size, LayoutDirection.Ltr, density)) }
+    val strip = Path().apply { addRect(Rect(0f, 0f, size.width, with(density) { 1.dp.toPx() })) }
+    return Path.combine(PathOperation.Intersect, outline, strip)
 }

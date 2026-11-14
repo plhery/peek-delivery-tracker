@@ -87,7 +87,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.Lamplight
 import com.plhery.peekdeliverytracker.ui.draw.SHEET_EDGE_OPACITY
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
-import com.plhery.peekdeliverytracker.ui.draw.litEdgePath
+import com.plhery.peekdeliverytracker.ui.draw.sheetEdgePath
 import com.plhery.peekdeliverytracker.ui.tabs.LocalLayersAbove
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
@@ -820,15 +820,15 @@ internal fun SheetGlass(shape: Shape, backdrop: MaterialBackdrop?, modifier: Mod
 }
 
 /**
- * A lit sheet's top edge in dark: the sheet's [shape] less itself one dp lower, in the lamp's light, as the web's inset
- * `0 1px 0` shadow draws it.
+ * A lit sheet's top edge in dark, `SheetGround`'s: one dp of the lamp's light across its top, cut by the [shape]'s
+ * corners ([sheetEdgePath]).
  */
 @Composable
 private fun LitEdge(shape: Shape, modifier: Modifier) {
     // Outlined again as the shape squares off on attaching.
     Box(
         modifier.drawWithCache {
-            val edge = litEdgePath(shape, size, this)
+            val edge = sheetEdgePath(shape, size, this)
             onDrawBehind { drawPath(edge, Lamplight.copy(alpha = SHEET_EDGE_OPACITY)) }
         },
     )

@@ -521,7 +521,8 @@ private fun DemoBarLine(demo: String, exit: String, named: Boolean) {
     val type = PeekTheme.type
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         if (named) {
-            Text(demo, color = colors.secondaryLabel, style = type.style(IosTextStyle.Caption, FontWeight.Medium), maxLines = 1)
+            // `.secondary` over the bar's ink: the ink at half.
+            Text(demo, color = colors.ink.copy(alpha = colors.ink.alpha * 0.5f), style = type.style(IosTextStyle.Caption, FontWeight.Medium), maxLines = 1)
             Spacer(Modifier.width(12.dp))
         }
         Spacer(Modifier.widthIn(min = 8.dp).weight(1f))

@@ -85,6 +85,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -1104,7 +1105,7 @@ private fun PosterCaption(scene: FirstOpenScene, modifier: Modifier) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     Row(
-        modifier.fillMaxWidth().clearAndSetSemantics {},
+        modifier.fillMaxWidth().clearAndSetSemantics { testTag = FIRST_OPEN_POSTER_CAPTION },
         horizontalArrangement = Arrangement.spacedBy(18.dp),
         verticalAlignment = Alignment.Bottom,
     ) {
@@ -1269,6 +1270,7 @@ private val FLEET_FADE = Brush.horizontalGradient(0f to Color.Transparent, 0.1f 
 
 const val FIRST_OPEN = "firstOpen"
 const val FIRST_OPEN_POSTER = "firstOpen.poster"
+const val FIRST_OPEN_POSTER_CAPTION = "firstOpen.posterCaption"
 const val FIRST_OPEN_PAGE = "firstOpen.page"
 const val FIRST_OPEN_SCROLL = "firstOpen.scroll"
 const val FIRST_OPEN_SPREAD = "firstOpen.spread"

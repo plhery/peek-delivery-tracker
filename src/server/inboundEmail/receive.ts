@@ -4,7 +4,9 @@ import { ownSenderAddress } from '../email/config';
 import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, type ParcelAddition } from '../parcelsFromText';
 import type { InboundMailResult, SupabaseServiceClient } from '../supabase';
+import { carrierNames, carriersOfAddress } from './carrierSender';
 import { headerFromAddress, readInboundMail, type InboundMail } from './mail';
+import { shopNamedIn } from './shopName';
 import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } from './settings';
 
 /** What an email did; `dropped` when its address names nobody who takes email. */
@@ -22,9 +24,9 @@ export function mailResult(additions: readonly ParcelAddition[]): InboundMailRes
 
 /**
  * Takes one email the Worker passed on: finds the account its address names and, when that account takes email,
- * counts it against the allowances and adds the numbers it holds, labelled with its sender. Gmail's request to
- * confirm forwarding is kept for the owner instead, and the server's own emails are dropped. The email itself is never
- * stored.
+ * counts it against the allowances and adds the numbers it holds, labelled with its sender, or with the shop a
+ * carrier's email names. Gmail's request to confirm forwarding is kept for the owner instead, and the server's own
+ * emails are dropped. The email itself is never stored: what it did is noted with its sender's name.
  */
 export async function receiveInboundMail(
   service: SupabaseServiceClient,
@@ -61,14 +63,18 @@ export async function receiveInboundMail(
   }
   if (mail.from && mail.from === own) return finish('dropped', 'own');
   if (mail.confirmation) {
-    await service.recordInboundMail(userId, 'confirmation', 0, mail.confirmation);
+    await service.recordInboundMail(userId, 'confirmation', 0, mail.confirmation, mail.sender);
     return finish('confirmation');
   }
-  const additions = await addParcelsFromText(service, userId, mail.text, mail.sender);
+  // A carrier's own email: its numbers are that carrier's, and its parcels take the name of the shop it says it
+  // carries for, or none. The carrier's mailbox name ("Info", "noreply") says nothing of the parcel.
+  const carriers = carriersOfAddress(mail.origin);
+  const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : mail.sender;
+  const additions = await addParcelsFromText(service, userId, mail.text, label, carriers);
   const result = mailResult(additions);
   const added = additions.filter(({ outcome }) => outcome === 'added').length;
-  await service.recordInboundMail(userId, result, added);
-  return finish(result, undefined, additions.length, added);
+  await service.recordInboundMail(userId, result, added, null, label || mail.sender);
+  return finish(result, carriers.length ? 'carrier' : undefined, additions.length, added);
 }
 
 function finish(outcome: InboundOutcome, reason?: string, numbers = 0, added = 0): InboundOutcome {

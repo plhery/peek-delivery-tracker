@@ -4048,7 +4048,15 @@ struct AddByEmail: Codable, Equatable, Hashable, Sendable {
     var lastMailAt: String? = nil
     var lastResult: AddByEmailResult? = nil
     var lastAdded: Int? = nil
+    var recent: [AddByEmailEntry]
     var confirmation: ForwardingConfirmation? = nil
+}
+
+struct AddByEmailEntry: Codable, Equatable, Hashable, Sendable {
+    var at: String
+    var sender: String
+    var result: AddByEmailResult
+    var added: Int
 }
 
 struct ForwardingConfirmation: Codable, Equatable, Hashable, Sendable {

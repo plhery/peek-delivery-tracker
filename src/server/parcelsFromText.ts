@@ -1,6 +1,7 @@
 import 'server-only';
 
-import { labelledNumbersInText, nonTrackingShape, numbersInText, type NumberInText } from '../peek/lookup/reading';
+import { carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numbersInText, type NumberInText } from '../peek/lookup/reading';
+import type { CarrierId } from '../types';
 import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
 import { HttpError } from './api';
@@ -34,12 +35,21 @@ export type ParcelAddition =
  * message (`numbersInText`) with its guard that a shop's order number is never one, and after them those the
  * text's own label calls a tracking number though their shape proves no carrier (`labelledNumbersInText`). Each
  * once, at most MOST_NUMBERS_PER_TEXT, from the first MOST_TEXT_LENGTH of the text.
+ *
+ * `carriers` are those the text's writer is, when it is a carrier's own email: a number whose shape proved no
+ * carrier is then theirs (`fromCarrier`), and when no number was read, the one that stands without a label in
+ * their shape is taken (`carrierNumberInText`).
  */
-export function trackingNumbersInText(text: string): NumberInText[] {
+export function trackingNumbersInText(text: string, carriers: readonly CarrierId[] = []): NumberInText[] {
   const read = text.slice(0, MOST_TEXT_LENGTH);
   const certain = numbersInText(read).filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order');
   const named = new Set(certain.map(({ normalized }) => normalized));
-  return [...certain, ...labelledNumbersInText(read).filter(({ normalized }) => !named.has(normalized))].slice(0, MOST_NUMBERS_PER_TEXT);
+  const numbers = [...certain, ...labelledNumbersInText(read).filter(({ normalized }) => !named.has(normalized))];
+  if (!numbers.length) {
+    const bare = carrierNumberInText(read, carriers);
+    if (bare) numbers.push(bare);
+  }
+  return numbers.slice(0, MOST_NUMBERS_PER_TEXT).map((number) => fromCarrier(number, carriers));
 }
 
 /**
@@ -139,13 +149,17 @@ export async function addNumbersToAccount(
   return additions;
 }
 
-/** Reads a text's tracking numbers and adds them to the account (addNumbersToAccount), named `label`. */
+/**
+ * Reads a text's tracking numbers and adds them to the account (addNumbersToAccount), named `label`. `carriers`
+ * are those the text's writer is, for a carrier's own email (trackingNumbersInText).
+ */
 export async function addParcelsFromText(
   service: SupabaseServiceClient,
   userId: string,
   text: string,
   label: string,
+  carriers: readonly CarrierId[] = [],
 ): Promise<ParcelAddition[]> {
-  const numbers = trackingNumbersInText(text);
+  const numbers = trackingNumbersInText(text, carriers);
   return numbers.length ? addNumbersToAccount(service, userId, numbers, label) : [];
 }

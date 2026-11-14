@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { trackingNumbersInText } from '../parcelsFromText';
+import { carriersOfAddress } from './carrierSender';
 import { headerFromAddress, htmlLinks, htmlText, readInboundMail } from './mail';
 
 // Synthetic mails only: example.com senders, UPS's published sample number and made-up numbers in valid shapes.
@@ -122,6 +123,47 @@ describe('the numbers a shipping email names', () => {
     const padding = '&#847;&zwnj;&nbsp;&shy; \u200B'.repeat(4000);
     expect(await numbers('Your parcel is on its way', `<div style="display:none">On its way${padding}</div><p>Parcel ${POSTAL}</p>`))
       .toEqual([{ number: POSTAL, carrier: expect.any(String) }]);
+  });
+});
+
+describe('a carrier\'s own email', () => {
+  async function read(from: string, subject: string, body: string) {
+    const mail = await readInboundMail(mime({ From: from, Subject: subject }, body));
+    return trackingNumbersInText(mail.text, carriersOfAddress(mail.origin)).map(({ normalized, match }) => ({ number: normalized, carrier: match.carrier }));
+  }
+
+  it('gives its carrier to a number whose shape proves none', async () => {
+    expect(await read('DHL <noreply@dhl.com>', 'Unterwegs', 'Sendungsnummer 4612345678 von Example Shop wurde abgeholt.'))
+      .toEqual([{ number: '4612345678', carrier: 'dhl' }]);
+    expect(await read('info@planzergroup.com', 'Sendung unterwegs', 'Sendungsnummer: 92123.0012345678'))
+      .toEqual([{ number: '921230012345678', carrier: 'planzer' }]);
+  });
+
+  it('leaves a number another carrier claims with that carrier', async () => {
+    expect(await read('DHL <noreply@dhl.com>', 'Unterwegs', `Tracking number: ${UPS}`)).toEqual([{ number: UPS, carrier: 'ups' }]);
+  });
+
+  it('takes its one number that stands without a label', async () => {
+    expect(await read('DHL <noreply@dhl.com>', 'Livré', 'Le bordereau N° 4612345678 de Example Shop a été livré.'))
+      .toEqual([{ number: '4612345678', carrier: 'dhl' }]);
+    const [parcel] = await read('DPD <noreply@dpd.ch>', 'Colis de Example Shop livré', 'Votre colis\n01234567890123\na été livré.');
+    expect(parcel).toEqual({ number: '01234567890123', carrier: expect.stringMatching(/^dpd/) });
+  });
+
+  it('takes none when two could be it, or when the one is a phone number', async () => {
+    expect(await read('DHL <noreply@dhl.com>', 'Info', 'Kunde 4612345678\nReferenz 4698765432')).toEqual([]);
+    expect(await read('DHL <noreply@dhl.com>', 'Info', 'Fragen? Telefon 0848123456')).toEqual([]);
+    expect(await read('DHL <noreply@dhl.com>', 'Info', 'Fragen? +41 848123456')).toEqual([]);
+  });
+
+  it('takes no unlabelled number from a shop', async () => {
+    expect(await read('Example Shop <orders@example-shop.com>', 'Livré', 'Le bordereau N° 4612345678 a été livré.')).toEqual([]);
+  });
+
+  it('knows the carrier of an email forwarded by hand', async () => {
+    expect(await read('Alex <alex@example.com>', 'Fwd: Unterwegs',
+      '---------- Forwarded message ---------\nFrom: DHL <noreply@dhl.com>\nSubject: Unterwegs\n\nSendungsnummer 4612345678 ist unterwegs.'))
+      .toEqual([{ number: '4612345678', carrier: 'dhl' }]);
   });
 });
 

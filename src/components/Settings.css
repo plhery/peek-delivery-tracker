@@ -98,7 +98,23 @@
 .add-by-email__language:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .add-by-email__code { margin: 0; padding: 14px; font-size: 13px; overflow-wrap: anywhere; }
 .add-by-email__code + .settings-row { border-top: 1px solid var(--line); }
-.refined-settings .add-by-email__last { margin: 0; }
+.add-by-email__recent { margin: 0; padding: 0; list-style: none; }
+.add-by-email__mail { justify-content: space-between; }
+.add-by-email__what { display: grid; gap: 3px; min-width: 0; }
+.add-by-email__what strong { font-weight: 550; overflow-wrap: anywhere; }
+.add-by-email__what small { color: var(--ink-soft); font-size: 11px; line-height: 1.4; }
+.add-by-email__auto { margin-bottom: 24px; }
+.add-by-email__auto > summary { cursor: pointer; list-style: none; }
+.add-by-email__auto > summary::-webkit-details-marker { display: none; }
+.add-by-email__auto > summary .settings-chevron { transition: transform .15s ease; }
+.add-by-email__auto[open] > summary .settings-chevron { transform: rotate(90deg); }
+.add-by-email__auto-body { padding: 4px 14px 14px; border-top: 1px solid var(--line); }
+.add-by-email__auto-body .settings-box { background: var(--canvas); }
+.add-by-email__steps { margin: 10px 0 14px; padding-left: 18px; display: grid; gap: 8px; font-size: 12px; line-height: 1.5; }
+.settings-badge { flex: none; padding: 2px 7px; border-radius: 999px; background: var(--yellow-soft); color: var(--ochre); font-size: 10px; font-weight: 550; letter-spacing: .5px; line-height: 1.5; text-transform: uppercase; }
+.sheet__title .settings-badge { display: inline-block; margin-left: 4px; vertical-align: middle; letter-spacing: .5px; }
+.settings-badge + .settings-chevron { margin-left: auto; }
+@media (prefers-reduced-motion: reduce) { .add-by-email__auto > summary .settings-chevron { transition: none; } }
 .add-by-email__renew { padding: 14px; font-size: 12px; color: var(--ink-soft); }
 .add-by-email__renew + .settings-row { border-top: 1px solid var(--line); }
 .add-by-email__renew .sheet__actions { margin-top: 12px; }

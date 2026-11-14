@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 8 November 2026
+Effective: 14 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -33,10 +33,10 @@ analytics.
   emails: the parcel, whether it told a delivery or a parcel ready for pickup,
   when it was sent and whether sending worked.
 - When you turn on adding parcels by email: your forwarding address, how many
-  emails reached it today, when the last one came and what it added, and the
-  code and link of a Gmail forwarding confirmation until the next email. Of an
-  email, the service keeps only the tracking numbers it adds and the sender's
-  name as their label, never the email itself.
+  emails reached it today, of its last twenty emails when each came, the
+  sender's name and what it added, and the code and link of a Gmail forwarding
+  confirmation until the next email. Of an email, the service keeps only the
+  tracking numbers it adds and the sender's name, never the email itself.
 - When you connect an assistant or make a personal token: its name, the site
   or app it answers to, what you allowed it (to see your parcels, or also to
   add and archive them), when you connected it and when it last used Peek, and

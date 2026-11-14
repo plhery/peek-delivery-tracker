@@ -61815,7 +61815,7 @@
       "AddByEmail": {
         "type": "object",
         "additionalProperties": false,
-        "description": "An account's forwarding address for adding parcels by email, and what its last email did. No email is kept.",
+        "description": "An account's forwarding address for adding parcels by email, and what its last emails did. No email is kept.",
         "required": [
           "address",
           "createdAt",
@@ -61823,6 +61823,7 @@
           "lastMailAt",
           "lastResult",
           "lastAdded",
+          "recent",
           "confirmation"
         ],
         "properties": {
@@ -61863,6 +61864,14 @@
             ],
             "minimum": 0
           },
+          "recent": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "$ref": "#/components/schemas/AddByEmailEntry"
+            },
+            "description": "What the last emails did, newest first."
+          },
           "confirmation": {
             "anyOf": [
               {
@@ -61872,6 +61881,36 @@
                 "type": "null"
               }
             ]
+          }
+        }
+      },
+      "AddByEmailEntry": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "One email to the forwarding address: when it came, who sent it and what it did. Never its content.",
+        "required": [
+          "at",
+          "sender",
+          "result",
+          "added"
+        ],
+        "properties": {
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sender": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "The shop or sender's name, as its parcels are named. Empty when the email was not read."
+          },
+          "result": {
+            "$ref": "#/components/schemas/AddByEmailResult"
+          },
+          "added": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Parcels the email added."
           }
         }
       },

@@ -56536,7 +56536,15 @@ export interface ApiAddByEmail {
   "lastMailAt": string | null;
   "lastResult": ApiAddByEmailResult | null;
   "lastAdded": number | null;
+  "recent": Array<ApiAddByEmailEntry>;
   "confirmation": ApiForwardingConfirmation | null;
+}
+
+export interface ApiAddByEmailEntry {
+  "at": string;
+  "sender": string;
+  "result": ApiAddByEmailResult;
+  "added": number;
 }
 
 export interface ApiForwardingConfirmation {

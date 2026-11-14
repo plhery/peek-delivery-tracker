@@ -307,6 +307,52 @@ export function labelledNumbersInText(text: string): NumberInText[] {
   return [...found.values()];
 }
 
+/** A line that gives a phone number, whose digits can fit a courier's shape. */
+const PHONE_LINE = /(?:^|[^\p{L}])(?:t[eé]l(?:[eé]fono|[eé]phone|efon)?|phone|fax|hotline|mobile|handy|whatsapp)(?![\p{L}])|☎|📞/iu;
+/** A date as a carrier prints one: "14.11.2026", "2026-11-14". */
+const PRINTED_DATE = /^(?:\d{1,2}([./-])\d{1,2}\1\d{2,4}|\d{4}([./-])\d{1,2}\2\d{1,2})$/;
+
+/**
+ * The one number of a carrier's own email that stands without a label: "Votre colis\n01234567890123". An email
+ * from a carrier is about its parcel, so a number in that carrier's shape is most likely the parcel's, where a
+ * shop's email could mean an order or a customer by it. Taken only when the text holds exactly one such number,
+ * no shop's order number, no date and not on a line that gives a phone number; two leave the choice open, and
+ * none is read.
+ */
+export function carrierNumberInText(text: string, carriers: readonly CarrierId[]): NumberInText | null {
+  if (!carriers.length) return null;
+  const found = new Map<string, NumberInText>();
+  for (const line of text.split(/\r?\n/)) {
+    if (PHONE_LINE.test(line)) continue;
+    const prose = withoutOrders(line.replace(LINK, ' '));
+    for (const pattern of CANDIDATE_PATTERNS) {
+      for (const hit of prose.matchAll(pattern)) {
+        const candidate = hit[0].trim();
+        // "+41 44 123 45 67": a number after a plus sign is a phone's.
+        if (!/\d/.test(candidate) || PRINTED_DATE.test(candidate) || /\+[\d\s()]*$/.test(prose.slice(Math.max(0, hit.index - 8), hit.index + 1))) continue;
+        const normalized = normalizeTrackingNumber(candidate);
+        if (!normalized || found.has(normalized) || nonTrackingShape(normalized)) continue;
+        if (found.size >= MOST_CANDIDATES_READ) return null;
+        const detection = detectCarrierMatch(candidate);
+        if (detection.confidence !== 'low' || !detection.candidates.some((carrier) => carriers.includes(carrier))) continue;
+        found.set(normalized, { normalized, match: { trackingNumber: candidate, source: 'text', ...detection } });
+      }
+    }
+  }
+  return found.size === 1 ? [...found.values()][0]! : null;
+}
+
+/**
+ * A number read from a carrier's own email, with that carrier named where the number's shape proved none: the
+ * first of the sender's carriers the shape fits, or the sender's only carrier. A number a carrier claims with
+ * certainty stays that carrier's.
+ */
+export function fromCarrier(number: NumberInText, carriers: readonly CarrierId[]): NumberInText {
+  if (number.match.confidence === 'high' || !carriers.length) return number;
+  const carrier = number.match.candidates.find((candidate) => carriers.includes(candidate)) ?? (carriers.length === 1 ? carriers[0]! : null);
+  return carrier ? { ...number, match: { ...number.match, carrier } } : number;
+}
+
 const NOTHING = parseTrackingInput('');
 
 /**

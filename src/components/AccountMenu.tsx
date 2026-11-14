@@ -123,13 +123,13 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
       <div ref={dialog} className="sheet settings-sheet account-menu refined-settings" role="dialog" aria-modal="true" aria-labelledby="settings-title" tabIndex={-1} onClick={(event) => event.stopPropagation()}>
         <div className="sheet__grabber" aria-hidden="true" />
         {page !== 'home' && <button type="button" className="settings-back" disabled={busy} onClick={() => navigate('home')}><span aria-hidden="true">‹</span>{t('settings.title')}</button>}
-        <div className="sheet__heading"><h2 ref={heading} tabIndex={-1} className="sheet__title" id="settings-title">{page === 'home' ? t('settings.title') : page === 'inbox' ? t('inbox.row') : page === 'assistants' ? t('assistants.row') : accountTitle}</h2>
+        <div className="sheet__heading"><h2 ref={heading} tabIndex={-1} className="sheet__title" id="settings-title">{page === 'home' ? t('settings.title') : page === 'inbox' ? <>{t('inbox.row')} <span className="settings-badge">{t('inbox.beta')}</span></> : page === 'assistants' ? t('assistants.row') : accountTitle}</h2>
           <button ref={closeButton} className="sheet__close" type="button" disabled={busy} onClick={close} aria-label={t('common.close')}><Icon name="close" /></button></div>
         <div hidden={page !== 'home'}>
           <div className="settings-profile"><span className="settings-profile__avatar">{initial || 'D'}</span>
             <div><strong>{email || t('app.demo')}</strong>{email && <span>{t('account.signedIn')}</span>}</div></div>
           {apiAuth && <section className="settings-group" aria-labelledby="settings-deliveries"><h3 id="settings-deliveries" className="settings-group__title">{t('native.deliveries')}</h3><div className="settings-box"><NotificationControl apiAuth={apiAuth} email={email} variant="row" />
-            {addByEmail && <button ref={inboxButton} className="settings-row" type="button" onClick={() => navigate('inbox')}><Icon name="mail" /><span>{t('inbox.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}
+            {addByEmail && <button ref={inboxButton} className="settings-row" type="button" onClick={() => navigate('inbox')}><Icon name="mail" /><span>{t('inbox.row')}</span><span className="settings-badge">{t('inbox.beta')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}
             {assistants && <button ref={assistantsButton} className="settings-row" type="button" onClick={() => navigate('assistants')}><Icon name="globe" /><span>{t('assistants.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}</div></section>}
           <section className="settings-group" aria-labelledby="settings-preferences"><h3 className="settings-group__title" id="settings-preferences">{t('settings.preferences')}</h3>
             <div className="settings-box"><fieldset className="settings-appearance"><legend>{t('native.appearance.title')}</legend>

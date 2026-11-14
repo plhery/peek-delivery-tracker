@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { ApiAddByEmail, ApiAddByEmailResponse } from '../generated/apiContract';
+import type { ApiAddByEmail, ApiAddByEmailEntry, ApiAddByEmailResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
 import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
 import type { ApiAuth } from '../lib/apiClient';
@@ -25,10 +25,18 @@ export function useAddByEmail(apiAuth: ApiAuth | undefined, open: boolean) {
   return [value, update] as const;
 }
 
-function lastResult(t: Translate, inbox: ApiAddByEmail): string | null {
-  if (!inbox.lastResult) return null;
-  if (inbox.lastResult === 'added') return t('inbox.result.added.many', { count: inbox.lastAdded ?? 0 });
-  return t(`inbox.result.${inbox.lastResult}`);
+/** What an email did, in a few words. */
+function resultText(t: Translate, entry: ApiAddByEmailEntry): string {
+  return entry.result === 'added' ? t('inbox.result.added.many', { count: entry.added }) : t(`inbox.result.${entry.result}`);
+}
+
+/** How many of the last emails the page lists. */
+const EMAILS_SHOWN = 5;
+
+/** The last emails, newest first. A mailbox from before they were kept shows its one last email. */
+function recentEmails(inbox: ApiAddByEmail): ApiAddByEmailEntry[] {
+  if (inbox.recent.length) return inbox.recent.slice(0, EMAILS_SHOWN);
+  return inbox.lastMailAt && inbox.lastResult ? [{ at: inbox.lastMailAt, sender: '', result: inbox.lastResult, added: inbox.lastAdded ?? 0 }] : [];
 }
 
 /** Each filter language's name in the language Peek shows, capitalised as a choice is. */
@@ -64,7 +72,7 @@ function ShippingFilter() {
     catch { /* The filter stays on screen to select by hand. */ }
   }
 
-  return <section className="settings-group" aria-labelledby="add-by-email-filter"><h3 className="settings-group__title" id="add-by-email-filter">{t('inbox.filter.title')}</h3>
+  return <>
     <p className="add-by-email__note add-by-email__note--lead" id="add-by-email-languages">{t('inbox.filter.languages')}</p>
     <div className="add-by-email__languages" role="group" aria-labelledby="add-by-email-languages">
       {FILTER_LANGUAGES.map((language) => <button key={language} className="add-by-email__language" type="button" aria-pressed={languages.includes(language)} onClick={() => toggle(language)}>{names[language]}</button>)}
@@ -73,11 +81,14 @@ function ShippingFilter() {
       <p className="add-by-email__address" translate="no">{filter}</p>
       <button className="settings-row" type="button" onClick={() => void copy()}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.filter.copy')}</button>
     </div>
-    <p className="add-by-email__note">{t('inbox.filter.note')}</p>
-  </section>;
+  </>;
 }
 
-/** The forwarding address's page in Settings: make it, copy it and the filter that feeds it, see Gmail's confirmation and the last email. */
+/**
+ * The forwarding address's page in Settings. Forwarding one email by hand is all it asks: the address to copy, then
+ * what the last emails did. Forwarding by a Gmail filter, with its three steps, stays folded away until wanted, or
+ * until Gmail's confirmation is waiting.
+ */
 export function AddByEmailPage({ apiAuth, offer, onChange, onBusy }: {
   apiAuth: ApiAuth;
   offer: ApiAddByEmailResponse;
@@ -104,7 +115,7 @@ export function AddByEmailPage({ apiAuth, offer, onChange, onBusy }: {
     catch { /* The address stays on screen to select by hand. */ }
   }
 
-  const result = inbox && lastResult(t, inbox);
+  const recent = inbox ? recentEmails(inbox) : [];
   return <>
     <p className="settings-description">{t('inbox.intro')}</p>
     {error && <p className="sheet__error" role="alert">{error}</p>}
@@ -115,21 +126,35 @@ export function AddByEmailPage({ apiAuth, offer, onChange, onBusy }: {
           <p className="add-by-email__address" translate="no">{inbox.address}</p>
           <button className="settings-row" type="button" onClick={() => void copy(inbox.address)}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.copy')}</button>
         </div>
-        <p className="add-by-email__note">{t('inbox.gmail')}</p>
       </section>
-      <ShippingFilter />
       {inbox.confirmation && <section className="settings-group" aria-labelledby="add-by-email-confirmation"><h3 className="settings-group__title" id="add-by-email-confirmation">{t('inbox.confirm.title')}</h3>
         <div className="settings-box">
           {inbox.confirmation.code && <p className="add-by-email__code">{t('inbox.confirm.code', { code: inbox.confirmation.code })}</p>}
           {inbox.confirmation.link && <a className="settings-row" href={inbox.confirmation.link} target="_blank" rel="noopener noreferrer">{t('inbox.confirm.link')}<span className="settings-chevron" aria-hidden="true">›</span></a>}
         </div>
       </section>}
-      {(inbox.lastMailAt && result || inbox.usedToday > 0) && <section className="settings-group" aria-labelledby="add-by-email-last"><h3 className="settings-group__title" id="add-by-email-last">{t('inbox.lastMail')}</h3>
-        {inbox.lastMailAt && result && <div className="settings-box">
-          <p className="settings-row add-by-email__last"><span>{result}</span><span className="settings-value">{localizedRelativeTime(inbox.lastMailAt, t, languageTag)}</span></p>
-        </div>}
-        {inbox.usedToday > 0 && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
+      {recent.length > 0 && <section className="settings-group" aria-labelledby="add-by-email-recent"><h3 className="settings-group__title" id="add-by-email-recent">{t('inbox.recent')}</h3>
+        <ul className="settings-box add-by-email__recent">
+          {recent.map((entry) => <li key={entry.at} className="settings-row add-by-email__mail">
+            <span className="add-by-email__what">{entry.sender ? <><strong>{entry.sender}</strong><small>{resultText(t, entry)}</small></> : <strong>{resultText(t, entry)}</strong>}</span>
+            <span className="settings-value">{localizedRelativeTime(entry.at, t, languageTag)}</span>
+          </li>)}
+        </ul>
+        {recent.some(({ result }) => result === 'none') && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
+        {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
       </section>}
+      <details className="settings-box add-by-email__auto" open={Boolean(inbox.confirmation) || undefined}>
+        <summary className="settings-row"><Icon name="settings" /><span>{t('inbox.auto.title')}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
+        <div className="add-by-email__auto-body">
+          <ol className="add-by-email__steps">
+            <li>{t('inbox.gmail')}</li>
+            <li>{t('inbox.auto.confirm')}</li>
+            <li>{t('inbox.filter.note')}</li>
+          </ol>
+          <ShippingFilter />
+          <p className="add-by-email__note">{t('inbox.auto.other')}</p>
+        </div>
+      </details>
       <div className="settings-box">
         {confirmingRenew
           ? <div className="add-by-email__renew"><p>{t('inbox.renewNote')}</p>

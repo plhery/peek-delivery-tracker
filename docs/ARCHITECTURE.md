@@ -278,10 +278,11 @@ Key server modules:
 - **Adding parcels by email**: an account the server opens it to (`INBOUND_EMAIL_ACCOUNTS`)
   gets a forwarding address whose random token (16 base32 characters, 80 bits) names it.
   Every other account gets 404 from `/api/account/inbox`, so Settings shows no row.
-  - Settings gives the search to paste into Gmail's filter: the reader picks the languages
-    their shops and carriers write in, and the filter looks for those languages' shipping
-    words in the subject (`src/lib/emailFilter.ts`). It starts with the language Peek
-    shows, the browser's and English.
+  - Settings shows the address to forward one email to, and what the last emails did. The
+    steps for forwarding by a Gmail filter are folded away under it: the reader picks the
+    languages their shops and carriers write in, and the filter looks for those languages'
+    shipping words in the subject (`src/lib/emailFilter.ts`). It starts with the language
+    Peek shows, the browser's and English.
   - A Cloudflare Email Worker (`ops/cloudflare/inbound-email-worker.js`) posts each email to
     `POST /api/inbound/email`, signed with a secret it shares with the server: an HMAC over
     the time, the recipient and the raw mail, valid for five minutes. An unsigned or stale
@@ -298,6 +299,18 @@ Key server modules:
     input, so no email holds the server up. Each is added as the Add sheet adds it, with the same daily allowance and
     parcel limit, labelled with the sender's name; one the account follows already costs
     nothing. `src/server/parcelsFromText.ts` is that step.
+  - A carrier's own email is read with what its sender says. The sender is a carrier when
+    its domain is one of the carrier's sites in the catalogue, or has that site's name under
+    another country's ending (`inboundEmail/carrierSender.ts`); a shop that also delivers
+    stays a shop. A number whose shape proved no carrier is then given the sender's carrier.
+    When no number was read, the one number in that carrier's shape that stands without a
+    label is taken, unless a phone number's line holds it. The parcel is named after the
+    shop the email says it carries for ("Colis de Example Shop", "Paket von Example Shop",
+    `inboundEmail/shopName.ts`), without its legal form, or left unnamed: a carrier's
+    mailbox name says nothing of the parcel.
+  - The mailbox keeps what its last twenty emails did: when each came, its sender's name,
+    its outcome and how many parcels it added. Settings lists the newest, and the account's
+    export holds them all.
   - Gmail's request to confirm forwarding is kept for three days for the owner to finish in
     Gmail, never followed by the server: its code and a link only to Google's own hosts.
   - The server's own emails (`EMAIL_FROM`) are dropped, read from their From header before

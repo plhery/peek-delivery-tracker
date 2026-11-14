@@ -148,6 +148,9 @@ function inboundMailbox(value: unknown): InboundMailbox | null {
     lastMailAt: text(row.last_mail_at),
     lastResult: INBOUND_MAIL_RESULTS.has(String(row.last_result)) ? row.last_result as InboundMailResult : null,
     lastAdded: typeof row.last_added === 'number' ? row.last_added : null,
+    recent: rows(row.recent).flatMap((entry) => (typeof entry.at === 'string' && INBOUND_MAIL_RESULTS.has(String(entry.result))
+      ? [{ at: entry.at, sender: text(entry.sender) ?? '', result: entry.result as InboundMailResult, added: Number(entry.added) || 0 }]
+      : [])),
     confirmation: confirmedAt
       ? { code: text(row.confirmation_code), link: text(row.confirmation_link), receivedAt: confirmedAt }
       : null,
@@ -300,11 +303,22 @@ export interface InboundMailbox {
   lastMailAt: string | null;
   lastResult: InboundMailResult | null;
   lastAdded: number | null;
+  /** What the last emails did, newest first, twenty at most. */
+  recent: InboundMailEntry[];
   /** What Gmail sent to confirm forwarding, for the owner to finish its setup. */
   confirmation: { code: string | null; link: string | null; receivedAt: string } | null;
 }
 
 export type InboundMailResult = 'added' | 'known' | 'none' | 'limited' | 'full' | 'confirmation';
+
+/** One email to a forwarding address: when it came, who sent it and what it did. Never its content. */
+export interface InboundMailEntry {
+  at: string;
+  /** The shop or sender's name; empty when the email was not read. */
+  sender: string;
+  result: InboundMailResult;
+  added: number;
+}
 
 /** Whom an email's address names, and whether its allowances let it through. */
 export interface InboundMailClaim {
@@ -1358,12 +1372,16 @@ export class SupabaseServiceClient extends SupabaseClient {
     };
   }
 
-  /** Notes what an email to the account's address did, and what Gmail sent to confirm forwarding when it was that. */
+  /**
+   * Notes what an email to the account's address did and who sent it, and what Gmail sent to confirm forwarding
+   * when it was that.
+   */
   async recordInboundMail(
     userId: string,
     result: InboundMailResult,
     added: number,
     confirmation: { code: string | null; link: string | null } | null = null,
+    sender = '',
   ): Promise<void> {
     await this.request('/rest/v1/rpc/record_inbound_mail', {
       method: 'POST',
@@ -1373,6 +1391,7 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_added: added,
         p_confirmation_code: confirmation?.code ?? null,
         p_confirmation_link: confirmation?.link ?? null,
+        p_sender: sender,
       },
     });
   }

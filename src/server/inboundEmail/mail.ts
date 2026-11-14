@@ -8,6 +8,13 @@ export interface InboundMail {
   sender: string;
   /** The address the email is from, in lower case. Empty when it has none. */
   from: string;
+  /**
+   * The address of who wrote it, in lower case: `from`, or the forwarded message's own sender when the email was
+   * forwarded by hand. Empty when the forwarded part names nobody's address.
+   */
+  origin: string;
+  /** The subject, as far as it is read. */
+  subject: string;
   /** The subject, the body as text, and the links of its HTML, one per line. */
   text: string;
   /** Gmail asking to confirm that it may forward to the address, with its code and link when they are there. */
@@ -134,31 +141,31 @@ function cleanLabel(name: string): string {
 }
 
 /** "Name <address>" or a bare address, as a forwarded message's From line writes it. */
-function senderOfLine(line: string): string {
+function senderOfLine(line: string): { name: string; address: string } {
   const value = line.slice(0, MOST_LINE_LENGTH).replace(/^[\s*]+|[\s*]+$/g, '');
   const named = /^(.*?)\s*[<[]\s*(?:mailto:)?([^\s<>[\]]+@[^\s<>[\]]+)\s*[>\]]\s*$/.exec(value);
-  if (named) return cleanLabel(named[1]!) || domainName(named[2]!);
+  if (named) return { name: cleanLabel(named[1]!) || domainName(named[2]!), address: named[2]!.toLowerCase() };
   const bare = /^[^\s@]+@[^\s@]+$/.exec(value.trim());
-  return bare ? domainName(bare[0]) : cleanLabel(value);
+  return bare ? { name: domainName(bare[0]), address: bare[0].toLowerCase() } : { name: cleanLabel(value), address: '' };
 }
 
 /**
  * Who wrote the email. Forwarding by a rule keeps the shop's own From; forwarding by hand puts the forwarder there
  * and the shop's on the first From line of the forwarded part, which is read instead.
  */
-function senderOf(email: Email, text: string): string {
+function senderOf(email: Email, text: string): { name: string; address: string } {
   if (FORWARDED_SUBJECT.test((email.subject ?? '').slice(0, MOST_SUBJECT_LENGTH))) {
     for (const line of text.split('\n', MOST_FORWARD_LINES)) {
       const found = FORWARDED_FROM.exec(line.slice(0, MOST_LINE_LENGTH));
       if (found) {
         const sender = senderOfLine(found[1]!);
-        if (sender) return sender;
+        if (sender.name) return sender;
       }
     }
   }
   const from = mailbox(email.from);
-  if (!from) return '';
-  return cleanLabel(from.name) || domainName(from.address);
+  if (!from) return { name: '', address: '' };
+  return { name: cleanLabel(from.name) || domainName(from.address), address: from.address.trim().toLowerCase() };
 }
 
 /** The link as stored, written the one way the database takes: on Google's mail hosts, with no user or port. */
@@ -215,10 +222,14 @@ export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
     read.push(link);
     room -= link.length + 1;
   }
-  const text = [(email.subject ?? '').slice(0, MOST_SUBJECT_LENGTH), body.slice(0, BODY_SHARE), ...read].join('\n');
+  const subject = (email.subject ?? '').slice(0, MOST_SUBJECT_LENGTH);
+  const text = [subject, body.slice(0, BODY_SHARE), ...read].join('\n');
+  const sender = senderOf(email, body);
   return {
-    sender: senderOf(email, body),
+    sender: sender.name,
     from: mailbox(email.from)?.address.trim().toLowerCase() ?? '',
+    origin: sender.address,
+    subject,
     text,
     confirmation: gmailConfirmation(email, body, links),
   };

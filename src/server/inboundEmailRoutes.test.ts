@@ -17,8 +17,9 @@ const SECRET = 'synthetic-inbound-secret-0123456789abcdef'; // gitleaks:allow --
 const token = 'abcdefghijklmnop';
 const recipient = `add+${token}@in.example.com`;
 const none = { params: Promise.resolve({}) };
+const earlier = { at: '2026-11-02T09:00:00.000Z', sender: 'Example Shop', result: 'added' as const, added: 1 };
 const mailbox: InboundMailbox = {
-  token, createdAt: '2026-11-03T10:00:00.000Z', usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, confirmation: null,
+  token, createdAt: '2026-11-03T10:00:00.000Z', usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null,
 };
 
 beforeEach(() => {
@@ -55,7 +56,7 @@ describe('the account\'s forwarding address', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
     const answer = await (await readInbox(signedIn('GET'), none)).json();
     expect(answer).toEqual({
-      inbox: { address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, confirmation: null },
+      inbox: { address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null },
       dailyLimit: 30,
     });
     expect(Object.keys(answer.inbox).sort()).toEqual([...contract.components.schemas.AddByEmail.required].sort());
@@ -85,7 +86,7 @@ describe('the account\'s forwarding address', () => {
     vi.spyOn(SupabaseUserClient.prototype, 'getNotificationPreferences').mockResolvedValue({ enabled_stages: [], email_on_delivery: null } as never);
     vi.spyOn(SupabaseUserClient.prototype, 'listDeliveryEmails').mockResolvedValue([]);
     const exported = await (await exportAccount(signedIn('GET'), none)).json();
-    expect(exported.addByEmail).toEqual({ address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, confirmation: null });
+    expect(exported.addByEmail).toEqual({ address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null });
   });
 
   it('is turned off, even by an account the setting is no longer open to', async () => {
@@ -140,7 +141,21 @@ describe('an email to a forwarding address', () => {
     expect(db.claimMail).toHaveBeenCalledWith(userId, { perAccount: 30, overall: 200 });
     expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([[UPS, 'Example Shop', 'ups'], [DHL, 'Example Shop', 'dhl']]);
     expect(db.queue).toHaveBeenCalledWith({ userId, packageId: `new-${UPS}`, reason: 'added' });
-    expect(db.record).toHaveBeenCalledWith(userId, 'added', 2);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Example Shop');
+  });
+
+  it('names a carrier\'s parcel after the shop its email carries for, and gives the number its carrier', async () => {
+    const db = account();
+    await posted(mail('DHL <noreply@dhl.com>', 'Your Example Shop shipment is on its way', 'Sendungsnummer 4612345678 ist unterwegs.'));
+    expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([['4612345678', 'Example Shop', 'dhl']]);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'Example Shop');
+  });
+
+  it('leaves a carrier\'s parcel unnamed when its email names no shop, and notes the carrier as the sender', async () => {
+    const db = account();
+    await posted(mail('DHL Info <noreply@dhl.com>', 'Unterwegs', 'Sendungsnummer 4612345678 ist unterwegs.'));
+    expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([['4612345678', '', 'dhl']]);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'DHL Info');
   });
 
   it('adds nothing twice, and a number the account follows costs no allowance', async () => {
@@ -148,7 +163,7 @@ describe('an email to a forwarding address', () => {
     await posted(mail('Shop <a@example.com>', 'Shipped', `Tracking: ${UPS}`));
     expect(db.claim).not.toHaveBeenCalled();
     expect(db.create).not.toHaveBeenCalled();
-    expect(db.record).toHaveBeenCalledWith(userId, 'known', 0);
+    expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Shop');
   });
 
   it('drops the server\'s own email about a parcel, which a filter sent back', async () => {
@@ -161,7 +176,7 @@ describe('an email to a forwarding address', () => {
     expect(db.create).not.toHaveBeenCalled();
     expect(db.record).not.toHaveBeenCalled();
     await posted(mail('Peek fans <hello@peek-fans.example>', 'Delivered', `Your parcel ${UPS} was delivered.`));
-    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, expect.any(String));
   });
 
   it('reads no order number as a tracking number', () => {
@@ -174,7 +189,7 @@ describe('an email to a forwarding address', () => {
     await posted(mail('Shop <a@example.com>', 'Shipped', `${UPS}\n${DHL}`));
     expect(db.create).toHaveBeenCalledTimes(1);
     expect(db.claim).toHaveBeenCalledTimes(2);
-    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, expect.any(String));
     vi.restoreAllMocks();
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     db = account();
@@ -189,7 +204,7 @@ describe('an email to a forwarding address', () => {
     const fetcher = vi.spyOn(globalThis, 'fetch');
     await posted(mail('Gmail Team <forwarding-noreply@google.com>', '(#123456789) Gmail Forwarding Confirmation - Receive Mail from alex@example.com',
       'Confirmation code: 123456789\nhttps://mail-settings.google.com/mail/vf-example'));
-    expect(db.record).toHaveBeenCalledWith(userId, 'confirmation', 0, { code: '123456789', link: 'https://mail-settings.google.com/mail/vf-example' });
+    expect(db.record).toHaveBeenCalledWith(userId, 'confirmation', 0, { code: '123456789', link: 'https://mail-settings.google.com/mail/vf-example' }, 'Gmail Team');
     expect(fetcher).not.toHaveBeenCalled();
     expect(db.create).not.toHaveBeenCalled();
   });

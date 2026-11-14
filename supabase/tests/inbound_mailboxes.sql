@@ -12,7 +12,7 @@ begin
     foreach function_name in array array[
       'public.inbound_mailbox(uuid)', 'public.open_inbound_mailbox(uuid,text)', 'public.close_inbound_mailbox(uuid)',
       'public.inbound_mailbox_owner(text)', 'public.claim_inbound_mail(uuid,integer,integer)',
-      'public.record_inbound_mail(uuid,text,integer,text,text)'
+      'public.record_inbound_mail(uuid,text,integer,text,text,text)'
     ] loop
       if has_function_privilege(role_name, function_name, 'EXECUTE') then
         raise exception '% must be server-only', function_name;
@@ -125,6 +125,27 @@ begin
   if exists (select 1 from private.inbound_mailboxes where user_id = one
       and (confirmation_code is not null or confirmation_link is not null or confirmation_at is not null)) then
     raise exception 'A later email must clear a confirmation older than three days';
+  end if;
+end;
+$$;
+
+-- The mailbox keeps what its last twenty emails did, newest first, and one line for emails refused in a row.
+do $$
+declare
+  one constant uuid := 'e9000000-0000-4000-8000-000000000001';
+  recent jsonb;
+begin
+  update private.inbound_mailboxes set recent = '[]' where user_id = one;
+  for sent in 1..22 loop
+    perform public.record_inbound_mail(one, 'added', 1, null, null, 'Shop ' || sent);
+  end loop;
+  perform public.record_inbound_mail(one, 'limited', 0);
+  perform public.record_inbound_mail(one, 'limited', 0);
+  recent := public.inbound_mailbox(one)->'recent';
+  if jsonb_array_length(recent) <> 20 or recent->0->>'result' <> 'limited' or recent->0->>'sender' <> ''
+      or recent->1->>'sender' <> 'Shop 22' or recent->1->>'added' <> '1' or recent->1->>'at' is null
+      or recent->19->>'sender' <> 'Shop 4' then
+    raise exception 'The last emails were not kept as expected: %', recent;
   end if;
 end;
 $$;

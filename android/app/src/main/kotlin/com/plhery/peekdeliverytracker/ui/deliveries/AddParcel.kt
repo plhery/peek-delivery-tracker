@@ -556,7 +556,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         }
         AddButton(addition, saving, error, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
     }
-    AddPicker(state, addition, form, actions)
+    AddPicker(state, addition, form, actions, escape)
     // The scanner goes down with Add, closed under it (a notification, a link), as the iPhone's goes with its presenter.
     val open = state.addition?.id == request.id
     TrackingScannerCover(form.showingScanner && open, onScan = actions::scanned, onCancel = { form.showingScanner = false })
@@ -1742,10 +1742,11 @@ internal fun ShrinkingText(text: String, style: TextStyle, color: Color, twoLine
 /**
  * The carrier picker over Add (`.sheet(isPresented: $showingCarrierPicker)`): automatic detection first, with what the
  * check found, then the carriers that know the number, those it fits and those used before, tagged as the check found
- * them; Cancel at the bar's leading end. A form over a form side by side.
+ * them; Cancel at the bar's leading end. A form over a form side by side. Its search gives Add's [escape] before an
+ * on-screen keyboard takes the key, as Add's own fields do.
  */
 @Composable
-private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: AddForm, actions: AddActions) {
+private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: AddForm, actions: AddActions, escape: (KeyEvent) -> Boolean) {
     val localizer = LocalLocalizer.current
     val parcels = state.parcels
     val close = { form.showingPicker = false }
@@ -1766,7 +1767,7 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
         }
         val tags = addition.pickerTags.mapValues { (_, key) -> CarrierPickerTag(localizer.text(key), found = true) }
         val automatic = CarrierPickerAutomatic(addition.automaticDescription(localizer), recommended = !addition.choosingCarrier, busy = addition.checking)
-        Box(Modifier.fillMaxSize().testTag(ADD_PICKER)) {
+        Box(Modifier.fillMaxSize().escapeBeforeKeyboard(escape).testTag(ADD_PICKER)) {
             LocalSheetGround.current?.invoke(Modifier.fillMaxSize())
             CarrierPicker(
                 selection = form.carrierOverride,

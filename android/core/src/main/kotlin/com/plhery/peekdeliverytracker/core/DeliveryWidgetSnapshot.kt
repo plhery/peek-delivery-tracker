@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
 import java.io.File
 import java.time.Instant
+import java.time.ZoneId
 import java.util.UUID
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -24,6 +25,7 @@ data class DeliveryWidgetParcel(
     val label: String,
     val carrier: String,
     val trackingNumber: String,
+    /** When it is expected or arrived, as the app words it when it publishes; else its status. */
     val detail: String,
     val isOutForDelivery: Boolean,
     /** When a delivered parcel arrived: the widget keeps it for a day after. */
@@ -34,9 +36,58 @@ data class DeliveryWidgetParcel(
     val stage: DeliveryWidgetStage? = null,
     /** Whether the reader named the parcel: the list widget calls one without a name by its carrier. */
     val named: Boolean? = null,
+    /**
+     * The detail from each of the next midnights where its words change, which the app writes ahead: "tomorrow"
+     * becomes "today" while the app stays closed. None from an app that didn't write them.
+     */
+    val later: List<DeliveryWidgetWording>? = null,
 ) {
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
+
+    /** The parcel as the widgets word it at `date`: the detail the app wrote for the last midnight before it. */
+    fun worded(at: Instant): DeliveryWidgetParcel {
+        val wording = later?.lastOrNull { it.from <= at } ?: return this
+        return copy(detail = wording.detail)
+    }
+}
+
+/** A parcel's detail from a moment on. */
+@Serializable
+data class DeliveryWidgetWording(
+    @Serializable(with = ReferenceDateSerializer::class) val from: Instant,
+    val detail: String,
+)
+
+/**
+ * The days the widgets' words follow while the app stays closed: "today", "tomorrow" and "yesterday" change at
+ * midnight, and an estimate that has passed gives way to the status.
+ */
+object DeliveryWidgetDays {
+    /** How many midnights ahead the app words the parcels. */
+    const val ahead = 7
+
+    /** The phone's midnights after `now`. */
+    fun midnights(after: Instant, count: Int = ahead, zone: ZoneId = ZoneId.systemDefault()): List<Instant> {
+        val today = after.atZone(zone).toLocalDate()
+        return (1..maxOf(count, 1)).map { today.plusDays(it.toLong()).atStartOfDay(zone).toInstant() }
+    }
+
+    /** The detail's words at each of `midnights` where they change from those before. */
+    fun later(than: String, at: List<Instant>, words: (Instant) -> String): List<DeliveryWidgetWording>? {
+        var last = than
+        val changes = at.mapNotNull { midnight ->
+            val next = words(midnight)
+            if (next == last) return@mapNotNull null
+            last = next
+            DeliveryWidgetWording(midnight, next)
+        }
+        return changes.ifEmpty { null }
+    }
+
+    /** When the parcels' words change after `now`: a widget is drawn again at each. */
+    fun changes(`in`: List<DeliveryWidgetParcel>, after: Instant): List<Instant> =
+        `in`.flatMap { it.later.orEmpty() }.map { it.from }.filter { it > after }.toSortedSet().toList()
 }
 
 /**
@@ -153,12 +204,12 @@ object DeliveryWidgetSelection {
     }
 
     /**
-     * What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
-     * delivery beside the parcel after it, and any other parcel alone, across it. Only the first [limit] of the
-     * parcels published.
+     * What a widget shows at a time, first page first, worded for `now`. A small one shows one parcel. A medium one
+     * shows a parcel out for delivery beside the parcel after it, and any other parcel alone, across it. Only the first
+     * [limit] of the parcels published.
      */
     fun pages(of: List<DeliveryWidgetParcel>, medium: Boolean, now: Instant = AppClock.now()): List<List<DeliveryWidgetParcel>> {
-        val rest = ArrayDeque(of.take(limit).filter { isShown(it, now) })
+        val rest = ArrayDeque(of.take(limit).filter { isShown(it, now) }.map { it.worded(now) })
         val pages = mutableListOf<List<DeliveryWidgetParcel>>()
         while (true) {
             val first = rest.removeFirstOrNull() ?: break

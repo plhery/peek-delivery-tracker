@@ -1715,39 +1715,60 @@ class ParcelStore(
         // As JSONEncoder.deliveryTracker writes the iPhone's models.
         private val exportEncoder = JsonEncoder(sortedKeys = true, swiftKeys = true)
 
-        fun nextDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
+        /** `midnights` are those the details are also worded for, as the widgets show them while the app stays closed. */
+        fun nextDeliveries(
+            parcels: List<Parcel>,
+            localizer: Localizer,
+            now: Instant = AppClock.now(),
+            midnights: List<Instant> = emptyList(),
+        ): List<DeliveryWidgetParcel> {
             val ordered = ParcelOrganizer.visible(parcels, query = "", status = ParcelStatusFilter.Active, carrier = null, sort = ParcelSort.Priority, now = now)
-            return ordered.map { parcel -> widgetParcel(parcel, localizer, localizer.parcelDeliveryEstimate(parcel, now)) }
+            return ordered.map { parcel -> widgetParcel(parcel, localizer, now, midnights) { localizer.parcelDeliveryEstimate(parcel, it) } }
         }
 
         /** The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first. */
         fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> =
             widgetOrder(parcels, localizer, now).take(DeliveryWidgetSelection.limit)
 
-        /** All of them in that order ([DeliveryWidgetSelection.ordered]), of which the list widget shows as many as fit. */
+        /**
+         * All of them in that order ([DeliveryWidgetSelection.ordered]), of which the list widget shows as many as fit.
+         * Their details are also worded for the next midnights.
+         */
         fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
+            val midnights = DeliveryWidgetDays.midnights(after = now)
             val delivered = ParcelOrganizer
                 .visible(parcels, query = "", status = ParcelStatusFilter.Delivered, carrier = null, sort = ParcelSort.Updated, now = now)
                 .mapNotNull { parcel ->
                     val arrived = parcel.currentEvent?.displayDate ?: return@mapNotNull null
-                    widgetParcel(parcel, localizer, localizer.parcelCompletionDate(parcel, now)).copy(deliveredAt = arrived)
+                    widgetParcel(parcel, localizer, now, midnights) { localizer.parcelCompletionDate(parcel, it) }.copy(deliveredAt = arrived)
                 }
             // The iPhone's nextDeliveries estimates with Date() rather than this `now`; passing it on can only make the two agree.
-            return DeliveryWidgetSelection.ordered(onTheWay = nextDeliveries(parcels, localizer, now), delivered = delivered, now = now)
+            return DeliveryWidgetSelection.ordered(
+                onTheWay = nextDeliveries(parcels, localizer, now, midnights), delivered = delivered, now = now,
+            )
         }
 
-        private fun widgetParcel(parcel: Parcel, localizer: Localizer, detail: String?): DeliveryWidgetParcel {
+        /** `detail` words when the parcel is expected or arrived, as of a moment. */
+        private fun widgetParcel(
+            parcel: Parcel,
+            localizer: Localizer,
+            now: Instant,
+            midnights: List<Instant>,
+            detail: (Instant) -> String?,
+        ): DeliveryWidgetParcel {
             val status = localizer.parcelStatus(parcel)
+            val first = detail(now) ?: status
             return DeliveryWidgetParcel(
                 id = parcel.id,
                 label = parcel.label.nonEmpty ?: localizer.text("common.parcel"),
                 carrier = CarrierCatalog.shared.info(parcel.displayedCarrier, localizer.language).displayName,
                 trackingNumber = CarrierCatalog.format(parcel.trackingNumber, parcel.carrier),
-                detail = detail ?: status,
+                detail = first,
                 isOutForDelivery = parcel.currentStage == TrackingStage.OutForDelivery,
                 // As the list's rows mark it.
                 stage = DeliveryWidgetStage.of(parcel.currentStage, status),
                 named = parcel.label.nonEmpty != null,
+                later = DeliveryWidgetDays.later(than = first, at = midnights) { detail(it) ?: status },
             )
         }
 

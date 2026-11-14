@@ -52,7 +52,10 @@ Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.s
 
 Both read only what the app publishes for them (`DeliveryWidgetSharedStore`): every parcel on its way, then those
 delivered within a day, in the widgets' order. They are drawn again whenever it publishes, and at least every 20
-minutes while either is placed.
+minutes while either is placed. Their days follow the clock while the app stays closed: the app also words each
+parcel's day for the next seven midnights where it changes (`DeliveryWidgetDays`), the widgets read the words for the
+moment they draw, and they are drawn again at those midnights. "Tomorrow" reads "today" on the day, last night's
+delivery "yesterday", and a passed estimate gives way to the status.
 
 - **Next delivery** (`NextDeliveryWidget.kt`) shows the first of them as a card, or two side by side. Like the
   iPhone's, which has no large size, it grows no taller than two rows of cells (`maxResizeHeight`).

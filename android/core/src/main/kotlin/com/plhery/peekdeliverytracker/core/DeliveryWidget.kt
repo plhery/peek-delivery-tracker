@@ -68,7 +68,7 @@ data class DeliveryWidgetEntry<A>(
 
 /**
  * What the list widget ("Parcels") shows at `date`: the parcels the store published in the widgets' order, less those
- * delivered more than a day ago.
+ * delivered more than a day ago, worded for `date`.
  */
 data class DeliveryWidgetList(
     val date: Instant,
@@ -96,7 +96,7 @@ data class DeliveryWidgetList(
         const val link = "peekdeliverytracker://parcels"
 
         fun make(date: Instant, enabled: Boolean, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
-            val shown = snapshot?.parcels.orEmpty().filter { DeliveryWidgetSelection.isShown(it, date) }
+            val shown = snapshot?.parcels.orEmpty().filter { DeliveryWidgetSelection.isShown(it, date) }.map { it.worded(date) }
             return DeliveryWidgetList(date, enabled, languageCode, shown, isSample = isSample)
         }
     }
@@ -133,11 +133,13 @@ object DeliveryWidgetTimeline {
 
     /**
      * When a widget is drawn again: the timeline's refresh, or sooner the end of a turn's spell, where a widget turned
-     * to other parcels shows its first ones again (the timeline's second entry). `turns` are the turns of each size.
+     * to other parcels shows its first ones again, or a midnight where the parcels' days change ([DeliveryWidgetDays]),
+     * as the timeline's later entries. `turns` are the turns of each size.
      */
-    fun next(now: Instant, turns: List<DeliveryWidgetTurn?>): Instant {
+    fun next(now: Instant, turns: List<DeliveryWidgetTurn?>, parcels: List<DeliveryWidgetParcel> = emptyList()): Instant {
         val refreshed = now.plusSeconds(refresh.toLong())
-        return turns.filterNotNull().map { it.ends }.filter { it > now }.fold(refreshed) { soonest, ends -> minOf(soonest, ends) }
+        val sooner = turns.filterNotNull().map { it.ends } + DeliveryWidgetDays.changes(parcels, after = now)
+        return sooner.filter { it > now }.fold(refreshed) { soonest, at -> minOf(soonest, at) }
     }
 }
 

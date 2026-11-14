@@ -315,7 +315,8 @@ object DeliveryWidgetUpdates {
 
     /**
      * The timeline's next entry while a widget is `placed`: the refresh, or the end of a turn's spell where a widget was
-     * turned to other parcels. With none placed, there is none.
+     * turned to other parcels, or the midnight where a parcel's day changes while the app stays closed. With none
+     * placed, there is none.
      */
     fun schedule(context: Context, store: DeliveryWidgetSharedStore, now: Instant = AppClock.now(), placed: Boolean = isPlaced(context)) {
         val alarms = context.getSystemService(AlarmManager::class.java) ?: return
@@ -324,7 +325,8 @@ object DeliveryWidgetUpdates {
             return
         }
         val turns = listOf(false, true).map { store.turn(size = DeliveryWidgetTimeline.turnSize(it), now = now) }
-        val wait = maxOf(Duration.between(now, DeliveryWidgetTimeline.next(now, turns)), MIN_FUTURITY)
+        val next = DeliveryWidgetTimeline.next(now, turns, store.snapshot?.parcels.orEmpty())
+        val wait = maxOf(Duration.between(now, next), MIN_FUTURITY)
         alarms.setWindow(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + wait.toMillis(), window(wait).toMillis(), refresh(context))
     }
 

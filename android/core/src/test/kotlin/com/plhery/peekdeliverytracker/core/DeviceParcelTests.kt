@@ -1918,7 +1918,7 @@ class DeviceParcelTests {
     }
 
     @Test
-    fun keysWithoutTheirParcelsAreSavedAloneAndLeaveTheFileTheyCameFrom() {
+    fun keysWithoutTheirParcelsAreSavedWithAnEmptyList() {
         val keys = mapOf("22222222222C" to key)
         val keychain = MemorySessionPersistence()
         keychain.save(JsonEncoder.deliveryTracker.encode(MapSerializer(String.serializer(), String.serializer()), keys))
@@ -1929,9 +1929,10 @@ class DeviceParcelTests {
         val forgets = MemorySessionPersistence()
         val storage = DeviceParcelFiles(keychain, file, forgets)
         assertEquals(DeviceParcelStorage.Contents(emptyList(), keys), storage.load())
+        // The list is written as it is, empty: a parcel forgotten meanwhile stays forgotten, as on the iPhone.
         storage.save(emptyList(), keys)
-        assertEquals(unreadable.toList(), file.data?.toList())
-        assertEquals(keys, storage.load().keys)
+        assertEquals("[]", file.data?.decodeToString())
+        assertEquals(DeviceParcelStorage.Contents(emptyList(), keys), storage.load())
 
         // The links still to be forgotten are kept in a store of their own, whatever becomes of the file.
         storage.save(emptyList(), keys, pendingForgets = mapOf("22222222222D" to key))

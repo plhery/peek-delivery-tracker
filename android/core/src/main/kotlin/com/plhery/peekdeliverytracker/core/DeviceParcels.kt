@@ -389,8 +389,8 @@ class DeviceParcelFiles(
                 return
             }
         }
-        // Keys alone are those of a file that couldn't be read, which stays until their parcels are read again.
-        if (parcels.isEmpty()) return
+        // Keys alone are those of parcels whose saved copy couldn't be read: their keys read them again, and the file
+        // holds the list as it is, even empty, as on the iPhone, so a parcel forgotten meanwhile stays forgotten.
         quietly { file.write(encoder.encode(parcelsSerializer, parcels)) }
     }
 

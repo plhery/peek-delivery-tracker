@@ -169,7 +169,7 @@ internal class SheetMenus {
  *   top 32 down the window or under the status bar where that is taller, 44 lower in a window wider than it is tall,
  *   and its foot 32 over the window's bottom or over the bottom bar where that is taller.
  *
- * The window under it dims, black at 20 % (in dark a warm black at 62 %, the web's scrim), and a tap there dismisses
+ * The window under it dims, black at 20 % (at 50 % in dark, as the iPhone's system dims it), and a tap there dismisses
  * it, but in the status bar's strip at the window's top, whose taps iOS gives to its status bar; the system's back and
  * its predictive gesture dismiss it too, the sheet following the gesture down. While it isn't [dismissible]
  * (`interactiveDismissDisabled`), none of them does: the back is kept from what is under it, and a drag down past its
@@ -185,9 +185,9 @@ internal class SheetMenus {
  * lower than 480, or under another sheet, as UIKit hides the grabber of a sheet in compact height and of one under
  * another.
  *
- * A [lit] sheet, one of Peek's own on its sheet ground ([PeekColors.sheet]) rather than a system list, stands up in dark
- * as the web's do: a lamp catches its top edge, one dp of warm light that thins away round its corners, and it casts a
- * deep shadow on the dimmed window. Light draws it as any other.
+ * A [lit] sheet, one of Peek's own on its sheet ground ([PeekColors.sheet]) rather than a system list, stands up in dark:
+ * a lamp catches its top edge, one dp of warm light that thins away round its corners. Its shadow is the light one's,
+ * as the iPhone casts none deeper on its dimmed window. Light draws it as any other.
  */
 @Composable
 fun Sheet(
@@ -629,7 +629,6 @@ private fun SheetLayer(
         // The dim and the sheet: a layer over the tab, which the glass of an alert over the sheet blurs with the tab.
         val layer = if (backdrop != null) Modifier.materialBackdropLayer(backdrop) else Modifier
         val dim = if (colors.dark) DIM_DARK else DIM_LIGHT
-        val dimColor = if (colors.dark) DIM_DARK_COLOR else Color.Black
         val standsUp = lit && colors.dark
         val statusBar = WindowInsets.statusBars
         Box(Modifier.fillMaxSize().then(layer)) {
@@ -639,7 +638,7 @@ private fun SheetLayer(
                 Modifier
                     .fillMaxSize()
                     .graphicsLayer { alpha = presence() }
-                    .background(dimColor.copy(alpha = dim))
+                    .background(Color.Black.copy(alpha = dim))
                     .pointerInput(statusBar) {
                         detectTapGestures { if (showing && canDismiss && it.y >= statusBar.getTop(this)) dismiss() }
                     }
@@ -656,7 +655,7 @@ private fun SheetLayer(
                         .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset() - raised()) }
                         .testTag(SHEET_PANEL)
                         .then(modifier)
-                        .dropShadow(shape, if (standsUp) SHEET_DARK_SHADOW else SHEET_SHADOW)
+                        .dropShadow(shape, SHEET_SHADOW)
                         .clip(shape)
                         .background(colors.groupedBackground)
                         .then(sheetModifier),
@@ -697,7 +696,7 @@ private fun SheetLayer(
                         }
                         .testTag(SHEET_PANEL)
                         .then(modifier)
-                        .dropShadow(shape, if (standsUp) SHEET_RISE_SHADOW else SHEET_SHADOW)
+                        .dropShadow(shape, SHEET_SHADOW)
                         .then(sheetModifier),
                 ) {
                     // The glass it floats on, giving way to the opaque ground as it attaches.
@@ -910,10 +909,7 @@ private val GRABBER_HEIGHT = 5.dp
 private val GRABBER_TARGET_WIDTH = 72.dp
 private val GRABBER_TARGET_HEIGHT = 20.dp
 private const val DIM_LIGHT = 0.2f
-private const val DIM_DARK = 0.62f
-
-/** The web's dark scrim, rgb(8 7 4): a warm black. */
-private val DIM_DARK_COLOR = Color(8, 7, 4)
+private const val DIM_DARK = 0.5f
 private const val PRESENT_DURATION = 0.5
 private const val DETENT_DURATION = 0.4
 /** How many frames a sheet made again with the window keeps to its rest at once, while the window's bars come. */
@@ -921,13 +917,6 @@ private const val RESTORING_FRAMES = 2
 /** How far down the predictive back gesture takes the sheet, as a part of its height. */
 private const val BACK_TRAVEL = 0.1f
 private val SHEET_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 20.dp, y = 0.dp)
-
-/**
- * A lit sheet's shadow in dark, the web's `0 ±24px 64px` black at 55 %: down from a form in the window's middle, up from
- * a sheet that comes from the bottom. CSS blurs 64 to a Gaussian of 32.
- */
-private val SHEET_DARK_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.55f), radius = 32.dp, y = 24.dp)
-private val SHEET_RISE_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.55f), radius = 32.dp, y = (-24).dp)
 
 /** The sheet's panel, the dim around it aside. */
 const val SHEET_PANEL = "sheet.panel"

@@ -316,7 +316,7 @@ internal fun LivePassCard(
                         Modifier
                             .accessibilityFocus(neededFocus)
                             .button(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null, neededFocus) },
-                        color = colors.accent,
+                        color = colors.ink,
                         style = type.footnote.sfLines(),
                     )
                 }
@@ -627,7 +627,7 @@ private fun PostcodeNote(text: String, button: String?, modifier: Modifier, acti
                 Modifier
                     .accessibilityFocus(focus)
                     .button(interactionSource = null, indication = PlainPress, role = Role.Button) { action(focus) },
-                color = colors.accent,
+                color = colors.ink,
                 style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines(),
             )
         }

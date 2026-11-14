@@ -332,7 +332,7 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
         CarrierNotes(state, parcel)
         ShipmentIdentity(state, parcel, pageId)
         ShipmentDetails(state, parcel, pageId)
-        if (divided) Box(Modifier.fillMaxWidth().height(1.dp).background(PeekTheme.colors.separator))
+        if (divided) Box(Modifier.fillMaxWidth().height(1.dp / LocalDensity.current.density).background(PeekTheme.colors.divider))
     }
 }
 

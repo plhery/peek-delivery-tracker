@@ -24,6 +24,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -39,7 +41,7 @@ import androidx.compose.ui.state.ToggleableState
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.Toggle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
@@ -364,10 +366,15 @@ internal fun DeliveryEmailSettings(
     }
 }
 
-/** `quietLink(_:)`: caption secondary, underlined, 44 tall at least. */
+/**
+ * `quietLink(_:)`: caption secondary, underlined in the tertiary label (`.underline(color:)`), the line where the
+ * platform draws one, a ninth of the size under the baseline and an eighteenth of it thick; 44 tall at least.
+ */
 @Composable
 private fun QuietLink(key: String, tag: String, onClick: () -> Unit) {
     val colors = PeekTheme.colors
+    val style = PeekTheme.type.caption.sfLines()
+    var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
     Box(
         Modifier
             .heightIn(min = 44.dp)
@@ -376,8 +383,18 @@ private fun QuietLink(key: String, tag: String, onClick: () -> Unit) {
         contentAlignment = Alignment.CenterStart,
     ) {
         Text(
-            localized(key), color = colors.secondaryLabel,
-            style = PeekTheme.type.caption.sfLines().copy(textDecoration = TextDecoration.Underline),
+            localized(key),
+            Modifier.drawBehind {
+                val lines = layout ?: return@drawBehind
+                val size = style.fontSize.toPx()
+                for (line in 0 until lines.lineCount) {
+                    val y = lines.getLineBaseline(line) + size / 9
+                    drawLine(colors.tertiaryLabel, Offset(lines.getLineLeft(line), y), Offset(lines.getLineRight(line), y), size / 18)
+                }
+            },
+            color = colors.secondaryLabel,
+            style = style,
+            onTextLayout = { layout = it },
         )
     }
 }

@@ -866,6 +866,7 @@ private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddF
             minLines = 2,
             maxLines = 4,
             suggestions = false,
+            inked = true,
         )
         val settled = addition.settled
         if (addition.notFound) Note(localized("add.notFound"), ADD_NOT_FOUND)
@@ -1331,7 +1332,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                                 .padding(vertical = 12.dp)
                                 .width(1.dp / LocalDensity.current.density)
                                 .testTag(ADD_COUNTRY_DIVIDER)
-                                .background(PeekTheme.colors.separator),
+                                .background(PeekTheme.colors.divider),
                         )
                     }
                     AddTextField(
@@ -1489,6 +1490,7 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
             actions = actions,
             keyboard = KeyboardOptions(KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
             onSubmit = actions::submitName,
+            inked = true,
         )
     }
 }
@@ -1500,7 +1502,8 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
  * field's placeholder. The placeholder keeps to one line, cut short, as a field's own does; a field of more lines draws
  * it on two at the accessibility sizes. Its submit key acts ([onSubmit]), as a hardware Return does. It keeps
  * the focus and the keyboard through a window made again. The keyboard offers no suggestions where the field is
- * `.autocorrectionDisabled()`.
+ * `.autocorrectionDisabled()`. An [inked] field's text is the ink, as the number's and the name's are under the iPhone's
+ * `.foregroundStyle(Brand.ink)`; another's the label.
  */
 @Composable
 private fun AddTextField(
@@ -1521,6 +1524,7 @@ private fun AddTextField(
     suggestions: Boolean = true,
     postalCode: Boolean = false,
     monospacedDigits: Boolean = false,
+    inked: Boolean = false,
 ) {
     val colors = PeekTheme.colors
     val base = PeekTheme.type.body.sfLines()
@@ -1575,7 +1579,7 @@ private fun AddTextField(
                     contentDescription = if (value.isEmpty() && placeholder.isNotEmpty()) "$label, $placeholder" else label
                     if (postalCode) contentType = ContentType.PostalCode
                 },
-            textStyle = font.copy(color = if (enabled) colors.label else colors.tertiaryLabel),
+            textStyle = font.copy(color = if (!enabled) colors.tertiaryLabel else if (inked) colors.ink else colors.label),
             enabled = enabled,
             singleLine = maxLines == 1,
             minLines = minLines,

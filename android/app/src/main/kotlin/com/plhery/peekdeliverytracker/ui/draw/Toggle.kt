@@ -87,7 +87,7 @@ fun Toggle(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     tint: Color = PeekTheme.colors.green,
-    behind: Color = PeekTheme.colors.paper,
+    behind: Color = PeekTheme.colors.raised,
 ) {
     val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion

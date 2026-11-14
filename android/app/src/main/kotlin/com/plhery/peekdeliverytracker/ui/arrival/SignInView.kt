@@ -943,7 +943,7 @@ private fun PrivacyNotice(privacyUrl: String, modifier: Modifier) {
     val read = localized("auth.readPrivacy")
     val uri = LocalUriHandler.current
     Column(modifier.fillMaxWidth().testTag(PRIVACY_NOTICE)) {
-        Box(Modifier.fillMaxWidth().height(1.dp / LocalDensity.current.density).background(colors.separator))
+        Box(Modifier.fillMaxWidth().height(1.dp / LocalDensity.current.density).background(colors.divider))
         Row(Modifier.fillMaxWidth().padding(top = 18.dp), horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.Top) {
             Box(Modifier.size(20.dp), contentAlignment = Alignment.Center) {
                 PeekSymbol("lock.fill", font = style.copy(fontWeight = FontWeight.SemiBold), tint = colors.secondaryLabel)

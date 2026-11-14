@@ -487,7 +487,7 @@ internal fun DemoModeBar(onExit: () -> Unit, modifier: Modifier = Modifier, side
             .background(colors.cream)
             .drawBehind {
                 val line = 1f
-                drawRect(colors.separator.copy(alpha = colors.separator.alpha * 0.45f), Offset(0f, size.height - line), size.copy(height = line))
+                drawRect(colors.divider.copy(alpha = colors.divider.alpha * 0.45f), Offset(0f, size.height - line), size.copy(height = line))
             },
     ) {
         CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {

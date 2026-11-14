@@ -94,8 +94,8 @@ class PeekColorsTest {
             listOf("#13110E", "#191612", "#292620", "#36322C", "#4A463E"),
             listOf(dark.background, dark.sheet, dark.raised, dark.sheetControl, dark.sheetLine(0.3f)).map(::hex),
         )
-        assertEquals("#292622", hex(dark.sheetButton.compositeOver(dark.sheet)))
-        assertEquals("#37352F", hex(dark.sheetButton.compositeOver(dark.raised)))
+        assertEquals("#36322C", hex(dark.sheetButton.compositeOver(dark.sheet)))
+        assertEquals("#36322C", hex(dark.sheetButton.compositeOver(dark.raised)))
         assertEquals(dark.sheetLine(0.25f), dark.sheetLine(0.6f))
     }
 

@@ -4,7 +4,7 @@ description: Lockers Mondial Relay, consignes Pickup, Amazon Locker, Bbox et My 
 slug: consigne-colis-code-retrait
 picture: Une rangée de consignes à colis avec une porte ouverte, un téléphone qui affiche un code, et Pip qui en sort.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Une consigne à colis (ou locker) est un point de retrait sans personne au comptoir : un mur de casiers qui s'ouvre avec un code ou l'appli du transporteur. Le suivi te dit quand ton colis est dedans, le transporteur t'envoie le code, et à partir de là tu as quelques jours, souvent 5. Passé ce délai, il repart en général chez l'expéditeur.
@@ -126,7 +126,7 @@ Quand le transporteur nomme le point de retrait, la fiche du colis l'affiche sou
 
 Les notifications te préviennent quand un colis est prêt à être retiré. Il existe aussi un e-mail facultatif, désactivé tant que tu ne l'actives pas : un quand un colis est prêt à être retiré, un quand il est livré.
 
-Peek n'affiche pas et ne garde pas le code qui ouvre la consigne. Il n'arrive que par le SMS, l'e-mail ou l'appli du transporteur.
+Peek n'affiche pas et ne garde pas le code qui ouvre la consigne. Il n'arrive que par le SMS, l'e-mail ou l'appli du transporteur. Si tu colles dans Peek un code à 6 chiffres sans choisir de transporteur, Peek te prévient « On dirait un code de retrait » et te demande plutôt le numéro de suivi, qui figure dans l'e-mail d'expédition.
 
 Une commande livrée par Amazon lui-même ne se suit que dans ton compte Amazon : voir [suivi de commande Amazon](guide:amazon-orders). Un numéro Mondial Relay, par exemple, peut compter 26 chiffres ; les autres formats sont dans [numéro de suivi](guide:tracking-number-formats).
 

@@ -4,7 +4,7 @@ description: Quanto tempo fica uma encomenda nos CTT, num cacifo Locky ou num Po
 slug: quanto-tempo-tenho-para-levantar-encomenda
 picture: Um cacifo de encomendas com uma porta aberta e o Pip à espera lá dentro, e um calendário com os dois últimos dias assinalados.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Depende de onde está a encomenda: nos CTT tens 10 dias úteis para levantar uma Encomenda Postal numa Loja ou Ponto CTT (15 se vier do estrangeiro), mas só 5 dias num cacifo Locky ou num Locker da InPost. O que conta é a data-limite do aviso, do SMS ou do e-mail. Passado esse dia, a encomenda volta para o remetente, e é a loja que decide se te reembolsa ou se a envia outra vez.
@@ -73,7 +73,7 @@ Se não consegues ir a tempo:
 
 Nos CTT, a nova entrega ou o levantamento noutra Loja CTT pedem-se até 3 dias úteis depois da data do aviso, e numa encomenda custam 3,40 € (outra loja) ou 4,15 € (nova entrega, na mesma morada ou noutra), mais IVA. Não deixes para o fim: passados esses 3 dias úteis, já não podes pedir.
 
-Num cacifo, o prazo é curto: 5 dias num Locky ou num Locker da InPost, só 72 horas num locker da DPD. Um aviso que te escape pode custar-te a encomenda. O [Peek](/) pode mandar-te uma notificação quando o seguimento diz que a encomenda está à tua espera, com a opção «Passos importantes». Mas não mexe no prazo: isso só a transportadora ou a loja podem fazer.
+Num cacifo, o prazo é curto: 5 dias num Locky ou num Locker da InPost, só 72 horas num locker da DPD. Um aviso que te escape pode custar-te a encomenda. O [Peek](/) pode mandar-te uma notificação quando o seguimento diz que a encomenda está à tua espera, e outra quando é devolvida ao remetente: a opção «Passos importantes» avisa das duas, a opção «Só a entrega» de nenhuma. Mas não mexe no prazo: isso só a transportadora ou a loja podem fazer.
 
 ## Se não levantar a encomenda, tenho direito a reembolso?
 

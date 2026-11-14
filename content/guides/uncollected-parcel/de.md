@@ -35,7 +35,7 @@ Meist rund eine Woche, an manchen Automaten nur 3 Tage. Die Abholfristen der gro
 
 | Land | Filiale nach verpasster Zustellung | Paketshop | Packstation oder Automat |
 | --- | --- | --- | --- |
-| Deutschland | DHL Postfiliale: 7 Werktage (Montag bis Samstag, ohne Feiertage) | DHL Paketshop: 7 Werktage; Hermes PaketShop: 7 Werktage; DPD Paketshop: 7 Tage; GLS Paketshop nach verpasster Zustellung: mindestens 7 Werktage | DHL Packstation: 7 Kalendertage, 9 nach einer verpassten Zustellung; Hermes Packstation: 7 Werktage; DPD Paketstation: 3 Tage; Amazon Locker: 3 Kalendertage |
+| Deutschland | DHL Postfiliale: 7 Werktage (Montag bis Samstag, ohne Feiertage) | DHL Paketshop: 7 Werktage; Hermes PaketShop: 7 Werktage; DPD Paketshop: 7 Tage; GLS Paketshop nach verpasster Zustellung: mindestens 7 Werktage | DHL Packstation: 7 Kalendertage, 9 nach einer verpassten Zustellung; Hermes Box: 3 Kalendertage (72 Stunden); DPD Paketstation: 3 Tage; Amazon Locker: 3 Kalendertage |
 | Österreich | Post: ab dem Folgetag bis zum dritten darauffolgenden Montag (5 Werktage, wenn der Versandhändler das so festlegt); GLS-Depot: 4 Arbeitstage | – | – |
 | Schweiz | Post: in der Regel 7 Tage, 15 bei Sendungen aus dem Ausland, verlängerbar | – | My Post 24: 10 Tage |
 
@@ -123,7 +123,8 @@ Ein Paket in der Packstation oder im Paketshop kann für den Paketdienst schon a
 :::sources
 - [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – 7 Werktage ab dem Werktag nach dem Zustellversuch, Statustexte, Vollmacht, Ausweis, tatsächlicher Abgabeort in der Sendungsverfolgung (gelesen am 14. November 2026)
 - [DHL: Packstation, Sendungen empfangen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 und 9 Kalendertage, Erinnerungen, keine Verlängerung, zweite Zustellung (gelesen am 14. November 2026)
-- [Hermes: Aufbewahrung im PaketShop](https://www.myhermes.de/service/fragen/empfangen/aufbewahrung-im-paketshop.html) – 7 Werktage im PaketShop und an der Packstation ab Einlieferung, keine Verlängerung, zurück an den Absender
+- [Hermes: Aufbewahrung im PaketShop](https://www.myhermes.de/service/fragen/empfangen/aufbewahrung-im-paketshop.html) – 7 Werktage im PaketShop ab Einlieferung, keine Verlängerung, zurück an den Absender
+- [Hermes: Lagerzeit Hermes Box](https://www.myhermes.de/service/fragen/hermesbox/lagerzeit-hermesbox.html) – 72 Stunden in der Hermes Box, danach zurück an den Absender (gelesen am 10. November 2026)
 - [DPD: Paket abholen](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – 7 Tage im Paketshop, 3 an der Paketstation, Beispiel Montag bis Montag, Ausweis statt Paketinfokarte, Vollmacht, Abholcode oder QR-Code, Gründe für den Paketshop, anderer Paketshop ohne freie Kapazität, Betriebsferien und geänderte Öffnungszeiten an Weihnachten und zum Jahreswechsel (gelesen am 14. November 2026)
 - [GLS: AGB für Geschäftskunden, Stand Januar 2025 (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – nach verpasster Zustellung mindestens 7 Werktage im PaketShop, Depot oder in der ParcelStation, nicht Abgeholtes zurück an den Absender (gelesen am 14. November 2026)
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – bis zum dritten Montag, 5 Werktage bei Versandhändlern, Sendung abholbereit, Sendung zugestellt bei Rücksendungen, Poststation mit Benachrichtigungscode, Abholung ohne gelben Zettel mit Lichtbildausweis, Ersatzempfänger mit Benachrichtigung

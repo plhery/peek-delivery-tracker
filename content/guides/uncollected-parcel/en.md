@@ -4,7 +4,7 @@ description: What happens to a parcel not collected from the post office, a parc
 slug: parcel-not-collected-from-post-office
 picture: A parcel locker with one door open and Pip waiting inside, and a calendar with its last two days circled.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 If nobody collects a parcel from a post office, parcel shop or locker, it goes back to the sender once its last day has passed. Post offices hold parcels longest (USPS usually 15 days, [Canada Post](carrier:canada-post) 15 calendar days), while many lockers give you only 2 or 3. The date on your card, text or email is the one that counts, and if you've missed it, ask the shop for a refund or to send it again.
@@ -39,7 +39,7 @@ Once the parcel is on its way back, [returned to sender](guide:returned-to-sende
 
 A locker parcel can get a second clock. At [Australia Post](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers), after 2 business days in a Parcel Locker it moves to the nearest Post Office, with a message and 10 more business days.
 
-In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), and Mondial Relay 5 calendar days in Belgium.
+In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days, counting the day it goes in (9 after a missed delivery), and Mondial Relay 5 calendar days in Belgium. [DPD](carrier:dpd-de) in Germany gives you 7 days at a parcel shop and 3 at one of its parcel stations.
 
 ### Why your date may differ from the table
 
@@ -70,7 +70,7 @@ Otherwise, work through these before the last day:
 
 USPS asks you to allow 2 days when you rebook with the paper notice, so book early. Australia Post can move a missed parcel to another Post Office for $7.55, using a form. For an [Amazon](carrier:amazon-logistics) Locker, forward the delivery confirmation email to whoever is collecting.
 
-With only 2 or 3 days at many lockers, a notice you see late can cost you the parcel. [Peek](/) can send a notification when the tracking says a parcel is waiting for pickup, but only the carrier or the shop can move the deadline.
+With only 2 or 3 days at many lockers, a notice you see late can cost you the parcel. [Peek](/) can send a notification when the tracking says a parcel is waiting for pickup, and when it's returned to the sender: "Important steps" announces both, "Delivery only" neither. Only the carrier or the shop can move the deadline, though.
 
 ## Will I get a refund if I don't collect my parcel?
 
@@ -115,7 +115,8 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 - [About Amazon UK: How to use Amazon Locker](https://www.aboutamazon.co.uk/news/operations/how-to-use-amazon-locker) – UK: three calendar days, automatic return and refund, forwarding the email
 - [About Amazon UK: What is an Amazon Counter and how does it work?](https://www.aboutamazon.co.uk/news/retail/how-to-use-amazon-counter) – automatic refund and return from a Counter
 - [About Amazon Australia: How to use Amazon Locker](https://www.aboutamazon.com.au/news/retail/how-to-use-amazon-locker) – three calendar days, automatic return and refund
-- [DHL: Packstation](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 calendar days
+- [DHL: Packstation](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 calendar days, counting the day the parcel goes in (in German, read 14 November 2026)
+- [DPD Germany: Collecting a parcel (in German)](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – 7 days at a parcel shop, 3 at a parcel station (read 14 November 2026)
 - [Mondial Relay Belgium: Collection period (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 calendar days in Belgium
 - [Mondial Relay Belgium: How long the Point Relais or Locker keeps a parcel (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/pendant-combien-de-temps-mon-colis-sera-garde-par-le-point-relais/) – a private sender's parcel back to its drop-off Locker or Point Relais at Mondial Relay's cost, a shop's back to the seller
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – free extension

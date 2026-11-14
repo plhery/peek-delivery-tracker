@@ -3,7 +3,7 @@ title: Urmărire colet J&T Germania: numărul JTDE și statusurile
 description: Urmărește un colet J&T Express în Germania: cum arată numărul JTDE, ce înseamnă fiecare status și ce faci dacă coletul întârzie, se pierde sau nu ajunge.
 slug: jt-express-germania-urmarire-colet
 published: 2026-11-03
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt pe Main) este rețeaua germană a J&T Express: livrează colete în Germania. Dacă un magazin online ți-a trimis comanda cu J&T, numărul de urmărire începe cu `JTDE`: lipește-l în căsuța de mai sus sau caută-l în [trackerul J&T de pe jtexpress.de](https://www.jtexpress.de/tracking). Numărul ți-l dă magazinul: e în emailul de expediere sau pe pagina comenzii.
@@ -56,11 +56,11 @@ Un colet lăsat la un vecin apare deci în Peek ca `Your package has been succes
 
 ## Livrarea J&T în Germania: ce-ți spune urmărirea
 
-În istoricele pe care le are codul Peek, curierul J&T încarcă coletul pentru o cursă de livrare și apoi fie îl livrează, fie scrie de ce n-a reușit livrarea. Codul Peek nu arată nicio predare către alt curier: trackerul J&T urmărește coletul până la ușa ta.
+În istoricele pe care le are codul Peek, curierul J&T încarcă coletul pentru o cursă de livrare și apoi fie îl livrează, fie scrie de ce n-a reușit livrarea. Codul Peek nu arată nicio predare către alt curier: trackerul J&T urmărește coletul până la ușa ta. Curierul care îți sună la ușă poate lucra pentru unul dintre partenerii în franciză ai J&T: pe jtexpress.de, J&T scrie că își caută în toată Germania parteneri ale căror echipe livrează colete.
 
 **În livrare.** `Your package has been loaded and is on its way to you` înseamnă că coletul e într-o cursă de livrare. În istoricele acelea, rândul apare cu câteva ore înainte de livrare, în aceeași dimineață. Trackerul J&T nu dă un interval orar sau o zi estimată de livrare, așa că nici Peek nu poate arăta așa ceva.
 
-**Preferințe de livrare.** Emailul care te anunță despre livrare are un link spre [pagina J&T cu preferințele de livrare](https://www.jtexpress.de/delivery-preference). Confirmă codul poștal și alege unul dintre modurile pe care ți le oferă J&T: cu semnătură, la tine, la un vecin (îi dai numele și spui dacă stă alături sau pe același etaj) sau la o recepție; fără semnătură, la ușa de la intrare, în grădină sau în curte, în cutia poștală sau în garaj. J&T spune că curierul îți respectă alegerea. Dacă alegi un loc fără semnătură, pagina te avertizează că, odată lăsat coletul acolo, riscul de pierdere e al tău. Dacă statusul coletului nu mai permite o alegere, pagina îți spune asta.
+**Preferințe de livrare.** Emailul care te anunță despre livrare are un link spre [pagina J&T cu preferințele de livrare](https://www.jtexpress.de/delivery-preference). Confirmă codul poștal și alege unul dintre modurile pe care ți le oferă J&T: cu semnătură, la tine, la un vecin (îi dai numele și spui dacă stă alături sau pe același etaj) sau la o recepție; fără semnătură, la ușa de la intrare, în grădină sau în curte, în cutia poștală sau în garaj. J&T spune că curierul îți respectă alegerea, ceea ce evită livrările repetate și pe cele greșite, și că datele introduse sunt folosite doar pentru livrarea respectivă. Dacă alegi un loc fără semnătură, pagina te avertizează că, odată lăsat coletul acolo, riscul de pierdere e al tău. Dacă statusul coletului nu mai permite o alegere, pagina îți spune asta.
 
 **Fotografia de livrare.** Potrivit notei J&T despre protecția datelor la dovada foto de livrare, curierul fotografiază coletul când ți-l predă sau când îl lasă în locul convenit și prinde în cadru doar coletul și cât e nevoie din locul acela; cine apare din greșeală în poză e anonimizat automat. De regulă, J&T șterge fotografia la șase luni după livrare, dar o poate păstra până la încheierea unei reclamații făcute în acest timp și o poate arăta expeditorului pentru a lămuri reclamația.
 
@@ -82,9 +82,9 @@ Magazinul a ales J&T, așa că la o comandă online te adresezi întâi lui. Pot
 
 ## Contact J&T Express Germany
 
-Canalele J&T Express Germany, așa cum apăreau pe [pagina de contact](https://www.jtexpress.de/contact) la 6 noiembrie 2026:
+Canalele J&T Express Germany, așa cum apăreau pe [pagina de contact](https://www.jtexpress.de/contact) la 14 noiembrie 2026:
 
-- **Telefon:** +49 6931090650, de luni până vineri, între 8:00 și 20:00, închis în zilele de sărbătoare legală.
+- **Telefon:** +49 6931090650 (069 31090650 din Germania), de luni până vineri, între 8:00 și 20:00, închis în zilele de sărbătoare legală.
 - **Email:** de-jtservice@jtexpress.de.
 - **Chat live:** „Chat starten” („Start Chat” pe site-ul în engleză), pe paginile de contact și FAQ.
 - **Fotografii de livrare și date personale:** de-dpo@jtexpress.de (din nota despre fotografia de livrare).
@@ -98,7 +98,7 @@ J&T nu spune în ce limbi răspunde serviciul clienți; site-ul e în germană, 
 
 Peek arată statusul, fiecare scanare la ora ei exactă și ora livrării. Pentru fiecare scanare, J&T dă momentul exact, așa că Peek o arată în fusul orar al dispozitivului tău. Scanările apar în engleză, cu formulările J&T, chiar dacă pe jtexpress.de le citești în germană. J&T nu dă locul, ziua estimată de livrare sau greutatea, așa că Peek nu arată nicio hartă. La un istoric foarte lung, Peek păstrează cele mai recente 100 de scanări. Pe pagina coletului, „Open the J&T Express Germany website” (deschide site-ul J&T Express Germany) îți deschide numărul în trackerul J&T.
 
-Până când J&T scanează coletul, Peek arată „Waiting for the carrier” și continuă să întrebe. Când trackerul J&T nu poate fi accesat sau nu cunoaște numărul, Peek întreabă servicii de urmărire și îți arată istoricul dat de ele, cu propriile lor formulări.
+Până când J&T scanează coletul, Peek arată „Waiting for the carrier” și continuă să întrebe. Când trackerul J&T nu poate fi accesat sau nu cunoaște numărul, Peek întreabă servicii de urmărire și îți arată istoricul dat de ele, cu propriile lor formulări. Dacă apoi trackerul J&T și serviciile de urmărire răspund toate fără nicio scanare pentru un colet care are deja scanări, Peek le păstrează pe cele găsite și, dacă situația durează, scrie „The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking.” (curierul nu are deocamdată scanări noi; cele găsite rămân, iar Peek verifică în continuare).
 
 Peek verifică coletul la fiecare 10 minute și, cât e în livrare, la fiecare 2 minute: doar în ziua aceea, de la ora 6:00, ora locală, și cât timp răspunde trackerul J&T însuși. Prin servicii de urmărire, îl verifică la fiecare 15 minute. Dacă trec două zile fără o scanare nouă (12 ore, cât timp arată „Received by carrier”), îl verifică o dată pe oră. Pentru notificări alegi „Every scan” (fiecare scanare), „Important steps” (pașii importanți) sau „Delivery only” (doar livrarea). Peek nu poate contacta J&T sau magazinul în locul tău, nu poate schimba adresa și nu poate programa o nouă livrare.
 
@@ -127,11 +127,11 @@ Sună la +49 6931090650 (de luni până vineri, între 8:00 și 20:00), scrie pe
 :::sources
 - [J&T Express Germany: Track & Trace](https://www.jtexpress.de/tracking) – trackerul, până la 10 numere, limbile site-ului, scanări reîncărcate, răspunsul fără rezultate, datele vecinului după codul poștal, cinci încercări
 - [J&T Express Germany: Frequently Asked Questions](https://www.jtexpress.de/faq) – numerele JTDE și unde le găsești, livrat dar neprimit, adresă greșită, chat; fără termene de livrare, încercări sau reguli de reclamație
-- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – linkul din email, verificarea codului poștal, moduri de livrare cu și fără semnătură, riscul la locul ales
+- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – linkul din email, verificarea codului poștal, moduri de livrare cu și fără semnătură, riscul la locul ales, mai puține livrări repetate și greșite, date folosite doar pentru livrarea respectivă
 - [J&T Express Germany: Contact Us](https://www.jtexpress.de/contact) – telefon, program, chat, email, adresa biroului
 - [J&T Express Germany: Legal notice](https://www.jtexpress.de/legal-statement) – J&T Express Germany GmbH, Frankfurt pe Main
 - [J&T Express Germany: POD Privacy Policy](https://www.jtexpress.de/pod-policy) – fotografia de livrare, șase luni, reclamații, contact pentru date personale
-- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – parteneri în franciză pentru livrări și ridicări pe ultima milă
+- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – parteneri în franciză în toată Germania pentru livrări și ridicări pe ultima milă
 - [J&T Express Germany: About Us](https://www.jtexpress.de/about) – fondat în 2015 în Indonezia, listat la Hong Kong
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – numele, forma JTDE, linkurile de urmărire, propozițiile trackerului de pe colete reale și etapele lor, cursele de livrare, modurile de livrare, ce lasă Peek deoparte, pagina de ajutor
 - [Universal Parcel Scraper: căutarea comună a rețelelor J&T](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – propoziții în engleză, ore exacte ale scanărilor, fără loc, zi estimată sau greutate, nume și numere de telefon scoase, cele mai recente 100 de scanări

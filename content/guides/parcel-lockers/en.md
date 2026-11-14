@@ -4,7 +4,7 @@ description: How Amazon, InPost, Evri, USPS and Australia Post lockers work: whe
 slug: parcel-locker-collection-code
 picture: A bank of parcel lockers with one door open, a phone showing a code, and Pip stepping out.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 A parcel locker is a pickup point with no one behind a counter: a wall of doors that opens with a code or with the carrier's app. The tracking tells you when your parcel is inside, the carrier sends you the code, and from then on you have a few days, often only 3. Miss them and the parcel moves to a post office counter or goes back to the sender.
@@ -125,7 +125,7 @@ When the carrier names the pickup point, the parcel's page shows it under "Picku
 
 Notifications tell you when a parcel is ready for pickup. There's also an optional email, off until you switch it on: one when a parcel is ready for pickup and one when it's delivered.
 
-Peek doesn't show or store the code that opens the locker. It comes only from the carrier's text, email or app.
+Peek doesn't show or store the code that opens the locker. It comes only from the carrier's text, email or app. Paste a 6-digit code into Peek without choosing a carrier and Peek says "That looks like a pickup code" and asks for the tracking number instead, which is in the shipping email.
 
 An Amazon order delivered by Amazon itself shows its tracking only in your Amazon account: see [Amazon orders](guide:amazon-orders). An InPost number, for one, can be 24 digits; other shapes are in [tracking number formats](guide:tracking-number-formats).
 

@@ -4,7 +4,7 @@ description: Bis wie spät DHL, Hermes, DPD und die Post in Österreich und der 
 slug: wann-liefert-dhl-uhrzeit-paketzustellung
 picture: Eine Uhr, die acht Uhr abends zeigt, unter einer Mondsichel, ein Kalender mit markierten Wochenenden, ein Lieferwagen mit eingeschalteten Scheinwerfern und Pip, der aus dem Fenster schaut.
 published: 2026-10-14
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzeit verspricht dir fast kein Paketdienst. Hermes stellt von 8 bis 20 Uhr zu. DHL, die Österreichische Post und die Schweizerische Post nennen für normale Pakete gar keine Uhrzeit. Samstag ist in Deutschland ein normaler Zustelltag. Die Schweizerische Post und GLS Österreich stellen montags bis freitags zu, die Post in der Schweiz samstags nur gegen Aufpreis.
@@ -34,7 +34,7 @@ Das hängt vom Paketdienst und vom Versandprodukt ab, das der Absender gewählt 
 | DHL Paket und Päckchen (DE) | In der Regel 1 bis 2 Werktage |
 | Deutsche Post, Warensendung | Regellaufzeit 4 Werktage |
 | Hermes (DE) | „wenige Tage“ |
-| DPD CLASSIC (DE) | 1 bis 2 Tage, innerhalb Europas 1 bis 4 Tage |
+| DPD CLASSIC (DE) | 1 bis 2 Werktage, innerhalb Europas 1 bis 4 Werktage |
 | Österreichische Post | Über 97 Prozent der Inlandspakete innerhalb von 2 Werktagen; Post Express am nächsten Werktag bis 13 Uhr |
 | GLS (AT) | In der Regel binnen 24 Stunden |
 | Schweizerische Post | PostPac Priority in der Regel am nächsten Werktag, PostPac Economy innerhalb von 2 Werktagen |
@@ -62,14 +62,14 @@ Das Zeitfenster ist die Spanne, in der der Paketdienst bei dir erwartet wird, be
 | Paketdienst | Zeitfenster | Wann |
 | --- | --- | --- |
 | DHL | 90 Minuten, oft ca. 15 Minuten vorher noch eine Nachricht | Am Liefertag in der Live-Sendungsverfolgung; mit Kundenkonto morgens per E-Mail oder Push |
-| DPD | 2 Stunden, kurz vorher auf 30 Minuten genau | Am Liefertag im Live-Tracking |
+| DPD | 2 Stunden, kurz vorher auf 30 Minuten genau | Am Liefertag im Live-Tracking, außer auf Inseln |
 | Hermes | 2 bis 4 Stunden, für über 90 Prozent höchstens 2; am Liefertag teils nur 30 Minuten | In der Regel am Vortag in der Sendungsverfolgung |
 | Schweizerische Post | Meist 40 bis 120 Minuten | Am Liefertag in „Meine Sendungen“, in immer mehr Gebieten |
 | Österreichische Post, GLS (AT) | Keins | GLS: Die genaue Uhrzeit kannst du nicht bestimmen |
 
-Ein Zeitfenster ist eine Schätzung. DHL zeigt seins nur, wenn es mit hoher Wahrscheinlichkeit eingehalten wird, und gerade in Städten nicht immer. Hermes nennt sein Zeitfenster „unverbindlich“, und bei der Schweizerischen Post ist das Zeitfenster noch in der Testphase (Label „early“) und gilt nicht für alle Pakete. Bei Hermes zeigt das Live-Tracking vielen Empfängern ab einer Stunde vor dem Zeitfenster, wie viele Stopps der Zusteller noch vor sich hat.
+Ein Zeitfenster ist eine Schätzung. DHL zeigt seins nur, wenn es mit hoher Wahrscheinlichkeit eingehalten wird, und gerade in Städten nicht immer; für DHL Päckchen und Sendungen an eine Filiale oder Packstation gibt es gar kein Live-Tracking. Hermes nennt sein Zeitfenster „unverbindlich“, und bei der Schweizerischen Post ist das Zeitfenster noch in der Testphase (Label „early“) und gilt nicht für alle Pakete. Bei Hermes zeigt das Live-Tracking vielen Empfängern ab einer Stunde vor dem Zeitfenster, wie viele Stopps der Zusteller noch vor sich hat. Auch das Live-Tracking von DPD zählt die Stopps bis zu dir. Passt dir der Tag nicht, kannst du bei DPD in den Änderungs-Optionen einen anderen Tag wählen, einen Nachbarn angeben, ein Abstell-Okay geben oder das Paket in einen Pickup Paketshop umleiten.
 
-Eine feste Uhrzeit kostet extra. Bei der Schweizerischen Post buchst du sie selbst: Sie bringt ein Paket auf Wunsch zwischen 7 und 9 Uhr (Dienstag bis Samstag, CHF 7.–) oder zwischen 16.30 und 21 Uhr (Montag bis Freitag, CHF 7.90). Die Benachrichtigung dazu kommt am Vortag, bei PostPac Priority meist zwischen 18 und 22 Uhr, und du hast bis Mitternacht Zeit, Zeitpunkt und Ort der Zustellung zu ändern. Auf [Peek](/) kannst du ein Zeitfenster, das der Paketdienst nennt, in deinen Kalender eintragen.
+Eine feste Uhrzeit kostet extra. Bei der Schweizerischen Post buchst du sie selbst: Sie bringt ein Paket auf Wunsch zwischen 7 und 9 Uhr (Dienstag bis Samstag, CHF 7.–) oder zwischen 16.30 und 21 Uhr (Montag bis Freitag, CHF 7.90). Die Benachrichtigung dazu kommt am Vortag, bei PostPac Priority meist zwischen 18 und 22 Uhr, und du hast bis Mitternacht Zeit, Zeitpunkt und Ort der Zustellung zu ändern. Amazon bringt in ausgewählten Postleitzahlgebieten von Frankfurt, Köln und München auch frische Lebensmittel am selben Tag, in einem 4-Stunden-Lieferfenster deiner Wahl oder, gegen Aufpreis, in einem 2-Stunden-Fenster. Auf [Peek](/) kannst du ein Zeitfenster, das der Paketdienst nennt, in deinen Kalender eintragen.
 
 ## Paket um 20 Uhr noch in Zustellung: Kommt es heute noch?
 
@@ -99,7 +99,7 @@ Noch am selben Abend anzurufen bringt selten etwas: Den DHL-Zusteller erreichst 
 - Dann nachfragen | Melde dich beim Absender oder Paketdienst, wenn seine Wartezeit vorbei ist.
 :::
 
-DHL stellt innerhalb Deutschlands in der Regel 1 bis 2 Werktage nach dem Versand zu. Ändert sich der Status seit mehr als 5 Werktagen nicht, kannst du einen Nachforschungsauftrag stellen. Bei Bestellungen in einem Onlineshop rät DHL aber, zuerst den Absender zu fragen, weil er meist schneller helfen kann. Was du tust, wenn das Paket auch dann nicht auftaucht, steht in [Paket verloren](guide:lost-parcel). In Österreich erreichst du die Post unter +43 800 010 100, in der Schweiz unter +41 848 888 888 (CHF 0.08/Min. vom Festnetz, Montag bis Freitag 7.30 bis 18 Uhr, Samstag 8 bis 12 Uhr).
+DHL stellt innerhalb Deutschlands in der Regel 1 bis 2 Werktage nach dem Versand zu; in wenigen Fällen, etwa in der Vorweihnachtszeit, dauert es länger. Ändert sich der Status seit mehr als 5 Werktagen nicht, kannst du einen Nachforschungsauftrag stellen. Bei Bestellungen in einem Onlineshop rät DHL aber, zuerst den Absender zu fragen, weil er meist schneller helfen kann. Was du tust, wenn das Paket auch dann nicht auftaucht, steht in [Paket verloren](guide:lost-parcel). In Österreich erreichst du die Post unter +43 800 010 100, in der Schweiz unter +41 848 888 888 (CHF 0.08/Min. vom Festnetz, Montag bis Freitag 7.30 bis 18 Uhr, Samstag 8 bis 12 Uhr).
 
 Lag eine Benachrichtigung im Briefkasten, weil du nicht da warst? Dann hilft [Paket verpasst: Was tun?](guide:missed-delivery). Kommt tagelang kein neuer Scan, lies [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
@@ -122,9 +122,9 @@ Ja, wenn es an eine Packstation, eine Poststation oder einen Automaten geht:
 Ein Haken bleibt: Eine Station, die du jederzeit öffnen kannst, wird nur an Zustelltagen befüllt. An Tagen ohne Zustellung, meist also sonntags, landet dort nichts Neues. Wie du ein Paket umleitest, das schon unterwegs ist, steht in [Lieferadresse ändern](guide:change-delivery-address).
 
 :::sources
-- [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zustellfahrzeug, abgebrochene Touren, 1 bis 2 Tage, kein direkter Kontakt, Werktage Montag bis Samstag außer Feiertage
-- [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – 1 bis 2 Werktage, mehr als 5 Werktage, Nachforschungsauftrag, Absender zuerst, Prognose
-- [DHL: Live-Tracking](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/live-tracking.html) – 90 Minuten, 15 Minuten vorher, nicht für jedes Paket
+- [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zustellfahrzeug, abgebrochene Touren, 1 bis 2 Tage, kein direkter Kontakt, Werktage Montag bis Samstag außer Feiertage (gelesen am 14. November 2026)
+- [DHL: Meine Sendung wurde noch nicht geliefert](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – 1 bis 2 Werktage, länger etwa in der Vorweihnachtszeit, mehr als 5 Werktage, Nachforschungsauftrag, Absender zuerst, Prognose (gelesen am 14. November 2026)
+- [DHL: Live-Tracking](https://www.dhl.de/de/privatkunden/pakete-empfangen/sendungen-verfolgen/live-tracking.html) – 90 Minuten, ca. 15 Minuten vorher, nicht für jedes Paket, nicht für DHL Päckchen und Sendungen an Filiale oder Packstation (gelesen am 14. November 2026)
 - [DHL: Packstation](https://www.dhl.de/de/privatkunden/pakete-empfangen/an-einem-abholort-empfangen/packstation.html) – über 19.000 Stationen, 24/7
 - [Postgesetz: § 19 Zustellfrequenz](https://www.gesetze-im-internet.de/postg_2024/__19.html) – Zustellung werktäglich
 - [Postgesetz: § 18 Laufzeitvorgaben](https://www.gesetze-im-internet.de/postg_2024/__18.html) – Pakete im Inland: 95 Prozent am dritten, 99 Prozent am vierten Werktag nach der Einlieferung
@@ -132,15 +132,16 @@ Ein Haken bleibt: Eine Station, die du jederzeit öffnen kannst, wird nur an Zus
 - [Hermes: Laufzeiten und Zustellung](https://www.myhermes.de/service/fragen/empfangen/laufzeiten-zustellung.html) – Montag bis Samstag, 8 bis 20 Uhr, wenige Tage im Inland, drei Zustellversuche
 - [Hermes: Voraussichtliche Zustellung](https://www.myhermes.de/service/fragen/empfangen/voraussichtliche-zustellung.html) – Zeitfenster am Vortag, unverbindlich
 - [Hermes Newsroom: Sendungsverfolgung und mehr](https://newsroom.hermesworld.com/themen-digitalisierung-hermes-sendungsverfolgung-und-mehr-wie-empfaengerinnen-von-mehr-transparenz-und-flexibilitaet-profitieren-34419/) – höchstens 2 Stunden für über 90 Prozent, 30 Minuten, Stopps ab einer Stunde vorher
-- [DPD: Empfangen](https://www.dpd.com/de/de/empfangen/) – Zeitfenster von 2 Stunden, 30 Minuten
-- [DPD: Paketversand](https://www.dpd.com/de/de/versenden/paketversand/) – DPD CLASSIC in 1 bis 2 Tagen in Deutschland, 1 bis 4 Tagen in Europa
+- [DPD: Empfangen](https://www.dpd.com/de/de/empfangen/) – Zeitfenster von 2 Stunden, 30 Minuten, Inseln ausgenommen, Stopps im Live-Tracking, Tag ändern, Nachbar, Abstell-Okay, Pickup Paketshop (gelesen am 14. November 2026)
+- [DPD: Paketversand](https://www.dpd.com/de/de/versenden/paketversand/) – DPD CLASSIC in 1 bis 2 Werktagen in Deutschland, 1 bis 4 Werktagen in Europa (gelesen am 14. November 2026)
 - [DPD: Feiertage](https://www.dpd.com/de/de/support/versandbestimmungen/feiertage/) – bundesweite und regionale Feiertage
-- [About Amazon Deutschland: Amazon Prime 2025, Rekord bei Liefergeschwindigkeit](https://www.aboutamazon.de/amazon-prime-liefergeschwindigkeit-2025-rekord) – Same-Day in über 70 Städten, in Berlin und München bis zum Nachmittag bestellt, am selben Abend geliefert
+- [About Amazon Deutschland: Amazon Prime 2025, Rekord bei Liefergeschwindigkeit](https://www.aboutamazon.de/amazon-prime-liefergeschwindigkeit-2025-rekord) – Same-Day in über 70 Städten, in Berlin und München bis zum Nachmittag bestellt, am selben Abend geliefert (gelesen am 14. November 2026)
+- [About Amazon Deutschland: Amazon liefert frische Lebensmittel am selben Tag](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-frische-lebensmittel-same-day-lieferung) – Frankfurt, Köln und München, 4-Stunden- oder 2-Stunden-Lieferfenster, Aufpreis für das 2-Stunden-Fenster (30. Oktober 2026, gelesen am 14. November 2026)
 - [Österreichische Post: FAQ](https://www.post.at/p/c/faq-privat) – nach Tagen, nicht nach Uhrzeiten, Position in der Tour, Post Express am Samstag, Poststation rund um die Uhr, Pakete in 2 Werktagen (über 97 Prozent), Post Express am nächsten Werktag bis 13 Uhr
 - [RTR: Wie oft muss die Post Briefe und Pakete zustellen?](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/empfangsbeschwerden/empfang-postendungen.de.html) – Zustellpflicht an Werktagen außer Samstag
 - [ORF Salzburg: Post mit neuer Paketzustellung an Sonntagen](https://salzburg.orf.at/stories/3358040/) – Sonntag in Wien, Linz, Graz und Salzburg für Geschäftskunden, sonst Montag bis Samstag
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – in Zustellung, in Verteilung, Hotline
-- [GLS Österreich: Pakete empfangen](https://gls-group.com/AT/de/faq/pakete-empfangen/) – Montag bis Freitag, Geschäftszeiten, Uhrzeit nicht bestimmbar, in der Regel binnen 24 Stunden
+- [GLS Österreich: Pakete empfangen](https://gls-group.com/AT/de/faq/pakete-empfangen/) – Montag bis Freitag, Geschäftszeiten, Uhrzeit nicht bestimmbar, in der Regel binnen 24 Stunden (gelesen am 14. November 2026)
 - [Schweizerische Post: PostPac Priority](https://www.post.ch/de/pakete-versenden/pakete-schweiz/postpac-priority) – nächster Werktag, Montag bis Freitag, Samstagzustellung CHF 3.80, keine Pakete sonntags und an Feiertagen
 - [Schweizerische Post: PostPac Economy](https://www.post.ch/de/pakete-versenden/pakete-schweiz/postpac-economy) – innerhalb von 2 Werktagen
 - [Schweizerische Post: Einmalig steuern](https://www.post.ch/de/empfangen/sendung-steuern/einmalig-steuern) – Samstag, Früh- und Abendzustellung, Preise, Umleiten, Mitternacht

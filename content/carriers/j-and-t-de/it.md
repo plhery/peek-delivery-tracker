@@ -3,7 +3,7 @@ title: Tracking J&T Express in Germania: numero JTDE e stati
 description: Tracking J&T in Germania: com'è fatto un numero JTDE, cosa vuol dire ogni riga del tracking e cosa fare se il pacco è in ritardo, smarrito o non arriva.
 slug: jt-express-germania-tracking
 published: 2026-11-03
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Francoforte sul Meno) è la rete tedesca di J&T Express: consegna pacchi in Germania. Se un negozio ti ha spedito l'ordine con J&T, il numero di tracking inizia con `JTDE`: incollalo nel box qui sopra, oppure cercalo sul [tracking di J&T su jtexpress.de](https://www.jtexpress.de/tracking). Il numero ce l'ha il negozio che ha spedito l'ordine: lo trovi nell'e-mail di spedizione o nella pagina dell'ordine.
@@ -56,11 +56,11 @@ Un pacco lasciato a un vicino, quindi, in Peek si legge `Your package has been s
 
 ## Consegna J&T in Germania: cosa ti dice il tracking
 
-Nelle cronologie che il codice di Peek conosce, il corriere di J&T carica il pacco sul furgone per un giro di consegna e poi lo consegna, oppure scrive perché non ci è riuscito. Il codice di Peek non mostra nessun passaggio a un altro corriere: il tracking di J&T segue il pacco fino alla tua porta.
+Nelle cronologie che il codice di Peek conosce, il corriere di J&T carica il pacco sul furgone per un giro di consegna e poi lo consegna, oppure scrive perché non ci è riuscito. Il codice di Peek non mostra nessun passaggio a un altro corriere: il tracking di J&T segue il pacco fino alla tua porta. Il corriere che ti suona alla porta può lavorare per uno dei partner in franchising di J&T: secondo jtexpress.de, J&T cerca in tutta la Germania partner i cui team consegnano pacchi.
 
 **In consegna.** `Your package has been loaded and is on its way to you` vuol dire che il pacco è partito per il giro di consegna. In quelle cronologie la riga compare la mattina, qualche ora prima della consegna. Il tracking di J&T non dà né una fascia oraria né un giorno di consegna previsto, quindi nemmeno Peek può mostrarli.
 
-**Preferenze di consegna.** L'e-mail che ti avvisa della consegna contiene un link alla [pagina delle preferenze di consegna](https://www.jtexpress.de/delivery-preference) di J&T. Conferma il CAP e scegli tra i modi che J&T ti propone: con firma, a te, a un vicino (ne indichi il nome e se abita accanto o sul tuo piano) o alla reception; senza firma, davanti alla porta, in giardino o in cortile, nella cassetta delle lettere o in garage. Secondo J&T il corriere segue la tua scelta. Se scegli un posto senza firma, la pagina avverte che il rischio di perdita passa a te appena il pacco viene lasciato lì. Se lo stato della spedizione non permette più di scegliere, la pagina te lo dice.
+**Preferenze di consegna.** L'e-mail che ti avvisa della consegna contiene un link alla [pagina delle preferenze di consegna](https://www.jtexpress.de/delivery-preference) di J&T. Conferma il CAP e scegli tra i modi che J&T ti propone: con firma, a te, a un vicino (ne indichi il nome e se abita accanto o sul tuo piano) o alla reception; senza firma, davanti alla porta, in giardino o in cortile, nella cassetta delle lettere o in garage. Secondo J&T il corriere segue la tua scelta, così si evitano seconde consegne e consegne sbagliate, e i dati che inserisci servono solo per quella consegna. Se scegli un posto senza firma, la pagina avverte che il rischio di perdita passa a te appena il pacco viene lasciato lì. Se lo stato della spedizione non permette più di scegliere, la pagina te lo dice.
 
 **Foto di consegna.** Secondo l'informativa privacy di J&T sulla prova di consegna fotografica, il corriere fotografa il pacco quando te lo consegna o lo lascia nel posto concordato, inquadrando solo il pacco e la parte del posto che serve; chi finisce nella foto per caso viene reso irriconoscibile in automatico. Di regola J&T cancella la foto sei mesi dopo la consegna, ma può tenerla finché non si chiude un reclamo aperto in quel periodo, e può mostrarla al mittente per risolverlo.
 
@@ -82,9 +82,9 @@ Il corriere l'ha scelto il negozio, quindi per un ordine online il primo a cui r
 
 ## J&T Express Germany: servizio clienti e contatti
 
-I canali di J&T Express Germany, come li riportava la sua [pagina contatti](https://www.jtexpress.de/contact) il 6 novembre 2026:
+I canali di J&T Express Germany, come li riportava la sua [pagina contatti](https://www.jtexpress.de/contact) il 14 novembre 2026:
 
-- **Telefono:** +49 6931090650, dal lunedì al venerdì dalle 8:00 alle 20:00, chiuso nei giorni festivi.
+- **Telefono:** +49 6931090650 (069 31090650 dalla Germania), dal lunedì al venerdì dalle 8:00 alle 20:00, chiuso nei giorni festivi.
 - **E-mail:** de-jtservice@jtexpress.de.
 - **Chat:** «Chat starten» («Start Chat» sul sito in inglese), nelle pagine contatti e FAQ.
 - **Foto di consegna e dati personali:** de-dpo@jtexpress.de (dall'informativa sulla foto di consegna).
@@ -96,9 +96,9 @@ J&T non dice in quali lingue risponde il servizio clienti; il sito è in tedesco
 
 [Peek](/) riconosce subito J&T Express Germany da un numero `JTDE` («Corriere rilevato»), scritto con o senza spazi, in maiuscolo o in minuscolo, e interroga il tracking di J&T con il solo numero: niente CAP e niente account. Funziona anche un link www.jtexpress.de/tracking con `?q=` e il numero; se dentro c'è un numero di un altro tipo, Peek lo legge come se avessi incollato solo quello. Se il tuo numero non è un `JTDE`, incollalo lo stesso: Peek segue più di 3.500 corrieri. Scegliere J&T Express Germany con «Cambia» per un numero di un'altra forma non serve: Peek ti avvisa che J&T Express Germany «non emette numeri come questo».
 
-Peek mostra lo stato, ogni scansione con l'ora esatta e il momento della consegna. J&T indica il momento preciso di ogni scansione, quindi Peek lo mostra nel fuso orario del tuo dispositivo. Le scansioni restano nell'inglese di J&T, anche se su jtexpress.de le leggi in tedesco. J&T non indica né il luogo né il giorno di consegna previsto né il peso, quindi Peek non mostra la mappa. Su una cronologia molto lunga tiene le 100 scansioni più recenti. «Apri il sito J&T Express Germany», nella pagina del pacco, apre il tuo numero sul tracking di J&T.
+Peek mostra lo stato, ogni scansione con l'ora esatta e il momento della consegna. J&T indica il momento preciso di ogni scansione, quindi Peek lo mostra nel fuso orario del tuo dispositivo; su peektracker.com l'ultima riga sotto la cronologia lo indica («Orari nel tuo fuso orario: …»). Le scansioni restano nell'inglese di J&T, anche se su jtexpress.de le leggi in tedesco. J&T non indica né il luogo né il giorno di consegna previsto né il peso, quindi Peek non mostra la mappa. Su una cronologia molto lunga tiene le 100 scansioni più recenti. «Apri il sito J&T Express Germany», nella pagina del pacco, apre il tuo numero sul tracking di J&T.
 
-Finché J&T non scansiona il pacco, Peek mostra «In attesa del corriere» e continua a chiedere. Se il tracking di J&T non risponde o non conosce il numero, Peek chiede ai servizi di tracking e mostra la loro cronologia, con le loro parole.
+Finché J&T non scansiona il pacco, Peek mostra «In attesa del corriere» e continua a chiedere. Se il tracking di J&T non risponde o non conosce il numero, Peek chiede ai servizi di tracking e mostra la loro cronologia, con le loro parole. Se poi il tracking di J&T e i servizi di tracking rispondono tutti senza nessuna scansione per un pacco che ne ha già, Peek tiene le scansioni trovate e, se la cosa dura, scrive «Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.»
 
 Peek controlla ogni 10 minuti, e ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di J&T; quando rispondono i servizi di tracciamento, ogni 15 minuti). Se per due giorni non arriva nessuna scansione nuova (12 ore se resta su «Preso in carico»), controlla una volta all'ora. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare J&T o il negozio al posto tuo, cambiare l'indirizzo o prenotare una nuova consegna.
 
@@ -127,11 +127,11 @@ Chiama il +49 6931090650 (dal lunedì al venerdì, dalle 8:00 alle 20:00), usa l
 :::sources
 - [J&T Express Germany: Track & Trace](https://www.jtexpress.de/tracking) – tracking, fino a 10 numeri, lingue del sito, scansioni ricaricate, risposta senza risultati, dati del vicino dopo la verifica del CAP, cinque tentativi
 - [J&T Express Germany: Frequently Asked Questions](https://www.jtexpress.de/faq) – numeri JTDE e dove trovarli, consegnato ma non ricevuto, indirizzo sbagliato, chat; niente tempi di consegna, tentativi o regole sui reclami
-- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – link nell'e-mail di avviso, verifica del CAP, modi di consegna con e senza firma, rischio nel posto scelto
+- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – link nell'e-mail di avviso, verifica del CAP, modi di consegna con e senza firma, rischio nel posto scelto, meno seconde consegne e consegne sbagliate, dati usati solo per quella consegna
 - [J&T Express Germany: Contact Us](https://www.jtexpress.de/contact) – telefono, orari, chat, e-mail, indirizzo dell'ufficio
 - [J&T Express Germany: Legal notice](https://www.jtexpress.de/legal-statement) – J&T Express Germany GmbH, Francoforte sul Meno
 - [J&T Express Germany: POD Privacy Policy](https://www.jtexpress.de/pod-policy) – foto di consegna, sei mesi, reclami, contatto per la privacy
-- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – partner in franchising per consegne e ritiri dell'ultimo miglio
+- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – partner in franchising in tutta la Germania per consegne e ritiri dell'ultimo miglio
 - [J&T Express Germany: About Us](https://www.jtexpress.de/about) – fondata nel 2015 in Indonesia, quotata a Hong Kong
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – nomi, forma JTDE, link di tracking, frasi del tracking lette su pacchi veri e loro fasi, giri di consegna, tipi di consegna, cosa viene tolto, pagina di assistenza
 - [Universal Parcel Scraper: interrogazione comune delle reti J&T](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – frasi in inglese, orari esatti delle scansioni, niente luogo, giorno previsto o peso, nomi e numeri di telefono tolti, 100 scansioni più recenti

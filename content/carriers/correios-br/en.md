@@ -3,7 +3,7 @@ title: Correios Brazil tracking: codes, statuses and customs
 description: Track a Correios parcel to or from Brazil: what BR codes look like, what the Portuguese statuses mean, import taxes, Minhas Importações and contacts.
 slug: correios-brazil-tracking
 published: 2026-10-23
-updated: 2026-11-09
+updated: 2026-11-14
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) is Brazil's post. A parcel sent from Brazil keeps its Correios code all the way, and the post of the country it's going to delivers it. A parcel bought abroad keeps the sending post's code, and Correios delivers it in Brazil. Track it on [Correios' tracker](https://rastreamento.correios.com.br/app/index.php), which takes up to 20 codes or a CPF or CNPJ and asks you to type the text from an image, or paste the code in the box above.
@@ -40,6 +40,7 @@ Correios writes its statuses in Portuguese, with the town and state (UF) of each
 | `Saída do Centro Internacional` | It left Correios' international centre for delivery in Brazil. |
 | `Objeto saiu para entrega ao destinatário` | Out for delivery to you. |
 | `Objeto não entregue - carteiro não atendido` | The postman found nobody to take it. |
+| `Objeto aguardando retirada no endereço indicado` | Waiting for you to collect it at the address Correios gives, such as one of its units ("Ready for pickup" in Peek). |
 | `Inconsistências no endereçamento do objeto` | Something is wrong with the address. |
 | `Objeto entregue ao destinatário` | Delivered to you. |
 
@@ -142,5 +143,5 @@ Yes, with the same code: on Correios' tracker, then on your own post's tracker o
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – service letters, check digit
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty, €2 handling fee
 - [European Commission: Guidance on the €3 customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – item, distance sales
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings (export customs inspection, 9 November 2026), what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings (export customs inspection, 9 November 2026; waiting for collection at the address given, 14 November 2026), what Peek shows
 :::

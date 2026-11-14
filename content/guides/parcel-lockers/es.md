@@ -4,7 +4,7 @@ description: Cómo funcionan las taquillas Citypaq, InPost y Amazon: dónde est�
 slug: taquilla-paquetes-codigo-recogida
 picture: Una fila de taquillas con una puerta abierta, un móvil que muestra un código y Pip saliendo de un casillero.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Una taquilla es un punto de recogida sin nadie detrás del mostrador: una pared de casilleros que se abre con un código o con la app del transportista. El seguimiento te dice cuándo está dentro el paquete, el transportista te manda el código para abrirlo y desde ese momento tienes pocos días, normalmente 5 y a veces solo 3. Si no pasas a tiempo, el paquete vuelve a quien lo envió.
@@ -30,9 +30,10 @@ En la taquilla nadie te pide el DNI ni una firma. Correos lo dice tal cual: en C
 | --- | --- | --- | --- |
 | Citypaq | [Correos](carrier:correos-spain) | PIN de 8 cifras por email, SMS o aviso de la app | 5 días naturales |
 | InPost Locker | [InPost](carrier:mondial-relay) | PIN de 6 cifras por email o SMS, también en la app | 5 días naturales |
+| GLS Parcel Locker | [GLS](carrier:gls-es) | PIN por email o SMS, también en la app My GLS | 7 días naturales |
 | Amazon Locker | [Amazon](carrier:amazon-logistics) | Código único por email, a mano o con su código de barras | 3 días |
 
-Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas de Correos. Las taquillas de Mondial Relay ahora son de InPost: InPost compró Mondial Relay en 2021 y mondialrelay.es lleva a inpost.es.
+Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas de Correos. Los Parcel Lockers de GLS están sobre todo en supermercados, gasolineras, centros comerciales y estaciones de metro o tren; eliges uno al comprar, en algunas tiendas, o después en el seguimiento de My GLS, con «Recoger en Parcel Shop». Las taquillas de Mondial Relay ahora son de InPost: InPost compró Mondial Relay en 2021 y mondialrelay.es lleva a inpost.es.
 
 Los plazos de InPost son los de envíos nacionales. Si te dan otra fecha, manda la del aviso. Para Wallapop, Milanuncios y otras compras entre particulares, mira [pedidos de segunda mano](guide:second-hand-orders).
 
@@ -45,6 +46,8 @@ Dónde buscarlo:
 - **Correos Citypaq.** PIN numérico de 8 cifras por email, SMS o notificación de la app de Correos, que guarda los códigos.
 - **InPost.** PIN de 6 cifras por email, SMS o ambos, y también en la app InPost. En el Locker vale el PIN o el QR.
 - **Amazon.** El email que te llega en cuanto el paquete está en el Locker, con el código único, la dirección y el horario.
+- **GLS.** PIN por SMS o email en cuanto el paquete está en el locker; también lo ves en el seguimiento de la app My GLS.
+- **Correos Express, en un Punto Correos.** PIN por SMS o email cuando el pedido llega. Si no lo encuentras, en su seguimiento web pulsas «Visualizar PIN» y, tras identificarte, lo ves en pantalla.
 
 ¿No te ha llegado? Ve por orden:
 
@@ -61,6 +64,9 @@ Menos que una oficina de Correos o un punto con personal.
 - **Citypaq.** 5 días naturales.
 - **InPost.** 5 días naturales desde el aviso en envíos nacionales. Después, el paquete vuelve solo al remitente.
 - **Amazon Locker.** 3 días desde que llega el paquete. Después vuelve a Amazon.
+- **GLS Parcel Locker.** 7 días naturales desde que llega el paquete, aunque GLS recomienda recogerlo en las primeras 48 horas.
+
+En un Punto Correos, Correos Express guarda el pedido 7 días naturales desde que llega y después lo devuelve solo al remitente.
 
 Qué pasa después y cómo se recupera el dinero: [paquete no recogido](guide:uncollected-parcel) y [devuelto al remitente](guide:returned-to-sender).
 
@@ -70,7 +76,7 @@ InPost es la red que lo explica. Si el Locker o el Punto Pack está fuera de ser
 
 Con las demás redes, vuelve a leer el último aviso y el seguimiento antes de salir. Si la dirección no es la que elegiste, el paquete te espera allí.
 
-¿Llegas y la taquilla no abre? Si el código no funciona, comprueba que estás en la taquilla correcta y dentro del plazo, y busca un aviso más reciente. Si sigue sin abrir, llama al transportista con el número de seguimiento.
+¿Llegas y la taquilla no abre? Si el código no funciona, comprueba que estás en la taquilla correcta y dentro del plazo, y busca un aviso más reciente. Si sigue sin abrir, llama al transportista con el número de seguimiento. En los Parcel Lockers de GLS, la propia pantalla tiene un asistente virtual con ayuda paso a paso, disponible las 24 horas.
 
 ¿El seguimiento dice entregado y no tienes código? Busca en el detalle el nombre de una taquilla: si aparece, el paquete está en el casillero. Si dice recogido y no fuiste tú, mira [entregado pero no recibido](guide:delivered-not-received).
 
@@ -91,7 +97,7 @@ Cada transportista usa sus palabras, pero los pasos son estos:
 :::steps
 - De camino a la taquilla | El transportista tiene el paquete y lo lleva a la taquilla elegida. Aún no hay código.
 - En la taquilla, código enviado | El paquete está en un casillero. Te llega el PIN o el QR con la dirección y la fecha límite.
-- Plazo | Tienes 5 días naturales en Citypaq e InPost, y 3 días en Amazon Locker. Mira la fecha límite del primer aviso.
+- Plazo | Tienes 5 días naturales en Citypaq e InPost, 7 en los Parcel Lockers de GLS y 3 días en Amazon Locker. Mira la fecha límite del primer aviso.
 - Se acabó el plazo | Pasada la fecha límite, el transportista retira el paquete del casillero.
 - Vuelve al remitente | InPost lo devuelve solo al remitente; Amazon lo recupera.
 :::
@@ -115,7 +121,7 @@ Si el transportista da el nombre del punto, la ficha del paquete lo muestra en P
 
 Las notificaciones te avisan cuando el paquete está listo para recoger. También hay un email opcional, desactivado hasta que lo activas: llega una vez cuando el paquete está listo para recoger y otra cuando se entrega.
 
-Peek no muestra ni guarda el código para abrir la taquilla. Ese código solo llega por la app, el SMS o el email del transportista.
+Peek no muestra ni guarda el código para abrir la taquilla. Ese código solo llega por la app, el SMS o el email del transportista. Si pegas en Peek un código de 6 cifras sin elegir transportista, Peek te avisa «Parece un código de recogida» y te pide en su lugar el número de seguimiento, que viene en el email del envío.
 
 Un número de Correos puede ser `PR` + 15 cifras + `C`; el resto de formatos, en [cómo reconocer un número de seguimiento](guide:tracking-number-formats).
 
@@ -132,6 +138,8 @@ Un número de Correos puede ser `PR` + 15 cifras + `C`; el resto de formatos, en
 - [InPost: Cómo recoger](https://www.inpost.es/recibe-con-nosotros/como-recoger) – PIN de 6 cifras por email o SMS y en la app, PIN o QR sin documentos
 - [InPost: No tengo el código o PIN de recogida](https://www.inpost.es/blog/no-tengo-el-codigo-o-pin-de-recogida-inpost-donde-verlo-y-que-hacer) – código frente a número de seguimiento, qué revisar
 - [InPost: Consigue la app](https://www.inpost.es/consigue-la-app) – abrir el casillero a unos 70 metros
+- [GLS: Parcel Lockers](https://gls-group.com/ES/es/gls-points/parcel-lockers/) – PIN por email o SMS y en My GLS, 7 días naturales desde la llegada, mejor en 48 horas, dónde están, «Recoger en Parcel Shop», asistente virtual 24 horas (leído el 14 de noviembre de 2026)
+- [Correos Express: Recogida en Punto Correos](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio/recogida-en-punto-correos) – PIN por SMS o email, «Visualizar PIN», 7 días naturales desde la llegada, devolución automática al remitente (leído el 14 de noviembre de 2026)
 - [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – código único por email al llegar el paquete, código a mano o código de barras, 3 días, vuelta a Amazon (artículo de 2017)
 - [About Amazon España: 15 cosas sobre Amazon que aún no sabías](https://www.aboutamazon.es/noticias/noticias-de-la-compania/15-cosas-sobre-amazon-que-aun-no-sabias) – taquillas con pantalla táctil o con la app de Amazon Compras
 - [Universal Parcel Scraper: datos de los transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos de número

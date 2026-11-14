@@ -3,7 +3,7 @@ title: Correios Brasil seguimiento: código, estados y aduanas
 description: Sigue un paquete de Correios de Brasil: cómo es el código BR, qué significan sus estados en portugués, la aduana en España y en Brasil, y quién lo entrega.
 slug: correios-brasil-seguimiento
 published: 2026-10-24
-updated: 2026-11-09
+updated: 2026-11-14
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) es el correo de Brasil; no lo confundas con Correos, el español. Si te mandan un paquete por correo desde Brasil, lleva un código de Correios acabado en `BR`, y en España lo reparte [Correos](carrier:correos-spain) con ese mismo código. Si eres tú quien envía a Brasil, Correios lo entrega allí con el código que le puso el correo de origen. Puedes seguirlo en el [rastreador de Correios](https://rastreamento.correios.com.br/app/index.php), en portugués (te pide copiar el texto de una imagen); en el localizador de Correos, cuando ya está en España, o en la casilla de arriba.
@@ -39,6 +39,7 @@ Correios escribe sus estados en portugués y añade la ciudad y el estado brasil
 | `Saída do Centro Internacional` | Ha salido del centro internacional de Correios hacia su entrega en Brasil. |
 | `Objeto saiu para entrega ao destinatário` | En reparto. |
 | `Objeto não entregue - carteiro não atendido` | El cartero no encontró a nadie que lo recogiera. |
+| `Objeto aguardando retirada no endereço indicado` | Espera a que el destinatario lo recoja en la dirección que indica Correios, como una de sus unidades («Listo para recoger» en Peek). |
 | `Inconsistências no endereçamento do objeto` | Algo falla en la dirección. |
 | `Objeto entregue ao destinatário` | Entregado al destinatario. |
 
@@ -159,5 +160,5 @@ Depende del servicio y del código postal (CEP), y el seguimiento de Correios mu
 - [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – Aduana, 3 €, 2 €
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – fechas de 3 € y 2 €
 - [Comisión Europea: Guidance on the €3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – ventas a distancia, 2 €
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados (inspección de la aduana de exportación, 9 de noviembre de 2026), lo que muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados (inspección de la aduana de exportación, 9 de noviembre de 2026; espera para recogerlo en la dirección indicada, 14 de noviembre de 2026), lo que muestra Peek
 :::

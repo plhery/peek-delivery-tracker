@@ -4,7 +4,7 @@ description: Co się dzieje z nieodebraną paczką z paczkomatu, punktu albo poc
 slug: paczka-nie-odebrana
 picture: Automat paczkowy z jedną otwartą skrytką, w której czeka Pip, i kalendarz z zakreślonymi dwoma ostatnimi dniami.
 published: 2026-10-14
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 Nieodebrana paczka z automatu, punktu albo poczty wraca do nadawcy, gdy minie ostatni dzień odbioru. Najdłużej czeka na poczcie (przesyłka polecona Poczty Polskiej 14 dni od dnia po pierwszym awizo), najkrócej w automacie: w Allegro One Box 2 dni kalendarzowe. Liczy się termin z Twojego SMS-a, e-maila albo awizo. Potem to sklep decyduje, czy odda Ci pieniądze, czy wyśle paczkę jeszcze raz.
@@ -59,7 +59,7 @@ Albo przy zamówieniu wybrano automat lub punkt odbioru, albo kurier czy listono
 
 U InPost Peek pokaże wtedy status o paczce gotowej do odbioru, a u DPD `Przyjęcie przesyłki do punktu Pickup` (albo `Parcel collected by pickup point`), w obu przypadkach z etapem „Do odbioru”. Co znaczą poszczególne statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Awizo, kod odbioru i to, kto może odebrać paczkę za Ciebie, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery). Jeśli trzeba coś dopłacić, poradnik [o cle i opłatach przy odbiorze](guide:customs) wyjaśnia, kto i za co chce pieniędzy.
 
-[Peek](/) może wysłać Ci powiadomienie, gdy śledzenie pokaże, że paczka czeka na odbiór. Terminu nie przedłuży: to może zrobić tylko przewoźnik albo sklep.
+[Peek](/) może wysłać Ci powiadomienie, gdy śledzenie pokaże, że paczka czeka na odbiór, i drugie, gdy paczka wraca do nadawcy: ustawienie „Ważne etapy” zgłasza jedno i drugie, „Tylko doręczenie” żadnego z nich. Terminu nie przedłuży: to może zrobić tylko przewoźnik albo sklep.
 
 ## Jak przedłużyć termin odbioru paczki?
 

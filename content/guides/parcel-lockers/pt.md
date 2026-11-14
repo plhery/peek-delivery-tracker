@@ -4,7 +4,7 @@ description: Como funcionam os cacifos Locky dos CTT, da InPost e da DPD: onde e
 slug: cacifo-encomendas-codigo-levantamento
 picture: Uma fila de cacifos com uma porta aberta, um telemóvel que mostra um código e o Pip a sair de um compartimento.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Um cacifo é um ponto de levantamento sem ninguém ao balcão: uma parede de compartimentos que se abre com um código ou com a app da transportadora. O rastreio diz-te quando a encomenda está lá dentro, a transportadora envia-te o código para abrir e, a partir daí, tens poucos dias, normalmente 5 e às vezes só 3. Se não passares a tempo, a encomenda volta para quem a enviou.
@@ -112,7 +112,7 @@ Se a transportadora indicar o ponto, a ficha da encomenda mostra-o em Ponto de l
 
 As notificações avisam-te quando a encomenda está pronta para levantamento. Há também um e-mail opcional, desligado até o ligares: chega uma vez quando a encomenda está pronta para levantamento e outra quando é entregue.
 
-O Peek não mostra nem guarda o código para abrir o cacifo. Esse código só chega pela app, pelo SMS ou pelo e-mail da transportadora.
+O Peek não mostra nem guarda o código para abrir o cacifo. Esse código só chega pela app, pelo SMS ou pelo e-mail da transportadora. Se colares no Peek um código de 6 dígitos sem escolheres a transportadora, o Peek avisa «Parece um código de levantamento» e pede-te antes o número de rastreio, que está no e-mail de envio.
 
 Um número dos CTT tem 2 letras, 9 algarismos e `PT`; os outros formatos estão em [saber a transportadora pelo número](guide:tracking-number-formats).
 

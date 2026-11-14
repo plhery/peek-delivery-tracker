@@ -3,7 +3,7 @@ title: Praćenje J&T pošiljke u Njemačkoj: JTDE broj i statusi
 description: Prati paket J&T Expressa u Njemačkoj: kako izgleda JTDE broj za praćenje, što znači svaki status i što učiniti kad paket kasni, izgubi se ili ga nema.
 slug: jt-express-njemacka-pracenje-posiljke
 published: 2026-11-03
-updated: 2026-11-06
+updated: 2026-11-14
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt na Majni) je njemačka mreža J&T Expressa: dostavlja pakete u Njemačkoj. Ako ti je web-trgovina narudžbu poslala preko J&T-a, broj za praćenje počinje s `JTDE`: zalijepi ga u polje iznad ili ga potraži na [J&T-ovoj stranici za praćenje na jtexpress.de](https://www.jtexpress.de/tracking). Broj ima trgovina koja ti je poslala narudžbu: naći ćeš ga u e-poruci o slanju ili na stranici narudžbe.
@@ -56,11 +56,11 @@ Za paket ostavljen kod susjeda Peek zato prikazuje `Your package has been succes
 
 ## J&T dostava u Njemačkoj: što ti govori praćenje
 
-U povijestima praćenja koje sadrži Peekov kod, J&T-ov dostavljač utovari paket za dostavnu turu, a zatim ga ili dostavi ili javi zašto dostava nije uspjela. Peekov kod ne pokazuje predaju drugom prijevozniku: J&T-ov sustav prati paket sve do tvojih vrata.
+U povijestima praćenja koje sadrži Peekov kod, J&T-ov dostavljač utovari paket za dostavnu turu, a zatim ga ili dostavi ili javi zašto dostava nije uspjela. Peekov kod ne pokazuje predaju drugom prijevozniku: J&T-ov sustav prati paket sve do tvojih vrata. Dostavljač na tvojim vratima može raditi za nekog od J&T-ovih franšiznih partnera: J&T na jtexpress.de piše da u cijeloj Njemačkoj traži partnere čiji timovi dostavljaju pakete.
 
 **U dostavi.** `Your package has been loaded and is on its way to you` znači da je paket na dostavnoj turi. U tim povijestima taj redak dolazi nekoliko sati prije dostave, istog jutra. J&T-ov sustav ne daje vremenski okvir ni očekivani dan dostave, pa ih ni Peek ne može pokazati.
 
-**Željeni način dostave.** U e-poruci kojom te J&T obavještava o dostavi nalazi se poveznica na J&T-ovu [stranicu za odabir načina dostave](https://www.jtexpress.de/delivery-preference). Potvrdi poštanski broj i odaberi jedan od načina koje ti J&T ponudi: uz potpis, tebi osobno, susjedu (upišeš njegovo ime i stanuje li do tebe ili na istom katu) ili na recepciji; bez potpisa, pred ulaznim vratima, u vrtu ili dvorištu, u poštanskom sandučiću ili u garaži. Prema J&T-u, dostavljač se drži tvog izbora. Odabereš li mjesto bez potpisa, stranica upozorava da rizik gubitka snosiš ti čim paket ondje bude ostavljen. Ako stanje pošiljke više ne dopušta izbor, stranica će ti to reći.
+**Željeni način dostave.** U e-poruci kojom te J&T obavještava o dostavi nalazi se poveznica na J&T-ovu [stranicu za odabir načina dostave](https://www.jtexpress.de/delivery-preference). Potvrdi poštanski broj i odaberi jedan od načina koje ti J&T ponudi: uz potpis, tebi osobno, susjedu (upišeš njegovo ime i stanuje li do tebe ili na istom katu) ili na recepciji; bez potpisa, pred ulaznim vratima, u vrtu ili dvorištu, u poštanskom sandučiću ili u garaži. Prema J&T-u, dostavljač se drži tvog izbora, čime se izbjegavaju ponovljene i pogrešne dostave, a tvoji se podaci koriste samo za tu dostavu. Odabereš li mjesto bez potpisa, stranica upozorava da rizik gubitka snosiš ti čim paket ondje bude ostavljen. Ako stanje pošiljke više ne dopušta izbor, stranica će ti to reći.
 
 **Fotografija dostave.** Prema J&T-ovoj obavijesti o zaštiti podataka za fotografski dokaz dostave, dostavljač fotografira paket kad ti ga preda ili ga ostavi na dogovorenom mjestu, i to samo paket i onoliko mjesta koliko treba; tko slučajno uđe u kadar, automatski postaje neprepoznatljiv. J&T fotografiju u pravilu briše šest mjeseci nakon dostave, ali je može čuvati do kraja postupka po reklamaciji podnesenoj u tom roku, a pošiljatelju je može pokazati kako bi se reklamacija riješila.
 
@@ -82,9 +82,9 @@ Prijevoznika J&T odabrala je trgovina, pa ti je kod narudžbe preko interneta up
 
 ## J&T Express Germany: služba za korisnike i kontakt
 
-Kanali J&T Express Germany kako ih je 6. studenoga 2026. navodila njegova [stranica za kontakt](https://www.jtexpress.de/contact):
+Kanali J&T Express Germany kako ih je 14. studenoga 2026. navodila njegova [stranica za kontakt](https://www.jtexpress.de/contact):
 
-- **Telefon:** +49 6931090650, od ponedjeljka do petka od 8 do 20 sati, blagdanima ne radi.
+- **Telefon:** +49 6931090650 (iz Njemačke 069 31090650), od ponedjeljka do petka od 8 do 20 sati, blagdanima ne radi.
 - **E-pošta:** de-jtservice@jtexpress.de.
 - **Chat:** "Chat starten" ("Start Chat" na engleskoj verziji), na stranici za kontakt i na stranici s čestim pitanjima.
 - **Fotografije dostave i osobni podaci:** de-dpo@jtexpress.de (iz obavijesti o fotografiji dostave).
@@ -98,7 +98,7 @@ J&T ne navodi na kojim jezicima odgovara služba za korisnike; stranica je na nj
 
 Peek pokazuje status, svako skeniranje s točnim vremenom i vrijeme dostave. J&T za svako skeniranje daje točan trenutak, pa ga Peek pokazuje u vremenskoj zoni tvog uređaja. Skeniranja stižu na engleskom, J&T-ovim riječima, čak i ako ih na jtexpress.de čitaš na njemačkom. J&T ne daje mjesto, očekivani dan dostave ni težinu, pa Peek ne pokazuje kartu. Kod vrlo duge povijesti zadržava 100 najnovijih skeniranja. "Open the J&T Express Germany website" (otvori web-stranicu J&T Express Germany) na stranici paketa otvara tvoj broj na J&T-ovoj stranici za praćenje.
 
-Dok J&T ne skenira paket, Peek pokazuje "Waiting for the carrier" i nastavlja provjeravati. Kad J&T-ov sustav nije dostupan ili ne poznaje broj, Peek pita servise za praćenje i pokazuje njihovu povijest, njihovim riječima.
+Dok J&T ne skenira paket, Peek pokazuje "Waiting for the carrier" i nastavlja provjeravati. Kad J&T-ov sustav nije dostupan ili ne poznaje broj, Peek pita servise za praćenje i pokazuje njihovu povijest, njihovim riječima. Ako zatim i J&T-ov sustav i servisi za praćenje odgovore bez ijednog skeniranja za paket koji ih već ima, Peek zadržava pronađena skeniranja i, ako to potraje, napiše "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking." (prijevoznik zasad nema novih skeniranja; ona već pronađena ostaju, a Peek nastavlja provjeravati).
 
 Peek provjerava paket svakih 10 minuta, a svake 2 minute kad je u dostavi: samo toga dana, od 6 sati ujutro po lokalnom vremenu i dok odgovara sam J&T. Preko servisa za praćenje provjerava ga svakih 15 minuta. Ako dva dana nema novog skeniranja (12 sati dok paket pokazuje "Received by carrier"), provjerava ga jednom na sat. Obavijesti ti može slati za "Every scan" (svako skeniranje), "Important steps" (važni koraci) ili "Delivery only" (samo dostava). Peek ne može umjesto tebe kontaktirati J&T ili trgovinu, promijeniti adresu ni dogovoriti novu dostavu.
 
@@ -127,11 +127,11 @@ Nazovi +49 6931090650 (od ponedjeljka do petka od 8 do 20 sati), piši u chat na
 :::sources
 - [J&T Express Germany: Track & Trace](https://www.jtexpress.de/tracking) – stranica za praćenje, do 10 brojeva, jezici stranice, ponovno učitana skeniranja, odgovor bez rezultata, podaci o susjedu uz poštanski broj, pet pokušaja
 - [J&T Express Germany: Frequently Asked Questions](https://www.jtexpress.de/faq) – JTDE brojevi i gdje ih naći, dostavljeno a nije primljeno, pogrešna adresa, chat; bez rokova dostave, pokušaja i pravila za reklamacije
-- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – poveznica u e-poruci, provjera poštanskog broja, načini dostave uz potpis i bez njega, rizik na odabranom mjestu
+- [J&T Express Germany: Delivery Preferences](https://www.jtexpress.de/delivery-preference) – poveznica u e-poruci, provjera poštanskog broja, načini dostave uz potpis i bez njega, rizik na odabranom mjestu, manje ponovljenih i pogrešnih dostava, podaci samo za tu dostavu
 - [J&T Express Germany: Contact Us](https://www.jtexpress.de/contact) – telefon, radno vrijeme, chat, e-pošta, adresa ureda
 - [J&T Express Germany: Legal notice](https://www.jtexpress.de/legal-statement) – J&T Express Germany GmbH, Frankfurt na Majni
 - [J&T Express Germany: POD Privacy Policy](https://www.jtexpress.de/pod-policy) – fotografija dostave, šest mjeseci, reklamacije, kontakt za zaštitu podataka
-- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – franšizni partneri za dostavu i preuzimanje na posljednjoj milji
+- [J&T Express Germany: Become Our Partner](https://www.jtexpress.de/career) – franšizni partneri u cijeloj Njemačkoj za dostavu i preuzimanje na posljednjoj milji
 - [J&T Express Germany: About Us](https://www.jtexpress.de/about) – osnovan 2015. u Indoneziji, kotira u Hong Kongu
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – nazivi, oblik JTDE, poveznice za praćenje, rečenice sustava za praćenje pročitane na stvarnim paketima i njihove faze, ture dostave, načini dostave, što Peek izostavlja, stranica za pomoć
 - [Universal Parcel Scraper: zajednički upit J&T-ovih mreža](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – rečenice na engleskom, točna vremena skeniranja, bez mjesta, očekivanog dana i težine, izostavljena imena i brojevi telefona, 100 najnovijih skeniranja

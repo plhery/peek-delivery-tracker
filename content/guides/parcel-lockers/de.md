@@ -4,7 +4,7 @@ description: So funktionieren Packstation, Amazon Locker, DPD-Paketstation, Herm
 slug: paketautomat-abholcode
 picture: Eine Wand voller Paketfächer mit einer offenen Tür, ein Handy mit einem Code und Pip, der herausspringt.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Ein Paketautomat ist eine Abholstelle ohne Schalter: eine Wand aus Fächern, die sich mit einem Code oder der App des Paketdiensts öffnet. Die Sendungsverfolgung zeigt, wann dein Paket drin liegt, der Paketdienst schickt dir den Code, und ab dann hast du nur wenige Tage, bei Amazon, DPD und Hermes nur 3. Holst du es nicht rechtzeitig ab, geht es meist zurück an den Absender.
@@ -127,7 +127,7 @@ Nennt der Paketdienst die Abholstelle, zeigt Peek sie beim Paket unter „Abhols
 
 Peek benachrichtigt dich, sobald ein Paket abholbereit ist. Es gibt auch eine E-Mail, die aus bleibt, bis du sie einschaltest: eine, wenn ein Paket abholbereit ist, und eine, wenn es zugestellt ist.
 
-Peek zeigt und speichert den Code nicht, der das Fach öffnet. Den gibt es nur per SMS, E-Mail oder App des Paketdiensts.
+Peek zeigt und speichert den Code nicht, der das Fach öffnet. Den gibt es nur per SMS, E-Mail oder App des Paketdiensts. Fügst du in Peek einen 6-stelligen Code ein, ohne einen Paketdienst zu wählen, meldet Peek „Das sieht nach einem Abholcode aus“ und bittet dich stattdessen um die Sendungsnummer aus der Versandmail.
 
 Eine Amazon-Bestellung, die Amazon selbst liefert, siehst du nur in deinem Amazon-Konto: siehe [Amazon-Sendungsverfolgung](guide:amazon-orders). Eine DHL-Nummer kann zum Beispiel mit `JJD` beginnen; die übrigen Formen stehen unter [Sendungsnummer erkennen](guide:tracking-number-formats).
 

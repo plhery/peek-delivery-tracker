@@ -26,7 +26,7 @@ Spaces, dashes and lower case don't matter when you paste the number into Peek.
 
 ## SXW Express tracking statuses explained
 
-Of the steps Peek knows from SXW's tracker, seven are in English and three in Chinese. Here they are, each in its own words:
+Of the steps Peek knows from SXW's tracker, eight are in English and three in Chinese. Here they are, each in its own words:
 
 | SXW's tracker says | What it means for you | Peek shows |
 | --- | --- | --- |
@@ -40,6 +40,7 @@ Of the steps Peek knows from SXW's tracker, seven are in English and three in Ch
 | `Parcel departure in Shenzhen Sorting Centre.` | On its way out of that sorting centre. | "In transit" |
 | `Parcel departure in Transit Facility, Parcel Departure` | The parcel has left a transit facility and is on its way. | "In transit" |
 | `Customs declaration completed` | The export declaration in China is done, before the flight. This is customs in China, not in your country, and the parcel isn't held. | "In transit" |
+| `Parcel is leaving Airport, Parcel Leaving Port` | The flight is leaving the airport in China, after the export declaration. | "In transit" |
 
 **Chinese and English lines.** The Chinese lines come from SXW's own system, and most English ones from the shipping line that carries the parcel. So two lines can say nearly the same thing: `货物电子信息已经收到` and `Parcel Data Received` both mean the details are in, and `到达收货点` and `Parcel picked up` both mean someone has the parcel now.
 

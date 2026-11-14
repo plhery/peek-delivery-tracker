@@ -4,7 +4,7 @@ description: Jak działają Paczkomaty InPost, One Box, ORLEN Paczka, DPD i Pocz
 slug: paczkomat-kod-odbioru-terminy
 picture: Rząd skrytek automatu paczkowego z jednymi otwartymi drzwiczkami, telefon z kodem i Pip wychodzący ze skrytki.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 Automat paczkowy to punkt odbioru bez okienka: ściana skrytek, które otwierasz kodem albo w aplikacji przewoźnika. Śledzenie pokazuje, kiedy paczka jest w środku, przewoźnik wysyła ci kod odbioru, a od tej chwili masz mało czasu, często tylko dwa dni. Jeśli nie zdążysz, paczka wraca do nadawcy.
@@ -119,7 +119,7 @@ Jeśli przewoźnik podaje punkt, karta paczki pokazuje go jako Punkt odbioru, z 
 
 Powiadomienia informują cię, gdy paczka czeka na odbiór. Jest też opcjonalny mail, wyłączony, dopóki go nie włączysz: przychodzi raz, gdy paczka czeka na odbiór, i raz, gdy zostanie doręczona.
 
-Peek nie pokazuje i nie przechowuje kodu do otwarcia skrytki. Ten kod przychodzi tylko w aplikacji, SMS-ie albo mailu od przewoźnika.
+Peek nie pokazuje i nie przechowuje kodu do otwarcia skrytki. Ten kod przychodzi tylko w aplikacji, SMS-ie albo mailu od przewoźnika. Jeśli wkleisz do Peek 6-cyfrowy kod bez wybrania przewoźnika, Peek wyświetli «To wygląda na kod odbioru» i poprosi zamiast niego o numer przesyłki, który znajdziesz w mailu o wysyłce.
 
 Numer InPost ma zwykle 24 cyfry, a Allegro One zaczyna się od `A0` lub `AD`; pozostałe wzory: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
 

@@ -598,6 +598,7 @@
   "parcel.deliveryAnnounced": "Annunciato a {{carrier}}, non ancora ricevuto",
   "parcel.awaitingHandover": "Il mittente non l’ha ancora affidato a {{carrier}}. Il tracciamento partirà da quel momento.",
   "parcel.scheduledDelivery": "{{carrier}} aggiorna secondo un calendario fisso, senza firma. Se non è arrivato nulla, contatta il venditore.",
+  "parcel.returnUnderWay": "{{carrier}} lo scansiona ancora sulla via del ritorno, quindi Peek continua a seguirlo.",
   "parcel.writtenAhead": "Il sito di {{carrier}} riporta tappe scritte in anticipo, persino la consegna. Peek non può confermarle, quindi non le mostra. Cerca su quel sito il corriere che consegna nel tuo Paese e il suo numero di tracciamento; se non c’è, chiedi al venditore.",
   "parcel.writtenAheadShown": "Il sito di {{carrier}} riporta tappe scritte in anticipo, persino la consegna. Peek non può confermarle, quindi le mostra in grigio. Cerca su quel sito il corriere che consegna nel tuo Paese e il suo numero di tracciamento; se non c’è, chiedi al venditore.",
   "parcel.updated": "Aggiornato: {{date}}",

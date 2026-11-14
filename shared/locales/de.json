@@ -598,6 +598,7 @@
   "parcel.deliveryAnnounced": "Bei {{carrier}} angekündigt, noch nicht eingetroffen",
   "parcel.awaitingHandover": "Der Absender hat es noch nicht an {{carrier}} übergeben. Die Sendungsverfolgung beginnt mit der Übergabe.",
   "parcel.scheduledDelivery": "{{carrier}} aktualisiert nach festem Zeitplan, ohne Unterschrift. Ist nichts angekommen, frag beim Verkäufer nach.",
+  "parcel.returnUnderWay": "{{carrier}} scannt es auf dem Rückweg noch, also bleibt Peek dran.",
   "parcel.writtenAhead": "Die Website von {{carrier}} zeigt vorab eingetragene Schritte, sogar eine Zustellung. Peek kann sie nicht bestätigen und lässt sie deshalb weg. Such dort nach dem Paketdienst, der in deinem Land zustellt, und seiner Sendungsnummer; steht keiner da, frag den Verkäufer.",
   "parcel.writtenAheadShown": "Die Website von {{carrier}} zeigt vorab eingetragene Schritte, sogar eine Zustellung. Peek kann sie nicht bestätigen und zeigt sie deshalb ausgegraut. Such dort nach dem Paketdienst, der in deinem Land zustellt, und seiner Sendungsnummer; steht keiner da, frag den Verkäufer.",
   "parcel.updated": "Aktualisiert: {{date}}",

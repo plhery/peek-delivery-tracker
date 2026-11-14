@@ -440,6 +440,14 @@ describe('ParcelPage stages and troubles', () => {
     expect(within(card()).getByText('On its way back since today')).toBeVisible();
     expect(screen.getByRole('note')).toHaveTextContent('DHL is taking it back to the sender. Contact the sender about a refund or a new delivery.');
     expect(screen.queryByRole('button', { name: /Check now/ })).toBeNull();
+    expect(within(card()).queryByText(/still scanning it on its way back/)).toBeNull();
+  });
+
+  it('says a held return is still scanned on its way back, and stays returned with no alerts', async () => {
+    await shown(view([...journey, scan('returned', 3), scan('in_transit', 1)], { returnHeld: true }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Returned to sender' })).toBeVisible();
+    expect(within(card()).getByText('DHL is still scanning it on its way back, so Peek keeps following it.')).toBeVisible();
+    expect(screen.queryByRole('button', { name: /^Notify me/ })).toBeNull();
   });
 
   it('explains a parcel that went quiet, and links its carrier’s help', async () => {

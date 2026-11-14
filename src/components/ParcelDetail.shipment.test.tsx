@@ -126,6 +126,24 @@ describe('shipment details', () => {
     expect(screen.queryByText(note)).not.toBeInTheDocument();
   });
 
+  it('says a held return is still scanned on its way back, not a plain or archived one', () => {
+    const scan = (id: string, stage: 'in_transit' | 'returned', hoursAgo: number) => ({ id, parcelId: 'parcel', stage, description: `Scan at ${stage}`,
+      occurredAt: new Date(Date.now() - hoursAgo * 3_600_000).toISOString() });
+    // Returned, then carried back.
+    const events = [scan('out', 'in_transit', 50), scan('back', 'returned', 3), scan('trip', 'in_transit', 1)];
+    const note = 'Chronopost is still scanning it on its way back, so Peek keeps following it.';
+    let view = show({ carrier: 'chronopost', events, returnHeld: true });
+    expect(screen.getByText(note)).toHaveClass('detail__handover');
+    view.unmount();
+
+    view = show({ carrier: 'chronopost', events });
+    expect(screen.queryByText(note)).not.toBeInTheDocument();
+    view.unmount();
+
+    show({ carrier: 'chronopost', events, returnHeld: true, archivedAt: '2026-09-12T12:00:00Z' });
+    expect(screen.queryByText(note)).not.toBeInTheDocument();
+  });
+
   it('shows available facts and omits unknown or invalid measurements', () => {
     const view = show({ pickupPoint: 'Corner shop\n12 Main Street', receiverName: 'Alex', weightKg: 1.25, dimensionsText: '20 × 30 × 10 cm' });
     expect(screen.getByText('Pickup point')).toBeInTheDocument();

@@ -598,6 +598,7 @@
   "parcel.deliveryAnnounced": "{{carrier}} 已收到预报，尚未收到包裹",
   "parcel.awaitingHandover": "寄件人还没有把包裹交给 {{carrier}}，交寄后就会开始跟踪。",
   "parcel.scheduledDelivery": "{{carrier}} 按固定时间表更新，不显示签收人。如果没有收到，请联系卖家。",
+  "parcel.returnUnderWay": "{{carrier}} 仍在退回途中扫描这个包裹，所以 Peek 会继续跟踪。",
   "parcel.writtenAhead": "{{carrier}} 的网站会显示提前写好的物流节点，甚至包括签收。Peek 无法确认这些节点，因此不显示。请在该网站上查找在你所在国家派送的快递公司及其运单号；如果没有，请联系卖家。",
   "parcel.writtenAheadShown": "{{carrier}} 的网站会显示提前写好的物流节点，甚至包括签收。Peek 无法确认这些节点，因此以灰色显示。请在该网站上查找在你所在国家派送的快递公司及其运单号；如果没有，请联系卖家。",
   "parcel.updated": "更新时间：{{date}}",

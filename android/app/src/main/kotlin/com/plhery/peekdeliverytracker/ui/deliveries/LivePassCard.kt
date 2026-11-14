@@ -73,6 +73,7 @@ import com.plhery.peekdeliverytracker.core.deliveringCarrier
 import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
+import com.plhery.peekdeliverytracker.core.heldReturn
 import com.plhery.peekdeliverytracker.core.inputNeededPrompt
 import com.plhery.peekdeliverytracker.core.inputSuggestedPrompt
 import com.plhery.peekdeliverytracker.core.isArchived
@@ -409,6 +410,14 @@ internal fun LivePassCard(
             if (parcel.scheduledDelivery) {
                 Text(
                     localizer.text("parcel.scheduledDelivery", mapOf("carrier" to displayed)),
+                    color = secondary,
+                    style = type.caption.sfLines(),
+                )
+            }
+            // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
+            if (!parcel.isArchived && parcel.heldReturn) {
+                Text(
+                    localizer.text("parcel.returnUnderWay", mapOf("carrier" to displayed)),
                     color = secondary,
                     style = type.caption.sfLines(),
                 )

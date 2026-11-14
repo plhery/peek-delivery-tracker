@@ -1,4 +1,4 @@
-import type { Stage, TrackingEvent } from '../types';
+import type { Parcel, Stage, TrackingEvent } from '../types';
 
 /** The happy path, in order. Progress is measured against these. */
 export const CORE_STAGES: readonly Stage[] = [
@@ -164,6 +164,14 @@ export function awaitingHandover(events: readonly Pick<TrackingEvent, 'stage' | 
   if (!carrier.length || carrier.some((event) => event.stage !== 'registered')) return false;
   const first = Math.min(...carrier.map((event) => Date.parse(event.occurredAt) || now));
   return now - first >= HANDOVER_WAIT_MS;
+}
+
+/**
+ * Whether a parcel shown as returned is a held return (`returnHeld`): the carrier is still scanning it on its way
+ * back, and the server keeps checking it. Its pages say so under the return.
+ */
+export function heldReturn(parcel: Pick<Parcel, 'returnHeld'>, stage: Stage | null | undefined): boolean {
+  return stage === 'returned' && parcel.returnHeld === true;
 }
 
 /** Stages that move a parcel: notices (announced, posted), problem reports and a delivery itself do not. */

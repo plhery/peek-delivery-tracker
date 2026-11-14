@@ -1729,6 +1729,20 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
     }
 
+    func testHeldReturnMatchesWebApp() {
+        let id = UUID()
+        // Returned, then carried back: held while the server says so.
+        var returned = makeParcel(id: id, events: [event(id, .returned, "2026-08-08T12:00:00Z"), event(id, .inTransit, "2026-08-09T12:00:00Z")])
+        XCTAssertEqual(returned.currentStage, .returned)
+        XCTAssertFalse(returned.heldReturn)
+        returned.carrierData = CarrierData(returnHeld: true)
+        XCTAssertTrue(returned.heldReturn)
+        // A delivery round after the return ends it, whatever the flag still says.
+        var round = makeParcel(id: id, events: [event(id, .returned, "2026-08-08T12:00:00Z"), event(id, .outForDelivery, "2026-08-09T12:00:00Z")])
+        round.carrierData = CarrierData(returnHeld: true)
+        XCTAssertFalse(round.heldReturn)
+    }
+
     func testFiltersSearchCompactTrackingNumbers() {
         let parcel = makeParcel(trackingNumber: "99.34.123456.99999980")
         let result = ParcelOrganizer.visible(

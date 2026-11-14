@@ -60,6 +60,7 @@ import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.attention
+import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -381,6 +382,29 @@ class PassNotesTest {
         compose.waitForIdle()
         assertFalse(textExists(line))
         assertTrue(textExists(line.replace("so it leaves them out", "so it shows them greyed")))
+    }
+
+    @Test
+    fun aReturnTheCarrierStillScansOnItsWayBackIsSaidWhileTheServerHoldsIt() {
+        val lamp = DemoCards.parcel("Moon lamp")
+        // Returned, then carried back.
+        fun scan(name: String, stage: TrackingStage, hoursAgo: Long) = TrackingEvent(
+            id = UUID.nameUUIDFromBytes("${lamp.id}-$name".toByteArray()), packageId = lamp.id, stage = stage, description = name,
+            occurredAt = DateParser.isoString(CAPTURED.minus(Duration.ofHours(hoursAgo))),
+        )
+        val back = lamp.copy(trackingEvents = lamp.trackingEvents + scan("Returned", TrackingStage.Returned, 3) + scan("Sorted", TrackingStage.InTransit, 1))
+        val held = back.copy(carrierData = (back.carrierData ?: CarrierData()).copy(returnHeld = true))
+        val line = "${identities.displayName(lamp.displayedCarrier, AppLanguage.En)} is still scanning it on its way back, so Peek keeps following it."
+        pass(held)
+        assertTrue(textExists(line))
+
+        passParcel = back
+        compose.waitForIdle()
+        assertFalse(textExists(line))
+
+        passParcel = held.copy(archivedAt = archivedTime)
+        compose.waitForIdle()
+        assertFalse(textExists(line))
     }
 
     @Test

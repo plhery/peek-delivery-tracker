@@ -59663,7 +59663,7 @@
                   "boolean",
                   "null"
                 ],
-                "description": "The parcel is returned only because the scans after its return carry it back, over a summary in transit or at customs: it stays on the schedule, since a delivery round, a problem or a new label after the return ends the hold."
+                "description": "The parcel is returned only because the scans after its return carry it back, over a summary in transit, at customs or of a problem: it stays on the schedule, since a delivery round, a problem or a new label after the return ends the hold."
               }
             }
           },
@@ -61230,7 +61230,7 @@
               },
               "return_held": {
                 "type": "boolean",
-                "description": "The parcel is returned only because the scans after its return carry it back, over a summary in transit or at customs: it stays on the schedule, since a delivery round, a problem or a new label after the return ends the hold."
+                "description": "The parcel is returned only because the scans after its return carry it back, over a summary in transit, at customs or of a problem: it stays on the schedule, since a delivery round, a problem or a new label after the return ends the hold."
               }
             }
           },

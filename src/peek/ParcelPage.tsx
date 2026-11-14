@@ -22,7 +22,7 @@ import { useCardDialog } from '../lib/cardDialog';
 import { focusClickedButton } from '../lib/modal';
 import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced, writtenAheadNote } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
-import { awaitingHandover, currentEvent, isFinal, sortEventsDesc } from '../lib/stages';
+import { awaitingHandover, currentEvent, heldReturn, isFinal, sortEventsDesc } from '../lib/stages';
 import { useTabTitle } from '../lib/tabTitle';
 import { deviceAlert } from './alerts';
 import { linkNote, noteLink, useLinkNote } from './deviceNotes';
@@ -282,9 +282,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     deliveryNote,
     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
     // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+    // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
     checking ? null : awaitingHandover(parcel.events, now) ? t('parcel.awaitingHandover', { carrier: displayed.name })
       : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name })
-        : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name }) : null,
+        : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name })
+          : heldReturn(parcel, stage) ? t('parcel.returnUnderWay', { carrier: displayed.name }) : null,
     // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm.
     checking ? null : writtenAheadNote(parcel, t, locale),
   ].filter((note): note is string => !!note);

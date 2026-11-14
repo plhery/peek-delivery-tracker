@@ -126,6 +126,7 @@ import com.plhery.peekdeliverytracker.core.gift
 import com.plhery.peekdeliverytracker.core.giftDetail
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
+import com.plhery.peekdeliverytracker.core.heldReturn
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
@@ -1049,6 +1050,13 @@ private fun SharedParcelCard(
                     if (!gift && parcel.scheduledDelivery) {
                         Text(
                             localizer.text("parcel.scheduledDelivery", mapOf("carrier" to identities.displayName(parcel.displayedCarrier, language))),
+                            color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
+                        )
+                    }
+                    // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
+                    if (!gift && parcel.heldReturn) {
+                        Text(
+                            localizer.text("parcel.returnUnderWay", mapOf("carrier" to identities.displayName(parcel.displayedCarrier, language))),
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
                     }

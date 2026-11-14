@@ -480,6 +480,13 @@ struct ParcelDetailView: View {
                         .font(.caption).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
+                if !parcel.isArchived, parcel.heldReturn {
+                    Text(localizer.text("parcel.returnUnderWay",
+                                        ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
+                        .font(.caption).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
                 if let ahead = parcel.writtenAheadBy, let note = parcel.writtenAheadNoteKey {
                     Text(localizer.text(note,

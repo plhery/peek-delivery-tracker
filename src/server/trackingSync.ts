@@ -821,18 +821,32 @@ function waitsForPostcode(parcel: JsonObject, now: Date): boolean {
 }
 
 /**
- * A delivery only a provider reported, which the parcel's carrier did not show: checked
- * daily until `unconfirmed_delivery_until`, in case the carrier disputes it.
+ * The carrier summaries a return holds over while the scans after it only carry the parcel back: in transit, at
+ * customs, or a problem, which some carriers sum a return up as. A return the summary states ends the checks.
  */
+const RETURN_HOLDING_SUMMARIES: ReadonlySet<string> = new Set(['in_transit', 'customs', 'exception']);
+
+/** Scans newest first, those of one instant by delivery progress, then in their source's order (`tie_order`). */
+function newestScanFirst(left: JsonObject, right: JsonObject): number {
+  const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
+  return String(right.occurred_at).localeCompare(String(left.occurred_at))
+    || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage))
+    || tie(right) - tie(left);
+}
+
 /**
  * Whether the parcel is returned only because the scans after its return carry it back, over a summary in
- * transit or at customs (`return_held`): it stays on the schedule, since a delivery round, a problem or a new
- * label after the return ends the hold.
+ * transit, at customs or of a problem (`return_held`): it stays on the schedule, since a delivery round, a
+ * problem or a new label after the return ends the hold.
  */
 function returnHeld(parcel: JsonObject): boolean {
   return parcel.current_stage === 'returned' && isRecord(parcel.carrier_data) && parcel.carrier_data.return_held === true;
 }
 
+/**
+ * A delivery only a provider reported, which the parcel's carrier did not show: checked
+ * daily until `unconfirmed_delivery_until`, in case the carrier disputes it.
+ */
 function unconfirmedDelivery(parcel: JsonObject, now: Date): boolean {
   const until = isRecord(parcel.carrier_data) ? Date.parse(String(parcel.carrier_data.unconfirmed_delivery_until ?? '')) : Number.NaN;
   return parcel.current_stage === 'delivered' && until > now.getTime();
@@ -1193,6 +1207,10 @@ export function buildEvents(
   // summary's stage would be newer and give the parcel the summary's stage at every stage change, back and forth.
   const summary = String(result.last_status_text ?? '').trim();
   const summaryIsWordedSetback = rows.some((row) => summaryNamesWordedSetback(summary, reportedCurrent, row));
+  // A summary of a problem holds the return the scans carry the parcel back from (`RETURN_HOLDING_SUMMARIES`): a row
+  // dated at the check in its stage would be the newest scan, a problem after the return that ends the hold.
+  const summaryHoldsReturn = current === 'exception'
+    && currentScan(rows.filter((row) => row.stage !== 'pending').sort(newestScanFirst))?.stage === 'returned';
   if (
     observedAt
     && !Number.isNaN(observedAt.getTime())
@@ -1202,6 +1220,7 @@ export function buildEvents(
     && (current !== previousStage || newUpuMilestone)
     && !currentAlreadyTimed
     && !summaryIsWordedSetback
+    && !summaryHoldsReturn
   ) {
     const matchingEvent = scans.find((_, index) => stages[index] === current);
     const description = String(
@@ -2567,16 +2586,10 @@ export class TrackingSyncService {
       const normalized = await audit.step('normalize', () => {
         const normalizedEvents = buildEvents(parcel, result!, sourceCarrierId!, now);
         const normalizedReportedStage = resultStage(result!);
-        // Scans of one instant read by delivery progress, then in the carrier's order.
-        const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
         // A scan dated hours after the check that returned it sets no stage, then or later.
         const storedAhead = storedAheadOfCheck(storedEventIdentities(parcel));
         const newestEvents = normalizedEvents.filter((event) => !datedAfterCheck(event.occurred_at, 'UTC', now)
-          && !storedAhead.has(scanKey(isRecord(event.raw_data) ? event.raw_data.time : undefined, event.description))).sort(
-          (left, right) => String(right.occurred_at).localeCompare(String(left.occurred_at))
-            || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage))
-            || tie(right) - tie(left),
-        );
+          && !storedAhead.has(scanKey(isRecord(event.raw_data) ? event.raw_data.time : undefined, event.description))).sort(newestScanFirst);
         // A scan no rule reads yet is pending; it does not undo the progress
         // of the scans before it.
         const progressEvent = newestEvents.find((event) => event.stage !== 'pending');
@@ -2623,8 +2636,8 @@ export class TrackingSyncService {
           .map((row) => ({ ...row, raw_data: { time: row.time, observed_without_provider_timestamp: row.observed_without_provider_timestamp } }));
         const lead = earlierLead(fetched.earlierFollowUp ? earlierEvents : storedEarlier, partnerAt, normalizedSelectedStage, now, storedAhead);
         // A return holds while the scans after it only carry the parcel back, as the apps read it
-        // (`currentScan`): a summary in transit or at customs then brings no delivery.
-        const back = ['in_transit', 'customs'].includes(String(normalizedSelectedStage))
+        // (`currentScan`): a summary in transit, at customs or of a problem then brings no delivery.
+        const back = RETURN_HOLDING_SUMMARIES.has(String(normalizedSelectedStage))
           ? currentScan(newestEvents.filter((event) => event.stage !== 'pending')) : undefined;
         const returned = back?.stage === 'returned' ? back : undefined;
         const selected = lead ?? returned;

@@ -598,6 +598,7 @@
   "parcel.deliveryAnnounced": "Announced to {{carrier}}, not received yet",
   "parcel.awaitingHandover": "The sender hasn’t handed it to {{carrier}} yet. Tracking starts when they do.",
   "parcel.scheduledDelivery": "{{carrier}} updates on a fixed schedule, with no signature. If nothing came, ask the seller.",
+  "parcel.returnUnderWay": "{{carrier}} is still scanning it on its way back, so Peek keeps following it.",
   "parcel.writtenAhead": "{{carrier}}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.",
   "parcel.writtenAheadShown": "{{carrier}}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it shows them greyed. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.",
   "parcel.updated": "Updated: {{date}}",

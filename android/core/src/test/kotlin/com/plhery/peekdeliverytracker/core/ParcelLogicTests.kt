@@ -1419,6 +1419,25 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun heldReturnMatchesWebApp() {
+        val id = UUID.randomUUID()
+        // Returned, then carried back: held while the server says so.
+        val returned = makeParcel(
+            id,
+            events = listOf(event(id, TrackingStage.Returned, "2026-08-08T12:00:00Z"), event(id, TrackingStage.InTransit, "2026-08-09T12:00:00Z")),
+        )
+        assertEquals(TrackingStage.Returned, returned.currentStage)
+        assertFalse(returned.heldReturn)
+        assertTrue(returned.copy(carrierData = CarrierData(returnHeld = true)).heldReturn)
+        // A delivery round after the return ends it, whatever the flag still says.
+        val round = makeParcel(
+            id,
+            events = listOf(event(id, TrackingStage.Returned, "2026-08-08T12:00:00Z"), event(id, TrackingStage.OutForDelivery, "2026-08-09T12:00:00Z")),
+        )
+        assertFalse(round.copy(carrierData = CarrierData(returnHeld = true)).heldReturn)
+    }
+
+    @Test
     fun filtersSearchCompactTrackingNumbers() {
         val parcel = makeParcel(trackingNumber = "99.34.123456.99999980")
         val result = ParcelOrganizer.visible(

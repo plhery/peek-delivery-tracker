@@ -598,6 +598,7 @@
   "parcel.deliveryAnnounced": "Zgłoszona przewoźnikowi {{carrier}}, jeszcze nieprzyjęta",
   "parcel.awaitingHandover": "Nadawca nie przekazał jej jeszcze przewoźnikowi {{carrier}}. Śledzenie zacznie się po przekazaniu.",
   "parcel.scheduledDelivery": "Statusy przewoźnika {{carrier}} pojawiają się według stałego harmonogramu, bez podpisu. Jeśli nic nie dotarło, zapytaj sprzedawcę.",
+  "parcel.returnUnderWay": "Przewoźnik {{carrier}} wciąż skanuje ją w drodze powrotnej, więc Peek dalej ją śledzi.",
   "parcel.writtenAhead": "Na stronie przewoźnika {{carrier}} widać etapy zapisane z wyprzedzeniem, nawet doręczenie. Peek nie może ich potwierdzić, więc ich nie pokazuje. Poszukaj tam firmy, która doręcza w Twoim kraju, i jej numeru śledzenia; jeśli jej nie ma, zapytaj sprzedawcę.",
   "parcel.writtenAheadShown": "Na stronie przewoźnika {{carrier}} widać etapy zapisane z wyprzedzeniem, nawet doręczenie. Peek nie może ich potwierdzić, więc pokazuje je na szaro. Poszukaj tam firmy, która doręcza w Twoim kraju, i jej numeru śledzenia; jeśli jej nie ma, zapytaj sprzedawcę.",
   "parcel.updated": "Aktualizacja: {{date}}",

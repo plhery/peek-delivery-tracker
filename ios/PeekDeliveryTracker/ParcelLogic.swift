@@ -461,6 +461,12 @@ extension Parcel {
         return shown ? "parcel.writtenAheadShown" : "parcel.writtenAhead"
     }
 
+    /// Whether the parcel, shown as returned, is a held return (`return_held`): the carrier is still scanning it on its way
+    /// back, and the server keeps checking it. Its views say so under the return.
+    var heldReturn: Bool {
+        currentStage == .returned && carrierData?.returnHeld == true
+    }
+
     private static let expectedDayPattern = try? NSRegularExpression(pattern: "^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])")
 
     var expectedDayKey: String? {

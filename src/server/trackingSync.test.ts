@@ -2035,7 +2035,7 @@ describe('TrackingSyncService', () => {
         await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() });
         const values = client.applyTrackingSync.mock.calls.at(-1)![1] as JsonObject;
         parcel = { ...parcel, ...values };
-        return { parcel, values };
+        return { parcel, values, rows: [...store.rows.values()] };
       };
     };
     const back = { time: '2026-11-07T15:30:00+01:00', description: 'Centro di origine', stage: 'in_transit' };
@@ -2055,11 +2055,39 @@ describe('TrackingSyncService', () => {
       expect(after.values.anomalies ?? []).not.toContain('terminal_stage_regression');
     });
 
+    it('holds over a summary of a problem, until a delivery round, a problem or a new label after the return', async () => {
+      // A carrier that sums the return up as a problem.
+      type Scan = { time: string; description: string; stage: string };
+      const problem = (...newer: Scan[]): CarrierResult => ({
+        ...answer('exception', ...newer), status: 'exception', last_status_text: 'Destinatario sconosciuto' });
+      const round = { time: '2026-11-09T09:00:00+01:00', description: 'In consegna', stage: 'out_for_delivery' };
+      const damaged = { time: '2026-11-09T09:00:00+01:00', description: 'Pacco danneggiato', stage: 'exception' };
+      const label = { time: '2026-11-09T09:00:00+01:00', description: 'Spedizione registrata', stage: 'registered' };
+      // Held while the scans after the return carry the parcel back, or while the return is the newest scan. A new
+      // label right after the return starts over; one after the trip back is a notice, as the apps read it.
+      const cases: Array<[Scan[], Scan]> = [[[back], round], [[back], damaged], [[], label]];
+      for (const [trip, end] of cases) {
+        const sync = checks();
+        const held = await sync('2026-11-07T18:00:00Z', problem(...trip));
+        expect(held.parcel, end.stage).toMatchObject({ current_stage: 'returned', expected_delivery: null, carrier_data: { return_held: true } });
+        expect(isOpenedParcelSyncDue(held.parcel, new Date('2026-11-08T18:00:00Z'))).toBe(true);
+        // No row is dated at the check in the summary's stage: as the newest scan, it would end the hold.
+        expect(held.rows.map((row) => row.stage), end.stage).not.toContain('exception');
+        const after = await sync('2026-11-09T10:00:00Z', problem(end, ...trip));
+        expect(after.parcel, end.stage).toMatchObject({ current_stage: 'exception' });
+        expect(after.parcel.carrier_data).not.toHaveProperty('return_held');
+        expect(after.values.anomalies ?? []).not.toContain('terminal_stage_regression');
+      }
+    });
+
     it('leaves a return its carrier states off the schedule', async () => {
-      const { parcel } = await checks()('2026-11-07T18:00:00Z', answer('returned', back));
-      expect(parcel).toMatchObject({ current_stage: 'returned' });
-      expect(parcel.carrier_data).not.toHaveProperty('return_held');
-      expect(isOpenedParcelSyncDue(parcel, new Date('2026-11-08T18:00:00Z'))).toBe(false);
+      // DPD states a return in its exception status.
+      for (const status of ['in_transit', 'exception'] as const) {
+        const { parcel } = await checks()('2026-11-07T18:00:00Z', { ...answer('returned', back), status });
+        expect(parcel).toMatchObject({ current_stage: 'returned' });
+        expect(parcel.carrier_data).not.toHaveProperty('return_held');
+        expect(isOpenedParcelSyncDue(parcel, new Date('2026-11-08T18:00:00Z'))).toBe(false);
+      }
     });
   });
   });

@@ -548,6 +548,12 @@ private struct SharedParcelCard: View {
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(.secondary)
                     }
+                    // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
+                    if !gift, parcel.heldReturn {
+                        Text(localizer.text("parcel.returnUnderWay",
+                                            ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
                     // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
                     if !gift, let ahead = parcel.writtenAheadBy, let note = parcel.writtenAheadNoteKey {
                         Text(localizer.text(note,

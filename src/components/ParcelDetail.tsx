@@ -44,7 +44,7 @@ import {
   writtenAheadNote,
   providerRequestText,
 } from '../lib/parcelStatus';
-import { awaitingHandover, currentEvent } from '../lib/stages';
+import { awaitingHandover, currentEvent, heldReturn } from '../lib/stages';
 import { parcelAttention } from '../lib/parcelPriority';
 import { isBackSwipe, type TouchPoint } from '../lib/swipe';
 import { useCardDialog } from '../lib/cardDialog';
@@ -153,8 +153,10 @@ export function ParcelDetail({
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
   // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
   // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+  // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
   const stageNote = !parcel.archivedAt && awaitingHandover(parcel.events) ? t('parcel.awaitingHandover', { carrier: displayedCarrier.name })
-    : scheduledDelivery(parcel, current?.stage) ? t('parcel.scheduledDelivery', { carrier: displayedCarrier.name }) : null;
+    : scheduledDelivery(parcel, current?.stage) ? t('parcel.scheduledDelivery', { carrier: displayedCarrier.name })
+      : !parcel.archivedAt && heldReturn(parcel, current?.stage) ? t('parcel.returnUnderWay', { carrier: displayedCarrier.name }) : null;
   // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm.
   const writtenAheadLine = writtenAheadNote(parcel, t, locale);
   const writtenSteps = parcel.writtenAheadBy && parcel.writtenAheadEvents?.length

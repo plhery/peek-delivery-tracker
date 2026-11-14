@@ -4,7 +4,7 @@ description: Qui expédie ta commande Amazon, quel transporteur la livre, pourqu
 slug: suivi-commande-amazon
 picture: Un téléphone affiche l'avancée d'une commande, deux camionnettes se passent un colis, et Pip regarde.
 published: 2026-10-16
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Pour suivre une commande Amazon, connecte-toi à ton compte sur amazon.fr ou ouvre l'application Amazon, puis va dans Vos commandes : c'est là que tu vérifies l'état de tes commandes. La page du service client d'Amazon donne aussi accès au suivi de tes colis. Qui t'aide en cas de souci dépend de qui expédie. Amazon s'occupe de ses propres commandes et des articles « Expédié par Amazon », alors que pour un vendeur qui expédie lui-même, c'est d'abord lui que tu contactes.
@@ -33,7 +33,7 @@ Quand Amazon livre lui-même, c'est [Amazon Logistics](carrier:amazon-logistics)
 | Belgique | amazon.com.be | Amazon et ses partenaires de livraison locaux, [bpost](carrier:bpost) |
 | Suisse | amazon.de, amazon.fr | [La Poste suisse](carrier:swiss-post), qui livre avec son propre réseau |
 
-Sur amazon.fr, la page d'aide « Coordonnées des transporteurs » en cite davantage. Les principaux transporteurs qu'elle nomme pour la France métropolitaine sont Amazon, [Chronopost](carrier:chronopost), [Colis Privé](carrier:colis-prive), DHL France, dont les colis sont livrés par La Poste, [DPD France](carrier:dpd-fr), France Express (Geodis), [GLS](carrier:gls-fr), La Poste Colissimo, Mondial Relay, [Paack](carrier:paack), [UPS](carrier:ups) et JP Home (VIR et Agediss). Pour savoir lequel a ton colis, ouvre Vos commandes et choisis « Suivre le colis » : tu y trouves le nom du transporteur et le numéro de suivi. La même page donne le lien de suivi de chacun et, pour la plupart, un numéro de téléphone : en cas de problème de livraison, Amazon conseille de contacter directement le transporteur.
+Sur amazon.fr, la page d'aide « Coordonnées des transporteurs » en cite davantage. Les principaux transporteurs qu'elle nomme pour la France métropolitaine sont Amazon, [Chronopost](carrier:chronopost), [Colis Privé](carrier:colis-prive), DHL France, dont les colis sont livrés par La Poste, [DPD France](carrier:dpd-fr), France Express (Geodis), [GLS](carrier:gls-fr), La Poste Colissimo, Mondial Relay, [Paack](carrier:paack), [UPS](carrier:ups) et JP Home (VIR et Agediss). Pour savoir lequel a ton colis, ouvre Vos commandes et choisis « Suivre le colis » : tu y trouves le nom du transporteur et le numéro de suivi. La même page donne le lien de suivi de chacun et, pour la plupart, un numéro de téléphone : en cas de problème de livraison, Amazon conseille de contacter directement le transporteur. Au lieu de ton domicile, tu peux aussi choisir une consigne Amazon Locker en commandant : il y en avait plus de 4 500 en France début 2025, la plupart accessibles 24 h/24 et 7 j/7. Ça ne coûte rien de plus, mais tous les articles n'y ont pas droit, notamment à cause du poids ou de la taille du colis.
 
 Quand un vendeur expédie lui-même, son transporteur peut être l'un de ceux-ci ou un autre. Pour retrouver le numéro de suivi : [trouver ton numéro de suivi](guide:find-tracking-number).
 
@@ -106,10 +106,10 @@ Pour l'instant, amazon.fr prévient qu'à cause de retards, un jour de plus peut
 Dans l'Union européenne, le commerçant doit te livrer dans les 30 jours, sauf si vous avez convenu d'un autre délai, et c'est lui qui est responsable de la livraison. Procède dans cet ordre :
 
 :::steps
-- Vérifier la commande | Ouvre-la dans Vos commandes, sur amazon.fr ou dans l'application, pour voir son état et l'adresse de livraison choisie : domicile, Amazon Locker ou point de retrait.
+- Vérifier la commande | Ouvre-la dans Vos commandes, sur amazon.fr ou dans l'application, pour voir son état et l'adresse de livraison choisie : domicile, Amazon Locker ou point de retrait. Dans la plupart des consignes Amazon Locker, le casier s'ouvre avec le code à six chiffres de l'e-mail de confirmation de livraison, sinon avec un code-barres ou l'application ; tu peux transférer cet e-mail à un proche pour qu'il retire le colis. Tu as trois jours calendaires : passé la date indiquée dans l'e-mail, Amazon renvoie le colis et te rembourse.
 - Chercher autour | Regarde ta boîte aux lettres et l'endroit où tu reçois d'habitude tes colis, et demande aux voisins.
 - Contacter le vendeur | S'il a vendu et expédié l'article, écris-lui d'abord. C'est à lui de prouver que l'article a été livré ; sinon, il doit t'envoyer un article identique ou te rembourser.
-- Contacter Amazon | Pour une commande expédiée par Amazon, ou si le vendeur ne règle pas le problème : service client, par chat ou par téléphone de 6 h à minuit, 7 j/7, ou rappel sur demande.
+- Contacter Amazon | Pour une commande expédiée par Amazon, ou si le vendeur ne règle pas le problème : service client, par chat ou par téléphone de 6 h à minuit, 7 j/7, ou rappel sur demande ; à toute heure, un assistant virtuel répond par chat et peut passer la conversation à un conseiller.
 - Faire valoir tes droits | Pas de livraison dans les 30 jours ou à la date convenue ? Accorde au commerçant un délai supplémentaire raisonnable ; s'il ne livre toujours pas, tu peux mettre fin au contrat et être remboursé.
 :::
 
@@ -148,10 +148,11 @@ Le retour se demande dans Vos commandes, avec « Retourner ou remplacer des arti
 
 :::sources
 - [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – vérifier ses commandes dans son compte ou l'application, garantie A à Z en cas de retard ou d'article en mauvais état
-- [About Amazon France : Comment contacter le service client Amazon ?](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – suivi des colis sur la page du service client, chat et téléphone de 6 h à minuit, rappel
+- [About Amazon France : Comment contacter le service client Amazon ?](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – suivi des colis sur la page du service client, chat et téléphone de 6 h à minuit, rappel, assistant virtuel par chat 24 h/24 qui peut transférer à un conseiller (lu le 14 novembre 2026)
 - [About Amazon France : Expédié par Amazon](https://www.aboutamazon.fr/actualites/innovations/expedie-par-amazon) – stockage, emballage, expédition, service client et retours par Amazon, ventes sur Amazon ou via d'autres canaux de vente (2018)
 - [About Amazon France : Les clients Amazon mettent leurs livreurs à l'honneur](https://www.aboutamazon.fr/actualites/activite-logistique/les-clients-amazon-mettent-leurs-livreurs-a-lhonneur) – entreprises de livraison indépendantes, agences de livraison d'Amazon, groupe La Poste (décembre 2022)
 - [About Amazon France : Garantir des livraisons fiables et efficaces](https://www.aboutamazon.fr/actualites/activite-logistique/garantir-des-livraisons-fiables-et-efficaces-pendant-les-periodes-exceptionnelles) – Amazon Locker, points de retrait Mondial Relay, Relais Colis et La Poste
+- [About Amazon France : Comment utiliser Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – plus de 4 500 consignes en France, la plupart ouvertes 24 h/24, sans coût supplémentaire, poids et taille du colis, code à six chiffres, code-barres ou application, trois jours calendaires, renvoi et remboursement, e-mail transféré à un proche (février 2025, lu le 14 novembre 2026)
 - [About Amazon (Europe) : Amazon.com.be launches in Belgium](https://www.aboutamazon.eu/news/amazon-prime/amazon-com-be-launches-in-belgium) – amazon.com.be, service client en français, néerlandais ou anglais
 - [About Amazon (Europe) : Amazon announces plans to invest over €1 billion in Belgium](https://www.aboutamazon.eu/news/job-creation-and-investment/amazon-announces-plans-to-invest-over-1-billion-to-enhance-belgian-customer-experience) – bpost, partenaires de livraison locaux
 - [About Amazon Deutschland : Amazon in der Schweiz, alles, was du wissen musst](https://www.aboutamazon.de/news/company-news/aus-der-schweiz-bei-amazon-bestellen-das-musst-du-wissen) – amazon.de et amazon.fr depuis la Suisse, délais, TVA, droits de douane et frais de port compris

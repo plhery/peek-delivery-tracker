@@ -4,7 +4,7 @@ description: Tracking number formats for USPS, UPS, FedEx, DHL, Royal Mail, Evri
 slug: tracking-number-formats-by-carrier
 picture: Three tracking-number labels split into coloured parts, a magnifying glass on the country code CH, and a curious Pip.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 A tracking number's letters and length often tell you which carrier has your parcel or package. `1Z` followed by 16 letters and digits is UPS, 22 digits starting `92` to `95` is USPS, and 13 characters shaped like `RR000000005CH` (two letters, nine digits, two letters) usually belong to a national post, with the issuing country in the last two letters. Plain digits are the hard case: 10, 12 or 14 digits each fit several carriers, so the shipping email, or a tracker that checks the candidates, has the final word.
@@ -23,7 +23,7 @@ Four checks, in this order:
 - Try the candidates | Enter the number on each likely carrier's site. The one that shows scans for it has your parcel.
 :::
 
-If you'd rather skip the detective work, paste the number, a carrier link or the whole shipping email into [Peek](/): it picks out the number and follows it across more than 3,500 carriers.
+If you'd rather skip the detective work, paste the number, a carrier link or the whole shipping email into [Peek](/): it picks out the number and follows it across more than 3,500 carriers. When the shape fits several, Peek asks the likeliest, up to five at once, and five more if none of them has the parcel; meanwhile the carrier row shows "Checking tracking services…". Only an answer about a recent parcel counts, as carriers reuse old numbers in time. If one carrier knows the number, you see its name and "has this parcel". If several do, you see, say, "3 carriers know this number" and "choose yours": pick the one your shipping email names. If none knows it yet, you read "not found yet · Peek keeps checking".
 
 ## Tracking number formats by carrier
 
@@ -33,9 +33,9 @@ Here's what the carriers and the postal standard say about the numbers you're mo
 | --- | --- |
 | [UPS](carrier:ups) | `1Z` + 16 letters and digits, 18 characters in all, such as `1Z999AA10123456784`, an example that passes UPS's check digit |
 | [USPS](carrier:usps) | 22 digits starting `92`, `93`, `94` or `95`, printed in groups of four, such as `9212 3912 3456 7812 3456 70`; 26 digits on some labels; international items can carry the postal format ending `US` |
-| [FedEx](carrier:fedex) | 12 digits, or 15 for FedEx Ground, the last one a check digit: when it checks out, Peek puts FedEx first among the carriers that length fits, except for 15 digits starting `8880`, `30000`, `31000` or `36000`. In Peek's carrier data, 20 digits starting `6129` or `7489` is FedEx Ground Economy when its check digit passes |
-| DHL | [DHL Express](carrier:dhl-express): 10 digits, never letters. [DHL in Germany](carrier:dhl): 10 to 39 characters |
-| [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce) | the postal format ending `GB`. In Peek's carrier data, those starting `E` and any letter, `CP` or `GI` are Parcelforce's, and so is `PB` + two letters + 10 digits, 14 characters in all, such as `PBAB1234567890`; Royal Mail also has 16- or 21-character references made of digits and the letters A to F |
+| [FedEx](carrier:fedex) | 12 digits, or 15 for FedEx Ground, the last one a check digit: when it checks out, Peek puts FedEx first among the carriers that length fits, except for 15 digits starting `8880` (J&T Express Brazil's, which Peek names at once), `30000`, `31000` or `36000`. In Peek's carrier data, 20 digits starting `6129` or `7489` is FedEx Ground Economy when its check digit passes |
+| DHL | [DHL Express](carrier:dhl-express): 10 digits, never letters. [DHL in Germany](carrier:dhl): 10 to 39 characters. In Peek's carrier data, DHL also takes `JJD` + at least 8 letters and digits (`JJD` + 16 digits can be InPost too), `JD` + 18 digits, and many 18-digit numbers starting `34043`, the last a check digit, also with `00` in front; `JD01` + 16 digits and `JJD0146` + 14 digits are DHL Express |
+| [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce) | the postal format ending `GB`. In Peek's carrier data, those starting `E` and any letter, `CP` or `GI` are Parcelforce's, and so is `PB` + two letters + 10 digits, 14 characters in all, such as `PBAB1234567890`; Royal Mail also has 16- or 21-character references made of digits and the letters A to F, though 16 digits, an `F` and 4 digits are likely [FAN Courier International](carrier:fan-courier-international)'s |
 | [Evri](carrier:evri) | 16 characters (Evri's page says both "16 digit" and "16 character") |
 | DPD | 14 characters, says [DPD Germany](carrier:dpd-de); 14 digits, say DPD Austria and Belgium. [DPD UK](carrier:dpd-uk)'s help page gives no length and asks for your postcode too |
 | [XDP](carrier:xdp) | no published format; its numbers are `ZDB`, three letters and six digits, such as `ZDBABC123456`, sometimes with a leading `0`; its tracker asks for the delivery postcode too |
@@ -46,7 +46,7 @@ Here's what the carriers and the postal standard say about the numbers you're mo
 | [Australia Post](carrier:australia-post) | its help page gives no format and calls it a "tracking number, or article ID"; numbers in the postal format end `AU` |
 | [YunExpress](carrier:yunexpress) | `YT` + 16 digits (`YT` + 13 digits is YTO Express) |
 | [Yanwen](carrier:yanwen) | `BYS` + 9 digits, or two letters, nine digits and `YP` (often starting `UL` or `UK`); Yanwen publishes no example number. `YW`, three letters and 12 digits is Yanwen's own US delivery service |
-| [4PX](carrier:4px) | `4PX` + 13 digits + `CN`; 4PX publishes no example number, and its site takes 5 to 50 letters and digits. `LP` + 13 digits + `CN` is likely 4PX too |
+| [4PX](carrier:4px) | `4PX` + 13 digits + `CN`; 4PX publishes no example number, and its site takes 5 to 50 letters and digits. `LP` + 13 digits + `CN` is likely 4PX too, and 12 digits starting `311` put 4PX among the first carriers Peek asks |
 | [Cainiao](carrier:cainiao), for AliExpress | no published format; its site takes letters and digits only, and its own example is a postal number ending `HK`. `LP` + 14 digits is likely Cainiao, though not certain, while `CNG` + 14 digits is Cainiao |
 | [China Post](carrier:china-post), EMS | the postal format ending `CN`; international EMS numbers start with `E` |
 | Amazon | `TBA`, `TBC` or `TBM` + 12 digits in Peek's carrier data, covered below |
@@ -68,6 +68,7 @@ There's no single length. These are the lengths carriers give on their own pages
 | 14 digits | DPD in Austria and Belgium (DPD Germany says 14 characters); [La Poste](carrier:la-poste) in France, in Peek's carrier data |
 | 15 digits | FedEx Ground, in Peek's carrier data; Canada Post's Delivery Notice Card |
 | 16 digits | Canada Post online labels; Evri (16 characters) |
+| 18 digits | DHL, starting `34043`, in Peek's carrier data |
 | 22 digits | USPS; Portugal's CTT; Austrian Post; TIPSA |
 | 26 digits | USPS, on some labels |
 | 13, 14, 16 or 21 characters | Royal Mail (13, 16 or 21) and Parcelforce (13 or 14), in Peek's carrier data |
@@ -75,7 +76,7 @@ There's no single length. These are the lengths carriers give on their own pages
 
 ## Whose tracking number starts with TBA?
 
-Amazon. In the carrier data Peek uses, `TBA`, `TBC` or `TBM` followed by 12 digits means [Amazon Logistics](carrier:amazon-logistics), Amazon's own delivery service (or [Amazon Shipping](carrier:amazon-shipping) when Amazon carried the parcel for another shop). Amazon's own guide to tracking a package doesn't mention the number: it sends you to Your Orders, then Track Package.
+Amazon. In the carrier data Peek uses, `TBA`, `TBC` or `TBM` followed by 12 digits, or in Australia `TBAU` followed by 9, means [Amazon Logistics](carrier:amazon-logistics), Amazon's own delivery service (or [Amazon Shipping](carrier:amazon-shipping) when Amazon carried the parcel for another shop). Amazon's own guide to tracking a package doesn't mention the number: it sends you to Your Orders, then Track Package.
 
 ## The postal format: two letters, nine digits, two letters
 
@@ -141,7 +142,7 @@ A parcel that crosses a border often changes hands, and each company can print i
 
 Some trackers join the two numbers once the first carrier's data shows the new one: see [universal parcel tracking](guide:universal-tracker).
 
-A number that returns nothing isn't always mistyped. Portugal's CTT gives two reasons: the code exists only for customs, or another company delivers the item. If a valid number simply hasn't moved yet, read [why tracking stops updating](guide:tracking-not-updating).
+A number that returns nothing isn't always mistyped. Portugal's CTT gives two reasons: the code exists only for customs, or another company delivers the item. On peektracker.com, when no carrier answers for a `1Z` number of 17 characters, one short of UPS's, Peek says "This starts like a UPS tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." If a valid number simply hasn't moved yet, read [why tracking stops updating](guide:tracking-not-updating).
 
 :::sources
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – the postal format, its letters, check digit and country code
@@ -174,9 +175,10 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [CTT: Encontrar o código de envio](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – 22 digits, PT codes from abroad, codes that return nothing
 - [Mondial Relay Belgium: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 or 12 digits
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – Your Orders, then Track Package
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape, APC's 22-digit shape, Royal Mail's and Parcelforce's shapes, An Post's shape ending IE and La Poste's 14 digits
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape, APC's 22-digit shape, Royal Mail's and Parcelforce's shapes, An Post's shape ending IE and La Poste's 14 digits; TBAU + 9 digits (Amazon Logistics in Australia), 8880 (J&T Express Brazil), 16 digits, F and 4 digits (FAN Courier International), 311 (4PX), and DHL's JJD, JD, 34043 and 0034043 shapes (read 14 November 2026)
 - [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – owner code, U for freight containers, six-digit serial number and check digit
 - [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer](https://www.textainer.com/) – container leasing
-- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – a shipping container's number no carrier answered for: where the tracking number is, choosing the carrier
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – up to five carriers asked at once, five more if none has the parcel, only recent parcels count, your choice when several know the number; a shipping container's number no carrier answered for: where the tracking number is, choosing the carrier
+- [Peek: reading.ts](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – a number one character short of a carrier's shape, or one over it, that no carrier answered for
 :::

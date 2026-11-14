@@ -4,7 +4,7 @@ description: Who ships your Amazon order, which carrier has it, why the tracking
 slug: amazon-order-tracking
 picture: A phone showing an order's progress, two vans passing a parcel between them, and Pip watching.
 published: 2026-10-16
-updated: 2026-10-27
+updated: 2026-11-14
 ---
 
 To track an Amazon order, open Your Orders (Returns & Orders at the top right of the website, or the person icon in the app), pick the order and select Track Package. Who helps when it goes wrong depends on who shipped it. Amazon looks after its own orders and Fulfilled by Amazon ones, while a seller who ships its own orders handles their customer service.
@@ -52,12 +52,12 @@ These are the shapes Peek recognises as Amazon's, here with made-up digits:
 
 | Shape (made up) | What it is |
 | --- | --- |
-| `TBA123456789012` | Amazon: `TBA`, `TBC` or `TBM` and 12 digits |
+| `TBA123456789012` | Amazon: `TBA`, `TBC` or `TBM` and 12 digits; in Australia, `TBAU` and 9 digits |
 | `UK1234567890` | Amazon in Europe: a country code (`UK`, `GB`, `IE` and others) and 10 digits |
 | `123-1234567-1234567` | Your Amazon order number: 3, 7 and 7 digits. Not a tracking number |
 | Anything else | The carrier's own number, such as Royal Mail's or USPS's |
 
-The letters also tell Peek which Amazon store holds the order: amazon.ca for `TBC`, amazon.com.mx for `TBM`, and amazon.com for `TBA`, or amazon.ca when the parcel is going to Canada. A carrier's number works on that carrier's site, as in [tracking number formats](guide:tracking-number-formats). Not sure which you have? Type it here:
+The letters also tell Peek which Amazon store holds the order: amazon.ca for `TBC`, amazon.com.mx for `TBM`, amazon.com.au for `TBAU`, and amazon.com for `TBA`, or amazon.ca when the parcel is going to Canada. A carrier's number works on that carrier's site, as in [tracking number formats](guide:tracking-number-formats). Not sure which you have? Type it here:
 
 :::checker
 :::
@@ -146,5 +146,5 @@ It depends on the number. Paste it into [Peek](/):
 - [About Amazon Australia: 12 tips for shopping on Amazon.com.au](https://www.aboutamazon.com.au/news/retail/12-tips-to-get-the-most-out-of-shopping-on-amazon-com-au) – A-to-z Guarantee in Australia (2022)
 - [About Amazon Australia: How to return an order you can't cancel](https://www.aboutamazon.com.au/news/shopping/how-to-return-an-order-if-you-cant-cancel-it-on-amazon-australia) – two business days, then the A-to-z Guarantee (2023)
 - [About Amazon UK: Amazon CEO Andy Jassy's 2023 Letter to Shareholders](https://www.aboutamazon.co.uk/news/company-news/ceo-andy-jassys-2023-letter-to-shareholders) – Amazon Shipping, Amazon's last-mile delivery network for other businesses' parcels; Multi-Channel Fulfillment, sellers' stock shipped wherever customers ordered
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Amazon number shapes, stores per prefix, Evri's former name, what Peek checks
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Amazon number shapes, stores per prefix, Evri's former name, what Peek checks; `TBAU` and 9 digits for amazon.com.au (read 14 November 2026)
 :::

@@ -4,7 +4,7 @@ description: PX i 10 cyfr to Poczta Polska, 24 cyfry to zwykle InPost, 1Z to UPS
 slug: jaki-kurier-po-numerze-przesylki
 picture: Trzy etykiety z numerami przesyłek podzielonymi na kolorowe części, lupa na kodzie kraju CH i zaciekawiony Pip.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-14
 ---
 
 Litery i długość numeru przesyłki często zdradzają, który przewoźnik ma Twoją paczkę. `1Z` i 16 liter lub cyfr to UPS, `PX` i 10 cyfr to [Poczta Polska](carrier:poczta-polska), numer [InPost](carrier:inpost) ma zwykle 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty, która go nadała. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
@@ -25,7 +25,7 @@ Ten numer bywa różnie nazywany: numer przesyłki, numer paczki, numer listu pr
 
 Jeśli nie chcesz bawić się w detektywa, wklej numer, link od przewoźnika albo całego e-maila o wysyłce do [Peeka](/): wyłowi z niego numer i rozpozna przewoźnika spośród ponad 3500. Jak działają takie trackery i czym się różnią, wyjaśnia poradnik o [śledzeniu przesyłek wszystkich firm](guide:universal-tracker).
 
-Gdy kształt numeru pasuje do kilku przewoźników, narzędzie powyżej odpowiada „Możliwe, że to” i podaje kandydatów. W Peeku, gdy tylko wkleisz numer albo po wpisaniu go wyjdziesz z pola, w wierszu przewoźnika pojawia się „Sprawdzanie usług śledzenia…”, a Peek pyta najbardziej prawdopodobnych przewoźników, najwyżej pięciu naraz. Liczy się tylko odpowiedź dotycząca niedawnej przesyłki, bo przewoźnicy po pewnym czasie używają numerów ponownie. Jeśli numer zna tylko jeden przewoźnik, zobaczysz jego nazwę i „ma tę przesyłkę”. Jeśli kilku, zobaczysz na przykład „3 przewoźników zna ten numer” i „wybierz swojego”: wybierz tego, którego podaje wiadomość o wysyłce. Jeśli żaden go jeszcze nie zna, przeczytasz „jeszcze nie znaleziono · Peek sprawdza dalej”.
+Gdy kształt numeru pasuje do kilku przewoźników, narzędzie powyżej odpowiada „Możliwe, że to” i podaje kandydatów. W Peeku, gdy tylko wkleisz numer albo po wpisaniu go wyjdziesz z pola, w wierszu przewoźnika pojawia się „Sprawdzanie usług śledzenia…”, a Peek pyta najbardziej prawdopodobnych przewoźników, najwyżej pięciu naraz, a jeśli żaden z nich nie ma przesyłki, pięciu kolejnych. Liczy się tylko odpowiedź dotycząca niedawnej przesyłki, bo przewoźnicy po pewnym czasie używają numerów ponownie. Jeśli numer zna tylko jeden przewoźnik, zobaczysz jego nazwę i „ma tę przesyłkę”. Jeśli kilku, zobaczysz na przykład „3 przewoźników zna ten numer” i „wybierz swojego”: wybierz tego, którego podaje wiadomość o wysyłce. Jeśli żaden go jeszcze nie zna, przeczytasz „jeszcze nie znaleziono · Peek sprawdza dalej”.
 
 ## Jak wygląda numer przesyłki InPost, DPD, DHL i Poczty Polskiej
 
@@ -68,13 +68,14 @@ Nie ma jednej długości. Poniżej te, które przewoźnicy podają na własnych 
 | 12 znaków | Poczta Polska: `PX` i 10 cyfr |
 | 13 znaków | każda poczta w formacie pocztowym, np. `RR000000005CH`; ORLEN Paczka: 13 cyfr |
 | 14 znaków | DPD: w DPD Polska 13 cyfr i litera albo 14 cyfr od 13 |
+| 18 cyfr | DHL, od `34043`, w danych przewoźników, z których korzysta Peek |
 | 19 cyfr | Poczta Polska, od `00` |
 | 20 cyfr | Poczta Polska, z `5900773` po trzech pierwszych cyfrach |
 | 24 cyfry | InPost, w danych przewoźników, z których korzysta Peek |
 | 14 do 20 znaków | Hermes w Niemczech, litery i cyfry |
 | 10 do 39 znaków | DHL w Niemczech, zależnie od usługi |
 
-Dwa ostatnie wiersze przydadzą się przy zakupach z Niemiec: 14 cyfr może wtedy należeć do DPD, Hermesa albo DHL. Przy paczce z Ukrainy 14 cyfr, na przykład zaczynających się od 204, może być listem przewozowym [Nova Post](carrier:nova-poshta); paczki między Polską a Ukrainą wozi też [Meest](carrier:meest).
+Dwa ostatnie wiersze przydadzą się przy zakupach z Niemiec: 14 cyfr może wtedy należeć do DPD, Hermesa albo DHL. Przy paczce z Ukrainy 14 cyfr, na przykład zaczynających się od 204, może być listem przewozowym [Nova Post](carrier:nova-poshta); paczki między Polską a Ukrainą wozi też [Meest](carrier:meest). Numer z `ANS`, 13 cyframi i `UA` na końcu to według danych przewoźników, z których korzysta Peek, prawdopodobnie Meest.
 
 ## Numer zaczyna się od TBA albo PL: czy to Amazon?
 
@@ -140,7 +141,7 @@ Paczka, która przekracza granicę, często zmienia przewoźnika, a każda firma
 - **Allegro Delivery** to, jak pisze Allegro, program dostaw realizowany metodami [Allegro One](carrier:allegro-one) i z partnerami: ORLEN Paczką, DHL i DPD. Paczkę wiezie więc jedna z tych firm, ale numer od `AD` nadaje Allegro i to w Allegro go śledzisz. Przesyłek ORLEN Paczki z tego programu nie znajdziesz na jej stronie.
 - **AliExpress, tania wysyłka:** Cainiao pisze, że śledzenie kończy się po przekazaniu paczki lokalnemu przewoźnikowi, a o kontakt do niego możesz zapytać sprzedawcę. Więcej w poradniku o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
-Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród powodów braku informacji podaje też numer innej firmy i paczkę z zagranicy, która nie dotarła jeszcze do Polski. Co znaczy pusta strona u innych przewoźników, ile czekać na pierwszy skan i co robić, gdy paczka po prostu stoi w miejscu, przeczytasz w poradniku [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród powodów braku informacji podaje też numer innej firmy i paczkę z zagranicy, która nie dotarła jeszcze do Polski. Na peektracker.com, gdy żaden przewoźnik nie odpowiada na numer `PX` z 9 cyframi zamiast 10, Peek napisze „Zaczyna się jak numer śledzenia przewoźnika Poczta Polska, ale brakuje jednego znaku: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.” Co znaczy pusta strona u innych przewoźników, ile czekać na pierwszy skan i co robić, gdy paczka po prostu stoi w miejscu, przeczytasz w poradniku [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 :::sources
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – format pocztowy, jego litery, cyfra kontrolna, kod kraju, dodatkowy kod poczty docelowej
@@ -164,12 +165,13 @@ Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród p
 - [About Amazon Polska: Amazon.pl startuje w Polsce](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-pl-startuje-w-polsce) – śledzenie zamówień w aplikacji Amazon Shopping i w przeglądarce (2021)
 - [About Amazon Polska: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – własna sieć dostaw ostatniej mili Amazona w Europie
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery InPost (24 cyfry od `20`, `52`, `62`–`66`, `80` i `82`), numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `210`) w danych przewoźników, z których korzysta Peek
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery InPost (24 cyfry od `20`, `52`, `62`–`66`, `80` i `82`), numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `210`) w danych przewoźników, z których korzysta Peek; Meest (`ANS`, 13 cyfr i `UA`) i DHL (18 cyfr od `34043`), odczytane 14 listopada 2026
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – numery od YT
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – przy taniej wysyłce brak śledzenia po przekazaniu lokalnemu przewoźnikowi
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – numery Cainiao bez opisu formatu, tylko litery i cyfry
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – kodów kreskowych zaczynających się od U nie da się śledzić
-- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – jak Peek potwierdza przewoźnika niejednoznacznego numeru: najwyżej pięciu naraz, liczą się tylko niedawne przesyłki, wybór należy do Ciebie, gdy numer zna kilku; numer kontenera, na który nie odpowiada żaden przewoźnik: gdzie jest numer śledzenia, wybór przewoźnika
+- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – jak Peek potwierdza przewoźnika niejednoznacznego numeru: najwyżej pięciu naraz, pięciu kolejnych, gdy żaden z pierwszych nie ma przesyłki, liczą się tylko niedawne przesyłki, wybór należy do Ciebie, gdy numer zna kilku; numer kontenera, na który nie odpowiada żaden przewoźnik: gdzie jest numer śledzenia, wybór przewoźnika
+- [Peek: reading.ts (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – numer o jeden znak krótszy albo dłuższy niż numery przewoźnika, na który nie odpowiada żaden przewoźnik
 - [BIC: Container Identification Number (po angielsku)](https://www.bic-code.org/identification-number/) – kod właściciela, U dla kontenerów ładunkowych, sześciocyfrowy numer seryjny i cyfra kontrolna
 - [BIC: Registered BIC Code TEMU (po angielsku)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer (po angielsku)](https://www.textainer.com/) – wynajem kontenerów

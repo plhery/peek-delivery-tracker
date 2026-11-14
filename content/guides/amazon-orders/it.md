@@ -113,7 +113,7 @@ Dipende dal numero. Incollalo in [Peek](/):
 - **Il numero di un corriere** (Poste Italiane, BRT, GLS, SDA…) si traccia come qualsiasi altro pacco.
 - **Un numero Amazon**, o un link track.amazon: Peek interroga prima il tracciamento pubblico di Amazon. Se risponde, il pacco viaggia con [Amazon Shipping](carrier:amazon-shipping), il servizio con cui Amazon consegna i pacchi dei venditori che gestiscono da sé le spedizioni, o con il Multi-Channel Fulfillment, in cui Amazon spedisce la merce di un venditore ai suoi clienti, ovunque abbiano ordinato. Allora Peek lo segue da solo.
 - Altrimenti è Amazon Logistics che consegna un ordine Amazon, e Amazon lo mostra solo nel tuo account. Peek te lo dice e propone "Apri i miei ordini Amazon", che apre i tuoi ordini sul sito Amazon giusto per quel numero: amazon.it per `IT`. Peek non ti chiede mai le credenziali Amazon.
-- **Un numero d'ordine** riceve "Sembra un numero d'ordine Amazon". Se l'e-mail di spedizione contiene un numero di tracciamento, incolla quello.
+- **Un numero d'ordine** riceve "Sembra un numero d’ordine Amazon". Se l'e-mail di spedizione contiene un numero di tracciamento, incolla quello.
 
 :::sources
 - [About Amazon Italia: Come evitare le truffe basate sui furti di identità di Amazon](https://www.aboutamazon.it/notizie/company-news/come-evitare-le-truffe-basate-sui-furti-di-identita-di-amazon-in-questo-periodo-festivo) – storico degli ordini nell'account o nell'app, Garanzia dalla A alla Z se il prodotto non arriva o non corrisponde alla descrizione, numeri da non chiamare (2022)

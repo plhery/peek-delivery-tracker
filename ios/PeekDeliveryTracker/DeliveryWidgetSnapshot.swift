@@ -8,7 +8,8 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     let label: String
     let carrier: String
     let trackingNumber: String
-    let detail: String
+    /// When it is expected or arrived, as the app words it when it publishes; else its status.
+    var detail: String
     let isOutForDelivery: Bool
     /// When a delivered parcel arrived: the widget keeps it for a day after.
     var deliveredAt: Date? = nil
@@ -18,9 +19,48 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     var stage: DeliveryWidgetStage? = nil
     /// Whether the reader named the parcel: the list widget calls one without a name by its carrier.
     var named: Bool? = nil
+    /// The detail from each of the next midnights where its words change, which the app writes ahead: "tomorrow"
+    /// becomes "today" while the app stays closed. None from an app that didn't write them.
+    var later: [DeliveryWidgetWording]? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
+    }
+}
+
+/// A parcel's detail from a moment on.
+struct DeliveryWidgetWording: Codable, Equatable, Hashable, Sendable {
+    let from: Date
+    let detail: String
+}
+
+/// The days the widgets' words follow while the app stays closed: "today", "tomorrow" and "yesterday" change at
+/// midnight, and an estimate that has passed gives way to the status.
+enum DeliveryWidgetDays {
+    /// How many midnights ahead the app words the parcels.
+    static let ahead = 7
+
+    /// The local midnights after `now`.
+    static func midnights(after now: Date, count: Int = ahead, calendar: Calendar = .current) -> [Date] {
+        let today = calendar.startOfDay(for: now)
+        return (1...max(count, 1)).compactMap { calendar.date(byAdding: .day, value: $0, to: today).map(calendar.startOfDay(for:)) }
+    }
+
+    /// The detail's words at each of `midnights` where they change from those before.
+    static func later(than detail: String, at midnights: [Date], _ words: (Date) -> String) -> [DeliveryWidgetWording]? {
+        var last = detail
+        let changes = midnights.compactMap { midnight -> DeliveryWidgetWording? in
+            let next = words(midnight)
+            guard next != last else { return nil }
+            last = next
+            return DeliveryWidgetWording(from: midnight, detail: next)
+        }
+        return changes.isEmpty ? nil : changes
+    }
+
+    /// When the parcels' words change after `now`: a widget's timeline has an entry at each.
+    static func changes(in parcels: [DeliveryWidgetParcel], after now: Date) -> [Date] {
+        Set(parcels.flatMap { $0.later ?? [] }.map(\.from).filter { $0 > now }).sorted()
     }
 }
 
@@ -139,10 +179,11 @@ enum DeliveryWidgetSelection {
         return Array((onTheWay.filter(\.isOutForDelivery) + onTheWay.filter { !$0.isOutForDelivery } + recent).prefix(limit))
     }
 
-    /// What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
-    /// delivery beside the parcel after it, and any other parcel alone, across it. It turns through the first `limit`.
+    /// What a widget shows at a time, first page first, worded for `now`. A small one shows one parcel. A medium one
+    /// shows a parcel out for delivery beside the parcel after it, and any other parcel alone, across it. It turns
+    /// through the first `limit`.
     static func pages(of parcels: [DeliveryWidgetParcel], medium: Bool, now: Date = Date()) -> [[DeliveryWidgetParcel]] {
-        var rest = parcels.prefix(limit).filter { isShown($0, now: now) }[...]
+        var rest = parcels.prefix(limit).filter { isShown($0, now: now) }.map { $0.worded(at: now) }[...]
         var pages: [[DeliveryWidgetParcel]] = []
         while let first = rest.popFirst() {
             if medium, first.isOutForDelivery, let second = rest.popFirst() {
@@ -154,9 +195,9 @@ enum DeliveryWidgetSelection {
         return pages
     }
 
-    /// The parcels the list widget shows, in their order.
+    /// The parcels the list widget shows, in their order, worded for `now`.
     static func listed(_ parcels: [DeliveryWidgetParcel], now: Date = Date()) -> [DeliveryWidgetParcel] {
-        parcels.filter { isShown($0, now: now) }
+        parcels.filter { isShown($0, now: now) }.map { $0.worded(at: now) }
     }
 
     /// A delivered parcel leaves the widget a day after it arrived, whenever the app last published it.
@@ -207,6 +248,14 @@ extension String {
 }
 
 extension DeliveryWidgetParcel {
+    /// The parcel as the widgets word it at `date`: the detail the app wrote for the last midnight before it.
+    func worded(at date: Date) -> DeliveryWidgetParcel {
+        guard let wording = later?.last(where: { $0.from <= date }) else { return self }
+        var parcel = self
+        parcel.detail = wording.detail
+        return parcel
+    }
+
     /// The name the list widget gives the parcel: its own, else its carrier's.
     var listName: String { named == false ? carrier : label }
 

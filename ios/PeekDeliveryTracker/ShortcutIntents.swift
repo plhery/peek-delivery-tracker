@@ -44,11 +44,11 @@ struct NextDeliveryIntent: AppIntent {
 /// and how many more are on the way. Without the widget's parcels, it asks for Peek.
 @MainActor
 enum NextDeliveryAnswer {
-    static func text(snapshot: DeliveryWidgetSnapshot?, enabled: Bool, copy: ExtensionLocalizer) -> String {
+    static func text(snapshot: DeliveryWidgetSnapshot?, enabled: Bool, copy: ExtensionLocalizer, now: Date = Date()) -> String {
         guard enabled, let snapshot else { return copy.text("siri.openPeek") }
         // The widget also keeps the parcels delivered in the last day, after those on their way.
         let onTheWay = snapshot.parcels.filter { $0.deliveredAt == nil }
-        guard let next = onTheWay.first else { return copy.text("app.noneOnWay") }
+        guard let next = onTheWay.first?.worded(at: now) else { return copy.text("app.noneOnWay") }
         let more = onTheWay.count - 1
         let key: String
         if more == 0 {

@@ -1652,6 +1652,39 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(localizer.parcelCompletionDate(makeParcel(id: id, events: [event(id, .delivered, "invalid")]), now: now))
     }
 
+    /// The app last opened late on Thursday: on Friday the widgets and Siri say "today" for the parcel expected then and
+    /// "yesterday" for Thursday evening's delivery, and on Saturday the passed estimate gives way to the status.
+    @MainActor
+    func testTheWidgetsDaysFollowTheClockWhileTheAppStaysClosed() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let calendar = Calendar.current
+        let thursday = try XCTUnwrap(DateParser.deliveryDate("2026-11-12"))
+        let lateThursday = try XCTUnwrap(calendar.date(bySettingHour: 23, minute: 30, second: 0, of: thursday))
+        let friday = try XCTUnwrap(calendar.date(byAdding: .day, value: 1, to: thursday))
+        let saturday = try XCTUnwrap(calendar.date(byAdding: .day, value: 2, to: thursday))
+        let coming = UUID(), arrived = UUID()
+        var expected = makeParcel(id: coming, events: [event(coming, .inTransit, DateParser.isoString(thursday.addingTimeInterval(8 * 3_600)))])
+        expected.expectedDelivery = "2026-11-13"
+        let delivered = makeParcel(id: arrived, events: [event(arrived, .delivered, DateParser.isoString(thursday.addingTimeInterval(19.9 * 3_600)))])
+
+        let published = ParcelStore.widgetDeliveries(of: [expected, delivered], localizer: localizer, now: lateThursday)
+        XCTAssertEqual(published.map(\.detail), ["tomorrow", "today"])
+        XCTAssertEqual(DeliveryWidgetDays.changes(in: published, after: lateThursday), [friday, saturday])
+        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: lateThursday).map(\.detail), ["tomorrow", "today"])
+
+        let fridayMorning = friday.addingTimeInterval(8 * 3_600)
+        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: fridayMorning).map(\.detail), ["today", "yesterday"])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: published, medium: false, now: fridayMorning).map { $0.map(\.detail) },
+                       [["today"], ["yesterday"]])
+        let snapshot = DeliveryWidgetSnapshot(generatedAt: lateThursday, languageCode: "en", parcels: published)
+        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: snapshot, enabled: true, copy: ExtensionLocalizer(languageCode: "en"), now: fridayMorning)
+            .hasSuffix(": today."))
+
+        // A day later the estimate has passed, and the delivery has left the widgets.
+        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: saturday.addingTimeInterval(8 * 3_600)).map(\.detail), ["In transit"])
+    }
+
     @MainActor
     func testALinksCardSaysWhenAParcelArrivesAndAGiftNoMoreThanThat() {
         let localizer = Localizer()

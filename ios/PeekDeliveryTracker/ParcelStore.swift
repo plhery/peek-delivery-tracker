@@ -1134,7 +1134,9 @@ final class ParcelStore: ObservableObject {
     /// The parcels on their way, the most pressing first, as the widget picks from them and a Mac's menu bar lists them.
     var nextDeliveries: [DeliveryWidgetParcel] { Self.nextDeliveries(of: parcels, localizer: localizer) }
 
-    static func nextDeliveries(of parcels: [Parcel], localizer: Localizer) -> [DeliveryWidgetParcel] {
+    /// `midnights` are those the details are also worded for, as the widgets show them while the app stays closed.
+    static func nextDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date(),
+                               midnights: [Date] = []) -> [DeliveryWidgetParcel] {
         let ordered = ParcelOrganizer.visible(
             parcels,
             query: "",
@@ -1143,32 +1145,40 @@ final class ParcelStore: ObservableObject {
             sort: .priority
         )
         return ordered.map { parcel in
-            widgetParcel(parcel, localizer: localizer, detail: localizer.parcelDeliveryEstimate(parcel))
+            widgetParcel(parcel, localizer: localizer, now: now, midnights: midnights) { localizer.parcelDeliveryEstimate(parcel, now: $0) }
         }
     }
 
-    /// The widgets' parcels: those on their way, then those delivered within the last day, the latest first.
+    /// The widgets' parcels: those on their way, then those delivered within the last day, the latest first. Their
+    /// details are also worded for the next midnights.
     static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date()) -> [DeliveryWidgetParcel] {
+        let midnights = DeliveryWidgetDays.midnights(after: now)
         let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
             .compactMap { parcel -> DeliveryWidgetParcel? in
                 guard let arrived = parcel.currentEvent?.displayDate else { return nil }
-                var item = widgetParcel(parcel, localizer: localizer, detail: localizer.parcelCompletionDate(parcel, now: now))
+                var item = widgetParcel(parcel, localizer: localizer, now: now, midnights: midnights) {
+                    localizer.parcelCompletionDate(parcel, now: $0)
+                }
                 item.deliveredAt = arrived
                 return item
             }
         return DeliveryWidgetSelection.parcels(
-            onTheWay: nextDeliveries(of: parcels, localizer: localizer), delivered: delivered, now: now, limit: .max
+            onTheWay: nextDeliveries(of: parcels, localizer: localizer, now: now, midnights: midnights),
+            delivered: delivered, now: now, limit: .max
         )
     }
 
-    private static func widgetParcel(_ parcel: Parcel, localizer: Localizer, detail: String?) -> DeliveryWidgetParcel {
+    /// `detail` words when the parcel is expected or arrived, as of a moment.
+    private static func widgetParcel(_ parcel: Parcel, localizer: Localizer, now: Date, midnights: [Date],
+                                     detail: (Date) -> String?) -> DeliveryWidgetParcel {
         let status = localizer.parcelStatus(parcel)
-        return DeliveryWidgetParcel(
+        let first = detail(now) ?? status
+        var item = DeliveryWidgetParcel(
             id: parcel.id,
             label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
             carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
             trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
-            detail: detail ?? status,
+            detail: first,
             isOutForDelivery: parcel.currentStage == .outForDelivery,
             // As the list's rows mark it.
             stage: DeliveryWidgetStage(
@@ -1177,6 +1187,8 @@ final class ParcelStore: ObservableObject {
             ),
             named: parcel.label.nonEmpty != nil
         )
+        item.later = DeliveryWidgetDays.later(than: first, at: midnights) { detail($0) ?? status }
+        return item
     }
 
     private func publishDeliveryWidget() {

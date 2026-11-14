@@ -42,11 +42,11 @@ private struct DeliveryWidgetProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<DeliveryWidgetEntry>) -> Void) {
         let now = Date()
         let entry = currentEntry(context.family, at: now)
-        var entries = [entry]
-        // Turned to other parcels, the widget shows its first ones again once the turn's spell ends.
-        if !entry.isFirstPage, let ends = turn(context.family, at: now)?.ends {
-            entries.append(currentEntry(context.family, at: ends))
-        }
+        // The parcels' days change at midnight while the app stays closed. Turned to other parcels, the widget shows
+        // its first ones again once the turn's spell ends.
+        var changes = DeliveryWidgetDays.changes(in: entry.snapshot?.parcels ?? [], after: now)
+        if !entry.isFirstPage, let ends = turn(context.family, at: now)?.ends { changes.append(ends) }
+        let entries = [entry] + Set(changes).sorted().map { currentEntry(context.family, at: $0) }
         let refresh = Calendar.current.date(byAdding: .minute, value: 20, to: now) ?? now.addingTimeInterval(1_200)
         completion(Timeline(entries: entries, policy: .after(refresh)))
     }

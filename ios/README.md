@@ -200,6 +200,10 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   line open the list (`peekdeliverytracker://parcels`); in the medium and large ones, a row opens its
   parcel. The app publishes every parcel for it, and pictures only for the first few the other widget
   turns through.
+- **The widgets' days** follow the clock while the app stays closed. The app also words each parcel's day
+  for the next seven midnights where it changes, and both widgets and Siri's Next delivery read the words
+  for the moment they show: "tomorrow" reads "today" on the day, last night's delivery "yesterday", and a
+  passed estimate gives way to the status. Each widget's timeline has an entry at those midnights.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications
   has its switch, which saves the moment it is flipped. While it is on, the bell of a parcel
   still on its way opens that parcel's alerts, where notifications and the email are switched

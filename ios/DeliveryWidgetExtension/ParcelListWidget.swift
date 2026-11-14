@@ -29,8 +29,11 @@ private struct ParcelListProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<ParcelListEntry>) -> Void) {
         let now = Date()
+        let entry = currentEntry(at: now)
+        // The parcels' days change at midnight while the app stays closed.
+        let entries = [entry] + DeliveryWidgetDays.changes(in: entry.parcels, after: now).map { currentEntry(at: $0) }
         let refresh = Calendar.current.date(byAdding: .minute, value: 20, to: now) ?? now.addingTimeInterval(1_200)
-        completion(Timeline(entries: [currentEntry(at: now)], policy: .after(refresh)))
+        completion(Timeline(entries: entries, policy: .after(refresh)))
     }
 
     private func currentEntry(at date: Date) -> ParcelListEntry {

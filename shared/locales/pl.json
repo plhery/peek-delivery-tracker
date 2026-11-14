@@ -969,6 +969,7 @@
   "tracking.failure.input": "Do sprawdzenia tej przesyłki potrzeba więcej danych. Uzupełnij dane śledzenia lub sprawdź stronę przewoźnika.",
   "tracking.failure.maintenance": "Trwają prace techniczne w serwisie śledzenia przewoźnika. Spróbuj ponownie później.",
   "tracking.failure.notFound": "Przewoźnik nie znalazł jeszcze tej przesyłki. Sprawdź dane lub spróbuj ponownie później.",
+  "tracking.failure.noNewScans": "Przewoźnik nie ma na razie nowych skanów. Te już znalezione zostają, a Peek sprawdza dalej.",
   "tracking.failure.rateLimited": "Przewoźnik ogranicza liczbę zapytań. Poczekaj przed ponowną próbą.",
   "tracking.failure.placeholderNumber": "To nie wygląda na prawdziwy numer śledzenia. Sprawdź numer w zamówieniu i dodaj przesyłkę ponownie.",
   "tracking.failure.refusedNumber": "Ten przewoźnik nie wydaje takich numerów śledzenia. Sprawdź numer lub wybierz innego przewoźnika.",

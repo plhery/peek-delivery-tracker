@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { InputRequiredError, IndeterminateError, InvalidInputError, MaintenanceError, RateLimitedError, ChallengeError } from 'universal-parcel-scraper';
-import { deferredTrackingFailure, placeholderNumber, refusedNumberCode, trackingFailureCode } from './trackingFailure';
+import { answeredWithoutNews, deferredTrackingFailure, placeholderNumber, refusedNumberCode, trackingFailureCode } from './trackingFailure';
 
 describe('public tracking failure codes', () => {
   it('retains typed causes without leaking diagnostic text', () => {
@@ -24,6 +24,13 @@ describe('public tracking failure codes', () => {
       .toBe('carrier:several_parcels');
     expect(deferredTrackingFailure({ first: { kind: 'rate_limited' }, second: { kind: 'rate_limited' } }, 'heppner')).toBe('carrier:rate_limited');
     expect(deferredTrackingFailure({ first: { kind: 'rate_limited' }, second: { kind: 'transport' } }, 'heppner')).toBeNull();
+  });
+
+  it('tells sources that all answered without a scan from an outage', () => {
+    expect(answeredWithoutNews({ jrt: { kind: 'no_history' }, Ship24: { kind: 'not_found' } })).toBe(true);
+    expect(answeredWithoutNews({ jrt: { kind: 'no_history' }, ParcelsApp: { kind: 'transport' } })).toBe(false);
+    expect(answeredWithoutNews({ jrt: { kind: 'rate_limited' } })).toBe(false);
+    expect(answeredWithoutNews({})).toBe(false);
   });
 
   it('names a placeholder number, refused by every source alike, whatever the parcel\'s carrier', () => {

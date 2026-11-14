@@ -969,6 +969,7 @@
   "tracking.failure.input": "Servono altre informazioni per questa spedizione. Aggiorna i dati di tracciamento o consulta il sito del corriere.",
   "tracking.failure.maintenance": "Il servizio di tracciamento del corriere è in manutenzione. Riprova più tardi.",
   "tracking.failure.notFound": "Il corriere non ha ancora trovato questa spedizione. Controlla i dati o riprova più tardi.",
+  "tracking.failure.noNewScans": "Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.",
   "tracking.failure.rateLimited": "Il corriere sta limitando le richieste di tracciamento. Attendi prima di riprovare.",
   "tracking.failure.placeholderNumber": "Questo non sembra un vero numero di tracciamento. Controlla il numero nel tuo ordine e aggiungi di nuovo il pacco.",
   "tracking.failure.refusedNumber": "Questo corriere non emette numeri di tracciamento come questo. Controlla il numero o scegli un altro corriere.",

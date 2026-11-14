@@ -93,6 +93,18 @@ export function trackingFailureCode(error: unknown): string | null {
   return kind ? `carrier:${kind}` : null;
 }
 
+/** Every source answered, with no scan the parcel lacks: the scans already found are kept. */
+export const NO_NEW_SCANS = 'carrier:no_new_scans';
+
+/**
+ * Whether every source the router keeps a failure for answered without a scan: not found, or listed without
+ * history. Nothing failed, so a parcel with scans has no news rather than an outage.
+ */
+export function answeredWithoutNews(failures: Record<string, { kind: string }>): boolean {
+  const kinds = Object.values(failures).map(failure => failure?.kind);
+  return kinds.length > 0 && kinds.every(kind => kind === 'not_found' || kind === 'no_history');
+}
+
 /** Do not blame one provider when several failed for different reasons. */
 export function deferredTrackingFailure(
   failures: Record<string, { user_error?: string; kind: string }>,

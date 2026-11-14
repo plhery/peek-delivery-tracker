@@ -969,6 +969,7 @@
   "tracking.failure.input": "Für diese Sendung fehlen Angaben. Ergänze die Sendungsdaten oder prüfe die Website des Paketdienstes.",
   "tracking.failure.maintenance": "Die Sendungsverfolgung wird gewartet. Versuche es später erneut.",
   "tracking.failure.notFound": "Der Paketdienst hat diese Sendung noch nicht gefunden. Prüfe die Sendungsdaten oder versuche es später erneut.",
+  "tracking.failure.noNewScans": "Der Paketdienst hat gerade keine neuen Scans. Die bisherigen bleiben erhalten, und Peek prüft weiter.",
   "tracking.failure.rateLimited": "Der Paketdienst begrenzt die Abfragen. Warte bitte, bevor du es erneut versuchst.",
   "tracking.failure.placeholderNumber": "Das sieht nicht nach einer echten Sendungsnummer aus. Prüfe die Nummer in deiner Bestellung und füge das Paket erneut hinzu.",
   "tracking.failure.refusedNumber": "Dieser Paketdienst vergibt keine Sendungsnummern wie diese. Prüfe die Nummer oder wähle einen anderen Paketdienst.",

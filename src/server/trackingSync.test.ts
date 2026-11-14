@@ -40,7 +40,7 @@ import {
 import type { JsonObject } from './types';
 import * as observability from './observability';
 import * as metrics from './metrics';
-import { catalogRules, recognizers, routingFailure, routingState, RoutingDeferred, TrackingRouter, type RoutedResult } from './trackingRouting';
+import { catalogRules, recognizers, routingFailure, routingState, RoutingDeferred, TrackingRouter, type RoutedResult, type RoutingFailureKind } from './trackingRouting';
 import { TrackingSyncAudit, WorkerShutdown } from './trackingAudit';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
@@ -3892,6 +3892,38 @@ describe('TrackingSyncService', () => {
     expect(refresh).not.toHaveBeenCalled();
     await expect(check(1)).resolves.toEqual({ outcome: 'error', fetch: 'failed', health: 1 });
     expect(refresh).toHaveBeenCalledExactlyOnceWith('jd-logistics', 'jd-logistics', 'error');
+  });
+
+  it('says a parcel whose sources all answered without a scan has no news, and shows nothing wrong once a carrier it was handed to lists it', async () => {
+    const answered = {
+      jrt: { count: 3, kind: 'no_history' as const, user_error: 'carrier:indeterminate', retry_at: '2026-09-10T13:00:00Z' },
+      Ship24: { count: 1, kind: 'not_found' as const, user_error: 'carrier:not_found', retry_at: '2026-09-11T00:00:00Z' },
+      '17TRACK': { count: 3, kind: 'no_history' as const, user_error: 'carrier:indeterminate', retry_at: '2026-09-10T13:00:00Z' },
+    };
+    const check = async (parcel: JsonObject, failures: Record<string, { count: number; kind: RoutingFailureKind; retry_at: string; user_error?: string }>) => {
+      vi.spyOn(TrackingRouter.prototype, 'fetch')
+        .mockRejectedValue(new RoutingDeferred({ ...routingState(parcel), failures, consecutive_failures: 3 }, true, 3));
+      const client = fakeClient();
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn(), fetchUniversal: vi.fn() }, null,
+        () => new Date('2026-09-10T12:00:00Z'));
+      await service.syncPackage(parcel, { trigger: 'scheduled' });
+      const { sync_status, sync_error } = client.updatePackage.mock.lastCall![1];
+      return { sync_status, sync_error, outcome: client.completeSyncAttempt.mock.lastCall![1].outcome };
+    };
+    const parcel = { id: 'handed', carrier: 'jrt', tracking_number: 'TEST1234', current_stage: 'in_transit' };
+    // Nothing failed: the scans already found stay, and the parcel says no new one came.
+    await expect(check(parcel, answered)).resolves.toEqual({ sync_status: 'error', sync_error: 'carrier:no_new_scans', outcome: 'error' });
+    // The carrier it was handed to lists it without a scan yet: the card names that carrier, and nothing is wrong.
+    const probe = { at: '2026-09-10T11:50:00Z', origin_update: null, carrier: 'ups', number: '1ZTEST0000000000', listed: true, held: true };
+    await expect(check({ ...parcel, carrier_data: { delivery_probe: probe } }, answered))
+      .resolves.toEqual({ sync_status: 'ok', sync_error: null, outcome: 'waiting' });
+    // A source that could not be reached keeps the outage copy, listed or not.
+    const down = { ...answered, ParcelsApp: { count: 2, kind: 'transport' as const, retry_at: '2026-09-10T12:15:00Z' } };
+    await expect(check({ ...parcel, carrier_data: { delivery_probe: probe } }, down)).resolves.toMatchObject({ sync_status: 'error' });
+    expect((await check(parcel, down)).sync_error).not.toBe('carrier:no_new_scans');
+    // A parcel with no scan yet has none to keep.
+    const notFound = { ups: { count: 3, kind: 'not_found' as const, user_error: 'carrier:not_found', retry_at: '2026-09-10T13:00:00Z' } };
+    expect((await check({ ...parcel, carrier: 'ups', current_stage: 'pending' }, notFound)).sync_error).not.toBe('carrier:no_new_scans');
   });
 
   it('checks a parcel whose link was opened only if the scheduled run has not checked it meanwhile', async () => {

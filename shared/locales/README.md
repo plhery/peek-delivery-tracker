@@ -55,6 +55,7 @@ localized guidance for each. A number the carrier finds several parcels under is
 the parcel's own carrier does not issue is stored as `carrier:refused_number`, so the owner
 is asked to check the number or the carrier; a refused postcode stays `carrier:invalid_input`. A
 placeholder number, such as 123456789, is `carrier:placeholder_number`: the owner is asked to
-check the number and add the parcel again. Unknown
+check the number and add the parcel again. A parcel with scans whose every source answered
+without a new one is `carrier:no_new_scans`: the scans found are kept. Unknown
 codes get generic copy. Full diagnostics stay in the server audit. Only offer "edit input"
 when the carrier actually has editable inputs.

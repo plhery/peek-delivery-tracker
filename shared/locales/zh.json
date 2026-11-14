@@ -969,6 +969,7 @@
   "tracking.failure.input": "需要更多信息才能查询这个快件。请更新跟踪信息，或到快递公司官网查看。",
   "tracking.failure.maintenance": "快递公司的查询服务正在维护，请稍后再试。",
   "tracking.failure.notFound": "快递公司暂未找到这个快件。请检查跟踪信息，或稍后再试。",
+  "tracking.failure.noNewScans": "快递公司暂时没有新的扫描记录。已找到的记录会保留，Peek 会继续查询。",
   "tracking.failure.rateLimited": "快递公司正在限制查询次数，请稍等再试。",
   "tracking.failure.placeholderNumber": "这看起来不像真实的运单号。请核对订单中的单号，然后重新添加包裹。",
   "tracking.failure.refusedNumber": "这家快递公司不使用这种格式的运单号。请检查单号，或选择其他快递公司。",

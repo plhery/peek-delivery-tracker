@@ -321,6 +321,7 @@
     "transport": "tracking.failure.connection",
     "budget": "tracking.failure.connection",
     "not_found": "tracking.failure.notFound",
+    "no_new_scans": "tracking.failure.noNewScans",
     "schema": "detail.trackingUnavailable",
     "indeterminate": "detail.trackingUnavailable"
   }

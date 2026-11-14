@@ -969,6 +969,7 @@
   "tracking.failure.input": "Des informations sont nécessaires pour suivre ce colis. Complète les informations de suivi ou consulte le site du transporteur.",
   "tracking.failure.maintenance": "Le service de suivi du transporteur est en maintenance. Réessaie plus tard.",
   "tracking.failure.notFound": "Le transporteur ne trouve pas encore ce colis. Vérifie les informations de suivi ou réessaie plus tard.",
+  "tracking.failure.noNewScans": "Le transporteur n’a pas de nouveau scan pour l’instant. Ceux déjà trouvés sont gardés, et Peek continue de vérifier.",
   "tracking.failure.rateLimited": "Le transporteur limite les consultations du suivi. Patiente avant de réessayer.",
   "tracking.failure.placeholderNumber": "Ce numéro ne ressemble pas à un vrai numéro de suivi. Vérifie le numéro dans ta commande et ajoute à nouveau le colis.",
   "tracking.failure.refusedNumber": "Ce transporteur n’émet pas de numéros de suivi comme celui-ci. Vérifie le numéro ou choisis un autre transporteur.",

@@ -1,5 +1,5 @@
 import 'server-only';
-import { carrierErrorReason, deferredTrackingFailure, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
+import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NEW_SCANS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
 import { REFUSED_NUMBER } from '../lib/messages';
 import { CarrierError, carrierErrorKind, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
@@ -3039,9 +3039,14 @@ export class TrackingSyncService {
         const code = deferredTrackingFailure(error.routing.failures, carrierId);
         const refused = (previousStage === 'pending' && error.routing.failures[carrierId]?.user_error === 'carrier:invalid_input')
           || code === PLACEHOLDER_NUMBER;
-        const failing = error.stale || refused;
-        const syncError = failing ? await failureCopy(code, carrierId, parcel,
-          error.routing.failures[carrierId]?.wrong_number === true) ?? error.message : null;
+        // Every source answered, without a scan: a parcel with scans has no news, not an outage, and keeps them. Once
+        // a carrier it was handed to lists it, the card names that carrier, and nothing has failed at all.
+        const noNews = !refused && previousStage !== 'pending' && answeredWithoutNews(error.routing.failures);
+        const probe = lookupProbe ?? (isRecord(parcel.carrier_data) ? parcel.carrier_data.delivery_probe : undefined);
+        const listed = noNews && isRecord(probe) && probe.listed === true;
+        const failing = (error.stale && !listed) || refused;
+        const syncError = !failing ? null : noNews ? NO_NEW_SCANS : await failureCopy(code, carrierId, parcel,
+          error.routing.failures[carrierId]?.wrong_number === true) ?? error.message;
         const deferred = besideFailure({ last_synced_at: this.now().toISOString(),
           sync_status: failing ? 'error' : previousStage === 'pending' ? 'waiting' : 'ok',
           sync_error: syncError,

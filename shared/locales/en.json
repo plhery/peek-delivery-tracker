@@ -969,6 +969,7 @@
   "tracking.failure.input": "More information is needed to check this shipment. Update its tracking details or check the carrier’s website.",
   "tracking.failure.maintenance": "The carrier’s tracking service is under maintenance. Try again later.",
   "tracking.failure.notFound": "The carrier hasn’t found this shipment yet. Check the tracking details or try again later.",
+  "tracking.failure.noNewScans": "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking.",
   "tracking.failure.rateLimited": "The carrier is limiting tracking checks. Please wait before trying again.",
   "tracking.failure.placeholderNumber": "This doesn’t look like a real tracking number. Check the number in your order and add the parcel again.",
   "tracking.failure.refusedNumber": "This carrier doesn’t issue tracking numbers like this one. Check the number, or choose another carrier.",

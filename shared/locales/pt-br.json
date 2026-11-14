@@ -969,6 +969,7 @@
   "tracking.failure.input": "São necessárias mais informações para consultar esta encomenda. Atualize os dados de rastreamento ou consulte o site da transportadora.",
   "tracking.failure.maintenance": "O serviço de rastreamento da transportadora está em manutenção. Tente novamente mais tarde.",
   "tracking.failure.notFound": "A transportadora ainda não encontrou esta encomenda. Confira os dados de rastreamento ou tente novamente mais tarde.",
+  "tracking.failure.noNewScans": "A transportadora não tem movimentações novas por enquanto. As que já foram encontradas ficam salvas, e o Peek continua verificando.",
   "tracking.failure.rateLimited": "A transportadora está limitando as consultas. Aguarde antes de tentar novamente.",
   "tracking.failure.placeholderNumber": "Isto não parece um código de rastreamento real. Confira o código no seu pedido e adicione a encomenda de novo.",
   "tracking.failure.refusedNumber": "Esta transportadora não emite códigos de rastreamento como este. Confira o código ou escolha outra transportadora.",

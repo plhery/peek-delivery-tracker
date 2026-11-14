@@ -1313,7 +1313,8 @@ cannot prove that both the page and FedEx's API went through its route fails as
 `datacenter_unverified`. Datacenter retries that end in
 `outcome="transport"` usually mean the proxy's exit is down rather than FedEx refusing it.
 First browser attempts, including those after optional API credentials fail, remain
-`attempt="initial"`.
+`attempt="initial"`; with `FEDEX_FIRST_ROUTE=datacenter` as well they are `route="datacenter"`,
+so our own address sends FedEx nothing.
 
 `browser_network_bytes_total` counts encrypted proxy payload the worker proves for an
 attempt's lease, page dependencies included. The worker opens a tunnel only under the

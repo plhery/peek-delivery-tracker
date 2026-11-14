@@ -31,9 +31,12 @@ import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
+import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import java.time.Duration
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -45,7 +48,8 @@ import org.robolectric.annotation.GraphicsMode
  * Changing a parcel's carrier over the demo's list, with the iPhone's bars: automatic detection at the medium detent,
  * light and dark; Mondial Relay's postcode at the large detent with its country beside it, light and dark, its
  * countries' menu, and at the largest Android text size; DPD's optional postcode while the change is saved, once
- * it failed, and offered from those given before; and the picker pushed in the sheet. On synthetic parcels, with the
+ * it failed, and offered from those given before; the bar's Save and Cancel sharing it on the smallest phone in
+ * Russian; and the picker pushed in the sheet. On synthetic parcels, with the
  * catalog pinned ([pinnedIdentities]).
  */
 @RunWith(AndroidJUnit4::class)
@@ -74,15 +78,21 @@ class ChangeCarrierScreenshotTest {
     private val chair = parcel(2, "Garden chair", CarrierId.MondialRelay, "76434219")
 
     /** The demo's list as the captures show it, with the iPhone's bars, then the carrier editor on `parcel`. */
-    private fun show(parcel: Parcel, dark: Boolean = false, fontScale: Float = 1f, prepare: FakeDeliveries.() -> Unit = {}) {
-        source = FakeDeliveries(DemoCards.parcels() + lamp + chair, AuthenticationState.Demo).apply(prepare)
+    private fun show(
+        parcel: Parcel,
+        dark: Boolean = false,
+        fontScale: Float = 1f,
+        language: AppLanguage = AppLanguage.En,
+        prepare: FakeDeliveries.() -> Unit = {},
+    ) {
+        source = FakeDeliveries(DemoCards.parcels(language) + lamp + chair, AuthenticationState.Demo).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, dark = dark, source = source, identities = pinnedIdentities)
+                    RootHost(state = AuthenticationState.Demo, language = language, dark = dark, source = source, identities = pinnedIdentities)
                 }
             }
         }
@@ -175,6 +185,22 @@ class ChangeCarrierScreenshotTest {
         show(lamp) { givenPostcodes = listOf(GivenPostcode(CarrierId.Dpd, "8000")) }
         chooseDpd()
         compose.screenshot("change_carrier_offer_light")
+    }
+
+    @Test
+    @Config(qualifiers = "w360dp-h640dp-xhdpi")
+    fun onTheSmallestPhoneInRussianSaveAndCancelShareTheBar() {
+        show(lamp, language = AppLanguage.Ru)
+        // As drawn: the sheet at its medium detent stands a little smaller than the window.
+        fun bounds(tag: String) = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInRoot
+        val sheet = bounds(SHEET_PANEL)
+        val cancel = bounds(CHANGE_CARRIER_CANCEL)
+        val save = bounds(CHANGE_CARRIER_SAVE)
+        val point = sheet.width / 360f
+        assertEquals(20f, (cancel.left - sheet.left) / point, 1f)
+        assertEquals(20f, (sheet.right - save.right) / point, 1f)
+        assertTrue("Save $save runs over Cancel $cancel", (save.left - cancel.right) / point >= 8f - 0.5f)
+        compose.screenshot("change_carrier_small_phone_russian")
     }
 
     @Test

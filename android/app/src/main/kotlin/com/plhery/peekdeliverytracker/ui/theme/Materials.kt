@@ -772,8 +772,12 @@ private object GlassLensShader {
     }
 }
 
-/** Lays the face out past the glass's edge on each side by [GLASS_MARGIN], drawn from where the glass's edge is. */
+/**
+ * Lays the face out past the glass's edge on each side by [GLASS_MARGIN], drawn from where the glass's edge is. It takes
+ * the glass's size and asks for none, so it adds nothing to the glass's intrinsic size, which is asked unbounded.
+ */
 private fun Modifier.pastTheEdge(): Modifier = layout { measurable, constraints ->
+    if (!constraints.hasBoundedWidth || !constraints.hasBoundedHeight) return@layout layout(0, 0) {}
     val width = constraints.maxWidth
     val height = constraints.maxHeight
     val margin = glassMargin()

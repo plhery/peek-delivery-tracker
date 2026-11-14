@@ -164,7 +164,8 @@ internal fun SheetPage(
 
 /**
  * The form's bar: [title] in the middle, or as near it as keeps clear of the [confirmation] at its trailing end and of
- * the [cancellation] at its leading one, cut short where even that room is too little.
+ * the [cancellation] at its leading one, cut short where even that room is too little. Where the two buttons are too
+ * wide for the bar together, they share it ([barButtonRooms]) and leave the title none.
  */
 @Composable
 internal fun FormBar(
@@ -197,8 +198,14 @@ internal fun FormBar(
         val height = constraints.maxHeight
         val side = insets.barSide.roundToPx()
         val gap = TITLE_GAP.roundToPx()
-        val button = measurables[1].measure(loose)
-        val cancel = measurables.getOrNull(2)?.measure(loose)
+        val room = width - 2 * side
+        val canceller = measurables.getOrNull(2)
+        val (buttonRoom, cancelRoom) = when (canceller) {
+            null -> room to 0
+            else -> barButtonRooms(room - gap, measurables[1].maxIntrinsicWidth(height), canceller.maxIntrinsicWidth(height))
+        }
+        val button = measurables[1].measure(loose.copy(maxWidth = max(0, buttonRoom)))
+        val cancel = canceller?.measure(loose.copy(maxWidth = max(0, cancelRoom)))
         val buttonStart = width - side - button.width
         val titleStart = if (cancel == null) side else side + cancel.width + gap
         val titleEnd = buttonStart - gap
@@ -212,7 +219,25 @@ internal fun FormBar(
     }
 }
 
-/** A button of the bar on its glass capsule: the confirmation `.fontWeight(.semibold)`, greyed while it is off. */
+/**
+ * How wide the confirmation and the cancellation may be in a bar `room` wide between them: as wide as their words
+ * where both fit, else at least half each, one narrower than its half keeping its width and the other the rest, their
+ * words cut short, so neither runs over the other.
+ */
+internal fun barButtonRooms(room: Int, confirmation: Int, cancellation: Int): Pair<Int, Int> {
+    val half = room / 2
+    return when {
+        confirmation + cancellation <= room -> confirmation to cancellation
+        cancellation <= half -> room - cancellation to cancellation
+        confirmation <= half -> confirmation to room - confirmation
+        else -> room - half to half
+    }
+}
+
+/**
+ * A button of the bar on its glass capsule: the confirmation `.fontWeight(.semibold)`, greyed while it is off, its
+ * words cut short where the bar is too narrow for them.
+ */
 @Composable
 internal fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBackdrop, weight: FontWeight, enabled: Boolean, tag: String?) {
     val colors = PeekTheme.colors
@@ -227,7 +252,7 @@ internal fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBac
         ) {
             Text(
                 title, color = if (enabled) colors.label else colors.tertiaryLabel,
-                style = PeekTheme.type.style(IosTextStyle.Body, weight), maxLines = 1,
+                style = PeekTheme.type.style(IosTextStyle.Body, weight), maxLines = 1, overflow = TextOverflow.Ellipsis,
             )
         }
     }

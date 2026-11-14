@@ -3,7 +3,7 @@ title: FAN Courier tracking: AWB numbers, statuses and FANbox
 description: Track a FAN Courier parcel in Romania: where the AWB number comes from, what the tracking statuses mean, FANbox lockers, missed deliveries and contacts.
 slug: fan-courier-tracking
 published: 2026-10-13
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 FAN Courier (legally FAN Courier Express S.R.L.) is a Romanian courier founded in 1998, with more than 3,000 FANbox lockers across the country; it calls itself Romania's courier leader since 2006. Track a parcel with its AWB number on [fancourier.ro's AWB Tracking page](https://www.fancourier.ro/en/awb-track/), with the link in FAN's SMS or in the FAN Courier app. The AWB comes from the shop or person who sent the parcel.
@@ -99,7 +99,7 @@ Like any FAN parcel: with its AWB on FAN's tracker or in the app, or with FAN's 
 
 ### Is FAN Courier international?
 
-Yes: FAN offers road transport to most EU countries and air transport worldwide, and has offices in Moldova. Its conditions allow up to 12 working days within the EU and EEA, 14 elsewhere. If the sender shows as MEEST, the parcel most likely comes from China, FAN says: [Meest](carrier:meest) is a logistics firm that handles shipments, mainly from China.
+Yes: FAN offers road transport to most EU countries and air transport worldwide, and has offices in Moldova. Its conditions allow up to 12 working days within the EU and EEA, 14 elsewhere. An AWB of 16 digits, the letter `F` and 4 digits belongs to [FAN Courier International](carrier:fan-courier-international), FAN's cross-border service for online shops, tracked on fancourier.eu. If the sender shows as MEEST, the parcel most likely comes from China, FAN says: [Meest](carrier:meest) is a logistics firm that handles shipments, mainly from China.
 
 ### Does FAN Courier deliver on Saturday?
 

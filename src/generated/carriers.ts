@@ -1984,6 +1984,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Jet Express tracking: order number, delivery and contact",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-tracking",
+      "title": "FAN Courier International tracking: AWB and statuses",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "de": [
@@ -4452,6 +4460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet J&T Germania: numărul JTDE și statusurile",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-urmarire-awb",
+      "title": "Urmărire colet FAN Courier International: AWB și statusuri",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "bg": [

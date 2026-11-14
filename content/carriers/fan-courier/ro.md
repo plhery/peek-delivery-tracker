@@ -3,7 +3,7 @@ title: Urmărire colet FAN Courier: AWB, statusuri și FANbox
 description: Urmărește un colet FAN Courier: unde găsești AWB-ul, ce înseamnă statusurile, cât stă coletul în FANbox, ce faci dacă nu ești acasă și cum contactezi FAN.
 slug: fan-courier-urmarire-awb
 published: 2026-10-23
-updated: 2026-11-10
+updated: 2026-11-14
 ---
 
 FAN Courier se prezintă drept liderul curieratului din România încă din 2006 și a anunțat în iunie 2026 că a ajuns la 3.000 de lockere FANbox în toată țara. Coletul îl urmărești cu numărul AWB pe [pagina de tracking a FAN](https://www.fancourier.ro/awb-tracking/), din linkul primit prin SMS de la FAN sau în aplicația FAN Courier. AWB-ul ți-l dă cine a trimis coletul, de obicei magazinul online. Îl poți lipi și în căsuța de mai sus.
@@ -113,7 +113,7 @@ Doar dacă expeditorul a ales opțiunea „Livrare sâmbătă”, între 9:00 ș
 
 ### Cât durează o livrare FAN Courier?
 
-Cu serviciul Standard, între o zi și 3 zile lucrătoare de la preluarea coletului. În străinătate, condițiile FAN dau cel mult 12 zile lucrătoare în UE și SEE și 14 în afara lor.
+Cu serviciul Standard, între o zi și 3 zile lucrătoare de la preluarea coletului. În străinătate, condițiile FAN dau cel mult 12 zile lucrătoare în UE și SEE și 14 în afara lor. Un AWB de 16 cifre, litera `F` și 4 cifre e de la [FAN Courier International](carrier:fan-courier-international), serviciul transfrontalier al FAN pentru magazinele online, urmărit pe fancourier.eu.
 
 :::sources
 - [FAN Courier: Tracking AWB](https://www.fancourier.ro/awb-tracking/) – formularul cu AWB sau referință, rândul de status și cele patru etape, Predat la FANbox, AWB de retur și de redirecționare, mesajele pentru AWB negăsit și AWB doar înregistrat, alerta de fraudă

@@ -688,11 +688,20 @@ interface ScheduleContext {
   opened?: boolean;
 }
 
-function isScheduledTrackingSyncDue(
+function isScheduledTrackingSyncDue(parcel: JsonObject, now: Date, context: ScheduleContext = {}): boolean {
+  return scheduledSyncDue(parcel, now, context) !== false;
+}
+
+/**
+ * Whether the schedule checks the parcel now, and `last_mile` when that is the last mile's check
+ * of a parcel out for delivery, every 2 or 5 minutes (below), which a scheduled run starts before it
+ * gives way to a check queued ahead of it.
+ */
+function scheduledSyncDue(
   parcel: JsonObject,
   now: Date,
   { unwatched = false, oneOff = false, unfollowed = false, sharedAlerts = false, opened = false }: ScheduleContext = {},
-): boolean {
+): boolean | 'last_mile' {
   if (!isTrackingSyncDue(parcel, now)) return false;
   // Every source a scheduled check may ask still waits its turn: it would ask nobody. Opening one of
   // the parcel's links still checks it as before.
@@ -787,7 +796,8 @@ function isScheduledTrackingSyncDue(
   const windowStart = byTheMinute
     ? local.startOf('minute').minus({ minutes: local.minute % intervalMinutes })
     : hourStart;
-  return lastChecked < windowStart.toMillis();
+  if (!(lastChecked < windowStart.toMillis())) return false;
+  return byTheMinute && lastMile ? 'last_mile' : true;
 }
 
 /**
@@ -972,6 +982,8 @@ export interface SyncSummary extends JsonObject {
   gave_way?: true;
   /** A scheduled run checked every parcel it took and left lookups due beyond its share: it is queued again at once. */
   lookups_left?: true;
+  /** The out-for-delivery checks a scheduled run started while a check queued ahead of it waited. */
+  last_mile_first?: number;
 }
 
 /** Adds what a push dispatch did to the job's counts, each channel's sends beside the total. */
@@ -1708,9 +1720,10 @@ export class TrackingSyncService {
         this.client.listActivePackages().then(async (active) => ({ active, shared: await this.sharedAlertPackages(active, context.signal) })),
         this.readOneOffPackages(now, context.signal),
       ]);
-      const due = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => isScheduledTrackingSyncDue(parcel, at, {
+      const schedule = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => scheduledSyncDue(parcel, at, {
         unwatched: unwatched.has(String(parcel.id)), oneOff, unfollowed, sharedAlerts: shared.has(String(parcel.id)),
       });
+      const due = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => schedule(oneOff, unfollowed)(parcel, at) !== false;
       const owned = active.filter((parcel) => due(false)(parcel, now));
       // How long each parcel the run may take has been due, by id: the run checks the longest due
       // first, accounts' and lookups' alike, so a parcel a run that stopped for another check left
@@ -1726,6 +1739,11 @@ export class TrackingSyncService {
         late, context.signal);
       const parcels = urgentFirst([...latestFirst([...shares.filter((parcel) => !rechecks.has(parcel)), ...oneOff.parcels], late),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)], now);
+      // The run's out-for-delivery checks, due on the last mile's 2 or 5 minutes: a check queued ahead of
+      // the run waits for them. A lookup nobody follows any more is never on the last mile.
+      const followed = new Set(lookupLists.followed.map((parcel) => String(parcel.id)));
+      const lastMile = new Set([...shares.filter((parcel) => schedule(false)(parcel, now) === 'last_mile'),
+        ...oneOff.parcels.filter((parcel) => followed.has(String(parcel.id)) && schedule(true)(parcel, now) === 'last_mile')]);
       // Copies of one number, in several accounts or followed without one, share their lookups, with
       // those of the run that stopped for another check before this one, while its time lasts.
       const lookups = new SharedLookups(parcels, earlier && performance.now() < earlier.until ? earlier : undefined);
@@ -1785,10 +1803,11 @@ export class TrackingSyncService {
             break;
           }
           // An account's or a lookup's check queued meanwhile, such as a refresh, a new lookup or a link opened,
-          // goes ahead of the run: once the run has checked a parcel, it starts no more and, once the checks
-          // under way end, is queued again behind it (background.ts), with this run's lookups.
+          // goes ahead of the run: once the run has checked a parcel, it starts only its out-for-delivery
+          // checks; once it has started those, it starts no more and, once the checks under way end, is
+          // queued again behind it (background.ts), with this run's lookups.
           const ahead = summary.checked > 0 ? await this.jobQueuedAhead() : null;
-          if (ahead !== null) {
+          if (ahead !== null && !waiting.some((parcel) => lastMile.has(parcel))) {
             const to = ahead <= LOOKUP_SYNC_PRIORITY ? 'lookup' : 'account';
             logOperationalEvent('scheduled_sync_gave_way', { checked: summary.checked, left: waiting.length, to });
             recordScheduledRunGaveWay(to);
@@ -1797,12 +1816,14 @@ export class TrackingSyncService {
             stopped = true;
             break;
           }
-          // The first parcel in the run's order that holds nothing a check under way holds; a recheck
-          // only once every other parcel has started.
+          // The first parcel in the run's order that holds nothing a check under way holds, an
+          // out-for-delivery one while a check waits ahead of the run; a recheck only once every other
+          // parcel has started.
           const others = waiting.some((parcel) => !rechecks.has(parcel));
-          const next = waiting.findIndex((parcel) => !(others && rechecks.has(parcel))
-            && keys.get(parcel)!.every((key) => !held.has(key)));
+          const next = waiting.findIndex((parcel) => (ahead === null || lastMile.has(parcel))
+            && !(others && rechecks.has(parcel)) && keys.get(parcel)!.every((key) => !held.has(key)));
           if (next < 0) break;
+          if (ahead !== null) summary.last_mile_first = (summary.last_mile_first ?? 0) + 1;
           start(waiting.splice(next, 1)[0]);
         }
         if (running.size === 0) break;

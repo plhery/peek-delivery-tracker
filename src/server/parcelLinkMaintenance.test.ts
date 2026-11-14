@@ -148,17 +148,55 @@ it('rewrites the usage counts after each scheduled sync, and finishes the sync w
 
 it('leaves the upkeep to a scheduled run that gave way, and queues that run again behind the check it gave way to', async () => {
   const { client, finish, redetections, state, sync, usage, worker } = scheduledRun();
-  sync.mockResolvedValue({ ...emptySyncSummary(), checked: 1, gave_way: true });
-  const forget = vi.spyOn(client, 'forgetExpiredParcelLinks');
+  vi.spyOn(client, 'publicLookupUsageSummary').mockResolvedValue({ buckets: 0, p50: 0, p90: 0, max: 0, detection: { buckets: 0, p50: 0, p90: 0, max: 0 } });
+  const forget = vi.spyOn(client, 'forgetExpiredParcelLinks').mockResolvedValue({ links: 0, packages: 0, stopped: 0, alerts: 0 });
+  sync.mockResolvedValueOnce(emptySyncSummary()).mockResolvedValue({ ...emptySyncSummary(), checked: 1, gave_way: true });
+  vi.mocked(client.claimSyncJob).mockReset()
+    .mockResolvedValueOnce({ id: 'ended', kind: 'scheduled' }).mockResolvedValueOnce({ id: 'job', kind: 'scheduled' })
+    .mockResolvedValue(null);
   const queue = vi.spyOn(client, 'enqueueSyncJob').mockResolvedValue({ row: {}, queued: true });
   worker.start();
   await vi.advanceTimersByTimeAsync(1);
   worker.stop();
-  expect(finish).toHaveBeenCalledExactlyOnceWith('job', worker.workerId, { result: expect.objectContaining({ checked: 1, gave_way: true }) });
+  // The run before did the upkeep; the one that gave way leaves it.
+  expect(finish.mock.calls).toEqual([
+    ['ended', worker.workerId, { result: expect.objectContaining({ upkeep: true }) }],
+    ['job', worker.workerId, { result: expect.objectContaining({ checked: 1, gave_way: true }) }],
+  ]);
+  expect(finish.mock.calls[1][2].result).not.toHaveProperty('upkeep');
   expect(queue).toHaveBeenCalledExactlyOnceWith({ scheduled: true });
-  expect(finish.mock.invocationCallOrder[0]).toBeLessThan(queue.mock.invocationCallOrder[0]);
-  for (const upkeep of [redetections, forget, usage, client.archiveDeliveredBefore]) expect(upkeep).not.toHaveBeenCalled();
+  expect(finish.mock.invocationCallOrder[1]).toBeLessThan(queue.mock.invocationCallOrder[0]);
+  for (const upkeep of [redetections, forget, usage, client.archiveDeliveredBefore]) expect(upkeep).toHaveBeenCalledOnce();
   expect(state.lastScheduledSync).not.toBeNull();
+});
+
+it('does the upkeep on a scheduled run that gave way once the last is 10 minutes old, and on a worker\'s first', async () => {
+  const { client, finish, sync, usage, worker } = scheduledRun();
+  vi.spyOn(client, 'forgetExpiredParcelLinks').mockResolvedValue({ links: 0, packages: 0, stopped: 0, alerts: 0 });
+  vi.spyOn(client, 'publicLookupUsageSummary').mockResolvedValue({ buckets: 0, p50: 0, p90: 0, max: 0, detection: { buckets: 0, p50: 0, p90: 0, max: 0 } });
+  sync.mockResolvedValue({ ...emptySyncSummary(), checked: 1, gave_way: true });
+  const claim = vi.mocked(client.claimSyncJob).mockReset()
+    .mockResolvedValueOnce({ id: 'first', kind: 'scheduled' }).mockResolvedValueOnce({ id: 'next', kind: 'scheduled' })
+    .mockResolvedValue(null);
+  vi.spyOn(client, 'enqueueSyncJob').mockResolvedValue({ row: {}, queued: true });
+  const runAfter = async (ms: number, id: string) => {
+    vi.setSystemTime(Date.now() + ms);
+    claim.mockResolvedValueOnce({ id, kind: 'scheduled' });
+    worker.wake();
+    await vi.advanceTimersByTimeAsync(1);
+  };
+  const upkept = () => finish.mock.calls.filter(([, , values]) => values?.result?.upkeep === true).map(([jobId]) => jobId);
+  worker.start();
+  await vi.advanceTimersByTimeAsync(1);
+  // The worker's first run does it, though it gave way; the next, right behind, leaves it.
+  expect(upkept()).toEqual(['first']);
+  await runAfter(10 * 60_000 - 1_000, 'early');
+  expect(upkept()).toEqual(['first']);
+  await runAfter(1_000, 'due');
+  worker.stop();
+  expect(finish.mock.calls.map(([jobId]) => jobId)).toEqual(['first', 'next', 'early', 'due']);
+  expect(upkept()).toEqual(['first', 'due']);
+  expect(usage).toHaveBeenCalledTimes(2);
 });
 
 it('queues a scheduled run that left lookups due again at once, and does the upkeep once in 2 minutes', async () => {

@@ -64,6 +64,13 @@ function initialState(): BackgroundState {
 
 /** Minutes between scheduled runs, around the clock. */
 const RUN_MINUTES = 2;
+/**
+ * A scheduled run that gives way to a queued check still does its upkeep once the last is this old:
+ * most runs give way while lookups are opened and added, and the upkeep would otherwise wait for one
+ * that does not, an hour or more at busy times. It holds the check it gave way to a second or two,
+ * a few times an hour; nothing it does needs a closer pace.
+ */
+const GAVE_WAY_UPKEEP_MINUTES = 10;
 
 /** When the schedule's current window opened: the last even minute. */
 export function syncWindowStart(now = new Date()): Date {
@@ -314,6 +321,8 @@ export class SyncJobWorker {
     try {
       let summary: SyncSummary;
       let archived = 0;
+      // Whether a scheduled run did its upkeep.
+      let upkeep = false;
       if (kind === 'package') {
         const packageId = String(job.package_id ?? '');
         if (!packageId) throw new Error('Package no longer exists');
@@ -338,20 +347,23 @@ export class SyncJobWorker {
         signal.throwIfAborted();
         summary = await this.service.sync({ ...context, trigger: 'scheduled' });
         signal.throwIfAborted();
-        // A run that gave way to an account's or a lookup's check leaves this to the run queued again
-        // behind it. So does one queued again at once for the lookups it left, within a window of the
-        // runs every 2 minutes: the upkeep keeps their pace.
-        if (!summary.gave_way && !(summary.lookups_left && Date.now() - this.#upkeptAt < RUN_MINUTES * 60_000)) {
+        // A run that gave way to an account's or a lookup's check leaves this to the runs behind it, unless
+        // the last upkeep is GAVE_WAY_UPKEEP_MINUTES old. One queued again at once for the lookups it left
+        // does it at most once in a window of the runs every 2 minutes: the upkeep keeps their pace.
+        const sinceUpkeep = Date.now() - this.#upkeptAt;
+        if (summary.gave_way ? sinceUpkeep >= GAVE_WAY_UPKEEP_MINUTES * 60_000
+          : !summary.lookups_left || sinceUpkeep >= RUN_MINUTES * 60_000) {
           archived = await this.scheduledUpkeep(jobId, kind, signal);
           this.#upkeptAt = Date.now();
           this.state.lastAutoArchived = archived;
+          upkeep = true;
         }
         this.state.lastScheduledSync = Date.now() / 1_000;
       } else {
         throw new TypeError('Unknown synchronization job kind');
       }
       signal.throwIfAborted();
-      const result: JsonObject = { ...summary, auto_archived: archived };
+      const result: JsonObject = { ...summary, auto_archived: archived, ...upkeep ? { upkeep } : {} };
       await this.service.client.finishSyncJob(jobId, this.workerId, { result });
       finishScheduledSyncCheckIn(scheduledCheckIn, 'ok');
       this.state.lastSummary = result;

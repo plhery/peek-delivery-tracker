@@ -780,7 +780,9 @@ Key JSON events:
   `account`'s or a `lookup`'s (`to`), and was queued again, with how many parcels it `checked`
   and how many it `left`; its `sync_job_completed` line says `gave_way`. One that checked every
   parcel it took and left lookups due beyond its twenty says `lookups_left`, and is queued again
-  at once;
+  at once. A scheduled run's line also says how many out-for-delivery checks it started while a
+  check queued ahead of it waited (`last_mile_first`), and `upkeep` when it did its upkeep
+  ([ROUTING.md](ROUTING.md) says when);
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
   (`web`, `native` for the iPhone and Android apps, `live_activity`, `link_alert`) beside the

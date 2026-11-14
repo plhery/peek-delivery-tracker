@@ -3181,6 +3181,63 @@ describe('TrackingSyncService', () => {
       expect(logged).toHaveBeenCalledWith('scheduled_sync_gave_way', { checked: 2, left: 1, to: 'lookup' });
     });
 
+    // Out for delivery on the carrier of the first parcel, checked 10 minutes ago: due after the others.
+    const delivering = (user: string | null, data?: JsonObject): JsonObject => ({ ...parcel('delivering', user, 'ctt', 'TEST0004'),
+      current_stage: 'out_for_delivery', last_synced_at: '2026-09-04T09:50:15Z', ...(data ? { carrier_data: data } : {}) });
+    it.each([
+      { name: 'an account\'s parcel', user: 'd' },
+      { name: 'a lookup someone follows', user: null },
+    ])('with $name due on the last mile, starts only that check while a check waits ahead, then gives way', async ({ user }) => {
+      const logged = vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient(user ? [...three(), delivering(user)] : three());
+      if (!user) client.listFollowedOneOffPackages.mockResolvedValue([delivering(null)]);
+      client.syncJobQueuedAhead.mockResolvedValue(-5);
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at).sync();
+      // The run checks the first parcel; its out-for-delivery check waits for the carrier, and no other starts meanwhile.
+      await vi.waitFor(() => expect(asked).toEqual(['ctt TEST0001']));
+      await pause();
+      expect(asked).toEqual(['ctt TEST0001']);
+      await answer('ctt TEST0001');
+      await vi.waitFor(() => expect(asked).toEqual(['ctt TEST0001', 'ctt TEST0004']));
+      await answer('ctt TEST0004');
+      // With none left, it gives way.
+      await expect(running).resolves.toMatchObject({ checked: 2, gave_way: true, last_mile_first: 1 });
+      expect(logged).toHaveBeenCalledWith('scheduled_sync_gave_way', { checked: 2, left: 2, to: 'lookup' });
+      expect(asked).toHaveLength(2);
+    });
+
+    it('gives way at once over an out-for-delivery parcel on its regular cadence, as a provider answers for it', async () => {
+      const logged = vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient([...three(), delivering('d', { tracking_provider: 'ParcelsApp' })]);
+      client.syncJobQueuedAhead.mockResolvedValue(10);
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at).sync();
+      await vi.waitFor(() => expect(asked).toEqual(['ctt TEST0001']));
+      await answer('ctt TEST0001');
+      const summary = await running;
+      expect(summary).toMatchObject({ checked: 1, gave_way: true });
+      expect(summary).not.toHaveProperty('last_mile_first');
+      expect(logged).toHaveBeenCalledWith('scheduled_sync_gave_way', { checked: 1, left: 3, to: 'account' });
+    });
+
+    it('checks an out-for-delivery parcel in its place when no check waits ahead', async () => {
+      const { adapter, asked, answer } = answers();
+      const client = fakeClient([...three(), delivering('d')]);
+      const running = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, at).sync();
+      await vi.waitFor(() => expect(asked).toHaveLength(2));
+      expect([...asked].sort()).toEqual(['ctt TEST0001', 'la-poste TEST0002']);
+      await answer('la-poste TEST0002');
+      await vi.waitFor(() => expect(asked).toHaveLength(3));
+      expect(asked[2]).toBe('gls-de TEST0003');
+      await answer('ctt TEST0001');
+      await answer('ctt TEST0004');
+      await answer('gls-de TEST0003');
+      const summary = await running;
+      expect(summary).toMatchObject({ checked: 4 });
+      expect(summary).not.toHaveProperty('last_mile_first');
+    });
+
     it('at shutdown, starts no other check, sends the news of those under way and fails once they end', async () => {
       const { adapter, asked, answer } = answers();
       const client = fakeClient(three());

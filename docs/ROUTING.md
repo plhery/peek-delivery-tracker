@@ -417,10 +417,12 @@ end; the next run takes the parcels it left, which are still due.
 A run that checked every parcel it took and left more lookups due than its twenty (below) is queued again at once rather
 than in the next window, and does its upkeep at most once in 2 minutes.
 An account's or a lookup's check queued meanwhile, such as a refresh, a new parcel, a new lookup's first check or a link
-opened, goes ahead of the run: once the run has checked a parcel, it starts no other, ends once the checks under way end, leaves its upkeep (archiving,
-forgetting, usage counts) to the next run, and is queued again behind that check. An account's check goes ahead of a
-lookup's. When the same server runs the run queued again, it takes over the stopped run's answers and the carriers that
-run found down until the stopped run's 4 minutes are up. The parcels the stopped run left keep their place by how long
+opened, goes ahead of the run: once the run has checked a parcel, it starts only the checks it took of parcels out for
+delivery due every 2 or 5 minutes (below), then no other, ends once the checks under way end, and is queued again
+behind that check. It leaves its upkeep (archiving, forgetting, usage counts, a release's re-checks) to the runs behind
+it until the last upkeep is 10 minutes old. An account's check goes ahead of a lookup's. When the same server runs the
+run queued again, it takes over the stopped run's answers and the carriers that run found down until the stopped run's
+4 minutes are up. The parcels the stopped run left keep their place by how long
 they have been due, so a run that keeps stopping still reaches the end of its list.
 
 A check that nothing answered stores its next check time within the hour. When every source a

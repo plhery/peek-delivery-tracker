@@ -120,7 +120,7 @@ Often, as a last resort:
 
 ### Can Peek find my parcel?
 
-No. [Peek](/) shows only what the carrier publishes and can't contact a carrier or file a claim, and [no other tracker can](guide:universal-tracker) either. It does check up to every 2 minutes once a parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers) and can notify you, so you reach the door soon after the "delivered" scan. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane and for Morning Global; every 30 minutes for PostNL, USPS, GOFO and Cainiao).
+No. [Peek](/) shows only what the carrier publishes and can't contact a carrier or file a claim, and [no other tracker can](guide:universal-tracker) either. It does check up to every 2 minutes once a parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers) and can notify you, so you reach the door soon after the "delivered" scan. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US and Cainiao).
 
 ### Should I report a stolen parcel to the police?
 

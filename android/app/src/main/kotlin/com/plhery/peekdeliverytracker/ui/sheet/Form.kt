@@ -191,7 +191,8 @@ internal fun FormBar(
             confirmation()
             cancellation?.invoke()
         },
-        modifier = modifier,
+        // Read before the form that scrolls under it, as the inline bar is and VoiceOver reads a navigation bar.
+        modifier = modifier.readFirst(),
     ) { measurables, constraints ->
         val loose = constraints.copy(minWidth = 0, minHeight = 0)
         val width = constraints.maxWidth

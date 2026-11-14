@@ -8,7 +8,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
-/** The list's frames as it is flung to its end and back, in each of [compilations]. */
+/** The frames of a list of [LONG_LIST] parcels as it is flung to its end and back, in each of [compilations]. */
 @RunWith(Parameterized::class)
 class ScrollBenchmark(private val compilation: CompilationMode) {
     @get:Rule
@@ -23,12 +23,19 @@ class ScrollBenchmark(private val compilation: CompilationMode) {
         setupBlock = {
             pressHome()
             openList()
+            if (!lengthened) {
+                lengthenTheList()
+                lengthened = true
+            }
         },
     ) {
         scrollThrough(awaitList())
     }
 
     companion object {
+        /** Whether the list holds its [LONG_LIST] parcels: they stay from one compilation to the next. */
+        private var lengthened = false
+
         @Parameterized.Parameters(name = "{0}")
         @JvmStatic
         fun parameters(): List<CompilationMode> = compilations()

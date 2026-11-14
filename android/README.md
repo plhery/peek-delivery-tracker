@@ -95,9 +95,11 @@ and settings made up for the run.
 
 `:baselineprofile` holds the app's macrobenchmarks, run on a device or emulator against the app's `benchmark` build
 type: the release as R8 shrinks it, signed with the debug key and profileable. `StartupBenchmark` times a cold start on
-the list, `ScrollBenchmark` the list's frames as it is flung to its end and back, each with JIT alone and with the APK's
-baseline profile installed as Google Play installs it; the instrumentation argument `peek.compilation` (`none` or
-`profile`) keeps one, to time two builds in turn. On a fresh install they open the demo from the welcome.
+the list, `ScrollBenchmark` the frames of a list of 60 parcels as it is flung to its end and back, and `PageBenchmark`
+the frames of a parcel's page as it opens from the list, each with JIT alone and with the APK's baseline profile
+installed as Google Play installs it; the instrumentation argument `peek.compilation` (`none` or `profile`) keeps one, to
+time two builds in turn. On a fresh install they open the demo from the welcome; `ScrollBenchmark` adds synthetic
+numbers to the demo's parcels through Add, which a build without a server keeps on the phone.
 `BaselineProfileGenerator` collects a profile from the unshrunk `nonMinifiedBenchmark` build.
 
 The app ships only the profiles its libraries bring. One of its own goes in `app/src/main/baselineProfiles/` when the

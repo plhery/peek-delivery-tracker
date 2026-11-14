@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.baselineprofile
 
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
+import android.content.Intent
+import android.net.Uri
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
@@ -16,6 +18,13 @@ internal const val PACKAGE = "com.plhery.peekdeliverytracker"
 private const val PARCEL_LIST = "parcelList"
 private const val FIRST_OPEN_DEMO = "welcome.demo"
 private const val PAGE_CONTENT = "parcelPage.content"
+private const val ADD_SAVE = "addParcel.save"
+
+/** The parcels the demo opens with. */
+private const val DEMO_PARCELS = 17
+
+/** The parcels on the list [lengthenTheList] makes. */
+internal const val LONG_LIST = 60
 
 /**
  * The compilations each benchmark runs in: JIT alone (`none`) and with the APK's baseline profile installed as Google
@@ -52,6 +61,34 @@ internal fun MacrobenchmarkScope.scrollThrough(list: UiObject2) {
         list.fling(Direction.UP)
         device.waitForIdle()
     }
+}
+
+/**
+ * Adds synthetic numbers to the demo's parcels, each through Add as the app's own link opens it filled in, until the
+ * list holds [LONG_LIST]. A build without a server keeps them on the phone, in the demo's store.
+ */
+internal fun MacrobenchmarkScope.lengthenTheList() {
+    val context = InstrumentationRegistry.getInstrumentation().context
+    for (index in 1..LONG_LIST - DEMO_PARCELS) {
+        val link = Uri.parse("peekdeliverytracker://add?tracking=TESTLIST%04d".format(index))
+        context.startActivity(Intent(Intent.ACTION_VIEW, link).setPackage(PACKAGE).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        checkNotNull(device.wait(Until.findObject(By.res(ADD_SAVE).enabled(true)), 10_000)) { "Add didn't open" }.click()
+        check(device.wait(Until.gone(By.res(ADD_SAVE)), 10_000)) { "Add didn't save TESTLIST%04d".format(index) }
+    }
+}
+
+/** Opens the first parcel's page and waits for it to settle. */
+internal fun MacrobenchmarkScope.openFirstParcelAndWait() {
+    val card = checkNotNull(device.findObject(By.res(PARCEL_LIST))?.findObject(By.clickable(true).descContains(", "))) { "No parcel" }
+    card.click()
+    check(device.wait(Until.hasObject(By.res(PAGE_CONTENT)), 5_000)) { "The page didn't open" }
+    device.waitForIdle()
+}
+
+/** Goes back from a parcel's page to the list, or waits for the list where no page shows. */
+internal fun MacrobenchmarkScope.backToTheList() {
+    if (device.wait(Until.hasObject(By.res(PAGE_CONTENT)), 1_000)) device.pressBack()
+    awaitList()
 }
 
 /** Opens the first parcel's page and goes back to the list. */

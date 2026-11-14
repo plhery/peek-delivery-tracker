@@ -90802,6 +90802,22 @@
     "candidates": []
   },
   {
+    "input": "MR022832",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "MRK0824B2LP5041691",
     "carrier": "unknown",
     "confidence": "none",

@@ -1563,6 +1563,30 @@ value class CarrierId(val rawValue: String) {
         val SiuntosAutobusais = CarrierId("siuntos-autobusais")
         val Zipasgo = CarrierId("zipasgo")
         val FanCourierInternational = CarrierId("fan-courier-international")
+        val AdexAl = CarrierId("adex-al")
+        val Bypost = CarrierId("bypost")
+        val CargoExpressMk = CarrierId("cargo-express-mk")
+        val DeliveryAuto = CarrierId("delivery-auto")
+        val DmExpressMe = CarrierId("dm-express-me")
+        val ElitPost = CarrierId("elit-post")
+        val ElitePostAl = CarrierId("elite-post-al")
+        val Europoshta = CarrierId("europoshta")
+        val ExpressOneMe = CarrierId("express-one-me")
+        val FanCourierMd = CarrierId("fan-courier-md")
+        val GlobexPost = CarrierId("globex-post")
+        val Greenposta = CarrierId("greenposta")
+        val Hopexpress = CarrierId("hopexpress")
+        val IcsCouriersUa = CarrierId("ics-couriers-ua")
+        val IntexCourier = CarrierId("intex-courier")
+        val JakeluyhtioSuomi = CarrierId("jakeluyhtio-suomi")
+        val MrCourierAl = CarrierId("mr-courier-al")
+        val NtcExpress = CarrierId("ntc-express")
+        val PostInternational = CarrierId("post-international")
+        val SofexPost = CarrierId("sofex-post")
+        val TribexCourier = CarrierId("tribex-courier")
+        val UnipostExpress = CarrierId("unipost-express")
+        val XExpressRs = CarrierId("x-express-rs")
+        val XpressLogisticsLu = CarrierId("xpress-logistics-lu")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3067,6 +3091,30 @@ value class CarrierId(val rawValue: String) {
             SiuntosAutobusais,
             Zipasgo,
             FanCourierInternational,
+            AdexAl,
+            Bypost,
+            CargoExpressMk,
+            DeliveryAuto,
+            DmExpressMe,
+            ElitPost,
+            ElitePostAl,
+            Europoshta,
+            ExpressOneMe,
+            FanCourierMd,
+            GlobexPost,
+            Greenposta,
+            Hopexpress,
+            IcsCouriersUa,
+            IntexCourier,
+            JakeluyhtioSuomi,
+            MrCourierAl,
+            NtcExpress,
+            PostInternational,
+            SofexPost,
+            TribexCourier,
+            UnipostExpress,
+            XExpressRs,
+            XpressLogisticsLu,
         )
     }
 }

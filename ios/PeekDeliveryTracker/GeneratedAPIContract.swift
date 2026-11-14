@@ -1554,6 +1554,30 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let siuntosAutobusais = CarrierID(rawValue: "siuntos-autobusais")
     static let zipasgo = CarrierID(rawValue: "zipasgo")
     static let fanCourierInternational = CarrierID(rawValue: "fan-courier-international")
+    static let adexAl = CarrierID(rawValue: "adex-al")
+    static let bypost = CarrierID(rawValue: "bypost")
+    static let cargoExpressMk = CarrierID(rawValue: "cargo-express-mk")
+    static let deliveryAuto = CarrierID(rawValue: "delivery-auto")
+    static let dmExpressMe = CarrierID(rawValue: "dm-express-me")
+    static let elitPost = CarrierID(rawValue: "elit-post")
+    static let elitePostAl = CarrierID(rawValue: "elite-post-al")
+    static let europoshta = CarrierID(rawValue: "europoshta")
+    static let expressOneMe = CarrierID(rawValue: "express-one-me")
+    static let fanCourierMd = CarrierID(rawValue: "fan-courier-md")
+    static let globexPost = CarrierID(rawValue: "globex-post")
+    static let greenposta = CarrierID(rawValue: "greenposta")
+    static let hopexpress = CarrierID(rawValue: "hopexpress")
+    static let icsCouriersUa = CarrierID(rawValue: "ics-couriers-ua")
+    static let intexCourier = CarrierID(rawValue: "intex-courier")
+    static let jakeluyhtioSuomi = CarrierID(rawValue: "jakeluyhtio-suomi")
+    static let mrCourierAl = CarrierID(rawValue: "mr-courier-al")
+    static let ntcExpress = CarrierID(rawValue: "ntc-express")
+    static let postInternational = CarrierID(rawValue: "post-international")
+    static let sofexPost = CarrierID(rawValue: "sofex-post")
+    static let tribexCourier = CarrierID(rawValue: "tribex-courier")
+    static let unipostExpress = CarrierID(rawValue: "unipost-express")
+    static let xExpressRs = CarrierID(rawValue: "x-express-rs")
+    static let xpressLogisticsLu = CarrierID(rawValue: "xpress-logistics-lu")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3058,6 +3082,30 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .siuntosAutobusais,
         .zipasgo,
         .fanCourierInternational,
+        .adexAl,
+        .bypost,
+        .cargoExpressMk,
+        .deliveryAuto,
+        .dmExpressMe,
+        .elitPost,
+        .elitePostAl,
+        .europoshta,
+        .expressOneMe,
+        .fanCourierMd,
+        .globexPost,
+        .greenposta,
+        .hopexpress,
+        .icsCouriersUa,
+        .intexCourier,
+        .jakeluyhtioSuomi,
+        .mrCourierAl,
+        .ntcExpress,
+        .postInternational,
+        .sofexPost,
+        .tribexCourier,
+        .unipostExpress,
+        .xExpressRs,
+        .xpressLogisticsLu,
     ]
 
     init(from decoder: Decoder) throws {

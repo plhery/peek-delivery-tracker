@@ -157,12 +157,15 @@ describe('review queue replay', () => {
       // Detection could still learn these: they stay open.
       { id: 'case-unknown', tracking_number: '123456789012', configured_carrier: 'unknown', reasons: ['ambiguous_shape'] },
       { id: 'case-adapter', tracking_number: 'ZZTEST1234', configured_carrier: 'shipup', reasons: ['unknown_shape', 'no_direct_adapter'] },
+      // A shape detection offers only other carriers for, delivered after its carrier tracked it.
+      { id: 'case-not-offered', tracking_number: '012345678901234', configured_carrier: 'ozon-logistics',
+        direct_verified_carrier: 'ozon-logistics', reasons: ['ambiguous_shape'] },
     ]);
     client.trackingNumberStages.mockResolvedValue(new Map([
-      ['123456789012', ['delivered']], ['123456789023', ['delivered', 'in_transit']],
+      ['123456789012', ['delivered']], ['123456789023', ['delivered', 'in_transit']], ['012345678901234', ['delivered']],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1'))
-      .resolves.toMatchObject({ cases_replayed: 5, cases_ignored: 1 });
+      .resolves.toMatchObject({ cases_replayed: 6, cases_ignored: 1 });
     expect(client.trackingNumberStages).toHaveBeenCalledExactlyOnceWith(['123456789012', '123456789023', '123456789001']);
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-delivered',
       note: 'Its parcel was delivered before fedex, one of the carriers its shape fits, confirmed the number directly: no check is left to confirm it.' }]);

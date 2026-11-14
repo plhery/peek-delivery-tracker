@@ -72,8 +72,10 @@ export function awaitsConfirmation(supportCase: JsonObject): boolean {
   const configured = typeof supportCase.configured_carrier === 'string' ? supportCase.configured_carrier : null;
   if (!configured || configured === 'unknown' || configured === 'intl-post') return false;
   const verified = typeof supportCase.direct_verified_carrier === 'string' ? supportCase.direct_verified_carrier : null;
-  const reasons = trackingSupportContext(String(supportCase.tracking_number ?? ''), configured, verified).reasons as string[];
-  return reasons.length === 1 && reasons[0] === 'ambiguous_shape';
+  const context = trackingSupportContext(String(supportCase.tracking_number ?? ''), configured, verified);
+  const reasons = context.reasons as string[];
+  // While detection offers only other carriers, no confirmation closes the case: detection has its shape to learn.
+  return reasons.length === 1 && reasons[0] === 'ambiguous_shape' && detectionOffers(context, configured);
 }
 
 /**

@@ -1017,6 +1017,24 @@ describe('FrontDoor: on this device', () => {
     expect(screen.getByRole('button', { name: 'Forget all' })).toBeVisible();
   });
 
+  it('waits while the server takes no more forgets, saying how far it has got, and never blames the connection', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    rememberParcel({ id: OTHER_LINK_ID, key: 'B'.repeat(43), view: testView({ id: OTHER_LINK_ID }), now: Date.now() - 60_000 });
+    mocks.forget.mockResolvedValue(undefined).mockRejectedValueOnce(new ParcelLinkError('burst', { retryAfterSeconds: 30 }));
+    door();
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    fireEvent.click(screen.getByRole('button', { name: 'Forget all' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Forget' }));
+    await act(async () => { await vi.advanceTimersByTimeAsync(29_000); });
+    const question = screen.getByRole('group', { name: 'Forgetting parcel 1 of 2…' });
+    expect(within(question).getByRole('button', { name: 'Forget' })).toBeDisabled();
+    expect(deviceLinks()).toHaveLength(2);
+    await act(async () => { await vi.advanceTimersByTimeAsync(1_000); });
+    expect(screen.queryByRole('region', { name: 'On this device' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(mocks.forget).toHaveBeenCalledTimes(3);
+  });
+
   it('asks again, a few times, about a parcel whose carrier has not answered yet', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] });
     rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: pendingView(), now: Date.now() });

@@ -243,6 +243,7 @@
   "door.recents.forget.one": "Dieses Paket vergessen?",
   "door.recents.forget.yes": "Vergessen",
   "door.recents.forgetAll": "Alle vergessen",
+  "door.recents.forgetting": "Paket {{done}} von {{count}} wird vergessen …",
   "door.recents.kept": "Nur in diesem Browser gespeichert.",
   "door.recents.signIn": "Melde dich an, um sie zu behalten und Mitteilungen zu bekommen",
   "door.several.question": "Du verfolgst alle?",

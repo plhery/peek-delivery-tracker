@@ -243,6 +243,7 @@
   "door.recents.forget.one": "Esquecer esta encomenda?",
   "door.recents.forget.yes": "Esquecer",
   "door.recents.forgetAll": "Esquecer todas",
+  "door.recents.forgetting": "Esquecendo a encomenda {{done}} de {{count}}…",
   "door.recents.kept": "Salvas só neste navegador.",
   "door.recents.signIn": "Entre para mantê-las, com notificações",
   "door.several.question": "Vai rastrear todas?",

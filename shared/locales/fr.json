@@ -243,6 +243,7 @@
   "door.recents.forget.one": "Oublier ce colis ?",
   "door.recents.forget.yes": "Oublier",
   "door.recents.forgetAll": "Tout oublier",
+  "door.recents.forgetting": "Oubli du colis {{done}} sur {{count}}…",
   "door.recents.kept": "Gardés dans ce navigateur uniquement.",
   "door.recents.signIn": "Connecte-toi pour les garder, avec des notifications",
   "door.several.question": "Tu les suis tous ?",

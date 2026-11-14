@@ -243,6 +243,7 @@
   "door.recents.forget.one": "Zapomnieć o tej przesyłce?",
   "door.recents.forget.yes": "Zapomnij",
   "door.recents.forgetAll": "Zapomnij o wszystkich",
+  "door.recents.forgetting": "Zapominanie przesyłki {{done}} z {{count}}…",
   "door.recents.kept": "Zapisane tylko w tej przeglądarce.",
   "door.recents.signIn": "Zaloguj się, aby je zachować i dostawać powiadomienia",
   "door.several.question": "Śledzisz wszystkie?",

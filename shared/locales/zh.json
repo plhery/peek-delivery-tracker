@@ -243,6 +243,7 @@
   "door.recents.forget.one": "要清除这个包裹吗？",
   "door.recents.forget.yes": "清除",
   "door.recents.forgetAll": "全部清除",
+  "door.recents.forgetting": "正在清除第 {{done}} 个包裹，共 {{count}} 个…",
   "door.recents.kept": "只保存在这个浏览器中。",
   "door.recents.signIn": "登录即可保留它们，还能收到通知",
   "door.several.question": "要全部跟踪吗？",

@@ -243,6 +243,7 @@
   "door.recents.forget.one": "¿Olvidar este paquete?",
   "door.recents.forget.yes": "Olvidar",
   "door.recents.forgetAll": "Olvidar todos",
+  "door.recents.forgetting": "Olvidando el paquete {{done}} de {{count}}…",
   "door.recents.kept": "Guardados solo en este navegador.",
   "door.recents.signIn": "Inicia sesión para conservarlos, con notificaciones",
   "door.several.question": "¿Los sigues todos?",

@@ -243,6 +243,7 @@
   "door.recents.forget.one": "Forget this parcel?",
   "door.recents.forget.yes": "Forget",
   "door.recents.forgetAll": "Forget all",
+  "door.recents.forgetting": "Forgetting parcel {{done}} of {{count}}…",
   "door.recents.kept": "Kept in this browser only.",
   "door.recents.signIn": "Sign in to keep them, with notifications",
   "door.several.question": "Following all of them?",

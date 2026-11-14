@@ -192,4 +192,27 @@ describe('forgetDeviceParcels', () => {
     expect(recentFor(LINK_ID)).toBeNull();
     expect(strandedParcels()).toEqual([{ id: THIRD_LINK_ID, key: OWNER_KEY }]);
   });
+
+  it('waits for the server to take forgets again, then goes on, saying which parcel it has reached', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now });
+    rememberParcel({ id: THIRD_LINK_ID, key: OWNER_KEY, view: testView({ id: THIRD_LINK_ID }), now: now - 1 });
+    mocks.forget.mockRejectedValueOnce(new ParcelLinkError('burst', { retryAfterSeconds: 42 }));
+    const wait = vi.fn(async () => {});
+    const progress = vi.fn();
+    await expect(forgetDeviceParcels([recentFor(LINK_ID)!, recentFor(THIRD_LINK_ID)!], progress, wait)).resolves.toBe(0);
+    expect(wait.mock.calls).toEqual([[42_000]]);
+    expect(progress.mock.calls).toEqual([[1, 2], [2, 2]]);
+    expect(mocks.forget.mock.calls).toEqual([[LINK_ID, OWNER_KEY], [LINK_ID, OWNER_KEY], [THIRD_LINK_ID, OWNER_KEY]]);
+    expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
+  });
+
+  it('keeps a parcel the server still refuses after a few waits', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now });
+    mocks.forget.mockRejectedValue(new ParcelLinkError('burst', { retryAfterSeconds: 60 }));
+    const wait = vi.fn(async () => {});
+    await expect(forgetDeviceParcels([recentFor(LINK_ID)!], undefined, wait)).resolves.toBe(1);
+    expect(wait).toHaveBeenCalledTimes(3);
+    expect(mocks.forget).toHaveBeenCalledTimes(4);
+    expect(recentFor(LINK_ID)).not.toBeNull();
+  });
 });

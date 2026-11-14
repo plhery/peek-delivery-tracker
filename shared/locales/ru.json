@@ -243,6 +243,7 @@
   "door.recents.forget.one": "Забыть {{count}} посылку?",
   "door.recents.forget.yes": "Забыть",
   "door.recents.forgetAll": "Забыть все",
+  "door.recents.forgetting": "Забываем посылку {{done}} из {{count}}…",
   "door.recents.kept": "Хранятся только в этом браузере.",
   "door.recents.signIn": "Войдите, чтобы сохранить их и получать уведомления",
   "door.several.question": "Следите за всеми?",

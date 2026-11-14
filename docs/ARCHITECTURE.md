@@ -165,7 +165,10 @@ Key server modules:
     browser's own lookups. A saved parcel the browser can't read, such as one
     another version wrote, stays with its id and owner key: it isn't listed, its link gets
     the key back when it is read again, and forgetting all the device's parcels forgets it on
-    the server too. Bringing parcels into an account sends twenty to a request. A parcel
+    the server too. The server takes 30 forgets a minute from one network: Forget all waits
+    for it past those and says which parcel it has reached. The apps take the parcels off at
+    once and tell the server on later refreshes. Bringing parcels into an account sends
+    twenty to a request. A parcel
     a full account refuses stays on the device, the toast says so, and it is offered again
     the next time the deliveries open.
   - The iPhone and Android apps bring their parcels into the account each time the

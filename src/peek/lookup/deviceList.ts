@@ -114,24 +114,46 @@ export function watchDeviceParcels(parcels: () => readonly RecentParcel[]): () =
   };
 }
 
+/** Most times one parcel waits for the server to take forgets again; a server still refusing after that keeps it. */
+const MOST_FORGET_WAITS = 3;
+
+/** Waits out a server that asked for a pause. */
+export type ForgetPause = (milliseconds: number) => Promise<void>;
+
+const pause: ForgetPause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
 /**
  * Forgets the device's parcels: on the server where this device made the
  * lookup and holds its key, then on the device. The parcels the device holds
- * the key of but cannot list go too. Returns how many could not be forgotten;
- * those stay.
+ * the key of but cannot list go too. The server takes a few forgets a minute
+ * from one network: past those, each waits until it takes them again.
+ * `progress` hears which parcel is being forgotten, from 1, of how many.
+ * Returns how many could not be forgotten; those stay.
  */
-export async function forgetDeviceParcels(recents: readonly RecentParcel[]): Promise<number> {
+export async function forgetDeviceParcels(
+  recents: readonly RecentParcel[],
+  progress: (done: number, count: number) => void = () => {},
+  wait: ForgetPause = pause,
+): Promise<number> {
   let kept = 0;
   const listed = new Set(recents.map((recent) => recent.id));
   const parcels = [...recents, ...strandedParcels().filter((stranded) => !listed.has(stranded.id))];
-  for (const recent of parcels) {
-    try {
-      if (recent.key) await forgetParcelLink(recent.id, recent.key);
-      forgetRecent(recent.id);
-    } catch (error) {
-      // A link the server no longer has is forgotten already.
-      if (error instanceof ParcelLinkError && error.kind === 'unavailable') forgetRecent(recent.id);
-      else kept += 1;
+  for (const [index, recent] of parcels.entries()) {
+    progress(index + 1, parcels.length);
+    for (let waits = 0; ; waits += 1) {
+      try {
+        if (recent.key) await forgetParcelLink(recent.id, recent.key);
+        forgetRecent(recent.id);
+      } catch (error) {
+        if (error instanceof ParcelLinkError && error.kind === 'burst' && waits < MOST_FORGET_WAITS) {
+          await wait((error.retryAfterSeconds ?? 60) * 1_000);
+          continue;
+        }
+        // A link the server no longer has is forgotten already.
+        if (error instanceof ParcelLinkError && error.kind === 'unavailable') forgetRecent(recent.id);
+        else kept += 1;
+      }
+      break;
     }
   }
   if (!kept) forgetDeviceChecks();

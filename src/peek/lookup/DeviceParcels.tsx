@@ -134,7 +134,8 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   // Saved parcels this version can't list keep their owner keys: Forget all is offered for them too.
   const stranded = strandedParcels().length;
   const [asking, setAsking] = useState(false);
-  const [forgetting, setForgetting] = useState(false);
+  // Which parcel Forget all has reached, of how many: the server takes a few a minute, and the rest wait their turn.
+  const [forgetting, setForgetting] = useState<{ done: number; count: number } | null>(null);
   const [failed, setFailed] = useState(false);
   const question = useRef<HTMLDivElement>(null);
   const list = useRef(recents);
@@ -149,10 +150,10 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   const delivered = useDeliveredHold(parcels, watching && !asking, cards, DOOR_CARDS, ON_THE_WAY.device);
 
   async function forget() {
-    setForgetting(true);
+    setForgetting({ done: 0, count: 0 });
     setFailed(false);
-    const kept = await forgetDeviceParcels(list.current);
-    setForgetting(false);
+    const kept = await forgetDeviceParcels(list.current, (done, count) => setForgetting({ done, count }));
+    setForgetting(null);
     setAsking(false);
     setFailed(kept > 0);
     if (!kept) onForgotten();
@@ -169,10 +170,12 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
       {!asking && <button type="button" className="door-device__forget" onClick={() => { setFailed(false); setAsking(true); }}>{t('door.recents.forgetAll')}</button>}
     </div>
     {asking && <div ref={question} className="door-device__question" role="group" aria-labelledby="door-device-question" tabIndex={-1}>
-      <p id="door-device-question">{t('door.recents.forget.many', { count: recents.length + stranded })}</p>
+      <p id="door-device-question" aria-live="polite">{forgetting && forgetting.count > 1
+        ? t('door.recents.forgetting', forgetting)
+        : t('door.recents.forget.many', { count: recents.length + stranded })}</p>
       <div>
-        <button type="button" className="door-device__cancel" disabled={forgetting} onClick={() => setAsking(false)}>{t('common.cancel')}</button>
-        <button type="button" className="door-device__confirm" disabled={forgetting} onClick={() => void forget()}>{t('door.recents.forget.yes')}</button>
+        <button type="button" className="door-device__cancel" disabled={!!forgetting} onClick={() => setAsking(false)}>{t('common.cancel')}</button>
+        <button type="button" className="door-device__confirm" disabled={!!forgetting} onClick={() => void forget()}>{t('door.recents.forget.yes')}</button>
       </div>
     </div>}
     {failed && <p className="door-message" role="alert">{t('door.recents.forget.failed')}</p>}

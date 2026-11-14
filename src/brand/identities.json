@@ -379,6 +379,9 @@
   "azul-cargo": {
     "decal": "azul-cargo"
   },
+  "baikal-service": {
+    "decal": "baikal-service"
+  },
   "bangladesh-post": {
     "decal": "bangladesh-post"
   },
@@ -767,6 +770,9 @@
   "citysprint": {
     "decal": "citysprint"
   },
+  "citytrans": {
+    "decal": "citytrans"
+  },
   "cityxpress": {
     "decal": "cityxpress"
   },
@@ -1008,6 +1014,9 @@
   "dakota-cargo": {
     "decal": "dakota-cargo"
   },
+  "dalli-service": {
+    "decal": "dalli-service"
+  },
   "danniao": {
     "decal": "danniao"
   },
@@ -1082,6 +1091,9 @@
   },
   "deprisa": {
     "decal": "deprisa"
+  },
+  "der-kurier": {
+    "decal": "der-kurier"
   },
   "der-kurier-sk": {
     "decal": "der-kurier-sk"
@@ -2473,6 +2485,9 @@
   "kuqi": {
     "decal": "kuqi"
   },
+  "kurierzentrale": {
+    "decal": "kurierzentrale"
+  },
   "kwick-box": {
     "decal": "kwick-box"
   },
@@ -2624,6 +2639,9 @@
   "logoix": {
     "decal": "logoix"
   },
+  "logsis": {
+    "decal": "logsis"
+  },
   "longcps": {
     "decal": "longcps"
   },
@@ -2641,6 +2659,9 @@
   },
   "lucky-fast-express": {
     "decal": "lucky-fast-express"
+  },
+  "lvz-post": {
+    "decal": "lvz-post"
   },
   "m-and-p": {
     "decal": "m-and-p"
@@ -2662,6 +2683,9 @@
   },
   "magic-trans": {
     "decal": "magic-trans"
+  },
+  "magnit-post": {
+    "decal": "magnit-post"
   },
   "magnum-transportation": {
     "decal": "magnum-transportation"
@@ -2898,6 +2922,9 @@
   "nhat-tin": {
     "decal": "nhat-tin"
   },
+  "night-star-express": {
+    "decal": "night-star-express"
+  },
   "nim-express": {
     "decal": "nim-express"
   },
@@ -2930,6 +2957,9 @@
   },
   "nord-wheel": {
     "decal": "nord-wheel"
+  },
+  "nordbrief": {
+    "decal": "nordbrief"
   },
   "norsk-global": {
     "decal": "norsk-global"
@@ -3211,6 +3241,9 @@
   "peru-box-air": {
     "decal": "peru-box-air"
   },
+  "peshkariki": {
+    "decal": "peshkariki"
+  },
   "pfc-express": {
     "decal": "pfc-express"
   },
@@ -3482,6 +3515,9 @@
   },
   "raben": {
     "decal": "raben"
+  },
+  "rail-continent": {
+    "decal": "rail-continent"
   },
   "ram-hand-to-hand": {
     "decal": "ram-hand-to-hand"
@@ -3808,6 +3844,9 @@
   "sjl-express": {
     "decal": "sjl-express"
   },
+  "skif-cargo": {
+    "decal": "skif-cargo"
+  },
   "skladusa": {
     "decal": "skladusa"
   },
@@ -4027,6 +4066,9 @@
   },
   "swiss-post-cargo": {
     "family": "swiss-post"
+  },
+  "swissconnect": {
+    "decal": "swissconnect"
   },
   "sxjd-freight": {
     "decal": "sxjd-freight"
@@ -4476,6 +4518,9 @@
   "veho": {
     "decal": "veho"
   },
+  "veloblitz": {
+    "decal": "veloblitz"
+  },
   "veloces": {
     "decal": "veloces"
   },
@@ -4727,6 +4772,9 @@
   },
   "yamato-america": {
     "family": "yamato"
+  },
+  "yandex-delivery": {
+    "decal": "yandex-delivery"
   },
   "yanwen": {
     "decal": "yanwen"

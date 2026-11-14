@@ -844,6 +844,22 @@ describe('carrier mark', () => {
     'unipost-express',
     'x-express-rs',
     'xpress-logistics-lu',
+    'night-star-express',
+    'der-kurier',
+    'nordbrief',
+    'lvz-post',
+    'swissconnect',
+    'citytrans',
+    'veloblitz',
+    'kurierzentrale',
+    'yandex-delivery',
+    'magnit-post',
+    'baikal-service',
+    'skif-cargo',
+    'rail-continent',
+    'dalli-service',
+    'logsis',
+    'peshkariki',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

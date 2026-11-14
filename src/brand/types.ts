@@ -832,7 +832,23 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'tribex-courier'
   | 'unipost-express'
   | 'x-express-rs'
-  | 'xpress-logistics-lu';
+  | 'xpress-logistics-lu'
+  | 'night-star-express'
+  | 'der-kurier'
+  | 'nordbrief'
+  | 'lvz-post'
+  | 'swissconnect'
+  | 'citytrans'
+  | 'veloblitz'
+  | 'kurierzentrale'
+  | 'yandex-delivery'
+  | 'magnit-post'
+  | 'baikal-service'
+  | 'skif-cargo'
+  | 'rail-continent'
+  | 'dalli-service'
+  | 'logsis'
+  | 'peshkariki';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

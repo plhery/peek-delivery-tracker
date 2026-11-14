@@ -949,6 +949,22 @@ describe('carrier brand', () => {
       'unipost-express',
       'x-express-rs',
       'xpress-logistics-lu',
+      'night-star-express',
+      'der-kurier',
+      'nordbrief',
+      'lvz-post',
+      'swissconnect',
+      'citytrans',
+      'veloblitz',
+      'kurierzentrale',
+      'yandex-delivery',
+      'magnit-post',
+      'baikal-service',
+      'skif-cargo',
+      'rail-continent',
+      'dalli-service',
+      'logsis',
+      'peshkariki',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -14,14 +15,16 @@ import androidx.compose.runtime.saveable.SaveableStateRegistry
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
 
 /**
  * The content made again from what it saved, as when the window is made again (a rotation, a change of theme), with
  * the first frame after it in the test's hands. StateRestorationTester takes the content away only while the clock
  * runs by itself, and then runs it past that frame. While the content goes, the activity is changing configurations,
- * as the system has it then.
+ * as the system has it then. A window ended in the background stops [lifecycle], the activity's where it's null.
  */
-class Recreation(private val compose: ComposeContentTestRule) {
+class Recreation(private val compose: ComposeContentTestRule, private val lifecycle: LifecycleRegistry? = null) {
     private var canBeSaved: (Any) -> Boolean = { true }
     private var registry = SaveableStateRegistry(null) { canBeSaved(it) }
     private var shown by mutableStateOf(true)
@@ -40,12 +43,18 @@ class Recreation(private val compose: ComposeContentTestRule) {
      * Saves the content and takes it away, then composes it again from what it saved, as far as its first frame. What
      * changed with the window, such as its size as it turns, changes in `meanwhile`, while the content is away. Where
      * [parceled], what it saved is written to a Parcel and read back, as the system hands it back once it has kept it
-     * outside the process, so nothing comes back as the very object that was saved.
+     * outside the process, so nothing comes back as the very object that was saved. Where [inTheBackground], the
+     * window goes as the system ends one in the background while the process lives on ("Don't keep activities"):
+     * stopped a frame before it saves, and taken away without changing configurations.
      */
-    fun recreate(parceled: Boolean = false, meanwhile: () -> Unit = {}) {
+    fun recreate(parceled: Boolean = false, inTheBackground: Boolean = false, meanwhile: () -> Unit = {}) {
         compose.mainClock.autoAdvance = false
+        if (inTheBackground) {
+            compose.runOnIdle { lifecycleTo(Lifecycle.State.CREATED) }
+            frame()
+        }
         compose.runOnIdle {
-            changingConfigurations(true)
+            if (!inTheBackground) changingConfigurations(true)
             val saved = registry.performSave()
             registry = SaveableStateRegistry(if (parceled) saved.throughParcel() else saved) { canBeSaved(it) }
             shown = false
@@ -53,7 +62,7 @@ class Recreation(private val compose: ComposeContentTestRule) {
         frame()
         compose.runOnIdle {
             meanwhile()
-            changingConfigurations(false)
+            if (inTheBackground) lifecycleTo(Lifecycle.State.RESUMED) else changingConfigurations(false)
             shown = true
         }
         frame()
@@ -79,6 +88,11 @@ class Recreation(private val compose: ComposeContentTestRule) {
     private fun changingConfigurations(changing: Boolean) {
         val shown = activity ?: return
         Activity::class.java.getDeclaredField("mChangingConfigurations").apply { isAccessible = true }.setBoolean(shown, changing)
+    }
+
+    private fun lifecycleTo(state: Lifecycle.State) {
+        val registry = lifecycle ?: (activity as? ComponentActivity)?.lifecycle as? LifecycleRegistry ?: return
+        registry.currentState = state
     }
 
     private fun frame() {

@@ -7,6 +7,7 @@ import android.os.VibrationEffect.Composition
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,6 +65,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.platform.notificationTap
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
@@ -134,18 +136,20 @@ class FriendsTest {
         fontScale: Float = 1f,
         choose: Boolean = true,
         inbox: DeliveriesInbox? = null,
+        recreation: Recreation? = null,
         friends: FakeFriendsClient.() -> Unit = {},
     ) {
         shownSession = session
         source = FakeDeliveries(parcels, session)
         client.friends()
         compose.waitsForMaps()
-        compose.setContent {
+        val content = @Composable {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalLifecycleOwner provides owner) {
                 RootHost(state = shownSession, dark = false, onView = { views += it }, source = source, inbox = inbox)
             }
         }
+        if (recreation != null) recreation.setContent(content) else compose.setContent(content)
         settle()
         if (choose) choose("Friends")
     }
@@ -976,6 +980,22 @@ class FriendsTest {
         lifecycle(Lifecycle.State.RESUMED)
         assertNull(panel())
         assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
+    }
+
+    @Test
+    fun aWindowEndedBehindTheAppTheLinkIsSharedToKeepsThePanelAndItsLink() {
+        val recreation = Recreation(compose, owner.registry)
+        show(recreation = recreation)
+        tap(FRIENDS_INVITE)
+        tap(FRIENDS_SHARE)
+        lifecycle(Lifecycle.State.STARTED)
+        // The app picked stops the window, and the system ends it while the app lives on ("Don't keep activities").
+        recreation.recreate(inTheBackground = true)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(text("friends.inviteTitle"), panel())
+        assertEquals(link, words(FRIENDS_INVITATION_URL).single())
+        assertEquals(1, requests(FriendsAction.CreateInvite).size)
     }
 
     @Test

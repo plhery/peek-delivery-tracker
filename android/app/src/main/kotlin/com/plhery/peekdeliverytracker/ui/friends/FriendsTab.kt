@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.friends
 
+import android.app.Activity
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.ScrollState
@@ -313,16 +314,17 @@ internal fun rememberFriendsState(source: DeliveriesSource, share: InvitationSha
 
 /**
  * What `onDisappear` forgets (the panel, the friend's page, `arrivingID`), held as [rememberForLaunch] holds it but
- * through a window made again (a rotation) alone: another tab chosen forgets it, whose holder saves the tab's state
+ * only while the window goes for now ([goesForNow]): another tab chosen forgets it, whose holder saves the tab's state
  * before the tab's own disposal could forget it.
  */
 @Composable
 private fun <T> rememberForWindow(launch: UUID, initial: T): MutableState<T> {
     val window = LocalActivity.current
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
     return rememberSaveable(
         launch,
         saver = listSaver(
-            save = { listOf(launch.toString(), if (window?.isChangingConfigurations == true) it.value else initial) },
+            save = { listOf(launch.toString(), if (window.goesForNow(lifecycle)) it.value else initial) },
             restore = { saved ->
                 @Suppress("UNCHECKED_CAST")
                 mutableStateOf(if (saved[0] == launch.toString()) saved[1] as T else initial)
@@ -330,6 +332,16 @@ private fun <T> rememberForWindow(launch: UUID, initial: T): MutableState<T> {
         ),
     ) { mutableStateOf(initial) }
 }
+
+/**
+ * Whether the window goes for now alone, to be made again from what it saved: as it turns (a configuration change),
+ * or as the system ends it in the background while the app lives on ("Don't keep activities"), behind the app the
+ * invitation's link is shared to ([FriendsState.sharing]) as the iPhone's scene lives on behind its share sheet; any
+ * other leaving has let go of the page and the panel by then. A tab left while the window stays, or a window that
+ * finishes, goes for good.
+ */
+private fun Activity?.goesForNow(lifecycle: Lifecycle): Boolean =
+    this != null && (isChangingConfigurations || !isFinishing && !lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED))
 
 /** The circle's scrolled content and its cards as last placed. */
 internal class CardPlaces {
@@ -527,10 +539,11 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
         store.configure(demo)
         activity.arrivalSnapshot?.let(store::seed)
     }
-    // `onDisappear`, but not as the window is made again (a rotation), which the iPhone's tab lives on through.
+    // `onDisappear`, but not as the window goes for now ([goesForNow]).
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
     DisposableEffect(store) {
         onDispose {
-            if (window?.isChangingConfigurations != true) {
+            if (!window.goesForNow(lifecycle)) {
                 state.hide()
                 state.arriving = null
                 store.clear()

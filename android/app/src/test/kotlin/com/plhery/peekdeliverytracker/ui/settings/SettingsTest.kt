@@ -27,6 +27,8 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -741,6 +743,31 @@ class SettingsTest {
         var held = false
         compose.runOnUiThread { held = frames.viewTreeObserver.dispatchOnPreDraw() }
         return held
+    }
+
+    @Test
+    @Config(qualifiers = "w360dp-h640dp-xhdpi")
+    fun aWindowMadeAgainKeepsSettingsWhereItWasScrolledAndTheNextOpeningStartsAtTheTop() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open()
+        fun top() = node(SETTINGS_DELIVERY_UPDATES).fetchSemanticsNode().boundsInRoot.top
+        val first = top()
+        compose.onAllNodes(hasScrollAction() and hasAnyAncestor(hasTestTag(SETTINGS_SHEET))).onFirst()
+            .performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, 100f) }
+        settle()
+        val scrolled = top()
+        assertEquals(first - 100, scrolled, 1f)
+        recreation.recreate()
+        settle()
+        assertEquals("Turned", scrolled, top(), 1f)
+        recreation.recreate(inTheBackground = true)
+        settle()
+        assertEquals("Ended in the background", scrolled, top(), 1f)
+        compose.mainClock.autoAdvance = true
+        press(SETTINGS_CLOSE)
+        open()
+        assertEquals("Opened again", first, top(), 1f)
     }
 
     @Test

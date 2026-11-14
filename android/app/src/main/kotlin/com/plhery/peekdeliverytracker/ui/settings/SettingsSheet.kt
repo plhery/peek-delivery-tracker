@@ -35,6 +35,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -132,8 +133,8 @@ internal interface AccountHost {
  * sizes, as `.presentationSizing` is left alone there. Close, a drag down, a tap outside and the system's back close
  * it, none of them while the data page waits for what it asked (`interactiveDismissDisabled(working)`); the back pops
  * a pushed page first. What it asked runs in the app's scope ([com.plhery.peekdeliverytracker.ui.deliveries.PageWork]),
- * so a window made again still waits for it, and the pushed page, the alert open and the address typed stay too; it
- * opens afresh each time.
+ * so a window made again still waits for it, and the pushed page, the alert open, the address typed and where each
+ * page was scrolled stay too; it opens afresh each time.
  */
 @Composable
 internal fun AccountSheetHost(state: AccountHost) {
@@ -144,9 +145,13 @@ internal fun AccountSheetHost(state: AccountHost) {
         alert = rememberForLaunch<String?>(launch, null),
         confirmation = rememberForLaunch(launch, ""),
     )
-    // Each opening scrolls from the top, as a new AccountView does; a change of language keeps the place.
+    // Each opening scrolls from the top, as a new AccountView does; a change of language and a window made again keep
+    // the place.
     var openings by remember { mutableIntStateOf(0) }
-    val scrolls = remember(openings) { SettingsScrolls(ScrollState(0), ScrollState(0), ScrollState(0)) }
+    val root = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
+    val data = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
+    val updates = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
+    val scrolls = remember(root, data, updates) { SettingsScrolls(root, data, updates) }
     Sheet(
         visible = state.showingAccount,
         onDismiss = state::closeAccount,

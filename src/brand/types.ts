@@ -809,7 +809,30 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'samus'
   | 'zipasgo'
   | 'dk-logistics-ee'
-  | 'jet-express-ee';
+  | 'jet-express-ee'
+  | 'adex-al'
+  | 'bypost'
+  | 'cargo-express-mk'
+  | 'delivery-auto'
+  | 'dm-express-me'
+  | 'elit-post'
+  | 'elite-post-al'
+  | 'europoshta'
+  | 'express-one-me'
+  | 'globex-post'
+  | 'greenposta'
+  | 'hopexpress'
+  | 'ics-couriers-ua'
+  | 'intex-courier'
+  | 'jakeluyhtio-suomi'
+  | 'mr-courier-al'
+  | 'ntc-express'
+  | 'post-international'
+  | 'sofex-post'
+  | 'tribex-courier'
+  | 'unipost-express'
+  | 'x-express-rs'
+  | 'xpress-logistics-lu';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

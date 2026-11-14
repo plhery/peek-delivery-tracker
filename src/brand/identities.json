@@ -89,6 +89,9 @@
   "act-argos": {
     "decal": "act-argos"
   },
+  "adex-al": {
+    "decal": "adex-al"
+  },
   "aeronet": {
     "decal": "aeronet"
   },
@@ -583,6 +586,9 @@
   "byhd": {
     "decal": "byhd"
   },
+  "bypost": {
+    "decal": "bypost"
+  },
   "c-chez-vous": {
     "decal": "c-chez-vous"
   },
@@ -614,6 +620,9 @@
   },
   "cargo-expreso": {
     "decal": "cargo-expreso"
+  },
+  "cargo-express-mk": {
+    "decal": "cargo-express-mk"
   },
   "cargo-trans-logistik": {
     "decal": "cargo-trans-logistik"
@@ -1045,6 +1054,9 @@
   "deliveright": {
     "decal": "deliveright"
   },
+  "delivery-auto": {
+    "decal": "delivery-auto"
+  },
   "delivro": {
     "decal": "delivro"
   },
@@ -1153,6 +1165,9 @@
   },
   "dk-logistics-ee": {
     "decal": "dk-logistics-ee"
+  },
+  "dm-express-me": {
+    "decal": "dm-express-me"
   },
   "dnipro-llc": {
     "decal": "dnipro-llc"
@@ -1331,6 +1346,12 @@
   "elianpost": {
     "decal": "elianpost"
   },
+  "elit-post": {
+    "decal": "elit-post"
+  },
+  "elite-post-al": {
+    "decal": "elite-post-al"
+  },
   "elog-luxembourg": {
     "decal": "elog-luxembourg",
     "palette": {
@@ -1438,6 +1459,9 @@
   "europochta": {
     "decal": "europochta"
   },
+  "europoshta": {
+    "decal": "europoshta"
+  },
   "eushipments": {
     "decal": "eushipments"
   },
@@ -1486,6 +1510,9 @@
   "express-one-bg": {
     "decal": "express-one-bg"
   },
+  "express-one-me": {
+    "decal": "express-one-me"
+  },
   "express-ru": {
     "decal": "express-ru"
   },
@@ -1505,6 +1532,9 @@
     "decal": "fan-courier"
   },
   "fan-courier-international": {
+    "decal": "fan-courier"
+  },
+  "fan-courier-md": {
     "decal": "fan-courier"
   },
   "far-international": {
@@ -1761,6 +1791,9 @@
   "globalpost": {
     "decal": "globalpost"
   },
+  "globex-post": {
+    "decal": "globex-post"
+  },
   "gls-at": {
     "family": "gls"
   },
@@ -1861,6 +1894,9 @@
   },
   "grand-slam-express": {
     "decal": "grand-slam-express"
+  },
+  "greenposta": {
+    "decal": "greenposta"
   },
   "greenway-vn": {
     "decal": "greenway-vn"
@@ -1991,6 +2027,9 @@
       "accent": "#000000"
     }
   },
+  "hopexpress": {
+    "decal": "hopexpress"
+  },
   "horoz": {
     "decal": "horoz"
   },
@@ -2068,6 +2107,9 @@
   },
   "ics-courier": {
     "decal": "ics-courier"
+  },
+  "ics-couriers-ua": {
+    "decal": "ics-couriers-ua"
   },
   "idexpress": {
     "decal": "idexpress"
@@ -2154,6 +2196,9 @@
   "intertown-transport": {
     "decal": "intertown-transport"
   },
+  "intex-courier": {
+    "decal": "intex-courier"
+  },
   "intex-paketdienst": {
     "decal": "intex-paketdienst"
   },
@@ -2214,6 +2259,9 @@
   },
   "jadlog": {
     "decal": "jadlog"
+  },
+  "jakeluyhtio-suomi": {
+    "decal": "jakeluyhtio-suomi"
   },
   "jamaica-post": {
     "decal": "jamaica-post"
@@ -2781,6 +2829,9 @@
   "movin": {
     "decal": "movin"
   },
+  "mr-courier-al": {
+    "decal": "mr-courier-al"
+  },
   "mrl-global": {
     "decal": "mrl-global"
   },
@@ -2902,6 +2953,9 @@
       "edge": "#000000",
       "accent": "#ffffff"
     }
+  },
+  "ntc-express": {
+    "decal": "ntc-express"
   },
   "nz-couriers": {
     "decal": "nz-couriers",
@@ -3228,6 +3282,9 @@
   },
   "post-haste": {
     "decal": "post-haste"
+  },
+  "post-international": {
+    "decal": "post-international"
   },
   "post-luxembourg": {
     "decal": "post-luxembourg"
@@ -3799,6 +3856,9 @@
   "smsa-express": {
     "decal": "smsa-express"
   },
+  "sofex-post": {
+    "decal": "sofex-post"
+  },
   "sol-express": {
     "decal": "sol-express"
   },
@@ -4251,6 +4311,9 @@
   "trexity": {
     "decal": "trexity"
   },
+  "tribex-courier": {
+    "decal": "tribex-courier"
+  },
   "trumpcard": {
     "decal": "trumpcard"
   },
@@ -4323,6 +4386,9 @@
   },
   "union-express": {
     "decal": "union-express"
+  },
+  "unipost-express": {
+    "decal": "unipost-express"
   },
   "united-delivery-service": {
     "decal": "united-delivery-service"
@@ -4574,6 +4640,9 @@
   "x-express-ba": {
     "decal": "x-express-ba"
   },
+  "x-express-rs": {
+    "decal": "x-express-rs"
+  },
   "x-trac": {
     "decal": "x-trac"
   },
@@ -4627,6 +4696,9 @@
   },
   "xpress-freight-management": {
     "decal": "xpress-freight-management"
+  },
+  "xpress-logistics-lu": {
+    "decal": "xpress-logistics-lu"
   },
   "xpressbees": {
     "decal": "xpressbees"

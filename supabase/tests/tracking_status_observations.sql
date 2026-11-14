@@ -11,7 +11,7 @@ begin
     ('id'), ('observation_key'), ('carrier'), ('provider_code'),
     ('description_normalized'), ('language_guess'), ('stage_source'),
     ('chosen_stage'), ('count'), ('first_seen'), ('last_seen'),
-    ('sample_event_id'), ('reviewed_at'), ('resolution')
+    ('sample_event_id'), ('sample_attempt_id'), ('reviewed_at'), ('resolution')
   ) as expected (column_name)
   where not exists (
     select 1 from information_schema.columns
@@ -88,6 +88,10 @@ insert into public.tracking_events (
   '{"stage_source":"none"}'::jsonb
 );
 
+insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, started_at)
+values ('97000000-0000-0000-0000-000000000003', '97000000-0000-0000-0000-000000000001', 'scheduled', 'ctt', now()),
+  ('97000000-0000-0000-0000-000000000004', '97000000-0000-0000-0000-000000000001', 'scheduled', 'ctt', now());
+
 set local role service_role;
 
 do $$
@@ -108,7 +112,8 @@ begin
       'stage_source', 'none',
       'chosen_stage', 'in_transit',
       'package_id', '97000000-0000-0000-0000-000000000001',
-      'provider_event_id', 'ctt:sample-event'
+      'provider_event_id', 'ctt:sample-event',
+      'attempt_id', '97000000-0000-0000-0000-000000000003'
     ),
     -- A wording repeated inside one batch collapses instead of aborting it.
     jsonb_build_object(
@@ -119,13 +124,16 @@ begin
       'stage_source', 'none',
       'chosen_stage', 'in_transit'
     ),
+    -- A scan no stored row carries still names the check that saw it; an attempt
+    -- whose row is missing is no error.
     jsonb_build_object(
       'observation_key', inpost_key,
       'carrier', 'inpost',
       'provider_code', '',
       'description_normalized', 'przesylka w nowym stanie',
       'stage_source', 'wording:in_transit',
-      'chosen_stage', 'in_transit'
+      'chosen_stage', 'in_transit',
+      'attempt_id', '97000000-0000-0000-0000-0000000000ff'
     ),
     -- An incomplete row is dropped instead of failing the batch.
     jsonb_build_object('carrier', 'ctt', 'description_normalized', 'no key')
@@ -153,6 +161,13 @@ begin
   if observed.sample_event_id <> '97000000-0000-0000-0000-000000000002'::uuid then
     raise exception 'the sample event was not resolved';
   end if;
+  if observed.sample_attempt_id is distinct from '97000000-0000-0000-0000-000000000003'::uuid then
+    raise exception 'the sample attempt was not recorded';
+  end if;
+  if (select sample_attempt_id from public.tracking_status_observations as observation
+      where observation.observation_key = inpost_key) is not null then
+    raise exception 'an attempt without its row was stored';
+  end if;
   if (select provider_code from public.tracking_status_observations as observation
       where observation.observation_key = inpost_key) is not null then
     raise exception 'an empty provider code must be stored as null';
@@ -170,7 +185,8 @@ begin
     'provider_code', '99',
     'description_normalized', 'objeto em nova fase',
     'stage_source', 'wording:in_transit',
-    'chosen_stage', 'customs'
+    'chosen_stage', 'customs',
+    'attempt_id', '97000000-0000-0000-0000-000000000004'
   )));
 
   if (select count(*) from public.tracking_status_observations) <> 2 then
@@ -191,6 +207,18 @@ begin
   if observed.sample_event_id <> '97000000-0000-0000-0000-000000000002'::uuid then
     raise exception 'the stored sample event was dropped';
   end if;
+  -- It names the check that saw it last.
+  if observed.sample_attempt_id is distinct from '97000000-0000-0000-0000-000000000004'::uuid then
+    raise exception 'the later sighting did not name its check';
+  end if;
+  -- One that names no check keeps the last one named.
+  perform public.record_tracking_status_observations(jsonb_build_array(jsonb_build_object(
+    'observation_key', ctt_key, 'carrier', 'ctt', 'provider_code', '99', 'description_normalized', 'objeto em nova fase',
+    'stage_source', 'wording:in_transit', 'chosen_stage', 'customs')));
+  if (select sample_attempt_id from public.tracking_status_observations as observation
+      where observation.observation_key = ctt_key) is distinct from '97000000-0000-0000-0000-000000000004'::uuid then
+    raise exception 'a sighting without a check dropped the stored one';
+  end if;
 
   begin
     update public.tracking_status_observations as observation
@@ -209,6 +237,15 @@ begin
   where observation.observation_key = ctt_key;
   if observed.id is null or observed.sample_event_id is not null then
     raise exception 'a deleted event did not clear only the sample reference';
+  end if;
+  -- So must purging the check that saw it.
+  reset role;
+  delete from public.tracking_sync_attempts where id = '97000000-0000-0000-0000-000000000004';
+  set local role service_role;
+  select * into observed from public.tracking_status_observations as observation
+  where observation.observation_key = ctt_key;
+  if observed.id is null or observed.sample_attempt_id is not null then
+    raise exception 'a purged attempt did not clear only its reference';
   end if;
 
   -- Wording that expired unseen is on a parcel again once a server that names itself sees it.

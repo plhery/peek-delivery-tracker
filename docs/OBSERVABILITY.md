@@ -457,7 +457,10 @@ Each event records its stage source in `tracking_events.raw_data.stage_source`:
 or `pending` where a scan in no stage of its own steps back from an earlier scan, see [ARCHITECTURE.md](ARCHITECTURE.md)). The sync preserves the scraper's
 source, including on unresolved `pending` scans and observed milestones. Local-clock
 wording is recorded without a sample timeline event when its instant is unresolved. It
-never creates a timestamped scan just to populate the review queue.
+never creates a timestamped scan just to populate the review queue. Every row also names
+the check that last saw it (`sample_attempt_id`, a `tracking_sync_attempts` row, cleared when
+the attempt is purged): it gives the parcel and the provider that answered when no stored
+scan carries the wording.
 
 Review, most frequent first:
 
@@ -469,7 +472,7 @@ group by carrier
 order by sightings desc, wordings desc;
 
 select provider_code, description_normalized, chosen_stage, stage_source,
-       count, first_seen, last_seen, last_seen_version, sample_event_id
+       count, first_seen, last_seen, last_seen_version, sample_event_id, sample_attempt_id
 from public.tracking_status_observations
 where reviewed_at is null and carrier = 'CARRIER_ID'
 order by count desc, last_seen desc;

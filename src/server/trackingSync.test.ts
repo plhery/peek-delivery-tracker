@@ -1230,6 +1230,26 @@ describe('status observation collection', () => {
     expect((parcel.carrier_data as JsonObject).last_update).toBe('2026-10-30T10:53:06.000Z');
   });
 
+  it('names the check that saw each wording, a scan no row stores included', async () => {
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn().mockResolvedValue({
+      status: 'in_transit', last_status_text: 'Estado interno 99', last_update: '2026-09-10T11:00:00Z',
+      events: [
+        { local_time: '2026-09-10T12:00:00', description: 'Estado interno 98', provider_code: '98', stage: 'in_transit', stage_source: 'none' },
+        { time: '2026-09-10T11:00:00Z', description: 'Estado interno 99', provider_code: '99' },
+      ],
+    }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null);
+    await expect(service.syncPackage({ id: 'observed', carrier: 'ctt', tracking_number: 'TEST1234' }))
+      .resolves.toMatchObject({ updated: 1 });
+    const [attemptId] = client.startSyncAttempt.mock.calls[0]!;
+    const [recorded] = client.recordTrackingStatusObservations.mock.calls[0]!;
+    expect(recorded).toEqual([
+      expect.objectContaining({ provider_code: '99', attempt_id: attemptId }),
+      expect.objectContaining({ provider_code: '98', attempt_id: attemptId }),
+    ]);
+  });
+
   it('closes the wording a carrier map leaves unmapped on purpose once it is recorded', async () => {
     const client = fakeClient();
     const adapter = { fetch: vi.fn().mockResolvedValue({

@@ -2045,11 +2045,14 @@ export class TrackingSyncService {
   // locates the sample row. Wording
   // the scraper mapped is sent too, so its open observation closes, and
   // wording its carrier map leaves unmapped on purpose closes as recorded.
+  // Each observation names the check that saw it (`attemptId`): wording no
+  // stored row carries has no sample event to tell its parcel and provider.
   private async recordStatusObservations(
     events: JsonObject[],
     carrierId: string,
     context: SyncRunContext,
     parcel: JsonObject,
+    attemptId: string,
     stored: readonly JsonObject[] = [],
     reusedIdentities: ReadonlyMap<string, string> = new Map(),
     localEvents: JsonObject[] = [],
@@ -2062,7 +2065,7 @@ export class TrackingSyncService {
     const copies = carrierCopies(parcel, all, stored, reusedIdentities);
     const observations = collectStatusObservations(all, carrierId, copies).map((observation) => {
       const row = reusedIdentities.get(observation.provider_event_id);
-      return row ? { ...observation, provider_event_id: row } : observation;
+      return { ...observation, ...(row ? { provider_event_id: row } : {}), attempt_id: attemptId };
     });
     const mapped = collectMappedStatusKeys(all, carrierId, copies);
     if (observations.length === 0 && mapped.length === 0) return;
@@ -2999,7 +3002,7 @@ export class TrackingSyncService {
         anomalies = [...anomalies, 'provider_clock_offset'];
         anomalyScans.provider_clock_offset = offsetScan;
       }
-      await this.recordStatusObservations(eventsToPersist, sourceCarrierId, context, parcel, stored, new Map([...matches.reused, ...matches.skipped]), [
+      await this.recordStatusObservations(eventsToPersist, sourceCarrierId, context, parcel, audit.attemptId, stored, new Map([...matches.reused, ...matches.skipped]), [
         ...(fetched.earlierResult && fetched.earlierCarrierId
           ? localStatusObservationEvents(parcel, fetched.earlierResult, fetched.earlierCarrierId) : []),
         ...localStatusObservationEvents(parcel, result, sourceCarrierId),

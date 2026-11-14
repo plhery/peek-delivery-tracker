@@ -6156,6 +6156,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^JJD000090\\d{14,16}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^MDP[DEGKLMNPQRVWXYZ1-9]{8}$",
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://my.dhlecommerce.nl/home/tracktrace/",

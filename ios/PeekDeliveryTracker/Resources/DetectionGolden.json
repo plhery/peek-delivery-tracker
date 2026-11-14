@@ -90362,6 +90362,22 @@
     ]
   },
   {
+    "input": "MDP531MPW19",
+    "carrier": "dhl-ecommerce-nl",
+    "confidence": "high",
+    "candidates": [
+      "dhl-ecommerce-nl"
+    ]
+  },
+  {
+    "input": "MDP5LYDY48L",
+    "carrier": "dhl-ecommerce-nl",
+    "confidence": "high",
+    "candidates": [
+      "dhl-ecommerce-nl"
+    ]
+  },
+  {
     "input": "ME 17628555026497EB",
     "carrier": "micro-express",
     "confidence": "high",

@@ -102,8 +102,8 @@ it('resets a streak when the configured carrier changes', () => {
 });
 
 it('defers a check our own pacing refused to when the next search frees up, asking no provider and counting no failure', async () => {
-  const run = setup();
-  run.direct.mockRejectedValue(new RateLimitedError('Poste Italiane', 20 * 60_000, 'Searched as often as an hour allows',
+  const run = setup('2026-09-10T10:40:00.000Z');
+  run.direct.mockRejectedValue(new RateLimitedError('Poste Italiane', 40 * 60_000, 'Searched as often as an hour allows',
     { reason: 'self_paced' }));
   const paced = await missed(run.router(), parcel({ consecutive_failures: 1 }));
   expect(paced).toMatchObject({ stale: false, attempted: 0,
@@ -113,10 +113,48 @@ it('defers a check our own pacing refused to when the next search frees up, aski
   expect(run.universal).not.toHaveBeenCalled();
   expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('paced_deferred', expect.objectContaining({ provider: 'la-poste' }));
   // The carrier's own rate limit, which carries no reason, is a failed check that providers answer for.
+  run.advance(20 * 60_000);
   run.direct.mockRejectedValue(new RateLimitedError('Poste Italiane', 20 * 60_000, 'Too many requests'));
   const limited = await missed(run.router(), parcel({ consecutive_failures: 1 }));
   expect(limited).toMatchObject({ attempted: 4, routing: { consecutive_failures: 2, failures: { 'la-poste': { kind: 'rate_limited' } } } });
   expect(run.universal).toHaveBeenCalled();
+});
+
+describe('an account parcel our own pacing refuses once nothing has answered for an hour', () => {
+  const owned = (routing: JsonObject = {}): JsonObject => ({ ...parcel(routing), user_id: 'owner', one_off: false });
+  const outage = () => new RateLimitedError('USPS', 5 * 60_000, 'Outage page on both routes; no read until the pause ends',
+    { reason: 'self_paced' });
+
+  it('asks the providers meanwhile, counting no failure of the carrier', async () => {
+    const run = setup();
+    run.direct.mockRejectedValue(outage());
+    run.universal.mockResolvedValue({ status: 'in_transit', current_stage: 'in_transit' });
+    const answered = await run.router().fetch(owned(), true);
+    expect(run.direct).toHaveBeenCalledTimes(1);
+    expect(run.universal).toHaveBeenCalled();
+    expect(answered.result.routing).toMatchObject({ consecutive_failures: 0, last_success_at: '2026-09-10T11:00:00.000Z' });
+    expect((answered.result.routing as JsonObject).failures).not.toHaveProperty('la-poste');
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('paced_fallback', expect.objectContaining({ provider: 'la-poste' }));
+    expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('paced_deferred', expect.anything());
+  });
+
+  it('comes back when the carrier frees up if no provider answers', async () => {
+    const run = setup();
+    run.direct.mockRejectedValue(outage());
+    const unanswered = await missed(run.router(), owned({ consecutive_failures: 1 }), true);
+    expect(run.universal).toHaveBeenCalled();
+    expect(unanswered).toMatchObject({ attempted: 3, routing: { consecutive_failures: 2, next_check_at: '2026-09-10T11:05:00.000Z' } });
+    expect(unanswered.routing.failures).not.toHaveProperty('la-poste');
+  });
+
+  it('leaves a parcel looked up without an account waiting for the carrier', async () => {
+    const run = setup();
+    run.direct.mockRejectedValue(outage());
+    const paced = await missed(run.router(), { ...owned(), user_id: null, one_off: true }, true);
+    expect(paced).toMatchObject({ attempted: 0, routing: { next_check_at: '2026-09-10T11:05:00.000Z' } });
+    expect(run.universal).not.toHaveBeenCalled();
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('paced_deferred', expect.objectContaining({ provider: 'la-poste' }));
+  });
 });
 
 describe('a check every source sits out', () => {

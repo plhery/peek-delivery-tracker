@@ -1,6 +1,6 @@
 import 'server-only';
 import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
-import { CANDIDATE_PROBE_WINDOW, routingState } from './trackingRouting';
+import { accountParcel, CANDIDATE_PROBE_WINDOW, routingState } from './trackingRouting';
 import { isRecord, type JsonObject } from './types';
 
 /**
@@ -92,9 +92,7 @@ const UNSEEN_RECHECKS_END_MS = 14 * DAY_MS;
  */
 export function unseenRecheckDue(parcel: JsonObject, now: Date): number | null | undefined {
   if (process.env.TRACKING_ENABLE_UNSEEN_RECHECKS !== 'true') return undefined;
-  // Lookups without an account have no owner (one_off), and every account's parcel has one.
-  const owned = parcel.one_off === false || (parcel.one_off == null && typeof parcel.user_id === 'string');
-  const unseen = owned ? unseenFor(parcel, now) : null;
+  const unseen = accountParcel(parcel) ? unseenFor(parcel, now) : null;
   if (unseen === null || unseen < UNSEEN_RECHECKS_MS[0]) return undefined;
   if (unseen >= UNSEEN_RECHECKS_END_MS) return null;
   const since = UNSEEN_RECHECKS_MS.filter((after) => unseen >= after).at(-1)!;

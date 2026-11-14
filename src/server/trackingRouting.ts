@@ -274,6 +274,11 @@ export function clearConfirmation(routing: JsonObject): void {
 
 /** How recent the last successful check is while it still stands for the parcel's progress, around the clock. */
 export const FRESHNESS_WINDOW_MS = HOUR;
+
+/** An account's parcel: lookups without an account have no owner (`one_off`), and every account's parcel has one. */
+export function accountParcel(parcel: JsonObject): boolean {
+  return parcel.one_off === false || (parcel.one_off == null && typeof parcel.user_id === 'string');
+}
 /** How often a parcel asks the universal providers, around the clock. */
 const UNIVERSAL_SPACING_MS = 15 * 60_000;
 /**
@@ -1092,6 +1097,8 @@ export class TrackingRouter {
     const unsettledDirect = new Set<string>();
     // Carriers our own pacing refused before any request (`self_paced`): asked, but nobody contacted.
     const pacedDirect = new Set<string>();
+    // When the parcel's own carrier frees up, paced while the providers stood in for it (0: they did not).
+    let pacedUntil = 0;
     // The clocks of rows a carrier holds back as written ahead of them: a provider relaying them shows them as scans.
     const writtenAhead: string[] = [];
     // Those a carrier named for the number in earlier checks too (`written_ahead`): one answering
@@ -1301,14 +1308,24 @@ export class TrackingRouter {
         // Admission paused this optional browser before any carrier contact: providers remain available.
         if (error instanceof RoyalBrowserPaused) return null;
         // Our own pacing refused the lookup before any request (Poste Italiane's searches an hour, a
-        // DHL Express key's turn): no failure and no contact. The parcel's own carrier defers the
-        // check to when its next search frees up, with no provider asked meanwhile; a candidate
-        // stays unanswered. Parcels a busy hour refuses so spread over the hour.
+        // DHL Express key's turn, USPS's pause while both its routes meet its outage page): no
+        // failure and no contact. The parcel's own carrier defers the check to when its next search
+        // frees up, with no provider asked meanwhile; a candidate stays unanswered. Parcels a busy
+        // hour refuses so spread over the hour.
         if (selfPacedRefusal(error)) {
           pacedDirect.add(carrier);
           if (probe) unsettledDirect.add(carrier);
           if (candidate && !ownInputs) return null;
-          state.next_check_at = iso(now().getTime() + Math.max(60_000, routingFailure(error).retryAfterMs));
+          const free = now().getTime() + Math.max(60_000, routingFailure(error).retryAfterMs);
+          // Pauses can follow one another for hours (USPS's outage spells): an account's parcel nothing
+          // has answered for the freshness window asks the providers meanwhile, as after a carrier's
+          // own 429, and a check they leave unanswered comes back when the carrier's search frees up.
+          if (!recent() && accountParcel(parcel)) {
+            pacedUntil = pacedUntil ? Math.min(pacedUntil, free) : free;
+            report('paced_fallback', carrier, 'rate_limited', error);
+            return null;
+          }
+          state.next_check_at = iso(free);
           report('paced_deferred', carrier, 'rate_limited', error);
           // Nobody answered, so the parcel's chip stays as the last answered checks left it.
           defer();
@@ -2065,6 +2082,8 @@ export class TrackingRouter {
     const deadlines = Object.entries(state.failures).filter(([provider]) => !awaitsInput(provider))
       .map(([, failure]) => millis(failure.retry_at)).filter((time) => time > now().getTime());
     state.next_check_at = iso(Math.max(now().getTime() + 15 * 60_000, Math.min(...deadlines, now().getTime() + HOUR)));
+    // The parcel's own carrier, paced while the providers were asked, is asked again once it frees up.
+    if (pacedUntil) state.next_check_at = iso(Math.min(millis(state.next_check_at), pacedUntil));
     // Each source a scheduled check may ask still waits its turn at the next check: scheduled
     // checks wait for the earliest, a day at most, rather than ask nobody hourly until then.
     const turn = nextTurn();

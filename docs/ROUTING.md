@@ -342,11 +342,15 @@ retry time runs out. Otherwise the router tries another provider. It never retri
 throttled one early.
 
 A lookup our own pacing refuses before any request (`reason: 'self_paced'`: Poste Italiane's
-searches an hour or its pause after a CAPTCHA, a DHL Express key's turn) is no failure and
-no 429 of the carrier's. For the parcel's own carrier, the check is deferred to the refusal's
-`retryAfterMs`, when the next search frees up, with no provider asked meanwhile, so a busy
-hour's parcels spread over it. It counts no failure, takes no health sample and ends
-`skipped`. A carrier asked as a candidate stays unanswered. A carrier's own 429 has no reason.
+searches an hour or its pause after a CAPTCHA, a DHL Express key's turn, USPS's pause while
+both its routes meet its outage page) is no failure and no 429 of the carrier's. For the
+parcel's own carrier, the check is deferred to the refusal's `retryAfterMs`, when the next
+search frees up, with no provider asked meanwhile, so a busy hour's parcels spread over it; it
+ends `skipped`. Pauses can follow one another for hours, as through USPS's outage spells: an
+account's parcel that nothing has answered for an hour, as for a 429, asks the providers
+meanwhile, and a check they leave unanswered comes back when the carrier's search frees up.
+Either way the carrier counts no failure and takes no health sample. A carrier asked as a
+candidate stays unanswered. A carrier's own 429 has no reason.
 Spring GDS's lookups go through PostNL's API, whose 20 calls a minute every caller shares: its
 429 is waited out like any other, but takes no health sample, since it says how busy the API
 is rather than whether Spring GDS works.
@@ -1087,6 +1091,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection). A Sentry event at most once in 30 minutes |
 | `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
+| `paced_fallback` | Our own pacing refused the carrier of an account's parcel nothing has answered for an hour, and the check asks the providers meanwhile |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |
 | `carrier_auto_swapped` | A carrier correction was committed. A signal, unless detection already names the new carrier for the number or lists it first among the carriers recognition asks for the parcel's lookup country: then the line has `category` `detected` |

@@ -1078,6 +1078,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "famafutar": "famafutar",
   "famiport": "famiport",
   "fan-courier": "fan-courier",
+  "fan-courier-international": "fan-courier",
   "far-international": "far-international",
   "fare-rata": "fare-rata",
   "fargo-courier": "fargo-courier",

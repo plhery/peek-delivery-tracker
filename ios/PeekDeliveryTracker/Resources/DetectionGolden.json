@@ -78720,6 +78720,14 @@
     ]
   },
   {
+    "input": "DE1323344412",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
     "input": "DE2019PRO0000309473",
     "carrier": "packlink",
     "confidence": "high",
@@ -89316,6 +89324,18 @@
     ]
   },
   {
+    "input": "LT040101617LT",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "lietuvos-pastas",
+      "chronopost"
+    ]
+  },
+  {
     "input": "LT063514435CH",
     "carrier": "swiss-post",
     "confidence": "high",
@@ -95942,6 +95962,18 @@
       "intl-post"
     ],
     "asked": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "RD012171943LT",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "lietuvos-pastas",
       "chronopost"
     ]
   },

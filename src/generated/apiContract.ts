@@ -2306,7 +2306,7 @@ export const CARRIER_CAPABILITIES = {
     "helpUrl": "https://www.parcelforce.com/contact-us"
   },
   "evri": {
-    "displayName": "Evri",
+    "displayName": "Evri International",
     "color": "#00014d",
     "selectable": true,
     "timezone": "UTC",
@@ -2332,7 +2332,6 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingUrlTemplate": "https://globaleco.app/track",
     "aliases": [
-      "Evri International",
       "Global Eco",
       "GlobalEco"
     ],
@@ -9287,7 +9286,8 @@ export const CARRIER_CAPABILITIES = {
       "Lietuvos pastas",
       "LP Express",
       "Lithuanian Post",
-      "Lithuania Post"
+      "Lithuania Post",
+      "Unisend"
     ],
     "countries": [
       "LT"
@@ -53159,6 +53159,137 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ]
+  },
+  "dk-logistics-ee": {
+    "displayName": "DK Logistics",
+    "aliases": [
+      "DKL",
+      "DK Logistics OÜ"
+    ],
+    "countries": [
+      "EE"
+    ],
+    "color": "#f58428",
+    "selectable": true,
+    "timezone": "Europe/Tallinn",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dkl.ee/en/menu/4-TRACK_TRACE.html"
+  },
+  "jet-express-ee": {
+    "displayName": "Jet Express",
+    "aliases": [
+      "Jet Express OÜ"
+    ],
+    "countries": [
+      "EE"
+    ],
+    "color": "#d61b22",
+    "selectable": true,
+    "timezone": "Europe/Tallinn",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://portal.kuller.ee/opter/TT?keyword={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.kuller.ee"
+        ],
+        "pathPattern": "^/opter/[Tt][Tt]/?$",
+        "params": [
+          "keyword"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.kuller.ee/opter/TT"
+  },
+  "samus": {
+    "displayName": "SAMUS",
+    "aliases": [
+      "UAB SAMUS"
+    ],
+    "countries": [
+      "LT"
+    ],
+    "color": "#e50079",
+    "selectable": true,
+    "timezone": "Europe/Vilnius",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.samus.lt/siuntu-sekimas/?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "samus.lt"
+        ],
+        "pathPattern": "^/siuntu-sekimas/?$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.samus.lt/siuntu-sekimas/"
+  },
+  "siuntos-autobusais": {
+    "displayName": "Siuntos autobusais",
+    "aliases": [
+      "Kautra",
+      "UAB Kautra"
+    ],
+    "countries": [
+      "LT"
+    ],
+    "color": "#00843d",
+    "selectable": true,
+    "timezone": "Europe/Vilnius",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.siuntosautobusais.lt/siuntos-lietuvoje/siuntos-sekimas/"
+  },
+  "zipasgo": {
+    "displayName": "ZipasGo",
+    "aliases": [
+      "Parcel Stars",
+      "Zipas"
+    ],
+    "countries": [
+      "LT"
+    ],
+    "color": "#ffdb1c",
+    "selectable": true,
+    "timezone": "Europe/Vilnius",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://zipasgo.com/lt/siuntimas?tid={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "zipasgo.com"
+        ],
+        "pathPattern": "^/lt/siuntimas/?$",
+        "params": [
+          "tid"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://zipasgo.com/lt/siuntimas"
   }
 } as const;
 
@@ -54708,7 +54839,12 @@ export const CARRIER_IDS = [
   "poste-srpske",
   "trustexpress",
   "sxw-express",
-  "xuchuan-logistics"
+  "xuchuan-logistics",
+  "dk-logistics-ee",
+  "jet-express-ee",
+  "samus",
+  "siuntos-autobusais",
+  "zipasgo"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

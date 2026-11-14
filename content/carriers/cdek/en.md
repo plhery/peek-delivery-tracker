@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-02
 ---
 
-CDEK (СДЭК, also written SDEK) is a courier company. Peek's catalog lists it in Russia, Kazakhstan and Belarus. It brings parcels to your door by courier, or to a pickup point or parcel locker where you collect them. The shop or the sender gives you the number: paste it in the box above. CDEK's own tracker is on my.cdek.ru. CDEK writes its steps in Russian, and the table below gives them in English.
+CDEK (СДЭК, also written SDEK) is a courier company. Peek's catalog lists it in Russia, Kazakhstan, Belarus and Serbia. It brings parcels to your door by courier, or to a pickup point or parcel locker where you collect them. The shop or the sender gives you the number: paste it in the box above. CDEK's own tracker is on my.cdek.ru. CDEK writes its steps in Russian, and the table below gives them in English.
 
 ## CDEK tracking number: what it looks like
 
@@ -83,7 +83,7 @@ For an order from a shop, ask the shop first: it booked the delivery.
 
 [Peek](/) can't be sure of a CDEK number by its shape alone. Paste it all the same: Peek follows more than 3,500 carriers.
 
-- **11 digits starting with 10.** Peek asks carriers whose numbers have this shape whether they have the parcel, five at a time, and shows "Checking tracking services…" meanwhile. If you look it up from Russia, Kazakhstan or Belarus (your iPhone's region, or on the web where you connect from), CDEK is asked first. From elsewhere, it comes in the second round, if none of the first five has the parcel. If CDEK knows the number, Peek names CDEK and says it "has this parcel". If several carriers know it, Peek asks you to choose. If none knows it yet, you see "not found yet · Peek keeps checking". You can also press "Change" and pick CDEK under "Fits this number".
+- **11 digits starting with 10.** Peek asks carriers whose numbers have this shape whether they have the parcel, five at a time, and shows "Checking tracking services…" meanwhile. If you look it up from Russia, Kazakhstan, Belarus or Serbia (your iPhone's region, or on the web where you connect from), CDEK is asked first. From elsewhere, it is still among the first five asked. If CDEK knows the number, Peek names CDEK and says it "has this parcel". If several carriers know it, Peek asks you to choose. If none knows it yet, you see "not found yet · Peek keeps checking". You can also press "Change" and pick CDEK under "Fits this number".
 - **Another shape.** Press "Change" and search for CDEK: typing СДЭК or SDEK finds it too.
 - **A link.** Paste a my.cdek.ru order link, and Peek tracks the order in it with CDEK.
 

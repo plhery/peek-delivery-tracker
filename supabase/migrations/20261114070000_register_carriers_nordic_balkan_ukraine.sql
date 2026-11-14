@@ -2954,4 +2954,4 @@ $$;
 notify pgrst, 'reload schema';
 
 
-insert into public.applied_migrations (name) values ('20261114042000_fan_courier_international') on conflict do nothing;
+insert into public.applied_migrations (name) values ('20261114070000_register_carriers_nordic_balkan_ukraine') on conflict do nothing;

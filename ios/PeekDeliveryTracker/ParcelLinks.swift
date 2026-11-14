@@ -138,9 +138,8 @@ enum ParcelLinkFailure: Equatable, Sendable {
 
     /// Nil for a read that was cancelled.
     init?(_ error: Error) {
-        if error is CancellationError { return nil }
-        if let error = error as? URLError {
-            if error.code == .cancelled { return nil }
+        if error.isCancellation { return nil }
+        if error is URLError {
             self = .offline
         } else if case DeliveryAPIError.rateLimited = error {
             self = .rateLimited

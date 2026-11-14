@@ -381,7 +381,7 @@ struct ParcelLinkSheet: View {
                 let claim = try await parcels.keep(link)
                 // The person may have closed this link, or opened another, while it was kept.
                 if links.route == link { links.resolve(claim) }
-            } catch is CancellationError {
+            } catch where error.isCancellation {
             } catch {
                 errorMessage = localizer.errorMessage(error)
             }
@@ -402,7 +402,7 @@ struct ParcelLinkSheet: View {
                 if links.route == link {
                     if case .already(let parcelID?) = claim { links.openExisting(parcelID) } else { links.resolve(claim) }
                 }
-            } catch is CancellationError {
+            } catch where error.isCancellation {
             } catch {
                 errorMessage = localizer.errorMessage(error)
             }

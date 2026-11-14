@@ -526,7 +526,7 @@ final class DeliveryAPIClient {
             if let event { DeliveryAnalytics.shared.action(event, result.1.statusCode == 202 ? .accepted : .success) }
             return result
         } catch {
-            if let event, !(error is CancellationError) { DeliveryAnalytics.shared.action(event, .error) }
+            if let event, !error.isCancellation { DeliveryAnalytics.shared.action(event, .error) }
             throw error
         }
     }

@@ -636,6 +636,12 @@ final class Localizer: ObservableObject {
     }
 }
 
+extension Error {
+    /// Work given up on, which says nothing went wrong and shows no message. URLSession ends a cancelled task's request
+    /// with URLError.cancelled rather than CancellationError.
+    var isCancellation: Bool { self is CancellationError || (self as? URLError)?.code == .cancelled }
+}
+
 /// The line a parcel's import charges read as, and whether they can still be paid online.
 struct ImportChargesLine: Equatable, Sendable {
     var text: String

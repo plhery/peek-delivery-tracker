@@ -750,7 +750,7 @@ struct SignInView: View {
         Task {
             do { try await operation() }
             catch AuthenticationError.oauthCancelled { }
-            catch is CancellationError { }
+            catch where error.isCancellation { }
             catch {
                 let message = localizer.errorMessage(error)
                 errorMessage = provider == "oidc" && message == localizer.text("error.generic")

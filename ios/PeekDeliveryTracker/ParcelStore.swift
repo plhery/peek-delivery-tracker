@@ -373,7 +373,7 @@ final class ParcelStore: ObservableObject {
         } catch {
             guard (try? session.checkGeneration(generation)) != nil,
                   revision == mutationRevision, sequence == loadSequence,
-                  !(error is CancellationError) else { return .skipped }
+                  !error.isCancellation else { return .skipped }
             let message = localizer.errorMessage(error)
             if errorMessage != message { errorMessage = message }
             var expired = false
@@ -739,7 +739,11 @@ final class ParcelStore: ObservableObject {
             guard generation == session.generation else { throw CancellationError() }
             parcels = device.list()
             refreshing = false
-            if let trouble { return .completed(.failed(localizer.errorMessage(trouble))) }
+            if let trouble {
+                // A check given up on says nothing went wrong.
+                if trouble.isCancellation { throw CancellationError() }
+                return .completed(.failed(localizer.errorMessage(trouble)))
+            }
             return .completed(Parcel.trackingChanged(from: before, to: parcels) ? .updated : .unchanged)
         }
         let jobIDs: [UUID]
@@ -772,7 +776,7 @@ final class ParcelStore: ObservableObject {
             // The checks keep running; their results arrive with a later load.
             result = .stillChecking
         } catch {
-            guard !(error is CancellationError) else { return }
+            guard !error.isCancellation else { return }
             result = .failed(localizer.errorMessage(error))
         }
         guard (try? session.checkGeneration(generation)) != nil else { return }
@@ -1039,7 +1043,7 @@ final class ParcelStore: ObservableObject {
             notificationError = nil
         } catch {
             // An answer for the account before this one says nothing about this one.
-            guard generation == session.generation, !(error is CancellationError) else { return }
+            guard generation == session.generation, !error.isCancellation else { return }
             notificationError = localizer.errorMessage(error)
         }
     }
@@ -1104,7 +1108,7 @@ final class ParcelStore: ObservableObject {
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = nil
         } catch {
-            guard sessionGeneration == session.generation, !(error is CancellationError) else { return }
+            guard sessionGeneration == session.generation, !error.isCancellation else { return }
             notificationError = localizer.errorMessage(error)
         }
     }
@@ -1577,7 +1581,7 @@ final class ParcelStore: ObservableObject {
             }
             deliveryLiveActivityError = nil
         } catch {
-            if generation == deliveryLiveActivityGeneration {
+            if generation == deliveryLiveActivityGeneration, !error.isCancellation {
                 deliveryLiveActivityError = localizer.errorMessage(error)
             }
         }
@@ -1605,7 +1609,7 @@ final class ParcelStore: ObservableObject {
                 deliveryLiveActivityError = nil
             }
         } catch {
-            if generation == deliveryLiveActivityGeneration {
+            if generation == deliveryLiveActivityGeneration, !error.isCancellation {
                 deliveryLiveActivityError = localizer.errorMessage(error)
             }
         }
@@ -1748,7 +1752,8 @@ final class ParcelStore: ObservableObject {
                     self.pendingJobIDs.subtract(current)
                     await self.load(showSpinner: false)
                 } catch {
-                    guard (try? self.session.checkGeneration(generation)) != nil else { return }
+                    // Whoever stopped the wait has let its jobs and this task go.
+                    guard (try? self.session.checkGeneration(generation)) != nil, !error.isCancellation else { return }
                     self.pendingJobIDs.subtract(current)
                     self.errorMessage = self.localizer.errorMessage(error)
                 }

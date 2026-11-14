@@ -974,6 +974,28 @@ final class DeviceParcelTests: XCTestCase {
         return (store, session, device, persistence)
     }
 
+    func testClosingNotificationsBeforeTheirSettingsArriveSaysNothingWentWrong() async throws {
+        let (store, session, _, _) = try signingIn([], into: AccountRoom(0))
+        defer { session.forceSignOut() }
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        let asked = expectation(description: "The settings were asked for")
+        PostcodeTestURLProtocol.held = { request in
+            guard request.url?.path == "/api/push/preferences" else { return false }
+            asked.fulfill()
+            return true
+        }
+        defer { PostcodeTestURLProtocol.held = nil }
+
+        // Settings › Notifications reads them in its task, which closing the page cancels: URLSession ends the request
+        // with URLError.cancelled rather than CancellationError.
+        let reading = Task { await store.loadNotificationPreferences() }
+        await fulfillment(of: [asked], timeout: 2)
+        reading.cancel()
+        await reading.value
+        XCTAssertNil(store.notificationError)
+        XCTAssertNil(store.notificationPreferences)
+    }
+
     func testAParcelAFullAccountRefusesStaysHereAndTheListIsToldOnceASignIn() async throws {
         let account = AccountRoom(1)
         let (store, session, device, _) = try signingIn(["22222222222A", "22222222222B", "22222222222C"], into: account)
@@ -1678,6 +1700,8 @@ private final class PostcodeTestSessionPersistence: SessionPersistence {
 
 private final class PostcodeTestURLProtocol: URLProtocol {
     nonisolated(unsafe) static var handler: ((URLRequest) -> (Int, Data))?
+    /// True for a request that gets no answer, which only cancelling it ends.
+    nonisolated(unsafe) static var held: ((URLRequest) -> Bool)?
 
     @MainActor static var configuration: AppConfiguration {
         AppConfiguration(mode: .api, apiBaseURL: URL(string: "https://postcodes.test")!, supabaseURL: URL(string: "https://postcodes.test")!,
@@ -1712,6 +1736,7 @@ private final class PostcodeTestURLProtocol: URLProtocol {
     override class func canInit(with request: URLRequest) -> Bool { request.url?.host == "postcodes.test" }
     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
     override func startLoading() {
+        if Self.held?(request) == true { return }
         let (status, data) = Self.handler?(request) ?? (500, Data())
         client?.urlProtocol(self, didReceive: HTTPURLResponse(url: request.url!, statusCode: status, httpVersion: nil,
                                                               headerFields: ["Content-Type": "application/json"])!, cacheStoragePolicy: .notAllowed)

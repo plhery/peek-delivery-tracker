@@ -1179,9 +1179,7 @@ private struct DeliveryListView: View {
             for await refreshing in store.$refreshing.values where !refreshing { break }
             guard let outcome = store.refreshOutcome, outcome.id != previousOutcome else { return nil }
             return outcome.result
-        } catch is CancellationError {
-            return nil
-        } catch let error as URLError where error.code == .cancelled {
+        } catch where error.isCancellation {
             return nil
         } catch {
             return .failed(localizer.errorMessage(error))

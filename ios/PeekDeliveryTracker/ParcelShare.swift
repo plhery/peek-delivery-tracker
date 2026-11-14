@@ -329,8 +329,8 @@ final class ParcelShareModel: ObservableObject {
     }
 
     private static func failureKey(_ error: Error) -> String? {
-        if error is CancellationError { return nil }
-        if let error = error as? URLError { return error.code == .cancelled ? nil : "error.connection" }
+        if error.isCancellation { return nil }
+        if error is URLError { return "error.connection" }
         switch error as? DeliveryAPIError {
         case .rateLimited: return "error.rateLimited"
         case .authenticationExpired: return "native.error.authenticationExpired"

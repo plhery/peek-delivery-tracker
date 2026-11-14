@@ -1238,7 +1238,7 @@ struct AddParcelView: View {
                 )
                 onAdded(parcel.id)
                 dismiss()
-            } catch is CancellationError {
+            } catch where error.isCancellation {
                 saving = false
             } catch {
                 if let apiError = error as? DeliveryAPIError,

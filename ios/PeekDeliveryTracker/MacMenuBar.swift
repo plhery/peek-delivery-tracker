@@ -254,7 +254,7 @@ struct MenuBarPanel: View {
         Task {
             do {
                 if case .completed(.failed(let message)) = try await store.refreshAll() { refreshError = message }
-            } catch is CancellationError {
+            } catch where error.isCancellation {
             } catch {
                 refreshError = localizer.errorMessage(error)
             }

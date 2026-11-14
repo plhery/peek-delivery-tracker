@@ -1,6 +1,6 @@
 'use client';
 
-import { useI18n, type DistanceUnit } from '../../i18n';
+import { useI18n } from '../../i18n';
 import { geoCircle, geoDistance, geoGraticule, geoPath } from 'd3-geo';
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type MouseEvent, type PointerEvent } from 'react';
 import { easeInOut, interpolateCamera, projection, subsolarPoint, zoomCamera, type Camera } from './camera';
@@ -8,7 +8,7 @@ import { detailRead, levelStrengths, loadDetail, noDetail, onDetailLoaded, paint
 import { geography, useWorld, type Coordinate } from './geography';
 import { circleOf, dotRadius, layout, mapView, shownOf, targetCamera, type Insets, type Overlay, type PipPlacing, type PipSpot, type Rect, type Shape, type Size } from './layout';
 import { InkPip } from './Pip';
-import { formatKm, type MapMode, type Route } from './route';
+import { formatKm, type DistanceUnit, type MapMode, type Route } from './route';
 import { springAt, springSettleTime, type Spring } from '../../lib/spring';
 import styles from './map.module.css';
 

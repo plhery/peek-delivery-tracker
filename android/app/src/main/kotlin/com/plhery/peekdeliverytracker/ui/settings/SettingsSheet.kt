@@ -315,8 +315,8 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
  * AccountView's `page`: "settings.title" as a large title under the bar, which goes under it as the page scrolls and
  * comes back as the bar's inline title, Close at the bar's leading end, off while the data page waits; then the
  * profile (the account, or the way to one), the deliveries' updates for an account and the widget's switch, the
- * appearance and the language, and the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's
- * ground. It loads the notifications' state as it opens (`.task`).
+ * appearance, the language, the time format and the distance units, and the data's row over the site's, 24 apart and
+ * 24 in, 520 wide at most, on the app's ground. It loads the notifications' state as it opens (`.task`).
  */
 @Composable
 private fun SettingsRootPage(
@@ -400,11 +400,7 @@ private fun SettingsRootPage(
                         SettingsDivider()
                         SettingsLanguageRow()
                         SettingsDivider()
-                        val localizer = LocalLocalizer.current
-                        SettingsToggleRow(
-                            localizer.use24HourTime, { localizer.use24HourTime = it },
-                            localized("settings.use24HourTime"), SETTINGS_CLOCK,
-                        )
+                        SettingsClockRow()
                         SettingsDivider()
                         SettingsDistanceRow()
                     }
@@ -776,8 +772,6 @@ internal const val SETTINGS_CLOSE = "$SETTINGS_SHEET.close"
 internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
-internal const val SETTINGS_DISTANCE = "$SETTINGS_SHEET.distance"
-internal const val SETTINGS_CLOCK = "$SETTINGS_SHEET.clock"
 internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"

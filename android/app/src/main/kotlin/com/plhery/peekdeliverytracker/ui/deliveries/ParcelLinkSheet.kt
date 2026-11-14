@@ -133,6 +133,7 @@ import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
@@ -913,6 +914,7 @@ private fun SharedParcelCard(
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val identities = LocalCarrierIdentities.current ?: return
     val now = LocalNow.current
     val colors = PeekTheme.colors
@@ -1206,6 +1208,7 @@ private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, 
 private fun GiftParcelCard(parcel: Parcel, opened: Boolean, refreshing: Boolean, onRefresh: () -> Unit) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val identities = LocalCarrierIdentities.current ?: return
     val now = LocalNow.current
     val colors = PeekTheme.colors

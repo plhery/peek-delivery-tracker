@@ -1,4 +1,3 @@
-import type { DistanceUnit } from '../../i18n';
 import { geoDistance } from 'd3-geo';
 import { withoutGeneratedScans } from '../../lib/generatedTrack';
 import { sortEventsDesc } from '../../lib/stages';
@@ -183,7 +182,10 @@ export function defaultMode(route: Route, stage?: Stage): MapMode {
   return stage === 'out_for_delivery' || stage === 'ready_for_pickup' || stage === 'failed_attempt' ? 'now' : 'journey';
 }
 
-/** Kilometres, rounded as a journey is told: "8 km", "450 km", "9,300 km". */
+/** The unit a journey's length is told in. */
+export type DistanceUnit = 'km' | 'mi';
+
+/** A distance in kilometres, rounded as a journey is told, in kilometres or miles: "8 km", "450 km", "9,300 km", "280 mi". */
 export function formatKm(km: number, languageTag = 'en', unit: DistanceUnit = 'km'): string {
   const distance = unit === 'mi' ? km / 1.609344 : km;
   const step = distance < 100 ? 1 : distance < 1000 ? 10 : 100;

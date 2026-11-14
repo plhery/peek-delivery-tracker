@@ -2,8 +2,10 @@ package com.plhery.peekdeliverytracker
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.os.LocaleList
 import android.os.Looper
+import android.provider.Settings
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -17,7 +19,10 @@ import com.plhery.peekdeliverytracker.core.AuthSession
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
+import com.plhery.peekdeliverytracker.core.DistancePreference
+import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.JsonEncoder
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackQuestion
@@ -199,6 +204,41 @@ class AppContainerTest {
         idleUntil("the demo") { app.session.state == AuthenticationState.Demo }
         idleUntil("the demo's parcels") { app.parcels.parcelsFlow.value.isNotEmpty() }
         assertTrue(app.session.isDemo)
+    }
+
+    /**
+     * The clock and the distance units are saved by their codes, nothing saved reading as Automatic, which follows the
+     * phone's as it changes: its 24-hour switch, which Android tells with `ACTION_TIME_CHANGED`.
+     */
+    @Test
+    fun theClockAndTheDistanceUnitsAreSavedAndAutomaticFollowsThePhone() {
+        val defaults = PreferencesDefaults.standard(context)
+        defaults.set("mi", forKey = "sdt.native.distanceUnit")
+        Settings.System.putString(context.contentResolver, Settings.System.TIME_12_24, "12")
+        val app = container()
+        val localizer = app.localizer
+        assertEquals(ClockPreference.Automatic, localizer.clockPreference)
+        assertFalse(localizer.use24HourTime)
+        assertEquals(DistancePreference.Miles, localizer.distancePreference)
+        assertEquals(DistanceUnit.Miles, localizer.distanceUnit)
+        app.start(process.lifecycle)
+        idleUntil("the session") { app.session.state != AuthenticationState.Loading }
+
+        Settings.System.putString(context.contentResolver, Settings.System.TIME_12_24, "24")
+        context.sendBroadcast(Intent(Intent.ACTION_TIME_CHANGED))
+        settle()
+        assertTrue(localizer.use24HourTime)
+
+        for ((preference, code) in listOf(ClockPreference.TwelveHour to "12", ClockPreference.TwentyFourHour to "24", ClockPreference.Automatic to "auto")) {
+            localizer.clockPreference = preference
+            settle()
+            assertEquals(code, defaults.string("sdt.native.clock"))
+        }
+        for ((preference, code) in listOf(DistancePreference.Kilometres to "km", DistancePreference.Automatic to "auto")) {
+            localizer.distancePreference = preference
+            settle()
+            assertEquals(code, defaults.string("sdt.native.distanceUnit"))
+        }
     }
 
     /**

@@ -3,11 +3,16 @@ package com.plhery.peekdeliverytracker.platform
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.icu.util.LocaleData
+import android.icu.util.ULocale
 import android.os.Build
 import android.os.LocaleList
+import android.text.format.DateFormat
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AppConfiguration
+import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
+import com.plhery.peekdeliverytracker.core.DistanceUnit
 import java.util.Locale
 
 /** What the app reads of the phone, where the iPhone reads UIDevice, Locale and its bundle. */
@@ -25,6 +30,20 @@ object Device {
     fun preferredLanguages(): List<String> = LocaleList.getDefault().tags()
 
     private fun LocaleList.tags(): List<String> = toLanguageTags().split(',').filter { it.isNotEmpty() }
+
+    /** Whether the phone's clock runs to 24 hours: its "Use 24-hour format", else its language's own. */
+    fun uses24HourTime(context: Context): Boolean = DateFormat.is24HourFormat(context)
+
+    /**
+     * Whether times are written on a 24-hour clock where the app isn't open to say so, as a push is posted or a widget
+     * drawn: the clock chosen in Settings, else the phone's.
+     */
+    fun appUses24HourTime(context: Context): Boolean =
+        ClockPreference.from(PreferencesDefaults.standard(context).string(ClockPreference.storageKey)).uses24HourTime(uses24HourTime(context))
+
+    /** The unit the phone's [region] measures roads in: kilometres where it is metric, miles elsewhere (the US, the UK). */
+    fun distanceUnit(): DistanceUnit =
+        if (LocaleData.getMeasurementSystem(ULocale.forLocale(region())) == LocaleData.MeasurementSystem.SI) DistanceUnit.Kilometres else DistanceUnit.Miles
 
     /**
      * `UIDevice.current.name`, which the iPhone gives apps as its model alone ("iPhone") without the entitlement for

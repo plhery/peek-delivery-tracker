@@ -18,6 +18,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,11 +48,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.ClockPreference
+import com.plhery.peekdeliverytracker.core.DistancePreference
 import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
-import com.plhery.peekdeliverytracker.ui.LocalDistanceUnit
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
@@ -251,6 +253,11 @@ internal fun SettingsToggleRow(
     }
 }
 
+/**
+ * `SettingsLanguageRow`: "language.label" and the app's language by its own name, in a [SettingsPickerRow] of the
+ * languages by their own names. A choice sets the app's language (`localizer.language`), which the app saves and passes
+ * on.
+ */
 @Composable
 internal fun SettingsLanguageRow() {
     val localizer = LocalLocalizer.current
@@ -264,20 +271,76 @@ internal fun SettingsLanguageRow() {
     ) { localizer.language = AppLanguage.entries[it] }
 }
 
+/**
+ * "settings.timeFormat" in a [SettingsPickerRow]: Automatic, which names the phone's clock ("Automatic (24-hour)"),
+ * 24-hour or 12-hour. A choice sets the localizer's clock (`localizer.clockPreference`), which the app saves.
+ */
+@Composable
+internal fun SettingsClockRow() {
+    val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
+    val chosen by localizer.clockPreferenceFlow.collectAsState()
+    val system by localizer.systemUses24HourTimeFlow.collectAsState()
+    val options = remember(localizer, language, system) {
+        ClockPreference.entries.map {
+            val title = when (it) {
+                ClockPreference.Automatic ->
+                    localizer.text("settings.automatic", mapOf("value" to localizer.text(if (system) "settings.clock24" else "settings.clock12")))
+                ClockPreference.TwentyFourHour -> localizer.text("settings.clock24")
+                ClockPreference.TwelveHour -> localizer.text("settings.clock12")
+            }
+            MenuOption(title, tag = "$SETTINGS_CLOCK.${it.code}")
+        }
+    }
+    SettingsPickerRow(
+        label = localized("settings.timeFormat"),
+        options = options,
+        selected = ClockPreference.entries.indexOf(chosen),
+        rowTag = SETTINGS_CLOCK,
+        pickerTag = SETTINGS_CLOCK_PICKER,
+    ) { localizer.clockPreference = ClockPreference.entries[it] }
+}
+
+/**
+ * "settings.distanceUnits" in a [SettingsPickerRow]: Automatic, which names the phone's unit ("Automatic (km)"),
+ * kilometres or miles. A choice sets the localizer's units (`localizer.distancePreference`), which the app saves.
+ */
 @Composable
 internal fun SettingsDistanceRow() {
     val localizer = LocalLocalizer.current
-    val unit = LocalDistanceUnit.current
+    val language = LocalLanguage.current
+    val chosen by localizer.distancePreferenceFlow.collectAsState()
+    val system by localizer.systemDistanceUnitFlow.collectAsState()
+    val options = remember(localizer, language, system) {
+        DistancePreference.entries.map {
+            val title = when (it) {
+                DistancePreference.Automatic -> localizer.text(
+                    "settings.automatic",
+                    mapOf("value" to localizer.text(if (system == DistanceUnit.Miles) "settings.milesShort" else "settings.kilometersShort")),
+                )
+                DistancePreference.Kilometres -> localizer.text("settings.kilometers")
+                DistancePreference.Miles -> localizer.text("settings.miles")
+            }
+            MenuOption(title, tag = "$SETTINGS_DISTANCE.${it.code}")
+        }
+    }
     SettingsPickerRow(
         label = localized("settings.distanceUnits"),
-        options = DistanceUnit.entries.map { MenuOption(localized(it.labelKey), tag = "$SETTINGS_DISTANCE.${it.code}") },
-        selected = DistanceUnit.entries.indexOf(unit),
+        options = options,
+        selected = DistancePreference.entries.indexOf(chosen),
         rowTag = SETTINGS_DISTANCE,
-        pickerTag = "$SETTINGS_DISTANCE.picker",
-    ) { localizer.distanceUnit = DistanceUnit.entries[it] }
+        pickerTag = SETTINGS_DISTANCE_PICKER,
+    ) { localizer.distancePreference = DistancePreference.entries[it] }
 }
 
-/** A picker row whose value sits under the label at the largest text sizes. */
+/**
+ * A menu `Picker` in a Form row: `label` in subheadline, and the option `selected` with the menu's chevrons in the
+ * secondary grey, beside it, 54 tall at least and 15 in, or under it at the accessibility sizes. A tap on the option
+ * and its chevrons, the picker's button, opens iOS's menu of `options` over the sheet ([SheetMenu]), the one selected
+ * checked, and fades them alone while pressed; the rest of the row takes no finger. A choice goes to `onSelect`.
+ * TalkBack still stops on the row as one, read as its label with the option as its state, and opens the menu from
+ * there: the row keeps the semantics, which clear the picker's own.
+ */
 @Composable
 private fun SettingsPickerRow(
     label: String,
@@ -522,3 +585,7 @@ internal const val SETTINGS_SIGN_IN = "$SETTINGS_SHEET.signIn"
 internal const val SETTINGS_APPEARANCE = "$SETTINGS_SHEET.appearance"
 internal const val SETTINGS_LANGUAGE = "$SETTINGS_SHEET.language"
 internal const val SETTINGS_LANGUAGE_PICKER = "$SETTINGS_LANGUAGE.picker"
+internal const val SETTINGS_CLOCK = "$SETTINGS_SHEET.clock"
+internal const val SETTINGS_CLOCK_PICKER = "$SETTINGS_CLOCK.picker"
+internal const val SETTINGS_DISTANCE = "$SETTINGS_SHEET.distance"
+internal const val SETTINGS_DISTANCE_PICKER = "$SETTINGS_DISTANCE.picker"

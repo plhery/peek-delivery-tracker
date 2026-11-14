@@ -864,10 +864,21 @@ private struct SettingsDistanceRow: View {
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
-        SettingsPickerRow(title: localizer.text("settings.distanceUnits"), selection: $localizer.distanceUnit) {
-            ForEach(DistanceUnit.allCases, id: \.self) { unit in Text(localizer.text(unit.labelKey)).tag(unit) }
+        SettingsPickerRow(title: localizer.text("settings.distanceUnits"), selection: $localizer.distance) {
+            ForEach(DistancePreference.allCases, id: \.self) { distance in Text(label(distance)).tag(distance) }
         }
         .accessibilityIdentifier("settings.distanceUnits")
+    }
+
+    /// Automatic names the unit the system measures in.
+    private func label(_ distance: DistancePreference) -> String {
+        switch distance {
+        case .automatic:
+            let unit = localizer.text(localizer.systemDistanceUnit == .miles ? "settings.milesShort" : "settings.kilometersShort")
+            return localizer.text("settings.automatic", ["value": unit])
+        case .kilometres: return localizer.text("settings.kilometers")
+        case .miles: return localizer.text("settings.miles")
+        }
     }
 }
 
@@ -907,13 +918,21 @@ private struct SettingsClockRow: View {
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
-        Toggle(isOn: $localizer.use24HourTime) {
-            SettingsRow(title: localizer.text("settings.use24HourTime"), padded: false)
+        SettingsPickerRow(title: localizer.text("settings.timeFormat"), selection: $localizer.clock) {
+            ForEach(ClockPreference.allCases, id: \.self) { clock in Text(label(clock)).tag(clock) }
         }
-        .rowToggle()
-        .padding(15)
-        .tint(settingsGreen)
         .accessibilityIdentifier("settings.clock")
+    }
+
+    /// Automatic names the clock the system writes on.
+    private func label(_ clock: ClockPreference) -> String {
+        switch clock {
+        case .automatic:
+            let system = localizer.text(localizer.systemUses24HourTime ? "settings.clock24" : "settings.clock12")
+            return localizer.text("settings.automatic", ["value": system])
+        case .twentyFourHour: return localizer.text("settings.clock24")
+        case .twelveHour: return localizer.text("settings.clock12")
+        }
     }
 }
 

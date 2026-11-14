@@ -87,6 +87,7 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -168,6 +169,7 @@ internal fun LivePassCard(
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val identities = LocalCarrierIdentities.current ?: return
     val branding = shownCarrierIdentity(parcel, localizer, language) ?: return
     val now = LocalNow.current()

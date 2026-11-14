@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.CarrierTruckGeometry
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
+import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
@@ -57,6 +58,7 @@ import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
 import com.plhery.peekdeliverytracker.core.listStatus
 import com.plhery.peekdeliverytracker.core.openingLine
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import java.util.Locale
@@ -123,12 +125,16 @@ private fun CardAndSteps(list: DeliveryWidgetList, parcel: DeliveryWidgetParcel,
 
 /**
  * The steps that fit `height`, four at most: a dot on the thread, the brightest for the latest; the carrier's words,
- * semibold for the latest, and the time at the end in the card's ink (the time alone today, else after the weekday);
- * the place under them.
+ * semibold for the latest, and the time at the end in the card's ink (the time alone today, else after the weekday),
+ * on the app's clock ([Device.appUses24HourTime]); the place under them.
  */
 @Composable
 private fun Steps(list: DeliveryWidgetList, steps: List<DeliveryWidgetStep>, card: DeliveryWidgetCard, height: Dp, type: WidgetText) {
-    val copy = remember(list.languageCode) { Localizer(AppLanguage.fromRawValue(list.languageCode) ?: AppLanguage.En) }
+    val use24HourTime = Device.appUses24HourTime(LocalContext.current)
+    val copy = remember(list.languageCode, use24HourTime) {
+        val clock = if (use24HourTime) ClockPreference.TwentyFourHour else ClockPreference.TwelveHour
+        Localizer(AppLanguage.fromRawValue(list.languageCode) ?: AppLanguage.En, clockPreference = clock)
+    }
     val footnote = type.points(IosTextStyle.Footnote)
     val caption = type.points(IosTextStyle.Caption)
     val caption2 = type.points(IosTextStyle.Caption2)

@@ -7,7 +7,7 @@ final class NotificationService: UNNotificationServiceExtension {
         _ request: UNNotificationRequest,
         withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
     ) {
-        let use24HourTime = DeviceClock.sharedDefaults()?.object(forKey: DeviceClock.preferenceKey) as? Bool ?? true
+        let use24HourTime = DeviceClock.uses24HourTime(in: DeviceClock.sharedDefaults())
         guard let body = DeviceClock.body(request.content.userInfo, use24HourTime: use24HourTime),
               let content = request.content.mutableCopy() as? UNMutableNotificationContent else {
             contentHandler(request.content)

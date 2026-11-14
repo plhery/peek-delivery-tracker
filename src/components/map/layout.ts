@@ -1,10 +1,9 @@
-import type { DistanceUnit } from '../../i18n';
 // What a map shows and where everything on it goes, worked out without a browser: the canvas map draws from it, and so does the server.
 import { geoDistance, geoInterpolate, geoPath } from 'd3-geo';
 import { CLOSE_UP_KM, fitCamera, projection, type Box, type Camera } from './camera';
 import type { Town } from './detail';
 import { PIP_FRAME, PIP_SPOTS, PIP_SPOT_BELOW, outlineDistance, pipExtents, pipOutlines, pipWidths, type PipMood, type PipSide } from './pipGeometry';
-import { NEAR_KM, distanceKm, formatKm, placeName, type MapMode, type Route, type Scale } from './route';
+import { NEAR_KM, distanceKm, formatKm, placeName, type DistanceUnit, type MapMode, type Route, type Scale } from './route';
 import { cities, geography, type Coordinate, type Detail, type Part } from './world';
 
 export interface Insets { top: number; right: number; bottom: number; left: number }

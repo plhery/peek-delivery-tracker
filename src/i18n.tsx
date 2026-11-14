@@ -12,6 +12,8 @@ import {
 } from 'react';
 import { detectLocale, documentLanguage, isLocale, languagePath, LOCALE_COOKIE, manifestPath, pathLanguage, SUPPORTED_LOCALES, type Locale } from './lib/locale';
 import { languageTags, translateMessage, type MessageKey, type Messages, type Translate } from './lib/messages';
+import { clockPreference, distancePreference, localeDistanceUnit, localeUses24HourTime, type ClockPreference, type DistancePreference } from './lib/units';
+import type { DistanceUnit } from './components/map/route';
 
 export { detectLocale, SUPPORTED_LOCALES, type Locale };
 // The words themselves have no React in them, so the server can use them too.
@@ -30,21 +32,17 @@ export {
 export type { MessageKey, Messages, Translate };
 
 const STORAGE_KEY = 'deliveryTrackerLocale';
-const CLOCK_STORAGE_KEY = 'deliveryTrackerUse24HourTime';
+const CLOCK_STORAGE_KEY = 'deliveryTrackerClock';
 const DISTANCE_STORAGE_KEY = 'deliveryTrackerDistanceUnit';
-
-export type DistanceUnit = 'km' | 'mi';
 
 import en from '../shared/locales/en.json';
 
-async function savePushClockPreference(use24HourTime: boolean) {
+/** The clock choice where the push worker reads it (public/push-sw.js), which follows the browser when it finds none. */
+async function savePushClockPreference(clock: ClockPreference) {
   try {
-    if (!window.caches) return;
     const cache = await window.caches.open('peek-preferences');
-    try { use24HourTime = window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false'; }
-    catch { /* Use the choice from this tab. */ }
-    await cache.put('/__peek/preferences/clock', new Response(String(use24HourTime)));
-  } catch { /* Push notifications use the default when shared storage is unavailable. */ }
+    await cache.put('/__peek/preferences/clock', new Response(clock));
+  } catch { /* Without it, notifications follow the browser's clock. */ }
 }
 
 // English ships with the app. The server sends the page's own language with
@@ -74,10 +72,17 @@ interface I18nValue {
   locale: Locale;
   languageTag: string;
   setLocale: (locale: Locale) => void;
+  /** Whether times are written on a 24-hour clock: the choice in Settings, or the browser's clock. */
   use24HourTime: boolean;
-  setUse24HourTime: (enabled: boolean) => void;
+  /** The unit distances are written in: the choice in Settings, or the browser's region's. */
   distanceUnit: DistanceUnit;
-  setDistanceUnit: (unit: DistanceUnit) => void;
+  /** What Settings keeps for each, `auto` following the browser. */
+  clock: ClockPreference;
+  setClock: (clock: ClockPreference) => void;
+  distance: DistancePreference;
+  setDistance: (distance: DistancePreference) => void;
+  /** What `auto` gives here, for Settings to name. */
+  automatic: { use24HourTime: boolean; distanceUnit: DistanceUnit };
   t: Translate;
 }
 
@@ -91,18 +96,29 @@ export function translate(
   return translateMessage(locale, key, variables, messages);
 }
 
+/** What the server writes, and a page before it has read the browser. */
+const SERVER_UNITS: I18nValue['automatic'] = { use24HourTime: true, distanceUnit: 'km' };
+
 const defaultValue: I18nValue = {
   locale: 'en',
   languageTag: 'en-CH',
   setLocale: () => undefined,
   use24HourTime: true,
-  setUse24HourTime: () => undefined,
   distanceUnit: 'km',
-  setDistanceUnit: () => undefined,
+  clock: 'auto',
+  setClock: () => undefined,
+  distance: 'auto',
+  setDistance: () => undefined,
+  automatic: SERVER_UNITS,
   t: (key, variables) => translate('en', key, variables),
 };
 
 const I18nContext = createContext<I18nValue>(defaultValue);
+
+/** What the browser's own settings give: its clock, and the units of its language's region. */
+function browserUnits(): I18nValue['automatic'] {
+  return { use24HourTime: localeUses24HourTime(), distanceUnit: localeDistanceUnit(window.navigator.language) };
+}
 
 function savedLocale(): Locale | null {
   try {
@@ -143,44 +159,53 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     return messages ? { locale, messages } : { locale: 'en' as Locale, messages: en };
   });
   const requested = useRef(language.locale);
-  const [use24HourTime, setClock] = useState(true);
-  const [distanceUnit, setDistance] = useState<DistanceUnit>('km');
+  // The server writes 24 hours and kilometres, as it cannot know the browser; the browser's own clock and units, and
+  // a saved choice, replace them before the first paint after hydration.
+  const [clock, setClockChoice] = useState<ClockPreference>('auto');
+  const [distance, setDistanceChoice] = useState<DistancePreference>('auto');
+  const [automatic, setAutomatic] = useState(SERVER_UNITS);
 
   useLayoutEffect(() => {
     const readClock = () => {
-      try {
-        const enabled = window.localStorage.getItem(CLOCK_STORAGE_KEY) !== 'false';
-        setClock(enabled);
-        void savePushClockPreference(enabled);
-      }
+      try { setClockChoice(clockPreference(window.localStorage.getItem(CLOCK_STORAGE_KEY))); }
       catch { /* Keep the current clock when storage is unavailable. */ }
     };
     const readDistance = () => {
-      try { setDistance(window.localStorage.getItem(DISTANCE_STORAGE_KEY) === 'mi' ? 'mi' : 'km'); }
+      try { setDistanceChoice(distancePreference(window.localStorage.getItem(DISTANCE_STORAGE_KEY))); }
       catch { /* Keep the current units when storage is unavailable. */ }
     };
+    // Another tab's choice.
     const syncPreferences = (event: StorageEvent) => {
       if (event.key === CLOCK_STORAGE_KEY || event.key === null) readClock();
       if (event.key === DISTANCE_STORAGE_KEY || event.key === null) readDistance();
     };
+    const readBrowser = () => setAutomatic(browserUnits());
     readClock();
     readDistance();
+    readBrowser();
     window.addEventListener('storage', syncPreferences);
-    return () => window.removeEventListener('storage', syncPreferences);
+    window.addEventListener('languagechange', readBrowser);
+    return () => {
+      window.removeEventListener('storage', syncPreferences);
+      window.removeEventListener('languagechange', readBrowser);
+    };
   }, []);
 
-  const setUse24HourTime = useCallback((enabled: boolean) => {
-    setClock(enabled);
-    try { window.localStorage.setItem(CLOCK_STORAGE_KEY, String(enabled)); }
+  const setClock = useCallback((next: ClockPreference) => {
+    setClockChoice(next);
+    try { window.localStorage.setItem(CLOCK_STORAGE_KEY, next); }
     catch { /* Keep the choice for this session. */ }
-    void savePushClockPreference(enabled);
+    void savePushClockPreference(next);
   }, []);
 
-  const setDistanceUnit = useCallback((unit: DistanceUnit) => {
-    setDistance(unit);
-    try { window.localStorage.setItem(DISTANCE_STORAGE_KEY, unit); }
+  const setDistance = useCallback((next: DistancePreference) => {
+    setDistanceChoice(next);
+    try { window.localStorage.setItem(DISTANCE_STORAGE_KEY, next); }
     catch { /* Keep the choice for this session. */ }
   }, []);
+
+  const use24HourTime = clock === 'auto' ? automatic.use24HourTime : clock === '24';
+  const distanceUnit = distance === 'auto' ? automatic.distanceUnit : distance;
 
   const show = useCallback((next: Locale) => {
     requested.current = next;
@@ -241,11 +266,14 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     languageTag: languageTags[language.locale],
     setLocale: chooseLocale,
     use24HourTime,
-    setUse24HourTime,
     distanceUnit,
-    setDistanceUnit,
+    clock,
+    setClock,
+    distance,
+    setDistance,
+    automatic,
     t,
-  }), [language, chooseLocale, use24HourTime, setUse24HourTime, distanceUnit, setDistanceUnit, t]);
+  }), [language, chooseLocale, use24HourTime, distanceUnit, clock, setClock, distance, setDistance, automatic, t]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

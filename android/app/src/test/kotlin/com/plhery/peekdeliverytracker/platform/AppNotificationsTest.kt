@@ -8,13 +8,16 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Looper
+import android.provider.Settings
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.R
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import java.time.Instant
@@ -139,19 +142,40 @@ class AppNotificationsTest {
         assertEquals(written, posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
     }
 
+    /**
+     * A push's times are on the clock chosen in Settings, else on the phone's as the push is posted, the app not running:
+     * the service sends a body for each clock (`body_12_hour`), and the time of a delivery for the phone to write.
+     */
     @Test
-    fun aTimedEstimateUsesTheClockPreferenceWhenPosted() {
+    fun aPushIsWrittenOnTheAppsClockAsItIsPosted() {
         val defaults = PreferencesDefaults.standard(context)
-        val push = parcelPush("Arriving at 16:00") + ("body_12_hour" to "Arriving at 4:00 pm")
-        notifications.post(push)
-        assertEquals("Arriving at 16:00", posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
-        try {
-            defaults.set(true, forKey = PreferencesDefaults.USE_12_HOUR_TIME)
-            notifications.post(push)
-            assertEquals("Arriving at 4:00 pm", posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
-        } finally {
-            defaults.removeObject(forKey = PreferencesDefaults.USE_12_HOUR_TIME)
+        fun phoneClock(hours: String) = Settings.System.putString(context.contentResolver, Settings.System.TIME_12_24, hours)
+        val estimate = parcelPush("Arriving at 16:00") + ("body_12_hour" to "Arriving at 4:00 PM")
+        fun told(data: Map<String, String> = estimate): String {
+            notifications.post(data)
+            return posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString()
         }
+
+        // Nothing saved, or Automatic: the phone's clock.
+        phoneClock("24")
+        assertEquals("Arriving at 16:00", told())
+        phoneClock("12")
+        assertEquals("Arriving at 4:00 PM", told())
+        defaults.set("auto", forKey = ClockPreference.storageKey)
+        assertEquals("Arriving at 4:00 PM", told())
+        // A minute before the captures' 06:11 in Zurich.
+        val scanned = AppClock.now().minusSeconds(60).toString()
+        assertEquals("Books · delivered at 6:10 AM", told(deliveredPush(scanned)))
+
+        // A clock chosen wins over the phone's, either way.
+        defaults.set("24", forKey = ClockPreference.storageKey)
+        assertEquals("Arriving at 16:00", told())
+        phoneClock("24")
+        defaults.set("12", forKey = ClockPreference.storageKey)
+        assertEquals("Arriving at 4:00 PM", told())
+        assertEquals("Books · delivered at 6:10 AM", told(deliveredPush(scanned)))
+        defaults.set("24", forKey = ClockPreference.storageKey)
+        assertEquals("Books · delivered at 06:10", told(deliveredPush(scanned)))
     }
 
     @Test

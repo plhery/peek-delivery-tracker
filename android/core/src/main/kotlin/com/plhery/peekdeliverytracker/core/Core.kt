@@ -191,6 +191,27 @@ enum class AppLanguage(val rawValue: String) {
 }
 
 /**
+ * The clock chosen in Settings, saved as its code under [storageKey]: Automatic, the phone's (`auto`), or a 24-hour
+ * (`24`) or 12-hour (`12`) one.
+ */
+enum class ClockPreference(val code: String, private val chosen24HourTime: Boolean?) {
+    Automatic("auto", null),
+    TwentyFourHour("24", true),
+    TwelveHour("12", false),
+    ;
+
+    /** Whether times are written on a 24-hour clock: the one chosen, else the phone's, `system`. */
+    fun uses24HourTime(system: Boolean): Boolean = chosen24HourTime ?: system
+
+    companion object {
+        const val storageKey = "sdt.native.clock"
+
+        /** The choice saved; nothing, or what no choice reads as, is Automatic. */
+        fun from(saved: String?): ClockPreference = entries.firstOrNull { it.code == saved } ?: Automatic
+    }
+}
+
+/**
  * The app's copy in its languages (Localization.json) and its date, time and money formats. Where Core.swift's
  * Localizer starts from `AppLanguage.current` and saves each language chosen (UserDefaults, and the widget's app
  * group), the app passes `AppLanguage.current` of its saved choice and the device's languages, and saves the
@@ -200,22 +221,74 @@ class Localizer(
     language: AppLanguage,
     /** Where the copy names the device, a variant such as `ipad` replaces the key when it has one. */
     private val variant: String? = null,
-    use24HourTime: Boolean = true,
-    distanceUnit: DistanceUnit = DistanceUnit.Kilometres,
+    /** The clock chosen in Settings, and whether the phone's runs to 24 hours, which Automatic follows. */
+    clockPreference: ClockPreference = ClockPreference.Automatic,
+    systemUses24HourTime: Boolean = true,
+    /** The distance units chosen in Settings, and the phone's, which Automatic follows. */
+    distancePreference: DistancePreference = DistancePreference.Automatic,
+    systemDistanceUnit: DistanceUnit = DistanceUnit.Kilometres,
 ) {
-    private val clockState = MutableStateFlow(use24HourTime)
+    private val clockPreferenceState = MutableStateFlow(clockPreference)
+    private val systemClockState = MutableStateFlow(systemUses24HourTime)
+    private val clockState = MutableStateFlow(clockPreference.uses24HourTime(systemUses24HourTime))
+
+    /** The clock chosen as it changes, for Settings and for saving it. */
+    val clockPreferenceFlow: StateFlow<ClockPreference> = clockPreferenceState.asStateFlow()
+
+    /** The phone's clock as it changes, which Settings names beside Automatic. */
+    val systemUses24HourTimeFlow: StateFlow<Boolean> = systemClockState.asStateFlow()
+
+    /** Whether times are written on a 24-hour clock ([use24HourTime]) as it changes, so they are written again. */
     val use24HourTimeFlow: StateFlow<Boolean> = clockState.asStateFlow()
 
-    var use24HourTime: Boolean
-        get() = clockState.value
-        set(value) { clockState.value = value }
+    var clockPreference: ClockPreference
+        get() = clockPreferenceState.value
+        set(value) {
+            clockPreferenceState.value = value
+            clockState.value = value.uses24HourTime(systemUses24HourTime)
+        }
 
-    private val distanceState = MutableStateFlow(distanceUnit)
+    /** Whether the phone's clock runs to 24 hours: the app sets it again when the phone's changes. */
+    var systemUses24HourTime: Boolean
+        get() = systemClockState.value
+        set(value) {
+            systemClockState.value = value
+            clockState.value = clockPreference.uses24HourTime(value)
+        }
+
+    /** Whether times are written "15:05" rather than "3:05 PM": the clock chosen, else the phone's. */
+    val use24HourTime: Boolean get() = clockState.value
+
+    private val distancePreferenceState = MutableStateFlow(distancePreference)
+    private val systemDistanceState = MutableStateFlow(systemDistanceUnit)
+    private val distanceState = MutableStateFlow(distancePreference.resolved(systemDistanceUnit))
+
+    /** The distance units chosen as they change, for Settings and for saving them. */
+    val distancePreferenceFlow: StateFlow<DistancePreference> = distancePreferenceState.asStateFlow()
+
+    /** The phone's distance unit as it changes, which Settings names beside Automatic. */
+    val systemDistanceUnitFlow: StateFlow<DistanceUnit> = systemDistanceState.asStateFlow()
+
+    /** The unit distances are written in ([distanceUnit]) as it changes, so they are written again. */
     val distanceUnitFlow: StateFlow<DistanceUnit> = distanceState.asStateFlow()
 
-    var distanceUnit: DistanceUnit
-        get() = distanceState.value
-        set(value) { distanceState.value = value }
+    var distancePreference: DistancePreference
+        get() = distancePreferenceState.value
+        set(value) {
+            distancePreferenceState.value = value
+            distanceState.value = value.resolved(systemDistanceUnit)
+        }
+
+    /** The unit the phone's region measures roads in: the app sets it again when the phone's changes. */
+    var systemDistanceUnit: DistanceUnit
+        get() = systemDistanceState.value
+        set(value) {
+            systemDistanceState.value = value
+            distanceState.value = distancePreference.resolved(value)
+        }
+
+    /** The unit distances are written in: the one chosen, else the phone's. */
+    val distanceUnit: DistanceUnit get() = distanceState.value
 
     private val languageState = MutableStateFlow(language)
 
@@ -382,7 +455,12 @@ class Localizer(
      */
     private fun fields(date: Instant): FoundationDates.DateFields = FoundationDates.dateFields(date, ZoneId.systemDefault())
 
-    /** Hours and minutes in the app language, as event rows show them. */
+    /**
+     * Hours and minutes in the app language and `timeZone`, as event rows show them, in ASCII digits in every language:
+     * "HH:mm" on a 24-hour clock ([use24HourTime]), else the hour and the language's day period, the iPhone's
+     * (FormatData.kt): "3:05 PM", "下午3:05". The formatter keeps the language's own calendar, which writes nothing for a
+     * date ICU's calendar does not hold.
+     */
     fun clockTime(date: Instant, timeZone: ZoneId = ZoneId.systemDefault()): String {
         if (!FoundationDates.calendarHolds(date)) return ""
         val fields = FoundationDates.dateFields(date, timeZone)
@@ -466,6 +544,11 @@ class Localizer(
         return "$weekday ${clockTime(date)}"
     }
 
+    /**
+     * A date and its time as `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes them in the app language,
+     * in the phone's zone, in the iPhone's pattern and names (FormatData.kt), not the phone's CLDR, with the time as
+     * [clockTime] writes it: "Oct 30, 2026 at 3:05 PM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05".
+     */
     fun abbreviatedDateTime(date: Instant): String {
         val format = FormatData.language(language)
         val datePattern = format.dateTime.substringBeforeLast(if (language == AppLanguage.En) "h:mm" else "H:mm")

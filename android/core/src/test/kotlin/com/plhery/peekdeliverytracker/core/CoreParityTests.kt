@@ -261,8 +261,12 @@ class CoreParityTests {
         }
     }
 
+    /**
+     * The parcel page's next check: `Date.FormatStyle(date: .abbreviated, time: .shortened)`'s date in each language, in
+     * the phone's zone, and its time on the localizer's clock.
+     */
     @Test
-    fun nextCheckKeepsLocalizedDatesAndUsesTheSelectedClockFormat() {
+    fun datesWithTheirTimeAreWrittenAsEachLanguagesFormatStyleWritesThem() {
         fun at(month: Int, day: Int, hour: Int, minute: Int): Instant =
             LocalDateTime.of(2026, month, day, hour, minute).atZone(ZoneId.systemDefault()).toInstant()
         val expected = mapOf(
@@ -284,14 +288,55 @@ class CoreParityTests {
                 "1/03/2026, 12:30", "1 de mar. de 2026, 12:30", "1 mar 2026 o 12:30", "1 марта 2026\u202Fг., 12:30", "2026年3月1日 12:30",
             ),
         )
-        val english = Localizer(AppLanguage.En, use24HourTime = false)
+        for ((date, texts) in expected) {
+            assertEquals("$date", texts, AppLanguage.entries.map { Localizer(it, clockPreference = ClockPreference.TwentyFourHour).abbreviatedDateTime(date) })
+        }
+        // On a 12-hour clock, AM and PM in capitals, as the service writes them in a push.
+        val twelve = AppLanguage.entries.associateWith { Localizer(it, clockPreference = ClockPreference.TwelveHour) }
+        val english = twelve.getValue(AppLanguage.En)
         assertEquals("Oct 30, 2026 at 3:05 PM", english.abbreviatedDateTime(at(10, 30, 15, 5)))
+        assertEquals("30. Okt. 2026, 3:05 PM", twelve.getValue(AppLanguage.De).abbreviatedDateTime(at(10, 30, 15, 5)))
+        assertEquals("2026年10月30日 下午3:05", twelve.getValue(AppLanguage.Zh).abbreviatedDateTime(at(10, 30, 15, 5)))
         assertEquals("12:00 AM", english.clockTime(at(9, 1, 0, 0)))
+        assertEquals("9:45 AM", english.clockTime(at(5, 3, 9, 45)))
         assertEquals("12:30 PM", english.clockTime(at(3, 1, 12, 30)))
         assertEquals("today, 11:45 AM–12:30 PM", english.expectedDelivery("2026-03-01 11:45–12:30", at(3, 1, 8, 0)))
-        for ((date, texts) in expected) {
-            assertEquals("$date", texts, AppLanguage.entries.map { Localizer(it).abbreviatedDateTime(date) })
-        }
+        assertEquals("today, 12:00 AM", english.expectedDelivery("2026-03-01 24:00", at(3, 1, 8, 0)))
+    }
+
+    /** Automatic writes times on the phone's clock, and a clock chosen in Settings wins over it either way. */
+    @Test
+    fun timesFollowThePhonesClockUntilOneIsChosen() {
+        val at = LocalDateTime.of(2026, 10, 30, 15, 5).atZone(ZoneId.systemDefault()).toInstant()
+        fun written(preference: ClockPreference, system: Boolean) =
+            Localizer(AppLanguage.En, clockPreference = preference, systemUses24HourTime = system).clockTime(at)
+        assertEquals("15:05", written(ClockPreference.Automatic, system = true))
+        assertEquals("3:05 PM", written(ClockPreference.Automatic, system = false))
+        assertEquals("15:05", written(ClockPreference.TwentyFourHour, system = false))
+        assertEquals("3:05 PM", written(ClockPreference.TwelveHour, system = true))
+
+        // The phone's clock changing changes Automatic's alone.
+        val localizer = Localizer(AppLanguage.En, systemUses24HourTime = true)
+        localizer.systemUses24HourTime = false
+        assertEquals(false, localizer.use24HourTimeFlow.value)
+        assertEquals("3:05 PM", localizer.clockTime(at))
+        localizer.clockPreference = ClockPreference.TwentyFourHour
+        assertEquals(true, localizer.use24HourTimeFlow.value)
+        localizer.systemUses24HourTime = true
+        localizer.systemUses24HourTime = false
+        assertEquals("15:05", localizer.clockTime(at))
+        localizer.clockPreference = ClockPreference.Automatic
+        assertEquals("3:05 PM", localizer.clockTime(at))
+    }
+
+    /** The clock is saved as `auto`, `24` or `12`; nothing saved, or anything else, is Automatic. */
+    @Test
+    fun theClockIsSavedByItsCode() {
+        assertEquals(listOf("auto", "24", "12"), ClockPreference.entries.map { it.code })
+        for (preference in ClockPreference.entries) assertEquals(preference, ClockPreference.from(preference.code))
+        assertEquals(ClockPreference.Automatic, ClockPreference.from(null))
+        assertEquals(ClockPreference.Automatic, ClockPreference.from("24h"))
+        assertEquals("sdt.native.clock", ClockPreference.storageKey)
     }
 
     /** What android/tools/FormatData.swift took from Foundation, so a table written again from another one shows here. */

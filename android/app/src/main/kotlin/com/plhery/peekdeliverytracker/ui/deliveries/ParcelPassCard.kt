@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.core.updateFailed
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.litEdge
@@ -85,6 +86,7 @@ fun ParcelPassCard(
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val identity = shownCarrierIdentity(parcel, localizer, language) ?: return
     val identities = LocalCarrierIdentities.current ?: return
     val now = LocalNow.current()

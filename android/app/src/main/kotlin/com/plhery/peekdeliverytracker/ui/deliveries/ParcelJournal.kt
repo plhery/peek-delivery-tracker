@@ -72,6 +72,7 @@ import com.plhery.peekdeliverytracker.core.showsTime
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -245,7 +246,7 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
     // The circle, 12 across beside footnote words at the default size, grown with them.
     val mark = type.scaled(12f, IosTextStyle.Footnote)
     val scale = mark / 12f
-    val timeWidth = if (localizer.use24HourTime) TIME_WIDTH else TIME_WIDTH_WITH_PERIOD
+    val timeWidth = if (LocalUse24HourTime.current) TIME_WIDTH else TIME_WIDTH_WITH_PERIOD
     val circle = @Composable {
         Box(Modifier.padding(top = (3f * scale).dp).width((if (large) mark else maxOf(mark, type.scaled(timeWidth, IosTextStyle.Caption2))).dp)) {
             Canvas(Modifier.size(mark.dp)) {
@@ -347,11 +348,12 @@ private fun JournalDayRows(day: JournalDay, tint: Color, currentId: UUID?, synci
 
 /**
  * `JournalEventRow` (B-S15): the scan's time in caption2 with figures of one width, in `tint` for the `current` row and
- * the opaque secondary grey otherwise, 2 lower than the words and in a column 38 wide at the Large text size that grows
- * with caption2; then, 12 on, the words in footnote, which say the carrier is being asked for the current pending scan
- * while the parcel syncs, and under them, 4 apart, where the scan was ([EventLocation]) and its copies' words in
- * caption2 secondary. At the accessibility sizes the time goes 2 over the words, as wide as it is. A scan dated by its
- * day alone has no time, which takes no room, as SwiftUI's empty text takes none. TalkBack reads the row as one.
+ * the opaque secondary grey otherwise, 2 lower than the words and in a column 38 wide at the Large text size, 64 on a
+ * 12-hour clock, that grows with caption2; then, 12 on, the words in footnote, which say the carrier is being asked for
+ * the current pending scan while the parcel syncs, and under them, 4 apart, where the scan was ([EventLocation]) and its
+ * copies' words in caption2 secondary. At the accessibility sizes the time goes 2 over the words, as wide as it is. A
+ * scan dated by its day alone has no time, which takes no room, as SwiftUI's empty text takes none. TalkBack reads the
+ * row as one.
  */
 @Composable
 private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, syncing: Boolean) {
@@ -361,7 +363,7 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val event = entry.event
     val time = localizer.journalTime(event)
-    val timeWidth = if (localizer.use24HourTime) TIME_WIDTH else TIME_WIDTH_WITH_PERIOD
+    val timeWidth = if (LocalUse24HourTime.current) TIME_WIDTH else TIME_WIDTH_WITH_PERIOD
     val timeFrame = Modifier.padding(top = 2.dp).then(if (large) Modifier else Modifier.width(type.scaled(timeWidth, IosTextStyle.Caption2).dp))
     val timeView = @Composable {
         if (time.isEmpty()) {
@@ -444,7 +446,7 @@ private fun EventLocation(location: String, placed: EventPlace?) {
 /** How long the days take to show or hide, in seconds. */
 private const val TOGGLE = 0.2
 
-/** The time column's width at the Large text size (`@ScaledMetric(relativeTo: .caption2)`). */
+/** The time column's width at the Large text size (`@ScaledMetric(relativeTo: .caption2)`), and on a 12-hour clock. */
 private const val TIME_WIDTH = 38f
 private const val TIME_WIDTH_WITH_PERIOD = 64f
 

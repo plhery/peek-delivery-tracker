@@ -153,13 +153,18 @@ export function dayAndTime(day: string, time: string, languageTag: string): stri
   return new Intl.Locale(languageTag).language === 'zh' ? `${day} ${time}` : `${day}, ${time}`;
 }
 
+/**
+ * Hours and minutes on the reader's clock: "16:51", or "4:51 PM" on a 12-hour one. English writes AM and PM in
+ * capitals in every region, as the iPhone and Android apps do.
+ */
 export function localizedClockTime(date: Date, languageTag: string, use24HourTime = true, timeZone?: string): string {
-  return new Intl.DateTimeFormat(languageTag, {
+  const time = new Intl.DateTimeFormat(languageTag, {
     hour: use24HourTime ? '2-digit' : 'numeric',
     minute: '2-digit',
     hourCycle: use24HourTime ? 'h23' : 'h12',
     timeZone,
   }).format(date);
+  return use24HourTime || new Intl.Locale(languageTag).language !== 'en' ? time : time.toUpperCase();
 }
 
 export function localizedCalendarDateTime(date: Date, languageTag: string, use24HourTime = true): string {

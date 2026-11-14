@@ -1600,7 +1600,7 @@ final class ParcelLogicTests: XCTestCase {
             defaults.removePersistentDomain(forName: suite)
             shared.removePersistentDomain(forName: sharedSuite)
         }
-        let localizer = Localizer(defaults: defaults, sharedClockDefaults: shared)
+        let localizer = Localizer(defaults: defaults, sharedClockDefaults: shared, systemUses24HourTime: { true })
         let midnight = Date(timeIntervalSince1970: 0)
         let noon = midnight.addingTimeInterval(12 * 3_600)
         let day = "2026-11-12"
@@ -1608,25 +1608,91 @@ final class ParcelLogicTests: XCTestCase {
         let window = "\(day) 11:30–15:30"
         let originalWindow = localizer.expectedDelivery(window)
 
+        // Nothing chosen is Automatic, which the App Group holds for the notification service extension.
+        XCTAssertEqual(localizer.clock, .automatic)
         XCTAssertTrue(localizer.use24HourTime)
-        XCTAssertTrue(shared.bool(forKey: DeviceClock.preferenceKey))
+        XCTAssertEqual(shared.string(forKey: DeviceClock.preferenceKey), "auto")
         XCTAssertEqual(localizer.clockTime(midnight, in: .gmt), "00:00")
         XCTAssertTrue(originalWindow.hasSuffix("11:30–15:30"))
 
-        localizer.use24HourTime = false
-        XCTAssertFalse(shared.bool(forKey: DeviceClock.preferenceKey))
+        localizer.clock = .twelveHour
+        XCTAssertFalse(localizer.use24HourTime)
+        XCTAssertEqual(defaults.string(forKey: DeviceClock.preferenceKey), "12")
+        XCTAssertEqual(shared.string(forKey: DeviceClock.preferenceKey), "12")
         shared.removeObject(forKey: DeviceClock.preferenceKey)
-        let reopened = Localizer(defaults: defaults, sharedClockDefaults: shared)
-        XCTAssertEqual(shared.object(forKey: DeviceClock.preferenceKey) as? Bool, false)
+        let reopened = Localizer(defaults: defaults, sharedClockDefaults: shared, systemUses24HourTime: { true })
+        XCTAssertEqual(shared.string(forKey: DeviceClock.preferenceKey), "12")
+        XCTAssertEqual(reopened.clock, .twelveHour)
         XCTAssertFalse(reopened.use24HourTime)
-        let morning = reopened.clockTime(midnight, in: .gmt)
-        let afternoon = reopened.clockTime(noon, in: .gmt)
-        XCTAssertTrue(morning.contains("12:00"))
-        XCTAssertTrue(afternoon.contains("12:00"))
-        XCTAssertNotEqual(morning, afternoon)
+        XCTAssertEqual(reopened.clockTime(midnight, in: .gmt), "12:00 AM")
+        XCTAssertEqual(reopened.clockTime(noon, in: .gmt), "12:00 PM")
         XCTAssertFalse(reopened.expectedDelivery(window).contains("15:30"))
-        XCTAssertTrue(reopened.expectedDelivery("\(day) 23:00–24:00").hasSuffix("–" + morning))
+        XCTAssertTrue(reopened.expectedDelivery("\(day) 23:00–24:00").hasSuffix("–12:00 AM"))
         XCTAssertEqual(reopened.expectedDelivery(day), originalDay)
+
+        reopened.clock = .twentyFourHour
+        XCTAssertEqual(defaults.string(forKey: DeviceClock.preferenceKey), "24")
+        XCTAssertEqual(shared.string(forKey: DeviceClock.preferenceKey), "24")
+        XCTAssertEqual(reopened.clockTime(noon, in: .gmt), "12:00")
+    }
+
+    @MainActor func testAutomaticClockAndDistanceFollowTheSystem() throws {
+        let suite = "system-units-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        var system24 = false
+        var systemUnit = DistanceUnit.miles
+        let localizer = Localizer(
+            defaults: defaults, systemUses24HourTime: { system24 }, systemDistanceUnit: { systemUnit }
+        )
+
+        // Automatic follows a 12-hour, imperial system, then a 24-hour, metric one once the system changes.
+        XCTAssertEqual(localizer.clock, .automatic)
+        XCTAssertEqual(localizer.distance, .automatic)
+        XCTAssertFalse(localizer.use24HourTime)
+        XCTAssertEqual(localizer.distanceUnit, .miles)
+        system24 = true
+        systemUnit = .kilometres
+        localizer.systemChanged()
+        XCTAssertTrue(localizer.systemUses24HourTime)
+        XCTAssertTrue(localizer.use24HourTime)
+        XCTAssertEqual(localizer.distanceUnit, .kilometres)
+
+        // A choice beats the system, both ways.
+        localizer.clock = .twelveHour
+        localizer.distance = .miles
+        XCTAssertFalse(localizer.use24HourTime)
+        XCTAssertEqual(localizer.distanceUnit, .miles)
+        system24 = false
+        systemUnit = .miles
+        localizer.systemChanged()
+        localizer.clock = .twentyFourHour
+        localizer.distance = .kilometres
+        XCTAssertTrue(localizer.use24HourTime)
+        XCTAssertEqual(localizer.distanceUnit, .kilometres)
+        XCTAssertFalse(localizer.systemUses24HourTime)
+        XCTAssertEqual(localizer.systemDistanceUnit, .miles)
+
+        // The distance persists as auto, km or mi; a missing or unknown one reads as Automatic.
+        XCTAssertEqual(defaults.string(forKey: "sdt.native.distanceUnit"), "km")
+        localizer.distance = .automatic
+        XCTAssertEqual(defaults.string(forKey: "sdt.native.distanceUnit"), "auto")
+        XCTAssertEqual(localizer.distanceUnit, .miles)
+        localizer.distance = .miles
+        XCTAssertEqual(Localizer(defaults: defaults, systemDistanceUnit: { .kilometres }).distanceUnit, .miles)
+        defaults.set("furlongs", forKey: "sdt.native.distanceUnit")
+        XCTAssertEqual(Localizer(defaults: defaults, systemDistanceUnit: { .kilometres }).distance, .automatic)
+        defaults.removeObject(forKey: "sdt.native.distanceUnit")
+        defaults.removeObject(forKey: DeviceClock.preferenceKey)
+        let fresh = Localizer(defaults: defaults, systemUses24HourTime: { false }, systemDistanceUnit: { .kilometres })
+        XCTAssertEqual(fresh.clock, .automatic)
+        XCTAssertFalse(fresh.use24HourTime)
+        XCTAssertEqual(fresh.distanceUnit, .kilometres)
+
+        // The system's unit: miles in the US and the UK, kilometres elsewhere.
+        XCTAssertEqual(DistanceUnit.system(Locale(identifier: "en_US")), .miles)
+        XCTAssertEqual(DistanceUnit.system(Locale(identifier: "en_GB")), .miles)
+        XCTAssertEqual(DistanceUnit.system(Locale(identifier: "fr_FR")), .kilometres)
     }
 
     func testScheduledDeliveryMatchesWebApp() {

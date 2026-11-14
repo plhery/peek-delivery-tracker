@@ -6,10 +6,10 @@ import { LanguageControl, useI18n } from '../i18n';
 import { useAppearance, type Appearance } from '../lib/appearance';
 import { LANDING_PATH } from '../lib/experience';
 import { useSheetDialog } from '../lib/modal';
+import { clockPreference, distancePreference } from '../lib/units';
 import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
 import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
 import { followInPlace } from '../peek/landing/links';
-import { SwitchRow } from '../peek/parcel/Sheet';
 import type { SignInMethods } from '../peek/session';
 import { AddByEmailPage, useAddByEmail } from './AddByEmail';
 import { AssistantsPage, useAssistants, type TokenDraft } from './Assistants';
@@ -38,7 +38,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   apiAuth?: ApiAuth;
   signIn?: SignInMethods;
 }) {
-  const { t, use24HourTime, setUse24HourTime, distanceUnit, setDistanceUnit } = useI18n();
+  const { t, clock, setClock, distance, setDistance, automatic } = useI18n();
   const [appearance, setAppearance] = useAppearance();
   const initial = email?.trim().charAt(0).toUpperCase();
   const [open, setOpen] = useState(false);
@@ -137,10 +137,18 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
               <div>{(['system', 'light', 'dark'] as Appearance[]).map((option) => <button type="button" key={option} aria-pressed={appearance === option} onClick={() => { setAppearance(option); trackAction('appearance-change'); }}><span className={`settings-mini-screen settings-mini-screen--${option}`} aria-hidden="true"><i /><i /></span>{t(`native.appearance.${option}`)}</button>)}</div>
             </fieldset>
               <LanguageControl className="language-control--account" />
-              <SwitchRow title={t('settings.use24HourTime')} checked={use24HourTime} onChange={setUse24HourTime} />
+              <label className="language-control language-control--account">
+                <span>{t('settings.timeFormat')}</span>
+                <select value={clock} onChange={(event) => setClock(clockPreference(event.target.value))}>
+                  <option value="auto">{t('settings.automatic', { value: t(automatic.use24HourTime ? 'settings.clock24' : 'settings.clock12') })}</option>
+                  <option value="24">{t('settings.clock24')}</option>
+                  <option value="12">{t('settings.clock12')}</option>
+                </select>
+              </label>
               <label className="language-control language-control--account">
                 <span>{t('settings.distanceUnits')}</span>
-                <select value={distanceUnit} onChange={(event) => setDistanceUnit(event.target.value === 'mi' ? 'mi' : 'km')}>
+                <select value={distance} onChange={(event) => setDistance(distancePreference(event.target.value))}>
+                  <option value="auto">{t('settings.automatic', { value: t(automatic.distanceUnit === 'mi' ? 'settings.milesShort' : 'settings.kilometersShort') })}</option>
                   <option value="km">{t('settings.kilometers')}</option>
                   <option value="mi">{t('settings.miles')}</option>
                 </select>

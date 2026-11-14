@@ -27,19 +27,28 @@ function deviceClockBody(payload, use24HourTime) {
   } catch {
     day = new Intl.DateTimeFormat(undefined, dayOptions);
   }
+  const locale = day.resolvedOptions().locale;
+  const twelveHour = () => new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', hourCycle: 'h12' }).format(scanned);
+  // English writes AM and PM in capitals, as the service does (localizedClockTime in src/lib/format.ts).
   const time = use24HourTime ? `${two(scanned.getHours())}:${two(scanned.getMinutes())}`
-    : new Intl.DateTimeFormat(day.resolvedOptions().locale, { hour: 'numeric', minute: '2-digit', hourCycle: 'h12' }).format(scanned);
+    : locale.startsWith('en') ? twelveHour().toUpperCase() : twelveHour();
   const date = day.format(scanned);
   return (today ? sameDay : otherDay).replaceAll('{{time}}', () => time).replaceAll('{{date}}', () => date);
 }
 
+/**
+ * Whether this device writes times on a 24-hour clock: the choice Settings saved ("24" or "12", savePushClockPreference
+ * in src/i18n.tsx), else the browser's own clock.
+ */
 async function pushUses24HourTime() {
+  let clock;
   try {
     const preference = await caches.match('/__peek/preferences/clock', { cacheName: 'peek-preferences' });
-    return (await preference?.text()) !== 'false';
-  } catch {
-    return true;
-  }
+    clock = await preference?.text();
+  } catch { /* Follow the browser. */ }
+  if (clock === '24' || clock === '12') return clock === '24';
+  const cycle = new Intl.DateTimeFormat(undefined, { hour: 'numeric' }).resolvedOptions().hourCycle;
+  return cycle === 'h23' || cycle === 'h24';
 }
 
 self.addEventListener('push', (event) => {

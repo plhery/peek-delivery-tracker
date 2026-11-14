@@ -641,6 +641,34 @@ class SettingsTest {
         assertTrue(deliveries.showingAccount)
     }
 
+    /**
+     * Time format and Distance units start on Automatic, which names what the phone uses, and a choice from their menus
+     * takes its place.
+     */
+    @Test
+    fun theTimeFormatAndDistanceUnitsMenusChooseOverThePhone() {
+        show()
+        open()
+        fun state(tag: String) = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription)
+        fun choose(row: String, picker: String, option: String) {
+            node(row).performScrollTo()
+            compose.onNodeWithTag(picker, useUnmergedTree = true).performClick()
+            settle()
+            tap(option)
+        }
+        assertEquals(text("settings.timeFormat"), node(SETTINGS_CLOCK).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single())
+        assertEquals("Automatic (24-hour)", state(SETTINGS_CLOCK))
+        choose(SETTINGS_CLOCK, SETTINGS_CLOCK_PICKER, "$SETTINGS_CLOCK.12")
+        assertEquals("12-hour", state(SETTINGS_CLOCK))
+
+        assertEquals(text("settings.distanceUnits"), node(SETTINGS_DISTANCE).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single())
+        assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
+        choose(SETTINGS_DISTANCE, SETTINGS_DISTANCE_PICKER, "$SETTINGS_DISTANCE.mi")
+        assertEquals("Miles (mi)", state(SETTINGS_DISTANCE))
+        choose(SETTINGS_DISTANCE, SETTINGS_DISTANCE_PICKER, "$SETTINGS_DISTANCE.auto")
+        assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
+    }
+
     @Test
     fun pagesPushAndTheBackPopsThemBeforeClosingTheSheet() {
         show { signedInWithEmail(choice = false) }

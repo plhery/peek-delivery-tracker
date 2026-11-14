@@ -118,7 +118,7 @@ describe('friendly parcel notifications', () => {
       body_same_day: 'Coffee beans · delivered at {{time}}',
       body_other_day: 'Coffee beans · delivered on {{date}} at {{time}}',
       date_locale: 'en-CH',
-      body_12_hour: 'Coffee beans · delivered at 2:32 pm',
+      body_12_hour: 'Coffee beans · delivered at 2:32 PM',
     };
     expect(web.payload(delivered)).toMatchObject({ body: 'Coffee beans · delivered at 14:32', ...clock });
     const app = native.eventPayload(delivered);
@@ -142,7 +142,7 @@ describe('friendly parcel notifications', () => {
     const estimate = { ...delivered, stage: 'out_for_delivery', expected_delivery: '2026-09-07 14:00–16:30' };
     const browser = web.payload(estimate);
     expect(browser.body).toContain('14:00–16:30');
-    expect(browser.body_12_hour).toContain('2:00 pm–4:30 pm');
+    expect(browser.body_12_hour).toContain('2:00 PM–4:30 PM');
     expect(native.eventPayload(estimate)).toMatchObject({
       aps: { 'mutable-content': 1, alert: { body: browser.body } },
       body_12_hour: browser.body_12_hour,
@@ -390,7 +390,14 @@ describe('service worker fallback copy', () => {
     expect(shown[0]![1].lang).toBe(locale);
   });
 
-  it.each([true, false])('writes a delivery on the device clock with 24 hour time set to %s', async (use24HourTime) => {
+  // The clock Settings saved for the worker, the browser's own language, and the clock the notifications are written on.
+  it.each([
+    [undefined, 'de-CH', 24],
+    [undefined, 'en-US', 12],
+    ['auto', 'en-US', 12],
+    ['24', 'en-US', 24],
+    ['12', 'de-CH', 12],
+  ] as const)('writes a delivery on the device clock: %s chosen, in a %s browser', async (chosen, browser, clock) => {
     const zone = process.env.TZ;
     process.env.TZ = 'America/Los_Angeles';
     try {
@@ -399,9 +406,15 @@ describe('service worker fallback copy', () => {
       vi.useFakeTimers({ now, toFake: ['Date'] });
       runInNewContext(worker, {
         Date,
+        // The browser's own locale is what Intl gives when none is named.
+        Intl: {
+          DateTimeFormat: function (tag: string | undefined, options: Intl.DateTimeFormatOptions) {
+            return new Intl.DateTimeFormat(tag ?? browser, options);
+          },
+        },
         caches: {
           delete: async () => true,
-          match: async () => use24HourTime ? undefined : { text: async () => 'false' },
+          match: async () => chosen && { text: async () => chosen },
         },
         self: {
           addEventListener: (type: string, listener: (event: unknown) => void) => { listeners[type] = listener; },
@@ -416,25 +429,27 @@ describe('service worker fallback copy', () => {
       await show(web.payload({ ...delivered, occurred_at: '2026-09-06T23:51:00Z' }));
       await show(web.payload({ ...delivered, locale: 'de', occurred_at: '2026-09-06T23:51:00Z' }));
       await show({ ...web.payload(delivered), scan_at: '2026-09-07T12:50:00Z' });
-      await show({ ...web.payload(delivered), date_locale: 'not a language' });
       const eta = web.payload({ ...delivered, stage: 'out_for_delivery', expected_delivery: '2026-09-07 14:00–16:30' });
       await show(eta);
-      expect(shown.map((message) => message.toLowerCase())).toEqual(use24HourTime ? [
+      expect(shown).toEqual(clock === 24 ? [
         'Coffee beans · delivered at 05:32',
         'Coffee beans · delivered on 6 September at 16:51',
         'Coffee beans · am 6. September um 16:51 Uhr zugestellt',
         // A scan the device's clock calls the future is told as the service wrote it.
         'Coffee beans · delivered at 14:32',
-        'Coffee beans · delivered at 05:32',
         eta.body,
-      ].map((message) => String(message).toLowerCase()) : [
-        'coffee beans · delivered at 5:32 am',
-        'coffee beans · delivered on 6 september at 4:51 pm',
-        'coffee beans · am 6. september um 4:51 pm uhr zugestellt',
-        'coffee beans · delivered at 2:32 pm',
-        'coffee beans · delivered at 5:32 am',
-        String(eta.body_12_hour).toLowerCase(),
+      ] : [
+        // AM and PM in capitals, as the service writes them.
+        'Coffee beans · delivered at 5:32 AM',
+        'Coffee beans · delivered on 6 September at 4:51 PM',
+        'Coffee beans · am 6. September um 4:51 PM Uhr zugestellt',
+        'Coffee beans · delivered at 2:32 PM',
+        eta.body_12_hour,
       ]);
+      expect(eta.body_12_hour).toContain('2:00 PM–4:30 PM');
+      // A language Intl does not know leaves the day to the browser's own.
+      await show({ ...web.payload(delivered), date_locale: 'not a language' });
+      expect(shown.at(-1)!.replace(' ', ' ')).toBe(`Coffee beans · delivered at ${clock === 24 ? '05:32' : '5:32 AM'}`);
     } finally {
       vi.useRealTimers();
       if (zone === undefined) delete process.env.TZ;

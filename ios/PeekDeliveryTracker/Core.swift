@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import SwiftUI
 
@@ -215,7 +216,27 @@ enum DistanceUnit: String, CaseIterable {
     case kilometres = "km"
     case miles = "mi"
 
-    var labelKey: String { self == .miles ? "settings.miles" : "settings.kilometers" }
+    /// Miles where the system measures in them (the US and the UK), else kilometres.
+    static func system(_ locale: Locale = .autoupdatingCurrent) -> DistanceUnit {
+        locale.measurementSystem == .metric ? .kilometres : .miles
+    }
+}
+
+/// The unit the app writes distances in: the system's, or one chosen over it. A missing or unknown value is automatic.
+enum DistancePreference: String, CaseIterable {
+    case automatic = "auto"
+    case kilometres = "km"
+    case miles = "mi"
+
+    init(stored: String?) { self = stored.flatMap(Self.init(rawValue:)) ?? .automatic }
+
+    func unit(system: DistanceUnit) -> DistanceUnit {
+        switch self {
+        case .automatic: system
+        case .kilometres: .kilometres
+        case .miles: .miles
+        }
+    }
 }
 
 private struct DistanceUnitKey: EnvironmentKey {
@@ -231,16 +252,31 @@ extension EnvironmentValues {
 
 @MainActor
 final class Localizer: ObservableObject {
-    @Published var use24HourTime: Bool {
+    /// The clock chosen in Settings, kept in the App Group too for the notification service extension.
+    @Published var clock: ClockPreference {
         didSet {
-            defaults.set(use24HourTime, forKey: DeviceClock.preferenceKey)
+            defaults.set(clock.rawValue, forKey: DeviceClock.preferenceKey)
             saveSharedClock()
+            resolveUnits()
         }
     }
+    /// Whether times are written on the 24-hour clock: the one chosen, else the system's.
+    @Published private(set) var use24HourTime: Bool
     private static let distanceStorageKey = "sdt.native.distanceUnit"
-    @Published var distanceUnit: DistanceUnit {
-        didSet { defaults.set(distanceUnit.rawValue, forKey: Self.distanceStorageKey) }
+    @Published var distance: DistancePreference {
+        didSet {
+            defaults.set(distance.rawValue, forKey: Self.distanceStorageKey)
+            resolveUnits()
+        }
     }
+    /// The unit distances are written in: the one chosen, else the system's.
+    @Published private(set) var distanceUnit: DistanceUnit
+    /// What the system says, which Automatic follows. They change with the device's settings while the app is open.
+    @Published private(set) var systemUses24HourTime: Bool
+    @Published private(set) var systemDistanceUnit: DistanceUnit
+    private let readSystemClock: () -> Bool
+    private let readSystemDistanceUnit: () -> DistanceUnit
+    private var systemChanges: AnyCancellable?
     private let defaults: UserDefaults
     private let sharedClockDefaults: UserDefaults?
 
@@ -263,12 +299,23 @@ final class Localizer: ObservableObject {
 
     init(
         bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad, defaults: UserDefaults = .standard,
-        sharedClockDefaults: UserDefaults? = nil
+        sharedClockDefaults: UserDefaults? = nil,
+        systemUses24HourTime: @escaping () -> Bool = { DeviceClock.systemUses24HourTime() },
+        systemDistanceUnit: @escaping () -> DistanceUnit = { DistanceUnit.system() }
     ) {
         self.defaults = defaults
         self.sharedClockDefaults = sharedClockDefaults
-        use24HourTime = defaults.object(forKey: DeviceClock.preferenceKey) as? Bool ?? true
-        distanceUnit = defaults.string(forKey: Self.distanceStorageKey).flatMap(DistanceUnit.init(rawValue:)) ?? .kilometres
+        readSystemClock = systemUses24HourTime
+        readSystemDistanceUnit = systemDistanceUnit
+        let clock = ClockPreference(stored: defaults.string(forKey: DeviceClock.preferenceKey))
+        let distance = DistancePreference(stored: defaults.string(forKey: Self.distanceStorageKey))
+        let systemClock = systemUses24HourTime(), systemUnit = systemDistanceUnit()
+        self.clock = clock
+        self.distance = distance
+        self.systemUses24HourTime = systemClock
+        self.systemDistanceUnit = systemUnit
+        use24HourTime = clock.uses24HourTime(system: systemClock)
+        distanceUnit = distance.unit(system: systemUnit)
         #if os(macOS)
         variant = "mac"
         #else
@@ -291,10 +338,27 @@ final class Localizer: ObservableObject {
         }
         saveSharedLanguage()
         saveSharedClock()
+        systemChanges = NotificationCenter.default.publisher(for: NSLocale.currentLocaleDidChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in MainActor.assumeIsolated { self?.systemChanged() } }
+    }
+
+    /// Reads the system's clock and unit again, as a change in the device's settings asks.
+    func systemChanged() {
+        systemUses24HourTime = readSystemClock()
+        systemDistanceUnit = readSystemDistanceUnit()
+        resolveUnits()
+    }
+
+    private func resolveUnits() {
+        let clock = clock.uses24HourTime(system: systemUses24HourTime)
+        if use24HourTime != clock { use24HourTime = clock }
+        let unit = distance.unit(system: systemDistanceUnit)
+        if distanceUnit != unit { distanceUnit = unit }
     }
 
     private func saveSharedClock() {
-        sharedClockDefaults?.set(use24HourTime, forKey: DeviceClock.preferenceKey)
+        sharedClockDefaults?.set(clock.rawValue, forKey: DeviceClock.preferenceKey)
     }
 
     private func saveSharedLanguage() {
@@ -496,6 +560,7 @@ final class Localizer: ObservableObject {
         if gregorian { formatter.calendar = Calendar(identifier: .gregorian) }
         formatter.timeZone = timeZone
         formatter.dateFormat = pattern
+        if !posix, language == .en { (formatter.amSymbol, formatter.pmSymbol) = ("AM", "PM") }
         formatters[key] = formatter
         return formatter
     }

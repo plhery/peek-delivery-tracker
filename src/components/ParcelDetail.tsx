@@ -30,6 +30,7 @@ import {
   localizedScanAge,
   useI18n,
 } from '../i18n';
+import { dayAndTime, localizedClockTime } from '../lib/format';
 import { NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
 import {
   awaitedCarrier,
@@ -779,7 +780,7 @@ export function ParcelDetail({
       <div className="detail__sync">
         <div className="detail__freshness">
           <div className="detail__freshness-times">
-            {parcel.nextCheckAt && !parcel.archivedAt && <span>{t('detail.nextCheckAfter', { date: new Date(parcel.nextCheckAt).toLocaleString(languageTag, { hourCycle: use24HourTime ? 'h23' : 'h12' }) })}</span>}
+            {parcel.nextCheckAt && !parcel.archivedAt && <span>{t('detail.nextCheckAfter', { date: dayAndTime(new Date(parcel.nextCheckAt).toLocaleDateString(languageTag), localizedClockTime(new Date(parcel.nextCheckAt), languageTag, use24HourTime), languageTag) })}</span>}
             {lastChecked && <span>{t('detail.lastChecked', { date: lastChecked })}</span>}
             {lastUpdate && <span>{t('detail.lastUpdate', { date: lastUpdate })}</span>}
           </div>

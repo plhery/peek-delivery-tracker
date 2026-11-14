@@ -112,6 +112,7 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.SystemPress
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
@@ -341,12 +342,13 @@ private fun rememberScene(
     language: AppLanguage,
 ): FirstOpenScene {
     val localizer = LocalLocalizer.current
+    val use24HourTime = LocalUse24HourTime.current
     val now = LocalNow.current
     val name = remember(localizer, language) { FirstOpenJourney.name(localizer) }
     // Made once a step, so that its route stays the same object between steps.
     val parcels = remember(name) { HashMap<Int, Parcel>() }
     fun parcel(at: Int) = parcels.getOrPut(at) { FirstOpenJourney.parcel(at, name, now()) }
-    val statuses = remember(parcels, localizer, language) { HashMap<Int, String>() }
+    val statuses = remember(parcels, localizer, language, use24HourTime) { HashMap<Int, String>() }
     val status = { at: Int ->
         statuses.getOrPut(at) {
             val parcel = parcel(at)

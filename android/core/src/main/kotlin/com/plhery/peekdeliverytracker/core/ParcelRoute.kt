@@ -111,9 +111,31 @@ data class RoutePlace(
     }
 }
 
-enum class DistanceUnit(val code: String, val labelKey: String) {
-    Kilometres("km", "settings.kilometers"),
-    Miles("mi", "settings.miles"),
+/** The unit distances are written in. */
+enum class DistanceUnit(val code: String) {
+    Kilometres("km"),
+    Miles("mi"),
+}
+
+/**
+ * The distance units chosen in Settings, saved as their code under [storageKey]: Automatic, the phone's (`auto`), or
+ * one unit (`km`, `mi`).
+ */
+enum class DistancePreference(val code: String, private val unit: DistanceUnit?) {
+    Automatic("auto", null),
+    Kilometres("km", DistanceUnit.Kilometres),
+    Miles("mi", DistanceUnit.Miles),
+    ;
+
+    /** The unit distances are written in: the one chosen, else the phone's, `system`. */
+    fun resolved(system: DistanceUnit): DistanceUnit = unit ?: system
+
+    companion object {
+        const val storageKey = "sdt.native.distanceUnit"
+
+        /** The choice saved; nothing, or what no choice reads as, is Automatic. */
+        fun from(saved: String?): DistancePreference = entries.firstOrNull { it.code == saved } ?: Automatic
+    }
 }
 
 /**
@@ -250,8 +272,9 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
         const val NEAR_KILOMETRES = 400.0
 
         /**
-         * Kilometres rounded the way a journey is told: "8 km", "450 km", "9,300 km". In the app's languages, as the
-         * iPhone writes them (`foundationKilometres`); another locale is the phone's ICU's.
+         * Kilometres rounded the way a journey is told, in `unit`: "8 km", "450 km", "9,300 km", "280 mi". Kilometres in
+         * the app's languages are written as the iPhone writes them (`foundationKilometres`); miles, and another
+         * locale, are the phone's ICU's.
          */
         fun formattedKilometres(kilometres: Double, locale: Locale, unit: DistanceUnit = DistanceUnit.Kilometres): String {
             val distance = if (unit == DistanceUnit.Miles) kilometres / 1.609344 else kilometres

@@ -33,6 +33,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.CarrierData
@@ -42,6 +43,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.RootHost
 import java.time.Duration
 import java.util.UUID
@@ -140,6 +142,30 @@ class SyncLineTest {
         assertEquals("Last checked: ${localizer.text("time.minutesAgo", mapOf("count" to 12))}", lines()[1])
         compose.onNodeWithTag(PAGE_REFRESH).assertContentDescriptionEquals("Check now").assertIsEnabled()
         assertEquals(Role.Button, compose.onNodeWithTag(PAGE_REFRESH).fetchSemanticsNode().config[SemanticsProperties.Role])
+    }
+
+    /** The next check on screen is written again on the clock chosen in Settings, and on the phone's again for Automatic. */
+    @Test
+    fun theNextCheckIsWrittenAgainWhenTheClockChanges() {
+        val clock = Localizer(AppLanguage.En, variant = "android")
+        val parcel = DemoCards.parcels().first { it.id == gift }.nextCheck()
+        compose.setContent {
+            ProvideLocalizer(clock) { SyncLine(parcel, Color.Black, working = false, onRefresh = null, Modifier.testTag(PAGE_SYNC_LINE)) }
+        }
+        compose.waitForIdle()
+        assertEquals("Next check after Oct 30, 2026 at 15:05", lines().first())
+        compose.runOnUiThread { clock.clockPreference = ClockPreference.TwelveHour }
+        compose.waitForIdle()
+        assertEquals("Next check after Oct 30, 2026 at 3:05 PM", lines().first())
+        compose.runOnUiThread {
+            clock.clockPreference = ClockPreference.Automatic
+            clock.systemUses24HourTime = false
+        }
+        compose.waitForIdle()
+        assertEquals("Next check after Oct 30, 2026 at 3:05 PM", lines().first())
+        compose.runOnUiThread { clock.systemUses24HourTime = true }
+        compose.waitForIdle()
+        assertEquals("Next check after Oct 30, 2026 at 15:05", lines().first())
     }
 
     @Test

@@ -593,8 +593,10 @@ and nothing typed is sent.
   instant and the sentence with the time left out (`deviceClockFields` in
   [`push.ts`](../src/server/push.ts)), so the device that shows it writes the time on its own
   clock as it arrives: the browser's push worker, the iPhone and Mac app's notification
-  service extension and the Android app do. Each uses Peek's saved clock format and chooses
-  the matching server text for estimates. A Live Activity's alert, and a device without
+  service extension and the Android app do, on the 12- or 24-hour clock chosen in Settings
+  or else on the device's own. An estimate's sentence comes written for both clocks (`body_12_hour`
+  beside `body`) and the device shows the one for its clock, so the server never learns the
+  choice. A Live Activity's alert, and a device without
   that code, show the server's sentence, in the timezone the account saved with its
   notification settings, or else on the scan's own clock when the carrier gave its UTC
   offset, or else in Zurich's. A link's alert never has a saved timezone.

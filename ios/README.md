@@ -175,8 +175,11 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   notifications here. Someone else's parcel forgotten while the service can't be told leaves
   the list at once, and each refresh tells the service again until it has. A parcel forgotten, or
   followed through another link, while a round signs it up is turned off again.
-- **Notification times** use the clock format in Preferences. The notification extension writes a delivery's
-  time in the device's current time zone and uses the server's wording for delivery estimates.
+- **A delivery's time** is written on the device's clock as its notification arrives, wherever the iPhone or Mac
+  is: the `NotificationService` extension fills the time into the server's sentence (`DeviceClock`), on the 12- or
+  24-hour clock chosen in Settings, which the app keeps in the App Group for it, or else on the device's own. An
+  estimate's notification shows the sentence the server wrote for that clock. Every other notification shows as the
+  server wrote it.
 - **Live Activities** are switched off (`ParcelStore.offersLiveActivities`, and
   `NSSupportsLiveActivities` in `Info.plist`). Settings has no switch for them, and the
   app ends any still showing and withdraws the iPhone's registration, so the server

@@ -209,6 +209,40 @@ class ParcelRouteTests {
         assertEquals("9.300 km", text(9_321.0, "de"))
         assertEquals("1 mi", text(0.2, unit = DistanceUnit.Miles))
         assertEquals("280 mi", text(447.0, unit = DistanceUnit.Miles))
+        assertEquals("5,800 mi", text(9_321.0, unit = DistanceUnit.Miles))
+    }
+
+    /** Automatic writes distances in the phone's unit, metric or not, and a unit chosen in Settings wins over it either way. */
+    @Test
+    fun distancesFollowThePhonesUnitUntilOneIsChosen() {
+        fun unit(preference: DistancePreference, system: DistanceUnit) =
+            Localizer(AppLanguage.En, distancePreference = preference, systemDistanceUnit = system).distanceUnit
+        assertEquals(DistanceUnit.Kilometres, unit(DistancePreference.Automatic, DistanceUnit.Kilometres))
+        assertEquals(DistanceUnit.Miles, unit(DistancePreference.Automatic, DistanceUnit.Miles))
+        assertEquals(DistanceUnit.Kilometres, unit(DistancePreference.Kilometres, DistanceUnit.Miles))
+        assertEquals(DistanceUnit.Miles, unit(DistancePreference.Miles, DistanceUnit.Kilometres))
+
+        // The phone's unit changing changes Automatic's alone.
+        val localizer = Localizer(AppLanguage.En)
+        localizer.systemDistanceUnit = DistanceUnit.Miles
+        assertEquals(DistanceUnit.Miles, localizer.distanceUnitFlow.value)
+        localizer.distancePreference = DistancePreference.Kilometres
+        assertEquals(DistanceUnit.Kilometres, localizer.distanceUnitFlow.value)
+        localizer.systemDistanceUnit = DistanceUnit.Kilometres
+        localizer.systemDistanceUnit = DistanceUnit.Miles
+        assertEquals(DistanceUnit.Kilometres, localizer.distanceUnit)
+        localizer.distancePreference = DistancePreference.Automatic
+        assertEquals(DistanceUnit.Miles, localizer.distanceUnit)
+    }
+
+    /** The units are saved as `auto`, `km` or `mi`; nothing saved, or anything else, is Automatic. */
+    @Test
+    fun theDistanceUnitsAreSavedByTheirCode() {
+        assertEquals(listOf("auto", "km", "mi"), DistancePreference.entries.map { it.code })
+        for (preference in DistancePreference.entries) assertEquals(preference, DistancePreference.from(preference.code))
+        assertEquals(DistancePreference.Automatic, DistancePreference.from(null))
+        assertEquals(DistancePreference.Automatic, DistancePreference.from("miles"))
+        assertEquals("sdt.native.distanceUnit", DistancePreference.storageKey)
     }
 
     /**

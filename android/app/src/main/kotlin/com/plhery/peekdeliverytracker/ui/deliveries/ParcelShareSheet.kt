@@ -89,6 +89,7 @@ import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
@@ -852,6 +853,7 @@ private fun ShareWarning(text: String) {
 private fun SharePreviewCard(parcel: Parcel, name: String?, showNumber: Boolean, gift: Boolean) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val now = LocalNow.current()
     val colors = PeekTheme.colors
     val type = PeekTheme.type

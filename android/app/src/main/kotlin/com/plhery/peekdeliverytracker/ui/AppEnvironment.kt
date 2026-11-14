@@ -22,29 +22,33 @@ import java.time.Instant
  * The app's copy, the iPhone's `@EnvironmentObject var localizer`: AppContainer's localizer, with the `android`
  * variant, for everything inside [ProvideLocalizer].
  */
-object LocalLocalizer {
-    val current: Localizer
-        @Composable get() = LocalFormatting.current.localizer
-}
-
-private data class AppFormatting(val localizer: Localizer, val use24HourTime: Boolean)
-
-private val LocalFormatting = compositionLocalOf<AppFormatting> { error("No Localizer: wrap the content in ProvideLocalizer") }
+val LocalLocalizer = staticCompositionLocalOf<Localizer> { error("No Localizer: wrap the content in ProvideLocalizer") }
 
 /** The localizer's language as it changes, so what is written in it is written again. */
 val LocalLanguage = compositionLocalOf { AppLanguage.En }
 
+/**
+ * Whether the localizer writes times on a 24-hour clock, as it changes: what writes a time with the localizer reads it,
+ * so the time is written again.
+ */
+val LocalUse24HourTime = compositionLocalOf { true }
+
+/** The unit the localizer writes distances in, as it changes, so the distances are written again. */
 val LocalDistanceUnit = compositionLocalOf { DistanceUnit.Kilometres }
 
-/** `localizer` and its language for `content`, with the fonts spaced for the language ([PeekTypography]). */
+/**
+ * `localizer`, its language, its clock and its distance unit for `content`, with the fonts spaced for the language
+ * ([PeekTypography]).
+ */
 @Composable
 fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
     val language by localizer.languageFlow.collectAsState()
     val use24HourTime by localizer.use24HourTimeFlow.collectAsState()
     val distanceUnit by localizer.distanceUnitFlow.collectAsState()
     CompositionLocalProvider(
-        LocalFormatting provides AppFormatting(localizer, use24HourTime),
+        LocalLocalizer provides localizer,
         LocalLanguage provides language,
+        LocalUse24HourTime provides use24HourTime,
         LocalDistanceUnit provides distanceUnit,
     ) {
         ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize, language, content)

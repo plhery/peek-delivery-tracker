@@ -25,6 +25,7 @@ import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -33,18 +34,19 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
  * `syncStatus` (B-S08): when the carrier was last asked and last said something, as the web says them, 3 apart, in
- * caption medium in the opaque secondary grey: when the next check comes, in caption regular, with the selected
- * clock format, while the
- * parcel isn't archived; how long ago the carrier was last asked; and how long ago its latest scan was, but a pending
- * one. The times are those of when the page was drawn, as the iPhone's are. Then, 7 after them and centred on them, the
- * refresh where `onRefresh` is given ([RefreshButton]), waiting while `working`. The refresh keeps its 26 and the lines
- * wrap in what is left, as SwiftUI sizes the fixed button first, at the largest text or in a narrow column. Nothing
- * where there is nothing to say, so the page leaves no gap for it. TalkBack reads the lines before the refresh, as
- * VoiceOver reads them in the order they are written.
+ * caption medium in the opaque secondary grey: when the next check comes, in caption regular, as the iPhone's format
+ * style writes a date with its time ([com.plhery.peekdeliverytracker.core.Localizer.abbreviatedDateTime]) on the app's
+ * clock, while the parcel isn't archived; how long ago the carrier was last asked; and how long ago its latest scan
+ * was, but a pending one. The times are those of when the page was drawn, as the iPhone's are. Then, 7 after them and
+ * centred on them, the refresh where `onRefresh` is given ([RefreshButton]), waiting while `working`. The refresh keeps
+ * its 26 and the lines wrap in what is left, as SwiftUI sizes the fixed button first, at the largest text or in a
+ * narrow column. Nothing where there is nothing to say, so the page leaves no gap for it. TalkBack reads the lines
+ * before the refresh, as VoiceOver reads them in the order they are written.
  */
 @Composable
 internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: (() -> Unit)?, modifier: Modifier = Modifier) {
     val localizer = LocalLocalizer.current
+    LocalUse24HourTime.current
     val now = LocalNow.current()
     val next = parcel.carrierData?.routing?.nextCheckAt?.let(DateParser::date)?.takeUnless { parcel.isArchived }
     val checked = parcel.lastSyncedAt

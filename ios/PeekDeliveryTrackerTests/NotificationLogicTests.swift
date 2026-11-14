@@ -422,12 +422,19 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertEqual(DeviceClock.body(push, now: evening, timeZone: california), "Kitchen scale · delivered at 16:51")
         XCTAssertEqual(DeviceClock.body(push, now: evening, timeZone: zurich), "Kitchen scale · delivered at 01:51")
         XCTAssertEqual(
-            DeviceClock.body(push, now: evening, timeZone: california, use24HourTime: false)?.lowercased(),
-            "kitchen scale · delivered at 4:51 pm"
+            DeviceClock.body(push, now: evening, timeZone: california, use24HourTime: false),
+            "Kitchen scale · delivered at 4:51 PM"
         )
         XCTAssertEqual(
-            DeviceClock.body(push, now: evening, timeZone: zurich, use24HourTime: false)?.lowercased(),
-            "kitchen scale · delivered at 1:51 am"
+            DeviceClock.body(push, now: evening, timeZone: zurich, use24HourTime: false),
+            "Kitchen scale · delivered at 1:51 AM"
+        )
+        // English writes its 12-hour clock in capitals, even where the language's region writes "pm".
+        var british = push
+        british["date_locale"] = "en-GB"
+        XCTAssertEqual(
+            DeviceClock.body(british, now: evening, timeZone: california, use24HourTime: false),
+            "Kitchen scale · delivered at 4:51 PM"
         )
         let twoDaysLater = try instant("2026-09-08T12:00:00Z")
         XCTAssertEqual(
@@ -448,13 +455,41 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertNil(DeviceClock.body(push.filter { $0.key as? String != "scan_at" }, now: evening, timeZone: california))
         XCTAssertNil(DeviceClock.body(push.merging(["scan_at": "yesterday"]) { $1 }, now: evening, timeZone: california))
         XCTAssertNil(DeviceClock.body(["body": "Kitchen scale · in transit"], now: evening, timeZone: california))
-        let estimate = ["body": "Arriving at 16:00", "body_12_hour": "Arriving at 4:00 pm"]
+        let estimate = ["body": "Arriving at 16:00", "body_12_hour": "Arriving at 4:00 PM"]
         XCTAssertNil(DeviceClock.body(estimate))
-        XCTAssertEqual(DeviceClock.body(estimate, use24HourTime: false), "Arriving at 4:00 pm")
+        XCTAssertEqual(DeviceClock.body(estimate, use24HourTime: false), "Arriving at 4:00 PM")
         // Without a language for the date, the device's own writes it.
         var unnamed = push
         unnamed["date_locale"] = ""
         XCTAssertNotNil(DeviceClock.body(unnamed, now: twoDaysLater, timeZone: california)?.range(of: "16:51"))
+    }
+
+    func testTheNotificationServiceWritesOnTheClockChosenInTheApp() throws {
+        let suite = "device-clock-\(UUID().uuidString)"
+        let shared = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { shared.removePersistentDomain(forName: suite) }
+        let twelveHour = Locale(identifier: "en_US"), twentyFourHour = Locale(identifier: "en_GB")
+
+        // Automatic, or no choice at all, follows the device.
+        XCTAssertFalse(DeviceClock.uses24HourTime(in: nil, locale: twelveHour))
+        XCTAssertTrue(DeviceClock.uses24HourTime(in: nil, locale: twentyFourHour))
+        XCTAssertFalse(DeviceClock.uses24HourTime(in: shared, locale: twelveHour))
+        shared.set("auto", forKey: DeviceClock.preferenceKey)
+        XCTAssertFalse(DeviceClock.uses24HourTime(in: shared, locale: twelveHour))
+        XCTAssertTrue(DeviceClock.uses24HourTime(in: shared, locale: twentyFourHour))
+        shared.set("sometimes", forKey: DeviceClock.preferenceKey)
+        XCTAssertTrue(DeviceClock.uses24HourTime(in: shared, locale: twentyFourHour))
+
+        // A choice beats the device, both ways.
+        shared.set("24", forKey: DeviceClock.preferenceKey)
+        XCTAssertTrue(DeviceClock.uses24HourTime(in: shared, locale: twelveHour))
+        shared.set("12", forKey: DeviceClock.preferenceKey)
+        XCTAssertFalse(DeviceClock.uses24HourTime(in: shared, locale: twentyFourHour))
+
+        // A 12-hour clock can mark the time of day without "a", and a 24-hour one can quote an "h".
+        XCTAssertFalse(DeviceClock.systemUses24HourTime(Locale(identifier: "zh_TW")))
+        XCTAssertTrue(DeviceClock.systemUses24HourTime(Locale(identifier: "fr_FR")))
+        XCTAssertTrue(DeviceClock.systemUses24HourTime(Locale(identifier: "en_US@hours=h23")))
     }
 
     private func instant(_ text: String) throws -> Date {

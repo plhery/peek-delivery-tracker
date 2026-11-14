@@ -3,7 +3,7 @@ title: JS Express tracking: JSE…YQ numbers, scans and who delivers
 description: Track a JS Express (急速国际) parcel from China: what a JSE…YQ number looks like, what its scans mean and who delivers it in the US, Canada and beyond.
 slug: js-express-tracking
 published: 2026-10-30
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS, GOFO or SpeedX in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany, Colissimo in France and CTT Express in Spain, and FedEx on some lines.
@@ -40,6 +40,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `Item departed from origin.`, `Arrive at international airport to abroad` | On its way out, then at the airport in China. | "In transit" |
 | `Arrived at export center`, `Exports Center Sorting and Packing`, `Arrived at Origin Port` | On some lines, between those two: an export centre in China sorts and packs the parcel, then it reaches the port it leaves China from. | "In transit" |
 | `Shipment arrived at facility and measured.`, `Depart from facility to service provider.` | A facility in China weighs and measures the parcel, then sends it on to the line that flies it. | "In transit" |
+| `Start on-site transportation and shipment` | At the airport in China, after its arrival there: the handling on site has started, before China's export customs release the parcel. | "In transit" |
 | `Released From Export Customs` | China's export customs are done. Not your country's customs. | "In transit" |
 | `DEPART ORIGIN AIRPORT`, `Departure from the original airport`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | The flight has left, sometimes with a stop and a connecting flight. | "In transit" |
 | `ARRIVED AT DESTINATION AIRPORT`, `Arrival to the destination airport`, `Item Flight landing`, `NOA-Notification of arrival from GHA` | Landed in your country. NOA is the airport's ground handler reporting it. | "In transit" |

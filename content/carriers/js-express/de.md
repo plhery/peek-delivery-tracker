@@ -3,7 +3,7 @@ title: JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller
 description: JS-Express-Paket (急速国际) aus China verfolgen: wie die JSE…YQ-Nummer aussieht, was die Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: js-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 JS Express (急速国际, auch JS EXP) ist ein chinesisches Logistikunternehmen für grenzüberschreitende Onlineshops, betrieben von 急创速供应链管理（苏州）有限公司 in Suzhou. Hat ein Shop deine Bestellung mit JS Express verschickt, beginnt die Sendungsnummer mit JSE und endet auf YQ: Füg sie oben ins Feld ein. JS Express bringt das Paket aus China in dein Land, die Zustellung übernimmt dann ein Paketdienst vor Ort. In Deutschland tauchen im Verlauf von JS Express die Scans von DHL, iMile oder J&T Express auf.
@@ -40,6 +40,7 @@ Die Seite von JS Express listet jeden Scan mit Datum und Uhrzeit, einem Ort in �
 | `Item departed from origin.`, `Arrive at international airport to abroad` | Auf dem Weg aus dem Lager, dann am Flughafen in China. | „Unterwegs“ |
 | `Arrived at export center`, `Exports Center Sorting and Packing`, `Arrived at Origin Port` | Auf manchen Linien zwischen diesen beiden: Ein Exportzentrum in China sortiert und verpackt das Paket, dann kommt es am Hafen an, über den es China verlässt. | „Unterwegs“ |
 | `Shipment arrived at facility and measured.`, `Depart from facility to service provider.` | Eine Anlage in China wiegt und misst das Paket und schickt es dann weiter an die Linie, mit der es fliegt. | „Unterwegs“ |
+| `Start on-site transportation and shipment` | Am Flughafen in China, nach der Ankunft dort: Der Transport vor Ort hat begonnen, noch bevor der Zoll in China das Paket zur Ausfuhr freigibt. | „Unterwegs“ |
 | `Released From Export Customs` | Die Ausfuhrabfertigung in China ist erledigt. Mit der Einfuhr hat das noch nichts zu tun. | „Unterwegs“ |
 | `DEPART ORIGIN AIRPORT`, `Departure from the original airport`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | Der Flug ist gestartet, manchmal mit Zwischenlandung und Anschlussflug. | „Unterwegs“ |
 | `ARRIVED AT DESTINATION AIRPORT`, `Arrival to the destination airport`, `Item Flight landing`, `NOA-Notification of arrival from GHA` | Am Zielflughafen gelandet. Mit NOA meldet der Abfertiger am Flughafen die Ankunft. | „Unterwegs“ |

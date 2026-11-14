@@ -3,7 +3,7 @@ title: Suivi colis Shouwu : numéro SWECN…YQ, statuts et livraison
 description: Suivre un colis Shouwu International (守务国际) venu de Chine : à quoi ressemble le numéro SWECN…YQ, ce que veulent dire les statuts et qui livre en France.
 slug: shouwu-suivi
 published: 2026-11-02
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. En France, c'est surtout Colissimo, et Shouwu annonce 4 à 7 jours ouvrés. Le vendeur choisit le numéro qu'il te transmet : celui de Shouwu, qui commence par SWECN et finit par YQ, ou celui de Colissimo. Colle l'un ou l'autre dans le champ ci-dessus, ou le numéro Shouwu sur son site de suivi, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Pas de numéro ? Demande-le au vendeur : Shouwu n'a aucun contact pour les destinataires.
@@ -57,6 +57,7 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | `Your consignment has been picked up` | Le transporteur l'a récupéré à l'entrepôt de Shouwu à l'étranger, après la douane : ce n'est ni un enlèvement chez le vendeur, ni un retrait par toi. | « En transit » |
 | `FR, Votre envoi est en transit sur nos plateformes logistiques.,运输途中` | Une ligne du transporteur qui livre en France, reprise avec le code du pays devant et « en transit » en chinois derrière. | « En transit » |
 | `The shipment has been processed in the destination parcel center` | DHL l'a trié au centre colis qui dessert ton adresse, avant sa tournée. | « En transit » |
+| `Mis routed` | Le transporteur qui livre en Allemagne a envoyé le colis au mauvais site et le réachemine : un retard, pas un blocage. La tournée peut passer le jour même. | « En transit » |
 | `Out for delivery` | La tournée de livraison du transporteur local. | « En livraison » |
 | `The shipment could not be delivered. Please find more information here.` | Le transporteur n'a pas pu livrer ; une autre tournée suit. Le lien annoncé n'est pas repris. | « Tentative de livraison » |
 | `The recipient is unknown` | Lors de la tournée de DHL en Allemagne, le destinataire est inconnu à l'adresse : le colis repart. | « Tentative de livraison » |

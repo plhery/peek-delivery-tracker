@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -59,6 +59,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Handed to the courier that delivers in your country, not delivered to you ("deliverey" is Shouwu's spelling). | "In transit" |
 | `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
 | `The shipment has been processed in the destination parcel center` | DHL has sorted it at the parcel centre that serves your address, before its delivery round. | "In transit" |
+| `Mis routed` | The courier delivering in Germany sent the parcel to the wrong facility and is sending it on: a delay, not a stop. The delivery round can still come the same day. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
 | `Abnormal delivery` | The round didn't deliver. The courier's reason follows as a scan of its own in angle brackets, such as `<Incorrect address.>`. | "Delivery attempted" |
 | `The recipient is unknown` | DHL's round in Germany found no such recipient at the address; the parcel goes back. | "Delivery attempted" |

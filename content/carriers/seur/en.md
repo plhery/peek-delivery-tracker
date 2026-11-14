@@ -3,7 +3,7 @@ title: SEUR tracking: numbers, statuses and pickup points
 description: Track a SEUR parcel in Spain: what the number looks like, what SEUR's Spanish statuses mean, Pickup points, missed deliveries and how to reach SEUR.
 slug: seur-tracking
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's miSEUR tracking page on seur.com, with a SEUR tracking link or by pasting the number in the box above.
@@ -37,6 +37,7 @@ SEUR's tracking site is in Spanish and English. The statuses below are the Spani
 | `EL ENVÍO HA SIDO DEPOSITADO EN UN PUNTO SEUR PICKUP.` | The sender has dropped it at a SEUR Pickup point, where SEUR collects it. |
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | SEUR has received it at its origin depot and it's on its way. |
 | `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` | In transit to the depot that delivers in your area. |
+| `EN ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE DESTINO. PRONTO SALDRÁ A REPARTO.` | At the depot that delivers in your area, with the delivery round still to come: not out for delivery yet, so Peek shows "In transit" (*EN ENVÍO* is SEUR's spelling). |
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | A delivery day has been agreed. |
 | `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA. DISCULPA LAS MOLESTIAS.` | Delayed: delivery may come later than planned. |
 | `EL ENVÍO ESTÁ EN REPARTO.` | Out for delivery today. |

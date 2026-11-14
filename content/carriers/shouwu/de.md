@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-13
+updated: 2026-11-14
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -57,6 +57,7 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: keine Abholung beim Händler und keine durch dich. | „Unterwegs“ |
 | `The shipment has been processed in the parcel center of origin` | DHLs erster Scan in Deutschland, nach dem Zoll. | „Unterwegs“ |
 | `The shipment has been processed in the destination parcel center` | DHL hat es im Paketzentrum sortiert, das deine Adresse beliefert, vor der Zustelltour. | „Unterwegs“ |
+| `Mis routed` | Der Zusteller in Deutschland hat das Paket an den falschen Standort geleitet und schickt es weiter: Das verzögert es, hält es aber nicht auf. Die Zustelltour kann noch am selben Tag kommen. | „Unterwegs“ |
 | `Germany, Die Sendung wurde im Briefzentrum bearbeitet.,运输途中` | Der Zusteller in Deutschland hat es in einem Briefzentrum bearbeitet; davor steht das Land, dahinter „unterwegs“ auf Chinesisch. | „Unterwegs“ |
 | `Out for delivery` | Die Zustelltour des Paketdiensts vor Ort. | „In Zustellung“ |
 | `The shipment could not be delivered. Please find more information here.` | Der Paketdienst konnte nicht zustellen; eine weitere Tour folgt. Den angekündigten Link gibt Shouwu nicht weiter. | „Zustellversuch“ |

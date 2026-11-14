@@ -39,7 +39,7 @@ Of the steps Peek knows from SXW's tracker, seven are in English and three in Ch
 | `Parcel processed at Shenzhen Sorting Centre.` | Sorted there. | "In transit" |
 | `Parcel departure in Shenzhen Sorting Centre.` | On its way out of that sorting centre. | "In transit" |
 | `Parcel departure in Transit Facility, Parcel Departure` | The parcel has left a transit facility and is on its way. | "In transit" |
-| `Customs declaration completed` | The export declaration in China is done. This is customs in China, not in your country. | "At customs" |
+| `Customs declaration completed` | The export declaration in China is done, before the flight. This is customs in China, not in your country, and the parcel isn't held. | "In transit" |
 
 **Chinese and English lines.** The Chinese lines come from SXW's own system, and most English ones from the shipping line that carries the parcel. So two lines can say nearly the same thing: `货物电子信息已经收到` and `Parcel Data Received` both mean the details are in, and `到达收货点` and `Parcel picked up` both mean someone has the parcel now.
 
@@ -51,7 +51,7 @@ Of the steps Peek knows from SXW's tracker, seven are in English and three in Ch
 
 SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile delivery", and that its network covers Europe, America, Southeast Asia, the Middle East and Africa. Its product list names UPS lines from Hong Kong, an "ARAMEX Special Line", a "Middle East and Europe small package" and a "US Express Mail Small Packet". It doesn't say which company delivers the parcel in your country.
 
-**What Peek's code shows.** For a parcel to the US, SXW's record can give a [GOFO Express](carrier:gofo) number (GFUS and fourteen digits) beside SXW's own. When it does, and the record names no shipping channel, Peek names GOFO Express as the company that delivers ("Delivery with GOFO Express") and shows its number and a link to GOFO's tracking. If the record names a channel, Peek names no delivering company. While GOFO lists the parcel but hasn't scanned it, the line reads "Announced to GOFO Express, not received yet". Once GOFO's own tracking shows a scan as recent as SXW's latest, or newer, Peek follows the parcel there. GOFO Express is the only delivering company Peek's code names for SXW.
+**What Peek's code shows.** For a parcel to the US, SXW's record can give a [GOFO Express](carrier:gofo) number (GFUS and fourteen digits) beside SXW's own. When it does, Peek names GOFO Express as the company that delivers ("Delivery with GOFO Express") and shows its number and a link to GOFO's tracking. The one exception is a record whose shipping channel names another company, UPS for one: then Peek names no delivering company. While GOFO lists the parcel but hasn't scanned it, the line reads "Announced to GOFO Express, not received yet". Once GOFO's own tracking shows a scan as recent as SXW's latest, or newer, Peek follows the parcel there. GOFO Express is the only delivering company Peek's code names for SXW.
 
 **Delivery attempts and pickup.** These follow the delivering company's rules, and SXW's site gives none. Ask the seller which company delivers and for its tracking number, and see [missed delivery](guide:missed-delivery).
 
@@ -63,7 +63,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 **"Waiting for the carrier" in Peek.** Peek has no step for your number yet: SXW's tracker doesn't know it, or has no steps for it, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too: SXW and twelve digits.
 
-**"At customs" after `Customs declaration completed`.** That's the export declaration in China, not customs in your country. If you're later asked to pay import charges, see [parcels held at customs](guide:customs).
+**`Customs declaration completed`.** That's the export declaration in China, before the flight, not customs in your country. The parcel isn't held, so Peek shows "In transit". If you're later asked to pay import charges, see [parcels held at customs](guide:customs).
 
 **No new step for days.** If Peek shows a GOFO Express number, check GOFO's tracking. Otherwise go by the shop's delivery estimate, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
@@ -79,7 +79,7 @@ SXW's customer is the seller, so ask the seller about your order first, and the 
 
 ## Track an SXW Express parcel with Peek
 
-[Peek](/) names SXW Express straight away for a number of SXW and twelve digits, with "Detected carrier". No other carrier in Peek's catalog uses that shape. If the seller gave you a number of another shape, paste it all the same: Peek follows more than 3,500 carriers. To put a number under SXW by hand, press "Change" and search for SXW Express (typing Shengxingwang finds it too), or use "Change carrier" on a parcel you've already added.
+[Peek](/) names SXW Express straight away for a number of SXW and twelve digits, with "Detected carrier". No other carrier in Peek's catalog uses that shape. If the seller gave you a number of another shape, paste it all the same: Peek follows more than 3,500 carriers. To put a number under SXW by hand, press "Change" and search for SXW Express (typing Shengxingwang or 胜兴旺 finds it too), or use "Change carrier" on a parcel you've already added.
 
 Peek asks SXW's own tracker, the one the box on sxwexpress.cn opens, with no account, postcode or phone number. It shows the status, each step with its place when the tracker gives one, and the destination country. It leaves out the names, address, postcodes, weight, number of pieces, customer reference, payment details, signature and proof of delivery the record can hold. SXW's tracker gives no delivery date, so Peek shows none.
 
@@ -87,7 +87,7 @@ Peek holds back any step dated after the moment it checks, and any step written 
 
 Apart from the GOFO hand-over above, Peek stays with SXW's tracker. If the seller gives you the delivering company's number, add it to Peek as a parcel of its own.
 
-Peek checks every 10 minutes, and hourly once the parcel has gone quiet. It can notify you of every scan, important steps only or the delivery only. Of SXW's own steps, "Important steps" covers only `Customs declaration completed`, as Peek shows it "At customs": that alert is about the export declaration in China, not your country's customs. "Delivery only" covers the delivery round and the delivery. Peek can't contact SXW Express or the seller for you.
+Peek checks every 10 minutes, and hourly once the parcel has gone quiet. It can notify you of every scan, important steps only or the delivery only. "Important steps" covers customs, problems, the delivery round, missed deliveries, pickup, the delivery and returns, so none of the steps in the table above sets one off, `Customs declaration completed` included. "Delivery only" covers the delivery round and the delivery. Peek can't contact SXW Express or the seller for you.
 
 ## Questions about SXW Express tracking
 
@@ -101,7 +101,7 @@ In the "Express Tracking" box on the home page of sxwexpress.cn: type the number
 
 ### What does "Customs declaration completed" mean on SXW tracking?
 
-That the export declaration in China is done. Peek shows it as "At customs", but this is customs in China, not in your country.
+That the export declaration in China is done, before the flight. Peek shows it as "In transit": this is customs in China, not in your country, and the parcel isn't held.
 
 ### Who delivers SXW Express parcels in my country?
 
@@ -120,5 +120,5 @@ The seller you ordered from: it booked the parcel with SXW. SXW's website lists 
 - [SXW Express: trace (tracker, English page)](http://www.sxwexpress.cn:8082/en/trackIndex.htm) – SXW's tracker in English; the Chinese page opens from the home page's box
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, SXW number shape, Peek reading SXW's own tracker, step wordings and stages, Beijing clock, steps dated ahead or written ahead held back, tracking services as fallback, GOFO Express number and hand-over when the record names no channel, what Peek shows and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, SXW number shape, Peek reading SXW's own tracker, step wordings and stages, Beijing clock, steps dated ahead or written ahead held back, tracking services as fallback, GOFO Express number and hand-over unless the record's channel names another carrier, what Peek shows and leaves out
 :::

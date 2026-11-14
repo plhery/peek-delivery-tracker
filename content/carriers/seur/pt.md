@@ -3,7 +3,7 @@ title: SEUR encomenda: rastreio, estados e contactos em Portugal
 description: Seguir uma encomenda SEUR em Portugal: o número, os estados em espanhol explicados, pontos Pickup, entregas falhadas, reclamações e contactos.
 slug: seur-encomenda
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 A SEUR é uma transportadora espanhola de encomendas e envios urgentes, do grupo Geopost, o mesmo da DPD. Para seguir a tua, abre a página de seguimento miSEUR, em seur.com, sem conta, ou cola o número na caixa acima.
@@ -40,6 +40,7 @@ Os estados aparecem em espanhol e em maiúsculas, tal como a SEUR os escreve. Pe
 | `EL ENVÍO HA SIDO DEPOSITADO EN UN PUNTO SEUR PICKUP.` | O remetente deixou-a num ponto SEUR Pickup, onde a SEUR a vai recolher. |
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | A SEUR recebeu-a no centro de origem e a encomenda já vai a caminho. |
 | `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` | Em trânsito para a delegação que faz as entregas na tua zona. |
+| `EN ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE DESTINO. PRONTO SALDRÁ A REPARTO.` | Já está na delegação que faz as entregas na tua zona e sai em breve para distribuição, mas ainda não saiu: o Peek mostra «Em trânsito» («EN ENVÍO» é a grafia da SEUR). |
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | Já há um dia de entrega combinado. |
 | `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA. DISCULPA LAS MOLESTIAS.` | Atrasada: a entrega pode chegar mais tarde do que o previsto. |
 | `EL ENVÍO ESTÁ EN REPARTO.` | Em distribuição, deve chegar hoje. |

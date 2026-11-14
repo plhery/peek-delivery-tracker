@@ -3,7 +3,7 @@ title: SEUR seguimiento: número, estados y puntos Pickup
 description: Pega tu número de SEUR y mira dónde está tu paquete: cómo es el número, qué significa cada estado, qué pasa si no estás en casa y los puntos Pickup.
 slug: seur-seguimiento
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-14
 ---
 
 Pega tu número de SEUR en la casilla de arriba para ver dónde está tu paquete, o escríbelo en Mis envíos de miSEUR, en seur.com, sin crear una cuenta. Suele tener 14 o 21 cifras y está en el correo de envío de la tienda o en la página de tu pedido. SEUR es una empresa española de paquetería urgente que forma parte del grupo Geopost, el mismo de DPD.
@@ -42,6 +42,7 @@ SEUR escribe sus estados en mayúsculas y en español. Esta tabla los ordena seg
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | SEUR ya lo tiene en su centro de origen y sale hacia tu zona. |
 | `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` | Va camino de la delegación que reparte en tu zona. |
 | `EL ENVÍO ESTÁ PENDIENTE DE LLEGAR A DESTINO. EN CUANTO SE RECIBA, ACTUALIZAREMOS LA SITUACIÓN.` | Aún no ha llegado a la delegación de destino; SEUR actualizará el estado cuando llegue. |
+| `EN ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE DESTINO. PRONTO SALDRÁ A REPARTO.` | Ya está en la delegación que reparte en tu zona y saldrá a reparto pronto, pero aún no está en reparto: Peek muestra «En tránsito» («EN ENVÍO» lo escribe así SEUR). |
 | `EL ENVÍO HA LLEGADO A LA ADUANA DE DESTINO. INICIAMOS LOS TRÁMITES DE DESPACHO ADUANERO.` | Está en la aduana del país de destino. |
 | `INCIDENCIA EN ADUANAS: FALTA FACTURA. CONTACTA CON SEUR DESDE EL ÁREA DE SOPORTE.` | La aduana necesita la factura de la compra: pídesela a la tienda y contacta con SEUR desde el área de soporte de miSEUR. |
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | Hay un día de entrega acordado. |

@@ -42,7 +42,7 @@ import {
   type ParcelAttention,
 } from './lib/parcelPriority';
 import { numberToCheck } from './lib/messages';
-import { useSeenWhileOpen } from './lib/newUpdate';
+import { useMarkNewUpdatesChoice, useSeenWhileOpen } from './lib/newUpdate';
 import {
   DEFAULT_PARCEL_SORT,
   parcelComparator,
@@ -216,6 +216,10 @@ export default function App({
     if (mode !== 'api' || !apiAuth || !preferences) return;
     void saveShownUnits({ clock: use24HourTime ? '24' : '12', distance: distanceUnit }, apiAuth).catch(() => undefined);
   }, [mode, apiAuth, preferences, use24HourTime, distanceUnit]);
+
+  // The account's choice to mark new updates reaches this browser with that read, not when Settings opens, and one
+  // made here that the account has not taken goes to it then.
+  useMarkNewUpdatesChoice(mode === 'api' ? apiAuth : undefined);
 
   // A share opens the add sheet: filled in with what came, or saying why nothing did.
   useEffect(() => {

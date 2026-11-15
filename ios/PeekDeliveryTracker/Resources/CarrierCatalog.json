@@ -54565,6 +54565,29 @@
       },
       "linkRules": [],
       "detectionRules": []
+    },
+    "memphis-courier": {
+      "displayName": "Memphis Courier",
+      "countries": [
+        "BR",
+        "US"
+      ],
+      "color": "#1f3c5b",
+      "selectable": true,
+      "timezone": "America/Sao_Paulo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "memphis-courier",
+        "recognitionRank": 17
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^M\\d{7}MIA$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://clients.memphiscourier.com.br/"
     }
   }
 }

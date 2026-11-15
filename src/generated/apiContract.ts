@@ -54566,6 +54566,29 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "memphis-courier": {
+    "displayName": "Memphis Courier",
+    "countries": [
+      "BR",
+      "US"
+    ],
+    "color": "#1f3c5b",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "memphis-courier",
+      "recognitionRank": 17
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^M\\d{7}MIA$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://clients.memphiscourier.com.br/"
   }
 } as const;
 
@@ -56173,7 +56196,8 @@ export const CARRIER_IDS = [
   "santos-e-vale",
   "xinsu",
   "yqs",
-  "yusuda"
+  "yusuda",
+  "memphis-courier"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

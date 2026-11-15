@@ -90164,6 +90164,17 @@
     "candidates": []
   },
   {
+    "input": "M9999998MIA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "memphis-courier"
+    ],
+    "asked": [
+      "memphis-courier"
+    ]
+  },
+  {
     "input": "MA0093019200031906151",
     "carrier": "unknown",
     "confidence": "low",

@@ -196,8 +196,9 @@ answer) did not answer, so neither changes that; a carrier's own adapter failing
 takes over from the universal provider again.
 
 The carrier that answers for a parcel failing in passing (transport, a bot check) leaves a
-scheduled check without a provider: the check comes back at the carrier's retry time. The
-providers are asked once the parcel would show the failure, its last answer an hour old and a
+scheduled check without a provider: the check comes back at the carrier's retry time, an hour
+at most, so a longer wait (a maintenance page's `Retry-After`) leaves the next check to the
+providers. The providers are asked once the parcel would show the failure, its last answer an hour old and a
 second check in a row failing. They are asked at once on a refresh by hand, for a parcel out for
 delivery, for one a provider answers for, and when the carrier's answer cannot be read (`schema`).
 
@@ -366,8 +367,9 @@ parcel's own carrier, the check is deferred to the refusal's `retryAfterMs`, whe
 search frees up, with no provider asked meanwhile, so a busy hour's parcels spread over it; it
 ends `skipped`. Pauses can follow one another for hours, as through USPS's outage spells: an
 account's parcel that nothing has answered for an hour, as for a 429, asks the providers
-meanwhile, and a check they leave unanswered comes back when the carrier's search frees up.
-Either way the carrier counts no failure and takes no health sample. A carrier asked as a
+meanwhile, and a check they leave unanswered comes back when the carrier's search frees up. A
+provider's answer then leaves the carrier to be asked again once its search frees up too, not 6 h
+later as after another answer. Either way the carrier counts no failure and takes no health sample. A carrier asked as a
 candidate stays unanswered. A carrier's own 429 has no reason.
 Spring GDS's lookups go through PostNL's API, whose 20 calls a minute every caller shares: its
 429 is waited out like any other, but takes no health sample, since it says how busy the API

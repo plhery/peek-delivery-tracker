@@ -53,6 +53,7 @@ import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -67,6 +68,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.currentStateAsState
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
@@ -172,7 +174,7 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
     // The page's scroll, which the word at its foot shows through its glass.
     val backdrop = rememberMaterialBackdrop()
     PageKeys(state, parcelId, menuParcel)
-    SeenWhileOpen(state, menuParcel)
+    SeenWhileOpen(state, menuParcel, parcelId)
     Box(
         Modifier
             .fillMaxSize()
@@ -625,18 +627,22 @@ internal fun PageBarButton(symbol: String, label: String, tag: String, modifier:
 }
 
 /**
- * A parcel with news is seen while its page can be seen (#72), with "Mark new updates" off too: once the window is
- * visible, and again when news comes in while it stays open. The store clears its mark at once and tells the account;
- * the call runs in the app's scope, so the page closing doesn't cancel it.
+ * A parcel with news is seen while the reader is looking at its page (#72, ParcelDetailView's `unseenNews`), with "Mark
+ * new updates" off too: a parcel someone opened, not the one shown beside the list by itself so that the column isn't
+ * empty; nothing over the page or the list; the window resumed and focused, as the iPhone's scene is active and a Mac's
+ * window is focused. It is seen again when news comes in while that lasts. The store clears its mark at once and tells
+ * the account; the call runs in the app's scope, so the page closing doesn't cancel it.
  */
 @Composable
-private fun SeenWhileOpen(state: DeliveriesState, parcel: Parcel?) {
-    val news = parcel?.takeIf { it.hasNewUpdate }?.newsAt
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
+private fun SeenWhileOpen(state: DeliveriesState, parcel: Parcel?, pageId: UUID) {
+    val resumed = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
+    val focused = LocalWindowInfo.current.isWindowFocused
+    val looking = state.navigator.navigation.chosen == pageId && resumed && focused && !state.modal && !state.showingFilters &&
+        !state.linkShown
+    val news = parcel?.takeIf { looking && it.hasNewUpdate }?.newsAt
     val current by rememberUpdatedState(parcel)
-    LaunchedEffect(parcel?.id, news, lifecycle) {
+    LaunchedEffect(parcel?.id, news) {
         if (news == null) return@LaunchedEffect
-        lifecycle.currentStateFlow.first { it.isAtLeast(Lifecycle.State.STARTED) }
         val seen = current ?: return@LaunchedEffect
         state.source.scope.launch { state.source.markSeen(seen) }
     }

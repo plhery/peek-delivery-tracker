@@ -278,6 +278,55 @@ class ParcelPageTest {
         compose.onNodeWithTag(PAGE_MENU_BUTTON).assertDoesNotExist()
     }
 
+    // The new-update mark (#72): only a parcel someone is looking at is seen.
+
+    /** Gives the parcel with `id` a scan later than it was seen. */
+    private fun news(id: UUID) {
+        source.parcels.value = source.parcels.value.map {
+            if (it.id == id) it.copy(newsAt = "2026-11-15T09:00:00Z", seenAt = "2026-11-15T08:00:00Z") else it
+        }
+        compose.waitForIdle()
+    }
+
+    @Test
+    fun aParcelOpenedWithNewsIsSeen() {
+        show()
+        val gift = DemoCards.parcel("Birthday gift").id
+        news(gift)
+        assertTrue(source.seen.isEmpty())
+        open("Birthday gift")
+        assertEquals(listOf(gift), source.seen)
+    }
+
+    @Test
+    fun newsArrivingUnderThePagesMenuIsSeenOnceTheMenuCloses() {
+        show()
+        open("Birthday gift")
+        openMenu()
+        val gift = DemoCards.parcel("Birthday gift").id
+        news(gift)
+        settle()
+        assertTrue(source.seen.isEmpty())
+        back()
+        settle()
+        assertEquals(listOf(gift), source.seen)
+    }
+
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun besideTheListTheParcelShownByItselfIsNotSeenUntilSomeoneOpensIt() {
+        show()
+        val shown = requireNotNull(deliveries.navigator.navigation.shown)
+        assertNull(deliveries.navigator.navigation.chosen)
+        news(shown)
+        settle()
+        compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+        assertTrue(source.seen.isEmpty())
+        compose.runOnUiThread { deliveries.navigator.open(shown) }
+        settle()
+        assertEquals(listOf(shown), source.seen)
+    }
+
     // The bar.
 
     @Test

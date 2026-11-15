@@ -35570,7 +35570,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Tallinn",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "hrx"
     },
     "trackingUrlTemplate": "https://wop.hrx.eu/public/tracking/{trackingNumber}",
     "linkRules": [
@@ -41789,11 +41789,20 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Madrid",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tsb-es"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "www.tsbconnect.net",
+          "tsbconnect.net"
+        ],
+        "path": "^/app/tracking/public/tracking/([^/]+)/?$"
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tsbconnect.net/app/tracking/public?search=true"
+    "trackingSearchUrl": "https://www.tsbconnect.net/app/tracking/public?search=true",
+    "trackingUrlTemplate": "https://www.tsbconnect.net/app/tracking/public/tracking/{trackingNumber}"
   },
   "bfe-express": {
     "displayName": "BFE Express",
@@ -51187,7 +51196,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "time-matters"
     },
     "trackingUrlTemplate": "https://booking.time-matters.com/en-US/tracking/{trackingNumber}",
     "linkRules": [
@@ -51195,7 +51204,7 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "booking.time-matters.com"
         ],
-        "path": "^/[a-z]{2}-[A-Z]{2}/tracking/([^/?#]+)/?$"
+        "path": "^/[a-z]{2}(?:-[A-Z]{2})?/tracking/([Ss]\\d{2,}(?:-\\d*)?|\\d{8,9}(?:-\\d*)?)/?$"
       }
     ],
     "detectionRules": [],
@@ -51452,7 +51461,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Budapest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "qt-express"
     },
     "trackingUrlTemplate": "https://tracking.qtlogistics.eu/hu/{trackingNumber}",
     "linkRules": [
@@ -53388,7 +53397,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Oslo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "bypost"
     },
     "trackingUrlTemplate": "https://bypost.no/spor/{trackingNumber}/",
     "linkRules": [
@@ -53903,7 +53912,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Luxembourg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xpress-logistics-lu"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -54127,7 +54136,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "night-star-express"
     },
     "trackingUrlTemplate": "https://customer.night-star-express.de/tracking/{trackingNumber}",
     "linkRules": [
@@ -54234,7 +54243,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Zurich",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "swissconnect"
     },
     "linkRules": [],
     "detectionRules": [],

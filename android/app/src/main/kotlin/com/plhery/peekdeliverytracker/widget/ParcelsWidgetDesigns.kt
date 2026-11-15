@@ -355,7 +355,8 @@ internal sealed interface SectionEntry {
  * The parcels as rows under the app list's sections ([DeliveryWidgetList.sections]). A small widget has no room for
  * the headings and shows the rows alone, in the same order, as [ListLayout] keeps them; so does a widget fed by an
  * app that didn't publish the sections. A medium one runs headings and rows down its first column, then its second, a
- * large one down its one column; a heading never ends a column. `more` counts the rest.
+ * large one down its one column; a heading never ends a column. `more` counts the rest, in a line at the foot of the
+ * last column, where they would follow its last row; only that column leaves the line room.
  */
 internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: WidgetText) {
     val sections = list.sections
@@ -376,20 +377,15 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
             val entries = sections.flatMap { section ->
                 listOf(SectionEntry.Heading(checkNotNull(section.kind), section.parcels.size)) + section.parcels.map { SectionEntry.Row(it, it.id in attention) }
             }
-            fun height(entry: SectionEntry, before: SectionEntry?): Dp = when (entry) {
-                is SectionEntry.Heading -> headingHeight + HEADING_BOTTOM + if (before == null) 0.dp else HEADING_TOP
-                is SectionEntry.Row -> layout.rowHeight + if (before == null || before is SectionEntry.Heading) 0.dp else metrics.rowSpacing
-            }
-
-            /** The entries down the columns in turn, `tall` each; a heading that would end a column starts the next. */
-            fun flow(tall: Dp): List<List<SectionEntry>> {
+            /** The entries down the columns in turn, each as tall as `tall` gives it; a heading that would end a column starts the next. */
+            fun flow(tall: List<Dp>): List<List<SectionEntry>> {
                 var index = 0
-                return List(if (layout.size == DeliveryWidgetList.Size.Medium) 2 else 1) {
+                return tall.map { room ->
                     val column = mutableListOf<SectionEntry>()
                     var used = 0.dp
                     while (index < entries.size) {
-                        val needed = height(entries[index], column.lastOrNull())
-                        if (used + needed > tall) break
+                        val needed = entryHeight(entries[index], column.lastOrNull())
+                        if (used + needed > room) break
                         column += entries[index]
                         used += needed
                         index++
@@ -401,10 +397,15 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
                     column
                 }
             }
-            val rowCount = entries.count { it is SectionEntry.Row }
-            val all = flow(layout.room.height)
-            columns = (if (all.sumOf { column -> column.count { it is SectionEntry.Row } } < rowCount) flow(layout.room.height - layout.moreHeight - metrics.rowSpacing * 2) else all)
-                .filter { it.isNotEmpty() }
+            val count = if (layout.size == DeliveryWidgetList.Size.Medium) 2 else 1
+            val full = layout.room.height
+            val short = full - layout.moreHeight - metrics.rowSpacing * 2
+            val all = flow(List(count) { full })
+            columns = when {
+                all.sumOf { column -> column.count { it is SectionEntry.Row } } == entries.count { it is SectionEntry.Row } -> all
+                // Where nothing more reaches the second column, the line ends the first, which then leaves it room.
+                else -> flow(List(count - 1) { full } + short).takeIf { it.last().isNotEmpty() } ?: flow(List(count) { short })
+            }.filter { it.isNotEmpty() }
         }
         more = list.parcels.size - rows.size
     }
@@ -412,31 +413,43 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
     /** The rows shown, down the columns in turn. */
     val rows: List<DeliveryWidgetParcel>
         get() = columns.flatten().mapNotNull { (it as? SectionEntry.Row)?.parcel }
+
+    /** How tall `column` stands, each entry with the gap above it. */
+    fun height(column: List<SectionEntry>): Dp = column.foldIndexed(0.dp) { at, sum, entry -> sum + entryHeight(entry, column.getOrNull(at - 1)) }
+
+    private fun entryHeight(entry: SectionEntry, before: SectionEntry?): Dp = when (entry) {
+        is SectionEntry.Heading -> headingHeight + HEADING_BOTTOM + if (before == null) 0.dp else HEADING_TOP
+        is SectionEntry.Row -> layout.rowHeight + if (before == null || before is SectionEntry.Heading) 0.dp else layout.metrics.rowSpacing
+    }
 }
 
 /**
  * The sections as [SectionsLayout] lays them out, each row marked by its carrier's truck, the stage of one that needs
- * the reader in the warning colour; then the count of the rest.
+ * the reader in the warning colour; then the count of the rest at the foot of the last column.
  */
 @Composable
 internal fun Sections(list: DeliveryWidgetList, size: DpSize, type: WidgetText, copy: Localizer) {
     val laid = SectionsLayout(list, size, type)
     val metrics = laid.layout.metrics
-    Column(GlanceModifier.fillMaxSize()) {
-        if (laid.columns.size == 2) {
-            Row(GlanceModifier.fillMaxWidth()) {
-                laid.columns.forEachIndexed { index, column ->
-                    if (index > 0) Spacer(GlanceModifier.width(SECTIONS_COLUMN_GAP))
-                    SectionColumn(column, laid.layout, laid.headingHeight, copy, GlanceModifier.defaultWeight())
-                }
+
+    @Composable
+    fun Last(entries: List<SectionEntry>, modifier: GlanceModifier) {
+        Column(modifier) {
+            SectionColumn(entries, laid.layout, laid.headingHeight, copy, GlanceModifier.fillMaxWidth())
+            if (laid.more > 0) {
+                Spacer(GlanceModifier.defaultWeight())
+                MoreLine(copy, laid.more, type, GlanceModifier.padding(start = metrics.markWidth + metrics.markSpacing, top = metrics.rowSpacing * 2))
             }
-        } else {
-            SectionColumn(laid.columns.firstOrNull().orEmpty(), laid.layout, laid.headingHeight, copy, GlanceModifier.fillMaxWidth())
         }
-        if (laid.more > 0) {
-            Spacer(GlanceModifier.defaultWeight())
-            MoreLine(copy, laid.more, type, GlanceModifier.padding(start = metrics.markWidth + metrics.markSpacing, top = metrics.rowSpacing * 2))
+    }
+    if (laid.columns.size == 2) {
+        Row(GlanceModifier.fillMaxSize()) {
+            SectionColumn(laid.columns.first(), laid.layout, laid.headingHeight, copy, GlanceModifier.defaultWeight())
+            Spacer(GlanceModifier.width(SECTIONS_COLUMN_GAP))
+            Last(laid.columns.last(), GlanceModifier.defaultWeight().fillMaxHeight())
         }
+    } else {
+        Last(laid.columns.firstOrNull().orEmpty(), GlanceModifier.fillMaxSize())
     }
 }
 

@@ -186,6 +186,38 @@ class ParcelsWidgetTest {
     }
 
     /**
+     * The line counting the parcels left out follows the last row shown, as they would: in a medium widget at the foot
+     * of the second column, so only that column leaves it room and the first takes the widget's height. Where nothing
+     * reaches the second column, the line ends the first, which then leaves it room.
+     */
+    @Test
+    fun theLineForTheParcelsLeftOutEndsTheColumnTheyWouldFollow() {
+        val medium = sections(sample, LIST_MEDIUM)
+        val (first, second) = medium.columns
+        assertTrue(medium.more > 0)
+        assertTrue(medium.height(first) > medium.layout.room.height - line(medium))
+        show(sample, LIST_MEDIUM) {
+            val names = { column: List<SectionEntry> -> column.filterIsInstance<SectionEntry.Row>().map { hasTextEqualTo(it.parcel.listName) } }
+            onNode(hasAnyDescendant(hasTextEqualTo("+${medium.more} more")) and hasAnyDescendant(names(second).last()) and hasAnyDescendant(names(first).first()).not())
+                .assertExists()
+        }
+        for (scale in listOf(1f, 1.3f, 2f)) {
+            val type = WidgetText(fontScaled(scale))
+            for (height in 60..270 step 5) {
+                val laid = SectionsLayout(sample, DpSize(LIST_MEDIUM.width, height.dp), type)
+                val room = laid.layout.room.height
+                val last = laid.columns.lastOrNull() ?: continue
+                assertTrue("$height at $scale", laid.more > 0)
+                laid.columns.dropLast(1).forEach { assertTrue("$height at $scale", laid.height(it) <= room) }
+                assertTrue("$height at $scale", laid.height(last) + line(laid) <= room)
+            }
+        }
+    }
+
+    /** The room the line counting the parcels left out takes under a column. */
+    private fun line(laid: SectionsLayout) = laid.layout.moreHeight + laid.layout.metrics.rowSpacing * 2
+
+    /**
      * Its design by how many parcels it shows, from the demo's cards: one a small widget shows as Next delivery's card,
      * two as passes, three as rows; a medium one two cards, four passes; a large one three cards, six passes. Until a
      * parcel's pictures are drawn, its rows.

@@ -1,8 +1,5 @@
 package com.plhery.peekdeliverytracker.core
 
-import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.Json
 import java.util.Locale
 
 // ExtensionLocalizer.swift. On Android the share target is an activity of the app itself, which could reach its
@@ -17,8 +14,13 @@ class ExtensionLocalizer(
     dictionaries: Map<String, Map<String, String>> = bundledDictionaries,
 ) {
     // Swift's Dictionary finds a key by canonical equivalence: "add.carrierKnownElsewhere" with a Kelvin sign for its K.
+    // The bundled copy's keys are canonical already.
     private val dictionaries: Map<String, Map<String, String>> =
-        dictionaries.entries.associate { (language, values) -> language.nfc() to values.mapKeys { it.key.nfc() } }
+        if (dictionaries === bundledDictionaries) {
+            dictionaries
+        } else {
+            dictionaries.entries.associate { (language, values) -> language.nfc() to values.mapKeys { it.key.nfc() } }
+        }
 
     /** `init(savedLanguageCode:)`, with the device's languages (`Locale.preferredLanguages`) given. */
     constructor(savedLanguageCode: String?, preferredLanguages: List<String>) :
@@ -32,14 +34,8 @@ class ExtensionLocalizer(
     }
 
     companion object {
-        val bundledDictionaries: Map<String, Map<String, String>> by lazy {
-            runCatching {
-                Json.decodeFromString(
-                    MapSerializer(String.serializer(), MapSerializer(String.serializer(), String.serializer())),
-                    SharedResources.text("Localization.json"),
-                )
-            }.getOrElse { emptyMap() }
-        }
+        /** The copy the app bundles, the app's [Localizer]'s, which reads it once. */
+        val bundledDictionaries: Map<String, Map<String, String>> get() = Localizer.dictionaries
 
         /**
          * The language saved by the app, else the first of the device's languages Peek speaks ([language]), else

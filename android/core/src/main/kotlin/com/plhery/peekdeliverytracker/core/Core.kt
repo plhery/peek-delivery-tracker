@@ -738,7 +738,8 @@ class Localizer(
         /** A key as a Swift Dictionary holds it: canonically, here in NFC, which ASCII already is. */
         private fun canonical(key: String): String = if (key.all { it.code < 0x80 }) key else key.nfc()
 
-        private val dictionaries: Map<String, Map<String, String>> by lazy {
+        /** The bundled copy, its keys canonical: read once in a process, for [ExtensionLocalizer] too. */
+        internal val dictionaries: Map<String, Map<String, String>> by lazy {
             runCatching {
                 Json.decodeFromString(
                     MapSerializer(String.serializer(), MapSerializer(String.serializer(), String.serializer())),

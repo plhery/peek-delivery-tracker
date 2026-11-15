@@ -71,6 +71,6 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Novo widget «Encomendas»: vê num relance as encomendas a caminho, a próxima primeiro. Consoante quantas forem, mostra-as como cartões iguais aos do widget «Próxima entrega», como cartões mais pequenos com as cores da sua transportadora ou como uma lista com tantas linhas quantas couberem. Num widget médio ou grande, toca numa encomenda para a abrir.
+• Novo widget «Encomendas»: vê num relance as encomendas a caminho, a próxima primeiro. Consoante quantas forem, mostra-as como cartões iguais aos do widget «Próxima entrega», como cartões mais pequenos com as cores da respetiva transportadora ou como uma lista com tantas linhas quantas couberem. Num widget médio ou grande, toca numa encomenda para a abrir.
 • O Peek avisa-te agora quando foi adicionado um número de pedido do Mercado Libre em vez de um número de seguimento.
 ```

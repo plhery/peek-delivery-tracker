@@ -207,6 +207,23 @@ class ParcelsWidgetTest {
     }
 
     /**
+     * The rows a widget tries ([DeliveryWidgetList.layouts]) start above what the tallest widget of its size holds in
+     * the smallest type, without headings or the last line: a small or medium one is under 280 dp tall whatever the
+     * launcher; a large one lists fewer parcels than its bound.
+     */
+    @Test
+    fun theRowsTriedStartAboveWhatTheTallestWidgetHolds() {
+        val smallest = WidgetText(fontScaled(0.5f))
+        for ((size, across) in listOf(DpSize(249.dp, 279.dp) to 1, DpSize(900.dp, 279.dp) to 2)) {
+            val kind = listSize(size)
+            val least = ListLayout(sample, size, smallest, compact = true, across)
+            val held = ((least.room.height + least.metrics.rowSpacing) / (least.rowHeight + least.metrics.rowSpacing)).toInt() * across
+            assertTrue("$size holds $held rows, over ${kind.mostRows}", held <= kind.mostRows)
+        }
+        assertTrue(DeliveryWidgetSelection.listLimit <= DeliveryWidgetList.Size.Large.mostRows)
+    }
+
+    /**
      * However many parcels there are, at any size and text size, the rows show them all or leave no room for another
      * under the last: a two-by-two widget showed three of four parcels over a blank a row tall, as the iPhone's
      * smaller one holds three.
@@ -214,18 +231,22 @@ class ParcelsWidgetTest {
     @Test
     fun theRowsLeaveNoRoomForAnotherBlank() {
         val order = sample.sections.flatMap { it.parcels }
-        for (scale in listOf(1f, 1.3f, 2f)) {
+        for (scale in listOf(0.85f, 1f, 1.3f, 2f)) {
             val type = WidgetText(fontScaled(scale))
-            for (size in listOf(LIST_SMALL, LIST_THREE_BY_TWO, LIST_MEDIUM, LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE, DpSize(194.dp, 223.dp))) {
+            for (size in listOf(LIST_SMALL, LIST_THREE_BY_TWO, LIST_MEDIUM, LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE, DpSize(194.dp, 223.dp), DpSize(249.dp, 279.dp), DpSize(900.dp, 279.dp))) {
                 for (count in 3..order.size) {
                     val laid = sections(list(order.take(count)), size, type)
                     val case = "$count parcels in $size at $scale"
                     assertEquals(case, count, laid.rows.size + laid.more)
                     if (laid.more == 0) continue
-                    // The smallest a row could be there, the type it takes before it gives a row up.
-                    val least = ListLayout(sample, size, type, compact = laid.layout.size != DeliveryWidgetList.Size.Large, laid.columns.size)
+                    // One row more, with its heading if it opens a section, and the last line, doesn't fit, even in the
+                    // type taken before a row is given up.
+                    val kind = laid.layout.size
+                    val next = DeliveryWidgetList.lines(laid.sections, laid.rows.size + 1, headings = kind != DeliveryWidgetList.Size.Small)
+                    val columns = if (kind == DeliveryWidgetList.Size.Medium) DeliveryWidgetList.columns(next) else listOf(next)
+                    val least = ListLayout(sample, size, type, compact = kind != DeliveryWidgetList.Size.Large, columns.size)
                     val blank = laid.layout.room.height - laid.columns.maxOf { laid.height(it) }
-                    assertTrue("$case: ${laid.rows.size} rows over $blank blank", blank < least.rowHeight + least.metrics.rowSpacing)
+                    assertTrue("$case: ${laid.rows.size} rows over $blank blank", columns.any { laid.height(it, least) > least.room.height })
                 }
             }
         }

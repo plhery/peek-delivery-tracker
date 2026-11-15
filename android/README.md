@@ -75,7 +75,7 @@ Arriving today, last night's delivery "yesterday", and a passed estimate gives w
     the foot of the last column, after the last row shown (`SectionsLayout`). As many rows as fit at every size, so
     that no room for another parcel is left blank: a small widget leaves the headings out, the name over the stage and
     day; a medium one has two columns about as tall as each other (`DeliveryWidgetList.columns`); a large one has a
-    line each where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up,
+    line each where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up (`DeliveryWidgetList.layouts`),
     and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line doesn't fit, the day stays.
 
   Cards and passes use the pictures the app draws for Next delivery's first 8 parcels; until those are drawn, the

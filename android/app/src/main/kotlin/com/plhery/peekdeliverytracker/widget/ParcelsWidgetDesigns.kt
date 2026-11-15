@@ -347,7 +347,8 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
 /**
  * The parcels as rows under the app list's sections ([DeliveryWidgetList.sections]), as `ParcelSections` picks them: as
  * many as the widget holds at the reader's text size, whatever its size, so that no room for another is left blank; a
- * small or medium widget taking smaller type ([ListMetrics.compact]) before it gives a row up. A small
+ * small or medium widget taking smaller type ([ListMetrics.compact]) before it gives a row up
+ * ([DeliveryWidgetList.layouts]). A small
  * widget has no room for the headings, nor has one fed by an app that didn't publish the sections
  * ([DeliveryWidgetList.lines]); a medium one splits the lines into two columns about as tall as each other, a heading
  * never ending the first ([DeliveryWidgetList.columns]). The line counting the parcels left out ends the last column,
@@ -364,23 +365,16 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
 
     init {
         val kind = listSize(size)
-        val across = if (kind == DeliveryWidgetList.Size.Medium) 2 else 1
-        // Tried from the most rows the smallest type could stand in, every parcel at most, down to one.
-        val least = ListLayout(list, size, type, compact = kind != DeliveryWidgetList.Size.Large, across)
-        val held = ((least.room.height + least.metrics.rowSpacing) / (least.rowHeight + least.metrics.rowSpacing)).toInt() * across
-        val most = minOf(held, list.parcels.size).coerceAtLeast(1)
-        val tries = (most downTo 1).flatMap { rows ->
-            if (kind == DeliveryWidgetList.Size.Large) listOf(rows to false) else listOf(rows to false, rows to true)
-        }
+        val tries = DeliveryWidgetList.layouts(list.parcels.size, kind).ifEmpty { listOf(DeliveryWidgetList.Layout(1, compact = false)) }
 
-        fun attempt(rows: Int, compact: Boolean): Pair<ListLayout, List<List<DeliveryWidgetList.Line>>> {
-            val lines = DeliveryWidgetList.lines(sections, rows, headings = kind != DeliveryWidgetList.Size.Small)
+        fun attempt(tried: DeliveryWidgetList.Layout): Pair<ListLayout, List<List<DeliveryWidgetList.Line>>> {
+            val lines = DeliveryWidgetList.lines(sections, tried.rows, headings = kind != DeliveryWidgetList.Size.Small)
             val columns = if (kind == DeliveryWidgetList.Size.Medium) DeliveryWidgetList.columns(lines) else listOf(lines)
-            return ListLayout(list, size, type, compact, columns.size) to columns
+            return ListLayout(list, size, type, tried.compact, columns.size) to columns
         }
-        val kept = tries.asSequence().map { (rows, compact) -> attempt(rows, compact) }
+        val kept = tries.asSequence().map(::attempt)
             .firstOrNull { (layout, columns) -> columns.all { height(it, layout) <= layout.room.height } }
-            ?: tries.last().let { (rows, compact) -> attempt(rows, compact) }
+            ?: attempt(tries.last())
         layout = kept.first
         columns = kept.second
     }
@@ -393,10 +387,8 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
     val more: Int
         get() = columns.flatten().filterIsInstance<DeliveryWidgetList.Line.More>().sumOf { it.count }
 
-    /** How tall `column` stands, each line with the gap above it. */
-    fun height(column: List<DeliveryWidgetList.Line>): Dp = height(column, layout)
-
-    private fun height(column: List<DeliveryWidgetList.Line>, layout: ListLayout): Dp = column.foldIndexed(0.dp) { at, sum, line ->
+    /** How tall `column` stands, each line with the gap above it, in this layout's rows or `layout`'s. */
+    fun height(column: List<DeliveryWidgetList.Line>, layout: ListLayout = this.layout): Dp = column.foldIndexed(0.dp) { at, sum, line ->
         val before = column.getOrNull(at - 1)
         sum + when (line) {
             is DeliveryWidgetList.Line.Heading -> headingHeight + HEADING_BOTTOM + if (before == null) 0.dp else HEADING_TOP

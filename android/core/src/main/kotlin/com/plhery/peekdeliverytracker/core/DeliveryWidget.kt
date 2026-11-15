@@ -79,15 +79,19 @@ data class DeliveryWidgetList(
     val isSample: Boolean = false,
 ) {
     /**
-     * `Size`: the iPhone's three list widgets, and the rows each has at the default text size: three, two columns of
-     * three, and fifteen, or as many as the large widget's height holds. Larger text keeps fewer. Up to `cards`
-     * parcels it shows as cards ([Design]): one, two side by side, three one above another.
+     * `Size`: the iPhone's three list widgets. `mostRows`: more rows than each size could hold in its smallest type,
+     * which bounds the layouts the widget measures ([layouts]); above the iPhone's 6 and 12 for a small and a medium
+     * one, which on Android stand up to 279 dp tall. Up to `cards` parcels it shows as cards ([Design]): one, two side
+     * by side, three one above another.
      */
-    enum class Size(val rows: Int, val cards: Int) {
-        Small(3, 1),
-        Medium(6, 2),
-        Large(DeliveryWidgetSelection.listLimit, 3),
+    enum class Size(val mostRows: Int, val cards: Int) {
+        Small(8, 1),
+        Medium(16, 2),
+        Large(24, 3),
     }
+
+    /** `Layout`: how many rows the sections' design shows, and in which type, `compact` being the smaller. */
+    data class Layout(val rows: Int, val compact: Boolean)
 
     /**
      * How the list shows its parcels, by how many there are for its size: up to [Size.cards] of them as cards, up to
@@ -147,6 +151,16 @@ data class DeliveryWidgetList(
     companion object {
         /** `link`: the deliveries, which the last line opens ([NativeRoute.Parcels]). */
         const val link = "peekdeliverytracker://parcels"
+
+        /**
+         * `layouts(count:size:)`: the layouts a widget tries for `count` parcels, the first that fits being the one it
+         * shows: the most rows first, each in the usual type, then in a small or medium widget in smaller type, as more
+         * rows win over larger type. The rows then show every parcel, or the room under the last is shorter than another
+         * row.
+         */
+        fun layouts(count: Int, size: Size): List<Layout> = (minOf(size.mostRows, count) downTo 1).flatMap { rows ->
+            listOf(Layout(rows, compact = false)) + if (size == Size.Large) emptyList() else listOf(Layout(rows, compact = true))
+        }
 
         /**
          * `lines(_:rows:headings:)`: the first `rows` parcels under their sections' headings, if the widget has room for

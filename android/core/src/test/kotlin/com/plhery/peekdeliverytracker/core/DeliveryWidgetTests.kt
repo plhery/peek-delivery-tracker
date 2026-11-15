@@ -358,13 +358,12 @@ class DeliveryWidgetTests {
 
     /**
      * The list widget's parcels, in the widgets' order: a delivered parcel goes from them a day after it arrived, the app
-     * silent since. Each size's rows at the default text size.
+     * silent since.
      */
     @Test
     fun theListKeepsADeliveredParcelForADay() {
         fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, true, "en", snapshot)
 
-        assertEquals(listOf(3, 6, 15), DeliveryWidgetList.Size.entries.map { it.rows })
         assertEquals(emptyList<DeliveryWidgetParcel>(), list(null).parcels)
 
         val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
@@ -610,6 +609,29 @@ class DeliveryWidgetTests {
         assertEquals("明天", "明天".openingLine(Locale.forLanguageTag("zh-Hans")))
         assertEquals("In transit", "In transit".openingLine(Locale.forLanguageTag("en")))
         assertEquals("", "".openingLine(Locale.forLanguageTag("en")))
+    }
+
+    /**
+     * The Parcels widget shows as many rows as fit, trying the most first: four parcels in a small widget are four rows
+     * where they fit, in smaller type if they must, before three and a line for the fourth. A large widget's rows keep
+     * the usual type.
+     */
+    @Test
+    fun theParcelsWidgetShowsAsManyRowsAsFitBeforeCountingTheOthers() {
+        fun rows(layouts: Iterable<DeliveryWidgetList.Layout>) = layouts.map { "${it.rows}${if (it.compact) " smaller" else ""}" }
+
+        assertEquals(
+            listOf("4", "4 smaller", "3", "3 smaller", "2", "2 smaller", "1", "1 smaller"),
+            rows(DeliveryWidgetList.layouts(4, DeliveryWidgetList.Size.Small)),
+        )
+        assertEquals(listOf("9", "9 smaller", "8", "8 smaller"), rows(DeliveryWidgetList.layouts(9, DeliveryWidgetList.Size.Medium).take(4)))
+        val large = DeliveryWidgetList.layouts(18, DeliveryWidgetList.Size.Large)
+        assertEquals((18 downTo 1).toList(), large.map { it.rows })
+        assertFalse(large.any { it.compact })
+        // However many parcels are listed, the widget measures a bounded number of layouts.
+        for (size in DeliveryWidgetList.Size.entries) {
+            assertEquals(DeliveryWidgetList.Layout(size.mostRows, compact = false), DeliveryWidgetList.layouts(1_000, size).first())
+        }
     }
 
     /** A row's tint is the one the app's cards mark the stage with, light then dark as hex. */

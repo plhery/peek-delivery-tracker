@@ -111,6 +111,11 @@ export interface SyncAuditCompletion {
    * place (trackingRouting.ts): it refreshed nothing yet, so it writes no refresh sample. Its lookups keep theirs.
    */
   awaitsCarrier?: boolean;
+  /**
+   * Every source answered without a scan for a parcel that has some (`carrier:no_new_scans`): the parcel has no
+   * news, which says nothing against its carrier. Its refresh sample is healthy, like a not-found answer.
+   */
+  answeredWithoutNews?: boolean;
   supportEvidence?: JsonObject;
 }
 
@@ -520,7 +525,8 @@ export class TrackingSyncAudit {
       // scans across many parcels still opens an incident, and every check keeps the anomaly.
       const repeated = !refused && completion.thinAnswer !== undefined && ownAnswer?.healthy === true
         && ownAnswer.details.category === 'ok' && await this.previousThinAnswer(subject) === completion.thinAnswer;
-      const healthy = refused || repeated || (completion.outcome !== 'error' && !failedFetch);
+      const quiet = !refused && completion.answeredWithoutNews === true;
+      const healthy = refused || repeated || quiet || (completion.outcome !== 'error' && !failedFetch);
       // A carrier whose adapter declined its verification on purpose, in this check or in the one whose
       // cooldown deferred it, failed no refresh while every other source answered: the check keeps its
       // lookups' samples. Postgres counts deliberate JD abstentions as review data, not an outage.
@@ -537,6 +543,7 @@ export class TrackingSyncAudit {
         // its lookup recovered from it.
         details: refused ? { category: 'input_required', ...refreshEvidence(completion) }
           : repeated ? { category: 'repeated_answer', ...refreshEvidence(completion), ...thin }
+          : quiet ? { category: 'no_new_scans', ...refreshEvidence(completion) }
           : { ...(values.error_type ? { error_type: values.error_type } : {}),
             ...[...this.#healthSamples.values()].reverse().find(sample => !sample.healthy && !sample.recovered)?.details,
             ...(healthy ? {} : refreshEvidence(completion)), ...thin },

@@ -3243,7 +3243,7 @@ export class TrackingSyncService {
         // Keep the failure evidence even while the parcel's error chip is suppressed.
         await audit.finish({ outcome: error.attempted > 0 ? failing ? 'error' : 'waiting' : 'skipped', sourceCarrier: carrierId,
           error, providerFailures: error.routing.failures, ...(deferred.added.length ? { eventsNew: deferred.added.length } : {}),
-          ...(error.awaitsCarrier ? { awaitsCarrier: true } : {}) });
+          ...(error.awaitsCarrier ? { awaitsCarrier: true } : {}), ...(syncError === NO_NEW_SCANS ? { answeredWithoutNews: true } : {}) });
         return failing ? 'errors' : 'waiting';
       }
       let message = error instanceof Error ? error.message.trim() || error.name : String(error);

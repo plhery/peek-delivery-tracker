@@ -4182,6 +4182,32 @@ describe('TrackingSyncService', () => {
     expect((await check({ ...parcel, carrier: 'ups', current_stage: 'pending' }, notFound)).sync_error).not.toBe('carrier:no_new_scans');
   });
 
+  it('records a quiet parcel\'s check, every source answering without a scan, as a healthy refresh filed as no_new_scans', async () => {
+    const answered = {
+      jrt: { count: 3, kind: 'no_history' as const, user_error: 'carrier:indeterminate', retry_at: '2026-09-10T13:00:00Z' },
+      Ship24: { count: 1, kind: 'not_found' as const, user_error: 'carrier:not_found', retry_at: '2026-09-11T00:00:00Z' },
+    };
+    const refreshSample = async (failures: Record<string, { count: number; kind: RoutingFailureKind; retry_at: string; user_error?: string }>) => {
+      const parcel = { id: 'quiet', carrier: 'jrt', tracking_number: 'TEST1234', current_stage: 'in_transit' };
+      vi.spyOn(TrackingRouter.prototype, 'fetch')
+        .mockRejectedValue(new RoutingDeferred({ ...routingState(parcel), failures, consecutive_failures: 3 }, true, 2));
+      const client = fakeClient();
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn(), fetchUniversal: vi.fn() }, null,
+        () => new Date('2026-09-10T12:00:00Z'));
+      await service.syncPackage(parcel, { trigger: 'scheduled' });
+      // The parcel still says no new scan came.
+      expect(client.updatePackage.mock.lastCall![1]).toMatchObject({ sync_status: 'error' });
+      const samples = client.recordTrackingHealth.mock.lastCall![2] as Array<{ kind: string; healthy: boolean; details: JsonObject }>;
+      return samples.find((sample) => sample.kind === 'refresh');
+    };
+    expect(await refreshSample(answered)).toMatchObject({ healthy: true, details: { category: 'no_new_scans' } });
+    // A source that could not be reached is still a failed refresh.
+    const down = { ...answered, ParcelsApp: { count: 2, kind: 'transport' as const, retry_at: '2026-09-10T12:15:00Z' } };
+    const failed = await refreshSample(down);
+    expect(failed).toMatchObject({ healthy: false });
+    expect(failed?.details.category).not.toBe('no_new_scans');
+  });
+
   it('keeps the steps a carrier with no scans wrote ahead, a passed "Delivered" among them, as no scan: the parcel stays pending and the step is served greyed', async () => {
     const added = { id: 'added', description: 'Tracking added', stage: 'pending', occurred_at: '2026-11-01T00:00:00Z', provider_event_id: 'app:added' };
     const parcel = { id: 'scripted', carrier: 'gzyl', tracking_number: 'TEST1234', current_stage: 'pending', tracking_events: [added] };

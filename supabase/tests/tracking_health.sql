@@ -41,6 +41,12 @@ returns jsonb language sql as $$
   select public.record_tracking_health(gen_random_uuid(),package_id,jsonb_build_array(jsonb_build_object(
     'kind','refresh','subject',subject,'healthy',true,'details',jsonb_build_object('category','repeated_answer'))));
 $$;
+-- A quiet parcel's refresh: every source answered without a scan (carrier:no_new_scans).
+create function pg_temp.quiet_refresh(subject text, package_id uuid)
+returns jsonb language sql as $$
+  select public.record_tracking_health(gen_random_uuid(),package_id,jsonb_build_array(jsonb_build_object(
+    'kind','refresh','subject',subject,'healthy',true,'details',jsonb_build_object('category','no_new_scans'))));
+$$;
 create function pg_temp.answered_sample(subject text)
 returns jsonb language sql as $$
   select public.record_tracking_health(gen_random_uuid(),null,jsonb_build_array(jsonb_build_object(
@@ -167,6 +173,17 @@ begin
   for i in 1..30 loop perform pg_temp.repeated_refresh('thin-rate',gen_random_uuid()); end loop;
   for i in 1..5 loop result := pg_temp.health_sample('thin-rate',false,'refresh',gen_random_uuid()); end loop;
   assert result->0->>'state'='open' and (result->0->>'attempts')::int=5, 'Repeated thin answers must not dilute the outage rate';
+  -- A quiet parcel's answer without news counts like them: toward recovery, never toward the rate or for another parcel.
+  for i in 1..3 loop result := pg_temp.health_sample('quiet-carrier',false,'refresh'); end loop;
+  assert result->0->>'state'='open', 'A quiet carrier''s only parcel failing three times must alert';
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
+  for i in 1..3 loop result := pg_temp.quiet_refresh('quiet-carrier','20000000-0000-4000-8000-000000000001'); end loop;
+  assert result='[]', 'Another parcel answering without news must not clear a still-failing parcel';
+  result := pg_temp.quiet_refresh('quiet-carrier','10000000-0000-4000-8000-000000000001');
+  assert result->0->>'state'='recovered', 'The failing parcel answering without news after three such answers must recover the incident';
+  for i in 1..30 loop perform pg_temp.quiet_refresh('quiet-rate',gen_random_uuid()); end loop;
+  for i in 1..5 loop result := pg_temp.health_sample('quiet-rate',false,'refresh',gen_random_uuid()); end loop;
+  assert result->0->>'state'='open' and (result->0->>'attempts')::int=5, 'Answers without news must not dilute the outage rate';
 
   for i in 1..10 loop result := pg_temp.health_sample('half-failing',i%2=0); end loop;
   assert result='[]', 'Exactly 50 percent must not alert';

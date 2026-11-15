@@ -75,11 +75,14 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   never toward an outage. The first still fails, so a scraper that drops scans across many
   parcels still opens an incident, and every check keeps its `progress_disappeared` anomaly.
   A thin answer's sample keeps an opaque id of it (`thin_answer`) for the next check to compare.
+- A parcel whose sources all answered without a scan (`carrier:no_new_scans`, a quiet parcel) has no news,
+  not an outage: its refresh sample is healthy, filed as `no_new_scans`, and counts toward recovery, never
+  toward an outage. The parcel still shows that no new scan came.
 - One parcel's failed streak while the carrier answers its other parcels is that parcel's
   own, such as a number that trips the carrier's bot defences: it neither opens a refresh
   incident nor holds one open. Each copy of a number (followed in several accounts, or also
   without one) counts its own checks, since a scheduled run gives every copy a sample of the one
-  lookup they share; copies of one number in a streak are one parcel. Missing input, not-found and repeated answers don't count as
+  lookup they share; copies of one number in a streak are one parcel. Missing input, not-found, repeated and no-news answers don't count as
   answering. A carrier whose other parcels fail too, or that has no other parcel, opens at the
   first streak.
 - A step skipped during a cooldown is not a success. A check that contacted nobody because

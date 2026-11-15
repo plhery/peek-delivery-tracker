@@ -32,6 +32,14 @@ if [[ "$status" != 200 ]]; then
   echo >&2
   exit 1
 fi
+# A proxy's or PostgREST's error page can come with a 200: an answer that is not a list of
+# names stops the deployment, as one that says nothing would.
+if ! jq -e 'type == "array" and all(.[]; type == "string")' "$workdir/missing.json" > /dev/null 2>&1; then
+  echo "The database's answer is not a list of migration names:" >&2
+  head -c 500 "$workdir/missing.json" >&2 2>/dev/null || true
+  echo >&2
+  exit 1
+fi
 
 blocking=()
 later=()

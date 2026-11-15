@@ -353,4 +353,37 @@ describe('stored scan replay', () => {
     // The scan restaged back to the attempt's stage at an older instant: the current scan, so the parcel follows it there too.
     expect(followedScans([open], [{ ...restage, to: 'in_transit' }])).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'in_transit' }]);
   });
+
+  it('keeps a return the newer scans carry back on the schedule, as the sync holds it', () => {
+    const attempt = scan('attempt', 'dpd-pl', '2026-09-08T14:00:00Z', 'failed_attempt', 'Delivery attempt', { provider_code: 'A1', stage: 'failed_attempt' });
+    const back = scan('back', 'dpd-pl', '2026-09-09T15:00:00Z', 'exception', 'Return to sender', { provider_code: 'R1', stage: 'exception' });
+    const trip = scan('trip', 'dpd-pl', '2026-09-10T08:00:00Z', 'in_transit', 'Parcel in transit', { provider_code: 'T1', stage: 'in_transit' });
+    const restage = { kind: 'stage', parcel: 'parcel-1', row: 'back', source: 'dpd-pl', open: true, from: 'exception', to: 'returned',
+      code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map' } as const;
+    const moved = followedScans([{ ...parcel(attempt, back, trip), stage: 'in_transit' }], [restage]);
+    expect(moved).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'returned', hold: 'return' }]);
+    const sql = replaySql([restage], moved);
+    expect(sql).toContain(`update public.packages set current_stage = 'returned', carrier_data = coalesce(carrier_data, '{}'::jsonb) || '{"return_held": true}'::jsonb
+   where id = 'parcel-1' and current_stage = 'in_transit';`);
+    expect(sql).toContain("'return_held', p.carrier_data->'return_held'");
+    // The return as the newest scan finishes the parcel.
+    expect(followedScans([{ ...parcel(attempt, back), stage: 'exception' }], [restage]))
+      .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'returned' }]);
+  });
+
+  it('checks a delivery only a universal provider\'s row shows daily for a while, as the sync does', () => {
+    // The carrier was down and ParcelsApp relayed its newest scan; a release now reads that row as delivered.
+    const own = scan('sorted', 'dpd-pl', '2026-09-08T14:00:00Z', 'in_transit', 'Sorted', { provider_code: 'T1', stage: 'in_transit' });
+    const relayed: StoredScan = { ...scan('relay', 'unknown', '2026-09-09T09:00:00Z', 'in_transit', 'Parcel handed over to recipient',
+      { universal_provider: 'ParcelsApp', stage: 'in_transit' }) };
+    const reread = { kind: 'stage', parcel: 'parcel-1', row: 'relay', source: 'unknown', open: true, from: 'in_transit', to: 'delivered',
+      code: 'D1', reason: 'mapped', declared: 'delivered', stageSource: 'carrier_map' } as const;
+    const moved = followedScans([{ ...parcel(own, relayed), stage: 'in_transit' }], [reread]);
+    expect(moved).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'delivered', hold: 'delivery' }]);
+    expect(replaySql([reread], moved)).toContain("jsonb_build_object('unconfirmed_delivery_until',\n    to_char((now() + interval '259200 seconds')");
+    // The carrier's own row read as delivered needs no window.
+    const ownDelivery = { ...reread, row: 'sorted', source: 'dpd-pl' } as const;
+    expect(followedScans([{ ...parcel({ ...own, occurredAt: '2026-09-10T09:00:00Z' }, relayed), stage: 'in_transit' }], [ownDelivery]))
+      .toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'delivered' }]);
+  });
 });

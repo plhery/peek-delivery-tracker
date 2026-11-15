@@ -33,7 +33,7 @@ import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/place
 import { STAGES } from '../generated/apiContract';
 import { currentScan, sortEventsDesc, tieOrder } from '../lib/stages';
 import type { Stage } from '../types';
-import { KEEPS_STAGE, scanStages } from './disputedDelivery';
+import { KEEPS_STAGE, scanStages, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { providerEventId, scanDay, UNIVERSAL_PROVIDER, unnamedRowCarrier } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
@@ -106,8 +106,13 @@ export interface CopyChange extends Change {
   clash: boolean;
 }
 export type ReplayedChange = ClockChange | StageChange | CopyChange;
-/** A parcel whose saved stage the changes move: back, as no row shows it then (`steppedBack`), or with its current scan (`followedScans`). */
-export interface StepBack { parcel: string; from: string; to: string }
+/**
+ * A parcel whose saved stage the changes move: back, as no row shows it then (`steppedBack`), or with its current scan
+ * (`followedScans`). `hold` keeps what the sync keeps with that stage: a return the scans after it only carry back stays
+ * on the schedule (`return_held`), and a delivery only a universal provider's row shows is checked daily for a while
+ * (`unconfirmed_delivery_until`).
+ */
+export interface StepBack { parcel: string; from: string; to: string; hold?: 'return' | 'delivery' }
 
 /** The read-only export the replay reads, one parcel a line. */
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
@@ -403,17 +408,25 @@ export function followedScans(parcels: readonly StoredParcel[], changes: readonl
   const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
   const deleted = new Set(changes.flatMap((change) => change.kind === 'copy' ? [change.row] : []));
   const stepped = new Set(stepBacks.map((step) => step.parcel));
-  const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string) => currentScan(sortEventsDesc(scans
+  const ordered = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string) => sortEventsDesc(scans
     .map((scan) => ({ id: scan.id, stage: stage(scan) as Stage, occurredAt: scan.occurredAt, tieOrder: tieOrder(scan.raw.tie_order) }))
-    .filter((scan) => scan.stage !== 'pending')));
+    .filter((scan) => scan.stage !== 'pending'));
+  const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string) => currentScan(ordered(scans, stage));
   return parcels.flatMap((parcel): StepBack[] => {
     const from = parcel.stage ?? '';
     if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
     const before = current(parcel.events, (scan) => scan.stage);
-    const after = current(parcel.events.filter((scan) => !deleted.has(scan.id)), (scan) => restaged.get(scan.id) ?? scan.stage);
+    const kept = parcel.events.filter((scan) => !deleted.has(scan.id));
+    const read = (scan: StoredScan) => restaged.get(scan.id) ?? scan.stage;
+    const after = current(kept, read);
     if (before?.stage !== from || !after || after.stage === from || !PROGRESS_STAGES.has(after.stage)) return [];
     if (after.stage === 'accepted' && ON_THE_WAY.has(from)) return [];
-    return [{ parcel: parcel.id, from, to: after.stage }];
+    // A return that newer scans carry back, as the sync holds it; a delivery no row of the carrier's own shows.
+    const providers = (scan: StoredScan) => typeof scan.raw[UNIVERSAL_PROVIDER] === 'string';
+    const hold = after.stage === 'returned' && ordered(kept, read)[0]?.id !== after.id ? 'return' as const
+      : after.stage === 'delivered' && kept.every((scan) => read(scan) !== 'delivered' || providers(scan)) ? 'delivery' as const
+        : undefined;
+    return [{ parcel: parcel.id, from, to: after.stage, ...(hold ? { hold } : {}) }];
   });
 }
 
@@ -434,6 +447,10 @@ function backupSql(changes: readonly ReplayedChange[], placed: readonly CopyChan
  where e.id = any(${idList(rows)}) order by e.id;`] : [],
     ...stepBacks.length ? [`select json_build_object('table', 'packages', 'row', jsonb_build_object('id', p.id, 'current_stage', p.current_stage))
   from public.packages p where p.id = any(${idList(stepBacks.map((step) => step.parcel))}) order by p.id;`] : [],
+    // The holds a move sets, as they stood.
+    ...stepBacks.some((step) => step.hold) ? [`select json_build_object('table', 'packages', 'row', jsonb_build_object('id', p.id,
+    'return_held', p.carrier_data->'return_held', 'unconfirmed_delivery_until', p.carrier_data->'unconfirmed_delivery_until'))
+  from public.packages p where p.id = any(${idList(stepBacks.filter((step) => step.hold).map((step) => step.parcel))}) order by p.id;`] : [],
   ].join('\n');
 }
 
@@ -465,7 +482,13 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
     provider_event_id = ${literal(copy.providerEventId)}, raw_data = raw_data || ${literal(JSON.stringify({ location: copy.location }))}::jsonb
    where id = ${literal(copy.to)} and coalesce(location, '') = '' and provider_event_id = ${literal(copy.keptProviderEventId)};
   get diagnostics n = row_count; filled := filled + n;`);
-  const parcels = stepBacks.map((step) => `  update public.packages set current_stage = ${literal(step.to)}
+  const held = (step: StepBack) => step.hold === 'return'
+    ? `, carrier_data = coalesce(carrier_data, '{}'::jsonb) || '{"return_held": true}'::jsonb`
+    : step.hold === 'delivery'
+      ? `, carrier_data = coalesce(carrier_data, '{}'::jsonb) || jsonb_build_object('unconfirmed_delivery_until',
+    to_char((now() + interval '${UNCONFIRMED_DELIVERY_MS / 1000} seconds') at time zone 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'))`
+      : '';
+  const parcels = stepBacks.map((step) => `  update public.packages set current_stage = ${literal(step.to)}${held(step)}
    where id = ${literal(step.parcel)} and current_stage = ${literal(step.from)};
   get diagnostics n = row_count; stepped := stepped + n;`);
   return `\\set ON_ERROR_STOP on

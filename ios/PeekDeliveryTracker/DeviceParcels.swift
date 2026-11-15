@@ -27,8 +27,24 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// Whether a postcode went with the lookup that made the parcel, which its link never shows: yes or no only,
     /// never the postcode. Nil where this iPhone doesn't know, such as a parcel it kept before it noted this.
     var postcodeGiven: Bool? = nil
+    /// The parcel's news this iPhone counts as seen: the `newsAt` it had when it was last opened here, or when it
+    /// started as seen. Nil on a parcel kept before this was noted, which starts as seen too.
+    var seenNews: String? = nil
 
     var isViewer: Bool { viewer == true }
+
+    /// What `seenNews` holds for a parcel seen before its first scan: earlier than any news.
+    static let seenBeforeAnyNews = "1970-01-01T00:00:00Z"
+
+    /// The parcel as it stands is seen: what it tells now is no news.
+    mutating func startSeen() { seenNews = parcel.newsAt ?? Self.seenBeforeAnyNews }
+
+    /// Takes the service's newer answer. The first answer of a parcel that was waiting for its carrier is no news.
+    mutating func take(_ answer: Parcel) {
+        let waited = parcel.syncStatus == .pending || parcel.syncStatus == .syncing
+        parcel = answer
+        if waited || seenNews == nil { startSeen() }
+    }
 }
 
 /// How the service answered when this iPhone asked for a parcel's notifications.
@@ -325,6 +341,8 @@ final class DeviceParcels {
         let (parcels, keys) = storage.load()
         // A link being forgotten stays forgotten, even where the list was saved before it was.
         entries = parcels.filter { $0.forgotten != true && forgetting[$0.linkID] == nil }
+        // The parcels kept before their news was marked start as seen: nobody opens the app to a wall of dots.
+        for index in entries.indices where entries[index].seenNews == nil { entries[index].startSeen() }
         forgotten = parcels.filter { $0.forgotten == true }
         self.keys = keys.filter { forgetting[$0.key] == nil }
         self.forgetting = forgetting
@@ -375,6 +393,7 @@ final class DeviceParcels {
         var entry = DeviceParcel(linkID: response.link.id, label: request.label ?? "", archivedAt: nil,
                                  parcel: Parcel(shared: response.package), checkedAt: now(),
                                  postcodeGiven: request.dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil)
+        entry.startSeen()
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         if let twin = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
             let old = entries.remove(at: twin)
@@ -420,7 +439,7 @@ final class DeviceParcels {
                 let response = try await client.read(entry.linkID, key)
                 guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { continue }
                 if let response {
-                    entries[index].parcel = Parcel(shared: response.package)
+                    entries[index].take(Parcel(shared: response.package))
                     entries[index].checkedAt = now()
                     if entry.isViewer { entries[index].canKeep = response.link.canKeep }
                 } else {
@@ -453,7 +472,9 @@ final class DeviceParcels {
                 keys[linkID] = nil
                 continue
             }
-            entries.append(DeviceParcel(linkID: linkID, label: "", archivedAt: nil, parcel: Parcel(shared: response.package), checkedAt: now()))
+            var entry = DeviceParcel(linkID: linkID, label: "", archivedAt: nil, parcel: Parcel(shared: response.package), checkedAt: now())
+            entry.startSeen()
+            entries.append(entry)
         }
         return nil
     }
@@ -479,6 +500,11 @@ final class DeviceParcels {
 
     func rename(id: UUID, label: String) throws -> Parcel {
         try update(id) { $0.label = label }
+    }
+
+    /// The parcel was opened on this iPhone: what it tells now is seen. Nothing leaves the device.
+    func markSeen(id: UUID) throws -> Parcel {
+        try update(id) { $0.startSeen() }
     }
 
     func setArchived(id: UUID, _ archived: Bool) throws -> Parcel {
@@ -655,7 +681,7 @@ final class DeviceParcels {
             entries[index].linkID = linkID
             entries[index].viewer = nil
             entries[index].canKeep = nil
-            entries[index].parcel = Parcel(shared: response.package)
+            entries[index].take(Parcel(shared: response.package))
             entries[index].checkedAt = now()
             if old.linkID != linkID {
                 // Another link's notifications give way to this one's, asked for on the next round.
@@ -670,6 +696,7 @@ final class DeviceParcels {
         }
         var entry = DeviceParcel(linkID: linkID, label: label?.nonEmpty ?? "", archivedAt: nil,
                                  parcel: Parcel(shared: response.package), checkedAt: now())
+        entry.startSeen()
         // Followed again before its notifications were turned off: they go on, and are its own again.
         if let left = forgotten.first(where: { $0.linkID == linkID }) {
             entry.alertToken = left.alertToken
@@ -775,6 +802,8 @@ final class DeviceParcels {
         var parcel = entry.parcel
         parcel.label = entry.label
         parcel.archivedAt = entry.archivedAt
+        // Without an account, the device keeps what was seen: the news it had when the parcel was last opened here.
+        parcel.seenAt = entry.seenNews ?? parcel.newsAt
         if let replaced = entry.replaced {
             var data = parcel.carrierData ?? CarrierData()
             data.originalPackageID = replaced

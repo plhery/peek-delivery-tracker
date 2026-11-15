@@ -63,7 +63,15 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var notificationInvitationDismissed = false
     @Published private(set) var notificationStatus: UNAuthorizationStatus = .notDetermined
     @Published private(set) var notificationsEnabledOnDevice = false
-    @Published private(set) var notificationPreferences: NotificationPreferences?
+    @Published private(set) var notificationPreferences: NotificationPreferences? {
+        // An account's choice about the list's mark follows it here from its other devices.
+        didSet { if let chosen = notificationPreferences?.markNewUpdates { keepMarkNewUpdates(chosen) } }
+    }
+    /// Whether the list marks the parcels with updates since they were last opened. On until switched off. An
+    /// account's choice is stored with its preferences; this device keeps its copy, and the choice of someone
+    /// without an account.
+    @Published private(set) var markNewUpdates = !UserDefaults.standard.bool(forKey: ParcelStore.markNewUpdatesOffKey)
+    static let markNewUpdatesOffKey = "sdt.markNewUpdatesOff.v1"
     @Published private(set) var notificationError: String?
     @Published private(set) var deliveryWidgetEnabled = true
     @Published private(set) var deliveryLiveActivitiesEnabled = true
@@ -114,6 +122,8 @@ final class ParcelStore: ObservableObject {
     private var nativePushGeneration = 0
     /// Counts saved preferences: the answer to a read that began before a save is older than it.
     private var notificationPreferenceSaves = 0
+    /// Counts the choices made about the list's mark: the answer to an earlier one does not undo a later one.
+    private var markNewUpdatesChoices = 0
     private var deliveryLiveActivityGeneration = 0
     private var deliveryLiveActivitySystemDisabled = false
     private var deliveryLiveActivityRegistrationRemovalPending = false
@@ -237,6 +247,65 @@ final class ParcelStore: ObservableObject {
         deliveryWidgetEnabled = enabled
         deliveryWidgetStore?.setEnabled(enabled)
         publishDeliveryWidget()
+    }
+
+    /// Switches the list's mark on parcels with new updates. What was seen is kept either way. An account's choice
+    /// is saved with its preferences; a save that fails leaves the choice on this device until they are next read.
+    func setMarkNewUpdates(_ enabled: Bool) {
+        guard markNewUpdates != enabled else { return }
+        keepMarkNewUpdates(enabled)
+        guard session.isAuthenticated, !isDemo, !isGuest else { return }
+        // A read of the preferences that began before the choice is older than it.
+        notificationPreferenceSaves += 1
+        markNewUpdatesChoices += 1
+        let choice = markNewUpdatesChoices
+        let generation = session.generation
+        Task {
+            guard let stored = try? await storedNotificationPreferences(), generation == session.generation else { return }
+            var value = stored
+            value.timezone = TimeZone.current.identifier
+            guard var saved = try? await api.saveNotificationPreferences(value, markNewUpdates: enabled),
+                  generation == session.generation else { return }
+            // Switched again meanwhile: that choice stands, and its own save is on its way.
+            if choice != markNewUpdatesChoices { saved.markNewUpdates = markNewUpdates }
+            notificationPreferenceSaves += 1
+            notificationPreferences = saved
+        }
+    }
+
+    private func keepMarkNewUpdates(_ enabled: Bool) {
+        if markNewUpdates != enabled { markNewUpdates = enabled }
+        UserDefaults.standard.set(!enabled, forKey: Self.markNewUpdatesOffKey)
+    }
+
+    /// The account's preferences as last read or saved, read now where they were not.
+    private func storedNotificationPreferences() async throws -> NotificationPreferences {
+        if let notificationPreferences { return notificationPreferences }
+        return try await api.notificationPreferences()
+    }
+
+    /// The parcel's page is in front of the reader: what it tells now is seen. Its mark leaves the list at once, and
+    /// the account's other devices at their next read. A parcel with no news is left alone, and a mark the server
+    /// could not take comes back with the next read of the list.
+    func markSeen(_ id: UUID) async {
+        guard let parcel = parcels.first(where: { $0.id == id }), parcel.hasNewUpdate else { return }
+        if isGuest {
+            if let seen = try? device.markSeen(id: id) { upsert(seen) }
+            return
+        }
+        if isDemo {
+            if let seen = try? demo.markSeen(id: id) { upsert(seen) }
+            return
+        }
+        let generation = session.generation
+        // Seen now: no later than its news, whatever this device's clock says.
+        var seen = parcel
+        seen.seenAt = parcel.newsAt
+        upsert(seen)
+        guard let seenAt = try? await api.markSeen(id: id), generation == session.generation,
+              var kept = parcels.first(where: { $0.id == id }) else { return }
+        kept.seenAt = seenAt
+        upsert(kept)
     }
 
     func setDeliveryLiveActivitiesEnabled(_ enabled: Bool) {
@@ -2033,6 +2102,11 @@ final class DemoRepository {
         try update(id: id) { $0 = advance($0) }
     }
 
+    /// The parcel was opened: its made-up scan is news no more.
+    func markSeen(id: UUID) throws -> Parcel {
+        try update(id: id) { $0.seenAt = $0.newsAt }
+    }
+
     func reset() {
         defaults.removeObject(forKey: key)
         defaults.removeObject(forKey: preferencesKey)
@@ -2155,6 +2229,9 @@ final class DemoRepository {
         ))
         copy.lastSyncedAt = timestamp
         copy.lastStatusText = description
+        // The made-up scan is news until the parcel is opened.
+        copy.newsAt = timestamp
+        copy.seenAt = copy.seenAt ?? copy.createdAt
         if CarrierCatalog.supportsSwissPostHandoff(copy.trackingNumber),
            [.inTransit, .customs, .outForDelivery, .delivered].contains(next) {
             copy.carrierData = CarrierData(activeTrackingCarrier: .swissPost, swissPostReady: true)

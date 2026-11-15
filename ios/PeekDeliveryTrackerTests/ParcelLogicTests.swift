@@ -84,6 +84,47 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertTrue(DemoRepository(defaults: defaults).list().isEmpty)
     }
 
+    func testAParcelIsNewWhileItsLatestScanArrivedAfterItWasLastOpened() {
+        var parcel = Parcel(id: UUID(), trackingNumber: "12345678", label: "", carrier: .unknown, createdAt: "2026-11-01T08:00:00Z",
+                            syncStatus: .ok, notificationsMuted: false)
+        XCTAssertFalse(parcel.hasNewUpdate, "A parcel without a scan has no news")
+        parcel.newsAt = "2026-11-15T10:00:00.123456+00:00"
+        XCTAssertFalse(parcel.hasNewUpdate, "Nothing is marked before the server says when the parcel was seen")
+        parcel.seenAt = "2026-11-15T09:59:59.9+00:00"
+        XCTAssertTrue(parcel.hasNewUpdate)
+        // The server writes its moments in more than one way: they are compared as moments, not as text.
+        parcel.seenAt = "2026-11-15T11:59:59+02:00"
+        XCTAssertTrue(parcel.hasNewUpdate)
+        parcel.seenAt = "2026-11-15T10:00:00.02933+00:00"
+        XCTAssertTrue(parcel.hasNewUpdate)
+        // Opened since: seen with its news, or later.
+        parcel.seenAt = "2026-11-15T10:00:00.123456+00:00"
+        XCTAssertFalse(parcel.hasNewUpdate)
+        parcel.seenAt = "2026-11-15T10:00:01Z"
+        XCTAssertFalse(parcel.hasNewUpdate)
+
+        // Settings can switch the mark off; the parcel is as new as it was.
+        parcel.seenAt = "2026-11-15T09:00:00+00:00"
+        XCTAssertTrue(parcel.showsNewUpdate(marking: true))
+        XCTAssertFalse(parcel.showsNewUpdate(marking: false))
+        XCTAssertTrue(parcel.hasNewUpdate)
+    }
+
+    func testTheDemoMarksAMadeUpScanUntilItsParcelIsOpened() throws {
+        let suite = "demo-new-update-tests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let repo = DemoRepository(defaults: defaults, language: { .en })
+        XCTAssertFalse(repo.list().contains(where: \.hasNewUpdate), "The examples start as seen")
+        let moving = try XCTUnwrap(repo.list().first { $0.isActive && $0.currentStage == .inTransit })
+        let scanned = try repo.refresh(id: moving.id)
+        XCTAssertGreaterThan(scanned.trackingEvents.count, moving.trackingEvents.count)
+        XCTAssertTrue(scanned.hasNewUpdate)
+        XCTAssertEqual(repo.list().filter(\.hasNewUpdate).map(\.id), [moving.id])
+        XCTAssertFalse(try repo.markSeen(id: moving.id).hasNewUpdate)
+        XCTAssertFalse(DemoRepository(defaults: defaults, language: { .en }).list().contains(where: \.hasNewUpdate))
+    }
+
     func testDemoCarrierChangeKeepsTheHistory() throws {
         let suite = "demo-carrier-tests-\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suite)!
@@ -3525,6 +3566,153 @@ extension SessionIsolationTests {
         completeRead?(.success((200, stale)))
         await reading.value
         XCTAssertEqual(store.deliveryEmail?.isOn, true)
+    }
+
+    /// A parcel whose latest scan arrived an hour after it was last opened.
+    private func scannedParcel() -> Parcel {
+        var parcel = parcel()
+        parcel.newsAt = "2026-11-15T10:00:00.25+00:00"
+        parcel.seenAt = "2026-11-15T09:00:00+00:00"
+        return parcel
+    }
+
+    @MainActor func testAScanAfterTheLastOpenIsMarkedAndOpeningTheParcelClearsItForTheAccount() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        var scanned = scannedParcel()
+        // Opened since its last scan, as every parcel is when the app starts with the parcels it had.
+        var quiet = parcel()
+        quiet.newsAt = "2026-11-15T08:00:00+00:00"
+        quiet.seenAt = "2026-11-15T09:00:00+00:00"
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [scanned, quiet])))
+        await store.load()
+        XCTAssertEqual(store.parcels.filter(\.hasNewUpdate).map(\.id), [scanned.id])
+
+        // Opening a parcel with no news tells the server nothing.
+        let log = RequestLog()
+        respond(Data("{\"seen_at\":\"2026-11-15T10:05:00.5+00:00\"}".utf8), recording: log)
+        await store.markSeen(quiet.id)
+        XCTAssertTrue(log.requests.isEmpty)
+
+        await store.markSeen(scanned.id)
+        XCTAssertEqual(log.requests.map(\.method), ["POST"])
+        XCTAssertEqual(log.requests.first?.path, "/api/packages/\(scanned.id.uuidString)/seen")
+        XCTAssertEqual(log.requests.first?.body.isEmpty, true)
+        XCTAssertEqual(store.parcels.first { $0.id == scanned.id }?.seenAt, "2026-11-15T10:05:00.5+00:00")
+        XCTAssertFalse(store.parcels.contains(where: \.hasNewUpdate))
+
+        // The account's other device reads its list next: the moment the server kept clears the mark there too.
+        scanned.seenAt = "2026-11-15T10:05:00.5+00:00"
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [scanned, quiet])))
+        let other = self.store(session, transport)
+        await other.load()
+        XCTAssertEqual(other.parcels.count, 2)
+        XCTAssertFalse(other.parcels.contains(where: \.hasNewUpdate))
+
+        // The next scan is news again, on both.
+        scanned.newsAt = "2026-11-15T12:00:00+00:00"
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [scanned, quiet])))
+        await store.load()
+        XCTAssertEqual(store.parcels.filter(\.hasNewUpdate).map(\.id), [scanned.id])
+    }
+
+    @MainActor func testAMarkTheServerCouldNotTakeGoesAtOnceAndComesBackWithTheNextRead() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let scanned = scannedParcel()
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [scanned]))
+        respond(list)
+        await store.load()
+
+        offline()
+        await store.markSeen(scanned.id)
+        XCTAssertEqual(store.parcels.first?.hasNewUpdate, false, "The reader has seen it, whatever the network says")
+        XCTAssertNil(store.errorMessage, "Opening a parcel is nothing to report on")
+
+        respond(list)
+        await store.load()
+        XCTAssertEqual(store.parcels.first?.hasNewUpdate, true)
+    }
+
+    @MainActor func testTheMarkForNewUpdatesIsOnUntilSwitchedOffAndFollowsTheAccount() async throws {
+        UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey)
+        defer { UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey) }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session, email: "alex@example.com")
+        let store = store(session, transport)
+        let scanned = scannedParcel()
+        XCTAssertTrue(store.markNewUpdates)
+        XCTAssertTrue(scanned.showsNewUpdate(marking: store.markNewUpdates))
+
+        var saved = emailPreferences
+        saved.markNewUpdates = true
+        respond(try JSONEncoder.deliveryTracker.encode(saved))
+        await store.loadNotificationPreferences()
+        XCTAssertTrue(store.markNewUpdates)
+
+        // Switched off here: gone from the list at once, and saved for the account with the rest as stored.
+        var answer = saved
+        answer.markNewUpdates = false
+        let log = RequestLog()
+        respond(try JSONEncoder.deliveryTracker.encode(answer), recording: log)
+        store.setMarkNewUpdates(false)
+        XCTAssertFalse(store.markNewUpdates)
+        XCTAssertFalse(scanned.showsNewUpdate(marking: store.markNewUpdates))
+        for _ in 0..<300 where store.notificationPreferences?.markNewUpdates != false { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(store.notificationPreferences?.markNewUpdates, false)
+        XCTAssertEqual(log.requests.map(\.method), ["PATCH"])
+        XCTAssertEqual(log.requests.first?.path, "/api/push/preferences")
+        let sent = try XCTUnwrap(log.requests.first?.body)
+        XCTAssertEqual(Set(sent.keys), ["enabledStages", "quietHoursStart", "quietHoursEnd", "timezone", "markNewUpdates"])
+        XCTAssertEqual(sent["markNewUpdates"] as? Bool, false)
+        XCTAssertEqual(sent["enabledStages"] as? [String], saved.enabledStages.map(\.rawValue))
+        // The next launch starts from it, before the account's preferences are read.
+        XCTAssertFalse(self.store(session, transport).markNewUpdates)
+
+        // Another save says nothing of the mark, so the server keeps the account's choice.
+        var emailed = answer
+        emailed.emailOnDelivery = true
+        respond(try JSONEncoder.deliveryTracker.encode(emailed), recording: log)
+        try await store.setEmailOnDelivery(true)
+        XCTAssertNil(log.requests.last?.body["markNewUpdates"])
+        XCTAssertFalse(store.markNewUpdates)
+
+        // Switched back on from another device: the next read of the preferences brings it here.
+        respond(try JSONEncoder.deliveryTracker.encode(saved))
+        await store.loadNotificationPreferences()
+        XCTAssertTrue(store.markNewUpdates)
+        XCTAssertTrue(scanned.showsNewUpdate(marking: store.markNewUpdates))
+    }
+
+    @MainActor func testWithoutAnAccountTheMarkSwitchStaysOnThisDevice() async throws {
+        UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey)
+        defer { UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey) }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        let store = store(session, transport)
+        let log = RequestLog()
+        respond(Data("{}".utf8), recording: log)
+
+        store.setMarkNewUpdates(false)
+
+        XCTAssertFalse(store.markNewUpdates)
+        XCTAssertFalse(self.store(session, transport).markNewUpdates)
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertTrue(log.requests.isEmpty)
+        store.setMarkNewUpdates(true)
+        XCTAssertTrue(self.store(session, transport).markNewUpdates)
     }
 
     @MainActor func testReturningToTheAppReadsTheEmailChoiceAgain() async throws {

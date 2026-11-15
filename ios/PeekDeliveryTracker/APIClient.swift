@@ -205,6 +205,12 @@ final class DeliveryAPIClient {
         )
     }
 
+    /// The parcel was opened: the moment the server kept, which its mark for new updates is measured from.
+    func markSeen(id: UUID) async throws -> String {
+        let response: PackageSeenResponse = try await request("/api/packages/\(id.uuidString)/seen", method: "POST")
+        return response.seenAt
+    }
+
     func setMuted(id: UUID, muted: Bool) async throws -> Parcel {
         try await request(
             "/api/packages/\(id.uuidString)/notifications",
@@ -290,10 +296,13 @@ final class DeliveryAPIClient {
         try await request("/api/push/preferences")
     }
 
-    func saveNotificationPreferences(_ value: NotificationPreferences) async throws -> NotificationPreferences {
+    /// `markNewUpdates` is the list's mark on parcels with new updates when its switch is what is being saved. Any
+    /// other save leaves it out, and the server keeps the account's choice, made on this device or another.
+    func saveNotificationPreferences(_ value: NotificationPreferences, markNewUpdates: Bool? = nil) async throws -> NotificationPreferences {
         var sent = value
         // Whether the server can email the account is the server's to say.
         sent.emailAvailable = nil
+        sent.markNewUpdates = markNewUpdates
         return try await request("/api/push/preferences", method: "PATCH", body: sent)
     }
 

@@ -274,6 +274,14 @@ extension Parcel {
     var isUnannounced: Bool { !hasCarrierUpdate && syncStatus == .waiting }
     var isArchived: Bool { archivedAt != nil }
     var isDelivered: Bool { currentStage == .delivered }
+    /// New since the parcel was last opened: its latest scan arrived after that. Both are moments the server noted,
+    /// or, without an account, moments this device kept from the server.
+    var hasNewUpdate: Bool {
+        guard let newsAt, let seenAt, let news = DateParser.date(newsAt), let seen = DateParser.date(seenAt) else { return false }
+        return news > seen
+    }
+    /// Whether the parcel's card carries the mark for new updates: Settings can switch it off.
+    func showsNewUpdate(marking: Bool) -> Bool { marking && hasNewUpdate }
     var isReturned: Bool { currentStage == .returned }
     var isActive: Bool { !isArchived && !(currentStage?.isFinal ?? false) }
 

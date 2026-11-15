@@ -163,6 +163,12 @@ struct ParcelDetailView: View {
             let loaded = await WorldAtlas.bundled.value
             withAnimation(.easeOut(duration: 0.5)) { atlas = loaded }
         }
+        // The page in front of the reader shows the parcel's news: it is seen, as it opens and whenever more arrives.
+        // The store sees it through, also once the page has closed.
+        .onChange(of: unseenNews, initial: true) { _, news in
+            guard news != nil, let id = parcel?.id else { return }
+            Task { await store.markSeen(id) }
+        }
         .fullScreenCover(isPresented: $showingMap) {
             if let parcel, let atlas {
                 ParcelMapScreen(
@@ -203,6 +209,12 @@ struct ParcelDetailView: View {
     }
 
     private var parcel: Parcel? { sample ?? store.parcels.first { $0.id == parcelID || $0.carrierData?.originalPackageID == parcelID } }
+
+    /// The news of the parcel on the page that the list still marks as new, while the page can be seen.
+    private var unseenNews: String? {
+        guard sample == nil, scenePhase != .background, let parcel, parcel.hasNewUpdate else { return nil }
+        return parcel.newsAt
+    }
 
     /// The page shows what the carrier answered: a carrier is being asked, or one has answered.
     private func showsHistory(_ parcel: Parcel) -> Bool {

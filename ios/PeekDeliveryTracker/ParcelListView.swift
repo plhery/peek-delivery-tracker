@@ -21,6 +21,7 @@ struct ParcelListView: View {
         TabView(selection: $selection) {
             DeliveryListView(isSelected: selection == 0, firstParcel: $firstParcel, adding: $adding) { selection = 0 }
                 .environment(\.keyboardInFront, inFront(0))
+                .environment(\.marksNewUpdates, store.markNewUpdates)
                 .tag(0)
                 .tabItem {
                     Label(localizer.text("native.deliveries"), systemImage: "shippingbox.fill")
@@ -1736,6 +1737,7 @@ private struct ExperimentalNextDeliveryPass: View {
 
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.marksNewUpdates) private var marksNewUpdates
     @State private var appeared = false
     @State private var atlas: WorldAtlas?
     @ObservedObject private var catalog = CarrierCatalog.shared
@@ -1745,6 +1747,8 @@ private struct ExperimentalNextDeliveryPass: View {
     }
     /// Scans with places are drawn as a route across the top of the card, as on the opened parcel.
     private var placed: Bool { parcel.hasMappedPlace }
+    /// New since the parcel was last opened: a dot before the status line, which VoiceOver says first.
+    private var marked: Bool { parcel.showsNewUpdate(marking: marksNewUpdates) }
 
     var body: some View {
         if decorative {
@@ -1753,6 +1757,7 @@ private struct ExperimentalNextDeliveryPass: View {
             card
                 .matchedTransitionSource(id: parcel.id, in: transition)
                 .accessibilityElement(children: .combine)
+                .newUpdateSaidFirst(marked)
                 .experimentalSwipeToArchive(
                     title: localizer.text("parcel.archive"), cornerRadius: 24,
                     onOpen: onOpen, action: onArchive
@@ -1801,11 +1806,14 @@ private struct ExperimentalNextDeliveryPass: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
 
-            HStack(spacing: 5) {
-                if arrived { Image(systemName: "checkmark").font(.caption2.weight(.light)).accessibilityHidden(true) }
-                Text([localizer.parcelStatus(parcel), parcel.pickupPlace,
-                      localizer.parcelDeliveryEstimate(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
-                    .compactMap { $0 }.joined(separator: " · "))
+            HStack(spacing: 0) {
+                NewUpdateDot(shown: marked)
+                HStack(spacing: 5) {
+                    if arrived { Image(systemName: "checkmark").font(.caption2.weight(.light)).accessibilityHidden(true) }
+                    Text([localizer.parcelStatus(parcel), parcel.pickupPlace,
+                          localizer.parcelDeliveryEstimate(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
+                        .compactMap { $0 }.joined(separator: " · "))
+                }
             }
                 .font(.caption)
                 .foregroundStyle(identity.ink)
@@ -1864,12 +1872,15 @@ private struct ExperimentalParcelPassCard: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
+    @Environment(\.marksNewUpdates) private var marksNewUpdates
     @State private var atlas: WorldAtlas?
     @ObservedObject private var catalog = CarrierCatalog.shared
 
     private var identity: CarrierVisualIdentity {
         CarrierVisualIdentity.shown(for: parcel, catalog: catalog, localizer: localizer)
     }
+    /// New since the parcel was last opened: a dot before the status line, which VoiceOver says first.
+    private var marked: Bool { parcel.showsNewUpdate(marking: marksNewUpdates) }
     private var date: String? { localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel) }
     /// Scans with places are drawn as a small route at the end of the card.
     private var placed: Bool { parcel.hasMappedPlace }
@@ -1910,6 +1921,7 @@ private struct ExperimentalParcelPassCard: View {
                     onOpen: onOpen, action: onArchive
                 )
                 .accessibilityElement(children: .combine)
+                .newUpdateSaidFirst(marked)
                 .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)
                 .cardMenu(menu, shape: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
@@ -1941,9 +1953,12 @@ private struct ExperimentalParcelPassCard: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if flag == nil || parcel.hasCarrierUpdate {
-                    HStack(spacing: 5) {
-                        if parcel.isDelivered { Image(systemName: "checkmark").font(.caption2.weight(.light)).accessibilityHidden(true) }
-                        Text([localizer.parcelStatus(parcel), parcel.pickupPlace].compactMap { $0 }.joined(separator: " · "))
+                    HStack(spacing: 0) {
+                        NewUpdateDot(shown: marked)
+                        HStack(spacing: 5) {
+                            if parcel.isDelivered { Image(systemName: "checkmark").font(.caption2.weight(.light)).accessibilityHidden(true) }
+                            Text([localizer.parcelStatus(parcel), parcel.pickupPlace].compactMap { $0 }.joined(separator: " · "))
+                        }
                     }
                         .font(.caption)
                         .foregroundStyle(identity.ink)
@@ -1989,6 +2004,55 @@ private struct ExperimentalParcelPassCard: View {
     private func dateLabel(_ date: String) -> some View {
         Text(date).font(.caption).foregroundStyle(identity.ink)
             .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+private struct MarksNewUpdatesKey: EnvironmentKey {
+    static let defaultValue = true
+}
+
+extension EnvironmentValues {
+    /// Whether cards mark the parcels with updates since they were last opened, as Settings has it.
+    var marksNewUpdates: Bool {
+        get { self[MarksNewUpdatesKey.self] }
+        set { self[MarksNewUpdatesKey.self] = newValue }
+    }
+}
+
+/// The dot before a card's status line on a parcel with updates since it was last opened, in the line's own colour.
+/// It brings the room between itself and the words. Off, it keeps its place in the line without any width, so it
+/// fades and the words slide back as it clears.
+struct NewUpdateDot: View {
+    let shown: Bool
+    @ScaledMetric(relativeTo: .caption) private var size: CGFloat = 5
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        Circle()
+            .frame(width: shown ? size : 0, height: size)
+            .opacity(shown ? 0.8 : 0)
+            .padding(.trailing, shown ? size : 0)
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: shown)
+            .accessibilityHidden(true)
+    }
+}
+
+extension View {
+    /// A card read as one says "New update" before the rest while its parcel is marked.
+    func newUpdateSaidFirst(_ marked: Bool) -> some View {
+        modifier(NewUpdateSaidFirst(marked: marked))
+    }
+}
+
+private struct NewUpdateSaidFirst: ViewModifier {
+    let marked: Bool
+    @EnvironmentObject private var localizer: Localizer
+
+    func body(content: Content) -> some View {
+        content.accessibilityLabel { label in
+            if marked { Text(localizer.text("parcel.newUpdate")) }
+            label
+        }
     }
 }
 

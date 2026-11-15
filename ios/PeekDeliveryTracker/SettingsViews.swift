@@ -503,6 +503,8 @@ struct AccountView: View {
                         SettingsClockRow()
                         settingsDivider
                         SettingsDistanceRow()
+                        settingsDivider
+                        SettingsMarkNewUpdatesRow()
                     }
                     SettingsGroup {
                         NavigationLink { accountPage } label: {
@@ -882,6 +884,22 @@ private struct SettingsDistanceRow: View {
     }
 }
 
+/// The list's mark on parcels with updates since they were last opened: on or off, for the account where there is one.
+private struct SettingsMarkNewUpdatesRow: View {
+    @EnvironmentObject private var store: ParcelStore
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        Toggle(isOn: Binding(get: { store.markNewUpdates }, set: { store.setMarkNewUpdates($0) })) {
+            SettingsRow(title: localizer.text("settings.markNewUpdates"), detail: localizer.text("settings.markNewUpdatesHint"), padded: false)
+        }
+        .rowToggle()
+        .tint(settingsGreen)
+        .padding(15)
+        .accessibilityIdentifier("settings.markNewUpdates")
+    }
+}
+
 /// The picker sits under its label at the largest text sizes.
 private struct SettingsPickerRow<Value: Hashable, Options: View>: View {
     let title: String
@@ -1049,6 +1067,8 @@ private struct GeneralSettings: View {
                 SettingsClockRow()
                 settingsDivider
                 SettingsDistanceRow()
+                settingsDivider
+                SettingsMarkNewUpdatesRow()
             }
             SettingsGroup {
                 Toggle(isOn: $menuBarShown) {

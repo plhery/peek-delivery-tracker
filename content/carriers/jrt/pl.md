@@ -99,7 +99,7 @@ Przy przesyłkach do Europy godziny linii JRT są podane w czasie pekińskim: 17
 
 **Nic po `已交服务商`, `Delivery to final service provider` albo `已交仓`.** JRT skończył swoją część. Jeśli jego śledzenie nie przepisuje skanów DHL, UPS, FedEx ani J&T Express Mexico, a Peek nie pokazuje numeru DHL ani FedEx, dalsze kroki są w śledzeniu firmy, która doręcza: poproś sprzedawcę o jej numer. Więcej w poradnikach [status przesyłki się nie zmienia](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
 
-**Nic nie znaleziono.** Gdy JRT nie zna numeru, jego strona pokazuje jeden wynik z tym numerem jako numerem referencyjnym i wszystkimi innymi kolumnami pustymi. Peek pokazuje wtedy na peektracker.com „Oczekiwanie na przewoźnika JRT” (a gdy sam dobiera przewoźnika do numeru z UP: „Oczekiwanie na pierwszy skan przewoźnika JRT”) i sprawdza dalej. Porównaj numer z wiadomością od sprzedawcy, znak po znaku.
+**Nic nie znaleziono.** Gdy JRT nie zna numeru, jego strona pokazuje jeden wynik z tym numerem jako numerem referencyjnym i wszystkimi innymi kolumnami pustymi. Peek traktuje taką odpowiedź tak, jakby JRT miał już przesyłkę w systemie, choć jeszcze bez skanu: pokazuje wtedy na peektracker.com „Oczekiwanie na przewoźnika JRT” (a gdy sam dobiera przewoźnika do numeru z UP: „Oczekiwanie na pierwszy skan przewoźnika JRT”) i sprawdza dalej, bez prośby o sprawdzenie numeru. Dlatego porównaj numer z wiadomością od sprzedawcy, znak po znaku.
 
 **Doręczona, a nic nie przyszło.** Skan doręczenia pochodzi od firmy, która doręcza, nie od JRT, nawet gdy JRT go przepisuje: zapytaj tę firmę, potem napisz do sprzedawcy. Więcej w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 

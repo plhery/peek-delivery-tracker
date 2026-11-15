@@ -152,7 +152,7 @@ En los envíos a Europa, las horas de los pasos de JRT van en hora de Pekín (UT
 
 **Nada después de `已交服务商`, `Delivery to final service provider` o `已交仓`.** JRT ya ha hecho su parte. Si su web no copia los escaneos de DHL, de UPS, de FedEx o de J&T Express México y Peek no muestra el número de DHL o de FedEx, los siguientes pasos están en el seguimiento de la empresa que reparte: pide ese número a la tienda. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
-**No sale nada.** Con un número que no conoce, la web de JRT muestra un solo resultado, con el número como referencia y todas las demás columnas vacías. Peek muestra en peektracker.com «Esperando a JRT» y sigue comprobando (si pegaste una referencia UP sin elegir transportista, «Esperando el primer escaneo de JRT»). Compara el número con el mensaje de la tienda, carácter por carácter.
+**No sale nada.** Con un número que no conoce, la web de JRT muestra un solo resultado, con el número como referencia y todas las demás columnas vacías. Peek toma esa respuesta como señal de que JRT ya tiene registrado el envío, aunque aún sin escanear, así que muestra en peektracker.com «Esperando a JRT» y sigue comprobando, sin pedirte que revises el número (si pegaste una referencia UP sin elegir transportista, «Esperando el primer escaneo de JRT»). Por eso, compara tú el número con el mensaje de la tienda, carácter por carácter.
 
 **Dirección no encontrada.** Después de `not delivered-bad address`, revisa la dirección de tu pedido y avisa enseguida a la tienda. Si luego aparece `shipment will be returned to origin-bad address`, el paquete vuelve al origen: pide a la tienda el reembolso o un nuevo envío.
 

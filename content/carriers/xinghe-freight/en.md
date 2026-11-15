@@ -65,7 +65,7 @@ Xinghe's own site says nothing about parcels for online shoppers: no delivery ti
 
 **Only `Order information received` or `货物电子信息已经收到`.** The seller has created the order, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for Xinghe Freight" on peektracker.com.** Peek has no step for your number yet: GZYL's tracker doesn't know it or holds only a plan of steps written ahead, which can end in `Delivered`, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too.
+**"Waiting for Xinghe Freight" on peektracker.com.** Peek has no step for your number yet: GZYL's tracker doesn't know it or holds only a plan of steps written ahead, which can end in `Delivered`, and the tracking services Peek asks have nothing either. Peek keeps checking. If the tracker still holds only that plan two days later and nothing else has answered for the number, peektracker.com shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." instead, and Peek from then on checks it daily, and weekly once a week has passed since you added it. For a number it doesn't know, GZYL's tracker shows one result with the number as the reference and every other field empty. Peek takes that answer as Xinghe listing the shipment without a scan yet, so it keeps showing "Waiting for Xinghe Freight", with no request to check the number: compare it with the seller's message yourself.
 
 **Stuck at customs.** If you're asked to pay import charges, see [parcels held at customs](guide:customs). If the parcel stays there for days, tell the seller.
 
@@ -91,7 +91,7 @@ The site has nothing for recipients abroad: its contact form only opens an email
 
 Peek asks GZYL's tracker, as Xinghe's own tracking box does. It shows the status, each step with its place, and the destination country when the record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, payment details, signature and proof of delivery the record can hold, and shows no expected delivery date: the tracker gives none.
 
-When the tracker doesn't know your number, Peek asks tracking services instead and shows their copy of the steps, which may be all Peek has for a Xinghe number. While neither has a step for it, the parcel shows "Waiting for Xinghe Freight" on peektracker.com.
+When the tracker doesn't know your number, Peek asks tracking services instead and shows their copy of the steps, which may be all Peek has for a Xinghe number. While neither has a step for it, the parcel shows "Waiting for Xinghe Freight" on peektracker.com, with no request to check the number.
 
 Peek holds back any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step, and any step dated after the moment it checks, on Beijing time. On a record with steps written ahead, it holds back `Delivered` too, even one written on its own day. It goes by the steps it keeps, not by the record's summary status, and sets aside tracking services' copies of the steps it holds back as written ahead, `Delivered` included, even when it keeps other steps. When the tracker has no record of your number or can't be reached, though, Peek can't tell a planned step in a tracking service's copy from a scan. When it holds back steps written ahead, Peek says so under the parcel's status until the parcel is delivered or returned: "Xinghe Freight’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Such a step never counts as a scan: it changes no status and sends no alert.
 
@@ -113,7 +113,7 @@ Peek doesn't know: neither the tracker's steps nor Xinghe's site name a company.
 
 ### Why does Peek show no tracking for my GZXH number yet?
 
-The tracker may not have the order yet, or only steps written ahead, which can end in `Delivered`: Peek holds them back. Peek asks tracking services too and keeps checking. If nothing comes after a few days, ask the seller whether the parcel has really been sent.
+The tracker may not have the order yet, or only steps written ahead, which can end in `Delivered`: Peek holds them back. Peek asks tracking services too and keeps checking. For a number the tracker doesn't know, Peek makes no request to check the number, so compare it with the seller's message; if the tracker still holds only steps written ahead two days later, peektracker.com does ask you to check it. If nothing comes after a few days, ask the seller whether the parcel has really been sent.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (home page)](http://xinghe-express.cn/) – company name, freight forwarding services, tracking box that opens GZYL's tracker, hotline and email
@@ -122,5 +122,5 @@ The tracker may not have the order yet, or only steps written ahead, which can e
 - [Xinghe Freight: 联系我们 (contact)](http://xinghe-express.cn/contact.html) – 24-hour hotline, email for business enquiries and quotes, address given as Guangzhou only, get in touch before visiting, contact form opening an email
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, GZXH…YQ number shape, Xinghe read on GZYL's tracker, step wordings and stages, Hong Kong acceptance, Chinese line, Beijing clock, timelines written ahead, tracking services as fallback, Swiss Post hand-over, what Peek shows, holds back and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, GZXH…YQ number shape, Xinghe read on GZYL's tracker, step wordings and stages, Hong Kong acceptance, Chinese line, Beijing clock, timelines written ahead, tracking services as fallback, the tracker's answer for an unknown number, Swiss Post hand-over, what Peek shows, holds back and leaves out
 :::

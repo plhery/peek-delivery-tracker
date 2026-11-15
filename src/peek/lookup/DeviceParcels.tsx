@@ -10,13 +10,14 @@ import { carrierBrand } from '../../lib/carrierBrand';
 import { ON_THE_WAY, useDeliveredHold } from '../../lib/deliveredHold';
 import type { CardList } from '../../lib/deliveredMove';
 import { carrierInfo, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber } from '../../lib/carriers';
+import { useMarkNewUpdates } from '../../lib/newUpdate';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { pickupPoint } from '../../lib/pickupPoint';
 import { isFinal } from '../../lib/stages';
 import { maskedNumber } from '../links';
 import { useMedia, useNow } from '../parcel/hooks';
 import { parcelDetail, parcelFreshness, parcelHeadline, parcelStage } from '../parcel/summary';
-import { strandedParcels, useRecents, type RecentParcel } from '../recents';
+import { hasUnopenedNews, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { openParcelLink, parcelLinkPath } from '../route';
 import { usePeekSession } from '../session';
 import { forgetDeviceParcels, leadParcel, watchDeviceParcels } from './deviceList';
@@ -33,6 +34,20 @@ function useParcelTitle(recent: RecentParcel): string {
   const { parcel, numberHint } = recent.snapshot;
   return recent.name ?? (parcel.trackingNumber ? shortNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : t('common.parcel'));
+}
+
+/**
+ * A scan since this device last opened the parcel, as the account's cards mark it: a dot before the status, and
+ * "New update." first for a screen reader, ahead of everything the card says. The dot stays in place when off, so it
+ * fades as it clears.
+ */
+function useNewUpdate(recent: RecentParcel) {
+  const { t } = useI18n();
+  const marked = useMarkNewUpdates() && hasUnopenedNews(recent);
+  return {
+    said: marked && <><span className="sr-only">{`${t('parcel.newUpdate')}.`}</span>{' '}</>,
+    dot: <i className="parcel-card__new" data-on={marked ? '' : undefined} aria-hidden="true" />,
+  };
 }
 
 /** A modified click opens the link the browser's way, in a new tab or window. Any other opens the page out of the card. */
@@ -56,11 +71,12 @@ function DeviceParcel({ recent, arrived = false }: { recent: RecentParcel; arriv
   const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
   const title = useParcelTitle(recent);
   const { placed, route } = useParcelRoute(parcel, languageTag);
+  const news = useNewUpdate(recent);
   return <a className={`door-parcel${placed ? ' door-parcel--route' : ''}`} style={carrierBrand(carrier).style} href={parcelLinkPath(recent.id)} data-parcel-link={recent.id} data-arrived={arrived ? '' : undefined} onClick={openOnClick(recent.id)}>
     {placed && <CardRoute route={route} />}
-    <span className="door-parcel__top"><CarrierMark carrier={carrier} />{when && <span className="door-parcel__when">{when}</span>}</span>
+    <span className="door-parcel__top">{news.said}<CarrierMark carrier={carrier} />{when && <span className="door-parcel__when">{when}</span>}</span>
     <strong>{title}</strong>
-    <span className="door-parcel__state">{parcelStatusLabel(parcel, t, locale)}</span>
+    <span className="door-parcel__state">{news.dot}{parcelStatusLabel(parcel, t, locale)}</span>
   </a>;
 }
 
@@ -95,6 +111,7 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
   // A parcel waiting to be collected says where.
   const detail = parcelDetail(parcel, wording) ?? (stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint)?.name : null);
   const mood = pipMood(stage ?? undefined);
+  const news = useNewUpdate(recent);
   return <a className="door-nextup" style={carrierBrand(carrier).style} href={parcelLinkPath(recent.id)} data-parcel-link={recent.id} data-arrived={arrived ? '' : undefined} onClick={openOnClick(recent.id)}>
     <span className="door-nextup__map" aria-hidden="true">
       {route && <WorldMap route={route} mode={defaultMode(route, stage ?? undefined)} time={time} look="tint" labels="ends" context={false}
@@ -102,12 +119,13 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
         insets={beside ? LEAD_INSETS.beside : LEAD_INSETS.under} className="door-nextup__canvas" />}
     </span>
     <span className="door-nextup__top">
+      {news.said}
       <CarrierMark carrier={carrier} />
       <span className="door-nextup__fresh">{freshness.dot && <i aria-hidden="true" />}{freshness.label}</span>
     </span>
     <span className="door-nextup__text">
       <span className="door-nextup__name">{title}</span>
-      <strong>{parcelHeadline(parcel, t)}</strong>
+      <strong>{news.dot}{parcelHeadline(parcel, t)}</strong>
       {detail && <span className="door-nextup__detail">{detail}</span>}
     </span>
     {/* The headline already says how far the parcel is. */}

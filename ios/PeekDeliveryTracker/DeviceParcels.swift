@@ -28,7 +28,8 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// never the postcode. Nil where this iPhone doesn't know, such as a parcel it kept before it noted this.
     var postcodeGiven: Bool? = nil
     /// The parcel's news this iPhone counts as seen: the `newsAt` it had when it was last opened here, or when it
-    /// started as seen. Nil on a parcel kept before this was noted, which starts as seen too.
+    /// started as seen. Nil on a parcel kept before this was noted, which shows no mark and starts as seen with its
+    /// next answer: what an older version kept has no `newsAt` to start from.
     var seenNews: String? = nil
 
     var isViewer: Bool { viewer == true }
@@ -39,11 +40,12 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// The parcel as it stands is seen: what it tells now is no news.
     mutating func startSeen() { seenNews = parcel.newsAt ?? Self.seenBeforeAnyNews }
 
-    /// Takes the service's newer answer. The first answer of a parcel that was waiting for its carrier is no news.
+    /// Takes the service's newer answer. A parcel's first answer is no news, as the service starts an account's
+    /// parcel: the first one with a check landed, also after a change of carrier or number.
     mutating func take(_ answer: Parcel) {
-        let waited = parcel.syncStatus == .pending || parcel.syncStatus == .syncing
+        let first = parcel.lastSyncedAt == nil && answer.lastSyncedAt != nil
         parcel = answer
-        if waited || seenNews == nil { startSeen() }
+        if first || seenNews == nil { startSeen() }
     }
 }
 
@@ -341,8 +343,6 @@ final class DeviceParcels {
         let (parcels, keys) = storage.load()
         // A link being forgotten stays forgotten, even where the list was saved before it was.
         entries = parcels.filter { $0.forgotten != true && forgetting[$0.linkID] == nil }
-        // The parcels kept before their news was marked start as seen: nobody opens the app to a wall of dots.
-        for index in entries.indices where entries[index].seenNews == nil { entries[index].startSeen() }
         forgotten = parcels.filter { $0.forgotten == true }
         self.keys = keys.filter { forgetting[$0.key] == nil }
         self.forgetting = forgetting

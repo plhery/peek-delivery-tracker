@@ -13,7 +13,8 @@ import { FIRST_SAMPLE_MS, SAMPLE_PERIOD_MS } from './landing/useSampleLoop';
 import { ParcelLinkError, type ParcelLookup } from './links';
 import { forgetDeviceChecks } from './lookup/deviceList';
 import { LookupVerificationError } from './lookup/verification';
-import { forgetAllRecents, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
+import { forgetAllRecents, markRecentSeen, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
+import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
 import { pickCandidate, pressEnter } from '../test/inputMethod';
@@ -1076,6 +1077,36 @@ describe('FrontDoor: on this device', () => {
     expect(mocks.forget.mock.calls).toEqual([[LINK_ID, OWNER_KEY]]);
     expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
     expect(field).toHaveFocus();
+  });
+
+  it('marks a parcel with a scan this device has not opened yet, unless marks are switched off', () => {
+    const scanned = (view: ReturnType<typeof testView>, newsAt: string) => ({ ...view, parcel: { ...view.parcel, newsAt, lastSyncedAt: '2026-11-15T08:00:00Z' } });
+    const lead = placedView(OTHER_LINK_ID, ['accepted', 'out_for_delivery']);
+    // Each starts as seen, then a scan lands.
+    for (const newsAt of ['2026-11-15T09:00:00Z', '2026-11-15T10:00:00Z']) {
+      rememberParcel({ id: LINK_ID, view: scanned(testView(), newsAt), now: Date.now() });
+      rememberParcel({ id: OTHER_LINK_ID, view: scanned(lead, newsAt), now: Date.now() - 60_000 });
+    }
+    onTestFinished(() => localStorage.removeItem(MARK_NEW_UPDATES_STORAGE_KEY));
+    door();
+    const links = deviceLinks();
+    expect(links[0]).toHaveClass('door-nextup');
+    // A screen reader hears it first; the eye finds a dot before the status.
+    expect(links[0]).toHaveAccessibleName(/^New update\. .*DHL.*Out for delivery/);
+    expect(links[0].querySelector('strong > .parcel-card__new')).toHaveAttribute('data-on');
+    expect(links[1]).toHaveAccessibleName(/^New update\. .*DHL.*In transit/);
+    expect(links[1].querySelector('.door-parcel__state > .parcel-card__new')).toHaveAttribute('data-on');
+    // Opened, a parcel's card loses its mark.
+    act(() => markRecentSeen(LINK_ID, '2026-11-15T10:00:00Z'));
+    expect(deviceLinks()[1].querySelector('.parcel-card__new')).not.toHaveAttribute('data-on');
+    expect(deviceLinks()[1]).not.toHaveAccessibleName(/New update/);
+    // Switched off, no card marks its news.
+    act(() => {
+      localStorage.setItem(MARK_NEW_UPDATES_STORAGE_KEY, 'off');
+      window.dispatchEvent(new StorageEvent('storage', { key: MARK_NEW_UPDATES_STORAGE_KEY }));
+    });
+    expect(deviceLinks()[0].querySelector('.parcel-card__new')).not.toHaveAttribute('data-on');
+    expect(deviceLinks()[0]).not.toHaveAccessibleName(/New update/);
   });
 });
 

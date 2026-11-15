@@ -17,6 +17,8 @@ export const MAX_RECENTS = 100;
 /** The longest name a parcel can carry into an account. */
 export const MAX_NAME_LENGTH = 80;
 const eventName = 'peek-recents-change';
+/** What a parcel opened before its first scan keeps as seen: any scan is news after it. */
+export const SEEN_BEFORE_ANY_NEWS = '1970-01-01T00:00:00Z';
 
 export interface RecentParcel {
   id: string;
@@ -35,6 +37,11 @@ export interface RecentParcel {
   lastSeenAt: string;
   /** The last answer, shown while offline. */
   snapshot: ParcelLinkView;
+  /**
+   * The parcel's `newsAt` as this device last opened it, or SEEN_BEFORE_ANY_NEWS: a later one marks its card.
+   * A parcel saved before the mark has none, and starts as seen with its next answer.
+   */
+  seenNews?: string;
 }
 
 /**
@@ -172,7 +179,9 @@ export function ownerKeyFor(id: string): string | null {
 /**
  * Saves the latest answer for a parcel. A key or a name the device already
  * has stays; `suggestedName` (the name a shared link carries) is taken only
- * when the device has none.
+ * when the device has none. What the device opened stays too: a parcel starts
+ * as seen as it is first listed, and again with its first answer, as the
+ * server starts an account's parcel.
  */
 export function rememberParcel({ id, view, key, name, suggestedName, now = Date.now() }: {
   id: string;
@@ -186,6 +195,8 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
   const { list, stranded } = load();
   const existing = list.find((recent) => recent.id === id);
   const current = currentEvent(view.parcel.events);
+  const firstAnswer = !existing?.snapshot.parcel.lastSyncedAt && !!view.parcel.lastSyncedAt;
+  const kept = typeof existing?.seenNews === 'string' && !firstAnswer ? existing.seenNews : null;
   const recent: RecentParcel = {
     id,
     // A parcel saved in a way this version could not read gets its key back.
@@ -198,8 +209,25 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
     updatedAt: current?.occurredAt ?? null,
     lastSeenAt: new Date(now).toISOString(),
     snapshot: view,
+    seenNews: kept ?? view.parcel.newsAt ?? SEEN_BEFORE_ANY_NEWS,
   };
   write([recent, ...list.filter((candidate) => candidate.id !== id)], stranded.filter((entry) => entry.id !== id));
+}
+
+/**
+ * Whether a scan reached the parcel after this device last opened it: the account's rule (`hasNewUpdate`), compared
+ * here so that the alerts this list serves don't import the notification preferences that import them.
+ */
+export function hasUnopenedNews(recent: RecentParcel): boolean {
+  const news = recent.snapshot.parcel.newsAt;
+  return !!news && typeof recent.seenNews === 'string' && Date.parse(news) > Date.parse(recent.seenNews);
+}
+
+/** The parcel was opened with the news it holds: its card loses its mark. */
+export function markRecentSeen(id: string, newsAt: string): void {
+  const list = read();
+  if (!list.some((recent) => recent.id === id && recent.seenNews !== newsAt)) return;
+  write(list.map((recent) => recent.id === id ? { ...recent, seenNews: newsAt } : recent));
 }
 
 /** Names a parcel on this device; an empty name removes it. */

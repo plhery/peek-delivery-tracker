@@ -279,6 +279,9 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 .door-nextup__text { display: grid; gap: 2px; max-width: 46%; margin-top: auto; }
 .door-nextup__name { font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
 .door-nextup__text strong { font-size: 30px; line-height: 1.1; letter-spacing: -.9px; font-weight: 650; text-wrap: balance; overflow-wrap: anywhere; }
+/* The headline is the lead card's status line: its new-update dot grows with it. */
+.door-nextup__text strong > .parcel-card__new { height: 8px; }
+.door-nextup__text strong > .parcel-card__new[data-on] { width: 8px; margin-right: 9px; }
 .door-nextup__detail { margin-top: 6px; color: var(--tone); font-size: 15px; font-weight: 500; line-height: 1.35; }
 .door-nextup__detail::first-letter { text-transform: uppercase; }
 .door-nextup__progress { max-width: 46%; margin-top: 16px; }

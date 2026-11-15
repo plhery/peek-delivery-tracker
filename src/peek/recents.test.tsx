@@ -4,16 +4,19 @@ import {
   cleanParcelName,
   forgetAllRecents,
   forgetRecent,
+  hasUnopenedNews,
+  markRecentSeen,
   MAX_RECENTS,
   ownerKeyFor,
   recentFor,
   RECENTS_STORAGE_KEY,
   rememberParcel,
   renameParcel,
+  SEEN_BEFORE_ANY_NEWS,
   strandedParcels,
   useRecents,
 } from './recents';
-import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
+import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
 
 const NOW = Date.parse('2026-10-02T08:00:00Z');
 const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -27,7 +30,7 @@ describe('the parcels of this device', () => {
     expect(recentFor(LINK_ID)).toEqual({
       id: LINK_ID, key: OWNER_KEY, name: null, carrier: 'dhl', stage: 'in_transit', syncStatus: 'ok',
       expectedDelivery: '2026-10-03', updatedAt: '2026-10-01T10:00:00.000Z', lastSeenAt: '2026-10-02T08:00:00.000Z',
-      snapshot: testView({ parcel: { expectedDelivery: '2026-10-03' } }),
+      snapshot: testView({ parcel: { expectedDelivery: '2026-10-03' } }), seenNews: SEEN_BEFORE_ANY_NEWS,
     });
     expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)).toHaveLength(1);
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
@@ -178,3 +181,55 @@ function validRecent() {
     expectedDelivery: null, updatedAt: null, lastSeenAt: '2026-10-02T08:00:00.000Z', snapshot: testView({ id: OTHER_LINK_ID }),
   };
 }
+
+describe('news since this device last opened a parcel', () => {
+  /** An answer once the parcel's first check has landed, with the time Peek stored its latest scan. */
+  const scanned = (newsAt?: string, overrides: Parameters<typeof testView>[0] = {}) =>
+    testView({ ...overrides, parcel: { newsAt, lastSyncedAt: '2026-11-15T08:00:00Z', ...overrides.parcel } });
+  const marked = () => hasUnopenedNews(recentFor(LINK_ID)!);
+
+  it('starts a parcel as seen, marks a scan stored after that until the parcel is opened, and keeps that in the browser', () => {
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00.12+00:00'), now: NOW });
+    expect(marked()).toBe(false);
+    // Read while the server was checking it: the answer is no news, and a later one still is.
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00.12+00:00', { parcel: { syncStatus: 'syncing' } }), now: NOW + 1 });
+    expect(marked()).toBe(false);
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T10:00:00.5+00:00'), now: NOW + 2 });
+    expect(marked()).toBe(true);
+    markRecentSeen(LINK_ID, '2026-11-15T10:00:00.5+00:00');
+    expect(marked()).toBe(false);
+    expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)[0]).toMatchObject({ seenNews: '2026-11-15T10:00:00.5+00:00' });
+    // Other parcels keep theirs.
+    markRecentSeen(OTHER_LINK_ID, '2026-11-15T10:00:00.5+00:00');
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
+  });
+
+  it('marks the first scan of a parcel listed while its carrier had nothing to tell', () => {
+    rememberParcel({ id: LINK_ID, view: scanned(undefined, { stages: [] }), now: NOW });
+    expect(recentFor(LINK_ID)!.seenNews).toBe(SEEN_BEFORE_ANY_NEWS);
+    expect(marked()).toBe(false);
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00Z'), now: NOW + 1 });
+    expect(marked()).toBe(true);
+  });
+
+  it('takes a lookup’s first answer as seen: what the carrier first tells is not news', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: pendingView(), now: NOW });
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00Z'), now: NOW + 1 });
+    expect(marked()).toBe(false);
+  });
+
+  it('starts a parcel saved before the mark as seen with its next answer: nobody comes back to a wall of dots', () => {
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00Z'), now: NOW });
+    // As the version before saved it: no news noted, and none in its answer.
+    const [saved] = JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!);
+    delete saved.seenNews;
+    delete saved.snapshot.parcel.newsAt;
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([saved]));
+    expect(recentFor(LINK_ID)!.seenNews).toBeUndefined();
+    expect(marked()).toBe(false);
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T10:00:00Z'), now: NOW + 1 });
+    expect(marked()).toBe(false);
+    rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T11:00:00Z'), now: NOW + 2 });
+    expect(marked()).toBe(true);
+  });
+});

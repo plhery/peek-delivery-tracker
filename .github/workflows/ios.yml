@@ -58,12 +58,16 @@ jobs:
           -scheme PeekDeliveryTracker -sdk iphonesimulator
           -destination 'generic/platform=iOS Simulator'
           CODE_SIGNING_ALLOWED=NO build
+      # A test that hangs fails under its own name after two minutes, and the others still run, rather than the
+      # job being cancelled at its time limit.
       - name: Run native tests
         run: >-
           xcodebuild -project ios/PeekDeliveryTracker.xcodeproj
           -scheme PeekDeliveryTracker
           -destination 'platform=iOS Simulator,name=iPhone 18 Pro,OS=latest'
           -collect-test-diagnostics never
+          -test-timeouts-enabled YES
+          -default-test-execution-time-allowance 120
           CODE_SIGNING_ALLOWED=NO test
 
   macos:

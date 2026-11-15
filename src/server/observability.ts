@@ -6,8 +6,8 @@ import type { Breadcrumb, ErrorEvent } from '@sentry/node';
 import { carrierErrorReason } from './trackingFailure';
 import { healthMessage, healthReviewSignal } from './trackingHealth';
 import type { JsonObject } from './types';
+import { scrubAddress, scrubQuery, scrubQueryString, scrubValue, withoutCredentials } from '../lib/credentials';
 import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parcel-scraper/node';
-import { UNIVERSAL_SOURCES } from 'universal-parcel-scraper';
 
 /**
  * What a check learnt that the catalog, detection or the adapters could act on.
@@ -132,6 +132,8 @@ export interface OperationalContext {
   providerStatus?: string | null;
   reportedStage?: string | null;
   selectedStage?: string | null;
+  /** The signed-in account the operation ran for: the report's user. */
+  userId?: string | null;
   /** Leave the incoming request out of the report: its address or body carries a capability. */
   withoutRequest?: boolean;
 }
@@ -257,113 +259,40 @@ export function operationalErrorMetadata(error: unknown): OperationalErrorMetada
   return metadata;
 }
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const ADDRESS = /\bhttps?:\/\/[^\s"'<>\\`]+/gi;
-
-/** A path without query or fragment, where a segment that could be a tracking number reads `:id`. */
-function scrubPath(path: string): string {
-  return path.split(/[?#]/, 1)[0].split('/')
-    .map((segment) => (segment.length >= 6 && /\d/.test(segment) && !UUID.test(segment) ? ':id' : segment))
-    .join('/');
-}
-
-function scrubAddress(address: string): string {
-  const origin = /^https?:\/\/[^/?#]*/i.exec(address)?.[0] ?? '';
-  return origin + scrubPath(address.slice(origin.length));
-}
-
-/** Every address loses its query and its number-like path segments. */
-function scrubText(text: string): string {
-  return text.replace(ADDRESS, scrubAddress);
-}
-
-/** A copy with every string scrubbed. Events arrive normalized; breadcrumb data may not be. */
-function scrubValue<T>(value: T, scrub: (text: string) => string, ancestors = new Set<object>()): T {
-  if (typeof value === 'string') return scrub(value) as T;
-  if (!value || typeof value !== 'object') return value;
-  if (ancestors.has(value) || ancestors.size > 20) return '[Truncated]' as T;
-  ancestors.add(value);
-  const copy = Array.isArray(value)
-    ? value.map((item: unknown) => scrubValue(item, scrub, ancestors))
-    : Object.fromEntries(Object.entries(value).map(([key, item]) => [scrub(key), scrubValue(item, scrub, ancestors)]));
-  ancestors.delete(value);
-  return copy as T;
-}
-
 /**
- * Error fields that can hold a request's or a reply's headers, cookies, body or keys, such as the
- * scraper's `request` and `diagnostics`. Sentry copies an error's fields, and its causes' and
- * nested errors', into the event's contexts.
- */
-const CREDENTIAL_FIELD = /^(?:request|diagnostics|headers|body|body_excerpt|response_body|cookies?|set-cookie|(?:proxy-)?authorization|password|secret|(?:access_|refresh_|guest_)?token|api_?key|session(?:_?id)?)$/i;
-
-/** A copy where each credential field reads `[Filtered]`, at any depth. */
-function withoutCredentialFields<T>(value: T, ancestors = new Set<object>()): T {
-  if (!value || typeof value !== 'object') return value;
-  if (ancestors.has(value) || ancestors.size > 20) return '[Truncated]' as T;
-  ancestors.add(value);
-  const copy = Array.isArray(value)
-    ? value.map((item: unknown) => withoutCredentialFields(item, ancestors))
-    : Object.fromEntries(Object.entries(value).map(([key, item]) =>
-      [key, CREDENTIAL_FIELD.test(key) ? '[Filtered]' : withoutCredentialFields(item, ancestors)]));
-  ancestors.delete(value);
-  return copy as T;
-}
-
-/**
- * The last step before an event leaves: addresses are cut down wherever they appear,
- * the incoming request keeps neither its body nor its query, and error fields keep no
- * upstream request or reply details (`upstream_http` holds what is safe of them).
+ * The last step before an event leaves. It keeps what a failure needs to be understood, personal data included:
+ * the parcel's number, the request's body, query and client address. Access values are filtered wherever they
+ * appear, and Peek's capability ids and fragments are left out of addresses.
  */
 export function scrubSentryEvent(event: ErrorEvent): ErrorEvent {
+  // The SDK's own metadata holds scopes and spans, and is never sent.
   const { sdkProcessingMetadata, ...rest } = event;
-  // The parcel the report is about: its number also gives way to its shape.
-  const number = typeof sdkProcessingMetadata?.trackingNumber === 'string' ? sdkProcessingMetadata.trackingNumber : '';
-  const scrubbed = scrubValue(rest, number.length >= 4 ? (text) => withoutNumber(scrubText(text), number) : scrubText);
-  if (scrubbed.request) scrubbed.request = { ...scrubbed.request, data: undefined, query_string: undefined };
-  if (scrubbed.contexts) {
-    const { upstream_http: upstreamHttp, ...contexts } = scrubbed.contexts;
-    scrubbed.contexts = { ...withoutCredentialFields(contexts), ...(upstreamHttp ? { upstream_http: upstreamHttp } : {}) };
+  const scrubbed = scrubValue(rest);
+  const request = rest.request;
+  if (request?.query_string !== undefined) {
+    let path = '';
+    try { path = new URL(request.url ?? '', 'http://localhost').pathname; } catch { /* no address */ }
+    scrubbed.request = { ...scrubbed.request, query_string: scrubQueryString(request.query_string, path) as typeof request.query_string };
   }
-  if (scrubbed.extra) scrubbed.extra = withoutCredentialFields(scrubbed.extra);
   if (scrubbed.transaction) {
-    scrubbed.transaction = scrubbed.transaction.replace(/(^|\s)(\/\S*)/g, (_, space: string, path: string) => space + scrubPath(path));
+    scrubbed.transaction = scrubbed.transaction.replace(/(^|\s)(\/\S*)/g, (_, space: string, path: string) => space + scrubAddress(path));
   }
   return { ...scrubbed, sdkProcessingMetadata };
 }
 
 /**
- * Each breadcrumb is scrubbed as it is recorded: addresses are cut down, and the
- * console's copy of a log line's arguments is dropped. A log line holds no number.
+ * Each breadcrumb is scrubbed as it is recorded. The console's copy of a log line's arguments is dropped: the
+ * message holds the line.
  */
 export function scrubSentryBreadcrumb(breadcrumb: Breadcrumb): Breadcrumb {
   const data = breadcrumb.data && Object.fromEntries(Object.entries(breadcrumb.data)
-    .filter(([key]) => !['arguments', 'http.query', 'http.fragment'].includes(key))
-    .map(([key, value]) => [key, scrubValue(value, scrubText)]));
-  return { ...breadcrumb, ...(breadcrumb.message ? { message: scrubText(breadcrumb.message) } : {}), ...(data ? { data } : {}) };
+    .filter(([key]) => !['arguments', 'http.fragment'].includes(key))
+    .map(([key, value]) => [key, key === 'http.query' && typeof value === 'string'
+      ? `?${scrubQuery(value.replace(/^\?/, ''))}` : scrubValue(value)]));
+  return { ...breadcrumb, ...(breadcrumb.message ? { message: withoutCredentials(breadcrumb.message) } : {}), ...(data ? { data } : {}) };
 }
 
-/** The text with every occurrence of the number, in any case, replaced by its pattern. */
-function withoutNumber(text: string, number: string): string {
-  const pattern = numberPattern(number);
-  return text.replace(new RegExp(number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), pattern);
-}
-
-/** A word of six letters and digits or more, with a digit: it could be a tracking number. */
-const NUMBER_LIKE = /(?<![A-Za-z0-9])(?=[A-Za-z0-9]*\d)[A-Za-z0-9]{6,}(?![A-Za-z0-9])/g;
-
-/** The universal providers' names, which look like numbers ("17TRACK", "Ship24") and stay as they are, to search by. */
-const PROVIDER_NAMES: ReadonlySet<string> = new Set(['Track123', ...UNIVERSAL_SOURCES].map((name) => name.toLowerCase()));
-
-/**
- * Wording for a line that is given no number: addresses cut down, and each word that could be a number given as its
- * shape, except a provider's name.
- */
-function withoutNumbers(text: string): string {
-  return scrubText(text).replace(NUMBER_LIKE, (word) => PROVIDER_NAMES.has(word.toLowerCase()) ? word : `[${numberPattern(word)}]`);
-}
-
-/** Readable refusal text, bounded like the other log fields and without identifiers or access values. */
+/** Readable refusal text, bounded like the other log fields and without access values. */
 function refusalExcerpt(body: string): string {
   const decoded = body.replace(/\\u([\da-f]{4})/gi, (_, code: string) => String.fromCharCode(Number.parseInt(code, 16)))
     .replace(/&#(x[\da-f]+|\d+);/gi, (_, code: string) => {
@@ -376,20 +305,13 @@ function refusalExcerpt(body: string): string {
       try { return decodeURIComponent(encoded); } catch { return '[encoded]'; }
     });
   const text = decoded.replace(/<(script|style|svg)\b[^>]*>[\s\S]*?(?:<\/\1\s*>|$)/gi, ' ')
-    .replace(/<[^>]*(?:>|$)/g, ' ')
-    .replace(/\b(?:Bearer|Basic)\s+[A-Za-z\d._~+\/-]+=*/gi, '[authorization]')
-    .replace(/(["']?(?:authorization|cookie|set-cookie|(?:access|refresh|guest)[_-]?token|token|session(?:id)?|password|secret|api[_-]?key|nonce)["']?\s*[:=]\s*)(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,;<>]+)/gi,
-      '$1[redacted]')
-    .replace(ADDRESS, (address) => {
-      try { return new URL(address).origin; } catch { return '[address]'; }
-    });
-  // Mask before truncating: a number crossing the log's boundary must not leave a prefix behind.
-  return withoutNumbers(text).replace(/\s+/g, ' ').trim().slice(0, 500);
+    .replace(/<[^>]*(?:>|$)/g, ' ');
+  return withoutCredentials(text).replace(/\s+/g, ' ').trim().slice(0, 500);
 }
 
 /**
- * Why a lookup failed, for a line that has no number to mask: the reason the carrier
- * gave, read through the causes, its wording, and the wording of each cause.
+ * Why a lookup failed: the reason the carrier gave, read through the causes, its wording,
+ * and the wording of each cause, without access values.
  */
 export function errorDetails(error: unknown): JsonObject {
   if (!(error instanceof Error)) return {};
@@ -398,11 +320,11 @@ export function errorDetails(error: unknown): JsonObject {
   const seen = new Set<Error>([error]);
   for (let cause = error.cause; cause instanceof Error && !seen.has(cause) && causes.length < 3; cause = cause.cause) {
     seen.add(cause);
-    causes.push(withoutNumbers(`${cause.name}: ${cause.message}`).slice(0, 150));
+    causes.push(withoutCredentials(`${cause.name}: ${cause.message}`).slice(0, 150));
   }
   return {
     error_reason: carrierErrorReason(error),
-    error_message: withoutNumbers(error.message).slice(0, 200),
+    error_message: withoutCredentials(error.message).slice(0, 200),
     error_cause: causes.length > 0 ? causes.join(' <- ') : undefined,
     ...(upstreamStatus !== undefined ? { upstream_status: upstreamStatus } : {}),
     ...(upstreamHttp ? {
@@ -422,10 +344,10 @@ export function initObservability(): boolean {
     dsn,
     environment: process.env.SENTRY_ENVIRONMENT?.trim() || process.env.NODE_ENV || 'development',
     release: resolveSentryRelease(),
-    // Request bodies and queries can carry keys and personal data. Without user
-    // information the SDK also leaves out the client's address and the headers that
-    // forward it: the visitor's is personal data, and the proxy's says nothing.
-    dataCollection: { userInfo: false, httpBodies: [], urlQueryParams: false },
+    // Reports carry the incoming request's body, query and headers, and the client's address
+    // (user.ip_address). The SDK filters the values it knows for keys, tokens and sessions, and
+    // scrubSentryEvent those it does not, such as Peek's own tokens. Cookies hold sessions only.
+    dataCollection: { userInfo: true, cookies: false, httpBodies: ['incomingRequest'], urlQueryParams: true },
     beforeSend: scrubSentryEvent,
     beforeBreadcrumb: scrubSentryBreadcrumb,
     // Sentry 11 turns on stack traces for messages. A message then arrives as an
@@ -471,15 +393,12 @@ function applyContext(
   errorMetadata: OperationalErrorMetadata = {},
 ): void {
   applyUpstreamHttpContext(scope, errorMetadata);
-  // Reports name the parcel by the shape of its number and the attempt or job that
-  // checked it, never by the number: Sentry is a third party.
-  const { trackingNumber, ...operation } = context;
+  // Reports name the parcel by its number, and give its shape to group by.
+  const { trackingNumber, userId, ...operation } = context;
   const number = trackingNumber?.trim() ?? '';
   const pattern = number ? numberPattern(number) : '';
-  scope.setContext('operation', { ...operation, ...(pattern ? { numberPattern: pattern } : {}) });
-  // The number can still reach a report in an error message, a provider's answer or a
-  // breadcrumb: the last step replaces it there. SDK metadata is never sent.
-  if (number) scope.setSDKProcessingMetadata({ trackingNumber: number });
+  scope.setContext('operation', { ...operation, ...(number ? { trackingNumber: number, numberPattern: pattern } : {}) });
+  if (userId) scope.setUser({ id: userId });
   const tags: Record<string, string | undefined> = {
     anomaly_code: boundedText(context.anomalyCode, 100),
     attempt_id: boundedText(context.attemptId, 100),
@@ -495,6 +414,7 @@ function applyContext(
     route: boundedText(context.route),
     route_type: boundedText(context.routeType, 100),
     trigger: boundedText(context.trigger, 100),
+    tracking_number: boundedText(number, 200),
     number_pattern: boundedText(pattern, 100),
     upstream_status: boundedText(errorMetadata.upstreamStatus, 3),
   };
@@ -635,7 +555,7 @@ export function reportRoutingEvent(code: string, context: {
       error_type: context.errorClass ?? null,
       error_reason: carrierErrorReason(context.error),
       // Per-attempt failures no longer reach Sentry, so the log line carries the provider's wording.
-      error_message: context.error instanceof Error ? context.error.message.slice(0, 200) : undefined,
+      error_message: context.error instanceof Error ? withoutCredentials(context.error.message).slice(0, 200) : undefined,
       upstream_status: metadata.upstreamStatus,
       upstream_content_type: metadata.upstreamHttp?.content_type,
       upstream_body_read: metadata.upstreamHttp?.body_read,
@@ -789,26 +709,19 @@ function boundedLogValue(value: unknown): string | number | boolean | null | und
   return undefined;
 }
 
-/** The fields a line is given a whole number in: the parcel's, and the one its check looked up (a handoff's). */
-const LOG_NUMBER_FIELDS = ['tracking_number', 'support_lookup_number'];
-
 /**
- * Writes one JSON line. Loki keeps lines past their parcel's deletion, so no line holds a
- * tracking number: the parcel's gives way to its shape (`number_pattern`), and each number
- * given is replaced by its shape wherever else the line repeats it, such as a carrier's error.
+ * Writes one JSON line. A line about a parcel holds its number (`tracking_number`) and the
+ * number's shape (`number_pattern`) to group by.
  */
 export function logOperationalEvent(
   event: string,
   fields: JsonObject = {},
   level: 'info' | 'warning' | 'error' = 'info',
 ): void {
-  const numbers = LOG_NUMBER_FIELDS.map((field) => fields[field])
-    .filter((value): value is string => typeof value === 'string' && value.length >= 4);
   const { tracking_number: trackingNumber } = fields;
   const safeFields = Object.fromEntries(
     Object.entries({ ...fields, number_pattern: typeof trackingNumber === 'string' ? numberPattern(trackingNumber) : undefined })
-      .filter(([key]) => !LOG_NUMBER_FIELDS.includes(key))
-      .map(([key, value]) => [key, boundedLogValue(typeof value === 'string' ? numbers.reduce(withoutNumber, value) : value)] as const)
+      .map(([key, value]) => [key, boundedLogValue(value)] as const)
       .filter((entry): entry is [string, string | number | boolean | null] => entry[1] !== undefined),
   );
   const payload = JSON.stringify({

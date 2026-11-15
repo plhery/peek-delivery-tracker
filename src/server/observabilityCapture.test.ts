@@ -88,24 +88,21 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   ]));
   expect(operational.contexts?.UniversalTrackingError).toHaveProperty('failures');
   expect(operational.tags).toMatchObject({
+    tracking_number: 'TEST1234',
     number_pattern: '4 letters + 4 digits',
     route: '/api/packages/11111111-1111-1111-1111-111111111111?detail=full',
   });
-  expect(operational.tags).not.toHaveProperty('tracking_number');
-  expect(operational.contexts?.operation).toMatchObject({ numberPattern: '4 letters + 4 digits' });
-  expect(operational.contexts?.operation).not.toHaveProperty('trackingNumber');
-  // Whatever else the report holds keeps its shape, with the parcel's number in its place.
-  expect(operational.extra?.carrier_payload).toEqual({ number: '4 letters + 4 digits' });
-  expect(operational.contexts?.carrier_response).toEqual({ number: '4 letters + 4 digits', status: 'waiting' });
+  expect(operational.contexts?.operation).toMatchObject({ trackingNumber: 'TEST1234', numberPattern: '4 letters + 4 digits' });
+  // Whatever else the report holds keeps the parcel's number.
+  expect(operational.extra?.carrier_payload).toEqual({ number: 'TEST1234' });
+  expect(operational.contexts?.carrier_response).toEqual({ number: 'TEST1234', status: 'waiting' });
   expect(operational.user?.id).toBe('diagnostic-user');
   expect(operational.breadcrumbs).toEqual(expect.arrayContaining([
-    expect.objectContaining({ message: 'Looking up parcel 4 letters + 4 digits' }),
+    expect.objectContaining({ message: 'Looking up parcel TEST1234' }),
   ]));
-  expect(withoutSource(operational)).not.toContain('TEST1234');
 
-  // A report about no parcel keeps its text; addresses are still cut down.
   const direct = captured.events.find((event) => event.message === 'Direct SDK diagnostic message')!;
-  expect(direct.request?.url).toBe('https://delivery.example.test/api/packages/:id');
+  expect(direct.request?.url).toBe('https://delivery.example.test/api/packages/TEST1234');
   expect(direct.transaction).toBe('parcel-detail');
   expect(direct.exception?.values?.[0]).toMatchObject({ value: 'Parcel TEST1234 unavailable',
     stacktrace: { frames: [expect.objectContaining({
@@ -114,7 +111,7 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   });
   const client = Sentry.getClient()!;
   const options = client.getOptions();
-  expect(options.dataCollection).toMatchObject({ userInfo: false, httpBodies: [], urlQueryParams: false });
+  expect(options.dataCollection).toMatchObject({ userInfo: true, cookies: false, httpBodies: ['incomingRequest'], urlQueryParams: true });
   expect(['Console', 'Http', 'NodeFetch', 'RequestData', 'ExtraErrorData']
     .filter((name) => !client.getIntegrationByName(name))).toEqual([]);
   expect(client.getIntegrationByName('Dedupe')).toBeUndefined();
@@ -300,7 +297,7 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   });
 });
 
-it('names a parcel by the shape of its number and cuts addresses down in reports and breadcrumbs', async () => {
+it('names a parcel by its number and keeps whole addresses in reports and breadcrumbs, without access values', async () => {
   vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
   expect(initObservability()).toBe(true);
 
@@ -308,9 +305,9 @@ it('names a parcel by the shape of its number and cuts addresses down in reports
   const line = JSON.stringify({ event: 'tracking_sync_started', number_pattern: '4 letters + 4 digits' });
   Sentry.addBreadcrumb({ category: 'console', level: 'log', message: line, data: { arguments: [line], logger: 'console' } });
   Sentry.addBreadcrumb({ category: 'http', type: 'http', data: { url: 'https://carrier.example/v1/track/TEST9012/events',
-    'http.method': 'GET', 'http.query': 'number=TEST9012', status_code: 404 } });
+    'http.method': 'GET', 'http.query': 'number=TEST9012&api_key=k3y', 'http.fragment': 'token=t0k', status_code: 404 } });
 
-  const request = { url: 'https://carrier.example/v1/track?number=TEST5678', method: 'POST', headers: {},
+  const request = { url: 'https://carrier.example/v1/track/TEST5678', method: 'POST', headers: {},
     body: '{"number":"TEST5678"}', timeout_ms: 10_000 };
   const refused = new UpstreamHttpError('Example Carrier', 404, undefined, {
     content_type: 'text/html', headers: { location: 'https://carrier.example/v1/parcels/TEST5678' },
@@ -322,24 +319,21 @@ it('names a parcel by the shape of its number and cuts addresses down in reports
   });
   await flushObservability();
   const report = captured.events.find((event) => event.event_id === id)!;
-  expect(report.tags).toMatchObject({ number_pattern: '4 letters + 4 digits' });
-  expect(report.tags).not.toHaveProperty('tracking_number');
+  expect(report.tags).toMatchObject({ tracking_number: 'TEST5678', number_pattern: '4 letters + 4 digits' });
   expect(report.contexts?.operation).toEqual(expect.objectContaining({ component: 'tracking-sync', carrier: 'example',
-    numberPattern: '4 letters + 4 digits' }));
-  expect(report.contexts?.operation).not.toHaveProperty('trackingNumber');
-  expect(report.exception?.values?.map((value) => value.value)).toContain('Lookup of 4 letters + 4 digits failed');
-  // Addresses lose their query and number-like path segments; other text loses the number, in any case.
-  expect(report.contexts?.upstream_http).toMatchObject({ response_url: 'https://carrier.example/v1/track',
-    body_excerpt: 'No parcel [4 letters + 4 digits]', headers: {},
-    request: { method: 'POST', url: 'https://carrier.example/v1/track', timeout_ms: 10_000 } });
+    trackingNumber: 'TEST5678', numberPattern: '4 letters + 4 digits' }));
+  expect(report.exception?.values?.map((value) => value.value)).toContain('Lookup of TEST5678 failed');
+  expect(report.contexts?.upstream_http).toMatchObject({ response_url: 'https://carrier.example/v1/track/TEST5678',
+    body_excerpt: 'No parcel test5678', headers: {},
+    request: { method: 'POST', url: 'https://carrier.example/v1/track/TEST5678', timeout_ms: 10_000 } });
 
-  // A log line, which holds no number, keeps its text without the console's copy of it.
+  // A log line keeps its text without the console's copy of it.
   const logLine = report.breadcrumbs?.find((crumb) => crumb.category === 'console' && crumb.message?.includes('tracking_sync_started'));
   expect(logLine!.message).toBe(line);
-  expect(withoutSource(report)).not.toMatch(/test5678|test9012/i);
   expect(logLine!.data).toEqual({ logger: 'console' });
   const call = report.breadcrumbs?.find((crumb) => crumb.category === 'http' && crumb.data?.status_code === 404);
-  expect(call!.data).toEqual({ url: 'https://carrier.example/v1/track/:id/events', 'http.method': 'GET', status_code: 404 });
+  expect(call!.data).toEqual({ url: 'https://carrier.example/v1/track/TEST9012/events', 'http.method': 'GET',
+    'http.query': '?number=TEST9012&api_key=[Filtered]', status_code: 404 });
 });
 
 it('opens one issue for a database that does not answer, whichever write found it, and one per write for a refusal', async () => {
@@ -413,18 +407,17 @@ it('sends carriers no trace headers', async () => {
 it('sends none of a refusal\'s access values, whichever error carries it', async () => {
   vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
   expect(initObservability()).toBe(true);
-  // Letters only: a word with a digit would be masked as a possible number and prove nothing.
   const secrets = ['QUERYSENTINEL', 'FRAGMENTSENTINEL', 'REQUESTBODYSENTINEL', 'AUTHORIZATIONSENTINEL', 'COOKIESENTINEL',
     'SETCOOKIESENTINEL', 'LOCATIONSENTINEL', 'REPLYCSRFSENTINEL', 'REPLYSESSIONSENTINEL'];
   const url = 'https://carrier.example/v1/track?accessKey=QUERYSENTINEL#FRAGMENTSENTINEL';
   // Raw details, as an error from any source may hold them. Sentry captures an error once, so each report has its own.
   const refusal = () => Object.assign(new UpstreamHttpError('Example Carrier', 403), {
-    request: { url, method: 'POST', timeout_ms: 10_000, body: '{"answer":"REQUESTBODYSENTINEL"}',
+    request: { url, method: 'POST', timeout_ms: 10_000, body: '{"number":"TEST1234","password":"REQUESTBODYSENTINEL"}',
       headers: { authorization: 'Bearer AUTHORIZATIONSENTINEL', cookie: 'session=COOKIESENTINEL', accept: 'text/html' } },
     diagnostics: {
       content_type: 'text/html', response_url: url, status_text: 'Forbidden', request_ids: { 'cf-ray': 'example-ray' },
       headers: { 'content-type': 'text/html', 'cf-mitigated': 'challenge', 'set-cookie': 'session=SETCOOKIESENTINEL',
-        location: 'https://carrier.example/challenge?state=LOCATIONSENTINEL' },
+        location: 'https://carrier.example/challenge?from=TEST1234&token=LOCATIONSENTINEL' },
       body_read: 'complete' as const, bytes_inspected: 120, body_signals: ['access_denied'],
       body_excerpt: '<p>Access denied</p><input type="hidden" name="csrf" value="REPLYCSRFSENTINEL">'
         + '<script>var config = {"session":"REPLYSESSIONSENTINEL"}</script>',
@@ -444,15 +437,19 @@ it('sends none of a refusal\'s access values, whichever error carries it', async
   for (const report of reports) {
     for (const secret of secrets) expect(withoutSource(report)).not.toContain(secret);
   }
-  // A refusal reached through causes keeps what is safe of it; an aggregate's failures give no context.
+  // A refusal reached through causes gives its summary; an aggregate's failures give none.
+  const address = 'https://carrier.example/v1/track?accessKey=[Filtered]#[Filtered]';
   for (const report of [reports[0], reports[1], reports[4]]) {
     expect(report.contexts?.upstream_http).toMatchObject({ content_type: 'text/html', body_read: 'complete',
-      response_url: 'https://carrier.example/v1/track', headers: { 'content-type': 'text/html', 'cf-mitigated': 'challenge' },
+      response_url: address, headers: { 'content-type': 'text/html', 'cf-mitigated': 'challenge' },
       body_excerpt: expect.stringContaining('Access denied'),
-      request: { method: 'POST', url: 'https://carrier.example/v1/track', timeout_ms: 10_000 } });
+      request: { method: 'POST', url: address, timeout_ms: 10_000 } });
   }
-  // The error's own fields stay, without the request and reply.
+  // The error's own fields stay, its request and reply included, with only their access values filtered.
   expect(reports[0].contexts?.UpstreamHttpError).toMatchObject({ provider: 'Example Carrier', status: 403,
-    request: '[Filtered]', diagnostics: '[Filtered]' });
-  expect(reports[1].contexts?.Error).toMatchObject({ cause: { UpstreamHttpError: { request: '[Filtered]', diagnostics: '[Filtered]' } } });
+    request: { url: address, body: '{"number":"TEST1234","password":"[Filtered]"}',
+      headers: { authorization: '[Filtered]', cookie: '[Filtered]', accept: 'text/html' } },
+    diagnostics: { headers: { 'set-cookie': '[Filtered]', 'cf-mitigated': 'challenge',
+      location: 'https://carrier.example/challenge?from=TEST1234&token=[Filtered]' } } });
+  expect(reports[1].contexts?.Error).toMatchObject({ cause: { UpstreamHttpError: { request: { headers: { authorization: '[Filtered]' } } } } });
 });

@@ -8335,11 +8335,11 @@ describe('TrackingSyncService', () => {
     expect(capture).not.toHaveBeenCalled();
     const logs = [...output.mock.calls, ...errors.mock.calls].map(([line]) => JSON.parse(String(line)));
     expect(logs).toEqual(expect.arrayContaining([
-      expect.objectContaining({ event: 'tracking_sync_started', package_id: 'unknown-package', number_pattern: '4 letters + 4 digits' }),
+      expect.objectContaining({ event: 'tracking_sync_started', package_id: 'unknown-package', tracking_number: 'TEST1234',
+        number_pattern: '4 letters + 4 digits' }),
       expect.objectContaining({ event: 'tracking_sync_step', step: 'fetch', step_status: 'failed', package_id: 'unknown-package' }),
       expect.objectContaining({ event: 'tracking_sync_completed', outcome: 'error', package_id: 'unknown-package' }),
     ]));
-    expect(JSON.stringify(logs)).not.toContain('TEST1234');
   });
 
   it('keeps tracking operational when the private audit store is unavailable', async () => {

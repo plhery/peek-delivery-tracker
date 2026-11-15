@@ -36,21 +36,23 @@ describe('typo candidates', () => {
     expect(typoCandidate('JJDA00123456789')).toBeNull();
   });
 
-  it('logs and counts the checksum, carrier, origin and first check, never the number', () => {
+  it('logs and counts the checksum, carrier, origin and first check, and logs the number', () => {
     const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const counted = vi.spyOn(metrics, 'recordTypoCandidate').mockImplementation(() => undefined);
     const typed = doubled(`RR${s10('12345678')}FR`, 5);
+    const answered = doubled(`CP${s10('12345678')}DE`, 5);
     noteTypoCandidate(typed, 'lookup', 'unanswered');
     noteTypoCandidate('RR1234567890FR', 'account', 'unanswered');
-    noteTypoCandidate(doubled(`CP${s10('12345678')}DE`, 5), 'lookup', 'answered');
+    noteTypoCandidate(answered, 'lookup', 'answered');
     expect(counted.mock.calls).toEqual([['s10', 'la-poste', 'lookup', 'unanswered'], ['s10', 'dhl', 'lookup', 'answered']]);
     expect(log).toHaveBeenCalledTimes(2);
     const lines = log.mock.calls.map(([line]) => JSON.parse(String(line)));
     expect(lines).toEqual([
-      { timestamp: expect.any(String), level: 'info', event: 'typo_candidate', checksum: 's10', carrier: 'la-poste', origin: 'lookup', first_check: 'unanswered' },
-      { timestamp: expect.any(String), level: 'info', event: 'typo_candidate', checksum: 's10', carrier: 'dhl', origin: 'lookup', first_check: 'answered' },
+      { timestamp: expect.any(String), level: 'info', event: 'typo_candidate', tracking_number: typed, checksum: 's10', carrier: 'la-poste',
+        origin: 'lookup', first_check: 'unanswered', number_pattern: expect.any(String) },
+      { timestamp: expect.any(String), level: 'info', event: 'typo_candidate', tracking_number: answered, checksum: 's10', carrier: 'dhl',
+        origin: 'lookup', first_check: 'answered', number_pattern: expect.any(String) },
     ]);
-    for (const [line] of log.mock.calls) expect(String(line)).not.toMatch(/\d{9}/);
   });
 
   it('never lets telemetry fail a check', () => {

@@ -32,10 +32,15 @@ type PostcodeOutcome = 'accepted' | 'refused' | 'limited' | 'unavailable' | 'not
 
 /**
  * Logs how an added postcode ended, with the carrier once the link asked for
- * it. The link, the number and the postcode never go in the log.
+ * it, and the number and the postcode once the carrier was asked. The link, a
+ * capability, stays out.
  */
-function recordPostcode(outcome: PostcodeOutcome, carrier: string | undefined, requestId?: string): void {
-  logOperationalEvent('parcel_link_postcode', { request_id: requestId, carrier, outcome });
+function recordPostcode(outcome: PostcodeOutcome, carrier: string | undefined, requestId?: string,
+  parcel?: { trackingNumber: string; postcode: string }): void {
+  logOperationalEvent('parcel_link_postcode', {
+    request_id: requestId, carrier, outcome,
+    ...(parcel ? { tracking_number: parcel.trackingNumber, postcode: parcel.postcode } : {}),
+  });
 }
 
 function secondsUntil(time: number): string {
@@ -84,24 +89,25 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
       values.dpdPostcodeCountry, context.request.signal);
     if (check.outcome === 'refused') {
       settled = true;
-      recordPostcode('refused', carrier, context.requestId);
+      recordPostcode('refused', carrier, context.requestId, { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
       // After several wrong postcodes the carrier takes none for a while, the right one included.
       return check.retryAfterMs
         ? json({ error: 'The carrier takes no postcode for now' }, 429, { 'Retry-After': secondsUntil(Date.now() + check.retryAfterMs) })
         : json({ error: 'The carrier does not have the parcel for this postcode' }, 422);
     }
     if (check.outcome === 'unavailable') {
-      recordPostcode('unavailable', carrier, context.requestId);
+      recordPostcode('unavailable', carrier, context.requestId, { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
       return json({ error: 'The carrier could not be asked. Try again later.' }, 503);
     }
 
     const filed = await service.fileParcelLinkPostcode(linkId, keyHash!, values.carrier, values.dpdPostcode);
     if (filed === null || filed === 'not_asked') {
-      recordPostcode(filed === null ? 'unknown' : 'not_asked', carrier, context.requestId);
+      recordPostcode(filed === null ? 'unknown' : 'not_asked', carrier, context.requestId,
+        { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
       return filed === null ? json({ error: PARCEL_UNAVAILABLE }, 404) : json({ error: 'No postcode is asked for this parcel' }, 409);
     }
     settled = true;
-    recordPostcode('accepted', carrier, context.requestId);
+    recordPostcode('accepted', carrier, context.requestId, { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
     try {
       // A parcel this postcode files for the first time keeps its country; one filed before keeps its own.
       const write = filed.created ? postcodeCountryWrite(filed.package, values.dpdPostcodeCountry) : null;

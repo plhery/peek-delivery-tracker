@@ -1,7 +1,8 @@
 import 'server-only';
 
 import type { ErrorReportsConfig } from '../lib/errorReportsConfig';
-import { HttpError, noContent } from './api';
+import { isIP } from 'node:net';
+import { clientIp, HttpError, noContent } from './api';
 import { errorType, logOperationalEvent, resolveSentryRelease } from './observability';
 import { RateLimiter } from './rateLimit';
 
@@ -86,9 +87,48 @@ function envelopeDsn(envelope: Buffer): unknown {
 }
 
 /**
+ * The envelope with the browser's address as the user's of each event that names none: Sentry sees
+ * the site's address only. An item that does not parse goes on as it came.
+ */
+export function withClientAddress(envelope: Buffer, ip: string): Buffer {
+  if (!isIP(ip)) return envelope;
+  const parts: Buffer[] = [];
+  let offset = envelope.indexOf(10);
+  if (offset < 0) return envelope;
+  parts.push(envelope.subarray(0, offset + 1));
+  offset += 1;
+  while (offset < envelope.length) {
+    const headerEnd = envelope.indexOf(10, offset);
+    if (headerEnd < 0) { parts.push(envelope.subarray(offset)); break; }
+    let header: { type?: unknown; length?: unknown };
+    try { header = JSON.parse(envelope.subarray(offset, headerEnd).toString('utf8')) as typeof header; } catch { return envelope; }
+    const start = headerEnd + 1;
+    const end = typeof header.length === 'number' ? start + header.length : (() => {
+      const newline = envelope.indexOf(10, start);
+      return newline < 0 ? envelope.length : newline;
+    })();
+    let payload = envelope.subarray(start, end);
+    if (header.type === 'event') {
+      try {
+        const event = JSON.parse(payload.toString('utf8')) as { user?: Record<string, unknown> };
+        if (!event.user?.ip_address || event.user.ip_address === '{{auto}}') {
+          event.user = { ...event.user, ip_address: ip };
+          payload = Buffer.from(JSON.stringify(event), 'utf8');
+          if (typeof header.length === 'number') header = { ...header, length: payload.length };
+        }
+      } catch { /* sent as it came */ }
+    }
+    parts.push(Buffer.from(`${JSON.stringify(header)}\n`, 'utf8'), payload, Buffer.from('\n', 'utf8'));
+    offset = end + 1;
+  }
+  return Buffer.concat(parts);
+}
+
+/**
  * Passes a browser's error report on to the server's own Sentry project, and
- * nowhere else. The browser's address, cookies and headers stay here. Sentry's
- * answer to an envelope it limits goes back, so the browser's SDK waits.
+ * nowhere else, with the browser's address as its user's. Its cookies and headers
+ * stay here. Sentry's answer to an envelope it limits goes back, so the browser's
+ * SDK waits.
  */
 export async function forwardBrowserErrors(
   request: Request,
@@ -111,7 +151,7 @@ export async function forwardBrowserErrors(
     response = await send(target.envelope, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-sentry-envelope' },
-      body: new Uint8Array(envelope),
+      body: new Uint8Array(withClientAddress(envelope, clientIp(request))),
       signal: AbortSignal.timeout(5_000),
     });
   } catch (error) {

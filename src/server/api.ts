@@ -282,12 +282,15 @@ function logRequest(
   startedAt: number,
   error?: unknown,
   expected = false,
+  userId?: string,
 ): void {
   const payload: JsonObject = {
     request_id: requestId,
     method: request.method,
     route: routeLabel(request),
     status,
+    ...(userId ? { user_id: userId } : {}),
+    ...(isIP(clientIp(request)) ? { client_ip: clientIp(request) } : {}),
     duration_ms: Math.round((performance.now() - startedAt) * 10) / 10,
   };
   if (error) payload.error_class = error instanceof Error ? error.name : typeof error;
@@ -309,6 +312,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
     const startedAt = performance.now();
     let response: Response;
     let caught: unknown;
+    let userId: string | undefined;
     try {
       const token = bearerToken(request);
       let user: SupabaseUser | null = null;
@@ -378,6 +382,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
           }
           throw error;
         }
+        userId = user.id;
         const policy = ratePolicy(request.method, new URL(request.url).pathname);
         retryAfter = limiters.account.retryAfter(`${user.id}:${policy.bucket}`, {
           limit: policy.limit,
@@ -427,7 +432,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
       headers,
     });
     if (!options.quiet || finalized.status >= 400) {
-      logRequest(request, requestId, finalized.status, startedAt, caught, expectedFailures.has(response));
+      logRequest(request, requestId, finalized.status, startedAt, caught, expectedFailures.has(response), userId);
     }
     if (caught && finalized.status >= 500) {
       captureOperationalError(caught, {
@@ -436,6 +441,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
         requestId,
         route: routeLabel(request),
         method: request.method,
+        userId,
         withoutRequest: options.capability,
       });
     }

@@ -163,6 +163,17 @@ describe('API request boundaries', () => {
     expect(requests(errors.mock.calls)).toEqual([['error', 503], ['error', 500]]);
   });
 
+  it('logs the client\'s address with each request behind a trusted proxy', async () => {
+    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
+    const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    await apiRoute(async () => json({ ok: true }), { authenticated: false, loadService: false })(
+      new NextRequest('https://delivery.example/api/example', { headers: { 'cf-connecting-ip': '203.0.113.7' } }),
+      { params: Promise.resolve({}) },
+    );
+    expect(output.mock.calls.map(([line]) => JSON.parse(String(line))).find((line) => line.event === 'http_request'))
+      .toMatchObject({ status: 200, client_ip: '203.0.113.7' });
+  });
+
   it('counts an IPv6 client as its /64 and every other address as itself', () => {
     expect(clientNetwork('198.51.100.7')).toBe('198.51.100.7');
     expect(clientNetwork('::ffff:198.51.100.7')).toBe('198.51.100.7');

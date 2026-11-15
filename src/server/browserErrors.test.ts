@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { POST } from '../../app/api/errors/route';
-import { browserErrorReporting, forwardBrowserErrors, sentryProject } from './browserErrors';
+import { browserErrorReporting, forwardBrowserErrors, sentryProject, withClientAddress } from './browserErrors';
 import { RateLimiter } from './rateLimit';
 
 // A made-up project: nothing here reaches Sentry.
@@ -60,17 +60,36 @@ describe('the error report tunnel', () => {
     vi.restoreAllMocks();
   });
 
-  it('passes the browser\'s envelope on to the project, without the browser\'s address or cookies', async () => {
+  it('passes the browser\'s envelope on to the project, with the browser\'s address as the user\'s and without its cookies', async () => {
     const send = vi.fn(async () => new Response('{}', { status: 200 }));
     vi.stubGlobal('fetch', send);
     const body = envelope();
-    const response = await POST(report(body, { cookie: 'session=secret', 'x-forwarded-for': '203.0.113.9' }), none);
+    const request = report(body, { cookie: 'session=secret' });
+    const ip = request.headers.get('cf-connecting-ip')!;
+    const response = await POST(request, none);
     expect(response.status).toBe(204);
     expect(send).toHaveBeenCalledTimes(1);
     const [address, init] = send.mock.calls[0] as unknown as [string, RequestInit];
     expect(address).toBe('https://o1.ingest.example.test/api/42/envelope/');
     expect(init.headers).toEqual({ 'Content-Type': 'application/x-sentry-envelope' });
-    expect(Buffer.from(init.body as Uint8Array).toString('utf8')).toBe(body);
+    const sent = Buffer.from(init.body as Uint8Array).toString('utf8');
+    const lines = body.split('\n');
+    expect(sent.split('\n').slice(0, 2)).toEqual(lines.slice(0, 2));
+    expect(JSON.parse(sent.split('\n')[2]!)).toEqual({ ...JSON.parse(lines[2]!), user: { ip_address: ip } });
+    expect(sent).not.toContain('secret');
+  });
+
+  it('gives the address to each event that names none, and keeps other items and their lengths readable', () => {
+    const event = JSON.stringify({ event_id: 'e', user: { id: 'u' } });
+    const attachment = 'line one\nline two';
+    const attachmentHeader = JSON.stringify({ type: 'attachment', length: Buffer.byteLength(attachment) });
+    const input = Buffer.from([JSON.stringify({ dsn }), JSON.stringify({ type: 'event', length: Buffer.byteLength(event) }), event,
+      attachmentHeader, attachment].join('\n'));
+    const lines = withClientAddress(input, '203.0.113.9').toString('utf8').split('\n');
+    expect(JSON.parse(lines[2]!)).toEqual({ event_id: 'e', user: { id: 'u', ip_address: '203.0.113.9' } });
+    expect(JSON.parse(lines[1]!)).toEqual({ type: 'event', length: Buffer.byteLength(lines[2]!) });
+    expect(lines.slice(3).join('\n')).toBe(`${attachmentHeader}\n${attachment}\n`);
+    expect(withClientAddress(input, 'unknown')).toBe(input);
   });
 
   it('forwards nothing for another project, or for what is no envelope', async () => {

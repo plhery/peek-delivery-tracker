@@ -191,9 +191,9 @@ describe('an answer through a link', () => {
     const text = JSON.stringify(stored);
     for (const secret of [linkId, packageId, '192.0.2', 'SECRET', '9999', 'Private']) expect(text).not.toContain(secret);
     expect(counted).toHaveBeenCalledExactlyOnceWith('wrong', 'link', 'ios', 'stored');
-    // The log names the answer and the carrier, never the number or the words.
+    // The log names the number, the answer and the carrier; the words stay in the table.
     const event = logged.mock.calls.find((call: unknown[]) => call[0] === 'parcel_feedback');
-    expect(event?.[1]).toEqual({ answer: 'wrong', reasons: 'status,steps', carrier: 'dpd', asked: 'back', via: 'link', app: 'ios', outcome: 'stored' });
+    expect(event?.[1]).toEqual({ tracking_number: trackingNumber, answer: 'wrong', reasons: 'status,steps', carrier: 'dpd', asked: 'back', via: 'link', app: 'ios', outcome: 'stored' });
   });
 
   it('names the carrier of a parcel no carrier was found for', async () => {

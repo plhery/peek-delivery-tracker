@@ -250,7 +250,7 @@ describe('looking up a parcel without an account', () => {
     expect(update).toHaveBeenLastCalledWith(packageId, { carrier_data: expect.objectContaining({ lookup_language: 'pl' }) });
   });
 
-  it('stores the phone digits a lookup gives its carrier, and never answers or logs them', async () => {
+  it('stores the phone digits a lookup gives its carrier, and never answers them', async () => {
     allow();
     const create = vi.spyOn(SupabaseServiceClient.prototype, 'createOneOffParcel').mockResolvedValue({
       link: storedLink({ owner: true }), created: true,
@@ -260,8 +260,6 @@ describe('looking up a parcel without an account', () => {
     expect(response.status).toBe(201);
     expect(create).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'j-and-t-mx', phoneDigits: '0472' }), expect.any(String));
     expect(await response.text()).not.toContain('0472');
-    const lines = [...vi.mocked(console.log).mock.calls, ...vi.mocked(console.error).mock.calls].map(([line]) => String(line));
-    for (const line of lines) expect(line).not.toContain('0472');
     // A carrier that reads no phone digits is given none.
     create.mockClear();
     expect((await lookup({ trackingNumber: 'JMX000000000001', carrier: 'dhl', phoneDigits: '0472' }, nextIp())).status).toBe(400);
@@ -480,10 +478,10 @@ describe('looking up a parcel without an account', () => {
     expect(claim.mock.calls.at(-1)![0].bucket).not.toBe(claim.mock.calls[0]![0].bucket);
   });
 
-  it('logs how each lookup ended and where a failed one stopped, never with its number', async () => {
+  it('logs how each lookup ended and where a failed one stopped, with its number once it was read', async () => {
     const logged = () => [...vi.mocked(console.log).mock.calls, ...vi.mocked(console.error).mock.calls].map(([line]) => String(line));
     const ended = () => logged().map((line) => JSON.parse(line)).filter((line) => line.event === 'public_lookup')
-      .map(({ outcome, reason, status, error_class }) => ({ outcome, reason, status, error_class }));
+      .map(({ outcome, reason, status, error_class, tracking_number }) => ({ outcome, reason, status, error_class, tracking_number }));
     const claim = allow();
     const create = store();
     expect((await lookup({ trackingNumber })).status).toBe(201);
@@ -495,13 +493,12 @@ describe('looking up a parcel without an account', () => {
     claim.mockResolvedValueOnce({ allowed: false, scope: 'bucket', overallUsed: 0 });
     expect((await lookup({ trackingNumber })).status).toBe(429);
     expect(ended()).toEqual([
-      { outcome: 'created' },
+      { outcome: 'created', tracking_number: trackingNumber },
       { outcome: 'failed', reason: 'input', status: 400, error_class: 'HttpError' },
-      { outcome: 'failed', reason: 'amazon', status: 503, error_class: 'HttpError' },
-      { outcome: 'failed', reason: 'saving', error_class: 'SupabaseError' },
-      { outcome: 'limited_daily' },
+      { outcome: 'failed', reason: 'amazon', status: 503, error_class: 'HttpError', tracking_number: trackingNumber },
+      { outcome: 'failed', reason: 'saving', error_class: 'SupabaseError', tracking_number: trackingNumber },
+      { outcome: 'limited_daily', tracking_number: trackingNumber },
     ]);
-    for (const line of logged()) expect(line).not.toContain(trackingNumber);
   });
 
   it('counts every client together when the proxy headers are not trusted', async () => {
@@ -938,14 +935,15 @@ describe('the postcode another carrier asks for', () => {
     expect(lines.map((line) => [line.outcome, line.carrier])).toEqual([...Array(5).fill(['unknown', undefined]), ['not_asked', undefined]]);
   });
 
-  it('never logs the link, the key, the number or the postcode', async () => {
+  it('logs the number and the postcode, never the link or the key', async () => {
     claim();
     check({ outcome: 'refused' });
     await add({ carrier: 'dhl', postcode: heldPostcode });
     const lines = [...vi.mocked(console.log).mock.calls, ...vi.mocked(console.error).mock.calls].map(([line]) => String(line));
-    expect(lines.some((line) => line.includes('parcel_link_postcode'))).toBe(true);
+    expect(lines.map((line) => JSON.parse(line)).find((line) => line.event === 'parcel_link_postcode'))
+      .toMatchObject({ outcome: 'refused', carrier: 'dhl', tracking_number: heldNumber, postcode: heldPostcode });
     for (const line of lines) {
-      for (const secret of [linkId, ownerKey, keyHash, heldNumber, heldPostcode]) expect(line).not.toContain(secret);
+      for (const secret of [linkId, ownerKey, keyHash]) expect(line).not.toContain(secret);
     }
   });
 

@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 14 November 2026
+Effective: 15 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -56,22 +56,22 @@ analytics.
 - Technical request data processed by the hosting, reverse-proxy, Auth, and mail
   infrastructure, such as IP address, timestamp, and user agent.
 - Server diagnostic logs and Sentry error reports include parcel tracking
-  numbers, carrier, synchronization outcomes, and error details to diagnose
-  tracking failures. Sentry reports leave out the body, the query and the IP
-  address of the request that failed. They may retain request and response
-  headers, addresses shortened to their path, and bounded excerpts of carriers'
-  responses, including personal data present in them.
+  numbers, postcodes and phone digits given to carriers, carrier,
+  synchronization outcomes, and error details to diagnose tracking failures.
+  A Sentry report of a failed request also keeps its address, query, headers
+  and body, your IP address and your account's id. Reports and logs may retain
+  carriers' requests and responses, including personal data present in them.
+  Passwords, keys, tokens, sessions and cookies are filtered out.
 - A review list of tracking numbers Peek could not follow well: a number no
   carrier was found for or several carriers could own, including one you
   checked without saving it, or a carrier Peek reaches only through a tracking
   service. Each entry keeps the number, the carriers it was checked against and
   how each check went, and no account. It is used to add and fix carriers.
 - When the web app's own code fails in your browser, a Sentry error report: the
-  error's message and stack, the page's address without its query, its fragment
-  or a parcel link's id, and your browser's user agent. It goes through the
-  service's own server, without your IP address, cookies or account, and with
-  anything shaped like a tracking number, a key or an email address taken out
-  of the message.
+  error's message and stack, the page's address with its query but without its
+  fragment or a parcel link's id, your browser's user agent and your IP
+  address. It goes through the service's own server, without your cookies, and
+  with keys and tokens taken out of the message.
 
 ## Why and where data is processed
 

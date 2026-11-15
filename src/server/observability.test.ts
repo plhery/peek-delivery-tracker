@@ -46,7 +46,7 @@ describe('structured operational logs', () => {
     expect(payload).toHaveProperty('authorization');
   });
 
-  it('names a parcel by the shape of its number, wherever the line would hold a number', () => {
+  it('names a parcel by its number, with the number\'s shape to group by', () => {
     const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
     logOperationalEvent('tracking_sync_step', {
@@ -59,9 +59,8 @@ describe('structured operational logs', () => {
     logOperationalEvent('tracking_routing', { tracking_number: null, decision: 'fresher_provider_found' });
 
     const [step, routing] = output.mock.calls.map(([line]) => String(line));
-    expect(JSON.parse(step!)).toEqual(expect.objectContaining({ package_id: 'private-package', number_pattern: '4 letters + 4 digits',
-      error_message: 'No parcel 4 letters + 4 digits, see 4 letters + 4 digits' }));
-    expect(step).not.toMatch(/tracking_number|support_lookup_number|test9012|hand7305/i);
+    expect(JSON.parse(step!)).toEqual(expect.objectContaining({ package_id: 'private-package', tracking_number: 'TEST9012',
+      support_lookup_number: 'HAND7305', number_pattern: '4 letters + 4 digits', error_message: 'No parcel test9012, see hand7305' }));
     expect(JSON.parse(routing!)).not.toHaveProperty('number_pattern');
   });
 });
@@ -98,7 +97,7 @@ describe('why a lookup failed', () => {
     body_read: read, bytes_inspected: body?.length ?? 0, body_signals: ['access_denied'], body_excerpt: body,
   });
 
-  it('logs the refused response from a wrapped error with identifiers and access values masked', () => {
+  it('logs the refused response from a wrapped error, readable and without access values', () => {
     const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const body = '<title>Site unavailable</title><style>.hidden { color: red }</style>'
       + '<script>const token="scriptsecret"</script><svg>unhelpful image</svg>'
@@ -111,19 +110,18 @@ describe('why a lookup failed', () => {
     expect(payload).toMatchObject({ upstream_status: 403, upstream_content_type: 'text/html',
       upstream_body_read: 'truncated', upstream_body_signals: 'access_denied' });
     expect(payload.upstream_body_excerpt).toContain('Site unavailable');
-    expect(payload.upstream_body_excerpt).toContain('[AB + 9 digits + CD]');
-    expect(payload.upstream_body_excerpt).toContain('[redacted]');
-    expect(payload.upstream_body_excerpt).toContain('https://carrier.example');
-    for (const hidden of ['AB123', '&#49;', '%31', '\\u0031', 'scriptsecret', 'bodysecret', 'apikeysecret',
-      'username', 'password', 'private-capability', 'session=secret', 'unhelpful image', '.hidden']) {
+    expect(payload.upstream_body_excerpt).toContain('Incident for AB123456789CD, AB123456789CD and AB123456789CD.');
+    expect(payload.upstream_body_excerpt).toContain('{"token":"[Filtered]","api_key":"[Filtered]","number":"AB123456789CD"}');
+    expect(payload.upstream_body_excerpt).toContain('https://carrier.example/private-capability?session=[Filtered]');
+    for (const hidden of ['&#49;', '%31', '\\u0031', 'scriptsecret', 'bodysecret', 'apikeysecret',
+      'username', 'password', 'session=secret', 'unhelpful image', '.hidden']) {
       expect(payload.upstream_body_excerpt).not.toContain(hidden);
     }
   });
 
-  it('masks before the 500-character boundary and preserves failure metadata when no body was read', () => {
+  it('keeps 500 characters of the excerpt and preserves failure metadata when no body was read', () => {
     const details = errorDetails(refused('a'.repeat(490) + ' AB123456789CD rest'));
-    expect(String(details.upstream_body_excerpt)).toHaveLength(500);
-    expect(details.upstream_body_excerpt).not.toContain('AB123');
+    expect(details.upstream_body_excerpt).toBe(`${'a'.repeat(490)} AB1234567`);
     const unread = errorDetails(refused(undefined, 'timed_out'));
     expect(unread).toMatchObject({ upstream_status: 403, upstream_body_read: 'timed_out' });
     expect(unread).not.toHaveProperty('upstream_body_excerpt');
@@ -137,7 +135,7 @@ describe('why a lookup failed', () => {
     expect(details.upstream_body_excerpt).not.toContain('secret_without_closing_tag');
   });
 
-  it('gives the reason, the wording and each cause, with no address query and no word that could be a number', () => {
+  it('gives the reason, the wording and each cause, with their numbers and without access values', () => {
     const cause = new TypeError('fetch failed for https://carrier.example/track/AB123456789CD?session=secret', {
       cause: new Error('socket hang up on 1234567'),
     });
@@ -145,20 +143,17 @@ describe('why a lookup failed', () => {
     expect(errorDetails(error)).toEqual({
       error_reason: 'session_rejected',
       error_message: 'City Express did not open an anonymous session',
-      error_cause: 'TypeError: fetch failed for https://carrier.example/track/:id <- Error: socket hang up on [7 digits]',
+      error_cause: 'TypeError: fetch failed for https://carrier.example/track/AB123456789CD?session=[Filtered] <- Error: socket hang up on 1234567',
     });
     expect(errorDetails(new Error('Shipment AB123456789CD was not listed, HTTP 502'))).toEqual({
-      error_reason: undefined, error_message: 'Shipment [AB + 9 digits + CD] was not listed, HTTP 502', error_cause: undefined,
+      error_reason: undefined, error_message: 'Shipment AB123456789CD was not listed, HTTP 502', error_cause: undefined,
     });
     expect(errorDetails('not an error')).toEqual({});
   });
 
-  it('keeps a provider\'s name, which looks like a number, and still masks the numbers beside it', () => {
-    expect(errorDetails(new Error('17TRACK has no usable shipment history for AB123456789CD'))).toMatchObject({
-      error_message: '17TRACK has no usable shipment history for [AB + 9 digits + CD]',
-    });
-    expect(errorDetails(new Error('Ship24 and Track718 found nothing; 17track saw 1234567'))).toMatchObject({
-      error_message: 'Ship24 and Track718 found nothing; 17track saw [7 digits]',
+  it('filters an authorization, an access value and Peek\'s own tokens out of the wording', () => {
+    expect(errorDetails(new Error('Refused Bearer abc.def-1 with api_key=k3y for peek_at_AbC-12, number=AB123456789CD'))).toMatchObject({
+      error_message: 'Refused Bearer [Filtered] with api_key=[Filtered] for [Filtered], number=AB123456789CD',
     });
   });
 });

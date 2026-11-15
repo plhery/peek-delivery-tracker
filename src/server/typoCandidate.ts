@@ -56,13 +56,15 @@ export function typoCandidate(trackingNumber: string): TypoCandidate | null {
 /**
  * Logs and counts the typo candidate of a number by checksum, carrier, whether an account or a
  * lookup added it, and its first check: `unanswered` when it failed or found nothing, `answered`
- * when it found scans all the same. Never the number.
+ * when it found scans all the same. The log line has the number as typed; the count never does.
  */
 export function noteTypoCandidate(trackingNumber: string, origin: 'account' | 'lookup', firstCheck: 'answered' | 'unanswered'): void {
   try {
     const candidate = typoCandidate(trackingNumber);
     if (!candidate) return;
     recordTypoCandidate(candidate.checksum, candidate.carrier, origin, firstCheck);
-    logOperationalEvent('typo_candidate', { checksum: candidate.checksum, carrier: candidate.carrier, origin, first_check: firstCheck });
+    logOperationalEvent('typo_candidate', {
+      tracking_number: trackingNumber, checksum: candidate.checksum, carrier: candidate.carrier, origin, first_check: firstCheck,
+    });
   } catch { /* Telemetry must never change a tracking result. */ }
 }

@@ -95,6 +95,7 @@ export async function keepParcelFeedback(
   });
   recordParcelFeedback(values.answer, via, values.app, outcome);
   logOperationalEvent('parcel_feedback', {
+    tracking_number: String(row.tracking_number ?? ''),
     answer: values.answer,
     reasons: values.reasons.join(',') || null,
     carrier,

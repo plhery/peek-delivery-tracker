@@ -24,17 +24,24 @@ export const runtime = 'nodejs';
 /** How far a failed lookup got: its input, the browser proof, the daily allowance, Amazon or the database. */
 type LookupStage = 'input' | 'verification' | 'allowance' | 'amazon' | 'saving';
 
-/** Counts a lookup and logs how it ended. The number never goes in the log. */
-function recordLookup(outcome: PublicLookupOutcome, requestId?: string): void {
+/** Counts a lookup and logs how it ended, with its number and carrier once they were read. */
+function recordLookup(outcome: PublicLookupOutcome, requestId?: string, parcel?: Parcel): void {
   recordPublicLookup(outcome);
-  logOperationalEvent('public_lookup', { request_id: requestId, outcome });
+  logOperationalEvent('public_lookup', { request_id: requestId, outcome, ...parcel });
 }
 
-async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Promise<Response> {
+/** The number and carrier of a lookup, as its log line names them. */
+interface Parcel {
+  tracking_number?: string;
+  carrier?: string;
+}
+
+async function lookUp(context: ApiContext, progress: { stage: LookupStage; parcel?: Parcel }): Promise<Response> {
   const service = requireService(context);
   // The name stays on the device: only the number, the carrier and its inputs are read.
   const { raw, value: body } = await readJsonBody(context.request);
   const values = newPackageValues({ ...body, label: '' }, lookupCountry(context.request, body.lookupCountryHint));
+  progress.parcel = { tracking_number: values.trackingNumber, carrier: values.carrier };
   progress.stage = 'verification';
   await verifyLookupRequest(context.request, service, raw);
 
@@ -43,7 +50,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Pr
   const allowance = await claimLookup(service, clientIp(context.request), now);
   if (!allowance.allowed) {
     recordLookup(allowance.scope === 'global' ? 'limited_global'
-      : allowance.scope === 'network' ? 'limited_network' : 'limited_daily', context.requestId);
+      : allowance.scope === 'network' ? 'limited_network' : 'limited_daily', context.requestId, progress.parcel);
     // `scope` lets a client offer signing in instead of a countdown to midnight.
     return json(
       { error: 'No lookups are left for today. Sign in to keep going.', scope: 'daily' },
@@ -62,7 +69,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Pr
     await rememberLookupCountry(service, created.package, context.request, body.lookupCountryHint, values.dpdPostcodeCountry, body.language);
   }
   await settleTypedSupportCases(service, values.trackingNumber);
-  recordLookup(created.created ? 'created' : 'reused', context.requestId);
+  recordLookup(created.created ? 'created' : 'reused', context.requestId, progress.parcel);
   try {
     await service.enqueueSyncJob({ packageId: String(created.package.id), reason: 'added' });
     wakeSyncWorker();
@@ -78,13 +85,13 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Pr
  * this once, the owner key: the server keeps only its hash.
  */
 export const POST = apiRoute(async (context) => {
-  const progress = { stage: 'input' as LookupStage };
+  const progress: { stage: LookupStage; parcel?: Parcel } = { stage: 'input' };
   try {
     return await lookUp(context, progress);
   } catch (error) {
     // A refusal names its status; any other failure is named by its class.
     logOperationalEvent('public_lookup', {
-      request_id: context.requestId, outcome: 'failed', reason: progress.stage,
+      request_id: context.requestId, outcome: 'failed', reason: progress.stage, ...progress.parcel,
       status: error instanceof HttpError ? error.status : undefined,
       error_class: error instanceof Error ? error.name : typeof error,
     });

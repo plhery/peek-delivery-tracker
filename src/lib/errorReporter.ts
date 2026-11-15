@@ -13,6 +13,7 @@ import {
 } from '@sentry/browser';
 import type { PendingReport } from './errorReports';
 import type { ErrorReportsConfig } from './errorReportsConfig';
+import { scrubAddress, scrubValue, withoutCredentials } from './credentials';
 
 /** Past this many reports a page is broken in a way the first ones already tell. */
 const MAX_REPORTS = 5;
@@ -32,43 +33,11 @@ export const IGNORED_ERRORS: RegExp[] = [
 
 /** Where browser extensions' code lives, in each browser. */
 const EXTENSION = /^(?:[a-z]+(?:-web)?-extension|webkit-masked-url|extensions?|resource):/i;
-const ADDRESS = /\b[a-z][a-z\d+.-]*:\/\/[^\s"'`<>\\)]+/gi;
 const PATH = /(^|[\s"'`(=])(\/[^\s"'`<>\\)]*)/g;
-const EMAIL = /[^\s@"'`<>()]+@[^\s@"'`<>()]+\.[a-z]{2,}/gi;
-const RUN = /[\w-]{8,}/g;
 
-/**
- * An address without its query and fragment, where sign-in codes, email
- * tokens and the names in parcel links travel. Parcel link ids, and any
- * segment of six characters or more with a digit, read `:id`; the site's
- * scripts keep their names, which their source maps are found by.
- */
-export function scrubAddress(address: string): string {
-  const origin = /^[a-z][a-z\d+.-]*:\/\/[^/?#]*/i.exec(address)?.[0] ?? '';
-  const path = address.slice(origin.length).split(/[?#]/, 1)[0]!;
-  if (path.startsWith('/_next/')) return origin + path;
-  return origin + path
-    .replace(/^\/(p|i)\/[^/]+/, '/$1/:id')
-    .replace(/\/parcels\/[^/]+/, '/parcels/:id')
-    .split('/')
-    .map((segment) => (segment.length >= 6 && /\d/.test(segment) ? ':id' : segment))
-    .join('/');
-}
-
-/**
- * Text with its addresses scrubbed, and without email addresses or anything
- * shaped like a tracking number or a key: a run of eight characters or more
- * with four digits, of twenty or more with one, or of thirty-two or more.
- */
+/** Text with the access values of its addresses and paths filtered (credentials.ts). */
 export function scrubText(text: string): string {
-  return text
-    .replace(EMAIL, '[Filtered]')
-    .replace(ADDRESS, scrubAddress)
-    .replace(PATH, (_, before: string, path: string) => before + scrubAddress(path))
-    .replace(RUN, (run) => {
-      const digits = run.replace(/\D/g, '').length;
-      return digits >= 4 || (digits > 0 && run.length >= 20) || run.length >= 32 ? '[Filtered]' : run;
-    });
+  return withoutCredentials(text).replace(PATH, (_, before: string, path: string) => before + scrubAddress(path));
 }
 
 function frames(event: Event): StackFrame[] {
@@ -84,35 +53,19 @@ export function reportable(event: Event, origin: string): boolean {
   return files.some((file) => file.startsWith(`${origin}/_next/`)) && !files.some((file) => EXTENSION.test(file));
 }
 
-/** What a report keeps: the error, its stack, the page's address and the browser. */
+/**
+ * What a report keeps: what the SDK gathered, the error, its stack, the page's address and the
+ * browser, with access values filtered and Peek's capability ids left out of addresses.
+ */
 export function scrubEvent<T extends Event>(event: T): T {
-  const userAgent = event.request?.headers?.['User-Agent'];
+  const scrubbed = scrubValue(event);
   return {
-    ...event,
-    message: event.message && scrubText(event.message),
-    logentry: undefined,
-    breadcrumbs: undefined,
-    user: undefined,
-    extra: undefined,
-    transaction: undefined,
-    request: event.request && {
-      url: event.request.url && scrubAddress(event.request.url),
-      ...(userAgent ? { headers: { 'User-Agent': userAgent } } : {}),
-    },
-    exception: event.exception && {
-      ...event.exception,
-      values: event.exception.values?.map((value) => ({
-        ...value,
-        value: value.value && scrubText(value.value),
-        stacktrace: value.stacktrace && {
-          ...value.stacktrace,
-          frames: value.stacktrace.frames?.map((frame) => ({
-            ...frame,
-            filename: frame.filename && scrubAddress(frame.filename),
-            abs_path: frame.abs_path && scrubAddress(frame.abs_path),
-          })),
-        },
-      })),
+    ...scrubbed,
+    message: scrubbed.message && scrubText(scrubbed.message),
+    transaction: scrubbed.transaction && scrubText(scrubbed.transaction),
+    exception: scrubbed.exception && {
+      ...scrubbed.exception,
+      values: scrubbed.exception.values?.map((value) => ({ ...value, value: value.value && scrubText(value.value) })),
     },
   };
 }
@@ -144,13 +97,8 @@ export function startErrorReports(
     integrations: [eventFiltersIntegration(), linkedErrorsIntegration(), dedupeIntegration(), httpContextIntegration()],
     allowUrls: [new RegExp(`^${origin.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/_next/`)],
     ignoreErrors: IGNORED_ERRORS,
-    dataCollection: {
-      userInfo: false,
-      cookies: false,
-      httpBodies: [],
-      urlQueryParams: false,
-      httpHeaders: { request: { allow: ['User-Agent'] }, response: false },
-    },
+    // The browser's address is the user's: the site adds it on the way (browserErrors.ts). Cookies hold sessions only.
+    dataCollection: { userInfo: true, cookies: false, urlQueryParams: true, httpHeaders: { request: true, response: false } },
     sendClientReports: false,
     maxBreadcrumbs: 0,
     beforeSend(event) {

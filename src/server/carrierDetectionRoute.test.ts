@@ -298,11 +298,10 @@ it('asks the next five carriers only when none of the first five knows the numbe
   const logged = vi.spyOn(observability, 'logOperationalEvent');
   expect(await (await request(number)).json()).toEqual({ trackingNumber: number, carrier: sixth, asked: candidates });
   expect(asked()).toEqual(candidates);
-  // The line names the carriers asked, in order, and never the number.
+  // The line names the number and the carriers asked, in order.
   expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({
-    asked: candidates.length, asked_carriers: candidates.join(','), second_batch: true, unanswered_carriers: '',
+    tracking_number: number, asked: candidates.length, asked_carriers: candidates.join(','), second_batch: true, unanswered_carriers: '',
   }));
-  expect(JSON.stringify(logged.mock.calls.filter(([event]) => event === 'carrier_recognition'))).not.toContain(number);
   // Each batch has three seconds of its own.
   expect(recognize.mock.calls.map(([, , context]) => context.budgetMs)).toEqual(candidates.map(() => 3_000));
 

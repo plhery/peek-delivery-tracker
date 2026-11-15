@@ -36,8 +36,8 @@ from error reports because their headers can carry verification credentials.
 
 Each carrier refresh leaves a trace in three places:
 
-1. **Logs**: one-line JSON describing the control flow, naming the parcel by its id or check
-   and the shape of its number.
+1. **Logs**: one-line JSON describing the control flow, naming the parcel by its number, its
+   id or its check.
 2. **Postgres audit**: private rows with every step and the evidence behind each status
    decision.
 3. **Sentry**: groups the failures someone has to fix: crashes, outages and failing
@@ -52,21 +52,20 @@ error; [Grafana alerts](#grafana-alerts) on what no single error shows.
 
 Failed `tracking_scrape` steps and totals keep an upstream HTTP refusal's status,
 content type, body-read outcome, recognized signals and a body-text excerpt when
-the transport supplied one. The excerpt omits markup, access values and URL paths,
-masks number-like words before truncation, and is limited to 500 characters.
+the transport supplied one. The excerpt omits markup and access values and is limited
+to 500 characters.
 The transport's read limit still applies; a truncated or unreadable body remains
 labelled as such. Logging makes no additional request.
 
-**Privacy.** Logs keep original errors and upstream request/response details but no
-tracking number: a line names its parcel by the shape of its number (`number_pattern`,
-such as `MY + 10 digits + US`), its `package_id` or its check's `attempt_id`, and wherever
-else the line would repeat the number, such as in a carrier's error, it reads as that
-shape. Sentry reports keep the errors and details, name a parcel the same way, shorten
-addresses and leave out the failing request's body, query and client address (see "What
-Sentry reports keep" below). Neither holds the phone digits a parcel keeps for J&T: the apps send
-them in request bodies, the carrier's address loses its query, and the scraper leaves them out
-of its errors and diagnostics. Both survive parcel deletion until retention expires. Restrict access and retention, and sanitize anything
-you share publicly.
+**Privacy.** Logs and Sentry reports carry what a failure needs to be understood, personal
+data included. A line about a parcel holds its `tracking_number`, the number's shape
+(`number_pattern`, such as `MY + 10 digits + US`) to group by, its `package_id` and its
+check's `attempt_id`; errors and upstream requests and replies keep their wording, postcodes
+and the phone digits a parcel keeps for J&T included. Sentry reports also keep the failing
+request's body, query and client address, and the signed-in account's id (see "What Sentry
+reports keep" below). Access values never go: a key, token, password, session, cookie or
+signature reads `[Filtered]` (`src/lib/credentials.ts`). Both survive parcel deletion until
+retention expires. Restrict access and retention, and keep them out of anything public.
 
 Parcel link ids and owner keys are the exception, because holding one is enough to read
 or forget a parcel. Request logs name those routes without the id
@@ -141,7 +140,7 @@ All tables and views here are service-role only.
   check: `ok`, the category of its failure (such as `transport`, `schema` or `not_found`), or
   `not_asked` when the check ran none, as while it waits out an earlier failure, reuses an
   answer of the run or has no adapter. A failed one has `direct_reason` too: the carrier's
-  reason code, or else its error's wording with every number given as its shape, which tells
+  reason code, or else its error's wording, which tells
   apart repeated fallbacks of one kind (`CTT Express returned no tracking scans` from an
   unavailable endpoint). A `fetch` that reused answers another copy of
   its number got earlier in the same scheduled run counts them in `shared_answers`, as it
@@ -743,10 +742,8 @@ Key JSON events:
   in the end stays `success`. These three do not count as a source that showed the label answering without it
   (`scans_withdrawn`).
   An `error` line says why: the carrier's `error_reason` when it gave one, `error_message`,
-  and `error_cause`, the wording of up to three causes. Its wording has no number to mask,
-  so addresses lose their query and number-like path segments, and every word of six
-  letters and digits or more with a digit reads as its shape (`[LX + 9 digits + PL]`),
-  except a universal provider's name (`17TRACK`, `Ship24`), which stays to search by.
+  and `error_cause`, the wording of up to three causes, numbers and addresses included,
+  without access values.
   A `tracking_routing` line is a warning for `transport_fallback`, `provider_blocked`,
   `provider_budget_spent` and `provider_failed`, except a provider's `no_history` answer, which is info. One with an error has its
   `error_type` and, when the carrier gave one, its `error_reason` (such as `parcel_found`
@@ -805,8 +802,9 @@ Key JSON events:
   carrier change took the job during it. `tracking_sync_audit_skipped` (by `attempt_id`):
   an audit write found its rows deleted with the parcel. Neither is a failure;
 - `http_request` (by `request_id`, matching Sentry for server errors): `method`, `status`,
-  `duration_ms` and the endpoint as `route`, the path with each id as `/:id` and a parcel
-  link as `:link` (there is no `path` field). A failed request
+  `duration_ms`, the signed-in account's `user_id`, the client's address as `client_ip`
+  behind a trusted proxy, and the endpoint as `route`, the path with each id as `/:id` and a
+  parcel link as `:link` (there is no `path` field). A failed request
   carries `error_class`; a 502 that wraps an upstream failure also names that failure's
   class in `error_cause`. Health checks (`/health`, `/health/live`) and metric scrapes
   (`/api/metrics`) are logged only when they fail. A 5xx is logged at `error`, except
@@ -814,14 +812,15 @@ Key JSON events:
 - `public_lookup` (by `request_id`): how a lookup without an account ended, as
   `public_lookup_total` counts it, or `failed` with the `reason`, the stage it stopped at:
   `input`, `verification` (the browser proof), `allowance`, `amazon` or `saving`. A
-  refusal adds its `status`; `error_class` names any failure. It never has the number;
+  refusal adds its `status`; `error_class` names any failure. It has the `tracking_number`
+  and the `carrier` once the request was read;
 - `parcel_link_postcode` (by `request_id`): how a postcode the owner of a lookup added
   ended: `accepted`, `refused` (the carrier does not have the parcel for it, or takes none
   for a while), `limited` (the link's tries for the day are spent), `unavailable` (the
   carrier could not be asked), `not_asked` or `unknown` (no such link, or a wrong key). It
-  has the `carrier` once the link asked for that one, never the link, the number or the
-  postcode;
-- `carrier_recognition`: how many carriers the Add sheet's recognition asked and which
+  has the `carrier` once the link asked for that one, the `tracking_number` and the
+  `postcode` once the carrier was asked, and never the link;
+- `carrier_recognition`: the `tracking_number`, how many carriers the Add sheet's recognition asked and which
   (`asked_carriers`, ids in the order asked), whether it asked a `second_batch` because none
   of the first five knew the number, how many knew the number or failed (`unanswered_carriers`
   names those), and what it settled on (a carrier, `choice` or `none`).
@@ -830,7 +829,8 @@ Key JSON events:
   high-confidence detection rule's check digit accepts while the number as typed passes
   none. It has that rule's `checksum` (`s10` before any other), the `carrier` it points to,
   the `origin`, `account` or `lookup`, and the `first_check`: `unanswered` when it failed or
-  found nothing, `answered` when it found scans all the same; never either number. Nothing
+  found nothing, `answered` when it found scans all the same, and the `tracking_number` as
+  typed. Nothing
   is suggested to the reader: it counts how often a "did you mean" would apply;
 - `tracking_redetections_queued`: how many parcels added in the last 30 days were queued for
   a check because a scraper release's catalog now points them to a carrier they never asked
@@ -850,10 +850,10 @@ Key JSON events:
 - `push_dispatch_skipped` (`reason`: `lease_held`): another server, or a dispatch still
   running here, holds the push dispatch lease ([DEPLOYMENT.md](DEPLOYMENT.md)); the scans
   wait for the next dispatch. Expected while a deploy's two containers overlap.
-- `parcel_feedback`: an answer about a parcel, with the `answer`, its `reasons`, the
+- `parcel_feedback`: an answer about a parcel, with its `tracking_number`, the `answer`, its `reasons`, the
   `carrier`, where it was `asked` (`page` or `back`, on the way back from the carrier's
   site), `via` an `account` or a `link`, the `app` and the `outcome` as
-  `parcel_feedback_total` counts it. It never has the number or the reader's words.
+  `parcel_feedback_total` counts it. The reader's words stay in the table.
   `parcel_feedback_forgotten` says how many old `answers` a maintenance pass deleted, and
   `parcel_feedback_maintenance_failed` that it could not run.
 - `tracking_review_forgotten`: how many support `cases` and routing `signals` of numbers no
@@ -893,7 +893,7 @@ provider failure in an `AggregateError` so every cause is visible.
   method and path, without query or ids). A database that does
   not answer (`database_code:unreachable`) fails every write at once and is one issue;
   its events' tags name each write. `attempt_id`,
-  `job_id`, `request_id`, `number_pattern`, `upstream_status`, `database_code` and
+  `job_id`, `request_id`, `tracking_number`, `number_pattern`, `upstream_status`, `database_code` and
   `database_operation` are searchable tags.
 - **Source maps**: the server's stay in its image. The browser's are public, beside the
   scripts; see "Browser error reports" below.
@@ -969,21 +969,25 @@ Request IDs and excerpts don't affect grouping.
 
 ### What Sentry reports keep
 
-A report names its parcel by the shape of its number, in the `number_pattern` tag and the
-operation context. The number itself is replaced by that shape wherever it appears in the
-report, in any case; the log lines among its breadcrumbs hold none. Find a parcel's
-reports through its `attempt_id` or `job_id`.
+A report names its parcel by its number and the number's shape, in the `tracking_number` and
+`number_pattern` tags and the operation context, and an API request's report names the
+signed-in account (`user.id`). Find a parcel's reports by its number, its `attempt_id` or its
+`job_id`.
 
-- **Addresses** anywhere in a report or breadcrumb, the request's and the transaction's
-  included, lose their query and fragment, which can hold keys. A path segment of six
-  characters or more with a digit, other than a uuid, reads `:id`, so a transaction is
-  named after its route.
-- **Error fields** that hold an upstream request or reply, such as `request`, `diagnostics`,
-  `headers`, `body` or `response_body`, or a cookie, token, key or password, read `[Filtered]`
-  in every context but `upstream_http`, through causes and nested errors too.
+- **Access values** read `[Filtered]` anywhere in a report or breadcrumb: a field, header,
+  query parameter or cookie named after a key, token, secret, password, session, signature or
+  cookie, at any depth and through causes and nested errors; the same names in text
+  (`api_key=…`, `"token":"…"`, a hidden form field); a bearer or basic authorization; and
+  Peek's own tokens.
+- **Addresses** stay whole but for their user and password and their fragment, where sign-in
+  tokens travel. A shared parcel's link id and an invite's id read `:id`, and the query of an
+  unsubscribe or invite link is filtered.
+- **Error fields** keep the upstream request and reply the scraper's errors carry (`request`,
+  `diagnostics`), which the scraper strips of credentials; `upstream_http` summarizes them.
 - **Breadcrumbs** drop the console's copy of a log line's arguments; the line itself stays.
-- **Incoming requests** keep their headers, less those Sentry filters, but no body, query
-  or client address (`dataCollection.userInfo` is off).
+- **Incoming requests** keep their address, query, headers, body and the client's address
+  (`dataCollection.userInfo`), less the access values. Cookies hold sessions only and stay
+  out. A route whose address or body carries a capability leaves the request out.
 
 From a report back to its parcel, follow `attempt_id` or `job_id` to Postgres.
 
@@ -1003,22 +1007,22 @@ without a DSN report nothing.
   navigations, scripts that did not load and `ResizeObserver` loops are dropped
   (`IGNORED_ERRORS` in `src/lib/errorReporter.ts`), so is a repeat of the last report,
   and a page sends five reports at most. An error rendered on the server reaches the page with only
-  a `digest`: the server reported it. No tracing, replay, breadcrumbs or user.
+  a `digest`: the server reported it. No tracing, replay or breadcrumbs.
 - **Translated pages**: a browser translating the page, or an extension, swaps the text
   React wrote for nodes of its own. From before the app renders, React's later changes
   around those nodes land as near as the page allows (`src/lib/pageTranslation.ts`)
   instead of throwing a `NotFoundError` that would bring up the error screen.
 - **Through the site**: the SDK posts to `/api/errors` (Sentry's `tunnel`), so the CSP
   names no other host and blockers leave reports alone. The route forwards a report only
-  to the project of `SENTRY_DSN`, without the browser's address, cookies or headers. It
+  to the project of `SENTRY_DSN`, with the browser's address as the user's
+  (`user.ip_address`) and without its cookies or headers. It
   takes 64 KiB at most, 10 reports per client network and 60 from all browsers every 10
   minutes, and passes Sentry's rate limits back. `browser_errors_refused` (with Sentry's
   `upstream_status`) and `browser_errors_forward_failed` log what Sentry did not take.
-- **What they keep**: the error, its causes and stack, the page's address and the
-  browser's user agent. Addresses lose their query and fragment; parcel link ids, and
-  path segments of six characters or more with a digit, read `:id`. Messages lose email
-  addresses and anything shaped like a tracking number or a key. No IP address: the SDK
-  tells Sentry not to infer one.
+- **What they keep**: the error, its causes and stack, the page's address with its query,
+  the browser's user agent and referrer, and the messages' wording, numbers and email
+  addresses included. Access values and fragments are filtered, and parcel link ids read
+  `:id`, as on the server.
 - **Source maps** are served beside the scripts (`productionBrowserSourceMaps`): the
   source is public. Sentry fetches them by the frames' addresses; the service worker
   leaves them out. A tab left open across a deploy reports scripts the new image no

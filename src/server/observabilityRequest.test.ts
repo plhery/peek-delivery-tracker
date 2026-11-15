@@ -46,7 +46,7 @@ it('leaves the request out of a report for a route whose address or body carries
       isolation.setSDKProcessingMetadata({ normalizedRequest: {
         url: 'https://delivery.example.test/api/public/parcels/k7Qm2xHd9RtW?lang=fr', method: 'GET',
         headers: { 'x-parcel-key': 'OWNER-KEY', 'user-agent': 'test', 'x-forwarded-for': '203.0.113.7' },
-        data: '{"links":[{"id":"k7Qm2xHd9RtW","key":"OWNER-KEY"}]}',
+        data: '{"number":"TEST1234","key":"OWNER-KEY"}',
       } });
       isolation.setTransactionName('GET /api/public/parcels/k7Qm2xHd9RtW');
       id = captureOperationalError(new Error('database down'), {
@@ -59,17 +59,17 @@ it('leaves the request out of a report for a route whose address or body carries
   const stripped = capture(true);
   expect(await flushObservability()).toBe(true);
 
-  // Other routes keep the request without its body, its query or the client's address.
-  // The SDK filters the key header by its name; a number-like segment of the address
-  // reads `:id`, here and in the transaction.
+  // Other routes keep the request: its address and query, its headers, its body and the client's
+  // address. Access values are filtered by their names, and a link id reads `:id`, here and in
+  // the transaction.
   const usual = captured.events.find((event) => event.event_id === kept)!;
-  expect(usual.request?.url).toBe('https://delivery.example.test/api/public/parcels/:id');
+  expect(usual.request?.url).toBe('https://delivery.example.test/api/public/parcels/:id?lang=fr');
   expect(usual.transaction).toBe('GET /api/public/parcels/:id');
-  expect(usual.request?.headers).toEqual({ 'x-parcel-key': '[Filtered]', 'user-agent': 'test' });
-  expect(usual.request?.data).toBeUndefined();
-  expect(usual.user?.ip_address).toBeUndefined();
+  expect(usual.request?.headers).toEqual({ 'x-parcel-key': '[Filtered]', 'user-agent': 'test', 'x-forwarded-for': '203.0.113.7' });
+  expect(usual.request?.data).toBe('{"number":"TEST1234","key":"[Filtered]"}');
+  expect(usual.user?.ip_address).toBe('203.0.113.7');
   // The stack frames quote this file.
-  expect(JSON.stringify({ ...usual, exception: undefined })).not.toMatch(/OWNER-KEY|203\.0\.113\.7|k7Qm2xHd9RtW/);
+  expect(JSON.stringify({ ...usual, exception: undefined })).not.toMatch(/OWNER-KEY|k7Qm2xHd9RtW/);
 
   const report = captured.events.find((event) => event.event_id === stripped)!;
   expect(report.request).toBeUndefined();

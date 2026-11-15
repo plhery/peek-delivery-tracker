@@ -1,6 +1,7 @@
 import type { Event } from '@sentry/browser';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { IGNORED_ERRORS, reportable, scrubAddress, scrubEvent, scrubText, startErrorReports } from './errorReporter';
+import { scrubAddress } from './credentials';
+import { IGNORED_ERRORS, reportable, scrubEvent, scrubText, startErrorReports } from './errorReporter';
 
 type Transport = ReturnType<NonNullable<Parameters<typeof startErrorReports>[1]>>;
 type Envelope = Parameters<Transport['send']>[0];
@@ -34,39 +35,41 @@ afterEach(() => {
 });
 
 describe('what a report may say', () => {
-  it('drops the query and the fragment, and the ids in a page\'s address', () => {
-    expect(scrubAddress('https://peek.example/p/AbCdEfGhJkMn#name=Jo')).toBe('https://peek.example/p/:id');
-    expect(scrubAddress('/i/AbCdEfGhJkMn?from=mail')).toBe('/i/:id');
-    expect(scrubAddress('/parcels/LX123456785FR/edit')).toBe('/parcels/:id/edit');
-    expect(scrubAddress('https://peek.example/unsubscribe?token=secret')).toBe('https://peek.example/unsubscribe');
-    expect(scrubAddress('https://peek.example/fr/track/1Z999AA10123456784')).toBe('https://peek.example/fr/track/:id');
-    expect(scrubAddress('https://peek.example/fr/settings')).toBe('https://peek.example/fr/settings');
+  it('keeps a page\'s address, without its fragment, its access values and the ids that are capabilities', () => {
+    expect(scrubAddress('https://peek.example/p/AbCdEfGhJkMn#name=Jo')).toBe('https://peek.example/p/:id#[Filtered]');
+    expect(scrubAddress('/i/AbCdEfGhJkMn?from=mail')).toBe('/i/:id?from=mail');
+    expect(scrubAddress('/parcels/LX123456785FR/edit')).toBe('/parcels/LX123456785FR/edit');
+    expect(scrubAddress('https://peek.example/unsubscribe?token=secret&lang=fr')).toBe('https://peek.example/unsubscribe?token=[Filtered]&lang=fr');
+    expect(scrubAddress('https://peek.example/api/email/unsubscribe?t=abc')).toBe('https://peek.example/api/email/unsubscribe?t=[Filtered]');
+    expect(scrubAddress('https://peek.example/fr/track/1Z999AA10123456784?postcode=75011'))
+      .toBe('https://peek.example/fr/track/1Z999AA10123456784?postcode=75011');
+    expect(scrubAddress('https://jo:pw@peek.example/fr/settings')).toBe('https://peek.example/fr/settings');
   });
 
   it('keeps the names of the site\'s scripts, which their maps are found by', () => {
-    expect(scrubAddress(`${scripts}/app/p/%5Bid%5D/page-0a1b2c3d4e5f.js?v=2`)).toBe(`${scripts}/app/p/%5Bid%5D/page-0a1b2c3d4e5f.js`);
+    expect(scrubAddress(`${scripts}/app/p/%5Bid%5D/page-0a1b2c3d4e5f.js?v=2`)).toBe(`${scripts}/app/p/%5Bid%5D/page-0a1b2c3d4e5f.js?v=2`);
   });
 
-  it('filters numbers, keys and email addresses out of messages', () => {
+  it('keeps numbers and email addresses in messages, and filters access values', () => {
     expect(scrubText('No parcel 1Z999AA10123456784 at https://peek.example/p/AbCdEfGhJkMn?x=1#Jo'))
-      .toBe('No parcel [Filtered] at https://peek.example/p/:id');
-    expect(scrubText('Bad key Q2xhdWRlLWtleS1mb3ItdGVzdHMtb25seS1hYmNkZWY')).toBe('Bad key [Filtered]');
-    expect(scrubText('Bad key abcdefghijklmnopqrstuvwx1')).toBe('Bad key [Filtered]');
-    expect(scrubText('Unknown owner jo@example.test')).toBe('Unknown owner [Filtered]');
-    expect(scrubText('Cannot fetch "/api/links/AbCdEfGh2345?key=secret"')).toBe('Cannot fetch "/api/links/:id"');
+      .toBe('No parcel 1Z999AA10123456784 at https://peek.example/p/:id?x=1#[Filtered]');
+    expect(scrubText('Unknown owner jo@example.test')).toBe('Unknown owner jo@example.test');
+    expect(scrubText('Cannot fetch "/api/links/AbCdEfGh2345?key=secret"')).toBe('Cannot fetch "/api/links/AbCdEfGh2345?key=[Filtered]"');
+    expect(scrubText('Lost /p/AbCdEfGhJkMn')).toBe('Lost /p/:id');
+    expect(scrubText('Refused Bearer eyJhbGciOi.x for peek_rt_AbC-1')).toBe('Refused Bearer [Filtered] for [Filtered]');
     expect(scrubText('Cannot read properties of undefined (reading \'carrier\')'))
       .toBe('Cannot read properties of undefined (reading \'carrier\')');
   });
 
-  it('keeps of a request its address and the browser, and drops who sent it', () => {
+  it('keeps what the SDK gathered, with access values filtered and link ids left out', () => {
     const event = scrubEvent({
       message: 'Lost 1Z999AA10123456784',
       user: { ip_address: '203.0.113.9' },
       breadcrumbs: [{ message: 'clicked' }],
-      extra: { key: 'secret' },
+      extra: { key: 'secret', number: '1Z999AA10123456784' },
       transaction: '/p/AbCdEfGhJkMn',
       request: {
-        url: 'http://localhost/p/AbCdEfGhJkMn#Jo',
+        url: 'http://localhost/p/AbCdEfGhJkMn?from=mail#Jo',
         headers: { 'User-Agent': 'Firefox', Referer: 'https://mail.example/?token=secret', Cookie: 'a=b' },
       },
       exception: { values: [{ type: 'Error', value: 'Lost /p/AbCdEfGhJkMn', stacktrace: { frames: [
@@ -74,10 +77,17 @@ describe('what a report may say', () => {
       ] } }] },
     });
     expect(event).toEqual({
-      message: 'Lost [Filtered]',
-      request: { url: 'http://localhost/p/:id', headers: { 'User-Agent': 'Firefox' } },
+      message: 'Lost 1Z999AA10123456784',
+      user: { ip_address: '203.0.113.9' },
+      breadcrumbs: [{ message: 'clicked' }],
+      extra: { key: '[Filtered]', number: '1Z999AA10123456784' },
+      transaction: '/p/:id',
+      request: {
+        url: 'http://localhost/p/:id?from=mail#[Filtered]',
+        headers: { 'User-Agent': 'Firefox', Referer: 'https://mail.example/?token=[Filtered]', Cookie: '[Filtered]' },
+      },
       exception: { values: [{ type: 'Error', value: 'Lost /p/:id', stacktrace: { frames: [
-        { filename: `${scripts}/a.js`, abs_path: 'http://localhost/p/:id' },
+        { filename: `${scripts}/a.js?v=1`, abs_path: 'http://localhost/p/:id#[Filtered]' },
       ] } }] },
     });
     expect(scrubEvent({ request: { url: 'http://localhost/' } }).request).toEqual({ url: 'http://localhost/' });
@@ -108,7 +118,7 @@ describe('what a report may say', () => {
 });
 
 describe('the reporter', () => {
-  it('sends the page\'s errors through the site, without who saw them', async () => {
+  it('sends the page\'s errors through the site, with its address and without its link id', async () => {
     history.replaceState(null, '', '/p/AbCdEfGhJkMn?from=mail#Jo%27s%20gift');
     const { envelopes, events, send } = capture();
     send({ error: ownError('Cannot read properties of undefined (reading \'events\')'), kind: 'onerror' });
@@ -119,15 +129,13 @@ describe('the reporter', () => {
       level: 'error',
       release: 'abc123',
       environment: 'production',
-      request: { url: 'http://localhost/p/:id' },
-      sdk: { settings: { infer_ip: 'never' } },
+      request: { url: 'http://localhost/p/:id?from=mail#[Filtered]' },
     });
-    expect(event!.user).toBeUndefined();
     expect(event!.breadcrumbs).toBeUndefined();
     const [exception] = event!.exception!.values!;
     expect(exception).toMatchObject({ type: 'TypeError', mechanism: { type: 'onerror', handled: false } });
     expect(exception!.stacktrace!.frames!.map((frame) => frame.filename)).toEqual([`${scripts}/main-3c4d.js`, `${scripts}/app-1a2b.js`]);
-    expect(JSON.stringify(event)).not.toMatch(/AbCdEfGhJkMn|from=mail|gift/);
+    expect(JSON.stringify(event)).not.toMatch(/AbCdEfGhJkMn|gift/);
   });
 
   it('sends neither noise, nor an extension\'s or another site\'s errors, nor one twice', async () => {

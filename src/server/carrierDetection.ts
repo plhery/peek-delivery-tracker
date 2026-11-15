@@ -78,6 +78,7 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   };
   if (outcomes.length) {
     logOperationalEvent('carrier_recognition', {
+      tracking_number: trackingNumber,
       asked: asked.length,
       asked_carriers: asked.join(','),
       second_batch: Boolean(next?.length),

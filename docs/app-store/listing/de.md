@@ -72,4 +72,5 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 
 ```text
 • Neues Widget „Pakete“: deine Pakete unterwegs auf einen Blick, das nächste zuerst. Je nachdem, wie viele es sind, zeigt es sie als Karten wie im Widget „Nächste Lieferung“, als kleinere Karten in den Farben ihres Paketdienstes oder als Liste mit so vielen Zeilen, wie Platz haben. In einem mittelgroßen oder großen Widget öffnest du ein Paket mit einem Tippen.
+• Peek sagt dir jetzt, wenn statt einer Sendungsnummer eine Bestellnummer von Mercado Libre hinzugefügt wurde.
 ```

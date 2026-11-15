@@ -2,9 +2,9 @@
 
 Thanks for helping. Keep changes focused and explain the user problem they solve.
 
-**Keep private shipment data out** of code, tests, screenshots, issue logs and commit
-messages. Use synthetic values in fixtures, and sanitize captures and diagnostic exports
-before sharing them. Published tracking numbers and live carrier tests belong to the
+**Keep data from production and your own parcels out** of code, tests, screenshots, issue
+logs and commit messages. Fixtures use public or synthetic values. Sanitize captures and
+diagnostic exports before sharing them publicly. Published tracking numbers and live carrier tests belong to the
 scraper; see its [corpus](https://github.com/plhery/universal-parcel-scraper/blob/main/CORPUS.md).
 
 ## Setup

@@ -3942,8 +3942,8 @@ extension SessionIsolationTests {
     }
 
     @MainActor func testTheMarkForNewUpdatesIsOnUntilSwitchedOffAndFollowsTheAccount() async throws {
-        UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey)
-        defer { UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey) }
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
         let transport = transport()
         defer { transport.invalidateAndCancel() }
         let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
@@ -3995,8 +3995,8 @@ extension SessionIsolationTests {
     }
 
     @MainActor func testWithoutAnAccountTheMarkSwitchStaysOnThisDevice() async throws {
-        UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey)
-        defer { UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey) }
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
         let transport = transport()
         defer { transport.invalidateAndCancel() }
         let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
@@ -4012,6 +4012,76 @@ extension SessionIsolationTests {
         XCTAssertTrue(log.requests.isEmpty)
         store.setMarkNewUpdates(true)
         XCTAssertTrue(self.store(session, transport).markNewUpdates)
+    }
+
+    @MainActor func testAMarkChoiceTheServerCouldNotTakeStandsUntilItIsSaved() async throws {
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session, email: "alex@example.com")
+        let store = store(session, transport)
+        var on = emailPreferences
+        on.markNewUpdates = true
+        respond(try JSONEncoder.deliveryTracker.encode(on))
+        await store.loadNotificationPreferences()
+
+        // Switched off while the server cannot take it: the next read, which still says on, leaves it off and saves it.
+        offline()
+        store.setMarkNewUpdates(false)
+        try await Task.sleep(for: .milliseconds(100))
+        var off = on
+        off.markNewUpdates = false
+        let log = RequestLog()
+        SessionTestURLProtocol.handler = { request, complete in
+            log.record(request)
+            complete(.success((200, try! JSONEncoder.deliveryTracker.encode(request.httpMethod == "PATCH" ? off : on))))
+        }
+        await store.loadNotificationPreferences()
+        XCTAssertFalse(store.markNewUpdates)
+        for _ in 0..<300 where store.notificationPreferences?.markNewUpdates != false { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(log.requests.map(\.method), ["GET", "PATCH"])
+        XCTAssertEqual(log.requests.last?.body["markNewUpdates"] as? Bool, false)
+        XCTAssertFalse(UserDefaults.standard.bool(forKey: ParcelStore.markNewUpdatesUnsavedKey))
+
+        // Saved, it follows the account again.
+        respond(try JSONEncoder.deliveryTracker.encode(on))
+        await store.loadNotificationPreferences()
+        XCTAssertTrue(store.markNewUpdates)
+    }
+
+    @MainActor func testAMarkChoiceMadeWithoutAnAccountGoesToTheAccountSignedInTo() async throws {
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        store(session, transport).setMarkNewUpdates(false)
+
+        try await authorize(session, email: "alex@example.com")
+        let store = store(session, transport)
+        var on = emailPreferences
+        on.markNewUpdates = true
+        var off = on
+        off.markNewUpdates = false
+        let log = RequestLog()
+        SessionTestURLProtocol.handler = { request, complete in
+            log.record(request)
+            complete(.success((200, try! JSONEncoder.deliveryTracker.encode(request.httpMethod == "PATCH" ? off : on))))
+        }
+        await store.loadNotificationPreferences()
+        XCTAssertFalse(store.markNewUpdates)
+        for _ in 0..<300 where store.notificationPreferences?.markNewUpdates != false { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(log.requests.last?.method, "PATCH")
+        XCTAssertEqual(log.requests.last?.body["markNewUpdates"] as? Bool, false)
+    }
+
+    private func forgetMarkNewUpdatesChoice() {
+        UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey)
+        UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesUnsavedKey)
     }
 
     @MainActor func testReturningToTheAppReadsTheEmailChoiceAgain() async throws {

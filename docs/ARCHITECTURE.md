@@ -599,7 +599,9 @@ and nothing typed is sent.
   starts as seen: when it is added, when its first answer arrives and when it joins an account
   (the `packages_start_seen` trigger). "Mark new updates" in Settings hides the dot and keeps
   the seen state; an account's choice is stored with its notification preferences, and a
-  browser keeps its copy (`src/lib/newUpdate.ts`). On the website, someone without an account
+  browser keeps its copy (`src/lib/newUpdate.ts`). A choice made on a device without an account,
+  or that the server could not take, stands there over the account's until it is saved, and goes
+  to the account the next time the device reads its preferences. On the website, someone without an account
   finds the switch, with appearance and units, behind the settings button of the front door and
   of a parcel's page, all kept in the browser (`src/components/GuestSettings.tsx`). A parcel followed without an account has no
   `seen_at`: the device keeps the `news_at` it last opened and compares with that, starting

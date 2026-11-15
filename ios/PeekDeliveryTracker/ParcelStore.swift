@@ -65,13 +65,16 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var notificationsEnabledOnDevice = false
     @Published private(set) var notificationPreferences: NotificationPreferences? {
         // An account's choice about the list's mark follows it here from its other devices.
-        didSet { if let chosen = notificationPreferences?.markNewUpdates { keepMarkNewUpdates(chosen) } }
+        didSet { if let chosen = notificationPreferences?.markNewUpdates { followMarkNewUpdates(chosen) } }
     }
     /// Whether the list marks the parcels with updates since they were last opened. On until switched off. An
     /// account's choice is stored with its preferences; this device keeps its copy, and the choice of someone
     /// without an account.
     @Published private(set) var markNewUpdates = !UserDefaults.standard.bool(forKey: ParcelStore.markNewUpdatesOffKey)
     static let markNewUpdatesOffKey = "sdt.markNewUpdatesOff.v1"
+    /// Set while a choice made on this device, without an account or while the server could not take it, has not been
+    /// saved to the account: it stands over the account's until it is.
+    static let markNewUpdatesUnsavedKey = "sdt.markNewUpdatesUnsaved.v1"
     @Published private(set) var notificationError: String?
     @Published private(set) var deliveryWidgetEnabled = true
     @Published private(set) var deliveryLiveActivitiesEnabled = true
@@ -131,6 +134,8 @@ final class ParcelStore: ObservableObject {
     private var notificationPreferenceSaves = 0
     /// Counts the choices made about the list's mark: the answer to an earlier one does not undo a later one.
     private var markNewUpdatesChoices = 0
+    /// The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken.
+    private var markNewUpdatesSaving = 0
     private var deliveryLiveActivityGeneration = 0
     private var deliveryLiveActivitySystemDisabled = false
     private var deliveryLiveActivityRegistrationRemovalPending = false
@@ -190,6 +195,7 @@ final class ParcelStore: ObservableObject {
         pendingMutations.removeAll()
         pendingJobIDs.removeAll()
         seenHere.removeAll()
+        markNewUpdatesSaving = 0
         nativePushGeneration += 1
         deliveryLiveActivityGeneration += 1
         stopDeliveryLiveActivityObservers()
@@ -270,27 +276,49 @@ final class ParcelStore: ObservableObject {
     }
 
     /// Switches the list's mark on parcels with new updates. What was seen is kept either way. An account's choice
-    /// is saved with its preferences; a save that fails leaves the choice on this device until they are next read.
+    /// is saved with its preferences. A choice the account has not taken, made without one or while the server could
+    /// not take it, stands on this device until it is saved, and goes to the account when its preferences are next
+    /// read.
     func setMarkNewUpdates(_ enabled: Bool) {
         guard markNewUpdates != enabled else { return }
         keepMarkNewUpdates(enabled)
+        guard !isDemo else { return }
+        UserDefaults.standard.set(true, forKey: Self.markNewUpdatesUnsavedKey)
+        saveMarkNewUpdates(enabled)
+    }
+
+    /// Saves the list's mark with the account's preferences, the rest as stored. Taken, the choice follows the account
+    /// again.
+    private func saveMarkNewUpdates(_ enabled: Bool) {
         guard session.isAuthenticated, !isDemo, !isGuest else { return }
         // A read of the preferences that began before the choice is older than it.
         notificationPreferenceSaves += 1
         markNewUpdatesChoices += 1
+        markNewUpdatesSaving += 1
         let choice = markNewUpdatesChoices
         let generation = session.generation
         Task {
+            defer { if generation == session.generation { markNewUpdatesSaving -= 1 } }
             guard let stored = try? await storedNotificationPreferences(), generation == session.generation else { return }
             var value = stored
             value.timezone = TimeZone.current.identifier
             guard var saved = try? await api.saveNotificationPreferences(value, markNewUpdates: enabled),
                   generation == session.generation else { return }
+            if choice == markNewUpdatesChoices { UserDefaults.standard.removeObject(forKey: Self.markNewUpdatesUnsavedKey) }
             // Switched again meanwhile: that choice stands, and its own save is on its way.
-            if choice != markNewUpdatesChoices { saved.markNewUpdates = markNewUpdates }
+            else { saved.markNewUpdates = markNewUpdates }
             notificationPreferenceSaves += 1
             notificationPreferences = saved
         }
+    }
+
+    /// The account's choice, as read or saved, unless one made on this device has not been saved: that one stands and
+    /// goes to the account, or, the account holding it already, follows the account again.
+    private func followMarkNewUpdates(_ stored: Bool) {
+        guard UserDefaults.standard.bool(forKey: Self.markNewUpdatesUnsavedKey) else { return keepMarkNewUpdates(stored) }
+        guard markNewUpdatesSaving == 0 else { return }
+        if stored == markNewUpdates { UserDefaults.standard.removeObject(forKey: Self.markNewUpdatesUnsavedKey) }
+        else { saveMarkNewUpdates(markNewUpdates) }
     }
 
     private func keepMarkNewUpdates(_ enabled: Bool) {

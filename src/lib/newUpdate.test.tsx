@@ -3,7 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getNotificationPreferences, saveNotificationPreferences, type NotificationPreferences } from './pushNotifications';
 import { loadNotificationPreferences } from '../store/notificationPreferences';
 import type { Parcel } from '../types';
-import { hasNewUpdate, MARK_NEW_UPDATES_STORAGE_KEY, useMarkNewUpdates, useMarkNewUpdatesChoice, useSeenWhileOpen } from './newUpdate';
+import {
+  hasNewUpdate, MARK_NEW_UPDATES_STORAGE_KEY, MARK_NEW_UPDATES_UNSAVED_KEY, useMarkNewUpdates, useMarkNewUpdatesChoice, useSeenWhileOpen,
+} from './newUpdate';
 
 vi.mock('./pushNotifications', () => ({ getNotificationPreferences: vi.fn(), saveNotificationPreferences: vi.fn() }));
 
@@ -17,7 +19,10 @@ beforeEach(() => {
   vi.mocked(getNotificationPreferences).mockReset().mockResolvedValue(SAVED);
   vi.mocked(saveNotificationPreferences).mockReset().mockImplementation(async (preferences) => ({ ...SAVED, ...preferences }));
 });
-afterEach(() => window.localStorage.removeItem(MARK_NEW_UPDATES_STORAGE_KEY));
+afterEach(() => {
+  window.localStorage.removeItem(MARK_NEW_UPDATES_STORAGE_KEY);
+  window.localStorage.removeItem(MARK_NEW_UPDATES_UNSAVED_KEY);
+});
 
 describe('hasNewUpdate', () => {
   it('holds for a parcel whose latest scan arrived after it was last opened', () => {
@@ -100,6 +105,45 @@ describe('the choice to mark new updates', () => {
     vi.mocked(getNotificationPreferences).mockResolvedValue({ ...SAVED, markNewUpdates: true });
     await act(async () => { await loadNotificationPreferences(auth); });
     expect(shown.result.current).toBe(true);
+  });
+
+  it('keeps a choice the server could not take until it is saved, at the next read', async () => {
+    const auth = session();
+    await loadNotificationPreferences(auth);
+    const choice = renderHook(() => useMarkNewUpdatesChoice(auth));
+    vi.mocked(saveNotificationPreferences).mockRejectedValueOnce(new Error('offline'));
+
+    act(() => choice.result.current[1](false));
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(1));
+    await act(() => new Promise((settled) => setTimeout(settled, 0)));
+
+    // The account still says on: the choice made here stands, and goes to the account.
+    vi.mocked(getNotificationPreferences).mockImplementation(async () => ({ ...SAVED }));
+    await act(async () => { await loadNotificationPreferences(auth); });
+    expect(choice.result.current[0]).toBe(false);
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(2));
+    expect(vi.mocked(saveNotificationPreferences).mock.calls[1][0].markNewUpdates).toBe(false);
+    await waitFor(() => expect(window.localStorage.getItem(MARK_NEW_UPDATES_UNSAVED_KEY)).toBeNull());
+
+    // Saved, it follows the account again.
+    vi.mocked(getNotificationPreferences).mockResolvedValue({ ...SAVED, markNewUpdates: true });
+    await act(async () => { await loadNotificationPreferences(auth); });
+    expect(choice.result.current[0]).toBe(true);
+    expect(saveNotificationPreferences).toHaveBeenCalledTimes(2);
+  });
+
+  it('takes a choice made without an account to the account signed in to next', async () => {
+    const guest = renderHook(() => useMarkNewUpdatesChoice(undefined));
+    act(() => guest.result.current[1](false));
+    guest.unmount();
+
+    const auth = session();
+    const choice = renderHook(() => useMarkNewUpdatesChoice(auth));
+    await act(async () => { await loadNotificationPreferences(auth); });
+
+    expect(choice.result.current[0]).toBe(false);
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(1));
+    expect(vi.mocked(saveNotificationPreferences).mock.calls[0][0].markNewUpdates).toBe(false);
   });
 
   it('keeps this browser’s choice against a server that does not name one', async () => {

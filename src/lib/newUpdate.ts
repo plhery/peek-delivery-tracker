@@ -49,6 +49,31 @@ function subscribe(notify: () => void) {
   };
 }
 
+/**
+ * Set while a choice made in this browser, as someone without an account or while the server could not take it, has
+ * not been saved to the account: it stands over the account's until it is.
+ */
+export const MARK_NEW_UPDATES_UNSAVED_KEY = 'deliveryTrackerMarkNewUpdatesUnsaved';
+let unsavedMemory: boolean | null = null;
+/** The choice whose save is on its way, so a read answered meanwhile does not send it again. */
+let saving: boolean | null = null;
+
+function unsaved(): boolean {
+  if (unsavedMemory !== null) return unsavedMemory;
+  try { return window.localStorage.getItem(MARK_NEW_UPDATES_UNSAVED_KEY) === '1'; } catch { return false; }
+}
+
+function setUnsaved(value: boolean): void {
+  unsavedMemory = value;
+  try {
+    if (value) window.localStorage.setItem(MARK_NEW_UPDATES_UNSAVED_KEY, '1');
+    else window.localStorage.removeItem(MARK_NEW_UPDATES_UNSAVED_KEY);
+    unsavedMemory = null;
+  } catch {
+    // Kept in memory.
+  }
+}
+
 /** Whether cards mark their parcel's new updates. */
 export function useMarkNewUpdates(): boolean {
   return useSyncExternalStore(subscribe, read, () => true);
@@ -56,17 +81,34 @@ export function useMarkNewUpdates(): boolean {
 
 /**
  * The choice with its switch. An account's choice follows it to its other devices: what the server
- * holds replaces this browser's copy whenever it is read or saved, and a choice the server could not
- * take stays on this browser until then.
+ * holds replaces this browser's copy whenever it is read or saved. A choice made here that the
+ * account has not taken, made without one or while the server could not take it, stands until it
+ * is saved, and goes to the account when its preferences are next read.
  */
 export function useMarkNewUpdatesChoice(auth: ApiAuth | undefined): [boolean, (enabled: boolean) => void] {
   const enabled = useMarkNewUpdates();
-  const stored = useNotificationPreferences(auth)?.markNewUpdates;
-  useEffect(() => { if (typeof stored === 'boolean') write(stored); }, [stored]);
+  // Each answer, read or saved, even one that names the same choice.
+  const preferences = useNotificationPreferences(auth);
+  const keep = useCallback((next: boolean) => {
+    if (!auth || saving === next) return;
+    saving = next;
+    void saveMarkNewUpdates(next, auth).then((saved) => {
+      // Switched again meanwhile: that choice stands, and its own save is on its way.
+      if (saved.markNewUpdates === next && read() === next) setUnsaved(false);
+    }).catch(() => undefined).finally(() => { if (saving === next) saving = null; });
+  }, [auth]);
+  useEffect(() => {
+    const stored = preferences?.markNewUpdates;
+    if (typeof stored !== 'boolean') return;
+    if (!unsaved()) write(stored);
+    else if (stored === read()) setUnsaved(false);
+    else keep(read());
+  }, [preferences, keep]);
   const choose = useCallback((next: boolean) => {
     write(next);
-    if (auth) void saveMarkNewUpdates(next, auth).catch(() => undefined);
-  }, [auth]);
+    setUnsaved(true);
+    keep(next);
+  }, [keep]);
   return [enabled, choose];
 }
 

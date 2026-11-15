@@ -125,6 +125,29 @@ begin
   perform pg_temp.health_sample('copy-carrier',false,'refresh','30000000-0000-4000-8000-000000000001');
   result := pg_temp.health_sample('copy-carrier',false,'refresh','30000000-0000-4000-8000-000000000002');
   assert result='[]', 'Two copies of one number failing while another parcel answers must not alert';
+  -- Copies share one lookup in a scheduled run, so each gets a sample of it: one failed run of a
+  -- number with three copies, or two of a number with two, is not three failed checks in a row.
+  insert into auth.users(id, email) values ('30000000-0000-4000-8000-00000000000a', 'health-copy@example.invalid');
+  insert into public.packages(id, user_id, tracking_number, carrier, one_off) values
+    ('30000000-0000-4000-8000-000000000003', '30000000-0000-4000-8000-000000000009', 'COPYTEST23456', 'unknown', false),
+    ('30000000-0000-4000-8000-000000000004', '30000000-0000-4000-8000-00000000000a', 'COPYTEST23456', 'unknown', false),
+    ('30000000-0000-4000-8000-000000000005', null, 'COPYTEST23456', 'unknown', true);
+  perform pg_temp.health_sample('copy-run-carrier',false,'refresh','30000000-0000-4000-8000-000000000003');
+  perform pg_temp.health_sample('copy-run-carrier',false,'refresh','30000000-0000-4000-8000-000000000004');
+  result := pg_temp.health_sample('copy-run-carrier',false,'refresh','30000000-0000-4000-8000-000000000005');
+  assert result='[]' and not exists(select 1 from public.tracking_health_incidents where kind='refresh' and subject='copy-run-carrier' and pending is not null),
+    'One failed run of a number with three copies must not alert';
+  for i in 1..2 loop
+    perform pg_temp.health_sample('copy-runs-carrier',false,'refresh','30000000-0000-4000-8000-000000000001');
+    result := pg_temp.health_sample('copy-runs-carrier',false,'refresh','30000000-0000-4000-8000-000000000002');
+  end loop;
+  assert result='[]' and not exists(select 1 from public.tracking_health_incidents where kind='refresh' and subject='copy-runs-carrier' and pending is not null),
+    'Two failed runs of a number with two copies must not alert';
+  -- A third failed run is three in a row for each copy: one parcel, alone, alerts.
+  perform pg_temp.health_sample('copy-runs-carrier',false,'refresh','30000000-0000-4000-8000-000000000001');
+  result := pg_temp.health_sample('copy-runs-carrier',false,'refresh','30000000-0000-4000-8000-000000000002');
+  assert exists(select 1 from public.tracking_health_incidents where kind='refresh' and subject='copy-runs-carrier' and pending->>'state'='open' and (pending->>'consecutive_failures')::boolean),
+    'Three failed runs of a number with two copies must alert';
 
   -- A carrier repeating a thin answer for its only parcel recovers once three checks repeated it.
   for i in 1..3 loop result := pg_temp.health_sample('thin-carrier',false,'refresh'); end loop;

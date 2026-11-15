@@ -328,7 +328,7 @@ private fun ListState(symbol: String, title: String, description: String, size: 
 /** The narrowest list that stands for the iPhone's medium or large widget: four cells across on a phone. */
 private val WIDE_WIDTH = 250.dp
 
-/** The shortest list that stands for the iPhone's large widget, fifteen rows: three cells down on a phone. */
+/** The shortest list that stands for the iPhone's large widget: three cells down on a phone. */
 private val TALL_HEIGHT = 280.dp
 
 /** WidgetKit's margins around a widget's content. */

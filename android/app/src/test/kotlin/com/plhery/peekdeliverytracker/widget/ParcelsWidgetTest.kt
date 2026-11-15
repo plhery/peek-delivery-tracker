@@ -98,8 +98,8 @@ class ParcelsWidgetTest {
         DeliveryWidgetList.make(CAPTURED, enabled, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
 
     /**
-     * The rows each size has room for, in the sections' order: three two cells by two, up to eight four by two, and up to
-     * fifteen four by four; the line counting the rest where there are more.
+     * The rows each size has room for, as many as fit, in the sections' order: four two cells by two, seven four by two,
+     * thirteen four by four; the line counting the rest where there are more.
      */
     @Test
     fun eachSizeHasRoomForItsRows() {
@@ -109,7 +109,7 @@ class ParcelsWidgetTest {
             assertEquals("$size", order.take(laid.rows.size), laid.rows)
             assertEquals("$size", 15 - laid.rows.size, laid.more)
         }
-        assertEquals(listOf(3, 7, 13), listOf(LIST_SMALL, LIST_MEDIUM, LIST_LARGE).map { sections(sample, it).rows.size })
+        assertEquals(listOf(4, 7, 13), listOf(LIST_SMALL, LIST_MEDIUM, LIST_LARGE).map { sections(sample, it).rows.size })
         // The iPhone's widget each size stands for: under four cells across the small one, from there the medium one,
         // from three cells down the large one, its rows on one line where it is four cells across.
         fun layout(size: DpSize) = sections(sample, size).layout
@@ -125,7 +125,7 @@ class ParcelsWidgetTest {
     }
 
     /**
-     * Fifteen parcels are rows under the app list's sections, in its order: in a small widget three rows without the
+     * Fifteen parcels are rows under the app list's sections, in its order: in a small widget four rows without the
      * headings, in a medium one the headings and rows down two columns, in a large one down one; a heading never ends a
      * column; then the count of the rest, which opens the list.
      */
@@ -134,15 +134,17 @@ class ParcelsWidgetTest {
         val order = sample.sections.flatMap { it.parcels }
         assertEquals(listOf("Phone case", "Camera lens from Japan", "Kids' science kit", "Garden hose reel", "Ceramic pour-over set"), order.take(5).map { it.label })
         val small = sections(sample, LIST_SMALL)
-        assertEquals(order.take(3), small.rows)
-        assertEquals(12, small.more)
+        assertEquals(order.take(4), small.rows)
+        assertEquals(11, small.more)
         assertTrue(small.columns.flatten().none { it is DeliveryWidgetList.Line.Heading })
         show(sample, LIST_SMALL) {
-            for (parcel in order.take(3)) onNode(hasTextEqualTo(parcel.listName)).assertExists()
-            for (parcel in order.take(3)) onNode(hasTextEqualTo(narrowLine(parcel, sample))).assertExists()
-            onNode(hasTextEqualTo(order[3].label)).assertDoesNotExist()
-            onNode(hasTextEqualTo("+12 more") and opensList).assertExists()
-            onNode(hasTextEqualTo(english.text("app.needsAttention"))).assertDoesNotExist()
+            for (parcel in order.take(4)) onNode(hasTextEqualTo(parcel.listName)).assertExists()
+            for (parcel in order.take(4)) onNode(hasTextEqualTo(narrowLine(parcel, sample))).assertExists()
+            onNode(hasTextEqualTo(order[4].label)).assertDoesNotExist()
+            onNode(hasTextEqualTo("+11 more") and opensList).assertExists()
+            // The heading's words only as the stage of a parcel held up.
+            val attention = english.text("app.needsAttention")
+            onAllNodes(hasTextEqualTo(attention)).assertCountEquals(order.take(4).count { narrowLine(it, sample) == attention })
         }
         for (size in listOf(LIST_MEDIUM, LIST_FOUR_BY_THREE, LIST_LARGE)) {
             val laid = sections(sample, size)
@@ -199,9 +201,35 @@ class ParcelsWidgetTest {
                 val laid = sections(sample, DpSize(width, height.dp), type)
                 val room = laid.layout.room.height
                 assertTrue("$width x $height at $scale", laid.columns.all { laid.height(it) <= room } || laid.rows.size == 1)
-                assertEquals("$width x $height at $scale", DeliveryWidgetList.Line.More(laid.more), laid.columns.last().last())
+                if (laid.more > 0) assertEquals("$width x $height at $scale", DeliveryWidgetList.Line.More(laid.more), laid.columns.last().last())
             }
         }
+    }
+
+    /**
+     * However many parcels there are, at any size and text size, the rows show them all or leave no room for another
+     * under the last: a two-by-two widget showed three of four parcels over a blank a row tall, as the iPhone's
+     * smaller one holds three.
+     */
+    @Test
+    fun theRowsLeaveNoRoomForAnotherBlank() {
+        val order = sample.sections.flatMap { it.parcels }
+        for (scale in listOf(1f, 1.3f, 2f)) {
+            val type = WidgetText(fontScaled(scale))
+            for (size in listOf(LIST_SMALL, LIST_THREE_BY_TWO, LIST_MEDIUM, LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE, DpSize(194.dp, 223.dp))) {
+                for (count in 3..order.size) {
+                    val laid = sections(list(order.take(count)), size, type)
+                    val case = "$count parcels in $size at $scale"
+                    assertEquals(case, count, laid.rows.size + laid.more)
+                    if (laid.more == 0) continue
+                    // The smallest a row could be there, the type it takes before it gives a row up.
+                    val least = ListLayout(sample, size, type, compact = laid.layout.size != DeliveryWidgetList.Size.Large, laid.columns.size)
+                    val blank = laid.layout.room.height - laid.columns.maxOf { laid.height(it) }
+                    assertTrue("$case: ${laid.rows.size} rows over $blank blank", blank < least.rowHeight + least.metrics.rowSpacing)
+                }
+            }
+        }
+        assertEquals(listOf(4, 4), listOf(LIST_SMALL, DpSize(194.dp, 223.dp)).map { sections(list(order.take(4)), it).rows.size })
     }
 
     /**
@@ -406,7 +434,7 @@ class ParcelsWidgetTest {
         assertEquals("+1 more", moreParcels(english, 1))
         val french = sampleList(AppLanguage.Fr)
         show(french, LIST_SMALL) {
-            onNode(hasTextEqualTo("+12 autres")).assertExists()
+            onNode(hasTextEqualTo("+11 autres")).assertExists()
             val rows = sections(french, LIST_SMALL).rows
             val first = narrowLine(rows[0], french)
             onAllNodes(hasTextEqualTo(first)).assertCountEquals(rows.count { narrowLine(it, french) == first })

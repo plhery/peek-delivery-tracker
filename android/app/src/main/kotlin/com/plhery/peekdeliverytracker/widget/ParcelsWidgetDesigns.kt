@@ -346,8 +346,8 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
 
 /**
  * The parcels as rows under the app list's sections ([DeliveryWidgetList.sections]), as `ParcelSections` picks them: as
- * many as the widget holds at the reader's text size, up to three in a small widget, eight in a medium one and fifteen in
- * a large one, a small or medium widget taking smaller type ([ListMetrics.compact]) before it gives a row up. A small
+ * many as the widget holds at the reader's text size, whatever its size, so that no room for another is left blank; a
+ * small or medium widget taking smaller type ([ListMetrics.compact]) before it gives a row up. A small
  * widget has no room for the headings, nor has one fed by an app that didn't publish the sections
  * ([DeliveryWidgetList.lines]); a medium one splits the lines into two columns about as tall as each other, a heading
  * never ending the first ([DeliveryWidgetList.columns]). The line counting the parcels left out ends the last column,
@@ -364,7 +364,11 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
 
     init {
         val kind = listSize(size)
-        val most = minOf(if (kind == DeliveryWidgetList.Size.Medium) 8 else kind.rows, list.parcels.size).coerceAtLeast(1)
+        val across = if (kind == DeliveryWidgetList.Size.Medium) 2 else 1
+        // Tried from the most rows the smallest type could stand in, every parcel at most, down to one.
+        val least = ListLayout(list, size, type, compact = kind != DeliveryWidgetList.Size.Large, across)
+        val held = ((least.room.height + least.metrics.rowSpacing) / (least.rowHeight + least.metrics.rowSpacing)).toInt() * across
+        val most = minOf(held, list.parcels.size).coerceAtLeast(1)
         val tries = (most downTo 1).flatMap { rows ->
             if (kind == DeliveryWidgetList.Size.Large) listOf(rows to false) else listOf(rows to false, rows to true)
         }

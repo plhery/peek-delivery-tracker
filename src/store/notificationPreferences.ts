@@ -19,7 +19,7 @@ interface Session {
   reading: Promise<NotificationPreferences> | null;
   /** Counts the answers taken: a read that began before a save must not undo it. */
   revision: number;
-  /** The clock and units last sent, so a server that does not keep them is not asked again and again. */
+  /** The clock and units sent and not yet kept, so a server that does not keep them is not asked again and again. */
   unitsSent: string | null;
   listeners: Set<() => void>;
 }
@@ -127,7 +127,7 @@ export interface ShownUnits {
  * Saves how the app here writes a time and a distance where the account has them otherwise, so
  * the delivery email writes them as the app last opened does. Nothing else changes: the events
  * and the other choices go as they were last saved. Says whether it asked the server, which it
- * does once per sign-in for the same clock and units.
+ * does not again for the same clock and units until it has kept them.
  */
 export async function saveShownUnits(shown: ShownUnits, auth: ApiAuth): Promise<boolean> {
   const session = sessionOf(auth);
@@ -135,14 +135,22 @@ export async function saveShownUnits(shown: ShownUnits, auth: ApiAuth): Promise<
   const sent = `${shown.clock} ${shown.distance}`;
   if ((saved.clock === shown.clock && saved.distance === shown.distance) || session.unitsSent === sent) return false;
   session.unitsSent = sent;
-  await save({
-    enabledStages: saved.enabledStages,
-    quietHoursStart: saved.quietHoursStart,
-    quietHoursEnd: saved.quietHoursEnd,
-    timezone: timeZone(saved),
-    clock: shown.clock,
-    distance: shown.distance,
-  }, auth);
+  let answer: NotificationPreferences;
+  try {
+    answer = await save({
+      enabledStages: saved.enabledStages,
+      quietHoursStart: saved.quietHoursStart,
+      quietHoursEnd: saved.quietHoursEnd,
+      timezone: timeZone(saved),
+      clock: shown.clock,
+      distance: shown.distance,
+    }, auth);
+  } catch (error) {
+    if (session.unitsSent === sent) session.unitsSent = null;
+    throw error;
+  }
+  // Kept: should another device change them, the next difference read here is sent again.
+  if (session.unitsSent === sent && answer.clock === shown.clock && answer.distance === shown.distance) session.unitsSent = null;
   return true;
 }
 

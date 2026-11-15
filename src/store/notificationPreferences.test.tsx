@@ -163,7 +163,7 @@ describe('the account’s shared notification preferences', () => {
     expect(renderHook(() => useNotificationPreferences(auth)).result.current?.markNewUpdates).toBe(true);
   });
 
-  it('saves the clock and units the app shows where the account has others, once each per sign-in, and nothing else', async () => {
+  it('saves the clock and units the app shows where the account has others, and nothing else', async () => {
     const auth = session();
     await act(async () => { await expect(saveShownUnits({ clock: '12', distance: 'mi' }, auth)).resolves.toBe(true); });
     expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
@@ -177,13 +177,24 @@ describe('the account’s shared notification preferences', () => {
     expect(saveNotificationPreferences).toHaveBeenCalledTimes(1);
     await expect(saveShownUnits({ clock: '24', distance: 'mi' }, auth)).resolves.toBe(true);
     expect(saveNotificationPreferences).toHaveBeenLastCalledWith(expect.objectContaining({ clock: '24', distance: 'mi' }), auth);
+    // Changed since on another device: the next read brings it, and the app here sends its own again.
+    vi.mocked(getNotificationPreferences).mockResolvedValue({ ...SAVED, clock: '12', distance: 'km' });
+    await loadNotificationPreferences(auth);
+    await expect(saveShownUnits({ clock: '24', distance: 'mi' }, auth)).resolves.toBe(true);
+    expect(saveNotificationPreferences).toHaveBeenCalledTimes(3);
 
     // A server that does not keep them is asked once per sign-in, not on every render.
     const other = session();
+    vi.mocked(getNotificationPreferences).mockResolvedValue(SAVED);
     vi.mocked(saveNotificationPreferences).mockImplementation(async (preferences) => ({ ...SAVED, ...preferences, clock: undefined, distance: undefined }));
     await expect(saveShownUnits({ clock: '12', distance: 'km' }, other)).resolves.toBe(true);
     await expect(saveShownUnits({ clock: '12', distance: 'km' }, other)).resolves.toBe(false);
-    expect(saveNotificationPreferences).toHaveBeenCalledTimes(3);
+    expect(saveNotificationPreferences).toHaveBeenCalledTimes(4);
+    // A save that failed is tried again at the next chance.
+    const failing = session();
+    vi.mocked(saveNotificationPreferences).mockRejectedValueOnce(new Error('offline'));
+    await expect(saveShownUnits({ clock: '12', distance: 'km' }, failing)).rejects.toThrow('offline');
+    await expect(saveShownUnits({ clock: '12', distance: 'km' }, failing)).resolves.toBe(true);
   });
 
   it('does not let a read that began before a save undo it', async () => {

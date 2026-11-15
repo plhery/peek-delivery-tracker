@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Refuses a deployment whose migrations the database lacks. Migrations are applied by
-# hand before the server that needs them, and each one records itself when it runs.
+# hand before the server that needs them, and each one records itself when it runs. One
+# that must follow the server it serves starts with the line "-- After its server.": it may
+# be missing, and the run names it, to apply once the commit is live.
 set -euo pipefail
 
 supabase_url=${SUPABASE_URL:-}
@@ -31,10 +33,27 @@ if [[ "$status" != 200 ]]; then
   exit 1
 fi
 
-missing=$(jq -r '.[]' "$workdir/missing.json")
-if [[ -n "$missing" ]]; then
+blocking=()
+later=()
+while IFS= read -r name; do
+  [[ -n "$name" ]] || continue
+  if [[ "$(head -n 1 "$repo_root/supabase/migrations/$name.sql")" == '-- After its server.' ]]; then
+    later+=("$name")
+  else
+    blocking+=("$name")
+  fi
+done < <(jq -r '.[]' "$workdir/missing.json")
+if (( ${#blocking[@]} )); then
   echo "Production lacks these migrations. Apply them, then re-run this job:" >&2
-  sed 's/^/  /' <<< "$missing" >&2
+  printf '  %s\n' "${blocking[@]}" >&2
   exit 1
 fi
-echo "Production has all $(jq '.p_names | length' <<< "$names") migrations."
+for name in ${later[@]+"${later[@]}"}; do
+  echo "::notice title=Apply after this deploy::$name follows its server: apply it once this commit is live."
+done
+total=$(jq '.p_names | length' <<< "$names")
+if (( ${#later[@]} )); then
+  echo "Production has $((total - ${#later[@]})) of $total migrations; the other ${#later[@]} follow their server."
+else
+  echo "Production has all $total migrations."
+fi

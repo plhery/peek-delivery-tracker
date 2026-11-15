@@ -351,7 +351,7 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const shown = shownEvents(row);
-  const news = newsAt(shown);
+  const news = newsAt(shown, storedAsCopies(row));
   const served = news ? { ...placedEvents(row), news_at: news } : placedEvents(row);
   const answered = withoutPlaceholderAnswers(row);
   const planned = placedSteps(row, servedPlannedSteps(answered, shown));
@@ -366,18 +366,40 @@ export function withEventPlaces(row: JsonObject): JsonObject {
  * When the parcel's latest scan was first stored (`news_at`), or null without a scan, which leaves it out: the time the list's mark of a
  * parcel with news compares with the owner's last opening of it (`seen_at`). The latest scan is the one its carrier
  * dates last, so older history filled in later is no news, and of the rows telling that moment the first stored
- * counts, so neither is another source's copy of it. Peek's own rows are no scans.
+ * counts, so neither is another source's copy of it: one at that moment, or a provider's copy the timeline leaves out
+ * once the carrier tells the scan itself (`copied`, by the scan's id). Peek's own rows are no scans.
  */
-export function newsAt(shown: readonly JsonObject[]): string | null {
+export function newsAt(shown: readonly JsonObject[], copied: ReadonlyMap<string, string> = new Map()): string | null {
   let latest = -Infinity;
   let stored: string | null = null;
   for (const event of shown) {
     const time = Date.parse(String(event.occurred_at));
-    if (isOwnRow(event) || typeof event.stored_at !== 'string' || !(time >= latest)) continue;
-    if (time > latest || stored === null || Date.parse(event.stored_at) < Date.parse(stored)) stored = event.stored_at;
+    const at = earlier(typeof event.stored_at === 'string' ? event.stored_at : null, copied.get(String(event.id)) ?? null);
+    if (isOwnRow(event) || at === null || !(time >= latest)) continue;
+    if (time > latest || stored === null || Date.parse(at) < Date.parse(stored)) stored = at;
     latest = time;
   }
   return stored;
+}
+
+function earlier(a: string | null, b: string | null): string | null {
+  return a === null || (b !== null && Date.parse(b) < Date.parse(a)) ? b : a;
+}
+
+/**
+ * When a universal provider's copy of each carrier scan was first stored, for the scans the timeline shows in the
+ * carrier's own row (`providerCopyScans`): the provider may have told the scan hours before the carrier answered.
+ */
+function storedAsCopies(row: JsonObject): Map<string, string> {
+  const events = new Map((Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [])
+    .map((event) => [String(event.id), event]));
+  const first = new Map<string, string>();
+  for (const [copy, scans] of providerCopyScans(row)) {
+    const stored = events.get(copy)?.stored_at;
+    if (typeof stored !== 'string') continue;
+    for (const scan of scans) first.set(scan, earlier(first.get(scan) ?? null, stored)!);
+  }
+  return first;
 }
 
 /**

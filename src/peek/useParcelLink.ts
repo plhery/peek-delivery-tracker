@@ -255,7 +255,7 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
 
   const view = answer.view ?? (answer.gone ? null : recent?.snapshot ?? null);
   const newsAt = view?.parcel.newsAt;
-  const opened = useMemo(() => view && recent ? { ...view.parcel, id: linkId, seenAt: recent.seenNews } : null, [view, recent, linkId]);
+  const opened = useMemo(() => view && recent ? { ...view.parcel, id: linkId, seenAt: recent.openedNews } : null, [view, recent, linkId]);
   const markSeen = useCallback(async (id: string) => { if (newsAt) markRecentSeen(id, newsAt); }, [newsAt]);
   useSeenWhileOpen(opened, markSeen);
   // Until the first answer says what the link is, nothing it carries is shown: it may be a gift.

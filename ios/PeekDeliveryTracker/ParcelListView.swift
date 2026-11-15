@@ -658,7 +658,7 @@ private struct DeliveryListView: View {
     private func page(_ parcelID: UUID, release: (() -> Void)? = nil) -> some View {
         ParcelDetailView(parcelID: parcelID, transition: parcelTransition,
                          sample: parcelID == FirstOpenJourney.parcelID ? sample : nil, release: release,
-                         covering: $pageCovered, listFree: isSelected && !listCovered)
+                         covering: $pageCovered, listFree: isSelected && !listCovered, chosen: navigation.chosen == parcelID)
             .environment(\.keyboardInFront, keyboardFree && !searchFocused)
     }
 
@@ -2050,7 +2050,7 @@ private struct NewUpdateSaidFirst: ViewModifier {
 
     func body(content: Content) -> some View {
         content.accessibilityLabel { label in
-            if marked { Text(localizer.text("parcel.newUpdate")) }
+            if marked { Text(localizer.text("parcel.newUpdate") + ".") }
             label
         }
     }

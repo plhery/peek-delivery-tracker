@@ -30,22 +30,22 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// The parcel's news this iPhone counts as seen: the `newsAt` it had when it was last opened here, or when it
     /// started as seen. Nil on a parcel kept before this was noted, which shows no mark and starts as seen with its
     /// next answer: what an older version kept has no `newsAt` to start from.
-    var seenNews: String? = nil
+    var openedNews: String? = nil
 
     var isViewer: Bool { viewer == true }
 
-    /// What `seenNews` holds for a parcel seen before its first scan: earlier than any news.
+    /// What `openedNews` holds for a parcel seen before its first scan: earlier than any news.
     static let seenBeforeAnyNews = "1970-01-01T00:00:00Z"
 
     /// The parcel as it stands is seen: what it tells now is no news.
-    mutating func startSeen() { seenNews = parcel.newsAt ?? Self.seenBeforeAnyNews }
+    mutating func startSeen() { openedNews = parcel.newsAt ?? Self.seenBeforeAnyNews }
 
     /// Takes the service's newer answer. A parcel's first answer is no news, as the service starts an account's
     /// parcel: the first one with a check landed, also after a change of carrier or number.
     mutating func take(_ answer: Parcel) {
         let first = parcel.lastSyncedAt == nil && answer.lastSyncedAt != nil
         parcel = answer
-        if first || seenNews == nil { startSeen() }
+        if first || openedNews == nil { startSeen() }
     }
 }
 
@@ -811,7 +811,7 @@ final class DeviceParcels {
         parcel.label = entry.label
         parcel.archivedAt = entry.archivedAt
         // Without an account, the device keeps what was seen: the news it had when the parcel was last opened here.
-        parcel.seenAt = entry.seenNews ?? parcel.newsAt
+        parcel.seenAt = entry.openedNews ?? parcel.newsAt
         if let replaced = entry.replaced {
             var data = parcel.carrierData ?? CarrierData()
             data.originalPackageID = replaced

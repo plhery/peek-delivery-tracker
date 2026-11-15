@@ -191,6 +191,22 @@ describe('withEventPlaces', () => {
     expect(JSON.stringify(withoutEventSources({ id: 'parcel', tracking_events: [first] }))).not.toContain('stored_at');
   });
 
+  it('dates the news of a scan a provider told before its carrier did by the provider\'s copy, which the timeline leaves out (#72)', () => {
+    const scan = (id: string, source: string, occurredAt: string, storedAt: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, null, occurredAt), provider_event_id: `${source}:${id}`, stored_at: storedAt, ...extra,
+    });
+    const posted = scan('posted', 'correos-chile', '2026-09-11T13:43:00+00:00', '2026-09-11T14:00:00+00:00');
+    // 17TRACK told the arrival while the carrier could not be asked; the carrier told it the next morning.
+    const copy = scan('arrived-copy', 'unknown', '2026-09-29T11:05:14+00:00', '2026-09-29T12:00:00+00:00', { universal_provider: '17TRACK' });
+    const arrived = scan('arrived', 'correos-chile', '2026-09-29T11:05:00+00:00', '2026-09-30T08:00:00+00:00');
+    const row = { id: 'parcel', carrier: 'correos-chile', carrier_data: { routing: { confirmed_carrier: 'correos-chile' } } };
+    const served = withEventPlaces({ ...row, tracking_events: [posted, copy, arrived] }) as { news_at?: string; tracking_events: { id: string }[] };
+    expect(served.tracking_events.map(({ id }) => id)).toEqual(['posted', 'arrived']);
+    expect(served.news_at).toBe('2026-09-29T12:00:00+00:00');
+    // Before the carrier told it, the provider's row was the news.
+    expect((withEventPlaces({ ...row, tracking_events: [posted, copy] }) as { news_at?: string }).news_at).toBe('2026-09-29T12:00:00+00:00');
+  });
+
   it('leaves packages without scans untouched', () => {
     const row = { id: 'parcel', carrier: 'swiss-post', tracking_events: [] };
     expect(withEventPlaces(row)).toBe(row);

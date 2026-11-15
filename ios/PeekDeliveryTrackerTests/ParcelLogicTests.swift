@@ -3708,10 +3708,13 @@ extension SessionIsolationTests {
     }
 
     /// An account the server can email, which has never chosen.
-    private var emailPreferences: NotificationPreferences {
-        NotificationPreferences(
+    /// With the clock and units the test store's app shows, so reading them sends nothing back.
+    @MainActor private var emailPreferences: NotificationPreferences {
+        let shown = Localizer()
+        return NotificationPreferences(
             enabledStages: NotificationPreset.important.stages, quietHoursStart: "22:00", quietHoursEnd: "07:00",
-            timezone: "Pacific/Auckland", emailOnDelivery: nil, emailAvailable: true
+            timezone: "Pacific/Auckland", emailOnDelivery: nil, emailAvailable: true,
+            clock: shown.use24HourTime ? .twentyFour : .twelve, distance: shown.distanceUnit == .miles ? .mi : .km
         )
     }
 
@@ -4050,6 +4053,80 @@ extension SessionIsolationTests {
         respond(try JSONEncoder.deliveryTracker.encode(on))
         await store.loadNotificationPreferences()
         XCTAssertTrue(store.markNewUpdates)
+    }
+
+    @MainActor func testTheAccountLearnsHowThisDeviceWritesATimeAndADistanceForTheDeliveryEmail() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session, email: "alex@example.com")
+        let suite = "units-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let localizer = Localizer(defaults: defaults, systemUses24HourTime: { true }, systemDistanceUnit: { .kilometres })
+        let store = ParcelStore(configuration: configuration, session: session, localizer: localizer, transport: transport)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        // Read without any: this device's go to the account, the rest as stored and the email choice left out.
+        var none = emailPreferences
+        none.clock = nil
+        none.distance = nil
+        none.emailOnDelivery = true
+        var kept = none
+        kept.clock = .twentyFour
+        kept.distance = .km
+        let log = RequestLog()
+        SessionTestURLProtocol.handler = { request, complete in
+            log.record(request)
+            complete(.success((200, try! JSONEncoder.deliveryTracker.encode(request.httpMethod == "PATCH" ? kept : none))))
+        }
+        await store.loadNotificationPreferences()
+        for _ in 0..<300 where store.notificationPreferences?.clock != .twentyFour { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(log.requests.map(\.method), ["GET", "PATCH"])
+        let sent = try XCTUnwrap(log.requests.last?.body)
+        XCTAssertEqual(Set(sent.keys), ["enabledStages", "quietHoursStart", "quietHoursEnd", "timezone", "clock", "distance"])
+        XCTAssertEqual(sent["clock"] as? String, "24")
+        XCTAssertEqual(sent["distance"] as? String, "km")
+
+        // Chosen in Settings: sent at once, both in one save.
+        var twelve = kept
+        twelve.clock = .twelve
+        twelve.distance = .mi
+        respond(try JSONEncoder.deliveryTracker.encode(twelve), recording: log)
+        localizer.clock = .twelveHour
+        localizer.distance = .miles
+        for _ in 0..<300 where store.notificationPreferences?.distance != .mi { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(store.notificationPreferences?.clock, .twelve)
+        XCTAssertEqual(log.requests.map(\.method), ["GET", "PATCH", "PATCH"])
+        XCTAssertEqual(log.requests.last?.body["clock"] as? String, "12")
+        XCTAssertEqual(log.requests.last?.body["distance"] as? String, "mi")
+
+        // Another save leaves them out, so the server keeps the account's.
+        var emailed = twelve
+        emailed.emailOnDelivery = false
+        respond(try JSONEncoder.deliveryTracker.encode(emailed), recording: log)
+        try await store.setEmailOnDelivery(false)
+        XCTAssertNil(log.requests.last?.body["clock"])
+        XCTAssertNil(log.requests.last?.body["distance"])
+
+        // Changed since on another device: the next read brings it, and this device sends its own again.
+        SessionTestURLProtocol.handler = { request, complete in
+            log.record(request)
+            complete(.success((200, try! JSONEncoder.deliveryTracker.encode(request.httpMethod == "PATCH" ? emailed : kept))))
+        }
+        await store.loadNotificationPreferences()
+        for _ in 0..<300 where store.notificationPreferences?.clock != .twelve { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(log.requests.suffix(2).map(\.method), ["GET", "PATCH"])
+        XCTAssertEqual(log.requests.last?.body["clock"] as? String, "12")
+
+        // A server that does not keep them is not asked again and again.
+        let before = log.requests.count
+        respond(try JSONEncoder.deliveryTracker.encode(none), recording: log)
+        await store.loadNotificationPreferences()
+        try await Task.sleep(for: .milliseconds(300))
+        XCTAssertEqual(log.requests.dropFirst(before).map(\.method), ["GET", "PATCH"])
     }
 
     @MainActor func testAMarkChoiceMadeWithoutAnAccountGoesToTheAccountSignedInTo() async throws {

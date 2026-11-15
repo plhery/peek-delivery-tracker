@@ -64,8 +64,11 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var notificationStatus: UNAuthorizationStatus = .notDetermined
     @Published private(set) var notificationsEnabledOnDevice = false
     @Published private(set) var notificationPreferences: NotificationPreferences? {
-        // An account's choice about the list's mark follows it here from its other devices.
-        didSet { if let chosen = notificationPreferences?.markNewUpdates { followMarkNewUpdates(chosen) } }
+        didSet {
+            // An account's choice about the list's mark follows it here from its other devices.
+            if let chosen = notificationPreferences?.markNewUpdates { followMarkNewUpdates(chosen) }
+            saveShownUnits()
+        }
     }
     /// Whether the list marks the parcels with updates since they were last opened. On until switched off. An
     /// account's choice is stored with its preferences; this device keeps its copy, and the choice of someone
@@ -136,6 +139,10 @@ final class ParcelStore: ObservableObject {
     private var markNewUpdatesChoices = 0
     /// The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken.
     private var markNewUpdatesSaving = 0
+    /// The clock and units sent with the account's preferences and not yet kept, so a server that does not keep them
+    /// is not asked again and again.
+    private var unitsSent: String?
+    private var unitsObservation: AnyCancellable?
     private var deliveryLiveActivityGeneration = 0
     private var deliveryLiveActivitySystemDisabled = false
     private var deliveryLiveActivityRegistrationRemovalPending = false
@@ -174,6 +181,10 @@ final class ParcelStore: ObservableObject {
         timeZoneObservation = NotificationCenter.default.publisher(for: .NSSystemTimeZoneDidChange)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in MainActor.assumeIsolated { self?.timeZoneChanged() } }
+        unitsObservation = localizer.$use24HourTime.map { _ in () }.merge(with: localizer.$distanceUnit.map { _ in () })
+            .dropFirst(2)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in MainActor.assumeIsolated { self?.saveShownUnits() } }
     }
 
     /// The widgets' days are worded for the midnights of the time zone the app published them in: in a new zone, the
@@ -196,6 +207,7 @@ final class ParcelStore: ObservableObject {
         pendingJobIDs.removeAll()
         seenHere.removeAll()
         markNewUpdatesSaving = 0
+        unitsSent = nil
         nativePushGeneration += 1
         deliveryLiveActivityGeneration += 1
         stopDeliveryLiveActivityObservers()
@@ -324,6 +336,36 @@ final class ParcelStore: ObservableObject {
     private func keepMarkNewUpdates(_ enabled: Bool) {
         if markNewUpdates != enabled { markNewUpdates = enabled }
         UserDefaults.standard.set(!enabled, forKey: Self.markNewUpdatesOffKey)
+    }
+
+    /// The delivery email writes a time and a distance as the app last opened does: the account learns this device's
+    /// clock and units whenever its preferences, as read or saved, have others. The rest goes as stored, and the email
+    /// choice is left out, so the server keeps it.
+    private func saveShownUnits() {
+        guard session.isAuthenticated, !isDemo, !isGuest, let stored = notificationPreferences else { return }
+        let clock: NotificationPreferencesClock = localizer.use24HourTime ? .twentyFour : .twelve
+        let distance: NotificationPreferencesDistance = localizer.distanceUnit == .miles ? .mi : .km
+        let sent = "\(clock.rawValue) \(distance.rawValue)"
+        guard stored.clock != clock || stored.distance != distance, unitsSent != sent else { return }
+        unitsSent = sent
+        // A read of the preferences that began before the save is older than it.
+        notificationPreferenceSaves += 1
+        let generation = session.generation
+        Task {
+            var value = stored
+            value.timezone = TimeZone.current.identifier
+            value.emailOnDelivery = nil
+            do {
+                let saved = try await api.saveNotificationPreferences(value, clock: clock, distance: distance)
+                guard generation == session.generation else { return }
+                // Kept: should another device change them, the next difference read here is sent again.
+                if unitsSent == sent, saved.clock == clock, saved.distance == distance { unitsSent = nil }
+                notificationPreferenceSaves += 1
+                notificationPreferences = saved
+            } catch {
+                if generation == session.generation, unitsSent == sent { unitsSent = nil }
+            }
+        }
     }
 
     /// The account's preferences as last read or saved, read now where they were not.

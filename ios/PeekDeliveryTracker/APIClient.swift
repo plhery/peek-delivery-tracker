@@ -302,13 +302,19 @@ final class DeliveryAPIClient {
         try await request("/api/push/preferences")
     }
 
-    /// `markNewUpdates` is the list's mark on parcels with new updates when its switch is what is being saved. Any
-    /// other save leaves it out, and the server keeps the account's choice, made on this device or another.
-    func saveNotificationPreferences(_ value: NotificationPreferences, markNewUpdates: Bool? = nil) async throws -> NotificationPreferences {
+    /// `markNewUpdates` is the list's mark on parcels with new updates when its switch is what is being saved, and
+    /// `clock` and `distance` how this device writes a time and a distance when they are. Any other save leaves them
+    /// out, and the server keeps the account's, sent from this device or another.
+    func saveNotificationPreferences(
+        _ value: NotificationPreferences, markNewUpdates: Bool? = nil,
+        clock: NotificationPreferencesClock? = nil, distance: NotificationPreferencesDistance? = nil
+    ) async throws -> NotificationPreferences {
         var sent = value
         // Whether the server can email the account is the server's to say.
         sent.emailAvailable = nil
         sent.markNewUpdates = markNewUpdates
+        sent.clock = clock
+        sent.distance = distance
         return try await request("/api/push/preferences", method: "PATCH", body: sent)
     }
 

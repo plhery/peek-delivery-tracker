@@ -116,6 +116,14 @@ The [iPhone guide](ios/README.md) covers connecting it to a server, signing it f
 phone, notifications and widgets.
 
 The Android beta, signed by Google Play, is in [Peek's F-Droid repository](https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7) and on [GitHub Releases](https://github.com/plhery/peek-delivery-tracker/releases).
+To add the repository, open the F-Droid app, go to Settings → Repositories → +, and paste
+the whole address, `?fingerprint=…` included:
+
+```
+https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7
+```
+
+Opened in a browser, the address shows a 404 page; that's expected.
 
 ## Host your own
 

@@ -92,10 +92,10 @@ data class DeliveryEmail private constructor(
     val isOn: Boolean get() = choice == true
 
     /**
-     * While the email is on and the parcel is still on its way, the parcel's bell opens its alerts. Otherwise one
-     * tap mutes or unmutes its notifications.
+     * While the email is on and the parcel is still on its way, a held return included, the parcel's bell opens its
+     * alerts. Otherwise one tap mutes or unmutes its notifications.
      */
-    fun bellOpensAlerts(parcel: Parcel): Boolean = isOn && parcel.currentStage?.isFinal != true
+    fun bellOpensAlerts(parcel: Parcel): Boolean = isOn && !parcel.isOver
 
     /** Offered once, on a delivered parcel, while the account has never chosen. */
     fun isOffered(parcel: Parcel): Boolean = choice == null && parcel.isDelivered

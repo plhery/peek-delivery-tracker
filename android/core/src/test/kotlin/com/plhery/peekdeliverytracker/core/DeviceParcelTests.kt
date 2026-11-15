@@ -1610,6 +1610,31 @@ class DeviceParcelTests {
 
     // Notifications
 
+    /**
+     * A held return is still on its way back: the carrier scans it and the server keeps its alerts on. A new token or
+     * language signs it up again, as it does a parcel on its way; a plain return needs nothing.
+     */
+    @Test
+    fun aHeldReturnIsSignedUpForNotificationsAsAParcelOnItsWay() = runTest {
+        val held = UUID.randomUUID()
+        val returned = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        val heldReturn = pkg(held, stage = TrackingStage.Returned).copy(carrierData = PublicPackageCarrierData(returnHeld = true))
+        storage.parcels = listOf(
+            parcel("22222222222A", "", held, pkg = heldReturn),
+            parcel("22222222222B", "", returned, pkg = pkg(returned, stage = TrackingStage.Returned)),
+        )
+        val calls = Calls()
+        val device = device(client(calls), storage, this)
+        assertTrue(device.hasParcelsOnTheirWay)
+
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(listOf("token1", null), storage.parcels.map { it.alertToken })
+        assertEquals(1, calls.all.size)
+        assertTrue(calls.all.single(), calls.all.single().startsWith("alert 22222222222A k "))
+    }
+
     @Test
     fun notificationsAreAskedForOnceForEveryParcelOnItsWayWithTheKeyOnlyForThisIPhonesOwn() = runTest {
         val mine = UUID.randomUUID()

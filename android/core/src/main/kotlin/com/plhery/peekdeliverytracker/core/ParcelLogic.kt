@@ -560,6 +560,12 @@ val Parcel.writtenAheadNoteKey: String?
 val Parcel.heldReturn: Boolean
     get() = currentStage == TrackingStage.Returned && carrierData?.returnHeld == true
 
+/**
+ * Whether the parcel has nothing more to tell: delivered, or returned with no scans to come. A held return is still on
+ * its way back, and keeps its alerts.
+ */
+val Parcel.isOver: Boolean get() = currentStage?.isFinal == true && !heldReturn
+
 private val expectedDayPattern: Pattern =
     Pattern.compile("^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])", unicodeCharacterClass)
 

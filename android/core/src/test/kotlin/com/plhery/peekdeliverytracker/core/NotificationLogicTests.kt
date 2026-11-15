@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
@@ -341,6 +342,10 @@ class NotificationLogicTests {
         }
         // A parcel no carrier has announced yet is still on its way.
         assertTrue(on.bellOpensAlerts(parcel(null)))
+        // So is a held return, which the carrier still scans on its way back and the server still alerts about.
+        val held = parcel(TrackingStage.Returned).copy(carrierData = CarrierData(returnHeld = true))
+        assertTrue(on.bellOpensAlerts(held))
+        assertFalse(off.bellOpensAlerts(held))
     }
 
     @Test

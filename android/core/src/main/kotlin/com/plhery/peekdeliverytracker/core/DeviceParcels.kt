@@ -644,7 +644,7 @@ class DeviceParcels(
             val key = keys.keyOf(entry.linkId)
             if (key == null && !entry.isViewer) continue
             val age = now().timeIntervalSinceReferenceDate - entry.checkedAt
-            val settled = entry.parcel.currentStage?.isFinal == true && entry.parcel.carrierData?.returnHeld != true
+            val settled = entry.parcel.isOver
             val fresh = if (waiting(entry.parcel)) waitingFresh else if (settled) settledFresh else fresh
             if (!(all || only != null || age < 0 || age >= fresh)) continue
             try {
@@ -984,17 +984,18 @@ class DeviceParcels(
 
     // Notifications
 
-    /** Whether a parcel is still on its way, with something left to tell. */
-    val hasParcelsOnTheirWay: Boolean get() = entries.any { it.parcel.currentStage?.isFinal != true }
+    /** Whether a parcel is still on its way, with something left to tell: a held return still is. */
+    val hasParcelsOnTheirWay: Boolean get() = entries.any { !it.parcel.isOver }
 
     /** What tells the service that this phone's FCM [token] hears nothing more of a parcel. */
     private fun removal(token: String) = DeleteParcelAppAlertRequest(token = token, transport = NativePushTransport.Fcm)
 
     /**
      * Turns notifications on, on this phone's token and in its language, for every parcel still on its way: once a
-     * launch, and again when the token or the language changes. A parcel that arrived needs none. A round is short and
-     * quiet: a few parcels at most, and it ends at the first sign that the service wants a pause or sends no
-     * notifications. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
+     * launch, and again when the token or the language changes. A parcel that arrived needs none; a held return still
+     * does. A round is short and quiet: a few parcels at most, and it ends at the first sign that the service wants a
+     * pause or sends no notifications. A link that leads nowhere, has no room or is no longer shared is left until the
+     * next launch.
      *
      * On Android the token is this phone's FCM registration token, which has one environment. Called from the main
      * thread: `FirebaseMessagingService.onNewToken` runs on another, and the app hands its token over to the main one.
@@ -1005,7 +1006,7 @@ class DeviceParcels(
         val round = asked.nfc()
         if (!alertRounds.add(round)) return
         try {
-            val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && it.parcel.currentStage?.isFinal != true }.take(alertsPerRound)
+            val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }.take(alertsPerRound)
             for (entry in due) {
                 // Forgotten, or followed through another link, since the round began.
                 if (entries.none { it.linkId.equalsCanonically(entry.linkId) }) continue

@@ -2,10 +2,13 @@ package com.plhery.peekdeliverytracker.widget
 
 import android.app.AlarmManager
 import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProviderInfo
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import android.util.SizeF
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.glance.appwidget.testing.unit.GlanceAppWidgetUnitTest
@@ -38,10 +41,13 @@ import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import java.time.Duration
 import java.util.Locale
+import kotlin.math.ceil
+import kotlin.math.pow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -251,6 +257,55 @@ class ParcelsWidgetTest {
             }
         }
         assertEquals(listOf(4, 4), listOf(LIST_SMALL, DpSize(194.dp, 223.dp)).map { sections(list(order.take(4)), it).rows.size })
+    }
+
+    /**
+     * Each list is drawn a little inside the sizes its launcher gives ([ParcelsWidget.fitting]), so that RemoteViews,
+     * which shows the closest layout that fits the widget's frame (`ceil(frame) + 1` over it each way), shows the
+     * frame's own. A Pixel launcher on a phone with a second screen gives a two-by-two widget four sizes, each twice,
+     * and frames it at 471 x 548 px at 420 dpi, 1.5 dp under the 210.3 dp it reports: as reported, the frame would show
+     * the other screen's layout, three rows and a row's room blank.
+     */
+    @Test
+    fun eachListIsDrawnInsideTheSizesItsLauncherGives() {
+        val reported = listOf(SizeF(179.42857f, 175.61905f), SizeF(179.42857f, 210.28572f), SizeF(360.38095f, 108.95238f), SizeF(419.0476f, 108.95238f))
+        val frame = SizeF(471 / 2.625f, 548 / 2.625f)
+        fun shown(sizes: List<SizeF>): SizeF = sizes.filter { ceil(frame.width) + 1 > it.width && ceil(frame.height) + 1 > it.height }
+            .minByOrNull { (it.width - frame.width).pow(2) + (it.height - frame.height).pow(2) } ?: sizes.minBy { it.width * it.height }
+        val options = Bundle().apply {
+            putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, ArrayList(reported.flatMap { listOf(it, it) }))
+            putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 179)
+            putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, 210)
+        }
+        @Suppress("DEPRECATION")
+        val fitted = ParcelsWidget.fitting(options).getParcelableArrayList<SizeF>(AppWidgetManager.OPTION_APPWIDGET_SIZES)!!
+        assertEquals(listOf(SizeF(177f, 173f), SizeF(177f, 208f), SizeF(358f, 106f), SizeF(417f, 106f)), fitted)
+        assertEquals(177, ParcelsWidget.fitting(options).getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH))
+        assertEquals(208, ParcelsWidget.fitting(options).getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT))
+        assertEquals(reported[0], shown(reported))
+        assertEquals(SizeF(177f, 208f), shown(fitted))
+
+        val order = sample.sections.flatMap { it.parcels }
+        fun rows(size: SizeF, count: Int) = sections(list(order.take(count)), DpSize(size.width.dp, size.height.dp)).rows.size
+        assertEquals(listOf(4, 4, 4), listOf(4, 6, 7).map { rows(shown(fitted), it) })
+        assertEquals(3, rows(shown(reported), 7))
+    }
+
+    /** Drawn by the app itself, a placed list is the launcher's to show, from its sizes. */
+    @Test
+    fun aPlacedListIsDrawnByTheApp() {
+        val manager = AppWidgetManager.getInstance(app)
+        val widgets = shadowOf(manager)
+        val component = ComponentName(app, ParcelsWidgetReceiver::class.java)
+        widgets.addInstalledProvider(AppWidgetProviderInfo().apply { provider = component })
+        widgets.bindAppWidgetId(3, component)
+        manager.updateAppWidgetOptions(3, Bundle().apply { putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, arrayListOf(SizeF(LIST_SMALL.width.value, LIST_SMALL.height.value))) })
+        val placed = widgets.getViewFor(3)
+        runBlocking { ParcelsWidget.draw(app) }
+        assertNotEquals(null, widgets.getViewFor(3))
+        assertNotSame(placed, widgets.getViewFor(3))
+        // Removed meanwhile: nothing to draw.
+        runBlocking { ParcelsWidget.draw(app, 4, Bundle()) }
     }
 
     /**

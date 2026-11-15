@@ -78,6 +78,11 @@ Arriving today, last night's delivery "yesterday", and a passed estimate gives w
     line each where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up (`DeliveryWidgetList.layouts`),
     and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line doesn't fit, the day stays.
 
+  The app draws it itself (`ParcelsWidget.draw`) rather than through Glance's sessions, at each size the launcher
+  gives taken to its whole dp and 2 dp under (`ParcelsWidget.fitting`): a launcher can frame a widget a little smaller
+  than the size it gives, and the launcher shows the closest layout that fits the frame, which would otherwise be
+  another screen's.
+
   Cards and passes use the pictures the app draws for Next delivery's first 8 parcels; until those are drawn, the
   widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list
   (`peekdeliverytracker://parcels`).

@@ -291,7 +291,7 @@ object DeliveryWidgetUpdates {
         val app = context.applicationContext
         invalidate(app)
         NextDeliveryWidget().updateAll(app)
-        ParcelsWidget().updateAll(app)
+        ParcelsWidget.draw(app)
     }
 
     /** [update], from where nothing waits for it but `done`. */
@@ -301,7 +301,7 @@ object DeliveryWidgetUpdates {
         scope.launch {
             try {
                 NextDeliveryWidget().updateAll(app)
-                ParcelsWidget().updateAll(app)
+                ParcelsWidget.draw(app)
             } finally {
                 done()
             }

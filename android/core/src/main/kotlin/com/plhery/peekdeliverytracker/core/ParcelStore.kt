@@ -1857,17 +1857,29 @@ class ParcelStore(
                 }
                 item.copy(
                     later = later, section = section, nextUp = nextUp, carrierId = parcel.displayedCarrier.rawValue,
-                    steps = if (index < DeliveryWidgetSelection.limit) widgetSteps(parcel).ifEmpty { null } else null,
+                    steps = if (index < DeliveryWidgetSelection.limit) widgetSteps(parcel, localizer).ifEmpty { null } else null,
                 )
             }
         }
 
-        /** The parcel's last steps, latest first: when, the carrier's words, and the place, else its name on the map. */
-        private fun widgetSteps(parcel: Parcel): List<DeliveryWidgetStep> = parcel.trackingEvents
+        /**
+         * The parcel's last steps, latest first, as its page words them: when, the carrier's words (else its stage's), the
+         * place, else its name on the map, and the time.
+         */
+        private fun widgetSteps(parcel: Parcel, localizer: Localizer): List<DeliveryWidgetStep> = parcel.trackingEvents
             .mapNotNull { event -> DateParser.date(event.occurredAt)?.let { event to it } }
             .sortedByDescending { it.second }
             .take(DeliveryWidgetSelection.steps)
-            .map { (event, at) -> DeliveryWidgetStep(at, event.description, event.location ?: event.place?.name) }
+            .map { (event, at) ->
+                val day = event.calendarDay
+                DeliveryWidgetStep(
+                    // A step dated by its day alone is on that day where the reader is, and has no time.
+                    at = day ?: at,
+                    text = localizer.journalWording(event),
+                    place = event.journalLocation?.let { TrackingLocation.spoken(it, event.place, localizer.language) } ?: event.place?.name,
+                    clock = if (day == null) localizer.clockTime(at) else "",
+                )
+            }
 
         /** `detail` words when the parcel is expected or arrived, as of a moment. */
         private fun widgetParcel(

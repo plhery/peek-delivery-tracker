@@ -76,7 +76,12 @@ data class DeliveryWidgetStep(
     @Serializable(with = ReferenceDateSerializer::class) val at: Instant,
     val text: String,
     val place: String? = null,
-)
+    /** Its time as the app writes a time; empty for a step the carrier dated by its day alone. */
+    val clock: String? = null,
+) {
+    /** Its time as the Parcels widget writes it ([Localizer.stepTime]). */
+    fun time(now: Instant, localizer: Localizer): String = localizer.stepTime(at, now, clock)
+}
 
 /**
  * The days the widgets' words follow while the app stays closed: "today", "tomorrow" and "yesterday" change at

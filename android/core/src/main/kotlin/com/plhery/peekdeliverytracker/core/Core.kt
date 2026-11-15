@@ -537,11 +537,16 @@ class Localizer(
         return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month" + if (withYear) " ${fields.yearOfEra}" else ""
     }
 
-    /** A tracking step's time as the list widget writes it: the time alone on `now`'s day, else after the short weekday ("Thu 21:40"). */
-    fun stepTime(date: Instant, now: Instant = AppClock.now()): String {
-        if (localDay(date) == localDay(now)) return clockTime(date)
+    /**
+     * A tracking step's time as the list widget writes it: its `clock`, else the time, alone on `now`'s day, else after
+     * the short weekday ("Thu 21:40"). A step dated by its day alone has an empty clock: nothing on its day, then the
+     * weekday alone ("Thu").
+     */
+    fun stepTime(date: Instant, now: Instant = AppClock.now(), clock: String? = null): String {
+        val time = clock ?: clockTime(date)
+        if (localDay(date) == localDay(now)) return time
         val weekday = FormatData.language(language).weekdays[fields(date).weekday - 1].replace(".", "")
-        return "$weekday ${clockTime(date)}"
+        return if (time.isEmpty()) weekday else "$weekday $time"
     }
 
     /**

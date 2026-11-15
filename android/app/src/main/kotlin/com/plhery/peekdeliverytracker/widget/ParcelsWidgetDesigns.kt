@@ -124,9 +124,10 @@ private fun CardAndSteps(list: DeliveryWidgetList, parcel: DeliveryWidgetParcel,
 }
 
 /**
- * The steps that fit `height`, four at most: a dot on the thread, the brightest for the latest; the carrier's words,
- * semibold for the latest, and the time at the end in the card's ink (the time alone today, else after the weekday),
- * on the app's clock ([Device.appUses24HourTime]); the place under them.
+ * The steps that fit `height`, four at most: a dot on the thread, the brightest for the latest; the words the parcel's
+ * page gives them, semibold for the latest, and the time at the end in the card's ink ([DeliveryWidgetStep.time]: the
+ * time alone today, else after the weekday, and the weekday alone for a step dated by its day alone), on the app's
+ * clock ([Device.appUses24HourTime]); the place under them.
  */
 @Composable
 private fun Steps(list: DeliveryWidgetList, steps: List<DeliveryWidgetStep>, card: DeliveryWidgetCard, height: Dp, type: WidgetText) {
@@ -161,7 +162,7 @@ private fun Steps(list: DeliveryWidgetList, steps: List<DeliveryWidgetStep>, car
                             style = TextStyle(color = WidgetCardColors.primary, fontSize = type.sp(footnote), fontWeight = if (index == 0) FontWeight.Medium else FontWeight.Normal),
                         )
                         Spacer(GlanceModifier.width(STEP_TIME_GAP))
-                        Text(copy.stepTime(step.at, list.date), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption), fontWeight = FontWeight.Medium))
+                        Text(step.time(list.date, copy), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption), fontWeight = FontWeight.Medium))
                     }
                     step.place?.let { Text(it, maxLines = 1, style = TextStyle(color = CARD_SECONDARY, fontSize = type.sp(caption2))) }
                 }

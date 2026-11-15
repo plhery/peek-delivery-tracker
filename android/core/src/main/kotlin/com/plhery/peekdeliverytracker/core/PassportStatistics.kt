@@ -432,6 +432,17 @@ object TrackingLocation {
         return countryCode(location) ?: placedCode(location, placedIn)?.country
     }
 
+    /**
+     * `EventLocation.spoken`: a scan's place as the parcel's page writes it, in words, the country's name after the
+     * place's ("Zürich, Switzerland"), or alone.
+     */
+    fun spoken(location: String, placed: EventPlace?, language: AppLanguage): String {
+        val place = place(location, placed, language)
+        val country = place.country ?: return place.name
+        val name = countryName(country, language)
+        return if (place.name.isEmpty()) name else "${place.name}, $name"
+    }
+
     /** `locale.localizedString(forRegionCode:)`, which reads the code in either case. */
     fun countryName(code: String, language: AppLanguage): String {
         if (code == "CN") chinaNames[language]?.let { return it }

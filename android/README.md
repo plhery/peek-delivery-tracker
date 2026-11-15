@@ -70,7 +70,8 @@ changes while the app runs, it words the days again for the new zone's midnights
   one. Its design follows how many parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the
   small, medium or large size:
   - up to `k`, cards, the app list's Next up first: Next delivery's card or two side by side; in a large widget one
-    wide card over the parcel's last four steps, two wide cards, or three of the app list's cards;
+    wide card over the parcel's last four steps, worded as its page words them, a step dated by its day alone
+    naming that day and no time, two wide cards, or three of the app list's cards;
   - up to `2k`, passes in each carrier's colours, in two columns in a medium widget;
   - more, rows under the app list's sections, each marked by its carrier's truck, then a line counting the rest at
     the foot of the last column, after the last row shown (`SectionsLayout`). As many rows as fit at every size, so

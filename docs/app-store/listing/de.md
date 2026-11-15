@@ -71,16 +71,12 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• In „Paket hinzufügen“ behält jetzt jeder Paketdienst seine eigene Postleitzahl und sein Lieferland: Die Postleitzahl des einen geht nicht mehr auf den nächsten über, wenn du wechselst, und erscheint wieder, wenn du zurückwechselst.
-• „Paketdienst ändern“ füllt eine erforderliche Postleitzahl jetzt mit der zuletzt angegebenen passenden aus und schlägt sie bei einer optionalen vor, wie „Paket hinzufügen“.
-• Ein mit seiner Postleitzahl gespeichertes Paket, etwa ein noch nicht gescanntes PostNL-Paket, fragt nicht mehr ein zweites Mal nach der Postleitzahl der Lieferadresse.
-• Peek verfolgt jetzt 83 weitere Paketdienste, jeden mit einem Lieferwagen in seinen eigenen Farben, darunter GLS US, BH Pošta, Pošte Srpske und Kurierdienste in Griechenland, Rumänien, Ungarn, Polen und Bulgarien.
-• Findet kein Paketdienst eine Nummer, die wie die eines Paketdienstes beginnt, aber ein Zeichen zu wenig oder zu viel hat, etwa eine UPS-Nummer mit 1Z am Anfang, sagt die Seite des Pakets jetzt, dass sie vielleicht vertippt ist, und nennt den Paketdienst.
-• Eine Zeile unter dem Sendungsverlauf sagt jetzt, dass die Uhrzeiten in deiner Zeitzone stehen, und nennt sie, etwa „Mitteleuropäische Zeit“.
-• Ein Lieferfenster in einer Mitteilung oder Live-Aktivität zeigt jetzt die Uhrzeiten des Paketdienstes, sodass ein britisches Zeitfenster von 07:00 bis 09:00 nicht mehr als 08:00 bis 10:00 erscheint.
-• Bis der zustellende Paketdienst ein Paket scannt, etwa bei JRT-Paketen, die an DHL übergeben werden, fragt Peek jetzt bis zu 14 Tage lang weiter beim ersten Paketdienst nach, damit dessen spätere Scans noch erscheinen.
-• Während ein Paket auf dem Rückweg zum Absender ist, sagen Mitteilungen jetzt „Auf dem Rückweg“ statt „Unterwegs“, und Peek prüft es weiter, falls es doch noch in Zustellung geht.
-• Trägt ein Paketdienst wie GZYL oder Xinghe Freight seine Schritte im Voraus ein, sogar die Zustellung, sagt die Seite des Pakets jetzt, dass Peek sie weglässt, und rät, auf seiner Website nach dem Paketdienst zu suchen, der in deinem Land zustellt.
-• Im Sendungsverlauf von AliExpress-Paketen heißt Cainiaos „Last-mile delivery forecast“ jetzt „Dem Paketdienst vor Ort angekündigt“.
-• Bei den größten Textgrößen auf einem kleinen iPhone wie dem SE laufen „Anmelden“ und der Name des Beispielpakets auf dem Willkommensbildschirm nicht mehr ineinander oder über die Route: Das Bild wächst mit, und der Bildschirm scrollt.
+• Ein Punkt markiert jetzt jedes Paket, bei dem sich seit dem letzten Öffnen etwas getan hat; mit einem Konto verschwindet er auf all deinen Geräten, sobald du das Paket öffnest. Ausschalten kannst du ihn mit „Neue Updates markieren“ in den Einstellungen.
+• In den Einstellungen gibt es jetzt „Zeitformat“ (12 oder 24 Stunden) und „Entfernungseinheit“ (Kilometer oder Meilen); voreingestellt ist „Automatisch“, das deinem Gerät folgt.
+• In „Sortieren & filtern“ gehört „Priorität“ jetzt zu „Lieferdatum“, das die nächste Lieferung zuerst zeigt.
+• Vorab eingetragene Schritte eines Paketdienstes erscheinen jetzt ausgegraut im Sendungsverlauf, sobald ihre Zeit vorbei ist.
+• Ein noch nicht gescanntes Paket zeigt jetzt etwa „Warten auf DHL“ statt „Aktualisierung nicht verfügbar“, und kennt der Paketdienst die Nummer nach zwei Tagen noch immer nicht, bittet Peek dich, sie zu prüfen.
+• Um Mitternacht wechseln Widgets von „Morgen“ auf „Heute“, auch wenn Peek geschlossen bleibt.
+• Ein an den Absender zurückgeschicktes Paket weist jetzt darauf hin, wenn der Paketdienst es auf dem Rückweg noch scannt.
+• Fehlerbehebungen: Zu einem Paket, das du ohne Konto vergisst, bekommst du keine Mitteilungen mehr, und nach „Alle vergessen“ taucht keines wieder auf. Schließt du die Mitteilungseinstellungen, bevor sie geladen sind, erscheint kein Verbindungsfehler mehr.
 ```

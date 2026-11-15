@@ -73,16 +73,12 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• In “Add a parcel”, each carrier now keeps its own postcode and delivery country: one carrier’s postcode no longer carries over when you switch to another, and switching back shows it again.
-• “Change carrier” now fills in a required postcode with the last one you gave that fits, and suggests it for an optional one, as “Add a parcel” does.
-• A parcel saved with its postcode, such as a PostNL parcel that hasn’t been scanned yet, no longer asks for the delivery postcode a second time.
-• Peek now tracks 83 more carriers, each with a truck in its own colours, among them GLS US, BH Pošta, Pošte Srpske and couriers in Greece, Romania, Hungary, Poland and Bulgaria.
-• When no carrier finds a number that starts like one carrier’s but has a character missing or one too many, such as a UPS number beginning 1Z, the parcel’s page now says the number may be mistyped and names the carrier.
-• A line under a parcel’s history now says its times are in your time zone and names it, such as “Central European Time”.
-• A delivery window in a notification or Live Activity now shows the carrier’s own hours, so a British 07:00–09:00 slot no longer reads 08:00–10:00.
-• Until the carrier that will deliver a parcel scans it, as with JRT parcels handed to DHL, Peek now keeps checking the first carrier for up to 14 days, so its later scans still show up.
-• While a parcel is on its way back to its sender, notifications now say “On its way back” instead of “On its way”, and Peek keeps checking it in case it goes out for delivery after all.
-• When a carrier such as GZYL or Xinghe Freight writes its steps in advance, even the delivery, the parcel’s page now says Peek leaves them out, and suggests looking on the carrier’s site for the company that delivers in your country.
-• In an AliExpress parcel’s history, Cainiao’s “Last-mile delivery forecast” now reads “Announced to the local courier”.
-• At the largest text sizes on a small iPhone such as the SE, the welcome screen’s “Sign in” button and sample parcel name no longer run into each other or over the route: the picture grows and the screen scrolls.
+• A dot now marks each parcel with updates since you last opened it; with an account, opening it clears the dot on all your devices. “Mark new updates” in Settings turns it off.
+• Settings now has “Time format” (12- or 24-hour) and “Distance units” (kilometres or miles); the default, “Automatic”, follows your device.
+• In “Sort & filter”, “Priority” is now part of “Delivery date”, which puts the next delivery first.
+• Steps a carrier writes in advance now show in grey in the parcel’s history once their time has passed.
+• A parcel with no scans yet now says “Waiting for” its carrier instead of “Update unavailable”, and if the carrier still doesn’t know the number after two days, Peek asks you to check it.
+• Widgets now change “Tomorrow” to “Today” at midnight, even while Peek is closed.
+• A parcel returned to sender now says when the carrier is still scanning it on its way back.
+• Fixes: without an account, a parcel you forget no longer keeps notifying you, and none comes back after “Forget all”. Closing the notification settings before they load no longer shows a connection error.
 ```

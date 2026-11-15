@@ -586,18 +586,24 @@ val Parcel.searchText: String
  * the parcel's history changes: copies of a parcel share their event list, so a hit compares the list, not events.
  */
 private object LatestEventCache {
-    private class Entry(val events: List<TrackingEvent>, val latest: TrackingEvent?)
+    private class Entry(val events: List<TrackingEvent>, val held: Boolean, val latest: TrackingEvent?)
 
     private val entries = ConcurrentHashMap<UUID, Entry>()
 
     fun latest(parcel: Parcel): TrackingEvent? {
         val events = parcel.trackingEvents
-        entries[parcel.id]?.let { if (it.events == events) return it.latest }
+        val held = parcel.carrierData?.returnHeld == true
+        entries[parcel.id]?.let { if (it.events == events && it.held == held) return it.latest }
         // A line under another scan in the journal is part of that scan's step, whichever is newer.
         val lines = relayLines(events).values.flatten().mapTo(HashSet()) { it.id }
         val carrier = events.filter { it.stage != TrackingStage.Pending && it.id !in lines }.sortedWith(eventOrderComparator)
-        val latest = current(carrier) ?: newest(events)
-        entries[parcel.id] = Entry(events, latest)
+        val current = current(carrier) ?: newest(events)
+        // While the server holds the return (`return_held`), it stays the parcel's event over a trip scan, customs or a
+        // problem, as the server stores it: a row an earlier check dated at the check can sit after it (`src/lib/stages.ts`).
+        val latest = if (held && current != null && current.stage in returnHolding) {
+            carrier.firstOrNull { it.stage == TrackingStage.Returned } ?: current
+        } else current
+        entries[parcel.id] = Entry(events, held, latest)
         return latest
     }
 
@@ -640,6 +646,9 @@ private object LatestEventCache {
 
     /** Stages of the scans that carry a parcel back to its sender once its return started. */
     private val returnTrip = setOf(TrackingStage.InTransit, TrackingStage.Customs)
+
+    /** What the server holds a return over (`return_held`): the trip back, customs, or a problem. */
+    private val returnHolding = setOf(TrackingStage.InTransit, TrackingStage.Customs, TrackingStage.Exception)
 
     /**
      * The scan that returned the parcel to its sender, while the scans after it only carry the parcel back (in transit,

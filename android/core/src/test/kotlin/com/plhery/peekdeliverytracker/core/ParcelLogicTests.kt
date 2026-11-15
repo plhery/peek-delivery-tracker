@@ -1425,6 +1425,27 @@ class ParcelLogicTests {
         assertFalse(moving.copy(carrier = CarrierId.Gzyl).scheduledDelivery)
     }
 
+    // As src/lib/stages.test.ts: a problem row an earlier check dated after the return scan.
+    @Test
+    fun aReturnTheServerHoldsStaysOverAProblemRowAndTheTripAfterIt() {
+        val id = UUID.randomUUID()
+        val failed = event(id, TrackingStage.FailedAttempt, "2026-06-04T08:00:00Z")
+        val returned = event(id, TrackingStage.Returned, "2026-06-05T08:00:00Z")
+        val problem = event(id, TrackingStage.Exception, "2026-06-05T13:00:00Z")
+        val hub = event(id, TrackingStage.InTransit, "2026-06-07T08:00:00Z")
+        fun held(vararg events: TrackingEvent) = makeParcel(id, events = events.toList()).copy(carrierData = CarrierData(returnHeld = true))
+        assertEquals(returned.id, held(failed, returned, problem).currentEvent?.id)
+        assertEquals(returned.id, held(failed, returned, problem, hub).currentEvent?.id)
+        assertTrue(held(failed, returned, problem, hub).heldReturn)
+        // Without the hold, the problem row ends the return.
+        assertEquals(hub.id, makeParcel(id, events = listOf(failed, returned, problem, hub)).currentEvent?.id)
+        // A delivery round after the return is news of its own, held or not.
+        val round = event(id, TrackingStage.OutForDelivery, "2026-06-08T08:00:00Z")
+        assertEquals(round.id, held(failed, returned, problem, hub, round).currentEvent?.id)
+        // A hold with no return among the rows reads them as they are.
+        assertEquals(hub.id, held(failed, hub).currentEvent?.id)
+    }
+
     @Test
     fun heldReturnMatchesWebApp() {
         val id = UUID.randomUUID()

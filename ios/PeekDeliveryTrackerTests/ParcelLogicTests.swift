@@ -3853,7 +3853,8 @@ extension SessionIsolationTests {
         await store.markSeen(scanned.id)
         XCTAssertEqual(log.requests.map(\.method), ["POST"])
         XCTAssertEqual(log.requests.first?.path, "/api/packages/\(scanned.id.uuidString)/seen")
-        XCTAssertEqual(log.requests.first?.body.isEmpty, true)
+        XCTAssertEqual(log.requests.first?.body["news_at"] as? String, "2026-11-15T10:00:00.25+00:00",
+                       "Seen as of the news its page showed")
         XCTAssertEqual(store.parcels.first { $0.id == scanned.id }?.seenAt, "2026-11-15T10:05:00.5+00:00")
         XCTAssertFalse(store.parcels.contains(where: \.hasNewUpdate))
 
@@ -3892,6 +3893,52 @@ extension SessionIsolationTests {
         respond(list)
         await store.load()
         XCTAssertEqual(store.parcels.first?.hasNewUpdate, true)
+    }
+
+    @MainActor func testAReadOfTheListUnderWayWhenTheParcelIsOpenedLandsSeenAsLateAsItWasMarked() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let scanned = scannedParcel()
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [scanned])))
+        await store.load()
+
+        // The read under way brings a scan stored after the one the page shows, and the parcel as it was before it opened.
+        var newer = scanned
+        newer.newsAt = "2026-11-15T10:30:00+00:00"
+        let answer = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [newer]))
+        let kept = Data("{\"seen_at\":\"2026-11-15T10:00:00.250999+00:00\"}".utf8)
+        let started = expectation(description: "Read started")
+        nonisolated(unsafe) var completeRead: ((Result<(Int, Data), Error>) -> Void)?
+        SessionTestURLProtocol.handler = { request, complete in
+            if request.httpMethod == "GET", request.url?.path == "/api/packages" {
+                completeRead = complete
+                started.fulfill()
+            } else { complete(.success((200, kept))) }
+        }
+        let reading = Task { await store.load() }
+        await fulfillment(of: [started], timeout: 2)
+        await store.markSeen(scanned.id)
+        completeRead?(.success((200, answer)))
+        await reading.value
+
+        let shown = try XCTUnwrap(store.parcels.first)
+        XCTAssertEqual(shown.newsAt, newer.newsAt, "The read landed")
+        XCTAssertEqual(shown.seenAt, "2026-11-15T10:00:00.250999+00:00", "Seen as late as this device marked it")
+        XCTAssertTrue(shown.hasNewUpdate, "The scan stored since the page showed its news is new")
+
+        // A read that brings the server's mark takes over from this device's.
+        var caughtUp = newer
+        caughtUp.seenAt = "2026-11-15T10:00:00.250999+00:00"
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [caughtUp])))
+        await store.load()
+        caughtUp.seenAt = "2026-11-15T09:30:00+00:00"
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [caughtUp])))
+        await store.load()
+        XCTAssertEqual(store.parcels.first?.seenAt, "2026-11-15T09:30:00+00:00", "Once caught up, the server's word is the list's")
     }
 
     @MainActor func testTheMarkForNewUpdatesIsOnUntilSwitchedOffAndFollowsTheAccount() async throws {

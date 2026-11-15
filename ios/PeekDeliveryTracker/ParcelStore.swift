@@ -123,6 +123,9 @@ final class ParcelStore: ObservableObject {
     private var cacheOwnerID: UUID?
     private var mutationRevision = 0
     private var loadSequence = 0
+    /// The `seen_at` the account's parcels were last marked with on this device, until a read of the list brings one
+    /// as late: opening a parcel lets a read in flight land, with the later of the two.
+    private var seenHere: [UUID: String] = [:]
     private var nativePushGeneration = 0
     /// Counts saved preferences: the answer to a read that began before a save is older than it.
     private var notificationPreferenceSaves = 0
@@ -186,6 +189,7 @@ final class ParcelStore: ObservableObject {
         refreshTask = nil
         pendingMutations.removeAll()
         pendingJobIDs.removeAll()
+        seenHere.removeAll()
         nativePushGeneration += 1
         deliveryLiveActivityGeneration += 1
         stopDeliveryLiveActivityObservers()
@@ -300,9 +304,11 @@ final class ParcelStore: ObservableObject {
         return try await api.notificationPreferences()
     }
 
-    /// The parcel's page is in front of the reader: what it tells now is seen. Its mark leaves the list at once, and
-    /// the account's other devices at their next read. A parcel with no news is left alone, and a mark the server
-    /// could not take comes back with the next read of the list.
+    /// The parcel's page is in front of the reader: what it tells now is seen, as of the news the page shows, so a scan
+    /// stored meanwhile stays new. Its mark leaves the list at once, and the account's other devices at their next
+    /// read. A read of the list in flight lands all the same, so the page shows the scans it brings, seen as late as
+    /// this device marked the parcel. A parcel with no news is left alone, and a mark the server could not take comes
+    /// back with the next read of the list.
     func markSeen(_ id: UUID) async {
         guard let parcel = parcels.first(where: { $0.id == id }), parcel.hasNewUpdate else { return }
         if isGuest {
@@ -314,14 +320,43 @@ final class ParcelStore: ObservableObject {
             return
         }
         let generation = session.generation
-        // Seen now: no later than its news, whatever this device's clock says.
-        var seen = parcel
-        seen.seenAt = parcel.newsAt
-        upsert(seen)
-        guard let seenAt = try? await api.markSeen(id: id), generation == session.generation,
-              var kept = parcels.first(where: { $0.id == id }) else { return }
-        kept.seenAt = seenAt
-        upsert(kept)
+        // Seen as of its news, whatever this device's clock says, and so the server stores it.
+        let news = parcel.newsAt
+        if let news { seeHere(id, news) }
+        do {
+            let seenAt = try await api.markSeen(id: id, newsAt: news)
+            if generation == session.generation { seeHere(id, seenAt) }
+        } catch {
+            if generation == session.generation { seenHere[id] = nil }
+        }
+    }
+
+    /// The account's parcel is seen at `seenAt` on this device. Unlike the list's other changes this one lets a read
+    /// of the list in flight land, which then keeps it (`seenAsHere`): its newer scans show on the open page.
+    private func seeHere(_ id: UUID, _ seenAt: String) {
+        seenHere[id] = seenAt
+        guard let index = parcels.firstIndex(where: { $0.id == id }) else { return }
+        parcels[index].seenAt = seenAt
+        persistCache()
+    }
+
+    /// The account's list as read, each parcel seen as late as this device marked it; a mark the read has caught up
+    /// with, or whose parcel the list no longer holds, goes.
+    private func seenAsHere(_ read: [Parcel]) -> [Parcel] {
+        guard !seenHere.isEmpty else { return read }
+        let ids = Set(read.map(\.id))
+        seenHere = seenHere.filter { ids.contains($0.key) }
+        return read.map { parcel in
+            guard let mark = seenHere[parcel.id] else { return parcel }
+            if let markedAt = DateParser.date(mark),
+               parcel.seenAt.flatMap(DateParser.date).map({ $0 < markedAt }) ?? true {
+                var seen = parcel
+                seen.seenAt = mark
+                return seen
+            }
+            seenHere[parcel.id] = nil
+            return parcel
+        }
     }
 
     func setDeliveryLiveActivitiesEnabled(_ enabled: Bool) {
@@ -438,11 +473,12 @@ final class ParcelStore: ObservableObject {
         if showSpinner && parcels.isEmpty && !loading { loading = true }
         defer { if generation == session.generation && sequence == loadSequence && loading { loading = false } }
         do {
-            let next = try await list()
+            let read = try await list()
             try session.checkGeneration(generation)
             guard revision == mutationRevision, sequence == loadSequence, pendingMutations.isEmpty else { return .skipped }
             holdingDeliverySurfaces = false
             showingSavedParcels = false
+            let next = seenAsHere(read)
             let changed = next != parcels
             if changed {
                 parcels = next

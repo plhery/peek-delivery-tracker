@@ -6486,6 +6486,59 @@ describe('TrackingSyncService', () => {
     expect(await refresh('13:10')).toEqual(['la-poste', 'poste-italiane']);
   });
 
+  it('asks a partner no sooner than its minimum interval allows after the router asked it about the number', async () => {
+    const client = fakeClient();
+    let now = new Date('2026-09-10T10:00:00Z');
+    let named = 'CW123456785FR';
+    const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
+      if (carrier === 'poste-italiane') throw Object.assign(new Error('Shipment not found'), { status: 404 });
+      return { status: 'in_transit', delivery_carrier: 'poste-italiane', delivery_tracking_number: named, last_update: '2026-09-10T11:00:00+02:00',
+        timezone: 'Europe/Paris', events: [{ time: '2026-09-10T11:00:00+02:00', description: 'In transit', stage: 'in_transit' }] };
+    }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    const asked = async (time: string) => {
+      now = new Date(`2026-09-10T${time}:00Z`);
+      adapter.fetch.mockClear();
+      // Recognition asked Poste Italiane about the number at 09:30.
+      await service.syncPackage({ id: 'to-italy', carrier: 'la-poste', tracking_number: 'CW123456785FR',
+        carrier_data: { routing: { version: 1, configured_carrier: 'la-poste', paced_asks: { 'poste-italiane': '2026-09-10T09:30:00.000Z' } } } });
+      return { fetched: adapter.fetch.mock.calls.map((call) => call[0]), saved: client.updatePackage.mock.calls.at(-1)![1] as JsonObject };
+    };
+    // Its hour holds the probe of the same number, which keeps no marker and counts no miss.
+    const waited = await asked('10:00');
+    expect(waited.fetched).toEqual(['la-poste']);
+    expect(waited.saved.carrier_data).not.toHaveProperty('delivery_probe');
+    expect((await asked('10:30')).fetched).toEqual(['la-poste', 'poste-italiane']);
+    // Another number is another ask.
+    named = '3UW1234567890';
+    expect((await asked('10:00')).fetched).toEqual(['la-poste', 'poste-italiane']);
+  });
+
+  it('looks up the carrier a provider names no sooner than its minimum interval allows after a handoff probe asked it', async () => {
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const transit = { status: 'in_transit', last_update: '2026-09-10T11:00:00+02:00', timezone: 'Europe/Paris',
+      events: [{ time: '2026-09-10T11:00:00+02:00', description: 'In transit', stage: 'in_transit' }] };
+    // Neither La Poste nor Poste Italiane knows the number.
+    const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
+      throw Object.assign(new Error(`${carrier}: shipment not found`), { status: 404 });
+    }),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...transit, discovered_carrier: 'poste-italiane', reported_carriers: ['Poste Italiane'] }) };
+    let now = new Date('2026-09-10T12:00:00Z');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    const looked = async (time: string) => {
+      now = new Date(`2026-09-10T${time}:00Z`);
+      adapter.fetch.mockClear();
+      // A handoff probe asked Poste Italiane about the number at 11:30.
+      await service.syncPackage({ id: 'to-italy', carrier: 'la-poste', tracking_number: 'CW123456785FR', created_at: '2026-09-09T08:00:00Z',
+        carrier_data: { delivery_probe: { at: '2026-09-10T11:30:00.000Z', origin_update: null, carrier: 'poste-italiane', number: 'CW123456785FR', misses: 1 },
+          routing: { version: 1, configured_carrier: 'la-poste', discovered_carrier: 'poste-italiane', failures: {}, probe_cursor: 0, discovery_cursor: 0 } } });
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+    expect(await looked('12:00')).toEqual(['la-poste']);
+    expect(await looked('12:30')).toEqual(['la-poste', 'poste-italiane']);
+  });
+
   it('keeps the long gap for a partner whose record is older than the origin’s news', async () => {
     const client = fakeClient();
     let now = new Date('2026-09-10T16:00:00Z');

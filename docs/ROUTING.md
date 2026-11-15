@@ -410,7 +410,9 @@ number, not across the carrier: the carrier's own pacing keeps the total (Poste 
 an hour), and its interval is sized for the parcels that fit it, so a number asked this way costs
 what a parcel filed under the carrier does. Copies of a number share the router's asks
 (`routing.paced_asks`); a handoff probe and the earlier carrier keep their own (`delivery_probe`,
-`earlier_checked_at`). A read our own pacing refuses sends nothing and starts no wait.
+`earlier_checked_at`). The router's asks and a handoff probe's count for each other: the wait runs
+from whichever asked the carrier about the number last, in this check or an earlier one. A read our
+own pacing refuses sends nothing and starts no wait.
 
 A parcel checked hourly or less often has an hour of its own, opening at a minute its
 number gives, so those checks spread over the hour rather than all falling in its

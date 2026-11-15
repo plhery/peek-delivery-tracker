@@ -1420,6 +1420,27 @@ describe('persistent tracking routing', () => {
       expect(Object.keys((asks.result.routing as JsonObject).paced_asks ?? {}))
         .toEqual(fourteen.filter((carrier) => minimumInterval(carrier) > 0));
     });
+    it('counts a handoff probe\'s ask of the number toward a carrier\'s minimum interval, and tells the check of its own', async () => {
+      const number = '123456A123456';
+      const named = (askedElsewhere: (carrier: string, asked: string) => number) => {
+        const onAsk = vi.fn();
+        const run = setup(time, { askedElsewhere, onAsk });
+        run.universal.mockResolvedValue({ ...history(), discovered_carrier: 'poste-italiane' });
+        run.direct.mockImplementation(async (_parcel: JsonObject, carrier: string) => directValue(carrier));
+        return { ...run, onAsk };
+      };
+      // A probe asked Poste Italiane about this number half an hour ago: the hour holds for the router too.
+      const probed = named((carrier, asked) => carrier === 'poste-italiane' && asked === number ? Date.parse('2026-09-10T11:30:00Z') : 0);
+      await probed.router.fetch(parcel({ tracking_number: number, carrier_data: { routing: state({ discovered_carrier: 'poste-italiane' }) } }), false);
+      expect(probed.direct.mock.calls.map(([, carrier]) => carrier)).not.toContain('poste-italiane');
+      expect(probed.recognize).not.toHaveBeenCalled();
+      expect(probed.onAsk).not.toHaveBeenCalled();
+      // Asked over an hour ago, it is asked, and the check hears of the ask.
+      const due = named((carrier) => carrier === 'poste-italiane' ? Date.parse('2026-09-10T10:30:00Z') : 0);
+      await due.router.fetch(parcel({ tracking_number: number, carrier_data: { routing: state({ discovered_carrier: 'poste-italiane' }) } }), false);
+      expect(due.direct.mock.calls.map(([, carrier]) => carrier)).toContain('poste-italiane');
+      expect(due.onAsk).toHaveBeenCalledWith('poste-italiane');
+    });
     it.each([
       // Past its hourly checks, a provider without history for a number nothing has answered for waits a day.
       ['a provider without history', new NoHistoryError('ParcelsApp'), 'no_history', 4, '2026-09-10T13:20:00.000Z', '2026-09-11T11:40:00.000Z'],

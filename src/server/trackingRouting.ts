@@ -807,6 +807,13 @@ export class TrackingRouter {
     recognizeBrowser?: (carrier: string, number: string, context?: TrackingContext, previousError?: unknown) => Promise<Recognition>;
     /** Whether a carrier's adapter refuses the number as one it does not issue, without a request. */
     refuses?: (carrier: string, number: string) => Promise<boolean>;
+    /**
+     * When a handoff probe last asked a carrier about the number (`delivery_probe`), as epoch milliseconds, zero
+     * when none did: its minimum interval runs from the later of that ask and the router's own (`paced_asks`).
+     */
+    askedElsewhere?: (carrier: string, number: string) => number;
+    /** Told of each ask the router paces (`paced_asks`), so a handoff probe in the same check waits for it too. */
+    onAsk?: (carrier: string) => void;
     /** Whether a carrier enters some scans at their planned time, which its own lookup holds back until due (its adapter's `plannedScans`). */
     plannedScans?: (carrier: string) => boolean;
     /**
@@ -1169,10 +1176,10 @@ export class TrackingRouter {
     // Carriers our own pacing refused before any request (`self_paced`): asked, but nobody contacted.
     const pacedDirect = new Set<string>();
     // When a carrier the parcel is not filed under may next be asked about its number, as epoch milliseconds: once its
-    // minimum interval since the last ask has passed (`paced_asks`), zero when it sets none. The parcel's own checks
-    // keep its carrier's interval (trackingSyncDueAt).
+    // minimum interval since the last ask, the router's (`paced_asks`) or a handoff probe's, has passed, zero when it
+    // sets none. The parcel's own checks keep its carrier's interval (trackingSyncDueAt).
     const askableAt = (carrier: string): number => carrier === declared ? 0
-      : millis(state.paced_asks?.[carrier]) + minimumInterval(carrier);
+      : Math.max(millis(state.paced_asks?.[carrier]), this.options.askedElsewhere?.(carrier, number) ?? 0) + minimumInterval(carrier);
     // Those this check asked: the lookup that follows a carrier's recognition is part of the same ask.
     const askedNow = new Set<string>();
     const pacedOut = (carrier: string) => !askedNow.has(carrier) && askableAt(carrier) > now().getTime();
@@ -1180,6 +1187,7 @@ export class TrackingRouter {
       if (carrier === declared || !minimumInterval(carrier)) return;
       state.paced_asks = { ...state.paced_asks, [carrier]: now().toISOString() };
       askedNow.add(carrier);
+      this.options.onAsk?.(carrier);
     };
     // When the parcel's own carrier frees up, paced while the providers stood in for it (0: they did not).
     let pacedUntil = 0;

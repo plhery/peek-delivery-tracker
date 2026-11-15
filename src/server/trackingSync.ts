@@ -2513,8 +2513,21 @@ export class TrackingSyncService {
       const withSavedProbe = (candidate: JsonObject) => isRecord(savedProbe) && isRecord(candidate.carrier_data)
         && candidate.carrier_data.delivery_probe === undefined
         ? { ...candidate, carrier_data: { ...candidate.carrier_data, delivery_probe: savedProbe } } : candidate;
+      // A partner's minimum interval runs from the last ask of the number by either path: the router's
+      // (`paced_asks`, and this check's) and a handoff probe's (`delivery_probe`, this check's or the saved one).
+      const subjectNumber = normalizeTrackingNumber(String(subject.tracking_number ?? ''));
+      const pacedAsks = routingState(subject).paced_asks;
+      const routerAsks = new Map<string, number>();
+      const routerAsked = (carrier: string, asked: string) => normalizeTrackingNumber(asked) !== subjectNumber ? 0
+        : Math.max(Date.parse(String(pacedAsks?.[carrier] ?? '')) || 0, routerAsks.get(carrier) ?? 0);
+      const probeAsked = (carrier: string, asked: string) => {
+        const probe = lookupProbe ?? savedProbe;
+        return isRecord(probe) && probe.carrier === carrier && typeof probe.number === 'string'
+          && normalizeTrackingNumber(probe.number) === normalizeTrackingNumber(asked) ? Date.parse(String(probe.at)) || 0 : 0;
+      };
       const keep = { probe: (probe: JsonObject) => { lookupProbe = probe; },
-        earlier: (earlier: EarlierInOutage) => { outage.earlier = earlier; } };
+        earlier: (earlier: EarlierInOutage) => { outage.earlier = earlier; },
+        askedAt: (carrier: string, asked: string) => Math.max(routerAsked(carrier, asked), probeAsked(carrier, asked)) };
       // A check nobody asked for of a number nobody has answered, an account's for a day or a lookup's
       // that left the schedule, contacts one provider at most.
       const sparse = !askedForCheck(context.trigger)
@@ -2532,6 +2545,7 @@ export class TrackingSyncService {
             ...(checks ? { reusedUniversal: (source: UniversalSource, number: string, postcode: string | null, timezone: string | null, carrier: string | null) =>
               checks.reuse<CarrierResult>(universalLookupKey(source, number, postcode, timezone, carrier)) } : {}),
             health: this.client, now: this.now, refusals: providerRefusals, misses: providerMisses,
+            askedElsewhere: probeAsked, onAsk: (carrier: string) => { routerAsks.set(carrier, this.now().getTime()); },
             ...(unseen !== null ? { hourlyUntil: now.getTime() - unseen + UNSEEN_HOURLY_MS } : {}),
             takePrefetchedUniversal: takePreflightHistory, preflightInputNeeded, refuses: refusesNumber,
             ...(this.adapter.plannedScans ? { plannedScans: (carrier: string) => this.adapter.plannedScans!(carrier) } : {}),
@@ -3383,8 +3397,9 @@ export class TrackingSyncService {
     byHand = false,
     lookupCountry: string | null = null,
     // What the lookup hands the check beside its answer: the delivery probe it made, and the earlier
-    // carrier's follow-up made while the delivery carrier failed.
-    keep: { probe?: (probe: JsonObject) => void; earlier?: (earlier: EarlierInOutage) => void } = {},
+    // carrier's follow-up made while the delivery carrier failed. askedAt: when the router or a probe
+    // last asked a carrier about a number, as epoch milliseconds, zero when neither did.
+    keep: { probe?: (probe: JsonObject) => void; earlier?: (earlier: EarlierInOutage) => void; askedAt?: (carrier: string, number: string) => number } = {},
     // A provider's answer for a parcel filed under a carrier with no adapter of its own, which
     // stands in for the origin's: only the delivery carrier it names is asked.
     providerOrigin?: CarrierResult,
@@ -3485,12 +3500,17 @@ export class TrackingSyncService {
       // The partner's minimum interval between two lookups of a number (Poste Italiane's searches an hour) holds
       // whatever would ask it sooner: the origin's news, its announcement, a refresh by hand. The probe waits, with
       // no miss counted, and the origin's news it waited through asks once the interval has passed.
+      // The interval runs from the router's asks too (recognition, a candidate's lookup), and from another probe of
+      // the same check: one ask of the number by either path starts it.
       const minimum = candidate ? minimumInterval(candidate.carrier) : 0;
-      const askedRecently = previousProbe !== null && sinceProbe >= 0
-        && (sinceProbe < minimum || (originUpdate === previousProbe.origin_update && sinceProbe < gap));
+      const sinceAsked = candidate && minimum ? this.now().getTime() - (keep.askedAt?.(candidate.carrier, candidate.number) || Number.NaN) : Number.NaN;
+      const askedRecently = (previousProbe !== null && sinceProbe >= 0
+        && (sinceProbe < minimum || (originUpdate === previousProbe.origin_update && sinceProbe < gap)))
+        || (sinceAsked >= 0 && sinceAsked < minimum);
       if (candidate && askedRecently) {
         // carrier_data is rebuilt from the result on every refresh: carry the marker forward.
-        origin.delivery_probe = { ...previousProbe, carrier: candidate.carrier, number: candidate.number };
+        if (previousProbe) origin.delivery_probe = { ...previousProbe, carrier: candidate.carrier, number: candidate.number };
+        else delete origin.delivery_probe;
       } else if (candidate) {
         const probe: DeliveryProbe = { at: this.now().toISOString(), origin_update: originUpdate, carrier: candidate.carrier, number: candidate.number,
           misses: previousProbe && originUpdate === previousProbe.origin_update ? misses + 1 : 1 };

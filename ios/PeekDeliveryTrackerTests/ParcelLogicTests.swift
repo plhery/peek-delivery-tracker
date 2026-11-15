@@ -1920,6 +1920,30 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
     }
 
+    // As src/lib/stages.test.ts: a problem row an earlier check dated after the return scan.
+    func testAReturnTheServerHoldsStaysOverAProblemRowAndTheTripAfterIt() {
+        let id = UUID()
+        let failed = event(id, .failedAttempt, "2026-06-04T08:00:00Z")
+        let returned = event(id, .returned, "2026-06-05T08:00:00Z")
+        let problem = event(id, .exception, "2026-06-05T13:00:00Z")
+        let hub = event(id, .inTransit, "2026-06-07T08:00:00Z")
+        func held(_ events: [TrackingEvent]) -> Parcel {
+            var parcel = makeParcel(id: id, events: events)
+            parcel.carrierData = CarrierData(returnHeld: true)
+            return parcel
+        }
+        XCTAssertEqual(held([failed, returned, problem]).currentEvent?.id, returned.id)
+        XCTAssertEqual(held([failed, returned, problem, hub]).currentEvent?.id, returned.id)
+        XCTAssertTrue(held([failed, returned, problem, hub]).heldReturn)
+        // Without the hold, the problem row ends the return.
+        XCTAssertEqual(makeParcel(id: id, events: [failed, returned, problem, hub]).currentEvent?.id, hub.id)
+        // A delivery round after the return is news of its own, held or not.
+        let round = event(id, .outForDelivery, "2026-06-08T08:00:00Z")
+        XCTAssertEqual(held([failed, returned, problem, hub, round]).currentEvent?.id, round.id)
+        // A hold with no return among the rows reads them as they are.
+        XCTAssertEqual(held([failed, hub]).currentEvent?.id, hub.id)
+    }
+
     func testHeldReturnMatchesWebApp() {
         let id = UUID()
         // Returned, then carried back: held while the server says so.

@@ -499,18 +499,24 @@ extension Parcel {
 private final class LatestEventCache: @unchecked Sendable {
     static let shared = LatestEventCache()
     private let lock = NSLock()
-    private var entries: [UUID: (events: [TrackingEvent], latest: TrackingEvent?)] = [:]
+    private var entries: [UUID: (events: [TrackingEvent], held: Bool, latest: TrackingEvent?)] = [:]
 
     func latest(of parcel: Parcel) -> TrackingEvent? {
         let events = parcel.trackingEvents
-        if let entry = lock.withLock({ entries[parcel.id] }), entry.events == events {
+        let held = parcel.carrierData?.returnHeld == true
+        if let entry = lock.withLock({ entries[parcel.id] }), entry.events == events, entry.held == held {
             return entry.latest
         }
         // A line under another scan in the journal is part of that scan's step, whichever is newer.
         let lines = Set(Parcel.relayLines(in: events).values.joined().map(\.id))
         let carrier = events.filter { $0.stage != .pending && !lines.contains($0.id) }.sorted(by: Parcel.eventPrecedes)
-        let latest = Self.current(newestFirst: carrier) ?? events.min(by: Parcel.eventPrecedes)
-        lock.withLock { entries[parcel.id] = (events, latest) }
+        var latest = Self.current(newestFirst: carrier) ?? events.min(by: Parcel.eventPrecedes)
+        // While the server holds the return (`return_held`), it stays the parcel's event over a trip scan, customs or
+        // a problem, as the server stores it: a row an earlier check dated at the check can sit after it (`src/lib/stages.ts`).
+        if held, let current = latest, Self.returnHolding.contains(current.stage) {
+            latest = carrier.first { $0.stage == .returned } ?? current
+        }
+        lock.withLock { entries[parcel.id] = (events, held, latest) }
         return latest
     }
 
@@ -521,6 +527,8 @@ private final class LatestEventCache: @unchecked Sendable {
 
     /// Stages of the scans that carry a parcel back to its sender once its return started.
     private static let returnTrip: Set<TrackingStage> = [.inTransit, .customs]
+    /// What the server holds a return over (`return_held`): the trip back, customs, or a problem.
+    private static let returnHolding: Set<TrackingStage> = [.inTransit, .customs, .exception]
 
     /// An announcement or acceptance after the parcel has moved on is a notice
     /// or a reworded scan, not a step back: the scan before it still says where

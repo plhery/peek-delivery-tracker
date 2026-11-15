@@ -405,15 +405,17 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
 
   const final = !!stage && isFinal(stage);
 
-  // Alerts and the calendar: for anyone with the link, until the journey is over.
+  // Alerts and the calendar: for anyone with the link, until the journey is over. A held return's is not: the
+  // carrier still scans it on its way back, and the server keeps its alerts on.
+  const over = final && !heldReturn(parcel, stage);
   const alert = useLinkNote(linkId).alert;
   const [alerting, setAlerting] = useState(false);
   const openAlerts = () => { trackAction('parcel-link-alerts-open'); setAlerting(true); };
   useEffect(() => {
     // A browser that withdrew its permission has no alert, whatever it noted; a parcel that arrived has none left.
-    if (!final) void deviceAlert(linkId);
+    if (!over) void deviceAlert(linkId);
     else if (linkNote(linkId).alert) noteLink(linkId, { alert: null });
-  }, [linkId, final]);
+  }, [linkId, over]);
   const estimate = parcelDeliveryEstimate(parcel, now);
   const slot = deliverySlot(parcel, now);
   const calendarWindow = slot && estimate ? capitalized(localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now, use24HourTime), languageTag) : null;
@@ -429,7 +431,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   }
   // Nothing scanned yet: being told is the one next step, and every scan is worth telling.
   const early = !moving || stage === 'registered';
-  const canPing = !final && !checking && !placeholder;
+  const canPing = !over && !checking && !placeholder;
   // A wrapped gift says little, and keeps its one button in its card; any other parcel has it among its actions.
   const ping: PingAction | undefined = canPing && !wrapped ? {
     label: t(alert ? 'alerts.action.on' : !carrierKnown ? 'alerts.action.found' : early ? 'alerts.action.moves' : 'alerts.action.ping'),

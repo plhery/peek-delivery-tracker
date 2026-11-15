@@ -660,18 +660,15 @@ class DeviceParcels(
     fun setArchived(id: UUID, archived: Boolean): Parcel = update(id) { it.copy(archivedAt = if (archived) DateParser.isoString(now()) else null) }
 
     /**
-     * The service forgets the parcel, then the device does. Someone else's parcel is forgotten here alone: its
+     * The parcel leaves the list, then the service is told. Someone else's parcel is forgotten here alone: its
      * notifications on this phone stop, and its link goes on working for others. When the service can't be told yet,
-     * the parcel leaves the list all the same and each refresh tells the service again: this phone's own link is kept
-     * with its key until the service has forgotten it, someone else's until its notifications are off.
+     * each refresh tells it again: this phone's own link is kept with its key until the service has forgotten it,
+     * someone else's until its notifications are off. Out of the list before the service is asked, a parcel that a
+     * round of sign-ups on a new token answers for meanwhile has that token's notifications turned off too.
      */
     suspend fun forget(id: UUID) {
         val entry = entries.firstOrNull { it.parcel.id == id } ?: return
         val client = client
-        var alerting = false
-        if (client != null && entry.alertToken != null) {
-            alerting = !succeeds { client.removeAlert(entry.linkId, removal(entry.alertToken)) }
-        }
         val key = keys.keyOf(entry.linkId)
         entries = entries.filter { !it.linkId.equalsCanonically(entry.linkId) }
         keys = keys.setting(entry.linkId, null)
@@ -679,10 +676,17 @@ class DeviceParcels(
         alertsAsked = alertsAsked.setting(entry.linkId, null)
         // On file as still to be forgotten before the service is asked, so that nothing stopping the app loses it.
         if (client != null && key != null) pendingForgets = pendingForgets.setting(entry.linkId, key)
-        // A forgotten link of this phone's own takes its notifications with it; someone else's goes on.
-        if (alerting && entry.isViewer) forgotten = forgotten + entry.copy(forgotten = true)
+        // A forgotten link of this phone's own takes its notifications with it; someone else's goes on, and stays on
+        // file until its notifications here are turned off.
+        val token = if (client == null) null else entry.alertToken
+        if (token != null && entry.isViewer) forgotten = forgotten + entry.copy(forgotten = true)
         save()
-        if (client != null && key != null && succeeds { client.forget(entry.linkId, key) }) {
+        client ?: return
+        if (token != null && succeeds { client.removeAlert(entry.linkId, removal(token)) } && entry.isViewer) {
+            forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(token)) }
+            save()
+        }
+        if (key != null && succeeds { client.forget(entry.linkId, key) }) {
             pendingForgets = pendingForgets.setting(entry.linkId, null)
             save()
         }

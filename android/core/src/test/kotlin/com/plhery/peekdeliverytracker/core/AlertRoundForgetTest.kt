@@ -29,7 +29,7 @@ import org.junit.Test
 /**
  * The launch's round of notifications (DeviceParcels.registerAlerts) works from the parcels listed when it began.
  * Someone else's parcel forgotten while the round goes on, before it reaches the parcel or while it signs the parcel up,
- * hears nothing more on this phone, as one forgotten after the round does.
+ * on this phone's token or a new one, hears nothing more on this phone, as one forgotten after the round does.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 class AlertRoundForgetTest {
@@ -127,6 +127,57 @@ class AlertRoundForgetTest {
                 "nothing on the phone turns them off (the service still sends: ${service.alerts})",
             "33333333333C" !in service.alerts,
         )
+    }
+
+    /**
+     * The phone's FCM token changed since the parcel was signed up. The launch's round asks for it on the new token;
+     * the reader forgets it; the round's answer comes back before the old token's removal does. The parcel is off the
+     * list before the service is asked, so the round turns the new token's notifications off too.
+     */
+    @Test
+    fun aParcelForgottenWhileTheRoundSignsItUpOnANewTokenHearsNothingMore() = runTest {
+        val id = UUID.randomUUID()
+        val signUp = CompletableDeferred<Unit>()
+        val removal = CompletableDeferred<Unit>()
+        var removals = 0
+        val pushes = mutableSetOf("33333333333D $token")
+        val client = DeviceParcelClient(
+            lookup = { throw IOException("offline") },
+            read = { _, _ -> throw IOException("offline") },
+            forget = { _, _ -> },
+            update = { _, _, _ -> throw IOException("offline") },
+            detect = { _, _, _ -> throw IOException("offline") },
+            setAlert = { linkId, _, request ->
+                pushes += "$linkId ${request.token}"
+                signUp.await()
+                DeviceAlertAnswer.On
+            },
+            removeAlert = { linkId, request ->
+                pushes -= "$linkId ${request.token}"
+                if (removals++ == 0) removal.await()
+            },
+        )
+        val storage = Memory(listOf(followed("33333333333D", id)))
+        val device = device(client, storage, this)
+
+        val round = launch { device.registerAlerts("new-fcm-token", NativePushLocale.En) }
+        runCurrent()
+        val forgetting = launch { device.forget(id) }
+        runCurrent()
+        assertTrue("The parcel leaves the list before the service is asked", device.list().isEmpty())
+        signUp.complete(Unit)
+        runCurrent()
+        removal.complete(Unit)
+        round.join()
+        forgetting.join()
+
+        assertTrue(device.list().isEmpty())
+        assertEquals(
+            "The forgotten parcel still sends pushes to the new token, and nothing on the phone turns them off",
+            emptySet<String>(),
+            pushes,
+        )
+        assertTrue("Nothing is left to turn off", storage.parcels.isEmpty())
     }
 
     /** Control: forgotten once the round is over, its notifications stop. */

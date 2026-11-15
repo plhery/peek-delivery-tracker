@@ -1981,8 +1981,13 @@ class DeviceParcelTests {
         assertEquals(listOf("token1"), storage.parcels.mapNotNull { it.alertToken })
     }
 
+    /**
+     * Forgetting is cancelled while the service is asked to turn someone else's parcel's notifications off. The
+     * cancellation goes on to the caller, the parcel has left the list already, and it stays on file as forgotten, so
+     * that the next refresh asks the service again.
+     */
     @Test
-    fun aParcelWhoseForgettingIsCancelledStaysOnThePhone() = runTest {
+    fun aParcelWhoseForgettingIsCancelledStaysForgotten() = runTest {
         val storage = Memory()
         val id = UUID.randomUUID()
         storage.parcels = listOf(parcel("33333333333A", "", id).copy(viewer = true, alertToken = "token1"))
@@ -1994,11 +1999,11 @@ class DeviceParcelTests {
         val device = device(leaving, storage, this)
         try {
             device.forget(id = id)
-            fail("The parcel was forgotten though its forgetting was cancelled")
+            fail("The forgetting went on as though nothing happened")
         } catch (_: CancellationException) {
         }
-        assertEquals(listOf(id), device.list().map { it.id })
-        assertEquals(1, storage.parcels.size)
+        assertTrue(device.list().isEmpty())
+        assertEquals(listOf(true), storage.parcels.map { it.forgotten })
     }
 
     @Test

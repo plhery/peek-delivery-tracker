@@ -653,7 +653,12 @@ function checkKeys(parcel: JsonObject): string[] {
   // provider's lease would turn the second away as if it rested.
   const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '')
     ?? (directCarrier(carrier) ? undefined : universalPlan({ carriers: [carrier], trackingNumber: number }).sources[0]);
-  return [`carrier:${directCarrier(carrier) ? carrierAdapter(carrier) : carrier}`,
+  // A parcel handed over to another carrier, or whose earlier leg answered last, asks that carrier too.
+  const active = typeof data.active_tracking_carrier === 'string' && directCarrier(data.active_tracking_carrier)
+    ? data.active_tracking_carrier : undefined;
+  const carriers = new Set([carrier, ...(active ? [active] : [])]
+    .map((id) => `carrier:${directCarrier(id) ? carrierAdapter(id) : id}`));
+  return [...carriers,
     `number:${number}`,
     ...(typeof parcel.user_id === 'string' ? [`account:${parcel.user_id}`] : []),
     ...(typeof provider === 'string' ? [`provider:${provider}`] : [])];

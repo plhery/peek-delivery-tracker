@@ -430,8 +430,8 @@ per account, each account's longest due, every 2 minutes. It lists every open pa
 as the database's API ends each answer at its row limit, and checks the parcels it takes the longest due
 first, accounts' and lookups' alike, an account's parcel as if it had come due 10 minutes earlier: when the worker
 can't keep up, every kind waits about as long past its cadence, accounts' parcels a little less. It checks two
-parcels at once, never two of one account, one number, one carrier (carriers on one adapter count as one) or one
-universal provider tracking them (for a parcel whose carrier has no adapter of its own and no provider named yet, the
+parcels at once, never two of one account, one number, one carrier (carriers on one adapter count as one; a parcel
+handed over, or whose earlier leg answered last, holds that carrier too) or one universal provider tracking them (for a parcel whose carrier has no adapter of its own and no provider named yet, the
 provider its plan asks first), so each keeps the pace of one check at a time: the run starts the first parcel in
 its order that shares none of these with the check under way. A merge with a parcel's other leg and its news go out
 one check at a time, as the checks end. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to

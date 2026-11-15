@@ -515,7 +515,8 @@ and nothing typed is sent.
   history. `src/server/plannedSteps.ts` serves
   those of the carrier delivering now as `planned_events`, apart from the scans: a step goes
   once a shown scan tells it in the same words, is as late or has come further, or once its
-  time has passed (a step dated by its day alone, once that day has), and every step goes
+  time has passed (a wall clock in no zone, its time or `local_time`, on the carrier's clock; a step dated by its
+  day alone, once that day has), and every step goes
   once the parcel is delivered or returned. The apps list them greyed above the scans, under
   "Planned by the carrier", and hide one whose time passes while it is shown. They are never scans: they set no stage, status,
   estimate, alert, email, count, map or drawing, and a wrapped gift's link shows none.
@@ -524,7 +525,7 @@ and nothing typed is sent.
   `routing.written_ahead`), the row names that carrier as `written_ahead_by`, the carrier
   tracking the parcel first, until the parcel is delivered or returned. That carrier's
   planned steps at one of those clocks whose time has passed are served apart as
-  `written_ahead_events` (`servedWrittenSteps`): a step on the same wall minute as a clock,
+  `written_ahead_events` (`servedWrittenSteps`): a step on the same wall minute as a clock, by its time or its `local_time`,
   or dated by its day alone with a clock on that day. A step goes once a shown carrier scan
   tells it at the same minute, or in the same words within a day of it, and all go once a
   carrier scan says delivered or returned. A row the carrier later shows as a scan frees its

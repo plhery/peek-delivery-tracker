@@ -99,10 +99,12 @@ const carrierScans = (events: readonly JsonObject[]) =>
 
 /**
  * When a step is planned, read in the carrier's zone: its moment, the moment it stops being ahead (a step dated by its
- * day alone stands until the end of that day) and that day. Null when its date does not read.
+ * day alone stands until the end of that day) and that day. A wall clock with its time of day, as `time` or as
+ * `local_time`, is that minute on the carrier's clock. Null when its date does not read.
  */
 function stepTime(step: PlannedStep, zone: string): { instant: number; until: number; day: string | null } | null {
-  const day = scanDay(step as unknown as JsonObject) ?? clockDay(step as unknown as JsonObject);
+  const wall = !step.time && WALL_MINUTE.test((step.local_time ?? '').trim());
+  const day = wall ? null : scanDay(step as unknown as JsonObject) ?? clockDay(step as unknown as JsonObject);
   const at = day ? DateTime.fromISO(day, { zone }).toUTC().toISO() : eventTimestamp(step.time ?? step.local_time, zone);
   const instant = Date.parse(at ?? '');
   if (!Number.isFinite(instant)) return null;
@@ -163,7 +165,11 @@ const DAY_MS = 86_400_000;
  * same wall clock to the minute, and for a step dated by its day alone a clock on that day.
  */
 export function atWrittenClock(step: Pick<PlannedStep, 'time' | 'local_time'>, clocks: readonly string[]): boolean {
-  const value = (step.time ?? step.local_time ?? '').trim();
+  // Its time, and the wall clock it kept beside it (`local_time`), as the scraper reads both.
+  return [step.time, step.local_time].some((value) => typeof value === 'string' && value.trim() !== '' && atClock(value.trim(), clocks));
+}
+
+function atClock(value: string, clocks: readonly string[]): boolean {
   const instant = OFFSET.test(value) ? Date.parse(value) : NaN;
   const wall = WALL_MINUTE.exec(value);
   return clocks.some((clock) => {

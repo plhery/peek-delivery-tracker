@@ -566,16 +566,32 @@ function pageClock(carrier: string): boolean {
  * a Canary Islands office in winter), else the zone of the carrier now tracking the parcel
  * (`deliveringCarrier`) in the catalog, not an earlier leg's that answered last. A "Z" is a UTC
  * instant, and "-00:00" an unknown offset, not the scan's own clock. A carrier that states its
- * page's clock (`pageClock`) is read on the clock of the place its newest stored scan names.
+ * page's clock (`pageClock`) is read on the clock of the place its newest stored scan names. After an earlier leg
+ * answered (`active_tracking_carrier` names another carrier), the newest scan may be that leg's, on its clock: the
+ * carrier's own newest stored scan gives its clock then, by the offset it states or else the place it names.
  */
 function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   const carrier = deliveringCarrier(parcel);
   const placed = pageClock(carrier) ? newestPlaceZone(parcel, carrier) : null;
   if (placed) return placed;
+  if (typeof data.active_tracking_carrier === 'string' && data.active_tracking_carrier !== carrier) {
+    return newestOffsetZone(parcel, carrier) ?? newestPlaceZone(parcel, carrier) ?? resultTimezone(carrier, data as CarrierResult);
+  }
   const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
     ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
   return stated?.isValid ? stated.zone : resultTimezone(carrier, data as CarrierResult);
+}
+
+/** The offset the newest stored scan of `carrier` that states one states, as a zone; null when none does. */
+function newestOffsetZone(parcel: JsonObject, carrier: string): DateTime['zone'] | null {
+  const at = (row: JsonObject) => Date.parse(String(row.occurred_at ?? ''));
+  const stated = (row: JsonObject) => /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(row.time ?? ''));
+  const newest = storedEventIdentities(parcel)
+    .filter((row) => String(row.provider_event_id ?? '').startsWith(`${carrier}:`) && stated(row) && Number.isFinite(at(row)))
+    .reduce<JsonObject | null>((latest, row) => !latest || at(row) > at(latest) ? row : latest, null);
+  const zone = newest ? DateTime.fromISO(String(newest.time), { setZone: true }) : null;
+  return zone?.isValid ? zone.zone : null;
 }
 
 /**

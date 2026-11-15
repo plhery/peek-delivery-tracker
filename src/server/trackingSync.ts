@@ -98,6 +98,8 @@ const MAX_ONE_OFF_PACKAGES_PER_SYNC = 20;
  * cadence, the accounts' parcels a little less.
  */
 const ACCOUNT_HEAD_START_MS = 10 * 60_000;
+/** How far into a scheduled run its checks may land: a carrier's refresh limit counts from that run. */
+const RUN_SPREAD_MS = 5 * 60_000;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
 const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 /** A one-off parcel stays on the schedule this long after one of its links was last opened. */
@@ -812,6 +814,9 @@ function scheduledSyncDue(
     ? local.startOf('minute').minus({ minutes: local.minute % intervalMinutes })
     : hourStart;
   if (!(lastChecked < windowStart.toMillis())) return false;
+  // A carrier's own limit counts from the last check as well, from the run that made it: a check
+  // late in one window is not followed by another as the next opens.
+  if (minimum && now.getTime() < lastChecked + minimum * 60_000 - RUN_SPREAD_MS) return false;
   return byTheMinute && lastMile ? 'last_mile' : true;
 }
 

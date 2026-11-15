@@ -245,7 +245,10 @@ begin
   -- A notice still waiting for delivery keeps its incident until it has been acknowledged.
   for i in 1..10 loop result := pg_temp.health_sample('unsent-tier',false,'direct'); end loop;
   perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
-  for i in 1..10 loop result := pg_temp.health_sample('unsent-tier',true,'direct'); end loop;
+  update public.tracking_health_samples set observed_at=now()-interval '3 hours' where subject='unsent-tier';
+  update public.tracking_health_samples set observed_at=now()-interval '25 hours'
+    where attempt_id=(select attempt_id from public.tracking_health_samples where subject='unsent-tier' limit 1);
+  for i in 1..3 loop result := pg_temp.health_sample('unsent-tier',true,'direct'); end loop;
   assert result->0->>'state'='recovered';
   update public.tracking_health_samples set observed_at=now()-interval '25 hours' where subject='unsent-tier';
   assert pg_temp.health_sample('other-tier',true)='[]';
@@ -321,10 +324,10 @@ begin
     'One unanswered check among rescued ones must not reopen a direct incident';
   for i in 1..9 loop result := pg_temp.direct_check('rescued-later',false,false); end loop;
   assert pg_temp.direct_notice(result,'rescued-later')->>'state'='open'
-    and (pg_temp.direct_notice(result,'rescued-later')->>'attempts')::int=10
+    and (pg_temp.direct_notice(result,'rescued-later')->>'attempts')::int=13
     and (pg_temp.direct_notice(result,'rescued-later')->>'failures')::int=10
     and not (pg_temp.direct_notice(result,'rescued-later')->'rescued')::boolean,
-    'Unanswered checks that fail most of the day must reopen it, counted without the rescued ones';
+    'Ten unanswered checks, a fifth of the day''s direct checks or more, must reopen it, counted among all of them';
   perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
   -- Nor does a day of rescued failures with one unanswered check, now or earlier in the window, open one.
   for i in 1..9 loop perform pg_temp.direct_check('unrescued-now',false,true); end loop;
@@ -336,8 +339,34 @@ begin
   assert pg_temp.direct_notice(result,'unrescued-earlier') is null
     and (select not active from public.tracking_health_incidents where kind='direct' and subject='unrescued-earlier'),
     'An earlier unanswered direct failure among rescued ones must open no incident';
+  -- Ten unanswered checks open an incident only as a fifth of the day's direct checks or more, those a
+  -- later step answered included.
+  for i in 1..41 loop perform pg_temp.direct_check('busy-direct',false,true); end loop;
+  for i in 1..10 loop result := pg_temp.direct_check('busy-direct',false,false); end loop;
+  assert pg_temp.direct_notice(result,'busy-direct') is null
+    and (select not active from public.tracking_health_incidents where kind='direct' and subject='busy-direct'),
+    'Ten unanswered checks under a fifth of the day''s direct checks must open no incident';
+  result := pg_temp.direct_check('busy-direct',false,false);
+  assert pg_temp.direct_notice(result,'busy-direct')->>'state'='open'
+    and (pg_temp.direct_notice(result,'busy-direct')->>'attempts')::int=52
+    and (pg_temp.direct_notice(result,'busy-direct')->>'failures')::int=11,
+    'Unanswered checks over a fifth of the day''s direct checks must open an incident';
+  -- An open direct incident recovers only after two hours without an unanswered check.
+  for i in 1..10 loop result := pg_temp.health_sample('clean-hours',false,'direct'); end loop;
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
+  update public.tracking_health_samples set observed_at=now()-interval '25 hours'
+    where attempt_id=(select attempt_id from public.tracking_health_samples where subject='clean-hours' limit 1);
+  for i in 1..4 loop
+    assert pg_temp.health_sample('clean-hours',true,'direct')='[]',
+      'A direct incident with an unanswered check in the last two hours must not recover';
+  end loop;
+  update public.tracking_health_samples set observed_at=now()-interval '3 hours' where subject='clean-hours' and not healthy
+    and observed_at >= now()-interval '2 hours';
+  result := pg_temp.health_sample('clean-hours',true,'direct');
+  assert result->0->>'state'='recovered', 'A direct incident must recover after two clean hours';
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
   -- A direct step challenged on every check, whose lookups answer through the next step, closes once
-  -- its unanswered checks are under the threshold and its three latest lookups answered.
+  -- its unanswered checks are under the threshold, none came in two hours and its three latest lookups answered.
   for i in 1..10 loop result := pg_temp.own_check('answered-tier',false,false,false); end loop;
   assert pg_temp.notice(result,'direct','answered-tier')->>'state'='open', 'Unanswered checks must open a direct incident';
   perform public.ack_tracking_health(array(select (n->>'id')::uuid from jsonb_array_elements(result) n));
@@ -353,10 +382,17 @@ begin
       assert pg_temp.notice(result,'direct','answered-tier') is null, 'Fewer than three answered lookups must keep it open';
     end if;
   end loop;
+  assert pg_temp.notice(pg_temp.own_check('answered-tier',false,true,true),'direct','answered-tier') is null,
+    'A direct incident with an unanswered check in the last two hours must stay open';
+  update public.tracking_health_samples set observed_at=now()-interval '3 hours' where kind='direct' and subject='answered-tier'
+    and observed_at >= now()-interval '2 hours' and attempt_id in (
+      select attempt_id from public.tracking_health_samples where kind='refresh' and subject='answered-tier' and not healthy);
   result := pg_temp.own_check('answered-tier',false,true,true);
   assert pg_temp.notice(result,'direct','answered-tier')->>'state'='closed'
-    and pg_temp.notice(result,'direct','answered-tier')->>'reason'='answered',
-    'A direct incident whose lookups answer under the threshold must close';
+    and pg_temp.notice(result,'direct','answered-tier')->>'reason'='answered'
+    and (pg_temp.notice(result,'direct','answered-tier')->>'attempts')::int=12
+    and (pg_temp.notice(result,'direct','answered-tier')->>'failures')::int=6,
+    'A direct incident whose lookups answer under the threshold must close after two clean hours';
   perform public.ack_tracking_health(array[(pg_temp.notice(result,'direct','answered-tier')->>'id')::uuid]);
   assert (select not active from public.tracking_health_incidents where kind='direct' and subject='answered-tier');
   -- A tier still failing when traffic resumes opens a new incident at once.

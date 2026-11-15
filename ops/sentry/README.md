@@ -20,7 +20,7 @@ failure that recovers never opens an issue. See [OBSERVABILITY.md](../../docs/OB
 | --- | --- | --- |
 | Shipment refresh | The 3 latest scheduled checks of two parcels failed, the last within the hour, or of one parcel while no other parcel's latest check that hour answered; or ≥ 5 failures and > 20 % of checks in one hour | The 3 latest checks succeed and no threshold is still breached |
 | Provider lookup | > 50 % of ≥ 10 lookups failed in 24 h | The 3 latest lookups succeed and no more than half of the 24 h's failed |
-| Direct transport (no issue) | > 50 % of ≥ 10 direct probes failed in 24 h, not counting a failure whose check still answered | The 3 latest direct probes succeed and no more than half of the 24 h's failed |
+| Direct transport (no issue) | ≥ 10 direct probes in 24 h failed in checks that went unanswered, and they are ≥ 20 % of the day's direct probes | The 3 latest direct probes succeed, the unanswered ones are under the threshold and none came in 2 h |
 
 While a threshold is still breached and the 3 latest samples are healthy, an incident
 waits: no recovery and no reminder. It recovers once enough later checks succeed or its
@@ -109,13 +109,15 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   an hour after a CAPTCHA, keeps its incident until it recovers.
 - A direct failure from a check whose refresh still answered, through the carrier's browser
   step or a provider, left no parcel without a fresh answer (Correos Brazil's and Australia
-  Post's direct steps meet a challenge, their browser steps answer). It counts toward no
-  incident: the rate reads the failures that left a parcel without an answer, so one such
-  check in a day of rescued ones opens nothing. An open direct incident closes once every
-  failure of its 24-hour window was rescued: a `closed` notice with the reason `rescued`. It
-  also closes, with the reason `answered`, once the carrier's three latest lookups answered and
-  its unanswered checks are under the threshold: a direct step challenged on every check
-  never recovers, and one unanswered check a day would keep it from closing as rescued.
+  Post's direct steps meet a challenge, their browser steps answer). It counts as one of the
+  day's direct probes but not as unanswered, so 10 unanswered checks among 1,000 rescued ones
+  open nothing. An open direct incident closes once every failure of its 24-hour window was
+  rescued: a `closed` notice with the reason `rescued`. It also closes, with the reason
+  `answered`, once the carrier's three latest lookups answered and its unanswered checks are
+  under the threshold: a direct step challenged on every check never recovers, and one
+  unanswered check a day would keep it from closing as rescued. It recovers or closes as
+  answered only after 2 hours without an unanswered check, so a carrier near the threshold
+  does not close and reopen with each check.
 - A scheduled check that waits for the retry of the parcel's carrier, which failed in passing,
   and asks no provider in its place ([docs/ROUTING.md](../../docs/ROUTING.md)) refreshed
   nothing yet: it records the carrier's failed lookup but no refresh sample. A check that then

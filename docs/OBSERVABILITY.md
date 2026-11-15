@@ -757,8 +757,10 @@ Key JSON events:
   row whose scan came on two clocks: the row a provider's copy repeats, or the copy's own;
 - `tracking_health_incident`: a health incident opened, still fails six hours on (warning,
   info for a direct step's), recovered, or closed once it had no sample in 24 hours, the carrier
-  answers without its direct step, or every check its direct step failed in 24 hours still
-  answered (info), with its `kind`, `subject`, `title`, `failures` and `attempts`;
+  answers without its direct step, every check its direct step failed in 24 hours still
+  answered, or its lookups answer and no check went unanswered for 2 hours (info), with its
+  `kind`, `subject`, `title`, `failures` and `attempts` (for a direct step's, the unanswered
+  checks among all its checks of the day);
 - `dpd_app_session`: the scraper took up a saved session at start (`outcome` `taken_up`,
   with `age_ms`, how long ago it opened), or an opening ended, `opened` or `failed`
   (warning, with `error_kind`). `trigger` says what began it: `start`, `retry` a quarter of

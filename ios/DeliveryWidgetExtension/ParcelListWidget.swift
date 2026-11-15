@@ -632,7 +632,8 @@ private struct ParcelListMetrics {
     var statusFont: Font { .caption2 }
     var markHeight: CGFloat { (markWidth * 0.75).rounded() }
     var markSpacing: CGFloat { compact ? 5 : 6 }
-    var rowSpacing: CGFloat { compact ? 3 : 5 }
+    /// In smaller type the rows sit two points apart, so that the small widget of the largest iPhones holds four.
+    var rowSpacing: CGFloat { compact ? 2 : 5 }
 }
 
 /// The carrier's truck, without its name; until the app has drawn it, the symbol the app's list marks the parcel's

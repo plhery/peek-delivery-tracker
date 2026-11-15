@@ -72,4 +72,5 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 
 ```text
 • Nuevo widget «Paquetes»: ve de un vistazo los paquetes en camino, el próximo primero. Según cuántos haya, los muestra como tarjetas iguales a las del widget «Próxima entrega», como tarjetas más pequeñas con los colores de su transportista o como una lista con tantas filas como quepan. En un widget mediano o grande, toca un paquete para abrirlo.
+• Peek ahora te avisa cuando se ha añadido un número de pedido de Mercado Libre en lugar de un número de seguimiento.
 ```

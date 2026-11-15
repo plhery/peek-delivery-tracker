@@ -597,6 +597,15 @@ class ParcelStore(
         publishDeliverySurfaces()
     }
 
+    /**
+     * The widgets' days are worded for the midnights of the time zone the app published them in: in a new zone, the
+     * app words them again and reloads the widgets, which also place their redraws at the new midnights.
+     */
+    fun timeZoneChanged() {
+        publishedWidgetState = null
+        if (!holdingDeliverySurfaces) publishDeliverySurfaces()
+    }
+
     fun clearDeliverySurfaces() {
         if (!session.isAuthenticated) {
             quietly { liveActivityRevocations.queue() }

@@ -470,6 +470,11 @@ class AppContainer(
             override fun onReceive(context: Context, intent: Intent) = deviceFormatsChanged()
         }
         ContextCompat.registerReceiver(context, clockChanged, IntentFilter(Intent.ACTION_TIME_CHANGED), ContextCompat.RECEIVER_NOT_EXPORTED)
+        // Sent when the phone's time zone changes, as after a flight: the widgets' days follow the new zone's midnights.
+        val zoneChanged = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) = parcels.timeZoneChanged()
+        }
+        ContextCompat.registerReceiver(context, zoneChanged, IntentFilter(Intent.ACTION_TIMEZONE_CHANGED), ContextCompat.RECEIVER_NOT_EXPORTED)
         analytics()
     }
 

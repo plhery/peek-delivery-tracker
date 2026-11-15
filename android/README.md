@@ -60,7 +60,8 @@ minutes while either is placed. Their days follow the clock while the app stays 
 parcel's day, with its section in the app's list and whether it is Next up, for the next seven midnights where one
 changes (`DeliveryWidgetDays`). The widgets read them for the moment they draw, and are drawn again at those midnights
 and at the one after each step they show, whose time then names its weekday. "Tomorrow" reads "today" on the day, under
-Arriving today, last night's delivery "yesterday", and a passed estimate gives way to the status.
+Arriving today, last night's delivery "yesterday", and a passed estimate gives way to the status. When the time zone
+changes while the app runs, it words the days again for the new zone's midnights and draws the widgets again.
 
 - **Next delivery** (`NextDeliveryWidget.kt`) shows the first of them as a card, or two side by side. Like the
   iPhone's, which has no large size, it grows no taller than two rows of cells (`maxResizeHeight`).

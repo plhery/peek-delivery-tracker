@@ -14,6 +14,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Locale
+import java.util.TimeZone
 import java.util.UUID
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
@@ -308,6 +309,50 @@ class DeliveryWidgetTests {
             assertEquals(0, folder.listFiles().orEmpty().size)
         } finally {
             folder.deleteRecursively()
+        }
+    }
+
+    /** After a flight to another time zone, the widgets' days change at the new zone's midnights, not the old one's. */
+    @Test
+    fun aNewTimeZoneWordsTheWidgetsForItsMidnights() = runTest {
+        val saved = TimeZone.getDefault()
+        val home = ZoneId.of("Europe/Zurich")
+        // Half an hour off every whole-hour zone, so no midnight of one is a midnight of the other.
+        val away = ZoneId.of("Asia/Kolkata")
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone(home))
+            val reloads = mutableListOf<String>()
+            val defaults = MemoryDefaults()
+            val demo = AppConfiguration(
+                mode = AppConfiguration.Mode.Demo, apiBaseUrl = "https://widget.test", supabaseUrl = null, supabasePublishableKey = "",
+                googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = false, appGroupIdentifier = "widget.test",
+            )
+            val transport = RecordingTransport()
+            val session = testSessionStore(demo, backgroundScope, transport = transport, defaults = defaults)
+            val store = testParcelStore(demo, session, transport, backgroundScope, defaults, widgetCenter = { reloads += it })
+            val shared = DeliveryWidgetSharedStore(defaults)
+            store.setDeliveryLiveActivitiesEnabled(false)
+            session.enterDemo()
+            store.load()
+            runCurrent()
+            fun startsADay(at: Instant, zone: ZoneId) = at.atZone(zone).toLocalDate().atStartOfDay(zone).toInstant() == at
+            fun worded() = requireNotNull(shared.snapshot).parcels.flatMap { it.later.orEmpty() }.map { it.from }
+            val before = worded()
+            assertTrue(before.isNotEmpty())
+            assertTrue(before.all { startsADay(it, home) })
+            val reloaded = reloads.size
+
+            TimeZone.setDefault(TimeZone.getTimeZone(away))
+            store.timeZoneChanged()
+            runCurrent()
+
+            val after = worded()
+            assertTrue(after.isNotEmpty())
+            assertTrue(after.all { startsADay(it, away) })
+            assertFalse(after.any { startsADay(it, home) })
+            assertEquals(reloaded + 1, reloads.size)
+        } finally {
+            TimeZone.setDefault(saved)
         }
     }
 

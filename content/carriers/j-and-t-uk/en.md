@@ -80,7 +80,7 @@ Start with the shop: it booked the delivery with J&T. For a marketplace order, u
 
 Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows them in your device's time zone, in summer as in winter; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. J&T's tracker can show proof of delivery; Peek leaves it out. On a very long history it keeps the newest 100 scans. "Open the J&T Express UK website", on the parcel's page, opens your number on J&T's tracker.
 
-Until J&T scans the parcel, Peek shows "Waiting for J&T Express UK" on peektracker.com and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
+Until J&T scans the parcel, Peek keeps asking and shows "Waiting for J&T Express UK" on peektracker.com (or, if J&T still doesn't know the number two days later, a request to check it). When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
 Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 

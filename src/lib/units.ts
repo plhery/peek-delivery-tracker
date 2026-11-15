@@ -30,3 +30,19 @@ export function localeDistanceUnit(locale: string | undefined): DistanceUnit {
     return 'km';
   }
 }
+
+/** The time zones of those regions: the United States, the United Kingdom and its Crown dependencies, Liberia, Myanmar. */
+const MILE_TIME_ZONE = new RegExp(
+  '^(America/(New_York|Detroit|Chicago|Menominee|Denver|Boise|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Metlakatla'
+  + '|Yakutat|Nome|Adak|Indianapolis|Fort_Wayne|Knox_IN|Louisville|(Indiana|Kentucky|North_Dakota)/.+)'
+  + '|Pacific/Honolulu|US/.+|Europe/(London|Belfast|Guernsey|Isle_of_Man|Jersey)|Africa/Monrovia|Asia/(Yangon|Rangoon))$',
+);
+
+/**
+ * The units of the place a browser's time zone names, or of its language's region when the zone names no place (UTC).
+ * The zone comes first: Chrome's English is en-US or en-GB wherever it runs, so its language alone says miles in Paris.
+ */
+export function browserDistanceUnit(locale: string | undefined, timeZone: string | undefined): DistanceUnit {
+  if (timeZone?.includes('/') && !timeZone.startsWith('Etc/')) return MILE_TIME_ZONE.test(timeZone) ? 'mi' : 'km';
+  return localeDistanceUnit(locale);
+}

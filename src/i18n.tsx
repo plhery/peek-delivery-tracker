@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { detectLocale, documentLanguage, isLocale, languagePath, LOCALE_COOKIE, manifestPath, pathLanguage, SUPPORTED_LOCALES, type Locale } from './lib/locale';
 import { languageTags, translateMessage, type MessageKey, type Messages, type Translate } from './lib/messages';
-import { clockPreference, distancePreference, localeDistanceUnit, localeUses24HourTime, type ClockPreference, type DistancePreference } from './lib/units';
+import { browserDistanceUnit, clockPreference, distancePreference, localeUses24HourTime, type ClockPreference, type DistancePreference } from './lib/units';
 import type { DistanceUnit } from './components/map/route';
 
 export { detectLocale, SUPPORTED_LOCALES, type Locale };
@@ -115,9 +115,10 @@ const defaultValue: I18nValue = {
 
 const I18nContext = createContext<I18nValue>(defaultValue);
 
-/** What the browser's own settings give: its clock, and the units of its language's region. */
+/** What the browser's own settings give: its clock, and the units of the place its time zone names. */
 function browserUnits(): I18nValue['automatic'] {
-  return { use24HourTime: localeUses24HourTime(), distanceUnit: localeDistanceUnit(window.navigator.language) };
+  const timeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return { use24HourTime: localeUses24HourTime(), distanceUnit: browserDistanceUnit(window.navigator.language, timeZone) };
 }
 
 function savedLocale(): Locale | null {

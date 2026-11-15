@@ -4,14 +4,18 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { formatKm } from '../components/map/route';
 import { I18nProvider, useI18n } from '../i18n';
 import { localizedClockTime } from './format';
-import { clockPreference, distancePreference, localeDistanceUnit, localeUses24HourTime } from './units';
+import { browserDistanceUnit, clockPreference, distancePreference, localeDistanceUnit, localeUses24HourTime } from './units';
 
-/** A browser set to `locale`: its clock, which `Intl` gives when no locale is named, and its language. */
-function browser(locale: string) {
+/** A browser set to `locale` in `timeZone`: its clock, which `Intl` gives when no locale is named, its language and its zone. */
+function browser(locale: string, timeZone: string) {
   const DateTimeFormat = Intl.DateTimeFormat;
+  const resolvedOptions = DateTimeFormat.prototype.resolvedOptions;
   vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(function (tag?: string | string[], options?: Intl.DateTimeFormatOptions) {
     return new DateTimeFormat(tag ?? locale, options);
   } as never);
+  vi.spyOn(DateTimeFormat.prototype, 'resolvedOptions').mockImplementation(function (this: Intl.DateTimeFormat) {
+    return { ...resolvedOptions.call(this), timeZone };
+  });
   vi.spyOn(window.navigator, 'language', 'get').mockReturnValue(locale);
 }
 
@@ -41,35 +45,53 @@ describe('the clock and the units of distance', () => {
     expect([undefined, '', 'not a language'].map(localeDistanceUnit)).toEqual(['km', 'km', 'km']);
   });
 
+  it('measures in the units of the place the browser’s time zone names', () => {
+    const zones = ['America/New_York', 'America/Indiana/Knox', 'America/Indianapolis', 'Pacific/Honolulu', 'US/Eastern',
+      'Europe/London', 'Europe/Jersey', 'Africa/Monrovia', 'Asia/Yangon', 'Europe/Zurich', 'Europe/Paris', 'America/Toronto',
+      'America/Mexico_City', 'Australia/Sydney'];
+    expect(zones.map((zone) => browserDistanceUnit('en-US', zone)))
+      .toEqual(['mi', 'mi', 'mi', 'mi', 'mi', 'mi', 'mi', 'mi', 'mi', 'km', 'km', 'km', 'km', 'km']);
+    expect(browserDistanceUnit('fr-FR', 'America/Chicago')).toBe('mi');
+    // A zone that names no place leaves it to the language.
+    expect([['en-US', 'UTC'], ['en-GB', 'Etc/UTC'], ['en-US', undefined], ['de-CH', 'UTC']].map(([locale, zone]) => browserDistanceUnit(locale, zone)))
+      .toEqual(['mi', 'mi', 'mi', 'km']);
+  });
+
   it('follows the browser for anything but a saved choice', () => {
     expect([null, '', 'auto', 'true', 'false', '24', '12'].map(clockPreference)).toEqual(['auto', 'auto', 'auto', 'auto', 'auto', '24', '12']);
     expect([null, 'auto', 'miles', 'km', 'mi'].map(distancePreference)).toEqual(['auto', 'auto', 'auto', 'km', 'mi']);
   });
 
   it('follows a browser on a 12-hour clock that measures in miles', () => {
-    browser('en-US');
+    browser('en-US', 'America/New_York');
     render(<I18nProvider><Probe /></I18nProvider>);
     expect(shown()).toEqual(['4:51 PM', '280 mi']);
     expect(screen.getByLabelText('saved')).toHaveTextContent('auto auto');
   });
 
   it('follows a browser on a 24-hour clock that measures in kilometres', () => {
-    browser('de-CH');
+    browser('de-CH', 'Europe/Zurich');
     render(<I18nProvider><Probe /></I18nProvider>);
     expect(shown()).toEqual(['16:51', '450 km']);
   });
 
+  it('measures in kilometres for Chrome’s American English in Switzerland', () => {
+    browser('en-US', 'Europe/Zurich');
+    render(<I18nProvider><Probe /></I18nProvider>);
+    expect(shown()[1]).toBe('450 km');
+  });
+
   it('follows the browser when its language changes', () => {
-    browser('de-CH');
+    browser('de-CH', 'Europe/Zurich');
     render(<I18nProvider><Probe /></I18nProvider>);
     vi.restoreAllMocks();
-    browser('en-US');
+    browser('en-US', 'America/New_York');
     act(() => { window.dispatchEvent(new Event('languagechange')); });
     expect(shown()).toEqual(['4:51 PM', '280 mi']);
   });
 
   it('keeps a saved choice whatever the browser says', () => {
-    browser('en-US');
+    browser('en-US', 'America/New_York');
     window.localStorage.setItem('deliveryTrackerClock', '24');
     window.localStorage.setItem('deliveryTrackerDistanceUnit', 'km');
     const first = render(<I18nProvider><Probe /></I18nProvider>);
@@ -77,7 +99,7 @@ describe('the clock and the units of distance', () => {
     first.unmount();
 
     vi.restoreAllMocks();
-    browser('de-CH');
+    browser('de-CH', 'Europe/Zurich');
     window.localStorage.setItem('deliveryTrackerClock', '12');
     window.localStorage.setItem('deliveryTrackerDistanceUnit', 'mi');
     render(<I18nProvider><Probe /></I18nProvider>);
@@ -85,7 +107,7 @@ describe('the clock and the units of distance', () => {
   });
 
   it('saves a choice, for the push worker too, and goes back to the browser’s', async () => {
-    browser('de-CH');
+    browser('de-CH', 'Europe/Zurich');
     const put = vi.fn(async () => undefined);
     vi.stubGlobal('caches', { open: vi.fn(async () => ({ put })) });
     const user = userEvent.setup();
@@ -111,7 +133,7 @@ describe('the clock and the units of distance', () => {
   });
 
   it('takes another tab’s choice', () => {
-    browser('de-CH');
+    browser('de-CH', 'Europe/Zurich');
     render(<I18nProvider><Probe /></I18nProvider>);
     window.localStorage.setItem('deliveryTrackerClock', '12');
     act(() => { window.dispatchEvent(new StorageEvent('storage', { key: 'deliveryTrackerClock' })); });

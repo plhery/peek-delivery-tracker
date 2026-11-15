@@ -73,8 +73,14 @@ export interface RoutedResult {
  * `abstained`: the carrier's verification its adapter declined on purpose (ABSTAINED_REASONS), which the refresh health
  * leaves out. `wrong_number`: the carrier's answer said the number is wrong (R+L's failed check digit).
  */
-/** `holder`: the carrier the failure says holds the number's record (RECORD_HOLDERS). */
-interface Failure { count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true; wrong_number?: true; holder?: string }
+/**
+ * `holder`: the carrier the failure says holds the number's record (RECORD_HOLDERS). `listed`: the carrier's own
+ * answer without history lists the shipment, booked or labelled without a scan, so it knows the number.
+ */
+interface Failure {
+  count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true; wrong_number?: true; holder?: string;
+  listed?: true;
+}
 /**
  * Older than the parcel's newest scan; no movement; dated only by a local clock; not dated at
  * all; or behind a provider's delivered or returned stage. Absent: older.
@@ -1015,8 +1021,10 @@ export class TrackingRouter {
       const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
       const wrongNumber = kind === 'invalid_input' && carrierErrorReason(error) === 'wrong_number';
       const holder = universalSource ? undefined : RECORD_HOLDERS[carrierErrorReason(error) ?? ''];
+      const listed = !universalSource && kind === 'no_history' && carrierErrorReason(error) === 'listed';
       const failure: Failure = { count, kind, ...(userError ? { user_error: userError } : {}), ...(abstained ? { abstained: true as const } : {}),
         ...(wrongNumber ? { wrong_number: true as const } : {}), ...(holder && holder !== provider ? { holder } : {}),
+        ...(listed ? { listed: true as const } : {}),
         retry_at: iso(unseen ? Math.max(now().getTime() + retryAfterMs, beforeHourlyEnd(retryAt)) : retryAt) };
       state.failures[provider] = failure;
       // A provider sent the parcel's own postcode that asks for one all the same asks its owner to check it, in the

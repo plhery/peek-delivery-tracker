@@ -7673,6 +7673,42 @@ describe('TrackingSyncService', () => {
     expect((saved.carrier_data as { routing: JsonObject }).routing.unknown_since).toBeUndefined();
   });
 
+  it('never asks the owner to check a number its carrier lists without a scan, and stops asking once it lists it', async () => {
+    let now = new Date('2026-09-10T12:00:00Z');
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn(async () => ({ token: 'lease', retry_at: now.toISOString() })),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const listed = () => new NoHistoryError('TNT', 'TNT lists the shipment without scans', { reason: 'listed' });
+    const adapter = { fetch: vi.fn(async (): Promise<never> => { throw listed(); }),
+      fetchUniversal: vi.fn(async (source: string) => { throw new NoHistoryError(source, `${source} has no usable shipment history`); }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'label-only', carrier: 'tnt', tracking_number: 'TEST12345678', current_stage: 'pending',
+      created_at: '2026-09-10T11:59:00Z' };
+    const check = async (at: string) => {
+      now = new Date(at);
+      await service.syncPackage(parcel, { trigger: 'scheduled' });
+      const saved = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+      parcel = { ...parcel, ...saved };
+      return { ...saved, routing: (saved.carrier_data as { routing: JsonObject }).routing };
+    };
+    expect(await check('2026-09-10T12:00:00Z')).toMatchObject({ sync_status: 'waiting', sync_error: null,
+      routing: { failures: { tnt: { kind: 'no_history', listed: true } } } });
+    // Two days on, the carrier still lists it: a label waiting for its first scan, not a number to check.
+    const later = await check('2026-09-12T12:00:00Z');
+    expect(later).toMatchObject({ sync_status: 'waiting', sync_error: null });
+    expect(later.routing.unknown_since).toBeUndefined();
+    expect(unseenFor(parcel, now)).toBeNull();
+    // A carrier that did not know the number for two days and then lists it clears the request.
+    adapter.fetch.mockImplementation(async () => { throw new NotFoundError('TNT'); });
+    await check('2026-09-13T12:00:00Z');
+    expect(await check('2026-09-15T13:00:00Z')).toMatchObject({ sync_status: 'error', sync_error: 'carrier:number_unknown' });
+    adapter.fetch.mockImplementation(async () => { throw listed(); });
+    const cleared = await check('2026-09-16T13:00:00Z');
+    expect(cleared).toMatchObject({ sync_status: 'waiting', sync_error: null });
+    expect(cleared.routing.unknown_since).toBeUndefined();
+  });
+
   it('starts the two days again for another carrier', async () => {
     const now = new Date('2026-09-10T12:00:00Z');
     const client = { ...fakeClient(),

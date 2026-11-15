@@ -2598,7 +2598,10 @@ export class TrackingSyncService {
           // that. Any answer clears it.
           const routing = error instanceof RoutingDeferred && previousStage === 'pending'
             && !error.routing.input_needed && !error.routing.provider_input_needed ? error.routing : null;
-          const unknown = routing !== null && ['not_found', 'no_history'].includes(routing.failures[carrierId]?.kind ?? '');
+          // One that lists the shipment without a scan yet (booked or labelled) knows the number: that is an answer.
+          const answer = routing?.failures[carrierId];
+          if (routing && answer?.listed) delete routing.unknown_since;
+          const unknown = routing !== null && ['not_found', 'no_history'].includes(answer?.kind ?? '') && !answer?.listed;
           if (unknown) {
             routing.unknown_since = { carrier: carrierId,
               since: routing.unknown_since?.carrier === carrierId ? routing.unknown_since.since : now.toISOString() };

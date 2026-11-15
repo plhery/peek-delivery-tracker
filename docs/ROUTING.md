@@ -186,8 +186,8 @@ are all not-found or `no_history` shows as waiting, not as an outage, unless its
 for an input: the missed checks then show that request. The status line names the carrier it waits
 for ("Waiting for DHL"), as it does for a parcel without scans whose carrier could not be reached,
 which shows no error chip either. Two days after its own carrier first said it has not found the
-number or has no history for it (`routing.unknown_since`, which any answer clears and a change of
-carrier starts again), the check stores `carrier:number_unknown`: the parcel asks its owner to check
+number or has no history for it (`routing.unknown_since`, which any answer clears, its listing of the
+shipment without a scan yet included, and a change of carrier starts again), the check stores `carrier:number_unknown`: the parcel asks its owner to check
 the number, choose another carrier or delete it, a check that cannot reach the carrier keeps that,
 and it is scheduled as a number nobody has seen (Refresh cadence, below). The first such check of a parcel that
 showed its label carries the `scans_withdrawn` signal ([OBSERVABILITY.md](OBSERVABILITY.md)), once a source whose

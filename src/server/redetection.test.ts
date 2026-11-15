@@ -51,6 +51,29 @@ it('points a delivered parcel filed under no carrier to the carrier a provider n
   expect(rerouteCarrier(finished('delivered', {}, { carrier: 'dhl' }))).toBeNull();
 });
 
+it('asks a delivered parcel\'s carrier again after its service failed only within a week of the newest scan', () => {
+  const now = Date.parse('2026-09-10T12:00:00Z');
+  const finished = (lastEventAt: string, failures: JsonObject = {}) => parcel({ tracking_number: UNCLAIMED, current_stage: 'delivered' },
+    { reported_carriers: ['UPS'], routing: { last_event_at: lastEventAt, failures } });
+  const failed = { ups: { kind: 'verification', count: 3, retry_at: '2026-09-10T11:00:00Z' } };
+  expect(rerouteCarrier(finished('2026-09-04T12:00:00Z', failed), 'newer', now)).toBe('ups');
+  // Past the week, a carrier that keeps failing would be asked at almost every release for the rest of the month.
+  expect(rerouteCarrier(finished('2026-09-03T11:00:00Z', failed), 'newer', now)).toBeNull();
+  // One it never asked is asked however long ago the parcel arrived: its first answer may still file it.
+  expect(rerouteCarrier(finished('2026-08-20T12:00:00Z'), 'newer', now)).toBe('ups');
+});
+
+it('passes over a carrier that shows the number only with an input the parcel does not hold for it', () => {
+  // TransMission shows a shipment only with the recipient's postcode, which the check never borrows or guesses:
+  // it would not ask, and every release would queue the same check again.
+  const named = { reported_carriers: ['TransMission'] };
+  expect(rerouteCarrier(parcel({ tracking_number: UNCLAIMED, current_stage: 'delivered' }, named))).toBeNull();
+  expect(rerouteCarrier(parcel({ tracking_number: UNCLAIMED }, named))).not.toBe('transmission');
+  expect(rerouteCarrier(parcel({ carrier: 'dhl', tracking_number: UNCLAIMED }, named))).not.toBe('transmission');
+  // A carrier that needs nothing more is asked as before.
+  expect(rerouteCarrier(parcel({ tracking_number: UNCLAIMED, current_stage: 'delivered' }, { reported_carriers: ['UPS'] }))).toBe('ups');
+});
+
 it('points a parcel filed under no carrier to a carrier without an adapter of its own', () => {
   expect(rerouteCarrier(parcel({ tracking_number: 'BUFZA0000000001YQ' }, { reported_carriers: ['Buffalo', 'Estafeta'] })))
     .toBe('buffalo-ex');

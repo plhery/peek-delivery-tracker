@@ -2,7 +2,7 @@ import 'server-only';
 import { recognitionCandidates } from 'universal-parcel-scraper';
 import { universalCarrierHints } from 'universal-parcel-scraper/app';
 import { detectCarrierMatch } from '../lib/carriers';
-import { AUTOMATIC_CARRIER_IDS } from './carriers';
+import { AUTOMATIC_CARRIER_IDS, requiredRequirements } from './carriers';
 import { localClockCarrier } from './directLocalHistory';
 import { refusesNumber } from './numberRefusal';
 import { refusedNumberCode } from './trackingFailure';
@@ -20,6 +20,13 @@ export const REDETECTION_WINDOW_MS = 30 * 24 * 60 * 60 * 1_000;
 export const RELEASE_REASK_MS = 12 * 60 * 60 * 1_000;
 
 /**
+ * How long after a delivered or returned parcel's newest scan a release still asks again the
+ * carrier its provider named whose service failed: a carrier that keeps failing would
+ * otherwise be asked at almost every release for the rest of the month.
+ */
+export const FINISHED_REASK_MS = 7 * 24 * 60 * 60 * 1_000;
+
+/**
  * The carrier the catalog's current rules point a parcel to, when the
  * parcel was last routed with other rules and has not asked that carrier yet:
  * one added or last checked before a scraper release brought a detection rule,
@@ -35,7 +42,10 @@ export const RELEASE_REASK_MS = 12 * 60 * 60 * 1_000;
  * can open a browser waits until the parcel has gone RELEASE_REASK_MS without a
  * check, unless the answer it gave, set aside as older than the parcel or on
  * local clocks, would now be taken. A carrier whose service failed has not answered: it
- * counts as not asked once that failure's wait is over. Null otherwise. Only parcels filed under no carrier, or showing a
+ * counts as not asked once that failure's wait is over, for a delivered or returned parcel
+ * only within FINISHED_REASK_MS of its newest scan. A carrier that shows the number only with an
+ * input the parcel does not hold for it, such as a postcode, is passed over: the check would
+ * not ask it. Null otherwise. Only parcels filed under no carrier, or showing a
  * universal provider's history, are looked at; a delivered or returned one only when it is
  * filed under no carrier, for a carrier with an adapter of its own that a provider named
  * and it never asked. Nothing is sent: the check
@@ -93,11 +103,15 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
     && !releaseLapses(carrier, routing.failures[carrier]);
   const waiting = (carrier: string) => Date.parse(routing.candidate_probes?.[carrier]?.retry_at ?? '') > now
     || failureWaits(carrier) || (checkedRecently && opensBrowser(carrier) && asked(carrier) && !fits(carrier));
+  // The check lends no carrier another's input and guesses none (tryDirect): a carrier that needs one
+  // the parcel does not hold for it is never asked, and listing it would queue the same check at every release.
+  const lacksInput = (carrier: string) => requiredRequirements(carrier, number).length > 0
+    && !(routing.confirmed_carrier === carrier && routing.confirmed_number === number);
   // A carrier with an adapter of its own that the parcel never asked, or an unfiled parcel
   // can ask again, or one an unfiled parcel's check asks the providers about.
   const leads = (carrier: string | undefined): carrier is string => carrier !== undefined && carrier !== filed
     && !refused.has(carrier) && AUTOMATIC_CARRIER_IDS.has(carrier) && (!directCarrier(carrier) ? unfiled
-      : unfiled ? carrier !== routing.confirmed_carrier && !waiting(carrier) : !asked(carrier) && !failureWaits(carrier));
+      : !lacksInput(carrier) && (unfiled ? carrier !== routing.confirmed_carrier && !waiting(carrier) : !asked(carrier) && !failureWaits(carrier)));
   const lead = (carrier: string, rank: 0 | 1 | 2 = asked(carrier) ? 2 : 1): RerouteLead =>
     ({ carrier, rank: refusedBefore(carrier) ? 0 : rank });
   // The names a provider gave, read with today's aliases and number rules.
@@ -106,9 +120,13 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
   const named = names.length ? universalCarrierHints(names, number).discovered_carrier : undefined;
   // A delivered or returned parcel has no next check to ask the carrier its provider names.
   // A release checks it for such a carrier with an adapter of its own that it never asked,
-  // such as one the release added, whose answer files the parcel there.
+  // such as one the release added, whose answer files the parcel there. One whose service
+  // failed is asked again only while the parcel's newest scan is recent.
   if (finished) {
-    return leads(named) && directCarrier(named) && !asked(named) && !refusedBefore(named) ? lead(named, 1) : null;
+    const failedLongAfter = (carrier: string) => serviceFailure(routing.failures[carrier])
+      && now - Date.parse(routing.last_event_at ?? '') > FINISHED_REASK_MS;
+    return leads(named) && directCarrier(named) && !asked(named) && !refusedBefore(named) && !failedLongAfter(named)
+      ? lead(named, 1) : null;
   }
   const taken = Object.keys(routing.set_aside ?? {}).find((carrier) => fits(carrier) && carrier !== filed
     && !refused.has(carrier) && AUTOMATIC_CARRIER_IDS.has(carrier) && directCarrier(carrier));

@@ -65,4 +65,36 @@ describe('tracking proxy scope', () => {
     await expect(proxy('http://tracking.example/')).rejects.toThrow('require HTTPS');
     await agent.close();
   });
+
+  it('asks the proxy once more when it refuses the tunnel with a gateway error, and only then', async () => {
+    // undici's error chain for a proxy whose exit could not reach the host.
+    const refused = (status: number) => Object.assign(new TypeError('fetch failed'), { cause: Object.assign(new Error('Request was cancelled.'),
+      { cause: Object.assign(new Error(`Proxy response (${status}) !== 200 when HTTP Tunneling`), { name: 'AbortError', code: 'UND_ERR_ABORTED' }) }) });
+    const route = { TRACKING_PROXY_ROUTES: '{"tracking.example":"http://proxy.example"}' };
+    const agents = new Set<ProxyAgent>();
+    const run = async (failures: unknown[], url = 'https://tracking.example/lookup', init?: RequestInit) => {
+      const fetcher = vi.fn<typeof fetch>(async (_input, options) => {
+        agents.add((options as RequestInit & { dispatcher: ProxyAgent }).dispatcher);
+        const failure = failures.shift();
+        if (failure) throw failure;
+        return new Response('{}');
+      });
+      const outcome = await trackingProxyFetcher(route, fetcher)!(url, init).then((response) => response.status, (error: unknown) => error);
+      return { outcome, calls: fetcher.mock.calls.length };
+    };
+    for (const status of [502, 503, 504]) expect(await run([refused(status)])).toEqual({ outcome: 200, calls: 2 });
+    // Once: a second refusal is the lookup's failure.
+    const twice = await run([refused(502), refused(502)]);
+    expect(twice.calls).toBe(2);
+    expect(twice.outcome).toBeInstanceOf(TypeError);
+    // Not a refusal of the proxy's own (its credentials), another failure, a lookup cut short, or a streamed body.
+    expect((await run([refused(407)])).calls).toBe(1);
+    expect((await run([new TypeError('fetch failed')])).calls).toBe(1);
+    const aborted = new AbortController();
+    aborted.abort();
+    expect((await run([refused(502)], undefined, { signal: aborted.signal })).calls).toBe(1);
+    expect((await run([refused(502)], undefined, { method: 'POST', body: new ReadableStream(), duplex: 'half' } as RequestInit)).calls).toBe(1);
+    expect((await run([refused(502)], undefined, { method: 'POST', body: '{}' })).calls).toBe(2);
+    for (const agent of agents) await agent.close();
+  });
 });

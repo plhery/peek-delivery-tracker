@@ -1,6 +1,16 @@
 import { ProxyAgent } from 'undici';
 
 const HOST = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
+/** undici's error when the proxy answers the tunnel with a gateway error: its exit could not reach the host. */
+const TUNNEL_REFUSED = /^Proxy response \((?:502|503|504)\) !== 200 when HTTP Tunneling$/;
+
+function tunnelRefused(error: unknown): boolean {
+  for (let cause = error, depth = 0; cause && depth < 5; cause = (cause as { cause?: unknown }).cause, depth += 1) {
+    const message = (cause as { message?: unknown }).message;
+    if (typeof message === 'string' && TUNNEL_REFUSED.test(message)) return true;
+  }
+  return false;
+}
 
 function proxySettings(raw: string, setting: string): { key: string; uri: string; token?: string } {
   try {
@@ -43,6 +53,15 @@ export function trackingProxyFetcher(env: Readonly<Record<string, string | undef
     if (url.protocol !== 'https:') throw new TypeError('Proxied tracking requests require HTTPS');
     let dispatcher = dispatchers.get(route.key);
     if (!dispatcher) { dispatcher = new ProxyAgent({ uri: route.uri, ...(route.token ? { token: route.token } : {}) }); dispatchers.set(route.key, dispatcher); }
-    return fetcher(input, { ...init, dispatcher } as RequestInit);
+    const proxied = () => fetcher(input, { ...init, dispatcher } as RequestInit);
+    try {
+      return await proxied();
+    } catch (error) {
+      // A proxy that answers the tunnel with a gateway error sent nothing to the host: it is asked
+      // once more. A body that streams would not be there to send again.
+      const replayable = !(input instanceof Request && input.body) && !(init?.body instanceof ReadableStream);
+      if (!replayable || init?.signal?.aborted || !tunnelRefused(error)) throw error;
+      return proxied();
+    }
   };
 }

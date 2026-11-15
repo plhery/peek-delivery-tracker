@@ -251,6 +251,30 @@ describe('relayCopies', () => {
     ] })).toEqual(new Map([['departed-copy', 'departed'], ['picked-up-copy', 'picked-up']]));
   });
 
+  it('pairs the earlier carrier\'s copy of a scan in the same second when its place adds the postcode', () => {
+    const told = (id: string, source: string, location: string) => ({
+      ...scan(id, source, 'in_transit', '2026-11-14T15:09:03Z'), description: 'Processing at Designated Facility', location,
+    });
+    // JS Express and WanB Express tell SpeedX's US scans in its words and second, with the facility's postcode.
+    for (const earlier of ['js-express', 'wanbexpress']) {
+      expect(relayCopies({ carrier: earlier, carrier_data: { original_carrier: earlier, active_tracking_carrier: 'speedx' }, tracking_events: [
+        told('facility', 'speedx', 'Testville, NJ'),
+        told('facility-copy', earlier, 'Testville, NJ 00001'),
+      ] }), earlier).toEqual(new Map([['facility-copy', 'facility']]));
+    }
+  });
+
+  it('pairs the earlier carrier\'s copy of a scan in the same second when it tells it in another language', () => {
+    const told = (id: string, source: string, description: string) => ({
+      ...scan(id, source, 'in_transit', '2026-11-14T11:04:35Z'), description,
+    });
+    // JS Express tells DHL's German parcel-centre scan in English, in the same second and without a place.
+    expect(relayCopies({ carrier: 'js-express', carrier_data: { original_carrier: 'js-express', active_tracking_carrier: 'dhl' }, tracking_events: [
+      told('sorted', 'dhl', 'Die Sendung wurde im Paketzentrum bearbeitet.'),
+      told('sorted-copy', 'js-express', 'The shipment has been processed in the parcel centre.'),
+    ] })).toEqual(new Map([['sorted-copy', 'sorted']]));
+  });
+
   it('pairs another carrier\'s row of the parcel\'s scan when no handoff is recorded: same second, stage and place', () => {
     const placed = (id: string, source: string, stage: string, at: string, location?: string) => ({ ...scan(id, source, stage, at), location });
     // BRT's rows stayed when the parcel was corrected to Chronopost, which tells the same scans.

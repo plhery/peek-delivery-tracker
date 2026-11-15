@@ -41,7 +41,7 @@ export interface RecentParcel {
    * The parcel's `newsAt` as this device last opened it, or SEEN_BEFORE_ANY_NEWS: a later one marks its card.
    * A parcel saved before the mark has none, and starts as seen with its next answer.
    */
-  seenNews?: string;
+  openedNews?: string;
 }
 
 /**
@@ -196,7 +196,7 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
   const existing = list.find((recent) => recent.id === id);
   const current = currentEvent(view.parcel.events);
   const firstAnswer = !existing?.snapshot.parcel.lastSyncedAt && !!view.parcel.lastSyncedAt;
-  const kept = typeof existing?.seenNews === 'string' && !firstAnswer ? existing.seenNews : null;
+  const kept = typeof existing?.openedNews === 'string' && !firstAnswer ? existing.openedNews : null;
   const recent: RecentParcel = {
     id,
     // A parcel saved in a way this version could not read gets its key back.
@@ -209,7 +209,7 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
     updatedAt: current?.occurredAt ?? null,
     lastSeenAt: new Date(now).toISOString(),
     snapshot: view,
-    seenNews: kept ?? view.parcel.newsAt ?? SEEN_BEFORE_ANY_NEWS,
+    openedNews: kept ?? view.parcel.newsAt ?? SEEN_BEFORE_ANY_NEWS,
   };
   write([recent, ...list.filter((candidate) => candidate.id !== id)], stranded.filter((entry) => entry.id !== id));
 }
@@ -220,14 +220,14 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
  */
 export function hasUnopenedNews(recent: RecentParcel): boolean {
   const news = recent.snapshot.parcel.newsAt;
-  return !!news && typeof recent.seenNews === 'string' && Date.parse(news) > Date.parse(recent.seenNews);
+  return !!news && typeof recent.openedNews === 'string' && Date.parse(news) > Date.parse(recent.openedNews);
 }
 
 /** The parcel was opened with the news it holds: its card loses its mark. */
 export function markRecentSeen(id: string, newsAt: string): void {
   const list = read();
-  if (!list.some((recent) => recent.id === id && recent.seenNews !== newsAt)) return;
-  write(list.map((recent) => recent.id === id ? { ...recent, seenNews: newsAt } : recent));
+  if (!list.some((recent) => recent.id === id && recent.openedNews !== newsAt)) return;
+  write(list.map((recent) => recent.id === id ? { ...recent, openedNews: newsAt } : recent));
 }
 
 /** Names a parcel on this device; an empty name removes it. */

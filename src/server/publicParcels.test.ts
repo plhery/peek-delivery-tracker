@@ -220,6 +220,27 @@ describe('what a link shows', () => {
     expect(JSON.stringify(shown([added]))).not.toContain('provider_event_id');
   });
 
+  it('says when its latest scan arrived, as the view stored its scans, except to whom a gift is still wrapped (#72)', () => {
+    // As parcel_link_view gives them: each with the time Peek stored it, Peek's own row too.
+    const scan = { id: 'scan', package_id: 'parcel', stage: 'in_transit', description: 'Sorted', location: null,
+      occurred_at: '2026-10-02T07:00:00+00:00', provider_event_id: 'swiss-post:sorted', point: null, recipient_action: null,
+      stored_at: '2026-10-02T07:20:00.123456+00:00' };
+    const added = { id: 'added', package_id: 'parcel', stage: 'pending', description: 'Tracking added', location: null,
+      occurred_at: '2026-10-02T08:00:00+00:00', provider_event_id: 'app:pending', point: null, recipient_action: null,
+      stored_at: '2026-10-02T08:00:00+00:00' };
+    const shown = (events: Record<string, unknown>[], link: Record<string, unknown> = {}) => publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-01T08:00:00Z', forget_at: null, ...link },
+      package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'in_transit',
+        created_at: '2026-10-01T08:00:00Z', carrier_data: {}, tracking_events: events },
+    }, alerts).package;
+    expect(shown([scan, added]).news_at).toBe('2026-10-02T07:20:00.123456+00:00');
+    expect(JSON.stringify(shown([scan, added]).tracking_events)).not.toContain('stored_at');
+    // Peek's own row is no news, and a gift on its way tells no scan.
+    expect(shown([added])).not.toHaveProperty('news_at');
+    expect(shown([scan, added], { gift: true })).not.toHaveProperty('news_at');
+    expect(shown([scan, added], { gift: true, owner: true }).news_at).toBe('2026-10-02T07:20:00.123456+00:00');
+  });
+
   it('asks the owner to correct a placeholder number, showing nothing of the shipments merged under it', () => {
     const merged = { id: 'merged', package_id: 'parcel', stage: 'delivered', description: 'Delivered', location: 'Lyon',
       occurred_at: '2026-10-02T07:00:00+00:00', provider_event_id: 'unknown:merged', point: null };

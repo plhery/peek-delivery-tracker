@@ -493,6 +493,20 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertTrue(reopened.list()[0].hasNewUpdate)
     }
 
+    func testAParcelNotedWhileItsLinkToldNoNewsStartsAsSeenWithItsNextAnswer() throws {
+        let id = UUID()
+        let saved = DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: checked(package(id))),
+                                 checkedAt: Date(timeIntervalSince1970: 1_800_000_000))
+        var file = try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder.deliveryTracker.encode([saved])) as? [[String: Any]])
+        // As the version that read links without their news noted it: seen before any news, which every scan follows.
+        file[0]["seenNews"] = DeviceParcel.seenBeforeAnyNews
+        var kept = try XCTUnwrap(try JSONDecoder.deliveryTracker.decode([DeviceParcel].self,
+                                                                       from: JSONSerialization.data(withJSONObject: file)).first)
+        XCTAssertNil(kept.openedNews)
+        kept.take(Parcel(shared: checked(news(package(id), at: "2026-11-15T09:00:00Z"))))
+        XCTAssertEqual(kept.openedNews, "2026-11-15T09:00:00Z", "Its scans so far are no news")
+    }
+
     func testANewScanReadWhileTheServiceWasCheckingTheParcelIsStillNews() async throws {
         let id = UUID()
         var now = Date(timeIntervalSince1970: 1_800_000_000)

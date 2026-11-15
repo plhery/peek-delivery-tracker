@@ -2,7 +2,8 @@
 begin;
 
 -- A link's events name their source, for the server alone: it tells Peek's
--- own "Tracking added" from the carrier's scans, and passes neither on.
+-- own "Tracking added" from the carrier's scans, and passes neither on. They say
+-- when Peek stored them too, which dates the parcel's news.
 do $$
 declare
   link_id text;
@@ -29,6 +30,13 @@ begin
   from jsonb_array_elements(public.public_parcel(link_id)#>'{package,tracking_events}') as event;
   if sources is distinct from array['app:pending', 'swiss-post:scan'] then
     raise exception 'A new lookup''s events do not name their source: %', sources;
+  end if;
+  if exists (
+    select 1 from jsonb_array_elements(public.parcel_link_view(link_id)#>'{package,tracking_events}') as event
+    join public.tracking_events as stored on stored.id = (event->>'id')::uuid
+    where (event->>'stored_at')::timestamptz is distinct from stored.created_at
+  ) then
+    raise exception 'A link''s events do not say when they were stored';
   end if;
 end;
 $$;

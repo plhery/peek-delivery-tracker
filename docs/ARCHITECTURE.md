@@ -588,8 +588,8 @@ and nothing typed is sent.
   `news_at`: when Peek first stored the parcel's latest scan (`newsAt` in
   `src/server/eventPlaces.ts`). Older history filled in later, another source's copy of that
   scan and Peek's own rows do not move it. A client shows the dot while `news_at` is later than
-  `seen_at`, and marks the open parcel as seen (`POST /api/packages/{id}/seen`) while its page
-  is in front, which clears the dot on the account's other devices at their next read. A parcel
+  `seen_at`, and marks the parcel someone opened as seen (`POST /api/packages/{id}/seen`) while
+  its page is in front, which clears the dot on the account's other devices at their next read. A parcel
   starts as seen: when it is added, when its first answer arrives and when it joins an account
   (the `packages_start_seen` trigger). "Mark new updates" in Settings hides the dot and keeps
   the seen state; an account's choice is stored with its notification preferences, and a

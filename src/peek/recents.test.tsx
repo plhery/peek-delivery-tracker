@@ -30,7 +30,7 @@ describe('the parcels of this device', () => {
     expect(recentFor(LINK_ID)).toEqual({
       id: LINK_ID, key: OWNER_KEY, name: null, carrier: 'dhl', stage: 'in_transit', syncStatus: 'ok',
       expectedDelivery: '2026-10-03', updatedAt: '2026-10-01T10:00:00.000Z', lastSeenAt: '2026-10-02T08:00:00.000Z',
-      snapshot: testView({ parcel: { expectedDelivery: '2026-10-03' } }), seenNews: SEEN_BEFORE_ANY_NEWS,
+      snapshot: testView({ parcel: { expectedDelivery: '2026-10-03' } }), openedNews: SEEN_BEFORE_ANY_NEWS,
     });
     expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)).toHaveLength(1);
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
@@ -198,7 +198,7 @@ describe('news since this device last opened a parcel', () => {
     expect(marked()).toBe(true);
     markRecentSeen(LINK_ID, '2026-11-15T10:00:00.5+00:00');
     expect(marked()).toBe(false);
-    expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)[0]).toMatchObject({ seenNews: '2026-11-15T10:00:00.5+00:00' });
+    expect(JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!)[0]).toMatchObject({ openedNews: '2026-11-15T10:00:00.5+00:00' });
     // Other parcels keep theirs.
     markRecentSeen(OTHER_LINK_ID, '2026-11-15T10:00:00.5+00:00');
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
@@ -206,7 +206,7 @@ describe('news since this device last opened a parcel', () => {
 
   it('marks the first scan of a parcel listed while its carrier had nothing to tell', () => {
     rememberParcel({ id: LINK_ID, view: scanned(undefined, { stages: [] }), now: NOW });
-    expect(recentFor(LINK_ID)!.seenNews).toBe(SEEN_BEFORE_ANY_NEWS);
+    expect(recentFor(LINK_ID)!.openedNews).toBe(SEEN_BEFORE_ANY_NEWS);
     expect(marked()).toBe(false);
     rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00Z'), now: NOW + 1 });
     expect(marked()).toBe(true);
@@ -218,14 +218,18 @@ describe('news since this device last opened a parcel', () => {
     expect(marked()).toBe(false);
   });
 
-  it('starts a parcel saved before the mark as seen with its next answer: nobody comes back to a wall of dots', () => {
+  it.each([
+    ['before the mark', {}],
+    // The version before noted every parcel as seen before any news, as links did not tell theirs.
+    ['while its link told no news', { seenNews: SEEN_BEFORE_ANY_NEWS }],
+  ])('starts a parcel saved %s as seen with its next answer: nobody comes back to a wall of dots', (_, noted) => {
     rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T09:00:00Z'), now: NOW });
-    // As the version before saved it: no news noted, and none in its answer.
+    // As a version before saved it: no news in its answer.
     const [saved] = JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!);
-    delete saved.seenNews;
+    delete saved.openedNews;
     delete saved.snapshot.parcel.newsAt;
-    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([saved]));
-    expect(recentFor(LINK_ID)!.seenNews).toBeUndefined();
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([{ ...saved, ...noted }]));
+    expect(recentFor(LINK_ID)!.openedNews).toBeUndefined();
     expect(marked()).toBe(false);
     rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T10:00:00Z'), now: NOW + 1 });
     expect(marked()).toBe(false);

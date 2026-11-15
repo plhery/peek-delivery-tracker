@@ -16,6 +16,8 @@ struct ParcelDetailView: View {
     /// The deliveries are in front and the list has nothing open over it. Beside the list, the page asks for no rating
     /// while the list has something open, as the list asks for none while the page has.
     var listFree = true
+    /// Someone opened the parcel. The one shown beside the list by itself, so that the column isn't empty, is not read.
+    var chosen = true
 
     @EnvironmentObject private var store: ParcelStore
     @EnvironmentObject private var localizer: Localizer
@@ -28,6 +30,7 @@ struct ParcelDetailView: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     @Environment(\.keyboardInFront) private var keyboardInFront
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.appearsActive) private var appearsActive
     /// The card's globe, share and bell grow with the text, and their buttons with them, keeping the room around each.
     @ScaledMetric(relativeTo: .body) private var cardSymbol: CGFloat = 17
     private var cardButton: CGFloat { cardSymbol + 27 }
@@ -210,9 +213,11 @@ struct ParcelDetailView: View {
 
     private var parcel: Parcel? { sample ?? store.parcels.first { $0.id == parcelID || $0.carrierData?.originalPackageID == parcelID } }
 
-    /// The news of the parcel on the page that the list still marks as new, while the page can be seen.
+    /// The news of the parcel on the page that the list still marks as new, while the reader is looking at the page:
+    /// a parcel someone opened, in front with nothing over it, in the focused window on a Mac.
     private var unseenNews: String? {
-        guard sample == nil, scenePhase != .background, let parcel, parcel.hasNewUpdate else { return nil }
+        guard sample == nil, chosen, listFree, scenePhase == .active, appearsActive, !covered,
+              let parcel, parcel.hasNewUpdate else { return nil }
         return parcel.newsAt
     }
 

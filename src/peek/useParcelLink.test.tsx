@@ -60,10 +60,10 @@ describe('useParcelLink', () => {
     expect(hasUnopenedNews(recentFor(LINK_ID)!)).toBe(true);
     state.mockReturnValue('visible');
     act(() => setHidden(false));
-    expect(recentFor(LINK_ID)!.seenNews).toBe('2026-11-15T10:00:00Z');
+    expect(recentFor(LINK_ID)!.openedNews).toBe('2026-11-15T10:00:00Z');
     await pass(30_000);
     expect(mocks.read).toHaveBeenCalledTimes(2);
-    expect(recentFor(LINK_ID)!.seenNews).toBe('2026-11-15T11:00:00Z');
+    expect(recentFor(LINK_ID)!.openedNews).toBe('2026-11-15T11:00:00Z');
     expect(hasUnopenedNews(recentFor(LINK_ID)!)).toBe(false);
   });
 

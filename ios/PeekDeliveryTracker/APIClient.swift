@@ -205,9 +205,15 @@ final class DeliveryAPIClient {
         )
     }
 
-    /// The parcel was opened: the moment the server kept, which its mark for new updates is measured from.
-    func markSeen(id: UUID) async throws -> String {
-        let response: PackageSeenResponse = try await request("/api/packages/\(id.uuidString)/seen", method: "POST")
+    /// The parcel was opened, seen as of the news its page showed (`newsAt`), or of now without one: the moment the
+    /// server kept, which its mark for new updates is measured from.
+    func markSeen(id: UUID, newsAt: String?) async throws -> String {
+        // The contract names the field `news_at`, and the generated requests go out under their Swift names.
+        let response: PackageSeenResponse = try await request(
+            "/api/packages/\(id.uuidString)/seen",
+            method: "POST",
+            body: newsAt.map { ["news_at": $0] }
+        )
         return response.seenAt
     }
 

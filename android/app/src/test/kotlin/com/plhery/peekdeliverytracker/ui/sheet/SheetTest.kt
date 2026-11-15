@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.sheet
 
+import android.graphics.Rect
 import android.view.View
 import androidx.activity.BackEventCompat
 import androidx.activity.compose.BackHandler
@@ -25,6 +26,7 @@ import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
@@ -55,8 +57,8 @@ import org.robolectric.annotation.GraphicsMode
  * focus let go as it starts to go; the sheet opened again on its way out after the back gesture; the detent asked
  * for; nothing but its own content sending it away while it isn't dismissible; taps on the status bar, which leave it
  * up; the page sheet in regular windows, the iPad's, an Android tablet's and an unfolded foldable's, beside the
- * form there; and the grabber, whose target a tap takes the sheet to its next detent from, gone on a phone on its side
- * and under another sheet.
+ * form there; the grabber, whose target a tap takes the sheet to its next detent from, gone on a phone on its side
+ * and under another sheet; and Android's 48 for a button in it, floating or attached.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -199,6 +201,29 @@ class SheetTest {
         assertEquals(0f, panel.left.value, 0.5f)
         assertEquals(compose.onRoot().getUnclippedBoundsInRoot().right.value, panel.right.value, 0.5f)
         assertEquals(emptyList<Float>(), grabbers())
+    }
+
+    /**
+     * Floating, it draws what it holds smaller, a 44 button 42 high, yet gives it Android's 48 on the screen, to a
+     * finger and as TalkBack and Accessibility Scanner are given it; attached, as large as it is laid out.
+     */
+    @Test
+    fun itsButtonsHaveAndroids48OnTheScreenFloatingOrAttached() {
+        show()
+        val density = view.resources.displayMetrics.density
+        for (attached in listOf(false, true)) {
+            if (attached) {
+                compose.onNodeWithTag(SHEET_GRABBER, useUnmergedTree = true).performTouchInput { click(center) }
+                compose.waitForIdle()
+            }
+            val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
+            assertEquals(if (attached) 0f else 8f, panel.left.value, 0.5f)
+            val done = compose.onNodeWithText("Done").fetchSemanticsNode()
+            val bounds = Rect().also(view.accessibilityNodeProvider.createAccessibilityNodeInfo(done.id)!!::getBoundsInScreen)
+            val drawn = done.boundsInRoot.height / density
+            assertEquals(if (attached) 44f else 44f * 374 / 390, drawn, 0.5f)
+            assertTrue("Done is ${bounds.width() / density} by ${bounds.height() / density}", bounds.width() >= 48 * density - 0.5f && bounds.height() >= 48 * density - 0.5f)
+        }
     }
 
     @Test

@@ -66,6 +66,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.platform.ViewConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -79,6 +81,7 @@ import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
@@ -676,6 +679,9 @@ private fun SheetLayer(
                 val shape = remember(floatingRadius, attachment) { SheetShape(floatingRadius, attachment) }
                 val glassDim = remember(presence, dim) { { dim * presence() } }
                 val scale = remember(geometry, attachment) { { (width - 2 * inset * (1 - attachment())) / width } }
+                // What it holds, drawn smaller as it floats, is touched in Android's 48 across on the screen, not 46.
+                val viewConfiguration = LocalViewConfiguration.current
+                val touch = remember(viewConfiguration, geometry) { viewConfiguration.scaledTouch(width / (width - 2 * inset)) }
                 // Drawn again in what is scaled, it is scaled back, so that its glass blurs the window where it is.
                 val ground = remember(scale, attachment, backdrop, glassDim, colors) {
                     @Composable { bounds: Modifier ->
@@ -723,7 +729,7 @@ private fun SheetLayer(
                                     .scaledFrom(scale)
                                     .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier)
                                     .sheetFootRoom(foot, bar),
-                            ) { content() }
+                            ) { CompositionLocalProvider(LocalViewConfiguration provides touch, content) }
                             if (standsUp) LitEdge(shape, Modifier.matchParentSize())
                             if (showsGrabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
                         }
@@ -770,6 +776,17 @@ private fun Modifier.placedAt(size: () -> Size, at: () -> Offset): Modifier =
             }
         },
     )
+
+/**
+ * This configuration with touch targets [factor] times as large as its own, for what is drawn 1 / [factor] its size,
+ * so that Android's 48 stays 48 on the screen.
+ */
+private fun ViewConfiguration.scaledTouch(factor: Float): ViewConfiguration {
+    val touch = minimumTouchTargetSize * factor
+    return object : ViewConfiguration by this {
+        override val minimumTouchTargetSize: DpSize get() = touch
+    }
+}
 
 /**
  * Lays the content out larger by 1 / [scale] and draws it scaled by it from its top leading corner, so that it fills

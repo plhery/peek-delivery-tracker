@@ -440,6 +440,44 @@ begin
 end;
 $$;
 
+-- paced: our own pacing refused La Poste's read at the latest check (its lookup ended `error`, no failure kept) and
+-- ParcelsApp answered; failed: the same read, but La Poste failed in transport; earlier: La Poste's read was refused
+-- a check before, and the latest check did not ask it.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f4000000-0000-4000-8000-0000000000fc', 'f4000000-0000-4000-8000-000000000001', false, 'GOALS0032', 'la-poste',
+    'in_transit', 'ok', now() - interval '1 hour', now() - interval '6 minutes', '{"tracking_provider": "ParcelsApp"}'),
+  ('f4000000-0000-4000-8000-0000000000fd', 'f4000000-0000-4000-8000-000000000001', false, 'GOALS0033', 'la-poste',
+    'in_transit', 'ok', now() - interval '1 hour', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "routing": {"failures": {"la-poste": {"kind": "transport", "count": 1}}}}'),
+  ('f4000000-0000-4000-8000-0000000000fe', 'f4000000-0000-4000-8000-000000000001', false, 'GOALS0034', 'la-poste',
+    'in_transit', 'ok', now() - interval '1 hour', now() - interval '6 minutes', '{"tracking_provider": "ParcelsApp"}');
+insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, source_carrier, outcome, lookups, started_at, completed_at)
+values
+  ('f4000000-0000-4000-8000-0000000000c3', 'f4000000-0000-4000-8000-0000000000fc', 'added', 'la-poste', 'unknown',
+    'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes'),
+  ('f4000000-0000-4000-8000-0000000000c4', 'f4000000-0000-4000-8000-0000000000fd', 'added', 'la-poste', 'unknown',
+    'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes'),
+  ('f4000000-0000-4000-8000-0000000000c5', 'f4000000-0000-4000-8000-0000000000fe', 'added', 'la-poste', 'unknown',
+    'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '40 minutes', now() - interval '40 minutes'),
+  ('f4000000-0000-4000-8000-0000000000c6', 'f4000000-0000-4000-8000-0000000000fe', 'scheduled', 'la-poste', 'unknown',
+    'unchanged', '{"ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes');
+
+-- A carrier our own pacing refused at the latest check was asked: the providers stand in until its next check.
+do $$
+begin
+  if (select array_agg(row(tracking_number, why, reason, lane)::text order by tracking_number)
+      from private.tracking_gaps where tracking_number in ('GOALS0032', 'GOALS0033', 'GOALS0034'))
+      is distinct from array[
+        row('GOALS0032', 'carrier paced', 'carrier paced', 'none')::text,
+        row('GOALS0033', 'adapter transport', 'transport', 'adapters')::text,
+        row('GOALS0034', 'carrier not asked', 'carrier not asked', 'delivery-tracker')::text] then
+    raise exception 'A carrier our pacing refused was misread: %', (select array_agg(row(tracking_number, why, reason, lane)::text)
+      from private.tracking_gaps where tracking_number in ('GOALS0032', 'GOALS0033', 'GOALS0034'));
+  end if;
+end;
+$$;
+
 -- Grafana's role reads the counts, not the parcels behind them.
 set local role metrics_reader;
 select day, parcels, stale_parcels from metrics.goals_daily order by day desc limit 1;

@@ -32,8 +32,9 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 
 /**
  * `LabelScanner` and `TrackingDataScanner`'s camera: whether this device scans a label's barcode ([available]), and the
- * camera that reads them ([Camera]). On a device, CameraX and ML Kit's bundled barcode model
- * (platform/CameraLabelScanner.kt); elsewhere none ([NoLabelScanner]); a fake in the tests.
+ * camera that reads them ([Camera]). On a device with Google Play's build, CameraX and ML Kit's bundled barcode model
+ * (src/play/…/platform/CameraLabelScanner.kt); elsewhere none ([NoLabelScanner]), F-Droid's build included; a fake in
+ * the tests.
  */
 @Stable
 interface LabelScanner {

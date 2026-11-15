@@ -568,6 +568,8 @@
   "notifications.prompt.title": "Recevoir les mises à jour",
   "notifications.qr.body": "Installe l’app Peek et connecte-toi avec ce compte.",
   "notifications.qr.title": "Sur ton iPhone aussi",
+  "notifications.route.inbox": "Peek vérifie les nouvelles environ toutes les 15 minutes : une notification peut donc arriver un peu en retard. Avec une application UnifiedPush comme ntfy, elles arrivent tout de suite.",
+  "notifications.route.unifiedpush": "Les notifications arrivent directement par {{app}}, votre application UnifiedPush.",
   "notifications.save": "Enregistrer les préférences",
   "notifications.saved": "Préférences enregistrées",
   "notifications.saving": "Enregistrement…",

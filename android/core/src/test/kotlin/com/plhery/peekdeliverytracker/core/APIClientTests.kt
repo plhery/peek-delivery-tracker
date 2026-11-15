@@ -1,10 +1,12 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
+import com.plhery.peekdeliverytracker.core.api.PushSubscriptionKeys
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.security.MessageDigest
@@ -210,6 +212,61 @@ class APIClientTests {
         val removed = removal.requests.single()
         assertEquals("DELETE https://peek.example/api/push/devices", "${removed.method} ${removed.url}")
         assertEquals("""{"token":"$token","transport":"fcm"}""", removed.body?.decodeToString())
+    }
+
+    /**
+     * The build without Google's services: its installation token, with the UnifiedPush distributor's endpoint and keys
+     * or for its inbox, and the inbox's notifications taken with the token alone.
+     */
+    @Test
+    fun aPhoneWithoutGooglesServicesRegistersItsInstallationTokenAndTakesItsInbox() = runTest {
+        val installation = UUID.fromString("42000000-0000-4000-8000-000000000003")
+        val token = "A".repeat(43)
+        val keys = PushSubscriptionKeys(p256dh = "B".repeat(87), auth = "C".repeat(22))
+        val unifiedPush = PushAddress(token, NativePushTransport.Unifiedpush, "https://push.example.com/up/1", keys).text
+        val transport = serving(jsonResponse(200, """{"ok":true,"testSent":false}"""))
+        client(transport, TestSession()).registerNativePushToken(unifiedPush, installation, AppLanguage.En, sendTest = false)
+        assertEquals(
+            // Escaped slashes, as Swift's JSONEncoder writes them.
+            """{"deviceName":"Synthetic phone","endpoint":"https:\/\/push.example.com\/up\/1","environment":"production",""" +
+                """"installationId":"42000000-0000-4000-8000-000000000003","keys":{"auth":"${keys.auth}","p256dh":"${keys.p256dh}"},""" +
+                """"locale":"en","sendTest":false,"token":"$token","transport":"unifiedpush"}""",
+            transport.requests.single().body?.decodeToString(),
+        )
+
+        val removal = serving(jsonResponse(200, """{"ok":true}"""))
+        client(removal, TestSession()).unregisterNativePushToken(PushAddress(token, NativePushTransport.Inbox).text)
+        assertEquals("""{"token":"$token","transport":"inbox"}""", removal.requests.single().body?.decodeToString())
+
+        val inbox = serving(jsonResponse(200, """{"messages":[{"title":"Parcel","body":"Out for delivery","parcel_id":"p1"}]}"""))
+        assertEquals(
+            listOf(mapOf("title" to "Parcel", "body" to "Out for delivery", "parcel_id" to "p1")),
+            PushInbox.take(configuration, inbox, token),
+        )
+        val taken = inbox.requests.single()
+        assertEquals("POST https://peek.example/api/public/push/inbox", "${taken.method} ${taken.url}")
+        assertEquals("""{"token":"$token"}""", taken.body?.decodeToString())
+
+        val config = serving(jsonResponse(200, """{"available":true,"publicKey":"${"V".repeat(87)}"}"""))
+        assertEquals("V".repeat(87), PushInbox.vapidKey(configuration, config))
+        assertEquals("GET https://peek.example/api/push/config", config.requests.single().let { "${it.method} ${it.url}" })
+        assertNull(PushInbox.vapidKey(configuration, serving(jsonResponse(200, """{"available":false,"publicKey":null}"""))))
+    }
+
+    @Test
+    fun aPushAddressKeepsItsWayInTheStoresOneString() {
+        val keys = PushSubscriptionKeys(p256dh = "B".repeat(87), auth = "C".repeat(22))
+        val fcm = "synthetic-fcm:" + "a".repeat(40)
+        assertEquals(PushAddress(fcm), PushAddress.of(fcm))
+        assertEquals(fcm, PushAddress(fcm).text)
+        for (address in listOf(
+            PushAddress("A".repeat(43), NativePushTransport.Inbox),
+            PushAddress("A".repeat(43), NativePushTransport.Unifiedpush, "https://push.example.com/up/1?x=1", keys),
+        )) {
+            assertEquals(address, PushAddress.of(address.text))
+        }
+        assertTrue(PushAddress.sameDevice(PushAddress("A".repeat(43), NativePushTransport.Inbox).text, PushAddress.of("unifiedpush ${"A".repeat(43)} https://e.example/1 ${keys.p256dh} ${keys.auth}").text))
+        assertFalse(PushAddress.sameDevice("inbox ${"A".repeat(43)}", "inbox ${"D".repeat(43)}"))
     }
 
     @Test

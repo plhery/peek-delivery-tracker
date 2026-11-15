@@ -568,6 +568,8 @@
   "notifications.prompt.title": "Otrzymuj aktualizacje dostaw",
   "notifications.qr.body": "Pobierz aplikację Peek i zaloguj się na to samo konto.",
   "notifications.qr.title": "Także na Twoim iPhonie",
+  "notifications.route.inbox": "Peek sprawdza nowości mniej więcej co 15 minut, więc powiadomienie może przyjść z lekkim opóźnieniem. Z aplikacją UnifiedPush, taką jak ntfy, przychodzą od razu.",
+  "notifications.route.unifiedpush": "Powiadomienia przychodzą bezpośrednio przez {{app}}, Twoją aplikację UnifiedPush.",
   "notifications.save": "Zapisz ustawienia",
   "notifications.saved": "Zapisano ustawienia",
   "notifications.saving": "Zapisywanie…",

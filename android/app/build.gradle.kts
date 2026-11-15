@@ -75,9 +75,9 @@ val iosSettings = mapOf(
 )
 
 /**
- * Firebase Cloud Messaging's settings, which the app starts Firebase with (platform/FirebasePush.kt), by their
- * BuildConfig names: Android's alone, from the same xcconfigs, and empty in Shared.xcconfig. A build without all four
- * has no pushes. The Firebase project's Android app gives them (android/README.md); no google-services.json is read.
+ * Firebase Cloud Messaging's settings, which Google Play's build starts Firebase with (src/play/…/platform/
+ * FirebasePush.kt), by their BuildConfig names: Android's alone, from the same xcconfigs, and empty in Shared.xcconfig.
+ * A build without all four has no pushes. The Firebase project's Android app gives them (android/README.md); no google-services.json is read.
  */
 val firebaseSettings = mapOf(
     "SDTFirebaseProjectID" to "SDT_FIREBASE_PROJECT_ID",
@@ -106,6 +106,26 @@ android {
         // The hosts whose /p/ links open the parcel's sheet, as the iPhone's associated domains name them.
         manifestPlaceholders["linkHost"] = xcconfig["SDT_ASSOCIATED_DOMAIN"].orEmpty().removePrefix("applinks:")
         manifestPlaceholders["linkHostLegacy"] = xcconfig["SDT_ASSOCIATED_DOMAIN_LEGACY"].orEmpty().removePrefix("applinks:")
+    }
+
+    // Google Play's build, with Google's libraries (Firebase Cloud Messaging, Play In-App Review, ML Kit's barcode
+    // model), and F-Droid's, with none (src/play, src/fdroid): the same app on the same version, whose notifications
+    // come through UnifiedPush or the inbox it reads (android/README.md).
+    flavorDimensions += "store"
+    productFlavors {
+        create("play") {
+            dimension = "store"
+            isDefault = true
+        }
+        create("fdroid") {
+            dimension = "store"
+        }
+    }
+
+    // No dependency report in an APK, which F-Droid can't read and which would keep its build from matching ours; Google
+    // Play reads the bundle's.
+    dependenciesInfo {
+        includeInApk = false
     }
 
     signingConfigs {
@@ -401,9 +421,27 @@ open class ReleaseSettingsCheck @Inject constructor(objects: ObjectFactory) : De
 val releaseSettingsCheck = tasks.register<ReleaseSettingsCheck>("checkReleaseSettings") {
     refusal.set(releaseRefusal)
 }
-tasks.named { it == "bundleRelease" || it == "assembleRelease" }.configureEach { dependsOn(releaseSettingsCheck) }
-// The release variant's first task, which all its building waits for.
-tasks.named { it == "preReleaseBuild" }.configureEach { mustRunAfter(releaseSettingsCheck) }
+tasks.named { Regex("(bundle|assemble)(Play|Fdroid)?Release").matches(it) }.configureEach { dependsOn(releaseSettingsCheck) }
+// Each release variant's first task, which all its building waits for.
+tasks.named { Regex("pre(Play|Fdroid)ReleaseBuild").matches(it) }.configureEach { mustRunAfter(releaseSettingsCheck) }
+
+// The tasks CI and the docs name from before the two builds: Google Play's unit tests and screenshots, which F-Droid's
+// share but for its own (testFdroidDebugUnitTest), and both builds' lint.
+for ((alias, task) in listOf("test" to "UnitTest", "verifyRoborazzi" to "", "recordRoborazzi" to "", "compareRoborazzi" to "")) {
+    tasks.register("${alias}Debug$task") { dependsOn("${alias}PlayDebug$task") }
+}
+tasks.register("lintDebug") { dependsOn("lintPlayDebug", "lintFdroidDebug") }
+
+// Google Play's release APK also where it was before the two builds, which CI's release check opens
+// (scripts/release-smoke.sh).
+val playReleaseApk = tasks.register<Copy>("playReleaseApk") {
+    from(layout.buildDirectory.dir("outputs/apk/play/release")) {
+        include("app-play-release.apk", "app-play-release-unsigned.apk")
+        rename { "app-release.apk" }
+    }
+    into(layout.buildDirectory.dir("outputs/apk/release"))
+}
+tasks.named { it == "assemblePlayRelease" }.configureEach { finalizedBy(playReleaseApk) }
 
 androidComponents {
     onVariants { variant ->
@@ -440,8 +478,8 @@ dependencies {
     implementation(libs.navigation3.ui)
     // A foldable's hinge, which the tab bar keeps clear of in book posture (FoldingFeature).
     implementation(libs.window)
-    // StoreKit's `requestReview`: the rating prompt, through Play In-App Review (platform/PlayReviews.kt).
-    implementation(libs.play.review.ktx)
+    // StoreKit's `requestReview`: the rating prompt, through Play In-App Review (src/play/…/platform/PlayReviews.kt).
+    "playImplementation"(libs.play.review.ktx)
     // WKWebView's script message handler for the browser check: WebViewCompat's message listener and document-start
     // script (ui/TurnstileSheet.kt, platform/WebViewTurnstilePages.kt).
     implementation(libs.webkit)
@@ -449,21 +487,24 @@ dependencies {
     // address (platform/CustomTabSignIn.kt).
     implementation(libs.browser)
     // DataScannerViewController's stand-in for the label scanner: CameraX's preview, analysis and zoom, and ML Kit's
-    // barcode model bundled in the app, read on the device with no account, key or download (platform/CameraLabelScanner.kt).
-    implementation(libs.camera.camera2)
-    implementation(libs.camera.lifecycle)
-    implementation(libs.camera.view)
-    implementation(libs.camera.mlkit.vision)
-    implementation(libs.mlkit.barcode.scanning)
+    // barcode model bundled in the app, read on the device with no account, key or download (src/play/…/platform/
+    // CameraLabelScanner.kt): Google Play's build alone, as ML Kit is Google's.
+    "playImplementation"(libs.camera.camera2)
+    "playImplementation"(libs.camera.lifecycle)
+    "playImplementation"(libs.camera.view)
+    "playImplementation"(libs.camera.mlkit.vision)
+    "playImplementation"(libs.mlkit.barcode.scanning)
     // WidgetKit's stand-in: the home screen widget, its RemoteViews written from Compose-like code (widget/).
     implementation(libs.glance.appwidget)
     // Glance runs its widget sessions on WorkManager. Its own minimum (2.7.1) brings Room 2.2.5, whose keep rule leaves
     // R8 free to drop WorkDatabase_Impl's constructor, which Room makes by reflection: a release then fails at launch.
     implementation(libs.work.runtime)
-    // APNs' stand-in: Firebase Cloud Messaging's token and pushes (platform/FirebasePush.kt), started from the build's
-    // settings rather than by the google-services plugin.
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.messaging)
+    // APNs' stand-in: Firebase Cloud Messaging's token and pushes (src/play/…/platform/FirebasePush.kt), started from
+    // the build's settings rather than by the google-services plugin.
+    "playImplementation"(platform(libs.firebase.bom))
+    "playImplementation"(libs.firebase.messaging)
+    // F-Droid's notifications, through the UnifiedPush distributor the reader chose (src/fdroid).
+    "fdroidImplementation"(libs.unifiedpush.connector)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
@@ -483,6 +524,8 @@ dependencies {
     testImplementation(libs.window.testing)
     // The widget's content as Glance composes it, without a launcher (runGlanceAppWidgetUnitTest).
     testImplementation(libs.glance.appwidget.testing)
+    // The inbox's check scheduled without running it (src/testFdroid).
+    "testFdroidImplementation"(libs.work.testing)
 
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.core)

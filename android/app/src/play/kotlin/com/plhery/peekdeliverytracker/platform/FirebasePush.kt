@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseOptions
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.PeekApplication
 
 /**
@@ -34,24 +35,20 @@ class FirebaseSettings private constructor(
             .build()
 
     companion object {
+        /** The build's (SDT_FIREBASE_*, Android's alone), or null in a build without all four. */
+        val build: FirebaseSettings? by lazy {
+            of(
+                projectId = BuildConfig.SDTFirebaseProjectID, applicationId = BuildConfig.SDTFirebaseAppID,
+                apiKey = BuildConfig.SDTFirebaseAPIKey, senderId = BuildConfig.SDTFirebaseSenderID,
+            )
+        }
+
         fun of(projectId: String, applicationId: String, apiKey: String, senderId: String): FirebaseSettings? {
             val values = listOf(projectId, applicationId, apiKey, senderId).map(String::trim)
             if (values.any(String::isEmpty)) return null
             return FirebaseSettings(values[0], values[1], values[2], values[3])
         }
     }
-}
-
-/**
- * What the pushes need of Firebase Cloud Messaging ([FirebasePushTokens]), or of a test: this phone's registration
- * token, and its removal. Answers come on the main thread.
- */
-interface PushTokens {
-    /** `FirebaseMessaging.getToken()`: this phone's token, or why there is none. */
-    fun token(answer: (Result<String>) -> Unit)
-
-    /** `FirebaseMessaging.deleteToken()`: the token takes no more pushes, and the next one asked for is new. */
-    fun delete()
 }
 
 /**

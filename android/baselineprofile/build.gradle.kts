@@ -12,6 +12,8 @@ android {
         minSdk = 31
         targetSdk = 37
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Google Play's build, whose release the profile is for; F-Droid's has the same code where it is measured.
+        missingDimensionStrategy("store", "play")
     }
 
     buildTypes {

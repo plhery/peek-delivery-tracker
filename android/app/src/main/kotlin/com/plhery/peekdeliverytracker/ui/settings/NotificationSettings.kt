@@ -51,6 +51,7 @@ import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreferencesDraft
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.platform.SitePage
+import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
@@ -76,7 +77,7 @@ import kotlinx.coroutines.launch
  * delivery email; and when updates come. Nothing on it takes a tap while it saves, or while the email switch waits for
  * its answer. It loads the notifications' state as it opens (`.task`), and again as the app comes back from Android's
  * settings. On a phone without pushes (`DeliveriesSource.pushAvailable`) neither the switch nor the presets show,
- * which leaves the delivery email.
+ * which leaves the delivery email. F-Droid's build says under the status how the pushes reach the phone.
  */
 @Composable
 internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack: () -> Unit) {
@@ -141,6 +142,8 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
         if (source.pushAvailable) SettingsGroup {
             Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(systemStatusText(status, enabledOnDevice), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+                // F-Droid's build: whether the pushes come through a UnifiedPush app or the inbox's check (platform/Store.kt).
+                Store.pushRoute(localizer)?.let { Text(it, color = colors.secondaryLabel, style = type.footnote.sfLines()) }
                 if (status == NotificationAuthorizationStatus.Denied && !source.isDemo) {
                     Row(
                         Modifier

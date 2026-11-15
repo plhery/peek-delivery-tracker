@@ -832,9 +832,12 @@ class SettingsTest {
         }
         open()
         tap(SETTINGS_DELIVERY_UPDATES)
+        // Scrolled to while the clock runs: a page taller than the window (F-Droid's adds how notifications come) scrolls
+        // through frames a stopped clock never draws.
+        node(SETTINGS_DELIVERY_EMAIL).performScrollTo()
         // TalkBack is told too (C-AX09), for the second the words are held.
         compose.mainClock.autoAdvance = false
-        node(SETTINGS_DELIVERY_EMAIL).performScrollTo().performTouchInput { click(Offset(width - 40.dp.toPx(), height / 2f)) }
+        node(SETTINGS_DELIVERY_EMAIL).performTouchInput { click(Offset(width - 40.dp.toPx(), height / 2f)) }
         compose.mainClock.advanceTimeBy(500)
         assertEquals(text("email.setting.failed"), announced())
         compose.mainClock.autoAdvance = true

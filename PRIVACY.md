@@ -180,10 +180,11 @@ for it. When you tap Directions or Show on map for a pickup point, in an app or
 in an email, Apple Maps or Google Maps receives that pickup point's name and
 address, and nothing else about the parcel.
 
-The Android app's barcode scanner uses the camera only while it is open.
-Google's ML Kit model, built into the app, reads the frames on the phone; no
-image or barcode leaves the phone, and ML Kit's usage logging to Google is
-switched off.
+The Android app from Google Play has a barcode scanner, which uses the camera
+only while it is open. Google's ML Kit model, built into the app, reads the
+frames on the phone; no image or barcode leaves the phone, and ML Kit's usage
+logging to Google is switched off. The build without Google's services has no
+scanner and no review prompt.
 
 ## Emails
 

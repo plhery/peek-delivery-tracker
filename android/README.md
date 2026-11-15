@@ -5,6 +5,15 @@ the files `:core` reads, synced from `ios/PeekDeliveryTracker/Resources` along w
 `peek/`, and `SharedResources` reads them there. The contract fixtures, read only by debug previews, ship in debug
 builds alone.
 
+## Two builds
+
+The app comes in two flavors of the `store` dimension. `play`, the default, is Google Play's, with Google's libraries:
+Firebase Cloud Messaging, Play In-App Review, and ML Kit's barcode model behind the label scanner. `fdroid` has none of
+them, for F-Droid's catalog: its notifications come through UnifiedPush or an inbox (see Pushes), it asks for no rating
+and scans no label. Code only one build has lives in `app/src/play` or `app/src/fdroid`, each behind the same
+`platform/Store.kt`. The task names without a flavor (`testDebugUnitTest`, `verifyRoborazziDebug`,
+`recordRoborazziDebug`, `compareRoborazziDebug`) run Google Play's build, and `lintDebug` lints both.
+
 ## App tests and screenshots
 
 `./gradlew :app:testDebugUnitTest` runs the app's tests on the JVM with Robolectric. The design system's screenshots
@@ -13,6 +22,8 @@ shot's pixels differ (see `Screenshots.kt`), and `./gradlew :app:recordRoborazzi
 change meant to show. The tests run with the app's clock (`AppClock`, which every "now" in the app and
 `:core` reads) stopped at one Thursday morning in Zurich's time, on a phone set to a 24-hour clock
 (`TestPeekApplication`), so the screenshots are the same whatever the day, the hour or the computer's zone.
+Tests only Google Play's build has are in `app/src/testPlay`; F-Droid's are in `app/src/testFdroid`, and
+`./gradlew :app:testFdroidDebugUnitTest` runs them with the shared ones.
 
 ## CI
 
@@ -24,14 +35,22 @@ keeps the reports, and each differing screenshot's `_actual` and `_compare` imag
 
 ## Pushes
 
-Pushes come through Firebase Cloud Messaging, without the google-services plugin or a `google-services.json`. The
-build reads the Firebase project's Android app from four xcconfig settings that only Android reads and
-`ios/Configuration/Shared.xcconfig` leaves empty: `SDT_FIREBASE_PROJECT_ID` (`project_id` in `google-services.json`),
+In Google Play's build, pushes come through Firebase Cloud Messaging, without the google-services plugin or a
+`google-services.json`. The build reads the Firebase project's Android app from four xcconfig settings that only
+Android reads and `ios/Configuration/Shared.xcconfig` leaves empty: `SDT_FIREBASE_PROJECT_ID` (`project_id` in `google-services.json`),
 `SDT_FIREBASE_APP_ID` (`mobilesdk_app_id`), `SDT_FIREBASE_API_KEY` (`current_key`) and `SDT_FIREBASE_SENDER_ID`
 (`project_number`). Debug builds take them from `Local.xcconfig`, a release from the `peek.releaseXcconfig` file. A
 build without all four has no pushes: nothing offers them, and a parcel's alerts are its email. Neither has a phone
 without Google Play services, which Firebase gets its tokens from. The server sends
 through the same Firebase project ([docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md)).
+
+F-Droid's build names the phone by an installation token it makes and reaches it in one of two ways
+(`app/src/fdroid/.../platform/UnifiedPush.kt`). With a UnifiedPush distributor app on the phone (ntfy and the like),
+the app registers with it, signed with the server's VAPID key from `/api/push/config`, and the server sends Web Push
+messages to the endpoint it gives. Without one, the server keeps the notifications in an inbox and a WorkManager job
+takes them about every 15 minutes, whenever the phone is online. Both carry the same data as FCM's and are posted the
+same way. A distributor installed later is used at the next return to the app, and one that goes away sends the phone
+back to the inbox. Delivery updates in Settings says which way notifications come.
 
 As on the iPhone, signing out, an expired session or a deleted account takes the phone's token off the server but
 keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another
@@ -95,12 +114,12 @@ Their gallery pictures show invented parcels in the phone's language (`DeliveryW
 ## Release bundle
 
 ```sh
-./gradlew :app:bundleRelease -Ppeek.releaseXcconfig=<path> -Ppeek.uploadProperties=<path>
+./gradlew :app:bundlePlayRelease -Ppeek.releaseXcconfig=<path> -Ppeek.uploadProperties=<path>
 ```
 
 makes the bundle for Google Play, shrunk by R8 with its mapping inside, at
-`app/build/outputs/bundle/release/app-release.aab`. Both files stay outside the repository; their paths are absolute
-or from `android/`:
+`app/build/outputs/bundle/playRelease/app-play-release.aab`. Both files stay outside the repository; their paths are
+absolute or from `android/`:
 
 - `peek.releaseXcconfig` names an xcconfig with the release's server settings, the ones `ios/Configuration/Local.xcconfig`
   holds. They replace the release build type's alone: debug builds and tests keep the iPhone build's. The bundle and
@@ -111,7 +130,8 @@ or from `android/`:
 The app uses Play App Signing: Google holds the key that signs the app phones install, and ours is only the upload
 key, which Google can replace if it is lost.
 
-Before a bundle goes to Google Play, open the APK built with it on an emulator or phone:
+Before a bundle goes to Google Play, open the APK built with it on an emulator or phone (`assemblePlayRelease`
+copies it to `outputs/apk/release` too):
 
 ```sh
 scripts/release-smoke.sh app/build/outputs/apk/release/app-release.apk [serial]
@@ -133,6 +153,10 @@ in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on th
 raw.githubusercontent.com serves, and attaches the APK to a pre-release. The app's entry in the repository is
 [`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml).
 
+F-Droid's own catalog builds from source and signs with its own key, from the `fdroid` flavor:
+`./gradlew :app:assembleFdroidRelease` with the same release settings gives its APK in
+`app/build/outputs/apk/fdroid/release/`.
+
 ## Macrobenchmarks and the baseline profile
 
 `:baselineprofile` holds the app's macrobenchmarks, run on a device or emulator against the app's `benchmark` build
@@ -148,8 +172,8 @@ The app ships only the profiles its libraries bring. One of its own goes in `app
 benchmarks show it helps.
 
 ```sh
-./gradlew :app:assembleBenchmark :app:assembleNonMinifiedBenchmark :baselineprofile:assembleBenchmark
-adb install -r app/build/outputs/apk/benchmark/app-benchmark.apk
+./gradlew :app:assemblePlayBenchmark :app:assemblePlayNonMinifiedBenchmark :baselineprofile:assembleBenchmark
+adb install -r app/build/outputs/apk/play/benchmark/app-play-benchmark.apk
 adb install -r baselineprofile/build/outputs/apk/benchmark/baselineprofile-benchmark.apk
 adb shell am instrument -w -r -e class com.plhery.peekdeliverytracker.baselineprofile.StartupBenchmark \
   -e androidx.benchmark.suppressErrors EMULATOR \

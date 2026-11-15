@@ -12,6 +12,7 @@ import com.plhery.peekdeliverytracker.core.api.ClaimParcelsResponse
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
+import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
@@ -24,6 +25,7 @@ import com.plhery.peekdeliverytracker.core.api.PublicLookupResponse
 import com.plhery.peekdeliverytracker.core.api.PublicPackage
 import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.core.api.PushSubscriptionKeys
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -1686,6 +1688,40 @@ class DeviceParcelTests {
         relaunched.release(setOf("22222222222A"))
         advanceUntilIdle()
         assertEquals("unalert 22222222222A token2 fcm", calls.all.last())
+    }
+
+    /**
+     * The build without Google's services names the phone by its installation token, reached through its inbox or
+     * through UnifiedPush: a change of way asks again with the same token, whose alert the service changes in place, so
+     * nothing is turned off; a new installation token takes the old one's place as a new FCM token does.
+     */
+    @Test
+    fun aPhoneWithoutGooglesServicesKeepsItsAlertsAsItMovesBetweenItsInboxAndUnifiedPush() = runTest {
+        val mine = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", mine))
+        val calls = Calls()
+        val sent = mutableListOf<ParcelAppAlertRequest>()
+        val base = client(calls)
+        val device = device(base.replacing(setAlert = { linkId, key, request -> sent += request; base.setAlert(linkId, key, request) }), storage, this)
+        val installation = "A".repeat(43)
+        val inbox = PushAddress(installation, NativePushTransport.Inbox).text
+        val keys = PushSubscriptionKeys(p256dh = "B".repeat(87), auth = "C".repeat(22))
+        val unifiedPush = PushAddress(installation, NativePushTransport.Unifiedpush, "https://push.example.com/up/1", keys).text
+
+        device.registerAlerts(token = inbox, locale = NativePushLocale.En)
+        device.registerAlerts(token = unifiedPush, locale = NativePushLocale.En)
+        assertEquals(
+            listOf("alert 22222222222A k important $installation en production inbox", "alert 22222222222A k important $installation en production unifiedpush"),
+            calls.all,
+        )
+        assertEquals(listOf(null to null, "https://push.example.com/up/1" to keys), sent.map { it.endpoint to it.keys })
+        assertEquals(listOf(unifiedPush), storage.parcels.map { it.alertToken })
+
+        // Signed out, the phone takes a new installation token, and the old one hears nothing more.
+        device.registerAlerts(token = PushAddress("D".repeat(43), NativePushTransport.Inbox).text, locale = NativePushLocale.En)
+        assertEquals("unalert 22222222222A $installation unifiedpush", calls.all.last())
     }
 
     @Test

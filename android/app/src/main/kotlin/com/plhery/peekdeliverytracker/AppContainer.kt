@@ -62,7 +62,6 @@ import com.plhery.peekdeliverytracker.platform.CarrierCatalogLoader
 import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.DeviceParcelsFile
-import com.plhery.peekdeliverytracker.platform.FirebasePushTokens
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
@@ -72,12 +71,12 @@ import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
-import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.platform.PushTokens
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
 import com.plhery.peekdeliverytracker.platform.SensorArrivalMotion
+import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.ui.TurnstileSheet
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalMotionSource
@@ -135,8 +134,11 @@ class AppContainer(
     val posted: AppNotifications = (context as? PeekApplication)?.posted ?: AppNotifications(context),
     /** Web sign-in in an Auth Tab or a Custom Tab over the window in front: the process's, which each window registers with. */
     webAuthentication: WebAuthenticating = (context as? PeekApplication)?.signInTab ?: CustomTabSignIn(),
-    /** The pushes' tokens: Firebase Cloud Messaging's in a build with its settings, or a test's; null without them. */
-    pushTokens: PushTokens? = FirebasePushTokens.of(context, BuildSettings.firebase),
+    /**
+     * The pushes' tokens: Firebase Cloud Messaging's in Google Play's build with its settings, UnifiedPush's or the
+     * inbox's in F-Droid's ([Store]), or a test's; null without them.
+     */
+    pushTokens: PushTokens? = Store.pushTokens(context),
 ) {
     /** `UserDefaults.standard`. */
     val defaults: UserDefaults = PreferencesDefaults.standard(context)
@@ -239,8 +241,8 @@ class AppContainer(
      */
     val storeScreenshots: Boolean get() = debug && defaults.bool(DEBUG_STORE_SCREENSHOTS)
 
-    /** The system's prompt for a rating over `activity`: Play In-App Review, where the iPhone asks StoreKit. */
-    fun reviews(activity: Activity): ReviewRequester = PlayReviews(activity)
+    /** The system's prompt for a rating over `activity`: Play In-App Review, where the iPhone asks StoreKit; none in F-Droid's build. */
+    fun reviews(activity: Activity): ReviewRequester = Store.reviews(activity)
 
     /** The map's names, measured as the renderer writes them; made when a map first needs it. */
     val mapText: TextMeasurer by lazy { MapTextWidths.of(context) }

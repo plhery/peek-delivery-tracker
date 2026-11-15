@@ -568,6 +568,8 @@
   "notifications.prompt.title": "Получайте новости о доставке",
   "notifications.qr.body": "Скачайте приложение Peek и войдите в этот же аккаунт.",
   "notifications.qr.title": "И на вашем iPhone",
+  "notifications.route.inbox": "Peek проверяет новости примерно раз в 15 минут, поэтому уведомление может прийти с небольшой задержкой. С приложением UnifiedPush, например ntfy, они приходят сразу.",
+  "notifications.route.unifiedpush": "Уведомления приходят напрямую через {{app}} — ваше приложение UnifiedPush.",
   "notifications.save": "Сохранить настройки",
   "notifications.saved": "Настройки сохранены",
   "notifications.saving": "Сохраняем…",

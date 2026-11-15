@@ -160,7 +160,8 @@ class NotificationPermission(context: Context) {
  * system no longer asks; on Android 12 the setting alone. The question ([requestAuthorization]) is asked from the
  * window on screen ([NotificationPermission]), only where the permission isn't granted yet.
  *
- * The token is [tokens]' ([FirebasePushTokens]), in a build with Firebase's settings; in one without, pushes are not
+ * The token is [tokens]': Firebase Cloud Messaging's in Google Play's build with Firebase's settings, the UnifiedPush or
+ * inbox address in F-Droid's ([Store]); in a build without either, pushes are not
  * [available] and nothing offers them. [registerForRemoteNotifications] asks for it and keeps the answer as
  * [currentDeviceToken], as AppDelegate keeps APNs', then hands it to [received]; a token Firebase makes anew
  * ([tokenRefreshed], from `FirebaseMessagingService.onNewToken`) goes the same way. An answer to a question asked before

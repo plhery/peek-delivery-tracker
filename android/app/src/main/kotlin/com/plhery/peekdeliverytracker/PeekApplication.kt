@@ -18,9 +18,9 @@ import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
-import com.plhery.peekdeliverytracker.platform.FirebasePushTokens
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import java.io.FileNotFoundException
 import java.time.Instant
@@ -104,8 +104,8 @@ open class PeekApplication : Application() {
         // measured off the main thread while a composition was open, that composition couldn't, and the app stopped.
         TextMeasurer(createFontFamilyResolver(this), Density(1f), LayoutDirection.Ltr).measure(" ")
         registerActivityLifecycleCallbacks(foreground)
-        // Firebase, which the manifest no longer starts: before a push or a new token reaches PeekMessagingService.
-        BuildSettings.firebase?.let { FirebasePushTokens.start(this, it) }
+        // Google Play's build starts Firebase, which the manifest no longer does: before a push or a new token reaches it.
+        Store.start(this)
         val assets = assets
         SharedResources.install { name ->
             try {

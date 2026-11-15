@@ -24,7 +24,6 @@ import com.plhery.peekdeliverytracker.core.api.LiveActivityUpdateTokenRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
-import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalResponse
@@ -410,18 +409,20 @@ class DeliveryApiClient(
     }
 
     /**
-     * This phone's Firebase Cloud Messaging registration token, sent through FCM. FCM has one environment, so a debug
-     * build's token is a production one too.
+     * This phone's address for notifications ([PushAddress]): its Firebase Cloud Messaging registration token, or, in
+     * the build without Google's services, its installation token with its UnifiedPush endpoint and keys or for its
+     * inbox. None of them has more than one environment, so a debug build's address is a production one too.
      */
     suspend fun registerNativePushToken(token: String, installationId: UUID, language: AppLanguage, sendTest: Boolean): Boolean {
+        val address = PushAddress.of(token)
         val response = request(
             "/api/push/devices", PushSubscriptionResponse.serializer(), "POST",
             encode(
                 NativePushDeviceRequest.serializer(),
                 NativePushDeviceRequest(
-                    token = token, installationId = installationId, environment = NativePushEnvironment.Production,
+                    token = address.token, installationId = installationId, environment = NativePushEnvironment.Production,
                     locale = NativePushLocale(language), deviceName = deviceName, sendTest = sendTest,
-                    transport = NativePushTransport.Fcm,
+                    transport = address.transport, endpoint = address.endpoint, keys = address.keys,
                 ),
             ),
         )
@@ -429,11 +430,12 @@ class DeliveryApiClient(
     }
 
     suspend fun unregisterNativePushToken(token: String) {
+        val address = PushAddress.of(token)
         request(
             "/api/push/devices", OkResponse.serializer(), "DELETE",
             encode(
                 DeleteNativePushDeviceRequest.serializer(),
-                DeleteNativePushDeviceRequest(token = token, transport = NativePushTransport.Fcm),
+                DeleteNativePushDeviceRequest(token = address.token, transport = address.transport),
             ),
         )
     }

@@ -36,7 +36,7 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.SessionStore
-import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
+import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalView
 import com.plhery.peekdeliverytracker.ui.arrival.InvitationArrival
 import com.plhery.peekdeliverytracker.ui.arrival.LocalArrivalMotion
@@ -102,7 +102,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     CompositionLocalProvider(LocalArrivalMotion provides container.motion) {
         PeekRoot(
             state, container.localizer, container.session, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
-            scanner = CameraLabelScanner, links = links, source = source, work = container.scope,
+            scanner = Store.scanner, links = links, source = source, work = container.scope,
         ) {
             DeliveriesTab(source, inbox = inbox)
         }

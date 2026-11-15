@@ -55312,6 +55312,8 @@
     "/api/push/config": {
       "get": {
         "operationId": "getPushConfig",
+        "description": "Whether the server sends Web Push, and its VAPID public key, which browsers subscribe with and the Android app without Google's services registers its UnifiedPush distributor with. No sign-in: a phone that follows parcels without an account asks too.",
+        "security": [],
         "responses": {
           "200": {
             "description": "Web Push availability",
@@ -55322,6 +55324,9 @@
                 }
               }
             }
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
           }
         }
       }

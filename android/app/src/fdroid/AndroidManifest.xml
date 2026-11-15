@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- F-Droid's build, without Google's libraries (src/fdroid). -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- No label scanner without ML Kit (platform/Store.kt), so no camera to ask for. Lint reads the removal as a
+         permission asked for. -->
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        tools:ignore="PermissionImpliesUnsupportedChromeOsHardware"
+        tools:node="remove" />
+
+    <application>
+        <!-- The pushes through the UnifiedPush distributor the reader chose (platform/UnifiedPush.kt): the connector's
+             own receiver, inside the app, hands this service each new endpoint and each message, so it isn't
+             exported. -->
+        <service
+            android:name=".platform.PeekPushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="org.unifiedpush.android.connector.PUSH_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

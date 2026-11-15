@@ -37,7 +37,8 @@ import java.util.UUID
  * makes its stores and whenever its language changes.
  *
  * [post] takes a push's data as the service sends it (`title`, `body`, `kind`, `friend_id`, `link_id`, `parcel_id`):
- * what Firebase's `onMessageReceived` hands it on its own thread ([PeekMessagingService]), and the debug build's
+ * what Firebase's `onMessageReceived` hands it in Google Play's build (PeekMessagingService), UnifiedPush's `onMessage`
+ * and the inbox's check in F-Droid's (PeekPushService, InboxCheck), each on its own thread, and the debug build's
  * receiver without a server. The parcel's, the link's or the friend's notification replaces the one before for the
  * same (its tag the push's `apns-collapse-id`: the parcel's id, `link-<id>`, `friend-<id>`), and is grouped as iOS
  * threads it (the parcel's id, `link-<id>`, `friends`). One without a collapse id, such as the service's welcome, has a

@@ -568,6 +568,8 @@
   "notifications.prompt.title": "接收派送动态",
   "notifications.qr.body": "下载 Peek App，并用这个账号登录。",
   "notifications.qr.title": "iPhone 上也能用",
+  "notifications.route.inbox": "Peek 大约每 15 分钟检查一次更新，因此通知可能会稍有延迟。使用 ntfy 等 UnifiedPush 应用，通知会即时送达。",
+  "notifications.route.unifiedpush": "通知通过你的 UnifiedPush 应用 {{app}} 即时送达。",
   "notifications.save": "保存偏好设置",
   "notifications.saved": "偏好设置已保存",
   "notifications.saving": "正在保存…",

@@ -10,7 +10,6 @@ import com.plhery.peekdeliverytracker.core.api.DeleteParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
-import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
@@ -987,8 +986,8 @@ class DeviceParcels(
     /** Whether a parcel is still on its way, with something left to tell: a held return still is. */
     val hasParcelsOnTheirWay: Boolean get() = entries.any { !it.parcel.isOver }
 
-    /** What tells the service that this phone's FCM [token] hears nothing more of a parcel. */
-    private fun removal(token: String) = DeleteParcelAppAlertRequest(token = token, transport = NativePushTransport.Fcm)
+    /** What tells the service that this phone's address ([PushAddress], its [token]) hears nothing more of a parcel. */
+    private fun removal(token: String) = PushAddress.of(token).let { DeleteParcelAppAlertRequest(token = it.token, transport = it.transport) }
 
     /**
      * Turns notifications on, on this phone's token and in its language, for every parcel still on its way: once a
@@ -997,7 +996,7 @@ class DeviceParcels(
      * pause or sends no notifications. A link that leads nowhere, has no room or is no longer shared is left until the
      * next launch.
      *
-     * On Android the token is this phone's FCM registration token, which has one environment. Called from the main
+     * On Android the token is this phone's address ([PushAddress]), which has one environment. Called from the main
      * thread: `FirebaseMessagingService.onNewToken` runs on another, and the app hands its token over to the main one.
      */
     suspend fun registerAlerts(token: String, locale: NativePushLocale) {
@@ -1005,6 +1004,7 @@ class DeviceParcels(
         val client = client ?: return
         val round = asked.nfc()
         if (!alertRounds.add(round)) return
+        val address = PushAddress.of(token)
         try {
             val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }.take(alertsPerRound)
             for (entry in due) {
@@ -1015,8 +1015,8 @@ class DeviceParcels(
                     client.setAlert(
                         entry.linkId, keys.keyOf(entry.linkId),
                         ParcelAppAlertRequest(
-                            token = token, environment = NativePushEnvironment.Production, preset = preset, locale = locale,
-                            transport = NativePushTransport.Fcm,
+                            token = address.token, environment = NativePushEnvironment.Production, preset = preset, locale = locale,
+                            transport = address.transport, endpoint = address.endpoint, keys = address.keys,
                         ),
                     )
                 } catch (cancellation: CancellationException) {
@@ -1037,8 +1037,9 @@ class DeviceParcels(
                 val old = entries[index].alertToken
                 change(index) { it.copy(alertToken = token, alertPreset = preset) }
                 save()
-                // The token changed: the old one hears nothing more of this parcel.
-                if (old != null && !old.equalsCanonically(token)) {
+                // The token changed: the old one hears nothing more of this parcel. A new way to the same phone (from
+                // its inbox to UnifiedPush) has replaced the old one already.
+                if (old != null && !PushAddress.sameDevice(old, token)) {
                     attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }

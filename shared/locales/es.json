@@ -568,6 +568,8 @@
   "notifications.prompt.title": "Recibir novedades de entrega",
   "notifications.qr.body": "Descarga la app Peek e inicia sesión con esta cuenta.",
   "notifications.qr.title": "También en tu iPhone",
+  "notifications.route.inbox": "Peek busca novedades cada 15 minutos aproximadamente, así que una notificación puede llegar con algo de retraso. Con una app de UnifiedPush como ntfy, llegan al instante.",
+  "notifications.route.unifiedpush": "Las notificaciones llegan directamente a través de {{app}}, tu app de UnifiedPush.",
   "notifications.save": "Guardar preferencias",
   "notifications.saved": "Preferencias guardadas",
   "notifications.saving": "Guardando…",

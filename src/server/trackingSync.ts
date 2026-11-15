@@ -1815,26 +1815,51 @@ export class TrackingSyncService {
       let failed: { error: unknown } | null = null;
       // The steps after a check, its merges and its news, one check's at a time.
       let after = Promise.resolve();
+      // Account parcels a check under way has stored and not merged yet: a dispatch meanwhile would send their
+      // news before the merge. A dispatch that waits for them is owed, and goes out once none is left.
+      const unmerged = new Set<JsonObject>();
+      let owed = false;
+      // A parcel's news goes out once it is stored, not after the slowest check of the run; the last check's
+      // goes with the run's own dispatch, and at shutdown before the run stops.
+      const notify = async () => {
+        if (!(running.size > 1 || shutdown || (!stopped && waiting.length > 0))) return;
+        owed = unmerged.size > 0;
+        if (!owed) await this.dispatchNotifications(summary, context.signal);
+      };
+      const afterwards = async (step: () => Promise<void>) => {
+        const steps = after.then(step);
+        after = steps.catch(() => undefined);
+        await steps;
+      };
       const check = async (parcel: JsonObject): Promise<void> => {
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
         if (rechecks.has(parcel) && !await this.uncheckedSinceListed(parcel, context.signal)) return;
         // A merge earlier in the run removed the parcel or gave it the other leg: the next run checks it.
         if (merged.has(String(parcel.user_id)) && !await this.unmergedSinceListed(parcel, context.signal)) return;
         summary.checked += 1;
-        const outcome = await this.syncOne(parcel, context, lookups);
+        let outcome: SyncOutcome | undefined;
+        try {
+          outcome = await this.syncOne(parcel, context, lookups,
+            () => { if (typeof parcel.user_id === 'string') unmerged.add(parcel); });
+        } finally {
+          if (outcome !== 'updated') unmerged.delete(parcel);
+        }
         summary[outcome] += 1;
-        if (outcome !== 'updated') return;
-        const steps = after.then(async () => {
+        if (outcome !== 'updated') {
+          if (owed && !unmerged.size) await afterwards(notify);
+          return;
+        }
+        await afterwards(async () => {
           // The news can show the parcel is a leg of another of its account's parcels: they merge
           // before it goes out, so the merged parcel announces its newest scan once. No other
           // check of the account runs meanwhile.
-          if (typeof parcel.user_id === 'string' && await this.linkConfirmedParcels(parcel.user_id) > 0) merged.add(parcel.user_id);
-          // A parcel's news goes out once it is stored, not after the slowest check of the
-          // run; the last check's goes with the run's own dispatch, and at shutdown before the run stops.
-          if (running.size > 1 || shutdown || (!stopped && waiting.length > 0)) await this.dispatchNotifications(summary, context.signal);
+          try {
+            if (typeof parcel.user_id === 'string' && await this.linkConfirmedParcels(parcel.user_id) > 0) merged.add(parcel.user_id);
+          } finally {
+            unmerged.delete(parcel);
+          }
+          await notify();
         });
-        after = steps.catch(() => undefined);
-        await steps;
       };
       const start = (parcel: JsonObject) => {
         for (const key of keys.get(parcel)!) held.add(key);
@@ -2269,7 +2294,8 @@ export class TrackingSyncService {
     }
   }
 
-  private async syncOne(parcel: JsonObject, context: SyncRunContext, lookups?: SharedLookups): Promise<SyncOutcome> {
+  /** `stored`: told each time the check writes what it found. */
+  private async syncOne(parcel: JsonObject, context: SyncRunContext, lookups?: SharedLookups, stored?: () => void): Promise<SyncOutcome> {
     context.signal?.throwIfAborted();
     const id = String(parcel.id ?? '');
     if (!id) throw new TypeError('A package id is required for synchronization');
@@ -2295,7 +2321,7 @@ export class TrackingSyncService {
     const filed: { carrier?: string } = {};
     try {
       const outcome = await untilShutdown(withRoyalBrowserAdmission(String(parcel.carrier ?? ''), this.client,
-        () => this.check(parcel, context, audit, now, lookups, filed), context.signal), context.signal);
+        () => this.check(parcel, context, audit, now, lookups, filed, stored), context.signal), context.signal);
       // A number that reads as mistyped is counted for review, never suggested, and apart when
       // its first check found scans all the same.
       if (firstAnswer && outcome !== 'superseded') {
@@ -2347,6 +2373,7 @@ export class TrackingSyncService {
     now: Date,
     lookups: SharedLookups | undefined,
     filed: { carrier?: string },
+    stored?: () => void,
   ): Promise<SyncOutcome> {
     const carrierId = String(parcel.carrier ?? '');
     const accountRequired = requiresAmazonAccount(carrierId, String(parcel.tracking_number ?? ''));
@@ -2388,6 +2415,8 @@ export class TrackingSyncService {
       if (!applied) {
         throw new SupersededTrackingSync('Tracking configuration changed during the check');
       }
+      // Its opening "syncing" mark stores nothing a dispatch could send.
+      if (values.sync_status !== 'syncing') stored?.();
       if (typeof values.carrier === 'string') filed.carrier = values.carrier;
       const saved = { ...parcel, ...values };
       const routing = routingState(saved);

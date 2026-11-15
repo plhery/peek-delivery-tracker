@@ -3147,9 +3147,8 @@ describe('TrackingSyncService', () => {
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, notifier as never).sync();
     expect(notifier.dispatch).toHaveBeenCalledTimes(2);
     expect(client.autoLinkPackages.mock.calls).toEqual([['owner'], ['neighbour'], [undefined]]);
-    // Checked at once, each parcel's merge and news go out in turn.
-    expect(notifier.dispatch.mock.invocationCallOrder[0]).toBeGreaterThan(client.autoLinkPackages.mock.invocationCallOrder[0]!);
-    expect(notifier.dispatch.mock.invocationCallOrder[0]).toBeLessThan(client.autoLinkPackages.mock.invocationCallOrder[1]!);
+    // Checked at once, both stored their news before either merged: it goes out once both merged.
+    expect(notifier.dispatch.mock.invocationCallOrder[0]).toBeGreaterThan(client.autoLinkPackages.mock.invocationCallOrder[1]!);
   });
 
   describe('two checks at once', () => {

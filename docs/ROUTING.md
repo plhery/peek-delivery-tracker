@@ -434,7 +434,7 @@ parcels at once, never two of one account, one number, one carrier (carriers on 
 handed over, or whose earlier leg answered last, holds that carrier too) or one universal provider tracking them (for a parcel whose carrier has no adapter of its own and no provider named yet, the
 provider its plan asks first), so each keeps the pace of one check at a time: the run starts the first parcel in
 its order that shares none of these with the check under way. A merge with a parcel's other leg and its news go out
-one check at a time, as the checks end. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
+one check at a time, as the checks end; news waits while the other check has stored its parcel and not merged it yet. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
 its parcels out for delivery today or expected today, as its own pacing may refuse the run's later
 lookups (Poste Italiane's searches an hour); every other parcel keeps its place. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
 read: the run reads those of the ones it takes. A run starts no check after 4 minutes and ends once those under way

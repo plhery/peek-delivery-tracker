@@ -638,6 +638,19 @@ export function packageNotificationValues(payload: JsonObject): { muted?: boolea
   return { ...(muted === undefined ? {} : { muted }), ...(emailMuted === undefined ? {} : { emailMuted }) };
 }
 
+/** An instant as the API serves one: a date, a time to the second or finer, and its offset. */
+const INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?(?:Z|[+-]\d{2}:\d{2})$/;
+
+/** The news a parcel's page showed as it was opened (`news_at`), or null when the request names none. */
+export function shownNews(payload: JsonObject): string | null {
+  const news = payload.news_at;
+  if (news === undefined || news === null) return null;
+  if (typeof news !== 'string' || !INSTANT.test(news) || !Number.isFinite(Date.parse(news))) {
+    throw new HttpError(400, 'news_at must be a date and time');
+  }
+  return news;
+}
+
 /** The token and the wanted state from the page an email links to. A switch left out turns the email off. */
 export function deliveryEmailSwitch(payload: JsonObject): { token: unknown; enabled: boolean } {
   if (payload.enabled !== undefined && typeof payload.enabled !== 'boolean') {

@@ -55134,7 +55134,17 @@
       ],
       "post": {
         "operationId": "markPackageSeen",
-        "description": "The account opened the parcel: what it holds is no longer new to it, on any of its devices. Takes no body. The parcel carries the moment stored as seen_at from then on.",
+        "description": "The account opened the parcel: what it holds is no longer new to it, on any of its devices. The parcel is seen as of the news its page showed (news_at in the body), so a scan stored while the page was opening stays new; a request without a body marks the moment it arrives. Never earlier than the parcel was seen already. The parcel carries the moment stored as seen_at from then on.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackageSeenRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "When the parcel was marked as seen",
@@ -60261,6 +60271,17 @@
         "properties": {
           "ok": {
             "type": "boolean"
+          }
+        }
+      },
+      "PackageSeenRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "news_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The parcel's news_at as its page showed it when opened, as served. Left out when the parcel had none."
           }
         }
       },

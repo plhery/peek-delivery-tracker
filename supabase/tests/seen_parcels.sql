@@ -15,11 +15,12 @@ declare
   sam constant uuid := '72000000-0000-4000-8000-000000000002';
   parcel constant uuid := '72000000-0000-4000-8000-000000000011';
   long_ago constant timestamptz := now() - interval '3 days';
+  shown constant timestamptz := now() - interval '1 day' + interval '123456 microseconds';
   generation uuid;
   seen timestamptz;
 begin
-  if has_function_privilege('anon', 'public.mark_owned_package_seen(uuid)', 'EXECUTE')
-      or not has_function_privilege('authenticated', 'public.mark_owned_package_seen(uuid)', 'EXECUTE')
+  if has_function_privilege('anon', 'public.mark_owned_package_seen(uuid, timestamptz)', 'EXECUTE')
+      or not has_function_privilege('authenticated', 'public.mark_owned_package_seen(uuid, timestamptz)', 'EXECUTE')
       or has_function_privilege('authenticated', 'public.start_package_seen()', 'EXECUTE')
       or not has_column_privilege('authenticated', 'public.packages', 'seen_at', 'SELECT')
       or has_column_privilege('authenticated', 'public.packages', 'seen_at', 'UPDATE')
@@ -77,6 +78,23 @@ begin
     perform public.mark_owned_package_seen(parcel);
     raise exception 'Nobody marked a parcel as seen' using errcode = 'P0001';
   exception when insufficient_privilege then null; end;
+  reset role;
+
+  -- Marked with the news its page showed, kept to the millisecond, the parcel is seen as of that news: a scan stored
+  -- since is still new. Never earlier than it was seen already, nor later than now.
+  update public.packages set seen_at = long_ago where id = parcel;
+  set local role authenticated;
+  perform set_config('request.jwt.claim.sub', alex::text, true);
+  seen := public.mark_owned_package_seen(parcel, date_trunc('milliseconds', shown));
+  if seen < shown or seen >= date_trunc('milliseconds', shown) + interval '1 millisecond' then
+    raise exception 'The parcel was not seen as of the news its page showed: %', seen;
+  end if;
+  if public.mark_owned_package_seen(parcel, long_ago) <> seen then
+    raise exception 'Older news moved the parcel back to unseen';
+  end if;
+  if public.mark_owned_package_seen(parcel, now() + interval '1 day') <> now() then
+    raise exception 'News from the future was stored as seen';
+  end if;
   reset role;
 
   -- A parcel starts as seen in the account it joins, and again with its new carrier's first answer.

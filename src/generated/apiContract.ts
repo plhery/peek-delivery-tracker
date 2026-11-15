@@ -56407,6 +56407,10 @@ export interface ApiOkResponse {
   "ok": boolean;
 }
 
+export interface ApiPackageSeenRequest {
+  "news_at"?: string;
+}
+
 export interface ApiPackageSeenResponse {
   "seen_at": string;
 }

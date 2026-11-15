@@ -12,8 +12,9 @@ const mergedInto = '72000000-0000-4000-a000-000000000003';
 const seenAt = '2026-11-15T08:00:00.123456+00:00';
 
 let address = 0;
-const open = (id = packageId) => markSeen(new NextRequest(`https://delivery.example/api/packages/${id}/seen`, {
+const open = (id = packageId, body?: object) => markSeen(new NextRequest(`https://delivery.example/api/packages/${id}/seen`, {
   method: 'POST', headers: { Authorization: 'Bearer seen-test', 'x-forwarded-for': `198.51.100.${++address % 250 + 1}` },
+  ...(body ? { body: JSON.stringify(body) } : {}),
 }), { params: Promise.resolve({ id }) });
 
 beforeEach(() => {
@@ -36,11 +37,33 @@ describe('opening a parcel marks it as seen (#72)', () => {
     expect(response.status).toBe(200);
     const answer = await response.json();
     expect(answer).toEqual({ seen_at: seenAt });
-    expect(mark).toHaveBeenCalledExactlyOnceWith(packageId);
+    expect(mark).toHaveBeenCalledExactlyOnceWith(packageId, null);
     const schema = contract.components.schemas.PackageSeenResponse;
     expect(Object.keys(answer)).toEqual(schema.required);
     expect(contract.paths['/api/packages/{packageId}/seen'].post.responses['200'].content['application/json'].schema.$ref)
       .toBe('#/components/schemas/PackageSeenResponse');
+  });
+
+  it('marks the parcel seen as of the news its page showed, which an older app leaves out', async () => {
+    const mark = vi.spyOn(SupabaseUserClient.prototype, 'markPackageSeen').mockResolvedValue(seenAt);
+    expect((await open(packageId, { news_at: '2026-11-15T07:59:00.123456+00:00' })).status).toBe(200);
+    expect(mark).toHaveBeenLastCalledWith(packageId, '2026-11-15T07:59:00.123456+00:00');
+    expect((await open(packageId, {})).status).toBe(200);
+    expect(mark).toHaveBeenLastCalledWith(packageId, null);
+    mark.mockClear();
+    for (const news_at of ['yesterday', '2026-11-15', 1_763_193_540_000, '2026-13-45T99:00:00Z']) {
+      expect((await open(packageId, { news_at })).status).toBe(400);
+    }
+    expect(mark).not.toHaveBeenCalled();
+    mark.mockRestore();
+    const client = new SupabaseUserClient('https://database.example', 'public-key', 'token');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce(seenAt);
+    await client.markPackageSeen(packageId, '2026-11-15T07:59:00.123Z');
+    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/mark_owned_package_seen',
+      { method: 'POST', body: { p_package_id: packageId, p_news_at: '2026-11-15T07:59:00.123Z' } });
+    const { requestBody } = contract.paths['/api/packages/{packageId}/seen'].post;
+    expect(requestBody.required).toBe(false);
+    expect(Object.keys(contract.components.schemas.PackageSeenRequest.properties)).toEqual(['news_at']);
   });
 
   it('finds no parcel that is not the account\'s, and takes only a parcel id', async () => {

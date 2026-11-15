@@ -3372,6 +3372,11 @@ data class OkResponse(
 )
 
 @Serializable
+data class PackageSeenRequest(
+    @SerialName("news_at") val newsAt: String? = null,
+)
+
+@Serializable
 data class PackageSeenResponse(
     @SerialName("seen_at") val seenAt: String,
 )

@@ -3421,6 +3421,10 @@ struct OKResponse: Codable, Equatable, Hashable, Sendable {
     var ok: Bool
 }
 
+struct PackageSeenRequest: Codable, Equatable, Hashable, Sendable {
+    var newsAt: String? = nil
+}
+
 struct PackageSeenResponse: Codable, Equatable, Hashable, Sendable {
     var seenAt: String
 }

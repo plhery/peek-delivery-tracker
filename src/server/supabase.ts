@@ -2653,9 +2653,11 @@ export class SupabaseUserClient extends SupabaseClient {
   }
 
   /** The account opened the parcel: the moment stored (`seen_at`), or null for a parcel that is not its own. */
-  async markPackageSeen(packageId: string): Promise<string | null> {
+  async markPackageSeen(packageId: string, newsAt: string | null = null): Promise<string | null> {
     const mark = async (id: string) => {
-      const seen = await this.request('/rest/v1/rpc/mark_owned_package_seen', { method: 'POST', body: { p_package_id: id } });
+      const seen = await this.request('/rest/v1/rpc/mark_owned_package_seen', {
+        method: 'POST', body: { p_package_id: id, ...(newsAt ? { p_news_at: newsAt } : {}) },
+      });
       return typeof seen === 'string' ? seen : null;
     };
     const seen = await mark(packageId);

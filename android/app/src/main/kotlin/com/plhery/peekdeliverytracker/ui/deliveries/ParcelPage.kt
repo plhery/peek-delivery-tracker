@@ -65,6 +65,8 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
@@ -80,6 +82,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.attention
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
+import com.plhery.peekdeliverytracker.core.hasNewUpdate
 import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.quotedWords
 import com.plhery.peekdeliverytracker.core.shipmentFacts
@@ -113,6 +116,7 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 
 /**
@@ -168,6 +172,7 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
     // The page's scroll, which the word at its foot shows through its glass.
     val backdrop = rememberMaterialBackdrop()
     PageKeys(state, parcelId, menuParcel)
+    SeenWhileOpen(state, menuParcel)
     Box(
         Modifier
             .fillMaxSize()
@@ -616,6 +621,24 @@ internal fun PageBarButton(symbol: String, label: String, tag: String, modifier:
         contentAlignment = Alignment.Center,
     ) {
         PeekSymbol(symbol, font = PeekTheme.type.fixed(BAR_SYMBOL, FontWeight.SemiBold), scale = SymbolScale.Large, tint = PeekTheme.colors.ink)
+    }
+}
+
+/**
+ * A parcel with news is seen while its page can be seen (#72), with "Mark new updates" off too: once the window is
+ * visible, and again when news comes in while it stays open. The store clears its mark at once and tells the account;
+ * the call runs in the app's scope, so the page closing doesn't cancel it.
+ */
+@Composable
+private fun SeenWhileOpen(state: DeliveriesState, parcel: Parcel?) {
+    val news = parcel?.takeIf { it.hasNewUpdate }?.newsAt
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val current by rememberUpdatedState(parcel)
+    LaunchedEffect(parcel?.id, news, lifecycle) {
+        if (news == null) return@LaunchedEffect
+        lifecycle.currentStateFlow.first { it.isAtLeast(Lifecycle.State.STARTED) }
+        val seen = current ?: return@LaunchedEffect
+        state.source.scope.launch { state.source.markSeen(seen) }
     }
 }
 

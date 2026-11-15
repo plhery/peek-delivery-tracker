@@ -76,6 +76,11 @@ data class DeviceParcel(
      * the postcode. Null where this phone doesn't know, such as a parcel it kept before it noted this.
      */
     val postcodeGiven: Boolean? = null,
+    /**
+     * The parcel's `news_at` this phone last saw (#72): when it was last opened, or first listed, or, with no scan yet
+     * then, the moment the parcel was made, which any scan stored later passes. Null until it has been listed.
+     */
+    val seenNewsAt: String? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
 
@@ -509,7 +514,7 @@ class DeviceParcels(
         pendingForgets = loaded.pendingForgets
         // A link both kept and still to be forgotten was being forgotten when the app last stopped: forgetting wins.
         fun pending(linkId: String) = pendingForgets.keyOf(linkId) != null
-        entries = loaded.parcels.filter { it.forgotten != true && !pending(it.linkId) }
+        entries = loaded.parcels.filter { it.forgotten != true && !pending(it.linkId) }.map(::firstSeen)
         forgotten = loaded.parcels.filter { it.forgotten == true }
         keys = loaded.keys.filterKeys { !pending(it) }
     }
@@ -1044,7 +1049,20 @@ class DeviceParcels(
         entries = entries.toMutableList().also { it[index] = change(it[index]) }
     }
 
-    private fun save() = storage.save(entries + forgotten, keys, pendingForgets)
+    /** The parcel was opened (#72): the `news_at` it carries is the one seen now, and its dot goes. */
+    fun markSeen(id: UUID) {
+        val index = entries.indexOfFirst { it.parcel.id == id }
+        if (index < 0) return
+        val news = entries[index].parcel.newsAt ?: return
+        if (entries[index].seenNewsAt == news) return
+        change(index) { it.copy(seenNewsAt = news) }
+        save()
+    }
+
+    private fun save() {
+        entries = entries.map(::firstSeen)
+        storage.save(entries + forgotten, keys, pendingForgets)
+    }
 
     companion object {
         /**
@@ -1073,8 +1091,23 @@ class DeviceParcels(
             return ParcelShare(id = link.id, showNumber = link.showNumber ?: false, gift = link.gift ?: false, createdAt = link.createdAt, giftWords = link.giftWords)
         }
 
+        /**
+         * The entry seen as it is first listed (#72), so that neither the parcels already here when this version
+         * arrives nor one just added shows a dot: the `news_at` it carries is kept, or, with no scan yet, the moment
+         * the parcel was made. Nothing is kept while the parcel waits for its carrier's first answer, whose history is
+         * never news, nor from a copy saved before the service sent `news_at`, which has scans and no `news_at`.
+         */
+        private fun firstSeen(entry: DeviceParcel): DeviceParcel {
+            if (entry.seenNewsAt != null) return entry
+            val parcel = entry.parcel
+            if (parcel.lastSyncedAt == null || parcel.syncStatus == SyncStatus.Pending) return entry
+            val seen = parcel.newsAt ?: parcel.createdAt.takeIf { parcel.trackingEvents.isEmpty() } ?: return entry
+            return entry.copy(seenNewsAt = seen)
+        }
+
+        /** As the list shows it: under this phone's name, and seen as far as this phone has seen it (#72). */
         private fun shown(entry: DeviceParcel): Parcel {
-            val parcel = entry.parcel.copy(label = entry.label, archivedAt = entry.archivedAt)
+            val parcel = entry.parcel.copy(label = entry.label, archivedAt = entry.archivedAt, seenAt = entry.seenNewsAt)
             val replaced = entry.replaced ?: return parcel
             return parcel.copy(carrierData = (parcel.carrierData ?: CarrierData()).copy(originalPackageId = replaced))
         }

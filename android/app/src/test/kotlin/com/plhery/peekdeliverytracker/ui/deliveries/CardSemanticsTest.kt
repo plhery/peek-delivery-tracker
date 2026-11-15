@@ -23,6 +23,7 @@ import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
@@ -150,6 +151,47 @@ class CardSemanticsTest {
         assertNull(card.selected())
         card.performClick()
         assertTrue(opened)
+    }
+
+    /** #72: a scan the reader hasn't seen is said first, with a full stop; once it's seen, the card reads as before. */
+    @Test
+    fun aNewUpdateIsReadFirst() {
+        compose.waitsForMaps()
+        val parcel = DemoCards.parcel("Moon lamp")
+        var new by mutableStateOf(true)
+        compose.setContent { CardHost { ParcelPassCard(parcel, notice = null, onOpen = {}, newUpdate = new) } }
+        val read = "${fullName(parcel)}, Sat 31 Oct, Moon lamp 🌙, In transit"
+        assertEquals("${localizer.text("parcel.newUpdate")}. $read", button().label())
+        new = false
+        compose.waitForIdle()
+        assertEquals(read, button().label())
+    }
+
+    /** #72: the status stands 10 on, after the dot and its gap, and slides back once the parcel is seen. */
+    @Test
+    fun theStatusSlidesBackAsTheDotClears() {
+        compose.waitsForMaps()
+        val parcel = DemoCards.parcel("Moon lamp")
+        var new by mutableStateOf(true)
+        compose.setContent { CardHost { ParcelPassCard(parcel, notice = null, onOpen = {}, newUpdate = new) } }
+        val status = { compose.onNodeWithText("In transit", useUnmergedTree = true).getBoundsInRoot().left }
+        val marked = status()
+        new = false
+        compose.waitForIdle()
+        assertEquals(10f, (marked - status()).value, 0.5f)
+    }
+
+    /** #72: Next up's card says it first too. */
+    @Test
+    fun nextUpReadsANewUpdateFirst() {
+        compose.waitsForMaps()
+        val parcel = DemoCards.parcel("Moon lamp")
+        var new by mutableStateOf(true)
+        compose.setContent { CardHost { NextDeliveryPass(parcel, onOpen = {}, newUpdate = new) } }
+        val marked = button().label()
+        new = false
+        compose.waitForIdle()
+        assertEquals("${localizer.text("parcel.newUpdate")}. ${button().label()}", marked)
     }
 
     @Test

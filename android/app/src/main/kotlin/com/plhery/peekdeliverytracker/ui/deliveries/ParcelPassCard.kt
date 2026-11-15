@@ -68,7 +68,8 @@ import kotlin.math.roundToInt
  * accessibility sizes. A past delivery's card is paler.
  *
  * `arrived`, `decorative`, `onName`, `selected`, `onLongClick`, `swipeAction` and `onTap` are as on [NextDeliveryPass];
- * an arrived card swells a little as the news lands. Nothing is drawn until the carriers' liveries are read.
+ * an arrived card swells a little as the news lands. `newUpdate`, a scan the reader hasn't seen (#72), puts a
+ * [NewUpdateDot] before the status, and TalkBack says so first. Nothing is drawn until the carriers' liveries are read.
  */
 @Composable
 fun ParcelPassCard(
@@ -83,6 +84,7 @@ fun ParcelPassCard(
     onLongClick: (() -> Unit)? = null,
     swipeAction: CustomAccessibilityAction? = null,
     onTap: () -> Unit = onOpen,
+    newUpdate: Boolean = false,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -133,8 +135,9 @@ fun ParcelPassCard(
         modifier
             .cardButton(
                 decorative = decorative,
-                label = cardLabel(
-                    identity.fullName, date, name, carrierNotice, delivering, status.takeIf { showsStatus }, flag,
+                label = newUpdateLabel(
+                    localizer.text("parcel.newUpdate").takeIf { newUpdate && showsStatus },
+                    cardLabel(identity.fullName, date, name, carrierNotice, delivering, status.takeIf { showsStatus }, flag),
                 ),
                 hint = null,
                 selected = selected,
@@ -191,11 +194,14 @@ fun ParcelPassCard(
                 if (carrierNotice != null) Text(carrierNotice, color = colors.secondaryLabel, style = type.caption.sfLines())
                 if (delivering != null) Text(delivering, color = colors.secondaryLabel, style = type.caption.sfLines())
                 if (showsStatus) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-                        if (parcel.isDelivered) {
-                            PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        NewUpdateDot(newUpdate, ink)
+                        Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
+                            if (parcel.isDelivered) {
+                                PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
+                            }
+                            Text(status, color = ink, style = type.caption.sfLines())
                         }
-                        Text(status, color = ink, style = type.caption.sfLines())
                     }
                 }
                 if (flag != null) ParcelFlag(flag, flagSymbol, Modifier.padding(top = 4.dp))
@@ -262,9 +268,10 @@ fun DeliveredParcelCard(
     onLongClick: (() -> Unit)? = null,
     swipeAction: CustomAccessibilityAction? = null,
     onTap: () -> Unit = onOpen,
+    newUpdate: Boolean = false,
 ) {
     ParcelPassCard(
         parcel, notice = null, onOpen = onOpen, modifier = modifier, onName = onName, selected = selected, onLongClick = onLongClick,
-        swipeAction = swipeAction, onTap = onTap,
+        swipeAction = swipeAction, onTap = onTap, newUpdate = newUpdate,
     )
 }

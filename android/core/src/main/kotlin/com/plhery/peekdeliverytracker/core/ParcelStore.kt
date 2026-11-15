@@ -284,6 +284,10 @@ class ParcelStore(
     val notificationStatusFlow: StateFlow<NotificationAuthorizationStatus> = notificationStatusState.asStateFlow()
     val notificationsEnabledOnDeviceFlow: StateFlow<Boolean> = notificationsEnabledOnDeviceState.asStateFlow()
     val notificationPreferencesFlow: StateFlow<NotificationPreferences?> = notificationPreferencesState.asStateFlow()
+    private val markNewUpdatesChoice = MarkNewUpdatesChoice(defaults)
+
+    /** Whether cards mark their parcel's new updates (#72), "Mark new updates" in Settings. */
+    val markNewUpdatesFlow: StateFlow<Boolean> = markNewUpdatesChoice.enabled
     val notificationErrorFlow: StateFlow<String?> = notificationErrorState.asStateFlow()
     val deliveryWidgetEnabledFlow: StateFlow<Boolean> = deliveryWidgetEnabledState.asStateFlow()
     val deliveryLiveActivitiesEnabledFlow: StateFlow<Boolean> = deliveryLiveActivitiesEnabledState.asStateFlow()
@@ -383,6 +387,8 @@ class ParcelStore(
         get() = notificationPreferencesState.value
         private set(value) {
             notificationPreferencesState.value = value
+            // The account's choice, as read or saved, is this phone's from now on (#72).
+            value?.markNewUpdates?.let(markNewUpdatesChoice::keep)
         }
 
     var notificationError: String?
@@ -1404,6 +1410,68 @@ class ParcelStore(
         if (deliveryEmail == null) return
         val value = notificationPreferences ?: return
         saveNotificationPreferences(value.copy(emailOnDelivery = enabled, timezone = ZoneId.systemDefault().id))
+    }
+
+    /**
+     * Switches "Mark new updates" (#72) at once on this phone; what was seen is kept either way. An account saves it
+     * with its preferences as stored and this device's time zone; a save that fails leaves the choice here until the
+     * preferences are next read, and the answer to an earlier choice doesn't undo a later one.
+     */
+    suspend fun setMarkNewUpdates(enabled: Boolean) {
+        if (markNewUpdatesFlow.value == enabled) return
+        markNewUpdatesChoice.keep(enabled)
+        if (!session.isAuthenticated || isDemo || isGuest) return
+        // A read of the preferences that began before the choice is older than it.
+        notificationPreferenceSaves += 1
+        markNewUpdatesChoices += 1
+        val choice = markNewUpdatesChoices
+        val generation = session.generation
+        try {
+            val stored = notificationPreferences ?: api.notificationPreferences()
+            if (generation != session.generation) return
+            var saved = api.saveNotificationPreferences(stored.copy(markNewUpdates = enabled, timezone = ZoneId.systemDefault().id))
+            if (generation != session.generation) return
+            // Switched again meanwhile: that choice stands, and its own save is on its way.
+            if (choice != markNewUpdatesChoices) saved = saved.copy(markNewUpdates = markNewUpdatesFlow.value)
+            notificationPreferenceSaves += 1
+            notificationPreferences = saved
+        } catch (error: Exception) {
+            currentCoroutineContext().ensureActive()
+        }
+    }
+
+    /** The choices made about "Mark new updates", counted. */
+    private var markNewUpdatesChoices = 0
+
+    /**
+     * The parcel's page is in front (#72): a parcel with news is seen now, whether or not its dot shows. Its dot goes at
+     * once, its `seen_at` then being its `news_at`, and the server's moment comes after; the account's other devices hear
+     * of it at their next read. A call that fails says nothing: the next read of the list brings what the server holds.
+     */
+    suspend fun markSeen(parcel: Parcel) {
+        val shown = parcels.firstOrNull { it.id == parcel.id } ?: return
+        if (!shown.hasNewUpdate) return
+        val news = shown.newsAt ?: return
+        if (isGuest) {
+            device.markSeen(parcel.id)
+            mutationRevision += 1
+            parcels = device.list()
+            return
+        }
+        if (isDemo) {
+            upsert(demo.markSeen(parcel.id))
+            return
+        }
+        upsert(shown.copy(seenAt = news))
+        val generation = session.generation
+        val seenAt = try {
+            api.markSeen(parcel.id)
+        } catch (error: Exception) {
+            currentCoroutineContext().ensureActive()
+            return
+        }
+        if (generation != session.generation) return
+        parcels.firstOrNull { it.id == parcel.id }?.let { upsert(it.copy(seenAt = seenAt)) }
     }
 
     /** Reads the preferences again without a word when that fails: what is loaded stays. */

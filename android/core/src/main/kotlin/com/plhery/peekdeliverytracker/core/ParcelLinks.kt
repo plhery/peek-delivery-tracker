@@ -80,6 +80,8 @@ fun Parcel(shared: PublicPackage): Parcel {
         plannedEvents = shared.plannedEvents,
         writtenAheadBy = shared.writtenAheadBy,
         writtenAheadEvents = shared.writtenAheadEvents,
+        // Its `seen_at` is the phone's to keep (DeviceParcel.seenNewsAt).
+        newsAt = shared.newsAt,
     )
 }
 

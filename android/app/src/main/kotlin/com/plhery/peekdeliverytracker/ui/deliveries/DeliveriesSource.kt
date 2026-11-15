@@ -236,6 +236,15 @@ interface DeliveriesSource {
      */
     fun setDeliveryWidgetEnabled(enabled: Boolean)
 
+    /** Whether cards mark their parcel's new updates (#72), "Mark new updates" in Settings, on until turned off. */
+    val markNewUpdates: StateFlow<Boolean>
+
+    /** Switches "Mark new updates" at once, then saves it with the account's preferences, if there is an account. */
+    fun setMarkNewUpdates(enabled: Boolean)
+
+    /** The parcel's page is in front (#72): a parcel with news is seen now, here and on the account's other devices. */
+    suspend fun markSeen(parcel: Parcel)
+
     /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
     fun viewerLink(parcel: Parcel): String?
 
@@ -530,6 +539,14 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val deliveryWidgetEnabled get() = container.parcels.deliveryWidgetEnabledFlow
 
     override fun setDeliveryWidgetEnabled(enabled: Boolean) = container.parcels.setDeliveryWidgetEnabled(enabled)
+
+    override val markNewUpdates get() = container.parcels.markNewUpdatesFlow
+
+    override fun setMarkNewUpdates(enabled: Boolean) {
+        container.scope.launch { container.parcels.setMarkNewUpdates(enabled) }
+    }
+
+    override suspend fun markSeen(parcel: Parcel) = container.parcels.markSeen(parcel)
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 

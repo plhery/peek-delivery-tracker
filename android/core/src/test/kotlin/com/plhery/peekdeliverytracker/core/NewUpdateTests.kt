@@ -1,0 +1,318 @@
+package com.plhery.peekdeliverytracker.core
+
+import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
+import com.plhery.peekdeliverytracker.core.api.PackageListResponse
+import com.plhery.peekdeliverytracker.core.api.PackageSeenResponse
+import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelLink
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
+import com.plhery.peekdeliverytracker.core.api.PublicPackage
+import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
+import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Instant
+import java.util.Locale
+import java.util.UUID
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+/**
+ * "New since you last looked" (#72): the dot on a parcel with a scan its reader hasn't seen, for an account (`news_at`
+ * against the server's `seen_at`) and for a guest (against the `news_at` this phone last saw).
+ */
+class NewUpdateTests {
+    private val configuration = AppConfiguration(
+        mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://news.test", supabaseUrl = "https://news.test", supabasePublishableKey = "public",
+        googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true, appGroupIdentifier = "news.test",
+    )
+    private val now = Instant.parse("2026-09-08T12:00:00Z")
+    private val parcelId = UUID.randomUUID()
+
+    // Moments as the server writes them: microseconds and an offset, never compared with the phone's clock.
+    private val opened = "2026-09-08T09:00:00.250000+00:00"
+    private val scanned = "2026-09-08T10:15:30.123456+00:00"
+    private val seenNow = "2026-09-08T11:00:00.654321+00:00"
+
+    /** The account's side: one parcel, its moments, its preferences, and the seen calls it was sent. */
+    private inner class Server {
+        var newsAt: String? = scanned
+        var seenAt: String = opened
+        var markNewUpdates = true
+        var seenFails = false
+        val seenCalls = mutableListOf<String>()
+        val preferenceSaves = mutableListOf<Boolean?>()
+
+        fun parcel() = Parcel(
+            id = parcelId, trackingNumber = "TESTPARCEL123789", label = "Synthetic parcel", carrier = CarrierId.Dhl,
+            createdAt = "2026-09-07T08:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false, lastSyncedAt = "2026-09-08T10:16:00Z",
+            newsAt = newsAt, seenAt = seenAt,
+        )
+
+        private fun preferences() = NotificationPreferences(
+            enabledStages = NotificationPreset.Important.stages, timezone = "Europe/Paris", markNewUpdates = markNewUpdates,
+        )
+
+        fun answer(request: HttpRequest): HttpResponse = when {
+            request.path == "/api/packages" && request.method == "GET" -> json(PackageListResponse(listOf(parcel())))
+            request.path == "/api/packages/${parcelId.uuidString}/seen" && request.method == "POST" -> {
+                seenCalls += request.header("Authorization").orEmpty()
+                if (seenFails) {
+                    jsonResponse(500, """{"error":"unavailable"}""")
+                } else {
+                    seenAt = seenNow
+                    jsonResponse(200, JsonEncoder.deliveryTracker.encode(PackageSeenResponse.serializer(), PackageSeenResponse(seenNow)).decodeToString())
+                }
+            }
+            request.path == "/api/push/preferences" && request.method == "GET" -> preferenceJson()
+            request.path == "/api/push/preferences" && request.method == "PATCH" -> {
+                val sent = request.body?.let { Json.parseToJsonElement(it.decodeToString()).jsonObject }
+                val choice = sent?.get("markNewUpdates")?.jsonPrimitive?.boolean
+                preferenceSaves += choice
+                choice?.let { markNewUpdates = it }
+                preferenceJson()
+            }
+            else -> throw AssertionError("Unexpected request ${request.method} ${request.url}")
+        }
+
+        private fun json(list: PackageListResponse) =
+            jsonResponse(200, JsonEncoder.deliveryTracker.encode(PackageListResponse.serializer(), list).decodeToString())
+
+        private fun preferenceJson() =
+            jsonResponse(200, JsonEncoder.deliveryTracker.encode(NotificationPreferences.serializer(), preferences()).decodeToString())
+    }
+
+    /** A device signed in to the account the server holds, with its own session, settings and cache. */
+    private suspend fun TestScope.signedIn(server: Server, defaults: UserDefaults = MemoryDefaults()): ParcelStore {
+        val transport = RecordingTransport()
+        val session = testSessionStore(configuration, backgroundScope, transport = transport, now = { now })
+        val user = AuthUser(id = accountId, email = "reader@example.com", isAnonymous = false)
+        val auth = AuthSession(
+            accessToken = "token-${UUID.randomUUID()}", tokenType = "bearer", expiresIn = 3600, expiresAt = now.epochSecond + 3600,
+            refreshToken = "refresh", user = user,
+        )
+        transport.handler = { jsonResponse(200, JsonEncoder.deliveryTracker.encode(AuthSession.serializer(), auth).decodeToString()) }
+        session.verifyCode(email = "reader@example.com", code = "123456")
+        transport.handler = { server.answer(it) }
+        val store = testParcelStore(configuration, session, transport, backgroundScope, defaults, now = { now })
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        return store
+    }
+
+    private val accountId = UUID.randomUUID()
+
+    private val ParcelStore.shown: Parcel get() = parcels.single { it.id == parcelId }
+    private val ParcelStore.dotShown: Boolean get() = shown.marksNewUpdate(markNewUpdatesFlow.value)
+
+    // A guest's parcel, read from the public parcel API.
+    private val key = "k".repeat(43)
+    private val linkId = "22222222222B"
+
+    private fun publicPackage(newsAt: String?, scans: Int = 1, sync: SyncStatus = SyncStatus.Ok, lastSyncedAt: String? = "2026-09-08T10:16:00Z") =
+        PublicPackage(
+            id = parcelId, trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, createdAt = "2026-09-07T08:00:00Z",
+            lastSyncedAt = lastSyncedAt, syncStatus = sync, carrierData = PublicPackageCarrierData(), notificationsMuted = false,
+            trackingEvents = (0 until scans).map {
+                TrackingEvent(id = UUID.randomUUID(), packageId = parcelId, stage = TrackingStage.InTransit, description = "", occurredAt = "2026-09-08T0${it}:00:00Z")
+            },
+            newsAt = newsAt,
+        )
+
+    private fun response(pkg: PublicPackage) = PublicParcelResponse(
+        link = ParcelLink(
+            id = linkId, role = ParcelLinkRole.Owner, kind = ParcelLinkKind.Lookup, createdAt = "2026-09-07T08:00:00Z", numberShown = true,
+            canKeep = true, showNumber = false, gift = false, shared = true,
+        ),
+        parcel = pkg,
+    )
+
+    private fun guestClient(read: () -> PublicParcelResponse?) = DeviceParcelClient(
+        lookup = { throw AssertionError("Unexpected lookup") },
+        read = { _, _ -> read() },
+        forget = { _, _ -> throw AssertionError("Unexpected forget") },
+        update = { _, _, _ -> throw AssertionError("Unexpected update") },
+        detect = { _, _, _ -> throw AssertionError("Unexpected detection") },
+    )
+
+    private fun guestDevice(storage: MemoryDeviceParcelStorage, scope: CoroutineScope, read: () -> PublicParcelResponse? = { null }) =
+        DeviceParcels(guestClient(read), storage, PostcodeMemory(MemoryDefaults()), scope, region = { Locale.UK }, language = { AppLanguage.En }, now = { now })
+
+    /** This phone's copy of the parcel as an earlier version kept it, before it noted what was seen. */
+    private fun keptBefore(pkg: PublicPackage, seenNewsAt: String? = null) = MemoryDeviceParcelStorage().apply {
+        keys = mapOf(linkId to key)
+        parcels = listOf(
+            DeviceParcel(
+                linkId = linkId, label = "Synthetic parcel", archivedAt = null, parcel = Parcel(shared = pkg),
+                checkedAt = now.minusSeconds(3600).timeIntervalSinceReferenceDate, seenNewsAt = seenNewsAt,
+            ),
+        )
+    }
+
+    @Test
+    fun aScanAfterTheLastOpenShowsTheDot() = runTest {
+        val server = Server()
+        server.newsAt = null
+        val store = signedIn(server)
+        store.load()
+        assertFalse("A parcel without a scan has nothing new", store.dotShown)
+
+        server.newsAt = scanned
+        store.load()
+        assertTrue("A scan stored after the parcel was last opened is news", store.dotShown)
+
+        // A guest: the scan that arrives after the phone last saw the parcel is news too.
+        var pkg = publicPackage(newsAt = opened)
+        val storage = keptBefore(pkg, seenNewsAt = opened)
+        val device = guestDevice(storage, backgroundScope) { response(pkg) }
+        assertFalse(device.list().single().hasNewUpdate)
+        pkg = publicPackage(newsAt = scanned, scans = 2)
+        device.refresh(all = true)
+        assertTrue(device.list().single().hasNewUpdate)
+        assertEquals("What the phone saw is kept until the parcel is opened", opened, storage.parcels.single().seenNewsAt)
+    }
+
+    @Test
+    fun openingTheParcelClearsItHereAndOnTheOtherDevice() = runTest {
+        val server = Server()
+        val phone = signedIn(server)
+        val tablet = signedIn(server)
+        phone.load()
+        tablet.load()
+        assertTrue(phone.dotShown)
+        assertTrue(tablet.dotShown)
+
+        phone.markSeen(phone.shown)
+        assertFalse("The dot goes on the device it was opened on", phone.dotShown)
+        assertEquals("The server's moment takes the place of the cleared one", seenNow, phone.shown.seenAt)
+        assertEquals(1, server.seenCalls.size)
+        assertTrue("The call is the account's", server.seenCalls.single().startsWith("Bearer token-"))
+
+        tablet.load()
+        assertFalse("The account's other device finds it seen at its next read", tablet.dotShown)
+
+        // Opened again with nothing new, nothing is sent.
+        phone.markSeen(phone.shown)
+        assertEquals(1, server.seenCalls.size)
+
+        // A failed call says nothing, and the dot stays cleared here until the list is read again.
+        server.newsAt = "2026-09-08T11:30:00.000001+00:00"
+        phone.load()
+        assertTrue(phone.dotShown)
+        server.seenFails = true
+        phone.markSeen(phone.shown)
+        assertFalse(phone.dotShown)
+        assertNull(phone.notificationError)
+
+        // A guest's parcel is seen on the phone, and stays seen after a relaunch.
+        val storage = keptBefore(publicPackage(newsAt = scanned, scans = 2), seenNewsAt = opened)
+        val device = guestDevice(storage, backgroundScope)
+        assertTrue(device.list().single().hasNewUpdate)
+        device.markSeen(parcelId)
+        assertFalse(device.list().single().hasNewUpdate)
+        assertFalse(guestDevice(storage, backgroundScope).list().single().hasNewUpdate)
+    }
+
+    @Test
+    fun startingTheAppWithExistingParcelsShowsNoDots() = runTest {
+        // Kept before this version: what the parcel carries is taken as seen.
+        val withScans = keptBefore(publicPackage(newsAt = scanned, scans = 3))
+        assertFalse(guestDevice(withScans, backgroundScope).list().single().hasNewUpdate)
+
+        // Kept before the service sent `news_at`: nothing is noted, and its first `news_at` is taken as seen.
+        var pkg = publicPackage(newsAt = null, scans = 2)
+        val older = keptBefore(pkg)
+        val device = guestDevice(older, backgroundScope) { response(pkg) }
+        assertFalse(device.list().single().hasNewUpdate)
+        pkg = publicPackage(newsAt = scanned, scans = 2)
+        device.refresh(all = true)
+        assertFalse(device.list().single().hasNewUpdate)
+        assertEquals(scanned, older.parcels.single().seenNewsAt)
+
+        // Still waiting for its carrier's first answer: its first scans aren't news either.
+        pkg = publicPackage(newsAt = null, scans = 0, sync = SyncStatus.Pending, lastSyncedAt = null)
+        val waiting = keptBefore(pkg)
+        val waitingDevice = guestDevice(waiting, backgroundScope) { response(pkg) }
+        assertNull(waiting.parcels.single().seenNewsAt)
+        pkg = publicPackage(newsAt = scanned, scans = 4)
+        waitingDevice.refresh(all = true)
+        assertFalse(waitingDevice.list().single().hasNewUpdate)
+
+        // No scan yet when it was first listed: the first scan that comes is news.
+        pkg = publicPackage(newsAt = null, scans = 0)
+        val quiet = keptBefore(pkg)
+        val quietDevice = guestDevice(quiet, backgroundScope) { response(pkg) }
+        assertFalse(quietDevice.list().single().hasNewUpdate)
+        pkg = publicPackage(newsAt = scanned, scans = 1)
+        quietDevice.refresh(all = true)
+        assertTrue(quietDevice.list().single().hasNewUpdate)
+
+        // An account's parcels come with the server's `seen_at`, which starts as their `news_at`.
+        val server = Server()
+        server.seenAt = scanned
+        val store = signedIn(server)
+        store.load()
+        assertFalse(store.dotShown)
+    }
+
+    @Test
+    fun theDemosMadeUpScanIsNewUntilItsParcelIsOpened() {
+        val demo = DemoRepository(MemoryDefaults(), language = { AppLanguage.En }, now = { now })
+        assertTrue("The demo starts without dots", demo.list().none { it.hasNewUpdate })
+        val refreshed = demo.refreshAll()
+        val news = refreshed.filter { it.hasNewUpdate }
+        assertTrue("A refresh's made-up scans are news", news.isNotEmpty())
+        val opened = demo.markSeen(news.first().id)
+        assertFalse(opened.hasNewUpdate)
+        assertFalse(demo.list().single { it.id == opened.id }.hasNewUpdate)
+    }
+
+    @Test
+    fun theSettingTurnedOffHidesTheDot() = runTest {
+        val server = Server()
+        val defaults = MemoryDefaults()
+        val store = signedIn(server, defaults)
+        store.load()
+        assertTrue(store.markNewUpdatesFlow.value)
+        assertTrue(store.dotShown)
+
+        store.setMarkNewUpdates(false)
+        assertFalse(store.markNewUpdatesFlow.value)
+        assertFalse("Off, no card shows the dot", store.dotShown)
+        assertTrue("What was seen is still kept", store.shown.hasNewUpdate)
+        assertEquals("The account keeps the choice with its preferences", listOf<Boolean?>(false), server.preferenceSaves)
+        assertFalse(server.markNewUpdates)
+
+        // Opening the parcel still marks it seen.
+        store.markSeen(store.shown)
+        assertEquals(1, server.seenCalls.size)
+
+        // A choice made on another device arrives with the account's preferences.
+        server.markNewUpdates = true
+        store.loadNotificationPreferences()
+        assertTrue(store.markNewUpdatesFlow.value)
+
+        // A guest's choice is this phone's, and outlasts a relaunch.
+        val guestDefaults = MemoryDefaults()
+        val choice = MarkNewUpdatesChoice(guestDefaults)
+        assertTrue(choice.enabled.value)
+        choice.keep(false)
+        assertFalse(MarkNewUpdatesChoice(guestDefaults).enabled.value)
+        val parcel = Parcel(shared = publicPackage(newsAt = scanned)).copy(seenAt = opened)
+        assertTrue(parcel.hasNewUpdate)
+        assertFalse(parcel.marksNewUpdate(MarkNewUpdatesChoice(guestDefaults).enabled.value))
+    }
+}

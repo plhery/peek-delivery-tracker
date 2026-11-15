@@ -341,6 +341,20 @@ class FakeDeliveries(
         deliveryWidgetEnabled.value = enabled
     }
 
+    override val markNewUpdates = MutableStateFlow(true)
+
+    override fun setMarkNewUpdates(enabled: Boolean) {
+        markNewUpdates.value = enabled
+    }
+
+    /** The parcels the pages saw (#72), in order; each is seen at once, as the store marks it. */
+    val seen = mutableListOf<UUID>()
+
+    override suspend fun markSeen(parcel: Parcel) {
+        seen += parcel.id
+        parcels.value = parcels.value.map { if (it.id == parcel.id && it.newsAt != null) it.copy(seenAt = it.newsAt) else it }
+    }
+
     override suspend fun changeCarrier(
         parcel: Parcel,
         carrier: CarrierId,

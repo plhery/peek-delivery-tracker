@@ -18,7 +18,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The cards of the parcels on their way as the iPhone's list draws them on its captures (A-S35): each carrier's tint,
  * with a date and without, with a route and without a place to draw; a card's problem kept on it (A-ST20); a parcel's
- * probable carrier (A-S103); a parcel just delivered among them; and the parcel shown beside the list.
+ * probable carrier (A-S103); a parcel just delivered among them; the parcel shown beside the list; and a scan the
+ * reader hasn't seen (#72).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -53,6 +54,17 @@ class ParcelPassCardScreenshotTest {
 
     @Test
     fun inTransitDark() = shot("card_transit_dark", dark = true) { DemoCards.parcel("Moon lamp") }
+
+    /** #72: a scan the reader hasn't seen, a dot before the status in the card's ink. */
+    @Test
+    fun newUpdateLight() = shot("card_new_light", newUpdate = true) { DemoCards.parcel("Moon lamp") }
+
+    @Test
+    fun newUpdateDark() = shot("card_new_dark", dark = true, newUpdate = true) { DemoCards.parcel("Moon lamp") }
+
+    /** Before the delivered check and on another carrier's tint. */
+    @Test
+    fun newUpdateOutForDeliveryLight() = shot("card_new_out_light", newUpdate = true) { DemoCards.parcel("Belgian chocolate") }
 
     /** Scans without places: no route. */
     @Test
@@ -158,6 +170,7 @@ class ParcelPassCardScreenshotTest {
         notice: String? = null,
         arrived: Boolean = false,
         selected: Boolean = false,
+        newUpdate: Boolean = false,
         parcel: () -> Parcel,
     ) {
         compose.waitsForMaps()
@@ -165,7 +178,7 @@ class ParcelPassCardScreenshotTest {
         val said = notice?.let { Localizer(language, variant = "android").text(it) } ?: if (noticed) DemoCards.notice(shown, language) else null
         compose.setContent {
             CardHost(language, dark, fontScale, highContrast) {
-                ParcelPassCard(shown, notice = said, onOpen = {}, arrived = arrived, selected = selected)
+                ParcelPassCard(shown, notice = said, onOpen = {}, arrived = arrived, selected = selected, newUpdate = newUpdate)
             }
         }
         compose.screenshot(name)

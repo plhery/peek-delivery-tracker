@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -42,6 +44,7 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.GlobalPositionAwareModifierNode
@@ -94,6 +97,7 @@ import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.time.Instant
 import java.util.UUID
+import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 
 /**
@@ -190,6 +194,32 @@ internal fun Modifier.secondaryClick(action: (Offset) -> Unit): Modifier = point
 
 /** The texts a card writes, in the order VoiceOver reads them once combined, as one label. */
 internal fun cardLabel(vararg parts: String?): String = parts.filterNot { it.isNullOrEmpty() }.joinToString(", ")
+
+/** A card's label with "New update" read first, and a full stop after it, while its dot shows (#72). */
+internal fun newUpdateLabel(newUpdate: String?, label: String): String = if (newUpdate == null) label else "$newUpdate. $label"
+
+/**
+ * The mark of a scan the reader hasn't seen (#72), first on a card's status line: a dot 5 wide in the line's ink at 80 %,
+ * 5 before the words, as on the web. As it clears it fades and the words slide back over its place in 0.3 s; with
+ * Reduce Motion it goes at once. TalkBack hears it in the card's label ([newUpdateLabel]), not here.
+ */
+@Composable
+internal fun NewUpdateDot(shown: Boolean, ink: Color) {
+    val reduceMotion = PeekTheme.reduceMotion
+    val progress by animateFloatAsState(if (shown) 1f else 0f, if (reduceMotion) snap() else Motion.easeOut(0.3), label = "newUpdate")
+    if (progress == 0f) return
+    Box(
+        Modifier
+            .clearAndSetSemantics {}
+            .layout { measurable, constraints ->
+                val dot = measurable.measure(constraints)
+                val width = ((dot.width + 5.dp.toPx()) * progress).roundToInt()
+                layout(width, dot.height) { dot.placeWithLayer(0, 0) { alpha = progress } }
+            }
+            .size(5.dp)
+            .background(ink.copy(alpha = ink.alpha * 0.8f), CircleShape),
+    )
+}
 
 /**
  * `SelectedCardRing` (A-S36): a 2-point ring in the ink inside the continuous edge of a card of `cornerRadius`, shown

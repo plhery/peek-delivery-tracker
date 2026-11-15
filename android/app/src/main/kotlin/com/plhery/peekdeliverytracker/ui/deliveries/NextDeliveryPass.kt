@@ -81,6 +81,7 @@ import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
  * - `onLongClick`: a long press, the list's card menu; the press then doesn't open the parcel ([cardButton]).
  * - `swipeAction`: the list's swipe to archive, offered to TalkBack; the swipe's row then draws the card's shadow.
  * - `onTap`: what a finger's tap does, `onOpen` unless the swipe closes the card first; TalkBack's double tap opens it.
+ * - `newUpdate`: a scan the reader hasn't seen (#72), a [NewUpdateDot] first on the status line, read first by TalkBack.
  *
  * It fades in as it first shows, and its map once drawn, neither under Reduce Motion. Nothing is drawn until the
  * carriers' liveries are read.
@@ -97,6 +98,7 @@ fun NextDeliveryPass(
     onLongClick: (() -> Unit)? = null,
     swipeAction: CustomAccessibilityAction? = null,
     onTap: () -> Unit = onOpen,
+    newUpdate: Boolean = false,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -141,7 +143,10 @@ fun NextDeliveryPass(
             .then(if (decorative) Modifier else Modifier.graphicsLayer { alpha = opacity })
             .cardButton(
                 decorative = decorative,
-                label = cardLabel(identity.fullName, nextUp.takeUnless { arrived }, name, notice, delivering, status, flag),
+                label = newUpdateLabel(
+                    localizer.text("parcel.newUpdate").takeIf { newUpdate },
+                    cardLabel(identity.fullName, nextUp.takeUnless { arrived }, name, notice, delivering, status, flag),
+                ),
                 hint = localizer.text("detail.label"),
                 selected = selected,
                 onOpen = onOpen,
@@ -207,9 +212,12 @@ fun NextDeliveryPass(
             }
             if (notice != null) Text(notice, color = colors.secondaryLabel, style = type.caption.sfLines())
             if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
-            Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-                if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
-                Text(status, color = ink, style = type.caption.sfLines())
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                NewUpdateDot(newUpdate, ink)
+                Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
+                    if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
+                    Text(status, color = ink, style = type.caption.sfLines())
+                }
             }
             if (flag != null) ParcelFlag(flag, "arrow.clockwise", Modifier.padding(top = 8.dp))
         }

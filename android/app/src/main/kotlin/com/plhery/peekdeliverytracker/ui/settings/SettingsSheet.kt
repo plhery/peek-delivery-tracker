@@ -339,6 +339,7 @@ private fun SettingsRootPage(
     val preferences by source.notificationPreferences.collectAsState()
     val deliveryEmail by source.deliveryEmail.collectAsState()
     val widgetEnabled by source.deliveryWidgetEnabled.collectAsState()
+    val markNewUpdates by source.markNewUpdates.collectAsState()
     val appearance = appearanceSetting()
     val demo = source.isDemo
     val guest = source.isGuest
@@ -403,6 +404,13 @@ private fun SettingsRootPage(
                         SettingsClockRow()
                         SettingsDivider()
                         SettingsDistanceRow()
+                        SettingsDivider()
+                        // The web's "Mark new updates" (#72): the account's, kept with its notification preferences,
+                        // or this phone's for a guest.
+                        SettingsToggleRow(
+                            markNewUpdates, source::setMarkNewUpdates, localized("settings.markNewUpdates"), SETTINGS_MARK_NEW_UPDATES,
+                            detail = localized("settings.markNewUpdatesHint"),
+                        )
                     }
                     SettingsGroup {
                         Box(Modifier.accessibilityFocus(rowFocus)) {
@@ -773,6 +781,7 @@ internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
 internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
+internal const val SETTINGS_MARK_NEW_UPDATES = "$SETTINGS_SHEET.markNewUpdates"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"
 internal const val SETTINGS_RATE = "$SETTINGS_SHEET.rate"

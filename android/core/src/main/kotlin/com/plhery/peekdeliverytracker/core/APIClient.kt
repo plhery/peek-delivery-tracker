@@ -31,6 +31,7 @@ import com.plhery.peekdeliverytracker.core.api.NumberRefusalResponse
 import com.plhery.peekdeliverytracker.core.api.OkResponse
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.PackageNotificationRequest
+import com.plhery.peekdeliverytracker.core.api.PackageSeenResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
@@ -339,6 +340,10 @@ class DeliveryApiClient(
     }
 
     suspend fun restore(id: UUID): Parcel = request("/api/packages/${id.uuidString}/restore", Parcel.serializer(), "POST")
+
+    /** The parcel opened by its owner (#72): the moment the server keeps as its `seen_at`. */
+    suspend fun markSeen(id: UUID): String =
+        request("/api/packages/${id.uuidString}/seen", PackageSeenResponse.serializer(), "POST").seenAt
 
     suspend fun permanentlyDelete(id: UUID) {
         request("/api/packages/${id.uuidString}/permanent", OkResponse.serializer(), "DELETE")

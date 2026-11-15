@@ -94,6 +94,7 @@ import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.isDelivered
+import com.plhery.peekdeliverytracker.core.marksNewUpdate
 import com.plhery.peekdeliverytracker.core.notice
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -712,13 +713,14 @@ private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     val place = state.cardPlace(parcel.id)
     val onName = state.names(parcel.id)
     val sight = remember(state, parcel.id) { { pip: () -> Rect? -> state.places.see(pip, parcel.id) } }
+    val markNew by state.source.markNewUpdates.collectAsState()
     CardComposed(parcel.id)
     ArrivalCelebration(state, parcel.id, place, ParcelArrival.NEXT_STUB_INSET) {
         SwipeableCard(state, shown, Radii.nextUp, shadow = true, pictured = true) { moved, open, tap, menu, archive ->
             CompositionLocalProvider(LocalPipSight provides sight) {
                 NextDeliveryPass(
                     shown, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected, onLongClick = menu,
-                    swipeAction = archive, onTap = tap,
+                    swipeAction = archive, onTap = tap, newUpdate = shown.marksNewUpdate(markNew),
                 )
             }
         }
@@ -735,6 +737,7 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     val shown = state.shows(parcel).value
     val arrived = state.holds(parcel.id).value
     val selected = state.selects(parcel.id).value
+    val markNew by state.source.markNewUpdates.collectAsState()
     CardComposed(parcel.id)
     val notice = if (!item.attention || arrived) {
         null
@@ -747,7 +750,7 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
         SwipeableCard(state, shown, Radii.card, shadow = false, pictured = true) { moved, open, tap, menu, archive ->
             ParcelPassCard(
                 shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected,
-                onLongClick = menu, swipeAction = archive, onTap = tap,
+                onLongClick = menu, swipeAction = archive, onTap = tap, newUpdate = shown.marksNewUpdate(markNew),
             )
         }
     }
@@ -761,6 +764,9 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
     val language = LocalLanguage.current
     val now = LocalNow.current
     val selected = state.selects(parcel.id).value
+    val markNew by state.source.markNewUpdates.collectAsState()
+    // An archived parcel found here carries no dot, as the archive's rows carry none.
+    val newUpdate = !parcel.isArchived && parcel.marksNewUpdate(markNew)
     CardComposed(parcel.id)
     when {
         item.kind == ParcelSectionKind.Delivered -> {
@@ -770,7 +776,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
                 SwipeableCard(state, parcel, Radii.card, shadow = false, pictured = true) { moved, open, tap, menu, archive ->
                     DeliveredParcelCard(
                         parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive,
-                        onTap = tap,
+                        onTap = tap, newUpdate = newUpdate,
                     )
                 }
             }
@@ -779,6 +785,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
             SwipeableCard(state, parcel, Radii.nextUp, shadow = true) { moved, open, tap, menu, archive ->
                 NextDeliveryPass(
                     parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive, onTap = tap,
+                    newUpdate = newUpdate,
                 )
             }
         }
@@ -791,7 +798,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
                 SwipeableCard(state, parcel, Radii.card, shadow = false, swipes = !parcel.isArchived) { moved, open, tap, menu, archive ->
                     ParcelPassCard(
                         parcel, notice = notice, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive,
-                        onTap = tap,
+                        onTap = tap, newUpdate = newUpdate,
                     )
                 }
             }

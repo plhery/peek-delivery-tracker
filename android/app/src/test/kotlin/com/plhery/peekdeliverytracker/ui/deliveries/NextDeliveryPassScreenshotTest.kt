@@ -33,6 +33,10 @@ class NextDeliveryPassScreenshotTest {
     @Test
     fun routeDark() = shot("nextup_route_dark", dark = true) { DemoCards.parcel("New trainers") }
 
+    /** #72: a scan the reader hasn't seen, a dot first on the status line. */
+    @Test
+    fun newUpdateLight() = shot("nextup_new_light", newUpdate = true) { DemoCards.parcel("New trainers") }
+
     @Test
     fun routeGerman() = shot("nextup_route_de_light", AppLanguage.De) { DemoCards.parcel("New trainers", AppLanguage.De) }
 
@@ -83,13 +87,14 @@ class NextDeliveryPassScreenshotTest {
         highContrast: Boolean = false,
         arrived: Boolean = false,
         selected: Boolean = false,
+        newUpdate: Boolean = false,
         parcel: () -> Parcel,
     ) {
         compose.waitsForMaps()
         val shown = parcel()
         compose.setContent {
             CardHost(language, dark, fontScale, highContrast) {
-                NextDeliveryPass(shown, onOpen = {}, arrived = arrived, selected = selected)
+                NextDeliveryPass(shown, onOpen = {}, arrived = arrived, selected = selected, newUpdate = newUpdate)
             }
         }
         compose.screenshot(name)

@@ -152,6 +152,9 @@ class DemoRepository(
 
     fun refresh(id: UUID): Parcel = update(id, ::advance)
 
+    /** The parcel was opened (#72): its made-up scan is news no more. */
+    fun markSeen(id: UUID): Parcel = update(id) { it.copy(seenAt = it.newsAt) }
+
     fun reset() {
         defaults.removeObject(forKey = key)
         defaults.removeObject(forKey = preferencesKey)
@@ -260,6 +263,9 @@ class DemoRepository(
             ),
             lastSyncedAt = timestamp,
             lastStatusText = description,
+            // The made-up scan is news until the parcel is opened (#72).
+            newsAt = timestamp,
+            seenAt = parcel.seenAt ?: parcel.createdAt,
         )
         if (CarrierCatalog.supportsSwissPostHandoff(copy.trackingNumber) &&
             next in listOf(TrackingStage.InTransit, TrackingStage.Customs, TrackingStage.OutForDelivery, TrackingStage.Delivered)

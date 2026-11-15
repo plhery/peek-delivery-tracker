@@ -1191,7 +1191,6 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(listed, parcels)
         XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [courier] + onTheWay)
 
-        XCTAssertEqual(DeliveryWidgetList.Size.allCases.map(\.rows), [3, 6, 15])
         XCTAssertEqual(DeliveryWidgetSelection.listed([], now: now), [])
     }
 
@@ -1294,6 +1293,25 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DeliveryWidgetList.columns(DeliveryWidgetList.lines(busy, rows: 1, headings: true)), [
             [.heading("attention", count: 2), .row(stuck), .more(6)],
         ])
+    }
+
+    /// The Parcels widget shows as many rows as fit, trying the most first: four parcels in a small widget are four rows
+    /// where they fit, in smaller type if they must, before three and a line for the fourth. A large widget's rows keep
+    /// the usual type.
+    func testParcelsWidgetShowsAsManyRowsAsFitBeforeCountingTheOthers() {
+        typealias Layout = DeliveryWidgetList.Layout
+        func rows(_ layouts: some Collection<Layout>) -> [String] { layouts.map { "\($0.rows)\($0.compact ? " smaller" : "")" } }
+
+        XCTAssertEqual(rows(DeliveryWidgetList.layouts(count: 4, size: .small)),
+                       ["4", "4 smaller", "3", "3 smaller", "2", "2 smaller", "1", "1 smaller"])
+        XCTAssertEqual(rows(DeliveryWidgetList.layouts(count: 9, size: .medium).prefix(4)), ["9", "9 smaller", "8", "8 smaller"])
+        let large = DeliveryWidgetList.layouts(count: 18, size: .large)
+        XCTAssertEqual(large.map(\.rows), Array((1...18).reversed()))
+        XCTAssertFalse(large.contains(where: \.compact))
+        // However many parcels are listed, the widget measures a bounded number of layouts.
+        for size in DeliveryWidgetList.Size.allCases {
+            XCTAssertEqual(DeliveryWidgetList.layouts(count: 1_000, size: size).first, Layout(rows: size.mostRows, compact: false))
+        }
     }
 
     /// A step's time is its clock on its day, and its short weekday and clock from the next, in the reader's language.

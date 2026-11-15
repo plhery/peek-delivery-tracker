@@ -289,13 +289,12 @@ enum DeliveryWidgetList {
     enum Size: CaseIterable, Sendable {
         case small, medium, large
 
-        /// The rows each size has at the default text size: three, two columns of three, and fifteen, or as many as the
-        /// large widget's height holds. Larger text keeps fewer.
-        var rows: Int {
+        /// More rows than each size could hold in its smallest type, which bounds the layouts the widget measures.
+        var mostRows: Int {
             switch self {
-            case .small: 3
-            case .medium: 6
-            case .large: 15
+            case .small: 6
+            case .medium: 12
+            case .large: 24
             }
         }
 
@@ -366,6 +365,22 @@ enum DeliveryWidgetList {
             case .row: 1
             case .more: 0.5
             }
+        }
+    }
+
+    /// How many rows the sections' design shows, and in which type.
+    struct Layout: Hashable, Sendable {
+        let rows: Int
+        /// In smaller type.
+        let compact: Bool
+    }
+
+    /// The layouts a widget tries for `count` parcels, the first that fits being the one it shows: the most rows first,
+    /// each in the usual type, then in a small or medium widget in smaller type, as more rows win over larger type. The
+    /// rows then show every parcel, or the room under the last is shorter than another row.
+    static func layouts(count: Int, size: Size) -> [Layout] {
+        stride(from: min(size.mostRows, count), through: 1, by: -1).flatMap { rows in
+            [Layout(rows: rows, compact: false)] + (size == .large ? [] : [Layout(rows: rows, compact: true)])
         }
     }
 

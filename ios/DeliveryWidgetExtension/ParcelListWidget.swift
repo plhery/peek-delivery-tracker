@@ -82,7 +82,8 @@ private struct ParcelListProvider: TimelineProvider {
             }
         }
         if let trucks {
-            for carrier in Set(parcels.prefix(DeliveryWidgetList.Size.large.rows).compactMap(\.carrierId)) {
+            let rows = DeliveryWidgetList.sections(parcels).flatMap(\.parcels).prefix(size.mostRows)
+            for carrier in Set(rows.compactMap(\.carrierId)) {
                 entry.trucks[carrier] = ParcelListTruck(carrier: carrier, in: trucks)
             }
         }
@@ -490,8 +491,7 @@ private struct ParcelPass: View {
 
 /// Rows under the app list's sections, each marked with its carrier's truck: in a small widget without the headings,
 /// down two columns in a medium one, and on one line each in a large one. As many as the widget holds at the reader's
-/// text size, then a line for the others. A small or medium widget tries its rows in smaller type before it gives one
-/// up, so that the smallest, an iPhone SE's or an iPad mini's, still hold three to a column.
+/// text size, then a line for the others (`DeliveryWidgetList.layouts`).
 private struct ParcelSections: View {
     let parcels: [DeliveryWidgetParcel]
     let trucks: [String: ParcelListTruck]
@@ -507,16 +507,11 @@ private struct ParcelSections: View {
         "delivered": "app.pastDeliveries", "returned": "app.returned", "archived": "app.archived",
     ]
 
-    private struct Layout: Hashable {
-        let rows: Int
-        let compact: Bool
-    }
-
     var body: some View {
         let sections = DeliveryWidgetList.sections(parcels)
         GeometryReader { proxy in
             ViewThatFits(in: .vertical) {
-                ForEach(layouts, id: \.self) { layout in
+                ForEach(DeliveryWidgetList.layouts(count: parcels.count, size: size), id: \.self) { layout in
                     list(sections, layout: layout, width: proxy.size.width)
                 }
             }
@@ -526,16 +521,9 @@ private struct ParcelSections: View {
         .widgetURL(DeliveryWidgetList.link)
     }
 
-    private var layouts: [Layout] {
-        let most = min(size == .medium ? 8 : size.rows, parcels.count)
-        return stride(from: most, through: 1, by: -1).flatMap { rows in
-            size == .large ? [Layout(rows: rows, compact: false)] : [Layout(rows: rows, compact: false), Layout(rows: rows, compact: true)]
-        }
-    }
-
     /// The rows and their headings, a small widget having no room for headings, down one column, or two in a medium
     /// widget (`DeliveryWidgetList.columns`); the line for the others at the foot of the column they would follow.
-    private func list(_ sections: [DeliveryWidgetList.Section], layout: Layout, width: CGFloat) -> some View {
+    private func list(_ sections: [DeliveryWidgetList.Section], layout: DeliveryWidgetList.Layout, width: CGFloat) -> some View {
         let metrics = ParcelListMetrics(compact: layout.compact, markWidth: layout.compact ? compactMarkWidth : markWidth)
         let lines = DeliveryWidgetList.lines(sections, rows: layout.rows, headings: size != .small)
         return Group {

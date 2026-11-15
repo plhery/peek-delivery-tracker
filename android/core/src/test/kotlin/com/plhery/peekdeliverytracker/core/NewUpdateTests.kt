@@ -251,10 +251,18 @@ class NewUpdateTests {
         waitingDevice.refresh(all = true)
         assertFalse(waitingDevice.list().single().hasNewUpdate)
 
-        // No scan yet when it was first listed: the first scan that comes is news.
+        // Kept before this version with no scan yet: nothing is noted, and its next answer starts it as seen.
         pkg = publicPackage(newsAt = null, scans = 0)
-        val quiet = keptBefore(pkg)
-        val quietDevice = guestDevice(quiet, backgroundScope) { response(pkg) }
+        val kept = keptBefore(pkg)
+        val keptDevice = guestDevice(kept, backgroundScope) { response(pkg) }
+        pkg = publicPackage(newsAt = scanned, scans = 1)
+        keptDevice.refresh(all = true)
+        assertFalse(keptDevice.list().single().hasNewUpdate)
+
+        // Followed with no scan yet: the first scan that comes is news.
+        pkg = publicPackage(newsAt = null, scans = 0)
+        val quietDevice = guestDevice(MemoryDeviceParcelStorage(), backgroundScope) { response(pkg) }
+        quietDevice.follow(response(pkg), key = key, label = null)
         assertFalse(quietDevice.list().single().hasNewUpdate)
         pkg = publicPackage(newsAt = scanned, scans = 1)
         quietDevice.refresh(all = true)
@@ -266,6 +274,50 @@ class NewUpdateTests {
         val store = signedIn(server)
         store.load()
         assertFalse(store.dotShown)
+    }
+
+    /**
+     * A gift followed while it is wrapped: its link tells no `news_at` until the gift is delivered, though it shows
+     * where it set off from. Its delivery is news, as on the iPhone and the web.
+     */
+    @Test
+    fun aWrappedGiftsDeliveryIsNews() = runTest {
+        fun gift(pkg: PublicPackage) = PublicParcelResponse(
+            link = ParcelLink(
+                id = "33333333333G", role = ParcelLinkRole.Viewer, kind = ParcelLinkKind.Shared, createdAt = "2026-09-07T08:00:00Z",
+                numberShown = false, canKeep = false, gift = true,
+            ),
+            parcel = pkg,
+        )
+        var pkg = publicPackage(newsAt = null, scans = 2)
+        val device = guestDevice(MemoryDeviceParcelStorage(), backgroundScope) { gift(pkg) }
+        device.follow(gift(pkg), key = null, label = null)
+        assertFalse(device.list().single().hasNewUpdate)
+        pkg = publicPackage(newsAt = scanned, scans = 3)
+        device.refresh(all = true)
+        assertTrue("The wrapped gift's delivery shows no dot", device.list().single().hasNewUpdate)
+    }
+
+    /**
+     * The parcel's carrier or number changed, and the service checks it anew: its first answer then, a history the
+     * phone has not seen, is no news, as an account's parcel starts. The scan after it is.
+     */
+    @Test
+    fun aParcelAnsweredAnewIsNoNews() = runTest {
+        var pkg = publicPackage(newsAt = opened, scans = 1)
+        val storage = keptBefore(pkg, seenNewsAt = opened)
+        val device = guestDevice(storage, backgroundScope) { response(pkg) }
+        // Waiting for the new carrier's first answer.
+        pkg = publicPackage(newsAt = opened, scans = 0, sync = SyncStatus.Pending, lastSyncedAt = null)
+        device.refresh(all = true)
+        pkg = publicPackage(newsAt = scanned, scans = 3)
+        device.refresh(all = true)
+        assertFalse("The new carrier's first answer shows a dot", device.list().single().hasNewUpdate)
+        assertEquals(scanned, storage.parcels.single().seenNewsAt)
+
+        pkg = publicPackage(newsAt = "2026-09-08T11:45:00.000001+00:00", scans = 4)
+        device.refresh(all = true)
+        assertTrue(device.list().single().hasNewUpdate)
     }
 
     @Test

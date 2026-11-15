@@ -21,9 +21,35 @@ device() {
   if [ -n "$limit" ]; then "$limit" 120 adb "$@"; else adb "$@"; fi
 }
 
+# Until <command> succeeds, asking every two seconds for two minutes; then the check stops, saying what never happened.
+await() {
+  what=$1
+  shift
+  tries=0
+  until "$@"; do
+    tries=$((tries + 1))
+    if [ "$tries" -ge 60 ]; then
+      echo "The device still hadn't $what after two minutes, so the check couldn't start the app."
+      exit 1
+    fi
+    sleep 2
+  done
+}
+booted() { [ "$(device shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = 1 ]; }
+# The launcher's intent finds the app's window: Android knows the activity the check starts.
+launchable() {
+  device shell cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.LAUNCHER \
+    "$package" 2>/dev/null | tr -d '\r' | grep -qx "$package/.MainActivity"
+}
+
+# adb reaches a device before Android has finished starting, and an emulator just booted installs the app and still
+# answers "Activity class does not exist" for a while: the check waits for the boot, then for the launcher to find
+# the app's window.
 device wait-for-device
+await "finished starting" booted
 device uninstall "$package" >/dev/null 2>&1 || true
 device install "$apk" >/dev/null
+await "found the app's window" launchable
 device logcat -c
 device logcat -b crash -c 2>/dev/null || true
 # With SMOKE_LOGCAT set to a file, the device's whole log goes there while the app runs: what's left of it when the

@@ -109,9 +109,9 @@ Before a bundle goes to Google Play, open the APK built with it on an emulator o
 scripts/release-smoke.sh app/build/outputs/apk/release/app-release.apk [serial]
 ```
 
-It installs the release in place of any build there, opens it and fails unless it is still up 15 seconds later: what R8
-removes shows only when the shrunk app runs. CI's "Release build opens" job does the same on each change, with a key
-and settings made up for the run.
+It waits for the device to finish starting, installs the release in place of any build there, opens it once Android
+finds its window and fails unless it is still up 15 seconds later: what R8 removes shows only when the shrunk app
+runs. CI's "Release build opens" job does the same on each change, with a key and settings made up for the run.
 
 Once Google Play has a beta, its APK as Google Play signs it goes to the F-Droid repository and GitHub Releases:
 

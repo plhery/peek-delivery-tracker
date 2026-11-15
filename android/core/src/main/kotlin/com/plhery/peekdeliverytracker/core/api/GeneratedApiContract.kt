@@ -3500,6 +3500,8 @@ enum class NativePushEnvironment(val rawValue: String) {
 enum class NativePushTransport(val rawValue: String) {
     @SerialName("apns") Apns("apns"),
     @SerialName("fcm") Fcm("fcm"),
+    @SerialName("unifiedpush") Unifiedpush("unifiedpush"),
+    @SerialName("inbox") Inbox("inbox"),
     ;
 
     companion object {
@@ -3535,12 +3537,24 @@ data class NativePushDeviceRequest(
     val deviceName: String? = null,
     val sendTest: Boolean,
     val transport: NativePushTransport? = null,
+    val endpoint: String? = null,
+    val keys: PushSubscriptionKeys? = null,
 )
 
 @Serializable
 data class DeleteNativePushDeviceRequest(
     val token: String,
     val transport: NativePushTransport? = null,
+)
+
+@Serializable
+data class PushInboxRequest(
+    val token: String,
+)
+
+@Serializable
+data class PushInboxResponse(
+    val messages: List<Map<String, String>>,
 )
 
 @Serializable
@@ -3912,6 +3926,8 @@ data class ParcelAppAlertRequest(
     val preset: ParcelAlertPreset,
     val locale: NativePushLocale,
     val transport: NativePushTransport? = null,
+    val endpoint: String? = null,
+    val keys: PushSubscriptionKeys? = null,
 )
 
 @Serializable

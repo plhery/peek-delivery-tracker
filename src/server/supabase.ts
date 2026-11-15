@@ -1,7 +1,7 @@
 import 'server-only';
 
 import type { DpdSession } from 'universal-parcel-scraper/node';
-import type { ApiGiftWords } from '../generated/apiContract';
+import type { ApiGiftWords, ApiNativePushTransport } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
 import { EMAIL_STAGES, type DeliveredTime, type EmailStage } from './email/types';
@@ -237,6 +237,16 @@ export interface DeliveryEmailClaim {
 }
 
 /** How a claimed delivery email ended. A failed one is claimed again while it is fresh and attempts are left. */
+/** The service that reaches a phone: APNs, FCM, UnifiedPush or the inbox. */
+type NativePushTransport = ApiNativePushTransport;
+
+/** Where UnifiedPush sends a phone's notices: its distributor's endpoint and the Web Push keys the app made for it. */
+export interface WebPushKeys {
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+}
+
 export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
@@ -645,6 +655,10 @@ export class SupabaseClient {
     });
   }
 
+  /**
+   * Stores a phone for the account's notifications. A UnifiedPush device brings its endpoint and Web Push keys
+   * (`webPush`); a UnifiedPush or inbox device that switches to the other transport keeps its row, and loses them.
+   */
   async upsertNativePushDevice(
     userId: string,
     token: string,
@@ -652,7 +666,8 @@ export class SupabaseClient {
     locale: string,
     installationId?: string | null,
     deviceName?: string | null,
-    transport: 'apns' | 'fcm' = 'apns',
+    transport: NativePushTransport = 'apns',
+    webPush: WebPushKeys | null = null,
   ): Promise<JsonObject> {
     const now = new Date().toISOString();
     const result = rows(await this.request(`/rest/v1/native_push_devices?${query({
@@ -664,6 +679,9 @@ export class SupabaseClient {
         token,
         environment,
         transport,
+        ...transport === 'unifiedpush' || transport === 'inbox'
+          ? { endpoint: webPush?.endpoint ?? null, p256dh: webPush?.p256dh ?? null, auth: webPush?.auth ?? null }
+          : {},
         locale,
         installation_id: installationId ?? null,
         device_name: deviceName ?? null,
@@ -678,7 +696,7 @@ export class SupabaseClient {
     return result[0];
   }
 
-  async deleteNativePushDevice(userId: string, token: string, transport: 'apns' | 'fcm' = 'apns'): Promise<void> {
+  async deleteNativePushDevice(userId: string, token: string, transport: NativePushTransport = 'apns'): Promise<void> {
     const params = query({ user_id: `eq.${userId}`, token: `eq.${token}`, transport: `eq.${transport}` });
     await this.request(`/rest/v1/native_push_devices?${params}`, {
       method: 'DELETE',
@@ -958,10 +976,13 @@ export class SupabaseClient {
     return rows(await this.request(`/rest/v1/pending_push_notifications?${params}`));
   }
 
-  /** `native` claims the iPhones' notices, `fcm` the Android phones'; each row says its `transport`. */
-  async claimFriendshipPush(web: boolean, native: boolean, fcm = false): Promise<JsonObject[]> {
+  /**
+   * `native` claims the iPhones' notices, `fcm`, `unifiedpush` and `inbox` the Android phones' of each transport;
+   * each row says its `transport`, and a UnifiedPush one carries its endpoint and keys.
+   */
+  async claimFriendshipPush(web: boolean, native: boolean, fcm = false, unifiedpush = false, inbox = false): Promise<JsonObject[]> {
     return rows(await this.request('/rest/v1/rpc/claim_friendship_push', {
-      method: 'POST', body: { p_web: web, p_native: native, p_limit: 10, p_fcm: fcm },
+      method: 'POST', body: { p_web: web, p_native: native, p_limit: 10, p_fcm: fcm, p_unifiedpush: unifiedpush, p_inbox: inbox },
     }));
   }
 
@@ -972,7 +993,7 @@ export class SupabaseClient {
   }
 
   /** The account notifications waiting for the devices of one transport. */
-  async listPendingNativePushNotifications(transport: 'apns' | 'fcm' = 'apns'): Promise<JsonObject[]> {
+  async listPendingNativePushNotifications(transport: NativePushTransport = 'apns'): Promise<JsonObject[]> {
     const params = query({ select: '*', transport: `eq.${transport}`, order: 'event_created_at.asc', limit: '1000' });
     return rows(await this.request(`/rest/v1/pending_native_push_notifications?${params}`));
   }
@@ -2432,7 +2453,9 @@ export class SupabaseServiceClient extends SupabaseClient {
   async addParcelLinkAppAlert(
     linkId: string,
     ownerKeyHash: string | null,
-    alert: { token: string; environment: string; locale: string; preset: string; transport?: 'apns' | 'fcm' },
+    alert: {
+      token: string; environment: string; locale: string; preset: string; transport?: NativePushTransport; webPush?: WebPushKeys;
+    },
   ): Promise<'added' | 'updated' | 'full' | 'finished' | 'stopped' | null> {
     const result = await this.request('/rest/v1/rpc/add_parcel_link_app_alert', {
       method: 'POST',
@@ -2444,6 +2467,7 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_locale: alert.locale,
         p_preset: alert.preset,
         p_transport: alert.transport ?? 'apns',
+        ...alert.webPush ? { p_endpoint: alert.webPush.endpoint, p_p256dh: alert.webPush.p256dh, p_auth: alert.webPush.auth } : {},
       },
     });
     if (result === null) return null;
@@ -2458,6 +2482,27 @@ export class SupabaseServiceClient extends SupabaseClient {
     }) === true;
   }
 
+  /** Puts a notice in a phone's inbox, in place of the one waiting with the same collapse key. */
+  async putPushInbox(token: string, collapseKey: string, data: Record<string, string>, deviceId: string | null): Promise<void> {
+    await this.request('/rest/v1/rpc/put_push_inbox', {
+      method: 'POST', body: { p_token: token, p_collapse_key: collapseKey, p_data: data, p_device_id: deviceId },
+    });
+  }
+
+  /** The notices waiting in a phone's inbox, oldest first, removed as they are read. */
+  async takePushInbox(token: string): Promise<Record<string, string>[]> {
+    const result = await this.request('/rest/v1/rpc/take_push_inbox', { method: 'POST', body: { p_token: token } });
+    if (!Array.isArray(result)) throw new SupabaseError('Supabase did not return the inbox');
+    return result.filter(isRecord).map((message) => Object.fromEntries(
+      Object.entries(message).filter((entry): entry is [string, string] => typeof entry[1] === 'string'),
+    ));
+  }
+
+  /** Forgets the inbox notices no phone came for within their day; answers how many. */
+  async forgetExpiredPushInbox(): Promise<number> {
+    return Number(await this.request('/rest/v1/rpc/forget_expired_push_inbox', { method: 'POST', body: {} }) ?? 0);
+  }
+
   /** Turns a browser's alert for a link off; false when there was none. */
   async removeParcelLinkAlert(linkId: string, endpoint: string): Promise<boolean> {
     return await this.request('/rest/v1/rpc/remove_parcel_link_alert', {
@@ -2467,16 +2512,20 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /**
    * The scans no link alert has handled yet, one row per alert and scan, with the alert's push credentials:
-   * a browser's (`endpoint`), an iPhone's (`apns_token`) or an Android phone's (`fcm_token`), only those of
-   * the channels named.
+   * a browser's (`endpoint`), an iPhone's (`apns_token`) or an Android phone's (`fcm_token`, or `app_token` with
+   * `app_transport` and a UnifiedPush endpoint and keys), only those of the channels named.
    */
   async listPendingParcelLinkAlerts(
-    channels: { web: boolean; apns: boolean; fcm: boolean } = { web: true, apns: true, fcm: true },
+    channels: Record<'web' | 'apns' | 'fcm' | 'unifiedpush' | 'inbox', boolean> = {
+      web: true, apns: true, fcm: true, unifiedpush: true, inbox: true,
+    },
   ): Promise<JsonObject[]> {
-    const named = ([['web', 'endpoint'], ['apns', 'apns_token'], ['fcm', 'fcm_token']] as const)
-      .filter(([channel]) => channels[channel]).map(([, column]) => `${column}.not.is.null`);
+    const named = ([
+      ['web', 'endpoint.not.is.null'], ['apns', 'apns_token.not.is.null'], ['fcm', 'fcm_token.not.is.null'],
+      ['unifiedpush', 'app_transport.eq.unifiedpush'], ['inbox', 'app_transport.eq.inbox'],
+    ] as const).filter(([channel]) => channels[channel]).map(([, filter]) => filter);
     if (named.length === 0) return [];
-    const only: Record<string, string> = named.length === 3 ? {} : { or: `(${named.join(',')})` };
+    const only: Record<string, string> = named.length === 5 ? {} : { or: `(${named.join(',')})` };
     const params = query({ select: '*', ...only, order: 'event_created_at.asc', limit: '1000' });
     return rows(await this.request(`/rest/v1/pending_parcel_link_alerts?${params}`));
   }

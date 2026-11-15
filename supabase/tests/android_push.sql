@@ -12,9 +12,9 @@ declare
 begin
   foreach role_name in array array['anon', 'authenticated'] loop
     foreach service_function in array array[
-      'public.add_parcel_link_app_alert(text,text,text,text,text,text,text)',
+      'public.add_parcel_link_app_alert(text,text,text,text,text,text,text,text,text,text)',
       'public.remove_parcel_link_app_alert(text,text)',
-      'public.claim_friendship_push(boolean,boolean,integer,boolean)'
+      'public.claim_friendship_push(boolean,boolean,integer,boolean,boolean,boolean)'
     ] loop
       if has_function_privilege(role_name, service_function, 'EXECUTE') then
         raise exception '% may execute %', role_name, service_function;
@@ -243,7 +243,7 @@ begin
   if (select iphone_push_accounts from metrics.live) <> (
         select count(distinct user_id) from public.native_push_devices where transport = 'apns' and disabled_at is null)
       or (select android_push_accounts from metrics.live) <> (
-        select count(distinct user_id) from public.native_push_devices where transport = 'fcm' and disabled_at is null)
+        select count(distinct user_id) from public.native_push_devices where transport <> 'apns' and disabled_at is null)
       or (select android_push_accounts from metrics.live) < 1 then
     raise exception 'The usage figures miscount phones with notifications on';
   end if;

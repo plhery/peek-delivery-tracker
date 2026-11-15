@@ -3,7 +3,7 @@ import { carriesBack, EVENT_STAGE_ORDER, returnUnderWay, tieOrder } from '../lib
 import 'server-only';
 
 import { connect, constants as http2Constants } from 'node:http2';
-import { createPrivateKey, type KeyObject } from 'node:crypto';
+import { createHash, createPrivateKey, type KeyObject } from 'node:crypto';
 import { SignJWT } from 'jose';
 import { DateTime, FixedOffsetZone, IANAZone, type Zone } from 'luxon';
 import webpush from 'web-push';
@@ -19,6 +19,7 @@ import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
 import { parcelNumberMask } from './hiddenNumbers';
+import { NonPublicAddressError, postToPublicEndpoint, type AddressLookup } from './publicAddress';
 import { servedPlannedSteps, servedWrittenSteps } from './plannedSteps';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
@@ -1003,10 +1004,12 @@ export class WebPushNotificationService {
 /** The push service says the subscription is gone, as for an account's. */
 const GONE_SUBSCRIPTION = new Set([404, 410]);
 
-/** What a link's alert is sent through: a browser's push service, APNs or FCM. */
+/** What a link's alert is sent through: a browser's push service, APNs, FCM, UnifiedPush or the inbox. */
 function linkAlertTransport(row: JsonObject): 'web' | NativeTransport {
   if (stringField(row, 'apns_token')) return 'apns';
-  return stringField(row, 'fcm_token') ? 'fcm' : 'web';
+  if (stringField(row, 'fcm_token')) return 'fcm';
+  const app = stringField(row, 'app_token') ? stringField(row, 'app_transport') : '';
+  return app === 'unifiedpush' || app === 'inbox' ? app : 'web';
 }
 /** An alert whose sends keep failing is removed after this many in a row. */
 const MAX_LINK_ALERT_FAILURES = 3;
@@ -1014,7 +1017,7 @@ const FINISHED_STAGES = new Set(['delivered', 'returned']);
 
 /**
  * Notifications for parcel links, for people without an account, in a browser,
- * the iPhone app or the Android app. An alert is told about its parcel's scans with the
+ * the iPhone app or the Android app (through FCM, UnifiedPush or the inbox). An alert is told about its parcel's scans with the
  * words an account gets, in the alert's language, when its preset covers the
  * scan's stage. It never carries the parcel's name or number.
  *
@@ -1041,22 +1044,32 @@ export class ParcelLinkAlertService {
     readonly web: WebPushNotificationService | null,
     readonly native: NativePushNotificationService | null = null,
     readonly fcm: FcmPushNotificationService | null = null,
+    readonly unifiedpush: UnifiedPushNotificationService | null = null,
+    readonly inbox: InboxPushNotificationService | null = null,
   ) {
-    const client = web?.client ?? native?.client ?? fcm?.client;
-    if (!client) throw new TypeError('Parcel link alerts need Web Push, APNs or FCM');
+    const client = web?.client ?? native?.client ?? fcm?.client ?? unifiedpush?.client ?? inbox?.client;
+    if (!client) throw new TypeError('Parcel link alerts need Web Push, APNs, FCM, UnifiedPush or the inbox');
     this.client = client;
   }
 
   /** Milliseconds, whichever channel keeps the clock. */
   now(): number {
-    return this.web ? this.web.now() : (this.native ?? this.fcm)!.now() * 1_000;
+    return this.web ? this.web.now() : (this.native ?? this.fcm ?? this.unifiedpush ?? this.inbox)!.now() * 1_000;
+  }
+
+  /** The service that sends an app's alerts of this transport, if this server has it. */
+  private appService(transport: NativeTransport): AppPushNotificationService | null {
+    return { apns: this.native, fcm: this.fcm, unifiedpush: this.unifiedpush, inbox: this.inbox }[transport];
   }
 
   async dispatch(signal?: AbortSignal): Promise<PushSummary> {
     signal?.throwIfAborted();
     const { client } = this;
     const grouped = new Map<string, JsonObject[]>();
-    const channels = { web: this.web !== null, apns: this.native !== null, fcm: this.fcm !== null };
+    const channels = {
+      web: this.web !== null, apns: this.native !== null, fcm: this.fcm !== null,
+      unifiedpush: this.unifiedpush !== null, inbox: this.inbox !== null,
+    };
     for (const row of await client.listPendingParcelLinkAlerts(channels)) {
       const alertId = stringField(row, 'alert_id');
       grouped.set(alertId, [...(grouped.get(alertId) ?? []), row]);
@@ -1081,7 +1094,7 @@ export class ParcelLinkAlertService {
       const announced = events.filter((event) => this.announces(event));
       const newest = announcedScan(announced, times);
       const transport = linkAlertTransport(events[0]!);
-      const app = transport === 'apns' ? this.native : transport === 'fcm' ? this.fcm : null;
+      const app = transport === 'web' ? null : this.appService(transport);
       const channel = app?.app ?? 'web';
       // A return held on the schedule (`return_held`) is still followed: its alert stays for the scan that ends the hold.
       const finished = FINISHED_STAGES.has(stringField(events[0]!, 'package_stage')) && events[0]!.return_held !== true;
@@ -1116,7 +1129,7 @@ export class ParcelLinkAlertService {
           await remove('expired');
           recordParcelAlertSent('expired', channel);
           summary.expired += 1;
-        } else if (transport !== 'web' && appSendFailedServerSide(error)) {
+        } else if (transport !== 'web' && appSendFailedServerSide(error, transport)) {
           // No device is at fault: the alert keeps its count, or every alert of the app would go after three scans.
           failed += 1;
           recordParcelAlertSent('failed', channel);
@@ -1200,9 +1213,16 @@ export class ParcelLinkAlertService {
     };
   }
 
-  /** Where APNs sends an iPhone's alert, or FCM an Android phone's. */
+  /** Where APNs sends an iPhone's alert, FCM an Android phone's, or UnifiedPush and the inbox the Android app's without Google's services. */
   private appDevice(row: JsonObject): JsonObject {
-    return linkAlertTransport(row) === 'fcm'
+    const transport = linkAlertTransport(row);
+    if (transport === 'unifiedpush' || transport === 'inbox') {
+      return {
+        token: stringField(row, 'app_token'), environment: 'production',
+        endpoint: stringField(row, 'app_endpoint'), p256dh: stringField(row, 'app_p256dh'), auth: stringField(row, 'app_auth'),
+      };
+    }
+    return transport === 'fcm'
       ? { token: stringField(row, 'fcm_token'), environment: 'production' }
       : { token: stringField(row, 'apns_token'), environment: stringField(row, 'apns_environment') };
   }
@@ -1233,8 +1253,14 @@ const APNS_SERVER_REASONS = new Set([
  * Whether an app's send failed on the server's side, whatever the device: its own credentials or settings (FCM's
  * service account, APNs's signing key and topic), the push service's outage or limit, or the network. Apple and
  * Google answer for those, never whoever added the alert, so they don't count toward the failures that end it.
+ * A UnifiedPush endpoint is on a host the phone chose: only its server's outage or limit, and a notice too large
+ * for it, are not the alert's fault; a host that cannot be reached, or is not public, counts. The inbox fails
+ * only with the database.
  */
-function appSendFailedServerSide(error: unknown): boolean {
+function appSendFailedServerSide(error: unknown, transport: NativeTransport): boolean {
+  if (transport === 'unifiedpush') {
+    return error instanceof UnifiedPushError && (error.statusCode === 413 || error.statusCode === 429 || error.statusCode >= 500);
+  }
   if (error instanceof FCMAuthError) return true;
   if (error instanceof FCMError) {
     return error.statusCode === 401 || error.statusCode === 429 || error.statusCode >= 500
@@ -1311,8 +1337,11 @@ async function postApns(
   });
 }
 
-/** How the server reaches a phone: APNs for the iPhone app, Firebase Cloud Messaging for the Android app. */
-export type NativeTransport = 'apns' | 'fcm';
+/**
+ * How the server reaches a phone: APNs for the iPhone app, Firebase Cloud Messaging for the Android app, and for the
+ * Android app without Google's services UnifiedPush or the inbox it polls.
+ */
+export type NativeTransport = 'apns' | 'fcm' | 'unifiedpush' | 'inbox';
 
 /** What replaces an earlier notification for the same thing: given, else the parcel's id, else the friend's. */
 function collapseKey(row: JsonObject, given?: string): string {
@@ -1339,7 +1368,7 @@ export function fcmData(payload: JsonObject): Record<string, string> {
 /**
  * An account's notifications on its phones, from one queue in the same words: each service
  * sends to the devices of its own transport. Payloads take the iPhone's shape (`payload`);
- * FCM carries the same alert and fields as data (`fcmData`).
+ * FCM, UnifiedPush and the inbox carry the same alert and fields as data (`fcmData`).
  */
 abstract class AppPushNotificationService {
   abstract readonly client: SupabaseServiceClient;
@@ -1355,11 +1384,11 @@ abstract class AppPushNotificationService {
 
   /** The app that metrics count this transport's sends for. */
   get app(): 'ios' | 'android' {
-    return this.transport === 'fcm' ? 'android' : 'ios';
+    return this.transport === 'apns' ? 'ios' : 'android';
   }
 
   private get serviceName(): string {
-    return this.transport === 'fcm' ? 'FCM' : 'APNs';
+    return { apns: 'APNs', fcm: 'FCM', unifiedpush: 'UnifiedPush', inbox: 'Inbox' }[this.transport];
   }
 
   async dispatch(signal?: AbortSignal): Promise<PushSummary> {
@@ -1572,6 +1601,130 @@ export class FcmPushNotificationService extends AppPushNotificationService {
   }
 }
 
+/**
+ * What an app's notice may weigh as UTF-8 JSON: a Web Push message is at most 4096 bytes once encrypted, and
+ * aes128gcm adds 103 to a single record. The inbox keeps the same bound.
+ */
+const APP_DATA_BYTES = 3_993;
+/** The fields that let a device write a delivery's time itself: without them, it shows `body` as it is. */
+const CLOCK_DATA_KEYS = ['scan_at', 'body_same_day', 'body_other_day', 'date_locale', 'body_12_hour'];
+
+/**
+ * A notice's data within `APP_DATA_BYTES`: past it, the device's own clock fields go first, then the body and
+ * the title are shortened as `notificationText` shortens them.
+ */
+export function boundedAppData(data: Record<string, string>, limit = APP_DATA_BYTES): Record<string, string> {
+  const bounded = { ...data };
+  const size = () => Buffer.byteLength(JSON.stringify(bounded));
+  if (size() <= limit) return bounded;
+  for (const key of CLOCK_DATA_KEYS) delete bounded[key];
+  for (const key of ['body', 'title']) {
+    while (size() > limit && [...(bounded[key] ?? '')].length > 1) {
+      const length = [...bounded[key]!].length;
+      bounded[key] = notificationText(bounded[key], Math.max(1, length - Math.max(1, Math.ceil((size() - limit) * 1.1))));
+    }
+  }
+  if (size() > limit) throw new RangeError('The notice does not fit an app\'s push message');
+  return bounded;
+}
+
+/** The Web Push Topic for a collapse key: at most 32 URL-safe base64 characters, so a hash of it. */
+export function webPushTopic(collapse: string): string | undefined {
+  return collapse ? createHash('sha256').update(collapse).digest('base64url').slice(0, 32) : undefined;
+}
+
+export class UnifiedPushError extends Error {
+  readonly reason: string;
+
+  constructor(readonly statusCode: number) {
+    super(`The UnifiedPush endpoint returned HTTP ${statusCode}`);
+    this.name = 'UnifiedPushError';
+    this.reason = statusCode === 413 ? 'payload_too_large' : '';
+  }
+}
+
+/**
+ * The Android app's notifications without Google's services, through UnifiedPush: the same data as FCM's
+ * (`fcmData`), as JSON in a Web Push message (aes128gcm, signed with the server's VAPID key) to the endpoint of
+ * the distributor the phone chose. It is sent at high urgency, kept a day, and replaced by a later one with the
+ * same Topic, a hash of the collapse key APNs and FCM get. The endpoint names any host: each send resolves it
+ * and connects only to public addresses (`postToPublicEndpoint`), and follows no redirect.
+ */
+export class UnifiedPushNotificationService extends AppPushNotificationService {
+  readonly transport = 'unifiedpush';
+
+  constructor(
+    readonly client: SupabaseServiceClient,
+    readonly publicKey: string,
+    readonly privateKey: string,
+    readonly subject: string,
+    readonly now: () => number = () => Date.now() / 1_000,
+    readonly lookup?: AddressLookup,
+  ) {
+    super();
+  }
+
+  async send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void> {
+    const topic = webPushTopic(collapseKey(row, collapseId));
+    const request = webpush.generateRequestDetails(
+      { endpoint: stringField(row, 'endpoint'), keys: { p256dh: stringField(row, 'p256dh'), auth: stringField(row, 'auth') } },
+      JSON.stringify(boundedAppData(fcmData(payload ?? this.eventPayload(row)))),
+      {
+        TTL: 86_400,
+        urgency: 'high',
+        ...topic ? { topic } : {},
+        vapidDetails: { subject: this.subject, publicKey: this.publicKey, privateKey: this.privateKey },
+      },
+    );
+    if (request.body.byteLength > 4_096) throw new UnifiedPushError(413);
+    const status = await postToPublicEndpoint(request.endpoint, {
+      headers: request.headers as Record<string, string | number>,
+      body: request.body,
+      timeoutMs: 15_000,
+      lookup: this.lookup,
+    });
+    if (status < 200 || status >= 300) throw new UnifiedPushError(status);
+  }
+
+  isExpired(error: unknown): boolean {
+    return error instanceof UnifiedPushError && GONE_SUBSCRIPTION.has(error.statusCode);
+  }
+}
+
+/**
+ * The Android app's notifications when it has no push service at all: each is stored as FCM's data for the
+ * app to fetch (`/api/public/push/inbox`), replacing the one waiting for the same thing, and kept a day. A
+ * device's notices go with its sign-out. Nothing tells the server a phone is gone, so none expires.
+ */
+export class InboxPushNotificationService extends AppPushNotificationService {
+  readonly transport = 'inbox';
+
+  constructor(
+    readonly client: SupabaseServiceClient,
+    readonly now: () => number = () => Date.now() / 1_000,
+  ) {
+    super();
+  }
+
+  async send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void> {
+    await this.client.putPushInbox(
+      stringField(row, 'token'),
+      collapseKey(row, collapseId),
+      boundedAppData(fcmData(payload ?? this.eventPayload(row))),
+      stringField(row, 'device_id') || null,
+    );
+  }
+
+  /** The device just registered names itself by its id. */
+  async sendTest(device: JsonObject): Promise<void> {
+    await super.sendTest({ ...device, device_id: device.id });
+  }
+
+  isExpired(): boolean {
+    return false;
+  }
+}
+
 type LiveActivityDeliveryKind = 'start' | 'update' | 'end';
 
 const LIVE_ACTIVITY_PHASES = new Set([
@@ -1770,8 +1923,8 @@ function logDeliveryFailure(channel: 'web' | 'native' | 'live_activity', error: 
     channel,
     ...transport ? { transport } : {},
     status,
-    reason: error instanceof APNsError || error instanceof FCMError || error instanceof FCMAuthError
-      ? error.reason || null : null,
+    reason: error instanceof APNsError || error instanceof FCMError || error instanceof FCMAuthError || error instanceof UnifiedPushError
+      ? error.reason || null : error instanceof NonPublicAddressError ? 'non_public_address' : null,
     error_type: errorType(error),
   }, 'warning');
 }
@@ -1793,6 +1946,8 @@ export class CompositePushNotificationService {
     readonly fcm: FcmPushNotificationService | null = null,
     /** Taken for each dispatch, so that two servers never send the same scans. */
     readonly lease: WorkerLease | null = null,
+    readonly unifiedpush: UnifiedPushNotificationService | null = null,
+    readonly inbox: InboxPushNotificationService | null = null,
   ) {}
 
   /**
@@ -1817,10 +1972,10 @@ export class CompositePushNotificationService {
     const combined: PushSummary & { sentByChannel: Partial<Record<PushChannel, number>> } = { ...emptySummary(), sentByChannel: {} };
     const errors: unknown[] = [];
     // Accounts first: a parcel link's alerts come on top of its owner's notifications. The iPhone's
-    // and Android's sends both count as native.
+    // and Android's sends all count as native.
     const channels = [
       ['live_activity', this.liveActivities], ['web', this.web], ['native', this.native], ['native', this.fcm],
-      ['link_alert', this.linkAlerts],
+      ['native', this.unifiedpush], ['native', this.inbox], ['link_alert', this.linkAlerts],
     ] as const;
     const add = (channel: PushChannel, summary: PushSummary) => {
       combined.attempted += summary.attempted;
@@ -1920,6 +2075,11 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
     const fcm = Object.values(fcmValues).every(Boolean)
       ? new FcmPushNotificationService(client, fcmValues.projectId, fcmValues.clientEmail, fcmValues.privateKey)
       : null;
+    // UnifiedPush signs with the browsers' VAPID key; the inbox needs nothing but the database.
+    const unifiedpush = web
+      ? new UnifiedPushNotificationService(client, webValues.publicKey, webValues.privateKey, webValues.subject)
+      : null;
+    const inbox = new InboxPushNotificationService(client);
     globalPush.__deliveryPushRuntime = {
       signature,
       client,
@@ -1927,9 +2087,11 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
         web,
         native,
         native ? new DeliveryLiveActivityNotificationService(client, native) : null,
-        web || native || fcm ? new ParcelLinkAlertService(web, native, fcm) : null,
+        new ParcelLinkAlertService(web, native, fcm, unifiedpush, inbox),
         fcm,
         new WorkerLease(client, 'push_dispatch'),
+        unifiedpush,
+        inbox,
       ),
     };
   }

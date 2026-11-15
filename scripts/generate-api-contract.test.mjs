@@ -79,6 +79,18 @@ test('names a value holding a character other than - and _ as separate words', (
   assert.match(kotlin, /@SerialName\("parcels:read"\) ParcelsRead\("parcels:read"\)/);
 });
 
+test('writes an object whose values are all strings as a dictionary of strings', (t) => {
+  const { root, run } = generateWith(t, []);
+  assert.equal(run.status, 0, run.stderr);
+  const typeScript = readFileSync(path.join(root, 'src', 'generated', 'apiContract.ts'), 'utf8');
+  const swift = readFileSync(path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPIContract.swift'), 'utf8');
+  const kotlin = readFileSync(path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
+    'core', 'api', 'GeneratedApiContract.kt'), 'utf8');
+  assert.match(typeScript, /"messages": Array<Record<string, string>>;/);
+  assert.match(swift, /var messages: \[\[String: String\]\]/);
+  assert.match(kotlin, /val messages: List<Map<String, String>>,/);
+});
+
 test('stops on two carriers given one Swift and Kotlin name, naming both, and writes nothing', (t) => {
   const { run } = generateWith(t, ['2go', 'two-go']);
   assert.notEqual(run.status, 0);

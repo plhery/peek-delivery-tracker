@@ -24,7 +24,9 @@ analytics.
   postcode, or the last four digits of the recipient's or sender's phone.
 - Web Push subscription endpoints, encryption keys, browser user agent, native
   iPhone APNs device token or Android Firebase Cloud Messaging registration
-  token, optional device name (on Android, the phone's model) and locale, a
+  token, or, in the Android app without Google's services, its random
+  installation token with the UnifiedPush endpoint and encryption keys of the
+  distributor app you chose, optional device name (on Android, the phone's model) and locale, a
   random local installation identifier, ActivityKit push-to-start and
   per-activity update tokens, delivery acknowledgements, and delivery errors
   when you enable the corresponding notification or Live Activity setting.
@@ -147,7 +149,10 @@ carrier for the parcel, delete or forget the parcel, or delete your account.
 Browser push services receive encrypted Web Push messages; Apple processes the
 iPhone app's notification and Live Activity payloads through APNs, and Google
 processes the Android app's notifications through Firebase Cloud Messaging.
-Those payloads can contain a parcel label, carrier, status, location, the time
+Without Google's services, the Android app's notifications go as encrypted Web
+Push messages to the UnifiedPush distributor you chose, or, without one, wait
+on the service in the app's inbox until the app fetches them, for a day at
+most. Those payloads can contain a parcel label, carrier, status, location, the time
 of the latest scan, and expected delivery text, but Peek does not put the
 tracking number in them.
 
@@ -163,8 +168,8 @@ through Google Play.
 
 Outside Switzerland and the European Union, data therefore goes to the United
 States (Cloudflare, Google, Apple, Sentry, Resend and your browser's push
-service) and to the countries of the carriers and tracking services asked
-about a parcel.
+service), to the countries of the carriers and tracking services asked
+about a parcel, and to wherever the UnifiedPush distributor you chose runs.
 
 The service places scan locations on its map itself, with
 [GeoNames](https://www.geonames.org) place data (CC BY 4.0) and sorting-centre
@@ -307,11 +312,12 @@ chose to send along, until the parcel is forgotten on that device.
 Anyone who has a link can turn on notifications for that one parcel, without an
 account, in their browser or in the iPhone or Android app. The service then
 stores that browser's Web Push endpoint and encryption keys, or that phone's
-APNs device token or Firebase Cloud Messaging registration token, with its
+APNs device token, Firebase Cloud Messaging registration token, or installation
+token with its UnifiedPush endpoint and encryption keys, with its
 language, which updates to announce, and whether the device that made the lookup
 turned notifications on. This is deleted when the parcel is delivered or
 returned, when the browser or phone turns notifications off, its push
-subscription ends or Apple or Google says the token is no longer valid, when the link
+subscription ends or Apple, Google or the distributor says the token or endpoint is no longer valid, when the link
 is forgotten, and, for everyone but the device that made the lookup, when
 sharing is stopped. The notifications carry the parcel's status and never its
 number or name; a gift's do not say where it is before it arrives.
@@ -374,6 +380,8 @@ parcel only hides it from the active list and retains its history. The time
 your apps last loaded your parcels is overwritten at each visit and deleted
 with the account. Turning off
 Live Activities or signing out removes that installation's ActivityKit tokens;
+notifications waiting in the Android app's inbox are deleted when the app
+fetches them, and after a day at most;
 disabled browser endpoints, ordinary native device registrations, and delivery
 acknowledgements may remain until account deletion or operational cleanup.
 Infrastructure backups and security logs may persist for the limited retention

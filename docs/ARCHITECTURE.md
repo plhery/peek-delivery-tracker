@@ -85,8 +85,9 @@ Key server modules:
   and towns, from tiles the site serves itself (`public/atlas`, built by
   [`build-detail.mjs`](../src/components/map/build-detail.mjs)). The iPhone app ships the
   same tiles in one file, so no map service is asked on either.
-- `push.ts` sends Web Push, APNs alerts and Live Activity updates to the parcel owner's
-  devices, and Web Push to the alerts of the parcel's links. Each batch of new scans
+- `push.ts` sends Web Push, APNs and FCM alerts, UnifiedPush messages and Live Activity
+  updates to the parcel owner's devices, or leaves them in the Android app's inbox, and the
+  same to the alerts of the parcel's links. Each batch of new scans
   announces its newest one in a stage, and only when it is the parcel's newest scan in a
   stage: history a carrier change backfills, or a scan reported late, is recorded as
   handled without an alert.
@@ -107,6 +108,15 @@ Key server modules:
   One server dispatches at a time, under a lease ([DEPLOYMENT.md](DEPLOYMENT.md)).
   A check that stores news first merges the parcel with another leg of its shipment in
   the same account ([ROUTING.md](ROUTING.md)), so the merged parcel announces a scan once.
+- The Android app without Google's services names itself by an installation token (32
+  random bytes) in place of an FCM token, and gets the same data FCM would carry. With a
+  UnifiedPush distributor it registers the distributor's endpoint and keys, and each notice
+  goes as a Web Push message of that data in JSON (aes128gcm, signed with the VAPID key),
+  kept a day at high urgency and replaced by a later one with the same Topic, a hash of
+  the collapse key. Without one, the notices wait in its inbox, which the app empties
+  about every quarter of an hour (`/api/public/push/inbox`): a later notice about the same
+  thing replaces the waiting one, and none is kept more than a day. A phone that switches
+  between the two keeps its registration and its link alerts.
 - `email/` tells an account by email that a parcel was delivered or is ready for pickup,
   when the account asked for it. The database hands each parcel out once per stage (`claim_delivery_emails`),
   `deliveryEmails.ts` writes the email and sends it through any SMTP service, and
@@ -236,7 +246,8 @@ Key server modules:
     failed send is not repeated, so an endpoint anyone can add costs a bounded number of
     requests. An app's send that failed on the server's side is not counted: its own
     credentials or settings (FCM's service account, APNs's signing key and topic), the push
-    service's outage or limit, or the network.
+    service's outage or limit, or the network. A UnifiedPush send counts as a browser's
+    does, but for a distributor's outage or limit, or a message it found too large.
     The browser is asked for the permission, and subscribes, only on "Turn on". It reuses
     the subscription an account or another parcel already made, so turning one alert off
     leaves the subscription in place. Turning the account's alerts off, signing out or
@@ -245,9 +256,10 @@ Key server modules:
     the push service dropped, the browser takes a new subscription and moves its link alerts
     there. The calendar file is made in the browser.
   - The iPhone app follows a link without an account and holds its alert with its APNs
-    device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`).
-    Browsers and iPhones share the same ten, and an iPhone the parcel's account already
-    notifies is passed over, as the owner's own browser is.
+    device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`),
+    the Android app with its FCM token, or its installation token with a UnifiedPush
+    endpoint and keys or for its inbox. Browsers and phones share the same ten, and a phone
+    the parcel's account already notifies is passed over, as the owner's own browser is.
   - On an iPhone outside the Home Screen, "Notify me" offers the app first once the App
     Store's version follows links (`APP_FOLLOWS_LINKS_FROM` in `appStoreRelease.ts`, checked
     hourly against the App Store). Its "Open" leads through a legacy host, since Safari opens
@@ -380,6 +392,12 @@ Key server modules:
   response reader, and host validation wherever they accept a URL.
 - **Push**: browser endpoints must belong to known push services, and delivery never
   follows redirects. APNs tokens are opaque hex values, sent only to Apple's fixed hosts.
+  A UnifiedPush endpoint may name any host, so it must be HTTPS on a public name or address
+  when registered, and each send resolves the name, refuses it when any address is not a
+  public one, connects only to the addresses it checked, follows no redirect, and gives up
+  after 15 seconds or a few kilobytes of answer
+  ([`publicAddress.ts`](../src/server/publicAddress.ts)). An inbox is read with its
+  installation token, limited per token and per address.
 - **Service worker**: caches only the public app shell and static assets. APIs, health,
   Auth, invitation pages, parcel link pages and the OAuth pages are network-only.
 - **Other sites**: without sign-in a request counts against its sender's address, so a

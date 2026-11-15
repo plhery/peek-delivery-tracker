@@ -1,7 +1,8 @@
 import 'server-only';
 import {
   friendNotificationCopy, WEB_NOTIFICATION_PICTURES,
-  type FcmPushNotificationService, type NativePushNotificationService, type WebPushNotificationService, type PushSummary,
+  type FcmPushNotificationService, type InboxPushNotificationService, type NativePushNotificationService,
+  type UnifiedPushNotificationService, type WebPushNotificationService, type PushSummary,
 } from './push';
 import type { SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -17,25 +18,37 @@ export function friendshipNotification(row: JsonObject): { web: JsonObject; nati
   };
 }
 
-/** A friendship's notice, to a browser, an iPhone through APNs or an Android phone through FCM. */
+/**
+ * A friendship's notice, to a browser, an iPhone through APNs or an Android phone through FCM, UnifiedPush
+ * or the inbox.
+ */
 export class FriendshipPushService {
   constructor(
     readonly client: SupabaseServiceClient,
     readonly web: WebPushNotificationService | null,
     readonly native: NativePushNotificationService | null,
     readonly fcm: FcmPushNotificationService | null = null,
+    readonly unifiedpush: UnifiedPushNotificationService | null = null,
+    readonly inbox: InboxPushNotificationService | null = null,
   ) {}
+  private app(transport: unknown) {
+    if (transport === 'fcm') return this.fcm;
+    if (transport === 'unifiedpush') return this.unifiedpush;
+    return transport === 'inbox' ? this.inbox : this.native;
+  }
   async dispatch(): Promise<PushSummary> {
     const summary: PushSummary = { attempted: 0, sent: 0, failed: 0, expired: 0 };
-    if (!this.web && !this.native && !this.fcm) return summary;
-    const deliveries = await this.client.claimFriendshipPush(!!this.web, !!this.native, !!this.fcm);
+    if (!this.web && !this.native && !this.fcm && !this.unifiedpush && !this.inbox) return summary;
+    const deliveries = await this.client.claimFriendshipPush(
+      !!this.web, !!this.native, !!this.fcm, !!this.unifiedpush, !!this.inbox,
+    );
     // Small leased batches run concurrently; each delivery retains its own acknowledgement.
     await Promise.all(deliveries.map(async (row) => {
       summary.attempted++;
       const payload = friendshipNotification(row);
       let success = false;
       // The claim returns a device only to a server that sends its transport.
-      const app = !row.device_id ? null : row.transport === 'fcm' ? this.fcm : this.native;
+      const app = row.device_id ? this.app(row.transport) : null;
       try {
         if (row.device_id) await app!.send(row, payload.native);
         else await this.web!.send(row, payload.web);

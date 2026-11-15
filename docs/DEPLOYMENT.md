@@ -80,7 +80,9 @@ At runtime, set the server Supabase values and `SUPABASE_SERVICE_ROLE_KEY`. Push
 optional:
 
 - Web Push: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (the canonical origin
-  when unset).
+  when unset). The same key signs the UnifiedPush messages of the Android app without
+  Google's services; without it, UnifiedPush registrations are refused. That app's inbox
+  needs nothing but the database, so every deployment serves it.
 - APNs: `APNS_TEAM_ID`, `APNS_KEY_ID`, `APNS_PRIVATE_KEY` (the whole `.p8`) and
   `APNS_BUNDLE_ID`. The same key sends alerts, Live Activity pushes and the alerts of
   parcel links followed in the app. With it, the server asks the App Store once an hour

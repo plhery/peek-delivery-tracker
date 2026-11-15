@@ -492,6 +492,21 @@ export class SyncJobWorker {
       });
     }
     try {
+      // A notice waits a day in the Android app's inbox; what no phone came for goes here too.
+      const forgotten = await this.service.client.forgetExpiredPushInbox();
+      if (forgotten > 0) logOperationalEvent('push_inbox_forgotten', { notices: forgotten });
+    } catch (maintenanceError) {
+      logOperationalEvent('push_inbox_maintenance_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'push-inbox',
+        operation: 'maintenance',
+        jobId,
+        trigger: kind,
+      });
+    }
+    try {
       // The review's cases and signals go 10 days after no parcel follows their number.
       const forgotten = await this.service.client.forgetUnfollowedTrackingReview();
       if (forgotten.cases > 0 || forgotten.signals > 0) logOperationalEvent('tracking_review_forgotten', forgotten);
@@ -680,16 +695,13 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   const notifier = pushServices(client);
   // The delivery email needs no push channel: it is sent wherever mail is configured.
   const emails = deliveryEmailService(client);
-  const service = new TrackingSyncService(
-    client,
-    undefined,
-    notifier.web || notifier.native || notifier.fcm || notifier.liveActivities ? notifier : null,
-    undefined,
-    emails,
-  );
+  // The Android app's inbox needs nothing but the database, so every deployment has a channel to send to.
+  const service = new TrackingSyncService(client, undefined, notifier, undefined, emails);
   const worker = new SyncJobWorker(service, state);
   const scheduler = new ScheduledSync(client, worker, state);
-  const friendshipWorker = new FriendshipPushWorker(new FriendshipPushService(client, notifier.web, notifier.native, notifier.fcm));
+  const friendshipWorker = new FriendshipPushWorker(new FriendshipPushService(
+    client, notifier.web, notifier.native, notifier.fcm, notifier.unifiedpush, notifier.inbox,
+  ));
   // Once per deployed version, the support backlog is replayed against it.
   const reviews = new ReviewQueueReplay(client);
   const runtime = { client, state, worker, scheduler, friendshipWorker, reviews };
@@ -705,6 +717,7 @@ export function startBackgroundServices(): BackgroundRuntime | null {
     web_push_enabled: Boolean(notifier.web),
     native_push_enabled: Boolean(notifier.native),
     fcm_push_enabled: Boolean(notifier.fcm),
+    unifiedpush_push_enabled: Boolean(notifier.unifiedpush),
     live_activity_push_enabled: Boolean(notifier.liveActivities),
     delivery_email_enabled: Boolean(emails),
   });

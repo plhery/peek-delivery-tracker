@@ -614,7 +614,7 @@ describe('alerts beside the account notifications', () => {
     });
   });
 
-  it('exists exactly when this server sends Web Push or APNs', async () => {
+  it('sends on the channels this server has, the Android app\'s inbox always', async () => {
     const { default: webpush } = await import('web-push');
     const keys = webpush.generateVAPIDKeys();
     vi.stubEnv('VAPID_PUBLIC_KEY', keys.publicKey);
@@ -622,10 +622,14 @@ describe('alerts beside the account notifications', () => {
     const configured = pushServices(client);
     expect(configured.linkAlerts).toBeInstanceOf(ParcelLinkAlertService);
     expect(configured.linkAlerts!.web).toBe(configured.web);
+    // UnifiedPush signs with the same VAPID key as the browsers.
+    expect(configured.linkAlerts!.unifiedpush).toBe(configured.unifiedpush);
+    expect(configured.unifiedpush).not.toBeNull();
     expect(configured.linkAlerts!.native).toBeNull();
     vi.stubEnv('VAPID_PUBLIC_KEY', '');
     vi.stubEnv('VAPID_PRIVATE_KEY', '');
-    expect(pushServices(client).linkAlerts).toBeNull();
+    expect(pushServices(client).linkAlerts).toMatchObject({ web: null, native: null, fcm: null, unifiedpush: null });
+    expect(pushServices(client).linkAlerts!.inbox).toBe(pushServices(client).inbox);
     vi.stubEnv('APNS_TEAM_ID', 'TEAM000000');
     vi.stubEnv('APNS_KEY_ID', 'KEY0000000');
     vi.stubEnv('APNS_PRIVATE_KEY', apnsKey());
@@ -655,7 +659,7 @@ describe('alerts in the iPhone app', () => {
     const queue = pending([row(), appRow({ alert_id: 'alert-2', locale: 'fr' })]);
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     expect(await alerts.dispatch()).toEqual({ attempted: 2, sent: 2, failed: 0, expired: 0 });
-    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, apns: true, fcm: false });
+    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, apns: true, fcm: false, unifiedpush: false, inbox: false });
     expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ alert_id: 'alert-1' }), expect.anything());
     const words = alerts.payload(appRow({ locale: 'fr' }));
     expect(apns).toHaveBeenCalledExactlyOnceWith({ token, environment: 'development' }, {
@@ -717,7 +721,7 @@ describe('alerts in the iPhone app', () => {
     const queue = pending([]);
     await new ParcelLinkAlertService(null, native).dispatch();
     await new ParcelLinkAlertService(web).dispatch();
-    expect(queue.mock.calls).toEqual([[{ web: false, apns: true, fcm: false }], [{ web: true, apns: false, fcm: false }]]);
+    expect(queue.mock.calls).toEqual([[{ web: false, apns: true, fcm: false, unifiedpush: false, inbox: false }], [{ web: true, apns: false, fcm: false, unifiedpush: false, inbox: false }]]);
     expect(() => new ParcelLinkAlertService(null, null)).toThrow(TypeError);
   });
 });
@@ -742,7 +746,7 @@ describe('alerts in the Android app', () => {
     const queue = pending([row(), appRow({ alert_id: 'alert-2', locale: 'fr' })]);
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     expect(await alerts.dispatch()).toEqual({ attempted: 2, sent: 2, failed: 0, expired: 0 });
-    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, apns: false, fcm: true });
+    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, apns: false, fcm: true, unifiedpush: false, inbox: false });
     expect(android).toHaveBeenCalledExactlyOnceWith({ token, environment: 'production' }, alerts.appPayload(appRow({ locale: 'fr' })), `link-${linkId}`);
     expect(JSON.stringify(android.mock.calls)).not.toContain('package-1');
     expect(counted.mock.calls).toEqual([['sent', 'web'], ['sent', 'android']]);
@@ -798,6 +802,6 @@ describe('alerts in the Android app', () => {
     const alone = new ParcelLinkAlertService(null, null, fcm);
     expect(alone.now()).toBe(now);
     expect(await alone.dispatch()).toMatchObject({ sent: 1 });
-    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: false, apns: false, fcm: true });
+    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: false, apns: false, fcm: true, unifiedpush: false, inbox: false });
   });
 });

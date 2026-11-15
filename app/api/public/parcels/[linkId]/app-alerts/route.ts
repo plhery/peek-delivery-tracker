@@ -15,7 +15,7 @@ import {
   PARCEL_UNAVAILABLE,
 } from '../../../../../../src/server/publicParcels';
 import { pushServices } from '../../../../../../src/server/push';
-import { parcelAppAlert, parcelAppAlertToken } from '../../../../../../src/server/validation';
+import { parcelAppAlert, parcelAppAlertToken, type NativePushTransport } from '../../../../../../src/server/validation';
 
 interface LinkParameters extends RouteParameters {
   linkId: string;
@@ -28,34 +28,41 @@ const limits = { limit: 20, window: 60, bucket: 'public-parcel-alerts' };
 
 /**
  * Whether this server sends the notifications of the app the token is for: the iPhone's through
- * APNs, Android's through FCM. A configuration that does not load reads as no.
+ * APNs, Android's through FCM, UnifiedPush (with the server's VAPID key) or the inbox. A
+ * configuration that does not load reads as no.
  */
-function appAlertsAvailable(service: Parameters<typeof pushServices>[0], transport: 'apns' | 'fcm'): boolean {
+function appAlertsAvailable(service: Parameters<typeof pushServices>[0], transport: NativePushTransport): boolean {
   try {
     const push = pushServices(service);
-    return (transport === 'fcm' ? push.fcm : push.native) !== null;
+    return { apns: push.native, fcm: push.fcm, unifiedpush: push.unifiedpush, inbox: push.inbox }[transport] !== null;
   } catch {
     return false;
   }
 }
 
+const UNAVAILABLE: Record<NativePushTransport, string> = {
+  apns: 'APNs is not configured',
+  fcm: 'FCM is not configured',
+  unifiedpush: 'Web Push is not configured',
+  inbox: 'The inbox is not available',
+};
+
 /**
  * Turns on notifications in the iPhone or Android app for this one parcel,
  * until it is delivered, without an account. Anyone holding the link may, as
- * in a browser. The device token is stored and never returned or logged.
+ * in a browser. The device token, and a UnifiedPush endpoint and its keys, are
+ * stored and never returned or logged.
  */
 export const PUT = apiRoute<LinkParameters>(async (context) => {
   const { linkId } = await context.route.params;
   const alert = parcelAppAlert(await readJsonObject(context.request));
   const service = requireService(context);
-  if (!appAlertsAvailable(service, alert.transport)) {
-    throw new HttpError(503, alert.transport === 'fcm' ? 'FCM is not configured' : 'APNs is not configured');
-  }
+  if (!appAlertsAvailable(service, alert.transport)) throw new HttpError(503, UNAVAILABLE[alert.transport]);
   // A malformed id is an unknown link: the answer never says which.
   const outcome = isParcelLinkId(linkId)
     ? await service.addParcelLinkAppAlert(linkId, ownerKeyHash(context.request.headers.get('x-parcel-key')), alert)
     : null;
-  recordParcelAlertSet(outcome ?? 'unavailable', alert.transport === 'fcm' ? 'android' : 'ios');
+  recordParcelAlertSet(outcome ?? 'unavailable', alert.transport === 'apns' ? 'ios' : 'android');
   if (outcome === null) return json({ error: PARCEL_UNAVAILABLE }, 404);
   if (outcome === 'stopped') return json({ error: PARCEL_NOT_SHARED }, 410);
   if (outcome === 'full') return json({ error: 'This parcel has all the alerts it can take' }, 409);

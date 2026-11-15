@@ -55600,7 +55600,7 @@
     "/api/push/devices": {
       "post": {
         "operationId": "upsertNativePushDevice",
-        "description": "Stores a phone's token for the signed-in account's notifications: an iPhone's APNs token, or an Android phone's FCM token with `transport` fcm. Answers 503 when this server does not send through that service.",
+        "description": "Stores a phone's token for the signed-in account's notifications: an iPhone's APNs token, an Android phone's FCM token with `transport` fcm, or the Android app's installation token with `transport` unifiedpush (with the distributor's `endpoint` and `keys`) or inbox. Answers 503 when this server does not send through that service.",
         "requestBody": {
           "required": true,
           "content": {
@@ -56634,7 +56634,7 @@
             "$ref": "#/components/responses/ApiError"
           },
           "503": {
-            "description": "APNs, or FCM for an Android token, is not configured on this server",
+            "description": "APNs, FCM for an Android token, or Web Push for a UnifiedPush endpoint is not configured on this server",
             "content": {
               "application/json": {
                 "schema": {
@@ -56670,6 +56670,48 @@
             "$ref": "#/components/responses/ApiError"
           },
           "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/public/push/inbox": {
+      "post": {
+        "operationId": "takePushInbox",
+        "summary": "Take the alerts waiting for an Android app that polls instead of receiving pushes",
+        "description": "Answers with the alerts stored for the installation token, oldest first, and removes them in the same step, so each is returned once. A token without alerts, or one never registered, answers an empty list.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PushInboxRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The waiting alerts, now removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PushInboxResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "503": {
             "$ref": "#/components/responses/ApiError"
           }
         }
@@ -60640,9 +60682,11 @@
         "type": "string",
         "enum": [
           "apns",
-          "fcm"
+          "fcm",
+          "unifiedpush",
+          "inbox"
         ],
-        "description": "The service that reaches the device: APNs for the iPhone app, Firebase Cloud Messaging for the Android app. A request that does not say is an APNs one."
+        "description": "The service that reaches the device: APNs for the iPhone app, Firebase Cloud Messaging for the Android app, and for the Android app without Google's services either UnifiedPush (Web Push to the endpoint of the distributor the phone chose) or the server's inbox, which the app polls (`/api/public/push/inbox`). A request that does not say is an APNs one."
       },
       "NativePushLocale": {
         "type": "string",
@@ -60674,7 +60718,7 @@
             "minLength": 32,
             "maxLength": 2048,
             "pattern": "^[A-Za-z0-9:_-]+$",
-            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), with `transport` fcm an FCM registration token, which is case-sensitive, or with unifiedpush or inbox the app's installation token: 43 URL-safe base64 characters from 32 random bytes, which the app keeps and sends again when it changes transport."
           },
           "installationId": {
             "type": "string",
@@ -60695,6 +60739,16 @@
           },
           "transport": {
             "$ref": "#/components/schemas/NativePushTransport"
+          },
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "maxLength": 4096,
+            "description": "With `transport` unifiedpush, and refused otherwise: the endpoint the phone's UnifiedPush distributor gave, an HTTPS URL on a public host, which takes Web Push. `keys` are then required too: the Web Push encryption keys the app made for it."
+          },
+          "keys": {
+            "$ref": "#/components/schemas/PushSubscriptionKeys"
           }
         }
       },
@@ -60710,10 +60764,46 @@
             "minLength": 32,
             "maxLength": 2048,
             "pattern": "^[A-Za-z0-9:_-]+$",
-            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), with `transport` fcm an FCM registration token, which is case-sensitive, or with unifiedpush or inbox the app's installation token: 43 URL-safe base64 characters from 32 random bytes, which the app keeps and sends again when it changes transport."
           },
           "transport": {
             "$ref": "#/components/schemas/NativePushTransport"
+          }
+        }
+      },
+      "PushInboxRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 43,
+            "maxLength": 43,
+            "pattern": "^[A-Za-z0-9_-]{43}$",
+            "description": "The installation token the app registered with `transport` inbox, for its account or for a parcel link's alerts."
+          }
+        }
+      },
+      "PushInboxResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "description": "The alerts waiting for the token, oldest first, each removed as it is returned. A newer alert for the same parcel, link or friend has replaced an older one, and none is kept longer than a day.",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "One alert as the FCM data of the same notification: `title` and `body` with the payload's own fields (`parcel_id`, `link_id`, `kind`, `friend_id` and the device clock fields), every value a string."
+            }
           }
         }
       },
@@ -62017,7 +62107,7 @@
             "minLength": 32,
             "maxLength": 2048,
             "pattern": "^[A-Za-z0-9:_-]+$",
-            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), with `transport` fcm an FCM registration token, which is case-sensitive, or with unifiedpush or inbox the app's installation token: 43 URL-safe base64 characters from 32 random bytes, which the app keeps and sends again when it changes transport."
           },
           "environment": {
             "$ref": "#/components/schemas/NativePushEnvironment"
@@ -62030,6 +62120,16 @@
           },
           "transport": {
             "$ref": "#/components/schemas/NativePushTransport"
+          },
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "maxLength": 4096,
+            "description": "With `transport` unifiedpush, and refused otherwise: the endpoint the phone's UnifiedPush distributor gave, an HTTPS URL on a public host, which takes Web Push. `keys` are then required too: the Web Push encryption keys the app made for it."
+          },
+          "keys": {
+            "$ref": "#/components/schemas/PushSubscriptionKeys"
           }
         }
       },
@@ -62045,7 +62145,7 @@
             "minLength": 32,
             "maxLength": 2048,
             "pattern": "^[A-Za-z0-9:_-]+$",
-            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), with `transport` fcm an FCM registration token, which is case-sensitive, or with unifiedpush or inbox the app's installation token: 43 URL-safe base64 characters from 32 random bytes, which the app keeps and sends again when it changes transport."
           },
           "transport": {
             "$ref": "#/components/schemas/NativePushTransport"

@@ -56500,7 +56500,7 @@ export interface ApiPushSubscriptionStatusResponse {
 
 export type ApiNativePushEnvironment = "development" | "production";
 
-export type ApiNativePushTransport = "apns" | "fcm";
+export type ApiNativePushTransport = "apns" | "fcm" | "unifiedpush" | "inbox";
 
 export type ApiNativePushLocale = "en" | "de" | "fr" | "it" | "es" | "pt" | "pt-br" | "pl" | "ru" | "zh";
 
@@ -56512,11 +56512,21 @@ export interface ApiNativePushDeviceRequest {
   "deviceName"?: string;
   "sendTest": boolean;
   "transport"?: ApiNativePushTransport;
+  "endpoint"?: string;
+  "keys"?: ApiPushSubscriptionKeys;
 }
 
 export interface ApiDeleteNativePushDeviceRequest {
   "token": string;
   "transport"?: ApiNativePushTransport;
+}
+
+export interface ApiPushInboxRequest {
+  "token": string;
+}
+
+export interface ApiPushInboxResponse {
+  "messages": Array<Record<string, string>>;
 }
 
 export interface ApiLiveActivityDeviceRequest {
@@ -56822,6 +56832,8 @@ export interface ApiParcelAppAlertRequest {
   "preset": ApiParcelAlertPreset;
   "locale": ApiNativePushLocale;
   "transport"?: ApiNativePushTransport;
+  "endpoint"?: string;
+  "keys"?: ApiPushSubscriptionKeys;
 }
 
 export interface ApiDeleteParcelAppAlertRequest {

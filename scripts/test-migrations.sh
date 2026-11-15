@@ -221,6 +221,9 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/android_push.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/unifiedpush_inbox.sql"
+
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/gift_messages.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \

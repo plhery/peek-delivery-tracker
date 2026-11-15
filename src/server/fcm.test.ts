@@ -309,7 +309,9 @@ describe('FCM on this server', () => {
 
   it('sends Android\'s notifications and link alerts once all three settings are there, and nothing without them', () => {
     const client = new SupabaseServiceClient('https://database.example', 'test');
-    expect(pushServices(client)).toMatchObject({ fcm: null, native: null, web: null, linkAlerts: null });
+    // Without them, only the inbox, which needs nothing but the database.
+    expect(pushServices(client)).toMatchObject({ fcm: null, native: null, web: null, unifiedpush: null });
+    expect(pushServices(client).linkAlerts).toMatchObject({ web: null, native: null, fcm: null, unifiedpush: null });
     vi.stubEnv('FCM_PROJECT_ID', projectId);
     vi.stubEnv('FCM_CLIENT_EMAIL', clientEmail);
     vi.stubEnv('FCM_PRIVATE_KEY', privateKey.trim().replaceAll('\n', '\\n'));

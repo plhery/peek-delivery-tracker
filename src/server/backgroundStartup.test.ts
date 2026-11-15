@@ -43,12 +43,14 @@ it('sends delivery emails on a deployment without push, and says so at startup',
   vi.stubEnv('EMAIL_FROM', 'Peek <hello@example.com>');
   vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.com');
   const { service } = start().worker;
-  expect(service.notifier).toBeNull();
+  // Only the Android app's inbox, which needs nothing but the database.
+  expect(service.notifier).toMatchObject({ web: null, native: null, fcm: null, unifiedpush: null, liveActivities: null });
+  expect(service.notifier!.inbox).not.toBeNull();
   expect(service.emails).toBeInstanceOf(DeliveryEmailService);
   expect(service.emails!.settings).toMatchObject({ host: 'smtp.example.com', origin: 'https://peek.example.com' });
   expect(logged).toHaveBeenCalledExactlyOnceWith('background_services_started', {
     sync_enabled: true, web_push_enabled: false, native_push_enabled: false, fcm_push_enabled: false,
-    live_activity_push_enabled: false, delivery_email_enabled: true,
+    unifiedpush_push_enabled: false, live_activity_push_enabled: false, delivery_email_enabled: true,
   });
 });
 

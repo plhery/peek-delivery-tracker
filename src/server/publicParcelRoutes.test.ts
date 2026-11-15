@@ -1405,3 +1405,90 @@ describe('alerts for a parcel link in the Android app', () => {
     expect((await request(appAlertOff, 'DELETE', { token })).status).toBe(400);
   });
 });
+
+describe('alerts for a parcel link in the Android app without Google\'s services', () => {
+  // A synthetic installation token, endpoint and keys: no UnifiedPush distributor issued them.
+  const token = `${'Up_-'.repeat(10)}abc`;
+  const endpoint = 'https://push.example.com/up/synthetic-endpoint';
+  const ecdh = createECDH('prime256v1');
+  ecdh.generateKeys();
+  const keys = { p256dh: ecdh.getPublicKey().toString('base64url'), auth: randomBytes(16).toString('base64url') };
+  const body = (changes: JsonObject = {}) => ({ token, transport: 'unifiedpush', endpoint, keys, preset: 'important', locale: 'de', ...changes });
+  const inboxBody = (changes: JsonObject = {}) => ({ token, transport: 'inbox', preset: 'important', locale: 'de', ...changes });
+  const request = (handler: typeof appAlertOn, method: string, payload: unknown, id = linkId) =>
+    handler(new NextRequest(`https://delivery.example/api/public/parcels/${id}/app-alerts`, {
+      method,
+      headers: { 'content-type': 'application/json', 'x-real-ip': nextIp() },
+      body: JSON.stringify(payload),
+    }), route(id));
+  const store = () => vi.spyOn(SupabaseServiceClient.prototype, 'addParcelLinkAppAlert').mockResolvedValue('added');
+
+  beforeEach(() => {
+    for (const name of ['VAPID_PUBLIC_KEY', 'VAPID_PRIVATE_KEY', 'APNS_TEAM_ID', 'APNS_KEY_ID', 'APNS_PRIVATE_KEY', 'APNS_BUNDLE_ID',
+      'FCM_PROJECT_ID', 'FCM_CLIENT_EMAIL', 'FCM_PRIVATE_KEY']) vi.stubEnv(name, '');
+    const vapid = webpush.generateVAPIDKeys();
+    vi.stubEnv('VAPID_PUBLIC_KEY', vapid.publicKey);
+    vi.stubEnv('VAPID_PRIVATE_KEY', vapid.privateKey);
+  });
+
+  it('stores the installation token with the endpoint and keys, for the one environment', async () => {
+    const stored = store();
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSet');
+    expect((await request(appAlertOn, 'PUT', body({ environment: 'development' }))).status).toBe(204);
+    expect(stored).toHaveBeenCalledExactlyOnceWith(linkId, null, {
+      token, environment: 'production', locale: 'de', preset: 'important', transport: 'unifiedpush',
+      webPush: { endpoint, p256dh: keys.p256dh, auth: keys.auth },
+    });
+    expect(counted).toHaveBeenCalledExactlyOnceWith('added', 'android');
+  });
+
+  it('stores an inbox alert on a server with no push settings at all', async () => {
+    vi.stubEnv('VAPID_PUBLIC_KEY', '');
+    vi.stubEnv('VAPID_PRIVATE_KEY', '');
+    const stored = store();
+    expect((await request(appAlertOn, 'PUT', inboxBody())).status).toBe(204);
+    expect(stored).toHaveBeenCalledExactlyOnceWith(linkId, null, {
+      token, environment: 'production', locale: 'de', preset: 'important', transport: 'inbox',
+    });
+  });
+
+  it('says so when this server has no VAPID key for UnifiedPush', async () => {
+    vi.stubEnv('VAPID_PUBLIC_KEY', '');
+    vi.stubEnv('VAPID_PRIVATE_KEY', '');
+    const stored = store();
+    const response = await request(appAlertOn, 'PUT', body());
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({ error: 'Web Push is not configured' });
+    expect(stored).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['an endpoint in a private network', body({ endpoint: 'https://10.0.0.8/up' })],
+    ['an endpoint on localhost', body({ endpoint: 'https://localhost:8443/up' })],
+    ['an endpoint over plain HTTP', body({ endpoint: 'http://push.example.com/up' })],
+    ['no keys', body({ keys: null })],
+    ['an endpoint with the inbox', inboxBody({ endpoint })],
+    ['keys with the inbox', inboxBody({ keys })],
+    ['a token too short', inboxBody({ token: token.slice(1) })],
+  ])('rejects %s without storing anything', async (_name, payload) => {
+    const stored = store();
+    expect((await request(appAlertOn, 'PUT', payload)).status).toBe(400);
+    expect(stored).not.toHaveBeenCalled();
+  });
+
+  it.each(['unifiedpush', 'inbox'])('turns the alert off by its token and %s alone', async (transport) => {
+    const removed = vi.spyOn(SupabaseServiceClient.prototype, 'removeParcelLinkAppAlert').mockResolvedValue(true);
+    expect((await request(appAlertOff, 'DELETE', { token, transport })).status).toBe(204);
+    expect(removed).toHaveBeenCalledExactlyOnceWith(linkId, token);
+  });
+
+  it('never returns or logs the token, the endpoint or the keys', async () => {
+    store();
+    const answers = [await request(appAlertOn, 'PUT', body()), await request(appAlertOn, 'PUT', body({ endpoint: 'https://10.0.0.8/synthetic-endpoint' }))];
+    const lines = [...vi.mocked(console.log).mock.calls, ...vi.mocked(console.error).mock.calls].map(([line]) => String(line));
+    expect(lines.length).toBeGreaterThan(0);
+    for (const text of [...lines, ...await Promise.all(answers.map((response) => response.text()))]) {
+      for (const secret of [token, 'synthetic-endpoint', keys.p256dh, keys.auth]) expect(text).not.toContain(secret);
+    }
+  });
+});

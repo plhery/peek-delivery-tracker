@@ -264,6 +264,11 @@ const swiftEnumCaseNames = {
   'CarrierId.spring-gds': 'springGDS',
 };
 
+/** An `additionalProperties` that is a schema: an object whose keys are free and whose values all take it. */
+function isSchema(value) {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 function refName(ref) {
   const prefix = '#/components/schemas/';
   if (!ref.startsWith(prefix)) throw new Error(`Unsupported schema reference: ${ref}`);
@@ -295,6 +300,9 @@ function typeScriptType(schema) {
       return `Array<${typeScriptType(schema.items ?? {})}>`;
     case 'object': {
       const entries = Object.entries(schema.properties ?? {});
+      if (entries.length === 0 && isSchema(schema.additionalProperties)) {
+        return `Record<string, ${typeScriptType(schema.additionalProperties)}>`;
+      }
       if (entries.length === 0) return 'Record<string, unknown>';
       const required = new Set(schema.required ?? []);
       const fields = entries.map(
@@ -482,6 +490,9 @@ function swiftBaseType(schema, parentSchemaName, propertyName) {
       return `[${swiftBaseType(value.items ?? {}, parentSchemaName, `${propertyName}Item`)}]`;
     case 'object':
       if (value.properties) return registerSwiftInlineSchema(parentSchemaName, propertyName, value);
+      if (isSchema(value.additionalProperties)) {
+        return `[String: ${swiftBaseType(value.additionalProperties, parentSchemaName, `${propertyName}Value`)}]`;
+      }
       throw new Error(`Object dictionaries are not supported by the Swift generator: ${parentSchemaName}.${propertyName}`);
     default:
       throw new Error(`Unsupported Swift schema at ${parentSchemaName}.${propertyName}: ${JSON.stringify(value)}`);
@@ -708,6 +719,9 @@ function kotlinBaseType(schema, parentSchemaName, propertyName) {
       return `List<${kotlinBaseType(value.items ?? {}, parentSchemaName, `${propertyName}Item`)}>`;
     case 'object':
       if (value.properties) return registerKotlinInlineSchema(parentSchemaName, propertyName, value);
+      if (isSchema(value.additionalProperties)) {
+        return `Map<String, ${kotlinBaseType(value.additionalProperties, parentSchemaName, `${propertyName}Value`)}>`;
+      }
       throw new Error(`Object dictionaries are not supported by the Kotlin generator: ${parentSchemaName}.${propertyName}`);
     default:
       throw new Error(`Unsupported Kotlin schema at ${parentSchemaName}.${propertyName}: ${JSON.stringify(value)}`);

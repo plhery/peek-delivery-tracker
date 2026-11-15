@@ -15,6 +15,8 @@ import { createECDH } from 'node:crypto';
 import { HttpError, parseUuid } from './api';
 import { normalizeCarrierInputs } from './carriers';
 import { normalizedLookupCountry } from './lookupCountry';
+import { isPublicHost, urlHost } from './publicAddress';
+import type { WebPushKeys } from './supabase';
 import { isRecord, type JsonObject } from './types';
 
 const VALID_CARRIERS = new Set<string>(CARRIER_IDS);
@@ -240,6 +242,12 @@ export function parcelAlert(payload: JsonObject): ParcelAlertValues {
   const { endpoint, p256dh, auth } = pushSubscription({
     endpoint: payload.subscription.endpoint, keys: payload.subscription.keys,
   });
+  onCurve(p256dh);
+  return { endpoint, p256dh, auth, locale: nativePushLocale(payload.locale), preset: alertPreset(payload.preset) };
+}
+
+/** Refuses a key that is no point of the P-256 curve, which no message could be encrypted to. */
+function onCurve(p256dh: string): void {
   try {
     const exchange = createECDH('prime256v1');
     exchange.generateKeys();
@@ -247,7 +255,54 @@ export function parcelAlert(payload: JsonObject): ParcelAlertValues {
   } catch (error) {
     throw new HttpError(400, 'Send valid push encryption keys', undefined, { cause: error });
   }
-  return { endpoint, p256dh, auth, locale: nativePushLocale(payload.locale), preset: alertPreset(payload.preset) };
+}
+
+/**
+ * A UnifiedPush endpoint: an HTTPS URL on a public host, without credentials or fragment, as the URL parser
+ * writes it. An address in another form (`0x7f.1`, `[::ffff:127.0.0.1]`) is read as the address it is, and a
+ * host of a private network (`localhost`, `.local`, `.internal`…) is refused. Each send resolves the name again
+ * and connects only to public addresses (`postToPublicEndpoint`).
+ */
+export function unifiedPushEndpoint(value: unknown): string {
+  if (typeof value !== 'string' || value.length < 1 || value.length > 4_096) {
+    throw new HttpError(400, 'Send a valid UnifiedPush endpoint');
+  }
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch (error) {
+    throw new HttpError(400, 'Send a valid UnifiedPush endpoint', undefined, { cause: error });
+  }
+  if (url.protocol !== 'https:' || url.username || url.password || url.hash || url.href.length > 4_096) {
+    throw new HttpError(400, 'Send a valid UnifiedPush endpoint');
+  }
+  if (!isPublicHost(urlHost(url))) throw new HttpError(400, 'Send a UnifiedPush endpoint on a public host');
+  return url.href;
+}
+
+/**
+ * The UnifiedPush endpoint and keys a request brings: both with `transport` unifiedpush, neither with any
+ * other. The keys are checked as a browser's are, and kept in unpadded base64url.
+ */
+function webPushTarget(payload: JsonObject, transport: NativePushTransport): WebPushKeys | null {
+  if (transport !== 'unifiedpush') {
+    if (payload.endpoint != null || payload.keys != null) {
+      throw new HttpError(400, 'Send an endpoint and keys only with the unifiedpush transport');
+    }
+    return null;
+  }
+  const endpoint = unifiedPushEndpoint(payload.endpoint);
+  if (!isRecord(payload.keys) || typeof payload.keys.p256dh !== 'string' || typeof payload.keys.auth !== 'string') {
+    throw new HttpError(400, 'Send valid push encryption keys');
+  }
+  const publicKey = decodeBase64Url(payload.keys.p256dh);
+  const authSecret = decodeBase64Url(payload.keys.auth);
+  if (publicKey.length !== 65 || publicKey[0] !== 4 || authSecret.length !== 16) {
+    throw new HttpError(400, 'Send valid push encryption keys');
+  }
+  const p256dh = publicKey.toString('base64url');
+  onCurve(p256dh);
+  return { endpoint, p256dh, auth: authSecret.toString('base64url') };
 }
 
 function alertPreset(preset: unknown): ApiParcelAlertPreset {
@@ -263,17 +318,22 @@ export interface ParcelAppAlertValues {
   locale: NativePushLocale;
   preset: ApiParcelAlertPreset;
   transport: NativePushTransport;
+  /** A UnifiedPush alert's endpoint and keys. */
+  webPush?: WebPushKeys;
 }
 
 /** An alert for a parcel link in the iPhone or Android app: its device token, checked as an account's is. */
 export function parcelAppAlert(payload: JsonObject): ParcelAppAlertValues {
   const transport = nativePushTransport(payload.transport);
+  const token = appToken(payload.token, transport);
+  const webPush = webPushTarget(payload, transport);
   return {
-    token: appToken(payload.token, transport),
-    environment: transport === 'fcm' ? 'production' : nativePushEnvironment(payload.environment),
+    token,
+    environment: transport === 'apns' ? nativePushEnvironment(payload.environment) : 'production',
     locale: nativePushLocale(payload.locale),
     preset: alertPreset(payload.preset),
     transport,
+    ...webPush ? { webPush } : {},
   };
 }
 
@@ -325,6 +385,8 @@ export function pushSubscriptionLocale(payload: JsonObject): { endpoint: string;
 export interface NativePushDeviceValues {
   token: string;
   transport: NativePushTransport;
+  /** A UnifiedPush device's endpoint and keys. */
+  webPush: WebPushKeys | null;
   installationId: string | null;
   environment: 'development' | 'production';
   locale: Locale;
@@ -334,14 +396,28 @@ export interface NativePushDeviceValues {
 
 type NativePushEnvironment = NativePushDeviceValues['environment'];
 type NativePushLocale = NativePushDeviceValues['locale'];
-/** APNs for the iPhone app, Firebase Cloud Messaging for the Android app. */
-export type NativePushTransport = 'apns' | 'fcm';
+/**
+ * APNs for the iPhone app, Firebase Cloud Messaging for the Android app, and for the Android app without Google's
+ * services UnifiedPush or the inbox it polls.
+ */
+export type NativePushTransport = 'apns' | 'fcm' | 'unifiedpush' | 'inbox';
 
 /** The service a device token is for; a request that does not say is the iPhone app's. */
 export function nativePushTransport(value: unknown): NativePushTransport {
   if (value === undefined || value === null || value === 'apns') return 'apns';
-  if (value === 'fcm') return 'fcm';
-  throw new HttpError(400, 'Choose apns or fcm as the transport');
+  if (value === 'fcm' || value === 'unifiedpush' || value === 'inbox') return value;
+  throw new HttpError(400, 'Choose apns, fcm, unifiedpush or inbox as the transport');
+}
+
+/**
+ * The Android app's installation token, which names it for UnifiedPush and the inbox: 32 random bytes in
+ * unpadded base64url. Like an FCM token it is case-sensitive.
+ */
+export function installationToken(value: unknown): string {
+  if (typeof value !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(value)) {
+    throw new HttpError(400, 'Send a valid installation token');
+  }
+  return value;
 }
 
 /**
@@ -358,6 +434,7 @@ function fcmToken(value: unknown): string {
 }
 
 function appToken(value: unknown, transport: NativePushTransport): string {
+  if (transport === 'unifiedpush' || transport === 'inbox') return installationToken(value);
   return transport === 'fcm' ? fcmToken(value) : apnsToken(value);
 }
 
@@ -410,6 +487,7 @@ export function nativePushDevice(
     return {
       token,
       transport,
+      webPush: null,
       installationId: null,
       environment: 'production',
       locale: 'en',
@@ -417,8 +495,9 @@ export function nativePushDevice(
       sendTest: false,
     };
   }
-  // FCM has no development service: whatever an Android phone sends, its device is a production one.
-  const environment = transport === 'fcm' ? 'production' : nativePushEnvironment(payload.environment);
+  const webPush = webPushTarget(payload, transport);
+  // Only APNs has a development service: whatever an Android phone sends, its device is a production one.
+  const environment = transport === 'apns' ? nativePushEnvironment(payload.environment) : 'production';
   const locale = nativePushLocale(payload.locale);
   const parsedInstallationId = payload.installationId == null
     ? null
@@ -434,6 +513,7 @@ export function nativePushDevice(
   return {
     token,
     transport,
+    webPush,
     installationId: parsedInstallationId,
     environment,
     locale,

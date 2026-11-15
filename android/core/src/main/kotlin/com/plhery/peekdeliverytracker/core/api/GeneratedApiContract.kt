@@ -3423,6 +3423,8 @@ data class NotificationPreferences(
     val emailOnDelivery: Boolean? = null,
     val emailAvailable: Boolean? = null,
     val markNewUpdates: Boolean? = null,
+    val clock: NotificationPreferencesClock? = null,
+    val distance: NotificationPreferencesDistance? = null,
 )
 
 @Serializable
@@ -4237,6 +4239,28 @@ enum class ErrorResponseCode(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): ErrorResponseCode? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class NotificationPreferencesClock(val rawValue: String) {
+    @SerialName("24") TwentyFour("24"),
+    @SerialName("12") Twelve("12"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): NotificationPreferencesClock? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class NotificationPreferencesDistance(val rawValue: String) {
+    @SerialName("km") Km("km"),
+    @SerialName("mi") Mi("mi"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): NotificationPreferencesDistance? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

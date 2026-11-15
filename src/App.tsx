@@ -58,7 +58,7 @@ import {
   type SharedParcel,
 } from './lib/shareTarget';
 import { currentStage, isDelivered } from './lib/stages';
-import { loadNotificationPreferences } from './store/notificationPreferences';
+import { loadNotificationPreferences, saveShownUnits, useNotificationPreferences } from './store/notificationPreferences';
 import { useParcels } from './store/ParcelsContext';
 import { onKeepOutcome, type KeepOutcome } from './peek/pending';
 import type { CarrierId, ParcelWithEvents } from './types';
@@ -121,7 +121,7 @@ export default function App({
   /** Shows the landing: at its own address for an account, at `/` for the demo of a visitor. */
   onOpenLanding?: () => void;
 } = {}) {
-  const { t } = useI18n();
+  const { t, use24HourTime, distanceUnit } = useI18n();
   const {
     parcels,
     loading,
@@ -209,6 +209,13 @@ export default function App({
   useEffect(() => {
     if (mode === 'api' && apiAuth) void loadNotificationPreferences(apiAuth, { once: true }).catch(() => undefined);
   }, [mode, apiAuth]);
+
+  // The delivery email writes a time and a distance as the app does: the app last opened tells the account how.
+  const preferences = useNotificationPreferences(mode === 'api' ? apiAuth : undefined);
+  useEffect(() => {
+    if (mode !== 'api' || !apiAuth || !preferences) return;
+    void saveShownUnits({ clock: use24HourTime ? '24' : '12', distance: distanceUnit }, apiAuth).catch(() => undefined);
+  }, [mode, apiAuth, preferences, use24HourTime, distanceUnit]);
 
   // A share opens the add sheet: filled in with what came, or saying why nothing did.
   useEffect(() => {

@@ -3471,6 +3471,8 @@ struct NotificationPreferences: Codable, Equatable, Hashable, Sendable {
     var emailOnDelivery: Bool? = nil
     var emailAvailable: Bool? = nil
     var markNewUpdates: Bool? = nil
+    var clock: NotificationPreferencesClock? = nil
+    var distance: NotificationPreferencesDistance? = nil
 }
 
 struct DeliveryEmailSwitchRequest: Codable, Equatable, Hashable, Sendable {
@@ -4304,6 +4306,20 @@ enum ErrorResponseScope: String, Codable, CaseIterable, Hashable, Sendable, Iden
 
 enum ErrorResponseCode: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case recentSignIn = "recent_sign_in"
+
+    var id: String { rawValue }
+}
+
+enum NotificationPreferencesClock: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case twentyFour = "24"
+    case twelve = "12"
+
+    var id: String { rawValue }
+}
+
+enum NotificationPreferencesDistance: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case km
+    case mi
 
     var id: String { rawValue }
 }

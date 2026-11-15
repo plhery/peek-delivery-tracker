@@ -138,6 +138,8 @@ export class DeliveryEmailService {
         locale,
         stage: claim.stage,
         timezone: claim.timezone,
+        clock: claim.clock,
+        distance: claim.distance,
         // What a notification opens.
         journeyUrl: `${this.settings.origin}/?parcel=${encodeURIComponent(claim.packageId)}`,
         offUrl: links.page,

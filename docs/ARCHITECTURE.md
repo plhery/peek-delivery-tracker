@@ -628,8 +628,7 @@ and nothing typed is sent.
   clock as it arrives: the browser's push worker, the iPhone and Mac app's notification
   service extension and the Android app do, on the 12- or 24-hour clock chosen in Settings
   or else on the device's own. An estimate's sentence comes written for both clocks (`body_12_hour`
-  beside `body`) and the device shows the one for its clock, so the server never learns the
-  choice. A Live Activity's alert, and a device without
+  beside `body`) and the device shows the one for its clock. A Live Activity's alert, and a device without
   that code, show the server's sentence, in the timezone the account saved with its
   notification settings, or else on the scan's own clock when the carrier gave its UTC
   offset, or else in Zurich's. A link's alert never has a saved timezone.
@@ -704,7 +703,10 @@ token and with the alerts of the parcels it follows without an account, the web 
 account's subscription and for the link alerts whenever the language differs from the one
 it last sent, which it notes on the device.
 The Share extension reads it from the app group. The delivery email is written in the
-language the account's apps last stored with its sign-in.
+language the account's apps last stored with its sign-in, and writes a time and a distance
+as the app last opened does, on its 12- or 24-hour clock and in kilometres or miles. The web
+app saves those with the account's notification preferences whenever the account has others;
+until an app has, the email's language decides.
 
 ## Contracts
 

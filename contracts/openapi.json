@@ -60415,6 +60415,22 @@
           "markNewUpdates": {
             "type": "boolean",
             "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Mark new updates\", on until switched off). A request that leaves it out keeps the stored choice."
+          },
+          "clock": {
+            "type": "string",
+            "enum": [
+              "24",
+              "12"
+            ],
+            "description": "How the account's emails write a time: on the 24-hour or the 12-hour clock, as its app shows times. An app sends what it shows when the account's differs, after reading them and when the reader changes it. Left out of a response until an app has sent it: the email's language decides. A request that leaves it out keeps the stored one."
+          },
+          "distance": {
+            "type": "string",
+            "enum": [
+              "km",
+              "mi"
+            ],
+            "description": "How the account's emails write a distance: in kilometres or miles, as its app shows distances. Sent and kept as clock is."
           }
         }
       },

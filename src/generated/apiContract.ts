@@ -56437,6 +56437,8 @@ export interface ApiNotificationPreferences {
   "emailOnDelivery"?: boolean | null;
   "emailAvailable"?: boolean;
   "markNewUpdates"?: boolean;
+  "clock"?: "24" | "12";
+  "distance"?: "km" | "mi";
 }
 
 export interface ApiDeliveryEmailSwitchRequest {

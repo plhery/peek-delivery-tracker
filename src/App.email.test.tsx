@@ -2,7 +2,8 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
-import { getNotificationPreferences, inspectPushState } from './lib/pushNotifications';
+import { I18nProvider } from './i18n';
+import { getNotificationPreferences, inspectPushState, saveNotificationPreferences } from './lib/pushNotifications';
 import { createDemoRepo } from './store/demoRepo';
 import { ParcelsProvider } from './store/ParcelsContext';
 import type { ParcelRepo, ParcelWithEvents } from './types';
@@ -11,6 +12,7 @@ vi.mock('./lib/pushNotifications', async (original) => ({
   ...await original<typeof import('./lib/pushNotifications')>(),
   inspectPushState: vi.fn(),
   getNotificationPreferences: vi.fn(),
+  saveNotificationPreferences: vi.fn(),
 }));
 
 const EMAIL_ON = {
@@ -37,6 +39,10 @@ beforeEach(() => {
   window.history.replaceState({}, '', '/');
   vi.mocked(inspectPushState).mockReset().mockResolvedValue({ kind: 'unsupported' });
   vi.mocked(getNotificationPreferences).mockReset().mockResolvedValue({ ...EMAIL_ON, enabledStages: [...EMAIL_ON.enabledStages] });
+  // The server answers with what it kept: the request, over what was stored.
+  vi.mocked(saveNotificationPreferences).mockReset().mockImplementation(async (preferences) => ({
+    ...await vi.mocked(getNotificationPreferences).mock.results.at(-1)?.value, ...preferences,
+  }));
 });
 
 describe('the delivery email in the deliveries', () => {
@@ -76,6 +82,30 @@ describe('the delivery email in the deliveries', () => {
     expect(await within(detail).findByRole('region', { name: 'An email when the next one arrives?' })).toBeVisible();
     // A delivered parcel has nothing left to announce: its bell is the plain mute.
     expect(within(detail).getByRole('button', { name: 'Turn off parcel notifications' })).toBeVisible();
+  });
+
+  it('tells the account how the app writes a time and a distance, for the email to write them the same way', async () => {
+    localStorage.setItem('deliveryTrackerClock', '12');
+    localStorage.setItem('deliveryTrackerDistanceUnit', 'mi');
+    const apiAuth = session();
+    render(<I18nProvider initialLocale="en"><ParcelsProvider repo={accountRepo().repo}><App apiAuth={apiAuth} accountEmail="alex@example.com" /></ParcelsProvider></I18nProvider>);
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledOnce());
+    // The events go as the account has them, and its email choice stays as it is.
+    expect(saveNotificationPreferences).toHaveBeenCalledWith({
+      enabledStages: EMAIL_ON.enabledStages, quietHoursStart: null, quietHoursEnd: null, timezone: expect.any(String), clock: '12', distance: 'mi',
+    }, apiAuth);
+    expect(await screen.findByText('Belgian chocolate 🍫')).toBeVisible();
+    expect(saveNotificationPreferences).toHaveBeenCalledOnce();
+  });
+
+  it('asks nothing of an account that already writes them as the app does', async () => {
+    localStorage.setItem('deliveryTrackerClock', '24');
+    localStorage.setItem('deliveryTrackerDistanceUnit', 'km');
+    vi.mocked(getNotificationPreferences).mockResolvedValue({ ...EMAIL_ON, enabledStages: [...EMAIL_ON.enabledStages], clock: '24', distance: 'km' });
+    render(<I18nProvider initialLocale="en"><ParcelsProvider repo={accountRepo().repo}><App apiAuth={session()} accountEmail="alex@example.com" /></ParcelsProvider></I18nProvider>);
+    expect(await screen.findByText('Belgian chocolate 🍫')).toBeVisible();
+    await waitFor(() => expect(getNotificationPreferences).toHaveBeenCalledOnce());
+    expect(saveNotificationPreferences).not.toHaveBeenCalled();
   });
 
   it('leaves the demo as it is: no preferences are read, the bell mutes, nothing is offered', async () => {

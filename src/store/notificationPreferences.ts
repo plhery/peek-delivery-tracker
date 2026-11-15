@@ -19,6 +19,8 @@ interface Session {
   reading: Promise<NotificationPreferences> | null;
   /** Counts the answers taken: a read that began before a save must not undo it. */
   revision: number;
+  /** The clock and units last sent, so a server that does not keep them is not asked again and again. */
+  unitsSent: string | null;
   listeners: Set<() => void>;
 }
 
@@ -29,7 +31,7 @@ function sessionOf(auth: ApiAuth): Session {
   const key = auth.signal ?? auth;
   let session = sessions.get(key);
   if (!session) {
-    session = { preferences: null, reading: null, revision: 0, listeners: new Set() };
+    session = { preferences: null, reading: null, revision: 0, unitsSent: null, listeners: new Set() };
     sessions.set(key, session);
   }
   return session;
@@ -113,6 +115,35 @@ export async function saveMarkNewUpdates(enabled: boolean, auth: ApiAuth): Promi
     timezone: timeZone(saved),
     markNewUpdates: enabled,
   }, auth);
+}
+
+/** How the app writes a time and a distance here. */
+export interface ShownUnits {
+  clock: '24' | '12';
+  distance: 'km' | 'mi';
+}
+
+/**
+ * Saves how the app here writes a time and a distance where the account has them otherwise, so
+ * the delivery email writes them as the app last opened does. Nothing else changes: the events
+ * and the other choices go as they were last saved. Says whether it asked the server, which it
+ * does once per sign-in for the same clock and units.
+ */
+export async function saveShownUnits(shown: ShownUnits, auth: ApiAuth): Promise<boolean> {
+  const session = sessionOf(auth);
+  const saved = session.preferences ?? await loadNotificationPreferences(auth, { once: true });
+  const sent = `${shown.clock} ${shown.distance}`;
+  if ((saved.clock === shown.clock && saved.distance === shown.distance) || session.unitsSent === sent) return false;
+  session.unitsSent = sent;
+  await save({
+    enabledStages: saved.enabledStages,
+    quietHoursStart: saved.quietHoursStart,
+    quietHoursEnd: saved.quietHoursEnd,
+    timezone: timeZone(saved),
+    clock: shown.clock,
+    distance: shown.distance,
+  }, auth);
+  return true;
 }
 
 /**

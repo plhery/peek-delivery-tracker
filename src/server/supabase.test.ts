@@ -962,18 +962,18 @@ describe('delivery emails', () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValue({
       send: [
-        { id: 'claim-1', package_id: parcel, user_id: owner, event_id: 'scan-1', stage: 'ready_for_pickup', timezone: 'Europe/Paris', delivered_time: 'date' },
-        { id: 'claim-2', package_id: 'parcel-2', user_id: owner, event_id: 'scan-2', timezone: null, delivered_time: 'sometime' },
+        { id: 'claim-1', package_id: parcel, user_id: owner, event_id: 'scan-1', stage: 'ready_for_pickup', timezone: 'Europe/Paris', clock: '12', distance: 'mi', delivered_time: 'date' },
+        { id: 'claim-2', package_id: 'parcel-2', user_id: owner, event_id: 'scan-2', timezone: null, clock: null, distance: 'yd', delivered_time: 'sometime' },
       ],
       account_cap: 2,
       service_cap: 1,
     });
     await expect(client.claimDeliveryEmails(20, 5, 80)).resolves.toEqual({
       send: [
-        { id: 'claim-1', packageId: parcel, userId: owner, eventId: 'scan-1', stage: 'ready_for_pickup', timezone: 'Europe/Paris', deliveredTime: 'date' },
+        { id: 'claim-1', packageId: parcel, userId: owner, eventId: 'scan-1', stage: 'ready_for_pickup', timezone: 'Europe/Paris', clock: '12', distance: 'mi', deliveredTime: 'date' },
         // A claim without a stage is a delivery, as before pickups were emailed. Without a time zone or a known kind of
-        // time, the email says less rather than something wrong.
-        { id: 'claim-2', packageId: 'parcel-2', userId: owner, eventId: 'scan-2', stage: 'delivered', timezone: 'Europe/Zurich', deliveredTime: 'none' },
+        // time, the email says less rather than something wrong; without a clock or units it writes its language's.
+        { id: 'claim-2', packageId: 'parcel-2', userId: owner, eventId: 'scan-2', stage: 'delivered', timezone: 'Europe/Zurich', clock: null, distance: null, deliveredTime: 'none' },
       ],
       accountCap: 2,
       serviceCap: 1,
@@ -1057,9 +1057,12 @@ describe('delivery emails', () => {
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', null);
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', true);
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', false);
+    await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', null, null, '12', 'mi');
     expect(request.mock.calls.map(([, options]) => options!.body)).toEqual([
       // The four arguments every server before this one sent: the stored choice stays.
       base, base, { ...base, p_email_on_delivery: true }, { ...base, p_email_on_delivery: false },
+      // The clock and units only when an app sends them.
+      { ...base, p_clock: '12', p_distance: 'mi' },
     ]);
   });
 
@@ -1069,7 +1072,7 @@ describe('delivery emails', () => {
     await expect(client.getNotificationPreferences()).resolves.toMatchObject({ email_on_delivery: false });
     await expect(client.getNotificationPreferences()).resolves.toMatchObject({ email_on_delivery: null, timezone: 'Europe/Zurich' });
     expect(new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams.get('select'))
-      .toBe('enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates');
+      .toBe('enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates,clock,distance');
   });
 
   it('leaves a parcel out of the email through the owner-scoped RPC', async () => {

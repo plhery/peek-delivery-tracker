@@ -10,6 +10,7 @@ import {
   saveEmailOnDelivery,
   saveMarkNewUpdates,
   saveNotificationStages,
+  saveShownUnits,
   turnOnDeliveryEmail,
   useDeliveryEmail,
   useNotificationPreferences,
@@ -160,6 +161,29 @@ describe('the account’s shared notification preferences', () => {
     await act(async () => { await saveMarkNewUpdates(true, auth); });
     expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
     expect(renderHook(() => useNotificationPreferences(auth)).result.current?.markNewUpdates).toBe(true);
+  });
+
+  it('saves the clock and units the app shows where the account has others, once each per sign-in, and nothing else', async () => {
+    const auth = session();
+    await act(async () => { await expect(saveShownUnits({ clock: '12', distance: 'mi' }, auth)).resolves.toBe(true); });
+    expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
+    // The events go as stored; the email choice and the mark are left out, so the server keeps them.
+    expect(saveNotificationPreferences).toHaveBeenCalledWith({
+      enabledStages: SAVED.enabledStages, quietHoursStart: '22:00', quietHoursEnd: '08:00', timezone: expect.any(String), clock: '12', distance: 'mi',
+    }, auth);
+    expect(renderHook(() => useNotificationPreferences(auth)).result.current).toMatchObject({ clock: '12', distance: 'mi' });
+    // What the account has already is not sent again.
+    await expect(saveShownUnits({ clock: '12', distance: 'mi' }, auth)).resolves.toBe(false);
+    expect(saveNotificationPreferences).toHaveBeenCalledTimes(1);
+    await expect(saveShownUnits({ clock: '24', distance: 'mi' }, auth)).resolves.toBe(true);
+    expect(saveNotificationPreferences).toHaveBeenLastCalledWith(expect.objectContaining({ clock: '24', distance: 'mi' }), auth);
+
+    // A server that does not keep them is asked once per sign-in, not on every render.
+    const other = session();
+    vi.mocked(saveNotificationPreferences).mockImplementation(async (preferences) => ({ ...SAVED, ...preferences, clock: undefined, distance: undefined }));
+    await expect(saveShownUnits({ clock: '12', distance: 'km' }, other)).resolves.toBe(true);
+    await expect(saveShownUnits({ clock: '12', distance: 'km' }, other)).resolves.toBe(false);
+    expect(saveNotificationPreferences).toHaveBeenCalledTimes(3);
   });
 
   it('does not let a read that began before a save undo it', async () => {

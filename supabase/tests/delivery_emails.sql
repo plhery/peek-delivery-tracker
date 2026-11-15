@@ -107,6 +107,31 @@ begin
     raise exception 'Switching the email on did not start it now: %', saved;
   end if;
 
+  -- How its emails write a time and a distance, as its app shows them: none until an app saves them, then kept by a
+  -- save that does not name them.
+  if saved.clock is not null or saved.distance is not null then
+    raise exception 'A save that named no clock or units chose them: %', saved;
+  end if;
+  saved := public.set_owned_notification_preferences(array['delivered'], null, null, 'Europe/Zurich', p_clock => '12', p_distance => 'mi');
+  if saved.clock is distinct from '12' or saved.distance is distinct from 'mi' or saved.email_on_delivery is not true then
+    raise exception 'The clock and units were not saved: %', saved;
+  end if;
+  saved := public.set_owned_notification_preferences(array['delivered', 'customs'], null, null, 'Europe/Zurich');
+  if saved.clock is distinct from '12' or saved.distance is distinct from 'mi' or cardinality(saved.enabled_stages) <> 2 then
+    raise exception 'A save that did not name the clock and units changed them: %', saved;
+  end if;
+  if (select clock || distance from public.notification_preferences) is distinct from '12mi' then
+    raise exception 'The account cannot read its clock and units';
+  end if;
+  begin
+    perform public.set_owned_notification_preferences(array['delivered'], null, null, 'Europe/Zurich', p_clock => '25');
+    raise exception 'A clock of 25 hours was saved' using errcode = 'P0001';
+  exception when invalid_parameter_value then null; end;
+  begin
+    perform public.set_owned_notification_preferences(array['delivered'], null, null, 'Europe/Zurich', p_distance => 'yd');
+    raise exception 'Yards were saved' using errcode = 'P0001';
+  exception when invalid_parameter_value then null; end;
+
   perform set_config('request.jwt.claim.sub', 'e1000000-0000-4000-8000-000000000004', true);
   begin
     perform public.set_owned_notification_preferences(array['delivered'], null, null, 'Europe/Zurich', true);
@@ -265,13 +290,15 @@ begin
   parcel := pg_temp.parcel(alex, 'EMAILTEST1001', '5 hours');
   perform pg_temp.scan(parcel, 'in_transit', '6 hours', '4 hours 59 minutes');
   delivered := pg_temp.scan(parcel, 'delivered', '4 hours', '3 hours 50 minutes');
+  update public.notification_preferences set clock = '12', distance = 'mi' where user_id = alex;
   claim := public.claim_delivery_emails(20, 20, 80);
   entry := claim#>'{send,0}';
   select * into ledger from public.delivery_emails where package_id = parcel;
   if pg_temp.sends(claim) <> array[parcel] or claim->'account_cap' <> '0' or claim->'service_cap' <> '0'
       or entry->>'id' <> ledger.id::text or entry->>'user_id' <> alex::text or entry->>'event_id' <> delivered::text
       or entry->>'timezone' <> 'America/New_York' or entry->>'delivered_time' <> 'timed' or entry->>'stage' <> 'delivered'
-      or (select count(*) from jsonb_object_keys(entry)) <> 7
+      or entry->>'clock' <> '12' or entry->>'distance' <> 'mi'
+      or (select count(*) from jsonb_object_keys(entry)) <> 9
       or ledger.status <> 'claimed' or ledger.attempts <> 1 or ledger.user_id <> alex or ledger.event_id <> delivered
       or ledger.stage <> 'delivered'
       or ledger.claimed_at <> now() or ledger.sent_at is not null or ledger.reason is not null then

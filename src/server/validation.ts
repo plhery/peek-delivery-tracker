@@ -497,6 +497,9 @@ export interface NotificationPreferencesValues {
   emailOnDelivery: boolean | null;
   /** The list's mark on a parcel with news, switched on or off. Null keeps the stored choice. */
   markNewUpdates: boolean | null;
+  /** How the account's app shows a time and a distance, which its emails follow. Null keeps the stored one. */
+  clock: '24' | '12' | null;
+  distance: 'km' | 'mi' | null;
 }
 
 export function notificationPreferences(payload: JsonObject): NotificationPreferencesValues {
@@ -543,6 +546,11 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
   if (markNewUpdates !== null && typeof markNewUpdates !== 'boolean') {
     throw new HttpError(400, 'Mark new updates must be true or false');
   }
+  // And the clock and units.
+  const clock = payload.clock ?? null;
+  if (clock !== null && clock !== '24' && clock !== '12') throw new HttpError(400, 'Clock must be 24 or 12');
+  const distance = payload.distance ?? null;
+  if (distance !== null && distance !== 'km' && distance !== 'mi') throw new HttpError(400, 'Distance must be km or mi');
   return {
     enabledStages,
     quietHoursStart: quietHoursStart as string | null,
@@ -550,6 +558,8 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
     timezone: payload.timezone,
     emailOnDelivery,
     markNewUpdates,
+    clock,
+    distance,
   };
 }
 
@@ -564,6 +574,9 @@ export function notificationPreferencesResponse(row: JsonObject, emailAvailable:
     emailOnDelivery: typeof row.email_on_delivery === 'boolean' ? row.email_on_delivery : null,
     emailAvailable,
     markNewUpdates: row.mark_new_updates !== false,
+    // None until an app has sent them.
+    ...(row.clock === '24' || row.clock === '12' ? { clock: row.clock } : {}),
+    ...(row.distance === 'km' || row.distance === 'mi' ? { distance: row.distance } : {}),
   };
 }
 

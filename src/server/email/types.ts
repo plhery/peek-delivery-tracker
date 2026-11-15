@@ -16,6 +16,9 @@ export interface DeliveryEmailInput {
   stage?: EmailStage;
   /** The IANA zone the scan's time is told in. */
   timezone: string;
+  /** How the account's app shows a time and a distance. Left out or null, the email's language decides. */
+  clock?: '24' | '12' | null;
+  distance?: 'km' | 'mi' | null;
   /** Opens the parcel in the app. */
   journeyUrl: string;
   /** The page that turns the account's delivery email off, with its token. */

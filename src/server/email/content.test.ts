@@ -69,6 +69,16 @@ describe('deliveryEmailContent', () => {
     expect(cardInput()).toMatchObject({ carrier: { id: 'dhl' }, delivery: null, when: 'Today, 14:12', timed: true, languageTag: 'en-CH' });
   });
 
+  it('writes the time and the journey\'s length as the account\'s app shows them, else as its language does', async () => {
+    const shown = await deliveryEmailContent(input({ clock: '12', distance: 'mi' }));
+    expect(sentence(shown.text)).toBe(english('email.delivered.by.today', { carrier: 'DHL', time: '2:12 PM' }));
+    expect(cardInput()).toMatchObject({ when: 'Today, 2:12 PM', distanceUnit: 'mi' });
+    await deliveryEmailContent(input({ clock: '24', distance: 'km' }));
+    expect(cardInput()).toMatchObject({ when: 'Today, 14:12', distanceUnit: 'km' });
+    await deliveryEmailContent(input({ clock: null, distance: null }));
+    expect(cardInput()).toMatchObject({ when: 'Today, 14:12', distanceUnit: 'km' });
+  });
+
   it.each([
     ['today', { deliveredTime: 'timed' }, { time: '14:12' }, 'Today, 14:12', true],
     ['yesterday', { deliveredTime: 'timed', now: new Date('2026-10-04T06:00:00Z') }, { time: '14:12' }, 'Yesterday, 14:12', true],

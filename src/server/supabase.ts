@@ -229,6 +229,9 @@ export interface DeliveryEmailClaim {
   stage: EmailStage;
   /** The account's time zone, which the scan's time is told in. */
   timezone: string;
+  /** How the account's app shows a time and a distance; null until an app has sent them. */
+  clock: '24' | '12' | null;
+  distance: 'km' | 'mi' | null;
   /** What the scan knows of its time, as the notification queues read it. */
   deliveredTime: DeliveredTime;
 }
@@ -1574,6 +1577,8 @@ export class SupabaseServiceClient extends SupabaseClient {
         eventId: String(claim.event_id),
         stage: claim.stage === 'ready_for_pickup' ? 'ready_for_pickup' : 'delivered',
         timezone: typeof claim.timezone === 'string' ? claim.timezone : 'Europe/Zurich',
+        clock: claim.clock === '24' || claim.clock === '12' ? claim.clock : null,
+        distance: claim.distance === 'km' || claim.distance === 'mi' ? claim.distance : null,
         deliveredTime: claim.delivered_time === 'timed' || claim.delivered_time === 'date' ? claim.delivered_time : 'none',
       })),
       accountCap: Number(result.account_cap ?? 0),
@@ -2768,7 +2773,7 @@ export class SupabaseUserClient extends SupabaseClient {
 
   async getNotificationPreferences(): Promise<JsonObject> {
     const params = query({
-      select: 'enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates',
+      select: 'enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates,clock,distance',
       limit: '1',
     });
     const result = rows(await this.request(`/rest/v1/notification_preferences?${params}`));
@@ -2784,7 +2789,8 @@ export class SupabaseUserClient extends SupabaseClient {
 
   /**
    * `emailOnDelivery` switches the delivery email, `markNewUpdates` the list's mark on a parcel with
-   * news; left out or null, the stored choice stays.
+   * news, and `clock` and `distance` are how the account's app shows a time and a distance; left out
+   * or null, the stored choice stays.
    */
   async setNotificationPreferences(
     enabledStages: string[],
@@ -2793,6 +2799,8 @@ export class SupabaseUserClient extends SupabaseClient {
     timezone: string,
     emailOnDelivery: boolean | null = null,
     markNewUpdates: boolean | null = null,
+    clock: '24' | '12' | null = null,
+    distance: 'km' | 'mi' | null = null,
   ): Promise<JsonObject> {
     let result = await this.request('/rest/v1/rpc/set_owned_notification_preferences', {
       method: 'POST',
@@ -2803,6 +2811,8 @@ export class SupabaseUserClient extends SupabaseClient {
         p_timezone: timezone,
         ...(emailOnDelivery === null ? {} : { p_email_on_delivery: emailOnDelivery }),
         ...(markNewUpdates === null ? {} : { p_mark_new_updates: markNewUpdates }),
+        ...(clock === null ? {} : { p_clock: clock }),
+        ...(distance === null ? {} : { p_distance: distance }),
       },
     });
     if (Array.isArray(result) && result.length === 1) [result] = result;

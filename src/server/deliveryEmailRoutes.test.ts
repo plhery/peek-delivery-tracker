@@ -65,8 +65,9 @@ describe('the account\'s choice about the delivery email', () => {
     expect(never.status).toBe(200);
     const answer = await never.json();
     expect(answer).toEqual({ ...shown, emailOnDelivery: null, emailAvailable: true, markNewUpdates: true });
-    // Exactly what the contract lists.
-    expect(Object.keys(answer).sort()).toEqual(Object.keys(contract.components.schemas.NotificationPreferences.properties).sort());
+    // Exactly what the contract lists, the clock and units once an app has sent them.
+    load.mockResolvedValueOnce({ ...stored, clock: '24', distance: 'km' });
+    expect(Object.keys(await (await read()).json()).sort()).toEqual(Object.keys(contract.components.schemas.NotificationPreferences.properties).sort());
     load.mockResolvedValue({ ...stored, email_on_delivery: true });
     expect(await (await read()).json()).toMatchObject({ emailOnDelivery: true, emailAvailable: true });
     load.mockResolvedValue({ ...stored, email_on_delivery: false });
@@ -97,7 +98,7 @@ describe('the account\'s choice about the delivery email', () => {
     const off = await save({ ...shown, emailOnDelivery: false });
     expect(off.status).toBe(200);
     expect(await off.json()).toEqual({ ...shown, emailOnDelivery: false, emailAvailable: false, markNewUpdates: true });
-    expect(store).toHaveBeenCalledExactlyOnceWith(shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false, null);
+    expect(store).toHaveBeenCalledExactlyOnceWith(shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false, null, null, null);
   });
 
   it('registers an Apple relay address once the sender is registered with Apple', async () => {
@@ -119,8 +120,8 @@ describe('the account\'s choice about the delivery email', () => {
     expect(await on.json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: true, markNewUpdates: true });
     expect(await (await save({ ...shown, emailOnDelivery: false })).json()).toMatchObject({ emailOnDelivery: false });
     expect(store.mock.calls).toEqual([
-      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', true, null],
-      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false, null],
+      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', true, null, null, null],
+      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false, null, null, null],
     ]);
   });
 
@@ -134,7 +135,7 @@ describe('the account\'s choice about the delivery email', () => {
       // The answer says what is stored, and what the server knows, whatever the request claimed.
       expect(await response.json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: true, markNewUpdates: true });
     }
-    expect(store.mock.calls).toEqual(Array(3).fill([shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', null, null]));
+    expect(store.mock.calls).toEqual(Array(3).fill([shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', null, null, null, null]));
   });
 
   it('switches the mark on new updates, on until switched off, and keeps it when a request leaves it out (#72)', async () => {
@@ -158,6 +159,28 @@ describe('the account\'s choice about the delivery email', () => {
       const refused = await save({ ...shown, markNewUpdates });
       expect(refused.status).toBe(400);
       expect(await refused.json()).toEqual({ error: 'Mark new updates must be true or false' });
+    }
+    expect(store).not.toHaveBeenCalled();
+  });
+
+  it('keeps the clock and units the account\'s app shows, for its emails, and keeps them when a request leaves them out', async () => {
+    signedIn();
+    const load = vi.spyOn(SupabaseUserClient.prototype, 'getNotificationPreferences').mockResolvedValue(stored);
+    // None until an app has sent them.
+    expect(await (await read()).json()).not.toHaveProperty('clock');
+    load.mockResolvedValue({ ...stored, clock: '12', distance: 'mi' });
+    expect(await (await read()).json()).toMatchObject({ clock: '12', distance: 'mi' });
+
+    const store = vi.spyOn(SupabaseUserClient.prototype, 'setNotificationPreferences').mockResolvedValue({ ...stored, clock: '24', distance: 'km' });
+    expect(await (await save({ ...shown, clock: '24', distance: 'km' })).json()).toMatchObject({ clock: '24', distance: 'km' });
+    expect((await save(shown)).status).toBe(200);
+    expect(store.mock.calls.map((call) => call.slice(6))).toEqual([['24', 'km'], [null, null]]);
+
+    store.mockClear();
+    for (const [field, value, error] of [['clock', 24, 'Clock must be 24 or 12'], ['clock', '25', 'Clock must be 24 or 12'], ['distance', 'yd', 'Distance must be km or mi']]) {
+      const refused = await save({ ...shown, [field]: value });
+      expect(refused.status).toBe(400);
+      expect(await refused.json()).toEqual({ error });
     }
     expect(store).not.toHaveBeenCalled();
   });

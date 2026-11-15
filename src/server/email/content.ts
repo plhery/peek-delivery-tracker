@@ -5,6 +5,7 @@ import { documentLanguage, isLocale, type Locale } from '../../lib/locale';
 import { languageTags, translateMessage, type Translate } from '../../lib/messages';
 import { pickupPoint, pickupPointMapsUrl, type PickupPoint } from '../../lib/pickupPoint';
 import { collectedFromPickupPoint } from '../../lib/stages';
+import { localeDistanceUnit, localeUses24HourTime } from '../../lib/units';
 import { SOURCE_URL } from '../../lib/source';
 import { capitalized } from '../../peek/parcel/summary';
 import { toParcel } from '../../store/apiRepo';
@@ -82,12 +83,15 @@ async function emailContent(input: DeliveryEmailInput, draw = drawCard): Promise
   const deliverer = named(carrierInfo(handedTo ?? activeTrackingCarrierId(parcel), locale));
   const marked = named(carrierInfo(displayedCarrierId(parcel), locale));
   const delivery = handedTo ? named(carrierInfo(handedTo, locale)) : null;
-  const when = deliveredWhen(parcel, { stage, known: input.deliveredTime, timezone: input.timezone, now: input.now, languageTag });
+  // Times and distances as the account's app shows them; until an app has said, as the email's language writes them.
+  const use24HourTime = input.clock ? input.clock === '24' : localeUses24HourTime(languageTag);
+  const distanceUnit = input.distance ?? localeDistanceUnit(languageTag);
+  const when = deliveredWhen(parcel, { stage, known: input.deliveredTime, timezone: input.timezone, now: input.now, languageTag, use24HourTime });
   const waitsAt = stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint) : null;
 
   let card: DeliveryCard | null = null;
   try {
-    card = await draw({ parcel, carrier: marked, delivery, when: cornerTime(when, t, languageTag), timed: 'time' in when, t, languageTag, stage });
+    card = await draw({ parcel, carrier: marked, delivery, when: cornerTime(when, t, languageTag), timed: 'time' in when, t, languageTag, stage, distanceUnit });
   } catch (error) {
     // The email is worth sending without its picture.
     logOperationalEvent('delivery_email_card_failed', { package_id: parcel.id, error_type: errorType(error) }, 'warning');

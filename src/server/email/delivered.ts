@@ -2,6 +2,7 @@ import 'server-only';
 
 import { DateTime, IANAZone } from 'luxon';
 import { placeTimeZone } from 'universal-parcel-scraper/places';
+import { deliveryWallClock } from '../../lib/messages';
 import { sortEventsDesc } from '../../lib/stages';
 import type { ParcelWithEvents, TrackingEvent } from '../../types';
 import { carrierTimezone } from '../carriers';
@@ -82,14 +83,16 @@ function guessedTime(at: DateTime, zones: readonly string[]): DeliveredTime {
  * day. Else `known` is what the sender read in the carrier's own data; left
  * out, the scan is judged by its timestamp. A
  * scan later than `now`, or without a readable time, says nothing. Dates are
- * written as push notifications write them.
+ * written as push notifications write them; times on the 24-hour clock unless
+ * `use24HourTime` is false.
  */
-export function deliveredWhen(parcel: ParcelWithEvents, { stage = 'delivered', known, timezone, now, languageTag }: {
+export function deliveredWhen(parcel: ParcelWithEvents, { stage = 'delivered', known, timezone, now, languageTag, use24HourTime = true }: {
   stage?: EmailStage;
   known?: DeliveredTime;
   timezone: string;
   now: Date;
   languageTag: string;
+  use24HourTime?: boolean;
 }): DeliveredWhen {
   const scan = deliveredScan(parcel, stage);
   const at = scan ? DateTime.fromISO(scan.occurredAt, { setZone: true }) : null;
@@ -105,7 +108,7 @@ export function deliveredWhen(parcel: ParcelWithEvents, { stage = 'delivered', k
   const zone = IANAZone.isValidZone(timezone) ? timezone : 'Europe/Zurich';
   const delivered = at.setZone(zone);
   const today = DateTime.fromJSDate(now, { zone });
-  const clock = delivered.toFormat('HH:mm');
+  const clock = deliveryWallClock(delivered.toFormat('HH:mm'), languageTag, use24HourTime);
   if (delivered.hasSame(today, 'day')) return { kind: 'today', time: clock };
   if (delivered.hasSame(today.minus({ days: 1 }), 'day')) return { kind: 'yesterday', time: clock };
   return { kind: 'date', date: written(delivered), time: clock };

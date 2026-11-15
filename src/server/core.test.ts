@@ -963,11 +963,12 @@ describe('input validation', () => {
   it('reads the delivery email as a switch, and keeps the stored choice when it is left out', () => {
     const saved = { enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: 'Europe/Zurich' };
     // What released apps send: the four fields they know.
-    expect(notificationPreferences(saved)).toEqual({ ...saved, emailOnDelivery: null, markNewUpdates: null });
+    expect(notificationPreferences(saved)).toEqual({ ...saved, emailOnDelivery: null, markNewUpdates: null, clock: null, distance: null });
     expect(notificationPreferences({ ...saved, emailOnDelivery: null, emailAvailable: true })).toMatchObject({ ...saved, emailOnDelivery: null });
     expect(notificationPreferences({ ...saved, emailOnDelivery: true })).toMatchObject({ ...saved, emailOnDelivery: true });
     expect(notificationPreferences({ ...saved, emailOnDelivery: false })).toMatchObject({ ...saved, emailOnDelivery: false });
-    expect(notificationPreferences({ ...saved, markNewUpdates: false })).toEqual({ ...saved, emailOnDelivery: null, markNewUpdates: false });
+    expect(notificationPreferences({ ...saved, markNewUpdates: false })).toEqual({ ...saved, emailOnDelivery: null, markNewUpdates: false, clock: null, distance: null });
+    expect(notificationPreferences({ ...saved, clock: '12', distance: 'mi' })).toMatchObject({ clock: '12', distance: 'mi' });
     for (const emailOnDelivery of ['on', 1, 0, {}]) {
       expect(() => notificationPreferences({ ...saved, emailOnDelivery })).toThrow('Email on delivery must be true or false');
     }

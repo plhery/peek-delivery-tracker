@@ -34,6 +34,8 @@ export const PATCH = apiRoute(async (context) => {
     values.timezone,
     values.emailOnDelivery,
     values.markNewUpdates,
+    values.clock,
+    values.distance,
   );
   return json(notificationPreferencesResponse(row, available));
 }, { serviceRequired: true });

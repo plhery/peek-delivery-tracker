@@ -95,6 +95,12 @@ describe('deliveryCard', () => {
     expect(await deliveryCard(input('en', { parcel: local }))).toMatchObject({ ends: null, mapped: true });
   });
 
+  it('gives the journey\'s length in the unit it is handed, kilometres unless told otherwise', async () => {
+    const [unset, km, mi] = await Promise.all([input('en'), input('en', { distanceUnit: 'km' }), input('en', { distanceUnit: 'mi' })].map(deliveryCard));
+    expect(Buffer.from(unset.png).equals(Buffer.from(km.png))).toBe(true);
+    expect(Buffer.from(mi.png).equals(Buffer.from(km.png))).toBe(false);
+  });
+
   it('stays neutral and names no carrier when none is known, and has no time to show without one', async () => {
     const card = await deliveryCard(input('en', { carrier: null, when: null, timed: false }));
     expect(size(card.png).width).toBe(1040);

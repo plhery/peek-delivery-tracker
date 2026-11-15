@@ -38,6 +38,9 @@ function claim(number: number, changes: Partial<DeliveryEmailClaim> = {}): Deliv
     eventId: `59000000-0000-4000-a000-00000000000${number}`,
     stage: 'delivered',
     timezone: 'Europe/Zurich',
+    // As the account's app shows them.
+    clock: '12',
+    distance: 'mi',
     deliveredTime: 'timed',
     ...changes,
   };
@@ -131,6 +134,8 @@ describe('telling an account that its parcel was delivered', () => {
       locale: 'de',
       stage: 'delivered',
       timezone: 'Europe/Zurich',
+      clock: '12',
+      distance: 'mi',
       journeyUrl: `https://peek.example.com/?parcel=${claim(1).packageId}`,
       // The page it opens speaks the email's language.
       offUrl: `https://peek.example.com/email/off?lang=de#t=${token}`,

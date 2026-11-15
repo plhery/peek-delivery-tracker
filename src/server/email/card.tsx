@@ -6,7 +6,7 @@ import { CARRIER_PALETTES, CARRIER_TRUCK, carrierBrand, carrierBrandFamily, carr
 import { PARCEL, flapPoints } from '../../components/Icon';
 import { PIP_FRAME } from '../../components/map/pipGeometry';
 import type { Rect } from '../../components/map/layout';
-import { formatKm, type Route } from '../../components/map/route';
+import { formatKm, type DistanceUnit, type Route } from '../../components/map/route';
 import type { CarrierInfo } from '../../lib/carriers';
 import type { Translate } from '../../lib/messages';
 import { formatJourneyDuration } from '../../lib/passport';
@@ -137,11 +137,11 @@ function pipSvg({ tone, surface }: Tint, open: boolean): string {
 }
 
 /** What the app's map tells of a finished journey: how far, through how many countries, in how long. */
-function journeyFacts(route: Route, parcel: ParcelWithEvents, timed: boolean, t: Translate, languageTag: string): string | null {
+function journeyFacts(route: Route, parcel: ParcelWithEvents, timed: boolean, t: Translate, languageTag: string, distanceUnit: DistanceUnit): string | null {
   const times = parcel.events.filter((event) => event.stage !== 'pending').map((event) => Date.parse(event.occurredAt)).filter(Number.isFinite);
   const duration = Math.max(...times) - Math.min(...times);
   const facts = [
-    route.km >= 1 ? formatKm(route.km, languageTag) : null,
+    route.km >= 1 ? formatKm(route.km, languageTag, distanceUnit) : null,
     route.countries.length > 1 ? t('map.countries.many', { count: route.countries.length }) : null,
     // A length in hours needs the delivery on the carrier's clock.
     timed && times.length > 1 && duration > 0 ? formatJourneyDuration(duration, languageTag) : null,
@@ -163,6 +163,8 @@ export interface DeliveryCardInput {
   languageTag: string;
   /** What the card shows: the parcel delivered, or waiting at its pickup point. Left out, delivered. */
   stage?: EmailStage;
+  /** The unit the journey's length is written in. Left out, kilometres. */
+  distanceUnit?: DistanceUnit;
 }
 
 export interface DeliveryCard {
@@ -185,7 +187,7 @@ export interface DeliveryCard {
  * Every word on it is checked against the picture's own face first: the
  * renderer would otherwise fetch a font for it from the web.
  */
-export async function deliveryCard({ parcel, carrier, delivery = null, when, timed, t, languageTag, stage = 'delivered' }: DeliveryCardInput): Promise<DeliveryCard> {
+export async function deliveryCard({ parcel, carrier, delivery = null, when, timed, t, languageTag, stage = 'delivered', distanceUnit = 'km' }: DeliveryCardInput): Promise<DeliveryCard> {
   const palette = carrier ? carrierBrand(carrier.color, CARRIER_PALETTES[carrier.id]) : null;
   const tint: Tint = palette ? { tone: palette['ink-light'], surface: palette['surface-light'] } : NEUTRAL;
   const { tone, surface } = tint;
@@ -201,7 +203,7 @@ export async function deliveryCard({ parcel, carrier, delivery = null, when, tim
   const room = WIDTH - 40 - (map ? 0 : BESIDE.pip + BESIDE.gap);
   const headlineSize = Math.min(28, 28 * room / Math.max(textWidth(headline, 28, ...PICTURE_FACES) - .8 * [...headline].length, 1));
   const reached = stageMeta(stage).progress;
-  const facts = map ? journeyFacts(map.route, parcel, timed, t, languageTag) : null;
+  const facts = map ? journeyFacts(map.route, parcel, timed, t, languageTag, distanceUnit) : null;
   const time = when ? writable(when, ...PICTURE_FACES) : null;
   const from = map?.route.origin?.place.name;
   const to = (map?.route.destination ?? map?.route.current?.place)?.name;

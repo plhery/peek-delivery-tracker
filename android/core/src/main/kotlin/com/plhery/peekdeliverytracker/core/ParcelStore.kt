@@ -1461,16 +1461,17 @@ class ParcelStore(
     private var markNewUpdatesChoices = 0
 
     /**
-     * The parcel's page is in front (#72): a parcel with news is seen now, whether or not its dot shows. Its dot goes at
-     * once, its `seen_at` then being its `news_at`, and the server's moment comes after; the account's other devices hear
-     * of it at their next read. A read of the list in flight lands all the same, so the page shows the scans it brings,
-     * seen as late as this phone marked the parcel. A call that fails says nothing: the next read of the list brings
-     * what the server holds.
+     * The parcel's page is in front (#72): a parcel with news is seen now, whether or not its dot shows, as of the
+     * `news_at` the page showed in [parcel], so that a scan stored meanwhile stays new. Its dot goes at once, its
+     * `seen_at` then being that `news_at`, and the server's moment comes after; the account's other devices hear of it
+     * at their next read. A read of the list in flight lands all the same, so the page shows the scans it brings, seen
+     * as late as this phone marked the parcel. A call that fails says nothing: the next read of the list brings what
+     * the server holds.
      */
     suspend fun markSeen(parcel: Parcel) {
         val shown = parcels.firstOrNull { it.id == parcel.id } ?: return
         if (!shown.hasNewUpdate) return
-        val news = shown.newsAt ?: return
+        val news = parcel.newsAt ?: shown.newsAt ?: return
         if (isGuest) {
             device.markSeen(parcel.id)
             mutationRevision += 1
@@ -1484,7 +1485,7 @@ class ParcelStore(
         seeHere(parcel.id, news)
         val generation = session.generation
         val seenAt = try {
-            api.markSeen(parcel.id)
+            api.markSeen(parcel.id, news)
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
             if (generation == session.generation) seenHere.remove(parcel.id)
@@ -1495,13 +1496,17 @@ class ParcelStore(
     }
 
     /**
-     * The account's parcel is seen at [seenAt] on this phone. Unlike the list's other changes this one lets a read of
-     * the list in flight land, which then keeps it ([seenAsHere]): its newer scans show on the open page.
+     * The account's parcel is seen at [seenAt] on this phone, unless it was seen later already. Unlike the list's other
+     * changes this one lets a read of the list in flight land, which then keeps it ([seenAsHere]): its newer scans show
+     * on the open page.
      */
     private fun seeHere(id: UUID, seenAt: String) {
         seenHere[id] = seenAt
         val index = parcels.indexOfFirst { it.id == id }
         if (index < 0) return
+        val marked = DateParser.date(seenAt) ?: return
+        val already = parcels[index].seenAt?.let(DateParser::date)
+        if (already != null && already > marked) return
         parcels = parcels.toMutableList().also { it[index] = it[index].copy(seenAt = seenAt) }
         persistCache()
     }

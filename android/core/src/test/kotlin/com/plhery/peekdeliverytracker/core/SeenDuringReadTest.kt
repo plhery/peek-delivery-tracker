@@ -6,12 +6,18 @@ import com.plhery.peekdeliverytracker.core.api.PackageSeenResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.temporal.ChronoUnit
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -19,7 +25,8 @@ import org.junit.Test
 
 /**
  * An account's parcel opened while a read of the list is in flight (#72): the read lands, so the open page shows the
- * scan it brings, and the parcel stays seen as late as this phone marked it. Synthetic numbers.
+ * scan it brings, and the parcel stays seen as late as this phone marked it. The phone tells the service which news
+ * the page showed, so a scan stored meanwhile stays new until the page shows it. Synthetic numbers.
  */
 class SeenDuringReadTest {
     private val configuration = AppConfiguration(
@@ -37,10 +44,17 @@ class SeenDuringReadTest {
     private val later = "2026-09-08T10:45:00.000000+00:00"
     private val seenNow = "2026-09-08T11:00:00.654321+00:00"
 
+    /** What the server keeps for news shown at [news]: the end of that millisecond (POST /api/packages/{id}/seen). */
+    private fun seenAsOf(news: String): String =
+        OffsetDateTime.parse(news).truncatedTo(ChronoUnit.MILLIS).plusNanos(999_000).toInstant().toString()
+
     private inner class Server {
         var newsAt: String? = scanned
         var seenAt: String = opened
         var seenFails = false
+
+        /** The `news_at` each seen call named. */
+        val named = mutableListOf<String?>()
 
         /** When set, a read of the list answers with what the server held when it was asked, once this completes. */
         var readGate: CompletableDeferred<Unit>? = null
@@ -62,12 +76,16 @@ class SeenDuringReadTest {
                 read
             }
             request.path == "/api/packages/${parcelId.uuidString}/seen" && request.method == "POST" -> {
+                val news = request.body?.let { Json.parseToJsonElement(it.decodeToString()).jsonObject["news_at"]?.jsonPrimitive?.contentOrNull }
+                named += news
                 seenGate?.await()
                 if (seenFails) {
                     jsonResponse(500, """{"error":"unavailable"}""")
                 } else {
-                    seenAt = seenNow
-                    jsonResponse(200, JsonEncoder.deliveryTracker.encode(PackageSeenResponse.serializer(), PackageSeenResponse(seenNow)).decodeToString())
+                    // Never later than now, nor earlier than the parcel was seen already.
+                    val asOf = news?.let(::seenAsOf)?.takeIf { DateParser.date(it)!! < DateParser.date(seenNow)!! } ?: seenNow
+                    if (DateParser.date(asOf)!! > DateParser.date(seenAt)!!) seenAt = asOf
+                    jsonResponse(200, JsonEncoder.deliveryTracker.encode(PackageSeenResponse.serializer(), PackageSeenResponse(seenAt)).decodeToString())
                 }
             }
             else -> throw AssertionError("Unexpected request ${request.method} ${request.url}")
@@ -102,7 +120,10 @@ class SeenDuringReadTest {
         return store
     }
 
-    /** The read is in flight when the parcel is opened, and lands once the server has stored the seen moment. */
+    /**
+     * The read is in flight when the parcel is opened, and lands once the server has stored the seen moment. The page
+     * then shows the newer scan, still new, and seeing it marks it seen in turn.
+     */
     @Test
     fun openingAParcelDuringTheReadKeepsTheReadsNewScan() = runTest {
         val server = Server()
@@ -111,16 +132,22 @@ class SeenDuringReadTest {
         val reading = launch { store.load() }
         runCurrent()
         store.markSeen(store.shown)
+        assertEquals("The seen call names the news the page showed", listOf<String?>(scanned), server.named)
         gate.complete(Unit)
         reading.join()
         assertEquals("The open page shows the scan the read brought", later, store.shown.newsAt)
-        assertEquals("The parcel stays seen at the server's moment, not the read's older one", seenNow, store.shown.seenAt)
+        assertEquals("The parcel stays seen at the server's moment, not the read's older one", seenAsOf(scanned), store.shown.seenAt)
+        assertTrue("The scan stored while the parcel opened is still new", store.shown.hasNewUpdate)
+
+        store.markSeen(store.shown)
+        assertEquals(listOf<String?>(scanned, later), server.named)
+        assertEquals(seenAsOf(later), store.shown.seenAt)
         assertFalse(store.shown.hasNewUpdate)
     }
 
     /**
-     * The read lands while the seen call is under way: it keeps the moment the parcel was marked with here, so the
-     * newer scan it brings is news; the server's moment then clears it.
+     * The read lands while the seen call is under way: it keeps the moment the parcel was marked with here rather than
+     * the read's older one, so the newer scan it brings is news, and stays news once the server answers.
      */
     @Test
     fun aReadLandingBeforeTheSeenCallAnswersKeepsTheMarkMadeHere() = runTest {
@@ -135,12 +162,28 @@ class SeenDuringReadTest {
         assertTrue(store.shown.hasNewUpdate)
         gate.complete(Unit)
         opening.join()
-        assertEquals(seenNow, store.shown.seenAt)
-        assertFalse(store.shown.hasNewUpdate)
+        assertEquals(seenAsOf(scanned), store.shown.seenAt)
+        assertTrue(store.shown.hasNewUpdate)
 
-        // A later read with the server's moment, or one after it, leaves nothing marked here.
+        // A later read with the server's moment leaves nothing marked here.
         store.load()
-        assertEquals(seenNow, store.shown.seenAt)
+        assertEquals(seenAsOf(scanned), store.shown.seenAt)
+    }
+
+    /** A page that showed older news than the phone holds, seen later already, doesn't move the parcel's seen moment back. */
+    @Test
+    fun anOlderPageNeverMovesTheSeenMomentBack() = runTest {
+        val server = Server()
+        val store = holding(server)
+        val page = store.shown
+        store.load()
+        store.markSeen(store.shown)
+        assertEquals(seenAsOf(later), store.shown.seenAt)
+        server.newsAt = "2026-09-08T10:50:00.000000+00:00"
+        store.load()
+        assertTrue(store.shown.hasNewUpdate)
+        store.markSeen(page)
+        assertEquals(seenAsOf(later), store.shown.seenAt)
     }
 
     /** A seen call that fails says nothing, and the next read brings what the server holds. */

@@ -4,6 +4,22 @@ set -euo pipefail
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 database_url=${TEST_DATABASE_URL:-}
 
+# Each migration has a number of its own: two sessions picking the same one leave the order between them to the
+# rest of the name. These pairs were applied before the check, under their names.
+applied_pairs=" 20260911120000 20260912090000 20261106110000 20261110170000 "
+shared=0
+while read -r count number; do
+  if (( count > 2 )) || [[ "$applied_pairs" != *" $number "* ]]; then
+    echo "Migrations share the number $number; give the newer one a later number:" >&2
+    find "$repo_root/supabase/migrations" -maxdepth 1 -type f -name "${number}_*.sql" -exec basename {} \; | sort >&2
+    shared=1
+  fi
+done < <(find "$repo_root/supabase/migrations" -maxdepth 1 -type f -name '*.sql' -exec basename {} \; \
+  | cut -d_ -f1 | sort | uniq -c | awk '$1 > 1')
+if (( shared )); then
+  exit 1
+fi
+
 if [[ -z "$database_url" ]]; then
   echo "TEST_DATABASE_URL is required" >&2
   exit 2

@@ -24,7 +24,9 @@ arguments.
 Back up, then apply every `supabase/migrations/*.sql` in filename order, stopping at the
 first error. CI applies the full history to a clean Postgres 16 and runs the RLS
 assertions. To do the same locally, point `TEST_DATABASE_URL` at a disposable database and
-run `scripts/test-migrations.sh`.
+run `scripts/test-migrations.sh`. It first refuses two migrations with the same number
+(the timestamp before the first `_`), even without a database: give the newer one a later
+number before it is applied.
 
 **Upgrades.** Migrations are append-only and written to be compatible with the running
 version. Apply new ones **before** deploying the server that needs them. Deploy the

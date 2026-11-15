@@ -139,6 +139,8 @@ describe('tracking support audit persistence', () => {
     ['opens no case once the filed carrier confirmed it', 'success', 'russian-post', {}],
     ['leaves the gap undecided while the filed carrier\'s lookup failed', 'error', null,
       { support_gap_reason: 'generic_postal', support_gap_undecided: true }],
+    ['leaves the gap undecided while our own pacing refused the filed carrier\'s lookup', 'paced', null,
+      { support_gap_reason: 'generic_postal', support_gap_undecided: true }],
     ['still opens one while the filed carrier answered without confirming it', 'not_found', null, { support_gap_reason: 'generic_postal' }],
   ] as const)('for an S10 number detection leaves to international post, %s', async (_case, lookup, answeredBy, gap) => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
@@ -147,7 +149,7 @@ describe('tracking support audit persistence', () => {
     const audit = new TrackingSyncAudit(client, 'synthetic-package', 'RR123456785RU', 'russian-post', 'pending', { trigger: 'added' });
     await audit.start();
     await audit.observeFetch(async () => {
-      reportTrackingLookup('russian-post', lookup, lookup === 'error' ? 'transport' : undefined);
+      reportTrackingLookup('russian-post', lookup, { error: 'transport', paced: 'self_paced' }[lookup as string]);
       reportTrackingLookup('ParcelsApp', 'success');
     });
     audit.filed('russian-post', answeredBy);

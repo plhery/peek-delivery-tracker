@@ -6,6 +6,7 @@ import { NoHistoryError } from 'universal-parcel-scraper';
 import type { LookupRecord, StepRecord, StepRecorder } from 'universal-parcel-scraper/node';
 import { combineRecorders, errorTypeOf, outcomeOf } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
+import { selfPacedRefusal } from './trackingFailure';
 import { prometheusStepRecorder, stepOutcome } from './metrics';
 import {
   errorDetails, initObservability, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep, trackingAttemptId,
@@ -41,6 +42,8 @@ function fellBackFromAnswer(record: StepRecord): boolean {
 
 function outcomeLabel(record: StepRecord | LookupRecord): string {
   if (record.outcome === 'ok') return 'success';
+  // Our own pacing refused it before any request: nobody was asked, so it is no failure.
+  if (selfPacedRefusal(record.error)) return 'paced';
   const outcome = stepOutcome(record.outcome, record.error);
   return ANSWERS.has(outcome) ? outcome : 'error';
 }

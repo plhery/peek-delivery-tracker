@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { IndeterminateError, NoHistoryError } from 'universal-parcel-scraper';
+import { IndeterminateError, NoHistoryError, RateLimitedError } from 'universal-parcel-scraper';
 
 const metrics = { distribution: vi.fn(), count: vi.fn() };
 const observability = {
@@ -103,6 +103,17 @@ describe('sentryStepRecorder', () => {
     expect(metrics.count).toHaveBeenCalledWith('tracking.scrape.attempts', 1, {
       attributes: { carrier: 'ups', phase: 'total', outcome: 'not_found', error_type: 'NotFoundError' },
     });
+  });
+
+  it('records a lookup our own pacing refused as paced, not as a failure, and a carrier\'s own 429 as one', () => {
+    const record = { carrier: 'aliexpress', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1 } as const;
+    hostStepRecorder().lookup({ ...record, error: new RateLimitedError('AliExpress', 15 * 60_000, 'Paused', { reason: 'self_paced' }) });
+    expect(observability.reportTrackingLookup.mock.lastCall?.slice(0, 2)).toEqual(['aliexpress', 'paced']);
+    expect(observability.logOperationalEvent).toHaveBeenLastCalledWith('tracking_scrape', expect.objectContaining({ outcome: 'paced' }));
+    expect(observability.logOperationalEvent.mock.lastCall?.[1]).not.toHaveProperty('error_message');
+    hostStepRecorder().lookup({ ...record, error: new RateLimitedError('AliExpress', 60_000, 'Too many requests') });
+    expect(observability.reportTrackingLookup.mock.lastCall?.slice(0, 2)).toEqual(['aliexpress', 'error']);
+    expect(observability.logOperationalEvent).toHaveBeenLastCalledWith('tracking_scrape', expect.objectContaining({ outcome: 'error' }));
   });
 
   it('says why a step or lookup failed, and not why one answered', () => {

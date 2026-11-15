@@ -107,7 +107,8 @@ All tables and views here are service-role only.
   fills in, is not new. It is null for checks recorded before the column existed.
   `lookups` names each carrier or provider the check's lookups asked, with how the lookup
   ended (`success`, `not_found`, `error` and the like, a success kept over a later failure),
-  so a `refused` or `waiting` check still shows whom it asked. A carrier that answers with an
+  so a `refused` or `waiting` check still shows whom it asked. One our own pacing refused
+  before any request (`self_paced`) is `paced`, not `error`. A carrier that answers with an
   empty result, as FedEx's "could not locate the shipment", is `no_history`, not `success`, and so is an
   answer the check did not take (below). A lookup another copy of the
   number ran in the same run is not this check's. It is `{}` when the check asked nobody,
@@ -578,8 +579,8 @@ only knows an earlier leg, the carrier showed its label alone beside a provider'
 (its rows, or `carrier_label_alone` when the provider's history keeps no row of it), the carrier a provider names as delivering the parcel was asked and has not scanned it
 yet (`delivery_probe`), the carrier has no such parcel while the provider shows only the
 sender's advance notice, so the carrier has nothing to show yet (provider shows the notice alone), or
-our own pacing refused the carrier's read at the latest check, its lookup ending `error` with no
-failure kept, and the parcel's next check asks it again (carrier paced).
+our own pacing refused the carrier's read at the latest check (its lookup `paced`) and the
+parcel's next check asks it again (carrier paced).
 
 Whatever its lane, a signal that comes from a wrong routing decision is a delivery-tracker
 fix. Mark a signal reviewed so that the next run leaves it out:
@@ -727,8 +728,8 @@ Key JSON events:
   ends `interrupted`, with `error_type` `WorkerShutdown`;
 - `tracking_scrape` and `tracking_routing`, which include `transport_fallback`, carry the
   `attempt_id` of the check whose lookup they belong to. Lookups outside a check, such as
-  carrier recognition, have none. A `tracking_scrape` `outcome` is `success`, `error`, or
-  an answer about the number: `not_found`, `no_history` (a provider has no scans for it
+  carrier recognition, have none. A `tracking_scrape` `outcome` is `success`, `error`, `paced`
+  (our own pacing refused the lookup before any request: no failure), or an answer about the number: `not_found`, `no_history` (a provider has no scans for it
   yet, or a carrier's tracking does not know the item or lists it without a scan: an
   inconclusive answer with a reason in `UNKNOWN_ITEM_REASONS`, `src/server/trackingFailure.ts`),
   `input_required`, `invalid_input` or `handed_off` (the carrier places the parcel with its
@@ -1063,7 +1064,7 @@ by one phase when counting attempts; summing phases double-counts.
 **Sentry metrics**, which work with tracing off:
 - `tracking.scrape.duration` (ms) and `tracking.scrape.attempts`, tagged `carrier`,
   `phase`, `outcome`, `error_type`. `outcome` reads as on the `tracking_scrape` line, so
-  `outcome:error` counts failures and leaves out answers about the number;
+  `outcome:error` counts failures and leaves out answers about the number and our own pacing's refusals;
 - `tracking.scrape.fallbacks`, with `from_phase` and `to_phase`;
 - `tracking.provider_input`, tagged `provider` and `step`, as `provider_input_total` below;
 - `tracking.checksum_rejection`, tagged `carrier` and `rule`, as

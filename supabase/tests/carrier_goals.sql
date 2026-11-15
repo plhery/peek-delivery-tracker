@@ -440,9 +440,9 @@ begin
 end;
 $$;
 
--- paced: our own pacing refused La Poste's read at the latest check (its lookup ended `error`, no failure kept) and
--- ParcelsApp answered; failed: the same read, but La Poste failed in transport; earlier: La Poste's read was refused
--- a check before, and the latest check did not ask it.
+-- paced: our own pacing refused La Poste's read at the latest check (its lookup ended `paced`) and ParcelsApp
+-- answered; failed: La Poste failed in transport instead; earlier: La Poste's read was refused a check before, and
+-- the latest check did not ask it.
 insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
 values
   ('f4000000-0000-4000-8000-0000000000fc', 'f4000000-0000-4000-8000-000000000001', false, 'GOALS0032', 'la-poste',
@@ -455,11 +455,11 @@ values
 insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, source_carrier, outcome, lookups, started_at, completed_at)
 values
   ('f4000000-0000-4000-8000-0000000000c3', 'f4000000-0000-4000-8000-0000000000fc', 'added', 'la-poste', 'unknown',
-    'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes'),
+    'updated', '{"la-poste": "paced", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes'),
   ('f4000000-0000-4000-8000-0000000000c4', 'f4000000-0000-4000-8000-0000000000fd', 'added', 'la-poste', 'unknown',
     'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes'),
   ('f4000000-0000-4000-8000-0000000000c5', 'f4000000-0000-4000-8000-0000000000fe', 'added', 'la-poste', 'unknown',
-    'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '40 minutes', now() - interval '40 minutes'),
+    'updated', '{"la-poste": "paced", "ParcelsApp": "success"}', now() - interval '40 minutes', now() - interval '40 minutes'),
   ('f4000000-0000-4000-8000-0000000000c6', 'f4000000-0000-4000-8000-0000000000fe', 'scheduled', 'la-poste', 'unknown',
     'unchanged', '{"ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes');
 

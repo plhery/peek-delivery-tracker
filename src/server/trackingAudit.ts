@@ -480,7 +480,7 @@ export class TrackingSyncAudit {
         outcome,
         ...completion.supportEvidence,
         ...trackingSupportGap(this.trackingNumber, filedCarrier,
-          holds ? filedCarrier : this.#filed ? this.#filed.answeredBy : this.answeredBy, (carrier) => this.#lookups.get(carrier) === 'error'),
+          holds ? filedCarrier : this.#filed ? this.#filed.answeredBy : this.answeredBy, (carrier) => ['error', 'paced'].includes(this.#lookups.get(carrier) ?? '')),
       });
     }
     const completedAt = new Date();

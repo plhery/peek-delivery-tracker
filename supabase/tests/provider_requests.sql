@@ -221,4 +221,33 @@ begin
 end;
 $$;
 
+-- paced: our own pacing refused AliExpress before any request, ParcelsApp answered and PacedTrack's lookup was refused
+-- by pacing too. ParcelsApp was asked because AliExpress was not, which is no failure of its adapter; PacedTrack sent
+-- nothing.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f5000000-0000-4000-8000-00000000000d', null, true, 'ASKED0013', 'aliexpress', 'in_transit', 'ok',
+    now() - interval '3 days', now() - interval '7 minutes', '{"tracking_provider": "ParcelsApp"}');
+insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, source_carrier, outcome,
+  previous_stage, selected_stage, anomaly_codes, lookups, started_at, completed_at)
+values
+  ('f5000000-0000-4000-8000-0000000000ad', 'f5000000-0000-4000-8000-00000000000d', 'scheduled', 'aliexpress', 'unknown', 'unchanged',
+    'in_transit', 'in_transit', '{}', '{"aliexpress": "paced", "ParcelsApp": "success", "PacedTrack": "paced"}',
+    now() - interval '7 minutes', now() - interval '7 minutes');
+
+do $$
+declare
+  counted text[];
+begin
+  perform metrics.record_provider_requests((now() at time zone 'UTC')::date);
+  select array_agg(provider || ':' || purpose || ':' || requests order by provider, purpose) into counted
+  from metrics.provider_requests_daily
+  where day = (now() at time zone 'UTC')::date and (provider = 'PacedTrack' or (provider = 'ParcelsApp' and purpose = 'adapter_no_answer'));
+  if (now() at time zone 'UTC')::time >= time '00:30'
+      and counted is distinct from array['ParcelsApp:adapter_no_answer:1'] then
+    raise exception 'A lookup our own pacing refused was counted as %', counted;
+  end if;
+end;
+$$;
+
 rollback;

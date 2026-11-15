@@ -3,7 +3,7 @@ title: DHL eCommerce pakket volgen: status, ServicePoint, klacht
 description: Volg je DHL eCommerce-pakket (vroeger DHL Parcel) in Nederland of België: het JVGL-nummer, wat de statussen betekenen, ServicePoints, klachten en contact.
 slug: dhl-ecommerce-pakket-volgen
 published: 2026-10-26
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 DHL eCommerce is de nieuwe naam van DHL Parcel, de pakketdienst die in Nederland en België bestellingen van webshops bezorgt. Je volgt je pakket op [dhlecommerce.nl](https://www.dhlecommerce.nl/nl/consument/track-en-trace), in België op [dhlecommerce.be](https://www.dhlecommerce.be/nl/particulieren/track-trace), of je plakt het zendingsnummer in het vak hierboven. Dat nummer krijg je van de webshop of van DHL.
@@ -17,9 +17,10 @@ Track en trace vraagt een "Zendingsnummer" en de "Postcode ontvanger". In Nederl
 | `JVGL0000000000` | JVGL en minstens acht letters of cijfers: het gewone nummer, onder de barcode op het label. |
 | `3SABC00000000` | 3S, drie letters en 8 tot 10 cijfers: een andere barcode van DHL eCommerce. |
 | `JJD00009012345678901234` | JJD000090 en 14 tot 16 cijfers: een JJD-label van het Nederlandse DHL-netwerk. |
+| `MDP12345678` | MDP en 8 tekens (cijfers 1 tot en met 9 en bepaalde hoofdletters): een vorm die de catalogus van Peek aan DHL eCommerce Netherlands toekent. |
 | Code op de gele kaart | Niet thuis? Met de niet-thuiscode (in België de leveringscode) of de QR-code zie je waar je pakket heen gaat. |
 
-**Nummers die erop lijken.** Een 3S-code met vier letters is meestal van [PostNL](carrier:postnl), andere JJD-nummers hebben de vorm van [DHL Paket](carrier:dhl) uit Duitsland en sommige 3S-codes van twaalf tekens passen bij [Colis Privé](carrier:colis-prive). [DHL Express](carrier:dhl-express) is een ander netwerk: zijn pakketten hebben een Waybill-nummer onder de barcode. Twijfel je, kijk dan welke vervoerder de webshop noemt.
+**Nummers die erop lijken.** Een 3S-code met vier letters is meestal van [PostNL](carrier:postnl), andere JJD-nummers hebben doorgaans de vorm van [DHL Paket](carrier:dhl) uit Duitsland en sommige 3S-codes van twaalf tekens passen bij [Colis Privé](carrier:colis-prive). [DHL Express](carrier:dhl-express) is een ander netwerk: zijn pakketten hebben een Waybill-nummer onder de barcode. Twijfel je, kijk dan welke vervoerder de webshop noemt.
 
 ## Wat de statussen betekenen
 
@@ -93,7 +94,7 @@ Zo stond het op 26 oktober 2026 op de Nederlandstalige pagina's van DHL eCommerc
 
 ## Je DHL eCommerce-pakket volgen met Peek
 
-[Peek](/) herkent DHL eCommerce Netherlands meteen aan een JVGL-nummer, aan 3S met drie letters en 8 tot 10 cijfers en aan JJD000090 met 14 tot 16 cijfers. Andere 3S-codes met twee of drie letters en 7 tot 12 cijfers vraagt Peek na bij DHL eCommerce Netherlands, sommige ook bij Colis Privé. Een 3S-code met vier letters zet Peek onder PostNL, of Peek herkent hem niet aan de vorm; andere JJD-nummers komen meestal onder DHL. Plak je nummer toch: Peek volgt meer dan 3.500 vervoerders. Staat er een andere vervoerder, kies dan DHL eCommerce Netherlands met 'Change'. Een trackinglink van my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be of dhlparcel.be met `/home/tracktrace/` en het nummer werkt ook.
+[Peek](/) herkent DHL eCommerce Netherlands meteen aan een JVGL-nummer, aan 3S met drie letters en 8 tot 10 cijfers, aan JJD000090 met 14 tot 16 cijfers en aan een MDP-code met de vorm uit de tabel hierboven. Andere 3S-codes met twee of drie letters en 7 tot 12 cijfers vraagt Peek na bij DHL eCommerce Netherlands, sommige ook bij Colis Privé. Een 3S-code met vier letters zet Peek onder PostNL, of Peek herkent hem niet aan de vorm; andere JJD-nummers komen meestal onder DHL. Plak je nummer toch: Peek volgt meer dan 3.500 vervoerders. Staat er een andere vervoerder, kies dan DHL eCommerce Netherlands met 'Change'. Een trackinglink van my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be of dhlparcel.be met `/home/tracktrace/` en het nummer werkt ook.
 
 Peek vraagt het pakket zonder postcode op bij DHL, dus zie je geen ontvanger, adres, handtekening of afhaalpunt. Je ziet de status, de scans (zonder plaats), de verwachte bezorging (een tijdvak of moment, als DHL er een plant) en het tijdstip van bezorging. Peek toont de scans met de Engelse teksten van DHL, zoals `Delivered at DHL ServicePoint` voor `Bezorgd bij DHL ServicePoint`, en zet er een eigen kop boven, zoals 'Ready for pickup' of 'Delivered'. Bij een vertraging (`Delivery interrupted, delivery date changed`) staat er 'Needs attention', ook al hoef je volgens DHL meestal alleen te wachten.
 

@@ -3,7 +3,7 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
@@ -60,6 +60,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Passato al corriere che consegna nel tuo Paese: a te non è ancora stato consegnato («deliverey» è scritto così da Shouwu). | «In transito» |
 | `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è il ritiro dal venditore (quello è `Picked up by Shipping Partner`, più in alto), né un ritiro da parte tua. | «In transito» |
 | `Picked up` | Negli Stati Uniti, FedEx ha ritirato il pacco dal magazzino di Shouwu dopo lo sdoganamento (la sua riga indica città e codice postale). Non è il ritiro dal venditore, `Picked up by Shipping Partner`, né un ritiro da parte tua. | «In transito» |
+| `Arrived at FedEx location`, `Departed FedEx location` | Le scansioni di FedEx nelle sue sedi negli Stati Uniti, dopo il ritiro del pacco dal magazzino di Shouwu. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
 | `The shipment has been processed in the destination parcel center` | DHL l'ha smistato nel centro pacchi che serve il tuo indirizzo, prima del giro di consegna. | «In transito» |
@@ -69,6 +70,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `The recipient is unknown` | Nel giro di DHL in Germania il destinatario risulta sconosciuto all'indirizzo: il pacco torna indietro. | «Tentativo di consegna» |
 | `Shipment will be returned to origin-Bad address` | DHL rimanda indietro il pacco perché non ha trovato l'indirizzo: è in viaggio di ritorno, non ancora dal mittente. Chiedi al venditore. | «Problema segnalato» |
 | `Delivered by post man`, `This parcel has been delivered` | La posta o il corriere locale l'ha consegnato. | «Consegnato», quando anche lo stato di Shouwu è `Delivered` |
+| `Shipment sent directly from parcel center to business customer` | DHL l'ha consegnato direttamente dal centro pacchi a un indirizzo aziendale. Se DHL aveva rimandato indietro il pacco, la stessa riga vuol dire che il reso è arrivato al mittente. | «Consegnato», o «Restituito al mittente» dopo un reso |
 
 Quando in Italia consegna iMile, la cronologia riprende le sue righe, con il centro tra 【】 (al posto di Milan center o ROM 10 può comparirne un altro):
 
@@ -162,5 +164,5 @@ Al venditore da cui hai comprato: ha prenotato lui la spedizione con Shouwu e pu
 - [Shouwu International: 美国标快 (Stati Uniti, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=1) – soprattutto USPS, da 6 a 8 giorni lavorativi, niente ritorno in Cina, reclami
 - [Shouwu International: 美国经济 (Stati Uniti, economica)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=21) – da 8 a 12 giorni lavorativi
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere, dal 14 novembre il ritiro dal venditore da parte del partner, il ritiro di FedEx negli Stati Uniti e la partenza della nave dalla Cina), righe di Poste Italiane e di iMile (anche il rinvio al mittente), righe di DPD, orari, luoghi, cosa mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi (dal 9 novembre anche sdoganamento in uscita e all'arrivo, carico in aeroporto e passaggio al corriere, dal 14 novembre il ritiro dal venditore da parte del partner, il ritiro di FedEx negli Stati Uniti e la partenza della nave dalla Cina, dal 15 novembre le scansioni di FedEx stessa e la consegna di DHL a un'azienda), righe di Poste Italiane e di iMile (anche il rinvio al mittente), righe di DPD, orari, luoghi, cosa mostra Peek
 :::

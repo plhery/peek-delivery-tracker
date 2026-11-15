@@ -4,7 +4,7 @@ description: Pacco fermo da giorni? Perché il tracking non si aggiorna, quanto 
 slug: tracking-non-si-aggiorna
 picture: Un calendario con diversi giorni barrati, una linea di avanzamento che si ferma a metà e Pip che aspetta, un po' annoiato.
 published: 2026-10-09
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Se il tracking non si aggiorna, di solito vuol dire solo che nessuno ha scansionato il pacco di recente, non che si è fermato. I corrieri lo scansionano nei centri di smistamento e alle frontiere, non lungo la strada: un viaggio lungo, un volo, la dogana o un fine settimana possono lasciarti per giorni senza aggiornamenti. Preoccupati solo quando è passato il termine del corriere (con Poste Delivery Standard il reclamo si può fare dal 6° giorno lavorativo dopo la spedizione; con la [Posta svizzera](carrier:swiss-post), per un invio nazionale, la ricerca si chiede quando il tempo di consegna abituale è superato di oltre due giorni). E anche allora scrivi prima al venditore: il cliente del corriere è lui.
@@ -31,7 +31,7 @@ Nessun corriere dice per quanti giorni, al massimo, il tracking può restare mut
 - home | Ultimo tratto | In consegna, poi consegnato: le scansioni tornano frequenti.
 :::
 
-Quando un pacco ha l'etichetta creata, è preso in carico o in transito e la sua ultima scansione ha quattro giorni o più, [Peek](/) mostra «Nessun aggiornamento da quattro giorni» nella tua lista e, sulla pagina del pacco, la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Poste Italiane.» (qui con Poste Italiane).
+Quando un pacco ha l'etichetta creata, è preso in carico o in transito e la sua ultima scansione ha quattro giorni o più, [Peek](/) mostra «Nessun aggiornamento da quattro giorni» nella tua lista e, sulla pagina del pacco, la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Poste Italiane.» (qui con Poste Italiane). Se il corriere e i servizi di tracciamento rispondono senza alcuna scansione (codice non trovato, o registrato senza cronologia) per un pacco che ne ha già, Peek tiene quelle trovate e mostra sulla pagina del pacco «Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.»
 
 ### Dopo quanto si aggiorna un codice di tracking nuovo?
 
@@ -124,7 +124,7 @@ No, e non può farlo nemmeno un tracker: mostra solo quello che pubblica il corr
 
 ### «Spedizione non trovata»: perché il codice non funziona?
 
-Il pacco forse non è ancora stato scansionato, il codice può essere di un altro corriere, o c'è un carattere sbagliato. Su Poste, per esempio, `Codice non valido` vuol dire che il codice potrebbe essere sbagliato, mentre `Tracciatura non disponibile` compare per un codice appena creato o per un pacco spedito da oltre 2 mesi, che non si può più tracciare. [Controlla a quale corriere appartiene](guide:tracking-number-formats) o [trova il codice giusto](guide:find-tracking-number).
+Il pacco forse non è ancora stato scansionato, il codice può essere di un altro corriere, o c'è un carattere sbagliato. Su Poste, per esempio, `Codice non valido` vuol dire che il codice potrebbe essere sbagliato, mentre `Tracciatura non disponibile` compare per un codice appena creato o per un pacco spedito da oltre 2 mesi, che non si può più tracciare. [Controlla a quale corriere appartiene](guide:tracking-number-formats) o [trova il codice giusto](guide:find-tracking-number). Su peektracker.com, un pacco senza scansioni il cui corriere non ha ancora registrato il codice, o non è stato raggiungibile, non mostra un errore ma «In attesa di Poste Italiane» (qui con Poste Italiane) e, se non è stato possibile raggiungerlo, sulla sua pagina «Non è ancora stato possibile raggiungere Poste Italiane. Peek continua a provare.» Se dopo due giorni il corriere non riconosce ancora il codice e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto.
 
 :::sources
 - [Poste Italiane: Carta del Servizio Postale Universale](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – chi può fare reclamo, Poste Delivery Standard e International Standard: tempi, reclamo, rimborsi
@@ -157,4 +157,5 @@ Il pacco forse non è ancora stato scansionato, il codice può essere di un altr
 - [Normattiva: Codice del consumo, art. 63](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art63) – passaggio del rischio
 - [Fedlex: Codice delle obbligazioni, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/it#art_185) – utili e rischi in Svizzera
 - [Peek: home page](https://peektracker.com/it) – «Controllato ogni 10 min» e «Ogni 2 min il giorno di consegna»
+- [Peek: Routing (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – nessuna nuova scansione quando tutte le fonti rispondono senza, scansioni trovate conservate; attesa del corriere per nome; dopo due giorni di codice sconosciuto, la richiesta di controllarlo, poi controlli giornalieri e settimanali (letto il 15 novembre 2026)
 :::

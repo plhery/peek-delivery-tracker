@@ -3,7 +3,7 @@ title: Suivi colis Shouwu : numéro SWECN…YQ, statuts et livraison
 description: Suivre un colis Shouwu International (守务国际) venu de Chine : à quoi ressemble le numéro SWECN…YQ, ce que veulent dire les statuts et qui livre en France.
 slug: shouwu-suivi
 published: 2026-11-02
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. En France, c'est surtout Colissimo, et Shouwu annonce 4 à 7 jours ouvrés. Le vendeur choisit le numéro qu'il te transmet : celui de Shouwu, qui commence par SWECN et finit par YQ, ou celui de Colissimo. Colle l'un ou l'autre dans le champ ci-dessus, ou le numéro Shouwu sur son site de suivi, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Pas de numéro ? Demande-le au vendeur : Shouwu n'a aucun contact pour les destinataires.
@@ -58,6 +58,7 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Remis au transporteur qui livre chez toi : ce n'est pas encore la livraison (« deliverey » est l'orthographe de Shouwu). | « En transit » |
 | `Your consignment has been picked up` | Le transporteur l'a récupéré à l'entrepôt de Shouwu à l'étranger, après la douane : ce n'est ni l'enlèvement chez le vendeur (celui-là, c'est `Picked up by Shipping Partner`, plus haut), ni un retrait par toi. | « En transit » |
 | `Picked up` | Aux États-Unis, FedEx a récupéré le colis à l'entrepôt de Shouwu après le dédouanement (sa ligne donne la ville et le code postal). Ce n'est ni l'enlèvement chez le vendeur, `Picked up by Shipping Partner`, ni un retrait par toi. | « En transit » |
+| `Arrived at FedEx location`, `Departed FedEx location` | Les scans de FedEx dans ses propres sites aux États-Unis, après l'enlèvement du colis à l'entrepôt de Shouwu. | « En transit » |
 | `FR, Votre envoi est en transit sur nos plateformes logistiques.,运输途中` | Une ligne du transporteur qui livre en France, reprise avec le code du pays devant et « en transit » en chinois derrière. | « En transit » |
 | `The shipment has been processed in the destination parcel center` | DHL l'a trié au centre colis qui dessert ton adresse, avant sa tournée. | « En transit » |
 | `Mis routed` | Le transporteur qui livre en Allemagne a envoyé le colis au mauvais site et le réachemine : un retard, pas un blocage. La tournée peut passer le jour même. | « En transit » |
@@ -66,6 +67,7 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | `The recipient is unknown` | Lors de la tournée de DHL en Allemagne, le destinataire est inconnu à l'adresse : le colis repart. | « Tentative de livraison » |
 | `Shipment will be returned to origin-Bad address` | DHL renvoie le colis faute d'avoir trouvé l'adresse : il est sur le chemin du retour, pas encore chez l'expéditeur. Contacte le vendeur. | « Problème signalé » |
 | `Delivered by post man`, `This parcel has been delivered` | La poste ou le transporteur local l'a livré. | « Livré », une fois que le statut de Shouwu dit aussi `Delivered` |
+| `Shipment sent directly from parcel center to business customer` | DHL l'a livré directement depuis son centre colis à une adresse professionnelle. Si DHL avait renvoyé le colis, la même ligne veut dire que le retour est arrivé chez l'expéditeur. | « Livré », ou « Retourné à l’expéditeur » après un retour |
 
 D'autres lignes sont à connaître. `Shipment started the customs clearance process at origin`, c'est le début du dédouanement à l'export en Chine, une étape de routine avant le vol : la douane ne retient pas le colis, et Peek affiche « En transit ». Il en va de même pour `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` : le colis part de l'entrepôt de transit vers l'aéroport, où la Chine le dédouane à l'export. Et `Abnormal delivery`, suivi d'une raison comme `<Incorrect address.>` (adresse erronée), signale une tournée sans livraison : Peek affiche « Tentative de livraison ».
 
@@ -163,5 +165,5 @@ Le vendeur chez qui tu as commandé : il a réservé l'envoi chez Shouwu et peut
 - [Shouwu International : 法国经济 (France, économique)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=23) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Shouwu International : 法国带电 (France, avec batteries)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=26) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droits de 3 € depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes (depuis le 9 novembre aussi le dédouanement à l'export et à l'arrivée, le chargement à l'aéroport et la remise au transporteur, depuis le 14 novembre l'enlèvement chez le vendeur par le partenaire, l'enlèvement par FedEx aux États-Unis et le départ du navire de Chine), lignes de Colis Privé et du transporteur français, lignes d'iMile en Italie (renvoi à l'expéditeur compris), lignes de DPD, heures, lieux, ce qu'affiche Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes (depuis le 9 novembre aussi le dédouanement à l'export et à l'arrivée, le chargement à l'aéroport et la remise au transporteur, depuis le 14 novembre l'enlèvement chez le vendeur par le partenaire, l'enlèvement par FedEx aux États-Unis et le départ du navire de Chine, depuis le 15 novembre les scans propres de FedEx et la livraison de DHL à un professionnel), lignes de Colis Privé et du transporteur français, lignes d'iMile en Italie (renvoi à l'expéditeur compris), lignes de DPD, heures, lieux, ce qu'affiche Peek
 :::

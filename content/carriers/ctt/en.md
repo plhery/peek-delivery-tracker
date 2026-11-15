@@ -3,7 +3,7 @@ title: CTT tracking: numbers, statuses and pickup in Portugal
 description: Track a CTT parcel in Portugal: where the tracking number comes from, what CTT's statuses mean, pickup deadlines, customs fees and how to reach CTT.
 slug: ctt-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-15
 ---
 
 CTT (CTT – Correios de Portugal) is Portugal's national postal service, with an express arm, CTT Expresso. Track a parcel with "Seguir objeto" on [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt), which has an English version, in the CTT app, or by pasting the number in the box above. The number reaches you by CTT's SMS or email, on a paper notice, or from the sender.
@@ -70,7 +70,7 @@ Postal parcels can be extended up to 30 days. Bring the notice and an ID (Cartã
 
 CTT says some countries share international tracking late or not at all. For a stalled parcel, ask the sender, who bought the delivery from CTT; see [tracking that isn't updating](guide:tracking-not-updating).
 
-**Customs.** For parcels from outside the EU without VAT paid at purchase, you pay VAT plus CTT's €7 clearance fee (plus VAT) up to €150, and VAT, duties and €14 from €150 to €1,000. Since 1 July 2026 purchases up to €150 also pay €3 duty per product type. You have 20 days after arrival in Portugal; then it goes back to the sender for good. See [parcels held at customs](guide:customs).
+**Customs.** For parcels from outside the EU without VAT paid at purchase, you pay VAT plus CTT's €7 clearance fee (plus VAT) up to €150, and VAT, duties and €14 from €150 to €1,000. Since 1 July 2026 purchases up to €150 also pay €3 duty per product type. Since 1 November 2026, a €2 EU handling fee per product type applies too, whatever the value, owed by whoever declares the goods to customs; VAT is added to it and, if it wasn't paid at checkout, you pay it when the parcel reaches Portugal. You have 20 days after arrival in Portugal; then it goes back to the sender for good. See [parcels held at customs](guide:customs).
 
 **Complaints** go through CTT's contact form, the support line or a Loja or Ponto CTT, within one year of acceptance (national) or six months (international). CTT Expresso's conditions give the sender 8 days after delivery to claim for damage and 30 days for loss or delay.
 
@@ -89,7 +89,7 @@ CTT's channels, as read on 11 October 2026:
 
 ## Tracking CTT parcels with Peek
 
-[Peek](/) recognises CTT's postal codes (two letters, nine digits, `PT`, valid check digit) at once and reads them from CTT's tracking; ctt.pt links with `objects=` work too. With one digit wrong, the check digit no longer fits and Peek suggests Chronopost instead, so check the number. Other CTT codes aren't read from CTT; Peek uses universal tracking services.
+[Peek](/) recognises CTT's postal codes (two letters, nine digits, `PT`, valid check digit) at once and reads them from CTT's tracking; ctt.pt links with `objects=` work too. With one digit wrong, the check digit no longer fits and Peek recognises no carrier, so check the number. Other CTT codes aren't read from CTT; Peek uses universal tracking services.
 
 Peek shows the status and the newest 20 scans with a rough place (depot or point) on a map, plus CTT's status code. It drops the sender and recipient, and CTT gives no expected delivery day. Times are read on Lisbon time, or Azores time for the islands, and shown in your device's time zone.
 
@@ -128,7 +128,9 @@ They track separately: CTT Express, a Spanish-run courier for Spain and Portugal
 - [CTT: Prazo para levantar](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – pickup deadlines
 - [CTT: Alterar uma entrega Expresso](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-expresso) – delivery changes
 - [CTT: Serviços cobrados](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/taxas-e-servicos-cobrados/servicos-cobrados) – customs fees
-- [CTT: Isenção de direitos](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – €3 duty
+- [CTT: Isenção de direitos](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – €3 duty; €2 handling fee plus VAT, paid on arrival if not at checkout (read 14 November 2026)
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, owed by the declarant
 - [CTT: Prazo para desalfandegar](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 days
 - [CTT: Condições Expresso](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – claims
 - [CTT: Refugo Postal](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/recuperar-o-correio-que-esta-no-refugo-postal) – unclaimed items

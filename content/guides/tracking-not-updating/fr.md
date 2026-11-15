@@ -4,7 +4,7 @@ description: Ton suivi n'avance plus depuis des jours ? Les raisons, combien de 
 slug: suivi-colis-ne-bouge-plus
 picture: Un calendrier aux jours barrés, une ligne de progression arrêtée à mi-chemin et Pip qui attend, l'air de s'ennuyer.
 published: 2026-10-09
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Un suivi qui ne bouge plus veut en général dire que personne n'a scanné ton colis ces derniers temps, pas qu'il s'est arrêté. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un long trajet, un vol, la douane ou un week-end peuvent laisser plusieurs jours sans nouvelle ligne. Ne t'inquiète qu'une fois passé le délai du transporteur lui-même (chez [bpost](carrier:bpost), au moins 5 jours ouvrables pour un envoi vers un pays voisin ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard sur le délai habituel), et même là, contacte d'abord le vendeur : c'est lui, le client du transporteur.
@@ -118,7 +118,7 @@ Non. Un [site de suivi universel](guide:universal-tracker) non plus : il ne mont
 
 ### Mon numéro de suivi ne fonctionne pas
 
-Peut-être que le colis n'a pas encore été scanné, que le numéro appartient à un autre transporteur ou qu'un caractère est faux. [Vérifie à quel transporteur il appartient](guide:tracking-number-formats) ou [retrouve le bon numéro](guide:find-tracking-number).
+Peut-être que le colis n'a pas encore été scanné, que le numéro appartient à un autre transporteur ou qu'un caractère est faux. [Vérifie à quel transporteur il appartient](guide:tracking-number-formats) ou [retrouve le bon numéro](guide:find-tracking-number). Sur peektracker.com, un colis sans scan dont le transporteur n'a pas encore enregistré le numéro, ou n'a pas pu être joint, n'affiche pas d'erreur mais « En attente de bpost » (ici avec bpost) et, s'il n'a pas pu être joint, sur sa page, « Impossible de joindre bpost pour l’instant. Peek continue d’essayer. » Si deux jours plus tard le transporteur ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
 
 :::sources
 - [Mondial Relay Belgique : retard de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – délai moyen de 3 à 6 jours ouvrés, demande par e-mail ou par téléphone
@@ -135,7 +135,7 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – « Transmission des données par l’expéditeur »
 - [DPD France : Pourquoi mon suivi colis indique-t-il « numéro de colis inconnu » ?](https://www.dpd.com/fr/fr/faq/pourquoi-mon-suivi-colis-indique-t-il-numero-de-colis-inconnu/) – colis pas encore remis par l'expéditeur, colis de filiales DPD pris en charge par Chronopost, numéro erroné ou hors du réseau Geopost (lu le 14 novembre 2026)
 - [GLS France : Aide](https://gls-group.com/FR/fr/recevoir-colis/aide/) – livraison du lundi au vendredi de 8 h à 18 h, 24 h dans la plupart des départements, indemnisation d'un retard demandée à l'expéditeur (lu le 14 novembre 2026)
-- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – aucun nouveau scan quand toutes les sources répondent sans scan, scans déjà trouvés gardés (lu le 14 novembre 2026)
+- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – aucun nouveau scan quand toutes les sources répondent sans scan, scans déjà trouvés gardés ; attente du transporteur nommé ; après deux jours de numéro inconnu, demande de le vérifier, puis vérifications quotidiennes et hebdomadaires (lu le 15 novembre 2026)
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – premier scan, « Exception »
 - [DHL : Why are there delays? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – problèmes d'adresse et d'étiquette
 - [DHL : My shipment has not been delivered yet (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – intempéries, embouteillages, accidents, période avant Noël

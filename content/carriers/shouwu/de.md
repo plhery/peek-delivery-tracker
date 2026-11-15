@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -58,6 +58,7 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | An den Paketdienst übergeben, der bei dir zustellt: Zugestellt ist es damit noch nicht („deliverey“ schreibt Shouwu so). | „Unterwegs“ |
 | `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: nicht die Abholung beim Händler (die heißt `Picked up by Shipping Partner`, siehe oben) und keine durch dich. | „Unterwegs“ |
 | `Picked up` | In den USA hat FedEx das Paket nach der Verzollung in Shouwus Lager abgeholt (die Zeile nennt Ort und Postleitzahl). Nicht die Abholung beim Händler, `Picked up by Shipping Partner`, und keine durch dich. | „Unterwegs“ |
+| `Arrived at FedEx location`, `Departed FedEx location` | FedEx' eigene Scans an seinen Standorten in den USA, nachdem FedEx das Paket in Shouwus Lager abgeholt hat. | „Unterwegs“ |
 | `The shipment has been processed in the parcel center of origin` | DHLs erster Scan in Deutschland, nach dem Zoll. | „Unterwegs“ |
 | `The shipment has been processed in the destination parcel center` | DHL hat es im Paketzentrum sortiert, das deine Adresse beliefert, vor der Zustelltour. | „Unterwegs“ |
 | `Mis routed` | Der Zusteller in Deutschland hat das Paket an den falschen Standort geleitet und schickt es weiter: Das verzögert es, hält es aber nicht auf. Die Zustelltour kann noch am selben Tag kommen. | „Unterwegs“ |
@@ -67,6 +68,7 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `The recipient is unknown` | DHLs Zustelltour in Deutschland: Unter der Adresse ist der Empfänger unbekannt, das Paket geht zurück. | „Zustellversuch“ |
 | `Shipment will be returned to origin-Bad address` | DHL schickt das Paket zurück, weil die Adresse nicht zu finden war: Es ist auf dem Rückweg, noch nicht beim Absender. Frag den Shop. | „Problem gemeldet“ |
 | `Delivered by post man`, `This parcel has been delivered` | Die Post oder der Paketdienst vor Ort hat es zugestellt. | „Zugestellt“, sobald auch Shouwus Status `Delivered` lautet |
+| `Shipment sent directly from parcel center to business customer` | DHL hat es direkt ab Paketzentrum an eine Geschäftsadresse zugestellt. Hatte DHL das Paket zurückgeschickt, heißt dieselbe Zeile, dass die Rücksendung beim Absender angekommen ist. | „Zugestellt“, nach einer Rücksendung „Zurück an Absender“ |
 
 Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 
@@ -175,5 +177,5 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei Shouwu gebucht und kann
 - [Shouwu International: 德国经济 (Deutschland, Economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=22) – vor allem Hermes, 4 bis 7 Arbeitstage
 - [Shouwu International: 德国带电 (Deutschland, mit Batterien)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=25) – vor allem DPD, 4 bis 7 Arbeitstage
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll seit 1. Juli 2026, Bearbeitungsgebühr von 2 € seit 1. November 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst, seit 14. November die Abholung beim Händler durch den Versandpartner, die Abholung durch FedEx in den USA und das Auslaufen des Schiffs aus China), Zeilen von DHL, DPD und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Sendungsverfolgung und Link, Status, Scantexte und ihre Phasen (seit 9. November auch Ausfuhrabfertigung, Verladung am Flughafen, Verzollung im Zielland und Übergabe an den Paketdienst, seit 14. November die Abholung beim Händler durch den Versandpartner, die Abholung durch FedEx in den USA und das Auslaufen des Schiffs aus China, seit 15. November FedEx' eigene Scans und DHLs Zustellung an Geschäftskunden), Zeilen von DHL, DPD und des Zustellers in Deutschland, iMiles Zeilen in Italien (auch die Rücksendung an den Absender), Uhrzeiten, Orte, was Peek zeigt
 :::

@@ -3,7 +3,7 @@ title: SEUR seguimiento: número, estados y puntos Pickup
 description: Pega tu número de SEUR y mira dónde está tu paquete: cómo es el número, qué significa cada estado, qué pasa si no estás en casa y los puntos Pickup.
 slug: seur-seguimiento
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Pega tu número de SEUR en la casilla de arriba para ver dónde está tu paquete, o escríbelo en Mis envíos de miSEUR, en seur.com, sin crear una cuenta. Suele tener 14 o 21 cifras y está en el correo de envío de la tienda o en la página de tu pedido. SEUR es una empresa española de paquetería urgente que forma parte del grupo Geopost, el mismo de DPD.
@@ -49,8 +49,10 @@ SEUR escribe sus estados en mayúsculas y en español. Esta tabla los ordena seg
 | `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.` | La entrega se ha cambiado a un punto Pickup. |
 | `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA. DISCULPA LAS MOLESTIAS.` | Va con retraso y puede llegar más tarde de lo previsto. |
 | `EL ENVÍO ESTÁ EN REPARTO.` | Lo lleva el repartidor: llega hoy. |
+| `EL ENVÍO ESTÁ EN REPARTO INTERNACIONAL.` | Lo lleva el repartidor; es un envío internacional. |
 | `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` | No había nadie o estaba cerrado. Puedes pedir otra entrega. |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE LA DIRECCIÓN DE ENTREGA ESTÁ INCOMPLETA O ERRÓNEA.` | A la dirección le falta algún dato o tiene un error. Habla con el remitente o con SEUR. |
+| `EL ENVÍO NO SE HA ENTREGADO PORQUE LA DIRECCIÓN DE ENTREGA ES INCORRECTA.` | La dirección de entrega es incorrecta. Habla con el remitente o con SEUR. |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE NO ES LA DIRECCIÓN ACTUAL DEL DESTINATARIO.` | La dirección es incorrecta o antigua. Habla con el remitente o con SEUR. |
 | `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO` | El punto Pickup que se pidió no ha podido recibir el paquete. |
 | `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` | Listo para recoger en un punto Pickup. |

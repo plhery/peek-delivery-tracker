@@ -3,7 +3,7 @@ title: GZYL csomagkövetés Kínából: YL…YQ szám, státuszok
 description: Így követheti a GZYL-lel (广州云链) érkező kínai csomagot: milyen az YL…YQ szám, mit jelentenek a státuszok, és miért jelezhet kézbesítést a követés, ha nem jött semmi.
 slug: gzyl-csomagkovetes
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 A GZYL (广州云链, Guangzhou Yunlian) teljes neve 广州云链货运代理有限公司: szállítmányozó cég a kínai Kantonban (Guangzhou). Ha egy kínai webáruház a GZYL-lel küldte el a rendelését, a nyomkövetési szám YL-lel kezdődik, ezt 10 számjegy követi, a végén pedig YQ áll: illessze be a fenti mezőbe. A GZYL weboldala, a yunlianhouyun.com, kínai nyelvű, és csomagkeresője (小包查询) a GZYL nyomkövetőjét nyitja meg, amely csak egy IP-címen érhető el, domainnév nélkül. Amit ott lát, azt fenntartással kezelje: a GZYL a csomag útjának nagy részét előre rögzíti, így egy ott látható lépés, akár a `Delivered` is, nem mindig valódi beolvasás.
@@ -70,7 +70,7 @@ A GZYL-től a Peek nem talált sem szállítási időket, sem a kézbesítési k
 
 **Elakadt a vámnál.** Ha behozatali költségeket kérnek Öntől, olvassa el a [vámnál feltartott csomagokról szóló útmutatót](guide:customs) (angolul). 2026. november 1-jétől a vámon felül uniós kezelési díjat is fizetni kell: tételsoronként 2 eurót, ugyanúgy számolva, mint a 3 eurós átalányvámot, de a küldemény értékétől függetlenül. Ha a webáruház nem számolta fel a vásárláskor, a vámkezelést intéző posta vagy futárszolgálat kérheti el Öntől. Ha a csomag napokig ott marad, szóljon az eladónak.
 
-**A GZYL nyomkövetője vagy egy nyomkövető szolgáltatás többet mutat, mint a Peek.** A Peek háromféle lépést tart vissza: azt, amelyet előre, a rajta szereplő időpont előtt írtak be, a GZYL tervét lezáró `Delivered` lépést, és azt, amelynek időpontja későbbi, mint a Peek legutóbbi ellenőrzése (lásd lent). A többletlépések tehát lehetnek a GZYL tervének részei, nem beolvasások. Igazodjon a webáruház által megadott szállítási határidőhöz, és ha lejárt, írjon az eladónak. Bővebben: [csomagkövetés Kínából](guide:tracking-from-china) (angolul).
+**A GZYL nyomkövetője vagy egy nyomkövető szolgáltatás többet mutat, mint a Peek.** A Peek háromféle lépést nem tekint beolvasásnak: azt, amelyet előre, a rajta szereplő időpont előtt írtak be, a GZYL tervét lezáró `Delivered` lépést, és azt, amelynek időpontja későbbi, mint a Peek legutóbbi ellenőrzése (lásd lent). A többletlépések tehát lehetnek a GZYL tervének részei, nem beolvasások. Ha egy előre beírt lépés időpontja elmúlt, a Peek a peektracker.com oldalon szürkén, a GZYL szavaival mutatja a „Written in advance by GZYL” (a GZYL előre beírta) cím alatt. Az ilyen lépés sosem számít beolvasásnak: nem változtat sem az állapoton, sem a várható dátumon, nem küld értesítést, és eltűnik, amint egy beolvasás megerősíti, vagy amint a csomagot kézbesítik vagy visszaküldik. Igazodjon a webáruház által megadott szállítási határidőhöz, és ha lejárt, írjon az eladónak. Bővebben: [csomagkövetés Kínából](guide:tracking-from-china) (angolul).
 
 **`Delivered`, de nem jött semmi.** Lehet, hogy ez a lépés csak a GZYL tervének része, nem valódi beolvasás. Hacsak nem a Swiss Post kézbesíti a csomagot, a Peek a „Delivered” alá ezt írja: „GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller.” Vagyis a GZYL nyomkövetése rögzített menetrendet követ, és nem mutat aláírást; ha nem érkezett semmi, kérdezze meg az eladót. Írja meg neki, hogy a csomag nem jött meg, és tudja meg tőle, melyik cég kézbesíti, és milyen számon követheti. Bővebben: [ha a követés kézbesítést mutat, de a csomag nem érkezett meg](guide:delivered-not-received) (angolul).
 
@@ -104,7 +104,7 @@ Nem feltétlenül. Az YL, 10 számjegy és YQ a GZYL formája, és a Peek katal�
 
 ### Miért mutatja a GZYL kézbesítettnek a csomagot, ha nem kaptam meg?
 
-Lehet, hogy ez a GZYL tervének része. A GZYL a csomag útjának nagy részét előre rögzíti, és egy `Delivered` lépéssel zárja; az ilyen lépések tervek, nem beolvasások. A Peek a GZYL nyomkövetőjéből érkező ilyen lépéseket, a `Delivered` lépést is beleértve, visszatartja, és ha mégis „Delivered” állapotot mutat, alá is írja, hogy a GZYL nyomkövetése rögzített menetrendet követ. Írja meg az eladónak, hogy a csomag nem érkezett meg, és kérdezze meg, melyik cég kézbesíti.
+Lehet, hogy ez a GZYL tervének része. A GZYL a csomag útjának nagy részét előre rögzíti, és egy `Delivered` lépéssel zárja; az ilyen lépések tervek, nem beolvasások. A Peek a GZYL nyomkövetőjéből érkező ilyen lépéseket, a `Delivered` lépést is beleértve, nem tekinti beolvasásnak, és ha mégis „Delivered” állapotot mutat, alá is írja, hogy a GZYL nyomkövetése rögzített menetrendet követ. Írja meg az eladónak, hogy a csomag nem érkezett meg, és kérdezze meg, melyik cég kézbesíti.
 
 ### Ki kézbesíti a GZYL-csomagokat Magyarországon?
 

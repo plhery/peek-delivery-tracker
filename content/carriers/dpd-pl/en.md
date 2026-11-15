@@ -3,7 +3,7 @@ title: DPD Poland tracking: statuses, pickup points and contact
 description: Track a DPD Poland parcel in English: the 14-character number, what each status means, DPD Pickup points and lockers, claims and who to call.
 slug: dpd-poland-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-15
 ---
 
 DPD Poland (DPD Polska) is a Warsaw-based parcel carrier in the Geopost group, owned by France's [La Poste](carrier:la-poste). Track a parcel on DPD's [Track & Trace page](https://tracktrace.dpd.com.pl/EN/findParcel) with its 14-character parcel number, or paste it in the box above. The shop usually gives the number in its shipping email or on your order page.
@@ -36,7 +36,7 @@ DPD's tracking site opens in Polish; switch to "English" for these wordings. In 
 | `Parcel collected by pickup point` | Ready for you to pick up at the point. |
 | `The Parcel has been placed in the DPD Pickup Station` | Ready to pick up from a DPD Pickup locker. |
 | `Waiting for pickup timeout` | Nobody picked it up in time; it goes back to the sender. |
-| `Parcel return` | Going back to the sender under a new number. |
+| `Parcel return` | Going back to the sender under a new number; Peek shows "Returned to sender". |
 | `Parcel delivered` | Delivered. |
 
 "Collected" means the courier or the pickup point took the parcel, not you, so `Parcel collected by pickup point` is good news. `Parcel not delivered - recipient resigned` means the parcel was refused; it then goes back to the sender at the sender's cost. `Mail notification` and `SMS notification` are messages DPD sent you, not movements.

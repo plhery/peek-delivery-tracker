@@ -3,7 +3,7 @@ title: CTT rastreio: números, estados, levantamento e contactos
 description: Rastreio CTT: onde está o código de envio, o que quer dizer cada estado, prazos para levantar, taxas de alfândega, reclamações e contactos dos CTT.
 slug: ctt-rastreio
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-15
 ---
 
 Os CTT – Correios de Portugal são o correio nacional, com um serviço expresso, o CTT Expresso. Para seguir uma encomenda, escreve o código de envio no «Seguir objeto» do [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) ou na app CTT, ou cola-o na caixa no topo desta página. O código chega-te por SMS ou email dos CTT, num aviso em papel na caixa do correio, ou pelo remetente.
@@ -69,7 +69,7 @@ As encomendas postais podem ser prolongadas até 30 dias. Leva o aviso e um docu
 
 Nenhuma página dos CTT diz o que fazer quando o seguimento para. Quem comprou o transporte foi o remetente, por isso é a ele que deves perguntar primeiro; vê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
-**Alfândega.** Para encomendas de fora da UE sem IVA pago na compra: até 150 €, pagas o IVA e o serviço de desalfandegamento dos CTT, 7 € mais IVA; de 150 € a 1.000 €, IVA, direitos e 14 €. Desde 1 de julho de 2026, as compras até 150 € de fora da UE pagam também, além do IVA, um direito simplificado de 3 € por tipo de produto. Se o IVA e os direitos foram pagos na compra, não pagas o serviço dos CTT. Tens 20 dias depois da chegada a Portugal para desalfandegar; depois, a encomenda volta ao remetente sem volta atrás. Mais em [encomenda retida na alfândega](guide:customs).
+**Alfândega.** Para encomendas de fora da UE sem IVA pago na compra: até 150 €, pagas o IVA e o serviço de desalfandegamento dos CTT, 7 € mais IVA; de 150 € a 1.000 €, IVA, direitos e 14 €. Desde 1 de julho de 2026, as compras até 150 € de fora da UE pagam também, além do IVA, um direito simplificado de 3 € por tipo de produto. Desde 1 de novembro de 2026, junta-se a Taxa de Manuseamento Aduaneiro da UE, de 2 € por tipo de produto, seja qual for o valor, devida por quem declara a mercadoria na alfândega; acresce-lhe IVA e, se não foi paga na compra, pagas quando a encomenda chega a Portugal. Se o IVA e os direitos foram pagos na compra, não pagas o serviço dos CTT. Tens 20 dias depois da chegada a Portugal para desalfandegar; depois, a encomenda volta ao remetente sem volta atrás. Mais em [encomenda retida na alfândega](guide:customs).
 
 **Reclamações** sobre objetos postais: pelo formulário de contacto, pela linha de apoio ou numa Loja ou Ponto CTT, até 1 ano depois da aceitação (nacional) ou 6 meses (internacional). As condições do CTT Expresso dão ao cliente, ou seja ao remetente, 8 dias após a entrega para reclamar danos e 30 dias para perda ou atraso.
 
@@ -88,13 +88,13 @@ Os canais dos CTT para particulares, lidos a 11 de outubro de 2026:
 
 ## Rastrear encomenda CTT com o Peek
 
-O [Peek](/) mostra os CTT como «CTT Portugal». Reconhece logo os códigos de envio internacionais dos CTT (duas letras, nove algarismos, `PT`, algarismo de controlo válido) e lê-os no seguimento dos CTT; as ligações do ctt.pt com `objects=` também servem. Com um algarismo errado, o controlo deixa de bater certo e o Peek sugere a Chronopost em vez dos CTT: confirma o número ou escolhe com «Alterar». Outros códigos dos CTT não são lidos nos CTT; aí o Peek recorre a serviços universais de seguimento.
+O [Peek](/) mostra os CTT como «CTT Portugal». Reconhece logo os códigos de envio internacionais dos CTT (duas letras, nove algarismos, `PT`, algarismo de controlo válido) e lê-os no seguimento dos CTT; as ligações do ctt.pt com `objects=` também servem. Com um algarismo errado, o controlo deixa de bater certo e o Peek não reconhece nenhuma transportadora: confirma o número ou escolhe com «Alterar». Outros códigos dos CTT não são lidos nos CTT; aí o Peek recorre a serviços universais de seguimento.
 
 Mostra o estado, o código de estado dos CTT e as 20 leituras mais recentes num mapa, com um local aproximado (o centro ou o ponto). Não guarda o remetente nem o destinatário, nem mostra uma data de entrega prevista. As horas são lidas na hora de Lisboa, na dos Açores para moradas e ilhas dos Açores e na do país de destino para leituras de um correio estrangeiro, e mostradas no fuso horário do teu dispositivo.
 
 Os números de 22 e 25 algarismos (`00`, quatro algarismos, `00` e 14 algarismos, mais `001` nos de 25) vão para a CTT Express, que o Peek lista à parte, mesmo quando é o Seguir objeto que os segue. Para esses, mostra o histórico sem locais, o dia de entrega previsto, o peso, a hora de entrega e os estados em espanhol, como `El envío fue entregado correctamente`.
 
-Verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento dos CTT a responder; através de serviços de seguimento, de 15 em 15 minutos), e envia-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue acelerar a encomenda nem reclamar por ti.
+Verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento dos CTT a responder; através de serviços de seguimento, de 15 em 15 minutos), e envia-te notificações conforme escolheres: «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue acelerar a encomenda nem reclamar por ti.
 
 ## Perguntas sobre o rastreio CTT
 
@@ -130,7 +130,9 @@ Seguem-se em sítios diferentes: a CTT Express, rede entre Espanha e Portugal, n
 - [CTT: Como levantar uma encomenda num cacifo Locky](https://www.ctt.pt/ajuda/particulares/receber/cacifos-locky/como-levantar-uma-encomenda) – cacifos
 - [CTT: Alterar uma entrega Expresso](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-expresso) – alterações e preços
 - [CTT: Serviços cobrados](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/taxas-e-servicos-cobrados/servicos-cobrados) – taxas de desalfandegamento
-- [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – direito de 3 €
+- [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – direito de 3 €; Taxa de Manuseamento Aduaneiro de 2 € mais IVA, paga à chegada se não for paga na compra (lido a 14 de novembro de 2026)
+- [Comissão Europeia: EU customs reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento da União de 2 € desde 1 de novembro de 2026
+- [Comissão Europeia: Guidance on the €3 customs duty and Union handling fee, PDF (em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, seja qual for o valor, devidos pelo declarante
 - [CTT: Prazo para desalfandegar a minha encomenda](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 dias
 - [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – canais e prazos de reclamação
 - [CTT: Condições gerais de transporte de encomendas Expresso](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – prazos de reclamação Expresso

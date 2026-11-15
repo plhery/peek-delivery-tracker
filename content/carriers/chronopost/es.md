@@ -86,7 +86,7 @@ Si una reclamación escrita, fechada y firmada a Chronopost lleva dos meses sin 
 
 ## Seguir un paquete de Chronopost con Peek
 
-[Peek](/) reconoce al instante los códigos de 13 caracteres que empiezan por `PZ`, `XR`, `XT`, `XU`, `XW` o `XY` con dígito de control válido y acaban en `FR`, o que terminan en `JB`, `JF` o `TS`. Con esos prefijos y dígito válido, si acaban en `ES` pregunta a Chronopost y a [Correos](carrier:correos-spain); en `CH`, a Chronopost y a Swiss Post, y en `GB`, a Chronopost y a Royal Mail. Si falla el dígito de control, acaba en `RV`/`VF` o empieza por `XN`, consulta solo a Chronopost; otros prefijos válidos en `FR` van a [La Poste](carrier:la-poste).
+[Peek](/) reconoce al instante los códigos de 13 caracteres que empiezan por `PZ`, `XR`, `XT`, `XU`, `XW` o `XY` con dígito de control válido y acaban en `FR`, o que terminan en `JB`, `JF` o `TS`. Con esos prefijos y dígito válido, si acaban en `ES` o `CH` pregunta solo a Chronopost, y en `GB`, a Chronopost y, si Chronopost no conoce el número, también a Royal Mail. Si falla el dígito de control, acaba en `RV`/`VF` o empieza por `XN`, consulta solo a Chronopost; otros prefijos válidos en `FR` van a [La Poste](carrier:la-poste).
 
 Con 15 caracteres muestra «Comprobando servicios de seguimiento…» y pregunta a Chronopost y a las cuatro redes DPD; con 14 cifras sin `10` inicial consulta a varios transportistas, incluidos Chronopost, DPD y [SEUR](carrier:seur). Si Chronopost lo tiene verás «tiene este paquete»; si responden varios pulsa «Elegir», o usa «Cambiar» para buscarlo en «Encaja con este número» o «Todos los transportistas». Acepta enlaces de chronopost.fr y chronoshop2shop.fr sin código postal.
 

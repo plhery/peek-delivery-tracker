@@ -3,7 +3,7 @@ title: GZYL track & trace: pakket volgen met een YL…YQ-nummer
 description: Volg je GZYL-pakket (广州云链) uit China: hoe een YL…YQ-trackingnummer eruitziet, wat de statussen betekenen en waarom het al op bezorgd kan staan.
 slug: gzyl-pakket-volgen
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, een expediteur in Guangzhou, China. Heeft een Chinese webshop je bestelling met GZYL verstuurd, dan bestaat je trackingnummer uit YL, tien cijfers en YQ: plak het in het vak hierboven. De website van GZYL, yunlianhouyun.com, is in het Chinees, en de pakketzoeker (小包查询) daar opent de trackingpagina van GZYL, die op een IP-adres zonder domeinnaam draait. Neem die tracking met een korreltje zout: GZYL schrijft een groot deel van de reis van een pakket vooraf, dus een stap daar is niet altijd een scan, ook `Delivered` niet.
@@ -70,7 +70,7 @@ Peek vond bij GZYL geen levertijden en geen regels over bezorgpogingen, afhaalpu
 
 **Vast bij de douane.** Moet je invoerkosten betalen, lees dan de gids over [pakketten bij de douane](guide:customs) (in het Engels). Sinds 1 november 2026 int de douane in de hele EU naast de invoerrechten ook een afhandelingsvergoeding van € 2 per productcategorie (HS-code), net als de € 3 invoerrechten, maar ook voor zendingen van meer dan € 150. Meestal betaal je die al bij het afrekenen; zo niet, dan kan in Nederland je bezorger, zoals PostNL of DHL, je erom vragen. Blijft het pakket er dagen liggen, laat het de verkoper weten.
 
-**De trackingpagina van GZYL of een trackingdienst toont meer dan Peek.** Peek houdt drie soorten stappen tegen: vooraf geschreven stappen, de `Delivered` waarmee de planning van GZYL afsluit, en stappen met een tijd na de laatste controle van Peek (zie hieronder). De extra stappen kunnen dus de planning van GZYL zijn, geen scans. Ga uit van de levertermijn die de webshop je gaf, en vraag de verkoper wat er aan de hand is als die voorbij is. Meer in de gids over [een pakket uit China volgen](guide:tracking-from-china) (in het Engels).
+**De trackingpagina van GZYL of een trackingdienst toont meer dan Peek.** Peek houdt drie soorten stappen buiten de scans: vooraf geschreven stappen, de `Delivered` waarmee de planning van GZYL afsluit, en stappen met een tijd na de laatste controle van Peek (zie hieronder). De extra stappen kunnen dus de planning van GZYL zijn, geen scans. Is de tijd van een vooraf geschreven stap voorbij, dan toont Peek die op peektracker.com grijs, in de woorden van GZYL, onder "Written in advance by GZYL" (vooraf geschreven door GZYL). Zo'n stap telt nooit als scan: hij verandert de status en de verwachte datum niet, geeft geen melding en verdwijnt zodra een scan hem bevestigt of het pakket bezorgd of teruggestuurd is. Ga uit van de levertermijn die de webshop je gaf, en vraag de verkoper wat er aan de hand is als die voorbij is. Meer in de gids over [een pakket uit China volgen](guide:tracking-from-china) (in het Engels).
 
 **`Delivered`, maar er kwam niets.** Die stap kan deel uitmaken van de planning van GZYL; dan is het geen scan. Tenzij Swiss Post het pakket bezorgt, zet Peek onder "Delivered": "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." Dat wil zeggen: de tracking van GZYL volgt een vast schema en toont geen handtekening; is er niets aangekomen, vraag het dan aan de verkoper. Laat de verkoper weten dat je pakket niet is aangekomen, en vraag welk bedrijf het bezorgt en met welk nummer. Meer in [bezorgd maar niet ontvangen](guide:delivered-not-received) (in het Engels).
 
@@ -104,7 +104,7 @@ Niet met zekerheid. YL, tien cijfers en YQ is de vorm van GZYL, en geen andere v
 
 ### Waarom staat mijn GZYL-pakket op bezorgd terwijl er niets kwam?
 
-Die stap kan deel uitmaken van de planning van GZYL. GZYL schrijft een groot deel van de reis van een pakket vooraf en laat die eindigen op `Delivered`, en zulke stappen zijn een planning, geen scans. Peek houdt die stappen van de trackingpagina van GZYL tegen, `Delivered` inbegrepen, en onder een "Delivered" die het wel toont, meldt het dat de tracking van GZYL een vast schema volgt. Laat de verkoper weten dat het pakket niet is aangekomen en vraag welk bedrijf het bezorgt.
+Die stap kan deel uitmaken van de planning van GZYL. GZYL schrijft een groot deel van de reis van een pakket vooraf en laat die eindigen op `Delivered`, en zulke stappen zijn een planning, geen scans. Peek telt die stappen van de trackingpagina van GZYL niet als scans, `Delivered` inbegrepen, en onder een "Delivered" die het wel toont, meldt het dat de tracking van GZYL een vast schema volgt. Laat de verkoper weten dat het pakket niet is aangekomen en vraag welk bedrijf het bezorgt.
 
 ### Wie bezorgt een GZYL-pakket in België of Nederland?
 

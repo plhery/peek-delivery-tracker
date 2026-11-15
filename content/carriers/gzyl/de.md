@@ -3,7 +3,7 @@ title: GZYL Sendungsverfolgung: YL…YQ-Nummer, Status und Zustellung
 description: GZYL-Paket (广州云链) aus Guangzhou verfolgen: wie die YL…YQ-Nummer aussieht, was die Schritte heißen und warum ein Paket dort vorab als zugestellt stehen kann.
 slug: gzyl-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) ist 广州云链货运代理有限公司, ein Spediteur aus Guangzhou in China. Hat ein Shop in China deine Bestellung mit GZYL verschickt, besteht deine Sendungsnummer aus YL, zehn Ziffern und YQ: Füg sie oben ins Feld ein. GZYLs Website, yunlianhouyun.com, ist auf Chinesisch, und ihre Paketsuche (小包查询) öffnet eine Tracking-Seite, die nur unter einer IP-Adresse läuft. Lies die Tracking-Seite mit Vorsicht: GZYL schreibt einen großen Teil des Verlaufs im Voraus, deshalb ist ein Schritt dort, selbst `Delivered`, nicht immer ein Scan.
@@ -68,7 +68,7 @@ Lieferzeiten von GZYL hat Peek nicht gefunden, ebenso wenig Regeln zu Zustellver
 
 **Hängt beim Zoll.** Sollst du Einfuhrabgaben zahlen, lies [Paket beim Zoll](guide:customs). In Deutschland und Österreich kommt seit dem 1. November 2026 eine Abfertigungspauschale der EU von 2 € je Warenkategorie dazu, egal wie viel die Ware wert ist. Sind die Abgaben nicht schon im Preis des Shops enthalten, legt sie in Deutschland laut Zoll in der Regel der Paketdienst aus, und du zahlst sie bei der Zustellung. Bleibt das Paket tagelang dort, sag dem Shop Bescheid.
 
-**Die Tracking-Seite oder ein Tracking-Dienst ist weiter als Peek.** Die zusätzlichen Schritte können vorab geschriebene sein, samt dem `Delivered` am Ende von GZYLs Plan, und die hält Peek zurück (mehr unten): ein Plan von GZYL, keine Scans. Halte dich an die Lieferzeit, die der Shop genannt hat, und frag dort nach, wenn sie verstrichen ist. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
+**Die Tracking-Seite oder ein Tracking-Dienst ist weiter als Peek.** Die zusätzlichen Schritte können vorab geschriebene sein, samt dem `Delivered` am Ende von GZYLs Plan, und die hält Peek zurück (mehr unten): ein Plan von GZYL, keine Scans. Ist die Zeit eines vorab geschriebenen Schritts vorbei, zeigt Peek ihn auf peektracker.com ausgegraut in GZYLs Worten unter „Vorab eingetragen von GZYL“. Als Scan zählt er nie: Er ändert weder Status noch Liefertermin, löst keine Benachrichtigung aus und verschwindet, sobald ein Scan ihn bestätigt oder das Paket zugestellt oder an den Absender zurückgegangen ist. Halte dich an die Lieferzeit, die der Shop genannt hat, und frag dort nach, wenn sie verstrichen ist. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
 **`Delivered`, aber nichts angekommen.** Der Schritt kann zum Plan von GZYL gehören und ist dann kein Scan. Stellt nicht die Schweizerische Post das Paket zu, schreibt Peek das unter „Zugestellt“ dazu: „GZYL aktualisiert nach festem Zeitplan, ohne Unterschrift. Ist nichts angekommen, frag beim Verkäufer nach.“ Sag dem Shop, dass das Paket nicht da ist, und frag, welcher Paketdienst es zustellt und unter welcher Nummer. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -104,7 +104,7 @@ Nicht mit Sicherheit. YL, zehn Ziffern und YQ ist die Form von GZYL, und kein an
 
 ### Warum meldet GZYL mein Paket als zugestellt, obwohl es nicht da ist?
 
-Vielleicht gehört der Schritt zum Plan von GZYL. GZYL schreibt einen großen Teil des Verlaufs vorab und lässt ihn mit einem `Delivered` enden, und solche Schritte sind ein Plan, keine Scans. Von GZYLs Tracking-Seite hält Peek solche Schritte zurück, `Delivered` eingeschlossen, und unter einem „Zugestellt“, das es zeigt, weist es darauf hin, dass GZYLs Sendungsverfolgung einem festen Zeitplan folgt. Sag dem Shop, dass das Paket nicht angekommen ist, und frag, wer es zustellt.
+Vielleicht gehört der Schritt zum Plan von GZYL. GZYL schreibt einen großen Teil des Verlaufs vorab und lässt ihn mit einem `Delivered` enden, und solche Schritte sind ein Plan, keine Scans. Von GZYLs Tracking-Seite zählt Peek solche Schritte nicht als Scans, `Delivered` eingeschlossen, und unter einem „Zugestellt“, das es zeigt, weist es darauf hin, dass GZYLs Sendungsverfolgung einem festen Zeitplan folgt. Sag dem Shop, dass das Paket nicht angekommen ist, und frag, wer es zustellt.
 
 ### Wer stellt GZYL-Pakete in Deutschland, Österreich und der Schweiz zu?
 

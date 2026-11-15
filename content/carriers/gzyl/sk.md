@@ -3,7 +3,7 @@ title: Sledovanie zásielky GZYL z Číny: číslo YL…YQ a stavy
 description: Ako sledovať balík z Číny poslaný cez GZYL (广州云链): ako vyzerá číslo YL…YQ, čo znamenajú stavy a prečo sledovanie môže ukázať Delivered, hoci balík neprišiel.
 slug: gzyl-sledovanie-zasielky
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špedičná firma z mesta Guangzhou (Kanton) v Číne. Ak vám čínsky e-shop poslal objednávku cez GZYL, číslo zásielky má tvar YL, desať číslic a YQ: vložte ho do poľa vyššie. Webová stránka GZYL, yunlianhouyun.com, je po čínsky a jej vyhľadávanie zásielok (小包查询) otvára sledovanie, ktoré beží na IP adrese bez doménového mena. Údaje v ňom berte s rezervou: GZYL zapisuje veľkú časť cesty balíka vopred, takže krok, ktorý tam uvidíte, nemusí byť skutočný sken, a to ani `Delivered`.
@@ -70,7 +70,7 @@ Peek u GZYL nenašiel lehoty doručenia ani pravidlá pre pokusy o doručenie, v
 
 **Zásielka uviazla na colnici.** Ak od vás žiadajú dovozné poplatky, pozrite si návod [o zásielkach na colnici](guide:customs) (v angličtine). Od 1. novembra 2026 sa okrem cla platí aj manipulačný poplatok Únie: 2 eurá za každú položku colného vyhlásenia, rovnako ako pri 3-eurovom cle, ale bez ohľadu na hodnotu tovaru. Ak ho e-shop nezahrnul do ceny, platí ho ten, kto zásielku colne deklaruje, zvyčajne prepravca, a ten ho môže pred doručením žiadať od vás. Finančná správa upozorňuje, že ak platforma pri objednávke účtuje poplatok nazvaný „clo“ alebo „colný poplatok“, jeho zaplatenie ešte neznamená, že clo či manipulačný poplatok dostal colný orgán: ak ich predajca neodvedie, budete ich musieť zaplatiť znova. Ak tam zásielka leží niekoľko dní, dajte vedieť predajcovi.
 
-**Sledovanie GZYL alebo služba sledovania zásielok ukazuje viac ako Peek.** Peek zadrží tri druhy krokov: kroky zapísané vopred, pred časom, ktorý uvádzajú, `Delivered`, ktorým sa končí plán GZYL, a kroky s časom neskorším než posledná kontrola Peeku (pozrite nižšie). Kroky navyše teda môžu byť plán GZYL, nie skeny. Riaďte sa termínom doručenia, ktorý vám dal e-shop, a keď uplynie, napíšte predajcovi. Viac v návode [o sledovaní zásielok z Číny](guide:tracking-from-china) (v angličtine).
+**Sledovanie GZYL alebo služba sledovania zásielok ukazuje viac ako Peek.** Peek nepočíta ako skeny tri druhy krokov: kroky zapísané vopred, pred časom, ktorý uvádzajú, `Delivered`, ktorým sa končí plán GZYL, a kroky s časom neskorším než posledná kontrola Peeku (pozrite nižšie). Kroky navyše teda môžu byť plán GZYL, nie skeny. Keď čas kroku zapísaného vopred uplynie, Peek ho na peektracker.com ukáže sivou farbou, slovami GZYL, pod „Written in advance by GZYL“ (zapísané vopred prepravcom GZYL). Taký krok sa nikdy nepočíta ako sken: nemení stav ani očakávaný dátum, neposiela upozornenia a zmizne, keď ho potvrdí sken alebo keď je zásielka doručená či vrátená. Riaďte sa termínom doručenia, ktorý vám dal e-shop, a keď uplynie, napíšte predajcovi. Viac v návode [o sledovaní zásielok z Číny](guide:tracking-from-china) (v angličtine).
 
 **`Delivered`, ale nič neprišlo.** Tento krok môže byť súčasťou plánu GZYL, nie sken. Ak zásielku nedoručuje Swiss Post, Peek pod „Delivered“ napíše: „GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller.“ Teda: sledovanie GZYL ide podľa pevného harmonogramu a neukazuje podpis; ak nič neprišlo, opýtajte sa predajcu. Napíšte mu, že balík neprišiel, a zistite, ktorá firma ho doručuje a pod akým číslom. Viac v návode [keď sledovanie ukazuje doručenie, ale zásielku nemáte](guide:delivered-not-received) (v angličtine).
 
@@ -104,7 +104,7 @@ Nie s úplnou istotou. YL, desať číslic a YQ je tvar čísel GZYL a žiadny i
 
 ### Prečo GZYL ukazuje zásielku ako doručenú, hoci neprišla?
 
-Môže to byť súčasť plánu GZYL. GZYL zapisuje veľkú časť cesty balíka vopred a končí ju krokom `Delivered`, a takéto kroky sú plán, nie skeny. Peek ich zo sledovania GZYL zadrží, `Delivered` vrátane, a ak „Delivered“ predsa ukáže, pripíše pod neho, že sledovanie GZYL ide podľa pevného harmonogramu. Napíšte predajcovi, že balík neprišiel, a opýtajte sa, ktorá firma ho doručuje.
+Môže to byť súčasť plánu GZYL. GZYL zapisuje veľkú časť cesty balíka vopred a končí ju krokom `Delivered`, a takéto kroky sú plán, nie skeny. Peek ich zo sledovania GZYL nepočíta ako skeny, `Delivered` vrátane, a ak „Delivered“ predsa ukáže, pripíše pod neho, že sledovanie GZYL ide podľa pevného harmonogramu. Napíšte predajcovi, že balík neprišiel, a opýtajte sa, ktorá firma ho doručuje.
 
 ### Kto doručuje zásielky GZYL na Slovensku?
 

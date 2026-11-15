@@ -4,7 +4,7 @@ description: O seguimento da encomenda não atualiza há dias? Vê as causas mai
 slug: tracking-nao-atualiza-encomenda-parada
 picture: Um calendário com vários dias riscados, uma linha de progresso interrompida a meio e o Pip à espera, um pouco aborrecido.
 published: 2026-10-09
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Quando o tracking não atualiza, normalmente é porque ninguém leu a etiqueta da tua encomenda nos últimos dias, não porque ela tenha parado. As transportadoras registam leituras nos centros operacionais e nas fronteiras, não na estrada: uma viagem longa, um voo, a alfândega ou um fim de semana podem deixar-te dias sem uma linha nova. Só vale a pena preocupares-te quando passar o prazo da própria transportadora (os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente; a [InPost](carrier:inpost) aceita uma reclamação por atraso passados mais de 5 dias desde a notificação de envio) e, mesmo assim, fala primeiro com a loja: foi ela que contratou a transportadora.
@@ -31,7 +31,7 @@ Nenhuma transportadora dá um número único para o tempo que o seguimento pode 
 - home | Último troço | Em entrega e depois entregue: as leituras voltam a ser rápidas.
 :::
 
-Quando uma encomenda está com a etiqueta criada, aceite pela transportadora ou em trânsito e a última leitura tem quatro dias ou mais, o [Peek](/) mostra «Sem atualizações há quatro dias» na tua lista e, na página da encomenda, a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana.», que diz também que o Peek continua a perguntar à transportadora.
+Quando uma encomenda está com a etiqueta criada, aceite pela transportadora ou em trânsito e a última leitura tem quatro dias ou mais, o [Peek](/) mostra «Sem atualizações há quatro dias» na tua lista e, na página da encomenda, a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana.», que diz também que o Peek continua a perguntar à transportadora. Se a transportadora e os serviços de seguimento responderem sem nenhuma leitura (número não encontrado, ou registado sem histórico) para uma encomenda que já tem leituras, o Peek guarda as que encontrou e mostra na página da encomenda «A transportadora não tem registos novos por agora. Os já encontrados ficam guardados, e o Peek continua a verificar.»
 
 ### Número novo ou «Aguarda entrada nos CTT» há dias: quanto tempo demora?
 
@@ -118,7 +118,7 @@ Não, e [um serviço de seguimento](guide:universal-tracker) também não: só m
 
 ### O meu número de seguimento não funciona
 
-A encomenda pode ainda não ter sido lida, o número pode ser de outra transportadora ou ter um carácter errado. [Vê de que transportadora é](guide:tracking-number-formats) ou [encontra o número certo](guide:find-tracking-number).
+A encomenda pode ainda não ter sido lida, o número pode ser de outra transportadora ou ter um carácter errado. [Vê de que transportadora é](guide:tracking-number-formats) ou [encontra o número certo](guide:find-tracking-number). No peektracker.com, uma encomenda sem leituras cuja transportadora ainda não registou o número, ou não pôde ser contactada, não mostra um erro, mas «À espera de DPD Portugal» (aqui com a DPD Portugal) e, se não foi possível contactá-la, na página da encomenda, «Ainda não foi possível contactar DPD Portugal. O Peek continua a tentar.» Se ao fim de dois dias a transportadora ainda não reconhecer o número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana quando já tiver passado uma semana desde que a adicionaste.
 
 :::sources
 - [CTT: Resultados que podem aparecer na pesquisa do «Seguir objeto»](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto) – Aguarda entrada nos CTT, Aceite, Em trânsito, Em importação, Em entrega
@@ -154,4 +154,5 @@ A encomenda pode ainda não ter sido lida, o número pode ser de outra transport
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 dias
 - [PGR Lisboa: Decreto-Lei n.º 84/2021](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – art. 11.º, prazo de 30 dias, transferência do risco, transportadora escolhida por ti
 - [PGR Lisboa: Decreto-Lei n.º 24/2014](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=2062&tabela=leis) – art. 19.º, produto indisponível, devolução em dobro
+- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – sem leituras novas quando todas as fontes respondem sem leitura, as encontradas ficam guardadas; espera pela transportadora pelo nome; ao fim de dois dias com o número desconhecido, o pedido para o verificar, depois verificações diárias e semanais (lido a 15 de novembro de 2026)
 :::

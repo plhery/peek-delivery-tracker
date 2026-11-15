@@ -24,7 +24,7 @@ Wraca do nadawcy. Zwykle odwozi ją ta sama firma, która ją przywiozła.
 
 - **[InPost](carrier:inpost):** gdy paczka wraca, Peek pokazuje ją z etapem „Zwrócona nadawcy” (statusy InPost są po polsku, gdy korzystasz z Peek po polsku).
 - **[Poczta Polska](carrier:poczta-polska)** zwraca nadawcy przesyłkę poleconą, której nikt nie odebrał w ciągu 14 dni. Nieodebraną paczkę Pocztex zwraca nadawcy na jego koszt.
-- **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy. W Peek zobaczysz wtedy `Zwrot przesyłki` (albo `Parcel return`, gdy Peek pobiera historię tej paczki po angielsku), z etapem „Zgłoszono problem”.
+- **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy. W Peek zobaczysz wtedy `Zwrot przesyłki` (albo `Parcel return`, gdy Peek pobiera historię tej paczki po angielsku), z etapem „Zwrócona nadawcy”.
 - **[Allegro One](carrier:allegro-one)** i inni przewoźnicy z programu Allegro Delivery odsyłają paczkę do sprzedającego.
 
 Przewoźnik nie wyśle Ci jej drugi raz sam z siebie: o ponownej wysyłce albo zwrocie pieniędzy decyduje sklep. Gdy paczka jest już w drodze powrotnej, poradnik [paczka wraca do nadawcy](guide:returned-to-sender) opisuje tę drogę i to, o co poprosić sprzedawcę.

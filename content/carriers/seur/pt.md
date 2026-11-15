@@ -3,7 +3,7 @@ title: SEUR encomenda: rastreio, estados e contactos em Portugal
 description: Seguir uma encomenda SEUR em Portugal: o número, os estados em espanhol explicados, pontos Pickup, entregas falhadas, reclamações e contactos.
 slug: seur-encomenda
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 A SEUR é uma transportadora espanhola de encomendas e envios urgentes, do grupo Geopost, o mesmo da DPD. Para seguir a tua, abre a página de seguimento miSEUR, em seur.com, sem conta, ou cola o número na caixa acima.
@@ -44,7 +44,9 @@ Os estados aparecem em espanhol e em maiúsculas, tal como a SEUR os escreve. Pe
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | Já há um dia de entrega combinado. |
 | `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA. DISCULPA LAS MOLESTIAS.` | Atrasada: a entrega pode chegar mais tarde do que o previsto. |
 | `EL ENVÍO ESTÁ EN REPARTO.` | Em distribuição, deve chegar hoje. |
+| `EL ENVÍO ESTÁ EN REPARTO INTERNACIONAL.` | Em distribuição, numa encomenda internacional. |
 | `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` | Entrega falhada: não estava ninguém ou o local estava fechado. Podes marcar nova entrega. |
+| `EL ENVÍO NO SE HA ENTREGADO PORQUE LA DIRECCIÓN DE ENTREGA ES INCORRECTA.` | Não entregue: a morada de entrega está errada. O Peek mostra «Tentativa de entrega». |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE NO ES LA DIRECCIÓN ACTUAL DEL DESTINATARIO.` | Não entregue: a morada está errada ou desatualizada. |
 | `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO` | Não entregue: o ponto SEUR Pickup pedido não pôde receber a encomenda. |
 | `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.` | A entrega passou para um ponto SEUR Pickup. |

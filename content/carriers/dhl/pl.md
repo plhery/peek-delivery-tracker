@@ -88,7 +88,7 @@ DHL nigdy nie prosi SMS-em o dane osobowe ani o płatność; podejrzaną wiadomo
 
 ## Śledzenie DHL Paket w Peek
 
-[Peek](/) od razu rozpoznaje DHL po numerze `JJD` z 18 cyframi, numerze `0034043…` z poprawną cyfrą kontrolną albo poprawnym numerze `C…DE` lub `L…DE`. 12-cyfrowy Identcode czy numer 10-cyfrowy pasuje też do innych przewoźników: wklej go mimo to, Peek śledzi ponad 3500 przewoźników, a jeśli paczka nie trafi pod DHL, wybierz „DHL” przez „Zmień przewoźnika”. Działają też linki z dhl.de i deutschepost.de.
+[Peek](/) od razu rozpoznaje DHL po numerze `JJD` z 18 cyframi (etykiety `JJD0146…` trafiają do [DHL Express](carrier:dhl-express)), numerze `0034043…` z poprawną cyfrą kontrolną albo poprawnym numerze `C…DE` lub `L…DE`. 12-cyfrowy Identcode czy numer 10-cyfrowy pasuje też do innych przewoźników: wklej go mimo to, Peek śledzi ponad 3500 przewoźników, a jeśli paczka nie trafi pod DHL, wybierz „DHL” przez „Zmień przewoźnika”. Działają też linki z dhl.de i deutschepost.de.
 
 Peek czyta śledzenie z dhl.de po angielsku (po niemiecku, jeśli aplikacja Peek jest ustawiona na niemiecki), a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy kilka przesyłek ma ten sam 12-cyfrowy numer, DHL żąda kodu pocztowego adresu doręczenia: wtedy Peek poprosi Cię o niego przy paczce („Dodaj kod pocztowy”), a dopóki go nie dodasz, pomagają serwisy śledzenia przesyłek. Dopóki DHL czeka na kod pocztowy albo odrzuca podany przez Ciebie, a przez dobę nie odpowiedział ani DHL, ani żaden serwis śledzenia, Peek sprawdza paczkę raz dziennie; dodanie lub zmiana kodu pocztowego od razu uruchamia sprawdzenie. Serwisy śledzenia pomagają też, gdy DHL odsyła do innej usługi DHL. Peek sprawdza paczkę co 10 minut, a gdy jest w doręczeniu, co 2 minuty (co 5, gdy musi otworzyć dhl.de w przeglądarce), i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Częstsze sprawdzanie działa tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego (gdy DHL podaje przedział godzin, od pół godziny przed jego początkiem), i dopóki odpowiada własne śledzenie DHL; przez serwisy śledzenia przesyłek Peek sprawdza co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
 
@@ -106,7 +106,7 @@ DHL podaje orientacyjnie 2–3 dni robocze. W Niemczech paczka dociera zwykle 1�
 
 ### Czy paczkę DHL Paket sprawdzę w Mój DHL?
 
-Czasem tak. Mój DHL podaje, że paczkę nadaną za granicą da się tam śledzić, gdy dotrze do magazynu DHL eCommerce Polska. Wtedy Mój DHL może znać jej numer `JJD`: w Peek wybierz DHL eCommerce Poland przez „Zmień przewoźnika”, bo sam numer `JJD` trafia do DHL z Niemiec (a `JJD000090` z 14–16 cyframi do DHL eCommerce Netherlands). Jeśli Mój DHL nie zna numeru, śledź paczkę na dhl.de.
+Czasem tak. Mój DHL podaje, że paczkę nadaną za granicą da się tam śledzić, gdy dotrze do magazynu DHL eCommerce Polska. Wtedy Mój DHL może znać jej numer `JJD`: w Peek wybierz DHL eCommerce Poland przez „Zmień przewoźnika”, bo sam numer `JJD` trafia do DHL z Niemiec (a `JJD000090` z 14–16 cyframi do DHL eCommerce Netherlands, `JJD000061`, `JJD000268`, `JJD000269` i `JJD000368` z 14 cyframi do DHL eCommerce Iberia, `JJD0146` z 14 cyframi do DHL Express). Jeśli Mój DHL nie zna numeru, śledź paczkę na dhl.de.
 
 ### Czy da się śledzić DHL Päckchen?
 

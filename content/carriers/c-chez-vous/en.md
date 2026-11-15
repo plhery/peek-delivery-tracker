@@ -99,7 +99,7 @@ Peek's status reads Label created while the order is registered and its appointm
 
 Some limits. `En livraison` stays In transit in Peek, since C Chez Vous's own text says the order is still heading to the regional depot, and the tracking page has no out-for-delivery step. Peek doesn't read `Annulée`: a cancelled order simply stops moving.
 
-It leaves out the shop, your name, address and contacts, and the items ordered. Peek checks every 10 minutes and can notify you of every scan, important steps only or delivery day only. With no out-for-delivery step, it never switches to its 2-minute delivery-day checks, and delivery day only brings just the Delivered alert; important steps also tell you when a pickup-point order is ready. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't move your appointment.
+It leaves out the shop, your name, address and contacts, and the items ordered. Peek checks every 10 minutes and can notify you of "Every scan", "Important steps" or "Delivery only". With no out-for-delivery step, it never switches to its 2-minute delivery-day checks, and "Delivery only" brings just the Delivered alert; "Important steps" also tells you when a pickup-point order is ready. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't move your appointment.
 
 ## Questions about C Chez Vous tracking
 

@@ -3,7 +3,7 @@ title: SEUR tracking: numbers, statuses and pickup points
 description: Track a SEUR parcel in Spain: what the number looks like, what SEUR's Spanish statuses mean, Pickup points, missed deliveries and how to reach SEUR.
 slug: seur-tracking
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's miSEUR tracking page on seur.com, with a SEUR tracking link or by pasting the number in the box above.
@@ -41,7 +41,9 @@ SEUR's tracking site is in Spanish and English. The statuses below are the Spani
 | `EL ENVÍO SERÁ ENTREGADO EN LA FECHA CONCERTADA. ACTUALIZAREMOS LA SITUACIÓN.` | A delivery day has been agreed. |
 | `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA. DISCULPA LAS MOLESTIAS.` | Delayed: delivery may come later than planned. |
 | `EL ENVÍO ESTÁ EN REPARTO.` | Out for delivery today. |
+| `EL ENVÍO ESTÁ EN REPARTO INTERNACIONAL.` | Out for delivery, for a parcel from or to another country. |
 | `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` | Missed: nobody was in or the place was closed. You can rebook. |
+| `EL ENVÍO NO SE HA ENTREGADO PORQUE LA DIRECCIÓN DE ENTREGA ES INCORRECTA.` | Not delivered: the delivery address is wrong. Peek shows "Delivery attempted". |
 | `EL ENVÍO NO SE HA ENTREGADO PORQUE NO ES LA DIRECCIÓN ACTUAL DEL DESTINATARIO.` | Not delivered: the address is wrong or out of date. |
 | `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO` | Not delivered: the SEUR Pickup point asked for couldn't take it. |
 | `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` | Ready for pickup at a SEUR Pickup point. |

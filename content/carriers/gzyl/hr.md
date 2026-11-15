@@ -3,7 +3,7 @@ title: Praćenje GZYL pošiljke iz Kine: broj YL…YQ i statusi
 description: Prati paket iz Kine poslan preko GZYL-a (广州云链): kako izgleda broj YL…YQ, što znače statusi i zašto praćenje može pokazati Delivered iako paket nije stigao.
 slug: gzyl-pracenje-posiljke
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špeditersko poduzeće iz Guangzhoua (Kantona) u Kini. Ako ti je kineska web-trgovina narudžbu poslala preko GZYL-a, broj za praćenje ima oblik YL, deset znamenki i YQ: zalijepi ga u polje iznad. GZYL-ova web-stranica, yunlianhouyun.com, na kineskom je, a njezina tražilica pošiljaka (小包查询) otvara GZYL-ov sustav za praćenje, koji radi na IP adresi, bez imena domene. Podatke u njemu uzmi s rezervom: GZYL velik dio puta paketa upisuje unaprijed, pa korak koji ondje vidiš nije uvijek stvarno skeniranje, čak ni kad piše `Delivered`.
@@ -70,7 +70,7 @@ Peek kod GZYL-a nije našao rokove dostave ni pravila o pokušajima dostave, mje
 
 **Paket je zapeo na carini.** Ako od tebe traže uvozna davanja, pogledaj vodič o [pošiljkama na carini](guide:customs) (na engleskom). Od 1. studenoga 2026. za internetske narudžbe iz zemalja izvan EU-a osim carine plaća se i naknada za rukovanje: 2 € za svaku stavku deklaracije, kao kod fiksne carine od 3 €, ali i za narudžbe iznad 150 €. Ako ih trgovina nije naplatila pri kupnji, plaća ih onaj tko prijavljuje pošiljku carini, obično prijevoznik, koji ih može tražiti od tebe prije uručenja. Ako paket ondje stoji danima, javi prodavaču.
 
-**GZYL-ov sustav za praćenje ili neki servis za praćenje pokazuje više od Peeka.** Peek ne prikazuje korake upisane unaprijed, prije vremena koje navode, `Delivered` kojim završava GZYL-ov plan ni korake s vremenom kasnijim od trenutka svoje posljednje provjere (vidi niže). Koraci kojih u Peeku nema zato mogu biti GZYL-ov plan, a ne skeniranja. Ravnaj se po roku dostave koji ti je dala trgovina, a kad prođe, javi se prodavaču. Više u vodiču o [praćenju paketa iz Kine](guide:tracking-from-china) (na engleskom).
+**GZYL-ov sustav za praćenje ili neki servis za praćenje pokazuje više od Peeka.** Peek ne prikazuje kao skeniranja korake upisane unaprijed, prije vremena koje navode, `Delivered` kojim završava GZYL-ov plan ni korake s vremenom kasnijim od trenutka svoje posljednje provjere (vidi niže). Dodatni koraci zato mogu biti GZYL-ov plan, a ne skeniranja. Kad prođe vrijeme koraka upisanog unaprijed, Peek ga na peektracker.com prikazuje sivo, GZYL-ovim riječima, pod "Written in advance by GZYL" (unaprijed upisao GZYL). Takav se korak nikad ne računa kao skeniranje: ne mijenja status ni očekivani datum, ne šalje obavijesti i nestaje čim ga potvrdi skeniranje ili kad paket bude dostavljen ili vraćen. Ravnaj se po roku dostave koji ti je dala trgovina, a kad prođe, javi se prodavaču. Više u vodiču o [praćenju paketa iz Kine](guide:tracking-from-china) (na engleskom).
 
 **`Delivered`, a ništa nije stiglo.** Taj korak može biti dio GZYL-ova plana, a ne skeniranje. Osim ako pošiljku dostavlja Swiss Post, Peek ispod "Delivered" piše: "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." To znači da GZYL-ovo praćenje slijedi unaprijed zadan raspored i ne pokazuje potpis te da se, ako ništa nije stiglo, trebaš obratiti prodavaču. Javi mu da paket nije stigao i pitaj koja ga tvrtka dostavlja i pod kojim brojem. Više u vodiču o [paketu koji je dostavljen, a nije stigao](guide:delivered-not-received) (na engleskom).
 
@@ -104,7 +104,7 @@ Ne nužno. YL, deset znamenki i YQ je GZYL-ov oblik i nijedan ga drugi prijevozn
 
 ### Zašto GZYL piše da je paket dostavljen iako nije stigao?
 
-Korak `Delivered` može biti dio GZYL-ova plana. GZYL velik dio puta paketa upisuje unaprijed i završava ga korakom `Delivered`, a takvi su koraci plan, a ne skeniranja. Peek takve korake iz GZYL-ova sustava za praćenje ne prikazuje, uključujući `Delivered`, a ako ipak prikaže "Delivered", ispod njega dopiše da GZYL-ovo praćenje slijedi unaprijed zadan raspored. Javi prodavaču da paket nije stigao i pitaj koja ga tvrtka dostavlja.
+Korak `Delivered` može biti dio GZYL-ova plana. GZYL velik dio puta paketa upisuje unaprijed i završava ga korakom `Delivered`, a takvi su koraci plan, a ne skeniranja. Peek takve korake iz GZYL-ova sustava za praćenje ne računa kao skeniranja, uključujući `Delivered`, a ako ipak prikaže "Delivered", ispod njega dopiše da GZYL-ovo praćenje slijedi unaprijed zadan raspored. Javi prodavaču da paket nije stigao i pitaj koja ga tvrtka dostavlja.
 
 ### Tko dostavlja GZYL pošiljke u Hrvatskoj?
 

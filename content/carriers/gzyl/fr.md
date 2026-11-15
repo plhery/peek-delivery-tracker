@@ -3,7 +3,7 @@ title: Suivi colis GZYL : numéro YL…YQ, statuts et qui contacter
 description: Suivre un colis GZYL (广州云链) venu de Chine : le numéro YL…YQ, ce que veulent dire les statuts et pourquoi ton colis peut s'afficher livré avant d'arriver.
 slug: gzyl-suivi-colis
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) est 广州云链货运代理有限公司, un transitaire de Guangzhou (Canton), en Chine. Si une boutique chinoise a confié ta commande à GZYL, ton numéro de suivi commence par YL et finit par YQ, avec dix chiffres entre les deux : colle-le dans le champ ci-dessus. Le site web de GZYL, yunlianhouyun.com, est en chinois, et sa recherche de colis (小包查询) ouvre un site de suivi qui tourne sur une simple adresse IP, sans nom de domaine. Prends ce suivi avec des pincettes : GZYL écrit d'avance une bonne partie du trajet d'un colis, si bien qu'une étape, même `Delivered`, n'y correspond pas toujours à un scan.
@@ -70,7 +70,7 @@ Peek n'a trouvé aucun délai de livraison chez GZYL. Tentatives de livraison, p
 
 **Bloqué à la douane.** Un colis acheté en ligne hors de l'Union européenne paie, depuis le 1er juillet 2026, 3 € de droits de douane par article s'il vaut 150 € au plus. Depuis le 1er novembre 2026, il faut aussi compter 2 € de frais de traitement par article, quelle que soit la valeur du colis. Un article, c'est un type de produit (une ligne de la déclaration en douane), pas une pièce. Pour le total à payer en France ou en Belgique, TVA comprise, lis [colis bloqué en douane](guide:customs). Si le colis reste des jours à la douane, préviens la boutique.
 
-**Le site de suivi de GZYL, ou un service de suivi, en montre plus que Peek.** Peek écarte les étapes écrites longtemps avant l'heure qu'elles portent, le `Delivered` qui clôt la prévision de GZYL, et les étapes datées d'après sa dernière vérification (détails plus bas) : les étapes en plus sont peut-être des prévisions de GZYL, pas des scans. Fie-toi au délai annoncé par la boutique, et écris-lui une fois ce délai dépassé. Plus d'infos dans [suivi de colis qui ne bouge plus](guide:tracking-not-updating) et [suivi d'un colis venant de Chine](guide:tracking-from-china).
+**Le site de suivi de GZYL, ou un service de suivi, en montre plus que Peek.** Peek écarte des scans les étapes écrites longtemps avant l'heure qu'elles portent, le `Delivered` qui clôt la prévision de GZYL, et les étapes datées d'après sa dernière vérification (détails plus bas) : les étapes en plus sont peut-être des prévisions de GZYL, pas des scans. Une fois passée l'heure d'une étape écrite à l'avance, Peek l'affiche sur peektracker.com en grisé, avec le libellé de GZYL, sous « Écrit à l’avance par GZYL ». Elle ne compte jamais comme un scan : elle ne change ni le statut ni la date prévue, ne déclenche aucune notification et disparaît dès qu'un scan la confirme ou que le colis est livré ou retourné à l'expéditeur. Fie-toi au délai annoncé par la boutique, et écris-lui une fois ce délai dépassé. Plus d'infos dans [suivi de colis qui ne bouge plus](guide:tracking-not-updating) et [suivi d'un colis venant de Chine](guide:tracking-from-china).
 
 **`Delivered`, mais rien reçu.** L'étape est peut-être une prévision de GZYL, pas un scan. Sauf si La Poste suisse livre le colis, Peek ajoute sous « Livré » : « GZYL met à jour selon un calendrier fixe, sans signature. Si rien n’est arrivé, contacte le vendeur. » Dis à la boutique que le colis n'est pas arrivé, et demande-lui quelle société le livre et sous quel numéro. Voir [colis livré mais non reçu](guide:delivered-not-received).
 
@@ -104,7 +104,7 @@ Pas à coup sûr. YL, dix chiffres et YQ, c'est la forme des numéros GZYL, et a
 
 ### Pourquoi mon colis GZYL est-il marqué livré alors que je ne l'ai pas reçu ?
 
-C'est peut-être une prévision de GZYL : GZYL écrit d'avance une bonne partie du trajet d'un colis et le termine par un `Delivered`, et ces étapes sont des prévisions, pas des scans. Peek écarte ces étapes quand il lit le site de GZYL, `Delivered` compris, et, s'il affiche quand même « Livré », il précise juste en dessous que le suivi de GZYL avance selon un calendrier fixe. Dis à la boutique que le colis n'est pas arrivé, et demande-lui qui le livre.
+C'est peut-être une prévision de GZYL : GZYL écrit d'avance une bonne partie du trajet d'un colis et le termine par un `Delivered`, et ces étapes sont des prévisions, pas des scans. Peek ne compte pas ces étapes comme des scans quand il lit le site de GZYL, `Delivered` compris, et, s'il affiche quand même « Livré », il précise juste en dessous que le suivi de GZYL avance selon un calendrier fixe. Dis à la boutique que le colis n'est pas arrivé, et demande-lui qui le livre.
 
 ### Qui livre les colis GZYL en France et en Belgique ?
 

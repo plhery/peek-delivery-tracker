@@ -4,7 +4,7 @@ description: Why parcel tracking stops updating, how long a gap is normal at eac
 slug: tracking-not-updating
 picture: A calendar with several days crossed out, a progress line that stops halfway, and Pip waiting, a little bored.
 published: 2026-10-09
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 11 working days after posting for a [Royal Mail](carrier:royal-mail) 1st Class claim), and even then, ask the seller first: it's the carrier's customer.
@@ -31,7 +31,7 @@ No carrier gives one figure for how long tracking can stay quiet. Before the del
 - home | Last mile | Out for delivery, then delivered: scans come quickly again.
 :::
 
-When a parcel is at label created, received by the carrier or in transit and its last scan is four days old or more, [Peek](/) shows "No tracking update for four days" in your list and, on the parcel's page, the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking USPS." (with USPS, for example).
+When a parcel is at label created, received by the carrier or in transit and its last scan is four days old or more, [Peek](/) shows "No tracking update for four days" in your list and, on the parcel's page, the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking USPS." (with USPS, for example). If the carrier and the tracking services answer without any scan (the number not found, or listed without history) for a parcel that already has scans, Peek keeps the ones it found and shows on the parcel's page "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking."
 
 ### How long does a new tracking number take to update?
 
@@ -121,7 +121,7 @@ No, and nor can a tracker: [it only shows what the carrier publishes](guide:univ
 
 ### My tracking number isn't working
 
-The parcel may not be scanned yet, the number may belong to another carrier, or a character may be wrong. [Check which carrier it belongs to](guide:tracking-number-formats) or [find the right number](guide:find-tracking-number).
+The parcel may not be scanned yet, the number may belong to another carrier, or a character may be wrong. [Check which carrier it belongs to](guide:tracking-number-formats) or [find the right number](guide:find-tracking-number). On peektracker.com, a parcel with no scans whose carrier hasn't listed the number yet, or couldn't be reached, shows no error but "Waiting for USPS" (with USPS, for example), and, when USPS couldn't be reached, its page says "USPS couldn’t be reached yet. Peek keeps trying." If the carrier still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and from then on checks it daily, and weekly once a week has passed since you added it.
 
 :::sources
 - [USPS: Missing Mail](https://www.usps.com/help/missing-mail.htm) – 7 days after mailing
@@ -158,4 +158,5 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [Irish Statute Book: Consumer Rights Act 2022, s. 35](https://www.irishstatutebook.ie/eli/2022/act/37/section/35/enacted/en/html) – passing of risk, carrier not proposed by the trader
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – seller responsible for damage until you receive the goods
 - [FTC: Mail Order Rule](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) – 30 days
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – no new scans when every source answers without one, found scans kept; waiting for the carrier by name; after two days unknown, the owner asked to check the number, then daily and weekly checks (read 15 November 2026)
 :::

@@ -3,7 +3,7 @@ title: Rastreo y seguimiento GZYL: número YL…YQ y estados
 description: Rastrea tu paquete de GZYL (广州云链) desde China: cómo es un número YL…YQ, qué significa cada estado y por qué puede salir entregado sin haber llegado.
 slug: gzyl-seguimiento
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) es 广州云链货运代理有限公司, un transitario (agente de carga) de Guangzhou, en China, que envía paquetes al extranjero. Si una tienda china te ha enviado el pedido con GZYL, tu número de seguimiento empieza por YL, lleva diez cifras y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El sitio web de GZYL, yunlianhouyun.com, está en chino, y su búsqueda de paquetes (小包查询) abre una página de seguimiento que está en una simple dirección IP, sin nombre de dominio. Lee ese seguimiento con cautela: GZYL escribe de antemano buena parte del recorrido de un paquete, así que un paso, incluso `Delivered`, no siempre es un escaneo.
@@ -70,7 +70,7 @@ Peek no ha encontrado plazos de entrega de GZYL, ni reglas sobre intentos de ent
 
 **Parado en la aduana.** Si te piden pagar algo para recibir el paquete, mira [paquete retenido en aduanas](guide:customs). En España, desde el 1 de noviembre de 2026, la aduana cobra además una tasa de tramitación de 2 € por tipo de producto, como el arancel de 3 €, pero sea cual sea el valor; en un envío de hasta 150 €, si la tienda no la cobró en la compra, el transportista puede pedírtela junto con el arancel antes de entregarte el paquete. Si se queda ahí varios días, avisa a la tienda.
 
-**La página de GZYL o un servicio de seguimiento muestra más pasos que Peek.** Peek deja fuera los pasos escritos de antemano, el `Delivered` con el que termina la previsión de GZYL y los pasos con fecha posterior a su última consulta (más abajo), así que los pasos que ves de más pueden ser la previsión de GZYL y no escaneos. Guíate por el plazo de entrega que te dio la tienda, y escríbele cuando se haya cumplido. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
+**La página de GZYL o un servicio de seguimiento muestra más pasos que Peek.** Peek deja fuera de los escaneos los pasos escritos de antemano, el `Delivered` con el que termina la previsión de GZYL y los pasos con fecha posterior a su última consulta (más abajo), así que los pasos que ves de más pueden ser la previsión de GZYL y no escaneos. Cuando pasa la hora de un paso escrito de antemano, Peek lo muestra en peektracker.com en gris, con las palabras de GZYL, bajo «Escrito de antemano por GZYL». Nunca cuenta como escaneo: no cambia el estado ni la fecha prevista, no genera avisos y desaparece en cuanto un escaneo lo confirma o el paquete se entrega o vuelve al remitente. Guíate por el plazo de entrega que te dio la tienda, y escríbele cuando se haya cumplido. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
 **`Delivered`, pero no ha llegado nada.** Ese paso puede ser parte de la previsión de GZYL, no un escaneo. Salvo que el paquete lo entregue Swiss Post, Peek añade debajo de «Entregado»: «GZYL actualiza según un calendario fijo, sin firma. Si no ha llegado nada, contacta con el vendedor.» Dile a la tienda que el paquete no ha llegado, y pregúntale qué empresa lo entrega y con qué número. Más en [paquete entregado pero no recibido](guide:delivered-not-received).
 
@@ -104,7 +104,7 @@ No con total seguridad. YL, diez cifras y YQ es el formato de GZYL, y ningún ot
 
 ### ¿Por qué GZYL dice que mi paquete está entregado si no ha llegado?
 
-Puede ser parte de la previsión de GZYL. GZYL escribe de antemano buena parte del recorrido de un paquete y lo termina con un `Delivered`, y esos pasos son una previsión, no escaneos. Cuando lee la página de seguimiento de GZYL, Peek deja fuera esos pasos, `Delivered` incluido, y si aun así muestra «Entregado», añade debajo que el seguimiento de GZYL sigue un calendario fijo. Dile a la tienda que el paquete no ha llegado y pregúntale qué empresa lo entrega.
+Puede ser parte de la previsión de GZYL. GZYL escribe de antemano buena parte del recorrido de un paquete y lo termina con un `Delivered`, y esos pasos son una previsión, no escaneos. Cuando lee la página de seguimiento de GZYL, Peek no cuenta esos pasos como escaneos, `Delivered` incluido, y si aun así muestra «Entregado», añade debajo que el seguimiento de GZYL sigue un calendario fijo. Dile a la tienda que el paquete no ha llegado y pregúntale qué empresa lo entrega.
 
 ### ¿Quién entrega los paquetes de GZYL en mi país?
 

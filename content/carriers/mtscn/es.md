@@ -3,7 +3,7 @@ title: Meiteshun seguimiento: número AMTS, estados y a quién acudir
 description: Sigue tu paquete de Meiteshun (美特顺) desde Shenzhen: cómo es un número AMTS, qué significa cada paso y por qué su «Delivered» puede estar escrito de antemano.
 slug: meiteshun-seguimiento
 published: 2026-11-01
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) es una empresa de logística de Shenzhen, en China. Sus números empiezan por AMTS y acaban en FS: si la tienda que te envió el pedido te ha dado uno, pégalo en la casilla de arriba. Lee con cuidado el seguimiento de Meiteshun: su sistema escribe todo el viaje del paquete, entrega incluida, cuando se crea el pedido, así que un `Delivered` en su web no demuestra que tu paquete haya llegado.
@@ -63,7 +63,7 @@ Peek no ha encontrado plazos de entrega de Meiteshun, ni normas sobre intentos d
 
 **Todos los pasos a su hora, pero ni rastro del paquete.** Los pasos se escribieron al crear el pedido: muestran el plan, no dónde está el paquete. Guíate por el plazo de entrega que te dio la tienda y pregúntale cuando haya pasado.
 
-**Parado en Shenzhen según Peek.** Si Peek solo muestra los primeros pasos en Shenzhen y un enlace de seguimiento de la tienda muestra más, los pasos que Peek deja fuera se escribieron de antemano o tienen fecha posterior a su consulta (más abajo). Si ha dejado fuera pasos escritos de antemano, Peek lo avisa bajo el estado del paquete en peektracker.com: «La web de Meiteshun Logistics muestra etapas escritas por adelantado, incluso la entrega. Peek no puede confirmarlas, así que las omite. Busca en esa web la empresa que reparte en tu país y su número de seguimiento; si no aparece, pregunta al vendedor.» Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
+**Parado en Shenzhen según Peek.** Si Peek solo muestra los primeros pasos en Shenzhen y un enlace de seguimiento de la tienda muestra más, los pasos que Peek deja fuera se escribieron de antemano o tienen fecha posterior a su consulta (más abajo). Cuando pasa la hora de un paso escrito de antemano, Peek lo muestra en peektracker.com en gris, con las palabras de Meiteshun, bajo «Escrito de antemano por Meiteshun Logistics». Nunca cuenta como escaneo: no cambia el estado ni la fecha prevista, no genera avisos y desaparece en cuanto un escaneo lo confirma o el paquete se entrega o vuelve al remitente. Si ha dejado fuera pasos escritos de antemano, Peek también lo avisa bajo el estado del paquete: «La web de Meiteshun Logistics muestra etapas escritas por adelantado, incluso la entrega. Peek no puede confirmarlas, así que las muestra en gris. Busca en esa web la empresa que reparte en tu país y su número de seguimiento; si no aparece, pregunta al vendedor.» Mientras no muestra ninguno, la frase dice que Peek «las omite». Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
 **No sale nada.** Con un número que no conoce, la web de Meiteshun muestra el número como referencia y todos los demás campos vacíos. Comprueba el número con la tienda.
 

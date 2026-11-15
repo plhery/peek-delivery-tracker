@@ -3,7 +3,7 @@ title: GZYL śledzenie przesyłki: numer YL…YQ, statusy i kontakt
 description: Paczka GZYL (广州云链) z Chin: jak wygląda numer YL…YQ, co znaczą statusy i dlaczego status Delivered może się pojawić, zanim paczka dotrze.
 slug: gzyl-sledzenie
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) to 广州云链货运代理有限公司, firma spedycyjna z Kantonu (Guangzhou) w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez GZYL, dostajesz numer, który zaczyna się od YL i kończy na YQ: wklej go w pole powyżej. Strona internetowa GZYL, yunlianhouyun.com, jest po chińsku, a jej wyszukiwarka paczek (小包查询) prowadzi do strony śledzenia, która działa pod samym adresem IP serwera. Czytaj ją z rezerwą: GZYL zapisuje dużą część drogi paczki z góry, więc nie każdy etap na tej stronie, nawet `Delivered`, jest skanem.
@@ -70,7 +70,7 @@ Peek nie znalazł podawanych przez GZYL czasów dostawy ani zasad dotyczących p
 
 **Utknęła w urzędzie celnym.** Od 1 lipca 2026 przy przesyłkach spoza UE o wartości do 150 euro nalicza się 3 euro cła za każdą pozycję, czyli rodzaj towaru w paczce. Od 1 listopada 2026 dochodzi do tego unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość przesyłki. Kto pobiera te kwoty razem z VAT-em i ile w sumie zapłacisz, wyjaśnia poradnik o [paczce zatrzymanej przez urząd celny](guide:customs). Jeśli paczka stoi w urzędzie celnym kilka dni, daj znać sprzedawcy.
 
-**Strona GZYL albo serwis śledzenia pokazuje więcej niż Peek.** Peek nie pokazuje etapów zapisanych z wyprzedzeniem, etapu `Delivered`, który kończy plan GZYL, ani etapów, których godzina jeszcze nie nadeszła (więcej niżej), więc dodatkowe etapy mogą być planem GZYL, a nie skanami. Kieruj się terminem dostawy podanym przez sklep, a gdy minie, napisz do sprzedawcy. Więcej w poradnikach [status przesyłki się nie zmienia](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
+**Strona GZYL albo serwis śledzenia pokazuje więcej niż Peek.** Peek nie pokazuje jako skanów etapów zapisanych z wyprzedzeniem, etapu `Delivered`, który kończy plan GZYL, ani etapów, których godzina jeszcze nie nadeszła (więcej niżej), więc dodatkowe etapy mogą być planem GZYL, a nie skanami. Gdy minie godzina etapu zapisanego z wyprzedzeniem, Peek pokazuje go na peektracker.com na szaro, słowami GZYL, w części „Zapisane z wyprzedzeniem przez przewoźnika GZYL”. Taki etap nigdy nie liczy się jako skan: nie zmienia statusu ani przewidywanej daty dostawy, nie wysyła powiadomień i znika, gdy potwierdzi go skan albo gdy paczka zostanie doręczona lub zwrócona. Kieruj się terminem dostawy podanym przez sklep, a gdy minie, napisz do sprzedawcy. Więcej w poradnikach [status przesyłki się nie zmienia](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
 
 **`Delivered`, a paczki nie ma.** Ten etap może być częścią planu GZYL, a nie skanem. Jeśli paczki nie doręcza Poczta Szwajcarska, Peek dopisuje pod statusem „Dostarczona”: „Statusy przewoźnika GZYL pojawiają się według stałego harmonogramu, bez podpisu. Jeśli nic nie dotarło, zapytaj sprzedawcę.” Napisz sprzedawcy, że paczka nie dotarła, i zapytaj, która firma ją doręcza i pod jakim numerem. Więcej w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
@@ -104,7 +104,7 @@ Niekoniecznie. YL, dziesięć cyfr i YQ to format numerów GZYL i żaden inny pr
 
 ### Dlaczego GZYL pokazuje doręczenie, choć paczka nie dotarła?
 
-Może to być część planu GZYL. GZYL zapisuje dużą część drogi paczki z wyprzedzeniem i kończy ją etapem `Delivered`, a takie etapy to plan, nie skany. Peek nie pokazuje takich etapów ze strony GZYL, łącznie z `Delivered`, a pod statusem „Dostarczona”, który pokazuje, dopisuje, że statusy GZYL pojawiają się według stałego harmonogramu. Napisz sprzedawcy, że paczka nie dotarła, i zapytaj, która firma ją doręcza.
+Może to być część planu GZYL. GZYL zapisuje dużą część drogi paczki z wyprzedzeniem i kończy ją etapem `Delivered`, a takie etapy to plan, nie skany. Peek nie liczy takich etapów ze strony GZYL jako skanów, łącznie z `Delivered`, a pod statusem „Dostarczona”, który pokazuje, dopisuje, że statusy GZYL pojawiają się według stałego harmonogramu. Napisz sprzedawcy, że paczka nie dotarła, i zapytaj, która firma ją doręcza.
 
 ### Kto doręcza paczki GZYL w Polsce?
 

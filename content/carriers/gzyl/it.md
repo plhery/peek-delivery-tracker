@@ -3,7 +3,7 @@ title: GZYL tracking: numero YL…YQ, stati e pacco non arrivato
 description: Tracking GZYL (广州云链) per i pacchi dalla Cina: com'è fatto il numero YL…YQ, cosa vogliono dire gli stati e perché il pacco può risultare consegnato senza esserlo.
 slug: gzyl-tracking
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) è 广州云链货运代理有限公司, uno spedizioniere di Guangzhou (Canton), in Cina. Se un negozio cinese ha spedito il tuo ordine con GZYL, il numero di tracking è composto da YL, dieci cifre e YQ: incollalo nel box qui sopra. Il sito web di GZYL, yunlianhouyun.com, è in cinese, e la sua ricerca pacchi (小包查询) apre un tracking che si trova su un semplice indirizzo IP, senza nome di dominio. Prendi con cautela quello che mostra: GZYL scrive in anticipo buona parte del viaggio di un pacco, quindi un passaggio, persino `Delivered`, non è sempre una vera scansione.
@@ -70,7 +70,7 @@ Peek non ha trovato tempi di consegna di GZYL, né regole su tentativi di conseg
 
 **Fermo in dogana.** Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Dal 1° novembre 2026, oltre al dazio, è dovuta anche la tassa di gestione dell'Unione: 2 € per articolo, cioè per voce doganale come il dazio di 3 €, qualunque sia il valore. Se il venditore non te l'ha già fatta pagare all'acquisto, di solito te la chiede chi consegna (Poste, per esempio) insieme a dazio e IVA, online prima della consegna o alla consegna. Se resta lì per giorni, avvisa il venditore.
 
-**Il tracking di GZYL o un servizio di tracciamento mostra più di Peek.** Peek tiene da parte i passaggi scritti in anticipo rispetto all'ora che riportano, il `Delivered` che chiude il programma di GZYL e i passaggi datati dopo il suo ultimo controllo (vedi sotto), quindi quelli in più possono essere solo il programma di GZYL, non vere scansioni. Regolati sulla data di consegna stimata dal negozio e, quando è passata, scrivi al venditore. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Il tracking di GZYL o un servizio di tracciamento mostra più di Peek.** Peek tiene da parte i passaggi scritti in anticipo rispetto all'ora che riportano, il `Delivered` che chiude il programma di GZYL e i passaggi datati dopo il suo ultimo controllo (vedi sotto), quindi quelli in più possono essere solo il programma di GZYL, non vere scansioni. Passata l'ora di un passaggio scritto in anticipo, Peek lo mostra su peektracker.com in grigio, con le parole di GZYL, sotto «Scritto in anticipo da GZYL». Non conta mai come scansione: non cambia lo stato né la data prevista, non fa partire notifiche e sparisce appena una scansione lo conferma o il pacco viene consegnato o restituito al mittente. Regolati sulla data di consegna stimata dal negozio e, quando è passata, scrivi al venditore. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **`Delivered`, ma non è arrivato niente.** Il passaggio può far parte del programma di GZYL, senza essere una scansione. A meno che il pacco non lo consegni la Posta Svizzera, Peek lo scrive sotto «Consegnato»: «GZYL aggiorna secondo un calendario fisso, senza firma. Se non è arrivato nulla, contatta il venditore.» Avvisa il venditore che il pacco non è arrivato e chiedigli quale corriere lo consegna e con che numero. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -104,7 +104,7 @@ Non è detto. YL, dieci cifre e YQ è la forma di GZYL e nessun altro corriere d
 
 ### Perché GZYL dice che il pacco è stato consegnato se non è arrivato?
 
-Perché quel `Delivered` può far parte del programma di GZYL. GZYL scrive in anticipo buona parte della cronologia di un pacco e la chiude con un `Delivered`: questi passaggi sono un programma, non scansioni. Quando legge il tracking di GZYL, Peek tiene da parte questi passaggi, `Delivered` compreso, e se mostra comunque «Consegnato», sotto aggiunge che il tracciamento di GZYL segue un calendario fisso. Avvisa il venditore che il pacco non è arrivato e chiedigli quale corriere lo consegna.
+Perché quel `Delivered` può far parte del programma di GZYL. GZYL scrive in anticipo buona parte della cronologia di un pacco e la chiude con un `Delivered`: questi passaggi sono un programma, non scansioni. Quando legge il tracking di GZYL, Peek non conta questi passaggi come scansioni, `Delivered` compreso, e se mostra comunque «Consegnato», sotto aggiunge che il tracciamento di GZYL segue un calendario fisso. Avvisa il venditore che il pacco non è arrivato e chiedigli quale corriere lo consegna.
 
 ### Chi consegna i pacchi GZYL in Italia?
 

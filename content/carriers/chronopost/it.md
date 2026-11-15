@@ -86,7 +86,7 @@ Se un reclamo scritto, datato e firmato inviato a Chronopost resta senza rispost
 
 ## Seguire un pacco Chronopost con Peek
 
-[Peek](/) riconosce subito i codici di 13 caratteri che iniziano con `PZ`, `XR`, `XT`, `XU`, `XW` o `XY` con cifra di controllo valida e finiscono in `FR` o `IT`, o che terminano in `JB`, `JF` o `TS`. Con finale `CH` interroga Chronopost e [La Posta Svizzera](carrier:swiss-post), con `GB` Chronopost e Royal Mail. Se la cifra di controllo non torna, o se il codice finisce in `RV`/`VF` o inizia con `XN`, interroga solo Chronopost; altri prefissi validi in `FR` vanno a La Poste.
+[Peek](/) riconosce subito i codici di 13 caratteri che iniziano con `PZ`, `XR`, `XT`, `XU`, `XW` o `XY` con cifra di controllo valida e finiscono in `FR` o `IT`, o che terminano in `JB`, `JF` o `TS`. Con finale `CH` interroga solo Chronopost, con `GB` Chronopost e, se Chronopost non conosce il codice, anche Royal Mail. Se la cifra di controllo non torna, o se il codice finisce in `RV`/`VF` o inizia con `XN`, interroga solo Chronopost; altri prefissi validi in `FR` vanno a La Poste.
 
 Con 15 caratteri mostra «Verifica dei servizi di tracciamento…» e interroga Chronopost e le quattro reti DPD; con 14 cifre senza `10` iniziale interroga più corrieri, inclusi Chronopost, DPD e [BRT](carrier:brt). Quando Chronopost risponde vedi «ha questo pacco»; se rispondono più corrieri premi «Scegli», oppure usa «Cambia» sotto «Compatibili con questo numero» o «Tutti i corrieri». Accetta link chronopost.fr e chronoshop2shop.fr senza codice postale.
 

@@ -848,7 +848,17 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'rail-continent'
   | 'dalli-service'
   | 'logsis'
-  | 'peshkariki';
+  | 'peshkariki'
+  | 'begad'
+  | 'ghapex'
+  | 'cargomini'
+  | 'santos-e-vale'
+  | 'xinsu'
+  | 'ruiqi'
+  | 'brics56'
+  | 'extrans'
+  | 'yqs'
+  | 'yusuda';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

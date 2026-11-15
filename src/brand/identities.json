@@ -406,6 +406,9 @@
   "beexprss": {
     "decal": "beexprss"
   },
+  "begad": {
+    "decal": "begad"
+  },
   "bel": {
     "decal": "bel"
   },
@@ -541,6 +544,9 @@
   "brauns-express": {
     "decal": "brauns-express"
   },
+  "brics56": {
+    "decal": "brics56"
+  },
   "bridge-intl": {
     "decal": "bridge-intl"
   },
@@ -635,6 +641,9 @@
   },
   "cargoline": {
     "decal": "cargoline"
+  },
+  "cargomini": {
+    "decal": "cargomini"
   },
   "cargus": {
     "decal": "cargus"
@@ -1528,6 +1537,9 @@
   "express-ru": {
     "decal": "express-ru"
   },
+  "extrans": {
+    "decal": "extrans"
+  },
   "ezship": {
     "decal": "ezship"
   },
@@ -1775,6 +1787,9 @@
   },
   "ghana-post": {
     "decal": "ghana-post"
+  },
+  "ghapex": {
+    "decal": "ghapex"
   },
   "ghn": {
     "decal": "ghn"
@@ -3630,6 +3645,9 @@
   "rtt": {
     "decal": "rtt"
   },
+  "ruiqi": {
+    "decal": "ruiqi"
+  },
   "runforint": {
     "decal": "runforint"
   },
@@ -3680,6 +3698,9 @@
   },
   "samus": {
     "decal": "samus"
+  },
+  "santos-e-vale": {
+    "decal": "santos-e-vale"
   },
   "sapx-express": {
     "decal": "sapx-express"
@@ -4715,6 +4736,9 @@
   "xingyunyi": {
     "decal": "xingyunyi"
   },
+  "xinsu": {
+    "decal": "xinsu"
+  },
   "xlcourier": {
     "decal": "xlcourier"
   },
@@ -4806,6 +4830,9 @@
   "youbang-express": {
     "decal": "youbang-express"
   },
+  "yqs": {
+    "decal": "yqs"
+  },
   "yto": {
     "decal": "yto"
   },
@@ -4830,6 +4857,9 @@
   },
   "yurtici-kargo": {
     "decal": "yurtici-kargo"
+  },
+  "yusuda": {
+    "decal": "yusuda"
   },
   "ywe": {
     "decal": "ywe"

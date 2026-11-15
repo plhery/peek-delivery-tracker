@@ -965,6 +965,16 @@ describe('carrier brand', () => {
       'dalli-service',
       'logsis',
       'peshkariki',
+      'begad',
+      'ghapex',
+      'cargomini',
+      'santos-e-vale',
+      'xinsu',
+      'ruiqi',
+      'brics56',
+      'extrans',
+      'yqs',
+      'yusuda',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

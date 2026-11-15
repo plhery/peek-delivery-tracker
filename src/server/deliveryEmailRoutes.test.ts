@@ -64,7 +64,7 @@ describe('the account\'s choice about the delivery email', () => {
     const never = await read();
     expect(never.status).toBe(200);
     const answer = await never.json();
-    expect(answer).toEqual({ ...shown, emailOnDelivery: null, emailAvailable: true });
+    expect(answer).toEqual({ ...shown, emailOnDelivery: null, emailAvailable: true, markNewUpdates: true });
     // Exactly what the contract lists.
     expect(Object.keys(answer).sort()).toEqual(Object.keys(contract.components.schemas.NotificationPreferences.properties).sort());
     load.mockResolvedValue({ ...stored, email_on_delivery: true });
@@ -85,7 +85,7 @@ describe('the account\'s choice about the delivery email', () => {
     configure();
     vi.spyOn(SupabaseUserClient.prototype, 'getNotificationPreferences').mockResolvedValue({ ...stored, email_on_delivery: true });
     // What is stored is still shown: the clients hide the switch.
-    expect(await (await read()).json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: false });
+    expect(await (await read()).json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: false, markNewUpdates: true });
 
     const store = vi.spyOn(SupabaseUserClient.prototype, 'setNotificationPreferences').mockResolvedValue({ ...stored, email_on_delivery: false });
     const refused = await save({ ...shown, emailOnDelivery: true });
@@ -96,8 +96,8 @@ describe('the account\'s choice about the delivery email', () => {
     // Switching it off and saving the rest still work.
     const off = await save({ ...shown, emailOnDelivery: false });
     expect(off.status).toBe(200);
-    expect(await off.json()).toEqual({ ...shown, emailOnDelivery: false, emailAvailable: false });
-    expect(store).toHaveBeenCalledExactlyOnceWith(shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false);
+    expect(await off.json()).toEqual({ ...shown, emailOnDelivery: false, emailAvailable: false, markNewUpdates: true });
+    expect(store).toHaveBeenCalledExactlyOnceWith(shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false, null);
   });
 
   it('registers an Apple relay address once the sender is registered with Apple', async () => {
@@ -116,11 +116,11 @@ describe('the account\'s choice about the delivery email', () => {
       .mockResolvedValueOnce({ ...stored, email_on_delivery: false });
     const on = await save({ ...shown, emailOnDelivery: true });
     expect(on.status).toBe(200);
-    expect(await on.json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: true });
+    expect(await on.json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: true, markNewUpdates: true });
     expect(await (await save({ ...shown, emailOnDelivery: false })).json()).toMatchObject({ emailOnDelivery: false });
     expect(store.mock.calls).toEqual([
-      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', true],
-      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false],
+      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', true, null],
+      [shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', false, null],
     ]);
   });
 
@@ -132,9 +132,34 @@ describe('the account\'s choice about the delivery email', () => {
       const response = await save(body);
       expect(response.status).toBe(200);
       // The answer says what is stored, and what the server knows, whatever the request claimed.
-      expect(await response.json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: true });
+      expect(await response.json()).toEqual({ ...shown, emailOnDelivery: true, emailAvailable: true, markNewUpdates: true });
     }
-    expect(store.mock.calls).toEqual(Array(3).fill([shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', null]));
+    expect(store.mock.calls).toEqual(Array(3).fill([shown.enabledStages, '22:00', '07:00', 'Europe/Zurich', null, null]));
+  });
+
+  it('switches the mark on new updates, on until switched off, and keeps it when a request leaves it out (#72)', async () => {
+    signedIn();
+    const load = vi.spyOn(SupabaseUserClient.prototype, 'getNotificationPreferences').mockResolvedValue(stored);
+    // A row from before the mark, or no row at all: on.
+    expect(await (await read()).json()).toMatchObject({ markNewUpdates: true });
+    load.mockResolvedValue({ ...stored, mark_new_updates: false });
+    expect(await (await read()).json()).toMatchObject({ markNewUpdates: false });
+
+    const store = vi.spyOn(SupabaseUserClient.prototype, 'setNotificationPreferences')
+      .mockResolvedValueOnce({ ...stored, mark_new_updates: false })
+      .mockResolvedValue({ ...stored, mark_new_updates: true });
+    expect(await (await save({ ...shown, markNewUpdates: false })).json()).toMatchObject({ markNewUpdates: false });
+    expect(await (await save({ ...shown, markNewUpdates: true })).json()).toMatchObject({ markNewUpdates: true });
+    expect((await save(shown)).status).toBe(200);
+    expect(store.mock.calls.map((call) => call[5])).toEqual([false, true, null]);
+
+    store.mockClear();
+    for (const markNewUpdates of ['off', 0, {}]) {
+      const refused = await save({ ...shown, markNewUpdates });
+      expect(refused.status).toBe(400);
+      expect(await refused.json()).toEqual({ error: 'Mark new updates must be true or false' });
+    }
+    expect(store).not.toHaveBeenCalled();
   });
 
   it('rejects a choice that is not a switch, before storing anything', async () => {

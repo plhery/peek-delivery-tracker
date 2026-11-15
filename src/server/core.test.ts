@@ -952,18 +952,20 @@ describe('input validation', () => {
   it('reads the delivery email as a switch, and keeps the stored choice when it is left out', () => {
     const saved = { enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: 'Europe/Zurich' };
     // What released apps send: the four fields they know.
-    expect(notificationPreferences(saved)).toEqual({ ...saved, emailOnDelivery: null });
-    expect(notificationPreferences({ ...saved, emailOnDelivery: null, emailAvailable: true })).toEqual({ ...saved, emailOnDelivery: null });
-    expect(notificationPreferences({ ...saved, emailOnDelivery: true })).toEqual({ ...saved, emailOnDelivery: true });
-    expect(notificationPreferences({ ...saved, emailOnDelivery: false })).toEqual({ ...saved, emailOnDelivery: false });
+    expect(notificationPreferences(saved)).toEqual({ ...saved, emailOnDelivery: null, markNewUpdates: null });
+    expect(notificationPreferences({ ...saved, emailOnDelivery: null, emailAvailable: true })).toMatchObject({ ...saved, emailOnDelivery: null });
+    expect(notificationPreferences({ ...saved, emailOnDelivery: true })).toMatchObject({ ...saved, emailOnDelivery: true });
+    expect(notificationPreferences({ ...saved, emailOnDelivery: false })).toMatchObject({ ...saved, emailOnDelivery: false });
+    expect(notificationPreferences({ ...saved, markNewUpdates: false })).toEqual({ ...saved, emailOnDelivery: null, markNewUpdates: false });
     for (const emailOnDelivery of ['on', 1, 0, {}]) {
       expect(() => notificationPreferences({ ...saved, emailOnDelivery })).toThrow('Email on delivery must be true or false');
     }
     const row = { enabled_stages: ['delivered'], quiet_hours_start: '22:00:00', quiet_hours_end: '07:30:00', timezone: 'Europe/Paris' };
     expect(notificationPreferencesResponse({ ...row, email_on_delivery: true, email_enabled_at: '2026-10-03T08:00:00Z' }, true)).toEqual({
       enabledStages: ['delivered'], quietHoursStart: '22:00', quietHoursEnd: '07:30', timezone: 'Europe/Paris',
-      emailOnDelivery: true, emailAvailable: true,
+      emailOnDelivery: true, emailAvailable: true, markNewUpdates: true,
     });
+    expect(notificationPreferencesResponse({ ...row, mark_new_updates: false }, true)).toMatchObject({ markNewUpdates: false });
     // A row from before the email, and a value that is not a switch, read as never chosen.
     expect(notificationPreferencesResponse(row, false)).toMatchObject({ emailOnDelivery: null, emailAvailable: false });
     expect(notificationPreferencesResponse({ ...row, email_on_delivery: 'true' }, true)).toMatchObject({ emailOnDelivery: null });

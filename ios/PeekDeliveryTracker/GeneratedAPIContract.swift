@@ -3280,6 +3280,8 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var writtenAheadBy: CarrierID? = nil
     var writtenAheadEvents: [PlannedTrackingEvent]? = nil
     var emailMuted: Bool? = nil
+    var newsAt: String? = nil
+    var seenAt: String? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -3303,6 +3305,8 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case writtenAheadBy
         case writtenAheadEvents
         case emailMuted
+        case newsAt
+        case seenAt
     }
 }
 
@@ -3395,6 +3399,10 @@ struct OKResponse: Codable, Equatable, Hashable, Sendable {
     var ok: Bool
 }
 
+struct PackageSeenResponse: Codable, Equatable, Hashable, Sendable {
+    var seenAt: String
+}
+
 struct ErrorResponse: Codable, Equatable, Hashable, Sendable {
     var error: String
     var packageID: UUID? = nil
@@ -3436,6 +3444,7 @@ struct NotificationPreferences: Codable, Equatable, Hashable, Sendable {
     var timezone: String
     var emailOnDelivery: Bool? = nil
     var emailAvailable: Bool? = nil
+    var markNewUpdates: Bool? = nil
 }
 
 struct DeliveryEmailSwitchRequest: Codable, Equatable, Hashable, Sendable {
@@ -3834,6 +3843,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var plannedEvents: [PlannedTrackingEvent]? = nil
     var writtenAheadBy: CarrierID? = nil
     var writtenAheadEvents: [PlannedTrackingEvent]? = nil
+    var newsAt: String? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -3856,6 +3866,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case plannedEvents
         case writtenAheadBy
         case writtenAheadEvents
+        case newsAt
     }
 }
 
@@ -4445,5 +4456,7 @@ extension Parcel {
         writtenAheadBy = try values.decodeIfPresent(CarrierID.self, forKey: .writtenAheadBy)
         writtenAheadEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .writtenAheadEvents)
         emailMuted = try values.decodeIfPresent(Bool.self, forKey: .emailMuted)
+        newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
+        seenAt = try values.decodeIfPresent(String.self, forKey: .seenAt)
     }
 }

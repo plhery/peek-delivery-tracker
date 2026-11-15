@@ -33,6 +33,7 @@ export const PATCH = apiRoute(async (context) => {
     values.quietHoursEnd,
     values.timezone,
     values.emailOnDelivery,
+    values.markNewUpdates,
   );
   return json(notificationPreferencesResponse(row, available));
 }, { serviceRequired: true });

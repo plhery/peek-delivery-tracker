@@ -47,6 +47,8 @@ interface ParcelsState {
   changeParcelCarrier: (id: string, input: ParcelCarrierInput) => Promise<ParcelWithEvents>;
   setParcelNotificationsMuted: (id: string, muted: boolean) => Promise<void>;
   setParcelEmailMuted: (id: string, muted: boolean) => Promise<void>;
+  /** The parcel was opened: its mark for new updates goes at once, here and on the account's other devices. */
+  markParcelSeen: (id: string) => Promise<void>;
   removeParcel: (id: string) => Promise<void>;
   restoreParcel: (id: string) => Promise<void>;
   deleteParcel: (id: string) => Promise<void>;
@@ -315,6 +317,23 @@ export function ParcelsProvider({
     }
   }, [repo, rememberError]);
 
+  // Opening a parcel is no action to report on: a mark that could not be stored comes back with the next read.
+  const markParcelSeen = useCallback(async (id: string) => {
+    if (!repo.markSeen) return;
+    const seen = (seenAt: string) => {
+      revision.current += 1;
+      if (mounted.current) setParcels((current) => current.map((parcel) => parcel.id === id ? { ...parcel, seenAt } : parcel));
+    };
+    const opened = parcelsRef.current.find((parcel) => parcel.id === id);
+    // What the reader is looking at is seen now: no later than its news, whatever this device's clock says.
+    if (opened?.newsAt) seen(opened.newsAt);
+    try {
+      seen(await repo.markSeen(id));
+    } catch {
+      // Offline, or signed out: the next read of the list says what the server holds.
+    }
+  }, [repo]);
+
   const refresh = useCallback(async () => {
     setRefreshing(true);
     const startedRevision = revision.current;
@@ -376,6 +395,7 @@ export function ParcelsProvider({
       changeParcelCarrier,
       setParcelNotificationsMuted,
       setParcelEmailMuted,
+      markParcelSeen,
       removeParcel,
       restoreParcel,
       deleteParcel,
@@ -397,6 +417,7 @@ export function ParcelsProvider({
       changeParcelCarrier,
       setParcelNotificationsMuted,
       setParcelEmailMuted,
+      markParcelSeen,
       removeParcel,
       restoreParcel,
       deleteParcel,

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { deliveringCarrierId, deliveryLineKey, displayedCarrierId, carrierInfo } from '../lib/carriers';
 import { localizedDatePhrase, localizedDeliveryEstimate, useI18n } from '../i18n';
 import { numberToCheck } from '../lib/messages';
+import { hasNewUpdate, useMarkNewUpdates } from '../lib/newUpdate';
 import { awaitedCarrier, localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { currentEvent } from '../lib/stages';
@@ -89,7 +90,13 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
     : pickupPlace ? `${statusLabel} · ${pickupPlace}` : statusLabel;
   const statusAria = expectedDelivery ? t('parcel.ariaExpected', { name: parcelName, status: statusSummary, date: expectedDelivery }) : t('parcel.aria', { name: parcelName, status: statusSummary });
 
-  const label = [statusAria, flag, deliveryLabel].filter(Boolean).join('. ');
+  // New since the parcel was last opened: a dot before the status line, which a screen reader hears first.
+  const marked = useMarkNewUpdates() && hasNewUpdate(parcel);
+  const described = [statusAria, flag, deliveryLabel].filter(Boolean).join('. ');
+  const placedLabel = hero && !arrived ? `${t('app.nextUp')}: ${described}` : described;
+  const label = marked ? `${t('parcel.newUpdate')}. ${placedLabel}` : placedLabel;
+  // Always there, so it fades and the words slide back as it clears.
+  const mark = <i className="parcel-card__new" data-on={marked ? '' : undefined} aria-hidden="true" />;
 
   const check = current?.stage === 'delivered' && <Icon name="check" />;
 
@@ -103,7 +110,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
         </div>
       </div>}
       <button ref={button} type="button" className={`parcel-card${hero ? ' parcel-card--hero' : ''}${placed ? (hero ? ' parcel-card--map' : ' parcel-card--route') : ''}${parcel.archivedAt ? ' parcel-card--archived' : ''}`}
-        disabled={archiving} aria-busy={archiving} aria-label={hero && !arrived ? `${t('app.nextUp')}: ${label}` : label}
+        disabled={archiving} aria-busy={archiving} aria-label={label}
         onClick={(event) => { if (!swipe.current?.consumeClick()) onOpen(parcel, event.currentTarget); }}>
         {hero ? <>
           {placed && <NextUpEngraving route={route} stage={current?.stage} />}
@@ -111,7 +118,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
           <span className="parcel-card__hero-main"><strong className="parcel-card__label">{parcelName}</strong><ParcelStamp parcel={parcel} /></span>
           {deliveryLabel && <span className="parcel-card__sender">{deliveryLabel}</span>}
           <AutoCarrierNotice parcel={parcel} className="parcel-card__sender" />
-          <span className="parcel-card__summary"><span className="parcel-card__state">{arrived && check}{statusLabel}</span>{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}{(expectedDelivery || (arrived && completionDate)) && <><span aria-hidden="true">·</span><span className="parcel-card__eta">{expectedDelivery || completionDate}</span></>}</span>
+          <span className="parcel-card__summary"><span className="parcel-card__state">{mark}{arrived && check}{statusLabel}</span>{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}{(expectedDelivery || (arrived && completionDate)) && <><span aria-hidden="true">·</span><span className="parcel-card__eta">{expectedDelivery || completionDate}</span></>}</span>
           {flagChip}
         </> : <>
           {placed && <CardRoute route={route} />}
@@ -119,7 +126,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
           <strong className="parcel-card__label">{parcelName}</strong>
           {deliveryLabel && <span className="parcel-card__sender">{deliveryLabel}</span>}
           <AutoCarrierNotice parcel={parcel} className="parcel-card__sender" />
-          {(!flag || parcelHasCarrierUpdate(parcel)) && <span className="parcel-card__state">{check}{statusLabel}{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}</span>}
+          {(!flag || parcelHasCarrierUpdate(parcel)) && <span className="parcel-card__state">{mark}{check}{statusLabel}{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}</span>}
           {flagChip}
         </>}
       </button>

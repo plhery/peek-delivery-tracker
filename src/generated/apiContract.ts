@@ -56042,6 +56042,8 @@ export interface ApiPackageRow {
   "written_ahead_by"?: ApiCarrierId;
   "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
   "email_muted"?: boolean;
+  "news_at"?: string;
+  "seen_at"?: string;
 }
 
 export interface ApiPackageListResponse {
@@ -56097,6 +56099,10 @@ export interface ApiOkResponse {
   "ok": boolean;
 }
 
+export interface ApiPackageSeenResponse {
+  "seen_at": string;
+}
+
 export interface ApiErrorResponse {
   "error": string;
   "packageId"?: string;
@@ -56118,6 +56124,7 @@ export interface ApiNotificationPreferences {
   "timezone": string;
   "emailOnDelivery"?: boolean | null;
   "emailAvailable"?: boolean;
+  "markNewUpdates"?: boolean;
 }
 
 export interface ApiDeliveryEmailSwitchRequest {
@@ -56403,6 +56410,7 @@ export interface ApiPublicPackage {
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
   "written_ahead_by"?: ApiCarrierId;
   "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
+  "news_at"?: string;
 }
 
 export interface ApiPublicParcelResponse {

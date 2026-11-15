@@ -8,6 +8,7 @@ import {
 import {
   loadNotificationPreferences,
   saveEmailOnDelivery,
+  saveMarkNewUpdates,
   saveNotificationStages,
   turnOnDeliveryEmail,
   useDeliveryEmail,
@@ -145,6 +146,20 @@ describe('the account’s shared notification preferences', () => {
     expect(sent).not.toHaveProperty('emailOnDelivery');
     expect(sent).not.toHaveProperty('emailAvailable');
     expect(renderHook(() => useNotificationPreferences(auth)).result.current).toMatchObject({ enabledStages: ['delivered'], emailOnDelivery: true });
+  });
+
+  it('switches the mark on new updates alone, reading the preferences first where nothing has', async () => {
+    const auth = session();
+    await act(async () => { await saveMarkNewUpdates(false, auth); });
+    expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
+    // The events go as stored, and the email choice is left out, so the server keeps it.
+    expect(saveNotificationPreferences).toHaveBeenCalledWith({
+      enabledStages: SAVED.enabledStages, quietHoursStart: '22:00', quietHoursEnd: '08:00', timezone: expect.any(String), markNewUpdates: false,
+    }, auth);
+    expect(renderHook(() => useNotificationPreferences(auth)).result.current?.markNewUpdates).toBe(false);
+    await act(async () => { await saveMarkNewUpdates(true, auth); });
+    expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
+    expect(renderHook(() => useNotificationPreferences(auth)).result.current?.markNewUpdates).toBe(true);
   });
 
   it('does not let a read that began before a save undo it', async () => {

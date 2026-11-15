@@ -54829,6 +54829,35 @@
         }
       }
     },
+    "/api/packages/{packageId}/seen": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/PackageId"
+        }
+      ],
+      "post": {
+        "operationId": "markPackageSeen",
+        "description": "The account opened the parcel: what it holds is no longer new to it, on any of its devices. Takes no body. The parcel carries the moment stored as seen_at from then on.",
+        "responses": {
+          "200": {
+            "description": "When the parcel was marked as seen",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackageSeenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
     "/api/packages/{packageId}/sync": {
       "parameters": [
         {
@@ -59711,6 +59740,16 @@
           "email_muted": {
             "type": "boolean",
             "description": "The account's delivery email is off for this parcel."
+          },
+          "news_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When Peek first stored the parcel's latest scan, the one its carrier dates last; absent without a scan. The parcel has news for its owner while this is later than seen_at. Older history filled in later, another source's copy of the latest scan and Peek's own rows do not move it."
+          },
+          "seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the account last opened the parcel on any device (POST /api/packages/{packageId}/seen), or when the parcel started as seen: at its first answer, or as it joined the account."
           }
         }
       },
@@ -59917,6 +59956,20 @@
           }
         }
       },
+      "PackageSeenResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "seen_at"
+        ],
+        "properties": {
+          "seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The moment stored: the parcel's new seen_at."
+          }
+        }
+      },
       "ErrorResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -60029,6 +60082,10 @@
           "emailAvailable": {
             "type": "boolean",
             "description": "Read-only: whether this server can email this account. Mail is configured and the account has a confirmed address it can write to. Ignored in a request."
+          },
+          "markNewUpdates": {
+            "type": "boolean",
+            "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Mark new updates\", on until switched off). A request that leaves it out keeps the stored choice."
           }
         }
       },
@@ -61269,6 +61326,11 @@
               "$ref": "#/components/schemas/PlannedTrackingEvent"
             },
             "description": "The steps the carrier named in written_ahead_by wrote in advance whose time has passed, in its own words, oldest first; absent when none, with written_ahead_by, and on a wrapped gift. Apps list them greyed in the timeline under Written in advance by that carrier, as its own page shows them. A step goes once a scan stands at its minute or tells it in the same words within a day. Never scans: see PlannedTrackingEvent."
+          },
+          "news_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When Peek first stored the parcel's latest scan; absent without a scan and on a wrapped gift. A device keeps the value it last opened the link with: a later one is news."
           }
         }
       },

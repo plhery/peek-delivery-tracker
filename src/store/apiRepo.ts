@@ -12,6 +12,7 @@ import type {
   ApiQueueResponse,
   ApiRenamePackageRequest,
   ApiPackageNotificationRequest,
+  ApiPackageSeenResponse,
   ApiPlannedTrackingEvent,
   ApiTrackingEventRow,
   ApiSyncJobListResponse,
@@ -174,6 +175,8 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     returnHeld: row.carrier_data?.return_held ?? undefined,
     destinationCountry: row.carrier_data?.destination_country ?? undefined,
     archivedAt: row.archived_at ?? undefined,
+    newsAt: row.news_at ?? undefined,
+    seenAt: row.seen_at ?? undefined,
     notificationsMuted: row.notifications_muted,
     emailMuted: row.email_muted,
     events: (row.tracking_events ?? []).map(toEvent),
@@ -456,6 +459,14 @@ export function createApiRepo(
 
     async setEmailMuted(id: string, emailMuted: boolean): Promise<ParcelWithEvents> {
       return setAlerts(id, { emailMuted });
+    },
+
+    async markSeen(id: string): Promise<string> {
+      const { seen_at: seenAt } = await request<ApiPackageSeenResponse>(
+        `/api/packages/${encodeURIComponent(id)}/seen`, auth, { method: 'POST' });
+      const cached = cachedParcels(storage, cacheKey);
+      if (cached) saveCachedParcels(storage, cacheKey, cached.map((parcel) => parcel.id === id ? { ...parcel, seenAt } : parcel));
+      return seenAt;
     },
 
     async remove(id: string): Promise<void> {

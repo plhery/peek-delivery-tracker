@@ -3283,6 +3283,8 @@ data class Parcel(
     @SerialName("written_ahead_by") val writtenAheadBy: CarrierId? = null,
     @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("email_muted") val emailMuted: Boolean? = null,
+    @SerialName("news_at") val newsAt: String? = null,
+    @SerialName("seen_at") val seenAt: String? = null,
 )
 
 @Serializable
@@ -3348,6 +3350,11 @@ data class OkResponse(
 )
 
 @Serializable
+data class PackageSeenResponse(
+    @SerialName("seen_at") val seenAt: String,
+)
+
+@Serializable
 data class ErrorResponse(
     val error: String,
     val packageId: UUID? = null,
@@ -3388,6 +3395,7 @@ data class NotificationPreferences(
     val timezone: String,
     val emailOnDelivery: Boolean? = null,
     val emailAvailable: Boolean? = null,
+    val markNewUpdates: Boolean? = null,
 )
 
 @Serializable
@@ -3762,6 +3770,7 @@ data class PublicPackage(
     @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("written_ahead_by") val writtenAheadBy: CarrierId? = null,
     @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
+    @SerialName("news_at") val newsAt: String? = null,
 )
 
 @Serializable

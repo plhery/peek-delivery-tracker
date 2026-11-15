@@ -101,6 +101,21 @@ export function saveEmailOnDelivery(enabled: boolean, auth: ApiAuth): Promise<No
 }
 
 /**
+ * Switches the list's mark on parcels with new updates on or off for the account, and nothing else: the
+ * events and the email choice go as they were last saved.
+ */
+export async function saveMarkNewUpdates(enabled: boolean, auth: ApiAuth): Promise<NotificationPreferences> {
+  const saved = sessionOf(auth).preferences ?? await loadNotificationPreferences(auth, { once: true });
+  return save({
+    enabledStages: saved.enabledStages,
+    quietHoursStart: saved.quietHoursStart,
+    quietHoursEnd: saved.quietHoursEnd,
+    timezone: timeZone(saved),
+    markNewUpdates: enabled,
+  }, auth);
+}
+
+/**
  * Switches the delivery email on for someone who signed in to get it, and
  * says whether it is on. Asking again overrides an earlier "off"; an account
  * the server cannot write to stays without.

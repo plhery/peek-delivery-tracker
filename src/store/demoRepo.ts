@@ -367,6 +367,9 @@ export function createDemoRepo(
       && ['in_transit', 'customs', 'out_for_delivery', 'delivered'].includes(next);
     return stillPlanned({
       ...parcel,
+      // The simulated scan is news until the parcel is opened.
+      newsAt: new Date(now()).toISOString(),
+      seenAt: parcel.seenAt ?? parcel.createdAt,
       trackingSource: swissPostReady ? 'swiss-post' : parcel.trackingSource,
       swissPostReady: swissPostReady || parcel.swissPostReady,
       events: [...parcel.events, event(parcel.id, next, occurredAt)],
@@ -488,6 +491,13 @@ export function createDemoRepo(
         parcels.map((candidate) => candidate.id === id ? updated : candidate),
       );
       return updated;
+    },
+
+    async markSeen(id: string) {
+      const parcels = await getAll();
+      const seenAt = new Date(now()).toISOString();
+      save(storage, parcels.map((candidate) => candidate.id === id ? { ...candidate, seenAt } : candidate));
+      return seenAt;
     },
 
     async setNotificationsMuted(id: string, muted: boolean) {

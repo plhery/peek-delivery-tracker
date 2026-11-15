@@ -149,10 +149,10 @@ describe('guarded tracking writes', () => {
     expect(select(serviceRequest, 1).endsWith(`,owner_locale,${identities}`)).toBe(true);
     // The API's package shape reads provider_event_id only to tell Peek's own rows, the stage source only to tell a
     // notice, and the stored times only to name a scan's day, which eventPlaces.ts serves without them, and never when
-    // the parcel joined its account.
+    // the parcel joined its account. When a scan was stored only dates the parcel's news.
     const apiShape = 'id,tracking_number,label,carrier,created_at,expected_delivery,last_status_text,'
       + 'last_synced_at,sync_status,sync_error,tracking_url,dpd_postcode,phone_digits,carrier_data,archived_at,'
-      + 'notifications_muted,email_muted,tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,'
+      + 'notifications_muted,email_muted,seen_at,tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,'
       + 'time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,'
       + 'recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source)';
     expect(select(userRequest, 0)).toBe(apiShape);
@@ -1069,7 +1069,7 @@ describe('delivery emails', () => {
     await expect(client.getNotificationPreferences()).resolves.toMatchObject({ email_on_delivery: false });
     await expect(client.getNotificationPreferences()).resolves.toMatchObject({ email_on_delivery: null, timezone: 'Europe/Zurich' });
     expect(new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams.get('select'))
-      .toBe('enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery');
+      .toBe('enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates');
   });
 
   it('leaves a parcel out of the email through the owner-scoped RPC', async () => {

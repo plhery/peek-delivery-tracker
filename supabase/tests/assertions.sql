@@ -249,7 +249,7 @@ begin
       ) then
     raise exception 'the delivery email ledger is readable through row level security';
   end if;
-  if has_function_privilege('anon', 'public.set_owned_notification_preferences(text[],time,time,text,boolean)', 'EXECUTE')
+  if has_function_privilege('anon', 'public.set_owned_notification_preferences(text[],time,time,text,boolean,boolean)', 'EXECUTE')
       or has_function_privilege('anon', 'public.set_owned_package_email_muted(uuid,boolean)', 'EXECUTE')
       or has_function_privilege('anon', 'public.owned_delivery_emails()', 'EXECUTE') then
     raise exception 'anonymous callers can execute the delivery email RPCs of an account';
@@ -263,7 +263,7 @@ begin
   end if;
   if not has_function_privilege(
     'authenticated',
-    'public.set_owned_notification_preferences(text[],time,time,text,boolean)',
+    'public.set_owned_notification_preferences(text[],time,time,text,boolean,boolean)',
     'EXECUTE'
   ) or not has_function_privilege(
     'authenticated',

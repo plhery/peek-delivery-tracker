@@ -508,6 +508,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       archived_at: null,
       notifications_muted: false,
       tracking_events: wrapped ? giftEvents(events, destination) : events,
+      // When its latest scan arrived, for a device to tell what is new since it last opened the link. A wrapped gift tells no scan.
+      ...(!wrapped && typeof row.news_at === 'string' ? { news_at: row.news_at } : {}),
       // A wrapped gift tells nothing of where its parcel is going before it gets there.
       ...(!wrapped && planned.length ? { planned_events: planned } : {}),
       ...(!wrapped && typeof row.written_ahead_by === 'string' ? { written_ahead_by: row.written_ahead_by as ApiCarrierId } : {}),

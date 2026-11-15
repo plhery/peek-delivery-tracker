@@ -30,6 +30,9 @@
 .settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#433f38 50%); }
 .refined-settings .language-control--account { padding: 5px 13px; min-height: 54px; border-top: 1px solid var(--line); }
 .refined-settings .language-control--account > span { font-weight: 400; }
+.refined-settings .settings-mark { border-top: 1px solid var(--line); padding: 10px 13px; }
+.settings-mark__text { display: grid; gap: 2px; flex: 1; }
+.settings-mark__text small { color: var(--ink-soft); font-size: 11px; line-height: 1.5; }
 .refined-settings .language-control--account select { background: transparent; color: var(--ink-soft); padding-right: 0; font-size: 12px; max-width: 60%; }
 .settings-back { display: flex; gap: 6px; align-items: center; background: transparent; color: var(--ink-soft); padding: 0; min-height: 44px; font-size: 12px; }
 .settings-back > span { font-size: 23px; font-weight: 300; }

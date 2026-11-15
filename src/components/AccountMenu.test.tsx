@@ -3,6 +3,7 @@ import userEvent, { type UserEvent } from '@testing-library/user-event';
 import { StrictMode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ApiRecentSignInError } from '../lib/apiClient';
+import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
 import { noteSignInAgain, SIGN_IN_AGAIN_STORAGE_KEY } from '../lib/signInAgain';
 import type { SignInMethods } from '../peek/session';
 import { AccountMenu } from './AccountMenu';
@@ -26,7 +27,11 @@ async function askToDelete(user: UserEvent) {
   await user.click(screen.getByRole('button', { name: 'Permanently delete' }));
 }
 
-afterEach(() => window.sessionStorage.clear());
+afterEach(() => {
+  window.sessionStorage.clear();
+  window.localStorage.removeItem(MARK_NEW_UPDATES_STORAGE_KEY);
+  vi.unstubAllGlobals();
+});
 
 describe('AccountMenu', () => {
   it('keeps demo actions one level deeper and confirms a reset', async () => {
@@ -46,6 +51,44 @@ describe('AccountMenu', () => {
     await user.click(screen.getByRole('button', { name: 'Reset demo data' }));
     expect(onResetDemo).toHaveBeenCalledOnce();
     expect(onExitDemo).not.toHaveBeenCalled();
+  });
+
+  it('switches the mark on new updates off and on, on this browser for someone without an account', async () => {
+    const user = userEvent.setup();
+    render(<AccountMenu onResetDemo={vi.fn()} onExitDemo={vi.fn()} />);
+    await user.click(screen.getByRole('button', { name: 'Account' }));
+    const mark = screen.getByRole('switch', { name: 'Mark new updates' });
+    expect(mark).toBeChecked();
+    expect(mark).toHaveAccessibleDescription('A dot on parcels with updates since you last opened them.');
+    await user.click(mark);
+    expect(mark).not.toBeChecked();
+    expect(window.localStorage.getItem(MARK_NEW_UPDATES_STORAGE_KEY)).toBe('off');
+    await user.click(mark);
+    expect(mark).toBeChecked();
+    expect(window.localStorage.getItem(MARK_NEW_UPDATES_STORAGE_KEY)).toBeNull();
+  });
+
+  it('saves the mark on new updates with an account’s preferences, the rest as stored', async () => {
+    const kept = { enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: 'Europe/Zurich', emailOnDelivery: null, emailAvailable: true, markNewUpdates: true };
+    const fetch = vi.fn(async (_url: string, init?: RequestInit) => ({
+      ok: true, status: 200, headers: new Headers(),
+      json: async () => init?.method === 'PATCH' ? { ...kept, ...JSON.parse(String(init.body)) as object } : kept,
+    }));
+    vi.stubGlobal('fetch', fetch);
+    const user = userEvent.setup();
+    render(<AccountMenu email="owner@example.test" apiAuth={{ userId: 'user-mark', getAccessToken: async () => 'session' }} />);
+    await user.click(screen.getByLabelText('Account options for owner@example.test'));
+    const mark = screen.getByRole('switch', { name: 'Mark new updates' });
+    await user.click(mark);
+    const saved = () => fetch.mock.calls.filter(([url, init]) => url === '/api/push/preferences' && init?.method === 'PATCH');
+    await vi.waitFor(() => expect(saved()).toHaveLength(1));
+    expect(JSON.parse(String(saved()[0][1]!.body))).toMatchObject({ enabledStages: ['delivered'], markNewUpdates: false });
+    expect(JSON.parse(String(saved()[0][1]!.body))).not.toHaveProperty('emailOnDelivery');
+    await vi.waitFor(() => expect(mark).not.toBeChecked());
+    await user.click(mark);
+    await vi.waitFor(() => expect(saved()).toHaveLength(2));
+    expect(JSON.parse(String(saved()[1][1]!.body))).toMatchObject({ markNewUpdates: true });
+    await vi.waitFor(() => expect(mark).toBeChecked());
   });
 
   it('leads to the landing from the end of Settings, in place for a plain click', async () => {

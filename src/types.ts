@@ -93,6 +93,9 @@ export interface Parcel {
    */
   returnHeld?: boolean;
   archivedAt?: string;
+  /** When the parcel's latest scan arrived, and when its owner last opened it: later news marks the parcel (newUpdate.ts). */
+  newsAt?: string;
+  seenAt?: string;
   notificationsMuted?: boolean;
   /** The account's delivery email is off for this parcel. */
   emailMuted?: boolean;
@@ -198,6 +201,8 @@ export interface ParcelRepo {
   setNotificationsMuted?(id: string, muted: boolean): Promise<ParcelWithEvents>;
   /** Turns the account's delivery email off or back on for one parcel; only an account has it. */
   setEmailMuted?(id: string, muted: boolean): Promise<ParcelWithEvents>;
+  /** The parcel was opened: what it holds is no longer new. Answers the moment stored. */
+  markSeen?(id: string): Promise<string>;
   /** Soft-delete an active parcel so it can still be restored. */
   remove(id: string): Promise<void>;
   restore?(id: string): Promise<ParcelWithEvents>;

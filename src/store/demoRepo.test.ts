@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { currentStage, isDelivered } from '../lib/stages';
+import { hasNewUpdate } from '../lib/newUpdate';
 import { createDemoRepo, DEMO_STORAGE_KEY, nextStage } from './demoRepo';
 import { CARRIER_CAPABILITIES } from '../generated/apiContract';
 import { passportStatistics } from '../lib/passport';
@@ -317,6 +318,27 @@ describe('createDemoRepo', () => {
     const mine = afterOne.find((p) => p.id === parcel.id)!;
     expect(currentStage(mine.events)).toBe('registered');
     expect(mine.events).toHaveLength(2);
+  });
+
+  it('marks a simulated scan as new until the parcel is opened', async () => {
+    let now = Date.parse('2026-11-15T10:00:00Z');
+    const repo = createDemoRepo(window.localStorage, () => now);
+    const added = await repo.add({ trackingNumber: '1234567890', label: 'Socks' });
+    // A parcel starts as seen, and the examples carry no mark.
+    expect(hasNewUpdate(added)).toBe(false);
+    expect((await repo.list()).some(hasNewUpdate)).toBe(false);
+
+    now += 60_000;
+    const scanned = await repo.refreshParcel!(added.id);
+    expect(hasNewUpdate(scanned)).toBe(true);
+
+    now += 60_000;
+    await repo.markSeen!(added.id);
+    const opened = (await repo.list()).find((parcel) => parcel.id === added.id)!;
+    expect(hasNewUpdate(opened)).toBe(false);
+    // The next scan is news again.
+    now += 60_000;
+    expect(hasNewUpdate(await repo.refreshParcel!(added.id))).toBe(true);
   });
 
   it('refreshes only the selected parcel', async () => {

@@ -32,6 +32,7 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
     ...(event.description === UNWORDED_STEP ? { description: '' } : {}) };
   delete rest.point;
   delete rest.provider_event_id;
+  delete rest.stored_at;
   delete rest.universal_provider;
   delete rest.stage_source;
   delete rest.recipient_action;
@@ -196,6 +197,7 @@ export function withoutEventSources(row: JsonObject): JsonObject {
       if (!isRecord(event)) return event;
       const rest = dated(event);
       delete rest.provider_event_id;
+      delete rest.stored_at;
       delete rest.universal_provider;
       delete rest.stage_source;
       return rest;
@@ -345,18 +347,37 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * listed before they happen and that are still ahead are served apart from the scans, each with its place
  * (`planned_events`, plannedSteps.ts and `placedSteps`), and so is the carrier that writes the timeline in advance
  * (`written_ahead_by`, `servedWrittenAhead`), with the steps it wrote whose time has passed (`written_ahead_events`,
- * `servedWrittenSteps`).
+ * `servedWrittenSteps`). `news_at` dates the parcel's latest scan as Peek stored it (`newsAt`).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
-  const served = placedEvents(row);
-  const answered = withoutPlaceholderAnswers(row);
   const shown = shownEvents(row);
+  const news = newsAt(shown);
+  const served = news ? { ...placedEvents(row), news_at: news } : placedEvents(row);
+  const answered = withoutPlaceholderAnswers(row);
   const planned = placedSteps(row, servedPlannedSteps(answered, shown));
   const ahead = servedWrittenAhead(answered);
   const written = ahead ? placedSteps(row, servedWrittenSteps(answered, shown)) : [];
   if (!planned.length && !ahead) return served;
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
     ...written.length ? { written_ahead_events: written } : {} };
+}
+
+/**
+ * When the parcel's latest scan was first stored (`news_at`), or null without a scan, which leaves it out: the time the list's mark of a
+ * parcel with news compares with the owner's last opening of it (`seen_at`). The latest scan is the one its carrier
+ * dates last, so older history filled in later is no news, and of the rows telling that moment the first stored
+ * counts, so neither is another source's copy of it. Peek's own rows are no scans.
+ */
+export function newsAt(shown: readonly JsonObject[]): string | null {
+  let latest = -Infinity;
+  let stored: string | null = null;
+  for (const event of shown) {
+    const time = Date.parse(String(event.occurred_at));
+    if (isOwnRow(event) || typeof event.stored_at !== 'string' || !(time >= latest)) continue;
+    if (time > latest || stored === null || Date.parse(event.stored_at) < Date.parse(stored)) stored = event.stored_at;
+    latest = time;
+  }
+  return stored;
 }
 
 /**

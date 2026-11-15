@@ -495,6 +495,8 @@ export interface NotificationPreferencesValues {
   timezone: string;
   /** The delivery email, switched on or off. Null keeps the stored choice: the request left it out. */
   emailOnDelivery: boolean | null;
+  /** The list's mark on a parcel with news, switched on or off. Null keeps the stored choice. */
+  markNewUpdates: boolean | null;
 }
 
 export function notificationPreferences(payload: JsonObject): NotificationPreferencesValues {
@@ -536,12 +538,18 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
   if (emailOnDelivery !== null && typeof emailOnDelivery !== 'boolean') {
     throw new HttpError(400, 'Email on delivery must be true or false');
   }
+  // Apps from before the mark leave it out too.
+  const markNewUpdates = payload.markNewUpdates ?? null;
+  if (markNewUpdates !== null && typeof markNewUpdates !== 'boolean') {
+    throw new HttpError(400, 'Mark new updates must be true or false');
+  }
   return {
     enabledStages,
     quietHoursStart: quietHoursStart as string | null,
     quietHoursEnd: quietHoursEnd as string | null,
     timezone: payload.timezone,
     emailOnDelivery,
+    markNewUpdates,
   };
 }
 
@@ -555,6 +563,7 @@ export function notificationPreferencesResponse(row: JsonObject, emailAvailable:
     timezone: typeof row.timezone === 'string' ? row.timezone : 'Europe/Zurich',
     emailOnDelivery: typeof row.email_on_delivery === 'boolean' ? row.email_on_delivery : null,
     emailAvailable,
+    markNewUpdates: row.mark_new_updates !== false,
   };
 }
 

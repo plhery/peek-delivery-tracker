@@ -42,6 +42,7 @@ import {
   type ParcelAttention,
 } from './lib/parcelPriority';
 import { numberToCheck } from './lib/messages';
+import { useSeenWhileOpen } from './lib/newUpdate';
 import {
   DEFAULT_PARCEL_SORT,
   parcelComparator,
@@ -134,6 +135,7 @@ export default function App({
     changeParcelCarrier,
     setParcelNotificationsMuted,
     setParcelEmailMuted,
+    markParcelSeen,
     removeParcel,
     restoreParcel,
     deleteParcel,
@@ -320,6 +322,8 @@ export default function App({
     () => parcels.find((p) => p.id === openParcelId || p.originalParcelId === openParcelId) ?? null,
     [parcels, openParcelId],
   );
+  // Opening a parcel clears its mark for new updates, whether or not the mark is shown.
+  useSeenWhileOpen(openParcel, markParcelSeen);
 
   // An update reload comes back to the same place: the address reopens the tab
   // and parcel, and the saved screen restores both scroll positions before the

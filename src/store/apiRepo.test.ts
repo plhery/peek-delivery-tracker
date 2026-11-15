@@ -37,6 +37,40 @@ describe('createApiRepo', () => {
     }
   });
 
+  it('maps when a parcel’s news arrived and when it was last opened, and leaves both out where the server names none', async () => {
+    const fetch = vi.fn().mockResolvedValue(response({ packages: [
+      { ...packageRow, news_at: '2026-11-15T10:00:00+00:00', seen_at: '2026-11-15T09:00:00+00:00' },
+      { ...packageRow, id: '7d1f0f0e-2a55-4d3c-9d55-0c1f3c1b2a01', news_at: undefined, seen_at: undefined },
+    ] }));
+    vi.stubGlobal('fetch', fetch);
+
+    const [marked, plain] = await createApiRepo().list();
+
+    expect(marked).toMatchObject({ newsAt: '2026-11-15T10:00:00+00:00', seenAt: '2026-11-15T09:00:00+00:00' });
+    expect(plain.newsAt).toBeUndefined();
+    expect(plain.seenAt).toBeUndefined();
+  });
+
+  it('marks a parcel as seen on the server, and in the list it saved', async () => {
+    const fetch = vi.fn()
+      .mockResolvedValueOnce(response({ packages: [{ ...packageRow, news_at: '2026-11-15T10:00:00+00:00', seen_at: '2026-11-15T09:00:00+00:00' }] }))
+      .mockResolvedValueOnce(response({ seen_at: '2026-11-15T10:30:00+00:00' }));
+    vi.stubGlobal('fetch', fetch);
+    const repo = createApiRepo();
+    try {
+      await repo.list();
+
+      await expect(repo.markSeen!(packageRow.id)).resolves.toBe('2026-11-15T10:30:00+00:00');
+
+      expect(fetch).toHaveBeenLastCalledWith(`/api/packages/${packageRow.id}/seen`, expect.objectContaining({ method: 'POST' }));
+      expect(fetch.mock.calls[1][1]?.body).toBeUndefined();
+      // The page opened again starts without the mark.
+      expect(repo.cachedList!()?.[0]).toMatchObject({ newsAt: '2026-11-15T10:00:00+00:00', seenAt: '2026-11-15T10:30:00+00:00' });
+    } finally {
+      window.localStorage.removeItem(API_CACHE_KEY);
+    }
+  });
+
   it('loads and maps the account package collection', async () => {
     const fetch = vi.fn().mockResolvedValue(response({ packages: [{ ...packageRow, carrier_data: { ...packageRow.carrier_data, sender_name: 'Example sender', pickup_point: ' Shop ', receiver_name: ' Alex ', weight_kg: 1.25, dimensions_text: '20 × 30 × 10 cm', expected_delivery_from: '2026-07-15', tracking_provider: 'Ship24', original_carrier: 'gls-de', original_tracking_number: '12345678901' } }] }));
     vi.stubGlobal('fetch', fetch);

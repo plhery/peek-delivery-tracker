@@ -583,6 +583,17 @@ and nothing typed is sent.
   tokens. A grant whose tokens have all expired goes the next time the account lists its
   assistants or connects one, and a registered client no grant uses goes after a day. The
   text `add_parcels` reads is dropped once its numbers are added.
+- **New since last opened**: a parcel's card carries a small dot when its latest scan arrived
+  after its owner last opened it. `packages.seen_at` holds that moment, and the server adds
+  `news_at`: when Peek first stored the parcel's latest scan (`newsAt` in
+  `src/server/eventPlaces.ts`). Older history filled in later, another source's copy of that
+  scan and Peek's own rows do not move it. A client shows the dot while `news_at` is later than
+  `seen_at`, and marks the open parcel as seen (`POST /api/packages/{id}/seen`) while its page
+  is in front, which clears the dot on the account's other devices at their next read. A parcel
+  starts as seen: when it is added, when its first answer arrives and when it joins an account
+  (the `packages_start_seen` trigger). "Mark new updates" in Settings hides the dot and keeps
+  the seen state; an account's choice is stored with its notification preferences, and a
+  browser keeps its copy (`src/lib/newUpdate.ts`).
 - **Deleting an account** removes the Auth user. Foreign-key cascades remove parcels,
   jobs, events, push registrations, Live Activity tokens, delivery email rows, the
   forwarding address, connected assistants and audit rows. Other audit rows expire after 90 days.

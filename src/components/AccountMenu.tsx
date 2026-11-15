@@ -6,6 +6,7 @@ import { LanguageControl, useI18n } from '../i18n';
 import { useAppearance, type Appearance } from '../lib/appearance';
 import { LANDING_PATH } from '../lib/experience';
 import { useSheetDialog } from '../lib/modal';
+import { useMarkNewUpdatesChoice } from '../lib/newUpdate';
 import { clockPreference, distancePreference } from '../lib/units';
 import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
 import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
@@ -40,6 +41,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
 }) {
   const { t, clock, setClock, distance, setDistance, automatic } = useI18n();
   const [appearance, setAppearance] = useAppearance();
+  const [markNewUpdates, setMarkNewUpdates] = useMarkNewUpdatesChoice(apiAuth);
   const initial = email?.trim().charAt(0).toUpperCase();
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState<Page>('home');
@@ -153,6 +155,11 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
                   <option value="mi">{t('settings.miles')}</option>
                 </select>
               </label>
+              <button className="settings-row settings-mark" type="button" role="switch" aria-checked={markNewUpdates} aria-labelledby="settings-mark-label" aria-describedby="settings-mark-hint"
+                onClick={() => setMarkNewUpdates(!markNewUpdates)}>
+                <span className="settings-mark__text"><span id="settings-mark-label">{t('settings.markNewUpdates')}</span><small id="settings-mark-hint">{t('settings.markNewUpdatesHint')}</small></span>
+                <span className="settings-switch" aria-hidden="true" />
+              </button>
             </div>
           </section>
           <div className="settings-box"><button ref={accountButton} className="settings-row" type="button" onClick={() => navigate('account')}>{accountTitle}<span className="settings-chevron" aria-hidden="true">›</span></button>

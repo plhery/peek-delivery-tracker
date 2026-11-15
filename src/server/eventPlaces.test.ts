@@ -166,6 +166,31 @@ describe('withEventPlaces', () => {
     expect(served.filter((scan) => 'tie_order' in scan)).toHaveLength(2);
   });
 
+  it('dates the parcel\'s news by when its latest scan was first stored, and serves no row with that time (#72)', () => {
+    const stored = (id: string, occurredAt: string, storedAt: string, source = `swiss-post:${id}`) => ({
+      ...event(id, null, occurredAt), provider_event_id: source, stored_at: storedAt,
+    });
+    const news = (events: object[]) => (withEventPlaces({ id: 'parcel', carrier: 'swiss-post', tracking_events: events }) as { news_at?: string }).news_at;
+    const first = stored('1', '2026-11-10T08:00:00+00:00', '2026-11-10T09:00:00+00:00');
+    const latest = stored('2', '2026-11-12T08:00:00+00:00', '2026-11-12T08:30:00+00:00');
+    expect(news([first, latest])).toBe('2026-11-12T08:30:00+00:00');
+    // History filled in later is no news: the latest scan is the one the carrier dates last.
+    expect(news([first, latest, stored('3', '2026-11-11T08:00:00+00:00', '2026-11-13T10:00:00+00:00')])).toBe('2026-11-12T08:30:00+00:00');
+    // Nor is a second row telling the latest scan's moment: the first one stored counts.
+    expect(news([first, latest, stored('4', '2026-11-12T08:00:00+00:00', '2026-11-13T10:00:00+00:00')])).toBe('2026-11-12T08:30:00+00:00');
+    // A later scan is.
+    expect(news([first, latest, stored('5', '2026-11-13T07:00:00+00:00', '2026-11-13T07:10:00+00:00')])).toBe('2026-11-13T07:10:00+00:00');
+    // Peek's own rows are no scans, and a parcel without one has no news.
+    const own = stored('6', '2026-11-14T08:00:00+00:00', '2026-11-14T08:00:00+00:00', 'app:created');
+    expect(news([first, own])).toBe('2026-11-10T09:00:00+00:00');
+    expect(withEventPlaces({ id: 'parcel', carrier: 'swiss-post', tracking_events: [own] })).not.toHaveProperty('news_at');
+    const served = withEventPlaces({ id: 'parcel', carrier: 'swiss-post', seen_at: '2026-11-12T09:00:00+00:00', tracking_events: [first, latest] }) as
+      { seen_at: string; tracking_events: object[] };
+    expect(served.seen_at).toBe('2026-11-12T09:00:00+00:00');
+    for (const row of served.tracking_events) expect(row).not.toHaveProperty('stored_at');
+    expect(JSON.stringify(withoutEventSources({ id: 'parcel', tracking_events: [first] }))).not.toContain('stored_at');
+  });
+
   it('leaves packages without scans untouched', () => {
     const row = { id: 'parcel', carrier: 'swiss-post', tracking_events: [] };
     expect(withEventPlaces(row)).toBe(row);

@@ -33,14 +33,16 @@ const PACKAGE_COLUMNS = [
   'archived_at',
   'notifications_muted',
   'email_muted',
+  'seen_at',
 ].join(',');
 /**
  * The package shape the API returns once eventPlaces.ts has served it. A
  * scan's `point`, the carrier's own coordinates, gives its place, and its
  * provider_event_id tells Peek's own rows from the carrier's: the response
- * carries neither. The scraper's `recipient_action` and `tie_order` are served as they were stored.
+ * carries neither, nor when a scan was stored (`stored_at`), which dates the parcel's news (`news_at`).
+ * The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
-const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source)`;
+const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source)`;
 /**
  * The columns the schedule reads, `one_off` among them: a lookup without an account leaves the
  * schedule once nobody has answered for its number (unseenLookup.ts).
@@ -2650,6 +2652,21 @@ export class SupabaseUserClient extends SupabaseClient {
     await this.request('/rest/v1/rpc/record_account_opened', { method: 'POST', body: {} });
   }
 
+  /** The account opened the parcel: the moment stored (`seen_at`), or null for a parcel that is not its own. */
+  async markPackageSeen(packageId: string): Promise<string | null> {
+    const mark = async (id: string) => {
+      const seen = await this.request('/rest/v1/rpc/mark_owned_package_seen', { method: 'POST', body: { p_package_id: id } });
+      return typeof seen === 'string' ? seen : null;
+    };
+    const seen = await mark(packageId);
+    if (seen) return seen;
+    // A parcel merged into another still answers to its old id.
+    const merged = rows(await this.request(`/rest/v1/packages?${query({
+      select: 'id', 'carrier_data->>original_package_id': `eq.${packageId}`, limit: '1',
+    })}`))[0];
+    return merged ? await mark(String(merged.id)) : null;
+  }
+
   /** The live link this account shares the parcel through, or null. A parcel of another account is a 404. */
   async packageShare(packageId: string): Promise<ParcelShare | null> {
     const result = await this.request('/rest/v1/rpc/owned_package_share', {
@@ -2749,7 +2766,7 @@ export class SupabaseUserClient extends SupabaseClient {
 
   async getNotificationPreferences(): Promise<JsonObject> {
     const params = query({
-      select: 'enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery',
+      select: 'enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates',
       limit: '1',
     });
     const result = rows(await this.request(`/rest/v1/notification_preferences?${params}`));
@@ -2759,16 +2776,21 @@ export class SupabaseUserClient extends SupabaseClient {
       quiet_hours_end: null,
       timezone: 'Europe/Zurich',
       email_on_delivery: null,
+      mark_new_updates: true,
     };
   }
 
-  /** `emailOnDelivery` switches the delivery email; left out or null, the stored choice stays. */
+  /**
+   * `emailOnDelivery` switches the delivery email, `markNewUpdates` the list's mark on a parcel with
+   * news; left out or null, the stored choice stays.
+   */
   async setNotificationPreferences(
     enabledStages: string[],
     quietHoursStart: string | null,
     quietHoursEnd: string | null,
     timezone: string,
     emailOnDelivery: boolean | null = null,
+    markNewUpdates: boolean | null = null,
   ): Promise<JsonObject> {
     let result = await this.request('/rest/v1/rpc/set_owned_notification_preferences', {
       method: 'POST',
@@ -2778,6 +2800,7 @@ export class SupabaseUserClient extends SupabaseClient {
         p_quiet_hours_end: quietHoursEnd,
         p_timezone: timezone,
         ...(emailOnDelivery === null ? {} : { p_email_on_delivery: emailOnDelivery }),
+        ...(markNewUpdates === null ? {} : { p_mark_new_updates: markNewUpdates }),
       },
     });
     if (Array.isArray(result) && result.length === 1) [result] = result;

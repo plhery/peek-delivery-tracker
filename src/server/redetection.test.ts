@@ -40,6 +40,10 @@ it('points a delivered parcel filed under no carrier to the carrier a provider n
   expect(rerouteCarrier(finished('delivered', { routing: { failures: { ups: { kind: 'not_found' } } } }))).toBeNull();
   expect(rerouteCarrier(finished('delivered', { routing: { failures: { ups: { kind: 'invalid_input', user_error: 'carrier:invalid_input' } } } })))
     .toBeNull();
+  // A lost connection is no answer: asked again once its wait is over.
+  const lost = (retry_at: string) => finished('delivered', { routing: { failures: { ups: { kind: 'transport', count: 1, retry_at } } } });
+  expect(rerouteCarrier(lost('2026-09-10T11:00:00Z'), 'newer', Date.parse('2026-09-10T12:00:00Z'))).toBe('ups');
+  expect(rerouteCarrier(lost('2026-09-10T13:00:00Z'), 'newer', Date.parse('2026-09-10T12:00:00Z'))).toBeNull();
   // Nothing else is asked about it: its detected carrier, a carrier without an adapter, or one filed under a carrier.
   expect(rerouteCarrier(parcel({ current_stage: 'delivered' }))).toBeNull();
   expect(rerouteCarrier(finished('delivered', { reported_carriers: ['Buffalo'] }, { tracking_number: 'BUFZA0000000001YQ' })))
@@ -80,10 +84,28 @@ it('asks an unknown parcel\'s detected carrier again once its wait is over, aske
   expect(rerouteCarrier(failed('2026-09-10T13:00:00Z'), 'newer', now)).toBeNull();
 });
 
+it('asks the detected carrier of a parcel filed under another again after a release when its service failed', () => {
+  const now = Date.parse('2026-09-10T12:00:00Z');
+  const failed = (kind: string, retry_at = '2026-09-10T11:00:00Z') =>
+    parcel({ carrier: 'dhl' }, { routing: { failures: { dhl: { kind: 'not_found' }, ups: { kind, count: 1, retry_at } } } });
+  // A maintenance page, a lost connection, a bot check or an answer its adapter could not read.
+  for (const kind of ['transport', 'verification', 'rate_limited', 'schema']) expect(rerouteCarrier(failed(kind), 'newer', now)).toBe('ups');
+  // Not while its wait lasts, which the check would keep.
+  expect(rerouteCarrier(failed('transport', '2026-09-10T13:00:00Z'), 'newer', now)).toBeNull();
+  // A carrier that answered without tracking the number was asked.
+  expect(rerouteCarrier(failed('not_found'), 'newer', now)).toBeNull();
+  expect(rerouteCarrier(failed('no_history'), 'newer', now)).toBeNull();
+});
+
 it('points a parcel a provider tracks back to its own carrier when that carrier was never asked', () => {
   const filed = { carrier: 'royal-mail', tracking_number: 'RR123456785GB' };
   expect(rerouteCarrier(parcel(filed))).toBe('royal-mail');
-  expect(rerouteCarrier(parcel(filed, { routing: { failures: { 'royal-mail': { kind: 'transport' } } } }))).toBeNull();
+  expect(rerouteCarrier(parcel(filed, { routing: { failures: { 'royal-mail': { kind: 'not_found' } } } }))).toBeNull();
+  // An outage is no answer: asked once its wait is over.
+  const now = Date.parse('2026-09-10T12:00:00Z');
+  const outage = (retry_at: string) => parcel(filed, { routing: { failures: { 'royal-mail': { kind: 'transport', count: 2, retry_at } } } });
+  expect(rerouteCarrier(outage('2026-09-10T11:00:00Z'), 'newer', now)).toBe('royal-mail');
+  expect(rerouteCarrier(outage('2026-09-10T13:00:00Z'), 'newer', now)).toBeNull();
   // The carrier answers it directly.
   expect(rerouteCarrier(parcel(filed, { tracking_provider: undefined }))).toBeNull();
 });
@@ -192,8 +214,11 @@ it('ranks the checks most likely to change the answer first', async () => {
   expect(await lead({}, { routing: { failures: { ups: refusal } } })).toEqual({ carrier: 'ups', rank: 0 });
   // A carrier never asked.
   expect(await lead({})).toEqual({ carrier: 'ups', rank: 1 });
-  // A carrier asked again once a passing failure is over, and recognition's first guess.
+  // Or one whose service failed, once its wait is over: it has not answered.
   expect(await lead({}, { routing: { failures: { ups: { kind: 'rate_limited', count: 1, retry_at: '2026-09-10T11:00:00Z' } } } }))
+    .toEqual({ carrier: 'ups', rank: 1 });
+  // A carrier asked again once the wait after its answer is over, and recognition's first guess.
+  expect(await lead({}, { routing: { failures: { ups: { kind: 'not_found', count: 1, retry_at: '2026-09-10T11:00:00Z' } } } }))
     .toEqual({ carrier: 'ups', rank: 2 });
   expect(await lead({ tracking_number: '1234567891', current_stage: 'pending' }, { tracking_provider: undefined }))
     .toEqual({ carrier: 'dhl-express', rank: 2 });

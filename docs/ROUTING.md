@@ -785,7 +785,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   parcel under it. A carrier whose adapter
   refuses the number by its own check, which sends nothing, is passed over until a release
   whose adapter takes it. One that refused the number under an older release counts as not
-  asked, the filed carrier and a provider's name the parcel already holds included. One whose
+  asked, the filed carrier and a provider's name the parcel already holds included. So does one
+  whose service failed (a maintenance page, a lost connection, a bot check, a rate limit, an
+  answer its adapter could not read), once that failure's wait is over. One whose
   answer was set aside counts as asked. A carrier the parcel already asked whose lookup can open
   a browser (the catalog's `tracking.browser`) is asked again only once the parcel has gone 12
   hours without a check: its answer would most likely be the same. Another is asked again at

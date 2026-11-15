@@ -6,7 +6,7 @@ import { AUTOMATIC_CARRIER_IDS } from './carriers';
 import { localClockCarrier } from './directLocalHistory';
 import { refusesNumber } from './numberRefusal';
 import { refusedNumberCode } from './trackingFailure';
-import { asNewAs, catalogRules, directCarrier, opensBrowser, recognizers, releaseLapses, routingState } from './trackingRouting';
+import { asNewAs, catalogRules, directCarrier, opensBrowser, recognizers, releaseLapses, routingState, serviceFailure } from './trackingRouting';
 import { isRecord, type JsonObject } from './types';
 
 /** Only parcels added this recently are looked at again, as carrier recognition only asks for them. */
@@ -34,7 +34,8 @@ export const RELEASE_REASK_MS = 12 * 60 * 60 * 1_000;
  * is over. A carrier the parcel already asked whose lookup
  * can open a browser waits until the parcel has gone RELEASE_REASK_MS without a
  * check, unless the answer it gave, set aside as older than the parcel or on
- * local clocks, would now be taken. Null otherwise. Only parcels filed under no carrier, or showing a
+ * local clocks, would now be taken. A carrier whose service failed has not answered: it
+ * counts as not asked once that failure's wait is over. Null otherwise. Only parcels filed under no carrier, or showing a
  * universal provider's history, are looked at; a delivered or returned one only when it is
  * filed under no carrier, for a carrier with an adapter of its own that a provider named
  * and it never asked. Nothing is sent: the check
@@ -78,18 +79,25 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
     return aside?.reason === 'local_clock' ? !localClockCarrier(carrier)
       : asNewAs(Date.parse(aside?.newest ?? ''), Date.parse(routing.last_event_at ?? ''));
   };
+  // The carrier answered about the number without tracking it: not found, no history, an input it
+  // wants. A failure of its service (an outage page, a lost connection, a bot check, an answer its
+  // adapter could not read) is no answer: a later release asks it again once its wait is over.
+  const answeredWithout = (carrier: string) => Boolean(routing.failures[carrier]) && !refusedBefore(carrier)
+    && !serviceFailure(routing.failures[carrier]);
   const asked = (carrier: string) => carrier === routing.confirmed_carrier || Boolean(routing.set_aside?.[carrier])
-    || (Boolean(routing.failures[carrier]) && !refusedBefore(carrier)) || Boolean(routing.candidate_probes?.[carrier]);
+    || answeredWithout(carrier) || Boolean(routing.candidate_probes?.[carrier]);
   const checkedRecently = now - Date.parse(String(parcel.last_synced_at ?? '')) < RELEASE_REASK_MS;
   // A refusal or an unreadable answer waits no longer: the check this release queues asks again.
+  // Until a failure's wait is over, that check would not ask the carrier.
+  const failureWaits = (carrier: string) => Date.parse(routing.failures[carrier]?.retry_at ?? '') > now
+    && !releaseLapses(carrier, routing.failures[carrier]);
   const waiting = (carrier: string) => Date.parse(routing.candidate_probes?.[carrier]?.retry_at ?? '') > now
-    || (Date.parse(routing.failures[carrier]?.retry_at ?? '') > now && !releaseLapses(carrier, routing.failures[carrier]))
-    || (checkedRecently && opensBrowser(carrier) && asked(carrier) && !fits(carrier));
+    || failureWaits(carrier) || (checkedRecently && opensBrowser(carrier) && asked(carrier) && !fits(carrier));
   // A carrier with an adapter of its own that the parcel never asked, or an unfiled parcel
   // can ask again, or one an unfiled parcel's check asks the providers about.
   const leads = (carrier: string | undefined): carrier is string => carrier !== undefined && carrier !== filed
     && !refused.has(carrier) && AUTOMATIC_CARRIER_IDS.has(carrier) && (!directCarrier(carrier) ? unfiled
-      : unfiled ? carrier !== routing.confirmed_carrier && !waiting(carrier) : !asked(carrier));
+      : unfiled ? carrier !== routing.confirmed_carrier && !waiting(carrier) : !asked(carrier) && !failureWaits(carrier));
   const lead = (carrier: string, rank: 0 | 1 | 2 = asked(carrier) ? 2 : 1): RerouteLead =>
     ({ carrier, rank: refusedBefore(carrier) ? 0 : rank });
   // The names a provider gave, read with today's aliases and number rules.
@@ -100,7 +108,7 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
   // A release checks it for such a carrier with an adapter of its own that it never asked,
   // such as one the release added, whose answer files the parcel there.
   if (finished) {
-    return leads(named) && directCarrier(named) && !asked(named) && !routing.failures[named] ? lead(named, 1) : null;
+    return leads(named) && directCarrier(named) && !asked(named) && !refusedBefore(named) ? lead(named, 1) : null;
   }
   const taken = Object.keys(routing.set_aside ?? {}).find((carrier) => fits(carrier) && carrier !== filed
     && !refused.has(carrier) && AUTOMATIC_CARRIER_IDS.has(carrier) && directCarrier(carrier));
@@ -128,7 +136,7 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
   // came to date the scans whose place settles their zone): asked again once the parcel
   // has gone RELEASE_REASK_MS without a check.
   if (localHistory && !checkedRecently && !waiting(filed)) return lead(filed, 2);
-  return filed !== routing.confirmed_carrier && (!routing.failures[filed] || refusedBefore(filed)) ? lead(filed, 1) : null;
+  return filed !== routing.confirmed_carrier && !answeredWithout(filed) && !failureWaits(filed) ? lead(filed, 1) : null;
 }
 
 /**

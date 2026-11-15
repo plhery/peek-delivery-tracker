@@ -245,6 +245,11 @@ export function releaseLapses(carrier: string, failure: { kind?: unknown } | und
   return directCarrier(carrier) && !opensBrowser(carrier) && (failure?.kind === 'invalid_input' || failure?.kind === 'schema');
 }
 
+/** Whether a source's failure is one of its service (SERVICE_FAILURES), which says nothing about the number asked. */
+export function serviceFailure(failure: { kind?: unknown } | undefined): boolean {
+  return SERVICE_FAILURES.includes(String(failure?.kind));
+}
+
 /**
  * Until when scheduled checks leave the parcel, as epoch milliseconds, zero when they don't: its
  * last check found every source they may ask waiting its turn (`quiet_until`). Whatever ends a

@@ -4281,9 +4281,9 @@ describe('TrackingSyncService', () => {
       current_stage: 'in_transit', carrier_data: { tracking_provider: 'ParcelsApp', routing: { version: 1, configured_carrier: 'unknown',
         failures: {}, probe_cursor: 0, discovery_cursor: 0, rules: 'older', ...routing } } });
     const failure = (kind: string, values: JsonObject = {}) => ({ failures: { ups: { kind, count: 1, retry_at: '2026-09-09T09:00:00Z', ...values } } });
-    // Listed newest first: UPS asked again after a rate limit, which its schedule does, a parcel in its
+    // Listed newest first: UPS asked again after its "not found", which its schedule does, a parcel in its
     // cooldown, 51 that never asked UPS, and the oldest, whose number UPS refused under an older release.
-    const candidates = [parcel('retry', failure('rate_limited')), parcel('deferred', { next_check_at: '2026-09-09T10:30:00Z' }),
+    const candidates = [parcel('retry', failure('not_found')), parcel('deferred', { next_check_at: '2026-09-09T10:30:00Z' }),
       ...Array.from({ length: 51 }, (_, index) => parcel(`due-${index}`)),
       parcel('refused', failure('schema', { user_error: 'carrier:invalid_input' }))];
     const client = { ...fakeClient(), listRedetectionCandidates: vi.fn().mockResolvedValue(candidates),

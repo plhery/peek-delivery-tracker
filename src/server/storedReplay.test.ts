@@ -386,4 +386,18 @@ describe('stored scan replay', () => {
     expect(followedScans([{ ...parcel({ ...own, occurredAt: '2026-09-10T09:00:00Z' }, relayed), stage: 'in_transit' }], [ownDelivery]))
       .toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'delivered' }]);
   });
+
+  it('reads a row re-dated in the same run at its new time when it moves the parcel with its current scan', () => {
+    // The attempt, read on the wrong clock at 10:00, is re-dated to 14:00 by the same release that reads the 12:00 row
+    // in transit: the attempt is then the newest scan.
+    const late = scan('attempt', 'dpd-pl', '2026-09-09T10:00:00Z', 'failed_attempt', 'Delivery attempt', { provider_code: 'A1', stage: 'failed_attempt' });
+    const noon = scan('noon', 'dpd-pl', '2026-09-09T12:00:00Z', 'exception', 'Parcel delayed', { provider_code: 'X1', stage: 'exception' });
+    const clock = { kind: 'clock', parcel: 'parcel-1', row: 'attempt', source: 'dpd-pl', open: true, from: '2026-09-09T10:00:00Z',
+      to: '2026-09-09T14:00:00Z', time: '2026-09-09T16:00:00+02:00', timeZone: 'Europe/Warsaw', basis: 'carrier',
+      providerEventId: 'dpd-pl:attempt', previousProviderEventId: 'dpd-pl:attempt', clash: false } as const;
+    const reread = { kind: 'stage', parcel: 'parcel-1', row: 'noon', source: 'dpd-pl', open: true, from: 'exception', to: 'in_transit',
+      code: 'X1', reason: 'mapped', declared: 'in_transit', stageSource: 'carrier_map' } as const;
+    expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock, reread]))
+      .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
+  });
 });

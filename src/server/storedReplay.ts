@@ -407,23 +407,26 @@ export function steppedBack(parcels: readonly StoredParcel[], changes: readonly 
 export function followedScans(parcels: readonly StoredParcel[], changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): StepBack[] {
   const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
   const deleted = new Set(changes.flatMap((change) => change.kind === 'copy' ? [change.row] : []));
+  const redated = new Map(changes.flatMap((change) => change.kind === 'clock' ? [[change.row, change.to] as const] : []));
   const stepped = new Set(stepBacks.map((step) => step.parcel));
-  const ordered = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string) => sortEventsDesc(scans
-    .map((scan) => ({ id: scan.id, stage: stage(scan) as Stage, occurredAt: scan.occurredAt, tieOrder: tieOrder(scan.raw.tie_order) }))
+  // Before the changes, each scan at its stored time; after them, a re-dated one at its new time.
+  const ordered = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string, changed = false) => sortEventsDesc(scans
+    .map((scan) => ({ id: scan.id, stage: stage(scan) as Stage, occurredAt: changed ? redated.get(scan.id) ?? scan.occurredAt : scan.occurredAt,
+      tieOrder: tieOrder(scan.raw.tie_order) }))
     .filter((scan) => scan.stage !== 'pending'));
-  const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string) => currentScan(ordered(scans, stage));
+  const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string, changed = false) => currentScan(ordered(scans, stage, changed));
   return parcels.flatMap((parcel): StepBack[] => {
     const from = parcel.stage ?? '';
     if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
     const before = current(parcel.events, (scan) => scan.stage);
     const kept = parcel.events.filter((scan) => !deleted.has(scan.id));
     const read = (scan: StoredScan) => restaged.get(scan.id) ?? scan.stage;
-    const after = current(kept, read);
+    const after = current(kept, read, true);
     if (before?.stage !== from || !after || after.stage === from || !PROGRESS_STAGES.has(after.stage)) return [];
     if (after.stage === 'accepted' && ON_THE_WAY.has(from)) return [];
     // A return that newer scans carry back, as the sync holds it; a delivery no row of the carrier's own shows.
     const providers = (scan: StoredScan) => typeof scan.raw[UNIVERSAL_PROVIDER] === 'string';
-    const hold = after.stage === 'returned' && ordered(kept, read)[0]?.id !== after.id ? 'return' as const
+    const hold = after.stage === 'returned' && ordered(kept, read, true)[0]?.id !== after.id ? 'return' as const
       : after.stage === 'delivered' && kept.every((scan) => read(scan) !== 'delivered' || providers(scan)) ? 'delivery' as const
         : undefined;
     return [{ parcel: parcel.id, from, to: after.stage, ...(hold ? { hold } : {}) }];

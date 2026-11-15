@@ -327,9 +327,10 @@ const LABEL_WAIT = 2 * DAY;
  */
 const PARTIAL_HOLD = 3 * HOUR;
 /**
- * How long a provider without history for a number nothing has answered for waits before it is asked again:
- * at the first hourly check, at the last one, half a day on, then daily. Carriers find nearly every first scan
- * that comes after the first hour.
+ * How long a provider without history for a number nothing has answered for waits before it is asked again,
+ * by its answers without history in a row, unless the parcel is filed under a carrier with no adapter of its own: at
+ * the first hourly check, at the last one, half a day on, then daily. A carrier's own adapter finds nearly every
+ * first scan that comes after the first hour. Where the providers alone track the carrier, they keep the usual waits.
  */
 const UNANSWERED_PROVIDER_WAITS = [45 * 60_000, 4 * HOUR, 12 * HOUR, DAY];
 const LABEL_SPACING = 6 * HOUR;
@@ -982,7 +983,12 @@ export class TrackingRouter {
       const kind = classified.kind === 'transport' && answeredWithoutHistory(error, !universalSource)
         ? 'no_history' : classified.kind;
       const { retryAfterMs } = classified;
-      const count = Math.min(20, (state.failures[provider]?.count ?? 0) + 1);
+      const previous = state.failures[provider];
+      const firstScanAwaited = universalSource && kind === 'no_history' && !state.last_success_at && !state.last_event_at;
+      // Filed under a carrier the providers alone track, the parcel keeps the usual waits.
+      const unanswered = firstScanAwaited && (['unknown', 'intl-post'].includes(declared) || directCarrier(declared));
+      // Waits for a first scan count the answers without history in a row: a lost connection before them answered nothing.
+      const count = firstScanAwaited && previous?.kind !== 'no_history' ? 1 : Math.min(20, (previous?.count ?? 0) + 1);
       // A provider's "not found" holds for a day. A carrier often doesn't know a
       // label before its first scan, so its own "not found" is asked again within hours.
       const daily = kind === 'not_found' && universalSource;
@@ -992,7 +998,6 @@ export class TrackingRouter {
         && !(kind === 'verification' && !universalSource && carrierErrorKind(error) === 'challenge');
       const base = daily ? DAY : hourly ? HOUR : 15 * 60_000;
       const userError = trackingFailureCode(error);
-      const unanswered = universalSource && kind === 'no_history' && !state.last_success_at && !state.last_event_at;
       const wait = unanswered ? UNANSWERED_PROVIDER_WAITS[Math.min(count, UNANSWERED_PROVIDER_WAITS.length) - 1]!
         : Math.min(daily ? DAY : 6 * HOUR, base * 2 ** (count - 1));
       const retryAt = now().getTime() + Math.max(retryAfterMs, wait);

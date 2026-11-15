@@ -619,7 +619,7 @@ to shrink, and the dashboard's "Universal providers" row follows what is sent to
 what they answer. `metrics.provider_requests_daily` counts each provider's lookups per UTC day
 from the checks' audit rows (`tracking_sync_attempts.lookups`), with how they ended (history,
 none, a failure) and how many returned history in a check that changed the parcel, by why the
-check asked:
+check asked. A provider lookup our own pacing refused (`paced`) sent nothing and is not counted.
 
 - `unseen`: the parcel had shown no scan, the kind a wrong number or an order number stays;
 - `no_adapter`: it is filed under no carrier, or under one whose own adapter answered no
@@ -627,7 +627,7 @@ check asked:
 - `adapter_failed`: its carrier's adapter failed in that check (for a parcel handed over, the delivery carrier's
   when the check asked it);
 - `adapter_no_answer`: its carrier's adapter was resting after failures, waiting for an input
-  or set aside, or held no history;
+  or set aside, refused by our own pacing, or held no history;
 - `label_only`: the carrier answered and the parcel had not moved past its label;
 - `beside_carrier`: the carrier answered a moving parcel, and a provider was asked to complete it.
 

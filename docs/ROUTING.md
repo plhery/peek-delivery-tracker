@@ -156,8 +156,9 @@ less when a carrier's order leaves a provider out. Postal S10 lookups get 13 s m
 attempt doesn't eat into this budget. If the budget runs out first, the discovery cursor
 moves on so the next check starts with another of ParcelsApp, Ship24 and 17TRACK. Postal
 Ninja, Track718 (Juxi's last provider) and UPU stay after them. A carrier's own lookup has its
-adapter's budget. Australia Post's has the minute an adapter takes at most, so that its read through a
-residential proxy after a bot check gets 45 s ([`trackingSync.ts`](../src/server/trackingSync.ts)).
+adapter's budget. Australia Post's has the minute an adapter takes at most: the adapter keeps 15 s for
+the transport, and its two browser reads, the second through a residential proxy after a bot check,
+share the other 45 s ([`trackingSync.ts`](../src/server/trackingSync.ts)).
 
 A failed source waits before it is retried for that parcel:
 
@@ -766,6 +767,7 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   ranked first among them, before the checks slow down or a lookup leaves the schedule.
   A carrier with a minimum interval of its own is not asked sooner than it allows
   (Refresh cadence); the lookup that follows its read in the same check is the same ask.
+  A read our own pacing refuses asked nothing and counts no miss.
 - **After a scraper release.** A parcel keeps a digest of the catalog that last routed it
   (`routing.rules`: the scraper release, each carrier's detection rules, names, whether it
   has an adapter of its own and whether that adapter's clocks are local), so every release

@@ -1744,6 +1744,8 @@ export class TrackingRouter {
       // the filed carrier's retry.
       const guessed = guessedCarrier(number);
       for (const carrier of new Set(outcomes.map((outcome) => outcome.carrier))) {
+        // Our own pacing refused the read before any request: the carrier was not asked, so no miss counts.
+        if (refused.has(carrier)) continue;
         const count = Math.min(20, (state.candidate_probes?.[carrier]?.count ?? 0) + 1);
         const longest = count > 6 && carrier !== guessed ? DAY : 6 * HOUR;
         // Known only on a recent answer: an older parcel sharing the number (FAN Courier reuses its AWBs) is not this one.

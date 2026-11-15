@@ -1389,6 +1389,8 @@ describe('persistent tracking routing', () => {
         new RateLimitedError('Poste Italiane', 60_000, 'Searched as often as an hour allows', { reason: 'self_paced' })));
       expect(refused.recognized).toEqual(['poste-italiane']);
       expect(saved).not.toHaveProperty('paced_asks');
+      // Nor does it count as a miss that pushes the next read further off.
+      expect(saved).toMatchObject({ candidate_probes: { 'poste-italiane': { count: 2, retry_at: '2026-09-10T13:30:00.000Z' } } });
       // Once the hour has passed it is asked, and the lookup that follows a read that knows the number is the same ask.
       saved = waiting;
       const known = await check('2026-09-10T14:00:00Z', (run) => {

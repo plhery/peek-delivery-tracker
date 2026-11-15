@@ -360,6 +360,52 @@ class DeliveryWidgetTests {
      * The store publishes every parcel in the widgets' order, as the iPhone does, so the list's count follows a parcel
      * leaving past the fifteenth row as it follows one among them.
      */
+    /**
+     * Published at 22:30 on Thursday in Paris; the reader lands in New York and looks at 20:00 on Thursday there. It is
+     * still Thursday where the phone is, so the widget words each parcel's day as the app itself does in New York: a
+     * parcel due on Friday is "tomorrow", not the "today" Paris's midnight (18:00 in New York) would have made it.
+     */
+    @Test
+    fun aWidgetCarriedToAnotherZoneSaysWhatTheAppSaysThere() = runTest {
+        val savedZone = TimeZone.getDefault()
+        val savedClock = AppClock.source
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"))
+            var clock = Instant.parse("2026-11-12T21:30:00Z") // Thu 22:30 Paris
+            AppClock.source = { clock }
+            val defaults = MemoryDefaults()
+            val demo = AppConfiguration(
+                mode = AppConfiguration.Mode.Demo, apiBaseUrl = "https://widget.test", supabaseUrl = null, supabasePublishableKey = "",
+                googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = false, appGroupIdentifier = "widget.test",
+            )
+            val transport = RecordingTransport()
+            val localizer = Localizer(AppLanguage.En)
+            val session = testSessionStore(demo, backgroundScope, transport = transport, defaults = defaults)
+            val store = testParcelStore(demo, session, transport, backgroundScope, defaults, localizer = localizer, now = { clock })
+            val shared = DeliveryWidgetSharedStore(defaults)
+            store.setDeliveryLiveActivitiesEnabled(false)
+            session.enterDemo()
+            store.load()
+            runCurrent()
+
+            TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"))
+            clock = Instant.parse("2026-11-12T22:00:00Z") // Thu 17:00 New York, as the phone lands
+            val evening = Instant.parse("2026-11-13T01:00:00Z") // Thu 20:00 New York
+            fun app() = ParcelStore.widgetOrder(store.parcels, localizer, evening).map { it.id to it.listDay }
+            fun widget() = DeliveryWidgetList.make(evening, enabled = true, languageCode = "en", snapshot = shared.snapshot).parcels
+                .map { it.id to it.listDay }
+            assertTrue("A parcel of the demo is due on Friday", app().any { it.second == "tomorrow" })
+            assertNotEquals("Worded in Paris, the widget follows Paris's midnights", app(), widget())
+
+            store.timeZoneChanged()
+            runCurrent()
+            assertEquals(app(), widget())
+        } finally {
+            AppClock.source = savedClock
+            TimeZone.setDefault(savedZone)
+        }
+    }
+
     @Test
     fun theStorePublishesEveryParcelSoTheCountFollowsThoseBeyondTheRows() = runTest {
         val reloads = mutableListOf<String>()

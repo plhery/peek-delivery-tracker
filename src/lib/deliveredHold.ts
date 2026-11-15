@@ -48,7 +48,7 @@ export function missedDeliveries(key: string, parcels: ParcelWithEvents[], now =
   if (!ids.size) return [];
   return parcels.filter((parcel) => {
     if (!ids.has(parcel.id) || parcel.archivedAt || !isDelivered(parcel.events)) return false;
-    const at = Date.parse(currentEvent(parcel.events)?.occurredAt ?? '');
+    const at = Date.parse(currentEvent(parcel.events, parcel.returnHeld)?.occurredAt ?? '');
     return now - at < RECENT_DELIVERY_MS;
   });
 }

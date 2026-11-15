@@ -21,7 +21,7 @@ export function sampleParcel(now: number): ParcelWithEvents {
 
 /** One more scan, the way the demo deliveries move on a refresh. */
 function advanced(parcel: ParcelWithEvents, now: number): ParcelWithEvents {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const next = current && nextStage(current.stage);
   if (!next) return parcel;
   const occurredAt = new Date(Math.max(now, Date.parse(latestEvent(parcel.events)!.occurredAt) + 1_000)).toISOString();

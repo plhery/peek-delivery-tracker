@@ -355,7 +355,7 @@ export function createDemoRepo(
 
   const advance = (parcel: ParcelWithEvents): ParcelWithEvents => {
     if (parcel.archivedAt) return parcel;
-    const stage = currentStage(parcel.events);
+    const stage = currentStage(parcel.events, parcel.returnHeld);
     if (stage === null || isFinal(stage)) return parcel;
     const next = nextStage(stage);
     if (!next) return parcel;

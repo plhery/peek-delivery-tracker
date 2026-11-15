@@ -203,6 +203,25 @@ describe('currentStage / progressIndex', () => {
     expect(currentEvent([returned, hub, label, moved])).toBe(moved);
   });
 
+  it('keeps a return the server holds over a problem row and the trip after it, and over nothing else', () => {
+    const at = (day: number, hour = 8) => `2026-06-${String(day).padStart(2, '0')}T${String(hour).padStart(2, '0')}:00:00.000Z`;
+    const failed = makeEvent({ id: 'failed', stage: 'failed_attempt', occurredAt: at(4) });
+    const returned = makeEvent({ id: 'returned', stage: 'returned', occurredAt: at(5) });
+    // A check dated the carrier's summary of a problem at the check, before the return scan was listed.
+    const problem = makeEvent({ id: 'problem', stage: 'exception', occurredAt: at(5, 13) });
+    const hub = makeEvent({ id: 'hub', stage: 'in_transit', occurredAt: at(7) });
+    expect(currentEvent([failed, returned, problem], true)).toBe(returned);
+    expect(currentEvent([failed, returned, problem, hub], true)).toBe(returned);
+    expect(currentStage([failed, returned, problem, hub], true)).toBe('returned');
+    // Without the hold, the problem row ends the return.
+    expect(currentEvent([failed, returned, problem, hub])).toBe(hub);
+    // A delivery round after the return is news of its own, held or not.
+    const round = makeEvent({ id: 'round', stage: 'out_for_delivery', occurredAt: at(8) });
+    expect(currentEvent([failed, returned, problem, hub, round], true)).toBe(round);
+    // A hold with no return among the rows reads them as they are.
+    expect(currentEvent([failed, hub], true)).toBe(hub);
+  });
+
   it('keeps progress at in-transit level while at customs', () => {
     const events = [
       makeEvent({ id: 'a', stage: 'customs', occurredAt: '2026-06-03T08:00:00.000Z' }),

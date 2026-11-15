@@ -29,13 +29,13 @@ export interface AssistantCaller {
 
 /** A parcel as a tool describes it: what an assistant needs to answer, without the recipient's name or postcode. */
 function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParcel {
-  const latest = currentEvent(parcel.events);
+  const latest = currentEvent(parcel.events, parcel.returnHeld);
   return {
     id: parcel.id,
     name: parcel.label || null,
     carrier: carrierInfo(parcel.carrier).name,
     trackingNumber: parcel.trackingNumber,
-    status: currentStage(parcel.events) ?? 'pending',
+    status: currentStage(parcel.events, parcel.returnHeld) ?? 'pending',
     // The newest scan, as the apps head the parcel and as `status` and `lastUpdate` read it: the saved summary is the
     // delivery carrier's after a handoff, while the earlier carrier may have scanned the parcel since.
     statusText: latest?.description ?? parcel.lastStatusText ?? null,

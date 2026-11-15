@@ -36,7 +36,7 @@ export function parcelAttention(
   parcel: ParcelWithEvents,
   now: number = Date.now(),
 ): ParcelAttention | null {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   // The carrier waits on the recipient until a later scan says it moved on.
   if (current?.recipientAction) return `customs_${current.recipientAction}`;
   switch (current?.stage) {
@@ -77,8 +77,8 @@ export function compareParcelPriority(
   const firstDay = expectedDeliveryDay(first.expectedDelivery) ?? '9999-99-99';
   const secondDay = expectedDeliveryDay(second.expectedDelivery) ?? '9999-99-99';
   if (firstDay !== secondDay) return firstDay.localeCompare(secondDay);
-  const firstUpdate = currentEvent(first.events)?.occurredAt ?? first.createdAt;
-  const secondUpdate = currentEvent(second.events)?.occurredAt ?? second.createdAt;
+  const firstUpdate = currentEvent(first.events, first.returnHeld)?.occurredAt ?? first.createdAt;
+  const secondUpdate = currentEvent(second.events, second.returnHeld)?.occurredAt ?? second.createdAt;
   return secondUpdate.localeCompare(firstUpdate);
 }
 
@@ -108,7 +108,7 @@ export function prioritizeActiveParcels(
 }
 
 export function isActiveParcel(parcel: ParcelWithEvents): boolean {
-  const stage = currentStage(parcel.events);
+  const stage = currentStage(parcel.events, parcel.returnHeld);
   return !parcel.archivedAt && (stage === null || (stage !== 'delivered' && stage !== 'returned'));
 }
 
@@ -119,11 +119,11 @@ export function nextPriorityParcel(parcels: ParcelWithEvents[], now = Date.now()
     if (!isActiveParcel(parcel)) return false;
     const reason = parcelAttention(parcel, now);
     return !reason || reason === 'ready_for_pickup'
-      || (reason === 'sync_error' && currentStage(parcel.events) === 'out_for_delivery');
+      || (reason === 'sync_error' && currentStage(parcel.events, parcel.returnHeld) === 'out_for_delivery');
   });
   const urgency = (parcel: ParcelWithEvents) => {
-    if (currentStage(parcel.events) === 'ready_for_pickup') return 0;
-    return currentStage(parcel.events) === 'out_for_delivery'
+    if (currentStage(parcel.events, parcel.returnHeld) === 'ready_for_pickup') return 0;
+    return currentStage(parcel.events, parcel.returnHeld) === 'out_for_delivery'
       || expectedDeliveryDay(parcel.expectedDelivery) === today ? 1 : 2;
   };
   const day = (parcel: ParcelWithEvents) => expectedDeliveryDay(parcel.expectedDelivery) ?? '9999-99-99';

@@ -194,7 +194,7 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
   if (!isParcelLinkId(id)) return;
   const { list, stranded } = load();
   const existing = list.find((recent) => recent.id === id);
-  const current = currentEvent(view.parcel.events);
+  const current = currentEvent(view.parcel.events, view.parcel.returnHeld);
   const firstAnswer = !existing?.snapshot.parcel.lastSyncedAt && !!view.parcel.lastSyncedAt;
   const kept = typeof existing?.openedNews === 'string' && !firstAnswer ? existing.openedNews : null;
   const recent: RecentParcel = {

@@ -39,8 +39,8 @@ export function firstCheckLanded(view: ParcelLinkView): boolean {
 /** The scan an answer brings that the answer before it did not have. A first check landing is not news. */
 export function newScan(before: ParcelLinkView | null, after: ParcelLinkView): TrackingEvent | null {
   if (!before || !parcelHasCarrierUpdate(before.parcel) || !parcelHasCarrierUpdate(after.parcel)) return null;
-  const was = currentEvent(before.parcel.events)!;
-  const now = currentEvent(after.parcel.events)!;
+  const was = currentEvent(before.parcel.events, before.parcel.returnHeld)!;
+  const now = currentEvent(after.parcel.events, after.parcel.returnHeld)!;
   return now.id !== was.id && Date.parse(now.occurredAt) >= Date.parse(was.occurredAt) ? now : null;
 }
 
@@ -141,7 +141,7 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     let waiting = false;
 
     const cadence = () => !landed ? Math.min(FIRST_CHECK_MAX_MS, FIRST_CHECK_MS * 1.5 ** waits++)
-      : Math.min(shown && currentStage(shown.parcel.events) === 'out_for_delivery' ? DELIVERING_MAX_MS : LIVE_MAX_MS, LIVE_MS * 2 ** quiet);
+      : Math.min(shown && currentStage(shown.parcel.events, shown.parcel.returnHeld) === 'out_for_delivery' ? DELIVERING_MAX_MS : LIVE_MAX_MS, LIVE_MS * 2 ** quiet);
     const stop = () => { clearTimeout(timer); waiting = false; };
     const schedule = (delay: number) => {
       stop();

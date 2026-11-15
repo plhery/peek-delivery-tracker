@@ -40,7 +40,7 @@ export function stampOrigin(parcel: ParcelWithEvents): string | null {
 
 /** The day and month the parcel was delivered, as a postmark shows it: 28.09. */
 export function stampDeliveryDate(parcel: ParcelWithEvents): string | null {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   if (current?.stage !== 'delivered') return null;
   const date = scanDate(current)?.date;
   if (!date) return null;

@@ -92,6 +92,9 @@ const EARLY_STAGES: readonly Stage[] = ['registered', 'accepted'];
 /** Stages of a parcel on its way, short of a final one. */
 const MOVING_STAGES: ReadonlySet<Stage> = new Set<Stage>(['in_transit', 'customs', 'out_for_delivery', 'failed_attempt', 'ready_for_pickup']);
 
+/** What the server holds a return over (`return_held`): the trip back, customs, or a problem. */
+const RETURN_HOLDING: ReadonlySet<Stage> = new Set<Stage>(['in_transit', 'customs', 'exception']);
+
 /**
  * The event that represents the parcel's current delivery state.
  *
@@ -103,16 +106,22 @@ const MOVING_STAGES: ReadonlySet<Stage> = new Set<Stage>(['in_transit', 'customs
  * a delivery, a new label starts over. A return holds while the scans after it
  * only carry the parcel back (`returnUnderWay`). A scan the journal shows as a
  * line under another (`relayOf`) is part of that scan's step, whichever is newer.
+ * While the server holds the parcel's return (`returnHeld`), the return stays its
+ * event over a trip scan, customs or a problem, as the server stores it: a row
+ * an earlier check dated at the check in a problem's stage can sit after it.
  */
-export function currentEvent(events: TrackingEvent[]): TrackingEvent | null {
+export function currentEvent(events: TrackingEvent[], returnHeld = false): TrackingEvent | null {
   const byId = new Map(events.map((event) => [event.id, event]));
   const underAnother = (event: TrackingEvent) => {
     const scan = event.relayOf ? byId.get(event.relayOf) : undefined;
     return scan !== undefined && scan !== event && !scan.relayOf;
   };
-  return currentScan(sortEventsDesc(events.filter((event) => event.stage !== 'pending' && !underAnother(event))))
-    ?? latestEvent(events);
+  const scans = sortEventsDesc(events.filter((event) => event.stage !== 'pending' && !underAnother(event)));
+  const current = currentScan(scans) ?? latestEvent(events);
+  return returnHeld && current && RETURN_HOLDING.has(current.stage)
+    ? scans.find((scan) => scan.stage === 'returned') ?? current : current;
 }
+
 
 /** `currentEvent` of a parcel's carrier scans, newest first: the server reads its rows by it too. */
 export function currentScan<T extends { stage?: unknown }>(newestFirst: readonly T[]): T | undefined {
@@ -189,8 +198,8 @@ export function collectedFromPickupPoint(events: readonly OrderedScan[]): boolea
   return moved ? moved.stage === 'ready_for_pickup' : null;
 }
 
-export function currentStage(events: TrackingEvent[]): Stage | null {
-  return currentEvent(events)?.stage ?? null;
+export function currentStage(events: TrackingEvent[], returnHeld = false): Stage | null {
+  return currentEvent(events, returnHeld)?.stage ?? null;
 }
 
 /** 0..5 position on the happy path; -1 when there are no events yet. */

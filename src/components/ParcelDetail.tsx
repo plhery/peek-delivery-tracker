@@ -141,7 +141,7 @@ export function ParcelDetail({
   const deliveryLabel = delivery ? t(deliveryLineKey(parcel), { carrier: delivery.name }) : null;
   const amazonHistoryExpired = carrier.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automaticTracking = tracksAutomatically(carrier.id) && !amazonHistoryExpired;
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   // While the parcel waits, its pickup point gets a card; afterwards it is a plain fact.
   const waitingAt = current?.stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint) : null;
   // After a missed delivery or a problem, or while customs asks the reader for something, the carrier waits on the reader:
@@ -779,7 +779,8 @@ export function ParcelDetail({
 
       {(automaticTracking || parcelHasCarrierUpdate(parcel)) && (
         <section className="detail__timeline">
-          <TrackingJournal events={parcel.events} planned={parcel.plannedEvents} written={writtenSteps} syncing={status.syncing} />
+          <TrackingJournal events={parcel.events} planned={parcel.plannedEvents} written={writtenSteps} syncing={status.syncing}
+            returnHeld={parcel.returnHeld} />
         </section>
       )}
 

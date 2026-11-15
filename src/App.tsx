@@ -399,7 +399,7 @@ export default function App({
   );
   const returnedParcels = useMemo(
     () => sortPastParcels(visibleParcels.filter(
-      (parcel) => !parcel.archivedAt && currentStage(parcel.events) === 'returned',
+      (parcel) => !parcel.archivedAt && currentStage(parcel.events, parcel.returnHeld) === 'returned',
     )),
     [visibleParcels],
   );

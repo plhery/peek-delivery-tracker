@@ -42,8 +42,8 @@ const QUIET_MS = 24 * 60 * 60 * 1_000;
 const NO_SCAN = 'none';
 
 /** What the page ends on: its newest scan, and how many it has. */
-export function scanIdentity(parcel: Pick<ParcelWithEvents, 'events'>): string {
-  const newest = currentEvent(parcel.events);
+export function scanIdentity(parcel: Pick<ParcelWithEvents, 'events' | 'returnHeld'>): string {
+  const newest = currentEvent(parcel.events, parcel.returnHeld);
   return newest ? `${parcel.events.length}:${newest.occurredAt}` : NO_SCAN;
 }
 

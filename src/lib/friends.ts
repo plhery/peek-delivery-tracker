@@ -27,7 +27,7 @@ export function ownFriendCard(parcels: readonly ParcelWithEvents[], profile: Api
   return {
     id: '44000000-0000-4000-8000-000000000004', nickname: profile.nickname,
     stats: profile.shareStats ? sharedPassport(parcels) : null,
-    arrivedThisWeek: profile.shareArrival ? parcels.some((p) => currentStage(p.events) === 'delivered' && (() => {
+    arrivedThisWeek: profile.shareArrival ? parcels.some((p) => currentStage(p.events, p.returnHeld) === 'delivered' && (() => {
       const arrived = Math.min(...p.events.filter((e) => e.stage === 'delivered').map((e) => Date.parse(e.occurredAt)));
       return arrived >= week.getTime() && arrived <= Date.now();
     })()) : null,

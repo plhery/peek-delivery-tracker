@@ -250,7 +250,7 @@ export const GIFT_ORIGIN_DESCRIPTION = 'Left the sender';
  * until it is delivered.
  */
 export function isWrappedGift(view: ParcelLinkView): boolean {
-  return view.link.gift === true && view.link.role !== 'owner' && currentEvent(view.parcel.events)?.stage !== 'delivered';
+  return view.link.gift === true && view.link.role !== 'owner' && currentEvent(view.parcel.events, view.parcel.returnHeld)?.stage !== 'delivered';
 }
 
 /**

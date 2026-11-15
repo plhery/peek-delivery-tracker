@@ -65,7 +65,7 @@ function estimateLine(parcel: ParcelWithEvents, estimate: string, wording: Wordi
 }
 
 export function parcelStage(parcel: ParcelWithEvents): Stage | null {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   return current && current.stage !== 'pending' ? current.stage : null;
 }
 
@@ -81,7 +81,7 @@ export function parcelHeadline(parcel: ParcelWithEvents, t: Translate): string {
  */
 export function parcelDetail(parcel: ParcelWithEvents, wording: Wording, clockTime = true, wholeWindow = false): string | null {
   const { t, languageTag, now = Date.now(), use24HourTime } = wording;
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const stage = parcelStage(parcel);
   const when = current ? scanDate(current) : null;
   const dated = when?.date ?? null;
@@ -115,7 +115,7 @@ export const flagKey = (flag: ParcelAttention) => `attention.${flag}` as Message
 
 /** Whether the journey ended long enough ago for the page to wind down. */
 export function journeyEndedBefore(parcel: ParcelWithEvents, now = Date.now()): boolean {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   if (!current || !isFinal(current.stage)) return false;
   const ended = Date.parse(current.occurredAt);
   return Number.isFinite(ended) && now - ended >= AFTERWARDS_MS;
@@ -163,7 +163,7 @@ export function parcelFreshness({ parcel, checking, offline, trouble, seenAt }: 
   if (offline) {
     return { kind: 'offline', label: t('link.offlineLabel'), dot: true };
   }
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const stage = parcelStage(parcel);
   if (stage && isFinal(stage) && current) {
     return { kind: 'ended', label: capitalized(localizedScanAge(current, t, languageTag, now), languageTag), dot: false };
@@ -210,7 +210,7 @@ export function parcelTabTitle({ parcel, name, checking, unseen = 0 }: {
   const { t, languageTag, now = Date.now(), use24HourTime } = wording;
   const app = t('app.title');
   if (checking) return `${t('link.title.checking')} · ${app}`;
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const when = current ? scanDate(current) : null;
   const deliveredToday = parcelStage(parcel) === 'delivered' && when?.timed && sameDay(when.date, new Date(now));
   const status = deliveredToday ? t('link.title.delivered', { time: localizedClockTime(when.date, languageTag, use24HourTime) }) : parcelHeadline(parcel, t);
@@ -244,7 +244,7 @@ export function giftArrival(parcel: ParcelWithEvents, wording: Wording): string 
 /** "Delivered today at 14:12", for a gift that has arrived. Without a time the card's own line gives the day. */
 export function giftDelivered(parcel: ParcelWithEvents, wording: Wording): string | null {
   const { t, languageTag, now = Date.now(), use24HourTime } = wording;
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const when = current?.stage === 'delivered' ? scanDate(current) : null;
   if (!when?.timed) return null;
   return t('share.gift.delivered', { date: localizedDeliveryDate(when.date, t, languageTag, now), time: localizedClockTime(when.date, languageTag, use24HourTime) });

@@ -79,7 +79,7 @@ function newOwnerKey(): string {
 function story(trackingNumber: string, carrier: CarrierId | undefined, now: number): ParcelWithEvents {
   const samples = seedParcels(now);
   const underway = samples.filter((parcel) => {
-    const stage = currentEvent(parcel.events)?.stage;
+    const stage = currentEvent(parcel.events, parcel.returnHeld)?.stage;
     return !parcel.archivedAt && stage && !isFinal(stage);
   });
   return samples.find((parcel) => parcel.trackingNumber === trackingNumber && (!carrier || parcel.carrier === carrier))
@@ -168,7 +168,7 @@ export function createDemoLinks(
 
   /** The same rule as the server's: 30 days after the end of the journey, else 90 days after the last sign of life. */
   function forgetAt(link: DemoLink): string {
-    const current = currentEvent(link.parcel.events);
+    const current = currentEvent(link.parcel.events, link.parcel.returnHeld);
     const created = Date.parse(link.createdAt);
     const time = current && isFinal(current.stage)
       ? Math.max(Date.parse(current.occurredAt), created) + 30 * DAY
@@ -178,7 +178,7 @@ export function createDemoLinks(
 
   function view(id: string, link: DemoLink, owner: boolean): ParcelLinkView {
     const { trackingNumber } = link.parcel;
-    const wrapped = !!link.gift && !owner && currentEvent(link.parcel.events)?.stage !== 'delivered';
+    const wrapped = !!link.gift && !owner && currentEvent(link.parcel.events, link.parcel.returnHeld)?.stage !== 'delivered';
     const numberShown = owner || (!!link.showNumber && !wrapped);
     return {
       link: {
@@ -197,7 +197,7 @@ export function createDemoLinks(
 
   /** One more scan, the way the demo deliveries move on a refresh. */
   function advanced(parcel: ParcelWithEvents): ParcelWithEvents {
-    const current = currentEvent(parcel.events);
+    const current = currentEvent(parcel.events, parcel.returnHeld);
     const next = current && nextStage(current.stage);
     if (!current || !next) return parcel;
     const occurredAt = new Date(Math.max(now(), Date.parse(latestEvent(parcel.events)!.occurredAt) + 1_000)).toISOString();
@@ -287,7 +287,7 @@ export function createDemoLinks(
       // Like the server, an open link moves its last-opened time at most every five minutes.
       if (time - Date.parse(link.openedAt) > 5 * 60_000) link = { ...link, openedAt: new Date(time).toISOString() };
       // Alerts stop when the parcel is delivered.
-      if (link.alerts?.length && isFinal(currentEvent(link.parcel.events)?.stage ?? 'pending')) link = { ...link, alerts: [] };
+      if (link.alerts?.length && isFinal(currentEvent(link.parcel.events, link.parcel.returnHeld)?.stage ?? 'pending')) link = { ...link, alerts: [] };
       if (link !== before) save({ ...links, [id]: link });
       return view(id, link, owner);
     },
@@ -332,7 +332,7 @@ export function createDemoLinks(
       const owner = link.key !== null && key === link.key;
       if (link.stopped && !owner) throw new ParcelLinkError('stopped');
       // An alert on a parcel that has arrived has nothing left to announce.
-      if (isFinal(currentEvent(link.parcel.events)?.stage ?? 'pending')) return;
+      if (isFinal(currentEvent(link.parcel.events, link.parcel.returnHeld)?.stage ?? 'pending')) return;
       const others = (link.alerts ?? []).filter((entry) => entry.endpoint !== alert.subscription.endpoint);
       if (others.filter((entry) => entry.owner === owner).length >= MAX_ALERTS) throw new ParcelLinkError('full');
       save({ ...links, [id]: { ...link, alerts: [...others, { endpoint: alert.subscription.endpoint, preset: alert.preset, owner }] } });

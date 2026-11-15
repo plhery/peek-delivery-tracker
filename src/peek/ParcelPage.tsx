@@ -250,7 +250,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const freshness = parcelFreshness({ parcel, checking, offline, trouble: !!failing, seenAt }, wording);
   // The carrier's own page would tell a gift's recipient where it comes from.
   const links = wrapped ? [] : carrierLinks(view, locale);
-  const scan = currentEvent(parcel.events);
+  const scan = currentEvent(parcel.events, parcel.returnHeld);
 
   const afterwards = journeyEndedBefore(parcel, now);
   // Later, a phone's card has no map: the page winds down.

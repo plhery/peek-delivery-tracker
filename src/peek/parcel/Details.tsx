@@ -167,7 +167,7 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
   const active = carrierInfo(activeTrackingCarrierId(parcel));
   const expired = active.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automatic = tracksAutomatically(active.id) && !expired;
-  const scan = currentEvent(parcel.events);
+  const scan = currentEvent(parcel.events, parcel.returnHeld);
   const notes: Note[] = [];
 
   if (trouble) notes.push({ id: 'trouble', icon: <Glyph name="info" />, body: t(parcelLinkErrorKey(trouble)) });

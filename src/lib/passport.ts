@@ -27,7 +27,7 @@ export function passportStatistics(parcels: readonly ParcelWithEvents[], timeZon
       .filter(({ date }) => Number.isFinite(date))
       .sort((a, b) => a.date - b.date || stageOrder.indexOf(a.event.stage) - stageOrder.indexOf(b.event.stage) || a.event.id.localeCompare(b.event.id));
     const datesAreComplete = dated.length === meaningful.length;
-    const stage = datesAreComplete ? dated.at(-1)?.event.stage : currentStage(parcel.events);
+    const stage = datesAreComplete ? dated.at(-1)?.event.stage : currentStage(parcel.events, parcel.returnHeld);
     if (stage === 'delivered') deliveredCount += 1;
     if (!parcel.archivedAt && stage !== 'delivered' && stage !== 'returned') activeCount += 1;
     const physical = dated.filter(({ event }) => event.stage !== 'registered');

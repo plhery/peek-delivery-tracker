@@ -14,7 +14,7 @@ export interface ParcelDisplayStatus {
 /** The carrier's estimate while the parcel is on its way and the estimate's last day has not passed. */
 function liveEstimate(parcel: ParcelWithEvents, now: number): { value: string; day: Date; today: Date } | null {
   const value = parcel.expectedDelivery;
-  const stage = currentEvent(parcel.events)?.stage;
+  const stage = currentEvent(parcel.events, parcel.returnHeld)?.stage;
   if (!value || (stage && ['delivered', 'returned', 'ready_for_pickup', 'failed_attempt', 'exception'].includes(stage))) return null;
   const day = estimateDay(value);
   const today = new Date(now);
@@ -31,7 +31,7 @@ export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now(
   const live = liveEstimate(parcel, now);
   if (!live) return null;
   const { value, day, today } = live;
-  if (currentEvent(parcel.events)?.stage === 'out_for_delivery') {
+  if (currentEvent(parcel.events, parcel.returnHeld)?.stage === 'out_for_delivery') {
     const first = parcel.expectedDeliveryFrom ? estimateDay(parcel.expectedDeliveryFrom) : null;
     const hours = /^\S+[ T]\d{2}:\d{2}/.test(value.trim());
     if (day.getTime() !== today.getTime() || !hours || (first && first < today)) return null;
@@ -41,11 +41,11 @@ export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now(
 
 /** Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named. */
 export function parcelArrivesToday(parcel: ParcelWithEvents, now = Date.now()): boolean {
-  return currentEvent(parcel.events)?.stage === 'out_for_delivery' && liveEstimate(parcel, now) !== null;
+  return currentEvent(parcel.events, parcel.returnHeld)?.stage === 'out_for_delivery' && liveEstimate(parcel, now) !== null;
 }
 
 export function parcelHasCarrierUpdate(parcel: ParcelWithEvents): boolean {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   return Boolean(current && current.stage !== 'pending');
 }
 
@@ -103,7 +103,7 @@ export function parcelIsUnannounced(parcel: ParcelWithEvents): boolean {
 
 /** Keep the app's sync lifecycle separate from the carrier's delivery stage. */
 export function parcelDisplayStatus(parcel: ParcelWithEvents): ParcelDisplayStatus {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const hasCarrierUpdate = parcelHasCarrierUpdate(parcel);
 
   if (!hasCarrierUpdate && parcel.syncStatus === 'error' && numberToCheck(parcel.syncError)) {
@@ -140,7 +140,7 @@ export function parcelDisplayStatus(parcel: ParcelWithEvents): ParcelDisplayStat
 }
 
 export function parcelDisplayStatusKey(parcel: ParcelWithEvents): MessageKey {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   const hasCarrierUpdate = parcelHasCarrierUpdate(parcel);
   // No carrier will answer for this number until its owner corrects it.
   if (!hasCarrierUpdate && parcel.syncStatus === 'error' && numberToCheck(parcel.syncError)) return 'status.checkNumber';
@@ -187,7 +187,7 @@ export function localizedParcelCompletionDate(
   t: Translate,
   now: number = Date.now(),
 ): string | null {
-  const current = currentEvent(parcel.events);
+  const current = currentEvent(parcel.events, parcel.returnHeld);
   if (current?.stage === 'delivered' || current?.stage === 'returned') {
     const when = scanDate(current);
     if (when) return localizedDeliveryDate(when.date, t, languageTag, now);

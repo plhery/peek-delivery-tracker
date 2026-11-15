@@ -72,13 +72,13 @@ export function parcelMatchesStatus(
     case 'today':
       return isActiveParcel(parcel)
         && expectedDeliveryDay(parcel.expectedDelivery) === dateKey(new Date(now));
-    case 'delivered': return !parcel.archivedAt && currentStage(parcel.events) === 'delivered';
+    case 'delivered': return !parcel.archivedAt && currentStage(parcel.events, parcel.returnHeld) === 'delivered';
     case 'archived': return Boolean(parcel.archivedAt);
   }
 }
 
 function updatedAt(parcel: ParcelWithEvents): string {
-  return currentEvent(parcel.events)?.occurredAt ?? parcel.createdAt;
+  return currentEvent(parcel.events, parcel.returnHeld)?.occurredAt ?? parcel.createdAt;
 }
 
 /**
@@ -91,7 +91,7 @@ export function completionSortDate(parcel: ParcelWithEvents): string {
     .sort((first, second) => second.occurredAt.localeCompare(first.occurredAt))[0];
   return completion?.occurredAt
     ?? parcel.archivedAt
-    ?? currentEvent(parcel.events)?.occurredAt
+    ?? currentEvent(parcel.events, parcel.returnHeld)?.occurredAt
     ?? parcel.createdAt;
 }
 

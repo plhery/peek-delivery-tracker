@@ -37,13 +37,15 @@ function withRelays(events: TrackingEvent[]): { listed: TrackingEvent[]; relays:
  * those the carrier named in `written.by` wrote in advance and whose time has
  * passed (`written.steps`), greyed too under "Written in advance by" it.
  */
-export function TrackingJournal({ events: allEvents, planned = [], written, syncing = false, fold = false }: {
+export function TrackingJournal({ events: allEvents, planned = [], written, syncing = false, fold = false, returnHeld = false }: {
   events: TrackingEvent[]; planned?: PlannedEvent[]; written?: { by: string; steps: PlannedEvent[] }; syncing?: boolean; fold?: boolean;
+  /** The server holds the parcel's return (`currentEvent`). */
+  returnHeld?: boolean;
 }) {
   const { languageTag, t, use24HourTime } = useI18n();
   const [oldestShown, setOldestShown] = useState(false);
   const { listed: events, relays } = withRelays(allEvents);
-  const current = currentEvent(events);
+  const current = currentEvent(events, returnHeld);
   const wording = (event: TrackingEvent) => localizedEventDescription(event.description, t) || stageLabel(t, event.stage);
   const groups = new Map<string, { date: Date | null; events: TrackingEvent[] }>();
   for (const event of sortEventsDesc(events)) {

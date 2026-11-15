@@ -1663,6 +1663,26 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(calls.all.last, "unalert 22222222222A token2")
     }
 
+    func testAHeldReturnIsSignedUpForNotificationsAsAParcelOnItsWay() async throws {
+        let held = UUID(), returned = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        // The carrier still scans the return on its way back: the server keeps checking it and sends its scans.
+        var heldReturn = package(held, stage: .returned)
+        heldReturn.carrierData.returnHeld = true
+        storage.parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: heldReturn), checkedAt: Date()),
+            DeviceParcel(linkID: "22222222222B", label: "", archivedAt: nil, parcel: Parcel(shared: package(returned, stage: .returned)), checkedAt: Date()),
+        ]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: storage)
+        XCTAssertTrue(device.hasParcelsOnTheirWay)
+
+        await device.registerAlerts(token: "token1", locale: .fr, environment: .development)
+        XCTAssertEqual(calls.all, ["alert 22222222222A k important token1 fr development"])
+        XCTAssertEqual(storage.parcels.map(\.alertToken), ["token1", nil])
+    }
+
     func testSomeoneElsesParcelLeavesTheListAtOnceAndItsNotificationsStopWhenTheServiceCanBeTold() async throws {
         let id = UUID()
         let storage = Memory()

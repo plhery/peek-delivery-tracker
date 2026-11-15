@@ -298,6 +298,16 @@ describe('the parcel page of a link’s owner', () => {
     expect(screen.queryByRole('button', { name: 'Sign in' })).toBeNull();
   });
 
+  it('keeps a held return\'s alert on, as the server does: the carrier still scans it on its way back', async () => {
+    stubAlertBrowser({ permission: 'granted' });
+    noteLink(LINK_ID, { alert: { preset: 'all', endpoint: 'demo:1' } });
+    open(view({ events: [...journey, scan('returned', 3), scan('in_transit', 1)], parcel: { returnHeld: true, expectedDelivery: undefined } }));
+    expect(await screen.findByRole('heading', { level: 1, name: 'Returned to sender' })).toBeVisible();
+    expect(await actions().findByRole('button', { name: 'Notifications on' })).toBeVisible();
+    await waitFor(() => expect(mocks.read).toHaveBeenCalled());
+    expect(linkNote(LINK_ID).alert).toBeDefined();
+  });
+
   it('once delivered offers “I have it”: keep the parcel until Peek forgets it, or forget it now', async () => {
     noteLink(LINK_ID, { alert: { preset: 'all', endpoint: 'demo:1' } });
     const user = userEvent.setup();

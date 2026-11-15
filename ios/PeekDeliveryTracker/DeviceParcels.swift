@@ -432,7 +432,7 @@ final class DeviceParcels {
             let key = keys[entry.linkID]
             guard key != nil || entry.isViewer else { continue }
             let age = now().timeIntervalSince(entry.checkedAt)
-            let settled = entry.parcel.currentStage?.isFinal == true && entry.parcel.carrierData?.returnHeld != true
+            let settled = Self.over(entry.parcel)
             let fresh = Self.waiting(entry.parcel) ? Self.waitingFresh : settled ? Self.settledFresh : Self.fresh
             guard all || id != nil || age < 0 || age >= fresh else { continue }
             do {
@@ -730,19 +730,23 @@ final class DeviceParcels {
         !parcel.hasCarrierUpdate || parcel.currentStage == .registered ? .all : .important
     }
 
+    /// Whether a parcel's journey is over: it arrived or went back, unless its carrier still scans it on its way back
+    /// (`heldReturn`), which the server keeps checking and alerting on.
+    static func over(_ parcel: Parcel) -> Bool { parcel.currentStage?.isFinal == true && !parcel.heldReturn }
+
     /// Whether a parcel is still on its way, with something left to tell.
-    var hasParcelsOnTheirWay: Bool { entries.contains { $0.parcel.currentStage?.isFinal != true } }
+    var hasParcelsOnTheirWay: Bool { entries.contains { !Self.over($0.parcel) } }
 
     /// Turns notifications on, on this iPhone's token and in its language, for every parcel still
     /// on its way: once a launch, and again when the token or the language changes. A parcel that
-    /// arrived needs none. A round is short and quiet: a few parcels at most, and it ends at the
+    /// arrived needs none; a held return still does. A round is short and quiet: a few parcels at most, and it ends at the
     /// first sign that the service wants a pause or sends no notifications. A link that leads
     /// nowhere, has no room or is no longer shared is left until the next launch.
     func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current) async {
         let asked = "\(token) \(locale.rawValue)"
         guard let client, alertRounds.insert(asked).inserted else { return }
         defer { alertRounds.remove(asked) }
-        let due = entries.filter { alertsAsked[$0.linkID] != asked && $0.parcel.currentStage?.isFinal != true }.prefix(Self.alertsPerRound)
+        let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) }.prefix(Self.alertsPerRound)
         for entry in due {
             // Forgotten, or followed through another link, since the round began.
             guard entries.contains(where: { $0.linkID == entry.linkID }) else { continue }

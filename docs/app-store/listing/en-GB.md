@@ -73,12 +73,5 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• A dot now marks each parcel with updates since you last opened it; with an account, opening it clears the dot on all your devices. “Mark new updates” in Settings turns it off.
-• Settings now has “Time format” (12- or 24-hour) and “Distance units” (kilometres or miles); the default, “Automatic”, follows your device.
-• In “Sort & filter”, “Priority” is now part of “Delivery date”, which puts the next delivery first.
-• Steps a carrier writes in advance now show in grey in the parcel’s history once their time has passed.
-• A parcel with no scans yet now says “Waiting for” its carrier instead of “Update unavailable”, and if the carrier still doesn’t know the number after two days, Peek asks you to check it.
-• Widgets now change “Tomorrow” to “Today” at midnight, even while Peek is closed.
-• A parcel returned to sender now says when the carrier is still scanning it on its way back.
-• Fixes: without an account, a parcel you forget no longer keeps notifying you, and none comes back after “Forget all”. Closing the notification settings before they load no longer shows a connection error.
+• New “Parcels” widget: see the parcels on their way at a glance, the next one first. Depending on how many there are, it shows them as cards like those of the “Next delivery” widget, as smaller cards in their carriers’ colours, or as a list with as many rows as fit. In a medium or large widget, tap a parcel to open it.
 ```

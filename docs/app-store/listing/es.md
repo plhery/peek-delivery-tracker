@@ -71,12 +71,5 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Un punto marca ahora cada paquete con novedades desde la última vez que lo abriste; con una cuenta, al abrirlo el punto desaparece en todos tus dispositivos. Puedes desactivarlo con «Marcar las novedades» en Ajustes.
-• Ajustes incluye ahora «Formato de hora» (12 o 24 horas) y «Unidad de distancia» (kilómetros o millas); la opción predeterminada, «Automático», sigue la configuración de tu dispositivo.
-• En «Ordenar y filtrar», «Prioridad» pasa a formar parte de «Fecha de entrega», que pone primero la próxima entrega.
-• Las etapas que un transportista escribe de antemano aparecen ahora en gris en el historial del paquete una vez pasada su hora.
-• Un paquete aún sin escanear muestra ahora, por ejemplo, «Esperando a DHL» en vez de «Actualización no disponible» y, si a los dos días el transportista sigue sin reconocer el número, Peek te pide que lo revises.
-• A medianoche, los widgets pasan de «Mañana» a «Hoy», aunque Peek siga cerrado.
-• Un paquete devuelto al remitente avisa ahora si el transportista sigue escaneándolo en el camino de vuelta.
-• Correcciones: sin cuenta, ya no recibes notificaciones de un paquete que hayas olvidado y ningún paquete vuelve a aparecer tras «Olvidar todos». Cerrar los ajustes de notificaciones antes de que carguen ya no muestra un error de conexión.
+• Nuevo widget «Paquetes»: ve de un vistazo los paquetes en camino, el próximo primero. Según cuántos haya, los muestra como tarjetas iguales a las del widget «Próxima entrega», como tarjetas más pequeñas con los colores de su transportista o como una lista con tantas filas como quepan. En un widget mediano o grande, toca un paquete para abrirlo.
 ```

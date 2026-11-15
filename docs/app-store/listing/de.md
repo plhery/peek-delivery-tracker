@@ -71,12 +71,5 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Ein Punkt markiert jetzt jedes Paket, bei dem sich seit dem letzten Öffnen etwas getan hat; mit einem Konto verschwindet er auf all deinen Geräten, sobald du das Paket öffnest. Ausschalten kannst du ihn mit „Neue Updates markieren“ in den Einstellungen.
-• In den Einstellungen gibt es jetzt „Zeitformat“ (12 oder 24 Stunden) und „Entfernungseinheit“ (Kilometer oder Meilen); voreingestellt ist „Automatisch“, das deinem Gerät folgt.
-• In „Sortieren & filtern“ gehört „Priorität“ jetzt zu „Lieferdatum“, das die nächste Lieferung zuerst zeigt.
-• Vorab eingetragene Schritte eines Paketdienstes erscheinen jetzt ausgegraut im Sendungsverlauf, sobald ihre Zeit vorbei ist.
-• Ein noch nicht gescanntes Paket zeigt jetzt etwa „Warten auf DHL“ statt „Aktualisierung nicht verfügbar“, und kennt der Paketdienst die Nummer nach zwei Tagen noch immer nicht, bittet Peek dich, sie zu prüfen.
-• Um Mitternacht wechseln Widgets von „Morgen“ auf „Heute“, auch wenn Peek geschlossen bleibt.
-• Ein an den Absender zurückgeschicktes Paket weist jetzt darauf hin, wenn der Paketdienst es auf dem Rückweg noch scannt.
-• Fehlerbehebungen: Zu einem Paket, das du ohne Konto vergisst, bekommst du keine Mitteilungen mehr, und nach „Alle vergessen“ taucht keines wieder auf. Schließt du die Mitteilungseinstellungen, bevor sie geladen sind, erscheint kein Verbindungsfehler mehr.
+• Neues Widget „Pakete“: deine Pakete unterwegs auf einen Blick, das nächste zuerst. Je nachdem, wie viele es sind, zeigt es sie als Karten wie im Widget „Nächste Lieferung“, als kleinere Karten in den Farben ihres Paketdienstes oder als Liste mit so vielen Zeilen, wie Platz haben. In einem mittelgroßen oder großen Widget öffnest du ein Paket mit einem Tippen.
 ```

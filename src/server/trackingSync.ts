@@ -56,7 +56,7 @@ import {
 } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
-import { UNIVERSAL_SOURCES, type UniversalSource } from 'universal-parcel-scraper';
+import { UNIVERSAL_SOURCES, universalPlan, type UniversalSource } from 'universal-parcel-scraper';
 import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, minimumInterval, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
@@ -635,9 +635,14 @@ function checkKeys(parcel: JsonObject): string[] {
   const carrier = String(parcel.carrier ?? '');
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   const routing = isRecord(data.routing) ? data.routing : {};
-  const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '');
+  const number = normalizeTrackingNumber(String(parcel.tracking_number ?? ''));
+  // A parcel whose carrier has no adapter of its own asks the providers first: with none named yet,
+  // it holds the one its plan puts first. Two checks would otherwise ask it at once, and the
+  // provider's lease would turn the second away as if it rested.
+  const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '')
+    ?? (directCarrier(carrier) ? undefined : universalPlan({ carriers: [carrier], trackingNumber: number }).sources[0]);
   return [`carrier:${directCarrier(carrier) ? carrierAdapter(carrier) : carrier}`,
-    `number:${normalizeTrackingNumber(String(parcel.tracking_number ?? ''))}`,
+    `number:${number}`,
     ...(typeof parcel.user_id === 'string' ? [`account:${parcel.user_id}`] : []),
     ...(typeof provider === 'string' ? [`provider:${provider}`] : [])];
 }

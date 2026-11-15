@@ -1073,7 +1073,9 @@ final class DeviceParcelTests: XCTestCase {
 
         try await session.verifyCode(email: "test@example.com", code: "123456")
         XCTAssertEqual(calls.all, [])
-        await store.start()
+        // A load, not the store's start, which goes on to the system's notification settings and to polling: in CI's
+        // simulator the start never returned.
+        await store.load(showSpinner: false)
         XCTAssertEqual(calls.all, ["forget 22222222222D"])
         XCTAssertEqual(storage.forgetting, [:])
         // Nothing waits any more: the next load tells nothing.

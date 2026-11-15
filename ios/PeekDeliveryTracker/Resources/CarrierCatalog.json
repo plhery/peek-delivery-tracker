@@ -26937,7 +26937,7 @@
       "timezone": "America/Mexico_City",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "hound-express"
       },
       "linkRules": [],
       "detectionRules": [],
@@ -49299,7 +49299,7 @@
       "timezone": "Europe/Rome",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "gruber-logistics"
       },
       "trackingUrlTemplate": "https://glapptracking.gruber-logistics.com/?trackingId={trackingNumber}",
       "linkRules": [

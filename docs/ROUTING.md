@@ -597,7 +597,8 @@ with eligible direct carriers ([`carrierDetection.ts`](../src/server/carrierDete
 HTTP recognition uses the catalog's `tracking.recognition` and the adapter's `recognize()`.
 If no recent carrier is confirmed, the server checks candidates declaring
 `tracking.browserRecognition` through `recognizeWithBrowser()`. Definite HTTP misses do
-not get a browser retry. Browser confirmation requires dated shipment activity; shells,
+not get a browser retry. The process runs two browser confirmations at a time; one turned away for a slot, or
+while the browser is paused, asked nothing and counts as no try. Browser confirmation requires dated shipment activity; shells,
 undated defaults and old reused numbers cannot identify a carrier. Candidate selection
 comes from the scraper's catalog, and the Add sheets show the possible candidates.
 The sheets send the number as typed (`typedNumber`) beside the normalized one: a rule's

@@ -6,6 +6,11 @@ import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
 
 export const BROWSER_RECOGNITION_BUDGET_MS = 20_000;
 export const MAX_BROWSER_RECOGNITIONS = 2;
+
+/** Every browser slot of the process is taken: refused before any browser opens, so the carrier was not asked. */
+export class BrowserRecognitionBusy extends Error {
+  constructor() { super('Browser recognition is busy'); this.name = 'BrowserRecognitionBusy'; }
+}
 const TTL_MS = 5 * 60_000;
 const FAILURE_TTL_MS = 30_000;
 const MAX_ENTRIES = 500;
@@ -44,7 +49,7 @@ export async function recognizeBrowser(carrier: string, number: string, context:
     job = pending.get(key);
   }
   if (!job) {
-    if (pending.size >= MAX_BROWSER_RECOGNITIONS) throw new Error('Browser recognition is busy');
+    if (pending.size >= MAX_BROWSER_RECOGNITIONS) throw new BrowserRecognitionBusy();
     const controller = new AbortController();
     const adapter = (registry ??= createAdapterRegistry()).for(carrier);
     if (!adapter?.recognizeWithBrowser) throw new RangeError(`${carrier} cannot confirm through a browser`);

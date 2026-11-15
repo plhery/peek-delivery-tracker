@@ -3,7 +3,7 @@ title: ePost Global tracking: EPG numbers and who delivers
 description: Track an ePost Global parcel: what an EPG number looks like, what the lines on its tracker mean and how Peek follows the partner that delivers it.
 slug: epost-global-tracking
 published: 2026-11-02
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track, and as RR Donnelley, RRD Donnelley or RRD International Logistics: searching any of these names when you pick a carrier in Peek finds ePost Global.
@@ -93,7 +93,7 @@ For an order from a shop, ask the shop first: it booked the delivery. Once a par
 
 Peek shows the status, each line with its place, the destination country, and the partner with its number when ePost Global gives them. It leaves out the tracker's progress bar, postcodes and air waybill numbers. ePost Global's tracker gives no expected delivery date, weight or proof of delivery, so Peek shows none. The link on the parcel's page, "Open the ePost Global website", opens the number on ePost Global's tracker.
 
-The tracker prints times without a time zone. Peek reads `Parcel Received and Processing` and `Parcel Shipped` on the clock of the centre's state, when the whole state keeps one time, GLS's lines on Central European time and Royal Mail's on UK time, and other lines on the clock of their place or of the leg the parcel was on. Every time is shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
+The tracker prints times without a time zone. Peek reads `Parcel Received and Processing` and `Parcel Shipped` on the clock of the centre's state, when the whole state keeps one time, GLS's lines on Central European time and Royal Mail's on UK time, and other lines on the clock of their place or of the leg the parcel was on. Every time is shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
 When ePost Global names a partner Peek knows, the parcel card says so ("Delivery with PostNL", for example, or "Announced to PostNL, not received yet" while that partner has only the announcement of the parcel, with no scan of its own) and lists the partner's number after the EPG number, if ePost Global gives one. Peek then asks that partner too: under its number, or under the EPG number if ePost Global gives none. With no partner named, Peek asks the destination country's post for a postal number, as above, and for another number the one carrier its shape points to. Peek asks only carriers whose own tracking it reads. Once that carrier shows a scan at least as recent as ePost Global's newest, Peek follows the parcel there and keeps ePost Global's history. Otherwise, Peek stays with ePost Global's tracker and its copies of the partner's lines. That is also the case for a parcel GLS's European network delivers: Peek doesn't know that partner by name.
 

@@ -3,7 +3,7 @@ title: GOFO Express tracking: statuses, photos and support
 description: Track a GOFO Express parcel in the US: what a GOFO tracking number looks like, what the statuses mean, missed deliveries, delivery photos and how to reach support.
 slug: gofo-express-tracking
 published: 2026-10-15
-updated: 2026-11-12
+updated: 2026-11-15
 ---
 
 GOFO Express is a US parcel carrier: it collects parcels from the sender's warehouse and moves them through its hubs to the delivery station that serves your area. Paste the number in the box above to track yours; GOFO's own site has a tracker too. The number comes from the shop that shipped your order, usually in its shipping email or on your order page. Nothing there? See [how to find a tracking number](guide:find-tracking-number).
@@ -79,7 +79,7 @@ For anything about the order itself, start with the shop that shipped it. For th
 
 ## Tracking GOFO Express parcels with Peek
 
-[Peek](/) names GOFO Express at once for a `GFUS` number ("Detected carrier"). For a `GF` or `CR` number, it asks GOFO whether it has the parcel and names GOFO Express when it does. Spaces in the number don't matter. Until GOFO knows the number, Peek keeps checking. AliExpress / Cainiao tracks some AliExpress parcels under GOFO's `GFUS` number: when GOFO has shown only the label for two days, Peek also asks Cainiao for the journey before GOFO. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link with `searchID=` and the number in it.
+[Peek](/) names GOFO Express at once for a `GFUS` number ("Detected carrier"). For a `GF` or `CR` number, it asks GOFO whether it has the parcel and names GOFO Express when it does. Spaces in the number don't matter. Until GOFO knows the number, Peek keeps checking; a parcel filed under GOFO Express (a `GFUS` number, or one you've picked GOFO for) shows "Waiting for GOFO Express" on peektracker.com meanwhile. If GOFO still doesn't know the number of such a parcel two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. AliExpress / Cainiao tracks some AliExpress parcels under GOFO's `GFUS` number: when GOFO has shown only the label for two days, Peek also asks Cainiao for the journey before GOFO. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link with `searchID=` and the number in it.
 
 Peek reads GOFO's US tracking every 30 minutes, out for delivery too, and waits an hour after a failed check. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with the town and state GOFO gives for it, those places on a map, the exact time of each scan, the delivery time and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows GOFO's expected delivery day until the parcel is out for delivery, delivered or returned, and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
 
@@ -95,7 +95,7 @@ The sender has made the shipping label, and GOFO doesn't have the parcel yet. Th
 
 ### Why is my GOFO tracking number not working?
 
-Check that it's a US GOFO number: GFUS, GF, CR or MGP. `GFCA`, `GFFR`, `GFIT`, `GFES` and `GFNL` numbers belong to GOFO's networks in other countries, and `YT` numbers to YunExpress. A DHgate parcel that GOFO delivers can also be looked up on GOFO's tracker by DHLink's `FC` number. If the shop has only just given you the number, GOFO may not know it yet: Peek keeps checking. If it shows `Label Cancelled`, nothing is coming under that number, so ask the shop for the right one.
+Check that it's a US GOFO number: GFUS, GF, CR or MGP. `GFCA`, `GFFR`, `GFIT`, `GFES` and `GFNL` numbers belong to GOFO's networks in other countries, and `YT` numbers to YunExpress. A DHgate parcel that GOFO delivers can also be looked up on GOFO's tracker by DHLink's `FC` number. If the shop has only just given you the number, GOFO may not know it yet: Peek keeps checking. If GOFO still doesn't know it two days later and the parcel is filed under GOFO Express, the site asks you to check it, choose another carrier or delete the parcel. If it shows `Label Cancelled`, nothing is coming under that number, so ask the shop for the right one.
 
 ### Why does my AliExpress order have a GOFO number?
 

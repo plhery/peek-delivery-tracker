@@ -3,7 +3,7 @@ title: Rastreio SPX Express: pedidos da Shopee, status e prazos
 description: Rastreie seu pedido da Shopee pela SPX Express: onde achar o código de rastreio BR, o que cada status significa, Agência Shopee e reembolso.
 slug: rastreio-spx-express
 published: 2026-11-01
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 A SPX Express (Shopee Xpress) é a logística própria da Shopee no Brasil. Ela coleta os pacotes com os vendedores e entrega na sua casa ou em uma Agência Shopee, um comércio parceiro onde você retira o pedido. A Shopee chama o serviço de Entrega Padrão e orienta a acompanhar tudo pelo app, onde ficam o pedido, a data prevista e o eventual reembolso. O site spx.com.br também tem uma busca de rastreio; ou cole o código no campo acima.
@@ -101,7 +101,7 @@ Com um código `BR` de 12 dígitos e um dígito ou letra final, o [Peek](/) já 
 
 O Peek lê o mesmo rastreio do spx.com.br e mostra o status, as mensagens da SPX (em português, algumas em inglês), o local de cada registro em centros logísticos, hubs e portos e a hora da entrega. Também mostra algumas atualizações que a página da SPX esconde, como `Seu pedido chegou ao último centro logístico` ou uma tentativa de coleta sem sucesso no vendedor ("Etiqueta criada"). Quando a tentativa de coleta sem sucesso vem depois de `Pedido postado …`, ela aconteceu no ponto de postagem: o pacote continua lá e o Peek mostra "Recebida pela transportadora". Não há data prevista, peso, ponto de retirada nem parceiro de entrega, e o nome de quem recebeu o pacote fica de fora. Pedido, palavra-chave, PIN da Agência e reembolso ficam no app da Shopee.
 
-Enquanto a SPX ainda não conhece o código, o Peek mostra no peektracker.com "Aguardando SPX Express Brazil" e continua consultando. Se o rastreio já começou e o pacote passa 4 dias em trânsito sem atualização nova, aparece o link "Pedir ajuda a SPX Express Brazil", que abre a página de horários do Atendimento ao Cliente da Shopee.
+Enquanto a SPX ainda não conhece o código, o Peek mostra no peektracker.com "Aguardando SPX Express Brazil" e continua consultando. Se, dois dias depois, a SPX ainda não conhecer o código e nenhuma outra fonte tiver respondido por ele, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a consultá-lo uma vez por dia e, uma semana depois de você adicioná-lo, uma vez por semana. Se o rastreio já começou e o pacote passa 4 dias em trânsito sem atualização nova, aparece o link "Pedir ajuda a SPX Express Brazil", que abre a página de horários do Atendimento ao Cliente da Shopee.
 
 O Peek consulta a SPX a cada 10 minutos e a cada 2 minutos quando o pacote sai para entrega: só nesse dia, a partir das 6h no horário local e enquanto o rastreio da própria SPX responder. Por serviços de rastreamento, a consulta é a cada 15 minutos. Você escolhe os avisos: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não fala com a SPX nem com a Shopee por você.
 

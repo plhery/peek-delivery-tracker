@@ -3,7 +3,7 @@ title: CTTYEX tracking: CTTY numbers, scans and Beijing time
 description: CTTYEX tracking from Shenzhen: the CTTY…CN number shape, the English scans on its Chinese tracker, and why every time on it is Beijing time.
 slug: cttyex-tracking
 published: 2026-10-28
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 CTTYEX is Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流, 诚泰通运 for short), a cross-border e-commerce forwarder in China that ships parcels abroad for online sellers. Its site says it was founded in 2011 and ships for sellers on platforms such as Amazon, Wish, Tophatter, VOVA and Shopify, with charter flights to the US, the UK, Canada, Germany and Australia. Its tracking numbers are CTTY, ten digits and CN, CTTY standing for Chengtai Tongyun. Look yours up on CTTYEX's tracker at [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html), or paste it in the box above.
@@ -90,7 +90,7 @@ As read on 10 November 2026, CTTYEX's [联系我们 (contact us) page](https://w
 
 [Peek](/) recognises CTTYEX from the number alone: CTTY, ten digits and CN is a shape no other carrier Peek follows uses. You can also paste a cttyvip888.com tracker link that holds the number after `nos=`.
 
-Peek reads the parcel from CTTYEX's tracker: its status, its scans and the country it's going to. Where a row opens with a town, or a town and state, Peek makes that the scan's place and drops the ZIP code; a processing centre's town stays in the wording. Peek also leaves out phone numbers, and on a delivery the name of whoever signed. Duplicate rows are shown once, and each scan stays in CTTYEX's English. Each time is read on Beijing time and shown in your device's time zone, so the dates line up with your day; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
+Peek reads the parcel from CTTYEX's tracker: its status, its scans and the country it's going to. Where a row opens with a town, or a town and state, Peek makes that the scan's place and drops the ZIP code; a processing centre's town stays in the wording. Peek also leaves out phone numbers, and on a delivery the name of whoever signed. Duplicate rows are shown once, and each scan stays in CTTYEX's English. Each time is read on Beijing time and shown in your device's time zone, so the dates line up with your day; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
 Peek's status follows the newest scan it understands, and the summary only when it understands none. `Order information received` counts as "Label created", the two receiving-point lines as "Received by carrier", `Import customs clearance` as "At customs", `Accepted at logistics carrier Regional Destination Facility` and `Internationaliy Package received at processing center` as "In transit", and `Delivered` as "Delivered". A line Peek doesn't know is read by its words, so one saying the parcel was delivered counts as delivered.
 

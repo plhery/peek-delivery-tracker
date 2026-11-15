@@ -3,7 +3,7 @@ title: JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller
 description: JS-Express-Paket (急速国际) aus China verfolgen: wie die JSE…YQ-Nummer aussieht, was die Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: js-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 JS Express (急速国际, auch JS EXP) ist ein chinesisches Logistikunternehmen für grenzüberschreitende Onlineshops, betrieben von 急创速供应链管理（苏州）有限公司 in Suzhou. Hat ein Shop deine Bestellung mit JS Express verschickt, beginnt die Sendungsnummer mit JSE und endet auf YQ: Füg sie oben ins Feld ein. JS Express bringt das Paket aus China in dein Land, die Zustellung übernimmt dann ein Paketdienst vor Ort. In Deutschland tauchen im Verlauf von JS Express die Scans von DHL, iMile oder J&T Express auf.
@@ -93,7 +93,7 @@ Zustellversuche, Benachrichtigungen und Abholstellen regelt der Paketdienst, der
 
 ## JS Express Paket kommt nicht an oder Tracking hängt
 
-**`未获取到任何数据,请提供有效单号!`** So antwortet die englische Tracking-Seite von JS Express auf Chinesisch, wenn sie eine Nummer nicht kennt (keine Daten gefunden, bitte eine gültige Frachtbriefnummer angeben). `No track data for now!` heißt: noch keine Scans. Peek zeigt in beiden Fällen auf peektracker.com „Warten auf JS Express“ und fragt weiter nach. Prüf die Nummer Zeichen für Zeichen gegen die Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
+**`未获取到任何数据,请提供有效单号!`** So antwortet die englische Tracking-Seite von JS Express auf Chinesisch, wenn sie eine Nummer nicht kennt (keine Daten gefunden, bitte eine gültige Frachtbriefnummer angeben). `No track data for now!` heißt: noch keine Scans. Peek zeigt in beiden Fällen auf peektracker.com „Warten auf JS Express“ und fragt weiter nach. Kennt JS Express die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, zeigt peektracker.com stattdessen „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Prüf die Nummer Zeichen für Zeichen gegen die Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
 
 **Hängt bei `Electronic notification of order creation received.`** JS Express hat das Paket noch nicht bekommen. Frag den Shop, wann er es übergeben hat.
 

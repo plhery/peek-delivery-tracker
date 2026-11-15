@@ -95,7 +95,7 @@ The page is in Chinese only, with no contact form, chat or help for recipients. 
 
 For any other number the seller gave you, paste it all the same: Peek follows more than 3,500 carriers. If the number's shape doesn't name one, Peek asks tracking services, as you add it or just after. If they don't name the carrier, tap "Change" and pick the one the seller names, or use "Change carrier" on a parcel you've already added. Peek reads Jifan's tracker only for JFGJ numbers: if you pick Jifan for another number, the carrier line says Jifan "doesn’t issue numbers like this one".
 
-Peek reads the parcel from Jifan's tracker: its status, every line in the tracker's English, and the country it's going to. When a line in the US starts with a town and state, Peek makes them the scan's place and drops the ZIP code. Each time is read as Beijing time and shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
+Peek reads the parcel from Jifan's tracker: its status, every line in the tracker's English, and the country it's going to. When a line in the US starts with a town and state, Peek makes them the scan's place and drops the ZIP code. Each time is read as Beijing time and shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
 Peek's status follows the newest line it understands, and the summary status (`运输途中`) only when it understands none. A line Peek doesn't know is read by its words.
 

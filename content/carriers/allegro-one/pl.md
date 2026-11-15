@@ -3,7 +3,7 @@ title: Allegro One śledzenie przesyłki: One Box, Punkt i Kurier
 description: Śledzenie przesyłki Allegro One Box, One Punkt i One Kurier: gdzie jest numer, co znaczą statusy, ile czeka paczka, opóźnienia, reklamacja i kontakt.
 slug: allegro-one-sledzenie
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Allegro One to własna sieć dostaw Allegro: automaty paczkowe Allegro One Box, punkty odbioru Allegro One Punkt i kurier Allegro One Kurier, wszystkie w ramach Allegro Delivery. Paczkę śledzisz tak samo, czy jedzie do One Boxa, do One Punktu, czy z One Kurierem pod drzwi: w „Moich przesyłkach” na allegro.pl i w aplikacji Allegro, na stronie śledzenia Allegro Delivery albo po wklejeniu numeru przesyłki w pole powyżej. Numer przesyłki znajdziesz w szczegółach zakupu, w aplikacji i w e-mailu, który Allegro wysyła, gdy numer zostanie dodany. Do One Punktu paczkę przywozi DPD, do One Boxa DPD, DHL albo ORLEN Paczka, a w wybranych miastach do obu także One Kurier. Gdy One Kurier wiezie paczkę pod drzwi z opcją „dostawa jutro”, Allegro zapowiada doręczenie w najbliższym dniu roboczym albo w sobotę po dniu nadania, a gwarantuje je w ciągu 3 dni roboczych. Niektórzy sprzedający oferują też dostawę tego samego dnia do One Boxa w mieście, w którym mają magazyn: paczkę odbierasz wtedy jeszcze tego dnia, między 16:00 a 22:00.
@@ -88,7 +88,7 @@ Obsługę klienta przy paczkach Allegro Delivery, także Allegro One, prowadzi A
 
 [Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi oraz po 17-znakowym numerze `AD0`. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tych kształtów. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika”.
 
-Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia, w strefie czasowej Twojego urządzenia; na peektracker.com historię zamyka wiersz „Godziny w Twojej strefie czasowej:” z nazwą tej strefy. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
+Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia, w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w Twojej strefie czasowej:” z nazwą tej strefy. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
 
 Peek sprawdza śledzenie co 10 minut, a gdy paczka jest w doręczeniu, co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Allegro One; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może Cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 

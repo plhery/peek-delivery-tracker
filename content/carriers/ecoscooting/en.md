@@ -3,7 +3,7 @@ title: Ecoscooting tracking: statuses, pickup points and contact
 description: Track an Ecoscooting parcel in Spain or Portugal: which number to use, what its statuses mean, missed deliveries, parcelshops and how to reach Ecoscooting.
 slug: ecoscooting-tracking
 published: 2026-10-12
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 Ecoscooting is a delivery company for online orders from cross-border platforms in Spain and Portugal. It only does the last leg: the local delivery to your door or to a pickup point. Track the parcel on ecoscooting.com with the number from Ecoscooting's emails, or paste it in the box above.
@@ -87,7 +87,7 @@ Ecoscooting's legal notice gives another number, 931 222 879, for queries and co
 
 When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, or a label Peek recognises as Ecoscooting's, Peek follows the parcel on to Ecoscooting; another 18-digit number isn't followed.
 
-Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. Times show in your time zone, and on peektracker.com a line at the end of the history says so: "Times are in your time zone: …". When the courier leaves the parcel at the pickup point (`Delivered to PUDO`), Peek still shows "Out for delivery"; it switches to "Ready for pickup" only once the point has received it. Wait for the email or SMS with the PIN all the same. Peek leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
+Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. Times show in your time zone; on peektracker.com and in the iPhone app, a line at the end of the history says so: "Times are in your time zone: …". When the courier leaves the parcel at the pickup point (`Delivered to PUDO`), Peek still shows "Out for delivery"; it switches to "Ready for pickup" only once the point has received it. Wait for the email or SMS with the PIN all the same. Peek leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
 
 Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day Ecoscooting scans the parcel out for delivery, while Ecoscooting's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 

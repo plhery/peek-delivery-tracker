@@ -3,7 +3,7 @@ title: ECMS Express tracking: numbers, scans and who delivers
 description: Track an ECMS Express (易客满) parcel: what its 16-character numbers look like, what each scan means, who delivers it and how to reach ECMS.
 slug: ecms-express-tracking
 published: 2026-10-31
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 ECMS Express (易客满, also ECMS Global) is an international express company that ships parcels for online shops. If a shop sent your order with ECMS, your number has 16 characters and starts with EC, ES, AP or AX: paste it in the box above. ECMS carries the parcel abroad and through customs, then a local carrier delivers it.
@@ -96,7 +96,7 @@ As read on 10 November 2026, ECMS's Contact Us page lists these numbers for Engl
 
 ECMS's picture check is a small sum. Peek reads it itself and, if that fails, tries once more with a new picture. When ECMS still won't answer, Peek asks tracking services in the meantime and shows the history they hold, in their own words.
 
-Peek shows the status, each scan with its town, region and country, and the destination country, newest first, with all times in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. It leaves out the shop's reference and any payment links on ECMS's record, and shows no weight or expected delivery date.
+Peek shows the status, each scan with its town, region and country, and the destination country, newest first, with all times in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It leaves out the shop's reference and any payment links on ECMS's record, and shows no weight or expected delivery date.
 
 When ECMS's record names a local carrier Peek knows, Peek shows "Delivery with" that carrier, with its number when ECMS's scans give one. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. If Peek reads that carrier's own tracker, it asks it too, and once that carrier shows a scan at least as recent as ECMS's latest, Peek follows the parcel there and keeps ECMS's scans. Otherwise, add the "LM Tracking No." as a parcel of its own: Peek follows more than 3,500 carriers.
 

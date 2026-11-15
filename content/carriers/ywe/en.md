@@ -3,7 +3,7 @@ title: YWE (YanwenExpress) tracking: numbers, scans and who to ask
 description: Track a YWE (YanwenExpress) parcel in the United States: what a YWE number looks like, what each scan means from hub to door, and who to ask.
 slug: ywe-tracking
 published: 2026-10-31
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 YWE (YanwenExpress, run by Yanwen Express LLC) is a last-mile delivery company in the United States: it brings parcels from its hubs to your door for online shops, retailers and marketplaces. Its numbers are YWE and 14 digits: paste yours in the box above, or in YWE's own tracker at [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -50,7 +50,7 @@ YWE's tracker lists each scan with its date and time, its offset from GMT, and t
 
 **Other wordings.** A scan that isn't in the table shows in Peek as YWE wrote it, and Peek reads its stage from its words where it can.
 
-**Times.** Each scan comes with its hub's offset from GMT. Peek reads the times that way and shows them all in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name.
+**Times.** Each scan comes with its hub's offset from GMT. Peek reads the times that way and shows them all in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
 ## Who delivers YWE parcels
 

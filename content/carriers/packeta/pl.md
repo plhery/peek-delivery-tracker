@@ -3,7 +3,7 @@ title: Packeta śledzenie: numer Z, statusy i punkty odbioru
 description: Paczka Packeta (Zásilkovna) w Polsce: jak wygląda numer Z, co znaczą statusy, ile paczka czeka w punkcie odbioru i jak skontaktować się z Packetą.
 slug: packeta-sledzenie
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-15
 ---
 
 Packeta to marka grupy przewozowej, której czeska nazwa to Zásilkovna; w Polsce działa jako Packeta Poland i wysyła przesyłki do 33 krajów. Paczkę śledzisz na [stronie śledzenia Packety](https://tracking.packeta.com/pl/) albo w polu nad tym tekstem. Numer to litera `Z` i dziesięć cyfr: znajdziesz go w e-mailu albo SMS-ie od Packety.
@@ -81,7 +81,7 @@ Adresu e-mail ani czatu polska strona nie podaje.
 
 Peek odczytuje śledzenie Packety po angielsku i pokazuje zdania tak, jak je pisze Packeta (tylko `Returned to sender` własnymi słowami: „Zwrócona nadawcy”). Widzisz status, 20 najnowszych skanów, sklep, który wysłał paczkę, godzinę doręczenia oraz adres punktu odbioru albo Z-BOX-a, gdy paczka tam jedzie (przy kurierze i zwrocie go nie ma). Twojego imienia, adresu, telefonu ani podpisu Peek nie pokazuje.
 
-Skany z nazwą magazynu albo punktu odbioru pokazują ją jako miejsce, a te, w których nazwie jest miasto, trafiają na mapę. Śledzenie Packety nie podaje przewidywanej dostawy, więc dnia i godziny doręczenia, o których Packeta uprzedza, Peek nie zna. Godziny Peek odczytuje według czasu praskiego i pokazuje w strefie czasowej Twojego urządzenia (skany z rumuńskich magazynów mogą się różnić o godzinę); na peektracker.com przypomina o tym linijka pod historią: „Godziny w Twojej strefie czasowej: …”. Nieznany i wygasły numer wyglądają tak samo. Gdy skan zawiera link do śledzenia przewoźnika partnerskiego, którego Peek zna, Peek wskazuje go jako doręczającego, a jeśli sam potrafi go śledzić, przechodzi do niego, gdy ten pokaże świeże skany. Sprawdza śledzenie Packety co 10 minut i powiadomi Cię o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie złoży za Ciebie reklamacji.
+Skany z nazwą magazynu albo punktu odbioru pokazują ją jako miejsce, a te, w których nazwie jest miasto, trafiają na mapę. Śledzenie Packety nie podaje przewidywanej dostawy, więc dnia i godziny doręczenia, o których Packeta uprzedza, Peek nie zna. Godziny Peek odczytuje według czasu praskiego i pokazuje w strefie czasowej Twojego urządzenia (skany z rumuńskich magazynów mogą się różnić o godzinę); na peektracker.com i w aplikacji na iPhonie przypomina o tym linijka pod historią: „Godziny w Twojej strefie czasowej: …”. Nieznany i wygasły numer wyglądają tak samo. Gdy skan zawiera link do śledzenia przewoźnika partnerskiego, którego Peek zna, Peek wskazuje go jako doręczającego, a jeśli sam potrafi go śledzić, przechodzi do niego, gdy ten pokaże świeże skany. Sprawdza śledzenie Packety co 10 minut i powiadomi Cię o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie złoży za Ciebie reklamacji.
 
 ## Pytania o paczki Packeta
 

@@ -3,7 +3,7 @@ title: Correos seguimiento: estados, entregas, aduanas y teléfono
 description: Seguimiento de Correos: cómo es el número de envío, qué significa cada estado, avisos de llegada, Citypaq, aduanas, reclamaciones y teléfonos.
 slug: seguimiento-correos
 published: 2026-10-13
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Correos es el operador postal público de España. Para seguir tu envío, escribe el código en su [localizador de envíos](https://www.correos.es/es/es/herramientas/localizador/envios) o pégalo en la casilla de arriba. El código te llega por correo electrónico, SMS o en el aviso de llegada en papel, y la tienda lo pone en su correo de confirmación de compra. [Correos Express](carrier:correos-express) es otra empresa del mismo grupo, con sus propios números y su propio buscador.
@@ -86,7 +86,7 @@ Canales de Correos según su web, consultada el 10 de noviembre de 2026:
 
 [Peek](/) reconoce Correos al momento con los códigos de paquete de 23 caracteres, los de expedición de 16, los `PR` y los números postales que acaban en ES. Si la letra de control no cuadra, no propone ningún transportista: revisa si hay una errata o elige Correos con «Cambiar transportista». Con un código de expedición de un solo paquete, Peek sigue ese paquete; si lleva varios, sigue cada uno con su código de 23 caracteres. También sirven los enlaces de correos.es con `tracking-number=` y los antiguos con `numero=`.
 
-Peek muestra los estados tal como los escribe Correos: en español, portugués o francés si usas Peek en uno de esos idiomas, y en inglés en los demás. Verás los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista. Lee las horas en hora de Madrid, salvo las de una unidad de reparto de Canarias, en hora canaria, y las del operador postal de origen en un envío del extranjero, en la hora de su país, y te las muestra en la zona horaria de tu dispositivo; en peektracker.com, una línea al final del historial lo recuerda: «Horas en tu zona horaria: …».
+Peek muestra los estados tal como los escribe Correos: en español, portugués o francés si usas Peek en uno de esos idiomas, y en inglés en los demás. Verás los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista. Lee las horas en hora de Madrid, salvo las de una unidad de reparto de Canarias, en hora canaria, y las del operador postal de origen en un envío del extranjero, en la hora de su país, y te las muestra en la zona horaria de tu dispositivo; en peektracker.com y en la app para iPhone, una línea al final del historial lo recuerda: «Horas en tu zona horaria: …».
 
 Un envío postal que viene de otro país hacia España puede pasar a seguirse en Correos («Entrega con Correos») en cuanto Correos muestra avances. Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Correos; a través de servicios de seguimiento, cada 15 minutos), y te manda notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede pagar la aduana ni cambiar la entrega.
 

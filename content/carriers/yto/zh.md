@@ -93,7 +93,7 @@ updated: 2026-11-15
 
 [Peek](/) 看到 `YT` 加 13 位数字，马上就能认出圆通，查询框里会显示 YTO Express 和“识别出的快递公司”。`D` 或 `G` 加 11 位数字的单号也可能属于 Colis Privé，光看格式分不清，照样粘贴进来就行：Peek 跟踪 3,500 多家快递公司。如果没出现 YTO Express，点“更换”，在“符合这个单号”下面选它，或者在包裹页面点“更换快递公司”。其他格式的圆通运单号，Peek 也能查，请在“所有快递公司”下面选 YTO Express。带 `mailNo=` 或 `waybillNo=` 的 yto.net.cn 链接，Peek 也会认作圆通。
 
-Peek 查的是圆通国内的物流数据，不是圆通国际的。它显示状态、圆通返回的每条记录和操作的网点或站点，还有签收时间；时间按北京时间读取，换算成你设备所在的时区显示；在 peektracker.com 上，物流记录最后还有一行“时间按你所在的时区显示：”，后面写着时区名称。重复的记录只显示一次。出现 `退回件扫描` 后，状态变为“需要留意”；退回途中的记录显示为 `Out for delivery back to the sender` 或 `In a parcel locker or station on its way back`，寄件人签收后显示 `Returned to the sender`，状态变为“已退回寄件人”。
+Peek 查的是圆通国内的物流数据，不是圆通国际的。它显示状态、圆通返回的每条记录和操作的网点或站点，还有签收时间；时间按北京时间读取，换算成你设备所在的时区显示；在 peektracker.com 和 iPhone App 上，物流记录最后还有一行“时间按你所在的时区显示：”，后面写着时区名称。重复的记录只显示一次。出现 `退回件扫描` 后，状态变为“需要留意”；退回途中的记录显示为 `Out for delivery back to the sender` 或 `In a parcel locker or station on its way back`，寄件人签收后显示 `Returned to the sender`，状态变为“已退回寄件人”。
 
 圆通不提供预计送达日期。快递员的姓名和电话、收件人信息、快递柜或驿站的取件地址，Peek 都不保存，可以到圆通官网上看。圆通对任何格式正确的单号都会应答，所以暂时没有记录不等于单号错了：Peek 会继续查询，并在 peektracker.com 上显示“等待 YTO Express 更新”。如果两天后圆通仍没有这个单号的记录，也没有其他来源给出结果，Peek 会在 peektracker.com 上显示：“两天过去了，快递公司仍查不到这个单号。请检查单号、更换快递公司，或删除这个包裹。”此后每天查询一次，添加满一周后改为每周一次。
 

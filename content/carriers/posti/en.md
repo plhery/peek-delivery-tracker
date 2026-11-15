@@ -3,7 +3,7 @@ title: Posti tracking: item ID, statuses, lockers and contact
 description: Track a Posti parcel in Finland: what the JJFI item ID looks like, what each English status means, how long lockers keep parcels and how to reach Posti.
 slug: posti-tracking
 published: 2026-10-12
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Posti is Finland's postal and parcel company. Track a parcel on [Posti's tracking page](https://www.posti.fi/en/tracking) or in Posti's OmaPosti app with its item ID, or paste the number in the box above. The number comes from the sender, and it is also on Posti's notice of arrival in OmaPosti, by SMS or by email.
@@ -90,7 +90,7 @@ For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and nam
 
 In Estonia, Latvia and Lithuania, Posti goes by SmartPosti: Peek's carrier search finds Posti under that name ("Also called SmartPosti"), and tracking links from smartposti.ee or itella.ee (or their .lv and .lt sites) name Posti for any code. Peek keeps Posti's answer only when exactly one shipment carries the exact code you typed, so for a SmartPosti code it may find nothing; then look the parcel up on smartposti.ee.
 
-Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes (every 2 from 6 a.m. local time on the day Posti scans the parcel out for delivery, while Posti's own tracker answers; through tracking services, every 15 minutes), draws each scan on a map and can notify you of changes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Times are shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
+Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes (every 2 from 6 a.m. local time on the day Posti scans the parcel out for delivery, while Posti's own tracker answers; through tracking services, every 15 minutes), draws each scan on a map and can notify you of changes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Times are shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
 
 ## Questions about Posti tracking
 

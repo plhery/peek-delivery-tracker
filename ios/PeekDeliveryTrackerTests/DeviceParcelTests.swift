@@ -1026,7 +1026,7 @@ final class DeviceParcelTests: XCTestCase {
 
     /// This iPhone following `links` as its own, a store on it and a session that signs into `account`, whose list is
     /// empty. The session's saved sign-in is `persistence`'s, for a relaunch to reopen.
-    private func signingIn(_ links: [String], into account: AccountRoom)
+    private func signingIn(_ links: [String], into account: AccountRoom, storage: Memory = Memory(), calls: Calls = Calls())
         throws -> (store: ParcelStore, session: SessionStore, device: DeviceParcels, persistence: PostcodeTestSessionPersistence) {
         let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
         let signedIn = try JSONEncoder.deliveryTracker.encode(AuthSession(
@@ -1045,13 +1045,12 @@ final class DeviceParcelTests: XCTestCase {
             default: return (404, Data())
             }
         }
-        let storage = Memory()
         storage.keys = Dictionary(uniqueKeysWithValues: links.map { ($0, key) })
         storage.parcels = links.enumerated().map { index, link in
             DeviceParcel(linkID: link, label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL12300\(index)")),
                          checkedAt: Date())
         }
-        let device = DeviceParcels(client: client(Calls()), storage: storage)
+        let device = DeviceParcels(client: client(calls), storage: storage)
         let persistence = PostcodeTestSessionPersistence()
         let session = SessionStore(configuration: PostcodeTestURLProtocol.configuration, persistence: persistence,
                                    transport: PostcodeTestURLProtocol.shared)
@@ -1061,6 +1060,25 @@ final class DeviceParcelTests: XCTestCase {
         store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         return (store, session, device, persistence)
+    }
+
+    /// A link this iPhone forgot offline before signing in reaches the service once signed in, as a guest's refresh sends
+    /// it, rather than wait for a sign-out with its parcel and its pushes.
+    func testSignedInALinkForgottenOfflineBeforeSigningInIsToldWithoutASignOut() async throws {
+        let storage = Memory()
+        storage.forgetting = ["22222222222D": key]
+        let calls = Calls()
+        let (store, session, _, _) = try signingIn([], into: AccountRoom(0), storage: storage, calls: calls)
+        defer { session.forceSignOut() }
+
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        XCTAssertEqual(calls.all, [])
+        await store.start()
+        XCTAssertEqual(calls.all, ["forget 22222222222D"])
+        XCTAssertEqual(storage.forgetting, [:])
+        // Nothing waits any more: the next load tells nothing.
+        await store.load(showSpinner: false)
+        XCTAssertEqual(calls.all, ["forget 22222222222D"])
     }
 
     func testClosingNotificationsBeforeTheirSettingsArriveSaysNothingWentWrong() async throws {

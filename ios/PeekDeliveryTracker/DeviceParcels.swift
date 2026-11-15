@@ -479,6 +479,14 @@ final class DeviceParcels {
         return nil
     }
 
+    /// Tells the service what was forgotten here before it could be, without reading a parcel: signed in, the
+    /// iPhone's own parcels are no longer read, and these would otherwise wait for a sign-out.
+    func tellForgotten() async {
+        guard let client, !forgotten.isEmpty || !forgetting.isEmpty else { return }
+        await stopForgottenAlerts(client)
+        await tellForgotten(client)
+    }
+
     /// Tells the service to forget the links forgotten here before it could be. The first trouble
     /// ends the round; the rest wait for the next.
     private func tellForgotten(_ client: DeviceParcelClient) async {

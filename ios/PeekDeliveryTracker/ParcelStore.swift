@@ -404,6 +404,9 @@ final class ParcelStore: ObservableObject {
     func load(showSpinner: Bool = false) async {
         if isGuest { await loadDeviceParcels(); return }
         await loadAccountParcels(showSpinner: showSpinner)
+        // The links forgotten on this iPhone before the service could be told reach it as a guest's refresh sends them,
+        // rather than wait for a sign-out with their parcels and pushes.
+        if session.isAuthenticated && !isDemo { await device.tellForgotten() }
     }
 
     /// Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read.

@@ -10,9 +10,13 @@ Changelog: https://github.com/plhery/peek-delivery-tracker/releases
 
 AntiFeatures:
   NonFreeDep:
-    en-US: Firebase Cloud Messaging for notifications, and Google Play's in-app review.
+    en-US: Notifications need Google Play services, as they come through Firebase Cloud Messaging. The APK carries Google's closed-source Firebase, Play In-App Review and ML Kit barcode libraries.
+  NonFreeNet:
+    en-US: A package's scans come from carriers' sites and from tracking services such as 17TRACK, through Peek's own server, which is free software. Notifications go through Firebase Cloud Messaging, a new lookup can need Cloudflare's Turnstile check, sign-in can use Google, and directions to a pickup point open Google Maps.
+  TetheredNet:
+    en-US: Works only with peektracker.com. Its server is free software that anyone can host, but the app has no setting to use another one.
   Tracking:
-    en-US: Sends which screens and actions are used to the project's own Umami analytics.
+    en-US: Sends which screens and actions are used to the project's own Umami analytics, with no setting to turn it off. A new lookup can need Cloudflare's Turnstile check, which reads browser and network signals.
 
 Name: Peek
 Summary: Track a package from any carrier on a map, no account needed

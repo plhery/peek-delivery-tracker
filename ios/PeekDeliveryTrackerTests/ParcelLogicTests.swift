@@ -3679,6 +3679,14 @@ extension SessionIsolationTests {
 }
 
 /// What the requests of a test carried, in the order they were made.
+/** A response held back until the test lets it go. */
+private final class LockedCompletion: @unchecked Sendable {
+    private let lock = NSLock()
+    private var completion: ((Result<(Int, Data), Error>) -> Void)?
+    func keep(_ completion: @escaping (Result<(Int, Data), Error>) -> Void) { lock.withLock { self.completion = completion } }
+    func complete(_ result: Result<(Int, Data), Error>) { lock.withLock { completion }?(result) }
+}
+
 private final class RequestLog: @unchecked Sendable {
     var requests: [(method: String, path: String, body: [String: Any])] = []
 
@@ -4053,6 +4061,35 @@ extension SessionIsolationTests {
         respond(try JSONEncoder.deliveryTracker.encode(on))
         await store.loadNotificationPreferences()
         XCTAssertTrue(store.markNewUpdates)
+    }
+
+    @MainActor func testAMarkChoiceWhoseSaveFailsLetsTheReadAlreadyUnderWayLand() async throws {
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session, email: "alex@example.com")
+        let store = store(session, transport)
+        // The launch's read is under way when the switch is flipped, and the save's own read of the preferences fails.
+        let stored = try JSONEncoder.deliveryTracker.encode(emailPreferences)
+        let held = LockedCompletion()
+        let asked = expectation(description: "The launch's read was sent")
+        let log = RequestLog()
+        SessionTestURLProtocol.handler = { request, complete in
+            log.record(request)
+            if log.requests.count == 1 { held.keep(complete); asked.fulfill() } else { complete(.failure(URLError(.notConnectedToInternet))) }
+        }
+        let reading = Task { await store.loadNotificationPreferences() }
+        await fulfillment(of: [asked], timeout: 2)
+        store.setMarkNewUpdates(false)
+        for _ in 0..<300 where log.requests.count < 2 { try await Task.sleep(for: .milliseconds(10)) }
+        try await Task.sleep(for: .milliseconds(50))
+        held.complete(.success((200, stored)))
+        await reading.value
+        XCTAssertNotNil(store.notificationPreferences, "The launch's read lands")
+        XCTAssertFalse(store.markNewUpdates, "The choice stands until it is saved")
     }
 
     @MainActor func testTheAccountLearnsHowThisDeviceWritesATimeAndADistanceForTheDeliveryEmail() async throws {

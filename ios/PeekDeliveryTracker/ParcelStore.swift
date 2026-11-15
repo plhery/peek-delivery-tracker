@@ -303,8 +303,9 @@ final class ParcelStore: ObservableObject {
     /// again.
     private func saveMarkNewUpdates(_ enabled: Bool) {
         guard session.isAuthenticated, !isDemo, !isGuest else { return }
-        // A read of the preferences that began before the choice is older than it.
-        notificationPreferenceSaves += 1
+        // A read of the preferences that lands before the answer leaves the choice standing (followMarkNewUpdates), and
+        // the answer's count turns away one that lands after it. Counting here too would turn away the launch's read
+        // when this save fails.
         markNewUpdatesChoices += 1
         markNewUpdatesSaving += 1
         let choice = markNewUpdatesChoices
@@ -348,8 +349,6 @@ final class ParcelStore: ObservableObject {
         let sent = "\(clock.rawValue) \(distance.rawValue)"
         guard stored.clock != clock || stored.distance != distance, unitsSent != sent else { return }
         unitsSent = sent
-        // A read of the preferences that began before the save is older than it.
-        notificationPreferenceSaves += 1
         let generation = session.generation
         Task {
             var value = stored

@@ -491,6 +491,8 @@ final class DeviceParcels {
     /// ends the round; the rest wait for the next.
     private func tellForgotten(_ client: DeviceParcelClient) async {
         for (linkID, key) in forgetting {
+            // Followed again while the service was told of another: the link stays.
+            guard forgetting[linkID] == key else { continue }
             guard await tellForgotten(linkID, key: key, client) else { return }
         }
     }

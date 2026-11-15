@@ -1487,6 +1487,31 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(device.list().map(\.id), [id])
     }
 
+    func testALinkFollowedAgainWhileTheServiceIsToldOfAnotherStays() async throws {
+        let storage = Memory()
+        storage.forgetting = ["22222222222A": key, "22222222222B": key]
+        let calls = Calls()
+        let gate = AlertGate()
+        var gated = client(calls)
+        gated.forget = { linkID, _ in
+            calls.add("forget \(linkID)")
+            await gate.pass("forget")
+        }
+        let device = DeviceParcels(client: gated, storage: storage)
+
+        let refreshing = Task { try await device.refresh() }
+        await gate.arrived("forget")
+        let told = try XCTUnwrap(calls.all.first?.split(separator: " ").last.map(String.init))
+        let other = told == "22222222222A" ? "22222222222B" : "22222222222A"
+        _ = try device.follow(answer(other, UUID()), key: key, label: "Lamp")
+        await gate.release("forget")
+        try await refreshing.value
+
+        XCTAssertEqual(calls.all.filter { $0.hasPrefix("forget") }, ["forget \(told)"], "The link followed again is not forgotten at the service")
+        XCTAssertEqual(storage.forgetting, [:])
+        XCTAssertEqual(device.list().count, 1)
+    }
+
     func testForgettingEveryParcelForgetsTheOnesStillToBeReadAgain() async {
         let storage = Memory()
         storage.keys = ["22222222222A": key]

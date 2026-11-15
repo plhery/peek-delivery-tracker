@@ -10,6 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -40,6 +41,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
@@ -416,19 +418,71 @@ class LivePassTest {
         assertEquals(176f + markHeight + 4f + 60f - 44f, (route.bottom - route.top).value, 1f)
     }
 
+    /** Each button is tapped 2 round the square it draws, 44 at the default size, 4 from the next: 48 apart. */
     @Test
     fun theGlobeTheShareAndTheBellGrowWithTheTextAndTheirButtonsWithThem() {
         show()
         open("Birthday gift")
-        for (tag in listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL)) assertEquals(tag, 44f, side(tag), 0.5f)
+        for (tag in listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL)) assertEquals(tag, 44f + 4f, side(tag), 0.5f)
+        assertNear(listOf(48f, 48f), pitches())
 
         // The body's 17 at the largest text is 33, and the buttons keep 27 around it.
         fontScale = 2f
         compose.waitForIdle()
-        for (tag in listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL)) assertEquals(tag, 60f, side(tag), 0.5f)
+        for (tag in listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL)) assertEquals(tag, 60f + 4f, side(tag), 0.5f)
+        assertNear(listOf(64f, 64f), pitches())
     }
 
     private fun side(tag: String): Float = bounds(tag).let { (it.right - it.left).value }
+
+    /** How far apart the middles of the globe and the share, and of the share and the bell, are. */
+    private fun pitches(): List<Float> =
+        listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL).map { bounds(it).let { b -> ((b.left + b.right) / 2).value } }.zipWithNext { a, b -> b - a }
+
+    private fun assertNear(expected: List<Float>, actual: List<Float>) {
+        assertEquals("$expected vs $actual", expected.size, actual.size)
+        expected.zip(actual).forEach { (e, a) -> assertEquals("$expected vs $actual", e, a, 0.5f) }
+    }
+
+    /**
+     * Android's 48 to tap each of the globe, the share and the bell, drawn 44 square and 4 apart: a tap up to 2 beside
+     * one's square, on any side, is that button's, neither its neighbour's nor the route's drawn behind the card's top,
+     * which takes a tap past that room and opens the map.
+     */
+    @Test
+    fun theGlobeTheShareAndTheBellEachHaveAndroids48ToTapTheRouteBehindTakingNoneOfIt() {
+        val tapped = mutableListOf<String>()
+        compose.waitsForMaps()
+        compose.setContent {
+            CardHost(reduceMotion = false) {
+                LivePassCard(
+                    DemoCards.parcel("Birthday gift"), WorldAtlases.loadedOrNull(), sample = false, readerLink = false,
+                    bell = remember { PassBell(opensAlerts = false) { _, _ -> tapped += "bell" } }, working = false,
+                    onMap = { tapped += "map" }, onEditCarrier = { _, _ -> }, onRename = {}, onShare = { tapped += "share" },
+                )
+            }
+        }
+        compose.waitForIdle()
+        assertTrue(exists(PAGE_ROUTE))
+        fun tap(x: Dp, y: Dp): String {
+            tapped.clear()
+            compose.onRoot().performTouchInput { click(Offset(x.toPx(), y.toPx())) }
+            compose.waitForIdle()
+            return tapped.joinToString()
+        }
+        for ((tag, does) in listOf(PAGE_GLOBE to "map", PAGE_SHARE to "share", PAGE_BELL to "bell")) {
+            val area = bounds(tag)
+            val x = (area.left + area.right) / 2
+            val y = (area.top + area.bottom) / 2
+            // 1.5 beside the drawn 44, just inside the 48.
+            for ((dx, dy) in listOf(-23.5f to 0f, 23.5f to 0f, 0f to -23.5f, 0f to 23.5f)) {
+                assertEquals("$tag at ($dx, $dy)", does, tap(x + dx.dp, y + dy.dp))
+            }
+        }
+        // Past the room above the share, the route opens the map.
+        val share = bounds(PAGE_SHARE)
+        assertEquals("map", tap((share.left + share.right) / 2, (share.top + share.bottom) / 2 - 27.dp))
+    }
 
     // What the pass asks of the carrier.
 

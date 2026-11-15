@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -133,9 +134,10 @@ internal class PassBell(
  *
  * - The carrier the card shows, a probable one named as such (B-S72), and under it the carrier that delivers where
  *   another does, which a tap offers to change (B-G03) on a parcel that is the reader's to change. At the trailing end,
- *   44 square each at the default text size, the globe that opens the map (B-G02, where scans have places, once the
- *   route is drawn), the share button and the bell (B-S03), their symbols growing with the text and their buttons with
- *   them ([CardButtons]). At the accessibility sizes the marks take the line, and the buttons go under them.
+ *   44 square each at the default text size and 4 apart, so each has Android's 48 to tap ([HeaderButton]), the globe
+ *   that opens the map (B-G02, where scans have places, once the route is drawn), the share button and the bell
+ *   (B-S03), their symbols growing with the text and their buttons with them ([CardButtons]). At the accessibility
+ *   sizes the marks take the line, and the buttons go under them.
  * - The route engraved behind the card's top, 176 tall, and 40 more under a second mark, once what it keeps clear of
  *   is laid out; at the accessibility sizes it goes as much lower as the buttons' line adds. It fades in over 0.5 s
  *   once drawn (B-AN03, B-AN04), at once under Reduce Motion, and a tap on it opens the map. Decorative: the globe is
@@ -277,14 +279,15 @@ internal fun LivePassCard(
                         frames.buttonsNode = it
                         frames.measure(density)
                     },
+                    horizontalArrangement = Arrangement.spacedBy(HEADER_TAP_ROOM * 2),
                 ) {
                     if (placed) {
-                        HeaderButton(localizer.text("map.open"), PAGE_GLOBE, enabled = route != null, Modifier.accessibilityFocus(globeFocus), open, sizes.button.dp) {
+                        HeaderButton(localizer.text("map.open"), PAGE_GLOBE, enabled = route != null, Modifier.accessibilityFocus(globeFocus), open, sizes.button.dp, HEADER_TAP_ROOM) {
                             PeekSymbol("globe", font = type.fixed(sizes.globe), tint = tint)
                         }
                     }
                     if (readerLink || !sample) {
-                        HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier.accessibilityFocus(shareFocus), { onShare(shareFocus) }, sizes.button.dp) {
+                        HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier.accessibilityFocus(shareFocus), { onShare(shareFocus) }, sizes.button.dp, HEADER_TAP_ROOM) {
                             PeekSymbol("square.and.arrow.up", font = type.fixed(sizes.share), tint = tint)
                         }
                     }
@@ -504,7 +507,12 @@ internal fun PassMarks(
     }
 }
 
-/** A button of the card's top row, `side` square (44 by default), as the iPhone's plain buttons dim while pressed or off. */
+/**
+ * A button of the card's top row, drawn `side` square (44 by default), as the iPhone's plain buttons dim while pressed
+ * or off. It is tapped `tapRoom` round what it draws: the pass card's buttons leave twice [HEADER_TAP_ROOM] between
+ * them, so each has Android's 48 at the default size. The room is laid out: the room Android adds round a small button
+ * gives way to the route drawn behind the card's top, which would open the map instead.
+ */
 @Composable
 internal fun HeaderButton(
     label: String,
@@ -513,18 +521,21 @@ internal fun HeaderButton(
     modifier: Modifier,
     action: () -> Unit,
     side: Dp = HEADER_BUTTON,
+    tapRoom: Dp = 0.dp,
     content: @Composable () -> Unit,
 ) {
-    Box(
-        modifier
-            .size(side)
-            .testTag(tag)
-            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
-            .plainDisabled(enabled)
-            .semantics { contentDescription = label },
-        contentAlignment = Alignment.Center,
-    ) {
-        content()
+    Box(Modifier.size(side), contentAlignment = Alignment.Center) {
+        Box(
+            modifier
+                .requiredSize(side + tapRoom * 2)
+                .testTag(tag)
+                .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+                .plainDisabled(enabled)
+                .semantics { contentDescription = label },
+            contentAlignment = Alignment.Center,
+        ) {
+            content()
+        }
     }
 }
 
@@ -550,7 +561,7 @@ private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: C
             rings++
             haptics.selection()
         }
-    }, sizes.button.dp) {
+    }, sizes.button.dp, HEADER_TAP_ROOM) {
         val struck = when {
             !bell.opensAlerts -> parcel.notificationsMuted
             bell.pushes -> parcel.allAlertsMuted
@@ -719,4 +730,7 @@ internal data class PassRouteMetrics(val room: Double, val lower: Double) {
 private val CARD_RADIUS = 18.dp
 private val CARD_PADDING = 18.dp
 private val HEADER_BUTTON = 44.dp
+
+/** What the pass card's buttons are tapped round what they draw: half the room between two, which makes a 44 one 48. */
+internal val HEADER_TAP_ROOM = 2.dp
 private val MARKS_SPACING = 7.dp

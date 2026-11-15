@@ -1137,7 +1137,8 @@ internal val MENU_PADDING = 10.dp
 internal val MENU_MARGIN = 21.dp
 private val MENU_GAP = 21.dp
 private val PREVIEW_SIDE = 22.dp
-private val ROW_HEIGHT = 42.dp
+/** A row of one line: Android's 48 to tap, where the iPhone's rows are 42. */
+private val ROW_HEIGHT = 48.dp
 
 /**
  * The room above and below a row's words, measured on the iPhone's "Copy tracking number": two lines of the body's 17

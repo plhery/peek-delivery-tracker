@@ -122,6 +122,19 @@ class CardMenuTest {
     }
 
     /**
+     * Each item is Android's 48 to tap, where the iPhone's rows are 42: an item of one line is 48 tall, one whose title
+     * takes two lines taller.
+     */
+    @Test
+    fun eachItemIsAtLeastAndroids48Tall() {
+        show()
+        longPress("Birthday gift")
+        val heights = shownItems().associateWith { item(it).getUnclippedBoundsInRoot().height.value }
+        for ((item, height) in heights) assertTrue("$item is $height tall", height >= 48f - 0.5f)
+        for (item in listOf(ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Delete)) assertEquals("$item", 48f, heights.getValue(item), 0.5f)
+    }
+
+    /**
      * A secondary click opens the menu as `.contextMenu` does under a pointer, at once, on a card and on an archived
      * row, and neither opens the parcel nor gives under the pointer.
      */
@@ -155,11 +168,13 @@ class CardMenuTest {
     fun aSecondaryClickOpensTheMenuAtThePointerWithoutLiftingTheCard() {
         show()
         val card = drawn(compose.card("Birthday gift"))
-        compose.card("Birthday gift").performMouseInput { rightClick(Offset(40.dp.toPx(), 20.dp.toPx())) }
+        // Low in the card, which leaves the whole menu room above the pointer.
+        val y = card.height - 20
+        compose.card("Birthday gift").performMouseInput { rightClick(Offset(40.dp.toPx(), y.dp.toPx())) }
         compose.waitForIdle()
         compose.onNodeWithTag(CARD_MENU_PREVIEW).assertDoesNotExist()
         val glass = drawn(compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.PaneTitle) and hasAnyAncestor(hasTestTag(CARD_MENU))))
-        val pointer = Offset(card.left + 40, card.top + 20)
+        val pointer = Offset(card.left + 40, card.top + y)
         assertEquals("From the pointer: $glass, $pointer", pointer.x, glass.left, 0.5f)
         assertTrue("From the pointer: $glass, $pointer", abs(glass.top - pointer.y) < 0.5f || abs(glass.bottom - pointer.y) < 0.5f)
         assertTrue(ParcelMenuItem.Archive in shownItems())

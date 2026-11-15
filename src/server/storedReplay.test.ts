@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { providerEventId } from './eventIdentity';
-import { replayParcel, replaySql, steppedBack, type StoredParcel, type StoredScan } from './storedReplay';
+import { followedScans, replayParcel, replaySql, steppedBack, type StoredParcel, type StoredScan } from './storedReplay';
 import type { JsonObject } from './types';
 
 const scan = (id: string, source: string, occurredAt: string, stage: string, description: string, raw: JsonObject): StoredScan => ({
@@ -320,5 +320,37 @@ describe('stored scan replay', () => {
       { ...delivered, archived: undefined }, { ...delivered, events: [round, { ...attempt, stage: 'in_transit' }] }]) {
       expect(steppedBack([other], [reread])).toEqual([]);
     }
+  });
+
+  it('moves a parcel with its current scan when the changes restage it, guarded on its saved stage', () => {
+    // A return an earlier release read as a problem, the parcel's newest carrier scan, under Peek's own row added later.
+    const attempt = scan('attempt', 'dpd-pl', '2026-09-08T14:00:00Z', 'failed_attempt', 'Delivery attempt', { provider_code: 'A1', stage: 'failed_attempt' });
+    const back = scan('back', 'dpd-pl', '2026-09-09T15:00:00Z', 'exception', 'Return to sender', { provider_code: 'R1', stage: 'exception' });
+    const added = scan('added', 'app', '2026-10-16T07:00:00Z', 'pending', 'Tracking added', { stage_source: 'none' });
+    const restage = { kind: 'stage', parcel: 'parcel-1', row: 'back', source: 'dpd-pl', open: true, from: 'exception', to: 'returned',
+      code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map' } as const;
+    const open = { ...parcel(attempt, back, added), stage: 'exception' };
+    expect(steppedBack([open], [restage])).toEqual([]);
+    const followed = followedScans([open], [restage]);
+    expect(followed).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'returned' }]);
+    const sql = replaySql([restage], followed);
+    expect(sql).toContain("update public.packages set current_stage = 'returned'\n   where id = 'parcel-1' and current_stage = 'exception';");
+    expect(sql).toContain('if stepped <> 1 then raise exception');
+
+    // An older scan restaged, a saved stage the current scan did not give (the carrier's summary), a delivered or returned
+    // parcel, one stepped back, or an export without the stage: the parcel keeps its stage.
+    expect(followedScans([open], [{ ...restage, row: 'attempt', from: 'failed_attempt', to: 'out_for_delivery' }])).toEqual([]);
+    for (const other of [{ ...open, stage: 'in_transit' }, { ...open, stage: 'delivered' }, { ...open, stage: 'returned' }, parcel(attempt, back, added)]) {
+      expect(followedScans([other], [restage])).toEqual([]);
+    }
+    expect(followedScans([open], [restage], [{ parcel: 'parcel-1', from: 'exception', to: 'pending' }])).toEqual([]);
+    // The newest scan read as a notice after the attempt: the attempt is current again, and the parcel follows it.
+    expect(followedScans([open], [{ ...restage, to: 'registered' }])).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
+    // A parcel on its way whose one moving scan reads as an acceptance keeps its stage, as the sync keeps it.
+    const sorted = scan('sorted', 'dpd-pl', '2026-09-08T14:00:00Z', 'in_transit', 'Sorted', { provider_code: 'T1', stage: 'in_transit' });
+    expect(followedScans([{ ...parcel(sorted, added), stage: 'in_transit' }],
+      [{ ...restage, row: 'sorted', from: 'in_transit', to: 'accepted' }])).toEqual([]);
+    // The scan restaged back to the attempt's stage at an older instant: the current scan, so the parcel follows it there too.
+    expect(followedScans([open], [{ ...restage, to: 'in_transit' }])).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'in_transit' }]);
   });
 });

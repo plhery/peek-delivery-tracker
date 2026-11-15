@@ -257,7 +257,7 @@ rows by their ids' first eight characters and shows no number, place or wording.
 updates those rows, each guarded on its stored values, in one transaction left open to roll back
 or commit. A row a fixed bug wrote is changed as any named-row fix is: a backup first, then a
 rolled-back run before the commit. The transaction takes its own backup: before any change it
-prints every row it changes and each parcel it steps back (id and saved stage) as they stand, one
+prints every row it changes and each parcel it moves (id and saved stage) as they stand, one
 JSON line each and nothing else, so the output of the run that commits is kept as the backup.
 
 An open parcel whose rows showed progress, none of them once the changes apply, steps back with
@@ -265,6 +265,10 @@ them: to the label when a row shows one, else to pending, guarded on its saved s
 the carrier's answers, read by the new release, show no progress, and each check keeps the saved
 stage with a `stages_reread` signal ([ROUTING.md](ROUTING.md)). A delivered parcel that is not
 archived, whose every row that showed the delivery the changes read in another stage, takes the
-stage the newest of those rows reads then: the sync keeps a delivery no row shows. So the replay runs after each
+stage the newest of those rows reads then: the sync keeps a delivery no row shows. A parcel neither delivered
+nor returned whose saved stage is its current scan's, as the apps read it, takes the stage its current scan reads
+once the changes apply, as the carrier's next answer would (a return an earlier release read as a problem), except an
+acceptance after the parcel moved: a parcel no longer checked would otherwise keep the old stage over its newest scan.
+So the replay runs after each
 adoption, and its rows and parcels are applied the same way: backup, rolled-back run, commit with
 the counts checked.

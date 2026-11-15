@@ -31,6 +31,8 @@ import * as scraperApp from 'universal-parcel-scraper/app';
 import { carrierIdFromName, statusMapAnswer, type StatusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
 import { STAGES } from '../generated/apiContract';
+import { currentScan, sortEventsDesc, tieOrder } from '../lib/stages';
+import type { Stage } from '../types';
 import { KEEPS_STAGE, scanStages } from './disputedDelivery';
 import { providerEventId, scanDay, UNIVERSAL_PROVIDER, unnamedRowCarrier } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
@@ -104,7 +106,7 @@ export interface CopyChange extends Change {
   clash: boolean;
 }
 export type ReplayedChange = ClockChange | StageChange | CopyChange;
-/** A parcel whose saved stage no row shows once the changes apply, and the stage they leave it. */
+/** A parcel whose saved stage the changes move: back, as no row shows it then (`steppedBack`), or with its current scan (`followedScans`). */
 export interface StepBack { parcel: string; from: string; to: string }
 
 /** The read-only export the replay reads, one parcel a line. */
@@ -128,6 +130,8 @@ const VALID_STAGES = new Set<string>(STAGES);
 /** Stages past the label, as the sync's `rereadStage` counts progress. */
 const PROGRESS_STAGES = new Set<string>(STAGES.filter((stage) => stage !== 'pending' && stage !== 'registered'));
 const HELD_STAGES = new Set(['delivered', 'returned', 'exception']);
+/** The stages of a parcel on its way, which the sync keeps over an acceptance (`stageToSave`, trackingSync.ts). */
+const ON_THE_WAY = new Set(['in_transit', 'customs', 'out_for_delivery', 'failed_attempt', 'ready_for_pickup']);
 
 const sourceOf = (scan: StoredScan) => scan.providerEventId.slice(0, Math.max(0, scan.providerEventId.indexOf(':')));
 /** The universal providers whose adapter stages a scan with the map of the carrier that reported it. */
@@ -386,6 +390,33 @@ export function steppedBack(parcels: readonly StoredParcel[], changes: readonly 
   });
 }
 
+/**
+ * A parcel whose saved stage is its current scan's, as the apps read it (`currentScan`), when the changes to its rows
+ * change that stage: the parcel moves with it, as the carrier's next answer would move it (a DPD Poland return an
+ * earlier release read as a problem, or a newest scan now read as a notice, so the one before it is current), and one
+ * no longer checked would otherwise keep the old stage over its newest scan. A delivered or returned parcel keeps its
+ * stage (a delivery steps back above), as do one stepped back, one whose saved stage no current scan gave, one the
+ * changes would leave at its label, which `steppedBack` reads, and one on its way that would take an acceptance, which
+ * the sync keeps the moving stage over (`stageToSave`, trackingSync.ts).
+ */
+export function followedScans(parcels: readonly StoredParcel[], changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): StepBack[] {
+  const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
+  const deleted = new Set(changes.flatMap((change) => change.kind === 'copy' ? [change.row] : []));
+  const stepped = new Set(stepBacks.map((step) => step.parcel));
+  const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string) => currentScan(sortEventsDesc(scans
+    .map((scan) => ({ id: scan.id, stage: stage(scan) as Stage, occurredAt: scan.occurredAt, tieOrder: tieOrder(scan.raw.tie_order) }))
+    .filter((scan) => scan.stage !== 'pending')));
+  return parcels.flatMap((parcel): StepBack[] => {
+    const from = parcel.stage ?? '';
+    if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
+    const before = current(parcel.events, (scan) => scan.stage);
+    const after = current(parcel.events.filter((scan) => !deleted.has(scan.id)), (scan) => restaged.get(scan.id) ?? scan.stage);
+    if (before?.stage !== from || !after || after.stage === from || !PROGRESS_STAGES.has(after.stage)) return [];
+    if (after.stage === 'accepted' && ON_THE_WAY.has(from)) return [];
+    return [{ parcel: parcel.id, from, to: after.stage }];
+  });
+}
+
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 
 const idList = (ids: readonly string[]) => `array[${[...new Set(ids)].sort().map(literal).join(', ')}]::uuid[]`;
@@ -393,7 +424,7 @@ const idList = (ids: readonly string[]) => `array[${[...new Set(ids)].sort().map
 /**
  * The rows the transaction changes, as they stand inside it before any change, one JSON line each
  * (`{"table": ..., "row": ...}`): every row it re-dates, re-stages or deletes, every row that takes a
- * deleted copy's place, and each parcel it steps back (its id and saved stage). psql, quiet and
+ * deleted copy's place, and each parcel it moves (its id and saved stage). psql, quiet and
  * printing tuples only, prints them alone, so its output is the backup.
  */
 function backupSql(changes: readonly ReplayedChange[], placed: readonly CopyChange[], stepBacks: readonly StepBack[]): string {
@@ -408,7 +439,7 @@ function backupSql(changes: readonly ReplayedChange[], placed: readonly CopyChan
 
 /**
  * One transaction that writes the changes as the release would, each guarded on the row's stored
- * values, and steps the parcels back, each guarded on its saved stage, failing unless every one
+ * values, and moves the parcels, each guarded on its saved stage, failing unless every one
  * applies. A copy is deleted after the other changes, and the row that stays then takes its place.
  * Before any change it prints the rows it changes (`backupSql`), so its run keeps its own backup.
  * It ends open: the operator rolls it back for a dry run or commits it.
@@ -450,7 +481,7 @@ begin
 ${[...statements, ...deletions, ...places, ...parcels].join('\n')}
   if total <> ${changes.length} then raise exception 'replay: % of ${changes.length} rows changed', total; end if;
   if filled <> ${placed.length} then raise exception 'replay: % of ${placed.length} rows given a copy''s place', filled; end if;
-  if stepped <> ${stepBacks.length} then raise exception 'replay: % of ${stepBacks.length} parcels stepped back', stepped; end if;
+  if stepped <> ${stepBacks.length} then raise exception 'replay: % of ${stepBacks.length} parcels moved', stepped; end if;
 end $$;
 `;
 }

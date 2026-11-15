@@ -78,10 +78,10 @@ private struct ParcelListProvider: TimelineProvider {
             if art.count == parcels.count {
                 entry.design = design
                 entry.art = art
-                return entry
             }
         }
-        if let trucks {
+        // Rows, and passes, which are rows where they don't all fit, mark each parcel with its carrier's truck.
+        if entry.design != .cards, let trucks {
             let rows = DeliveryWidgetList.sections(parcels).flatMap(\.parcels).prefix(size.mostRows)
             for carrier in Set(rows.compactMap(\.carrierId)) {
                 entry.trucks[carrier] = ParcelListTruck(carrier: carrier, in: trucks)
@@ -141,7 +141,7 @@ private struct ParcelListWidgetView: View {
             case .cards:
                 ParcelCards(parcels: DeliveryWidgetList.cardOrder(entry.parcels), art: entry.art, size: family.listSize, now: entry.date)
             case .passes:
-                ParcelPasses(parcels: entry.parcels, art: entry.art, size: family.listSize, copy: copy)
+                ParcelSections(parcels: entry.parcels, trucks: entry.trucks, marks: entry.art, size: family.listSize, copy: copy)
             case .sections:
                 ParcelSections(parcels: entry.parcels, trucks: entry.trucks, size: family.listSize, copy: copy)
             }
@@ -356,48 +356,29 @@ private struct ParcelListSteps: View {
 
 // MARK: - Passes
 
-/// Each parcel a pass cut from the app list's card, in its carrier's colours, the passes sharing the widget's height:
-/// one above the other in a small or large widget, and two columns in a medium one, the first parcel alone in the first
-/// of three. Where the widget or larger text leaves room for fewer, as many as fit, then a line for the others.
+/// Every parcel's pass, in the carrier's colours: one above the other in a small or large widget, and two columns in a
+/// medium one, the first parcel alone in the first of three. Where they don't all fit, the parcels are rows instead
+/// (`DeliveryWidgetList.fits`), so that every one that fits shows.
 private struct ParcelPasses: View {
     let parcels: [DeliveryWidgetParcel]
     let art: [UUID: DeliveryWidgetCardArt]
     let size: DeliveryWidgetList.Size
-    let copy: ExtensionLocalizer
 
     private let spacing: CGFloat = 6
 
+    /// The passes in their columns, read down the first then the second, a medium widget's first column having the fewer.
     var body: some View {
-        ViewThatFits(in: .vertical) {
-            ForEach(Array(stride(from: parcels.count, through: 1, by: -1)), id: \.self) { shown in
-                passes(shown: shown)
-            }
-        }
-        .containerBackground(for: .widget) { DeliveryWidgetCardPage() }
-        .widgetURL(DeliveryWidgetList.link)
-    }
-
-    /// The first passes in their columns, read down the first then the second, a medium widget's first column having
-    /// the fewer; then the line for the others.
-    private func passes(shown count: Int) -> some View {
-        let shown = Array(parcels.prefix(count))
-        let columns = size == .medium && shown.count > 1
-            ? [Array(shown.prefix(shown.count / 2)), Array(shown.dropFirst(shown.count / 2))] : [shown]
-        let more = parcels.count - shown.count
-        return VStack(alignment: .leading, spacing: spacing) {
-            HStack(alignment: .top, spacing: spacing) {
-                ForEach(Array(columns.enumerated()), id: \.offset) { _, column in
-                    VStack(spacing: spacing) {
-                        ForEach(column) { parcel in
-                            ParcelListLink(parcel: parcel, size: size) {
-                                ParcelPass(parcel: parcel, mark: art[parcel.id], wide: size == .large)
-                            }
+        let columns = size == .medium && parcels.count > 1
+            ? [Array(parcels.prefix(parcels.count / 2)), Array(parcels.dropFirst(parcels.count / 2))] : [parcels]
+        HStack(alignment: .top, spacing: spacing) {
+            ForEach(Array(columns.enumerated()), id: \.offset) { _, column in
+                VStack(spacing: spacing) {
+                    ForEach(column) { parcel in
+                        ParcelListLink(parcel: parcel, size: size) {
+                            ParcelPass(parcel: parcel, mark: art[parcel.id], wide: size == .large)
                         }
                     }
                 }
-            }
-            if more > 0 {
-                ParcelListMore(count: more, copy: copy, leading: 4)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -479,10 +460,13 @@ private struct ParcelPass: View {
 
 /// Rows under the app list's sections, each marked with its carrier's truck: in a small widget without the headings,
 /// down two columns in a medium one, and on one line each in a large one. As many as the widget holds at the reader's
-/// text size, then a line for the others (`DeliveryWidgetList.layouts`).
+/// text size, then a line for the others (`DeliveryWidgetList.layouts`). The passes' design shows its passes where
+/// they all fit, and these rows where they don't (`DeliveryWidgetList.fits`).
 private struct ParcelSections: View {
     let parcels: [DeliveryWidgetParcel]
     let trucks: [String: ParcelListTruck]
+    /// The passes' marks, in the passes' design.
+    var marks: [UUID: DeliveryWidgetCardArt]?
     let size: DeliveryWidgetList.Size
     let copy: ExtensionLocalizer
 
@@ -499,8 +483,13 @@ private struct ParcelSections: View {
         let sections = DeliveryWidgetList.sections(parcels)
         GeometryReader { proxy in
             ViewThatFits(in: .vertical) {
-                ForEach(DeliveryWidgetList.layouts(count: parcels.count, size: size), id: \.self) { layout in
-                    list(sections, layout: layout, width: proxy.size.width)
+                ForEach(DeliveryWidgetList.fits(marks == nil ? .sections : .passes, count: parcels.count, size: size), id: \.self) { fit in
+                    switch fit {
+                    case .passes:
+                        ParcelPasses(parcels: parcels, art: marks ?? [:], size: size)
+                    case let .rows(layout):
+                        list(sections, layout: layout, width: proxy.size.width)
+                    }
                 }
             }
         }

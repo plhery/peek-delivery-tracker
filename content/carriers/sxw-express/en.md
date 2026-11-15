@@ -3,7 +3,7 @@ title: SXW Express tracking: SXW numbers, scans and who delivers
 description: Track an SXW Express (Shengxingwang) parcel from Shenzhen: what an SXW number looks like, where SXW's own tracker is, what its steps mean and who to ask.
 slug: sxw-express-tracking
 published: 2026-11-14
-updated: 2026-11-15
+updated: 2026-11-16
 ---
 
 SXW Express is the name Peek uses for Shenzhen Shengxingwang Supply Chain Management Co., Ltd. (深圳胜兴旺供应链管理有限公司), a logistics company in Shenzhen, China, that ships goods abroad for businesses and online sellers. If a Chinese shop sent your order with SXW, look for a number of SXW and twelve digits, the shape Peek knows as SXW's, and paste it in the box above. You can also check it yourself on SXW's own tracker, which opens from the "Express Tracking" box on sxwexpress.cn. Peek reads that same tracker for you.
@@ -62,7 +62,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 **Only `Parcel Data Received` or `货物电子信息已经收到`.** The seller has created the shipment, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for SXW Express" on peektracker.com.** Peek has no step for your number yet: SXW's tracker doesn't know it, or has no steps for it, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too: SXW and twelve digits.
+**"Waiting for SXW Express" on peektracker.com.** Peek has no step for your number yet: SXW's tracker doesn't know it, has no steps for it or holds only steps written ahead, and the tracking services Peek asks have nothing either. Peek keeps checking. If the tracker still holds only steps written ahead two days later and nothing else has answered for the number, peektracker.com shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." instead, and Peek from then on checks it daily, and weekly once a week has passed since you added it. Peek takes SXW's answer for a number it doesn't know as SXW listing the shipment without a scan yet, so it keeps showing "Waiting for SXW Express", with no request to check the number: compare the number with the seller's message yourself, SXW and twelve digits.
 
 **`Customs declaration completed`.** That's the export declaration in China, before the flight, not customs in your country. The parcel isn't held, so Peek shows "In transit". If you're later asked to pay import charges, see [parcels held at customs](guide:customs).
 

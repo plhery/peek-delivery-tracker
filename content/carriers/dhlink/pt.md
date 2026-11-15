@@ -3,7 +3,7 @@ title: DHLink rastreio: número da DHgate, estados e quem entrega
 description: Segue uma encomenda DHLink da DHgate: que números o rastreio aceita, o que querem dizer os estados em inglês, quem entrega no teu país e quem contactar.
 slug: dhlink-rastreio
 published: 2026-11-14
-updated: 2026-11-15
+updated: 2026-11-16
 ---
 
 A DHLink (驼飞侠) é a plataforma de logística transfronteiriça da DHgate (敦煌网). Criada em 2014, envia encomendas de vendedores da DHgate e de outros clientes a partir da China ou dos seus armazéns no estrangeiro, entregando-as depois a uma transportadora no país de destino para a etapa final. Segue o teu código na [página de rastreio da DHLink](https://www.dhlink.com/trackQuery?lang=en) ou cola-o na caixa acima. Encontras o número nos detalhes da encomenda na DHgate; se não aparecer lá, pede-o ao vendedor.
@@ -64,7 +64,7 @@ Assim que souberes qual é a transportadora local e o respetivo número, consult
 
 ## Encomenda DHLink parada, não encontrada ou dada como entregue
 
-**Não encontrada.** Confirma o código na tua encomenda da DHgate e experimenta o número de seguimento (*Tracking No.*) em vez do número `FC` da DHLink. Um número da transportadora local não dá resultado na página da DHLink: pesquisa-o diretamente nessa transportadora.
+**Não encontrada.** Confirma o código na tua encomenda da DHgate e experimenta o número de seguimento (*Tracking No.*) em vez do número `FC` da DHLink. Um número da transportadora local não dá resultado na página da DHLink: pesquisa-o diretamente nessa transportadora. Se escolheste a DHLink em «Alterar» para um código que a DHLink não conhece, o Peek mostra no peektracker.com «À espera de DHLink» e continua a verificar. Se ao fim de dois dias a DHLink ainda não reconhecer o código e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana quando já tiver passado uma semana desde que a adicionaste.
 
 **Parada depois do voo ou da alfândega.** Procura um «Last Leg No.» no resultado e consulta essa transportadora, que muitas vezes tem leituras mais recentes do que a DHLink. Vê mais em [porque é que o rastreio não atualiza](guide:tracking-not-updating) e [rastrear uma encomenda vinda da China](guide:tracking-from-china).
 

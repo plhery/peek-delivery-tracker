@@ -3,7 +3,7 @@ title: JCEX tracking: JCZ numbers, statuses and who delivers
 description: Track a JCEX parcel from China: what a JCZ waybill number looks like, what each status means, who delivers it in your country and who to ask when it stalls.
 slug: jcex-tracking
 published: 2026-10-21
-updated: 2026-11-15
+updated: 2026-11-16
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) is a logistics company in Hangzhou, China, that ships parcels abroad for online sellers and hands them to a carrier in your country for the last stretch, such as [USPS](carrier:usps) in the United States or Colissimo in France. Track the number on JCEX's tracker, [track.jcex.com](https://track.jcex.com/), or in the box above. The shop gives it with your order's shipping details.
@@ -59,7 +59,7 @@ JCEX publishes no rules for delivery attempts, notice cards, pickup points or ho
 
 **Who acts.** JCEX's customers are the sellers who ship with it. JCEX publishes no claim route for recipients, so for a late, lost, damaged or returned parcel, contact the seller or the marketplace you bought from.
 
-**No tracking yet.** A new waybill can show `查询不到` with no lines until JCEX scans the parcel; Peek shows "Waiting for JCEX" on peektracker.com meanwhile. If it stays that way, check the number with the seller. If `Shipment order info received` is still the only line a day later, Peek notes that the seller hasn't handed the parcel to JCEX yet: ask the seller when it will.
+**No tracking yet.** JCEX's tracker shows `查询不到` with no lines both for a new waybill it hasn't scanned yet and for a number it doesn't know; Peek shows "Waiting for JCEX" on peektracker.com meanwhile. If JCEX's answer lists the waybill, that stays until the first scan, with no request to check the number. If JCEX still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Either way, if nothing changes, check the number with the seller. If `Shipment order info received` is still the only line a day later, Peek notes that the seller hasn't handed the parcel to JCEX yet: ask the seller when it will.
 
 **No update.** JCEX doesn't say after how long a parcel counts as `运输过久`. If nothing moves, ask the seller, which booked the parcel and can ask JCEX. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china); for customs stops or import charges, which in the EU now include a €2 handling fee per item (due since 1 November 2026), see [parcels held at customs](guide:customs).
 

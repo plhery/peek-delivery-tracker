@@ -3,7 +3,7 @@ title: Lingdong International seguimiento: número SZLD y estados
 description: Sigue tu paquete de Lingdong International (领东国际) desde Shenzhen: cómo es un número SZLD, qué significa cada paso, dónde acaba el seguimiento y qué pagas en aduana.
 slug: lingdong-seguimiento
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-16
 ---
 
 Lingdong International (领东国际; razón social, 深圳市领东国际货运代理有限公司) es un transitario de Shenzhen, en China, que envía al extranjero los pedidos de tiendas online chinas. Sus números de seguimiento empiezan por SZLD: pega el tuyo en la casilla de arriba o escríbelo en la casilla 快件查询 (consulta de envíos) de lingdong56.com, que abre la web de seguimiento de Lingdong.
@@ -67,7 +67,7 @@ Lingdong no publica plazos de entrega ni reglas sobre intentos de entrega, aviso
 
 **Solo `货物电子信息已经收到`.** La tienda ha registrado el envío, pero el paquete aún no ha llegado al almacén de Lingdong. Si en varios días no aparece nada más, pregunta a la tienda si de verdad lo ha enviado.
 
-**No sale nada.** Con un número que no conoce, la web de Lingdong muestra el número como referencia y todos los demás campos vacíos. Peek muestra en peektracker.com «Esperando a Lingdong International» y sigue comprobando. Compara el número con el mensaje de la tienda, carácter por carácter.
+**No sale nada.** Con un número que no conoce, la web de Lingdong muestra el número como referencia y todos los demás campos vacíos. Peek toma esa respuesta como señal de que Lingdong ya tiene registrado el envío, aunque aún sin escanear, así que sigue comprobando y muestra en peektracker.com «Esperando a Lingdong International», sin pedirte que revises el número. Por eso, compara tú el número con el mensaje de la tienda, carácter por carácter.
 
 **Perdido, dañado o devuelto.** Lingdong no publica ningún procedimiento de reclamación para destinatarios: su página de condiciones de transporte (运输条款) está vacía. Su web tiene un botón de chat para incidencias, reclamaciones y quejas, pero quien tiene el contrato con Lingdong es la tienda: pídele a ella, o al marketplace, el reembolso o un nuevo envío. Mira [paquete perdido](guide:lost-parcel) y [paquete devuelto al remitente](guide:returned-to-sender).
 

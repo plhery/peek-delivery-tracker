@@ -51,13 +51,34 @@ while IFS= read -r name; do
     blocking+=("$name")
   fi
 done < <(jq -r '.[]' "$workdir/missing.json")
+missing=$'\n'$(jq -r '.[]' "$workdir/missing.json")$'\n'
+
+# CI applies every migration in name order, so one that follows its server ran before the
+# migrations named after it. Production gets it last: the run names the ones it now follows.
+listed() { local list; list=$(printf '%s, ' "$@"); echo "${list%, }"; }
 if (( ${#blocking[@]} )); then
   echo "Production lacks these migrations. Apply them, then re-run this job:" >&2
   printf '  %s\n' "${blocking[@]}" >&2
+  for server in ${later[@]+"${later[@]}"}; do
+    ran=()
+    for name in "${blocking[@]}"; do
+      if [[ "$name" > "$server" ]]; then ran+=("$name"); fi
+    done
+    if (( ${#ran[@]} )); then
+      echo "CI applied $(listed "${ran[@]}") after $server, which follows its server and production lacks: check that they work without it." >&2
+    fi
+  done
   exit 1
 fi
-for name in ${later[@]+"${later[@]}"}; do
-  echo "::notice title=Apply after this deploy::$name follows its server: apply it once this commit is live."
+for server in ${later[@]+"${later[@]}"}; do
+  echo "::notice title=Apply after this deploy::$server follows its server: apply it once this commit is live."
+  ran=()
+  while IFS= read -r name; do
+    if [[ "$name" > "$server" && "$missing" != *$'\n'"$name"$'\n'* ]]; then ran+=("$name"); fi
+  done < <(jq -r '.p_names[]' <<< "$names")
+  if (( ${#ran[@]} )); then
+    echo "::warning title=Out of the tested order::Production already has migrations that CI applied after $server: $(listed "${ran[@]}"). Applied once this commit is live, $server runs after them: check that it does not undo or clash with them."
+  fi
 done
 total=$(jq '.p_names | length' <<< "$names")
 if (( ${#later[@]} )); then

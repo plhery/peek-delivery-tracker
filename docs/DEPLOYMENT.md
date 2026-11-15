@@ -32,7 +32,10 @@ server before releasing iPhone builds that call new endpoints. Each migration en
 recording its file name in `public.applied_migrations`, which the deployment checks. One
 that the running version would misread, so that it must follow the server it serves, starts
 with the line `-- After its server.`: the deployment lets it be missing and names it in the
-run's notices, to apply once that commit is live.
+run's notices, to apply once that commit is live. CI applied it before the migrations named
+after it, so the run also names those: when they are missing too, check that they work
+without it; when production already has them, its warning asks to check that the late one
+does not undo them.
 
 Supabase grants every table, sequence and function a migration creates in `public` to
 `anon`, `authenticated` and `service_role`. A migration revokes what it does not mean to

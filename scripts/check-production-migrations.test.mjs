@@ -70,3 +70,29 @@ describe("production's answer", () => {
     }
   });
 });
+
+const SERVER = '20261116100000_after_server';
+const AFTER = '-- After its server.\n';
+
+describe('a migration that follows its server', () => {
+  it('may be missing alone: the run names it, to apply once the commit is live', async () => {
+    const { code, stdout, stderr } = await gate({ [OLD]: 'select 1;\n', [SERVER]: `${AFTER}select 1;\n` }, JSON.stringify([SERVER]));
+    assert.equal(code, 0, stderr);
+    assert.match(stdout, new RegExp(`::notice title=Apply after this deploy::${SERVER}`));
+    assert.doesNotMatch(stdout, /::warning/);
+  });
+
+  it('is named when a later migration it was tested under stops the deploy', async () => {
+    const { code, stderr } = await gate({ [OLD]: 'select 1;\n', [SERVER]: `${AFTER}select 1;\n`, [NEW]: 'select 1;\n' },
+      JSON.stringify([SERVER, NEW]));
+    assert.equal(code, 1);
+    assert.match(stderr, new RegExp(`Production lacks these migrations[^\\n]*\\n  ${NEW}\\nCI applied ${NEW} after ${SERVER}, which follows its server`));
+  });
+
+  it('is applied out of the tested order when a later migration is already in: the run warns', async () => {
+    const { code, stdout, stderr } = await gate({ [OLD]: 'select 1;\n', [SERVER]: `${AFTER}select 1;\n`, [NEW]: 'select 1;\n' },
+      JSON.stringify([SERVER]));
+    assert.equal(code, 0, stderr);
+    assert.match(stdout, new RegExp(`::warning title=Out of the tested order::[^\\n]*after ${SERVER}: ${NEW}\\.`));
+  });
+});

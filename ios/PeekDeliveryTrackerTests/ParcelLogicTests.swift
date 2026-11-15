@@ -1321,6 +1321,32 @@ final class ParcelLogicTests: XCTestCase {
         }
     }
 
+    /// Passes show every parcel or none: where they don't all fit, the widget tries rows, the most first, as the sections'
+    /// design does, rather than fewer passes and a line for the others. The cards' and the sections' designs try no pass.
+    func testParcelsWidgetTurnsPassesThatDontAllFitIntoRows() {
+        func fits(_ design: DeliveryWidgetList.Design, _ count: Int, _ size: DeliveryWidgetList.Size) -> [String] {
+            DeliveryWidgetList.fits(design, count: count, size: size).map { fit in
+                switch fit {
+                case .passes: "passes"
+                case let .rows(layout): "\(layout.rows)\(layout.compact ? " smaller" : "")"
+                }
+            }
+        }
+        XCTAssertEqual(fits(.passes, 2, .small), ["passes", "2", "2 smaller", "1", "1 smaller"])
+        XCTAssertEqual(fits(.passes, 4, .medium), ["passes", "4", "4 smaller", "3", "3 smaller", "2", "2 smaller", "1", "1 smaller"])
+        XCTAssertEqual(fits(.passes, 6, .large), ["passes", "6", "5", "4", "3", "2", "1"])
+        for size in DeliveryWidgetList.Size.allCases {
+            for count in 1...8 {
+                let design = DeliveryWidgetList.design(of: count, size: size)
+                let tried = DeliveryWidgetList.fits(design, count: count, size: size)
+                XCTAssertEqual(tried.first == .passes, design == .passes, "\(size) \(count)")
+                XCTAssertEqual(tried.filter { $0 == .passes }.count, design == .passes ? 1 : 0, "\(size) \(count)")
+                XCTAssertEqual(Array(tried.dropFirst(design == .passes ? 1 : 0)),
+                               DeliveryWidgetList.layouts(count: count, size: size).map(DeliveryWidgetList.Fit.rows))
+            }
+        }
+    }
+
     /// A step's time is its clock on its day, and its short weekday and clock from the next, in the reader's language.
     func testAWidgetStepsTimeNamesItsWeekdayFromAnotherDay() throws {
         var calendar = Calendar(identifier: .gregorian)

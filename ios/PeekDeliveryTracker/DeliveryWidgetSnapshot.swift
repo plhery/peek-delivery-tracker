@@ -384,6 +384,20 @@ enum DeliveryWidgetList {
         }
     }
 
+    /// What the widget shows its parcels as.
+    enum Fit: Hashable, Sendable {
+        /// Every parcel's pass.
+        case passes
+        case rows(Layout)
+    }
+
+    /// What a widget of `design` tries for `count` parcels, the first that fits being the one it shows: every parcel's
+    /// pass, for the passes' design, then the most rows that fit (`layouts`). Passes show every parcel or none: where two
+    /// cannot stand one above the other, in the shorter widgets of most iPhones or at larger text, the parcels are rows.
+    static func fits(_ design: Design, count: Int, size: Size) -> [Fit] {
+        (design == .passes ? [.passes] : []) + layouts(count: count, size: size).map(Fit.rows)
+    }
+
     /// The first `rows` parcels under their sections' headings, if the widget has room for them, then a line that counts
     /// the others.
     static func lines(_ sections: [Section], rows: Int, headings: Bool) -> [Line] {

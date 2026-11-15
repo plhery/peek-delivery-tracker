@@ -33,6 +33,7 @@ import {
   resultHasUpdate,
   scansMissing,
   resultStage,
+  stageShown,
   stageToSave,
   TrackingSyncService,
   type TrackingAdapter,
@@ -2979,6 +2980,33 @@ describe('TrackingSyncService', () => {
     // Without its rows, a parcel holds its stage; delivered and returned have their own rule.
     expect(heldStage({}, 'in_transit', rows())).toBe('in_transit');
     expect(heldStage(parcel, 'delivered', rows())).toBe('delivered');
+  });
+
+  it('saves an early stage as the moving one the rows show after it, as the apps read them', () => {
+    const rows = (...scans: [string, string][]) => scans.map(([stage, occurred_at]) => ({ stage, occurred_at }));
+    // A notice after the scans that moved the parcel is no step back.
+    expect(stageShown('accepted', rows(['in_transit', '2026-11-10T08:00:00Z'], ['accepted', '2026-11-11T08:00:00Z']))).toBe('in_transit');
+    expect(stageShown('registered', rows(['customs', '2026-11-10T08:00:00Z'], ['registered', '2026-11-11T08:00:00Z'],
+      ['pending', '2026-11-12T08:00:00Z']))).toBe('customs');
+    // After a problem a new label starts over, and rows that never moved hold the stage.
+    expect(stageShown('registered', rows(['in_transit', '2026-11-09T08:00:00Z'], ['exception', '2026-11-10T08:00:00Z'],
+      ['registered', '2026-11-11T08:00:00Z']))).toBe('registered');
+    expect(stageShown('accepted', rows(['registered', '2026-11-10T08:00:00Z'], ['accepted', '2026-11-11T08:00:00Z']))).toBe('accepted');
+    // Only an early stage moves on.
+    expect(stageShown('exception', rows(['in_transit', '2026-11-10T08:00:00Z']))).toBe('exception');
+  });
+
+  it('saves the moving stage of an answer whose newest scan is a notice after the parcel moved', async () => {
+    const client = fakeClient();
+    const adapter: TrackingAdapter = { fetch: vi.fn().mockResolvedValue({ status: 'accepted', current_stage: 'accepted',
+      last_status_text: 'Shipment information received', last_update: '2026-11-11T08:00:00Z', events: [
+        { time: '2026-11-10T08:00:00Z', description: 'Departed from the sorting centre', location: 'Example Hub', stage: 'in_transit' },
+        { time: '2026-11-11T08:00:00Z', description: 'Shipment information received', stage: 'accepted' },
+      ] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-11T12:00:00Z'));
+    await service.syncPackage({ id: 'notice-after-move', carrier: 'dpd', tracking_number: '06080000000003', current_stage: 'registered',
+      [STORED_EVENT_IDENTITIES]: [] }, { trigger: 'scheduled' });
+    expect(client.updatePackage).toHaveBeenLastCalledWith('notice-after-move', expect.objectContaining({ current_stage: 'in_transit' }));
   });
 
   it('keeps the progress of earlier scans when the newest scan has wording no rule reads', async () => {

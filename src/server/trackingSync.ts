@@ -1599,6 +1599,18 @@ export function heldStage(parcel: JsonObject, previousStage: string, rows: reado
 }
 
 /**
+ * The stage the parcel's rows show past an early stage to save, as the apps read them (`currentScan`):
+ * an announcement or acceptance after the scans that moved the parcel, in one answer with them or a
+ * partner's after the earlier carrier's scans, is a notice rather than a step back. After a problem, a
+ * delivery or a return, a new label starts over.
+ */
+export function stageShown(stage: string, rows: readonly JsonObject[]): string {
+  if (!EARLY_STAGES.includes(stage)) return stage;
+  const shown = String(currentScan(rows.filter((row) => row.stage !== 'pending').sort(newestScanFirst))?.stage ?? '');
+  return MOVING_STAGES.has(shown) ? shown : stage;
+}
+
+/**
  * Whether a held stage is the earlier leg's while the delivery partner, now answering for a
  * handed-over parcel, starts its own: it announces or accepts the parcel the earlier carrier
  * already moved (Poczta Polska's posting scan in the minute 4PX hands the parcel over). So does
@@ -3086,13 +3098,14 @@ export class TrackingSyncService {
           // provider's copies of its scans, for a parcel filed under none).
           const swappedBehind = fetched.correction && !events.some((event) => event.stage === previousStage
             || (stageRank(previousStage) >= 0 && stageRank(String(event.stage)) >= stageRank(previousStage)));
-          values.current_stage = swappedBehind ? selectedStage : stageToSave(heldStage(parcel, previousStage, rows), selectedStage);
+          const kept = swappedBehind ? selectedStage : stageToSave(heldStage(parcel, previousStage, rows), selectedStage);
+          values.current_stage = swappedBehind ? kept : stageShown(kept, rows);
           // Only the check that brings such a scan, dated after the stored progress, flags it: not the
           // later checks that repeat it, nor an answer that only lacks the later scans.
           const cameAfter = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))
             && ['registered', 'accepted'].includes(String(event.stage)) && Date.parse(String(event.occurred_at ?? '')) > progressAt);
-          if (values.current_stage !== selectedStage && cameAfter
-            && !partnerStartsLeg(parcel, carrierData, sourceCarrierId, selectedStage, String(values.current_stage), rows)) {
+          if (kept !== selectedStage && cameAfter
+            && !partnerStartsLeg(parcel, carrierData, sourceCarrierId, selectedStage, kept, rows)) {
             anomalies = [...anomalies, 'early_stage_regression'];
           }
         }

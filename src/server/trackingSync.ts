@@ -450,9 +450,11 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
   if (!refresh?.afterFailureMinutes) return after;
   const lastChecked = Date.parse(String(parcel.last_synced_at ?? ''));
   if (!Number.isFinite(lastChecked)) return after;
+  // Counted from the run that made the last check, which lands a little into it, as a scheduled
+  // check counts a limit alone (scheduledSyncDue).
   const interval = parcel.sync_status === 'error'
     ? refresh.afterFailureMinutes * 60_000 : refresh.minMinutes * 60_000;
-  return Math.max(after, lastChecked + interval);
+  return Math.max(after, lastChecked + interval - RUN_SPREAD_MS);
 }
 
 /** Whether the first carrier error in the chain is an inconclusive answer, such as a national post's miss. */

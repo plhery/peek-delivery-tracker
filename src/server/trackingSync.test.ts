@@ -776,12 +776,13 @@ describe('fair scheduling', () => {
     const checked = { current_stage: 'in_transit', sync_status: 'ok', last_synced_at: '2026-11-13T10:00:00Z' };
     // Poste Italiane is checked hourly at most; Cainiao's leg before it sets no interval.
     const poste = { ...checked, carrier: 'poste-italiane', carrier_data: { active_tracking_carrier: 'cainiao' } };
-    expect(isTrackingSyncDue(poste, at(59))).toBe(false);
-    expect(isTrackingSyncDue(poste, at(60))).toBe(true);
+    // Counted from the run that made the last check, which a check lands a little into.
+    expect(isTrackingSyncDue(poste, at(54))).toBe(false);
+    expect(isTrackingSyncDue(poste, at(55))).toBe(true);
     // Poste Italiane's hour outlasts AliExpress's half hour.
     const both = { ...poste, carrier_data: { active_tracking_carrier: 'aliexpress' } };
-    expect(isTrackingSyncDue(both, at(59))).toBe(false);
-    expect(isTrackingSyncDue(both, at(60))).toBe(true);
+    expect(isTrackingSyncDue(both, at(54))).toBe(false);
+    expect(isTrackingSyncDue(both, at(55))).toBe(true);
     // After a handoff, only the carrier it moved the parcel to.
     const handed = { ...checked, carrier: 'aliexpress', carrier_data: { original_carrier: 'aliexpress', active_tracking_carrier: 'correios-br' } };
     expect(isTrackingSyncDue(handed, at(1))).toBe(true);
@@ -6731,12 +6732,13 @@ describe('TrackingSyncService', () => {
 
   it.each(['gls-de', 'gls-ch', 'gls-fr'])(
     'checks %s hourly and waits four hours after failures', (carrier) => {
+      // Counted from the run that made the last check (RUN_SPREAD_MS): a check lands a little into its run.
       const parcel = { carrier, last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok' };
       expect(isTrackingSyncDue({ carrier }, new Date('2026-09-09T10:00:00Z'))).toBe(true);
-      expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:59:59.999Z'))).toBe(false);
-      expect(isTrackingSyncDue(parcel, new Date('2026-09-09T11:00:00Z'))).toBe(true);
-      expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T13:59:59Z'))).toBe(false);
-      expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T14:00:00Z'))).toBe(true);
+      expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:54:59.999Z'))).toBe(false);
+      expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:55:00Z'))).toBe(true);
+      expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T13:54:59Z'))).toBe(false);
+      expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T13:55:00Z'))).toBe(true);
       expect(isTrackingSyncDue({ ...parcel, last_synced_at: 'invalid' }, new Date())).toBe(true);
     },
   );
@@ -6744,18 +6746,18 @@ describe('TrackingSyncService', () => {
   it('paces a Swiss postal number Cainiao still tracks as AliExpress: half-hourly, hourly after a failure', () => {
     const parcel = { carrier: 'swiss-post', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok',
       carrier_data: { active_tracking_carrier: 'aliexpress' } };
-    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:29:59Z'))).toBe(false);
-    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:30:00Z'))).toBe(true);
-    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T10:59:59Z'))).toBe(false);
-    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:00:00Z'))).toBe(true);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:24:59Z'))).toBe(false);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:25:00Z'))).toBe(true);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T10:54:59Z'))).toBe(false);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T10:55:00Z'))).toBe(true);
   });
 
   it('checks Morning Global hourly, out for delivery too, and waits two hours after a failure', () => {
     const parcel = { carrier: 'morning-global', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok' };
-    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:59:59.999Z'))).toBe(false);
-    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T11:00:00Z'))).toBe(true);
-    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:59:59Z'))).toBe(false);
-    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T12:00:00Z'))).toBe(true);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:54:59.999Z'))).toBe(false);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:55:00Z'))).toBe(true);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:54:59Z'))).toBe(false);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:55:00Z'))).toBe(true);
     // No 2-minute last mile: its lookups count against the same limit.
     const delivering = { id: 'morning', carrier: 'morning-global', tracking_number: 'TEST1234', current_stage: 'out_for_delivery',
       created_at: '2026-09-09T00:00:00Z', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok',
@@ -6766,16 +6768,16 @@ describe('TrackingSyncService', () => {
 
   it('checks DHL Poland hourly, out for delivery in a browser too, and waits two hours after a failure', () => {
     const parcel = { carrier: 'dhl-ecommerce-pl', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok' };
-    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:59:59.999Z'))).toBe(false);
-    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T11:00:00Z'))).toBe(true);
-    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:59:59Z'))).toBe(false);
-    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T12:00:00Z'))).toBe(true);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:54:59.999Z'))).toBe(false);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:55:00Z'))).toBe(true);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:54:59Z'))).toBe(false);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:55:00Z'))).toBe(true);
     // Each check solves its history page's reCAPTCHA: none every 5 minutes out for delivery.
     const delivering = { id: 'dhl-pl', carrier: 'dhl-ecommerce-pl', tracking_number: 'TEST1234', current_stage: 'out_for_delivery',
       created_at: '2026-09-09T00:00:00Z', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok',
       carrier_data: { last_update: '2026-09-09T09:58:00+02:00', routing: { version: 1, configured_carrier: 'dhl-ecommerce-pl', browser_check: true } } };
     expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T10:05:00Z'))).toBe(false);
-    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T10:59:00Z'))).toBe(false);
+    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T10:54:00Z'))).toBe(false);
     expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T11:00:00Z'))).toBe(true);
   });
 
@@ -6827,15 +6829,15 @@ describe('TrackingSyncService', () => {
     const service = () => new TrackingSyncService(client as unknown as SupabaseServiceClient,
       adapter, null, () => now);
     await expect(service().syncPackage(parcel)).resolves.toMatchObject({ checked: 1, errors: 1 });
-    now = new Date('2026-09-09T13:59:59Z');
+    now = new Date('2026-09-09T13:54:59Z');
     await expect(service().syncPackage(parcel)).resolves.toMatchObject({ checked: 0, errors: 0 });
     expect(adapter.fetch).toHaveBeenCalledOnce();
-    now = new Date('2026-09-09T14:00:00Z');
+    now = new Date('2026-09-09T13:55:00Z');
     adapter.fetch.mockResolvedValue({ status: 'in_transit' });
     await expect(service().syncPackage(parcel)).resolves.toMatchObject({ checked: 1, unchanged: 1 });
-    now = new Date('2026-09-09T14:59:59Z');
+    now = new Date('2026-09-09T14:49:59Z');
     await expect(service().syncPackage(parcel)).resolves.toMatchObject({ checked: 0 });
-    now = new Date('2026-09-09T15:00:00Z');
+    now = new Date('2026-09-09T14:50:00Z');
     await expect(service().syncPackage(parcel)).resolves.toMatchObject({ checked: 1, unchanged: 1 });
     expect(adapter.fetch).toHaveBeenCalledTimes(3);
   });

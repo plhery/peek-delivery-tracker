@@ -3,7 +3,7 @@ title: J&T Express Australia tracking: JTAU numbers and statuses
 description: Track a J&T Express Australia parcel: what a JTAU number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-australia-tracking
 published: 2026-10-21
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 J&T Express Australia (J&T Express Australia Pty Ltd, Villawood NSW) is the Australian arm of J&T Express, the parcel group behind J&T in South-East Asia and China. It delivers parcels in Australia for e-commerce platforms, brands and retailers, including orders from overseas once they've cleared customs. If a shop sent your order with J&T, the tracking number starts with `JTAU`: paste it in the box above, or look it up on [J&T's own tracker](https://www.jtexpress.au/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -25,7 +25,7 @@ J&T's networks in other countries have their own trackers and their own numbers:
 
 **Where to find it.** In the shop's shipping email, on the order page of the shop or marketplace, or in any message about the delivery. J&T gets your name, address and contact details from the sender or the marketplace you ordered on, so if you can't find the number, ask the shop, or see [how to find a tracking number](guide:find-tracking-number).
 
-**Searching.** J&T's tracker takes up to 10 numbers at once, separated by spaces or commas, and says `No tracking records yet` for a number it doesn't know. If Peek keeps showing "Waiting for the carrier", check all 16 characters against the shop's email, then ask the shop.
+**Searching.** J&T's tracker takes up to 10 numbers at once, separated by spaces or commas, and says `No tracking records yet` for a number it doesn't know. If peektracker.com keeps showing "Waiting for J&T Express Australia", check all 16 characters against the shop's email, then ask the shop.
 
 ## J&T Express Australia tracking statuses explained
 
@@ -75,7 +75,7 @@ The shop chose J&T, so for an online order the shop is your first contact.
 
 **No new scans.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek ("No tracking update for four days") and a "Get help from J&T Express Australia" link. If nothing moves after that, ask the shop or J&T's customer service (below), with your tracking number. More on [tracking that isn't updating](guide:tracking-not-updating).
 
-**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for the carrier" in Peek. Shops often create the number before they hand the parcel over. If it stays that way for several days, check the number with the shop and ask whether the parcel has really been sent.
+**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express Australia" on peektracker.com. Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 
 **Delivered but not there.** Open the proof-of-delivery link in J&T's text and check the spot the photo shows, then around your door, with your household and with neighbours. Still missing? Tell the shop and J&T, with your tracking number: J&T's privacy notice says it uses these records to look into missing, damaged and misdelivered parcels. Ask the shop for a refund or a new parcel. See also [delivered but not received](guide:delivered-not-received).
 
@@ -100,7 +100,7 @@ J&T can text you a proof-of-delivery link after a delivery, so a text about a J&
 
 Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. Peek doesn't show J&T's proof of delivery either: open the link in J&T's text for the photo. J&T's tracker can also show office contact details; Peek leaves them out. On a very long history it keeps the newest 100 scans. "Open the J&T Express Australia website", on the parcel's page, opens your number on J&T's tracker.
 
-Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
+Until J&T scans the parcel, Peek shows "Waiting for J&T Express Australia" on peektracker.com and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
 Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 
@@ -116,7 +116,7 @@ Customs is done. The parcel came from overseas, cleared customs, and J&T collect
 
 ### Why is my J&T tracking number not found?
 
-Check that it starts with `JTAU` and has 12 digits after it: numbers from J&T's other networks, such as `JTUK` in the UK, aren't Australian. If the number is right, J&T may not have the parcel yet: its tracker says `No tracking records yet`, and Peek shows "Waiting for the carrier" until the first scan. If that lasts several days, ask the shop.
+Check that it starts with `JTAU` and has 12 digits after it: numbers from J&T's other networks, such as `JTUK` in the UK, aren't Australian. If the number is right, J&T may not have the parcel yet: its tracker says `No tracking records yet`, and peektracker.com shows "Waiting for J&T Express Australia". If J&T still doesn't know the number two days later and nothing else has answered for it, the site asks you to check it, choose another carrier or delete the parcel. If J&T still has no record after several days, ask the shop.
 
 ### How do I contact J&T Express Australia?
 

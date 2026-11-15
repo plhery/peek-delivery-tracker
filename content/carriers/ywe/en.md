@@ -66,7 +66,7 @@ YWE says it started in Los Angeles in 2024 and plans to cover most of the United
 
 ## YWE parcel not arriving or tracking stuck
 
-**`NOT_FOUND`.** YWE's tracker shows this for a number it has no scans for, and lists possible causes: the parcel hasn't been accepted or scanned yet, the number is wrong, or it was posted so long ago that its tracking is gone. Peek shows "Waiting for the carrier" and keeps checking. Check the number against the seller's message: YWE and 14 digits. If nothing comes after a few days, ask the seller whether the parcel was sent.
+**`NOT_FOUND`.** YWE's tracker shows this for a number it has no scans for, and lists possible causes: the parcel hasn't been accepted or scanned yet, the number is wrong, or it was posted so long ago that its tracking is gone. Peek shows "Waiting for YWE" on peektracker.com and keeps checking. Check the number against the seller's message: YWE and 14 digits. If nothing comes after a few days, ask the seller whether the parcel was sent.
 
 **Stuck on `Shipping Order Created.`** YWE has the delivery's details, not the parcel. YWE first scans a parcel at its US hub, so ask the seller where the parcel is now and when it was sent. If it was shipped from China, see [tracking a parcel from China](guide:tracking-from-china).
 

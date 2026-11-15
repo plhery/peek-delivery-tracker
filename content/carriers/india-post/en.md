@@ -79,7 +79,7 @@ India Post warns of fake links impersonating it: use only www.indiapost.gov.in, 
 
 ## Track an India Post parcel with Peek
 
-[Peek](/) recognises two letters, nine digits and `IN` as India Post when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number you were given, or choose "Track it as typed". Filed under India Post, a parcel shows "Waiting for the carrier" until its first scan.
+[Peek](/) recognises two letters, nine digits and `IN` as India Post when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number you were given, or choose "Track it as typed". Filed under India Post, a parcel shows "Waiting for India Post" on peektracker.com until its first scan.
 
 Peek doesn't read India Post's own site: it reads India Post's scans through MySpeedPost, a tracking site outside India Post's domain that fetches them from India Post (or through track91, the tracker of MySpeedPost's operator, when MySpeedPost passes the lookup there). When that copy is over 30 minutes old, Peek asks MySpeedPost to refresh it, and keeps the older copy if it can't, so a scan can reach Peek late.
 

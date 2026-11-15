@@ -37,7 +37,7 @@ Peek doesn't ask Transpress's tracker, so its code holds no Transpress wordings.
 | "Returned to sender" | It went back to the sender. |
 | "Needs attention" | The service reports a problem. Read the line under it. |
 
-Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for the carrier". If you leave the carrier to Peek, the same wait usually reads "No tracking history yet". "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
+Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for Transpress" on peektracker.com. If two checks in a row fail, the parcel still shows "Waiting for Transpress", and its page says "Transpress couldn’t be reached yet. Peek keeps trying." If you leave the carrier to Peek, the same wait usually reads "No tracking history yet", and "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
 
 ## Transpress delivery in Bulgaria
 

@@ -3,7 +3,7 @@ title: Jifan tracking: JFGJ numbers, scans and Beijing time
 description: Track a Jifan (吉凡国际物流) parcel from China to the US: what a JFGJ…CN number looks like, what the tracker's lines mean, and why every time on it is Beijing time.
 slug: jifan-tracking
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-15
 ---
 
 Jifan is Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流 for short), a logistics company in Shenzhen, China, founded in 2017. It ships parcels from businesses in China to buyers in the United States, by air and by sea. Its tracking numbers are JFGJ, nine digits and CN. Look yours up on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track), or paste it in the box above. The seller gives you the number with your order's shipping details.
@@ -67,7 +67,7 @@ Jifan publishes no rules for recipients on delivery attempts, notice cards or pi
 
 Jifan's customers are the businesses that send parcels with it, not you. For a late, lost, damaged or returned parcel, contact the seller or marketplace first.
 
-**`查询不到` (can't be found).** Check the number for a typo, type it in capitals, and ask the seller if it still fails. In Peek, the parcel shows "Waiting for the carrier" and Peek keeps checking. After two days with nothing, Peek flags it: "Still waiting for the carrier’s first update".
+**`查询不到` (can't be found).** Check the number for a typo, type it in capitals, and ask the seller if it still fails. On peektracker.com, the parcel shows "Waiting for Jifan" and Peek keeps checking. If Jifan still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
 
 **Only `Order information received`.** Jifan has the order's data, not the parcel. If nothing new comes for several days, ask the seller whether the parcel was handed over.
 

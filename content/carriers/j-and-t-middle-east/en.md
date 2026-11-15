@@ -37,7 +37,7 @@ J&T's tracker lists a parcel's scans newest first. Each scan has a short heading
 | "Needs attention" | J&T's `Abnormal Parcel`, after a delivery round that didn't deliver it. The reason is in the sentence under it on J&T's tracker, which Peek doesn't show. |
 | "Delivered" | J&T's `Signed`, its sign scan after the driver's round: the sentence under it on J&T's tracker names who signed for the parcel. Delivered to the address, not necessarily to you in person. |
 | "Returned to sender" | On its way back to the sender, or back there. |
-| "Waiting for the carrier" | J&T doesn't list the number yet, or lists it with no scans. |
+| "Waiting for J&T Express Middle East" | J&T doesn't list the number yet, or lists it with no scans. That's the label on peektracker.com. |
 
 A heading Peek can't place reads as "In transit", unless the parcel was already out for delivery or at a later step, such as an attempt, a delivery or a return: then it stays at that step. Either way, you see J&T's words in the history.
 
@@ -96,7 +96,7 @@ As read on [J&T's contact page](https://www.jtexpress.me/KSA/contact-us) on 9 No
 
 Paste the `JTE` number in [Peek](/): it names J&T Express Middle East at once ("Detected carrier"), whether you type it with spaces or in lower case. A tracking link from J&T's site works too, from jtexpress.me or jtexpress.ae, with the number after `waybillNo=`. If you meant another carrier, press "Change".
 
-Peek asks J&T's own tracker, through the same lookup its tracking page makes, in English. It shows each scan's heading, its exact time and the branch's town and province, and on a very long history it keeps the newest 100 scans. It leaves out the sentence under each heading, the courier's name and contact details, who signed for the parcel and the proof of delivery. J&T gives no expected delivery day or weight, so Peek shows none. Until J&T lists a scan, the parcel reads "Waiting for the carrier" and Peek keeps asking. When J&T's tracker asks for a captcha, Peek doesn't solve it: it tries J&T again later and asks other tracking services in the meantime.
+Peek asks J&T's own tracker, through the same lookup its tracking page makes, in English. It shows each scan's heading, its exact time and the branch's town and province, and on a very long history it keeps the newest 100 scans. It leaves out the sentence under each heading, the courier's name and contact details, who signed for the parcel and the proof of delivery. J&T gives no expected delivery day or weight, so Peek shows none. Until J&T lists a scan, the parcel reads "Waiting for J&T Express Middle East" on peektracker.com and Peek keeps asking. When J&T's tracker asks for a captcha, Peek doesn't solve it: it tries J&T again later and asks other tracking services in the meantime.
 
 Peek checks J&T about every 10 minutes while you follow the parcel, or every 2 minutes from 6 a.m. Saudi time (7 a.m. in the UAE) on the day J&T scans it out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
 

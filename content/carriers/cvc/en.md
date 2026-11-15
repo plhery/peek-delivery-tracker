@@ -38,7 +38,7 @@ Peek doesn't ask CVC's tracker, so its code holds no CVC wordings. It asks track
 | "Returned to sender" | It went back to the sender. |
 | "Needs attention" | The service reports a problem. Read its line in the history. |
 
-Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for the carrier". "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
+Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for CVC" on peektracker.com. If two checks in a row fail, the parcel still shows "Waiting for CVC", and its page says "CVC couldn’t be reached yet. Peek keeps trying." More in [tracking statuses explained](guide:tracking-statuses).
 
 ## CVC delivery in Bulgaria
 
@@ -46,7 +46,7 @@ CVC's own sites give no delivery times, delivery attempts, offices, cash-on-deli
 
 ## CVC parcel not updating, lost or returned
 
-**Nothing yet.** A tracking service may not know the number yet, or may not follow CVC's parcels at all. Peek then shows "Waiting for the carrier" and keeps asking, each service again at most a day after it last had nothing. If there's still no line two days after you added the parcel, Peek flags it: "Still waiting for the carrier’s first update". Check the number against the shop's email. If nothing comes after a few days, open CVC's own tracker with "Open the CVC website" on the parcel's page, and ask the shop whether the parcel was really sent.
+**Nothing yet.** A tracking service may not know the number yet, or may not follow CVC's parcels at all. Peek then shows "Waiting for CVC" on peektracker.com and keeps asking, each service again at most a day after it last had nothing. If there's still no line two days after you added the parcel, Peek flags it: "Still waiting for the carrier’s first update". Check the number against the shop's email. If nothing comes after a few days, open CVC's own tracker with "Open the CVC website" on the parcel's page, and ask the shop whether the parcel was really sent.
 
 **No news for days.** After four days without a new line, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag: "No tracking update for four days". See [why tracking stops updating](guide:tracking-not-updating).
 
@@ -94,9 +94,9 @@ It's a waybill number ("товарителница") made of digits: CVC's track
 
 Yes. CVC's tracker on my.e-cvc.bg calls itself e-CVC.bg and carries CVC's logo, and Peek's catalog lists e-CVC, Си Ви Си and Си Ви Си ЕООД as other names for CVC. Searching for any of these names in Peek's carrier list finds CVC.
 
-### Why does my CVC parcel say "Waiting for the carrier"?
+### Why does my CVC parcel say "Waiting for CVC"?
 
-No tracking service has a line for the number yet. Peek keeps asking, each service again at most a day after it last had nothing. Check the number with the shop, and look it up on CVC's own tracker with "Open the CVC website".
+On peektracker.com, a parcel filed under CVC shows this while no tracking service has a line for the number yet, or while none could be reached: its page then says "CVC couldn’t be reached yet. Peek keeps trying." Peek keeps asking, each service again at most a day after it last had nothing. Check the number with the shop, and look it up on CVC's own tracker with "Open the CVC website".
 
 ### What is CVC's phone number?
 

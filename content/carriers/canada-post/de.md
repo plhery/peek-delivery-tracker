@@ -102,7 +102,7 @@ Bei einer internationalen Postnummer auf `CA` die Post deines Landes: DHL, die �
 
 ### Warum findet Peek meine Canada-Post-Nummer nicht?
 
-Canada Post gibt dieselbe Antwort, wenn eine Nummer unbekannt, noch nicht gescannt oder abgelaufen ist. Peek zeigt dann „Warten auf den Paketdienst“. Prüf jede Ziffer: Bei 16-stelligen Nummern ist die letzte eine Prüfziffer, bei Postnummern die letzte vor `CA`.
+Canada Post gibt dieselbe Antwort, wenn eine Nummer unbekannt, noch nicht gescannt oder abgelaufen ist. Peek zeigt dann auf peektracker.com „Warten auf Canada Post“. Prüf jede Ziffer: Bei 16-stelligen Nummern ist die letzte eine Prüfziffer, bei Postnummern die letzte vor `CA`.
 
 ### Was bedeutet „Item processed“ bei Canada Post?
 

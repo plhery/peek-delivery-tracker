@@ -78,7 +78,7 @@ CNE publishes no rules for delivery attempts, notice cards or pickup points: tho
 
 CNE's customers are the sellers who book it: for a late, lost, damaged or returned parcel, contact the seller or the marketplace first.
 
-**Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for the carrier" and keeps checking. `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
+**Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for CNE Express" on peektracker.com and keeps checking. `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
 
 **No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. While Peek follows the parcel on CNE's tracker, the note adds a "Get help from CNE Express" link to CNE's Contact us page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

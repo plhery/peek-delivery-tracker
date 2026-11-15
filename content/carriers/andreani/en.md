@@ -61,7 +61,7 @@ Peek couldn't read Andreani's website, so this page gives no delivery times, no 
 
 **Only `Pendiente de ingreso`.** The sender has created the shipment but hasn't handed the parcel to Andreani yet. Peek shows "Label created". Ask the shop if it has sent your order.
 
-**No result at all.** Andreani's tracker may not know the number yet. Filed under Andreani, the parcel shows "Waiting for the carrier", and Peek keeps asking. If nothing comes after a few days, check the number with the shop. See [why tracking stops updating](guide:tracking-not-updating).
+**No result at all.** Andreani's tracker may not know the number yet. Filed under Andreani, the parcel shows "Waiting for Andreani" on peektracker.com, and Peek keeps asking. If nothing comes after a few days, check the number with the shop. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Quiet for days.** When the newest line is four days old or more and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it: "No tracking update for four days". Parcels often go quiet over a weekend. If nothing changes, ask the shop.
 

@@ -51,7 +51,7 @@ Peek couldn't read R+L Carriers' website, so this page gives no delivery times, 
 
 ## R+L Carriers shipment not found, late, damaged or lost
 
-**Not found.** For a PRO it doesn't know, R+L's tracer answers `No records found for Number:` followed by the PRO with an `I` in front. Peek then shows "Waiting for the carrier" and asks again later. Check each digit against the shop's email. If the number is right, ask the shipper whether R+L has picked the freight up.
+**Not found.** For a PRO it doesn't know, R+L's tracer answers `No records found for Number:` followed by the PRO with an `I` in front. Peek then shows "Waiting for R+L Carriers" on peektracker.com for a PRO filed under R+L Carriers, and asks again later. Check each digit against the shop's email. If the number is right, ask the shipper whether R+L has picked the freight up.
 
 **A digit is wrong.** For a PRO whose check digit doesn't add up, R+L's tracer answers with the PRO followed by `Pro number failed check digit validation.` Peek then shows "Check the tracking number". Compare the number, digit by digit, with the shop's email or the shipping papers.
 

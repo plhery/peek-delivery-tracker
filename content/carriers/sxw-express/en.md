@@ -62,7 +62,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 **Only `Parcel Data Received` or `货物电子信息已经收到`.** The seller has created the shipment, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for the carrier" in Peek.** Peek has no step for your number yet: SXW's tracker doesn't know it, or has no steps for it, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too: SXW and twelve digits.
+**"Waiting for SXW Express" on peektracker.com.** Peek has no step for your number yet: SXW's tracker doesn't know it, or has no steps for it, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too: SXW and twelve digits.
 
 **`Customs declaration completed`.** That's the export declaration in China, before the flight, not customs in your country. The parcel isn't held, so Peek shows "In transit". If you're later asked to pay import charges, see [parcels held at customs](guide:customs).
 

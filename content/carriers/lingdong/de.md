@@ -69,7 +69,7 @@ Mehr dazu in [Paket beim Zoll](guide:customs).
 
 **Nur `货物电子信息已经收到`.** Der Shop hat das Paket gebucht, aber in Lingdongs Lager ist es noch nicht angekommen. Kommt mehrere Tage nichts nach, frag den Shop, ob er es wirklich verschickt hat.
 
-**Nichts gefunden.** Kennt Lingdongs Tracking-Seite eine Nummer nicht, zeigt sie nur die Nummer und lässt alle anderen Felder leer. Peek zeigt dann „Warten auf den Paketdienst“ und fragt weiter nach. Vergleich die Nummer Zeichen für Zeichen mit der Nachricht des Shops.
+**Nichts gefunden.** Kennt Lingdongs Tracking-Seite eine Nummer nicht, zeigt sie nur die Nummer und lässt alle anderen Felder leer. Peek zeigt dann auf peektracker.com „Warten auf Lingdong International“ und fragt weiter nach. Vergleich die Nummer Zeichen für Zeichen mit der Nachricht des Shops.
 
 **Verloren, beschädigt oder zurück.** Ein Verfahren für Reklamationen von Empfängern veröffentlicht Lingdong nicht: Seine Seite mit Beförderungsbedingungen (运输条款) ist leer. Auf der Website gibt es zwar einen Chat-Button für Problempakete, Entschädigungsforderungen und Beschwerden, aber den Vertrag mit Lingdong hat der Shop. Bitte also ihn oder den Marktplatz um Erstattung oder ein neues Paket. Siehe [Paket verloren](guide:lost-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
 

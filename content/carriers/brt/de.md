@@ -107,7 +107,7 @@ Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung
 
 ### Wo ist mein BRT-Paket gerade?
 
-Das sagt BRTs neueste Zeile: Bei `ARRIVED AT DEPOT` liegt es in der Filiale aus der Spalte Filiale, bei `FOR DELIVERY` bringt es der Zusteller. Noch keine Zeile? Dann hat BRT das Paket wohl noch nicht, und Peek zeigt „Warten auf den Paketdienst“; ist noch kein Paketdienst gewählt, bei einer `EOB`-Nummer „Warten auf den ersten Scan von BRT“.
+Das sagt BRTs neueste Zeile: Bei `ARRIVED AT DEPOT` liegt es in der Filiale aus der Spalte Filiale, bei `FOR DELIVERY` bringt es der Zusteller. Noch keine Zeile? Dann hat BRT das Paket wohl noch nicht, und Peek zeigt auf peektracker.com „Warten auf BRT“; ist noch kein Paketdienst gewählt, bei einer `EOB`-Nummer „Warten auf den ersten Scan von BRT“.
 
 ### Ist BRT dasselbe wie DPD?
 

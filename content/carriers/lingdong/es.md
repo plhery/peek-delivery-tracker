@@ -67,7 +67,7 @@ Lingdong no publica plazos de entrega ni reglas sobre intentos de entrega, aviso
 
 **Solo `货物电子信息已经收到`.** La tienda ha registrado el envío, pero el paquete aún no ha llegado al almacén de Lingdong. Si en varios días no aparece nada más, pregunta a la tienda si de verdad lo ha enviado.
 
-**No sale nada.** Con un número que no conoce, la web de Lingdong muestra el número como referencia y todos los demás campos vacíos. Peek muestra «Esperando al transportista» y sigue comprobando. Compara el número con el mensaje de la tienda, carácter por carácter.
+**No sale nada.** Con un número que no conoce, la web de Lingdong muestra el número como referencia y todos los demás campos vacíos. Peek muestra en peektracker.com «Esperando a Lingdong International» y sigue comprobando. Compara el número con el mensaje de la tienda, carácter por carácter.
 
 **Perdido, dañado o devuelto.** Lingdong no publica ningún procedimiento de reclamación para destinatarios: su página de condiciones de transporte (运输条款) está vacía. Su web tiene un botón de chat para incidencias, reclamaciones y quejas, pero quien tiene el contrato con Lingdong es la tienda: pídele a ella, o al marketplace, el reembolso o un nuevo envío. Mira [paquete perdido](guide:lost-parcel) y [paquete devuelto al remitente](guide:returned-to-sender).
 

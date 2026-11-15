@@ -116,7 +116,7 @@ Les longs vols, la douane et les fins de semaine laissent souvent un trou entre 
 
 ### Pourquoi Peek ne trouve pas mon numéro de repérage Postes Canada ?
 
-Postes Canada donne la même réponse qu'un numéro soit inconnu, pas encore scanné ou expiré : pour un colis Postes Canada, Peek affiche donc « En attente du transporteur » jusqu'au premier scan. Raisons habituelles selon Repérage : le colis n'est pas encore chez Postes Canada ou encore à l'étranger, il a été expédié il y a plus d'un an, ou le service ne comprend pas le repérage. Vérifie chaque chiffre : dans un numéro de 16 chiffres, le dernier est un chiffre de contrôle, et dans un numéro postal, c'est le dernier chiffre avant `CA`.
+Postes Canada donne la même réponse qu'un numéro soit inconnu, pas encore scanné ou expiré : pour un colis Postes Canada, Peek affiche donc sur peektracker.com « En attente de Canada Post ». Raisons habituelles selon Repérage : le colis n'est pas encore chez Postes Canada ou encore à l'étranger, il a été expédié il y a plus d'un an, ou le service ne comprend pas le repérage. Vérifie chaque chiffre : dans un numéro de 16 chiffres, le dernier est un chiffre de contrôle, et dans un numéro postal, c'est le dernier chiffre avant `CA`.
 
 ### Puis-je suivre un colis avec le numéro de l'avis de livraison ?
 

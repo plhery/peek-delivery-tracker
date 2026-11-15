@@ -23,7 +23,7 @@ Hat eine Nummer nach `JTDE` eine Ziffer zu wenig oder zu viel und antwortet kein
 
 Die Sendungsverfolgung von J&T nimmt bis zu 10 Nummern pro Abfrage an, getrennt durch Leerzeichen oder Kommas.
 
-**Ähnliche Nummern.** Die J&T-Netze anderer Länder haben eigene Sendungsverfolgungen und Nummern: `JTUK` mit 12 Ziffern gehört zu J&T Express UK, `JTAU` mit 12 Ziffern zu J&T Express Australia, `JTE` mit 12 Ziffern zu J&T Express Middle East, und `JT` mit 13 Ziffern nutzt J&T in Südostasien und in China. Nur `JTDE` gehört zum deutschen Netz. Meldet die Sendungsverfolgung von J&T `Keine Abfrageergebnisse` oder zeigt Peek weiter „Warten auf den Paketdienst“, vergleich die Nummer mit der E-Mail des Shops oder frag den Shop.
+**Ähnliche Nummern.** Die J&T-Netze anderer Länder haben eigene Sendungsverfolgungen und Nummern: `JTUK` mit 12 Ziffern gehört zu J&T Express UK, `JTAU` mit 12 Ziffern zu J&T Express Australia, `JTE` mit 12 Ziffern zu J&T Express Middle East, und `JT` mit 13 Ziffern nutzt J&T in Südostasien und in China. Nur `JTDE` gehört zum deutschen Netz. Meldet die Sendungsverfolgung von J&T `Keine Abfrageergebnisse` oder zeigt Peek auf peektracker.com weiter „Warten auf J&T Express Germany“, vergleich die Nummer mit der E-Mail des Shops oder frag den Shop.
 
 ## J&T Sendungsverfolgung: was die Status bedeuten
 
@@ -76,7 +76,7 @@ Den Auftrag an J&T hat der Shop erteilt, bei einem Online-Kauf ist er also deine
 
 **Keine Bewegung.** Laufzeiten für Empfänger nennt J&T nicht. Zeigt ein Paket „Beim Paketdienst eingegangen“ oder „Unterwegs“ und kommt vier Tage lang keine neue Zeile, markiert Peek es („Seit vier Tagen keine Aktualisierung“) und zeigt den Link „Hol dir Hilfe bei J&T Express Germany“. Tut sich danach nichts, frag den Shop oder ruf mit deiner Sendungsnummer bei der Hotline von J&T an. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Noch keine Sendungsverfolgung.** Kennt die Sendungsverfolgung von J&T die Nummer noch nicht, zeigt Peek „Warten auf den Paketdienst“. Shops legen die Nummer oft an, bevor sie das Paket übergeben. Bleibt es mehrere Tage dabei, lass dir die Nummer vom Shop bestätigen und frag, ob das Paket wirklich verschickt wurde.
+**Noch keine Sendungsverfolgung.** Kennt die Sendungsverfolgung von J&T die Nummer noch nicht, zeigt Peek auf peektracker.com „Warten auf J&T Express Germany“. Shops legen die Nummer oft an, bevor sie das Paket übergeben. Bleibt es mehrere Tage dabei, lass dir die Nummer vom Shop bestätigen und frag, ob das Paket wirklich verschickt wurde.
 
 **Zugestellt, aber nicht da.** Lies den Zustellsatz in Peek: Nennt er einen Ort, etwa `Mailbox` oder `Garage`, schau dort nach. Steht dort `Left with neighbor`, frag deine Nachbarn oder lass dir in der Sendungsverfolgung von J&T zeigen, welcher es ist (siehe oben). Die FAQ von J&T rät außerdem nachzufragen, ob Familie, Nachbarn, die Hausverwaltung oder andere Berechtigte das Paket angenommen haben. Immer noch nichts? Melde es der Hotline von J&T und bitte den Shop mit deiner Sendungsnummer um Erstattung oder ein neues Paket. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -100,7 +100,7 @@ Bei einer Online-Bestellung ist trotzdem der Shop deine erste Adresse: Er hat di
 
 Peek zeigt den Status, jeden Scan mit genauer Uhrzeit und den Zeitpunkt der Zustellung. J&T gibt jeden Scan als genauen Zeitpunkt an, Peek zeigt ihn also in der Zeitzone deines Geräts; auf peektracker.com steht sie in der letzten Zeile unter dem Verlauf („Uhrzeiten in deiner Zeitzone: …“). Die Scans zeigt Peek im englischen Wortlaut von J&T. Orte, einen erwarteten Zustelltag oder das Gewicht gibt J&T nicht heraus, Peek zeigt also keine Karte. Bei sehr langem Verlauf behält Peek die neuesten 100 Scans. „Website von J&T Express Germany öffnen“ auf der Seite des Pakets öffnet deine Nummer in der Sendungsverfolgung von J&T.
 
-Bis J&T das Paket scannt, zeigt Peek „Warten auf den Paketdienst“ und fragt weiter nach. Ist die Sendungsverfolgung von J&T nicht erreichbar oder kennt sie die Nummer nicht, fragt Peek bei Tracking-Diensten nach und zeigt deren Verlauf in deren Worten. Antworten später J&T und die Tracking-Dienste ohne Scan für ein Paket, das schon welche hat, behält Peek die gefundenen Scans und schreibt, wenn das anhält: „Der Paketdienst hat gerade keine neuen Scans. Die bisherigen bleiben erhalten, und Peek prüft weiter.“
+Bis J&T das Paket scannt, zeigt Peek auf peektracker.com „Warten auf J&T Express Germany“ und fragt weiter nach. Ist die Sendungsverfolgung von J&T nicht erreichbar oder kennt sie die Nummer nicht, fragt Peek bei Tracking-Diensten nach und zeigt deren Verlauf in deren Worten. Antworten später J&T und die Tracking-Dienste ohne Scan für ein Paket, das schon welche hat, behält Peek die gefundenen Scans und schreibt, wenn das anhält: „Der Paketdienst hat gerade keine neuen Scans. Die bisherigen bleiben erhalten, und Peek prüft weiter.“
 
 Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange J&T selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang kein neuer Scan (solange es „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek stündlich nach. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. J&T oder den Shop kann Peek nicht für dich kontaktieren, und es kann weder die Adresse ändern noch eine neue Zustellung buchen.
 
@@ -120,7 +120,7 @@ Die deutsche Website von J&T nennt keine, und keine Zeile von J&T Express German
 
 ### Warum findet die J&T Sendungsverfolgung meine Nummer nicht?
 
-Prüf, ob sie mit `JTDE` beginnt und danach 12 Ziffern hat: Nummern aus anderen J&T-Netzen, etwa `JTUK` aus Großbritannien, sind keine deutschen. Stimmt die Nummer, hat J&T das Paket vielleicht noch nicht: Die Sendungsverfolgung von J&T meldet dann `Keine Abfrageergebnisse`, Peek zeigt bis zum ersten Scan „Warten auf den Paketdienst“. Dauert das mehrere Tage, frag den Shop.
+Prüf, ob sie mit `JTDE` beginnt und danach 12 Ziffern hat: Nummern aus anderen J&T-Netzen, etwa `JTUK` aus Großbritannien, sind keine deutschen. Stimmt die Nummer, hat J&T das Paket vielleicht noch nicht: Die Sendungsverfolgung von J&T meldet dann `Keine Abfrageergebnisse`, Peek zeigt auf peektracker.com „Warten auf J&T Express Germany“. Dauert das mehrere Tage, frag den Shop.
 
 ### Wie erreiche ich J&T Express in Deutschland?
 

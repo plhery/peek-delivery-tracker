@@ -86,7 +86,7 @@ Elsewhere, see [parcels held at customs](guide:customs), and ask whoever booked 
 
 ## Mainfreight freight late, stuck, damaged or lost
 
-**Nothing yet.** A shipment you've filed under Mainfreight that its tracker doesn't list yet shows "Waiting for the carrier" while Peek keeps asking. Pasted 11 digits that no carrier has answered for show "No tracking history yet". Check the digits, and ask the sender whether Mainfreight has picked the freight up.
+**Nothing yet.** A shipment you've filed under Mainfreight that its tracker doesn't list yet shows "Waiting for Mainfreight" on peektracker.com while Peek keeps asking. Pasted 11 digits that no carrier has answered for show "No tracking history yet". Check the digits, and ask the sender whether Mainfreight has picked the freight up.
 
 **Not moving.** After four days without a new step, a shipment showing "Label created", "Received by carrier" or "In transit" gets a flag ("No tracking update for four days"). Ask the shop or the sender why. See [tracking that isn't updating](guide:tracking-not-updating).
 

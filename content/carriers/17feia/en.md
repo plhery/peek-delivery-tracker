@@ -3,7 +3,7 @@ title: 17FEIA tracking: FEI…YQ numbers, statuses and delivery
 description: Track a 17FEIA (一起飞) parcel from China: what a FEI…YQ number looks like, what each line on its tracker means, who delivers it and what Peek shows.
 slug: 17feia-tracking
 published: 2026-11-03
-updated: 2026-11-09
+updated: 2026-11-15
 ---
 
 17FEIA (一起飞, also Shanghai Hongshan International Logistics, 上海宏杉国际物流) is a Chinese logistics company. It takes parcels in at its warehouse in Shenzhen or Shanghai, flies them out of China and, after import customs, hands them to a carrier for delivery. Its numbers start with FEI and end with YQ. Paste yours in the box above, or use 17FEIA's own tracker on www.17feia.com. The number comes from whoever shipped your order: the seller, or the forwarder that sent your goods on from China.
@@ -67,7 +67,7 @@ After import customs, 17FEIA hands the parcel to a carrier that takes it on to y
 
 17FEIA works for whoever booked the shipment: the seller, or the forwarder you used. For a late, lost, damaged or returned parcel, contact them first.
 
-**Number not found.** For a number it doesn't know, 17FEIA's tracker shows no progress. In Peek, the parcel shows "Waiting for the carrier" and Peek keeps checking; after two days, it flags "Still waiting for the carrier’s first update". Check the number against the shipping message: FEI, two letters, ten digits, YQ.
+**Number not found.** For a number it doesn't know, 17FEIA's tracker shows no progress. On peektracker.com, the parcel shows "Waiting for 17FEIA" and Peek keeps checking. If 17FEIA still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shipping message: FEI, two letters, ten digits, YQ.
 
 **Stuck on `The order has information pending customer confirmation.`** If you used a forwarder, check your account or messages there. Otherwise, ask the seller.
 

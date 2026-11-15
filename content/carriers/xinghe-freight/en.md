@@ -65,7 +65,7 @@ Xinghe's own site says nothing about parcels for online shoppers: no delivery ti
 
 **Only `Order information received` or `货物电子信息已经收到`.** The seller has created the order, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for the carrier" in Peek.** Peek has no step for your number yet: GZYL's tracker doesn't know it or holds only a plan of steps written ahead, which can end in `Delivered`, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too.
+**"Waiting for Xinghe Freight" on peektracker.com.** Peek has no step for your number yet: GZYL's tracker doesn't know it or holds only a plan of steps written ahead, which can end in `Delivered`, and the tracking services Peek asks have nothing either. Peek keeps checking. Compare the number with the seller's message too.
 
 **Stuck at customs.** If you're asked to pay import charges, see [parcels held at customs](guide:customs). If the parcel stays there for days, tell the seller.
 
@@ -91,7 +91,7 @@ The site has nothing for recipients abroad: its contact form only opens an email
 
 Peek asks GZYL's tracker, as Xinghe's own tracking box does. It shows the status, each step with its place, and the destination country when the record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, payment details, signature and proof of delivery the record can hold, and shows no expected delivery date: the tracker gives none.
 
-When the tracker doesn't know your number, Peek asks tracking services instead and shows their copy of the steps, which may be all Peek has for a Xinghe number. While neither has a step for it, the parcel shows "Waiting for the carrier".
+When the tracker doesn't know your number, Peek asks tracking services instead and shows their copy of the steps, which may be all Peek has for a Xinghe number. While neither has a step for it, the parcel shows "Waiting for Xinghe Freight" on peektracker.com.
 
 Peek holds back any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step, and any step dated after the moment it checks, on Beijing time. On a record with steps written ahead, it holds back `Delivered` too, even one written on its own day. It goes by the steps it keeps, not by the record's summary status, and sets aside tracking services' copies of the steps it holds back as written ahead, `Delivered` included, even when it keeps other steps. When the tracker has no record of your number or can't be reached, though, Peek can't tell a planned step in a tracking service's copy from a scan.
 

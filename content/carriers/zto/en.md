@@ -58,7 +58,7 @@ From ZTO's FAQ:
 
 ## ZTO parcel not updating, lost or returned
 
-**Nothing yet.** If ZTO's tracker finds nothing under the number, check it with the seller. Meanwhile, a parcel filed under ZTO Express in Peek shows "Waiting for the carrier"; one filed under no carrier, "No tracking history yet".
+**Nothing yet.** If ZTO's tracker finds nothing under the number, check it with the seller. Meanwhile, a parcel filed under ZTO Express shows "Waiting for ZTO Express" on peektracker.com; one filed under no carrier, "No tracking history yet".
 
 **No update.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet and adds a "Get help from ZTO Express" link to ZTO's contact page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

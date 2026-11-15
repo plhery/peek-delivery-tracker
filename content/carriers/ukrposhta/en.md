@@ -79,7 +79,7 @@ When you add a Ukrposhta item in the UK, Peek also asks [Royal Mail](carrier:roy
 
 ### Why is my Ukrposhta tracking number not working?
 
-Check it against the one the sender gave you, character by character. A 13-digit number ends in a check digit, and Peek doesn't offer Ukrposhta one whose check digit is wrong. If the number is right, Ukrposhta may not know it yet: a parcel filed under Ukrposhta then shows "Waiting for the carrier" while Peek keeps checking. If nothing changes for several days, ask the sender.
+Check it against the one the sender gave you, character by character. A 13-digit number ends in a check digit, and Peek doesn't offer Ukrposhta one whose check digit is wrong. If the number is right, Ukrposhta may not know it yet: a parcel filed under Ukrposhta then shows "Waiting for Ukrposhta" on peektracker.com while Peek keeps checking. If nothing changes for several days, ask the sender.
 
 ### How do I track a parcel sent to Ukraine from abroad?
 

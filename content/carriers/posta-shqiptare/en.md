@@ -89,7 +89,7 @@ Posta Shqiptare warns about messages on its services that don't come from it: do
 
 ## Track a Posta Shqiptare parcel with Peek
 
-[Peek](/) recognises a C, E, L or R, another letter, nine digits and `AL` as Posta Shqiptare when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number you were given, or choose "Track it as typed". Links to e-Posta's tracker work too. Filed under Posta Shqiptare, a parcel shows "Waiting for the carrier" until its first scan.
+[Peek](/) recognises a C, E, L or R, another letter, nine digits and `AL` as Posta Shqiptare when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number you were given, or choose "Track it as typed". Links to e-Posta's tracker work too. Filed under Posta Shqiptare, a parcel shows "Waiting for Posta Shqiptare" on peektracker.com until its first scan.
 
 A number ending in `AL` that starts with another letter, such as U or V, isn't filed under Posta Shqiptare by its shape alone. Paste it all the same: Peek follows more than 3,500 carriers. While it checks, it shows "Checking tracking services…"; it asks Posta Shqiptare first, and shows "Posta Shqiptare has this parcel." when Posta Shqiptare knows it.
 

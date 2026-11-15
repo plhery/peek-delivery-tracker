@@ -71,7 +71,7 @@ Peek couldn't read ePost Global's website, so this page has no list of its partn
 
 ## ePost Global parcel not updating, lost or returned
 
-**Nothing yet.** When ePost Global's tracker has no update for the number, Peek shows "Waiting for the carrier" and keeps checking. Check the number: EPG and 10 to 15 digits. If nothing comes after a few days, ask the shop whether the parcel was really sent.
+**Nothing yet.** When ePost Global's tracker has no update for the number, Peek shows "Waiting for ePost Global" on peektracker.com and keeps checking. Check the number: EPG and 10 to 15 digits. If nothing comes after a few days, ask the shop whether the parcel was really sent.
 
 **Nothing new after the handover.** The partner has the parcel, and its own tracking may be ahead of ePost Global's. Peek follows the parcel there when it can (see below). Otherwise, find the partner's name and number in the handover line.
 

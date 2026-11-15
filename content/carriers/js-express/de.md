@@ -93,7 +93,7 @@ Zustellversuche, Benachrichtigungen und Abholstellen regelt der Paketdienst, der
 
 ## JS Express Paket kommt nicht an oder Tracking hängt
 
-**`未获取到任何数据,请提供有效单号!`** So antwortet die englische Tracking-Seite von JS Express auf Chinesisch, wenn sie eine Nummer nicht kennt (keine Daten gefunden, bitte eine gültige Frachtbriefnummer angeben). `No track data for now!` heißt: noch keine Scans. Peek zeigt in beiden Fällen „Warten auf den Paketdienst“ und fragt weiter nach. Prüf die Nummer Zeichen für Zeichen gegen die Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
+**`未获取到任何数据,请提供有效单号!`** So antwortet die englische Tracking-Seite von JS Express auf Chinesisch, wenn sie eine Nummer nicht kennt (keine Daten gefunden, bitte eine gültige Frachtbriefnummer angeben). `No track data for now!` heißt: noch keine Scans. Peek zeigt in beiden Fällen auf peektracker.com „Warten auf JS Express“ und fragt weiter nach. Prüf die Nummer Zeichen für Zeichen gegen die Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
 
 **Hängt bei `Electronic notification of order creation received.`** JS Express hat das Paket noch nicht bekommen. Frag den Shop, wann er es übergeben hat.
 

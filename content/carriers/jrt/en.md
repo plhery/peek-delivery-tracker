@@ -102,7 +102,7 @@ On the line into Europe, JRT's own lines are on Beijing time: 17:00 there is 09:
 
 **Nothing after `已交服务商`, `Delivery to final service provider` or `已交仓`.** JRT's part is done. Unless its tracker copies DHL's, UPS's, FedEx's or J&T Express Mexico's scans, or Peek shows DHL's or FedEx's number, the next steps are in the delivering company's tracking: ask the seller for that number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek shows "Waiting for the carrier" and keeps checking (for a UP reference you left Peek to match to a carrier, "Waiting for JRT’s first scan"). Compare the number with the seller's message, character by character.
+**Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek shows "Waiting for JRT" on peektracker.com and keeps checking (for a UP reference you left Peek to match to a carrier, "Waiting for JRT’s first scan"). Compare the number with the seller's message, character by character.
 
 **Address not found.** After `not delivered-bad address`, check the address on your order and tell the seller at once. If `shipment will be returned to origin-bad address` follows, the parcel is going back: ask the seller for a refund or a new parcel.
 

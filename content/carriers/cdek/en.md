@@ -87,7 +87,7 @@ For an order from a shop, ask the shop first: it booked the delivery.
 - **Another shape.** Press "Change" and search for CDEK: typing СДЭК or SDEK finds it too.
 - **A link.** Paste a my.cdek.ru order link, and Peek tracks the order in it with CDEK.
 
-On a parcel you've already added, use "Change carrier". A parcel added without a carrier, before anyone has it, shows "No tracking history yet". If you filed it under CDEK, it shows "Waiting for the carrier" until CDEK lists the number.
+On a parcel you've already added, use "Change carrier". A parcel added without a carrier, before anyone has it, shows "No tracking history yet". If you filed it under CDEK, it shows "Waiting for CDEK" on peektracker.com until CDEK lists the number.
 
 **What Peek shows.** Peek reads CDEK's own tracking with the number alone: no account and no phone confirmation. You see the status, each step in CDEK's words and the city it happened in, at its exact time. Peek never reads your name, address, phone or pickup code, and gets no weight or expected delivery date from CDEK. It links CDEK's order page as "Open the CDEK website".
 

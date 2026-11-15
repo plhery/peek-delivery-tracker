@@ -3,7 +3,7 @@ title: Stone3PL tracking: numbers, statuses and contact
 description: Track a Stone3PL parcel from China: what its number can look like, what each tracking line means, who delivers it in your country and how to reach Stone3PL.
 slug: stone3pl-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-15
 ---
 
 Stone3PL is a logistics company with its headquarters in Shenzhen, China, and part of the Stone Group. It ships goods for online sellers and other businesses from China to the world, together with other logistics companies. If a shop sent your order with Stone3PL, look up the number on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track), in English, or paste it in the box above. The number comes from the seller, with your order's shipping details.
@@ -63,7 +63,7 @@ Its pages don't say which company delivers in which country: look for the delive
 
 Stone3PL works for the businesses that ship with it and has no help pages for recipients, so for a late, lost, damaged or returned parcel, contact the seller first.
 
-**Nothing yet.** Peek keeps checking. It shows "Waiting for the carrier" if you picked Stone3PL, and "No tracking history yet" if no carrier was named when you added the number. After two days with nothing, Peek flags it ("Still waiting for the carrier’s first update"): check the number with the seller.
+**Nothing yet.** Peek keeps checking. It shows "Waiting for Stone3PL" on peektracker.com if you picked Stone3PL, and "No tracking history yet" if no carrier was named when you added the number. After two days with nothing, Peek flags a parcel added without a carrier ("Still waiting for the carrier’s first update"): check the number with the seller. If you picked Stone3PL and it still doesn't know the number two days later, with nothing else answering for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
 
 **Only `Order Submited.` or `Shipment information received`.** Stone3PL has the order's details, but maybe not the parcel. If nothing new comes for several days, ask the seller if the parcel was handed over.
 

@@ -57,7 +57,7 @@ TForce's rules tariff (LTL Rules Tariff UPGF 102-T, effective 17 August 2026) se
 
 ## TForce Freight shipment not found, late, damaged or lost
 
-**Not found.** For a PRO it doesn't know, TForce's tracker shows `Not Available` and `Please check ProNumber` with the number. Peek then shows "Waiting for the carrier" if you filed the shipment under TForce Freight, "No tracking history yet" if not, and asks again later. Check each digit, and ask the shipper whether TForce has the freight yet.
+**Not found.** For a PRO it doesn't know, TForce's tracker shows `Not Available` and `Please check ProNumber` with the number. Peek then shows "Waiting for TForce Freight" on peektracker.com if you filed the shipment under TForce Freight, "No tracking history yet" if not, and asks again later. Check each digit, and ask the shipper whether TForce has the freight yet.
 
 **A digit is wrong.** A PRO whose last digit fails the check isn't TForce's, and Peek never asks TForce about it. If you pick TForce Freight anyway, Peek says it "doesn’t issue numbers like this one", and the shipment shows "Check the tracking number".
 

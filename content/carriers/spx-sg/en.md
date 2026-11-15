@@ -64,7 +64,7 @@ Singapore Customs' rules for goods bought from overseas that come in by air or b
 
 ## SPX parcel not updating, lost or returned
 
-**Number not found yet.** When SPX doesn't know an SPXSG number yet, Peek shows "Waiting for the carrier" and keeps checking. The seller may not have handed the parcel over. Check the number too.
+**Number not found yet.** When SPX doesn't know an SPXSG number yet, Peek shows "Waiting for SPX Express Singapore" on peektracker.com and keeps checking. The seller may not have handed the parcel over. Check the number too.
 
 **Stuck on `[China]Sender is preparing to ship your parcel`.** The seller hasn't shipped it yet. Ask the seller when it will.
 

@@ -32,7 +32,7 @@ Le suivi de Shouwu est en anglais, sous un titre en chinois. Pour chaque colis, 
 
 | Statut Shouwu | Ce que ça veut dire pour toi | Peek affiche |
 | --- | --- | --- |
-| `Not Found` | Shouwu n'a encore rien sous ce numéro : « We seem can't identify the number. » | « En attente du transporteur » |
+| `Not Found` | Shouwu n'a encore rien sous ce numéro : « We seem can't identify the number. » | « En attente de Shouwu International » (sur peektracker.com) |
 | `Preparing` | Selon Shouwu, le colis a été remis à son entrepôt en Chine, ou y est pesé et scellé. Ce statut peut apparaître avant tout scan. | « Étiquette créée », puis « Pris en charge » après l'enlèvement par le partenaire ou un scan de l'entrepôt |
 | `In Transit` | Tout le trajet, de la remise à un transporteur jusqu'à la douane et à l'acheminement dans ton pays. | « En transit », ou l'étape du dernier scan, comme « À la douane » ; « Étiquette créée » tant qu'il n'y a que les données de commande et `Carrier received the shipment` |
 | `Undelivered` | Une tentative de livraison a échoué. | « Tentative de livraison », ou « Prêt à être retiré » ou « Retourné à l’expéditeur » si le dernier scan le dit |
@@ -106,7 +106,7 @@ Shouwu dit travailler directement avec USPS, Royal Mail, La Poste, DHL, DPD et H
 
 ## Colis Shouwu bloqué ou qui n'arrive pas
 
-**`Not Found`.** Shouwu donne quatre raisons : il n'a pas encore accepté le colis, ne l'a pas encore scanné, le numéro est faux, ou le colis a été posté il y a si longtemps que son suivi a disparu. Il ajoute que le traitement prend en général quelques jours. Peek affiche « En attente du transporteur » et continue de vérifier. Vérifie le numéro caractère par caractère ; si rien ne vient après quelques jours, demande au vendeur.
+**`Not Found`.** Shouwu donne quatre raisons : il n'a pas encore accepté le colis, ne l'a pas encore scanné, le numéro est faux, ou le colis a été posté il y a si longtemps que son suivi a disparu. Il ajoute que le traitement prend en général quelques jours. Peek affiche sur peektracker.com « En attente de Shouwu International » et continue de vérifier. Vérifie le numéro caractère par caractère ; si rien ne vient après quelques jours, demande au vendeur.
 
 **Bloqué sur `Preparing`, `Shipment information received` ou `Carrier received the shipment`.** Shouwu n'a pas encore le colis, ou ne l'a pas encore expédié de son entrepôt. Demande au vendeur quand il le lui a remis.
 

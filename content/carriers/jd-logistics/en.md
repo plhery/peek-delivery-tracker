@@ -59,7 +59,7 @@ JD's pages don't say how many delivery attempts the local carrier makes, or wher
 
 ## JD Logistics parcel not updating, lost or returned
 
-**Nothing yet.** If JD's tracker finds nothing under the number, check it with the seller. Peek shows "Waiting for the carrier" and keeps checking.
+**Nothing yet.** If JD's tracker finds nothing under the number, check it with the seller. Peek shows "Waiting for JD Logistics" on peektracker.com and keeps checking.
 
 **No update for days.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet on long flights, at customs or over a weekend, and adds a "Get help from JD Logistics" link to JD's contact page (once GOFO has taken over, "Get help from GOFO Express" and GOFO's customer service page). More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

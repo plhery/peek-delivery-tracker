@@ -104,7 +104,7 @@ After `Has been given to local carrier`, a carrier in the destination country de
 
 ## HuaHan parcel not arriving or tracking stuck
 
-**Number not found.** When HuaHan has no record of the number, its tracker answers 没有找到记录 ("no record found"), and Peek shows "Waiting for the carrier" and keeps checking. Check the number against the seller's message, character by character: HHW, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Number not found.** When HuaHan has no record of the number, its tracker answers 没有找到记录 ("no record found"), and Peek shows "Waiting for HuaHan Logistics" on peektracker.com and keeps checking. Check the number against the seller's message, character by character: HHW, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Shipment information received`.** The shop has booked the shipment, but HuaHan hasn't scanned the parcel yet. Ask the shop when it handed the parcel over.
 

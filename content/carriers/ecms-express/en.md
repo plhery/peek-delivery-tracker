@@ -65,7 +65,7 @@ For the last leg, ECMS says it partners "with trusted local carriers". Its track
 
 ## ECMS Express parcel not arriving or tracking stuck
 
-**"We could not find a shipment for this tracking number."** ECMS's tracker doesn't know the number: a typo, or the shop hasn't sent ECMS the details yet. Peek shows "Waiting for the carrier" and keeps checking. Check the number; if nothing comes after a few days, ask the seller whether the parcel was really sent.
+**"We could not find a shipment for this tracking number."** ECMS's tracker doesn't know the number: a typo, or the shop hasn't sent ECMS the details yet. Peek shows "Waiting for ECMS Express" on peektracker.com and keeps checking. Check the number; if nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Virtual Manifest has been received`.** ECMS has the details, not the parcel. Ask the shop when it handed the parcel over.
 

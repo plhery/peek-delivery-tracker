@@ -74,7 +74,7 @@ WanbExpress's scans follow the parcel out of China, through customs and on to a 
 
 ## WanbExpress parcel not arriving or tracking stuck
 
-**Number not found.** If WanbExpress's tracker doesn't know the number, Peek shows "Waiting for the carrier" and keeps checking. Check the number against the seller's message, character by character: WNB, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Number not found.** If WanbExpress's tracker doesn't know the number, Peek shows "Waiting for WanbExpress" on peektracker.com and keeps checking. Check the number against the seller's message, character by character: WNB, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Shipping Order Created.` or `Parcel Data Received`.** The shop has booked the shipment, but WanbExpress hasn't scanned the parcel yet. Ask the shop when it handed the parcel over.
 

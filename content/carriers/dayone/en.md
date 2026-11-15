@@ -3,7 +3,7 @@ title: DayOne tracking: DOT numbers, statuses and who delivers
 description: Track a DayOne parcel from China: what a DOT number looks like, what the statuses on DayOne's tracker mean, who delivers it and who to ask when it's late.
 slug: dayone-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-15
 ---
 
 DayOne is the warehouse that sends out a shop's online orders from China. It is not a courier: it says it is "the order fulfillment warehouse, not a courier delivery service provider". Other companies carry the parcel, and DayOne's tracker, [DayOneTrack](https://www.dayonetrack.com/), in English and Chinese, shows their scans. Look up your DOT number there, or paste it in the box above. The shop gives you the number with your order's shipping details.
@@ -30,7 +30,7 @@ DayOne's tracker gives each parcel one status, in English and Chinese, and lists
 
 | DayOne's status | What it means for you | Peek shows |
 | --- | --- | --- |
-| `Not found` (查询不到) | DayOne has nothing under this number yet. The tracker adds: "The order information has not been updated yet". | "Waiting for the carrier" |
+| `Not found` (查询不到) | DayOne has nothing under this number yet. The tracker adds: "The order information has not been updated yet". | "Waiting for DayOne" on peektracker.com |
 | `Info received` (收到信息) | The shipping data is in. The parcel may not have left the warehouse. | "Label created" |
 | `In transit` (运输途中) | On its way. | "In transit" |
 | `Pick up` (到达待取) | It has arrived and is waiting for you to collect it. | "Ready for pickup" |
@@ -73,7 +73,7 @@ DayOne publishes no rules for delivery attempts, notice cards or pickup points: 
 
 DayOne sends you to the shop. Its tracker says: "For all package logistics, lost items, refunds, and resending related issues, please contact the customer service of the ordering store."
 
-**`Not found`.** DayOne has nothing under the number yet. Check the number: DOT and 16 digits. If it's right, the order may not have been sent yet. Peek shows "Waiting for the carrier" and keeps checking. After two days with nothing, Peek flags the parcel: "Still waiting for the carrier’s first update". If nothing comes after a few days, ask the shop.
+**`Not found`.** DayOne has nothing under the number yet. Check the number: DOT and 16 digits. If it's right, the order may not have been sent yet. Peek shows "Waiting for DayOne" on peektracker.com and keeps checking. If DayOne still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If nothing comes after a few days, ask the shop.
 
 **Only `Info received` or `Order processed by shipper`.** Nobody has scanned the parcel yet. If it stays like that for several days, ask the shop when it was sent.
 

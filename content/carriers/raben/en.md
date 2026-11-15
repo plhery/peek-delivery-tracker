@@ -82,7 +82,7 @@ As read on Raben's sites on 30 October 2026:
 
 ## Track a Raben shipment with Peek
 
-Raben's shape is shared with BRT and Yunda, so Peek can't tell Raben by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks the carriers that use the shape ("Checking tracking services…") and shows "Raben has this parcel." when Raben's tracker knows the number; if several know it, you choose. If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for the carrier" once you've picked Raben. To set the carrier yourself, press "Change" and pick "Raben" under "Fits this number", or search for it (Raben Group finds it too). On a parcel you've already added, use "Change carrier".
+Raben's shape is shared with BRT and Yunda, so Peek can't tell Raben by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks the carriers that use the shape ("Checking tracking services…") and shows "Raben has this parcel." when Raben's tracker knows the number; if several know it, you choose. If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for Raben" on peektracker.com once you've picked Raben. To set the carrier yourself, press "Change" and pick "Raben" under "Fits this number", or search for it (Raben Group finds it too). On a parcel you've already added, use "Change carrier".
 
 A link from myraben.com or oftc.myraben.com files the parcel under Raben straight away. If your Raben number has another shape, pick Raben by hand: Peek asks Raben's tracker for any 4 to 40 letters and digits, with at least one digit.
 

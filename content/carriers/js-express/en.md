@@ -81,7 +81,7 @@ Delivery attempts, notice cards and pickup points follow the local courier's rul
 
 ## JS Express parcel not arriving or tracking stuck
 
-**"未获取到任何数据,请提供有效单号!"** JS Express's English page answers this, in Chinese, for a number it doesn't know: "no data found, please give a valid waybill number". `No track data for now!` means no scans yet. Peek shows "Waiting for the carrier" for both and keeps checking. Check the number character by character; if nothing comes after a few days, ask the seller whether the parcel was sent.
+**"未获取到任何数据,请提供有效单号!"** JS Express's English page answers this, in Chinese, for a number it doesn't know: "no data found, please give a valid waybill number". `No track data for now!` means no scans yet. Peek shows "Waiting for JS Express" on peektracker.com for both and keeps checking. Check the number character by character; if nothing comes after a few days, ask the seller whether the parcel was sent.
 
 **Stuck on `Electronic notification of order creation received.`** JS Express hasn't collected the parcel yet. Ask the shop when it was handed over.
 

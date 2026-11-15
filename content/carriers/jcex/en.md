@@ -59,7 +59,7 @@ JCEX publishes no rules for delivery attempts, notice cards, pickup points or ho
 
 **Who acts.** JCEX's customers are the sellers who ship with it. JCEX publishes no claim route for recipients, so for a late, lost, damaged or returned parcel, contact the seller or the marketplace you bought from.
 
-**No tracking yet.** A new waybill can show `查询不到` with no lines until JCEX scans the parcel; Peek shows "Waiting for the carrier" meanwhile. If it stays that way, check the number with the seller. If `Shipment order info received` is still the only line a day later, Peek notes that the seller hasn't handed the parcel to JCEX yet: ask the seller when it will.
+**No tracking yet.** A new waybill can show `查询不到` with no lines until JCEX scans the parcel; Peek shows "Waiting for JCEX" on peektracker.com meanwhile. If it stays that way, check the number with the seller. If `Shipment order info received` is still the only line a day later, Peek notes that the seller hasn't handed the parcel to JCEX yet: ask the seller when it will.
 
 **No update.** JCEX doesn't say after how long a parcel counts as `运输过久`. If nothing moves, ask the seller, which booked the parcel and can ask JCEX. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china); for customs stops or import charges, which in the EU now include a €2 handling fee per item (due since 1 November 2026), see [parcels held at customs](guide:customs).
 

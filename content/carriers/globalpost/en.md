@@ -73,7 +73,7 @@ From the United States, Plus reaches more than 30 countries, among them the UK, 
 
 ## GlobalPost parcel not updating, lost or returned
 
-**Nothing yet.** Until GlobalPost's tracker has a line for the number, Peek shows "Waiting for the carrier" and keeps checking. With `Label Created` alone, the parcel may not have reached GlobalPost. If nothing comes after a few days, ask the seller whether it was sent.
+**Nothing yet.** Until GlobalPost's tracker has a line for the number, Peek shows "Waiting for GlobalPost" on peektracker.com and keeps checking. With `Label Created` alone, the parcel may not have reached GlobalPost. If nothing comes after a few days, ask the seller whether it was sent.
 
 **No update for days.** GlobalPost says updates may take time on international shipments, and that weather, holidays, strikes and customs can delay them. On Economy, tracking ends after customs in your country. When a parcel still on its way has had no new scan for four days, Peek flags it ("No tracking update for four days") with a note that parcels often go quiet on long flights, at customs or over a weekend. The note links no GlobalPost help page; once Peek follows the parcel at the delivery company, it links that company's, if Peek knows one. See [why tracking stops updating](guide:tracking-not-updating).
 

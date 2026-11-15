@@ -74,7 +74,7 @@ A parcel goes from the Aras branch that takes it in, through transfer centres (t
 
 ## Aras Kargo tracking not updating, lost or returned
 
-**No result.** When Aras doesn't know the number, its tracker answers `Girdiğiniz bilgiler için bir sonuç bulunamamıştır.`: no result was found for what you entered. The shop may not have handed the parcel over yet. Peek keeps asking: a parcel filed under Aras Kargo shows "Waiting for the carrier". Check the number with the shop: 13 digits. If nothing comes after a few days, ask the shop whether it really gave the parcel to Aras.
+**No result.** When Aras doesn't know the number, its tracker answers `Girdiğiniz bilgiler için bir sonuç bulunamamıştır.`: no result was found for what you entered. The shop may not have handed the parcel over yet. Peek keeps asking: a parcel filed under Aras Kargo shows "Waiting for Aras Kargo" on peektracker.com. Check the number with the shop: 13 digits. If nothing comes after a few days, ask the shop whether it really gave the parcel to Aras.
 
 **Stuck at `TESLİMAT ŞUBESİNDE`.** The delivery branch has the parcel, and the status stays the same after a failed delivery. If a reason is listed for a day (the table above), the parcel wasn't delivered that day, and the reason says why. Otherwise, it is waiting there for delivery. Peek knows no out-for-delivery step from Aras, so the parcel shows "In transit" until it is delivered or a delivery fails.
 

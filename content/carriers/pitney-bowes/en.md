@@ -78,7 +78,7 @@ Peek couldn't read Pitney Bowes's website, so this page has no list of its partn
 
 ## Pitney Bowes parcel not updating, lost or returned
 
-**Nothing yet.** For a number it doesn't know, or a parcel whose history has expired, Pitney Bowes's tracker gives the answer it gives when it can't read a parcel. Peek can't tell that from an outage: it asks tracking services, and if none has the parcel, it shows "Update unavailable" after two checks. It keeps checking. Check the number against the table above. If nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Nothing yet.** For a number it doesn't know, or a parcel whose history has expired, Pitney Bowes's tracker gives the answer it gives when it can't read a parcel. Peek can't tell that from an outage: it asks tracking services, and if none has the parcel, it shows "Waiting for Pitney Bowes" on peektracker.com, and from the second check on, the parcel's page says "Pitney Bowes couldn’t be reached yet. Peek keeps trying." It keeps checking. Check the number against the table above. If nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Package not received by Hub or First Mile Carrier yet`.** The seller has made the label, but neither Pitney Bowes's shipping centre nor the carrier bringing the parcel there has scanned it. Ask the seller when they sent it.
 

@@ -3,7 +3,7 @@ title: TSJY tracking (通世集运): order numbers and statuses
 description: Track a TSJY (通世集运) consolidated parcel from China: what a TSJY…CN number looks like, what each Chinese status means, and when 17FEIA takes over.
 slug: tsjy-tracking
 published: 2026-11-03
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TSJY (通世集运) is a consolidation service in China, run by 苏州通世供应链有限公司, a supply chain company in Suzhou. You buy on Chinese shopping sites such as Taobao, Tmall, Pinduoduo, JD or Douyin, and the shops send your goods to TSJY's warehouse in Suzhou. TSJY stores them, packs them together and ships them abroad. Track your TSJY number on [TSJY's site](https://www.tsjy56.com/), under 订单查询 (order search), or paste it in the box above.
@@ -85,7 +85,7 @@ With TSJY you are usually the customer: you booked the shipment. So for a late, 
 
 **Goods not at the warehouse yet.** Before your goods reach TSJY, they travel with the shops' couriers in China: track them where you bought them. TSJY's tracking starts when a parcel reaches its warehouse, its site says, and runs until it is signed for.
 
-**Nothing for the number.** For a number it doesn't know, TSJY's results page on a phone says `未找到相关的轨迹信息。` (no tracking information found). Check for a typo. In Peek, the parcel shows "Waiting for the carrier" and Peek keeps checking. After two days with nothing, Peek flags it: "Still waiting for the carrier’s first update".
+**Nothing for the number.** For a number it doesn't know, TSJY's results page on a phone says `未找到相关的轨迹信息。` (no tracking information found). Check for a typo. On peektracker.com, the parcel shows "Waiting for TSJY" and Peek keeps checking. If TSJY still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
 
 **Stuck in the warehouse.** If TSJY's own steps stop for several days, ask its customer service.
 

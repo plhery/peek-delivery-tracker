@@ -77,7 +77,7 @@ Efter flyget och tullen lämnar TopYou över paketet till ett bolag som delar ut
 
 **Inget händer efter `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` eller `Import clearance success`.** Nu bör leveransbolaget ha paketet. Leta efter dess nummer på TopYous spårningssida, eller fråga säljaren vilket bolag som levererar och under vilket nummer. Mer bakgrund finns i guiden om [att spåra paket från Kina](guide:tracking-from-china) (på engelska).
 
-**Hittas inte, eller inga skanningar än.** Känner TopYous spårningssida inte till numret svarar den 查询不到 (hittades inte). Känner den till numret men har inte skannat paketet än kan den svara 暂无轨迹信息 (ingen spårningsinformation än). Peek visar "Waiting for the carrier" (väntar på transportören) i båda fallen och frågar igen vid nästa kontroll. Jämför numret med säljarens meddelande, tecken för tecken. Händer inget på några dagar, fråga säljaren om paketet verkligen har skickats.
+**Hittas inte, eller inga skanningar än.** Känner TopYous spårningssida inte till numret svarar den 查询不到 (hittades inte). Känner den till numret men har inte skannat paketet än kan den svara 暂无轨迹信息 (ingen spårningsinformation än). Peek visar på peektracker.com "Waiting for TopYou" (väntar på TopYou) i båda fallen och frågar igen vid nästa kontroll. Jämför numret med säljarens meddelande, tecken för tecken. Händer inget på några dagar, fråga säljaren om paketet verkligen har skickats.
 
 **Levererat, men inget paket.** Hör först med bolaget som delade ut paketet och kontakta sedan säljaren.
 

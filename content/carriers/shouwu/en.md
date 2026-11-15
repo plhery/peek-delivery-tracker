@@ -32,7 +32,7 @@ Shouwu's tracker is in English under a Chinese heading. It gives each parcel a s
 
 | Shouwu's status | What it means for you | Peek shows |
 | --- | --- | --- |
-| `Not Found` | Shouwu has nothing under that number yet: "We seem can't identify the number." | "Waiting for the carrier" |
+| `Not Found` | Shouwu has nothing under that number yet: "We seem can't identify the number." | "Waiting for Shouwu International" on peektracker.com |
 | `Preparing` | Shouwu explains it as a parcel handed to its warehouse in China, or being weighed and sealed there. It can show before the first scan. | "Label created", then "Received by carrier" after the partner's pickup or a warehouse scan |
 | `In Transit` | Anything from the handover to a carrier to customs and the trip inside your country. | "In transit", or the newest scan's stage, such as "At customs"; "Label created" while there is only the order data and `Carrier received the shipment` |
 | `Undelivered` | A delivery attempt failed. | "Delivery attempted", or "Ready for pickup" or "Returned to sender" if the newest scan says so |
@@ -104,7 +104,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 ## Shouwu parcel not arriving or tracking stuck
 
-**`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for the carrier" and keeps checking. Check the number character by character; if nothing comes after a few days, ask the seller.
+**`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for Shouwu International" on peektracker.com and keeps checking. Check the number character by character; if nothing comes after a few days, ask the seller.
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 

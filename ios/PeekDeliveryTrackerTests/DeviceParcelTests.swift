@@ -445,18 +445,32 @@ final class DeviceParcelTests: XCTestCase {
         return copy
     }
 
+    /// The package once its first check has landed.
+    private func checked(_ package: PublicPackage) -> PublicPackage {
+        var copy = package
+        copy.lastSyncedAt = "2026-11-15T08:00:00Z"
+        return copy
+    }
+
     func testAScanAfterTheParcelWasLastOpenedHereIsMarkedAndOpeningClearsItOnThisIPhone() async throws {
         let id = UUID()
         var now = Date(timeIntervalSince1970: 1_800_000_000)
         let storage = Memory()
         storage.keys = ["22222222222A": key]
-        // Followed before the app marked anything.
+        // Followed with a version that kept no news, as every parcel kept before the mark was.
         storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil,
-                                        parcel: Parcel(shared: news(package(id), at: "2026-11-15T09:00:00.12+00:00")), checkedAt: now)]
+                                        parcel: Parcel(shared: checked(package(id))), checkedAt: now)]
+        let first = PublicParcelResponse(link: link("22222222222A"), package: checked(news(package(id), at: "2026-11-15T09:00:00.12+00:00")))
+        let updated = DeviceParcels(client: client(Calls(), read: { _ in first }), storage: storage, now: { now })
+        XCTAssertFalse(updated.list()[0].hasNewUpdate)
+        now += DeviceParcels.fresh
+        try await updated.refresh()
+        XCTAssertFalse(updated.list()[0].hasNewUpdate, "The parcels already here start as seen with their next answer: nobody opens the app to a wall of dots")
+
         let calls = Calls()
-        let later = PublicParcelResponse(link: link("22222222222A"), package: news(package(id), at: "2026-11-15T10:00:00.5+00:00"))
+        let later = PublicParcelResponse(link: link("22222222222A"), package: checked(news(package(id), at: "2026-11-15T10:00:00.5+00:00")))
         let device = DeviceParcels(client: client(calls, read: { _ in later }), storage: storage, now: { now })
-        XCTAssertFalse(device.list()[0].hasNewUpdate, "The parcels already here start as seen: nobody opens the app to a wall of dots")
+        XCTAssertFalse(device.list()[0].hasNewUpdate)
 
         now += DeviceParcels.fresh
         try await device.refresh()
@@ -472,11 +486,28 @@ final class DeviceParcelTests: XCTestCase {
         now += DeviceParcels.fresh
         try await device.refresh()
         XCTAssertFalse(device.list()[0].hasNewUpdate)
-        let newer = PublicParcelResponse(link: link("22222222222A"), package: news(package(id), at: "2026-11-15T11:00:00+00:00"))
+        let newer = PublicParcelResponse(link: link("22222222222A"), package: checked(news(package(id), at: "2026-11-15T11:00:00+00:00")))
         let reopened = DeviceParcels(client: client(Calls(), read: { _ in newer }), storage: storage, now: { now })
         now += DeviceParcels.fresh
         try await reopened.refresh()
         XCTAssertTrue(reopened.list()[0].hasNewUpdate)
+    }
+
+    func testANewScanReadWhileTheServiceWasCheckingTheParcelIsStillNews() async throws {
+        let id = UUID()
+        var now = Date(timeIntervalSince1970: 1_800_000_000)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        // Kept here and seen, then read in the middle of one of the service's checks.
+        var kept = DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil,
+                                parcel: Parcel(shared: checked(news(package(id, sync: .syncing), at: "2026-11-15T09:00:00Z"))), checkedAt: now)
+        kept.startSeen()
+        storage.parcels = [kept]
+        let scanned = PublicParcelResponse(link: link("22222222222A"), package: checked(news(package(id), at: "2026-11-15T10:00:00Z")))
+        let device = DeviceParcels(client: client(Calls(), read: { _ in scanned }), storage: storage, now: { now })
+        now += DeviceParcels.fresh
+        try await device.refresh()
+        XCTAssertTrue(device.list()[0].hasNewUpdate)
     }
 
     func testAParcelFollowedHereStartsAsSeenAndSoDoesItsFirstAnswer() async throws {
@@ -486,7 +517,7 @@ final class DeviceParcelTests: XCTestCase {
         let calls = Calls()
         // The lookup answers before the carrier has: the parcel waits.
         let waiting = PublicLookupResponse(link: link("22222222222A"), key: key, package: package(id, stage: nil, sync: .pending))
-        let first = PublicParcelResponse(link: link("22222222222A"), package: news(package(id), at: "2026-11-15T09:00:00+00:00"))
+        let first = PublicParcelResponse(link: link("22222222222A"), package: checked(news(package(id), at: "2026-11-15T09:00:00+00:00")))
         let device = DeviceParcels(client: client(calls, lookup: waiting, read: { _ in first }), storage: storage, now: { now })
         let added = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL123789", label: "Lamp", carrier: .dhl))
         XCTAssertFalse(added.hasNewUpdate)
@@ -510,10 +541,12 @@ final class DeviceParcelTests: XCTestCase {
         var now = Date(timeIntervalSince1970: 1_800_000_000)
         let storage = Memory()
         storage.keys = ["22222222222A": key]
-        // The carrier answered, with nothing to tell yet.
-        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil,
-                                        parcel: Parcel(shared: package(id, stage: nil)), checkedAt: now)]
-        let scanned = PublicParcelResponse(link: link("22222222222A"), package: news(package(id), at: "2026-11-15T09:00:00+00:00"))
+        // The carrier answered, with nothing to tell yet, and the parcel was listed here like that.
+        var kept = DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil,
+                                parcel: Parcel(shared: checked(package(id, stage: nil))), checkedAt: now)
+        kept.startSeen()
+        storage.parcels = [kept]
+        let scanned = PublicParcelResponse(link: link("22222222222A"), package: checked(news(package(id), at: "2026-11-15T09:00:00+00:00")))
         let device = DeviceParcels(client: client(Calls(), read: { _ in scanned }), storage: storage, now: { now })
         XCTAssertFalse(device.list()[0].hasNewUpdate)
 

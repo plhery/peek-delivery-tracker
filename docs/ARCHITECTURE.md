@@ -594,7 +594,9 @@ and nothing typed is sent.
   (the `packages_start_seen` trigger). "Mark new updates" in Settings hides the dot and keeps
   the seen state; an account's choice is stored with its notification preferences, and a
   browser keeps its copy (`src/lib/newUpdate.ts`). A parcel followed without an account has no
-  `seen_at`: the device keeps the `news_at` it last opened and compares with that.
+  `seen_at`: the device keeps the `news_at` it last opened and compares with that, starting
+  from what the parcel carries when it is first listed and at its first answer (in the browser,
+  `src/peek/recents.ts`).
 - **Deleting an account** removes the Auth user. Foreign-key cascades remove parcels,
   jobs, events, push registrations, Live Activity tokens, delivery email rows, the
   forwarding address, connected assistants and audit rows. Other audit rows expire after 90 days.

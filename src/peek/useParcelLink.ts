@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { useI18n } from '../i18n';
+import { useSeenWhileOpen } from '../lib/newUpdate';
 import { parcelHasCarrierUpdate } from '../lib/parcelStatus';
 import { currentEvent, currentStage } from '../lib/stages';
 import type { TrackingEvent } from '../types';
 import { isWrappedGift, ParcelLinkError, readParcelLink, type ParcelLinkView } from './links';
-import { forgetRecent, ownerKeyFor, recentFor, rememberParcel, useRecents } from './recents';
+import { forgetRecent, markRecentSeen, ownerKeyFor, recentFor, rememberParcel, useRecents } from './recents';
 import { hashWithoutOwnerKey, linkWordsFromHash, type LinkWords } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 
@@ -91,8 +92,9 @@ function onVisibilityChange(notify: () => void) {
 /**
  * Follows one parcel link: reads it, keeps reading as often as the server
  * can have news, in sight or in the background, and saves every answer to
- * this device's parcels. One link per mount: give the component a `key` when
- * the link can change.
+ * this device's parcels. While the page is in front, the news it shows is
+ * seen: the parcel's card on this device's list loses its mark. One link per
+ * mount: give the component a `key` when the link can change.
  */
 export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelLinkState {
   const recent = useRecents().find((candidate) => candidate.id === linkId);
@@ -252,6 +254,10 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
   }, [linkId]);
 
   const view = answer.view ?? (answer.gone ? null : recent?.snapshot ?? null);
+  const newsAt = view?.parcel.newsAt;
+  const opened = useMemo(() => view && recent ? { ...view.parcel, id: linkId, seenAt: recent.seenNews } : null, [view, recent, linkId]);
+  const markSeen = useCallback(async (id: string) => { if (newsAt) markRecentSeen(id, newsAt); }, [newsAt]);
+  useSeenWhileOpen(opened, markSeen);
   // Until the first answer says what the link is, nothing it carries is shown: it may be a gift.
   const words = view && !isWrappedGift(view) ? view.link.giftWords ?? carried : NO_WORDS;
   return {

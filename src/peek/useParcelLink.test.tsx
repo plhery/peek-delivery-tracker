@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
 import { linkNote, noteLink } from './deviceNotes';
 import { ParcelLinkError, type ParcelLinkRead, type ParcelLinkView } from './links';
-import { forgetAllRecents, recentFor, rememberParcel, renameParcel } from './recents';
+import { forgetAllRecents, hasUnopenedNews, recentFor, rememberParcel, renameParcel } from './recents';
 import type { Stage } from '../types';
 import { I18nProvider, loadMessages, useI18n, type Locale } from '../i18n';
 import { SAMPLE_LINK_ID } from './sample';
@@ -46,6 +46,27 @@ afterEach(() => {
 });
 
 describe('useParcelLink', () => {
+  it('clears its parcel’s mark on this device’s list once the page is in front, and again as news lands', async () => {
+    const at = (newsAt: string) => testView({ parcel: { newsAt, lastSyncedAt: '2026-11-15T08:00:00Z' } });
+    rememberParcel({ id: LINK_ID, view: at('2026-11-15T09:00:00Z') });
+    rememberParcel({ id: LINK_ID, view: at('2026-11-15T10:00:00Z') });
+    expect(hasUnopenedNews(recentFor(LINK_ID)!)).toBe(true);
+    const state = vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('hidden');
+    hidden = true;
+    answers(at('2026-11-15T10:00:00Z'), at('2026-11-15T11:00:00Z'));
+    renderHook(() => useParcelLink(LINK_ID));
+    await pass(0);
+    // Opened in a tab in the background, the news waits to be seen.
+    expect(hasUnopenedNews(recentFor(LINK_ID)!)).toBe(true);
+    state.mockReturnValue('visible');
+    act(() => setHidden(false));
+    expect(recentFor(LINK_ID)!.seenNews).toBe('2026-11-15T10:00:00Z');
+    await pass(30_000);
+    expect(mocks.read).toHaveBeenCalledTimes(2);
+    expect(recentFor(LINK_ID)!.seenNews).toBe('2026-11-15T11:00:00Z');
+    expect(hasUnopenedNews(recentFor(LINK_ID)!)).toBe(false);
+  });
+
   it('opens a link directly: reads at once, remembers the parcel, then reads again more slowly while nothing changes, up to 10 minutes', async () => {
     const hook = renderHook(() => useParcelLink(LINK_ID));
     expect(hook.result.current).toMatchObject({ status: 'loading', view: null, live: true, checking: false });

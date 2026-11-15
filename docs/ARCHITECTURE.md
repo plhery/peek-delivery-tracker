@@ -307,8 +307,10 @@ Key server modules:
     nothing. `src/server/parcelsFromText.ts` is that step.
   - A carrier's own email is read with what its sender says. The sender is a carrier when
     its domain is one of the carrier's sites in the catalogue, or has that site's name under
-    another country's ending (`inboundEmail/carrierSender.ts`); a shop that also delivers
-    stays a shop. A number whose shape proved no carrier is then given the sender's carrier.
+    another country's ending when the name is one company's, not a word several posts use
+    (`inboundEmail/carrierSender.ts`); a shop that also delivers stays a shop, and so does a
+    person writing from free mail on a carrier's domain or name ("yandex.ru", "skynet.be").
+    A page on a hosting platform is not a carrier's site. A number whose shape proved no carrier is then given the sender's carrier.
     When no number was read, the one number in that carrier's shape that stands without a
     label is taken, unless a phone number's line holds it. The parcel is named after the
     shop the email says it carries for ("Colis de Example Shop", "Paket von Example Shop",

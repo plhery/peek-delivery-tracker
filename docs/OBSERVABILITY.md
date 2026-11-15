@@ -812,9 +812,10 @@ Key JSON events:
   carrier could not be asked), `not_asked` or `unknown` (no such link, or a wrong key). It
   has the `carrier` once the link asked for that one, never the link, the number or the
   postcode;
-- `carrier_recognition`: how many carriers the Add sheet's recognition asked, whether it
-  asked a `second_batch` because none of the first five knew the number, how many knew the
-  number or failed, and what it settled on (a carrier, `choice` or `none`).
+- `carrier_recognition`: how many carriers the Add sheet's recognition asked and which
+  (`asked_carriers`, ids in the order asked), whether it asked a `second_batch` because none
+  of the first five knew the number, how many knew the number or failed (`unanswered_carriers`
+  names those), and what it settled on (a carrier, `choice` or `none`).
 - `typo_candidate`: the number of a parcel just added or looked up reads as a digit typed
   twice: leaving out one digit of two identical neighbours gives a number that a
   high-confidence detection rule's check digit accepts while the number as typed passes

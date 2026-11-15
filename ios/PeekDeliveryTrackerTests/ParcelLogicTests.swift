@@ -3384,6 +3384,52 @@ extension SessionIsolationTests {
 }
 
 extension SessionIsolationTests {
+    /// After a flight to another time zone, the widgets' days change at the new zone's midnights, not the old one's.
+    @MainActor func testANewTimeZoneWordsTheWidgetsForItsMidnights() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        store.setDeliveryWidgetEnabled(true)
+        defer { store.setDeliveryWidgetEnabled(false) }
+        let shared = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: configuration.appGroupIdentifier, fallbackToStandard: true))
+        let home = TimeZone.current
+        // Half an hour off every whole-hour zone, so no midnight of one is a midnight of the other.
+        let away = try XCTUnwrap(TimeZone(identifier: home.secondsFromGMT() == 19_800 ? "Pacific/Honolulu" : "Asia/Kolkata"))
+        func startsADay(_ date: Date, in zone: TimeZone) -> Bool {
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.timeZone = zone
+            return calendar.startOfDay(for: date) == date
+        }
+        let now = Date()
+        let day = DateFormatter()
+        day.locale = Locale(identifier: "en_US_POSIX")
+        day.calendar = Calendar(identifier: .gregorian)
+        day.dateFormat = "yyyy-MM-dd"
+        var expected = parcel()
+        expected.trackingEvents = [TrackingEvent(id: UUID(), packageID: expected.id, stage: .inTransit, description: "Transit",
+                                                 occurredAt: DateParser.isoString(now.addingTimeInterval(-3_600)))]
+        expected.expectedDelivery = day.string(from: now.addingTimeInterval(3 * 86_400))
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [expected])))
+        await store.load()
+        let before = try XCTUnwrap(shared.snapshot?.parcels.first?.later).map(\.from)
+        XCTAssertTrue(before.allSatisfy { startsADay($0, in: home) })
+
+        NSTimeZone.default = away
+        defer { NSTimeZone.default = home }
+        NotificationCenter.default.post(name: .NSSystemTimeZoneDidChange, object: nil)
+        let heard = expectation(description: "the store heard the change")
+        DispatchQueue.main.async { heard.fulfill() }
+        await fulfillment(of: [heard], timeout: 5)
+
+        let after = try XCTUnwrap(shared.snapshot?.parcels.first?.later).map(\.from)
+        XCTAssertFalse(after.isEmpty)
+        XCTAssertTrue(after.allSatisfy { startsADay($0, in: away) })
+        XCTAssertFalse(after.contains { startsADay($0, in: home) })
+    }
+
     @MainActor func testUnchangedPollKeepsTheListWithoutRepublishing() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

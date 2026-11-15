@@ -119,6 +119,7 @@ final class ParcelStore: ObservableObject {
     private var pendingJobIDs = Set<UUID>()
     private var isActive = true
     private var identityObservation: AnyCancellable?
+    private var timeZoneObservation: AnyCancellable?
     private var cacheOwnerID: UUID?
     private var mutationRevision = 0
     private var loadSequence = 0
@@ -162,6 +163,17 @@ final class ParcelStore: ObservableObject {
         cacheOwnerID = session.user?.id
         notificationInvitationDismissed = session.user.map { NotificationInvitationPreference.isDismissed(for: $0.id) } ?? false
         identityObservation = session.identityChanges.sink { [weak self] in self?.resetForSessionChange() }
+        timeZoneObservation = NotificationCenter.default.publisher(for: .NSSystemTimeZoneDidChange)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in MainActor.assumeIsolated { self?.timeZoneChanged() } }
+    }
+
+    /// The widgets' days are worded for the midnights of the time zone the app published them in: in a new zone, the
+    /// app words them again and reloads the widgets, which also place their entries at the new midnights.
+    private func timeZoneChanged() {
+        publishedWidgetState = nil
+        guard !holdingDeliverySurfaces else { return }
+        publishDeliverySurfaces()
     }
 
     private func resetForSessionChange() {

@@ -212,7 +212,8 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   and Next up for the next seven midnights where they change, and both widgets and Siri's Next delivery read the words
   for the moment they show: "tomorrow" reads "today" on the day, last night's delivery "yesterday", and a
   passed estimate gives way to the status. Each widget's timeline has an entry at those midnights, and at the
-  midnight after each step, whose time then names its weekday.
+  midnight after each step, whose time then names its weekday. When the time zone changes, the app words the days
+  again for the new zone's midnights and reloads the widgets.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications
   has its switch, which saves the moment it is flipped. While it is on, the bell of a parcel
   still on its way opens that parcel's alerts, where notifications and the email are switched

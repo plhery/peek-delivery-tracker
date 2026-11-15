@@ -3,7 +3,7 @@ begin;
 
 -- A link's events name their source, for the server alone: it tells Peek's
 -- own "Tracking added" from the carrier's scans, and passes neither on. They say
--- when Peek stored them too, which dates the parcel's news.
+-- when Peek stored them too, which dates the parcel's news, and carry the fields an account's events carry.
 do $$
 declare
   link_id text;
@@ -37,6 +37,20 @@ begin
     where (event->>'stored_at')::timestamptz is distinct from stored.created_at
   ) then
     raise exception 'A link''s events do not say when they were stored';
+  end if;
+
+  -- And they carry what an account's events carry: a provider's copy names its provider, a day-only scan its day.
+  insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, raw_data)
+  values (parcel, 'in_transit', 'Scan', now() - interval '1 day', 'unknown:copy', jsonb_build_object(
+    'universal_provider', '17TRACK', 'time', '2026-11-14', 'local_time', '2026-11-14', 'observed_without_provider_timestamp', true,
+    'tie_order', 2, 'stage_source', 'none'));
+  if not exists (
+    select 1 from jsonb_array_elements(public.parcel_link_view(link_id)#>'{package,tracking_events}') as event
+    where event->>'provider_event_id' = 'unknown:copy' and event->>'universal_provider' = '17TRACK'
+      and event->>'time' = '2026-11-14' and event->>'local_time' = '2026-11-14' and event->'observed' = 'true'::jsonb
+      and event->'tie_order' = '2'::jsonb and event->>'stage_source' = 'none'
+  ) then
+    raise exception 'A link''s events do not carry their provider, times, order and stage source';
   end if;
 end;
 $$;

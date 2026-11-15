@@ -54301,6 +54301,271 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://dostavka.yandex.ru/ndd/tracking/"
+  },
+  "begad": {
+    "displayName": "Begad Logistics",
+    "aliases": [
+      "Begad",
+      "بيجاد"
+    ],
+    "countries": [
+      "AE"
+    ],
+    "color": "#f15a24",
+    "selectable": true,
+    "timezone": "Asia/Dubai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://logistics.begad.ae/tracking/"
+  },
+  "brics56": {
+    "displayName": "Brics56",
+    "aliases": [
+      "金专特快",
+      "深圳市金专特快物流有限公司",
+      "Jinzhuan Expert Express"
+    ],
+    "countries": [
+      "CN",
+      "BR"
+    ],
+    "color": "#004098",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.brics56.com/track.html?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "brics56.com"
+        ],
+        "pathPattern": "^/(?:pt/)?track\\.html$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.brics56.com/track.html"
+  },
+  "cargomini": {
+    "displayName": "CargoMini",
+    "aliases": [
+      "KargomKolay",
+      "DRN Lojistik A.Ş.",
+      "CargoMini Express"
+    ],
+    "countries": [
+      "TR"
+    ],
+    "color": "#ff0026",
+    "selectable": true,
+    "timezone": "Europe/Istanbul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.cargomini.com/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.cargomini.com"
+        ],
+        "path": "^/([A-Za-z0-9]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.cargomini.com/"
+  },
+  "extrans": {
+    "displayName": "Extrans Global",
+    "aliases": [
+      "Extrans",
+      "EXTRANS International",
+      "EXTRANS International (HK) Co., Ltd.",
+      "瑛特仕",
+      "广州瑛特仕国际货运代理有限公司",
+      "旭晖空运国际",
+      "엑스트란스 글로벌"
+    ],
+    "countries": [
+      "HK",
+      "CN",
+      "KR",
+      "VN"
+    ],
+    "color": "#005daa",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://extrans.itdida.com/"
+  },
+  "ghapex": {
+    "displayName": "Ghapex Courier",
+    "aliases": [
+      "Ghapex",
+      "GhApex"
+    ],
+    "countries": [
+      "GH"
+    ],
+    "color": "#ff4b26",
+    "selectable": true,
+    "timezone": "Africa/Accra",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ghapex.com/public-tracking"
+  },
+  "ruiqi": {
+    "displayName": "Ruiqi Logistics",
+    "aliases": [
+      "Ruiqi",
+      "Ruiqi Express",
+      "锐骑物流",
+      "深圳市锐骑物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#014285",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^RQ(?:US|GB|DE|Y2|VK|AC)\\d{12}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://www.ruiqiexpress.com/"
+  },
+  "santos-e-vale": {
+    "displayName": "Santos e Vale",
+    "aliases": [
+      "Grupo Santos e Vale"
+    ],
+    "countries": [
+      "PT",
+      "ES"
+    ],
+    "color": "#006657",
+    "selectable": true,
+    "timezone": "Europe/Lisbon",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://santosevale.pt/track/"
+  },
+  "xinsu": {
+    "displayName": "Xinsu International",
+    "aliases": [
+      "新速国际",
+      "新速物流",
+      "广州新速国际供应链有限公司",
+      "Xinsu International Supply Chain"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0045e7",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://xinsu.kingtrans.net/WebTrack?action=list&language=en&istrack=false&bills={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "xinsu.kingtrans.net"
+        ],
+        "pathPattern": "^/WebTrack$",
+        "params": [
+          "bills"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://xinsu.kingtrans.net/tracken.jsp"
+  },
+  "yqs": {
+    "displayName": "YQS Logistics",
+    "aliases": [
+      "YQS",
+      "悦其胜",
+      "悦其胜国际物流",
+      "深圳市悦其胜物流有限公司",
+      "天凡国际物流",
+      "Tianfan International Logistics"
+    ],
+    "countries": [
+      "CN",
+      "MX"
+    ],
+    "color": "#f1000b",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.nextsls.com/trace?app=686f63bc81cc2241b447ab39&numbers={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.nextsls.com"
+        ],
+        "pathPattern": "^/trace$",
+        "query": "^(?=(?:.*&)?app=686f63bc81cc2241b447ab39(?:&|$))(?:.*&)?numbers=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.nextsls.com/trace?app=686f63bc81cc2241b447ab39"
+  },
+  "yusuda": {
+    "displayName": "Yusuda",
+    "aliases": [
+      "YUSUDA",
+      "YUSUDA Global Logistics",
+      "裕速达",
+      "广州裕速达货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0b2338",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "yusuda"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -55898,7 +56163,17 @@ export const CARRIER_IDS = [
   "skif-cargo",
   "swissconnect",
   "veloblitz",
-  "yandex-delivery"
+  "yandex-delivery",
+  "begad",
+  "brics56",
+  "cargomini",
+  "extrans",
+  "ghapex",
+  "ruiqi",
+  "santos-e-vale",
+  "xinsu",
+  "yqs",
+  "yusuda"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

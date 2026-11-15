@@ -97212,6 +97212,14 @@
     ]
   },
   {
+    "input": "RQUS999999999980",
+    "carrier": "ruiqi",
+    "confidence": "high",
+    "candidates": [
+      "ruiqi"
+    ]
+  },
+  {
     "input": "RR000083193BO",
     "carrier": "unknown",
     "confidence": "none",

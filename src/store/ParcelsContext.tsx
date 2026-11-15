@@ -62,6 +62,30 @@ interface ParcelsState {
 
 const ParcelsContext = createContext<ParcelsState | null>(null);
 
+/** The later of two moments, either of which may be missing. */
+function later(a: string | undefined, b: string): string {
+  return a && Date.parse(a) >= Date.parse(b) ? a : b;
+}
+
+/**
+ * The list as read, each parcel seen as late as this device marked it (`marks`, by id); a mark the read has caught up
+ * with, or whose parcel the list no longer holds, goes.
+ */
+function seenAsHere(list: ParcelWithEvents[], marks: Map<string, string>): ParcelWithEvents[] {
+  if (!marks.size) return list;
+  const ids = new Set(list.map((parcel) => parcel.id));
+  for (const id of marks.keys()) if (!ids.has(id)) marks.delete(id);
+  return list.map((parcel) => {
+    const mark = marks.get(parcel.id);
+    if (!mark) return parcel;
+    if (parcel.seenAt && Date.parse(parcel.seenAt) >= Date.parse(mark)) {
+      marks.delete(parcel.id);
+      return parcel;
+    }
+    return { ...parcel, seenAt: mark };
+  });
+}
+
 export function ParcelsProvider({
   repo,
   children,
@@ -81,6 +105,8 @@ export function ParcelsProvider({
   const parcelsRef = useRef<ParcelWithEvents[]>(savedParcels ?? []);
   const revision = useRef(0);
   const loadSequence = useRef(0);
+  // The seenAt this device marked parcels with, until a read of the list brings one as late (`seenAsHere`).
+  const seenHere = useRef(new Map<string, string>());
   // Only the demo writes its own parcels, so only it reloads with the language.
   const { locale } = useI18n();
   const demoLanguage = repo.setLanguage ? locale : null;
@@ -109,7 +135,7 @@ export function ParcelsProvider({
     try {
       const list = await repo.list();
       if (isCurrent()) {
-        setParcels(list);
+        setParcels(seenAsHere(list, seenHere.current));
         setError(null);
         setAuthenticationRequired(false);
         setUsingCachedData(false);
@@ -150,7 +176,6 @@ export function ParcelsProvider({
     // synchronization this provider owns.
     if (demoLanguage) repo.setLanguage?.(demoLanguage);
     const unsubscribe = repo.subscribe?.(reload);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     void reload();
     return unsubscribe;
   }, [repo, reload, demoLanguage]);
@@ -317,20 +342,24 @@ export function ParcelsProvider({
     }
   }, [repo, rememberError]);
 
-  // Opening a parcel is no action to report on: a mark that could not be stored comes back with the next read.
+  // Opening a parcel is no action to report on: a mark that could not be stored comes back with the next read. Unlike
+  // the list's other changes, a mark lets a read of the list in flight land, so the open page shows the scans it brings,
+  // seen as late as this device marked the parcel.
   const markParcelSeen = useCallback(async (id: string) => {
     if (!repo.markSeen) return;
     const seen = (seenAt: string) => {
-      revision.current += 1;
-      if (mounted.current) setParcels((current) => current.map((parcel) => parcel.id === id ? { ...parcel, seenAt } : parcel));
+      seenHere.current.set(id, seenAt);
+      if (mounted.current) setParcels((current) => current.map((parcel) => parcel.id === id ? { ...parcel, seenAt: later(parcel.seenAt, seenAt) } : parcel));
     };
     const opened = parcelsRef.current.find((parcel) => parcel.id === id);
-    // What the reader is looking at is seen now: no later than its news, whatever this device's clock says.
-    if (opened?.newsAt) seen(opened.newsAt);
+    // What the reader is looking at is seen as of its news, whatever this device's clock says, and so the server stores it.
+    const news = opened?.newsAt;
+    if (news) seen(news);
     try {
-      seen(await repo.markSeen(id));
+      seen(await repo.markSeen(id, news));
     } catch {
       // Offline, or signed out: the next read of the list says what the server holds.
+      seenHere.current.delete(id);
     }
   }, [repo]);
 
@@ -345,7 +374,7 @@ export function ParcelsProvider({
       if (startedRevision !== revision.current) return changed;
       revision.current += 1;
       if (mounted.current) {
-        setParcels(list);
+        setParcels(seenAsHere(list, seenHere.current));
         setError(null);
         setAuthenticationRequired(false);
       }

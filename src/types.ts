@@ -201,8 +201,11 @@ export interface ParcelRepo {
   setNotificationsMuted?(id: string, muted: boolean): Promise<ParcelWithEvents>;
   /** Turns the account's delivery email off or back on for one parcel; only an account has it. */
   setEmailMuted?(id: string, muted: boolean): Promise<ParcelWithEvents>;
-  /** The parcel was opened: what it holds is no longer new. Answers the moment stored. */
-  markSeen?(id: string): Promise<string>;
+  /**
+   * The parcel was opened: what it holds is no longer new, as of the news its page showed (`newsAt`), or of now
+   * without one. Answers the moment stored.
+   */
+  markSeen?(id: string, newsAt?: string): Promise<string>;
   /** Soft-delete an active parcel so it can still be restored. */
   remove(id: string): Promise<void>;
   restore?(id: string): Promise<ParcelWithEvents>;

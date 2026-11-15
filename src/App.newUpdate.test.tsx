@@ -70,7 +70,7 @@ describe('the mark on a parcel with updates since it was last opened', () => {
     fireEvent.click(card('Tea'));
 
     expect(await screen.findByRole('dialog', { name: 'Tea' })).toBeInTheDocument();
-    await waitFor(() => expect(markSeen).toHaveBeenCalledWith('tea'));
+    await waitFor(() => expect(markSeen).toHaveBeenCalledWith('tea', tea.newsAt));
     // The dot stays in the card, switched off, so it can fade and the words slide back.
     await waitFor(() => expect(dot('tea')).not.toHaveAttribute('data-on'));
     expect(dot('tea')).toBeInTheDocument();
@@ -96,7 +96,7 @@ describe('the mark on a parcel with updates since it was last opened', () => {
 
     fireEvent.click(card('Tea'));
 
-    await waitFor(() => expect(markSeen).toHaveBeenCalledWith('tea'));
+    await waitFor(() => expect(markSeen).toHaveBeenCalledWith('tea', tea.newsAt));
   });
 
   it('leaves a parcel without news alone when it is opened', async () => {

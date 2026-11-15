@@ -594,7 +594,8 @@ and nothing typed is sent.
   that moment, in another stage or other words, does. A client shows the dot while `news_at` is later than
   `seen_at`, and marks the parcel someone opened as seen (`POST /api/packages/{id}/seen`) while
   its page is in front, as of the `news_at` the page showed, so a scan stored while it opened stays
-  new; this clears the dot on the account's other devices at their next read. A parcel
+  new; this clears the dot on the account's other devices at their next read. The device lays its
+  mark over each read of the list until one brings it, so a read already on its way still lands. A parcel
   starts as seen: when it is added, when its first answer arrives and when it joins an account
   (the `packages_start_seen` trigger). "Mark new updates" in Settings hides the dot and keeps
   the seen state; an account's choice is stored with its notification preferences, and a

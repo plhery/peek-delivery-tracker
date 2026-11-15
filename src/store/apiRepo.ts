@@ -12,6 +12,7 @@ import type {
   ApiQueueResponse,
   ApiRenamePackageRequest,
   ApiPackageNotificationRequest,
+  ApiPackageSeenRequest,
   ApiPackageSeenResponse,
   ApiPlannedTrackingEvent,
   ApiTrackingEventRow,
@@ -461,9 +462,10 @@ export function createApiRepo(
       return setAlerts(id, { emailMuted });
     },
 
-    async markSeen(id: string): Promise<string> {
+    async markSeen(id: string, newsAt?: string): Promise<string> {
+      const body: ApiPackageSeenRequest = { news_at: newsAt };
       const { seen_at: seenAt } = await request<ApiPackageSeenResponse>(
-        `/api/packages/${encodeURIComponent(id)}/seen`, auth, { method: 'POST' });
+        `/api/packages/${encodeURIComponent(id)}/seen`, auth, { method: 'POST', ...(newsAt ? { body: JSON.stringify(body) } : {}) });
       const cached = cachedParcels(storage, cacheKey);
       if (cached) saveCachedParcels(storage, cacheKey, cached.map((parcel) => parcel.id === id ? { ...parcel, seenAt } : parcel));
       return seenAt;

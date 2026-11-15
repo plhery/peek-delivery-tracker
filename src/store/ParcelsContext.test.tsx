@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { ApiAuthenticationError } from '../lib/apiClient';
@@ -50,9 +50,34 @@ describe('a parcel marked as seen', () => {
     await userEvent.setup().click(screen.getByRole('button', { name: 'Open' }));
     // No later than its news, whatever this device's clock says.
     expect(await screen.findByText('tea 2026-11-15T10:00:00.000Z')).toBeVisible();
-    expect(repo.markSeen).toHaveBeenCalledWith('tea');
+    // The server stores it as of that news too.
+    expect(repo.markSeen).toHaveBeenCalledWith('tea', '2026-11-15T10:00:00.000Z');
     answer('2026-11-15T10:20:00.000Z');
     expect(await screen.findByText('tea 2026-11-15T10:20:00.000Z')).toBeVisible();
+  });
+
+  it('lets a read of the list under way when the parcel is opened land, seen as late as it was marked', async () => {
+    const newer: ParcelWithEvents = { ...tea, newsAt: '2026-11-15T10:45:00.000Z' };
+    let read: (list: ParcelWithEvents[]) => void = () => undefined;
+    let reload: () => void = () => undefined;
+    const repo: ParcelRepo = {
+      ...service(vi.fn().mockResolvedValue('2026-11-15T10:00:00.999Z')),
+      list: vi.fn().mockResolvedValueOnce([tea]).mockImplementationOnce(() => new Promise((resolve) => { read = resolve; })),
+      subscribe: (listener) => { reload = listener; return () => undefined; },
+    };
+    function News() {
+      const { parcels, markParcelSeen } = useParcels();
+      return <><button onClick={() => void markParcelSeen('tea')}>Open</button>
+        <p>{parcels.map((parcel) => `${parcel.id} news ${parcel.newsAt} seen ${parcel.seenAt}`).join()}</p></>;
+    }
+    render(<ParcelsProvider repo={repo}><News /></ParcelsProvider>);
+    await screen.findByText('tea news 2026-11-15T10:00:00.000Z seen 2026-11-15T09:00:00.000Z');
+    act(() => { reload(); });
+    await userEvent.setup().click(screen.getByRole('button', { name: 'Open' }));
+    expect(await screen.findByText('tea news 2026-11-15T10:00:00.000Z seen 2026-11-15T10:00:00.999Z')).toBeVisible();
+    // The read began before the parcel was seen: it lands with the later scan, which is still news.
+    act(() => read([newer]));
+    expect(await screen.findByText('tea news 2026-11-15T10:45:00.000Z seen 2026-11-15T10:00:00.999Z')).toBeVisible();
   });
 
   it('says nothing when the server could not keep it, or where nothing keeps it', async () => {

@@ -64,6 +64,12 @@ describe('createApiRepo', () => {
 
       expect(fetch).toHaveBeenLastCalledWith(`/api/packages/${packageRow.id}/seen`, expect.objectContaining({ method: 'POST' }));
       expect(fetch.mock.calls[1][1]?.body).toBeUndefined();
+      // As of the news the page showed, when it showed one.
+      fetch.mockResolvedValueOnce(response({ seen_at: '2026-11-15T10:00:00.999+00:00' }));
+      await repo.markSeen!(packageRow.id, '2026-11-15T10:00:00+00:00');
+      expect(JSON.parse(String(fetch.mock.calls[2][1]?.body))).toEqual({ news_at: '2026-11-15T10:00:00+00:00' });
+      fetch.mockResolvedValueOnce(response({ seen_at: '2026-11-15T10:30:00+00:00' }));
+      await repo.markSeen!(packageRow.id);
       // The page opened again starts without the mark.
       expect(repo.cachedList!()?.[0]).toMatchObject({ newsAt: '2026-11-15T10:00:00+00:00', seenAt: '2026-11-15T10:30:00+00:00' });
     } finally {

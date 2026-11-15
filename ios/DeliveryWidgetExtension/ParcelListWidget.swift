@@ -358,45 +358,32 @@ private struct ParcelListSteps: View {
 
 /// Each parcel a pass cut from the app list's card, in its carrier's colours, the passes sharing the widget's height:
 /// one above the other in a small or large widget, and two columns in a medium one, the first parcel alone in the first
-/// of three. Where larger text leaves room for fewer, as many as fit, then a line for the others.
+/// of three. Where the widget or larger text leaves room for fewer, as many as fit, then a line for the others.
 private struct ParcelPasses: View {
     let parcels: [DeliveryWidgetParcel]
     let art: [UUID: DeliveryWidgetCardArt]
     let size: DeliveryWidgetList.Size
     let copy: ExtensionLocalizer
 
-    /// A pass's least height, which grows with the text: on three lines, or on two in a large widget.
-    @ScaledMetric(relativeTo: .subheadline) private var passHeight: CGFloat = 54
-    @ScaledMetric(relativeTo: .subheadline) private var widePassHeight: CGFloat = 44
-    @ScaledMetric(relativeTo: .caption) private var moreHeight: CGFloat = 16
-
     private let spacing: CGFloat = 6
 
     var body: some View {
-        GeometryReader { proxy in
-            passes(height: proxy.size.height)
+        ViewThatFits(in: .vertical) {
+            ForEach(Array(stride(from: parcels.count, through: 1, by: -1)), id: \.self) { shown in
+                passes(shown: shown)
+            }
         }
         .containerBackground(for: .widget) { DeliveryWidgetCardPage() }
         .widgetURL(DeliveryWidgetList.link)
     }
 
-    /// The passes in their columns, read down the first then the second, and how many are left out.
-    private func columns(height: CGFloat) -> (columns: [[DeliveryWidgetParcel]], more: Int) {
-        let least = size == .large ? widePassHeight : passHeight
-        let rows = { (room: CGFloat) in max(1, Int((room + spacing) / (least + spacing))) }
-        let medium = size == .medium
-        // A medium widget's first column has the fewer.
-        func split(_ shown: [DeliveryWidgetParcel]) -> [[DeliveryWidgetParcel]] {
-            medium && shown.count > 1 ? [Array(shown.prefix(shown.count / 2)), Array(shown.dropFirst(shown.count / 2))] : [shown]
-        }
-        let needed = medium ? parcels.count - parcels.count / 2 : parcels.count
-        if rows(height) >= needed { return (split(parcels), 0) }
-        let shown = Array(parcels.prefix(rows(height - moreHeight - spacing) * (medium ? 2 : 1)))
-        return (split(shown), parcels.count - shown.count)
-    }
-
-    private func passes(height: CGFloat) -> some View {
-        let (columns, more) = columns(height: height)
+    /// The first passes in their columns, read down the first then the second, a medium widget's first column having
+    /// the fewer; then the line for the others.
+    private func passes(shown count: Int) -> some View {
+        let shown = Array(parcels.prefix(count))
+        let columns = size == .medium && shown.count > 1
+            ? [Array(shown.prefix(shown.count / 2)), Array(shown.dropFirst(shown.count / 2))] : [shown]
+        let more = parcels.count - shown.count
         return VStack(alignment: .leading, spacing: spacing) {
             HStack(alignment: .top, spacing: spacing) {
                 ForEach(Array(columns.enumerated()), id: \.offset) { _, column in
@@ -441,7 +428,7 @@ private struct ParcelPass: View {
                     Text(day.openingLine(in: locale)).font(.caption2).foregroundStyle(ink).lineLimit(1)
                 }
             }
-            Spacer(minLength: 2)
+            Spacer(minLength: 0)
             if wide {
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
                     name
@@ -463,7 +450,8 @@ private struct ParcelPass: View {
             }
         }
         .padding(.horizontal, 10)
-        .padding(.vertical, 8)
+        // Two passes, one above the other, fit the content of the largest iPhones' small and medium widgets.
+        .padding(.vertical, 6)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(colored ? surface : Color.primary.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .ignore)

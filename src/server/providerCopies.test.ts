@@ -217,6 +217,23 @@ describe('providerCopies', () => {
       .toEqual(new Set(['u1']));
   });
 
+  it('leaves out a provider\'s copy of a scan the carrier dated by its day alone, at the start of that day in its words', () => {
+    // FedEx dates a pickup by its day alone; Track123 dates its copy at midnight on the town's clock.
+    const track123 = { universal_provider: 'Track123', stage: 'accepted', description: 'Picked up' };
+    const events = [
+      scan('c1', 'fedex', '2026-11-10T21:09:00Z', { stage: 'registered', time: '2026-11-10T15:09:00-06:00' }),
+      scan('c2', 'fedex', '2026-11-10T21:09:01Z', { stage: 'accepted', description: 'Picked up', local_time: '2026-11-10' }),
+      scan('u1', 'unknown', '2026-11-10T06:00:00Z', { ...track123, location: 'MOKENA, IL, US', local_time: '2026-11-10T00:00:00' }),
+      // Another day's start, another time of the day, other words or another stage stay.
+      scan('u2', 'unknown', '2026-11-11T06:00:00Z', { ...track123, local_time: '2026-11-11T00:00:00' }),
+      scan('u3', 'unknown', '2026-11-10T14:00:00Z', { ...track123, local_time: '2026-11-10T08:00:00' }),
+      scan('u4', 'unknown', '2026-11-10T06:00:00Z', { ...track123, description: 'Departed', local_time: '2026-11-10T00:00:00' }),
+      scan('u5', 'unknown', '2026-11-10T06:00:00Z', { ...track123, stage: 'in_transit', local_time: '2026-11-10T00:00:00' }),
+    ];
+    const row = { carrier_data: { routing: { confirmed_carrier: 'fedex' } }, tracking_events: events };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c2'])]]));
+  });
+
   it('leaves out a provider\'s copy whole hours from a carrier\'s scan to its second, in any stage and words', () => {
     // ParcelsApp reads a Japanese scan an hour off, as another stage, with a Chinese line added.
     const events = [

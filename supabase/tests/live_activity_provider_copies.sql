@@ -100,6 +100,25 @@ do $$ begin
     raise exception 'Clients can run hidden_provider_copy';
   end if;
 end; $$;
+-- A copy of a scan dated by its day alone, at the start of that day on the copy's wall clock, in its words and stage.
+update public.tracking_events set occurred_at = '2026-10-08T21:09:01Z', stage = 'accepted', description = 'Picked up',
+  raw_data = '{"local_time": "2026-10-08"}' where id = '97000000-0000-0000-0000-000000000006';
+update public.tracking_events set occurred_at = '2026-10-08T05:00:00Z', stage = 'accepted', description = 'Picked  up',
+  raw_data = '{"universal_provider": "Track123", "local_time": "2026-10-08T00:00:00"}'
+where id = '97000000-0000-0000-0000-000000000007';
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A copy at the start of a scan''s day, the day the scan alone gives, was not hidden';
+  end if;
+end; $$;
+update public.tracking_events set occurred_at = '2026-10-08T12:00:00Z',
+  raw_data = '{"universal_provider": "Track123", "local_time": "2026-10-08T07:00:00"}'
+where id = '97000000-0000-0000-0000-000000000007';
+do $$ begin
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A row at another time of the day a scan alone gives was hidden';
+  end if;
+end; $$;
 -- A provider reading the carrier's scans a zone away tells every scan of that minute on the same clock: its other
 -- rows of the minute of a copy only whole hours from the carrier's scans are copies too, in any stage.
 update public.tracking_events set occurred_at = '2026-10-08T08:40:00Z', stage = 'in_transit',

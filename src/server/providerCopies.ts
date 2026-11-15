@@ -30,7 +30,10 @@
  * hours away up to 14 h, in its words and stage (or none), or at its second
  * when that is not a minute's first, is left out, and so is a copy at the wall
  * clock read as UTC, to the second, in its stage (ParcelsApp's reworded
- * MailAmericas scans). A provider's step the carrier never shows, such as
+ * MailAmericas scans). Of a scan dated by its day alone, with no time of day,
+ * a copy in its words and stage (or none) at the start of that day on the
+ * copy's own wall clock is left out: the provider knew the day alone too
+ * (Track123's copy of FedEx's pickup). A provider's step the carrier never shows, such as
  * another leg's scans, stays.
  * Push leaves the copies unannounced too (push.ts), and the Live Activity
  * queue tells them with the same rules in SQL (`public.hidden_provider_copy`):
@@ -134,6 +137,27 @@ function wallClock(event: JsonObject): number {
   return clockDay(event) ? DateTime.fromISO(String(event.local_time), { zone: 'utc' }).toMillis() : Number.NaN;
 }
 
+function rawField(event: JsonObject, key: string): string {
+  const value = event[key] ?? (isRecord(event.raw_data) ? event.raw_data[key] : undefined);
+  return typeof value === 'string' ? value : '';
+}
+
+/** The day of a scan its carrier dated by the day alone, with no time of day (FedEx's pickup); null for any other scan. */
+function dayAlone(event: JsonObject): string | null {
+  const day = rawField(event, 'local_time');
+  return rawField(event, 'time').trim() === '' && /^\d{4}-\d{2}-\d{2}$/.test(day) && DateTime.fromISO(day).isValid ? day : null;
+}
+
+/**
+ * Whether `copy` tells a scan its carrier dated by its day alone, in its words and stage (or none), at the start of
+ * that day on the copy's own wall clock: the provider knew the day alone too (Track123's copy of FedEx's pickup).
+ */
+function startsScanDay(copy: JsonObject, scan: JsonObject): boolean {
+  const day = dayAlone(scan);
+  return day !== null && [`${day}T00:00`, `${day}T00:00:00`].includes(rawField(copy, 'local_time'))
+    && stagesAgree(copy, scan) && wording(scan) !== '' && wording(copy) === wording(scan);
+}
+
 /** A time to its second. */
 function second(at: number): number {
   return Math.floor(at / SECOND_MS) * SECOND_MS;
@@ -180,7 +204,8 @@ function movedOn(copy: JsonObject, scan: JsonObject): boolean {
  * words at its place, or whole hours from it, or whole hours from it to the second when that second is not a minute's first (a
  * provider reads the carrier's seconds on another clock, in its own words and stage). A scan dated
  * by its day is repeated at its wall clock in some zone: in its stage and words, or at that second
- * when it is not a minute's first, or at the wall clock itself, read as UTC, to the second, in its stage.
+ * when it is not a minute's first, or at the wall clock itself, read as UTC, to the second, in its stage. A scan
+ * dated by its day alone is repeated in its words and stage at the start of that day on the copy's wall clock.
  */
 function copies(copy: JsonObject, scan: JsonObject): boolean {
   const clock = wallClock(scan);
@@ -192,6 +217,7 @@ function copies(copy: JsonObject, scan: JsonObject): boolean {
       || (clock % MINUTE_MS !== 0 && seconds % QUARTER_HOUR_MS === 0 && Math.abs(seconds) <= MAX_SHIFT_MS)
       || (seconds === 0 && copy.stage === scan.stage);
   }
+  if (startsScanDay(copy, scan)) return true;
   const minutes = Math.abs(Math.floor(instant(copy) / MINUTE_MS) - Math.floor(instant(scan) / MINUTE_MS)) * MINUTE_MS;
   if (minutes === 0) return true;
   if (second(instant(scan)) % MINUTE_MS !== 0 && wholeHours(second(instant(copy)) - second(instant(scan)))) return true;

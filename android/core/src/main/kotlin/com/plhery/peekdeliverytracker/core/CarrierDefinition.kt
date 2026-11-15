@@ -267,7 +267,7 @@ sealed interface NonTrackingShape {
     /** A character missing from a number, or one too many. */
     enum class Change { Missing, Extra }
 
-    /** The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu. */
+    /** The shop by its id in `shared/reading.json`: amazon, aliexpress, mercadolibre, shein, shopee or temu. */
     data class Order(val shop: String) : NonTrackingShape
 
     data object Container : NonTrackingShape
@@ -280,8 +280,15 @@ sealed interface NonTrackingShape {
     companion object {
         /** The shop by the name the app writes. */
         val shopNames = mapOf(
-            "amazon" to "Amazon", "aliexpress" to "AliExpress", "shein" to "Shein", "shopee" to "Shopee", "temu" to "Temu",
+            "amazon" to "Amazon", "aliexpress" to "AliExpress", "mercadolibre" to "Mercado Libre", "shein" to "Shein",
+            "shopee" to "Shopee", "temu" to "Temu",
         )
+
+        /** The names a shop goes by in one language: Mercado Libre is Mercado Livre in Brazil. */
+        private val localShopNames = mapOf(AppLanguage.PtBr to mapOf("mercadolibre" to "Mercado Livre"))
+
+        /** A shop by the name the app writes in this language (`shopName` in src/peek/lookup/reading.ts). */
+        fun shopName(shop: String, language: AppLanguage): String = localShopNames[language]?.get(shop) ?: shopNames[shop] ?: shop
     }
 }
 

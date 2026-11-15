@@ -758,6 +758,13 @@ class ParcelLogicTests {
         // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
         assertEquals(NonTrackingShape.Order(shop = "amazon"), CarrierCatalog.nonTrackingShape("30245719832294617"))
         assertEquals(NonTrackingShape.Order(shop = "aliexpress"), CarrierCatalog.nonTrackingShape("3041234567890123"))
+        // Mercado Libre's order and pack ids: 16 digits that start 2000, named Mercado Livre in Brazil's Portuguese.
+        assertEquals(NonTrackingShape.Order(shop = "mercadolibre"), CarrierCatalog.nonTrackingShape("2000123456789012"))
+        assertNull(CarrierCatalog.nonTrackingShape("200012345678901"))
+        assertNull(CarrierCatalog.nonTrackingShape("2001123456789012"))
+        assertEquals("Mercado Libre", NonTrackingShape.shopName("mercadolibre", AppLanguage.Es))
+        assertEquals("Mercado Livre", NonTrackingShape.shopName("mercadolibre", AppLanguage.PtBr))
+        assertEquals("Amazon", NonTrackingShape.shopName("amazon", AppLanguage.PtBr))
         assertEquals(NonTrackingShape.Order(shop = "temu"), CarrierCatalog.nonTrackingShape("PO00012345678901234567"))
         assertEquals(NonTrackingShape.Short, CarrierCatalog.nonTrackingShape("10293"))
         assertNull(CarrierCatalog.nonTrackingShape("99945719832294617"))

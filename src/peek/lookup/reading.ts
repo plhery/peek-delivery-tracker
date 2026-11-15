@@ -48,10 +48,18 @@ const orderShop = (text: string) => ORDER_NUMBERS.find(({ pattern }) => pattern.
 const STORED_ORDER_NUMBERS = rules.storedOrders.map(({ shop, pattern }) => ({ shop: shop as StoredOrderShop, pattern: new RegExp(pattern) }));
 
 /** A shop whose order numbers a parcel page tells from tracking numbers once no carrier answered for one. */
-export type StoredOrderShop = OrderShop | 'aliexpress';
+export type StoredOrderShop = OrderShop | 'aliexpress' | 'mercadolibre';
 
 /** Shops by the name a page writes. */
-export const SHOP_NAMES: Record<StoredOrderShop, string> = { amazon: 'Amazon', aliexpress: 'AliExpress', shein: 'Shein', shopee: 'Shopee', temu: 'Temu' };
+export const SHOP_NAMES: Record<StoredOrderShop, string> = {
+  amazon: 'Amazon', aliexpress: 'AliExpress', mercadolibre: 'Mercado Libre', shein: 'Shein', shopee: 'Shopee', temu: 'Temu',
+};
+
+/** The names a shop goes by in one language: Mercado Libre is Mercado Livre in Brazil. */
+const LOCAL_SHOP_NAMES: Partial<Record<string, Partial<Record<StoredOrderShop, string>>>> = { 'pt-br': { mercadolibre: 'Mercado Livre' } };
+
+/** A shop by the name a page in this language writes. */
+export const shopName = (shop: StoredOrderShop, locale?: string) => (locale && LOCAL_SHOP_NAMES[locale]?.[shop]) || SHOP_NAMES[shop];
 
 /** What a looked-up number no carrier answered for looks like instead of a tracking number. */
 export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'container' } | MistypedNumber | { kind: 'short' };
@@ -159,7 +167,7 @@ export function nonTrackingShape(normalized: string): NonTrackingShape | null {
 
 /** What a parcel says about its number's shape, where it would say that no carrier knows the number yet. */
 export function nonTrackingNote(shape: NonTrackingShape, t: Translate, locale?: string): string {
-  if (shape.kind === 'order') return t('link.notTracking.order', { shop: SHOP_NAMES[shape.shop] });
+  if (shape.kind === 'order') return t('link.notTracking.order', { shop: shopName(shape.shop, locale) });
   if (shape.kind === 'mistyped') {
     return t(shape.change === 'missing' ? 'link.notTracking.missing' : 'link.notTracking.extra', { carrier: carrierInfo(shape.carrier, locale).name });
   }

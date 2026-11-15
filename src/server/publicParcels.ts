@@ -22,7 +22,7 @@ import { emailConfigured } from './email/config';
 import { withEventPlaces } from './eventPlaces';
 import { numberHint, parcelNumberMask, WORDED_CARRIER_DATA } from './hiddenNumbers';
 import { type AllowanceHolder, captureOverallAllowance, logOperationalEvent } from './observability';
-import { viewerScans, viewerStatusText } from './privateDetails';
+import { privateValues, viewerScans, viewerStatusText } from './privateDetails';
 import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
 import type { PublicAllowance, StoredParcelLink, SupabaseServiceClient } from './supabase';
@@ -426,8 +426,10 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * steps, status line and worded carrier details mask them (`parcelNumberMask`),
  * as a link's alerts do.
  *
- * Nor does anyone but the owner read who signed, a code that collects the
- * parcel or the number of its door (`viewerScan`).
+ * Nor does anyone but the owner read the recipient's details: a delivery
+ * reads "Delivered", and a scan, place or status line that names who signed,
+ * the recipient, a code that collects the parcel or the number of its door is
+ * left out (`viewerScan`).
  */
 export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelAlerts): ApiPublicParcelResponse {
   const { link } = found;
@@ -463,7 +465,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     ...(typeof stored.day === 'string' ? { day: stored.day } : {}),
     place: (isRecord(stored.place) ? stored.place : null) as ApiPlannedTrackingEvent['place'],
   });
-  const shown = <T extends ApiTrackingEventRow | ApiPlannedTrackingEvent>(scans: T[]): T[] => owner ? scans : viewerScans(scans);
+  const recipient = privateValues(carrierData);
+  const shown = <T extends ApiTrackingEventRow | ApiPlannedTrackingEvent>(scans: T[]): T[] => owner ? scans : viewerScans(scans, recipient);
   const planned = shown(storedPlanned.map(step));
   const written = shown(storedWritten.map(step));
   const viewed = shown(events);
@@ -503,7 +506,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       created_at: later(row.created_at, link.created_at),
       expected_delivery: optionalText(row.expected_delivery),
       // The carrier's status line can name the place the newest scan was made.
-      last_status_text: wrapped ? null : owner ? toldText(row.last_status_text) : viewerStatusText(toldText(row.last_status_text)),
+      last_status_text: wrapped ? null : owner ? toldText(row.last_status_text)
+        : viewerStatusText(toldText(row.last_status_text), row.current_stage, recipient),
       last_synced_at: optionalText(row.last_synced_at),
       sync_status: String(row.sync_status) as ApiSyncStatus,
       sync_error: typeof row.sync_error === 'string' && SYNC_ERROR_CODE.test(row.sync_error) ? row.sync_error : null,

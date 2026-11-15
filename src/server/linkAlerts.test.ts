@@ -428,6 +428,10 @@ describe('what an alert says', () => {
     pending([row({ owner: true, location: 'Door number 12, Example Street' })]);
     await alerts.dispatch();
     expect(send.mock.calls[1]![1]?.body).toBe('One step closer\nDoor number 12, Example Street');
+    // A delivery's place can be the recipient's door: a viewer is told none.
+    pending([row({ stage: 'delivered', package_stage: 'delivered', event_id: 'event-2' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[2]![1]?.body).not.toContain('Example Town');
   });
 
   it('tells the owner of a gift lookup like the owner of any parcel', () => {

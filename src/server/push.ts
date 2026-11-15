@@ -1024,8 +1024,8 @@ const FINISHED_STAGES = new Set(['delivered', 'returned']);
  * - A gift on its way is announced as one: without the place of a scan, and
  *   without the scans its page leaves out.
  * - A link that hides its number masks the parcel's numbers in the scan's
- *   place, as its page does (`viewerScan`), and no viewer is told a place
- *   that names a signatory, a code or a door.
+ *   place, as its page does (`viewerScan`), and no viewer is told where a
+ *   parcel was delivered or a place that names a signatory, a code or a door.
  * - An alert on a browser or phone the parcel's owner gets account
  *   notifications on is passed over, so nobody is told twice.
  * - An alert ends with the journey, when the push service says its
@@ -1149,14 +1149,15 @@ export class ParcelLinkAlertService {
   }
 
   /**
-   * The scan as the alert may tell it: for a viewer, without a place that names a signatory, a code or a door, as
-   * the link's page leaves it out (`hasPrivateDeliveryDetails`); for a viewer of a link that hides its number, its
+   * The scan as the alert may tell it: for a viewer, without a delivery's place or a place that names a signatory,
+   * a code or a door (`hasPrivateDeliveryDetails`); for a viewer of a link that hides its number, its
    * place with the parcel's numbers masked as its page masks them (`parcelNumberMask`), or without its place when
    * they could not be read.
    */
   viewerScan(row: JsonObject, hiding: ReadonlyMap<string, JsonObject> | null): JsonObject {
     if (row.owner === true || typeof row.location !== 'string') return row;
-    if (hiding === null || hasPrivateDeliveryDetails(row.location)) return { ...row, location: null };
+    // A delivery's place can be the recipient's door; the page names it only when it names nobody's details.
+    if (hiding === null || row.stage === 'delivered' || hasPrivateDeliveryDetails(row.location)) return { ...row, location: null };
     const parcel = hiding.get(stringField(row, 'link_id'));
     if (!parcel) return row;
     const events = Array.isArray(parcel.tracking_events) ? parcel.tracking_events.filter(isRecord) : [];

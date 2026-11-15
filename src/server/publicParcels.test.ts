@@ -220,7 +220,7 @@ describe('what a link shows', () => {
     expect(JSON.stringify(shown([added]))).not.toContain('provider_event_id');
   });
 
-  it('shows only its owner who signed, a code that collects the parcel and the number of its door', () => {
+  it('shows only its owner who took the parcel, the recipient\'s details, a code that collects it and the number of its door', () => {
     const scan = (id: string, stage: string, description: string, location: string | null = 'Example Town') => ({
       id, package_id: 'parcel', stage, description, location, occurred_at: `2026-10-02T0${id.length}:00:00+00:00`,
       place: location ? { latitude: 46.9, longitude: 7.4, precision: 'city', country: 'CH', name: location } : null,
@@ -230,11 +230,13 @@ describe('what a link shows', () => {
       scan('bb', 'out_for_delivery', 'Out for delivery, PIN: 4711'),
       scan('ccc', 'delivered', 'Delivered, signed by A. Example'),
       scan('dddd', 'delivered', 'Delivered', 'Door number 12, Example Street'),
+      scan('eeeee', 'failed_attempt', 'Ann Example was not at home'),
+      scan('ffffff', 'delivered', 'DELIVERED TO RECEPTION', '7 Sample Road, Example Town'),
     ];
     const shown = (link: Record<string, unknown>) => publicParcelResponse({
       link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, show_number: true, ...link },
       package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'delivered',
-        created_at: '2026-10-02T08:00:00Z', carrier_data: {}, tracking_events: events,
+        created_at: '2026-10-02T08:00:00Z', carrier_data: { receiver_name: 'Ann Example', receiver_address: '7 Sample Road' }, tracking_events: events,
         last_status_text: 'Delivered, signed by A. Example',
         planned_events: [{ stage: 'out_for_delivery', description: 'Collect with code de retrait 0815', occurred_at: '2026-10-03T08:00:00Z' }] },
     }, alerts).package;
@@ -243,11 +245,14 @@ describe('what a link shows', () => {
       ['a', 'Sorted', 'Example Town'],
       ['ccc', 'Delivered', 'Example Town'],
       ['dddd', 'Delivered', null],
+      ['ffffff', 'Delivered', null],
     ]);
     expect(viewer.tracking_events.find(({ id }) => id === 'dddd')?.place).toBeNull();
     expect(viewer.last_status_text).toBeNull();
     expect(viewer).not.toHaveProperty('planned_events');
-    for (const secret of ['4711', 'A. Example', 'Door number', '0815']) expect(JSON.stringify(viewer)).not.toContain(secret);
+    for (const secret of ['4711', 'A. Example', 'Door number', '0815', 'Ann Example', 'Sample Road', 'RECEPTION']) {
+      expect(JSON.stringify(viewer)).not.toContain(secret);
+    }
     // Its owner reads every scan as the carrier wrote it.
     const owner = shown({ owner: true });
     expect(owner.tracking_events.map(({ description }) => description)).toEqual(events.map(({ description }) => description));
@@ -438,7 +443,8 @@ describe('what a link shows', () => {
       for (const link of [{ owner: true }, { owner: false, show_number: true }, { owner: false, gift: true, show_number: true }]) {
         const shown = answer(link, 'delivered');
         for (const number of numbers) expect(JSON.stringify(shown)).toContain(number);
-        expect(shown.package.last_status_text).toBe(handover);
+        // A viewer reads no status line of a delivered parcel, since a carrier words it with who took it.
+        expect(shown.package.last_status_text).toBe(link.owner ? handover : null);
         expect(shown.package.tracking_events.at(-1)?.description).toBe(handover);
       }
     });
@@ -630,10 +636,10 @@ describe('a gift on its way', () => {
     expect(answer.link).toMatchObject({ gift: true, numberShown: true, canKeep: true });
     expect(answer.package.tracking_number).toBe('TESTGIFT23406789');
     expect(answer.package.carrier_data).toMatchObject({ sender_name: 'Example Shop', weight_kg: 2, pickup_point: 'Example Kiosk' });
-    expect(answer.package.last_status_text).toBe('Processed in Hamburg');
+    expect(answer.package.last_status_text).toBeNull();
     expect(told(answer.package.tracking_events)).toEqual([
       kept('registered', 'Hamburg, DE', 'city Hamburg'), kept('accepted', 'Hamburg, DE', 'city Hamburg'),
-      kept('in_transit', 'Leipzig, DE', 'city Leipzig'), kept('delivered', 'Zürich, CH', 'city Zürich'),
+      kept('in_transit', 'Leipzig, DE', 'city Leipzig'), 'delivered: Delivered @ Zürich, CH (city Zürich)',
     ]);
     // A delivered gift whose link hides the number still hides it.
     expect(publicParcelResponse(stored(crossing(), { current_stage: 'delivered' }, { show_number: false }), alerts).link)
@@ -660,7 +666,7 @@ describe('a gift on its way', () => {
   });
 
   it('names the carrier writing the timeline ahead, and its steps whose time has passed, on any link but a wrapped gift', () => {
-    const script = [{ time: '2026-10-04T08:00:00+08:00', description: 'Delivered, waybill TESTGIFT23406789', stage: 'delivered' }];
+    const script = [{ time: '2026-10-04T08:00:00+08:00', description: 'Out for delivery, waybill TESTGIFT23406789', stage: 'out_for_delivery' }];
     const ahead = { current_stage: 'in_transit', carrier_data: { routing: {
       planned: { number: 'TESTGIFT23406789', carriers: { gzyl: script } },
       written_ahead: { number: 'TESTGIFT23406789', carriers: { gzyl: ['2026-10-04T08:00:00+08:00'] } } } } };
@@ -669,13 +675,13 @@ describe('a gift on its way', () => {
     expect(publicParcelResponse(gift, alerts).package).not.toHaveProperty('written_ahead_events');
     const open = publicParcelResponse({ ...gift, link: { ...gift.link, gift: false } }, alerts).package;
     expect(open).toMatchObject({ written_ahead_by: 'gzyl',
-      written_ahead_events: [{ description: 'Delivered, waybill TESTGIFT23406789', stage: 'delivered', occurred_at: '2026-10-04T00:00:00.000Z' }] });
+      written_ahead_events: [{ description: 'Out for delivery, waybill TESTGIFT23406789', stage: 'out_for_delivery', occurred_at: '2026-10-04T00:00:00.000Z' }] });
     // Apart from the scans, which it adds nothing to.
     expect(open.tracking_events.map((event) => event.stage)).toEqual(['accepted', 'registered']);
     expect(open).not.toHaveProperty('planned_events');
     // Whoever is not shown the number does not read it in a written step either.
     const hidden = publicParcelResponse({ ...gift, link: { ...gift.link, gift: false, show_number: false } }, alerts).package;
-    expect(hidden.written_ahead_events?.[0]?.description).toBe('Delivered, waybill ••• 6789');
+    expect(hidden.written_ahead_events?.[0]?.description).toBe('Out for delivery, waybill ••• 6789');
     expect(publicParcelResponse({ ...gift, link: { ...gift.link, owner: true } }, alerts).package.written_ahead_by).toBe('gzyl');
     expect(JSON.stringify(publicParcelResponse({ ...gift, link: { ...gift.link, owner: true } }, alerts))).not.toContain('2026-10-04T08');
   });

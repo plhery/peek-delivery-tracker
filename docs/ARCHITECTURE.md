@@ -144,10 +144,13 @@ Key server modules:
     keeps, and those the words name after "tracking no", "waybill" or "AWB" or as a web
     address's parameter, in any of the parcel's scans, steps or worded fields
     (`hiddenNumbers.ts`); a link's alerts mask the scan's place alike. A number needs six
-    characters and a digit to count. A viewer reads no signatory, collection code, PIN or
-    door number either (the scraper's `hasPrivateDeliveryDetails`): a delivery that names one
-    reads "Delivered", another scan that does is left out, and so are a place and a status
-    line that do (`privateDetails.ts`). The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
+    characters and a digit to count. A viewer reads no signatory, recipient, address,
+    collection code, PIN or door number either: every delivery reads "Delivered", since carriers
+    word it with who took the parcel, and a delivered parcel has no status line. Another scan
+    that names one is left out, and so are a place and a status line that do. A text names one
+    when the scraper's `hasPrivateDeliveryDetails` matches it or it contains the signatory,
+    recipient name, address or pickup code the parcel's carrier data holds (`privateDetails.ts`).
+    A viewer's delivery alert names no place. The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
     catalog's `trackingSearchUrl`), or is left out when the carrier has none.
   - A parcel with no new scan for four days links the help page of the carrier that has it,
     else of the one it is filed under (the catalog's `helpUrl`; no link when neither has

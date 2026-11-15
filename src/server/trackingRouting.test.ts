@@ -1914,7 +1914,7 @@ describe('persistent tracking routing', () => {
     universal.mockImplementation(async (source: string) => {
       throw source === 'Ship24' ? new NotFoundError(source)
         : source === '17TRACK' ? new UpstreamHttpError(source, 502)
-          : new IndeterminateError(source, `${source} has no usable shipment history`);
+          : new NoHistoryError(source, `${source} has no usable shipment history`);
     });
     await expect(router.fetch(parcel(), false)).rejects.toMatchObject({ routing: { failures: {
       Ship24: { kind: 'not_found' },
@@ -3614,7 +3614,7 @@ describe('coverage-based provider order', () => {
   it('asks the providers with a carrier\'s fullest history first', async () => {
     const { router, direct, universal } = setup();
     direct.mockRejectedValue(new Error('carrier down'));
-    universal.mockRejectedValueOnce(new IndeterminateError('17TRACK', 'no history'));
+    universal.mockRejectedValueOnce(new NoHistoryError('17TRACK', 'no history'));
     await router.fetch(parcel({ carrier: 'usps' }), false);
     // 17TRACK had USPS's full history and ParcelsApp part of it; Ship24, which had none, comes after them.
     expect(sources(universal)).toEqual(['17TRACK', 'ParcelsApp']);
@@ -3635,8 +3635,8 @@ describe('coverage-based provider order', () => {
     expect(sources(universal)).toEqual(['ParcelsApp']);
     expect(moved.result.routing).toMatchObject({ preferred_provider: 'ParcelsApp' });
     // Fuller providers without this parcel wait out their backoff while the parcel stays where it was.
-    universal.mockClear().mockRejectedValueOnce(new IndeterminateError('ParcelsApp', 'no history'))
-      .mockRejectedValueOnce(new IndeterminateError('17TRACK', 'no history'));
+    universal.mockClear().mockRejectedValueOnce(new NoHistoryError('ParcelsApp', 'no history'))
+      .mockRejectedValueOnce(new NoHistoryError('17TRACK', 'no history'));
     const kept = await router.fetch(pinned(), false);
     expect(sources(universal)).toEqual(['ParcelsApp', '17TRACK', 'Ship24']);
     expect(kept.result.routing).toMatchObject({ preferred_provider: 'Ship24', failures: {
@@ -3663,7 +3663,7 @@ describe('coverage-based provider order', () => {
       tier: (source) => source === '17TRACK' ? 'full' : 'empty', rank: (source) => source === '17TRACK' ? 0 : 1 });
     const { router, direct, universal } = setup();
     direct.mockRejectedValue(new Error('carrier down'));
-    universal.mockRejectedValueOnce(new IndeterminateError('17TRACK', 'no history'));
+    universal.mockRejectedValueOnce(new NoHistoryError('17TRACK', 'no history'));
     await router.fetch(parcel({ carrier: 'usps' }), false);
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('coverage_contradicted', expect.objectContaining({ provider: 'ParcelsApp', category: 'history' }));
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('coverage_contradicted', expect.objectContaining({ provider: '17TRACK', category: 'no_history' }));
@@ -3671,7 +3671,7 @@ describe('coverage-based provider order', () => {
     plan.mockRestore();
     // Without evidence for the carrier, nothing contradicts it.
     const other = setup();
-    other.universal.mockRejectedValueOnce(new IndeterminateError('ParcelsApp', 'no history'));
+    other.universal.mockRejectedValueOnce(new NoHistoryError('ParcelsApp', 'no history'));
     await other.router.fetch(parcel(), false);
     expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('coverage_contradicted', expect.anything());
   });

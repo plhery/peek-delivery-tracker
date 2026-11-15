@@ -401,18 +401,19 @@ export function routingFailure(error: unknown): { kind: RoutingFailureKind; retr
   return { kind: error instanceof TypeError || error instanceof RangeError || error instanceof SyntaxError ? 'schema' : 'transport', retryAfterMs: 0 };
 }
 /**
- * An adapter's own inconclusive verdict (17TRACK code 400, ParcelsApp NO_DATA,
- * Postal Ninja's empty lookup, a national post's miss) describes the number; an
- * HTTP 5xx describes the provider.
+ * An adapter's own verdict that it holds no history for the number (17TRACK code 400, ParcelsApp NO_DATA,
+ * Postal Ninja's empty lookup, a national post's miss) describes the number. A provider's other inconclusive
+ * answers (busy, a guest request refused, a quota spent, the carrier it asks unavailable), like an HTTP 5xx,
+ * describe the provider: it did not answer.
  */
 export function answeredWithoutHistory(error: unknown, carrier = false): boolean {
   let current = error;
   for (let i = 0; i < 8 && current instanceof Error; i++, current = current.cause) {
-    // A carrier's other inconclusive answers (an outage page, contradictory
-    // scans) describe the carrier; only a parcel it lists without scans, or
-    // one its tracking does not know yet, is an answer.
-    if (current instanceof CarrierError) return current instanceof (carrier ? NoHistoryError : IndeterminateError)
-      || (current instanceof IndeterminateError && UNKNOWN_ITEM_REASONS.has(current.reason ?? ''));
+    // Only a parcel the source lists without scans, or one its tracking does not know yet, is an answer;
+    // a provider's history of undated rows alone is one too.
+    if (current instanceof CarrierError) return current instanceof NoHistoryError
+      || (current instanceof IndeterminateError && (UNKNOWN_ITEM_REASONS.has(current.reason ?? '')
+        || (!carrier && current.reason === 'undated_history')));
   }
   return false;
 }
@@ -1896,11 +1897,11 @@ export class TrackingRouter {
         if (!usable(result)) throw new TypeError('No usable universal progress');
         if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           report('foreign_history_rejected', source);
-          throw new IndeterminateError(source, `${source} returned an older parcel for this number`);
+          throw new NoHistoryError(source, `${source} returned an older parcel for this number`);
         }
         if (await strangersHistory(result)) {
           report('foreign_history_rejected', source, 'refused_number');
-          throw new IndeterminateError(source, `${source} returned a parcel of a carrier that refuses this number`);
+          throw new NoHistoryError(source, `${source} returned a parcel of a carrier that refuses this number`);
         }
         const previousFailure = state.failures[source];
         if (previousFailure) report('provider_recovered', source);

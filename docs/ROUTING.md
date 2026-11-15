@@ -209,7 +209,8 @@ count as missed checks and keep the time of the last successful check. Checks th
 wait for cooldowns leave it unchanged. Provider failures remain in the audit and health
 evidence while the chip is hidden. When every source answered without a scan (not found, listed
 without history, or, for a source other than the parcel's own carrier, refusing the number as none it
-issues) for a parcel that has scans, nothing failed: the chip says no new scans came and the
+issues) for a parcel that has scans, nothing failed: a provider that was busy, refused the request, spent its
+quota or could not reach the carrier did not answer. Then the chip says no new scans came and the
 found ones are kept (`carrier:no_new_scans`), and it does not appear at all once the carrier the parcel
 was handed to lists it (`delivery_probe.listed`), since the card names that carrier. A parcel without scans whose own carrier refuses the
 number, such as one chosen by hand that issues no number of that shape, shows the refusal

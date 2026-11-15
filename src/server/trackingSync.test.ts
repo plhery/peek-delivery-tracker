@@ -7600,7 +7600,7 @@ describe('TrackingSyncService', () => {
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
     };
     const noHistory = (source: string) => source === 'Ship24' ? new NotFoundError(source)
-      : new IndeterminateError(source, `${source} has no usable shipment history`);
+      : new NoHistoryError(source, `${source} has no usable shipment history`);
     const adapter = { fetch: vi.fn(), fetchUniversal: vi.fn(async (source: string) => { throw noHistory(source); }) };
     const parcel = { id: 'not-handed-over', carrier: 'unknown', tracking_number: 'TEST1234', current_stage: 'pending' };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));

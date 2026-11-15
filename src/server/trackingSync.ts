@@ -1,7 +1,7 @@
 import 'server-only';
 import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NEW_SCANS, PLACEHOLDER_NUMBER, selfPacedRefusal, trackingFailureCode } from './trackingFailure';
 import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
-import { CarrierError, carrierErrorKind, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
+import { CarrierError, carrierErrorKind, IndeterminateError, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
@@ -57,7 +57,7 @@ import {
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import { UNIVERSAL_SOURCES, universalPlan, type UniversalSource } from 'universal-parcel-scraper';
-import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, minimumInterval, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, minimumInterval, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, NUMBER_UNKNOWN_AFTER_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
@@ -451,6 +451,14 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
   const interval = parcel.sync_status === 'error'
     ? refresh.afterFailureMinutes * 60_000 : refresh.minMinutes * 60_000;
   return Math.max(after, lastChecked + interval);
+}
+
+/** Whether the first carrier error in the chain is an inconclusive answer, such as a national post's miss. */
+function inconclusiveAnswer(error: unknown): boolean {
+  for (let current = error, i = 0; i < 8 && current instanceof Error; i++, current = current.cause) {
+    if (current instanceof CarrierError) return current instanceof IndeterminateError;
+  }
+  return false;
 }
 
 /** The newest carrier event; null when none is known. */
@@ -3486,7 +3494,7 @@ export class TrackingSyncService {
             // was not asked, so it counts no miss, and the next check asks it.
             if (previousProbe) origin.delivery_probe = { ...previousProbe, carrier: candidate.carrier, number: candidate.number };
             else delete origin.delivery_probe;
-          } else if (!isUnannouncedTrackingError(error) && !answeredWithoutHistory(error)) {
+          } else if (!isUnannouncedTrackingError(error) && !inconclusiveAnswer(error)) {
             // The partner's service failed. One that does not know the item yet, or answers inconclusively
             // (a national post's miss), is waited for, not reported as failing.
             reportRoutingEvent('provider_failed', {

@@ -93,6 +93,12 @@ describe('a looked-up number no carrier answered for', () => {
     ['D0112345671234567', { kind: 'order', shop: 'amazon' }],
     ['3041234567890123', { kind: 'order', shop: 'aliexpress' }],
     ['8121234567890123', { kind: 'order', shop: 'aliexpress' }],
+    // Mercado Libre's order and pack ids: 16 digits that start 2000. One digit fewer or more, or 2001, isn't one.
+    ['2000123456789012', { kind: 'order', shop: 'mercadolibre' }],
+    ['2000000000000001', { kind: 'order', shop: 'mercadolibre' }],
+    ['200012345678901', null],
+    ['20001234567890123', null],
+    ['2001123456789012', null],
     // The door's own shops, as a lookup stores their numbers.
     ['PO00012345678901234567', { kind: 'order', shop: 'temu' }],
     ['GSH0A1B2C3D4E5F', { kind: 'order', shop: 'shein' }],
@@ -130,6 +136,10 @@ describe('a looked-up number no carrier answered for', () => {
   it('says where the tracking number is for each shape', () => {
     const t = ((key: string, values?: Record<string, string>) => `${key}${values?.shop ? `:${values.shop}` : ''}`) as Translate;
     expect(nonTrackingNote({ kind: 'order', shop: 'aliexpress' }, t)).toBe('link.notTracking.order:AliExpress');
+    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'es')).toBe('link.notTracking.order:Mercado Libre');
+    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'pt-br')).toBe('link.notTracking.order:Mercado Livre');
+    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'pt')).toBe('link.notTracking.order:Mercado Libre');
+    expect(nonTrackingNote({ kind: 'order', shop: 'amazon' }, t, 'pt-br')).toBe('link.notTracking.order:Amazon');
     expect(nonTrackingNote({ kind: 'container' }, t)).toBe('link.notTracking.container');
     expect(nonTrackingNote({ kind: 'short' }, t)).toBe('link.notTracking.short');
   });

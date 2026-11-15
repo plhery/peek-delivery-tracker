@@ -794,6 +794,13 @@ final class ParcelLogicTests: XCTestCase {
         // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("30245719832294617"), .order(shop: "amazon"))
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("3041234567890123"), .order(shop: "aliexpress"))
+        // Mercado Libre's order and pack ids: 16 digits that start 2000, named Mercado Livre in Brazil's Portuguese.
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("2000123456789012"), .order(shop: "mercadolibre"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("200012345678901"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("2001123456789012"))
+        XCTAssertEqual(NonTrackingShape.shopName("mercadolibre", language: .es), "Mercado Libre")
+        XCTAssertEqual(NonTrackingShape.shopName("mercadolibre", language: .ptBR), "Mercado Livre")
+        XCTAssertEqual(NonTrackingShape.shopName("amazon", language: .ptBR), "Amazon")
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("PO00012345678901234567"), .order(shop: "temu"))
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("10293"), .short)
         XCTAssertNil(CarrierCatalog.nonTrackingShape("99945719832294617"))

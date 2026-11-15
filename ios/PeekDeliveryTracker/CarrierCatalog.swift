@@ -267,7 +267,7 @@ enum NonTrackingShape: Equatable, Sendable {
         case missing, extra
     }
 
-    /// The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu.
+    /// The shop by its id in `shared/reading.json`: amazon, aliexpress, mercadolibre, shein, shopee or temu.
     case order(shop: String)
     case container
     /// The number starts like the carrier's numbers and is one character short of their length, or one over it.
@@ -275,7 +275,18 @@ enum NonTrackingShape: Equatable, Sendable {
     case short
 
     /// The shop by the name the app writes.
-    static let shopNames = ["amazon": "Amazon", "aliexpress": "AliExpress", "shein": "Shein", "shopee": "Shopee", "temu": "Temu"]
+    static let shopNames = [
+        "amazon": "Amazon", "aliexpress": "AliExpress", "mercadolibre": "Mercado Libre", "shein": "Shein", "shopee": "Shopee",
+        "temu": "Temu",
+    ]
+
+    /// The names a shop goes by in one language: Mercado Libre is Mercado Livre in Brazil.
+    static let localShopNames: [AppLanguage: [String: String]] = [.ptBR: ["mercadolibre": "Mercado Livre"]]
+
+    /// A shop by the name the app writes in this language (`shopName` in src/peek/lookup/reading.ts).
+    static func shopName(_ shop: String, language: AppLanguage) -> String {
+        localShopNames[language]?[shop] ?? shopNames[shop] ?? shop
+    }
 }
 
 /// One tracking number a text names, with what its shape says about the carrier.

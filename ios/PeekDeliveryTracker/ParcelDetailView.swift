@@ -686,7 +686,7 @@ struct ParcelDetailView: View {
         VStack(alignment: .leading, spacing: 2) {
             switch shape {
             case .order(let shop):
-                Text(localizer.text("link.notTracking.order", ["shop": NonTrackingShape.shopNames[shop] ?? shop]))
+                Text(localizer.text("link.notTracking.order", ["shop": NonTrackingShape.shopName(shop, language: localizer.language)]))
             case .container:
                 Text(localizer.text("link.notTracking.container"))
             case .mistyped(let carrier, let change):

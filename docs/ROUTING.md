@@ -431,8 +431,9 @@ without waiting the provider's 15 minutes, archived or delivered too (`carrier_n
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
 per account, each account's longest due, every 2 minutes. It lists every open parcel and lookup in pages by id,
 as the database's API ends each answer at its row limit, and checks the parcels it takes the longest due
-first, accounts' and lookups' alike, an account's parcel as if it had come due 10 minutes earlier: when the worker
-can't keep up, every kind waits about as long past its cadence, accounts' parcels a little less. It checks two
+first, accounts' and lookups' alike, an account's parcel as if it had come due 30 minutes earlier: when the worker
+falls behind by less than that, accounts' parcels wait for no lookup, and behind by more, every kind waits about as
+long past its cadence, accounts' parcels 30 minutes less. It checks two
 parcels at once, never two of one account, one number, one carrier (carriers on one adapter count as one; a parcel
 handed over, or whose earlier leg answered last, holds that carrier too) or one universal provider tracking them (for a parcel whose carrier has no adapter of its own and no provider named yet, the
 provider its plan asks first), so each keeps the pace of one check at a time: the run starts the first parcel in

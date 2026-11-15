@@ -3585,7 +3585,7 @@ describe('TrackingSyncService', () => {
       ...Array.from({ length: 20 }, (_, index) => `one-off-${index + 1}`)]);
   });
 
-  it('checks the longest due first, an account\'s parcel as if it had come due ten minutes earlier', async () => {
+  it('checks the longest due first, an account\'s parcel as if it had come due thirty minutes earlier', async () => {
     const parcel = (id: string, number: string, last: string, user: string | null): JsonObject => ({ id, user_id: user,
       one_off: user === null, carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: number,
       last_synced_at: `2026-09-09T${last}Z`, sync_status: 'ok' });
@@ -3603,9 +3603,10 @@ describe('TrackingSyncService', () => {
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T10:12:00Z'));
     await expect(service.sync()).resolves.not.toHaveProperty('lookups_left');
-    // The lookup due since 10:00 goes behind the account's parcel due since 10:10.
+    // The lookup due since 09:40 goes behind the accounts' parcels due since 10:00 and 10:10 (a tie goes to the account),
+    // the lookup due since 05:48 ahead of them all.
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
-      .toEqual(['unread', 'waited', 'older', 'recent', 'tied', 'just due']);
+      .toEqual(['unread', 'older', 'recent', 'waited', 'tied', 'just due']);
   });
 
   it('gives the places of a carrier that spaces its lookups out first to its parcels out for delivery or expected today', async () => {

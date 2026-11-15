@@ -94,10 +94,11 @@ const SCHEDULED_RUN_LANES = 2;
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 20;
 /**
  * A scheduled run checks the parcels it takes the longest due first, an account's as if it had come
- * due this much earlier: when the worker cannot keep up, every kind waits about as long past its
- * cadence, the accounts' parcels a little less.
+ * due this much earlier: when the worker falls behind by less than this, the accounts' parcels wait
+ * for no lookup, and behind by more, every kind waits about as long past its cadence, the accounts'
+ * parcels this much less.
  */
-const ACCOUNT_HEAD_START_MS = 10 * 60_000;
+const ACCOUNT_HEAD_START_MS = 30 * 60_000;
 /** How far into a scheduled run its checks may land: a carrier's refresh limit counts from that run. */
 const RUN_SPREAD_MS = 5 * 60_000;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */

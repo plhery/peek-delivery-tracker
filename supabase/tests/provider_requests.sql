@@ -186,4 +186,39 @@ begin
 end;
 $$;
 
+-- A parcel handed over from AliExpress to La Poste stays filed under AliExpress. handoff: La Poste fails and a
+-- provider answers. follow_up: the same, with AliExpress asked alongside and answering. Both count as La Poste's
+-- failure.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f5000000-0000-4000-8000-00000000000b', null, true, 'ASKED0011', 'aliexpress', 'in_transit', 'ok',
+    now() - interval '3 days', now() - interval '9 minutes',
+    '{"original_carrier": "aliexpress", "active_tracking_carrier": "la-poste", "active_tracking_number": "ASKED0011"}'),
+  ('f5000000-0000-4000-8000-00000000000c', null, true, 'ASKED0012', 'aliexpress', 'in_transit', 'ok',
+    now() - interval '3 days', now() - interval '8 minutes',
+    '{"original_carrier": "aliexpress", "active_tracking_carrier": "la-poste", "active_tracking_number": "ASKED0012"}');
+insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, source_carrier, outcome,
+  previous_stage, selected_stage, anomaly_codes, lookups, started_at, completed_at)
+values
+  ('f5000000-0000-4000-8000-0000000000ab', 'f5000000-0000-4000-8000-00000000000b', 'scheduled', 'aliexpress', 'unknown', 'unchanged',
+    'in_transit', 'in_transit', '{}', '{"la-poste": "error", "HandoffTrack": "success"}',
+    now() - interval '9 minutes', now() - interval '9 minutes'),
+  ('f5000000-0000-4000-8000-0000000000ac', 'f5000000-0000-4000-8000-00000000000c', 'scheduled', 'aliexpress', 'unknown', 'unchanged',
+    'in_transit', 'in_transit', '{}', '{"aliexpress": "success", "la-poste": "error", "FollowUpTrack": "success"}',
+    now() - interval '8 minutes', now() - interval '8 minutes');
+
+do $$
+declare
+  purposes text[];
+begin
+  perform metrics.record_provider_requests((now() at time zone 'UTC')::date);
+  select array_agg(provider || ':' || purpose order by provider) into purposes from metrics.provider_requests_daily
+  where day = (now() at time zone 'UTC')::date and provider in ('HandoffTrack', 'FollowUpTrack');
+  if (now() at time zone 'UTC')::time >= time '00:30'
+      and purposes is distinct from array['FollowUpTrack:adapter_failed', 'HandoffTrack:adapter_failed'] then
+    raise exception 'A provider asked because the delivery carrier failed was filed as %', purposes;
+  end if;
+end;
+$$;
+
 rollback;

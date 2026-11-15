@@ -622,7 +622,8 @@ check asked:
 - `unseen`: the parcel had shown no scan, the kind a wrong number or an order number stays;
 - `no_adapter`: it is filed under no carrier, or under one whose own adapter answered no
   check in the 30 days before;
-- `adapter_failed`: its carrier's adapter failed in that check;
+- `adapter_failed`: its carrier's adapter failed in that check (for a parcel handed over, the delivery carrier's
+  when the check asked it);
 - `adapter_no_answer`: its carrier's adapter was resting after failures, waiting for an input
   or set aside, or held no history;
 - `label_only`: the carrier answered and the parcel had not moved past its label;

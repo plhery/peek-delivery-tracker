@@ -405,7 +405,13 @@ class CarrierCatalog private constructor(
         return if (found.all { it.carrier == first.carrier }) first else null
     }
 
-    private class RuleMatch(val carrier: CarrierId, val confidence: CarrierMatch.Confidence, val preferred: Boolean)
+    private class RuleMatch(
+        val carrier: CarrierId,
+        val confidence: CarrierMatch.Confidence,
+        val preferred: Boolean,
+        // The rule takes any run of digits of its length, and only its check digit backs its carrier.
+        val checkDigitOnly: Boolean,
+    )
 
     private fun detectNormalized(number: String, printed: String, inText: Boolean): CarrierMatch {
         val found = mutableListOf<RuleMatch>()
@@ -430,15 +436,20 @@ class CarrierCatalog private constructor(
                         }
                     }
                 }
-                found += RuleMatch(carrier, confidence, preferred)
+                val checkDigitOnly = checksum != null && matches(rule.pattern, BARE_DIGITS_RULE)
+                found += RuleMatch(carrier, confidence, preferred, checkDigitOnly)
                 break
             }
         }
         val high = found.filter { it.confidence == CarrierMatch.Confidence.High }
         val ranked = high.ifEmpty { found }
-        // Number evidence first; the catalog's order is not the shared engine's, so sort each group.
-        val preferred = ranked.filter { it.preferred }.map { it.carrier }.sortedBy { it.rawValue }
-        val candidates = preferred + ranked.filter { !it.preferred }.map { it.carrier }.sortedBy { it.rawValue }
+        // Number evidence first; the catalog's order is not the shared engine's, so sort each group. A check digit
+        // alone, which one run of digits of its length in ten or so passes, yields to a narrower preferred shape:
+        // some of 4PX's twelve-digit waybills of 311 pass FedEx's or SF Express's check digit too.
+        val narrower = ranked.any { it.preferred && !it.checkDigitOnly }
+        val backed = ranked.filter { it.preferred && !(narrower && it.checkDigitOnly) }
+        val preferred = backed.map { it.carrier }.sortedBy { it.rawValue }
+        val candidates = preferred + ranked.filter { it !in backed }.map { it.carrier }.sortedBy { it.rawValue }
         if (high.size == 1) {
             return CarrierMatch(high[0].carrier, CarrierMatch.Confidence.High, candidates, preferred)
         }
@@ -925,6 +936,9 @@ class CarrierCatalog private constructor(
 
     companion object {
         private const val MEMO_LIMIT = 4_096
+
+        /** A detection pattern that is a bare run of digits: only its check digit points to its carrier. */
+        private const val BARE_DIGITS_RULE = """^\^(?:\\d|\[0-9\])\{\d+\}\$$"""
 
         /**
          * What an optional postcode gives, by the adapter that asks for it; DPD's line when it only shows more.

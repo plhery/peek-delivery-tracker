@@ -2254,7 +2254,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "s10"
       },
       {
-        "pattern": "^(?!\\d{16}F\\d{4}$)(?:32\\d{11}[A-F0-9]{8}|(?=[A-F0-9]*[A-F])[A-F0-9]{2}\\d{7}[A-F0-9]{12})$",
+        "pattern": "^(?!(?!32)\\d{16}F\\d{4}$)(?:32\\d{11}[A-F0-9]{8}|(?=[A-F0-9]*[A-F])[A-F0-9]{2}\\d{7}[A-F0-9]{12})$",
         "confidence": "low"
       },
       {
@@ -15225,6 +15225,14 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^CYS\\d{11}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^JAS\\d{8}CN$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^XYL\\d{9}CH$",
         "confidence": "low"
       },
       {
@@ -33769,7 +33777,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "veho",
+      "browserRecognitionRank": 47
     },
     "trackingUrlTemplate": "https://track.shipveho.com/#/trackingid/{trackingNumber}",
     "linkRules": [

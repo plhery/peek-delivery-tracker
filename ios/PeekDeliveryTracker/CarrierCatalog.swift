@@ -916,7 +916,10 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }
 
     private func detectNormalized(_ number: String, printed: String, inText: Bool) -> CarrierMatch {
-        var matches: [(carrier: CarrierID, confidence: CarrierMatch.Confidence, preferred: Bool)] = []
+        // `checkDigitOnly`: the rule takes any run of digits of its length, and only its check digit backs its carrier.
+        var matches: [(
+            carrier: CarrierID, confidence: CarrierMatch.Confidence, preferred: Bool, checkDigitOnly: Bool
+        )] = []
         for (carrier, definition) in definitions {
             for rule in definition.detectionRules {
                 if inText, rule.standalone == true { continue }
@@ -935,15 +938,21 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
                         preferred = false
                     }
                 }
-                matches.append((carrier, confidence, preferred))
+                let checkDigitOnly = rule.checksum != nil && Self.matches(rule.pattern, pattern: Self.bareDigitsRule)
+                matches.append((carrier, confidence, preferred, checkDigitOnly))
                 break
             }
         }
         let high = matches.filter { $0.confidence == .high }
         let ranked = high.isEmpty ? matches : high
-        // Number evidence first; the dictionary has no order, so sort each group.
-        let preferred = ranked.filter(\.preferred).map(\.carrier).sorted { $0.rawValue < $1.rawValue }
-        let candidates = preferred + ranked.filter { !$0.preferred }.map(\.carrier).sorted { $0.rawValue < $1.rawValue }
+        // Number evidence first; the dictionary has no order, so sort each group. A check digit alone, which one run
+        // of digits of its length in ten or so passes, yields to a narrower preferred shape: some of 4PX's
+        // twelve-digit waybills of 311 pass FedEx's or SF Express's check digit too.
+        let narrower = ranked.contains { $0.preferred && !$0.checkDigitOnly }
+        let backed = Set(ranked.filter { $0.preferred && !(narrower && $0.checkDigitOnly) }.map(\.carrier))
+        let preferred = backed.sorted { $0.rawValue < $1.rawValue }
+        let others = ranked.map(\.carrier).filter { !backed.contains($0) }
+        let candidates = preferred + others.sorted { $0.rawValue < $1.rawValue }
         if high.count == 1 {
             return CarrierMatch(carrier: high[0].carrier, confidence: .high, candidates: candidates, preferred: preferred)
         }
@@ -1524,6 +1533,9 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// or a set number of times (`^1Z[A-Z0-9]{16}$`). A rule of several lengths, with a lookahead or with
     /// alternatives doesn't say how long its carrier's numbers are.
     private static let oneLengthRule = #"^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$"#
+
+    /// A detection pattern that is a bare run of digits: only its check digit points to its carrier.
+    private static let bareDigitsRule = #"^\^(?:\\d|\[0-9\])\{\d+\}\$$"#
 
     /// The characters a rule of one length spells out at its start, at least two and one of them a letter, so that
     /// a number starting with them is most likely that carrier's; nil for any other rule.

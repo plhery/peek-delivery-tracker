@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { createPortal } from 'react-dom';
 import { AndroidTestRow } from '../components/AndroidTest';
 import { Icon, ParcelIllustration } from '../components/Icon';
+import { GuestSettings } from '../components/GuestSettings';
 import { ParcelMapSheet, useParcelRoute } from '../components/ParcelMap';
 import type { Rect } from '../components/map/WorldMap';
 // The journal and the pickup card keep their styles with the deliveries' detail.
@@ -496,6 +497,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
       <button type="button" className="icon-button" aria-label={t('app.trackAnother')} onClick={onHome}><Icon name="search" /></button>
       <button type="button" className="icon-button peekp-header__share" aria-label={t('link.shareAria')} onClick={() => void share()}><Icon name="share" /><span>{t('link.share')}</span></button>
       {/* The sample has its own invitation, at its foot. */}
+      {visitor && <GuestSettings />}
       {visitor && !sample && <button type="button" className="peekp-header__signin" onClick={signInToKeep}>{t('arrival.signInTitle')}</button>}
     </>}
   >

@@ -348,6 +348,10 @@
   .peekp-card--map:has(.peekp-card__marks) .peekp-map--card { height: 224px; }
   .peekp-card--map .peekp-card__top { top: 12px; right: 12px; left: 16px; }
 }
+/* A visitor's header holds four controls: on the narrowest phones Peek's name gives way to them, its mark stays. */
+@media (max-width: 340px) {
+  .peekp-header:has(.peekp-header__signin) .peek-lockup__text { display: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .peekp-pip .parcel-illustration__ribbon { transition: none; }
   .peekp-main[data-entrance=reveal] .tracking-journal__events > li, .peekp-card[data-settled] .progress-track__dot--current,

@@ -54,6 +54,9 @@
 .refined-settings .notification-preferences strong { font-weight: 400; }
 .refined-settings .notification-preferences small { font-size: 11px; line-height: 1.5; }
 .refined-settings .notification-schedule { margin: 18px 0 0; font-size: 11px; }
+/* A visitor's settings (GuestSettings): the preferences alone, and where they are kept. */
+.guest-settings .settings-group { margin-bottom: 14px; }
+.guest-settings .guest-settings__kept { margin: 0 2px; }
 @media(max-width:480px) { .refined-settings.sheet { padding: 22px 20px max(24px,env(safe-area-inset-bottom)); } }
 @media(forced-colors:active) { .settings-appearance button[aria-pressed=true] { outline: 2px solid Highlight; } }
 

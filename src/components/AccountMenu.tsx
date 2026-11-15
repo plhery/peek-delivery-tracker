@@ -2,12 +2,9 @@ import { trackAction, trackOverlay } from '../lib/analytics';
 import { userErrorMessage } from '../lib/userMessages';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LanguageControl, useI18n } from '../i18n';
-import { useAppearance, type Appearance } from '../lib/appearance';
+import { useI18n } from '../i18n';
 import { LANDING_PATH } from '../lib/experience';
 import { useSheetDialog } from '../lib/modal';
-import { useMarkNewUpdatesChoice } from '../lib/newUpdate';
-import { clockPreference, distancePreference } from '../lib/units';
 import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
 import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
 import { followInPlace } from '../peek/landing/links';
@@ -16,6 +13,7 @@ import { AddByEmailPage, useAddByEmail } from './AddByEmail';
 import { AssistantsPage, useAssistants, type TokenDraft } from './Assistants';
 import { Icon } from './Icon';
 import { NotificationControl } from './NotificationControl';
+import { PreferenceSettings } from './Preferences';
 import { SignInAgain } from './SignInAgain';
 import './Settings.css';
 
@@ -39,9 +37,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   apiAuth?: ApiAuth;
   signIn?: SignInMethods;
 }) {
-  const { t, clock, setClock, distance, setDistance, automatic } = useI18n();
-  const [appearance, setAppearance] = useAppearance();
-  const [markNewUpdates, setMarkNewUpdates] = useMarkNewUpdatesChoice(apiAuth);
+  const { t } = useI18n();
   const initial = email?.trim().charAt(0).toUpperCase();
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState<Page>('home');
@@ -134,34 +130,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
           {apiAuth && <section className="settings-group" aria-labelledby="settings-deliveries"><h3 id="settings-deliveries" className="settings-group__title">{t('native.deliveries')}</h3><div className="settings-box"><NotificationControl apiAuth={apiAuth} email={email} variant="row" />
             {addByEmail && <button ref={inboxButton} className="settings-row" type="button" onClick={() => navigate('inbox')}><Icon name="mail" /><span>{t('inbox.row')}</span><span className="settings-badge">{t('inbox.beta')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}
             {assistants && <button ref={assistantsButton} className="settings-row" type="button" onClick={() => navigate('assistants')}><Icon name="globe" /><span>{t('assistants.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}</div></section>}
-          <section className="settings-group" aria-labelledby="settings-preferences"><h3 className="settings-group__title" id="settings-preferences">{t('settings.preferences')}</h3>
-            <div className="settings-box"><fieldset className="settings-appearance"><legend>{t('native.appearance.title')}</legend>
-              <div>{(['system', 'light', 'dark'] as Appearance[]).map((option) => <button type="button" key={option} aria-pressed={appearance === option} onClick={() => { setAppearance(option); trackAction('appearance-change'); }}><span className={`settings-mini-screen settings-mini-screen--${option}`} aria-hidden="true"><i /><i /></span>{t(`native.appearance.${option}`)}</button>)}</div>
-            </fieldset>
-              <LanguageControl className="language-control--account" />
-              <label className="language-control language-control--account">
-                <span>{t('settings.timeFormat')}</span>
-                <select value={clock} onChange={(event) => setClock(clockPreference(event.target.value))}>
-                  <option value="auto">{t('settings.automatic', { value: t(automatic.use24HourTime ? 'settings.clock24' : 'settings.clock12') })}</option>
-                  <option value="24">{t('settings.clock24')}</option>
-                  <option value="12">{t('settings.clock12')}</option>
-                </select>
-              </label>
-              <label className="language-control language-control--account">
-                <span>{t('settings.distanceUnits')}</span>
-                <select value={distance} onChange={(event) => setDistance(distancePreference(event.target.value))}>
-                  <option value="auto">{t('settings.automatic', { value: t(automatic.distanceUnit === 'mi' ? 'settings.milesShort' : 'settings.kilometersShort') })}</option>
-                  <option value="km">{t('settings.kilometers')}</option>
-                  <option value="mi">{t('settings.miles')}</option>
-                </select>
-              </label>
-              <button className="settings-row settings-mark" type="button" role="switch" aria-checked={markNewUpdates} aria-labelledby="settings-mark-label" aria-describedby="settings-mark-hint"
-                onClick={() => setMarkNewUpdates(!markNewUpdates)}>
-                <span className="settings-mark__text"><span id="settings-mark-label">{t('settings.markNewUpdates')}</span><small id="settings-mark-hint">{t('settings.markNewUpdatesHint')}</small></span>
-                <span className="settings-switch" aria-hidden="true" />
-              </button>
-            </div>
-          </section>
+          <PreferenceSettings apiAuth={apiAuth} language />
           <div className="settings-box"><button ref={accountButton} className="settings-row" type="button" onClick={() => navigate('account')}>{accountTitle}<span className="settings-chevron" aria-hidden="true">›</span></button>
             {onOpenLanding && <a className="settings-row" href={LANDING_PATH} onClick={(event) => followInPlace(event, onOpenLanding)}>{t('app.homePage')}<span className="settings-value">{window.location.host}</span><span className="settings-chevron" aria-hidden="true">›</span></a>}</div>
         </div>

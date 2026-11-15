@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExter
 import { AndroidTestBanner } from '../components/AndroidTest';
 import { CarrierPickerSheet } from '../components/CarrierPickerSheet';
 import { Icon } from '../components/Icon';
+import { GuestSettings } from '../components/GuestSettings';
 import { PeekLockup } from '../components/PeekMark';
 import { useI18n } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
@@ -270,6 +271,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
       <PeekLockup />
       <div className="door-header__actions">
         <a className="door-github" href={SOURCE_URL} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>
+        {account !== 'signed-in' && <GuestSettings className="door-settings" />}
         {mine
           // eslint-disable-next-line @next/next/no-html-link-for-pages -- followed in place: the app itself answers at `/`
           ? <a className="door-signin door-mine" href="/" onClick={(event) => followInPlace(event, () => mine())}>

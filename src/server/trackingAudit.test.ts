@@ -478,6 +478,25 @@ describe('a check whose carrier declined its verification on purpose', () => {
   });
 });
 
+describe('a check waiting for its carrier\'s retry', () => {
+  it('records the carrier\'s failed lookup but no refresh, which a check that asked the providers still records', async () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
+      recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };
+    const check = async (awaitsCarrier: boolean) => {
+      const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+        'synthetic-package', 'TEST1234', 'usps', 'in_transit', { trigger: 'scheduled' });
+      await audit.observeFetch(async () => healthStepRecorder.lookup({ carrier: 'usps', finalStep: 'trawl', outcome: 'transport',
+        errorType: 'TransportError', durationMs: 1, attempts: 1, error: new TransportError('USPS') }));
+      audit.record('fetch', 'failed', 100, {}, new Error('Every tier deferred'));
+      await audit.finish({ outcome: 'waiting', sourceCarrier: 'usps', awaitsCarrier,
+        providerFailures: { usps: { kind: 'transport', count: 1 } } });
+      return (client.recordTrackingHealth.mock.lastCall?.[2] ?? []) as { kind: string; subject: string; healthy: boolean }[];
+    };
+    expect((await check(true)).map(({ kind, subject, healthy }) => [kind, subject, healthy])).toEqual([['provider', 'usps', false]]);
+    expect((await check(false)).find((sample) => sample.kind === 'refresh')).toMatchObject({ subject: 'usps', healthy: false });
+  });
+});
+
 describe('a check while the carrier waits for the owner', () => {
   it('is an answer when the carrier, not asked again yet, last asked for an input or found several parcels', async () => {
     const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),

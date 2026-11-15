@@ -77,7 +77,8 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   A thin answer's sample keeps an opaque id of it (`thin_answer`) for the next check to compare.
 - One parcel's failed streak while the carrier answers its other parcels is that parcel's
   own, such as a number that trips the carrier's bot defences: it neither opens a refresh
-  incident nor holds one open. Missing input, not-found and repeated answers don't count as
+  incident nor holds one open. Copies of one number (followed in several accounts, or also
+  without one) are one parcel. Missing input, not-found and repeated answers don't count as
   answering. A carrier whose other parcels fail too, or that has no other parcel, opens at the
   first streak.
 - A step skipped during a cooldown is not a success. A check that contacted nobody because
@@ -107,7 +108,14 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   Post's direct steps meet a challenge, their browser steps answer). It counts toward no
   incident: the rate reads the failures that left a parcel without an answer, so one such
   check in a day of rescued ones opens nothing. An open direct incident closes once every
-  failure of its 24-hour window was rescued: a `closed` notice with the reason `rescued`.
+  failure of its 24-hour window was rescued: a `closed` notice with the reason `rescued`. It
+  also closes, with the reason `answered`, once the carrier's three latest lookups answered and
+  its unanswered checks are under the threshold: a direct step challenged on every check
+  never recovers, and one unanswered check a day would keep it from closing as rescued.
+- A scheduled check that waits for the retry of the parcel's carrier, which failed in passing,
+  and asks no provider in its place ([docs/ROUTING.md](../../docs/ROUTING.md)) refreshed
+  nothing yet: it records the carrier's failed lookup but no refresh sample. A check that then
+  asks the providers records its refresh as usual.
 
 ## Delivery
 

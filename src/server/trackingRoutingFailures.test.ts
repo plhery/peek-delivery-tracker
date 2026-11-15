@@ -166,7 +166,7 @@ describe('the carrier that answers for a parcel failing in passing', () => {
   it('waits for its retry on scheduled checks, and asks the providers once its last answer is an hour old', async () => {
     const run = setup('2026-09-10T10:20:00.000Z');
     const first = await missed(run.router(), answered(), true);
-    expect(first).toMatchObject({ stale: false, attempted: 1, routing: { consecutive_failures: 1,
+    expect(first).toMatchObject({ stale: false, attempted: 1, awaitsCarrier: true, routing: { consecutive_failures: 1,
       next_check_at: '2026-09-10T10:35:00.000Z', failures: { 'la-poste': { kind: 'transport' } } } });
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('carrier_retry_awaited', expect.objectContaining({ provider: 'la-poste' }));
     run.advance(15 * 60_000);
@@ -175,7 +175,7 @@ describe('the carrier that answers for a parcel failing in passing', () => {
     expect(second).toMatchObject({ stale: false, attempted: 1, routing: { consecutive_failures: 2, next_check_at: '2026-09-10T11:00:00.000Z' } });
     expect(run.universal).not.toHaveBeenCalled();
     run.advance(25 * 60_000);
-    await missed(run.router(), answered(second.routing), true);
+    expect(await missed(run.router(), answered(second.routing), true)).toMatchObject({ awaitsCarrier: false });
     expect(run.direct).toHaveBeenCalledTimes(2);
     expect(run.universal).toHaveBeenCalled();
   });

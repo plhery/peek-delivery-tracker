@@ -3199,7 +3199,7 @@ export class TrackingSyncService {
           || code === PLACEHOLDER_NUMBER;
         // Every source answered, without a scan: a parcel with scans has no news, not an outage, and keeps them. Once
         // a carrier it was handed to lists it, the card names that carrier, and nothing has failed at all.
-        const noNews = !refused && previousStage !== 'pending' && answeredWithoutNews(error.routing.failures);
+        const noNews = !refused && previousStage !== 'pending' && answeredWithoutNews(error.routing.failures, carrierId);
         const probe = lookupProbe ?? (isRecord(parcel.carrier_data) ? parcel.carrier_data.delivery_probe : undefined);
         const listed = noNews && isRecord(probe) && probe.listed === true;
         const failing = (error.stale && !listed) || refused;
@@ -3224,7 +3224,8 @@ export class TrackingSyncService {
         // skipped, which neither health samples nor failure counts read, whatever the parcel shows.
         // Keep the failure evidence even while the parcel's error chip is suppressed.
         await audit.finish({ outcome: error.attempted > 0 ? failing ? 'error' : 'waiting' : 'skipped', sourceCarrier: carrierId,
-          error, providerFailures: error.routing.failures, ...(deferred.added.length ? { eventsNew: deferred.added.length } : {}) });
+          error, providerFailures: error.routing.failures, ...(deferred.added.length ? { eventsNew: deferred.added.length } : {}),
+          ...(error.awaitsCarrier ? { awaitsCarrier: true } : {}) });
         return failing ? 'errors' : 'waiting';
       }
       let message = error instanceof Error ? error.message.trim() || error.name : String(error);

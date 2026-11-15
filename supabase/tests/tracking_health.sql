@@ -111,6 +111,20 @@ begin
   perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
   for i in 1..3 loop result := pg_temp.health_sample('streak-carrier',true,'refresh','20000000-0000-4000-8000-000000000001'); end loop;
   assert result='[]', 'Another parcel answering must not clear two still-failing parcels';
+  -- Copies of one number, followed in an account and without one, are one parcel: their streaks are one.
+  insert into auth.users(id, email) values ('30000000-0000-4000-8000-000000000009', 'health-test@example.invalid');
+  insert into public.packages(id, user_id, tracking_number, carrier, one_off) values
+    ('30000000-0000-4000-8000-000000000001', '30000000-0000-4000-8000-000000000009', 'COPYTEST12345', 'unknown', false),
+    ('30000000-0000-4000-8000-000000000002', null, 'COPYTEST12345', 'unknown', true);
+  for i in 1..3 loop
+    perform pg_temp.health_sample('copy-carrier',false,'refresh','30000000-0000-4000-8000-000000000001');
+    result := pg_temp.health_sample('copy-carrier',false,'refresh','30000000-0000-4000-8000-000000000002');
+  end loop;
+  update public.tracking_health_samples set observed_at=now()-interval '2 hours' where subject='copy-carrier';
+  perform pg_temp.health_sample('copy-carrier',true,'refresh','20000000-0000-4000-8000-000000000001');
+  perform pg_temp.health_sample('copy-carrier',false,'refresh','30000000-0000-4000-8000-000000000001');
+  result := pg_temp.health_sample('copy-carrier',false,'refresh','30000000-0000-4000-8000-000000000002');
+  assert result='[]', 'Two copies of one number failing while another parcel answers must not alert';
 
   -- A carrier repeating a thin answer for its only parcel recovers once three checks repeated it.
   for i in 1..3 loop result := pg_temp.health_sample('thin-carrier',false,'refresh'); end loop;
@@ -282,6 +296,29 @@ begin
   assert pg_temp.direct_notice(result,'unrescued-earlier') is null
     and (select not active from public.tracking_health_incidents where kind='direct' and subject='unrescued-earlier'),
     'An earlier unanswered direct failure among rescued ones must open no incident';
+  -- A direct step challenged on every check, whose lookups answer through the next step, closes once
+  -- its unanswered checks are under the threshold and its three latest lookups answered.
+  for i in 1..10 loop result := pg_temp.own_check('answered-tier',false,false,false); end loop;
+  assert pg_temp.notice(result,'direct','answered-tier')->>'state'='open', 'Unanswered checks must open a direct incident';
+  perform public.ack_tracking_health(array(select (n->>'id')::uuid from jsonb_array_elements(result) n));
+  assert pg_temp.notice(pg_temp.own_check('answered-tier',false,true,true),'direct','answered-tier') is null,
+    'A direct incident must stay open while its unanswered checks still pass the threshold';
+  update public.tracking_health_samples set observed_at=now()-interval '25 hours' where kind='direct' and subject='answered-tier'
+    and attempt_id in (select attempt_id from public.tracking_health_samples where kind='refresh' and subject='answered-tier'
+      and not healthy order by observed_at limit 5);
+  perform pg_temp.own_check('answered-tier',false,false,false);
+  for i in 1..3 loop
+    result := pg_temp.own_check('answered-tier',false,true,true);
+    if i < 3 then
+      assert pg_temp.notice(result,'direct','answered-tier') is null, 'Fewer than three answered lookups must keep it open';
+    end if;
+  end loop;
+  result := pg_temp.own_check('answered-tier',false,true,true);
+  assert pg_temp.notice(result,'direct','answered-tier')->>'state'='closed'
+    and pg_temp.notice(result,'direct','answered-tier')->>'reason'='answered',
+    'A direct incident whose lookups answer under the threshold must close';
+  perform public.ack_tracking_health(array[(pg_temp.notice(result,'direct','answered-tier')->>'id')::uuid]);
+  assert (select not active from public.tracking_health_incidents where kind='direct' and subject='answered-tier');
   -- A tier still failing when traffic resumes opens a new incident at once.
   for i in 1..10 loop result := pg_temp.health_sample('retired-tier',false,'direct'); end loop;
   assert result->0->>'state'='open', 'A closed incident must reopen on fresh failures';

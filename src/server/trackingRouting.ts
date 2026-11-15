@@ -754,8 +754,11 @@ const PACING_ROUNDS = 2;
 const WRITTEN_AHEAD_KEPT = 50;
 
 export class RoutingDeferred extends Error {
-  /** `attempted` counts providers actually contacted; zero means every tier was still cooling down. */
-  constructor(readonly routing: RoutingState, readonly stale: boolean, readonly attempted = 0) {
+  /**
+   * `attempted` counts providers actually contacted; zero means every tier was still cooling down.
+   * `awaitsCarrier`: the check waits for the retry of the carrier that failed in passing, asking no provider.
+   */
+  constructor(readonly routing: RoutingState, readonly stale: boolean, readonly attempted = 0, readonly awaitsCarrier = false) {
     super(stale ? 'Tracking providers are temporarily unavailable. Previous progress has been kept; another check is scheduled.'
       : 'Previous tracking has been kept; another check is scheduled.');
     // Ends in "Error" so the audit trail records it instead of a bare "Error".
@@ -1200,11 +1203,11 @@ export class TrackingRouter {
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
     const attempted = () => attemptedDirect.size - pacedDirect.size - probeContacts + attempts;
-    const defer = (stale = !recent()): never => {
+    const defer = (stale = !recent(), awaitsCarrier = false): never => {
       const contacts = attempted();
       // A cooldown-only check supplies no new evidence of failure.
       if (contacts > 0) state.consecutive_failures = Math.min(20, state.consecutive_failures + 1);
-      throw new RoutingDeferred(state, stale && state.consecutive_failures >= 2, contacts);
+      throw new RoutingDeferred(state, stale && state.consecutive_failures >= 2, contacts, awaitsCarrier);
     };
     // A candidate whose newest scan is older than the parcel's newest is no
     // fresher source, unless the provider's copies of the candidate's own
@@ -1466,7 +1469,7 @@ export class TrackingRouter {
       state.next_check_at = iso(recent()
         ? Math.min(millis(ownFailure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS) : millis(ownFailure.retry_at));
       report('carrier_retry_awaited', primary, ownFailure.kind);
-      defer();
+      defer(!recent(), true);
     }
     // The filed carrier's answer, kept although its clocks are local: it
     // creates no scan instants, and a provider's history already shown stays.

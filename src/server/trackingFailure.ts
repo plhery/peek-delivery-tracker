@@ -98,11 +98,14 @@ export const NO_NEW_SCANS = 'carrier:no_new_scans';
 
 /**
  * Whether every source the router keeps a failure for answered without a scan: not found, or listed without
- * history. Nothing failed, so a parcel with scans has no news rather than an outage.
+ * history. Nothing failed, so a parcel with scans has no news rather than an outage. Another source refusing
+ * the number as none it issues (a delivery partner asked for its leg, a provider) has answered too; the
+ * parcel's own carrier refusing it, `carrier`, has a failure of its own to show.
  */
-export function answeredWithoutNews(failures: Record<string, { kind: string }>): boolean {
-  const kinds = Object.values(failures).map(failure => failure?.kind);
-  return kinds.length > 0 && kinds.every(kind => kind === 'not_found' || kind === 'no_history');
+export function answeredWithoutNews(failures: Record<string, { kind: string }>, carrier?: string): boolean {
+  const entries = Object.entries(failures).filter(([, failure]) => failure);
+  return entries.length > 0 && entries.every(([source, { kind }]) => kind === 'not_found' || kind === 'no_history'
+    || (kind === 'invalid_input' && source !== carrier));
 }
 
 /** Do not blame one provider when several failed for different reasons. */

@@ -155,6 +155,11 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
       nextSteps: 'Each direct failure of the last 24 hours came from a check the lookup\'s next step answered (a browser step after a CAPTCHA). Such failures count toward no incident; checks that go unanswered open a new one when they fail more than half of at least 10 direct checks in 24 hours.',
       impact: 'This describes one direct transport. No parcel was left without a fresh answer.' };
   }
+  if (incident.state === 'closed' && incident.reason === 'answered') {
+    return { title: `${scope} closed: ${subject} lookups answer through another step`,
+      nextSteps: 'The carrier\'s three latest lookups answered through its browser step or a provider, and the direct failures that left a parcel without an answer are under the threshold. The direct step may still fail on every check; unanswered checks open a new incident when they fail more than half of at least 10 direct checks in 24 hours.',
+      impact: 'This describes one direct transport. The carrier\'s lookups answer.' };
+  }
   if (incident.state === 'closed') {
     return { title: `${scope} closed without a recent check: ${subject}`,
       nextSteps: 'Nothing was checked for 24 hours, so no recovery was observed. If it should still be checked, find out why it is not; fresh failures open a new incident.',

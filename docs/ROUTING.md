@@ -205,8 +205,9 @@ is at least 1 h old. An answer with progress, or one for a parcel
 awaiting its first movement, resets the streak. Thin answers for a universal-only parcel
 count as missed checks and keep the time of the last successful check. Checks that only
 wait for cooldowns leave it unchanged. Provider failures remain in the audit and health
-evidence while the chip is hidden. When every source answered without a scan (not found, or listed
-without history) for a parcel that has scans, nothing failed: the chip says no new scans came and the
+evidence while the chip is hidden. When every source answered without a scan (not found, listed
+without history, or, for a source other than the parcel's own carrier, refusing the number as none it
+issues) for a parcel that has scans, nothing failed: the chip says no new scans came and the
 found ones are kept (`carrier:no_new_scans`), and it does not appear at all once the carrier the parcel
 was handed to lists it (`delivery_probe.listed`), since the card names that carrier. A parcel without scans whose own carrier refuses the
 number, such as one chosen by hand that issues no number of that shape, shows the refusal

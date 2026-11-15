@@ -5334,8 +5334,11 @@ describe('TrackingSyncService', () => {
       expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
       answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
       expect(await sync('2026-01-13T12:00:00Z', 'scheduled')).toEqual(['posti', 'la-poste']);
-      const samples = client.recordTrackingHealth.mock.lastCall![2] as JsonObject[];
-      expect(samples.filter((sample) => sample.kind === 'refresh')).toEqual([expect.objectContaining({ subject: 'posti', healthy: false })]);
+      // The first check waits for the delivery carrier's retry: it refreshed nothing yet.
+      const refreshes = () => ((client.recordTrackingHealth.mock.lastCall?.[2] ?? []) as JsonObject[]).filter((sample) => sample.kind === 'refresh');
+      expect(refreshes()).toEqual([]);
+      await sync('2026-01-13T13:00:00Z', 'scheduled');
+      expect(refreshes()).toEqual([expect.objectContaining({ subject: 'posti', healthy: false })]);
     });
 
     it('takes the delivery the earlier carrier relayed during the outage at the next answered check', async () => {
@@ -5364,6 +5367,7 @@ describe('TrackingSyncService', () => {
       answers.origin = Object.assign(new Error('Bad gateway'), { status: 502 }) as unknown as CarrierResult;
       answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
       await sync('2026-01-13T12:00:00Z', 'scheduled');
+      await sync('2026-01-13T13:00:00Z', 'scheduled');
       const samples = client.recordTrackingHealth.mock.lastCall![2] as JsonObject[];
       expect(samples.filter((sample) => sample.kind === 'refresh')).toEqual([expect.objectContaining({ subject: 'la-poste', healthy: false })]);
     });

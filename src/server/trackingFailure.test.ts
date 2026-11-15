@@ -31,6 +31,9 @@ describe('public tracking failure codes', () => {
     expect(answeredWithoutNews({ jrt: { kind: 'no_history' }, ParcelsApp: { kind: 'transport' } })).toBe(false);
     expect(answeredWithoutNews({ jrt: { kind: 'rate_limited' } })).toBe(false);
     expect(answeredWithoutNews({})).toBe(false);
+    // A delivery partner refusing the number for its leg answered; the parcel's own carrier refusing it did not.
+    expect(answeredWithoutNews({ gzyl: { kind: 'no_history' }, 'dpd-pt': { kind: 'invalid_input' } }, 'gzyl')).toBe(true);
+    expect(answeredWithoutNews({ gzyl: { kind: 'invalid_input' }, Ship24: { kind: 'not_found' } }, 'gzyl')).toBe(false);
   });
 
   it('names a placeholder number, refused by every source alike, whatever the parcel\'s carrier', () => {

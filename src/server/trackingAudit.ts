@@ -106,6 +106,11 @@ export interface SyncAuditCompletion {
    * its stage and rows: the refresh sample keeps it for the next check to compare.
    */
   thinAnswer?: string;
+  /**
+   * The check waits for the retry of the parcel's carrier, which failed in passing, and asked no provider in its
+   * place (trackingRouting.ts): it refreshed nothing yet, so it writes no refresh sample. Its lookups keep theirs.
+   */
+  awaitsCarrier?: boolean;
   supportEvidence?: JsonObject;
 }
 
@@ -524,8 +529,9 @@ export class TrackingSyncAudit {
         ? !ownAnswer.healthy && !ownAnswer.recovered && ABSTAINED_REASONS.has(String(ownAnswer.details.reason))
         : isRecord(ownFailure) && ownFailure.abstained === true)
         && [...this.#healthSamples.values()].every((sample) => sample === ownAnswer || sample.healthy || sample.recovered);
+      const awaiting = completion.awaitsCarrier === true && completion.outcome === 'waiting';
       const thin = completion.thinAnswer === undefined ? {} : { thin_answer: completion.thinAnswer };
-      const samples: JsonObject[] = [...this.#healthSamples.values(), ...(abstained ? [] : [{
+      const samples: JsonObject[] = [...this.#healthSamples.values(), ...(abstained || awaiting ? [] : [{
         kind: 'refresh', subject, healthy,
         // The failing tier's own error class is better evidence than the attempt's summary, unless
         // its lookup recovered from it.

@@ -298,7 +298,11 @@ it('asks the next five carriers only when none of the first five knows the numbe
   const logged = vi.spyOn(observability, 'logOperationalEvent');
   expect(await (await request(number)).json()).toEqual({ trackingNumber: number, carrier: sixth, asked: candidates });
   expect(asked()).toEqual(candidates);
-  expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({ asked: candidates.length, second_batch: true }));
+  // The line names the carriers asked, in order, and never the number.
+  expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({
+    asked: candidates.length, asked_carriers: candidates.join(','), second_batch: true, unanswered_carriers: '',
+  }));
+  expect(JSON.stringify(logged.mock.calls.filter(([event]) => event === 'carrier_recognition'))).not.toContain(number);
   // Each batch has three seconds of its own.
   expect(recognize.mock.calls.map(([, , context]) => context.budgetMs)).toEqual(candidates.map(() => 3_000));
 
@@ -310,7 +314,7 @@ it('asks the next five carriers only when none of the first five knows the numbe
   recognize.mockImplementation(knows(first, ...bothBatches(settled).slice(MAX_RECOGNITIONS)));
   expect(await (await request(settled)).json()).toEqual({ trackingNumber: settled, carrier: first, asked: recognitionAskedCarriers(settled) });
   expect(asked()).toEqual(recognitionAskedCarriers(settled));
-  expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({ second_batch: false }));
+  expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({ asked_carriers: recognitionAskedCarriers(settled).join(','), second_batch: false }));
 });
 
 it('gives the next five only what is left of the route\'s time, and asks them again once none was left', async () => {

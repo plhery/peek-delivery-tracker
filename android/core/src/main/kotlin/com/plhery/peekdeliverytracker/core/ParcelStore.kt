@@ -458,6 +458,12 @@ class ParcelStore(
     private var cacheOwnerId: UUID? = null
     private var mutationRevision = 0
     private var loadSequence = 0
+
+    /**
+     * The `seen_at` the account's parcels were last marked with on this phone (#72), until a read of the list brings
+     * one as late: opening a parcel leaves a read in flight to land, with the later of the two.
+     */
+    private val seenHere = mutableMapOf<UUID, String>()
     private var nativePushGeneration = 0
 
     /** Counts saved preferences: the answer to a read that began before a save is older than it. */
@@ -490,6 +496,7 @@ class ParcelStore(
         refreshTask = null
         pendingMutations.clear()
         pendingJobIds.clear()
+        seenHere.clear()
         nativePushGeneration += 1
         stopDeliveryLiveActivityObservers()
         cacheOwnerId?.let { owner ->
@@ -694,11 +701,12 @@ class ParcelStore(
         val sequence = loadSequence
         if (showSpinner && parcels.isEmpty() && !loading) loading = true
         try {
-            val next = list()
+            val read = list()
             session.checkGeneration(generation)
             if (revision != mutationRevision || sequence != loadSequence || pendingMutations.isNotEmpty()) return LoadOutcome.Skipped
             holdingDeliverySurfaces = false
             showingSavedParcels = false
+            val next = seenAsHere(read)
             val changed = next != parcels
             if (changed) {
                 parcels = next
@@ -1455,7 +1463,9 @@ class ParcelStore(
     /**
      * The parcel's page is in front (#72): a parcel with news is seen now, whether or not its dot shows. Its dot goes at
      * once, its `seen_at` then being its `news_at`, and the server's moment comes after; the account's other devices hear
-     * of it at their next read. A call that fails says nothing: the next read of the list brings what the server holds.
+     * of it at their next read. A read of the list in flight lands all the same, so the page shows the scans it brings,
+     * seen as late as this phone marked the parcel. A call that fails says nothing: the next read of the list brings
+     * what the server holds.
      */
     suspend fun markSeen(parcel: Parcel) {
         val shown = parcels.firstOrNull { it.id == parcel.id } ?: return
@@ -1471,16 +1481,46 @@ class ParcelStore(
             upsert(demo.markSeen(parcel.id))
             return
         }
-        upsert(shown.copy(seenAt = news))
+        seeHere(parcel.id, news)
         val generation = session.generation
         val seenAt = try {
             api.markSeen(parcel.id)
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
+            if (generation == session.generation) seenHere.remove(parcel.id)
             return
         }
         if (generation != session.generation) return
-        parcels.firstOrNull { it.id == parcel.id }?.let { upsert(it.copy(seenAt = seenAt)) }
+        seeHere(parcel.id, seenAt)
+    }
+
+    /**
+     * The account's parcel is seen at [seenAt] on this phone. Unlike the list's other changes this one lets a read of
+     * the list in flight land, which then keeps it ([seenAsHere]): its newer scans show on the open page.
+     */
+    private fun seeHere(id: UUID, seenAt: String) {
+        seenHere[id] = seenAt
+        val index = parcels.indexOfFirst { it.id == id }
+        if (index < 0) return
+        parcels = parcels.toMutableList().also { it[index] = it[index].copy(seenAt = seenAt) }
+        persistCache()
+    }
+
+    /** The account's list as read, each parcel seen as late as this phone marked it; a mark the read has caught up with goes. */
+    private fun seenAsHere(read: List<Parcel>): List<Parcel> {
+        if (seenHere.isEmpty()) return read
+        seenHere.keys.retainAll(read.map { it.id }.toSet())
+        return read.map { parcel ->
+            val mark = seenHere[parcel.id] ?: return@map parcel
+            val markedAt = DateParser.date(mark)
+            val readAt = parcel.seenAt?.let(DateParser::date)
+            if (markedAt == null || (readAt != null && readAt >= markedAt)) {
+                seenHere.remove(parcel.id)
+                parcel
+            } else {
+                parcel.copy(seenAt = mark)
+            }
+        }
     }
 
     /** Reads the preferences again without a word when that fails: what is loaded stays. */

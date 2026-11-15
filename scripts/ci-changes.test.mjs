@@ -49,10 +49,11 @@ describe('test suite boundaries', () => {
     }
   });
 
-  it('runs both native apps for the generated data and the build settings the Android build takes from the iPhone app', () => {
+  it('runs both native apps for the generated data, the widget sample and the build settings the Android build takes from the iPhone app', () => {
     for (const file of ['ios/PeekDeliveryTracker/Resources/CarrierCatalog.json',
       'ios/PeekDeliveryTracker/Resources/WorldDetail.pack', 'ios/PeekDeliveryTracker/Resources/DetectionGolden.json',
-      'ios/Configuration/Shared.xcconfig']) {
+      'ios/DeliveryWidgetExtension/WidgetSample/sample-0-half-light.png',
+      'ios/DeliveryWidgetExtension/WidgetSample/snapshots.json', 'ios/Configuration/Shared.xcconfig']) {
       assert.deepEqual(selectSuites([file]), native, file);
     }
   });

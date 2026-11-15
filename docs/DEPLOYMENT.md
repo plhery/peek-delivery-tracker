@@ -165,8 +165,8 @@ in the repository:
 successful `main` ancestor of that workflow, or with the pull request base. This includes
 changes from canceled and replaced runs. Without a trusted baseline, every suite runs.
 Documentation skips application tests. SQL changes run migration tests; iPhone and Android
-changes run their app's tests, and the data files the Android app copies from the iPhone
-app's resources run both; web changes run web checks, unit tests, browser journeys and the
+changes run their app's tests, and the data files and widget sample the Android app copies
+from the iPhone app run both; web changes run web checks, unit tests, browser journeys and the
 image build. Dependencies and shared client data run web, iPhone and Android tests. Scraper
 updates keep browser journeys because the package supplies browser code too.
 

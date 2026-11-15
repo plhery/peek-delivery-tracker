@@ -66,8 +66,8 @@ import kotlin.math.floor
 
 // The "Parcels" widget's designs ([DeliveryWidgetList.design]), drawn from the app's design system as the iPhone's
 // list widget draws them: Next delivery's cards for a few parcels, the app list's cards made small (passes) for a few
-// more, and rows under the app list's sections for the rest. Cards and passes are in each parcel's carrier colours,
-// from the pictures the app draws for Next delivery (WidgetCardPictures).
+// more where every one fits, and rows under the app list's sections for the rest. Cards and passes are in each
+// parcel's carrier colours, from the pictures the app draws for Next delivery (WidgetCardPictures).
 
 /**
  * The pictures `count` cards show at the widget's size: one alone fills a small or medium widget as Next delivery's
@@ -262,41 +262,49 @@ private class PassMetrics(type: WidgetText, val oneLine: Boolean) {
     val height: Dp = PASS_PADDING_VERTICAL * 2 + top + PASS_SPACING + if (oneLine) maxOf(nameHeight, lineHeight) else nameHeight + lineHeight
 }
 
+/** One column of passes in a small or large widget, two in a medium one. */
+private fun passColumns(listSize: DeliveryWidgetList.Size): Int = if (listSize == DeliveryWidgetList.Size.Medium) 2 else 1
+
+private fun passMetrics(listSize: DeliveryWidgetList.Size, type: WidgetText) = PassMetrics(type, oneLine = listSize == DeliveryWidgetList.Size.Large)
+
 /**
- * The parcels as passes, in the widget's order, each with its mark `art`: one column in a small or large widget, two
- * in a medium one, the first column holding the fewer, so that three put the first parcel alone. They share the
- * height; where larger text leaves room for fewer, as many as fit, then the count of the rest.
+ * Whether `count` passes all stand in the widget at `size`, one above another down their columns: passes show every
+ * parcel or none, and where they don't all fit, at larger text or in a shorter widget, the parcels are rows
+ * ([DeliveryWidgetList.fits], [SectionsLayout]).
+ */
+internal fun passesFit(count: Int, size: DpSize, type: WidgetText): Boolean {
+    val listSize = listSize(size)
+    val columns = passColumns(listSize)
+    return fitting(size.height - PAGE_MARGIN * 2, passMetrics(listSize, type).height, PASS_GAP) >= (count + columns - 1) / columns
+}
+
+/**
+ * Every parcel's pass, in the widget's order, each with its mark `art`: one column in a small or large widget, two in a
+ * medium one, the first column holding the fewer, so that three put the first parcel alone. They share the height,
+ * which holds them all ([passesFit]).
  */
 @Composable
-internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: DpSize, type: WidgetText, copy: Localizer) {
+internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: DpSize, type: WidgetText) {
     val context = LocalContext.current
     val listSize = listSize(size)
-    val columns = if (listSize == DeliveryWidgetList.Size.Medium) 2 else 1
-    val metrics = PassMetrics(type, oneLine = listSize == DeliveryWidgetList.Size.Large)
-    val room = size.height - PAGE_MARGIN * 2
+    val columns = passColumns(listSize)
+    val metrics = passMetrics(listSize, type)
     val parcels = list.parcels.zip(art)
-    val tallest = (parcels.size + columns - 1) / columns
-    val perColumn = if (fitting(room, metrics.height, PASS_GAP) >= tallest) tallest else fitting(room - moreHeight(type) - PASS_GAP, metrics.height, PASS_GAP).coerceAtLeast(1)
-    val shown = parcels.take(perColumn * columns)
-    val more = parcels.size - shown.size
-    val filled = if (columns == 2) listOf(shown.take(shown.size / 2), shown.drop(shown.size / 2)) else listOf(shown)
+    val filled = if (columns == 2) listOf(parcels.take(parcels.size / 2), parcels.drop(parcels.size / 2)) else listOf(parcels)
     val width = (size.width - PAGE_MARGIN * 2 - PASS_GAP * (columns - 1)) / columns
     val locale = ExtensionLocalizer.locale(list.languageCode)
     Box(root().background(ListColors.page)) {
         PageTap(listIntent(context))
         // Each pass stands in half the gap above and below it, the page's margins less as much.
-        Column(GlanceModifier.fillMaxSize().padding(horizontal = PAGE_MARGIN, vertical = PAGE_MARGIN - PASS_GAP / 2)) {
-            Row(GlanceModifier.fillMaxWidth().defaultWeight()) {
-                filled.forEachIndexed { index, column ->
-                    if (index > 0) Spacer(GlanceModifier.width(PASS_GAP))
-                    Column(GlanceModifier.defaultWeight().fillMaxHeight()) {
-                        column.forEach { (parcel, pictures) ->
-                            Box(GlanceModifier.fillMaxWidth().defaultWeight().padding(vertical = PASS_GAP / 2)) { Pass(parcel, pictures, metrics, width, type, locale) }
-                        }
+        Row(GlanceModifier.fillMaxSize().padding(horizontal = PAGE_MARGIN, vertical = PAGE_MARGIN - PASS_GAP / 2)) {
+            filled.forEachIndexed { index, column ->
+                if (index > 0) Spacer(GlanceModifier.width(PASS_GAP))
+                Column(GlanceModifier.defaultWeight().fillMaxHeight()) {
+                    column.forEach { (parcel, pictures) ->
+                        Box(GlanceModifier.fillMaxWidth().defaultWeight().padding(vertical = PASS_GAP / 2)) { Pass(parcel, pictures, metrics, width, type, locale) }
                     }
                 }
             }
-            if (more > 0) MoreLine(copy, more, type, GlanceModifier.padding(top = PASS_GAP / 2, bottom = PASS_GAP / 2))
         }
     }
 }
@@ -349,13 +357,19 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
  * The parcels as rows under the app list's sections ([DeliveryWidgetList.sections]), as `ParcelSections` picks them: as
  * many as the widget holds at the reader's text size, whatever its size, so that no room for another is left blank; a
  * small or medium widget taking smaller type ([ListMetrics.compact]) before it gives a row up
- * ([DeliveryWidgetList.layouts]). A small
- * widget has no room for the headings, nor has one fed by an app that didn't publish the sections
- * ([DeliveryWidgetList.lines]); a medium one splits the lines into two columns about as tall as each other, a heading
- * never ending the first ([DeliveryWidgetList.columns]). The line counting the parcels left out ends the last column,
- * where they would follow its last row.
+ * ([DeliveryWidgetList.layouts]). A small widget has no room for the headings, nor has one fed by an app that didn't
+ * publish the sections ([DeliveryWidgetList.lines]); a medium one splits the lines into two columns about as tall as
+ * each other, a heading never ending the first ([DeliveryWidgetList.columns]). The line counting the parcels left out
+ * ends the last column, where they would follow its last row. The passes' `design`, whose passes don't all fit, tries
+ * the same rows, in a medium widget every parcel down one column without headings before one is left out
+ * ([DeliveryWidgetList.fits]).
  */
-internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: WidgetText) {
+internal class SectionsLayout(
+    list: DeliveryWidgetList,
+    size: DpSize,
+    type: WidgetText,
+    design: DeliveryWidgetList.Design = DeliveryWidgetList.Design.Sections,
+) {
     val sections = list.sections
     val headingHeight = maxOf(
         type.lineHeight(type.points(IosTextStyle.Caption), FontWeight.Medium),
@@ -366,12 +380,13 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
 
     init {
         val kind = listSize(size)
-        val tries = DeliveryWidgetList.layouts(list.parcels.size, kind).ifEmpty { listOf(DeliveryWidgetList.Layout(1, compact = false)) }
+        val tries = DeliveryWidgetList.fits(design, list.parcels.size, kind).mapNotNull { (it as? DeliveryWidgetList.Fit.Rows)?.layout }
+            .ifEmpty { listOf(DeliveryWidgetList.Layout(1, compact = false)) }
 
         fun attempt(tried: DeliveryWidgetList.Layout): Pair<ListLayout, List<List<DeliveryWidgetList.Line>>> {
-            val lines = DeliveryWidgetList.lines(sections, tried.rows, headings = kind != DeliveryWidgetList.Size.Small)
-            val columns = if (kind == DeliveryWidgetList.Size.Medium) DeliveryWidgetList.columns(lines) else listOf(lines)
-            return ListLayout(list, size, type, tried.compact, columns.size) to columns
+            val lines = DeliveryWidgetList.lines(sections, tried.rows, headings = kind != DeliveryWidgetList.Size.Small && !tried.oneColumn)
+            val columns = if (kind == DeliveryWidgetList.Size.Medium && !tried.oneColumn) DeliveryWidgetList.columns(lines) else listOf(lines)
+            return ListLayout(list, size, type, tried.compact, columns.size, tried.oneColumn) to columns
         }
         val kept = tries.asSequence().map(::attempt)
             .firstOrNull { (layout, columns) -> columns.all { height(it, layout) <= layout.room.height } }
@@ -400,12 +415,18 @@ internal class SectionsLayout(list: DeliveryWidgetList, size: DpSize, type: Widg
 }
 
 /**
- * The sections as [SectionsLayout] lays them out, each row marked by its carrier's truck, the stage of one that needs
- * the reader in the warning colour; then the count of the rest at the foot of the last column.
+ * The sections as [SectionsLayout] lays them out for `design`, each row marked by its carrier's truck, the stage of one
+ * that needs the reader in the warning colour; then the count of the rest at the foot of the last column.
  */
 @Composable
-internal fun Sections(list: DeliveryWidgetList, size: DpSize, type: WidgetText, copy: Localizer) {
-    val laid = SectionsLayout(list, size, type)
+internal fun Sections(
+    list: DeliveryWidgetList,
+    size: DpSize,
+    type: WidgetText,
+    copy: Localizer,
+    design: DeliveryWidgetList.Design = DeliveryWidgetList.Design.Sections,
+) {
+    val laid = SectionsLayout(list, size, type, design)
     if (laid.columns.size == 2) {
         Row(GlanceModifier.fillMaxSize()) {
             SectionColumn(laid.columns.first(), laid, copy, GlanceModifier.defaultWeight().fillMaxHeight())
@@ -510,8 +531,6 @@ private fun MoreLine(copy: Localizer, count: Int, type: WidgetText, modifier: Gl
         style = TextStyle(color = ListColors.secondary, fontSize = type.sp(type.points(IosTextStyle.Caption)), fontWeight = FontWeight.Medium),
     )
 }
-
-private fun moreHeight(type: WidgetText): Dp = type.lineHeight(type.points(IosTextStyle.Caption), FontWeight.Medium)
 
 /**
  * A carrier's mark `height` tall, as wide as its picture then is but no wider than `room`. The width is given outright:

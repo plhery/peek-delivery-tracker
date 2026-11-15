@@ -90,8 +90,19 @@ data class DeliveryWidgetList(
         Large(24, 3),
     }
 
-    /** `Layout`: how many rows the sections' design shows, and in which type, `compact` being the smaller. */
-    data class Layout(val rows: Int, val compact: Boolean)
+    /**
+     * `Layout`: how many rows the sections' design shows, and in which type, `compact` being the smaller; `oneColumn`,
+     * in a medium widget, down one column with each row on one line, as in a large widget, and without the headings, as
+     * in a small one, rather than in two columns.
+     */
+    data class Layout(val rows: Int, val compact: Boolean, val oneColumn: Boolean = false)
+
+    /** `Fit`: what the widget shows its parcels as, every parcel's pass or rows. */
+    sealed interface Fit {
+        data object Passes : Fit
+
+        data class Rows(val layout: Layout) : Fit
+    }
 
     /**
      * How the list shows its parcels, by how many there are for its size: up to [Size.cards] of them as cards, up to
@@ -160,6 +171,21 @@ data class DeliveryWidgetList(
          */
         fun layouts(count: Int, size: Size): List<Layout> = (minOf(size.mostRows, count) downTo 1).flatMap { rows ->
             listOf(Layout(rows, compact = false)) + if (size == Size.Large) emptyList() else listOf(Layout(rows, compact = true))
+        }
+
+        /**
+         * `fits(_:count:size:)`: what a widget of `design` tries for `count` parcels, the first that fits being the one
+         * it shows: every parcel's pass, for the passes' design, then the most rows that fit ([layouts]). Passes show
+         * every parcel or none: where two cannot stand one above the other, in a shorter widget or at larger text, the
+         * parcels are rows. In a medium widget, where every parcel's row doesn't fit in two columns either, they try one
+         * column in smaller type before leaving one out.
+         */
+        fun fits(design: Design, count: Int, size: Size): List<Fit> {
+            val rows = layouts(count, size)
+            if (design != Design.Passes) return rows.map(Fit::Rows)
+            val every = rows.takeWhile { it.rows == count }
+            val oneColumn = if (size == Size.Medium && every.isNotEmpty()) listOf(Layout(count, compact = true, oneColumn = true)) else emptyList()
+            return listOf(Fit.Passes) + (every + oneColumn + rows.drop(every.size)).map(Fit::Rows)
         }
 
         /**

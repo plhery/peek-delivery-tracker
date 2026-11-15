@@ -91,7 +91,9 @@ changes while the app runs, it words the days again for the new zone's midnights
   - up to `k`, cards, the app list's Next up first: Next delivery's card or two side by side; in a large widget one
     wide card over the parcel's last four steps, worded as its page words them, a step dated by its day alone
     naming that day and no time, two wide cards, or three of the app list's cards;
-  - up to `2k`, passes in each carrier's colours, in two columns in a medium widget;
+  - up to `2k`, passes in each carrier's colours, in two columns in a medium widget, only where every one fits
+    (`passesFit`): where two can't stand one above the other, in a shorter widget or at larger text, the parcels are
+    rows, in a medium widget down one column without headings before one is left out (`DeliveryWidgetList.fits`);
   - more, rows under the app list's sections, each marked by its carrier's truck, then a line counting the rest at
     the foot of the last column, after the last row shown (`SectionsLayout`). As many rows as fit at every size, so
     that no room for another parcel is left blank: a small widget leaves the headings out, the name over the stage and

@@ -725,6 +725,58 @@ class DeliveryWidgetTests {
         }
     }
 
+    /**
+     * Passes show every parcel or none: where they don't all fit, the widget tries rows, the most first, as the sections'
+     * design does, rather than fewer passes and a line for the others; in a medium widget, every parcel down one column
+     * before one is left out. The cards' and the sections' designs try no pass and no single column.
+     */
+    @Test
+    fun theParcelsWidgetTurnsPassesThatDontAllFitIntoRows() {
+        fun fits(design: DeliveryWidgetList.Design, count: Int, size: DeliveryWidgetList.Size) =
+            DeliveryWidgetList.fits(design, count, size).map { fit ->
+                when (fit) {
+                    DeliveryWidgetList.Fit.Passes -> "passes"
+                    is DeliveryWidgetList.Fit.Rows ->
+                        "${fit.layout.rows}${if (fit.layout.compact) " smaller" else ""}${if (fit.layout.oneColumn) " in one column" else ""}"
+                }
+            }
+        val passes = DeliveryWidgetList.Design.Passes
+        assertEquals(listOf("passes", "2", "2 smaller", "1", "1 smaller"), fits(passes, 2, DeliveryWidgetList.Size.Small))
+        assertEquals(
+            listOf("passes", "3", "3 smaller", "3 smaller in one column", "2", "2 smaller", "1", "1 smaller"),
+            fits(passes, 3, DeliveryWidgetList.Size.Medium),
+        )
+        assertEquals(
+            listOf("passes", "4", "4 smaller", "4 smaller in one column", "3", "3 smaller", "2", "2 smaller", "1", "1 smaller"),
+            fits(passes, 4, DeliveryWidgetList.Size.Medium),
+        )
+        assertEquals(listOf("passes", "6", "5", "4", "3", "2", "1"), fits(passes, 6, DeliveryWidgetList.Size.Large))
+        for (size in DeliveryWidgetList.Size.entries) {
+            for (count in 1..8) {
+                val design = DeliveryWidgetList.make(now, true, "en", listed(count)).design(size)
+                val tried = DeliveryWidgetList.fits(design, count, size)
+                assertEquals("$size $count", design == passes, tried.first() == DeliveryWidgetList.Fit.Passes)
+                assertEquals("$size $count", if (design == passes) 1 else 0, tried.count { it == DeliveryWidgetList.Fit.Passes })
+                // One column is only a medium widget's passes' last try at every parcel; the rest are the rows' layouts.
+                val oneColumn = tried.filter { it is DeliveryWidgetList.Fit.Rows && it.layout.oneColumn }
+                assertEquals(
+                    "$size $count",
+                    if (design == passes && size == DeliveryWidgetList.Size.Medium) {
+                        listOf(DeliveryWidgetList.Fit.Rows(DeliveryWidgetList.Layout(count, compact = true, oneColumn = true)))
+                    } else {
+                        emptyList()
+                    },
+                    oneColumn,
+                )
+                assertEquals(
+                    "$size $count",
+                    DeliveryWidgetList.layouts(count, size).map { DeliveryWidgetList.Fit.Rows(it) },
+                    tried.drop(if (design == passes) 1 else 0).filter { it !in oneColumn },
+                )
+            }
+        }
+    }
+
     /** A row's tint is the one the app's cards mark the stage with, light then dark as hex. */
     @Test
     fun aRowsTintIsTheStagesInTheApp() {

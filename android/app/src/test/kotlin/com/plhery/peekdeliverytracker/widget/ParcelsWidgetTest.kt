@@ -31,6 +31,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.core.listDay
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
@@ -94,7 +95,12 @@ class ParcelsWidgetTest {
     }
 
     /** The rows under the sections at `size`, in the sections' order, and the count of the rest. */
-    private fun sections(list: DeliveryWidgetList, size: DpSize, type: WidgetText = WidgetText(app)) = SectionsLayout(list, size, type)
+    private fun sections(
+        list: DeliveryWidgetList,
+        size: DpSize,
+        type: WidgetText = WidgetText(app),
+        design: DeliveryWidgetList.Design = DeliveryWidgetList.Design.Sections,
+    ) = SectionsLayout(list, size, type, design)
 
     /** The line a row of the two-by-two widget shows. */
     private fun narrowLine(parcel: DeliveryWidgetParcel, list: DeliveryWidgetList) =
@@ -368,6 +374,75 @@ class ParcelsWidgetTest {
         show(some(2), LIST_SMALL) {
             for (parcel in some(2).parcels) onNode(opens(parcel) and hasAnyDescendant(hasTextEqualTo(parcel.listName))).assertExists()
         }
+    }
+
+    /**
+     * Passes show every parcel or none ([DeliveryWidgetList.fits]): where two can't stand one above the other, in a
+     * shorter widget or at larger text, the parcels are rows, every one, rather than fewer passes and a line for the
+     * others; a medium widget's rows try one column, without headings, before one is left out. A phone's usual sizes
+     * keep their passes.
+     */
+    @Test
+    fun passesThatDontAllFitAreRowsForEveryParcel() {
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val folder = files.newFolder("WidgetCards")
+        runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble(), drawn = DeliveryWidgetSelection.limit) }
+        val source = widgetSource(app, folder, store)
+        val demo = source.list(CAPTURED)
+        fun some(count: Int) = demo.copy(parcels = demo.parcels.take(count))
+        val type = WidgetText(app)
+        val largest = WidgetText(fontScaled(2f))
+
+        // Two cells by two and four by two hold every pass at every text size a widget takes; four by four holds six at
+        // the default text, and at the largest, as on the iPhone, they are rows, every one.
+        for (text in listOf(type, largest)) {
+            assertTrue(passesFit(2, LIST_SMALL, text))
+            assertTrue(passesFit(4, LIST_MEDIUM, text))
+        }
+        assertTrue(passesFit(6, LIST_LARGE, type))
+        assertFalse(passesFit(6, LIST_LARGE, largest))
+        assertEquals(6, sections(some(6), LIST_LARGE, largest, DeliveryWidgetList.Design.Passes).rows.size)
+        // Four by three holds four passes, not five or six: those are rows, each on one line.
+        assertTrue(passesFit(4, LIST_FOUR_BY_THREE, type))
+        assertFalse(passesFit(5, LIST_FOUR_BY_THREE, type))
+        val six = sections(some(6), LIST_FOUR_BY_THREE, type, DeliveryWidgetList.Design.Passes)
+        assertEquals(some(6).sections.flatMap { it.parcels }, six.rows)
+        assertEquals(0, six.more)
+        assertTrue(six.layout.lineRows)
+        show(some(6), LIST_FOUR_BY_THREE, source::read) {
+            for (parcel in some(6).parcels) {
+                onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+                // A large pass has the day at its top and the stage beside the name; a row, both at its end.
+                onAllNodes(hasTextEqualTo(lineRowEnd(parcel, six.layout).line))[0].assertExists()
+            }
+            onNode(hasTextEqualTo(moreParcels(english, 2))).assertDoesNotExist()
+            onNode(hasTextEqualTo(moreParcels(english, 1))).assertDoesNotExist()
+        }
+
+        // A medium widget on a phone on its side: one pass a column, so four parcels are rows. Two columns under their
+        // headings hold fewer than four; one column of one-line rows in the smaller type holds every one.
+        val side = LAUNCHER_ON_ITS_SIDE
+        assertFalse(passesFit(4, side, type))
+        assertTrue(sections(some(4), side, type).rows.size < 4)
+        val down = sections(some(4), side, type, DeliveryWidgetList.Design.Passes)
+        assertEquals(some(4).sections.flatMap { it.parcels }, down.rows)
+        assertEquals(1, down.columns.size)
+        assertTrue(down.columns.single().none { it is DeliveryWidgetList.Line.Heading })
+        assertTrue(down.layout.lineRows)
+        assertTrue(down.layout.metrics.compact)
+        show(some(4), side, source::read) {
+            for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (kind in ParcelSectionKind.entries) onNode(hasTextEqualTo(english.text(sectionTitleKey(kind)))).assertDoesNotExist()
+            onNode(hasTextEqualTo(moreParcels(english, 1))).assertDoesNotExist()
+        }
+
+        // Two cells by two made short: rows, both parcels. Without the pictures, the sections' design: no single column.
+        val short = DpSize(LIST_SMALL.width, 120.dp)
+        assertFalse(passesFit(2, short, type))
+        assertEquals(2, sections(some(2), short, type, DeliveryWidgetList.Design.Passes).rows.size)
+        assertTrue(DeliveryWidgetList.fits(DeliveryWidgetList.Design.Sections, 4, DeliveryWidgetList.Size.Medium).none {
+            it is DeliveryWidgetList.Fit.Rows && it.layout.oneColumn
+        })
     }
 
     /**

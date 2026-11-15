@@ -65,9 +65,9 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 
 // The "Parcels" widget's look, the iPhone's list widget (ParcelListWidget.swift): the parcels on their way, in the
-// design their number takes at the widget's size ([DeliveryWidgetList.design]): cards or passes for a few
-// (ParcelsWidgetDesigns.kt), else rows under the app list's sections on the app's page, then a line counting the rest
-// at the widget's foot. Each row is the carrier's truck, the parcel's name, and its stage and day, as the app published
+// design their number takes at the widget's size ([DeliveryWidgetList.design]): cards for a few, passes for a few more
+// where every one fits (ParcelsWidgetDesigns.kt), else rows under the app list's sections on the app's page, then a
+// line counting the rest at the widget's foot. Each row is the carrier's truck, the parcel's name, and its stage and day, as the app published
 // them (DeliveryWidgetStage). The widget's size stands for one of the iPhone's three ([listSize]): small, a column of
 // rows of two lines, the name over the stage and day; medium, two such columns; large, rows of one line, the stage and
 // day at their end. Text is the existing widget's (WidgetText), and as there, the layout works out from the measured
@@ -110,20 +110,24 @@ internal class ListMetrics(val compact: Boolean, type: WidgetText) {
 
 /**
  * How the list's rows look at `size` (`ParcelListMetrics`): the iPhone's widget the size stands for ([size]), the larger
- * type or, `compact`, the smaller ([ListMetrics.compact]), and in `columns` columns, which give the words their width.
+ * type or, `compact`, the smaller ([ListMetrics.compact]), and in `columns` columns, which give the words their width;
+ * `oneColumn`, a medium widget's rows down one column, each on one line ([DeliveryWidgetList.Layout.oneColumn]).
  * [SectionsLayout] picks the type and the rows that fit.
  */
-internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText, compact: Boolean, columns: Int) {
+internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText, compact: Boolean, columns: Int, oneColumn: Boolean = false) {
     val locale: Locale = ExtensionLocalizer.locale(list.languageCode)
     val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN * 2)
 
     val size: DeliveryWidgetList.Size = listSize(size)
 
-    /** Whether rows take one line, the stage and day at their end, as a large widget's: where it is wide enough. */
-    val lineRows = this.size == DeliveryWidgetList.Size.Large && size.width >= WIDE_WIDTH
+    /**
+     * Whether rows take one line, the stage and day at their end, as a large widget's where it is wide enough, and a
+     * medium one's down one column.
+     */
+    val lineRows = oneColumn || (this.size == DeliveryWidgetList.Size.Large && size.width >= WIDE_WIDTH)
 
-    /** The stage and day's size: caption beside the name, caption2 under it. */
-    val statusPoints: Float = type.points(if (lineRows) IosTextStyle.Caption else IosTextStyle.Caption2)
+    /** The stage and day's size: caption beside the name, caption2 under it and beside the name in the smaller type. */
+    val statusPoints: Float = type.points(if (lineRows && !compact) IosTextStyle.Caption else IosTextStyle.Caption2)
     val morePoints: Float = type.points(IosTextStyle.Caption)
     val moreHeight: Dp = type.lineHeight(morePoints, FontWeight.Medium)
     val metrics = ListMetrics(compact, type)
@@ -150,7 +154,7 @@ internal fun listSize(size: DpSize): DeliveryWidgetList.Size = when {
 /**
  * The list at the widget's `size`, in the design its number of parcels takes there ([DeliveryWidgetList.design]):
  * cards, passes, or rows under the app list's sections, which it also shows until the cards' pictures `art` reads are
- * drawn. Each parcel opens itself, and the rest of the widget the app's list ([DeliveryWidgetList.link]). Or why there
+ * drawn, and where the passes don't all fit ([passesFit], [DeliveryWidgetList.fits]). Each parcel opens itself, and the rest of the widget the app's list ([DeliveryWidgetList.link]). Or why there
  * are none, in the existing widget's words.
  */
 @Composable
@@ -166,16 +170,18 @@ fun ParcelsWidgetContent(
     val shown = if (design == DeliveryWidgetList.Design.Cards) list.cardOrder else list.parcels
     val shape = if (design == DeliveryWidgetList.Design.Cards) cardShape(listSize(size), shown.size, size) else DeliveryWidgetPicture.Half
     val drawn = if (design == DeliveryWidgetList.Design.Sections) emptyList() else shown.map { parcel -> parcel.card?.let { art(it, shape) } }
+    val drawnAll = drawn.isNotEmpty() && drawn.all { it != null }
+    val passes = drawnAll && design == DeliveryWidgetList.Design.Passes
     when {
-        drawn.isNotEmpty() && drawn.all { it != null } && design == DeliveryWidgetList.Design.Cards -> ListCards(list, shown, drawn.filterNotNull(), size, type)
-        drawn.isNotEmpty() && drawn.all { it != null } -> Passes(list, drawn.filterNotNull(), size, type, copy)
+        drawnAll && design == DeliveryWidgetList.Design.Cards -> ListCards(list, shown, drawn.filterNotNull(), size, type)
+        passes && passesFit(list.parcels.size, size, type) -> Passes(list, drawn.filterNotNull(), size, type)
         else -> Box(root().background(ListColors.page)) {
             PageTap(listIntent(context))
             Box(GlanceModifier.fillMaxSize().padding(MARGIN)) {
                 when {
                     !list.enabled -> ListState("rectangle.slash", copy.text("widget.disabledTitle"), copy.text("widget.disabledDescription"), size, type)
                     list.parcels.isEmpty() -> ListState("shippingbox", copy.text("app.noneOnWay"), copy.text("app.emptyDescription"), size, type)
-                    else -> Sections(list, size, type, copy)
+                    else -> Sections(list, size, type, copy, if (passes) DeliveryWidgetList.Design.Passes else DeliveryWidgetList.Design.Sections)
                 }
             }
         }

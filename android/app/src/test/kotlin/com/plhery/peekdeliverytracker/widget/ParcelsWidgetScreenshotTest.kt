@@ -38,8 +38,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The "Parcels" widget as a launcher shows it, its RemoteViews applied on a wallpaper: its three sizes with the sample
  * (two cells by two and four by two side by side, four by four under them), beside nothing on its way and the widget
- * switched off; light and dark; the largest text; the sizes between; and the cards and passes a few of the demo's
- * parcels take at each size.
+ * switched off; light and dark; the largest text; the sizes between; the cards and passes a few of the demo's
+ * parcels take at each size; and where passes that don't all fit are rows, at default and larger text.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -157,6 +157,34 @@ class ParcelsWidgetScreenshotTest {
     @Test
     @Config(qualifiers = "w1220dp-h960dp-night-xhdpi")
     fun largeDesignsDark() = largeDesigns("large_designs_dark", dark = true)
+
+    /**
+     * Passes where every one fits, else rows ([DeliveryWidgetList.fits]): two two cells by two, three and four four by
+     * two, four and six four by four; then shorter frames, where they are rows: six four by three, four in a medium
+     * widget on a phone on its side (one column), two in a short small one.
+     */
+    private fun fits(name: String) = shoot(
+        name, dark = false,
+        listOf(
+            listOf(listOf(demo(LIST_SMALL, 2)), listOf(demo(LIST_MEDIUM, 3)), listOf(demo(LIST_MEDIUM, 4))),
+            listOf(listOf(demo(LIST_LARGE, 4)), listOf(demo(LIST_LARGE, 6)), listOf(demo(LIST_FOUR_BY_THREE, 6))),
+            listOf(listOf(demo(LAUNCHER_ON_ITS_SIDE, 4)), listOf(demo(DpSize(LIST_SMALL.width, 120.dp), 2))),
+        ),
+    )
+
+    @Test
+    @Config(qualifiers = "w1220dp-h960dp-xhdpi")
+    fun fitsAtDefaultText() = fits("fits_text_100")
+
+    /** Android's font scale 1.15, the iPhone's Extra Large text. */
+    @Test
+    @Config(qualifiers = "w1220dp-h960dp-xhdpi", fontScale = 1.15f)
+    fun fitsAtLargerText() = fits("fits_text_115")
+
+    /** Android's font scale 1.3, the iPhone's Extra Extra Large text, the largest a widget takes (WidgetText). */
+    @Test
+    @Config(qualifiers = "w1220dp-h960dp-xhdpi", fontScale = 1.3f)
+    fun fitsAtLargestText() = fits("fits_text_130")
 
     /**
      * Between the three: three cells by two (two columns), two by three and two by four (one column of two-line rows),

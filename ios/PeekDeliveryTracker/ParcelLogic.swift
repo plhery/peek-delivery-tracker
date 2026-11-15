@@ -647,7 +647,7 @@ enum ParcelSort: String, CaseIterable, Identifiable {
     var localizationKey: String { "view.sort.\(rawValue)" }
 }
 
-enum ParcelSectionKind: String, Identifiable {
+enum ParcelSectionKind: String, CaseIterable, Identifiable {
     case attention, today, active, delivered, returned, archived
     var id: String { rawValue }
 }

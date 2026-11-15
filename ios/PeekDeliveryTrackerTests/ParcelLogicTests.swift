@@ -1175,9 +1175,9 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DeliveryWidgetSelection.parcels(onTheWay: many, delivered: [arrived], now: now).count, DeliveryWidgetSelection.limit)
     }
 
-    /// The list widget lists the parcels in the next-delivery widget's order and counts those it has no room for, while
-    /// the next-delivery widget still turns through the first few.
-    func testListWidgetCountsTheParcelsItHasNoRoomFor() {
+    /// The Parcels widget lists all the next-delivery widget's parcels, in its order, while the next-delivery widget
+    /// turns through the first few.
+    func testListWidgetListsTheNextDeliveryWidgetsParcelsInItsOrder() {
         let now = Date(timeIntervalSince1970: 1_800_000_000)
         let courier = widgetParcel(label: "Courier", outForDelivery: true)
         let onTheWay = (0..<15).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
@@ -1192,28 +1192,83 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [courier] + onTheWay)
 
         XCTAssertEqual(DeliveryWidgetList.Size.allCases.map(\.rows), [3, 6, 15])
-        for size in DeliveryWidgetList.Size.allCases {
-            let page = DeliveryWidgetList.page(of: listed, rows: size.rows)
-            XCTAssertEqual(page.shown, Array(listed.prefix(size.rows)), "\(size)")
-            XCTAssertEqual(page.more, listed.count - size.rows, "\(size)")
-        }
-        // Room for them all, it counts none; with no parcels, it shows none.
-        XCTAssertEqual(DeliveryWidgetList.page(of: Array(listed.prefix(2)), rows: 3).more, 0)
-        XCTAssertEqual(DeliveryWidgetList.page(of: [], rows: 6).shown, [])
-        XCTAssertEqual(DeliveryWidgetList.page(of: [], rows: 6).more, 0)
         XCTAssertEqual(DeliveryWidgetSelection.listed([], now: now), [])
     }
 
-    /// A medium list widget reads down two columns once one can't hold its parcels, the first never the shorter.
-    func testMediumListWidgetBalancesItsColumns() {
-        let parcels = (0..<6).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
+    /// The Parcels widget shows up to one, two or three parcels for a small, medium or large widget as cards, up to twice
+    /// as many as passes, and more as rows under the app list's sections. A parcel delivered within the day counts, and
+    /// stops counting a day after it arrived.
+    func testParcelsWidgetPicksItsDesignByHowManyParcelsItLists() {
+        func designs(_ size: DeliveryWidgetList.Size) -> String {
+            String((1...8).map { count -> Character in
+                switch DeliveryWidgetList.design(of: count, size: size) {
+                case .cards: "C"
+                case .passes: "P"
+                case .sections: "S"
+                }
+            })
+        }
+        XCTAssertEqual(DeliveryWidgetList.Size.allCases.map(\.cards), [1, 2, 3])
+        XCTAssertEqual(designs(.small), "CPSSSSSS")
+        XCTAssertEqual(designs(.medium), "CCPPSSSS")
+        XCTAssertEqual(designs(.large), "CCCPPPSS")
 
-        XCTAssertEqual(DeliveryWidgetList.columns(of: parcels, perColumn: 3), [Array(parcels[0..<3]), Array(parcels[3..<6])])
-        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(5)), perColumn: 3), [Array(parcels[0..<3]), Array(parcels[3..<5])])
-        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(4)), perColumn: 2), [Array(parcels[0..<2]), Array(parcels[2..<4])])
-        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(3)), perColumn: 3), [Array(parcels.prefix(3))])
-        XCTAssertEqual(DeliveryWidgetList.columns(of: Array(parcels.prefix(2)), perColumn: 1), [[parcels[0]], [parcels[1]]])
-        XCTAssertEqual(DeliveryWidgetList.columns(of: [], perColumn: 3), [])
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let onTheWay = (0..<2).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
+        var arrived = widgetParcel(label: "Arrived", outForDelivery: false)
+        arrived.deliveredAt = now.addingTimeInterval(-3_600)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: onTheWay, delivered: [arrived], now: now, limit: .max)
+        let design = { (date: Date) in DeliveryWidgetList.design(of: DeliveryWidgetSelection.listed(parcels, now: date).count, size: .medium) }
+        XCTAssertEqual(design(now), .passes)
+        XCTAssertEqual(design(now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), .cards)
+    }
+
+    /// Under its sections the widget lists the parcels as the app's list does: its sections in its order, each led by its
+    /// Next up, then the widgets' order; the cards put the Next up first. A snapshot from an app that published no
+    /// sections lists them under none, in the widgets' order.
+    func testParcelsWidgetSectionsAreTheAppListsWithItsNextUpFirst() {
+        func parcel(_ label: String, _ section: String?, nextUp: Bool = false) -> DeliveryWidgetParcel {
+            var parcel = widgetParcel(label: label, outForDelivery: false)
+            parcel.section = section
+            parcel.nextUp = nextUp
+            return parcel
+        }
+        let today = parcel("Today", "today")
+        let coming = parcel("Coming", "active")
+        let next = parcel("Next", "today", nextUp: true)
+        let arrived = parcel("Arrived", "delivered")
+        let stuck = parcel("Stuck", "attention")
+        let widgets = [today, coming, next, arrived, stuck]
+
+        let sections = DeliveryWidgetList.sections(widgets)
+        XCTAssertEqual(sections.map(\.kind), ["attention", "today", "active", "delivered"])
+        XCTAssertEqual(sections.map { $0.parcels.map(\.label) }, [["Stuck"], ["Next", "Today"], ["Coming"], ["Arrived"]])
+        XCTAssertEqual(DeliveryWidgetList.cardOrder(widgets).map(\.label), ["Next", "Today", "Coming", "Arrived", "Stuck"])
+        XCTAssertEqual(DeliveryWidgetList.sectionKinds, ParcelSectionKind.allCases.map(\.rawValue))
+
+        let unsectioned = [today, parcel("Older app", nil), coming]
+        XCTAssertEqual(DeliveryWidgetList.sections(unsectioned), [DeliveryWidgetList.Section(kind: nil, parcels: unsectioned)])
+        XCTAssertEqual(DeliveryWidgetList.sections([parcel("Newer app", "someday"), next]).map(\.kind), [nil])
+        XCTAssertEqual(DeliveryWidgetList.sections([]), [])
+    }
+
+    /// A step's time is its clock on its day, and its short weekday and clock from the next, in the reader's language.
+    func testAWidgetStepsTimeNamesItsWeekdayFromAnotherDay() throws {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = try XCTUnwrap(TimeZone(identifier: "Europe/Paris"))
+        let thursdayEvening = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 11, day: 12, hour: 21, minute: 40)))
+        let thursdayMorning = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 11, day: 12, hour: 8, minute: 5)))
+        let friday = try XCTUnwrap(calendar.date(byAdding: .day, value: 1, to: thursdayMorning))
+        let time = { (step: DeliveryWidgetStep, now: Date, language: String) in
+            step.time(now: now, locale: Locale(identifier: language), calendar: calendar)
+        }
+
+        XCTAssertEqual(time(DeliveryWidgetStep(at: thursdayMorning, text: "Sorted", clock: "08:05"), thursdayEvening, "en"), "08:05")
+        let evening = DeliveryWidgetStep(at: thursdayEvening, text: "Sorted", clock: "21:40")
+        XCTAssertEqual(["en", "fr", "de"].map { time(evening, friday, $0) }, ["Thu 21:40", "jeu 21:40", "Do 21:40"])
+        // A step dated by its day alone names the day; one without the app's clock reads the time in the language.
+        XCTAssertEqual(time(DeliveryWidgetStep(at: thursdayMorning, text: "Sorted", clock: ""), friday, "en"), "Thu")
+        XCTAssertEqual(time(DeliveryWidgetStep(at: thursdayEvening, text: "Sorted"), thursdayEvening, "fr"), "21:40")
     }
 
     /// A row names the parcel, or its carrier when the reader gave it no name, and reads its stage then its day.
@@ -1964,7 +2019,10 @@ final class ParcelLogicTests: XCTestCase {
 
         let published = ParcelStore.widgetDeliveries(of: [expected, delivered], localizer: localizer, now: lateThursday)
         XCTAssertEqual(published.map(\.detail), ["tomorrow", "today"])
-        XCTAssertEqual(DeliveryWidgetDays.changes(in: published, after: lateThursday), [friday, saturday])
+        // On Tuesday the parcel last scanned on Thursday morning has gone four days without a scan, and needs the reader.
+        let tuesday = try XCTUnwrap(calendar.date(byAdding: .day, value: 5, to: thursday))
+        XCTAssertEqual(DeliveryWidgetDays.changes(in: published, after: lateThursday), [friday, saturday, tuesday])
+        XCTAssertEqual(published.first?.worded(at: tuesday).section, "attention")
         XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: lateThursday).map(\.detail), ["tomorrow", "today"])
 
         let fridayMorning = friday.addingTimeInterval(8 * 3_600)
@@ -1977,6 +2035,85 @@ final class ParcelLogicTests: XCTestCase {
 
         // A day later the estimate has passed, and the delivery has left the widgets.
         XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: saturday.addingTimeInterval(8 * 3_600)).map(\.detail), ["In transit"])
+    }
+
+    /// The app publishes where its list puts each parcel, which one is its Next up, and the carrier shown, and the last
+    /// steps of the first parcels, latest first, for a large widget's card.
+    @MainActor
+    func testTheStorePublishesEachParcelsSectionNextUpAndLastSteps() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        localizer.language = .en
+        let calendar = Calendar.current
+        let thursday = try XCTUnwrap(DateParser.deliveryDate("2026-11-12"))
+        let now = try XCTUnwrap(calendar.date(bySettingHour: 12, minute: 0, second: 0, of: thursday))
+        let hoursAgo = { (hours: Double) in DateParser.isoString(now.addingTimeInterval(-hours * 3_600)) }
+        let courierID = UUID(), busyID = UUID(), arrivedID = UUID()
+        var courier = makeParcel(id: courierID, events: [event(courierID, .inTransit, hoursAgo(26)), event(courierID, .outForDelivery, hoursAgo(2))])
+        courier.expectedDelivery = "2026-11-12"
+        let busy = makeParcel(id: busyID, events: (1...6).map { hour in
+            TrackingEvent(id: UUID(), packageID: busyID, stage: .inTransit, description: "Step \(hour)", occurredAt: hoursAgo(Double(hour)))
+        }.shuffled())
+        // The first of the others is held by the carrier, and needs the reader.
+        let others = (0..<8).map { index in
+            let id = UUID()
+            return makeParcel(id: id, events: [event(id, index == 0 ? .exception : .inTransit, hoursAgo(10 + Double(index)))])
+        }
+        let quiet = makeParcel(events: [])
+        let arrived = makeParcel(id: arrivedID, events: [event(arrivedID, .delivered, hoursAgo(3))])
+
+        let published = ParcelStore.widgetDeliveries(of: [quiet, arrived, busy, courier] + others, localizer: localizer, now: now)
+        XCTAssertEqual(published.count, 12)
+        XCTAssertEqual(published.map(\.carrierId), Array(repeating: "ups", count: 12))
+        XCTAssertEqual(published.filter { $0.nextUp == true }.map(\.id), [courierID])
+        XCTAssertTrue(published.allSatisfy { $0.nextUp != nil && $0.section != nil })
+        let section = { (id: UUID) in published.first { $0.id == id }?.section }
+        XCTAssertEqual([section(courierID), section(busyID), section(others[0].id), section(quiet.id), section(arrivedID)],
+                       ["today", "active", "attention", "active", "delivered"])
+
+        let steps = try XCTUnwrap(published.first { $0.id == busyID }?.steps)
+        XCTAssertEqual(steps.map(\.text), ["Step 1", "Step 2", "Step 3", "Step 4"])
+        XCTAssertEqual(steps.map(\.clock), ["11:00", "10:00", "09:00", "08:00"])
+        XCTAssertEqual(steps.first?.time(now: now, locale: Locale(identifier: "en")), "11:00")
+        // Only the first parcels carry steps; a parcel without events has none.
+        XCTAssertTrue(published.prefix(DeliveryWidgetSelection.limit).allSatisfy { $0.steps != nil })
+        XCTAssertEqual(published.dropFirst(DeliveryWidgetSelection.limit).map(\.steps), [nil, nil, nil, nil])
+        XCTAssertNil(ParcelStore.widgetDeliveries(of: [quiet], localizer: localizer, now: now).first?.steps)
+    }
+
+    /// Published late on Thursday, Friday's parcel moves under Arriving today at midnight and leads as Next up, and
+    /// Thursday's goes back under On the way. The steps then name their weekday, so the widget is drawn again at the
+    /// midnight after each.
+    @MainActor
+    func testTheParcelsWidgetsSectionsAndNextUpFollowTheDay() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        localizer.language = .en
+        let calendar = Calendar.current
+        let thursday = try XCTUnwrap(DateParser.deliveryDate("2026-11-12"))
+        let lateThursday = try XCTUnwrap(calendar.date(bySettingHour: 23, minute: 30, second: 0, of: thursday))
+        let friday = try XCTUnwrap(calendar.date(byAdding: .day, value: 1, to: thursday))
+        let fridayMorning = friday.addingTimeInterval(8 * 3_600)
+        let thursdays = UUID(), fridays = UUID()
+        var due = makeParcel(id: thursdays, events: [event(thursdays, .inTransit, DateParser.isoString(thursday.addingTimeInterval(20 * 3_600)))])
+        due.expectedDelivery = "2026-11-12"
+        var next = makeParcel(id: fridays, events: [event(fridays, .inTransit, DateParser.isoString(thursday.addingTimeInterval(9 * 3_600)))])
+        next.expectedDelivery = "2026-11-13"
+
+        let published = ParcelStore.widgetDeliveries(of: [due, next], localizer: localizer, now: lateThursday)
+        func shown(_ date: Date) -> [String] {
+            DeliveryWidgetList.cardOrder(DeliveryWidgetSelection.listed(published, now: date)).map {
+                "\($0.id == fridays ? "Friday" : "Thursday") \($0.section ?? "none")\($0.nextUp == true ? ", next" : "")"
+            }
+        }
+        XCTAssertEqual(shown(lateThursday), ["Thursday today, next", "Friday active"])
+        XCTAssertEqual(shown(fridayMorning), ["Friday today, next", "Thursday active"])
+        XCTAssertEqual(DeliveryWidgetList.sections(DeliveryWidgetSelection.listed(published, now: fridayMorning)).map(\.kind), ["today", "active"])
+        XCTAssertEqual(published.first { $0.id == thursdays }?.steps?.first?.time(now: fridayMorning, locale: Locale(identifier: "en")), "Thu 20:00")
+
+        // A step alone, its words and its parcel's unchanged, still has the widget drawn again the midnight after it.
+        var stepped = widgetParcel(label: "Sorted", outForDelivery: false)
+        stepped.steps = [DeliveryWidgetStep(at: thursday.addingTimeInterval(20 * 3_600), text: "Sorted", clock: "20:00")]
+        XCTAssertEqual(DeliveryWidgetDays.changes(in: [stepped], after: lateThursday), [friday])
+        XCTAssertEqual(DeliveryWidgetDays.changes(in: [stepped], after: fridayMorning), [])
     }
 
     @MainActor

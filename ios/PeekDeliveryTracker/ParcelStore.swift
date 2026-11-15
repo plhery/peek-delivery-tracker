@@ -108,6 +108,9 @@ final class ParcelStore: ObservableObject {
     private let widgetPictures: URL?
     private var widgetPicturesFailed = Set<String>()
     private var widgetPicturesTask: Task<Void, Never>?
+    /// Where the carriers' trucks are drawn for the Parcels widget, and those drawn since the app opened.
+    private let widgetTrucks: URL?
+    private var widgetTrucksDrawn = Set<CarrierID>()
     private var deliveryActivityTask: Task<Void, Never>?
     private var deliveryPushToStartTask: Task<Void, Never>?
     private var deliveryActivityUpdatesTask: Task<Void, Never>?
@@ -147,6 +150,7 @@ final class ParcelStore: ObservableObject {
             fallbackToStandard: true
         )
         widgetPictures = DeliveryWidgetPicture.folder(appGroupIdentifier: configuration.appGroupIdentifier)
+        widgetTrucks = DeliveryWidgetTruck.folder(appGroupIdentifier: configuration.appGroupIdentifier)
         liveActivityRevocations = LiveActivityRevocations(configuration: configuration, transport: transport)
         api = DeliveryAPIClient(configuration: configuration, session: session, transport: transport)
         demo = DemoRepository()
@@ -341,6 +345,7 @@ final class ParcelStore: ObservableObject {
         deliveryWidgetStore?.clearSnapshot()
         publishedWidgetState = nil
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: [], in: widgetPictures) }
+        if let widgetTrucks { DeliveryWidgetPictures.drawTrucks([], drawn: &widgetTrucksDrawn, localizer: localizer, in: widgetTrucks) }
         for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
         scheduleDeliveryLiveActivities(forceEnd: true)
     }
@@ -1227,6 +1232,10 @@ final class ParcelStore: ObservableObject {
 
     /// The widgets' parcels: those on their way, then those delivered within the last day, the latest first. Their
     /// details are also worded for the next midnights.
+    ///
+    /// What the Parcels widget shows besides: where the app's list puts each parcel and which is its Next up, also for
+    /// those midnights, the carrier shown, and the last steps of the first parcels. Whichever ends up alone in the widget
+    /// is among them: one on its way comes first, and with none, the one delivered last stays longest and leads.
     static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date()) -> [DeliveryWidgetParcel] {
         let midnights = DeliveryWidgetDays.midnights(after: now)
         let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
@@ -1238,10 +1247,57 @@ final class ParcelStore: ObservableObject {
                 item.deliveredAt = arrived
                 return item
             }
-        return DeliveryWidgetSelection.parcels(
+        let ordered = DeliveryWidgetSelection.parcels(
             onTheWay: nextDeliveries(of: parcels, localizer: localizer, now: now, midnights: midnights),
             delivered: delivered, now: now, limit: .max
         )
+        func sections(at date: Date) -> [UUID: String] {
+            let pairs = ParcelOrganizer.sections(from: parcels, now: date).flatMap { section in section.parcels.map { ($0.id, section.kind.rawValue) } }
+            return Dictionary(pairs) { first, _ in first }
+        }
+        let section = sections(at: now)
+        let next = ParcelOrganizer.nextDelivery(from: parcels, now: now)?.id
+        let sectionLater = midnights.map(sections(at:))
+        let nextLater = midnights.map { ParcelOrganizer.nextDelivery(from: parcels, now: $0)?.id }
+        let byID = Dictionary(parcels.map { ($0.id, $0) }) { first, _ in first }
+        return ordered.enumerated().map { index, published in
+            guard let parcel = byID[published.id] else { return published }
+            var item = published
+            item.section = section[item.id]
+            item.nextUp = item.id == next
+            item.carrierId = parcel.displayedCarrier.rawValue
+            item.steps = index < DeliveryWidgetSelection.limit ? widgetSteps(parcel, localizer: localizer) : nil
+            let first = DeliveryWidgetWording(from: now, detail: item.detail, section: item.section, nextUp: item.nextUp)
+            item.later = DeliveryWidgetDays.later(than: first, at: midnights) { midnight in
+                let at = midnights.firstIndex(of: midnight) ?? 0
+                return DeliveryWidgetWording(from: midnight, detail: published.worded(at: midnight).detail,
+                                             section: sectionLater[at][item.id], nextUp: item.id == nextLater[at])
+            }
+            return item
+        }
+    }
+
+    /// The parcel's last steps, latest first, as its history words them: when, the carrier's words, the place, else its
+    /// name on the map, and the time.
+    private static func widgetSteps(_ parcel: Parcel, localizer: Localizer) -> [DeliveryWidgetStep]? {
+        let dated = parcel.trackingEvents.enumerated().compactMap { offset, event in
+            DateParser.date(event.occurredAt).map { (offset: offset, event: event, at: $0) }
+        }
+        let steps = dated
+            .sorted { $0.at != $1.at ? $0.at > $1.at : $0.offset < $1.offset }
+            .prefix(DeliveryWidgetSelection.steps)
+            .map { step in
+                let event = step.event
+                let location = event.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
+                return DeliveryWidgetStep(
+                    // A step dated by its day alone is on that day where the reader is.
+                    at: event.calendarDay ?? step.at,
+                    text: localizer.eventDescription(event.description.nonEmpty ?? localizer.text(event.stage.localizationKey)),
+                    place: location.map { EventLocation.spoken($0, placed: event.place, language: localizer.language) } ?? event.place?.name,
+                    clock: event.calendarDay == nil ? localizer.clockTime(step.at) : ""
+                )
+            }
+        return steps.isEmpty ? nil : Array(steps)
     }
 
     /// `detail` words when the parcel is expected or arrived, as of a moment.
@@ -1280,6 +1336,10 @@ final class ParcelStore: ObservableObject {
         }
         // Cards still being drawn come with the next publication, so that the widget reloads once for them.
         guard snapshot == nil || widgetPicturesTask == nil else { return }
+        if let widgetTrucks {
+            let carriers = Set((snapshot?.parcels ?? []).compactMap { $0.carrierId.map(CarrierID.init(rawValue:)) })
+            DeliveryWidgetPictures.drawTrucks(carriers, drawn: &widgetTrucksDrawn, localizer: localizer, in: widgetTrucks)
+        }
 
         // Reloads spend the widget's system budget; skip them when nothing it shows changed.
         let state = DeliveryWidgetState(

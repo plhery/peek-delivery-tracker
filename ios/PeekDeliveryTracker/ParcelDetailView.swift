@@ -2024,7 +2024,7 @@ private struct DashedRule: Shape {
 
 /// The flag leads and the country closes the place, named in the reader's language. A place written in Chinese,
 /// Japanese or Korean script is named by the town it was placed in (`TrackingLocation.place(_:placed:language:)`).
-private struct EventLocation: View {
+struct EventLocation: View {
     let location: String
     /// Where the server placed the scan: its country settles a final code that is also a state or canton.
     let placed: EventPlace?

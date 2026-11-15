@@ -19,23 +19,65 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     var stage: DeliveryWidgetStage? = nil
     /// Whether the reader named the parcel: the list widget calls one without a name by its carrier.
     var named: Bool? = nil
-    /// The detail from each of the next midnights where its words change, which the app writes ahead: "tomorrow"
-    /// becomes "today" while the app stays closed. None from an app that didn't write them.
+    /// The detail, section and Next up from each of the next midnights where one changes, which the app writes ahead:
+    /// "tomorrow" becomes "today", under Arriving today, while the app stays closed. None from an app that didn't write
+    /// them.
     var later: [DeliveryWidgetWording]? = nil
+    /// The section of the app's list the parcel is in (`ParcelSectionKind`), which the Parcels widget's sections follow.
+    var section: String? = nil
+    /// Whether it is the app list's Next up, which leads the Parcels widget's cards and its section there.
+    var nextUp: Bool? = nil
+    /// The carrier shown, whose truck marks the parcel's row in the Parcels widget's sections.
+    var carrierId: String? = nil
+    /// Its last tracking steps, latest first, which the Parcels widget shows of a parcel alone in a large widget. Only
+    /// the first `DeliveryWidgetSelection.limit` parcels carry them.
+    var steps: [DeliveryWidgetStep]? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
     }
 }
 
-/// A parcel's detail from a moment on.
+/// A parcel's detail from a moment on, and its section and whether it is Next up, where the app published them.
 struct DeliveryWidgetWording: Codable, Equatable, Hashable, Sendable {
     let from: Date
     let detail: String
+    var section: String? = nil
+    var nextUp: Bool? = nil
+
+    /// Whether it words the parcel as `other` does, from whichever moment.
+    func says(as other: DeliveryWidgetWording) -> Bool {
+        detail == other.detail && section == other.section && nextUp == other.nextUp
+    }
+}
+
+/// A step of a parcel's tracking: when, the carrier's words as the app's history writes them, where, and its time as
+/// the app writes a time.
+struct DeliveryWidgetStep: Codable, Equatable, Hashable, Sendable {
+    let at: Date
+    let text: String
+    var place: String? = nil
+    /// Empty for a step the carrier dated by its day alone.
+    var clock: String? = nil
+
+    /// Its time as the Parcels widget writes it: the time alone on `now`'s day, else after the short weekday
+    /// ("Thu 21:40", "jeu 21:40", "Do 21:40").
+    func time(now: Date, locale: Locale, calendar: Calendar = .current) -> String {
+        let clock = clock ?? at.formatted(Date.FormatStyle(date: .omitted, time: .shortened, timeZone: calendar.timeZone).locale(locale))
+        guard !calendar.isDate(at, inSameDayAs: now) else { return clock }
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.calendar = calendar
+        formatter.timeZone = calendar.timeZone
+        formatter.dateFormat = "EEE"
+        let weekday = formatter.string(from: at).replacingOccurrences(of: ".", with: "")
+        return clock.isEmpty ? weekday : "\(weekday) \(clock)"
+    }
 }
 
 /// The days the widgets' words follow while the app stays closed: "today", "tomorrow" and "yesterday" change at
-/// midnight, and an estimate that has passed gives way to the status.
+/// midnight, and an estimate that has passed gives way to the status. The app list's sections and its Next up change
+/// with them: a parcel due today is under Arriving today.
 enum DeliveryWidgetDays {
     /// How many midnights ahead the app words the parcels.
     static let ahead = 7
@@ -48,19 +90,31 @@ enum DeliveryWidgetDays {
 
     /// The detail's words at each of `midnights` where they change from those before.
     static func later(than detail: String, at midnights: [Date], _ words: (Date) -> String) -> [DeliveryWidgetWording]? {
-        var last = detail
+        later(than: DeliveryWidgetWording(from: .distantPast, detail: detail), at: midnights) {
+            DeliveryWidgetWording(from: $0, detail: words($0))
+        }
+    }
+
+    /// The parcel's wording at each of `midnights` where it changes from the one before.
+    static func later(
+        than first: DeliveryWidgetWording, at midnights: [Date], _ wording: (Date) -> DeliveryWidgetWording
+    ) -> [DeliveryWidgetWording]? {
+        var last = first
         let changes = midnights.compactMap { midnight -> DeliveryWidgetWording? in
-            let next = words(midnight)
-            guard next != last else { return nil }
+            let next = wording(midnight)
+            guard !next.says(as: last) else { return nil }
             last = next
-            return DeliveryWidgetWording(from: midnight, detail: next)
+            return next
         }
         return changes.isEmpty ? nil : changes
     }
 
-    /// When the parcels' words change after `now`: a widget's timeline has an entry at each.
-    static func changes(in parcels: [DeliveryWidgetParcel], after now: Date) -> [Date] {
-        Set(parcels.flatMap { $0.later ?? [] }.map(\.from).filter { $0 > now }).sorted()
+    /// When the parcels' words change after `now`, and the midnight after each of their steps, from which a step's time
+    /// names its weekday: a widget's timeline has an entry at each.
+    static func changes(in parcels: [DeliveryWidgetParcel], after now: Date, calendar: Calendar = .current) -> [Date] {
+        let worded = parcels.flatMap { $0.later ?? [] }.map(\.from)
+        let stepped = parcels.flatMap { $0.steps ?? [] }.compactMap { midnights(after: $0.at, count: 1, calendar: calendar).first }
+        return Set((worded + stepped).filter { $0 > now }).sorted()
     }
 }
 
@@ -103,6 +157,23 @@ enum DeliveryWidgetPicture: String, CaseIterable, Sendable {
     }
 }
 
+/// A carrier's truck, which marks its parcels' rows in the Parcels widget. A widget has too little memory for the
+/// carriers' liveries, so the app draws the truck of each carrier the widget lists into the shared container.
+enum DeliveryWidgetTruck {
+    /// The truck's size in points, as the app's cards draw it, and its pictures' pixels per point.
+    static let size = CGSize(width: 27, height: 18)
+    static let scale: CGFloat = 3
+
+    static func folder(appGroupIdentifier: String) -> URL? {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?
+            .appending(path: "Library/Caches/WidgetTrucks", directoryHint: .isDirectory)
+    }
+
+    static func file(of carrier: String, dark: Bool, in folder: URL) -> URL {
+        folder.appending(path: "\(carrier)-\(dark ? "dark" : "light").png")
+    }
+}
+
 struct DeliveryWidgetSnapshot: Codable, Equatable, Sendable {
     let generatedAt: Date
     let languageCode: String
@@ -115,8 +186,9 @@ struct DeliveryWidgetSnapshot: Codable, Equatable, Sendable {
 enum DeliveryWidgetSample {
     static let folderName = "WidgetSample"
     static let snapshotsFile = "snapshots.json"
-    /// The picture of each shape a sample card shows in: the first card alone in a small widget, both in a medium one.
-    static func pictures(of index: Int) -> [DeliveryWidgetPicture] { index == 0 ? [.small, .half] : [.half] }
+    /// The picture of each shape a sample card shows in: the first card alone in a small widget, both in a medium one,
+    /// and both across a large one.
+    static func pictures(of index: Int) -> [DeliveryWidgetPicture] { index == 0 ? [.small, .half, .wide] : [.half, .wide] }
 
     static func snapshot(languageCode: String, in folder: URL) -> DeliveryWidgetSnapshot? {
         guard let data = try? Data(contentsOf: folder.appending(path: snapshotsFile)),
@@ -165,6 +237,8 @@ enum DeliveryWidgetSelection {
     static let limit = 8
     /// How long a delivered parcel stays in the widget.
     static let deliveredFor: TimeInterval = 24 * 60 * 60
+    /// How many of a parcel's last steps the Parcels widget shows of it alone, which the first `limit` parcels carry.
+    static let steps = 4
 
     /// The parcels the widgets show, in their order: those out for delivery, then the others on their way as `onTheWay`
     /// orders them, then those delivered within the last day, as `delivered` orders them. The next-delivery widget turns
@@ -206,7 +280,8 @@ enum DeliveryWidgetSelection {
     }
 }
 
-/// The list widget: the widgets' parcels in their order, one to a row, and a last line that counts those left out.
+/// The Parcels widget: the widgets' parcels as cards, passes, or rows under the app list's sections, by how many there
+/// are, and a last line that counts those left out.
 enum DeliveryWidgetList {
     /// Opens the deliveries.
     static let link = URL(string: "peekdeliverytracker://parcels")!
@@ -223,20 +298,57 @@ enum DeliveryWidgetList {
             case .large: 15
             }
         }
+
+        /// The cards each size holds whole: one; two side by side; three one above another.
+        var cards: Int {
+            switch self {
+            case .small: 1
+            case .medium: 2
+            case .large: 3
+            }
+        }
     }
 
-    /// The parcels `rows` rows show, and how many there are after them.
-    static func page(of parcels: [DeliveryWidgetParcel], rows: Int) -> (shown: [DeliveryWidgetParcel], more: Int) {
-        let shown = Array(parcels.prefix(max(rows, 0)))
-        return (shown, parcels.count - shown.count)
+    /// How the widget shows its parcels.
+    enum Design: Equatable, Sendable {
+        /// The Next delivery widget's cards, the app list's Next up first.
+        case cards
+        /// A pass for each parcel, in its carrier's colours.
+        case passes
+        /// Rows under the app list's sections, each marked with its carrier's truck.
+        case sections
     }
 
-    /// A medium widget's columns: the parcels it shows in two, read down the first then the second, once one column
-    /// can't hold them all; else in one, across the widget.
-    static func columns(of shown: [DeliveryWidgetParcel], perColumn: Int) -> [[DeliveryWidgetParcel]] {
-        guard shown.count > max(perColumn, 1) else { return shown.isEmpty ? [] : [shown] }
-        let first = (shown.count + 1) / 2
-        return [Array(shown.prefix(first)), Array(shown.dropFirst(first))]
+    /// The design for `count` parcels: up to `size.cards` of them as cards, up to twice as many as passes, more as rows
+    /// under the sections. Each shows every parcel whole up to there: a large widget holds three cards and six passes,
+    /// one above another.
+    static func design(of count: Int, size: Size) -> Design {
+        count <= size.cards ? .cards : count <= size.cards * 2 ? .passes : .sections
+    }
+
+    /// The parcels as the cards show them: the app list's Next up first, then the widgets' order.
+    static func cardOrder(_ parcels: [DeliveryWidgetParcel]) -> [DeliveryWidgetParcel] {
+        parcels.filter { $0.nextUp == true } + parcels.filter { $0.nextUp != true }
+    }
+
+    /// The app list's sections, in its order (`ParcelSectionKind`).
+    static let sectionKinds = ["attention", "today", "active", "delivered", "returned", "archived"]
+
+    /// A section of the app's list and the parcels under it; of none where the app didn't publish the sections.
+    struct Section: Equatable, Sendable {
+        let kind: String?
+        let parcels: [DeliveryWidgetParcel]
+    }
+
+    /// The parcels under the app list's sections, in its order, each with its Next up first, then the widgets' order;
+    /// under none, in the widgets' order, where one has no section, as from an app that didn't publish them.
+    static func sections(_ parcels: [DeliveryWidgetParcel]) -> [Section] {
+        guard !parcels.isEmpty else { return [] }
+        guard parcels.allSatisfy({ $0.section.map(sectionKinds.contains) ?? false }) else { return [Section(kind: nil, parcels: parcels)] }
+        return sectionKinds.compactMap { kind in
+            let under = parcels.filter { $0.section == kind }
+            return under.isEmpty ? nil : Section(kind: kind, parcels: cardOrder(under))
+        }
     }
 }
 
@@ -248,11 +360,13 @@ extension String {
 }
 
 extension DeliveryWidgetParcel {
-    /// The parcel as the widgets word it at `date`: the detail the app wrote for the last midnight before it.
+    /// The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it.
     func worded(at date: Date) -> DeliveryWidgetParcel {
         guard let wording = later?.last(where: { $0.from <= date }) else { return self }
         var parcel = self
         parcel.detail = wording.detail
+        parcel.section = wording.section ?? section
+        parcel.nextUp = wording.nextUp ?? nextUp
         return parcel
     }
 

@@ -117,7 +117,28 @@ enum DeliveryWidgetPictures {
         }
     }
 
-    private static func write(_ view: some View, dark: Bool, localizer: Localizer, to file: URL) -> Bool {
+    /// Draws the truck of each of `carriers` not drawn since the app opened, so that a livery the app changed is drawn
+    /// afresh, and removes the others'.
+    static func drawTrucks(_ carriers: Set<CarrierID>, drawn: inout Set<CarrierID>, localizer: Localizer, in folder: URL) {
+        let manager = FileManager.default
+        let kept = Set(carriers.flatMap { carrier in [false, true].map { DeliveryWidgetTruck.file(of: carrier.rawValue, dark: $0, in: folder).lastPathComponent } })
+        for file in (try? manager.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil)) ?? [] where !kept.contains(file.lastPathComponent) {
+            try? manager.removeItem(at: file)
+        }
+        drawn.formIntersection(carriers)
+        guard !carriers.isEmpty, (try? manager.createDirectory(at: folder, withIntermediateDirectories: true)) != nil else { return }
+        for carrier in carriers {
+            let files = [false, true].map { DeliveryWidgetTruck.file(of: carrier.rawValue, dark: $0, in: folder) }
+            guard !drawn.contains(carrier) || !files.allSatisfy({ manager.fileExists(atPath: $0.path) }) else { continue }
+            let truck = CarrierTruckMark(identity: CarrierVisualIdentity.of(carrier, language: localizer.language))
+            let written = zip([false, true], files).allSatisfy { dark, file in
+                write(truck, dark: dark, localizer: localizer, scale: DeliveryWidgetTruck.scale, to: file)
+            }
+            if written { drawn.insert(carrier) }
+        }
+    }
+
+    private static func write(_ view: some View, dark: Bool, localizer: Localizer, scale: CGFloat? = nil, to file: URL) -> Bool {
         let renderer = ImageRenderer(
             content: view
                 .environmentObject(localizer)
@@ -125,7 +146,7 @@ enum DeliveryWidgetPictures {
                 .environment(\.colorScheme, dark ? .dark : .light)
                 .environment(\.dynamicTypeSize, .large)
         )
-        renderer.scale = scale
+        renderer.scale = scale ?? Self.scale
         renderer.isOpaque = false
         guard let image = renderer.cgImage,
               let destination = CGImageDestinationCreateWithURL(file as CFURL, UTType.png.identifier as CFString, 1, nil) else { return false }

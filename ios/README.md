@@ -197,17 +197,20 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test
   checks them against the demo; it redraws them when run with
   `TEST_RUNNER_PEEK_WIDGET_SAMPLE` set to that folder's full path.
-- **The Parcels widget** lists the same parcels in the same order, one to a row: the name, or the
-  carrier's for a parcel without one, its stage in the list's words, symbol and colour, and the day
-  it is expected; a line too narrow for both keeps the day. A small one has three rows, a medium one two columns of three and a large one up to
-  fifteen; larger text keeps fewer. A last line counts the parcels left out. The small widget and that
-  line open the list (`peekdeliverytracker://parcels`); in the medium and large ones, a row opens its
-  parcel. The app publishes every parcel for it, and pictures only for the first few the other widget
-  turns through.
-- **The widgets' days** follow the clock while the app stays closed. The app also words each parcel's day
-  for the next seven midnights where it changes, and both widgets and Siri's Next delivery read the words
+- **The Parcels widget** lists the same parcels, its design chosen by how many there are: up to one, two or three
+  for a small, medium or large widget as the other widget's cards, the list's Next up first (a large one with a single
+  parcel adds its last four steps); up to twice that as passes in the carriers' colours; more as rows under the
+  list's sections, each marked with its carrier's truck, a parcel needing the reader in the warning colour
+  (`DeliveryWidgetList.design`). Rows and passes keep fewer at larger text, and a last line counts the others. Until
+  the app has drawn every listed parcel's card, the widget shows rows. The small widget and that line open the list
+  (`peekdeliverytracker://parcels`); in the medium and large ones, a card, pass or row opens its parcel. The app
+  publishes every parcel with its section, whether it is Next up, and its carrier, the first few with their last
+  steps, and draws each listed carrier's truck into the App Group.
+- **The widgets' days** follow the clock while the app stays closed. The app also words each parcel's day, section
+  and Next up for the next seven midnights where they change, and both widgets and Siri's Next delivery read the words
   for the moment they show: "tomorrow" reads "today" on the day, last night's delivery "yesterday", and a
-  passed estimate gives way to the status. Each widget's timeline has an entry at those midnights.
+  passed estimate gives way to the status. Each widget's timeline has an entry at those midnights, and at the
+  midnight after each step, whose time then names its weekday.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications
   has its switch, which saves the moment it is flipped. While it is on, the bell of a parcel
   still on its way opens that parcel's alerts, where notifications and the email are switched

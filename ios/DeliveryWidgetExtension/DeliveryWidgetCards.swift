@@ -6,6 +6,20 @@ import UIKit
 import AppKit
 #endif
 
+/// A picture the app drew into the shared container, at its pixels per point.
+enum DeliveryWidgetImage {
+    static func load(_ file: URL, scale: Double) -> Image? {
+        guard let data = try? Data(contentsOf: file) else { return nil }
+        #if os(iOS)
+        return UIImage(data: data, scale: scale).map(Image.init(uiImage:))
+        #else
+        guard let image = NSImage(data: data), let pixels = image.representations.first else { return nil }
+        image.size = CGSize(width: CGFloat(pixels.pixelsWide) / scale, height: CGFloat(pixels.pixelsHigh) / scale)
+        return Image(nsImage: image)
+        #endif
+    }
+}
+
 /// A card's pictures as the widget reads them from the shared container, light and dark.
 struct DeliveryWidgetCardArt {
     struct Look {
@@ -17,21 +31,14 @@ struct DeliveryWidgetCardArt {
     let light: Look
     let dark: Look
 
-    /// The mark, and the route as `shape` shows it; nil while the mark isn't there.
-    init?(_ card: DeliveryWidgetCard, route shape: DeliveryWidgetPicture, in folder: URL) {
+    /// The mark, and the route as `shape` shows it, if any; nil while the mark isn't there.
+    init?(_ card: DeliveryWidgetCard, route shape: DeliveryWidgetPicture?, in folder: URL) {
         func image(_ picture: DeliveryWidgetPicture, dark: Bool) -> Image? {
-            guard let data = try? Data(contentsOf: picture.file(of: card, dark: dark, in: folder)) else { return nil }
-            #if os(iOS)
-            return UIImage(data: data, scale: card.scale).map(Image.init(uiImage:))
-            #else
-            guard let image = NSImage(data: data), let pixels = image.representations.first else { return nil }
-            image.size = CGSize(width: CGFloat(pixels.pixelsWide) / card.scale, height: CGFloat(pixels.pixelsHigh) / card.scale)
-            return Image(nsImage: image)
-            #endif
+            DeliveryWidgetImage.load(picture.file(of: card, dark: dark, in: folder), scale: card.scale)
         }
         guard let lightMark = image(.mark, dark: false), let darkMark = image(.mark, dark: true) else { return nil }
-        light = Look(mark: lightMark, route: image(shape, dark: false))
-        dark = Look(mark: darkMark, route: image(shape, dark: true))
+        light = Look(mark: lightMark, route: shape.flatMap { image($0, dark: false) })
+        dark = Look(mark: darkMark, route: shape.flatMap { image($0, dark: true) })
     }
 
     func look(_ scheme: ColorScheme) -> Look { scheme == .dark ? dark : light }
@@ -47,6 +54,9 @@ enum DeliveryWidgetCardColors {
 
     /// The page the app's list of cards stands on.
     static func page(_ scheme: ColorScheme) -> Color { color(["#F4F5F1", "#13110E"], scheme) }
+
+    /// The app's warning colour (`Brand.warning`), which a parcel that needs the reader writes its stage in.
+    static func warning(_ scheme: ColorScheme) -> Color { color(["#963E19", "#FFB184"], scheme) }
 }
 
 /// A card's colour, with its route drawn across the top as wide as the card. A tinted, clear or inactive desktop

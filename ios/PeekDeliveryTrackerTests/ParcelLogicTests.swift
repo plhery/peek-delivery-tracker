@@ -1322,18 +1322,23 @@ final class ParcelLogicTests: XCTestCase {
     }
 
     /// Passes show every parcel or none: where they don't all fit, the widget tries rows, the most first, as the sections'
-    /// design does, rather than fewer passes and a line for the others. The cards' and the sections' designs try no pass.
+    /// design does, rather than fewer passes and a line for the others; in a medium widget, every parcel down one column
+    /// before one is left out. The cards' and the sections' designs try no pass and no single column.
     func testParcelsWidgetTurnsPassesThatDontAllFitIntoRows() {
         func fits(_ design: DeliveryWidgetList.Design, _ count: Int, _ size: DeliveryWidgetList.Size) -> [String] {
             DeliveryWidgetList.fits(design, count: count, size: size).map { fit in
                 switch fit {
                 case .passes: "passes"
-                case let .rows(layout): "\(layout.rows)\(layout.compact ? " smaller" : "")"
+                case let .rows(layout):
+                    "\(layout.rows)\(layout.compact ? " smaller" : "")\(layout.oneColumn ? " in one column" : "")"
                 }
             }
         }
         XCTAssertEqual(fits(.passes, 2, .small), ["passes", "2", "2 smaller", "1", "1 smaller"])
-        XCTAssertEqual(fits(.passes, 4, .medium), ["passes", "4", "4 smaller", "3", "3 smaller", "2", "2 smaller", "1", "1 smaller"])
+        XCTAssertEqual(fits(.passes, 3, .medium),
+                       ["passes", "3", "3 smaller", "3 smaller in one column", "2", "2 smaller", "1", "1 smaller"])
+        XCTAssertEqual(fits(.passes, 4, .medium),
+                       ["passes", "4", "4 smaller", "4 smaller in one column", "3", "3 smaller", "2", "2 smaller", "1", "1 smaller"])
         XCTAssertEqual(fits(.passes, 6, .large), ["passes", "6", "5", "4", "3", "2", "1"])
         for size in DeliveryWidgetList.Size.allCases {
             for count in 1...8 {
@@ -1341,7 +1346,11 @@ final class ParcelLogicTests: XCTestCase {
                 let tried = DeliveryWidgetList.fits(design, count: count, size: size)
                 XCTAssertEqual(tried.first == .passes, design == .passes, "\(size) \(count)")
                 XCTAssertEqual(tried.filter { $0 == .passes }.count, design == .passes ? 1 : 0, "\(size) \(count)")
-                XCTAssertEqual(Array(tried.dropFirst(design == .passes ? 1 : 0)),
+                // One column is only a medium widget's passes' last try at every parcel; the rest are the rows' layouts.
+                let oneColumn = tried.filter { if case let .rows(layout) = $0 { layout.oneColumn } else { false } }
+                XCTAssertEqual(oneColumn, design == .passes && size == .medium
+                               ? [.rows(.init(rows: count, compact: true, oneColumn: true))] : [], "\(size) \(count)")
+                XCTAssertEqual(Array(tried.dropFirst(design == .passes ? 1 : 0)).filter { !oneColumn.contains($0) },
                                DeliveryWidgetList.layouts(count: count, size: size).map(DeliveryWidgetList.Fit.rows))
             }
         }

@@ -498,26 +498,28 @@ private struct ParcelSections: View {
         .widgetURL(DeliveryWidgetList.link)
     }
 
-    /// The rows and their headings, a small widget having no room for headings, down one column, or two in a medium
-    /// widget (`DeliveryWidgetList.columns`); the line for the others at the foot of the column they would follow.
+    /// The rows and their headings, down one column, or two in a medium widget (`DeliveryWidgetList.columns`) unless the
+    /// layout says one; a small widget, and a medium one's single column, having no room for headings. The line for the
+    /// others at the foot of the column they would follow.
     private func list(_ sections: [DeliveryWidgetList.Section], layout: DeliveryWidgetList.Layout, width: CGFloat) -> some View {
         let metrics = ParcelListMetrics(compact: layout.compact, markWidth: layout.compact ? compactMarkWidth : markWidth)
-        let lines = DeliveryWidgetList.lines(sections, rows: layout.rows, headings: size != .small)
+        let lines = DeliveryWidgetList.lines(sections, rows: layout.rows, headings: size != .small && !layout.oneColumn)
+        let oneLine = size == .large || layout.oneColumn
         return Group {
-            if size == .medium {
+            if size == .medium && !layout.oneColumn {
                 HStack(alignment: .top, spacing: 12) {
                     ForEach(Array(DeliveryWidgetList.columns(lines).enumerated()), id: \.offset) { _, column in
-                        self.column(column, metrics: metrics, width: width)
+                        self.column(column, metrics: metrics, oneLine: oneLine, width: width)
                     }
                 }
             } else {
-                column(lines, metrics: metrics, width: width)
+                column(lines, metrics: metrics, oneLine: oneLine, width: width)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
-    private func column(_ lines: [DeliveryWidgetList.Line], metrics: ParcelListMetrics, width: CGFloat) -> some View {
+    private func column(_ lines: [DeliveryWidgetList.Line], metrics: ParcelListMetrics, oneLine: Bool, width: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: metrics.rowSpacing) {
             ForEach(lines, id: \.self) { line in
                 switch line {
@@ -529,7 +531,7 @@ private struct ParcelSections: View {
                 case let .row(parcel):
                     let truck = parcel.carrierId.flatMap { trucks[$0] }
                     ParcelListLink(parcel: parcel, size: size) {
-                        if size == .large {
+                        if oneLine {
                             ParcelListLineRow(parcel: parcel, truck: truck, metrics: metrics, width: width)
                         } else {
                             ParcelListStackedRow(parcel: parcel, truck: truck, metrics: metrics)
@@ -607,6 +609,8 @@ private struct ParcelListMetrics {
 
     var nameFont: Font { (compact ? Font.caption : .footnote).weight(.semibold) }
     var statusFont: Font { .caption2 }
+    /// The stage beside the name, on a row of one line.
+    var lineStatusFont: Font { compact ? .caption2 : .caption }
     var markHeight: CGFloat { (markWidth * 0.75).rounded() }
     var markSpacing: CGFloat { compact ? 5 : 6 }
     /// In smaller type the rows sit two points apart, so that the small widget of the largest iPhones holds four.
@@ -681,7 +685,7 @@ private struct ParcelListStatus: View {
     }
 }
 
-/// A row of a small or medium widget: the mark beside the name, over the stage and the day.
+/// A row of a small or medium widget in two columns: the mark beside the name, over the stage and the day.
 private struct ParcelListStackedRow: View {
     let parcel: DeliveryWidgetParcel
     let truck: ParcelListTruck?
@@ -705,7 +709,8 @@ private struct ParcelListStackedRow: View {
     }
 }
 
-/// A row of a large widget, on one line: the mark, the name, and at the end the stage and the day. Where the row can't
+/// A row of a large widget, or of a medium one down one column, on one line: the mark, the name, and at the end the
+/// stage and the day. Where the row can't
 /// hold them whole, the name keeps at least two fifths of it.
 private struct ParcelListLineRow: View {
     let parcel: DeliveryWidgetParcel
@@ -721,7 +726,7 @@ private struct ParcelListLineRow: View {
                 name
                 Spacer(minLength: 4)
                 ParcelListStatus(parcel: parcel)
-                    .font(.caption)
+                    .font(metrics.lineStatusFont)
                     .fixedSize()
             }
             HStack(spacing: metrics.markSpacing) {
@@ -729,7 +734,7 @@ private struct ParcelListLineRow: View {
                 name
                     .frame(minWidth: width * 0.4, maxWidth: .infinity, alignment: .leading)
                 ParcelListStatus(parcel: parcel)
-                    .font(.caption)
+                    .font(metrics.lineStatusFont)
                     .padding(.leading, 4)
                     .layoutPriority(1)
             }
@@ -740,7 +745,7 @@ private struct ParcelListLineRow: View {
 
     private var name: some View {
         Text(parcel.listName)
-            .font(.footnote.weight(.semibold))
+            .font(metrics.nameFont)
             .foregroundStyle(.primary)
             .lineLimit(1)
     }

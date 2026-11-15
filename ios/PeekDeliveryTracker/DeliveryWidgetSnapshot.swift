@@ -373,6 +373,9 @@ enum DeliveryWidgetList {
         let rows: Int
         /// In smaller type.
         let compact: Bool
+        /// In a medium widget, down one column with each row on one line, as in a large widget, and without the headings,
+        /// as in a small one, rather than in two columns.
+        var oneColumn = false
     }
 
     /// The layouts a widget tries for `count` parcels, the first that fits being the one it shows: the most rows first,
@@ -394,8 +397,14 @@ enum DeliveryWidgetList {
     /// What a widget of `design` tries for `count` parcels, the first that fits being the one it shows: every parcel's
     /// pass, for the passes' design, then the most rows that fit (`layouts`). Passes show every parcel or none: where two
     /// cannot stand one above the other, in the shorter widgets of most iPhones or at larger text, the parcels are rows.
+    /// In a medium widget, where every parcel's row doesn't fit in two columns either, they try one column in smaller
+    /// type before leaving one out.
     static func fits(_ design: Design, count: Int, size: Size) -> [Fit] {
-        (design == .passes ? [.passes] : []) + layouts(count: count, size: size).map(Fit.rows)
+        let rows = layouts(count: count, size: size)
+        guard design == .passes else { return rows.map(Fit.rows) }
+        let every = rows.prefix { $0.rows == count }
+        let oneColumn = size == .medium && !every.isEmpty ? [Layout(rows: count, compact: true, oneColumn: true)] : []
+        return [.passes] + (every + oneColumn + rows.dropFirst(every.count)).map(Fit.rows)
     }
 
     /// The first `rows` parcels under their sections' headings, if the widget has room for them, then a line that counts

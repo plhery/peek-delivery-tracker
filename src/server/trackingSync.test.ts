@@ -2702,6 +2702,22 @@ describe('TrackingSyncService', () => {
       expect.objectContaining({ anomaly_codes: [] }), expect.any(Array));
   });
 
+  it.each(['customs', 'out_for_delivery'])('keeps a parcel filed under none at %s once its carrier answers with a scan in transit', async (stage) => {
+    // Synthetic wording and times: the carrier's summary names its pick-up while its newest scan moves on.
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'accepted',
+      last_status_text: 'Picked up', last_update: '2026-09-10T08:00:00Z',
+      events: [{ time: '2026-09-10T08:00:00Z', description: 'Arrived at the sorting hub', stage: 'in_transit' },
+        { time: '2026-09-09T18:00:00Z', description: 'Picked up', stage: 'accepted' }] }),
+    fetchUniversal: vi.fn() };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage({ id: 'filed-unknown', carrier: 'unknown', tracking_number: '1Z999AA10123456784', current_stage: stage });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ carrier: 'ups', current_stage: stage });
+  });
+
   it('keeps the stage a provider read for a parcel filed under none once its carrier answers with a scan in it', async () => {
     // Synthetic wording and times: the carrier's summary names its pick-up while its newest scan moves on.
     const client = { ...fakeClient(),

@@ -48,4 +48,59 @@ begin
 end;
 $$;
 
+-- Three numbers of one shape no carrier claims, each on a parcel with a support case first seen in the last
+-- 14 days, raise `repeated_unknown_shape` for each, under the shape the review shows.
+insert into public.packages(id, user_id, tracking_number, carrier) values
+  ('a7200000-0000-4000-8000-000000000011', 'a7200000-0000-4000-8000-000000000001', 'SHAPEAB1234567', 'unknown'),
+  ('a7200000-0000-4000-8000-000000000012', 'a7200000-0000-4000-8000-000000000001', 'SHAPEAB7654321', 'unknown'),
+  ('a7200000-0000-4000-8000-000000000013', 'a7200000-0000-4000-8000-000000000001', 'SHAPEXY2222222', 'unknown'),
+  ('a7200000-0000-4000-8000-000000000014', 'a7200000-0000-4000-8000-000000000001', 'SHAPEAB5555555', 'unknown'),
+  ('a7200000-0000-4000-8000-000000000015', 'a7200000-0000-4000-8000-000000000001', 'SHAPEAB6666666', 'unknown'),
+  ('a7200000-0000-4000-8000-000000000016', 'a7200000-0000-4000-8000-000000000001', 'SHAPEAB8888888', 'unknown'),
+  ('a7200000-0000-4000-8000-000000000017', 'a7200000-0000-4000-8000-000000000001', 'SHAPEAB9999999', 'unknown');
+
+do $$
+declare
+  shown text := private.tracking_number_pattern('SHAPEAB1234567');
+  shape_case text := 'insert into public.tracking_support_cases (tracking_number, first_seen, last_seen, configured_carrier, reasons, fix_status, fixed_at) values ($1, $2, $2, ''unknown'', $3, $4, $5)';
+  signals integer;
+begin
+  assert private.tracking_number_shape('shapeab-123 4567') = 'SHAPEAB + 7';
+  assert private.tracking_number_shape('MY1234567890US') = 'MY + 10 + US';
+  assert private.tracking_number_shape('') = '';
+  assert not has_function_privilege('authenticated', 'private.raise_repeated_unknown_shape(text)', 'execute');
+
+  execute shape_case using 'SHAPEAB1234567', now() - interval '13 days', array['unknown_shape'], 'ignored', null::timestamptz;
+  execute shape_case using 'SHAPEAB7654321', now() - interval '2 days', array['unknown_shape'], 'open', null::timestamptz;
+  -- Not counted: a number no parcel follows, another shape the review shows alike, a case first seen 15 days ago,
+  -- a fixed case, and one without the reason.
+  execute shape_case using 'SHAPEAB3333333', now(), array['unknown_shape'], 'open', null::timestamptz;
+  execute shape_case using 'SHAPEXY2222222', now(), array['unknown_shape'], 'open', null::timestamptz;
+  execute shape_case using 'SHAPEAB5555555', now() - interval '15 days', array['unknown_shape'], 'ignored', null::timestamptz;
+  execute shape_case using 'SHAPEAB6666666', now(), array['unknown_shape'], 'fixed', now();
+  execute shape_case using 'SHAPEAB8888888', now(), array['no_direct_adapter'], 'open', null::timestamptz;
+  assert not exists (select from public.tracking_routing_signals where signal = 'repeated_unknown_shape'), 'raised under three';
+  assert private.tracking_number_pattern('SHAPEXY2222222') = shown;
+
+  -- The third raises the shape for each of its numbers, with their parcels.
+  execute shape_case using 'SHAPEAB9999999', now(), array['unknown_shape'], 'open', null::timestamptz;
+  assert (select count(*) = 3 and bool_and(carrier = 'unknown' and subject = shown and count = 1 and package_id is not null)
+    and array_agg(tracking_number order by tracking_number) = array['SHAPEAB1234567', 'SHAPEAB7654321', 'SHAPEAB9999999']
+    from public.tracking_routing_signals where signal = 'repeated_unknown_shape'), 'three numbers raised';
+  -- A later write of one of their cases adds nothing.
+  update public.tracking_support_cases set reasons = array['unknown_shape'], seen_count = seen_count + 1 where tracking_number = 'SHAPEAB9999999';
+  assert (select count(*) from public.tracking_routing_signals where signal = 'repeated_unknown_shape') = 3;
+
+  -- Once reviewed, a fourth number adds its row and marks the unreviewed ones seen again; the reviewed stay reviewed.
+  update public.tracking_routing_signals set reviewed_at = now(), review_note = 'checked',
+    first_seen = now() - interval '2 hours', last_seen = now() - interval '1 hour'
+    where signal = 'repeated_unknown_shape';
+  update public.tracking_support_cases set reasons = array['unknown_shape', 'no_direct_adapter'] where tracking_number = 'SHAPEAB8888888';
+  assert (select count(*) filter (where reviewed_at is null) = 1 and count(*) = 4
+    and bool_and(reviewed_at is not null or (tracking_number = 'SHAPEAB8888888' and last_seen > now() - interval '1 minute'))
+    from public.tracking_routing_signals where signal = 'repeated_unknown_shape'), 'fourth number';
+  assert private.raise_repeated_unknown_shape('SHAPEAB1234567') = 0;
+end;
+$$;
+
 rollback;

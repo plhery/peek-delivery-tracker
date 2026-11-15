@@ -505,9 +505,15 @@ number, as support cases do. `tracking_routing_signal_total` counts
 them, and the "Review signals" row of the carrier dashboard shows them beside sync
 anomalies and health incidents.
 
+The database raises one signal itself: `repeated_unknown_shape`, once three numbers of one shape
+no carrier claims (each digit run counted, each letter run as it is) have a support case giving
+`unknown_shape` first seen in the last 14 days, each on a parcel. Each number gets a row, with the shape
+as the review shows it as its subject, so a shape whose cases closed unseen, as a one-off lookup's
+do once it leaves the schedule unanswered, still reaches the carriers' review.
+
 [ops/review/signals.sql](../ops/review/signals.sql) is the hourly review of every queue. For
 a window of hours (1 by default, 24 for the daily review) ending at `until` (now by default, so
-that a round that starts late can still read its own hour) it lists routing signals, sync
+that a round that starts late can still read its own hour) it lists routing signals (with their parcels' short ids), sync
 anomalies (with `looping_track` for a parcel whose moves in transit, each to a new place, repeat one
 interval to within 2 s three times or more: a generated track, which the app also flags to the parcel's readers,
 leaving it off the map and its moves unannounced ([generatedTrack.ts](../src/lib/generatedTrack.ts))), the parcels first flagged in the window with a scan
@@ -548,7 +554,7 @@ psql "$DATABASE_URL" -v hours=1 -v until=2026-01-01T09:00Z -f ops/review/signals
 
 Each row names the lane that acts on it:
 
-- **carriers**: an unknown or ambiguous number format, a detection rule that missed, a
+- **carriers**: an unknown or ambiguous number format, one that repeats, a detection rule that missed, a
   carrier missing from the catalog, a reader's answer about a parcel with no carrier or the
   wrong one;
 - **adapters**: a carrier without an adapter, a failing adapter or provider, an adapter that

@@ -1111,7 +1111,7 @@ away data already retrieved.
 Each routing decision is a `tracking_routing` log line with its `decision`, `carrier`,
 `provider`, `category` and the check's `attempt_id`, and a breadcrumb on any later Sentry
 report. Only `health_store_unavailable`, `provider_blocked` and `provider_budget_spent` open a
-Sentry issue (`component:tracking-routing`, grouped by decision, provider and category). The four signals
+Sentry issue (`component:tracking-routing`, grouped by decision, provider and category). The signals
 are what the catalog, detection or the adapters could act on: each check saves them for the
 hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 

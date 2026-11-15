@@ -27,11 +27,13 @@ set session characteristics as transaction read only;
 \set since '(:upto - make_interval(hours => :hours))'
 
 \echo
-\echo '== Routing signals: numbers seen in the window (new: first seen in it)'
+\echo '== Routing signals: numbers seen in the window (new: first seen in it), with up to ten of their parcels'' short ids'
+\echo '   repeated_unknown_shape: three numbers or more of one shape no carrier claims, on parcels, in 14 days'
 select signal, carrier, subject,
        case when signal in ('direct_support_opportunity', 'unread_delivery_estimate') then 'adapters' else 'carriers' end as lane,
        count(*) filter (where first_seen >= :since) as new, count(*) as numbers,
-       array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
+       array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns,
+       array_to_string((array_agg(distinct left(package_id::text, 8)) filter (where package_id is not null))[1:10], ' ') as parcels
 from public.tracking_routing_signals
 where last_seen >= :since and first_seen < :upto and reviewed_at is null
 group by signal, carrier, subject

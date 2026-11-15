@@ -421,6 +421,15 @@ describe('what an alert says', () => {
     expect(send.mock.calls[2]![1]?.body).toBe('One step closer');
   });
 
+  it('tells a viewer no place that names a code or a door, and the owner the place as written', async () => {
+    pending([row({ location: 'Door number 12, Example Street' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[0]![1]?.body).toBe('One step closer');
+    pending([row({ owner: true, location: 'Door number 12, Example Street' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[1]![1]?.body).toBe('One step closer\nDoor number 12, Example Street');
+  });
+
   it('tells the owner of a gift lookup like the owner of any parcel', () => {
     expect(alerts.payload(row({ gift: true, owner: true }))).toEqual(alerts.payload(row()));
   });

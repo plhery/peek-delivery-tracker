@@ -281,7 +281,8 @@ number as described above and under "Retention and control".
 
 You can share a parcel through its link, with or without an account. Anyone
 who has the link sees the parcel's status and history. They never see a pickup
-code, a postcode, phone digits or the recipient's name. They see the name you gave the parcel
+code, a PIN, who signed for the parcel, a door number, a postcode, phone digits or the
+recipient's name. They see the name you gave the parcel
 only if you choose to show it, and
 the tracking number stays masked unless you choose to show it. An app that
 previews the link, a chat app for instance, gets the parcel's status, carrier

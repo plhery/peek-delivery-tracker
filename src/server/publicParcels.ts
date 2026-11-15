@@ -22,6 +22,7 @@ import { emailConfigured } from './email/config';
 import { withEventPlaces } from './eventPlaces';
 import { numberHint, parcelNumberMask, WORDED_CARRIER_DATA } from './hiddenNumbers';
 import { type AllowanceHolder, captureOverallAllowance, logOperationalEvent } from './observability';
+import { viewerScans, viewerStatusText } from './privateDetails';
 import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
 import type { PublicAllowance, StoredParcelLink, SupabaseServiceClient } from './supabase';
@@ -424,6 +425,9 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * either, nor another number of the parcel: the scans, planned and written
  * steps, status line and worded carrier details mask them (`parcelNumberMask`),
  * as a link's alerts do.
+ *
+ * Nor does anyone but the owner read who signed, a code that collects the
+ * parcel or the number of its door (`viewerScan`).
  */
 export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelAlerts): ApiPublicParcelResponse {
   const { link } = found;
@@ -459,8 +463,10 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     ...(typeof stored.day === 'string' ? { day: stored.day } : {}),
     place: (isRecord(stored.place) ? stored.place : null) as ApiPlannedTrackingEvent['place'],
   });
-  const planned = storedPlanned.map(step);
-  const written = storedWritten.map(step);
+  const shown = <T extends ApiTrackingEventRow | ApiPlannedTrackingEvent>(scans: T[]): T[] => owner ? scans : viewerScans(scans);
+  const planned = shown(storedPlanned.map(step));
+  const written = shown(storedWritten.map(step));
+  const viewed = shown(events);
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)
     ? carrierData.destination_country.toUpperCase() : null;
   const shownLink: ApiParcelLink = {
@@ -497,7 +503,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       created_at: later(row.created_at, link.created_at),
       expected_delivery: optionalText(row.expected_delivery),
       // The carrier's status line can name the place the newest scan was made.
-      last_status_text: wrapped ? null : toldText(row.last_status_text),
+      last_status_text: wrapped ? null : owner ? toldText(row.last_status_text) : viewerStatusText(toldText(row.last_status_text)),
       last_synced_at: optionalText(row.last_synced_at),
       sync_status: String(row.sync_status) as ApiSyncStatus,
       sync_error: typeof row.sync_error === 'string' && SYNC_ERROR_CODE.test(row.sync_error) ? row.sync_error : null,
@@ -507,7 +513,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       carrier_data: publicCarrierData(carrierData, numberShown, wrapped, told),
       archived_at: null,
       notifications_muted: false,
-      tracking_events: wrapped ? giftEvents(events, destination) : events,
+      tracking_events: wrapped ? giftEvents(viewed, destination) : viewed,
       // When its latest scan arrived, for a device to tell what is new since it last opened the link. A wrapped gift tells no scan.
       ...(!wrapped && typeof row.news_at === 'string' ? { news_at: row.news_at } : {}),
       // A wrapped gift tells nothing of where its parcel is going before it gets there.

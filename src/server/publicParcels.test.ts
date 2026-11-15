@@ -220,6 +220,41 @@ describe('what a link shows', () => {
     expect(JSON.stringify(shown([added]))).not.toContain('provider_event_id');
   });
 
+  it('shows only its owner who signed, a code that collects the parcel and the number of its door', () => {
+    const scan = (id: string, stage: string, description: string, location: string | null = 'Example Town') => ({
+      id, package_id: 'parcel', stage, description, location, occurred_at: `2026-10-02T0${id.length}:00:00+00:00`,
+      place: location ? { latitude: 46.9, longitude: 7.4, precision: 'city', country: 'CH', name: location } : null,
+    });
+    const events = [
+      scan('a', 'in_transit', 'Sorted'),
+      scan('bb', 'out_for_delivery', 'Out for delivery, PIN: 4711'),
+      scan('ccc', 'delivered', 'Delivered, signed by A. Example'),
+      scan('dddd', 'delivered', 'Delivered', 'Door number 12, Example Street'),
+    ];
+    const shown = (link: Record<string, unknown>) => publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, show_number: true, ...link },
+      package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'delivered',
+        created_at: '2026-10-02T08:00:00Z', carrier_data: {}, tracking_events: events,
+        last_status_text: 'Delivered, signed by A. Example',
+        planned_events: [{ stage: 'out_for_delivery', description: 'Collect with code de retrait 0815', occurred_at: '2026-10-03T08:00:00Z' }] },
+    }, alerts).package;
+    const viewer = shown({});
+    expect(viewer.tracking_events.map(({ id, description, location }) => [id, description, location])).toEqual([
+      ['a', 'Sorted', 'Example Town'],
+      ['ccc', 'Delivered', 'Example Town'],
+      ['dddd', 'Delivered', null],
+    ]);
+    expect(viewer.tracking_events.find(({ id }) => id === 'dddd')?.place).toBeNull();
+    expect(viewer.last_status_text).toBeNull();
+    expect(viewer).not.toHaveProperty('planned_events');
+    for (const secret of ['4711', 'A. Example', 'Door number', '0815']) expect(JSON.stringify(viewer)).not.toContain(secret);
+    // Its owner reads every scan as the carrier wrote it.
+    const owner = shown({ owner: true });
+    expect(owner.tracking_events.map(({ description }) => description)).toEqual(events.map(({ description }) => description));
+    expect(owner.last_status_text).toBe('Delivered, signed by A. Example');
+    expect(owner.planned_events).toHaveLength(1);
+  });
+
   it('says when its latest scan arrived, as the view stored its scans, except to whom a gift is still wrapped (#72)', () => {
     // As parcel_link_view gives them: each with the time Peek stored it, Peek's own row too.
     const scan = { id: 'scan', package_id: 'parcel', stage: 'in_transit', description: 'Sorted', location: null,

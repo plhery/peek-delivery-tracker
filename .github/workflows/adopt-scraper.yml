@@ -15,9 +15,11 @@ on:
   # every half hour, and a CI run that ends on main are only a backup. The
   # first run in a slot that pushes a release is its adoption, unless it was
   # started by hand; the backup runs after it end at once (the Due job), and so
-  # do those that would take a release that already failed in the slot.
+  # do those that would take a release that already failed in the slot. The
+  # schedule runs through the night too, so a release the database gate holds
+  # fails again then, and one that failed is tried again without a CI run.
   schedule:
-    - cron: '7,37 6-23 * * *'
+    - cron: '7,37 * * * *'
   workflow_run:
     workflows: [CI]
     types: [completed]
@@ -313,8 +315,9 @@ jobs:
   # A release that waits for a migration fails the first run it stops, which
   # notifies. The runs after it pass, linking to that first failure, until the
   # release has waited 4 hours: from then the first run of each slot fails
-  # again, and in the night's 8-hour slot the first run two hours after the
-  # last failure, until the migration is in (scripts/adopt-scraper.mjs held).
+  # again, and in the night's 8-hour slot the first scheduled run two hours
+  # after the last failure, until the migration is in (gateHold in
+  # scripts/adopt-scraper.mjs).
   # GitHub never fills in a skipped job's name, so the release goes in its step's.
   gate:
     name: Database gate

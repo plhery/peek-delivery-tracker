@@ -107,8 +107,8 @@ does not wait for the next slot. Each run records the release it tries as an art
 (`release-<version>`): when that release fails, such as the app's tests with it, the slot's
 later runs that would take it stop at once too, saying when it is tried again, and a newer
 release still adopts. In the
-night's slot, which lasts eight hours, the first CI run on main from two hours after the
-failure tries it again, so a fix that lands at night does not wait for 06:07. The timer
+night's slot, which lasts eight hours, the first run from two hours after the failure tries
+it again, so a fix that lands at night does not wait for 06:07. The timer
 sets the workflow's `slot` input. A run without it, by hand, always adopts but never counts
 as its slot's adoption, so a release published after it still adopts in the same slot. An
 urgent release is adopted by hand:
@@ -193,8 +193,8 @@ The run's summary lists each change with the constraints and functions that enfo
 the migration that made it. The first run a release stops fails, which notifies; later runs
 stop at the same release and link to that first run, found by the gate step's name, which
 carries the release. Once the release has waited 4 hours, the first run of each slot fails
-again, and in the night's 8-hour slot the first run two hours after the last failure, until
-the migration is in. Write the migration with the lines the summary gives and apply it
+again, and in the night's 8-hour slot the first run two hours after the last failure (the
+schedule runs through the night for it), until the migration is in. Write the migration with the lines the summary gives and apply it
 to production: the next run adopts the release. To adopt it at once, continue with the
 release the run named:
 

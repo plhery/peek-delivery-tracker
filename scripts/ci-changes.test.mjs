@@ -296,9 +296,9 @@ describe('scraper adoption validation', () => {
     assert.ok(workflow.includes('PUSH_TOKEN: ${{ secrets.SCRAPER_ADOPTION_TOKEN }}'));
   });
 
-  it('adopts the newest release once in each 2-hour slot by day, or by hand, not on each release', () => {
+  it('adopts the newest release once in each 2-hour slot, or by hand, not on each release', () => {
     const triggers = workflow.match(/\non:\n([\s\S]*?)\n\S/)?.[1] ?? '';
-    assert.match(triggers, /\n  schedule:\n(?:\s*#.*\n)*\s+- cron: '7,37 6-23 \* \* \*'/);
+    assert.match(triggers, /\n  schedule:\n(?:\s*#.*\n)*\s+- cron: '7,37 \* \* \* \*'/);
     assert.match(triggers, /\n  workflow_dispatch:/);
     assert.doesNotMatch(workflow, /repository_dispatch|client_payload/);
   });

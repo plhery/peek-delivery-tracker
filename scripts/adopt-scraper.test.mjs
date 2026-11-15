@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, it } from 'node:test';
+import { load } from 'js-yaml';
 import {
   BY_HAND_TITLE,
   ENFORCED_BY,
@@ -268,6 +269,34 @@ describe('a release the database gate holds', () => {
     assert.equal(at('2026-11-12T01:40:00Z', [midnight, night, reported, first]).fail, false);
     assert.equal(at('2026-11-12T03:00:00Z', [midnight, night, reported, first]).fail, true);
     assert.equal(at('2026-11-12T06:08:00Z', [{ ...midnight, startedAt: '2026-11-12T05:00:00Z' }, night, reported, first]).fail, true);
+  });
+
+  it('fails again through a night when no CI run lands on main: the schedule runs then too', () => {
+    const workflow = load(readFileSync(new URL('../.github/workflows/adopt-scraper.yml', import.meta.url), 'utf8'));
+    // The minutes of the day a cron such as '7,37 6-23 * * *' starts a run.
+    const field = (text, size) => text.split(',').flatMap((part) => {
+      if (part === '*') return [...Array(size).keys()];
+      const [from, to = from] = part.split('-').map(Number);
+      return Array.from({ length: to - from + 1 }, (_, index) => from + index);
+    });
+    const minutes = workflow.on.schedule.flatMap(({ cron }) => {
+      const [minute, hour] = cron.split(' ');
+      return field(hour, 24).flatMap((h) => field(minute, 60).map((m) => h * 60 + m));
+    });
+    // The server's timer at each slot, and the schedule, from a release held at 14:11 until the morning's slot.
+    const timer = [6, 8, 10, 12, 14, 16, 18, 20, 22].map((hour) => hour * 60 + 7);
+    const runs = [...new Set(['2026-11-16', '2026-11-17'].flatMap((day) => [...timer, ...minutes]
+      .map((minute) => Date.parse(day) + minute * 60_000)))]
+      .filter((time) => time > Date.parse('2026-11-16T14:11:00Z') && time < Date.parse('2026-11-17T06:30:00Z'))
+      .sort((a, b) => a - b);
+    const failures = [{ url: 'https://example.test/first', startedAt: '2026-11-16T14:11:00Z' }];
+    for (const run of runs) {
+      // Each run's Database gate starts a few minutes after the run.
+      const now = new Date(run + 4 * 60_000);
+      if (gateHold('1.2.3', now, failures).fail) failures.push({ url: `https://example.test/${run}`, startedAt: now.toISOString() });
+    }
+    const night = failures.map(({ startedAt }) => startedAt.slice(11, 16)).filter((time) => time > '22:30' || time < '06:00');
+    assert.ok(night.length >= 2, `failed only at ${failures.map(({ startedAt }) => startedAt.slice(11, 16)).join(', ')}`);
   });
 });
 

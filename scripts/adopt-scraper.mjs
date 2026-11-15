@@ -177,8 +177,8 @@ export const RELEASE_STEPS = new Set(['Install the release', "Check the scraper'
   'Test the Android core with the release']);
 
 /**
- * Since when a release that failed waits: the slot's start, or a slot's length ago in the night's longer slot. A CI run
- * on main tries a release that failed at 22:07 again from 00:07, once the app may have been fixed, not only at 06:07.
+ * Since when a release that failed waits: the slot's start, or a slot's length ago in the night's longer slot. A run
+ * tries a release that failed at 22:07 again from 00:07, once the app may have been fixed, not only at 06:07.
  */
 export function failureHeldSince(slot, now) {
   return new Date(Math.max(slot.getTime(), now.getTime() - SLOT_LENGTH * MINUTE));

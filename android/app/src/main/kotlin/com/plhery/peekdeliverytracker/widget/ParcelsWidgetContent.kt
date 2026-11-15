@@ -109,12 +109,11 @@ internal class ListMetrics(val compact: Boolean, type: WidgetText) {
 }
 
 /**
- * What the list keeps at `size`: the iPhone's widget the size stands for ([size]), its rows' metrics, the parcels it
- * shows in one column or two and how many the last line counts. As `ParcelListRows`, it tries its size's rows to a column
- * (three, or fifteen for a large one), then each fewer, a small or medium widget in smaller type ([ListMetrics.compact])
- * before it gives a row up, and keeps the first that the height holds, with the last line where parcels are left out.
+ * How the list's rows look at `size` (`ParcelListMetrics`): the iPhone's widget the size stands for ([size]), the larger
+ * type or, `compact`, the smaller ([ListMetrics.compact]), and in `columns` columns, which give the words their width.
+ * [SectionsLayout] picks the type and the rows that fit.
  */
-internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText) {
+internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText, compact: Boolean, columns: Int) {
     val locale: Locale = ExtensionLocalizer.locale(list.languageCode)
     val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN * 2)
 
@@ -127,45 +126,11 @@ internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: Widg
     val statusPoints: Float = type.points(if (lineRows) IosTextStyle.Caption else IosTextStyle.Caption2)
     val morePoints: Float = type.points(IosTextStyle.Caption)
     val moreHeight: Dp = type.lineHeight(morePoints, FontWeight.Medium)
-    val metrics: ListMetrics
-    val rowHeight: Dp
-    val shown: DeliveryWidgetList.Shown
-
-    /** The rows in their columns: two in a medium widget once one can't hold them ([DeliveryWidgetList.columns]). */
-    val columns: List<List<DeliveryWidgetParcel>>
+    val metrics = ListMetrics(compact, type)
+    val rowHeight: Dp = rowHeight(metrics)
 
     /** The width a row leaves its words, past the stage's symbol. */
-    val words: Dp
-
-    init {
-        val medium = this.size == DeliveryWidgetList.Size.Medium
-        val most = minOf(this.size.rows / if (medium) 2 else 1, list.parcels.size).coerceAtLeast(1)
-        val tries = (most downTo 1).flatMap { rows ->
-            if (this.size == DeliveryWidgetList.Size.Large) listOf(rows to false) else listOf(rows to false, rows to true)
-        }
-
-        class Try(val metrics: ListMetrics, val rowHeight: Dp, val shown: DeliveryWidgetList.Shown, val columns: List<List<DeliveryWidgetParcel>>) {
-            val height: Dp = (columns.maxOfOrNull { it.size } ?: 0).let { rows ->
-                rowHeight * rows + metrics.rowSpacing * (rows - 1).coerceAtLeast(0) +
-                    if (shown.more > 0) metrics.rowSpacing * 2 + moreHeight else 0.dp
-            }
-        }
-
-        fun attempt(rows: Int, compact: Boolean): Try {
-            val metrics = ListMetrics(compact, type)
-            val page = list.page(rows * if (medium) 2 else 1)
-            val columns = if (medium) DeliveryWidgetList.columns(page.rows, rows) else listOf(page.rows).filter { it.isNotEmpty() }
-            return Try(metrics, rowHeight(metrics), page, columns)
-        }
-        val kept = tries.asSequence().map { (rows, compact) -> attempt(rows, compact) }.firstOrNull { it.height <= room.height }
-            ?: tries.last().let { (rows, compact) -> attempt(rows, compact) }
-        metrics = kept.metrics
-        rowHeight = kept.rowHeight
-        shown = kept.shown
-        columns = kept.columns
-        val column = if (columns.size == 2) (room.width - COLUMN_GAP) / 2 else room.width
-        words = column - metrics.markWidth - metrics.markSpacing
-    }
+    val words: Dp = (if (columns == 2) (room.width - COLUMN_GAP) / 2 else room.width) - metrics.markWidth - metrics.markSpacing
 
     /** A row's height: its name over its line, or both on one line, and the symbol's box. */
     private fun rowHeight(metrics: ListMetrics): Dp {

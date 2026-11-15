@@ -20,7 +20,8 @@ import com.plhery.peekdeliverytracker.core.AppClock
  * `ParcelsWidget`: the parcels on their way on the home screen, next to [NextDeliveryWidget], in its order and from what
  * the app published for it (DeliveryWidgetSharedStore). One widget whose design follows how many parcels there are for
  * the size the launcher gives it ([SizeMode.Exact], [DeliveryWidgetList.design]): cards, passes, or rows under the app
- * list's sections, of which two cells by two show three, four by two six, four by four up to fifteen ([ListLayout]).
+ * list's sections, of which two cells by two show three, four by two up to eight, four by four up to fifteen
+ * ([SectionsLayout]).
  * It is drawn again whenever the other one is ([DeliveryWidgetUpdates]).
  */
 class ParcelsWidget : GlanceAppWidget() {

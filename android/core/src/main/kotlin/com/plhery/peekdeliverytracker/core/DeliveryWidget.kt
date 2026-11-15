@@ -78,9 +78,6 @@ data class DeliveryWidgetList(
     /** The sample's parcels, which the gallery shows. */
     val isSample: Boolean = false,
 ) {
-    /** The rows a widget shows, and how many parcels its last line counts beyond them ("+N more"). */
-    data class Shown(val rows: List<DeliveryWidgetParcel>, val more: Int)
-
     /**
      * `Size`: the iPhone's three list widgets, and the rows each has at the default text size: three, two columns of
      * three, and fifteen, or as many as the large widget's height holds. Larger text keeps fewer. Up to `cards`
@@ -127,10 +124,24 @@ data class DeliveryWidgetList(
             }
         }
 
-    /** `page(of:rows:)`: the parcels `rows` rows show, and how many there are after them. */
-    fun page(rows: Int): Shown {
-        val shown = parcels.take(maxOf(rows, 0))
-        return Shown(shown, parcels.size - shown.size)
+    /** `Line`: a line of the sections' design. */
+    sealed interface Line {
+        /** About how tall the line is, against a row's. */
+        val weight: Double
+
+        /** A section's kind and how many parcels it has. */
+        data class Heading(val kind: ParcelSectionKind, val count: Int) : Line {
+            override val weight: Double get() = 0.6
+        }
+
+        data class Row(val parcel: DeliveryWidgetParcel) : Line {
+            override val weight: Double get() = 1.0
+        }
+
+        /** How many parcels are left out. */
+        data class More(val count: Int) : Line {
+            override val weight: Double get() = 0.5
+        }
     }
 
     companion object {
@@ -138,13 +149,37 @@ data class DeliveryWidgetList(
         const val link = "peekdeliverytracker://parcels"
 
         /**
-         * `columns(of:perColumn:)`: a medium widget's columns, the parcels it shows in two, read down the first then the
-         * second, once one column can't hold them all; else in one, across the widget.
+         * `lines(_:rows:headings:)`: the first `rows` parcels under their sections' headings, if the widget has room for
+         * them, then a line that counts the others.
          */
-        fun <P> columns(shown: List<P>, perColumn: Int): List<List<P>> {
-            if (shown.size <= maxOf(perColumn, 1)) return if (shown.isEmpty()) emptyList() else listOf(shown)
-            val first = (shown.size + 1) / 2
-            return listOf(shown.take(first), shown.drop(first))
+        fun lines(sections: List<Section>, rows: Int, headings: Boolean): List<Line> {
+            val lines = mutableListOf<Line>()
+            var left = rows
+            for (section in sections) {
+                if (left <= 0) break
+                if (headings && section.kind != null) lines += Line.Heading(section.kind, section.parcels.size)
+                section.parcels.take(left).mapTo(lines) { Line.Row(it) }
+                left -= minOf(left, section.parcels.size)
+            }
+            val more = sections.sumOf { it.parcels.size } - (rows - left)
+            return if (more > 0) lines + Line.More(more) else lines
+        }
+
+        /**
+         * `columns(_:)`: a medium widget's two columns, about as tall as each other, read down the first then the
+         * second. A heading never ends the first; the line that counts the parcels left out always ends the second, as
+         * they would follow its last row. A single row and its heading take one column.
+         */
+        fun columns(lines: List<Line>): List<List<Line>> {
+            val total = lines.sumOf { it.weight }
+            var split = 0
+            var height = 0.0
+            while (split < lines.size - 1 && height + lines[split].weight / 2 < total / 2) {
+                height += lines[split].weight
+                split++
+            }
+            if (split > 0 && lines[split - 1] is Line.Heading) split--
+            return if (split == 0) listOf(lines) else listOf(lines.take(split), lines.drop(split))
         }
 
         fun make(date: Instant, enabled: Boolean, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {

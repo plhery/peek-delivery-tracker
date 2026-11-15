@@ -88,44 +88,37 @@ class ParcelsWidgetTest {
     }
 
     /** The rows under the sections at `size`, in the sections' order, and the count of the rest. */
-    private fun sections(list: DeliveryWidgetList, size: DpSize) = SectionsLayout(list, size, WidgetText(app))
-
-    private fun shown(list: DeliveryWidgetList, size: DpSize) = ListLayout(list, size, WidgetText(app)).shown
+    private fun sections(list: DeliveryWidgetList, size: DpSize, type: WidgetText = WidgetText(app)) = SectionsLayout(list, size, type)
 
     /** The line a row of the two-by-two widget shows. */
     private fun narrowLine(parcel: DeliveryWidgetParcel, list: DeliveryWidgetList) =
-        ListLayout(list, LIST_SMALL, WidgetText(app)).let { fittingLine(parcel, it, it.words) }
+        sections(list, LIST_SMALL).layout.let { fittingLine(parcel, it, it.words) }
 
     private fun list(parcels: List<DeliveryWidgetParcel>, enabled: Boolean = true) =
         DeliveryWidgetList.make(CAPTURED, enabled, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
 
     /**
-     * The rows each size has room for, which its sections keep: three two cells by two, six four by two, and all
-     * fifteen four by four, in the order they are given; the line counting the rest where there are more.
+     * The rows each size has room for, in the sections' order: three two cells by two, up to eight four by two, and up to
+     * fifteen four by four; the line counting the rest where there are more.
      */
     @Test
     fun eachSizeHasRoomForItsRows() {
-        val small = shown(sample, LIST_SMALL)
-        assertEquals(sample.parcels.take(3), small.rows)
-        assertEquals(12, small.more)
-        val medium = shown(sample, LIST_MEDIUM)
-        assertEquals(sample.parcels.take(6), medium.rows)
-        assertEquals(9, medium.more)
-        val large = shown(sample, LIST_LARGE)
-        assertEquals(sample.parcels, large.rows)
-        assertEquals(0, large.more)
+        val order = sample.sections.flatMap { it.parcels }
+        for (size in listOf(LIST_SMALL, LIST_THREE_BY_TWO, LIST_MEDIUM, LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE)) {
+            val laid = sections(sample, size)
+            assertEquals("$size", order.take(laid.rows.size), laid.rows)
+            assertEquals("$size", 15 - laid.rows.size, laid.more)
+        }
+        assertEquals(listOf(3, 7, 13), listOf(LIST_SMALL, LIST_MEDIUM, LIST_LARGE).map { sections(sample, it).rows.size })
         // The iPhone's widget each size stands for: under four cells across the small one, from there the medium one,
         // from three cells down the large one, its rows on one line where it is four cells across.
-        fun layout(size: DpSize) = ListLayout(sample, size, WidgetText(app))
+        fun layout(size: DpSize) = sections(sample, size).layout
         assertEquals(DeliveryWidgetList.Size.Small, layout(LIST_SMALL).size)
         for (size in listOf(LIST_THREE_BY_TWO, LIST_MEDIUM)) assertEquals("$size", DeliveryWidgetList.Size.Medium, layout(size).size)
         for (size in listOf(LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE)) {
             assertEquals("$size", DeliveryWidgetList.Size.Large, layout(size).size)
         }
         assertEquals(listOf(LIST_FOUR_BY_THREE, LIST_LARGE), listOf(LIST_SMALL, LIST_MEDIUM, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE).filter { layout(it).lineRows })
-        assertEquals(listOf(sample.parcels.take(3)), layout(LIST_SMALL).columns)
-        assertEquals(listOf(sample.parcels.take(3), sample.parcels.subList(3, 6)), layout(LIST_MEDIUM).columns)
-        assertEquals(listOf(sample.parcels), layout(LIST_LARGE).columns)
 
         // Two cells across leave the first row's line too little room for its stage: its day stays, opening the line.
         assertEquals(sample.parcels[0].listDay?.openingLine(Locale.ENGLISH), narrowLine(sample.parcels[0], sample))
@@ -143,7 +136,7 @@ class ParcelsWidgetTest {
         val small = sections(sample, LIST_SMALL)
         assertEquals(order.take(3), small.rows)
         assertEquals(12, small.more)
-        assertTrue(small.columns.flatten().all { it is SectionEntry.Row })
+        assertTrue(small.columns.flatten().none { it is DeliveryWidgetList.Line.Heading })
         show(sample, LIST_SMALL) {
             for (parcel in order.take(3)) onNode(hasTextEqualTo(parcel.listName)).assertExists()
             for (parcel in order.take(3)) onNode(hasTextEqualTo(narrowLine(parcel, sample))).assertExists()
@@ -157,11 +150,9 @@ class ParcelsWidgetTest {
             assertEquals("$size", order.take(laid.rows.size), laid.rows)
             assertEquals("$size", 15 - laid.rows.size, laid.more)
             assertTrue("$size", laid.more > 0)
-            for (column in laid.columns) {
-                assertTrue("$size", column.first() is SectionEntry.Heading || column.first() is SectionEntry.Row)
-                assertTrue("$size", column.last() is SectionEntry.Row)
-            }
-            assertTrue("$size", laid.columns.first().first() is SectionEntry.Heading)
+            for (column in laid.columns.dropLast(1)) assertTrue("$size", column.last() is DeliveryWidgetList.Line.Row)
+            assertEquals("$size", DeliveryWidgetList.Line.More(laid.more), laid.columns.last().last())
+            assertTrue("$size", laid.columns.first().first() is DeliveryWidgetList.Line.Heading)
         }
         val medium = sections(sample, LIST_MEDIUM)
         show(sample, LIST_MEDIUM) {
@@ -182,40 +173,36 @@ class ParcelsWidgetTest {
         }
         // From an app that published no sections, the rows in the widgets' order, without headings.
         val older = list(sample.parcels.map { it.copy(section = null) })
-        assertEquals(listOf(older.parcels.take(3), older.parcels.subList(3, 6)), sections(older, LIST_MEDIUM).columns.map { column -> column.map { (it as SectionEntry.Row).parcel } })
+        val olderMedium = sections(older, LIST_MEDIUM)
+        assertEquals(older.parcels.take(olderMedium.rows.size), olderMedium.rows)
+        assertTrue(olderMedium.columns.flatten().none { it is DeliveryWidgetList.Line.Heading })
+        assertEquals(2, olderMedium.columns.size)
     }
 
     /**
-     * The line counting the parcels left out follows the last row shown, as they would: in a medium widget at the foot
-     * of the second column, so only that column leaves it room and the first takes the widget's height. Where nothing
-     * reaches the second column, the line ends the first, which then leaves it room.
+     * The line counting the parcels left out ends the last column, after the last row shown, as they would follow it; the
+     * columns, the line with them, fit the widget at any height and text size that leaves room for more than one row.
      */
     @Test
     fun theLineForTheParcelsLeftOutEndsTheColumnTheyWouldFollow() {
         val medium = sections(sample, LIST_MEDIUM)
         val (first, second) = medium.columns
-        assertTrue(medium.more > 0)
-        assertTrue(medium.height(first) > medium.layout.room.height - line(medium))
+        assertEquals(DeliveryWidgetList.Line.More(medium.more), second.last())
         show(sample, LIST_MEDIUM) {
-            val names = { column: List<SectionEntry> -> column.filterIsInstance<SectionEntry.Row>().map { hasTextEqualTo(it.parcel.listName) } }
+            val names = { column: List<DeliveryWidgetList.Line> -> column.filterIsInstance<DeliveryWidgetList.Line.Row>().map { hasTextEqualTo(it.parcel.listName) } }
             onNode(hasAnyDescendant(hasTextEqualTo("+${medium.more} more")) and hasAnyDescendant(names(second).last()) and hasAnyDescendant(names(first).first()).not())
                 .assertExists()
         }
         for (scale in listOf(1f, 1.3f, 2f)) {
             val type = WidgetText(fontScaled(scale))
-            for (height in 60..270 step 5) {
-                val laid = SectionsLayout(sample, DpSize(LIST_MEDIUM.width, height.dp), type)
+            for (height in 110..429 step 10) for (width in listOf(LIST_SMALL.width, LIST_THREE_BY_TWO.width, LIST_MEDIUM.width)) {
+                val laid = sections(sample, DpSize(width, height.dp), type)
                 val room = laid.layout.room.height
-                val last = laid.columns.lastOrNull() ?: continue
-                assertTrue("$height at $scale", laid.more > 0)
-                laid.columns.dropLast(1).forEach { assertTrue("$height at $scale", laid.height(it) <= room) }
-                assertTrue("$height at $scale", laid.height(last) + line(laid) <= room)
+                assertTrue("$width x $height at $scale", laid.columns.all { laid.height(it) <= room } || laid.rows.size == 1)
+                assertEquals("$width x $height at $scale", DeliveryWidgetList.Line.More(laid.more), laid.columns.last().last())
             }
         }
     }
-
-    /** The room the line counting the parcels left out takes under a column. */
-    private fun line(laid: SectionsLayout) = laid.layout.moreHeight + laid.layout.metrics.rowSpacing * 2
 
     /**
      * Its design by how many parcels it shows, from the demo's cards: one a small widget shows as Next delivery's card,
@@ -255,7 +242,7 @@ class ParcelsWidgetTest {
             for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
         }
         val five = sections(some(5), LIST_MEDIUM)
-        val headings = five.columns.flatten().filterIsInstance<SectionEntry.Heading>()
+        val headings = five.columns.flatten().filterIsInstance<DeliveryWidgetList.Line.Heading>()
         assertTrue(headings.isNotEmpty())
         show(some(5), LIST_MEDIUM, source::read) {
             for (heading in headings) onAllNodes(hasTextEqualTo(english.text(sectionTitleKey(heading.kind))))[0].assertExists()
@@ -286,11 +273,11 @@ class ParcelsWidgetTest {
     @Test
     fun noCountWhereEveryParcelHasItsRow() {
         for (size in listOf(LIST_SMALL, LIST_THREE_BY_TWO, LIST_MEDIUM, LIST_TWO_BY_FOUR, LIST_LARGE)) {
-            val beside = shown(sample, size).rows.size
+            val beside = sections(sample, size).rows.size
             for (count in 1..sample.parcels.size) {
                 val some = list(sample.parcels.take(count))
-                val kept = shown(some, size)
-                assertEquals("$count at $size", some.parcels.take(kept.rows.size), kept.rows)
+                val kept = sections(some, size)
+                assertEquals("$count at $size", some.sections.flatMap { it.parcels }.take(kept.rows.size), kept.rows)
                 assertEquals("$count at $size", count - kept.rows.size, kept.more)
                 if (count <= beside) assertEquals("$count at $size", 0, kept.more)
             }
@@ -302,18 +289,13 @@ class ParcelsWidgetTest {
     }
 
     /**
-     * A medium widget reads down two columns once one can't hold its parcels, the first never the shorter; three, it
-     * lists down one, across the widget.
+     * A medium widget splits its lines into two columns about as tall as each other ([DeliveryWidgetList.columns]), read
+     * down the first then the second; a single row and its heading take one, across the widget.
      */
     @Test
     fun mediumListReadsDownTwoColumns() {
-        fun columns(count: Int) = ListLayout(list(sample.parcels.take(count)), LIST_MEDIUM, WidgetText(app)).columns.map { it.size }
-        assertEquals(listOf(3, 3), columns(7))
-        assertEquals(listOf(3, 3), columns(6))
-        assertEquals(listOf(3, 2), columns(5))
-        assertEquals(listOf(2, 2), columns(4))
-        assertEquals(listOf(3), columns(3))
-        assertEquals(listOf(1), columns(1))
+        fun columns(count: Int) = sections(list(sample.parcels.take(count)), LIST_MEDIUM).columns.map { column -> column.count { it is DeliveryWidgetList.Line.Row } }
+        assertEquals(listOf(listOf(1), listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(2, 3), listOf(2, 4), listOf(3, 4), listOf(3, 5)), (1..8).map { columns(it) })
     }
 
     /**
@@ -323,14 +305,14 @@ class ParcelsWidgetTest {
     @Test
     fun aShortListTakesSmallerTypeBeforeItGivesARowUp() {
         val iPhoneSmall = DpSize(158.dp, 158.dp)
-        val crowded = ListLayout(sample, iPhoneSmall, WidgetText(app))
-        assertEquals(sample.parcels.take(3), crowded.shown.rows)
-        assertTrue(crowded.metrics.compact)
-        val three = ListLayout(list(sample.parcels.take(3)), iPhoneSmall, WidgetText(app))
-        assertEquals(3, three.shown.rows.size)
-        assertFalse(three.metrics.compact)
+        val crowded = sections(sample, iPhoneSmall)
+        assertEquals(sample.sections.flatMap { it.parcels }.take(3), crowded.rows)
+        assertTrue(crowded.layout.metrics.compact)
+        val three = sections(list(sample.parcels.take(3)), iPhoneSmall)
+        assertEquals(3, three.rows.size)
+        assertFalse(three.layout.metrics.compact)
         // A large widget keeps its type and gives rows up.
-        assertFalse(ListLayout(sample, LIST_LARGE, WidgetText(fontScaled(2f))).metrics.compact)
+        assertFalse(sections(sample, LIST_LARGE, WidgetText(fontScaled(2f))).layout.metrics.compact)
     }
 
     /**
@@ -339,7 +321,7 @@ class ParcelsWidgetTest {
      */
     @Test
     fun aLargeRowEndsInWhatFitsBesideItsName() {
-        val layout = ListLayout(sample, LIST_LARGE, WidgetText(app))
+        val layout = sections(sample, LIST_LARGE).layout
         val short = sample.parcels.first { it.listName.length < 12 }
         val end = lineRowEnd(short, layout)
         assertEquals(short.listLine.openingLine(Locale.ENGLISH), end.line)
@@ -360,10 +342,10 @@ class ParcelsWidgetTest {
             onNode(hasTextEqualTo("Handmade oak bookshelf with matching side table and drawers")).assertExists()
         }
         // At the largest text, fewer rows.
-        val larger = ListLayout(sample, LIST_LARGE, WidgetText(fontScaled(2f)))
-        assertTrue(larger.shown.rows.size < 15)
-        assertTrue(larger.shown.rows.size >= 10)
-        assertEquals(15 - larger.shown.rows.size, larger.shown.more)
+        val larger = sections(sample, LIST_LARGE, WidgetText(fontScaled(2f)))
+        assertTrue(larger.rows.size < sections(sample, LIST_LARGE).rows.size)
+        assertTrue(larger.rows.size >= 10)
+        assertEquals(15 - larger.rows.size, larger.more)
     }
 
     /**
@@ -372,7 +354,7 @@ class ParcelsWidgetTest {
      */
     @Test
     fun aLineTooLongKeepsTheDay() {
-        val layout = ListLayout(sample, LIST_SMALL, WidgetText(app))
+        val layout = sections(sample, LIST_SMALL).layout
         val parcel = sample.parcels.first { it.listDay != null }.copy(detail = "tomorrow")
         val status = parcel.listStatus
         fun width(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal)

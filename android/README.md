@@ -72,10 +72,11 @@ Arriving today, last night's delivery "yesterday", and a passed estimate gives w
     wide card over the parcel's last four steps, two wide cards, or three of the app list's cards;
   - up to `2k`, passes in each carrier's colours, in two columns in a medium widget;
   - more, rows under the app list's sections, each marked by its carrier's truck, then a line counting the rest at
-    the foot of the last column, after the last row shown (`ParcelsWidgetDesigns.kt`). A small widget leaves the headings out and keeps the sections' order. The rows keep
-    `ListLayout`'s sizes: a column of 3, the name over the stage and day; two such columns; up to 15 on one line each
-    where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up, and larger
-    text keeps fewer rows. Where a line doesn't fit, the day stays.
+    the foot of the last column, after the last row shown (`SectionsLayout`). As many rows as fit: up to 3 in a small
+    widget, which leaves the headings out, the name over the stage and day; up to 8 in a medium one, in two columns
+    about as tall as each other (`DeliveryWidgetList.columns`); up to 15 in a large one, on one line each where the
+    widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up, and larger text keeps
+    fewer rows. Where a line doesn't fit, the day stays.
 
   Cards and passes use the pictures the app draws for Next delivery's first 8 parcels; until those are drawn, the
   widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list

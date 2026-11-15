@@ -357,49 +357,25 @@ class DeliveryWidgetTests {
     )
 
     /**
-     * The list widget (ParcelLogicTests' `testListWidgetCountsTheParcelsItHasNoRoomFor`): each size's rows, in the widgets'
-     * order, and the count of the rest, which goes where every parcel has its row.
+     * The list widget's parcels, in the widgets' order: a delivered parcel goes from them a day after it arrived, the app
+     * silent since. Each size's rows at the default text size.
      */
     @Test
-    fun listPagesItsParcelsBySize() {
+    fun theListKeepsADeliveredParcelForADay() {
         fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, true, "en", snapshot)
 
         assertEquals(listOf(3, 6, 15), DeliveryWidgetList.Size.entries.map { it.rows })
-        val many = list(listed(20))
-        for (size in DeliveryWidgetList.Size.entries) {
-            val page = many.page(size.rows)
-            assertEquals("$size", many.parcels.take(size.rows), page.rows)
-            assertEquals("$size", many.parcels.size - size.rows, page.more)
-        }
-        val five = list(listed(5))
-        assertEquals(DeliveryWidgetList.Shown(five.parcels, 0), five.page(6))
-        assertEquals(DeliveryWidgetList.Shown(five.parcels.take(2), 3), five.page(2))
-        assertEquals(DeliveryWidgetList.Shown(emptyList(), 5), five.page(-1))
-        assertEquals(DeliveryWidgetList.Shown(emptyList(), 0), list(null).page(6))
+        assertEquals(emptyList<DeliveryWidgetParcel>(), list(null).parcels)
 
-        // A delivered parcel goes from the rows and the count a day after it arrived, the app silent since.
         val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
         val withArrived = listed(2, delivered = listOf(arrived))
         assertEquals(listOf("Parcel 1", "Parcel 2", "Arrived"), list(withArrived).parcels.map { it.label })
         val later = list(withArrived, now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong()))
         assertEquals(listOf("Parcel 1", "Parcel 2"), later.parcels.map { it.label })
-        // Ten on their way and eight delivered within the hour: a day later, the ten alone, four rows and "+6 more".
+        // Ten on their way and eight delivered within the hour: a day later, the ten alone.
         val delivered = (1..8).map { widgetParcel(label = "Delivered $it", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600L + it)) }
         val dayLater = list(listed(10, delivered = delivered), now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong()))
-        assertEquals(10, dayLater.parcels.size)
-        assertEquals(DeliveryWidgetList.Shown(dayLater.parcels.take(4), 6), dayLater.page(4))
-    }
-
-    /** `testMediumListWidgetBalancesItsColumns`: two columns once one can't hold the parcels, the first never the shorter. */
-    @Test
-    fun mediumListBalancesItsColumns() {
-        val parcels = (1..6).toList()
-        assertEquals(listOf(listOf(1, 2, 3), listOf(4, 5, 6)), DeliveryWidgetList.columns(parcels, perColumn = 3))
-        assertEquals(listOf(listOf(1, 2, 3), listOf(4, 5)), DeliveryWidgetList.columns(parcels.take(5), perColumn = 3))
-        assertEquals(listOf(listOf(1, 2), listOf(3, 4)), DeliveryWidgetList.columns(parcels.take(4), perColumn = 2))
-        assertEquals(listOf(listOf(1, 2, 3)), DeliveryWidgetList.columns(parcels.take(3), perColumn = 3))
-        assertEquals(listOf(listOf(1), listOf(2)), DeliveryWidgetList.columns(parcels.take(2), perColumn = 1))
-        assertEquals(emptyList<List<Int>>(), DeliveryWidgetList.columns(emptyList<Int>(), perColumn = 3))
+        assertEquals((1..10).map { "Parcel $it" }, dayLater.parcels.map { it.label })
     }
 
     /**
@@ -496,6 +472,63 @@ class DeliveryWidgetTests {
         val unsorted = list.copy(parcels = parcels + parcel("Older app", null))
         assertEquals(listOf(DeliveryWidgetList.Section(null, unsorted.parcels)), unsorted.sections)
         assertEquals(emptyList<DeliveryWidgetList.Section>(), list.copy(parcels = emptyList()).sections)
+    }
+
+    /**
+     * `testParcelsWidgetCountsTheParcelsLeftOutUnderTheColumnTheyWouldFollow`: the line that counts the parcels left out
+     * follows the last row shown, as they would: in a medium widget, at the foot of the second column, whichever section
+     * they are in. A heading never ends the first column.
+     */
+    @Test
+    fun theParcelsWidgetCountsTheParcelsLeftOutUnderTheColumnTheyWouldFollow() {
+        fun parcel(label: String, section: ParcelSectionKind) = widgetParcel(label = label, outForDelivery = false).copy(section = section.rawValue)
+        val stuck = parcel("Stuck", ParcelSectionKind.Attention)
+        val held = parcel("Held", ParcelSectionKind.Attention)
+        val today = parcel("Today", ParcelSectionKind.Today)
+        val coming = (1..4).map { parcel("Coming $it", ParcelSectionKind.Active) }
+        val quiet = DeliveryWidgetList(now, true, "en", listOf(stuck, today) + coming).sections
+        val busy = DeliveryWidgetList(now, true, "en", listOf(stuck, held, today) + coming).sections
+        fun heading(kind: ParcelSectionKind, count: Int) = DeliveryWidgetList.Line.Heading(kind, count)
+        fun row(parcel: DeliveryWidgetParcel) = DeliveryWidgetList.Line.Row(parcel)
+        fun more(count: Int) = DeliveryWidgetList.Line.More(count)
+        val attention = ParcelSectionKind.Attention
+        val active = ParcelSectionKind.Active
+
+        // Six parcels, four shown: the two left out are on their way, under the second column's last rows.
+        val six = DeliveryWidgetList.lines(quiet, rows = 4, headings = true)
+        assertEquals(
+            listOf(heading(attention, 1), row(stuck), heading(ParcelSectionKind.Today, 1), row(today), heading(active, 4), row(coming[0]), row(coming[1]), more(2)),
+            six,
+        )
+        assertEquals(
+            listOf(
+                listOf(heading(attention, 1), row(stuck), heading(ParcelSectionKind.Today, 1), row(today)),
+                listOf(heading(active, 4), row(coming[0]), row(coming[1]), more(2)),
+            ),
+            DeliveryWidgetList.columns(six),
+        )
+        // Seven: the first column ends on a row, not on the heading that would lead the second.
+        assertEquals(
+            listOf(
+                listOf(heading(attention, 2), row(stuck), row(held)),
+                listOf(heading(ParcelSectionKind.Today, 1), row(today), heading(active, 4), row(coming[0]), more(3)),
+            ),
+            DeliveryWidgetList.columns(DeliveryWidgetList.lines(busy, rows = 4, headings = true)),
+        )
+        // Left out from a section none of whose rows shows: still after the last row shown.
+        assertEquals(
+            listOf(listOf(heading(attention, 1), row(stuck)), listOf(heading(ParcelSectionKind.Today, 1), row(today), more(4))),
+            DeliveryWidgetList.columns(DeliveryWidgetList.lines(quiet, rows = 2, headings = true)),
+        )
+        // Every parcel shown: no line for others. A small widget has no headings.
+        assertEquals(row(coming[3]), DeliveryWidgetList.lines(quiet, rows = 6, headings = true).last())
+        assertEquals(emptyList<DeliveryWidgetList.Line>(), DeliveryWidgetList.lines(quiet, rows = 8, headings = true).filterIsInstance<DeliveryWidgetList.Line.More>())
+        assertEquals(listOf(row(stuck), row(held), row(today), more(4)), DeliveryWidgetList.lines(busy, rows = 3, headings = false))
+        // A single row, at the largest text, takes one column with its heading and the line for the others.
+        assertEquals(
+            listOf(listOf(heading(attention, 2), row(stuck), more(6))),
+            DeliveryWidgetList.columns(DeliveryWidgetList.lines(busy, rows = 1, headings = true)),
+        )
     }
 
     /**

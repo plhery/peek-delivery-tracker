@@ -153,7 +153,9 @@ transport allowance each. That's 120 s in total by default, 155 s with Postal Ni
 less when a carrier's order leaves a provider out. Postal S10 lookups get 13 s more for UPU. A slow direct
 attempt doesn't eat into this budget. If the budget runs out first, the discovery cursor
 moves on so the next check starts with another of ParcelsApp, Ship24 and 17TRACK. Postal
-Ninja, Track718 (Juxi's last provider) and UPU stay after them.
+Ninja, Track718 (Juxi's last provider) and UPU stay after them. A carrier's own lookup has its
+adapter's budget. Australia Post's has the minute an adapter takes at most, so that its read through a
+residential proxy after a bot check gets 45 s ([`trackingSync.ts`](../src/server/trackingSync.ts)).
 
 A failed source waits before it is retried for that parcel:
 

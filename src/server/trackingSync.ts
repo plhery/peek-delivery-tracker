@@ -928,6 +928,13 @@ export interface TrackingAdapter {
   ): Promise<CarrierResult>;
 }
 
+/**
+ * The carrier lookups given more than their adapter's default budget, up to the minute an adapter takes at most.
+ * Australia Post keeps 15 s of each browser read for the transport, so its 45 s left the browser service 30 s for
+ * both reads; behind its bot check, the second read, through a residential proxy, needs longer.
+ */
+export const CARRIER_LOOKUP_BUDGET_MS: Readonly<Partial<Record<string, number>>> = { 'australia-post': 60_000 };
+
 export class CarrierTrackingAdapter implements TrackingAdapter {
   constructor(
     readonly universal = new UniversalTracker({ environment: hostAdapterEnvironment(), providers: ['Track123', ...UNIVERSAL_SOURCES] }),
@@ -971,8 +978,9 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
     if (prefetched) return dateLocalClocks(carrierId, normalizeCarrierResult(prefetched));
     if (usesRoyalBrowser(carrierId)) await requireRoyalBrowser(carrierId, 'tracking');
     // A lookup that answered with an empty result is recorded as one without history (withHeldLookups).
+    const budgetMs = CARRIER_LOOKUP_BUDGET_MS[carrierId];
     return withHeldLookups(carrierId, () => trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language, phoneDigits), {
-      registry: this.registry, universal: this.universal, recorder: this.recorder,
+      registry: this.registry, universal: this.universal, recorder: this.recorder, ...(budgetMs ? { budgetMs } : {}),
     }), (result) => !usable(result));
   }
 }

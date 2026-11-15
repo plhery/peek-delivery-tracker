@@ -117,6 +117,22 @@ describe('dedicated carrier dispatch', () => {
     ]);
   });
 
+  it('gives Australia Post its minute, so that its read through the proxy after a challenge has 45 s', async () => {
+    const reads: { maxTimeout: number; proxy: boolean }[] = [];
+    // The gateway and both browser reads meet Australia Post's bot check.
+    const trawl = { scrape: vi.fn(async (request: { maxTimeout: number; proxy?: unknown; captureResponses: string[] }) => {
+      reads.push({ maxTimeout: request.maxTimeout, proxy: request.proxy !== undefined });
+      return { tier: 2, statusCode: 200, capturedResponses: [{ url: request.captureResponses[0], status: 403, headers: {} }] };
+    }) };
+    const environment = { fetcher: vi.fn(async () => new Response('', { status: 403 })), trawl, browserExecutablePath: null,
+      env: { AUSTRALIA_POST_FALLBACK_PROXY_URL: 'http://proxy.test:8080' }, recorder: NOOP_RECORDER } as unknown as AdapterEnvironment;
+    const adapter = new CarrierTrackingAdapter(undefined, new AdapterRegistry(REGISTRY, environment), NOOP_RECORDER);
+    await expect(adapter.fetch('australia-post', 'SYNTHETIC0001', null)).rejects.toBeInstanceOf(ChallengeError);
+    expect(reads.map((read) => read.proxy)).toEqual([false, true]);
+    // Each read keeps 15 s for the transport: the adapter's default 45 s left the second one 30 s at most.
+    expect(reads[1].maxTimeout).toBeGreaterThan(44_000);
+  });
+
   it('records a carrier that answers a number it does not know with an empty result as answering without history', async () => {
     const adapter = new CarrierTrackingAdapter();
     // FedEx runs its own steps and reports its lookup to the host's recorder, then returns its result.

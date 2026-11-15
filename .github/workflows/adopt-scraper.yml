@@ -24,8 +24,8 @@ on:
     workflows: [CI]
     types: [completed]
     branches: [main]
-  # The server's timer at each slot, an urgent release, or one the database
-  # gate stopped.
+  # The server's timer at each slot and three times in the night's, an urgent
+  # release, or one the database gate stopped.
   workflow_dispatch:
     inputs:
       version:
@@ -40,6 +40,11 @@ on:
         default: false
       slot:
         description: Started by the server's timer at its slot. A run without it never counts as its slot's adoption.
+        required: false
+        type: boolean
+        default: false
+      backup:
+        description: Started by the server's timer in the night's slot, after its start. Adopts only as a scheduled run would.
         required: false
         type: boolean
         default: false
@@ -79,13 +84,16 @@ env:
     src/generated/carriers.ts
 
 jobs:
-  # A scheduled run, or one a CI run on main started, adopts when no run but
-  # one by hand has pushed a release since its slot began and the release it
-  # would take has not failed in the slot. A dispatched run, the timer's or one
-  # by hand, always adopts.
+  # A scheduled run, one a CI run on main started, or the timer's backup in
+  # the night's slot adopts when no run but one by hand has pushed a release
+  # since its slot began and the release it would take has not failed in the
+  # slot. Another dispatched run, the timer's at its slot or one by hand,
+  # always adopts.
   due:
     name: Due
-    if: github.event_name == 'schedule' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    if: >-
+      github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.backup == true)
+      || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -120,7 +128,7 @@ jobs:
     needs: due
     if: >-
       !cancelled() && github.repository == 'plhery/peek-delivery-tracker'
-      && (github.event_name == 'workflow_dispatch' || needs.due.outputs.due == 'true')
+      && ((github.event_name == 'workflow_dispatch' && inputs.backup != true) || needs.due.outputs.due == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:

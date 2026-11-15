@@ -303,12 +303,14 @@ describe('scraper adoption validation', () => {
     assert.doesNotMatch(workflow, /repository_dispatch|client_payload/);
   });
 
-  it('lets the first scheduled or CI-started run of a slot adopt, and a dispatched run always', () => {
+  it('lets the first scheduled, CI-started or backup run of a slot adopt, and another dispatched run always', () => {
     const triggers = workflow.match(/\non:\n([\s\S]*?)\n\S/)?.[1] ?? '';
     assert.match(triggers, /\n  workflow_run:\n\s+workflows: \[CI\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
     const due = workflow.match(/\n  due:\n([\s\S]*?)\n  adopt:\n/)?.[1];
     assert.ok(due, 'The due job must come before the adopt job.');
-    assert.match(due, /if: github\.event_name == 'schedule' \|\| \(github\.event_name == 'workflow_run' && github\.event\.workflow_run\.conclusion == 'success'\)/);
+    assert.match(due, /if: >-\n\s+github\.event_name == 'schedule' \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.backup == true\)\n\s+\|\| \(github\.event_name == 'workflow_run' && github\.event\.workflow_run\.conclusion == 'success'\)\n/);
+    // The server's timer starts a backup in the night's slot, which adopts only as a scheduled run would.
+    assert.match(triggers, /\n      backup:\n\s+description: [^\n]+\n\s+required: false\n\s+type: boolean\n\s+default: false\n/);
     // It reads the workflow's runs, jobs and artifacts, the app's pin and npm's tags, and nothing of a release runs there.
     assert.match(due, /permissions:\n\s+actions: read\n\s+contents: read\n/);
     assert.match(due, /sparse-checkout: \|\n\s+\/scripts\/adopt-scraper\.mjs\n\s+\/package\.json\n/);
@@ -324,8 +326,8 @@ describe('scraper adoption validation', () => {
     assert.ok(workflow.startsWith('name: Adopt scraper release\n'));
     assert.ok(workflow.includes(`\nrun-name: \${{ github.event_name == 'workflow_dispatch' && inputs.slot != true && '${BY_HAND_TITLE}' || 'Adopt scraper release' }}\n`));
     assert.match(workflow, /\n      slot:\n {8}description: .+\n {8}required: false\n {8}type: boolean\n {8}default: false\n/);
-    // Only a dispatched run, the timer's or one by hand, skips the Due job.
-    assert.match(workflow, /\n    needs: due\n    if: >-\n      !cancelled\(\) && github\.repository == 'plhery\/peek-delivery-tracker'\n      && \(github\.event_name == 'workflow_dispatch' \|\| needs\.due\.outputs\.due == 'true'\)\n/);
+    // Only a dispatched run, the timer's at its slot or one by hand, skips the Due job.
+    assert.match(workflow, /\n    needs: due\n    if: >-\n      !cancelled\(\) && github\.repository == 'plhery\/peek-delivery-tracker'\n      && \(\(github\.event_name == 'workflow_dispatch' && inputs\.backup != true\) \|\| needs\.due\.outputs\.due == 'true'\)\n/);
     // Due is skipped then, and a skipped ancestor skips the push unless it says !cancelled().
     const push = workflow.match(/\n  push:\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
     assert.match(push, /if: "!cancelled\(\) && needs\.adopt\.result == 'success' && needs\.adopt\.outputs\.adopt == 'true'"/);

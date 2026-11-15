@@ -147,6 +147,10 @@ After deploying, run `scripts/smoke-url.sh https://your-hostname` from outside t
 
 ## Deploying from CI
 
+The scraper's adoption commits to `main` from a timer on the netcup server,
+`peek-adopt-dispatch.timer`: at each slot from 06:07 to 22:07 UTC, and at 00:37, 02:37 and
+04:37 UTC as a backup ([SCRAPER.md](SCRAPER.md)).
+
 The CI workflow builds the image while the tests run. To let it publish and deploy, set
 in the repository:
 

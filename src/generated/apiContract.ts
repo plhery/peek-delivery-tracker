@@ -40507,7 +40507,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "360lion"
     },
     "trackingUrlTemplate": "https://toms.360lion.com/track?trackNumber={trackingNumber}",
     "linkRules": [
@@ -40527,7 +40527,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.360lion.com/"
+    "trackingSearchUrl": "https://toms.360lion.com/track"
   },
   "asiafly": {
     "displayName": "Asiafly",

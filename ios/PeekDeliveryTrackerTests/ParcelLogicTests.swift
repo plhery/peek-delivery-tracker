@@ -1252,6 +1252,50 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DeliveryWidgetList.sections([]), [])
     }
 
+    /// The line that counts the parcels left out follows the last row shown, as they would: in a medium widget, at the
+    /// foot of the second column, whichever section they are in. A heading never ends the first column.
+    func testParcelsWidgetCountsTheParcelsLeftOutUnderTheColumnTheyWouldFollow() {
+        func parcel(_ label: String, _ section: String) -> DeliveryWidgetParcel {
+            var parcel = widgetParcel(label: label, outForDelivery: false)
+            parcel.section = section
+            return parcel
+        }
+        typealias Line = DeliveryWidgetList.Line
+        let stuck = parcel("Stuck", "attention")
+        let held = parcel("Held", "attention")
+        let today = parcel("Today", "today")
+        let coming = (1...4).map { parcel("Coming \($0)", "active") }
+        let quiet = DeliveryWidgetList.sections([stuck, today] + coming)
+        let busy = DeliveryWidgetList.sections([stuck, held, today] + coming)
+
+        // Six parcels, four shown: the two left out are on their way, under the second column's last rows.
+        let six = DeliveryWidgetList.lines(quiet, rows: 4, headings: true)
+        XCTAssertEqual(six, [.heading("attention", count: 1), .row(stuck), .heading("today", count: 1), .row(today),
+                             .heading("active", count: 4), .row(coming[0]), .row(coming[1]), .more(2)])
+        XCTAssertEqual(DeliveryWidgetList.columns(six), [
+            [.heading("attention", count: 1), .row(stuck), .heading("today", count: 1), .row(today)],
+            [.heading("active", count: 4), .row(coming[0]), .row(coming[1]), .more(2)],
+        ])
+        // Seven: the first column ends on a row, not on the heading that would lead the second.
+        XCTAssertEqual(DeliveryWidgetList.columns(DeliveryWidgetList.lines(busy, rows: 4, headings: true)), [
+            [.heading("attention", count: 2), .row(stuck), .row(held)],
+            [.heading("today", count: 1), .row(today), .heading("active", count: 4), .row(coming[0]), .more(3)],
+        ])
+        // Left out from a section none of whose rows shows: still after the last row shown.
+        XCTAssertEqual(DeliveryWidgetList.columns(DeliveryWidgetList.lines(quiet, rows: 2, headings: true)), [
+            [.heading("attention", count: 1), .row(stuck)],
+            [.heading("today", count: 1), .row(today), .more(4)],
+        ])
+        // Every parcel shown: no line for others. A small widget has no headings.
+        XCTAssertEqual(DeliveryWidgetList.lines(quiet, rows: 6, headings: true).last, Line.row(coming[3]))
+        XCTAssertEqual(DeliveryWidgetList.lines(quiet, rows: 8, headings: true).filter { if case .more = $0 { true } else { false } }, [])
+        XCTAssertEqual(DeliveryWidgetList.lines(busy, rows: 3, headings: false), [.row(stuck), .row(held), .row(today), .more(4)])
+        // A single row, at the largest text, takes one column with its heading and the line for the others.
+        XCTAssertEqual(DeliveryWidgetList.columns(DeliveryWidgetList.lines(busy, rows: 1, headings: true)), [
+            [.heading("attention", count: 2), .row(stuck), .more(6)],
+        ])
+    }
+
     /// A step's time is its clock on its day, and its short weekday and clock from the next, in the reader's language.
     func testAWidgetStepsTimeNamesItsWeekdayFromAnotherDay() throws {
         var calendar = Calendar(identifier: .gregorian)

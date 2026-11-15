@@ -350,6 +350,53 @@ enum DeliveryWidgetList {
             return under.isEmpty ? nil : Section(kind: kind, parcels: cardOrder(under))
         }
     }
+
+    /// A line of the sections' design.
+    enum Line: Hashable, Sendable {
+        /// A section's kind and how many parcels it has.
+        case heading(String, count: Int)
+        case row(DeliveryWidgetParcel)
+        /// How many parcels are left out.
+        case more(Int)
+
+        /// About how tall the line is, against a row's.
+        var weight: Double {
+            switch self {
+            case .heading: 0.6
+            case .row: 1
+            case .more: 0.5
+            }
+        }
+    }
+
+    /// The first `rows` parcels under their sections' headings, if the widget has room for them, then a line that counts
+    /// the others.
+    static func lines(_ sections: [Section], rows: Int, headings: Bool) -> [Line] {
+        var lines: [Line] = []
+        var left = rows
+        for section in sections where left > 0 {
+            if headings, let kind = section.kind { lines.append(.heading(kind, count: section.parcels.count)) }
+            lines += section.parcels.prefix(left).map(Line.row)
+            left -= min(left, section.parcels.count)
+        }
+        let more = sections.reduce(0) { $0 + $1.parcels.count } - (rows - left)
+        return more > 0 ? lines + [.more(more)] : lines
+    }
+
+    /// A medium widget's two columns, about as tall as each other, read down the first then the second. A heading never
+    /// ends the first; the line that counts the parcels left out always ends the second, as they would follow its last
+    /// row. A single row and its heading take one column.
+    static func columns(_ lines: [Line]) -> [[Line]] {
+        let total = lines.reduce(0) { $0 + $1.weight }
+        var split = 0
+        var height = 0.0
+        while split < lines.count - 1, height + lines[split].weight / 2 < total / 2 {
+            height += lines[split].weight
+            split += 1
+        }
+        if split > 0, case .heading = lines[split - 1] { split -= 1 }
+        return split == 0 ? [lines] : [Array(lines.prefix(split)), Array(lines.dropFirst(split))]
+    }
 }
 
 extension String {

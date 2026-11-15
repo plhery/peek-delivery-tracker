@@ -507,15 +507,6 @@ private struct ParcelSections: View {
         "delivered": "app.pastDeliveries", "returned": "app.returned", "archived": "app.archived",
     ]
 
-    private enum Item: Hashable {
-        /// A section's title key and how many parcels it has.
-        case heading(String, count: Int)
-        case row(DeliveryWidgetParcel)
-
-        /// A heading is about half a row's height.
-        var weight: Double { if case .heading = self { 0.6 } else { 1 } }
-    }
-
     private struct Layout: Hashable {
         let rows: Int
         let compact: Bool
@@ -542,63 +533,34 @@ private struct ParcelSections: View {
         }
     }
 
-    /// The first `rows` parcels under their sections' headings; a small widget has no room for headings.
-    private func items(_ sections: [DeliveryWidgetList.Section], rows: Int) -> [Item] {
-        var items: [Item] = []
-        var left = rows
-        for section in sections where left > 0 {
-            if size != .small, let kind = section.kind {
-                items.append(.heading(Self.titles[kind] ?? "app.onTheWaySection", count: section.parcels.count))
-            }
-            items += section.parcels.prefix(left).map(Item.row)
-            left -= min(left, section.parcels.count)
-        }
-        return items
-    }
-
-    /// A medium widget's two columns, about as tall as each other, read down the first then the second; a heading never
-    /// ends the first.
-    private func columns(_ items: [Item]) -> [[Item]] {
-        let total = items.reduce(0) { $0 + $1.weight }
-        var split = 0
-        var height = 0.0
-        while split < items.count, height + items[split].weight / 2 < total / 2 {
-            height += items[split].weight
-            split += 1
-        }
-        if split > 0, case .heading = items[split - 1] { split -= 1 }
-        return [Array(items.prefix(split)), Array(items.dropFirst(split))]
-    }
-
+    /// The rows and their headings, a small widget having no room for headings, down one column, or two in a medium
+    /// widget (`DeliveryWidgetList.columns`); the line for the others at the foot of the column they would follow.
     private func list(_ sections: [DeliveryWidgetList.Section], layout: Layout, width: CGFloat) -> some View {
         let metrics = ParcelListMetrics(compact: layout.compact, markWidth: layout.compact ? compactMarkWidth : markWidth)
-        let items = items(sections, rows: layout.rows)
-        let more = parcels.count - layout.rows
-        return VStack(alignment: .leading, spacing: metrics.rowSpacing) {
+        let lines = DeliveryWidgetList.lines(sections, rows: layout.rows, headings: size != .small)
+        return Group {
             if size == .medium {
                 HStack(alignment: .top, spacing: 12) {
-                    ForEach(Array(columns(items).enumerated()), id: \.offset) { _, column in
+                    ForEach(Array(DeliveryWidgetList.columns(lines).enumerated()), id: \.offset) { _, column in
                         self.column(column, metrics: metrics, width: width)
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
                     }
                 }
             } else {
-                column(items, metrics: metrics, width: width)
-            }
-            if more > 0 {
-                Spacer(minLength: 0)
-                ParcelListMore(count: more, copy: copy, leading: metrics.markWidth + metrics.markSpacing)
+                column(lines, metrics: metrics, width: width)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
-    private func column(_ items: [Item], metrics: ParcelListMetrics, width: CGFloat) -> some View {
+    private func column(_ lines: [DeliveryWidgetList.Line], metrics: ParcelListMetrics, width: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: metrics.rowSpacing) {
-            ForEach(items, id: \.self) { item in
-                switch item {
-                case let .heading(title, count):
-                    heading(title, count: count)
+            ForEach(lines, id: \.self) { line in
+                switch line {
+                case let .heading(kind, count):
+                    heading(Self.titles[kind] ?? "app.onTheWaySection", count: count)
+                case let .more(count):
+                    Spacer(minLength: 0)
+                    ParcelListMore(count: count, copy: copy, leading: metrics.markWidth + metrics.markSpacing)
                 case let .row(parcel):
                     let truck = parcel.carrierId.flatMap { trucks[$0] }
                     ParcelListLink(parcel: parcel, size: size) {
@@ -611,6 +573,7 @@ private struct ParcelSections: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     /// The app list's heading, made small: its title and how many parcels it has.

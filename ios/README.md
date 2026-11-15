@@ -201,8 +201,9 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   for a small, medium or large widget as the other widget's cards, the list's Next up first (a large one with a single
   parcel adds its last four steps); up to twice that as passes in the carriers' colours; more as rows under the
   list's sections, each marked with its carrier's truck, a parcel needing the reader in the warning colour
-  (`DeliveryWidgetList.design`). Rows and passes keep fewer at larger text, and a last line counts the others. Until
-  the app has drawn every listed parcel's card, the widget shows rows. The small widget and that line open the list
+  (`DeliveryWidgetList.design`). Rows and passes keep fewer at larger text, and a last line, after the last row
+  shown, counts the others. Until the app has drawn every listed parcel's card, the widget shows rows. The small
+  widget and that line open the list
   (`peekdeliverytracker://parcels`); in the medium and large ones, a card, pass or row opens its parcel. The app
   publishes every parcel with its section, whether it is Next up, and its carrier, the first few with their last
   steps, and draws each listed carrier's truck into the App Group.

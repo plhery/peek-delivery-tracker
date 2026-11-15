@@ -3,7 +3,7 @@ title: TopYou Sendungsverfolgung: TYZR-Nummer, Status, Zustellung
 description: TopYou-Paket (通邮) aus China verfolgen: wie die TYZR-Nummer aussieht, was die englischen Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: topyou-sendungsverfolgung
 published: 2026-10-30
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TopYou (通邮, Tongyou, auch 通邮集团 oder SZTY56) ist 深圳市通邮物流科技（集团）股份有限公司, ein Spediteur aus Shenzhen in China, der Sendungen über eigene internationale Linien ins Ausland bringt. Hat ein chinesischer Shop deine Bestellung mit TopYou verschickt, bekommst du eine Nummer, die mit TYZ beginnt und auf YQ endet: Füg sie oben ins Feld ein. TopYous Verlauf reicht vom Lager in China über Flug und Zoll bis in dein Land, wo ein Paketdienst vor Ort das Paket übernimmt.
@@ -86,7 +86,7 @@ Wie Abholung, Ausweis und Fristen genau laufen, steht unter [Zustellung verpasst
 
 **Nichts mehr nach der Zollfreigabe.** Nach `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` oder `Import clearance success` sollte der Paketdienst vor Ort das Paket haben. Such auf TopYous Tracking-Seite nach seiner Nummer und gib sie in seine Sendungsverfolgung ein, oder frag den Shop, wer zustellt und unter welcher Nummer. Hintergrund unter [Paket aus China verfolgen](guide:tracking-from-china).
 
-**Nicht gefunden oder noch keine Scans.** Eine Nummer, die TopYou nicht kennt, beantwortet die Tracking-Seite mit 查询不到 (nicht gefunden). Bei einer bekannten Nummer ohne Scan kann 暂无轨迹信息 (noch keine Sendungsdaten) stehen. Peek zeigt in beiden Fällen auf peektracker.com „Warten auf TopYou“ und fragt weiter nach. Steht seit mehr als einem Tag nur `Parcel Data Received` da, weist Peek darauf hin, dass der Absender das Paket noch nicht an TopYou übergeben hat: Frag den Shop, wann er es verschickt. Vergleiche die Nummer Zeichen für Zeichen mit der Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
+**Nicht gefunden oder noch keine Scans.** Eine Nummer, die TopYou nicht kennt, beantwortet die Tracking-Seite mit 查询不到 (nicht gefunden). Bei einer bekannten Nummer ohne Scan kann 暂无轨迹信息 (noch keine Sendungsdaten) stehen. Peek zeigt in beiden Fällen auf peektracker.com „Warten auf TopYou“ und fragt weiter nach. Gibt TopYou auch zwei Tage später noch eine dieser Antworten und antwortet sonst niemand für die Nummer, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Steht seit mehr als einem Tag nur `Parcel Data Received` da, weist Peek darauf hin, dass der Absender das Paket noch nicht an TopYou übergeben hat: Frag den Shop, wann er es verschickt. Vergleiche die Nummer Zeichen für Zeichen mit der Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
 
 **Zugestellt, aber nicht da.** Zugestellt hat der Paketdienst vor Ort, also fang bei ihm an und frag danach den Shop. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 

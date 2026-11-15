@@ -3,7 +3,7 @@ title: TopYou seguimiento: número TYZR, estados y entrega en España
 description: Sigue tu paquete de TopYou (通邮) desde China: cómo es un número TYZR…YQ, qué significan sus escaneos en inglés, quién lo entrega en España y qué se paga en aduanas.
 slug: topyou-seguimiento
 published: 2026-11-03
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TopYou (通邮, Tongyou, también 通邮集团 o SZTY56) es 深圳市通邮物流科技（集团）股份有限公司, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Si una tienda online china te ha enviado el pedido con TopYou, te habrá dado un número de seguimiento que empieza por TYZ y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El historial de TopYou va desde su almacén en China hasta el vuelo y la aduana, y a veces sigue con los escaneos de la empresa que hace la entrega.
@@ -79,7 +79,7 @@ Si se trata de un número postal internacional válido (dos letras, nueve cifras
 
 **Nada después de `Departed from customs`, de `Shipment completed the customs clearance process at destination`, de `Customs Clearance Completed Successfully` o de `Import clearance success`.** El paquete debería estar ya en manos de la empresa que lo entrega. Busca su número en la web de seguimiento de TopYou, o pregunta a la tienda qué empresa lo reparte y con qué número. Más información en [seguimiento de paquetes de China](guide:tracking-from-china).
 
-**No sale nada o todavía no hay escaneos.** Si no conoce el número, la web de TopYou responde 查询不到 (no encontrado), y si lo conoce pero aún no ha escaneado el paquete, puede responder 暂无轨迹信息 (todavía no hay información de seguimiento). En los dos casos, Peek muestra en peektracker.com «Esperando a TopYou» y sigue comprobando. Compara el número con el mensaje de la tienda, carácter por carácter; si en unos días no aparece nada, pregunta a la tienda si de verdad envió el paquete.
+**No sale nada o todavía no hay escaneos.** Si no conoce el número, la web de TopYou responde 查询不到 (no encontrado), y si lo conoce pero aún no ha escaneado el paquete, puede responder 暂无轨迹信息 (todavía no hay información de seguimiento). En los dos casos, Peek muestra en peektracker.com «Esperando a TopYou» y sigue comprobando. Si dos días después TopYou sigue dando una de esas respuestas y ninguna otra fuente responde por el número, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste. Compara el número con el mensaje de la tienda, carácter por carácter; si en unos días no aparece nada, pregunta a la tienda si de verdad envió el paquete.
 
 **Entregado, pero no ha llegado nada.** La entrega la hace la empresa que reparte, no TopYou: pregunta primero a esa empresa y después avisa a la tienda. Más en [paquete entregado pero no recibido](guide:delivered-not-received).
 

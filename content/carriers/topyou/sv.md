@@ -3,7 +3,7 @@ title: Spåra paket med TopYou: TYZR-nummer, statusar och leverans
 description: Spåra ditt TopYou-paket (通邮) från Kina: så ser TYZR-numret ut, det här betyder de engelska skanningarna och så går det till när paketet når Sverige.
 slug: topyou-spara-paket
 published: 2026-11-03
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TopYou (通邮, Tongyou, även 通邮集团 eller SZTY56) är 深圳市通邮物流科技（集团）股份有限公司, en speditör i Shenzhen i Kina som kör internationella fraktlinjer och skickar beställningar från kinesiska webbutiker till kunder utomlands. Skickar butiken din beställning med TopYou får du ett spårningsnummer som börjar med TYZ och slutar på YQ: klistra in det i fältet ovanför. TopYous spårning följer paketet från lagret i Kina, genom flyget och tullen, och kan sedan fortsätta med skanningar från bolaget som delar ut det.
@@ -77,7 +77,7 @@ Efter flyget och tullen lämnar TopYou över paketet till ett bolag som delar ut
 
 **Inget händer efter `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` eller `Import clearance success`.** Nu bör leveransbolaget ha paketet. Leta efter dess nummer på TopYous spårningssida, eller fråga säljaren vilket bolag som levererar och under vilket nummer. Mer bakgrund finns i guiden om [att spåra paket från Kina](guide:tracking-from-china) (på engelska).
 
-**Hittas inte, eller inga skanningar än.** Känner TopYous spårningssida inte till numret svarar den 查询不到 (hittades inte). Känner den till numret men har inte skannat paketet än kan den svara 暂无轨迹信息 (ingen spårningsinformation än). Peek visar på peektracker.com "Waiting for TopYou" (väntar på TopYou) i båda fallen och frågar igen vid nästa kontroll. Jämför numret med säljarens meddelande, tecken för tecken. Händer inget på några dagar, fråga säljaren om paketet verkligen har skickats.
+**Hittas inte, eller inga skanningar än.** Känner TopYous spårningssida inte till numret svarar den 查询不到 (hittades inte). Känner den till numret men har inte skannat paketet än kan den svara 暂无轨迹信息 (ingen spårningsinformation än). Peek visar på peektracker.com "Waiting for TopYou" (väntar på TopYou) i båda fallen och frågar igen vid nästa kontroll. Om TopYou fortfarande ger något av de svaren två dagar senare och ingen annan källa har hittat något om numret, visar peektracker.com "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." (efter två dagar känner transportören fortfarande inte till numret: kontrollera det, välj en annan transportör eller ta bort paketet). Peek kontrollerar sedan paketet en gång om dagen, och en gång i veckan när det har gått en vecka sedan du lade till det. Jämför numret med säljarens meddelande, tecken för tecken. Händer inget på några dagar, fråga säljaren om paketet verkligen har skickats.
 
 **Levererat, men inget paket.** Hör först med bolaget som delade ut paketet och kontakta sedan säljaren.
 

@@ -3,7 +3,7 @@ title: Praćenje J&T pošiljke u Njemačkoj: JTDE broj i statusi
 description: Prati paket J&T Expressa u Njemačkoj: kako izgleda JTDE broj za praćenje, što znači svaki status i što učiniti kad paket kasni, izgubi se ili ga nema.
 slug: jt-express-njemacka-pracenje-posiljke
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt na Majni) je njemačka mreža J&T Expressa: dostavlja pakete u Njemačkoj. Ako ti je web-trgovina narudžbu poslala preko J&T-a, broj za praćenje počinje s `JTDE`: zalijepi ga u polje iznad ili ga potraži na [J&T-ovoj stranici za praćenje na jtexpress.de](https://www.jtexpress.de/tracking). Broj ima trgovina koja ti je poslala narudžbu: naći ćeš ga u e-poruci o slanju ili na stranici narudžbe.
@@ -74,7 +74,7 @@ Prijevoznika J&T odabrala je trgovina, pa ti je kod narudžbe preko interneta up
 
 **Paket stoji.** J&T ne objavljuje rokove dostave za primatelje. Ako paket pokazuje "Received by carrier" ili "In transit", a četiri dana nema novog retka, Peek uz njega ispiše "No tracking update for four days" (četiri dana bez novosti u praćenju) i ponudi poveznicu "Get help from J&T Express Germany" (zatraži pomoć od J&T Express Germany). Ako se ni nakon toga ništa ne pomakne, pitaj trgovinu ili nazovi J&T-ovu službu za korisnike i navedi broj za praćenje. Više u vodiču o [praćenju koje se ne ažurira](guide:tracking-not-updating) (na engleskom).
 
-**Još nema praćenja.** Za broj koji J&T-ov sustav još ne poznaje Peek na peektracker.com pokazuje "Waiting for J&T Express Germany". Trgovine broj često izrade prije nego što paket predaju prijevozniku. Ako tako ostane nekoliko dana, provjeri broj kod trgovine i pitaj je li paket stvarno poslan.
+**Još nema praćenja.** Za broj koji J&T-ov sustav još ne poznaje Peek na peektracker.com pokazuje "Waiting for J&T Express Germany". Trgovine broj često izrade prije nego što paket predaju prijevozniku. Ako J&T ni nakon dva dana ne poznaje broj, a nijedan drugi izvor o njemu nije ništa javio, peektracker.com pokazuje "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." (ni nakon dva dana prijevoznik ne poznaje ovaj broj; provjeri ga, odaberi drugog prijevoznika ili izbriši paket), a Peek ga od tada provjerava jednom dnevno, nakon tjedan dana od dodavanja jednom tjedno. Ako tako ostane nekoliko dana, provjeri broj kod trgovine i pitaj je li paket stvarno poslan.
 
 **Dostavljeno, a paketa nema.** Pročitaj redak o dostavi u Peeku: ako navodi mjesto, kao `Mailbox` ili `Garage`, pogledaj ondje; ako piše `Left with neighbor`, pitaj susjede ili na J&T-ovoj stranici za praćenje provjeri kod kojeg je (vidi gore). J&T-ova česta pitanja savjetuju i da provjeriš je li paket preuzeo netko od ukućana, susjeda ili osoblja zgrade. I dalje ga nema? Prijavi to telefonom J&T-ovoj službi za korisnike i od trgovine zatraži povrat novca ili novi paket, uz broj za praćenje. Pogledaj i vodič o [paketu koji je dostavljen, a nije stigao](guide:delivered-not-received) (na engleskom).
 
@@ -98,7 +98,7 @@ J&T ne navodi na kojim jezicima odgovara služba za korisnike; stranica je na nj
 
 Peek pokazuje status, svako skeniranje s točnim vremenom i vrijeme dostave. J&T za svako skeniranje daje točan trenutak, pa ga Peek pokazuje u vremenskoj zoni tvog uređaja. Skeniranja stižu na engleskom, J&T-ovim riječima, čak i ako ih na jtexpress.de čitaš na njemačkom. J&T ne daje mjesto, očekivani dan dostave ni težinu, pa Peek ne pokazuje kartu. Kod vrlo duge povijesti zadržava 100 najnovijih skeniranja. "Open the J&T Express Germany website" (otvori web-stranicu J&T Express Germany) na stranici paketa otvara tvoj broj na J&T-ovoj stranici za praćenje.
 
-Dok J&T ne skenira paket, Peek na peektracker.com pokazuje "Waiting for J&T Express Germany" i nastavlja provjeravati. Kad J&T-ov sustav nije dostupan ili ne poznaje broj, Peek pita servise za praćenje i pokazuje njihovu povijest, njihovim riječima. Ako zatim i J&T-ov sustav i servisi za praćenje odgovore bez ijednog skeniranja za paket koji ih već ima, Peek zadržava pronađena skeniranja i, ako to potraje, napiše "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking." (prijevoznik zasad nema novih skeniranja; ona već pronađena ostaju, a Peek nastavlja provjeravati).
+Dok J&T ne skenira paket, Peek nastavlja provjeravati i na peektracker.com pokazuje "Waiting for J&T Express Germany" (ili, ako J&T ni nakon dva dana ne poznaje broj, molbu da ga provjeriš). Kad J&T-ov sustav nije dostupan ili ne poznaje broj, Peek pita servise za praćenje i pokazuje njihovu povijest, njihovim riječima. Ako zatim i J&T-ov sustav i servisi za praćenje odgovore bez ijednog skeniranja za paket koji ih već ima, Peek zadržava pronađena skeniranja i, ako to potraje, napiše "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking." (prijevoznik zasad nema novih skeniranja; ona već pronađena ostaju, a Peek nastavlja provjeravati).
 
 Peek provjerava paket svakih 10 minuta, a svake 2 minute kad je u dostavi: samo toga dana, od 6 sati ujutro po lokalnom vremenu i dok odgovara sam J&T. Preko servisa za praćenje provjerava ga svakih 15 minuta. Ako dva dana nema novog skeniranja (12 sati dok paket pokazuje "Received by carrier"), provjerava ga jednom na sat. Obavijesti ti može slati za "Every scan" (svako skeniranje), "Important steps" (važni koraci) ili "Delivery only" (samo dostava). Peek ne može umjesto tebe kontaktirati J&T ili trgovinu, promijeniti adresu ni dogovoriti novu dostavu.
 
@@ -118,7 +118,7 @@ J&T-ova njemačka web-stranica ne navodi ni jedno ni drugo, a nijedan redak J&T 
 
 ### Zašto J&T ne pronalazi moj broj za praćenje?
 
-Provjeri počinje li s `JTDE` i ima li iza toga 12 znamenki: brojevi drugih J&T mreža, primjerice `JTUK` u Ujedinjenom Kraljevstvu, nisu njemački. Ako je broj točan, J&T možda još nema paket: njegova stranica za praćenje tada javlja `Keine Abfrageergebnisse` (`No tracking records yet`), a Peek na peektracker.com pokazuje "Waiting for J&T Express Germany". Ako to potraje nekoliko dana, pitaj trgovinu.
+Provjeri počinje li s `JTDE` i ima li iza toga 12 znamenki: brojevi drugih J&T mreža, primjerice `JTUK` u Ujedinjenom Kraljevstvu, nisu njemački. Ako je broj točan, J&T možda još nema paket: njegova stranica za praćenje tada javlja `Keine Abfrageergebnisse` (`No tracking records yet`), a Peek na peektracker.com pokazuje "Waiting for J&T Express Germany". Ako J&T ni nakon dva dana ne poznaje broj, a nijedan drugi izvor o njemu nije ništa javio, peektracker.com traži da ga provjeriš, odabereš drugog prijevoznika ili izbrišeš paket. Ako J&T ni nakon nekoliko dana nema zapis, pitaj trgovinu.
 
 ### Kako kontaktirati J&T Express u Njemačkoj?
 

@@ -3,7 +3,7 @@ title: TopYou tracking: codice TYZR, stati e consegna in Italia
 description: Tracking TopYou (通邮) per un pacco dalla Cina: com'è fatto un codice TYZR…YQ, cosa vogliono dire le scansioni in inglese e chi prende il pacco in Italia.
 slug: topyou-tracking
 published: 2026-11-03
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TopYou (通邮, Tongyou, anche 通邮集团 o SZTY56) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZ e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
@@ -81,7 +81,7 @@ Se il secondo codice inizia con GFIT o CIIT, Peek lo chiede a GOFO Italy. Se è 
 
 **Niente dopo la dogana.** Dopo `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` o `Import clearance success` il pacco dovrebbe averlo il corriere che consegna. Cerca il suo codice sul sito di TopYou, oppure chiedi al negozio quale corriere consegna e con quale codice. Dopo `Shipment is out for delivery` il pacco è al primo centro di smistamento di GOFO: il giro di consegna arriva qualche giorno dopo. Vedi anche [tracking di un pacco dalla Cina](guide:tracking-from-china).
 
-**Codice non trovato o ancora nessuna scansione.** Il sito di TopYou risponde 查询不到 (non trovato) per un codice che non conosce, e può rispondere 暂无轨迹信息 (ancora nessuna informazione di tracking) per un codice che conosce ma non ha ancora scansionato. In tutti e due i casi Peek mostra su peektracker.com «In attesa di TopYou» e continua a controllare. Confronta il codice con il messaggio del negozio, carattere per carattere; se dopo qualche giorno non arriva niente, chiedi al negozio se il pacco è partito davvero.
+**Codice non trovato o ancora nessuna scansione.** Il sito di TopYou risponde 查询不到 (non trovato) per un codice che non conosce, e può rispondere 暂无轨迹信息 (ancora nessuna informazione di tracking) per un codice che conosce ma non ha ancora scansionato. In tutti e due i casi Peek mostra su peektracker.com «In attesa di TopYou» e continua a controllare. Se dopo due giorni TopYou dà ancora una di queste risposte e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Confronta il codice con il messaggio del negozio, carattere per carattere; se dopo qualche giorno non arriva niente, chiedi al negozio se il pacco è partito davvero.
 
 **Consegnato ma non ce l'hai.** Il pacco l'ha consegnato il corriere in Italia: parti dal suo tracking, poi scrivi al negozio. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 

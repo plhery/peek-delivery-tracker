@@ -3,7 +3,7 @@ title: TopYou suivi colis : numéro TYZR, statuts et livraison
 description: Suivre un colis TopYou (通邮) venu de Chine : le numéro TYZR, ce que disent ses scans en anglais et qui prend le relais en France, en Belgique et en Suisse.
 slug: topyou-suivi-colis
 published: 2026-10-30
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TopYou (通邮, Tongyou, aussi 通邮集团 ou SZTY56) est 深圳市通邮物流科技（集团）股份有限公司, un transitaire de Shenzhen, en Chine, qui fait voyager des colis sur ses propres lignes internationales. Si une boutique chinoise a confié ta commande à TopYou, ton numéro commence par TYZ et finit par YQ : colle-le dans le champ ci-dessus. Le suivi de TopYou va de son entrepôt en Chine jusqu'à ton pays, vol et douane compris ; un transporteur local prend ensuite le relais.
@@ -84,7 +84,7 @@ Le détail du retrait est dans [avis de passage : que faire](guide:missed-delive
 
 **Plus rien après la douane.** Après `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` ou `Import clearance success`, le transporteur local devrait avoir le colis. Cherche son numéro sur le site de TopYou et suis le colis chez lui, ou demande à la boutique. Voir aussi [le suivi d'un colis venu de Chine](guide:tracking-from-china).
 
-**Introuvable ou pas encore de scan.** Le site de TopYou répond 查询不到 (introuvable) à un numéro inconnu, et peut répondre 暂无轨迹信息 (pas encore d'informations de suivi) à un numéro connu sans scan. Peek affiche alors sur peektracker.com « En attente de TopYou » et continue de vérifier. Si seule la ligne `Parcel Data Received` est là depuis plus d'un jour, Peek précise que l'expéditeur n'a pas encore remis le colis à TopYou : demande à la boutique quand elle l'enverra. Compare le numéro avec le message de la boutique, caractère par caractère ; si rien ne vient après quelques jours, demande-lui si le colis est vraiment parti.
+**Introuvable ou pas encore de scan.** Le site de TopYou répond 查询不到 (introuvable) à un numéro inconnu, et peut répondre 暂无轨迹信息 (pas encore d'informations de suivi) à un numéro connu sans scan. Peek affiche alors sur peektracker.com « En attente de TopYou » et continue de vérifier. Si TopYou donne encore l'une de ces réponses deux jours plus tard et qu'aucune autre source ne répond pour le numéro, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout. Si seule la ligne `Parcel Data Received` est là depuis plus d'un jour, Peek précise que l'expéditeur n'a pas encore remis le colis à TopYou : demande à la boutique quand elle l'enverra. Compare le numéro avec le message de la boutique, caractère par caractère ; si rien ne vient après quelques jours, demande-lui si le colis est vraiment parti.
 
 **Livré mais pas reçu.** C'est le transporteur local qui a livré : commence par lui, puis la boutique. Voir [colis livré mais non reçu](guide:delivered-not-received).
 

@@ -3,7 +3,7 @@ title: Canada Post Sendungsverfolgung: Paket aus Kanada, Status
 description: Canada-Post-Paket verfolgen: wie die Trackingnummer aussieht, was die Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Zoll.
 slug: canada-post-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-15
 ---
 
 Canada Post ist die Post Kanadas. Ein Paket verfolgst du in der Sendungsverfolgung von Canada Post auf canadapost-postescanada.ca oder hier: Füg die Trackingnummer oben ins Feld ein. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops. Endet sie auf `CA`, fragt Peek mit derselben Nummer auch die Post deines Landes.
@@ -102,7 +102,7 @@ Bei einer internationalen Postnummer auf `CA` die Post deines Landes: DHL, die �
 
 ### Warum findet Peek meine Canada-Post-Nummer nicht?
 
-Canada Post gibt dieselbe Antwort, wenn eine Nummer unbekannt, noch nicht gescannt oder abgelaufen ist. Peek zeigt dann auf peektracker.com „Warten auf Canada Post“. Prüf jede Ziffer: Bei 16-stelligen Nummern ist die letzte eine Prüfziffer, bei Postnummern die letzte vor `CA`.
+Canada Post gibt dieselbe Antwort, wenn eine Nummer unbekannt, noch nicht gescannt oder abgelaufen ist. Peek zeigt dann auf peektracker.com „Warten auf Canada Post“. Gibt Canada Post diese Antwort auch zwei Tage später noch und antwortet sonst niemand für die Nummer, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Prüf jede Ziffer: Bei 16-stelligen Nummern ist die letzte eine Prüfziffer, bei Postnummern die letzte vor `CA`.
 
 ### Was bedeutet „Item processed“ bei Canada Post?
 

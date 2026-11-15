@@ -3,7 +3,7 @@ title: TopYou tracking: TYZR numbers, scans and who delivers
 description: Track a TopYou (通邮) parcel from China: what a TYZR…YQ number looks like, what its English scans mean and who takes the parcel over in your country.
 slug: topyou-tracking
 published: 2026-10-28
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
@@ -91,7 +91,7 @@ In Spain, the delivering partner's scan after customs can read `Parcel in transi
 
 **Nothing after `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` or `Import clearance success`.** The delivering carrier should have the parcel. Look for its number on TopYou's tracker, or ask the seller which carrier delivers and under which number. Background in [tracking a parcel from China](guide:tracking-from-china).
 
-**Not found or no scans yet.** TopYou's tracker answers 查询不到 (not found) for a number it doesn't know, and can answer 暂无轨迹信息 (no tracking information yet) for one it knows but hasn't scanned. Peek shows "Waiting for TopYou" on peektracker.com for both and keeps checking. If TopYou has shown only `Parcel Data Received` for a day or more, Peek says "The sender hasn’t handed it to TopYou yet. Tracking starts when they do." Ask the shop when it will send it. Check the number against the seller's message, character by character; if nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Not found or no scans yet.** TopYou's tracker answers 查询不到 (not found) for a number it doesn't know, and can answer 暂无轨迹信息 (no tracking information yet) for one it knows but hasn't scanned. Peek shows "Waiting for TopYou" on peektracker.com for both and keeps checking. If TopYou still gives either answer two days later and nothing else has answered for the number, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If TopYou has shown only `Parcel Data Received` for a day or more, Peek says "The sender hasn’t handed it to TopYou yet. Tracking starts when they do." Ask the shop when it will send it. Check the number against the seller's message, character by character; if nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Delivered, but nothing came.** On a US parcel USPS delivers: ask your post office, then tell the seller. More in [delivered but not received](guide:delivered-not-received).
 

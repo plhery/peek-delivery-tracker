@@ -3,7 +3,7 @@ title: Rastreio Meiteshun: número AMTS, estados e a quem perguntar
 description: Rastreio Meiteshun (美特顺) em Portugal: como é um número AMTS, o que quer dizer cada passo e porque é que o «Delivered» pode ser escrito antes da entrega.
 slug: meiteshun-rastreio
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-15
 ---
 
 A Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) é um transitário de Shenzhen, na China. Os seus números começam por AMTS e acabam em FS: se a loja que te enviou a encomenda te deu um, cola-o na caixa acima. Lê com cuidado o seguimento da Meiteshun: o seu sistema escreve a viagem toda, entrega incluída, quando a encomenda é criada, por isso um `Delivered` não prova que a encomenda chegou.
@@ -61,7 +61,7 @@ O Peek não encontrou prazos de entrega da Meiteshun, nem regras para tentativas
 
 **Todos os passos a horas, mas nada de encomenda.** Os passos foram escritos quando a encomenda foi criada: mostram o plano, não onde ela está. Guia-te pela estimativa de entrega que a loja te deu e pergunta-lhe quando esse prazo passar.
 
-**Parada em Shenzhen no Peek.** Se o Peek só mostra os primeiros passos em Shenzhen, mas uma ligação de seguimento da loja mostra mais, os passos que o Peek deixa de fora foram escritos com antecedência ou têm data posterior à verificação (mais abaixo). Mais em [porque é que o tracking não atualiza](guide:tracking-not-updating) e em [rastrear encomendas da China](guide:tracking-from-china).
+**Parada em Shenzhen no Peek.** Se o Peek só mostra os primeiros passos em Shenzhen, mas uma ligação de seguimento da loja mostra mais, os passos que o Peek deixa de fora foram escritos com antecedência ou têm data posterior à verificação (mais abaixo). Quando deixa de fora passos escritos com antecedência, o Peek também o diz por baixo do estado da encomenda, até ela ser entregue ou devolvida: «O site de Meiteshun Logistics mostra etapas escritas com antecedência, até mesmo a entrega. O Peek não as pode confirmar, por isso omite-as. Procura nesse site a transportadora que entrega no teu país e o respetivo número de seguimento; se não houver, pergunta ao vendedor.» Um passo assim nunca conta como leitura: não muda o estado nem envia notificações. Mais em [porque é que o tracking não atualiza](guide:tracking-not-updating) e em [rastrear encomendas da China](guide:tracking-from-china).
 
 **Nada encontrado.** Para um número que não conhece, o site da Meiteshun mostra o número como referência e todos os outros campos vazios. Confirma o número com a loja.
 

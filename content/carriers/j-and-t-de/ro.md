@@ -3,7 +3,7 @@ title: Urmărire colet J&T Germania: numărul JTDE și statusurile
 description: Urmărește un colet J&T Express în Germania: cum arată numărul JTDE, ce înseamnă fiecare status și ce faci dacă coletul întârzie, se pierde sau nu ajunge.
 slug: jt-express-germania-urmarire-colet
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt pe Main) este rețeaua germană a J&T Express: livrează colete în Germania. Dacă un magazin online ți-a trimis comanda cu J&T, numărul de urmărire începe cu `JTDE`: lipește-l în căsuța de mai sus sau caută-l în [trackerul J&T de pe jtexpress.de](https://www.jtexpress.de/tracking). Numărul ți-l dă magazinul: e în emailul de expediere sau pe pagina comenzii.
@@ -74,7 +74,7 @@ Magazinul a ales J&T, așa că la o comandă online te adresezi întâi lui. Pot
 
 **Nu se mișcă.** J&T nu publică termene de livrare pentru destinatari. Dacă un colet rămâne pe „Received by carrier” sau „In transit” patru zile fără niciun rând nou, Peek îl semnalează cu „No tracking update for four days” (nicio actualizare de patru zile) și îți arată linkul „Get help from J&T Express Germany” (cere ajutor de la J&T Express Germany). Dacă tot nu se mișcă nimic, întreabă magazinul sau sună la linia telefonică J&T și dă numărul de urmărire. Mai multe în ghidul despre [trackingul care nu se actualizează](guide:tracking-not-updating) (în engleză).
 
-**Încă nu apare în tracking.** Un număr pe care trackerul J&T nu-l cunoaște încă apare pe peektracker.com ca „Waiting for J&T Express Germany”. Magazinele creează adesea numărul înainte să predea coletul. Dacă rămâne așa mai multe zile, verifică numărul cu magazinul și întreabă dacă a trimis cu adevărat coletul.
+**Încă nu apare în tracking.** Un număr pe care trackerul J&T nu-l cunoaște încă apare pe peektracker.com ca „Waiting for J&T Express Germany”. Magazinele creează adesea numărul înainte să predea coletul. Dacă după două zile J&T tot nu cunoaște numărul și nicio altă sursă nu a găsit nimic despre el, pe peektracker.com apare „After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.” (după două zile, curierul tot nu cunoaște numărul; verifică-l, alege alt curier sau șterge coletul), iar de atunci Peek îl verifică o dată pe zi, apoi o dată pe săptămână, după ce a trecut o săptămână de când l-ai adăugat. Dacă rămâne așa mai multe zile, verifică numărul cu magazinul și întreabă dacă a trimis cu adevărat coletul.
 
 **Livrat, dar nu l-ai primit.** Uită-te în Peek la rândul care confirmă livrarea: dacă numește un loc, ca `Mailbox` sau `Garage`, uită-te acolo; dacă scrie `Left with neighbor`, întreabă-ți vecinii sau caută vecinul în trackerul J&T (vezi mai sus). FAQ-ul J&T te sfătuiește să verifici și dacă l-au primit membri ai familiei, vecini sau personalul clădirii. Tot nu-l găsești? Anunță problema la linia telefonică J&T și cere magazinului banii înapoi sau un colet nou, cu numărul de urmărire. Vezi și ghidul despre [coletul livrat, dar neprimit](guide:delivered-not-received) (în engleză).
 
@@ -98,7 +98,7 @@ J&T nu spune în ce limbi răspunde serviciul clienți; site-ul e în germană, 
 
 Peek arată statusul, fiecare scanare la ora ei exactă și ora livrării. Pentru fiecare scanare, J&T dă momentul exact, așa că Peek o arată în fusul orar al dispozitivului tău. Scanările apar în engleză, cu formulările J&T, chiar dacă pe jtexpress.de le citești în germană. J&T nu dă locul, ziua estimată de livrare sau greutatea, așa că Peek nu arată nicio hartă. La un istoric foarte lung, Peek păstrează cele mai recente 100 de scanări. Pe pagina coletului, „Open the J&T Express Germany website” (deschide site-ul J&T Express Germany) îți deschide numărul în trackerul J&T.
 
-Până când J&T scanează coletul, Peek arată pe peektracker.com „Waiting for J&T Express Germany” și continuă să întrebe. Când trackerul J&T nu poate fi accesat sau nu cunoaște numărul, Peek întreabă servicii de urmărire și îți arată istoricul dat de ele, cu propriile lor formulări. Dacă apoi trackerul J&T și serviciile de urmărire răspund toate fără nicio scanare pentru un colet care are deja scanări, Peek le păstrează pe cele găsite și, dacă situația durează, scrie „The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking.” (curierul nu are deocamdată scanări noi; cele găsite rămân, iar Peek verifică în continuare).
+Până când J&T scanează coletul, Peek continuă să întrebe și arată pe peektracker.com „Waiting for J&T Express Germany” (sau, dacă J&T tot nu cunoaște numărul după două zile, rugămintea de a-l verifica). Când trackerul J&T nu poate fi accesat sau nu cunoaște numărul, Peek întreabă servicii de urmărire și îți arată istoricul dat de ele, cu propriile lor formulări. Dacă apoi trackerul J&T și serviciile de urmărire răspund toate fără nicio scanare pentru un colet care are deja scanări, Peek le păstrează pe cele găsite și, dacă situația durează, scrie „The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking.” (curierul nu are deocamdată scanări noi; cele găsite rămân, iar Peek verifică în continuare).
 
 Peek verifică coletul la fiecare 10 minute și, cât e în livrare, la fiecare 2 minute: doar în ziua aceea, de la ora 6:00, ora locală, și cât timp răspunde trackerul J&T însuși. Prin servicii de urmărire, îl verifică la fiecare 15 minute. Dacă trec două zile fără o scanare nouă (12 ore, cât timp arată „Received by carrier”), îl verifică o dată pe oră. Pentru notificări alegi „Every scan” (fiecare scanare), „Important steps” (pașii importanți) sau „Delivery only” (doar livrarea). Peek nu poate contacta J&T sau magazinul în locul tău, nu poate schimba adresa și nu poate programa o nouă livrare.
 
@@ -118,7 +118,7 @@ Site-ul german al J&T nu dă niciunul, iar niciun rând J&T Express Germany cuno
 
 ### De ce nu găsește J&T numărul meu de urmărire?
 
-Verifică dacă începe cu `JTDE` și dacă după el urmează 12 cifre: numerele altor rețele J&T, de exemplu `JTUK` din Marea Britanie, nu sunt germane. Dacă numărul e corect, poate că J&T nu are încă coletul: trackerul J&T răspunde atunci `Keine Abfrageergebnisse` (`No tracking records yet`), iar Peek arată pe peektracker.com „Waiting for J&T Express Germany”. Dacă durează mai multe zile, întreabă magazinul.
+Verifică dacă începe cu `JTDE` și dacă după el urmează 12 cifre: numerele altor rețele J&T, de exemplu `JTUK` din Marea Britanie, nu sunt germane. Dacă numărul e corect, poate că J&T nu are încă coletul: trackerul J&T răspunde atunci `Keine Abfrageergebnisse` (`No tracking records yet`), iar Peek arată pe peektracker.com „Waiting for J&T Express Germany”. Dacă după două zile J&T tot nu cunoaște numărul și nicio altă sursă nu a găsit nimic despre el, peektracker.com îți cere să-l verifici, să alegi alt curier sau să ștergi coletul. Dacă J&T tot nu are nicio înregistrare după mai multe zile, întreabă magazinul.
 
 ### Cum contactez J&T Express în Germania?
 

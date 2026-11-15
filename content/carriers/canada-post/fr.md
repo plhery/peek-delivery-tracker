@@ -3,7 +3,7 @@ title: Postes Canada (Canada Post) suivi : numéro, statuts, avis
 description: Suivre un colis Postes Canada : où trouver le numéro de repérage, ce que veulent dire les statuts, l'avis de livraison, le ramassage et la douane.
 slug: canada-post-suivi
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-15
 ---
 
 Postes Canada, c'est la Société canadienne des postes, la société d'État fédérale qui exploite le service postal du Canada. Pour suivre ton colis, entre son numéro de repérage dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur, en général dans le courriel d'expédition de la boutique ; Postes Canada ne peut pas retrouver un colis à partir de ton nom ou de ton adresse. S'il finit par `CA` et que tu suis le colis depuis l'étranger, Peek peut aussi interroger la poste de ton pays avec le même numéro.
@@ -116,7 +116,7 @@ Les longs vols, la douane et les fins de semaine laissent souvent un trou entre 
 
 ### Pourquoi Peek ne trouve pas mon numéro de repérage Postes Canada ?
 
-Postes Canada donne la même réponse qu'un numéro soit inconnu, pas encore scanné ou expiré : pour un colis Postes Canada, Peek affiche donc sur peektracker.com « En attente de Canada Post ». Raisons habituelles selon Repérage : le colis n'est pas encore chez Postes Canada ou encore à l'étranger, il a été expédié il y a plus d'un an, ou le service ne comprend pas le repérage. Vérifie chaque chiffre : dans un numéro de 16 chiffres, le dernier est un chiffre de contrôle, et dans un numéro postal, c'est le dernier chiffre avant `CA`.
+Postes Canada donne la même réponse qu'un numéro soit inconnu, pas encore scanné ou expiré : pour un colis Postes Canada, Peek affiche donc sur peektracker.com « En attente de Canada Post ». Si Postes Canada donne encore cette réponse deux jours plus tard et qu'aucune autre source ne répond pour le numéro, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout. Raisons habituelles selon Repérage : le colis n'est pas encore chez Postes Canada ou encore à l'étranger, il a été expédié il y a plus d'un an, ou le service ne comprend pas le repérage. Vérifie chaque chiffre : dans un numéro de 16 chiffres, le dernier est un chiffre de contrôle, et dans un numéro postal, c'est le dernier chiffre avant `CA`.
 
 ### Puis-je suivre un colis avec le numéro de l'avis de livraison ?
 

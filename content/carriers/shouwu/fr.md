@@ -106,7 +106,7 @@ Shouwu dit travailler directement avec USPS, Royal Mail, La Poste, DHL, DPD et H
 
 ## Colis Shouwu bloqué ou qui n'arrive pas
 
-**`Not Found`.** Shouwu donne quatre raisons : il n'a pas encore accepté le colis, ne l'a pas encore scanné, le numéro est faux, ou le colis a été posté il y a si longtemps que son suivi a disparu. Il ajoute que le traitement prend en général quelques jours. Peek affiche sur peektracker.com « En attente de Shouwu International » et continue de vérifier. Vérifie le numéro caractère par caractère ; si rien ne vient après quelques jours, demande au vendeur.
+**`Not Found`.** Shouwu donne quatre raisons : il n'a pas encore accepté le colis, ne l'a pas encore scanné, le numéro est faux, ou le colis a été posté il y a si longtemps que son suivi a disparu. Il ajoute que le traitement prend en général quelques jours. Peek affiche sur peektracker.com « En attente de Shouwu International » et continue de vérifier. Si deux jours plus tard Shouwu ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout. Vérifie le numéro caractère par caractère ; si rien ne vient après quelques jours, demande au vendeur.
 
 **Bloqué sur `Preparing`, `Shipment information received` ou `Carrier received the shipment`.** Shouwu n'a pas encore le colis, ou ne l'a pas encore expédié de son entrepôt. Demande au vendeur quand il le lui a remis.
 

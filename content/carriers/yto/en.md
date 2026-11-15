@@ -3,7 +3,7 @@ title: YTO Express tracking: YT numbers, statuses and contact
 description: Track a YTO Express (圆通) parcel: what a YT number looks like, what YTO's Chinese scans mean, where parcels wait in China and how to reach YTO.
 slug: yto-express-tracking
 published: 2026-10-24
-updated: 2026-11-14
+updated: 2026-11-15
 ---
 
 YTO Express (圆通速递, Yuantong) is a Chinese express company founded in Shanghai in 2000, with more than 5,000 branches across China. A YTO number often belongs to a parcel inside China: an order from Taobao, Pinduoduo or Douyin, platforms YTO serves, on its way to a forwarder's warehouse or a friend's address. Track it on [YTO's tracker](https://www.yto.net.cn/ytoExpress/waybill/search), which is in Chinese only, or in the box above. YTO's service abroad is run by YTO International, which has its own tracker on [ytoglobal.com](https://www.ytoglobal.com/service).
@@ -93,7 +93,7 @@ YTO gives no hours or languages for them. Its site also has an online customer s
 
 Peek reads YTO's own tracking in China, not YTO International's. It shows the status, the scans YTO returns with the town of the branch or station that made each (its Chinese name where Peek can't place it), and the delivery time, with times read on China's clock and shown in your device's time zone; on peektracker.com, the history ends with "Times are in your time zone:" and its name. Scans in the table above appear in Peek's English, others in YTO's Chinese, and repeated scans once. After `退回件扫描`, Peek shows the trip back as "Out for delivery back to the sender" and "In a parcel locker or station on its way back", and the sender's signature as "Returned to the sender".
 
-YTO gives no expected delivery date. Peek leaves out couriers' names and phone numbers, the recipient's details and collection addresses: YTO's own tracker has those. YTO answers any number in a valid shape, so no scans yet doesn't prove a mistake: Peek keeps checking.
+YTO gives no expected delivery date. Peek leaves out couriers' names and phone numbers, the recipient's details and collection addresses: YTO's own tracker has those. YTO answers any number in a valid shape, so no scans yet doesn't prove a mistake: Peek keeps checking. If a parcel filed under YTO still has no record at YTO two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." on peektracker.com and from then on checks it daily, and weekly once a week has passed since you added it.
 
 It checks every 10 minutes, or every 2 minutes from 6 a.m. China time on the day YTO scans the parcel out for delivery, while YTO's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
 
@@ -109,7 +109,7 @@ Signed for: the courier handed the parcel over and recorded it (`PDA正常签收
 
 ### Why does my YTO number show no tracking?
 
-YTO hasn't scanned the parcel yet, the number is wrong, or the waybill is older than YTO keeps it searchable: three to six months, its privacy policy says. Check the number with the seller, or paste it into Peek, which keeps checking.
+YTO hasn't scanned the parcel yet, the number is wrong, or the waybill is older than YTO keeps it searchable: three to six months, its privacy policy says. Check the number with the seller, or paste it into Peek, which keeps checking and, if YTO still has no record of it two days later, asks you on peektracker.com to check it, choose another carrier or delete the parcel.
 
 ### Does YTO Express deliver outside China?
 

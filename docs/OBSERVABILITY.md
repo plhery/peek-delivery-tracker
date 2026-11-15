@@ -803,7 +803,9 @@ Key JSON events:
   `reason`: `parcel_deleted` before its check, or `job_withdrawn` when a deletion or a
   carrier change took the job during it. `tracking_sync_audit_skipped` (by `attempt_id`):
   an audit write found its rows deleted with the parcel. Neither is a failure;
-- `http_request` (by `request_id`, matching Sentry for server errors). A failed request
+- `http_request` (by `request_id`, matching Sentry for server errors): `method`, `status`,
+  `duration_ms` and the endpoint as `route`, the path with each id as `/:id` and a parcel
+  link as `:link` (there is no `path` field). A failed request
   carries `error_class`; a 502 that wraps an upstream failure also names that failure's
   class in `error_cause`. Health checks (`/health`, `/health/live`) and metric scrapes
   (`/api/metrics`) are logged only when they fail. A 5xx is logged at `error`, except

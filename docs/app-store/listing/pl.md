@@ -71,16 +71,12 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• W „Dodaj przesyłkę” każdy przewoźnik zachowuje teraz własny kod pocztowy i kraj doręczenia: kod jednego przewoźnika nie przechodzi już do następnego po zmianie, a po powrocie znów się pojawia.
-• „Zmień przewoźnika” wpisuje teraz w wymagane pole ostatni podany pasujący kod pocztowy, a przy polu opcjonalnym go proponuje, tak jak „Dodaj przesyłkę”.
-• Przesyłka zapisana z kodem pocztowym, np. jeszcze niezeskanowana przesyłka PostNL, nie prosi już drugi raz o kod pocztowy odbiorcy.
-• Peek śledzi teraz 83 kolejnych przewoźników, każdego z furgonetką w jego barwach, a wśród nich GLS US, BH Pošta, Pošte Srpske oraz firmy kurierskie z Grecji, Rumunii, Węgier, Polski i Bułgarii.
-• Gdy żaden przewoźnik nie znajduje numeru, który zaczyna się jak numery jednego przewoźnika, ale ma o jeden znak za mało lub za dużo, np. numeru UPS zaczynającego się od 1Z, strona przesyłki informuje teraz, że może być w nim literówka, i podaje przewoźnika.
-• Wiersz pod historią śledzenia mówi teraz, że godziny są podane w Twojej strefie czasowej, i podaje jej nazwę, np. „czas środkowoeuropejski”.
-• Przedział doręczenia w powiadomieniu lub aktywności na żywo pokazuje teraz godziny przewoźnika, więc brytyjski przedział 07:00–09:00 nie wyświetla się już jako 08:00–10:00.
-• Dopóki przewoźnik, który ma doręczyć przesyłkę, jej nie zeskanuje, jak w przypadku przesyłek JRT przekazanych DHL, Peek sprawdza teraz pierwszego przewoźnika nawet przez 14 dni, więc jego późniejsze skany nadal się pojawiają.
-• Gdy przesyłka wraca do nadawcy, powiadomienia mówią teraz „W drodze powrotnej” zamiast „W drodze”, a Peek nadal ją sprawdza na wypadek, gdyby jednak trafiła do doręczenia.
-• Gdy przewoźnik taki jak GZYL czy Xinghe Freight zapisuje etapy z wyprzedzeniem, nawet doręczenie, strona przesyłki mówi teraz, że Peek ich nie pokazuje, i radzi poszukać na jego stronie firmy, która doręcza w Twoim kraju.
-• W historii przesyłek z AliExpress wiersz Cainiao „Last-mile delivery forecast” brzmi teraz „Zgłoszono lokalnemu kurierowi”.
-• Przy największych rozmiarach tekstu na małym iPhonie, takim jak SE, „Zaloguj się” i nazwa przykładowej przesyłki na ekranie powitalnym nie nachodzą już na siebie ani na trasę: obraz się powiększa, a ekran się przewija.
+• Kropka oznacza teraz każdą przesyłkę, w której coś się zmieniło od jej ostatniego otwarcia; jeśli masz konto, po otwarciu przesyłki kropka znika na wszystkich Twoich urządzeniach. Możesz ją wyłączyć opcją „Oznaczaj nowe aktualizacje” w Ustawieniach.
+• W Ustawieniach są teraz „Format czasu” (12- lub 24-godzinny) i „Jednostka odległości” (kilometry lub mile); domyślna opcja „Automatycznie” korzysta z ustawień Twojego urządzenia.
+• W „Sortuj i filtruj” opcja „Priorytet” została włączona do opcji „Data dostawy”, która pokazuje najbliższą dostawę na początku.
+• Etapy zapisane przez przewoźnika z wyprzedzeniem widać teraz na szaro w historii śledzenia, gdy minie ich czas.
+• Jeszcze niezeskanowana przesyłka pokazuje teraz np. „Oczekiwanie na przewoźnika DHL” zamiast „Aktualizacja niedostępna”, a jeśli po dwóch dniach przewoźnik nadal nie zna numeru, Peek poprosi Cię o jego sprawdzenie.
+• O północy widżety zmieniają „Jutro” na „Dziś”, nawet gdy Peek jest zamknięty.
+• Przesyłka zwrócona nadawcy informuje teraz, jeśli przewoźnik wciąż skanuje ją w drodze powrotnej.
+• Poprawki: jeśli nie masz konta, nie dostajesz już powiadomień o zapomnianej przesyłce, a po „Zapomnij o wszystkich” żadna przesyłka nie wraca. Zamknięcie ustawień powiadomień przed ich wczytaniem nie pokazuje już błędu połączenia.
 ```

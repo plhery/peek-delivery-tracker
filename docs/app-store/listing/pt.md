@@ -71,16 +71,12 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Em «Adicionar uma encomenda», cada transportadora guarda agora o seu próprio código postal e país de entrega: o código postal de uma já não passa para a seguinte quando mudas de transportadora, e volta a aparecer quando regressas.
-• «Alterar transportadora» preenche agora um código postal obrigatório com o último que deste e que corresponda, e sugere-o para um opcional, como faz «Adicionar uma encomenda».
-• Uma encomenda guardada com o seu código postal, como uma encomenda PostNL ainda sem registos, já não pede o código postal de entrega uma segunda vez.
-• O Peek segue agora mais 83 transportadoras, cada uma com uma carrinha nas suas cores, entre elas a GLS US, a BH Pošta, a Pošte Srpske e transportadoras da Grécia, da Roménia, da Hungria, da Polónia e da Bulgária.
-• Quando nenhuma transportadora encontra um número que começa como os de uma transportadora mas tem um carácter a menos ou a mais, como um número UPS começado por 1Z, a página da encomenda diz agora que pode estar mal escrito e indica a transportadora.
-• Uma linha por baixo do histórico de uma encomenda diz agora que as horas estão no teu fuso horário e indica qual é, por exemplo «Hora da Europa Central».
-• Um intervalo de entrega numa notificação ou atividade em direto mostra agora as horas da transportadora, por isso um intervalo britânico das 07:00 às 09:00 já não aparece como das 08:00 às 10:00.
-• Até a transportadora que vai entregar uma encomenda a registar, como nas encomendas da JRT passadas à DHL, o Peek continua agora a consultar a primeira transportadora até 14 dias, para que os registos seguintes dela continuem a aparecer.
-• Enquanto uma encomenda regressa ao remetente, as notificações dizem agora «De regresso» em vez de «A caminho», e o Peek continua a consultá-la caso acabe por sair para distribuição.
-• Quando uma transportadora como a GZYL ou a Xinghe Freight escreve as etapas com antecedência, até mesmo a entrega, a página da encomenda diz agora que o Peek as omite e sugere que procures no site dela a transportadora que entrega no teu país.
-• No histórico das encomendas AliExpress, a linha «Last-mile delivery forecast» da Cainiao aparece agora como «Anunciada à transportadora local».
-• Com os maiores tamanhos de texto, num iPhone pequeno como o SE, «Iniciar sessão» e o nome da encomenda de exemplo já não se sobrepõem no ecrã de boas-vindas nem invadem o percurso: a imagem cresce e o ecrã desliza.
+• Um ponto assinala agora cada encomenda com novidades desde a última vez que a abriste; com uma conta, ao abri-la, o ponto desaparece em todos os teus dispositivos. Podes desativá-lo em «Assinalar novas atualizações», nas Definições.
+• As Definições têm agora «Formato da hora» (12 ou 24 horas) e «Unidade de distância» (quilómetros ou milhas); a opção predefinida, «Automático», segue as definições do teu dispositivo.
+• Em «Ordenar e filtrar», «Prioridade» passa a fazer parte de «Data de entrega», que põe a próxima entrega em primeiro lugar.
+• As etapas que uma transportadora escreve com antecedência aparecem agora a cinzento no histórico da encomenda depois de passada a sua hora.
+• Uma encomenda ainda sem registos mostra agora, por exemplo, «À espera de DHL» em vez de «Atualização indisponível» e, se ao fim de dois dias a transportadora ainda não reconhecer o número, o Peek pede-te que o verifiques.
+• À meia-noite, os widgets passam de «Amanhã» para «Hoje», mesmo com o Peek fechado.
+• Uma encomenda devolvida ao remetente indica agora se a transportadora ainda a regista no caminho de regresso.
+• Correções: sem conta, deixas de receber notificações de uma encomenda que esqueceste e nenhuma encomenda volta a aparecer depois de «Esquecer todas». Fechar as definições de notificações antes de carregarem já não mostra um erro de ligação.
 ```

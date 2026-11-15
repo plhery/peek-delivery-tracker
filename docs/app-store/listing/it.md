@@ -71,16 +71,12 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• In «Aggiungi un pacco» ogni corriere ora conserva il proprio codice postale e Paese di consegna: il codice postale di un corriere non passa più al successivo quando cambi, e ricompare quando torni indietro.
-• «Cambia corriere» ora compila un codice postale obbligatorio con l’ultimo che hai dato e che corrisponde, e lo suggerisce per uno facoltativo, come fa «Aggiungi un pacco».
-• Un pacco salvato con il suo codice postale, come un pacco PostNL non ancora scansionato, non chiede più il codice postale di consegna una seconda volta.
-• Peek ora segue 83 corrieri in più, ognuno con un furgone nei suoi colori, tra cui GLS US, BH Pošta, Pošte Srpske e corrieri di Grecia, Romania, Ungheria, Polonia e Bulgaria.
-• Quando nessun corriere trova un numero che inizia come quelli di un corriere ma ha un carattere in meno o in più, come un numero UPS che inizia con 1Z, la pagina del pacco ora dice che forse c’è un errore di battitura e nomina il corriere.
-• Una riga sotto la cronologia di un pacco ora dice che gli orari sono nel tuo fuso orario e lo nomina, ad esempio «Ora dell’Europa centrale».
-• Una fascia di consegna in una notifica o in un’Attività Live ora mostra gli orari del corriere, così una fascia britannica dalle 07:00 alle 09:00 non appare più dalle 08:00 alle 10:00.
-• Finché il corriere che consegnerà un pacco non lo scansiona, come per i pacchi JRT affidati a DHL, Peek ora continua a controllare il primo corriere fino a 14 giorni, così le sue scansioni successive compaiono ancora.
-• Mentre un pacco torna al mittente, le notifiche ora dicono «Sulla via del ritorno» invece di «In viaggio», e Peek continua a controllarlo nel caso venga comunque messo in consegna.
-• Quando un corriere come GZYL o Xinghe Freight scrive in anticipo le sue tappe, persino la consegna, la pagina del pacco ora dice che Peek non le mostra e suggerisce di cercare sul suo sito il corriere che consegna nel tuo Paese.
-• Nella cronologia dei pacchi AliExpress, la riga «Last-mile delivery forecast» di Cainiao ora diventa «Annunciato al corriere locale».
-• Con le dimensioni del testo più grandi, su un iPhone piccolo come l’SE, «Accedi» e il nome del pacco di esempio nella schermata di benvenuto non si sovrappongono più tra loro né al percorso: l’immagine si ingrandisce e la schermata scorre.
+• Un puntino ora segnala ogni pacco con novità dall’ultima volta che l’hai aperto; con un account, quando lo apri il puntino sparisce su tutti i tuoi dispositivi. Puoi disattivarlo con «Segnala i nuovi aggiornamenti» nelle Impostazioni.
+• Nelle Impostazioni ci sono ora «Formato dell’ora» (12 o 24 ore) e «Unità di distanza» (chilometri o miglia): l’opzione predefinita, «Automatico», segue il tuo dispositivo.
+• In «Ordina e filtra», «Priorità» ora fa parte di «Data di consegna», che mette per prima la prossima consegna.
+• Le tappe scritte in anticipo da un corriere ora compaiono in grigio nella cronologia del pacco, una volta passato il loro orario.
+• Un pacco non ancora scansionato ora mostra, ad esempio, «In attesa di DHL» invece di «Aggiornamento non disponibile» e, se dopo due giorni il corriere non riconosce ancora il numero, Peek ti chiede di controllarlo.
+• A mezzanotte i widget passano da «Domani» a «Oggi», anche se Peek resta chiuso.
+• Un pacco restituito al mittente ora segnala se il corriere lo scansiona ancora sulla via del ritorno.
+• Correzioni: senza account, non ricevi più notifiche per un pacco che hai dimenticato e nessun pacco ricompare dopo «Dimentica tutti». Chiudere le impostazioni delle notifiche prima che si carichino non mostra più un errore di connessione.
 ```

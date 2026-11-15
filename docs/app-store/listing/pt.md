@@ -71,12 +71,5 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Um ponto assinala agora cada encomenda com novidades desde a última vez que a abriste; com uma conta, ao abri-la, o ponto desaparece em todos os teus dispositivos. Podes desativá-lo em «Assinalar novas atualizações», nas Definições.
-• As Definições têm agora «Formato da hora» (12 ou 24 horas) e «Unidade de distância» (quilómetros ou milhas); a opção predefinida, «Automático», segue as definições do teu dispositivo.
-• Em «Ordenar e filtrar», «Prioridade» passa a fazer parte de «Data de entrega», que põe a próxima entrega em primeiro lugar.
-• As etapas que uma transportadora escreve com antecedência aparecem agora a cinzento no histórico da encomenda depois de passada a sua hora.
-• Uma encomenda ainda sem registos mostra agora, por exemplo, «À espera de DHL» em vez de «Atualização indisponível» e, se ao fim de dois dias a transportadora ainda não reconhecer o número, o Peek pede-te que o verifiques.
-• À meia-noite, os widgets passam de «Amanhã» para «Hoje», mesmo com o Peek fechado.
-• Uma encomenda devolvida ao remetente indica agora se a transportadora ainda a regista no caminho de regresso.
-• Correções: sem conta, deixas de receber notificações de uma encomenda que esqueceste e nenhuma encomenda volta a aparecer depois de «Esquecer todas». Fechar as definições de notificações antes de carregarem já não mostra um erro de ligação.
+• Novo widget «Encomendas»: vê num relance as encomendas a caminho, a próxima primeiro. Consoante quantas forem, mostra-as como cartões iguais aos do widget «Próxima entrega», como cartões mais pequenos com as cores da sua transportadora ou como uma lista com tantas linhas quantas couberem. Num widget médio ou grande, toca numa encomenda para a abrir.
 ```

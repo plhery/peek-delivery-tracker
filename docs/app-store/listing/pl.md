@@ -71,12 +71,5 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Kropka oznacza teraz każdą przesyłkę, w której coś się zmieniło od jej ostatniego otwarcia; jeśli masz konto, po otwarciu przesyłki kropka znika na wszystkich Twoich urządzeniach. Możesz ją wyłączyć opcją „Oznaczaj nowe aktualizacje” w Ustawieniach.
-• W Ustawieniach są teraz „Format czasu” (12- lub 24-godzinny) i „Jednostka odległości” (kilometry lub mile); domyślna opcja „Automatycznie” korzysta z ustawień Twojego urządzenia.
-• W „Sortuj i filtruj” opcja „Priorytet” została włączona do opcji „Data dostawy”, która pokazuje najbliższą dostawę na początku.
-• Etapy zapisane przez przewoźnika z wyprzedzeniem widać teraz na szaro w historii śledzenia, gdy minie ich czas.
-• Jeszcze niezeskanowana przesyłka pokazuje teraz np. „Oczekiwanie na przewoźnika DHL” zamiast „Aktualizacja niedostępna”, a jeśli po dwóch dniach przewoźnik nadal nie zna numeru, Peek poprosi Cię o jego sprawdzenie.
-• O północy widżety zmieniają „Jutro” na „Dziś”, nawet gdy Peek jest zamknięty.
-• Przesyłka zwrócona nadawcy informuje teraz, jeśli przewoźnik wciąż skanuje ją w drodze powrotnej.
-• Poprawki: jeśli nie masz konta, nie dostajesz już powiadomień o zapomnianej przesyłce, a po „Zapomnij o wszystkich” żadna przesyłka nie wraca. Zamknięcie ustawień powiadomień przed ich wczytaniem nie pokazuje już błędu połączenia.
+• Nowy widżet „Przesyłki”: zobacz od razu przesyłki w drodze, najbliższą na początku. Zależnie od ich liczby pokazuje je jako karty takie jak w widżecie „Najbliższa dostawa”, jako mniejsze karty w kolorach ich przewoźnika albo jako listę z tyloma wierszami, ile się zmieści. W średnim lub dużym widżecie dotknij przesyłki, aby ją otworzyć.
 ```

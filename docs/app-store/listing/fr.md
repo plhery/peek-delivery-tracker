@@ -73,12 +73,5 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Un point signale désormais chaque colis qui a du nouveau depuis que tu l’as ouvert ; avec un compte, l’ouvrir efface le point sur tous tes appareils. Tu peux le désactiver avec « Signaler les nouveautés » dans les Réglages.
-• Les Réglages proposent désormais « Format de l’heure » (12 ou 24 heures) et « Unité de distance » (kilomètres ou miles) ; le choix par défaut, « Automatique », suit ton appareil.
-• Dans « Trier et filtrer », « Priorité » fait désormais partie de « Date de livraison », qui place la prochaine livraison en tête.
-• Les étapes écrites à l’avance par un transporteur s’affichent désormais en grisé dans l’historique du colis une fois leur heure passée.
-• Un colis encore sans scan affiche désormais, par exemple, « En attente de DHL » au lieu de « Mise à jour indisponible », et si le transporteur ne connaît toujours pas le numéro au bout de deux jours, Peek te demande de le vérifier.
-• À minuit, les widgets passent de « Demain » à « Aujourd’hui », même si Peek reste fermé.
-• Un colis retourné à l’expéditeur indique désormais si le transporteur le scanne encore sur le chemin du retour.
-• Corrections : sans compte, tu ne reçois plus de notifications pour un colis que tu as oublié, et aucun colis ne revient après « Tout oublier ». Fermer les réglages de notifications avant leur chargement n’affiche plus d’erreur de connexion.
+• Nouveau widget « Colis » : tes colis en route en un coup d’œil, le prochain en premier. Selon leur nombre, il les affiche en cartes comme celles du widget « Prochaine livraison », en cartes plus petites aux couleurs de leur transporteur, ou en liste avec autant de lignes que la place le permet. Dans un widget moyen ou grand, touche un colis pour l’ouvrir.
 ```

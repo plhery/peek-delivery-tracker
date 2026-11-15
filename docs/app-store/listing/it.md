@@ -71,12 +71,5 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Un puntino ora segnala ogni pacco con novità dall’ultima volta che l’hai aperto; con un account, quando lo apri il puntino sparisce su tutti i tuoi dispositivi. Puoi disattivarlo con «Segnala i nuovi aggiornamenti» nelle Impostazioni.
-• Nelle Impostazioni ci sono ora «Formato dell’ora» (12 o 24 ore) e «Unità di distanza» (chilometri o miglia): l’opzione predefinita, «Automatico», segue il tuo dispositivo.
-• In «Ordina e filtra», «Priorità» ora fa parte di «Data di consegna», che mette per prima la prossima consegna.
-• Le tappe scritte in anticipo da un corriere ora compaiono in grigio nella cronologia del pacco, una volta passato il loro orario.
-• Un pacco non ancora scansionato ora mostra, ad esempio, «In attesa di DHL» invece di «Aggiornamento non disponibile» e, se dopo due giorni il corriere non riconosce ancora il numero, Peek ti chiede di controllarlo.
-• A mezzanotte i widget passano da «Domani» a «Oggi», anche se Peek resta chiuso.
-• Un pacco restituito al mittente ora segnala se il corriere lo scansiona ancora sulla via del ritorno.
-• Correzioni: senza account, non ricevi più notifiche per un pacco che hai dimenticato e nessun pacco ricompare dopo «Dimentica tutti». Chiudere le impostazioni delle notifiche prima che si carichino non mostra più un errore di connessione.
+• Nuovo widget «Pacchi»: i pacchi in arrivo a colpo d’occhio, il prossimo per primo. A seconda di quanti sono, li mostra come schede simili a quelle del widget «Prossima consegna», come schede più piccole nei colori del loro corriere o come elenco con tutte le righe che ci stanno. In un widget medio o grande, tocca un pacco per aprirlo.
 ```

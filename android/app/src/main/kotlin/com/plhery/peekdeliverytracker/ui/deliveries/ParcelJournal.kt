@@ -24,6 +24,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -81,14 +83,16 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.util.UUID
+import kotlinx.coroutines.delay
 
 /**
- * `ParcelJournal` (B-S14): the parcel's tracking history, newest first and grouped by day ([journalDays]), 2 in from
- * its sides. Its header shows or hides the days (B-G15), which show at first and stay as they were through a window
- * made again (B-SE11). They fade in and out where they stand while the journal's height, and what is under it, move
+ * `ParcelJournal` (B-S14): the parcel's tracking history, newest first and grouped by day ([journalDays]), named
+ * again at each midnight while it stays open, 2 in from its sides. Its header shows or hides the days (B-G15), which
+ * show at first and stay as they were through a window made again (B-SE11). They fade in and out where they stand while the journal's height, and what is under it, move
  * over 0.2 s easeInOut, nothing clipped; at once under Reduce Motion (B-AN10). Without a row it says the carrier is
  * being asked while the parcel syncs, and that there is nothing yet otherwise. Each day is headed in caption2 capitals
  * tracked 1 in the secondary grey, 22 under what comes before and 13 over its rows, which stand 18 apart; TalkBack
@@ -109,8 +113,17 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
     val reduceMotion = PeekTheme.reduceMotion
     val now = LocalNow.current
     val entries = remember(parcel) { parcel.journalEntries }
-    // Worked out again on the day it has become and in the zone the phone is in, as the iPhone works them out each time.
+    // Worked out again on the day it has become and in the zone the phone is in, as the iPhone works them out each time:
+    // the history also draws again at each midnight while it stays open, its parcel changed or not.
     val zone = ZoneId.systemDefault()
+    val redraw = currentRecomposeScope
+    LaunchedEffect(zone, now) {
+        while (true) {
+            val at = now()
+            delay(Duration.between(at, at.atZone(zone).toLocalDate().plusDays(1).atStartOfDay(zone).toInstant()).toMillis())
+            redraw.invalidate()
+        }
+    }
     val today = now().atZone(zone).toLocalDate()
     val days = remember(localizer, language, entries, zone, today) { localizer.journalDays(entries, now()) }
     // A copy the journal shows under its scan is current through that scan.

@@ -123,6 +123,27 @@ class JournalDaysAfterMidnightTest {
     }
 
     /**
+     * The page is left open overnight, and nothing about the parcel changes: a delivered parcel is no longer checked,
+     * so the morning's reload reads it as it was, and the page isn't given anything new. Its days still turn at
+     * midnight.
+     */
+    @Test
+    fun aPageLeftOpenOvernightNamesItsDaysAfreshAtMidnight() {
+        show()
+        assertEquals(listOf("today", "yesterday"), days())
+        clock = CAPTURED.plusSeconds(86_400)
+        shown = first.copy(trackingEvents = first.trackingEvents.map { it.copy() })
+        // The page's own wait for midnight runs on the test's clock, which a night moves on too.
+        compose.mainClock.advanceTimeBy(86_400_000)
+        compose.waitForIdle()
+        assertEquals(
+            "Friday morning, a page left open since Thursday heads Thursday's scan \"today\"",
+            listOf("yesterday", "Wed 28 Oct"),
+            days(),
+        )
+    }
+
+    /**
      * The phone moves to New York's zone with the page open; the app comes back and reloads the parcel. Without the
      * history being closed and opened, the line under it names Eastern Time while the rows keep Zurich's times and days.
      */

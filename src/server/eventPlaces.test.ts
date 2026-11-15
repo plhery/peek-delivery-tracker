@@ -207,6 +207,52 @@ describe('withEventPlaces', () => {
     expect((withEventPlaces({ ...row, tracking_events: [posted, copy] }) as { news_at?: string }).news_at).toBe('2026-09-29T12:00:00+00:00');
   });
 
+  it('counts a scan of the latest moment in another stage or other words as news when it arrives (#72)', () => {
+    const scan = (id: string, stage: string, description: string, occurredAt: string, storedAt: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, 'Härkingen', occurredAt), stage, description, provider_event_id: `swiss-post:${id}`, stored_at: storedAt, ...extra,
+    });
+    const news = (events: object[]) => (withEventPlaces({ id: 'parcel', carrier: 'swiss-post', tracking_events: events }) as
+      { news_at?: string; tracking_events: { id: string }[] });
+    // A carrier that dates its scans by the day alone tells the delivery at the instant of the round before it.
+    const out = scan('out', 'out_for_delivery', 'Out for delivery', '2026-11-14T23:00:00+00:00', '2026-11-15T07:00:00+00:00', { time: '2026-11-15' });
+    const delivered = scan('delivered', 'delivered', 'Delivered', '2026-11-14T23:00:00+00:00', '2026-11-15T15:00:00+00:00', { time: '2026-11-15' });
+    const served = news([out, delivered]);
+    expect(served.tracking_events.map(({ id }) => id).sort()).toEqual(['delivered', 'out']);
+    expect(served.news_at).toBe('2026-11-15T15:00:00+00:00');
+    // Two steps on one minute, the second told at a later check.
+    const arrived = scan('arrived', 'in_transit', 'Arrived at the sorting centre', '2026-11-15T06:40:00+00:00', '2026-11-15T07:00:00+00:00');
+    const leaving = scan('leaving', 'in_transit', 'Left the sorting centre', '2026-11-15T06:40:00+00:00', '2026-11-15T09:30:00+00:00');
+    expect(news([arrived, leaving]).news_at).toBe('2026-11-15T09:30:00+00:00');
+    // Another source's copy of that moment in the same stage is no news.
+    const copy = { ...scan('copy', 'in_transit', 'Ankunft im Sortierzentrum', '2026-11-15T06:40:00+00:00', '2026-11-15T09:30:00+00:00'),
+      provider_event_id: 'post-ch:copy' };
+    expect(news([arrived, copy]).news_at).toBe('2026-11-15T07:00:00+00:00');
+  });
+
+  it('dates the news of a step by its first row stored, whatever the timeline shows under it (#72)', () => {
+    const scan = (id: string, source: string, stage: string, description: string, occurredAt: string, storedAt: string) => ({
+      ...event(id, 'Lyon', occurredAt), stage, description, provider_event_id: `${source}:${id}`, stored_at: storedAt,
+    });
+    const transit = scan('transit', 'dpd', 'in_transit', 'In transit', '2026-11-15T06:00:00+00:00', '2026-11-15T06:10:00+00:00');
+    const delivered = scan('delivered', 'dpd', 'delivered', 'Delivered', '2026-11-15T14:00:37+00:00', '2026-11-15T14:05:00+00:00');
+    type Served = { news_at?: string; tracking_events: { id: string; relay_of?: string }[] };
+    // Handed over from Chronopost to DPD: Chronopost, asked again, tells DPD's delivery 23 s later at a later check.
+    const handed = (events: object[]) => withEventPlaces({ id: 'parcel', carrier: 'dpd', current_stage: 'delivered',
+      carrier_data: { original_carrier: 'chronopost', active_tracking_carrier: 'dpd' }, tracking_events: events }) as Served;
+    for (const at of ['2026-11-15T14:01:00+00:00', '2026-11-15T14:00:00+00:00']) {
+      const copy = scan('livre', 'chronopost', 'delivered', 'Livré', at, '2026-11-15T18:00:00+00:00');
+      const served = handed([transit, delivered, copy]);
+      expect(served.tracking_events.find(({ id }) => id === 'livre')?.relay_of).toBe('delivered');
+      expect(served.news_at).toBe('2026-11-15T14:05:00+00:00');
+    }
+    // A carrier's repeat of its own scan two minutes later, told at a later check, is shown as one step.
+    const failed = scan('failed', 'dpd', 'failed_attempt', 'Delivery attempt failed', '2026-11-15T10:00:00+00:00', '2026-11-15T10:05:00+00:00');
+    const again = scan('again', 'dpd', 'failed_attempt', 'Delivery attempt failed', '2026-11-15T10:02:00+00:00', '2026-11-15T16:00:00+00:00');
+    const served = withEventPlaces({ id: 'parcel', carrier: 'dpd', tracking_events: [transit, failed, again] }) as Served;
+    expect(served.tracking_events.some(({ relay_of }) => relay_of !== undefined)).toBe(true);
+    expect(served.news_at).toBe('2026-11-15T10:05:00+00:00');
+  });
+
   it('leaves packages without scans untouched', () => {
     const row = { id: 'parcel', carrier: 'swiss-post', tracking_events: [] };
     expect(withEventPlaces(row)).toBe(row);

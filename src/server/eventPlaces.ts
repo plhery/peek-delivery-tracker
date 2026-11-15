@@ -7,7 +7,7 @@ import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/place
 import { clockDay, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, relayCopies } from './relayCopies';
-import { repeatLeads } from './scanRepeats';
+import { repeatLeads, scanSource } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
@@ -351,8 +351,9 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const shown = shownEvents(row);
-  const news = newsAt(shown, storedAsCopies(row));
-  const served = news ? { ...placedEvents(row), news_at: news } : placedEvents(row);
+  const placed = placedEvents(row);
+  const news = newsAt(shown, storedAsCopies(row), shownUnder(placed));
+  const served = news ? { ...placed, news_at: news } : placed;
   const answered = withoutPlaceholderAnswers(row);
   const planned = placedSteps(row, servedPlannedSteps(answered, shown));
   const ahead = servedWrittenAhead(answered);
@@ -365,21 +366,50 @@ export function withEventPlaces(row: JsonObject): JsonObject {
 /**
  * When the parcel's latest scan was first stored (`news_at`), or null without a scan, which leaves it out: the time the list's mark of a
  * parcel with news compares with the owner's last opening of it (`seen_at`). The latest scan is the one its carrier
- * dates last, so older history filled in later is no news, and of the rows telling that moment the first stored
- * counts, so neither is another source's copy of it: one at that moment, or a provider's copy the timeline leaves out
- * once the carrier tells the scan itself (`copied`, by the scan's id). Peek's own rows are no scans.
+ * dates last, so older history filled in later is no news. A row the timeline shows under another (`under`, by id:
+ * a relay copy, a carrier's repeat or its notice) tells that row's step, and so does a provider's copy the timeline
+ * leaves out once the carrier tells the scan itself (`copied`, by the scan's id): the step counts from when the first
+ * of them was stored. Of the steps at the latest moment, one in a stage none stored before it is in, or in other
+ * words from the same source, is a scan of its own and news when it arrives; another source's copy of one is not.
+ * Peek's own rows are no scans.
  */
-export function newsAt(shown: readonly JsonObject[], copied: ReadonlyMap<string, string> = new Map()): string | null {
-  let latest = -Infinity;
-  let stored: string | null = null;
+export function newsAt(shown: readonly JsonObject[], copied: ReadonlyMap<string, string> = new Map(),
+  under: ReadonlyMap<string, string> = new Map()): string | null {
+  const byId = new Map(shown.map((event) => [String(event.id), event]));
+  const steps = new Map<string, { scan: JsonObject; time: number; stored: string }>();
   for (const event of shown) {
+    const id = String(event.id);
     const time = Date.parse(String(event.occurred_at));
-    const at = earlier(typeof event.stored_at === 'string' ? event.stored_at : null, copied.get(String(event.id)) ?? null);
-    if (isOwnRow(event) || at === null || !(time >= latest)) continue;
-    if (time > latest || stored === null || Date.parse(at) < Date.parse(stored)) stored = at;
-    latest = time;
+    const at = earlier(typeof event.stored_at === 'string' ? event.stored_at : null, copied.get(id) ?? null);
+    if (isOwnRow(event) || at === null || !Number.isFinite(time)) continue;
+    const lead = under.get(id) ?? id;
+    const step = steps.get(lead);
+    if (step) {
+      step.time = Math.max(step.time, time);
+      step.stored = earlier(step.stored, at)!;
+    } else steps.set(lead, { scan: byId.get(lead) ?? event, time, stored: at });
   }
-  return stored;
+  const latest = Math.max(...[...steps.values()].map((step) => step.time));
+  const told: JsonObject[] = [];
+  let news: string | null = null;
+  for (const step of [...steps.values()].filter((step) => step.time === latest)
+    .sort((a, b) => Date.parse(a.stored) - Date.parse(b.stored))) {
+    if (!told.some((scan) => sameScan(scan, step.scan))) news = step.stored;
+    told.push(step.scan);
+  }
+  return news;
+}
+
+/** Two rows of one moment tell one scan when they are in one stage, from two sources or in the same words. */
+function sameScan(a: JsonObject, b: JsonObject): boolean {
+  return a.stage === b.stage && (scanSource(a.provider_event_id, a.universal_provider) !== scanSource(b.provider_event_id, b.universal_provider)
+    || String(a.description ?? '').trim() === String(b.description ?? '').trim());
+}
+
+/** Each served row shown under another, with that row's id (`relay_of`). */
+function shownUnder(served: JsonObject): Map<string, string> {
+  const events = Array.isArray(served.tracking_events) ? served.tracking_events.filter(isRecord) : [];
+  return new Map(events.flatMap((event) => typeof event.relay_of === 'string' ? [[String(event.id), event.relay_of] as const] : []));
 }
 
 function earlier(a: string | null, b: string | null): string | null {

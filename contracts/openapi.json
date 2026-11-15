@@ -60052,7 +60052,7 @@
           "news_at": {
             "type": "string",
             "format": "date-time",
-            "description": "When Peek first stored the parcel's latest scan, the one its carrier dates last; absent without a scan. The parcel has news for its owner while this is later than seen_at. Older history filled in later, another source's copy of the latest scan and Peek's own rows do not move it."
+            "description": "When Peek first stored the parcel's latest scan, the one its carrier dates last; absent without a scan. The parcel has news for its owner while this is later than seen_at. Older history filled in later, another source's copy of the latest scan, a row the timeline shows under another (relay_of) and Peek's own rows do not move it; another scan at the latest scan's moment, in another stage or other words, does."
           },
           "seen_at": {
             "type": "string",

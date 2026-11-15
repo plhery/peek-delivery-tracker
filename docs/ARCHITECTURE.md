@@ -588,7 +588,8 @@ and nothing typed is sent.
   after its owner last opened it. `packages.seen_at` holds that moment, and the server adds
   `news_at`: when Peek first stored the parcel's latest scan (`newsAt` in
   `src/server/eventPlaces.ts`). Older history filled in later, another source's copy of that
-  scan and Peek's own rows do not move it. A client shows the dot while `news_at` is later than
+  scan, a row the timeline shows under another and Peek's own rows do not move it; another scan at
+  that moment, in another stage or other words, does. A client shows the dot while `news_at` is later than
   `seen_at`, and marks the parcel someone opened as seen (`POST /api/packages/{id}/seen`) while
   its page is in front, which clears the dot on the account's other devices at their next read. A parcel
   starts as seen: when it is added, when its first answer arrives and when it joins an account

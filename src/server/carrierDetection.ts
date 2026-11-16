@@ -3,7 +3,7 @@ import 'server-only';
 import type { AdapterRegistry, TrackingContext } from 'universal-parcel-scraper/node';
 import type { ApiCarrierDetectionResponse, ApiCarrierId } from '../generated/apiContract';
 import { isAmazonTrackingNumber } from '../lib/amazon';
-import { detectCarrierMatch, normalizeTrackingNumber, validTrackingNumber } from '../lib/carriers';
+import { detectCarrierMatch, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, validTrackingNumber } from '../lib/carriers';
 import { createAdapterRegistry } from './adapterRegistry';
 import { BROWSER_RECOGNITION_BUDGET_MS, MAX_BROWSER_RECOGNITIONS, recognizeBrowser } from './browserRecognition';
 import { checkAmazonShipping } from './amazonShippingEligibility';
@@ -117,7 +117,7 @@ export async function detectCarrier(
     throw new HttpError(400, 'Invalid tracking number');
   }
   const trackingNumber = normalizeTrackingNumber(body.trackingNumber);
-  if (!/^[A-Z0-9]{4,40}$/.test(trackingNumber) || !validTrackingNumber(body.trackingNumber)) {
+  if (!KEPT_NUMBER_SHAPE.test(trackingNumber) || !validTrackingNumber(body.trackingNumber)) {
     throw new HttpError(400, 'Invalid tracking number');
   }
   // A mobile number as dialled in the reader's country is refused as a placeholder is when added: no carrier, and no

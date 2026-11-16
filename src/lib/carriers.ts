@@ -158,6 +158,13 @@ export {
 } from 'universal-parcel-scraper';
 
 /**
+ * The shapes a number is kept in, normalized, as the packages table allows them: four to forty letters and digits, or
+ * NACEX's agency/shipment composite with its slash. The scraper's gate (`validTrackingNumber`) decides the rest. Every
+ * gate a number passes, detection's and the add's alike, reads this one, so none refuses a number another takes.
+ */
+export const KEPT_NUMBER_SHAPE = /^(?:[A-Z0-9]{4,40}|\d{4}\/\d{8})$/;
+
+/**
  * A number no carrier issues, which nobody is asked about and Add holds back: a placeholder, such as the app's demo
  * number, or a mobile number as dialled in the reader's `country`.
  */

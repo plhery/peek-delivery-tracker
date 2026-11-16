@@ -30,6 +30,11 @@ it('confirms FedEx after HTTP misses and charges the allowance once', async () =
   expect(mocks.browser).toHaveBeenCalledWith('fedex', number, expect.objectContaining({ budgetMs: 20_000 }), undefined);
 });
 
+it('reads a NACEX number with its slash, as the add takes it, without asking anyone', async () => {
+  expect(await detectCarrier({ trackingNumber: '1234/12345678' })).toEqual({ trackingNumber: '1234/12345678', carrier: 'nacex' });
+  expect(mocks.http).not.toHaveBeenCalled();
+});
+
 it('can ask a browser-only candidate without an HTTP recognizer', async () => {
   const answer = await detectCarrier({ trackingNumber: '000000000000017' });
   expect(answer.carrier).toBe('fedex');

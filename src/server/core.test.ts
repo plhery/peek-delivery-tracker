@@ -631,6 +631,9 @@ describe('input validation', () => {
       trackingUrl: '',
       dpdPostcode: '',
     })).toThrow('letters and numbers');
+    // The add reads a number as detection does: a label's bracketed SSCC is the twenty digits behind the brackets.
+    expect(newPackageValues({ trackingNumber: '(00) 3 4043438 1234567890', label: '', carrier: 'unknown', trackingUrl: '', dpdPostcode: '' })
+      .trackingNumber).toBe('00340434381234567890');
     // Every lookup refuses a placeholder, such as the app's demo number, under any carrier.
     for (const [trackingNumber, carrier] of [['123EXAMPLE', 'unknown'], ['123 example', 'nacex'], ['RR123456785CH', 'swiss-post']]) {
       expect(() => newPackageValues({ trackingNumber, label: '', carrier, trackingUrl: '', dpdPostcode: '' })).toThrow('not a real tracking number');

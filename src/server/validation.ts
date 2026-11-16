@@ -6,7 +6,7 @@ import {
   type ApiParcelFeedbackAnswer,
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
-import { carrierInfo, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
+import { carrierInfo, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
 import { readsPostcodeCountry, sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
@@ -91,12 +91,13 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
       'Tracking number, label, carrier, tracking URL, postcode, its country and phone digits must be text',
     );
   }
-  const trackingNumber = rawTracking.replace(/[\s.-]/g, '').toUpperCase();
+  // The number as detection reads it: the scraper decides what "the same number" means.
+  const trackingNumber = normalizeTrackingNumber(rawTracking);
   if (trackingNumber.length < 4 || trackingNumber.length > 40) {
     throw new HttpError(400, 'Enter a tracking number between 4 and 40 characters');
   }
   // The scraper decides what a number may be: a digit, or letters alone in a shape a carrier issues.
-  if (!/^(?:[A-Z0-9]+|\d{4}\/\d{8})$/.test(trackingNumber) || !validTrackingNumber(rawTracking)) {
+  if (!KEPT_NUMBER_SHAPE.test(trackingNumber) || !validTrackingNumber(rawTracking)) {
     throw new HttpError(400, 'Tracking numbers use letters and numbers and include a digit, unless a carrier issues them as letters alone');
   }
   // Every carrier's lookup refuses a placeholder, such as the app's demo number, and no carrier issues a phone number,

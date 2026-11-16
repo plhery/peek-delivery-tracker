@@ -446,7 +446,6 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
         val insets = WindowInsets.safeDrawing
         val direction = LocalLayoutDirection.current
         var origin by remember { mutableStateOf(Offset.Zero) }
-        val menuWidth = with(density) { MENU_WIDTH.toPx() }
         // The menu's whole height, as tall as its items; it shows as much as the placement leaves room for.
         var menuHeight by remember(request) { mutableIntStateOf(0) }
         val card = request.source.bounds.translate(-origin)
@@ -459,6 +458,7 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
         }
         val margin = with(density) { MENU_MARGIN.toPx() }
         val side = with(density) { PREVIEW_SIDE.toPx() }
+        val menuWidth = parcelMenuWidth(items, shortcuts, room = safe.width - 2 * side)
         val placement = if (pointer == null) {
             cardMenuPlacement(card, menuWidth, menuHeight.toFloat(), safe, margin = margin, gap = with(density) { MENU_GAP.toPx() }, side = side)
         } else {
@@ -639,22 +639,45 @@ private fun MenuItemRow(
                 role = Role.Button
                 if (enabled) onClick { choose(item); true } else disabled()
             }
-            .padding(start = 26.dp, end = 20.dp, top = ROW_PADDING, bottom = ROW_PADDING),
+            .padding(start = ROW_START, end = ROW_END, top = ROW_PADDING, bottom = ROW_PADDING),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(Modifier.width(26.dp), contentAlignment = Alignment.Center) {
+        Box(Modifier.width(SYMBOL_WIDTH), contentAlignment = Alignment.Center) {
             PeekSymbol(item.symbol, font = type.body, tint = ink)
         }
-        Spacer(Modifier.width(12.dp))
+        Spacer(Modifier.width(SYMBOL_GAP))
         // UIKit writes the keys as glyphs (⇧⌘C) at the row's end, beside any title. Android writes them out
         // (Shift+Ctrl+C), which beside a title in a menu this narrow would squeeze it into broken words: they stand
-        // under it. UIKit sets a title's lines SF's line apart (20 at Large), not the body's leading (22).
-        val font = type.fixed(IosTextStyle.Body.pointSize(type.size)).sfLines()
+        // under it.
+        val font = menuFont()
         Column(Modifier.weight(1f)) {
             Text(title, color = ink, style = font)
             if (key != null) Text(key, color = colors.secondaryLabel, style = font)
         }
     }
+}
+
+/** A row's words: the body's size, its lines SF's line apart as UIKit sets a title's (20 at Large), not its leading (22). */
+@Composable
+private fun menuFont(): TextStyle = PeekTheme.type.let { it.fixed(IosTextStyle.Body.pointSize(it.size)).sfLines() }
+
+/**
+ * The menu's width in pixels: [MENU_WIDTH], as the iPhone's, where a long title takes two lines. At the accessibility
+ * text sizes 250 holds about one word a line and cuts the longer ones ("perma-nently"), so the menu grows as wide as
+ * its longest title or keys need on one line, up to `room`; past that, its titles wrap between words.
+ */
+@Composable
+internal fun parcelMenuWidth(items: List<List<ParcelMenuItem>>, shortcuts: Boolean, room: Float): Float {
+    val density = LocalDensity.current
+    val narrow = with(density) { MENU_WIDTH.toPx() }
+    if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) return narrow
+    val localizer = LocalLocalizer.current
+    val font = menuFont()
+    val measurer = rememberTextMeasurer()
+    val words = items.flatten().flatMap { listOfNotNull(localizer.text(it.titleKey), it.shortcutLabel.takeIf { shortcuts }) }
+    val widest = words.maxOfOrNull { measurer.measure(it, font, maxLines = 1, softWrap = false).size.width } ?: 0
+    val chrome = with(density) { (ROW_START + SYMBOL_WIDTH + SYMBOL_GAP + ROW_END).toPx() }
+    return (widest + chrome).coerceIn(narrow, max(narrow, room))
 }
 
 @Composable
@@ -1139,6 +1162,10 @@ private val MENU_GAP = 21.dp
 private val PREVIEW_SIDE = 22.dp
 /** A row of one line: Android's 48 to tap, where the iPhone's rows are 42. */
 private val ROW_HEIGHT = 48.dp
+private val ROW_START = 26.dp
+private val SYMBOL_WIDTH = 26.dp
+private val SYMBOL_GAP = 12.dp
+private val ROW_END = 20.dp
 
 /**
  * The room above and below a row's words, measured on the iPhone's "Copy tracking number": two lines of the body's 17

@@ -17,6 +17,7 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.click
@@ -30,6 +31,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
@@ -492,6 +494,21 @@ class ParcelPageTest {
         assertEquals(10.7f + 2 * line + 10.7f, height(ParcelMenuItem.Archive), 0.5f)
         assertEquals(10.7f + 2 * line + 10.7f, height(ParcelMenuItem.Delete), 0.5f)
         assertEquals(MENU_WIDTH.value, width(bounds(item(ParcelMenuItem.Delete))), 0.5f)
+    }
+
+    /**
+     * At the accessibility text sizes the page's menu grows as the card's does: on a phone, as wide as the window
+     * leaves it, 16 from each side, its last item still reached by scrolling.
+     */
+    @Test
+    fun atTheAccessibilitySizesThePagesMenuIsAsWideAsTheWindowLeavesIt() {
+        show()
+        fontScale = 2f
+        open("Birthday gift")
+        openMenu()
+        val window = compose.onRoot().getBoundsInRoot()
+        assertEquals(width(window) - 2 * 16f, width(bounds(item(ParcelMenuItem.Rename))), 0.5f)
+        item(ParcelMenuItem.Delete).performScrollTo().assertIsDisplayed()
     }
 
     @Test

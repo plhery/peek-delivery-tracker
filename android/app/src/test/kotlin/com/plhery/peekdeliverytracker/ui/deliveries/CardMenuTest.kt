@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import kotlin.math.abs
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -57,6 +58,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.GraphicsMode
 
 /**
@@ -132,6 +134,45 @@ class CardMenuTest {
         val heights = shownItems().associateWith { item(it).getUnclippedBoundsInRoot().height.value }
         for ((item, height) in heights) assertTrue("$item is $height tall", height >= 48f - 0.5f)
         for (item in listOf(ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Delete)) assertEquals("$item", 48f, heights.getValue(item), 0.5f)
+    }
+
+    @After
+    fun normalText() = RuntimeEnvironment.setFontScale(1f)
+
+    /** The menu's width: each row is as wide as the glass. */
+    private fun menuWidth(): Float = item(ParcelMenuItem.Open).getUnclippedBoundsInRoot().width.value
+
+    /** At the default text size the menu is the iPhone's 250 wide, where a long title takes two lines. */
+    @Test
+    fun atTheDefaultTextSizeTheMenuIsTheIphones250Wide() {
+        show()
+        longPress("Birthday gift")
+        assertEquals(250f, menuWidth(), 0.5f)
+    }
+
+    /**
+     * At the accessibility text sizes, where 250 holds about a word a line and cuts the longer ones, the menu grows to
+     * its longest title on one line: on a phone, that is wider than the window, so the menu is as wide as the window
+     * leaves it, 22 from each side.
+     */
+    @Test
+    fun atTheAccessibilitySizesThePhonesMenuIsAsWideAsTheWindowLeavesIt() {
+        RuntimeEnvironment.setFontScale(2f)
+        show()
+        longPress("Birthday gift")
+        assertEquals(window().width.value - 2 * 22f, menuWidth(), 0.5f)
+        assertEveryItemOnScreen()
+    }
+
+    /** On a tablet the window leaves more than the longest title needs: the menu stops at that. */
+    @Test
+    @Config(qualifiers = TABLET)
+    fun atTheAccessibilitySizesATabletsMenuIsAsWideAsItsLongestTitle() {
+        RuntimeEnvironment.setFontScale(2f)
+        show()
+        longPress("Birthday gift")
+        val width = menuWidth()
+        assertTrue("$width", width > 250f + 0.5f && width < window().width.value - 2 * 22f - 0.5f)
     }
 
     /**

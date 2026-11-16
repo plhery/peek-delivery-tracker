@@ -758,11 +758,11 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
         val direction = LocalLayoutDirection.current
         var origin by remember { mutableStateOf(Offset.Zero) }
         val anchor = state.pageMenuButton.translate(-origin)
-        val menuWidth = with(density) { MENU_WIDTH.toPx() }
+        val margin = with(density) { MENU_SIDE.toPx() }
+        val leftmost = insets.getLeft(density, direction) + margin
+        val rightmost = max(leftmost, windowWidth - insets.getRight(density, direction) - margin)
+        val menuWidth = parcelMenuWidth(items, shortcuts, room = rightmost - leftmost)
         val frame = with(density) {
-            val margin = MENU_SIDE.toPx()
-            val leftmost = insets.getLeft(this, direction) + margin
-            val rightmost = max(leftmost, windowWidth - insets.getRight(this, direction) - margin)
             val left = (anchor.right - menuWidth).coerceIn(leftmost, max(leftmost, rightmost - menuWidth))
             val top = max(anchor.top, insets.getTop(this).toFloat())
             val bottom = max(top, windowHeight - insets.getBottom(this) - MENU_MARGIN.toPx())

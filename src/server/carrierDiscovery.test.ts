@@ -55,6 +55,11 @@ it('with FEDEX_EARLY_RECOGNITION off, asks FedEx only after both HTTP batches mi
   });
 });
 
+it('reads a number with one underscore inside, as Obibox writes its parcel counter', async () => {
+  expect(await detectCarrier({ trackingNumber: 'XPTEST1000000000_1' })).toMatchObject({ trackingNumber: 'XPTEST1000000000_1', carrier: 'obibox' });
+  await expect(detectCarrier({ trackingNumber: 'XPTEST_1000000000_1' })).rejects.toThrow('Invalid tracking number');
+});
+
 it('reads a NACEX number with its slash, as the add takes it, without asking anyone', async () => {
   expect(await detectCarrier({ trackingNumber: '1234/12345678' })).toEqual({ trackingNumber: '1234/12345678', carrier: 'nacex' });
   expect(mocks.http).not.toHaveBeenCalled();

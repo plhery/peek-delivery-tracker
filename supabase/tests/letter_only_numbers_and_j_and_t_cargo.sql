@@ -24,6 +24,15 @@ begin
   parcel := test_support.add_parcel('1234/12345678', 'NACEX fixture', 'nacex');
   if parcel.tracking_number <> '1234/12345678' then raise exception 'NACEX composite was rewritten'; end if;
 
+  -- One underscore inside is a number, as Obibox writes its parcel counter after one; two are not.
+  parcel := test_support.add_parcel('xptest1000000000_1', 'Underscore fixture', 'unknown');
+  if parcel.tracking_number <> 'XPTEST1000000000_1' then raise exception 'Underscore number was rewritten'; end if;
+  begin
+    perform test_support.add_parcel('XPTEST_1000000000_1', 'Two underscores', 'unknown');
+    raise exception 'Two underscores were accepted';
+  exception when sqlstate '22023' then null;
+  end;
+
   parcel := test_support.add_parcel('200000000001', 'J&T Cargo fixture', 'j-and-t-cargo');
   if parcel.carrier <> 'j-and-t-cargo' then raise exception 'J&T Cargo carrier was lost'; end if;
   perform public.change_owned_package_carrier(parcel.id, 'unknown');
@@ -51,6 +60,10 @@ begin
   if answer#>>'{package,carrier}' is distinct from 'j-and-t-cargo' then
     raise exception 'One-off J&T Cargo carrier was lost';
   end if;
+  answer := public.create_one_off_parcel('XPTEST1000000001_2', 'unknown', null, null, repeat('e', 64));
+  if answer#>>'{package,tracking_number}' is distinct from 'XPTEST1000000001_2' then
+    raise exception 'One-off underscore number was lost';
+  end if;
   begin
     perform public.create_one_off_parcel('ABCDE', 'unknown', null, null, repeat('d', 64));
     raise exception 'One-off five letters were accepted';
@@ -60,6 +73,9 @@ begin
   -- A support case can be opened for a letter-only number, and still not for a short word.
   if public.record_tracking_support_observation('AALZJT', '{"reasons":["unknown_shape"]}', '{}', now(), 'test:letters') is null then
     raise exception 'Letter-only support observation was refused';
+  end if;
+  if public.record_tracking_support_observation('XPTEST1000000002_3', '{"reasons":["unknown_shape"]}', '{}', now(), 'test:underscore') is null then
+    raise exception 'Underscore support observation was refused';
   end if;
   begin
     perform public.record_tracking_support_observation('ABCDE', '{"reasons":["unknown_shape"]}', '{}', now(), 'test:short-letters');

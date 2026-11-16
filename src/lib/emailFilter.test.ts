@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FILTER_LANGUAGES, MAIN_SUBJECT_WORDS, SHIPPING_SUBJECT_WORDS, filterLanguagesFor, gmailFilter, gmailFilterLink, mailServiceOf, subjectWords } from './emailFilter';
+import { FILTER_LANGUAGES, MAIN_SUBJECT_WORDS, SHIPPING_SUBJECT_WORDS, filterLanguagesFor, gmailFilter, mailServiceOf, subjectWords } from './emailFilter';
 
 describe('the mail filter for shipping emails', () => {
   it('searches the subject for one language\'s words, quoting those of several words', () => {
@@ -37,15 +37,6 @@ describe('the mail filter for shipping emails', () => {
 
   it('stays within what Gmail\'s filter takes when every language is chosen', () => {
     expect(gmailFilter(FILTER_LANGUAGES).length).toBeLessThan(1_500);
-  });
-
-  it('opens Gmail\'s filter form with the words already in its Subject field', () => {
-    const link = gmailFilterLink(['en', 'fr']);
-    expect(link.startsWith('https://mail.google.com/mail/#create-filter/subject=')).toBe(true);
-    expect(decodeURIComponent(link.split('subject=')[1] ?? '')).toBe(gmailFilter(['en', 'fr']).slice('subject:'.length));
-    // Nothing a browser or Gmail would read as the end of the field.
-    expect(link.split('#')[1]).toMatch(/^create-filter\/subject=[A-Za-z0-9%().~*'!_-]+$/);
-    expect(gmailFilterLink([])).toBe('');
   });
 
   it('gives a one-word-at-a-time rule each language\'s main words, every first word before any second', () => {

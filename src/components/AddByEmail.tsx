@@ -1,27 +1,39 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import type { ApiAddByEmail, ApiAddByEmailEntry, ApiAddByEmailResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
 import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
 import type { ApiAuth } from '../lib/apiClient';
 import {
-  FILTER_LANGUAGES, GMAIL_FORWARDING_LINK, ICLOUD_MAIL_LINK, MAIL_SERVICES, OUTLOOK_RULES_LINK, filterLanguagesFor, gmailFilter, gmailFilterLink,
+  FILTER_LANGUAGES, GMAIL_FORWARDING_LINK, ICLOUD_MAIL_LINK, MAIL_SERVICES, OUTLOOK_RULES_LINK, filterLanguagesFor, gmailFilter,
   mailServiceOf, subjectWords, type FilterLanguage, type MailService,
 } from '../lib/emailFilter';
 import { localizedRelativeTime, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
 
+/** How soon the reader coming back to Peek reads the offer again: the tab and the window tell of the same return. */
+const REREAD_AFTER_MS = 2_000;
+
 /**
- * Whether the server offers this account a forwarding address, read each time Settings opens. Null hides the row:
- * the server answers 404 until the feature is set up and open to the account.
+ * Whether the server offers this account a forwarding address, read each time Settings opens, and again each time
+ * the reader comes back to Peek's tab or window: Gmail's confirmation, sent while they were in Gmail, then shows
+ * without a reload. Null hides the row: the server answers 404 until the feature is set up and open to the account.
  */
 export function useAddByEmail(apiAuth: ApiAuth | undefined, open: boolean) {
   const [offer, setOffer] = useState<{ userId: string; value: ApiAddByEmailResponse | null } | null>(null);
   useEffect(() => {
     if (!open || !apiAuth) return;
     let current = true;
-    void readAddByEmail(apiAuth).then((value) => { if (current) setOffer({ userId: apiAuth.userId, value }); }, () => undefined);
-    return () => { current = false; };
+    let readAt = 0;
+    const read = () => {
+      readAt = Date.now();
+      void readAddByEmail(apiAuth).then((value) => { if (current) setOffer({ userId: apiAuth.userId, value }); }, () => undefined);
+    };
+    const onReturn = () => { if (document.visibilityState === 'visible' && Date.now() - readAt >= REREAD_AFTER_MS) read(); };
+    read();
+    document.addEventListener('visibilitychange', onReturn);
+    window.addEventListener('focus', onReturn);
+    return () => { current = false; document.removeEventListener('visibilitychange', onReturn); window.removeEventListener('focus', onReturn); };
   }, [apiAuth, open]);
   const value = apiAuth && offer?.userId === apiAuth.userId ? offer.value : null;
   const update = (next: ApiAddByEmailResponse | null) => { if (apiAuth) setOffer({ userId: apiAuth.userId, value: next }); };
@@ -61,15 +73,42 @@ function StepLink({ href, children }: { href: string; children: string }) {
 }
 
 /**
- * How to have a mail service forward shipping emails by itself. The reader names their service, which starts on the
- * one their account's address belongs to, and the languages their shops and carriers write in, which start with the
- * language Peek shows, the browser's and English. Gmail opens its filter already filled; a service whose rule takes
- * words one at a time is given the main ones, each copied by a tap; Yahoo, which forwards no chosen email, says so.
+ * Gmail's "Show search options" button as Gmail draws it, three sliders, set in the step that has it pressed: it has
+ * no written name on screen, only this.
  */
-function ForwardingSteps({ email, confirming }: { email?: string; confirming: boolean }) {
+function SearchOptionsGlyph() {
+  return <svg className="add-by-email__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+    <path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1" /><circle cx="15" cy="6" r="2" /><circle cx="9" cy="12" r="2" /><circle cx="17" cy="18" r="2" />
+  </svg>;
+}
+
+/**
+ * A step's text with the mail service's own button and field names, which the translation marks `**…**`, in bold,
+ * and Gmail's options button drawn where the translation puts `{{options}}`.
+ */
+function StepText({ text }: { text: string }) {
+  return <>{text.split(/(\*\*[^*]+\*\*|\[\[options\]\])/).map((piece, index) => {
+    if (piece === '[[options]]') return <SearchOptionsGlyph key={index} />;
+    if (piece.startsWith('**') && piece.endsWith('**') && piece.length > 4) return <strong key={index} className="add-by-email__ui">{piece.slice(2, -2)}</strong>;
+    return <Fragment key={index}>{piece}</Fragment>;
+  })}</>;
+}
+
+/**
+ * How to have a mail service forward shipping emails by itself, each service's steps in the order it asks for them,
+ * with its own names for its buttons. The reader names their service, which starts on the one their account's address
+ * belongs to, and the languages their shops and carriers write in, which start with the language Peek shows, the
+ * browser's and English.
+ * - Gmail forwards only to an address it has confirmed, and then only the emails a filter picks: the address is added
+ *   and confirmed first (Peek shows Gmail's confirmation in the step), then the filter is made from a search to copy.
+ *   Its forwarding settings also offer to forward every email, which the steps say to leave off.
+ * - A service whose rule takes words one at a time is given the main ones, each copied by a tap.
+ * - Yahoo, whose filters only move emails and whose forwarding takes every email, says so.
+ */
+function ForwardingSteps({ email, confirmation }: { email?: string; confirmation: ApiAddByEmail['confirmation'] }) {
   const { t, locale, languageTag } = useI18n();
   // Gmail is the one service whose confirmation Peek shows: while one waits, its steps are the ones to follow.
-  const [service, setService] = useState<MailService>(() => confirming ? 'gmail' : mailServiceOf(email));
+  const [service, setService] = useState<MailService>(() => confirmation ? 'gmail' : mailServiceOf(email));
   const [languages, setLanguages] = useState(() => filterLanguagesFor([locale, ...(typeof navigator === 'undefined' ? [] : navigator.languages ?? [])]));
   const [copied, setCopied] = useState<string | null>(null);
   const names = useMemo(() => languageNames(languageTag), [languageTag]);
@@ -87,48 +126,62 @@ function ForwardingSteps({ email, confirming }: { email?: string; confirming: bo
     catch { /* The text stays on screen to select by hand. */ }
   }
 
+  const step = (key: Parameters<typeof t>[0]) => <StepText text={t(key, { options: '[[options]]' })} />;
+  const languagePicker = <>
+    <p className="add-by-email__note add-by-email__note--lead" id="add-by-email-languages">{t('inbox.filter.languages')}</p>
+    <div className="add-by-email__choices" role="group" aria-labelledby="add-by-email-languages">
+      {FILTER_LANGUAGES.map((language) => <button key={language} className="add-by-email__choice" type="button" aria-pressed={languages.includes(language)} onClick={() => toggle(language)}>{names[language]}</button>)}
+    </div>
+  </>;
+  const words = <div className="add-by-email__step-box">
+    {languagePicker}
+    <div className="add-by-email__words" role="group" aria-label={t('inbox.words.title')} translate="no">
+      {subjectWords(languages).map((word) => <button key={word} className="add-by-email__word" type="button" onClick={() => void copy(word)}>{word}<Icon name={copied === word ? 'check' : 'copy'} /></button>)}
+    </div>
+    <p className="add-by-email__note" role="status">{copied ? t('inbox.copied') : t('inbox.words.copy')}</p>
+  </div>;
+
   return <>
     <p className="add-by-email__note add-by-email__note--lead" id="add-by-email-service">{t('inbox.service.title')}</p>
     <div className="add-by-email__choices" role="group" aria-labelledby="add-by-email-service">
       {MAIL_SERVICES.map((choice) => <button key={choice} className="add-by-email__choice" type="button" aria-pressed={service === choice} translate={choice === 'other' ? undefined : 'no'}
         onClick={() => { setService(choice); setCopied(null); }}>{choice === 'other' ? t('inbox.service.other') : SERVICE_NAMES[choice]}</button>)}
     </div>
-    {service === 'yahoo' ? <p className="add-by-email__steps add-by-email__steps--none">{t('inbox.yahoo')}</p> : <>
-      <ol className="add-by-email__steps">
-        {service === 'gmail' && <>
-          <li>{t('inbox.gmail.add')}<StepLink href={GMAIL_FORWARDING_LINK}>{t('inbox.gmail.addLink')}</StepLink></li>
-          <li>{t('inbox.auto.confirm')}</li>
-          <li>{t('inbox.gmail.filter')}</li>
-        </>}
-        {service === 'outlook' && <>
-          <li>{t('inbox.outlook.rule')}<StepLink href={OUTLOOK_RULES_LINK}>{t('inbox.outlook.link')}</StepLink></li>
-          <li>{t('inbox.rule.words')}</li>
-        </>}
-        {service === 'icloud' && <>
-          <li>{t('inbox.icloud.rule')}<StepLink href={ICLOUD_MAIL_LINK}>{t('inbox.icloud.link')}</StepLink></li>
-          <li>{t('inbox.icloud.words')}</li>
-        </>}
-        {service === 'other' && <>
-          <li>{t('inbox.other.rule')}</li>
-          <li>{t('inbox.rule.words')}</li>
-        </>}
-      </ol>
-      <p className="add-by-email__note add-by-email__note--lead" id="add-by-email-languages">{t('inbox.filter.languages')}</p>
-      <div className="add-by-email__choices" role="group" aria-labelledby="add-by-email-languages">
-        {FILTER_LANGUAGES.map((language) => <button key={language} className="add-by-email__choice" type="button" aria-pressed={languages.includes(language)} onClick={() => toggle(language)}>{names[language]}</button>)}
-      </div>
-      {service === 'gmail' ? <div className="settings-box">
-        <p className="add-by-email__address" translate="no">{filter}</p>
-        <a className="settings-row" href={gmailFilterLink(languages)} target="_blank" rel="noopener noreferrer"><Icon name="mail" />{t('inbox.gmail.filterLink')}<span className="settings-chevron" aria-hidden="true">›</span></a>
-        <button className="settings-row" type="button" onClick={() => void copy(filter)}><Icon name={copied === filter ? 'check' : 'copy'} />{t(copied === filter ? 'inbox.copied' : 'inbox.filter.copy')}</button>
-      </div> : <>
-        <div className="add-by-email__words" role="group" aria-label={t('inbox.words.title')} translate="no">
-          {subjectWords(languages).map((word) => <button key={word} className="add-by-email__word" type="button" onClick={() => void copy(word)}>{word}<Icon name={copied === word ? 'check' : 'copy'} /></button>)}
-        </div>
-        <p className="add-by-email__note" role="status">{copied && copied !== filter ? t('inbox.copied') : t('inbox.words.copy')}</p>
-        {service === 'other' && <p className="add-by-email__note">{t('inbox.other.link')}</p>}
+    {service === 'yahoo' ? <p className="add-by-email__steps add-by-email__steps--none">{t('inbox.yahoo')}</p> : <ol className="add-by-email__steps">
+      {service === 'gmail' && <>
+        <li>{step('inbox.gmail.add')}<StepLink href={GMAIL_FORWARDING_LINK}>{t('inbox.gmail.addLink')}</StepLink></li>
+        <li>{step('inbox.gmail.confirm')}
+          {confirmation && <div className="settings-box add-by-email__step-box add-by-email__confirmation">
+            {confirmation.link && <a className="settings-row" href={confirmation.link} target="_blank" rel="noopener noreferrer"><Icon name="mail" />{t('inbox.confirm.link')}<span className="settings-chevron" aria-hidden="true">›</span></a>}
+            {confirmation.code && <p className="add-by-email__code">{t('inbox.confirm.code', { code: confirmation.code })}</p>}
+          </div>}
+        </li>
+        <li>{step('inbox.gmail.keepOff')}</li>
+        <li>{step('inbox.gmail.search')}
+          <div className="add-by-email__step-box">
+            {languagePicker}
+            <div className="settings-box">
+              <p className="add-by-email__address" translate="no">{filter}</p>
+              <button className="settings-row" type="button" onClick={() => void copy(filter)}><Icon name={copied === filter ? 'check' : 'copy'} />{t(copied === filter ? 'inbox.copied' : 'inbox.filter.copy')}</button>
+            </div>
+          </div>
+        </li>
+        <li>{step('inbox.gmail.filter')}</li>
+        <li>{step('inbox.gmail.forward')}</li>
       </>}
-    </>}
+      {service === 'outlook' && <>
+        <li>{step('inbox.outlook.rule')}<StepLink href={OUTLOOK_RULES_LINK}>{t('inbox.outlook.link')}</StepLink></li>
+        <li>{step('inbox.outlook.condition')}{words}</li>
+        <li>{step('inbox.outlook.action')}</li>
+      </>}
+      {service === 'icloud' && <>
+        <li>{step('inbox.icloud.rule')}<StepLink href={ICLOUD_MAIL_LINK}>{t('inbox.icloud.link')}</StepLink></li>
+        <li>{step('inbox.icloud.words')}{words}</li>
+        <li>{step('inbox.icloud.more')}</li>
+      </>}
+      {service === 'other' && <li>{step('inbox.other.rule')}{words}</li>}
+    </ol>}
+    {service === 'other' && <p className="add-by-email__note">{t('inbox.other.link')}</p>}
   </>;
 }
 
@@ -177,12 +230,6 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
           <button className="settings-row" type="button" onClick={() => void copy(inbox.address)}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.copy')}</button>
         </div>
       </section>
-      {inbox.confirmation && <section className="settings-group" aria-labelledby="add-by-email-confirmation"><h3 className="settings-group__title" id="add-by-email-confirmation">{t('inbox.confirm.title')}</h3>
-        <div className="settings-box">
-          {inbox.confirmation.code && <p className="add-by-email__code">{t('inbox.confirm.code', { code: inbox.confirmation.code })}</p>}
-          {inbox.confirmation.link && <a className="settings-row" href={inbox.confirmation.link} target="_blank" rel="noopener noreferrer">{t('inbox.confirm.link')}<span className="settings-chevron" aria-hidden="true">›</span></a>}
-        </div>
-      </section>}
       {recent.length > 0 && <section className="settings-group" aria-labelledby="add-by-email-recent"><h3 className="settings-group__title" id="add-by-email-recent">{t('inbox.recent')}</h3>
         <ul className="settings-box add-by-email__recent">
           {recent.map((entry) => <li key={entry.at} className="settings-row add-by-email__mail">
@@ -196,7 +243,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
       <details className="settings-box add-by-email__auto" open={Boolean(inbox.confirmation) || undefined}>
         <summary className="settings-row"><Icon name="settings" /><span>{t('inbox.auto.title')}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
         <div className="add-by-email__auto-body">
-          <ForwardingSteps email={email} confirming={Boolean(inbox.confirmation)} />
+          <ForwardingSteps email={email} confirmation={inbox.confirmation} />
         </div>
       </details>
       <div className="settings-box">

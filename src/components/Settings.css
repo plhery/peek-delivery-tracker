@@ -104,7 +104,7 @@
 .add-by-email__choice[aria-pressed=true] { border-color: var(--green); box-shadow: inset 0 0 0 .5px var(--green); color: var(--ink); background: color-mix(in srgb,var(--green) 5%,var(--paper)); }
 .add-by-email__choice:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .add-by-email__code { margin: 0; padding: 14px; font-size: 13px; overflow-wrap: anywhere; }
-.add-by-email__code + .settings-row { border-top: 1px solid var(--line); }
+.settings-row + .add-by-email__code { border-top: 1px solid var(--line); }
 .add-by-email__recent { margin: 0; padding: 0; list-style: none; }
 .add-by-email__mail { justify-content: space-between; }
 .add-by-email__what { display: grid; gap: 3px; min-width: 0; }
@@ -119,6 +119,11 @@
 .add-by-email__auto-body .settings-box { background: var(--canvas); }
 .add-by-email__steps { margin: 10px 0 14px; padding-left: 18px; display: grid; gap: 8px; font-size: 12px; line-height: 1.5; }
 .add-by-email__steps--none { padding-left: 2px; margin-bottom: 0; }
+.add-by-email__steps > li::marker { font-weight: 650; }
+.add-by-email__ui { font-weight: 650; }
+.add-by-email__glyph { display: inline-block; width: 1.3em; height: 1.3em; margin: 0 .15em; padding: .12em; border: 1px solid var(--line); border-radius: 50%; vertical-align: -.38em; color: var(--ink); }
+.add-by-email__step-box { margin-top: 8px; }
+.add-by-email__auto-body .add-by-email__confirmation { border-color: var(--green); background: color-mix(in srgb,var(--green) 6%,var(--paper)); }
 .add-by-email__link { display: block; width: fit-content; margin-top: 3px; color: var(--ink); font-weight: 550; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
 .add-by-email__words { display: flex; flex-wrap: wrap; gap: 6px; }
 .add-by-email__word { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px 6px 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--canvas); color: var(--ink); font: 500 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; }

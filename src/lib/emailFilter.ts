@@ -72,17 +72,8 @@ export function gmailFilter(languages: readonly FilterLanguage[]): string {
   return words.size ? `subject:(${[...words.values()].join(' OR ')})` : '';
 }
 
-/** Where Gmail adds a forwarding address. */
+/** Gmail's forwarding settings, where it adds a forwarding address (Settings › See all settings › Forwarding and POP/IMAP). */
 export const GMAIL_FORWARDING_LINK = 'https://mail.google.com/mail/#settings/fwdandpop';
-
-/**
- * Gmail's own form for a new filter, opened with these languages' words already in its Subject field, so that the
- * reader only chooses what the filter does. Gmail on a computer reads the form's fields from the address.
- */
-export function gmailFilterLink(languages: readonly FilterLanguage[]): string {
-  const filter = gmailFilter(languages);
-  return filter ? `https://mail.google.com/mail/#create-filter/subject=${encodeURIComponent(filter.slice('subject:'.length))}` : '';
-}
 
 /**
  * The main words of these languages, for a rule that asks "subject includes" (MAIN_SUBJECT_WORDS). Each language's

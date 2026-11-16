@@ -315,12 +315,16 @@ Key server modules:
     (`src/lib/emailFilter.ts`). The reader names their service, which starts on the one the
     account's address belongs to, and the languages their shops and carriers write in,
     which start with the language Peek shows, the browser's and English.
-    - Gmail gets links to its forwarding settings and to its filter form, opened with
-      those languages' shipping words already in the Subject field.
+    - Each service's steps follow its own help pages, in its order and with its button
+      names (`**…**` in the copy, set in bold).
+    - Gmail: add the address, confirm it (Gmail's confirmation shows in that step, and
+      Settings reads the address again when the reader comes back to Peek), leave
+      forwarding of all mail off, then a filter made from a search to copy that forwards
+      the emails with those languages' shipping words in the subject.
     - Outlook, iCloud and any other service whose rules forward get each language's main
       words, copied one at a time, since their rules take them so.
-    - Yahoo forwards no chosen email, and a service that emails the address a link to
-      confirm (GMX, Proton) cannot be set up: only Gmail's confirmation is shown.
+    - Yahoo forwards no chosen email, and a service that emails the address an invitation
+      to accept (Proton) cannot be set up: only Gmail's confirmation is shown.
   - A Cloudflare Email Worker (`ops/cloudflare/inbound-email-worker.js`) posts each email to
     `POST /api/inbound/email`, signed with a secret it shares with the server: an HMAC over
     the time, the recipient and the raw mail, valid for five minutes. An unsigned or stale

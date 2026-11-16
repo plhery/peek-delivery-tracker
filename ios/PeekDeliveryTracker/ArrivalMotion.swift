@@ -15,9 +15,11 @@ struct ArrivalTilt: Equatable, Sendable {
         // response makes the paper feel weighted even without rotating the phone.
         let horizontalInput = roll / 0.36 + min(1, max(-1, accelerationX * 2)) * 0.16
         let verticalInput = pitch / 0.36 - min(1, max(-1, accelerationY * 2)) * 0.16
+        // Roll turns about the device's y axis and pitch about its x, so a quarter turn of the screen rotates the pair
+        // the other way from an (x, y) point.
         let angle = Double(quarterTurns) * .pi / 2
-        let horizontal = horizontalInput * cos(angle) + verticalInput * sin(angle)
-        let vertical = verticalInput * cos(angle) - horizontalInput * sin(angle)
+        let horizontal = horizontalInput * cos(angle) - verticalInput * sin(angle)
+        let vertical = verticalInput * cos(angle) + horizontalInput * sin(angle)
         // A low-pass filter removes hand tremor; output can never exceed ±1.
         x += (min(1, max(-1, horizontal)) - x) * 0.22
         y += (min(1, max(-1, vertical)) - y) * 0.22

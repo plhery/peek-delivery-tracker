@@ -194,7 +194,7 @@ final class ParcelLogicTests: XCTestCase {
         portrait.follow(roll: 0.44, pitch: 0)
         landscape.follow(roll: 0.44, pitch: 0, quarterTurns: 1)
         XCTAssertEqual(landscape.x, 0, accuracy: 0.0001)
-        XCTAssertEqual(landscape.y, -portrait.x, accuracy: 0.0001)
+        XCTAssertEqual(landscape.y, portrait.x, accuracy: 0.0001)
         for _ in 0..<40 { landscape.follow(roll: 0, pitch: 0) }
         XCTAssertEqual(landscape.y, 0, accuracy: 0.0001)
     }

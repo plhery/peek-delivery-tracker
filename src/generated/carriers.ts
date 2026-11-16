@@ -2838,6 +2838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-suivi",
+      "title": "Suivi colis JS Express\u00a0: numéro JSE, statuts et livraison",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-suivi-colis",
@@ -3142,6 +3150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JRT tracking: numero JRT…MM, stati, dogana e DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-tracking",
+      "title": "JS Express tracking: numero JSE…YQ, stati e consegna",
+      "name": "JS Express",
+      "color": "#fe9b00"
     },
     {
       "id": "gzyl",
@@ -3570,6 +3586,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-seguimiento",
+      "title": "JS Express seguimiento: número JSE…YQ, estados y reparto",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-seguimiento",
@@ -3890,6 +3914,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Meiteshun: número AMTS, estados e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-rastreio",
+      "title": "TopYou rastreio: número TYZR…YQ, estados e entrega",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-rastreio",
+      "title": "JS Express rastreio: número JSE…YQ, estados e entrega",
+      "name": "JS Express",
+      "color": "#fe9b00"
     }
   ],
   "pt-br": [
@@ -4144,12 +4184,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-sledzenie",
+      "title": "TopYou śledzenie przesyłki: numer TYZR, statusy",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-sledzenie",
       "title": "JRT śledzenie przesyłki: numer JRT…MM, statusy i DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-sledzenie",
+      "title": "JS Express śledzenie przesyłki: numer JSE, statusy",
+      "name": "JS Express",
+      "color": "#fe9b00"
     },
     {
       "id": "gzyl",

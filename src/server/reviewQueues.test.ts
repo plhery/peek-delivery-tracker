@@ -114,10 +114,9 @@ describe('review queue replay', () => {
     // An ambiguous shape its filed carrier tracked directly.
     expect(replaySupportCase('123456789012', 'fedex', 'fedex'))
       .toBe('Replay found no gap: fedex, one of the carriers its shape fits, tracks the number directly.');
-    // One its shape as stored does not fit, such as a made-up Ozon posting number without its hyphens, stays open:
-    // detection offers only other carriers.
-    expect(replaySupportCase('012345678901234', 'ozon-logistics', 'ozon-logistics')).toBeNull();
-    expect(replaySupportCase('012345678901234', 'ozon-logistics')).toBeNull();
+    // A shape offered only to other carriers stays open, even after a direct answer.
+    expect(replaySupportCase('HL123456789RV', 'dhl', 'dhl')).toBeNull();
+    expect(replaySupportCase('HL123456789RV', 'dhl')).toBeNull();
   });
 
   it("fixes a case its parcel's latest check left without a reason", async () => {
@@ -158,11 +157,11 @@ describe('review queue replay', () => {
       { id: 'case-unknown', tracking_number: '123456789012', configured_carrier: 'unknown', reasons: ['ambiguous_shape'] },
       { id: 'case-adapter', tracking_number: 'ZZTEST1234', configured_carrier: 'shipup', reasons: ['unknown_shape', 'no_direct_adapter'] },
       // A shape detection offers only other carriers for, delivered after its carrier tracked it.
-      { id: 'case-not-offered', tracking_number: '012345678901234', configured_carrier: 'ozon-logistics',
-        direct_verified_carrier: 'ozon-logistics', reasons: ['ambiguous_shape'] },
+      { id: 'case-not-offered', tracking_number: 'HL123456789RV', configured_carrier: 'dhl',
+        direct_verified_carrier: 'dhl', reasons: ['ambiguous_shape'] },
     ]);
     client.trackingNumberStages.mockResolvedValue(new Map([
-      ['123456789012', ['delivered']], ['123456789023', ['delivered', 'in_transit']], ['012345678901234', ['delivered']],
+      ['123456789012', ['delivered']], ['123456789023', ['delivered', 'in_transit']], ['HL123456789RV', ['delivered']],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1'))
       .resolves.toMatchObject({ cases_replayed: 6, cases_ignored: 1 });

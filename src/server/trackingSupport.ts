@@ -28,7 +28,7 @@ export function trackingSupportContext(trackingNumber: string, configuredCarrier
   if (detection.carrier === 'unknown') {
     // A shape several carriers issue leaves no gap once the filed one, among them, tracked the number. While detection
     // offers only other carriers, the gap stays open even though the filed carrier tracked it: detection has its shape
-    // to learn, as for an Ozon posting number stored without its hyphens.
+    // to learn.
     // Six digits filed under no carrier are a pickup code, not a shape detection misses: the apps ask for the
     // parcel's tracking number instead.
     if (!detection.candidates.length) {

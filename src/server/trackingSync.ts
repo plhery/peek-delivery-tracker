@@ -898,11 +898,15 @@ function unconfirmedDelivery(parcel: JsonObject, now: Date): boolean {
  * How long a due parcel has been due, from the minute it came due. A parcel stays due from the moment
  * its cadence comes round until its check, so a search between its last check, or its addition, and
  * now finds that minute; parcels that came due in the same minute have waited as long. 0 for one that
- * came due this minute.
+ * came due this minute. A wait its last check set (`quiet_until`) that has not run out but no longer
+ * holds it ended early, at the scraper release this server brought or at the owner's input, which the
+ * search cannot see: the parcel came due no sooner than `startedAt`, when the sync service started.
  */
-function overdueMs(parcel: JsonObject, dueAt: (parcel: JsonObject, at: Date) => boolean, now: Date): number {
+function overdueMs(parcel: JsonObject, dueAt: (parcel: JsonObject, at: Date) => boolean, now: Date, startedAt: number): number {
   const minute = (at: number) => new Date(at * 60_000);
-  let low = Math.floor(Date.parse(String(parcel.last_synced_at ?? parcel.created_at ?? '')) / 60_000);
+  const checked = Date.parse(String(parcel.last_synced_at ?? parcel.created_at ?? ''));
+  const endedEarly = Date.parse(String(routingState(parcel).quiet_until ?? '')) > now.getTime();
+  let low = Math.floor((endedEarly ? Math.max(checked, startedAt) : checked) / 60_000);
   let high = Math.floor(now.getTime() / 60_000);
   if (!(low < high) || !dueAt(parcel, minute(high))) return 0;
   while (high - low > 1) {
@@ -915,18 +919,19 @@ function overdueMs(parcel: JsonObject, dueAt: (parcel: JsonObject, at: Date) => 
 
 /**
  * Sets in `late`, by id, how long each of these due parcels has been due, plus `headStart`, and
- * returns how long the longest-waiting of them has been due.
+ * returns how long the longest-waiting of them has been due (overdueMs).
  */
 function measureOverdue(
   parcels: Iterable<JsonObject>,
   dueAt: (parcel: JsonObject, at: Date) => boolean,
   now: Date,
+  startedAt: number,
   late: Map<string, number>,
   headStart = 0,
 ): number {
   let longest = 0;
   for (const parcel of parcels) {
-    const overdue = overdueMs(parcel, dueAt, now);
+    const overdue = overdueMs(parcel, dueAt, now, startedAt);
     late.set(String(parcel.id), overdue + headStart);
     longest = Math.max(longest, overdue);
   }
@@ -1779,6 +1784,8 @@ export class TrackingSyncService {
    * (performance.now()): the run queued again, when this process runs it, takes them over until then.
    */
   #gaveWay: { lookups: SharedLookups; until: number } | null = null;
+  /** When the service started, on its clock: a parcel whose wait a release ended came due no sooner (overdueMs). */
+  readonly #startedAt: number;
 
   constructor(
     readonly client: SupabaseServiceClient,
@@ -1786,7 +1793,9 @@ export class TrackingSyncService {
     readonly notifier: CompositePushNotificationService | null = null,
     readonly now: () => Date = () => new Date(),
     readonly emails: DeliveryEmailService | null = null,
-  ) {}
+  ) {
+    this.#startedAt = now().getTime();
+  }
 
   async sync(context: SyncRunContext = { trigger: 'scheduled' }): Promise<SyncSummary> {
     return await this.exclusive(async () => {
@@ -1812,7 +1821,7 @@ export class TrackingSyncService {
       // first, accounts' and lookups' alike, so a parcel a run that stopped for another check left
       // keeps its place, and none waits behind parcels that came due after it.
       const late = new Map<string, number>();
-      recordScheduledBacklog('account', owned.length, measureOverdue(owned, due(false), now, late, ACCOUNT_HEAD_START_MS));
+      recordScheduledBacklog('account', owned.length, measureOverdue(owned, due(false), now, this.#startedAt, late, ACCOUNT_HEAD_START_MS));
       // An account's parcel whose number nobody has answered for a day is rechecked after every
       // other parcel and lookup, within its account's share, a few a run.
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
@@ -2103,9 +2112,9 @@ export class TrackingSyncService {
     // read leaves its kind unknown, not empty; the unfollowed ones are those the followed list
     // leaves out, so they need both.
     const followedRead = !failed.has('list_one_off_packages');
-    recordScheduledBacklog('lookup', followedRead ? followedNow.length : null, measureOverdue(followedNow, followedDue, now, late));
+    recordScheduledBacklog('lookup', followedRead ? followedNow.length : null, measureOverdue(followedNow, followedDue, now, this.#startedAt, late));
     recordScheduledBacklog('unfollowed', followedRead && !failed.has('list_unfiled_one_off_packages') ? unfollowed.size : null,
-      measureOverdue(unfollowed, unfollowedDue, now, late));
+      measureOverdue(unfollowed, unfollowedDue, now, this.#startedAt, late));
     const due = latestFirst([...followedNow, ...unfollowed], late);
     const taken = due.slice(0, limit);
     // The unfiled list comes without the stored rows, which the cadence of a lookup nobody follows

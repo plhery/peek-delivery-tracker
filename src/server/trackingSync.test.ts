@@ -3691,6 +3691,26 @@ describe('TrackingSyncService', () => {
     expect(unfollowed[2]).toBeLessThanOrEqual((2 * 60 + 24) * 60_000);
   });
 
+  it('counts a parcel whose wait a release ended as due since the service started, not since its wait began', async () => {
+    // Its last check found every source waiting its turn until 14:00; the scraper release the server started
+    // with, under other catalog rules, ends the wait of the carrier it retries.
+    const routing = { version: 1, configured_carrier: 'swiss-post', failures: {}, rules: 'older-rules',
+      next_check_at: '2026-09-09T09:05:00Z', quiet_until: '2026-09-09T14:00:00Z', direct_retry_at: '2026-09-09T14:00:00Z' };
+    const client = fakeClient([{ carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234', sync_status: 'ok',
+      id: 'held', user_id: 'a', last_synced_at: '2026-09-09T09:00:00Z', carrier_data: { routing } }]);
+    let now = new Date('2026-09-09T10:05:00Z');
+    const recorded = vi.spyOn(metrics, 'recordScheduledBacklog');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
+    now = new Date('2026-09-09T10:12:00Z');
+    await service.sync();
+    const [account] = recorded.mock.calls;
+    expect(account.slice(0, 2)).toEqual(['account', 1]);
+    // The minutes since the service started at 10:05, not the hour since its cadence came round at 09:10.
+    expect(account[2]).toBeGreaterThan(5 * 60_000);
+    expect(account[2]).toBeLessThanOrEqual(7 * 60_000);
+  });
+
   it('leaves a kind of lookup unknown, not empty, when the run cannot list it', async () => {
     const client = fakeClient([]);
     client.listFollowedOneOffPackages.mockRejectedValue(new Error('timeout'));

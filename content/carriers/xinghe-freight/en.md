@@ -113,7 +113,7 @@ Peek doesn't know: neither the tracker's steps nor Xinghe's site name a company.
 
 ### Why does Peek show no tracking for my GZXH number yet?
 
-The tracker may not have the order yet, or only steps written ahead, which can end in `Delivered`: Peek holds them back. Peek asks tracking services too and keeps checking. For a number the tracker doesn't know, or one it holds only steps written ahead for, Peek makes no request to check the number, so compare it with the seller's message. If nothing comes after a few days, ask the seller whether the parcel has really been sent.
+The tracker may not have the order yet, or only steps written ahead, which can end in `Delivered`: Peek holds them back. Peek asks tracking services too and keeps checking, at the pace given above under "Waiting for Xinghe Freight". For a number the tracker doesn't know, or one it holds only steps written ahead for, Peek makes no request to check the number, so compare it with the seller's message. If nothing comes after a few days, ask the seller whether the parcel has really been sent.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (home page)](http://xinghe-express.cn/) – company name, freight forwarding services, tracking box that opens GZYL's tracker, hotline and email

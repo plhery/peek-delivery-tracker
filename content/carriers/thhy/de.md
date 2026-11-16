@@ -65,7 +65,7 @@ Lieferzeiten von Tianhui Hengyuan hat Peek nicht gefunden, ebenso wenig Regeln z
 
 **Die Tracking-Seite ist weiter als Peek.** Die zusätzlichen Zeilen hält Peek zurück: Es sind Zeilen nach Vorlage (oben) oder Zeilen, die lange vor ihrer eigenen Uhrzeit geschrieben wurden (unten). Halte dich an die Lieferzeit, die der Shop genannt hat, und frag dort nach, wenn sie verstrichen ist.
 
-**Nichts gefunden.** Kennt die Tracking-Seite eine Nummer nicht, zeigt sie ein einziges Ergebnis mit deiner Nummer unter 参考号 (Referenz), alle anderen Felder leer. Für Peek heißt diese Antwort, dass Tianhui Hengyuan die Sendung schon erfasst, aber noch nicht gescannt hat: Peek fragt deshalb weiter nach und zeigt auf peektracker.com „Warten auf Tianhui Hengyuan“, ohne dich zu bitten, die Nummer zu prüfen. Vergleiche die Nummer also selbst Zeichen für Zeichen mit der Nachricht des Shops.
+**Nichts gefunden.** Kennt die Tracking-Seite eine Nummer nicht, zeigt sie ein einziges Ergebnis mit deiner Nummer unter 参考号 (Referenz), alle anderen Felder leer. Für Peek heißt diese Antwort, dass Tianhui Hengyuan die Sendung schon erfasst, aber noch nicht gescannt hat: Peek fragt deshalb weiter nach, so oft wie unten für vorab geschriebene Zeilen beschrieben, und zeigt auf peektracker.com „Warten auf Tianhui Hengyuan“, ohne dich zu bitten, die Nummer zu prüfen. Vergleiche die Nummer also selbst Zeichen für Zeichen mit der Nachricht des Shops.
 
 **Zugestellt, aber nicht da.** Einen Zustellscan schreibt der Paketdienst, der zustellt, nicht Tianhui Hengyuan in seinen eigenen Zeilen: Frag zuerst den Paketdienst und sag dann dem Shop Bescheid. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 

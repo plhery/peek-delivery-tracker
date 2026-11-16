@@ -72,7 +72,7 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 **`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
 
-**Nothing found.** For a number it doesn't know, GZYL's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek takes that answer as GZYL listing the shipment without a scan yet: it keeps checking and shows "Waiting for GZYL" on peektracker.com, with no request to check the number. So compare the number with the seller's message yourself.
+**Nothing found.** For a number it doesn't know, GZYL's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek takes that answer as GZYL listing the shipment without a scan yet: it keeps checking, at the pace given below for steps written ahead, and shows "Waiting for GZYL" on peektracker.com, with no request to check the number. So compare the number with the seller's message yourself.
 
 **Lost or returned.** The seller booked the parcel with GZYL, so ask the seller, or the marketplace, for a refund or a new parcel. See [lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 

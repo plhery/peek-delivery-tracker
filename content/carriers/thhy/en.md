@@ -65,7 +65,7 @@ Peek found no delivery times from Tianhui Hengyuan, and no rules for delivery at
 
 **The tracker shows your parcel further along than Peek.** Peek holds those lines back: they're the scripted ones (above), or lines written ahead of the time they carry (below). Go by the delivery estimate the shop gave, and ask the seller once it has passed.
 
-**Nothing found.** For a number it doesn't know, Tianhui Hengyuan's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek takes that answer as Tianhui Hengyuan listing the shipment without a scan yet: it keeps checking and shows "Waiting for Tianhui Hengyuan" on peektracker.com, with no request to check the number. So compare the number with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, Tianhui Hengyuan's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek takes that answer as Tianhui Hengyuan listing the shipment without a scan yet: it keeps checking, at the pace given below for lines written ahead, and shows "Waiting for Tianhui Hengyuan" on peektracker.com, with no request to check the number. So compare the number with the seller's message yourself, character by character.
 
 **Delivered, but nothing came.** A delivered scan comes from the company that delivers, not from Tianhui Hengyuan's own lines: ask that company first, then tell the seller. More in [delivered but not received](guide:delivered-not-received).
 

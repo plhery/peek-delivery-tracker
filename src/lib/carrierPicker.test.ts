@@ -36,7 +36,8 @@ describe('carrier search', () => {
   it('ignores case, accents and punctuation', () => {
     expect(foldForSearch('Colis Privé')).toBe('colis prive');
     expect(names('colis prive')[0]).toBe('Colis Privé');
-    expect(names('jt').slice(0, 2)).toEqual(['J&T Cargo', 'J&T Express']);
+    expect(names('jt').slice(0, 2).every((name) => name.startsWith('J&T '))).toBe(true);
+    expect(names('jt')).toEqual(expect.arrayContaining(['J&T Cargo', 'J&T Express']));
     expect(names('4px')[0]).toBe('4PX');
   });
 

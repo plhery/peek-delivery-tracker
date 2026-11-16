@@ -12,6 +12,6 @@ export const POST = apiRoute(async (context) => {
 }, {
   authenticated: false,
   serviceRequired: true,
-  // Every client together may register 1,000 an hour (register_assistant_client): a home's /64s share their /48's 20.
+  // A home's /64s share their /48's 20. Past 2,000 unused clients, a new one pushes out the oldest (register_assistant_client).
   publicRateLimit: { limit: 20, window: 3_600, bucket: 'oauth-register', site: true },
 });

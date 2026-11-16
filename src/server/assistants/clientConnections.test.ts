@@ -110,8 +110,9 @@ describe('metadata document connections', () => {
 
   it('never holds more than 16 connections open, however many lookups come', async () => {
     answer = trickle(404, 'text/html');
+    // From 20 sites: one site alone gets 2 at a time.
     for (let round = 0; round < 4; round += 1) {
-      const found = await Promise.all(Array.from({ length: 20 }, (_, index) => findClient(service, `https://assistant.example.com/${round}/${index}.json`)));
+      const found = await Promise.all(Array.from({ length: 20 }, (_, index) => findClient(service, `https://assistant.site${index}.test/${round}.json`)));
       expect(found.every((client) => client === null)).toBe(true);
     }
     expect(connectionsSeen).toBe(64);

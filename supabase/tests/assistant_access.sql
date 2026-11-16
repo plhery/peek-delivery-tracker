@@ -248,5 +248,31 @@ begin
   end if;
 end;
 $$;
+
+-- Registration is never refused for being busy: past 2,000 clients no grant uses, a new
+-- one pushes out the oldest of them, never a client a grant uses.
+do $$
+declare
+  owner constant uuid := 'ea000000-0000-4000-8000-000000000002';
+begin
+  perform public.register_assistant_client('peek_c_uuuuuuuuuuuuuuuuuuuuuu', 'Used', null, array['https://used.example.test/callback']);
+  perform public.open_assistant_code(owner, 'peek_c_uuuuuuuuuuuuuuuuuuuuuu', 'Used', 'used.example.test', true,
+    array['parcels:read'], repeat('91', 32), 'https://used.example.test/callback', repeat('c', 43));
+  perform public.register_assistant_client('peek_c_oooooooooooooooooooooo', 'Oldest', null, array['https://old.example.test/callback']);
+  update private.assistant_clients set created_at = now() - interval '2 hours'
+  where id in ('peek_c_uuuuuuuuuuuuuuuuuuuuuu', 'peek_c_oooooooooooooooooooooo');
+  for i in 1..2000 loop
+    perform public.register_assistant_client('peek_c_' || lpad(to_hex(i), 22, 'n'), 'Busy', null,
+      array['https://busy.example.test/callback']);
+  end loop;
+  if public.assistant_client('peek_c_oooooooooooooooooooooo') is not null then raise exception 'The oldest unused client stayed'; end if;
+  if public.assistant_client('peek_c_uuuuuuuuuuuuuuuuuuuuuu') is null then raise exception 'A client a grant uses was pushed out'; end if;
+  if public.assistant_client('peek_c_' || lpad(to_hex(1), 22, 'n')) is null then raise exception 'A new client was pushed out'; end if;
+  if (select count(*) from private.assistant_clients registered
+      where not exists (select 1 from private.assistant_grants granted where granted.client_id = registered.id)) <> 2000 then
+    raise exception 'Unused clients are not kept at 2,000';
+  end if;
+end;
+$$;
 rollback;
 \echo assistant access assertions passed

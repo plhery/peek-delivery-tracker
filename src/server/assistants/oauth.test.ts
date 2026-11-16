@@ -241,12 +241,8 @@ describe('client registration', () => {
     expect(db.registerAssistantClient).not.toHaveBeenCalled();
   });
 
-  it('answers 429 when the database says too many clients registered lately', async () => {
+  it('passes a database failure on', async () => {
     const db = service();
-    db.registerAssistantClient.mockRejectedValue(new SupabaseError('too many', 400, 'P0001'));
-    const response = await registerClient(db.client, { redirect_uris: [callback] }, now);
-    expect(response.status).toBe(429);
-    expect((await response.json()).error).toBe('temporarily_unavailable');
     db.registerAssistantClient.mockRejectedValue(new SupabaseError('down', 503));
     await expect(registerClient(db.client, { redirect_uris: [callback] }, now)).rejects.toBeInstanceOf(SupabaseError);
   });

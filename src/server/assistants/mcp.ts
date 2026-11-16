@@ -7,6 +7,8 @@ import { RateLimiter } from '../rateLimit';
 import type { AssistantTokenOwner, SupabaseServiceClient } from '../supabase';
 import { isRecord } from '../types';
 import { assistantsOpenToAccount } from './access';
+import { noteConnectedClient } from './clients';
+import { noteValidToken, validLately } from './recentTokens';
 import { personalTokensOpen, SCOPES, secretDigest, type AssistantSettings } from './settings';
 import { assistantServer, type AssistantCaller } from './tools';
 
@@ -16,8 +18,9 @@ const MOST_MCP_BODY_BYTES = 65_536;
 
 /**
  * Unknown tokens one network (an IPv4 address or IPv6 /64), and one IPv6 /48, may present a minute; past that it waits
- * before any token is looked up. Assistants call from a few shared addresses, and each connected account's expired
- * access token counts once an hour, so this stays high: it only bounds the database lookups a stranger can cause.
+ * before any token is looked up, except one issued or found valid lately. Assistants call from a few shared addresses,
+ * and each connected account's expired access token counts once an hour, so this stays high: it only bounds the
+ * database lookups a stranger can cause.
  */
 const UNKNOWN_TOKENS_PER_MINUTE = 600;
 
@@ -78,9 +81,10 @@ export async function tokenOwner(
   const ip = clientIp(request);
   const site = clientSite(ip);
   const networks = site ? [clientNetwork(ip), site] : [clientNetwork(ip)];
+  const digest = secretDigest(token);
   const refusedUntil = Math.max(...networks.map((network) => refusedNetworks.get(network) ?? 0));
-  if (refusedUntil > now) return tooMany(Math.ceil((refusedUntil - now) / 1_000));
-  const found = await service.assistantToken(secretDigest(token));
+  if (refusedUntil > now && !validLately(digest, now)) return tooMany(Math.ceil((refusedUntil - now) / 1_000));
+  const found = await service.assistantToken(digest);
   // While personal tokens are off, one counts as unknown: it is kept, and works again once they are on.
   const owner = found && (found.kind !== 'personal' || personalTokensOpen()) ? found : null;
   if (!owner) {
@@ -92,6 +96,8 @@ export async function tokenOwner(
     }
     return unauthorized(settings, 'invalid_token');
   }
+  noteValidToken(digest, owner.expiresAt ? owner.expiresAt * 1_000 : now + 3_600_000);
+  if (owner.clientId) noteConnectedClient(owner.clientId);
   const retryAfter = grants.retryAfter(owner.grantId, { limit: PER_GRANT_PER_MINUTE, window: 60 });
   if (retryAfter) return tooMany(retryAfter);
   if (!(await assistantsOpenToAccount(settings, service, owner.userId, now))) {

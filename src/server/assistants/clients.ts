@@ -153,17 +153,53 @@ function publicLookup(hostname: string, options: LookupOptions, callback: Lookup
 const MOST_DOCUMENT_BYTES = 10_000;
 const DOCUMENT_TIMEOUT_MS = 5_000;
 const DOCUMENT_LIFETIME_MS = 3_600_000;
+/** How long a connected client's document stands in once it is due again, while a fresh one can't be read. */
+const STAND_IN_MS = 86_400_000;
 const FAILURE_LIFETIME_MS = 60_000;
 const MOST_CACHED_DOCUMENTS = 200;
+const MOST_DOCUMENTS_PER_SITE = 10;
 const MOST_FETCHES_AT_ONCE = 16;
+const MOST_FETCHES_PER_SITE = 2;
+const MOST_CONNECTED_CLIENTS = 1_000;
 // Documents read, and the addresses that gave none, apart: a flood of bad addresses can't push out good clients.
 const documents = new Map<string, { client: AssistantClient; until: number }>();
 const failures = new Map<string, number>();
 const fetching = new Map<string, Promise<AssistantClient | null>>();
+/** Clients whose tokens reached the MCP endpoint lately, in order of use: their documents are pushed out last. */
+const connected = new Set<string>();
 
+/**
+ * The site a document's address belongs to, as far as limits go: its host's last two labels, so that one domain's many
+ * names count as one. A country's second-level domain (example.co.uk) then shares its limits with others, which only
+ * makes it stricter.
+ */
+function siteOf(id: string): string {
+  return new URL(id).hostname.split('.').slice(-2).join('.');
+}
+
+/** Notes a client whose token reached the MCP endpoint: its document is kept before others'. */
+export function noteConnectedClient(id: string): void {
+  if (!isMetadataDocumentId(id)) return;
+  connected.delete(id);
+  if (connected.size >= MOST_CONNECTED_CLIENTS) connected.delete(connected.values().next().value!);
+  connected.add(id);
+}
+
+/**
+ * Keeps a value, used last, in a cache that holds at most `MOST_CACHED_DOCUMENTS`, and `MOST_DOCUMENTS_PER_SITE` of one
+ * site: past either, the entry used least recently goes, a connected client's last. A site's many addresses then push
+ * out only that site's own.
+ */
 function remember<Value>(cache: Map<string, Value>, key: string, value: Value): void {
   cache.delete(key);
-  if (cache.size >= MOST_CACHED_DOCUMENTS) cache.delete(cache.keys().next().value!);
+  const site = siteOf(key);
+  const pushOut = (candidates: string[]) => {
+    const chosen = candidates.find((candidate) => !connected.has(candidate)) ?? candidates[0];
+    if (chosen !== undefined) cache.delete(chosen);
+  };
+  const sameSite = [...cache.keys()].filter((other) => siteOf(other) === site);
+  if (sameSite.length >= MOST_DOCUMENTS_PER_SITE) pushOut(sameSite);
+  if (cache.size >= MOST_CACHED_DOCUMENTS) pushOut([...cache.keys()]);
   cache.set(key, value);
 }
 
@@ -234,23 +270,31 @@ export function clientFromDocument(id: string, document: unknown): AssistantClie
 
 /**
  * The client a metadata document describes, read at most once an hour, and once at a time. A document that can't be
- * read is tried again a minute later; while many are being read (until their connections have closed), a new one counts
- * as unknown.
+ * read is tried again a minute later. While many are being read (until their connections have closed), 16 in all or 2
+ * of one site, a new one counts as unknown. A connected client's document, once due again, stands in for a day while a
+ * fresh one can't be read.
  */
 async function documentClient(id: string, now = Date.now()): Promise<AssistantClient | null> {
   const cached = documents.get(id);
-  if (cached && cached.until > now) return cached.client;
-  if ((failures.get(id) ?? 0) > now) return null;
+  if (cached && cached.until > now) {
+    remember(documents, id, cached);
+    return cached.client;
+  }
+  const standIn = cached && connected.has(id) && cached.until + STAND_IN_MS > now ? cached.client : null;
+  if ((failures.get(id) ?? 0) > now) return standIn;
   const pending = fetching.get(id);
-  if (pending) return pending;
-  if (fetching.size >= MOST_FETCHES_AT_ONCE) return null;
+  if (pending) return (await pending) ?? standIn;
+  const site = siteOf(id);
+  if (fetching.size >= MOST_FETCHES_AT_ONCE || [...fetching.keys()].filter((other) => siteOf(other) === site).length >= MOST_FETCHES_PER_SITE) {
+    return standIn;
+  }
   const read = readDocument(id).then((document) => clientFromDocument(id, document), () => null).then((client) => {
     if (client) remember(documents, id, { client, until: Date.now() + DOCUMENT_LIFETIME_MS });
     else remember(failures, id, Date.now() + FAILURE_LIFETIME_MS);
     return client;
   }).finally(() => fetching.delete(id));
   fetching.set(id, read);
-  return read;
+  return (await read) ?? standIn;
 }
 
 /** The client an id names: one that registered with Peek, or one that publishes its metadata document. */
@@ -259,8 +303,9 @@ export async function findClient(service: SupabaseServiceClient, id: string): Pr
   return isMetadataDocumentId(id) ? documentClient(id) : null;
 }
 
-/** Forgets the metadata documents read, for tests. */
+/** Forgets the metadata documents read and the clients seen connected, for tests. */
 export function forgetClientDocuments(): void {
   documents.clear();
   failures.clear();
+  connected.clear();
 }

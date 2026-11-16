@@ -373,11 +373,15 @@ Key server modules:
     answer (RFC 9207). A redirect address is HTTPS, HTTP to the loopback, or an app's own
     scheme, never one a browser or the system handles (`javascript:`, `search-ms:`,
     `itms-services:`…), checked again at each consent. A client registers (`/oauth/register`:
-    20 an hour per address, IPv6 /64 and /48, and 1,000 an hour from all together) or names its metadata document
+    20 an hour per address, IPv6 /64 and /48; past 2,000 clients no grant uses, a new one
+    pushes out the oldest of them) or names its metadata document
     by its URL; the server fetches that over HTTPS from public addresses only (IPv6 global
     unicast), at most 10 KB
-    in five seconds over at most 16 connections at a time, closes a connection as soon as it
-    refuses the answer, and keeps the document an hour.
+    in five seconds over at most 16 connections at a time and 2 for one site (a domain's
+    last two labels), and closes a connection as soon as it refuses the answer. It keeps a
+    document an hour, at most 200 and 10 of one site, pushing out the one used least
+    recently; those of clients whose tokens reach `/mcp` go last, and once due stand in for a
+    day while a fresh one can't be read.
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`) and
@@ -394,7 +398,8 @@ Key server modules:
     tokens and codes as their SHA-256, and only the service role reaches those tables.
   - A grant makes at most 120 requests a minute, each `/mcp` request one message: a batch
     and `subscriptions/listen` get 400. A network may present 600 unknown tokens a minute,
-    as may an IPv6 /48, open the consent page 30 times a minute (a /48 120) and register 20
+    as may an IPv6 /48; while it waits, a token issued or found valid lately still goes
+    through, so a stranger can't lock out an assistant's shared addresses. A network may open the consent page 30 times a minute (a /48 120) and register 20
     clients an hour. An
     account has at most 50 grants and 10 personal tokens; Settings lists the assistants and
     disconnects any.

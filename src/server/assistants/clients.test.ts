@@ -10,6 +10,7 @@ import {
   forgetClientDocuments,
   isMetadataDocumentId,
   keepsRefreshToken,
+  noteConnectedClient,
   publicAddress,
   redirectHost,
   redirectMatches,
@@ -307,6 +308,69 @@ describe('finding a client', () => {
     const found = await Promise.all([findClient(client, id), findClient(client, id), findClient(client, id)]);
     expect(found.every((one) => one?.id === id)).toBe(true);
     expect(network.requests).toHaveLength(1);
+  });
+
+  /** A document at an address, served as JSON. */
+  function serve(address: string, status = 200): void {
+    network.documents.set(address, { status, type: 'application/json', body: JSON.stringify({ ...document, client_id: address }) });
+  }
+
+  it('reads at most two documents of one site at once, whatever its host names, and keeps ten of a site', async () => {
+    const { client } = service();
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const slow = ['a', 'b', 'c'].map((name) => `https://${name}.slow.test/client.json`);
+    for (const address of slow) serve(address, 0);
+    const pending = slow.map((address) => findClient(client, address));
+    await expect(pending[2]).resolves.toBeNull();
+    expect(network.requests).toHaveLength(2);
+    serve(id);
+    await expect(findClient(client, id)).resolves.not.toBeNull();
+    await vi.advanceTimersByTimeAsync(5_000);
+    await Promise.all(pending);
+    vi.useRealTimers();
+
+    const many = Array.from({ length: 11 }, (_, index) => `https://many${index}.crowd.test/client.json`);
+    for (const address of many) {
+      serve(address);
+      await expect(findClient(client, address)).resolves.not.toBeNull();
+    }
+    const asked = network.requests.length;
+    await findClient(client, many[10]!);
+    await findClient(client, id);
+    expect(network.requests).toHaveLength(asked);
+    await findClient(client, many[0]!);
+    expect(network.requests).toHaveLength(asked + 1);
+  });
+
+  it('keeps a connected client\'s document before others, and lets it stand in for a day while a fresh one can\'t be read', async () => {
+    const { client } = service();
+    vi.useFakeTimers({ toFake: ['Date'] });
+    const other = 'https://other.example.org/client.json';
+    for (const address of [id, other]) serve(address);
+    await findClient(client, id);
+    await findClient(client, other);
+    noteConnectedClient(id);
+    for (let site = 0; site < 20; site += 1) {
+      for (let index = 0; index < 10; index += 1) {
+        const address = `https://n${index}.site${site}.test/client.json`;
+        serve(address);
+        await findClient(client, address);
+      }
+    }
+    const asked = network.requests.length;
+    await expect(findClient(client, id)).resolves.not.toBeNull();
+    expect(network.requests).toHaveLength(asked);
+    await findClient(client, other);
+    expect(network.requests).toHaveLength(asked + 1);
+
+    // An hour later the documents are due again, and neither can be read.
+    vi.setSystemTime(Date.now() + 3_600_001);
+    network.documents.delete(id);
+    network.documents.delete(other);
+    await expect(findClient(client, id)).resolves.toMatchObject({ id, name: 'Example Assistant' });
+    await expect(findClient(client, other)).resolves.toBeNull();
+    vi.setSystemTime(Date.now() + 86_400_000);
+    await expect(findClient(client, id)).resolves.toBeNull();
   });
 
   it('gives up on a document whose whole answer takes too long', async () => {

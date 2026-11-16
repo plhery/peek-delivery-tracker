@@ -184,6 +184,30 @@ describe('the MCP endpoint', () => {
     expect((await mcp(connect(['parcels:read']), 'tools/list', {}, 'legacy', from('198.51.100.9'))).status).toBe(200);
   });
 
+  it('still serves a token issued or found valid lately while its shared network waits', async () => {
+    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
+    const shared = { 'cf-connecting-ip': '203.0.113.20' };
+    const seen = connect(['parcels:read']);
+    expect((await mcp(seen, 'tools/list', {}, 'legacy', shared)).status).toBe(200);
+    vi.spyOn(service, 'redeemAssistantCode').mockResolvedValue({ userId, grantId: '6c000000-0000-4000-a000-0000000000f4', scopes: ['parcels:read'] });
+    const issued = await (await token(new NextRequest('https://peek.example/oauth/token', {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ grant_type: 'authorization_code', code: newSecret('code'), redirect_uri: 'https://assistant.example.com/callback', code_verifier: 'v'.repeat(64), client_id: newClientId() }).toString(),
+    }), none)).json() as { access_token: string };
+    owners.set(secretDigest(issued.access_token), {
+      userId, grantId: '6c000000-0000-4000-a000-0000000000f4', scopes: ['parcels:read'], kind: 'access', clientId: newClientId(), expiresAt: Math.floor(Date.now() / 1_000) + 3_600,
+    });
+
+    for (let index = 0; index <= 600; index += 1) await mcp(newSecret('access'), 'tools/list', {}, 'legacy', shared);
+    expect((await mcp(connect(['parcels:read']), 'tools/list', {}, 'legacy', shared)).status).toBe(429);
+    expect((await mcp(seen, 'tools/list', {}, 'legacy', shared)).status).toBe(200);
+    expect((await mcp(issued.access_token, 'tools/list', {}, 'legacy', shared)).status).toBe(200);
+    // Revoked since, it is looked up and refused.
+    owners.delete(secretDigest(seen));
+    expect((await mcp(seen, 'tools/list', {}, 'legacy', shared)).status).toBe(401);
+  });
+
   it('counts an IPv6 /48\'s unknown tokens together, whichever of its /64s they come from', async () => {
     vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
     const from = (ip: string) => ({ 'cf-connecting-ip': ip });

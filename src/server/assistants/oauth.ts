@@ -1,10 +1,11 @@
 import 'server-only';
 
 import { readBodyBytes } from '../api';
-import { SupabaseError, type SupabaseServiceClient } from '../supabase';
+import type { SupabaseServiceClient } from '../supabase';
 import type { JsonObject } from '../types';
 import { assistantsOpenToAccount } from './access';
 import { clientName, clientUri, MOST_REDIRECT_URIS, redirectHost, redirectUriProblem } from './clients';
+import { noteValidToken } from './recentTokens';
 import {
   ACCESS_TOKEN_SECONDS,
   newClientId,
@@ -75,7 +76,8 @@ export async function readForm(request: Request): Promise<URLSearchParams> {
   return form;
 }
 
-function tokenAnswer(access: string, refresh: string | null, scopes: Scope[]): Response {
+function tokenAnswer(access: string, expires: Date, refresh: string | null, scopes: Scope[]): Response {
+  noteValidToken(secretDigest(access), expires.getTime());
   return Response.json({
     access_token: access,
     token_type: 'Bearer',
@@ -120,7 +122,7 @@ export async function exchangeToken(
       });
       if (!issued) return oauthError('invalid_grant', 'The code is unknown, expired, already used, or not this client\'s');
       if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
-      return tokenAnswer(access, refresh, issued.scopes);
+      return tokenAnswer(access, accessExpires, refresh, issued.scopes);
     }
     case 'refresh_token': {
       const presented = form.get('refresh_token');
@@ -131,7 +133,7 @@ export async function exchangeToken(
       });
       if (!issued) return oauthError('invalid_grant', 'The refresh token is unknown, expired or revoked');
       if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
-      return tokenAnswer(access, issued.rotated ? refresh : null, issued.scopes);
+      return tokenAnswer(access, accessExpires, issued.rotated ? refresh : null, issued.scopes);
     }
     default:
       return oauthError('unsupported_grant_type', 'Use authorization_code or refresh_token');
@@ -155,14 +157,7 @@ export async function registerClient(service: SupabaseServiceClient, body: JsonO
     uri: clientUri(body.client_uri),
     redirectUris,
   };
-  try {
-    await service.registerAssistantClient(client);
-  } catch (error) {
-    if (error instanceof SupabaseError && error.code === 'P0001') {
-      return oauthError('temporarily_unavailable', 'Too many clients registered lately. Try again later.', 429);
-    }
-    throw error;
-  }
+  await service.registerAssistantClient(client);
   return Response.json({
     client_id: client.id,
     client_id_issued_at: Math.floor(now / 1_000),

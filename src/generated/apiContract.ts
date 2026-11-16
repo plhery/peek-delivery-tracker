@@ -12153,7 +12153,8 @@ export const CARRIER_CAPABILITIES = {
       "한진",
       "Hanjin Express",
       "Hanjin Transportation",
-      "Hanjin Parcel"
+      "Hanjin Parcel",
+      "농협택배"
     ],
     "countries": [
       "KR"
@@ -14331,7 +14332,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "sicepat"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -56113,6 +56114,194 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://connect.zufall.de/Track/"
+  },
+  "doobalhero": {
+    "displayName": "Doobalhero",
+    "aliases": [
+      "두발히어로",
+      "Chainlogis",
+      "체인로지스"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#ea2545",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://check.doobalhero.kr/?bookId={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "check.doobalhero.kr"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "bookId"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://check.doobalhero.kr/"
+  },
+  "kakao-t-same-day": {
+    "displayName": "Kakao T Same-Day Delivery",
+    "aliases": [
+      "카카오 T 당일배송",
+      "오늘의픽업",
+      "Today Pickup"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#282d4b",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://todaypickup-partners.kakaomobility.com/front/delivery/list/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "todaypickup-partners.kakaomobility.com"
+        ],
+        "path": "^/front/delivery/list/([0-9]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://todaypickup-partners.kakaomobility.com/front/delivery/list"
+  },
+  "kurly-nextmile": {
+    "displayName": "Kurly Next Mile",
+    "aliases": [
+      "컬리넥스트마일",
+      "Kurly Nextmile"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#5f0080",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.kurlynextmile.com/information/invoice?invoice_no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "kurlynextmile.com"
+        ],
+        "pathPattern": "^/information/invoice/?$",
+        "params": [
+          "invoice_no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.kurlynextmile.com/information/invoice"
+  },
+  "lx-pantos": {
+    "displayName": "LX Pantos",
+    "aliases": [
+      "LX판토스",
+      "LX PANTOS Co., Ltd.",
+      "Pantos Logistics",
+      "범한판토스"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#a72b2a",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.epantos.com/ecp/web/pr/dt/popup/dlvChaseInqPopup.do?locale=en&quickNo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "epantos.com"
+        ],
+        "pathPattern": "^/ecp/web/pr/dt/popup/dlvChaseInqPopup\\.do$",
+        "params": [
+          "quickNo"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.epantos.com/ecp/web/pr/dt/popup/dlvChaseInqPopup.do?locale=en"
+  },
+  "slx-kr": {
+    "displayName": "SLX",
+    "aliases": [
+      "SLX택배",
+      "에스엘엑스택배",
+      "에스엘엑스"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#2e3092",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://net.slx.co.kr/info/tracking.jsp?iv_no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "net.slx.co.kr"
+        ],
+        "pathPattern": "^/info/tracking\\.jsp$",
+        "params": [
+          "iv_no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.slx.co.kr/new/delivery/waybill.php"
+  },
+  "yongma-logis": {
+    "displayName": "Yongma Logis",
+    "aliases": [
+      "용마로지스",
+      "YONGMA LOGIS CO., LTD."
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#e6958f",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ylis.yongmalogis.co.kr/cmm/modalDeliveryCargoTrace.do?ordno={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ylis.yongmalogis.co.kr"
+        ],
+        "pathPattern": "^/cmm/modalDeliveryCargoTrace\\.do$",
+        "params": [
+          "ordno"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://yongmalogis.co.kr/"
   }
 } as const;
 
@@ -57779,7 +57968,13 @@ export const CARRIER_IDS = [
   "veoy",
   "xwwt",
   "ziegler",
-  "zufall"
+  "zufall",
+  "doobalhero",
+  "kakao-t-same-day",
+  "kurly-nextmile",
+  "lx-pantos",
+  "slx-kr",
+  "yongma-logis"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

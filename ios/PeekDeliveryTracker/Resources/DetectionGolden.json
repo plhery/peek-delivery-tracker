@@ -2914,6 +2914,41 @@
     ]
   },
   {
+    "input": "006920823346",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "dpd-fr",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "gls-at",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "japan-post",
+      "brt"
+    ]
+  },
+  {
     "input": "0073938000549297",
     "carrier": "unknown",
     "confidence": "low",

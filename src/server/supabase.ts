@@ -1180,6 +1180,8 @@ export const SCHEDULED_SYNC_PRIORITY = -10;
 export const LOOKUP_SYNC_PRIORITY = -5;
 /** An account's check, such as a refresh or a new parcel: ahead of every other job. */
 export const ACCOUNT_SYNC_PRIORITY = 10;
+/** The checks a reader waits for, which the readers' lane takes (claim_reader_sync_job): a first check, a link opened, a refresh. */
+export const READER_SYNC_REASONS: readonly string[] = ['added', 'opened', 'refresh'];
 
 export class SupabaseServiceClient extends SupabaseClient {
   /**
@@ -2055,6 +2057,15 @@ export class SupabaseServiceClient extends SupabaseClient {
     return result[0] ?? null;
   }
 
+  /** Claims the next job of the readers' lane (READER_SYNC_REASONS), or one whose worker stopped. */
+  async claimReaderSyncJob(workerId: string, leaseSeconds = 90): Promise<JsonObject | null> {
+    const result = rows(await this.request('/rest/v1/rpc/claim_reader_sync_job', {
+      method: 'POST', timeoutMs: 3_000,
+      body: { p_worker_id: workerId, p_lease_seconds: leaseSeconds },
+    }));
+    return result[0] ?? null;
+  }
+
   async renewSyncJobLease(jobId: string, workerId: string, leaseSeconds = 90): Promise<boolean> {
     return await this.request('/rest/v1/rpc/renew_sync_job_lease', {
       method: 'POST', body: { p_job_id: jobId, p_worker_id: workerId, p_lease_seconds: leaseSeconds },
@@ -2109,14 +2120,16 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /**
    * The highest priority of the jobs that go ahead of `priority` and wait to be claimed, such as an
-   * account's refresh or a lookup's check during a scheduled run; null when none waits.
+   * account's refresh or a lookup's check during a scheduled run; null when none waits. Without
+   * `readers`, the jobs the readers' lane takes are left out.
    */
-  async syncJobQueuedAhead(priority: number): Promise<number | null> {
+  async syncJobQueuedAhead(priority: number, readers = true): Promise<number | null> {
     const params = query([
       ['select', 'priority'],
       ['state', 'eq.queued'],
       ['priority', `gt.${priority}`],
       ['run_after', `lte.${new Date().toISOString()}`],
+      ...readers ? [] : [['or', `(reason.is.null,reason.not.in.(${READER_SYNC_REASONS.join(',')}))`] as [string, string]],
       ['order', 'priority.desc'],
       ['limit', '1'],
     ]);

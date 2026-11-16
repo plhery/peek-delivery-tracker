@@ -121,8 +121,20 @@ async function settleWithin(work: Promise<unknown> | null, ms: number): Promise<
   clearTimeout(timer);
 }
 
+/**
+ * Whether readers' checks (a lookup's first check, a link opened, a refresh) have a lane of their own beside the
+ * scheduled run: on unless `SYNC_READER_LANE` is `off`, `false`, `no` or `0`, read when the server starts.
+ */
+export function readerLaneEnabled(env: Record<string, string | undefined> = process.env): boolean {
+  return !['off', 'false', 'no', '0'].includes(env.SYNC_READER_LANE?.trim().toLowerCase() ?? '');
+}
+
+/**
+ * Claims and runs the queue's jobs, one at a time. The `readers` lane claims only readers' checks (claim_reader_sync_job)
+ * and runs them beside the other lane's scheduled run; the other lane claims every job.
+ */
 export class SyncJobWorker {
-  readonly workerId = `${hostname()}:${process.pid}:${randomUUID().slice(0, 12)}`;
+  readonly workerId: string;
   #stopped = false;
   #running = false;
   #timer: NodeJS.Timeout | null = null;
@@ -144,7 +156,11 @@ export class SyncJobWorker {
     readonly service: TrackingSyncService,
     readonly state: BackgroundState,
     readonly pollIntervalMs = 1_000,
-  ) {}
+    readonly lane: 'all' | 'readers' = 'all',
+  ) {
+    // The lane shows in the job's `locked_by`.
+    this.workerId = `${hostname()}:${process.pid}:${randomUUID().slice(0, 12)}${lane === 'readers' ? ':readers' : ''}`;
+  }
 
   start(): void {
     if (this.#stopped || this.#timer || this.#running) return;
@@ -242,7 +258,8 @@ export class SyncJobWorker {
   private async processNext(): Promise<boolean> {
     let job: JsonObject | null;
     try {
-      job = await this.service.client.claimSyncJob(this.workerId);
+      job = this.lane === 'readers' ? await this.service.client.claimReaderSyncJob(this.workerId)
+        : await this.service.client.claimSyncJob(this.workerId);
     } catch (error) {
       this.#consecutiveClaimFailures += 1;
       this.#claimFailingSince ??= Date.now();
@@ -368,7 +385,7 @@ export class SyncJobWorker {
       finishScheduledSyncCheckIn(scheduledCheckIn, 'ok');
       this.state.lastSummary = result;
       this.state.lastError = null;
-      logOperationalEvent('sync_job_completed', { job_id: jobId, kind, ...result });
+      logOperationalEvent('sync_job_completed', { job_id: jobId, kind, ...this.lane === 'readers' ? { lane: this.lane } : {}, ...result });
       if (summary.gave_way || summary.lookups_left) await this.queueScheduledRunAgain();
     } catch (error) {
       if (error instanceof WorkerShutdown || signal.reason instanceof WorkerShutdown) {
@@ -387,6 +404,7 @@ export class SyncJobWorker {
       logOperationalEvent('sync_job_failed', {
         job_id: jobId,
         kind,
+        ...this.lane === 'readers' ? { lane: this.lane } : {},
         error_type: capturedErrorType,
       }, 'error');
       captureOperationalError(error, {
@@ -666,6 +684,8 @@ interface BackgroundRuntime {
   client: SupabaseServiceClient;
   state: BackgroundState;
   worker: SyncJobWorker;
+  /** The readers' lane, when it is on. Its state is its own: readiness follows the other worker's heartbeat. */
+  readerWorker?: SyncJobWorker | null;
   scheduler: ScheduledSync;
   friendshipWorker: FriendshipPushWorker;
   reviews: ReviewQueueReplay;
@@ -682,12 +702,14 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   if (current?.state.draining) return current;
   if (current?.client === client && current.friendshipWorker && current.reviews) {
     current.worker.start();
+    current.readerWorker?.start();
     current.scheduler.start();
     current.friendshipWorker.start();
     current.reviews.start();
     return current;
   }
   current?.worker.stop();
+  current?.readerWorker?.stop();
   current?.scheduler.stop();
   current?.friendshipWorker?.stop();
   current?.reviews?.stop();
@@ -696,24 +718,27 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   // The delivery email needs no push channel: it is sent wherever mail is configured.
   const emails = deliveryEmailService(client);
   // The Android app's inbox needs nothing but the database, so every deployment has a channel to send to.
-  const service = new TrackingSyncService(client, undefined, notifier, undefined, emails);
+  const service = new TrackingSyncService(client, undefined, notifier, undefined, emails, { readerLane: readerLaneEnabled() });
   const worker = new SyncJobWorker(service, state);
+  const readerWorker = service.readerLane ? new SyncJobWorker(service, initialState(), undefined, 'readers') : null;
   const scheduler = new ScheduledSync(client, worker, state);
   const friendshipWorker = new FriendshipPushWorker(new FriendshipPushService(
     client, notifier.web, notifier.native, notifier.fcm, notifier.unifiedpush, notifier.inbox,
   ));
   // Once per deployed version, the support backlog is replayed against it.
   const reviews = new ReviewQueueReplay(client);
-  const runtime = { client, state, worker, scheduler, friendshipWorker, reviews };
+  const runtime = { client, state, worker, readerWorker, scheduler, friendshipWorker, reviews };
   globalBackground.__deliveryBackgroundRuntime = runtime;
   // Each scrape reads the queue this worker serves.
   readSyncQueueWith(() => client.syncQueue());
   worker.start();
+  readerWorker?.start();
   scheduler.start();
   friendshipWorker.start();
   reviews.start();
   logOperationalEvent('background_services_started', {
     sync_enabled: true,
+    reader_lane: Boolean(readerWorker),
     web_push_enabled: Boolean(notifier.web),
     native_push_enabled: Boolean(notifier.native),
     fcm_push_enabled: Boolean(notifier.fcm),
@@ -726,6 +751,7 @@ export function startBackgroundServices(): BackgroundRuntime | null {
 
 export function wakeSyncWorker(): void {
   globalBackground.__deliveryBackgroundRuntime?.worker.wake();
+  globalBackground.__deliveryBackgroundRuntime?.readerWorker?.wake();
 }
 
 export function wakeFriendshipWorker(): void { globalBackground.__deliveryBackgroundRuntime?.friendshipWorker?.wake(); }
@@ -741,5 +767,5 @@ export async function drainBackgroundServices(): Promise<void> {
   runtime.scheduler.stop();
   runtime.friendshipWorker.stop();
   runtime.reviews.stop();
-  await runtime.worker.drain();
+  await Promise.all([runtime.worker.drain(), runtime.readerWorker?.drain()]);
 }

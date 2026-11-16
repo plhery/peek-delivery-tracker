@@ -788,7 +788,7 @@ Key JSON events:
 - `scheduled_sync_budget_reached`: a scheduled run reached its 4 minutes and left the rest
   to the next run, with how many parcels it `checked` (those under way included) and how many it `left`;
 - `scheduled_sync_gave_way`: a scheduled run started no more checks for one queued ahead of it, an
-  `account`'s or a `lookup`'s (`to`), and was queued again, with how many parcels it `checked`
+  `account`'s or a `lookup`'s (`to`), one the readers' lane does not take while it is on, and was queued again, with how many parcels it `checked`
   and how many it `left`; its `sync_job_completed` line says `gave_way`. One that checked every
   parcel it took and left lookups due beyond its twenty says `lookups_left`, and is queued again
   at once. A scheduled run's line also says how many out-for-delivery checks it started while a
@@ -797,8 +797,8 @@ Key JSON events:
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
   (`web`, `native` for the iPhone and Android apps, `live_activity`, `link_alert`) beside the
-  `notifications_sent` total;
-- `sync_job_failed`, `sync_job_finish_failed` (by `job_id`). Alert on these. A scheduled
+  `notifications_sent` total, and `lane` `readers` when the readers' lane ran it;
+- `sync_job_failed`, `sync_job_finish_failed` (by `job_id`), the first with `lane` too. Alert on these. A scheduled
   run whose worker died three times is logged as failed by the next run, with
   `error_type` `WorkerLeaseExpired`;
 - `sync_job_handoff` (by `job_id`): at shutdown, whether the job went back to the queue;
@@ -1111,7 +1111,7 @@ dashboard's failure panels leave out.
 | `tracking_routing_signal_total` (signal, carrier, subject) | Routing signals for the review: `subject` is the carrier the signal is about, `uncatalogued` for a name a provider gave |
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
 | `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample in 24 hours, a direct step the carrier has not run for six hours, or direct failures whose checks all answered (a direct failure whose check answered counts toward no incident) |
-| `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them. Routine while lookups are opened and added: the parcels a stopped run left keep their place in the next, the longest due first. Whether checks fall behind shows in `scheduled_sync_overdue_seconds` |
+| `scheduled_sync_gave_way_total` (to) | Scheduled runs that stopped for an `account`'s or a `lookup`'s check queued ahead of them, with the readers' lane on only one it does not take. Routine while lookups are opened and added: the parcels a stopped run left keep their place in the next, the longest due first. Whether checks fall behind shows in `scheduled_sync_overdue_seconds` |
 | `scheduled_sync_due` (kind) | Parcels the latest scheduled run found due when it started: an `account`'s, a `lookup`, or an `unfollowed` lookup filed under no carrier and followed by nobody. A kind shows no value when the run could not list it, or when no run has started for 15 minutes |
 | `scheduled_sync_overdue_seconds` (kind) | How long the longest-waiting of those parcels had been due, to the minute. A lookup checked late shows here before its check. A parcel whose wait for its sources' turn a scraper release ended has been due since the server started |
 | `sync_jobs_queued` (kind) | Checks waiting for the sync worker, read from the queue at each scrape where the worker runs: an `account`'s, a `lookup`'s, the `scheduled` run, or a scraper `release`'s re-check |

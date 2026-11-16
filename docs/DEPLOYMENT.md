@@ -470,7 +470,10 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
 - **Quotas** (enforced in the database): 50 active and 500 total parcels per account.
   Scheduled sync runs every 2 minutes around the clock and processes at most five due parcels per account
   per run, and ten followed without an account. Treat changes to these limits as security-sensitive.
-- **Queue**: `public.sync_jobs`, deduplicated. Finished jobs are kept for 30 days.
+- **Queue**: `public.sync_jobs`, deduplicated. Finished jobs are kept for 30 days. A second
+  worker takes readers' checks (a first check, a link opened, a refresh) beside the scheduled
+  run; its jobs' `locked_by` ends in `:readers`. `SYNC_READER_LANE=off` switches it off from
+  the next start: those checks then wait for the run, as before ([ROUTING.md](ROUTING.md)).
 - **Backups**: back up Postgres independently and regularly test restoring Auth, parcels,
   events and push tables together.
 - **Secrets**: rotate anything exposed. New VAPID keys invalidate all browser subscriptions.

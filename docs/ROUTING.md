@@ -437,16 +437,26 @@ long past its cadence, accounts' parcels 30 minutes less. It checks two
 parcels at once, never two of one account, one number, one carrier (carriers on one adapter count as one; a parcel
 handed over, or whose earlier leg answered last, holds that carrier too) or one universal provider tracking them (for a parcel whose carrier has no adapter of its own and no provider named yet, the
 provider its plan asks first), so each keeps the pace of one check at a time: the run starts the first parcel in
-its order that shares none of these with the check under way. A merge with a parcel's other leg and its news go out
-one check at a time, as the checks end; news waits while the other check has stored its parcel and not merged it yet. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
+its order that shares none of these with the checks under way, the readers' lane's included (below). At most two checks
+whose lookups are expected to open a browser (the parcel's last lookup did, or its carrier has nothing else) run at once
+across both. A merge with a parcel's other leg and its news go out one check at a time, as the checks end; news waits
+while another check, the run's or a reader's, has stored its parcel and not merged it yet. A carrier the catalog spaces out (`tracking.refresh`) gives its places in the run first to
 its parcels out for delivery today or expected today, as its own pacing may refuse the run's later
 lookups (Poste Italiane's searches an hour); every other parcel keeps its place. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
 read: the run reads those of the ones it takes. A run starts no check after 4 minutes and ends once those under way
 end; the next run takes the parcels it left, which are still due.
 A run that checked every parcel it took and left more lookups due than its twenty (below) is queued again at once rather
 than in the next window, and does its upkeep at most once in 2 minutes.
-An account's or a lookup's check queued meanwhile, such as a refresh, a new parcel, a new lookup's first check or a link
-opened, goes ahead of the run: once the run has checked a parcel, it starts only the checks it took of parcels out for
+Readers' checks, a new parcel's or lookup's first check, a link opened and a refresh, have a lane of their own beside
+the run, which takes them one at a time as they are queued (`claim_reader_sync_job`); `SYNC_READER_LANE=off` switches it
+off ([DEPLOYMENT.md](DEPLOYMENT.md)). Such a check holds what the run's checks hold and waits for any check under way that
+holds the same, and the run starts no check that needs what a waiting one needs. A check of a number another check is
+asking about waits for it and takes its answers rather than asking again; one of the same parcel takes that check as its
+own. The run checks a parcel a reader's check took meanwhile only if the parcel was not checked since the run listed it.
+The other worker still takes any job, a reader's too, between runs.
+
+A check queued meanwhile that the readers' lane does not take, such as a carrier change, or with the lane off an
+account's or a lookup's check of any kind, goes ahead of the run: once the run has checked a parcel, it starts only the checks it took of parcels out for
 delivery due every 2 or 5 minutes (below), then no other, ends once the checks under way end, and is queued again
 behind that check. It leaves its upkeep (archiving, forgetting, usage counts, a release's re-checks) to the runs behind
 it until the last upkeep is 10 minutes old. An account's check goes ahead of a lookup's. When the same server runs the

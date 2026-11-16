@@ -27,6 +27,7 @@ beforeEach(() => {
 afterEach(() => {
   for (const runtime of started.splice(0)) {
     runtime.worker.stop();
+    runtime.readerWorker?.stop();
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
     runtime.reviews.stop();
@@ -49,9 +50,24 @@ it('sends delivery emails on a deployment without push, and says so at startup',
   expect(service.emails).toBeInstanceOf(DeliveryEmailService);
   expect(service.emails!.settings).toMatchObject({ host: 'smtp.example.com', origin: 'https://peek.example.com' });
   expect(logged).toHaveBeenCalledExactlyOnceWith('background_services_started', {
-    sync_enabled: true, web_push_enabled: false, native_push_enabled: false, fcm_push_enabled: false,
+    sync_enabled: true, reader_lane: true, web_push_enabled: false, native_push_enabled: false, fcm_push_enabled: false,
     unifiedpush_push_enabled: false, live_activity_push_enabled: false, delivery_email_enabled: true,
   });
+});
+
+it('runs the readers\' checks in a lane of their own, unless switched off', () => {
+  const lane = start();
+  expect(lane.worker.service.readerLane).toBe(true);
+  expect(lane.readerWorker?.lane).toBe('readers');
+  expect(lane.readerWorker?.service).toBe(lane.worker.service);
+  expect(lane.readerWorker?.state).not.toBe(lane.state);
+  lane.worker.stop();
+  lane.readerWorker?.stop();
+  delete globalRuntime.__deliveryBackgroundRuntime;
+  vi.stubEnv('SYNC_READER_LANE', 'off');
+  const off = start();
+  expect(off.worker.service.readerLane).toBe(false);
+  expect(off.readerWorker).toBeNull();
 });
 
 it('sends no email without mail settings', () => {

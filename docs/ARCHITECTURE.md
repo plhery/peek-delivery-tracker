@@ -52,10 +52,14 @@ Key server modules:
   queue, and workers claim jobs with leases, so deploys, crashes and replicas never lose
   or double-run work. This is the only code path with cross-account access. An idle
   worker asks for a job less often, down to every 10 s; a job its own process queues
-  wakes it at once, so only a job another container queued or handed back can wait.
+  wakes it at once, so only a job another container queued or handed back can wait. Each
+  server runs two: one takes every job, the other only readers' checks, beside the
+  scheduled run ([ROUTING.md](ROUTING.md)), and `checkHolds.ts` keeps what the checks
+  under way hold across the two.
 - `trackingSync.ts` runs one refresh through the adapter registry;
   `trackingRouting.ts` decides which source to ask ([ROUTING.md](ROUTING.md)), and
-  `sharedLookups.ts` lets the copies of a number in one scheduled run share their lookups.
+  `sharedLookups.ts` lets the copies of a number in one scheduled run share their lookups,
+  and a reader's check of a number another check is asking about take that check's answers.
   A check claims the parcel, asks, then writes what it found, each in one call
   (`apply_tracking_sync`) against the parcel it read: its tracking generation, which a
   change of carrier, number or inputs renews, and its sync revision, which each applied

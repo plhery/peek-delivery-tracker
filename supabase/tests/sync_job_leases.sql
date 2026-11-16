@@ -236,3 +236,53 @@ begin
 end;
 $$;
 rollback;
+
+begin;
+delete from public.sync_jobs;
+insert into public.packages (id, user_id, tracking_number, carrier) values
+  ('97000000-0000-0000-0000-000000000011', '10000000-0000-0000-0000-000000000001', 'READERLANE0001', 'ups'),
+  ('97000000-0000-0000-0000-000000000012', '10000000-0000-0000-0000-000000000001', 'READERLANE0002', 'ups'),
+  ('97000000-0000-0000-0000-000000000013', '10000000-0000-0000-0000-000000000001', 'READERLANE0003', 'ups'),
+  ('97000000-0000-0000-0000-000000000014', '10000000-0000-0000-0000-000000000001', 'READERLANE0004', 'ups');
+-- The readers' lane claims a lookup's first check, a link opened and a refresh, in the queue's order, and nothing else.
+do $$
+declare
+  claimed public.sync_jobs;
+begin
+  if has_function_privilege('anon', 'public.claim_reader_sync_job(text,integer)', 'execute')
+      or has_function_privilege('authenticated', 'public.claim_reader_sync_job(text,integer)', 'execute')
+      or not has_function_privilege('service_role', 'public.claim_reader_sync_job(text,integer)', 'execute') then
+    raise exception 'the readers'' lane claim is not reserved to the server';
+  end if;
+  insert into public.sync_jobs (kind, dedupe_key, priority) values ('scheduled', 'reader-scheduled', 20);
+  insert into public.sync_jobs (user_id, package_id, kind, dedupe_key, priority, reason) values
+    ('10000000-0000-0000-0000-000000000001', '97000000-0000-0000-0000-000000000011', 'package', 'reader-changed', 30, 'changed'),
+    ('10000000-0000-0000-0000-000000000001', '97000000-0000-0000-0000-000000000012', 'package', 'reader-opened', -5, 'opened'),
+    ('10000000-0000-0000-0000-000000000001', '97000000-0000-0000-0000-000000000013', 'package', 'reader-refresh', 10, 'refresh');
+  insert into public.sync_jobs (user_id, package_id, kind, dedupe_key, priority) values
+    ('10000000-0000-0000-0000-000000000001', '97000000-0000-0000-0000-000000000014', 'package', 'reader-release', -30);
+  select * into claimed from public.claim_reader_sync_job('reader-worker');
+  if claimed.reason is distinct from 'refresh' or claimed.locked_by <> 'reader-worker' or claimed.state <> 'running' then
+    raise exception 'the readers'' lane took % first', coalesce(claimed.reason, claimed.kind);
+  end if;
+  select * into claimed from public.claim_reader_sync_job('reader-worker');
+  if claimed.reason is distinct from 'opened' then raise exception 'the readers'' lane took % second', coalesce(claimed.reason, claimed.kind); end if;
+  if exists (select 1 from public.claim_reader_sync_job('reader-worker')) then
+    raise exception 'the readers'' lane took a scheduled run, a change or a release''s re-check';
+  end if;
+  -- A reader's job whose worker stopped is taken again.
+  update public.sync_jobs set lease_until = clock_timestamp() - interval '1 second' where dedupe_key = 'reader-opened';
+  select * into claimed from public.claim_reader_sync_job('other-reader');
+  if claimed.dedupe_key is distinct from 'reader-opened' or claimed.attempts <> 2 then
+    raise exception 'the readers'' lane left a stopped worker''s job';
+  end if;
+  -- The other worker still takes every job, the readers' too.
+  update public.sync_jobs set state = 'queued', locked_by = null, lease_until = null where dedupe_key = 'reader-refresh';
+  if (select dedupe_key from public.claim_sync_job('main-worker')) <> 'reader-changed'
+      or (select dedupe_key from public.claim_sync_job('main-worker')) <> 'reader-scheduled'
+      or (select dedupe_key from public.claim_sync_job('main-worker')) <> 'reader-refresh' then
+    raise exception 'the other worker lost its order';
+  end if;
+end;
+$$;
+rollback;

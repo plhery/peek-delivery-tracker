@@ -43,7 +43,8 @@ import {
 } from './observability';
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
-import { LOOKUP_SYNC_PRIORITY, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
+import { LOOKUP_SYNC_PRIORITY, READER_SYNC_REASONS, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
+import { CheckHolds } from './checkHolds';
 import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
@@ -87,6 +88,11 @@ const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
 const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
 /** A scheduled run checks this many parcels at once, no two sharing what checkKeys names. */
 const SCHEDULED_RUN_LANES = 2;
+/**
+ * Checks whose lookups are expected to open a browser that run at once, across the run's lanes and the readers'
+ * (background.ts): as many as the run's lanes, all that ran at once before the readers had a lane.
+ */
+const BROWSER_CHECKS = SCHEDULED_RUN_LANES;
 /**
  * One-off parcels have no owner: a scheduled run checks this many of them, all together, the
  * longest due first. A run that checks them all and leaves more due is queued again at once.
@@ -653,12 +659,18 @@ export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
   return parcels.map((parcel) => refreshLimit(parcel) !== undefined ? queues.get(carrier(parcel))!.shift()! : parcel);
 }
 
+/** What a check holds of the number it asks about (checkKeys). */
+function numberKey(parcel: JsonObject): string {
+  return `number:${normalizeTrackingNumber(String(parcel.tracking_number ?? ''))}`;
+}
+
 /**
- * What two checks of a scheduled run never share at once: the account, whose merges run between its
- * checks; the number, whose copies share their lookups; the carrier's adapter, so each carrier keeps
- * the pace and limits of one check at a time (carriers on one adapter, as Parcelforce on Royal Mail's,
- * share them); and the universal provider that tracks the number, which takes one call at a time
- * across servers (acquire_tracking_provider), so a second check would find it busy.
+ * What two checks never share at once, the scheduled run's and the readers' alike (CheckHolds): the
+ * account, whose merges run between its checks; the number, whose copies share their lookups; the
+ * carrier's adapter, so each carrier keeps the pace and limits of one check at a time (carriers on one
+ * adapter, as Parcelforce on Royal Mail's, share them); and the universal provider that tracks the
+ * number, which takes one call at a time across servers (acquire_tracking_provider), so a second check
+ * would find it busy.
  */
 function checkKeys(parcel: JsonObject): string[] {
   const carrier = String(parcel.carrier ?? '');
@@ -676,7 +688,7 @@ function checkKeys(parcel: JsonObject): string[] {
   const carriers = new Set([carrier, ...(active ? [active] : [])]
     .map((id) => `carrier:${directCarrier(id) ? carrierAdapter(id) : id}`));
   return [...carriers,
-    `number:${number}`,
+    numberKey(parcel),
     ...(typeof parcel.user_id === 'string' ? [`account:${parcel.user_id}`] : []),
     ...(typeof provider === 'string' ? [`provider:${provider}`] : [])];
 }
@@ -1786,6 +1798,20 @@ export class TrackingSyncService {
   #gaveWay: { lookups: SharedLookups; until: number } | null = null;
   /** When the service started, on its clock: a parcel whose wait a release ended came due no sooner (overdueMs). */
   readonly #startedAt: number;
+  /** What the checks under way hold, the scheduled run's and the single parcels' alike. */
+  readonly #holds = new CheckHolds(BROWSER_CHECKS);
+  /**
+   * Account parcels a check has stored and not merged yet, whichever lane runs it: a dispatch meanwhile would send
+   * their news before the merge. The check that merges the last of them sends what waited.
+   */
+  readonly #unmerged = new Set<JsonObject>();
+  /** The dispatch under way: the next one waits for it, rather than finding the dispatch lease taken and sending nothing. */
+  #dispatching: Promise<void> = Promise.resolve();
+  /**
+   * Whether readers' checks (READER_SYNC_REASONS) run beside the scheduled run, in a lane of their own (background.ts),
+   * rather than between its runs: the run then gives way only to the other checks.
+   */
+  readonly readerLane: boolean;
 
   constructor(
     readonly client: SupabaseServiceClient,
@@ -1793,8 +1819,10 @@ export class TrackingSyncService {
     readonly notifier: CompositePushNotificationService | null = null,
     readonly now: () => Date = () => new Date(),
     readonly emails: DeliveryEmailService | null = null,
+    options: { readerLane?: boolean } = {},
   ) {
     this.#startedAt = now().getTime();
+    this.readerLane = options.readerLane === true;
   }
 
   async sync(context: SyncRunContext = { trigger: 'scheduled' }): Promise<SyncSummary> {
@@ -1845,7 +1873,7 @@ export class TrackingSyncService {
       // what the checks under way hold, and those checks.
       const waiting = [...parcels];
       const keys = new Map(parcels.map((parcel) => [parcel, checkKeys(parcel)]));
-      const held = new Set<string>();
+      const browser = new Map(parcels.map((parcel) => [parcel, this.opensBrowser(parcel)]));
       const running = new Set<Promise<void>>();
       // Whether the run starts no more checks, and why: shutdown, or a check that failed.
       let stopped = false;
@@ -1853,9 +1881,9 @@ export class TrackingSyncService {
       let failed: { error: unknown } | null = null;
       // The steps after a check, its merges and its news, one check's at a time.
       let after = Promise.resolve();
-      // Account parcels a check under way has stored and not merged yet: a dispatch meanwhile would send their
-      // news before the merge. A dispatch that waits for them is owed, and goes out once none is left.
-      const unmerged = new Set<JsonObject>();
+      // A dispatch while a check under way, the run's or a reader's, has stored an account parcel it has not merged yet
+      // (#unmerged) is owed, and goes out once none is left.
+      const unmerged = this.#unmerged;
       let owed = false;
       // A parcel's news goes out once it is stored, not after the slowest check of the run; the last check's
       // goes with the run's own dispatch, and at shutdown before the run stops.
@@ -1869,9 +1897,10 @@ export class TrackingSyncService {
         after = steps.catch(() => undefined);
         await steps;
       };
-      const check = async (parcel: JsonObject): Promise<void> => {
-        // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
-        if (rechecks.has(parcel) && !await this.uncheckedSinceListed(parcel, context.signal)) return;
+      const check = async (parcel: JsonObject, touched: boolean): Promise<void> => {
+        // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck,
+        // and a reader's check of the parcel during the run, in the readers' lane, for the run's.
+        if ((rechecks.has(parcel) || touched) && !await this.uncheckedSinceListed(parcel, context.signal)) return;
         // A merge earlier in the run removed the parcel or gave it the other leg: the next run checks it.
         if (merged.has(String(parcel.user_id)) && !await this.unmergedSinceListed(parcel, context.signal)) return;
         summary.checked += 1;
@@ -1900,13 +1929,17 @@ export class TrackingSyncService {
         });
       };
       const start = (parcel: JsonObject) => {
-        for (const key of keys.get(parcel)!) held.add(key);
-        const task: Promise<void> = check(parcel)
+        // Whether a check of the parcel outside the run was under way when the run listed it, or ran since.
+        const touched = this.#holds.touchedSince(String(parcel.id), started);
+        const release = this.#holds.take({ parcelId: String(parcel.id), keys: keys.get(parcel)!, browser: browser.get(parcel)!, lookups });
+        const task: Promise<void> = check(parcel, touched)
           .catch((error: unknown) => { failed ??= { error }; stopped = true; })
-          .finally(() => { for (const key of keys.get(parcel)!) held.delete(key); running.delete(task); });
+          .finally(() => { release(); running.delete(task); });
         running.add(task);
       };
       for (;;) {
+        // Whether the run could start none of the parcels it has left because checks outside it, a reader's, hold what they need.
+        let blocked = false;
         while (!stopped && running.size < SCHEDULED_RUN_LANES && waiting.length > 0) {
           // At shutdown the run starts no more checks; once those under way end, its job goes back to
           // the queue, and the replacement checks the parcels still due.
@@ -1933,18 +1966,24 @@ export class TrackingSyncService {
             stopped = true;
             break;
           }
-          // The first parcel in the run's order that holds nothing a check under way holds, an
-          // out-for-delivery one while a check waits ahead of the run; a recheck only once every other
-          // parcel has started.
+          // The first parcel in the run's order that holds nothing a check under way holds, nor a reader's check waits
+          // for, with a browser slot free if its lookups open a browser; an out-for-delivery one while a check waits
+          // ahead of the run; a recheck only once every other parcel has started.
           const others = waiting.some((parcel) => !rechecks.has(parcel));
-          const next = waiting.findIndex((parcel) => (ahead === null || lastMile.has(parcel))
-            && !(others && rechecks.has(parcel)) && keys.get(parcel)!.every((key) => !held.has(key)));
-          if (next < 0) break;
+          const eligible = (parcel: JsonObject) => (ahead === null || lastMile.has(parcel)) && !(others && rechecks.has(parcel));
+          const next = waiting.findIndex((parcel) => eligible(parcel) && this.#holds.free(keys.get(parcel)!, browser.get(parcel)!, true));
+          if (next < 0) {
+            blocked = waiting.some(eligible);
+            break;
+          }
           if (ahead !== null) summary.last_mile_first = (summary.last_mile_first ?? 0) + 1;
           start(waiting.splice(next, 1)[0]);
         }
-        if (running.size === 0) break;
-        await Promise.race(running);
+        if (running.size === 0 && (stopped || !blocked)) break;
+        // A check of the run's ends, or one outside it frees what the run's parcels wait for. With none of its own
+        // under way, shutdown or a lost lease ends the wait too; with some, their checks end on those.
+        await Promise.race([...running, running.size === 0 ? this.#holds.released(context.signal, context.stopping) : this.#holds.released()]);
+        if (running.size === 0) context.signal?.throwIfAborted();
       }
       if (failed) throw (failed as { error: unknown }).error;
       if (shutdown) throw context.stopping!.reason;
@@ -1953,7 +1992,8 @@ export class TrackingSyncService {
       // the next run finds that one done and none goes round for ever.
       if (!stopped && oneOff.more && summary.checked > 0) summary.lookups_left = true;
       await this.linkConfirmedParcels();
-      await this.dispatchNotifications(summary, context.signal);
+      // A reader's check that stored an account parcel it has not merged yet sends the news once merged.
+      if (unmerged.size === 0) await this.dispatchNotifications(summary, context.signal);
       return summary;
     });
   }
@@ -1961,35 +2001,69 @@ export class TrackingSyncService {
   /** The priority of an account's or a lookup's check queued while the scheduled run runs; null when none is, or that cannot be read. */
   private async jobQueuedAhead(): Promise<number | null> {
     try {
-      return await this.client.syncJobQueuedAhead(SCHEDULED_SYNC_PRIORITY);
+      // The readers' checks have a lane of their own, when it is on: the run gives way to the others only.
+      return await (this.readerLane ? this.client.syncJobQueuedAhead(SCHEDULED_SYNC_PRIORITY, false)
+        : this.client.syncJobQueuedAhead(SCHEDULED_SYNC_PRIORITY));
     } catch {
       return null;
     }
   }
 
+  /**
+   * One parcel's check. A reader's (READER_SYNC_REASONS) runs beside the scheduled run when the readers' lane is on;
+   * any other waits for the run to end. Either holds what checkKeys names, as each of the run's checks does.
+   */
   async syncPackage(
     parcel: JsonObject,
     context: SyncRunContext = { trigger: 'package' },
   ): Promise<SyncSummary> {
-    return await this.exclusive(async () => {
-      context.signal?.throwIfAborted();
-      const summary = emptySyncSummary();
-      // A link read queued this check because one was due. A check of the parcel under way when the
-      // link was read, such as the scheduled run's, may have checked it meanwhile, which stands in for it.
-      if (context.trigger === 'opened') {
-        const current = await this.client.getPackage(String(parcel.id));
-        if (!current || !isOpenedParcelSyncDue(current, this.now())) return summary;
-        parcel = current;
-      }
-      // Manual refreshes share the persisted cooldown with scheduled checks.
-      if (isTrackingSyncDue(parcel, this.now())) {
+    if (this.readerLane && READER_SYNC_REASONS.includes(context.trigger)) return await this.checkParcel(parcel, context);
+    return await this.exclusive(() => this.checkParcel(parcel, context));
+  }
+
+  private async checkParcel(parcel: JsonObject, context: SyncRunContext): Promise<SyncSummary> {
+    context.signal?.throwIfAborted();
+    const summary = emptySyncSummary();
+    const id = String(parcel.id);
+    // A link read queued this check because one was due. A check of the parcel under way when the
+    // link was read, such as the scheduled run's, may have checked it meanwhile, which stands in for it.
+    if (context.trigger === 'opened') {
+      const current = await this.client.getPackage(id);
+      if (!current || !isOpenedParcelSyncDue(current, this.now())) return summary;
+      parcel = current;
+    }
+    const userId = typeof parcel.user_id === 'string' ? parcel.user_id : null;
+    // Manual refreshes share the persisted cooldown with scheduled checks.
+    const due = isTrackingSyncDue(parcel, this.now());
+    // A check of the same number under way, such as the scheduled run's: this one waits for it and takes its answers
+    // rather than asking again. One of the same parcel stands in for this one, which only waits for it to end.
+    const joined = due ? this.#holds.holder(numberKey(parcel)) : undefined;
+    const same = joined?.parcelId === id;
+    // With the readers' lane on, a check of a parcel's lets another of the number wait for its answers in turn.
+    const lookups = joined && !same && joined.lookups ? joined.lookups : this.readerLane ? new SharedLookups([parcel]) : undefined;
+    // Without a check, the merge below still holds the account.
+    const release = await this.#holds.acquire({
+      parcelId: id, keys: due ? checkKeys(parcel) : userId ? [`account:${userId}`] : [], browser: due && !same && this.opensBrowser(parcel), lookups,
+    }, context.signal);
+    const checked = parcel;
+    try {
+      if (due && !same) {
         summary.checked = 1;
-        summary[await this.syncOne(parcel, context)] += 1;
+        summary[await this.syncOne(checked, context, lookups, () => { if (userId) this.#unmerged.add(checked); })] += 1;
       }
-      if (typeof parcel.user_id === 'string') await this.linkConfirmedParcels(parcel.user_id);
-      await this.dispatchNotifications(summary, context.signal);
-      return summary;
-    });
+      if (userId) await this.linkConfirmedParcels(userId);
+    } finally {
+      this.#unmerged.delete(checked);
+      release();
+    }
+    // An account parcel another check has stored and not merged yet: that check sends the news once merged.
+    if (this.#unmerged.size === 0) await this.dispatchNotifications(summary, context.signal);
+    return summary;
+  }
+
+  /** Whether the parcel's check is expected to open a browser: its last lookup did, or its carrier has nothing else. */
+  private opensBrowser(parcel: JsonObject): boolean {
+    return checkedInBrowser(parcel) || this.adapter.browserOnly?.(String(parcel.carrier ?? '')) === true;
   }
 
   /**
@@ -2211,8 +2285,16 @@ export class TrackingSyncService {
    * need no push channel. A run may dispatch several times, so the counts add up.
    */
   private async dispatchNotifications(summary: SyncSummary, signal?: AbortSignal): Promise<void> {
-    await this.dispatchPush(summary, signal);
-    await this.dispatchEmails(summary, signal);
+    const prior = this.#dispatching;
+    let done!: () => void;
+    this.#dispatching = new Promise<void>((resolve) => { done = resolve; });
+    try {
+      await prior;
+      await this.dispatchPush(summary, signal);
+      await this.dispatchEmails(summary, signal);
+    } finally {
+      done();
+    }
   }
 
   private async dispatchEmails(summary: SyncSummary, signal?: AbortSignal): Promise<void> {

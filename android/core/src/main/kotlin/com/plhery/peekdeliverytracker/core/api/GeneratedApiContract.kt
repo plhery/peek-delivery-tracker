@@ -1688,6 +1688,21 @@ value class CarrierId(val rawValue: String) {
         val PostAnatolia = CarrierId("post-anatolia")
         val YolKargo = CarrierId("yol-kargo")
         val GlsNl = CarrierId("gls-nl")
+        val Akropost = CarrierId("akropost")
+        val AltcampExpress = CarrierId("altcamp-express")
+        val Fiscourier = CarrierId("fiscourier")
+        val KaizenExpress = CarrierId("kaizen-express")
+        val Kilbourne = CarrierId("kilbourne")
+        val LogisticaAlatec = CarrierId("logistica-alatec")
+        val MaamEnvios = CarrierId("maam-envios")
+        val MayCourier = CarrierId("may-courier")
+        val MundiExpress = CarrierId("mundi-express")
+        val Paqline = CarrierId("paqline")
+        val PaquexpressUrgente = CarrierId("paquexpress-urgente")
+        val RojasExpress = CarrierId("rojas-express")
+        val Servipost = CarrierId("servipost")
+        val SitraEs = CarrierId("sitra-es")
+        val TrablisaExpres = CarrierId("trablisa-expres")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3317,6 +3332,21 @@ value class CarrierId(val rawValue: String) {
             PostAnatolia,
             YolKargo,
             GlsNl,
+            Akropost,
+            AltcampExpress,
+            Fiscourier,
+            KaizenExpress,
+            Kilbourne,
+            LogisticaAlatec,
+            MaamEnvios,
+            MayCourier,
+            MundiExpress,
+            Paqline,
+            PaquexpressUrgente,
+            RojasExpress,
+            Servipost,
+            SitraEs,
+            TrablisaExpres,
         )
     }
 }

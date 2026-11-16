@@ -1679,6 +1679,21 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let postAnatolia = CarrierID(rawValue: "post-anatolia")
     static let yolKargo = CarrierID(rawValue: "yol-kargo")
     static let glsNl = CarrierID(rawValue: "gls-nl")
+    static let akropost = CarrierID(rawValue: "akropost")
+    static let altcampExpress = CarrierID(rawValue: "altcamp-express")
+    static let fiscourier = CarrierID(rawValue: "fiscourier")
+    static let kaizenExpress = CarrierID(rawValue: "kaizen-express")
+    static let kilbourne = CarrierID(rawValue: "kilbourne")
+    static let logisticaAlatec = CarrierID(rawValue: "logistica-alatec")
+    static let maamEnvios = CarrierID(rawValue: "maam-envios")
+    static let mayCourier = CarrierID(rawValue: "may-courier")
+    static let mundiExpress = CarrierID(rawValue: "mundi-express")
+    static let paqline = CarrierID(rawValue: "paqline")
+    static let paquexpressUrgente = CarrierID(rawValue: "paquexpress-urgente")
+    static let rojasExpress = CarrierID(rawValue: "rojas-express")
+    static let servipost = CarrierID(rawValue: "servipost")
+    static let sitraEs = CarrierID(rawValue: "sitra-es")
+    static let trablisaExpres = CarrierID(rawValue: "trablisa-expres")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3308,6 +3323,21 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .postAnatolia,
         .yolKargo,
         .glsNl,
+        .akropost,
+        .altcampExpress,
+        .fiscourier,
+        .kaizenExpress,
+        .kilbourne,
+        .logisticaAlatec,
+        .maamEnvios,
+        .mayCourier,
+        .mundiExpress,
+        .paqline,
+        .paquexpressUrgente,
+        .rojasExpress,
+        .servipost,
+        .sitraEs,
+        .trablisaExpres,
     ]
 
     init(from decoder: Decoder) throws {

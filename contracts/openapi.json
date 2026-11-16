@@ -56560,6 +56560,306 @@
         }
       ],
       "trackingSearchUrl": "https://www.gls-info.nl/tracking"
+    },
+    "akropost": {
+      "displayName": "Akropost",
+      "aliases": [
+        "Akropost, Servicios Postales del País Vasco, S.A.",
+        "Akropost Araba, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#157cc0",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://intranet.akropost.com/tracking"
+    },
+    "altcamp-express": {
+      "displayName": "Altcamp Express",
+      "aliases": [
+        "Alt Camp Express",
+        "Alt Camp Express, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#fecf2f",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://valls.factapp.es/IRIS/Seguimiento"
+    },
+    "fiscourier": {
+      "displayName": "Fiscourier",
+      "aliases": [
+        "Fiscourier, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#f4a448",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://fiscourier.factapp.es/IRIS/Seguimiento"
+    },
+    "kaizen-express": {
+      "displayName": "Kaizen Express",
+      "aliases": [
+        "Kaizen Expres",
+        "Kaizen Expres, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#24242b",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.kaizenexpres.com/seguimiento/"
+    },
+    "kilbourne": {
+      "displayName": "Kilbourne",
+      "aliases": [
+        "Kilbourne Corporate",
+        "Kilbourne Corporate, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#2c8068",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://kilbourne.factapp.es/IRIS/Seguimiento"
+    },
+    "logistica-alatec": {
+      "displayName": "Logística Alatec",
+      "aliases": [
+        "Alatec, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#518fcd",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://logisticaalatec.factapp.es/IRIS/Seguimiento"
+    },
+    "maam-envios": {
+      "displayName": "MAAM Envíos",
+      "aliases": [
+        "MAAM Envíos, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#000000",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://maam.factapp.es/IRIS/Seguimiento"
+    },
+    "may-courier": {
+      "displayName": "May Courier",
+      "aliases": [
+        "May Courier International",
+        "May Courier Madrid",
+        "May Courier Madrid, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#cb241a",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://maycouriermadrid.com/consulta-tu-envio/"
+    },
+    "mundi-express": {
+      "displayName": "Mundi Express",
+      "aliases": [
+        "Mundi Express Aragón",
+        "Mundi Express Aragón, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#cf3432",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://zaragoza.factapp.es/IRIS/Seguimiento"
+    },
+    "paqline": {
+      "displayName": "PAQLine",
+      "aliases": [
+        "PAQLine Express Group"
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#003ca6",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://navarra.factapp.es/IRIS/Seguimiento"
+    },
+    "paquexpress-urgente": {
+      "displayName": "Paquexpress Urgente",
+      "aliases": [
+        "Paquexpress",
+        "Paquexpress Urgente, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#d1122a",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.paquexpressurgente.com/go/seguimiento"
+    },
+    "rojas-express": {
+      "displayName": "Rojas Express",
+      "aliases": [
+        "Rojas Express Paquetería",
+        "Rojas Express, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#cc0000",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://rojasexpress.factapp.es/IRIS/Seguimiento"
+    },
+    "servipost": {
+      "displayName": "ServiPost",
+      "aliases": [
+        "Valnot",
+        "Valenciana de Notificadores",
+        "Valenciana de Notificadores, S.L.",
+        "Servipost Canarias, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#57abdd",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://localizador.servipost.es/localizador"
+    },
+    "sitra-es": {
+      "displayName": "SITRA",
+      "aliases": [
+        "Sistemas Integrados de Transporte Alcorcón",
+        "SITRA, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#009cf8",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://alcorcon.factapp.es/IRIS/Seguimiento"
+    },
+    "trablisa-expres": {
+      "displayName": "Trablisa Exprés",
+      "aliases": [
+        "Trablisa Express",
+        "Trablisa Distribución y Servicios",
+        "Trablisa Distribución y Servicios, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#1a2a4a",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://trablisa.factapp.es/IRIS/Seguimiento"
     }
   },
   "servers": [
@@ -61420,7 +61720,22 @@
           "pamukkale-kargo",
           "post-anatolia",
           "yol-kargo",
-          "gls-nl"
+          "gls-nl",
+          "akropost",
+          "altcamp-express",
+          "fiscourier",
+          "kaizen-express",
+          "kilbourne",
+          "logistica-alatec",
+          "maam-envios",
+          "may-courier",
+          "mundi-express",
+          "paqline",
+          "paquexpress-urgente",
+          "rojas-express",
+          "servipost",
+          "sitra-es",
+          "trablisa-expres"
         ]
       },
       "Stage": {

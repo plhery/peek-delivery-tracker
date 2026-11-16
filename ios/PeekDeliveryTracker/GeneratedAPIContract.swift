@@ -1714,6 +1714,54 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let tsnGroen = CarrierID(rawValue: "tsn-groen")
     static let ubsend = CarrierID(rawValue: "ubsend")
     static let varubud = CarrierID(rawValue: "varubud")
+    static let aeropaq = CarrierID(rawValue: "aeropaq")
+    static let alfaTransportes = CarrierID(rawValue: "alfa-transportes")
+    static let andesmarCargas = CarrierID(rawValue: "andesmar-cargas")
+    static let ativaLogistica = CarrierID(rawValue: "ativa-logistica")
+    static let bauerExpress = CarrierID(rawValue: "bauer-express")
+    static let bmCargo = CarrierID(rawValue: "bm-cargo")
+    static let brazilBorder = CarrierID(rawValue: "brazil-border")
+    static let buslog = CarrierID(rawValue: "buslog")
+    static let caribePack = CarrierID(rawValue: "caribe-pack")
+    static let civaCargo = CarrierID(rawValue: "civa-cargo")
+    static let correosPanama = CarrierID(rawValue: "correos-panama")
+    static let cotUy = CarrierID(rawValue: "cot-uy")
+    static let cruzDelSurPe = CarrierID(rawValue: "cruz-del-sur-pe")
+    static let dacUy = CarrierID(rawValue: "dac-uy")
+    static let dialogoLogistica = CarrierID(rawValue: "dialogo-logistica")
+    static let domexDo = CarrierID(rawValue: "domex-do")
+    static let ePick = CarrierID(rawValue: "e-pick")
+    static let euEntrego = CarrierID(rawValue: "eu-entrego")
+    static let favoritaTransportes = CarrierID(rawValue: "favorita-transportes")
+    static let flashCourier = CarrierID(rawValue: "flash-courier")
+    static let flechacarga = CarrierID(rawValue: "flechacarga")
+    static let gollog = CarrierID(rawValue: "gollog")
+    static let hopEnvios = CarrierID(rawValue: "hop-envios")
+    static let iflow = CarrierID(rawValue: "iflow")
+    static let jAndTCargoBr = CarrierID(rawValue: "j-and-t-cargo-br")
+    static let latamCargo = CarrierID(rawValue: "latam-cargo")
+    static let libertyExpress = CarrierID(rawValue: "liberty-express")
+    static let liftit = CarrierID(rawValue: "liftit")
+    static let marvisur = CarrierID(rawValue: "marvisur")
+    static let miraTransportes = CarrierID(rawValue: "mira-transportes")
+    static let movvi = CarrierID(rawValue: "movvi")
+    static let mrwVe = CarrierID(rawValue: "mrw-ve")
+    static let nobordist = CarrierID(rawValue: "nobordist")
+    static let pickit = CarrierID(rawValue: "pickit")
+    static let princesaDosCampos = CarrierID(rawValue: "princesa-dos-campos")
+    static let rapiboy = CarrierID(rawValue: "rapiboy")
+    static let rapidoOchoa = CarrierID(rawValue: "rapido-ochoa")
+    static let recibelo = CarrierID(rawValue: "recibelo")
+    static let samex = CarrierID(rawValue: "samex")
+    static let sharf = CarrierID(rawValue: "sharf")
+    static let tecmar = CarrierID(rawValue: "tecmar")
+    static let tracopa = CarrierID(rawValue: "tracopa")
+    static let tramaco = CarrierID(rawValue: "tramaco")
+    static let transportesBertolini = CarrierID(rawValue: "transportes-bertolini")
+    static let treggo = CarrierID(rawValue: "treggo")
+    static let tupaq = CarrierID(rawValue: "tupaq")
+    static let uello = CarrierID(rawValue: "uello")
+    static let urbanoAr = CarrierID(rawValue: "urbano-ar")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3378,6 +3426,54 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .tsnGroen,
         .ubsend,
         .varubud,
+        .aeropaq,
+        .alfaTransportes,
+        .andesmarCargas,
+        .ativaLogistica,
+        .bauerExpress,
+        .bmCargo,
+        .brazilBorder,
+        .buslog,
+        .caribePack,
+        .civaCargo,
+        .correosPanama,
+        .cotUy,
+        .cruzDelSurPe,
+        .dacUy,
+        .dialogoLogistica,
+        .domexDo,
+        .ePick,
+        .euEntrego,
+        .favoritaTransportes,
+        .flashCourier,
+        .flechacarga,
+        .gollog,
+        .hopEnvios,
+        .iflow,
+        .jAndTCargoBr,
+        .latamCargo,
+        .libertyExpress,
+        .liftit,
+        .marvisur,
+        .miraTransportes,
+        .movvi,
+        .mrwVe,
+        .nobordist,
+        .pickit,
+        .princesaDosCampos,
+        .rapiboy,
+        .rapidoOchoa,
+        .recibelo,
+        .samex,
+        .sharf,
+        .tecmar,
+        .tracopa,
+        .tramaco,
+        .transportesBertolini,
+        .treggo,
+        .tupaq,
+        .uello,
+        .urbanoAr,
     ]
 
     init(from decoder: Decoder) throws {

@@ -14559,7 +14559,8 @@ export const CARRIER_CAPABILITIES = {
   "starken": {
     "displayName": "Starken",
     "aliases": [
-      "Starken Chile"
+      "Starken Chile",
+      "Tur-Bus Cargo"
     ],
     "countries": [
       "CL"
@@ -19171,7 +19172,8 @@ export const CARRIER_CAPABILITIES = {
   "aeropost": {
     "displayName": "Aeropost",
     "aliases": [
-      "Aeropost Costa Rica"
+      "Aeropost Costa Rica",
+      "Aerocasillas"
     ],
     "countries": [
       "CR",
@@ -57390,6 +57392,1115 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://varubudse.opter.cloud/tt"
+  },
+  "aeropaq": {
+    "displayName": "Aeropaq",
+    "countries": [
+      "DO"
+    ],
+    "color": "#ff6c00",
+    "selectable": true,
+    "timezone": "America/Santo_Domingo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://aeropaq.com/"
+  },
+  "alfa-transportes": {
+    "displayName": "Alfa Transportes",
+    "aliases": [
+      "Alfa Transportes Ltda"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#df2140",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://alfatransportes.com.br/"
+  },
+  "andesmar-cargas": {
+    "displayName": "Andesmar Cargas",
+    "aliases": [
+      "Andesmar"
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#00519b",
+    "selectable": true,
+    "timezone": "America/Argentina/Mendoza",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://andesmarcargas.com/seguimiento?numero={trackingNumber}&tipo=seguimiento",
+    "linkRules": [
+      {
+        "domains": [
+          "andesmarcargas.com"
+        ],
+        "pathPattern": "^/seguimiento/?$",
+        "query": "^(?=(?:.*&)?tipo=seguimiento(?:&|$))(?:.*&)?numero=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://andesmarcargas.com/seguimiento"
+  },
+  "ativa-logistica": {
+    "displayName": "Ativa Logística",
+    "aliases": [
+      "Ativa Distribuição e Logística",
+      "Ativa Distribuição e Logística Ltda"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#003489",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ativalog.com.br/"
+  },
+  "bauer-express": {
+    "displayName": "Bauer Express",
+    "countries": [
+      "BR"
+    ],
+    "color": "#fdbb2d",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.bauerexpress.com.br/area-do-cliente/rastreamento-de-encomenda/"
+  },
+  "bm-cargo": {
+    "displayName": "BM Cargo",
+    "aliases": [
+      "BMCargo"
+    ],
+    "countries": [
+      "DO"
+    ],
+    "color": "#1578c0",
+    "selectable": true,
+    "timezone": "America/Santo_Domingo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://bmcargo-online.iplus.com.do/lg-es/ut/Estatus.aspx?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "bmcargo-online.iplus.com.do"
+        ],
+        "pathPattern": "^/lg-es/ut/Estatus\\.aspx$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://bmcargo-online.iplus.com.do/lg-es/ut/Estatus.aspx"
+  },
+  "brazil-border": {
+    "displayName": "Brazil Border",
+    "aliases": [
+      "Brazil Border Express"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#e00000",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://bbexp.com.br/rastreio/?code={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "bbexp.com.br"
+        ],
+        "pathPattern": "^/rastreio/?$",
+        "params": [
+          "code"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://bbexp.com.br/rastreio/"
+  },
+  "buslog": {
+    "displayName": "Buslog",
+    "countries": [
+      "BR"
+    ],
+    "color": "#214882",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://envio.buslog.com.br/rastreamento"
+  },
+  "caribe-pack": {
+    "displayName": "Caribe Pack",
+    "aliases": [
+      "CaribePack",
+      "Caribe Tours"
+    ],
+    "countries": [
+      "DO",
+      "HT"
+    ],
+    "color": "#33409b",
+    "selectable": true,
+    "timezone": "America/Santo_Domingo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://caribepack-erp.iplus.app/fe/lg-es/ut/Estatus.aspx"
+  },
+  "civa-cargo": {
+    "displayName": "Civa Cargo",
+    "aliases": [
+      "CIVA",
+      "Turismo CIVA"
+    ],
+    "countries": [
+      "PE"
+    ],
+    "color": "#582885",
+    "selectable": true,
+    "timezone": "America/Lima",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.civa.com.pe/"
+  },
+  "correos-panama": {
+    "displayName": "Correos Panamá",
+    "aliases": [
+      "Correos de Panamá",
+      "COTEL",
+      "Correos y Telégrafos Nacionales de Panamá"
+    ],
+    "countries": [
+      "PA"
+    ],
+    "color": "#2d2768",
+    "selectable": true,
+    "timezone": "America/Panama",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://operaciones.correospanama.gob.pa/IPSWebTracking/IPSWeb_item_events.aspx?itemid={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "operaciones.correospanama.gob.pa"
+        ],
+        "pathPattern": "^/IPSWebTracking/IPSWeb_item_events\\.aspx$",
+        "params": [
+          "itemid"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://operaciones.correospanama.gob.pa/IPSWebTracking/"
+  },
+  "cot-uy": {
+    "displayName": "COT Encomiendas",
+    "aliases": [
+      "COT"
+    ],
+    "countries": [
+      "UY"
+    ],
+    "color": "#f0511b",
+    "selectable": true,
+    "timezone": "America/Montevideo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cot.com.uy/encomiendas"
+  },
+  "cruz-del-sur-pe": {
+    "displayName": "Cruz del Sur Cargo",
+    "aliases": [
+      "Cruz del Sur Envíos",
+      "CDS Envíos"
+    ],
+    "countries": [
+      "PE"
+    ],
+    "color": "#001c46",
+    "selectable": true,
+    "timezone": "America/Lima",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://venta.cruzdelsurcargo.com.pe/home-filtro-busqueda"
+  },
+  "dac-uy": {
+    "displayName": "DAC",
+    "aliases": [
+      "DAC Uruguay",
+      "Agencia Central",
+      "Encomiendas del Litoral"
+    ],
+    "countries": [
+      "UY"
+    ],
+    "color": "#d50c29",
+    "selectable": true,
+    "timezone": "America/Montevideo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dac.com.uy/envios/rastrear"
+  },
+  "dialogo-logistica": {
+    "displayName": "Diálogo Logística",
+    "countries": [
+      "BR"
+    ],
+    "color": "#1a2441",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://bbmlogistica.com.br/"
+  },
+  "domex-do": {
+    "displayName": "Domex Expreso",
+    "aliases": [
+      "Domex República Dominicana"
+    ],
+    "countries": [
+      "DO"
+    ],
+    "color": "#fdda1c",
+    "selectable": true,
+    "timezone": "America/Santo_Domingo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://domex.do/rastreo?guia={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "domex.do"
+        ],
+        "pathPattern": "^/rastreo/?$",
+        "params": [
+          "guia"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://domex.do/rastreo"
+  },
+  "e-pick": {
+    "displayName": "E-Pick",
+    "countries": [
+      "AR"
+    ],
+    "color": "#0a1550",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://app.e-pick.com.ar/seguimiento?codigo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "app.e-pick.com.ar"
+        ],
+        "pathPattern": "^/seguimiento/?$",
+        "params": [
+          "codigo",
+          "code",
+          "c"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://app.e-pick.com.ar/seguimiento"
+  },
+  "eu-entrego": {
+    "displayName": "Eu Entrego",
+    "countries": [
+      "BR"
+    ],
+    "color": "#5e17eb",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.euentrego.com.br/"
+  },
+  "favorita-transportes": {
+    "displayName": "Favorita Transportes",
+    "aliases": [
+      "Favorita Transportes Ltda"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#ee1e24",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cliente.favorita.com.br/rastreamento"
+  },
+  "flash-courier": {
+    "displayName": "Flash Courier",
+    "countries": [
+      "BR"
+    ],
+    "color": "#1b2470",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.flashcourier.com.br/rastreio/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "flashcourier.com.br"
+        ],
+        "path": "^/rastreio/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.flashcourier.com.br/rastreio/"
+  },
+  "flechacarga": {
+    "displayName": "FlechaCarga",
+    "aliases": [
+      "Flecha Carga",
+      "Buspack"
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#ff0000",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.flechacarga.com/segui-tu-envio/"
+  },
+  "gollog": {
+    "displayName": "GOLLOG",
+    "aliases": [
+      "GOL Linhas Aéreas"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#ff7020",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://servicos.gollog.com.br/app/site/tracking?code={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "servicos.gollog.com.br"
+        ],
+        "pathPattern": "^/app/site/tracking/?$",
+        "params": [
+          "code"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://servicos.gollog.com.br/app/site/tracking"
+  },
+  "hop-envios": {
+    "displayName": "HOP Envíos",
+    "aliases": [
+      "HOP"
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#22cdc6",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://hopenvios.com.ar/segui-tu-envio?c={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "hopenvios.com.ar"
+        ],
+        "pathPattern": "^/segui-tu-envio/?$",
+        "params": [
+          "c"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://hopenvios.com.ar/segui-tu-envio"
+  },
+  "iflow": {
+    "displayName": "iFLOW",
+    "aliases": [
+      "iFLOW Logística"
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#83c241",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.iflow21.com/#/tracking/code/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.iflow21.com"
+        ],
+        "pathPattern": "^/?$",
+        "fragment": "^/tracking/code/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.iflow21.com/"
+  },
+  "j-and-t-cargo-br": {
+    "displayName": "J&T Cargo Brasil",
+    "aliases": [
+      "J&T Cargo Brazil"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#00b075",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.jtcargo.com.br/networkQuery?waybillNo={trackingNumber}&type=0",
+    "linkRules": [
+      {
+        "domains": [
+          "jtcargo.com.br"
+        ],
+        "pathPattern": "^/networkQuery/?$",
+        "params": [
+          "waybillNo"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jtcargo.com.br/networkQuery"
+  },
+  "latam-cargo": {
+    "displayName": "LATAM Cargo",
+    "aliases": [
+      "LATAM Cargo Brasil",
+      "LAN Cargo",
+      "TAM Cargo"
+    ],
+    "countries": [
+      "BR",
+      "CL",
+      "CO",
+      "EC",
+      "PE",
+      "US"
+    ],
+    "color": "#070b64",
+    "selectable": true,
+    "timezone": "America/Santiago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.latamcargo.com/en/trackshipment"
+  },
+  "liberty-express": {
+    "displayName": "Liberty Express",
+    "countries": [
+      "VE",
+      "US"
+    ],
+    "color": "#c2262b",
+    "selectable": true,
+    "timezone": "America/Caracas",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://iqpack.libertyexpress.com/SearchGuide"
+  },
+  "liftit": {
+    "displayName": "Liftit",
+    "countries": [
+      "CO"
+    ],
+    "color": "#2b3492",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.liftit.co/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.liftit.co"
+        ],
+        "path": "^/([A-Za-z0-9]{4,40})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.liftit.co/"
+  },
+  "marvisur": {
+    "displayName": "Expreso Marvisur",
+    "aliases": [
+      "Marvisur",
+      "Arequipa Expreso Marvisur"
+    ],
+    "countries": [
+      "PE"
+    ],
+    "color": "#e42222",
+    "selectable": true,
+    "timezone": "America/Lima",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.expresomarvisur.com/seccion/consulta-gret"
+  },
+  "mira-transportes": {
+    "displayName": "Mira Transportes",
+    "countries": [
+      "BR"
+    ],
+    "color": "#e60032",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cliente.mira.com.br/rastreamento"
+  },
+  "movvi": {
+    "displayName": "Movvi",
+    "countries": [
+      "BR"
+    ],
+    "color": "#ff6701",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://movvi.com.br/ferramentas/rastreio"
+  },
+  "mrw-ve": {
+    "displayName": "MRW Venezuela",
+    "countries": [
+      "VE"
+    ],
+    "color": "#e30613",
+    "selectable": true,
+    "timezone": "America/Caracas",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mrwve.com/"
+  },
+  "nobordist": {
+    "displayName": "Nobordist",
+    "countries": [
+      "BR"
+    ],
+    "color": "#0d2a45",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://trackmyorder.io/trackings?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "trackmyorder.io"
+        ],
+        "pathPattern": "^/trackings/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      },
+      {
+        "domains": [
+          "trackmyorder.io"
+        ],
+        "path": "^/trackings/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://trackmyorder.io/trackings"
+  },
+  "pickit": {
+    "displayName": "Pickit",
+    "countries": [
+      "AR",
+      "CL",
+      "CO",
+      "MX",
+      "PE",
+      "UY"
+    ],
+    "color": "#ff6c0e",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.pickit.com.ar/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.pickit.com.ar"
+        ],
+        "path": "^/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.pickit.com.ar/"
+  },
+  "princesa-dos-campos": {
+    "displayName": "Princesa dos Campos",
+    "aliases": [
+      "Princesa dos Campos Encomendas"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#00c800",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://encomendas.princesadoscampos.com.br/rastreio/"
+  },
+  "rapiboy": {
+    "displayName": "Rapiboy",
+    "aliases": [
+      "Rapilog"
+    ],
+    "countries": [
+      "AR",
+      "BR",
+      "CL",
+      "CO",
+      "MX",
+      "UY"
+    ],
+    "color": "#242468",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://rapilog.com.ar/SeguimientoPedido"
+  },
+  "rapido-ochoa": {
+    "displayName": "Rápido Ochoa",
+    "aliases": [
+      "Rapido Ochoa"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#de0613",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://rapidoochoa.tmsolutions.com.co/tmland/faces/public/tmland-carga/cotizador_envios.xhtml?parametroInicial=cmFwaWRvb2Nob2E="
+  },
+  "recibelo": {
+    "displayName": "Recíbelo",
+    "aliases": [
+      "Recibelo"
+    ],
+    "countries": [
+      "CL"
+    ],
+    "color": "#e6166a",
+    "selectable": true,
+    "timezone": "America/Santiago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.recibelo.cl/seguimiento/?codigo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "recibelo.cl"
+        ],
+        "pathPattern": "^/seguimiento/?$",
+        "params": [
+          "codigo"
+        ]
+      },
+      {
+        "domains": [
+          "recibelo.cl"
+        ],
+        "path": "^/seguimiento/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.recibelo.cl/seguimiento/"
+  },
+  "samex": {
+    "displayName": "Samex",
+    "countries": [
+      "CL"
+    ],
+    "color": "#34424c",
+    "selectable": true,
+    "timezone": "America/Santiago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://mysamex.samex.cl/gts/pub/locNumSeguimiento.seam?tipo=L&localizador={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mysamex.samex.cl"
+        ],
+        "pathPattern": "^/gts/pub/locNumSeguimiento\\.seam$",
+        "params": [
+          "localizador"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.samex.cl/wp-content/rastreo/rastreo/v1/rastreo_form.php"
+  },
+  "sharf": {
+    "displayName": "Sharf",
+    "aliases": [
+      "Scharff"
+    ],
+    "countries": [
+      "PE"
+    ],
+    "color": "#68002b",
+    "selectable": true,
+    "timezone": "America/Lima",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://envia.holasharf.com/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "envia.holasharf.com"
+        ],
+        "path": "^/tracking/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://envia.holasharf.com/tracking"
+  },
+  "tecmar": {
+    "displayName": "Tecmar",
+    "aliases": [
+      "Tecmar Transportes",
+      "Tecmar Transportes Ltda",
+      "Tecmar Transporte & Logística"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#253aa4",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://smonet.tecmartransportes.com.br/smonet/"
+  },
+  "tracopa": {
+    "displayName": "Tracopa",
+    "aliases": [
+      "Transportes Costarricenses Panameños"
+    ],
+    "countries": [
+      "CR",
+      "PA"
+    ],
+    "color": "#2d3186",
+    "selectable": true,
+    "timezone": "America/Costa_Rica",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tracopacr.com/Servicios_encomiendas"
+  },
+  "tramaco": {
+    "displayName": "Tramaco Express",
+    "aliases": [
+      "Tramaco",
+      "TMC Grupo Tramaco"
+    ],
+    "countries": [
+      "EC"
+    ],
+    "color": "#2a52f3",
+    "selectable": true,
+    "timezone": "America/Guayaquil",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.tramaco.com.ec/rastreo.html?guia={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tramaco.com.ec"
+        ],
+        "pathPattern": "^/rastreo\\.html$",
+        "params": [
+          "guia"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tramaco.com.ec/rastreo.html"
+  },
+  "transportes-bertolini": {
+    "displayName": "Transportes Bertolini",
+    "aliases": [
+      "TBL",
+      "Transportes Bertolini Ltda",
+      "Empresas Bertolini"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#009fe2",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tbl.com.br/RastreamentoCarga"
+  },
+  "treggo": {
+    "displayName": "Treggo",
+    "countries": [
+      "AR",
+      "CO",
+      "MX",
+      "UY"
+    ],
+    "color": "#002c42",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ar.treggo.co/tracking/"
+  },
+  "tupaq": {
+    "displayName": "Tupaq Courier",
+    "aliases": [
+      "Tupaq"
+    ],
+    "countries": [
+      "DO"
+    ],
+    "color": "#00005b",
+    "selectable": true,
+    "timezone": "America/Santo_Domingo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://app.iplus.com.do/tupaq/fe/lg-es/ut/Estatus.aspx?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "app.iplus.com.do"
+        ],
+        "pathPattern": "^/tupaq/fe/lg-es/ut/Estatus\\.aspx$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://app.iplus.com.do/tupaq/fe/lg-es/ut/Estatus.aspx"
+  },
+  "uello": {
+    "displayName": "Uello",
+    "aliases": [
+      "Uello Tecnologia S.A."
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#e63c4f",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://uello.com.br/consulta-do-pedido/"
+  },
+  "urbano-ar": {
+    "displayName": "Urbano Argentina",
+    "aliases": [
+      "Urbano Express Argentina"
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#db0814",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.urbano.com.ar/segui-tu-envio"
   }
 } as const;
 
@@ -59105,7 +60216,55 @@ export const CARRIER_IDS = [
   "tromso-budbil-sentral",
   "tsn-groen",
   "ubsend",
-  "varubud"
+  "varubud",
+  "aeropaq",
+  "alfa-transportes",
+  "andesmar-cargas",
+  "ativa-logistica",
+  "bauer-express",
+  "bm-cargo",
+  "brazil-border",
+  "buslog",
+  "caribe-pack",
+  "civa-cargo",
+  "correos-panama",
+  "cot-uy",
+  "cruz-del-sur-pe",
+  "dac-uy",
+  "dialogo-logistica",
+  "domex-do",
+  "e-pick",
+  "eu-entrego",
+  "favorita-transportes",
+  "flash-courier",
+  "flechacarga",
+  "gollog",
+  "hop-envios",
+  "iflow",
+  "j-and-t-cargo-br",
+  "latam-cargo",
+  "liberty-express",
+  "liftit",
+  "marvisur",
+  "mira-transportes",
+  "movvi",
+  "mrw-ve",
+  "nobordist",
+  "pickit",
+  "princesa-dos-campos",
+  "rapiboy",
+  "rapido-ochoa",
+  "recibelo",
+  "samex",
+  "sharf",
+  "tecmar",
+  "tracopa",
+  "tramaco",
+  "transportes-bertolini",
+  "treggo",
+  "tupaq",
+  "uello",
+  "urbano-ar"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -1723,6 +1723,54 @@ value class CarrierId(val rawValue: String) {
         val TsnGroen = CarrierId("tsn-groen")
         val Ubsend = CarrierId("ubsend")
         val Varubud = CarrierId("varubud")
+        val Aeropaq = CarrierId("aeropaq")
+        val AlfaTransportes = CarrierId("alfa-transportes")
+        val AndesmarCargas = CarrierId("andesmar-cargas")
+        val AtivaLogistica = CarrierId("ativa-logistica")
+        val BauerExpress = CarrierId("bauer-express")
+        val BmCargo = CarrierId("bm-cargo")
+        val BrazilBorder = CarrierId("brazil-border")
+        val Buslog = CarrierId("buslog")
+        val CaribePack = CarrierId("caribe-pack")
+        val CivaCargo = CarrierId("civa-cargo")
+        val CorreosPanama = CarrierId("correos-panama")
+        val CotUy = CarrierId("cot-uy")
+        val CruzDelSurPe = CarrierId("cruz-del-sur-pe")
+        val DacUy = CarrierId("dac-uy")
+        val DialogoLogistica = CarrierId("dialogo-logistica")
+        val DomexDo = CarrierId("domex-do")
+        val EPick = CarrierId("e-pick")
+        val EuEntrego = CarrierId("eu-entrego")
+        val FavoritaTransportes = CarrierId("favorita-transportes")
+        val FlashCourier = CarrierId("flash-courier")
+        val Flechacarga = CarrierId("flechacarga")
+        val Gollog = CarrierId("gollog")
+        val HopEnvios = CarrierId("hop-envios")
+        val Iflow = CarrierId("iflow")
+        val JAndTCargoBr = CarrierId("j-and-t-cargo-br")
+        val LatamCargo = CarrierId("latam-cargo")
+        val LibertyExpress = CarrierId("liberty-express")
+        val Liftit = CarrierId("liftit")
+        val Marvisur = CarrierId("marvisur")
+        val MiraTransportes = CarrierId("mira-transportes")
+        val Movvi = CarrierId("movvi")
+        val MrwVe = CarrierId("mrw-ve")
+        val Nobordist = CarrierId("nobordist")
+        val Pickit = CarrierId("pickit")
+        val PrincesaDosCampos = CarrierId("princesa-dos-campos")
+        val Rapiboy = CarrierId("rapiboy")
+        val RapidoOchoa = CarrierId("rapido-ochoa")
+        val Recibelo = CarrierId("recibelo")
+        val Samex = CarrierId("samex")
+        val Sharf = CarrierId("sharf")
+        val Tecmar = CarrierId("tecmar")
+        val Tracopa = CarrierId("tracopa")
+        val Tramaco = CarrierId("tramaco")
+        val TransportesBertolini = CarrierId("transportes-bertolini")
+        val Treggo = CarrierId("treggo")
+        val Tupaq = CarrierId("tupaq")
+        val Uello = CarrierId("uello")
+        val UrbanoAr = CarrierId("urbano-ar")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3387,6 +3435,54 @@ value class CarrierId(val rawValue: String) {
             TsnGroen,
             Ubsend,
             Varubud,
+            Aeropaq,
+            AlfaTransportes,
+            AndesmarCargas,
+            AtivaLogistica,
+            BauerExpress,
+            BmCargo,
+            BrazilBorder,
+            Buslog,
+            CaribePack,
+            CivaCargo,
+            CorreosPanama,
+            CotUy,
+            CruzDelSurPe,
+            DacUy,
+            DialogoLogistica,
+            DomexDo,
+            EPick,
+            EuEntrego,
+            FavoritaTransportes,
+            FlashCourier,
+            Flechacarga,
+            Gollog,
+            HopEnvios,
+            Iflow,
+            JAndTCargoBr,
+            LatamCargo,
+            LibertyExpress,
+            Liftit,
+            Marvisur,
+            MiraTransportes,
+            Movvi,
+            MrwVe,
+            Nobordist,
+            Pickit,
+            PrincesaDosCampos,
+            Rapiboy,
+            RapidoOchoa,
+            Recibelo,
+            Samex,
+            Sharf,
+            Tecmar,
+            Tracopa,
+            Tramaco,
+            TransportesBertolini,
+            Treggo,
+            Tupaq,
+            Uello,
+            UrbanoAr,
         )
     }
 }

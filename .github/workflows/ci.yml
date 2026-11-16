@@ -126,6 +126,11 @@ jobs:
           node-version: 26
           cache: npm
       - run: npm ci
+      # Built in a step of its own, Playwright's wait for the server (playwright.config.ts) times only its start:
+      # a build of 90-120 s inside that wait ran out of time on a slow runner.
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_USE_API: 'false'
       - run: npm run test:e2e -- --shard=${{ matrix.shard }}/8
 
   # Builds the container while the tests run. On main, where the instance's public build

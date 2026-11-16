@@ -714,15 +714,16 @@ export async function allRead<T extends readonly unknown[] | []>(reads: T): Prom
 }
 
 /**
- * The start of the parcel's current hour, which opens at a minute of its own: the
- * parcels checked hourly or less often are spread over the hour rather than all due at
- * its start, so no run takes them all. Copies of one number open at the same minute
- * and still share their lookups.
+ * The start of the parcel's current window of `minutes`, an hour or a carrier's interval (`refreshLimit`), which opens
+ * at a minute of its own: the parcels checked hourly or less often, and those of a carrier that spaces its lookups
+ * out, are spread over the window rather than all due at its start, so no run takes them all or asks such a carrier
+ * for all of its parcels at once. Copies of one number open at the same minute and still share their lookups.
  */
-function parcelHourStart(parcel: JsonObject, local: DateTime): DateTime {
+function parcelWindowStart(parcel: JsonObject, local: DateTime, minutes = 60): DateTime {
   const number = normalizeTrackingNumber(String(parcel.tracking_number ?? ''));
-  const minute = createHash('sha256').update(number).digest().readUInt32BE(0) % 60;
-  return local.minus({ minutes: minute }).startOf('hour').plus({ minutes: minute });
+  const minute = createHash('sha256').update(number).digest().readUInt32BE(0) % 60 % minutes;
+  const shifted = local.minus({ minutes: minute }).startOf('minute');
+  return shifted.minus({ minutes: shifted.minute % minutes }).plus({ minutes: minute });
 }
 
 interface ScheduleContext {
@@ -766,7 +767,7 @@ function scheduledSyncDue(
     // after it was added. One only opened gets its check from the opening.
     if (unfollowed || unwatched || unseen >= ALERTED_UNSEEN_MS) return false;
     const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-    return !(Date.parse(String(parcel.last_synced_at ?? '')) >= parcelHourStart(parcel, local).minus({ hours: 23 }).toMillis());
+    return !(Date.parse(String(parcel.last_synced_at ?? '')) >= parcelWindowStart(parcel, local).minus({ hours: 23 }).toMillis());
   }
   // An account's parcel whose number nobody has answered for a day, with the rechecks on: once
   // 1, 3 and 7 days after it was added, archived or not, and no more from 14 days. Any
@@ -784,7 +785,7 @@ function scheduledSyncDue(
   const lastChecked = Date.parse(String(parcel.last_synced_at ?? ''));
   if (!Number.isFinite(lastChecked)) return true;
   const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-  const hourStart = parcelHourStart(parcel, local);
+  const hourStart = parcelWindowStart(parcel, local);
   // A provider filed the parcel under a carrier with an adapter of its own that the check did
   // not ask: the next run asks that carrier, archived or delivered too. That check clears the
   // mark; failing that, it lapses.
@@ -845,10 +846,11 @@ function scheduledSyncDue(
   // outside routing (Amazon Shipping) or the carrier's answer without the parcel's progress. The
   // carrier's next answer clears the error, and the 2-minute checks resume.
   if (byTheMinute && lastMile && parcel.sync_status === 'error' && now.getTime() - lastChecked < LAST_MILE_BACKOFF_MS) return false;
-  // Compare schedule windows so request duration does not skip the next tick.
-  const windowStart = byTheMinute
-    ? local.startOf('minute').minus({ minutes: local.minute % intervalMinutes })
-    : hourStart;
+  // Compare schedule windows so request duration does not skip the next tick. A carrier's own
+  // interval opens at the parcel's minute, as its hour does.
+  const windowStart = !byTheMinute ? hourStart
+    : minimum ? parcelWindowStart(parcel, local, intervalMinutes)
+    : local.startOf('minute').minus({ minutes: local.minute % intervalMinutes });
   if (!(lastChecked < windowStart.toMillis())) return false;
   // A carrier's own limit counts from the last check as well, from the run that made it: a check
   // late in one window is not followed by another as the next opens.

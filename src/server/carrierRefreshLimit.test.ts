@@ -63,3 +63,30 @@ describe('a carrier asking for at most one check an hour', () => {
     expect(await checks('royal-mail')).toBe(0);
   });
 });
+
+// Every parcel of such a carrier came due at once as each of its intervals opened, so a run asked it for all of them
+// back to back and it answered the later ones with 429s.
+describe('a carrier that spaces its lookups out', () => {
+  it('has each number\'s interval open at a minute of its own, so its parcels come apart', async () => {
+    // Two numbers whose half hours open at :01/:31 and :28/:58, both last checked as the 09:30 half hour opened.
+    const parcels: JsonObject[] = ['TEST0002', 'TEST0003'].map((number, i) => ({ id: `p${i}`, user_id: `owner${i}`, carrier: 'aliexpress',
+      tracking_number: number, current_stage: 'in_transit', created_at: '2026-09-08T08:00:00Z', last_synced_at: '2026-09-09T09:30:20Z',
+      sync_status: 'ok', archived_at: null, carrier_data: { last_update: '2026-09-09T09:00:00Z',
+        routing: { version: 1, configured_carrier: 'aliexpress', last_event_at: '2026-09-09T09:00:00Z' } } }));
+    const asked: Record<string, string[]> = {};
+    // A run every 2 minutes, from 10:00:30 to 11:00:30.
+    for (let minute = 0; minute <= 60; minute += 2) {
+      const now = new Date(Date.parse('2026-09-09T10:00:30Z') + minute * 60_000);
+      const adapter = { fetch: vi.fn(async (): Promise<CarrierResult> => ({ status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-09T09:00:00Z' })) };
+      await new TrackingSyncService(client(parcels) as unknown as SupabaseServiceClient, adapter, null, () => now).sync();
+      for (const [, number] of adapter.fetch.mock.calls as unknown as Array<[string, string]>) {
+        (asked[number] ??= []).push(now.toISOString().slice(11, 19));
+        parcels.find((parcel) => parcel.tracking_number === number)!.last_synced_at = now.toISOString();
+      }
+    }
+    // Both catch up in the first run. TEST0003 then keeps to its own minute. TEST0002's half hour opens just after
+    // that check, so it waits out the carrier's interval (less a run's spread) until its own minute comes round.
+    // Before, both were asked at 10:00:30, 10:30:30 and 11:00:30.
+    expect(asked).toEqual({ TEST0002: ['10:00:30', '10:26:30', '10:52:30'], TEST0003: ['10:00:30', '10:28:30', '10:58:30'] });
+  });
+});

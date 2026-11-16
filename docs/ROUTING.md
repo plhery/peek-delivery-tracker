@@ -417,7 +417,8 @@ own pacing refuses sends nothing and starts no wait.
 
 A parcel checked hourly or less often has an hour of its own, opening at a minute its
 number gives, so those checks spread over the hour rather than all falling in its
-first runs; copies of one number open together and share their lookups. A carrier tracked only through its own browser, such
+first runs. A carrier's own interval opens at the parcel's minute too, so a run does not
+ask it for all of its parcels at once. Copies of one number open together and share their lookups. A carrier tracked only through its own browser, such
 as Royal Mail, fails every parcel alike while that browser is down or times out: once it
 fails that way in a run, the run's other checks take the same failure without asking it.
 

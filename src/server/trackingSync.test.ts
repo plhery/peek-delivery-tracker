@@ -4604,8 +4604,12 @@ describe('TrackingSyncService', () => {
     { carrier: 'swiss-post', stage: 'in_transit', time: '10:10:00', checked: 1 },
     { carrier: 'spring-gds', stage: 'in_transit', time: '10:02:00', checked: 0 },
     { carrier: 'spring-gds', stage: 'in_transit', time: '10:10:00', checked: 0 },
-    { carrier: 'spring-gds', stage: 'in_transit', time: '10:29:59', checked: 0 },
-    { carrier: 'spring-gds', stage: 'in_transit', time: '10:30:00', checked: 1 },
+    // Its half hour opens at the number's minute (:18 and :48), and the interval counts from the last check, less a
+    // run's spread.
+    { carrier: 'spring-gds', stage: 'in_transit', time: '10:25:14', checked: 0 },
+    { carrier: 'spring-gds', stage: 'in_transit', time: '10:25:15', checked: 1 },
+    { carrier: 'spring-gds', stage: 'in_transit', last: '10:18:15', time: '10:47:59', checked: 0 },
+    { carrier: 'spring-gds', stage: 'in_transit', last: '10:18:15', time: '10:48:00', checked: 1 },
     { carrier: 'spring-gds', stage: 'registered', time: '10:10:00', checked: 0 },
     { carrier: 'spring-gds', stage: 'registered', time: '10:30:00', checked: 1 },
     { carrier: 'swiss-post', stage: 'registered', time: '10:02:00', checked: 0 },
@@ -4613,10 +4617,10 @@ describe('TrackingSyncService', () => {
     { carrier: 'swiss-post', stage: 'customs', time: '10:02:00', checked: 0 },
     { carrier: 'swiss-post', stage: 'registered', time: '10:10:00', checked: 1 },
     { carrier: 'gls-de', stage: 'in_transit', time: '10:02:00', checked: 0 },
-  ])('schedules $carrier at $stage at $time (active: $active, provider: $provider, browser: $browser, failed: $failed): $checked checks', async ({ carrier, active, provider, browser, failed, stage, time, checked }) => {
+  ])('schedules $carrier at $stage at $time (active: $active, provider: $provider, browser: $browser, failed: $failed, last: $last): $checked checks', async ({ carrier, active, provider, browser, failed, last, stage, time, checked }) => {
     const parcel = {
       id: 'scheduled', carrier, current_stage: stage, tracking_number: 'TEST1234',
-      last_synced_at: '2026-09-09T10:00:15Z', sync_status: failed ? 'error' : 'ok',
+      last_synced_at: `2026-09-09T${last ?? '10:00:15'}Z`, sync_status: failed ? 'error' : 'ok',
       ...(provider ? { carrier_data: { tracking_provider: provider } } : {}),
       ...(active ? { carrier_data: { original_carrier: carrier, active_tracking_carrier: active } } : {}),
       ...(browser ? { carrier_data: { routing: { version: 1, configured_carrier: carrier, browser_check: true } } } : {}),

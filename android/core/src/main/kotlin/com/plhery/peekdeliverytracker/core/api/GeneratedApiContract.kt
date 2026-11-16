@@ -1616,6 +1616,64 @@ value class CarrierId(val rawValue: String) {
         val Yqs = CarrierId("yqs")
         val Yusuda = CarrierId("yusuda")
         val MemphisCourier = CarrierId("memphis-courier")
+        val FourAExpress = CarrierId("4a-express")
+        val A2bFi = CarrierId("a2b-fi")
+        val A3Transport = CarrierId("a3-transport")
+        val Afimex = CarrierId("afimex")
+        val Airtrans = CarrierId("airtrans")
+        val ApolloBudbiler = CarrierId("apollo-budbiler")
+        val BlaKurer = CarrierId("bla-kurer")
+        val BuhoLogistics = CarrierId("buho-logistics")
+        val ChicExpress = CarrierId("chic-express")
+        val CourierExpressMalta = CarrierId("courier-express-malta")
+        val Duxiuexp = CarrierId("duxiuexp")
+        val DyloExpress = CarrierId("dylo-express")
+        val Easycourier = CarrierId("easycourier")
+        val Enset = CarrierId("enset")
+        val EnviopackAr = CarrierId("enviopack-ar")
+        val EnviopackMx = CarrierId("enviopack-mx")
+        val EsbjergGods = CarrierId("esbjerg-gods")
+        val Freja = CarrierId("freja")
+        val GfLogistikk = CarrierId("gf-logistikk")
+        val GlsCa = CarrierId("gls-ca")
+        val Golucky = CarrierId("golucky")
+        val HartmannInternational = CarrierId("hartmann-international")
+        val HssTransport = CarrierId("hss-transport")
+        val HurtigGutta = CarrierId("hurtig-gutta")
+        val Interfjord = CarrierId("interfjord")
+        val ItcDelivery = CarrierId("itc-delivery")
+        val Itide = CarrierId("itide")
+        val Kaukokiito = CarrierId("kaukokiito")
+        val KurerAs = CarrierId("kurer-as")
+        val Leman = CarrierId("leman")
+        val Lillebil = CarrierId("lillebil")
+        val MebelTaxi = CarrierId("mebel-taxi")
+        val Meyership = CarrierId("meyership")
+        val MilesExpress = CarrierId("miles-express")
+        val OckCn = CarrierId("ock-cn")
+        val Ocolchonespack = CarrierId("ocolchonespack")
+        val Oohpod = CarrierId("oohpod")
+        val Pakettipiste = CarrierId("pakettipiste")
+        val Premo = CarrierId("premo")
+        val Primewell = CarrierId("primewell")
+        val QuickCouriersPk = CarrierId("quick-couriers-pk")
+        val QuickTransport = CarrierId("quick-transport")
+        val Ramberg = CarrierId("ramberg")
+        val Sandahls = CarrierId("sandahls")
+        val SendaInsular = CarrierId("senda-insular")
+        val Shiplowcost = CarrierId("shiplowcost")
+        val Smafrakt = CarrierId("smafrakt")
+        val TjwFragt = CarrierId("tjw-fragt")
+        val TmgJp = CarrierId("tmg-jp")
+        val TransgoMx = CarrierId("transgo-mx")
+        val TransportesCondesa = CarrierId("transportes-condesa")
+        val TransportsBesson = CarrierId("transports-besson")
+        val TravelExpress = CarrierId("travel-express")
+        val Trobud = CarrierId("trobud")
+        val Veoy = CarrierId("veoy")
+        val Xwwt = CarrierId("xwwt")
+        val Ziegler = CarrierId("ziegler")
+        val Zufall = CarrierId("zufall")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3173,6 +3231,64 @@ value class CarrierId(val rawValue: String) {
             Yqs,
             Yusuda,
             MemphisCourier,
+            FourAExpress,
+            A2bFi,
+            A3Transport,
+            Afimex,
+            Airtrans,
+            ApolloBudbiler,
+            BlaKurer,
+            BuhoLogistics,
+            ChicExpress,
+            CourierExpressMalta,
+            Duxiuexp,
+            DyloExpress,
+            Easycourier,
+            Enset,
+            EnviopackAr,
+            EnviopackMx,
+            EsbjergGods,
+            Freja,
+            GfLogistikk,
+            GlsCa,
+            Golucky,
+            HartmannInternational,
+            HssTransport,
+            HurtigGutta,
+            Interfjord,
+            ItcDelivery,
+            Itide,
+            Kaukokiito,
+            KurerAs,
+            Leman,
+            Lillebil,
+            MebelTaxi,
+            Meyership,
+            MilesExpress,
+            OckCn,
+            Ocolchonespack,
+            Oohpod,
+            Pakettipiste,
+            Premo,
+            Primewell,
+            QuickCouriersPk,
+            QuickTransport,
+            Ramberg,
+            Sandahls,
+            SendaInsular,
+            Shiplowcost,
+            Smafrakt,
+            TjwFragt,
+            TmgJp,
+            TransgoMx,
+            TransportesCondesa,
+            TransportsBesson,
+            TravelExpress,
+            Trobud,
+            Veoy,
+            Xwwt,
+            Ziegler,
+            Zufall,
         )
     }
 }

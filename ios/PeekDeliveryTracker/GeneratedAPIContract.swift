@@ -1607,6 +1607,64 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let yqs = CarrierID(rawValue: "yqs")
     static let yusuda = CarrierID(rawValue: "yusuda")
     static let memphisCourier = CarrierID(rawValue: "memphis-courier")
+    static let fourAExpress = CarrierID(rawValue: "4a-express")
+    static let a2bFi = CarrierID(rawValue: "a2b-fi")
+    static let a3Transport = CarrierID(rawValue: "a3-transport")
+    static let afimex = CarrierID(rawValue: "afimex")
+    static let airtrans = CarrierID(rawValue: "airtrans")
+    static let apolloBudbiler = CarrierID(rawValue: "apollo-budbiler")
+    static let blaKurer = CarrierID(rawValue: "bla-kurer")
+    static let buhoLogistics = CarrierID(rawValue: "buho-logistics")
+    static let chicExpress = CarrierID(rawValue: "chic-express")
+    static let courierExpressMalta = CarrierID(rawValue: "courier-express-malta")
+    static let duxiuexp = CarrierID(rawValue: "duxiuexp")
+    static let dyloExpress = CarrierID(rawValue: "dylo-express")
+    static let easycourier = CarrierID(rawValue: "easycourier")
+    static let enset = CarrierID(rawValue: "enset")
+    static let enviopackAr = CarrierID(rawValue: "enviopack-ar")
+    static let enviopackMx = CarrierID(rawValue: "enviopack-mx")
+    static let esbjergGods = CarrierID(rawValue: "esbjerg-gods")
+    static let freja = CarrierID(rawValue: "freja")
+    static let gfLogistikk = CarrierID(rawValue: "gf-logistikk")
+    static let glsCa = CarrierID(rawValue: "gls-ca")
+    static let golucky = CarrierID(rawValue: "golucky")
+    static let hartmannInternational = CarrierID(rawValue: "hartmann-international")
+    static let hssTransport = CarrierID(rawValue: "hss-transport")
+    static let hurtigGutta = CarrierID(rawValue: "hurtig-gutta")
+    static let interfjord = CarrierID(rawValue: "interfjord")
+    static let itcDelivery = CarrierID(rawValue: "itc-delivery")
+    static let itide = CarrierID(rawValue: "itide")
+    static let kaukokiito = CarrierID(rawValue: "kaukokiito")
+    static let kurerAs = CarrierID(rawValue: "kurer-as")
+    static let leman = CarrierID(rawValue: "leman")
+    static let lillebil = CarrierID(rawValue: "lillebil")
+    static let mebelTaxi = CarrierID(rawValue: "mebel-taxi")
+    static let meyership = CarrierID(rawValue: "meyership")
+    static let milesExpress = CarrierID(rawValue: "miles-express")
+    static let ockCn = CarrierID(rawValue: "ock-cn")
+    static let ocolchonespack = CarrierID(rawValue: "ocolchonespack")
+    static let oohpod = CarrierID(rawValue: "oohpod")
+    static let pakettipiste = CarrierID(rawValue: "pakettipiste")
+    static let premo = CarrierID(rawValue: "premo")
+    static let primewell = CarrierID(rawValue: "primewell")
+    static let quickCouriersPk = CarrierID(rawValue: "quick-couriers-pk")
+    static let quickTransport = CarrierID(rawValue: "quick-transport")
+    static let ramberg = CarrierID(rawValue: "ramberg")
+    static let sandahls = CarrierID(rawValue: "sandahls")
+    static let sendaInsular = CarrierID(rawValue: "senda-insular")
+    static let shiplowcost = CarrierID(rawValue: "shiplowcost")
+    static let smafrakt = CarrierID(rawValue: "smafrakt")
+    static let tjwFragt = CarrierID(rawValue: "tjw-fragt")
+    static let tmgJp = CarrierID(rawValue: "tmg-jp")
+    static let transgoMx = CarrierID(rawValue: "transgo-mx")
+    static let transportesCondesa = CarrierID(rawValue: "transportes-condesa")
+    static let transportsBesson = CarrierID(rawValue: "transports-besson")
+    static let travelExpress = CarrierID(rawValue: "travel-express")
+    static let trobud = CarrierID(rawValue: "trobud")
+    static let veoy = CarrierID(rawValue: "veoy")
+    static let xwwt = CarrierID(rawValue: "xwwt")
+    static let ziegler = CarrierID(rawValue: "ziegler")
+    static let zufall = CarrierID(rawValue: "zufall")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3164,6 +3222,64 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .yqs,
         .yusuda,
         .memphisCourier,
+        .fourAExpress,
+        .a2bFi,
+        .a3Transport,
+        .afimex,
+        .airtrans,
+        .apolloBudbiler,
+        .blaKurer,
+        .buhoLogistics,
+        .chicExpress,
+        .courierExpressMalta,
+        .duxiuexp,
+        .dyloExpress,
+        .easycourier,
+        .enset,
+        .enviopackAr,
+        .enviopackMx,
+        .esbjergGods,
+        .freja,
+        .gfLogistikk,
+        .glsCa,
+        .golucky,
+        .hartmannInternational,
+        .hssTransport,
+        .hurtigGutta,
+        .interfjord,
+        .itcDelivery,
+        .itide,
+        .kaukokiito,
+        .kurerAs,
+        .leman,
+        .lillebil,
+        .mebelTaxi,
+        .meyership,
+        .milesExpress,
+        .ockCn,
+        .ocolchonespack,
+        .oohpod,
+        .pakettipiste,
+        .premo,
+        .primewell,
+        .quickCouriersPk,
+        .quickTransport,
+        .ramberg,
+        .sandahls,
+        .sendaInsular,
+        .shiplowcost,
+        .smafrakt,
+        .tjwFragt,
+        .tmgJp,
+        .transgoMx,
+        .transportesCondesa,
+        .transportsBesson,
+        .travelExpress,
+        .trobud,
+        .veoy,
+        .xwwt,
+        .ziegler,
+        .zufall,
     ]
 
     init(from decoder: Decoder) throws {

@@ -3,7 +3,7 @@ title: Xinghe Freight tracking: GZXH…YQ numbers and scans
 description: Track a Xinghe Freight (星和货运) parcel from Guangzhou: what a GZXH…YQ number looks like, whose tracker it runs on, what its steps mean and who to ask.
 slug: xinghe-freight-tracking
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-16
 ---
 
 Xinghe Freight (星和货运, 广州星和货运代理有限公司) is a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with Xinghe, look for a number of GZXH, ten digits and YQ, the shape Peek knows as Xinghe's, and paste it in the box above. Xinghe's tracking runs on the tracker of GZYL, another Guangzhou forwarder: the tracking box on Xinghe's website sends your number there. That tracker sits on a bare server address, over plain HTTP. Peek reads it for you, and asks tracking services when that tracker doesn't know your number.
@@ -65,7 +65,7 @@ Xinghe's own site says nothing about parcels for online shoppers: no delivery ti
 
 **Only `Order information received` or `货物电子信息已经收到`.** The seller has created the order, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for Xinghe Freight" on peektracker.com.** Peek has no step for your number yet: GZYL's tracker doesn't know it or holds only a plan of steps written ahead, which can end in `Delivered`, and the tracking services Peek asks have nothing either. Peek keeps checking. If the tracker still holds only that plan two days later and nothing else has answered for the number, peektracker.com shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." instead, and Peek from then on checks it daily, and weekly once a week has passed since you added it. For a number it doesn't know, GZYL's tracker shows one result with the number as the reference and every other field empty. Peek takes that answer as Xinghe listing the shipment without a scan yet, so it keeps showing "Waiting for Xinghe Freight", with no request to check the number: compare it with the seller's message yourself.
+**"Waiting for Xinghe Freight" on peektracker.com.** Peek has no step for your number yet: GZYL's tracker doesn't know it or holds only a plan of steps written ahead, which can end in `Delivered`, and the tracking services Peek asks have nothing either. Peek keeps checking, asking GZYL's tracker every 6 hours after the first few hours. For a number it doesn't know, GZYL's tracker shows one result with the number as the reference and every other field empty. Peek takes that answer as Xinghe listing the shipment without a scan yet, and a plan written ahead as Xinghe having the order, so either way it keeps showing "Waiting for Xinghe Freight", with no request to check the number: compare it with the seller's message yourself.
 
 **Stuck at customs.** If you're asked to pay import charges, see [parcels held at customs](guide:customs). If the parcel stays there for days, tell the seller.
 
@@ -113,7 +113,7 @@ Peek doesn't know: neither the tracker's steps nor Xinghe's site name a company.
 
 ### Why does Peek show no tracking for my GZXH number yet?
 
-The tracker may not have the order yet, or only steps written ahead, which can end in `Delivered`: Peek holds them back. Peek asks tracking services too and keeps checking. For a number the tracker doesn't know, Peek makes no request to check the number, so compare it with the seller's message; if the tracker still holds only steps written ahead two days later, peektracker.com does ask you to check it. If nothing comes after a few days, ask the seller whether the parcel has really been sent.
+The tracker may not have the order yet, or only steps written ahead, which can end in `Delivered`: Peek holds them back. Peek asks tracking services too and keeps checking. For a number the tracker doesn't know, or one it holds only steps written ahead for, Peek makes no request to check the number, so compare it with the seller's message. If nothing comes after a few days, ask the seller whether the parcel has really been sent.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (home page)](http://xinghe-express.cn/) – company name, freight forwarding services, tracking box that opens GZYL's tracker, hotline and email

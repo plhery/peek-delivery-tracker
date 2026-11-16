@@ -603,6 +603,15 @@ class Localizer(
         return text(key, mapOf("carrier" to CarrierCatalog.shared.info(named, language).displayName))
     }
 
+    /**
+     * A status's shorter words for a widget's line too narrow for `status`, the status `key`'s: `widget.<key>`, as the
+     * stages have them; none where the language's are the same or there are none.
+     */
+    fun widgetShortStatus(key: String, status: String): String? {
+        val shortKey = "widget.$key"
+        return text(shortKey).takeIf { it != shortKey && it != status }
+    }
+
     /** The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends. */
     fun parcelDeliveryEstimate(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val value = shownEstimate(parcel, now) ?: return null

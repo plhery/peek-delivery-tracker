@@ -196,17 +196,14 @@ internal fun openList(context: Context): Action = actionStartActivity(listIntent
 
 /**
  * `ParcelListStatus`'s `ViewThatFits`: a row's line where it fits `width`, the stage and the day; else the day alone;
- * else the stage, cut short. What opens the line takes a capital, "Tomorrow" ([openingLine]).
+ * else the stage, in the widget's shorter words where the app's don't fit ([fittingStatus]). What opens the line takes
+ * a capital, "Tomorrow" ([openingLine]).
  */
 internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width: Dp): String {
-    val whole = parcel.listLine.openingLine(layout.locale)
-    val day = parcel.listDay?.openingLine(layout.locale) ?: return whole
     fun fits(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal) <= width
-    return when {
-        fits(whole) -> whole
-        fits(day) -> day
-        else -> parcel.listStatus.openingLine(layout.locale)
-    }
+    val whole = parcel.listLine.openingLine(layout.locale)
+    if (fits(whole)) return whole
+    return parcel.listDay?.openingLine(layout.locale)?.takeIf(::fits) ?: layout.type.fittingStatus(parcel, layout.locale, layout.statusPoints, width)
 }
 
 /** `listAccessibilityLabel`: what TalkBack reads for a row, the parcel's name, its carrier, its stage and its day. */

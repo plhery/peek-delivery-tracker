@@ -61,7 +61,8 @@ object DeliveryWidgetListSample {
         val zone = ZoneId.systemDefault()
         val today = now.atZone(zone).toLocalDate()
         val parcels = samples.mapIndexed { index, sample ->
-            val status = sample.stage?.let { localizer.text(it.localizationKey) } ?: localizer.text("status.unannounced")
+            val key = sample.stage?.localizationKey ?: "status.unannounced"
+            val status = localizer.text(key)
             val arrived = sample.delivered?.let { now.minus(it) }
             val estimate = sample.day?.let { offset ->
                 val day = today.plusDays(offset)
@@ -82,7 +83,7 @@ object DeliveryWidgetListSample {
                 detail = arrived?.let { localizer.deliveryDate(it, now) } ?: estimate ?: status,
                 isOutForDelivery = sample.stage == TrackingStage.OutForDelivery,
                 deliveredAt = arrived,
-                stage = DeliveryWidgetStage.of(sample.stage, status),
+                stage = DeliveryWidgetStage.of(sample.stage, status, localizer.widgetShortStatus(key, status)),
                 named = sample.name != null,
                 section = section(sample).rawValue,
                 nextUp = sample.stage == TrackingStage.ReadyForPickup,

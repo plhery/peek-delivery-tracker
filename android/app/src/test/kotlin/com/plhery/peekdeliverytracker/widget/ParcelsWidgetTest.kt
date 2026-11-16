@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.SizeF
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.glance.appwidget.testing.unit.GlanceAppWidgetUnitTest
@@ -30,12 +31,15 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetStage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.listDay
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
 import com.plhery.peekdeliverytracker.core.listStatus
+import com.plhery.peekdeliverytracker.core.localizationKey
 import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
@@ -528,8 +532,9 @@ class ParcelsWidgetTest {
     }
 
     /**
-     * A line too long for its room keeps the day, and the stage where even the day is too long; TalkBack reads both. The
-     * day takes a capital where it opens the line.
+     * A line too long for its room keeps the day, and the stage where even the day is too long, in the widget's shorter
+     * words where its own don't fit; TalkBack reads both, in the app's words. The day takes a capital where it opens the
+     * line.
      */
     @Test
     fun aLineTooLongKeepsTheDay() {
@@ -539,7 +544,8 @@ class ParcelsWidgetTest {
         fun width(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal)
         assertEquals("$status · tomorrow", fittingLine(parcel, layout, width(parcel.listLine)))
         assertEquals("Tomorrow", fittingLine(parcel, layout, width(parcel.listLine) - 1.dp))
-        assertEquals(status, fittingLine(parcel, layout, width("Tomorrow") - 1.dp))
+        assertEquals("Out for delivery", status)
+        assertEquals("Delivering", fittingLine(parcel, layout, width("Tomorrow") - 1.dp))
         assertTrue(rowDescription(parcel).endsWith("$status, tomorrow"))
     }
 
@@ -637,6 +643,60 @@ class ParcelsWidgetTest {
                 assertEquals(roomy.layout.statusPoints, linePoints(roomy.layout, line, roomy.layout.words))
             }
         }
+    }
+
+    /**
+     * At the largest text, in three cells by two and on its side, a parcel's stage fits its row in every language, with
+     * or without the new-update dot: in the app's words where they fit at the line's least size, else in the widget's
+     * shorter ones. Portuguese's "Pronta para levantamento" takes them at the default size too, and keeps its own where
+     * the row has room.
+     */
+    @Test
+    fun aStageTooLongForItsRowTakesItsShorterWords() {
+        val type = WidgetText(fontScaled(1.3f))
+        var shortened = 0
+        for (language in AppLanguage.entries) {
+            val copy = Localizer(language)
+            val list = sampleList(language)
+            for (size in listOf(LIST_THREE_BY_TWO, LAUNCHER_ON_ITS_SIDE)) {
+                val layout = sections(list, size, type).layout
+                for (stage in TrackingStage.entries) {
+                    for (newUpdate in listOf(null, true)) {
+                        val parcel = staged(list, copy, stage).copy(newUpdate = newUpdate)
+                        val (line, points, room) = drawnLine(parcel, layout)
+                        val what = "${language.rawValue} ${stage.rawValue} ${size.width}, dot $newUpdate: $line at $points"
+                        assertTrue(what, type.lines(line, points, FontWeight.Normal, room) <= 1)
+                        val own = parcel.listStatus.openingLine(layout.locale)
+                        if (type.lines(own, layout.statusPoints * LINE_FLOOR, FontWeight.Normal, room) <= 1) {
+                            assertEquals(what, own, line)
+                        } else {
+                            assertEquals(what, parcel.stage?.short, line)
+                            shortened += 1
+                        }
+                    }
+                }
+            }
+        }
+        assertTrue(shortened > 0)
+        val portuguese = sampleList(AppLanguage.Pt)
+        val pickup = staged(portuguese, Localizer(AppLanguage.Pt), TrackingStage.ReadyForPickup)
+        assertEquals("Por levantar", drawnLine(pickup, sections(portuguese, LIST_THREE_BY_TWO).layout).first)
+        assertEquals("Pronta para levantamento", drawnLine(pickup, sections(portuguese, LIST_MEDIUM).layout).first)
+    }
+
+    /** The list's first parcel at `stage`, with no day, as the app publishes it in `copy`'s words. */
+    private fun staged(list: DeliveryWidgetList, copy: Localizer, stage: TrackingStage): DeliveryWidgetParcel {
+        val status = copy.text(stage.localizationKey)
+        val short = copy.widgetShortStatus(stage.localizationKey, status)
+        return list.parcels.first().copy(detail = status, stage = DeliveryWidgetStage.of(stage, status, short))
+    }
+
+    /** The line a row of `layout` shows for `parcel`, its size and the room it keeps to. */
+    private fun drawnLine(parcel: DeliveryWidgetParcel, layout: ListLayout): Triple<String, Float, Dp> {
+        if (layout.lineRows) return lineRowEnd(parcel, layout).let { Triple(it.line, it.points, it.width) }
+        val room = layout.words - parcel.dotRoom
+        val line = fittingLine(parcel, layout, room)
+        return Triple(line, linePoints(layout, line, room), room)
     }
 
     /**

@@ -688,6 +688,31 @@ class DeliveryWidgetTests {
         assertEquals(DeliveryWidgetStage("Waiting for the carrier", "shippingbox.fill", listOf("#654299", "#D1B5FF")), waiting.stage)
     }
 
+    /**
+     * A stage's shorter words for the widget's narrow lines, published beside the app's own and kept through the
+     * snapshot: none where a language's are the same, nor for a status that names no stage.
+     */
+    @Test
+    fun aStagePublishesTheWidgetsShorterWords() {
+        val portuguese = Localizer(AppLanguage.Pt)
+        val pickup = portuguese.text(TrackingStage.ReadyForPickup.localizationKey)
+        assertEquals("Pronta para levantamento", pickup)
+        assertEquals("Por levantar", portuguese.widgetShortStatus(TrackingStage.ReadyForPickup.localizationKey, pickup))
+        val chinese = Localizer(AppLanguage.Zh)
+        assertNull(chinese.widgetShortStatus(TrackingStage.ReadyForPickup.localizationKey, chinese.text(TrackingStage.ReadyForPickup.localizationKey)))
+        val english = Localizer(AppLanguage.En)
+        assertNull(english.widgetShortStatus(TrackingStage.Delivered.localizationKey, english.text(TrackingStage.Delivered.localizationKey)))
+        assertNull(english.widgetShortStatus("status.unannounced", english.text("status.unannounced")))
+        val stage = DeliveryWidgetStage.of(TrackingStage.ReadyForPickup, pickup, "Por levantar")
+        val parcel = widgetParcel(label = "Parcel", outForDelivery = false).copy(detail = pickup, stage = stage)
+        assertEquals("Por levantar", parcel.listShortStatus)
+        assertEquals(pickup, parcel.listStatus)
+        assertNull(parcel.copy(stage = DeliveryWidgetStage.of(TrackingStage.Delivered, "Delivered")).listShortStatus)
+        val shared = DeliveryWidgetSharedStore(MemoryDefaults())
+        assertTrue(shared.save(DeliveryWidgetSnapshot(Instant.EPOCH, "pt", listOf(parcel))))
+        assertEquals(stage, requireNotNull(shared.snapshot).parcels.single().stage)
+    }
+
     /** A day the app writes to follow a status takes a capital where it opens a line, in each language's own way. */
     @Test
     fun aDayOpeningAWidgetLineTakesACapital() {

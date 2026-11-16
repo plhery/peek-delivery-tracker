@@ -1953,7 +1953,7 @@ class ParcelStore(
                 detail = first,
                 isOutForDelivery = parcel.currentStage == TrackingStage.OutForDelivery,
                 // As the list's rows mark it.
-                stage = DeliveryWidgetStage.of(parcel.currentStage, status),
+                stage = DeliveryWidgetStage.of(parcel.currentStage, status, localizer.widgetShortStatus(parcel.displayStatus.key, status)),
                 named = parcel.label.nonEmpty != null,
                 later = DeliveryWidgetDays.later(than = first, at = midnights) { detail(it) ?: status },
             )

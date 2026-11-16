@@ -133,14 +133,15 @@ object DeliveryWidgetDays {
 
 /**
  * A parcel's stage as a row of the app's list shows it: the status in the app's words, and the symbol and colour that
- * mark it, the colour light then dark as hex.
+ * mark it, the colour light then dark as hex. `short` is the status in the widget's shorter words, for a line too
+ * narrow for the app's ([Localizer.widgetShortStatus]); none where they are the same.
  */
 @Serializable
-data class DeliveryWidgetStage(val status: String, val symbol: String, val tint: List<String>) {
+data class DeliveryWidgetStage(val status: String, val symbol: String, val tint: List<String>, val short: String? = null) {
     companion object {
         /** As the list's rows mark a parcel at `stage`, `status` in the app's words (`ParcelStore.widgetParcel`). */
-        fun of(stage: TrackingStage?, status: String): DeliveryWidgetStage =
-            DeliveryWidgetStage(status, stage?.metadata?.symbol ?: "shippingbox.fill", ExperimentalPalette.tintHex(stage))
+        fun of(stage: TrackingStage?, status: String, short: String? = null): DeliveryWidgetStage =
+            DeliveryWidgetStage(status, stage?.metadata?.symbol ?: "shippingbox.fill", ExperimentalPalette.tintHex(stage), short)
     }
 }
 

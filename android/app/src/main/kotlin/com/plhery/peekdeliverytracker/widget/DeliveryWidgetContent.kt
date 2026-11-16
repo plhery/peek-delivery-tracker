@@ -70,6 +70,8 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPictures
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetTimeline
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
+import com.plhery.peekdeliverytracker.core.listShortStatus
+import com.plhery.peekdeliverytracker.core.listStatus
 import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.ui.draw.drawPeekMark
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
@@ -77,6 +79,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
 import com.plhery.peekdeliverytracker.ui.symbols.drawSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.materialSymbols
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import java.util.Locale
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
@@ -316,13 +319,28 @@ internal val DeliveryWidgetParcel.dotRoom: Dp
 
 /**
  * The size of a parcel's stage or day `text` in a line `room` wide, past the new-update dot where it has one: `points`
- * where it fits, else as much smaller as it takes, down to 0.8 of it as a card's status, past which it is cut short.
+ * where it fits, else as much smaller as it takes, down to [LINE_FLOOR] of it as a card's status, past which it is cut
+ * short.
  */
-internal fun WidgetText.lineFit(text: String, points: Float, room: Dp): Float = fit(text, points, FontWeight.Normal, room, 1, 0.8f)
+internal fun WidgetText.lineFit(text: String, points: Float, room: Dp): Float = fit(text, points, FontWeight.Normal, room, 1, LINE_FLOOR)
+
+/**
+ * A parcel's stage as a line `room` wide shows it from `points` ([lineFit]): in the app's words where they fit at
+ * [LINE_FLOOR] of that size, else in the widget's shorter ones where the app gave some ([listShortStatus]), so that a
+ * stage is cut short only where neither fits.
+ */
+internal fun WidgetText.fittingStatus(parcel: DeliveryWidgetParcel, locale: Locale, points: Float, room: Dp): String {
+    val status = parcel.listStatus.openingLine(locale)
+    val short = parcel.listShortStatus?.openingLine(locale) ?: return status
+    return if (lines(status, points * LINE_FLOOR, FontWeight.Normal, room) <= 1) status else short
+}
 
 /** "New update." as TalkBack reads it first on a parcel with the dot (#72), as the app's cards say it; none without. */
 internal fun newUpdateSpoken(parcel: DeliveryWidgetParcel, languageCode: String): String? =
     if (parcel.newUpdate == true) "${ExtensionLocalizer(languageCode).text("parcel.newUpdate")}." else null
+
+/** The least of its size a parcel's line takes before it is cut short ([lineFit]). */
+internal const val LINE_FLOOR = 0.8f
 
 internal val NEW_UPDATE_DOT = 5.dp
 internal val NEW_UPDATE_GAP = 5.dp

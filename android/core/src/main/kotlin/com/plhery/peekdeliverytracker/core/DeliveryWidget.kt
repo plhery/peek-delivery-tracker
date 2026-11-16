@@ -240,6 +240,10 @@ val DeliveryWidgetParcel.listName: String
 val DeliveryWidgetParcel.listStatus: String
     get() = stage?.status ?: detail
 
+/** The stage in the widget's shorter words, for a line too narrow for [listStatus]; none where the app gave none. */
+val DeliveryWidgetParcel.listShortStatus: String?
+    get() = stage?.short
+
 /** `listLine.day`: the day the parcel is expected or arrived, when the app knows one. */
 val DeliveryWidgetParcel.listDay: String?
     get() = stage?.let { detail.takeIf { it != stage.status } }

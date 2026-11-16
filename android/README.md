@@ -100,7 +100,9 @@ changes while the app runs, it words the days again for the new zone's midnights
     day; a medium one has two columns about as tall as each other (`DeliveryWidgetList.columns`); a large one has a
     line each where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up (`DeliveryWidgetList.layouts`),
     and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line doesn't fit, the day stays; where
-    neither fits, the stage does, at a smaller size where it must (down to 0.8 of it, then cut short).
+    neither fits, the stage does, at a smaller size where it must (down to 0.8 of it). A stage too long even then
+    takes the widget's shorter words (`widget.stage.*`, which the app publishes as the stage's `short`), in rows,
+    passes and cards alike; the list and the parcel's page keep their own.
 
   The app draws it itself (`ParcelsWidget.draw`) rather than through Glance's sessions, at each size the launcher
   gives taken to its whole dp and 2 dp under (`ParcelsWidget.fitting`): a launcher can frame a widget a little smaller

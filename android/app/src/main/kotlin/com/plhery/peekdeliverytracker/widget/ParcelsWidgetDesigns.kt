@@ -56,7 +56,6 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.listDay
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
-import com.plhery.peekdeliverytracker.core.listStatus
 import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
@@ -247,7 +246,9 @@ private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp
                 Spacer(GlanceModifier.height(2.dp))
                 Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     if (parcel.newUpdate == true) NewUpdateDot(WidgetCardColors.pair(card.ink, NEW_UPDATE_OPACITY))
-                    Text(parcel.listStatus.openingLine(locale), GlanceModifier.defaultWeight(), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption)))
+                    val room = minOf(inner, LIST_CARD_WORDS) - parcel.dotRoom
+                    val status = type.fittingStatus(parcel, locale, caption, room)
+                    Text(status, GlanceModifier.defaultWeight(), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(type.lineFit(status, caption, room))))
                 }
             }
         }
@@ -343,11 +344,11 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
         Spacer(GlanceModifier.height(PASS_SPACING))
         Spacer(GlanceModifier.defaultWeight())
         if (metrics.oneLine) {
-            val status = parcel.listStatus.openingLine(locale)
+            val room = words * 0.5f - parcel.dotRoom
+            val status = type.fittingStatus(parcel, locale, metrics.caption2, room)
             Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(parcel.listName, GlanceModifier.defaultWeight(), maxLines = 1, style = nameStyle)
                 Spacer(GlanceModifier.width(6.dp))
-                val room = words * 0.5f - parcel.dotRoom
                 val points = type.lineFit(status, metrics.caption2, room)
                 dot?.let { NewUpdateDot(it) }
                 Text(
@@ -358,7 +359,7 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
         } else {
             val whole = parcel.listLine.openingLine(locale)
             val room = words - parcel.dotRoom
-            val line = if (width(whole) <= room) whole else parcel.listDay?.openingLine(locale) ?: whole
+            val line = if (width(whole) <= room) whole else parcel.listDay?.openingLine(locale) ?: type.fittingStatus(parcel, locale, metrics.caption2, room)
             Text(parcel.listName, maxLines = 1, style = nameStyle)
             Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 dot?.let { NewUpdateDot(it) }

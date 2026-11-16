@@ -1369,7 +1369,17 @@
     "widget.settingDescription": "Show your next deliveries in the Home Screen widgets you add.",
     "widget.settingDescription.android": "Show your next deliveries in the home screen widgets you add.",
     "widget.settingTitle": "Home Screen widgets",
-    "widget.settingTitle.android": "Home screen widgets"
+    "widget.settingTitle.android": "Home screen widgets",
+    "widget.stage.accepted": "With carrier",
+    "widget.stage.customs": "At customs",
+    "widget.stage.exception": "Issue",
+    "widget.stage.failed_attempt": "Attempted",
+    "widget.stage.in_transit": "In transit",
+    "widget.stage.out_for_delivery": "Delivering",
+    "widget.stage.pending": "Added",
+    "widget.stage.ready_for_pickup": "To pick up",
+    "widget.stage.registered": "Label made",
+    "widget.stage.returned": "Returned"
   },
   "de": {
     "account.actionFailed": "Die Aktion konnte nicht abgeschlossen werden. Versuche es erneut.",
@@ -2741,7 +2751,17 @@
     "widget.settingDescription": "Zeige deine nächsten Lieferungen in deinen Home-Bildschirm-Widgets.",
     "widget.settingDescription.android": "Zeige deine nächsten Lieferungen in deinen Startbildschirm-Widgets.",
     "widget.settingTitle": "Home-Bildschirm-Widgets",
-    "widget.settingTitle.android": "Startbildschirm-Widgets"
+    "widget.settingTitle.android": "Startbildschirm-Widgets",
+    "widget.stage.accepted": "Eingegangen",
+    "widget.stage.customs": "Beim Zoll",
+    "widget.stage.exception": "Problem",
+    "widget.stage.failed_attempt": "Verpasst",
+    "widget.stage.in_transit": "Unterwegs",
+    "widget.stage.out_for_delivery": "In Zustellung",
+    "widget.stage.pending": "Hinzugefügt",
+    "widget.stage.ready_for_pickup": "Abholbereit",
+    "widget.stage.registered": "Angekündigt",
+    "widget.stage.returned": "Retoure"
   },
   "fr": {
     "account.actionFailed": "Impossible de terminer cette action. Réessaie.",
@@ -4113,7 +4133,17 @@
     "widget.settingDescription": "Affiche tes prochaines livraisons dans les widgets de l’écran d’accueil.",
     "widget.settingDescription.android": "Affiche tes prochaines livraisons dans les widgets de l’écran d’accueil.",
     "widget.settingTitle": "Widgets d’écran d’accueil",
-    "widget.settingTitle.android": "Widgets d’écran d’accueil"
+    "widget.settingTitle.android": "Widgets d’écran d’accueil",
+    "widget.stage.accepted": "Expédié",
+    "widget.stage.customs": "À la douane",
+    "widget.stage.exception": "Problème",
+    "widget.stage.failed_attempt": "Tentative",
+    "widget.stage.in_transit": "En transit",
+    "widget.stage.out_for_delivery": "En livraison",
+    "widget.stage.pending": "Ajouté",
+    "widget.stage.ready_for_pickup": "À retirer",
+    "widget.stage.registered": "Étiqueté",
+    "widget.stage.returned": "Retourné"
   },
   "it": {
     "account.actionFailed": "Impossibile completare questa operazione. Riprova.",
@@ -5485,7 +5515,17 @@
     "widget.settingDescription": "Mostra le prossime consegne nei widget della schermata Home.",
     "widget.settingDescription.android": "Mostra le prossime consegne nei widget della schermata Home.",
     "widget.settingTitle": "Widget della schermata Home",
-    "widget.settingTitle.android": "Widget della schermata Home"
+    "widget.settingTitle.android": "Widget della schermata Home",
+    "widget.stage.accepted": "Accettato",
+    "widget.stage.customs": "In dogana",
+    "widget.stage.exception": "Problema",
+    "widget.stage.failed_attempt": "Tentativo",
+    "widget.stage.in_transit": "In transito",
+    "widget.stage.out_for_delivery": "In consegna",
+    "widget.stage.pending": "Aggiunto",
+    "widget.stage.ready_for_pickup": "Da ritirare",
+    "widget.stage.registered": "Etichettato",
+    "widget.stage.returned": "Reso"
   },
   "es": {
     "account.actionFailed": "No se ha podido completar la acción. Inténtalo de nuevo.",
@@ -6857,7 +6897,17 @@
     "widget.settingDescription": "Muestra tus próximas entregas en los widgets de la pantalla de inicio.",
     "widget.settingDescription.android": "Muestra tus próximas entregas en los widgets de la pantalla de inicio.",
     "widget.settingTitle": "Widgets de inicio",
-    "widget.settingTitle.android": "Widgets de inicio"
+    "widget.settingTitle.android": "Widgets de inicio",
+    "widget.stage.accepted": "Admitido",
+    "widget.stage.customs": "En aduanas",
+    "widget.stage.exception": "Incidencia",
+    "widget.stage.failed_attempt": "Intento",
+    "widget.stage.in_transit": "En tránsito",
+    "widget.stage.out_for_delivery": "En reparto",
+    "widget.stage.pending": "Añadido",
+    "widget.stage.ready_for_pickup": "Por recoger",
+    "widget.stage.registered": "Etiquetado",
+    "widget.stage.returned": "Devuelto"
   },
   "pt": {
     "account.actionFailed": "Não foi possível concluir a ação. Tenta novamente.",
@@ -8229,7 +8279,17 @@
     "widget.settingDescription": "Mostra as próximas entregas nos widgets do ecrã principal.",
     "widget.settingDescription.android": "Mostra as próximas entregas nos widgets do ecrã principal.",
     "widget.settingTitle": "Widgets do ecrã principal",
-    "widget.settingTitle.android": "Widgets do ecrã principal"
+    "widget.settingTitle.android": "Widgets do ecrã principal",
+    "widget.stage.accepted": "Aceite",
+    "widget.stage.customs": "Alfândega",
+    "widget.stage.exception": "Problema",
+    "widget.stage.failed_attempt": "Tentativa",
+    "widget.stage.in_transit": "Em trânsito",
+    "widget.stage.out_for_delivery": "Em entrega",
+    "widget.stage.pending": "Adicionada",
+    "widget.stage.ready_for_pickup": "Por levantar",
+    "widget.stage.registered": "Etiquetada",
+    "widget.stage.returned": "Devolvida"
   },
   "pt-br": {
     "account.actionFailed": "Não foi possível concluir esta ação. Tente novamente.",
@@ -9601,7 +9661,17 @@
     "widget.settingDescription": "Mostre suas próximas entregas nos widgets que você adicionar à Tela de Início.",
     "widget.settingDescription.android": "Mostre suas próximas entregas nos widgets que você adicionar à tela inicial.",
     "widget.settingTitle": "Widgets da Tela de Início",
-    "widget.settingTitle.android": "Widgets da tela inicial"
+    "widget.settingTitle.android": "Widgets da tela inicial",
+    "widget.stage.accepted": "Recebida",
+    "widget.stage.customs": "Alfândega",
+    "widget.stage.exception": "Problema",
+    "widget.stage.failed_attempt": "Tentativa",
+    "widget.stage.in_transit": "Em trânsito",
+    "widget.stage.out_for_delivery": "Em rota",
+    "widget.stage.pending": "Adicionada",
+    "widget.stage.ready_for_pickup": "Para retirar",
+    "widget.stage.registered": "Etiquetada",
+    "widget.stage.returned": "Devolvida"
   },
   "pl": {
     "account.actionFailed": "Nie udało się wykonać tej czynności. Spróbuj ponownie.",
@@ -10973,7 +11043,17 @@
     "widget.settingDescription": "Pokazuj najbliższe dostawy w widżetach na ekranie początkowym.",
     "widget.settingDescription.android": "Pokazuj najbliższe dostawy w widżetach na ekranie głównym.",
     "widget.settingTitle": "Widżety ekranu początkowego",
-    "widget.settingTitle.android": "Widżety ekranu głównego"
+    "widget.settingTitle.android": "Widżety ekranu głównego",
+    "widget.stage.accepted": "Przyjęta",
+    "widget.stage.customs": "W odprawie",
+    "widget.stage.exception": "Problem",
+    "widget.stage.failed_attempt": "Awizowana",
+    "widget.stage.in_transit": "W drodze",
+    "widget.stage.out_for_delivery": "U kuriera",
+    "widget.stage.pending": "Dodana",
+    "widget.stage.ready_for_pickup": "Do odbioru",
+    "widget.stage.registered": "Utworzona",
+    "widget.stage.returned": "Zwrócona"
   },
   "ru": {
     "account.actionFailed": "Не удалось выполнить действие. Попробуйте ещё раз.",
@@ -12345,7 +12425,17 @@
     "widget.settingDescription": "Показывать ближайшие доставки в виджетах на экране «Домой».",
     "widget.settingDescription.android": "Показывать ближайшие доставки в виджетах на главном экране.",
     "widget.settingTitle": "Виджеты на экране «Домой»",
-    "widget.settingTitle.android": "Виджеты на главном экране"
+    "widget.settingTitle.android": "Виджеты на главном экране",
+    "widget.stage.accepted": "Принята",
+    "widget.stage.customs": "На таможне",
+    "widget.stage.exception": "Проблема",
+    "widget.stage.failed_attempt": "Не вручена",
+    "widget.stage.in_transit": "В пути",
+    "widget.stage.out_for_delivery": "У курьера",
+    "widget.stage.pending": "Добавлена",
+    "widget.stage.ready_for_pickup": "К выдаче",
+    "widget.stage.registered": "Оформлена",
+    "widget.stage.returned": "Возврат"
   },
   "zh": {
     "account.actionFailed": "无法完成此操作，请重试。",
@@ -13717,6 +13807,16 @@
     "widget.settingDescription": "在你添加的主屏幕小组件中显示接下来的包裹。",
     "widget.settingDescription.android": "在你添加的桌面小组件中显示接下来的包裹。",
     "widget.settingTitle": "主屏幕小组件",
-    "widget.settingTitle.android": "桌面小组件"
+    "widget.settingTitle.android": "桌面小组件",
+    "widget.stage.accepted": "已揽收",
+    "widget.stage.customs": "清关中",
+    "widget.stage.exception": "需要留意",
+    "widget.stage.failed_attempt": "派送未成功",
+    "widget.stage.in_transit": "运输中",
+    "widget.stage.out_for_delivery": "派送中",
+    "widget.stage.pending": "已加入跟踪",
+    "widget.stage.ready_for_pickup": "待取件",
+    "widget.stage.registered": "已生成面单",
+    "widget.stage.returned": "已退回"
   }
 }

@@ -471,7 +471,7 @@ them, the account has a Live Activity device, or one of the parcel's links has a
 So is someone who looked lately: for an hour after the account's apps read its parcels
 (recorded at most every five minutes) or one of the parcel's links was opened. Any other
 open parcel, a held return among them, is checked hourly
-([`unwatched_package_ids`](../supabase/migrations/20261114090000_held_return_unwatched.sql), read in
+([`unwatched_package_ids`](../supabase/migrations/20261116014500_link_alerts_read_once.sql), read in
 pages by id: the database's API ends each answer at its row limit, and a parcel left past it
 would keep the cadence of one someone is waiting for).
 

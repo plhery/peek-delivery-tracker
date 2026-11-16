@@ -160,12 +160,14 @@ begin
   if 'UNWATCHED60' = any(pg_temp.unwatched()) then
     raise exception 'A lookup that was just made is checked hourly';
   end if;
-  -- After an hour it is checked hourly, and it stays on the schedule for 24 hours.
+  -- After an hour it is checked hourly, whatever account opened its apps since, and it stays on the schedule for 24 hours.
   update public.parcel_links set last_opened_at = now() - interval '2 hours' where id = lookup_link;
+  insert into public.account_activity (user_id, last_opened_at) values (quiet, now());
   select array_agg(tracking_number) into followed from public.followed_one_off_packages(now() - interval '24 hours');
   if not 'UNWATCHED60' = any(pg_temp.unwatched()) or followed is distinct from array['UNWATCHED60'] then
     raise exception 'A lookup opened two hours ago is not checked hourly: followed %', followed;
   end if;
+  delete from public.account_activity where user_id = quiet;
   perform public.add_parcel_link_alert(lookup_link, null, 'https://fcm.googleapis.com/fcm/send/unwatched-viewer', 'k', 'a', 'en', 'all');
   if 'UNWATCHED60' = any(pg_temp.unwatched()) then
     raise exception 'A lookup with an alert on is checked hourly';
@@ -174,6 +176,18 @@ begin
   if not 'UNWATCHED60' = any(pg_temp.unwatched()) then
     raise exception 'A stopped link''s viewer keeps its parcel on the full schedule';
   end if;
+  -- Its owner's alert still counts, and keeps it followed once the link has not been opened for a day.
+  update public.parcel_links set last_opened_at = now() - interval '2 days' where id = lookup_link;
+  if exists (select 1 from public.followed_one_off_packages(now() - interval '24 hours') where tracking_number = 'UNWATCHED60') then
+    raise exception 'A stopped link''s viewer keeps its lookup followed';
+  end if;
+  insert into public.parcel_link_alerts (link_id, apns_token, apns_environment, locale, preset, owner)
+  values (lookup_link, repeat('ef', 32), 'production', 'en', 'all', true);
+  select array_agg(tracking_number) into followed from public.followed_one_off_packages(now() - interval '24 hours');
+  if 'UNWATCHED60' = any(pg_temp.unwatched()) or followed is distinct from array['UNWATCHED60'] then
+    raise exception 'A stopped link''s owner alert leaves its parcel off the full schedule: followed %', followed;
+  end if;
+  delete from public.parcel_link_alerts where link_id = lookup_link and owner;
 
   -- A quiet account's shared parcel keeps the full schedule while its link is opened; its other parcels do not.
   insert into public.parcel_links (package_id, created_by, last_opened_at)

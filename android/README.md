@@ -28,8 +28,8 @@ Tests only Google Play's build has are in `app/src/testPlay`; F-Droid's are in `
 The tests in `app/src/androidTest`, and Google Play's own in `app/src/androidTestPlay`, run on a device or emulator
 (`./gradlew :app:connectedPlayDebugAndroidTest`, one class with
 `-Pandroid.testInstrumentationRunnerArguments.class=<class>`). `AccessibilityChecksDeviceTest` runs the
-Accessibility Test Framework's checks, Accessibility Scanner's, on the main screens through Compose's accessibility
-checks: an error fails it, and the text contrast it warns of goes to the log under `PeekAccessibility`. Robolectric
+Accessibility Test Framework's checks, Accessibility Scanner's, on the main screens in both appearances through
+Compose's accessibility checks: an error fails it, and the text contrast it warns of goes to the log under `PeekAccessibility`. Robolectric
 skips these checks.
 
 ## CI

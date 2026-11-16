@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { AUTOMATIC_CARRIER_IDS, carrierAdapter } from './carriers';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
 import type { JsonObject } from './types';
@@ -264,18 +265,21 @@ describe('persistent tracking routing', () => {
     expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('direct_support_opportunity', expect.anything());
   });
   it('reports a direct-support opportunity once per number, not on every check', async () => {
+    // A carrier still tracked through providers, read from the catalog: a new adapter must not break this.
+    const withoutAdapter = [...AUTOMATIC_CARRIER_IDS].filter((id) => carrierAdapter(id) === 'universal').sort()[0]!;
+    expect(directCarrier(withoutAdapter)).toBe(false);
     const reported = () => vi.mocked(monitoring.reportRoutingEvent).mock.calls
       .filter(([code]) => code === 'direct_support_opportunity').map(([, context]) => context.provider);
     const first = setup();
-    first.universal.mockResolvedValue({ ...history(), discovered_carrier: 'aaa-cooper' });
+    first.universal.mockResolvedValue({ ...history(), discovered_carrier: withoutAdapter });
     const result = await first.router.fetch(parcel(), false);
-    expect(reported()).toEqual(['aaa-cooper']);
-    expect(result.result.routing).toMatchObject({ support_opportunity: 'aaa-cooper' });
+    expect(reported()).toEqual([withoutAdapter]);
+    expect(result.result.routing).toMatchObject({ support_opportunity: withoutAdapter });
     const next = setup(new Date('2026-09-10T13:00:00Z'));
-    next.universal.mockResolvedValue({ ...history('2026-09-10T12:30:00Z'), discovered_carrier: 'aaa-cooper' });
+    next.universal.mockResolvedValue({ ...history('2026-09-10T12:30:00Z'), discovered_carrier: withoutAdapter });
     await next.router.fetch(parcel({ carrier_data: result.result }), true);
     expect(next.universal).toHaveBeenCalled();
-    expect(reported()).toEqual(['aaa-cooper']);
+    expect(reported()).toEqual([withoutAdapter]);
   });
   it.each([
     ['registered', { ...thinHistory(), current_stage: 'registered',

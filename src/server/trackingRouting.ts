@@ -49,6 +49,11 @@ const CARRIER_RETRY_AWAIT_MAX_MS = HOUR;
  * same number: DHL's tracking holding only DHL Paket's record of a piece in DHL Express's range.
  */
 const RECORD_HOLDERS: Readonly<Record<string, string>> = { parcel_de_division: 'dhl' };
+/**
+ * A carrier's answers without history that show it has the order: the shipment listed, booked or labelled without a
+ * scan (`listed`), or only steps it wrote ahead of their time (`written_ahead`).
+ */
+const KNOWN_REASONS: ReadonlySet<string> = new Set(['listed', 'written_ahead']);
 // no_history: a universal provider, or the carrier listing the parcel without scans, answered without any history.
 // invalid_input: the source refused the number or an input as one it does not issue, or found several parcels under it.
 export type RoutingFailureKind = 'rate_limited' | 'not_found' | 'no_history' | 'input_required' | 'invalid_input' | 'verification' | 'schema' | 'transport';
@@ -75,7 +80,8 @@ export interface RoutedResult {
  */
 /**
  * `holder`: the carrier the failure says holds the number's record (RECORD_HOLDERS). `listed`: the carrier's own
- * answer without history lists the shipment, booked or labelled without a scan, so it knows the number.
+ * answer without history lists the shipment, booked or labelled without a scan, or holds only the steps it wrote
+ * ahead of their time (KNOWN_REASONS), so it knows the number.
  */
 interface Failure {
   count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true; wrong_number?: true; holder?: string;
@@ -1021,7 +1027,7 @@ export class TrackingRouter {
       const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
       const wrongNumber = kind === 'invalid_input' && carrierErrorReason(error) === 'wrong_number';
       const holder = universalSource ? undefined : RECORD_HOLDERS[carrierErrorReason(error) ?? ''];
-      const listed = !universalSource && kind === 'no_history' && carrierErrorReason(error) === 'listed';
+      const listed = !universalSource && kind === 'no_history' && KNOWN_REASONS.has(carrierErrorReason(error) ?? '');
       const failure: Failure = { count, kind, ...(userError ? { user_error: userError } : {}), ...(abstained ? { abstained: true as const } : {}),
         ...(wrongNumber ? { wrong_number: true as const } : {}), ...(holder && holder !== provider ? { holder } : {}),
         ...(listed ? { listed: true as const } : {}),

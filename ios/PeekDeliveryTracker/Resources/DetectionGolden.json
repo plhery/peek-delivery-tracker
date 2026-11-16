@@ -108998,6 +108998,17 @@
     ]
   },
   {
+    "input": "WS12368808141435820DL",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "whatsship"
+    ],
+    "asked": [
+      "whatsship"
+    ]
+  },
+  {
     "input": "WS89725933",
     "carrier": "unknown",
     "confidence": "low",

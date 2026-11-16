@@ -59727,6 +59727,31 @@
         }
       ],
       "trackingSearchUrl": "https://conecta.log.br/rastreio.php"
+    },
+    "whatsship": {
+      "displayName": "WhatsShip",
+      "aliases": [
+        "Whats Ship",
+        "WhatsShip Logistics Inc."
+      ],
+      "color": "#2563eb",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "whatsship",
+        "recognitionRank": 695,
+        "recognitionPattern": "^WS\\d{17}DL$"
+      },
+      "trackingUrlTemplate": "https://www.whatsship.com/#tracking",
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^WS\\d{17}DL$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.whatsship.com/"
     }
   }
 }

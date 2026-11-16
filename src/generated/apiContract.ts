@@ -59728,6 +59728,31 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://conecta.log.br/rastreio.php"
+  },
+  "whatsship": {
+    "displayName": "WhatsShip",
+    "aliases": [
+      "Whats Ship",
+      "WhatsShip Logistics Inc."
+    ],
+    "color": "#2563eb",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "whatsship",
+      "recognitionRank": 695,
+      "recognitionPattern": "^WS\\d{17}DL$"
+    },
+    "trackingUrlTemplate": "https://www.whatsship.com/#tracking",
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^WS\\d{17}DL$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.whatsship.com/"
   }
 } as const;
 
@@ -61538,7 +61563,8 @@ export const CARRIER_IDS = [
   "wakilni",
   "xalq-global",
   "zmc-express",
-  "onlog-express"
+  "onlog-express",
+  "whatsship"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

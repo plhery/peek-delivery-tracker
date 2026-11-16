@@ -207,9 +207,11 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   rows, in a medium widget down one column without headings before one is left out (`DeliveryWidgetList.fits`).
   Until the app has drawn every listed parcel's card, the widget shows rows. The small widget and that line open the
   list
-  (`peekdeliverytracker://parcels`); in the medium and large ones, a card, pass or row opens its parcel. The app
-  publishes every parcel with its section, whether it is Next up, and its carrier, the first few with their last
-  steps, and draws each listed carrier's truck into the App Group.
+  (`peekdeliverytracker://parcels`); in the medium and large ones, a card, pass or row opens its parcel. A card,
+  pass or row carries the list's dot for new updates, which VoiceOver reads first; "Mark new updates" hides it, and
+  opening the parcel clears it. The app publishes every parcel with its section, whether it is Next up, whether the
+  list marks it, and its carrier, the first few with their last steps, and draws each listed carrier's truck into the
+  App Group.
 - **The widgets' days** follow the clock while the app stays closed. The app also words each parcel's day, section
   and Next up for the next seven midnights where they change, and both widgets and Siri's Next delivery read the words
   for the moment they show: "tomorrow" reads "today" on the day, last night's delivery "yesterday", and a

@@ -32,6 +32,9 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     /// Its last tracking steps, latest first, which the Parcels widget shows of a parcel alone in a large widget. Only
     /// the first `DeliveryWidgetSelection.limit` parcels carry them.
     var steps: [DeliveryWidgetStep]? = nil
+    /// Whether the app's list marks it with the dot for updates since it was last opened (`showsNewUpdate`), which the
+    /// Parcels widget shows too. None while Settings has the mark off, or from an app that didn't publish it.
+    var newUpdate: Bool? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!

@@ -126,6 +126,7 @@ private struct ParcelListWidgetView: View {
     var body: some View {
         let content = design
             .environment(\.locale, ExtensionLocalizer.locale(for: entry.languageCode))
+            .environment(\.widgetNewUpdateWords, copy.text("parcel.newUpdate") + ".")
         // WidgetKit redacts a placeholder; the gallery's sample shows the widget as it will look.
         if entry.isSample { content.unredacted() } else { content }
     }
@@ -208,13 +209,15 @@ private struct ParcelCards: View {
                     // The wide route is drawn 364 by 104 and fills the widget's width; the words start under it.
                     let width = proxy.size.width + margins.leading + margins.trailing
                     VStack(alignment: .leading, spacing: 12) {
-                        DeliveryWidgetCardView(parcel: only.parcel, card: only.card, art: only.art, shape: .wide)
+                        DeliveryWidgetCardView(parcel: only.parcel, card: only.card, art: only.art, shape: .wide,
+                                               marked: only.parcel.newUpdate == true)
                             .frame(height: max(width * 104 / 364 + 40 - margins.top, 0))
                         ParcelListSteps(steps: only.parcel.steps ?? [], card: only.card, now: now)
                     }
                 }
             } else {
-                DeliveryWidgetCardView(parcel: only.parcel, card: only.card, art: only.art, shape: route)
+                DeliveryWidgetCardView(parcel: only.parcel, card: only.card, art: only.art, shape: route,
+                                       marked: only.parcel.newUpdate == true)
             }
         }
         .containerBackground(for: .widget) { DeliveryWidgetCardBackground(card: only.card, art: only.art) }
@@ -227,7 +230,8 @@ private struct ParcelCards: View {
         return layout {
             ForEach(shown) { item in
                 Link(destination: item.parcel.deepLink) {
-                    DeliveryWidgetCardView(parcel: item.parcel, card: item.card, art: item.art, shape: route)
+                    DeliveryWidgetCardView(parcel: item.parcel, card: item.card, art: item.art, shape: route,
+                                           marked: item.parcel.newUpdate == true)
                         .padding(route == .half ? 10 : 14)
                         .background { DeliveryWidgetCardBackground(card: item.card, art: item.art) }
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
@@ -283,10 +287,13 @@ private struct ParcelListCard: View {
                     .font(.headline.weight(.semibold))
                     .foregroundStyle(Color.primary)
                     .lineLimit(1)
-                Text(card.status)
-                    .font(.caption)
-                    .foregroundStyle(ink)
-                    .lineLimit(1)
+                HStack(spacing: 0) {
+                    NewUpdateDot(shown: parcel.newUpdate == true)
+                    Text(card.status)
+                }
+                .font(.caption)
+                .foregroundStyle(ink)
+                .lineLimit(1)
             }
             .padding(.trailing, look.route != nil && colored ? 104 : 0)
         }
@@ -299,6 +306,7 @@ private struct ParcelListCard: View {
         .background(colored ? DeliveryWidgetCardColors.color(card.surface, scheme) : Color.primary.opacity(0.12))
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         .accessibilityElement(children: .combine)
+        .widgetNewUpdateSaidFirst(parcel.newUpdate == true)
     }
 }
 
@@ -414,15 +422,22 @@ private struct ParcelPass: View {
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
                     name
                     Spacer(minLength: 4)
-                    Text(line.status.openingLine(in: locale)).font(.caption2).foregroundStyle(ink).lineLimit(1).fixedSize()
+                    HStack(spacing: 0) {
+                        NewUpdateDot(shown: marked)
+                        Text(line.status.openingLine(in: locale))
+                    }
+                    .font(.caption2).foregroundStyle(ink).lineLimit(1).fixedSize()
                 }
             } else {
                 name
-                ViewThatFits(in: .horizontal) {
-                    Text(ParcelListStatus.whole(parcel, locale: locale))
-                    if let day = line.day {
-                        Text(day.openingLine(in: locale))
-                        Text(line.status.openingLine(in: locale))
+                HStack(spacing: 0) {
+                    NewUpdateDot(shown: marked)
+                    ViewThatFits(in: .horizontal) {
+                        Text(ParcelListStatus.whole(parcel, locale: locale))
+                        if let day = line.day {
+                            Text(day.openingLine(in: locale))
+                            Text(line.status.openingLine(in: locale))
+                        }
                     }
                 }
                 .font(.caption2)
@@ -437,7 +452,10 @@ private struct ParcelPass: View {
         .background(colored ? surface : Color.primary.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(listAccessibilityLabel(parcel))
+        .widgetNewUpdateSaidFirst(marked)
     }
+
+    private var marked: Bool { parcel.newUpdate == true }
 
     private var name: some View {
         Text(parcel.listName)
@@ -658,8 +676,8 @@ private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel) -> String {
         .compactMap { $0 }.joined(separator: ", ")
 }
 
-/// The stage, then the day, in the warning colour where the parcel needs the reader. Where the line can't hold both, the
-/// day stays, as the mark still names the carrier; VoiceOver reads both.
+/// The stage, then the day, in the warning colour where the parcel needs the reader, after the list's dot where it marks
+/// the parcel. Where the line can't hold both, the day stays, as the mark still names the carrier; VoiceOver reads both.
 private struct ParcelListStatus: View {
     let parcel: DeliveryWidgetParcel
     @Environment(\.locale) private var locale
@@ -673,11 +691,14 @@ private struct ParcelListStatus: View {
 
     var body: some View {
         let line = parcel.listLine
-        ViewThatFits(in: .horizontal) {
-            Text(Self.whole(parcel, locale: locale))
-            if let day = line.day {
-                Text(day.openingLine(in: locale))
-                Text(line.status.openingLine(in: locale))
+        HStack(spacing: 0) {
+            NewUpdateDot(shown: parcel.newUpdate == true)
+            ViewThatFits(in: .horizontal) {
+                Text(Self.whole(parcel, locale: locale))
+                if let day = line.day {
+                    Text(day.openingLine(in: locale))
+                    Text(line.status.openingLine(in: locale))
+                }
             }
         }
         .lineLimit(1)
@@ -706,6 +727,7 @@ private struct ParcelListStackedRow: View {
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(listAccessibilityLabel(parcel))
+        .widgetNewUpdateSaidFirst(parcel.newUpdate == true)
     }
 }
 
@@ -741,6 +763,7 @@ private struct ParcelListLineRow: View {
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(listAccessibilityLabel(parcel))
+        .widgetNewUpdateSaidFirst(parcel.newUpdate == true)
     }
 
     private var name: some View {

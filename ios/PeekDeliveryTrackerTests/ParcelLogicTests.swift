@@ -3943,6 +3943,45 @@ extension SessionIsolationTests {
         XCTAssertEqual(store.parcels.filter(\.hasNewUpdate).map(\.id), [scanned.id])
     }
 
+    /// The Parcels widget marks what the list marks: a scan after the last open, until the parcel is opened, and nothing
+    /// while Settings has the mark off.
+    @MainActor func testTheParcelsWidgetMarksWhatTheListMarks() async throws {
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        store.setDeliveryWidgetEnabled(true)
+        defer { store.setDeliveryWidgetEnabled(false) }
+        let shared = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: configuration.appGroupIdentifier, fallbackToStandard: true))
+        let scanned = scannedParcel()
+        var quiet = parcel()
+        quiet.newsAt = "2026-11-15T08:00:00+00:00"
+        quiet.seenAt = "2026-11-15T09:00:00+00:00"
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [scanned, quiet])))
+        await store.load()
+        func marked() -> [UUID] { (shared.snapshot?.parcels ?? []).filter { $0.newUpdate == true }.map(\.id) }
+        XCTAssertEqual(shared.snapshot?.parcels.count, 2)
+        XCTAssertEqual(marked(), [scanned.id])
+        XCTAssertTrue(shared.snapshot?.parcels.allSatisfy { $0.newUpdate == true || $0.newUpdate == nil } ?? false)
+
+        // Switched off, the dot leaves the widget at once; what was seen is kept, so switched on again it comes back.
+        respond(Data("{}".utf8))
+        store.setMarkNewUpdates(false)
+        XCTAssertEqual(marked(), [])
+        store.setMarkNewUpdates(true)
+        XCTAssertEqual(marked(), [scanned.id])
+
+        // Opening the parcel clears it in the widget too.
+        respond(Data("{\"seen_at\":\"2026-11-15T10:05:00.5+00:00\"}".utf8))
+        await store.markSeen(scanned.id)
+        XCTAssertEqual(marked(), [])
+        XCTAssertEqual(shared.snapshot?.parcels.count, 2)
+    }
+
     @MainActor func testAMarkTheServerCouldNotTakeGoesAtOnceAndComesBackWithTheNextRead() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

@@ -97,6 +97,8 @@ struct DeliveryWidgetCardView: View {
     let shape: DeliveryWidgetPicture
     /// The end of the top row is left to the widget's next button.
     var leavesNext = false
+    /// The status line starts with the dot for new updates, which the Parcels widget shows.
+    var marked = false
 
     @Environment(\.colorScheme) private var scheme
 
@@ -123,15 +125,61 @@ struct DeliveryWidgetCardView: View {
                     .foregroundStyle(Color.primary)
                     .lineLimit(2)
                     .minimumScaleFactor(0.82)
-                Text(status)
-                    .font(shape == .half ? .caption2 : .caption)
-                    .foregroundStyle(ink)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                HStack(spacing: 0) {
+                    NewUpdateDot(shown: marked)
+                    Text(status)
+                }
+                .font(shape == .half ? .caption2 : .caption)
+                .foregroundStyle(ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .accessibilityElement(children: .combine)
+        .widgetNewUpdateSaidFirst(marked)
+    }
+}
+
+/// The dot before a parcel's status line, in the app's list and the Parcels widget, on a parcel with updates since it
+/// was last opened, in the line's own colour. It brings the room between itself and the words. Off, it keeps its place
+/// in the line without any width, so it fades and the words slide back as it clears.
+struct NewUpdateDot: View {
+    let shown: Bool
+    @ScaledMetric(relativeTo: .caption) private var size: CGFloat = 5
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        Circle()
+            .frame(width: shown ? size : 0, height: size)
+            .opacity(shown ? 0.8 : 0)
+            .padding(.trailing, shown ? size : 0)
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: shown)
+            .accessibilityHidden(true)
+    }
+}
+
+extension EnvironmentValues {
+    /// "New update." in the widget's language, which VoiceOver says first of a parcel the Parcels widget marks.
+    @Entry var widgetNewUpdateWords = ""
+}
+
+extension View {
+    /// A widget's parcel, read as one, says "New update" before the rest while it is marked, as the app's list does.
+    func widgetNewUpdateSaidFirst(_ marked: Bool) -> some View {
+        modifier(WidgetNewUpdateSaidFirst(marked: marked))
+    }
+}
+
+private struct WidgetNewUpdateSaidFirst: ViewModifier {
+    let marked: Bool
+    @Environment(\.widgetNewUpdateWords) private var words
+
+    func body(content: Content) -> some View {
+        content.accessibilityLabel { label in
+            if marked { Text(words) }
+            label
+        }
     }
 }
 

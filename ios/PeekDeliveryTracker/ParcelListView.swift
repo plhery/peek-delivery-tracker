@@ -2019,24 +2019,6 @@ extension EnvironmentValues {
     }
 }
 
-/// The dot before a card's status line on a parcel with updates since it was last opened, in the line's own colour.
-/// It brings the room between itself and the words. Off, it keeps its place in the line without any width, so it
-/// fades and the words slide back as it clears.
-struct NewUpdateDot: View {
-    let shown: Bool
-    @ScaledMetric(relativeTo: .caption) private var size: CGFloat = 5
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    var body: some View {
-        Circle()
-            .frame(width: shown ? size : 0, height: size)
-            .opacity(shown ? 0.8 : 0)
-            .padding(.trailing, shown ? size : 0)
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: shown)
-            .accessibilityHidden(true)
-    }
-}
-
 extension View {
     /// A card read as one says "New update" before the rest while its parcel is marked.
     func newUpdateSaidFirst(_ marked: Bool) -> some View {

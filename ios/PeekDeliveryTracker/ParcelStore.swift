@@ -335,7 +335,11 @@ final class ParcelStore: ObservableObject {
     }
 
     private func keepMarkNewUpdates(_ enabled: Bool) {
-        if markNewUpdates != enabled { markNewUpdates = enabled }
+        if markNewUpdates != enabled {
+            markNewUpdates = enabled
+            // The Parcels widget shows the list's mark.
+            publishDeliveryWidget()
+        }
         UserDefaults.standard.set(!enabled, forKey: Self.markNewUpdatesOffKey)
     }
 
@@ -1352,8 +1356,9 @@ final class ParcelStore: ObservableObject {
     ///
     /// What the Parcels widget shows besides: where the app's list puts each parcel and which is its Next up, also for
     /// those midnights, the carrier shown, and the last steps of the first parcels. Whichever ends up alone in the widget
-    /// is among them: one on its way comes first, and with none, the one delivered last stays longest and leads.
-    static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date()) -> [DeliveryWidgetParcel] {
+    /// is among them: one on its way comes first, and with none, the one delivered last stays longest and leads. Which
+    /// parcels the list marks with the dot for new updates, `marking` as Settings has it.
+    static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, marking: Bool = true, now: Date = Date()) -> [DeliveryWidgetParcel] {
         let midnights = DeliveryWidgetDays.midnights(after: now)
         let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
             .compactMap { parcel -> DeliveryWidgetParcel? in
@@ -1384,6 +1389,7 @@ final class ParcelStore: ObservableObject {
             item.nextUp = item.id == next
             item.carrierId = parcel.displayedCarrier.rawValue
             item.steps = index < DeliveryWidgetSelection.limit ? widgetSteps(parcel, localizer: localizer) : nil
+            item.newUpdate = parcel.showsNewUpdate(marking: marking) ? true : nil
             let first = DeliveryWidgetWording(from: now, detail: item.detail, section: item.section, nextUp: item.nextUp)
             item.later = DeliveryWidgetDays.later(than: first, at: midnights) { midnight in
                 let at = midnights.firstIndex(of: midnight) ?? 0
@@ -1446,7 +1452,7 @@ final class ParcelStore: ObservableObject {
             snapshot = DeliveryWidgetSnapshot(
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
-                parcels: carded(Self.widgetDeliveries(of: parcels, localizer: localizer))
+                parcels: carded(Self.widgetDeliveries(of: parcels, localizer: localizer, marking: markNewUpdates))
             )
         } else {
             snapshot = nil

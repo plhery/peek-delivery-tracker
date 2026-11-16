@@ -755,7 +755,7 @@ class AddParcelTest {
         open()
         type("204 617")
         settle()
-        assertEquals("", description(ADD_ANNOUNCEMENT, unmerged = true))
+        compose.assertNothingAnnounced(ADD_ANNOUNCEMENT)
     }
 
     /** As `onChange(of: errorMessage)`: what went wrong is read out as it appears. */

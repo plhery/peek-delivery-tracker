@@ -384,7 +384,9 @@ private fun AnnouncementBox(node: AnnouncementNode) {
             .testTag(node.tag)
             .semantics {
                 liveRegion = LiveRegionMode.Polite
-                contentDescription = node.text
+                // Between two announcements, no words at all: an empty description is still a node TalkBack can stop
+                // on that says nothing (the Accessibility Test Framework's SpeakableTextPresentCheck).
+                if (node.text.isNotEmpty()) contentDescription = node.text
             },
     )
 }

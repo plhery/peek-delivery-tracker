@@ -562,7 +562,7 @@ class PassNotesTest {
         copy.assertContentDescriptionEquals("Copied")
         assertTrue(textExists("Copied"))
         // From Android 13 the system's overlay shows the copy and TalkBack hears it: the app says nothing more.
-        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
+        compose.assertNothingAnnounced()
 
         compose.mainClock.advanceTimeBy(1_800)
         copy.assertContentDescriptionEquals("Copied")

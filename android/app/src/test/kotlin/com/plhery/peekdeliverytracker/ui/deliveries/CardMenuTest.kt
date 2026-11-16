@@ -401,7 +401,7 @@ class CardMenuTest {
         assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         assertEquals(listOf("parcel-copy-tracking"), source.actions.filter { it == "parcel-copy-tracking" })
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
-        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
+        compose.assertNothingAnnounced()
     }
 
     /** Up to Android 12L nothing of the system's says so: the iPhone's toast and its announcement. */

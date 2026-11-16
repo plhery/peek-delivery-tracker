@@ -534,6 +534,10 @@ dependencies {
     // The label scanner's cover over this device's camera, found and tapped by its semantics.
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
+    // The Accessibility Test Framework's checks on the main screens (AccessibilityChecksDeviceTest); Robolectric skips
+    // them. Google Play's build only: the framework needs Guava, and F-Droid's device tests take the versions of
+    // F-Droid's app, which leaves Guava out.
+    "androidTestPlayImplementation"(libs.compose.ui.test.junit4.accessibility)
     // Compose's test rule idles through Espresso, whose own 3.5 no longer finds Android 17's input manager.
     androidTestImplementation(libs.espresso.core)
 }

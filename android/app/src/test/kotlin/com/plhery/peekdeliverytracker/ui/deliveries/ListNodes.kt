@@ -4,6 +4,7 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
@@ -38,6 +39,11 @@ fun ComposeContentTestRule.assertAnnounced(text: String, tag: String = ANNOUNCEM
     } finally {
         mainClock.autoAdvance = advancing
     }
+}
+
+/** TalkBack told nothing by `tag`'s node: no words at all, as it stands between two announcements. */
+fun ComposeContentTestRule.assertNothingAnnounced(tag: String = ANNOUNCEMENT) {
+    onNodeWithTag(tag, useUnmergedTree = true).assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.ContentDescription))
 }
 
 /** Scrolls the list to the card of the parcel named `name` and taps it. */

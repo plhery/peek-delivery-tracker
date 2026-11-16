@@ -25,6 +25,13 @@ change meant to show. The tests run with the app's clock (`AppClock`, which ever
 Tests only Google Play's build has are in `app/src/testPlay`; F-Droid's are in `app/src/testFdroid`, and
 `./gradlew :app:testFdroidDebugUnitTest` runs them with the shared ones.
 
+The tests in `app/src/androidTest`, and Google Play's own in `app/src/androidTestPlay`, run on a device or emulator
+(`./gradlew :app:connectedPlayDebugAndroidTest`, one class with
+`-Pandroid.testInstrumentationRunnerArguments.class=<class>`). `AccessibilityChecksDeviceTest` runs the
+Accessibility Test Framework's checks, Accessibility Scanner's, on the main screens through Compose's accessibility
+checks: an error fails it, and the text contrast it warns of goes to the log under `PeekAccessibility`. Robolectric
+skips these checks.
+
 ## CI
 
 `.github/workflows/android.yml` runs for the changes [docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md) lists. On Linux it

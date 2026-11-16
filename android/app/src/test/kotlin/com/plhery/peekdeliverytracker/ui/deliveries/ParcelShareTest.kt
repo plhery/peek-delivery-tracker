@@ -646,7 +646,7 @@ class ParcelShareTest {
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Success), shadowOf(view).lastHapticFeedbackPerformed())
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
         // From Android 13 TalkBack hears the system's overlay, and nothing of the app's beside it.
-        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
+        compose.assertNothingAnnounced()
         assertEquals(listOf(DeliveryAnalytics.Outcome.Success), shareActions())
         compose.mainClock.advanceTimeBy(1_800)
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))

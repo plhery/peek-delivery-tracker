@@ -88692,6 +88692,14 @@
     ]
   },
   {
+    "input": "LJ007335445FR",
+    "carrier": "la-poste",
+    "confidence": "high",
+    "candidates": [
+      "la-poste"
+    ]
+  },
+  {
     "input": "LJ150908992US",
     "carrier": "usps",
     "confidence": "high",

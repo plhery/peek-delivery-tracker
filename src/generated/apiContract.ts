@@ -22071,7 +22071,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/La_Paz",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "correos-bolivia"
     },
     "linkRules": [
       {

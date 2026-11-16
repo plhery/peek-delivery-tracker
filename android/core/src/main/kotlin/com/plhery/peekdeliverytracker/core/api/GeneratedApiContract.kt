@@ -1771,6 +1771,24 @@ value class CarrierId(val rawValue: String) {
         val Tupaq = CarrierId("tupaq")
         val Uello = CarrierId("uello")
         val UrbanoAr = CarrierId("urbano-ar")
+        val AbcCargoExpress = CarrierId("abc-cargo-express")
+        val Breaze = CarrierId("breaze")
+        val Celero = CarrierId("celero")
+        val CharkExpress = CarrierId("chark-express")
+        val ChronopostMa = CarrierId("chronopost-ma")
+        val CnExpressZa = CarrierId("cn-express-za")
+        val CorreiosCaboVerde = CarrierId("correios-cabo-verde")
+        val CtmMessagerie = CarrierId("ctm-messagerie")
+        val FastwayZa = CarrierId("fastway-za")
+        val Guepex = CarrierId("guepex")
+        val Intigo = CarrierId("intigo")
+        val MaystroDelivery = CarrierId("maystro-delivery")
+        val MmCargoServices = CarrierId("mm-cargo-services")
+        val OzonExpressMa = CarrierId("ozon-express-ma")
+        val Paps = CarrierId("paps")
+        val PickupMtaani = CarrierId("pickup-mtaani")
+        val PostnetZa = CarrierId("postnet-za")
+        val RedStarExpress = CarrierId("red-star-express")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3483,6 +3501,24 @@ value class CarrierId(val rawValue: String) {
             Tupaq,
             Uello,
             UrbanoAr,
+            AbcCargoExpress,
+            Breaze,
+            Celero,
+            CharkExpress,
+            ChronopostMa,
+            CnExpressZa,
+            CorreiosCaboVerde,
+            CtmMessagerie,
+            FastwayZa,
+            Guepex,
+            Intigo,
+            MaystroDelivery,
+            MmCargoServices,
+            OzonExpressMa,
+            Paps,
+            PickupMtaani,
+            PostnetZa,
+            RedStarExpress,
         )
     }
 }

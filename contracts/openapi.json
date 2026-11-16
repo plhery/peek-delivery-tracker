@@ -58506,6 +58506,471 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.urbano.com.ar/segui-tu-envio"
+    },
+    "abc-cargo-express": {
+      "displayName": "ABC Cargo Express",
+      "aliases": [
+        "ABC Cargo Xpress",
+        "ABC Cargo"
+      ],
+      "countries": [
+        "NG"
+      ],
+      "color": "#015028",
+      "selectable": true,
+      "timezone": "Africa/Lagos",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://abccargoxpress.com/"
+    },
+    "breaze": {
+      "displayName": "Breaze",
+      "aliases": [
+        "Breaze Delivery"
+      ],
+      "countries": [
+        "ZA"
+      ],
+      "color": "#ff5800",
+      "selectable": true,
+      "timezone": "Africa/Johannesburg",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://portal.breaze.co.za/track-order/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "portal.breaze.co.za"
+          ],
+          "path": "^/track-order/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://portal.breaze.co.za/track-order"
+    },
+    "celero": {
+      "displayName": "Celero",
+      "aliases": [
+        "Celero Group"
+      ],
+      "countries": [
+        "MU",
+        "MG"
+      ],
+      "color": "#f17922",
+      "selectable": true,
+      "timezone": "Indian/Mauritius",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://celerogroup.com/"
+    },
+    "chark-express": {
+      "displayName": "Chark Express",
+      "countries": [
+        "MA"
+      ],
+      "color": "#000000",
+      "selectable": true,
+      "timezone": "Africa/Casablanca",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://charkexpress.com/"
+    },
+    "chronopost-ma": {
+      "displayName": "Chronopost Maroc",
+      "aliases": [
+        "Chronopost Morocco",
+        "Chronopost International Maroc"
+      ],
+      "countries": [
+        "MA"
+      ],
+      "color": "#0099e0",
+      "selectable": true,
+      "timezone": "Africa/Casablanca",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://chronopost.ma/suivez-votre-envoi?SendingNumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "chronopost.ma",
+            "www.chronopost.ma"
+          ],
+          "pathPattern": "^/suivez-votre-envoi/?$",
+          "params": [
+            "SendingNumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://chronopost.ma/suivez-votre-envoi"
+    },
+    "cn-express-za": {
+      "displayName": "CN Express",
+      "aliases": [
+        "CN Express International"
+      ],
+      "countries": [
+        "CN",
+        "ZA"
+      ],
+      "color": "#00a98e",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.cnexpressintl.com/service_support/track?order_no={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.cnexpressintl.com",
+            "cnexpressintl.com"
+          ],
+          "pathPattern": "^/service_support/track/?$",
+          "params": [
+            "order_no"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.cnexpressintl.com/service_support/track"
+    },
+    "correios-cabo-verde": {
+      "displayName": "Correios de Cabo Verde",
+      "aliases": [
+        "Correios Cabo Verde",
+        "Cabo Verde Post"
+      ],
+      "countries": [
+        "CV"
+      ],
+      "color": "#e92329",
+      "selectable": true,
+      "timezone": "Atlantic/Cape_Verde",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://correios.cv/ferramentas/tracking?tracking-ids={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "correios.cv",
+            "www.correios.cv"
+          ],
+          "pathPattern": "^/ferramentas/tracking/?$",
+          "params": [
+            "tracking-ids"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://correios.cv/ferramentas/tracking"
+    },
+    "ctm-messagerie": {
+      "displayName": "CTM Messagerie",
+      "countries": [
+        "MA"
+      ],
+      "color": "#043882",
+      "selectable": true,
+      "timezone": "Africa/Casablanca",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ctm-messagerie.ma/fr/suivi-du-colis"
+    },
+    "fastway-za": {
+      "displayName": "Fastway South Africa",
+      "aliases": [
+        "Fastway Couriers South Africa",
+        "Fastway ZA"
+      ],
+      "countries": [
+        "ZA"
+      ],
+      "color": "#ba0c2f",
+      "selectable": true,
+      "timezone": "Africa/Johannesburg",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.fastway.co.za/our-services/track-your-parcel/?l={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.fastway.co.za",
+            "fastway.co.za"
+          ],
+          "pathPattern": "^/(?:our-services/track-your-parcel|tools/track)/?$",
+          "params": [
+            "l"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.fastway.co.za/our-services/track-your-parcel/"
+    },
+    "guepex": {
+      "displayName": "Guepex",
+      "countries": [
+        "DZ"
+      ],
+      "color": "#c81d2e",
+      "selectable": true,
+      "timezone": "Africa/Algiers",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.guepex.dz/"
+    },
+    "intigo": {
+      "displayName": "Intigo",
+      "countries": [
+        "TN"
+      ],
+      "color": "#ff7400",
+      "selectable": true,
+      "timezone": "Africa/Tunis",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://intigo.net/?nid={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "intigo.net",
+            "www.intigo.net"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "nid"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://intigo.net/"
+    },
+    "maystro-delivery": {
+      "displayName": "Maystro Delivery",
+      "aliases": [
+        "Maystro"
+      ],
+      "countries": [
+        "DZ"
+      ],
+      "color": "#008aff",
+      "selectable": true,
+      "timezone": "Africa/Algiers",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://maystro-delivery.com/trackingSD.html"
+    },
+    "mm-cargo-services": {
+      "displayName": "MM Cargo Services",
+      "aliases": [
+        "MMCS"
+      ],
+      "countries": [
+        "ZA",
+        "ZM"
+      ],
+      "color": "#f26522",
+      "selectable": true,
+      "timezone": "Africa/Johannesburg",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://mmcargoservices.co.za/track?number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "mmcargoservices.co.za",
+            "www.mmcargoservices.co.za"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://mmcargoservices.co.za/track"
+    },
+    "ozon-express-ma": {
+      "displayName": "Ozon Express",
+      "aliases": [
+        "OzonExpress"
+      ],
+      "countries": [
+        "MA"
+      ],
+      "color": "#e41c29",
+      "selectable": true,
+      "timezone": "Africa/Casablanca",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://ozonexpress.ma/tracking-colis/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "ozonexpress.ma",
+            "www.ozonexpress.ma"
+          ],
+          "path": "^/tracking-colis/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ozonexpress.ma/"
+    },
+    "paps": {
+      "displayName": "Paps",
+      "aliases": [
+        "Paps Logistique",
+        "Paps Logistics"
+      ],
+      "countries": [
+        "SN",
+        "CI"
+      ],
+      "color": "#252e59",
+      "selectable": true,
+      "timezone": "Africa/Dakar",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://papslogistics.com/tracking/?uid={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "papslogistics.com",
+            "www.papslogistics.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "uid"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://papslogistics.com/tracking/"
+    },
+    "pickup-mtaani": {
+      "displayName": "Pickup Mtaani",
+      "aliases": [
+        "Pickup Mtaani Delivery"
+      ],
+      "countries": [
+        "KE"
+      ],
+      "color": "#fcda45",
+      "selectable": true,
+      "timezone": "Africa/Nairobi",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://new.pickupmtaani.com/track-package?package={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "new.pickupmtaani.com"
+          ],
+          "pathPattern": "^/track-package/?$",
+          "params": [
+            "package"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://new.pickupmtaani.com/track-package"
+    },
+    "postnet-za": {
+      "displayName": "PostNet",
+      "aliases": [
+        "PostNet South Africa",
+        "PostNet to PostNet"
+      ],
+      "countries": [
+        "ZA"
+      ],
+      "color": "#ff0000",
+      "selectable": true,
+      "timezone": "Africa/Johannesburg",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.postnet.co.za/tracker?pnpp={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.postnet.co.za",
+            "postnet.co.za"
+          ],
+          "pathPattern": "^/tracker/?$",
+          "params": [
+            "pnpp"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.postnet.co.za/tracker"
+    },
+    "red-star-express": {
+      "displayName": "Red Star Express",
+      "aliases": [
+        "Red Star Express Plc",
+        "RedStar Express"
+      ],
+      "countries": [
+        "NG"
+      ],
+      "color": "#ce100d",
+      "selectable": true,
+      "timezone": "Africa/Lagos",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://redstarplc.com/tracker/"
     }
   },
   "servers": [
@@ -63449,7 +63914,25 @@
           "treggo",
           "tupaq",
           "uello",
-          "urbano-ar"
+          "urbano-ar",
+          "abc-cargo-express",
+          "breaze",
+          "celero",
+          "chark-express",
+          "chronopost-ma",
+          "cn-express-za",
+          "correios-cabo-verde",
+          "ctm-messagerie",
+          "fastway-za",
+          "guepex",
+          "intigo",
+          "maystro-delivery",
+          "mm-cargo-services",
+          "ozon-express-ma",
+          "paps",
+          "pickup-mtaani",
+          "postnet-za",
+          "red-star-express"
         ]
       },
       "Stage": {

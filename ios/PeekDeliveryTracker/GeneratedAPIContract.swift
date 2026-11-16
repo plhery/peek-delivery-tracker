@@ -1762,6 +1762,24 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let tupaq = CarrierID(rawValue: "tupaq")
     static let uello = CarrierID(rawValue: "uello")
     static let urbanoAr = CarrierID(rawValue: "urbano-ar")
+    static let abcCargoExpress = CarrierID(rawValue: "abc-cargo-express")
+    static let breaze = CarrierID(rawValue: "breaze")
+    static let celero = CarrierID(rawValue: "celero")
+    static let charkExpress = CarrierID(rawValue: "chark-express")
+    static let chronopostMa = CarrierID(rawValue: "chronopost-ma")
+    static let cnExpressZa = CarrierID(rawValue: "cn-express-za")
+    static let correiosCaboVerde = CarrierID(rawValue: "correios-cabo-verde")
+    static let ctmMessagerie = CarrierID(rawValue: "ctm-messagerie")
+    static let fastwayZa = CarrierID(rawValue: "fastway-za")
+    static let guepex = CarrierID(rawValue: "guepex")
+    static let intigo = CarrierID(rawValue: "intigo")
+    static let maystroDelivery = CarrierID(rawValue: "maystro-delivery")
+    static let mmCargoServices = CarrierID(rawValue: "mm-cargo-services")
+    static let ozonExpressMa = CarrierID(rawValue: "ozon-express-ma")
+    static let paps = CarrierID(rawValue: "paps")
+    static let pickupMtaani = CarrierID(rawValue: "pickup-mtaani")
+    static let postnetZa = CarrierID(rawValue: "postnet-za")
+    static let redStarExpress = CarrierID(rawValue: "red-star-express")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3474,6 +3492,24 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .tupaq,
         .uello,
         .urbanoAr,
+        .abcCargoExpress,
+        .breaze,
+        .celero,
+        .charkExpress,
+        .chronopostMa,
+        .cnExpressZa,
+        .correiosCaboVerde,
+        .ctmMessagerie,
+        .fastwayZa,
+        .guepex,
+        .intigo,
+        .maystroDelivery,
+        .mmCargoServices,
+        .ozonExpressMa,
+        .paps,
+        .pickupMtaani,
+        .postnetZa,
+        .redStarExpress,
     ]
 
     init(from decoder: Decoder) throws {

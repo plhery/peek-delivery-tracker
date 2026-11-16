@@ -39,6 +39,7 @@ import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.performScrollToKey
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.graphics.toPixelMap
@@ -68,6 +69,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
+import com.plhery.peekdeliverytracker.ui.deliveries.cardNamed
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
@@ -452,6 +454,44 @@ class SettingsTest {
         assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
         flip(SETTINGS_WIDGETS)
         assertFalse(source.deliveryWidgetEnabled.value)
+    }
+
+    /**
+     * Signed out, a guest has "Mark new updates" (#72) too, on at first: turned off, a parcel with news loses its dot in
+     * the list; turned on again from TalkBack, it has it back.
+     */
+    @Test
+    fun aGuestsMarkNewUpdatesSwitchTakesTheDotsAwayAndBack() {
+        val gift = DemoCards.parcel("Birthday gift").id
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            parcels.value = parcels.value.map {
+                if (it.id == gift) it.copy(newsAt = "2026-10-29T05:00:00Z", seenAt = "2026-10-28T05:00:00Z") else it
+            }
+        }
+        val card = cardNamed("Birthday gift") and hasAnyAncestor(hasTestTag(PARCEL_LIST))
+        fun marked(): Boolean {
+            node(PARCEL_LIST).performScrollToNode(card)
+            val said = compose.onNode(card).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].joinToString()
+            return said.startsWith("${text("parcel.newUpdate")}. ")
+        }
+        assertTrue(marked())
+        open()
+        node(SETTINGS_MARK_NEW_UPDATES).assert(hasText(text("settings.markNewUpdates"))).assert(hasText(text("settings.markNewUpdatesHint")))
+        assertEquals(ToggleableState.On, toggled(SETTINGS_MARK_NEW_UPDATES))
+        flip(SETTINGS_MARK_NEW_UPDATES)
+        assertFalse(source.markNewUpdates.value)
+        assertEquals(ToggleableState.Off, toggled(SETTINGS_MARK_NEW_UPDATES))
+        press(SETTINGS_CLOSE)
+        assertFalse(marked())
+
+        open()
+        node(SETTINGS_MARK_NEW_UPDATES).performScrollTo().performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertTrue(source.markNewUpdates.value)
+        assertEquals(ToggleableState.On, toggled(SETTINGS_MARK_NEW_UPDATES))
+        press(SETTINGS_CLOSE)
+        assertTrue(marked())
     }
 
     @Test

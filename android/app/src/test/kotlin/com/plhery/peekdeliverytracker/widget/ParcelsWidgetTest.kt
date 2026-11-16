@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.SizeF
+import android.widget.TextView
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -836,6 +837,39 @@ class ParcelsWidgetTest {
         // The list's own last one gone (no next delivery widget placed): the refresh goes.
         ParcelsWidgetReceiver().onDisabled(app)
         assertTrue(alarms.scheduledAlarms.isEmpty())
+    }
+
+    /**
+     * A pass's stage takes its shorter words as a row's does, where its own don't fit at the line's least size: at the
+     * largest text Portuguese's "Pronta para levantamento" gives way to "Por levantar" in two passes two cells by two,
+     * and in four passes four by two once the new-update dot takes its room. At the default size it keeps its own.
+     */
+    @Test
+    fun aPassesStageTooLongForItsLineTakesItsShorterWords() {
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val folder = files.newFolder("PassWords")
+        runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble(), language = AppLanguage.Pt, drawn = 4) }
+        val source = widgetSource(app, folder, store, listOf("pt"))
+        val demo = source.list(CAPTURED)
+        val copy = Localizer(AppLanguage.Pt)
+        val pickup = staged(demo, copy, TrackingStage.ReadyForPickup)
+        fun stages(scale: Float, count: Int, size: DpSize, newUpdate: Boolean?): List<String> {
+            val list = demo.copy(parcels = demo.parcels.take(count).map { pickup.copy(id = it.id, label = it.label, card = it.card, newUpdate = newUpdate) })
+            assertEquals(DeliveryWidgetList.Design.Passes, list.design(listSize(size)))
+            val context = fontScaled(scale)
+            val texts = appliedViews(context, runBlocking { listViews(context, size, list, source::read) }).mapNotNull { (it as? TextView)?.text?.toString() }
+            return texts.filter { it != pickup.listName && it !in list.parcels.map { parcel -> parcel.listName } }
+        }
+        val own = "Pronta para levantamento"
+        val short = "Por levantar"
+        assertEquals(short, pickup.stage?.short)
+        for (newUpdate in listOf(null, true)) {
+            assertEquals(List(2) { own }, stages(1f, 2, LIST_SMALL, newUpdate))
+            assertEquals(List(4) { own }, stages(1f, 4, LIST_MEDIUM, newUpdate))
+            assertEquals(List(2) { short }, stages(1.3f, 2, LIST_SMALL, newUpdate))
+        }
+        assertEquals(List(4) { own }, stages(1.3f, 4, LIST_MEDIUM, null))
+        assertEquals(List(4) { short }, stages(1.3f, 4, LIST_MEDIUM, true))
     }
 
     private fun fontScaled(scale: Float): Context = app.createConfigurationContext(

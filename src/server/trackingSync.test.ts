@@ -7054,12 +7054,16 @@ describe('TrackingSyncService', () => {
     it.each([
       ['a newer scan in an earlier stage', [{ stage: 'registered', description: 'Label printed again', time: '2026-10-21T08:00:00Z' }, relabel, label]],
       ['a stored scan read in an earlier stage', [{ ...accepted, stage: 'registered' }, relabel, label]],
+      // DPD's web page, asked while its app failed, listing the scan in transit as the pickup and leaving the pickup out.
+      ['a stored scan read in an earlier stage past the label, with another left out', [{ ...departed, stage: 'accepted' }, relabel, label]],
     ])('still finds the progress gone after %s', async (_case, events) => {
-      const { check } = await tracked();
+      const { store, check } = await tracked();
+      const rows = structuredClone([...store.rows.values()]);
       const checked = await check(answer(...events));
       expect(checked.counts).toMatchObject({ errors: 1 });
       expect(checked.attempt).toMatchObject({ outcome: 'error', anomaly_codes: ['progress_disappeared'], error_type: 'ProgressDisappeared' });
       expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', sync_status: 'error' });
+      expect([...store.rows.values()]).toEqual(rows);
     });
 
     // A scraper release reading the carrier's stored scans past the label as the label again.

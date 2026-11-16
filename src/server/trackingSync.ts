@@ -2926,8 +2926,24 @@ export class TrackingSyncService {
       // The answering source's own rows past the selected stage, and whether its answer leaves one out.
       const ownRows = past(stored.filter((row) => String(row.provider_event_id).startsWith(`${sourceCarrierId}:`)));
       const leftOut = ownRows.some((row) => !shown.has(String(row.provider_event_id)));
-      const carrierWithoutProgress = anomalies.includes('progress_disappeared') && sourceCarrierId === carrierId
-        && typeof result.tracking_provider !== 'string';
+      // The stage each stored row an answered scan is reads in this answer.
+      const answeredAs = new Map(events.flatMap((event) => {
+        const row = rowOf(event);
+        return row === undefined ? [] : [[row, String(event.stage ?? '')] as const];
+      }));
+      const carrierAnswer = sourceCarrierId === carrierId && typeof result.tracking_provider !== 'string';
+      const listsEveryOwn = stored.every((row) => !String(row.provider_event_id).startsWith(`${sourceCarrierId}:`)
+        || shown.has(String(row.provider_event_id)));
+      // Its answer past the label shows no progress either when it reads a stored scan of its own past the answer's stage
+      // in an earlier stage, leaves out others of its own and brings nothing newer than the stored progress (DPD's web
+      // page, asked while its app failed, listing only the scan in transit read as the pickup): the stored progress
+      // stays, and the check fails. A newer scan goes by the stage rules below (`early_stage_regression`).
+      if (carrierAnswer && !fetched.correction && !listsEveryOwn && stageRank(selectedStage ?? 'pending') >= 0 && ownRows.some((row) => {
+        const stage = answeredAs.get(String(row.provider_event_id));
+        return stage !== undefined && stageRank(stage) <= stageRank(selectedStage ?? 'pending');
+      }) && events.every((event) => rowOf(event) !== undefined || Date.parse(String(event.occurred_at ?? '')) < progressAt)
+        && !anomalies.includes('progress_disappeared')) anomalies = [...anomalies, 'progress_disappeared'];
+      const carrierWithoutProgress = anomalies.includes('progress_disappeared') && carrierAnswer;
       const fewerStoredScans = carrierWithoutProgress && leftOut && listsFewer(events, latest(ownRows));
       // Progress that only other sources' rows show (ParcelsApp's copies of an origin leg GOFO never
       // lists) is none the carrier takes back: the stored progress stays and the check answered, with
@@ -2943,12 +2959,7 @@ export class TrackingSyncService {
       // received scan read as the label), and the carrier withdrew nothing. The stored progress stays and the check
       // answered, with a `stages_reread` signal, until the release's replay of the stored scans puts the rows and
       // the parcel right (scripts/replay-stored-scans.mjs).
-      const answeredAs = new Map(events.flatMap((event) => {
-        const row = rowOf(event);
-        return row === undefined ? [] : [[row, String(event.stage ?? '')] as const];
-      }));
-      const reread = carrierWithoutProgress && ownRows.length > 0
-        && stored.every((row) => !String(row.provider_event_id).startsWith(`${sourceCarrierId}:`) || shown.has(String(row.provider_event_id)))
+      const reread = carrierWithoutProgress && ownRows.length > 0 && listsEveryOwn
         && ownRows.some((row) => answeredAs.has(String(row.provider_event_id))
           && stageRank(answeredAs.get(String(row.provider_event_id))!) <= stageRank(selectedStage ?? 'pending'))
         && events.every((event) => rowOf(event) !== undefined || Date.parse(String(event.occurred_at ?? '')) < progressAt);

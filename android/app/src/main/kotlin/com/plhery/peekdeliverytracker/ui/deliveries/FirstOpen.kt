@@ -255,7 +255,8 @@ internal fun FirstOpenHost(firstOpen: FirstOpen, source: DeliveriesSource, shows
  * FirstOpenView (A-S09): the sample parcel's journey on its map and the question, laid out as the window has room for
  * ([FirstOpenLayouts]), its text as large as the reader's. Its picture opens the sample parcel's page in the first
  * open's own stack (`navigationDestination`), zooming out of it, and the page goes back to the first open, not to the
- * deliveries under it. The page is drawn from a state of the first open's own, as FirstOpenView's stack has its own.
+ * deliveries under it. The page is drawn from a state of the first open's own, as FirstOpenView's stack has its own;
+ * its globe opens its map over the whole window, as a page's does.
  *
  * The journey (`running`) moves on a scan at a time, each held `FirstOpenJourney.hold(step)`, changing over
  * `.easeInOut(duration: 0.5)`, while the app is in front, Add doesn't cover it, the atlas is read, no parcel link's
@@ -306,6 +307,8 @@ private fun FirstOpenView(firstOpen: FirstOpen, source: DeliveriesSource) {
             bar = { CompositionLocalProvider(LocalPageStack provides stack) { ParcelPageBar(state, FirstOpenJourney.parcelId) } },
         )
     }
+    // The sample page's map, over the whole window, as a page's is: the deliveries' own map under it is another.
+    ParcelMapHost(state, FIRST_OPEN_MAP) { it == FirstOpenJourney.parcelId && firstOpen.sampleShown }
 }
 
 /** What every part of the first open draws: the sample parcel at the journey's step, in DHL's colours. */
@@ -1235,6 +1238,9 @@ private const val PRESENCE_DURATION = 0.55
 private const val APPEAR_DURATION = 0.7
 private const val APPEAR_BOUNCE = 0.12
 private const val STEP_DURATION = 0.5
+
+/** The sample page's map, as a layer of the window's of its own. */
+private const val FIRST_OPEN_MAP = "firstOpen.map"
 
 /** How far the picture comes in from, and the question. */
 private val APPEAR_RISE = 18.dp

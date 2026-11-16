@@ -40,21 +40,27 @@ internal data class MapCoverRequest(val pageId: UUID)
 
 /**
  * The page's map (B-S19), over the whole window, its tab bar and the system's bars too, where the tab shell is there to
- * draw it ([LocalTabOverlay]), over the page otherwise. Nothing while it is closed.
+ * draw it ([LocalTabOverlay]) as its layer `key`, over the page otherwise. Nothing while it is closed. It goes once
+ * [pageShown] no longer holds for its page: the page the navigation shows, or the page of a stack of its own, as the
+ * first open's sample has.
  */
 @Composable
-internal fun ParcelMapHost(state: DeliveriesState) {
+internal fun ParcelMapHost(
+    state: DeliveriesState,
+    key: Any = MAP_COVER,
+    pageShown: (UUID) -> Boolean = { state.navigator.navigation.shown == it },
+) {
     val request = state.mapCover
     val host = LocalTabOverlay.current
     // The shell draws its layers outside the tab, where the hinges aren't known: they are read here.
     val hinge = LocalWindowHinge.current
     val levelHinge = LocalWindowLevelHinge.current
-    val content: (@Composable () -> Unit)? = request?.let { { ParcelMapCover(state, it, hinge, levelHinge) } }
+    val content: (@Composable () -> Unit)? = request?.let { { ParcelMapCover(state, it, hinge, levelHinge, pageShown) } }
     if (host == null) {
         content?.invoke()
         return
     }
-    OverlayLayer(host, MAP_COVER, content)
+    OverlayLayer(host, key, content)
 }
 
 /**
@@ -64,12 +70,18 @@ internal fun ParcelMapHost(state: DeliveriesState) {
  * globe as it closes. On its way down it takes no touch: a view button tapped as it goes flies nothing.
  */
 @Composable
-private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hinge: WindowHinge?, levelHinge: WindowLevelHinge?) {
+private fun ParcelMapCover(
+    state: DeliveriesState,
+    request: MapCoverRequest,
+    hinge: WindowHinge?,
+    levelHinge: WindowLevelHinge?,
+    pageShown: (UUID) -> Boolean,
+) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val live = state.liveMenuParcel(request.pageId)
     val parcel = state.sample(request.pageId) ?: live
-    val gone = parcel == null || state.navigator.navigation.shown != request.pageId
+    val gone = parcel == null || !pageShown(request.pageId)
     LaunchedEffect(gone) { if (gone) state.mapCover = null }
     val atlas = rememberWorldAtlas()
     val identity = parcel?.let { shownCarrierIdentity(it, localizer, language) }

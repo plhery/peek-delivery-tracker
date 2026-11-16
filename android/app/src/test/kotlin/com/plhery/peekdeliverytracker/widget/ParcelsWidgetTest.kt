@@ -543,6 +543,103 @@ class ParcelsWidgetTest {
         assertTrue(rowDescription(parcel).endsWith("$status, tomorrow"))
     }
 
+    /**
+     * The new-update dot (#72) where the app's list shows it: before each marked row's line, which keeps to the room
+     * the dot leaves, taking a shorter wording, then a smaller size, rather than being cut short, so every size keeps its
+     * rows at every text size a widget takes. TalkBack says "New update." first, in the widget's language, and nothing
+     * of it for the others.
+     */
+    @Test
+    fun aParcelWithNewsHasTheDotAndEverySizeKeepsItsRows() {
+        val news = sample.copy(parcels = sample.parcels.map { it.copy(newUpdate = true) })
+        val sizes = listOf(LIST_SMALL, LIST_THREE_BY_TWO, LIST_MEDIUM, LIST_TWO_BY_THREE, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE, LAUNCHER_ON_ITS_SIDE)
+        var smaller = 0
+        for (size in sizes) {
+            for (type in listOf(WidgetText(app), WidgetText(fontScaled(1.3f)), WidgetText(fontScaled(2f)))) {
+                val plain = sections(sample, size, type)
+                val marked = sections(news, size, type)
+                assertEquals("$size", plain.rows.map { it.id }, marked.rows.map { it.id })
+                assertEquals("$size", plain.more, marked.more)
+                val layout = marked.layout
+                for (parcel in marked.rows) {
+                    if (layout.lineRows) {
+                        val end = lineRowEnd(parcel, layout)
+                        val name = minOf(layout.type.width(parcel.listName, layout.metrics.namePoints, FontWeight.Medium), layout.room.width * 0.4f)
+                        assertTrue("${parcel.listName} at $size", name + end.gap + parcel.dotRoom + end.width <= layout.words)
+                        assertTrue("${parcel.listName} at $size: ${end.line}", layout.type.lines(end.line, end.points, FontWeight.Normal, end.width + 0.5.dp) <= 1)
+                    } else {
+                        val room = layout.words - parcel.dotRoom
+                        val line = fittingLine(parcel, layout, room)
+                        val points = linePoints(parcel, layout, line, room)
+                        // What fitted without the dot fits beside it; a stage too long even without it is cut short as before.
+                        val alone = fittingLine(parcel.copy(newUpdate = null), layout, layout.words)
+                        if (layout.type.lines(alone, layout.statusPoints, FontWeight.Normal, layout.words) <= 1) {
+                            assertTrue("${parcel.listName} at $size: $line", layout.type.lines(line, points, FontWeight.Normal, room) <= 1)
+                            if (points < layout.statusPoints) smaller += 1
+                        }
+                        assertTrue(points >= layout.statusPoints * 0.8f - 0.01f)
+                        // Without the dot, the line and its size are the layout's.
+                        assertEquals(layout.statusPoints, linePoints(parcel.copy(newUpdate = null), layout, line, room))
+                    }
+                }
+            }
+        }
+
+        assertTrue("Some lines take a smaller size beside the dot", smaller > 0)
+
+        val some = sample.copy(parcels = sample.parcels.mapIndexed { index, parcel -> if (index % 2 == 0) parcel.copy(newUpdate = true) else parcel })
+        show(some, LIST_MEDIUM) {
+            for (parcel in sections(some, LIST_MEDIUM).rows) {
+                val said = if (parcel.newUpdate == true) "New update. ${rowDescription(parcel)}" else rowDescription(parcel)
+                onNode(hasContentDescriptionEqualTo(said) and opens(parcel)).assertExists()
+            }
+        }
+        val first = some.parcels.first()
+        assertEquals("Nouvelle mise à jour. ${rowDescription(first)}", spokenRow(first, "fr"))
+        for (language in AppLanguage.entries) {
+            val said = requireNotNull(newUpdateSpoken(first, language.rawValue))
+            assertNotEquals(language.rawValue, "parcel.newUpdate.", said)
+            assertEquals(language.rawValue, Localizer(language).text("parcel.newUpdate") + ".", said)
+        }
+        assertEquals(null, newUpdateSpoken(first.copy(newUpdate = null), "en"))
+    }
+
+    /**
+     * Passes and cards show the dot before their stage, the passes' line taking the shorter wording the dot leaves room
+     * for; each says "New update." first, as the rows do, the cards in their carrier's words.
+     */
+    @Test
+    fun passesAndCardsWithNewsHaveTheDot() {
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val folder = files.newFolder("WidgetCards")
+        runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble(), drawn = DeliveryWidgetSelection.limit) }
+        val source = widgetSource(app, folder, store)
+        val demo = source.list(CAPTURED)
+        fun some(count: Int) = demo.copy(parcels = demo.parcels.take(count).mapIndexed { index, parcel -> if (index != 1) parcel.copy(newUpdate = true) else parcel })
+        // Passes two cells by two, four by two and four by four, and three cards one above another.
+        for ((count, size) in listOf(2 to LIST_SMALL, 4 to LIST_MEDIUM, 6 to LIST_LARGE, 3 to LIST_LARGE)) {
+            val list = some(count)
+            show(list, size, source::read) {
+                for (parcel in list.parcels) {
+                    val said = if (parcel.newUpdate == true) "New update. ${rowDescription(parcel)}" else rowDescription(parcel)
+                    onNode(opens(parcel) and hasContentDescriptionEqualTo(said)).assertExists()
+                }
+            }
+        }
+        // A card, two cards side by side, a card over its steps: the card's first words, its carrier's mark.
+        for ((count, size) in listOf(1 to LIST_SMALL, 2 to LIST_MEDIUM, 2 to LIST_LARGE, 1 to LIST_LARGE)) {
+            val list = some(count)
+            val said = appliedViews(app, runBlocking { listViews(app, size, list, source::read) }).filter { it.isClickable }.map { spoken(it) }
+            for (parcel in list.parcels) {
+                val card = said.filter { parcel.label in it }
+                assertEquals("$count at $size: $said", 1, card.size)
+                val first = if (parcel.newUpdate == true) "New update. ${parcel.carrier} " else "${parcel.carrier} "
+                assertTrue("$count at $size: $said", card.single().startsWith(first))
+            }
+            assertEquals("$count at $size: $said", list.parcels.count { it.newUpdate == true }, said.count { "New update." in it })
+        }
+    }
+
     /** A row opens its parcel, and TalkBack reads its name, stage and day as one item. */
     @Test
     fun eachRowOpensItsParcelAndReadsAsOne() = show(sample, LIST_MEDIUM) {

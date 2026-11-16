@@ -388,7 +388,7 @@ class ParcelStore(
         private set(value) {
             notificationPreferencesState.value = value
             // The account's choice, as read or saved, is this phone's from now on (#72).
-            value?.markNewUpdates?.let(markNewUpdatesChoice::keep)
+            value?.markNewUpdates?.let(::keepMarkNewUpdates)
         }
 
     var notificationError: String?
@@ -1436,7 +1436,7 @@ class ParcelStore(
      */
     suspend fun setMarkNewUpdates(enabled: Boolean) {
         if (markNewUpdatesFlow.value == enabled) return
-        markNewUpdatesChoice.keep(enabled)
+        keepMarkNewUpdates(enabled)
         if (!session.isAuthenticated || isDemo || isGuest) return
         // A read of the preferences that began before the choice is older than it.
         notificationPreferenceSaves += 1
@@ -1459,6 +1459,13 @@ class ParcelStore(
 
     /** The choices made about "Mark new updates", counted. */
     private var markNewUpdatesChoices = 0
+
+    /** "Mark new updates" as this phone or the account chose it: the widgets show their dots as the cards do. */
+    private fun keepMarkNewUpdates(enabled: Boolean) {
+        if (markNewUpdatesFlow.value == enabled) return
+        markNewUpdatesChoice.keep(enabled)
+        if (!holdingDeliverySurfaces) publishDeliveryWidget()
+    }
 
     /**
      * The parcel's page is in front (#72): a parcel with news is seen now, whether or not its dot shows, as of the
@@ -1595,7 +1602,7 @@ class ParcelStore(
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
-                parcels = carded(widgetOrder(parcels, localizer, now())),
+                parcels = carded(widgetOrder(parcels, localizer, now(), markNewUpdatesFlow.value)),
             )
         } else {
             null
@@ -1863,14 +1870,15 @@ class ParcelStore(
         }
 
         /** The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first. */
-        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> =
-            widgetOrder(parcels, localizer, now).take(DeliveryWidgetSelection.limit)
+        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> =
+            widgetOrder(parcels, localizer, now, markNewUpdates).take(DeliveryWidgetSelection.limit)
 
         /**
          * All of them in that order ([DeliveryWidgetSelection.ordered]), of which the list widget shows as many as fit.
-         * Their details are also worded for the next midnights.
+         * Their details are also worded for the next midnights. Each carries the dot its card in the app shows while
+         * "Mark new updates" is on ([DeliveryWidgetParcel.newUpdate]).
          */
-        fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
+        fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> {
             val midnights = DeliveryWidgetDays.midnights(after = now)
             val delivered = ParcelOrganizer
                 .visible(parcels, query = "", status = ParcelStatusFilter.Delivered, carrier = null, sort = ParcelSort.Updated, now = now)
@@ -1903,6 +1911,7 @@ class ParcelStore(
                 item.copy(
                     later = later, section = section, nextUp = nextUp, carrierId = parcel.displayedCarrier.rawValue,
                     steps = if (index < DeliveryWidgetSelection.limit) widgetSteps(parcel, localizer).ifEmpty { null } else null,
+                    newUpdate = true.takeIf { parcel.marksNewUpdate(markNewUpdates) },
                 )
             }
         }

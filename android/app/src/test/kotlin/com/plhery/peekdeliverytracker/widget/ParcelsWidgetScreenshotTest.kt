@@ -72,10 +72,10 @@ class ParcelsWidgetScreenshotTest {
         widgetSource(app, folder, store)
     }
 
-    /** The demo's first `count` parcels at `size`. */
-    private fun demo(size: DpSize, count: Int): Shown {
+    /** The demo's first `count` parcels at `size`, those `marked` with the new-update dot. */
+    private fun demo(size: DpSize, count: Int, marked: (Int) -> Boolean = { false }): Shown {
         val list = demoSource.list(CAPTURED)
-        return widget(size, list.copy(parcels = list.parcels.take(count)), demoSource::read)
+        return widget(size, list.copy(parcels = list.parcels.take(count).mapIndexed { index, parcel -> if (marked(index)) parcel.copy(newUpdate = true) else parcel }), demoSource::read)
     }
 
     private fun none(enabled: Boolean = true) = DeliveryWidgetList.make(CAPTURED, enabled, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
@@ -185,6 +185,32 @@ class ParcelsWidgetScreenshotTest {
     @Test
     @Config(qualifiers = "w1220dp-h960dp-xhdpi", fontScale = 1.3f)
     fun fitsAtLargestText() = fits("fits_text_130")
+
+    /**
+     * The new-update dot (#72) on two parcels in three, as the app's list marks them: the sample's rows at each size,
+     * two cells by four for its two-line rows; the demo's card, passes and cards two cells by two and four by two; a card
+     * over its steps, three cards and six passes four by four.
+     */
+    private fun newUpdates(name: String, dark: Boolean) {
+        val marked = { index: Int -> index % 3 != 1 }
+        val rows = sampleList().let { list -> list.copy(parcels = list.parcels.mapIndexed { index, parcel -> if (marked(index)) parcel.copy(newUpdate = true) else parcel }) }
+        shoot(
+            name, dark,
+            listOf(
+                listOf(listOf(widget(LIST_SMALL, rows), widget(LIST_SMALL, rows.copy(parcels = rows.parcels.take(3)))), listOf(widget(LIST_MEDIUM, rows)), listOf(widget(LIST_LARGE, rows)), listOf(widget(LIST_TWO_BY_FOUR, rows))),
+                listOf(listOf(demo(LIST_SMALL, 1, marked)), listOf(demo(LIST_SMALL, 2, marked)), listOf(demo(LIST_MEDIUM, 2, marked)), listOf(demo(LIST_MEDIUM, 4, marked))),
+                listOf(listOf(demo(LIST_LARGE, 1, marked)), listOf(demo(LIST_LARGE, 3, marked)), listOf(demo(LIST_LARGE, 6, marked))),
+            ),
+        )
+    }
+
+    @Test
+    @Config(qualifiers = "w1220dp-h1360dp-xhdpi")
+    fun newUpdatesLight() = newUpdates("new_updates_light", dark = false)
+
+    @Test
+    @Config(qualifiers = "w1220dp-h1360dp-night-xhdpi")
+    fun newUpdatesDark() = newUpdates("new_updates_dark", dark = true)
 
     /**
      * Between the three: three cells by two (two columns), two by three and two by four (one column of two-line rows),

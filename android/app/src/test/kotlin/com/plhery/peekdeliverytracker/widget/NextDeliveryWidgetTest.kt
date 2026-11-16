@@ -11,8 +11,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Looper
 import android.os.SystemClock
-import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.compose.ui.graphics.Color
@@ -27,6 +25,7 @@ import androidx.glance.appwidget.testing.unit.runGlanceAppWidgetUnitTest
 import androidx.glance.testing.unit.hasAnyDescendant
 import androidx.glance.testing.unit.hasContentDescriptionEqualTo
 import androidx.glance.testing.unit.hasTextEqualTo
+import androidx.glance.text.FontWeight
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.MainActivity
@@ -47,6 +46,7 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import java.time.Duration
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -461,7 +461,7 @@ class NextDeliveryWidgetTest {
             NextDeliveryWidget().runComposition(app, sizes = listOf(IPHONE_SMALL)).collect { views ->
                 val host = FrameLayout(app)
                 host.addView(views.apply(app, host))
-                shown.send(views(host).mapNotNull { (it as? TextView)?.text?.toString() })
+                shown.send(viewsUnder(host).mapNotNull { (it as? TextView)?.text?.toString() })
             }
         }
         suspend fun showing(label: String): List<List<String>> = withTimeout(10_000) {
@@ -496,9 +496,7 @@ class NextDeliveryWidgetTest {
     fun talkBackStopsOnlyWhereThereIsSomethingToSay() = runBlocking<Unit> {
         val carded = three.map { it.copy(card = card(it.id.toString())) }
         for ((entry, size) in listOf(cardsEntry(carded, medium = true) to IPHONE_MEDIUM, cardsEntry(carded, medium = false) to IPHONE_SMALL, wordsEntry(three, medium = true) to IPHONE_MEDIUM)) {
-            val host = FrameLayout(app)
-            host.addView(widgetViews(app, size, entry).apply(app, host))
-            val clickable = views(host).filter { it.isClickable }
+            val clickable = appliedViews(app, widgetViews(app, size, entry)).filter { it.isClickable }
             for (view in clickable.filter { it.isImportantForAccessibility }) assertTrue("$view says nothing", spoken(view).isNotBlank())
             val silent = clickable.filterNot { it.isImportantForAccessibility }
             if (entry.cards.size == 2) {
@@ -512,12 +510,46 @@ class NextDeliveryWidgetTest {
         }
     }
 
-    private fun views(view: View): List<View> = listOf(view) + ((view as? ViewGroup)?.let { group -> (0 until group.childCount).flatMap { views(group.getChildAt(it)) } } ?: emptyList())
+    /**
+     * The new-update dot (#72) on a parcel the app's list marks, and only there: before a card's status, which takes the
+     * size that fits the room the dot leaves; in words, before the badge. TalkBack says "New update." first: the card's
+     * mark, its first words, says it before the carrier; in words, the dot.
+     */
+    @Test
+    fun aParcelWithNewsHasTheDot() = runBlocking<Unit> {
+        val marked = three.mapIndexed { index, parcel -> if (index == 0) parcel.copy(newUpdate = true) else parcel }
+        val carded = marked.map { it.copy(card = card(it.id.toString())) }
+        for ((entry, size) in listOf(cardsEntry(carded, medium = true) to IPHONE_MEDIUM, cardsEntry(carded, medium = false) to IPHONE_SMALL)) {
+            val said = appliedViews(app, widgetViews(app, size, entry)).filter { it.isClickable && it.isImportantForAccessibility }.map { spoken(it) }
+            assertEquals("$size: $said", 1, said.count { "New update." in it })
+            assertTrue("$size: $said", said.first().startsWith("New update. FedEx Belgian chocolate"))
+            if (entry.cards.size == 2) assertTrue("$size: $said", said[1].startsWith("DPD Switzerland Trail weekend kit"))
+        }
+        show(wordsEntry(marked, medium = true), IPHONE_MEDIUM) {
+            onAllNodes(hasContentDescriptionEqualTo("New update.")).assertCountEquals(1)
+            onNode(opens(three[0]) and hasAnyDescendant(hasContentDescriptionEqualTo("New update."))).assertExists()
+        }
+        show(wordsEntry(three, medium = true), IPHONE_MEDIUM) { onNode(hasContentDescriptionEqualTo("New update.")).assertDoesNotExist() }
 
-    /** What TalkBack reads of a view: its description, else its words and its children's. */
-    private fun spoken(view: View): String = view.contentDescription?.toString()
-        ?: listOfNotNull((view as? TextView)?.text?.toString()).plus((view as? ViewGroup)?.let { group -> (0 until group.childCount).map { spoken(group.getChildAt(it)) } } ?: emptyList())
-            .joinToString(" ").trim()
+        // The status keeps to the room the dot leaves, at a smaller size where it must; its words stay whole.
+        val type = WidgetText(app)
+        val parcel = widgetParcel(5, "Desk lamp", detail = "Thursday 12 November")
+        val caption = type.points(IosTextStyle.Caption)
+        var smaller = false
+        for (width in 100..240 step 10) {
+            val room = DpSize(width.dp, 150.dp)
+            val plain = CardWords(parcel, card("5"), DeliveryWidgetPicture.Small, leavesNext = false, room = room, type = type, languageCode = "en")
+            val dotted = CardWords(parcel.copy(newUpdate = true), card("5"), DeliveryWidgetPicture.Small, leavesNext = false, room = room, type = type, languageCode = "en")
+            assertEquals(plain.status, dotted.status)
+            assertTrue("$width", dotted.statusPoints <= plain.statusPoints)
+            smaller = smaller || dotted.statusPoints < plain.statusPoints
+            val fits = type.lines(dotted.status, dotted.statusPoints, FontWeight.Normal, room.width - NEW_UPDATE_DOT - NEW_UPDATE_GAP) <= 1
+            assertTrue("$width", fits || dotted.statusPoints <= caption * 0.8f + 0.01f)
+            assertEquals("New update. ${parcel.carrier}", dotted.markDescription)
+            assertEquals(parcel.carrier, plain.markDescription)
+        }
+        assertTrue(smaller)
+    }
 
     /**
      * Sizes: the medium layout where the widget is wide for its height as the iPhone's medium is, and wide enough for

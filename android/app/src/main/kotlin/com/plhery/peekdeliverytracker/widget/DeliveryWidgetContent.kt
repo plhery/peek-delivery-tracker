@@ -152,7 +152,7 @@ private fun Cards(
     if (only != null) {
         val shape = if (NextDeliveryWidget.isMedium(size)) DeliveryWidgetPicture.Wide else DeliveryWidgetPicture.Small
         val (parcel, card, art) = only
-        val words = CardWords(parcel, card, shape, leavesNext = entry.next != null, room = size.inside(MARGIN), type)
+        val words = CardWords(parcel, card, shape, leavesNext = entry.next != null, room = size.inside(MARGIN), type, entry.languageCode)
         Box(root().background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))) {
             CardBackground(art, shape, size)
             Box(GlanceModifier.fillMaxSize().padding(MARGIN)) { CardView(parcel, card, art, words) }
@@ -168,7 +168,7 @@ private fun Cards(
                 cards.forEachIndexed { index, (parcel, card, art) ->
                     if (index > 0) Spacer(GlanceModifier.width(CARD_SPACING))
                     val leavesNext = entry.next != null && index == cards.lastIndex
-                    val words = CardWords(parcel, card, DeliveryWidgetPicture.Half, leavesNext, room = half.inside(CARD_PADDING), type)
+                    val words = CardWords(parcel, card, DeliveryWidgetPicture.Half, leavesNext, room = half.inside(CARD_PADDING), type, entry.languageCode)
                     Box(
                         GlanceModifier.defaultWeight().fillMaxHeight().cornerRadius(14.dp).background(WidgetCardColors.pair(card.surface))
                             .clickable(openParcel(context, parcel)),
@@ -189,7 +189,8 @@ private fun Cards(
 
 /**
  * A card's words as they fit `room`, the card inside its padding: the label on two lines where the card is tall enough
- * for them, else one, shrunk to 0.82 of its style to fit them, and the status line shrunk to 0.8 to fit its one.
+ * for them, else one, shrunk to 0.82 of its style to fit them, and the status line shrunk to 0.8 to fit its one, past
+ * the new-update dot where the parcel has one ([newUpdate]).
  */
 internal class CardWords(
     parcel: DeliveryWidgetParcel,
@@ -198,14 +199,22 @@ internal class CardWords(
     val leavesNext: Boolean,
     room: DpSize,
     val type: WidgetText,
+    languageCode: String,
 ) {
     val half = shape == DeliveryWidgetPicture.Half
     val markHeight = markHeight(shape)
     val status = if (card.status == parcel.detail) card.status else "${card.status} · ${parcel.detail}"
-    val statusPoints = type.fit(status, type.points(if (half) IosTextStyle.Caption2 else IosTextStyle.Caption), FontWeight.Normal, room.width, 1, 0.8f)
+
+    /** Whether the status line starts with the new-update dot (#72). */
+    val newUpdate = parcel.newUpdate == true
+    private val statusWidth = room.width - parcel.dotRoom
+    val statusPoints = type.fit(status, type.points(if (half) IosTextStyle.Caption2 else IosTextStyle.Caption), FontWeight.Normal, statusWidth, 1, 0.8f)
     val spacing = if (half) 2.dp else 3.dp
     private val labelStyle = if (half) IosTextStyle.Subheadline else if (shape == DeliveryWidgetPicture.Wide) IosTextStyle.Title3 else IosTextStyle.Headline
-    private val statusHeight = type.height(status, statusPoints, FontWeight.Normal, room.width, 1)
+    private val statusHeight = type.height(status, statusPoints, FontWeight.Normal, statusWidth, 1)
+
+    /** What TalkBack reads for the mark, the card's first words: "New update." before the carrier while the dot shows. */
+    val markDescription: String = newUpdateSpoken(parcel, languageCode)?.let { "$it ${parcel.carrier}" } ?: parcel.carrier
     val label: FittedLine = listOf(2, 1).map { lines -> FittedLine.of(parcel.label, labelStyle, FontWeight.Medium, room.width, lines, 0.82f, type) }
         .firstOrNull { markHeight + 4.dp + it.height + spacing + statusHeight <= room.height } ?: FittedLine.of(parcel.label, labelStyle, FontWeight.Medium, room.width, 1, 0.82f, type)
 
@@ -268,7 +277,7 @@ internal fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, ar
         Row(GlanceModifier.fillMaxWidth()) {
             val natural = words.markHeight * (art.mark.first.width.toFloat() / art.mark.first.height)
             val mark = GlanceModifier.height(words.markHeight).let { if (natural > words.markRoom) it.width(words.markRoom) else it }
-            DayNightPicture(art.mark, R.layout.widget_mark, mark, description = parcel.carrier)
+            DayNightPicture(art.mark, R.layout.widget_mark, mark, description = words.markDescription)
             Spacer(GlanceModifier.defaultWeight())
             // The end of the top row is left to the widget's next button.
             if (words.leavesNext) Spacer(GlanceModifier.width(NextMark.room))
@@ -280,9 +289,44 @@ internal fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, ar
             style = TextStyle(color = WidgetCardColors.primary, fontWeight = FontWeight.Medium, fontSize = type.sp(words.label.points)),
         )
         Spacer(GlanceModifier.height(words.spacing))
-        Text(words.status, maxLines = 1, style = TextStyle(color = WidgetCardColors.pair(card.ink), fontSize = type.sp(words.statusPoints)))
+        Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            if (words.newUpdate) NewUpdateDot(WidgetCardColors.pair(card.ink, NEW_UPDATE_OPACITY))
+            Text(words.status, GlanceModifier.defaultWeight(), maxLines = 1, style = TextStyle(color = WidgetCardColors.pair(card.ink), fontSize = type.sp(words.statusPoints)))
+        }
     }
 }
+
+/**
+ * The mark of a scan the reader hasn't seen (#72), first on a parcel's status line, as the app's cards draw it
+ * (`NewUpdateDot`): a dot [NEW_UPDATE_DOT] wide in the line's colour at 80 % ([NEW_UPDATE_OPACITY]), [NEW_UPDATE_GAP]
+ * before the words. TalkBack hears "New update." first in the parcel's words ([newUpdateSpoken]), not here.
+ */
+@Composable
+internal fun NewUpdateDot(color: ColorProvider, description: String? = null) {
+    val spoken = description?.let { words -> GlanceModifier.semantics { contentDescription = words } } ?: GlanceModifier
+    Box(spoken.size(NEW_UPDATE_DOT).cornerRadius(NEW_UPDATE_DOT / 2).background(color)) {}
+    Spacer(GlanceModifier.width(NEW_UPDATE_GAP))
+}
+
+/** The room the new-update dot takes before the parcel's status line: none without one. */
+internal val DeliveryWidgetParcel.dotRoom: Dp
+    get() = if (newUpdate == true) NEW_UPDATE_DOT + NEW_UPDATE_GAP else 0.dp
+
+/**
+ * The size of `parcel`'s status `text` after the new-update dot, `room` wide: `points`, or where the dot leaves it too
+ * little room, as much smaller as it takes, down to 0.8 of it as a card's status, so that the dot cuts no words short.
+ * Without the dot, `points`.
+ */
+internal fun WidgetText.besideDot(parcel: DeliveryWidgetParcel, text: String, points: Float, room: Dp): Float =
+    if (parcel.newUpdate == true) fit(text, points, FontWeight.Normal, room, 1, 0.8f) else points
+
+/** "New update." as TalkBack reads it first on a parcel with the dot (#72), as the app's cards say it; none without. */
+internal fun newUpdateSpoken(parcel: DeliveryWidgetParcel, languageCode: String): String? =
+    if (parcel.newUpdate == true) "${ExtensionLocalizer(languageCode).text("parcel.newUpdate")}." else null
+
+internal val NEW_UPDATE_DOT = 5.dp
+internal val NEW_UPDATE_GAP = 5.dp
+internal const val NEW_UPDATE_OPACITY = 0.8f
 
 /**
  * `words`: the widget's own yellow, with the next parcels, or why there are none: the widget switched off in the app,
@@ -474,18 +518,21 @@ private fun Header(type: WidgetText, copy: ExtensionLocalizer) {
 }
 
 /**
- * `parcelBadge`'s words: out for delivery, delivered or on its way, in `width`, its symbol and its spacing included,
- * less what it `leaves` at its end to the widget's next button; the words shrink to 0.7 of caption 2 before they end in
- * an ellipsis.
+ * `parcelBadge`'s words: out for delivery, delivered or on its way, in `width`, the new-update dot (#72), its symbol
+ * and its spacing included, less what it `leaves` at its end to the widget's next button; the words shrink to 0.7 of
+ * caption 2 before they end in an ellipsis. The badge leads the parcel's words, so the dot there says "New update."
+ * to TalkBack.
  */
 private class BadgeLine(parcel: DeliveryWidgetParcel, width: Dp, leaves: Dp, type: WidgetText, copy: ExtensionLocalizer) {
     val symbol = if (parcel.isOutForDelivery) "bicycle" else if (parcel.deliveredAt != null) "checkmark.circle.fill" else "arrow.right.circle.fill"
     val symbolPoints = type.points(IosTextStyle.Caption2)
     private val box = requireNotNull(materialSymbols[symbol]).box(symbolPoints, SymbolScale.Small.factor)
     val text = badgeWords(parcel, copy).uppercase(ExtensionLocalizer.locale(copy.languageCode))
+    val newUpdate: String? = newUpdateSpoken(parcel, copy.languageCode)
+    private val words = width - leaves - parcel.dotRoom - box[0].dp - 4.dp
     /** The words' width where the badge leaves room for the button, which the row's own width wouldn't hold them to. */
-    val textWidth: Dp? = (width - leaves - box[0].dp - 4.dp).takeIf { leaves > 0.dp }
-    val points = type.fit(text, symbolPoints, FontWeight.Bold, width - leaves - box[0].dp - 4.dp, 1, 0.7f)
+    val textWidth: Dp? = words.takeIf { leaves > 0.dp }
+    val points = type.fit(text, symbolPoints, FontWeight.Bold, words, 1, 0.7f)
     val height = maxOf(box[1].dp, type.lineHeight(points, FontWeight.Bold))
 }
 
@@ -501,6 +548,7 @@ private fun lastLine(parcel: DeliveryWidgetParcel, copy: ExtensionLocalizer): St
 @Composable
 private fun Badge(badge: BadgeLine, type: WidgetText) {
     Row(verticalAlignment = Alignment.CenterVertically) {
+        badge.newUpdate?.let { NewUpdateDot(ColorProvider(WidgetPalette.ink.copy(alpha = NEW_UPDATE_OPACITY)), description = it) }
         Symbol(badge.symbol, badge.symbolPoints, ComposeFontWeight.Black, WidgetPalette.ink, SymbolScale.Small)
         Spacer(GlanceModifier.width(4.dp))
         val width = badge.textWidth?.let { GlanceModifier.width(it) } ?: GlanceModifier

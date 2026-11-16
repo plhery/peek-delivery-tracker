@@ -96,7 +96,7 @@ class NewUpdateTests {
     }
 
     /** A device signed in to the account the server holds, with its own session, settings and cache. */
-    private suspend fun TestScope.signedIn(server: Server, defaults: UserDefaults = MemoryDefaults()): ParcelStore {
+    private suspend fun TestScope.signedIn(server: Server, defaults: UserDefaults = MemoryDefaults(), widgetCenter: WidgetCenter? = null): ParcelStore {
         val transport = RecordingTransport()
         val session = testSessionStore(configuration, backgroundScope, transport = transport, now = { now })
         val user = AuthUser(id = accountId, email = "reader@example.com", isAnonymous = false)
@@ -107,8 +107,8 @@ class NewUpdateTests {
         transport.handler = { jsonResponse(200, JsonEncoder.deliveryTracker.encode(AuthSession.serializer(), auth).decodeToString()) }
         session.verifyCode(email = "reader@example.com", code = "123456")
         transport.handler = { server.answer(it) }
-        val store = testParcelStore(configuration, session, transport, backgroundScope, defaults, now = { now })
-        store.setDeliveryWidgetEnabled(false)
+        val store = testParcelStore(configuration, session, transport, backgroundScope, defaults, widgetCenter = widgetCenter ?: WidgetCenter {}, now = { now })
+        store.setDeliveryWidgetEnabled(widgetCenter != null)
         store.setDeliveryLiveActivitiesEnabled(false)
         return store
     }
@@ -330,6 +330,52 @@ class NewUpdateTests {
         val opened = demo.markSeen(news.first().id)
         assertFalse(opened.hasNewUpdate)
         assertFalse(demo.list().single { it.id == opened.id }.hasNewUpdate)
+    }
+
+    @Test
+    fun theWidgetsShowTheDotTheCardShowsAndLoseItWithIt() = runTest {
+        val server = Server()
+        val defaults = MemoryDefaults()
+        val reloads = mutableListOf<String>()
+        val store = signedIn(server, defaults) { reloads += it }
+        val shared = DeliveryWidgetSharedStore(defaults)
+        fun published() = requireNotNull(shared.snapshot).parcels.single { it.id == parcelId }.newUpdate
+        store.load()
+        assertTrue(store.dotShown)
+        assertEquals("The widgets are told which parcels have news", true, published())
+
+        // The setting off: the dots go from the widgets as from the cards, and the widgets reload to lose them.
+        var before = reloads.size
+        store.setMarkNewUpdates(false)
+        assertNull(published())
+        assertEquals(before + 1, reloads.size)
+        // Back on, a choice made on another device: the dot comes back.
+        server.markNewUpdates = true
+        before = reloads.size
+        store.loadNotificationPreferences()
+        assertTrue(store.markNewUpdatesFlow.value)
+        assertEquals(true, published())
+        assertEquals(before + 1, reloads.size)
+
+        // Opened: the parcel is seen, and the widgets lose its dot.
+        store.markSeen(store.shown)
+        assertFalse(store.dotShown)
+        assertNull(published())
+
+        // With news again, read on another device first: the next read of the list takes it away there too.
+        server.newsAt = "2026-09-08T11:30:00.000001+00:00"
+        store.load()
+        assertEquals(true, published())
+        server.seenAt = "2026-09-08T11:45:00.000001+00:00"
+        store.load()
+        assertNull(published())
+
+        // The order and the dot as the widget is told them, worked out from the cards.
+        val parcel = store.shown.copy(newsAt = scanned, seenAt = opened)
+        val localizer = Localizer(AppLanguage.En)
+        assertEquals(true, ParcelStore.widgetOrder(listOf(parcel), localizer, now).single().newUpdate)
+        assertNull(ParcelStore.widgetOrder(listOf(parcel), localizer, now, markNewUpdates = false).single().newUpdate)
+        assertNull(ParcelStore.widgetOrder(listOf(parcel.copy(seenAt = seenNow)), localizer, now).single().newUpdate)
     }
 
     @Test

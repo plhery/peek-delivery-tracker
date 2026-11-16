@@ -61,7 +61,7 @@ import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
-import java.util.Locale
+import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import kotlin.math.floor
 
 // The "Parcels" widget's designs ([DeliveryWidgetList.design]), drawn from the app's design system as the iPhone's
@@ -96,8 +96,8 @@ internal fun ListCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetPar
             DeliveryWidgetContent(entry, size, page = listIntent(context))
         }
         parcels.size == 1 -> CardAndSteps(list, parcels.single(), art.single(), size, type)
-        parcels.size == 2 -> WideCards(parcels, art, size, type)
-        else -> ThreeCards(parcels, art, size, type, ExtensionLocalizer.locale(list.languageCode))
+        parcels.size == 2 -> WideCards(list, parcels, art, size, type)
+        else -> ThreeCards(list, parcels, art, size, type)
     }
 }
 
@@ -111,7 +111,7 @@ private fun CardAndSteps(list: DeliveryWidgetList, parcel: DeliveryWidgetParcel,
     val card = parcel.card ?: return
     val steps = parcel.steps.orEmpty()
     val top = DpSize(size.width, if (steps.isEmpty()) size.height else size.height / 3)
-    val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = top.inside(PAGE_MARGIN), type)
+    val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = top.inside(PAGE_MARGIN), type, list.languageCode)
     Box(root().background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))) {
         Column(GlanceModifier.fillMaxSize()) {
             Box(GlanceModifier.fillMaxWidth().height(top.height)) {
@@ -173,7 +173,7 @@ private fun Steps(list: DeliveryWidgetList, steps: List<DeliveryWidgetStep>, car
 
 /** Two parcels in a large widget: two wide cards, one above the other, half the height each, on the app's page. */
 @Composable
-private fun WideCards(parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardArt>, size: DpSize, type: WidgetText) {
+private fun WideCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardArt>, size: DpSize, type: WidgetText) {
     val context = LocalContext.current
     val each = DpSize(size.width - PAGE_MARGIN * 2, (size.height - PAGE_MARGIN * 2 - CARD_GAP) / 2)
     Box(root().background(WidgetCardColors.page)) {
@@ -182,7 +182,7 @@ private fun WideCards(parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardA
             parcels.zip(art).forEachIndexed { index, (parcel, pictures) ->
                 if (index > 0) Spacer(GlanceModifier.height(CARD_GAP))
                 val card = parcel.card ?: return@forEachIndexed
-                val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = each.inside(WIDE_CARD_PADDING), type)
+                val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = each.inside(WIDE_CARD_PADDING), type, list.languageCode)
                 Box(
                     GlanceModifier.fillMaxWidth().defaultWeight().cornerRadius(16.dp).background(WidgetCardColors.pair(card.surface))
                         .clickable(openParcel(context, parcel)),
@@ -197,14 +197,14 @@ private fun WideCards(parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardA
 
 /** Three parcels in a large widget: three of the app list's cards, one above another, a third of the height each. */
 @Composable
-private fun ThreeCards(parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardArt>, size: DpSize, type: WidgetText, locale: Locale) {
+private fun ThreeCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardArt>, size: DpSize, type: WidgetText) {
     val context = LocalContext.current
     Box(root().background(WidgetCardColors.page)) {
         PageTap(listIntent(context))
         Column(GlanceModifier.fillMaxSize().padding(PAGE_MARGIN)) {
             parcels.zip(art).forEachIndexed { index, (parcel, pictures) ->
                 if (index > 0) Spacer(GlanceModifier.height(CARD_GAP))
-                Box(GlanceModifier.fillMaxWidth().defaultWeight()) { ListCard(parcel, pictures, size.width - PAGE_MARGIN * 2, type, locale) }
+                Box(GlanceModifier.fillMaxWidth().defaultWeight()) { ListCard(parcel, pictures, size.width - PAGE_MARGIN * 2, type, list.languageCode) }
             }
         }
     }
@@ -212,12 +212,13 @@ private fun ThreeCards(parcels: List<DeliveryWidgetParcel>, art: List<WidgetCard
 
 /**
  * `ParcelPassCard` made small, `width` wide: the carrier's mark and the day at the top, the name and the status at the
- * bottom, the half route at the end.
+ * bottom, the status after the new-update dot where the parcel has one (#72), the half route at the end.
  */
 @Composable
-private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp, type: WidgetText, locale: Locale) {
+private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp, type: WidgetText, languageCode: String) {
     val context = LocalContext.current
     val card = parcel.card ?: return
+    val locale = ExtensionLocalizer.locale(languageCode)
     val ink = WidgetCardColors.pair(card.ink)
     val caption = type.points(IosTextStyle.Caption)
     val inner = width - LIST_CARD_PADDING * 2
@@ -225,7 +226,7 @@ private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp
     val dayWidth = day?.let { type.width(it, caption, FontWeight.Medium) + 8.dp } ?: 0.dp
     Box(
         GlanceModifier.fillMaxSize().cornerRadius(16.dp).background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))
-            .semantics { contentDescription = rowDescription(parcel) },
+            .semantics { contentDescription = spokenRow(parcel, languageCode) },
     ) {
         art.route?.let { route ->
             val frame = DeliveryWidgetPictures.frame(DeliveryWidgetPicture.Half)
@@ -244,7 +245,10 @@ private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp
             Column(GlanceModifier.width(minOf(inner, LIST_CARD_WORDS))) {
                 Text(parcel.listName, maxLines = 1, style = TextStyle(color = WidgetCardColors.primary, fontSize = type.sp(type.points(IosTextStyle.Headline)), fontWeight = FontWeight.Medium))
                 Spacer(GlanceModifier.height(2.dp))
-                Text(parcel.listStatus.openingLine(locale), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption)))
+                Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    if (parcel.newUpdate == true) NewUpdateDot(WidgetCardColors.pair(card.ink, NEW_UPDATE_OPACITY))
+                    Text(parcel.listStatus.openingLine(locale), GlanceModifier.defaultWeight(), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption)))
+                }
             }
         }
     }
@@ -292,7 +296,6 @@ internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: Dp
     val parcels = list.parcels.zip(art)
     val filled = if (columns == 2) listOf(parcels.take(parcels.size / 2), parcels.drop(parcels.size / 2)) else listOf(parcels)
     val width = (size.width - PAGE_MARGIN * 2 - PASS_GAP * (columns - 1)) / columns
-    val locale = ExtensionLocalizer.locale(list.languageCode)
     Box(root().background(ListColors.page)) {
         PageTap(listIntent(context))
         // Each pass stands in half the gap above and below it, the page's margins less as much.
@@ -301,7 +304,7 @@ internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: Dp
                 if (index > 0) Spacer(GlanceModifier.width(PASS_GAP))
                 Column(GlanceModifier.defaultWeight().fillMaxHeight()) {
                     column.forEach { (parcel, pictures) ->
-                        Box(GlanceModifier.fillMaxWidth().defaultWeight().padding(vertical = PASS_GAP / 2)) { Pass(parcel, pictures, metrics, width, type, locale) }
+                        Box(GlanceModifier.fillMaxWidth().defaultWeight().padding(vertical = PASS_GAP / 2)) { Pass(parcel, pictures, metrics, width, type, list.languageCode) }
                     }
                 }
             }
@@ -312,18 +315,22 @@ internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: Dp
 /**
  * A parcel's pass, `width` wide, in its carrier's colours: the mark at the top, then the name, over the day, or the
  * stage and day where both fit; in a large widget the day at the top's end, then the name and the stage on one line.
+ * The stage or day starts with the new-update dot where the parcel has one (#72), and keeps to the room it leaves
+ * ([besideDot]).
  */
 @Composable
-private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: PassMetrics, width: Dp, type: WidgetText, locale: Locale) {
+private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: PassMetrics, width: Dp, type: WidgetText, languageCode: String) {
     val context = LocalContext.current
     val card = parcel.card ?: return
+    val locale = ExtensionLocalizer.locale(languageCode)
     val words = width - PASS_PADDING * 2
+    val dot = if (parcel.newUpdate == true) WidgetCardColors.pair(card.ink, NEW_UPDATE_OPACITY) else null
     val nameStyle = TextStyle(color = WidgetCardColors.primary, fontSize = type.sp(metrics.name), fontWeight = FontWeight.Medium)
     val lineStyle = TextStyle(color = WidgetCardColors.pair(card.ink), fontSize = type.sp(metrics.caption2))
     fun width(text: String) = type.width(text, metrics.caption2, FontWeight.Normal)
     Column(
         GlanceModifier.fillMaxSize().cornerRadius(12.dp).background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))
-            .semantics { contentDescription = rowDescription(parcel) }.padding(horizontal = PASS_PADDING, vertical = PASS_PADDING_VERTICAL),
+            .semantics { contentDescription = spokenRow(parcel, languageCode) }.padding(horizontal = PASS_PADDING, vertical = PASS_PADDING_VERTICAL),
     ) {
         val day = if (metrics.oneLine) parcel.listDay?.openingLine(locale) else null
         Row(GlanceModifier.fillMaxWidth().height(metrics.top), verticalAlignment = Alignment.CenterVertically) {
@@ -340,13 +347,23 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
             Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(parcel.listName, GlanceModifier.defaultWeight(), maxLines = 1, style = nameStyle)
                 Spacer(GlanceModifier.width(6.dp))
-                Text(status, GlanceModifier.width(minOf(width(status), words * 0.5f)), maxLines = 1, style = lineStyle.copy(textAlign = TextAlign.End))
+                val room = words * 0.5f - parcel.dotRoom
+                val points = type.besideDot(parcel, status, metrics.caption2, room)
+                dot?.let { NewUpdateDot(it) }
+                Text(
+                    status, GlanceModifier.width(minOf(type.width(status, points, FontWeight.Normal), room)), maxLines = 1,
+                    style = lineStyle.copy(fontSize = type.sp(points), textAlign = TextAlign.End),
+                )
             }
         } else {
             val whole = parcel.listLine.openingLine(locale)
-            val line = if (width(whole) <= words) whole else parcel.listDay?.openingLine(locale) ?: whole
+            val room = words - parcel.dotRoom
+            val line = if (width(whole) <= room) whole else parcel.listDay?.openingLine(locale) ?: whole
             Text(parcel.listName, maxLines = 1, style = nameStyle)
-            Text(line, maxLines = 1, style = lineStyle)
+            Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                dot?.let { NewUpdateDot(it) }
+                Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(type.besideDot(parcel, line, metrics.caption2, room))))
+            }
         }
     }
 }
@@ -458,7 +475,7 @@ private fun SectionColumn(lines: List<DeliveryWidgetList.Line>, laid: SectionsLa
                             SectionHeading(copy.text(sectionTitleKey(line.kind)), line.count, layout.type, top = if (before == null) 0.dp else HEADING_TOP, height = laid.headingHeight)
                         is DeliveryWidgetList.Line.Row -> ListRow(
                             line.parcel, layout, top = if (before == null || before is DeliveryWidgetList.Line.Heading) 0.dp else metrics.rowSpacing,
-                            lineColor = if (line.parcel.section == ParcelSectionKind.Attention.rawValue) ListColors.warning else ListColors.secondary,
+                            lineColor = if (line.parcel.section == ParcelSectionKind.Attention.rawValue) Brand.warning else SystemColors.secondaryLabel,
                             mark = { CarrierMark(line.parcel, metrics) },
                         )
                         is DeliveryWidgetList.Line.More -> Unit

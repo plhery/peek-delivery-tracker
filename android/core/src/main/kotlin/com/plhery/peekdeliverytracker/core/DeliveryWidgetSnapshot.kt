@@ -50,6 +50,12 @@ data class DeliveryWidgetParcel(
     val carrierId: String? = null,
     /** Its last tracking steps, latest first, which the list widget shows of a parcel alone in it. */
     val steps: List<DeliveryWidgetStep>? = null,
+    /**
+     * Whether its card in the app's list shows the new-update dot (#72): a scan its reader hasn't seen, while "Mark new
+     * updates" is on ([marksNewUpdate]). The widgets show the same dot, and lose it when the app does: the parcel opened
+     * on any of the account's devices, or the setting off. None from an app that didn't publish it.
+     */
+    val newUpdate: Boolean? = null,
 ) {
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"

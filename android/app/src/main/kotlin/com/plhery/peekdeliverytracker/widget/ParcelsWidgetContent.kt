@@ -85,9 +85,6 @@ internal object ListColors {
     val page = of(Brand.background)
     val primary = of(SystemColors.label)
     val secondary = of(SystemColors.secondaryLabel)
-
-    /** The stage of a parcel that needs the reader, as the app's list writes it. */
-    val warning = of(Brand.warning)
 }
 
 /** `ParcelListMetrics`: a row's name and the box of its stage's symbol, each smaller where [compact]. */
@@ -115,6 +112,7 @@ internal class ListMetrics(val compact: Boolean, type: WidgetText) {
  * [SectionsLayout] picks the type and the rows that fit.
  */
 internal class ListLayout(list: DeliveryWidgetList, size: DpSize, val type: WidgetText, compact: Boolean, columns: Int, oneColumn: Boolean = false) {
+    val languageCode: String = list.languageCode
     val locale: Locale = ExtensionLocalizer.locale(list.languageCode)
     val room = DpSize(size.width - MARGIN * 2, size.height - MARGIN * 2)
 
@@ -215,11 +213,20 @@ internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width
 internal fun rowDescription(parcel: DeliveryWidgetParcel): String =
     listOfNotNull(parcel.listName, parcel.carrier.takeIf { parcel.named != false }, parcel.listStatus, parcel.listDay).joinToString(", ")
 
+/** The size of a row's `line`, `room` wide: the layout's, smaller where the new-update dot needs it ([besideDot]). */
+internal fun linePoints(parcel: DeliveryWidgetParcel, layout: ListLayout, line: String, room: Dp): Float =
+    layout.type.besideDot(parcel, line, layout.statusPoints, room)
+
+/** What TalkBack reads for a row, a pass or a card of the list: "New update." first while it shows the dot (#72). */
+internal fun spokenRow(parcel: DeliveryWidgetParcel, languageCode: String): String =
+    newUpdateSpoken(parcel, languageCode)?.let { "$it ${rowDescription(parcel)}" } ?: rowDescription(parcel)
+
 /**
  * The stage and day a large widget's row ends in, `ParcelListLineRow`'s: the whole line where it fits beside the name,
- * else what fits beside the name kept to [NAME_SHARE] of the widget ([fittingLine]); its width, and the gap before it.
+ * else what fits beside the name kept to [NAME_SHARE] of the widget ([fittingLine]); its width, its size ([linePoints]),
+ * and the gap before it, and before the line the new-update dot where the parcel has one ([dotRoom]).
  */
-internal class LineRowEnd(val line: String, val width: Dp, val gap: Dp)
+internal class LineRowEnd(val line: String, val width: Dp, val gap: Dp, val points: Float)
 
 internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineRowEnd {
     val type = layout.type
@@ -227,25 +234,28 @@ internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineR
     val name = type.width(parcel.listName, layout.metrics.namePoints, FontWeight.Medium)
     val whole = parcel.listLine.openingLine(layout.locale)
     val wholeWidth = type.width(whole, layout.statusPoints, FontWeight.Normal)
+    val dot = parcel.dotRoom
     // The name, a spacer at least END_GAP wide and the line, spaced as the symbol and the name.
     val apart = spacing * 2 + END_GAP
-    if (name + apart + wholeWidth <= layout.words) return LineRowEnd(whole, wholeWidth, apart)
-    val room = (layout.words - spacing - END_GAP - layout.room.width * NAME_SHARE).coerceAtLeast(0.dp)
+    if (name + apart + dot + wholeWidth <= layout.words) return LineRowEnd(whole, wholeWidth, apart, layout.statusPoints)
+    val room = (layout.words - spacing - END_GAP - layout.room.width * NAME_SHARE - dot).coerceAtLeast(0.dp)
     val line = fittingLine(parcel, layout, room)
-    return LineRowEnd(line, minOf(type.width(line, layout.statusPoints, FontWeight.Normal), room), spacing + END_GAP)
+    val points = linePoints(parcel, layout, line, room)
+    return LineRowEnd(line, minOf(type.width(line, points, FontWeight.Normal), room), spacing + END_GAP, points)
 }
 
 /**
  * A parcel's row, `top` below the one before it (Glance's padding is inside a view's height): the stage's symbol in its
  * colour, then its name over its stage and day (`ParcelListStackedRow`), or, in a large widget, its name and then its
- * stage and day at the row's end ([lineRowEnd]).
+ * stage and day at the row's end ([lineRowEnd]). The line, in `lineColor`, starts with the new-update dot where the
+ * parcel has one (#72), and keeps to the room the dot leaves it ([linePoints]).
  */
 @Composable
 internal fun ListRow(
     parcel: DeliveryWidgetParcel,
     layout: ListLayout,
     top: Dp,
-    lineColor: ColorProvider = ListColors.secondary,
+    lineColor: AdaptiveColor = SystemColors.secondaryLabel,
     mark: @Composable () -> Unit = { StageSymbol(parcel, layout.metrics) },
 ) {
     val context = LocalContext.current
@@ -253,9 +263,11 @@ internal fun ListRow(
     val type = layout.type
     val metrics = layout.metrics
     val nameStyle = TextStyle(color = ListColors.primary, fontSize = type.sp(metrics.namePoints), fontWeight = FontWeight.Medium)
-    val lineStyle = TextStyle(color = lineColor, fontSize = type.sp(layout.statusPoints))
+    val lineStyle = TextStyle(color = ListColors.of(lineColor), fontSize = type.sp(layout.statusPoints))
+    val dot = if (parcel.newUpdate == true) ListColors.of(lineColor, NEW_UPDATE_OPACITY) else null
     Row(
-        GlanceModifier.fillMaxWidth().height(layout.rowHeight + top).padding(top = top).semantics { contentDescription = rowDescription(parcel) }.clickable(openParcel(context, parcel)),
+        GlanceModifier.fillMaxWidth().height(layout.rowHeight + top).padding(top = top).semantics { contentDescription = spokenRow(parcel, layout.languageCode) }
+            .clickable(openParcel(context, parcel)),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         mark()
@@ -264,11 +276,17 @@ internal fun ListRow(
             val end = lineRowEnd(parcel, layout)
             Text(name, GlanceModifier.defaultWeight(), maxLines = 1, style = nameStyle)
             Spacer(GlanceModifier.width(end.gap))
-            Text(end.line, GlanceModifier.width(end.width), maxLines = 1, style = lineStyle.copy(textAlign = TextAlign.End))
+            dot?.let { NewUpdateDot(it) }
+            Text(end.line, GlanceModifier.width(end.width), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(end.points), textAlign = TextAlign.End))
         } else {
             Column(GlanceModifier.defaultWeight()) {
                 Text(name, maxLines = 1, style = nameStyle)
-                Text(fittingLine(parcel, layout, layout.words), maxLines = 1, style = lineStyle)
+                Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    val room = layout.words - parcel.dotRoom
+                    val line = fittingLine(parcel, layout, room)
+                    dot?.let { NewUpdateDot(it) }
+                    Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(linePoints(parcel, layout, line, room))))
+                }
             }
         }
     }

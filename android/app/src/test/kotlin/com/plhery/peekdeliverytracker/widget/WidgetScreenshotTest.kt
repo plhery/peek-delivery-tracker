@@ -177,6 +177,33 @@ class WidgetScreenshotTest {
     @Config(qualifiers = "+night")
     fun wordsDark() = words(dark = true)
 
+    /**
+     * The new-update dot (#72) where the app's list shows it: before the first card's status, not the second's; in words,
+     * before the badges of the first and third parcels, not the second's.
+     */
+    private fun newUpdates(dark: Boolean) {
+        val folder = files.newFolder("WidgetCards")
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val source = widgetSource(app, folder, store)
+        val published = runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble()) }
+        check(store.save(published.copy(parcels = published.parcels.mapIndexed { index, parcel -> if (index == 0) parcel.copy(newUpdate = true) else parcel })))
+        val marked = parcels.mapIndexed { index, parcel -> if (index != 1) parcel.copy(newUpdate = true) else parcel }
+        shoot(
+            if (dark) "new_updates_dark" else "new_updates_light", dark,
+            listOf(
+                listOf(widget(IPHONE_SMALL, source.current(false, CAPTURED)), widget(IPHONE_MEDIUM, source.current(true, CAPTURED))),
+                listOf(widget(IPHONE_SMALL, wordsEntry(marked, medium = false)), widget(IPHONE_MEDIUM, wordsEntry(marked, medium = true))),
+            ),
+        )
+    }
+
+    @Test
+    fun newUpdatesLight() = newUpdates(dark = false)
+
+    @Test
+    @Config(qualifiers = "+night")
+    fun newUpdatesDark() = newUpdates(dark = true)
+
     /** Nothing on its way, and the widget switched off in the app. */
     private fun states(dark: Boolean) = shoot(
         if (dark) "states_dark" else "states_light", dark,

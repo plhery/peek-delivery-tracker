@@ -1,8 +1,11 @@
 package com.plhery.peekdeliverytracker.widget
 
 import android.content.Context
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RemoteViews
+import android.widget.TextView
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -139,6 +142,23 @@ suspend fun listViews(
     list: DeliveryWidgetList,
     art: (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt? = { _, _ -> null },
 ): RemoteViews = GlanceRemoteViews().compose(context, size) { ParcelsWidgetContent(list, size, art) }.remoteViews
+
+/** `views` applied in a host as a launcher applies them, and every view under it, the host first. */
+fun appliedViews(context: Context, views: RemoteViews): List<View> {
+    val host = FrameLayout(context)
+    host.addView(views.apply(context, host))
+    return viewsUnder(host)
+}
+
+fun viewsUnder(view: View): List<View> =
+    listOf(view) + ((view as? ViewGroup)?.let { group -> (0 until group.childCount).flatMap { viewsUnder(group.getChildAt(it)) } } ?: emptyList())
+
+/** What TalkBack reads of a view: its description, else its words and its children's, one space apart. */
+fun spoken(view: View): String = (
+    view.contentDescription?.toString()
+        ?: listOfNotNull((view as? TextView)?.text?.toString()).plus((view as? ViewGroup)?.let { group -> (0 until group.childCount).map { spoken(group.getChildAt(it)) } } ?: emptyList())
+            .joinToString(" ")
+    ).replace(Regex("\\s+"), " ").trim()
 
 /** `views` as a launcher shows them: applied in the host's window, `size` big, as a home screen's cells hold a widget. */
 @Composable

@@ -1,10 +1,11 @@
 import 'server-only';
 
 import { createMcpHandler, type McpHttpHandler } from '@modelcontextprotocol/server';
-import { clientIp, clientNetwork } from '../api';
+import { clientIp, clientNetwork, clientSite, readBodyBytes } from '../api';
 import { captureOperationalError } from '../observability';
 import { RateLimiter } from '../rateLimit';
 import type { AssistantTokenOwner, SupabaseServiceClient } from '../supabase';
+import { isRecord } from '../types';
 import { assistantsOpenToAccount } from './access';
 import { personalTokensOpen, SCOPES, secretDigest, type AssistantSettings } from './settings';
 import { assistantServer, type AssistantCaller } from './tools';
@@ -14,9 +15,9 @@ const PER_GRANT_PER_MINUTE = 120;
 const MOST_MCP_BODY_BYTES = 65_536;
 
 /**
- * Unknown tokens one network may present a minute; past that it waits before any token is looked up. Assistants call
- * from a few shared addresses, and each connected account's expired access token counts once an hour, so this stays
- * high: it only bounds the database lookups a stranger can cause.
+ * Unknown tokens one network (an IPv4 address or IPv6 /64), and one IPv6 /48, may present a minute; past that it waits
+ * before any token is looked up. Assistants call from a few shared addresses, and each connected account's expired
+ * access token counts once an hour, so this stays high: it only bounds the database lookups a stranger can cause.
  */
 const UNKNOWN_TOKENS_PER_MINUTE = 600;
 
@@ -74,15 +75,18 @@ export async function tokenOwner(
   now = Date.now(),
 ): Promise<AssistantTokenOwner | Response> {
   if (!token) return unauthorized(settings);
-  const network = clientNetwork(clientIp(request));
-  const refusedUntil = refusedNetworks.get(network) ?? 0;
+  const ip = clientIp(request);
+  const site = clientSite(ip);
+  const networks = site ? [clientNetwork(ip), site] : [clientNetwork(ip)];
+  const refusedUntil = Math.max(...networks.map((network) => refusedNetworks.get(network) ?? 0));
   if (refusedUntil > now) return tooMany(Math.ceil((refusedUntil - now) / 1_000));
   const found = await service.assistantToken(secretDigest(token));
   // While personal tokens are off, one counts as unknown: it is kept, and works again once they are on.
   const owner = found && (found.kind !== 'personal' || personalTokensOpen()) ? found : null;
   if (!owner) {
-    const wait = unknownTokens.retryAfter(network, { limit: UNKNOWN_TOKENS_PER_MINUTE, window: 60 });
-    if (wait) {
+    for (const network of networks) {
+      const wait = unknownTokens.retryAfter(network, { limit: UNKNOWN_TOKENS_PER_MINUTE, window: 60 });
+      if (!wait) continue;
       if (refusedNetworks.size >= 4_096) refusedNetworks.delete(refusedNetworks.keys().next().value!);
       refusedNetworks.set(network, now + wait * 1_000);
     }
@@ -96,9 +100,31 @@ export async function tokenOwner(
   return owner;
 }
 
+function rpcError(id: unknown, code: number, message: string): Response {
+  const echoed = typeof id === 'string' || typeof id === 'number' ? id : null;
+  return Response.json({ jsonrpc: '2.0', id: echoed, error: { code, message } }, { status: 400 });
+}
+
+/**
+ * The request again with its one JSON-RPC message, or the answer that refuses it. A batch would run many tools for one
+ * request of the grant's allowance, and `subscriptions/listen` would hold a stream open with nothing to tell: Peek's
+ * tools never change while it runs. A body that is not JSON goes on, for the handler to answer as the protocol says.
+ */
+async function oneMessage(request: Request): Promise<Request | Response> {
+  const body = Buffer.from(await readBodyBytes(request, MOST_MCP_BODY_BYTES));
+  let message: unknown = null;
+  try {
+    message = JSON.parse(body.toString('utf8'));
+  } catch { /* Not JSON. */ }
+  if (Array.isArray(message) && message.length > 1) return rpcError(null, -32600, 'Send one message a request');
+  const only: unknown = Array.isArray(message) ? message[0] : message;
+  if (isRecord(only) && only.method === 'subscriptions/listen') return rpcError(only.id, -32601, 'Peek sends no notifications');
+  return new Request(request.url, { method: request.method, headers: request.headers, body, signal: request.signal });
+}
+
 /**
  * Serves `POST /mcp`: the bearer token must be an access token of a live grant, or a personal token while those are on,
- * whose account the setting is open to. The tools then work on that account alone.
+ * whose account the setting is open to. Each request carries one message; the tools then work on that account alone.
  */
 export async function serveMcp(
   settings: AssistantSettings,
@@ -110,8 +136,10 @@ export async function serveMcp(
   if (!token) return unauthorized(settings);
   const owner = await tokenOwner(settings, service, request, token, now);
   if (owner instanceof Response) return owner;
+  const single = await oneMessage(request);
+  if (single instanceof Response) return single;
   const peek: McpRequestData = { service, caller: { userId: owner.userId, scopes: owner.scopes } };
-  return mcpHandler().fetch(request, {
+  return mcpHandler().fetch(single, {
     authInfo: {
       token,
       clientId: owner.clientId ?? 'personal',

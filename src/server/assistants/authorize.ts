@@ -1,7 +1,7 @@
 import 'server-only';
 
 import type { SupabaseServiceClient } from '../supabase';
-import { findClient, redirectMatches, type AssistantClient } from './clients';
+import { findClient, redirectMatches, redirectUriProblem, type AssistantClient } from './clients';
 import { knownScopes, PKCE_CHALLENGE, SCOPES, type AssistantSettings, type Scope } from './settings';
 
 /** An authorization request Peek can ask the owner about. */
@@ -50,7 +50,8 @@ export async function readAuthorizationRequest(
   const redirectUri = presented === null
     ? (client.redirectUris.length === 1 ? client.redirectUris[0]! : null)
     : (client.redirectUris.some((registered) => redirectMatches(registered, presented)) ? presented : null);
-  if (!redirectUri) return { problem: { kind: 'shown', reason: 'redirect' } };
+  // Checked again here: an address registered before its scheme was refused is not used either.
+  if (!redirectUri || redirectUriProblem(redirectUri)) return { problem: { kind: 'shown', reason: 'redirect' } };
 
   const state = parameters.get('state');
   const back = (error: string, description: string) => ({

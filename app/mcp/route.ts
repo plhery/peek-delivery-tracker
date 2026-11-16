@@ -15,8 +15,9 @@ export const POST = apiRoute(async (context) => {
   return serveMcp(settings, requireService(context), context.request, context.token);
 }, { authenticated: false, serviceRequired: true, capability: true });
 
-/** No stream to open and no session to end: each request stands alone. */
+/** No stream to open and no session to end: each request stands alone. Without the setting, there is no endpoint. */
 function notAllowed(): Response {
+  if (!assistantsConfigured()) return new Response(null, { status: 404, headers: { 'Cache-Control': 'no-store' } });
   return new Response(null, { status: 405, headers: { Allow: 'POST', 'Cache-Control': 'no-store' } });
 }
 

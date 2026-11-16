@@ -99,6 +99,15 @@ describe('redirect addresses a client may register', () => {
       'microsoft-edge:https://attacker.example.net', 'x-safari-https://attacker.example.net', 'googlechromes://attacker.example.net',
       'opera-https://attacker.example.net', 'firefox:https://attacker.example.net', 'intent://scan/', 'wss://attacker.example.net', 'mailto:a@example.com',
     ]) expect(redirectUriProblem(uri), uri).toBe('uses a scheme that is not allowed');
+    // Schemes the system handles: a search of a share, a troubleshooter, an Office command, an installer, a shortcut.
+    for (const uri of [
+      'search-ms:query=x&crumb=location:\\\\attacker.example.net\\share', 'ms-msdt:/id PCWDiagnostic', 'ms-officecmd:{}',
+      'ms-settings:privacy', 'itms-services://?action=download-manifest&url=https://attacker.example.net/x.plist', 'itms-apps://x',
+      'shortcuts://run-shortcut?name=x', 'smb://attacker.example.net/share', 'webcal://attacker.example.net/x.ics',
+      'x-apple-systempreferences:com.apple.preference', 'search:query=x',
+    ]) expect(redirectUriProblem(uri), uri).toBe('uses a scheme that is not allowed');
+    // An app's own scheme that merely starts like one still works.
+    for (const uri of ['items-app://callback', 'msteams-example://callback', 'smbapp://callback']) expect(redirectUriProblem(uri), uri).toBeNull();
     expect(redirectUriProblem('https://assistant.example.com/callback#done')).toBe('has a fragment');
     expect(redirectUriProblem('https://assistant.example.com/callback#')).toBe('has a fragment');
     expect(redirectUriProblem('https://someone@assistant.example.com/callback')).toBe('has credentials');
@@ -189,6 +198,8 @@ describe('client id metadata documents', () => {
     for (const address of [
       '127.0.0.1', '10.1.2.3', '172.16.5.4', '192.168.1.1', '169.254.169.254', '100.64.0.1', '0.0.0.0',
       '::1', '::', 'fc00::1', 'fd12:3456::1', 'fe80::1', '::ffff:127.0.0.1', '::ffff:10.0.0.1', '64:ff9b::7f00:1',
+      // IPv4-compatible loopback, local-use NAT64 of 10.0.0.1, site-local, Teredo, 6to4, documentation and multicast.
+      '::7f00:1', '64:ff9b:1::a00:1', 'fec0::1', '2001::1', '2002:a00:1::1', '2001:db8::1', '3fff::1', 'ff02::1',
       'not an address',
     ]) expect(publicAddress(address), address).toBe(false);
     expect(publicAddress('1.1.1.1')).toBe(true);

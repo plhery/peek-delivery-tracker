@@ -184,6 +184,17 @@ describe('the MCP endpoint', () => {
     expect((await mcp(connect(['parcels:read']), 'tools/list', {}, 'legacy', from('198.51.100.9'))).status).toBe(200);
   });
 
+  it('counts an IPv6 /48\'s unknown tokens together, whichever of its /64s they come from', async () => {
+    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
+    const from = (ip: string) => ({ 'cf-connecting-ip': ip });
+    for (let index = 0; index < 600; index += 1) {
+      expect((await mcp(newSecret('access'), 'tools/list', {}, 'legacy', from(`2001:db8:5500:${index.toString(16)}::1`))).status).toBe(401);
+    }
+    expect((await mcp(newSecret('access'), 'tools/list', {}, 'legacy', from('2001:db8:5500:ffff::1'))).status).toBe(401);
+    expect((await mcp(connect(['parcels:read']), 'tools/list', {}, 'legacy', from('2001:db8:5500:fffe::1'))).status).toBe(429);
+    expect((await mcp(connect(['parcels:read']), 'tools/list', {}, 'legacy', from('2001:db8:5501::1'))).status).toBe(200);
+  });
+
   it('refuses an account the setting is not open to, by id or by confirmed email', async () => {
     const secret = connect(['parcels:read'], otherUser);
     const auth = vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: 'sam@example.com', emailConfirmed: false, locale: null });
@@ -242,6 +253,36 @@ describe('the MCP endpoint', () => {
     expect(tools.map(({ name }) => name).sort()).toEqual(['add_parcels', 'archive_parcel', 'get_parcel', 'list_parcels']);
     for (const { annotations } of tools) expect(annotations?.readOnlyHint === true || annotations?.destructiveHint === false).toBe(true);
     expect(Object.keys(tokenApi).filter((name) => /^[A-Z]+$/.test(name))).toEqual(['GET']);
+  });
+
+  it('takes one message a request: no batch of calls, and no stream to listen on', async () => {
+    const list = vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
+    const secret = connect(['parcels:read']);
+    const batch = (size: number) => mcpPost(new NextRequest('https://peek.example/mcp', {
+      method: 'POST',
+      headers: { accept: 'application/json, text/event-stream', 'content-type': 'application/json', 'mcp-protocol-version': LATEST_PROTOCOL_VERSION, authorization: `Bearer ${secret}` },
+      body: JSON.stringify(Array.from({ length: size }, (_, index) => ({ jsonrpc: '2.0', id: index + 1, method: 'tools/call', params: { name: 'list_parcels', arguments: {} } }))),
+    }), none);
+    const refused = await batch(100);
+    expect(refused.status).toBe(400);
+    expect(await refused.json()).toMatchObject({ jsonrpc: '2.0', id: null, error: { code: -32600 } });
+    expect(list).not.toHaveBeenCalled();
+
+    const listen = await mcp(secret, 'subscriptions/listen', { notifications: { toolsListChanged: true } }, 'modern');
+    expect(listen.status).toBe(400);
+    expect(listen.headers.get('content-type')).toMatch(/^application\/json/);
+    expect((await listen.json()).error).toMatchObject({ code: -32601 });
+
+    // One message still goes through, whatever it holds.
+    expect((await call(secret, 'list_parcels')).result!.structuredContent).toMatchObject({ total: 0 });
+    expect(list).toHaveBeenCalledTimes(1);
+    const broken = await mcpPost(new NextRequest('https://peek.example/mcp', {
+      method: 'POST',
+      headers: { accept: 'application/json, text/event-stream', 'content-type': 'application/json', 'mcp-protocol-version': LATEST_PROTOCOL_VERSION, authorization: `Bearer ${secret}` },
+      body: '{"jsonrpc":',
+    }), none);
+    expect(broken.status).toBe(400);
+    expect((await broken.json()).error).toMatchObject({ code: -32700 });
   });
 
   it('answers a 2026-07-28 client in JSON', async () => {
@@ -411,12 +452,25 @@ describe('the MCP endpoint', () => {
     expect(archive).toHaveBeenCalledTimes(1);
   });
 
-  it('opens no stream and ends no session', async () => {
+  it('opens no stream and ends no session, and is not there when no account may connect', async () => {
     for (const handler of [mcpGet, mcpDelete]) {
       const response = handler();
       expect(response.status).toBe(405);
       expect(response.headers.get('allow')).toBe('POST');
     }
+    vi.stubEnv('ASSISTANT_ACCOUNTS', '');
+    for (const handler of [mcpGet, mcpDelete]) expect(handler().status).toBe(404);
+  });
+
+  it('keeps a comma or a quote in a tracking number within that number', async () => {
+    const paths: string[] = [];
+    vi.spyOn(service as unknown as { request: (path: string) => Promise<unknown> }, 'request').mockImplementation(async (path: string) => {
+      paths.push(new URL(path, 'https://database.example').searchParams.get('tracking_number') ?? '');
+      return [];
+    });
+    const lookup = await call(connect(['parcels:read']), 'get_parcel', { parcel: 'SYNTHETICA","SYNTHETICB' });
+    expect(lookup.result).toMatchObject({ isError: true });
+    expect(paths).toContain('in.("SYNTHETICA\\",\\"SYNTHETICB")');
   });
 
   it('refuses another site\'s page', async () => {
@@ -455,6 +509,27 @@ describe('the OAuth endpoints', () => {
     const json = await token(new NextRequest('https://peek.example/oauth/token', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }), none);
     expect(json.status).toBe(400);
     expect((await json.json()).error).toBe('invalid_request');
+  });
+
+  it('give no token to an account the setting is no longer open to', async () => {
+    vi.spyOn(service, 'redeemAssistantCode').mockResolvedValue({ userId: otherUser, grantId: '6c000000-0000-4000-a000-0000000000f2', scopes: ['parcels:read'] });
+    const refresh = vi.spyOn(service, 'refreshAssistantTokens').mockResolvedValue({ userId: otherUser, grantId: '6c000000-0000-4000-a000-0000000000f2', scopes: ['parcels:read'], rotated: true });
+    const answers = [
+      await token(form('/oauth/token', {
+        grant_type: 'authorization_code', code: newSecret('code'), redirect_uri: 'https://assistant.example.com/callback', code_verifier: 'v'.repeat(64), client_id: newClientId(),
+      }), none),
+      await token(form('/oauth/token', { grant_type: 'refresh_token', refresh_token: newSecret('refresh'), client_id: newClientId() }), none),
+    ];
+    for (const answer of answers) {
+      expect(answer.status).toBe(400);
+      const body = await answer.json();
+      expect(body.error).toBe('invalid_grant');
+      expect(body).not.toHaveProperty('access_token');
+    }
+    refresh.mockResolvedValue({ userId, grantId: '6c000000-0000-4000-a000-0000000000f3', scopes: ['parcels:read'], rotated: true });
+    const renewed = await token(form('/oauth/token', { grant_type: 'refresh_token', refresh_token: newSecret('refresh'), client_id: newClientId() }), none);
+    expect(renewed.status).toBe(200);
+    expect(await renewed.json()).toMatchObject({ token_type: 'Bearer', scope: 'parcels:read' });
   });
 
   it('register a client from JSON only', async () => {

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { connection } from 'next/server';
 import { AssistantConsentScreen } from '../../../src/components/AssistantConsentScreen';
 import { translateMessage } from '../../../src/lib/messages';
-import { clientIp, clientNetwork } from '../../../src/server/api';
+import { clientIp, clientNetwork, clientSite } from '../../../src/server/api';
 import { readAuthorizationRequest } from '../../../src/server/assistants/authorize';
 import { consentDetails } from '../../../src/server/assistants/consent';
 import { assistantsConfigured } from '../../../src/server/assistants/settings';
@@ -16,9 +16,20 @@ interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-/** Each opening may fetch a client's metadata document, so one network opens the page at most this often. */
+/**
+ * Each opening may fetch a client's metadata document, so one network (an IPv4 address or IPv6 /64) opens the page at
+ * most this often a minute, and one IPv6 /48, which may hold a whole street's homes, four times as often.
+ */
 const OPENINGS_PER_MINUTE = 30;
+const OPENINGS_PER_SITE_PER_MINUTE = 120;
 const openings = new RateLimiter();
+
+/** Whether this address has opened the page too often lately; each opening counts. */
+function openedTooOften(ip: string): boolean {
+  const site = clientSite(ip);
+  const network = openings.retryAfter(clientNetwork(ip), { limit: OPENINGS_PER_MINUTE, window: 60 }) > 0;
+  return (site !== null && openings.retryAfter(site, { limit: OPENINGS_PER_SITE_PER_MINUTE, window: 60 }) > 0) || network;
+}
 
 /** The page answers one person's request: it is never indexed, and never leaves as a referrer. */
 export async function generateMetadata(): Promise<Metadata> {
@@ -42,7 +53,7 @@ export default async function AuthorizePage({ searchParams }: Props) {
   const service = serviceClient();
   if (!settings || !service) notFound();
   const language = await requestLanguage();
-  if (openings.retryAfter(clientNetwork(clientIp({ headers: await headers() })), { limit: OPENINGS_PER_MINUTE, window: 60 })) {
+  if (openedTooOften(clientIp({ headers: await headers() }))) {
     return <AssistantConsentScreen {...language} request={null} busy query="" />;
   }
   const parameters = new URLSearchParams();

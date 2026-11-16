@@ -9,8 +9,10 @@ const challenge = pkceChallenge('v'.repeat(64));
 const callback = 'https://assistant.example.com/oauth/callback';
 const single: AssistantClient = { id: newClientId(), name: 'Example Assistant', uri: null, redirectUris: [callback] };
 const several: AssistantClient = { id: newClientId(), name: 'Example App', uri: null, redirectUris: ['http://127.0.0.1/callback', 'com.example.assistant:/oauth'] };
+/** Registered before its scheme was refused. */
+const older: AssistantClient = { id: newClientId(), name: 'Example Old App', uri: null, redirectUris: ['ms-officecmd:callback'] };
 const service = {
-  assistantClient: vi.fn(async (id: string) => [single, several].find((client) => client.id === id) ?? null),
+  assistantClient: vi.fn(async (id: string) => [single, several, older].find((client) => client.id === id) ?? null),
 } as unknown as SupabaseServiceClient;
 
 function query(values: Record<string, string | null> = {}): URLSearchParams {
@@ -43,6 +45,11 @@ describe('an authorization request', () => {
     // With several registered, the client must say which one.
     await expect(readAuthorizationRequest(settings, service, query({ client_id: several.id, redirect_uri: null })))
       .resolves.toEqual({ problem: { kind: 'shown', reason: 'redirect' } });
+    // An address registered before its scheme was refused is never sent anything, not even a refusal.
+    for (const redirect of ['ms-officecmd:callback', null]) {
+      await expect(readAuthorizationRequest(settings, service, query({ client_id: older.id, redirect_uri: redirect })))
+        .resolves.toEqual({ problem: { kind: 'shown', reason: 'redirect' } });
+    }
   });
 
   it('uses the one registered redirect when none is given, and a loopback one on any port', async () => {

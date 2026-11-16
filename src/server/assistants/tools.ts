@@ -254,14 +254,14 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         search: z.string().max(MOST_SEARCH_LENGTH).optional().describe('Words the parcel\'s name, shop, carrier, tracking number or scans hold, such as a shop\'s name'),
         limit: z.number().int().min(1).max(MOST_LISTED).optional().describe('How many at most; 20 unless given'),
       }),
-      annotations: { readOnlyHint: true, openWorldHint: false },
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     }, async (query) => answer(await listParcels(service, caller.userId, query)));
 
     server.registerTool('get_parcel', {
       title: 'Get a parcel',
       description: 'One of the user\'s parcels: its status, expected delivery day, pickup point and the carrier\'s scans, newest first.',
       inputSchema: z.object({ parcel: z.string().min(1).max(100).describe('The parcel\'s id from list_parcels, or its tracking number') }),
-      annotations: { readOnlyHint: true, openWorldHint: false },
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     }, async ({ parcel: named }) => {
       const parcel = await ownedParcel(service, caller.userId, named);
       if (!parcel) return refusal('No such parcel in this Peek account.');

@@ -3,6 +3,7 @@ import 'server-only';
 import { readBodyBytes } from '../api';
 import { SupabaseError, type SupabaseServiceClient } from '../supabase';
 import type { JsonObject } from '../types';
+import { assistantsOpenToAccount } from './access';
 import { clientName, clientUri, MOST_REDIRECT_URIS, redirectHost, redirectUriProblem } from './clients';
 import {
   ACCESS_TOKEN_SECONDS,
@@ -84,7 +85,12 @@ function tokenAnswer(access: string, refresh: string | null, scopes: Scope[]): R
   }, { headers: NO_STORE });
 }
 
-/** The token endpoint: a code (with its PKCE verifier) or a refresh token, for a public client. */
+const CLOSED_ACCOUNT = 'Peek no longer connects assistants to this account';
+
+/**
+ * The token endpoint: a code (with its PKCE verifier) or a refresh token, for a public client. An account the setting
+ * is no longer open to gets no token, so its grants lapse rather than renew.
+ */
 export async function exchangeToken(
   settings: AssistantSettings,
   service: SupabaseServiceClient,
@@ -113,6 +119,7 @@ export async function exchangeToken(
         accessDigest: secretDigest(access), accessExpires, refreshDigest: secretDigest(refresh), refreshExpires,
       });
       if (!issued) return oauthError('invalid_grant', 'The code is unknown, expired, already used, or not this client\'s');
+      if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
       return tokenAnswer(access, refresh, issued.scopes);
     }
     case 'refresh_token': {
@@ -123,6 +130,7 @@ export async function exchangeToken(
         newRefreshDigest: secretDigest(refresh), refreshExpires,
       });
       if (!issued) return oauthError('invalid_grant', 'The refresh token is unknown, expired or revoked');
+      if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
       return tokenAnswer(access, issued.rotated ? refresh : null, issued.scopes);
     }
     default:

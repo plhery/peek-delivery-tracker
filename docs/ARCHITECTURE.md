@@ -370,9 +370,12 @@ Key server modules:
   - Peek is the OAuth 2.1 authorization server of its own MCP endpoint, `/mcp`, with the
     canonical origin as issuer. Clients are public: PKCE with S256 only, the exact redirect
     address they registered (any port on this computer's loopback), and the issuer in each
-    answer (RFC 9207). A client registers (`/oauth/register`: 20 an hour per address, IPv6 /64 and
-    /48, and 1,000 an hour from all together) or names its metadata document
-    by its URL; the server fetches that over HTTPS from public addresses only, at most 10 KB
+    answer (RFC 9207). A redirect address is HTTPS, HTTP to the loopback, or an app's own
+    scheme, never one a browser or the system handles (`javascript:`, `search-ms:`,
+    `itms-services:`…), checked again at each consent. A client registers (`/oauth/register`:
+    20 an hour per address, IPv6 /64 and /48, and 1,000 an hour from all together) or names its metadata document
+    by its URL; the server fetches that over HTTPS from public addresses only (IPv6 global
+    unicast), at most 10 KB
     in five seconds over at most 16 connections at a time, closes a connection as soon as it
     refuses the answer, and keeps the document an hour.
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
@@ -386,10 +389,13 @@ Key server modules:
     theirs, as they require. A personal token lasts until it is deleted. Allowing an
     assistant, or making a personal token, needs a sign-in from the last ten minutes, which the server
     checks with Auth afresh; the consent page then asks to sign in again in place and
-    allows the same request ([AUTHENTICATION.md](AUTHENTICATION.md)). The database keeps
+    allows the same request ([AUTHENTICATION.md](AUTHENTICATION.md)). An account the list no
+    longer names gets no token, so its grants lapse. The database keeps
     tokens and codes as their SHA-256, and only the service role reaches those tables.
-  - A grant makes at most 120 requests a minute. A network may present 600 unknown tokens
-    a minute, open the consent page 30 times a minute and register 20 clients an hour. An
+  - A grant makes at most 120 requests a minute, each `/mcp` request one message: a batch
+    and `subscriptions/listen` get 400. A network may present 600 unknown tokens a minute,
+    as may an IPv6 /48, open the consent page 30 times a minute (a /48 120) and register 20
+    clients an hour. An
     account has at most 50 grants and 10 personal tokens; Settings lists the assistants and
     disconnects any.
   - Settings also shows how to add Peek to Claude, ChatGPT and Gemini, with each one's menu

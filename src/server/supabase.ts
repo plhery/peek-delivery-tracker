@@ -132,6 +132,11 @@ function query(
   return new URLSearchParams(entries as Record<string, string>).toString();
 }
 
+/** A PostgREST `in` list of text values, each quoted with its quotes and backslashes escaped: a comma stays within it. */
+function quotedList(values: readonly string[]): string {
+  return `in.(${values.map((value) => `"${value.replace(/["\\]/g, '\\$&')}"`).join(',')})`;
+}
+
 function rows(value: unknown): JsonObject[] {
   return Array.isArray(value) ? value.filter(isRecord) : [];
 }
@@ -1341,7 +1346,7 @@ export class SupabaseServiceClient extends SupabaseClient {
   async accountTrackingNumbers(userId: string, numbers: string[]): Promise<Map<string, string>> {
     const known = new Map<string, string>();
     if (!numbers.length) return known;
-    const list = `in.(${numbers.map((number) => `"${number}"`).join(',')})`;
+    const list = quotedList(numbers);
     const [saved, merged] = await Promise.all([
       this.request(`/rest/v1/packages?${query({ select: 'id,tracking_number', user_id: `eq.${userId}`, tracking_number: list })}`),
       this.request(`/rest/v1/packages?${query({
@@ -1948,7 +1953,7 @@ export class SupabaseServiceClient extends SupabaseClient {
     const starts = Array.from({ length: Math.max(0, trackingNumber.length - 4) }, (_, index) => trackingNumber.slice(0, index + 4));
     if (!starts.length) return 0;
     const params = query([
-      ['tracking_number', `in.(${starts.map((start) => `"${start}"`).join(',')})`],
+      ['tracking_number', quotedList(starts)],
       ['fix_status', 'eq.open'],
       ['last_outcome', 'in.(detection_unknown,detection_choice)'],
       ['last_seen', `gte.${since.toISOString()}`],

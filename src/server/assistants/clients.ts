@@ -21,7 +21,14 @@ const BLOCKED_SCHEMES = new Set([
   // Schemes that open a web address in a browser, which would hand the code to a website as if to an app.
   'microsoft-edge', 'microsoft-edge-holographic', 'googlechrome', 'googlechromes', 'firefox', 'firefox-private',
   'opera', 'brave', 'duckduckgo', 'x-web-search', 'x-safari-http', 'x-safari-https',
+  // Schemes the system itself handles: they open files, shares, installers and settings, which no assistant's app needs.
+  'search', 'shell', 'hcp', 'its', 'mk', 'res', 'jar', 'smb', 'nfs', 'afp', 'webdav', 'davs', 'ssh', 'sftp', 'telnet',
+  'rdp', 'vnc', 'ldap', 'ldaps', 'gopher', 'news', 'nntp', 'feed', 'webcal', 'callto', 'sip', 'sips', 'facetime',
+  'facetime-audio', 'shortcuts', 'workflow', 'prefs', 'app-settings', 'help', 'x-apple-helpbook',
+  'x-apple-systempreferences', 'applescript',
 ]);
+// Windows' own schemes (search-ms, ms-msdt, ms-officecmd, ms-settings…) and Apple's installers (itms-services…).
+const BLOCKED_SCHEME_PREFIXES = /^(?:ms-|search-ms$|itms(?:-|s?$)|vnd\.ms-)/;
 const LOOPBACK_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
 export const MOST_REDIRECT_URIS = 10;
 
@@ -39,8 +46,8 @@ export function redirectUriProblem(uri: string): string | null {
   if (url.protocol === 'https:') return url.hostname ? null : 'has no host';
   if (url.protocol === 'http:') return LOOPBACK_HOSTS.has(url.hostname) ? null : 'uses HTTP away from this computer';
   const scheme = url.protocol.slice(0, -1);
-  return /^[a-z][a-z0-9+.-]*$/.test(scheme) && !BLOCKED_SCHEMES.has(scheme) && !/-https?$/.test(scheme)
-    ? null : 'uses a scheme that is not allowed';
+  return /^[a-z][a-z0-9+.-]*$/.test(scheme) && !BLOCKED_SCHEMES.has(scheme) && !BLOCKED_SCHEME_PREFIXES.test(scheme)
+    && !/-https?$/.test(scheme) ? null : 'uses a scheme that is not allowed';
 }
 
 function loopback(url: URL): boolean {
@@ -116,15 +123,18 @@ for (const [network, prefix] of [
   ['192.0.0.0', 24], ['192.0.2.0', 24], ['192.168.0.0', 16], ['198.18.0.0', 15], ['198.51.100.0', 24],
   ['203.0.113.0', 24], ['224.0.0.0', 4], ['240.0.0.0', 4],
 ] as const) unreachable.addSubnet(network, prefix, 'ipv4');
-// No ::ffff:0:0/96: BlockList checks IPv4-mapped addresses against the IPv4 ranges, and that range would block every IPv4 one.
+// An IPv6 address must be global unicast (2000::/3): that leaves out loopback, the IPv4-mapped and -compatible forms,
+// NAT64, unique-local, link- and site-local and multicast. Within it, these special ranges are left out too.
+const globalUnicast = new BlockList();
+globalUnicast.addSubnet('2000::', 3, 'ipv6');
 for (const [network, prefix] of [
-  ['::', 127], ['64:ff9b::', 96], ['100::', 64], ['2001::', 23], ['2001:db8::', 32],
-  ['2002::', 16], ['fc00::', 7], ['fe80::', 10], ['ff00::', 8],
+  ['2001::', 23], ['2001:db8::', 32], ['2002::', 16], ['3fff::', 20],
 ] as const) unreachable.addSubnet(network, prefix, 'ipv6');
 
 export function publicAddress(address: string): boolean {
   const family = isIP(address);
-  return family !== 0 && !unreachable.check(address, family === 6 ? 'ipv6' : 'ipv4');
+  if (family === 4) return !unreachable.check(address, 'ipv4');
+  return family === 6 && globalUnicast.check(address, 'ipv6') && !unreachable.check(address, 'ipv6');
 }
 
 type LookupCallback = (error: NodeJS.ErrnoException | null, address: string | LookupAddress[], family?: number) => void;

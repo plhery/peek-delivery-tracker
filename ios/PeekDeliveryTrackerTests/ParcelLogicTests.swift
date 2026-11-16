@@ -1163,19 +1163,16 @@ final class ParcelLogicTests: XCTestCase {
         let parcels = DeliveryWidgetSelection.parcels(onTheWay: [nextUp, outForDelivery, later], delivered: [])
 
         XCTAssertEqual(parcels, [outForDelivery, nextUp, later])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: true), [[outForDelivery, nextUp], [later]])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: false), [[outForDelivery], [nextUp], [later]])
     }
 
-    func testWidgetShowsTwoOutForDeliveryParcelsBeforeOtherCandidates() {
+    func testWidgetShowsEveryOutForDeliveryParcelBeforeOtherCandidates() {
         let nextUp = widgetParcel(label: "Next up", outForDelivery: false)
         let first = widgetParcel(label: "Courier one", outForDelivery: true)
         let second = widgetParcel(label: "Courier two", outForDelivery: true)
         let third = widgetParcel(label: "Courier three", outForDelivery: true)
         let parcels = DeliveryWidgetSelection.parcels(onTheWay: [nextUp, first, second, third], delivered: [])
 
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: true), [[first, second], [third, nextUp]])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: [nextUp], medium: true), [[nextUp]])
+        XCTAssertEqual(parcels, [first, second, third, nextUp])
     }
 
     /// A delivered parcel comes after those on their way, for a day after it arrived, even when the app has not
@@ -1190,24 +1187,20 @@ final class ParcelLogicTests: XCTestCase {
         let parcels = DeliveryWidgetSelection.parcels(onTheWay: [nextUp], delivered: [arrived, older], now: now)
 
         XCTAssertEqual(parcels, [nextUp, arrived])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: true, now: now), [[nextUp], [arrived]])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: false, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [[nextUp]])
-        let many = (0..<12).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
-        XCTAssertEqual(DeliveryWidgetSelection.parcels(onTheWay: many, delivered: [arrived], now: now).count, DeliveryWidgetSelection.limit)
+        XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: now), [nextUp, arrived])
+        XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [nextUp])
     }
 
-    /// The Parcels widget lists all the next-delivery widget's parcels, in its order, while the next-delivery widget
-    /// turns through the first few.
-    func testListWidgetListsTheNextDeliveryWidgetsParcelsInItsOrder() {
+    /// The widget lists every parcel the app publishes, in its order.
+    func testWidgetListsEveryPublishedParcelInItsOrder() {
         let now = Date(timeIntervalSince1970: 1_800_000_000)
         let courier = widgetParcel(label: "Courier", outForDelivery: true)
         let onTheWay = (0..<15).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
         var arrived = widgetParcel(label: "Arrived", outForDelivery: false)
         arrived.deliveredAt = now.addingTimeInterval(-3_600)
-        let parcels = DeliveryWidgetSelection.parcels(onTheWay: onTheWay + [courier], delivered: [arrived], now: now, limit: .max)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: onTheWay + [courier], delivered: [arrived], now: now)
 
         XCTAssertEqual(parcels, [courier] + onTheWay + [arrived])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: false, now: now).flatMap { $0 }, Array(parcels.prefix(DeliveryWidgetSelection.limit)))
         let listed = DeliveryWidgetSelection.listed(parcels, now: now)
         XCTAssertEqual(listed, parcels)
         XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [courier] + onTheWay)
@@ -1237,7 +1230,7 @@ final class ParcelLogicTests: XCTestCase {
         let onTheWay = (0..<2).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
         var arrived = widgetParcel(label: "Arrived", outForDelivery: false)
         arrived.deliveredAt = now.addingTimeInterval(-3_600)
-        let parcels = DeliveryWidgetSelection.parcels(onTheWay: onTheWay, delivered: [arrived], now: now, limit: .max)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: onTheWay, delivered: [arrived], now: now)
         let design = { (date: Date) in DeliveryWidgetList.design(of: DeliveryWidgetSelection.listed(parcels, now: date).count, size: .medium) }
         XCTAssertEqual(design(now), .passes)
         XCTAssertEqual(design(now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), .cards)
@@ -1424,7 +1417,7 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual("".openingLine(in: Locale(identifier: "en")), "")
     }
 
-    /// The list widget's last line counts the parcels left out in the form each language gives the count.
+    /// The widget's last line counts the parcels left out in the form each language gives the count.
     func testListWidgetCountsInEachLanguagesForm() {
         let dictionaries = [
             "en": ["widget.listMore.one": "+{{count}} more", "widget.listMore.many": "+{{count}} more"],
@@ -1443,22 +1436,6 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual([1, 21, 3, 11].map { text("ru", $0) }, ["one 1", "one 21", "few 3", "many 11"])
         // A language without the copy reads English.
         XCTAssertEqual(text("it", 4), "+4 more")
-    }
-
-    /// The next button turns the widgets of one size, and for a few minutes only.
-    func testWidgetTurnLastsItsSpellForOneSize() throws {
-        let suiteName = "DeliveryWidgetTurnTests.\(UUID().uuidString)"
-        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
-        defer { defaults.removePersistentDomain(forName: suiteName) }
-        let store = DeliveryWidgetSharedStore(defaults: defaults)
-        let at = Date(timeIntervalSince1970: 1_800_000_000)
-        let turn = DeliveryWidgetTurn(parcel: UUID(), at: at)
-
-        XCTAssertNil(store.turn(size: "small", now: at))
-        store.setTurn(turn, size: "small")
-        XCTAssertEqual(store.turn(size: "small", now: at.addingTimeInterval(60)), turn)
-        XCTAssertNil(store.turn(size: "medium", now: at.addingTimeInterval(60)))
-        XCTAssertNil(store.turn(size: "small", now: turn.ends))
     }
 
     func testDisablingWidgetRemovesSharedParcelSnapshot() throws {
@@ -2169,8 +2146,6 @@ final class ParcelLogicTests: XCTestCase {
 
         let fridayMorning = friday.addingTimeInterval(8 * 3_600)
         XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: fridayMorning).map(\.detail), ["today", "yesterday"])
-        XCTAssertEqual(DeliveryWidgetSelection.pages(of: published, medium: false, now: fridayMorning).map { $0.map(\.detail) },
-                       [["today"], ["yesterday"]])
         let snapshot = DeliveryWidgetSnapshot(generatedAt: lateThursday, languageCode: "en", parcels: published)
         XCTAssertTrue(NextDeliveryAnswer.text(snapshot: snapshot, enabled: true, copy: ExtensionLocalizer(languageCode: "en"), now: fridayMorning)
             .hasSuffix(": today."))

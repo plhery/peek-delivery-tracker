@@ -112,9 +112,9 @@ describe('Native localization references', () => {
   });
 
   it('checks the Share extension copy along with the app and the widget', () => {
-    const keys = ['shareExtension.title', 'common.cancel', 'native.done', 'widget.galleryName'];
+    const keys = ['shareExtension.title', 'common.cancel', 'native.done', 'widget.listGalleryName'];
     const references = nativeLocalizationReferences(nativeSwiftSources(fileURLToPath(new URL('../ios', import.meta.url))), keys);
-    for (const key of ['shareExtension.title', 'shareExtension.notFound', 'common.cancel', 'native.done', 'widget.galleryName']) {
+    for (const key of ['shareExtension.title', 'shareExtension.notFound', 'common.cancel', 'native.done', 'widget.listGalleryName']) {
       assert.ok(references.has(key), key);
     }
   });

@@ -466,7 +466,7 @@ final class ParcelStore: ObservableObject {
         publishedWidgetState = nil
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: [], in: widgetPictures) }
         if let widgetTrucks { DeliveryWidgetPictures.drawTrucks([], drawn: &widgetTrucksDrawn, localizer: localizer, in: widgetTrucks) }
-        for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
+        WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
         scheduleDeliveryLiveActivities(forceEnd: true)
     }
 
@@ -1371,7 +1371,7 @@ final class ParcelStore: ObservableObject {
             }
         let ordered = DeliveryWidgetSelection.parcels(
             onTheWay: nextDeliveries(of: parcels, localizer: localizer, now: now, midnights: midnights),
-            delivered: delivered, now: now, limit: .max
+            delivered: delivered, now: now
         )
         func sections(at date: Date) -> [UUID: String] {
             let pairs = ParcelOrganizer.sections(from: parcels, now: date).flatMap { section in section.parcels.map { ($0.id, section.kind.rawValue) } }
@@ -1480,11 +1480,11 @@ final class ParcelStore: ObservableObject {
             deliveryWidgetStore?.clearSnapshot()
         }
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: snapshot?.parcels.compactMap(\.card) ?? [], in: widgetPictures) }
-        for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
+        WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
     }
 
-    /// Gives each parcel the next-delivery widget turns through its card once the card's pictures are drawn, and starts
-    /// drawing those that aren't. The list widget writes words alone.
+    /// Gives each of the first `DeliveryWidgetSelection.limit` parcels its card once the card's pictures are drawn, and
+    /// starts drawing those that aren't. The widget shows the others as rows.
     private func carded(_ shown: [DeliveryWidgetParcel]) -> [DeliveryWidgetParcel] {
         guard let folder = widgetPictures else { return shown }
         var missing: [(parcel: Parcel, card: DeliveryWidgetCard)] = []

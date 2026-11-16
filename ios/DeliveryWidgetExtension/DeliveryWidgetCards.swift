@@ -95,8 +95,6 @@ struct DeliveryWidgetCardView: View {
     let art: DeliveryWidgetCardArt
     /// A small widget, half a medium one, or a whole medium one.
     let shape: DeliveryWidgetPicture
-    /// The end of the top row is left to the widget's next button.
-    var leavesNext = false
     /// The status line starts with the dot for new updates, which the Parcels widget shows.
     var marked = false
 
@@ -116,7 +114,6 @@ struct DeliveryWidgetCardView: View {
                     .frame(height: Self.markHeight(shape))
                     .accessibilityLabel(parcel.carrier)
                 Spacer(minLength: 0)
-                if leavesNext { Color.clear.frame(width: DeliveryWidgetNextMark.size, height: 1) }
             }
             Spacer(minLength: 4)
             VStack(alignment: .leading, spacing: shape == .half ? 2 : 3) {
@@ -179,34 +176,6 @@ private struct WidgetNewUpdateSaidFirst: ViewModifier {
         content.accessibilityLabel { label in
             if marked { Text(words) }
             label
-        }
-    }
-}
-
-/// The widget's next button, as quiet as the card's words: a small chevron in the card's ink. It reaches past what it
-/// shows, so that a finger finds it.
-struct DeliveryWidgetNextMark: View {
-    let ink: Color
-
-    static let size: CGFloat = 18
-    static let reach: CGFloat = 9
-
-    var body: some View {
-        Image(systemName: "chevron.forward")
-            .font(.system(size: 8, weight: .bold))
-            .foregroundStyle(ink.opacity(0.6))
-            .frame(width: Self.size, height: Self.size)
-            .background(ink.opacity(0.07), in: Circle())
-            .padding(Self.reach)
-            .contentShape(Rectangle())
-    }
-}
-
-extension View {
-    /// The widget's next button at the end of a card's top row, level with the card's mark.
-    func deliveryWidgetNext(markHeight: CGFloat, @ViewBuilder _ button: () -> some View) -> some View {
-        overlay(alignment: .topTrailing) {
-            button().offset(x: DeliveryWidgetNextMark.reach, y: (markHeight - DeliveryWidgetNextMark.size) / 2 - DeliveryWidgetNextMark.reach)
         }
     }
 }

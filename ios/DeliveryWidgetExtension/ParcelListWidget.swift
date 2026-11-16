@@ -158,9 +158,9 @@ private struct ParcelListWidgetView: View {
 
 // MARK: - Cards
 
-/// A few parcels as the Next delivery widget's cards, the app list's Next up first. One fills the widget as Next delivery
-/// shows it, and a large widget writes its last steps under it; two stand side by side in a medium widget and one above
-/// the other in a large one; three fill a large widget as the app list's cards.
+/// A few parcels as cards, the app list's Next up first. One fills the widget, and a large widget writes its last steps
+/// under it; two stand side by side in a medium widget and one above the other in a large one; three fill a large widget
+/// as the app list's cards.
 private struct ParcelCards: View {
     let parcels: [DeliveryWidgetParcel]
     let art: [UUID: DeliveryWidgetCardArt]
@@ -224,7 +224,7 @@ private struct ParcelCards: View {
         .widgetURL(only.parcel.deepLink)
     }
 
-    /// Two cards, as the Next delivery widget shows a pair: side by side, or one above the other in a large widget.
+    /// Two cards: side by side, or one above the other in a large widget.
     private func pair(_ shown: [Shown], route: DeliveryWidgetPicture) -> some View {
         let layout = size == .large ? AnyLayout(VStackLayout(spacing: 8)) : AnyLayout(HStackLayout(spacing: 8))
         return layout {
@@ -774,7 +774,7 @@ private struct ParcelListLineRow: View {
     }
 }
 
-/// Nothing to list, or the widgets turned off: in the words and the shape of the next-delivery widget's.
+/// Nothing to list, or the widgets turned off.
 private struct ParcelListState: View {
     let symbol: String
     let title: String
@@ -803,14 +803,15 @@ private struct ParcelListState: View {
     }
 }
 
-/// The widgets' parcels by how many there are: up to one, two or three for a small, medium or large widget as cards; up
-/// to twice as many as passes; more as rows under the app list's sections.
+/// Peek's widget, "Parcels": the parcels by how many there are, up to one, two or three for a small, medium or large
+/// widget as cards; up to twice as many as passes; more as rows under the app list's sections. It has the kind of the
+/// Next delivery widget it replaced, so that the widgets readers placed show it.
 struct ParcelListWidget: Widget {
     var body: some WidgetConfiguration {
         let store = DeliveryWidgetSharedStore(appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier())
         // The app's language, else the device's: the gallery can open before the app has.
         let copy = ExtensionLocalizer(savedLanguageCode: store?.languageCode)
-        return StaticConfiguration(kind: DeliveryWidgetSharedStore.listKind, provider: ParcelListProvider()) { entry in
+        return StaticConfiguration(kind: DeliveryWidgetSharedStore.kind, provider: ParcelListProvider()) { entry in
             ParcelListWidgetView(entry: entry)
         }
         .configurationDisplayName(copy.text("widget.listGalleryName"))

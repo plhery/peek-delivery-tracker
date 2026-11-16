@@ -253,7 +253,7 @@ struct ParcelLinkRoute: Equatable, Sendable, CustomStringConvertible, CustomDebu
 
 enum NativeRoute: Equatable {
     case parcel(UUID)
-    /// The deliveries, as the list widget opens them.
+    /// The deliveries, as the widget opens them.
     case parcels
     case friend(UUID)
     case add(trackingInput: String)

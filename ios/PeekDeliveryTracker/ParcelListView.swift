@@ -672,7 +672,7 @@ private struct DeliveryListView: View {
         navigation.open(parcelID)
     }
 
-    /// The list, as the list widget opens it. Beside a parcel, it is in view already.
+    /// The list, as the widget opens it. Beside a parcel, it is in view already.
     private func showList() {
         closeSheets()
         if !listShown { navigation.path = [] }

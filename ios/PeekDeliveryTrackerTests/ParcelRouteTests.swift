@@ -942,7 +942,7 @@ extension ParcelRouteTests {
             let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
             defer { defaults.removePersistentDomain(forName: suite) }
             let parcels = DemoRepository(defaults: defaults, language: { language }).list()
-            let shown = DeliveryWidgetSelection.pages(of: ParcelStore.widgetDeliveries(of: parcels, localizer: localizer), medium: true).first ?? []
+            let shown = Array(DeliveryWidgetSelection.listed(ParcelStore.widgetDeliveries(of: parcels, localizer: localizer)).prefix(2))
             XCTAssertEqual(shown.count, 2, "\(language)")
             var sample: [DeliveryWidgetParcel] = []
             for (index, item) in shown.enumerated() {

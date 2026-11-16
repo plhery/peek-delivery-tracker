@@ -185,37 +185,30 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   `NSSupportsLiveActivities` in `Info.plist`). Settings has no switch for them, and the
   app ends any still showing and withdraws the iPhone's registration, so the server
   starts none.
-- **The widget** shows the next parcel; a medium one shows a parcel out for delivery beside
-  the one after it. Tapping one opens it. When more parcels are on their way, or were delivered in the last day, a small
-  next button turns the widget to them (`ShowNextParcelIntent`); a few minutes later it shows
-  its first parcels again. Each is its card from the app's list: the carrier's colours and mark
-  over the parcel's route, or Pip alone for a parcel without places. A widget hasn't the memory
-  to draw the map, so the app draws these pictures into the App Group (`DeliveryWidgetPictures`);
-  until they are there, the widget shows the parcels in words. Tinted and clear widgets keep
-  the card without its colours or route.
-  Until the app has drawn the reader's cards, the widget gallery shows the demo's next
-  deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test
-  checks them against the demo; it redraws them when run with
-  `TEST_RUNNER_PEEK_WIDGET_SAMPLE` set to that folder's full path.
-- **The Parcels widget** lists the same parcels, its design chosen by how many there are: up to one, two or three
-  for a small, medium or large widget as the other widget's cards, the list's Next up first (a large one with a single
-  parcel adds its last four steps); up to twice that as passes in the carriers' colours; more as rows under the
-  list's sections, each marked with its carrier's truck, a parcel needing the reader in the warning colour
-  (`DeliveryWidgetList.design`). The rows are as many as fit, in smaller type before one is left out
-  (`DeliveryWidgetList.layouts`); a last line, after the last row shown, counts the others. Passes show only where
-  every one fits; where two cannot stand one above the other, at larger text or in a shorter widget, the parcels are
-  rows, in a medium widget down one column without headings before one is left out (`DeliveryWidgetList.fits`).
-  Until the app has drawn every listed parcel's card, the widget shows rows. The small widget and that line open the
-  list
-  (`peekdeliverytracker://parcels`); in the medium and large ones, a card, pass or row opens its parcel. A card,
-  pass or row carries the list's dot for new updates, which VoiceOver reads first; "Mark new updates" hides it, and
-  opening the parcel clears it. The app publishes every parcel with its section, whether it is Next up, whether the
-  list marks it, and its carrier, the first few with their last steps, and draws each listed carrier's truck into the
-  App Group.
+- **The widget**, Parcels, lists the parcels on their way and those delivered in the last day, its design chosen by
+  how many there are (`DeliveryWidgetList.design`): up to one, two or three for a small, medium or large widget as
+  their cards from the app's list, the list's Next up first (a large one with a single parcel adds its last four
+  steps); up to twice that as passes in the carriers' colours; more as rows under the list's sections, each marked
+  with its carrier's truck, a parcel needing the reader in the warning colour. The rows are as many as fit, in
+  smaller type before one is left out (`DeliveryWidgetList.layouts`); a last line, after the last row shown, counts
+  the others. Passes show only where every one fits; where two cannot stand one above the other, at larger text or
+  in a shorter widget, the parcels are rows, in a medium widget down one column without headings before one is left
+  out (`DeliveryWidgetList.fits`). The small widget and that line open the list (`peekdeliverytracker://parcels`);
+  in the medium and large ones, a card, pass or row opens its parcel. A card, pass or row carries the list's dot for
+  new updates, which VoiceOver reads first; "Mark new updates" hides it, and opening the parcel clears it. Its kind
+  is `NextDeliveryWidget`, the name of the widget it replaced, which the widgets readers placed carry.
+- **The widget's pictures**: a card has the carrier's colours and mark over the parcel's route, or Pip alone for a
+  parcel without places. A widget hasn't the memory to draw the map, so the app draws the cards and each listed
+  carrier's truck into the App Group (`DeliveryWidgetPictures`); until it has drawn every listed parcel's card, the
+  widget shows rows. Tinted and clear widgets keep the cards without their colours or route. The app publishes every
+  parcel with its section, whether it is Next up, whether the list marks it, and its carrier, the first few with
+  their last steps. Until the app has drawn the reader's cards, the widget gallery shows the demo's next
+  deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test checks them against the
+  demo; it redraws them when run with `TEST_RUNNER_PEEK_WIDGET_SAMPLE` set to that folder's full path.
 - **The widgets' days** follow the clock while the app stays closed. The app also words each parcel's day, section
-  and Next up for the next seven midnights where they change, and both widgets and Siri's Next delivery read the words
+  and Next up for the next seven midnights where they change, and the widget and Siri's Next delivery read the words
   for the moment they show: "tomorrow" reads "today" on the day, last night's delivery "yesterday", and a
-  passed estimate gives way to the status. Each widget's timeline has an entry at those midnights, and at the
+  passed estimate gives way to the status. The widget's timeline has an entry at those midnights, and at the
   midnight after each step, whose time then names its weekday. When the time zone changes, the app words the days
   again for the new zone's midnights and reloads the widgets.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications

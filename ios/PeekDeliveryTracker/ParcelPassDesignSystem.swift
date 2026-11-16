@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum ExperimentalPalette {
-    /// The tints a row marks a parcel's stage with, light then dark, as hex: the list widget, which has no palette of its
+    /// The tints a row marks a parcel's stage with, light then dark, as hex: the widget, which has no palette of its
     /// own, draws them from these.
     private static let transitHex = ["#22588A", "#9BCBFF"]
     /// `Brand.warning`.

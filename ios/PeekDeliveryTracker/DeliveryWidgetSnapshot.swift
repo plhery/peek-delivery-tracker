@@ -15,9 +15,9 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     var deliveredAt: Date? = nil
     /// The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone.
     var card: DeliveryWidgetCard? = nil
-    /// The parcel's stage as the app's list marks it, which the list widget shows; none from an app that didn't publish it.
+    /// The parcel's stage as the app's list marks it, which the widget shows; none from an app that didn't publish it.
     var stage: DeliveryWidgetStage? = nil
-    /// Whether the reader named the parcel: the list widget calls one without a name by its carrier.
+    /// Whether the reader named the parcel: the widget calls one without a name by its carrier.
     var named: Bool? = nil
     /// The detail, section and Next up from each of the next midnights where one changes, which the app writes ahead:
     /// "tomorrow" becomes "today", under Arriving today, while the app stays closed. None from an app that didn't write
@@ -236,43 +236,27 @@ struct DeliveryActivityAttributes: ActivityAttributes {
 #endif
 
 enum DeliveryWidgetSelection {
-    /// How many parcels the widget's next button turns through.
+    /// How many of the first parcels the app draws cards for and gives their last steps: more than any widget shows as
+    /// cards or passes.
     static let limit = 8
     /// How long a delivered parcel stays in the widget.
     static let deliveredFor: TimeInterval = 24 * 60 * 60
     /// How many of a parcel's last steps the Parcels widget shows of it alone, which the first `limit` parcels carry.
     static let steps = 4
 
-    /// The parcels the widgets show, in their order: those out for delivery, then the others on their way as `onTheWay`
-    /// orders them, then those delivered within the last day, as `delivered` orders them. The next-delivery widget turns
-    /// through the first `limit`; the app publishes them all, so that the list widget can count those it has no room for.
+    /// The parcels the widget shows, in their order: those out for delivery, then the others on their way as `onTheWay`
+    /// orders them, then those delivered within the last day, as `delivered` orders them. The app publishes them all, so
+    /// that the widget can count those it has no room for.
     static func parcels(
         onTheWay: [DeliveryWidgetParcel],
         delivered: [DeliveryWidgetParcel],
-        now: Date = Date(),
-        limit: Int = limit
+        now: Date = Date()
     ) -> [DeliveryWidgetParcel] {
         let recent = delivered.filter { isShown($0, now: now) && $0.deliveredAt != nil }
-        return Array((onTheWay.filter(\.isOutForDelivery) + onTheWay.filter { !$0.isOutForDelivery } + recent).prefix(limit))
+        return onTheWay.filter(\.isOutForDelivery) + onTheWay.filter { !$0.isOutForDelivery } + recent
     }
 
-    /// What a widget shows at a time, first page first, worded for `now`. A small one shows one parcel. A medium one
-    /// shows a parcel out for delivery beside the parcel after it, and any other parcel alone, across it. It turns
-    /// through the first `limit`.
-    static func pages(of parcels: [DeliveryWidgetParcel], medium: Bool, now: Date = Date()) -> [[DeliveryWidgetParcel]] {
-        var rest = parcels.prefix(limit).filter { isShown($0, now: now) }.map { $0.worded(at: now) }[...]
-        var pages: [[DeliveryWidgetParcel]] = []
-        while let first = rest.popFirst() {
-            if medium, first.isOutForDelivery, let second = rest.popFirst() {
-                pages.append([first, second])
-            } else {
-                pages.append([first])
-            }
-        }
-        return pages
-    }
-
-    /// The parcels the list widget shows, in their order, worded for `now`.
+    /// The parcels the widget shows, in their order, worded for `now`.
     static func listed(_ parcels: [DeliveryWidgetParcel], now: Date = Date()) -> [DeliveryWidgetParcel] {
         parcels.filter { isShown($0, now: now) }.map { $0.worded(at: now) }
     }
@@ -313,7 +297,7 @@ enum DeliveryWidgetList {
 
     /// How the widget shows its parcels.
     enum Design: Equatable, Sendable {
-        /// The Next delivery widget's cards, the app list's Next up first.
+        /// Cards, the app list's Next up first.
         case cards
         /// A pass for each parcel, in its carrier's colours.
         case passes
@@ -458,7 +442,7 @@ extension DeliveryWidgetParcel {
         return parcel
     }
 
-    /// The name the list widget gives the parcel: its own, else its carrier's.
+    /// The name the widget gives the parcel: its own, else its carrier's.
     var listName: String { named == false ? carrier : label }
 
     /// The parcel's stage, and the day it is expected or arrived when the app knows one. Published by an app that
@@ -469,29 +453,16 @@ extension DeliveryWidgetParcel {
     }
 }
 
-/// A widget turned to other parcels with its next button: the first of them, and when. It shows its first parcels again
-/// a few minutes later, as its job is the next delivery.
-struct DeliveryWidgetTurn: Codable, Equatable, Sendable {
-    let parcel: UUID
-    let at: Date
-
-    static let spell: TimeInterval = 5 * 60
-
-    var ends: Date { at.addingTimeInterval(Self.spell) }
-}
-
 struct DeliveryWidgetSharedStore {
+    /// The Parcels widget's kind. It keeps the name of the Next delivery widget it replaced: the widgets readers placed
+    /// carry it.
     static let kind = "NextDeliveryWidget"
-    static let listKind = "ParcelListWidget"
-    /// The widgets that read the snapshot.
-    static let kinds = [kind, listKind]
     static let defaultAppGroupIdentifier = "group.com.plhery.PeekDeliveryTracker"
 
     private static let enabledKey = "sdt.deliveryWidget.enabled.v1"
     private static let liveActivitiesEnabledKey = "sdt.deliveryLiveActivities.enabled.v1"
     private static let languageKey = "sdt.deliveryWidget.language.v1"
     private static let snapshotKey = "sdt.deliveryWidget.snapshot.v1"
-    private static let turnsKey = "sdt.deliveryWidget.turns.v1"
     private let defaults: UserDefaults
 
     init?(appGroupIdentifier: String, fallbackToStandard: Bool = false) {
@@ -555,23 +526,6 @@ struct DeliveryWidgetSharedStore {
 
     func clearSnapshot() {
         defaults.removeObject(forKey: Self.snapshotKey)
-    }
-
-    /// Where the widgets of one size were turned to, until the turn's spell ends.
-    func turn(size: String, now: Date = Date()) -> DeliveryWidgetTurn? {
-        turns[size].flatMap { now < $0.ends ? $0 : nil }
-    }
-
-    func setTurn(_ turn: DeliveryWidgetTurn, size: String) {
-        var turns = turns
-        turns[size] = turn
-        guard let data = try? JSONEncoder().encode(turns) else { return }
-        defaults.set(data, forKey: Self.turnsKey)
-    }
-
-    private var turns: [String: DeliveryWidgetTurn] {
-        guard let data = defaults.data(forKey: Self.turnsKey) else { return [:] }
-        return (try? JSONDecoder().decode([String: DeliveryWidgetTurn].self, from: data)) ?? [:]
     }
 
     static func appGroupIdentifier(bundle: Bundle = .main) -> String {

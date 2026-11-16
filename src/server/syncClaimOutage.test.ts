@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi, type MockInstance } from 'vitest';
 import { startBackgroundServices, SyncJobWorker, type BackgroundState } from './background';
 import * as monitoring from './observability';
 import { SupabaseError, SupabaseServiceClient } from './supabase';
@@ -7,6 +7,7 @@ import { TrackingSyncService } from './trackingSync';
 type Runtime = NonNullable<ReturnType<typeof startBackgroundServices>>;
 const started: Runtime[] = [];
 const globalRuntime = globalThis as { __deliveryBackgroundRuntime?: unknown };
+let network: MockInstance<typeof fetch> | null = null;
 
 afterEach(() => {
   for (const runtime of started.splice(0)) {
@@ -14,12 +15,39 @@ afterEach(() => {
     runtime.readerWorker?.stop();
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
+    runtime.reviews.stop();
   }
+  // A request still on its way when the file ends logs after its worker has closed.
+  const asked = network?.mock.calls.length ?? 0;
+  network = null;
   delete globalRuntime.__deliveryBackgroundRuntime;
   vi.restoreAllMocks();
   vi.useRealTimers();
   vi.unstubAllEnvs();
+  expect(asked, 'the background services asked the network').toBe(0);
 });
+
+/** Starts the background services against a database none of them reaches: each finds nothing to do. */
+function background(): Runtime {
+  vi.stubEnv('SUPABASE_URL', 'https://database.example');
+  vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
+  for (const unset of ['VAPID_PUBLIC_KEY', 'VAPID_PRIVATE_KEY', 'APNS_TEAM_ID', 'APNS_KEY_ID', 'APNS_PRIVATE_KEY',
+    'APNS_BUNDLE_ID', 'SMTP_HOST', 'SMTP_USER', 'SMTP_PASSWORD']) {
+    vi.stubEnv(unset, '');
+  }
+  network = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new TypeError('fetch failed'));
+  const runtime = startBackgroundServices();
+  if (!runtime) throw new Error('The background services did not start');
+  started.push(runtime);
+  // The worker and the scheduler have only set their timers: none has fired.
+  vi.spyOn(runtime.client, 'claimSyncJob').mockResolvedValue(null);
+  // The readers' lane polls too: it finds nothing, and stops with the rest after each test.
+  vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
+  vi.spyOn(runtime.client, 'claimFriendshipPush').mockResolvedValue([]);
+  // The review replay starts a minute in, and finds this version's done.
+  vi.spyOn(runtime.client, 'claimTrackingReviewRun').mockResolvedValue('done');
+  return runtime;
+}
 
 const unreachable = () => new SupabaseError('The delivery database is unreachable', undefined, 'unreachable');
 const gateway = () => new SupabaseError('Supabase POST request failed (503)', 503);
@@ -229,20 +257,8 @@ describe('an idle sync worker', () => {
 describe('a failed enqueue of the scheduled sync', () => {
   function scheduled(failure: Error) {
     vi.useFakeTimers();
-    vi.stubEnv('SUPABASE_URL', 'https://database.example');
-    vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
-    for (const unset of ['VAPID_PUBLIC_KEY', 'VAPID_PRIVATE_KEY', 'APNS_TEAM_ID', 'APNS_KEY_ID', 'APNS_PRIVATE_KEY',
-      'APNS_BUNDLE_ID', 'SMTP_HOST', 'SMTP_USER', 'SMTP_PASSWORD']) {
-      vi.stubEnv(unset, '');
-    }
     const monitored = monitor();
-    const runtime = startBackgroundServices();
-    if (!runtime) throw new Error('The background services did not start');
-    started.push(runtime);
-    // The worker and the scheduler have only set their timers: none has fired.
-    vi.spyOn(runtime.client, 'claimSyncJob').mockResolvedValue(null);
-    // The readers' lane polls too: it finds nothing, and stops with the rest after each test.
-    vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
+    const runtime = background();
     vi.spyOn(runtime.client, 'lastScheduledRunFinishedAt').mockResolvedValue(null);
     const enqueue = vi.spyOn(runtime.client, 'enqueueSyncJob').mockRejectedValue(failure);
     return { runtime, enqueue, ...monitored };
@@ -278,18 +294,8 @@ describe('a failed enqueue of the scheduled sync', () => {
 describe('the scheduled sync at start', () => {
   function starting(lastRun: () => Promise<Date | null>) {
     vi.useFakeTimers({ now: new Date('2026-09-09T02:30:00Z') });
-    vi.stubEnv('SUPABASE_URL', 'https://database.example');
-    vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
-    for (const unset of ['VAPID_PUBLIC_KEY', 'VAPID_PRIVATE_KEY', 'APNS_TEAM_ID', 'APNS_KEY_ID', 'APNS_PRIVATE_KEY',
-      'APNS_BUNDLE_ID', 'SMTP_HOST', 'SMTP_USER', 'SMTP_PASSWORD']) {
-      vi.stubEnv(unset, '');
-    }
     monitor();
-    const runtime = startBackgroundServices();
-    if (!runtime) throw new Error('The background services did not start');
-    started.push(runtime);
-    vi.spyOn(runtime.client, 'claimSyncJob').mockResolvedValue(null);
-    vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
+    const runtime = background();
     vi.spyOn(runtime.client, 'lastScheduledRunFinishedAt').mockImplementation(lastRun);
     const enqueue = vi.spyOn(runtime.client, 'enqueueSyncJob').mockResolvedValue({ row: {}, queued: true });
     return { runtime, enqueue };

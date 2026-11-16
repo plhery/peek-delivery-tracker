@@ -472,7 +472,8 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
   per run, and ten followed without an account. Treat changes to these limits as security-sensitive.
 - **Queue**: `public.sync_jobs`, deduplicated. Finished jobs are kept for 30 days. A second
   worker takes readers' checks (a first check, a link opened, a refresh) beside the scheduled
-  run; its jobs' `locked_by` ends in `:readers`. `SYNC_READER_LANE=off` switches it off from
+  run; while it runs one, the job's `locked_by` ends in `:readers`, and its `sync_job_completed`
+  line says `lane: readers`. `SYNC_READER_LANE=off` switches it off from
   the next start: those checks then wait for the run, as before ([ROUTING.md](ROUTING.md)).
 - **Backups**: back up Postgres independently and regularly test restoring Auth, parcels,
   events and push tables together.

@@ -1512,7 +1512,8 @@
       "detectionRules": [
         {
           "pattern": "^00(?=[A-Z0-9]{6}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{6}$",
-          "confidence": "high"
+          "confidence": "low",
+          "preferred": true
         },
         {
           "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{8}$",
@@ -56490,6 +56491,69 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://yolkargo.com.tr/"
+    },
+    "gls-nl": {
+      "displayName": "GLS Netherlands",
+      "aliases": [
+        "GLS Nederland",
+        "GLS NL",
+        "General Logistics Systems Netherlands"
+      ],
+      "countries": [
+        "NL"
+      ],
+      "color": "#ffdd00",
+      "selectable": true,
+      "timezone": "Europe/Amsterdam",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "gls-nl",
+        "requirements": [
+          {
+            "field": "dpdPostcode",
+            "validator": "internationalPostcode",
+            "optional": true,
+            "showsMore": true,
+            "label": "Delivery postcode",
+            "type": "text",
+            "placeholder": "1012 AB",
+            "help": "GLS Netherlands shows a parcel only with its delivery postcode. Without it, other sources are asked.",
+            "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ \\-][A-Za-z0-9]+)*$",
+            "maxLength": 12,
+            "inputMode": "text",
+            "autoComplete": "postal-code"
+          }
+        ]
+      },
+      "trackingUrlTemplate": "https://www.gls-info.nl/tracking",
+      "linkRules": [
+        {
+          "domains": [
+            "gls-info.nl"
+          ],
+          "pathPattern": "^/tracking(?:/ttlink)?/?$",
+          "params": [
+            "parcelNo",
+            "NDOC"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^\\d{14}$",
+          "confidence": "low"
+        },
+        {
+          "pattern": "^\\d{12}$",
+          "confidence": "low",
+          "checksum": "gls"
+        },
+        {
+          "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{8}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.gls-info.nl/tracking"
     }
   }
 }

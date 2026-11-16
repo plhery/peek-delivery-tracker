@@ -1211,6 +1211,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -1300,6 +1301,36 @@
     "confidence": "high",
     "candidates": [
       "poczta-polska"
+    ]
+  },
+  {
+    "input": "00161403845251",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -1451,6 +1482,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -1960,6 +1992,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -2382,6 +2415,128 @@
     ]
   },
   {
+    "input": "00396134806916",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00396428517689",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00396439705310",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00401123510474",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "004038395151",
     "carrier": "unknown",
     "confidence": "low",
@@ -2400,6 +2555,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -2489,6 +2645,37 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00506469596905",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -2640,6 +2827,37 @@
     ]
   },
   {
+    "input": "00536143860763",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "0054312810885W",
     "carrier": "dpd-pl",
     "confidence": "high",
@@ -2648,11 +2866,72 @@
     ]
   },
   {
+    "input": "00549070442421",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "00559007730000939814",
     "carrier": "poczta-polska",
     "confidence": "high",
     "candidates": [
       "poczta-polska"
+    ]
+  },
+  {
+    "input": "00561840300427",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -2787,6 +3066,36 @@
     ]
   },
   {
+    "input": "00613424882710",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "006164380472967",
     "carrier": "unknown",
     "confidence": "low",
@@ -2897,6 +3206,129 @@
     ]
   },
   {
+    "input": "00669511632287",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00669518709340",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00669578675265",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00669578675388",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "0068113343",
     "carrier": "unknown",
     "confidence": "low",
@@ -2933,6 +3365,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -2946,6 +3379,99 @@
       "gls-ch",
       "japan-post",
       "brt"
+    ]
+  },
+  {
+    "input": "00724945748383",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00736424454081",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00736556050922",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -2965,6 +3491,37 @@
       "canada-post",
       "tnt",
       "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "00751015570384",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -3232,6 +3789,157 @@
     ]
   },
   {
+    "input": "00851026185307",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00851052479456",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00851120062405",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00851146836080",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00851159125416",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "008631211185",
     "carrier": "unknown",
     "confidence": "low",
@@ -3292,6 +4000,66 @@
     ]
   },
   {
+    "input": "00875570717500",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00875651613301",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "00876401518210952508",
     "carrier": "unknown",
     "confidence": "low",
@@ -3323,6 +4091,159 @@
     "candidates": []
   },
   {
+    "input": "00903289909999",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00903790134668",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00903858618352",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00904570828951",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00904853473069",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "00909355962431",
     "carrier": "unknown",
     "confidence": "low",
@@ -3342,6 +4263,159 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00921920419560",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00926014421412",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00926014421481",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00938384536986",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "00984231757257",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -3382,10 +4456,22 @@
   },
   {
     "input": "00AB12CD",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -3396,6 +4482,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -3406,50 +4493,293 @@
   },
   {
     "input": "00E7V8YY",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
     "input": "00IU9SEC",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00J6RG3A",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00JWUSVO",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00JWW9RA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00JWXA8S",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00K59ZHT",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00KHOJJM",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00KJK5MN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00KTHEQQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "00L9VSLL",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
     "input": "00LB1K5I",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
     "input": "00LB1K6P",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
     "input": "00LB1LXH",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
     "input": "00LBJB4H",
-    "carrier": "gls-fr",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
       "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -4185,6 +5515,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -4245,6 +5576,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -4519,6 +5851,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -4583,6 +5916,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -4735,6 +6069,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -4792,6 +6127,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -4823,6 +6159,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -4856,6 +6193,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -4926,6 +6264,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -4958,6 +6297,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5015,6 +6355,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5436,6 +6777,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5467,6 +6809,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5558,6 +6901,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -5620,6 +6964,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -5681,6 +7026,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -5711,6 +7057,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5744,6 +7091,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5776,6 +7124,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5809,6 +7158,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5841,6 +7191,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -5874,6 +7225,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -5904,6 +7256,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -6526,6 +7879,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -6594,6 +7948,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -6835,6 +8190,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -6964,6 +8320,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -7330,6 +8687,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -7358,6 +8716,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -7579,6 +8938,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -7843,6 +9203,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -7872,6 +9233,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -7953,6 +9315,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -7981,6 +9344,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -8032,6 +9396,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -8109,6 +9474,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -8170,6 +9536,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -8400,6 +9767,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8437,6 +9805,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -8470,6 +9839,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8502,6 +9872,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8535,6 +9906,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8568,6 +9940,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8600,6 +9973,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8631,6 +10005,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -8663,6 +10038,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -8697,6 +10073,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8730,6 +10107,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -8762,6 +10140,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -9111,6 +10490,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9172,6 +10552,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9214,6 +10595,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9243,6 +10625,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9291,6 +10674,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -9476,6 +10860,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9504,6 +10889,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9533,6 +10919,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9562,6 +10949,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9713,6 +11101,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9761,6 +11150,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -9927,6 +11317,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -10200,6 +11591,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -10257,6 +11649,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -10291,6 +11684,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -10455,6 +11849,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -10620,6 +12015,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -10654,6 +12050,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -10687,6 +12084,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -10886,6 +12284,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -10939,6 +12338,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11027,6 +12427,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11058,6 +12459,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11089,6 +12491,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11120,6 +12523,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11151,6 +12555,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11182,6 +12587,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11213,6 +12619,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11244,6 +12651,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11276,6 +12684,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -11364,6 +12773,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -12134,6 +13544,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -12165,6 +13576,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -12277,6 +13689,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -12375,6 +13788,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -12776,6 +14190,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -12808,6 +14223,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13066,6 +14482,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -13216,6 +14633,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13269,6 +14687,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13327,6 +14746,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13557,6 +14977,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13587,6 +15008,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13667,6 +15089,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -13901,6 +15324,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -14074,6 +15498,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -14106,6 +15531,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -14138,6 +15564,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -14732,6 +16159,69 @@
     ]
   },
   {
+    "input": "11180101670817",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "11180104525817",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "11190624704",
     "carrier": "unknown",
     "confidence": "low",
@@ -14773,6 +16263,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -14829,6 +16320,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -15135,6 +16627,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -15466,6 +16959,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -15475,6 +16969,39 @@
       "dpd-nl",
       "dpd-de",
       "chronopost"
+    ]
+  },
+  {
+    "input": "11850028601354",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -15534,6 +17061,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -15643,6 +17171,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -16075,6 +17604,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -16234,6 +17764,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -16270,6 +17801,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -16610,6 +18142,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -16644,6 +18177,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -16678,6 +18212,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -16840,6 +18375,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -16880,6 +18416,79 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "13290055180152",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-pl",
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-pl"
+    ],
+    "asked": [
+      "dpd-pl",
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl"
+    ]
+  },
+  {
+    "input": "13290055180169",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-pl",
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-pl"
+    ],
+    "asked": [
+      "dpd-pl",
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl"
+    ]
   },
   {
     "input": "1331326480444",
@@ -17031,6 +18640,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17227,6 +18837,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17262,6 +18873,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17365,6 +18977,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17421,6 +19034,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17477,6 +19091,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17563,6 +19178,41 @@
     ]
   },
   {
+    "input": "13820100496817",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-pl",
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-pl"
+    ],
+    "asked": [
+      "dpd-pl",
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl"
+    ]
+  },
+  {
     "input": "138702241536",
     "carrier": "unknown",
     "confidence": "low",
@@ -17596,6 +19246,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -17701,6 +19352,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -17980,6 +19632,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -18038,6 +19691,101 @@
     "candidates": []
   },
   {
+    "input": "14320080713168",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "14370118621613",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "14370120893817",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "143862",
     "carrier": "unknown",
     "confidence": "none",
@@ -18076,6 +19824,39 @@
     "confidence": "low",
     "candidates": [
       "seur"
+    ]
+  },
+  {
+    "input": "14540031919191",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -18253,6 +20034,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -18577,6 +20359,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -18607,6 +20390,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -18780,6 +20564,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -18851,6 +20636,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -18884,6 +20670,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19018,6 +20805,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19050,6 +20838,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19084,6 +20873,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19118,6 +20908,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19151,6 +20942,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19184,6 +20976,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19217,6 +21010,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19250,6 +21044,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19283,6 +21078,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19316,6 +21112,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19349,6 +21146,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19383,6 +21181,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19416,6 +21215,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19466,6 +21266,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -19907,6 +21708,7 @@
       "dpd-hu",
       "dpd-nl",
       "dpd-pt",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -19929,6 +21731,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -20046,6 +21849,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20077,6 +21881,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20124,6 +21929,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20153,6 +21959,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20276,6 +22083,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20285,6 +22093,39 @@
       "dpd",
       "dpd-nl",
       "dpd-de"
+    ]
+  },
+  {
+    "input": "161403845250",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "dpd-fr",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -20305,6 +22146,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -20572,6 +22414,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20657,6 +22500,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -20689,6 +22533,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21089,6 +22934,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21148,6 +22994,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -21286,6 +23133,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21858,6 +23706,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21889,6 +23738,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21919,6 +23769,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21948,6 +23799,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -21978,6 +23830,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -22877,6 +24730,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -22931,6 +24785,38 @@
     ]
   },
   {
+    "input": "19760044367825",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "19800000330997",
     "carrier": "unknown",
     "confidence": "low",
@@ -22949,6 +24835,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -22978,6 +24865,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -23008,6 +24896,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -23189,6 +25078,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -24863,6 +26753,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -25105,6 +26996,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "j-and-t-cargo",
       "lbc-express",
@@ -25227,6 +27119,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "j-and-t-cargo",
       "lbc-express",
@@ -25669,6 +27562,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -25716,6 +27610,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -25770,6 +27665,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -25895,6 +27791,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "j-and-t-cargo",
       "lbc-express",
@@ -25980,6 +27877,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26009,6 +27907,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26080,6 +27979,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26111,6 +28011,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26141,6 +28042,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26171,6 +28073,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26313,6 +28216,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26371,6 +28275,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26401,6 +28306,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26432,6 +28338,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26462,6 +28369,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26567,6 +28475,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -26893,6 +28802,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27103,6 +29013,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27133,6 +29044,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27163,6 +29075,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27215,6 +29128,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27245,6 +29159,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -27436,6 +29351,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27467,6 +29383,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27515,6 +29432,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -27546,6 +29464,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -27895,6 +29814,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -28246,6 +30166,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -28352,6 +30273,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "rex-indonesia"
     ],
@@ -28381,6 +30303,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "rex-indonesia"
     ],
@@ -28411,6 +30334,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "rex-indonesia"
     ],
@@ -28479,6 +30403,128 @@
     ]
   },
   {
+    "input": "22220400237673",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "22220400302272",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "22220400831574",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "22220400973113",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "222222221",
     "carrier": "unknown",
     "confidence": "low",
@@ -28534,6 +30580,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -29138,6 +31185,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -29165,6 +31213,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -29221,6 +31270,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -29487,6 +31537,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -29926,6 +31977,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30147,6 +32199,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30229,6 +32282,36 @@
     ]
   },
   {
+    "input": "24410021737036",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "24490933",
     "carrier": "unknown",
     "confidence": "low",
@@ -30258,6 +32341,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30375,6 +32459,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -30410,6 +32495,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -30462,6 +32548,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30509,6 +32596,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30581,6 +32669,37 @@
     ]
   },
   {
+    "input": "25021380056714",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "25022100094102",
     "carrier": "unknown",
     "confidence": "low",
@@ -30599,6 +32718,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30656,6 +32776,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30684,6 +32805,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30714,6 +32836,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30775,6 +32898,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30804,6 +32928,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -30911,6 +33036,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -31104,6 +33230,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -31766,6 +33893,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -31923,6 +34051,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -32387,6 +34516,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -32421,6 +34551,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -32521,6 +34652,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -33166,6 +35298,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -33407,6 +35540,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -33436,6 +35570,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -33666,6 +35801,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -33693,6 +35829,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -33920,6 +36057,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -34220,6 +36358,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -34297,6 +36436,37 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "29930024353385",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -34391,6 +36561,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -34495,6 +36666,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -34557,6 +36729,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -34793,6 +36966,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -35057,6 +37231,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -35113,6 +37288,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -35913,6 +38089,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -36221,6 +38398,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -36249,6 +38427,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -36278,6 +38457,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -36306,6 +38486,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -36388,6 +38569,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -36533,6 +38715,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -37224,6 +39407,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -37472,6 +39656,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -37742,6 +39927,36 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "33640139658314",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -38058,6 +40273,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -38152,6 +40368,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -38260,6 +40477,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -38357,6 +40575,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -38427,6 +40646,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -38917,6 +41137,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -39538,6 +41759,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -39801,6 +42023,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -40583,6 +42806,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -40711,6 +42935,70 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "396428517688",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "396439705319",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -40943,6 +43231,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -41464,6 +43753,43 @@
     ]
   },
   {
+    "input": "401123510473",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "dhl",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex"
+    ],
+    "asked": [
+      "dhl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt"
+    ]
+  },
+  {
     "input": "4011663590",
     "carrier": "unknown",
     "confidence": "low",
@@ -41627,6 +43953,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -41821,6 +44148,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -41963,6 +44291,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -42267,6 +44596,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -42341,6 +44671,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -42485,6 +44816,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -42829,6 +45161,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -43106,6 +45439,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -43317,6 +45651,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -43440,6 +45775,36 @@
     "confidence": "high",
     "candidates": [
       "gogo-xpress"
+    ]
+  },
+  {
+    "input": "43820014312105",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -43595,6 +45960,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -44521,6 +46887,98 @@
     ]
   },
   {
+    "input": "47040066200472",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "47040066221446",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "47040070061618",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "470551104391",
     "carrier": "unknown",
     "confidence": "low",
@@ -44632,6 +47090,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -44661,6 +47120,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -44784,6 +47244,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -44949,6 +47410,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -45291,6 +47753,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -45392,6 +47855,36 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "48810071103834",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -45515,6 +48008,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -45547,6 +48041,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -45604,6 +48099,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -45677,6 +48173,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -45944,6 +48441,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -46288,6 +48786,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -46469,6 +48968,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -46610,6 +49110,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -46896,6 +49397,187 @@
     ]
   },
   {
+    "input": "50470160928318",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "50470182023626",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "50470215929635",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "50470217667986",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "50470223092338",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "50470227475151",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "5047085867",
     "carrier": "unknown",
     "confidence": "low",
@@ -47025,6 +49707,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -47033,6 +49716,39 @@
     ],
     "preferred": [
       "fedex"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "506469596904",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "saia",
+      "sending"
     ],
     "asked": [
       "gls-fr",
@@ -47211,6 +49927,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -47318,6 +50035,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -47486,6 +50204,69 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "51450149175567",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "nova-poshta"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "51450149181971",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "nova-poshta"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -48232,6 +51013,35 @@
     ]
   },
   {
+    "input": "52220355997517",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "522718670636",
     "carrier": "unknown",
     "confidence": "low",
@@ -48399,6 +51209,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -48702,6 +51513,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -48769,6 +51581,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -48835,6 +51648,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -48943,6 +51757,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -48976,6 +51791,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -49074,6 +51890,36 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "54080332787535",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -49323,6 +52169,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -49343,6 +52190,38 @@
     "confidence": "high",
     "candidates": [
       "gogo-xpress"
+    ]
+  },
+  {
+    "input": "549070442420",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -49387,6 +52266,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -49428,6 +52308,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -49573,6 +52454,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -49879,6 +52761,39 @@
     ]
   },
   {
+    "input": "561840300426",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "poste-italiane",
+      "brt"
+    ]
+  },
+  {
     "input": "5662698462",
     "carrier": "unknown",
     "confidence": "low",
@@ -49930,6 +52845,37 @@
     ]
   },
   {
+    "input": "56920383270250",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "570131415103",
     "carrier": "unknown",
     "confidence": "low",
@@ -49978,6 +52924,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -50276,6 +53223,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -50304,6 +53252,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -50400,6 +53349,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50429,6 +53379,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50459,6 +53410,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50487,6 +53439,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50517,6 +53470,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50546,6 +53500,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50611,6 +53566,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "nova-poshta"
     ],
@@ -50640,6 +53596,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -50668,6 +53625,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -50676,6 +53634,67 @@
       "dpd-nl",
       "dpd-de",
       "chronopost"
+    ]
+  },
+  {
+    "input": "59280696904387",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "59280993013942",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -50749,6 +53768,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -50782,6 +53802,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -50814,6 +53835,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -50846,6 +53868,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -50879,6 +53902,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -50977,6 +54001,23 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "59DWJU7X",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -51371,6 +54412,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51402,6 +54444,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51433,6 +54476,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51465,6 +54509,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51496,6 +54541,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51526,6 +54572,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51558,6 +54605,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51589,6 +54637,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51620,6 +54669,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51651,6 +54701,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -51812,6 +54863,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -52355,6 +55407,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -52749,6 +55802,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -52857,6 +55911,36 @@
     ]
   },
   {
+    "input": "61300207163870",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
+    ]
+  },
+  {
     "input": "61303082",
     "carrier": "unknown",
     "confidence": "low",
@@ -52865,6 +55949,38 @@
       "colisweb",
       "heppner",
       "tforce-freight"
+    ]
+  },
+  {
+    "input": "613424882719",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -52937,6 +56053,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -53072,6 +56189,36 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "61610150940937",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -53274,6 +56421,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -53322,6 +56470,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -53396,6 +56545,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -53651,6 +56801,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -53731,6 +56882,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -53760,6 +56912,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -53790,6 +56943,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -53820,6 +56974,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -53991,6 +57146,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "mylerz"
     ],
@@ -54020,6 +57176,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "mylerz"
     ],
@@ -54049,6 +57206,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "mylerz"
     ],
@@ -54096,6 +57254,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "mylerz"
     ],
@@ -54212,6 +57371,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "mylerz"
     ],
@@ -54354,6 +57514,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "mylerz"
     ],
@@ -54532,6 +57693,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -54697,6 +57859,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -54729,6 +57892,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -54776,6 +57940,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -54890,6 +58055,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -54990,6 +58156,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55117,6 +58284,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -55516,6 +58684,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55545,6 +58714,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55575,6 +58745,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55605,6 +58776,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55635,6 +58807,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55665,6 +58838,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55694,6 +58868,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55723,6 +58898,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55751,6 +58927,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55769,6 +58946,138 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "669511632286",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "669518709349",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "669578675264",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "poste-italiane",
+      "japan-post"
+    ]
+  },
+  {
+    "input": "669578675387",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -55809,6 +59118,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -55974,6 +59284,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -56246,6 +59557,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -56449,6 +59761,95 @@
       "geniki-taxydromiki",
       "packeta",
       "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "69170010395106",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "69210241440081",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "69210241440098",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -56725,6 +60126,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -56769,6 +60171,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -57571,6 +60974,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -57601,6 +61005,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -57691,6 +61096,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "slovak-parcel-service"
     ],
@@ -57741,6 +61147,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "slovak-parcel-service"
     ],
@@ -57772,6 +61179,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "slovak-parcel-service"
     ],
@@ -57803,6 +61211,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "slovak-parcel-service"
     ],
@@ -58136,6 +61545,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -58190,6 +61600,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -58311,6 +61722,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -58359,6 +61771,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -58895,6 +62308,37 @@
     ]
   },
   {
+    "input": "73160043083159",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "zto",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "73161537761233",
     "carrier": "unknown",
     "confidence": "low",
@@ -58914,6 +62358,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -59073,6 +62518,41 @@
     ]
   },
   {
+    "input": "736424454080",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "japan-post",
+      "brt"
+    ]
+  },
+  {
     "input": "7365529850",
     "carrier": "unknown",
     "confidence": "low",
@@ -59097,6 +62577,38 @@
       "geniki-taxydromiki",
       "packeta",
       "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "736556050921",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -59346,6 +62858,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -59404,6 +62917,70 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "751015570383",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "75210166320964",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "zto",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -59546,6 +63123,37 @@
     ],
     "asked": [
       "brt"
+    ]
+  },
+  {
+    "input": "76090148393600",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "zto",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -59875,6 +63483,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -59908,6 +63517,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -59940,6 +63550,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -59973,6 +63584,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -60007,6 +63619,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -60039,6 +63652,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -60072,6 +63686,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -60106,6 +63721,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -61176,6 +64792,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -61361,6 +64978,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -61661,6 +65279,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -61692,6 +65311,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -61723,6 +65343,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -61863,6 +65484,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -61895,6 +65517,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -62528,6 +66151,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "preferred": [
@@ -62652,6 +66276,74 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "80610038839594",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "russian-post",
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "preferred": [
+      "russian-post"
+    ],
+    "asked": [
+      "russian-post",
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl"
+    ]
+  },
+  {
+    "input": "80610038846233",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "russian-post",
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "preferred": [
+      "russian-post"
+    ],
+    "asked": [
+      "russian-post",
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl"
     ]
   },
   {
@@ -63022,6 +66714,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -63112,6 +66805,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -63333,6 +67027,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -63440,6 +67135,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -63890,6 +67586,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64181,6 +67878,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -64331,6 +68029,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64359,6 +68058,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64415,6 +68115,75 @@
     ]
   },
   {
+    "input": "851026185306",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "poste-italiane",
+      "japan-post"
+    ]
+  },
+  {
+    "input": "851052479455",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "poste-italiane",
+      "brt"
+    ]
+  },
+  {
     "input": "8510870804504756",
     "carrier": "unknown",
     "confidence": "low",
@@ -64431,6 +68200,103 @@
       "canada-post",
       "tnt",
       "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "851120062404",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "dhl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt"
+    ]
+  },
+  {
+    "input": "851146836089",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "851159125415",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -64659,6 +68525,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64705,6 +68572,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64807,6 +68675,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64935,6 +68804,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -64981,6 +68851,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -64997,6 +68868,75 @@
     "confidence": "low",
     "candidates": [
       "seur"
+    ]
+  },
+  {
+    "input": "875570717509",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "875651613300",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "dhl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt"
     ]
   },
   {
@@ -65154,6 +69094,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -65246,6 +69187,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -65321,6 +69263,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -65607,6 +69550,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog"
     ],
     "asked": [
@@ -65677,6 +69621,37 @@
       "austrian-post",
       "inpost",
       "ciblex"
+    ]
+  },
+  {
+    "input": "89240038812375",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -65876,6 +69851,7 @@
       "yamato",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -65942,6 +69918,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -65972,6 +69949,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -66003,6 +69981,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -66033,6 +70012,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -66064,6 +70044,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -66095,6 +70076,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -66125,6 +70107,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -66433,6 +70416,38 @@
     ]
   },
   {
+    "input": "903289909998",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "90365953296",
     "carrier": "unknown",
     "confidence": "low",
@@ -66457,6 +70472,94 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "903790134667",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "90385861835",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
+    ]
+  },
+  {
+    "input": "903858618351",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -66487,6 +70590,99 @@
     ],
     "asked": [
       "delhivery"
+    ]
+  },
+  {
+    "input": "90457082895",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
+    ]
+  },
+  {
+    "input": "904570828950",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "poste-italiane",
+      "brt"
+    ]
+  },
+  {
+    "input": "904853473068",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -66617,6 +70813,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -67065,6 +71262,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -67177,6 +71375,37 @@
     ]
   },
   {
+    "input": "92070058326316",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "92108901755477000015642562",
     "carrier": "usps",
     "confidence": "high",
@@ -67190,6 +71419,38 @@
     "confidence": "high",
     "candidates": [
       "usps"
+    ]
+  },
+  {
+    "input": "921920419569",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -67212,6 +71473,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -67293,6 +71555,70 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "926014421411",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "926014421480",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
   },
   {
     "input": "9261269903500013618305",
@@ -68093,12 +72419,45 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
       "gls-fr",
       "gls-de",
       "gls-ch"
+    ]
+  },
+  {
+    "input": "938384536985",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -68326,6 +72685,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -68418,6 +72778,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -68526,6 +72887,340 @@
     ]
   },
   {
+    "input": "953665873962",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "dhl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt"
+    ]
+  },
+  {
+    "input": "953673207599",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953704308028",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953740839937",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953765418865",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953770510592",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953774814894",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "sf-express",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "sf-express"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953776551933",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953811665038",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953889056615",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "sf-express",
+      "dhl",
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex",
+      "sf-express"
+    ],
+    "asked": [
+      "dhl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt"
+    ]
+  },
+  {
     "input": "95389069659",
     "carrier": "unknown",
     "confidence": "low",
@@ -68548,6 +73243,70 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "953922589438",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "953928542185",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -69141,6 +73900,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -69299,6 +74059,69 @@
     ]
   },
   {
+    "input": "97230767592074",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
+    "input": "97270021698630",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "974849998",
     "carrier": "unknown",
     "confidence": "none",
@@ -69333,6 +74156,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -69386,6 +74210,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -69705,6 +74530,38 @@
     ]
   },
   {
+    "input": "984231757256",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "984931500084",
     "carrier": "unknown",
     "confidence": "low",
@@ -69721,6 +74578,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -69920,6 +74778,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -70242,6 +75101,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -70271,6 +75131,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -70667,6 +75528,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -70696,6 +75558,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -70726,6 +75589,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -71039,6 +75903,7 @@
       "zto",
       "j-and-t",
       "gls-at",
+      "gls-nl",
       "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
@@ -71134,6 +75999,7 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk",
+      "gls-nl",
       "jadlog",
       "xpressbees"
     ],
@@ -71633,6 +76499,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -71748,6 +76615,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -72563,6 +77431,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73194,6 +78063,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73364,6 +78234,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73380,6 +78251,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73396,6 +78268,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73412,6 +78285,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73428,6 +78302,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73444,6 +78319,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73460,6 +78336,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73476,6 +78353,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73492,6 +78370,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73508,6 +78387,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73524,6 +78404,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73540,6 +78421,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73556,6 +78438,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73572,6 +78455,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73588,6 +78472,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73604,6 +78489,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73620,6 +78506,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73636,6 +78523,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73652,6 +78540,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73668,6 +78557,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73684,6 +78574,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73700,6 +78591,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -73716,6 +78608,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -74721,6 +79614,7 @@
       "gls-de",
       "dx",
       "flecha-amarilla",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -74739,6 +79633,7 @@
       "gls-de",
       "dx",
       "flecha-amarilla",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -74827,6 +79722,7 @@
       "gls-de",
       "dx",
       "flecha-amarilla",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -75093,6 +79989,7 @@
       "gls-fr",
       "gls-de",
       "flecha-amarilla",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -78695,6 +83592,7 @@
       "gls-fr",
       "gls-de",
       "the-courier-guy",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -79204,6 +84102,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -79293,6 +84192,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -81962,6 +86862,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -81997,6 +86898,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82117,6 +87019,7 @@
       "gls-fr",
       "gls-de",
       "forza-delivery",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82788,6 +87691,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82804,6 +87708,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82820,6 +87725,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82836,6 +87742,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82852,6 +87759,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82868,6 +87776,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82884,6 +87793,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -82908,6 +87818,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -83754,6 +88665,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -83778,6 +88690,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84063,6 +88976,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84081,6 +88995,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84099,6 +89014,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84133,6 +89049,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84167,6 +89084,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84185,6 +89103,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84203,6 +89122,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84221,6 +89141,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84239,6 +89160,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84305,6 +89227,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84323,6 +89246,7 @@
       "gls-fr",
       "gls-de",
       "copa-courier",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -84921,6 +89845,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -85565,6 +90490,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -85581,6 +90507,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -85597,6 +90524,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87288,6 +92216,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87304,6 +92233,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87356,6 +92286,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87860,6 +92791,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87877,6 +92809,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87894,6 +92827,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87911,6 +92845,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87928,6 +92863,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -87945,6 +92881,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -88298,6 +93235,7 @@
       "gls-fr",
       "gls-de",
       "the-courier-guy",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -90894,6 +95832,7 @@
       "gls-fr",
       "gls-de",
       "city-air-express",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -90987,6 +95926,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -91456,6 +96396,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -91472,6 +96413,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -91895,6 +96837,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -92815,6 +97758,7 @@
       "gls-fr",
       "gls-de",
       "flecha-amarilla",
+      "gls-nl",
       "loggi",
       "polaris-transport"
     ],
@@ -92833,6 +97777,7 @@
       "gls-fr",
       "gls-de",
       "flecha-amarilla",
+      "gls-nl",
       "loggi",
       "polaris-transport"
     ],
@@ -92902,6 +97847,7 @@
       "gls-fr",
       "gls-de",
       "flecha-amarilla",
+      "gls-nl",
       "loggi",
       "polaris-transport"
     ],
@@ -95075,6 +100021,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -103181,6 +108128,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -103453,6 +108401,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -104985,6 +109934,24 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "YVMP520R",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105117,6 +110084,23 @@
     ]
   },
   {
+    "input": "Z0C152PX",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "Z0OA641Z",
     "carrier": "unknown",
     "confidence": "low",
@@ -105124,6 +110108,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105218,6 +110203,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105234,6 +110220,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105250,6 +110237,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105274,6 +110262,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105290,6 +110279,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105336,6 +110326,23 @@
     "confidence": "low",
     "candidates": [
       "dtdc"
+    ]
+  },
+  {
+    "input": "Z89TKTLV",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -105420,6 +110427,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105759,6 +110767,23 @@
     ]
   },
   {
+    "input": "ZOK83YGE",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "ZP123456789ZW",
     "carrier": "unknown",
     "confidence": "none",
@@ -105778,6 +110803,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105817,6 +110843,74 @@
     ]
   },
   {
+    "input": "ZT5O1RRD",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZT5SZD4K",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZT5TNXBN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZT5TO0D4",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "ZW924750388GB",
     "carrier": "royal-mail",
     "confidence": "high",
@@ -105832,6 +110926,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
@@ -105856,12 +110951,191 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
       "gls-fr",
       "gls-de",
       "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXV2BUWM",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXV3V2UP",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXV47SGS",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXV514SR",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVEF10W",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVHUKD5",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVJB8VY",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVJM5RN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVJZ3X5",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVOUJ05",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "ZXVPXLJG",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "loggi"
     ]
   },
   {
@@ -106250,6 +111524,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "gls-nl",
       "loggi"
     ],
     "asked": [

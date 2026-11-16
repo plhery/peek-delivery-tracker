@@ -64,18 +64,19 @@ import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import kotlin.math.floor
 
 // The "Parcels" widget's designs ([DeliveryWidgetList.design]), drawn from the app's design system as the iPhone's
-// list widget draws them: Next delivery's cards for a few parcels, the app list's cards made small (passes) for a few
-// more where every one fits, and rows under the app list's sections for the rest. Cards and passes are in each
-// parcel's carrier colours, from the pictures the app draws for Next delivery (WidgetCardPictures).
+// list widget draws them: the iPhone's Next delivery cards for a few parcels, the app list's cards made small (passes)
+// for a few more where every one fits, and rows under the app list's sections for the rest. Cards and passes are in
+// each parcel's carrier colours, from the pictures the app draws for the widget (WidgetCardPictures).
 
 /**
- * The pictures `count` cards show at the widget's size: one alone fills a small or medium widget as Next delivery's
- * does, two stand side by side; at the large size one or two are wide cards, three the app list's cards with half routes.
+ * The pictures `count` cards show at the widget's size: one alone fills a small or medium widget as the iPhone's Next
+ * delivery does, two stand side by side; at the large size one or two are wide cards, three the app list's cards with
+ * half routes.
  */
 internal fun cardShape(listSize: DeliveryWidgetList.Size, count: Int, size: DpSize): DeliveryWidgetPicture = when {
     listSize == DeliveryWidgetList.Size.Large -> if (count >= 3) DeliveryWidgetPicture.Half else DeliveryWidgetPicture.Wide
     count >= 2 -> DeliveryWidgetPicture.Half
-    NextDeliveryWidget.isMedium(size) -> DeliveryWidgetPicture.Wide
+    isMedium(size) -> DeliveryWidgetPicture.Wide
     else -> DeliveryWidgetPicture.Small
 }
 
@@ -83,8 +84,8 @@ internal fun cardShape(listSize: DeliveryWidgetList.Size, count: Int, size: DpSi
 
 /**
  * The parcels as cards, the app list's Next up first ([DeliveryWidgetList.cardOrder]), each with its pictures `art`:
- * in a small or medium widget as Next delivery shows one or two; in a large one a card over the parcel's last steps,
- * two wide cards one above the other, or three of the app list's cards.
+ * in a small or medium widget as the iPhone's Next delivery shows one or two; in a large one a card over the parcel's
+ * last steps, two wide cards one above the other, or three of the app list's cards.
  */
 @Composable
 internal fun ListCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardArt>, size: DpSize, type: WidgetText) {

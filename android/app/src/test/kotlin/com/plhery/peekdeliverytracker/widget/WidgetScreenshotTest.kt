@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
@@ -43,11 +42,11 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The home screen widget as a launcher shows it, its RemoteViews applied at the iPhone's widget sizes, on a wallpaper
- * (a screen wide enough for a small and a medium one side by side, at twice the pixels): the gallery's sample with the
- * iPhone's own pictures over the same cards with the pictures this app draws, and the pictures themselves (the
- * iPhone's, then this app's); words, empty and switched off; light and dark; the largest text; and at the sizes a
- * launcher gives it.
+ * The iPhone's Next delivery cards, which the Parcels widget shows for its fewest parcels ([DeliveryWidgetContent]), as
+ * a launcher shows them, their RemoteViews applied at the iPhone's widget sizes, on a wallpaper (a screen wide enough
+ * for a small and a medium one side by side, at twice the pixels): the demo's cards with the pictures this app draws,
+ * and the pictures themselves (the iPhone's for its sample, then this app's); words, empty and switched off; light and
+ * dark; the largest text; and at the sizes a launcher gives them.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -92,9 +91,9 @@ class WidgetScreenshotTest {
         compose.screenshot("widget_$name")
     }
 
-    /** The iPhone's picture of the sample's card `index`, as its tests draw it. */
+    /** The iPhone's picture of its sample's card `index` (the demo's), as its tests draw it, from the tests' resources. */
     private fun iPhone(index: Int, picture: DeliveryWidgetPicture, dark: Boolean): Bitmap =
-        app.assets.open("${DeliveryWidgetSample.folderName}/sample-$index-${picture.rawValue}-${if (dark) "dark" else "light"}.png").use {
+        checkNotNull(javaClass.getResourceAsStream("/${DeliveryWidgetSample.folderName}/sample-$index-${picture.rawValue}-${if (dark) "dark" else "light"}.png")).use {
             BitmapFactory.decodeStream(it).apply { density = Bitmap.DENSITY_NONE }
         }
 
@@ -102,9 +101,9 @@ class WidgetScreenshotTest {
         BitmapFactory.decodeFile(picture.file(card, dark, folder).path).apply { density = (app.resources.displayMetrics.density * 160).toInt() }
 
     /**
-     * The gallery's sample with the iPhone's pictures, over the demo's same next deliveries with the pictures this app
-     * draws; a card whose parcel has no places, with Pip alone where its route would be, alone across a medium widget;
-     * then the iPhone's pictures over this app's.
+     * The demo's next deliveries with the pictures this app draws; a card whose parcel has no places, with Pip alone
+     * where its route would be, alone across a medium widget; then the iPhone's pictures of the same cards over this
+     * app's.
      */
     private fun cards(dark: Boolean) {
         val folder = files.newFolder("WidgetCards")
@@ -124,7 +123,6 @@ class WidgetScreenshotTest {
         shoot(
             if (dark) "cards_dark" else "cards_light", dark,
             listOf(
-                listOf(widget(IPHONE_SMALL, source.placeholder(false, CAPTURED)), widget(IPHONE_MEDIUM, source.placeholder(true, CAPTURED))),
                 listOf(widget(IPHONE_SMALL, source.current(false, CAPTURED)), widget(IPHONE_MEDIUM, source.current(true, CAPTURED))),
                 listOf(widget(IPHONE_SMALL, unplaced.current(false, CAPTURED)), widget(IPHONE_MEDIUM, unplaced.current(true, CAPTURED))),
             ),
@@ -186,25 +184,6 @@ class WidgetScreenshotTest {
         ),
     )
 
-    /**
-     * The gallery's preview before Android 15, and a widget's first look until it has drawn (widget_preview), applied as
-     * a launcher applies it, which inflates only the views RemoteViews allows: at the iPhone's small size, a phone's
-     * two-by-two and a tablet's.
-     */
-    private fun staticPreview(dark: Boolean) = shoot(
-        if (dark) "static_preview_dark" else "static_preview_light", dark,
-        listOf(listOf(IPHONE_SMALL, DpSize(179.dp, 208.dp)), listOf(DpSize(304.dp, 233.dp))).map { row ->
-            row.map { Shown(RemoteViews(app.packageName, R.layout.widget_preview), it) }
-        },
-    )
-
-    @Test
-    fun staticPreviewLight() = staticPreview(dark = false)
-
-    @Test
-    @Config(qualifiers = "+night")
-    fun staticPreviewDark() = staticPreview(dark = true)
-
     @Test
     fun statesLight() = states(dark = false)
 
@@ -220,8 +199,6 @@ class WidgetScreenshotTest {
     @Test
     @Config(fontScale = 2.0f)
     fun largestText() {
-        val folder = files.newFolder("WidgetCards")
-        val source = widgetSource(app, folder)
         val long = listOf(
             widgetParcel(5, "Wanderschuh-Imprägnierspray", carrier = "Swiss Post", detail = "tomorrow"),
             widgetParcel(6, "Mechanical keyboard switches", carrier = "DPD Switzerland", detail = "Friday"),
@@ -230,7 +207,6 @@ class WidgetScreenshotTest {
             "largest_text", dark = false,
             listOf(
                 listOf(widget(IPHONE_SMALL, wordsEntry(parcels, medium = false)), widget(IPHONE_MEDIUM, wordsEntry(parcels, medium = true))),
-                listOf(widget(IPHONE_SMALL, source.placeholder(false, CAPTURED)), widget(IPHONE_MEDIUM, source.placeholder(true, CAPTURED))),
                 listOf(widget(IPHONE_SMALL, wordsEntry(emptyList(), medium = false)), widget(IPHONE_MEDIUM, wordsEntry(parcels, medium = true, enabled = false))),
                 listOf(widget(IPHONE_SMALL, wordsEntry(long, medium = false)), widget(IPHONE_MEDIUM, wordsEntry(long, medium = true))),
             ),
@@ -247,8 +223,8 @@ class WidgetScreenshotTest {
         val store = DeliveryWidgetSharedStore(MemoryDefaults())
         val source = widgetSource(app, folder, store)
         runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble()) }
-        fun cards(size: DpSize) = widget(size, source.current(NextDeliveryWidget.isMedium(size), CAPTURED))
-        fun words(size: DpSize) = widget(size, wordsEntry(parcels, NextDeliveryWidget.isMedium(size)))
+        fun cards(size: DpSize) = widget(size, source.current(isMedium(size), CAPTURED))
+        fun words(size: DpSize) = widget(size, wordsEntry(parcels, isMedium(size)))
         shoot(
             name, dark = false,
             listOf(

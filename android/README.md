@@ -81,55 +81,56 @@ Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.s
   switch is off or nobody is signed in; a copy pinned to the home screen stays, greyed, as "Next delivery" in the
   app's language, renamed when it changes.
 
-## Home screen widgets
+## Home screen widget
 
-Both read only what the app publishes for them (`DeliveryWidgetSharedStore`): every parcel on its way, then those
-delivered within a day, in the widgets' order. They are drawn again whenever it publishes, and at least every 20
-minutes while either is placed. Their days follow the clock while the app stays closed: the app also words each
-parcel's day, with its section in the app's list and whether it is Next up, for the next seven midnights where one
-changes (`DeliveryWidgetDays`). The widgets read them for the moment they draw, and are drawn again at those midnights
-and at the one after each step they show, whose time then names its weekday. "Tomorrow" reads "today" on the day, under
-Arriving today, last night's delivery "yesterday", and a passed estimate gives way to the status. When the time zone
-changes while the app runs, it words the days again for the new zone's midnights and draws the widgets again.
+The widget, **Parcels** (`ParcelsWidget.kt`), reads only what the app publishes for it (`DeliveryWidgetSharedStore`):
+every parcel on its way, then those delivered within a day, in the app list's order. It is drawn again whenever the app
+publishes, and at least every 20 minutes while one is placed. Its days follow the clock while the app stays closed: the
+app also words each parcel's day, with its section in the app's list and whether it is Next up, for the next seven
+midnights where one changes (`DeliveryWidgetDays`). The widget reads them for the moment it draws, and is drawn again
+at those midnights and at the one after each step it shows, whose time then names its weekday. "Tomorrow" reads "today"
+on the day, under Arriving today, last night's delivery "yesterday", and a passed estimate gives way to the status.
+When the time zone changes while the app runs, it words the days again for the new zone's midnights and draws the
+widget again.
 
-- **Next delivery** (`NextDeliveryWidget.kt`) shows the first of them as a card, or two side by side. Like the
-  iPhone's, which has no large size, it grows no taller than two rows of cells (`maxResizeHeight`).
-- **Parcels** (`ParcelsWidget.kt`) shows them as the iPhone's list widget does. Its size stands for one of the
-  iPhone's three (`listSize`): from 280 dp tall the large one, else from 250 dp wide the medium one, else the small
-  one. Its design follows how many parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the
-  small, medium or large size:
-  - up to `k`, cards, the app list's Next up first: Next delivery's card or two side by side; in a large widget one
-    wide card over the parcel's last four steps, worded as its page words them, a step dated by its day alone
-    naming that day and no time, two wide cards, or three of the app list's cards;
-  - up to `2k`, passes in each carrier's colours, in two columns in a medium widget, only where every one fits
-    (`passesFit`): where two can't stand one above the other, in a shorter widget or at larger text, the parcels are
-    rows, in a medium widget down one column without headings before one is left out (`DeliveryWidgetList.fits`);
-  - more, rows under the app list's sections, each marked by its carrier's truck, then a line counting the rest at
-    the foot of the last column, after the last row shown (`SectionsLayout`). As many rows as fit at every size, so
-    that no room for another parcel is left blank: a small widget leaves the headings out, the name over the stage and
-    day; a medium one has two columns about as tall as each other (`DeliveryWidgetList.columns`); a large one has a
-    line each where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up (`DeliveryWidgetList.layouts`),
-    and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line doesn't fit, the day stays; where
-    neither fits, the stage does, at a smaller size where it must (down to 0.8 of it). A stage too long even then
-    takes the widget's shorter words (`widget.stage.*`, which the app publishes as the stage's `short`), in rows,
-    passes and cards alike; the list and the parcel's page keep their own.
+Its receiver keeps the name of the Next delivery widget it replaced (`NextDeliveryWidgetReceiver`), so a widget placed
+as Next delivery shows the list, at the size it was placed with.
 
-  The app draws it itself (`ParcelsWidget.draw`) rather than through Glance's sessions, at each size the launcher
-  gives taken to its whole dp and 2 dp under (`ParcelsWidget.fitting`): a launcher can frame a widget a little smaller
-  than the size it gives, and the launcher shows the closest layout that fits the frame, which would otherwise be
-  another screen's.
+It shows the parcels as the iPhone's list widget does. Its size stands for one of the iPhone's three (`listSize`): from
+280 dp tall the large one, else from 250 dp wide the medium one, else the small one. Its design follows how many
+parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the small, medium or large size:
+- up to `k`, cards, the app list's Next up first: the iPhone's Next delivery card or two side by side
+  (`DeliveryWidgetContent.kt`); in a large widget one wide card over the parcel's last four steps, worded as its page
+  words them, a step dated by its day alone naming that day and no time, two wide cards, or three of the app list's
+  cards;
+- up to `2k`, passes in each carrier's colours, in two columns in a medium widget, only where every one fits
+  (`passesFit`): where two can't stand one above the other, in a shorter widget or at larger text, the parcels are
+  rows, in a medium widget down one column without headings before one is left out (`DeliveryWidgetList.fits`);
+- more, rows under the app list's sections, each marked by its carrier's truck, then a line counting the rest at the
+  foot of the last column, after the last row shown (`SectionsLayout`). As many rows as fit at every size, so that no
+  room for another parcel is left blank: a small widget leaves the headings out, the name over the stage and day; a
+  medium one has two columns about as tall as each other (`DeliveryWidgetList.columns`); a large one has a line each
+  where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up
+  (`DeliveryWidgetList.layouts`), and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line
+  doesn't fit, the day stays; where neither fits, the stage does, at a smaller size where it must (down to 0.8 of it).
+  A stage too long even then takes the widget's shorter words (`widget.stage.*`, which the app publishes as the
+  stage's `short`), in rows, passes and cards alike; the list and the parcel's page keep their own.
 
-  Cards and passes use the pictures the app draws for Next delivery's first 8 parcels; until those are drawn, the
-  widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list
-  (`peekdeliverytracker://parcels`).
+The app draws it itself (`ParcelsWidget.draw`) rather than through Glance's sessions, at each size the launcher gives
+taken to its whole dp and 2 dp under (`ParcelsWidget.fitting`): a launcher can frame a widget a little smaller than the
+size it gives, and the launcher shows the closest layout that fits the frame, which would otherwise be another
+screen's.
 
-A parcel whose card in the app's list shows the new-update dot shows it in the Parcels widget too, before its stage,
-and loses it when the card does: once it is opened on any of the account's devices, or when "Mark new updates" is off
+Cards and passes use the pictures the app draws for the first 8 parcels (`WidgetCardPictures`); until those are drawn,
+the widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list
+(`peekdeliverytracker://parcels`).
+
+A parcel whose card in the app's list shows the new-update dot shows it in the widget too, before its stage, and loses
+it when the card does: once it is opened on any of the account's devices, or when "Mark new updates" is off
 (`DeliveryWidgetParcel.newUpdate`). The line keeps to the room the dot leaves, so every size keeps its rows. TalkBack
-reads "New update." first. Next delivery, which shows one parcel, leaves the dot out, as the iPhone's does.
+reads "New update." first.
 
-Their gallery pictures show invented parcels in the phone's language (`DeliveryWidgetSample`,
-`DeliveryWidgetListSample`), never the reader's.
+Its gallery picture shows invented parcels in the phone's language (`DeliveryWidgetListSample`), never the reader's.
 
 ## Release bundle
 

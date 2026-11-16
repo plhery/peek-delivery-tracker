@@ -205,24 +205,13 @@
             </intent-filter>
         </activity>
 
-        <!-- The home screen widget (NextDeliveryWidget), and the refresh its alarm sends it (DeliveryWidgetUpdates). -->
+        <!-- The home screen widget, Parcels (ParcelsWidget), and the refresh its alarm sends it (DeliveryWidgetUpdates).
+             The receiver keeps the name of the Next delivery widget it replaced, which widgets placed then are bound
+             to. -->
         <receiver
             android:name=".widget.NextDeliveryWidgetReceiver"
             android:exported="true"
             android:label="@string/widget_gallery_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/next_delivery_widget" />
-        </receiver>
-
-        <!-- The list widget (ParcelsWidget), next to it. -->
-        <receiver
-            android:name=".widget.ParcelsWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_list_gallery_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

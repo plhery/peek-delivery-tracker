@@ -309,12 +309,10 @@ val systemStrings = tasks.register<SystemStrings>("systemStrings") {
     sharedResources.from(coreSharedResources)
     // The share target's name, `CFBundleDisplayName` of the iPhone's ShareExtension.
     strings.put("share_title", "shareExtension.title")
-    // The widget's name and description in the widget gallery (`configurationDisplayName`, `description`).
-    strings.put("widget_gallery_name", "widget.galleryName")
-    strings.put("widget_gallery_description", "widget.galleryDescription")
-    // The list widget's (ParcelsWidget), the iPhone's ParcelListWidget's.
-    strings.put("widget_list_gallery_name", "widget.listGalleryName")
-    strings.put("widget_list_gallery_description", "widget.listGalleryDescription")
+    // The widget's name and description in the widget gallery, the iPhone's ParcelListWidget's (`configurationDisplayName`,
+    // `description`).
+    strings.put("widget_gallery_name", "widget.listGalleryName")
+    strings.put("widget_gallery_description", "widget.listGalleryDescription")
     // The "Add a parcel" shortcut on the app's icon (res/xml/shortcuts.xml), the iPhone's AddParcelIntent's title.
     strings.put("shortcut_add_parcel", "appIntents.addParcel")
     // Localization.json's languages, as the iPhone's .lproj folders name them.
@@ -328,83 +326,11 @@ val systemStrings = tasks.register<SystemStrings>("systemStrings") {
 }
 
 /**
- * The widget gallery's sample, which the iPhone's tests draw into its widget's folder (WidgetSample): the demo's next
- * deliveries in each language, and their cards' pictures. The widget reads it from the assets ([widgetSampleAssets]);
- * the preview layout Android shows before 15, which can only name resources, takes the first card as resources: its
- * pictures light and dark, its words in each of [qualifiers]' languages and its colours. Nothing of it is committed.
+ * The iPhone widget's sample, which its tests draw into its widget's folder (WidgetSample): the demo's next deliveries
+ * in each language and their cards' pictures, which the widget's screenshots set beside this app's. The tests read it
+ * from their resources; the app doesn't ship it.
  */
-open class WidgetSampleResources @Inject constructor(objects: ObjectFactory) : DefaultTask() {
-    @get:InputDirectory
-    @get:PathSensitive(PathSensitivity.RELATIVE)
-    val sample: DirectoryProperty = objects.directoryProperty()
-
-    @get:Input
-    val qualifiers: MapProperty<String, String> = objects.mapProperty(String::class.java, String::class.java)
-
-    @get:OutputDirectory
-    val outputDirectory: DirectoryProperty = objects.directoryProperty()
-
-    @TaskAction
-    fun write() {
-        val folder = sample.get().asFile
-        @Suppress("UNCHECKED_CAST")
-        val snapshots = groovy.json.JsonSlurper().parse(folder.resolve("snapshots.json"), "UTF-8") as Map<String, Map<String, Any>>
-        val output = outputDirectory.get().asFile
-        output.deleteRecursively()
-        fun first(language: String): Map<String, Any> {
-            @Suppress("UNCHECKED_CAST")
-            val parcels = (snapshots[language] ?: snapshots.getValue("en"))["parcels"] as List<Map<String, Any>>
-            return parcels.first()
-        }
-        for ((language, qualifier) in qualifiers.get()) {
-            val parcel = first(language)
-            @Suppress("UNCHECKED_CAST")
-            val card = parcel["card"] as Map<String, Any>
-            val detail = parcel["detail"] as String
-            val status = card["status"] as String
-            val strings = mapOf(
-                "widget_sample_label" to parcel["label"] as String,
-                "widget_sample_carrier" to parcel["carrier"] as String,
-                // `DeliveryWidgetCardView`'s status line.
-                "widget_sample_status" to if (status == detail) status else "$status · $detail",
-            )
-            val values = output.resolve(if (qualifier.isEmpty()) "values" else "values-$qualifier").apply { mkdirs() }
-            values.resolve("widget_sample.xml").writeText(resources(strings.map { (name, text) -> "    <string name=\"$name\">${resourceText(text)}</string>" }))
-        }
-        @Suppress("UNCHECKED_CAST")
-        val card = first("en")["card"] as Map<String, Any>
-        @Suppress("UNCHECKED_CAST")
-        fun pair(name: String) = card[name] as List<String>
-        for ((index, mode) in listOf("", "-night").withIndex()) {
-            val colors = mapOf("widget_sample_surface" to pair("surface")[index], "widget_sample_ink" to pair("ink")[index],
-                "widget_sample_primary" to if (index == 0) "#000000" else "#FFFFFF")
-            val values = output.resolve("values$mode").apply { mkdirs() }
-            values.resolve("widget_sample_colors.xml").writeText(resources(colors.map { (name, hex) -> "    <color name=\"$name\">$hex</color>" }))
-            val drawables = output.resolve("drawable$mode-nodpi").apply { mkdirs() }
-            val look = if (index == 0) "light" else "dark"
-            folder.resolve("sample-0-small-$look.png").copyTo(drawables.resolve("widget_sample_route.png"))
-            folder.resolve("sample-0-mark-$look.png").copyTo(drawables.resolve("widget_sample_mark.png"))
-        }
-    }
-
-    private fun resources(lines: List<String>) =
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n${lines.joinToString("\n")}\n</resources>\n"
-
-    /** `text` as a string resource holds it: aapt's escapes, then XML's. */
-    private fun resourceText(text: String): String {
-        val escaped = text.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("\n", "\\n")
-            .let { if (it.startsWith("@") || it.startsWith("?")) "\\$it" else it }
-        return escaped.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    }
-}
-
 val widgetSample: Directory = rootProject.layout.projectDirectory.dir("../ios/DeliveryWidgetExtension/WidgetSample")
-
-val widgetSampleResources = tasks.register<WidgetSampleResources>("widgetSampleResources") {
-    sample.set(widgetSample)
-    qualifiers.set(systemStrings.flatMap { it.qualifiers })
-    outputDirectory.set(layout.buildDirectory.dir("generated/widgetSample/res"))
-}
 
 val widgetSampleAssets = tasks.register<Sync>("widgetSampleAssets") {
     from(widgetSample) {
@@ -455,8 +381,7 @@ tasks.named { it == "assemblePlayRelease" }.configureEach { finalizedBy(playRele
 androidComponents {
     onVariants { variant ->
         variant.sources.res?.addGeneratedSourceDirectory(systemStrings) { it.outputDirectory }
-        variant.sources.res?.addGeneratedSourceDirectory(widgetSampleResources) { it.outputDirectory }
-        variant.sources.assets?.addGeneratedSourceDirectory(widgetSampleAssets) { it.destinationDirectory }
+        variant.hostTests.values.forEach { it.sources.resources?.addGeneratedSourceDirectory(widgetSampleAssets) { task -> task.destinationDirectory } }
         variant.sources.assets?.addGeneratedSourceDirectory(sharedAssets) { it.destinationDirectory }
         if (variant.buildType == "debug") {
             variant.sources.assets?.addGeneratedSourceDirectory(debugSharedAssets) { it.destinationDirectory }

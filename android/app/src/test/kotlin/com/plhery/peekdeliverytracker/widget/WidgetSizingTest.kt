@@ -38,8 +38,8 @@ import org.robolectric.annotation.GraphicsMode
 import org.xmlpull.v1.XmlPullParser
 
 /**
- * The widgets' sizes: how many rows of cells a launcher lets each one take on the home screens it was tried on, and the
- * Next delivery card's carrier mark at every size the widget can be given, which keeps its shape and its place.
+ * The widget's sizes: how many rows of cells a launcher lets it take on the home screens it was tried on, and the
+ * cards' carrier mark at every size the widget can be given, which keeps its shape and its place.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -85,21 +85,17 @@ class WidgetSizingTest {
     }
 
     /**
-     * Next delivery grows no taller than two rows anywhere it was tried, as the iPhone's has no large size, and still
-     * starts at two; the list grows as tall as the home screen, its large size the iPhone's large one.
+     * The widget grows as tall as the home screen, its large size the iPhone's large one; it starts at two rows, and
+     * goes down to the two a widget placed as Next delivery kept, everywhere it was tried.
      */
     @Test
-    fun nextDeliveryTakesTwoRowsAtMostAndTheListAsManyAsItLikes() {
-        val next = provider(R.xml.next_delivery_widget)
-        assertEquals(2, next.targetCellHeight)
+    fun theWidgetStartsAtTwoRowsAndGrowsAsTallAsItLikes() {
+        val widget = provider(R.xml.parcels_widget)
+        assertEquals(2, widget.targetCellHeight)
+        assertEquals("no height limit", 0f, widget.maxResizeHeight)
         for ((home, orientations) in homes) {
-            // A launcher leaves a widget with no limit free to take every row.
-            val most = if (next.maxResizeHeight <= 0f) Int.MAX_VALUE else orientations.minOf { span(next.maxResizeHeight, it) }
-            val least = orientations.maxOf { span(next.minResizeHeight, it) }
-            assertEquals("Next delivery's rows at most on the $home", 2, most)
-            assertTrue("Next delivery starts at two rows on the $home", next.targetCellHeight in least..most)
+            assertTrue("two rows are enough on the $home", orientations.maxOf { span(widget.minResizeHeight, it) } <= 2)
         }
-        assertEquals("the list has no height limit", 0f, provider(R.xml.parcels_widget).maxResizeHeight)
     }
 
     /** `DeliveryWidgetCard`'s colours, as the gallery's first card has them. */
@@ -140,7 +136,7 @@ class WidgetSizingTest {
         publishDemo(app, store, folder, scale = density.toDouble())
         val next = ExtensionLocalizer("en").text("app.nextParcel")
         for (size in sizes) {
-            val medium = NextDeliveryWidget.isMedium(size)
+            val medium = isMedium(size)
             val entries = mapOf(
                 "the demo's" to source.current(medium, CAPTURED),
                 "a wide mark" to drawnWith(picture(1200, 36), medium),

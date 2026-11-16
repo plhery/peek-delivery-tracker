@@ -30,11 +30,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * `ParcelsWidget`: the parcels on their way on the home screen, next to [NextDeliveryWidget], in its order and from what
- * the app published for it (DeliveryWidgetSharedStore). One widget whose design follows how many parcels there are for
- * the size the launcher gives it ([SizeMode.Exact], [DeliveryWidgetList.design]): cards, passes, or rows under the app
- * list's sections, as many as fit at every size ([SectionsLayout]).
- * It is drawn again whenever the other one is ([DeliveryWidgetUpdates]), by [draw] rather than Glance's sessions.
+ * `ParcelsWidget`, the app's home screen widget: the parcels on their way, in the app list's order and from what the app
+ * published for it (DeliveryWidgetSharedStore). Its design follows how many parcels there are for the size the launcher
+ * gives it ([SizeMode.Exact], [DeliveryWidgetList.design]): cards, passes, or rows under the app list's sections, as
+ * many as fit at every size ([SectionsLayout]). It is drawn again when the app publishes and on its alarm
+ * ([DeliveryWidgetUpdates]), by [draw] rather than Glance's sessions.
  */
 class ParcelsWidget : GlanceAppWidget() {
     override val sizeMode = SizeMode.Exact
@@ -68,7 +68,7 @@ class ParcelsWidget : GlanceAppWidget() {
          */
         suspend fun draw(context: Context) {
             val manager = AppWidgetManager.getInstance(context)
-            for (id in manager.getAppWidgetIds(ComponentName(context, ParcelsWidgetReceiver::class.java))) {
+            for (id in manager.getAppWidgetIds(ComponentName(context, NextDeliveryWidgetReceiver::class.java))) {
                 draw(context, id, manager.getAppWidgetOptions(id))
             }
         }
@@ -110,12 +110,14 @@ internal fun ParcelsWidgetBody(source: DeliveryWidgetSource) {
 }
 
 /**
- * The list's receiver: the launcher's updates and new sizes, each list drawn by [ParcelsWidget.draw], and its gallery
- * pictures tried again once the system takes them. Glance's own handlers aren't called: they start the session that
- * draws at the sizes the launcher reports, which would draw over [ParcelsWidget.draw]'s; the list's taps open the app
- * ([openParcel], [openList]) and need no session.
+ * The widget's receiver, under the name of the Next delivery widget it replaced: a widget placed as Next delivery is
+ * bound to this name, and shows the list now. It takes the launcher's updates and new sizes, each list drawn by
+ * [ParcelsWidget.draw]; the refresh [DeliveryWidgetUpdates] sets an alarm for, which ends with the last widget; and the
+ * gallery's pictures tried again once the system takes them. Glance's own handlers aren't called: they start the session
+ * that draws at the sizes the launcher reports, which would draw over [ParcelsWidget.draw]'s; the list's taps open the
+ * app ([openParcel], [openList]) and need no session.
  */
-class ParcelsWidgetReceiver : GlanceAppWidgetReceiver() {
+class NextDeliveryWidgetReceiver : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = ParcelsWidget()
 
     @SuppressLint("MissingSuperCall")
@@ -141,16 +143,21 @@ class ParcelsWidgetReceiver : GlanceAppWidgetReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action == DeliveryWidgetUpdates.PREVIEWS) {
-            val pending = goAsync()
-            DeliveryWidgetUpdates.retryPreviews(context, list = true) { pending.finish() }
-        } else {
-            super.onReceive(context, intent)
+        when (intent.action) {
+            DeliveryWidgetUpdates.REFRESH -> {
+                val pending = goAsync()
+                DeliveryWidgetUpdates.reload(context) { pending.finish() }
+            }
+            DeliveryWidgetUpdates.PREVIEWS -> {
+                val pending = goAsync()
+                DeliveryWidgetUpdates.retryPreviews(context) { pending.finish() }
+            }
+            else -> super.onReceive(context, intent)
         }
     }
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        DeliveryWidgetUpdates.cancel(context, gone = ParcelsWidgetReceiver::class.java)
+        DeliveryWidgetUpdates.cancel(context)
     }
 }

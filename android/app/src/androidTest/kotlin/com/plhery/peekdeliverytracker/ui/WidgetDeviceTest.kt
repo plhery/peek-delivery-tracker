@@ -45,7 +45,6 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
-import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
@@ -59,11 +58,11 @@ import com.plhery.peekdeliverytracker.widget.LAUNCHER_ON_ITS_SIDE
 import com.plhery.peekdeliverytracker.widget.LAUNCHER_TABLET
 import com.plhery.peekdeliverytracker.widget.LAUNCHER_UPRIGHT
 import com.plhery.peekdeliverytracker.widget.LAUNCHER_UPRIGHT_WIDE
-import com.plhery.peekdeliverytracker.widget.NextDeliveryWidget
 import com.plhery.peekdeliverytracker.widget.NextDeliveryWidgetReceiver
 import com.plhery.peekdeliverytracker.widget.WidgetCardArt
 import com.plhery.peekdeliverytracker.widget.WidgetText
 import com.plhery.peekdeliverytracker.widget.appIntent
+import com.plhery.peekdeliverytracker.widget.isMedium
 import com.plhery.peekdeliverytracker.widget.publishDemo
 import com.plhery.peekdeliverytracker.widget.widgetParcel
 import com.plhery.peekdeliverytracker.widget.widgetSource
@@ -83,15 +82,15 @@ import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 /**
- * The home screen widget on this device (C-S47, C-S48, C-W05…C-W10, C-W21, C-W24), shot to widget/ in the test
- * package's external files, which adb pulls:
+ * The iPhone's Next delivery cards and words, which the Parcels widget shows for its fewest parcels, on this device
+ * (C-S47, C-S48, C-W05…C-W10, C-W24), shot to widget/ in the test package's external files, which adb pulls:
  * - each state as a launcher draws it: the RemoteViews Glance writes, applied in the test's window at the iPhone's
  *   widget sizes, light and dark, with fakes (a store in memory, synthetic parcels, the demo's cards as this device
- *   draws them, the gallery's sample); and the cards and words at the sizes a launcher gives the widget, at the
- *   device's text size and at the largest;
+ *   draws them); and the cards and words at the sizes a launcher gives the widget, at the device's text size and at
+ *   the largest;
  * - the widget itself, bound to a host in the test's window where the device lets the test bind it (`appwidget
- *   grantbind`): it reads what the test published to the app's store, and its next button turns it, through Glance's
- *   action and the app's reload. What the app's store held is put back once it ends.
+ *   grantbind`): it shows what the test published to the app's store once the app reloads it. What the app's store
+ *   held is put back once it ends.
  * - where each widget's taps lead (C-G13): the activities its RemoteViews, applied, start on a click, as the launcher
  *   starts them, read from each view's pending intent and not started: one card its parcel, two cards each theirs
  *   with the page between them the app, small words their first parcel, medium words each column its own, and words
@@ -172,8 +171,8 @@ class WidgetDeviceTest {
     )
 
     /**
-     * Each state as a launcher draws it: the gallery's sample with the iPhone's pictures, the demo's cards with this
-     * device's, a card whose parcel has no places (Pip alone), words, nothing on its way, and switched off.
+     * Each state as a launcher draws it: the demo's cards with this device's pictures, a card whose parcel has no
+     * places (Pip alone), words, nothing on its way, and switched off.
      */
     @Test
     fun widgetsAsALauncherDrawsThem() {
@@ -181,7 +180,6 @@ class WidgetDeviceTest {
         val scale = context.resources.displayMetrics.density.toDouble()
         val store = DeliveryWidgetSharedStore(MemoryDefaults())
         val source = widgetSource(context, File(folder, "cards"), store)
-        shoot("sample", source.placeholder(false, CAPTURED), source.placeholder(true, CAPTURED))
         runBlocking { publishDemo(context, store, File(folder, "cards"), scale) }
         shoot("cards", source.current(false, CAPTURED), source.current(true, CAPTURED))
         val unplacedStore = DeliveryWidgetSharedStore(MemoryDefaults())
@@ -206,8 +204,8 @@ class WidgetDeviceTest {
         runBlocking { publishDemo(context, store, File(folder, "cards"), context.resources.displayMetrics.density.toDouble()) }
         val pages = listOf("upright" to listOf(LAUNCHER_UPRIGHT, LAUNCHER_UPRIGHT_WIDE), "side" to listOf(LAUNCHER_ON_ITS_SIDE, LAUNCHER_TABLET))
         val kinds = listOf<Pair<String, (DpSize) -> DeliveryWidgetEntry<WidgetCardArt>>>(
-            "cards" to { source.current(NextDeliveryWidget.isMedium(it), CAPTURED) },
-            "words" to { wordsEntry(parcels, medium = NextDeliveryWidget.isMedium(it)) },
+            "cards" to { source.current(isMedium(it), CAPTURED) },
+            "words" to { wordsEntry(parcels, medium = isMedium(it)) },
         )
         for (fontScale in listOf(null, LARGEST_TEXT)) {
             val composed = mode(night = false, fontScale)
@@ -220,11 +218,11 @@ class WidgetDeviceTest {
     }
 
     /**
-     * The widget itself in a host of the test's: what it reads from the app's store, published by the test, and its
-     * next button turning it to the next parcel (C-W01, C-W03, C-W21).
+     * The widget itself in a host of the test's, bound to the receiver a widget placed as Next delivery is bound to:
+     * the list of what the app's store holds, published by the test, once the app reloads it (C-W01, C-W03).
      */
     @Test
-    fun boundWidgetReadsTheStoreAndTurns() {
+    fun boundWidgetReadsTheStore() {
         val manager = AppWidgetManager.getInstance(context)
         val provider = ComponentName(context, NextDeliveryWidgetReceiver::class.java)
         val preferences = context.getSharedPreferences(BuildSettings.configuration.appGroupIdentifier, Context.MODE_PRIVATE)
@@ -236,7 +234,6 @@ class WidgetDeviceTest {
             assumeTrue("The device lets the test bind the widget", manager.bindAppWidgetIdIfAllowed(id, provider))
             val store = DeliveryWidgetSharedStore(PreferencesDefaults(preferences))
             store.setEnabled(true)
-            // Not the sample's names, which the widget's first look (its preview layout) shows until it is drawn.
             val published = listOf(widgetParcel(11, "First parcel", outForDelivery = true), widgetParcel(12, "Second parcel"), widgetParcel(13, "Third parcel"))
             store.save(DeliveryWidgetSnapshot(Instant.now(), "en", published))
             lateinit var view: AppWidgetHostView
@@ -251,13 +248,8 @@ class WidgetDeviceTest {
             compose.runOnUiThread { view.updateAppWidgetSize(Bundle(), listOf(SizeF(IPHONE_SMALL.width.value, IPHONE_SMALL.height.value))) }
             DeliveryWidgetUpdates.reload(context)
             awaitText(view, "First parcel")
+            awaitText(view, "Third parcel")
             shots.take("bound_small")
-
-            val next = ExtensionLocalizer("en").text("app.nextParcel")
-            compose.runOnUiThread { checkNotNull(view.described(next)?.tapped(view)) { "No next button" }.performClick() }
-            awaitText(view, "Second parcel")
-            shots.take("bound_next")
-            assertEquals(published[1].id, store.turn(size = "small")?.parcel)
         } finally {
             host.deleteAppWidgetId(id)
             compose.runOnUiThread { host.stopListening() }
@@ -413,16 +405,6 @@ class WidgetDeviceTest {
 
     private fun View.shows(text: String): Boolean =
         (this is TextView && this.text?.toString() == text) || (this is ViewGroup && (0 until childCount).any { getChildAt(it).shows(text) })
-
-    private fun View.described(description: String): View? {
-        if (contentDescription?.toString() == description) return this
-        if (this !is ViewGroup) return null
-        return (0 until childCount).firstNotNullOfOrNull { getChildAt(it).described(description) }
-    }
-
-    /** What a tap on this view reaches: itself, or the view round it that Glance gives the click to, within `host`. */
-    private fun View.tapped(host: View): View? =
-        generateSequence(this) { (it.parent as? View)?.takeIf { _ -> it !== host } }.firstOrNull { it.isClickable }
 
     /**
      * This test's user, as a number: `appwidget`'s `--user current` fails on Android 12 ("User -2 must be unlocked"),

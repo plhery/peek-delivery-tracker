@@ -66,14 +66,15 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The home screen widget (C-S47, C-S48, C-W01…C-W10, C-W21…C-W24, C-L02, A-W09) as Glance composes it, without a
- * launcher: what each state shows, where a tap goes, the next button's turn, and what the widget reads from the store
- * the app publishes to; DeliveryWidget.swift and DeliveryWidgetCards.swift are the spec.
+ * The iPhone's Next delivery widget (C-S47, C-S48, C-W01…C-W10, C-W21…C-W24, C-L02, A-W09), whose cards and words the
+ * Parcels widget shows for its fewest parcels, as Glance composes them, without a launcher: what each state shows, where
+ * a tap goes and the next button's turn; and what the widget reads from the store the app publishes to, and its
+ * refresh. DeliveryWidget.swift and DeliveryWidgetCards.swift are the spec.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(qualifiers = "w390dp-h844dp-xhdpi")
-class NextDeliveryWidgetTest {
+class DeliveryWidgetTest {
     @get:Rule
     val zurich = ZurichTime()
 
@@ -335,31 +336,6 @@ class NextDeliveryWidgetTest {
     }
 
     /**
-     * `placeholder` and `getSnapshot` (C-W08): the gallery's sample is the demo's next deliveries in the reader's
-     * language, with the iPhone's own pictures of them; the reader's own cards once the app has drawn them.
-     */
-    @Test
-    fun galleryShowsTheSampleUntilTheReadersCardsAreDrawn() = runBlocking {
-        val folder = files.newFolder("WidgetCards")
-        val store = DeliveryWidgetSharedStore(com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults())
-        store.setLanguageCode("fr")
-        val source = widgetSource(app, folder, store)
-        val sample = source.placeholder(medium = true, CAPTURED)
-        assertTrue(sample.isSample)
-        assertEquals("fr", sample.languageCode)
-        assertEquals(listOf("Chocolat belge 🍫", "Kit week-end trail 🏕️").map { it.take(8) }, sample.shown.map { it.label.take(8) })
-        assertEquals(2, sample.cards.size)
-        assertEquals(1, source.placeholder(medium = false, CAPTURED).cards.size)
-        assertEquals(sample.shown, source.preview(medium = true, CAPTURED).shown)
-        assertTrue(source.preview(medium = true, CAPTURED).isSample)
-
-        publishDemo(app, store, folder, scale = 2.0, language = AppLanguage.Fr)
-        val own = source.preview(medium = true, CAPTURED)
-        assertFalse(own.isSample)
-        assertEquals(2, own.cards.size)
-    }
-
-    /**
      * The cards' pictures are decoded away from the main thread, before the widget's layout is composed there: once
      * decoded, the layout has them with their files gone.
      */
@@ -463,8 +439,8 @@ class NextDeliveryWidgetTest {
     }
 
     /**
-     * `WidgetCenter.reloadTimelines` (C-W01, A-W08): a widget being shown, its composition running as the launcher's
-     * session keeps it, shows what the app published once the app reloads its own kind, and again when its alarm comes.
+     * `WidgetCenter.reloadTimelines` (C-W01, A-W08): a widget being shown, its composition running, shows what the app
+     * published once the app reloads its own kind, and again when its alarm comes.
      */
     @OptIn(ExperimentalGlanceApi::class)
     @Test
@@ -474,7 +450,7 @@ class NextDeliveryWidgetTest {
         publish(three[0])
         val shown = Channel<List<String>>(Channel.UNLIMITED)
         val session = launch {
-            NextDeliveryWidget().runComposition(app, sizes = listOf(IPHONE_SMALL)).collect { views ->
+            ParcelsWidget().runComposition(app, sizes = listOf(IPHONE_SMALL)).collect { views ->
                 val host = FrameLayout(app)
                 host.addView(views.apply(app, host))
                 shown.send(viewsUnder(host).mapNotNull { (it as? TextView)?.text?.toString() })
@@ -585,32 +561,15 @@ class NextDeliveryWidgetTest {
      */
     @Test
     fun layoutFollowsTheWidgetsShape() {
-        assertFalse(NextDeliveryWidget.isMedium(IPHONE_SMALL))
-        assertTrue(NextDeliveryWidget.isMedium(IPHONE_MEDIUM))
-        assertFalse(NextDeliveryWidget.isMedium(DpSize(130.dp, 220.dp)))
-        assertFalse(NextDeliveryWidget.isMedium(DpSize(203.dp, 220.dp)))
-        assertTrue(NextDeliveryWidget.isMedium(DpSize(269.dp, 117.dp)))
+        assertFalse(isMedium(IPHONE_SMALL))
+        assertTrue(isMedium(IPHONE_MEDIUM))
+        assertFalse(isMedium(DpSize(130.dp, 220.dp)))
+        assertFalse(isMedium(DpSize(203.dp, 220.dp)))
+        assertTrue(isMedium(DpSize(269.dp, 117.dp)))
         // Wide but square: the small layout, larger.
-        assertFalse(NextDeliveryWidget.isMedium(DpSize(349.dp, 340.dp)))
+        assertFalse(isMedium(DpSize(349.dp, 340.dp)))
         // Wide for its height but too narrow for two cards.
-        assertFalse(NextDeliveryWidget.isMedium(DpSize(200.dp, 110.dp)))
-        assertEquals(NextDeliveryWidget.PREVIEW_SIZES.map { NextDeliveryWidget.isMedium(it) }.toSet(), setOf(false, true))
-    }
-
-    /**
-     * The gallery's picture has the layout the widget is placed with: of the declared sizes, the launcher shows the one
-     * closest to its two-by-two frame that fits in it, else the smallest (RemoteViews' best fit). The frames are the
-     * reference phone's, upright and on its side, and the reference tablet's either way up.
-     */
-    @Test
-    fun galleryPictureHasThePlacedLayout() {
-        val frames = listOf(DpSize(179.dp, 208.dp), DpSize(269.dp, 117.dp), DpSize(220.dp, 309.dp), DpSize(304.dp, 233.dp))
-        for (frame in frames) {
-            val fitting = NextDeliveryWidget.PREVIEW_SIZES.filter { it.width.value <= frame.width.value + 1 && it.height.value <= frame.height.value + 1 }
-            val shown = fitting.minByOrNull { (it.width.value - frame.width.value).let { w -> w * w } + (it.height.value - frame.height.value).let { h -> h * h } }
-                ?: NextDeliveryWidget.PREVIEW_SIZES.minBy { it.width.value * it.height.value }
-            assertEquals("$frame shows $shown", NextDeliveryWidget.isMedium(frame), NextDeliveryWidget.isMedium(shown))
-        }
+        assertFalse(isMedium(DpSize(200.dp, 110.dp)))
     }
 
     /**

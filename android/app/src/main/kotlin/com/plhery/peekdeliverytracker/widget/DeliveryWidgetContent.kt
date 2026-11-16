@@ -82,6 +82,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import java.util.Locale
 import kotlin.math.floor
 import kotlin.math.roundToInt
+import kotlin.math.sqrt
 
 // DeliveryWidget.swift's DeliveryWidgetView and DeliveryWidgetCards.swift: what the widget shows, in Glance's
 // RemoteViews, at the size the launcher gives it. Text is iOS's text styles at the phone's text size within WidgetKit's
@@ -115,6 +116,21 @@ internal object WidgetCardColors {
     val primary: ColorProvider = ColorProvider(day = Color.Black, night = Color.White)
 }
 
+/** The narrowest widget that shows two cards side by side, two cards on their side on a phone. */
+private val MEDIUM_WIDTH = 250.dp
+
+/**
+ * How much wider than tall a widget is from which it is medium: midway, in proportion, between the iPhone's small widget
+ * (170 × 170) and its medium one (364 × 170).
+ */
+private val MEDIUM_SHAPE = sqrt(364f / 170f)
+
+/**
+ * Whether a widget `size` big shows its cards as the iPhone's medium widget does, wide enough and wide for its height:
+ * two side by side, or one across. A two-by-two widget on a phone is small upright and medium on its side.
+ */
+fun isMedium(size: DpSize): Boolean = size.width >= MEDIUM_WIDTH && size.width.value >= size.height.value * MEDIUM_SHAPE
+
 /** A card's pictures as the widget reads them: its mark, and its route as the widget's shape shows it, light and dark. */
 class WidgetCardArt(val mark: Pair<Bitmap, Bitmap>, val route: Pair<Bitmap, Bitmap>?)
 
@@ -128,10 +144,11 @@ private object NextMark {
 }
 
 /**
- * `DeliveryWidgetView`: the cards once the app has drawn every one the widget shows, else words, at the widget's
- * `size`: the iPhone's systemMedium family where it is wide for its height ([NextDeliveryWidget.isMedium]). A tap opens
- * the parcel shown, or the app where none is; the page between two cards opens `page` where one is given, else the app.
- * The cards carry the new-update dot where `marked`, as the Parcels widget's do; Next delivery's don't.
+ * `DeliveryWidgetView`, the iPhone's Next delivery widget, whose one or two cards the Parcels widget shows for its
+ * fewest parcels: the cards once the app has drawn every one the widget shows, else words, at the widget's `size`: the
+ * iPhone's systemMedium family where it is wide for its height ([isMedium]). A tap opens the parcel shown, or the app
+ * where none is; the page between two cards opens `page` where one is given, else the app. The cards carry the
+ * new-update dot where `marked`, as the Parcels widget's do; the iPhone's Next delivery's don't.
  */
 @Composable
 fun DeliveryWidgetContent(entry: DeliveryWidgetEntry<WidgetCardArt>, size: DpSize, page: Intent? = null, marked: Boolean = false) {
@@ -155,13 +172,13 @@ private fun Cards(
     val context = LocalContext.current
     val only = cards.singleOrNull()
     if (only != null) {
-        val shape = if (NextDeliveryWidget.isMedium(size)) DeliveryWidgetPicture.Wide else DeliveryWidgetPicture.Small
+        val shape = if (isMedium(size)) DeliveryWidgetPicture.Wide else DeliveryWidgetPicture.Small
         val (parcel, card, art) = only
         val words = CardWords(parcel, card, shape, leavesNext = entry.next != null, room = size.inside(MARGIN), type, entry.languageCode, marked)
         Box(root().background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))) {
             CardBackground(art, shape, size)
             Box(GlanceModifier.fillMaxSize().padding(MARGIN)) { CardView(parcel, card, art, words) }
-            NextButton(entry, NextDeliveryWidget.isMedium(size), card.ink, copy, top = MARGIN + words.markHeight / 2, end = MARGIN + NextMark.reach)
+            NextButton(entry, isMedium(size), card.ink, copy, top = MARGIN + words.markHeight / 2, end = MARGIN + NextMark.reach)
         }
     } else {
         val half = DpSize((size.width - MARGIN * 2 - CARD_SPACING) / 2, size.height - MARGIN * 2)
@@ -185,7 +202,7 @@ private fun Cards(
             }
             // Over the last card, outside its link.
             NextButton(
-                entry, NextDeliveryWidget.isMedium(size), cards.last().second.ink, copy, top = MARGIN + CARD_PADDING + markHeight(DeliveryWidgetPicture.Half) / 2,
+                entry, isMedium(size), cards.last().second.ink, copy, top = MARGIN + CARD_PADDING + markHeight(DeliveryWidgetPicture.Half) / 2,
                 end = MARGIN + CARD_PADDING + NextMark.reach,
             )
         }
@@ -354,7 +371,7 @@ internal const val NEW_UPDATE_OPACITY = 0.8f
 private fun Words(entry: DeliveryWidgetEntry<WidgetCardArt>, size: DpSize, type: WidgetText, copy: ExtensionLocalizer) {
     val context = LocalContext.current
     val parcels = entry.shown
-    val medium = NextDeliveryWidget.isMedium(size)
+    val medium = isMedium(size)
     val tap = if (!medium && entry.enabled) parcels.firstOrNull()?.let { openParcel(context, it) } else null
     val room = size.inside(MARGIN)
     Box(root().background(ImageProvider(R.drawable.widget_words_background)).clickable(tap ?: openApp(context))) {

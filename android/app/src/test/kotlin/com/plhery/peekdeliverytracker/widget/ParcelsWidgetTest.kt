@@ -307,7 +307,7 @@ class ParcelsWidgetTest {
     fun aPlacedListIsDrawnByTheApp() {
         val manager = AppWidgetManager.getInstance(app)
         val widgets = shadowOf(manager)
-        val component = ComponentName(app, ParcelsWidgetReceiver::class.java)
+        val component = ComponentName(app, NextDeliveryWidgetReceiver::class.java)
         widgets.addInstalledProvider(AppWidgetProviderInfo().apply { provider = component })
         widgets.bindAppWidgetId(3, component)
         manager.updateAppWidgetOptions(3, Bundle().apply { putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, arrayListOf(SizeF(LIST_SMALL.width.value, LIST_SMALL.height.value))) })
@@ -811,32 +811,10 @@ class ParcelsWidgetTest {
         assertTrue(gallery.isSample)
         assertEquals("de", gallery.languageCode)
         assertEquals(15, gallery.parcels.size)
-        val shows = DeliveryWidgetUpdates.listPreviewsShow(source, CAPTURED)
+        val shows = DeliveryWidgetUpdates.previewsShow(source, CAPTURED)
         assertTrue(shows.sample)
         store.setLanguageCode("fr")
-        assertNotEquals(shows, DeliveryWidgetUpdates.listPreviewsShow(source, CAPTURED))
-    }
-
-    /**
-     * Placed alone, the list keeps the refresh that drops a parcel a day after it arrived; it goes with the last widget
-     * of either kind.
-     */
-    @Test
-    fun theRefreshLastsWhileEitherWidgetIsPlaced() {
-        val store = DeliveryWidgetSharedStore(MemoryDefaults())
-        val alarms = shadowOf(app.getSystemService(AlarmManager::class.java))
-        val widgets = shadowOf(AppWidgetManager.getInstance(app))
-        assertFalse(DeliveryWidgetUpdates.isPlaced(app))
-        widgets.bindAppWidgetId(2, ComponentName(app, ParcelsWidgetReceiver::class.java))
-        assertTrue(DeliveryWidgetUpdates.isPlaced(app))
-        DeliveryWidgetUpdates.schedule(app, store, AppClock.now())
-        assertEquals(1, alarms.scheduledAlarms.size)
-        // The last next delivery widget gone: the list keeps the refresh.
-        NextDeliveryWidgetReceiver().onDisabled(app)
-        assertEquals(1, alarms.scheduledAlarms.size)
-        // The list's own last one gone (no next delivery widget placed): the refresh goes.
-        ParcelsWidgetReceiver().onDisabled(app)
-        assertTrue(alarms.scheduledAlarms.isEmpty())
+        assertNotEquals(shows, DeliveryWidgetUpdates.previewsShow(source, CAPTURED))
     }
 
     /**

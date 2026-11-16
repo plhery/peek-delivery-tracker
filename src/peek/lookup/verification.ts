@@ -64,6 +64,16 @@ function current(): Proof | null {
   return proof;
 }
 
+/**
+ * The proof's expiry on this device's clock. The server states it on its own clock and its response's `Date` says what
+ * time that clock read, so a device set minutes or hours wrong still keeps the proof as long as the server takes it.
+ * `Date` is to the second, so a second comes off. Without a readable `Date` the server's expiry stands as given.
+ */
+function localExpiry(expiresAt: number, served: string | null): number {
+  const serverNow = served ? Date.parse(served) : Number.NaN;
+  return Number.isFinite(serverNow) ? Date.now() + expiresAt - serverNow - 1_000 : expiresAt;
+}
+
 export function lookupProof(): string | null {
   const saved = current();
   return saved && saved.expiresAt > Date.now() + 5_000 ? saved.proof : null;
@@ -172,10 +182,10 @@ export function mountLookupVerification(container: HTMLElement, language: string
           }).then(async (response) => {
             if (!response.ok) throw new LookupVerificationError('refused');
             const result = (await response.json().catch(() => null) ?? {}) as Partial<Proof>;
-            if (typeof result.proof !== 'string' || typeof result.expiresAt !== 'number' || result.expiresAt <= Date.now()) {
-              throw new LookupVerificationError('refused');
-            }
-            finish(result as Proof);
+            if (typeof result.proof !== 'string' || typeof result.expiresAt !== 'number') throw new LookupVerificationError('refused');
+            const expiresAt = localExpiry(result.expiresAt, response.headers.get('Date'));
+            if (expiresAt <= Date.now()) throw new LookupVerificationError('refused');
+            finish({ proof: result.proof, expiresAt });
           }).catch((error: unknown) => finish(error instanceof LookupVerificationError ? error.reason : 'unanswered'));
         },
         'error-callback': (code: unknown) => { finish(widgetFailure(code)); return true; },

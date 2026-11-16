@@ -169,6 +169,34 @@ it('keeps the proof in the tab through a reload, until it expires', async () => 
   expect(saved()).toBeNull();
 });
 
+it.each([
+  ['an hour fast', 3_600_000],
+  ['an hour slow', -3_600_000],
+])('keeps a proof for its lifetime on a device clock set %s', async (_clock, offset) => {
+  const server = Date.now();
+  const device = server + offset;
+  vi.spyOn(Date, 'now').mockReturnValue(device);
+  mounted.warm();
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+  vi.mocked(fetch).mockResolvedValueOnce(Response.json(
+    { proof: 'verified-proof', expiresAt: server + 900_000 },
+    { headers: { Date: new Date(server).toUTCString() } },
+  ));
+  (options.callback as (token: string) => void)('single-use-token');
+  await expect(getLookupProof()).resolves.toBe('verified-proof');
+  expect(lookupProof()).toBe('verified-proof');
+  // The server's 15 minutes, counted on this device's clock (less a second: its Date header is to the second).
+  const kept = (saved() as { expiresAt: number }).expiresAt;
+  expect(kept).toBeGreaterThan(device + 898_000);
+  expect(kept).toBeLessThanOrEqual(device + 900_000);
+  vi.mocked(Date.now).mockReturnValue(device + 890_000);
+  expect(lookupProof()).toBe('verified-proof');
+  vi.mocked(Date.now).mockReturnValue(device + 900_000);
+  expect(lookupProof()).toBeNull();
+  lookupProof();
+  expect(saved()).toBeNull();
+});
+
 it('forgets a refused saved proof and saves the one that replaces it', async () => {
   sessionStorage.setItem(PROOF_KEY, JSON.stringify({ proof: 'refused-proof', expiresAt: Date.now() + 600_000 }));
   const page = await reloaded();

@@ -209,7 +209,10 @@ class ParcelLinkSheetState {
     private var handedOver: UUID? = null
     private var reading: Job? = null
 
-    /** `.task(id: presentationID)`: once a presentation, and not again in the window made again, its link read. */
+    /**
+     * `.task(id: presentationID)`: once a presentation, and not again in the window made again, its link read, then
+     * read again while its parcel waits for a check (`followCheck`).
+     */
     internal fun present(source: ParcelLinkSource, presentation: UUID) {
         if (presented == presentation) return
         presented = presentation
@@ -218,7 +221,10 @@ class ParcelLinkSheetState {
         pulled = false
         errorMessage = null
         reading?.cancel()
-        reading = source.scope.launch { source.links.load() }
+        reading = source.scope.launch {
+            source.links.load()
+            source.links.followCheck()
+        }
     }
 
     /** The sheet has closed: its read stops, and its question goes with it. */

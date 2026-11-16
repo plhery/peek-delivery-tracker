@@ -33,6 +33,8 @@ import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
@@ -458,6 +460,69 @@ class ParcelLinkTests {
         store.load()
         assertEquals("Cafe lamp", store.route?.name)
         assertEquals("Bonne anne\u0301e", store.route?.note)
+    }
+
+    /**
+     * The sheet reads the link again while its parcel waits for a check, as the web page does: a check queued on
+     * opening, or the parcel's first, for about a minute at most.
+     */
+    @Test
+    fun theSheetReadsAgainUntilTheCheckItWaitsForLands() = runTest {
+        val checked = fixture().publicParcel.let { it.copy(parcel = it.parcel.copy(syncStatus = SyncStatus.Ok), checkQueued = null) }
+        val queued = checked.copy(checkQueued = true)
+        val first = checked.copy(parcel = checked.parcel.copy(syncStatus = SyncStatus.Pending))
+
+        // A check queued on opening: read again at 2 s, then 3 s, until an answer no longer waits for it.
+        var answers = mutableListOf(queued, queued, checked)
+        var reads = 0
+        val store = ParcelLinkStore(defaults = MemoryDefaults(), read = { _, _ ->
+            reads += 1
+            answers.removeFirstOrNull() ?: checked
+        })
+        store.open(ParcelLinkRoute(linkId))
+        store.load()
+        val waits = mutableListOf<Duration>()
+        store.followCheck { waits.add(it) }
+        assertEquals(listOf(2.seconds, 3.seconds), waits)
+        assertEquals(3, reads)
+        assertEquals(ParcelLinkStore.Phase.Shown(checked), store.phase)
+
+        // Nothing on its way: nothing read again.
+        waits.clear()
+        store.followCheck { waits.add(it) }
+        assertEquals(emptyList<Duration>(), waits)
+        assertEquals(3, reads)
+
+        // A first check that never lands is read for about a minute, ten seconds apart at most.
+        answers = MutableList(20) { first }
+        store.open(ParcelLinkRoute(linkId))
+        store.load()
+        store.followCheck { waits.add(it) }
+        assertEquals(9, waits.size)
+        assertEquals(10.seconds, waits.last())
+        assertTrue(waits.dropLast(1).fold(Duration.ZERO, Duration::plus) < 60.seconds)
+        assertTrue(waits.fold(Duration.ZERO, Duration::plus) >= 60.seconds)
+
+        // The link opened again, or the service asking for a pause, ends the reads.
+        answers = MutableList(20) { queued }
+        store.open(ParcelLinkRoute(linkId))
+        store.load()
+        reads = 0
+        store.followCheck { store.open(ParcelLinkRoute(linkId)) }
+        assertEquals(0, reads)
+        var paused = false
+        val limited = ParcelLinkStore(defaults = MemoryDefaults(), read = { _, _ ->
+            if (paused) throw DeliveryApiError.RateLimited(30.0)
+            paused = true
+            queued
+        })
+        limited.open(ParcelLinkRoute(linkId))
+        limited.load()
+        waits.clear()
+        limited.followCheck { waits.add(it) }
+        assertEquals(listOf(2.seconds), waits)
+        assertEquals(ParcelLinkFailure.RateLimited, limited.refreshFailure)
+        assertEquals(ParcelLinkStore.Phase.Shown(queued), limited.phase)
     }
 
     /** The app's API client stands in for `DeliveryAPIClient.publicParcel`, failing as a request to links.test would. */

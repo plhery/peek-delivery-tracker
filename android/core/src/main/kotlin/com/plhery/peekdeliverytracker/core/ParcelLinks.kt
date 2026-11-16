@@ -16,14 +16,18 @@ import com.plhery.peekdeliverytracker.core.api.ParcelNumberHint
 import com.plhery.peekdeliverytracker.core.api.PublicPackage
 import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.IOException
 import java.time.Instant
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -360,6 +364,29 @@ class ParcelLinkStore(
         }
     }
 
+    /**
+     * Reads the link again while its parcel waits for a check: until the first one lands, and while an answer says one
+     * is queued or under way (`checkQueued`, as opening the link queues one when the parcel is due). After 2 s, then
+     * ever more slowly up to 10 s, for about a minute, as the web page does: the check's result shows as it lands
+     * rather than at the next pull. A link opened again or gone, or the service asking for a pause, ends it.
+     */
+    suspend fun followCheck(sleep: suspend (Duration) -> Unit = { delay(it) }) {
+        val presentation = presentationId
+        var wait = checkReadFirst
+        var waited = Duration.ZERO
+        while (waited < checkReadFor && presentationId == presentation && route != null &&
+            refreshFailure != ParcelLinkFailure.RateLimited
+        ) {
+            val response = (phase as? Phase.Shown)?.response ?: return
+            if (!awaitsCheck(response)) return
+            sleep(wait)
+            if (!currentCoroutineContext().isActive || presentationId != presentation) return
+            waited += wait
+            wait = minOf(wait * 1.5, checkReadMax)
+            load()
+        }
+    }
+
     /** Keeps the link across sign-in. The sheet closes; `resume` opens it again. */
     fun rememberForSignIn() {
         val route = route ?: return
@@ -454,6 +481,15 @@ class ParcelLinkStore(
 
     companion object {
         private const val storageKey = "sdt.pendingParcelLink.v1"
+
+        val checkReadFirst = 2.seconds
+        val checkReadMax = 10.seconds
+        val checkReadFor = 60.seconds
+
+        /** The parcel's first check has not landed yet, or the service says a check is on its way. */
+        fun awaitsCheck(response: PublicParcelResponse): Boolean =
+            response.checkQueued == true || response.parcel.syncStatus == SyncStatus.Pending ||
+                response.parcel.syncStatus == SyncStatus.Syncing
 
         /**
          * Opens the link sheet at launch without a server, to look at it in a debug build. `variant` (the iPhone's

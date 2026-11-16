@@ -315,12 +315,10 @@ internal val DeliveryWidgetParcel.dotRoom: Dp
     get() = if (newUpdate == true) NEW_UPDATE_DOT + NEW_UPDATE_GAP else 0.dp
 
 /**
- * The size of `parcel`'s status `text` after the new-update dot, `room` wide: `points`, or where the dot leaves it too
- * little room, as much smaller as it takes, down to 0.8 of it as a card's status, so that the dot cuts no words short.
- * Without the dot, `points`.
+ * The size of a parcel's stage or day `text` in a line `room` wide, past the new-update dot where it has one: `points`
+ * where it fits, else as much smaller as it takes, down to 0.8 of it as a card's status, past which it is cut short.
  */
-internal fun WidgetText.besideDot(parcel: DeliveryWidgetParcel, text: String, points: Float, room: Dp): Float =
-    if (parcel.newUpdate == true) fit(text, points, FontWeight.Normal, room, 1, 0.8f) else points
+internal fun WidgetText.lineFit(text: String, points: Float, room: Dp): Float = fit(text, points, FontWeight.Normal, room, 1, 0.8f)
 
 /** "New update." as TalkBack reads it first on a parcel with the dot (#72), as the app's cards say it; none without. */
 internal fun newUpdateSpoken(parcel: DeliveryWidgetParcel, languageCode: String): String? =

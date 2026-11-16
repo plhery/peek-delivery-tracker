@@ -213,9 +213,8 @@ internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width
 internal fun rowDescription(parcel: DeliveryWidgetParcel): String =
     listOfNotNull(parcel.listName, parcel.carrier.takeIf { parcel.named != false }, parcel.listStatus, parcel.listDay).joinToString(", ")
 
-/** The size of a row's `line`, `room` wide: the layout's, smaller where the new-update dot needs it ([besideDot]). */
-internal fun linePoints(parcel: DeliveryWidgetParcel, layout: ListLayout, line: String, room: Dp): Float =
-    layout.type.besideDot(parcel, line, layout.statusPoints, room)
+/** The size of a row's `line`, `room` wide: the layout's, smaller where it takes that to fit ([lineFit]). */
+internal fun linePoints(layout: ListLayout, line: String, room: Dp): Float = layout.type.lineFit(line, layout.statusPoints, room)
 
 /** What TalkBack reads for a row, a pass or a card of the list: "New update." first while it shows the dot (#72). */
 internal fun spokenRow(parcel: DeliveryWidgetParcel, languageCode: String): String =
@@ -240,7 +239,7 @@ internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineR
     if (name + apart + dot + wholeWidth <= layout.words) return LineRowEnd(whole, wholeWidth, apart, layout.statusPoints)
     val room = (layout.words - spacing - END_GAP - layout.room.width * NAME_SHARE - dot).coerceAtLeast(0.dp)
     val line = fittingLine(parcel, layout, room)
-    val points = linePoints(parcel, layout, line, room)
+    val points = linePoints(layout, line, room)
     return LineRowEnd(line, minOf(type.width(line, points, FontWeight.Normal), room), spacing + END_GAP, points)
 }
 
@@ -248,7 +247,7 @@ internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineR
  * A parcel's row, `top` below the one before it (Glance's padding is inside a view's height): the stage's symbol in its
  * colour, then its name over its stage and day (`ParcelListStackedRow`), or, in a large widget, its name and then its
  * stage and day at the row's end ([lineRowEnd]). The line, in `lineColor`, starts with the new-update dot where the
- * parcel has one (#72), and keeps to the room the dot leaves it ([linePoints]).
+ * parcel has one (#72), and keeps to the room left to it, at a smaller size where it must ([linePoints]).
  */
 @Composable
 internal fun ListRow(
@@ -285,7 +284,7 @@ internal fun ListRow(
                     val room = layout.words - parcel.dotRoom
                     val line = fittingLine(parcel, layout, room)
                     dot?.let { NewUpdateDot(it) }
-                    Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(linePoints(parcel, layout, line, room))))
+                    Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(linePoints(layout, line, room))))
                 }
             }
         }

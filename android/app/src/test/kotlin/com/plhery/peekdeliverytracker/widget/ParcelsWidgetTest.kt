@@ -570,16 +570,14 @@ class ParcelsWidgetTest {
                     } else {
                         val room = layout.words - parcel.dotRoom
                         val line = fittingLine(parcel, layout, room)
-                        val points = linePoints(parcel, layout, line, room)
-                        // What fitted without the dot fits beside it; a stage too long even without it is cut short as before.
+                        val points = linePoints(layout, line, room)
+                        // What fitted without the dot fits beside it.
                         val alone = fittingLine(parcel.copy(newUpdate = null), layout, layout.words)
                         if (layout.type.lines(alone, layout.statusPoints, FontWeight.Normal, layout.words) <= 1) {
                             assertTrue("${parcel.listName} at $size: $line", layout.type.lines(line, points, FontWeight.Normal, room) <= 1)
                             if (points < layout.statusPoints) smaller += 1
                         }
                         assertTrue(points >= layout.statusPoints * 0.8f - 0.01f)
-                        // Without the dot, the line and its size are the layout's.
-                        assertEquals(layout.statusPoints, linePoints(parcel.copy(newUpdate = null), layout, line, room))
                     }
                 }
             }
@@ -602,6 +600,43 @@ class ParcelsWidgetTest {
             assertEquals(language.rawValue, Localizer(language).text("parcel.newUpdate") + ".", said)
         }
         assertEquals(null, newUpdateSpoken(first.copy(newUpdate = null), "en"))
+    }
+
+    /**
+     * A row's line too long for its column takes a smaller size, down to 0.8 of it, before it is cut short, dot or none:
+     * three cells by two, two narrow columns, at the largest text a widget takes, in every language. A line that fits
+     * at a smaller size takes it ("Out for delivery", cut short at its own size); one that still doesn't stands at 0.8.
+     */
+    @Test
+    fun aLineTooLongForItsColumnTakesASmallerSize() {
+        val type = WidgetText(fontScaled(1.3f))
+        var smaller = 0
+        for (language in AppLanguage.entries) {
+            val sections = sections(sampleList(language), LIST_THREE_BY_TWO, type)
+            val layout = sections.layout
+            assertFalse(layout.lineRows)
+            for (parcel in sections.rows) {
+                val line = fittingLine(parcel, layout, layout.words)
+                val points = linePoints(layout, line, layout.words)
+                val fits = type.lines(line, points, FontWeight.Normal, layout.words) <= 1
+                assertTrue("${language.rawValue}: $line at $points", fits || points <= layout.statusPoints * 0.8f + 0.01f)
+                assertTrue("${language.rawValue}: $line at $points", points >= layout.statusPoints * 0.8f - 0.01f)
+                if (fits && type.lines(line, layout.statusPoints, FontWeight.Normal, layout.words) > 1) smaller += 1
+                if (language == AppLanguage.En && line == "Out for delivery") {
+                    assertTrue(type.lines(line, layout.statusPoints, FontWeight.Normal, layout.words) > 1)
+                    assertTrue(fits && points < layout.statusPoints)
+                }
+            }
+        }
+        assertTrue(smaller > 0)
+        // A line that fits keeps the layout's size.
+        val roomy = sections(sample, LIST_MEDIUM)
+        for (parcel in roomy.rows) {
+            val line = fittingLine(parcel, roomy.layout, roomy.layout.words)
+            if (roomy.layout.type.lines(line, roomy.layout.statusPoints, FontWeight.Normal, roomy.layout.words) <= 1) {
+                assertEquals(roomy.layout.statusPoints, linePoints(roomy.layout, line, roomy.layout.words))
+            }
+        }
     }
 
     /**

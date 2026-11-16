@@ -315,8 +315,8 @@ internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: Dp
 /**
  * A parcel's pass, `width` wide, in its carrier's colours: the mark at the top, then the name, over the day, or the
  * stage and day where both fit; in a large widget the day at the top's end, then the name and the stage on one line.
- * The stage or day starts with the new-update dot where the parcel has one (#72), and keeps to the room it leaves
- * ([besideDot]).
+ * The stage or day starts with the new-update dot where the parcel has one (#72), and keeps to the room left to it,
+ * at a smaller size where it must ([lineFit]).
  */
 @Composable
 private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: PassMetrics, width: Dp, type: WidgetText, languageCode: String) {
@@ -348,7 +348,7 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
                 Text(parcel.listName, GlanceModifier.defaultWeight(), maxLines = 1, style = nameStyle)
                 Spacer(GlanceModifier.width(6.dp))
                 val room = words * 0.5f - parcel.dotRoom
-                val points = type.besideDot(parcel, status, metrics.caption2, room)
+                val points = type.lineFit(status, metrics.caption2, room)
                 dot?.let { NewUpdateDot(it) }
                 Text(
                     status, GlanceModifier.width(minOf(type.width(status, points, FontWeight.Normal), room)), maxLines = 1,
@@ -362,7 +362,7 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
             Text(parcel.listName, maxLines = 1, style = nameStyle)
             Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 dot?.let { NewUpdateDot(it) }
-                Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(type.besideDot(parcel, line, metrics.caption2, room))))
+                Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(type.lineFit(line, metrics.caption2, room))))
             }
         }
     }

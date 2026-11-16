@@ -99,7 +99,8 @@ changes while the app runs, it words the days again for the new zone's midnights
     that no room for another parcel is left blank: a small widget leaves the headings out, the name over the stage and
     day; a medium one has two columns about as tall as each other (`DeliveryWidgetList.columns`); a large one has a
     line each where the widget is 250 dp wide. A small or medium widget takes smaller type before it gives a row up (`DeliveryWidgetList.layouts`),
-    and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line doesn't fit, the day stays.
+    and larger text keeps fewer rows. The type is the iPhone's, in dp. Where a line doesn't fit, the day stays; where
+    neither fits, the stage does, at a smaller size where it must (down to 0.8 of it, then cut short).
 
   The app draws it itself (`ParcelsWidget.draw`) rather than through Glance's sessions, at each size the launcher
   gives taken to its whole dp and 2 dp under (`ParcelsWidget.fitting`): a launcher can frame a widget a little smaller
@@ -112,9 +113,8 @@ changes while the app runs, it words the days again for the new zone's midnights
 
 A parcel whose card in the app's list shows the new-update dot shows it in the Parcels widget too, before its stage,
 and loses it when the card does: once it is opened on any of the account's devices, or when "Mark new updates" is off
-(`DeliveryWidgetParcel.newUpdate`). The stage keeps to the room the dot leaves, taking a shorter wording or a smaller
-size rather than being cut short, so every size keeps its rows. TalkBack reads "New update." first. Next delivery,
-which shows one parcel, leaves the dot out, as the iPhone's does.
+(`DeliveryWidgetParcel.newUpdate`). The line keeps to the room the dot leaves, so every size keeps its rows. TalkBack
+reads "New update." first. Next delivery, which shows one parcel, leaves the dot out, as the iPhone's does.
 
 Their gallery pictures show invented parcels in the phone's language (`DeliveryWidgetSample`,
 `DeliveryWidgetListSample`), never the reader's.

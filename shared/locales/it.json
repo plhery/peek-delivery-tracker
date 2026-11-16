@@ -1186,6 +1186,7 @@
   "status.noHistory": "Nessuna cronologia di tracciamento per ora",
   "status.likelyCarrier": "In attesa della prima scansione di {{carrier}}",
   "status.inputNeeded": "Codice postale di consegna richiesto",
+  "status.postcodeRefused": "Non trovato con il tuo codice postale",
   "status.checkNumber": "Controlla il numero di tracciamento",
   "feedback.pip.question": "Questo l’ho azzeccato?",
   "feedback.yes": "Sì",

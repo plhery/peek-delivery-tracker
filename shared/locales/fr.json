@@ -1186,6 +1186,7 @@
   "status.noHistory": "Aucun historique de suivi pour le moment",
   "status.likelyCarrier": "En attente du premier scan de {{carrier}}",
   "status.inputNeeded": "Code postal de livraison requis",
+  "status.postcodeRefused": "Introuvable avec ton code postal",
   "status.checkNumber": "Numéro de suivi à vérifier",
   "feedback.pip.question": "J’ai tout bon pour ce colis ?",
   "feedback.yes": "Oui",

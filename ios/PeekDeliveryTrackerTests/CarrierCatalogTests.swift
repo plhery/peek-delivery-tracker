@@ -1187,6 +1187,10 @@ final class CarrierCatalogTests: XCTestCase {
         // Changed since, the next check answers; without a postcode, the provider needs one.
         XCTAssertNil(parcel(postcode: "1234 AC", refused: "1234 AB").providerRefusedPostcode)
         XCTAssertNil(try request(parcel(postcode: nil, refused: nil)).refusedPostcode)
+        // The list says the postcode wasn't found rather than asking for one.
+        XCTAssertEqual(refused.displayStatus.key, "status.postcodeRefused")
+        XCTAssertEqual(parcel(postcode: "1234 AC", refused: "1234 AB").displayStatus.key, "status.inputNeeded")
+        XCTAssertEqual(parcel(postcode: nil, refused: nil).displayStatus.key, "status.inputNeeded")
 
         let localizer = Localizer()
         let originalLanguage = localizer.language
@@ -1194,6 +1198,7 @@ final class CarrierCatalogTests: XCTestCase {
         localizer.language = .en
         XCTAssertEqual(localizer.providerRequest("ParcelsApp", refused: "1234 AB"), "ParcelsApp didn’t find this parcel with postcode 1234 AB.")
         XCTAssertEqual(localizer.providerRequest("ParcelsApp", refused: nil), "ParcelsApp needs the delivery postcode to look up this parcel.")
+        XCTAssertEqual(localizer.text(refused.displayStatus.key), "Not found with your postcode")
     }
 
     func testTheDevicesCountryIsItsClocksThenItsRegionSetting() {

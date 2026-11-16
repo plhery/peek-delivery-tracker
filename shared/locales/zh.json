@@ -1186,6 +1186,7 @@
   "status.noHistory": "暂无物流记录",
   "status.likelyCarrier": "等待 {{carrier}} 的首次扫描",
   "status.inputNeeded": "需要收件邮编",
+  "status.postcodeRefused": "用你的邮编未找到包裹",
   "status.checkNumber": "请检查运单号",
   "feedback.pip.question": "这次我说对了吗？",
   "feedback.yes": "是的",

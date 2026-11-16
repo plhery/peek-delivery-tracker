@@ -465,6 +465,8 @@ val Parcel.displayStatus: ParcelDisplayStatus
         }
         if (isUnannounced) {
             val key = when {
+                // A provider that refused the parcel's own postcode asks for it all the same: the owner should check that one.
+                providerRefusedPostcode != null -> "status.postcodeRefused"
                 carrierData?.routing?.providerInputNeeded != null -> "status.inputNeeded"
                 carrier != CarrierId.Unknown -> "status.unannounced"
                 likelyCarrier != null -> "status.likelyCarrier"

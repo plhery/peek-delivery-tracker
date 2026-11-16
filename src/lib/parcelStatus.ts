@@ -128,7 +128,13 @@ export function parcelDisplayStatus(parcel: ParcelWithEvents): ParcelDisplayStat
     };
   }
   if (!hasCarrierUpdate && parcel.syncStatus === 'waiting') {
-    return { label: parcel.providerInputNeeded ? 'Delivery postcode needed' : parcel.carrier === 'unknown' ? 'No tracking history yet' : 'Waiting for the carrier', tone: parcel.providerInputNeeded ? 'warn' : 'ok', syncing: false };
+    const request = parcel.providerInputNeeded;
+    return {
+      label: request?.refusedPostcode ? 'Not found with your postcode' : request ? 'Delivery postcode needed'
+        : parcel.carrier === 'unknown' ? 'No tracking history yet' : 'Waiting for the carrier',
+      tone: request ? 'warn' : 'ok',
+      syncing: false,
+    };
   }
 
   const meta = current ? stageMeta(current.stage) : null;
@@ -155,7 +161,9 @@ export function parcelDisplayStatusKey(parcel: ParcelWithEvents): MessageKey {
   if (!hasCarrierUpdate && parcel.syncStatus === 'error') return 'status.failed';
   if (!hasCarrierUpdate && parcel.syncStatus === 'unsupported') return 'status.unsupported';
   if (!hasCarrierUpdate && parcel.syncStatus === 'waiting') {
-    return parcel.providerInputNeeded ? 'status.inputNeeded' : parcel.carrier !== 'unknown' ? 'status.unannounced'
+    // A provider that refused the parcel's own postcode asks for it all the same: the owner should check that one.
+    if (parcel.providerInputNeeded) return parcel.providerInputNeeded.refusedPostcode ? 'status.postcodeRefused' : 'status.inputNeeded';
+    return parcel.carrier !== 'unknown' ? 'status.unannounced'
       : likelyCarrier(parcel) ? 'status.likelyCarrier' : 'status.noHistory';
   }
   return current ? (`stage.${current.stage}` as MessageKey) : 'status.unannounced';

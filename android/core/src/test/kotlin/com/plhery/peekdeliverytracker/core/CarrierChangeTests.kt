@@ -9,6 +9,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PostcodeCountry
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeeded
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeededField
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -326,6 +327,9 @@ class CarrierChangeTests {
         )
         val held = parcel(CarrierId.SpringGDS, number = "3SABCD826405193", postcode = "1234 AB", data = refused)
         assertEquals("1234 AB", held.providerRefusedPostcode)
+        // The list says the postcode wasn't found rather than asking for one.
+        assertEquals("status.postcodeRefused", held.copy(syncStatus = SyncStatus.Waiting).displayStatus.key)
+        assertEquals("Not found with your postcode", localizer.text(held.copy(syncStatus = SyncStatus.Waiting).displayStatus.key))
         val change = start(held)
         assertTrue(change.providerAsks)
         assertEquals("1234 AB", change.refusedPostcode)
@@ -343,6 +347,7 @@ class CarrierChangeTests {
         // Once the parcel's postcode differs from the refused one, the request is an ordinary one again.
         val changed = held.copy(dpdPostcode = "1234 AC")
         assertNull(changed.providerRefusedPostcode)
+        assertEquals("status.inputNeeded", changed.copy(syncStatus = SyncStatus.Waiting).displayStatus.key)
         assertNull(start(changed).refusedPostcode)
         assertEquals(
             localizer.text("detail.providerInputNeeded", mapOf("provider" to "Example Provider")), start(changed).requirementsHelp(localizer),

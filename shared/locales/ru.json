@@ -1186,6 +1186,7 @@
   "status.noHistory": "Истории отслеживания пока нет",
   "status.likelyCarrier": "Ждём первой отметки от {{carrier}}",
   "status.inputNeeded": "Нужен индекс получателя",
+  "status.postcodeRefused": "Не найдена по вашему индексу",
   "status.checkNumber": "Проверьте трек-номер",
   "feedback.pip.question": "Я всё верно понял?",
   "feedback.yes": "Да",

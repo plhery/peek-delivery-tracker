@@ -1186,6 +1186,7 @@
   "status.noHistory": "No tracking history yet",
   "status.likelyCarrier": "Waiting for {{carrier}}’s first scan",
   "status.inputNeeded": "Delivery postcode needed",
+  "status.postcodeRefused": "Not found with your postcode",
   "status.checkNumber": "Check the tracking number",
   "feedback.pip.question": "Did I get this one right?",
   "feedback.yes": "Yes",

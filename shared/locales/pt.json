@@ -1186,6 +1186,7 @@
   "status.noHistory": "Ainda sem histórico de seguimento",
   "status.likelyCarrier": "À espera do primeiro registo de {{carrier}}",
   "status.inputNeeded": "Código postal de entrega necessário",
+  "status.postcodeRefused": "Não encontrada com o teu código postal",
   "status.checkNumber": "Verifica o número de seguimento",
   "feedback.pip.question": "Acertei nesta?",
   "feedback.yes": "Sim",

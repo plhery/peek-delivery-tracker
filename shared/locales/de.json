@@ -1186,6 +1186,7 @@
   "status.noHistory": "Noch kein Sendungsverlauf",
   "status.likelyCarrier": "Warten auf den ersten Scan von {{carrier}}",
   "status.inputNeeded": "Postleitzahl der Lieferadresse erforderlich",
+  "status.postcodeRefused": "Mit deiner Postleitzahl nicht gefunden",
   "status.checkNumber": "Sendungsnummer prüfen",
   "feedback.pip.question": "Liege ich hier richtig?",
   "feedback.yes": "Ja",

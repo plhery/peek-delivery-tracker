@@ -1186,6 +1186,7 @@
   "status.noHistory": "Brak historii śledzenia",
   "status.likelyCarrier": "Oczekiwanie na pierwszy skan przewoźnika {{carrier}}",
   "status.inputNeeded": "Wymagany kod pocztowy odbiorcy",
+  "status.postcodeRefused": "Nie znaleziono z podanym kodem pocztowym",
   "status.checkNumber": "Sprawdź numer śledzenia",
   "feedback.pip.question": "Dobrze to odczytałem?",
   "feedback.yes": "Tak",

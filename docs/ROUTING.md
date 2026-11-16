@@ -54,7 +54,8 @@ The owner supplies it through the carrier editor, in the carrier's own postcode 
 has one (PostNL's for a 3S number), which every provider receives, and otherwise in a field
 of its own. A provider sent the parcel's own postcode that asks for one all the same asks the
 owner to check it: the request names that postcode, which the carrier's field offers to
-correct, and stands until the owner changes it or a source finds the parcel. A refusal of a
+correct, and stands until the owner changes it or a source finds the parcel. Until then the
+parcel list says the parcel wasn't found with that postcode, not that one is needed. A refusal of a
 separate postcode given beside the parcel's own asks nothing. The separate one is bound to the number providers are
 asked about (the delivery leg's after a handoff), kept across checks, kept private, and
 ignored for a different tracking number, and replaced by a new postcode the owner gives the

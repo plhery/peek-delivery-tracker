@@ -386,7 +386,9 @@ extension Parcel {
             return ParcelDisplayStatus(key: "status.unsupported", tone: .warning, syncing: false)
         }
         if isUnannounced {
-            let key = carrierData?.routing?.providerInputNeeded != nil ? "status.inputNeeded" : carrier != .unknown ? "status.unannounced"
+            // A provider that refused the parcel's own postcode asks for it all the same: the owner should check that one.
+            let key = providerRefusedPostcode != nil ? "status.postcodeRefused"
+                : carrierData?.routing?.providerInputNeeded != nil ? "status.inputNeeded" : carrier != .unknown ? "status.unannounced"
                 : likelyCarrier != nil ? "status.likelyCarrier" : "status.noHistory"
             return ParcelDisplayStatus(key: key, tone: .normal, syncing: false)
         }

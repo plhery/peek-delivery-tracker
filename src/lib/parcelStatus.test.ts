@@ -59,6 +59,19 @@ describe('parcelDisplayStatus', () => {
     expect(parcelDisplayStatusKey({ ...parcel('error', 'in_transit'), syncError: 'carrier:transport' })).toBe('stage.in_transit');
   });
 
+  it('says a provider did not find the parcel with the postcode its owner gave, rather than asking for one', () => {
+    for (const carrier of ['swiss-post', 'unknown'] as const) {
+      const asked = { ...parcel('waiting'), carrier, dpdPostcode: '75011', providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode' as const } };
+      expect(parcelDisplayStatusKey(asked)).toBe('status.inputNeeded');
+      expect(parcelDisplayStatus(asked)).toEqual({ label: en['status.inputNeeded'], tone: 'warn', syncing: false });
+      const refused = { ...asked, providerInputNeeded: { ...asked.providerInputNeeded, refusedPostcode: '75011' } };
+      expect(parcelDisplayStatusKey(refused)).toBe('status.postcodeRefused');
+      expect(parcelDisplayStatus(refused)).toEqual({ label: en['status.postcodeRefused'], tone: 'warn', syncing: false });
+      // Its first scan says more.
+      expect(parcelDisplayStatusKey({ ...refused, events: parcel('waiting', 'in_transit').events })).toBe('stage.in_transit');
+    }
+  });
+
   it.each(['carrier:refused_number', 'carrier:placeholder_number', 'carrier:number_unknown'])('asks to check a number no carrier will answer for (%s)', (syncError) => {
     for (const carrier of ['swiss-post', 'unknown'] as const) {
       const refused = { ...parcel('error'), carrier, syncError };

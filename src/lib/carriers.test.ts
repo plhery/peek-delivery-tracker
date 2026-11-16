@@ -1555,11 +1555,10 @@ describe('ambiguous number shapes', () => {
 
   it('keeps 15-digit numbers ambiguous', () => {
     // The last digit is a GS1 check, which FedEx's 15-digit numbers carry.
-    expect(detectCarrierMatch('123456789012343')).toMatchObject({
-      carrier: 'unknown',
-      confidence: 'low',
-      candidates: ['fedex', 'dpd-fr', 'brt', 'yunda'],
-    });
+    const match = detectCarrierMatch('123456789012343');
+    expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
+    // The scraper may list Ozon Logistics too.
+    expect(match.candidates?.filter((carrier) => carrier !== 'ozon-logistics')).toEqual(['fedex', 'dpd-fr', 'brt', 'yunda']);
   });
 
   it('keeps 8-digit numbers and mixed 8-character IDs ambiguous', () => {

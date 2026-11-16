@@ -117,7 +117,7 @@ Le suivi de J&T te le dit : sous le scan de livraison, clique sur `Zustelldetail
 
 ### J&T Express a-t-il des points relais en Allemagne ?
 
-Le site allemand de J&T n'en mentionne aucun, et aucune ligne de J&T Express Germany connue de Peek n'oriente un colis vers un point relais ou une consigne. Sur la page des préférences de livraison, tu peux demander une remise en main propre, chez un voisin, à une réception ou dans un lieu sûr à ton adresse.
+Le site allemand de J&T n'en mentionne aucun, mais une ligne de J&T Express Germany connue de Peek indique que le livreur a déposé le colis en point de retrait, J&T envoyant les informations par e-mail. Sur la page des préférences de livraison, tu peux demander une remise en main propre, chez un voisin, à une réception ou dans un lieu sûr à ton adresse.
 
 ### Pourquoi mon numéro de suivi J&T est-il introuvable ?
 

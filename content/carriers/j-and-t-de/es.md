@@ -117,7 +117,7 @@ Te lo indica el propio buscador de J&T: bajo el escaneo de entrega, pulsa `Zuste
 
 ### ¿Tiene J&T Express puntos de recogida o taquillas en Alemania?
 
-Su web alemana no menciona ninguno, y ningún evento de J&T Express Germany conocido por Peek deriva paquetes a tiendas o taquillas. Desde la página de preferencias de entrega puedes pedir que te lo entreguen en mano, a un vecino, en recepción o en un lugar seguro de tu domicilio.
+Su web alemana no menciona ninguno, pero un evento de J&T Express Germany conocido por Peek indica que el repartidor dejó el paquete en un punto de recogida y que J&T envía los detalles por correo electrónico. Desde la página de preferencias de entrega puedes pedir que te lo entreguen en mano, a un vecino, en recepción o en un lugar seguro de tu domicilio.
 
 ### ¿Por qué no aparece mi número de seguimiento de J&T?
 

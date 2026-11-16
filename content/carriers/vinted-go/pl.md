@@ -82,7 +82,7 @@ Według stanu sprawdzonego 16 listopada 2026 r. Vinted Go nie udostępnia kupuj�
 
 [Peek](/) odczytuje bezpośrednio śledzenie Vinted Go — bez konta i bez kodu pocztowego: pokazuje każdy skan z dokładną godziną w oryginalnym angielskim brzmieniu Vinted Go (np. `Ready to collect at the locker`), miejscowość każdego centrum sortowania na mapie oraz czytelny polski status główny („Do odbioru”, „Dostarczona”, „Zwrócona nadawcy”). Wskazuje nazwę automatu lub punktu partnerskiego, w którym paczka czeka albo z którego została odebrana, pomija natomiast punkty sąsiedzkie mogące być prywatnym adresem; pełny adres punktu, godziny otwarcia i ostateczny termin odbioru pozostają na stronie Vinted Go, która nie podaje też przewidywanej daty doręczenia. Godziny skanów wyświetlają się w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie przypomina o tym linijka pod historią („Godziny w Twojej strefie czasowej: …”).
 
-Po numerze zaczynającym się od `VGS` — albo po wklejeniu linku `vintedgo.com/en/tracking/...` — Peek od razu rozpoznaje Vinted Go („Wykryty przewoźnik”). Gdy wpiszesz sam 16-cyfrowy numer z prefiksem `17` lub `18`, Peek odpytuje Vinted Go, [TNT](carrier:tnt) i DHL eCommerce, przypisując przesyłkę do Vinted Go, gdy przewoźnik potwierdzi numer („Vinted Go ma tę przesyłkę.”); kod z `UW` sprawdza w Vinted Go. W innym wypadku naciśnij „Zmień” i wybierz Vinted Go.
+Po numerze zaczynającym się od `VGS` — albo po wklejeniu linku `vintedgo.com/en/tracking/...` — Peek od razu rozpoznaje Vinted Go („Wykryty przewoźnik”). Gdy wpiszesz sam 16-cyfrowy numer z prefiksem `17` lub `18`, Peek odpytuje Vinted Go, [TNT](carrier:tnt) i DHL eCommerce (przy niektórych numerach także innych przewoźników), przypisując przesyłkę do Vinted Go, gdy przewoźnik potwierdzi numer („Vinted Go ma tę przesyłkę.”); kod z `UW` sprawdza w Vinted Go. W innym wypadku naciśnij „Zmień” i wybierz Vinted Go.
 
 Jeśli Vinted Go przekaże paczkę innej sieci pod nowym numerem śledzenia, Peek może śledzić ją dalej u nowego przewoźnika, o ile obsługuje go bezpośrednio; gdy ostatnie 13 znaków 16-znakowego kodu z `UW` tworzy kod paczki Poste Italiane, Peek odpytuje również Poste Italiane i przełącza kartę na „Doręcza: Poste Italiane”, jak tylko włoska poczta zapisze najnowszy skan. Dopóki przesyłka idzie w sieci Vinted Go, Peek sprawdza status co 10 minut, a po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) — raz na godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z Vinted ani nie zgłosi reklamacji.
 
@@ -90,7 +90,7 @@ Jeśli Vinted Go przekaże paczkę innej sieci pod nowym numerem śledzenia, Pee
 
 ### Co to jest Vinted Go i dlaczego widnieje w regulaminie Vinted?
 
-Vinted Go to własny operator logistyczny grupy Vinted, prowadzony przez spółkę Vinted Go, UAB zarejestrowaną w Wilnie na Litwie. Poza obsługą własnej sieci automatów i punktów w sześciu krajach Europy spółka Vinted Go UAB odpowiada formalnie na Vinted m.in. za rozliczenia własności przesyłek zintegrowanych, za które wypłacono odszkodowanie lub których nadawca nie odebrał po zwrocie.
+Vinted Go to własny operator logistyczny grupy Vinted, prowadzony przez spółkę Vinted Go, UAB zarejestrowaną w Wilnie na Litwie. Poza obsługą własnej sieci automatów i punktów w sześciu krajach Europy według zasad wysyłki zintegrowanej na Vinted spółka Vinted Go UAB staje się właścicielem zaginionych przesyłek, za które wypłacono odszkodowanie, oraz zwróconych przesyłek, których nikt nie odebrał w terminie.
 
 ### Ile idzie paczka Vinted Go?
 
@@ -98,7 +98,7 @@ Regulamin Vinted Go zakłada doręczenie do punktu odbioru w ciągu 3 do 6 dni r
 
 ### Czy Vinted Go ma infolinię po polsku?
 
-Nie. Vinted Go udostępnia telefon wsparcia wyłącznie na ekranach własnych automatów za granicą (przycisk „?”, a w Belgii i Holandii numer `+31 20 793 2587` obsługiwany po angielsku i francusku). Wszystkie sprawy dotyczące zamówień zgłasza się przez pomoc Vinted w oknie rozmowy.
+Nie. Vinted Go udostępnia telefon wsparcia wyłącznie na ekranach własnych automatów za granicą (przycisk „?”, a w Belgii i Holandii numer `+31 20 793 2587` obsługiwany po angielsku, a w Belgii także po francusku). Wszystkie sprawy dotyczące zamówień zgłasza się przez pomoc Vinted w oknie rozmowy.
 
 ### Dlaczego mój numer śledzenia Vinted Go nie działa?
 

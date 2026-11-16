@@ -117,7 +117,7 @@ Sprawdzisz to na stronie śledzenia J&T: pod skanem doręczenia kliknij `Zustell
 
 ### Czy J&T Express ma punkty odbioru lub automaty paczkowe w Niemczech?
 
-Niemiecka strona J&T nie wymienia żadnych punktów odbioru ani automatów, a żaden ze znanych Peek komunikatów J&T Express Germany nie kieruje paczki do punktu czy skrytki. Na stronie preferencji doręczenia możesz poprosić o wydanie paczki Tobie, sąsiadowi, w recepcji albo o zostawienie jej w wybranym miejscu pod Twoim adresem.
+Niemiecka strona J&T nie wymienia żadnych punktów odbioru ani automatów, ale jeden ze znanych Peek komunikatów J&T Express Germany mówi, że kurier zostawił paczkę w punkcie odbioru, a szczegóły J&T wysyła e-mailem. Na stronie preferencji doręczenia możesz poprosić o wydanie paczki Tobie, sąsiadowi, w recepcji albo o zostawienie jej w wybranym miejscu pod Twoim adresem.
 
 ### Dlaczego śledzenie J&T nie znajduje mojego numeru?
 

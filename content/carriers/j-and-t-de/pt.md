@@ -117,7 +117,7 @@ O seguimento da J&T diz-to: por baixo da leitura de entrega, clica em `Zustellde
 
 ### A J&T Express tem pontos de recolha ou cacifos na Alemanha?
 
-O site alemão da J&T não lista nenhum, e nenhuma linha da J&T Express Germany conhecida pelo Peek envia encomendas para lojas ou cacifos. Na página de preferências de entrega podes pedir a entrega em mão, a um vizinho, numa receção ou num local seguro na tua morada.
+O site alemão da J&T não lista nenhum, mas uma linha da J&T Express Germany conhecida pelo Peek indica que o estafeta deixou a encomenda num ponto de recolha e que a J&T envia os detalhes por e-mail. Na página de preferências de entrega podes pedir a entrega em mão, a um vizinho, numa receção ou num local seguro na tua morada.
 
 ### Porque é que o meu código de seguimento J&T não é encontrado?
 

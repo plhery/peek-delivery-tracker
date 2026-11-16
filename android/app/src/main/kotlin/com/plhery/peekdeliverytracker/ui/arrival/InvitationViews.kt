@@ -189,7 +189,7 @@ internal fun InvitationWelcome(
                     if (loading) ActivityIndicator(Modifier.padding(top = 12.dp).testTag(INVITATION_LOADING), size = 20.dp, tint = colors.secondaryLabel)
                     errorKey?.let { error ->
                         Text(
-                            localized(error), Modifier.testTag(INVITATION_ERROR), color = colors.secondaryLabel, textAlign = TextAlign.Center,
+                            localized(error), Modifier.testTag(INVITATION_ERROR), color = colors.secondaryText, textAlign = TextAlign.Center,
                             style = type.footnote.sfLines(),
                         )
                         if (error != UNAVAILABLE) PlainTextButton(localized("common.retry"), INVITATION_RETRY, Modifier.padding(top = 8.dp), onClick = onRetry)
@@ -247,7 +247,7 @@ private fun OpenParcelButton(opening: Boolean, onOpen: () -> Unit, onPress: (Boo
     ) {
         anchor()
         Box(Modifier.heightIn(min = 44.dp).graphicsLayer { alpha = captionAlpha }, contentAlignment = Alignment.Center) {
-            Text(title, color = colors.secondaryLabel, textAlign = TextAlign.Center, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
+            Text(title, color = colors.secondaryText, textAlign = TextAlign.Center, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
         }
     }
 }
@@ -626,7 +626,7 @@ internal fun FriendInvitationAcceptance(
                         }
                     }
                     FriendSharingPreview(snapshot?.ownCard ?: FriendsStore.ownCard(parcels, profile))
-                    SymbolLabel(localized("friends.privacy"), "lock", type.caption2, colors.secondaryLabel)
+                    SymbolLabel(localized("friends.privacy"), "lock", type.caption2, colors.secondaryText)
                 }
             }
             if (outcome != null) {
@@ -703,7 +703,7 @@ private fun ProfileSheet(
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     errorKey?.let {
-                        Text(localized(it), color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.footnote.sfLines())
+                        Text(localized(it), color = PeekTheme.colors.secondaryText, style = PeekTheme.type.footnote.sfLines())
                     }
                     androidx.compose.runtime.key(editing) {
                         FriendsProfileForm(

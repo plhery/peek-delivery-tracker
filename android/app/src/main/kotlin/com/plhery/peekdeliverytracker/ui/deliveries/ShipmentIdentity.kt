@@ -53,10 +53,10 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
  * Under each number its carrier's own pages, and after the numbers the pages that are none of theirs
  * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`.
  *
- * `padded` is the page's look: 2 in from the sides, what a number is in the opaque secondary grey (`Brand.secondaryText`)
+ * What a number is is in the secondary grey (`Brand.secondaryText`). `padded` is the page's look: 2 in from the sides
  * and, at the accessibility sizes, the number taking the line with its copy under it, saying what it does in footnote,
- * 44 tall. A link's sheet (`SharedParcelNumber`, not padded) has none of it: its numbers reach its sides, what a number
- * is is in the translucent secondary grey (`.secondary`), and its copy stays at the line's end at every size.
+ * 44 tall. A link's sheet (`SharedParcelNumber`, not padded) has none of it: its numbers reach its sides, and its copy
+ * stays at the line's end at every size.
  */
 @Composable
 internal fun ShipmentNumbers(
@@ -85,7 +85,7 @@ internal fun ShipmentNumbers(
                 val copyLabel = localizer.text(if (says) "detail.copied" else "detail.copyTracking") + if (numbers.size > 1) " — $label" else ""
                 val number = @Composable { numberModifier: Modifier ->
                     Column(numberModifier.semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(label, color = if (padded) colors.secondaryText else colors.secondaryLabel, style = type.caption2.sfLines())
+                        Text(label, color = colors.secondaryText, style = type.caption2.sfLines())
                         SelectionContainer {
                             Text(
                                 CarrierCatalog.format(entry.number, entry.carrier),
@@ -106,10 +106,10 @@ internal fun ShipmentNumbers(
                                 horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
-                                PeekSymbol(if (says) "checkmark" else "doc.on.doc", font = type.footnote, tint = colors.secondaryLabel)
+                                PeekSymbol(if (says) "checkmark" else "doc.on.doc", font = type.footnote, tint = colors.secondaryText)
                                 Text(
                                     localizer.text(if (says) "detail.copied" else "detail.copyTracking"),
-                                    color = colors.secondaryLabel,
+                                    color = colors.secondaryText,
                                     style = type.footnote.sfLines(),
                                 )
                             }
@@ -122,7 +122,7 @@ internal fun ShipmentNumbers(
                         Spacer(Modifier.width(16.dp))
                         CopyButton(copyLabel, copy) {
                             Box(Modifier.size(COPY_SIDE), contentAlignment = Alignment.Center) {
-                                PeekSymbol(if (says) "checkmark" else "doc.on.doc", font = type.fixed(14f), tint = colors.secondaryLabel)
+                                PeekSymbol(if (says) "checkmark" else "doc.on.doc", font = type.fixed(14f), tint = colors.secondaryText)
                             }
                         }
                     }
@@ -209,8 +209,7 @@ internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: C
                 if (role != null) {
                     // 6 either side of the spacer, at least 4 long.
                     Spacer(Modifier.width(16.dp))
-                    // `.secondary` over the link's tint: the tint at half.
-                    Text(role, color = tint.copy(alpha = tint.alpha * 0.5f), style = type.caption2.sfLines())
+                    Text(role, color = PeekTheme.colors.secondaryText, style = type.caption2.sfLines())
                 }
             }
         }

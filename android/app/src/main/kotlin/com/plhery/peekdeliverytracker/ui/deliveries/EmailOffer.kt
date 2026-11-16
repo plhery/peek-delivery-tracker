@@ -236,7 +236,7 @@ private fun OfferCard(address: String, phase: EmailOfferPhase, turnOn: () -> Uni
                 color = colors.label,
                 style = type.style(IosTextStyle.Callout, FontWeight.SemiBold).sfLines(),
             )
-            Text(localizer.text("email.offer.body", mapOf("email" to address)), color = colors.secondaryLabel, style = type.footnote.sfLines())
+            Text(localizer.text("email.offer.body", mapOf("email" to address)), color = colors.secondaryText, style = type.footnote.sfLines())
             val failed = phase == EmailOfferPhase.Failed
             val failure = @Composable {
                 Text(
@@ -263,7 +263,7 @@ private fun OfferCard(address: String, phase: EmailOfferPhase, turnOn: () -> Uni
                 )
                 OfferButton(
                     localizer.text("onboarding.notifications.notNow"), PAGE_EMAIL_OFFER_NOT_NOW, saving = phase == EmailOfferPhase.Saving(false),
-                    enabled = !answering, colors.secondaryLabel, colors.secondaryLabel, FontWeight.Medium, null, notNow,
+                    enabled = !answering, colors.secondaryText, colors.secondaryText, FontWeight.Medium, null, notNow,
                 )
             }
         }

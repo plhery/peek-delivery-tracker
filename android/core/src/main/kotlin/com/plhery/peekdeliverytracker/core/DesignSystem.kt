@@ -174,11 +174,17 @@ object Brand {
     val accentBright = accent
     val onAccent = AdaptiveColor(RgbaColor.hex("#20251E"))
     val ink = color(light = "#20251E", dark = "#FAF6EB")
-    val inkSoft = color(light = "#657060", dark = "#C2BAAA")
 
     /**
-     * The system's secondary grey, a little darker in light and lighter in dark, opaque: it reads at 4.5:1 or more on
-     * the page, the paper, the cream, a sheet's grounds and every carrier's card (`ContrastTest`).
+     * The ink's quieter shade, as in the name's tagline: 4.5:1 or more on the page, the paper, the cream and the first
+     * open's card (`ContrastTest`).
+     */
+    val inkSoft = color(light = "#485242", dark = "#CEC6B6")
+
+    /**
+     * Every quieter word's grey, in place of the system's secondary and placeholder greys, which read under 4.5:1 in
+     * light: it reads at 4.5:1 or more on the page, the paper, the cream, a sheet's grounds, a notice and every carrier's
+     * card (`ContrastTest`).
      */
     val secondaryText = color(light = "#606065", dark = "#BCBCC2")
     val cream = color(light = "#F0F0E9", dark = "#292620")

@@ -164,7 +164,7 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                     Text(
                         localizer.text(if (syncing) "timeline.emptySyncing" else "timeline.empty"),
                         Modifier.padding(vertical = 12.dp),
-                        color = colors.secondaryLabel,
+                        color = colors.secondaryText,
                         style = type.footnote.sfLines(),
                     )
                 }
@@ -214,7 +214,7 @@ private fun JournalHeading(label: String, bottom: Dp, modifier: Modifier = Modif
                 heading()
                 text = AnnotatedString(label)
             },
-        color = PeekTheme.colors.secondaryLabel,
+        color = PeekTheme.colors.secondaryText,
         style = type.tracking(type.caption2, 1f).sfLines(),
     )
 }
@@ -368,13 +368,13 @@ private fun JournalHeader(count: Int, full: Boolean, reduceMotion: Boolean, onTo
         Text(
             localizer.text(if (count == 1) "detail.updateCount.one" else "detail.updateCount.many", mapOf("count" to count)),
             Modifier.padding(start = 16.dp),
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.caption2.sfLines(),
         )
         // The symbol changes in the toggle's transaction, which SwiftUI draws as a crossfade (its `.opacity` content
         // transition).
         Crossfade(full, animationSpec = if (reduceMotion) snap() else Motion.easeInOut<Float>(TOGGLE), label = "chevron") { up ->
-            PeekSymbol(if (up) "chevron.up" else "chevron.down", font = type.fixed(10f), tint = colors.secondaryLabel)
+            PeekSymbol(if (up) "chevron.up" else "chevron.down", font = type.fixed(10f), tint = colors.secondaryText)
         }
     }
 }
@@ -423,7 +423,7 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
             event.journalLocation?.let { EventLocation(it, event.place) }
             // A copy's words stay in sight, in case it was a scan of its own.
             for (line in localizer.relayedWordings(entry)) {
-                Text(line, color = colors.secondaryLabel, style = type.caption2.sfLines())
+                Text(line, color = colors.secondaryText, style = type.caption2.sfLines())
             }
         }
     }

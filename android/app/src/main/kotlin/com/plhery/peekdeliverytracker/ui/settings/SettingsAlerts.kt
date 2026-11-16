@@ -163,7 +163,7 @@ private fun AlertTextField(field: AlertField, focus: FocusRequester) {
                 contentAlignment = Alignment.CenterStart,
             ) {
                 if (value.text.isEmpty()) {
-                    Text(field.placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = 1)
+                    Text(field.placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
                 }
                 text()
             }

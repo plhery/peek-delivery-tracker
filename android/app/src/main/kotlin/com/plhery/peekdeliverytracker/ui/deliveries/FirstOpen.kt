@@ -838,7 +838,7 @@ private fun FirstOpenAsk(
 
 /**
  * `field(large:)`: reads as the field it leads to, Add, which takes a number, a link or a whole message. The
- * placeholder in the tertiary label, on up to two lines (at the accessibility sizes as many as it needs), in title 3
+ * placeholder in the secondary grey, on up to two lines (at the accessibility sizes as many as it needs), in title 3
  * when [large] or body, across a row at least 64 or 58 tall that opens Add to type, read as its placeholder and "Tracking number"; then,
  * where the device scans, the viewfinder that opens Add on the camera. Both dim a little under the finger
  * (`.buttonStyle(.plain)`), on the paper with corners of 20 or 18 and a hairline of the separator at 30 %. TalkBack
@@ -877,7 +877,7 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
                 // A long placeholder takes a second line rather than being cut off, and at the accessibility sizes as
                 // many as it needs.
                 localized("add.trackingPlaceholder"), Modifier.clearAndSetSemantics {},
-                color = colors.tertiaryLabel, style = if (large) type.title3 else type.body,
+                color = colors.secondaryText, style = if (large) type.title3 else type.body,
                 maxLines = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) Int.MAX_VALUE else 2,
             )
         }
@@ -1169,7 +1169,7 @@ private fun CarrierFleet(rolling: Boolean, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(caption, color = PeekTheme.colors.secondaryLabel, style = type.caption, textAlign = TextAlign.Center)
+        Text(caption, color = PeekTheme.colors.secondaryText, style = type.caption, textAlign = TextAlign.Center)
         FleetLane(fleet, travelled)
     }
 }

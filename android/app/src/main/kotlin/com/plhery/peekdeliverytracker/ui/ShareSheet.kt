@@ -185,7 +185,7 @@ private fun ShareCardView(card: ShareCard, copy: ExtensionLocalizer, onSave: () 
                     Spacer(Modifier.height(SPACING))
                     Text(
                         copy.text(phase.statusKey), Modifier.testTag(SHARE_STATUS),
-                        style = type.subheadline.sfLines(), color = colors.secondaryLabel, textAlign = TextAlign.Center,
+                        style = type.subheadline.sfLines(), color = colors.secondaryText, textAlign = TextAlign.Center,
                     )
                     Spacer(Modifier.height(STATUS_SPACING))
                     // Saved, Save is hidden, and the stack closes up over it.

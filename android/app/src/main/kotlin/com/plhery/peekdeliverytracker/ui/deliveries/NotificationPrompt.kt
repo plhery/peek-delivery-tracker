@@ -42,7 +42,7 @@ import java.util.UUID
  * `NotificationPromptView` (C-S34): the invitation to turn notifications on, on the paper with 22-point corners, a line
  * of the ink at 10 % round it and a shadow (black at 10 %, radius 16, 4 down), in by 16, its parts 12 apart. The bell on
  * the accent's 44-point tile (but at the accessibility sizes), 12 from the title in headline, read as a heading
- * (C-AX07), and the description in subheadline 4 under it, the ink at half; why turning them on failed in caption, in
+ * (C-AX07), and the description in subheadline 4 under it, in the secondary grey; why turning them on failed in caption, in
  * the warning's colour; then Turn on and Not now side by side 8 apart where both fit as they would lay themselves out,
  * else stacked 4 apart (`ViewThatFits`).
  *
@@ -94,7 +94,7 @@ internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Mod
                     color = colors.ink,
                     style = type.headline.sfLines(),
                 )
-                Text(localized("notifications.prompt.description"), color = colors.ink.copy(alpha = SECONDARY), style = type.subheadline.sfLines())
+                Text(localized("notifications.prompt.description"), color = colors.secondaryText, style = type.subheadline.sfLines())
             }
         }
         if (error != null) {
@@ -169,8 +169,6 @@ private val TILE_RADIUS = 14.dp
 private val BUTTON_RADIUS = 12.dp
 private val PROMPT_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius = 16.dp, y = 4.dp)
 
-/** `.secondary` over the ink: the ink at half. */
-private const val SECONDARY = 0.5f
 
 internal const val NOTIFICATIONS_PROMPT = "notifications.prompt"
 /** The bell's tile, which iOS gives no identifier: a hook for the tests alone, named as no copy key is. */

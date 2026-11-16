@@ -90,7 +90,7 @@ internal fun PickupPointCard(
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val ink = colors.resolve(identity.ink)
     val surface = colors.resolve(identity.surface)
-    val secondary = colors.secondaryLabel
+    val secondary = colors.secondaryText
     val uriHandler = LocalUriHandler.current
     var copied by remember { mutableStateOf(false) }
     // How many times it copied: each copy says it for 2 s from then, where the iPhone's earlier task clears a later
@@ -172,7 +172,7 @@ internal fun PickupPointCard(
                             }
                         }
                         .button(interactionSource = null, indication = PressStyle.Tactile, shape = ContinuousRoundedShape(BUTTON_RADIUS), onClick = copy)
-                        .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), ContinuousRoundedShape(BUTTON_RADIUS))
+                        .border(1.dp, colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.3f), ContinuousRoundedShape(BUTTON_RADIUS))
                         .heightIn(min = BUTTON_HEIGHT)
                         .padding(horizontal = 10.dp),
                     contentAlignment = Alignment.Center,
@@ -262,11 +262,11 @@ internal fun CarrierSaysNote(words: String, carrier: String, modifier: Modifier 
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val secondary = colors.secondaryLabel
+    val secondary = colors.secondaryText
     Row(
         modifier
             .fillMaxWidth()
-            .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), ContinuousRoundedShape(CARD_RADIUS))
+            .border(1.dp, colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.3f), ContinuousRoundedShape(CARD_RADIUS))
             .padding(horizontal = 16.dp, vertical = 14.dp)
             .semantics(mergeDescendants = true) {},
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -296,7 +296,7 @@ internal fun ShipmentFacts(facts: List<ShipmentFact>, modifier: Modifier = Modif
     Column(modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
         for (fact in facts) {
             Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                Text(localizer.text(fact.key), color = colors.secondaryLabel, style = type.caption2.sfLines())
+                Text(localizer.text(fact.key), color = colors.secondaryText, style = type.caption2.sfLines())
                 Text(fact.value, color = colors.label, style = type.footnote.sfLines())
             }
         }
@@ -346,7 +346,7 @@ internal fun TrackingNotes(
                     if (expired) "add.amazonHistoryExpired" else catalog.trackingHintKey(active),
                     mapOf("carrier" to identities.displayName(active, language)),
                 ),
-                color = colors.secondaryLabel,
+                color = colors.secondaryText,
                 style = type.footnote.sfLines(),
             )
             if (editable && !catalog.requiresAmazonAccount(active) && !expired) {

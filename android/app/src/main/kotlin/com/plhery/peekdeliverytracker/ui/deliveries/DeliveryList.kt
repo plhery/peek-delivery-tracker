@@ -667,7 +667,7 @@ private fun DeviceAccountRow(onSignIn: () -> Unit) {
     val words = @Composable {
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(localized("link.account.title"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
-            Text(localized("native.guest.kept"), color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(localized("native.guest.kept"), color = colors.secondaryText, style = type.caption.sfLines())
         }
     }
     val capsule = @Composable {
@@ -989,7 +989,7 @@ private fun FirstLoad(modifier: Modifier) {
     val text = remember(localizer, language) { localizer.text("app.opening") }
     Column(modifier, verticalArrangement = Arrangement.spacedBy(12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         ActivityIndicator()
-        Text(text, color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.subheadline)
+        Text(text, color = PeekTheme.colors.secondaryText, style = PeekTheme.type.subheadline)
     }
 }
 

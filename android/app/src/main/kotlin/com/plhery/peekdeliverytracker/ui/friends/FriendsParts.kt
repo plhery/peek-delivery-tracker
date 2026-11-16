@@ -382,7 +382,7 @@ internal fun FriendsProfileForm(
             NicknameField(name, { name = it.cutToScalars() }, localized("friends.nicknamePlaceholder"), label, enabled, focus)
         }
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(localized("friends.preview"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+            Text(localized("friends.preview"), color = colors.secondaryText, style = type.subheadline.sfLines())
             FriendSharingPreview(preview)
         }
         Column {
@@ -398,7 +398,7 @@ internal fun FriendsProfileForm(
             }
             FormHairline()
         }
-        SymbolLabel(localized("friends.privacy"), "lock", type.caption, colors.secondaryLabel)
+        SymbolLabel(localized("friends.privacy"), "lock", type.caption, colors.secondaryText)
         ProminentButton(
             localized(submitKey ?: if (profile == null) "friends.join" else "friends.save"), enabled = enabled && trimmed.isNotEmpty(), tag = FRIENDS_SAVE,
         ) { save(FriendProfile(trimmed, stats, arrival)) }
@@ -433,7 +433,7 @@ private fun NicknameField(value: String, onValueChange: (String) -> Unit, placeh
         keyboardActions = KeyboardActions(onDone = { focus.clearFocus() }),
         decorationBox = { text ->
             Box(contentAlignment = Alignment.CenterStart) {
-                if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = 1)
+                if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
                 text()
             }
         },
@@ -475,7 +475,7 @@ private fun ShareToggle(title: String, detail: String, on: Boolean, enabled: Boo
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(titleText, color = colors.label, style = type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines())
-            if (showsDetail) Text(detailText, color = colors.secondaryLabel, style = type.caption2.sfLines())
+            if (showsDetail) Text(detailText, color = colors.secondaryText, style = type.caption2.sfLines())
         }
         Toggle(on, onChange, enabled = enabled, tint = colors.resolve(ExperimentalPalette.delivered))
     }
@@ -580,7 +580,7 @@ internal fun FriendsInvitationView(
         create()
     }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        DottedLine(localized("friends.inviteExpiry").split(" · "), colors.secondaryLabel, type.caption2.sfLines())
+        DottedLine(localized("friends.inviteExpiry").split(" · "), colors.secondaryText, type.caption2.sfLines())
         FriendsInvitationParcel(nickname)
         if (invitation.code.isEmpty()) {
             if (!invitation.requested || busy) {
@@ -736,7 +736,7 @@ private fun LinkAction(title: String, tag: String, enabled: Boolean, action: () 
                 .testTag(tag)
                 .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
                 .plainDisabled(enabled),
-            color = PeekTheme.colors.secondaryLabel,
+            color = PeekTheme.colors.secondaryText,
             style = PeekTheme.type.caption.sfLines(),
         )
     }
@@ -785,7 +785,7 @@ internal fun Disclosure(
                 .plainDisabled(enabled),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(label, Modifier.weight(1f), color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(label, Modifier.weight(1f), color = colors.secondaryText, style = type.caption.sfLines())
             PeekSymbol("chevron.right", Modifier.rotate(turn), font = type.style(IosTextStyle.Caption, FontWeight.SemiBold), tint = colors.ink)
         }
         AnimatedVisibility(expanded, enter = expandVertically() + fadeIn(), exit = shrinkVertically() + fadeOut()) { content() }

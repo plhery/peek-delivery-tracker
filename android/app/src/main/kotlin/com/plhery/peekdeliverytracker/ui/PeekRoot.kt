@@ -318,7 +318,7 @@ internal fun LaunchView(loading: String) {
             ) {
                 PeekMark(78.dp)
                 ActivityIndicator()
-                BasicText(loading, style = PeekTheme.type.subheadline.copy(color = colors.secondaryLabel))
+                BasicText(loading, style = PeekTheme.type.subheadline.copy(color = colors.secondaryText))
             }
         }
     }

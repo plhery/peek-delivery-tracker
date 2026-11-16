@@ -191,8 +191,8 @@ fun ParcelPassCard(
                     color = colors.label,
                     style = type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
                 )
-                if (carrierNotice != null) Text(carrierNotice, color = colors.secondaryLabel, style = type.caption.sfLines())
-                if (delivering != null) Text(delivering, color = colors.secondaryLabel, style = type.caption.sfLines())
+                if (carrierNotice != null) Text(carrierNotice, color = colors.secondaryText, style = type.caption.sfLines())
+                if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
                 if (showsStatus) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         NewUpdateDot(newUpdate, ink)

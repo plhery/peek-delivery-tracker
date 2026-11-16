@@ -141,9 +141,9 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
     PushedPage(localized("settings.deliveryUpdates"), scroll, backEnabled = true, onBack = onBack, enabled = !working && emailChoice == null) {
         if (source.pushAvailable) SettingsGroup {
             Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(systemStatusText(status, enabledOnDevice), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+                Text(systemStatusText(status, enabledOnDevice), color = colors.secondaryText, style = type.subheadline.sfLines())
                 // F-Droid's build: whether the pushes come through a UnifiedPush app or the inbox's check (platform/Store.kt).
-                Store.pushRoute(localizer)?.let { Text(it, color = colors.secondaryLabel, style = type.footnote.sfLines()) }
+                Store.pushRoute(localizer)?.let { Text(it, color = colors.secondaryText, style = type.footnote.sfLines()) }
                 if (status == NotificationAuthorizationStatus.Denied && !source.isDemo) {
                     Row(
                         Modifier
@@ -210,7 +210,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                 },
             )
         }
-        Text(localized("notifications.schedule"), color = colors.secondaryLabel, style = type.caption.sfLines())
+        Text(localized("notifications.schedule"), color = colors.secondaryText, style = type.caption.sfLines())
     }
 }
 
@@ -268,11 +268,11 @@ private fun PresetRow(option: NotificationPreset, chosen: Boolean, onChoose: () 
     ) {
         PeekSymbol(
             if (chosen) "largecircle.fill.circle" else "circle", Modifier.padding(top = 2.dp),
-            font = type.fixed(16f), tint = if (chosen) colors.resolve(settingsGreen) else colors.secondaryLabel,
+            font = type.fixed(16f), tint = if (chosen) colors.resolve(settingsGreen) else colors.secondaryText,
         )
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(localized(option.titleKey), color = colors.label, style = type.subheadline.sfLines())
-            Text(localized(option.descriptionKey), color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(localized(option.descriptionKey), color = colors.secondaryText, style = type.caption.sfLines())
         }
     }
 }
@@ -395,7 +395,7 @@ private fun QuietLink(key: String, tag: String, onClick: () -> Unit) {
                     drawLine(colors.tertiaryLabel, Offset(lines.getLineLeft(line), y), Offset(lines.getLineRight(line), y), size / 18)
                 }
             },
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = style,
             onTextLayout = { layout = it },
         )

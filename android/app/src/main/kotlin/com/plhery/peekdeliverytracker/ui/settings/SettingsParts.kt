@@ -165,7 +165,7 @@ internal fun SettingsRow(
     ) {
         if (symbol != null && !stacked) {
             Box(Modifier.width(17.dp), contentAlignment = Alignment.Center) {
-                PeekSymbol(symbol, font = type.fixed(15f, FontWeight.Light), tint = colors.secondaryLabel)
+                PeekSymbol(symbol, font = type.fixed(15f, FontWeight.Light), tint = colors.secondaryText)
             }
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -181,7 +181,7 @@ internal fun SettingsRow(
                     Text(value, style = style)
                 }
             }
-            if (detail != null) Text(detail, color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (detail != null) Text(detail, color = colors.secondaryText, style = type.caption.sfLines())
         }
         if (!stacked && !value.isNullOrEmpty()) {
             Text(value, Modifier.padding(start = 4.dp), color = colors.secondaryText, style = type.caption.sfLines(), textAlign = TextAlign.End)
@@ -386,10 +386,10 @@ private fun SettingsPickerRow(
                 .padding(end = PICKER_TRAILING),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(selectedName, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(selectedName, color = colors.secondaryText, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
             PeekSymbol(
                 "chevron.up.chevron.down", Modifier.padding(start = PICKER_GAP),
-                font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.secondaryLabel,
+                font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.secondaryText,
             )
         }
     }
@@ -464,7 +464,7 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     if (!stacked) AppearanceMiniature(option)
-                    Text(name, color = if (chosen) colors.ink else colors.secondaryLabel, style = type.caption.sfLines(), textAlign = TextAlign.Center)
+                    Text(name, color = if (chosen) colors.ink else colors.secondaryText, style = type.caption.sfLines(), textAlign = TextAlign.Center)
                 }
             }
         }
@@ -529,7 +529,7 @@ internal fun AccountRow(email: String?, demo: Boolean) {
             SelectionContainer {
                 Text(email ?: localized("app.demo"), color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
             }
-            if (!demo) Text(localized("account.signedIn"), color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (!demo) Text(localized("account.signedIn"), color = colors.secondaryText, style = type.caption.sfLines())
         }
     }
 }
@@ -555,7 +555,7 @@ internal fun SignInOffer(onSignIn: () -> Unit) {
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
             Text(localized("link.account.title"), color = colors.label, style = type.headline.sfLines())
-            Text(localized("link.keep.body"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+            Text(localized("link.keep.body"), color = colors.secondaryText, style = type.subheadline.sfLines())
         }
         FirstParcelPrimaryButton(localized("arrival.signInTitle"), null, false, SETTINGS_SIGN_IN, focus, Modifier.fillMaxWidth(), onSignIn)
     }

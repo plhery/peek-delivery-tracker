@@ -206,7 +206,7 @@ private fun ExplanationBubble(title: String, explanation: String, tag: String) {
     val type = PeekTheme.type
     Column(Modifier.testTag(tag).fillMaxWidth().padding(BUBBLE_PADDING), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(title, Modifier.semantics { heading() }, color = colors.ink, style = type.headline.sfLines())
-        Text(explanation, color = colors.ink.copy(alpha = SECONDARY), style = type.subheadline.sfLines())
+        Text(explanation, color = colors.secondaryText, style = type.subheadline.sfLines())
     }
 }
 
@@ -301,7 +301,7 @@ internal fun PassportStamps(state: PassportState, stats: PassportStatistics, car
                     }
                     .heightIn(min = 44.dp)
                     .wrapContentHeightCentred(),
-                color = colors.secondaryLabel,
+                color = colors.secondaryText,
                 style = type.caption.sfLines(),
             )
         }
@@ -332,7 +332,7 @@ private fun Stamp(state: PassportState, milestone: PassportMilestone) {
         )
         Text(
             milestone.title,
-            color = if (milestone.earned) colors.ink else colors.ink.copy(alpha = 0.6f),
+            color = if (milestone.earned) colors.ink else colors.secondaryText,
             style = PeekTheme.type.caption2.sfLines(),
             textAlign = TextAlign.Center,
         )
@@ -410,7 +410,7 @@ internal fun PassportTimes(state: PassportState, stats: PassportStatistics) {
                 }
             }
         } else {
-            Text(localizer.text("passport.waitingForTimes"), color = colors.secondaryLabel, style = PeekTheme.type.footnote.sfLines())
+            Text(localizer.text("passport.waitingForTimes"), color = colors.secondaryText, style = PeekTheme.type.footnote.sfLines())
         }
         Spacer(Modifier.height(21.dp))
         Hairline()
@@ -451,7 +451,7 @@ private fun TimeCard(state: PassportState, id: String, tag: String, title: Strin
                     autoSize = MinimumScale(style.fontSize, MINIMUM_SCALE),
                 )
             }
-            Text(title, color = colors.ink.copy(alpha = SECONDARY), style = type.caption.sfLines())
+            Text(title, color = colors.secondaryText, style = type.caption.sfLines())
         }
     }
     ExplanationPopover(state, id, anchor, title, explanation)
@@ -513,7 +513,7 @@ internal fun PassportCountries(state: PassportState, stats: PassportStatistics) 
                     // `Spacer(minLength: 8)`: the count at the trailing edge, at least 8 clear of the name.
                     Text(name, Modifier.weight(1f), color = colors.label, style = type.subheadline.sfLines())
                     Spacer(Modifier.width(8.dp))
-                    Text(number(country.count, localizer), color = colors.secondaryLabel, style = type.caption.monospacedDigit().sfLines())
+                    Text(number(country.count, localizer), color = colors.secondaryText, style = type.caption.monospacedDigit().sfLines())
                 }
             }
         }
@@ -593,8 +593,6 @@ private fun Color.grey(): Color {
 private val COVER_SEAL_TINT = Color(0xFF745300)
 private val COVER_RADIUS = 20.dp
 private const val COUNT_SIZE = 54f
-/** `.secondary` over the ink: the ink at half. */
-private const val SECONDARY = 0.5f
 private const val UNEARNED_OPACITY = 0.3f
 /** `minimumScaleFactor(0.75)` of a time on one line. */
 private const val MINIMUM_SCALE = 0.75f

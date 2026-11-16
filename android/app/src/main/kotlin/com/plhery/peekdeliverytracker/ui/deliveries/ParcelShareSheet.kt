@@ -563,12 +563,12 @@ private fun ShareSwitch(tag: String, symbol: String, title: String, value: Strin
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(title, color = colors.label, style = titleStyle)
                 if (value != null) {
-                    Text(value, color = colors.secondaryLabel, style = type.caption.sfLines(), maxLines = 2, overflow = TextOverflow.Ellipsis)
+                    Text(value, color = colors.secondaryText, style = type.caption.sfLines(), maxLines = 2, overflow = TextOverflow.Ellipsis)
                 }
             }
         } else {
             Box(Modifier.width(22.dp), contentAlignment = Alignment.Center) {
-                PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryLabel)
+                PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryText)
             }
             Spacer(Modifier.width(12.dp))
             Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
@@ -578,7 +578,7 @@ private fun ShareSwitch(tag: String, symbol: String, title: String, value: Strin
                     Text(
                         value,
                         Modifier.padding(start = 10.dp),
-                        color = colors.secondaryLabel,
+                        color = colors.secondaryText,
                         style = type.caption.sfLines(),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -614,7 +614,7 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
         WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), words.from, name = true, writing) {
             work.type(work.words.copy(from = it))
         }
-        Text(localizer.text("share.gift.private"), color = colors.secondaryLabel, style = PeekTheme.type.caption.sfLines())
+        Text(localizer.text("share.gift.private"), color = colors.secondaryText, style = PeekTheme.type.caption.sfLines())
     }
 }
 
@@ -630,7 +630,7 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
     val style = PeekTheme.type.subheadline.sfLines()
     val focusManager = LocalFocusManager.current
     Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
-        Text(label, Modifier.clearAndSetSemantics {}, color = colors.secondaryLabel, style = PeekTheme.type.caption.sfLines())
+        Text(label, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = PeekTheme.type.caption.sfLines())
         BasicTextField(
             value,
             change,
@@ -708,7 +708,7 @@ private fun LinkRow(loading: Boolean, address: String?, copied: Boolean, enabled
                 else -> Text(
                     localizer.text("share.pending"),
                     Modifier.testTag(PARCEL_SHARE_PENDING),
-                    color = colors.secondaryLabel,
+                    color = colors.secondaryText,
                     style = type.footnote.sfLines(),
                 )
             }
@@ -799,7 +799,7 @@ private fun StopButton(enabled: Boolean, stop: () -> Unit) {
         ) {
             Text(
                 localized("share.stop"),
-                color = colors.secondaryLabel,
+                color = colors.secondaryText,
                 style = PeekTheme.type.footnote.sfLines().copy(textDecoration = TextDecoration.Underline),
             )
         }
@@ -877,7 +877,7 @@ private fun SharePreviewCard(parcel: Parcel, name: String?, showNumber: Boolean,
         Text(
             localizer.text(if (wrapped) "share.preview.wrapped" else "share.preview.title"),
             Modifier.padding(horizontal = 2.dp),
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.caption.sfLines(),
         )
         Row(

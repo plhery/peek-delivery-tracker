@@ -653,7 +653,7 @@ private fun MenuItemRow(
         val font = menuFont()
         Column(Modifier.weight(1f)) {
             Text(title, color = ink, style = font)
-            if (key != null) Text(key, color = colors.secondaryLabel, style = font)
+            if (key != null) Text(key, color = colors.secondaryText, style = font)
         }
     }
 }
@@ -935,7 +935,7 @@ internal fun AlertWords(title: String, message: String?, focus: AccessibilityFoc
         verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
     ) {
         Text(title, color = colors.label, style = type.headline.uiKitLines(IosTextStyle.Headline, type.size))
-        if (message != null) Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline, type.size))
+        if (message != null) Text(message, color = colors.secondaryText, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline, type.size))
     }
 }
 
@@ -1016,7 +1016,7 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
                         contentAlignment = Alignment.CenterStart,
                     ) {
                         if (field.text.isEmpty()) {
-                            Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = 1)
+                            Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
                         }
                         text()
                     }

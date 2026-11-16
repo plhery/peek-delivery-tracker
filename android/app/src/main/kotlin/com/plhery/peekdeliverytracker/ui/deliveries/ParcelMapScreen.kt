@@ -341,7 +341,7 @@ private fun MapSummary(route: ParcelRoute, stage: TrackingStage?, large: Boolean
             }
             if (figures.isNotEmpty()) {
                 val style = PeekTheme.type.caption.monospacedDigit().sfLines()
-                val color = PeekTheme.colors.secondaryLabel
+                val color = PeekTheme.colors.secondaryText
                 val lines = @Composable { figures.forEach { Text(it, color = color, style = style) } }
                 // The figures go one under the other when they don't fit on one line.
                 FirstThatFits(
@@ -380,7 +380,7 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
             title.uppercase(language.locale),
             // CoreText tracks after each letter, Android half before it: the words end where the iPhone's end.
             Modifier.offset(x = (-0.7).dp),
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.tracking(type.style(IosTextStyle.Caption2, FontWeight.Medium), 1.4f).sfLines(),
             textAlign = align,
         )
@@ -398,7 +398,7 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
                 withStyle(SpanStyle(color = colors.label)) { append(TrackingLocation.flag(place.country)) }
                 append(" $country")
             },
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.caption.sfLines(),
             textAlign = align,
             maxLines = lines,
@@ -417,7 +417,7 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
 private fun ViewButton(title: String, symbol: String, selected: Boolean, group: String?, wide: Boolean, action: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val tint = if (selected) colors.paper else colors.secondaryLabel
+    val tint = if (selected) colors.paper else colors.secondaryText
     val style = type.style(IosTextStyle.Caption, FontWeight.Medium)
     Row(
         Modifier

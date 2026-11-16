@@ -1150,7 +1150,7 @@ private fun WordsSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
             Text(
                 it,
                 Modifier.fillMaxWidth().padding(horizontal = 2.dp).testTag(FEEDBACK_NOTE_LEFT),
-                color = PeekTheme.colors.secondaryLabel,
+                color = PeekTheme.colors.secondaryText,
                 style = PeekTheme.type.caption.sfLines(),
                 textAlign = TextAlign.End,
             )
@@ -1303,7 +1303,7 @@ private fun FeedbackField(label: String, input: @Composable (MutableState<Boolea
         Text(
             label,
             Modifier.padding(horizontal = 2.dp).clearAndSetSemantics {},
-            color = PeekTheme.colors.secondaryLabel,
+            color = PeekTheme.colors.secondaryText,
             style = PeekTheme.type.caption.sfLines(),
         )
         input(focused)
@@ -1409,7 +1409,7 @@ private fun Promise(text: String) {
     Text(
         text,
         Modifier.fillMaxWidth().testTag(FEEDBACK_PROMISE),
-        color = PeekTheme.colors.secondaryLabel,
+        color = PeekTheme.colors.secondaryText,
         style = PeekTheme.type.caption.sfLines(),
         textAlign = TextAlign.Center,
     )

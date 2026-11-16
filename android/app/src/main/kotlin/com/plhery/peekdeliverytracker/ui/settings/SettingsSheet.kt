@@ -496,7 +496,7 @@ private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: Scroll
     ) {
         Text(
             if (guest) localized("native.guest.kept") else email ?: localized("app.demo"),
-            color = colors.secondaryLabel, style = type.subheadline.sfLines(),
+            color = colors.secondaryText, style = type.subheadline.sfLines(),
         )
         SettingsGroup(localized("settings.yourData")) {
             SettingsButtonRow(

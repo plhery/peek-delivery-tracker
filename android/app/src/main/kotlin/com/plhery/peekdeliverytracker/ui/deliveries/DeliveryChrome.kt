@@ -521,8 +521,7 @@ private fun DemoBarLine(demo: String, exit: String, named: Boolean) {
     val type = PeekTheme.type
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         if (named) {
-            // `.secondary` over the bar's ink: the ink at half.
-            Text(demo, color = colors.ink.copy(alpha = colors.ink.alpha * 0.5f), style = type.style(IosTextStyle.Caption, FontWeight.Medium), maxLines = 1)
+            Text(demo, color = colors.secondaryText, style = type.style(IosTextStyle.Caption, FontWeight.Medium), maxLines = 1)
             Spacer(Modifier.width(12.dp))
         }
         Spacer(Modifier.widthIn(min = 8.dp).weight(1f))
@@ -748,7 +747,7 @@ internal fun SearchControls(state: DeliveriesState) {
         horizontalArrangement = Arrangement.spacedBy(7.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.secondaryLabel)
+        PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.secondaryText)
         NoSuggestions {
             BasicTextField(
                 query,
@@ -773,7 +772,7 @@ internal fun SearchControls(state: DeliveriesState) {
                     Box(contentAlignment = Alignment.CenterStart) {
                         if (query.isEmpty()) {
                             Text(
-                                localized("view.searchPlaceholder"), Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font,
+                                localized("view.searchPlaceholder"), Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font,
                                 maxLines = 1, overflow = TextOverflow.Ellipsis,
                             )
                         }
@@ -838,7 +837,7 @@ internal fun FilterChips(state: DeliveriesState) {
                 .padding(horizontal = 5.dp),
             contentAlignment = Alignment.Center,
         ) {
-            Text(localized("view.clearAll"), color = colors.secondaryLabel, style = PeekTheme.type.style(IosTextStyle.Caption, FontWeight.SemiBold), maxLines = 1)
+            Text(localized("view.clearAll"), color = colors.secondaryText, style = PeekTheme.type.style(IosTextStyle.Caption, FontWeight.SemiBold), maxLines = 1)
         }
     }
 }
@@ -877,7 +876,7 @@ internal fun ContentUnavailable(symbol: String, title: String, description: Stri
             symbol,
             Modifier.padding(top = 16.dp, bottom = 15.dp).clearAndSetSemantics {},
             font = type.fixed(NO_RESULTS_SYMBOL, FontWeight.Normal),
-            tint = colors.secondaryLabel,
+            tint = colors.secondaryText,
         )
         Text(
             title,
@@ -889,7 +888,7 @@ internal fun ContentUnavailable(symbol: String, title: String, description: Stri
         Text(
             description,
             Modifier.padding(top = 2.dp).widthIn(max = NO_RESULTS_TEXT_WIDTH),
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.title3,
             textAlign = TextAlign.Center,
         )
@@ -946,7 +945,7 @@ internal fun DeliveriesFoot(homePageUrl: String, privacyUrl: String) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             PeekMark(18.dp)
-            Text("$title · $tagline", Modifier.weight(1f, fill = false), color = colors.secondaryLabel, style = font, textAlign = TextAlign.Center)
+            Text("$title · $tagline", Modifier.weight(1f, fill = false), color = colors.secondaryText, style = font, textAlign = TextAlign.Center)
         }
         val links = @Composable {
             FootLink(home, "home") { open(homePageUrl) }
@@ -983,7 +982,7 @@ private fun FootLink(title: String, id: String, open: () -> Unit) {
                     drawLine(colors.tertiaryLabel, Offset(text.getLineLeft(line), y), Offset(text.getLineRight(line), y), thickness)
                 }
             },
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = PeekTheme.type.caption,
             textAlign = TextAlign.Center,
             onTextLayout = { layout = it },
@@ -1027,7 +1026,7 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
         Text(
             localized("app.emptyDescription"),
             Modifier.padding(top = 8.dp),
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.subheadline,
             textAlign = TextAlign.Center,
         )
@@ -1069,7 +1068,7 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
         Text(
             hint,
             Modifier.padding(top = 14.dp).clearAndSetSemantics {},
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.footnote,
             textAlign = TextAlign.Center,
         )
@@ -1228,10 +1227,10 @@ internal fun AllArrived(state: DeliveriesState) {
             "checkmark",
             Modifier.padding(bottom = 6.dp).clearAndSetSemantics {},
             font = type.fixed(36f, FontWeight.W100),
-            tint = colors.secondaryLabel,
+            tint = colors.secondaryText,
         )
         Text(localized("app.allArrived"), color = colors.label, style = type.style(IosTextStyle.Title2, FontWeight.SemiBold), textAlign = TextAlign.Center)
-        Text(localized("app.allArrivedDescription"), color = colors.secondaryLabel, style = type.subheadline, textAlign = TextAlign.Center)
+        Text(localized("app.allArrivedDescription"), color = colors.secondaryText, style = type.subheadline, textAlign = TextAlign.Center)
         val focus = remember { AccessibilityFocus() }
         Box(
             Modifier

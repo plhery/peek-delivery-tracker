@@ -75,8 +75,8 @@ import kotlin.math.roundToInt
 // the day.
 
 /**
- * The widget's colours, light and dark as the launcher's mode picks: the app's page, and on it the system's label
- * colours the iPhone's list widget writes in (`.primary`, `.secondary`).
+ * The widget's colours, light and dark as the launcher's mode picks: the app's page, and on it the system's label and
+ * the app's quieter grey, as the iPhone's list widget writes in full colour (`.primary`, `Brand.secondaryText`).
  */
 internal object ListColors {
     fun of(color: AdaptiveColor, alpha: Float = 1f): ColorProvider =
@@ -84,7 +84,7 @@ internal object ListColors {
 
     val page = of(Brand.background)
     val primary = of(SystemColors.label)
-    val secondary = of(SystemColors.secondaryLabel)
+    val secondary = of(Brand.secondaryText)
 }
 
 /** `ParcelListMetrics`: a row's name and the box of its stage's symbol, each smaller where [compact]. */
@@ -251,7 +251,7 @@ internal fun ListRow(
     parcel: DeliveryWidgetParcel,
     layout: ListLayout,
     top: Dp,
-    lineColor: AdaptiveColor = SystemColors.secondaryLabel,
+    lineColor: AdaptiveColor = Brand.secondaryText,
     mark: @Composable () -> Unit = { StageSymbol(parcel, layout.metrics) },
 ) {
     val context = LocalContext.current

@@ -361,14 +361,14 @@ private fun ChangeCarrierForm(
             FormRowFrame(Modifier) {
                 Text(
                     localizer.text("detail.changeCarrierDescription", mapOf("number" to number)),
-                    color = colors.secondaryLabel, style = type.footnote.sfLines(),
+                    color = colors.secondaryText, style = type.footnote.sfLines(),
                 )
             }
         }
         FormSection(localized("add.carrier")) {
             CarrierRow(change, refused, carrierRow, onPush)
             FormRowFrame(Modifier) {
-                Text(change.hint(localizer), Modifier.testTag(CHANGE_CARRIER_HINT), color = colors.secondaryLabel, style = type.footnote.sfLines())
+                Text(change.hint(localizer), Modifier.testTag(CHANGE_CARRIER_HINT), color = colors.secondaryText, style = type.footnote.sfLines())
             }
         }
         val requirements = change.requirements
@@ -402,7 +402,7 @@ private fun ChangeCarrierForm(
                                 )
                                 if (requirement.isOptional) {
                                     Text(
-                                        localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryLabel,
+                                        localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryText,
                                         style = type.caption.sfLines(),
                                     )
                                 }
@@ -429,7 +429,7 @@ private fun ChangeCarrierForm(
                             )
                             if (requirement.isOptional) {
                                 Text(
-                                    localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryLabel,
+                                    localized("add.optional"), Modifier.padding(start = 6.dp), color = colors.secondaryText,
                                     style = type.caption.sfLines(),
                                 )
                             }
@@ -549,7 +549,7 @@ private fun androidx.compose.foundation.layout.RowScope.CarrierField(
             keyboardOptions = keyboard,
             decorationBox = { text ->
                 Box(contentAlignment = Alignment.CenterStart) {
-                    if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font)
+                    if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font)
                     text()
                 }
             },
@@ -636,7 +636,7 @@ internal fun PostcodeCountryMenu(
     ) {
         Text(TrackingLocation.flag(country), style = type.body)
         Text(country, color = colors.ink, style = type.style(IosTextStyle.Body, FontWeight.Medium))
-        PeekSymbol("chevron.up.chevron.down", font = type.style(IosTextStyle.Caption2, FontWeight.SemiBold), tint = colors.secondaryLabel)
+        PeekSymbol("chevron.up.chevron.down", font = type.style(IosTextStyle.Caption2, FontWeight.SemiBold), tint = colors.secondaryText)
     }
 }
 

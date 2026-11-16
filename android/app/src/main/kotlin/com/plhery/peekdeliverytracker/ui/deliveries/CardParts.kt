@@ -271,7 +271,7 @@ fun ParcelFlag(text: String, symbol: String, modifier: Modifier = Modifier) {
 fun AutomaticCarrierNotice(parcel: Parcel, modifier: Modifier = Modifier) {
     if (parcel.carrierData?.autoChangedFrom == null) return
     val text = automaticCarrierNotice(parcel) ?: return
-    Text(text, modifier, color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.caption.sfLines())
+    Text(text, modifier, color = PeekTheme.colors.secondaryText, style = PeekTheme.type.caption.sfLines())
 }
 
 /** What [AutomaticCarrierNotice] says now, for the card's label too; null when it says nothing. */
@@ -363,11 +363,11 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
         ""
     }
     val help = identities.catalog.helpLink(parcel, language)
-    val secondary = colors.secondaryLabel
+    val secondary = colors.secondaryText
     Row(
         modifier
             .fillMaxWidth()
-            .background(secondary.copy(alpha = secondary.alpha * 0.08f), ContinuousRoundedShape(16.dp))
+            .background(colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.08f), ContinuousRoundedShape(16.dp))
             // The link's own height leaves room below it.
             .padding(start = 16.dp, top = 14.dp, end = 16.dp, bottom = if (help == null) 14.dp else 4.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),

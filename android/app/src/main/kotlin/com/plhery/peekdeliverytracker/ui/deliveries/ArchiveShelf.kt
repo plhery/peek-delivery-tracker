@@ -148,17 +148,17 @@ private fun ArchiveShelfHeader(title: String, count: Int, expanded: Boolean, lab
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(Modifier.width(22.dp), contentAlignment = Alignment.Center) {
-            PeekSymbol("archivebox", font = type.subheadline, tint = colors.secondaryLabel)
+            PeekSymbol("archivebox", font = type.subheadline, tint = colors.secondaryText)
         }
-        Text(title, color = colors.secondaryLabel, style = type.subheadline.sfLines())
+        Text(title, color = colors.secondaryText, style = type.subheadline.sfLines())
         Spacer(Modifier.weight(1f))
         // `Spacer(minLength: 6)` between the words and the count, and 9 on either side of it.
-        Text("($count)", Modifier.padding(start = 6.dp), color = colors.secondaryLabel, style = type.caption.monospacedDigit().sfLines())
+        Text("($count)", Modifier.padding(start = 6.dp), color = colors.secondaryText, style = type.caption.monospacedDigit().sfLines())
         PeekSymbol(
             "chevron.down",
             Modifier.graphicsLayer { rotationZ = turn },
             font = type.style(IosTextStyle.Caption, FontWeight.Normal),
-            tint = colors.secondaryLabel,
+            tint = colors.secondaryText,
         )
     }
 }
@@ -252,7 +252,7 @@ fun ArchivedParcelRow(
                 name, color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines(),
                 maxLines = lines, overflow = TextOverflow.Ellipsis,
             )
-            Text(detail, color = colors.secondaryLabel, style = type.caption.sfLines(), maxLines = lines, overflow = TextOverflow.Ellipsis)
+            Text(detail, color = colors.secondaryText, style = type.caption.sfLines(), maxLines = lines, overflow = TextOverflow.Ellipsis)
             if (large && date != null) ArchivedDate(date)
         }
         // `Spacer(minLength: 6)`: the words take what the date leaves them.
@@ -266,7 +266,7 @@ fun ArchivedParcelRow(
 private fun ArchivedDate(date: String) {
     val type = PeekTheme.type
     Text(
-        date, color = PeekTheme.colors.secondaryLabel,
+        date, color = PeekTheme.colors.secondaryText,
         style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).monospacedDigit().sfLines(), maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )

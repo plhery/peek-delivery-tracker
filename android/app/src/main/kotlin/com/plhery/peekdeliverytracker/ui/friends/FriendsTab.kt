@@ -498,7 +498,7 @@ private fun Intro(title: String, tag: String, action: () -> Unit) {
     val size = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) type.scaled(26f, IosTextStyle.Title) else 26f
     FriendsPostagePair(Modifier.padding(bottom = 12.dp))
     Text(localized("friends.title"), color = colors.label, style = type.fixed(size, FontWeight.SemiBold).sfLines(), textAlign = TextAlign.Center)
-    Text(localized("friends.introSummary"), color = colors.secondaryLabel, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
+    Text(localized("friends.introSummary"), color = colors.secondaryText, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
     ProminentButton(title, tag = tag, action = action)
 }
 
@@ -661,7 +661,7 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
                     if (focus != null && state.checkedPresentation == presentation && data.friends.none { it.id == focus }) {
                         Text(
                             localized("friends.friendUnavailable"), Modifier.testTag(FRIENDS_UNAVAILABLE_FRIEND),
-                            color = colors.secondaryLabel, style = type.footnote.sfLines(),
+                            color = colors.secondaryText, style = type.footnote.sfLines(),
                         )
                     }
                     if (data.profile != null) {
@@ -744,10 +744,10 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
                     localizer.text(if (profile.shareStats) "friends.shareStats" else "friends.privateStats"),
                     localizer.text("friends.shareArrival").takeIf { profile.shareArrival },
                 )
-                DottedLine(summary, colors.secondaryLabel, type.caption2.sfLines())
+                DottedLine(summary, colors.secondaryText, type.caption2.sfLines())
             }
             // `Spacer(minLength: 6)`, with the stack's 12 either side of it.
-            PeekSymbol("slider.horizontal.3", Modifier.padding(start = 18.dp), font = type.footnote, tint = colors.secondaryLabel)
+            PeekSymbol("slider.horizontal.3", Modifier.padding(start = 18.dp), font = type.footnote, tint = colors.secondaryText)
         }
         FormHairline()
     }
@@ -768,7 +768,7 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
     val title = @Composable {
         Row(Modifier.semantics(mergeDescendants = true) {}, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(localized("friends.circle"), Modifier.alignByBaseline(), color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
-            Text(count, Modifier.alignByBaseline(), color = colors.secondaryLabel, style = type.caption2.sfLines())
+            Text(count, Modifier.alignByBaseline(), color = colors.secondaryText, style = type.caption2.sfLines())
         }
     }
     val pill = @Composable { modifier: Modifier ->
@@ -917,7 +917,7 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
         }
         FriendsPanel.Invite -> if (demo) {
             FriendsInvitationParcel(nickname)
-            Text(localized("friends.demoInvites"), color = colors.secondaryLabel, style = PeekTheme.type.subheadline.sfLines())
+            Text(localized("friends.demoInvites"), color = colors.secondaryText, style = PeekTheme.type.subheadline.sfLines())
             ProminentButton(localized("welcome.signInInstead"), tag = FRIENDS_DEMO_SIGN_IN) {
                 state.closePanel()
                 store.errorKey = null

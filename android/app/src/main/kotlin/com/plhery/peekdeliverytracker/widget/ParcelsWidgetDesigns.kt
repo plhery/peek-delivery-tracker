@@ -60,7 +60,6 @@ import com.plhery.peekdeliverytracker.core.openingLine
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
-import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import kotlin.math.floor
 
 // The "Parcels" widget's designs ([DeliveryWidgetList.design]), drawn from the app's design system as the iPhone's
@@ -477,7 +476,7 @@ private fun SectionColumn(lines: List<DeliveryWidgetList.Line>, laid: SectionsLa
                             SectionHeading(copy.text(sectionTitleKey(line.kind)), line.count, layout.type, top = if (before == null) 0.dp else HEADING_TOP, height = laid.headingHeight)
                         is DeliveryWidgetList.Line.Row -> ListRow(
                             line.parcel, layout, top = if (before == null || before is DeliveryWidgetList.Line.Heading) 0.dp else metrics.rowSpacing,
-                            lineColor = if (line.parcel.section == ParcelSectionKind.Attention.rawValue) Brand.warning else SystemColors.secondaryLabel,
+                            lineColor = if (line.parcel.section == ParcelSectionKind.Attention.rawValue) Brand.warning else Brand.secondaryText,
                             mark = { CarrierMark(line.parcel, metrics) },
                         )
                         is DeliveryWidgetList.Line.More -> Unit

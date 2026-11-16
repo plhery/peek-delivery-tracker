@@ -61,7 +61,7 @@ fun NoticeBanner(
     val words: @Composable (Modifier) -> Unit = { wordsModifier ->
         Column(wordsModifier, verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(title, color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
-            if (message.isNotEmpty()) Text(message, color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (message.isNotEmpty()) Text(message, color = colors.secondaryText, style = type.caption.sfLines())
             if (actionTitle != null && action != null) {
                 Text(
                     actionTitle,

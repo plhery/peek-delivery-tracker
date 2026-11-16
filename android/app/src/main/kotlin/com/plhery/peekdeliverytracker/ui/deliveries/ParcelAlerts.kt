@@ -225,7 +225,7 @@ internal fun ParcelAlertSwitches(
             Text(
                 localizer.text("email.parcel.note", mapOf("place" to localizer.deliveryUpdatesPlace)),
                 Modifier.padding(horizontal = 2.dp),
-                color = colors.secondaryLabel,
+                color = colors.secondaryText,
                 style = type.caption.sfLines(),
             )
             DoneButton(closing, close)
@@ -302,12 +302,12 @@ private fun SwitchRow(tag: String, symbol: String, title: String, hint: String, 
     ) {
         if (!large) {
             Box(Modifier.size(width = 22.dp, height = 22.dp).wrapContentSize(unbounded = true), contentAlignment = Alignment.Center) {
-                PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryLabel)
+                PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryText)
             }
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(title, color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
-            Text(hint, color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(hint, color = colors.secondaryText, style = type.caption.sfLines())
         }
         Toggle(on, flip, Modifier.clearAndSetSemantics {}, enabled = enabled, tint = colors.resolve(ExperimentalPalette.delivered))
     }

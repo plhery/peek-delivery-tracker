@@ -426,7 +426,7 @@ fun FormSection(header: String?, modifier: Modifier = Modifier, footer: String? 
             Text(
                 footer,
                 Modifier.padding(horizontal = side).padding(top = FOOTER_TOP),
-                color = colors.secondaryLabel,
+                color = colors.secondaryText,
                 style = PeekTheme.type.footnote.sfLines(),
             )
         }
@@ -439,7 +439,7 @@ internal fun FormHeader(title: String, modifier: Modifier = Modifier) {
     Text(
         title,
         Modifier.padding(top = HEADER_TOP, bottom = HEADER_BOTTOM).then(modifier).semantics { heading() },
-        color = PeekTheme.colors.secondaryLabel,
+        color = PeekTheme.colors.secondaryText,
         style = PeekTheme.type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
     )
 }
@@ -546,12 +546,12 @@ fun FormMenuRow(
     ) {
         Text(title, Modifier.weight(1f).padding(end = 8.dp), color = colors.label, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
         Row(Modifier.onGloballyPositioned { value = it.boundsInWindow() }, verticalAlignment = Alignment.CenterVertically) {
-            Text(current, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(current, color = colors.secondaryText, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
             PeekSymbol(
                 "chevron.up.chevron.down",
                 Modifier.padding(start = 5.dp),
                 font = type.style(IosTextStyle.Footnote, FontWeight.Medium),
-                tint = colors.secondaryLabel,
+                tint = colors.secondaryText,
             )
         }
     }

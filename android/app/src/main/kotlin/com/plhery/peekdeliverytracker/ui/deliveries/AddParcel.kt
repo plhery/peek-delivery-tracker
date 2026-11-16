@@ -924,8 +924,8 @@ private fun PasteButton(paste: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PeekSymbol("doc.on.clipboard", Modifier.clearAndSetSemantics {}, font = type.caption, tint = colors.secondaryLabel)
-        Text(localized("add.paste"), color = colors.secondaryLabel, style = type.caption, maxLines = 1)
+        PeekSymbol("doc.on.clipboard", Modifier.clearAndSetSemantics {}, font = type.caption, tint = colors.secondaryText)
+        Text(localized("add.paste"), color = colors.secondaryText, style = type.caption, maxLines = 1)
     }
 }
 
@@ -946,7 +946,7 @@ private fun ScanButton(scan: () -> Unit) {
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,
     ) {
-        PeekSymbol("barcode.viewfinder", font = PeekTheme.type.body, tint = PeekTheme.colors.secondaryLabel)
+        PeekSymbol("barcode.viewfinder", font = PeekTheme.type.body, tint = PeekTheme.colors.secondaryText)
     }
 }
 
@@ -1079,14 +1079,14 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
         } else {
             NumberChoice(state, addition, actions)
         }
-        addition.hint(localizer)?.let { Text(it, Modifier.testTag(ADD_HINT), color = colors.secondaryLabel, style = type.caption.sfLines()) }
+        addition.hint(localizer)?.let { Text(it, Modifier.testTag(ADD_HINT), color = colors.secondaryText, style = type.caption.sfLines()) }
         addition.knownElsewhere?.let { known ->
             val name = catalog.info(known, language).displayName
-            Text(localizer.text("add.carrierKnownElsewhere", mapOf("carrier" to name)), color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(localizer.text("add.carrierKnownElsewhere", mapOf("carrier" to name)), color = colors.secondaryText, style = type.caption.sfLines())
             TintedButton(AnnotatedString(localizer.text("add.useCarrier", mapOf("carrier" to name))), { form.carrierOverride = known }, ADD_USE_CARRIER)
         }
         if (addition.amazonCheckUnavailable) {
-            Text(localized("add.amazonCheckUnavailable"), Modifier.testTag(ADD_AMAZON_UNAVAILABLE), color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(localized("add.amazonCheckUnavailable"), Modifier.testTag(ADD_AMAZON_UNAVAILABLE), color = colors.secondaryText, style = type.caption.sfLines())
             TintedButton(
                 AnnotatedString(localized("add.amazonRetry")),
                 {
@@ -1124,10 +1124,10 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
     // Voice Access answers to the words on the line, "Change" or "Choose" with them.
     val description = listOfNotNull(name, detail, action.takeUnless { addition.amazonNumber }).joinToString(", ")
     val nameStyle = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines()
-    val detailColor = if (addition.choosingCarrier || addition.refused) ochre else colors.secondaryLabel
+    val detailColor = if (addition.choosingCarrier || addition.refused) ochre else colors.secondaryText
     val lineAction = @Composable {
         if (!addition.amazonNumber) {
-            Text(action, color = colors.secondaryLabel, style = type.caption.copy(textDecoration = TextDecoration.Underline).sfLines())
+            Text(action, color = colors.secondaryText, style = type.caption.copy(textDecoration = TextDecoration.Underline).sfLines())
         }
     }
     Row(
@@ -1202,7 +1202,7 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
         // Someone signed in keeps them together already.
         if (state.source.isGuest) {
             FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
-                Text(localized("door.several.question"), color = colors.secondaryLabel, style = type.caption.sfLines())
+                Text(localized("door.several.question"), color = colors.secondaryText, style = type.caption.sfLines())
                 val enabled = LocalFormEnabled.current
                 Text(
                     localized("door.several.signIn"),
@@ -1440,8 +1440,8 @@ private fun PhoneDigitsPrivate() {
         horizontalArrangement = Arrangement.spacedBy(7.dp),
         verticalAlignment = Alignment.Top,
     ) {
-        PeekSymbol("lock", Modifier.padding(top = 2.dp), font = type.caption2, tint = colors.secondaryLabel)
-        Text(localized("door.phoneDigits.private"), color = colors.secondaryLabel, style = type.caption.sfLines())
+        PeekSymbol("lock", Modifier.padding(top = 2.dp), font = type.caption2, tint = colors.secondaryText)
+        Text(localized("door.phoneDigits.private"), color = colors.secondaryText, style = type.caption.sfLines())
     }
 }
 
@@ -1457,7 +1457,7 @@ private fun RequirementField(title: String, help: String, optional: Boolean = fa
     Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(title, Modifier.alignByBaseline(), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
-            if (optional) Text(localized("add.optional"), Modifier.alignByBaseline(), color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (optional) Text(localized("add.optional"), Modifier.alignByBaseline(), color = colors.secondaryText, style = type.caption.sfLines())
         }
         Row(
             Modifier
@@ -1468,7 +1468,7 @@ private fun RequirementField(title: String, help: String, optional: Boolean = fa
             verticalAlignment = Alignment.CenterVertically,
             content = field,
         )
-        Text(help, color = colors.secondaryLabel, style = type.caption.sfLines())
+        Text(help, color = colors.secondaryText, style = type.caption.sfLines())
     }
 }
 
@@ -1483,7 +1483,7 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(localized("design.parcelTitle"), Modifier.alignByBaseline(), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
-            Text(localized("add.optional"), Modifier.alignByBaseline(), color = colors.secondaryLabel, style = type.caption.sfLines())
+            Text(localized("add.optional"), Modifier.alignByBaseline(), color = colors.secondaryText, style = type.caption.sfLines())
         }
         AddTextField(
             value = form.label,
@@ -1596,7 +1596,7 @@ private fun AddTextField(
             decorationBox = { text ->
                 Box(Modifier.padding(top = leading.first, bottom = leading.second), contentAlignment = Alignment.TopStart) {
                     if (value.isEmpty()) {
-                        Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = placeholderLines, overflow = TextOverflow.Ellipsis)
+                        Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = placeholderLines, overflow = TextOverflow.Ellipsis)
                     }
                     text()
                 }

@@ -713,7 +713,7 @@ private fun Keeping(
 @Composable
 private fun LinkHint(text: String) {
     Text(
-        text, Modifier.fillMaxWidth(), color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.caption.sfLines(),
+        text, Modifier.fillMaxWidth(), color = PeekTheme.colors.secondaryText, style = PeekTheme.type.caption.sfLines(),
         textAlign = TextAlign.Center,
     )
 }
@@ -773,7 +773,7 @@ private fun AlreadyFollowed(source: ParcelLinkSource, parcelId: UUID?, here: Boo
             Column(Modifier.semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(localizer.text("link.already.title"), color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
                 if (name != null) {
-                    Text(localizer.text("link.already.body", mapOf("name" to name)), color = colors.secondaryLabel, style = type.footnote.sfLines())
+                    Text(localizer.text("link.already.body", mapOf("name" to name)), color = colors.secondaryText, style = type.footnote.sfLines())
                 }
             }
         }
@@ -837,7 +837,7 @@ private fun Nothing(title: String, body: String, close: () -> Unit) {
             localized(title), Modifier.semantics { heading() }, color = colors.label,
             style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).sfLines(), textAlign = TextAlign.Center,
         )
-        Text(localized(body), color = colors.secondaryLabel, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
+        Text(localized(body), color = colors.secondaryText, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
         ProminentButton(localized("common.close"), LINK_NOTHING_CLOSE, enabled = true, Modifier.padding(top = 8.dp), close)
     }
 }
@@ -857,9 +857,9 @@ private fun Failed(failure: ParcelLinkFailure, refreshing: Boolean, retry: () ->
     ) {
         PeekSymbol(
             if (failure == ParcelLinkFailure.Offline) "wifi.exclamationmark" else "exclamationmark.circle",
-            font = type.fixed(34f, FontWeight.Light), tint = colors.secondaryLabel,
+            font = type.fixed(34f, FontWeight.Light), tint = colors.secondaryText,
         )
-        Text(localized(failure.messageKey), color = colors.secondaryLabel, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
+        Text(localized(failure.messageKey), color = colors.secondaryText, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
         ProminentButton(localized("app.tryAgain"), LINK_TRY_AGAIN, enabled = !refreshing, Modifier.padding(top = 8.dp), retry)
     }
 }
@@ -936,7 +936,7 @@ private fun SharedParcelCard(
     val reduceMotion = PeekTheme.reduceMotion
     val identity = remember(identities, parcel, language) { identities.of(parcel.displayedCarrier, language) }
     val ink = colors.resolve(identity.ink)
-    val secondary = colors.secondaryLabel
+    val secondary = colors.secondaryText
     val placed = parcel.hasMappedPlace
     val arrived = !placed && parcel.currentStage == TrackingStage.Delivered && !large
     val label = if (parcel.carrier != CarrierId.Unknown || parcel.hasCarrierUpdate) {
@@ -1269,7 +1269,7 @@ private fun GiftParcelCard(parcel: Parcel, opened: Boolean, refreshing: Boolean,
             localizer.giftDetail(parcel, opened, now())?.let {
                 Text(it, color = tone, style = type.style(IosTextStyle.Callout, FontWeight.Medium).sfLines(), textAlign = TextAlign.Center)
             }
-            if (deliveryLine != null) Text(deliveryLine, color = colors.secondaryLabel, style = type.caption.sfLines(), textAlign = TextAlign.Center)
+            if (deliveryLine != null) Text(deliveryLine, color = colors.secondaryText, style = type.caption.sfLines(), textAlign = TextAlign.Center)
         }
         if (!opened) JourneyRail(parcel.currentStage, tone.copy(alpha = tone.alpha * 0.55f), Modifier.padding(top = 18.dp), compact = true)
     }
@@ -1335,8 +1335,8 @@ private fun GiftSurprise() {
         Modifier.fillMaxWidth().padding(horizontal = 6.dp).testTag(LINK_SURPRISE),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PeekSymbol("gift", font = type.footnote, tint = colors.secondaryLabel)
-        Text(localized("share.gift.surprise"), Modifier.weight(1f), color = colors.secondaryLabel, style = type.footnote.sfLines())
+        PeekSymbol("gift", font = type.footnote, tint = colors.secondaryText)
+        Text(localized("share.gift.surprise"), Modifier.weight(1f), color = colors.secondaryText, style = type.footnote.sfLines())
     }
 }
 
@@ -1387,10 +1387,10 @@ private fun GiftNote(note: String?, from: String?, inside: String?) {
                 }
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                PeekSymbol("gift", font = type.footnote, tint = colors.secondaryLabel)
+                PeekSymbol("gift", font = type.footnote, tint = colors.secondaryText)
                 Text(
                     buildAnnotatedString {
-                        withStyle(SpanStyle(color = colors.secondaryLabel)) { append(LocalLocalizer.current.text("share.gift.inside") + " ") }
+                        withStyle(SpanStyle(color = colors.secondaryText)) { append(LocalLocalizer.current.text("share.gift.inside") + " ") }
                         withStyle(SpanStyle(color = colors.label, fontWeight = FontWeight.SemiBold)) { append(inside) }
                     },
                     style = type.footnote.sfLines(),
@@ -1418,11 +1418,11 @@ private fun SharedImportCharges(charges: ImportChargesLine, asksForNumber: Boole
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     Column(Modifier.fillMaxWidth().semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(3.dp)) {
-        Text(localized("detail.importCharges"), color = colors.secondaryLabel, style = type.caption2.sfLines())
+        Text(localized("detail.importCharges"), color = colors.secondaryText, style = type.caption2.sfLines())
         Text(charges.text, color = colors.label, style = type.footnote.sfLines())
         if (charges.payableOnline && asksForNumber) {
             Text(
-                localized("detail.importChargesAskNumber"), Modifier.padding(top = 4.dp), color = colors.secondaryLabel,
+                localized("detail.importChargesAskNumber"), Modifier.padding(top = 4.dp), color = colors.secondaryText,
                 style = type.caption.sfLines(),
             )
         }
@@ -1435,9 +1435,9 @@ private fun SharedImportCharges(charges: ImportChargesLine, asksForNumber: Boole
  * a long press selects, with its copy and its carriers' pages ([ShipmentNumbers]); a copy puts the number on the
  * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds and, before
  * Android 13, whose system shows no copy, to TalkBack ([announce], [Device.confirmsCopies]). A carrier's page opened is
- * counted and told ([onVisit]). Not padded as the page's: its numbers reach the sheet's sides, what a number is is in
- * the translucent secondary grey (`.secondary`), a copy stays at its number's line's end at every size, and its
- * carriers' pages are 44 tall, with none of the page's 10 above and below, their arrows silent to TalkBack.
+ * counted and told ([onVisit]). Not padded as the page's: its numbers reach the sheet's sides, a copy stays at its
+ * number's line's end at every size, and its carriers' pages are 44 tall, with none of the page's 10 above and below,
+ * their arrows silent to TalkBack.
  */
 @Composable
 private fun SharedParcelNumber(
@@ -1461,7 +1461,7 @@ private fun SharedParcelNumber(
         // A hidden number cannot be copied; the carrier's page takes one typed in.
         Column(Modifier.fillMaxWidth()) {
             Column(Modifier.semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(localized("detail.trackingNumber"), color = colors.secondaryLabel, style = type.caption2.sfLines())
+                Text(localized("detail.trackingNumber"), color = colors.secondaryText, style = type.caption2.sfLines())
                 Text(hint.masked, color = colors.label, style = type.style(IosTextStyle.Caption, design = FontDesign.Monospaced).sfLines())
             }
             CarrierLinks(listOfNotNull(identities.catalog.searchLink(parcel, language)), own = true, tint, onLink, padded = false)

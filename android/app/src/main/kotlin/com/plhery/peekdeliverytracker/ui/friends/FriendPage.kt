@@ -240,13 +240,13 @@ private fun FriendDetail(friend: FriendCard, busy: Boolean, remove: () -> Unit) 
                         Modifier
                             .testTag(FRIENDS_SHOW_ALL)
                             .button(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) { showAll = !showAll },
-                        color = colors.secondaryLabel,
+                        color = colors.secondaryText,
                         style = type.caption.sfLines(),
                     )
                 }
             }
         } else {
-            SymbolLabel(localized("friends.privateStats"), "lock", type.footnote, colors.secondaryLabel, Modifier.testTag(FRIENDS_PRIVATE_STATS))
+            SymbolLabel(localized("friends.privateStats"), "lock", type.footnote, colors.secondaryText, Modifier.testTag(FRIENDS_PRIVATE_STATS))
         }
         FormHairline()
         Disclosure(
@@ -260,12 +260,12 @@ private fun FriendDetail(friend: FriendCard, busy: Boolean, remove: () -> Unit) 
                             localizer.text("friends.removeTitle", mapOf("name" to friend.nickname)),
                             color = colors.label, style = type.headline.sfLines(),
                         )
-                        Text(localized("friends.removeDetail"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+                        Text(localized("friends.removeDetail"), color = colors.secondaryText, style = type.subheadline.sfLines())
                         BorderedButton(localized("friends.remove"), FRIENDS_CONFIRM_REMOVE, enabled = !busy, action = remove)
                         PlainButton(localized("common.cancel"), FRIENDS_CANCEL_REMOVE, type.body, colors.ink, !busy) { confirming = false }
                     }
                 } else {
-                    PlainButton(localized("friends.remove"), FRIENDS_REMOVE, type.footnote, colors.secondaryLabel, !busy, Modifier.heightIn(min = 36.dp)) {
+                    PlainButton(localized("friends.remove"), FRIENDS_REMOVE, type.footnote, colors.secondaryText, !busy, Modifier.heightIn(min = 36.dp)) {
                         confirming = true
                     }
                 }
@@ -281,7 +281,7 @@ private fun Metric(value: String, title: String, modifier: Modifier) {
     val type = PeekTheme.type
     Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(value, color = colors.label, style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).sfLines())
-        Text(title, color = colors.secondaryLabel, style = type.caption2.sfLines())
+        Text(title, color = colors.secondaryText, style = type.caption2.sfLines())
     }
 }
 
@@ -351,7 +351,7 @@ private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, o
         PassportSeal(sealSymbol(value), colors.resolve(tint), colors.resolve(surface), earned, Modifier.size(50.dp, 64.dp))
         Text(
             title,
-            color = if (earned) colors.ink else colors.ink.copy(alpha = 0.6f),
+            color = if (earned) colors.ink else colors.secondaryText,
             style = PeekTheme.type.caption2.sfLines(),
             textAlign = TextAlign.Center,
         )

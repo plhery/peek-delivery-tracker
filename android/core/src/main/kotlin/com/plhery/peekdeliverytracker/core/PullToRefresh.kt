@@ -239,7 +239,7 @@ data class PullToRefreshTrigger(val rested: Boolean = true) {
 }
 
 object PullToRefreshPalette {
-    val inkSoft = Brand.color(light = "#657060", dark = "#C2BAAA")
+    val inkSoft = Brand.inkSoft
 }
 
 /**

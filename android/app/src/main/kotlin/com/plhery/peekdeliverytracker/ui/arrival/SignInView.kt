@@ -398,7 +398,7 @@ internal fun SignInView(
                                     tint = colors.orange,
                                 )
                             } else {
-                                Text(localized("auth.configTitle"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+                                Text(localized("auth.configTitle"), color = colors.secondaryText, style = type.subheadline.sfLines())
                             }
                             form.step == SignInStep.Code -> CodeForm(form, invitation != null, codeFocus, onVerify = {
                                 val email = form.email.cleanedEmail
@@ -497,8 +497,8 @@ internal fun LanguageMenu(menus: SheetMenus) {
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PeekSymbol("globe", font = type.subheadline, tint = colors.secondaryLabel)
-        Text(language.rawValue.uppercase(), color = colors.secondaryLabel, style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines())
+        PeekSymbol("globe", font = type.subheadline, tint = colors.secondaryText)
+        Text(language.rawValue.uppercase(), color = colors.secondaryText, style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines())
     }
 }
 
@@ -608,7 +608,7 @@ private fun EmailForm(form: SignInForm, invited: Boolean, onSend: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     Column(Modifier.fillMaxWidth().formSurface(invited, 18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(localized(if (invited) "auth.emailIntro" else "auth.emailIntroShort"), color = colors.secondaryLabel, style = type.footnote.sfLines())
+        Text(localized(if (invited) "auth.emailIntro" else "auth.emailIntroShort"), color = colors.secondaryText, style = type.footnote.sfLines())
         val label = localized("auth.email")
         SignInField(label) { modifier ->
             NoSuggestions {
@@ -647,7 +647,7 @@ private fun CodeForm(form: SignInForm, invited: Boolean, focus: AccessibilityFoc
     val email = form.email.cleanedEmail
     val intro = remember(email, language) { localizer.text("auth.codeIntro", mapOf("email" to email)) }
     Column(Modifier.fillMaxWidth().formSurface(invited, 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(intro, color = colors.secondaryLabel, style = type.footnote.sfLines())
+        Text(intro, color = colors.secondaryText, style = type.footnote.sfLines())
         val label = localized("auth.code")
         SignInField(label) { modifier ->
             SignInTextField(
@@ -706,7 +706,7 @@ private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
 }
 
 /**
- * A field of the form: one line, centred in its 54, the [placeholder] in the placeholder grey while it is empty, the
+ * A field of the form: one line, centred in its 54, the [placeholder] in the secondary grey while it is empty, the
  * cursor in the accent, read by TalkBack as [label] and offered by autofill as [autofill]. The placeholder shrinks to
  * keep to its one line where the field is too narrow for it at the reader's size, as UITextField's does
  * (`you@example.com` in about 33 points at the largest size), ending in an ellipsis past a quarter. The cursor stays
@@ -748,7 +748,7 @@ internal fun SignInTextField(
                 if (value.isEmpty() && placeholder.isNotEmpty()) {
                     val probe = LocalSignInPlaceholder.current
                     Text(
-                        placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = style, maxLines = 1, softWrap = false,
+                        placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = style, maxLines = 1, softWrap = false,
                         overflow = TextOverflow.Ellipsis, autoSize = MinimumScale(style.fontSize, PLACEHOLDER_SHRINK),
                         onTextLayout = { probe?.invoke(it) },
                     )
@@ -814,7 +814,7 @@ private fun OrRule() {
     val line = colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.35f)
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.weight(1f).height(0.5.dp).background(line))
-        Text(localized("auth.or"), color = colors.secondaryLabel, style = PeekTheme.type.caption.sfLines())
+        Text(localized("auth.or"), color = colors.secondaryText, style = PeekTheme.type.caption.sfLines())
         Box(Modifier.weight(1f).height(0.5.dp).background(line))
     }
 }
@@ -828,7 +828,7 @@ private fun OrRule() {
 internal fun LeadingFootnote(text: String, modifier: Modifier = Modifier) {
     val lines = remember { TextLines() }
     Text(
-        text, modifier.widestLine(lines), color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.footnote.sfLines(),
+        text, modifier.widestLine(lines), color = PeekTheme.colors.secondaryText, style = PeekTheme.type.footnote.sfLines(),
         onTextLayout = { lines.result = it },
     )
 }
@@ -857,15 +857,15 @@ private fun PrivacyLine(privacyUrl: String, modifier: Modifier) {
     val text = remember(short, link, privacyUrl, colors) {
         buildAnnotatedString {
             append("$short ")
-            withLink(LinkAnnotation.Url(privacyUrl, TextLinkStyles(SpanStyle(color = colors.secondaryLabel, textDecoration = TextDecoration.Underline)))) {
+            withLink(LinkAnnotation.Url(privacyUrl, TextLinkStyles(SpanStyle(color = colors.secondaryText, textDecoration = TextDecoration.Underline)))) {
                 append(link)
             }
         }
     }
     Row(modifier.fillMaxWidth().testTag(PRIVACY_LINE), horizontalArrangement = Arrangement.spacedBy(7.dp), verticalAlignment = Alignment.Top) {
-        PeekSymbol("lock", Modifier.padding(top = 2.dp), font = style, tint = colors.secondaryLabel)
+        PeekSymbol("lock", Modifier.padding(top = 2.dp), font = style, tint = colors.secondaryText)
         // 7 short of the end, as the HStack spaces its closing `Spacer(minLength: 0)` from the words.
-        Text(text, Modifier.weight(1f).padding(end = 7.dp), color = colors.secondaryLabel, style = style.sfLines())
+        Text(text, Modifier.weight(1f).padding(end = 7.dp), color = colors.secondaryText, style = style.sfLines())
     }
 }
 
@@ -899,8 +899,8 @@ private fun DemoLink(enabled: Boolean, modifier: Modifier, onClick: () -> Unit) 
         horizontalArrangement = Arrangement.spacedBy(7.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(title, color = colors.secondaryLabel, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
-        PeekSymbol("arrow.up.right", font = type.caption, tint = colors.secondaryLabel)
+        Text(title, color = colors.secondaryText, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
+        PeekSymbol("arrow.up.right", font = type.caption, tint = colors.secondaryText)
     }
 }
 
@@ -946,14 +946,14 @@ private fun PrivacyNotice(privacyUrl: String, modifier: Modifier) {
         Box(Modifier.fillMaxWidth().height(1.dp / LocalDensity.current.density).background(colors.divider))
         Row(Modifier.fillMaxWidth().padding(top = 18.dp), horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.Top) {
             Box(Modifier.size(20.dp), contentAlignment = Alignment.Center) {
-                PeekSymbol("lock.fill", font = style.copy(fontWeight = FontWeight.SemiBold), tint = colors.secondaryLabel)
+                PeekSymbol("lock.fill", font = style.copy(fontWeight = FontWeight.SemiBold), tint = colors.secondaryText)
             }
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(localized("auth.privacy"), color = colors.secondaryLabel, style = style.sfLines())
+                Text(localized("auth.privacy"), color = colors.secondaryText, style = style.sfLines())
                 Text(
                     read,
                     Modifier.button(interactionSource = null, indication = PlainPress, role = Role.Button) { uri.openUri(privacyUrl) },
-                    color = colors.secondaryLabel,
+                    color = colors.secondaryText,
                     style = style.sfLines().copy(textDecoration = TextDecoration.Underline),
                 )
             }

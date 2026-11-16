@@ -185,7 +185,7 @@ internal fun LivePassCard(
     val reduceMotion = PeekTheme.reduceMotion
     val density = LocalDensity.current
     val ink = colors.resolve(branding.ink)
-    val secondary = colors.secondaryLabel
+    val secondary = colors.secondaryText
     // Handed from one carrier to another, or about to be, the card carries both marks and says who delivers.
     val delivering = parcel.deliveringCarrier
     val delivery = remember(identities, delivering, language) { delivering?.let { identities.of(it, language) } }
@@ -648,7 +648,7 @@ private fun PostcodeNote(text: String, button: String?, modifier: Modifier, acti
     val type = PeekTheme.type
     val focus = remember { AccessibilityFocus() }
     Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(text, color = colors.secondaryLabel, style = type.caption.sfLines())
+        Text(text, color = colors.secondaryText, style = type.caption.sfLines())
         if (button != null) {
             Text(
                 button,

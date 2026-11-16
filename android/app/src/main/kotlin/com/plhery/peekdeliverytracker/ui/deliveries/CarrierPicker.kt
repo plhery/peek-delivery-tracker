@@ -289,7 +289,7 @@ internal fun CarrierPicker(
                         entry, catalog, selected = selection == entry.carrier, tag = tags[entry.carrier], stacked, start, end,
                     ) { choose(entry.carrier) }
                     is PickerEntry.Empty -> PickerCell(first = true, last = true, fill = null, start, end, separatorStart = 0.dp) {
-                        Text(entry.text, color = colors.secondaryLabel, style = PeekTheme.type.body.sfLines())
+                        Text(entry.text, color = colors.secondaryText, style = PeekTheme.type.body.sfLines())
                     }
                 }
             }
@@ -486,7 +486,7 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
                         Box(contentAlignment = Alignment.CenterStart) {
                             if (query.isEmpty()) {
                                 Text(
-                                    prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryLabel, style = font,
+                                    prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font,
                                     maxLines = 1, overflow = TextOverflow.Ellipsis,
                                 )
                             }
@@ -625,7 +625,7 @@ private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, s
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(localized("add.detect"), color = colors.ink, style = type.body.sfLines())
             val description: @Composable (Modifier) -> Unit = { modifier ->
-                Text(automatic.description, modifier, color = colors.secondaryLabel, style = type.caption.sfLines())
+                Text(automatic.description, modifier, color = colors.secondaryText, style = type.caption.sfLines())
             }
             if (stacked) {
                 Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -687,7 +687,7 @@ private fun CarrierRow(
         if (identity != null) CarrierTruck(identity) else Spacer(Modifier.width(MARK_WIDTH))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(name, color = colors.ink, style = type.body.sfLines())
-            if (subtitle.isNotEmpty()) Text(subtitle, color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (subtitle.isNotEmpty()) Text(subtitle, color = colors.secondaryText, style = type.caption.sfLines())
             if (stacked && tag != null) PickerTag(tag.label, tag.found, wraps = true, Modifier.padding(top = 3.dp))
         }
         Spacer(Modifier.width(TRAILING_SPACER))
@@ -720,7 +720,7 @@ private fun PickerTag(label: String, found: Boolean, wraps: Boolean, modifier: M
                 if (wraps) ContinuousRoundedShape(TAG_RADIUS) else CapsuleShape,
             )
             .padding(horizontal = 8.dp, vertical = 2.dp),
-        color = if (found) colors.resolve(ExperimentalPalette.delivered) else colors.secondaryLabel,
+        color = if (found) colors.resolve(ExperimentalPalette.delivered) else colors.secondaryText,
         style = PeekTheme.type.style(IosTextStyle.Caption2, FontWeight.SemiBold).sfLines(),
         softWrap = wraps,
         maxLines = if (wraps) Int.MAX_VALUE else 1,

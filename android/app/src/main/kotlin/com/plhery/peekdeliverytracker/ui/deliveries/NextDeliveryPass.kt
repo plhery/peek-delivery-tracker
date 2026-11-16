@@ -210,7 +210,7 @@ fun NextDeliveryPass(
                 )
                 DeliveryPostageStamp(parcel, identity, appeared = appeared || decorative)
             }
-            if (notice != null) Text(notice, color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (notice != null) Text(notice, color = colors.secondaryText, style = type.caption.sfLines())
             if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
             Row(verticalAlignment = Alignment.CenterVertically) {
                 NewUpdateDot(newUpdate, ink)

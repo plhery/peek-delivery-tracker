@@ -20,14 +20,14 @@ class PeekColorsTest {
     fun theBrandIsTheIPhonesInLightAndDark() {
         assertEquals(
             listOf(
-                "#F3CF48", "#F3CF48", "#20251E", "#20251E", "#657060", "#606065", "#F0F0E9", "#FFFFFF", "#FFFFFF", "#963E19",
+                "#F3CF48", "#F3CF48", "#20251E", "#20251E", "#485242", "#606065", "#F0F0E9", "#FFFFFF", "#FFFFFF", "#963E19",
                 "#FFDDC7", "#F4F5F1",
             ),
             tokens(PeekColors(dark = false)),
         )
         assertEquals(
             listOf(
-                "#F3CF48", "#F3CF48", "#20251E", "#FAF6EB", "#C2BAAA", "#BCBCC2", "#292620", "#1F1C17", "#292620", "#FFB184",
+                "#F3CF48", "#F3CF48", "#20251E", "#FAF6EB", "#CEC6B6", "#BCBCC2", "#292620", "#1F1C17", "#292620", "#FFB184",
                 "#341F14", "#13110E",
             ),
             tokens(PeekColors(dark = true)),

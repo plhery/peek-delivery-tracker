@@ -10207,7 +10207,7 @@
       "timezone": "America/Chicago",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "aaa-cooper"
       },
       "trackingUrlTemplate": "https://www.aaacooper.com/workspace/action-trac?id={trackingNumber}&PG=ProNumber",
       "linkRules": [
@@ -20012,7 +20012,7 @@
       "timezone": "Asia/Ho_Chi_Minh",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "nhat-tin"
       },
       "trackingUrlTemplate": "https://ntlogistics.vn/tra-van-don.html?bill={trackingNumber}",
       "linkRules": [
@@ -26029,7 +26029,7 @@
       "timezone": "America/Toronto",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "tforce-logistics"
       },
       "trackingUrlTemplate": "https://direct.tfesg.com/finalmiletrack/Track?trackingNumber={trackingNumber}&brand=0",
       "linkRules": [
@@ -31045,9 +31045,9 @@
       "timezone": "America/Chicago",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "custom-companies"
       },
-      "trackingUrlTemplate": "https://api.customco.com/shipmenttrace.htm?referencenumber={trackingNumber}",
+      "trackingUrlTemplate": "https://api.customco.com/scripts/cgiip.exe/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}&seskey=&nav=top&language=",
       "linkRules": [
         {
           "domains": [

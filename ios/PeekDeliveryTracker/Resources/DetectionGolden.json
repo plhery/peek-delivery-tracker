@@ -16821,6 +16821,27 @@
     ]
   },
   {
+    "input": "1174350186",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "cargus",
+      "dhl-ecommerce-es",
+      "gls-es"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "1176101017977",
     "carrier": "unknown",
     "confidence": "low",
@@ -82136,6 +82157,17 @@
     ]
   },
   {
+    "input": "CP120498464",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
     "input": "CP123456789FI",
     "carrier": "unknown",
     "confidence": "none",
@@ -82146,6 +82178,17 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "CP12446495887",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste"
+    ],
+    "asked": [
+      "la-poste"
+    ]
   },
   {
     "input": "CP16658276R",

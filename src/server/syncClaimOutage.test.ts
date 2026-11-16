@@ -11,6 +11,7 @@ const globalRuntime = globalThis as { __deliveryBackgroundRuntime?: unknown };
 afterEach(() => {
   for (const runtime of started.splice(0)) {
     runtime.worker.stop();
+    runtime.readerWorker?.stop();
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
   }
@@ -240,6 +241,8 @@ describe('a failed enqueue of the scheduled sync', () => {
     started.push(runtime);
     // The worker and the scheduler have only set their timers: none has fired.
     vi.spyOn(runtime.client, 'claimSyncJob').mockResolvedValue(null);
+    // The readers' lane polls too: it finds nothing, and stops with the rest after each test.
+    vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
     vi.spyOn(runtime.client, 'lastScheduledRunFinishedAt').mockResolvedValue(null);
     const enqueue = vi.spyOn(runtime.client, 'enqueueSyncJob').mockRejectedValue(failure);
     return { runtime, enqueue, ...monitored };
@@ -286,6 +289,7 @@ describe('the scheduled sync at start', () => {
     if (!runtime) throw new Error('The background services did not start');
     started.push(runtime);
     vi.spyOn(runtime.client, 'claimSyncJob').mockResolvedValue(null);
+    vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
     vi.spyOn(runtime.client, 'lastScheduledRunFinishedAt').mockImplementation(lastRun);
     const enqueue = vi.spyOn(runtime.client, 'enqueueSyncJob').mockResolvedValue({ row: {}, queued: true });
     return { runtime, enqueue };

@@ -55,9 +55,11 @@ F-Droid's build names the phone by an installation token it makes and reaches it
 (`app/src/fdroid/.../platform/UnifiedPush.kt`). With a UnifiedPush distributor app on the phone (ntfy and the like),
 the app registers with it, signed with the server's VAPID key from `/api/push/config`, and the server sends Web Push
 messages to the endpoint it gives. Without one, the server keeps the notifications in an inbox and a WorkManager job
-takes them about every 15 minutes, whenever the phone is online. Both carry the same data as FCM's and are posted the
-same way. A distributor installed later is used at the next return to the app, and one that goes away sends the phone
-back to the inbox. Delivery updates in Settings says which way notifications come.
+takes them about every 15 minutes, whenever the phone is online, Doze and battery saver spacing the checks out. With
+notifications turned off on the phone the job takes nothing and stops until the app is next opened with them on. Both
+carry the same data as FCM's and are posted the same way. A distributor installed later is used at the next return to
+the app, and one that goes away sends the phone back to the inbox. Delivery updates in Settings says which way
+notifications come.
 
 As on the iPhone, signing out, an expired session or a deleted account takes the phone's token off the server but
 keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another

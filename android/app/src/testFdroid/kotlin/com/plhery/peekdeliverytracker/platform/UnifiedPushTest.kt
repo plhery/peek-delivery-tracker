@@ -8,10 +8,13 @@ import android.app.NotificationManager
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.work.ListenableWorker
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.impl.WorkManagerImpl
+import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
@@ -70,6 +73,24 @@ class UnifiedPushTest {
         tokens.delete()
         assertEquals(WorkInfo.State.CANCELLED, inboxCheck())
         assertNotEquals("A deleted address is followed by a new one", first, address(tokens))
+    }
+
+    /**
+     * Notifications turned off on the phone: the check takes nothing from the inbox, which keeps it, and stops until the
+     * app asks for the address again with them on.
+     */
+    @Test
+    fun notificationsTurnedOffOnThePhoneStopTheChecks() = runBlocking {
+        val tokens = UnifiedPushTokens(context)
+        address(tokens)
+        assertEquals(WorkInfo.State.ENQUEUED, inboxCheck())
+        shadowOf(context.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(false)
+        assertEquals(ListenableWorker.Result.success(), TestListenableWorkerBuilder<InboxCheck>(context).build().doWork())
+        assertEquals(WorkInfo.State.CANCELLED, inboxCheck())
+
+        shadowOf(context.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(true)
+        address(tokens)
+        assertEquals(WorkInfo.State.ENQUEUED, inboxCheck())
     }
 
     @Test

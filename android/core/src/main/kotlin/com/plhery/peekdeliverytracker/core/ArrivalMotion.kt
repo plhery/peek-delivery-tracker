@@ -17,9 +17,11 @@ data class ArrivalTilt(val x: Double = 0.0, val y: Double = 0.0) {
         // response makes the paper feel weighted even without rotating the phone.
         val horizontalInput = roll / 0.36 + min(1.0, max(-1.0, accelerationX * 2)) * 0.16
         val verticalInput = pitch / 0.36 - min(1.0, max(-1.0, accelerationY * 2)) * 0.16
+        // Roll turns about the device's y axis and pitch about its x, so (roll, pitch) is the (x, y) pair mirrored:
+        // the display's quarter turns rotate it the other way round from a vector's.
         val angle = quarterTurns.toDouble() * PI / 2
-        val horizontal = horizontalInput * cos(angle) + verticalInput * sin(angle)
-        val vertical = verticalInput * cos(angle) - horizontalInput * sin(angle)
+        val horizontal = horizontalInput * cos(angle) - verticalInput * sin(angle)
+        val vertical = verticalInput * cos(angle) + horizontalInput * sin(angle)
         // A low-pass filter removes hand tremor; output can never exceed ±1.
         return ArrivalTilt(
             x = x + (min(1.0, max(-1.0, horizontal)) - x) * 0.22,

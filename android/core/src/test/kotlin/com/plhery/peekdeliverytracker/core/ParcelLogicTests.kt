@@ -196,7 +196,7 @@ class ParcelLogicTests {
         val portrait = ArrivalTilt().follow(roll = 0.44, pitch = 0.0)
         var landscape = ArrivalTilt().follow(roll = 0.44, pitch = 0.0, quarterTurns = 1)
         assertEquals(0.0, landscape.x, 0.0001)
-        assertEquals(-portrait.x, landscape.y, 0.0001)
+        assertEquals(portrait.x, landscape.y, 0.0001)
         repeat(40) { landscape = landscape.follow(roll = 0.0, pitch = 0.0) }
         assertEquals(0.0, landscape.y, 0.0001)
     }

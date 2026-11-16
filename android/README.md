@@ -182,11 +182,13 @@ the list, `ScrollBenchmark` the frames of a list of 60 parcels as it is flung to
 the frames of a parcel's page as it opens from the list, each with JIT alone and with the APK's baseline profile
 installed as Google Play installs it; the instrumentation argument `peek.compilation` (`none` or `profile`) keeps one, to
 time two builds in turn. On a fresh install they open the demo from the welcome; `ScrollBenchmark` adds synthetic
-numbers to the demo's parcels through Add, which a build without a server keeps on the phone.
-`BaselineProfileGenerator` collects a profile from the unshrunk `nonMinifiedBenchmark` build.
+numbers to the demo's parcels through Add, which a build without a server keeps on the phone, so it needs a fresh
+install for each run. `BaselineProfileGenerator` collects a profile from the unshrunk `nonMinifiedBenchmark` build.
 
-The app ships only the profiles its libraries bring. One of its own goes in `app/src/main/baselineProfiles/` when the
-benchmarks show it helps.
+Besides its libraries' profiles, the app ships its own, `app/src/main/baselineProfiles/baseline-prof.txt`, as
+`BaselineProfileGenerator` collects it: a start on the welcome and into the demo, a start on the list, the list
+scrolled and a parcel's page opened. R8 rewrites its rules for the shrunk release. Collect it again when those screens
+change, and keep it while the benchmarks show it helps.
 
 ```sh
 ./gradlew :app:assemblePlayBenchmark :app:assemblePlayNonMinifiedBenchmark :baselineprofile:assembleBenchmark

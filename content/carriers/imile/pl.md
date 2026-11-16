@@ -17,7 +17,7 @@ iMile nie podaje na stronie przykładowego numeru. Takie formaty noszą przesył
 | `IM06010000000000` | `IM`, `0601` i dziesięć cyfr: iMile. |
 | `IM00000000000000` | `IM` i 14 cyfr: również iMile. |
 | `6010125000000` | 13 cyfr zaczynających się od `6`, po których sześć kolejnych ma układ daty (miesiąc, dzień, rok): własny numer listu przewozowego iMile. |
-| `49000000000000` | 14 cyfr zaczynających się od `49`: format używany przez iMile w Europie, współdzielony przy 14 cyfrach m.in. z DPD, Chronopost czy BRT. |
+| `49000000000000` | 14 cyfr zaczynających się od `49`: format spotykany na przesyłkach iMile we Włoszech, współdzielony przy 14 cyfrach m.in. z DPD, Chronopost czy BRT. |
 | `3000000000000` | 13 cyfr zaczynających się od `3`: kolejna seria obsługiwana przez iMile, używana też przez innych przewoźników z 13-cyfrowymi numerami. |
 | `2000000000000` | Inne 13-cyfrowe numery: to nie jest format iMile. Takich numerów używają m.in. Delhivery, Yunda i Korea Post. |
 | `LP00000000000000` | To nie iMile, lecz [Cainiao](carrier:cainiao) – numer logistyczny z AliExpress. |

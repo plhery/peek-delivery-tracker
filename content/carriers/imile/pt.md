@@ -17,7 +17,7 @@ A iMile não publica nenhum código de exemplo. Estes são os formatos usados em
 | `IM06010000000000` | `IM`, `0601` e dez algarismos: iMile. |
 | `IM00000000000000` | `IM` e 14 algarismos: também iMile. |
 | `6010125000000` | 13 algarismos começados por `6`, seguidos de seis algarismos com forma de data (mês, dia, ano): número de carta de porte próprio da iMile. |
-| `49000000000000` | 14 algarismos começados por `49`: formato usado pela iMile na Europa, partilhado a 14 algarismos com transportadoras como [DPD Portugal](carrier:dpd-pt), [Chronopost](carrier:chronopost) ou [SEUR](carrier:seur). |
+| `49000000000000` | 14 algarismos começados por `49`: formato visto em encomendas da iMile em Itália, partilhado a 14 algarismos com transportadoras como [DPD Portugal](carrier:dpd-pt), [Chronopost](carrier:chronopost) ou [SEUR](carrier:seur). |
 | `3000000000000` | 13 algarismos começados por `3`: outra série aceite pelo seguimento da iMile, partilhada com outras transportadoras de 13 algarismos. |
 | `2000000000000` | Outros números de 13 algarismos: não correspondem aos formatos da iMile. São usados por empresas como Delhivery, Yunda ou Korea Post. |
 | `LP00000000000000` | Não é da iMile, mas da [Cainiao](carrier:cainiao), a referência logística da AliExpress. |

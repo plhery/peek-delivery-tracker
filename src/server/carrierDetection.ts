@@ -25,6 +25,16 @@ const RECOGNITION_BUDGET_MS = 3_000;
 const ANSWER_TTL_MS = 10 * 60_000;
 const MAX_ANSWERS = 500;
 
+/**
+ * Whether FedEx is asked right after the first batch of carriers misses a number that passes FedEx's check (the
+ * scraper ranks FedEx first for it), rather than after the second batch and the providers: on unless
+ * `FEDEX_EARLY_RECOGNITION` is `off`, `false`, `no` or `0`. FedEx answers only in a browser, which turns some lookups
+ * away with a bot check.
+ */
+export function fedexEarlyRecognition(env: Record<string, string | undefined> = process.env): boolean {
+  return !['off', 'false', 'no', '0'].includes(env.FEDEX_EARLY_RECOGNITION?.trim().toLowerCase() ?? '');
+}
+
 // One registry per server process keeps carrier sessions (DPD's guest token) warm.
 let registry: AdapterRegistry | undefined;
 const answers = new Map<string, { at: number; answer: ApiCarrierDetectionResponse }>();
@@ -47,11 +57,18 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
     try { return await adapter.recognize(trackingNumber, context); }
     catch (error) { errors.set(carrier, error); throw error; }
   };
+  const askBrowser = (carrier: string, context: TrackingContext) => recognizeBrowser(carrier, trackingNumber, context, errors.get(carrier));
+  const browserBudget = () => Math.max(1, Math.min(BROWSER_RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now())));
   const outcomes = await recognizeAll(candidates.slice(0, MAX_RECOGNITIONS), ask, RECOGNITION_BUDGET_MS, signal);
-  const first = settleRecognition(outcomes);
+  const missed = () => { const settled = settleRecognition(outcomes); return !settled.carrier && !settled.choices.length; };
+  // A number that passes FedEx's check goes to FedEx as soon as the first five miss it, before the next five and the
+  // providers.
+  const early = missed() && fedexEarlyRecognition() && detectCarrierMatch(typed).preferred.includes('fedex')
+    ? browserCandidates.filter(({ carrier }) => carrier === 'fedex') : [];
+  if (early.length) outcomes.push(...await recognizeAll(early, askBrowser, browserBudget(), signal));
   // The next five are asked only when none of the first knows the number, for another three
   // seconds at most: past the deadline they go unanswered.
-  const next = !first.carrier && !first.choices.length ? candidates.slice(MAX_RECOGNITIONS) : undefined;
+  const next = missed() ? candidates.slice(MAX_RECOGNITIONS) : undefined;
   if (next) {
     outcomes.push(...await recognizeAll(next, ask,
       Math.min(RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now())), signal));
@@ -60,9 +77,9 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   const preflight = !cheap.carrier && !cheap.choices.length && health
     ? await preflightTracking(trackingNumber, health, signal) : undefined;
   if (!cheap.carrier && !cheap.choices.length && !preflight?.trackingFound) {
-    const due = browserCandidates.filter(({ carrier }) => !outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed'));
-    outcomes.push(...await recognizeAll(due, (carrier, context) => recognizeBrowser(carrier, trackingNumber, context, errors.get(carrier)),
-      Math.max(1, Math.min(BROWSER_RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now()))), signal));
+    const due = browserCandidates.filter(({ carrier }) => !early.some((asked) => asked.carrier === carrier)
+      && !outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed'));
+    outcomes.push(...await recognizeAll(due, askBrowser, browserBudget(), signal));
   }
   const { carrier, choices } = settleRecognition(outcomes);
   // Who was asked, and who could not answer, tells "nobody knows it yet" from "could not check".
@@ -82,6 +99,7 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
       asked: asked.length,
       asked_carriers: asked.join(','),
       second_batch: Boolean(next?.length),
+      ...(early.length ? { fedex_early: true } : {}),
       known: outcomes.filter((outcome) => outcome.status === 'known').length,
       failed: unanswered.length,
       unanswered_carriers: unanswered.join(','),

@@ -1,5 +1,5 @@
 import { beforeEach, expect, it, vi } from 'vitest';
-import { IndeterminateError, MAX_RECOGNITIONS, recognitionCandidates } from 'universal-parcel-scraper';
+import { detectCarrierMatch, IndeterminateError, MAX_RECOGNITIONS, recognitionCandidates } from 'universal-parcel-scraper';
 import { detectCarrier } from './carrierDetection';
 import { SupabaseServiceClient } from './supabase';
 
@@ -10,24 +10,49 @@ vi.mock('./adapterRegistry', () => ({ createAdapterRegistry: () => ({ for: (carr
 vi.mock('./browserRecognition', () => ({ BROWSER_RECOGNITION_BUDGET_MS: 20_000, MAX_BROWSER_RECOGNITIONS: 2,
   recognizeBrowser: (...args: unknown[]) => mocks.browser(...args) }));
 beforeEach(() => {
+  vi.unstubAllEnvs();
   mocks.http.mockReset().mockResolvedValue({ known: false });
   mocks.browser.mockReset().mockResolvedValue({ known: true, lastActivityAt: new Date().toISOString() });
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
 });
 
-it('confirms FedEx after HTTP misses and charges the allowance once', async () => {
+// Twelve digits whose GLS check holds, so GLS's networks are asked too, and FedEx's: the scraper ranks FedEx first.
+const FEDEX_NUMBER = '100000000150';
+const httpBatches = () => recognitionCandidates(FEDEX_NUMBER).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+/** Detection without the answers an earlier test left in its cache. */
+async function freshDetection() {
+  vi.resetModules();
+  return (await import('./carrierDetection')).detectCarrier;
+}
+
+it('asks FedEx as soon as the first five miss a number that passes its check, and charges the allowance once', async () => {
   const allowance = vi.fn();
-  // Twelve digits whose GLS check holds, so GLS's networks are asked too.
-  const number = '100000000150';
-  // Both HTTP batches miss before the browser is asked.
-  const http = recognitionCandidates(number).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+  expect(detectCarrierMatch(FEDEX_NUMBER).preferred).toContain('fedex');
+  const http = httpBatches();
   expect(http.length, 'the number has a second batch').toBeGreaterThan(MAX_RECOGNITIONS);
-  expect(await detectCarrier({ trackingNumber: number }, allowance)).toEqual({
-    trackingNumber: number, carrier: 'fedex', asked: [...http, 'fedex'],
+  expect(await detectCarrier({ trackingNumber: FEDEX_NUMBER }, allowance)).toEqual({
+    trackingNumber: FEDEX_NUMBER, carrier: 'fedex', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex'],
   });
   expect(allowance).toHaveBeenCalledOnce();
-  expect(mocks.http).toHaveBeenCalledWith('colis-prive', number, expect.objectContaining({ budgetMs: 3_000, signal: expect.any(AbortSignal) }));
-  expect(mocks.browser).toHaveBeenCalledWith('fedex', number, expect.objectContaining({ budgetMs: 20_000 }), undefined);
+  expect(mocks.http).toHaveBeenCalledWith('colis-prive', FEDEX_NUMBER, expect.objectContaining({ budgetMs: 3_000, signal: expect.any(AbortSignal) }));
+  expect(mocks.browser).toHaveBeenCalledWith('fedex', FEDEX_NUMBER, expect.objectContaining({ budgetMs: 20_000 }), undefined);
+});
+
+it('asks the next five when FedEx does not know the number either, and FedEx only once', async () => {
+  mocks.browser.mockResolvedValue({ known: false });
+  const http = httpBatches();
+  expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
+    trackingNumber: FEDEX_NUMBER, carrier: 'unknown', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS)],
+  });
+  expect(mocks.browser).toHaveBeenCalledOnce();
+});
+
+it('with FEDEX_EARLY_RECOGNITION off, asks FedEx only after both HTTP batches miss', async () => {
+  vi.stubEnv('FEDEX_EARLY_RECOGNITION', 'off');
+  const http = httpBatches();
+  expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
+    trackingNumber: FEDEX_NUMBER, carrier: 'fedex', asked: [...http, 'fedex'],
+  });
 });
 
 it('reads a NACEX number with its slash, as the add takes it, without asking anyone', async () => {

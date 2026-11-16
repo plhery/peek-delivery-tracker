@@ -644,7 +644,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
 - **In the Add sheet.** The detect route asks once the number is settled (the field loses
   focus, which includes opening the carrier picker, a paste, a shared number), within
   three seconds for the first five HTTP candidates and, when none of them knows the number,
-  three more for the next five, then up to twenty seconds for browser confirmation. At most two
+  three more for the next five, then up to twenty seconds for browser confirmation. A number that
+  passes FedEx's check goes to FedEx, which confirms only in a browser, as soon as the first five miss
+  it, before the next five (`FEDEX_EARLY_RECOGNITION=off` asks it after them again). At most two
   browser recognitions run per process, and identical requests share work. Complete answers
   are cached per number and country hint for ten minutes; browser answers and their history for five minutes,
   failures for thirty seconds. Changing the number or leaving the form cancels its request;

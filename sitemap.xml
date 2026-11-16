@@ -5737,21 +5737,38 @@
 <url>
 <loc>https://peektracker.com/carriers/vinted-go-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-11-12</lastmod>
 </url>
 <url>
-<loc>https://peektracker.com/fr/carriers/vinted-go-suivi</loc>
+<loc>https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/vinted-go-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-11-12</lastmod>
@@ -5759,10 +5776,12 @@
 <url>
 <loc>https://peektracker.com/it/carriers/vinted-go-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-11-14</lastmod>
@@ -5770,10 +5789,12 @@
 <url>
 <loc>https://peektracker.com/es/carriers/vinted-go-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-11-12</lastmod>
@@ -5781,21 +5802,38 @@
 <url>
 <loc>https://peektracker.com/pt/carriers/vinted-go-encomenda</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-11-12</lastmod>
 </url>
 <url>
-<loc>https://peektracker.com/nl/carriers/vinted-go-pakket-volgen</loc>
+<loc>https://peektracker.com/pl/carriers/vinted-go-sledzenie</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/nl/carriers/vinted-go-pakket-volgen</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/vinted-go-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/vinted-go-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-11-12</lastmod>
@@ -7968,7 +8006,11 @@
 <loc>https://peektracker.com/carriers/jt-express-germany-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
@@ -7979,18 +8021,41 @@
 <loc>https://peektracker.com/de/carriers/jt-express-sendungsverfolgung</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <lastmod>2026-11-15</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/jt-express-allemagne-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
+<xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<lastmod>2026-11-16</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/jt-express-germania-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
@@ -7998,10 +8063,59 @@
 <lastmod>2026-11-15</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/es/carriers/jt-express-alemania-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
+<xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
+<xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
+<xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
@@ -8012,7 +8126,11 @@
 <loc>https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
@@ -8023,7 +8141,11 @@
 <loc>https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-germany-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/jt-express-allemagne-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jt-express-germania-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jt-express-alemania-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/jt-express-alemanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jt-express-niemcy-sledzenie" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/jt-express-germaniya-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/jt-express-germania-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/jt-express-njemacka-pracenje-posiljke" />
@@ -8256,8 +8378,11 @@
 <loc>https://peektracker.com/carriers/imile-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
 <lastmod>2026-11-13</lastmod>
 </url>
@@ -8265,17 +8390,35 @@
 <loc>https://peektracker.com/de/carriers/imile-sendungsverfolgung</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
 <lastmod>2026-11-13</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/imile-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
+<lastmod>2026-11-16</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/imile-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
 <lastmod>2026-11-13</lastmod>
 </url>
@@ -8283,10 +8426,37 @@
 <loc>https://peektracker.com/es/carriers/imile-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
 <lastmod>2026-11-13</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/imile-rastreio</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/imile-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/imile-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/imile-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/imile-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/imile-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/imile-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
+<lastmod>2026-11-16</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/postnl-tracking</loc>
@@ -8341,24 +8511,84 @@
 <url>
 <loc>https://peektracker.com/carriers/dhlink-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/dhlink-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
 <lastmod>2026-11-16</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/dhlink-suivi</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/dhlink-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/dhlink-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
 <lastmod>2026-11-16</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/dhlink-rastreio</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
+<lastmod>2026-11-16</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/dhlink-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhlink-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhlink-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/dhlink-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhlink-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhlink-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dhlink-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhlink-tracking" />
 <lastmod>2026-11-16</lastmod>
 </url>

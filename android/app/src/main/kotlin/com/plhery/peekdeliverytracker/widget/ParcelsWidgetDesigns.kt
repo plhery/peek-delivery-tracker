@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
@@ -15,7 +14,6 @@ import androidx.glance.LocalContext
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.background
-import androidx.glance.color.ColorProvider
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
@@ -34,7 +32,6 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
-import androidx.glance.unit.ColorProvider
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Brand
@@ -126,7 +123,7 @@ private fun CardAndSteps(list: DeliveryWidgetList, parcel: DeliveryWidgetParcel,
  * The steps that fit `height`, four at most: a dot on the thread, the brightest for the latest; the words the parcel's
  * page gives them, semibold for the latest, and the time at the end in the card's ink ([DeliveryWidgetStep.time]: the
  * time alone today, else after the weekday, and the weekday alone for a step dated by its day alone), on the app's
- * clock ([Device.appUses24HourTime]); the place under them.
+ * clock ([Device.appUses24HourTime]); the place under them in the app's quieter grey, as on the iPhone.
  */
 @Composable
 private fun Steps(list: DeliveryWidgetList, steps: List<DeliveryWidgetStep>, card: DeliveryWidgetCard, height: Dp, type: WidgetText) {
@@ -163,7 +160,7 @@ private fun Steps(list: DeliveryWidgetList, steps: List<DeliveryWidgetStep>, car
                         Spacer(GlanceModifier.width(STEP_TIME_GAP))
                         Text(step.time(list.date, copy), maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption), fontWeight = FontWeight.Medium))
                     }
-                    step.place?.let { Text(it, maxLines = 1, style = TextStyle(color = CARD_SECONDARY, fontSize = type.sp(caption2))) }
+                    step.place?.let { Text(it, maxLines = 1, style = TextStyle(color = ListColors.secondary, fontSize = type.sp(caption2))) }
                 }
             }
         }
@@ -561,9 +558,6 @@ private fun markSize(art: WidgetCardArt, height: Dp, room: Dp): GlanceModifier =
 private fun fitting(height: Dp, item: Dp, gap: Dp): Int = if (height < item) 0 else 1 + floor((height - item) / (item + gap)).toInt()
 
 private fun DpSize.inside(padding: Dp) = DpSize(width - padding * 2, height - padding * 2)
-
-/** On a card, the words less than its label. */
-private val CARD_SECONDARY: ColorProvider = ColorProvider(day = Color.Black.copy(alpha = 0.58f), night = Color.White.copy(alpha = 0.62f))
 
 private val PAGE_MARGIN = 16.dp
 private val CARD_GAP = 8.dp

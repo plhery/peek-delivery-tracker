@@ -2,8 +2,8 @@
 title: JS Express seguimiento: número JSE…YQ, estados y reparto
 description: Sigue tu paquete de JS Express (急速国际) desde China: cómo es el número JSE…YQ, qué significan sus estados en inglés y quién lo entrega en España.
 slug: js-express-seguimiento
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 JS Express (急速国际, también JS EXP) es una empresa logística china para tiendas online transfronterizas, gestionada en Suzhou por 急创速供应链管理（苏州）有限公司. Si una tienda te ha enviado el pedido con JS Express, el número empieza por JSE y termina en YQ: pégalo en la casilla de arriba. JS Express lleva el paquete desde China hasta España y una empresa de reparto local se encarga de la entrega; en su historial en España aparece a veces [CTT Express](carrier:ctt-express).
@@ -85,7 +85,7 @@ Los intentos de entrega, avisos y puntos de recogida siguen las normas del trans
 
 **Parado en `Electronic notification of order creation received.`** JS Express aún no ha recogido el paquete en su almacén. Pregunta a la tienda cuándo lo entregó.
 
-**Parado en `Inbound to customs temporary warehouse`.** El envío espera el despacho de importación (en algunas rutas aparece `Start Custom clearance Process` y luego `customs clearance completed`; un `Under customs clearance, please wait patiently.` antes del vuelo corresponde a la aduana china de salida, «En tránsito»). JS Express comercializa su línea Europa en modalidad DDP: cobra el IVA por adelantado al vendedor y no entrega justificante fiscal, por lo que en esa línea no deberían pedirte impuestos al recibirlo. Con carácter general, según la Comisión Europea y la Agencia Tributaria, desde el 1 de julio de 2026 las compras por internet de hasta 150 € procedentes de fuera de la UE pagan un arancel fijo de 3 € por categoría de artículos, y desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por categoría en las ventas a distancia, cualquiera que sea su valor; si la plataforma no los cobró al comprar, el transportista puede pedírtelos junto con el IVA antes de la entrega (la Aduana reclama esos importes al declarante, no directamente al consumidor). Si un repartidor te pide un pago que ya abonaste, consúltalo antes con la tienda. Más detalles en [paquete retenido en aduanas](guide:customs), [el seguimiento no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes desde China](guide:tracking-from-china).
+**Parado en `Inbound to customs temporary warehouse`.** El envío espera el despacho de importación (en algunas rutas aparece `Start Custom clearance Process` y luego `customs clearance completed`; un `Under customs clearance, please wait patiently.` antes del vuelo corresponde a la aduana china de salida, «En tránsito»). JS Express comercializa su línea Europa en modalidad DDP: cobra el IVA por adelantado al vendedor y no entrega justificante fiscal. Con carácter general, según la Comisión Europea y la Agencia Tributaria, desde el 1 de julio de 2026 las compras por internet de hasta 150 € procedentes de fuera de la UE pagan un arancel fijo de 3 € por categoría de artículos, y desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por categoría en las ventas a distancia, cualquiera que sea su valor; si la plataforma no los cobró al comprar, el transportista puede pedírtelos junto con el IVA antes de la entrega (la Aduana reclama esos importes al declarante, no directamente al consumidor). Si un repartidor te pide un pago que ya abonaste, consúltalo antes con la tienda. Más detalles en [paquete retenido en aduanas](guide:customs), [el seguimiento no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes desde China](guide:tracking-from-china).
 
 **Nada después de `Delivery to local courier`.** Ya lo tiene el transportista local. Si Peek muestra su número, búscalo en la web de ese transportista; si no, pídeselo a la tienda.
 

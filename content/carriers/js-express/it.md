@@ -2,8 +2,8 @@
 title: JS Express tracking: numero JSE…YQ, stati e consegna
 description: Traccia un pacco JS Express (急速国际) dalla Cina: com'è fatto il codice JSE…YQ, cosa significano gli stati in inglese e chi consegna in Italia.
 slug: js-express-tracking
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 JS Express (急速国际, anche JS EXP) è un operatore logistico cinese per i negozi online transfrontalieri, gestito a Suzhou da 急创速供应链管理（苏州）有限公司. Se un negozio ha spedito il tuo ordine con JS Express, il codice inizia con JSE e finisce con YQ: incollalo nel riquadro qui sopra. JS Express porta il pacco fuori dalla Cina fino in Italia e poi lo affida a un corriere locale per la consegna a domicilio.
@@ -83,7 +83,7 @@ Tentativi di consegna, avvisi di giacenza e punti di ritiro seguono le regole de
 
 **Fermo su `Electronic notification of order creation received.`** JS Express non ha ancora preso in carico il pacco in magazzino. Chiedi al negozio quando lo ha consegnato allo spedizioniere.
 
-**Fermo su `Inbound to customs temporary warehouse`.** Il pacco attende lo sdoganamento all'importazione (su alcune tratte compaiono `Start Custom clearance Process` e poi `customs clearance completed`; un `Under customs clearance, please wait patiently.` prima del volo riguarda invece la dogana di esportazione cinese, «In transito»). JS Express vende la sua linea Europa in modalità DDP: riscuote l'IVA in anticipo dal venditore e non rilascia ricevuta fiscale, quindi su quella linea non dovrebbero chiederti tributi alla consegna. In generale, per gli acquisti online da Paesi extra-UE fino a 150 € si applica dal 1° luglio 2026 un dazio doganale di 3 € per articolo, e dal 1° novembre 2026 si aggiunge nelle vendite a distanza la Tassa di Gestione dell'Unione di 2 € per voce doganale, qualunque sia il valore; Poste Italiane cura direttamente lo sdoganamento solo per i flussi postali UPU. Se un corriere ti chiede un pagamento che avevi già versato all'acquisto, verifica con il venditore prima di pagare. Approfondisci in [pacco fermo in dogana](guide:customs), [tracciamento fermo](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Fermo su `Inbound to customs temporary warehouse`.** Il pacco attende lo sdoganamento all'importazione (su alcune tratte compaiono `Start Custom clearance Process` e poi `customs clearance completed`; un `Under customs clearance, please wait patiently.` prima del volo riguarda invece la dogana di esportazione cinese, «In transito»). JS Express vende la sua linea Europa in modalità DDP: riscuote l'IVA in anticipo dal venditore e non rilascia ricevuta fiscale. In generale, per gli acquisti online da Paesi extra-UE fino a 150 € si applica dal 1° luglio 2026 un dazio doganale di 3 € per voce doganale, e dal 1° novembre 2026 si aggiunge nelle vendite a distanza la Tassa di Gestione dell'Unione di 2 € per voce doganale, qualunque sia il valore; Poste Italiane cura direttamente lo sdoganamento solo per i flussi postali UPU. Se un corriere ti chiede un pagamento che avevi già versato all'acquisto, verifica con il venditore prima di pagare. Approfondisci in [pacco fermo in dogana](guide:customs), [tracciamento fermo](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun aggiornamento dopo `Delivery to local courier`.** Il pacco è passato al corriere locale. Se Peek mostra il secondo codice, cercalo sul sito di quel corriere; altrimenti chiedi al negozio chi consegna.
 

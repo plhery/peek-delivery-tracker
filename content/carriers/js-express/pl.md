@@ -2,8 +2,8 @@
 title: JS Express śledzenie przesyłki: numer JSE, statusy
 description: Śledź przesyłkę JS Express (急速国际) z Chin: jak wygląda numer JSE…YQ, co oznaczają angielskie statusy, kto doręcza paczkę w Polsce i jak działa odprawa celna.
 slug: js-express-sledzenie
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 JS Express (急速国际, także JS EXP) to chińska firma logistyczna obsługująca zagraniczne sklepy internetowe, prowadzona w Suzhou przez spółkę 急创速供应链管理（苏州）有限公司. Jeśli sprzedawca wysłał Twoje zamówienie przez JS Express, numer śledzenia zaczyna się od JSE i kończy na YQ: wklej go w pole powyżej. JS Express wyprowadza paczkę z Chin do kraju docelowego, a doręczenie pod drzwi przejmuje lokalny przewoźnik.

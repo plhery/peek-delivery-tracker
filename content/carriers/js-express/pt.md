@@ -2,8 +2,8 @@
 title: JS Express rastreio: número JSE…YQ, estados e entrega
 description: Segue uma encomenda JS Express (急速国际) vinda da China: como é o número JSE…YQ, o que significam as leituras em inglês e quem entrega em Portugal.
 slug: js-express-rastreio
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 A JS Express (急速国际, também JS EXP) é uma empresa chinesa de logística para lojas online internacionais, gerida em Suzhou pela 急创速供应链管理（苏州）有限公司. Se uma loja enviou a tua encomenda pela JS Express, o número começa por JSE e termina em YQ: cola-o na caixa acima. A JS Express trata do transporte desde a China até ao país de destino e passa depois a encomenda a uma transportadora local para a entrega à porta.
@@ -73,7 +73,7 @@ O mesmo aviso de morada pode surgir em chinês (`收件人地址不详或有误�
 
 No histórico da JS Express que o Peek conhece não aparece o nome de uma transportadora final em Portugal (e a página da linha europeia da JS Express enumera Reino Unido, França, Alemanha, Itália, Espanha, Suíça e Dinamarca). O registo informático da JS Express pode trazer o número próprio da transportadora local, mas não o nome dela, e a página de seguimento da JS Express não mostra nem uma coisa nem outra.
 
-Quando o formato desse segundo número pertence sem margem para dúvida a uma única transportadora que opera em Portugal (por exemplo, um código próprio da [CTT Expresso](carrier:ctt-express)), o Peek mostra «Entrega: …» com o nome e o número dela e consulta-a também. Se for um [número postal internacional](guide:tracking-number-formats) válido (duas letras, nove algarismos e duas letras), o Peek consulta os [CTT](carrier:ctt). Se o Peek não indicar nenhuma empresa de entrega, pergunta ao vendedor quem distribui a encomenda em Portugal e com que código.
+Quando o formato desse segundo número pertence sem margem para dúvida a uma única transportadora que opera em Portugal (por exemplo, um código próprio da [CTT Express](carrier:ctt-express)), o Peek mostra «Entrega: …» com o nome e o número dela e consulta-a também. Se for um [número postal internacional](guide:tracking-number-formats) válido (duas letras, nove algarismos e duas letras), o Peek consulta os [CTT](carrier:ctt). Se o Peek não indicar nenhuma empresa de entrega, pergunta ao vendedor quem distribui a encomenda em Portugal e com que código.
 
 As tentativas de entrega, avisos e prazos de levantamento seguem as regras dessa transportadora. Quando os CTT deixam um objeto para levantar numa Loja CTT ou Ponto CTT, avisam por SMS, e-mail ou aviso em papel, e se o remetente autorizar alterações podes prolongar o prazo em até 5 dias úteis. Como uma linha `到达待取` da JS Express mostra apenas o país, confirma sempre no seguimento da distribuidora local onde a encomenda te espera. Vê também [tentativa de entrega falhada](guide:missed-delivery) e [encomenda não levantada](guide:uncollected-parcel).
 
@@ -83,7 +83,7 @@ As tentativas de entrega, avisos e prazos de levantamento seguem as regras dessa
 
 **Parada em `Electronic notification of order creation received.`** A JS Express ainda não recolheu o pacote. Pergunta à loja quando o entregou ao transitário.
 
-**Parada em `Inbound to customs temporary warehouse`.** A encomenda aguarda o desalfandegamento de importação (nalgumas rotas vês `Start Custom clearance Process` e depois `customs clearance completed`; um `Under customs clearance, please wait patiently.` antes do voo refere-se apenas à saída na China, «Em trânsito»). Segundo a Autoridade Tributária e Aduaneira e os CTT, desde 1 de julho de 2026 deixou de existir a isenção de direitos aduaneiros nas compras online até 150 € vindas de fora da União Europeia, aplicando-se um direito de 3 € por categoria de artigo, e desde 1 de novembro de 2026 soma-se a Taxa de Manuseamento Aduaneiro da UE de 2 € por item nas vendas à distância, qualquer que seja o valor, além do IVA quando este não foi cobrado na compra. Os CTT sublinham que não pedem pagamentos por SMS nem por e-mail: nos envios postais geridos pelos CTT, todo o processo decorre no Portal de Desalfandegamento dos CTT. Mais detalhes em [encomenda retida na alfândega](guide:customs), [rastreio não atualiza](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
+**Parada em `Inbound to customs temporary warehouse`.** A encomenda aguarda o desalfandegamento de importação (nalgumas rotas vês `Start Custom clearance Process` e depois `customs clearance completed`; um `Under customs clearance, please wait patiently.` antes do voo refere-se apenas à saída na China, «Em trânsito»). Segundo a Autoridade Tributária e Aduaneira e os CTT, desde 1 de julho de 2026 deixou de existir a isenção de direitos aduaneiros nas compras online até 150 € vindas de fora da União Europeia, aplicando-se um direito de 3 € por categoria de artigo, e desde 1 de novembro de 2026 soma-se a Taxa de Manuseamento Aduaneiro da UE de 2 € por tipo de artigo nas vendas à distância, qualquer que seja o valor, além do IVA quando este não foi cobrado na compra. Os CTT sublinham que não pedem pagamentos por SMS nem por e-mail: nos envios postais geridos pelos CTT, todo o processo decorre no Portal de Desalfandegamento dos CTT. Mais detalhes em [encomenda retida na alfândega](guide:customs), [rastreio não atualiza](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
 
 **Sem novidades depois de `Delivery to local courier`.** A encomenda já passou para a transportadora local. Se o Peek mostrar o número dela, pesquisa-o no seguimento dessa empresa; caso contrário, pede-o à loja.
 
@@ -130,7 +130,7 @@ Significa «nenhum dado encontrado»: o sistema da JS Express ainda não conhece
 
 ### Quem entrega as encomendas da JS Express em Portugal?
 
-Uma transportadora local, embora o histórico da JS Express conhecido pelo Peek não diga qual é em Portugal. Se o registo trouxer um código postal internacional válido, o Peek consulta os CTT; se trouxer um código próprio reconhecido em Portugal, como da CTT Expresso, mostra-o. Caso contrário, pergunta ao vendedor.
+Uma transportadora local, embora o histórico da JS Express conhecido pelo Peek não diga qual é em Portugal. Se o registo trouxer um código postal internacional válido, o Peek consulta os CTT; se trouxer um código próprio reconhecido em Portugal, como da CTT Express, mostra-o. Caso contrário, pergunta ao vendedor.
 
 ### Quem devo contactar se a minha encomenda JS Express não chegar?
 

@@ -147,6 +147,9 @@ absolute or from `android/`:
 The app uses Play App Signing: Google holds the key that signs the app phones install, and ours is only the upload
 key, which Google can replace if it is lost.
 
+The bundle has no language splits, so each install from Google Play carries every language rather than the phone's
+alone: the words the app takes from Material are read in the app's language, which needn't be one of the phone's.
+
 Before a bundle goes to Google Play, open the APK built with it on an emulator or phone (`assemblePlayRelease`
 copies it to `outputs/apk/release` too):
 

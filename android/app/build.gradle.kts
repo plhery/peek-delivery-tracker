@@ -129,6 +129,14 @@ android {
         includeInApk = false
     }
 
+    // Every language in each install from Google Play: the words the app takes from Material come in the app's language
+    // (ui/AppEnvironment.kt), which needn't be one of the phone's, whose words alone Play would otherwise install.
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
     signingConfigs {
         uploadKey?.let { key ->
             create("upload") {

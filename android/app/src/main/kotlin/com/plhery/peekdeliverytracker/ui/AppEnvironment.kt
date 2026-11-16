@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import com.plhery.peekdeliverytracker.core.AppClock
@@ -68,12 +69,13 @@ fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
 @Composable
 fun appLanguageResources(): Resources {
     val context = LocalContext.current
+    val resources = LocalResources.current
     val configuration = LocalConfiguration.current
     val language = LocalLanguage.current
-    return remember(context, configuration, language) {
+    return remember(context, resources, configuration, language) {
         val phone = configuration.locales[0]
         if (phone != null && AppLanguage.fromTag(phone.toLanguageTag()) == language) {
-            context.resources
+            resources
         } else {
             // With its likely region: a language alone takes Material's pseudo-locale (en-XC) before its own words.
             val locale = ULocale.addLikelySubtags(ULocale.forLocale(language.locale)).toLocale()

@@ -447,7 +447,7 @@ struct ParcelDetailView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(localizer.text(parcel.refusedPostcode == nil ? "detail.postcodeNotVerified" : "detail.postcodeRefused",
                                             ["carrier": carrier.displayName, "postcode": postcode]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         if parcel.archivedAt == nil, editable {
                             Button(localizer.text("detail.editPostcode")) { carrierEditor = CarrierEditorRequest() }
@@ -459,7 +459,7 @@ struct ParcelDetailView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(localizer.text("detail.postcodeShowsMore",
                                             ["carrier": catalog.info(for: parcel.carrier, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         Button(localizer.text("detail.inputNeededAction")) { carrierEditor = CarrierEditorRequest() }
                             .font(.caption.weight(.semibold))
@@ -468,7 +468,7 @@ struct ParcelDetailView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(localizer.text("detail.phoneDigitsShowsMore",
                                             ["carrier": catalog.info(for: parcel.carrier, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         Button(localizer.text("detail.phoneDigitsAction")) { carrierEditor = CarrierEditorRequest() }
                             .font(.caption.weight(.semibold))
@@ -487,28 +487,28 @@ struct ParcelDetailView: View {
                 if !parcel.isArchived, parcel.awaitingHandover() {
                     Text(localizer.text("parcel.awaitingHandover",
                                         ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
                 if parcel.scheduledDelivery {
                     Text(localizer.text("parcel.scheduledDelivery",
                                         ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
                 if !parcel.isArchived, parcel.heldReturn {
                     Text(localizer.text("parcel.returnUnderWay",
                                         ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
                 if let ahead = parcel.writtenAheadBy, let note = parcel.writtenAheadNoteKey {
                     Text(localizer.text(note,
                                         ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if let waits = carrierWaits(parcel) {
@@ -520,7 +520,7 @@ struct ParcelDetailView: View {
                     ParcelFlag(text: localizer.text("attention.generated"), symbol: "exclamationmark.triangle")
                     Text(localizer.text("link.generated",
                                         ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 ExperimentalJourneyRail(stage: parcel.currentStage, tint: branding.ink.opacity(0.45), compact: true)
@@ -587,7 +587,7 @@ struct ParcelDetailView: View {
             if !catalog.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.amazonShippingHistoryExpired {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(localizer.text(parcel.amazonShippingHistoryExpired ? "add.amazonHistoryExpired" : catalog.trackingHintKey(for: parcel.activeTrackingCarrier), ["carrier": carrier.displayName]))
-                        .font(.footnote).foregroundStyle(.secondary)
+                        .font(.footnote).foregroundStyle(Brand.secondaryText)
                     if editable, !catalog.requiresAmazonAccount(parcel.activeTrackingCarrier) && !parcel.amazonShippingHistoryExpired {
                         Button(localizer.text("detail.changeCarrier")) { carrierEditor = CarrierEditorRequest() }
                             .font(.footnote).foregroundStyle(branding.ink)
@@ -723,11 +723,11 @@ struct ParcelDetailView: View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: "info.circle")
                 .font(.system(size: 17))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 3) {
                 Text(localizer.text("link.carrierSays", ["carrier": carrier])).font(.footnote.weight(.semibold))
-                Text(verbatim: "“\(words)”").font(.footnote).foregroundStyle(.secondary)
+                Text(verbatim: "“\(words)”").font(.footnote).foregroundStyle(Brand.secondaryText)
             }
             .fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -751,7 +751,7 @@ struct ParcelDetailView: View {
                         .accessibilityHidden(true)
                 }
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(localizer.text("detail.pickupPoint")).font(.caption).foregroundStyle(.secondary)
+                    Text(localizer.text("detail.pickupPoint")).font(.caption).foregroundStyle(Brand.secondaryText)
                     Text(point.name).font(.callout.weight(.semibold))
                     if let address = point.address {
                         Text(address).font(.footnote)
@@ -825,7 +825,7 @@ struct ParcelDetailView: View {
 
     private func shipmentFact(_ key: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(localizer.text(key)).font(.caption2).foregroundStyle(.secondary)
+            Text(localizer.text(key)).font(.caption2).foregroundStyle(Brand.secondaryText)
             Text(value).font(.footnote).fixedSize(horizontal: false, vertical: true)
         }
     }
@@ -862,7 +862,7 @@ struct ParcelDetailView: View {
                                 .frame(width: 44, height: 44).contentShape(Rectangle())
                         }
                     }
-                    .buttonStyle(.plain).foregroundStyle(.secondary)
+                    .buttonStyle(.plain).foregroundStyle(Brand.secondaryText)
                     .accessibilityLabel(localizer.text(copiedNumber == entry.number ? "detail.copied" : "detail.copyTracking")
                         + (numbers.count > 1 ? " — " + parcel.trackingNumberLabel(entry, localizer: localizer) : ""))
                 }
@@ -884,7 +884,7 @@ struct ParcelDetailView: View {
                     Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular))
                     if let role {
                         Spacer(minLength: 4)
-                        Text(role).font(.caption2).foregroundStyle(.secondary)
+                        Text(role).font(.caption2).foregroundStyle(Brand.secondaryText)
                     }
                 }
                 .font(.caption)
@@ -1308,10 +1308,10 @@ struct ChangeCarrierView: View {
                         "number": CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
                     ]))
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                 }
 
-                Section(localizer.text("add.carrier")) {
+                Section {
                     NavigationLink {
                         CarrierPickerView(
                             selection: chosenCarrier,
@@ -1350,7 +1350,9 @@ struct ChangeCarrierView: View {
                         "carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName,
                     ]))
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
+                } header: {
+                    Text(localizer.text("add.carrier")).foregroundStyle(Brand.secondaryText)
                 }
 
                 if !requirements.isEmpty {
@@ -1360,17 +1362,18 @@ struct ChangeCarrierView: View {
                         }
                     } footer: {
                         if let help = requirementsHelp {
-                            Text(help)
+                            Text(help).foregroundStyle(Brand.secondaryText)
                         }
                     }
                 }
 
                 if let request = providerRequest, !request.inCarrierField {
                     Section {
-                        TextField(localizer.text("add.requirement.dpdPostcode"), text: $providerPostcode)
+                        TextField(placeholder: localizer.text("add.requirement.dpdPostcode"), text: $providerPostcode)
                             .textContentType(.postalCode).textInputAutocapitalization(.characters).autocorrectionDisabled()
                     } footer: {
                         Text(localizer.text("detail.providerInputNeeded", ["provider": request.provider]))
+                            .foregroundStyle(Brand.secondaryText)
                     }
                 }
                 if let errorMessage {
@@ -1604,11 +1607,7 @@ struct ChangeCarrierView: View {
     private func requirementField(_ requirement: CarrierRequirement) -> some View {
         switch requirement.field {
         case .trackingURL:
-            TextField(
-                localizer.text("add.requirement.trackingUrl"),
-                text: $trackingURL,
-                axis: .vertical
-            )
+            TextField(placeholder: localizer.text("add.requirement.trackingUrl"), text: $trackingURL, axis: .vertical)
             .drawnField()
             .keyboardType(.URL)
             .textInputAutocapitalization(.never)
@@ -1621,7 +1620,7 @@ struct ChangeCarrierView: View {
                     }
                 }
                 TextField(
-                    localizer.text("add.requirement.dpdPostcode"),
+                    placeholder: localizer.text("add.requirement.dpdPostcode"),
                     text: Binding(get: { deliveryPostcode }, set: { deliveryPostcode = $0 })
                 )
                 .drawnField()
@@ -1639,7 +1638,7 @@ struct ChangeCarrierView: View {
                 if requirement.isOptional {
                     Text(localizer.text("add.optional"))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                 }
             }
             // An optional postcode is offered, never filled in for the reader.
@@ -1652,7 +1651,7 @@ struct ChangeCarrierView: View {
         case .phoneDigits:
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 // Number keys, and no content type: nothing on the iPhone fills in these digits.
-                TextField(localizer.text("add.requirement.phoneDigits"), text: $phoneDigits)
+                TextField(placeholder: localizer.text("add.requirement.phoneDigits"), text: $phoneDigits)
                     .drawnField()
                     .font(.body.monospacedDigit())
                     .keyboardType(requirement.inputMode == "numeric" ? .numberPad : .asciiCapable)
@@ -1663,7 +1662,7 @@ struct ChangeCarrierView: View {
                 if requirement.isOptional {
                     Text(localizer.text("add.optional"))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                 }
             }
         }
@@ -1725,9 +1724,9 @@ struct ParcelJournal: View {
                     Text(localizer.text("timeline.label")).font(.subheadline.weight(.semibold))
                     Spacer(minLength: 4)
                     Text(localizer.text(eventCount == 1 ? "detail.updateCount.one" : "detail.updateCount.many", ["count": eventCount]))
-                        .font(.caption2).foregroundStyle(.secondary)
+                        .font(.caption2).foregroundStyle(Brand.secondaryText)
                     Image(systemName: showingFullJourney ? "chevron.up" : "chevron.down")
-                        .font(.system(size: 10, weight: .regular)).foregroundStyle(.secondary)
+                        .font(.system(size: 10, weight: .regular)).foregroundStyle(Brand.secondaryText)
                 }
                 .frame(minHeight: 36)
                 .contentShape(Rectangle())
@@ -1745,12 +1744,12 @@ struct ParcelJournal: View {
                 }
                 if groups.isEmpty {
                     Text(localizer.text(syncing ? "timeline.emptySyncing" : "timeline.empty"))
-                        .font(.footnote).foregroundStyle(.secondary).padding(.vertical, 12)
+                        .font(.footnote).foregroundStyle(Brand.secondaryText).padding(.vertical, 12)
                 }
                 ForEach(groups) { group in
                     Text(group.label)
                         .font(.caption2).textCase(.uppercase).tracking(1)
-                        .foregroundStyle(.secondary).padding(.top, 22).padding(.bottom, 13)
+                        .foregroundStyle(Brand.secondaryText).padding(.top, 22).padding(.bottom, 13)
                         .accessibilityAddTraits(.isHeader)
                     VStack(alignment: .leading, spacing: 18) {
                         ForEach(group.entries) { entry in
@@ -1878,7 +1877,7 @@ private struct JournalEventRow: View {
                 // A copy's words stay in sight, in case it was a scan of its own.
                 ForEach(relayed, id: \.self) { line in
                     Text(line)
-                        .font(.caption2).foregroundStyle(.secondary)
+                        .font(.caption2).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -1924,7 +1923,7 @@ private struct PlannedSteps: View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
                 .font(.caption2).textCase(.uppercase).tracking(1)
-                .foregroundStyle(.secondary).padding(.top, 22).padding(.bottom, 4)
+                .foregroundStyle(Brand.secondaryText).padding(.top, 22).padding(.bottom, 4)
                 .accessibilityAddTraits(.isHeader)
             Text(note)
                 .font(.caption2).foregroundStyle(Brand.secondaryText)
@@ -2071,7 +2070,7 @@ struct AutomaticCarrierNotice: View {
                     Text(localizer.text("parcel.autoChangedCarrier", [
                         "carrier": CarrierCatalog.shared.info(for: from, language: localizer.language).displayName,
                     ]))
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.caption).foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -2096,11 +2095,11 @@ struct ParcelQuietNote: View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: "hourglass")
                 .font(.system(size: 17))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
                 Text(localizer.text("link.quiet", ["carrier": carrier]) + abroad)
-                    .font(.footnote).foregroundStyle(.secondary)
+                    .font(.footnote).foregroundStyle(Brand.secondaryText)
                 if let help {
                     Link(destination: help.url) {
                         HStack(spacing: 6) {

@@ -188,14 +188,14 @@ struct MenuBarPanel: View {
         if followsParcels {
             Text(localizer.text("app.onTheWaySection"))
                 .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .padding(.horizontal, 9)
                 .padding(.top, 3)
                 .padding(.bottom, 4)
                 .accessibilityAddTraits(.isHeader)
             if parcels.isEmpty {
                 Text(localizer.text("app.noneOnWay"))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .padding(.horizontal, 9)
                     .padding(.vertical, 3)
             }
@@ -289,7 +289,11 @@ private struct MenuBarItem<Label: View>: View {
                 .padding(.horizontal, 9)
                 .padding(.vertical, 3)
                 .frame(maxWidth: .infinity, minHeight: 22, alignment: .leading)
-                .foregroundStyle(highlighted ? AnyShapeStyle(Color.white) : isEnabled ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary))
+                // Its quieter words are the app's secondary grey, and white over the highlight.
+                .foregroundStyle(
+                    highlighted ? AnyShapeStyle(Color.white) : isEnabled ? AnyShapeStyle(.primary) : AnyShapeStyle(.tertiary),
+                    highlighted ? AnyShapeStyle(Color.white.opacity(0.85)) : isEnabled ? AnyShapeStyle(Brand.secondaryText) : AnyShapeStyle(.tertiary)
+                )
                 .background(
                     highlighted ? Color(nsColor: .selectedContentBackgroundColor) : .clear,
                     in: RoundedRectangle(cornerRadius: 5, style: .continuous)

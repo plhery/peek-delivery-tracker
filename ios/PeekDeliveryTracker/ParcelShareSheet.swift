@@ -162,7 +162,7 @@ struct ParcelShareSheet: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .disabled(model.working)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.horizontal, 2)
@@ -221,7 +221,7 @@ struct ParcelShareSheet: View {
                 } else {
                     Text(localizer.text("share.pending"))
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -257,7 +257,7 @@ struct ParcelShareSheet: View {
                     if let value {
                         Text(value)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                             .lineLimit(2)
                     }
                 }
@@ -265,7 +265,7 @@ struct ParcelShareSheet: View {
                 HStack(spacing: 0) {
                     Image(systemName: symbol)
                         .font(.system(size: 16))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .frame(width: 22)
                         .padding(.trailing, 12)
                         .accessibilityHidden(true)
@@ -277,7 +277,7 @@ struct ParcelShareSheet: View {
                         Spacer(minLength: 10)
                         Text(value)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                             .lineLimit(1)
                             .truncationMode(.tail)
                     }
@@ -309,7 +309,7 @@ struct ParcelShareSheet: View {
             }
             Text(localizer.text("share.gift.private"))
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(14)
@@ -318,7 +318,7 @@ struct ParcelShareSheet: View {
 
     private func wordsField(_ label: String, _ which: WordsField, @ViewBuilder field: () -> some View) -> some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(label).font(.caption).foregroundStyle(.secondary).accessibilityHidden(true)
+            Text(label).font(.caption).foregroundStyle(Brand.secondaryText).accessibilityHidden(true)
             field()
                 .font(.subheadline)
                 .focused($writing, equals: which)
@@ -421,7 +421,7 @@ private struct SharePreviewCard: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(localizer.text(wrapped ? "share.preview.wrapped" : "share.preview.title"))
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 2)
             HStack(alignment: .center, spacing: 12) {

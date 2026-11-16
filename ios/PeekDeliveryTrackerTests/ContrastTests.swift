@@ -52,10 +52,14 @@ final class ContrastTests: XCTestCase {
                           shown(Brand.background, appearances[0].traits).luminance)
         for (appearance, traits) in appearances {
             let page = shown(Brand.background, traits)
+            let paper = shown(Brand.paper, traits)
             let sheet = shown(Brand.sheet, traits)
-            // The deliveries' counts stand in a capsule of the secondary label at 9% on the page.
-            let grounds = [("page", page), ("paper", shown(Brand.paper, traits)), ("cream", shown(Brand.cream, traits)),
+            // The deliveries' counts stand in a capsule of the secondary label at 9% on the page, and a notice is its tint
+            // at 9% on the paper.
+            let grounds = [("page", page), ("paper", paper), ("cream", shown(Brand.cream, traits)),
                            ("count's capsule", shown(Color(uiColor: .secondaryLabel), over: page, opacity: 0.09, traits)),
+                           ("notice", shown(Brand.accent, over: paper, opacity: 0.09, traits)),
+                           ("warning notice", shown(.orange, over: paper, opacity: 0.09, traits)),
                            ("sheet", sheet), ("sheet's row", shown(Brand.raised, traits)),
                            ("sheet's control", shown(Brand.sheetControl, traits)),
                            ("sheet's button", shown(Brand.sheetButton, over: sheet, traits))]
@@ -64,6 +68,34 @@ final class ContrastTests: XCTestCase {
                 let measured = ratio(shown(Brand.secondaryText, over: ground, traits), ground)
                 XCTAssertGreaterThanOrEqual(measured, 4.5, "on the \(name), \(appearance)")
             }
+        }
+    }
+
+    /// The ink's quieter shade, as in the name's tagline, which stands on the first open's DHL card as its globe turns
+    /// under it: land is the card's ink at 10%, and a country on the route its ink at 17% over that.
+    func testSoftInkReadsOnThePagePaperCreamSheetsAndTheFirstOpensCard() {
+        let dhl = CarrierVisualIdentity.of(.dhl, catalog: CarrierCatalog(cacheURL: nil), language: .en)
+        for (appearance, traits) in appearances {
+            let card = shown(dhl.surface, traits)
+            let land = shown(dhl.ink, over: card, opacity: 0.10, traits)
+            let grounds = [("page", shown(Brand.background, traits)), ("paper", shown(Brand.paper, traits)),
+                           ("cream", shown(Brand.cream, traits)), ("sheet", shown(Brand.sheet, traits)),
+                           ("sheet's row", shown(Brand.raised, traits)), ("first open's card", card),
+                           ("first open's land", land), ("first open's route", shown(dhl.ink, over: land, opacity: 0.17, traits))]
+            for (name, ground) in grounds {
+                let measured = ratio(shown(Brand.inkSoft, traits), ground)
+                XCTAssertGreaterThanOrEqual(measured, 4.5, "on the \(name), \(appearance)")
+            }
+        }
+    }
+
+    /// A widget, which can't reach the app's palette, writes its quieter words in the app's grey.
+    func testTheWidgetsGreyIsTheApps() {
+        for (scheme, traits) in [(ColorScheme.light, appearances[0].traits), (.dark, appearances[1].traits)] {
+            let (widget, app) = (shown(DeliveryWidgetCardColors.secondary(scheme), traits), shown(Brand.secondaryText, traits))
+            XCTAssertEqual(widget.red, app.red, accuracy: 0.0005, "\(scheme)")
+            XCTAssertEqual(widget.green, app.green, accuracy: 0.0005, "\(scheme)")
+            XCTAssertEqual(widget.blue, app.blue, accuracy: 0.0005, "\(scheme)")
         }
     }
 

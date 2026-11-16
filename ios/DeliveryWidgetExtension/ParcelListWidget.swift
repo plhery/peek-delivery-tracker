@@ -350,7 +350,7 @@ private struct ParcelListSteps: View {
                                 .fixedSize()
                         }
                         if let place = step.place {
-                            Text(place).font(.caption2).foregroundStyle(.secondary).lineLimit(1)
+                            Text(place).font(.caption2).foregroundStyle(.widgetSecondary).lineLimit(1)
                         }
                     }
                     .padding(.bottom, index < shown.count - 1 ? 9 : 0)
@@ -407,7 +407,7 @@ private struct ParcelPass: View {
     var body: some View {
         let colored = renderingMode == .fullColor
         let surface = parcel.card.map { DeliveryWidgetCardColors.color($0.surface, scheme) } ?? Color.primary.opacity(0.08)
-        let ink = parcel.card.map { DeliveryWidgetCardColors.color($0.ink, scheme) } ?? Color.secondary
+        let ink = parcel.card.map { DeliveryWidgetCardColors.color($0.ink, scheme) } ?? (colored ? DeliveryWidgetCardColors.secondary(scheme) : Color.secondary)
         let line = parcel.listLine
         VStack(alignment: .leading, spacing: 1) {
             HStack(alignment: .center, spacing: 6) {
@@ -570,7 +570,7 @@ private struct ParcelSections: View {
                 .lineLimit(1)
             Text("\(count)")
                 .font(.caption2.monospacedDigit())
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.widgetSecondary)
                 .padding(.horizontal, 5)
                 .padding(.vertical, 1)
                 .background(Color.primary.opacity(0.09), in: Capsule())
@@ -609,7 +609,7 @@ private struct ParcelListMore: View {
         Link(destination: DeliveryWidgetList.link) {
             Text(copy.text("widget.listMore.many", count: count))
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.widgetSecondary)
                 .lineLimit(1)
                 .padding(.leading, leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -702,7 +702,7 @@ private struct ParcelListStatus: View {
             }
         }
         .lineLimit(1)
-        .foregroundStyle(parcel.section == "attention" ? AnyShapeStyle(DeliveryWidgetCardColors.warning(scheme)) : AnyShapeStyle(.secondary))
+        .foregroundStyle(parcel.section == "attention" ? AnyShapeStyle(DeliveryWidgetCardColors.warning(scheme)) : AnyShapeStyle(.widgetSecondary))
     }
 }
 
@@ -795,7 +795,7 @@ private struct ParcelListState: View {
                 .layoutPriority(1)
             Text(description)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.widgetSecondary)
                 .lineLimit(family == .systemSmall ? 3 : 2)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)

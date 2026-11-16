@@ -29,7 +29,7 @@ struct NotificationPromptView: View {
                         .accessibilityAddTraits(.isHeader)
                     Text(localizer.text("notifications.prompt.description"))
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -127,7 +127,7 @@ struct NotificationSettingsView: View {
             VStack(alignment: .leading, spacing: 24) {
                 SettingsGroup {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text(systemStatusText).font(.subheadline).foregroundStyle(.secondary)
+                        Text(systemStatusText).font(.subheadline).foregroundStyle(Brand.secondaryText)
                         if store.notificationStatus == .denied && !store.isDemo {
                             Button(localizer.text("native.openSettings"), systemImage: "gear") {
                                 #if os(macOS)
@@ -165,11 +165,11 @@ struct NotificationSettingsView: View {
                                 HStack(alignment: .top, spacing: 12) {
                                     Image(systemName: draft.preset == option ? "largecircle.fill.circle" : "circle")
                                         .font(.system(size: 16, weight: .regular))
-                                        .foregroundStyle(draft.preset == option ? settingsGreen : .secondary)
+                                        .foregroundStyle(draft.preset == option ? settingsGreen : Brand.secondaryText)
                                         .padding(.top, 2)
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(localizer.text(option.titleKey)).font(.subheadline)
-                                        Text(localizer.text(option.descriptionKey)).font(.caption).foregroundStyle(.secondary)
+                                        Text(localizer.text(option.descriptionKey)).font(.caption).foregroundStyle(Brand.secondaryText)
                                     }
                                     Spacer(minLength: 0)
                                 }
@@ -211,7 +211,7 @@ struct NotificationSettingsView: View {
                         }
                     )
                 }
-                Text(localizer.text("notifications.schedule")).font(.caption).foregroundStyle(.secondary)
+                Text(localizer.text("notifications.schedule")).font(.caption).foregroundStyle(Brand.secondaryText)
             }
             .padding(24)
             .frame(maxWidth: 520)
@@ -364,7 +364,7 @@ struct DeliveryEmailSettings: View {
     private func quietLink(_ key: String) -> some View {
         Text(localizer.text(key)).font(.caption)
             .underline(color: Color(uiColor: .tertiaryLabel))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Brand.secondaryText)
             .fixedSize(horizontal: false, vertical: true)
             .frame(minHeight: 44)
             .contentShape(Rectangle())
@@ -599,7 +599,7 @@ struct AccountView: View {
         VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 5) {
                 Text(localizer.text("link.account.title")).font(.headline)
-                Text(localizer.text("link.keep.body")).font(.subheadline).foregroundStyle(.secondary)
+                Text(localizer.text("link.keep.body")).font(.subheadline).foregroundStyle(Brand.secondaryText)
             }
             .fixedSize(horizontal: false, vertical: true)
             Button {
@@ -634,7 +634,7 @@ struct AccountView: View {
                 .background(Brand.color(light: "#F7EFC9", dark: "#49452A"), in: RoundedRectangle(cornerRadius: 12))
             VStack(alignment: .leading, spacing: 4) {
                 Text(session.user?.email ?? localizer.text("app.demo")).font(.subheadline.weight(.medium)).textSelection(.enabled)
-                if !store.isDemo { Text(localizer.text("account.signedIn")).font(.caption).foregroundStyle(.secondary) }
+                if !store.isDemo { Text(localizer.text("account.signedIn")).font(.caption).foregroundStyle(Brand.secondaryText) }
             }
         }
         .padding(.bottom, 2)
@@ -644,7 +644,7 @@ struct AccountView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 Text(store.isGuest ? localizer.text("native.guest.kept") : session.user?.email ?? localizer.text("app.demo"))
-                    .font(.subheadline).foregroundStyle(.secondary)
+                    .font(.subheadline).foregroundStyle(Brand.secondaryText)
                 accountData
             }
             .buttonStyle(.plain)
@@ -829,7 +829,7 @@ private struct SettingsRow: View {
         HStack(spacing: 11) {
             if let symbol, !stacked {
                 Image(systemName: symbol).font(.system(size: 15, weight: .light))
-                    .foregroundStyle(.secondary).frame(width: 17)
+                    .foregroundStyle(Brand.secondaryText).frame(width: 17)
             }
             VStack(alignment: .leading, spacing: 4) {
                 Text(title).font(.subheadline).foregroundStyle(Brand.ink)
@@ -840,7 +840,7 @@ private struct SettingsRow: View {
                         .lineLimit(oneWord ? 1 : nil).minimumScaleFactor(oneWord ? 0.5 : 1)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                if let detail { Text(detail).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
+                if let detail { Text(detail).font(.caption).foregroundStyle(Brand.secondaryText).fixedSize(horizontal: false, vertical: true) }
             }
             Spacer(minLength: 4)
             if !stacked, let value, !value.isEmpty { Text(value).font(.caption).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.trailing) }
@@ -928,7 +928,7 @@ private struct SettingsPickerRow<Value: Hashable, Options: View>: View {
 
     private var picker: some View {
         Picker(title, selection: $selection, content: options)
-            .labelsHidden().pickerStyle(.menu).tint(.secondary)
+            .labelsHidden().pickerStyle(.menu).tint(Brand.secondaryText)
     }
 }
 
@@ -978,7 +978,7 @@ private struct SettingsAppearancePicker: View {
                                 miniature(option).frame(width: 60, height: 43)
                             }
                             Text(localizer.text(option.titleKey)).font(.caption)
-                                .foregroundStyle(appearance == option ? Brand.ink : .secondary)
+                                .foregroundStyle(appearance == option ? Brand.ink : Brand.secondaryText)
                         }
                         .padding(.vertical, 10)
                         .frame(maxWidth: .infinity)
@@ -1087,7 +1087,7 @@ private struct GeneralSettings: View {
                 if login == .requiresApproval {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(localizer.text("settings.openAtLoginApproval"))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         Button(localizer.text("native.openSettings")) { SMAppService.openSystemSettingsLoginItems() }
                     }

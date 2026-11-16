@@ -83,7 +83,7 @@ struct ParcelAlertSwitches: View {
             }
             Text(localizer.text("email.parcel.note", ["place": localizer.deliveryUpdatesPlace]))
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 2)
             doneButton
@@ -137,13 +137,13 @@ struct ParcelAlertSwitches: View {
                 if !dynamicTypeSize.isAccessibilitySize {
                     Image(systemName: symbol)
                         .font(.system(size: 16))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .frame(width: 22)
                         .accessibilityHidden(true)
                 }
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title).font(.subheadline.weight(.semibold))
-                    Text(hint).font(.caption).foregroundStyle(.secondary)
+                    Text(hint).font(.caption).foregroundStyle(Brand.secondaryText)
                 }
                 .fixedSize(horizontal: false, vertical: true)
             }
@@ -265,7 +265,7 @@ struct DeliveryEmailOffer: View {
                     .accessibilityAddTraits(.isHeader)
                 Text(localizer.text("email.offer.body", ["email": address]))
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                 if phase == .failed {
                     Text(localizer.text("email.setting.failed"))
                         .font(.caption)
@@ -314,7 +314,7 @@ struct DeliveryEmailOffer: View {
                 .font(.subheadline.weight(.medium))
                 .padding(.horizontal, 14)
                 .frame(minHeight: 44)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .contentShape(Rectangle())
         }
         .buttonStyle(TactileButtonStyle())

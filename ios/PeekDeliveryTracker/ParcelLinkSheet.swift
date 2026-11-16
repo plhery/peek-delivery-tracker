@@ -204,7 +204,7 @@ struct ParcelLinkSheet: View {
     private func hint(_ text: String) -> some View {
         Text(text)
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Brand.secondaryText)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity)
@@ -271,7 +271,7 @@ struct ParcelLinkSheet: View {
                     Text(localizer.text("link.already.title")).font(.subheadline.weight(.semibold))
                     if let name {
                         Text(localizer.text("link.already.body", ["name": name]))
-                            .font(.footnote).foregroundStyle(.secondary)
+                            .font(.footnote).foregroundStyle(Brand.secondaryText)
                     }
                 }
                 .fixedSize(horizontal: false, vertical: true)
@@ -328,7 +328,7 @@ struct ParcelLinkSheet: View {
                 .accessibilityAddTraits(.isHeader)
             Text(localizer.text(body))
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
             Button(localizer.text("common.close")) { links.close() }
                 .buttonStyle(.borderedProminent)
                 .tint(Brand.accent)
@@ -345,11 +345,11 @@ struct ParcelLinkSheet: View {
         VStack(spacing: 12) {
             Image(systemName: failure == .offline ? "wifi.exclamationmark" : "exclamationmark.circle")
                 .font(.system(size: 34, weight: .light))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .accessibilityHidden(true)
             Text(localizer.text(failure.messageKey))
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
             Button(localizer.text("app.tryAgain")) {
                 Task { await refresh() }
             }
@@ -534,32 +534,32 @@ private struct SharedParcelCard: View {
                             if let pickedUpAt { Text(localizer.text("parcel.pickedUpAt", ["place": pickedUpAt])) }
                             if let deliveryLine { Text(deliveryLine) }
                         }
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they
                     // hand it over.
                     if !gift, parcel.awaitingHandover() {
                         Text(localizer.text("parcel.awaitingHandover",
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                     // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
                     if !gift, parcel.scheduledDelivery {
                         Text(localizer.text("parcel.scheduledDelivery",
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                     // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
                     if !gift, parcel.heldReturn {
                         Text(localizer.text("parcel.returnUnderWay",
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                     // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
                     if !gift, let ahead = parcel.writtenAheadBy, let note = parcel.writtenAheadNoteKey {
                         Text(localizer.text(note,
                                             ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                 }
                 .multilineTextAlignment(arrived ? .center : .leading)
@@ -779,7 +779,7 @@ private struct GiftParcelCard: View {
                         .foregroundStyle(tone)
                 }
                 if let deliveryLine {
-                    Text(deliveryLine).font(.caption).foregroundStyle(.secondary)
+                    Text(deliveryLine).font(.caption).foregroundStyle(Brand.secondaryText)
                 }
             }
             .multilineTextAlignment(.center)
@@ -816,7 +816,7 @@ private struct GiftSurprise: View {
             Spacer(minLength: 0)
         }
         .font(.footnote)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Brand.secondaryText)
         .padding(.horizontal, 6)
     }
 }
@@ -860,8 +860,8 @@ private struct GiftNote: View {
                             .padding(.bottom, 12)
                     }
                     HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Image(systemName: "gift").foregroundStyle(.secondary).accessibilityHidden(true)
-                        (Text(localizer.text("share.gift.inside") + " ").foregroundStyle(.secondary)
+                        Image(systemName: "gift").foregroundStyle(Brand.secondaryText).accessibilityHidden(true)
+                        (Text(localizer.text("share.gift.inside") + " ").foregroundStyle(Brand.secondaryText)
                             + Text(inside).fontWeight(.semibold))
                     }
                     .font(.footnote)
@@ -899,11 +899,11 @@ private struct SharedImportCharges: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(localizer.text("detail.importCharges")).font(.caption2).foregroundStyle(.secondary)
+            Text(localizer.text("detail.importCharges")).font(.caption2).foregroundStyle(Brand.secondaryText)
             Text(charges.text).font(.footnote).fixedSize(horizontal: false, vertical: true)
             if charges.payableOnline && asksForNumber {
                 Text(localizer.text("detail.importChargesAskNumber"))
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.caption).foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 4)
             }
@@ -947,7 +947,7 @@ private struct SharedParcelNumber: View {
                                 .font(.system(size: 14, weight: .regular))
                                 .frame(width: 44, height: 44).contentShape(Rectangle())
                         }
-                        .buttonStyle(.plain).foregroundStyle(.secondary)
+                        .buttonStyle(.plain).foregroundStyle(Brand.secondaryText)
                         .accessibilityLabel(localizer.text(copiedNumber == entry.number ? "detail.copied" : "detail.copyTracking")
                             + (numbers.count > 1 ? " — " + parcel.trackingNumberLabel(entry, localizer: localizer) : ""))
                     }
@@ -970,7 +970,7 @@ private struct SharedParcelNumber: View {
                         .accessibilityHidden(true)
                     if let role {
                         Spacer(minLength: 4)
-                        Text(role).font(.caption2).foregroundStyle(.secondary)
+                        Text(role).font(.caption2).foregroundStyle(Brand.secondaryText)
                     }
                 }
                 .font(.caption)
@@ -987,7 +987,7 @@ private struct SharedParcelNumber: View {
 
     private func row(title: String, number: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(title).font(.caption2).foregroundStyle(.secondary)
+            Text(title).font(.caption2).foregroundStyle(Brand.secondaryText)
             Text(number)
                 .font(.system(.caption, design: .monospaced))
                 .fixedSize(horizontal: false, vertical: true)

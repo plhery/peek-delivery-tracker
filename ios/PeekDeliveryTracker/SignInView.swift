@@ -265,7 +265,7 @@ private struct WelcomeView: View {
                     if invitation == nil {
                         Text(localizer.text("arrival.welcomeSubtitle"))
                             .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 18)
@@ -286,7 +286,7 @@ private struct WelcomeView: View {
                                     .anchorPreference(key: ArrivalParcelFrame.self, value: .bounds) { [.welcome: $0] }
                                 Text(copy.tapToOpen)
                                     .font(.subheadline.weight(.medium))
-                                    .foregroundStyle(.secondary)
+                                    .foregroundStyle(Brand.secondaryText)
                                     .multilineTextAlignment(.center)
                                     .frame(minHeight: 44)
                                     .opacity(opening ? 0 : 1)
@@ -304,7 +304,7 @@ private struct WelcomeView: View {
                     if let invitation {
                         if invitation.loading { ProgressView().padding(.top, 12) }
                         if let error = invitation.errorKey {
-                            Text(localizer.text(error)).font(.footnote).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                            Text(localizer.text(error)).font(.footnote).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.center)
                             if error != "friends.inviteUnavailable" {
                                 Button(localizer.text("common.retry")) { Task { await invitation.loadPreview(session: session) } }.padding(.top, 8)
                             }
@@ -432,7 +432,7 @@ struct SignInView: View {
                                 Image(systemName: "arrow.up.right").font(.caption)
                             }
                             .font(.subheadline.weight(.medium))
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                             .frame(minHeight: 44)
                         }
                         .buttonStyle(TactileButtonStyle())
@@ -483,12 +483,12 @@ struct SignInView: View {
             Group {
                 if let invitation, invitation.nickname == nil {
                     if let error = invitation.errorKey {
-                        Text(localizer.text(error)).font(.footnote).foregroundStyle(.secondary)
+                        Text(localizer.text(error)).font(.footnote).foregroundStyle(Brand.secondaryText)
                         Button(localizer.text("common.retry")) { Task { await invitation.loadPreview(session: session) } }
                     } else { ProgressView() }
                 } else if !configured {
                     if invitation == nil { configurationNotice }
-                    else { Text(localizer.text("auth.configTitle")).font(.subheadline).foregroundStyle(.secondary) }
+                    else { Text(localizer.text("auth.configTitle")).font(.subheadline).foregroundStyle(Brand.secondaryText) }
                 } else if step == .code {
                     codeForm
                 } else {
@@ -512,26 +512,26 @@ struct SignInView: View {
             Text(text).font(.caption2).fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
-        .foregroundStyle(.secondary)
-        .tint(Color(uiColor: .secondaryLabel))
+        .foregroundStyle(Brand.secondaryText)
+        .tint(Brand.secondaryText)
     }
 
     private var privacyNotice: some View {
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: "lock.fill")
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .frame(width: 20, height: 20)
             VStack(alignment: .leading, spacing: 4) {
                 Text(localizer.text("auth.privacy"))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                 Link(destination: session.configuration.privacyURL) {
                     Text(localizer.text("auth.readPrivacy"))
                         .font(.caption)
                         .underline(color: Color(uiColor: .tertiaryLabel))
                 }
-                .tint(Color(uiColor: .secondaryLabel))
+                .tint(Brand.secondaryText)
             }
             Spacer(minLength: 0)
         }
@@ -623,7 +623,7 @@ struct SignInView: View {
             if socialSignInEnabled && emailFormVisible {
                 HStack {
                     Rectangle().frame(height: 0.5)
-                    Text(localizer.text("auth.or")).font(.caption).foregroundStyle(.secondary)
+                    Text(localizer.text("auth.or")).font(.caption).foregroundStyle(Brand.secondaryText)
                     Rectangle().frame(height: 0.5)
                 }
                 .foregroundStyle(.secondary.opacity(0.35))
@@ -669,9 +669,9 @@ struct SignInView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(localizer.text(invitation == nil ? "auth.emailIntroShort" : "auth.emailIntro"))
                 .font(.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
             SignInField(label: localizer.text("auth.email")) {
-                TextField(localizer.text("auth.email"), text: $email, prompt: Text(verbatim: "you@example.com"))
+                TextField(localizer.text("auth.email"), text: $email, prompt: Text(verbatim: "you@example.com").foregroundStyle(Brand.secondaryText))
                     .drawnField()
                     .textContentType(.emailAddress)
                     .keyboardType(.emailAddress)
@@ -697,7 +697,7 @@ struct SignInView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(localizer.text("auth.codeIntro", ["email": email.cleanedEmail]))
                 .font(.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
             SignInField(label: localizer.text("auth.code")) {
                 TextField(localizer.text("auth.code"), text: $code, prompt: Text(verbatim: ""))
                     .drawnField()
@@ -946,7 +946,7 @@ private struct FriendInvitationAcceptanceView: View {
                         .accessibilityAddTraits(.isHeader)
                 } else if let name = invitation.nickname { FriendPostcardView(nickname: name) }
                 if let error = invitation.errorKey ?? model.errorKey, !creatingProfile, outcomeMessage == nil, invitation.receipt == nil {
-                    Text(localizer.text(error)).font(.footnote).foregroundStyle(.secondary)
+                    Text(localizer.text(error)).font(.footnote).foregroundStyle(Brand.secondaryText)
                     if error != "friends.inviteUnavailable" {
                         Button(localizer.text("common.retry")) { Task { await invitation.loadPreview(session: session); await checkInvitation() } }
                     }
@@ -955,7 +955,7 @@ private struct FriendInvitationAcceptanceView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack { Text(localizer.text("friends.yourSharing")).font(.subheadline.weight(.semibold)); Spacer(); Button(localizer.text("friends.editSharing")) { editingProfile = true; creatingProfile = true; model.errorKey = nil }.font(.caption).disabled(joining) }
                         FriendSharingPreviewView(friend: model.snapshot?.ownCard ?? FriendsStore.ownCard(parcels: parcels.parcels, profile: profile))
-                        Label(localizer.text("friends.privacy"), systemImage: "lock").font(.caption2).foregroundStyle(.secondary)
+                        Label(localizer.text("friends.privacy"), systemImage: "lock").font(.caption2).foregroundStyle(Brand.secondaryText)
                     }
                 }
                 if outcomeMessage != nil {
@@ -986,7 +986,7 @@ private struct FriendInvitationAcceptanceView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         if let error = model.errorKey {
-                            Text(localizer.text(error)).font(.footnote).foregroundStyle(.secondary)
+                            Text(localizer.text(error)).font(.footnote).foregroundStyle(Brand.secondaryText)
                         }
                         FriendsProfileForm(profile: editingProfile ? model.snapshot?.profile : nil, busy: joining, submitKey: editingProfile ? "friends.save" : "friends.joinAndAccept") { profile in
                             Task { if editingProfile { await saveSharing(profile) } else { await accept(profile: profile) } }
@@ -1074,7 +1074,7 @@ private struct AuthenticationLanguageMenu: View {
                     .font(.caption.weight(.semibold))
             }
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Brand.secondaryText)
             .padding(.horizontal, 10)
             .frame(minHeight: 44)
             .contentShape(Rectangle())

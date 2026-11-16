@@ -17,9 +17,12 @@ enum Brand {
     static let accentBright = accent
     static let onAccent = Color(hex: "#20251E")
     static let ink = color(light: "#20251E", dark: "#FAF6EB")
-    static let inkSoft = color(light: "#657060", dark: "#C2BAAA")
-    /// The system's secondary grey, a little darker in light and lighter in dark: it reads at 4.5:1 or more on the page,
-    /// the paper, the cream, a sheet's grounds and every carrier's card (`ContrastTests`).
+    /// The ink's quieter shade, as in the name's tagline: 4.5:1 or more on the page, the paper, the cream and the first
+    /// open's card (`ContrastTests`).
+    static let inkSoft = color(light: "#485242", dark: "#CEC6B6")
+    /// Every quieter word's grey, in place of the system's secondary and placeholder greys, which read under 4.5:1 in
+    /// light: it reads at 4.5:1 or more on the page, the paper, the cream, a sheet's grounds and every carrier's card
+    /// (`ContrastTests`).
     static let secondaryText = color(light: "#606065", dark: "#BCBCC2")
     static let cream = color(light: "#F0F0E9", dark: "#292620")
     static let paper = color(light: "#FFFFFF", dark: "#1F1C17")
@@ -208,6 +211,14 @@ struct AccountToolbarItem: ToolbarContent {
         #else
         ToolbarItem(placement: .topBarTrailing) { AccountToolbarButton(action: action) }
         #endif
+    }
+}
+
+extension TextField where Label == Text {
+    /// A field whose placeholder is its title in the secondary grey, which reads at 4.5:1: the system's placeholder
+    /// is fainter than that.
+    init(placeholder title: String, text: Binding<String>, axis: Axis = .horizontal) {
+        self.init(title, text: text, prompt: Text(title).foregroundStyle(Brand.secondaryText), axis: axis)
     }
 }
 
@@ -623,7 +634,7 @@ struct CountPill: View {
     var body: some View {
         Text("\(count)")
             .font(.caption2.weight(.bold).monospacedDigit())
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Brand.secondaryText)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .background(.secondary.opacity(0.1), in: Capsule())
@@ -655,7 +666,7 @@ struct NoticeBanner: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(title).font(.subheadline.weight(.semibold))
                 if !message.isEmpty {
-                    Text(message).font(.caption).foregroundStyle(.secondary)
+                    Text(message).font(.caption).foregroundStyle(Brand.secondaryText)
                 }
                 if let actionTitle, let action {
                     Button(actionTitle, action: action)

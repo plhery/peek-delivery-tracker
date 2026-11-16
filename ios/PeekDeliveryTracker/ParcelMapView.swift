@@ -242,7 +242,7 @@ struct ParcelMapScreen: View {
                     }
                     .font(.caption)
                     .monospacedDigit()
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                 }
             }
         }
@@ -276,13 +276,13 @@ struct ParcelMapScreen: View {
                 .font(.caption2.weight(.medium))
                 .textCase(.uppercase)
                 .tracking(1.4)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
             Text(name)
                 .font(.title2.weight(.semibold))
                 .lineLimit(lines)
             Text("\(TrackingLocation.flag(place.country)) \(country)")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .lineLimit(lines)
         }
         .frame(maxWidth: .infinity, alignment: alignment == .leading ? .leading : .trailing)
@@ -306,7 +306,7 @@ struct ParcelMapScreen: View {
                 .font(.caption.weight(.medium))
                 .padding(.horizontal, 12)
                 .frame(maxWidth: wide ? .infinity : nil, minHeight: 36, alignment: .leading)
-                .foregroundStyle(selected ? Brand.paper : Color.secondary)
+                .foregroundStyle(selected ? Brand.paper : Brand.secondaryText)
                 .background(selected ? Brand.ink : Color.clear, in: Capsule())
                 .contentShape(Capsule())
         }

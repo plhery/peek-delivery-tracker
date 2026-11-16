@@ -57,6 +57,22 @@ enum DeliveryWidgetCardColors {
 
     /// The app's warning colour (`Brand.warning`), which a parcel that needs the reader writes its stage in.
     static func warning(_ scheme: ColorScheme) -> Color { color(["#963E19", "#FFB184"], scheme) }
+
+    /// The app's quieter words' grey (`Brand.secondaryText`), which reads at 4.5:1 or more on the page and the cards.
+    static func secondary(_ scheme: ColorScheme) -> Color { color(["#606065", "#BCBCC2"], scheme) }
+}
+
+/// Quieter words in the app's grey on a widget in its colours. A tinted or clear widget draws the system's secondary
+/// in its own way, and keeps it.
+struct DeliveryWidgetSecondary: ShapeStyle {
+    func resolve(in environment: EnvironmentValues) -> AnyShapeStyle {
+        environment.widgetRenderingMode == .fullColor
+            ? AnyShapeStyle(DeliveryWidgetCardColors.secondary(environment.colorScheme)) : AnyShapeStyle(.secondary)
+    }
+}
+
+extension ShapeStyle where Self == DeliveryWidgetSecondary {
+    static var widgetSecondary: DeliveryWidgetSecondary { DeliveryWidgetSecondary() }
 }
 
 /// A card's colour, with its route drawn across the top as wide as the card. A tinted, clear or inactive desktop

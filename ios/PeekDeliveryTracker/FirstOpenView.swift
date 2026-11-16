@@ -516,7 +516,7 @@ struct FirstOpenView: View {
                 // many as it needs.
                 Text(localizer.text("add.trackingPlaceholder"))
                     .font(large ? .title3 : .body)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(Brand.secondaryText)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, minHeight: large ? 64 : 58, alignment: .leading)
@@ -701,7 +701,7 @@ struct CarrierFleet: View {
         VStack(spacing: 12) {
             Text(localizer.text("landing.ribbon.caption", ["first": name(.swissPost), "last": name(.usps)]))
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
             // The line is wider than the screen and must not widen it. It is as tall as the names.
@@ -781,7 +781,7 @@ struct DeliveriesEmptyState: View {
                 .accessibilityAddTraits(.isHeader)
             Text(localizer.text("app.emptyDescription"))
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 8)
@@ -812,7 +812,7 @@ struct DeliveriesEmptyState: View {
         let parts = localizer.text("landing.pip.hint", ["action": "\u{0}"]).components(separatedBy: "\u{0}")
         return (Text(parts.first ?? "") + Text(action).fontWeight(.semibold).foregroundColor(Brand.ink) + Text(parts.count > 1 ? parts[1] : ""))
             .font(.footnote)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Brand.secondaryText)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .accessibilityHidden(true)
@@ -868,7 +868,7 @@ struct DeviceAccountRow: View {
                         .foregroundStyle(Brand.ink)
                     Text(localizer.text("native.guest.kept"))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                 }
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
@@ -909,7 +909,7 @@ struct FriendsSignedOutView: View {
                     Text(localizer.text("friends.title")).font(.system(size: dynamicTypeSize.isAccessibilitySize ? titleSize : 26, weight: .semibold))
                     Text(localizer.text("friends.introSummary"))
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .multilineTextAlignment(.center)
                     Button { session.showSignIn() } label: {
                         Text(localizer.text("arrival.signInTitle")).frame(maxWidth: .infinity, minHeight: 46)

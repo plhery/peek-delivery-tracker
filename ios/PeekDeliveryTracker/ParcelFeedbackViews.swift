@@ -503,7 +503,7 @@ private struct ParcelFeedbackWordsSheet: View {
             if noteLeft <= ParcelFeedbackRequest.noteWarning {
                 Text(localizer.text("feedback.noteLeft.many", ["count": noteLeft]))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 2)
             }
@@ -683,7 +683,7 @@ private struct FeedbackField<Input: View>: View {
             // The field says its own label aloud.
             Text(label)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 2)
                 .accessibilityHidden(true)
@@ -753,7 +753,7 @@ private struct FeedbackPromise: View {
     var body: some View {
         Text(text)
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Brand.secondaryText)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity)

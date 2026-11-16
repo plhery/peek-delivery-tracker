@@ -148,7 +148,7 @@ struct DemoModeBar: View {
             if named {
                 Text(localizer.text("app.demo"))
                     .font(.caption.weight(.medium))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
             }
             Spacer(minLength: 8)
             Text(localizer.text("native.exitDemo"))
@@ -193,7 +193,7 @@ struct DeliveriesFoot: View {
             }
         }
         .font(.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Brand.secondaryText)
         .buttonStyle(.plain)
         .frame(maxWidth: .infinity)
         .accessibilityIdentifier("deliveries.foot")
@@ -888,7 +888,7 @@ private struct DeliveryListView: View {
                         ProgressView().controlSize(.large)
                         Text(localizer.text("app.opening"))
                             .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                     }
                 }
             }
@@ -1068,8 +1068,8 @@ private struct DeliveryListView: View {
     /// One quiet field, as the system's own search fields are: no box around it, its tools inside it.
     private var searchControls: some View {
         HStack(spacing: 7) {
-            Image(systemName: "magnifyingglass").foregroundStyle(.secondary).accessibilityHidden(true)
-            TextField(localizer.text("view.searchPlaceholder"), text: $query)
+            Image(systemName: "magnifyingglass").foregroundStyle(Brand.secondaryText).accessibilityHidden(true)
+            TextField(placeholder: localizer.text("view.searchPlaceholder"), text: $query)
                 .drawnField()
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
@@ -1110,9 +1110,9 @@ private struct DeliveryListView: View {
             } else if !session.isGuest, !hasCustomView, store.errorMessage == nil, store.parcels.allSatisfy(\.isDelivered) {
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark").font(.system(size: 36, weight: .ultraLight))
-                        .foregroundStyle(.secondary).padding(.bottom, 6).accessibilityHidden(true)
+                        .foregroundStyle(Brand.secondaryText).padding(.bottom, 6).accessibilityHidden(true)
                     Text(localizer.text("app.allArrived")).font(.title2.weight(.semibold))
-                    Text(localizer.text("app.allArrivedDescription")).font(.subheadline).foregroundStyle(.secondary)
+                    Text(localizer.text("app.allArrivedDescription")).font(.subheadline).foregroundStyle(Brand.secondaryText)
                     Button(localizer.text("app.trackAnother")) { sharedDraft = nil; showingAdd = true }
                         .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent)
                         .padding(.top, 6)
@@ -1278,7 +1278,7 @@ private struct DeliveryListView: View {
                 Button(localizer.text("view.clearAll")) { clearFilters() }
                     .font(.caption.weight(.semibold))
                     .buttonStyle(.plain)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .padding(.horizontal, 5)
             }
         }
@@ -1949,7 +1949,7 @@ private struct ExperimentalParcelPassCard: View {
                 AutomaticCarrierNotice(parcel: parcel)
                 if let delivering = parcel.deliveringCarrier {
                     Text(localizer.text(parcel.deliveryLineKey, ["carrier": catalog.info(for: delivering, language: localizer.language).displayName]))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if flag == nil || parcel.hasCarrierUpdate {
@@ -2907,20 +2907,20 @@ private struct ExperimentalArchiveShelf: View {
                 HStack(spacing: 9) {
                     Image(systemName: "archivebox")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .frame(width: 22)
 
                     Text(localizer.text("app.archived"))
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
 
                     Spacer(minLength: 6)
 
-                    Text("(\(parcels.count))").font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+                    Text("(\(parcels.count))").font(.caption.monospacedDigit()).foregroundStyle(Brand.secondaryText)
 
                     Image(systemName: "chevron.down")
                         .font(.caption.weight(.regular))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .rotationEffect(.degrees(isExpanded ? 180 : 0))
                 }
                 .padding(.vertical, 9)
@@ -3015,7 +3015,7 @@ private struct ExperimentalArchivedParcelRow: View {
                         .lineLimit(large ? nil : 1)
                     Text("\(catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language).displayName) · \(localizer.parcelStatus(parcel))")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .lineLimit(large ? nil : 1)
                     if large { archivedDate }
                 }
@@ -3046,7 +3046,7 @@ private struct ExperimentalArchivedParcelRow: View {
         if let date = parcel.experimentalArchivedDisplayDate {
             Text(localizer.shortDate(date))
                 .font(.caption.weight(.semibold).monospacedDigit())
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .lineLimit(1)
         }
     }

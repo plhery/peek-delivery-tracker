@@ -42,14 +42,14 @@ struct FriendsView: View {
                     }
                     if let data = model.snapshot {
                         if let friendID = activity.focusID, checkedPresentation == activity.presentationID, !data.friends.contains(where: { $0.id == friendID }) {
-                            Text(text("friends.friendUnavailable")).font(.footnote).foregroundStyle(.secondary)
+                            Text(text("friends.friendUnavailable")).font(.footnote).foregroundStyle(Brand.secondaryText)
                         }
                         if data.profile != nil { circle(data) }
                         else {
                             VStack(spacing: 22) {
                                 FriendsPostagePair().padding(.bottom, 12)
                                 Text(text("friends.title")).font(.system(size: dynamicTypeSize.isAccessibilitySize ? titleSize : 26, weight: .semibold))
-                                Text(text("friends.introSummary")).font(.subheadline).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                                Text(text("friends.introSummary")).font(.subheadline).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.center)
                                 Button { panel = .create } label: { Text(text("friends.join")).frame(maxWidth: .infinity, minHeight: 46) }
                                     .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent)
                             }.padding(.vertical, 70).frame(maxWidth: .infinity)
@@ -130,10 +130,10 @@ struct FriendsView: View {
                         FriendAvatarView(name: profile.nickname, tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface).frame(width: 31, height: 38)
                         VStack(alignment: .leading, spacing: 3) {
                             Text(text("friends.yourSharing")).font(.subheadline.weight(.medium)).foregroundStyle(Brand.ink)
-                            DottedLine(parts: [text(profile.shareStats ? "friends.shareStats" : "friends.privateStats")] + (profile.shareArrival ? [text("friends.shareArrival")] : [])).font(.caption2).foregroundStyle(.secondary)
+                            DottedLine(parts: [text(profile.shareStats ? "friends.shareStats" : "friends.privateStats")] + (profile.shareArrival ? [text("friends.shareArrival")] : [])).font(.caption2).foregroundStyle(Brand.secondaryText)
                         }
                         Spacer(minLength: 6)
-                        Image(systemName: "slider.horizontal.3").font(.footnote).foregroundStyle(.secondary)
+                        Image(systemName: "slider.horizontal.3").font(.footnote).foregroundStyle(Brand.secondaryText)
                     }.padding(.bottom, 18)
                     Divider()
                 }.frame(maxWidth: .infinity, alignment: .leading)
@@ -154,7 +154,7 @@ struct FriendsView: View {
                 ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12))
                 : AnyLayout(HStackLayout(alignment: .center))
             header {
-                HStack(alignment: .firstTextBaseline, spacing: 4) { Text(text("friends.circle")).font(.subheadline.weight(.semibold)); Text(data.friends.count.formatted()).font(.caption2).foregroundStyle(.secondary) }
+                HStack(alignment: .firstTextBaseline, spacing: 4) { Text(text("friends.circle")).font(.subheadline.weight(.semibold)); Text(data.friends.count.formatted()).font(.caption2).foregroundStyle(Brand.secondaryText) }
                 if !dynamicTypeSize.isAccessibilitySize { Spacer(minLength: 8) }
                 Button { noticeKey = nil; panel = .invite } label: { Label(text("friends.invite"), systemImage: "plus").font(.caption.weight(.medium)).padding(.horizontal, 10).frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, minHeight: 36) }
                     .buttonStyle(.plain).foregroundStyle(Brand.onAccent).background(Brand.accent, in: RoundedRectangle(cornerRadius: 11))
@@ -182,7 +182,7 @@ struct FriendsView: View {
         case .invite:
             if session.isDemo {
                 FriendsInvitationParcel(nickname: model.snapshot?.profile?.nickname ?? text("friends.you"))
-                Text(text("friends.demoInvites")).font(.subheadline).foregroundStyle(.secondary)
+                Text(text("friends.demoInvites")).font(.subheadline).foregroundStyle(Brand.secondaryText)
                 Button { panel = nil; model.errorKey = nil; session.showWelcome() } label: { Text(text("welcome.signInInstead")).frame(maxWidth: .infinity, minHeight: 46) }
                     .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent).accessibilityIdentifier("friends.demoSignIn")
             } else {
@@ -348,7 +348,7 @@ struct FriendsProfileForm: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(localizer.text("friends.nickname")).font(.subheadline.weight(.semibold))
-                TextField(localizer.text("friends.nicknamePlaceholder"), text: $name).textContentType(.nickname).padding(14).background(Brand.raised, in: RoundedRectangle(cornerRadius: 14))
+                TextField(placeholder: localizer.text("friends.nicknamePlaceholder"), text: $name).textContentType(.nickname).padding(14).background(Brand.raised, in: RoundedRectangle(cornerRadius: 14))
                     .drawnField()
                     .focused($nameFocused).submitLabel(.done).onSubmit { nameFocused = false }
                     .onChange(of: name) { _, next in
@@ -357,7 +357,7 @@ struct FriendsProfileForm: View {
                     }
             }
             VStack(alignment: .leading, spacing: 8) {
-                Text(localizer.text("friends.preview")).font(.subheadline).foregroundStyle(.secondary)
+                Text(localizer.text("friends.preview")).font(.subheadline).foregroundStyle(Brand.secondaryText)
                 FriendSharingPreviewView(friend: FriendsStore.ownCard(parcels: parcels.parcels, profile: FriendProfile(nickname: value.nickname.isEmpty ? localizer.text("friends.you") : value.nickname, shareStats: stats, shareArrival: arrival)))
             }
             VStack(spacing: 0) {
@@ -368,7 +368,7 @@ struct FriendsProfileForm: View {
                 Divider()
             }
 
-            Label(localizer.text("friends.privacy"), systemImage: "lock").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            Label(localizer.text("friends.privacy"), systemImage: "lock").font(.caption).foregroundStyle(Brand.secondaryText).fixedSize(horizontal: false, vertical: true)
             Button { save(value) } label: { Text(localizer.text(submitKey ?? (profile == nil ? "friends.join" : "friends.save"))).frame(maxWidth: .infinity, minHeight: 46) }
                 .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent).disabled(busy || value.nickname.isEmpty)
         }.disabled(busy)
@@ -386,7 +386,7 @@ struct FriendsProfileForm: View {
         Toggle(isOn: value) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(localizer.text(title)).font(.footnote.weight(.medium))
-                if title == "friends.shareStats" { Text(localizer.text(detail)).font(.caption2).foregroundStyle(.secondary) }
+                if title == "friends.shareStats" { Text(localizer.text(detail)).font(.caption2).foregroundStyle(Brand.secondaryText) }
             }
         }.rowToggle().toggleStyle(.switch).tint(ExperimentalPalette.delivered).padding(.vertical, 10).accessibilityHint(localizer.text(detail))
     }
@@ -441,7 +441,7 @@ private struct FriendsInvitationView: View {
     @State private var previousInvitationsCancelled = false
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            DottedLine(parts: localizer.text("friends.inviteExpiry").components(separatedBy: " · ")).font(.caption2).foregroundStyle(.secondary)
+            DottedLine(parts: localizer.text("friends.inviteExpiry").components(separatedBy: " · ")).font(.caption2).foregroundStyle(Brand.secondaryText)
             FriendsInvitationParcel(nickname: nickname)
             if code.isEmpty {
                 if !requestedInvitation || busy { ProgressView().frame(maxWidth: .infinity, minHeight: 44).accessibilityLabel(localizer.text("friends.link")) }
@@ -465,8 +465,8 @@ private struct FriendsInvitationView: View {
                                 Task { if await act(FriendsActionRequest(action: .revokePreviousInvites, code: code)) != nil { previousInviteCount = 0; previousInvitationsCancelled = true } }
                             }.frame(minHeight: 30)
                         }
-                    }.font(.caption).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
-                } label: { Text(localizer.text("friends.manageLinks")).font(.caption).foregroundStyle(.secondary) }
+                    }.font(.caption).foregroundStyle(Brand.secondaryText).frame(maxWidth: .infinity, alignment: .leading)
+                } label: { Text(localizer.text("friends.manageLinks")).font(.caption).foregroundStyle(Brand.secondaryText) }
             }
         }.disabled(busy).task { guard !requestedInvitation else { return }; requestedInvitation = true; await createInvitation() }
     }
@@ -539,39 +539,39 @@ private struct FriendDetailView: View {
                         Button { stamp = value } label: {
                             VStack(spacing: 10) {
                                 PassportSeal(symbol: value == .ten ? "10" : value == .theRegular ? "25" : value == .busyDoorstep ? "parcels" : value.symbol, tint: stampTint(value), surface: stampSurface(value), earned: earned).frame(width: 50, height: 64)
-                                Text(localizer.text(value.titleKey)).font(.caption2).foregroundStyle(earned ? Brand.ink : Brand.ink.opacity(0.6)).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+                                Text(localizer.text(value.titleKey)).font(.caption2).foregroundStyle(earned ? Brand.ink : Brand.secondaryText).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                             }.frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
                         }.buttonStyle(PassportPressStyle()).accessibilityLabel(stampLabel(value, earned: earned, count: stats.deliveredCount))
                             .popover(isPresented: Binding(get: { stamp == value }, set: { if !$0 { stamp = nil } })) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(localizer.text(value.titleKey)).font(.headline)
-                                    Text(localizer.text(value.explanationKey) + progress(value, earned: earned, count: stats.deliveredCount)).font(.subheadline).foregroundStyle(.secondary)
+                                    Text(localizer.text(value.explanationKey) + progress(value, earned: earned, count: stats.deliveredCount)).font(.subheadline).foregroundStyle(Brand.secondaryText)
                                 }.fixedSize(horizontal: false, vertical: true).frame(idealWidth: 260, maxWidth: 280, alignment: .leading).padding(20).foregroundStyle(Brand.ink).presentationBackground(Brand.raised).presentationCompactAdaptation(.popover)
                             }
                     }
                 }
                 if FriendStamp.allCases.filter({ !stats.stamps.contains($0) }).count > 3 {
-                    Button(localizer.text(showAllStamps ? "passport.showLess" : "passport.showAll")) { showAllStamps.toggle() }.font(.caption).foregroundStyle(.secondary).frame(minHeight: 44).buttonStyle(PassportPressStyle())
+                    Button(localizer.text(showAllStamps ? "passport.showLess" : "passport.showAll")) { showAllStamps.toggle() }.font(.caption).foregroundStyle(Brand.secondaryText).frame(minHeight: 44).buttonStyle(PassportPressStyle())
                 }
-            } else { Label(localizer.text("friends.privateStats"), systemImage: "lock").font(.footnote).foregroundStyle(.secondary) }
+            } else { Label(localizer.text("friends.privateStats"), systemImage: "lock").font(.footnote).foregroundStyle(Brand.secondaryText) }
             Divider()
             DisclosureGroup {
                 if confirming {
                     VStack(alignment: .leading, spacing: 12) {
                         Text(localizer.text("friends.removeTitle", ["name": friend.nickname])).font(.headline)
-                        Text(localizer.text("friends.removeDetail")).font(.subheadline).foregroundStyle(.secondary)
+                        Text(localizer.text("friends.removeDetail")).font(.subheadline).foregroundStyle(Brand.secondaryText)
                         Button(localizer.text("friends.remove"), action: remove).buttonStyle(.bordered).disabled(busy)
                         Button(localizer.text("common.cancel")) { confirming = false }.disabled(busy)
                     }
-                } else { Button(localizer.text("friends.remove")) { confirming = true }.font(.footnote).foregroundStyle(.secondary).frame(minHeight: 36).disabled(busy) }
-            } label: { Text(localizer.text("friends.manageFriendship")).font(.caption).foregroundStyle(.secondary) }
+                } else { Button(localizer.text("friends.remove")) { confirming = true }.font(.footnote).foregroundStyle(Brand.secondaryText).frame(minHeight: 36).disabled(busy) }
+            } label: { Text(localizer.text("friends.manageFriendship")).font(.caption).foregroundStyle(Brand.secondaryText) }
         }.sensoryFeedback(.impact(weight: .light, intensity: 0.6), trigger: stamp)
     }
     private func visibleStamps(_ earned: [FriendStamp]) -> [FriendStamp] {
         let upcoming = Set(FriendStamp.allCases.filter { !earned.contains($0) }.prefix(3))
         return showAllStamps ? FriendStamp.allCases : FriendStamp.allCases.filter { earned.contains($0) || upcoming.contains($0) }
     }
-    private func metric(_ value: String, _ title: String) -> some View { VStack(alignment: .leading, spacing: 4) { Text(value).font(.title2.weight(.semibold)); Text(title).font(.caption2).foregroundStyle(.secondary) }.frame(maxWidth: .infinity, alignment: .leading) }
+    private func metric(_ value: String, _ title: String) -> some View { VStack(alignment: .leading, spacing: 4) { Text(value).font(.title2.weight(.semibold)); Text(title).font(.caption2).foregroundStyle(Brand.secondaryText) }.frame(maxWidth: .infinity, alignment: .leading) }
     private func stampTint(_ stamp: FriendStamp) -> Color { switch stamp { case .first, .aroundWorld, .rightNextDoor, .homeForHolidays: ExperimentalPalette.delivered; case .ten, .theRegular: ExperimentalPalette.lilac; case .connected, .acrossBorders, .pickedUp: ExperimentalPalette.transit; case .express, .busyDoorstep: ExperimentalPalette.pickup; case .worthTheWait: ExperimentalPalette.ochre } }
     private func stampSurface(_ stamp: FriendStamp) -> Color { switch stamp { case .first, .aroundWorld, .rightNextDoor, .homeForHolidays: ExperimentalPalette.deliveredSurface; case .ten, .theRegular: ExperimentalPalette.lilacSurface; case .connected, .acrossBorders, .pickedUp: ExperimentalPalette.transitSurface; case .express, .busyDoorstep: ExperimentalPalette.pickupSurface; case .worthTheWait: ExperimentalPalette.ochreSurface } }
     /// A stamp is read as Passport reads one: its title, and while it isn't earned, how far along it is, or that it isn't.

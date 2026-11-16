@@ -254,9 +254,9 @@ struct AddParcelView: View {
                     .font(.subheadline.weight(.medium))
                 Text(localizer.text("add.optional"))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
             }
-            TextField(localizer.text("add.contentsPlaceholder"), text: $label)
+            TextField(placeholder: localizer.text("add.contentsPlaceholder"), text: $label)
                 .drawnField()
                 .font(.body)
                 .accessibilityLabel(localizer.text("design.parcelTitle"))
@@ -299,7 +299,7 @@ struct AddParcelView: View {
             TextField(
                 placeholder,
                 text: $trackingInput,
-                prompt: drawsPlaceholder ? Text(placeholder).foregroundStyle(.clear) : nil,
+                prompt: Text(placeholder).foregroundStyle(drawsPlaceholder ? Color.clear : Brand.secondaryText),
                 axis: .vertical
             )
             .drawnField()
@@ -309,7 +309,7 @@ struct AddParcelView: View {
                 if drawsPlaceholder && trackingInput.isEmpty {
                     Text(placeholder)
                         .font(.body)
-                        .foregroundStyle(Color(uiColor: .tertiaryLabel))
+                        .foregroundStyle(Brand.secondaryText)
                         .lineLimit(2)
                         .allowsHitTesting(false)
                         .accessibilityHidden(true)
@@ -439,7 +439,7 @@ struct AddParcelView: View {
             }
         }
         .buttonStyle(.plain)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Brand.secondaryText)
     }
 
     private var carrierFeedback: some View {
@@ -465,14 +465,14 @@ struct AddParcelView: View {
             if !automatic || shippingConfirmed {
                 Text(localizer.text(shippingConfirmed ? (currentVerification?.amazonShippingStatus == .expired ? "add.amazonHistoryExpired" : "add.amazonShippingConfirmed") : catalog.trackingHintKey(for: resolvedCarrier), ["carrier": definition.displayName]))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
             }
             if let known = knownElsewhere {
                 let name = catalog.info(for: known, language: localizer.language).displayName
                 Text(localizer.text("add.carrierKnownElsewhere", ["carrier": name]))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
                 Button(localizer.text("add.useCarrier", ["carrier": name])) {
                     carrierOverride = known
@@ -480,7 +480,7 @@ struct AddParcelView: View {
                 .font(.subheadline)
             }
             if amazonNumber && currentVerification?.amazonShippingStatus == .unavailable {
-                Text(localizer.text("add.amazonCheckUnavailable")).font(.caption).foregroundStyle(.secondary)
+                Text(localizer.text("add.amazonCheckUnavailable")).font(.caption).foregroundStyle(Brand.secondaryText)
                 Button(localizer.text("add.amazonRetry")) {
                     verifiedCarrier = nil
                     lookupAttempt += 1
@@ -507,7 +507,7 @@ struct AddParcelView: View {
             }
             // Someone signed in keeps them together already.
             if store.isGuest {
-                let question = Text(localizer.text("door.several.question")).foregroundStyle(.secondary)
+                let question = Text(localizer.text("door.several.question")).foregroundStyle(Brand.secondaryText)
                 let signIn = Button(localizer.text("door.several.signIn")) {
                     dismiss()
                     session.showSignIn()
@@ -628,7 +628,7 @@ struct AddParcelView: View {
         if !amazonNumber {
             Text(localizer.text(choosingCarrier ? "add.line.choose" : "add.line.change"))
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .underline()
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -639,7 +639,7 @@ struct AddParcelView: View {
         if let detail {
             Text(detail)
                 .font(.caption)
-                .foregroundStyle(choosingCarrier || refused ? ExperimentalPalette.ochre : Color.secondary)
+                .foregroundStyle(choosingCarrier || refused ? ExperimentalPalette.ochre : Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
         }
     }
@@ -652,7 +652,7 @@ struct AddParcelView: View {
                     title: localizer.text("add.requirement.trackingUrl"),
                     help: localizer.text("add.requirement.trackingUrlHelp")
                 ) {
-                    TextField(requirement.placeholder ?? "https://…", text: $trackingURL)
+                    TextField(placeholder: requirement.placeholder ?? "https://…", text: $trackingURL)
                         .drawnField()
                         .font(.body)
                         .keyboardType(.URL)
@@ -692,7 +692,7 @@ struct AddParcelView: View {
                                 }
                                 Divider().padding(.vertical, 12)
                             }
-                            TextField(example ?? "", text: Binding(get: { deliveryPostcode }, set: { deliveryPostcode = $0 }))
+                            TextField(placeholder: example ?? "", text: Binding(get: { deliveryPostcode }, set: { deliveryPostcode = $0 }))
                                 .drawnField()
                                 .font(.body.monospacedDigit())
                                 .keyboardType(requirement.inputMode == "numeric" ? .numberPad
@@ -736,7 +736,7 @@ struct AddParcelView: View {
                         optional: requirement.isOptional
                     ) {
                         // Number keys, and no content type: nothing on the iPhone fills in these digits.
-                        TextField(requirement.placeholder ?? "", text: $phoneDigits)
+                        TextField(placeholder: requirement.placeholder ?? "", text: $phoneDigits)
                             .drawnField()
                             .font(.body.monospacedDigit())
                             .keyboardType(requirement.inputMode == "numeric" ? .numberPad : .asciiCapable)
@@ -756,7 +756,7 @@ struct AddParcelView: View {
                                 .font(.caption)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .accessibilityElement(children: .combine)
                     }
                 }
@@ -777,7 +777,7 @@ struct AddParcelView: View {
                 if optional {
                     Text(localizer.text("add.optional"))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                 }
             }
             field()
@@ -785,7 +785,7 @@ struct AddParcelView: View {
                 .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Brand.sheetLine(0.3), lineWidth: 0.7))
             Text(help)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
         }
     }
@@ -1382,7 +1382,7 @@ struct PostcodeCountryMenu: View {
                 Text(country).fontWeight(.medium)
                 Image(systemName: "chevron.up.chevron.down")
                     .font(.caption2.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
             }
             .foregroundStyle(Brand.ink)
             .padding(inset)
@@ -1616,7 +1616,7 @@ struct ParcelFilterView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(localizer.text("view.status")) {
+                Section {
                     Picker(localizer.text("view.status"), selection: $status) {
                         ForEach(ParcelStatusFilter.allCases) { value in
                             Text(localizer.text(value.localizationKey)).tag(value)
@@ -1624,16 +1624,16 @@ struct ParcelFilterView: View {
                     }
                     .pickerStyle(.inline)
                     .choicesOnly()
-                }
-                Section(localizer.text("view.carrier")) {
+                } header: { Text(localizer.text("view.status")).foregroundStyle(Brand.secondaryText) }
+                Section {
                     Picker(localizer.text("view.carrier"), selection: $carrier) {
                         Text(localizer.text("view.allCarriers")).tag(Optional<CarrierID>.none)
                         ForEach(carriers) { value in
                             Text(catalog.info(for: value, language: localizer.language).displayName).tag(Optional(value))
                         }
                     }
-                }
-                Section(localizer.text("view.sort")) {
+                } header: { Text(localizer.text("view.carrier")).foregroundStyle(Brand.secondaryText) }
+                Section {
                     Picker(localizer.text("view.sort"), selection: $sort) {
                         ForEach(ParcelSort.allCases) { value in
                             Text(localizer.text(value.localizationKey)).tag(value)
@@ -1641,7 +1641,7 @@ struct ParcelFilterView: View {
                     }
                     .pickerStyle(.inline)
                     .choicesOnly()
-                }
+                } header: { Text(localizer.text("view.sort")).foregroundStyle(Brand.secondaryText) }
                 Section {
                     Button(localizer.text("view.clear"), role: .destructive) {
                         status = .all

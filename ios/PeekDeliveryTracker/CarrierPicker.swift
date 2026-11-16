@@ -234,28 +234,32 @@ struct CarrierPickerView: View {
                         Section { automaticRow(automatic) }
                     }
                     ForEach(openingSections) { section in
-                        Section(section.title) {
+                        Section {
                             ForEach(section.carriers) { carrier in row(carrier) }
+                        } header: {
+                            Text(section.title).foregroundStyle(Brand.secondaryText)
                         }
                     }
                     ForEach(letterSections, id: \.letter) { section in
                         Section {
                             ForEach(section.carriers) { carrier in row(carrier) }
                         } header: {
-                            Text(section.letter)
+                            Text(section.letter).foregroundStyle(Brand.secondaryText)
                         }
                         .id(Self.letterID(section.letter))
                     }
                 } else if results.isEmpty {
                     Section {
                         Text(localizer.text("picker.empty", ["query": trimmedQuery]))
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                     }
                 } else {
-                    Section(localizer.text("picker.results.many", ["count": results.count])) {
+                    Section {
                         ForEach(results, id: \.carrier) { result in
                             row(result.carrier, highlight: result.highlight, alias: result.alias)
                         }
+                    } header: {
+                        Text(localizer.text("picker.results.many", ["count": results.count])).foregroundStyle(Brand.secondaryText)
                     }
                 }
             }
@@ -327,7 +331,7 @@ struct CarrierPickerView: View {
                         }
                         Text(automatic.description)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
@@ -379,7 +383,7 @@ struct CarrierPickerView: View {
         if !subtitle.isEmpty {
             Text(subtitle)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
         }
     }
 
@@ -394,7 +398,7 @@ struct CarrierPickerView: View {
     private func tag(_ label: String, found: Bool, wraps: Bool = false) -> some View {
         Text(label)
             .font(.caption2.weight(.semibold))
-            .foregroundStyle(found ? ExperimentalPalette.delivered : Color.secondary)
+            .foregroundStyle(found ? ExperimentalPalette.delivered : Brand.secondaryText)
             .padding(.horizontal, 8)
             .padding(.vertical, 2)
             .background(found ? ExperimentalPalette.deliveredSurface : Brand.cream,

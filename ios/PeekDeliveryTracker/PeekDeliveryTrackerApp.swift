@@ -316,7 +316,7 @@ private struct LaunchView: View {
                         .tint(Brand.ink)
                     Text(localizer.text("auth.loading"))
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                 }
                 .transition(.opacity)
             }

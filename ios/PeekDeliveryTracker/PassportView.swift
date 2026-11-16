@@ -141,7 +141,7 @@ struct PassportView: View {
                                 .frame(width: 50, height: 64)
                             Text(milestone.title)
                                 .font(.caption2)
-                                .foregroundStyle(milestone.earned ? Brand.ink : Brand.ink.opacity(0.6))
+                                .foregroundStyle(milestone.earned ? Brand.ink : Brand.secondaryText)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
                         }
@@ -162,7 +162,7 @@ struct PassportView: View {
                 Button { showAllStamps.toggle() } label: {
                     Text(localizer.text(showAllStamps ? "passport.showLess" : "passport.showAll"))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                         .frame(minHeight: 44, alignment: .leading)
                         .contentShape(Rectangle())
                 }
@@ -186,7 +186,7 @@ struct PassportView: View {
                              explanation: fastestExplanation(stats))
                 }
             } else {
-                Text(copy.waitingForTimes).font(.footnote).foregroundStyle(.secondary)
+                Text(copy.waitingForTimes).font(.footnote).foregroundStyle(Brand.secondaryText)
             }
             Divider().padding(.top, 21)
         }
@@ -201,7 +201,7 @@ struct PassportView: View {
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
                 Text(title)
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
@@ -245,7 +245,7 @@ struct PassportView: View {
                         Spacer(minLength: 8)
                         Text(country.count, format: .number)
                             .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Brand.secondaryText)
                     }
                     .frame(minHeight: 44)
                     .padding(.vertical, 2)
@@ -316,7 +316,7 @@ struct PassportView: View {
     private func explanationBubble(title: String, explanation: String) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title).font(.headline).accessibilityAddTraits(.isHeader)
-            Text(explanation).font(.subheadline).foregroundStyle(.secondary)
+            Text(explanation).font(.subheadline).foregroundStyle(Brand.secondaryText)
         }
         .fixedSize(horizontal: false, vertical: true)
         .frame(idealWidth: 260, maxWidth: 280, alignment: .leading)

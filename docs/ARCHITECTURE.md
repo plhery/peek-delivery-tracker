@@ -737,7 +737,7 @@ it last sent, which it notes on the device.
 The Share extension reads it from the app group. The delivery email is written in the
 language the account's apps last stored with its sign-in, and writes a time and a distance
 as the app last opened does, on its 12- or 24-hour clock and in kilometres or miles. The web
-app and the iPhone and Mac app save those with the account's notification preferences
+app and the iPhone, Mac and Android apps save those with the account's notification preferences
 whenever the preferences they read or save have others; until an app has, the email's
 language decides.
 

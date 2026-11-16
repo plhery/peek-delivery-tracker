@@ -25,6 +25,8 @@ import com.plhery.peekdeliverytracker.core.api.NativePushDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesClock
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesDistance
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalResponse
 import com.plhery.peekdeliverytracker.core.api.OkResponse
@@ -402,9 +404,17 @@ class DeliveryApiClient(
     suspend fun notificationPreferences(): NotificationPreferences =
         request("/api/push/preferences", NotificationPreferences.serializer())
 
-    suspend fun saveNotificationPreferences(value: NotificationPreferences): NotificationPreferences {
+    /**
+     * `markNewUpdates` is the list's mark on parcels with new updates when its switch is what is being saved, and
+     * `clock` and `distance` how this phone writes a time and a distance when they are. Any other save leaves them out,
+     * and the server keeps the account's, sent from this phone or another device.
+     */
+    suspend fun saveNotificationPreferences(
+        value: NotificationPreferences, markNewUpdates: Boolean? = null,
+        clock: NotificationPreferencesClock? = null, distance: NotificationPreferencesDistance? = null,
+    ): NotificationPreferences {
         // Whether the server can email the account is the server's to say.
-        val sent = value.copy(emailAvailable = null)
+        val sent = value.copy(emailAvailable = null, markNewUpdates = markNewUpdates, clock = clock, distance = distance)
         return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", encode(NotificationPreferences.serializer(), sent))
     }
 

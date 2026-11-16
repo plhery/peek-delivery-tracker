@@ -1521,6 +1521,32 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun aLinkFollowedAgainWhileTheServiceIsToldOfAnotherStays() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.pendingForgets = mapOf("22222222222A" to key, "22222222222B" to key)
+        val calls = Calls()
+        val gate = AlertGate()
+        val gated = client(calls, read = { linkId -> PublicParcelResponse(link = link(linkId), parcel = pkg(id)) }).replacing(forget = { linkId, _ ->
+            calls.add("forget $linkId")
+            gate.pass("forget")
+        })
+        val device = device(gated, storage, this)
+
+        val refreshing = launch { device.refresh(all = true) }
+        gate.arrived("forget")
+        val told = calls.all.first().substringAfterLast(" ")
+        val other = if (told == "22222222222A") "22222222222B" else "22222222222A"
+        device.follow(PublicParcelResponse(link = link(other), parcel = pkg(id)), key = key, label = "Lamp")
+        gate.release("forget")
+        refreshing.join()
+
+        assertEquals("The link followed again is not forgotten at the service", listOf("forget $told"), calls.all.filter { it.startsWith("forget") })
+        assertTrue(storage.pendingForgets.isEmpty())
+        assertEquals(1, device.list().size)
+    }
+
+    @Test
     fun aParcelSavedBeforeAnUpdateChangedItsModelIsReadAgainThroughItsKey() = runTest {
         val older = UUID.randomUUID()
         val newer = UUID.randomUUID()

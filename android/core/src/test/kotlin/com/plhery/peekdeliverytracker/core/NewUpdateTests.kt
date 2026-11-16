@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesClock
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesDistance
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.PackageSeenResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -14,18 +16,24 @@ import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.io.IOException
 import java.time.Instant
 import java.util.Locale
 import java.util.UUID
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -56,6 +64,19 @@ class NewUpdateTests {
         val seenCalls = mutableListOf<String>()
         val preferenceSaves = mutableListOf<Boolean?>()
 
+        // The account's other preferences, its clock and units as this phone writes them unless a test says otherwise.
+        var clock: NotificationPreferencesClock? = NotificationPreferencesClock.TwentyFour
+        var distance: NotificationPreferencesDistance? = NotificationPreferencesDistance.Km
+        var keepsUnits = true
+        var emailOnDelivery: Boolean? = null
+        var emailAvailable: Boolean? = null
+
+        /** The calls about the preferences, each its method and what a save sent. */
+        val preferenceCalls = mutableListOf<Pair<String, JsonObject?>>()
+
+        /** Run before each call about the preferences is answered: it may hold the call, or fail it. */
+        var beforePreferences: suspend (HttpRequest) -> Unit = {}
+
         fun parcel() = Parcel(
             id = parcelId, trackingNumber = "TESTPARCEL123789", label = "Synthetic parcel", carrier = CarrierId.Dhl,
             createdAt = "2026-09-07T08:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false, lastSyncedAt = "2026-09-08T10:16:00Z",
@@ -63,10 +84,11 @@ class NewUpdateTests {
         )
 
         private fun preferences() = NotificationPreferences(
-            enabledStages = NotificationPreset.Important.stages, timezone = "Europe/Paris", markNewUpdates = markNewUpdates,
+            enabledStages = NotificationPreset.Important.stages, timezone = "Europe/Paris", emailOnDelivery = emailOnDelivery,
+            emailAvailable = emailAvailable, markNewUpdates = markNewUpdates, clock = clock, distance = distance,
         )
 
-        fun answer(request: HttpRequest): HttpResponse = when {
+        suspend fun answer(request: HttpRequest): HttpResponse = when {
             request.path == "/api/packages" && request.method == "GET" -> json(PackageListResponse(listOf(parcel())))
             request.path == "/api/packages/${parcelId.uuidString}/seen" && request.method == "POST" -> {
                 seenCalls += request.header("Authorization").orEmpty()
@@ -77,15 +99,25 @@ class NewUpdateTests {
                     jsonResponse(200, JsonEncoder.deliveryTracker.encode(PackageSeenResponse.serializer(), PackageSeenResponse(seenNow)).decodeToString())
                 }
             }
-            request.path == "/api/push/preferences" && request.method == "GET" -> preferenceJson()
-            request.path == "/api/push/preferences" && request.method == "PATCH" -> {
-                val sent = request.body?.let { Json.parseToJsonElement(it.decodeToString()).jsonObject }
+            request.path == "/api/push/preferences" && request.method in setOf("GET", "PATCH") -> preferences(request)
+            else -> throw AssertionError("Unexpected request ${request.method} ${request.url}")
+        }
+
+        private suspend fun preferences(request: HttpRequest): HttpResponse {
+            val sent = request.body?.let { Json.parseToJsonElement(it.decodeToString()).jsonObject }
+            preferenceCalls += request.method to sent
+            beforePreferences(request)
+            if (request.method == "PATCH") {
                 val choice = sent?.get("markNewUpdates")?.jsonPrimitive?.boolean
                 preferenceSaves += choice
                 choice?.let { markNewUpdates = it }
-                preferenceJson()
+                sent?.get("emailOnDelivery")?.jsonPrimitive?.boolean?.let { emailOnDelivery = it }
+                if (keepsUnits) {
+                    sent?.get("clock")?.jsonPrimitive?.content?.let { clock = NotificationPreferencesClock.fromRawValue(it) }
+                    sent?.get("distance")?.jsonPrimitive?.content?.let { distance = NotificationPreferencesDistance.fromRawValue(it) }
+                }
             }
-            else -> throw AssertionError("Unexpected request ${request.method} ${request.url}")
+            return preferenceJson()
         }
 
         private fun json(list: PackageListResponse) =
@@ -96,7 +128,9 @@ class NewUpdateTests {
     }
 
     /** A device signed in to the account the server holds, with its own session, settings and cache. */
-    private suspend fun TestScope.signedIn(server: Server, defaults: UserDefaults = MemoryDefaults(), widgetCenter: WidgetCenter? = null): ParcelStore {
+    private suspend fun TestScope.signedIn(
+        server: Server, defaults: UserDefaults = MemoryDefaults(), localizer: Localizer = Localizer(AppLanguage.En), widgetCenter: WidgetCenter? = null,
+    ): ParcelStore {
         val transport = RecordingTransport()
         val session = testSessionStore(configuration, backgroundScope, transport = transport, now = { now })
         val user = AuthUser(id = accountId, email = "reader@example.com", isAnonymous = false)
@@ -107,7 +141,9 @@ class NewUpdateTests {
         transport.handler = { jsonResponse(200, JsonEncoder.deliveryTracker.encode(AuthSession.serializer(), auth).decodeToString()) }
         session.verifyCode(email = "reader@example.com", code = "123456")
         transport.handler = { server.answer(it) }
-        val store = testParcelStore(configuration, session, transport, backgroundScope, defaults, widgetCenter = widgetCenter ?: WidgetCenter {}, now = { now })
+        val store = testParcelStore(
+            configuration, session, transport, backgroundScope, defaults, localizer = localizer, widgetCenter = widgetCenter ?: WidgetCenter {}, now = { now },
+        )
         store.setDeliveryWidgetEnabled(widgetCenter != null)
         store.setDeliveryLiveActivitiesEnabled(false)
         return store
@@ -412,5 +448,122 @@ class NewUpdateTests {
         val parcel = Parcel(shared = publicPackage(newsAt = scanned)).copy(seenAt = opened)
         assertTrue(parcel.hasNewUpdate)
         assertFalse(parcel.marksNewUpdate(MarkNewUpdatesChoice(guestDefaults).enabled.value))
+    }
+    @Test
+    fun aMarkChoiceTheServerCouldNotTakeStandsUntilItIsSaved() = runTest {
+        val server = Server()
+        val store = signedIn(server)
+        store.loadNotificationPreferences()
+        assertTrue(store.markNewUpdatesFlow.value)
+
+        // Switched off while the server cannot take it: the next read, which still says on, leaves it off and saves it.
+        server.beforePreferences = { throw IOException("The Internet connection appears to be offline.") }
+        store.setMarkNewUpdates(false)
+        server.beforePreferences = {}
+        server.preferenceCalls.clear()
+        store.loadNotificationPreferences()
+        assertFalse(store.markNewUpdatesFlow.value)
+        runCurrent()
+        assertEquals(listOf("GET", "PATCH"), server.preferenceCalls.map { it.first })
+        assertEquals(false, server.preferenceCalls.last().second?.get("markNewUpdates")?.jsonPrimitive?.boolean)
+        assertEquals(false, store.notificationPreferences?.markNewUpdates)
+
+        // Saved, it follows the account again.
+        server.markNewUpdates = true
+        store.loadNotificationPreferences()
+        assertTrue(store.markNewUpdatesFlow.value)
+    }
+
+    @Test
+    fun aMarkChoiceMadeWithoutAnAccountGoesToTheAccountSignedInTo() = runTest {
+        val defaults = MemoryDefaults()
+        val guestSession = testSessionStore(configuration, backgroundScope, transport = RecordingTransport(), now = { now })
+        guestSession.bootstrap()
+        val guest = testParcelStore(configuration, guestSession, RecordingTransport(), backgroundScope, defaults, now = { now })
+        assertTrue(guest.isGuest)
+        guest.setMarkNewUpdates(false)
+
+        val server = Server()
+        val store = signedIn(server, defaults)
+        store.loadNotificationPreferences()
+        assertFalse(store.markNewUpdatesFlow.value)
+        runCurrent()
+        assertEquals("PATCH", server.preferenceCalls.last().first)
+        assertEquals(false, server.preferenceCalls.last().second?.get("markNewUpdates")?.jsonPrimitive?.boolean)
+        assertEquals(false, store.notificationPreferences?.markNewUpdates)
+    }
+
+    @Test
+    fun aMarkChoiceWhoseSaveFailsLetsTheReadAlreadyUnderWayLand() = runTest {
+        val server = Server()
+        val store = signedIn(server)
+        // The launch's read is under way when the switch is flipped, and the save's own read of the preferences fails.
+        val held = CompletableDeferred<Unit>()
+        var calls = 0
+        server.beforePreferences = { if (calls++ == 0) held.await() else throw IOException("The Internet connection appears to be offline.") }
+        val reading = launch { store.loadNotificationPreferences() }
+        runCurrent()
+        store.setMarkNewUpdates(false)
+        assertEquals(2, calls)
+        held.complete(Unit)
+        reading.join()
+        assertNotNull("The launch's read lands", store.notificationPreferences)
+        assertFalse("The choice stands until it is saved", store.markNewUpdatesFlow.value)
+    }
+
+    @Test
+    fun theAccountLearnsHowThisPhoneWritesATimeAndADistanceForTheDeliveryEmail() = runTest {
+        val server = Server()
+        server.clock = null
+        server.distance = null
+        server.emailOnDelivery = true
+        server.emailAvailable = true
+        val localizer = Localizer(AppLanguage.En, systemUses24HourTime = true, systemDistanceUnit = DistanceUnit.Kilometres)
+        val store = signedIn(server, localizer = localizer)
+        fun methods() = server.preferenceCalls.map { it.first }
+        fun lastSent(name: String) = server.preferenceCalls.last().second?.get(name)?.jsonPrimitive?.content
+
+        // Read without any: this phone's go to the account, the rest as stored and the email choice left out.
+        store.loadNotificationPreferences()
+        runCurrent()
+        assertEquals(listOf("GET", "PATCH"), methods())
+        assertEquals(setOf("enabledStages", "timezone", "clock", "distance"), server.preferenceCalls.last().second?.keys)
+        assertEquals("24", lastSent("clock"))
+        assertEquals("km", lastSent("distance"))
+        assertEquals(NotificationPreferencesClock.TwentyFour, store.notificationPreferences?.clock)
+
+        // Chosen in Settings: sent at once, both in one save.
+        localizer.clockPreference = ClockPreference.TwelveHour
+        localizer.distancePreference = DistancePreference.Miles
+        runCurrent()
+        assertEquals(listOf("GET", "PATCH", "PATCH"), methods())
+        assertEquals("12", lastSent("clock"))
+        assertEquals("mi", lastSent("distance"))
+        assertEquals(NotificationPreferencesDistance.Mi, store.notificationPreferences?.distance)
+
+        // Another save leaves them out, so the server keeps the account's.
+        store.setEmailOnDelivery(false)
+        assertEquals("PATCH", methods().last())
+        assertNull(lastSent("clock"))
+        assertNull(lastSent("distance"))
+        assertEquals(NotificationPreferencesClock.Twelve, store.notificationPreferences?.clock)
+
+        // Changed since on another device: the next read brings it, and this phone sends its own again.
+        server.clock = NotificationPreferencesClock.TwentyFour
+        store.loadNotificationPreferences()
+        runCurrent()
+        assertEquals(listOf("GET", "PATCH"), methods().takeLast(2))
+        assertEquals("12", lastSent("clock"))
+
+        // A server that does not keep them is not asked again and again.
+        server.keepsUnits = false
+        server.clock = null
+        server.distance = null
+        val before = server.preferenceCalls.size
+        store.loadNotificationPreferences()
+        runCurrent()
+        store.loadNotificationPreferences()
+        runCurrent()
+        assertEquals(listOf("GET", "PATCH", "GET"), methods().drop(before))
     }
 }

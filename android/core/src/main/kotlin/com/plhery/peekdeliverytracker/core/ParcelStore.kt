@@ -7,6 +7,8 @@ import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelsRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesClock
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesDistance
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
@@ -29,6 +31,8 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
@@ -387,8 +391,9 @@ class ParcelStore(
         get() = notificationPreferencesState.value
         private set(value) {
             notificationPreferencesState.value = value
-            // The account's choice, as read or saved, is this phone's from now on (#72).
-            value?.markNewUpdates?.let(::keepMarkNewUpdates)
+            // An account's choice about the list's mark follows it here from its other devices (#72).
+            value?.markNewUpdates?.let(::followMarkNewUpdates)
+            saveShownUnits()
         }
 
     var notificationError: String?
@@ -469,6 +474,15 @@ class ParcelStore(
     /** Counts saved preferences: the answer to a read that began before a save is older than it. */
     private var notificationPreferenceSaves = 0
 
+    /** The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken. */
+    private var markNewUpdatesSaving = 0
+
+    /**
+     * The clock and units sent with the account's preferences and not yet kept, so a server that does not keep them is
+     * not asked again and again.
+     */
+    private var unitsSent: String? = null
+
     // The iPhone's Live Activity generation and pending removal guard the registration of their tokens, which Android,
     // without Live Activities, never makes.
     private var deliveryLiveActivitySystemDisabled = false
@@ -484,6 +498,8 @@ class ParcelStore(
         cacheOwnerId = session.user?.id
         notificationInvitationDismissed = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) } ?: false
         identityObservation = session.identityChanges.sink { resetForSessionChange() }
+        // The delivery email writes a time and a distance as the app does: those chosen in Settings go to the account.
+        scope.launch { combine(localizer.use24HourTimeFlow, localizer.distanceUnitFlow) { _, _ -> }.drop(1).collect { saveShownUnits() } }
     }
 
     private fun resetForSessionChange() {
@@ -497,6 +513,8 @@ class ParcelStore(
         pendingMutations.clear()
         pendingJobIds.clear()
         seenHere.clear()
+        markNewUpdatesSaving = 0
+        unitsSent = null
         nativePushGeneration += 1
         stopDeliveryLiveActivityObservers()
         cacheOwnerId?.let { owner ->
@@ -1430,35 +1448,95 @@ class ParcelStore(
     }
 
     /**
-     * Switches "Mark new updates" (#72) at once on this phone; what was seen is kept either way. An account saves it
-     * with its preferences as stored and this device's time zone; a save that fails leaves the choice here until the
-     * preferences are next read, and the answer to an earlier choice doesn't undo a later one.
+     * Switches "Mark new updates" (#72) at once on this phone; what was seen is kept either way. An account's choice is
+     * saved with its preferences. A choice the account has not taken, made without one or while the server could not
+     * take it, stands on this phone until it is saved, and goes to the account when its preferences are next read.
      */
     suspend fun setMarkNewUpdates(enabled: Boolean) {
         if (markNewUpdatesFlow.value == enabled) return
         keepMarkNewUpdates(enabled)
-        if (!session.isAuthenticated || isDemo || isGuest) return
-        // A read of the preferences that began before the choice is older than it.
-        notificationPreferenceSaves += 1
+        if (isDemo) return
+        markNewUpdatesChoice.unsaved = true
+        saveMarkNewUpdates(enabled)?.join()
+    }
+
+    /** The choices made about "Mark new updates", counted: the answer to an earlier one does not undo a later one. */
+    private var markNewUpdatesChoices = 0
+
+    /**
+     * Saves "Mark new updates" with the account's preferences as stored and this phone's time zone. Taken, the choice
+     * follows the account again.
+     */
+    private fun saveMarkNewUpdates(enabled: Boolean): Job? {
+        if (!session.isAuthenticated || isDemo || isGuest) return null
+        // A read of the preferences that lands before the answer leaves the choice standing (followMarkNewUpdates), and
+        // the answer's count turns away one that lands after it. Counting here too would turn away the launch's read
+        // when this save fails.
         markNewUpdatesChoices += 1
+        markNewUpdatesSaving += 1
         val choice = markNewUpdatesChoices
         val generation = session.generation
-        try {
-            val stored = notificationPreferences ?: api.notificationPreferences()
-            if (generation != session.generation) return
-            var saved = api.saveNotificationPreferences(stored.copy(markNewUpdates = enabled, timezone = ZoneId.systemDefault().id))
-            if (generation != session.generation) return
-            // Switched again meanwhile: that choice stands, and its own save is on its way.
-            if (choice != markNewUpdatesChoices) saved = saved.copy(markNewUpdates = markNewUpdatesFlow.value)
-            notificationPreferenceSaves += 1
-            notificationPreferences = saved
-        } catch (error: Exception) {
-            currentCoroutineContext().ensureActive()
+        return scope.launch {
+            try {
+                val stored = notificationPreferences ?: api.notificationPreferences()
+                if (generation != session.generation) return@launch
+                var saved = api.saveNotificationPreferences(stored.copy(timezone = ZoneId.systemDefault().id), markNewUpdates = enabled)
+                if (generation != session.generation) return@launch
+                if (choice == markNewUpdatesChoices) {
+                    markNewUpdatesChoice.unsaved = false
+                } else {
+                    // Switched again meanwhile: that choice stands, and its own save is on its way.
+                    saved = saved.copy(markNewUpdates = markNewUpdatesFlow.value)
+                }
+                notificationPreferenceSaves += 1
+                notificationPreferences = saved
+            } catch (error: Exception) {
+                currentCoroutineContext().ensureActive()
+            } finally {
+                if (generation == session.generation) markNewUpdatesSaving -= 1
+            }
         }
     }
 
-    /** The choices made about "Mark new updates", counted. */
-    private var markNewUpdatesChoices = 0
+    /**
+     * The account's choice, as read or saved, unless one made on this phone has not been saved: that one stands and
+     * goes to the account, or, the account holding it already, follows the account again.
+     */
+    private fun followMarkNewUpdates(stored: Boolean) {
+        if (!markNewUpdatesChoice.unsaved) return keepMarkNewUpdates(stored)
+        if (markNewUpdatesSaving > 0) return
+        if (stored == markNewUpdatesFlow.value) markNewUpdatesChoice.unsaved = false else saveMarkNewUpdates(markNewUpdatesFlow.value)
+    }
+
+    /**
+     * The delivery email writes a time and a distance as the app last opened does: the account learns this phone's clock
+     * and units whenever its preferences, as read or saved, have others. The rest goes as stored, and the email choice
+     * is left out, so the server keeps it.
+     */
+    private fun saveShownUnits() {
+        if (!session.isAuthenticated || isDemo || isGuest) return
+        val stored = notificationPreferences ?: return
+        val clock = if (localizer.use24HourTime) NotificationPreferencesClock.TwentyFour else NotificationPreferencesClock.Twelve
+        val distance = if (localizer.distanceUnit == DistanceUnit.Miles) NotificationPreferencesDistance.Mi else NotificationPreferencesDistance.Km
+        val sent = "${clock.rawValue} ${distance.rawValue}"
+        if ((stored.clock == clock && stored.distance == distance) || unitsSent == sent) return
+        unitsSent = sent
+        val generation = session.generation
+        scope.launch {
+            try {
+                val value = stored.copy(timezone = ZoneId.systemDefault().id, emailOnDelivery = null)
+                val saved = api.saveNotificationPreferences(value, clock = clock, distance = distance)
+                if (generation != session.generation) return@launch
+                // Kept: should another device change them, the next difference read here is sent again.
+                if (unitsSent == sent && saved.clock == clock && saved.distance == distance) unitsSent = null
+                notificationPreferenceSaves += 1
+                notificationPreferences = saved
+            } catch (error: Exception) {
+                currentCoroutineContext().ensureActive()
+                if (generation == session.generation && unitsSent == sent) unitsSent = null
+            }
+        }
+    }
 
     /** "Mark new updates" as this phone or the account chose it: the widgets show their dots as the cards do. */
     private fun keepMarkNewUpdates(enabled: Boolean) {

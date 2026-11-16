@@ -745,6 +745,8 @@ class DeviceParcels(
      */
     private suspend fun tellPendingForgets(client: DeviceParcelClient) {
         for ((linkId, key) in pendingForgets) {
+            // Followed again while the service was told of another: the link stays.
+            if (pendingForgets.keyOf(linkId) != key) continue
             if (!succeeds { client.forget(linkId, key) }) continue
             pendingForgets = pendingForgets.setting(linkId, null)
         }

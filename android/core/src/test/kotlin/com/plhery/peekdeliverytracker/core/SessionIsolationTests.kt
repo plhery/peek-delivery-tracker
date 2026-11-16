@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesClock
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesDistance
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.QueueResponse
@@ -132,10 +134,14 @@ class SessionIsolationTests {
     /** A request's JSON body, as the Swift tests' RequestLog reads it. */
     private fun body(request: HttpRequest): JsonObject = request.body?.let { Json.parseToJsonElement(it.decodeToString()).jsonObject } ?: JsonObject(emptyMap())
 
-    /** An account the server can email, which has never chosen. */
+    /**
+     * An account the server can email, which has never chosen. With the clock and units the test store's app shows, so
+     * reading them sends nothing back.
+     */
     private val emailPreferences = NotificationPreferences(
         enabledStages = NotificationPreset.Important.stages, quietHoursStart = "22:00", quietHoursEnd = "07:00",
         timezone = "Pacific/Auckland", emailOnDelivery = null, emailAvailable = true,
+        clock = NotificationPreferencesClock.TwentyFour, distance = NotificationPreferencesDistance.Km,
     )
 
     /** A parcel as the server answers it, with its two mutes. */

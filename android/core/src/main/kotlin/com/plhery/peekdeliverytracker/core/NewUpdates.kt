@@ -27,8 +27,8 @@ fun Parcel.marksNewUpdate(markNewUpdates: Boolean): Boolean = markNewUpdates && 
 /**
  * Whether cards mark their parcel's new updates ("Mark new updates" in Settings), on until switched off. This phone
  * keeps the choice; an account's, whenever its notification preferences are read or saved, takes its place, so a choice
- * made on another device arrives, and one the server could not take stays here until then. What was seen is kept
- * either way.
+ * made on another device arrives. One made here that the account has not taken ([unsaved]) stands over the account's
+ * until it is saved. What was seen is kept either way.
  */
 class MarkNewUpdatesChoice(private val defaults: UserDefaults) {
     private val state = MutableStateFlow(defaults.string(forKey = KEY) != OFF)
@@ -41,8 +41,16 @@ class MarkNewUpdatesChoice(private val defaults: UserDefaults) {
         state.value = enabled
     }
 
+    /** Set while a choice made here, without an account or while the server could not take it, is not the account's. */
+    var unsaved: Boolean
+        get() = defaults.bool(forKey = UNSAVED_KEY)
+        set(value) {
+            if (value) defaults.set(true, forKey = UNSAVED_KEY) else defaults.removeObject(forKey = UNSAVED_KEY)
+        }
+
     private companion object {
         const val KEY = "sdt.markNewUpdates.v1"
         const val OFF = "off"
+        const val UNSAVED_KEY = "sdt.markNewUpdatesUnsaved.v1"
     }
 }

@@ -17,7 +17,8 @@ analytics.
 - Parcel labels, tracking numbers, carrier selection, tracking history, status,
   timestamps, the operational location a carrier attaches to each scan — the
   city, region, country, and the postcode or name of the depot, parcel shop or
-  locker that performed the scan — plus sender or business names, pickup-point
+  locker that performed the scan — plus sender or business names, the
+  recipient's name and address, who signed for the parcel, pickup-point
   details, parcel weight and dimensions where the carrier provides them.
 - What some carriers need besides the number, when you supply it: a delivery
   postcode, a private tracking link, a reference that itself contains the
@@ -135,15 +136,17 @@ account, when a check finds that an open parcel saved without a postcode is with
 a carrier that shows more with one, such as DPD, the service gives it, once, the
 latest postcode you gave another parcel, preferring one for the same carrier.
 It then goes where a postcode you typed would, and you can change or clear it
-on the parcel. Dachser's link shows more than the journey: the service discards
-its sender, recipient, address, contact and document fields.
+on the parcel. Dachser's link shows more than the journey: the service keeps
+the recipient's name and address it shows and discards its sender, contact and
+document fields.
 
 J&T Express Mexico and J&T Express China show a parcel only with the last four
 digits of the recipient's or sender's phone, so their parcels have an optional
 field for them. If you fill it in, the service keeps those four digits with the
 parcel and sends them to that carrier with each check, and to no other carrier
-or tracking service. They never go into a link, a notification, logs, error
-reports or analytics. They are deleted when you clear the field, choose another
+or tracking service. They never go into a link, a notification or analytics.
+Like tracking numbers and postcodes, server logs and error reports can include
+them. They are deleted when you clear the field, choose another
 carrier for the parcel, delete or forget the parcel, or delete your account.
 
 Browser push services receive encrypted Web Push messages; Apple processes the

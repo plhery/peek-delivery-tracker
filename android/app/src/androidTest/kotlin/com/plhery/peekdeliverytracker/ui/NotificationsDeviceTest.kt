@@ -85,10 +85,9 @@ import org.junit.runner.RunWith
  * notifications/<name>.png in the test package's external files, which adb pulls. Nothing reaches a server. Run the
  * class on its own (`-e class`), as the stores are made once a process.
  *
- * Not revoked: Android ends an app's process as one of its runtime permissions is taken away, the test's with it. By
- * hand, on Android 13 and later, after `adb shell pm revoke <package> android.permission.POST_NOTIFICATIONS`: the
- * card's Turn on shows the system's question; Don't allow sends the card away and Settings › Notifications says they
- * may still be asked for; a second refusal, and Settings sends to the phone's settings.
+ * Not revoked: Android ends an app's process as one of its runtime permissions is taken away, the test's with it. The
+ * system's question, refused twice and Settings then sending to the phone's page, is NotificationQuestionDeviceTest's,
+ * on an install made afresh.
  */
 @RunWith(AndroidJUnit4::class)
 class NotificationsDeviceTest {

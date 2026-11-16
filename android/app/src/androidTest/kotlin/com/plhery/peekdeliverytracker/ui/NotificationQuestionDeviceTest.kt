@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
 import android.Manifest
+import android.accessibilityservice.AccessibilityService
 import android.app.Activity
 import android.app.Application
 import android.content.pm.PackageManager
@@ -13,13 +14,28 @@ import android.view.accessibility.AccessibilityNodeInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.PeekApplication
+import com.plhery.peekdeliverytracker.core.AuthUser
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.platform.AndroidPushNotifications
+import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
+import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_UPDATES
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DEVICE_SWITCH
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_OPEN_SETTINGS
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
+import java.util.UUID
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.MainScope
@@ -44,13 +60,14 @@ import org.junit.runner.RunWith
  * through the phone's pushes ([AndroidPushNotifications.requestAuthorization]), here on this device's own window,
  * which the process's question attaches to as it is made, as MainActivity's does. On Android 13 and later, with
  * POST_NOTIFICATIONS not given yet, the system's question shows over the window; Allow, tapped as TalkBack taps it,
- * gives the answer and the permission. Android 12 has no such question: nothing shows, and the answer is the app's
- * notification setting. Saved as notificationquestion/<name>.png in the test package's external files, which adb pulls.
+ * gives the answer and the permission; Don't allow twice, and Android asks no more, which Settings sends to the phone's
+ * page for (X-AD07). Android 12 has no such question: nothing shows, and the answer is the app's notification setting.
+ * Saved as notificationquestion/<name>.png in the test package's external files, which adb pulls.
  *
  * Android ends an app's process as a runtime permission is taken away, so the question is asked only on an install
- * that has never been given it: run after the app is installed afresh (instrument-check's PEEK_UNINSTALL), and on its
- * own (`-e class`). A build without Firebase's settings has no pushes, so its store asks nothing as a parcel is
- * followed; the question is the same once it has them.
+ * that has never answered it: run each test after the app is installed afresh (instrument-check's PEEK_UNINSTALL), on
+ * its own (`-e class <class>#<test>`). A build without Firebase's settings has no pushes, so its store asks nothing as
+ * a parcel is followed; the question is the same once it has them.
  */
 @RunWith(AndroidJUnit4::class)
 class NotificationQuestionDeviceTest {
@@ -87,31 +104,132 @@ class NotificationQuestionDeviceTest {
         assumeTrue("Android 13 and later", Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         assumeFalse("POST_NOTIFICATIONS given already: run after the app is installed afresh", granted())
         showWindow()
-        assertEquals(NotificationAuthorizationStatus.NotDetermined, runBlocking { pushes.authorizationStatus() })
-        val ground = instrumentation.uiAutomation.takeScreenshot()
-        val answer = ask()
-        val question = awaitQuestion()
-        val allow = checkNotNull(ALLOW_IDS.firstNotNullOfOrNull { id -> question.findAccessibilityNodeInfosByViewId(id).firstOrNull() }) {
-            "The question's Allow among ${question.packageName}'s"
-        }
-        awaitDrawn(allow, ground)
-        shots.take("B-P03-question", ownWindow = false)
-        assertTrue("Allow tapped", allow.performAction(AccessibilityNodeInfo.ACTION_CLICK))
-        val until = SystemClock.uptimeMillis() + ANSWER_MILLIS
-        while (!answer.isCompleted && SystemClock.uptimeMillis() < until) SystemClock.sleep(POLL_MILLIS)
-        assertTrue("Answered once Allow was tapped", answer.isCompleted)
-        assertTrue("Allowed", runBlocking { answer.await() })
+        assertEquals(NotificationAuthorizationStatus.NotDetermined, status())
+        assertTrue("Allowed", answer(ALLOW_IDS, "Allow", "B-P03-question"))
         assertTrue(granted())
         assertTrue(pushes.answeredBefore)
-        assertEquals(NotificationAuthorizationStatus.Authorized, runBlocking { pushes.authorizationStatus() })
+        assertEquals(NotificationAuthorizationStatus.Authorized, status())
         compose.waitForIdle()
         assertNoQuestionFor(POLL_MILLIS)
         shots.take("B-P03-answered")
     }
 
+    /**
+     * X-AD07: refused once, Android would still ask, so the phone reads as not asked yet and the app's Enable asks again;
+     * refused a second time, Android asks no more and the phone reads as denied; a third question is refused at once,
+     * without showing. Denied, Settings › Delivery updates offers Open Settings in place of the device's switch, which
+     * opens the system's notification settings for the app; Back comes back to the app.
+     */
+    @Test
+    fun androidThirteenRefusedTwiceAsksNoMoreAndSettingsOpensThePhonesPage() {
+        assumeTrue("Android 13 and later", Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+        assumeFalse("POST_NOTIFICATIONS answered already: run after the app is installed afresh", granted() || pushes.answeredBefore)
+        val source = showDeliveries()
+        assertEquals(NotificationAuthorizationStatus.NotDetermined, status())
+        assertFalse("Refused", answer(DENY_IDS, "Don't allow", "X-AD07-question"))
+        assertFalse(granted())
+        assertTrue(pushes.answeredBefore)
+        assertEquals(NotificationAuthorizationStatus.NotDetermined, status())
+        assertFalse("Refused again", answer(DENY_IDS, "Don't allow", "X-AD07-question-again"))
+        assertEquals(NotificationAuthorizationStatus.Denied, status())
+
+        val third = ask()
+        assertNoQuestionFor(QUIET_MILLIS)
+        assertTrue("Refused without a question", third.isCompleted)
+        assertFalse(runBlocking { third.await() })
+        assertEquals(NotificationAuthorizationStatus.Denied, status())
+
+        val denied = status()
+        instrumentation.runOnMainSync { source.notificationStatus.value = denied }
+        compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+        compose.waitUntil(5_000) { exists(SETTINGS_SHEET) }
+        compose.onNodeWithTag(SETTINGS_DELIVERY_UPDATES).performScrollTo().performClick()
+        compose.waitUntil(5_000) { exists(SETTINGS_OPEN_SETTINGS) }
+        assertFalse(exists(SETTINGS_DEVICE_SWITCH))
+        shots.take("X-AD07-settings-denied")
+        val app = instrumentation.uiAutomation.takeScreenshot()
+        compose.onNodeWithTag(SETTINGS_OPEN_SETTINGS).performScrollTo().performClick()
+        val page = awaitFront(SYSTEM_SETTINGS)
+        val label = context.applicationInfo.loadLabel(context.packageManager).toString()
+        assertTrue("The phone's page names $label", page.findAccessibilityNodeInfosByText(label).isNotEmpty())
+        awaitScreenMovedFrom(app)
+        shots.take("X-AD07-phone-settings", ownWindow = false)
+        assertTrue(instrumentation.uiAutomation.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK))
+        awaitFront(context.packageName)
+    }
+
     private fun showWindow() {
         compose.setContent { BasicText("Peek") }
         compose.waitForIdle()
+    }
+
+    /** A signed-in reader's deliveries on fakes, as the app's window, Settings reading what the phone allows from them. */
+    private fun showDeliveries(): FakeDeliveries {
+        val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 7), email = "reader@example.com"))
+        val source = FakeDeliveries(DemoCards.parcels(), reader).apply { signedInWithEmail(choice = null) }
+        compose.waitsForMaps()
+        compose.setContent { RootHost(state = reader, dark = false, reduceMotion = true, source = source) }
+        compose.waitForIdle()
+        return source
+    }
+
+    private fun exists(tag: String) = compose.onAllNodesWithTag(tag).fetchSemanticsNodes().isNotEmpty()
+
+    private fun status() = runBlocking { pushes.authorizationStatus() }
+
+    /**
+     * The question asked, and answered with its button of one of [ids] ([what]) once drawn, as TalkBack taps it, the
+     * screen saved as [shot] first: the answer.
+     */
+    private fun answer(ids: List<String>, what: String, shot: String): Boolean {
+        val ground = instrumentation.uiAutomation.takeScreenshot()
+        val answer = ask()
+        val question = awaitQuestion()
+        val button = checkNotNull(ids.firstNotNullOfOrNull { id -> question.findAccessibilityNodeInfosByViewId(id).firstOrNull() }) {
+            "The question's $what among ${question.packageName}'s"
+        }
+        awaitDrawn(button, ground)
+        shots.take(shot, ownWindow = false)
+        assertTrue("$what tapped", button.performAction(AccessibilityNodeInfo.ACTION_CLICK))
+        val until = SystemClock.uptimeMillis() + ANSWER_MILLIS
+        while (!answer.isCompleted && SystemClock.uptimeMillis() < until) SystemClock.sleep(POLL_MILLIS)
+        assertTrue("Answered once $what was tapped", answer.isCompleted)
+        return runBlocking { answer.await() }
+    }
+
+    /**
+     * Once the screen shows something else than [ground] and holds still: a window in front is drawn a little after it
+     * is, as it comes in.
+     */
+    private fun awaitScreenMovedFrom(ground: Bitmap) {
+        val until = SystemClock.uptimeMillis() + QUESTION_MILLIS
+        var last: Bitmap? = null
+        while (SystemClock.uptimeMillis() < until) {
+            val screen = instrumentation.uiAutomation.takeScreenshot()
+            if (screen != null && !sameScreen(screen, ground) && last?.let { sameScreen(it, screen) } == true) return
+            last = screen
+            SystemClock.sleep(POLL_MILLIS)
+        }
+        throw AssertionError("The screen never moved from the app's window and held still")
+    }
+
+    /** Whether every eighth pixel each way of [a] and [b] is the same. */
+    private fun sameScreen(a: Bitmap, b: Bitmap): Boolean {
+        if (a.width != b.width || a.height != b.height) return false
+        for (y in 0 until a.height step 8) {
+            for (x in 0 until a.width step 8) if (a.getPixel(x, y) != b.getPixel(x, y)) return false
+        }
+        return true
+    }
+
+    /** What the window in front holds once it is [packageName]'s. */
+    private fun awaitFront(packageName: String): AccessibilityNodeInfo {
+        val until = SystemClock.uptimeMillis() + QUESTION_MILLIS
+        while (SystemClock.uptimeMillis() < until) {
+            instrumentation.uiAutomation.rootInActiveWindow?.takeIf { it.packageName == packageName }?.let { return it }
+            SystemClock.sleep(POLL_MILLIS)
+        }
+        throw AssertionError("$packageName never in front: ${instrumentation.uiAutomation.rootInActiveWindow?.packageName}")
     }
 
     /** The question asked from the main thread, its answer to come. */
@@ -196,6 +314,17 @@ class NotificationQuestionDeviceTest {
             "com.android.permissioncontroller:id/permission_allow_button",
             "com.google.android.permissioncontroller:id/permission_allow_button",
         )
+
+        /** Don't allow, the first time and once Android would ask no more after it. */
+        val DENY_IDS = listOf(
+            "com.android.permissioncontroller:id/permission_deny_button",
+            "com.google.android.permissioncontroller:id/permission_deny_button",
+            "com.android.permissioncontroller:id/permission_deny_and_dont_ask_again_button",
+            "com.google.android.permissioncontroller:id/permission_deny_and_dont_ask_again_button",
+        )
+
+        /** The phone's Settings, which shows the app's notification settings. */
+        const val SYSTEM_SETTINGS = "com.android.settings"
 
         const val QUESTION_MILLIS = 10_000L
         const val ANSWER_MILLIS = 5_000L

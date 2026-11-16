@@ -582,7 +582,7 @@
   "notifications.state.prompt": "Escolha suas atualizações e ative as notificações neste dispositivo.",
   "notifications.state.retry": "Para tentar de novo, abra estas configurações outra vez.",
   "notifications.state.unavailable": "As notificações estão temporariamente indisponíveis. Tente novamente mais tarde.",
-  "notifications.state.unsupported": "Este navegador não consegue mostrar notificações. Tente outro navegador ou o app Peek no iPhone.",
+  "notifications.state.unsupported": "Este navegador não consegue mostrar notificações. Tente outro navegador ou o app Peek no seu celular.",
   "offline.description": "Conecte-se para ver as últimas atualizações de rastreamento.",
   "offline.title": "Você está offline",
   "onboarding.notifications.notNow": "Agora não",

@@ -106,13 +106,20 @@ describe('NotificationControl', () => {
     expect(await screen.findByRole('alert')).toBeInTheDocument();
   });
 
-  it('says a browser without notifications can’t show them, wherever it runs', async () => {
+  it('says a browser without notifications can’t show them, and offers the app on whichever phone', async () => {
     vi.mocked(inspectPushState).mockResolvedValue({ kind: 'unsupported' });
     const user = userEvent.setup();
     render(<NotificationControl />);
     await user.click(screen.getByRole('button', { name: 'Notifications' }));
-    expect(await screen.findByText('This browser can’t show notifications. Try another browser, or the Peek app on iPhone.')).toBeInTheDocument();
+    expect(await screen.findByText('This browser can’t show notifications. Try another browser, or the Peek app on your phone.')).toBeInTheDocument();
     expect(screen.queryByText('Notifications in the Peek app')).toBeNull();
+    expect(screen.queryByRole('switch', { name: 'Notifications' })).toBeNull();
+    const sheet = screen.getByRole('dialog', { name: 'Notifications' });
+    expect(sheet.querySelector('.notification-app-qr img')).toHaveAttribute('src', '/settings/app-qr.svg');
+    document.addEventListener('click', stay, true);
+    await user.click(within(sheet).getByRole('link', { name: 'Get' }));
+    expect(within(sheet).getByRole('link', { name: 'Get' })).toHaveAttribute('href', '/app?utm_source=settings');
+    expect(mocks.track).toHaveBeenCalledWith('notifications-app-get');
   });
 
   describe('in Safari on an iPhone or iPad, outside the Home Screen', () => {

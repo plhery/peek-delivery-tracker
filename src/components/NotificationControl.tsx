@@ -145,6 +145,20 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
     }
   }
 
+  // The Peek app, on whichever phone: a scan away on a computer, as the landing's code, and a tap away on a phone or
+  // a tablet. The stylesheet shows one of the two. Both go through `/app`, which sends an iPhone or an iPad to the App
+  // Store and an Android phone to the Android app's steps.
+  const phoneApp = <>
+    <div className="notification-app-qr">
+      {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
+      <img src="/settings/app-qr.svg" alt="" width={60} height={60} loading="lazy" />
+      <span><strong>{t('notifications.qr.title')}</strong><span>{t('notifications.qr.body')}</span></span>
+    </div>
+    <AppOffer className="notification-app-offer" title={t('notifications.qr.title')} body={t('notifications.qr.body')}>
+      <a href={phoneAppLink(PHONE_APP_SETTINGS_SOURCE)} onClick={() => trackAction('notifications-app-get')}>{t('alerts.app.get')}</a>
+    </AppOffer>
+  </>;
+
   return (
     <>
       <button
@@ -195,18 +209,10 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
 
             {(state?.kind === 'prompt' || enabled) && <>
               <div className="settings-box settings-device-control"><button className="settings-row" type="button" role="switch" aria-checked={enabled} aria-label={t('settings.deliveryUpdates')} disabled={busy} onClick={() => void (enabled ? disable() : enable())}><span>{t('settings.deliveryUpdates')}</span><span className="settings-switch" aria-hidden="true" /></button></div>
-              {/* The Peek app, on whichever phone: a scan away on a computer, as the landing's code, and a tap away on a
-                  phone or a tablet. The stylesheet shows one of the two. Both go through `/app`, which sends an iPhone or
-                  an iPad to the App Store and an Android phone to the Android app's steps. */}
-              <div className="notification-app-qr">
-                {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
-                <img src="/settings/app-qr.svg" alt="" width={60} height={60} loading="lazy" />
-                <span><strong>{t('notifications.qr.title')}</strong><span>{t('notifications.qr.body')}</span></span>
-              </div>
-              <AppOffer className="notification-app-offer" title={t('notifications.qr.title')} body={t('notifications.qr.body')}>
-                <a href={phoneAppLink(PHONE_APP_SETTINGS_SOURCE)} onClick={() => trackAction('notifications-app-get')}>{t('alerts.app.get')}</a>
-              </AppOffer>
+              {phoneApp}
             </>}
+            {/* A browser that can't notify at all: the app instead, as under the switch. */}
+            {state?.kind === 'unsupported' && phoneApp}
             {error && <p className="sheet__error" role="alert">{error}</p>}
 
             {apiAuth && preferences && (

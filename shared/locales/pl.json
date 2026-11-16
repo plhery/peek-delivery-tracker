@@ -582,7 +582,7 @@
   "notifications.state.prompt": "Wybierz aktualizacje i włącz powiadomienia na tym urządzeniu.",
   "notifications.state.retry": "Otwórz ponownie te ustawienia, aby spróbować jeszcze raz.",
   "notifications.state.unavailable": "Powiadomienia są chwilowo niedostępne. Spróbuj później.",
-  "notifications.state.unsupported": "Ta przeglądarka nie potrafi wyświetlać powiadomień. Spróbuj innej przeglądarki albo aplikacji Peek na iPhonie.",
+  "notifications.state.unsupported": "Ta przeglądarka nie potrafi wyświetlać powiadomień. Spróbuj innej przeglądarki albo aplikacji Peek na Twoim telefonie.",
   "offline.description": "Połącz się z internetem, aby pobrać najnowsze aktualizacje śledzenia.",
   "offline.title": "Brak połączenia",
   "onboarding.notifications.notNow": "Nie teraz",

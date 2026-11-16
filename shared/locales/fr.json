@@ -582,7 +582,7 @@
   "notifications.state.prompt": "Choisis tes mises à jour, puis active les notifications sur cet appareil.",
   "notifications.state.retry": "Rouvre ces réglages pour réessayer.",
   "notifications.state.unavailable": "Les notifications sont momentanément indisponibles. Réessaie plus tard.",
-  "notifications.state.unsupported": "Ce navigateur ne peut pas afficher de notifications. Essaie un autre navigateur, ou l’app Peek sur iPhone.",
+  "notifications.state.unsupported": "Ce navigateur ne peut pas afficher de notifications. Essaie un autre navigateur, ou l’app Peek sur ton téléphone.",
   "offline.description": "Reconnecte-toi à Internet pour obtenir les dernières informations de suivi.",
   "offline.title": "Tu es hors ligne",
   "onboarding.notifications.notNow": "Pas maintenant",

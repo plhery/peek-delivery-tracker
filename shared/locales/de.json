@@ -582,7 +582,7 @@
   "notifications.state.prompt": "Wähle deine Updates und aktiviere Mitteilungen für dieses Gerät.",
   "notifications.state.retry": "Öffne diese Einstellungen erneut, um es nochmals zu versuchen.",
   "notifications.state.unavailable": "Mitteilungen sind vorübergehend nicht verfügbar. Versuche es später erneut.",
-  "notifications.state.unsupported": "Dieser Browser kann keine Mitteilungen anzeigen. Versuche einen anderen Browser oder die Peek-App auf dem iPhone.",
+  "notifications.state.unsupported": "Dieser Browser kann keine Mitteilungen anzeigen. Versuche einen anderen Browser oder die Peek-App auf deinem Handy.",
   "offline.description": "Verbinde dich mit dem Internet, um die neuesten Sendungsupdates zu erhalten.",
   "offline.title": "Du bist offline",
   "onboarding.notifications.notNow": "Nicht jetzt",

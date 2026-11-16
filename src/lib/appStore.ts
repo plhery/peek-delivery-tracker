@@ -9,8 +9,8 @@ const PROVIDER_TOKEN = '129628155';
  * the landing, scanned with an iPhone or iPad, and `web-app` that code's address, `/app`, reached
  * any other way. `web-notify` is the app row of a parcel page's "Notify me". In Settings ›
  * Notifications, `web-settings` is the app row an iPhone or iPad shows outside the Home
- * Screen, or a phone or tablet under its switch, and `web-settings-qr` the code a computer
- * shows there instead; both of those under the switch go through `/app`. `web-invite` is
+ * Screen, or a phone or tablet under its switch or in a browser that can't notify, and
+ * `web-settings-qr` the code a computer shows there instead; those two go through `/app`. `web-invite` is
  * the button of the deliveries' invitation to notifications in the same place.
  */
 export type AppStoreCampaign = 'web-banner' | 'web-more' | 'web-moves' | 'web-footer' | 'web-qr' | 'web-app' | 'web-notify' | 'web-settings' | 'web-settings-qr' | 'web-invite';

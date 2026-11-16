@@ -69,7 +69,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.platform.ViewConfiguration
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -85,6 +84,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
+import com.plhery.peekdeliverytracker.ui.appLanguageResources
 import com.plhery.peekdeliverytracker.ui.deliveries.OverlayLayer
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.Lamplight
@@ -859,14 +859,15 @@ private class GrabberToggle(val expands: Boolean, val run: () -> Unit)
  * that takes a finger and TalkBack's focus, as UIKit's grabber takes more than its pill. Where the sheet has detents to
  * go to, a tap there takes it to the next ([toggle]), as UIKit's grabber cycles them, the sheet hearing it; a drag there
  * drags the sheet. TalkBack reaches it first in the sheet, as VoiceOver does the iPhone's ("Sheet grabber, button"), in
- * the system's words for one (Material's "Drag handle"); with detents to go to, it is a button whose double tap does as
- * a tap, heard as expanding or collapsing the sheet, as VoiceOver's hint says.
+ * the system's words for one (Material's "Drag handle"), in the app's language; with detents to go to, it is a button
+ * whose double tap does as a tap, heard as expanding or collapsing the sheet, as VoiceOver's hint says.
  */
 @Composable
 private fun Grabber(toggle: GrabberToggle?, modifier: Modifier) {
-    val name = stringResource(MaterialR.string.m3c_bottom_sheet_drag_handle_description)
+    val words = appLanguageResources()
+    val name = words.getString(MaterialR.string.m3c_bottom_sheet_drag_handle_description)
     val action = toggle?.let {
-        stringResource(if (it.expands) MaterialR.string.m3c_bottom_sheet_expand_description else MaterialR.string.m3c_bottom_sheet_collapse_description)
+        words.getString(if (it.expands) MaterialR.string.m3c_bottom_sheet_expand_description else MaterialR.string.m3c_bottom_sheet_collapse_description)
     }
     Box(
         modifier

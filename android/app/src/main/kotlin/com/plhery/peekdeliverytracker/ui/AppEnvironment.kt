@@ -1,5 +1,8 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.icu.util.ULocale
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -7,6 +10,8 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import com.plhery.peekdeliverytracker.core.AppClock
@@ -52,6 +57,28 @@ fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
         LocalDistanceUnit provides distanceUnit,
     ) {
         ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize, language, content)
+    }
+}
+
+/**
+ * The platform's resources in the app's language rather than the phone's, for the words the app takes from Material:
+ * on a phone set to a language Peek doesn't speak, or with another language picked in Settings, they would otherwise
+ * be in the phone's language beside the app's words.
+ */
+@Composable
+fun appLanguageResources(): Resources {
+    val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val language = LocalLanguage.current
+    return remember(context, configuration, language) {
+        val phone = configuration.locales[0]
+        if (phone != null && AppLanguage.fromTag(phone.toLanguageTag()) == language) {
+            context.resources
+        } else {
+            // With its likely region: a language alone takes Material's pseudo-locale (en-XC) before its own words.
+            val locale = ULocale.addLikelySubtags(ULocale.forLocale(language.locale)).toLocale()
+            context.createConfigurationContext(Configuration(configuration).apply { setLocale(locale) }).resources
+        }
     }
 }
 

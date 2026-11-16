@@ -15,6 +15,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_BUTTON
@@ -29,8 +30,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The order TalkBack reads the main screens in, as VoiceOver reads the iPhone's and the iPad's: each bar before the
- * content that scrolls under it, the demo's bar after the bar at the top, a sheet's buttons before its title, and
- * nothing TalkBack stops on without a label.
+ * content that scrolls under it, the demo's bar after the bar at the top, a sheet's buttons before its title, the words
+ * taken from Material in the app's language, and nothing TalkBack stops on without a label.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -88,6 +89,22 @@ class TalkBackOrderTest {
         assertStartsWith(listOf("Deliveries", "Passport", "Friends", "Account", DEMO), stops())
         tab("Friends")
         assertStartsWith(listOf("Deliveries", "Passport", "Friends", "Account", DEMO), stops())
+    }
+
+    @Test
+    @Config(qualifiers = "ar-rEG-$PHONE")
+    fun onAPhoneSetToALanguagePeekDoesntSpeakMaterialsWordsAreTheAppsEnglish() {
+        compose.setContent { RootHost(state = AuthenticationState.Demo) }
+        compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+        assertStartsWith(listOf("Drag handle", "Close", "Settings"), stops())
+    }
+
+    @Test
+    @Config(qualifiers = PHONE)
+    fun withAnotherLanguagePickedInSettingsMaterialsWordsAreInIt() {
+        compose.setContent { RootHost(state = AuthenticationState.Demo, language = AppLanguage.De) }
+        compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+        assertEquals("Ziehpunkt", stops().first())
     }
 
     /**
